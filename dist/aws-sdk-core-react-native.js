@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1333.0',
+	  VERSION: '2.1334.0',
 
 	  /**
 	   * @api private
@@ -14522,6 +14522,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    typeof process.env === 'object' &&
 	    typeof process.env.AWS_EXECUTION_ENV !== 'undefined' &&
 	    process.env.AWS_EXECUTION_ENV.indexOf('AWS_Lambda_') === 0
+	  ) {
+	    return;
+	  }
+
+	  if (
+	    typeof process.env === 'object' &&
+	    typeof process.env.AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE !== 'undefined'
 	  ) {
 	    return;
 	  }

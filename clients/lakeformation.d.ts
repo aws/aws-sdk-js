@@ -638,6 +638,9 @@ declare namespace LakeFormation {
      * A wildcard with exclusions. You must specify either a ColumnNames list or the ColumnWildCard. 
      */
     ColumnWildcard?: ColumnWildcard;
+    /**
+     * The ID of the data cells filter version.
+     */
     VersionId?: VersionString;
   }
   export type DataCellsFilterList = DataCellsFilter[];

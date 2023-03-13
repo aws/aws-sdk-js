@@ -148,23 +148,31 @@ declare namespace AppIntegrations {
     /**
      * The KMS key for the DataIntegration.
      */
-    KmsKey?: NonBlankString;
+    KmsKey: NonBlankString;
     /**
      * The URI of the data source.
      */
-    SourceURI?: NonBlankString;
+    SourceURI: SourceURI;
     /**
      * The name of the data and how often it should be pulled from the source.
      */
-    ScheduleConfig?: ScheduleConfiguration;
+    ScheduleConfig: ScheduleConfiguration;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: IdempotencyToken;
+    /**
+     * The configuration for what files should be pulled from the source.
+     */
+    FileConfiguration?: FileConfiguration;
+    /**
+     * The configuration for what data should be pulled from the source.
+     */
+    ObjectConfiguration?: ObjectConfiguration;
   }
   export interface CreateDataIntegrationResponse {
     /**
@@ -190,19 +198,27 @@ declare namespace AppIntegrations {
     /**
      * The URI of the data source.
      */
-    SourceURI?: NonBlankString;
+    SourceURI?: SourceURI;
     /**
      * The name of the data and how often it should be pulled from the source.
      */
     ScheduleConfiguration?: ScheduleConfiguration;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: IdempotencyToken;
+    /**
+     * The configuration for what files should be pulled from the source.
+     */
+    FileConfiguration?: FileConfiguration;
+    /**
+     * The configuration for what data should be pulled from the source.
+     */
+    ObjectConfiguration?: ObjectConfiguration;
   }
   export interface CreateEventIntegrationRequest {
     /**
@@ -222,11 +238,11 @@ declare namespace AppIntegrations {
      */
     EventBridgeBus: EventBridgeBus;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: IdempotencyToken;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -242,11 +258,11 @@ declare namespace AppIntegrations {
      */
     DataIntegrationAssociationArn?: Arn;
     /**
-     * The Amazon Resource Name (ARN)of the DataIntegration.
+     * The Amazon Resource Name (ARN) of the DataIntegration.
      */
     DataIntegrationArn?: Arn;
     /**
-     * The identifier for teh client that is associated with the DataIntegration association.
+     * The identifier for the client that is associated with the DataIntegration association.
      */
     ClientId?: ClientId;
   }
@@ -263,7 +279,7 @@ declare namespace AppIntegrations {
     /**
      * The URI of the data source.
      */
-    SourceURI?: NonBlankString;
+    SourceURI?: SourceURI;
   }
   export type DataIntegrationsList = DataIntegrationSummary[];
   export interface DeleteDataIntegrationRequest {
@@ -313,7 +329,7 @@ declare namespace AppIntegrations {
      */
     EventBridgeBus?: EventBridgeBus;
     /**
-     * The tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -345,6 +361,20 @@ declare namespace AppIntegrations {
   }
   export type EventIntegrationAssociationsList = EventIntegrationAssociation[];
   export type EventIntegrationsList = EventIntegration[];
+  export type Fields = string;
+  export type FieldsList = Fields[];
+  export type FieldsMap = {[key: string]: FieldsList};
+  export interface FileConfiguration {
+    /**
+     * Identifiers for the source folders to pull all files from recursively.
+     */
+    Folders: FolderList;
+    /**
+     * Restrictions for what files should be pulled from the source.
+     */
+    Filters?: FieldsMap;
+  }
+  export type FolderList = NonBlankLongString[];
   export interface GetDataIntegrationRequest {
     /**
      * A unique identifier.
@@ -375,15 +405,23 @@ declare namespace AppIntegrations {
     /**
      * The URI of the data source.
      */
-    SourceURI?: NonBlankString;
+    SourceURI?: SourceURI;
     /**
      * The name of the data and how often it should be pulled from the source.
      */
     ScheduleConfiguration?: ScheduleConfiguration;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The configuration for what files should be pulled from the source.
+     */
+    FileConfiguration?: FileConfiguration;
+    /**
+     * The configuration for what data should be pulled from the source.
+     */
+    ObjectConfiguration?: ObjectConfiguration;
   }
   export interface GetEventIntegrationRequest {
     /**
@@ -413,7 +451,7 @@ declare namespace AppIntegrations {
      */
     EventFilter?: EventFilter;
     /**
-     * One or more tags.
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
   }
@@ -522,12 +560,13 @@ declare namespace AppIntegrations {
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
+  export type NonBlankLongString = string;
   export type NonBlankString = string;
   export type Object = string;
-  export type Schedule = string;
+  export type ObjectConfiguration = {[key: string]: FieldsMap};
   export interface ScheduleConfiguration {
     /**
-     * The start date for objects to import in the first flow run.
+     * The start date for objects to import in the first flow run as an Unix/epoch timestamp in milliseconds or in ISO-8601 format.
      */
     FirstExecutionFrom?: NonBlankString;
     /**
@@ -537,9 +576,10 @@ declare namespace AppIntegrations {
     /**
      * How often the data should be pulled from data source.
      */
-    ScheduleExpression?: Schedule;
+    ScheduleExpression: NonBlankString;
   }
   export type Source = string;
+  export type SourceURI = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -549,7 +589,7 @@ declare namespace AppIntegrations {
      */
     resourceArn: Arn;
     /**
-     * One or more tags. 
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     tags: TagMap;
   }

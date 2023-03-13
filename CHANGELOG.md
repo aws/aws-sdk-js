@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1333.0-->
+<!--LATEST=2.1334.0-->
 <!--ENTRYINSERT-->
+
+## 2.1334.0
+* bugfix: maintenance mode message: add environment var for suppression of maintenance mode message
+* feature: AppIntegrations: Adds FileConfiguration to Amazon AppIntegrations CreateDataIntegration supporting scheduled downloading of third party files into Amazon Connect from sources such as Microsoft SharePoint.
+* feature: S3Control: Added support for cross-account Multi-Region Access Points. Added support for S3 Replication for S3 on Outposts.
+* feature: Tnb: This release adds tagging support to the following Network Instance APIs : Instantiate, Update, Terminate.
+* feature: Wisdom: This release extends Wisdom CreateKnowledgeBase API to support SharePoint connector type by removing the @required trait for objectField
 
 ## 2.1333.0
 * bugfix: maintenance mode message: supress maintenance mode message in Lambda environment

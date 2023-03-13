@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "maintenance mode message",
-  "description": "add environment var for suppression of maintenance mode message"
-}

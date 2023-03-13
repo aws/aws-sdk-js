@@ -281,7 +281,7 @@ declare namespace Tnb {
   export type Boolean = boolean;
   export interface CancelSolNetworkOperationInput {
     /**
-     * The ID of a network operation occurrence.
+     * The identifier of the network operation.
      */
     nsLcmOpOccId: NsLcmOpOccId;
   }
@@ -653,7 +653,7 @@ declare namespace Tnb {
   }
   export interface GetSolNetworkOperationInput {
     /**
-     * The identifier of the operation occurrence.
+     * The identifier of the network operation.
      */
     nsLcmOpOccId: NsLcmOpOccId;
   }
@@ -673,7 +673,7 @@ declare namespace Tnb {
      */
     arn: NsLcmOpOccArn;
     /**
-     * Error related to this specific network operation occurence.
+     * Error related to this specific network operation occurrence.
      */
     error?: ProblemDetails;
     /**
@@ -875,16 +875,24 @@ declare namespace Tnb {
      * ID of the network instance.
      */
     nsInstanceId: NsInstanceId;
+    /**
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     */
+    tags?: TagMap;
   }
   export interface InstantiateSolNetworkInstanceOutput {
     /**
-     * The identifier of the network instance.
+     * The identifier of the network operation.
      */
     nsLcmOpOccId: NsLcmOpOccId;
+    /**
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     */
+    tags?: TagMap;
   }
   export interface LcmOperationInfo {
     /**
-     * The identifier of the latest network lifecycle management operation occurrence.
+     * The identifier of the network operation.
      */
     nsLcmOpOccId: NsLcmOpOccId;
   }
@@ -1397,12 +1405,20 @@ declare namespace Tnb {
      * ID of the network instance.
      */
     nsInstanceId: NsInstanceId;
+    /**
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     */
+    tags?: TagMap;
   }
   export interface TerminateSolNetworkInstanceOutput {
     /**
-     * The identifier of the operation occurrence.
+     * The identifier of the network operation.
      */
     nsLcmOpOccId?: NsLcmOpOccId;
+    /**
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     */
+    tags?: TagMap;
   }
   export interface ToscaOverride {
     /**
@@ -1452,15 +1468,23 @@ declare namespace Tnb {
      */
     nsInstanceId: NsInstanceId;
     /**
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     */
+    tags?: TagMap;
+    /**
      * The type of update.
      */
     updateType: UpdateSolNetworkType;
   }
   export interface UpdateSolNetworkInstanceOutput {
     /**
-     * The identifier of the network instance operation occurrence.
+     * The identifier of the network operation.
      */
     nsLcmOpOccId?: NsLcmOpOccId;
+    /**
+     * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. When you use this API, the tags are transferred to the network operation that is created. Use tags to search and filter your resources or track your Amazon Web Services costs.
+     */
+    tags?: TagMap;
   }
   export interface UpdateSolNetworkModify {
     /**

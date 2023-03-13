@@ -36,11 +36,11 @@ declare class Wisdom extends Service {
    */
   createContent(callback?: (err: AWSError, data: Wisdom.Types.CreateContentResponse) => void): Request<Wisdom.Types.CreateContentResponse, AWSError>;
   /**
-   * Creates a knowledge base.  When using this API, you cannot reuse Amazon AppIntegrations DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do, you'll get an InvalidRequestException error.   &lt;p&gt;For example, you're programmatically managing your external knowledge base, and you want to add or remove one of the fields that is being ingested from Salesforce. Do the following:&lt;/p&gt; &lt;ol&gt; &lt;li&gt; &lt;p&gt;Call &lt;a href=&quot;https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html&quot;&gt;DeleteKnowledgeBase&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;Call &lt;a href=&quot;https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html&quot;&gt;DeleteDataIntegration&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;Call &lt;a href=&quot;https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html&quot;&gt;CreateDataIntegration&lt;/a&gt; to recreate the DataIntegration or a create different one.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;Call CreateKnowledgeBase.&lt;/p&gt; &lt;/li&gt; &lt;/ol&gt; &lt;/note&gt; 
+   * Creates a knowledge base.  When using this API, you cannot reuse Amazon AppIntegrations DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do, you'll get an InvalidRequestException error.  For example, you're programmatically managing your external knowledge base, and you want to add or remove one of the fields that is being ingested from Salesforce. Do the following:   Call DeleteKnowledgeBase.   Call DeleteDataIntegration.   Call CreateDataIntegration to recreate the DataIntegration or a create different one.   Call CreateKnowledgeBase.   
    */
   createKnowledgeBase(params: Wisdom.Types.CreateKnowledgeBaseRequest, callback?: (err: AWSError, data: Wisdom.Types.CreateKnowledgeBaseResponse) => void): Request<Wisdom.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
-   * Creates a knowledge base.  When using this API, you cannot reuse Amazon AppIntegrations DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do, you'll get an InvalidRequestException error.   &lt;p&gt;For example, you're programmatically managing your external knowledge base, and you want to add or remove one of the fields that is being ingested from Salesforce. Do the following:&lt;/p&gt; &lt;ol&gt; &lt;li&gt; &lt;p&gt;Call &lt;a href=&quot;https://docs.aws.amazon.com/wisdom/latest/APIReference/API_DeleteKnowledgeBase.html&quot;&gt;DeleteKnowledgeBase&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;Call &lt;a href=&quot;https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html&quot;&gt;DeleteDataIntegration&lt;/a&gt;.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;Call &lt;a href=&quot;https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html&quot;&gt;CreateDataIntegration&lt;/a&gt; to recreate the DataIntegration or a create different one.&lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt;Call CreateKnowledgeBase.&lt;/p&gt; &lt;/li&gt; &lt;/ol&gt; &lt;/note&gt; 
+   * Creates a knowledge base.  When using this API, you cannot reuse Amazon AppIntegrations DataIntegrations with external knowledge bases such as Salesforce and ServiceNow. If you do, you'll get an InvalidRequestException error.  For example, you're programmatically managing your external knowledge base, and you want to add or remove one of the fields that is being ingested from Salesforce. Do the following:   Call DeleteKnowledgeBase.   Call DeleteDataIntegration.   Call CreateDataIntegration to recreate the DataIntegration or a create different one.   Call CreateKnowledgeBase.   
    */
   createKnowledgeBase(callback?: (err: AWSError, data: Wisdom.Types.CreateKnowledgeBaseResponse) => void): Request<Wisdom.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
@@ -263,13 +263,13 @@ declare class Wisdom extends Service {
 declare namespace Wisdom {
   export interface AppIntegrationsConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.
+     * The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.    For  Salesforce, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least Id, ArticleNumber, VersionNumber, Title, PublishStatus, and IsDeleted as source fields.     For  ServiceNow, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least number, short_description, sys_mod_count, workflow_state, and active as source fields.     For  Zendesk, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least id, title, updated_at, and draft as source fields.     For  SharePoint, your AppIntegrations DataIntegration must have a FileConfiguration, including only file extensions that are among docx, pdf, html, htm, and txt.   
      */
     appIntegrationArn: GenericArn;
     /**
-     * The fields from the source that are made available to your agents in Wisdom.     For  Salesforce, you must include at least Id, ArticleNumber, VersionNumber, Title, PublishStatus, and IsDeleted.    For  ServiceNow, you must include at least number, short_description, sys_mod_count, workflow_state, and active.    Make sure to include additional fields. These fields are indexed and used to source recommendations. 
+     * The fields from the source that are made available to your agents in Wisdom. Optional if ObjectConfiguration is included in the provided DataIntegration.     For  Salesforce, you must include at least Id, ArticleNumber, VersionNumber, Title, PublishStatus, and IsDeleted.    For  ServiceNow, you must include at least number, short_description, sys_mod_count, workflow_state, and active.    For  Zendesk, you must include at least id, title, updated_at, and draft.    Make sure to include additional fields. These fields are indexed and used to source recommendations. 
      */
-    objectFields: ObjectFieldsList;
+    objectFields?: ObjectFieldsList;
   }
   export type Arn = string;
   export interface AssistantAssociationData {
@@ -560,7 +560,7 @@ declare namespace Wisdom {
      */
     associationType: AssociationType;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     clientToken?: ClientToken;
     /**
@@ -576,7 +576,7 @@ declare namespace Wisdom {
   }
   export interface CreateAssistantRequest {
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     clientToken?: ClientToken;
     /**
@@ -608,7 +608,7 @@ declare namespace Wisdom {
   }
   export interface CreateContentRequest {
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     clientToken?: NonEmptyString;
     /**
@@ -648,7 +648,7 @@ declare namespace Wisdom {
   }
   export interface CreateKnowledgeBaseRequest {
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     clientToken?: NonEmptyString;
     /**
@@ -692,7 +692,7 @@ declare namespace Wisdom {
      */
     assistantId: UuidOrArn;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     clientToken?: ClientToken;
     /**
@@ -1272,7 +1272,7 @@ declare namespace Wisdom {
   }
   export interface RenderingConfiguration {
     /**
-     * A URI template containing exactly one variable in ${variableName} format. This can only be set for EXTERNAL knowledge bases. For Salesforce and ServiceNow, the variable must be one of the following:   Salesforce: Id, ArticleNumber, VersionNumber, Title, PublishStatus, or IsDeleted    ServiceNow: number, short_description, sys_mod_count, workflow_state, or active     &lt;p&gt;The variable is replaced with the actual value for a piece of content when calling &lt;a href=&quot;https://docs.aws.amazon.com/wisdom/latest/APIReference/API_GetContent.html&quot;&gt;GetContent&lt;/a&gt;. &lt;/p&gt; 
+     * A URI template containing exactly one variable in ${variableName} format. This can only be set for EXTERNAL knowledge bases. For Salesforce, ServiceNow, and Zendesk, the variable must be one of the following:   Salesforce: Id, ArticleNumber, VersionNumber, Title, PublishStatus, or IsDeleted    ServiceNow: number, short_description, sys_mod_count, workflow_state, or active    Zendesk: id, title, updated_at, or draft    The variable is replaced with the actual value for a piece of content when calling GetContent. 
      */
     templateUri?: Uri;
   }
