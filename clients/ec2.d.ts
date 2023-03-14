@@ -18330,12 +18330,20 @@ declare namespace EC2 {
      * The DNS records created for the endpoint.
      */
     DnsRecordIpType?: DnsRecordIpType;
+    /**
+     * Indicates whether to enable private DNS only for inbound endpoints.
+     */
+    PrivateDnsOnlyForInboundResolverEndpoint?: Boolean;
   }
   export interface DnsOptionsSpecification {
     /**
      * The DNS records created for the endpoint.
      */
     DnsRecordIpType?: DnsRecordIpType;
+    /**
+     * Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint.
+     */
+    PrivateDnsOnlyForInboundResolverEndpoint?: Boolean;
   }
   export type DnsRecordIpType = "ipv4"|"dualstack"|"ipv6"|"service-defined"|string;
   export interface DnsServersOptionsModifyStructure {

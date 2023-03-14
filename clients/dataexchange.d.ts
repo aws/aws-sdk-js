@@ -1446,6 +1446,13 @@ declare namespace DataExchange {
   }
   export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|"Amazon Redshift datashare assets per revision"|"AWS Lake Formation data permission assets per revision"|"Amazon S3 data access assets per revision"|string;
   export type JobErrorResourceTypes = "REVISION"|"ASSET"|"DATA_SET"|string;
+  export type KmsKeyArn = string;
+  export interface KmsKeyToGrant {
+    /**
+     * The AWS KMS CMK (Key Management System Customer Managed Key) used to encrypt S3 objects in the shared S3 Bucket. AWS Data exchange will create a KMS grant for each subscriber to allow them to access and decrypt their entitled data that is encrypted using this KMS key specified.
+     */
+    KmsKeyArn: KmsKeyArn;
+  }
   export type LFPermission = "DESCRIBE"|"SELECT"|string;
   export interface LFResourceDetails {
     /**
@@ -1615,6 +1622,7 @@ declare namespace DataExchange {
   export type ListOfEventActionEntry = EventActionEntry[];
   export type ListOfJobEntry = JobEntry[];
   export type ListOfJobError = JobError[];
+  export type ListOfKmsKeysToGrant = KmsKeyToGrant[];
   export type ListOfLFPermissions = LFPermission[];
   export type ListOfLFTagValues = String[];
   export type ListOfLFTags = LFTag[];
@@ -1911,6 +1919,10 @@ declare namespace DataExchange {
      * The ARN for your Amazon S3 Access Point. Customers can also access their entitled data using the S3 Access Point ARN.
      */
     S3AccessPointArn?: __string;
+    /**
+     *  List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used to encrypt S3 objects being shared in this S3 Data Access asset. Providers must include all AWS KMS keys used to encrypt these shared S3 objects.
+     */
+    KmsKeysToGrant?: ListOfKmsKeysToGrant;
   }
   export interface S3DataAccessAssetSourceEntry {
     /**
@@ -1925,6 +1937,10 @@ declare namespace DataExchange {
      * The keys used to create the Amazon S3 data access.
      */
     Keys?: ListOf__string;
+    /**
+     * List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used to encrypt S3 objects being shared in this S3 Data Access asset.
+     */
+    KmsKeysToGrant?: ListOfKmsKeysToGrant;
   }
   export interface S3SnapshotAsset {
     /**

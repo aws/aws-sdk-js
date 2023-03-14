@@ -110,11 +110,11 @@ declare namespace ApplicationAutoScaling {
     /**
      * The name of the metric. To get the exact metric name, namespace, and dimensions, inspect the Metric object that is returned by a call to ListMetrics.
      */
-    MetricName: MetricName;
+    MetricName?: MetricName;
     /**
      * The namespace of the metric.
      */
-    Namespace: MetricNamespace;
+    Namespace?: MetricNamespace;
     /**
      * The dimensions of the metric.  Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.
      */
@@ -122,11 +122,15 @@ declare namespace ApplicationAutoScaling {
     /**
      * The statistic of the metric.
      */
-    Statistic: MetricStatistic;
+    Statistic?: MetricStatistic;
     /**
      * The unit of the metric. For a complete list of the units that CloudWatch supports, see the MetricDatum data type in the Amazon CloudWatch API Reference.
      */
     Unit?: MetricUnit;
+    /**
+     * The metrics to include in the target tracking scaling policy, as a metric data query. This can include both raw metric and metric math expressions.
+     */
+    Metrics?: TargetTrackingMetricDataQueries;
   }
   export interface DeleteScalingPolicyRequest {
     /**
@@ -325,6 +329,8 @@ declare namespace ApplicationAutoScaling {
     NextToken?: XmlString;
   }
   export type DisableScaleIn = boolean;
+  export type Expression = string;
+  export type Id = string;
   export type IncludeNotScaledActivities = boolean;
   export type MaxResults = number;
   export type MetricAggregationType = "Average"|"Minimum"|"Maximum"|string;
@@ -496,6 +502,7 @@ declare namespace ApplicationAutoScaling {
   export type ResourceIdMaxLen1600 = string;
   export type ResourceIdsMaxLen1600 = ResourceIdMaxLen1600[];
   export type ResourceLabel = string;
+  export type ReturnData = boolean;
   export type ScalableDimension = "ecs:service:DesiredCount"|"ec2:spot-fleet-request:TargetCapacity"|"elasticmapreduce:instancegroup:InstanceCount"|"appstream:fleet:DesiredCapacity"|"dynamodb:table:ReadCapacityUnits"|"dynamodb:table:WriteCapacityUnits"|"dynamodb:index:ReadCapacityUnits"|"dynamodb:index:WriteCapacityUnits"|"rds:cluster:ReadReplicaCount"|"sagemaker:variant:DesiredInstanceCount"|"custom-resource:ResourceType:Property"|"comprehend:document-classifier-endpoint:DesiredInferenceUnits"|"comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"|"lambda:function:ProvisionedConcurrency"|"cassandra:table:ReadCapacityUnits"|"cassandra:table:WriteCapacityUnits"|"kafka:broker-storage:VolumeSize"|"elasticache:replication-group:NodeGroups"|"elasticache:replication-group:Replicas"|"neptune:cluster:ReadReplicaCount"|string;
   export interface ScalableTarget {
     /**
@@ -526,6 +533,9 @@ declare namespace ApplicationAutoScaling {
      * The Unix timestamp for when the scalable target was created.
      */
     CreationTime: TimestampType;
+    /**
+     * Specifies whether the scaling activities for a scalable target are in a suspended state.
+     */
     SuspendedState?: SuspendedState;
   }
   export interface ScalableTargetAction {
@@ -736,6 +746,73 @@ declare namespace ApplicationAutoScaling {
      */
     ScheduledScalingSuspended?: ScalingSuspended;
   }
+  export interface TargetTrackingMetric {
+    /**
+     * The dimensions for the metric. For the list of available dimensions, see the Amazon Web Services documentation available from the table in Amazon Web Services services that publish CloudWatch metrics  in the Amazon CloudWatch User Guide.  Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.
+     */
+    Dimensions?: TargetTrackingMetricDimensions;
+    /**
+     * The name of the metric.
+     */
+    MetricName?: TargetTrackingMetricName;
+    /**
+     * The namespace of the metric. For more information, see the table in Amazon Web Services services that publish CloudWatch metrics  in the Amazon CloudWatch User Guide.
+     */
+    Namespace?: TargetTrackingMetricNamespace;
+  }
+  export type TargetTrackingMetricDataQueries = TargetTrackingMetricDataQuery[];
+  export interface TargetTrackingMetricDataQuery {
+    /**
+     * The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the Id of the other metrics to refer to those metrics, and can also use the Id of other expressions to use the result of those expressions.  Conditional: Within each TargetTrackingMetricDataQuery object, you must specify either Expression or MetricStat, but not both.
+     */
+    Expression?: Expression;
+    /**
+     * A short name that identifies the object's results in the response. This name must be unique among all MetricDataQuery objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter. 
+     */
+    Id: Id;
+    /**
+     * A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.
+     */
+    Label?: XmlString;
+    /**
+     * Information about the metric data to return. Conditional: Within each MetricDataQuery object, you must specify either Expression or MetricStat, but not both.
+     */
+    MetricStat?: TargetTrackingMetricStat;
+    /**
+     * Indicates whether to return the timestamps and raw data values of this metric.  If you use any math expressions, specify true for this value for only the final math expression that the metric specification is based on. You must specify false for ReturnData for all the other metrics and expressions used in the metric specification. If you are only retrieving metrics and not performing any math expressions, do not specify anything for ReturnData. This sets it to its default (true).
+     */
+    ReturnData?: ReturnData;
+  }
+  export interface TargetTrackingMetricDimension {
+    /**
+     * The name of the dimension.
+     */
+    Name: TargetTrackingMetricDimensionName;
+    /**
+     * The value of the dimension.
+     */
+    Value: TargetTrackingMetricDimensionValue;
+  }
+  export type TargetTrackingMetricDimensionName = string;
+  export type TargetTrackingMetricDimensionValue = string;
+  export type TargetTrackingMetricDimensions = TargetTrackingMetricDimension[];
+  export type TargetTrackingMetricName = string;
+  export type TargetTrackingMetricNamespace = string;
+  export interface TargetTrackingMetricStat {
+    /**
+     * The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the Metric object that is returned by a call to ListMetrics.
+     */
+    Metric: TargetTrackingMetric;
+    /**
+     * The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in Statistics in the Amazon CloudWatch User Guide. The most commonly used metrics for scaling is Average 
+     */
+    Stat: XmlString;
+    /**
+     * The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the MetricDatum data type in the Amazon CloudWatch API Reference.
+     */
+    Unit?: TargetTrackingMetricUnit;
+  }
+  export type TargetTrackingMetricUnit = string;
   export interface TargetTrackingScalingPolicyConfiguration {
     /**
      * The target value for the metric. Although this property accepts numbers of type Double, it won't accept values that are either too small or too large. Values must be in the range of -2^360 to 2^360. The value must be a valid number based on the choice of metric. For example, if the metric is CPU utilization, then the target value is a percent value that represents how much of the CPU can be used before scaling out.   If the scaling policy specifies the ALBRequestCountPerTarget predefined metric, specify the target utilization as the optimal average request count per target during any one-minute interval. 
