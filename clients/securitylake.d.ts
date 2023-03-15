@@ -68,11 +68,11 @@ declare class SecurityLake extends Service {
    */
   createSubscriber(callback?: (err: AWSError, data: SecurityLake.Types.CreateSubscriberResponse) => void): Request<SecurityLake.Types.CreateSubscriberResponse, AWSError>;
   /**
-   * Notifies the subscriber when new data is written to the data lake for the sources that the subscriber consumes in Security Lake.
+   * Notifies the subscriber when new data is written to the data lake for the sources that the subscriber consumes in Security Lake. You can create only one subscriber notification per subscriber.
    */
   createSubscriptionNotificationConfiguration(params: SecurityLake.Types.CreateSubscriptionNotificationConfigurationRequest, callback?: (err: AWSError, data: SecurityLake.Types.CreateSubscriptionNotificationConfigurationResponse) => void): Request<SecurityLake.Types.CreateSubscriptionNotificationConfigurationResponse, AWSError>;
   /**
-   * Notifies the subscriber when new data is written to the data lake for the sources that the subscriber consumes in Security Lake.
+   * Notifies the subscriber when new data is written to the data lake for the sources that the subscriber consumes in Security Lake. You can create only one subscriber notification per subscriber.
    */
   createSubscriptionNotificationConfiguration(callback?: (err: AWSError, data: SecurityLake.Types.CreateSubscriptionNotificationConfigurationResponse) => void): Request<SecurityLake.Types.CreateSubscriptionNotificationConfigurationResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class SecurityLake extends Service {
    */
   deleteDatalake(callback?: (err: AWSError, data: SecurityLake.Types.DeleteDatalakeResponse) => void): Request<SecurityLake.Types.DeleteDatalakeResponse, AWSError>;
   /**
-   * Automatically deletes Amazon Security Lake to stop collecting security data. When you delete Amazon Security Lake from your account, Security Lake is disabled in all Regions. Also, this API automatically takes steps to remove the account from Security Lake .  This operation disables security data collection from sources, deletes data stored, and stops making data accessible to subscribers. Security Lake also deletes all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. The DeleteDatalake operation does not delete the Amazon S3 bucket, which is owned by your Amazon Web Services account. For more information, see the Amazon Security Lake User Guide.
+   *  DeleteDatalakeAutoEnable removes automatic enablement of configuration settings for new member accounts (but keeps settings for the delegated administrator) from Amazon Security Lake. You must run this API using credentials of the delegated administrator. When you run this API, new member accounts that are added after the organization enables Security Lake won't contribute to the data lake.
    */
   deleteDatalakeAutoEnable(params: SecurityLake.Types.DeleteDatalakeAutoEnableRequest, callback?: (err: AWSError, data: SecurityLake.Types.DeleteDatalakeAutoEnableResponse) => void): Request<SecurityLake.Types.DeleteDatalakeAutoEnableResponse, AWSError>;
   /**
-   * Automatically deletes Amazon Security Lake to stop collecting security data. When you delete Amazon Security Lake from your account, Security Lake is disabled in all Regions. Also, this API automatically takes steps to remove the account from Security Lake .  This operation disables security data collection from sources, deletes data stored, and stops making data accessible to subscribers. Security Lake also deletes all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. The DeleteDatalake operation does not delete the Amazon S3 bucket, which is owned by your Amazon Web Services account. For more information, see the Amazon Security Lake User Guide.
+   *  DeleteDatalakeAutoEnable removes automatic enablement of configuration settings for new member accounts (but keeps settings for the delegated administrator) from Amazon Security Lake. You must run this API using credentials of the delegated administrator. When you run this API, new member accounts that are added after the organization enables Security Lake won't contribute to the data lake.
    */
   deleteDatalakeAutoEnable(callback?: (err: AWSError, data: SecurityLake.Types.DeleteDatalakeAutoEnableResponse) => void): Request<SecurityLake.Types.DeleteDatalakeAutoEnableResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class SecurityLake extends Service {
    */
   updateSubscriber(callback?: (err: AWSError, data: SecurityLake.Types.UpdateSubscriberResponse) => void): Request<SecurityLake.Types.UpdateSubscriberResponse, AWSError>;
   /**
-   * Creates a new subscription notification or adds the existing subscription notification setting for the specified subscription ID.
+   * Updates an existing notification method for the subscription (SQS or HTTPs endpoint) or switches the notification subscription endpoint for a subscriber.
    */
   updateSubscriptionNotificationConfiguration(params: SecurityLake.Types.UpdateSubscriptionNotificationConfigurationRequest, callback?: (err: AWSError, data: SecurityLake.Types.UpdateSubscriptionNotificationConfigurationResponse) => void): Request<SecurityLake.Types.UpdateSubscriptionNotificationConfigurationResponse, AWSError>;
   /**
-   * Creates a new subscription notification or adds the existing subscription notification setting for the specified subscription ID.
+   * Updates an existing notification method for the subscription (SQS or HTTPs endpoint) or switches the notification subscription endpoint for a subscriber.
    */
   updateSubscriptionNotificationConfiguration(callback?: (err: AWSError, data: SecurityLake.Types.UpdateSubscriptionNotificationConfigurationResponse) => void): Request<SecurityLake.Types.UpdateSubscriptionNotificationConfigurationResponse, AWSError>;
 }
@@ -436,7 +436,15 @@ declare namespace SecurityLake {
   export type CreateSubscriberRequestSubscriberNameString = string;
   export interface CreateSubscriberResponse {
     /**
-     * The Amazon Resource Name (ARN) created by you to provide to the subscriber. For more information about ARNs and how to use them in policies, see IAM identifiers in the Identity and Access Management (IAM) User Guide. .
+     * The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource share. Before accepting the RAM resource share invitation, you can view details related to the RAM resource share.
+     */
+    resourceShareArn?: ResourceShareArn;
+    /**
+     * The name of the resource share.
+     */
+    resourceShareName?: ResourceShareName;
+    /**
+     * The Amazon Resource Name (ARN) created by you to provide to the subscriber. For more information about ARNs and how to use them in policies, see Amazon Security Lake User Guide.
      */
     roleArn?: RoleArn;
     /**
@@ -470,7 +478,7 @@ declare namespace SecurityLake {
      */
     httpsMethod?: HttpsMethod;
     /**
-     * The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.
+     * The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created. For more information about ARNs and how to use them in policies, see Managing data access and Amazon Web Services Managed Policies in the Amazon Security Lake User Guide.
      */
     roleArn?: RoleArn;
     /**
@@ -478,7 +486,7 @@ declare namespace SecurityLake {
      */
     subscriptionEndpoint?: CreateSubscriptionNotificationConfigurationRequestSubscriptionEndpointString;
     /**
-     * The subscription ID for the notification subscription/
+     * The subscription ID for the notification subscription.
      */
     subscriptionId: UUID;
   }
@@ -532,7 +540,7 @@ declare namespace SecurityLake {
   }
   export interface DeleteDatalakeAutoEnableRequest {
     /**
-     * Delete Amazon Security Lake with the specified configuration settings to stop ingesting security data for new accounts in Security Lake. 
+     * Remove automatic enablement of configuration settings for new member accounts in Security Lake. 
      */
     removeFromConfigurationForNewAccounts: AutoEnableNewRegionConfigurationList;
   }
@@ -727,8 +735,22 @@ declare namespace SecurityLake {
      * A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define.
      */
     tagsMap?: TagsMap;
+    /**
+     * The status of the last UpdateDatalake or DeleteDatalake API request. 
+     */
+    updateStatus?: UpdateStatus;
   }
   export type LakeConfigurationResponseMap = {[key: string]: LakeConfigurationResponse};
+  export interface LastUpdateFailure {
+    /**
+     * The reason code for the failure of the last UpdateDatalake or DeleteDatalake API request.
+     */
+    code?: String;
+    /**
+     * The reason for the failure of the last UpdateDatalakeor DeleteDatalake API request.
+     */
+    reason?: String;
+  }
   export interface ListDatalakeExceptionsRequest {
     /**
      * List the maximum number of failures in Security Lake.
@@ -835,6 +857,8 @@ declare namespace SecurityLake {
   export type Region = "us-east-1"|"us-west-2"|"eu-central-1"|"us-east-2"|"eu-west-1"|"ap-northeast-1"|"ap-southeast-2"|string;
   export type RegionSet = Region[];
   export type RegionSourceTypesAccountsList = AllDimensionsMap[];
+  export type ResourceShareArn = string;
+  export type ResourceShareName = string;
   export interface RetentionSetting {
     /**
      * The retention period specifies a fixed period of time during which the Security Lake object remains locked. You can specify the retention period in days for one or more sources. 
@@ -883,6 +907,14 @@ declare namespace SecurityLake {
      * The external ID of the subscriber. The external ID lets the user that is assuming the role assert the circumstances in which they are operating. It also provides a way for the account owner to permit the role to be assumed only under specific circumstances.
      */
     externalId?: SafeString;
+    /**
+     * The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource share. Before accepting the RAM resource share invitation, you can view details related to the RAM resource share. This field is available only for Lake Formation subscribers created after March 8, 2023.
+     */
+    resourceShareArn?: ResourceShareArn;
+    /**
+     * The name of the resource share.
+     */
+    resourceShareName?: ResourceShareName;
     /**
      * The Amazon Resource Name (ARN) specifying the role of the subscriber.
      */
@@ -963,6 +995,20 @@ declare namespace SecurityLake {
   }
   export interface UpdateDatalakeResponse {
   }
+  export interface UpdateStatus {
+    /**
+     * The details of the last UpdateDatalakeor DeleteDatalake API request which failed.
+     */
+    lastUpdateFailure?: LastUpdateFailure;
+    /**
+     * The unique ID for the UpdateDatalake or DeleteDatalake API request.
+     */
+    lastUpdateRequestId?: String;
+    /**
+     * The status of the last UpdateDatalake or DeleteDatalake API request that was requested.
+     */
+    lastUpdateStatus?: settingsStatus;
+  }
   export interface UpdateSubscriberRequest {
     /**
      * The external ID of the Security Lake account.
@@ -1010,7 +1056,7 @@ declare namespace SecurityLake {
      */
     httpsMethod?: HttpsMethod;
     /**
-     * The Amazon Resource Name (ARN) specifying the role of the subscriber. 
+     * The Amazon Resource Name (ARN) specifying the role of the subscriber. For more information about ARNs and how to use them in policies, see, see the Managing data access and Amazon Web Services Managed Policiesin the Amazon Security Lake User Guide.
      */
     roleArn?: RoleArn;
     /**

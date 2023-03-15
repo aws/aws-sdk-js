@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1335.0-->
+<!--LATEST=2.1336.0-->
 <!--ENTRYINSERT-->
+
+## 2.1336.0
+* feature: MigrationHubStrategy: This release adds the binary analysis that analyzes IIS application DLLs on Windows and Java applications on Linux to provide anti-pattern report without configuring access to the source code.
+* feature: S3Control: Added support for S3 Object Lambda aliases.
+* feature: SecurityLake: Make Create/Get/ListSubscribers APIs return resource share ARN and name so they can be used to validate the RAM resource share to accept. GetDatalake can be used to track status of UpdateDatalake and DeleteDatalake requests.
 
 ## 2.1335.0
 * feature: ApplicationAutoScaling: Application Auto Scaling customers can now use mathematical functions to customize the metric used with Target Tracking policies within the policy configuration itself, saving the cost and effort of publishing the customizations as a separate metric.

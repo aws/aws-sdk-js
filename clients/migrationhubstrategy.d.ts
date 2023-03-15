@@ -181,6 +181,47 @@ declare class MigrationHubStrategy extends Service {
   updateServerConfig(callback?: (err: AWSError, data: MigrationHubStrategy.Types.UpdateServerConfigResponse) => void): Request<MigrationHubStrategy.Types.UpdateServerConfigResponse, AWSError>;
 }
 declare namespace MigrationHubStrategy {
+  export interface AnalysisStatusUnion {
+    /**
+     * The status of the analysis.
+     */
+    runtimeAnalysisStatus?: RuntimeAnalysisStatus;
+    /**
+     * The status of the source code or database analysis.
+     */
+    srcCodeOrDbAnalysisStatus?: SrcCodeOrDbAnalysisStatus;
+  }
+  export type AnalysisType = "SOURCE_CODE_ANALYSIS"|"DATABASE_ANALYSIS"|"RUNTIME_ANALYSIS"|"BINARY_ANALYSIS"|string;
+  export interface AnalyzerNameUnion {
+    /**
+     * The binary analyzer names.
+     */
+    binaryAnalyzerName?: BinaryAnalyzerName;
+    /**
+     * The assessment analyzer names.
+     */
+    runTimeAnalyzerName?: RunTimeAnalyzerName;
+    /**
+     * The source code analyzer names.
+     */
+    sourceCodeAnalyzerName?: SourceCodeAnalyzerName;
+  }
+  export interface AntipatternReportResult {
+    /**
+     * The analyzer name.
+     */
+    analyzerName?: AnalyzerNameUnion;
+    antiPatternReportS3Object?: S3Object;
+    /**
+     * The status of the anti-pattern report generation.
+     */
+    antipatternReportStatus?: AntipatternReportStatus;
+    /**
+     * The status message for the anti-pattern.
+     */
+    antipatternReportStatusMessage?: StatusMessage;
+  }
+  export type AntipatternReportResultList = AntipatternReportResult[];
   export type AntipatternReportStatus = "FAILED"|"IN_PROGRESS"|"SUCCESS"|string;
   export interface AntipatternSeveritySummary {
     /**
@@ -274,6 +315,10 @@ declare namespace MigrationHubStrategy {
      *  The application component subtype.
      */
     resourceSubType?: ResourceSubType;
+    /**
+     * A list of the analysis results.
+     */
+    resultList?: ResultList;
     /**
      * The status of the application unit.
      */
@@ -421,6 +466,7 @@ declare namespace MigrationHubStrategy {
   }
   export type AwsManagedTargetDestination = "None specified"|"AWS Elastic BeanStalk"|"AWS Fargate"|string;
   export type AwsManagedTargetDestinations = AwsManagedTargetDestination[];
+  export type BinaryAnalyzerName = "DLL_ANALYZER"|"BYTECODE_ANALYZER"|string;
   export type Boolean = boolean;
   export interface BusinessGoals {
     /**
@@ -1137,6 +1183,26 @@ declare namespace MigrationHubStrategy {
   export type ResourceId = string;
   export type ResourceName = string;
   export type ResourceSubType = "Database"|"Process"|"DatabaseProcess"|string;
+  export interface Result {
+    /**
+     * The error in server analysis.
+     */
+    analysisStatus?: AnalysisStatusUnion;
+    /**
+     * The error in server analysis.
+     */
+    analysisType?: AnalysisType;
+    /**
+     * The error in server analysis.
+     */
+    antipatternReportResultList?: AntipatternReportResultList;
+    /**
+     * The error in server analysis.
+     */
+    statusMessage?: StatusMessage;
+  }
+  export type ResultList = Result[];
+  export type RunTimeAnalyzerName = "A2C_ANALYZER"|"REHOST_ANALYZER"|"EMP_PA_ANALYZER"|"DATABASE_ANALYZER"|"SCT_ANALYZER"|string;
   export type RunTimeAssessmentStatus = "dataCollectionTaskToBeScheduled"|"dataCollectionTaskScheduled"|"dataCollectionTaskStarted"|"dataCollectionTaskStopped"|"dataCollectionTaskSuccess"|"dataCollectionTaskFailed"|"dataCollectionTaskPartialSuccess"|string;
   export type RuntimeAnalysisStatus = "ANALYSIS_TO_BE_SCHEDULED"|"ANALYSIS_STARTED"|"ANALYSIS_SUCCESS"|"ANALYSIS_FAILED"|string;
   export type S3Bucket = string;
@@ -1289,6 +1355,7 @@ declare namespace MigrationHubStrategy {
      */
     versionControl?: VersionControl;
   }
+  export type SourceCodeAnalyzerName = "CSHARP_ANALYZER"|"JAVA_ANALYZER"|"BYTECODE_ANALYZER"|"PORTING_ASSISTANT"|string;
   export type SourceCodeList = SourceCode[];
   export type SourceCodeRepositories = SourceCodeRepository[];
   export interface SourceCodeRepository {
