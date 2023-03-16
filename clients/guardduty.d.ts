@@ -44,11 +44,11 @@ declare class GuardDuty extends Service {
    */
   createDetector(callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
-   * Creates a filter using the specified finding criteria.
+   * Creates a filter using the specified finding criteria. The maximum number of saved filters per Amazon Web Services account per Region is 100. For more information, see Quotas for GuardDuty.
    */
   createFilter(params: GuardDuty.Types.CreateFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateFilterResponse) => void): Request<GuardDuty.Types.CreateFilterResponse, AWSError>;
   /**
-   * Creates a filter using the specified finding criteria.
+   * Creates a filter using the specified finding criteria. The maximum number of saved filters per Amazon Web Services account per Region is 100. For more information, see Quotas for GuardDuty.
    */
   createFilter(callback?: (err: AWSError, data: GuardDuty.Types.CreateFilterResponse) => void): Request<GuardDuty.Types.CreateFilterResponse, AWSError>;
   /**
@@ -613,6 +613,10 @@ declare namespace GuardDuty {
      * Describes the data source enabled for the GuardDuty member account.
      */
     DataSources?: DataSourcesFreeTrial;
+    /**
+     * A list of features enabled for the GuardDuty account.
+     */
+    Features?: FreeTrialFeatureConfigurationsResults;
   }
   export type AccountFreeTrialInfos = AccountFreeTrialInfo[];
   export type AccountId = string;
@@ -648,6 +652,10 @@ declare namespace GuardDuty {
      * Information about the Kubernetes API call action described in this finding.
      */
     KubernetesApiCallAction?: KubernetesApiCallAction;
+    /**
+     * Information about RDS_LOGIN_ATTEMPT action described in this finding.
+     */
+    RdsLoginAttemptAction?: RdsLoginAttemptAction;
   }
   export interface AdminAccount {
     /**
@@ -899,6 +907,10 @@ declare namespace GuardDuty {
      * The tags to be added to a new detector resource.
      */
     Tags?: TagMap;
+    /**
+     * A list of features that will be configured for the detector.
+     */
+    Features?: DetectorFeatureConfigurations;
   }
   export interface CreateDetectorResponse {
     /**
@@ -920,7 +932,7 @@ declare namespace GuardDuty {
      */
     Name: FilterName;
     /**
-     * The description of the filter. Valid characters include alphanumeric characters, and special characters such as -, ., :, { }, [ ], ( ), /, \t, \n, \x0B, \f, \r, _, and whitespace.
+     * The description of the filter. Valid characters include alphanumeric characters, and special characters such as hyphen, period, colon, underscore, parentheses ({ }, [ ], and ( )), forward slash, horizontal tab, vertical tab, newline, form feed, return, and whitespace.
      */
     Description?: FilterDescription;
     /**
@@ -1300,6 +1312,14 @@ declare namespace GuardDuty {
      * The ID of the detector to retrieve information about the delegated administrator from.
      */
     DetectorId: DetectorId;
+    /**
+     * You can use this parameter to indicate the maximum number of items that you want in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action, fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     */
+    NextToken?: String;
   }
   export interface DescribeOrganizationConfigurationResponse {
     /**
@@ -1314,6 +1334,14 @@ declare namespace GuardDuty {
      * Describes which data sources are enabled automatically for member accounts.
      */
     DataSources?: OrganizationDataSourceConfigurationsResult;
+    /**
+     * A list of features that are configured for this organization.
+     */
+    Features?: OrganizationFeaturesConfigurationsResults;
+    /**
+     * The pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
   }
   export interface DescribePublishingDestinationRequest {
     /**
@@ -1373,6 +1401,34 @@ declare namespace GuardDuty {
   }
   export type DestinationType = "S3"|string;
   export type Destinations = Destination[];
+  export type DetectorFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|string;
+  export interface DetectorFeatureConfiguration {
+    /**
+     * The name of the feature.
+     */
+    Name?: DetectorFeature;
+    /**
+     * The status of the feature.
+     */
+    Status?: FeatureStatus;
+  }
+  export interface DetectorFeatureConfigurationResult {
+    /**
+     * Indicates the name of the feature that can be enabled for the detector.
+     */
+    Name?: DetectorFeatureResult;
+    /**
+     * Indicates the status of the feature that is enabled for the detector.
+     */
+    Status?: FeatureStatus;
+    /**
+     * The timestamp at which the feature object was updated.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export type DetectorFeatureConfigurations = DetectorFeatureConfiguration[];
+  export type DetectorFeatureConfigurationsResults = DetectorFeatureConfigurationResult[];
+  export type DetectorFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|string;
   export type DetectorId = string;
   export type DetectorIds = DetectorId[];
   export type DetectorStatus = "ENABLED"|"DISABLED"|string;
@@ -1603,6 +1659,7 @@ declare namespace GuardDuty {
      */
     ThreatIntelligenceDetails?: ThreatIntelligenceDetails;
   }
+  export type FeatureStatus = "ENABLED"|"DISABLED"|string;
   export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
   export type FilePaths = ScanFilePath[];
   export type FilterAction = "NOOP"|"ARCHIVE"|string;
@@ -1723,6 +1780,18 @@ declare namespace GuardDuty {
      */
     Status: DataSourceStatus;
   }
+  export interface FreeTrialFeatureConfigurationResult {
+    /**
+     * The name of the feature for which the free trial is configured.
+     */
+    Name?: FreeTrialFeatureResult;
+    /**
+     * The number of the remaining free trial days for the feature.
+     */
+    FreeTrialDaysRemaining?: Integer;
+  }
+  export type FreeTrialFeatureConfigurationsResults = FreeTrialFeatureConfigurationResult[];
+  export type FreeTrialFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|string;
   export interface GeoLocation {
     /**
      * The latitude information of the remote IP address.
@@ -1780,6 +1849,10 @@ declare namespace GuardDuty {
      * The tags of the detector resource.
      */
     Tags?: TagMap;
+    /**
+     * Describes the features that have been enabled for the detector.
+     */
+    Features?: DetectorFeatureConfigurationsResults;
   }
   export interface GetFilterRequest {
     /**
@@ -2545,6 +2618,25 @@ declare namespace GuardDuty {
     PortName?: String;
   }
   export type Location = string;
+  export interface LoginAttribute {
+    /**
+     * Indicates the user name which attempted to log in.
+     */
+    User?: String;
+    /**
+     * Indicates the application name used to attempt log in.
+     */
+    Application?: String;
+    /**
+     * Represents the sum of failed (unsuccessful) login attempts made to establish a connection to the database instance.
+     */
+    FailedLoginAttempts?: Integer;
+    /**
+     * Represents the sum of successful connections (a correct combination of login attributes) made to the database instance by the actor.
+     */
+    SuccessfulLoginAttempts?: Integer;
+  }
+  export type LoginAttributes = LoginAttribute[];
   export type Long = number;
   export type LongValue = number;
   export interface MalwareProtectionConfiguration {
@@ -2631,9 +2723,39 @@ declare namespace GuardDuty {
     /**
      * Contains information on the status of data sources for the account.
      */
-    DataSources: DataSourceConfigurationsResult;
+    DataSources?: DataSourceConfigurationsResult;
+    /**
+     * Contains information about the status of the features for the member account.
+     */
+    Features?: MemberFeaturesConfigurationsResults;
   }
   export type MemberDataSourceConfigurations = MemberDataSourceConfiguration[];
+  export interface MemberFeaturesConfiguration {
+    /**
+     * The name of the feature.
+     */
+    Name?: OrgFeature;
+    /**
+     * The status of the feature.
+     */
+    Status?: FeatureStatus;
+  }
+  export interface MemberFeaturesConfigurationResult {
+    /**
+     * Indicates the name of the feature that is enabled for the detector.
+     */
+    Name?: OrgFeature;
+    /**
+     * Indicates the status of the feature that is enabled for the detector.
+     */
+    Status?: FeatureStatus;
+    /**
+     * The timestamp at which the feature object was updated.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export type MemberFeaturesConfigurations = MemberFeaturesConfiguration[];
+  export type MemberFeaturesConfigurationsResults = MemberFeaturesConfigurationResult[];
   export type Members = Member[];
   export type Name = string;
   export type Neq = String[];
@@ -2713,6 +2835,8 @@ declare namespace GuardDuty {
   export type NonEmptyString = string;
   export type NotEquals = String[];
   export type OrderBy = "ASC"|"DESC"|string;
+  export type OrgFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|string;
+  export type OrgFeatureStatus = "NEW"|"NONE"|string;
   export interface Organization {
     /**
      * The Autonomous System Number (ASN) of the internet provider of the remote IP address.
@@ -2771,6 +2895,28 @@ declare namespace GuardDuty {
      */
     AutoEnable?: Boolean;
   }
+  export interface OrganizationFeatureConfiguration {
+    /**
+     * The name of the feature that will be configured for the organization.
+     */
+    Name?: OrgFeature;
+    /**
+     * The status of the feature that will be configured for the organization.
+     */
+    AutoEnable?: OrgFeatureStatus;
+  }
+  export interface OrganizationFeatureConfigurationResult {
+    /**
+     * The name of the feature that is configured for the member accounts within the organization.
+     */
+    Name?: OrgFeature;
+    /**
+     * Describes how The status of the feature that are configured for the member accounts within the organization. If you set AutoEnable to NEW, a feature will be configured for only the new accounts when they join the organization. If you set AutoEnable to NONE, no feature will be configured for the accounts when they join the organization.
+     */
+    AutoEnable?: OrgFeatureStatus;
+  }
+  export type OrganizationFeaturesConfigurations = OrganizationFeatureConfiguration[];
+  export type OrganizationFeaturesConfigurationsResults = OrganizationFeatureConfigurationResult[];
   export interface OrganizationKubernetesAuditLogsConfiguration {
     /**
      * A value that contains information on whether Kubernetes audit logs should be enabled automatically as a data source for the organization.
@@ -2906,6 +3052,61 @@ declare namespace GuardDuty {
     EffectivePermission?: String;
   }
   export type PublishingStatus = "PENDING_VERIFICATION"|"PUBLISHING"|"UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY"|"STOPPED"|string;
+  export interface RdsDbInstanceDetails {
+    /**
+     * The identifier associated to the database instance that was involved in the finding.
+     */
+    DbInstanceIdentifier?: String;
+    /**
+     * The database engine of the database instance involved in the finding.
+     */
+    Engine?: String;
+    /**
+     * The version of the database engine that was involved in the finding.
+     */
+    EngineVersion?: String;
+    /**
+     * The identifier of the database cluster that contains the database instance ID involved in the finding.
+     */
+    DbClusterIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the database instance involved in the finding.
+     */
+    DbInstanceArn?: String;
+    /**
+     * Instance tag key-value pairs associated with the database instance ID.
+     */
+    Tags?: Tags;
+  }
+  export interface RdsDbUserDetails {
+    /**
+     * The user name used in the anomalous login attempt.
+     */
+    User?: String;
+    /**
+     * The application name used in the anomalous login attempt.
+     */
+    Application?: String;
+    /**
+     * The name of the database instance involved in the anomalous login attempt.
+     */
+    Database?: String;
+    /**
+     * The version of the Secure Socket Layer (SSL) used for the network.
+     */
+    Ssl?: String;
+    /**
+     * The authentication method used by the user involved in the finding.
+     */
+    AuthMethod?: String;
+  }
+  export interface RdsLoginAttemptAction {
+    RemoteIpDetails?: RemoteIpDetails;
+    /**
+     * Indicates the login attributes used in the login attempt.
+     */
+    LoginAttributes?: LoginAttributes;
+  }
   export interface RemoteAccountDetails {
     /**
      * The Amazon Web Services account ID of the remote API caller.
@@ -2982,6 +3183,14 @@ declare namespace GuardDuty {
      */
     EcsClusterDetails?: EcsClusterDetails;
     ContainerDetails?: Container;
+    /**
+     * Contains information about the database instance to which an anomalous login attempt was made.
+     */
+    RdsDbInstanceDetails?: RdsDbInstanceDetails;
+    /**
+     * Contains information about the user details through which anomalous login attempt was made.
+     */
+    RdsDbUserDetails?: RdsDbUserDetails;
   }
   export interface ResourceDetails {
     /**
@@ -3481,6 +3690,10 @@ declare namespace GuardDuty {
      * Describes which data sources will be updated. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
      */
     DataSources?: DataSourceConfigurations;
+    /**
+     * Provides the features that will be updated for the detector.
+     */
+    Features?: DetectorFeatureConfigurations;
   }
   export interface UpdateDetectorResponse {
   }
@@ -3589,6 +3802,10 @@ declare namespace GuardDuty {
      * Describes which data sources will be updated.
      */
     DataSources?: DataSourceConfigurations;
+    /**
+     * A list of features that will be updated for the specified member accounts.
+     */
+    Features?: MemberFeaturesConfigurations;
   }
   export interface UpdateMemberDetectorsResponse {
     /**
@@ -3609,6 +3826,10 @@ declare namespace GuardDuty {
      * Describes which data sources will be updated.
      */
     DataSources?: OrganizationDataSourceConfigurations;
+    /**
+     * A list of features that will be configured for the organization.
+     */
+    Features?: OrganizationFeaturesConfigurations;
   }
   export interface UpdateOrganizationConfigurationResponse {
   }
@@ -3671,11 +3892,15 @@ declare namespace GuardDuty {
     /**
      * The data sources to aggregate usage statistics from.
      */
-    DataSources: DataSourceList;
+    DataSources?: DataSourceList;
     /**
      * The resources to aggregate usage statistics from. Only accepts exact resource names.
      */
     Resources?: ResourceList;
+    /**
+     * The features to aggregate usage statistics from.
+     */
+    Features?: UsageFeatureList;
   }
   export interface UsageDataSourceResult {
     /**
@@ -3688,6 +3913,16 @@ declare namespace GuardDuty {
     Total?: Total;
   }
   export type UsageDataSourceResultList = UsageDataSourceResult[];
+  export type UsageFeature = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"LAMBDA_NETWORK_LOGS"|"EKS_RUNTIME_MONITORING"|string;
+  export type UsageFeatureList = UsageFeature[];
+  export interface UsageFeatureResult {
+    /**
+     * The feature that generated the usage cost.
+     */
+    Feature?: UsageFeature;
+    Total?: Total;
+  }
+  export type UsageFeatureResultList = UsageFeatureResult[];
   export interface UsageResourceResult {
     /**
      * The Amazon Web Services resource that generated usage.
@@ -3699,7 +3934,7 @@ declare namespace GuardDuty {
     Total?: Total;
   }
   export type UsageResourceResultList = UsageResourceResult[];
-  export type UsageStatisticType = "SUM_BY_ACCOUNT"|"SUM_BY_DATA_SOURCE"|"SUM_BY_RESOURCE"|"TOP_RESOURCES"|string;
+  export type UsageStatisticType = "SUM_BY_ACCOUNT"|"SUM_BY_DATA_SOURCE"|"SUM_BY_RESOURCE"|"TOP_RESOURCES"|"SUM_BY_FEATURES"|string;
   export interface UsageStatistics {
     /**
      * The usage statistic sum organized by account ID.
@@ -3717,6 +3952,10 @@ declare namespace GuardDuty {
      * Lists the top 50 resources that have generated the most GuardDuty usage, in order from most to least expensive.
      */
     TopResources?: UsageResourceResultList;
+    /**
+     * The usage statistic sum organized by feature.
+     */
+    SumByFeature?: UsageFeatureResultList;
   }
   export interface Volume {
     /**

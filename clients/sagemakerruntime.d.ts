@@ -63,11 +63,11 @@ declare namespace SageMakerRuntime {
      */
     InputLocation: InputLocationHeader;
     /**
-     * Maximum age in seconds a request can be in the queue before it is marked as expired.
+     * Maximum age in seconds a request can be in the queue before it is marked as expired. The default is 6 hours, or 21,600 seconds.
      */
     RequestTTLSeconds?: RequestTTLSecondsHeader;
     /**
-     * Maximum amount of time in seconds a request can be processed before it is marked as expired.
+     * Maximum amount of time in seconds a request can be processed before it is marked as expired. The default is 15 minutes, or 900 seconds.
      */
     InvocationTimeoutSeconds?: InvocationTimeoutSecondsHeader;
   }

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1336.0-->
+<!--LATEST=2.1337.0-->
 <!--ENTRYINSERT-->
+
+## 2.1337.0
+* feature: GuardDuty: Updated 9 APIs for feature enablement to reflect expansion of GuardDuty to features. Added new APIs and updated existing APIs to support RDS Protection GA.
 
 ## 2.1336.0
 * feature: MigrationHubStrategy: This release adds the binary analysis that analyzes IIS application DLLs on Windows and Java applications on Linux to provide anti-pattern report without configuring access to the source code.
