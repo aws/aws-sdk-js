@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Typings",
+  "description": "Removes enum string literal widening with string"
+}
