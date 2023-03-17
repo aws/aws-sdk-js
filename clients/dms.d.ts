@@ -2697,6 +2697,7 @@ declare namespace DMS {
      */
     NumberOfSchemas?: IntegerOptional;
   }
+  export type KafkaSaslMechanism = "scram-sha-512"|"plain"|string;
   export type KafkaSecurityProtocol = "plaintext"|"ssl-authentication"|"ssl-encryption"|"sasl-ssl"|string;
   export interface KafkaSettings {
     /**
@@ -2771,6 +2772,10 @@ declare namespace DMS {
      * Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the NoHexPrefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.
      */
     NoHexPrefix?: BooleanOptional;
+    /**
+     * For SASL/SSL authentication, DMS supports the SCRAM-SHA-512 mechanism by default. DMS versions 3.5.0 and later also support the PLAIN mechanism. To use the PLAIN mechanism, set this parameter to PLAIN. 
+     */
+    SaslMechanism?: KafkaSaslMechanism;
   }
   export type KeyList = String[];
   export interface KinesisSettings {
@@ -2922,6 +2927,14 @@ declare namespace DMS {
      * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
      */
     TrimSpaceInChar?: BooleanOptional;
+    /**
+     * Indicates the mode used to fetch CDC data.
+     */
+    TlogAccessMode?: TlogAccessMode;
+    /**
+     * Forces LOB lookup on inline LOB.
+     */
+    ForceLobLookup?: BooleanOptional;
   }
   export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string;
   export interface ModifyEndpointMessage {
@@ -3537,6 +3550,10 @@ declare namespace DMS {
      * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
      */
     TrimSpaceInChar?: BooleanOptional;
+    /**
+     * When true, converts timestamps with the timezone datatype to their UTC value.
+     */
+    ConvertTimestampWithZoneToUTC?: BooleanOptional;
   }
   export interface OrderableReplicationInstance {
     /**
@@ -3684,6 +3701,10 @@ declare namespace DMS {
      * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
      */
     TrimSpaceInChar?: BooleanOptional;
+    /**
+     * When true, lets PostgreSQL migrate the boolean type as boolean. By default, PostgreSQL migrates booleans as varchar(5).
+     */
+    MapBooleanAsBoolean?: BooleanOptional;
   }
   export interface RdsConfiguration {
     /**
@@ -3974,6 +3995,10 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the Amazon Redshift endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * When true, lets Redshift migrate the boolean type as boolean. By default, Redshift migrates booleans as varchar(1).
+     */
+    MapBooleanAsBoolean?: BooleanOptional;
   }
   export interface RefreshSchemasMessage {
     /**
@@ -4640,6 +4665,10 @@ declare namespace DMS {
      * To specify a bucket owner and prevent sniping, you can use the ExpectedBucketOwner endpoint setting.  Example: --s3-settings='{"ExpectedBucketOwner": "AWS_Account_ID"}'  When you make a request to test a connection or perform a migration, S3 checks the account ID of the bucket owner against the specified parameter.
      */
     ExpectedBucketOwner?: String;
+    /**
+     * When true, allows Glue to catalog your S3 bucket. Creating an Glue catalog lets you use Athena to query your data.
+     */
+    GlueCatalogGeneration?: BooleanOptional;
   }
   export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string;
   export type SchemaList = String[];
@@ -5046,6 +5075,7 @@ declare namespace DMS {
      */
     Connection?: Connection;
   }
+  export type TlogAccessMode = "BackupOnly"|"PreferBackup"|"PreferTlog"|"TlogOnly"|string;
   export interface UpdateSubscriptionsToEventBridgeMessage {
     /**
      * When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is. If not set or set to false, this operation runs only when all your replication instances are from DMS version 3.4.6 or higher. 

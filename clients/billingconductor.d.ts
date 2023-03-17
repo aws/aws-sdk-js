@@ -289,6 +289,7 @@ declare namespace Billingconductor {
     LinkedAccountIds: AccountIdList;
   }
   export type AccountId = string;
+  export type AccountIdFilterList = AccountId[];
   export type AccountIdList = AccountId[];
   export type AccountName = string;
   export type Arn = string;
@@ -463,6 +464,7 @@ declare namespace Billingconductor {
   }
   export type BillingGroupName = string;
   export type BillingGroupStatus = "ACTIVE"|"PRIMARY_ACCOUNT_MISSING"|string;
+  export type BillingGroupStatusList = BillingGroupStatus[];
   export type BillingGroupStatusReason = string;
   export type BillingPeriod = string;
   export type ClientToken = string;
@@ -782,6 +784,14 @@ declare namespace Billingconductor {
      * The end billing period of the custom line item version.
      */
     EndBillingPeriod?: BillingPeriod;
+    /**
+     *  A list of custom line item Amazon Resource Names (ARNs) to retrieve information. 
+     */
+    Arn?: CustomLineItemArn;
+    /**
+     *  The inclusive start time. 
+     */
+    StartTime?: Instant;
   }
   export interface DeleteBillingGroupInput {
     /**
@@ -891,6 +901,10 @@ declare namespace Billingconductor {
      *  The Amazon Web Services account ID to filter on. 
      */
     AccountId?: AccountId;
+    /**
+     *  The list of Amazon Web Services IDs to retrieve their associated billing group for a given time range. 
+     */
+    AccountIds?: AccountIdFilterList;
   }
   export interface ListAccountAssociationsInput {
     /**
@@ -959,6 +973,10 @@ declare namespace Billingconductor {
      * The pricing plan Amazon Resource Names (ARNs) to retrieve information. 
      */
     PricingPlan?: PricingPlanFullArn;
+    /**
+     *  A list of billing groups to retrieve their current status for a specific time range 
+     */
+    Statuses?: BillingGroupStatusList;
   }
   export interface ListBillingGroupsInput {
     /**
@@ -1416,9 +1434,17 @@ declare namespace Billingconductor {
      *  The set of tiering configurations for the pricing rule. 
      */
     Tiering?: Tiering;
+    /**
+     *  Usage type is the unit that each service uses to measure the usage of a specific type of resource. If the Scope attribute is set to SKU, this attribute indicates which usage type the PricingRule is modifying. For example, USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large instance in the US West (Oregon) Region. &lt;/p&gt; 
+     */
+    UsageType?: UsageType;
+    /**
+     *  Operation is the specific Amazon Web Services action covered by this line item. This describes the specific usage of the line item.  If the Scope attribute is set to SKU, this attribute indicates which operation the PricingRule is modifying. For example, a value of RunInstances:0202 indicates the operation of running an Amazon EC2 instance.
+     */
+    Operation?: Operation;
   }
   export type PricingRuleName = string;
-  export type PricingRuleScope = "GLOBAL"|"SERVICE"|"BILLING_ENTITY"|string;
+  export type PricingRuleScope = "GLOBAL"|"SERVICE"|"BILLING_ENTITY"|"SKU"|string;
   export type PricingRuleType = "MARKUP"|"DISCOUNT"|"TIERING"|string;
   export type ProformaCost = string;
   export type Service = string;

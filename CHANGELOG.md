@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1337.0-->
+<!--LATEST=2.1338.0-->
 <!--ENTRYINSERT-->
+
+## 2.1338.0
+* feature: Billingconductor: This release adds a new filter to ListAccountAssociations API and a new filter to ListBillingGroups API.
+* feature: ConfigService: This release adds resourceType enums for types released from October 2022 through February 2023.
+* feature: DMS: S3 setting to create AWS Glue Data Catalog. Oracle setting to control conversion of timestamp column. Support for Kafka SASL Plain authentication. Setting to map boolean from PostgreSQL to Redshift. SQL Server settings to force lob lookup on inline LOBs and to control access of database logs.
 
 ## 2.1337.0
 * feature: GuardDuty: Updated 9 APIs for feature enablement to reflect expansion of GuardDuty to features. Added new APIs and updated existing APIs to support RDS Protection GA.
