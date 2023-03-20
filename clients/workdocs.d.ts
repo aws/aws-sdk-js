@@ -324,6 +324,14 @@ declare class WorkDocs extends Service {
    */
   restoreDocumentVersions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Searches metadata and the content of folders, documents, document versions, and comments.
+   */
+  searchResources(params: WorkDocs.Types.SearchResourcesRequest, callback?: (err: AWSError, data: WorkDocs.Types.SearchResourcesResponse) => void): Request<WorkDocs.Types.SearchResourcesResponse, AWSError>;
+  /**
+   * Searches metadata and the content of folders, documents, document versions, and comments.
+   */
+  searchResources(callback?: (err: AWSError, data: WorkDocs.Types.SearchResourcesResponse) => void): Request<WorkDocs.Types.SearchResourcesResponse, AWSError>;
+  /**
    * Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.
    */
   updateDocument(params: WorkDocs.Types.UpdateDocumentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -451,6 +459,8 @@ declare namespace WorkDocs {
      */
     ShareResults?: ShareResultsList;
   }
+  export type AdditionalResponseFieldType = "WEBURL"|string;
+  export type AdditionalResponseFieldsList = AdditionalResponseFieldType[];
   export type AuthenticationHeaderType = string;
   export type BooleanEnumType = "TRUE"|"FALSE"|string;
   export type BooleanType = boolean;
@@ -515,10 +525,15 @@ declare namespace WorkDocs {
      * The ID of the user being replied to.
      */
     RecipientId?: IdType;
+    /**
+     * The ID of the user who made the comment.
+     */
+    ContributorId?: IdType;
   }
   export type CommentStatusType = "DRAFT"|"PUBLISHED"|"DELETED"|string;
   export type CommentTextType = string;
   export type CommentVisibilityType = "PUBLIC"|"PRIVATE"|string;
+  export type ContentCategoryType = "IMAGE"|"DOCUMENT"|"PDF"|"SPREADSHEET"|"PRESENTATION"|"AUDIO"|"VIDEO"|"SOURCE_CODE"|"OTHER"|string;
   export interface CreateCommentRequest {
     /**
      * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
@@ -687,6 +702,16 @@ declare namespace WorkDocs {
   export type CustomMetadataKeyType = string;
   export type CustomMetadataMap = {[key: string]: CustomMetadataValueType};
   export type CustomMetadataValueType = string;
+  export interface DateRangeType {
+    /**
+     * Timestamp range start value (in epochs)
+     */
+    StartValue?: TimestampType;
+    /**
+     * Timestamp range end value (in epochs).
+     */
+    EndValue?: TimestampType;
+  }
   export interface DeactivateUserRequest {
     /**
      * The ID of the user.
@@ -1263,6 +1288,48 @@ declare namespace WorkDocs {
   export type DocumentVersionStatus = "ACTIVE"|string;
   export type EmailAddressType = string;
   export type FieldNamesType = string;
+  export interface Filters {
+    /**
+     * Filters by the locale of the content or comment.
+     */
+    TextLocales?: TextLocaleTypeList;
+    /**
+     * Filters by content category.
+     */
+    ContentCategories?: SearchContentCategoryTypeList;
+    /**
+     * Filters based on entity type.
+     */
+    ResourceTypes?: SearchResourceTypeList;
+    /**
+     * Filter by labels using exact match.
+     */
+    Labels?: SearchLabelList;
+    /**
+     * Filter based on UserIds or GroupIds.
+     */
+    Principals?: SearchPrincipalTypeList;
+    /**
+     * Filter based on resource’s path.
+     */
+    AncestorIds?: SearchAncestorIdList;
+    /**
+     * Filter based on file groupings.
+     */
+    SearchCollectionTypes?: SearchCollectionTypeList;
+    /**
+     * Filter based on size (in bytes).
+     */
+    SizeRange?: LongRangeType;
+    /**
+     * Filter based on resource’s creation timestamp.
+     */
+    CreatedRange?: DateRangeType;
+    /**
+     * Filter based on resource’s modified timestamp.
+     */
+    ModifiedRange?: DateRangeType;
+  }
   export type FolderContentType = "ALL"|"DOCUMENT"|"FOLDER"|string;
   export interface FolderMetadata {
     /**
@@ -1555,10 +1622,23 @@ declare namespace WorkDocs {
      */
     UploadMetadata?: UploadMetadata;
   }
+  export type LanguageCodeType = "AR"|"BG"|"BN"|"DA"|"DE"|"CS"|"EL"|"EN"|"ES"|"FA"|"FI"|"FR"|"HI"|"HU"|"ID"|"IT"|"JA"|"KO"|"LT"|"LV"|"NL"|"NO"|"PT"|"RO"|"RU"|"SV"|"SW"|"TH"|"TR"|"ZH"|"DEFAULT"|string;
   export type LimitType = number;
   export type LocaleType = "en"|"fr"|"ko"|"de"|"es"|"ja"|"ru"|"zh_CN"|"zh_TW"|"pt_BR"|"default"|string;
+  export interface LongRangeType {
+    /**
+     * The size start range (in bytes).
+     */
+    StartValue?: LongType;
+    /**
+     * The size end range (in bytes).
+     */
+    EndValue?: LongType;
+  }
+  export type LongType = number;
   export type MarkerType = string;
   export type MessageType = string;
+  export type NextMarkerType = string;
   export interface NotificationOptions {
     /**
      * Boolean value to indicate an email notification should be sent to the recipients.
@@ -1569,6 +1649,7 @@ declare namespace WorkDocs {
      */
     EmailMessage?: MessageType;
   }
+  export type OrderByFieldType = "RELEVANCE"|"NAME"|"SIZE"|"CREATED_TIMESTAMP"|"MODIFIED_TIMESTAMP"|string;
   export type OrderType = "ASCENDING"|"DESCENDING"|string;
   export type OrganizationUserList = User[];
   export type PageMarkerType = string;
@@ -1611,6 +1692,7 @@ declare namespace WorkDocs {
     Roles?: PermissionInfoList;
   }
   export type PrincipalList = Principal[];
+  export type PrincipalRoleType = "VIEWER"|"CONTRIBUTOR"|"OWNER"|"COOWNER"|string;
   export type PrincipalType = "USER"|"GROUP"|"INVITE"|"ANONYMOUS"|"ORGANIZATION"|string;
   export interface RemoveAllResourcePermissionsRequest {
     /**
@@ -1693,6 +1775,35 @@ declare namespace WorkDocs {
   export type ResourceSortType = "DATE"|"NAME"|string;
   export type ResourceStateType = "ACTIVE"|"RESTORING"|"RECYCLING"|"RECYCLED"|string;
   export type ResourceType = "FOLDER"|"DOCUMENT"|string;
+  export interface ResponseItem {
+    /**
+     * The type of item being returned.
+     */
+    ResourceType?: ResponseItemType;
+    /**
+     * The webUrl of the item being returned.
+     */
+    WebUrl?: ResponseItemWebUrl;
+    /**
+     * The document that matches the query.
+     */
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The folder that matches the query.
+     */
+    FolderMetadata?: FolderMetadata;
+    /**
+     * The comment that matches the query.
+     */
+    CommentMetadata?: CommentMetadata;
+    /**
+     * The document version that matches the metadata.
+     */
+    DocumentVersionMetadata?: DocumentVersionMetadata;
+  }
+  export type ResponseItemType = "DOCUMENT"|"FOLDER"|"COMMENT"|"DOCUMENT_VERSION"|string;
+  export type ResponseItemWebUrl = string;
+  export type ResponseItemsList = ResponseItem[];
   export interface RestoreDocumentVersionsRequest {
     /**
      * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
@@ -1705,8 +1816,91 @@ declare namespace WorkDocs {
   }
   export type RolePermissionType = "DIRECT"|"INHERITED"|string;
   export type RoleType = "VIEWER"|"CONTRIBUTOR"|"OWNER"|"COOWNER"|string;
+  export type SearchAncestorId = string;
+  export type SearchAncestorIdList = SearchAncestorId[];
+  export type SearchCollectionType = "OWNED"|"SHARED_WITH_ME"|string;
+  export type SearchCollectionTypeList = SearchCollectionType[];
+  export type SearchContentCategoryTypeList = ContentCategoryType[];
+  export type SearchLabel = string;
+  export type SearchLabelList = SearchLabel[];
   export type SearchMarkerType = string;
+  export type SearchPrincipalRoleList = PrincipalRoleType[];
+  export interface SearchPrincipalType {
+    /**
+     * UserIds or GroupIds.
+     */
+    Id: IdType;
+    /**
+     * The Role of a User or Group.
+     */
+    Roles?: SearchPrincipalRoleList;
+  }
+  export type SearchPrincipalTypeList = SearchPrincipalType[];
+  export type SearchQueryScopeType = "NAME"|"CONTENT"|string;
+  export type SearchQueryScopeTypeList = SearchQueryScopeType[];
   export type SearchQueryType = string;
+  export type SearchResourceType = "FOLDER"|"DOCUMENT"|"COMMENT"|"DOCUMENT_VERSION"|string;
+  export type SearchResourceTypeList = SearchResourceType[];
+  export interface SearchResourcesRequest {
+    /**
+     * Amazon WorkDocs authentication token. Not required when using Amazon Web Services administrator credentials to access the API.
+     */
+    AuthenticationToken?: AuthenticationHeaderType;
+    /**
+     * The String to search for. Searches across different text fields based on request parameters. Use double quotes around the query string for exact phrase matches.
+     */
+    QueryText?: SearchQueryType;
+    /**
+     * Filter based on the text field type. A Folder has only a name and no content. A Comment has only content and no name. A Document or Document Version has a name and content
+     */
+    QueryScopes?: SearchQueryScopeTypeList;
+    /**
+     * Filters based on the resource owner OrgId. This is a mandatory parameter when using Admin SigV4 credentials.
+     */
+    OrganizationId?: IdType;
+    /**
+     * A list of attributes to include in the response. Used to request fields that are not normally returned in a standard response.
+     */
+    AdditionalResponseFields?: AdditionalResponseFieldsList;
+    /**
+     * Filters results based on entity metadata.
+     */
+    Filters?: Filters;
+    /**
+     * Order by results in one or more categories.
+     */
+    OrderBy?: SearchResultSortList;
+    /**
+     * Max results count per page.
+     */
+    Limit?: SearchResultsLimitType;
+    /**
+     * The marker for the next set of results.
+     */
+    Marker?: NextMarkerType;
+  }
+  export interface SearchResourcesResponse {
+    /**
+     * List of Documents, Folders, Comments, and Document Versions matching the query.
+     */
+    Items?: ResponseItemsList;
+    /**
+     * The marker to use when requesting the next set of results. If there are no additional results, the string is empty.
+     */
+    Marker?: NextMarkerType;
+  }
+  export type SearchResultSortList = SearchSortResult[];
+  export type SearchResultsLimitType = number;
+  export interface SearchSortResult {
+    /**
+     * Sort search results based on this field name.
+     */
+    Field?: OrderByFieldType;
+    /**
+     * Sort direction.
+     */
+    Order?: SortOrder;
+  }
   export interface SharePrincipal {
     /**
      * The ID of the recipient.
@@ -1754,6 +1948,7 @@ declare namespace WorkDocs {
   export type SharedLabels = SharedLabel[];
   export type SignedHeaderMap = {[key: string]: HeaderValueType};
   export type SizeType = number;
+  export type SortOrder = "ASC"|"DESC"|string;
   export interface StorageRuleType {
     /**
      * The amount of storage allocated, in bytes.
@@ -1783,6 +1978,7 @@ declare namespace WorkDocs {
   export type SubscriptionList = Subscription[];
   export type SubscriptionProtocolType = "HTTPS"|"SQS"|string;
   export type SubscriptionType = "ALL"|string;
+  export type TextLocaleTypeList = LanguageCodeType[];
   export type TimeZoneIdType = string;
   export type TimestampType = Date;
   export interface UpdateDocumentRequest {

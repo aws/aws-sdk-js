@@ -43,6 +43,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "OutpostOfflineException"
         }
       ],
       "documentation": "<p>Creates an endpoint and associates it with the specified Outpost.</p> <note> <p>It can take up to 5 minutes for this action to finish.</p> </note> <p/> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html\">DeleteEndpoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html\">ListEndpoints</a> </p> </li> </ul>"
@@ -71,6 +74,9 @@
         },
         {
           "shape": "ThrottlingException"
+        },
+        {
+          "shape": "OutpostOfflineException"
         }
       ],
       "documentation": "<p>Deletes an endpoint.</p> <note> <p>It can take up to 5 minutes for this action to finish.</p> </note> <p/> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html\">CreateEndpoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html\">ListEndpoints</a> </p> </li> </ul>"
@@ -290,6 +296,10 @@
         "CustomerOwnedIpv4Pool": {
           "shape": "CustomerOwnedIpv4Pool",
           "documentation": "<p>The ID of the customer-owned IPv4 address pool used for the endpoint.</p>"
+        },
+        "FailedReason": {
+          "shape": "FailedReason",
+          "documentation": "<p>The failure reason, if any, for a create or delete endpoint operation.</p>"
         }
       },
       "documentation": "<p>Amazon S3 on Outposts Access Points simplify managing data access at scale for shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to Outposts buckets so that you can perform actions within your virtual private cloud (VPC). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/WorkingWithS3Outposts.html\"> Accessing S3 on Outposts using VPC-only access points</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
@@ -314,7 +324,9 @@
       "enum": [
         "Pending",
         "Available",
-        "Deleting"
+        "Deleting",
+        "Create_Failed",
+        "Delete_Failed"
       ]
     },
     "Endpoints": {
@@ -322,6 +334,23 @@
       "member": {
         "shape": "Endpoint"
       }
+    },
+    "ErrorCode": {
+      "type": "string"
+    },
+    "FailedReason": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>The failure code, if any, for a create or delete endpoint operation.</p>"
+        },
+        "Message": {
+          "shape": "Message",
+          "documentation": "<p>Additional error details describing the endpoint failure and recommended action.</p>"
+        }
+      },
+      "documentation": "<p>The failure reason, if any, for a create or delete endpoint operation.</p>"
     },
     "ListEndpointsRequest": {
       "type": "structure",
@@ -426,6 +455,9 @@
       "type": "integer",
       "max": 100,
       "min": 0
+    },
+    "Message": {
+      "type": "string"
     },
     "NetworkInterface": {
       "type": "structure",

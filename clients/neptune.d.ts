@@ -668,6 +668,36 @@ declare namespace Neptune {
      */
     DisableLogTypes?: LogTypeList;
   }
+  export interface ClusterPendingModifiedValues {
+    /**
+     * This PendingCloudwatchLogsExports structure specifies pending changes to which CloudWatch logs are enabled and which are disabled.
+     */
+    PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
+    /**
+     * The DBClusterIdentifier value for the DB cluster.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A value that indicates whether mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled.
+     */
+    IAMDatabaseAuthenticationEnabled?: BooleanOptional;
+    /**
+     * The database engine version.
+     */
+    EngineVersion?: String;
+    /**
+     * The number of days for which automatic DB snapshots are retained.
+     */
+    BackupRetentionPeriod?: IntegerOptional;
+    /**
+     * The allocated storage size in gibibytes (GiB) for database engines. For Neptune, AllocatedStorage always returns 1, because Neptune DB cluster storage size isn't fixed, but instead automatically adjusts as needed.
+     */
+    AllocatedStorage?: IntegerOptional;
+    /**
+     * The Provisioned IOPS (I/O operations per second) value. This setting is only for non-Aurora Multi-AZ DB clusters.
+     */
+    Iops?: IntegerOptional;
+  }
   export interface CopyDBClusterParameterGroupMessage {
     /**
      * The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN). Constraints:   Must specify a valid DB cluster parameter group.   If the source DB cluster parameter group is in the same Amazon Region as the copy, specify a valid DB parameter group identifier, for example my-db-cluster-param-group, or a valid ARN.   If the source DB parameter group is in a different Amazon Region than the copy, specify a valid DB cluster parameter group ARN, for example arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.  
@@ -1059,7 +1089,7 @@ declare namespace Neptune {
     /**
      * The identifier of the DB cluster that the instance will belong to. For information on creating a DB cluster, see CreateDBCluster. Type: String
      */
-    DBClusterIdentifier?: String;
+    DBClusterIdentifier: String;
     /**
      * Specifies the storage type to be associated with the DB instance. Not applicable. Storage is managed by the DB Cluster.
      */
@@ -1386,6 +1416,10 @@ declare namespace Neptune {
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
     /**
+     * This data type is used as a response element in the ModifyDBCluster operation and contains changes that will be applied during the next maintenance window.
+     */
+    PendingModifiedValues?: ClusterPendingModifiedValues;
+    /**
      * Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
@@ -1398,6 +1432,10 @@ declare namespace Neptune {
      */
     AutomaticRestartTime?: TStamp;
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfigurationInfo;
+    /**
+     * Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
   }
   export interface DBClusterEndpoint {
     /**

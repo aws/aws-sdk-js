@@ -141,12 +141,27 @@ declare namespace S3Outposts {
      * The ID of the customer-owned IPv4 address pool used for the endpoint.
      */
     CustomerOwnedIpv4Pool?: CustomerOwnedIpv4Pool;
+    /**
+     * The failure reason, if any, for a create or delete endpoint operation.
+     */
+    FailedReason?: FailedReason;
   }
   export type EndpointAccessType = "Private"|"CustomerOwnedIp"|string;
   export type EndpointArn = string;
   export type EndpointId = string;
-  export type EndpointStatus = "Pending"|"Available"|"Deleting"|string;
+  export type EndpointStatus = "Pending"|"Available"|"Deleting"|"Create_Failed"|"Delete_Failed"|string;
   export type Endpoints = Endpoint[];
+  export type ErrorCode = string;
+  export interface FailedReason {
+    /**
+     * The failure code, if any, for a create or delete endpoint operation.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * Additional error details describing the endpoint failure and recommended action.
+     */
+    Message?: Message;
+  }
   export interface ListEndpointsRequest {
     /**
      * If a previous response from this operation included a NextToken value, provide that value here to retrieve the next page of results.
@@ -212,6 +227,7 @@ declare namespace S3Outposts {
     NextToken?: NextToken;
   }
   export type MaxResults = number;
+  export type Message = string;
   export interface NetworkInterface {
     /**
      * The ID for the network interface.

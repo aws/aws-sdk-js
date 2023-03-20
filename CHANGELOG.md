@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1338.0-->
+<!--LATEST=2.1339.0-->
 <!--ENTRYINSERT-->
+
+## 2.1339.0
+* feature: ApplicationAutoScaling: With this release customers can now tag their Application Auto Scaling registered targets with key-value pairs and manage IAM permissions for all the tagged resources centrally.
+* feature: Neptune: This release makes following few changes. db-cluster-identifier is now a required parameter of create-db-instance. describe-db-cluster will now return PendingModifiedValues and GlobalClusterIdentifier fields in the response.
+* feature: S3Outposts: S3 On Outposts added support for endpoint status, and a failed endpoint reason, if any
+* feature: WorkDocs: This release adds a new API, SearchResources, which enable users to search through metadata and content of folders, documents, document versions and comments in a WorkDocs site.
 
 ## 2.1338.0
 * feature: Billingconductor: This release adds a new filter to ListAccountAssociations API and a new filter to ListBillingGroups API.
