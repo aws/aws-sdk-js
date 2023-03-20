@@ -38,7 +38,7 @@ A maintenance mode message may be emitted by this package on startup.
 To suppress this message, use an environment variable:
 
 ```sh
-AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE=1 node my_program.js
+AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE=1
 ```
 
 or a JavaScript setting as follows:
