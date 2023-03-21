@@ -734,6 +734,9 @@
       },
       "errors": [
         {
+          "shape": "ResourceNotFoundException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -853,6 +856,9 @@
       },
       "errors": [
         {
+          "shape": "ResourceNotFoundException"
+        },
+        {
           "shape": "InternalServerException"
         },
         {
@@ -899,6 +905,29 @@
       ],
       "documentation": "<p>Lists the schemas for relations within a collaboration.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceInput"
+      },
+      "output": {
+        "shape": "ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Lists all of the tags that have been added to a resource.</p>"
+    },
     "StartProtectedQuery": {
       "name": "StartProtectedQuery",
       "http": {
@@ -933,6 +962,52 @@
         }
       ],
       "documentation": "<p>Creates a protected query that is started by AWS Clean Rooms.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "TagResourceInput"
+      },
+      "output": {
+        "shape": "TagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Tags a resource.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UntagResourceInput"
+      },
+      "output": {
+        "shape": "UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Removes a tag or list of tags from a resource.</p>"
     },
     "UpdateCollaboration": {
       "name": "UpdateCollaboration",
@@ -1208,6 +1283,7 @@
     "AggregationConstraintMinimumInteger": {
       "type": "integer",
       "box": true,
+      "max": 100000,
       "min": 2
     },
     "AggregationConstraints": {
@@ -1228,7 +1304,7 @@
       "member": {
         "shape": "ColumnName"
       },
-      "max": 250,
+      "max": 100,
       "min": 1
     },
     "AnalysisMethod": {
@@ -1465,6 +1541,12 @@
     "Boolean": {
       "type": "boolean",
       "box": true
+    },
+    "CleanroomsArn": {
+      "type": "string",
+      "max": 100,
+      "min": 0,
+      "pattern": "arn:aws:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:[\\d\\w/-]+"
     },
     "Collaboration": {
       "type": "structure",
@@ -2026,6 +2108,10 @@
         "queryLogStatus": {
           "shape": "CollaborationQueryLogStatus",
           "documentation": "<p>An indicator as to whether query logging has been enabled or disabled for the collaboration.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>"
         }
       }
     },
@@ -2107,6 +2193,10 @@
         "roleArn": {
           "shape": "RoleArn",
           "documentation": "<p>The service will assume this role to access catalog metadata and query the table.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>"
         }
       }
     },
@@ -2150,6 +2240,10 @@
         "analysisMethod": {
           "shape": "AnalysisMethod",
           "documentation": "<p>The analysis method for the configured tables. The only valid value is currently `DIRECT_QUERY`.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>"
         }
       }
     },
@@ -2179,6 +2273,10 @@
         "queryLogStatus": {
           "shape": "MembershipQueryLogStatus",
           "documentation": "<p>An indicator as to whether query logging has been enabled or disabled for the collaboration.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.</p>"
         }
       }
     },
@@ -2941,6 +3039,32 @@
         }
       }
     },
+    "ListTagsForResourceInput": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "CleanroomsArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) associated with the resource you want to list tags on.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceOutput": {
+      "type": "structure",
+      "required": [
+        "tags"
+      ],
+      "members": {
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map of objects specifying each key name and value.</p>"
+        }
+      }
+    },
     "Long": {
       "type": "long",
       "box": true
@@ -3538,7 +3662,7 @@
         },
         "partitionKeys": {
           "shape": "ColumnList",
-          "documentation": "<p>The partition keys for the data set underlying this schema.</p>"
+          "documentation": "<p>The partition keys for the dataset underlying this schema.</p>"
         },
         "analysisRuleTypes": {
           "shape": "AnalysisRuleTypeList",
@@ -3727,8 +3851,60 @@
           "documentation": "<p>If present, a reference to the AWS Glue table referred to by this table reference.</p>"
         }
       },
-      "documentation": "<p>A pointer to the data set that underlies this table. Currently, this can only be an AWS Glue table.</p>",
+      "documentation": "<p>A pointer to the dataset that underlies this table. Currently, this can only be an AWS Glue table.</p>",
       "union": true
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "(?!aws:).{1,128}"
+    },
+    "TagKeys": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "documentation": "<p>Map of tags assigned to a resource</p>",
+      "max": 200,
+      "min": 0
+    },
+    "TagResourceInput": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "CleanroomsArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) associated with the resource you want to tag.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map of objects specifying each key name and value.</p>"
+        }
+      }
+    },
+    "TagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
     },
     "TargetProtectedQueryStatus": {
       "type": "string",
@@ -3744,6 +3920,31 @@
       "max": 36,
       "min": 36,
       "pattern": ".*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*"
+    },
+    "UntagResourceInput": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "CleanroomsArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeys",
+          "documentation": "<p>A list of key names of tags to be removed.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceOutput": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateCollaborationInput": {
       "type": "structure",
@@ -3960,5 +4161,5 @@
       }
     }
   },
-  "documentation": "<note> <p>AWS Clean Rooms is in preview release and is subject to change.</p> </note> <p>Welcome to the <i>AWS Clean Rooms API Reference</i>.</p> <p>AWS Clean Rooms is an AWS service that helps multiple parties to join their data together in a secure collaboration workspace. In the collaboration, members who can query and receive results can get insights into the combined data without either party getting access to the other party's raw data.</p> <p>To learn more about AWS Clean Rooms concepts, procedures, and best practices, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html\">AWS Clean Rooms User Guide</a>.</p>"
+  "documentation": "<p>Welcome to the <i>AWS Clean Rooms API Reference</i>.</p> <p>AWS Clean Rooms is an AWS service that helps multiple parties to join their data together in a secure collaboration workspace. In the collaboration, members who can query and receive results can get insights into the collective datasets without either party getting access to the other party's raw data.</p> <p>To learn more about AWS Clean Rooms concepts, procedures, and best practices, see the <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html\">AWS Clean Rooms User Guide</a>.</p>"
 }

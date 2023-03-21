@@ -228,6 +228,14 @@ declare class CleanRooms extends Service {
    */
   listSchemas(callback?: (err: AWSError, data: CleanRooms.Types.ListSchemasOutput) => void): Request<CleanRooms.Types.ListSchemasOutput, AWSError>;
   /**
+   * Lists all of the tags that have been added to a resource.
+   */
+  listTagsForResource(params: CleanRooms.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CleanRooms.Types.ListTagsForResourceOutput) => void): Request<CleanRooms.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Lists all of the tags that have been added to a resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CleanRooms.Types.ListTagsForResourceOutput) => void): Request<CleanRooms.Types.ListTagsForResourceOutput, AWSError>;
+  /**
    * Creates a protected query that is started by AWS Clean Rooms.
    */
   startProtectedQuery(params: CleanRooms.Types.StartProtectedQueryInput, callback?: (err: AWSError, data: CleanRooms.Types.StartProtectedQueryOutput) => void): Request<CleanRooms.Types.StartProtectedQueryOutput, AWSError>;
@@ -235,6 +243,22 @@ declare class CleanRooms extends Service {
    * Creates a protected query that is started by AWS Clean Rooms.
    */
   startProtectedQuery(callback?: (err: AWSError, data: CleanRooms.Types.StartProtectedQueryOutput) => void): Request<CleanRooms.Types.StartProtectedQueryOutput, AWSError>;
+  /**
+   * Tags a resource.
+   */
+  tagResource(params: CleanRooms.Types.TagResourceInput, callback?: (err: AWSError, data: CleanRooms.Types.TagResourceOutput) => void): Request<CleanRooms.Types.TagResourceOutput, AWSError>;
+  /**
+   * Tags a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: CleanRooms.Types.TagResourceOutput) => void): Request<CleanRooms.Types.TagResourceOutput, AWSError>;
+  /**
+   * Removes a tag or list of tags from a resource.
+   */
+  untagResource(params: CleanRooms.Types.UntagResourceInput, callback?: (err: AWSError, data: CleanRooms.Types.UntagResourceOutput) => void): Request<CleanRooms.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Removes a tag or list of tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: CleanRooms.Types.UntagResourceOutput) => void): Request<CleanRooms.Types.UntagResourceOutput, AWSError>;
   /**
    * Updates collaboration metadata and can only be called by the collaboration owner.
    */
@@ -437,6 +461,7 @@ declare namespace CleanRooms {
     errors: BatchGetSchemaErrorList;
   }
   export type Boolean = boolean;
+  export type CleanroomsArn = string;
   export interface Collaboration {
     /**
      * The unique ID for the collaboration.
@@ -783,6 +808,10 @@ declare namespace CleanRooms {
      * An indicator as to whether query logging has been enabled or disabled for the collaboration.
      */
     queryLogStatus: CollaborationQueryLogStatus;
+    /**
+     * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+     */
+    tags?: TagMap;
   }
   export interface CreateCollaborationOutput {
     /**
@@ -831,6 +860,10 @@ declare namespace CleanRooms {
      * The service will assume this role to access catalog metadata and query the table.
      */
     roleArn: RoleArn;
+    /**
+     * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+     */
+    tags?: TagMap;
   }
   export interface CreateConfiguredTableAssociationOutput {
     /**
@@ -859,6 +892,10 @@ declare namespace CleanRooms {
      * The analysis method for the configured tables. The only valid value is currently `DIRECT_QUERY`.
      */
     analysisMethod: AnalysisMethod;
+    /**
+     * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+     */
+    tags?: TagMap;
   }
   export interface CreateConfiguredTableOutput {
     /**
@@ -875,6 +912,10 @@ declare namespace CleanRooms {
      * An indicator as to whether query logging has been enabled or disabled for the collaboration.
      */
     queryLogStatus: MembershipQueryLogStatus;
+    /**
+     * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+     */
+    tags?: TagMap;
   }
   export interface CreateMembershipOutput {
     /**
@@ -1267,6 +1308,18 @@ declare namespace CleanRooms {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the resource you want to list tags on.
+     */
+    resourceArn: CleanroomsArn;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * A map of objects specifying each key name and value.
+     */
+    tags: TagMap;
+  }
   export type Long = number;
   export type MaxResults = number;
   export type MemberAbilities = MemberAbility[];
@@ -1570,7 +1623,7 @@ declare namespace CleanRooms {
      */
     columns: ColumnList;
     /**
-     * The partition keys for the data set underlying this schema.
+     * The partition keys for the dataset underlying this schema.
      */
     partitionKeys: ColumnList;
     /**
@@ -1689,9 +1742,37 @@ declare namespace CleanRooms {
      */
     glue?: GlueTableReference;
   }
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the resource you want to tag.
+     */
+    resourceArn: CleanroomsArn;
+    /**
+     * A map of objects specifying each key name and value.
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
   export type TargetProtectedQueryStatus = "CANCELLED"|string;
   export type Timestamp = Date;
   export type UUID = string;
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the resource you want to remove the tag from.
+     */
+    resourceArn: CleanroomsArn;
+    /**
+     * A list of key names of tags to be removed.
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceOutput {
+  }
   export interface UpdateCollaborationInput {
     /**
      * The identifier for the collaboration.

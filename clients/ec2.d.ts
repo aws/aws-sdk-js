@@ -93,11 +93,11 @@ declare class EC2 extends Service {
    */
   allocateHosts(callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
   /**
-   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
+   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide.  This action creates an allocation with strong consistency. The returned CIDR will not overlap with any other allocations from the same pool. 
    */
   allocateIpamPoolCidr(params: EC2.Types.AllocateIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
   /**
-   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide. 
+   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide.  This action creates an allocation with strong consistency. The returned CIDR will not overlap with any other allocations from the same pool. 
    */
   allocateIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
   /**
@@ -725,11 +725,11 @@ declare class EC2 extends Service {
    */
   createNetworkInsightsAccessScope(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsAccessScopeResult) => void): Request<EC2.Types.CreateNetworkInsightsAccessScopeResult, AWSError>;
   /**
-   * Creates a path to analyze for reachability. Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see What is Reachability Analyzer.
+   * Creates a path to analyze for reachability. Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see the Reachability Analyzer Guide.
    */
   createNetworkInsightsPath(params: EC2.Types.CreateNetworkInsightsPathRequest, callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsPathResult) => void): Request<EC2.Types.CreateNetworkInsightsPathResult, AWSError>;
   /**
-   * Creates a path to analyze for reachability. Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see What is Reachability Analyzer.
+   * Creates a path to analyze for reachability. Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see the Reachability Analyzer Guide.
    */
   createNetworkInsightsPath(callback?: (err: AWSError, data: EC2.Types.CreateNetworkInsightsPathResult) => void): Request<EC2.Types.CreateNetworkInsightsPathResult, AWSError>;
   /**
@@ -813,11 +813,11 @@ declare class EC2 extends Service {
    */
   createSecurityGroup(callback?: (err: AWSError, data: EC2.Types.CreateSecurityGroupResult) => void): Request<EC2.Types.CreateSecurityGroupResult, AWSError>;
   /**
-   * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. You can create snapshots of volumes in a Region and volumes on an Outpost. If you create a snapshot of a volume in a Region, the snapshot must be stored in the same Region as the volume. If you create a snapshot of a volume on an Outpost, the snapshot can be stored on the same Outpost as the volume, or in the Region for that Outpost. When a snapshot is created, any Amazon Web Services Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your Amazon EBS volume at the time the snapshot command is issued; this might exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. To create a snapshot for Amazon EBS volumes that serve as root devices, you should stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. You can create snapshots of volumes in a Region and volumes on an Outpost. If you create a snapshot of a volume in a Region, the snapshot must be stored in the same Region as the volume. If you create a snapshot of a volume on an Outpost, the snapshot can be stored on the same Outpost as the volume, or in the Region for that Outpost. When a snapshot is created, any Amazon Web Services Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your Amazon EBS volume at the time the snapshot command is issued; this might exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. When you create a snapshot for an EBS volume that serves as a root device, we recommend that you stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   createSnapshot(params: EC2.Types.CreateSnapshotRequest, callback?: (err: AWSError, data: EC2.Types.Snapshot) => void): Request<EC2.Types.Snapshot, AWSError>;
   /**
-   * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. You can create snapshots of volumes in a Region and volumes on an Outpost. If you create a snapshot of a volume in a Region, the snapshot must be stored in the same Region as the volume. If you create a snapshot of a volume on an Outpost, the snapshot can be stored on the same Outpost as the volume, or in the Region for that Outpost. When a snapshot is created, any Amazon Web Services Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your Amazon EBS volume at the time the snapshot command is issued; this might exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. To create a snapshot for Amazon EBS volumes that serve as root devices, you should stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. You can create snapshots of volumes in a Region and volumes on an Outpost. If you create a snapshot of a volume in a Region, the snapshot must be stored in the same Region as the volume. If you create a snapshot of a volume on an Outpost, the snapshot can be stored on the same Outpost as the volume, or in the Region for that Outpost. When a snapshot is created, any Amazon Web Services Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your Amazon EBS volume at the time the snapshot command is issued; this might exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. When you create a snapshot for an EBS volume that serves as a root device, we recommend that you stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tag your Amazon EC2 resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   createSnapshot(callback?: (err: AWSError, data: EC2.Types.Snapshot) => void): Request<EC2.Types.Snapshot, AWSError>;
   /**
@@ -3429,11 +3429,11 @@ declare class EC2 extends Service {
    */
   getIpamDiscoveredResourceCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredResourceCidrsResult) => void): Request<EC2.Types.GetIpamDiscoveredResourceCidrsResult, AWSError>;
   /**
-   * Get a list of all the CIDR allocations in an IPAM pool.
+   * Get a list of all the CIDR allocations in an IPAM pool.  If you use this action after AllocateIpamPoolCidr or ReleaseIpamPoolAllocation, note that all EC2 API actions follow an eventual consistency model. 
    */
   getIpamPoolAllocations(params: EC2.Types.GetIpamPoolAllocationsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
   /**
-   * Get a list of all the CIDR allocations in an IPAM pool.
+   * Get a list of all the CIDR allocations in an IPAM pool.  If you use this action after AllocateIpamPoolCidr or ReleaseIpamPoolAllocation, note that all EC2 API actions follow an eventual consistency model. 
    */
   getIpamPoolAllocations(callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
   /**
@@ -4365,11 +4365,11 @@ declare class EC2 extends Service {
    */
   releaseHosts(callback?: (err: AWSError, data: EC2.Types.ReleaseHostsResult) => void): Request<EC2.Types.ReleaseHostsResult, AWSError>;
   /**
-   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide. 
+   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide.   All EC2 API actions follow an eventual consistency model. 
    */
   releaseIpamPoolAllocation(params: EC2.Types.ReleaseIpamPoolAllocationRequest, callback?: (err: AWSError, data: EC2.Types.ReleaseIpamPoolAllocationResult) => void): Request<EC2.Types.ReleaseIpamPoolAllocationResult, AWSError>;
   /**
-   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide. 
+   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide.   All EC2 API actions follow an eventual consistency model. 
    */
   releaseIpamPoolAllocation(callback?: (err: AWSError, data: EC2.Types.ReleaseIpamPoolAllocationResult) => void): Request<EC2.Types.ReleaseIpamPoolAllocationResult, AWSError>;
   /**
@@ -5312,13 +5312,37 @@ declare namespace EC2 {
   export type AddedPrincipalSet = AddedPrincipal[];
   export interface AdditionalDetail {
     /**
-     * The information type.
+     * The additional detail code.
      */
     AdditionalDetailType?: String;
     /**
      * The path component.
      */
     Component?: AnalysisComponent;
+    /**
+     * The VPC endpoint service.
+     */
+    VpcEndpointService?: AnalysisComponent;
+    /**
+     * The rule options.
+     */
+    RuleOptions?: RuleOptionList;
+    /**
+     * The rule group type.
+     */
+    RuleGroupTypePairs?: RuleGroupTypePairList;
+    /**
+     * The rule options.
+     */
+    RuleGroupRuleOptionsPairs?: RuleGroupRuleOptionsPairList;
+    /**
+     * The name of the VPC endpoint service.
+     */
+    ServiceName?: String;
+    /**
+     * The load balancers.
+     */
+    LoadBalancers?: AnalysisComponentList;
   }
   export type AdditionalDetailList = AdditionalDetail[];
   export interface Address {
@@ -5778,6 +5802,18 @@ declare namespace EC2 {
      * The state. The following are the possible values:   active   blackhole  
      */
     State?: String;
+    /**
+     * The ID of a carrier gateway.
+     */
+    CarrierGatewayId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of a core network.
+     */
+    CoreNetworkArn?: ResourceArn;
+    /**
+     * The ID of a local gateway.
+     */
+    LocalGatewayId?: String;
   }
   export interface AnalysisSecurityGroupRule {
     /**
@@ -9610,21 +9646,21 @@ declare namespace EC2 {
   }
   export interface CreateNetworkInsightsPathRequest {
     /**
-     * The IP address of the Amazon Web Services resource that is the source of the path.
+     * The IP address of the source.
      */
     SourceIp?: IpAddress;
     /**
-     * The IP address of the Amazon Web Services resource that is the destination of the path.
+     * The IP address of the destination.
      */
     DestinationIp?: IpAddress;
     /**
-     * The Amazon Web Services resource that is the source of the path.
+     * The ID or ARN of the source. If the resource is in another account, you must specify an ARN.
      */
     Source: NetworkInsightsResourceId;
     /**
-     * The Amazon Web Services resource that is the destination of the path.
+     * The ID or ARN of the destination. If the resource is in another account, you must specify an ARN.
      */
-    Destination: NetworkInsightsResourceId;
+    Destination?: NetworkInsightsResourceId;
     /**
      * The protocol.
      */
@@ -9645,6 +9681,14 @@ declare namespace EC2 {
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken: String;
+    /**
+     * Scopes the analysis to network paths that match specific filters at the source. If you specify this parameter, you can't specify the parameters for the source IP address or the destination port.
+     */
+    FilterAtSource?: PathRequestFilter;
+    /**
+     * Scopes the analysis to network paths that match specific filters at the destination. If you specify this parameter, you can't specify the parameter for the destination IP address.
+     */
+    FilterAtDestination?: PathRequestFilter;
   }
   export interface CreateNetworkInsightsPathResult {
     /**
@@ -9986,7 +10030,7 @@ declare namespace EC2 {
   }
   export interface CreateSecurityGroupRequest {
     /**
-     * A description for the security group. This is informational only. Constraints: Up to 255 characters in length Constraints for EC2-Classic: ASCII characters Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*
+     * A description for the security group. Constraints: Up to 255 characters in length Constraints for EC2-Classic: ASCII characters Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&amp;;{}!$*
      */
     Description: String;
     /**
@@ -15267,7 +15311,7 @@ declare namespace EC2 {
      */
     NetworkInsightsPathIds?: NetworkInsightsPathIdList;
     /**
-     * The filters. The following are the possible values:   destination - The ID of the resource.   destination-port - The destination port.   protocol - The protocol.   source - The ID of the resource.  
+     * The filters. The following are the possible values:   destination - The ID of the resource.   filter-at-source.source-address - The source IPv4 address at the source.   filter-at-source.source-port-range - The source port range at the source.   filter-at-source.destination-address - The destination IPv4 address at the source.   filter-at-source.destination-port-range - The destination port range at the source.   filter-at-destination.source-address - The source IPv4 address at the destination.   filter-at-destination.source-port-range - The source port range at the destination.   filter-at-destination.destination-address - The destination IPv4 address at the destination.   filter-at-destination.destination-port-range - The destination port range at the destination.   protocol - The protocol.   source - The ID of the resource.  
      */
     Filters?: FilterList;
     /**
@@ -18282,7 +18326,7 @@ declare namespace EC2 {
     /**
      * A presigned URL for the import manifest stored in Amazon S3 and presented here as an Amazon S3 presigned URL. For information about creating a presigned URL for an Amazon S3 object, read the "Query String Request Authentication Alternative" section of the Authenticating REST Requests topic in the Amazon Simple Storage Service Developer Guide. For information about the import manifest referenced by this API action, see VM Import Manifest.
      */
-    ImportManifestUrl: String;
+    ImportManifestUrl: ImportManifestUrl;
   }
   export type DiskImageFormat = "VMDK"|"RAW"|"VHD"|string;
   export type DiskImageList = DiskImage[];
@@ -19231,6 +19275,14 @@ declare namespace EC2 {
      * The Region for the component.
      */
     ComponentRegion?: ComponentRegion;
+    /**
+     * The Network Firewall stateless rule.
+     */
+    FirewallStatelessRule?: FirewallStatelessRule;
+    /**
+     * The Network Firewall stateful rule.
+     */
+    FirewallStatefulRule?: FirewallStatefulRule;
   }
   export type ExplanationList = Explanation[];
   export interface ExportClientVpnClientCertificateRevocationListRequest {
@@ -19595,7 +19647,85 @@ declare namespace EC2 {
     Values?: ValueStringList;
   }
   export type FilterList = Filter[];
+  export interface FilterPortRange {
+    /**
+     * The first port in the range.
+     */
+    FromPort?: Port;
+    /**
+     * The last port in the range.
+     */
+    ToPort?: Port;
+  }
   export type FindingsFound = "true"|"false"|"unknown"|string;
+  export interface FirewallStatefulRule {
+    /**
+     * The ARN of the stateful rule group.
+     */
+    RuleGroupArn?: ResourceArn;
+    /**
+     * The source IP addresses, in CIDR notation.
+     */
+    Sources?: ValueStringList;
+    /**
+     * The destination IP addresses, in CIDR notation.
+     */
+    Destinations?: ValueStringList;
+    /**
+     * The source ports.
+     */
+    SourcePorts?: PortRangeList;
+    /**
+     * The destination ports.
+     */
+    DestinationPorts?: PortRangeList;
+    /**
+     * The protocol.
+     */
+    Protocol?: String;
+    /**
+     * The rule action. The possible values are pass, drop, and alert.
+     */
+    RuleAction?: String;
+    /**
+     * The direction. The possible values are FORWARD and ANY.
+     */
+    Direction?: String;
+  }
+  export interface FirewallStatelessRule {
+    /**
+     * The ARN of the stateless rule group.
+     */
+    RuleGroupArn?: ResourceArn;
+    /**
+     * The source IP addresses, in CIDR notation.
+     */
+    Sources?: ValueStringList;
+    /**
+     * The destination IP addresses, in CIDR notation.
+     */
+    Destinations?: ValueStringList;
+    /**
+     * The source ports.
+     */
+    SourcePorts?: PortRangeList;
+    /**
+     * The destination ports.
+     */
+    DestinationPorts?: PortRangeList;
+    /**
+     * The protocols.
+     */
+    Protocols?: ProtocolIntList;
+    /**
+     * The rule action. The possible values are pass, drop, and forward_to_site.
+     */
+    RuleAction?: String;
+    /**
+     * The rule priority.
+     */
+    Priority?: Priority;
+  }
   export type FleetActivityStatus = "error"|"pending_fulfillment"|"pending_termination"|"fulfilled"|string;
   export interface FleetCapacityReservation {
     /**
@@ -22389,6 +22519,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
   }
+  export type ImportManifestUrl = string;
   export interface ImportSnapshotRequest {
     /**
      * The client-specific data.
@@ -28728,7 +28859,7 @@ declare namespace EC2 {
      */
     AdditionalAccounts?: ValueStringList;
     /**
-     * The Amazon Resource Names (ARN) of the Amazon Web Services resources that the path must traverse.
+     * The Amazon Resource Names (ARN) of the resources that the path must traverse.
      */
     FilterInArns?: ArnList;
     /**
@@ -28794,11 +28925,11 @@ declare namespace EC2 {
      */
     CreatedDate?: MillisecondDateTime;
     /**
-     * The Amazon Web Services resource that is the source of the path.
+     * The ID of the source.
      */
     Source?: String;
     /**
-     * The Amazon Web Services resource that is the destination of the path.
+     * The ID of the destination.
      */
     Destination?: String;
     /**
@@ -28810,11 +28941,11 @@ declare namespace EC2 {
      */
     DestinationArn?: ResourceArn;
     /**
-     * The IP address of the Amazon Web Services resource that is the source of the path.
+     * The IP address of the source.
      */
     SourceIp?: IpAddress;
     /**
-     * The IP address of the Amazon Web Services resource that is the destination of the path.
+     * The IP address of the destination.
      */
     DestinationIp?: IpAddress;
     /**
@@ -28829,6 +28960,14 @@ declare namespace EC2 {
      * The tags associated with the path.
      */
     Tags?: TagList;
+    /**
+     * Scopes the analysis to network paths that match specific filters at the source.
+     */
+    FilterAtSource?: PathFilter;
+    /**
+     * Scopes the analysis to network paths that match specific filters at the destination.
+     */
+    FilterAtDestination?: PathFilter;
   }
   export type NetworkInsightsPathId = string;
   export type NetworkInsightsPathIdList = NetworkInsightsPathId[];
@@ -29342,8 +29481,56 @@ declare namespace EC2 {
      * The load balancer listener.
      */
     ElasticLoadBalancerListener?: AnalysisComponent;
+    /**
+     * The Network Firewall stateless rule.
+     */
+    FirewallStatelessRule?: FirewallStatelessRule;
+    /**
+     * The Network Firewall stateful rule.
+     */
+    FirewallStatefulRule?: FirewallStatefulRule;
+    /**
+     * The name of the VPC endpoint service.
+     */
+    ServiceName?: String;
   }
   export type PathComponentList = PathComponent[];
+  export interface PathFilter {
+    /**
+     * The source IPv4 address.
+     */
+    SourceAddress?: IpAddress;
+    /**
+     * The source port range.
+     */
+    SourcePortRange?: FilterPortRange;
+    /**
+     * The destination IPv4 address.
+     */
+    DestinationAddress?: IpAddress;
+    /**
+     * The destination port range.
+     */
+    DestinationPortRange?: FilterPortRange;
+  }
+  export interface PathRequestFilter {
+    /**
+     * The source IPv4 address.
+     */
+    SourceAddress?: IpAddress;
+    /**
+     * The source port range.
+     */
+    SourcePortRange?: RequestFilterPortRange;
+    /**
+     * The destination IPv4 address.
+     */
+    DestinationAddress?: IpAddress;
+    /**
+     * The destination port range.
+     */
+    DestinationPortRange?: RequestFilterPortRange;
+  }
   export interface PathStatement {
     /**
      * The packet header statement.
@@ -29751,6 +29938,7 @@ declare namespace EC2 {
   }
   export type PrincipalIdFormatList = PrincipalIdFormat[];
   export type PrincipalType = "All"|"Service"|"OrganizationUnit"|"Account"|"User"|"Role"|string;
+  export type Priority = number;
   export interface PrivateDnsDetails {
     /**
      * The private DNS name assigned to the VPC endpoint service.
@@ -29865,6 +30053,8 @@ declare namespace EC2 {
   }
   export type PropagatingVgwList = PropagatingVgw[];
   export type Protocol = "tcp"|"udp"|string;
+  export type ProtocolInt = number;
+  export type ProtocolIntList = ProtocolInt[];
   export type ProtocolList = Protocol[];
   export type ProtocolValue = "gre"|string;
   export interface ProvisionByoipCidrRequest {
@@ -30848,6 +31038,16 @@ declare namespace EC2 {
     Status: ReportStatusType;
   }
   export type ReportStatusType = "ok"|"impaired"|string;
+  export interface RequestFilterPortRange {
+    /**
+     * The first port in the range.
+     */
+    FromPort?: Port;
+    /**
+     * The last port in the range.
+     */
+    ToPort?: Port;
+  }
   export type RequestHostIdList = DedicatedHostId[];
   export type RequestHostIdSet = DedicatedHostId[];
   export type RequestInstanceTypeList = InstanceType[];
@@ -32197,6 +32397,39 @@ declare namespace EC2 {
   export type RouteTableIdStringList = RouteTableId[];
   export type RouteTableList = RouteTable[];
   export type RuleAction = "allow"|"deny"|string;
+  export interface RuleGroupRuleOptionsPair {
+    /**
+     * The ARN of the rule group.
+     */
+    RuleGroupArn?: ResourceArn;
+    /**
+     * The rule options.
+     */
+    RuleOptions?: RuleOptionList;
+  }
+  export type RuleGroupRuleOptionsPairList = RuleGroupRuleOptionsPair[];
+  export interface RuleGroupTypePair {
+    /**
+     * The ARN of the rule group.
+     */
+    RuleGroupArn?: ResourceArn;
+    /**
+     * The rule group type. The possible values are Domain List and Suricata.
+     */
+    RuleGroupType?: String;
+  }
+  export type RuleGroupTypePairList = RuleGroupTypePair[];
+  export interface RuleOption {
+    /**
+     * The Suricata keyword.
+     */
+    Keyword?: String;
+    /**
+     * The settings for the keyword.
+     */
+    Settings?: StringList;
+  }
+  export type RuleOptionList = RuleOption[];
   export interface RunInstancesMonitoringEnabled {
     /**
      * Indicates whether detailed monitoring is enabled. Otherwise, basic monitoring is enabled.

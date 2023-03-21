@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1339.0-->
+<!--LATEST=2.1340.0-->
 <!--ENTRYINSERT-->
+
+## 2.1340.0
+* feature: ChimeSDKMessaging: Amazon Chime SDK messaging customers can now manage streaming configuration for messaging data for archival and analysis.
+* feature: CleanRooms: GA Release of AWS Clean Rooms, Added Tagging Functionality
+* feature: EC2: This release adds support for AWS Network Firewall, AWS PrivateLink, and Gateway Load Balancers to Amazon VPC Reachability Analyzer, and it makes the path destination optional as long as a destination address in the filter at source is provided.
+* feature: IoTSiteWise: Provide support for tagging of data streams and enabling tag based authorization for property alias
+* feature: Mgn: This release introduces the Import and export feature and expansion of the post-launch actions
 
 ## 2.1339.0
 * feature: ApplicationAutoScaling: With this release customers can now tag their Application Auto Scaling registered targets with key-value pairs and manage IAM permissions for all the tagged resources centrally.

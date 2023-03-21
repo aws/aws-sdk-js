@@ -252,6 +252,38 @@ declare class Mgn extends Service {
    */
   listApplications(callback?: (err: AWSError, data: Mgn.Types.ListApplicationsResponse) => void): Request<Mgn.Types.ListApplicationsResponse, AWSError>;
   /**
+   * List export errors.
+   */
+  listExportErrors(params: Mgn.Types.ListExportErrorsRequest, callback?: (err: AWSError, data: Mgn.Types.ListExportErrorsResponse) => void): Request<Mgn.Types.ListExportErrorsResponse, AWSError>;
+  /**
+   * List export errors.
+   */
+  listExportErrors(callback?: (err: AWSError, data: Mgn.Types.ListExportErrorsResponse) => void): Request<Mgn.Types.ListExportErrorsResponse, AWSError>;
+  /**
+   * List exports.
+   */
+  listExports(params: Mgn.Types.ListExportsRequest, callback?: (err: AWSError, data: Mgn.Types.ListExportsResponse) => void): Request<Mgn.Types.ListExportsResponse, AWSError>;
+  /**
+   * List exports.
+   */
+  listExports(callback?: (err: AWSError, data: Mgn.Types.ListExportsResponse) => void): Request<Mgn.Types.ListExportsResponse, AWSError>;
+  /**
+   * List import errors.
+   */
+  listImportErrors(params: Mgn.Types.ListImportErrorsRequest, callback?: (err: AWSError, data: Mgn.Types.ListImportErrorsResponse) => void): Request<Mgn.Types.ListImportErrorsResponse, AWSError>;
+  /**
+   * List import errors.
+   */
+  listImportErrors(callback?: (err: AWSError, data: Mgn.Types.ListImportErrorsResponse) => void): Request<Mgn.Types.ListImportErrorsResponse, AWSError>;
+  /**
+   * List imports.
+   */
+  listImports(params: Mgn.Types.ListImportsRequest, callback?: (err: AWSError, data: Mgn.Types.ListImportsResponse) => void): Request<Mgn.Types.ListImportsResponse, AWSError>;
+  /**
+   * List imports.
+   */
+  listImports(callback?: (err: AWSError, data: Mgn.Types.ListImportsResponse) => void): Request<Mgn.Types.ListImportsResponse, AWSError>;
+  /**
    * List source server post migration custom actions.
    */
   listSourceServerActions(params: Mgn.Types.ListSourceServerActionsRequest, callback?: (err: AWSError, data: Mgn.Types.ListSourceServerActionsResponse) => void): Request<Mgn.Types.ListSourceServerActionsResponse, AWSError>;
@@ -339,6 +371,22 @@ declare class Mgn extends Service {
    * Launches a Cutover Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartCutover and changes the SourceServer.lifeCycle.state property to CUTTING_OVER.
    */
   startCutover(callback?: (err: AWSError, data: Mgn.Types.StartCutoverResponse) => void): Request<Mgn.Types.StartCutoverResponse, AWSError>;
+  /**
+   * Start export.
+   */
+  startExport(params: Mgn.Types.StartExportRequest, callback?: (err: AWSError, data: Mgn.Types.StartExportResponse) => void): Request<Mgn.Types.StartExportResponse, AWSError>;
+  /**
+   * Start export.
+   */
+  startExport(callback?: (err: AWSError, data: Mgn.Types.StartExportResponse) => void): Request<Mgn.Types.StartExportResponse, AWSError>;
+  /**
+   * Start import.
+   */
+  startImport(params: Mgn.Types.StartImportRequest, callback?: (err: AWSError, data: Mgn.Types.StartImportResponse) => void): Request<Mgn.Types.StartImportResponse, AWSError>;
+  /**
+   * Start import.
+   */
+  startImport(callback?: (err: AWSError, data: Mgn.Types.StartImportResponse) => void): Request<Mgn.Types.StartImportResponse, AWSError>;
   /**
    * Starts replication for SNAPSHOT_SHIPPING agents.
    */
@@ -454,6 +502,9 @@ declare class Mgn extends Service {
 }
 declare namespace Mgn {
   export type ARN = string;
+  export type AccountID = string;
+  export type ActionCategory = "DISASTER_RECOVERY"|"OPERATING_SYSTEM"|"LICENSE_AND_SUBSCRIPTION"|"VALIDATION"|"OBSERVABILITY"|"SECURITY"|"NETWORKING"|"CONFIGURATION"|"BACKUP"|"OTHER"|string;
+  export type ActionDescription = string;
   export type ActionID = string;
   export type ActionIDs = ActionID[];
   export type ActionName = string;
@@ -592,6 +643,7 @@ declare namespace Mgn {
     state: ChangeServerLifeCycleStateSourceServerLifecycleState;
   }
   export type ChangeServerLifeCycleStateSourceServerLifecycleState = "READY_FOR_TEST"|"READY_FOR_CUTOVER"|"CUTOVER"|string;
+  export type ClientIdempotencyToken = string;
   export type CloudWatchLogGroupName = string;
   export type Cpus = CPU[];
   export interface CreateApplicationRequest {
@@ -1102,6 +1154,78 @@ declare namespace Mgn {
   export type EC2InstanceID = string;
   export type EC2InstanceType = string;
   export type EC2LaunchConfigurationTemplateID = string;
+  export interface ExportErrorData {
+    /**
+     * Export errors data raw error.
+     */
+    rawError?: LargeBoundedString;
+  }
+  export type ExportErrors = ExportTaskError[];
+  export type ExportID = string;
+  export type ExportStatus = "PENDING"|"STARTED"|"FAILED"|"SUCCEEDED"|string;
+  export interface ExportTask {
+    /**
+     * Export task creation datetime.
+     */
+    creationDateTime?: ISO8601DatetimeString;
+    /**
+     * Export task end datetime.
+     */
+    endDateTime?: ISO8601DatetimeString;
+    /**
+     * Export task id.
+     */
+    exportID?: ExportID;
+    /**
+     * Export task progress percentage.
+     */
+    progressPercentage?: Float;
+    /**
+     * Export task s3 bucket.
+     */
+    s3Bucket?: S3BucketName;
+    /**
+     * Export task s3 bucket owner.
+     */
+    s3BucketOwner?: AccountID;
+    /**
+     * Export task s3 key.
+     */
+    s3Key?: S3Key;
+    /**
+     * Export task status.
+     */
+    status?: ExportStatus;
+    /**
+     * Export task summary.
+     */
+    summary?: ExportTaskSummary;
+  }
+  export interface ExportTaskError {
+    /**
+     * Export task error data.
+     */
+    errorData?: ExportErrorData;
+    /**
+     * Export task error datetime.
+     */
+    errorDateTime?: ISO8601DatetimeString;
+  }
+  export interface ExportTaskSummary {
+    /**
+     * Export task summary applications count.
+     */
+    applicationsCount?: PositiveInteger;
+    /**
+     * Export task summary servers count.
+     */
+    serversCount?: PositiveInteger;
+    /**
+     * Export task summary waves count.
+     */
+    wavesCount?: PositiveInteger;
+  }
+  export type ExportsList = ExportTask[];
   export interface FinalizeCutoverRequest {
     /**
      * Request to finalize Cutover by Source Server ID.
@@ -1109,6 +1233,7 @@ declare namespace Mgn {
     sourceServerID: SourceServerID;
   }
   export type FirstBoot = "WAITING"|"SUCCEEDED"|"UNKNOWN"|"STOPPED"|string;
+  export type Float = number;
   export interface GetLaunchConfigurationRequest {
     /**
      * Request to get Launch Configuration information by Source Server ID.
@@ -1146,11 +1271,132 @@ declare namespace Mgn {
      */
     vmWareUuid?: BoundedString;
   }
+  export interface ImportErrorData {
+    /**
+     * Import error data application ID.
+     */
+    applicationID?: ApplicationID;
+    /**
+     * Import error data ec2 LaunchTemplate ID.
+     */
+    ec2LaunchTemplateID?: BoundedString;
+    /**
+     * Import error data raw error.
+     */
+    rawError?: LargeBoundedString;
+    /**
+     * Import error data row number.
+     */
+    rowNumber?: PositiveInteger;
+    /**
+     * Import error data source server ID.
+     */
+    sourceServerID?: SourceServerID;
+    /**
+     * Import error data wave id.
+     */
+    waveID?: WaveID;
+  }
+  export type ImportErrorType = "VALIDATION_ERROR"|"PROCESSING_ERROR"|string;
+  export type ImportErrors = ImportTaskError[];
+  export type ImportID = string;
+  export type ImportIDsFilter = ImportID[];
+  export type ImportList = ImportTask[];
+  export type ImportStatus = "PENDING"|"STARTED"|"FAILED"|"SUCCEEDED"|string;
+  export interface ImportTask {
+    /**
+     * Import task creation datetime.
+     */
+    creationDateTime?: ISO8601DatetimeString;
+    /**
+     * Import task end datetime.
+     */
+    endDateTime?: ISO8601DatetimeString;
+    /**
+     * Import task id.
+     */
+    importID?: ImportID;
+    /**
+     * Import task progress percentage.
+     */
+    progressPercentage?: Float;
+    /**
+     * Import task s3 bucket source.
+     */
+    s3BucketSource?: S3BucketSource;
+    /**
+     * Import task status.
+     */
+    status?: ImportStatus;
+    /**
+     * Import task summary.
+     */
+    summary?: ImportTaskSummary;
+  }
+  export interface ImportTaskError {
+    /**
+     * Import task error data.
+     */
+    errorData?: ImportErrorData;
+    /**
+     * Import task error datetime.
+     */
+    errorDateTime?: ISO8601DatetimeString;
+    /**
+     * Import task error type.
+     */
+    errorType?: ImportErrorType;
+  }
+  export interface ImportTaskSummary {
+    /**
+     * Import task summary applications.
+     */
+    applications?: ImportTaskSummaryApplications;
+    /**
+     * Import task summary servers.
+     */
+    servers?: ImportTaskSummaryServers;
+    /**
+     * Import task summary waves.
+     */
+    waves?: ImportTaskSummaryWaves;
+  }
+  export interface ImportTaskSummaryApplications {
+    /**
+     * Import task summary applications created count.
+     */
+    createdCount?: PositiveInteger;
+    /**
+     * Import task summary applications modified count.
+     */
+    modifiedCount?: PositiveInteger;
+  }
+  export interface ImportTaskSummaryServers {
+    /**
+     * Import task summary servers created count.
+     */
+    createdCount?: PositiveInteger;
+    /**
+     * Import task summary servers modified count.
+     */
+    modifiedCount?: PositiveInteger;
+  }
+  export interface ImportTaskSummaryWaves {
+    /**
+     * Import task summery waves created count.
+     */
+    createdCount?: PositiveInteger;
+    /**
+     * Import task summery waves modified count.
+     */
+    modifiedCount?: PositiveInteger;
+  }
   export interface InitializeServiceRequest {
   }
   export interface InitializeServiceResponse {
   }
   export type InitiatedBy = "START_TEST"|"START_CUTOVER"|"DIAGNOSTIC"|"TERMINATE"|string;
+  export type JmesPathString = string;
   export interface Job {
     /**
      * the ARN of the specific Job.
@@ -1505,7 +1751,7 @@ declare namespace Mgn {
      */
     apiCallDateTime?: ISO8601DatetimeString;
   }
-  export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|"DISCOVERED"|string;
+  export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|"DISCOVERED"|"PENDING_INSTALLATION"|string;
   export type LifeCycleStates = LifeCycleState[];
   export interface ListApplicationsRequest {
     /**
@@ -1542,6 +1788,112 @@ declare namespace Mgn {
     items?: ApplicationsList;
     /**
      * Response next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListExportErrorsRequest {
+    /**
+     * List export errors request export id.
+     */
+    exportID: ExportID;
+    /**
+     * List export errors request max results.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * List export errors request next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListExportErrorsResponse {
+    /**
+     * List export errors response items.
+     */
+    items?: ExportErrors;
+    /**
+     * List export errors response next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListExportsRequest {
+    filters?: ListExportsRequestFilters;
+    /**
+     * List export request max results.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * List export request next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListExportsRequestFilters {
+    /**
+     * List exports request filters export ids.
+     */
+    exportIDs?: ListExportsRequestFiltersExportIDs;
+  }
+  export type ListExportsRequestFiltersExportIDs = ExportID[];
+  export interface ListExportsResponse {
+    /**
+     * List export response items.
+     */
+    items?: ExportsList;
+    /**
+     * List export response next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListImportErrorsRequest {
+    /**
+     * List import errors request import id.
+     */
+    importID: ImportID;
+    /**
+     * List import errors request max results.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * List import errors request next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListImportErrorsResponse {
+    /**
+     * List imports errors response items.
+     */
+    items?: ImportErrors;
+    /**
+     * List imports errors response next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListImportsRequest {
+    /**
+     * List imports request filters.
+     */
+    filters?: ListImportsRequestFilters;
+    /**
+     * List imports request max results.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * List imports request next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListImportsRequestFilters {
+    /**
+     * List imports request filters import IDs.
+     */
+    importIDs?: ImportIDsFilter;
+  }
+  export interface ListImportsResponse {
+    /**
+     * List import response items.
+     */
+    items?: ImportList;
+    /**
+     * List import response next token.
      */
     nextToken?: PaginationToken;
   }
@@ -1747,6 +2099,14 @@ declare namespace Mgn {
      */
     active?: Boolean;
     /**
+     * Source server post migration custom action category.
+     */
+    category?: ActionCategory;
+    /**
+     * Source server post migration custom action description.
+     */
+    description?: ActionDescription;
+    /**
      * Source server post migration custom action document identifier.
      */
     documentIdentifier: BoundedString;
@@ -1754,6 +2114,10 @@ declare namespace Mgn {
      * Source server post migration custom action document version.
      */
     documentVersion?: DocumentVersion;
+    /**
+     * Source server post migration custom action external parameters.
+     */
+    externalParameters?: SsmDocumentExternalParameters;
     /**
      * Source server post migration custom action must succeed for cutover.
      */
@@ -1789,6 +2153,14 @@ declare namespace Mgn {
      */
     active?: Boolean;
     /**
+     * Template post migration custom action category.
+     */
+    category?: ActionCategory;
+    /**
+     * Template post migration custom action description.
+     */
+    description?: ActionDescription;
+    /**
      * Template post migration custom action document identifier.
      */
     documentIdentifier: BoundedString;
@@ -1796,6 +2168,10 @@ declare namespace Mgn {
      * Template post migration custom action document version.
      */
     documentVersion?: DocumentVersion;
+    /**
+     * Template post migration custom action external parameters.
+     */
+    externalParameters?: SsmDocumentExternalParameters;
     /**
      * Launch configuration template ID.
      */
@@ -2008,6 +2384,22 @@ declare namespace Mgn {
      */
     sourceServerID: SourceServerID;
   }
+  export type S3BucketName = string;
+  export interface S3BucketSource {
+    /**
+     * S3 bucket source s3 bucket.
+     */
+    s3Bucket: S3BucketName;
+    /**
+     * S3 bucket source s3 bucket owner.
+     */
+    s3BucketOwner?: AccountID;
+    /**
+     * S3 bucket source s3 key.
+     */
+    s3Key: S3Key;
+  }
+  export type S3Key = string;
   export type S3LogBucketName = string;
   export type SecurityGroupID = string;
   export type SmallBoundedString = string;
@@ -2059,6 +2451,10 @@ declare namespace Mgn {
      */
     dataReplicationInfo?: DataReplicationInfo;
     /**
+     * Source server fqdn for action framework.
+     */
+    fqdnForActionFramework?: BoundedString;
+    /**
      * Source server archived status.
      */
     isArchived?: Boolean;
@@ -2087,6 +2483,10 @@ declare namespace Mgn {
      */
     tags?: TagsMap;
     /**
+     * Source server user provided ID.
+     */
+    userProvidedID?: BoundedString;
+    /**
      * Source server vCenter client id.
      */
     vcenterClientID?: VcenterClientID;
@@ -2105,6 +2505,14 @@ declare namespace Mgn {
      */
     active?: Boolean;
     /**
+     * Source server post migration custom action category.
+     */
+    category?: ActionCategory;
+    /**
+     * Source server post migration custom action description.
+     */
+    description?: ActionDescription;
+    /**
      * Source server post migration custom action document identifier.
      */
     documentIdentifier?: BoundedString;
@@ -2112,6 +2520,10 @@ declare namespace Mgn {
      * Source server post migration custom action document version.
      */
     documentVersion?: DocumentVersion;
+    /**
+     * Source server post migration custom action external parameters.
+     */
+    externalParameters?: SsmDocumentExternalParameters;
     /**
      * Source server post migration custom action must succeed for cutover.
      */
@@ -2144,6 +2556,10 @@ declare namespace Mgn {
      */
     actionName: BoundedString;
     /**
+     * AWS Systems Manager Document external parameters.
+     */
+    externalParameters?: SsmDocumentExternalParameters;
+    /**
      * If true, Cutover will not be enabled if the document has failed.
      */
     mustSucceedForCutover?: Boolean;
@@ -2160,11 +2576,18 @@ declare namespace Mgn {
      */
     timeoutSeconds?: StrictlyPositiveInteger;
   }
+  export type SsmDocumentExternalParameters = {[key: string]: SsmExternalParameter};
   export type SsmDocumentName = string;
   export type SsmDocumentParameterName = string;
   export type SsmDocumentParameters = {[key: string]: SsmParameterStoreParameters};
   export type SsmDocumentType = "AUTOMATION"|"COMMAND"|string;
   export type SsmDocuments = SsmDocument[];
+  export interface SsmExternalParameter {
+    /**
+     * AWS Systems Manager Document external parameters dynamic path.
+     */
+    dynamicPath?: JmesPathString;
+  }
   export interface SsmParameterStoreParameter {
     /**
      * AWS Systems Manager Parameter Store parameter name.
@@ -2194,6 +2617,42 @@ declare namespace Mgn {
      * Start Cutover Job response.
      */
     job?: Job;
+  }
+  export interface StartExportRequest {
+    /**
+     * Start export request s3 bucket.
+     */
+    s3Bucket: S3BucketName;
+    /**
+     * Start export request s3 bucket owner.
+     */
+    s3BucketOwner?: AccountID;
+    /**
+     * Start export request s3key.
+     */
+    s3Key: S3Key;
+  }
+  export interface StartExportResponse {
+    /**
+     * Start export response export task.
+     */
+    exportTask?: ExportTask;
+  }
+  export interface StartImportRequest {
+    /**
+     * Start import request client token.
+     */
+    clientToken?: ClientIdempotencyToken;
+    /**
+     * Start import request s3 bucket source.
+     */
+    s3BucketSource: S3BucketSource;
+  }
+  export interface StartImportResponse {
+    /**
+     * Start import response import task.
+     */
+    importTask?: ImportTask;
   }
   export interface StartReplicationRequest {
     /**
@@ -2249,6 +2708,14 @@ declare namespace Mgn {
      */
     active?: Boolean;
     /**
+     * Template post migration custom action category.
+     */
+    category?: ActionCategory;
+    /**
+     * Template post migration custom action description.
+     */
+    description?: ActionDescription;
+    /**
      * Template post migration custom action document identifier.
      */
     documentIdentifier?: BoundedString;
@@ -2256,6 +2723,10 @@ declare namespace Mgn {
      * Template post migration custom action document version.
      */
     documentVersion?: DocumentVersion;
+    /**
+     * Template post migration custom action external parameters.
+     */
+    externalParameters?: SsmDocumentExternalParameters;
     /**
      * Template post migration custom action must succeed for cutover.
      */

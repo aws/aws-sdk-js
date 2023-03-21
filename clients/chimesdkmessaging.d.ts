@@ -124,6 +124,14 @@ declare class ChimeSDKMessaging extends Service {
    */
   deleteChannelModerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the streaming configurations for an AppInstance. For more information, see Streaming messaging data in the Amazon Chime SDK Developer Guide.
+   */
+  deleteMessagingStreamingConfigurations(params: ChimeSDKMessaging.Types.DeleteMessagingStreamingConfigurationsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the streaming configurations for an AppInstance. For more information, see Streaming messaging data in the Amazon Chime SDK Developer Guide.
+   */
+  deleteMessagingStreamingConfigurations(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   describeChannel(params: ChimeSDKMessaging.Types.DescribeChannelRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelResponse, AWSError>;
@@ -220,6 +228,14 @@ declare class ChimeSDKMessaging extends Service {
    */
   getMessagingSessionEndpoint(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetMessagingSessionEndpointResponse) => void): Request<ChimeSDKMessaging.Types.GetMessagingSessionEndpointResponse, AWSError>;
   /**
+   * Retrieves the data streaming configuration for an AppInstance. For more information, see Streaming messaging data in the Amazon Chime SDK Developer Guide.
+   */
+  getMessagingStreamingConfigurations(params: ChimeSDKMessaging.Types.GetMessagingStreamingConfigurationsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetMessagingStreamingConfigurationsResponse) => void): Request<ChimeSDKMessaging.Types.GetMessagingStreamingConfigurationsResponse, AWSError>;
+  /**
+   * Retrieves the data streaming configuration for an AppInstance. For more information, see Streaming messaging data in the Amazon Chime SDK Developer Guide.
+   */
+  getMessagingStreamingConfigurations(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetMessagingStreamingConfigurationsResponse) => void): Request<ChimeSDKMessaging.Types.GetMessagingStreamingConfigurationsResponse, AWSError>;
+  /**
    * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannelBans(params: ChimeSDKMessaging.Types.ListChannelBansRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelBansResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelBansResponse, AWSError>;
@@ -315,6 +331,14 @@ declare class ChimeSDKMessaging extends Service {
    * Sets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can set preferences. Users in the AppInstanceAdmin and channel moderator roles can't set preferences for other users. Banned users can't set membership preferences for the channel from which they are banned.
    */
   putChannelMembershipPreferences(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse, AWSError>;
+  /**
+   * Sets the data streaming configuration for an AppInstance. For more information, see Streaming messaging data in the Amazon Chime SDK Developer Guide.
+   */
+  putMessagingStreamingConfigurations(params: ChimeSDKMessaging.Types.PutMessagingStreamingConfigurationsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutMessagingStreamingConfigurationsResponse) => void): Request<ChimeSDKMessaging.Types.PutMessagingStreamingConfigurationsResponse, AWSError>;
+  /**
+   * Sets the data streaming configuration for an AppInstance. For more information, see Streaming messaging data in the Amazon Chime SDK Developer Guide.
+   */
+  putMessagingStreamingConfigurations(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutMessagingStreamingConfigurationsResponse) => void): Request<ChimeSDKMessaging.Types.PutMessagingStreamingConfigurationsResponse, AWSError>;
   /**
    * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
@@ -1166,6 +1190,12 @@ declare namespace ChimeSDKMessaging {
      */
     SubChannelId?: SubChannelId;
   }
+  export interface DeleteMessagingStreamingConfigurationsRequest {
+    /**
+     * The ARN of the streaming configurations being deleted.
+     */
+    AppInstanceArn: ChimeArn;
+  }
   export interface DescribeChannelBanRequest {
     /**
      * The ARN of the channel from which the user is banned.
@@ -1412,6 +1442,18 @@ declare namespace ChimeSDKMessaging {
      * The endpoint returned in the response.
      */
     Endpoint?: MessagingSessionEndpoint;
+  }
+  export interface GetMessagingStreamingConfigurationsRequest {
+    /**
+     * The ARN of the streaming configurations.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface GetMessagingStreamingConfigurationsResponse {
+    /**
+     * The streaming settings.
+     */
+    StreamingConfigurations?: StreamingConfigurationList;
   }
   export interface Identity {
     /**
@@ -1787,6 +1829,7 @@ declare namespace ChimeSDKMessaging {
     StringValues?: MessageAttributeStringValues;
   }
   export type MessageId = string;
+  export type MessagingDataType = "Channel"|"ChannelMessage"|string;
   export interface MessagingSessionEndpoint {
     /**
      * The endpoint to which you establish a websocket connection.
@@ -1882,6 +1925,22 @@ declare namespace ChimeSDKMessaging {
      * The ARN and metadata of the member being added.
      */
     Preferences?: ChannelMembershipPreferences;
+  }
+  export interface PutMessagingStreamingConfigurationsRequest {
+    /**
+     * The ARN of the streaming configuration.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The streaming configurations.
+     */
+    StreamingConfigurations: StreamingConfigurationList;
+  }
+  export interface PutMessagingStreamingConfigurationsResponse {
+    /**
+     * The requested streaming configurations.
+     */
+    StreamingConfigurations?: StreamingConfigurationList;
   }
   export interface RedactChannelMessageRequest {
     /**
@@ -2025,6 +2084,17 @@ declare namespace ChimeSDKMessaging {
   }
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type StatusDetail = string;
+  export interface StreamingConfiguration {
+    /**
+     * The data type of the configuration.
+     */
+    DataType: MessagingDataType;
+    /**
+     * The ARN of the resource in the configuration. 
+     */
+    ResourceArn: ChimeArn;
+  }
+  export type StreamingConfigurationList = StreamingConfiguration[];
   export type String = string;
   export type SubChannelId = string;
   export interface SubChannelSummary {

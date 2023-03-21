@@ -1528,7 +1528,7 @@ declare namespace IoTSiteWise {
   }
   export interface BatchGetAssetPropertyValueRequest {
     /**
-     * The list of asset property value entries for the batch get request. You can specify up to 16 entries per request.
+     * The list of asset property value entries for the batch get request. You can specify up to 128 entries per request.
      */
     entries: BatchGetAssetPropertyValueEntries;
     /**
@@ -2638,6 +2638,10 @@ declare namespace IoTSiteWise {
      * The date that the time series was last updated, in Unix epoch time.
      */
     timeSeriesLastUpdateDate: Timestamp;
+    /**
+     * The ARN of the time series, which has the following format.  arn:${Partition}:iotsitewise:${Region}:${Account}:time-series/${TimeSeriesId} 
+     */
+    timeSeriesArn: ARN;
   }
   export type Description = string;
   export interface DetailedError {
@@ -3893,6 +3897,10 @@ declare namespace IoTSiteWise {
      * The date that the time series was last updated, in Unix epoch time.
      */
     timeSeriesLastUpdateDate: Timestamp;
+    /**
+     * The ARN of the time series, which has the following format.  arn:${Partition}:iotsitewise:${Region}:${Account}:time-series/${TimeSeriesId} 
+     */
+    timeSeriesArn: ARN;
   }
   export type Timestamp = Date;
   export type Timestamps = TimeInNanos[];
