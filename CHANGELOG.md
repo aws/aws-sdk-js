@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1340.0-->
+<!--LATEST=2.1341.0-->
 <!--ENTRYINSERT-->
+
+## 2.1341.0
+* feature: IoTTwinMaker: This release adds support of adding metadata when creating a new scene or updating an existing scene.
+* feature: Pipes: This release improves validation on the ARNs in the API model
+* feature: Resiliencehub: This release provides customers with the ability to import resources from within an EKS cluster and assess the resiliency of EKS cluster workloads.
+* feature: SSM: This Patch Manager release supports creating, updating, and deleting Patch Baselines for AmazonLinux2023, AlmaLinux.
 
 ## 2.1340.0
 * feature: ChimeSDKMessaging: Amazon Chime SDK messaging customers can now manage streaming configuration for messaging data for archival and analysis.

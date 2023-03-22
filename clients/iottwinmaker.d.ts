@@ -617,6 +617,10 @@ declare namespace IoTTwinMaker {
      * Metadata that you can use to manage the scene.
      */
     tags?: TagMap;
+    /**
+     * The request metadata.
+     */
+    sceneMetadata?: SceneMetadataMap;
   }
   export interface CreateSceneResponse {
     /**
@@ -630,15 +634,15 @@ declare namespace IoTTwinMaker {
   }
   export interface CreateSyncJobRequest {
     /**
-     * The workspace Id.
+     * The workspace ID.
      */
     workspaceId: Id;
     /**
-     * The sync source.  Currently the only supported syncSoucre is SITEWISE . 
+     * The sync source.  Currently the only supported syncSoource is SITEWISE . 
      */
     syncSource: SyncSource;
     /**
-     * The SyncJob IAM role. This IAM role is used by the sync job to read from the syncSource, and create, update or delete the corresponding resources.
+     * The SyncJob IAM role. This IAM role is used by the SyncJob to read from the syncSource, and create, update, or delete the corresponding resources.
      */
     syncRole: RoleArn;
     /**
@@ -814,11 +818,11 @@ declare namespace IoTTwinMaker {
   }
   export interface DeleteSyncJobRequest {
     /**
-     * The workspace Id.
+     * The workspace ID.
      */
     workspaceId: Id;
     /**
-     * The sync source.  Currently the only supported syncSoucre is SITEWISE . 
+     * The sync source.  Currently the only supported syncSource is SITEWISE . 
      */
     syncSource: SyncSource;
   }
@@ -981,6 +985,7 @@ declare namespace IoTTwinMaker {
   }
   export type FunctionsRequest = {[key: string]: FunctionRequest};
   export type FunctionsResponse = {[key: string]: FunctionResponse};
+  export type GeneratedSceneMetadataMap = {[key: string]: SceneMetadataValue};
   export interface GetComponentTypeRequest {
     /**
      * The ID of the workspace that contains the component type.
@@ -1049,7 +1054,7 @@ declare namespace IoTTwinMaker {
      */
     propertyGroups?: PropertyGroupsResponse;
     /**
-     * The syncSource of the sync job, if this entity was created by a sync job.
+     * The syncSource of the SyncJob, if this entity was created by a SyncJob.
      */
     syncSource?: SyncSource;
     /**
@@ -1292,14 +1297,22 @@ declare namespace IoTTwinMaker {
      * A list of capabilities that the scene uses to render.
      */
     capabilities?: SceneCapabilities;
+    /**
+     * The response metadata.
+     */
+    sceneMetadata?: SceneMetadataMap;
+    /**
+     * The generated scene metadata.
+     */
+    generatedSceneMetadata?: GeneratedSceneMetadataMap;
   }
   export interface GetSyncJobRequest {
     /**
-     * The sync soucre.  Currently the only supported syncSoucre is SITEWISE . 
+     * The sync source.  Currently the only supported syncSource is SITEWISE . 
      */
     syncSource: SyncSource;
     /**
-     * The workspace Id.
+     * The workspace ID.
      */
     workspaceId?: Id;
   }
@@ -1313,7 +1326,7 @@ declare namespace IoTTwinMaker {
      */
     workspaceId: Id;
     /**
-     * The sync soucre.  Currently the only supported syncSoucre is SITEWISE . 
+     * The sync soucre.  Currently the only supported syncSource is SITEWISE . 
      */
     syncSource: SyncSource;
     /**
@@ -1540,11 +1553,11 @@ declare namespace IoTTwinMaker {
      */
     workspaceId: Id;
     /**
-     * The sync soucre.  Currently the only supported syncSoucre is SITEWISE . 
+     * The sync source.  Currently the only supported syncSource is SITEWISE . 
      */
     syncSource: SyncSource;
     /**
-     * A list of objects that filter the request.
+     * A list of objects that filter the request. The following filter combinations are supported:   Filter with state   Filter with ResourceType and ResourceId   Filter with ResourceType and ExternalId  
      */
     filters?: SyncResourceFilters;
     /**
@@ -1663,7 +1676,7 @@ declare namespace IoTTwinMaker {
      */
     updateDateTime: Timestamp;
     /**
-     * The update reason, for changing a pricing plan.
+     * The update reason for changing a pricing plan.
      */
     updateReason: UpdateReason;
   }
@@ -1795,7 +1808,7 @@ declare namespace IoTTwinMaker {
   export type PropertyGroupsResponse = {[key: string]: PropertyGroupResponse};
   export interface PropertyLatestValue {
     /**
-     * An object that specifies information about a property.&gt;
+     * An object that specifies information about a property.
      */
     propertyReference: EntityPropertyReference;
     /**
@@ -1907,6 +1920,8 @@ declare namespace IoTTwinMaker {
   export type S3Url = string;
   export type SceneCapabilities = SceneCapability[];
   export type SceneCapability = string;
+  export type SceneMetadataMap = {[key: string]: SceneMetadataValue};
+  export type SceneMetadataValue = string;
   export type SceneSummaries = SceneSummary[];
   export interface SceneSummary {
     /**
@@ -1992,15 +2007,15 @@ declare namespace IoTTwinMaker {
      */
     state?: SyncResourceState;
     /**
-     * The sync resource filter resoucre type
+     * The sync resource filter resource type
      */
     resourceType?: SyncResourceType;
     /**
-     * The sync resource filter resource Id.
+     * The sync resource filter resource ID.
      */
     resourceId?: Id;
     /**
-     * The external Id.
+     * The external ID.
      */
     externalId?: Id;
   }
@@ -2023,11 +2038,11 @@ declare namespace IoTTwinMaker {
      */
     resourceType?: SyncResourceType;
     /**
-     * The external Id.
+     * The external ID.
      */
     externalId?: Id;
     /**
-     * The resource Id.
+     * The resource ID.
      */
     resourceId?: Id;
     /**
@@ -2115,7 +2130,7 @@ declare namespace IoTTwinMaker {
      */
     functions?: FunctionsRequest;
     /**
-     * The property groups
+     * The property groups.
      */
     propertyGroups?: PropertyGroupsRequest;
     /**
@@ -2219,6 +2234,10 @@ declare namespace IoTTwinMaker {
      * A list of capabilities that the scene uses to render.
      */
     capabilities?: SceneCapabilities;
+    /**
+     * The scene metadata.
+     */
+    sceneMetadata?: SceneMetadataMap;
   }
   export interface UpdateSceneResponse {
     /**
