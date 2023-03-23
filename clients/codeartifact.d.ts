@@ -253,11 +253,11 @@ declare class CodeArtifact extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CodeArtifact.Types.ListTagsForResourceResult) => void): Request<CodeArtifact.Types.ListTagsForResourceResult, AWSError>;
   /**
-   * Creates a new package version containing one or more assets (or files). The unfinished flag can be used to keep the package version in the Unfinished state until all of it’s assets have been uploaded (see Package version status in the CodeArtifact user guide). To set the package version’s status to Published, omit the unfinished flag when uploading the final asset, or set the status using UpdatePackageVersionStatus. Once a package version’s status is set to Published, it cannot change back to Unfinished.  Only generic packages can be published using this API. 
+   * Creates a new package version containing one or more assets (or files). The unfinished flag can be used to keep the package version in the Unfinished state until all of its assets have been uploaded (see Package version status in the CodeArtifact user guide). To set the package version’s status to Published, omit the unfinished flag when uploading the final asset, or set the status using UpdatePackageVersionStatus. Once a package version’s status is set to Published, it cannot change back to Unfinished.  Only generic packages can be published using this API. For more information, see Using generic packages in the CodeArtifact User Guide. 
    */
   publishPackageVersion(params: CodeArtifact.Types.PublishPackageVersionRequest, callback?: (err: AWSError, data: CodeArtifact.Types.PublishPackageVersionResult) => void): Request<CodeArtifact.Types.PublishPackageVersionResult, AWSError>;
   /**
-   * Creates a new package version containing one or more assets (or files). The unfinished flag can be used to keep the package version in the Unfinished state until all of it’s assets have been uploaded (see Package version status in the CodeArtifact user guide). To set the package version’s status to Published, omit the unfinished flag when uploading the final asset, or set the status using UpdatePackageVersionStatus. Once a package version’s status is set to Published, it cannot change back to Unfinished.  Only generic packages can be published using this API. 
+   * Creates a new package version containing one or more assets (or files). The unfinished flag can be used to keep the package version in the Unfinished state until all of its assets have been uploaded (see Package version status in the CodeArtifact user guide). To set the package version’s status to Published, omit the unfinished flag when uploading the final asset, or set the status using UpdatePackageVersionStatus. Once a package version’s status is set to Published, it cannot change back to Unfinished.  Only generic packages can be published using this API. For more information, see Using generic packages in the CodeArtifact User Guide. 
    */
   publishPackageVersion(callback?: (err: AWSError, data: CodeArtifact.Types.PublishPackageVersionResult) => void): Request<CodeArtifact.Types.PublishPackageVersionResult, AWSError>;
   /**
@@ -354,7 +354,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     *  The name of the external connection to add to the repository. The following values are supported:     public:npmjs - for the npm public repository.     public:nuget-org - for the NuGet Gallery.     public:pypi - for the Python Package Index.     public:maven-central - for Maven Central.     public:maven-googleandroid - for the Google Android repository.     public:maven-gradleplugins - for the Gradle plugins repository.     public:maven-commonsware - for the CommonsWare Android repository.   
+     *  The name of the external connection to add to the repository. The following values are supported:     public:npmjs - for the npm public repository.     public:nuget-org - for the NuGet Gallery.     public:pypi - for the Python Package Index.     public:maven-central - for Maven Central.     public:maven-googleandroid - for the Google Android repository.     public:maven-gradleplugins - for the Gradle plugins repository.     public:maven-commonsware - for the CommonsWare Android repository.     public:maven-clojars - for the Clojars repository.   
      */
     externalConnection: ExternalConnectionName;
   }
@@ -388,7 +388,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package versions to be copied. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId. The namespace is required when copying Maven package versions.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package versions to be copied. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId. The namespace is required when copying Maven package versions.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -528,7 +528,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId. The namespace is required when deleting Maven package versions.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.   
+     * The namespace of the package to delete. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId. The namespace is required when deleting Maven package versions.     The namespace of an npm package is its scope.    Python and NuGet packages do not contain corresponding components, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -557,7 +557,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package versions to be deleted. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId. The namespace is required when deleting Maven package versions.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package versions to be deleted. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId. The namespace is required when deleting Maven package versions.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -658,7 +658,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the requested package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId. The namespace is required when requesting Maven packages.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the requested package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId. The namespace is required when requesting Maven packages.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -690,7 +690,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the requested package version. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the requested package version. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -771,7 +771,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package versions to be disposed. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package versions to be disposed. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -939,7 +939,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version with the requested asset file. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package version with the requested asset file. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -995,7 +995,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version with the requested readme file. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
+     * The namespace of the package version with the requested readme file. The package version component that specifies its namespace depends on its type. For example:    The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1131,7 +1131,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version that contains the requested package version assets. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package version that contains the requested package version assets. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1199,7 +1199,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version with the requested dependencies. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package version with the requested dependencies. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1264,7 +1264,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package that contains the requested package versions. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package that contains the requested package versions. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1337,7 +1337,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called --namespace and not --namespace-prefix, it has prefix-matching behavior. Each package format uses namespace as follows:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace prefix used to filter requested packages. Only packages with a namespace that starts with the provided string value are returned. Note that although this option is called --namespace and not --namespace-prefix, it has prefix-matching behavior. Each package format uses namespace as follows:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1472,7 +1472,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1509,7 +1509,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1529,7 +1529,7 @@ declare namespace CodeArtifact {
      */
     format?: PackageFormat;
     /**
-     * The namespace of the package version. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package version. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1665,7 +1665,7 @@ declare namespace CodeArtifact {
      */
     assetName: AssetName;
     /**
-     * The SHA256 hash of the assetContent to publish. This value must be calculated by the caller and provided with the request. This value is used as an integrity check to verify that the assetContent has not changed after it was originally sent.
+     * The SHA256 hash of the assetContent to publish. This value must be calculated by the caller and provided with the request (see Publishing a generic package in the CodeArtifact User Guide). This value is used as an integrity check to verify that the assetContent has not changed after it was originally sent.
      */
     assetSHA256: SHA256;
     /**
@@ -1745,7 +1745,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package to be updated. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package to be updated. The package component that specifies its namespace depends on its type. For example:    The namespace of a Maven package is its groupId.     The namespace of an npm package is its scope.     Python and NuGet packages do not contain a corresponding component, packages of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**
@@ -1824,6 +1824,10 @@ declare namespace CodeArtifact {
      *  An array of external connections associated with the repository. 
      */
     externalConnections?: RepositoryExternalConnectionInfoList;
+    /**
+     * A timestamp that represents the date and time the repository was created.
+     */
+    createdTime?: Timestamp;
   }
   export interface RepositoryExternalConnectionInfo {
     /**
@@ -1866,6 +1870,10 @@ declare namespace CodeArtifact {
      *  The description of the repository. 
      */
     description?: Description;
+    /**
+     * A timestamp that represents the date and time the repository was created.
+     */
+    createdTime?: Timestamp;
   }
   export type RepositorySummaryList = RepositorySummary[];
   export interface ResourcePolicy {
@@ -1953,7 +1961,7 @@ declare namespace CodeArtifact {
      */
     format: PackageFormat;
     /**
-     * The namespace of the package version to be updated. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is it’s namespace.   
+     * The namespace of the package version to be updated. The package version component that specifies its namespace depends on its type. For example:    The namespace of a Maven package version is its groupId.     The namespace of an npm package version is its scope.     Python and NuGet package versions do not contain a corresponding component, package versions of those formats do not have a namespace.     The namespace of a generic package is its namespace.   
      */
     namespace?: PackageNamespace;
     /**

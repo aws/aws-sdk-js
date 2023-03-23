@@ -341,5 +341,6 @@ module.exports = {
   CleanRooms: require('./cleanrooms'),
   CloudTrailData: require('./cloudtraildata'),
   Tnb: require('./tnb'),
-  InternetMonitor: require('./internetmonitor')
+  InternetMonitor: require('./internetmonitor'),
+  IVSRealTime: require('./ivsrealtime')
 };

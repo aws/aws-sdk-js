@@ -28,11 +28,27 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   createMediaConcatenationPipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaConcatenationPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaConcatenationPipelineResponse, AWSError>;
   /**
-   * Creates a streaming media pipeline in an Amazon Chime SDK meeting.
+   * Creates a media insights pipeline.
+   */
+  createMediaInsightsPipeline(params: ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineResponse, AWSError>;
+  /**
+   * Creates a media insights pipeline.
+   */
+  createMediaInsightsPipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineResponse, AWSError>;
+  /**
+   * A structure that contains the static configurations for a media insights pipeline.
+   */
+  createMediaInsightsPipelineConfiguration(params: ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineConfigurationRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineConfigurationResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineConfigurationResponse, AWSError>;
+  /**
+   * A structure that contains the static configurations for a media insights pipeline.
+   */
+  createMediaInsightsPipelineConfiguration(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineConfigurationResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaInsightsPipelineConfigurationResponse, AWSError>;
+  /**
+   * Creates a media live connector pipeline in an Amazon Chime SDK meeting.
    */
   createMediaLiveConnectorPipeline(params: ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineResponse, AWSError>;
   /**
-   * Creates a streaming media pipeline in an Amazon Chime SDK meeting.
+   * Creates a media live connector pipeline in an Amazon Chime SDK meeting.
    */
   createMediaLiveConnectorPipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineResponse, AWSError>;
   /**
@@ -43,6 +59,14 @@ declare class ChimeSDKMediaPipelines extends Service {
    * Deletes the media pipeline.
    */
   deleteMediaCapturePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified configuration settings.
+   */
+  deleteMediaInsightsPipelineConfiguration(params: ChimeSDKMediaPipelines.Types.DeleteMediaInsightsPipelineConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified configuration settings.
+   */
+  deleteMediaInsightsPipelineConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the media pipeline.
    */
@@ -60,6 +84,14 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   getMediaCapturePipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaCapturePipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaCapturePipelineResponse, AWSError>;
   /**
+   * Gets the configuration settings for a media insights pipeline.
+   */
+  getMediaInsightsPipelineConfiguration(params: ChimeSDKMediaPipelines.Types.GetMediaInsightsPipelineConfigurationRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaInsightsPipelineConfigurationResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaInsightsPipelineConfigurationResponse, AWSError>;
+  /**
+   * Gets the configuration settings for a media insights pipeline.
+   */
+  getMediaInsightsPipelineConfiguration(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaInsightsPipelineConfigurationResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaInsightsPipelineConfigurationResponse, AWSError>;
+  /**
    * Gets an existing media pipeline.
    */
   getMediaPipeline(params: ChimeSDKMediaPipelines.Types.GetMediaPipelineRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaPipelineResponse, AWSError>;
@@ -75,6 +107,14 @@ declare class ChimeSDKMediaPipelines extends Service {
    * Returns a list of media pipelines.
    */
   listMediaCapturePipelines(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListMediaCapturePipelinesResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListMediaCapturePipelinesResponse, AWSError>;
+  /**
+   * Lists the available media insights pipeline configurations.
+   */
+  listMediaInsightsPipelineConfigurations(params: ChimeSDKMediaPipelines.Types.ListMediaInsightsPipelineConfigurationsRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListMediaInsightsPipelineConfigurationsResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListMediaInsightsPipelineConfigurationsResponse, AWSError>;
+  /**
+   * Lists the available media insights pipeline configurations.
+   */
+  listMediaInsightsPipelineConfigurations(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListMediaInsightsPipelineConfigurationsResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListMediaInsightsPipelineConfigurationsResponse, AWSError>;
   /**
    * Returns a list of media pipelines.
    */
@@ -92,11 +132,11 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * The ARN of the media pipeline that you want to tag. Consists of he pipeline's endpoint region, resource ID, and pipeline ID.
+   * The ARN of the media pipeline that you want to tag. Consists of the pipeline's endpoint region, resource ID, and pipeline ID.
    */
   tagResource(params: ChimeSDKMediaPipelines.Types.TagResourceRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.TagResourceResponse) => void): Request<ChimeSDKMediaPipelines.Types.TagResourceResponse, AWSError>;
   /**
-   * The ARN of the media pipeline that you want to tag. Consists of he pipeline's endpoint region, resource ID, and pipeline ID.
+   * The ARN of the media pipeline that you want to tag. Consists of the pipeline's endpoint region, resource ID, and pipeline ID.
    */
   tagResource(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.TagResourceResponse) => void): Request<ChimeSDKMediaPipelines.Types.TagResourceResponse, AWSError>;
   /**
@@ -107,9 +147,129 @@ declare class ChimeSDKMediaPipelines extends Service {
    * Removes any tags from a media pipeline.
    */
   untagResource(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.UntagResourceResponse) => void): Request<ChimeSDKMediaPipelines.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates the media insights pipeline's configuration settings.
+   */
+  updateMediaInsightsPipelineConfiguration(params: ChimeSDKMediaPipelines.Types.UpdateMediaInsightsPipelineConfigurationRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.UpdateMediaInsightsPipelineConfigurationResponse) => void): Request<ChimeSDKMediaPipelines.Types.UpdateMediaInsightsPipelineConfigurationResponse, AWSError>;
+  /**
+   * Updates the media insights pipeline's configuration settings.
+   */
+  updateMediaInsightsPipelineConfiguration(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.UpdateMediaInsightsPipelineConfigurationResponse) => void): Request<ChimeSDKMediaPipelines.Types.UpdateMediaInsightsPipelineConfigurationResponse, AWSError>;
+  /**
+   * Updates the status of a media insights pipeline.
+   */
+  updateMediaInsightsPipelineStatus(params: ChimeSDKMediaPipelines.Types.UpdateMediaInsightsPipelineStatusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the status of a media insights pipeline.
+   */
+  updateMediaInsightsPipelineStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace ChimeSDKMediaPipelines {
   export type AmazonResourceName = string;
+  export interface AmazonTranscribeCallAnalyticsProcessorConfiguration {
+    /**
+     * The language code in the configuration.
+     */
+    LanguageCode: CallAnalyticsLanguageCode;
+    /**
+     * Specifies the name of the custom vocabulary to use when processing a transcription. Note that vocabulary names are case sensitive. If the language of the specified custom vocabulary doesn't match the language identified in your media, the custom vocabulary is not applied to your transcription. For more information, see Custom vocabularies in the Amazon Transcribe Developer Guide. Length Constraints: Minimum length of 1. Maximum length of 200. 
+     */
+    VocabularyName?: VocabularyName;
+    /**
+     * Specifies the name of the custom vocabulary filter to use when processing a transcription. Note that vocabulary filter names are case sensitive. If the language of the specified custom vocabulary filter doesn't match the language identified in your media, the vocabulary filter is not applied to your transcription. For more information, see Using vocabulary filtering with unwanted words in the Amazon Transcribe Developer Guide. Length Constraints: Minimum length of 1. Maximum length of 200. 
+     */
+    VocabularyFilterName?: VocabularyFilterName;
+    /**
+     * Specifies how to apply a vocabulary filter to a transcript. To replace words with ***, choose mask. To delete words, choose remove. To flag words without changing them, choose tag. 
+     */
+    VocabularyFilterMethod?: VocabularyFilterMethod;
+    /**
+     * Specifies the name of the custom language model to use when processing a transcription. Note that language model names are case sensitive. The language of the specified language model must match the language code specified in the transcription request. If the languages don't match, the custom language model isn't applied. Language mismatches don't generate errors or warnings. For more information, see Custom language models in the Amazon Transcribe Developer Guide.
+     */
+    LanguageModelName?: ModelName;
+    /**
+     * Enables partial result stabilization for your transcription. Partial result stabilization can reduce latency in your output, but may impact accuracy. For more information, see Partial-result stabilization in the Amazon Transcribe Developer Guide.
+     */
+    EnablePartialResultsStabilization?: Boolean;
+    /**
+     * Specifies the level of stability to use when you enable partial results stabilization (EnablePartialResultsStabilization). Low stability provides the highest accuracy. High stability transcribes faster, but with slightly lower accuracy. For more information, see Partial-result stabilization in the Amazon Transcribe Developer Guide.
+     */
+    PartialResultsStability?: PartialResultsStability;
+    /**
+     * Labels all personally identifiable information (PII) identified in your transcript. Content identification is performed at the segment level; PII specified in PiiEntityTypes is flagged upon complete transcription of an audio segment. You can’t set ContentIdentificationType and ContentRedactionType in the same request. If you do, your request returns a BadRequestException. For more information, see Redacting or identifying personally identifiable information in the Amazon Transcribe Developer Guide.
+     */
+    ContentIdentificationType?: ContentType;
+    /**
+     * Redacts all personally identifiable information (PII) identified in your transcript. Content redaction is performed at the segment level; PII specified in PiiEntityTypes is redacted upon complete transcription of an audio segment. You can’t set ContentRedactionType and ContentIdentificationType in the same request. If you do, your request returns a BadRequestException. For more information, see Redacting or identifying personally identifiable information in the Amazon Transcribe Developer Guide.
+     */
+    ContentRedactionType?: ContentType;
+    /**
+     * Specifies the types of personally identifiable information (PII) to redact from a transcript. You can include as many types as you'd like, or you can select ALL. To include PiiEntityTypes in your Call Analytics request, you must also include ContentIdentificationType or ContentRedactionType, but you can't include both.  Values must be comma-separated and can include: ADDRESS, BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, CREDIT_DEBIT_NUMBER, EMAIL, NAME, PHONE, PIN, SSN, or ALL. Length Constraints: Minimum length of 1. Maximum length of 300.
+     */
+    PiiEntityTypes?: PiiEntityTypes;
+    /**
+     * If true, UtteranceEvents with IsPartial: true are filtered out of the insights target.
+     */
+    FilterPartialResults?: Boolean;
+    /**
+     * The settings for a post-call analysis task in an analytics configuration.
+     */
+    PostCallAnalyticsSettings?: PostCallAnalyticsSettings;
+    /**
+     * By default, all CategoryEvents will be sent to the insights target. If this parameter is specified, only included categories will be sent to the insights target. 
+     */
+    CallAnalyticsStreamCategories?: CategoryNameList;
+  }
+  export interface AmazonTranscribeProcessorConfiguration {
+    /**
+     * The language code that represents the language spoken in your audio. If you're unsure of the language spoken in your audio, consider using IdentifyLanguage to enable automatic language identification. For a list of languages that real-time Call Analytics supports, see the Supported languages table in the Amazon Transcribe Developer Guide.
+     */
+    LanguageCode: CallAnalyticsLanguageCode;
+    /**
+     * The name of the custom vocabulary that you specified in your Call Analytics request. Length Constraints: Minimum length of 1. Maximum length of 200.
+     */
+    VocabularyName?: VocabularyName;
+    /**
+     * The name of the custom vocabulary filter that you specified in your Call Analytics request. Length Constraints: Minimum length of 1. Maximum length of 200.
+     */
+    VocabularyFilterName?: VocabularyFilterName;
+    /**
+     * The vocabulary filtering method used in your Call Analytics transcription.
+     */
+    VocabularyFilterMethod?: VocabularyFilterMethod;
+    /**
+     * Enables speaker partitioning (diarization) in your transcription output. Speaker partitioning labels the speech from individual speakers in your media file. For more information, see Partitioning speakers (diarization) in the Amazon Transcribe Developer Guide.
+     */
+    ShowSpeakerLabel?: Boolean;
+    /**
+     * Enables partial result stabilization for your transcription. Partial result stabilization can reduce latency in your output, but may impact accuracy. For more information, see Partial-result stabilization in the Amazon Transcribe Developer Guide.
+     */
+    EnablePartialResultsStabilization?: Boolean;
+    /**
+     * The level of stability to use when you enable partial results stabilization (EnablePartialResultsStabilization). Low stability provides the highest accuracy. High stability transcribes faster, but with slightly lower accuracy. For more information, see Partial-result stabilization in the Amazon Transcribe Developer Guide.
+     */
+    PartialResultsStability?: PartialResultsStability;
+    /**
+     * Labels all personally identifiable information (PII) identified in your transcript. Content identification is performed at the segment level; PII specified in PiiEntityTypes is flagged upon complete transcription of an audio segment. You can’t set ContentIdentificationType and ContentRedactionType in the same request. If you set both, your request returns a BadRequestException. For more information, see Redacting or identifying personally identifiable information in the Amazon Transcribe Developer Guide.
+     */
+    ContentIdentificationType?: ContentType;
+    /**
+     * Redacts all personally identifiable information (PII) identified in your transcript. Content redaction is performed at the segment level; PII specified in PiiEntityTypes is redacted upon complete transcription of an audio segment. You can’t set ContentRedactionType and ContentIdentificationType in the same request. If you set both, your request returns a BadRequestException. For more information, see Redacting or identifying personally identifiable information in the Amazon Transcribe Developer Guide.
+     */
+    ContentRedactionType?: ContentType;
+    /**
+     * The types of personally identifiable information (PII) to redact from a transcript. You can include as many types as you'd like, or you can select ALL. To include PiiEntityTypes in your Call Analytics request, you must also include ContentIdentificationType or ContentRedactionType, but you can't include both. Values must be comma-separated and can include: ADDRESS, BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, CREDIT_DEBIT_NUMBER, EMAIL, NAME, PHONE, PIN, SSN, or ALL. Length Constraints: Minimum length of 1. Maximum length of 300.
+     */
+    PiiEntityTypes?: PiiEntityTypes;
+    /**
+     * The name of the custom language model that you want to use when processing your transcription. Note that language model names are case sensitive. The language of the specified language model must match the language code you specify in your transcription request. If the languages don't match, the custom language model isn't applied. There are no errors or warnings associated with a language mismatch. For more information, see Custom language models in the Amazon Transcribe Developer Guide.
+     */
+    LanguageModelName?: ModelName;
+    /**
+     * If true, TranscriptEvents with IsPartial: true are filtered out of the insights target.
+     */
+    FilterPartialResults?: Boolean;
+  }
   export type Arn = string;
   export interface ArtifactsConcatenationConfiguration {
     /**
@@ -172,12 +332,28 @@ declare namespace ChimeSDKMediaPipelines {
   export type AudioChannelsOption = "Stereo"|"Mono"|string;
   export interface AudioConcatenationConfiguration {
     /**
-     * Enables the name object, where name is the name of the configuration object, such as AudioConcatenation.
+     * Enables or disables the configuration object.
      */
     State: AudioArtifactsConcatenationState;
   }
   export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|"AudioWithCompositedVideo"|string;
   export type AudioSampleRateOption = string;
+  export type Boolean = boolean;
+  export type CallAnalyticsLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|string;
+  export type CategoryName = string;
+  export type CategoryNameList = CategoryName[];
+  export interface ChannelDefinition {
+    /**
+     * The channel ID.
+     */
+    ChannelId: ChannelId;
+    /**
+     * Specifies whether the audio in a channel belongs to the AGENT or CUSTOMER.
+     */
+    ParticipantRole?: ParticipantRole;
+  }
+  export type ChannelDefinitions = ChannelDefinition[];
+  export type ChannelId = number;
   export interface ChimeSdkMeetingConcatenationConfiguration {
     /**
      * The configuration for the artifacts in an Amazon Chime SDK meeting concatenation.
@@ -186,7 +362,7 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface ChimeSdkMeetingConfiguration {
     /**
-     * The source configuration for a specified media pipline.
+     * The source configuration for a specified media pipeline.
      */
     SourceConfiguration?: SourceConfiguration;
     /**
@@ -274,7 +450,9 @@ declare namespace ChimeSDKMediaPipelines {
     State: ArtifactsConcatenationState;
   }
   export type ContentMuxType = "ContentOnly"|string;
+  export type ContentRedactionOutput = "redacted"|"redacted_and_unredacted"|string;
   export type ContentShareLayoutOption = "PresenterOnly"|"Horizontal"|"Vertical"|string;
+  export type ContentType = "PII"|string;
   export interface CreateMediaCapturePipelineRequest {
     /**
      * Source type from which the media artifacts are captured. A Chime SDK Meeting is the only supported source.
@@ -335,13 +513,81 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaConcatenationPipeline?: MediaConcatenationPipeline;
   }
+  export interface CreateMediaInsightsPipelineConfigurationRequest {
+    /**
+     * The name of the media insights pipeline configuration.
+     */
+    MediaInsightsPipelineConfigurationName: MediaInsightsPipelineConfigurationNameString;
+    /**
+     * The ARN of the role used by the service to access Amazon Web Services resources, including Transcribe and Transcribe Call Analytics, on the caller’s behalf.
+     */
+    ResourceAccessRoleArn: Arn;
+    /**
+     * The configuration settings for the real-time alerts in a media insights pipeline configuration.
+     */
+    RealTimeAlertConfiguration?: RealTimeAlertConfiguration;
+    /**
+     * The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream.
+     */
+    Elements: MediaInsightsPipelineConfigurationElements;
+    /**
+     * The tags assigned to the media insights pipeline configuration.
+     */
+    Tags?: TagList;
+    /**
+     * The unique identifier for the media insights pipeline configuration request.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateMediaInsightsPipelineConfigurationResponse {
+    /**
+     * The configuration settings for the media insights pipeline.
+     */
+    MediaInsightsPipelineConfiguration?: MediaInsightsPipelineConfiguration;
+  }
+  export interface CreateMediaInsightsPipelineRequest {
+    /**
+     * The ARN of the pipeline's configuration.
+     */
+    MediaInsightsPipelineConfigurationArn: Arn;
+    /**
+     * The runtime configuration for the Kinesis video stream source of the media insights pipeline.
+     */
+    KinesisVideoStreamSourceRuntimeConfiguration?: KinesisVideoStreamSourceRuntimeConfiguration;
+    /**
+     * The runtime metadata for the media insights pipeline. Consists of a key-value map of strings.
+     */
+    MediaInsightsRuntimeMetadata?: MediaInsightsRuntimeMetadata;
+    /**
+     * The runtime configuration for the Kinesis video recording stream source.
+     */
+    KinesisVideoStreamRecordingSourceRuntimeConfiguration?: KinesisVideoStreamRecordingSourceRuntimeConfiguration;
+    /**
+     * The runtime configuration for the S3 recording sink.
+     */
+    S3RecordingSinkRuntimeConfiguration?: S3RecordingSinkRuntimeConfiguration;
+    /**
+     * The tags assigned to the media insights pipeline.
+     */
+    Tags?: TagList;
+    /**
+     * The unique identifier for the media insights pipeline request.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateMediaInsightsPipelineResponse {
+    /**
+     * The media insights pipeline object.
+     */
+    MediaInsightsPipeline: MediaInsightsPipeline;
+  }
   export interface CreateMediaLiveConnectorPipelineRequest {
     /**
-     * The media pipeline's data sources.
+     * The media live connector pipeline's data sources.
      */
     Sources: LiveConnectorSourceList;
     /**
-     * The media pipeline's data sinks.
+     * The media live connector pipeline's data sinks.
      */
     Sinks: LiveConnectorSinkList;
     /**
@@ -349,13 +595,13 @@ declare namespace ChimeSDKMediaPipelines {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The tags associated with the media pipeline.
+     * The tags associated with the media live connector pipeline.
      */
     Tags?: TagList;
   }
   export interface CreateMediaLiveConnectorPipelineResponse {
     /**
-     * The new media pipeline.
+     * The new media live connector pipeline.
      */
     MediaLiveConnectorPipeline?: MediaLiveConnectorPipeline;
   }
@@ -371,6 +617,12 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaPipelineId: GuidString;
   }
+  export interface DeleteMediaInsightsPipelineConfigurationRequest {
+    /**
+     * The unique identifier of the resource to be deleted. Valid values include the name and ARN of the media insights pipeline configuration.
+     */
+    Identifier: NonEmptyString;
+  }
   export interface DeleteMediaPipelineRequest {
     /**
      * The ID of the media pipeline to delete.
@@ -379,6 +631,18 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export type ExternalUserIdList = ExternalUserIdType[];
   export type ExternalUserIdType = string;
+  export type FragmentNumberString = string;
+  export interface FragmentSelector {
+    /**
+     * The origin of the timestamps to use, Server or Producer. For more information, see StartSelectorType in the Amazon Kinesis Video Streams Developer Guide.
+     */
+    FragmentSelectorType: FragmentSelectorType;
+    /**
+     * The range of timestamps to return.
+     */
+    TimestampRange: TimestampRange;
+  }
+  export type FragmentSelectorType = "ProducerTimestamp"|"ServerTimestamp"|string;
   export interface GetMediaCapturePipelineRequest {
     /**
      * The ID of the pipeline that you want to get.
@@ -390,6 +654,18 @@ declare namespace ChimeSDKMediaPipelines {
      * The media pipeline object.
      */
     MediaCapturePipeline?: MediaCapturePipeline;
+  }
+  export interface GetMediaInsightsPipelineConfigurationRequest {
+    /**
+     * The unique identifier of the requested resource. Valid values include the name and ARN of the media insights pipeline configuration.
+     */
+    Identifier: NonEmptyString;
+  }
+  export interface GetMediaInsightsPipelineConfigurationResponse {
+    /**
+     * The requested media insights pipeline configuration.
+     */
+    MediaInsightsPipelineConfiguration?: MediaInsightsPipelineConfiguration;
   }
   export interface GetMediaPipelineRequest {
     /**
@@ -415,6 +691,65 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export type GuidString = string;
   export type Iso8601Timestamp = Date;
+  export interface IssueDetectionConfiguration {
+    /**
+     * The name of the issue detection rule.
+     */
+    RuleName: RuleName;
+  }
+  export type Keyword = string;
+  export interface KeywordMatchConfiguration {
+    /**
+     * The name of the keyword match rule.
+     */
+    RuleName: RuleName;
+    /**
+     * The keywords or phrases that you want to match.
+     */
+    Keywords: KeywordMatchWordList;
+    /**
+     * Matches keywords or phrases on their presence or absence. If set to TRUE, the rule matches when all the specified keywords or phrases are absent. Default: FALSE.
+     */
+    Negate?: Boolean;
+  }
+  export type KeywordMatchWordList = Keyword[];
+  export interface KinesisDataStreamSinkConfiguration {
+    /**
+     * The URL of the sink, https://aws.amazon.com/kinesis/data-streams/.
+     */
+    InsightsTarget?: Arn;
+  }
+  export type KinesisVideoStreamArn = string;
+  export interface KinesisVideoStreamRecordingSourceRuntimeConfiguration {
+    /**
+     * The stream or streams to be recorded.
+     */
+    Streams: RecordingStreamList;
+    /**
+     * Describes the timestamp range and timestamp origin of a range of fragments in the Kinesis video stream.
+     */
+    FragmentSelector: FragmentSelector;
+  }
+  export interface KinesisVideoStreamSourceRuntimeConfiguration {
+    /**
+     * The streams in the source runtime configuration of a Kinesis video stream.
+     */
+    Streams: Streams;
+    /**
+     * Specifies the encoding of your input audio. Supported format: PCM (only signed 16-bit little-endian audio formats, which does not include WAV) For more information, see Media formats in the Amazon Transcribe Developer Guide.
+     */
+    MediaEncoding: MediaEncoding;
+    /**
+     * The sample rate of the input audio (in hertz). Low-quality audio, such as telephone audio, is typically around 8,000 Hz. High-quality audio typically ranges from 16,000 Hz to 48,000 Hz. Note that the sample rate you specify must match that of your audio. Valid Range: Minimum value of 8000. Maximum value of 48000.
+     */
+    MediaSampleRate: MediaSampleRateHertz;
+  }
+  export interface LambdaFunctionSinkConfiguration {
+    /**
+     * The URL of the sink, https://aws.amazon.com/kinesis/data-streams/.
+     */
+    InsightsTarget?: Arn;
+  }
   export type LayoutOption = "GridView"|string;
   export interface ListMediaCapturePipelinesRequest {
     /**
@@ -433,6 +768,26 @@ declare namespace ChimeSDKMediaPipelines {
     MediaCapturePipelines?: MediaCapturePipelineSummaryList;
     /**
      * The token used to retrieve the next page of results. 
+     */
+    NextToken?: String;
+  }
+  export interface ListMediaInsightsPipelineConfigurationsRequest {
+    /**
+     * The token used to return the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: ResultMax;
+  }
+  export interface ListMediaInsightsPipelineConfigurationsResponse {
+    /**
+     * The requested list of media insights pipeline configurations.
+     */
+    MediaInsightsPipelineConfigurations?: MediaInsightsPipelineConfigurationSummaryList;
+    /**
+     * The token used to return the next page of results. 
      */
     NextToken?: String;
   }
@@ -489,7 +844,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     SinkType: LiveConnectorSinkType;
     /**
-     * The sink configuration's RTMP configuration setttings.
+     * The sink configuration's RTMP configuration settings.
      */
     RTMPConfiguration: LiveConnectorRTMPConfiguration;
   }
@@ -580,7 +935,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaPipelineArn?: AmazonResourceName;
     /**
-     * The data sources being concatnated.
+     * The data sources being concatenated.
      */
     Sources?: ConcatenationSourceList;
     /**
@@ -600,6 +955,136 @@ declare namespace ChimeSDKMediaPipelines {
      */
     UpdatedTimestamp?: Iso8601Timestamp;
   }
+  export type MediaEncoding = "pcm"|string;
+  export interface MediaInsightsPipeline {
+    /**
+     * The ID of a media insights pipeline.
+     */
+    MediaPipelineId?: GuidString;
+    /**
+     * The ARN of a media insights pipeline.
+     */
+    MediaPipelineArn?: Arn;
+    /**
+     * The ARN of a media insight pipeline's configuration settings.
+     */
+    MediaInsightsPipelineConfigurationArn?: Arn;
+    /**
+     * The status of a media insights pipeline.
+     */
+    Status?: MediaPipelineStatus;
+    /**
+     * The configuration settings for a Kinesis runtime video stream in a media insights pipeline.
+     */
+    KinesisVideoStreamSourceRuntimeConfiguration?: KinesisVideoStreamSourceRuntimeConfiguration;
+    /**
+     * The runtime metadata of a media insights pipeline.
+     */
+    MediaInsightsRuntimeMetadata?: MediaInsightsRuntimeMetadata;
+    /**
+     * The runtime configuration settings for a Kinesis recording video stream in a media insights pipeline.
+     */
+    KinesisVideoStreamRecordingSourceRuntimeConfiguration?: KinesisVideoStreamRecordingSourceRuntimeConfiguration;
+    /**
+     * The runtime configuration of the Amazon S3 bucket that stores recordings in a media insights pipeline.
+     */
+    S3RecordingSinkRuntimeConfiguration?: S3RecordingSinkRuntimeConfiguration;
+    /**
+     * The time at which the media insights pipeline was created.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+  }
+  export interface MediaInsightsPipelineConfiguration {
+    /**
+     * The name of the configuration.
+     */
+    MediaInsightsPipelineConfigurationName?: MediaInsightsPipelineConfigurationNameString;
+    /**
+     * The ARN of the configuration.
+     */
+    MediaInsightsPipelineConfigurationArn?: Arn;
+    /**
+     * The ARN of the role used by the service to access Amazon Web Services resources.
+     */
+    ResourceAccessRoleArn?: Arn;
+    /**
+     * Lists the rules that trigger a real-time alert.
+     */
+    RealTimeAlertConfiguration?: RealTimeAlertConfiguration;
+    /**
+     * The elements in the configuration.
+     */
+    Elements?: MediaInsightsPipelineConfigurationElements;
+    /**
+     * The ID of the configuration.
+     */
+    MediaInsightsPipelineConfigurationId?: GuidString;
+    /**
+     * The time at which the configuration was created.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The time at which the configuration was last updated.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export interface MediaInsightsPipelineConfigurationElement {
+    /**
+     * The element type.
+     */
+    Type: MediaInsightsPipelineConfigurationElementType;
+    /**
+     * The analytics configuration settings for transcribing audio in a media insights pipeline configuration element.
+     */
+    AmazonTranscribeCallAnalyticsProcessorConfiguration?: AmazonTranscribeCallAnalyticsProcessorConfiguration;
+    /**
+     * The transcription processor configuration settings in a media insights pipeline configuration element.
+     */
+    AmazonTranscribeProcessorConfiguration?: AmazonTranscribeProcessorConfiguration;
+    /**
+     * The configuration settings for the Kinesis Data Stream Sink in a media insights pipeline configuration element.
+     */
+    KinesisDataStreamSinkConfiguration?: KinesisDataStreamSinkConfiguration;
+    /**
+     * The configuration settings for the Amazon S3 recording bucket in a media insights pipeline configuration element.
+     */
+    S3RecordingSinkConfiguration?: S3RecordingSinkConfiguration;
+    /**
+     * The voice analytics configuration settings in a media insights pipeline configuration element.
+     */
+    VoiceAnalyticsProcessorConfiguration?: VoiceAnalyticsProcessorConfiguration;
+    /**
+     * The configuration settings for the Amazon Web Services Lambda sink in a media insights pipeline configuration element.
+     */
+    LambdaFunctionSinkConfiguration?: LambdaFunctionSinkConfiguration;
+    /**
+     * The configuration settings for an SQS queue sink in a media insights pipeline configuration element.
+     */
+    SqsQueueSinkConfiguration?: SqsQueueSinkConfiguration;
+    /**
+     * The configuration settings for an SNS topic sink in a media insights pipeline configuration element.
+     */
+    SnsTopicSinkConfiguration?: SnsTopicSinkConfiguration;
+  }
+  export type MediaInsightsPipelineConfigurationElementType = "AmazonTranscribeCallAnalyticsProcessor"|"VoiceAnalyticsProcessor"|"AmazonTranscribeProcessor"|"KinesisDataStreamSink"|"LambdaFunctionSink"|"SqsQueueSink"|"SnsTopicSink"|"S3RecordingSink"|string;
+  export type MediaInsightsPipelineConfigurationElements = MediaInsightsPipelineConfigurationElement[];
+  export type MediaInsightsPipelineConfigurationNameString = string;
+  export interface MediaInsightsPipelineConfigurationSummary {
+    /**
+     * The name of the media insights pipeline configuration.
+     */
+    MediaInsightsPipelineConfigurationName?: MediaInsightsPipelineConfigurationNameString;
+    /**
+     * The ID of the media insights pipeline configuration.
+     */
+    MediaInsightsPipelineConfigurationId?: GuidString;
+    /**
+     * The ARN of the media insights pipeline configuration.
+     */
+    MediaInsightsPipelineConfigurationArn?: Arn;
+  }
+  export type MediaInsightsPipelineConfigurationSummaryList = MediaInsightsPipelineConfigurationSummary[];
+  export type MediaInsightsRuntimeMetadata = {[key: string]: String};
   export interface MediaLiveConnectorPipeline {
     /**
      * The connector pipeline's data sources.
@@ -622,7 +1107,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     Status?: MediaPipelineStatus;
     /**
-     * Thetime at which the connector pipeline was created.
+     * The time at which the connector pipeline was created.
      */
     CreatedTimestamp?: Iso8601Timestamp;
     /**
@@ -643,11 +1128,16 @@ declare namespace ChimeSDKMediaPipelines {
      * The media concatenation pipeline in a media pipeline.
      */
     MediaConcatenationPipeline?: MediaConcatenationPipeline;
+    /**
+     * The media insights pipeline of a media pipeline.
+     */
+    MediaInsightsPipeline?: MediaInsightsPipeline;
   }
   export type MediaPipelineList = MediaPipelineSummary[];
   export type MediaPipelineSinkType = "S3Bucket"|string;
   export type MediaPipelineSourceType = "ChimeSdkMeeting"|string;
-  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
+  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|"Paused"|string;
+  export type MediaPipelineStatusUpdate = "Pause"|"Resume"|string;
   export interface MediaPipelineSummary {
     /**
      * The ID of the media pipeline in the summary.
@@ -658,11 +1148,36 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaPipelineArn?: AmazonResourceName;
   }
+  export type MediaSampleRateHertz = number;
   export interface MeetingEventsConcatenationConfiguration {
     /**
      * Enables or disables the configuration object.
      */
     State: ArtifactsConcatenationState;
+  }
+  export type ModelName = string;
+  export type NonEmptyString = string;
+  export type NumberOfChannels = number;
+  export type PartialResultsStability = "high"|"medium"|"low"|string;
+  export type ParticipantRole = "AGENT"|"CUSTOMER"|string;
+  export type PiiEntityTypes = string;
+  export interface PostCallAnalyticsSettings {
+    /**
+     * The URL of the Amazon S3 bucket that contains the post-call data.
+     */
+    OutputLocation: String;
+    /**
+     * The ARN of the role used by Amazon Web Services Transcribe to upload your post call analysis. For more information, see Post-call analytics with real-time transcriptions in the Amazon Transcribe Developer Guide.
+     */
+    DataAccessRoleArn: String;
+    /**
+     * The content redaction output settings for a post-call analysis task.
+     */
+    ContentRedactionOutput?: ContentRedactionOutput;
+    /**
+     * The ID of the KMS (Key Management System) key used to encrypt the output.
+     */
+    OutputEncryptionKMSKeyId?: String;
   }
   export interface PresenterOnlyConfiguration {
     /**
@@ -671,13 +1186,68 @@ declare namespace ChimeSDKMediaPipelines {
     PresenterPosition?: PresenterPosition;
   }
   export type PresenterPosition = "TopLeft"|"TopRight"|"BottomLeft"|"BottomRight"|string;
+  export interface RealTimeAlertConfiguration {
+    /**
+     * Turns off real-time alerts.
+     */
+    Disabled?: Boolean;
+    /**
+     * The rules in the alert. Rules specify the words or phrases that you want to be notified about.
+     */
+    Rules?: RealTimeAlertRuleList;
+  }
+  export interface RealTimeAlertRule {
+    /**
+     * The type of alert rule.
+     */
+    Type: RealTimeAlertRuleType;
+    /**
+     * Specifies the settings for matching the keywords in a real-time alert rule.
+     */
+    KeywordMatchConfiguration?: KeywordMatchConfiguration;
+    /**
+     * Specifies the settings for predicting sentiment in a real-time alert rule.
+     */
+    SentimentConfiguration?: SentimentConfiguration;
+    /**
+     * Specifies the issue detection settings for a real-time alert rule.
+     */
+    IssueDetectionConfiguration?: IssueDetectionConfiguration;
+  }
+  export type RealTimeAlertRuleList = RealTimeAlertRule[];
+  export type RealTimeAlertRuleType = "KeywordMatch"|"Sentiment"|"IssueDetection"|string;
+  export type RecordingFileFormat = "Wav"|"Opus"|string;
+  export interface RecordingStreamConfiguration {
+    /**
+     * The ARN of the recording stream.
+     */
+    StreamArn?: KinesisVideoStreamArn;
+  }
+  export type RecordingStreamList = RecordingStreamConfiguration[];
   export type ResolutionOption = "HD"|"FHD"|string;
   export type ResultMax = number;
+  export type RuleName = string;
   export interface S3BucketSinkConfiguration {
     /**
      * The destination URL of the S3 bucket.
      */
     Destination: Arn;
+  }
+  export interface S3RecordingSinkConfiguration {
+    /**
+     * The URL of the Amazon S3 bucket used as the recording sink.
+     */
+    Destination?: Arn;
+  }
+  export interface S3RecordingSinkRuntimeConfiguration {
+    /**
+     * The URL of the S3 bucket used as the runtime sink.
+     */
+    Destination: Arn;
+    /**
+     * The file formats for the audio and video files sent to the Amazon S3 bucket.
+     */
+    RecordingFileFormat: RecordingFileFormat;
   }
   export interface SelectedVideoStreams {
     /**
@@ -690,12 +1260,65 @@ declare namespace ChimeSDKMediaPipelines {
     ExternalUserIds?: ExternalUserIdList;
   }
   export type SensitiveString = string;
+  export interface SentimentConfiguration {
+    /**
+     * The name of the rule in the sentiment configuration.
+     */
+    RuleName: RuleName;
+    /**
+     * The type of sentiment, POSITIVE, NEGATIVE, or NEUTRAL.
+     */
+    SentimentType: SentimentType;
+    /**
+     * Specifies the analysis interval.
+     */
+    TimePeriod: SentimentTimePeriodInSeconds;
+  }
+  export type SentimentTimePeriodInSeconds = number;
+  export type SentimentType = "NEGATIVE"|string;
+  export interface SnsTopicSinkConfiguration {
+    /**
+     * The URL of the SNS sink, https://aws.amazon.com/kinesis/data-streams/.
+     */
+    InsightsTarget?: Arn;
+  }
   export interface SourceConfiguration {
     /**
      * The selected video streams for a specified media pipeline. The number of video streams can't exceed 25.
      */
     SelectedVideoStreams?: SelectedVideoStreams;
   }
+  export interface SqsQueueSinkConfiguration {
+    /**
+     * The URL of the SQS sink, https://aws.amazon.com/kinesis/data-streams/.
+     */
+    InsightsTarget?: Arn;
+  }
+  export interface StreamChannelDefinition {
+    /**
+     * The number of channels in a streaming channel.
+     */
+    NumberOfChannels: NumberOfChannels;
+    /**
+     * The definitions of the channels in a streaming channel.
+     */
+    ChannelDefinitions?: ChannelDefinitions;
+  }
+  export interface StreamConfiguration {
+    /**
+     * The ARN of the stream.
+     */
+    StreamArn: KinesisVideoStreamArn;
+    /**
+     * The unique identifier of the fragment to begin processing.
+     */
+    FragmentNumber?: FragmentNumberString;
+    /**
+     * The streaming channel definition in the stream configuration.
+     */
+    StreamChannelDefinition: StreamChannelDefinition;
+  }
+  export type Streams = StreamConfiguration[];
   export type String = string;
   export interface Tag {
     /**
@@ -723,6 +1346,17 @@ declare namespace ChimeSDKMediaPipelines {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type Timestamp = Date;
+  export interface TimestampRange {
+    /**
+     * The starting timestamp for the specified range.
+     */
+    StartTimestamp: Timestamp;
+    /**
+     * The ending timestamp for the specified range.
+     */
+    EndTimestamp: Timestamp;
+  }
   export interface TranscriptionMessagesConcatenationConfiguration {
     /**
      * Enables or disables the configuration object.
@@ -741,6 +1375,40 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateMediaInsightsPipelineConfigurationRequest {
+    /**
+     * The unique identifier for the resource to be updated. Valid values include the name and ARN of the media insights pipeline configuration.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The ARN of the role used by the service to access Amazon Web Services resources.
+     */
+    ResourceAccessRoleArn: Arn;
+    /**
+     * The configuration settings for real-time alerts for the media insights pipeline.
+     */
+    RealTimeAlertConfiguration?: RealTimeAlertConfiguration;
+    /**
+     * The elements in the request, such as a processor for Amazon Transcribe or a sink for a Kinesis Data Stream..
+     */
+    Elements: MediaInsightsPipelineConfigurationElements;
+  }
+  export interface UpdateMediaInsightsPipelineConfigurationResponse {
+    /**
+     * The updated configuration settings.
+     */
+    MediaInsightsPipelineConfiguration?: MediaInsightsPipelineConfiguration;
+  }
+  export interface UpdateMediaInsightsPipelineStatusRequest {
+    /**
+     * The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The requested status of the media insights pipeline.
+     */
+    UpdateStatus: MediaPipelineStatusUpdate;
+  }
   export interface VideoArtifactsConfiguration {
     /**
      * Indicates whether the video artifact is enabled or disabled.
@@ -758,6 +1426,20 @@ declare namespace ChimeSDKMediaPipelines {
     State: ArtifactsConcatenationState;
   }
   export type VideoMuxType = "VideoOnly"|string;
+  export type VocabularyFilterMethod = "remove"|"mask"|"tag"|string;
+  export type VocabularyFilterName = string;
+  export type VocabularyName = string;
+  export type VoiceAnalyticsConfigurationStatus = "Enabled"|"Disabled"|string;
+  export interface VoiceAnalyticsProcessorConfiguration {
+    /**
+     * The status of the speaker search task.
+     */
+    SpeakerSearchStatus?: VoiceAnalyticsConfigurationStatus;
+    /**
+     * The status of the voice tone analysis task.
+     */
+    VoiceToneAnalysisStatus?: VoiceAnalyticsConfigurationStatus;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

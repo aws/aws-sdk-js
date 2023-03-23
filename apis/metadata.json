@@ -1284,5 +1284,9 @@
   },
   "internetmonitor": {
     "name": "InternetMonitor"
+  },
+  "ivsrealtime": {
+    "prefix": "ivs-realtime",
+    "name": "IVSRealTime"
   }
 }

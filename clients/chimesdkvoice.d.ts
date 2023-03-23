@@ -102,6 +102,22 @@ declare class ChimeSDKVoice extends Service {
   /**
    * 
    */
+  createVoiceProfile(params: ChimeSDKVoice.Types.CreateVoiceProfileRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.CreateVoiceProfileResponse) => void): Request<ChimeSDKVoice.Types.CreateVoiceProfileResponse, AWSError>;
+  /**
+   * 
+   */
+  createVoiceProfile(callback?: (err: AWSError, data: ChimeSDKVoice.Types.CreateVoiceProfileResponse) => void): Request<ChimeSDKVoice.Types.CreateVoiceProfileResponse, AWSError>;
+  /**
+   * 
+   */
+  createVoiceProfileDomain(params: ChimeSDKVoice.Types.CreateVoiceProfileDomainRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.CreateVoiceProfileDomainResponse) => void): Request<ChimeSDKVoice.Types.CreateVoiceProfileDomainResponse, AWSError>;
+  /**
+   * 
+   */
+  createVoiceProfileDomain(callback?: (err: AWSError, data: ChimeSDKVoice.Types.CreateVoiceProfileDomainResponse) => void): Request<ChimeSDKVoice.Types.CreateVoiceProfileDomainResponse, AWSError>;
+  /**
+   * 
+   */
   deletePhoneNumber(params: ChimeSDKVoice.Types.DeletePhoneNumberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * 
@@ -198,6 +214,22 @@ declare class ChimeSDKVoice extends Service {
   /**
    * 
    */
+  deleteVoiceProfile(params: ChimeSDKVoice.Types.DeleteVoiceProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteVoiceProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteVoiceProfileDomain(params: ChimeSDKVoice.Types.DeleteVoiceProfileDomainRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  deleteVoiceProfileDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
   disassociatePhoneNumbersFromVoiceConnector(params: ChimeSDKVoice.Types.DisassociatePhoneNumbersFromVoiceConnectorRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.DisassociatePhoneNumbersFromVoiceConnectorResponse) => void): Request<ChimeSDKVoice.Types.DisassociatePhoneNumbersFromVoiceConnectorResponse, AWSError>;
   /**
    * 
@@ -278,6 +310,14 @@ declare class ChimeSDKVoice extends Service {
   /**
    * 
    */
+  getSpeakerSearchTask(params: ChimeSDKVoice.Types.GetSpeakerSearchTaskRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetSpeakerSearchTaskResponse) => void): Request<ChimeSDKVoice.Types.GetSpeakerSearchTaskResponse, AWSError>;
+  /**
+   * 
+   */
+  getSpeakerSearchTask(callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetSpeakerSearchTaskResponse) => void): Request<ChimeSDKVoice.Types.GetSpeakerSearchTaskResponse, AWSError>;
+  /**
+   * 
+   */
   getVoiceConnector(params: ChimeSDKVoice.Types.GetVoiceConnectorRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetVoiceConnectorResponse) => void): Request<ChimeSDKVoice.Types.GetVoiceConnectorResponse, AWSError>;
   /**
    * 
@@ -350,6 +390,30 @@ declare class ChimeSDKVoice extends Service {
   /**
    * 
    */
+  getVoiceProfile(params: ChimeSDKVoice.Types.GetVoiceProfileRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetVoiceProfileResponse) => void): Request<ChimeSDKVoice.Types.GetVoiceProfileResponse, AWSError>;
+  /**
+   * 
+   */
+  getVoiceProfile(callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetVoiceProfileResponse) => void): Request<ChimeSDKVoice.Types.GetVoiceProfileResponse, AWSError>;
+  /**
+   * 
+   */
+  getVoiceProfileDomain(params: ChimeSDKVoice.Types.GetVoiceProfileDomainRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetVoiceProfileDomainResponse) => void): Request<ChimeSDKVoice.Types.GetVoiceProfileDomainResponse, AWSError>;
+  /**
+   * 
+   */
+  getVoiceProfileDomain(callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetVoiceProfileDomainResponse) => void): Request<ChimeSDKVoice.Types.GetVoiceProfileDomainResponse, AWSError>;
+  /**
+   * 
+   */
+  getVoiceToneAnalysisTask(params: ChimeSDKVoice.Types.GetVoiceToneAnalysisTaskRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetVoiceToneAnalysisTaskResponse) => void): Request<ChimeSDKVoice.Types.GetVoiceToneAnalysisTaskResponse, AWSError>;
+  /**
+   * 
+   */
+  getVoiceToneAnalysisTask(callback?: (err: AWSError, data: ChimeSDKVoice.Types.GetVoiceToneAnalysisTaskResponse) => void): Request<ChimeSDKVoice.Types.GetVoiceToneAnalysisTaskResponse, AWSError>;
+  /**
+   * 
+   */
   listAvailableVoiceConnectorRegions(callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListAvailableVoiceConnectorRegionsResponse) => void): Request<ChimeSDKVoice.Types.ListAvailableVoiceConnectorRegionsResponse, AWSError>;
   /**
    * 
@@ -402,6 +466,14 @@ declare class ChimeSDKVoice extends Service {
   /**
    * 
    */
+  listTagsForResource(params: ChimeSDKVoice.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKVoice.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKVoice.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * 
+   */
   listVoiceConnectorGroups(params: ChimeSDKVoice.Types.ListVoiceConnectorGroupsRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListVoiceConnectorGroupsResponse) => void): Request<ChimeSDKVoice.Types.ListVoiceConnectorGroupsResponse, AWSError>;
   /**
    * 
@@ -423,6 +495,22 @@ declare class ChimeSDKVoice extends Service {
    * 
    */
   listVoiceConnectors(callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListVoiceConnectorsResponse) => void): Request<ChimeSDKVoice.Types.ListVoiceConnectorsResponse, AWSError>;
+  /**
+   * 
+   */
+  listVoiceProfileDomains(params: ChimeSDKVoice.Types.ListVoiceProfileDomainsRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListVoiceProfileDomainsResponse) => void): Request<ChimeSDKVoice.Types.ListVoiceProfileDomainsResponse, AWSError>;
+  /**
+   * 
+   */
+  listVoiceProfileDomains(callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListVoiceProfileDomainsResponse) => void): Request<ChimeSDKVoice.Types.ListVoiceProfileDomainsResponse, AWSError>;
+  /**
+   * 
+   */
+  listVoiceProfiles(params: ChimeSDKVoice.Types.ListVoiceProfilesRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListVoiceProfilesResponse) => void): Request<ChimeSDKVoice.Types.ListVoiceProfilesResponse, AWSError>;
+  /**
+   * 
+   */
+  listVoiceProfiles(callback?: (err: AWSError, data: ChimeSDKVoice.Types.ListVoiceProfilesResponse) => void): Request<ChimeSDKVoice.Types.ListVoiceProfilesResponse, AWSError>;
   /**
    * 
    */
@@ -514,6 +602,54 @@ declare class ChimeSDKVoice extends Service {
   /**
    * 
    */
+  startSpeakerSearchTask(params: ChimeSDKVoice.Types.StartSpeakerSearchTaskRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.StartSpeakerSearchTaskResponse) => void): Request<ChimeSDKVoice.Types.StartSpeakerSearchTaskResponse, AWSError>;
+  /**
+   * 
+   */
+  startSpeakerSearchTask(callback?: (err: AWSError, data: ChimeSDKVoice.Types.StartSpeakerSearchTaskResponse) => void): Request<ChimeSDKVoice.Types.StartSpeakerSearchTaskResponse, AWSError>;
+  /**
+   * 
+   */
+  startVoiceToneAnalysisTask(params: ChimeSDKVoice.Types.StartVoiceToneAnalysisTaskRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.StartVoiceToneAnalysisTaskResponse) => void): Request<ChimeSDKVoice.Types.StartVoiceToneAnalysisTaskResponse, AWSError>;
+  /**
+   * 
+   */
+  startVoiceToneAnalysisTask(callback?: (err: AWSError, data: ChimeSDKVoice.Types.StartVoiceToneAnalysisTaskResponse) => void): Request<ChimeSDKVoice.Types.StartVoiceToneAnalysisTaskResponse, AWSError>;
+  /**
+   * 
+   */
+  stopSpeakerSearchTask(params: ChimeSDKVoice.Types.StopSpeakerSearchTaskRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  stopSpeakerSearchTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  stopVoiceToneAnalysisTask(params: ChimeSDKVoice.Types.StopVoiceToneAnalysisTaskRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  stopVoiceToneAnalysisTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  tagResource(params: ChimeSDKVoice.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  untagResource(params: ChimeSDKVoice.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
   updateGlobalSettings(params: ChimeSDKVoice.Types.UpdateGlobalSettingsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * 
@@ -586,6 +722,22 @@ declare class ChimeSDKVoice extends Service {
   /**
    * 
    */
+  updateVoiceProfile(params: ChimeSDKVoice.Types.UpdateVoiceProfileRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.UpdateVoiceProfileResponse) => void): Request<ChimeSDKVoice.Types.UpdateVoiceProfileResponse, AWSError>;
+  /**
+   * 
+   */
+  updateVoiceProfile(callback?: (err: AWSError, data: ChimeSDKVoice.Types.UpdateVoiceProfileResponse) => void): Request<ChimeSDKVoice.Types.UpdateVoiceProfileResponse, AWSError>;
+  /**
+   * 
+   */
+  updateVoiceProfileDomain(params: ChimeSDKVoice.Types.UpdateVoiceProfileDomainRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.UpdateVoiceProfileDomainResponse) => void): Request<ChimeSDKVoice.Types.UpdateVoiceProfileDomainResponse, AWSError>;
+  /**
+   * 
+   */
+  updateVoiceProfileDomain(callback?: (err: AWSError, data: ChimeSDKVoice.Types.UpdateVoiceProfileDomainResponse) => void): Request<ChimeSDKVoice.Types.UpdateVoiceProfileDomainResponse, AWSError>;
+  /**
+   * 
+   */
   validateE911Address(params: ChimeSDKVoice.Types.ValidateE911AddressRequest, callback?: (err: AWSError, data: ChimeSDKVoice.Types.ValidateE911AddressResponse) => void): Request<ChimeSDKVoice.Types.ValidateE911AddressResponse, AWSError>;
   /**
    * 
@@ -610,6 +762,7 @@ declare namespace ChimeSDKVoice {
   export type AlexaSkillStatus = "ACTIVE"|"INACTIVE"|string;
   export type Alpha2CountryCode = string;
   export type AreaCode = string;
+  export type Arn = string;
   export interface AssociatePhoneNumbersWithVoiceConnectorGroupRequest {
     VoiceConnectorGroupId: NonEmptyString;
     E164PhoneNumbers: E164PhoneNumberList;
@@ -639,6 +792,11 @@ declare namespace ChimeSDKVoice {
     PhoneNumberErrors?: PhoneNumberErrorList;
   }
   export type Boolean = boolean;
+  export interface CallDetails {
+    VoiceConnectorId?: NonEmptyString128;
+    TransactionId?: NonEmptyString256;
+    IsCaller?: Boolean;
+  }
   export type CallingName = string;
   export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed"|string;
   export type CallingRegion = string;
@@ -655,6 +813,8 @@ declare namespace ChimeSDKVoice {
   export type CandidateAddressList = CandidateAddress[];
   export type Capability = "Voice"|"SMS"|string;
   export type CapabilityList = Capability[];
+  export type ClientRequestId = string;
+  export type ConfidenceScore = number;
   export type Country = string;
   export type CountryList = Country[];
   export type CpsLimit = number;
@@ -721,6 +881,22 @@ declare namespace ChimeSDKVoice {
   export interface CreateVoiceConnectorResponse {
     VoiceConnector?: VoiceConnector;
   }
+  export interface CreateVoiceProfileDomainRequest {
+    Name: VoiceProfileDomainName;
+    Description?: VoiceProfileDomainDescription;
+    ServerSideEncryptionConfiguration: ServerSideEncryptionConfiguration;
+    ClientRequestToken?: ClientRequestId;
+    Tags?: TagList;
+  }
+  export interface CreateVoiceProfileDomainResponse {
+    VoiceProfileDomain?: VoiceProfileDomain;
+  }
+  export interface CreateVoiceProfileRequest {
+    SpeakerSearchTaskId: NonEmptyString256;
+  }
+  export interface CreateVoiceProfileResponse {
+    VoiceProfile?: VoiceProfile;
+  }
   export interface Credential {
     Username?: SensitiveString;
     Password?: SensitiveString;
@@ -770,6 +946,12 @@ declare namespace ChimeSDKVoice {
   }
   export interface DeleteVoiceConnectorTerminationRequest {
     VoiceConnectorId: NonEmptyString;
+  }
+  export interface DeleteVoiceProfileDomainRequest {
+    VoiceProfileDomainId: NonEmptyString256;
+  }
+  export interface DeleteVoiceProfileRequest {
+    VoiceProfileId: NonEmptyString256;
   }
   export interface DisassociatePhoneNumbersFromVoiceConnectorGroupRequest {
     VoiceConnectorGroupId: NonEmptyString;
@@ -847,6 +1029,13 @@ declare namespace ChimeSDKVoice {
   export interface GetSipRuleResponse {
     SipRule?: SipRule;
   }
+  export interface GetSpeakerSearchTaskRequest {
+    VoiceConnectorId: NonEmptyString128;
+    SpeakerSearchTaskId: NonEmptyString256;
+  }
+  export interface GetSpeakerSearchTaskResponse {
+    SpeakerSearchTask?: SpeakerSearchTask;
+  }
   export interface GetVoiceConnectorEmergencyCallingConfigurationRequest {
     VoiceConnectorId: NonEmptyString;
   }
@@ -901,9 +1090,30 @@ declare namespace ChimeSDKVoice {
   export interface GetVoiceConnectorTerminationResponse {
     Termination?: Termination;
   }
+  export interface GetVoiceProfileDomainRequest {
+    VoiceProfileDomainId: NonEmptyString256;
+  }
+  export interface GetVoiceProfileDomainResponse {
+    VoiceProfileDomain?: VoiceProfileDomain;
+  }
+  export interface GetVoiceProfileRequest {
+    VoiceProfileId: NonEmptyString256;
+  }
+  export interface GetVoiceProfileResponse {
+    VoiceProfile?: VoiceProfile;
+  }
+  export interface GetVoiceToneAnalysisTaskRequest {
+    VoiceConnectorId: NonEmptyString128;
+    VoiceToneAnalysisTaskId: NonEmptyString256;
+    IsCaller: Boolean;
+  }
+  export interface GetVoiceToneAnalysisTaskResponse {
+    VoiceToneAnalysisTask?: VoiceToneAnalysisTask;
+  }
   export type GuidString = string;
   export type Integer = number;
   export type Iso8601Timestamp = Date;
+  export type LanguageCode = "en-US"|string;
   export interface ListAvailableVoiceConnectorRegionsResponse {
     VoiceConnectorRegions?: VoiceConnectorAwsRegionList;
   }
@@ -960,6 +1170,12 @@ declare namespace ChimeSDKVoice {
   export interface ListSupportedPhoneNumberCountriesResponse {
     PhoneNumberCountries?: PhoneNumberCountriesList;
   }
+  export interface ListTagsForResourceRequest {
+    ResourceARN: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    Tags?: TagList;
+  }
   export interface ListVoiceConnectorGroupsRequest {
     NextToken?: String;
     MaxResults?: ResultMax;
@@ -982,13 +1198,35 @@ declare namespace ChimeSDKVoice {
     VoiceConnectors?: VoiceConnectorList;
     NextToken?: String;
   }
+  export interface ListVoiceProfileDomainsRequest {
+    NextToken?: String;
+    MaxResults?: ResultMax;
+  }
+  export interface ListVoiceProfileDomainsResponse {
+    VoiceProfileDomains?: VoiceProfileDomainSummaryList;
+    NextToken?: String;
+  }
+  export interface ListVoiceProfilesRequest {
+    VoiceProfileDomainId: NonEmptyString256;
+    NextToken?: String;
+    MaxResults?: ResultMax;
+  }
+  export interface ListVoiceProfilesResponse {
+    VoiceProfiles?: VoiceProfileSummaryList;
+    NextToken?: String;
+  }
   export interface LoggingConfiguration {
     EnableSIPLogs?: Boolean;
     EnableMediaMetricLogs?: Boolean;
   }
+  export interface MediaInsightsConfiguration {
+    Disabled?: Boolean;
+    ConfigurationArn?: Arn;
+  }
   export type NextTokenString = string;
   export type NonEmptyString = string;
   export type NonEmptyString128 = string;
+  export type NonEmptyString256 = string;
   export type NonEmptyStringList = String[];
   export type NotificationTarget = "EventBridge"|"SNS"|"SQS"|string;
   export type NullableBoolean = boolean;
@@ -1195,6 +1433,9 @@ declare namespace ChimeSDKVoice {
   export type SensitiveNonEmptyString = string;
   export type SensitiveString = string;
   export type SensitiveStringList = SensitiveString[];
+  export interface ServerSideEncryptionConfiguration {
+    KmsKeyArn: Arn;
+  }
   export type SipApplicationPriority = number;
   export type SipHeadersMap = {[key: string]: SensitiveString};
   export interface SipMediaApplication {
@@ -1240,10 +1481,56 @@ declare namespace ChimeSDKVoice {
   }
   export type SipRuleTargetApplicationList = SipRuleTargetApplication[];
   export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname"|string;
+  export interface SpeakerSearchDetails {
+    Results?: SpeakerSearchResultList;
+    VoiceprintGenerationStatus?: NonEmptyString256;
+  }
+  export interface SpeakerSearchResult {
+    ConfidenceScore?: ConfidenceScore;
+    VoiceProfileId?: NonEmptyString256;
+  }
+  export type SpeakerSearchResultList = SpeakerSearchResult[];
+  export interface SpeakerSearchTask {
+    SpeakerSearchTaskId?: NonEmptyString256;
+    SpeakerSearchTaskStatus?: NonEmptyString;
+    CallDetails?: CallDetails;
+    SpeakerSearchDetails?: SpeakerSearchDetails;
+    CreatedTimestamp?: Iso8601Timestamp;
+    UpdatedTimestamp?: Iso8601Timestamp;
+    StartedTimestamp?: Iso8601Timestamp;
+    StatusMessage?: String;
+  }
+  export interface StartSpeakerSearchTaskRequest {
+    VoiceConnectorId: NonEmptyString128;
+    TransactionId: NonEmptyString256;
+    VoiceProfileDomainId: NonEmptyString256;
+    ClientRequestToken?: ClientRequestId;
+  }
+  export interface StartSpeakerSearchTaskResponse {
+    SpeakerSearchTask?: SpeakerSearchTask;
+  }
+  export interface StartVoiceToneAnalysisTaskRequest {
+    VoiceConnectorId: NonEmptyString128;
+    TransactionId: NonEmptyString256;
+    LanguageCode: LanguageCode;
+    ClientRequestToken?: ClientRequestId;
+  }
+  export interface StartVoiceToneAnalysisTaskResponse {
+    VoiceToneAnalysisTask?: VoiceToneAnalysisTask;
+  }
+  export interface StopSpeakerSearchTaskRequest {
+    VoiceConnectorId: NonEmptyString128;
+    SpeakerSearchTaskId: NonEmptyString256;
+  }
+  export interface StopVoiceToneAnalysisTaskRequest {
+    VoiceConnectorId: NonEmptyString128;
+    VoiceToneAnalysisTaskId: NonEmptyString256;
+  }
   export interface StreamingConfiguration {
     DataRetentionInHours: DataRetentionInHours;
     Disabled: Boolean;
     StreamingNotificationTargets?: StreamingNotificationTargetList;
+    MediaInsightsConfiguration?: MediaInsightsConfiguration;
   }
   export interface StreamingNotificationTarget {
     NotificationTarget?: NotificationTarget;
@@ -1252,6 +1539,18 @@ declare namespace ChimeSDKVoice {
   export type String = string;
   export type String128 = string;
   export type StringList = String[];
+  export interface Tag {
+    Key: TagKey;
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    ResourceARN: Arn;
+    Tags: TagList;
+  }
+  export type TagValue = string;
   export interface Termination {
     CpsLimit?: CpsLimit;
     DefaultPhoneNumber?: E164PhoneNumber;
@@ -1264,6 +1563,10 @@ declare namespace ChimeSDKVoice {
     Source?: String;
   }
   export type TollFreePrefix = string;
+  export interface UntagResourceRequest {
+    ResourceARN: Arn;
+    TagKeys: TagKeyList;
+  }
   export interface UpdateGlobalSettingsRequest {
     VoiceConnector?: VoiceConnectorSettings;
   }
@@ -1334,6 +1637,21 @@ declare namespace ChimeSDKVoice {
   export interface UpdateVoiceConnectorResponse {
     VoiceConnector?: VoiceConnector;
   }
+  export interface UpdateVoiceProfileDomainRequest {
+    VoiceProfileDomainId: NonEmptyString256;
+    Name?: VoiceProfileDomainName;
+    Description?: VoiceProfileDomainDescription;
+  }
+  export interface UpdateVoiceProfileDomainResponse {
+    VoiceProfileDomain?: VoiceProfileDomain;
+  }
+  export interface UpdateVoiceProfileRequest {
+    VoiceProfileId: NonEmptyString256;
+    SpeakerSearchTaskId: NonEmptyString256;
+  }
+  export interface UpdateVoiceProfileResponse {
+    VoiceProfile?: VoiceProfile;
+  }
   export interface ValidateE911AddressRequest {
     AwsAccountId: NonEmptyString;
     StreetNumber: SensitiveNonEmptyString;
@@ -1382,6 +1700,52 @@ declare namespace ChimeSDKVoice {
   export type VoiceConnectorName = string;
   export interface VoiceConnectorSettings {
     CdrBucket?: String;
+  }
+  export interface VoiceProfile {
+    VoiceProfileId?: NonEmptyString256;
+    VoiceProfileArn?: Arn;
+    VoiceProfileDomainId?: NonEmptyString256;
+    CreatedTimestamp?: Iso8601Timestamp;
+    UpdatedTimestamp?: Iso8601Timestamp;
+    ExpirationTimestamp?: Iso8601Timestamp;
+  }
+  export interface VoiceProfileDomain {
+    VoiceProfileDomainId?: NonEmptyString256;
+    VoiceProfileDomainArn?: Arn;
+    Name?: VoiceProfileDomainName;
+    Description?: VoiceProfileDomainDescription;
+    ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
+    CreatedTimestamp?: Iso8601Timestamp;
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type VoiceProfileDomainDescription = string;
+  export type VoiceProfileDomainName = string;
+  export interface VoiceProfileDomainSummary {
+    VoiceProfileDomainId?: NonEmptyString256;
+    VoiceProfileDomainArn?: Arn;
+    Name?: VoiceProfileDomainName;
+    Description?: VoiceProfileDomainDescription;
+    CreatedTimestamp?: Iso8601Timestamp;
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type VoiceProfileDomainSummaryList = VoiceProfileDomainSummary[];
+  export interface VoiceProfileSummary {
+    VoiceProfileId?: NonEmptyString256;
+    VoiceProfileArn?: Arn;
+    VoiceProfileDomainId?: NonEmptyString256;
+    CreatedTimestamp?: Iso8601Timestamp;
+    UpdatedTimestamp?: Iso8601Timestamp;
+    ExpirationTimestamp?: Iso8601Timestamp;
+  }
+  export type VoiceProfileSummaryList = VoiceProfileSummary[];
+  export interface VoiceToneAnalysisTask {
+    VoiceToneAnalysisTaskId?: NonEmptyString256;
+    VoiceToneAnalysisTaskStatus?: NonEmptyString;
+    CallDetails?: CallDetails;
+    CreatedTimestamp?: Iso8601Timestamp;
+    UpdatedTimestamp?: Iso8601Timestamp;
+    StartedTimestamp?: Iso8601Timestamp;
+    StatusMessage?: String;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

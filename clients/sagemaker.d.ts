@@ -93,6 +93,14 @@ declare class SageMaker extends Service {
    */
   createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
+   * Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems. Find the resulting model after you run an AutoML job V2 by calling . To create an AutoMLJob using tabular data, see .  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   */
+  createAutoMLJobV2(params: SageMaker.Types.CreateAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
+  /**
+   * Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems. Find the resulting model after you run an AutoML job V2 by calling . To create an AutoMLJob using tabular data, see .  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   */
+  createAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
+  /**
    * Creates a Git repository as a resource in your SageMaker account. You can associate the repository with notebook instances so that you can use Git source control for the notebooks you create. The Git repository is a resource in your SageMaker account, so it can be associated with more than one notebook instance, and it persists independently from the lifecycle of any notebook instances it is associated with. The repository can be hosted either in Amazon Web Services CodeCommit or in any other Git repository.
    */
   createCodeRepository(params: SageMaker.Types.CreateCodeRepositoryInput, callback?: (err: AWSError, data: SageMaker.Types.CreateCodeRepositoryOutput) => void): Request<SageMaker.Types.CreateCodeRepositoryOutput, AWSError>;
@@ -884,6 +892,14 @@ declare class SageMaker extends Service {
    * Returns information about an Amazon SageMaker AutoML job.
    */
   describeAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
+  /**
+   * Returns information about an Amazon SageMaker AutoML V2 job.  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   */
+  describeAutoMLJobV2(params: SageMaker.Types.DescribeAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobV2Response) => void): Request<SageMaker.Types.DescribeAutoMLJobV2Response, AWSError>;
+  /**
+   * Returns information about an Amazon SageMaker AutoML V2 job.  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   */
+  describeAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobV2Response) => void): Request<SageMaker.Types.DescribeAutoMLJobV2Response, AWSError>;
   /**
    * Gets details about the specified Git repository.
    */
@@ -2829,7 +2845,7 @@ declare namespace SageMaker {
   export type AppImageConfigList = AppImageConfigDetails[];
   export type AppImageConfigName = string;
   export type AppImageConfigSortKey = "CreationTime"|"LastModifiedTime"|"Name"|string;
-  export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.8xlarge"|"ml.m5d.12xlarge"|"ml.m5d.16xlarge"|"ml.m5d.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|string;
+  export type AppInstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.8xlarge"|"ml.m5d.12xlarge"|"ml.m5d.16xlarge"|"ml.m5d.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.geospatial.interactive"|string;
   export type AppList = AppDetails[];
   export type AppManaged = boolean;
   export type AppName = string;
@@ -3058,7 +3074,7 @@ declare namespace SageMaker {
      */
     CandidateStatus: CandidateStatus;
     /**
-     * Information about the inference container definitions.
+     * Information about the recommended inference container definitions.
      */
     InferenceContainers?: AutoMLContainerDefinitions;
     /**
@@ -3081,6 +3097,10 @@ declare namespace SageMaker {
      * The properties of an AutoML candidate job.
      */
     CandidateProperties?: CandidateProperties;
+    /**
+     * The mapping of all supported processing unit (CPU, GPU, etc...) to inference container definitions for the candidate. This field is populated for the V2 API only (for example, for jobs created by calling CreateAutoMLJobV2).
+     */
+    InferenceContainerDefinitions?: AutoMLInferenceContainerDefinitions;
   }
   export interface AutoMLCandidateGenerationConfig {
     /**
@@ -3158,6 +3178,7 @@ declare namespace SageMaker {
     ValidationFraction?: ValidationFraction;
   }
   export type AutoMLFailureReason = string;
+  export type AutoMLInferenceContainerDefinitions = {[key: string]: AutoMLContainerDefinitions};
   export type AutoMLInputDataConfig = AutoMLChannel[];
   export type AutoMLJobArn = string;
   export interface AutoMLJobArtifacts {
@@ -3170,17 +3191,35 @@ declare namespace SageMaker {
      */
     DataExplorationNotebookLocation?: DataExplorationNotebookLocation;
   }
+  export interface AutoMLJobChannel {
+    /**
+     * The type of channel. Defines whether the data are used for training or validation. The default value is training. Channels for training and validation must share the same ContentType 
+     */
+    ChannelType?: AutoMLChannelType;
+    /**
+     * The content type of the data from the input source. The following are the allowed content types for different problems:   ImageClassification: image/png, image/jpeg, image/*    TextClassification: text/csv;header=present   
+     */
+    ContentType?: ContentType;
+    /**
+     * The allowed compression types depend on the input format. We allow the compression type Gzip for S3Prefix inputs only. For all other inputs, the compression type should be None. If no compression type is provided, we default to None.
+     */
+    CompressionType?: CompressionType;
+    /**
+     * The data source for an AutoML channel.
+     */
+    DataSource?: AutoMLDataSource;
+  }
   export interface AutoMLJobCompletionCriteria {
     /**
-     * The maximum number of times a training job is allowed to run.
+     * The maximum number of times a training job is allowed to run. For V2 jobs (jobs created by calling CreateAutoMLJobV2), the supported value is 1.
      */
     MaxCandidates?: MaxCandidates;
     /**
-     * The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the used by the action.
+     * The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the used by the action. For V2 jobs (jobs created by calling CreateAutoMLJobV2), this field controls the runtime of the job candidate.
      */
     MaxRuntimePerTrainingJobInSeconds?: MaxRuntimePerTrainingJobInSeconds;
     /**
-     * The maximum runtime, in seconds, an AutoML job has to complete. If an AutoML job exceeds the maximum runtime, the job is stopped automatically and its processing is ended gracefully. The AutoML job identifies the best model whose training was completed and marks it as the best-performing model. Any unfinished steps of the job, such as automatic one-click Autopilot model deployment, are not completed. 
+     * The maximum runtime, in seconds, an AutoML job has to complete. If an AutoML job exceeds the maximum runtime, the job is stopped automatically and its processing is ended gracefully. The AutoML job identifies the best model whose training was completed and marks it as the best-performing model. Any unfinished steps of the job, such as automatic one-click Autopilot model deployment, are not completed.
      */
     MaxAutoMLJobRuntimeInSeconds?: MaxAutoMLJobRuntimeInSeconds;
   }
@@ -3206,6 +3245,7 @@ declare namespace SageMaker {
      */
     Mode?: AutoMLMode;
   }
+  export type AutoMLJobInputDataConfig = AutoMLJobChannel[];
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
     /**
@@ -3214,7 +3254,7 @@ declare namespace SageMaker {
     MetricName: AutoMLMetricEnum;
   }
   export type AutoMLJobObjectiveType = "Maximize"|"Minimize"|string;
-  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|"GeneratingModelInsightsReport"|"ModelInsightsError"|string;
+  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|"GeneratingModelInsightsReport"|"ModelInsightsError"|"TrainingModels"|string;
   export type AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
   export interface AutoMLJobStepMetadata {
     /**
@@ -3283,17 +3323,28 @@ declare namespace SageMaker {
     PartialFailureMessage?: AutoMLFailureReason;
   }
   export type AutoMLPartialFailureReasons = AutoMLPartialFailureReason[];
+  export interface AutoMLProblemTypeConfig {
+    /**
+     * Settings used to configure an AutoML job using the V2 API for the image classification problem type.
+     */
+    ImageClassificationJobConfig?: ImageClassificationJobConfig;
+    /**
+     * Settings used to configure an AutoML job using the V2 API for the text classification problem type.
+     */
+    TextClassificationJobConfig?: TextClassificationJobConfig;
+  }
+  export type AutoMLProcessingUnit = "CPU"|"GPU"|string;
   export interface AutoMLS3DataSource {
     /**
-     * The data type. A ManifestFile should have the format shown below:  [ {"prefix": "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},    "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",   "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",   ... "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]  An S3Prefix should have the following format:   s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE 
+     * The data type.    If you choose S3Prefix, S3Uri identifies a key name prefix. SageMaker uses all objects that match the specified key name prefix for model training. The S3Prefix should have the following format:  s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE    If you choose ManifestFile, S3Uri identifies an object that is a manifest file containing a list of object keys that you want SageMaker to use for model training. A ManifestFile should have the format shown below:  [ {"prefix": "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},    "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",   "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",   ... "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]    If you choose AugmentedManifestFile, S3Uri identifies an object that is an augmented manifest file in JSON lines format. This file contains the data you want to use for model training. AugmentedManifestFile is available for V2 API jobs only (for example, for jobs created by calling CreateAutoMLJobV2). Here is a minimal, single-record example of an AugmentedManifestFile:  {"source-ref": "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg",   "label-metadata": {"class-name": "cat" } For more information on AugmentedManifestFile, see Provide Dataset Metadata to Training Jobs with an Augmented Manifest File.  
      */
     S3DataType: AutoMLS3DataType;
     /**
-     * The URL to the Amazon S3 data source.
+     * The URL to the Amazon S3 data source. The Uri refers to the Amazon S3 prefix or ManifestFile depending on the data type.
      */
     S3Uri: S3Uri;
   }
-  export type AutoMLS3DataType = "ManifestFile"|"S3Prefix"|string;
+  export type AutoMLS3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile"|string;
   export interface AutoMLSecurityConfig {
     /**
      * The key used to encrypt stored data.
@@ -4013,6 +4064,7 @@ declare namespace SageMaker {
   export type ContainerMode = "SingleModel"|"MultiModel"|string;
   export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
   export type ContentClassifiers = ContentClassifier[];
+  export type ContentColumn = string;
   export type ContentDigest = string;
   export type ContentType = string;
   export type ContentTypes = ContentType[];
@@ -4265,11 +4317,11 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * Defines the type of supervised learning available for the candidates. For more information, see  Amazon SageMaker Autopilot problem types and algorithm support.
+     * Defines the type of supervised learning problem available for the candidates. For more information, see  Amazon SageMaker Autopilot problem types and algorithm support.
      */
     ProblemType?: ProblemType;
     /**
-     * Defines the objective metric used to measure the predictive quality of an AutoML job. You provide an AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it.
+     * Defines the objective metric used to measure the predictive quality of an AutoML job. You provide an AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it. For , only Accuracy is supported.
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -4285,7 +4337,7 @@ declare namespace SageMaker {
      */
     GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
     /**
-     * Each tag consists of a key and an optional value. Tag keys must be unique per resource.
+     * An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging Amazon Web ServicesResources. Tag keys must be unique per resource.
      */
     Tags?: TagList;
     /**
@@ -4296,6 +4348,54 @@ declare namespace SageMaker {
   export interface CreateAutoMLJobResponse {
     /**
      * The unique ARN assigned to the AutoML job when it is created.
+     */
+    AutoMLJobArn: AutoMLJobArn;
+  }
+  export interface CreateAutoMLJobV2Request {
+    /**
+     * Identifies an Autopilot job. The name must be unique to your account and is case insensitive.
+     */
+    AutoMLJobName: AutoMLJobName;
+    /**
+     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to InputDataConfig supported by CreateAutoMLJob. The supported formats depend on the problem type:   ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile    TextClassification: S3Prefix  
+     */
+    AutoMLJobInputDataConfig: AutoMLJobInputDataConfig;
+    /**
+     * Provides information about encryption and the Amazon S3 output path needed to store artifacts from an AutoML job.
+     */
+    OutputDataConfig: AutoMLOutputDataConfig;
+    /**
+     * Defines the configuration settings of one of the supported problem types.
+     */
+    AutoMLProblemTypeConfig: AutoMLProblemTypeConfig;
+    /**
+     * The ARN of the role that is used to access the data.
+     */
+    RoleArn: RoleArn;
+    /**
+     * An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, such as by purpose, owner, or environment. For more information, see Tagging Amazon Web ServicesResources. Tag keys must be unique per resource.
+     */
+    Tags?: TagList;
+    /**
+     * The security configuration for traffic encryption or Amazon VPC settings.
+     */
+    SecurityConfig?: AutoMLSecurityConfig;
+    /**
+     * Specifies a metric to minimize or maximize as the objective of a job. For , only Accuracy is supported.
+     */
+    AutoMLJobObjective?: AutoMLJobObjective;
+    /**
+     * Specifies how to generate the endpoint name for an automatic one-click Autopilot model deployment.
+     */
+    ModelDeployConfig?: ModelDeployConfig;
+    /**
+     * This structure specifies how to split the data into train and validation datasets. If you are using the V1 API (for example CreateAutoMLJob) or the V2 API for Natural Language Processing problems (for example CreateAutoMLJobV2 with a TextClassificationJobConfig problem type), the validation and training datasets must contain the same headers. Also, for V1 API jobs, the validation dataset must be less than 2 GB in size.
+     */
+    DataSplitConfig?: AutoMLDataSplitConfig;
+  }
+  export interface CreateAutoMLJobV2Response {
+    /**
+     * The unique ARN assigned to the AutoMLJob when it is created.
      */
     AutoMLJobArn: AutoMLJobArn;
   }
@@ -7068,6 +7168,90 @@ declare namespace SageMaker {
      * Provides information about endpoint for the model deployment.
      */
     ModelDeployResult?: ModelDeployResult;
+  }
+  export interface DescribeAutoMLJobV2Request {
+    /**
+     * Requests information about an AutoML V2 job using its unique name.
+     */
+    AutoMLJobName: AutoMLJobName;
+  }
+  export interface DescribeAutoMLJobV2Response {
+    /**
+     * Returns the name of the AutoML V2 job.
+     */
+    AutoMLJobName: AutoMLJobName;
+    /**
+     * Returns the Amazon Resource Name (ARN) of the AutoML V2 job.
+     */
+    AutoMLJobArn: AutoMLJobArn;
+    /**
+     * Returns an array of channel objects describing the input data and their location.
+     */
+    AutoMLJobInputDataConfig: AutoMLJobInputDataConfig;
+    /**
+     * Returns the job's output data config.
+     */
+    OutputDataConfig: AutoMLOutputDataConfig;
+    /**
+     * The ARN of the Identity and Access Management role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     */
+    RoleArn: RoleArn;
+    /**
+     * Returns the job's objective.
+     */
+    AutoMLJobObjective?: AutoMLJobObjective;
+    /**
+     * Returns the configuration settings of the problem type set for the AutoML V2 job.
+     */
+    AutoMLProblemTypeConfig?: AutoMLProblemTypeConfig;
+    /**
+     * Returns the creation time of the AutoML V2 job.
+     */
+    CreationTime: Timestamp;
+    /**
+     * Returns the end time of the AutoML V2 job.
+     */
+    EndTime?: Timestamp;
+    /**
+     * Returns the job's last modified time.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * Returns the reason for the failure of the AutoML V2 job, when applicable.
+     */
+    FailureReason?: AutoMLFailureReason;
+    /**
+     * Returns a list of reasons for partial failures within an AutoML V2 job.
+     */
+    PartialFailureReasons?: AutoMLPartialFailureReasons;
+    /**
+     * Information about the candidate produced by an AutoML training job V2, including its status, steps, and other properties.
+     */
+    BestCandidate?: AutoMLCandidate;
+    /**
+     * Returns the status of the AutoML V2 job.
+     */
+    AutoMLJobStatus: AutoMLJobStatus;
+    /**
+     * Returns the secondary status of the AutoML V2 job.
+     */
+    AutoMLJobSecondaryStatus: AutoMLJobSecondaryStatus;
+    /**
+     * Indicates whether the model was deployed automatically to an endpoint and the name of that endpoint if deployed automatically.
+     */
+    ModelDeployConfig?: ModelDeployConfig;
+    /**
+     * Provides information about endpoint for the model deployment.
+     */
+    ModelDeployResult?: ModelDeployResult;
+    /**
+     * Returns the configuration settings of how the data are split into train and validation datasets.
+     */
+    DataSplitConfig?: AutoMLDataSplitConfig;
+    /**
+     * Returns the security configuration for traffic encryption or Amazon VPC settings.
+     */
+    SecurityConfig?: AutoMLSecurityConfig;
   }
   export interface DescribeCodeRepositoryInput {
     /**
@@ -11913,6 +12097,12 @@ declare namespace SageMaker {
   }
   export type ImageArn = string;
   export type ImageBaseImage = string;
+  export interface ImageClassificationJobConfig {
+    /**
+     * How long a job is allowed to run, or how many candidates a job is allowed to generate.
+     */
+    CompletionCriteria?: AutoMLJobCompletionCriteria;
+  }
   export interface ImageConfig {
     /**
      * Set this to one of the following values:    Platform - The model image is hosted in Amazon ECR.    Vpc - The model image is hosted in a private Docker registry in your VPC.  
@@ -17490,7 +17680,7 @@ declare namespace SageMaker {
   }
   export interface OnlineStoreSecurityConfig {
     /**
-     * The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption. The caller (either IAM user or IAM role) of CreateFeatureGroup must have below permissions to the OnlineStore KmsKeyId:    "kms:Encrypt"     "kms:Decrypt"     "kms:DescribeKey"     "kms:CreateGrant"     "kms:RetireGrant"     "kms:ReEncryptFrom"     "kms:ReEncryptTo"     "kms:GenerateDataKey"     "kms:ListAliases"     "kms:ListGrants"     "kms:RevokeGrant"    The caller (either user or IAM role) to all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the following permissions to the KmsKeyId:    "kms:Decrypt"   
+     * The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker Feature Store uses to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption. The caller (either user or IAM role) of CreateFeatureGroup must have below permissions to the OnlineStore KmsKeyId:    "kms:Encrypt"     "kms:Decrypt"     "kms:DescribeKey"     "kms:CreateGrant"     "kms:RetireGrant"     "kms:ReEncryptFrom"     "kms:ReEncryptTo"     "kms:GenerateDataKey"     "kms:ListAliases"     "kms:ListGrants"     "kms:RevokeGrant"    The caller (either user or IAM role) to all DataPlane operations (PutRecord, GetRecord, DeleteRecord) must have the following permissions to the KmsKeyId:    "kms:Decrypt"   
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -18292,7 +18482,7 @@ declare namespace SageMaker {
      */
     ContainerStartupHealthCheckTimeoutInSeconds?: ProductionVariantContainerStartupHealthCheckTimeoutInSeconds;
     /**
-     *  You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints. You can turn on or turn off SSM access for a production variant behind an existing endpoint by creating a new endpoint configuration and calling UpdateEndpoint. 
+     *  You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoint. You can turn on or turn off SSM access for a production variant behind an existing endpoint by creating a new endpoint configuration and calling UpdateEndpoint. 
      */
     EnableSSMAccess?: ProductionVariantSSMAccess;
   }
@@ -19843,6 +20033,7 @@ declare namespace SageMaker {
   export type TagValue = string;
   export type TargetAttributeName = string;
   export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv2"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|"imx8mplus"|string;
+  export type TargetLabelColumn = string;
   export type TargetObjectiveMetricValue = number;
   export interface TargetPlatform {
     /**
@@ -19890,6 +20081,20 @@ declare namespace SageMaker {
   }
   export type TenthFractionsOfACent = number;
   export type TerminationWaitInSeconds = number;
+  export interface TextClassificationJobConfig {
+    /**
+     * How long a job is allowed to run, or how many candidates a job is allowed to generate.
+     */
+    CompletionCriteria?: AutoMLJobCompletionCriteria;
+    /**
+     * The name of the column used to provide the sentences to be classified. It should not be the same as the target column.
+     */
+    ContentColumn?: ContentColumn;
+    /**
+     * The name of the column used to provide the class labels. It should not be same as the content column.
+     */
+    TargetLabelColumn?: TargetLabelColumn;
+  }
   export type ThingName = string;
   export interface TimeSeriesForecastingSettings {
     /**

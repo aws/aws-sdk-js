@@ -342,6 +342,7 @@ export abstract class ConfigurationServicePlaceholders {
   cloudtraildata?: AWS.CloudTrailData.Types.ClientConfiguration;
   tnb?: AWS.Tnb.Types.ClientConfiguration;
   internetmonitor?: AWS.InternetMonitor.Types.ClientConfiguration;
+  ivsrealtime?: AWS.IVSRealTime.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -686,4 +687,5 @@ export interface ConfigurationServiceApiVersions {
   cloudtraildata?: AWS.CloudTrailData.Types.apiVersion;
   tnb?: AWS.Tnb.Types.apiVersion;
   internetmonitor?: AWS.InternetMonitor.Types.apiVersion;
+  ivsrealtime?: AWS.IVSRealTime.Types.apiVersion;
 }

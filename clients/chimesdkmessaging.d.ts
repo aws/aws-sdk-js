@@ -12,19 +12,19 @@ declare class ChimeSDKMessaging extends Service {
   constructor(options?: ChimeSDKMessaging.Types.ClientConfiguration)
   config: Config & ChimeSDKMessaging.Types.ClientConfiguration;
   /**
-   * Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the DisassociateChannelFlow API.  Only administrators or channel moderators can associate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the DisassociateChannelFlow API.  Only administrators or channel moderators can associate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   associateChannelFlow(params: ChimeSDKMessaging.Types.AssociateChannelFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the DisassociateChannelFlow API.  Only administrators or channel moderators can associate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Associates a channel flow with a channel. Once associated, all messages to that channel go through channel flow processors. To stop processing, use the DisassociateChannelFlow API.  Only administrators or channel moderators can associate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   associateChannelFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds a specified number of users to a channel. 
+   * Adds a specified number of users and bots to a channel. 
    */
   batchCreateChannelMembership(params: ChimeSDKMessaging.Types.BatchCreateChannelMembershipRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.BatchCreateChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.BatchCreateChannelMembershipResponse, AWSError>;
   /**
-   * Adds a specified number of users to a channel. 
+   * Adds a specified number of users and bots to a channel. 
    */
   batchCreateChannelMembership(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.BatchCreateChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.BatchCreateChannelMembershipResponse, AWSError>;
   /**
@@ -36,19 +36,19 @@ declare class ChimeSDKMessaging extends Service {
    */
   channelFlowCallback(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ChannelFlowCallbackResponse) => void): Request<ChimeSDKMessaging.Types.ChannelFlowCallbackResponse, AWSError>;
   /**
-   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   createChannel(params: ChimeSDKMessaging.Types.CreateChannelRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   createChannel(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelResponse, AWSError>;
   /**
-   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   createChannelBan(params: ChimeSDKMessaging.Types.CreateChannelBanRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelBanResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelBanResponse, AWSError>;
   /**
-   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   createChannelBan(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelBanResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelBanResponse, AWSError>;
   /**
@@ -60,35 +60,35 @@ declare class ChimeSDKMessaging extends Service {
    */
   createChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelFlowResponse, AWSError>;
   /**
-   * Adds a user to a channel. The InvitedBy field in ChannelMembership is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Adds a member to a channel. The InvitedBy field in ChannelMembership is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUserArn or AppInstanceBot that makes the API call as the value in the header. 
    */
   createChannelMembership(params: ChimeSDKMessaging.Types.CreateChannelMembershipRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelMembershipResponse, AWSError>;
   /**
-   * Adds a user to a channel. The InvitedBy field in ChannelMembership is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Adds a member to a channel. The InvitedBy field in ChannelMembership is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUserArn or AppInstanceBot that makes the API call as the value in the header. 
    */
   createChannelMembership(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelMembershipResponse, AWSError>;
   /**
-   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBotof the user that makes the API call as the value in the header. 
    */
   createChannelModerator(params: ChimeSDKMessaging.Types.CreateChannelModeratorRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelModeratorResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelModeratorResponse, AWSError>;
   /**
-   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBotof the user that makes the API call as the value in the header. 
    */
   createChannelModerator(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.CreateChannelModeratorResponse) => void): Request<ChimeSDKMessaging.Types.CreateChannelModeratorResponse, AWSError>;
   /**
-   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUserArn or AppInstanceBot that makes the API call as the value in the header. 
    */
   deleteChannel(params: ChimeSDKMessaging.Types.DeleteChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUserArn or AppInstanceBot that makes the API call as the value in the header. 
    */
   deleteChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Removes a member from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   deleteChannelBan(params: ChimeSDKMessaging.Types.DeleteChannelBanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Removes a member from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   deleteChannelBan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -108,19 +108,19 @@ declare class ChimeSDKMessaging extends Service {
    */
   deleteChannelMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   deleteChannelMessage(params: ChimeSDKMessaging.Types.DeleteChannelMessageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   deleteChannelMessage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   deleteChannelModerator(params: ChimeSDKMessaging.Types.DeleteChannelModeratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   deleteChannelModerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -132,19 +132,19 @@ declare class ChimeSDKMessaging extends Service {
    */
   deleteMessagingStreamingConfigurations(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannel(params: ChimeSDKMessaging.Types.DescribeChannelRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannel(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannelBan(params: ChimeSDKMessaging.Types.DescribeChannelBanRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelBanResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelBanResponse, AWSError>;
   /**
-   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannelBan(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelBanResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelBanResponse, AWSError>;
   /**
@@ -156,27 +156,27 @@ declare class ChimeSDKMessaging extends Service {
    */
   describeChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelFlowResponse, AWSError>;
   /**
-   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannelMembership(params: ChimeSDKMessaging.Types.DescribeChannelMembershipRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelMembershipResponse, AWSError>;
   /**
-   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannelMembership(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelMembershipResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelMembershipResponse, AWSError>;
   /**
-   *  Returns the details of a channel based on the membership of the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   *  Returns the details of a channel based on the membership of the specified AppInstanceUser or AppInstanceBot.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannelMembershipForAppInstanceUser(params: ChimeSDKMessaging.Types.DescribeChannelMembershipForAppInstanceUserRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelMembershipForAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelMembershipForAppInstanceUserResponse, AWSError>;
   /**
-   *  Returns the details of a channel based on the membership of the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   *  Returns the details of a channel based on the membership of the specified AppInstanceUser or AppInstanceBot.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannelMembershipForAppInstanceUser(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelMembershipForAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelMembershipForAppInstanceUserResponse, AWSError>;
   /**
-   * Returns the full details of a channel moderated by the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel moderated by the specified AppInstanceUser or AppInstanceBot.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannelModeratedByAppInstanceUser(params: ChimeSDKMessaging.Types.DescribeChannelModeratedByAppInstanceUserRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelModeratedByAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelModeratedByAppInstanceUserResponse, AWSError>;
   /**
-   * Returns the full details of a channel moderated by the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel moderated by the specified AppInstanceUser or AppInstanceBot.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   describeChannelModeratedByAppInstanceUser(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelModeratedByAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelModeratedByAppInstanceUserResponse, AWSError>;
   /**
@@ -188,35 +188,35 @@ declare class ChimeSDKMessaging extends Service {
    */
   describeChannelModerator(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.DescribeChannelModeratorResponse) => void): Request<ChimeSDKMessaging.Types.DescribeChannelModeratorResponse, AWSError>;
   /**
-   * Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.  Only administrators or channel moderators can disassociate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.  Only administrators or channel moderators can disassociate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   disassociateChannelFlow(params: ChimeSDKMessaging.Types.DisassociateChannelFlowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.  Only administrators or channel moderators can disassociate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Disassociates a channel flow from all its channels. Once disassociated, all messages to that channel stop going through the channel flow processor.  Only administrators or channel moderators can disassociate a channel flow. The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   disassociateChannelFlow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can retrieve preferences. Users in the AppInstanceAdmin and channel moderator roles can't retrieve preferences for other users. Banned users can't retrieve membership preferences for the channel from which they are banned.
+   * Gets the membership preferences of an AppInstanceUser or AppInstanceBot for the specified channel. A user or a bot must be a member of the channel and own the membership to be able to retrieve membership preferences. Users or bots in the AppInstanceAdmin and channel moderator roles can't retrieve preferences for other users or bots. Banned users or bots can't retrieve membership preferences for the channel from which they are banned.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   getChannelMembershipPreferences(params: ChimeSDKMessaging.Types.GetChannelMembershipPreferencesRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMembershipPreferencesResponse, AWSError>;
   /**
-   * Gets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can retrieve preferences. Users in the AppInstanceAdmin and channel moderator roles can't retrieve preferences for other users. Banned users can't retrieve membership preferences for the channel from which they are banned.
+   * Gets the membership preferences of an AppInstanceUser or AppInstanceBot for the specified channel. A user or a bot must be a member of the channel and own the membership to be able to retrieve membership preferences. Users or bots in the AppInstanceAdmin and channel moderator roles can't retrieve preferences for other users or bots. Banned users or bots can't retrieve membership preferences for the channel from which they are banned.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   getChannelMembershipPreferences(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMembershipPreferencesResponse, AWSError>;
   /**
-   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   getChannelMessage(params: ChimeSDKMessaging.Types.GetChannelMessageRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageResponse, AWSError>;
   /**
-   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   getChannelMessage(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageResponse, AWSError>;
   /**
-   * Gets message status for a specified messageId. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn't connected to a websocket.  Messages can have any one of these statuses.  SENT  Message processed successfully  PENDING  Ongoing processing  FAILED  Processing failed  DENIED  Messasge denied by the processor      This API does not return statuses for denied messages, because we don't store them once the processor denies them.    Only the message sender can invoke this API.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header   
+   * Gets message status for a specified messageId. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn't connected to a websocket.  Messages can have any one of these statuses.  SENT  Message processed successfully  PENDING  Ongoing processing  FAILED  Processing failed  DENIED  Messasge denied by the processor      This API does not return statuses for denied messages, because we don't store them once the processor denies them.    Only the message sender can invoke this API.   The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.   
    */
   getChannelMessageStatus(params: ChimeSDKMessaging.Types.GetChannelMessageStatusRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageStatusResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageStatusResponse, AWSError>;
   /**
-   * Gets message status for a specified messageId. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn't connected to a websocket.  Messages can have any one of these statuses.  SENT  Message processed successfully  PENDING  Ongoing processing  FAILED  Processing failed  DENIED  Messasge denied by the processor      This API does not return statuses for denied messages, because we don't store them once the processor denies them.    Only the message sender can invoke this API.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header   
+   * Gets message status for a specified messageId. Use this API to determine the intermediate status of messages going through channel flow processing. The API provides an alternative to retrieving message status if the event was not received because a client wasn't connected to a websocket.  Messages can have any one of these statuses.  SENT  Message processed successfully  PENDING  Ongoing processing  FAILED  Processing failed  DENIED  Messasge denied by the processor      This API does not return statuses for denied messages, because we don't store them once the processor denies them.    Only the message sender can invoke this API.   The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.   
    */
   getChannelMessageStatus(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetChannelMessageStatusResponse) => void): Request<ChimeSDKMessaging.Types.GetChannelMessageStatusResponse, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class ChimeSDKMessaging extends Service {
    */
   getMessagingStreamingConfigurations(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.GetMessagingStreamingConfigurationsResponse) => void): Request<ChimeSDKMessaging.Types.GetMessagingStreamingConfigurationsResponse, AWSError>;
   /**
-   * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all the users and bots banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelBans(params: ChimeSDKMessaging.Types.ListChannelBansRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelBansResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelBansResponse, AWSError>;
   /**
-   * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all the users and bots banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelBans(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelBansResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelBansResponse, AWSError>;
   /**
@@ -252,43 +252,43 @@ declare class ChimeSDKMessaging extends Service {
    */
   listChannelFlows(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelFlowsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelFlowsResponse, AWSError>;
   /**
-   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.  If you want to list the channels to which a specific app instance user belongs, see the ListChannelMembershipsForAppInstanceUser API.
+   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.  If you want to list the channels to which a specific app instance user belongs, see the ListChannelMembershipsForAppInstanceUser API.
    */
   listChannelMemberships(params: ChimeSDKMessaging.Types.ListChannelMembershipsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelMembershipsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelMembershipsResponse, AWSError>;
   /**
-   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.  If you want to list the channels to which a specific app instance user belongs, see the ListChannelMembershipsForAppInstanceUser API.
+   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.  If you want to list the channels to which a specific app instance user belongs, see the ListChannelMembershipsForAppInstanceUser API.
    */
   listChannelMemberships(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelMembershipsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelMembershipsResponse, AWSError>;
   /**
-   *  Lists all channels that a particular AppInstanceUser is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   *  Lists all channels that anr AppInstanceUser or AppInstanceBot is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelMembershipsForAppInstanceUser(params: ChimeSDKMessaging.Types.ListChannelMembershipsForAppInstanceUserRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelMembershipsForAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelMembershipsForAppInstanceUserResponse, AWSError>;
   /**
-   *  Lists all channels that a particular AppInstanceUser is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   *  Lists all channels that anr AppInstanceUser or AppInstanceBot is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelMembershipsForAppInstanceUser(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelMembershipsForAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelMembershipsForAppInstanceUserResponse, AWSError>;
   /**
-   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelMessages(params: ChimeSDKMessaging.Types.ListChannelMessagesRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelMessagesResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelMessagesResponse, AWSError>;
   /**
-   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelMessages(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelMessagesResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelMessagesResponse, AWSError>;
   /**
-   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelModerators(params: ChimeSDKMessaging.Types.ListChannelModeratorsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelModeratorsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelModeratorsResponse, AWSError>;
   /**
-   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelModerators(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelModeratorsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelModeratorsResponse, AWSError>;
   /**
-   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannels(params: ChimeSDKMessaging.Types.ListChannelsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsResponse, AWSError>;
   /**
-   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannels(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsResponse, AWSError>;
   /**
@@ -300,11 +300,11 @@ declare class ChimeSDKMessaging extends Service {
    */
   listChannelsAssociatedWithChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsAssociatedWithChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsAssociatedWithChannelFlowResponse, AWSError>;
   /**
-   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelsModeratedByAppInstanceUser(params: ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
   /**
-   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   listChannelsModeratedByAppInstanceUser(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<ChimeSDKMessaging.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
   /**
@@ -324,11 +324,19 @@ declare class ChimeSDKMessaging extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMessaging.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Sets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can set preferences. Users in the AppInstanceAdmin and channel moderator roles can't set preferences for other users. Banned users can't set membership preferences for the channel from which they are banned.
+   * Sets the number of days before the channel is automatically deleted.    A background process deletes expired channels within 6 hours of expiration. Actual deletion times may vary.   Expired channels that have not yet been deleted appear as active, and you can update their expiration settings. The system honors the new settings.   The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.   
+   */
+  putChannelExpirationSettings(params: ChimeSDKMessaging.Types.PutChannelExpirationSettingsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutChannelExpirationSettingsResponse) => void): Request<ChimeSDKMessaging.Types.PutChannelExpirationSettingsResponse, AWSError>;
+  /**
+   * Sets the number of days before the channel is automatically deleted.    A background process deletes expired channels within 6 hours of expiration. Actual deletion times may vary.   Expired channels that have not yet been deleted appear as active, and you can update their expiration settings. The system honors the new settings.   The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.   
+   */
+  putChannelExpirationSettings(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutChannelExpirationSettingsResponse) => void): Request<ChimeSDKMessaging.Types.PutChannelExpirationSettingsResponse, AWSError>;
+  /**
+   * Sets the membership preferences of an AppInstanceUser or AppIntanceBot for the specified channel. The user or bot must be a member of the channel. Only the user or bot who owns the membership can set preferences. Users or bots in the AppInstanceAdmin and channel moderator roles can't set preferences for other users or users. Banned users or bots can't set membership preferences for the channel from which they are banned.  The x-amz-chime-bearer request header is mandatory. Use the ARN of an AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   putChannelMembershipPreferences(params: ChimeSDKMessaging.Types.PutChannelMembershipPreferencesRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse, AWSError>;
   /**
-   * Sets the membership preferences of an AppInstanceUser for the specified channel. The AppInstanceUser must be a member of the channel. Only the AppInstanceUser who owns the membership can set preferences. Users in the AppInstanceAdmin and channel moderator roles can't set preferences for other users. Banned users can't set membership preferences for the channel from which they are banned.
+   * Sets the membership preferences of an AppInstanceUser or AppIntanceBot for the specified channel. The user or bot must be a member of the channel. Only the user or bot who owns the membership can set preferences. Users or bots in the AppInstanceAdmin and channel moderator roles can't set preferences for other users or users. Banned users or bots can't set membership preferences for the channel from which they are banned.  The x-amz-chime-bearer request header is mandatory. Use the ARN of an AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   putChannelMembershipPreferences(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse) => void): Request<ChimeSDKMessaging.Types.PutChannelMembershipPreferencesResponse, AWSError>;
   /**
@@ -340,27 +348,27 @@ declare class ChimeSDKMessaging extends Service {
    */
   putMessagingStreamingConfigurations(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.PutMessagingStreamingConfigurationsResponse) => void): Request<ChimeSDKMessaging.Types.PutMessagingStreamingConfigurationsResponse, AWSError>;
   /**
-   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   redactChannelMessage(params: ChimeSDKMessaging.Types.RedactChannelMessageRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.RedactChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.RedactChannelMessageResponse, AWSError>;
   /**
-   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   redactChannelMessage(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.RedactChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.RedactChannelMessageResponse, AWSError>;
   /**
-   * Allows ChimeBearer to search channels by channel members. AppInstanceUsers can search across the channels that they belong to. AppInstanceAdmins can search across all channels.
+   * Allows the ChimeBearer to search channels by channel members. Users or bots can search across the channels that they belong to. Users in the AppInstanceAdmin role can search across all channels. The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.
    */
   searchChannels(params: ChimeSDKMessaging.Types.SearchChannelsRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SearchChannelsResponse) => void): Request<ChimeSDKMessaging.Types.SearchChannelsResponse, AWSError>;
   /**
-   * Allows ChimeBearer to search channels by channel members. AppInstanceUsers can search across the channels that they belong to. AppInstanceAdmins can search across all channels.
+   * Allows the ChimeBearer to search channels by channel members. Users or bots can search across the channels that they belong to. Users in the AppInstanceAdmin role can search across all channels. The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header.
    */
   searchChannels(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SearchChannelsResponse) => void): Request<ChimeSDKMessaging.Types.SearchChannelsResponse, AWSError>;
   /**
-   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
+   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
    */
   sendChannelMessage(params: ChimeSDKMessaging.Types.SendChannelMessageRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SendChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.SendChannelMessageResponse, AWSError>;
   /**
-   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
+   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
    */
   sendChannelMessage(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.SendChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.SendChannelMessageResponse, AWSError>;
   /**
@@ -380,11 +388,11 @@ declare class ChimeSDKMessaging extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   updateChannel(params: ChimeSDKMessaging.Types.UpdateChannelRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelResponse, AWSError>;
   /**
-   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   updateChannel(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelResponse, AWSError>;
   /**
@@ -396,19 +404,19 @@ declare class ChimeSDKMessaging extends Service {
    */
   updateChannelFlow(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelFlowResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelFlowResponse, AWSError>;
   /**
-   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   updateChannelMessage(params: ChimeSDKMessaging.Types.UpdateChannelMessageRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelMessageResponse, AWSError>;
   /**
-   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   updateChannelMessage(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelMessageResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelMessageResponse, AWSError>;
   /**
-   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   updateChannelReadMarker(params: ChimeSDKMessaging.Types.UpdateChannelReadMarkerRequest, callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelReadMarkerResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelReadMarkerResponse, AWSError>;
   /**
-   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the API call as the value in the header. 
    */
   updateChannelReadMarker(callback?: (err: AWSError, data: ChimeSDKMessaging.Types.UpdateChannelReadMarkerResponse) => void): Request<ChimeSDKMessaging.Types.UpdateChannelReadMarkerResponse, AWSError>;
 }
@@ -448,7 +456,7 @@ declare namespace ChimeSDKMessaging {
      */
     InvitedBy?: Identity;
     /**
-     * The membership types set for the channel users.
+     * The membership types set for the channel members.
      */
     Type?: ChannelMembershipType;
     /**
@@ -456,7 +464,7 @@ declare namespace ChimeSDKMessaging {
      */
     Members?: Members;
     /**
-     * The ARN of the channel to which you're adding users.
+     * The ARN of the channel to which you're adding members.
      */
     ChannelArn?: ChimeArn;
     /**
@@ -481,7 +489,7 @@ declare namespace ChimeSDKMessaging {
   export type BatchCreateChannelMembershipErrors = BatchCreateChannelMembershipError[];
   export interface BatchCreateChannelMembershipRequest {
     /**
-     * The ARN of the channel to which you're adding users.
+     * The ARN of the channel to which you're adding users or bots.
      */
     ChannelArn: ChimeArn;
     /**
@@ -489,11 +497,11 @@ declare namespace ChimeSDKMessaging {
      */
     Type?: ChannelMembershipType;
     /**
-     * The AppInstanceUserArns of the members you want to add to the channel.
+     * The ARNs of the members you want to add to the channel. Only AppInstanceUsers and AppInstanceBots can be added as a channel member.
      */
     MemberArns: MemberArns;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -557,6 +565,10 @@ declare namespace ChimeSDKMessaging {
      * The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million members.
      */
     ElasticChannelConfiguration?: ElasticChannelConfiguration;
+    /**
+     * Settings that control when a channel expires.
+     */
+    ExpirationSettings?: ExpirationSettings;
   }
   export interface ChannelAssociatedWithFlowSummary {
     /**
@@ -786,6 +798,10 @@ declare namespace ChimeSDKMessaging {
      * The ID of the SubChannel.
      */
     SubChannelId?: SubChannelId;
+    /**
+     * The content type of the channel message.
+     */
+    ContentType?: ContentType;
   }
   export interface ChannelMessageCallback {
     /**
@@ -812,6 +828,10 @@ declare namespace ChimeSDKMessaging {
      * The ID of the SubChannel.
      */
     SubChannelId?: SubChannelId;
+    /**
+     * The content type of the call-back message.
+     */
+    ContentType?: ContentType;
   }
   export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT"|string;
   export type ChannelMessageStatus = "SENT"|"PENDING"|"FAILED"|"DENIED"|string;
@@ -870,6 +890,10 @@ declare namespace ChimeSDKMessaging {
      * The message attribues listed in a the summary of a channel message.
      */
     MessageAttributes?: MessageAttributeMap;
+    /**
+     * The content type of the channel messsage listed in the summary.
+     */
+    ContentType?: ContentType;
   }
   export type ChannelMessageSummaryList = ChannelMessageSummary[];
   export type ChannelMessageType = "STANDARD"|"CONTROL"|string;
@@ -938,6 +962,7 @@ declare namespace ChimeSDKMessaging {
   export type ChimeArn = string;
   export type ClientRequestToken = string;
   export type Content = string;
+  export type ContentType = string;
   export interface CreateChannelBanRequest {
     /**
      * The ARN of the ban request.
@@ -948,7 +973,7 @@ declare namespace ChimeSDKMessaging {
      */
     MemberArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1004,7 +1029,7 @@ declare namespace ChimeSDKMessaging {
      */
     Type: ChannelMembershipType;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1036,7 +1061,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelModeratorArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1080,7 +1105,7 @@ declare namespace ChimeSDKMessaging {
      */
     Tags?: TagList;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1099,6 +1124,10 @@ declare namespace ChimeSDKMessaging {
      * The attributes required to configure and create an elastic channel. An elastic channel can support a maximum of 1-million users, excluding moderators.
      */
     ElasticChannelConfiguration?: ElasticChannelConfiguration;
+    /**
+     * Settings that control the interval after which the channel is automatically deleted.
+     */
+    ExpirationSettings?: ExpirationSettings;
   }
   export interface CreateChannelResponse {
     /**
@@ -1116,7 +1145,7 @@ declare namespace ChimeSDKMessaging {
      */
     MemberArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1136,7 +1165,7 @@ declare namespace ChimeSDKMessaging {
      */
     MemberArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1154,7 +1183,7 @@ declare namespace ChimeSDKMessaging {
      */
     MessageId: MessageId;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1172,7 +1201,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelModeratorArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1182,7 +1211,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1206,7 +1235,7 @@ declare namespace ChimeSDKMessaging {
      */
     MemberArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1234,11 +1263,11 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the user in a channel.
+     * The ARN of the user or bot in a channel.
      */
     AppInstanceUserArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1258,7 +1287,7 @@ declare namespace ChimeSDKMessaging {
      */
     MemberArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1278,11 +1307,11 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The ARN of the AppInstanceUser in the moderated channel.
+     * The ARN of the user or bot in the moderated channel.
      */
     AppInstanceUserArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1302,7 +1331,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelModeratorArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1318,7 +1347,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1357,6 +1386,18 @@ declare namespace ChimeSDKMessaging {
     MinimumMembershipPercentage: MinimumMembershipPercentage;
   }
   export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
+  export type ExpirationCriterion = "CREATED_TIMESTAMP"|"LAST_MESSAGE_TIMESTAMP"|string;
+  export type ExpirationDays = number;
+  export interface ExpirationSettings {
+    /**
+     * The period in days after which the system automatically deletes a channel.
+     */
+    ExpirationDays: ExpirationDays;
+    /**
+     * The conditions that must be met for a channel to expire.
+     */
+    ExpirationCriterion: ExpirationCriterion;
+  }
   export type FallbackAction = "CONTINUE"|"ABORT"|string;
   export type FilterRule = string;
   export interface GetChannelMembershipPreferencesRequest {
@@ -1369,7 +1410,7 @@ declare namespace ChimeSDKMessaging {
      */
     MemberArn: ChimeArn;
     /**
-     * The AppInstanceUserARN of the user making the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1397,7 +1438,7 @@ declare namespace ChimeSDKMessaging {
      */
     MessageId: MessageId;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1491,7 +1532,7 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1535,7 +1576,7 @@ declare namespace ChimeSDKMessaging {
   }
   export interface ListChannelMembershipsForAppInstanceUserRequest {
     /**
-     * The ARN of the AppInstanceUsers
+     * The ARN of the user or bot.
      */
     AppInstanceUserArn?: ChimeArn;
     /**
@@ -1547,7 +1588,7 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1579,7 +1620,7 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1627,7 +1668,7 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1667,7 +1708,7 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1711,7 +1752,7 @@ declare namespace ChimeSDKMessaging {
   }
   export interface ListChannelsModeratedByAppInstanceUserRequest {
     /**
-     * The ARN of the user in the moderated channel.
+     * The ARN of the user or bot in the moderated channel.
      */
     AppInstanceUserArn?: ChimeArn;
     /**
@@ -1723,7 +1764,7 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1755,7 +1796,7 @@ declare namespace ChimeSDKMessaging {
      */
     NextToken?: NextToken;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }
@@ -1894,17 +1935,41 @@ declare namespace ChimeSDKMessaging {
   }
   export type PushNotificationTitle = string;
   export type PushNotificationType = "DEFAULT"|"VOIP"|string;
+  export interface PutChannelExpirationSettingsRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+    /**
+     * Settings that control the interval after which a channel is deleted.
+     */
+    ExpirationSettings?: ExpirationSettings;
+  }
+  export interface PutChannelExpirationSettingsResponse {
+    /**
+     * The channel ARN.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * Settings that control the interval after which a channel is deleted.
+     */
+    ExpirationSettings?: ExpirationSettings;
+  }
   export interface PutChannelMembershipPreferencesRequest {
     /**
      * The ARN of the channel.
      */
     ChannelArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the member setting the preferences.
+     * The ARN of the member setting the preferences.
      */
     MemberArn: ChimeArn;
     /**
-     * The AppInstanceUserARN of the user making the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -1952,7 +2017,7 @@ declare namespace ChimeSDKMessaging {
      */
     MessageId: MessageId;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -2048,7 +2113,7 @@ declare namespace ChimeSDKMessaging {
      */
     ClientRequestToken: ClientRequestToken;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -2063,6 +2128,10 @@ declare namespace ChimeSDKMessaging {
      * The ID of the SubChannel in the request.
      */
     SubChannelId?: SubChannelId;
+    /**
+     * The content type of the channel message.
+     */
+    ContentType?: ContentType;
   }
   export interface SendChannelMessageResponse {
     /**
@@ -2176,19 +2245,23 @@ declare namespace ChimeSDKMessaging {
     /**
      * The content of the message being updated.
      */
-    Content?: Content;
+    Content: NonEmptyContent;
     /**
      * The metadata of the message being updated.
      */
     Metadata?: Metadata;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
      * The ID of the SubChannel in the request.  Only required when updating messages in a SubChannel that the user belongs to. 
      */
     SubChannelId?: SubChannelId;
+    /**
+     * The content type of the channel message.
+     */
+    ContentType?: ContentType;
   }
   export interface UpdateChannelMessageResponse {
     /**
@@ -2214,7 +2287,7 @@ declare namespace ChimeSDKMessaging {
      */
     ChannelArn: ChimeArn;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
     /**
@@ -2250,7 +2323,7 @@ declare namespace ChimeSDKMessaging {
      */
     Metadata?: Metadata;
     /**
-     * The AppInstanceUserArn of the user that makes the API call.
+     * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
   }

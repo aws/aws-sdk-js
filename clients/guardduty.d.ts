@@ -132,11 +132,11 @@ declare class GuardDuty extends Service {
    */
   deleteInvitations(callback?: (err: AWSError, data: GuardDuty.Types.DeleteInvitationsResponse) => void): Request<GuardDuty.Types.DeleteInvitationsResponse, AWSError>;
   /**
-   * Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
+   * Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to disable GuardDuty for a member account in your organization.
    */
   deleteMembers(params: GuardDuty.Types.DeleteMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteMembersResponse) => void): Request<GuardDuty.Types.DeleteMembersResponse, AWSError>;
   /**
-   * Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
+   * Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to disable GuardDuty for a member account in your organization.
    */
   deleteMembers(callback?: (err: AWSError, data: GuardDuty.Types.DeleteMembersResponse) => void): Request<GuardDuty.Types.DeleteMembersResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class GuardDuty extends Service {
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisableOrganizationAdminAccountResponse) => void): Request<GuardDuty.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Disassociates the current GuardDuty member account from its administrator account.
+   * Disassociates the current GuardDuty member account from its administrator account. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to disable GuardDuty in a member account.
    */
   disassociateFromAdministratorAccount(params: GuardDuty.Types.DisassociateFromAdministratorAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromAdministratorAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
   /**
-   * Disassociates the current GuardDuty member account from its administrator account.
+   * Disassociates the current GuardDuty member account from its administrator account. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to disable GuardDuty in a member account.
    */
   disassociateFromAdministratorAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromAdministratorAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromAdministratorAccountResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class GuardDuty extends Service {
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current administrator account) specified by the account IDs.
+   * Disassociates GuardDuty member accounts (to the current administrator account) specified by the account IDs. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to disassociate a member account before removing them from your Amazon Web Services organization.
    */
   disassociateMembers(params: GuardDuty.Types.DisassociateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Disassociates GuardDuty member accounts (to the current administrator account) specified by the account IDs.
+   * Disassociates GuardDuty member accounts (to the current administrator account) specified by the account IDs. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to disassociate a member account before removing them from your Amazon Web Services organization.
    */
   disassociateMembers(callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
@@ -428,11 +428,11 @@ declare class GuardDuty extends Service {
    */
   startMonitoringMembers(callback?: (err: AWSError, data: GuardDuty.Types.StartMonitoringMembersResponse) => void): Request<GuardDuty.Types.StartMonitoringMembersResponse, AWSError>;
   /**
-   * Stops GuardDuty monitoring for the specified member accounts. Use the StartMonitoringMembers operation to restart monitoring for those accounts.
+   * Stops GuardDuty monitoring for the specified member accounts. Use the StartMonitoringMembers operation to restart monitoring for those accounts. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to stop monitoring the member accounts in your organization.
    */
   stopMonitoringMembers(params: GuardDuty.Types.StopMonitoringMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.StopMonitoringMembersResponse) => void): Request<GuardDuty.Types.StopMonitoringMembersResponse, AWSError>;
   /**
-   * Stops GuardDuty monitoring for the specified member accounts. Use the StartMonitoringMembers operation to restart monitoring for those accounts.
+   * Stops GuardDuty monitoring for the specified member accounts. Use the StartMonitoringMembers operation to restart monitoring for those accounts. With autoEnableOrganizationMembers configuration for your organization set to ALL, you'll receive an error if you attempt to stop monitoring the member accounts in your organization.
    */
   stopMonitoringMembers(callback?: (err: AWSError, data: GuardDuty.Types.StopMonitoringMembersResponse) => void): Request<GuardDuty.Types.StopMonitoringMembersResponse, AWSError>;
   /**
@@ -508,11 +508,11 @@ declare class GuardDuty extends Service {
    */
   updateMemberDetectors(callback?: (err: AWSError, data: GuardDuty.Types.UpdateMemberDetectorsResponse) => void): Request<GuardDuty.Types.UpdateMemberDetectorsResponse, AWSError>;
   /**
-   * Updates the delegated administrator account with the values provided. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Configures the delegated administrator account with the provided values. You must provide the value for either autoEnableOrganizationMembers or autoEnable.  There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateOrganizationConfiguration(params: GuardDuty.Types.UpdateOrganizationConfigurationRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateOrganizationConfigurationResponse) => void): Request<GuardDuty.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
-   * Updates the delegated administrator account with the values provided. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
+   * Configures the delegated administrator account with the provided values. You must provide the value for either autoEnableOrganizationMembers or autoEnable.  There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   updateOrganizationConfiguration(callback?: (err: AWSError, data: GuardDuty.Types.UpdateOrganizationConfigurationResponse) => void): Request<GuardDuty.Types.UpdateOrganizationConfigurationResponse, AWSError>;
   /**
@@ -700,6 +700,7 @@ declare namespace GuardDuty {
   }
   export interface ArchiveFindingsResponse {
   }
+  export type AutoEnableMembers = "NEW"|"ALL"|"NONE"|string;
   export interface AwsApiCallAction {
     /**
      * The Amazon Web Services API name.
@@ -1325,7 +1326,7 @@ declare namespace GuardDuty {
     /**
      * Indicates whether GuardDuty is automatically enabled for accounts added to the organization.
      */
-    AutoEnable: Boolean;
+    AutoEnable?: Boolean;
     /**
      * Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator account for your organization.
      */
@@ -1342,6 +1343,10 @@ declare namespace GuardDuty {
      * The pagination parameter to be used on the next list operation to retrieve more items.
      */
     NextToken?: String;
+    /**
+     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.    NEW: Indicates that new accounts joining the organization are configured to have GuardDuty enabled automatically.    ALL: Indicates that all accounts (new and existing members) in the organization are configured to have GuardDuty enabled automatically.    NONE: Indicates that no account in the organization will be configured to have GuardDuty enabled automatically.  
+     */
+    AutoEnableOrganizationMembers?: AutoEnableMembers;
   }
   export interface DescribePublishingDestinationRequest {
     /**
@@ -3815,13 +3820,13 @@ declare namespace GuardDuty {
   }
   export interface UpdateOrganizationConfigurationRequest {
     /**
-     * The ID of the detector to update the delegated administrator for.
+     * The ID of the detector that configures the delegated administrator.
      */
     DetectorId: DetectorId;
     /**
      * Indicates whether to automatically enable member accounts in the organization.
      */
-    AutoEnable: Boolean;
+    AutoEnable?: Boolean;
     /**
      * Describes which data sources will be updated.
      */
@@ -3830,6 +3835,10 @@ declare namespace GuardDuty {
      * A list of features that will be configured for the organization.
      */
     Features?: OrganizationFeaturesConfigurations;
+    /**
+     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.     NEW: Indicates that new accounts joining the organization are configured to have GuardDuty enabled automatically.    ALL: Indicates that all accounts (new and existing members) in the organization are configured to have GuardDuty enabled automatically.    NONE: Indicates that no account in the organization will be configured to have GuardDuty enabled automatically.  
+     */
+    AutoEnableOrganizationMembers?: AutoEnableMembers;
   }
   export interface UpdateOrganizationConfigurationResponse {
   }

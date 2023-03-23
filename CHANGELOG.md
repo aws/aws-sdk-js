@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1341.0-->
+<!--LATEST=2.1342.0-->
 <!--ENTRYINSERT-->
+
+## 2.1342.0
+* feature: Batch: This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE
+* feature: ChimeSDKIdentity: AppInstanceBots can be used to add a bot powered by Amazon Lex to chat channels.  ExpirationSettings provides automatic resource deletion for AppInstanceUsers.
+* feature: ChimeSDKMediaPipelines: This release adds Amazon Chime SDK call analytics. Call analytics include voice analytics, which provides speaker search and voice tone analysis. These capabilities can be used with Amazon Transcribe and Transcribe Call Analytics to generate machine-learning-powered insights from real-time audio.
+* feature: ChimeSDKMessaging: ExpirationSettings provides automatic resource deletion for Channels.
+* feature: ChimeSDKVoice: This release adds Amazon Chime SDK call analytics. Call analytics include voice analytics, which provides speaker search and voice tone analysis. These capabilities can be used with Amazon Transcribe and Transcribe Call Analytics to generate machine-learning-powered insights from real-time audio.
+* feature: CodeArtifact: Repository CreationTime is added to the CreateRepository and ListRepositories API responses.
+* feature: GuardDuty: Adds AutoEnableOrganizationMembers attribute to DescribeOrganizationConfiguration and UpdateOrganizationConfiguration APIs.
+* feature: IVSRealTime: Initial release of the Amazon Interactive Video Service RealTime API.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK now supports passthrough of ID3v2 tags for audio inputs to audio-only HLS outputs.
+* feature: SageMaker: Amazon SageMaker Autopilot adds two new APIs - CreateAutoMLJobV2 and DescribeAutoMLJobV2. Amazon SageMaker Notebook Instances now supports the ml.geospatial.interactive instance type.
+* feature: ServiceDiscovery: Reverted the throttling exception RequestLimitExceeded for AWS Cloud Map APIs introduced in SDK version 1.12.424 2023-03-09 to previous exception specified in the ErrorCode.
+* feature: Textract: The AnalyzeDocument - Tables feature adds support for new elements in the API: table titles, footers, section titles, summary cells/tables, and table type.
 
 ## 2.1341.0
 * feature: IoTTwinMaker: This release adds support of adding metadata when creating a new scene or updating an existing scene.
