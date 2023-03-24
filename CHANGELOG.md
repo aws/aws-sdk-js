@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1342.0-->
+<!--LATEST=2.1343.0-->
 <!--ENTRYINSERT-->
+
+## 2.1343.0
+* feature: Comprehend: This release adds a new field (FlywheelArn) to the EntitiesDetectionJobProperties object. The FlywheelArn field is returned in the DescribeEntitiesDetectionJob and ListEntitiesDetectionJobs responses when the EntitiesDetection job is started with a FlywheelArn instead of an EntityRecognizerArn .
+* feature: RDS: Added error code CreateCustomDBEngineVersionFault for when the create custom engine version for Custom engines fails.
 
 ## 2.1342.0
 * feature: Batch: This feature allows Batch to support configuration of ephemeral storage size for jobs running on FARGATE
