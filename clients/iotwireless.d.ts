@@ -220,6 +220,14 @@ declare class IoTWireless extends Service {
    */
   deleteWirelessDevice(callback?: (err: AWSError, data: IoTWireless.Types.DeleteWirelessDeviceResponse) => void): Request<IoTWireless.Types.DeleteWirelessDeviceResponse, AWSError>;
   /**
+   * Delete an import task.
+   */
+  deleteWirelessDeviceImportTask(params: IoTWireless.Types.DeleteWirelessDeviceImportTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeleteWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.DeleteWirelessDeviceImportTaskResponse, AWSError>;
+  /**
+   * Delete an import task.
+   */
+  deleteWirelessDeviceImportTask(callback?: (err: AWSError, data: IoTWireless.Types.DeleteWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.DeleteWirelessDeviceImportTaskResponse, AWSError>;
+  /**
    * Deletes a wireless gateway.
    */
   deleteWirelessGateway(params: IoTWireless.Types.DeleteWirelessGatewayRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeleteWirelessGatewayResponse) => void): Request<IoTWireless.Types.DeleteWirelessGatewayResponse, AWSError>;
@@ -243,6 +251,14 @@ declare class IoTWireless extends Service {
    * Deletes a wireless gateway task definition. Deleting this task definition does not affect tasks that are currently in progress.
    */
   deleteWirelessGatewayTaskDefinition(callback?: (err: AWSError, data: IoTWireless.Types.DeleteWirelessGatewayTaskDefinitionResponse) => void): Request<IoTWireless.Types.DeleteWirelessGatewayTaskDefinitionResponse, AWSError>;
+  /**
+   * Deregister a wireless device from AWS IoT Wireless.
+   */
+  deregisterWirelessDevice(params: IoTWireless.Types.DeregisterWirelessDeviceRequest, callback?: (err: AWSError, data: IoTWireless.Types.DeregisterWirelessDeviceResponse) => void): Request<IoTWireless.Types.DeregisterWirelessDeviceResponse, AWSError>;
+  /**
+   * Deregister a wireless device from AWS IoT Wireless.
+   */
+  deregisterWirelessDevice(callback?: (err: AWSError, data: IoTWireless.Types.DeregisterWirelessDeviceResponse) => void): Request<IoTWireless.Types.DeregisterWirelessDeviceResponse, AWSError>;
   /**
    * Disassociates your AWS account from a partner account. If PartnerAccountId and PartnerType are null, disassociates your AWS account from all partner accounts.
    */
@@ -444,6 +460,14 @@ declare class IoTWireless extends Service {
    */
   getWirelessDevice(callback?: (err: AWSError, data: IoTWireless.Types.GetWirelessDeviceResponse) => void): Request<IoTWireless.Types.GetWirelessDeviceResponse, AWSError>;
   /**
+   * Get information about an import task and count of device onboarding summary information for the import task.
+   */
+  getWirelessDeviceImportTask(params: IoTWireless.Types.GetWirelessDeviceImportTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.GetWirelessDeviceImportTaskResponse, AWSError>;
+  /**
+   * Get information about an import task and count of device onboarding summary information for the import task.
+   */
+  getWirelessDeviceImportTask(callback?: (err: AWSError, data: IoTWireless.Types.GetWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.GetWirelessDeviceImportTaskResponse, AWSError>;
+  /**
    * Gets operating information about a wireless device.
    */
   getWirelessDeviceStatistics(params: IoTWireless.Types.GetWirelessDeviceStatisticsRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetWirelessDeviceStatisticsResponse) => void): Request<IoTWireless.Types.GetWirelessDeviceStatisticsResponse, AWSError>;
@@ -515,6 +539,14 @@ declare class IoTWireless extends Service {
    * Lists the device profiles registered to your AWS account.
    */
   listDeviceProfiles(callback?: (err: AWSError, data: IoTWireless.Types.ListDeviceProfilesResponse) => void): Request<IoTWireless.Types.ListDeviceProfilesResponse, AWSError>;
+  /**
+   * List the Sidewalk devices in an import task and their onboarding status.
+   */
+  listDevicesForWirelessDeviceImportTask(params: IoTWireless.Types.ListDevicesForWirelessDeviceImportTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListDevicesForWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.ListDevicesForWirelessDeviceImportTaskResponse, AWSError>;
+  /**
+   * List the Sidewalk devices in an import task and their onboarding status.
+   */
+  listDevicesForWirelessDeviceImportTask(callback?: (err: AWSError, data: IoTWireless.Types.ListDevicesForWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.ListDevicesForWirelessDeviceImportTaskResponse, AWSError>;
   /**
    * List event configurations where at least one event topic has been enabled.
    */
@@ -595,6 +627,14 @@ declare class IoTWireless extends Service {
    * Lists the tags (metadata) you have assigned to the resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: IoTWireless.Types.ListTagsForResourceResponse) => void): Request<IoTWireless.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List wireless devices that have been added to an import task.
+   */
+  listWirelessDeviceImportTasks(params: IoTWireless.Types.ListWirelessDeviceImportTasksRequest, callback?: (err: AWSError, data: IoTWireless.Types.ListWirelessDeviceImportTasksResponse) => void): Request<IoTWireless.Types.ListWirelessDeviceImportTasksResponse, AWSError>;
+  /**
+   * List wireless devices that have been added to an import task.
+   */
+  listWirelessDeviceImportTasks(callback?: (err: AWSError, data: IoTWireless.Types.ListWirelessDeviceImportTasksResponse) => void): Request<IoTWireless.Types.ListWirelessDeviceImportTasksResponse, AWSError>;
   /**
    * Lists the wireless devices registered to your AWS account.
    */
@@ -699,6 +739,22 @@ declare class IoTWireless extends Service {
    * Starts a multicast group session.
    */
   startMulticastGroupSession(callback?: (err: AWSError, data: IoTWireless.Types.StartMulticastGroupSessionResponse) => void): Request<IoTWireless.Types.StartMulticastGroupSessionResponse, AWSError>;
+  /**
+   * Start import task for a single wireless device.
+   */
+  startSingleWirelessDeviceImportTask(params: IoTWireless.Types.StartSingleWirelessDeviceImportTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.StartSingleWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.StartSingleWirelessDeviceImportTaskResponse, AWSError>;
+  /**
+   * Start import task for a single wireless device.
+   */
+  startSingleWirelessDeviceImportTask(callback?: (err: AWSError, data: IoTWireless.Types.StartSingleWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.StartSingleWirelessDeviceImportTaskResponse, AWSError>;
+  /**
+   * Start import task for provisioning Sidewalk devices in bulk using an S3 CSV file.
+   */
+  startWirelessDeviceImportTask(params: IoTWireless.Types.StartWirelessDeviceImportTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.StartWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.StartWirelessDeviceImportTaskResponse, AWSError>;
+  /**
+   * Start import task for provisioning Sidewalk devices in bulk using an S3 CSV file.
+   */
+  startWirelessDeviceImportTask(callback?: (err: AWSError, data: IoTWireless.Types.StartWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.StartWirelessDeviceImportTaskResponse, AWSError>;
   /**
    * Adds a tag to a resource.
    */
@@ -812,6 +868,14 @@ declare class IoTWireless extends Service {
    */
   updateWirelessDevice(callback?: (err: AWSError, data: IoTWireless.Types.UpdateWirelessDeviceResponse) => void): Request<IoTWireless.Types.UpdateWirelessDeviceResponse, AWSError>;
   /**
+   * Update an import task to add more devices to the task.
+   */
+  updateWirelessDeviceImportTask(params: IoTWireless.Types.UpdateWirelessDeviceImportTaskRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.UpdateWirelessDeviceImportTaskResponse, AWSError>;
+  /**
+   * Update an import task to add more devices to the task.
+   */
+  updateWirelessDeviceImportTask(callback?: (err: AWSError, data: IoTWireless.Types.UpdateWirelessDeviceImportTaskResponse) => void): Request<IoTWireless.Types.UpdateWirelessDeviceImportTaskResponse, AWSError>;
+  /**
    * Updates properties of a wireless gateway.
    */
   updateWirelessGateway(params: IoTWireless.Types.UpdateWirelessGatewayRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateWirelessGatewayResponse) => void): Request<IoTWireless.Types.UpdateWirelessGatewayResponse, AWSError>;
@@ -864,6 +928,7 @@ declare namespace IoTWireless {
   export type AddGwMetadata = boolean;
   export type AmazonId = string;
   export type AmazonResourceName = string;
+  export type ApId = string;
   export type AppEui = string;
   export type AppKey = string;
   export type AppSKey = string;
@@ -880,6 +945,7 @@ declare namespace IoTWireless {
     DestinationName?: DestinationName;
   }
   export type ApplicationConfigType = "SemtechGeolocation"|string;
+  export type ApplicationServerPublicKey = string;
   export type Applications = ApplicationConfig[];
   export type AssistPosition = Coordinate[];
   export interface AssociateAwsAccountWithPartnerAccountRequest {
@@ -1174,6 +1240,10 @@ declare namespace IoTWireless {
      * Each resource must have a unique client request token. If you try to create a new resource with the same token as a resource that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. 
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The Sidewalk-related information for creating the Sidewalk device profile.
+     */
+    Sidewalk?: SidewalkCreateDeviceProfile;
   }
   export interface CreateDeviceProfileResponse {
     /**
@@ -1301,6 +1371,10 @@ declare namespace IoTWireless {
      * FPort values for the GNSS, stream, and ClockSync functions of the positioning information.
      */
     Positioning?: PositioningConfigStatus;
+    /**
+     * The device configuration information to use to create the Sidewalk device.
+     */
+    Sidewalk?: SidewalkCreateWirelessDevice;
   }
   export interface CreateWirelessDeviceResponse {
     /**
@@ -1398,6 +1472,31 @@ declare namespace IoTWireless {
   }
   export type CreatedAt = Date;
   export type CreationDate = Date;
+  export type CreationTime = Date;
+  export type DakCertificateId = string;
+  export interface DakCertificateMetadata {
+    /**
+     * The certificate ID for the DAK.
+     */
+    CertificateId: DakCertificateId;
+    /**
+     * The maximum number of signatures that the DAK can sign. A value of -1 indicates that there's no device limit.
+     */
+    MaxAllowedSignature?: MaxAllowedSignature;
+    /**
+     * Whether factory support has been enabled.
+     */
+    FactorySupport?: FactorySupport;
+    /**
+     * The advertised product ID (APID) that's used for pre-production and production applications.
+     */
+    ApId?: ApId;
+    /**
+     * The device type ID that's used for prototyping applications.
+     */
+    DeviceTypeId?: DeviceTypeId;
+  }
+  export type DakCertificateMetadataList = DakCertificateMetadata[];
   export interface DeleteDestinationRequest {
     /**
      * The name of the resource to delete.
@@ -1453,6 +1552,14 @@ declare namespace IoTWireless {
   }
   export interface DeleteServiceProfileResponse {
   }
+  export interface DeleteWirelessDeviceImportTaskRequest {
+    /**
+     * The unique identifier of the import task to be deleted.
+     */
+    Id: ImportTaskId;
+  }
+  export interface DeleteWirelessDeviceImportTaskResponse {
+  }
   export interface DeleteWirelessDeviceRequest {
     /**
      * The ID of the resource to delete.
@@ -1484,6 +1591,18 @@ declare namespace IoTWireless {
     Id: WirelessGatewayId;
   }
   export interface DeleteWirelessGatewayTaskResponse {
+  }
+  export interface DeregisterWirelessDeviceRequest {
+    /**
+     * The identifier of the wireless device to deregister from AWS IoT Wireless.
+     */
+    Identifier: Identifier;
+    /**
+     * The type of wireless device to deregister from AWS IoT Wireless, which can be LoRaWAN or Sidewalk.
+     */
+    WirelessDeviceType?: WirelessDeviceType;
+  }
+  export interface DeregisterWirelessDeviceResponse {
   }
   export type Description = string;
   export type DestinationArn = string;
@@ -1519,6 +1638,9 @@ declare namespace IoTWireless {
   export type DevEui = string;
   export type DevStatusReqFreq = number;
   export type DeviceCertificateList = CertificateList[];
+  export type DeviceCreationFile = string;
+  export type DeviceCreationFileList = DeviceCreationFile[];
+  export type DeviceName = string;
   export interface DeviceProfile {
     /**
      * The Amazon Resource Name of the resource.
@@ -1537,6 +1659,7 @@ declare namespace IoTWireless {
   export type DeviceProfileId = string;
   export type DeviceProfileList = DeviceProfile[];
   export type DeviceProfileName = string;
+  export type DeviceProfileType = "Sidewalk"|"LoRaWAN"|string;
   export interface DeviceRegistrationStateEventConfiguration {
     /**
      * Device registration state event configuration object for enabling or disabling Sidewalk related event topics.
@@ -1554,6 +1677,7 @@ declare namespace IoTWireless {
     Sidewalk?: SidewalkResourceTypeEventConfiguration;
   }
   export type DeviceState = "Provisioned"|"RegisteredNotSeen"|"RegisteredReachable"|"RegisteredUnreachable"|string;
+  export type DeviceTypeId = string;
   export interface DisassociateAwsAccountFromPartnerAccountRequest {
     /**
      * The partner account ID to disassociate from the AWS account.
@@ -1701,6 +1825,7 @@ declare namespace IoTWireless {
     Applications?: Applications;
   }
   export type FactoryPresetFreqsList = PresetFreq[];
+  export type FactorySupport = boolean;
   export type Fingerprint = string;
   export type FirmwareUpdateImage = string;
   export type FirmwareUpdateRole = string;
@@ -1788,6 +1913,10 @@ declare namespace IoTWireless {
      * Information about the device profile.
      */
     LoRaWAN?: LoRaWANDeviceProfile;
+    /**
+     * Information about the Sidewalk parameters in the device profile.
+     */
+    Sidewalk?: SidewalkGetDeviceProfile;
   }
   export interface GetEventConfigurationByResourceTypesRequest {
   }
@@ -2084,6 +2213,58 @@ declare namespace IoTWireless {
      * Information about the service profile.
      */
     LoRaWAN?: LoRaWANGetServiceProfileInfo;
+  }
+  export interface GetWirelessDeviceImportTaskRequest {
+    /**
+     * The identifier of the import task for which information is requested.
+     */
+    Id: ImportTaskId;
+  }
+  export interface GetWirelessDeviceImportTaskResponse {
+    /**
+     * The identifier of the import task for which information is retrieved.
+     */
+    Id?: ImportTaskId;
+    /**
+     * The ARN (Amazon Resource Name) of the import task.
+     */
+    Arn?: ImportTaskArn;
+    /**
+     * The name of the destination that's assigned to the wireless devices in the import task.
+     */
+    DestinationName?: DestinationName;
+    /**
+     * The Sidewalk-related information about an import task.
+     */
+    Sidewalk?: SidewalkGetStartImportInfo;
+    /**
+     * The time at which the import task was created.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The import task status.
+     */
+    Status?: ImportTaskStatus;
+    /**
+     * The reason for the provided status information, such as a validation error that causes the import task to fail.
+     */
+    StatusReason?: StatusReason;
+    /**
+     * The number of devices in the import task that are waiting for the control log to start processing.
+     */
+    InitializedImportedDeviceCount?: ImportedWirelessDeviceCount;
+    /**
+     * The number of devices in the import task that are waiting in the import task queue to be onboarded.
+     */
+    PendingImportedDeviceCount?: ImportedWirelessDeviceCount;
+    /**
+     * The number of devices in the import task that have been onboarded to the import task.
+     */
+    OnboardedImportedDeviceCount?: ImportedWirelessDeviceCount;
+    /**
+     * The number of devices in the import task that failed to onboard to the import task.
+     */
+    FailedImportedDeviceCount?: ImportedWirelessDeviceCount;
   }
   export interface GetWirelessDeviceRequest {
     /**
@@ -2413,6 +2594,35 @@ declare namespace IoTWireless {
   export type ISODateTimeString = string;
   export type Identifier = string;
   export type IdentifierType = "PartnerAccountId"|"DevEui"|"GatewayEui"|"WirelessDeviceId"|"WirelessGatewayId"|string;
+  export type ImportTaskArn = string;
+  export type ImportTaskId = string;
+  export type ImportTaskStatus = "INITIALIZING"|"INITIALIZED"|"PENDING"|"COMPLETE"|"FAILED"|"DELETING"|string;
+  export interface ImportedSidewalkDevice {
+    /**
+     * The Sidewalk manufacturing serial number (SMSN) of the Sidewalk device.
+     */
+    SidewalkManufacturingSn?: SidewalkManufacturingSn;
+    /**
+     * The onboarding status of the Sidewalk device in the import task.
+     */
+    OnboardingStatus?: OnboardStatus;
+    /**
+     * The reason for the onboarding status information for the Sidewalk device.
+     */
+    OnboardingStatusReason?: OnboardStatusReason;
+    /**
+     * The time at which the status information was last updated.
+     */
+    LastUpdateTime?: LastUpdateTime;
+  }
+  export interface ImportedWirelessDevice {
+    /**
+     * The Sidewalk-related information about a device that has been added to an import task.
+     */
+    Sidewalk?: ImportedSidewalkDevice;
+  }
+  export type ImportedWirelessDeviceCount = number;
+  export type ImportedWirelessDeviceList = ImportedWirelessDevice[];
   export type Integer = number;
   export type IotCertificateId = string;
   export interface Ip {
@@ -2441,6 +2651,7 @@ declare namespace IoTWireless {
     LoRaWAN?: LoRaWANJoinResourceTypeEventConfiguration;
   }
   export type LAC = number;
+  export type LastUpdateTime = Date;
   export interface ListDestinationsRequest {
     /**
      * The maximum number of results to return in this operation.
@@ -2470,6 +2681,10 @@ declare namespace IoTWireless {
      * The maximum number of results to return in this operation.
      */
     MaxResults?: MaxResults;
+    /**
+     * A filter to list only device profiles that use this type, which can be LoRaWAN or Sidewalk.
+     */
+    DeviceProfileType?: DeviceProfileType;
   }
   export interface ListDeviceProfilesResponse {
     /**
@@ -2480,6 +2695,35 @@ declare namespace IoTWireless {
      * The list of device profiles.
      */
     DeviceProfileList?: DeviceProfileList;
+  }
+  export interface ListDevicesForWirelessDeviceImportTaskRequest {
+    /**
+     * The identifier of the import task for which wireless devices are listed.
+     */
+    Id: ImportTaskId;
+    MaxResults?: MaxResults;
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The status of the devices in the import task.
+     */
+    Status?: OnboardStatus;
+  }
+  export interface ListDevicesForWirelessDeviceImportTaskResponse {
+    /**
+     * The token to use to get the next set of results, or null if there are no additional results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The name of the Sidewalk destination that describes the IoT rule to route messages received from devices in an import task that are onboarded to AWS IoT Wireless.
+     */
+    DestinationName?: DestinationName;
+    /**
+     * List of wireless devices in an import task and their onboarding status.
+     */
+    ImportedWirelessDeviceList?: ImportedWirelessDeviceList;
   }
   export interface ListEventConfigurationsRequest {
     /**
@@ -2662,6 +2906,23 @@ declare namespace IoTWireless {
      * The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
+  }
+  export interface ListWirelessDeviceImportTasksRequest {
+    MaxResults?: MaxResults;
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListWirelessDeviceImportTasksResponse {
+    /**
+     * The token to use to get the next set of results, or null if there are no additional results.
+     */
+    NextToken?: NextToken;
+    /**
+     * List of import tasks and summary information of onboarding status of devices in each import task.
+     */
+    WirelessDeviceImportTaskList?: WirelessDeviceImportTaskList;
   }
   export interface ListWirelessDevicesRequest {
     /**
@@ -3222,6 +3483,7 @@ declare namespace IoTWireless {
   export type MNC = number;
   export type MacAddress = string;
   export type MacVersion = string;
+  export type MaxAllowedSignature = number;
   export type MaxDutyCycle = number;
   export type MaxEirp = number;
   export type MaxResults = number;
@@ -3280,6 +3542,8 @@ declare namespace IoTWireless {
   export type NwkKey = string;
   export type NwkSEncKey = string;
   export type NwkSKey = string;
+  export type OnboardStatus = "INITIALIZED"|"PENDING"|"ONBOARDED"|"FAILED"|string;
+  export type OnboardStatusReason = string;
   export interface OtaaV1_0_x {
     /**
      * The AppKey value.
@@ -3383,6 +3647,7 @@ declare namespace IoTWireless {
   export type PositioningConfigStatus = "Enabled"|"Disabled"|string;
   export type PrAllowed = boolean;
   export type PresetFreq = number;
+  export type PrivateKeysList = CertificateList[];
   export interface ProximityEventConfiguration {
     /**
      * Proximity event configuration object for enabling or disabling Sidewalk related event topics.
@@ -3429,6 +3694,7 @@ declare namespace IoTWireless {
   }
   export interface PutResourceLogLevelResponse {
   }
+  export type QualificationStatus = boolean;
   export type QueryString = string;
   export type RSCP = number;
   export type RSRP = number;
@@ -3457,6 +3723,7 @@ declare namespace IoTWireless {
   export type ResourceType = string;
   export type Result = string;
   export type RfRegion = string;
+  export type Role = string;
   export type RoleArn = string;
   export type RxDataRate2 = number;
   export type RxDelay1 = number;
@@ -3595,6 +3862,14 @@ declare namespace IoTWireless {
     Arn?: PartnerAccountArn;
   }
   export type SidewalkAccountList = SidewalkAccountInfoWithFingerprint[];
+  export interface SidewalkCreateDeviceProfile {
+  }
+  export interface SidewalkCreateWirelessDevice {
+    /**
+     * The ID of the Sidewalk device profile.
+     */
+    DeviceProfileId?: DeviceProfileId;
+  }
   export interface SidewalkDevice {
     AmazonId?: AmazonId;
     /**
@@ -3609,6 +3884,22 @@ declare namespace IoTWireless {
      * The sidewalk device certificates for Ed25519 and P256r1.
      */
     DeviceCertificates?: DeviceCertificateList;
+    /**
+     * The Sidewalk device private keys that will be used for onboarding the device.
+     */
+    PrivateKeys?: PrivateKeysList;
+    /**
+     * The ID of the Sidewalk device profile.
+     */
+    DeviceProfileId?: DeviceProfileId;
+    /**
+     * The ID of the Sidewalk device profile.
+     */
+    CertificateId?: DakCertificateId;
+    /**
+     * The Sidewalk device status, such as provisioned or registered.
+     */
+    Status?: WirelessDeviceSidewalkStatus;
   }
   export interface SidewalkDeviceMetadata {
     /**
@@ -3634,6 +3925,30 @@ declare namespace IoTWireless {
      */
     AmazonIdEventTopic?: EventNotificationTopicStatus;
   }
+  export interface SidewalkGetDeviceProfile {
+    /**
+     * The Sidewalk application server public key.
+     */
+    ApplicationServerPublicKey?: ApplicationServerPublicKey;
+    /**
+     * Gets information about the certification status of a Sidewalk device profile.
+     */
+    QualificationStatus?: QualificationStatus;
+    /**
+     * The DAK certificate information of the Sidewalk device profile.
+     */
+    DakCertificateMetadata?: DakCertificateMetadataList;
+  }
+  export interface SidewalkGetStartImportInfo {
+    /**
+     * List of Sidewalk devices that are added to the import task.
+     */
+    DeviceCreationFileList?: DeviceCreationFileList;
+    /**
+     * The IAM role that allows AWS IoT Wireless to access the CSV file in the S3 bucket.
+     */
+    Role?: Role;
+  }
   export type SidewalkId = string;
   export interface SidewalkListDevice {
     /**
@@ -3652,6 +3967,14 @@ declare namespace IoTWireless {
      * The sidewalk device certificates for Ed25519 and P256r1.
      */
     DeviceCertificates?: DeviceCertificateList;
+    /**
+     * Sidewalk object used by list functions.
+     */
+    DeviceProfileId?: DeviceProfileId;
+    /**
+     * The status of the Sidewalk devices, such as provisioned or registered.
+     */
+    Status?: WirelessDeviceSidewalkStatus;
   }
   export type SidewalkManufacturingSn = string;
   export interface SidewalkResourceTypeEventConfiguration {
@@ -3671,11 +3994,33 @@ declare namespace IoTWireless {
      */
     AckModeRetryDurationSecs?: AckModeRetryDurationSecs;
   }
+  export interface SidewalkSingleStartImportInfo {
+    /**
+     * The Sidewalk manufacturing serial number (SMSN) of the device added to the import task.
+     */
+    SidewalkManufacturingSn?: SidewalkManufacturingSn;
+  }
+  export interface SidewalkStartImportInfo {
+    /**
+     * The CSV file contained in an S3 bucket that's used for adding devices to an import task.
+     */
+    DeviceCreationFile?: DeviceCreationFile;
+    /**
+     * The IAM role that allows AWS IoT Wireless to access the CSV file in the S3 bucket.
+     */
+    Role?: Role;
+  }
   export interface SidewalkUpdateAccount {
     /**
      * The new Sidewalk application server private key.
      */
     AppServerPrivateKey?: AppServerPrivateKey;
+  }
+  export interface SidewalkUpdateImportInfo {
+    /**
+     * The CSV file contained in an S3 bucket that's used for appending devices to an existing import task.
+     */
+    DeviceCreationFile?: DeviceCreationFile;
   }
   export type SigningAlg = "Ed25519"|"P256r1"|string;
   export interface StartBulkAssociateWirelessDeviceWithMulticastGroupRequest {
@@ -3704,11 +4049,60 @@ declare namespace IoTWireless {
   }
   export interface StartMulticastGroupSessionResponse {
   }
+  export interface StartSingleWirelessDeviceImportTaskRequest {
+    /**
+     * The name of the Sidewalk destination that describes the IoT rule to route messages from the device in the import task that will be onboarded to AWS IoT Wireless.
+     */
+    DestinationName: DestinationName;
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The name of the wireless device for which an import task is being started.
+     */
+    DeviceName?: DeviceName;
+    Tags?: TagList;
+    /**
+     * The Sidewalk-related parameters for importing a single wireless device.
+     */
+    Sidewalk: SidewalkSingleStartImportInfo;
+  }
+  export interface StartSingleWirelessDeviceImportTaskResponse {
+    /**
+     * The import task ID.
+     */
+    Id?: ImportTaskId;
+    /**
+     * The ARN (Amazon Resource Name) of the import task.
+     */
+    Arn?: ImportTaskArn;
+  }
   export type StartTime = Date;
+  export interface StartWirelessDeviceImportTaskRequest {
+    /**
+     * The name of the Sidewalk destination that describes the IoT rule to route messages from the devices in the import task that are onboarded to AWS IoT Wireless.
+     */
+    DestinationName: DestinationName;
+    ClientRequestToken?: ClientRequestToken;
+    Tags?: TagList;
+    /**
+     * The Sidewalk-related parameters for importing wireless devices that need to be provisioned in bulk.
+     */
+    Sidewalk: SidewalkStartImportInfo;
+  }
+  export interface StartWirelessDeviceImportTaskResponse {
+    /**
+     * The import task ID.
+     */
+    Id?: ImportTaskId;
+    /**
+     * The ARN (Amazon Resource Name) of the import task.
+     */
+    Arn?: ImportTaskArn;
+  }
   export type Station = string;
+  export type StatusReason = string;
   export type SubBand = number;
   export type SubBands = SubBand[];
-  export type SupportedRfRegion = "EU868"|"US915"|"AU915"|"AS923-1"|string;
+  export type SupportedRfRegion = "EU868"|"US915"|"AU915"|"AS923-1"|"AS923-2"|"AS923-3"|"AS923-4"|"EU433"|"CN470"|"CN779"|"RU864"|"KR920"|"IN865"|string;
   export type Supports32BitFCnt = boolean;
   export type SupportsClassB = boolean;
   export type SupportsClassC = boolean;
@@ -4059,6 +4453,18 @@ declare namespace IoTWireless {
   export interface UpdateResourcePositionResponse {
   }
   export type UpdateSignature = string;
+  export interface UpdateWirelessDeviceImportTaskRequest {
+    /**
+     * The identifier of the import task to be updated.
+     */
+    Id: ImportTaskId;
+    /**
+     * The Sidewalk-related parameters of the import task to be updated.
+     */
+    Sidewalk: SidewalkUpdateImportInfo;
+  }
+  export interface UpdateWirelessDeviceImportTaskResponse {
+  }
   export interface UpdateWirelessDeviceRequest {
     /**
      * The ID of the resource to update.
@@ -4210,7 +4616,7 @@ declare namespace IoTWireless {
      */
     MacAddress: MacAddress;
     /**
-     * Recived signal strength of the WLAN measurement data.
+     * Received signal strength (dBm) of the WLAN measurement data.
      */
     Rss: RSS;
   }
@@ -4225,6 +4631,53 @@ declare namespace IoTWireless {
   export type WirelessDeviceFrameInfo = "ENABLED"|"DISABLED"|string;
   export type WirelessDeviceId = string;
   export type WirelessDeviceIdType = "WirelessDeviceId"|"DevEui"|"ThingName"|"SidewalkManufacturingSn"|string;
+  export interface WirelessDeviceImportTask {
+    /**
+     * The ID of the wireless device import task.
+     */
+    Id?: ImportTaskId;
+    /**
+     * The ARN (Amazon Resource Name) of the wireless device import task.
+     */
+    Arn?: ImportTaskArn;
+    /**
+     * The name of the Sidewalk destination that that describes the IoT rule to route messages from the device in the import task that will be onboarded to AWS IoT Wireless
+     */
+    DestinationName?: DestinationName;
+    /**
+     * The Sidewalk-related information of the wireless device import task.
+     */
+    Sidewalk?: SidewalkGetStartImportInfo;
+    /**
+     * The time at which the import task was created.
+     */
+    CreationTime?: CreationTime;
+    /**
+     * The status information of the wireless device import task.
+     */
+    Status?: ImportTaskStatus;
+    /**
+     * The reason that provides additional information about the import task status.
+     */
+    StatusReason?: StatusReason;
+    /**
+     * The summary information of count of wireless devices that are waiting for the control log to be added to an import task.
+     */
+    InitializedImportedDeviceCount?: ImportedWirelessDeviceCount;
+    /**
+     * The summary information of count of wireless devices in an import task that are waiting in the queue to be onboarded.
+     */
+    PendingImportedDeviceCount?: ImportedWirelessDeviceCount;
+    /**
+     * The summary information of count of wireless devices in an import task that have been onboarded to the import task.
+     */
+    OnboardedImportedDeviceCount?: ImportedWirelessDeviceCount;
+    /**
+     * The summary information of count of wireless devices in an import task that failed to onboarded to the import task.
+     */
+    FailedImportedDeviceCount?: ImportedWirelessDeviceCount;
+  }
+  export type WirelessDeviceImportTaskList = WirelessDeviceImportTask[];
   export type WirelessDeviceList = WirelessDeviceId[];
   export interface WirelessDeviceLogOption {
     /**
@@ -4236,6 +4689,7 @@ declare namespace IoTWireless {
   }
   export type WirelessDeviceLogOptionList = WirelessDeviceLogOption[];
   export type WirelessDeviceName = string;
+  export type WirelessDeviceSidewalkStatus = "PROVISIONED"|"REGISTERED"|"ACTIVATED"|"UNKNOWN"|string;
   export interface WirelessDeviceStatistics {
     /**
      * The Amazon Resource Name of the resource.

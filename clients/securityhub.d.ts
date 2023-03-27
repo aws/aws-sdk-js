@@ -116,11 +116,11 @@ declare class SecurityHub extends Service {
    */
   createMembers(callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Declines invitations to become a member account. This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.
+   * Declines invitations to become a member account. A prospective member account uses this operation to decline an invitation to become a member. This operation is only called by member accounts that aren't part of an organization. Organization accounts don't receive invitations.
    */
   declineInvitations(params: SecurityHub.Types.DeclineInvitationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeclineInvitationsResponse) => void): Request<SecurityHub.Types.DeclineInvitationsResponse, AWSError>;
   /**
-   * Declines invitations to become a member account. This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.
+   * Declines invitations to become a member account. A prospective member account uses this operation to decline an invitation to become a member. This operation is only called by member accounts that aren't part of an organization. Organization accounts don't receive invitations.
    */
   declineInvitations(callback?: (err: AWSError, data: SecurityHub.Types.DeclineInvitationsResponse) => void): Request<SecurityHub.Types.DeclineInvitationsResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class SecurityHub extends Service {
    */
   deleteInsight(callback?: (err: AWSError, data: SecurityHub.Types.DeleteInsightResponse) => void): Request<SecurityHub.Types.DeleteInsightResponse, AWSError>;
   /**
-   * Deletes invitations received by the Amazon Web Services account to become a member account. This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.
+   * Deletes invitations received by the Amazon Web Services account to become a member account. A Security Hub administrator account can use this operation to delete invitations sent to one or more member accounts. This operation is only used to delete invitations that are sent to member accounts that aren't part of an organization. Organization accounts don't receive invitations.
    */
   deleteInvitations(params: SecurityHub.Types.DeleteInvitationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteInvitationsResponse) => void): Request<SecurityHub.Types.DeleteInvitationsResponse, AWSError>;
   /**
-   * Deletes invitations received by the Amazon Web Services account to become a member account. This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.
+   * Deletes invitations received by the Amazon Web Services account to become a member account. A Security Hub administrator account can use this operation to delete invitations sent to one or more member accounts. This operation is only used to delete invitations that are sent to member accounts that aren't part of an organization. Organization accounts don't receive invitations.
    */
   deleteInvitations(callback?: (err: AWSError, data: SecurityHub.Types.DeleteInvitationsResponse) => void): Request<SecurityHub.Types.DeleteInvitationsResponse, AWSError>;
   /**
@@ -655,6 +655,43 @@ declare namespace SecurityHub {
     StandardsId?: NonEmptyString;
   }
   export type AssociatedStandardsList = AssociatedStandard[];
+  export interface AssociationSetDetails {
+    /**
+     *  The state of the association between a route table and a subnet or gateway. 
+     */
+    AssociationState?: AssociationStateDetails;
+    /**
+     *  The ID of the internet gateway or virtual private gateway. 
+     */
+    GatewayId?: NonEmptyString;
+    /**
+     *  Indicates whether this is the main route table. 
+     */
+    Main?: Boolean;
+    /**
+     *  The ID of the association. 
+     */
+    RouteTableAssociationId?: NonEmptyString;
+    /**
+     *  The ID of the route table. 
+     */
+    RouteTableId?: NonEmptyString;
+    /**
+     *  The ID of the subnet. A subnet ID is not returned for an implicit association. 
+     */
+    SubnetId?: NonEmptyString;
+  }
+  export type AssociationSetList = AssociationSetDetails[];
+  export interface AssociationStateDetails {
+    /**
+     *  The state of the association. 
+     */
+    State?: NonEmptyString;
+    /**
+     *  The status message, if applicable. 
+     */
+    StatusMessage?: NonEmptyString;
+  }
   export type AssociationStatus = "ENABLED"|"DISABLED"|string;
   export type AutoEnableStandards = "NONE"|"DEFAULT"|string;
   export interface AvailabilityZone {
@@ -2785,6 +2822,10 @@ declare namespace SecurityHub {
      * Details about the metadata options for the Amazon EC2 instance. 
      */
     MetadataOptions?: AwsEc2InstanceMetadataOptions;
+    /**
+     *  Describes the type of monitoring that’s turned on for an instance. 
+     */
+    Monitoring?: AwsEc2InstanceMonitoringDetails;
   }
   export interface AwsEc2InstanceMetadataOptions {
     /**
@@ -2807,6 +2848,12 @@ declare namespace SecurityHub {
      * Specifies whether to allow access to instance tags from the instance metadata. 
      */
     InstanceMetadataTags?: NonEmptyString;
+  }
+  export interface AwsEc2InstanceMonitoringDetails {
+    /**
+     *  Indicates whether detailed monitoring is turned on. Otherwise, basic monitoring is turned on. 
+     */
+    State?: NonEmptyString;
   }
   export interface AwsEc2InstanceNetworkInterfacesDetails {
     /**
@@ -3655,6 +3702,32 @@ declare namespace SecurityHub {
     GroupId?: NonEmptyString;
   }
   export type AwsEc2NetworkInterfaceSecurityGroupList = AwsEc2NetworkInterfaceSecurityGroup[];
+  export interface AwsEc2RouteTableDetails {
+    /**
+     *  The associations between a route table and one or more subnets or a gateway. 
+     */
+    AssociationSet?: AssociationSetList;
+    /**
+     *  The ID of the Amazon Web Services account that owns the route table. 
+     */
+    OwnerId?: NonEmptyString;
+    /**
+     *  Describes a virtual private gateway propagating route. 
+     */
+    PropagatingVgwSet?: PropagatingVgwSetList;
+    /**
+     *  The ID of the route table. 
+     */
+    RouteTableId?: NonEmptyString;
+    /**
+     *  The routes in the route table. 
+     */
+    RouteSet?: RouteSetList;
+    /**
+     *  The ID of the virtual private cloud (VPC). 
+     */
+    VpcId?: NonEmptyString;
+  }
   export interface AwsEc2SecurityGroupDetails {
     /**
      * The name of the security group.
@@ -5427,6 +5500,10 @@ declare namespace SecurityHub {
      * The subnets that are associated with the cluster.
      */
     SubnetIds?: NonEmptyStringList;
+    /**
+     *  Indicates whether the Amazon EKS public API server endpoint is turned on. If the Amazon EKS public API server endpoint is turned off, your cluster's Kubernetes API server can only receive requests that originate from within the cluster VPC. 
+     */
+    EndpointPublicAccess?: Boolean;
   }
   export interface AwsElasticBeanstalkEnvironmentDetails {
     /**
@@ -8560,6 +8637,10 @@ declare namespace SecurityHub {
      * The versioning state of an S3 bucket.
      */
     BucketVersioningConfiguration?: AwsS3BucketBucketVersioningConfiguration;
+    /**
+     *  Specifies which rule Amazon S3 applies by default to every new object placed in the specified bucket. 
+     */
+    ObjectLockConfiguration?: AwsS3BucketObjectLockConfiguration;
   }
   export interface AwsS3BucketLoggingConfiguration {
     /**
@@ -8621,6 +8702,36 @@ declare namespace SecurityHub {
   }
   export type AwsS3BucketNotificationConfigurationS3KeyFilterRuleName = "Prefix"|"Suffix"|string;
   export type AwsS3BucketNotificationConfigurationS3KeyFilterRules = AwsS3BucketNotificationConfigurationS3KeyFilterRule[];
+  export interface AwsS3BucketObjectLockConfiguration {
+    /**
+     *  Indicates whether the bucket has an Object Lock configuration enabled. 
+     */
+    ObjectLockEnabled?: NonEmptyString;
+    /**
+     *  Specifies the Object Lock rule for the specified object. 
+     */
+    Rule?: AwsS3BucketObjectLockConfigurationRuleDetails;
+  }
+  export interface AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails {
+    /**
+     *  The number of days that you want to specify for the default retention period. 
+     */
+    Days?: Integer;
+    /**
+     *  The default Object Lock retention mode you want to apply to new objects placed in the specified bucket. 
+     */
+    Mode?: NonEmptyString;
+    /**
+     *  The number of years that you want to specify for the default retention period. 
+     */
+    Years?: Integer;
+  }
+  export interface AwsS3BucketObjectLockConfigurationRuleDetails {
+    /**
+     *  The default Object Lock retention mode and period that you want to apply to new objects placed in the specified bucket. 
+     */
+    DefaultRetention?: AwsS3BucketObjectLockConfigurationRuleDefaultRetentionDetails;
+  }
   export interface AwsS3BucketServerSideEncryptionByDefault {
     /**
      * Server-side encryption algorithm to use for the default encryption. Valid values are aws: kms or AES256.
@@ -9201,7 +9312,7 @@ declare namespace SecurityHub {
      */
     ProcessPid?: NumberFilterList;
     /**
-     * The parent process ID.
+     * The parent process ID. This field accepts positive integers between O and 2147483647.
      */
     ProcessParentPid?: NumberFilterList;
     /**
@@ -10630,7 +10741,7 @@ declare namespace SecurityHub {
   export type DateRangeUnit = "DAYS"|string;
   export interface DeclineInvitationsRequest {
     /**
-     * The list of account IDs for the accounts from which to decline the invitations to Security Hub.
+     * The list of prospective member account IDs for which to decline an invitation.
      */
     AccountIds: AccountIdList;
   }
@@ -10674,7 +10785,7 @@ declare namespace SecurityHub {
   }
   export interface DeleteInvitationsRequest {
     /**
-     * The list of the account IDs that sent the invitations to delete.
+     * The list of member account IDs that received the invitations you want to delete.
      */
     AccountIds: AccountIdList;
   }
@@ -10740,7 +10851,7 @@ declare namespace SecurityHub {
      */
     AutoEnableControls?: Boolean;
     /**
-     * Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to SECURITY_CONTROL, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards. If the value for this field is set to STANDARD_CONTROL, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards. The value for this field in a member account matches the value in the administrator account. For accounts that aren't part of an organization, the default value of this field is SECURITY_CONTROL if you enabled Security Hub on or after February 9, 2023.
+     * Specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to SECURITY_CONTROL, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards. If the value for this field is set to STANDARD_CONTROL, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards. The value for this field in a member account matches the value in the administrator account. For accounts that aren't part of an organization, the default value of this field is SECURITY_CONTROL if you enabled Security Hub on or after February 23, 2023.
      */
     ControlFindingGenerator?: ControlFindingGenerator;
   }
@@ -10909,7 +11020,7 @@ declare namespace SecurityHub {
      */
     EnableDefaultStandards?: Boolean;
     /**
-     * This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to SECURITY_CONTROL, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards. If the value for this field is set to STANDARD_CONTROL, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards. The value for this field in a member account matches the value in the administrator account. For accounts that aren't part of an organization, the default value of this field is SECURITY_CONTROL if you enabled Security Hub on or after February 9, 2023.
+     * This field, used when enabling Security Hub, specifies whether the calling account has consolidated control findings turned on. If the value for this field is set to SECURITY_CONTROL, Security Hub generates a single finding for a control check even when the check applies to multiple enabled standards. If the value for this field is set to STANDARD_CONTROL, Security Hub generates separate findings for a control check when the check applies to multiple enabled standards. The value for this field in a member account matches the value in the administrator account. For accounts that aren't part of an organization, the default value of this field is SECURITY_CONTROL if you enabled Security Hub on or after February 23, 2023.
      */
     ControlFindingGenerator?: ControlFindingGenerator;
   }
@@ -11885,7 +11996,7 @@ declare namespace SecurityHub {
      */
     Pid?: Integer;
     /**
-     * The parent process ID.
+     * The parent process ID. This field accepts positive integers between O and 2147483647.
      */
     ParentPid?: Integer;
     /**
@@ -11937,6 +12048,13 @@ declare namespace SecurityHub {
   }
   export type ProductSubscriptionArnList = NonEmptyString[];
   export type ProductsList = Product[];
+  export interface PropagatingVgwSetDetails {
+    /**
+     *  The ID of the virtual private gateway. 
+     */
+    GatewayId?: NonEmptyString;
+  }
+  export type PropagatingVgwSetList = PropagatingVgwSetDetails[];
   export interface Range {
     /**
      * The number of lines (for a line range) or characters (for an offset range) from the beginning of the file to the end of the sensitive data.
@@ -12350,6 +12468,10 @@ declare namespace SecurityHub {
     AwsSageMakerNotebookInstance?: AwsSageMakerNotebookInstanceDetails;
     AwsWafv2WebAcl?: AwsWafv2WebAclDetails;
     AwsWafv2RuleGroup?: AwsWafv2RuleGroupDetails;
+    /**
+     *  Provides details about a route table. A route table contains a set of rules, called routes, that determine where to direct network traffic from your subnet or gateway. 
+     */
+    AwsEc2RouteTable?: AwsEc2RouteTableDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {
@@ -12363,6 +12485,73 @@ declare namespace SecurityHub {
     ProcessingResult?: NonEmptyString;
   }
   export type ResultList = Result[];
+  export interface RouteSetDetails {
+    /**
+     *  The ID of the carrier gateway. 
+     */
+    CarrierGatewayId?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the core network. 
+     */
+    CoreNetworkArn?: NonEmptyString;
+    /**
+     *  The IPv4 CIDR block used for the destination match. 
+     */
+    DestinationCidrBlock?: NonEmptyString;
+    /**
+     *  The IPv6 CIDR block used for the destination match. 
+     */
+    DestinationIpv6CidrBlock?: NonEmptyString;
+    /**
+     *  The prefix of the destination Amazon Web Service. 
+     */
+    DestinationPrefixListId?: NonEmptyString;
+    /**
+     *  The ID of the egress-only internet gateway. 
+     */
+    EgressOnlyInternetGatewayId?: NonEmptyString;
+    /**
+     *  The ID of a gateway attached to your VPC. 
+     */
+    GatewayId?: NonEmptyString;
+    /**
+     *  The ID of a NAT instance in your VPC. 
+     */
+    InstanceId?: NonEmptyString;
+    /**
+     *  The ID of the Amazon Web Services account that owns the instance. 
+     */
+    InstanceOwnerId?: NonEmptyString;
+    /**
+     *  The ID of the local gateway. 
+     */
+    LocalGatewayId?: NonEmptyString;
+    /**
+     *  The ID of a NAT gateway. 
+     */
+    NatGatewayId?: NonEmptyString;
+    /**
+     *  The ID of the network interface. 
+     */
+    NetworkInterfaceId?: NonEmptyString;
+    /**
+     *  Describes how the route was created. 
+     */
+    Origin?: NonEmptyString;
+    /**
+     *  The state of the route. 
+     */
+    State?: NonEmptyString;
+    /**
+     *  The ID of a transit gateway. 
+     */
+    TransitGatewayId?: NonEmptyString;
+    /**
+     *  The ID of a VPC peering connection. 
+     */
+    VpcPeeringConnectionId?: NonEmptyString;
+  }
+  export type RouteSetList = RouteSetDetails[];
   export interface RuleGroupDetails {
     /**
      * Additional settings to use in the specified rules.

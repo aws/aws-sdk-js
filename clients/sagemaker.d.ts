@@ -85,19 +85,19 @@ declare class SageMaker extends Service {
    */
   createArtifact(callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
   /**
-   * Creates an Autopilot job. Find the best-performing model after you run an Autopilot job by calling . For information about how to use Autopilot, see Automate Model Development with Amazon SageMaker Autopilot.
+   * Creates an Autopilot job. Find the best-performing model after you run an Autopilot job by calling  DescribeAutoMLJob . For information about how to use Autopilot, see Automate Model Development with Amazon SageMaker Autopilot.
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job. Find the best-performing model after you run an Autopilot job by calling . For information about how to use Autopilot, see Automate Model Development with Amazon SageMaker Autopilot.
+   * Creates an Autopilot job. Find the best-performing model after you run an Autopilot job by calling  DescribeAutoMLJob . For information about how to use Autopilot, see Automate Model Development with Amazon SageMaker Autopilot.
    */
   createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems. Find the resulting model after you run an AutoML job V2 by calling . To create an AutoMLJob using tabular data, see .  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   * Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems. Find the resulting model after you run an AutoML job V2 by calling  DescribeAutoMLJobV2 . To create an AutoMLJob using tabular data, see  CreateAutoMLJob .  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
    */
   createAutoMLJobV2(params: SageMaker.Types.CreateAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
-   * Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems. Find the resulting model after you run an AutoML job V2 by calling . To create an AutoMLJob using tabular data, see .  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   * Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems. Find the resulting model after you run an AutoML job V2 by calling  DescribeAutoMLJobV2 . To create an AutoMLJob using tabular data, see  CreateAutoMLJob .  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
    */
   createAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
@@ -3108,7 +3108,7 @@ declare namespace SageMaker {
      */
     FeatureSpecificationS3Uri?: S3Uri;
     /**
-     * Stores the configuration information for the selection of algorithms used to train the model candidates. The list of available algorithms to choose from depends on the training mode set in  AutoMLJobConfig.Mode .    AlgorithmsConfig should not be set in AUTO training mode.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.   When AlgorithmsConfig is not provided, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.   For the list of all algorithms per training mode, see . For more information on each algorithm, see the Algorithm support section in Autopilot developer guide.
+     * Stores the configuration information for the selection of algorithms used to train the model candidates. The list of available algorithms to choose from depends on the training mode set in  AutoMLJobConfig.Mode .    AlgorithmsConfig should not be set in AUTO training mode.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.   When AlgorithmsConfig is not provided, AutoMLCandidateGenerationConfig uses the full set of algorithms for the given training mode.   For the list of all algorithms per training mode, see   AutoMLAlgorithmConfig . For more information on each algorithm, see the Algorithm support section in Autopilot developer guide.
      */
     AlgorithmsConfig?: AutoMLAlgorithmsConfig;
   }
@@ -3152,15 +3152,15 @@ declare namespace SageMaker {
   export type AutoMLChannelType = "training"|"validation"|string;
   export interface AutoMLContainerDefinition {
     /**
-     * The Amazon Elastic Container Registry (Amazon ECR) path of the container. For more information, see .
+     * The Amazon Elastic Container Registry (Amazon ECR) path of the container. For more information, see   ContainerDefinition .
      */
     Image: ContainerImage;
     /**
-     * The location of the model artifacts. For more information, see .
+     * The location of the model artifacts. For more information, see   ContainerDefinition .
      */
     ModelDataUrl: Url;
     /**
-     * The environment variables to set in the container. For more information, see .
+     * The environment variables to set in the container. For more information, see   ContainerDefinition .
      */
     Environment?: EnvironmentMap;
   }
@@ -3215,7 +3215,7 @@ declare namespace SageMaker {
      */
     MaxCandidates?: MaxCandidates;
     /**
-     * The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the used by the action. For V2 jobs (jobs created by calling CreateAutoMLJobV2), this field controls the runtime of the job candidate.
+     * The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the  StoppingCondition  used by the  CreateHyperParameterTuningJob  action. For V2 jobs (jobs created by calling CreateAutoMLJobV2), this field controls the runtime of the job candidate.
      */
     MaxRuntimePerTrainingJobInSeconds?: MaxRuntimePerTrainingJobInSeconds;
     /**
@@ -4309,7 +4309,7 @@ declare namespace SageMaker {
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * An array of channel objects that describes the input data and its location. Each channel is a named input source. Similar to InputDataConfig supported by . Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the training dataset. There is not a minimum number of rows required for the validation dataset.
+     * An array of channel objects that describes the input data and its location. Each channel is a named input source. Similar to InputDataConfig supported by  HyperParameterTrainingJobDefinition . Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the training dataset. There is not a minimum number of rows required for the validation dataset.
      */
     InputDataConfig: AutoMLInputDataConfig;
     /**
@@ -4317,11 +4317,11 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * Defines the type of supervised learning problem available for the candidates. For more information, see  Amazon SageMaker Autopilot problem types and algorithm support.
+     * Defines the type of supervised learning problem available for the candidates. For more information, see  Amazon SageMaker Autopilot problem types.
      */
     ProblemType?: ProblemType;
     /**
-     * Defines the objective metric used to measure the predictive quality of an AutoML job. You provide an AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it. For , only Accuracy is supported.
+     * Defines the objective metric used to measure the predictive quality of an AutoML job. You provide an  AutoMLJobObjective$MetricName  and Autopilot infers whether to minimize or maximize it. For  CreateAutoMLJobV2 , only Accuracy is supported.
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -4357,7 +4357,7 @@ declare namespace SageMaker {
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to InputDataConfig supported by CreateAutoMLJob. The supported formats depend on the problem type:   ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile    TextClassification: S3Prefix  
+     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to  InputDataConfig  supported by CreateAutoMLJob. The supported formats depend on the problem type:   ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile    TextClassification: S3Prefix  
      */
     AutoMLJobInputDataConfig: AutoMLJobInputDataConfig;
     /**
@@ -4381,7 +4381,7 @@ declare namespace SageMaker {
      */
     SecurityConfig?: AutoMLSecurityConfig;
     /**
-     * Specifies a metric to minimize or maximize as the objective of a job. For , only Accuracy is supported.
+     * Specifies a metric to minimize or maximize as the objective of a job. For  CreateAutoMLJobV2 , only Accuracy is supported.
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -11213,7 +11213,7 @@ declare namespace SageMaker {
      */
     Type?: AutoMLJobObjectiveType;
     /**
-     * The name of the metric with the best result. For a description of the possible objective metrics, see AutoMLJobObjective$MetricName.
+     * The name of the metric with the best result. For a description of the possible objective metrics, see  AutoMLJobObjective$MetricName .
      */
     MetricName: AutoMLMetricEnum;
     /**
@@ -12040,7 +12040,7 @@ declare namespace SageMaker {
      */
     MinResource?: HyperbandStrategyMinResource;
     /**
-     * The maximum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. Once a job reaches the MaxResource value, it is stopped. If a value for MaxResource is not provided, and Hyperband is selected as the hyperparameter tuning strategy, HyperbandTrainingJ attempts to infer MaxResource from the following keys (if present) in StaticsHyperParameters:    epochs     numepochs     n-epochs     n_epochs     num_epochs    If HyperbandStrategyConfig is unable to infer a value for MaxResource, it generates a validation error. The maximum value is 20,000 epochs. All metrics that correspond to an objective metric are used to derive early stopping decisions. For distributive training jobs, ensure that duplicate metrics are not printed in the logs across the individual nodes in a training job. If multiple nodes are publishing duplicate or incorrect metrics, training jobs may make an incorrect stopping decision and stop the job prematurely. 
+     * The maximum number of resources (such as epochs) that can be used by a training job launched by a hyperparameter tuning job. Once a job reaches the MaxResource value, it is stopped. If a value for MaxResource is not provided, and Hyperband is selected as the hyperparameter tuning strategy, HyperbandTrainingJ attempts to infer MaxResource from the following keys (if present) in  StaticsHyperParameters :    epochs     numepochs     n-epochs     n_epochs     num_epochs    If HyperbandStrategyConfig is unable to infer a value for MaxResource, it generates a validation error. The maximum value is 20,000 epochs. All metrics that correspond to an objective metric are used to derive early stopping decisions. For distributive training jobs, ensure that duplicate metrics are not printed in the logs across the individual nodes in a training job. If multiple nodes are publishing duplicate or incorrect metrics, training jobs may make an incorrect stopping decision and stop the job prematurely. 
      */
     MaxResource?: HyperbandStrategyMaxResource;
   }
@@ -16006,7 +16006,7 @@ declare namespace SageMaker {
      */
     Name: MetricName;
     /**
-     * A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see Defining Objective Metrics.
+     * A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see Defining metrics and environment variables.
      */
     Regex: MetricRegex;
   }

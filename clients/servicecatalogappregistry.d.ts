@@ -20,11 +20,11 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   associateAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.AssociateAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.AssociateAttributeGroupResponse, AWSError>;
   /**
-   * Associates a resource with an application. Both the resource and the application can be specified either by ID or name.
+   *  Associates a resource with an application. The resource can be specified by its ARN or name. The application can be specified by ARN, ID, or name. 
    */
   associateResource(params: ServiceCatalogAppRegistry.Types.AssociateResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.AssociateResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.AssociateResourceResponse, AWSError>;
   /**
-   * Associates a resource with an application. Both the resource and the application can be specified either by ID or name.
+   *  Associates a resource with an application. The resource can be specified by its ARN or name. The application can be specified by ARN, ID, or name. 
    */
   associateResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.AssociateResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.AssociateResourceResponse, AWSError>;
   /**
@@ -44,19 +44,19 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   createAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.CreateAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.CreateAttributeGroupResponse, AWSError>;
   /**
-   * Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.
+   * Deletes an application that is specified either by its application ID, name, or ARN. All associated attribute groups and resources must be disassociated from it before deleting an application.
    */
   deleteApplication(params: ServiceCatalogAppRegistry.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.DeleteApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.
+   * Deletes an application that is specified either by its application ID, name, or ARN. All associated attribute groups and resources must be disassociated from it before deleting an application.
    */
   deleteApplication(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.DeleteApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.DeleteApplicationResponse, AWSError>;
   /**
-   * Deletes an attribute group, specified either by its attribute group ID or name.
+   * Deletes an attribute group, specified either by its attribute group ID, name, or ARN.
    */
   deleteAttributeGroup(params: ServiceCatalogAppRegistry.Types.DeleteAttributeGroupRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.DeleteAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.DeleteAttributeGroupResponse, AWSError>;
   /**
-   * Deletes an attribute group, specified either by its attribute group ID or name.
+   * Deletes an attribute group, specified either by its attribute group ID, name, or ARN.
    */
   deleteAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.DeleteAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.DeleteAttributeGroupResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   disassociateResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.DisassociateResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.DisassociateResourceResponse, AWSError>;
   /**
-   * Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a ResourceNotFoundException is thrown, avoiding the ABA addressing problem.
+   *  Retrieves metadata information about one of your applications. The application can be specified by its ARN, ID, or name (which is unique within one account in one region at a given point in time). Specify by ARN or ID in automated workflows if you want to make sure that the exact same application is returned or a ResourceNotFoundException is thrown, avoiding the ABA addressing problem. 
    */
   getApplication(params: ServiceCatalogAppRegistry.Types.GetApplicationRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetApplicationResponse, AWSError>;
   /**
-   * Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a ResourceNotFoundException is thrown, avoiding the ABA addressing problem.
+   *  Retrieves metadata information about one of your applications. The application can be specified by its ARN, ID, or name (which is unique within one account in one region at a given point in time). Specify by ARN or ID in automated workflows if you want to make sure that the exact same application is returned or a ResourceNotFoundException is thrown, avoiding the ABA addressing problem. 
    */
   getApplication(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetApplicationResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   getAssociatedResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAssociatedResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAssociatedResourceResponse, AWSError>;
   /**
-   * Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.
+   *  Retrieves an attribute group by its ARN, ID, or name. The attribute group can be specified by its ARN, ID, or name. 
    */
   getAttributeGroup(params: ServiceCatalogAppRegistry.Types.GetAttributeGroupRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse, AWSError>;
   /**
-   * Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.
+   *  Retrieves an attribute group by its ARN, ID, or name. The attribute group can be specified by its ARN, ID, or name. 
    */
   getAttributeGroup(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse, AWSError>;
   /**
@@ -270,11 +270,11 @@ declare namespace ServiceCatalogAppRegistry {
   export type Arn = string;
   export interface AssociateAttributeGroupRequest {
     /**
-     * The name or ID of the application.
+     *  The name, ID, or ARN of the application. 
      */
     application: ApplicationSpecifier;
     /**
-     * The name or ID of the attribute group that holds the attributes to describe the application.
+     *  The name, ID, or ARN of the attribute group that holds the attributes to describe the application. 
      */
     attributeGroup: AttributeGroupSpecifier;
   }
@@ -290,7 +290,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface AssociateResourceRequest {
     /**
-     * The name or ID of the application.
+     *  The name, ID, or ARN of the application. 
      */
     application: ApplicationSpecifier;
     /**
@@ -357,6 +357,10 @@ declare namespace ServiceCatalogAppRegistry {
      *   This field is no longer supported. We recommend you don't use the field when using ListAttributeGroupsForApplication.    The name of the attribute group. 
      */
     name?: Name;
+    /**
+     * The service principal that created the attribute group.
+     */
+    createdBy?: CreatedBy;
   }
   export type AttributeGroupDetailsList = AttributeGroupDetails[];
   export type AttributeGroupId = string;
@@ -388,6 +392,10 @@ declare namespace ServiceCatalogAppRegistry {
      * The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.
      */
     lastUpdateTime?: Timestamp;
+    /**
+     * The service principal that created the attribute group.
+     */
+    createdBy?: CreatedBy;
   }
   export type Attributes = string;
   export type ClientToken = string;
@@ -443,9 +451,10 @@ declare namespace ServiceCatalogAppRegistry {
      */
     attributeGroup?: AttributeGroup;
   }
+  export type CreatedBy = string;
   export interface DeleteApplicationRequest {
     /**
-     * The name or ID of the application.
+     *  The name, ID, or ARN of the application. 
      */
     application: ApplicationSpecifier;
   }
@@ -457,7 +466,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface DeleteAttributeGroupRequest {
     /**
-     * The name or ID of the attribute group that holds the attributes to describe the application.
+     *  The name, ID, or ARN of the attribute group that holds the attributes to describe the application. 
      */
     attributeGroup: AttributeGroupSpecifier;
   }
@@ -470,11 +479,11 @@ declare namespace ServiceCatalogAppRegistry {
   export type Description = string;
   export interface DisassociateAttributeGroupRequest {
     /**
-     * The name or ID of the application.
+     *  The name, ID, or ARN of the application. 
      */
     application: ApplicationSpecifier;
     /**
-     * The name or ID of the attribute group that holds the attributes to describe the application.
+     *  The name, ID, or ARN of the attribute group that holds the attributes to describe the application. 
      */
     attributeGroup: AttributeGroupSpecifier;
   }
@@ -514,7 +523,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface GetApplicationRequest {
     /**
-     * The name or ID of the application.
+     *  The name, ID, or ARN of the application. 
      */
     application: ApplicationSpecifier;
   }
@@ -558,7 +567,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface GetAssociatedResourceRequest {
     /**
-     * The name or ID of the application.
+     *  The name, ID, or ARN of the application. 
      */
     application: ApplicationSpecifier;
     /**
@@ -578,7 +587,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface GetAttributeGroupRequest {
     /**
-     * The name or ID of the attribute group that holds the attributes to describe the application.
+     *  The name, ID, or ARN of the attribute group that holds the attributes to describe the application. 
      */
     attributeGroup: AttributeGroupSpecifier;
   }
@@ -615,6 +624,10 @@ declare namespace ServiceCatalogAppRegistry {
      * Key-value pairs associated with the attribute group.
      */
     tags?: Tags;
+    /**
+     * The service principal that created the attribute group.
+     */
+    createdBy?: CreatedBy;
   }
   export interface GetConfigurationResponse {
     /**
@@ -674,7 +687,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface ListAssociatedResourcesRequest {
     /**
-     * The name or ID of the application.
+     *  The name, ID, or ARN of the application. 
      */
     application: ApplicationSpecifier;
     /**
@@ -892,7 +905,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface UpdateApplicationRequest {
     /**
-     * The name or ID of the application that will be updated.
+     *  The name, ID, or ARN of the application that will be updated. 
      */
     application: ApplicationSpecifier;
     /**
@@ -912,7 +925,7 @@ declare namespace ServiceCatalogAppRegistry {
   }
   export interface UpdateAttributeGroupRequest {
     /**
-     * The name or ID of the attribute group that holds the attributes to describe the application.
+     *  The name, ID, or ARN of the attribute group that holds the attributes to describe the application. 
      */
     attributeGroup: AttributeGroupSpecifier;
     /**

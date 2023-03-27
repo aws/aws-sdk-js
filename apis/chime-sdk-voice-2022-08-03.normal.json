@@ -49,7 +49,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Associates phone numbers with the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "AssociatePhoneNumbersWithVoiceConnectorGroup": {
       "name": "AssociatePhoneNumbersWithVoiceConnectorGroup",
@@ -89,7 +90,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Associates phone numbers with the specified Amazon Chime SDK Voice Connector group.</p>"
     },
     "BatchDeletePhoneNumber": {
       "name": "BatchDeletePhoneNumber",
@@ -126,7 +128,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p> Moves phone numbers into the <b>Deletion queue</b>. Phone numbers must be disassociated from any users or Amazon Chime SDK Voice Connectors before they can be deleted. </p> <p> Phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently. </p>"
     },
     "BatchUpdatePhoneNumber": {
       "name": "BatchUpdatePhoneNumber",
@@ -163,7 +166,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates one or more phone numbers.</p>"
     },
     "CreatePhoneNumberOrder": {
       "name": "CreatePhoneNumberOrder",
@@ -203,7 +207,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates an order for phone numbers to be provisioned. For numbers outside the U.S., you must use the Amazon Chime SDK SIP media application dial-in product type.</p>"
     },
     "CreateProxySession": {
       "name": "CreateProxySession",
@@ -240,7 +245,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates a proxy session for the specified Amazon Chime SDK Voice Connector for the specified participant phone numbers.</p>"
     },
     "CreateSipMediaApplication": {
       "name": "CreateSipMediaApplication",
@@ -283,7 +289,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates a SIP media application. For more information about SIP media applications, see <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/ag/manage-sip-applications.html\">Managing SIP media applications and rules</a> in the <i>Amazon Chime SDK Administrator Guide</i>.</p>"
     },
     "CreateSipMediaApplicationCall": {
       "name": "CreateSipMediaApplicationCall",
@@ -323,7 +330,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified <code>sipMediaApplicationId</code>.</p>"
     },
     "CreateSipRule": {
       "name": "CreateSipRule",
@@ -366,7 +374,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates a SIP rule, which can be used to run a SIP media application as a target for a specific trigger type. For more information about SIP rules, see <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/ag/manage-sip-applications.html\">Managing SIP media applications and rules</a> in the <i>Amazon Chime SDK Administrator Guide</i>.</p>"
     },
     "CreateVoiceConnector": {
       "name": "CreateVoiceConnector",
@@ -406,7 +415,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates an Amazon Chime SDK Voice Connector. For more information about Voice Connectors, see <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/ag/voice-connector-groups.html\">Managing Amazon Chime SDK Voice Connector groups</a> in the <i>Amazon Chime SDK Administrator Guide</i>.</p>"
     },
     "CreateVoiceConnectorGroup": {
       "name": "CreateVoiceConnectorGroup",
@@ -446,7 +456,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates an Amazon Chime SDK Voice Connector group under the administrator's AWS account. You can associate Amazon Chime SDK Voice Connectors with the Voice Connector group by including <code>VoiceConnectorItems</code> in the request. </p> <p>You can include Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>"
     },
     "CreateVoiceProfile": {
       "name": "CreateVoiceProfile",
@@ -495,7 +506,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates a voice profile, which consists of an enrolled user and their latest voice print.</p> <important> <p>Before creating any voice profiles, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the <a href=\"https://aws.amazon.com/service-terms/\">AWS service terms</a> for the Amazon Chime SDK.</p> </important> <p>For more information about voice profiles and voice analytics, see <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html\">Using Amazon Chime SDK Voice Analytics</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p>"
     },
     "CreateVoiceProfileDomain": {
       "name": "CreateVoiceProfileDomain",
@@ -538,7 +550,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Creates a voice profile domain, a collection of voice profiles, their voice prints, and encrypted enrollment audio.</p> <important> <p>Before creating any voice profiles, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the <a href=\"https://aws.amazon.com/service-terms/\">AWS service terms</a> for the Amazon Chime SDK.</p> </important> <p>For more information about voice profile domains, see <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html\">Using Amazon Chime SDK Voice Analytics</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p>"
     },
     "DeletePhoneNumber": {
       "name": "DeletePhoneNumber",
@@ -572,7 +585,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Moves the specified phone number into the <b>Deletion queue</b>. A phone number must be disassociated from any users or Amazon Chime SDK Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> queue for 7 days before they are deleted permanently.</p>"
     },
     "DeleteProxySession": {
       "name": "DeleteProxySession",
@@ -606,7 +620,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes the specified proxy session from the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "DeleteSipMediaApplication": {
       "name": "DeleteSipMediaApplication",
@@ -643,7 +658,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes a SIP media application.</p>"
     },
     "DeleteSipRule": {
       "name": "DeleteSipRule",
@@ -680,7 +696,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes a SIP rule.</p>"
     },
     "DeleteVoiceConnector": {
       "name": "DeleteVoiceConnector",
@@ -717,7 +734,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes an Amazon Chime SDK Voice Connector. Any phone numbers associated with the Amazon Chime SDK Voice Connector must be disassociated from it before it can be deleted.</p>"
     },
     "DeleteVoiceConnectorEmergencyCallingConfiguration": {
       "name": "DeleteVoiceConnectorEmergencyCallingConfiguration",
@@ -751,7 +769,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes the emergency calling details from the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "DeleteVoiceConnectorGroup": {
       "name": "DeleteVoiceConnectorGroup",
@@ -788,7 +807,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes an Amazon Chime SDK Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted.</p>"
     },
     "DeleteVoiceConnectorOrigination": {
       "name": "DeleteVoiceConnectorOrigination",
@@ -822,7 +842,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes the origination settings for the specified Amazon Chime SDK Voice Connector. </p> <note> <p>If emergency calling is configured for the Voice Connector, it must be deleted prior to deleting the origination settings.</p> </note>"
     },
     "DeleteVoiceConnectorProxy": {
       "name": "DeleteVoiceConnectorProxy",
@@ -856,7 +877,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes the proxy configuration from the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "DeleteVoiceConnectorStreamingConfiguration": {
       "name": "DeleteVoiceConnectorStreamingConfiguration",
@@ -890,7 +912,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes a Voice Connector's streaming configuration.</p>"
     },
     "DeleteVoiceConnectorTermination": {
       "name": "DeleteVoiceConnectorTermination",
@@ -924,7 +947,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes the termination settings for the specified Amazon Chime SDK Voice Connector.</p> <note> <p>If emergency calling is configured for the Voice Connector, it must be deleted prior to deleting the termination settings.</p> </note>"
     },
     "DeleteVoiceConnectorTerminationCredentials": {
       "name": "DeleteVoiceConnectorTerminationCredentials",
@@ -958,7 +982,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes the specified SIP credentials used by your equipment to authenticate during call termination.</p>"
     },
     "DeleteVoiceProfile": {
       "name": "DeleteVoiceProfile",
@@ -998,7 +1023,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes a voice profile, including its voice print and enrollment data. WARNING: This action is not reversible.</p>"
     },
     "DeleteVoiceProfileDomain": {
       "name": "DeleteVoiceProfileDomain",
@@ -1038,7 +1064,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Deletes all voice profiles in the domain. WARNING: This action is not reversible.</p>"
     },
     "DisassociatePhoneNumbersFromVoiceConnector": {
       "name": "DisassociatePhoneNumbersFromVoiceConnector",
@@ -1075,7 +1102,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Disassociates the specified phone numbers from the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "DisassociatePhoneNumbersFromVoiceConnectorGroup": {
       "name": "DisassociatePhoneNumbersFromVoiceConnectorGroup",
@@ -1112,7 +1140,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Disassociates the specified phone numbers from the specified Amazon Chime SDK Voice Connector group.</p>"
     },
     "GetGlobalSettings": {
       "name": "GetGlobalSettings",
@@ -1143,7 +1172,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the global settings for the Amazon Chime SDK Voice Connectors in an AWS account.</p>"
     },
     "GetPhoneNumber": {
       "name": "GetPhoneNumber",
@@ -1179,7 +1209,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.</p>"
     },
     "GetPhoneNumberOrder": {
       "name": "GetPhoneNumberOrder",
@@ -1216,7 +1247,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves details for the specified phone number order, such as the order creation timestamp, phone numbers in E.164 format, product type, and order status.</p>"
     },
     "GetPhoneNumberSettings": {
       "name": "GetPhoneNumberSettings",
@@ -1247,7 +1279,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the phone number settings for the administrator's AWS account, such as the default outbound calling name.</p>"
     },
     "GetProxySession": {
       "name": "GetProxySession",
@@ -1284,7 +1317,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the specified proxy session details for the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "GetSipMediaApplication": {
       "name": "GetSipMediaApplication",
@@ -1321,7 +1355,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.</p>"
     },
     "GetSipMediaApplicationAlexaSkillConfiguration": {
       "name": "GetSipMediaApplicationAlexaSkillConfiguration",
@@ -1358,7 +1393,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Gets the Alexa Skill configuration for the SIP media application.</p>"
     },
     "GetSipMediaApplicationLoggingConfiguration": {
       "name": "GetSipMediaApplicationLoggingConfiguration",
@@ -1395,7 +1431,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the logging configuration for the specified SIP media application.</p>"
     },
     "GetSipRule": {
       "name": "GetSipRule",
@@ -1432,7 +1469,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.</p>"
     },
     "GetSpeakerSearchTask": {
       "name": "GetSpeakerSearchTask",
@@ -1475,7 +1513,8 @@
         {
           "shape": "ServiceUnavailableException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the details of the specified speaker search task.</p>"
     },
     "GetVoiceConnector": {
       "name": "GetVoiceConnector",
@@ -1512,7 +1551,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves details for the specified Amazon Chime SDK Voice Connector, such as timestamps,name, outbound host, and encryption requirements.</p>"
     },
     "GetVoiceConnectorEmergencyCallingConfiguration": {
       "name": "GetVoiceConnectorEmergencyCallingConfiguration",
@@ -1549,7 +1589,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the emergency calling configuration details for the specified Voice Connector.</p>"
     },
     "GetVoiceConnectorGroup": {
       "name": "GetVoiceConnectorGroup",
@@ -1586,7 +1627,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves details for the specified Amazon Chime SDK Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code>.</p>"
     },
     "GetVoiceConnectorLoggingConfiguration": {
       "name": "GetVoiceConnectorLoggingConfiguration",
@@ -1623,7 +1665,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the logging configuration settings for the specified Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p>"
     },
     "GetVoiceConnectorOrigination": {
       "name": "GetVoiceConnectorOrigination",
@@ -1660,7 +1703,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the origination settings for the specified Voice Connector.</p>"
     },
     "GetVoiceConnectorProxy": {
       "name": "GetVoiceConnectorProxy",
@@ -1697,7 +1741,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the proxy configuration details for the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "GetVoiceConnectorStreamingConfiguration": {
       "name": "GetVoiceConnectorStreamingConfiguration",
@@ -1734,7 +1779,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the streaming configuration details for the specified Amazon Chime SDK Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.</p>"
     },
     "GetVoiceConnectorTermination": {
       "name": "GetVoiceConnectorTermination",
@@ -1771,7 +1817,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the termination setting details for the specified Voice Connector.</p>"
     },
     "GetVoiceConnectorTerminationHealth": {
       "name": "GetVoiceConnectorTerminationHealth",
@@ -1808,7 +1855,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves information about the last time a <code>SIP OPTIONS</code> ping was received from your SIP infrastructure for the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "GetVoiceProfile": {
       "name": "GetVoiceProfile",
@@ -1848,7 +1896,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the details of the specified voice profile.</p>"
     },
     "GetVoiceProfileDomain": {
       "name": "GetVoiceProfileDomain",
@@ -1888,7 +1937,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the details of the specified voice profile domain.</p>"
     },
     "GetVoiceToneAnalysisTask": {
       "name": "GetVoiceToneAnalysisTask",
@@ -1931,7 +1981,8 @@
         {
           "shape": "ServiceUnavailableException"
         }
-      ]
+      ],
+      "documentation": "<p>Retrieves the details of a voice tone analysis task.</p>"
     },
     "ListAvailableVoiceConnectorRegions": {
       "name": "ListAvailableVoiceConnectorRegions",
@@ -1962,7 +2013,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the available AWS Regions in which you can create an Amazon Chime SDK Voice Connector.</p>"
     },
     "ListPhoneNumberOrders": {
       "name": "ListPhoneNumberOrders",
@@ -1996,7 +2048,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the phone numbers for an administrator's Amazon Chime SDK account.</p>"
     },
     "ListPhoneNumbers": {
       "name": "ListPhoneNumbers",
@@ -2032,7 +2085,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the phone numbers for the specified Amazon Chime SDK account, Amazon Chime SDK user, Amazon Chime SDK Voice Connector, or Amazon Chime SDK Voice Connector group.</p>"
     },
     "ListProxySessions": {
       "name": "ListProxySessions",
@@ -2069,7 +2123,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "ListSipMediaApplications": {
       "name": "ListSipMediaApplications",
@@ -2103,7 +2158,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the SIP media applications under the administrator's AWS account.</p>"
     },
     "ListSipRules": {
       "name": "ListSipRules",
@@ -2137,7 +2193,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the SIP rules under the administrator's AWS account.</p>"
     },
     "ListSupportedPhoneNumberCountries": {
       "name": "ListSupportedPhoneNumberCountries",
@@ -2174,7 +2231,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the countries that you can order phone numbers from.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -2207,7 +2265,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Returns a list of the tags in a given resource.</p>"
     },
     "ListVoiceConnectorGroups": {
       "name": "ListVoiceConnectorGroups",
@@ -2241,7 +2300,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the Amazon Chime SDK Voice Connector groups in the administrator's AWS account.</p>"
     },
     "ListVoiceConnectorTerminationCredentials": {
       "name": "ListVoiceConnectorTerminationCredentials",
@@ -2278,7 +2338,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the SIP credentials for the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "ListVoiceConnectors": {
       "name": "ListVoiceConnectors",
@@ -2312,7 +2373,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the Amazon Chime SDK Voice Connectors in the administrators AWS account.</p>"
     },
     "ListVoiceProfileDomains": {
       "name": "ListVoiceProfileDomains",
@@ -2349,7 +2411,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the specified voice profile domains in the administrator's AWS account. </p>"
     },
     "ListVoiceProfiles": {
       "name": "ListVoiceProfiles",
@@ -2386,7 +2449,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Lists the voice profiles in a voice profile domain.</p>"
     },
     "PutSipMediaApplicationAlexaSkillConfiguration": {
       "name": "PutSipMediaApplicationAlexaSkillConfiguration",
@@ -2423,7 +2487,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the Alexa Skill configuration for the SIP media application.</p>"
     },
     "PutSipMediaApplicationLoggingConfiguration": {
       "name": "PutSipMediaApplicationLoggingConfiguration",
@@ -2460,7 +2525,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the logging configuration for the specified SIP media application.</p>"
     },
     "PutVoiceConnectorEmergencyCallingConfiguration": {
       "name": "PutVoiceConnectorEmergencyCallingConfiguration",
@@ -2497,7 +2563,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates a Voice Connector's emergency calling configuration.</p>"
     },
     "PutVoiceConnectorLoggingConfiguration": {
       "name": "PutVoiceConnectorLoggingConfiguration",
@@ -2534,7 +2601,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates a Voice Connector's logging configuration.</p>"
     },
     "PutVoiceConnectorOrigination": {
       "name": "PutVoiceConnectorOrigination",
@@ -2571,7 +2639,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates a Voice Connector's origination settings.</p>"
     },
     "PutVoiceConnectorProxy": {
       "name": "PutVoiceConnectorProxy",
@@ -2610,7 +2679,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Puts the specified proxy configuration to the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "PutVoiceConnectorStreamingConfiguration": {
       "name": "PutVoiceConnectorStreamingConfiguration",
@@ -2647,7 +2717,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates a Voice Connector's streaming configuration settings.</p>"
     },
     "PutVoiceConnectorTermination": {
       "name": "PutVoiceConnectorTermination",
@@ -2687,7 +2758,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates a Voice Connector's termination settings.</p>"
     },
     "PutVoiceConnectorTerminationCredentials": {
       "name": "PutVoiceConnectorTerminationCredentials",
@@ -2721,7 +2793,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates a Voice Connector's termination credentials.</p>"
     },
     "RestorePhoneNumber": {
       "name": "RestorePhoneNumber",
@@ -2761,7 +2834,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Restores a deleted phone number.</p>"
     },
     "SearchAvailablePhoneNumbers": {
       "name": "SearchAvailablePhoneNumbers",
@@ -2797,7 +2871,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Searches the provisioned phone numbers in an organization.</p>"
     },
     "StartSpeakerSearchTask": {
       "name": "StartSpeakerSearchTask",
@@ -2849,7 +2924,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Starts a speaker search task.</p> <important> <p>Before starting any speaker search tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the <a href=\"https://aws.amazon.com/service-terms/\">AWS service terms</a> for the Amazon Chime SDK.</p> </important>"
     },
     "StartVoiceToneAnalysisTask": {
       "name": "StartVoiceToneAnalysisTask",
@@ -2901,7 +2977,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Starts a voice tone analysis task. For more information about voice tone analysis, see <a href=\"https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html\">Using Amazon Chime SDK voice analytics</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> <important> <p>Before starting any voice tone analysis tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the <a href=\"https://aws.amazon.com/service-terms/\">AWS service terms</a> for the Amazon Chime SDK.</p> </important>"
     },
     "StopSpeakerSearchTask": {
       "name": "StopSpeakerSearchTask",
@@ -2944,7 +3021,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Stops a speaker search task.</p>"
     },
     "StopVoiceToneAnalysisTask": {
       "name": "StopVoiceToneAnalysisTask",
@@ -2987,7 +3065,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Stops a voice tone analysis task.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -3021,7 +3100,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Adds a tag to the specified resource.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -3052,7 +3132,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Removes tags from a resource.</p>"
     },
     "UpdateGlobalSettings": {
       "name": "UpdateGlobalSettings",
@@ -3083,7 +3164,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates global settings for the Amazon Chime SDK Voice Connectors in an AWS account.</p>"
     },
     "UpdatePhoneNumber": {
       "name": "UpdatePhoneNumber",
@@ -3123,7 +3205,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For numbers outside the U.S., you must use the Amazon Chime SDK SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
     },
     "UpdatePhoneNumberSettings": {
       "name": "UpdatePhoneNumberSettings",
@@ -3154,7 +3237,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name. You can update the default outbound calling name once every seven days. Outbound calling names can take up to 72 hours to update.</p>"
     },
     "UpdateProxySession": {
       "name": "UpdateProxySession",
@@ -3191,7 +3275,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the specified proxy session details, such as voice or SMS capabilities.</p>"
     },
     "UpdateSipMediaApplication": {
       "name": "UpdateSipMediaApplication",
@@ -3231,7 +3316,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the details of the specified SIP media application.</p>"
     },
     "UpdateSipMediaApplicationCall": {
       "name": "UpdateSipMediaApplicationCall",
@@ -3271,7 +3357,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.</p>"
     },
     "UpdateSipRule": {
       "name": "UpdateSipRule",
@@ -3314,7 +3401,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the details of the specified SIP rule.</p>"
     },
     "UpdateVoiceConnector": {
       "name": "UpdateVoiceConnector",
@@ -3351,7 +3439,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the details for the specified Amazon Chime SDK Voice Connector.</p>"
     },
     "UpdateVoiceConnectorGroup": {
       "name": "UpdateVoiceConnectorGroup",
@@ -3391,7 +3480,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the settings for the specified Amazon Chime SDK Voice Connector group.</p>"
     },
     "UpdateVoiceProfile": {
       "name": "UpdateVoiceProfile",
@@ -3437,7 +3527,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the specified voice profile’s voice print and refreshes its expiration timestamp.</p> <important> <p>As a condition of using this feature, you acknowledge that the collection, use, storage, and retention of your caller’s biometric identifiers and biometric information (“biometric data”) in the form of a digital voiceprint requires the caller’s informed consent via a written release. Such consent is required under various state laws, including biometrics laws in Illinois, Texas, Washington and other state privacy laws.</p> <p>You must provide a written release to each caller through a process that clearly reflects each caller’s informed consent before using Amazon Chime SDK Voice Insights service, as required under the terms of your agreement with AWS governing your use of the service.</p> </important>"
     },
     "UpdateVoiceProfileDomain": {
       "name": "UpdateVoiceProfileDomain",
@@ -3477,7 +3568,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Updates the settings for the specified voice profile domain.</p>"
     },
     "ValidateE911Address": {
       "name": "ValidateE911Address",
@@ -3514,7 +3606,8 @@
         {
           "shape": "ServiceFailureException"
         }
-      ]
+      ],
+      "documentation": "<p>Validates an address to be used for 911 calls made with Amazon Chime SDK Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.</p>"
     }
   },
   "shapes": {
@@ -3522,36 +3615,47 @@
       "type": "structure",
       "members": {
         "streetName": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The address street, such as <code>8th Avenue</code>.</p>"
         },
         "streetSuffix": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The address suffix, such as the <code>N</code> in <code>8th Avenue N</code>.</p>"
         },
         "postDirectional": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>An address suffix location, such as the <code>S. Unit A</code> in <code>Central Park S. Unit A</code>.</p>"
         },
         "preDirectional": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>An address prefix location, such as the <code>N</code> in <code>N. Third St.</code> </p>"
         },
         "streetNumber": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The numeric portion of an address.</p>"
         },
         "city": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The city of an address.</p>"
         },
         "state": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The state of an address.</p>"
         },
         "postalCode": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The postal code of an address.</p>"
         },
         "postalCodePlus4": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The zip + 4 or postal code + 4 of an address.</p>"
         },
         "country": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The country of an address.</p>"
         }
-      }
+      },
+      "documentation": "<p>A validated address.</p>"
     },
     "AlexaSkillId": {
       "type": "string",
@@ -3598,14 +3702,17 @@
       "members": {
         "VoiceConnectorGroupId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Chime SDK Voice Connector group ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorGroupId"
         },
         "E164PhoneNumbers": {
-          "shape": "E164PhoneNumberList"
+          "shape": "E164PhoneNumberList",
+          "documentation": "<p>List of phone numbers, in E.164 format.</p>"
         },
         "ForceAssociate": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector Group and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.</p>"
         }
       }
     },
@@ -3613,7 +3720,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberErrors": {
-          "shape": "PhoneNumberErrorList"
+          "shape": "PhoneNumberErrorList",
+          "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
         }
       }
     },
@@ -3626,14 +3734,17 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "E164PhoneNumbers": {
-          "shape": "E164PhoneNumberList"
+          "shape": "E164PhoneNumberList",
+          "documentation": "<p>List of phone numbers, in E.164 format.</p>"
         },
         "ForceAssociate": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>If true, associates the provided phone numbers with the provided Amazon Chime SDK Voice Connector and removes any previously existing associations. If false, does not associate any phone numbers that have previously existing associations.</p>"
         }
       }
     },
@@ -3641,7 +3752,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberErrors": {
-          "shape": "PhoneNumberErrorList"
+          "shape": "PhoneNumberErrorList",
+          "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
         }
       }
     },
@@ -3652,7 +3764,8 @@
       ],
       "members": {
         "PhoneNumberIds": {
-          "shape": "NonEmptyStringList"
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>List of phone number IDs.</p>"
         }
       }
     },
@@ -3660,7 +3773,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberErrors": {
-          "shape": "PhoneNumberErrorList"
+          "shape": "PhoneNumberErrorList",
+          "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
         }
       }
     },
@@ -3671,7 +3785,8 @@
       ],
       "members": {
         "UpdatePhoneNumberRequestItems": {
-          "shape": "UpdatePhoneNumberRequestItemList"
+          "shape": "UpdatePhoneNumberRequestItemList",
+          "documentation": "<p>Lists the phone numbers in the update request.</p>"
         }
       }
     },
@@ -3679,7 +3794,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberErrors": {
-          "shape": "PhoneNumberErrorList"
+          "shape": "PhoneNumberErrorList",
+          "documentation": "<p>A list of failed phone numbers and their error messages.</p>"
         }
       }
     },
@@ -3690,15 +3806,19 @@
       "type": "structure",
       "members": {
         "VoiceConnectorId": {
-          "shape": "NonEmptyString128"
+          "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>"
         },
         "TransactionId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The transaction ID of a Voice Connector call.</p>"
         },
         "IsCaller": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Identifies a person as the caller or the callee.</p>"
         }
-      }
+      },
+      "documentation": "<p>The details of an Amazon Chime SDK Voice Connector call.</p>"
     },
     "CallingName": {
       "type": "string",
@@ -3727,27 +3847,35 @@
       "type": "structure",
       "members": {
         "streetInfo": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The street information of the candidate address.</p>"
         },
         "streetNumber": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The numeric portion of the candidate address.</p>"
         },
         "city": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The city of the candidate address.</p>"
         },
         "state": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The state of the candidate address.</p>"
         },
         "postalCode": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The postal code of the candidate address.</p>"
         },
         "postalCodePlus4": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The zip + 4 or postal code +4 of the candidate address.</p>"
         },
         "country": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The country of the candidate address.</p>"
         }
-      }
+      },
+      "documentation": "<p>A suggested address.</p>"
     },
     "CandidateAddressList": {
       "type": "list",
@@ -3801,10 +3929,12 @@
       ],
       "members": {
         "ProductType": {
-          "shape": "PhoneNumberProductType"
+          "shape": "PhoneNumberProductType",
+          "documentation": "<p>The phone number product type.</p>"
         },
         "E164PhoneNumbers": {
-          "shape": "E164PhoneNumberList"
+          "shape": "E164PhoneNumberList",
+          "documentation": "<p>List of phone numbers, in E.164 format.</p>"
         }
       }
     },
@@ -3812,7 +3942,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberOrder": {
-          "shape": "PhoneNumberOrder"
+          "shape": "PhoneNumberOrder",
+          "documentation": "<p>The phone number order details.</p>"
         }
       }
     },
@@ -3826,29 +3957,37 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "ParticipantPhoneNumbers": {
-          "shape": "ParticipantPhoneNumberList"
+          "shape": "ParticipantPhoneNumberList",
+          "documentation": "<p>The participant phone numbers.</p>"
         },
         "Name": {
-          "shape": "ProxySessionNameString"
+          "shape": "ProxySessionNameString",
+          "documentation": "<p>The name of the proxy session.</p>"
         },
         "ExpiryMinutes": {
-          "shape": "PositiveInteger"
+          "shape": "PositiveInteger",
+          "documentation": "<p>The number of minutes allowed for the proxy session.</p>"
         },
         "Capabilities": {
-          "shape": "CapabilityList"
+          "shape": "CapabilityList",
+          "documentation": "<p>The proxy session's capabilities.</p>"
         },
         "NumberSelectionBehavior": {
-          "shape": "NumberSelectionBehavior"
+          "shape": "NumberSelectionBehavior",
+          "documentation": "<p>The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.</p>"
         },
         "GeoMatchLevel": {
-          "shape": "GeoMatchLevel"
+          "shape": "GeoMatchLevel",
+          "documentation": "<p>The preference for matching the country or area code of the proxy phone number with that of the first participant.</p>"
         },
         "GeoMatchParams": {
-          "shape": "GeoMatchParams"
+          "shape": "GeoMatchParams",
+          "documentation": "<p>The country and area code for the proxy phone number.</p>"
         }
       }
     },
@@ -3856,7 +3995,8 @@
       "type": "structure",
       "members": {
         "ProxySession": {
-          "shape": "ProxySession"
+          "shape": "ProxySession",
+          "documentation": "<p>The proxy session details.</p>"
         }
       }
     },
@@ -3869,21 +4009,26 @@
       ],
       "members": {
         "FromPhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The phone number that a user calls from. This is a phone number in your Amazon Chime SDK phone number inventory.</p>"
         },
         "ToPhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The phone number that the service should call.</p>"
         },
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the SIP media application.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         },
         "SipHeaders": {
-          "shape": "SipHeadersMap"
+          "shape": "SipHeadersMap",
+          "documentation": "<p>The SIP headers added to an outbound call leg.</p>"
         },
         "ArgumentsMap": {
-          "shape": "SMACreateCallArgumentsMap"
+          "shape": "SMACreateCallArgumentsMap",
+          "documentation": "<p>Context passed to a CreateSipMediaApplication API call. For example, you could pass key-value pairs such as: <code>\"FirstName\": \"John\", \"LastName\": \"Doe\"</code> </p>"
         }
       }
     },
@@ -3891,7 +4036,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplicationCall": {
-          "shape": "SipMediaApplicationCall"
+          "shape": "SipMediaApplicationCall",
+          "documentation": "<p>The actual call.</p>"
         }
       }
     },
@@ -3904,13 +4050,16 @@
       ],
       "members": {
         "AwsRegion": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The AWS Region assigned to the SIP media application.</p>"
         },
         "Name": {
-          "shape": "SipMediaApplicationName"
+          "shape": "SipMediaApplicationName",
+          "documentation": "<p>The SIP media application's name.</p>"
         },
         "Endpoints": {
-          "shape": "SipMediaApplicationEndpointList"
+          "shape": "SipMediaApplicationEndpointList",
+          "documentation": "<p>List of endpoints (Lambda ARNs) specified for the SIP media application.</p>"
         }
       }
     },
@@ -3918,7 +4067,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplication": {
-          "shape": "SipMediaApplication"
+          "shape": "SipMediaApplication",
+          "documentation": "<p>The SIP media application details.</p>"
         }
       }
     },
@@ -3931,19 +4081,24 @@
       ],
       "members": {
         "Name": {
-          "shape": "SipRuleName"
+          "shape": "SipRuleName",
+          "documentation": "<p>The name of the SIP rule.</p>"
         },
         "TriggerType": {
-          "shape": "SipRuleTriggerType"
+          "shape": "SipRuleTriggerType",
+          "documentation": "<p>The type of trigger assigned to the SIP rule in <code>TriggerValue</code>, currently <code>RequestUriHostname</code> or <code>ToPhoneNumber</code>.</p>"
         },
         "TriggerValue": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>If <code>TriggerType</code> is <code>RequestUriHostname</code>, the value can be the outbound host name of a Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, the value can be a customer-owned phone number in the E164 format. The <code>SipMediaApplication</code> specified in the <code>SipRule</code> is triggered if the request URI in an incoming SIP request matches the <code>RequestUriHostname</code>, or if the <code>To</code> header in the incoming SIP request matches the <code>ToPhoneNumber</code> value.</p>"
         },
         "Disabled": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>Disables or enables a SIP rule. You must disable SIP rules before you can delete them.</p>"
         },
         "TargetApplications": {
-          "shape": "SipRuleTargetApplicationList"
+          "shape": "SipRuleTargetApplicationList",
+          "documentation": "<p>List of SIP media applications, with priority and AWS Region. Only one SIP application per AWS Region can be used.</p>"
         }
       }
     },
@@ -3951,7 +4106,8 @@
       "type": "structure",
       "members": {
         "SipRule": {
-          "shape": "SipRule"
+          "shape": "SipRule",
+          "documentation": "<p>The SIP rule information, including the rule ID, triggers, and target applications.</p>"
         }
       }
     },
@@ -3962,10 +4118,12 @@
       ],
       "members": {
         "Name": {
-          "shape": "VoiceConnectorGroupName"
+          "shape": "VoiceConnectorGroupName",
+          "documentation": "<p>The name of the Voice Connector group.</p>"
         },
         "VoiceConnectorItems": {
-          "shape": "VoiceConnectorItemList"
+          "shape": "VoiceConnectorItemList",
+          "documentation": "<p>Lists the Voice Connectors that inbound calls are routed to.</p>"
         }
       }
     },
@@ -3973,7 +4131,8 @@
       "type": "structure",
       "members": {
         "VoiceConnectorGroup": {
-          "shape": "VoiceConnectorGroup"
+          "shape": "VoiceConnectorGroup",
+          "documentation": "<p>The details of the Voice Connector group.</p>"
         }
       }
     },
@@ -3985,13 +4144,16 @@
       ],
       "members": {
         "Name": {
-          "shape": "VoiceConnectorName"
+          "shape": "VoiceConnectorName",
+          "documentation": "<p>The name of the Voice Connector.</p>"
         },
         "AwsRegion": {
-          "shape": "VoiceConnectorAwsRegion"
+          "shape": "VoiceConnectorAwsRegion",
+          "documentation": "<p>The AWS Region in which the Amazon Chime SDK Voice Connector is created. Default value: <code>us-east-1</code> .</p>"
         },
         "RequireEncryption": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Enables or disables encryption for the Voice Connector.</p>"
         }
       }
     },
@@ -3999,7 +4161,8 @@
       "type": "structure",
       "members": {
         "VoiceConnector": {
-          "shape": "VoiceConnector"
+          "shape": "VoiceConnector",
+          "documentation": "<p>The details of the Voice Connector.</p>"
         }
       }
     },
@@ -4011,19 +4174,24 @@
       ],
       "members": {
         "Name": {
-          "shape": "VoiceProfileDomainName"
+          "shape": "VoiceProfileDomainName",
+          "documentation": "<p>The name of the voice profile domain.</p>"
         },
         "Description": {
-          "shape": "VoiceProfileDomainDescription"
+          "shape": "VoiceProfileDomainDescription",
+          "documentation": "<p>A description of the voice profile domain.</p>"
         },
         "ServerSideEncryptionConfiguration": {
-          "shape": "ServerSideEncryptionConfiguration"
+          "shape": "ServerSideEncryptionConfiguration",
+          "documentation": "<p>The server-side encryption configuration for the request.</p>"
         },
         "ClientRequestToken": {
-          "shape": "ClientRequestId"
+          "shape": "ClientRequestId",
+          "documentation": "<p>The unique identifier for the client request. Use a different token for different domain creation requests.</p>"
         },
         "Tags": {
-          "shape": "TagList"
+          "shape": "TagList",
+          "documentation": "<p>The tags assigned to the domain.</p>"
         }
       }
     },
@@ -4031,7 +4199,8 @@
       "type": "structure",
       "members": {
         "VoiceProfileDomain": {
-          "shape": "VoiceProfileDomain"
+          "shape": "VoiceProfileDomain",
+          "documentation": "<p>The requested voice profile domain.</p>"
         }
       }
     },
@@ -4042,7 +4211,8 @@
       ],
       "members": {
         "SpeakerSearchTaskId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the speaker search task.</p>"
         }
       }
     },
@@ -4050,7 +4220,8 @@
       "type": "structure",
       "members": {
         "VoiceProfile": {
-          "shape": "VoiceProfile"
+          "shape": "VoiceProfile",
+          "documentation": "<p>The requested voice profile.</p>"
         }
       }
     },
@@ -4058,12 +4229,15 @@
       "type": "structure",
       "members": {
         "Username": {
-          "shape": "SensitiveString"
+          "shape": "SensitiveString",
+          "documentation": "<p>The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII format.</p>"
         },
         "Password": {
-          "shape": "SensitiveString"
+          "shape": "SensitiveString",
+          "documentation": "<p>The RFC2617 compliant password associated with the SIP credentials, in US-ASCII format.</p>"
         }
-      }
+      },
+      "documentation": "<p>The SIP credentials used to authenticate requests to an Amazon Chime SDK Voice Connector.</p>"
     },
     "CredentialList": {
       "type": "list",
@@ -4079,15 +4253,19 @@
       ],
       "members": {
         "EmergencyPhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The DNIS phone number that you route emergency calls to, in E.164 format.</p>"
         },
         "TestPhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The DNIS phone number for routing test emergency calls to, in E.164 format.</p>"
         },
         "CallingCountry": {
-          "shape": "Alpha2CountryCode"
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The country from which emergency calls are allowed, in ISO 3166-1 alpha-2 format.</p>"
         }
-      }
+      },
+      "documentation": "<p>The Dialed Number Identification Service (DNIS) emergency calling configuration details associated with an Amazon Chime SDK Voice Connector's emergency calling configuration.</p>"
     },
     "DNISEmergencyCallingConfigurationList": {
       "type": "list",
@@ -4107,6 +4285,7 @@
       "members": {
         "PhoneNumberId": {
           "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The phone number ID.</p>",
           "location": "uri",
           "locationName": "phoneNumberId"
         }
@@ -4121,11 +4300,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "ProxySessionId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The proxy session ID.</p>",
           "location": "uri",
           "locationName": "proxySessionId"
         }
@@ -4139,6 +4320,7 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         }
@@ -4152,6 +4334,7 @@
       "members": {
         "SipRuleId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP rule ID.</p>",
           "location": "uri",
           "locationName": "sipRuleId"
         }
@@ -4165,6 +4348,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4178,6 +4362,7 @@
       "members": {
         "VoiceConnectorGroupId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector Group ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorGroupId"
         }
@@ -4191,6 +4376,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4204,6 +4390,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4217,6 +4404,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4230,6 +4418,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4244,11 +4433,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "Usernames": {
-          "shape": "SensitiveStringList"
+          "shape": "SensitiveStringList",
+          "documentation": "<p>The RFC2617 compliant username associated with the SIP credentials, in US-ASCII format.</p>"
         }
       }
     },
@@ -4260,6 +4451,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4273,6 +4465,7 @@
       "members": {
         "VoiceProfileDomainId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The voice profile domain ID.</p>",
           "location": "uri",
           "locationName": "VoiceProfileDomainId"
         }
@@ -4286,6 +4479,7 @@
       "members": {
         "VoiceProfileId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The voice profile ID.</p>",
           "location": "uri",
           "locationName": "VoiceProfileId"
         }
@@ -4300,11 +4494,13 @@
       "members": {
         "VoiceConnectorGroupId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector group ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorGroupId"
         },
         "E164PhoneNumbers": {
-          "shape": "E164PhoneNumberList"
+          "shape": "E164PhoneNumberList",
+          "documentation": "<p>The list of phone numbers, in E.164 format.</p>"
         }
       }
     },
@@ -4312,7 +4508,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberErrors": {
-          "shape": "PhoneNumberErrorList"
+          "shape": "PhoneNumberErrorList",
+          "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
         }
       }
     },
@@ -4325,11 +4522,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "E164PhoneNumbers": {
-          "shape": "E164PhoneNumberList"
+          "shape": "E164PhoneNumberList",
+          "documentation": "<p>List of phone numbers, in E.164 format.</p>"
         }
       }
     },
@@ -4337,7 +4536,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberErrors": {
-          "shape": "PhoneNumberErrorList"
+          "shape": "PhoneNumberErrorList",
+          "documentation": "<p>If the action fails for one or more of the phone numbers in the request, a list of the phone numbers is returned, along with error codes and error messages.</p>"
         }
       }
     },
@@ -4356,9 +4556,11 @@
       "type": "structure",
       "members": {
         "DNIS": {
-          "shape": "DNISEmergencyCallingConfigurationList"
+          "shape": "DNISEmergencyCallingConfigurationList",
+          "documentation": "<p>The Dialed Number Identification Service (DNIS) emergency calling configuration details.</p>"
         }
-      }
+      },
+      "documentation": "<p>The emergency calling configuration details associated with an Amazon Chime SDK Voice Connector.</p>"
     },
     "ErrorCode": {
       "type": "string",
@@ -4402,18 +4604,22 @@
       ],
       "members": {
         "Country": {
-          "shape": "Country"
+          "shape": "Country",
+          "documentation": "<p>The country. </p>"
         },
         "AreaCode": {
-          "shape": "AreaCode"
+          "shape": "AreaCode",
+          "documentation": "<p>The area code.</p>"
         }
-      }
+      },
+      "documentation": "<p>The country and area code for a proxy phone number in a proxy phone session.</p>"
     },
     "GetGlobalSettingsResponse": {
       "type": "structure",
       "members": {
         "VoiceConnector": {
-          "shape": "VoiceConnectorSettings"
+          "shape": "VoiceConnectorSettings",
+          "documentation": "<p>The Voice Connector settings.</p>"
         }
       }
     },
@@ -4425,6 +4631,7 @@
       "members": {
         "PhoneNumberOrderId": {
           "shape": "GuidString",
+          "documentation": "<p>The ID of the phone number order .</p>",
           "location": "uri",
           "locationName": "phoneNumberOrderId"
         }
@@ -4434,7 +4641,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberOrder": {
-          "shape": "PhoneNumberOrder"
+          "shape": "PhoneNumberOrder",
+          "documentation": "<p>The phone number order details.</p>"
         }
       }
     },
@@ -4446,6 +4654,7 @@
       "members": {
         "PhoneNumberId": {
           "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The phone number ID.</p>",
           "location": "uri",
           "locationName": "phoneNumberId"
         }
@@ -4455,7 +4664,8 @@
       "type": "structure",
       "members": {
         "PhoneNumber": {
-          "shape": "PhoneNumber"
+          "shape": "PhoneNumber",
+          "documentation": "<p>The phone number details.</p>"
         }
       }
     },
@@ -4463,10 +4673,12 @@
       "type": "structure",
       "members": {
         "CallingName": {
-          "shape": "CallingName"
+          "shape": "CallingName",
+          "documentation": "<p>The default outbound calling name for the account.</p>"
         },
         "CallingNameUpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The updated outbound calling name timestamp, in ISO 8601 format.</p>"
         }
       }
     },
@@ -4479,11 +4691,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "ProxySessionId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The proxy session ID.</p>",
           "location": "uri",
           "locationName": "proxySessionId"
         }
@@ -4493,7 +4707,8 @@
       "type": "structure",
       "members": {
         "ProxySession": {
-          "shape": "ProxySession"
+          "shape": "ProxySession",
+          "documentation": "<p>The proxy session details.</p>"
         }
       }
     },
@@ -4505,6 +4720,7 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         }
@@ -4514,7 +4730,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplicationAlexaSkillConfiguration": {
-          "shape": "SipMediaApplicationAlexaSkillConfiguration"
+          "shape": "SipMediaApplicationAlexaSkillConfiguration",
+          "documentation": "<p>Returns the Alexa Skill configuration.</p>"
         }
       }
     },
@@ -4526,6 +4743,7 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         }
@@ -4535,7 +4753,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplicationLoggingConfiguration": {
-          "shape": "SipMediaApplicationLoggingConfiguration"
+          "shape": "SipMediaApplicationLoggingConfiguration",
+          "documentation": "<p>The actual logging configuration.</p>"
         }
       }
     },
@@ -4547,6 +4766,7 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID .</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         }
@@ -4556,7 +4776,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplication": {
-          "shape": "SipMediaApplication"
+          "shape": "SipMediaApplication",
+          "documentation": "<p>The details of the SIP media application.</p>"
         }
       }
     },
@@ -4568,6 +4789,7 @@
       "members": {
         "SipRuleId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP rule ID.</p>",
           "location": "uri",
           "locationName": "sipRuleId"
         }
@@ -4577,7 +4799,8 @@
       "type": "structure",
       "members": {
         "SipRule": {
-          "shape": "SipRule"
+          "shape": "SipRule",
+          "documentation": "<p>The SIP rule details.</p>"
         }
       }
     },
@@ -4590,11 +4813,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "VoiceConnectorId"
         },
         "SpeakerSearchTaskId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the speaker search task.</p>",
           "location": "uri",
           "locationName": "SpeakerSearchTaskId"
         }
@@ -4604,7 +4829,8 @@
       "type": "structure",
       "members": {
         "SpeakerSearchTask": {
-          "shape": "SpeakerSearchTask"
+          "shape": "SpeakerSearchTask",
+          "documentation": "<p>The details of the speaker search task.</p>"
         }
       }
     },
@@ -4616,6 +4842,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4625,7 +4852,8 @@
       "type": "structure",
       "members": {
         "EmergencyCallingConfiguration": {
-          "shape": "EmergencyCallingConfiguration"
+          "shape": "EmergencyCallingConfiguration",
+          "documentation": "<p>The details of the emergency calling configuration.</p>"
         }
       }
     },
@@ -4637,6 +4865,7 @@
       "members": {
         "VoiceConnectorGroupId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector group ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorGroupId"
         }
@@ -4646,7 +4875,8 @@
       "type": "structure",
       "members": {
         "VoiceConnectorGroup": {
-          "shape": "VoiceConnectorGroup"
+          "shape": "VoiceConnectorGroup",
+          "documentation": "<p>The details of the Voice Connector group.</p>"
         }
       }
     },
@@ -4658,6 +4888,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4667,7 +4898,8 @@
       "type": "structure",
       "members": {
         "LoggingConfiguration": {
-          "shape": "LoggingConfiguration"
+          "shape": "LoggingConfiguration",
+          "documentation": "<p>The logging configuration details .</p>"
         }
       }
     },
@@ -4679,6 +4911,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4688,7 +4921,8 @@
       "type": "structure",
       "members": {
         "Origination": {
-          "shape": "Origination"
+          "shape": "Origination",
+          "documentation": "<p>The origination setting details.</p>"
         }
       }
     },
@@ -4700,6 +4934,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4709,7 +4944,8 @@
       "type": "structure",
       "members": {
         "Proxy": {
-          "shape": "Proxy"
+          "shape": "Proxy",
+          "documentation": "<p>The proxy configuration details.</p>"
         }
       }
     },
@@ -4721,6 +4957,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4730,7 +4967,8 @@
       "type": "structure",
       "members": {
         "VoiceConnector": {
-          "shape": "VoiceConnector"
+          "shape": "VoiceConnector",
+          "documentation": "<p>The Voice Connector details.</p>"
         }
       }
     },
@@ -4742,6 +4980,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4751,7 +4990,8 @@
       "type": "structure",
       "members": {
         "StreamingConfiguration": {
-          "shape": "StreamingConfiguration"
+          "shape": "StreamingConfiguration",
+          "documentation": "<p>The details of the streaming configuration.</p>"
         }
       }
     },
@@ -4763,6 +5003,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4772,7 +5013,8 @@
       "type": "structure",
       "members": {
         "TerminationHealth": {
-          "shape": "TerminationHealth"
+          "shape": "TerminationHealth",
+          "documentation": "<p>The termination health details.</p>"
         }
       }
     },
@@ -4784,6 +5026,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -4793,7 +5036,8 @@
       "type": "structure",
       "members": {
         "Termination": {
-          "shape": "Termination"
+          "shape": "Termination",
+          "documentation": "<p>The termination setting details.</p>"
         }
       }
     },
@@ -4805,6 +5049,7 @@
       "members": {
         "VoiceProfileDomainId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The voice profile domain ID.</p>",
           "location": "uri",
           "locationName": "VoiceProfileDomainId"
         }
@@ -4814,7 +5059,8 @@
       "type": "structure",
       "members": {
         "VoiceProfileDomain": {
-          "shape": "VoiceProfileDomain"
+          "shape": "VoiceProfileDomain",
+          "documentation": "<p>The details of the voice profile domain.</p>"
         }
       }
     },
@@ -4826,6 +5072,7 @@
       "members": {
         "VoiceProfileId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The voice profile ID.</p>",
           "location": "uri",
           "locationName": "VoiceProfileId"
         }
@@ -4835,7 +5082,8 @@
       "type": "structure",
       "members": {
         "VoiceProfile": {
-          "shape": "VoiceProfile"
+          "shape": "VoiceProfile",
+          "documentation": "<p>The voice profile details.</p>"
         }
       }
     },
@@ -4849,16 +5097,19 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "VoiceConnectorId"
         },
         "VoiceToneAnalysisTaskId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice tone anlysis task.</p>",
           "location": "uri",
           "locationName": "VoiceToneAnalysisTaskId"
         },
         "IsCaller": {
           "shape": "Boolean",
+          "documentation": "<p>Specifies whether the voice being analyzed is the caller (originator) or the callee (responder).</p>",
           "location": "querystring",
           "locationName": "isCaller"
         }
@@ -4868,7 +5119,8 @@
       "type": "structure",
       "members": {
         "VoiceToneAnalysisTask": {
-          "shape": "VoiceToneAnalysisTask"
+          "shape": "VoiceToneAnalysisTask",
+          "documentation": "<p>The details of the voice tone analysis task.</p>"
         }
       }
     },
@@ -4893,7 +5145,8 @@
       "type": "structure",
       "members": {
         "VoiceConnectorRegions": {
-          "shape": "VoiceConnectorAwsRegionList"
+          "shape": "VoiceConnectorAwsRegionList",
+          "documentation": "<p>The list of AWS Regions.</p>"
         }
       }
     },
@@ -4902,11 +5155,13 @@
       "members": {
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token used to retrieve the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         },
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>",
           "location": "querystring",
           "locationName": "max-results"
         }
@@ -4916,10 +5171,12 @@
       "type": "structure",
       "members": {
         "PhoneNumberOrders": {
-          "shape": "PhoneNumberOrderList"
+          "shape": "PhoneNumberOrderList",
+          "documentation": "<p>The phone number order details.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The token used to retrieve the next page of results.</p>"
         }
       }
     },
@@ -4928,31 +5185,37 @@
       "members": {
         "Status": {
           "shape": "String",
+          "documentation": "<p>The status of your organization's phone numbers.</p>",
           "location": "querystring",
           "locationName": "status"
         },
         "ProductType": {
           "shape": "PhoneNumberProductType",
+          "documentation": "<p>The phone number product types.</p>",
           "location": "querystring",
           "locationName": "product-type"
         },
         "FilterName": {
           "shape": "PhoneNumberAssociationName",
+          "documentation": "<p>The filter to limit the number of results.</p>",
           "location": "querystring",
           "locationName": "filter-name"
         },
         "FilterValue": {
           "shape": "String",
+          "documentation": "<p>The filter value.</p>",
           "location": "querystring",
           "locationName": "filter-value"
         },
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>",
           "location": "querystring",
           "locationName": "max-results"
         },
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         }
@@ -4962,10 +5225,12 @@
       "type": "structure",
       "members": {
         "PhoneNumbers": {
-          "shape": "PhoneNumberList"
+          "shape": "PhoneNumberList",
+          "documentation": "<p>The phone number details.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>"
         }
       }
     },
@@ -4977,21 +5242,25 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "Status": {
           "shape": "ProxySessionStatus",
+          "documentation": "<p>The proxy session status.</p>",
           "location": "querystring",
           "locationName": "status"
         },
         "NextToken": {
           "shape": "NextTokenString",
+          "documentation": "<p>The token used to retrieve the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         },
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>",
           "location": "querystring",
           "locationName": "max-results"
         }
@@ -5001,10 +5270,12 @@
       "type": "structure",
       "members": {
         "ProxySessions": {
-          "shape": "ProxySessions"
+          "shape": "ProxySessions",
+          "documentation": "<p>The proxy sessions' details.</p>"
         },
         "NextToken": {
-          "shape": "NextTokenString"
+          "shape": "NextTokenString",
+          "documentation": "<p>The token used to retrieve the next page of results.</p>"
         }
       }
     },
@@ -5013,11 +5284,13 @@
       "members": {
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call. Defaults to 100.</p>",
           "location": "querystring",
           "locationName": "max-results"
         },
         "NextToken": {
           "shape": "NextTokenString",
+          "documentation": "<p>The token used to return the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         }
@@ -5027,10 +5300,12 @@
       "type": "structure",
       "members": {
         "SipMediaApplications": {
-          "shape": "SipMediaApplicationList"
+          "shape": "SipMediaApplicationList",
+          "documentation": "<p>The list of SIP media applications and application details.</p>"
         },
         "NextToken": {
-          "shape": "NextTokenString"
+          "shape": "NextTokenString",
+          "documentation": "<p>The token used to return the next page of results.</p>"
         }
       }
     },
@@ -5039,16 +5314,19 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
           "location": "querystring",
           "locationName": "sip-media-application"
         },
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call. Defaults to 100.</p>",
           "location": "querystring",
           "locationName": "max-results"
         },
         "NextToken": {
           "shape": "NextTokenString",
+          "documentation": "<p>The token used to return the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         }
@@ -5058,10 +5336,12 @@
       "type": "structure",
       "members": {
         "SipRules": {
-          "shape": "SipRuleList"
+          "shape": "SipRuleList",
+          "documentation": "<p>The list of SIP rules and details.</p>"
         },
         "NextToken": {
-          "shape": "NextTokenString"
+          "shape": "NextTokenString",
+          "documentation": "<p>The token used to return the next page of results.</p>"
         }
       }
     },
@@ -5073,6 +5353,7 @@
       "members": {
         "ProductType": {
           "shape": "PhoneNumberProductType",
+          "documentation": "<p>The phone number product type.</p>",
           "location": "querystring",
           "locationName": "product-type"
         }
@@ -5082,7 +5363,8 @@
       "type": "structure",
       "members": {
         "PhoneNumberCountries": {
-          "shape": "PhoneNumberCountriesList"
+          "shape": "PhoneNumberCountriesList",
+          "documentation": "<p>The supported phone number countries.</p>"
         }
       }
     },
@@ -5094,6 +5376,7 @@
       "members": {
         "ResourceARN": {
           "shape": "Arn",
+          "documentation": "<p>The resource ARN.</p>",
           "location": "querystring",
           "locationName": "arn"
         }
@@ -5103,7 +5386,8 @@
       "type": "structure",
       "members": {
         "Tags": {
-          "shape": "TagList"
+          "shape": "TagList",
+          "documentation": "<p>The tags in the list.</p>"
         }
       }
     },
@@ -5112,11 +5396,13 @@
       "members": {
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         },
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call. </p>",
           "location": "querystring",
           "locationName": "max-results"
         }
@@ -5126,10 +5412,12 @@
       "type": "structure",
       "members": {
         "VoiceConnectorGroups": {
-          "shape": "VoiceConnectorGroupList"
+          "shape": "VoiceConnectorGroupList",
+          "documentation": "<p>The details of the Voice Connector groups.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>"
         }
       }
     },
@@ -5141,6 +5429,7 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         }
@@ -5150,7 +5439,8 @@
       "type": "structure",
       "members": {
         "Usernames": {
-          "shape": "SensitiveStringList"
+          "shape": "SensitiveStringList",
+          "documentation": "<p>A list of user names.</p>"
         }
       }
     },
@@ -5159,11 +5449,13 @@
       "members": {
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         },
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>",
           "location": "querystring",
           "locationName": "max-results"
         }
@@ -5173,10 +5465,12 @@
       "type": "structure",
       "members": {
         "VoiceConnectors": {
-          "shape": "VoiceConnectorList"
+          "shape": "VoiceConnectorList",
+          "documentation": "<p>The details of the Voice Connectors.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>"
         }
       }
     },
@@ -5185,11 +5479,13 @@
       "members": {
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         },
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>",
           "location": "querystring",
           "locationName": "max-results"
         }
@@ -5199,10 +5495,12 @@
       "type": "structure",
       "members": {
         "VoiceProfileDomains": {
-          "shape": "VoiceProfileDomainSummaryList"
+          "shape": "VoiceProfileDomainSummaryList",
+          "documentation": "<p>The list of voice profile domains.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>"
         }
       }
     },
@@ -5214,16 +5512,19 @@
       "members": {
         "VoiceProfileDomainId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice profile domain.</p>",
           "location": "querystring",
           "locationName": "voice-profile-domain-id"
         },
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token used to retrieve the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         },
         "MaxResults": {
           "shape": "ResultMax",
+          "documentation": "<p>The maximum number of results in the request.</p>",
           "location": "querystring",
           "locationName": "max-results"
         }
@@ -5233,10 +5534,12 @@
       "type": "structure",
       "members": {
         "VoiceProfiles": {
-          "shape": "VoiceProfileSummaryList"
+          "shape": "VoiceProfileSummaryList",
+          "documentation": "<p>The list of voice profiles.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The token used to retrieve the next page of results.</p>"
         }
       }
     },
@@ -5244,23 +5547,29 @@
       "type": "structure",
       "members": {
         "EnableSIPLogs": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Boolean that enables sending SIP message logs to Amazon CloudWatch logs.</p>"
         },
         "EnableMediaMetricLogs": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Enables or disables media metrics logging.</p>"
         }
-      }
+      },
+      "documentation": "<p>The logging configuration associated with an Amazon Chime SDK Voice Connector. Specifies whether SIP message logs can be sent to Amazon CloudWatch Logs.</p>"
     },
     "MediaInsightsConfiguration": {
       "type": "structure",
       "members": {
         "Disabled": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Denotes the configration as enabled or disabled.</p>"
         },
         "ConfigurationArn": {
-          "shape": "Arn"
+          "shape": "Arn",
+          "documentation": "<p>The configuration's ARN.</p>"
         }
-      }
+      },
+      "documentation": "<p>The configuration for a call analytics task.</p>"
     },
     "NextTokenString": {
       "type": "string",
@@ -5311,12 +5620,15 @@
       "type": "structure",
       "members": {
         "E164PhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The phone number, in E.164 format.</p>"
         },
         "Status": {
-          "shape": "OrderedPhoneNumberStatus"
+          "shape": "OrderedPhoneNumberStatus",
+          "documentation": "<p>The phone number status.</p>"
         }
-      }
+      },
+      "documentation": "<p>A phone number for which an order has been placed.</p>"
     },
     "OrderedPhoneNumberList": {
       "type": "list",
@@ -5336,32 +5648,41 @@
       "type": "structure",
       "members": {
         "Routes": {
-          "shape": "OriginationRouteList"
+          "shape": "OriginationRouteList",
+          "documentation": "<p>The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20. This parameter is not required, but you must specify this parameter or <code>Disabled</code>.</p>"
         },
         "Disabled": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>When origination settings are disabled, inbound calls are not enabled for your Amazon Chime SDK Voice Connector. This parameter is not required, but you must specify this parameter or <code>Routes</code>.</p>"
         }
-      }
+      },
+      "documentation": "<p>Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime SDK Voice Connector.</p> <note> <p>The parameters listed below are not required, but you must use at least one.</p> </note>"
     },
     "OriginationRoute": {
       "type": "structure",
       "members": {
         "Host": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The FQDN or IP address to contact for origination traffic.</p>"
         },
         "Port": {
-          "shape": "Port"
+          "shape": "Port",
+          "documentation": "<p>The designated origination route port. Defaults to 5060.</p>"
         },
         "Protocol": {
-          "shape": "OriginationRouteProtocol"
+          "shape": "OriginationRouteProtocol",
+          "documentation": "<p>The protocol to use for the origination route. Encryption-enabled Amazon Chime SDK Voice Connectors use TCP protocol by default.</p>"
         },
         "Priority": {
-          "shape": "OriginationRoutePriority"
+          "shape": "OriginationRoutePriority",
+          "documentation": "<p>The priority associated with the host, with 1 being the highest priority. Higher priority hosts are attempted first.</p>"
         },
         "Weight": {
-          "shape": "OriginationRouteWeight"
+          "shape": "OriginationRouteWeight",
+          "documentation": "<p>The weight assigned to an origination route. When hosts have equal priority, calls are distributed between them based on their relative weights.</p>"
         }
-      }
+      },
+      "documentation": "<p>Origination routes define call distribution properties for your SIP hosts to receive inbound calls using an Amazon Chime SDK Voice Connector. Limit: Ten origination routes for each Voice Connector.</p> <note> <p>The parameters listed below are not required, but you must use at least one.</p> </note>"
     },
     "OriginationRouteList": {
       "type": "list",
@@ -5390,12 +5711,15 @@
       "type": "structure",
       "members": {
         "PhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The participant's phone number.</p>"
         },
         "ProxyPhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The participant's proxy phone number.</p>"
         }
-      }
+      },
+      "documentation": "<p>The phone number and proxy phone number for a participant in an Amazon Chime SDK Voice Connector proxy session.</p>"
     },
     "ParticipantPhoneNumberList": {
       "type": "list",
@@ -5415,62 +5739,81 @@
       "type": "structure",
       "members": {
         "PhoneNumberId": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The phone number's ID.</p>"
         },
         "E164PhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The phone number, in E.164 format.</p>"
         },
         "Country": {
-          "shape": "Alpha2CountryCode"
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The phone number's country. Format: ISO 3166-1 alpha-2.</p>"
         },
         "Type": {
-          "shape": "PhoneNumberType"
+          "shape": "PhoneNumberType",
+          "documentation": "<p>The phone number's type.</p>"
         },
         "ProductType": {
-          "shape": "PhoneNumberProductType"
+          "shape": "PhoneNumberProductType",
+          "documentation": "<p>The phone number's product type.</p>"
         },
         "Status": {
-          "shape": "PhoneNumberStatus"
+          "shape": "PhoneNumberStatus",
+          "documentation": "<p>The phone number's status.</p>"
         },
         "Capabilities": {
-          "shape": "PhoneNumberCapabilities"
+          "shape": "PhoneNumberCapabilities",
+          "documentation": "<p>The phone number's capabilities.</p>"
         },
         "Associations": {
-          "shape": "PhoneNumberAssociationList"
+          "shape": "PhoneNumberAssociationList",
+          "documentation": "<p>The phone number's associations.</p>"
         },
         "CallingName": {
-          "shape": "CallingName"
+          "shape": "CallingName",
+          "documentation": "<p>The outbound calling name associated with the phone number.</p>"
         },
         "CallingNameStatus": {
-          "shape": "CallingNameStatus"
+          "shape": "CallingNameStatus",
+          "documentation": "<p>The outbound calling name status.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The phone number creation timestamp, in ISO 8601 format.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The updated phone number timestamp, in ISO 8601 format.</p>"
         },
         "DeletionTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The deleted phone number timestamp, in ISO 8601 format.</p>"
         },
         "OrderId": {
-          "shape": "GuidString"
+          "shape": "GuidString",
+          "documentation": "<p>The phone number's order ID.</p>"
         }
-      }
+      },
+      "documentation": "<p>A phone number used to call an Amazon Chime SDK Voice Connector.</p>"
     },
     "PhoneNumberAssociation": {
       "type": "structure",
       "members": {
         "Value": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>Contains the ID for the entity specified in Name.</p>"
         },
         "Name": {
-          "shape": "PhoneNumberAssociationName"
+          "shape": "PhoneNumberAssociationName",
+          "documentation": "<p>Defines the association with an Amazon Chime SDK account ID, user ID, Voice Connector ID, or Voice Connector group ID.</p>"
         },
         "AssociatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The timestamp of the phone number association, in ISO 8601 format.</p>"
         }
-      }
+      },
+      "documentation": "<p>The phone number associations, such as an Amazon Chime SDK account ID, user ID, Voice Connector ID, or Voice Connector group ID.</p>"
     },
     "PhoneNumberAssociationList": {
       "type": "list",
@@ -5490,24 +5833,31 @@
       "type": "structure",
       "members": {
         "InboundCall": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>Allows or denies inbound calling for the specified phone number.</p>"
         },
         "OutboundCall": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>Allows or denies outbound calling for the specified phone number.</p>"
         },
         "InboundSMS": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>Allows or denies inbound SMS messaging for the specified phone number.</p>"
         },
         "OutboundSMS": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>Allows or denies outbound SMS messaging for the specified phone number.</p>"
         },
         "InboundMMS": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>Allows or denies inbound MMS messaging for the specified phone number.</p>"
         },
         "OutboundMMS": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>Allows or denies inbound MMS messaging for the specified phone number.</p>"
         }
-      }
+      },
+      "documentation": "<p>The phone number capabilities for Amazon Chime SDK phone numbers, such as enabled inbound and outbound calling, and text messaging.</p>"
     },
     "PhoneNumberCountriesList": {
       "type": "list",
@@ -5519,26 +5869,33 @@
       "type": "structure",
       "members": {
         "CountryCode": {
-          "shape": "Alpha2CountryCode"
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The phone number country code. Format: ISO 3166-1 alpha-2.</p>"
         },
         "SupportedPhoneNumberTypes": {
-          "shape": "PhoneNumberTypeList"
+          "shape": "PhoneNumberTypeList",
+          "documentation": "<p>The supported phone number types.</p>"
         }
-      }
+      },
+      "documentation": "<p>The phone number's country.</p>"
     },
     "PhoneNumberError": {
       "type": "structure",
       "members": {
         "PhoneNumberId": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The phone number ID for which the action failed.</p>"
         },
         "ErrorCode": {
-          "shape": "ErrorCode"
+          "shape": "ErrorCode",
+          "documentation": "<p>The error code.</p>"
         },
         "ErrorMessage": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The error message.</p>"
         }
-      }
+      },
+      "documentation": "<p>If a phone number action fails for one or more of the phone numbers in a request, a list of the failed phone numbers is returned, along with error codes and error messages.</p>"
     },
     "PhoneNumberErrorList": {
       "type": "list",
@@ -5561,27 +5918,35 @@
       "type": "structure",
       "members": {
         "PhoneNumberOrderId": {
-          "shape": "GuidString"
+          "shape": "GuidString",
+          "documentation": "<p>The ID of the phone order.</p>"
         },
         "ProductType": {
-          "shape": "PhoneNumberProductType"
+          "shape": "PhoneNumberProductType",
+          "documentation": "<p>The phone number order product type.</p>"
         },
         "Status": {
-          "shape": "PhoneNumberOrderStatus"
+          "shape": "PhoneNumberOrderStatus",
+          "documentation": "<p>The status of the phone number order.</p>"
         },
         "OrderType": {
-          "shape": "PhoneNumberOrderType"
+          "shape": "PhoneNumberOrderType",
+          "documentation": "<p>The type of phone number being ordered, local or toll-free.</p>"
         },
         "OrderedPhoneNumbers": {
-          "shape": "OrderedPhoneNumberList"
+          "shape": "OrderedPhoneNumberList",
+          "documentation": "<p>The ordered phone number details, such as the phone number in E.164 format and the phone number status.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The phone number order creation time stamp, in ISO 8601 format.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The updated phone number order time stamp, in ISO 8601 format.</p>"
         }
-      }
+      },
+      "documentation": "<p>The details of an Amazon Chime SDK phone number order.</p>"
     },
     "PhoneNumberOrderList": {
       "type": "list",
@@ -5661,62 +6026,81 @@
       "type": "structure",
       "members": {
         "DefaultSessionExpiryMinutes": {
-          "shape": "Integer"
+          "shape": "Integer",
+          "documentation": "<p>The default number of minutes allowed for proxy sessions.</p>"
         },
         "Disabled": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>When true, stops proxy sessions from being created on the specified Amazon Chime SDK Voice Connector.</p>"
         },
         "FallBackPhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The phone number to route calls to after a proxy session expires.</p>"
         },
         "PhoneNumberCountries": {
-          "shape": "StringList"
+          "shape": "StringList",
+          "documentation": "<p>The countries for proxy phone numbers to be selected from.</p>"
         }
-      }
+      },
+      "documentation": "<p>The proxy configuration for an Amazon Chime SDK Voice Connector.</p>"
     },
     "ProxySession": {
       "type": "structure",
       "members": {
         "VoiceConnectorId": {
-          "shape": "NonEmptyString128"
+          "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>"
         },
         "ProxySessionId": {
-          "shape": "NonEmptyString128"
+          "shape": "NonEmptyString128",
+          "documentation": "<p>The proxy session ID.</p>"
         },
         "Name": {
-          "shape": "String128"
+          "shape": "String128",
+          "documentation": "<p>The proxy session name.</p>"
         },
         "Status": {
-          "shape": "ProxySessionStatus"
+          "shape": "ProxySessionStatus",
+          "documentation": "<p>The proxy session status.</p>"
         },
         "ExpiryMinutes": {
-          "shape": "PositiveInteger"
+          "shape": "PositiveInteger",
+          "documentation": "<p>The number of minutes allowed for the proxy session.</p>"
         },
         "Capabilities": {
-          "shape": "CapabilityList"
+          "shape": "CapabilityList",
+          "documentation": "<p>The proxy session capabilities.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The created time stamp, in ISO 8601 format.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The updated time stamp, in ISO 8601 format.</p>"
         },
         "EndedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The ended time stamp, in ISO 8601 format.</p>"
         },
         "Participants": {
-          "shape": "Participants"
+          "shape": "Participants",
+          "documentation": "<p>The proxy session participants.</p>"
         },
         "NumberSelectionBehavior": {
-          "shape": "NumberSelectionBehavior"
+          "shape": "NumberSelectionBehavior",
+          "documentation": "<p>The preference for proxy phone number reuse, or stickiness, between the same participants across sessions.</p>"
         },
         "GeoMatchLevel": {
-          "shape": "GeoMatchLevel"
+          "shape": "GeoMatchLevel",
+          "documentation": "<p>The preference for matching the country or area code of the proxy phone number with that of the first participant.</p>"
         },
         "GeoMatchParams": {
-          "shape": "GeoMatchParams"
+          "shape": "GeoMatchParams",
+          "documentation": "<p>The country and area code for the proxy phone number.</p>"
         }
-      }
+      },
+      "documentation": "<p>The proxy session for an Amazon Chime SDK Voice Connector.</p>"
     },
     "ProxySessionNameString": {
       "type": "string",
@@ -5745,11 +6129,13 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         },
         "SipMediaApplicationAlexaSkillConfiguration": {
-          "shape": "SipMediaApplicationAlexaSkillConfiguration"
+          "shape": "SipMediaApplicationAlexaSkillConfiguration",
+          "documentation": "<p>The Alexa Skill configuration.</p>"
         }
       }
     },
@@ -5757,7 +6143,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplicationAlexaSkillConfiguration": {
-          "shape": "SipMediaApplicationAlexaSkillConfiguration"
+          "shape": "SipMediaApplicationAlexaSkillConfiguration",
+          "documentation": "<p>Returns the Alexa Skill configuration.</p>"
         }
       }
     },
@@ -5769,11 +6156,13 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         },
         "SipMediaApplicationLoggingConfiguration": {
-          "shape": "SipMediaApplicationLoggingConfiguration"
+          "shape": "SipMediaApplicationLoggingConfiguration",
+          "documentation": "<p>The logging configuration for the specified SIP media application.</p>"
         }
       }
     },
@@ -5781,7 +6170,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplicationLoggingConfiguration": {
-          "shape": "SipMediaApplicationLoggingConfiguration"
+          "shape": "SipMediaApplicationLoggingConfiguration",
+          "documentation": "<p>The updated logging configuration for the specified SIP media application.</p>"
         }
       }
     },
@@ -5794,11 +6184,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "EmergencyCallingConfiguration": {
-          "shape": "EmergencyCallingConfiguration"
+          "shape": "EmergencyCallingConfiguration",
+          "documentation": "<p>The configuration being updated.</p>"
         }
       }
     },
@@ -5806,7 +6198,8 @@
       "type": "structure",
       "members": {
         "EmergencyCallingConfiguration": {
-          "shape": "EmergencyCallingConfiguration"
+          "shape": "EmergencyCallingConfiguration",
+          "documentation": "<p>The updated configuration.</p>"
         }
       }
     },
@@ -5819,11 +6212,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "LoggingConfiguration": {
-          "shape": "LoggingConfiguration"
+          "shape": "LoggingConfiguration",
+          "documentation": "<p>The logging configuration being updated.</p>"
         }
       }
     },
@@ -5831,7 +6226,8 @@
       "type": "structure",
       "members": {
         "LoggingConfiguration": {
-          "shape": "LoggingConfiguration"
+          "shape": "LoggingConfiguration",
+          "documentation": "<p>The updated logging configuration.</p>"
         }
       }
     },
@@ -5844,11 +6240,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "Origination": {
-          "shape": "Origination"
+          "shape": "Origination",
+          "documentation": "<p>The origination settings being updated.</p>"
         }
       }
     },
@@ -5856,7 +6254,8 @@
       "type": "structure",
       "members": {
         "Origination": {
-          "shape": "Origination"
+          "shape": "Origination",
+          "documentation": "<p>The updated origination settings.</p>"
         }
       }
     },
@@ -5870,20 +6269,25 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "DefaultSessionExpiryMinutes": {
-          "shape": "Integer"
+          "shape": "Integer",
+          "documentation": "<p>The default number of minutes allowed for proxy session.</p>"
         },
         "PhoneNumberPoolCountries": {
-          "shape": "CountryList"
+          "shape": "CountryList",
+          "documentation": "<p>The countries for proxy phone numbers to be selected from.</p>"
         },
         "FallBackPhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The phone number to route calls to after a proxy session expires.</p>"
         },
         "Disabled": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>When true, stops proxy sessions from being created on the specified Amazon Chime SDK Voice Connector.</p>"
         }
       }
     },
@@ -5891,7 +6295,8 @@
       "type": "structure",
       "members": {
         "Proxy": {
-          "shape": "Proxy"
+          "shape": "Proxy",
+          "documentation": "<p>The proxy configuration details.</p>"
         }
       }
     },
@@ -5904,11 +6309,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "StreamingConfiguration": {
-          "shape": "StreamingConfiguration"
+          "shape": "StreamingConfiguration",
+          "documentation": "<p>The streaming settings being updated.</p>"
         }
       }
     },
@@ -5916,7 +6323,8 @@
       "type": "structure",
       "members": {
         "StreamingConfiguration": {
-          "shape": "StreamingConfiguration"
+          "shape": "StreamingConfiguration",
+          "documentation": "<p>The updated streaming settings.</p>"
         }
       }
     },
@@ -5928,11 +6336,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "Credentials": {
-          "shape": "CredentialList"
+          "shape": "CredentialList",
+          "documentation": "<p>The termination credentials being updated.</p>"
         }
       }
     },
@@ -5945,11 +6355,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "Termination": {
-          "shape": "Termination"
+          "shape": "Termination",
+          "documentation": "<p>The termination settings to be updated.</p>"
         }
       }
     },
@@ -5957,7 +6369,8 @@
       "type": "structure",
       "members": {
         "Termination": {
-          "shape": "Termination"
+          "shape": "Termination",
+          "documentation": "<p>The updated termination settings.</p>"
         }
       }
     },
@@ -5969,6 +6382,7 @@
       "members": {
         "PhoneNumberId": {
           "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The ID of the phone number being restored.</p>",
           "location": "uri",
           "locationName": "phoneNumberId"
         }
@@ -5978,7 +6392,8 @@
       "type": "structure",
       "members": {
         "PhoneNumber": {
-          "shape": "PhoneNumber"
+          "shape": "PhoneNumber",
+          "documentation": "<p>The restored phone number.</p>"
         }
       }
     },
@@ -6014,41 +6429,49 @@
       "members": {
         "AreaCode": {
           "shape": "String",
+          "documentation": "<p>Confines a search to just the phone numbers associated with the specified area code.</p>",
           "location": "querystring",
           "locationName": "area-code"
         },
         "City": {
           "shape": "String",
+          "documentation": "<p>Confines a search to just the phone numbers associated with the specified city.</p>",
           "location": "querystring",
           "locationName": "city"
         },
         "Country": {
           "shape": "Alpha2CountryCode",
+          "documentation": "<p>Confines a search to just the phone numbers associated with the specified country.</p>",
           "location": "querystring",
           "locationName": "country"
         },
         "State": {
           "shape": "String",
+          "documentation": "<p>Confines a search to just the phone numbers associated with the specified state.</p>",
           "location": "querystring",
           "locationName": "state"
         },
         "TollFreePrefix": {
           "shape": "TollFreePrefix",
+          "documentation": "<p>Confines a search to just the phone numbers associated with the specified toll-free prefix.</p>",
           "location": "querystring",
           "locationName": "toll-free-prefix"
         },
         "PhoneNumberType": {
           "shape": "PhoneNumberType",
+          "documentation": "<p>Confines a search to just the phone numbers associated with the specified phone number type, either <b>local</b> or <b>toll-free</b>.</p>",
           "location": "querystring",
           "locationName": "phone-number-type"
         },
         "MaxResults": {
           "shape": "PhoneNumberMaxResults",
+          "documentation": "<p>The maximum number of results to return.</p>",
           "location": "querystring",
           "locationName": "max-results"
         },
         "NextToken": {
           "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         }
@@ -6058,10 +6481,12 @@
       "type": "structure",
       "members": {
         "E164PhoneNumbers": {
-          "shape": "E164PhoneNumberList"
+          "shape": "E164PhoneNumberList",
+          "documentation": "<p>Confines a search to just the phone numbers in the E.164 format.</p>"
         },
         "NextToken": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The token used to return the next page of results.</p>"
         }
       }
     },
@@ -6087,9 +6512,11 @@
       ],
       "members": {
         "KmsKeyArn": {
-          "shape": "Arn"
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the KMS key used to encrypt the enrollment data in a voice profile domain. Asymmetric customer managed keys are not supported.</p>"
         }
-      }
+      },
+      "documentation": "<p>A structure that contains the configuration settings for server-side encryption.</p> <note> <p>We only support symmetric keys. Do not use asymmetric or HMAC keys, or KMS aliases.</p> </note>"
     },
     "SipApplicationPriority": {
       "type": "integer",
@@ -6110,24 +6537,31 @@
       "type": "structure",
       "members": {
         "SipMediaApplicationId": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>A SIP media application's ID.</p>"
         },
         "AwsRegion": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The AWS Region in which the SIP media application is created.</p>"
         },
         "Name": {
-          "shape": "SipMediaApplicationName"
+          "shape": "SipMediaApplicationName",
+          "documentation": "<p>The SIP media application's name.</p>"
         },
         "Endpoints": {
-          "shape": "SipMediaApplicationEndpointList"
+          "shape": "SipMediaApplicationEndpointList",
+          "documentation": "<p>List of endpoints for SIP media application. Currently, only one endpoint per SIP media application is permitted.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The SIP media application creation timestamp, in ISO 8601 format.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the SIP media application was updated.</p>"
         }
-      }
+      },
+      "documentation": "<p>The details of the SIP media application, including name and endpoints. An AWS account can have multiple SIP media applications.</p>"
     },
     "SipMediaApplicationAlexaSkillConfiguration": {
       "type": "structure",
@@ -6137,28 +6571,35 @@
       ],
       "members": {
         "AlexaSkillStatus": {
-          "shape": "AlexaSkillStatus"
+          "shape": "AlexaSkillStatus",
+          "documentation": "<p>The status of the Alexa Skill configuration.</p>"
         },
         "AlexaSkillIds": {
-          "shape": "AlexaSkillIdList"
+          "shape": "AlexaSkillIdList",
+          "documentation": "<p>The ID of the Alexa Skill configuration.</p>"
         }
-      }
+      },
+      "documentation": "<p>The Alexa Skill configuration of a SIP media application.</p>"
     },
     "SipMediaApplicationCall": {
       "type": "structure",
       "members": {
         "TransactionId": {
-          "shape": "GuidString"
+          "shape": "GuidString",
+          "documentation": "<p>The call's transaction ID.</p>"
         }
-      }
+      },
+      "documentation": "<p>A <code>Call</code> instance for a SIP media application.</p>"
     },
     "SipMediaApplicationEndpoint": {
       "type": "structure",
       "members": {
         "LambdaArn": {
-          "shape": "FunctionArn"
+          "shape": "FunctionArn",
+          "documentation": "<p>Valid Amazon Resource Name (ARN) of the Lambda function, version, or alias. The function must be created in the same AWS Region as the SIP media application.</p>"
         }
-      }
+      },
+      "documentation": "<p>The endpoint assigned to a SIP media application.</p>"
     },
     "SipMediaApplicationEndpointList": {
       "type": "list",
@@ -6178,9 +6619,11 @@
       "type": "structure",
       "members": {
         "EnableSipMediaApplicationMessageLogs": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Enables message logging for the specified SIP media application.</p>"
         }
-      }
+      },
+      "documentation": "<p>The logging configuration of a SIP media application.</p>"
     },
     "SipMediaApplicationName": {
       "type": "string",
@@ -6192,30 +6635,39 @@
       "type": "structure",
       "members": {
         "SipRuleId": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>A SIP rule's ID.</p>"
         },
         "Name": {
-          "shape": "SipRuleName"
+          "shape": "SipRuleName",
+          "documentation": "<p>A SIP rule's name.</p>"
         },
         "Disabled": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the SIP rule is enabled or disabled. You must disable a rule before you can delete it.</p>"
         },
         "TriggerType": {
-          "shape": "SipRuleTriggerType"
+          "shape": "SipRuleTriggerType",
+          "documentation": "<p>The type of trigger set for a SIP rule, either a phone number or a URI request host name.</p>"
         },
         "TriggerValue": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value set for a SIP rule's trigger type. Either a phone number or a URI hostname.</p>"
         },
         "TargetApplications": {
-          "shape": "SipRuleTargetApplicationList"
+          "shape": "SipRuleTargetApplicationList",
+          "documentation": "<p>The target SIP media application and other details, such as priority and AWS Region, to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the SIP rule was created, in ISO 8601 format.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the SIP rule was updated, in ISO 8601 format.</p>"
         }
-      }
+      },
+      "documentation": "<p>The details of a SIP rule, including name, triggers, and target applications. An AWS account can have multiple SIP rules.</p>"
     },
     "SipRuleList": {
       "type": "list",
@@ -6233,15 +6685,19 @@
       "type": "structure",
       "members": {
         "SipMediaApplicationId": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of a rule's target SIP media application.</p>"
         },
         "Priority": {
-          "shape": "SipApplicationPriority"
+          "shape": "SipApplicationPriority",
+          "documentation": "<p>The priority setting of a rule's target SIP media application.</p>"
         },
         "AwsRegion": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The AWS Region of a rule's target SIP media application.</p>"
         }
-      }
+      },
+      "documentation": "<p>A target SIP media application and other details, such as priority and AWS Region, to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.</p>"
     },
     "SipRuleTargetApplicationList": {
       "type": "list",
@@ -6262,23 +6718,29 @@
       "type": "structure",
       "members": {
         "Results": {
-          "shape": "SpeakerSearchResultList"
+          "shape": "SpeakerSearchResultList",
+          "documentation": "<p>The result value in the speaker search details.</p>"
         },
         "VoiceprintGenerationStatus": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The status of a voice print generation operation, <code>VoiceprintGenerationSuccess</code> or <code>VoiceprintGenerationFailure</code>..</p>"
         }
-      }
+      },
+      "documentation": "<p>The details of a speaker search task.</p>"
     },
     "SpeakerSearchResult": {
       "type": "structure",
       "members": {
         "ConfidenceScore": {
-          "shape": "ConfidenceScore"
+          "shape": "ConfidenceScore",
+          "documentation": "<p>The confidence score in the speaker search analysis.</p>"
         },
         "VoiceProfileId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The voice profile ID.</p>"
         }
-      }
+      },
+      "documentation": "<p>The result of a speaker search analysis.</p>"
     },
     "SpeakerSearchResultList": {
       "type": "list",
@@ -6290,30 +6752,39 @@
       "type": "structure",
       "members": {
         "SpeakerSearchTaskId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The speaker search task ID.</p>"
         },
         "SpeakerSearchTaskStatus": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the speaker search task, <code>IN_QUEUE</code>, <code>IN_PROGRESS</code>, <code>PARTIAL_SUCCESS</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, or <code>STOPPED</code>.</p>"
         },
         "CallDetails": {
-          "shape": "CallDetails"
+          "shape": "CallDetails",
+          "documentation": "<p>The call details of a speaker search task.</p>"
         },
         "SpeakerSearchDetails": {
-          "shape": "SpeakerSearchDetails"
+          "shape": "SpeakerSearchDetails",
+          "documentation": "<p>The details of a speaker search task.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which a speaker search task was created.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which a speaker search task was updated.</p>"
         },
         "StartedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the speaker search task began.</p>"
         },
         "StatusMessage": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>A detailed message about the status of a speaker search.</p>"
         }
-      }
+      },
+      "documentation": "<p>A representation of an asynchronous request to perform speaker search analysis on a Voice Connector call.</p>"
     },
     "StartSpeakerSearchTaskRequest": {
       "type": "structure",
@@ -6325,17 +6796,21 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "VoiceConnectorId"
         },
         "TransactionId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The transaction ID of the call being analyzed.</p>"
         },
         "VoiceProfileDomainId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice profile domain that will store the voice profile.</p>"
         },
         "ClientRequestToken": {
-          "shape": "ClientRequestId"
+          "shape": "ClientRequestId",
+          "documentation": "<p>The unique identifier for the client request. Use a different token for different speaker search tasks.</p>"
         }
       }
     },
@@ -6343,7 +6818,8 @@
       "type": "structure",
       "members": {
         "SpeakerSearchTask": {
-          "shape": "SpeakerSearchTask"
+          "shape": "SpeakerSearchTask",
+          "documentation": "<p>The details of the speaker search task.</p>"
         }
       }
     },
@@ -6357,17 +6833,21 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "VoiceConnectorId"
         },
         "TransactionId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The transaction ID.</p>"
         },
         "LanguageCode": {
-          "shape": "LanguageCode"
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code.</p>"
         },
         "ClientRequestToken": {
-          "shape": "ClientRequestId"
+          "shape": "ClientRequestId",
+          "documentation": "<p>The unique identifier for the client request. Use a different token for different voice tone analysis tasks.</p>"
         }
       }
     },
@@ -6375,7 +6855,8 @@
       "type": "structure",
       "members": {
         "VoiceToneAnalysisTask": {
-          "shape": "VoiceToneAnalysisTask"
+          "shape": "VoiceToneAnalysisTask",
+          "documentation": "<p>The details of the voice tone analysis task.</p>"
         }
       }
     },
@@ -6388,11 +6869,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "VoiceConnectorId"
         },
         "SpeakerSearchTaskId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The speaker search task ID.</p>",
           "location": "uri",
           "locationName": "SpeakerSearchTaskId"
         }
@@ -6407,11 +6890,13 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "VoiceConnectorId"
         },
         "VoiceToneAnalysisTaskId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice tone analysis task.</p>",
           "location": "uri",
           "locationName": "VoiceToneAnalysisTaskId"
         }
@@ -6425,26 +6910,33 @@
       ],
       "members": {
         "DataRetentionInHours": {
-          "shape": "DataRetentionInHours"
+          "shape": "DataRetentionInHours",
+          "documentation": "<p>The amount of time, in hours, to the Kinesis data.</p>"
         },
         "Disabled": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>When true, streaming to Kinesis is off.</p>"
         },
         "StreamingNotificationTargets": {
-          "shape": "StreamingNotificationTargetList"
+          "shape": "StreamingNotificationTargetList",
+          "documentation": "<p>The streaming notification targets.</p>"
         },
         "MediaInsightsConfiguration": {
-          "shape": "MediaInsightsConfiguration"
+          "shape": "MediaInsightsConfiguration",
+          "documentation": "<p>The call analytics configuration.</p>"
         }
-      }
+      },
+      "documentation": "<p>The streaming configuration associated with an Amazon Chime SDK Voice Connector. Specifies whether media streaming is enabled for sending to Amazon Kinesis, and shows the retention period for the Amazon Kinesis data, in hours.</p>"
     },
     "StreamingNotificationTarget": {
       "type": "structure",
       "members": {
         "NotificationTarget": {
-          "shape": "NotificationTarget"
+          "shape": "NotificationTarget",
+          "documentation": "<p>The streaming notification target.</p>"
         }
-      }
+      },
+      "documentation": "<p>The target recipient for a streaming configuration notification.</p>"
     },
     "StreamingNotificationTargetList": {
       "type": "list",
@@ -6475,12 +6967,15 @@
       ],
       "members": {
         "Key": {
-          "shape": "TagKey"
+          "shape": "TagKey",
+          "documentation": "<p>The tag's key.</p>"
         },
         "Value": {
-          "shape": "TagValue"
+          "shape": "TagValue",
+          "documentation": "<p>The tag's value.</p>"
         }
-      }
+      },
+      "documentation": "<p>Describes a tag applied to a resource.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -6512,10 +7007,12 @@
       ],
       "members": {
         "ResourceARN": {
-          "shape": "Arn"
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the resource being tagged. </p>"
         },
         "Tags": {
-          "shape": "TagList"
+          "shape": "TagList",
+          "documentation": "<p>A list of the tags being added to the resource.</p>"
         }
       }
     },
@@ -6529,32 +7026,41 @@
       "type": "structure",
       "members": {
         "CpsLimit": {
-          "shape": "CpsLimit"
+          "shape": "CpsLimit",
+          "documentation": "<p>The limit on calls per second. Max value based on account service quota. Default value of 1.</p>"
         },
         "DefaultPhoneNumber": {
-          "shape": "E164PhoneNumber"
+          "shape": "E164PhoneNumber",
+          "documentation": "<p>The default outbound calling number.</p>"
         },
         "CallingRegions": {
-          "shape": "CallingRegionList"
+          "shape": "CallingRegionList",
+          "documentation": "<p>The countries to which calls are allowed, in ISO 3166-1 alpha-2 format. Required.</p>"
         },
         "CidrAllowedList": {
-          "shape": "StringList"
+          "shape": "StringList",
+          "documentation": "<p>The IP addresses allowed to make calls, in CIDR format.</p>"
         },
         "Disabled": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>When termination is disabled, outbound calls cannot be made.</p>"
         }
-      }
+      },
+      "documentation": "<p>Termination settings enable SIP hosts to make outbound calls using an Amazon Chime SDK Voice Connector.</p>"
     },
     "TerminationHealth": {
       "type": "structure",
       "members": {
         "Timestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The timestamp, in ISO 8601 format.</p>"
         },
         "Source": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The source IP address.</p>"
         }
-      }
+      },
+      "documentation": "<p>The termination health details, including the source IP address and timestamp of the last successful <code>SIP OPTIONS</code> message from your SIP infrastructure.</p>"
     },
     "TollFreePrefix": {
       "type": "string",
@@ -6570,10 +7076,12 @@
       ],
       "members": {
         "ResourceARN": {
-          "shape": "Arn"
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the resource having its tags removed.</p>"
         },
         "TagKeys": {
-          "shape": "TagKeyList"
+          "shape": "TagKeyList",
+          "documentation": "<p>The keys of the tags being removed from the resource.</p>"
         }
       }
     },
@@ -6581,7 +7089,8 @@
       "type": "structure",
       "members": {
         "VoiceConnector": {
-          "shape": "VoiceConnectorSettings"
+          "shape": "VoiceConnectorSettings",
+          "documentation": "<p>The Voice Connector settings.</p>"
         }
       }
     },
@@ -6593,14 +7102,17 @@
       "members": {
         "PhoneNumberId": {
           "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The phone number ID.</p>",
           "location": "uri",
           "locationName": "phoneNumberId"
         },
         "ProductType": {
-          "shape": "PhoneNumberProductType"
+          "shape": "PhoneNumberProductType",
+          "documentation": "<p>The product type.</p>"
         },
         "CallingName": {
-          "shape": "CallingName"
+          "shape": "CallingName",
+          "documentation": "<p>The outbound calling name associated with the phone number.</p>"
         }
       }
     },
@@ -6611,15 +7123,19 @@
       ],
       "members": {
         "PhoneNumberId": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The phone number ID to update.</p>"
         },
         "ProductType": {
-          "shape": "PhoneNumberProductType"
+          "shape": "PhoneNumberProductType",
+          "documentation": "<p>The product type to update.</p>"
         },
         "CallingName": {
-          "shape": "CallingName"
+          "shape": "CallingName",
+          "documentation": "<p>The outbound calling name to update.</p>"
         }
-      }
+      },
+      "documentation": "<p>The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.</p>"
     },
     "UpdatePhoneNumberRequestItemList": {
       "type": "list",
@@ -6631,7 +7147,8 @@
       "type": "structure",
       "members": {
         "PhoneNumber": {
-          "shape": "PhoneNumber"
+          "shape": "PhoneNumber",
+          "documentation": "<p>The updated phone number details.</p>"
         }
       }
     },
@@ -6642,7 +7159,8 @@
       ],
       "members": {
         "CallingName": {
-          "shape": "CallingName"
+          "shape": "CallingName",
+          "documentation": "<p>The default outbound calling name for the account.</p>"
         }
       }
     },
@@ -6656,19 +7174,23 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "ProxySessionId": {
           "shape": "NonEmptyString128",
+          "documentation": "<p>The proxy session ID.</p>",
           "location": "uri",
           "locationName": "proxySessionId"
         },
         "Capabilities": {
-          "shape": "CapabilityList"
+          "shape": "CapabilityList",
+          "documentation": "<p>The proxy session capabilities.</p>"
         },
         "ExpiryMinutes": {
-          "shape": "PositiveInteger"
+          "shape": "PositiveInteger",
+          "documentation": "<p>The number of minutes allowed for the proxy session.</p>"
         }
       }
     },
@@ -6676,7 +7198,8 @@
       "type": "structure",
       "members": {
         "ProxySession": {
-          "shape": "ProxySession"
+          "shape": "ProxySession",
+          "documentation": "<p>The updated proxy session details.</p>"
         }
       }
     },
@@ -6690,16 +7213,19 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the SIP media application handling the call.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         },
         "TransactionId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the call transaction.</p>",
           "location": "uri",
           "locationName": "transactionId"
         },
         "Arguments": {
-          "shape": "SMAUpdateCallArgumentsMap"
+          "shape": "SMAUpdateCallArgumentsMap",
+          "documentation": "<p>Arguments made available to the Lambda function as part of the <code>CALL_UPDATE_REQUESTED</code> event. Can contain 0-20 key-value pairs.</p>"
         }
       }
     },
@@ -6707,7 +7233,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplicationCall": {
-          "shape": "SipMediaApplicationCall"
+          "shape": "SipMediaApplicationCall",
+          "documentation": "<p>A <code>Call</code> instance for a SIP media application.</p>"
         }
       }
     },
@@ -6719,14 +7246,17 @@
       "members": {
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP media application ID.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
         },
         "Name": {
-          "shape": "SipMediaApplicationName"
+          "shape": "SipMediaApplicationName",
+          "documentation": "<p>The new name for the specified SIP media application.</p>"
         },
         "Endpoints": {
-          "shape": "SipMediaApplicationEndpointList"
+          "shape": "SipMediaApplicationEndpointList",
+          "documentation": "<p>The new set of endpoints for the specified SIP media application.</p>"
         }
       }
     },
@@ -6734,7 +7264,8 @@
       "type": "structure",
       "members": {
         "SipMediaApplication": {
-          "shape": "SipMediaApplication"
+          "shape": "SipMediaApplication",
+          "documentation": "<p>The updated SIP media application’s details.</p>"
         }
       }
     },
@@ -6747,17 +7278,21 @@
       "members": {
         "SipRuleId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The SIP rule ID.</p>",
           "location": "uri",
           "locationName": "sipRuleId"
         },
         "Name": {
-          "shape": "SipRuleName"
+          "shape": "SipRuleName",
+          "documentation": "<p>The new name for the specified SIP rule.</p>"
         },
         "Disabled": {
-          "shape": "NullableBoolean"
+          "shape": "NullableBoolean",
+          "documentation": "<p>The new value that indicates whether the rule is disabled.</p>"
         },
         "TargetApplications": {
-          "shape": "SipRuleTargetApplicationList"
+          "shape": "SipRuleTargetApplicationList",
+          "documentation": "<p>The new list of target applications.</p>"
         }
       }
     },
@@ -6765,7 +7300,8 @@
       "type": "structure",
       "members": {
         "SipRule": {
-          "shape": "SipRule"
+          "shape": "SipRule",
+          "documentation": "<p>The updated SIP rule details.</p>"
         }
       }
     },
@@ -6779,14 +7315,17 @@
       "members": {
         "VoiceConnectorGroupId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorGroupId"
         },
         "Name": {
-          "shape": "VoiceConnectorGroupName"
+          "shape": "VoiceConnectorGroupName",
+          "documentation": "<p>The name of the Voice Connector group.</p>"
         },
         "VoiceConnectorItems": {
-          "shape": "VoiceConnectorItemList"
+          "shape": "VoiceConnectorItemList",
+          "documentation": "<p>The <code>VoiceConnectorItems</code> to associate with the Voice Connector group.</p>"
         }
       }
     },
@@ -6794,7 +7333,8 @@
       "type": "structure",
       "members": {
         "VoiceConnectorGroup": {
-          "shape": "VoiceConnectorGroup"
+          "shape": "VoiceConnectorGroup",
+          "documentation": "<p>The updated Voice Connector group.</p>"
         }
       }
     },
@@ -6808,14 +7348,17 @@
       "members": {
         "VoiceConnectorId": {
           "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>",
           "location": "uri",
           "locationName": "voiceConnectorId"
         },
         "Name": {
-          "shape": "VoiceConnectorName"
+          "shape": "VoiceConnectorName",
+          "documentation": "<p>The name of the Voice Connector.</p>"
         },
         "RequireEncryption": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>When enabled, requires encryption for the Voice Connector.</p>"
         }
       }
     },
@@ -6823,7 +7366,8 @@
       "type": "structure",
       "members": {
         "VoiceConnector": {
-          "shape": "VoiceConnector"
+          "shape": "VoiceConnector",
+          "documentation": "<p>The updated Voice Connector details.</p>"
         }
       }
     },
@@ -6835,14 +7379,17 @@
       "members": {
         "VoiceProfileDomainId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The domain ID.</p>",
           "location": "uri",
           "locationName": "VoiceProfileDomainId"
         },
         "Name": {
-          "shape": "VoiceProfileDomainName"
+          "shape": "VoiceProfileDomainName",
+          "documentation": "<p>The name of the voice profile domain.</p>"
         },
         "Description": {
-          "shape": "VoiceProfileDomainDescription"
+          "shape": "VoiceProfileDomainDescription",
+          "documentation": "<p>The description of the voice profile domain.</p>"
         }
       }
     },
@@ -6850,7 +7397,8 @@
       "type": "structure",
       "members": {
         "VoiceProfileDomain": {
-          "shape": "VoiceProfileDomain"
+          "shape": "VoiceProfileDomain",
+          "documentation": "<p>The updated details of the voice profile domain.</p>"
         }
       }
     },
@@ -6863,11 +7411,13 @@
       "members": {
         "VoiceProfileId": {
           "shape": "NonEmptyString256",
+          "documentation": "<p>The profile ID.</p>",
           "location": "uri",
           "locationName": "VoiceProfileId"
         },
         "SpeakerSearchTaskId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the speaker search task.</p>"
         }
       }
     },
@@ -6875,7 +7425,8 @@
       "type": "structure",
       "members": {
         "VoiceProfile": {
-          "shape": "VoiceProfile"
+          "shape": "VoiceProfile",
+          "documentation": "<p>The updated voice profile settings.</p>"
         }
       }
     },
@@ -6892,25 +7443,32 @@
       ],
       "members": {
         "AwsAccountId": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The AWS account ID.</p>"
         },
         "StreetNumber": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The address street number, such as <code>200</code> or <code>2121</code>.</p>"
         },
         "StreetInfo": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The address street information, such as <code>8th Avenue</code>.</p>"
         },
         "City": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The address city, such as <code>Portland</code>.</p>"
         },
         "State": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The address state, such as <code>ME</code>.</p>"
         },
         "Country": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The country in the address being validated.</p>"
         },
         "PostalCode": {
-          "shape": "SensitiveNonEmptyString"
+          "shape": "SensitiveNonEmptyString",
+          "documentation": "<p>The dress postal code, such <code>04352</code>.</p>"
         }
       }
     },
@@ -6918,16 +7476,20 @@
       "type": "structure",
       "members": {
         "ValidationResult": {
-          "shape": "ValidationResult"
+          "shape": "ValidationResult",
+          "documentation": "<p>Number indicating the result of address validation. <code>0</code> means the address was perfect as-is and successfully validated. <code>1</code> means the address was corrected. <code>2</code> means the address sent was not close enough and was not validated.</p>"
         },
         "AddressExternalId": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The ID that represents the address.</p>"
         },
         "Address": {
-          "shape": "Address"
+          "shape": "Address",
+          "documentation": "<p>The validated address.</p>"
         },
         "CandidateAddressList": {
-          "shape": "CandidateAddressList"
+          "shape": "CandidateAddressList",
+          "documentation": "<p>The list of address suggestions..</p>"
         }
       }
     },
@@ -6940,30 +7502,39 @@
       "type": "structure",
       "members": {
         "VoiceConnectorId": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector's ID.</p>"
         },
         "AwsRegion": {
-          "shape": "VoiceConnectorAwsRegion"
+          "shape": "VoiceConnectorAwsRegion",
+          "documentation": "<p>The AWS Region in which the Voice Connector is created. Default: us-east-1.</p>"
         },
         "Name": {
-          "shape": "VoiceConnectorName"
+          "shape": "VoiceConnectorName",
+          "documentation": "<p>The Voice Connector's name.</p>"
         },
         "OutboundHostName": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The outbound host name for the Voice Connector.</p>"
         },
         "RequireEncryption": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Enables or disables encryption for the Voice Connector.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The Voice Connector's creation timestamp, in ISO 8601 format.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The Voice Connector's updated timestamp, in ISO 8601 format.</p>"
         },
         "VoiceConnectorArn": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the Voice Connector.</p>"
         }
-      }
+      },
+      "documentation": "<p>The Amazon Chime SDK Voice Connector configuration, including outbound host name and encryption settings.</p>"
     },
     "VoiceConnectorAwsRegion": {
       "type": "string",
@@ -6990,24 +7561,31 @@
       "type": "structure",
       "members": {
         "VoiceConnectorGroupId": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of a Voice Connector group.</p>"
         },
         "Name": {
-          "shape": "VoiceConnectorGroupName"
+          "shape": "VoiceConnectorGroupName",
+          "documentation": "<p>The name of a Voice Connector group.</p>"
         },
         "VoiceConnectorItems": {
-          "shape": "VoiceConnectorItemList"
+          "shape": "VoiceConnectorItemList",
+          "documentation": "<p>The Voice Connectors to which you route inbound calls.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The Voice Connector group's creation time stamp, in ISO 8601 format.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The Voice Connector group's creation time stamp, in ISO 8601 format.</p>"
         },
         "VoiceConnectorGroupArn": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the Voice Connector group.</p>"
         }
-      }
+      },
+      "documentation": "<p>The Amazon Chime SDK Voice Connector group configuration, including associated Voice Connectors. You can include Voice Connectors from different AWS Regions in a group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>"
     },
     "VoiceConnectorGroupList": {
       "type": "list",
@@ -7029,12 +7607,15 @@
       ],
       "members": {
         "VoiceConnectorId": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Voice Connector ID.</p>"
         },
         "Priority": {
-          "shape": "VoiceConnectorItemPriority"
+          "shape": "VoiceConnectorItemPriority",
+          "documentation": "<p>The priority setting of a Voice Connector item. Calls are routed to hosts in priority order, with 1 as the highest priority. When hosts have equal priority, the system distributes calls among them based on their relative weight.</p>"
         }
-      }
+      },
+      "documentation": "<p>For Amazon Chime SDK Voice Connector groups, the Amazon Chime SDK Voice Connectors to which you route inbound calls. Includes priority configuration settings. Limit: 3 VoiceConnectorItems per Voice Connector group.</p>"
     },
     "VoiceConnectorItemList": {
       "type": "list",
@@ -7063,58 +7644,75 @@
       "type": "structure",
       "members": {
         "CdrBucket": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The S3 bucket that stores the Voice Connector's call detail records.</p>"
         }
-      }
+      },
+      "documentation": "<p>The Amazon Chime SDK Voice Connector settings. Includes any Amazon S3 buckets designated for storing call detail records.</p>"
     },
     "VoiceProfile": {
       "type": "structure",
       "members": {
         "VoiceProfileId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice profile.</p>"
         },
         "VoiceProfileArn": {
-          "shape": "Arn"
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the voice profile.</p>"
         },
         "VoiceProfileDomainId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the domain that contains the voice profile.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the voice profile was created and enrolled.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the voice profile was last updated.</p>"
         },
         "ExpirationTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which a voice profile expires unless you re-enroll the caller via the <code>UpdateVoiceProfile</code> API.</p>"
         }
-      }
+      },
+      "documentation": "<p>The combination of a voice print and caller ID.</p>"
     },
     "VoiceProfileDomain": {
       "type": "structure",
       "members": {
         "VoiceProfileDomainId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice profile domain.</p>"
         },
         "VoiceProfileDomainArn": {
-          "shape": "Arn"
+          "shape": "Arn",
+          "documentation": "<p>The voice profile domain's Amazon Resource Number (ARN).</p>"
         },
         "Name": {
-          "shape": "VoiceProfileDomainName"
+          "shape": "VoiceProfileDomainName",
+          "documentation": "<p>The name of the voice profile domain.</p>"
         },
         "Description": {
-          "shape": "VoiceProfileDomainDescription"
+          "shape": "VoiceProfileDomainDescription",
+          "documentation": "<p>The description of the voice profile domain.</p>"
         },
         "ServerSideEncryptionConfiguration": {
-          "shape": "ServerSideEncryptionConfiguration"
+          "shape": "ServerSideEncryptionConfiguration",
+          "documentation": "<p>A structure that contains the configuration settings for server-side encryption.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the voice profile domain was created.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the voice profile was last updated.</p>"
         }
-      }
+      },
+      "documentation": "<p>A collection of voice profiles.</p>"
     },
     "VoiceProfileDomainDescription": {
       "type": "string",
@@ -7131,24 +7729,31 @@
       "type": "structure",
       "members": {
         "VoiceProfileDomainId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice profile domain summary.</p>"
         },
         "VoiceProfileDomainArn": {
-          "shape": "Arn"
+          "shape": "Arn",
+          "documentation": "<p>The ARN of a voice profile in a voice profile domain summary.</p>"
         },
         "Name": {
-          "shape": "VoiceProfileDomainName"
+          "shape": "VoiceProfileDomainName",
+          "documentation": "<p>The name of the voice profile domain summary.</p>"
         },
         "Description": {
-          "shape": "VoiceProfileDomainDescription"
+          "shape": "VoiceProfileDomainDescription",
+          "documentation": "<p>Describes the voice profile domain summary.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the voice profile domain summary was created.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which the voice profile domain summary was last updated.</p>"
         }
-      }
+      },
+      "documentation": "<p>A high-level overview of a voice profile domain.</p>"
     },
     "VoiceProfileDomainSummaryList": {
       "type": "list",
@@ -7160,24 +7765,31 @@
       "type": "structure",
       "members": {
         "VoiceProfileId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice profile in a voice profile summary.</p>"
         },
         "VoiceProfileArn": {
-          "shape": "Arn"
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the voice profile in a voice profile summary.</p>"
         },
         "VoiceProfileDomainId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice profile domain in a voice profile summary.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which a voice profile summary was created.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which a voice profile summary was last updated.</p>"
         },
         "ExpirationTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>Extends the life of the voice profile. You can use <code>UpdateVoiceProfile</code> to refresh an existing voice profile's voice print and extend the life of the summary.</p>"
         }
-      }
+      },
+      "documentation": "<p>A high-level summary of a voice profile.</p>"
     },
     "VoiceProfileSummaryList": {
       "type": "list",
@@ -7189,27 +7801,36 @@
       "type": "structure",
       "members": {
         "VoiceToneAnalysisTaskId": {
-          "shape": "NonEmptyString256"
+          "shape": "NonEmptyString256",
+          "documentation": "<p>The ID of the voice tone analysis task.</p>"
         },
         "VoiceToneAnalysisTaskStatus": {
-          "shape": "NonEmptyString"
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of a voice tone analysis task, <code>IN_QUEUE</code>, <code>IN_PROGRESS</code>, <code>PARTIAL_SUCCESS</code>, <code>SUCCEEDED</code>, <code>FAILED</code>, or <code>STOPPED</code>.</p>"
         },
         "CallDetails": {
-          "shape": "CallDetails"
+          "shape": "CallDetails",
+          "documentation": "<p>The call details of a voice tone analysis task.</p>"
         },
         "CreatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which a voice tone analysis task was created.</p>"
         },
         "UpdatedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which a voice tone analysis task was updated.</p>"
         },
         "StartedTimestamp": {
-          "shape": "Iso8601Timestamp"
+          "shape": "Iso8601Timestamp",
+          "documentation": "<p>The time at which a voice tone analysis task started.</p>"
         },
         "StatusMessage": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The status of a voice tone analysis task.</p>"
         }
-      }
+      },
+      "documentation": "<p>A representation of an asynchronous request to perform voice tone analysis on a Voice Connector call.</p>"
     }
-  }
+  },
+  "documentation": "<p>The Amazon Chime SDK telephony APIs in this section enable developers to create PSTN calling solutions that use Amazon Chime SDK Voice Connectors, and Amazon Chime SDK SIP media applications. Developers can also order and manage phone numbers, create and manage Voice Connectors and SIP media applications, and run voice analytics.</p>"
 }

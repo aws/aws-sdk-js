@@ -2088,6 +2088,10 @@ one destination per packager.
      * Settings that describe an input device that is type UHD.
      */
     UhdDeviceSettings?: InputDeviceUhdSettings;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface DescribeInputDeviceThumbnailRequest {
     /**
@@ -3677,7 +3681,11 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
     /**
      * ID3 tag to insert into each segment. Supports special keyword identifiers to substitute in segment-related values.\nSupported keyword identifiers: https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
      */
-    Tag: __string;
+    Tag?: __string;
+    /**
+     * Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure
+     */
+    Id3?: __string;
   }
   export type HlsId3SegmentTaggingState = "DISABLED"|"ENABLED"|string;
   export type HlsIncompleteSegmentBehavior = "AUTO"|"SUPPRESS"|string;
@@ -4095,6 +4103,10 @@ to.
      * Settings that describe an input device that is type UHD.
      */
     UhdDeviceSettings?: InputDeviceUhdSettings;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
   export type InputDeviceType = "HD"|"UHD"|string;
@@ -6823,6 +6835,10 @@ one destination per packager.
      * Settings that describe an input device that is type UHD.
      */
     UhdDeviceSettings?: InputDeviceUhdSettings;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface UpdateInputRequest {
     /**

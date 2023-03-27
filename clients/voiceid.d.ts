@@ -12,13 +12,29 @@ declare class VoiceID extends Service {
   constructor(options?: VoiceID.Types.ClientConfiguration)
   config: Config & VoiceID.Types.ClientConfiguration;
   /**
-   * Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer audio, and voiceprints. 
+   * Associates the fraudsters with the watchlist specified in the same domain. 
+   */
+  associateFraudster(params: VoiceID.Types.AssociateFraudsterRequest, callback?: (err: AWSError, data: VoiceID.Types.AssociateFraudsterResponse) => void): Request<VoiceID.Types.AssociateFraudsterResponse, AWSError>;
+  /**
+   * Associates the fraudsters with the watchlist specified in the same domain. 
+   */
+  associateFraudster(callback?: (err: AWSError, data: VoiceID.Types.AssociateFraudsterResponse) => void): Request<VoiceID.Types.AssociateFraudsterResponse, AWSError>;
+  /**
+   * Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer audio, and voiceprints. Every domain is created with a default watchlist that fraudsters can be a part of.
    */
   createDomain(params: VoiceID.Types.CreateDomainRequest, callback?: (err: AWSError, data: VoiceID.Types.CreateDomainResponse) => void): Request<VoiceID.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer audio, and voiceprints. 
+   * Creates a domain that contains all Amazon Connect Voice ID data, such as speakers, fraudsters, customer audio, and voiceprints. Every domain is created with a default watchlist that fraudsters can be a part of.
    */
   createDomain(callback?: (err: AWSError, data: VoiceID.Types.CreateDomainResponse) => void): Request<VoiceID.Types.CreateDomainResponse, AWSError>;
+  /**
+   * Creates a watchlist that fraudsters can be a part of.
+   */
+  createWatchlist(params: VoiceID.Types.CreateWatchlistRequest, callback?: (err: AWSError, data: VoiceID.Types.CreateWatchlistResponse) => void): Request<VoiceID.Types.CreateWatchlistResponse, AWSError>;
+  /**
+   * Creates a watchlist that fraudsters can be a part of.
+   */
+  createWatchlist(callback?: (err: AWSError, data: VoiceID.Types.CreateWatchlistResponse) => void): Request<VoiceID.Types.CreateWatchlistResponse, AWSError>;
   /**
    * Deletes the specified domain from Voice ID.
    */
@@ -28,11 +44,11 @@ declare class VoiceID extends Service {
    */
   deleteDomain(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified fraudster from Voice ID.
+   * Deletes the specified fraudster from Voice ID. This action disassociates the fraudster from any watchlists it is a part of.
    */
   deleteFraudster(params: VoiceID.Types.DeleteFraudsterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified fraudster from Voice ID.
+   * Deletes the specified fraudster from Voice ID. This action disassociates the fraudster from any watchlists it is a part of.
    */
   deleteFraudster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -43,6 +59,14 @@ declare class VoiceID extends Service {
    * Deletes the specified speaker from Voice ID.
    */
   deleteSpeaker(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified watchlist from Voice ID. This API throws an exception when there are fraudsters in the watchlist that you are trying to delete. You must delete the fraudsters, and then delete the watchlist. Every domain has a default watchlist which cannot be deleted. 
+   */
+  deleteWatchlist(params: VoiceID.Types.DeleteWatchlistRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified watchlist from Voice ID. This API throws an exception when there are fraudsters in the watchlist that you are trying to delete. You must delete the fraudsters, and then delete the watchlist. Every domain has a default watchlist which cannot be deleted. 
+   */
+  deleteWatchlist(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Describes the specified domain.
    */
@@ -84,6 +108,22 @@ declare class VoiceID extends Service {
    */
   describeSpeakerEnrollmentJob(callback?: (err: AWSError, data: VoiceID.Types.DescribeSpeakerEnrollmentJobResponse) => void): Request<VoiceID.Types.DescribeSpeakerEnrollmentJobResponse, AWSError>;
   /**
+   * Describes the specified watchlist.
+   */
+  describeWatchlist(params: VoiceID.Types.DescribeWatchlistRequest, callback?: (err: AWSError, data: VoiceID.Types.DescribeWatchlistResponse) => void): Request<VoiceID.Types.DescribeWatchlistResponse, AWSError>;
+  /**
+   * Describes the specified watchlist.
+   */
+  describeWatchlist(callback?: (err: AWSError, data: VoiceID.Types.DescribeWatchlistResponse) => void): Request<VoiceID.Types.DescribeWatchlistResponse, AWSError>;
+  /**
+   * Disassociates the fraudsters from the watchlist specified. Voice ID always expects a fraudster to be a part of at least one watchlist. If you try to disassociate a fraudster from its only watchlist, a ValidationException is thrown. 
+   */
+  disassociateFraudster(params: VoiceID.Types.DisassociateFraudsterRequest, callback?: (err: AWSError, data: VoiceID.Types.DisassociateFraudsterResponse) => void): Request<VoiceID.Types.DisassociateFraudsterResponse, AWSError>;
+  /**
+   * Disassociates the fraudsters from the watchlist specified. Voice ID always expects a fraudster to be a part of at least one watchlist. If you try to disassociate a fraudster from its only watchlist, a ValidationException is thrown. 
+   */
+  disassociateFraudster(callback?: (err: AWSError, data: VoiceID.Types.DisassociateFraudsterResponse) => void): Request<VoiceID.Types.DisassociateFraudsterResponse, AWSError>;
+  /**
    * Evaluates a specified session based on audio data accumulated during a streaming Amazon Connect Voice ID call.
    */
   evaluateSession(params: VoiceID.Types.EvaluateSessionRequest, callback?: (err: AWSError, data: VoiceID.Types.EvaluateSessionResponse) => void): Request<VoiceID.Types.EvaluateSessionResponse, AWSError>;
@@ -108,6 +148,14 @@ declare class VoiceID extends Service {
    */
   listFraudsterRegistrationJobs(callback?: (err: AWSError, data: VoiceID.Types.ListFraudsterRegistrationJobsResponse) => void): Request<VoiceID.Types.ListFraudsterRegistrationJobsResponse, AWSError>;
   /**
+   * Lists all fraudsters in a specified watchlist or domain.
+   */
+  listFraudsters(params: VoiceID.Types.ListFraudstersRequest, callback?: (err: AWSError, data: VoiceID.Types.ListFraudstersResponse) => void): Request<VoiceID.Types.ListFraudstersResponse, AWSError>;
+  /**
+   * Lists all fraudsters in a specified watchlist or domain.
+   */
+  listFraudsters(callback?: (err: AWSError, data: VoiceID.Types.ListFraudstersResponse) => void): Request<VoiceID.Types.ListFraudstersResponse, AWSError>;
+  /**
    * Lists all the speaker enrollment jobs in the domain with the specified JobStatus. If JobStatus is not provided, this lists all jobs with all possible speaker enrollment job statuses.
    */
   listSpeakerEnrollmentJobs(params: VoiceID.Types.ListSpeakerEnrollmentJobsRequest, callback?: (err: AWSError, data: VoiceID.Types.ListSpeakerEnrollmentJobsResponse) => void): Request<VoiceID.Types.ListSpeakerEnrollmentJobsResponse, AWSError>;
@@ -131,6 +179,14 @@ declare class VoiceID extends Service {
    * Lists all tags associated with a specified Voice ID resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: VoiceID.Types.ListTagsForResourceResponse) => void): Request<VoiceID.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all watchlists in a specified domain.
+   */
+  listWatchlists(params: VoiceID.Types.ListWatchlistsRequest, callback?: (err: AWSError, data: VoiceID.Types.ListWatchlistsResponse) => void): Request<VoiceID.Types.ListWatchlistsResponse, AWSError>;
+  /**
+   * Lists all watchlists in a specified domain.
+   */
+  listWatchlists(callback?: (err: AWSError, data: VoiceID.Types.ListWatchlistsResponse) => void): Request<VoiceID.Types.ListWatchlistsResponse, AWSError>;
   /**
    * Opts out a speaker from Voice ID. A speaker can be opted out regardless of whether or not they already exist in Voice ID. If they don't yet exist, a new speaker is created in an opted out state. If they already exist, their existing status is overridden and they are opted out. Enrollment and evaluation authentication requests are rejected for opted out speakers, and opted out speakers have no voice embeddings stored in Voice ID.
    */
@@ -179,10 +235,35 @@ declare class VoiceID extends Service {
    * Updates the specified domain. This API has clobber behavior, and clears and replaces all attributes. If an optional field, such as 'Description' is not provided, it is removed from the domain.
    */
   updateDomain(callback?: (err: AWSError, data: VoiceID.Types.UpdateDomainResponse) => void): Request<VoiceID.Types.UpdateDomainResponse, AWSError>;
+  /**
+   * Updates the specified watchlist. Every domain has a default watchlist which cannot be updated. 
+   */
+  updateWatchlist(params: VoiceID.Types.UpdateWatchlistRequest, callback?: (err: AWSError, data: VoiceID.Types.UpdateWatchlistResponse) => void): Request<VoiceID.Types.UpdateWatchlistResponse, AWSError>;
+  /**
+   * Updates the specified watchlist. Every domain has a default watchlist which cannot be updated. 
+   */
+  updateWatchlist(callback?: (err: AWSError, data: VoiceID.Types.UpdateWatchlistResponse) => void): Request<VoiceID.Types.UpdateWatchlistResponse, AWSError>;
 }
 declare namespace VoiceID {
   export type AmazonResourceName = string;
   export type Arn = string;
+  export interface AssociateFraudsterRequest {
+    /**
+     * The identifier of the domain that contains the fraudster.
+     */
+    DomainId: DomainId;
+    /**
+     * The identifier of the fraudster to be associated with the watchlist.
+     */
+    FraudsterId: FraudsterId;
+    /**
+     * The identifier of the watchlist you want to associate with the fraudster.
+     */
+    WatchlistId: WatchlistId;
+  }
+  export interface AssociateFraudsterResponse {
+    Fraudster?: Fraudster;
+  }
   export interface AuthenticationConfiguration {
     /**
      * The minimum threshold needed to successfully authenticate a speaker.
@@ -192,11 +273,11 @@ declare namespace VoiceID {
   export type AuthenticationDecision = "ACCEPT"|"REJECT"|"NOT_ENOUGH_SPEECH"|"SPEAKER_NOT_ENROLLED"|"SPEAKER_OPTED_OUT"|"SPEAKER_ID_NOT_PROVIDED"|"SPEAKER_EXPIRED"|string;
   export interface AuthenticationResult {
     /**
-     * A timestamp indicating when audio aggregation ended for this authentication result.
+     * A timestamp of when audio aggregation ended for this authentication result.
      */
     AudioAggregationEndedAt?: Timestamp;
     /**
-     * A timestamp indicating when audio aggregation started for this authentication result.
+     * A timestamp of when audio aggregation started for this authentication result.
      */
     AudioAggregationStartedAt?: Timestamp;
     /**
@@ -224,14 +305,15 @@ declare namespace VoiceID {
      */
     Score?: Score;
   }
+  export type Boolean = boolean;
   export type ClientTokenString = string;
   export interface CreateDomainRequest {
     /**
-     * The idempotency token for creating a new domain. If not provided, Amazon Web Services SDK populates this field.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientTokenString;
     /**
-     * A brief description of the domain.
+     * A brief description of this domain.
      */
     Description?: Description;
     /**
@@ -253,6 +335,30 @@ declare namespace VoiceID {
      */
     Domain?: Domain;
   }
+  export interface CreateWatchlistRequest {
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientTokenString;
+    /**
+     * A brief description of this watchlist.
+     */
+    Description?: WatchlistDescription;
+    /**
+     * The identifier of the domain that contains the watchlist.
+     */
+    DomainId: DomainId;
+    /**
+     * The name of the watchlist.
+     */
+    Name: WatchlistName;
+  }
+  export interface CreateWatchlistResponse {
+    /**
+     * Information about the newly created watchlist.
+     */
+    Watchlist?: Watchlist;
+  }
   export type CustomerSpeakerId = string;
   export interface DeleteDomainRequest {
     /**
@@ -262,7 +368,7 @@ declare namespace VoiceID {
   }
   export interface DeleteFraudsterRequest {
     /**
-     * The identifier of the domain containing the fraudster.
+     * The identifier of the domain that contains the fraudster.
      */
     DomainId: DomainId;
     /**
@@ -272,7 +378,7 @@ declare namespace VoiceID {
   }
   export interface DeleteSpeakerRequest {
     /**
-     * The identifier of the domain containing the speaker.
+     * The identifier of the domain that contains the speaker.
      */
     DomainId: DomainId;
     /**
@@ -280,9 +386,19 @@ declare namespace VoiceID {
      */
     SpeakerId: SpeakerId;
   }
+  export interface DeleteWatchlistRequest {
+    /**
+     * The identifier of the domain that contains the watchlist.
+     */
+    DomainId: DomainId;
+    /**
+     * The identifier of the watchlist to be deleted.
+     */
+    WatchlistId: WatchlistId;
+  }
   export interface DescribeDomainRequest {
     /**
-     * The identifier of the domain you are describing.
+     * The identifier of the domain that you are describing.
      */
     DomainId: DomainId;
   }
@@ -294,11 +410,11 @@ declare namespace VoiceID {
   }
   export interface DescribeFraudsterRegistrationJobRequest {
     /**
-     * The identifier for the domain containing the fraudster registration job.
+     * The identifier of the domain that contains the fraudster registration job.
      */
     DomainId: DomainId;
     /**
-     * The identifier for the fraudster registration job you are describing.
+     * The identifier of the fraudster registration job you are describing.
      */
     JobId: JobId;
   }
@@ -310,7 +426,7 @@ declare namespace VoiceID {
   }
   export interface DescribeFraudsterRequest {
     /**
-     * The identifier of the domain containing the fraudster.
+     * The identifier of the domain that contains the fraudster.
      */
     DomainId: DomainId;
     /**
@@ -326,7 +442,7 @@ declare namespace VoiceID {
   }
   export interface DescribeSpeakerEnrollmentJobRequest {
     /**
-     * The identifier of the domain containing the speaker enrollment job.
+     * The identifier of the domain that contains the speaker enrollment job.
      */
     DomainId: DomainId;
     /**
@@ -356,22 +472,55 @@ declare namespace VoiceID {
      */
     Speaker?: Speaker;
   }
+  export interface DescribeWatchlistRequest {
+    /**
+     * The identifier of the domain that contains the watchlist.
+     */
+    DomainId: DomainId;
+    /**
+     * The identifier of the watchlist that you are describing.
+     */
+    WatchlistId: WatchlistId;
+  }
+  export interface DescribeWatchlistResponse {
+    /**
+     * Information about the specified watchlist.
+     */
+    Watchlist?: Watchlist;
+  }
   export type Description = string;
+  export interface DisassociateFraudsterRequest {
+    /**
+     * The identifier of the domain that contains the fraudster.
+     */
+    DomainId: DomainId;
+    /**
+     * The identifier of the fraudster to be disassociated from the watchlist.
+     */
+    FraudsterId: FraudsterId;
+    /**
+     * The identifier of the watchlist that you want to disassociate from the fraudster.
+     */
+    WatchlistId: WatchlistId;
+  }
+  export interface DisassociateFraudsterResponse {
+    Fraudster?: Fraudster;
+  }
   export interface Domain {
     /**
      * The Amazon Resource Name (ARN) for the domain.
      */
     Arn?: Arn;
     /**
-     * The timestamp at which the domain is created.
+     * The timestamp of when the domain was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The client-provided description of the domain.
+     * The description of the domain.
      */
     Description?: Description;
     /**
-     * The service-generated identifier for the domain.
+     * The identifier of the domain.
      */
     DomainId?: DomainId;
     /**
@@ -379,7 +528,7 @@ declare namespace VoiceID {
      */
     DomainStatus?: DomainStatus;
     /**
-     * The client-provided name for the domain.
+     * The name for the domain.
      */
     Name?: DomainName;
     /**
@@ -391,9 +540,13 @@ declare namespace VoiceID {
      */
     ServerSideEncryptionUpdateDetails?: ServerSideEncryptionUpdateDetails;
     /**
-     * The timestamp showing the domain's last update.
+     * The timestamp of when the domain was last update.
      */
     UpdatedAt?: Timestamp;
+    /**
+     * The watchlist details of a domain. Contains the default watchlist ID of the domain.
+     */
+    WatchlistDetails?: WatchlistDetails;
   }
   export type DomainId = string;
   export type DomainName = string;
@@ -405,15 +558,15 @@ declare namespace VoiceID {
      */
     Arn?: Arn;
     /**
-     * The timestamp showing when the domain is created.
+     * The timestamp of when the domain was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The client-provided description of the domain.
+     * The description of the domain.
      */
     Description?: Description;
     /**
-     * The service-generated identifier for the domain.
+     * The identifier of the domain.
      */
     DomainId?: DomainId;
     /**
@@ -433,9 +586,13 @@ declare namespace VoiceID {
      */
     ServerSideEncryptionUpdateDetails?: ServerSideEncryptionUpdateDetails;
     /**
-     * The timestamp showing the domain's last update.
+     * The timestamp of when the domain was last updated.
      */
     UpdatedAt?: Timestamp;
+    /**
+     * Provides information about watchlistDetails and DefaultWatchlistID. 
+     */
+    WatchlistDetails?: WatchlistDetails;
   }
   export type DuplicateRegistrationAction = "SKIP"|"REGISTER_AS_NEW"|string;
   export interface EnrollmentConfig {
@@ -457,7 +614,12 @@ declare namespace VoiceID {
      * Threshold value for determining whether the speaker is a high risk to be fraudulent. If the detected risk score calculated by Voice ID is greater than or equal to the threshold, the speaker is considered a fraudster.
      */
     RiskThreshold?: Score;
+    /**
+     * The identifier of watchlists against which fraud detection is performed. 
+     */
+    WatchlistIds?: EnrollmentJobFraudDetectionConfigWatchlistIds;
   }
+  export type EnrollmentJobFraudDetectionConfigWatchlistIds = WatchlistId[];
   export interface EvaluateSessionRequest {
     /**
      * The identifier of the domain where the session started.
@@ -474,7 +636,7 @@ declare namespace VoiceID {
      */
     AuthenticationResult?: AuthenticationResult;
     /**
-     * The identifier of the domain containing the session.
+     * The identifier of the domain that contains the session.
      */
     DomainId?: DomainId;
     /**
@@ -510,18 +672,22 @@ declare namespace VoiceID {
     /**
      * Threshold value for determining whether the speaker is a fraudster. If the detected risk score calculated by Voice ID is higher than the threshold, the speaker is considered a fraudster.
      */
-    RiskThreshold: Score;
+    RiskThreshold?: Score;
+    /**
+     * The identifier of the watchlist against which fraud detection is performed. 
+     */
+    WatchlistId?: WatchlistId;
   }
   export type FraudDetectionDecision = "HIGH_RISK"|"LOW_RISK"|"NOT_ENOUGH_SPEECH"|string;
   export type FraudDetectionReason = "KNOWN_FRAUDSTER"|"VOICE_SPOOFING"|string;
   export type FraudDetectionReasons = FraudDetectionReason[];
   export interface FraudDetectionResult {
     /**
-     * A timestamp indicating when audio aggregation ended for this fraud detection result.
+     * A timestamp of when audio aggregation ended for this fraud detection result.
      */
     AudioAggregationEndedAt?: Timestamp;
     /**
-     * A timestamp indicating when audio aggregation started for this fraud detection result.
+     * A timestamp of when audio aggregation started for this fraud detection result.
      */
     AudioAggregationStartedAt?: Timestamp;
     /**
@@ -557,22 +723,26 @@ declare namespace VoiceID {
   }
   export interface Fraudster {
     /**
-     * The timestamp when Voice ID identified the fraudster.
+     * The timestamp of when Voice ID identified the fraudster.
      */
     CreatedAt?: Timestamp;
     /**
-     * The identifier for the domain containing the fraudster.
+     * The identifier of the domain that contains the fraudster.
      */
     DomainId?: DomainId;
     /**
      * The service-generated identifier for the fraudster.
      */
     GeneratedFraudsterId?: GeneratedFraudsterId;
+    /**
+     * The identifier of the watchlists the fraudster is a part of.
+     */
+    WatchlistIds?: ResponseWatchlistIds;
   }
   export type FraudsterId = string;
   export interface FraudsterRegistrationJob {
     /**
-     * A timestamp showing the creation time of the fraudster registration job.
+     * A timestamp of when the fraudster registration job was created.
      */
     CreatedAt?: Timestamp;
     /**
@@ -580,11 +750,11 @@ declare namespace VoiceID {
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
-     * The identifier of the domain containing the fraudster registration job.
+     * The identifier of the domain that contains the fraudster registration job.
      */
     DomainId?: DomainId;
     /**
-     * A timestamp showing when the fraudster registration job ended.
+     * A timestamp of when the fraudster registration job ended.
      */
     EndedAt?: Timestamp;
     /**
@@ -624,15 +794,15 @@ declare namespace VoiceID {
   export type FraudsterRegistrationJobSummaries = FraudsterRegistrationJobSummary[];
   export interface FraudsterRegistrationJobSummary {
     /**
-     * A timestamp showing when the fraudster registration job is created. 
+     * A timestamp of when the fraudster registration job was created. 
      */
     CreatedAt?: Timestamp;
     /**
-     * The identifier of the domain containing the fraudster registration job.
+     * The identifier of the domain that contains the fraudster registration job.
      */
     DomainId?: DomainId;
     /**
-     * A timestamp showing when the fraudster registration job ended.
+     * A timestamp of when the fraudster registration job ended.
      */
     EndedAt?: Timestamp;
     /**
@@ -655,6 +825,25 @@ declare namespace VoiceID {
      * The current status of the fraudster registration job.
      */
     JobStatus?: FraudsterRegistrationJobStatus;
+  }
+  export type FraudsterSummaries = FraudsterSummary[];
+  export interface FraudsterSummary {
+    /**
+     * The timestamp of when the fraudster summary was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The identifier of the domain that contains the fraudster summary.
+     */
+    DomainId?: DomainId;
+    /**
+     * The service-generated identifier for the fraudster.
+     */
+    GeneratedFraudsterId?: GeneratedFraudsterId;
+    /**
+     * The identifier of the watchlists the fraudster is a part of.
+     */
+    WatchlistIds?: ResponseWatchlistIds;
   }
   export type GeneratedFraudsterId = string;
   export type GeneratedSpeakerId = string;
@@ -687,11 +876,11 @@ declare namespace VoiceID {
   }
   export interface ListDomainsRequest {
     /**
-     * The maximum number of domains to list per API call.
+     * The maximum number of results that are returned per call. You can use NextToken to obtain more pages of results. The default is 100; the maximum allowed page size is also 100.
      */
     MaxResults?: MaxResultsForListDomainFe;
     /**
-     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
      */
     NextToken?: NextToken;
   }
@@ -701,13 +890,13 @@ declare namespace VoiceID {
      */
     DomainSummaries?: DomainSummaries;
     /**
-     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
      */
     NextToken?: String;
   }
   export interface ListFraudsterRegistrationJobsRequest {
     /**
-     * The identifier of the domain containing the fraudster registration Jobs.
+     * The identifier of the domain that contains the fraudster registration Jobs.
      */
     DomainId: DomainId;
     /**
@@ -715,11 +904,11 @@ declare namespace VoiceID {
      */
     JobStatus?: FraudsterRegistrationJobStatus;
     /**
-     * The maximum number of results that are returned per call. You can use NextToken to obtain further pages of results. The default is 100; the maximum allowed page size is also 100. 
+     * The maximum number of results that are returned per call. You can use NextToken to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. 
      */
     MaxResults?: MaxResultsForList;
     /**
-     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
      */
     NextToken?: NextToken;
   }
@@ -729,13 +918,41 @@ declare namespace VoiceID {
      */
     JobSummaries?: FraudsterRegistrationJobSummaries;
     /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
+     */
+    NextToken?: String;
+  }
+  export interface ListFraudstersRequest {
+    /**
+     * The identifier of the domain. 
+     */
+    DomainId: DomainId;
+    /**
+     * The maximum number of results that are returned per call. You can use NextToken to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. 
+     */
+    MaxResults?: MaxResultsForList;
+    /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The identifier of the watchlist. If provided, all fraudsters in the watchlist are listed. If not provided, all fraudsters in the domain are listed.
+     */
+    WatchlistId?: WatchlistId;
+  }
+  export interface ListFraudstersResponse {
+    /**
+     * A list that contains details about each fraudster in the Amazon Web Services account. 
+     */
+    FraudsterSummaries?: FraudsterSummaries;
+    /**
      * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
      */
     NextToken?: String;
   }
   export interface ListSpeakerEnrollmentJobsRequest {
     /**
-     * The identifier of the domain containing the speaker enrollment jobs.
+     * The identifier of the domain that contains the speaker enrollment jobs.
      */
     DomainId: DomainId;
     /**
@@ -743,11 +960,11 @@ declare namespace VoiceID {
      */
     JobStatus?: SpeakerEnrollmentJobStatus;
     /**
-     * The maximum number of results that are returned per call. You can use NextToken to obtain further pages of results. The default is 100; the maximum allowed page size is also 100. 
+     * The maximum number of results that are returned per call. You can use NextToken to obtain more pages of results. The default is 100; the maximum allowed page size is also 100.
      */
     MaxResults?: MaxResultsForList;
     /**
-     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
      */
     NextToken?: NextToken;
   }
@@ -767,11 +984,11 @@ declare namespace VoiceID {
      */
     DomainId: DomainId;
     /**
-     * The maximum number of results that are returned per call. You can use NextToken to obtain further pages of results. The default is 100; the maximum allowed page size is also 100. 
+     * The maximum number of results that are returned per call. You can use NextToken to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. 
      */
     MaxResults?: MaxResultsForList;
     /**
-     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
      */
     NextToken?: NextToken;
   }
@@ -797,12 +1014,36 @@ declare namespace VoiceID {
      */
     Tags?: TagList;
   }
+  export interface ListWatchlistsRequest {
+    /**
+     * The identifier of the domain.
+     */
+    DomainId: DomainId;
+    /**
+     * The maximum number of results that are returned per call. You can use NextToken to obtain more pages of results. The default is 100; the maximum allowed page size is also 100. 
+     */
+    MaxResults?: MaxResultsForList;
+    /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListWatchlistsResponse {
+    /**
+     * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     */
+    NextToken?: String;
+    /**
+     * A list that contains details about each watchlist in the Amazon Web Services account. 
+     */
+    WatchlistSummaries?: WatchlistSummaries;
+  }
   export type MaxResultsForList = number;
   export type MaxResultsForListDomainFe = number;
   export type NextToken = string;
   export interface OptOutSpeakerRequest {
     /**
-     * The identifier of the domain containing the speaker.
+     * The identifier of the domain that contains the speaker.
      */
     DomainId: DomainId;
     /**
@@ -835,7 +1076,13 @@ declare namespace VoiceID {
      * The minimum similarity score between the new and old fraudsters in order to consider the new fraudster a duplicate.
      */
     FraudsterSimilarityThreshold?: Score;
+    /**
+     * The identifiers of watchlists that a fraudster is registered to. If a watchlist isn't provided, the fraudsters are registered to the default watchlist. 
+     */
+    WatchlistIds?: RegistrationConfigWatchlistIds;
   }
+  export type RegistrationConfigWatchlistIds = WatchlistId[];
+  export type ResponseWatchlistIds = WatchlistId[];
   export type S3Uri = string;
   export type Score = number;
   export interface ServerSideEncryptionConfiguration {
@@ -864,7 +1111,7 @@ declare namespace VoiceID {
   export type SessionNameOrId = string;
   export interface Speaker {
     /**
-     * A timestamp showing when the speaker is created. 
+     * A timestamp of when the speaker was created. 
      */
     CreatedAt?: Timestamp;
     /**
@@ -880,7 +1127,7 @@ declare namespace VoiceID {
      */
     GeneratedSpeakerId?: GeneratedSpeakerId;
     /**
-     * The timestamp when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.
+     * The timestamp of when the speaker was last accessed for enrollment, re-enrollment or a successful authentication. This timestamp is accurate to one hour.
      */
     LastAccessedAt?: Timestamp;
     /**
@@ -888,13 +1135,13 @@ declare namespace VoiceID {
      */
     Status?: SpeakerStatus;
     /**
-     * A timestamp showing the speaker's last update.
+     * A timestamp of the speaker's last update.
      */
     UpdatedAt?: Timestamp;
   }
   export interface SpeakerEnrollmentJob {
     /**
-     * A timestamp showing the creation of the speaker enrollment job.
+     * A timestamp of when the speaker enrollment job was created.
      */
     CreatedAt?: Timestamp;
     /**
@@ -906,7 +1153,7 @@ declare namespace VoiceID {
      */
     DomainId?: DomainId;
     /**
-     * A timestamp showing when the speaker enrollment job ended. 
+     * A timestamp of when the speaker enrollment job ended. 
      */
     EndedAt?: Timestamp;
     /**
@@ -946,7 +1193,7 @@ declare namespace VoiceID {
   export type SpeakerEnrollmentJobSummaries = SpeakerEnrollmentJobSummary[];
   export interface SpeakerEnrollmentJobSummary {
     /**
-     * A timestamp showing the creation time of the speaker enrollment job.
+     * A timestamp of when of the speaker enrollment job was created.
      */
     CreatedAt?: Timestamp;
     /**
@@ -954,7 +1201,7 @@ declare namespace VoiceID {
      */
     DomainId?: DomainId;
     /**
-     * A timestamp showing when the speaker enrollment job ended.
+     * A timestamp of when the speaker enrollment job ended.
      */
     EndedAt?: Timestamp;
     /**
@@ -1013,7 +1260,7 @@ declare namespace VoiceID {
   }
   export interface StartFraudsterRegistrationJobRequest {
     /**
-     * The idempotency token for starting a new fraudster registration job. If not provided, Amazon Web Services SDK populates this field.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientTokenString;
     /**
@@ -1021,7 +1268,7 @@ declare namespace VoiceID {
      */
     DataAccessRoleArn: IamRoleArn;
     /**
-     * The identifier of the domain containing the fraudster registration job and in which the fraudsters are registered.
+     * The identifier of the domain that contains the fraudster registration job and in which the fraudsters are registered.
      */
     DomainId: DomainId;
     /**
@@ -1049,7 +1296,7 @@ declare namespace VoiceID {
   }
   export interface StartSpeakerEnrollmentJobRequest {
     /**
-     * The idempotency token for starting a new speaker enrollment Job. If not provided, Amazon Web Services SDK populates this field.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
     ClientToken?: ClientTokenString;
     /**
@@ -1127,7 +1374,7 @@ declare namespace VoiceID {
   }
   export interface UpdateDomainRequest {
     /**
-     * A brief description of the domain.
+     * A brief description about this domain.
      */
     Description?: Description;
     /**
@@ -1149,11 +1396,105 @@ declare namespace VoiceID {
      */
     Domain?: Domain;
   }
+  export interface UpdateWatchlistRequest {
+    /**
+     * A brief description about this watchlist.
+     */
+    Description?: WatchlistDescription;
+    /**
+     * The identifier of the domain that contains the watchlist.
+     */
+    DomainId: DomainId;
+    /**
+     * The name of the watchlist.
+     */
+    Name?: WatchlistName;
+    /**
+     * The identifier of the watchlist to be updated.
+     */
+    WatchlistId: WatchlistId;
+  }
+  export interface UpdateWatchlistResponse {
+    /**
+     * Details about the updated watchlist.
+     */
+    Watchlist?: Watchlist;
+  }
   export interface VoiceSpoofingRisk {
     /**
      * The score indicating the likelihood of speaker’s voice being spoofed.
      */
     RiskScore: Score;
+  }
+  export interface Watchlist {
+    /**
+     * The timestamp of when the watchlist was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * Whether the specified watchlist is the default watchlist of a domain.
+     */
+    DefaultWatchlist?: Boolean;
+    /**
+     * The description of the watchlist.
+     */
+    Description?: WatchlistDescription;
+    /**
+     * The identifier of the domain that contains the watchlist.
+     */
+    DomainId?: DomainId;
+    /**
+     * The name for the watchlist.
+     */
+    Name?: WatchlistName;
+    /**
+     * The timestamp of when the watchlist was updated.
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     * The identifier of the watchlist.
+     */
+    WatchlistId?: WatchlistId;
+  }
+  export type WatchlistDescription = string;
+  export interface WatchlistDetails {
+    /**
+     * The identifier of the default watchlist.
+     */
+    DefaultWatchlistId: WatchlistId;
+  }
+  export type WatchlistId = string;
+  export type WatchlistName = string;
+  export type WatchlistSummaries = WatchlistSummary[];
+  export interface WatchlistSummary {
+    /**
+     * The timestamp of when the watchlist was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * Whether the specified watchlist is the default watchlist of a domain.
+     */
+    DefaultWatchlist?: Boolean;
+    /**
+     * The description of the watchlist.
+     */
+    Description?: WatchlistDescription;
+    /**
+     * The identifier of the domain that contains the watchlist.
+     */
+    DomainId?: DomainId;
+    /**
+     * The name for the watchlist.
+     */
+    Name?: WatchlistName;
+    /**
+     * The timestamp of when the watchlist was last updated.
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     * The identifier of the watchlist.
+     */
+    WatchlistId?: WatchlistId;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -68,19 +68,19 @@ declare class Athena extends Service {
    */
   createPreparedStatement(callback?: (err: AWSError, data: Athena.Types.CreatePreparedStatementOutput) => void): Request<Athena.Types.CreatePreparedStatementOutput, AWSError>;
   /**
-   * Gets an authentication token and the URL at which the notebook can be accessed. During programmatic access, CreatePresignedNotebookUrl must be called every 10 minutes to refresh the authentication token.
+   * Gets an authentication token and the URL at which the notebook can be accessed. During programmatic access, CreatePresignedNotebookUrl must be called every 10 minutes to refresh the authentication token. For information about granting programmatic access, see Grant programmatic access.
    */
   createPresignedNotebookUrl(params: Athena.Types.CreatePresignedNotebookUrlRequest, callback?: (err: AWSError, data: Athena.Types.CreatePresignedNotebookUrlResponse) => void): Request<Athena.Types.CreatePresignedNotebookUrlResponse, AWSError>;
   /**
-   * Gets an authentication token and the URL at which the notebook can be accessed. During programmatic access, CreatePresignedNotebookUrl must be called every 10 minutes to refresh the authentication token.
+   * Gets an authentication token and the URL at which the notebook can be accessed. During programmatic access, CreatePresignedNotebookUrl must be called every 10 minutes to refresh the authentication token. For information about granting programmatic access, see Grant programmatic access.
    */
   createPresignedNotebookUrl(callback?: (err: AWSError, data: Athena.Types.CreatePresignedNotebookUrlResponse) => void): Request<Athena.Types.CreatePresignedNotebookUrlResponse, AWSError>;
   /**
-   * Creates a workgroup with the specified name. Only one of Configurations or Configuration can be specified; Configurations for a workgroup with multi engine support (for example, an Apache Spark enabled workgroup) or Configuration for an Athena SQL workgroup.
+   * Creates a workgroup with the specified name. A workgroup can be an Apache Spark enabled workgroup or an Athena SQL workgroup.
    */
   createWorkGroup(params: Athena.Types.CreateWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.CreateWorkGroupOutput) => void): Request<Athena.Types.CreateWorkGroupOutput, AWSError>;
   /**
-   * Creates a workgroup with the specified name. Only one of Configurations or Configuration can be specified; Configurations for a workgroup with multi engine support (for example, an Apache Spark enabled workgroup) or Configuration for an Athena SQL workgroup.
+   * Creates a workgroup with the specified name. A workgroup can be an Apache Spark enabled workgroup or an Athena SQL workgroup.
    */
   createWorkGroup(callback?: (err: AWSError, data: Athena.Types.CreateWorkGroupOutput) => void): Request<Athena.Types.CreateWorkGroupOutput, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class Athena extends Service {
    */
   getCalculationExecution(callback?: (err: AWSError, data: Athena.Types.GetCalculationExecutionResponse) => void): Request<Athena.Types.GetCalculationExecutionResponse, AWSError>;
   /**
-   * Retrieves a pre-signed URL to a copy of the code that was executed for the calculation.
+   * Retrieves the unencrypted code that was executed for the calculation.
    */
   getCalculationExecutionCode(params: Athena.Types.GetCalculationExecutionCodeRequest, callback?: (err: AWSError, data: Athena.Types.GetCalculationExecutionCodeResponse) => void): Request<Athena.Types.GetCalculationExecutionCodeResponse, AWSError>;
   /**
-   * Retrieves a pre-signed URL to a copy of the code that was executed for the calculation.
+   * Retrieves the unencrypted code that was executed for the calculation.
    */
   getCalculationExecutionCode(callback?: (err: AWSError, data: Athena.Types.GetCalculationExecutionCodeResponse) => void): Request<Athena.Types.GetCalculationExecutionCodeResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Athena extends Service {
    */
   getQueryExecution(callback?: (err: AWSError, data: Athena.Types.GetQueryExecutionOutput) => void): Request<Athena.Types.GetQueryExecutionOutput, AWSError>;
   /**
-   * Streams the results of a single query execution specified by QueryExecutionId from the Athena query results location in Amazon S3. For more information, see Query Results in the Amazon Athena User Guide. This request does not execute the query but returns results. Use StartQueryExecution to run a query. To stream query results successfully, the IAM principal with permission to call GetQueryResults also must have permissions to the Amazon S3 GetObject action for the Athena query results location.  IAM principals with permission to the Amazon S3 GetObject action for the query results location are able to retrieve query results from Amazon S3 even if permission to the GetQueryResults action is denied. To restrict user or role access, ensure that Amazon S3 permissions to the Athena query location are denied. 
+   * Streams the results of a single query execution specified by QueryExecutionId from the Athena query results location in Amazon S3. For more information, see Working with query results, recent queries, and output files in the Amazon Athena User Guide. This request does not execute the query but returns results. Use StartQueryExecution to run a query. To stream query results successfully, the IAM principal with permission to call GetQueryResults also must have permissions to the Amazon S3 GetObject action for the Athena query results location.  IAM principals with permission to the Amazon S3 GetObject action for the query results location are able to retrieve query results from Amazon S3 even if permission to the GetQueryResults action is denied. To restrict user or role access, ensure that Amazon S3 permissions to the Athena query location are denied. 
    */
   getQueryResults(params: Athena.Types.GetQueryResultsInput, callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
-   * Streams the results of a single query execution specified by QueryExecutionId from the Athena query results location in Amazon S3. For more information, see Query Results in the Amazon Athena User Guide. This request does not execute the query but returns results. Use StartQueryExecution to run a query. To stream query results successfully, the IAM principal with permission to call GetQueryResults also must have permissions to the Amazon S3 GetObject action for the Athena query results location.  IAM principals with permission to the Amazon S3 GetObject action for the query results location are able to retrieve query results from Amazon S3 even if permission to the GetQueryResults action is denied. To restrict user or role access, ensure that Amazon S3 permissions to the Athena query location are denied. 
+   * Streams the results of a single query execution specified by QueryExecutionId from the Athena query results location in Amazon S3. For more information, see Working with query results, recent queries, and output files in the Amazon Athena User Guide. This request does not execute the query but returns results. Use StartQueryExecution to run a query. To stream query results successfully, the IAM principal with permission to call GetQueryResults also must have permissions to the Amazon S3 GetObject action for the Athena query results location.  IAM principals with permission to the Amazon S3 GetObject action for the query results location are able to retrieve query results from Amazon S3 even if permission to the GetQueryResults action is denied. To restrict user or role access, ensure that Amazon S3 permissions to the Athena query location are denied. 
    */
   getQueryResults(callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class Athena extends Service {
    */
   importNotebook(callback?: (err: AWSError, data: Athena.Types.ImportNotebookOutput) => void): Request<Athena.Types.ImportNotebookOutput, AWSError>;
   /**
-   * Returns the supported DPU sizes for the supported application runtimes (for example, Jupyter 1.0). 
+   * Returns the supported DPU sizes for the supported application runtimes (for example, Athena notebook version 1). 
    */
   listApplicationDPUSizes(params: Athena.Types.ListApplicationDPUSizesInput, callback?: (err: AWSError, data: Athena.Types.ListApplicationDPUSizesOutput) => void): Request<Athena.Types.ListApplicationDPUSizesOutput, AWSError>;
   /**
-   * Returns the supported DPU sizes for the supported application runtimes (for example, Jupyter 1.0). 
+   * Returns the supported DPU sizes for the supported application runtimes (for example, Athena notebook version 1). 
    */
   listApplicationDPUSizes(callback?: (err: AWSError, data: Athena.Types.ListApplicationDPUSizesOutput) => void): Request<Athena.Types.ListApplicationDPUSizesOutput, AWSError>;
   /**
@@ -300,11 +300,11 @@ declare class Athena extends Service {
    */
   listEngineVersions(callback?: (err: AWSError, data: Athena.Types.ListEngineVersionsOutput) => void): Request<Athena.Types.ListEngineVersionsOutput, AWSError>;
   /**
-   * Lists, in descending order, the executors that have been submitted to a session. Newer executors are listed first; older executors are listed later. The result can be optionally filtered by state.
+   * Lists, in descending order, the executors that joined a session. Newer executors are listed first; older executors are listed later. The result can be optionally filtered by state.
    */
   listExecutors(params: Athena.Types.ListExecutorsRequest, callback?: (err: AWSError, data: Athena.Types.ListExecutorsResponse) => void): Request<Athena.Types.ListExecutorsResponse, AWSError>;
   /**
-   * Lists, in descending order, the executors that have been submitted to a session. Newer executors are listed first; older executors are listed later. The result can be optionally filtered by state.
+   * Lists, in descending order, the executors that joined a session. Newer executors are listed first; older executors are listed later. The result can be optionally filtered by state.
    */
   listExecutors(callback?: (err: AWSError, data: Athena.Types.ListExecutorsResponse) => void): Request<Athena.Types.ListExecutorsResponse, AWSError>;
   /**
@@ -380,11 +380,11 @@ declare class Athena extends Service {
    */
   listWorkGroups(callback?: (err: AWSError, data: Athena.Types.ListWorkGroupsOutput) => void): Request<Athena.Types.ListWorkGroupsOutput, AWSError>;
   /**
-   * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request or as an Amazon S3 URL.
+   * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request.
    */
   startCalculationExecution(params: Athena.Types.StartCalculationExecutionRequest, callback?: (err: AWSError, data: Athena.Types.StartCalculationExecutionResponse) => void): Request<Athena.Types.StartCalculationExecutionResponse, AWSError>;
   /**
-   * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request or as an Amazon S3 URL.
+   * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request.
    */
   startCalculationExecution(callback?: (err: AWSError, data: Athena.Types.StartCalculationExecutionResponse) => void): Request<Athena.Types.StartCalculationExecutionResponse, AWSError>;
   /**
@@ -484,11 +484,11 @@ declare class Athena extends Service {
    */
   updatePreparedStatement(callback?: (err: AWSError, data: Athena.Types.UpdatePreparedStatementOutput) => void): Request<Athena.Types.UpdatePreparedStatementOutput, AWSError>;
   /**
-   * Updates the workgroup with the specified name. The workgroup's name cannot be changed. Only one of ConfigurationsUpdates or ConfigurationUpdates can be specified; ConfigurationsUpdates for a workgroup with multi engine support (for example, an Apache Spark enabled workgroup) or ConfigurationUpdates for an Athena SQL workgroup.
+   * Updates the workgroup with the specified name. The workgroup's name cannot be changed. Only ConfigurationUpdates can be specified.
    */
   updateWorkGroup(params: Athena.Types.UpdateWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.UpdateWorkGroupOutput) => void): Request<Athena.Types.UpdateWorkGroupOutput, AWSError>;
   /**
-   * Updates the workgroup with the specified name. The workgroup's name cannot be changed. Only one of ConfigurationsUpdates or ConfigurationUpdates can be specified; ConfigurationsUpdates for a workgroup with multi engine support (for example, an Apache Spark enabled workgroup) or ConfigurationUpdates for an Athena SQL workgroup.
+   * Updates the workgroup with the specified name. The workgroup's name cannot be changed. Only ConfigurationUpdates can be specified.
    */
   updateWorkGroup(callback?: (err: AWSError, data: Athena.Types.UpdateWorkGroupOutput) => void): Request<Athena.Types.UpdateWorkGroupOutput, AWSError>;
 }
@@ -503,7 +503,7 @@ declare namespace Athena {
   export type AmazonResourceName = string;
   export interface ApplicationDPUSizes {
     /**
-     * The name of the supported application runtime (for example, Jupyter 1.0).
+     * The name of the supported application runtime (for example, Athena notebook version 1).
      */
     ApplicationRuntimeId?: NameString;
     /**
@@ -843,7 +843,7 @@ declare namespace Athena {
      */
     Name: WorkGroupName;
     /**
-     * Contains configuration information for creating an Athena SQL workgroup, which includes the location in Amazon S3 where query results are stored, the encryption configuration, if any, used for encrypting query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, the limit for the amount of bytes scanned (cutoff) per query, if it is specified, and whether workgroup's settings (specified with EnforceWorkGroupConfiguration) in the WorkGroupConfiguration override client-side settings. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     * Contains configuration information for creating an Athena SQL workgroup or Spark enabled Athena workgroup. Athena SQL workgroup configuration includes the location in Amazon S3 where query and calculation results are stored, the encryption configuration, if any, used for encrypting query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, the limit for the amount of bytes scanned (cutoff) per query, if it is specified, and whether workgroup's settings (specified with EnforceWorkGroupConfiguration) in the WorkGroupConfiguration override client-side settings. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
     Configuration?: WorkGroupConfiguration;
     /**
@@ -959,7 +959,7 @@ declare namespace Athena {
      */
     WorkGroup: WorkGroupName;
     /**
-     * The option to delete the workgroup and its contents even if the workgroup contains any named queries or query executions.
+     * The option to delete the workgroup and its contents even if the workgroup contains any named queries, query executions, or notebooks.
      */
     RecursiveDeleteOption?: BoxedBoolean;
   }
@@ -991,7 +991,7 @@ declare namespace Athena {
      */
     DefaultExecutorDpuSize?: DefaultExecutorDpuSize;
     /**
-     * Contains additional notebook engine MAP&lt;string, string&gt; parameter mappings in the form of key-value pairs. To specify an Amazon S3 URI that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookFileURI to AdditionalConfigs that has value of the Amazon S3 URI.
+     * Contains additional notebook engine MAP&lt;string, string&gt; parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.
      */
     AdditionalConfigs?: ParametersMap;
   }
@@ -1073,7 +1073,7 @@ declare namespace Athena {
   }
   export interface GetCalculationExecutionCodeResponse {
     /**
-     * A pre-signed URL to the code that executed the calculation.
+     * The unencrypted code that was executed for the calculation.
      */
     CodeBlock?: CodeBlock;
   }
@@ -1366,7 +1366,7 @@ declare namespace Athena {
   }
   export interface ImportNotebookOutput {
     /**
-     * The ID of the notebook to import.
+     * The ID assigned to the imported notebook.
      */
     NotebookId?: NotebookId;
   }
@@ -1886,7 +1886,7 @@ declare namespace Athena {
      */
     StatementType?: StatementType;
     /**
-     * The location in Amazon S3 where query results were stored and the encryption option, if any, used for query results. These are known as "client-side settings". If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup.
+     * The location in Amazon S3 where query and calculation results are stored and the encryption option, if any, used for query results. These are known as "client-side settings". If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup.
      */
     ResultConfiguration?: ResultConfiguration;
     /**
@@ -2101,11 +2101,11 @@ declare namespace Athena {
   export type QueryString = string;
   export interface ResultConfiguration {
     /**
-     * The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration. If none of them is set, Athena issues an error that no output location is provided. For more information, see Query Results. If workgroup settings override client-side settings, then the query uses the settings specified for the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     * The location in Amazon S3 where your query and calculation results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration. If none of them is set, Athena issues an error that no output location is provided. For more information, see Working with query results, recent queries, and output files. If workgroup settings override client-side settings, then the query uses the settings specified for the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
     OutputLocation?: ResultOutputLocation;
     /**
-     * If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE_KMS or CSE_KMS) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
+     * If query and calculation results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE_KMS or CSE_KMS) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
     /**
@@ -2119,7 +2119,7 @@ declare namespace Athena {
   }
   export interface ResultConfigurationUpdates {
     /**
-     * The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Query Results If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The "workgroup settings override" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     * The location in Amazon S3 where your query and calculation results are stored, such as s3://path/to/query/bucket/. For more information, see Working with query results, recent queries, and output files. If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The "workgroup settings override" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
     OutputLocation?: ResultOutputLocation;
     /**
@@ -2127,7 +2127,7 @@ declare namespace Athena {
      */
     RemoveOutputLocation?: BoxedBoolean;
     /**
-     * The encryption configuration for the query results.
+     * The encryption configuration for query and calculation results.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
     /**
@@ -2356,7 +2356,7 @@ declare namespace Athena {
      */
     EngineConfiguration: EngineConfiguration;
     /**
-     * The notebook version. This value is required only when requesting that a notebook server be started for the session. The only valid notebook version is Jupyter1.0.
+     * The notebook version. This value is supplied automatically for notebook sessions in the Athena console and is not required for programmatic session access. The only valid notebook version is Athena notebook version 1. If you specify a value for NotebookVersion, you must also specify a value for NotebookId. See EngineConfiguration$AdditionalConfigs.
      */
     NotebookVersion?: NameString;
     /**
@@ -2587,7 +2587,7 @@ declare namespace Athena {
      */
     Type: NotebookType;
     /**
-     * The ID of the session in which the notebook will be updated.
+     * The active notebook session ID. Required if the notebook has an active session.
      */
     SessionId?: SessionId;
     /**
@@ -2663,7 +2663,7 @@ declare namespace Athena {
      */
     State?: WorkGroupState;
     /**
-     * The configuration of the workgroup, which includes the location in Amazon S3 where query results are stored, the encryption configuration, if any, used for query results; whether the Amazon CloudWatch Metrics are enabled for the workgroup; whether workgroup settings override client-side settings; and the data usage limits for the amount of data scanned per query or per workgroup. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     * The configuration of the workgroup, which includes the location in Amazon S3 where query and calculation results are stored, the encryption configuration, if any, used for query and calculation results; whether the Amazon CloudWatch Metrics are enabled for the workgroup; whether workgroup settings override client-side settings; and the data usage limits for the amount of data scanned per query or per workgroup. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
     Configuration?: WorkGroupConfiguration;
     /**
@@ -2677,7 +2677,7 @@ declare namespace Athena {
   }
   export interface WorkGroupConfiguration {
     /**
-     * The configuration for the workgroup, which includes the location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. To run the query, you must specify the query results location using one of the ways: either in the workgroup using this setting, or for individual queries (client-side), using ResultConfiguration$OutputLocation. If none of them is set, Athena issues an error that no output location is provided. For more information, see Query Results.
+     * The configuration for the workgroup, which includes the location in Amazon S3 where query and calculation results are stored and the encryption option, if any, used for query and calculation results. To run the query, you must specify the query results location using one of the ways: either in the workgroup using this setting, or for individual queries (client-side), using ResultConfiguration$OutputLocation. If none of them is set, Athena issues an error that no output location is provided. For more information, see Working with query results, recent queries, and output files.
      */
     ResultConfiguration?: ResultConfiguration;
     /**
@@ -2705,13 +2705,17 @@ declare namespace Athena {
      */
     AdditionalConfiguration?: NameString;
     /**
-     * Role used in a notebook session for accessing the user's resources.
+     * Role used in a session for accessing the user's resources.
      */
     ExecutionRole?: RoleArn;
     /**
      * Specifies the KMS key that is used to encrypt the user's data stores in Athena.
      */
     CustomerContentEncryptionConfiguration?: CustomerContentEncryptionConfiguration;
+    /**
+     * Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries. The EnforceWorkGroupConfiguration setting takes precedence over the EnableMinimumEncryptionConfiguration flag. This means that if EnforceWorkGroupConfiguration is true, the EnableMinimumEncryptionConfiguration flag is ignored, and the workgroup configuration for encryption is used.
+     */
+    EnableMinimumEncryptionConfiguration?: BoxedBoolean;
   }
   export interface WorkGroupConfigurationUpdates {
     /**
@@ -2755,6 +2759,10 @@ declare namespace Athena {
      */
     ExecutionRole?: RoleArn;
     CustomerContentEncryptionConfiguration?: CustomerContentEncryptionConfiguration;
+    /**
+     * Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries. This setting does not apply to Spark-enabled workgroups. The EnforceWorkGroupConfiguration setting takes precedence over the EnableMinimumEncryptionConfiguration flag. This means that if EnforceWorkGroupConfiguration is true, the EnableMinimumEncryptionConfiguration flag is ignored, and the workgroup configuration for encryption is used.
+     */
+    EnableMinimumEncryptionConfiguration?: BoxedBoolean;
   }
   export type WorkGroupDescriptionString = string;
   export type WorkGroupName = string;
