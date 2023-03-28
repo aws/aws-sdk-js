@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1344.0-->
+<!--LATEST=2.1345.0-->
 <!--ENTRYINSERT-->
+
+## 2.1345.0
+* feature: IotData: Add endpoint ruleset support for cn-north-1.
+* feature: SSMContacts: This release adds 12 new APIs as part of Oncall Schedule feature release, adds support for a new contact type: ONCALL_SCHEDULE. Check public documentation for AWS ssm-contacts for more information
+* feature: SSMIncidents: Increased maximum length of "TriggerDetails.rawData" to 10K characters and "IncidentSummary" to 8K characters.
 
 ## 2.1344.0
 * feature: Athena: Enforces a minimal level of encryption for the workgroup for query and calculation results that are written to Amazon S3. When enabled, workgroup users can set encryption only to the minimum level set by the administrator or higher when they submit queries.

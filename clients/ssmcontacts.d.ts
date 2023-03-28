@@ -28,11 +28,11 @@ declare class SSMContacts extends Service {
    */
   activateContactChannel(callback?: (err: AWSError, data: SSMContacts.Types.ActivateContactChannelResult) => void): Request<SSMContacts.Types.ActivateContactChannelResult, AWSError>;
   /**
-   * Contacts are either the contacts that Incident Manager engages during an incident or the escalation plans that Incident Manager uses to engage contacts in phases during an incident. 
+   * Contacts are either the contacts that Incident Manager engages during an incident or the escalation plans that Incident Manager uses to engage contacts in phases during an incident.
    */
   createContact(params: SSMContacts.Types.CreateContactRequest, callback?: (err: AWSError, data: SSMContacts.Types.CreateContactResult) => void): Request<SSMContacts.Types.CreateContactResult, AWSError>;
   /**
-   * Contacts are either the contacts that Incident Manager engages during an incident or the escalation plans that Incident Manager uses to engage contacts in phases during an incident. 
+   * Contacts are either the contacts that Incident Manager engages during an incident or the escalation plans that Incident Manager uses to engage contacts in phases during an incident.
    */
   createContact(callback?: (err: AWSError, data: SSMContacts.Types.CreateContactResult) => void): Request<SSMContacts.Types.CreateContactResult, AWSError>;
   /**
@@ -43,6 +43,22 @@ declare class SSMContacts extends Service {
    * A contact channel is the method that Incident Manager uses to engage your contact.
    */
   createContactChannel(callback?: (err: AWSError, data: SSMContacts.Types.CreateContactChannelResult) => void): Request<SSMContacts.Types.CreateContactChannelResult, AWSError>;
+  /**
+   * Creates a rotation in an on-call schedule.
+   */
+  createRotation(params: SSMContacts.Types.CreateRotationRequest, callback?: (err: AWSError, data: SSMContacts.Types.CreateRotationResult) => void): Request<SSMContacts.Types.CreateRotationResult, AWSError>;
+  /**
+   * Creates a rotation in an on-call schedule.
+   */
+  createRotation(callback?: (err: AWSError, data: SSMContacts.Types.CreateRotationResult) => void): Request<SSMContacts.Types.CreateRotationResult, AWSError>;
+  /**
+   * Creates an override for a rotation in an on-call schedule.
+   */
+  createRotationOverride(params: SSMContacts.Types.CreateRotationOverrideRequest, callback?: (err: AWSError, data: SSMContacts.Types.CreateRotationOverrideResult) => void): Request<SSMContacts.Types.CreateRotationOverrideResult, AWSError>;
+  /**
+   * Creates an override for a rotation in an on-call schedule.
+   */
+  createRotationOverride(callback?: (err: AWSError, data: SSMContacts.Types.CreateRotationOverrideResult) => void): Request<SSMContacts.Types.CreateRotationOverrideResult, AWSError>;
   /**
    * To no longer receive Incident Manager engagements to a contact channel, you can deactivate the channel.
    */
@@ -67,6 +83,22 @@ declare class SSMContacts extends Service {
    * To no longer receive engagements on a contact channel, you can delete the channel from a contact. Deleting the contact channel removes it from the contact's engagement plan. If you delete the only contact channel for a contact, you won't be able to engage that contact during an incident.
    */
   deleteContactChannel(callback?: (err: AWSError, data: SSMContacts.Types.DeleteContactChannelResult) => void): Request<SSMContacts.Types.DeleteContactChannelResult, AWSError>;
+  /**
+   * Deletes a rotation from the system. If a rotation belongs to more than one on-call schedule, this operation deletes it from all of them.
+   */
+  deleteRotation(params: SSMContacts.Types.DeleteRotationRequest, callback?: (err: AWSError, data: SSMContacts.Types.DeleteRotationResult) => void): Request<SSMContacts.Types.DeleteRotationResult, AWSError>;
+  /**
+   * Deletes a rotation from the system. If a rotation belongs to more than one on-call schedule, this operation deletes it from all of them.
+   */
+  deleteRotation(callback?: (err: AWSError, data: SSMContacts.Types.DeleteRotationResult) => void): Request<SSMContacts.Types.DeleteRotationResult, AWSError>;
+  /**
+   * Deletes an existing override for an on-call rotation.
+   */
+  deleteRotationOverride(params: SSMContacts.Types.DeleteRotationOverrideRequest, callback?: (err: AWSError, data: SSMContacts.Types.DeleteRotationOverrideResult) => void): Request<SSMContacts.Types.DeleteRotationOverrideResult, AWSError>;
+  /**
+   * Deletes an existing override for an on-call rotation.
+   */
+  deleteRotationOverride(callback?: (err: AWSError, data: SSMContacts.Types.DeleteRotationOverrideResult) => void): Request<SSMContacts.Types.DeleteRotationOverrideResult, AWSError>;
   /**
    * Incident Manager uses engagements to engage contacts and escalation plans during an incident. Use this command to describe the engagement that occurred during an incident.
    */
@@ -108,6 +140,22 @@ declare class SSMContacts extends Service {
    */
   getContactPolicy(callback?: (err: AWSError, data: SSMContacts.Types.GetContactPolicyResult) => void): Request<SSMContacts.Types.GetContactPolicyResult, AWSError>;
   /**
+   * Retrieves information about an on-call rotation.
+   */
+  getRotation(params: SSMContacts.Types.GetRotationRequest, callback?: (err: AWSError, data: SSMContacts.Types.GetRotationResult) => void): Request<SSMContacts.Types.GetRotationResult, AWSError>;
+  /**
+   * Retrieves information about an on-call rotation.
+   */
+  getRotation(callback?: (err: AWSError, data: SSMContacts.Types.GetRotationResult) => void): Request<SSMContacts.Types.GetRotationResult, AWSError>;
+  /**
+   * Retrieves information about an override to an on-call rotation.
+   */
+  getRotationOverride(params: SSMContacts.Types.GetRotationOverrideRequest, callback?: (err: AWSError, data: SSMContacts.Types.GetRotationOverrideResult) => void): Request<SSMContacts.Types.GetRotationOverrideResult, AWSError>;
+  /**
+   * Retrieves information about an override to an on-call rotation.
+   */
+  getRotationOverride(callback?: (err: AWSError, data: SSMContacts.Types.GetRotationOverrideResult) => void): Request<SSMContacts.Types.GetRotationOverrideResult, AWSError>;
+  /**
    * Lists all contact channels for the specified contact.
    */
   listContactChannels(params: SSMContacts.Types.ListContactChannelsRequest, callback?: (err: AWSError, data: SSMContacts.Types.ListContactChannelsResult) => void): Request<SSMContacts.Types.ListContactChannelsResult, AWSError>;
@@ -132,13 +180,21 @@ declare class SSMContacts extends Service {
    */
   listEngagements(callback?: (err: AWSError, data: SSMContacts.Types.ListEngagementsResult) => void): Request<SSMContacts.Types.ListEngagementsResult, AWSError>;
   /**
-   * Lists all of the engagements to contact channels that have been acknowledged. 
+   * Lists all of the engagements to contact channels that have been acknowledged.
    */
   listPageReceipts(params: SSMContacts.Types.ListPageReceiptsRequest, callback?: (err: AWSError, data: SSMContacts.Types.ListPageReceiptsResult) => void): Request<SSMContacts.Types.ListPageReceiptsResult, AWSError>;
   /**
-   * Lists all of the engagements to contact channels that have been acknowledged. 
+   * Lists all of the engagements to contact channels that have been acknowledged.
    */
   listPageReceipts(callback?: (err: AWSError, data: SSMContacts.Types.ListPageReceiptsResult) => void): Request<SSMContacts.Types.ListPageReceiptsResult, AWSError>;
+  /**
+   * Returns the resolution path of an engagement. For example, the escalation plan engaged in an incident might target an on-call schedule that includes several contacts in a rotation, but just one contact on-call when the incident starts. The resolution path indicates the hierarchy of escalation plan &gt; on-call schedule &gt; contact.
+   */
+  listPageResolutions(params: SSMContacts.Types.ListPageResolutionsRequest, callback?: (err: AWSError, data: SSMContacts.Types.ListPageResolutionsResult) => void): Request<SSMContacts.Types.ListPageResolutionsResult, AWSError>;
+  /**
+   * Returns the resolution path of an engagement. For example, the escalation plan engaged in an incident might target an on-call schedule that includes several contacts in a rotation, but just one contact on-call when the incident starts. The resolution path indicates the hierarchy of escalation plan &gt; on-call schedule &gt; contact.
+   */
+  listPageResolutions(callback?: (err: AWSError, data: SSMContacts.Types.ListPageResolutionsResult) => void): Request<SSMContacts.Types.ListPageResolutionsResult, AWSError>;
   /**
    * Lists the engagements to a contact's contact channels.
    */
@@ -155,6 +211,38 @@ declare class SSMContacts extends Service {
    * Lists the engagements to contact channels that occurred by engaging a contact.
    */
   listPagesByEngagement(callback?: (err: AWSError, data: SSMContacts.Types.ListPagesByEngagementResult) => void): Request<SSMContacts.Types.ListPagesByEngagementResult, AWSError>;
+  /**
+   * Returns a list of shifts based on rotation configuration parameters.  The Incident Manager primarily uses this operation to populate the Preview calendar. It is not typically run by end users. 
+   */
+  listPreviewRotationShifts(params: SSMContacts.Types.ListPreviewRotationShiftsRequest, callback?: (err: AWSError, data: SSMContacts.Types.ListPreviewRotationShiftsResult) => void): Request<SSMContacts.Types.ListPreviewRotationShiftsResult, AWSError>;
+  /**
+   * Returns a list of shifts based on rotation configuration parameters.  The Incident Manager primarily uses this operation to populate the Preview calendar. It is not typically run by end users. 
+   */
+  listPreviewRotationShifts(callback?: (err: AWSError, data: SSMContacts.Types.ListPreviewRotationShiftsResult) => void): Request<SSMContacts.Types.ListPreviewRotationShiftsResult, AWSError>;
+  /**
+   * Retrieves a list of overrides currently specified for an on-call rotation.
+   */
+  listRotationOverrides(params: SSMContacts.Types.ListRotationOverridesRequest, callback?: (err: AWSError, data: SSMContacts.Types.ListRotationOverridesResult) => void): Request<SSMContacts.Types.ListRotationOverridesResult, AWSError>;
+  /**
+   * Retrieves a list of overrides currently specified for an on-call rotation.
+   */
+  listRotationOverrides(callback?: (err: AWSError, data: SSMContacts.Types.ListRotationOverridesResult) => void): Request<SSMContacts.Types.ListRotationOverridesResult, AWSError>;
+  /**
+   * Returns a list of shifts generated by an existing rotation in the system.
+   */
+  listRotationShifts(params: SSMContacts.Types.ListRotationShiftsRequest, callback?: (err: AWSError, data: SSMContacts.Types.ListRotationShiftsResult) => void): Request<SSMContacts.Types.ListRotationShiftsResult, AWSError>;
+  /**
+   * Returns a list of shifts generated by an existing rotation in the system.
+   */
+  listRotationShifts(callback?: (err: AWSError, data: SSMContacts.Types.ListRotationShiftsResult) => void): Request<SSMContacts.Types.ListRotationShiftsResult, AWSError>;
+  /**
+   * Retrieves a list of on-call rotations.
+   */
+  listRotations(params: SSMContacts.Types.ListRotationsRequest, callback?: (err: AWSError, data: SSMContacts.Types.ListRotationsResult) => void): Request<SSMContacts.Types.ListRotationsResult, AWSError>;
+  /**
+   * Retrieves a list of on-call rotations.
+   */
+  listRotations(callback?: (err: AWSError, data: SSMContacts.Types.ListRotationsResult) => void): Request<SSMContacts.Types.ListRotationsResult, AWSError>;
   /**
    * Lists the tags of an escalation plan or contact.
    */
@@ -196,27 +284,27 @@ declare class SSMContacts extends Service {
    */
   stopEngagement(callback?: (err: AWSError, data: SSMContacts.Types.StopEngagementResult) => void): Request<SSMContacts.Types.StopEngagementResult, AWSError>;
   /**
-   * Tags a contact or escalation plan. You can tag only contacts and escalation plans in the first region of your replication set. 
+   * Tags a contact or escalation plan. You can tag only contacts and escalation plans in the first region of your replication set.
    */
   tagResource(params: SSMContacts.Types.TagResourceRequest, callback?: (err: AWSError, data: SSMContacts.Types.TagResourceResult) => void): Request<SSMContacts.Types.TagResourceResult, AWSError>;
   /**
-   * Tags a contact or escalation plan. You can tag only contacts and escalation plans in the first region of your replication set. 
+   * Tags a contact or escalation plan. You can tag only contacts and escalation plans in the first region of your replication set.
    */
   tagResource(callback?: (err: AWSError, data: SSMContacts.Types.TagResourceResult) => void): Request<SSMContacts.Types.TagResourceResult, AWSError>;
   /**
-   * Removes tags from the specified resource. 
+   * Removes tags from the specified resource.
    */
   untagResource(params: SSMContacts.Types.UntagResourceRequest, callback?: (err: AWSError, data: SSMContacts.Types.UntagResourceResult) => void): Request<SSMContacts.Types.UntagResourceResult, AWSError>;
   /**
-   * Removes tags from the specified resource. 
+   * Removes tags from the specified resource.
    */
   untagResource(callback?: (err: AWSError, data: SSMContacts.Types.UntagResourceResult) => void): Request<SSMContacts.Types.UntagResourceResult, AWSError>;
   /**
-   * Updates the contact or escalation plan specified. 
+   * Updates the contact or escalation plan specified.
    */
   updateContact(params: SSMContacts.Types.UpdateContactRequest, callback?: (err: AWSError, data: SSMContacts.Types.UpdateContactResult) => void): Request<SSMContacts.Types.UpdateContactResult, AWSError>;
   /**
-   * Updates the contact or escalation plan specified. 
+   * Updates the contact or escalation plan specified.
    */
   updateContact(callback?: (err: AWSError, data: SSMContacts.Types.UpdateContactResult) => void): Request<SSMContacts.Types.UpdateContactResult, AWSError>;
   /**
@@ -227,6 +315,14 @@ declare class SSMContacts extends Service {
    * Updates a contact's contact channel.
    */
   updateContactChannel(callback?: (err: AWSError, data: SSMContacts.Types.UpdateContactChannelResult) => void): Request<SSMContacts.Types.UpdateContactChannelResult, AWSError>;
+  /**
+   * Updates the information specified for an on-call rotation.
+   */
+  updateRotation(params: SSMContacts.Types.UpdateRotationRequest, callback?: (err: AWSError, data: SSMContacts.Types.UpdateRotationResult) => void): Request<SSMContacts.Types.UpdateRotationResult, AWSError>;
+  /**
+   * Updates the information specified for an on-call rotation.
+   */
+  updateRotation(callback?: (err: AWSError, data: SSMContacts.Types.UpdateRotationResult) => void): Request<SSMContacts.Types.UpdateRotationResult, AWSError>;
 }
 declare namespace SSMContacts {
   export type AcceptCode = string;
@@ -249,7 +345,7 @@ declare namespace SSMContacts {
      */
     Note?: ReceiptInfo;
     /**
-     * The accept code is a 6-digit code used to acknowledge the page.
+     * A 6-digit code used to acknowledge the page.
      */
     AcceptCode: AcceptCode;
     /**
@@ -266,7 +362,7 @@ declare namespace SSMContacts {
      */
     ContactChannelId: SsmContactsArn;
     /**
-     * The code sent to the contact channel when it was created in the contact. 
+     * The code sent to the contact channel when it was created in the contact.
      */
     ActivationCode: ActivationCode;
   }
@@ -328,7 +424,7 @@ declare namespace SSMContacts {
      */
     DeliveryAddress: ContactChannelAddress;
     /**
-     * A Boolean value describing if the contact channel has been activated or not. If the contact channel isn't activated, Incident Manager can't engage the contact through it. 
+     * A Boolean value describing if the contact channel has been activated or not. If the contact channel isn't activated, Incident Manager can't engage the contact through it.
      */
     ActivationStatus: ActivationStatus;
   }
@@ -350,9 +446,20 @@ declare namespace SSMContacts {
      */
     IsEssential: IsEssential;
   }
-  export type ContactType = "PERSONAL"|"ESCALATION"|string;
+  export type ContactType = "PERSONAL"|"ESCALATION"|"ONCALL_SCHEDULE"|string;
   export type ContactsList = Contact[];
   export type Content = string;
+  export interface CoverageTime {
+    /**
+     * Information about when the on-call rotation shift begins.
+     */
+    Start?: HandOffTime;
+    /**
+     * Information about when the on-call rotation shift ends.
+     */
+    End?: HandOffTime;
+  }
+  export type CoverageTimes = CoverageTime[];
   export interface CreateContactChannelRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact you are adding the contact channel to.
@@ -387,11 +494,11 @@ declare namespace SSMContacts {
   }
   export interface CreateContactRequest {
     /**
-     * The short name to quickly identify a contact or escalation plan. The contact alias must be unique and identifiable. 
+     * The short name to quickly identify a contact or escalation plan. The contact alias must be unique and identifiable.
      */
     Alias: ContactAlias;
     /**
-     * The full name of the contact or escalation plan. 
+     * The full name of the contact or escalation plan.
      */
     DisplayName?: ContactName;
     /**
@@ -399,11 +506,11 @@ declare namespace SSMContacts {
      */
     Type: ContactType;
     /**
-     * A list of stages. A contact has an engagement plan with stages that contact specified contact channels. An escalation plan uses stages that contact specified contacts. 
+     * A list of stages. A contact has an engagement plan with stages that contact specified contact channels. An escalation plan uses stages that contact specified contacts.
      */
     Plan: Plan;
     /**
-     * Adds a tag to the target. You can only tag resources created in the first Region of your replication set. 
+     * Adds a tag to the target. You can only tag resources created in the first Region of your replication set.
      */
     Tags?: TagsList;
     /**
@@ -417,7 +524,74 @@ declare namespace SSMContacts {
      */
     ContactArn: SsmContactsArn;
   }
+  export interface CreateRotationOverrideRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the rotation to create an override for.
+     */
+    RotationId: SsmContactsArn;
+    /**
+     * The Amazon Resource Names (ARNs) of the contacts to replace those in the current on-call rotation with. If you want to include any current team members in the override shift, you must include their ARNs in the new contact ID list.
+     */
+    NewContactIds: RotationOverrideContactsArnList;
+    /**
+     * The date and time when the override goes into effect.
+     */
+    StartTime: DateTime;
+    /**
+     * The date and time when the override ends.
+     */
+    EndTime: DateTime;
+    /**
+     * A token that ensures that the operation is called only once with the specified details.
+     */
+    IdempotencyToken?: IdempotencyToken;
+  }
+  export interface CreateRotationOverrideResult {
+    /**
+     * The Amazon Resource Name (ARN) of the created rotation override.
+     */
+    RotationOverrideId: Uuid;
+  }
+  export interface CreateRotationRequest {
+    /**
+     * The name of the rotation.
+     */
+    Name: RotationName;
+    /**
+     * The Amazon Resource Names (ARNs) of the contacts to add to the rotation. The order that you list the contacts in is their shift order in the rotation schedule. To change the order of the contact's shifts, use the UpdateRotation operation.
+     */
+    ContactIds: RotationContactsArnList;
+    /**
+     * The date and time that the rotation goes into effect.
+     */
+    StartTime?: DateTime;
+    /**
+     * The time zone to base the rotation’s activity on in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.  Designators for time zones that don’t support Daylight Savings Time rules, such as Pacific Standard Time (PST) and Pacific Daylight Time (PDT), are not supported. 
+     */
+    TimeZoneId: TimeZoneId;
+    /**
+     * Information about the rule that specifies when a shift's team members rotate.
+     */
+    Recurrence: RecurrenceSettings;
+    /**
+     * Optional metadata to assign to the rotation. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For more information, see Tagging Incident Manager resources in the Incident Manager User Guide.
+     */
+    Tags?: TagsList;
+    /**
+     * A token that ensures that the operation is called only once with the specified details.
+     */
+    IdempotencyToken?: IdempotencyToken;
+  }
+  export interface CreateRotationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the created rotation.
+     */
+    RotationArn: SsmContactsArn;
+  }
+  export type DailySettings = HandOffTime[];
   export type DateTime = Date;
+  export type DayOfMonth = number;
+  export type DayOfWeek = "MON"|"TUE"|"WED"|"THU"|"FRI"|"SAT"|"SUN"|string;
   export interface DeactivateContactChannelRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact channel you're deactivating.
@@ -442,6 +616,26 @@ declare namespace SSMContacts {
     ContactId: SsmContactsArn;
   }
   export interface DeleteContactResult {
+  }
+  export interface DeleteRotationOverrideRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the rotation that was overridden.
+     */
+    RotationId: SsmContactsArn;
+    /**
+     * The Amazon Resource Name (ARN) of the on-call rotation override to delete.
+     */
+    RotationOverrideId: Uuid;
+  }
+  export interface DeleteRotationOverrideResult {
+  }
+  export interface DeleteRotationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the on-call rotation to delete.
+     */
+    RotationId: SsmContactsArn;
+  }
+  export interface DeleteRotationResult {
   }
   export interface DescribeEngagementRequest {
     /**
@@ -598,7 +792,7 @@ declare namespace SSMContacts {
      */
     Type: ChannelType;
     /**
-     * The details that Incident Manager uses when trying to engage the contact channel. 
+     * The details that Incident Manager uses when trying to engage the contact channel.
      */
     DeliveryAddress: ContactChannelAddress;
     /**
@@ -642,7 +836,7 @@ declare namespace SSMContacts {
      */
     DisplayName?: ContactName;
     /**
-     * The type of contact, either PERSONAL or ESCALATION. 
+     * The type of contact, either PERSONAL or ESCALATION.
      */
     Type: ContactType;
     /**
@@ -650,12 +844,91 @@ declare namespace SSMContacts {
      */
     Plan: Plan;
   }
+  export interface GetRotationOverrideRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the overridden rotation to retrieve information about.
+     */
+    RotationId: SsmContactsArn;
+    /**
+     * The Amazon Resource Name (ARN) of the on-call rotation override to retrieve information about.
+     */
+    RotationOverrideId: Uuid;
+  }
+  export interface GetRotationOverrideResult {
+    /**
+     * The Amazon Resource Name (ARN) of the override to an on-call rotation.
+     */
+    RotationOverrideId?: Uuid;
+    /**
+     * The Amazon Resource Name (ARN) of the on-call rotation that was overridden.
+     */
+    RotationArn?: SsmContactsArn;
+    /**
+     * The Amazon Resource Names (ARNs) of the contacts assigned to the override of the on-call rotation.
+     */
+    NewContactIds?: SsmContactsArnList;
+    /**
+     * The date and time when the override goes into effect.
+     */
+    StartTime?: DateTime;
+    /**
+     * The date and time when the override ends.
+     */
+    EndTime?: DateTime;
+    /**
+     * The date and time when the override was created.
+     */
+    CreateTime?: DateTime;
+  }
+  export interface GetRotationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the on-call rotation to retrieve information about.
+     */
+    RotationId: SsmContactsArn;
+  }
+  export interface GetRotationResult {
+    /**
+     * The Amazon Resource Name (ARN) of the on-call rotation.
+     */
+    RotationArn: SsmContactsArn;
+    /**
+     * The name of the on-call rotation.
+     */
+    Name: RotationName;
+    /**
+     * The Amazon Resource Names (ARNs) of the contacts assigned to the on-call rotation team.
+     */
+    ContactIds: RotationContactsArnList;
+    /**
+     * The specified start time for the on-call rotation.
+     */
+    StartTime: DateTime;
+    /**
+     * The time zone that the rotation’s activity is based on, in Internet Assigned Numbers Authority (IANA) format.
+     */
+    TimeZoneId: TimeZoneId;
+    /**
+     * Specifies how long a rotation lasts before restarting at the beginning of the shift order.
+     */
+    Recurrence: RecurrenceSettings;
+  }
+  export interface HandOffTime {
+    /**
+     * The hour when an on-call rotation shift begins or ends.
+     */
+    HourOfDay: HourOfDay;
+    /**
+     * The minute when an on-call rotation shift begins or ends.
+     */
+    MinuteOfHour: MinuteOfHour;
+  }
+  export type HourOfDay = number;
   export type IdempotencyToken = string;
   export type IncidentId = string;
   export type IsEssential = boolean;
   export interface ListContactChannelsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the contact. 
+     * The Amazon Resource Name (ARN) of the contact.
      */
     ContactId: SsmContactsArn;
     /**
@@ -757,6 +1030,26 @@ declare namespace SSMContacts {
      */
     Receipts?: ReceiptsList;
   }
+  export interface ListPageResolutionsRequest {
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The Amazon Resource Name (ARN) of the contact engaged for the incident.
+     */
+    PageId: SsmContactsArn;
+  }
+  export interface ListPageResolutionsResult {
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Information about the resolution for an engagement.
+     */
+    PageResolutions: ResolutionList;
+  }
   export interface ListPagesByContactRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact you are retrieving engagements for.
@@ -805,6 +1098,142 @@ declare namespace SSMContacts {
      */
     Pages: PagesList;
   }
+  export interface ListPreviewRotationShiftsRequest {
+    /**
+     * The date and time a rotation would begin. The first shift is calculated from this date and time.
+     */
+    RotationStartTime?: DateTime;
+    /**
+     * Used to filter the range of calculated shifts before sending the response back to the user. 
+     */
+    StartTime?: DateTime;
+    /**
+     * The date and time a rotation shift would end.
+     */
+    EndTime: DateTime;
+    /**
+     * The contacts that would be assigned to a rotation.
+     */
+    Members: RotationPreviewMemberList;
+    /**
+     * The time zone the rotation’s activity would be based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". 
+     */
+    TimeZoneId: TimeZoneId;
+    /**
+     * Information about how long a rotation would last before restarting at the beginning of the shift order.
+     */
+    Recurrence: RecurrenceSettings;
+    /**
+     * Information about changes that would be made in a rotation override.
+     */
+    Overrides?: OverrideList;
+    /**
+     * A token to start the list. This token is used to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that can be specified in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListPreviewRotationShiftsResult {
+    /**
+     * Details about a rotation shift, including times, types, and contacts.
+     */
+    RotationShifts?: RotationShifts;
+    /**
+     * The token for the next set of items to return. This token is used to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListRotationOverridesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the rotation to retrieve information about.
+     */
+    RotationId: SsmContactsArn;
+    /**
+     * The date and time for the beginning of a time range for listing overrides.
+     */
+    StartTime: DateTime;
+    /**
+     * The date and time for the end of a time range for listing overrides.
+     */
+    EndTime: DateTime;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListRotationOverridesResult {
+    /**
+     * A list of rotation overrides in the specified time range.
+     */
+    RotationOverrides?: RotationOverrides;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListRotationShiftsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the rotation to retrieve shift information about. 
+     */
+    RotationId: SsmContactsArn;
+    /**
+     * The date and time for the beginning of the time range to list shifts for.
+     */
+    StartTime?: DateTime;
+    /**
+     * The date and time for the end of the time range to list shifts for.
+     */
+    EndTime: DateTime;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListRotationShiftsResult {
+    /**
+     * Information about shifts that meet the filter criteria.
+     */
+    RotationShifts?: RotationShifts;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListRotationsRequest {
+    /**
+     * A filter to include rotations in list results based on their common prefix. For example, entering prod returns a list of all rotation names that begin with prod, such as production and prod-1.
+     */
+    RotationNamePrefix?: RotationName;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListRotationsResult {
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Information about rotations that meet the filter criteria.
+     */
+    Rotations: Rotations;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact or escalation plan.
@@ -818,6 +1247,21 @@ declare namespace SSMContacts {
     Tags?: TagsList;
   }
   export type MaxResults = number;
+  export type Member = string;
+  export type MinuteOfHour = number;
+  export interface MonthlySetting {
+    /**
+     * The day of the month when monthly recurring on-call rotations begin.
+     */
+    DayOfMonth: DayOfMonth;
+    /**
+     * The time of day when a monthly recurring on-call shift rotation begins.
+     */
+    HandOffTime: HandOffTime;
+  }
+  export type MonthlySettings = MonthlySetting[];
+  export type NumberOfOnCalls = number;
+  export type OverrideList = PreviewOverride[];
   export interface Page {
     /**
      * The Amazon Resource Name (ARN) of the page to the contact channel.
@@ -858,9 +1302,27 @@ declare namespace SSMContacts {
     /**
      * A list of stages that the escalation plan or engagement plan uses to engage contacts and contact methods.
      */
-    Stages: StagesList;
+    Stages?: StagesList;
+    /**
+     * The Amazon Resource Names (ARNs) of the on-call rotations associated with the plan. 
+     */
+    RotationIds?: SsmContactsArnList;
   }
   export type Policy = string;
+  export interface PreviewOverride {
+    /**
+     * Information about contacts to add to an on-call rotation override.
+     */
+    NewMembers?: RotationOverridePreviewMemberList;
+    /**
+     * Information about the time a rotation override would begin.
+     */
+    StartTime?: DateTime;
+    /**
+     * Information about the time a rotation override would end.
+     */
+    EndTime?: DateTime;
+  }
   export type PublicContent = string;
   export type PublicSubject = string;
   export interface PutContactPolicyRequest {
@@ -896,7 +1358,127 @@ declare namespace SSMContacts {
   export type ReceiptInfo = string;
   export type ReceiptType = "DELIVERED"|"ERROR"|"READ"|"SENT"|"STOP"|string;
   export type ReceiptsList = Receipt[];
+  export type RecurrenceMultiplier = number;
+  export interface RecurrenceSettings {
+    /**
+     * Information about on-call rotations that recur monthly.
+     */
+    MonthlySettings?: MonthlySettings;
+    /**
+     * Information about on-call rotations that recur weekly.
+     */
+    WeeklySettings?: WeeklySettings;
+    /**
+     * Information about on-call rotations that recur daily.
+     */
+    DailySettings?: DailySettings;
+    /**
+     * The number of contacts, or shift team members designated to be on call concurrently during a shift. For example, in an on-call schedule containing ten contacts, a value of 2 designates that two of them are on call at any given time.
+     */
+    NumberOfOnCalls: NumberOfOnCalls;
+    /**
+     * Information about the days of the week included in on-call rotation coverage.
+     */
+    ShiftCoverages?: ShiftCoveragesMap;
+    /**
+     * The number of days, weeks, or months a single rotation lasts.
+     */
+    RecurrenceMultiplier: RecurrenceMultiplier;
+  }
+  export interface ResolutionContact {
+    /**
+     * The Amazon Resource Name (ARN) of a contact in the engagement resolution process. 
+     */
+    ContactArn: SsmContactsArn;
+    /**
+     * The type of contact for a resolution step.
+     */
+    Type: ContactType;
+    /**
+     * The stage in the escalation plan that resolves to this contact.
+     */
+    StageIndex?: StageIndex;
+  }
+  export type ResolutionList = ResolutionContact[];
   export type RetryIntervalInMinutes = number;
+  export interface Rotation {
+    /**
+     * The Amazon Resource Name (ARN) of the rotation.
+     */
+    RotationArn: SsmContactsArn;
+    /**
+     * The name of the rotation.
+     */
+    Name: RotationName;
+    /**
+     * The Amazon Resource Names (ARNs) of the contacts assigned to the rotation team.
+     */
+    ContactIds?: SsmContactsArnList;
+    /**
+     * The date and time the rotation becomes active.
+     */
+    StartTime?: DateTime;
+    /**
+     * The time zone the rotation’s activity is based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". 
+     */
+    TimeZoneId?: TimeZoneId;
+    /**
+     * Information about when an on-call rotation is in effect and how long the rotation period lasts.
+     */
+    Recurrence?: RecurrenceSettings;
+  }
+  export type RotationContactsArnList = SsmContactsArn[];
+  export type RotationName = string;
+  export interface RotationOverride {
+    /**
+     * The Amazon Resource Name (ARN) of the override to an on-call rotation.
+     */
+    RotationOverrideId: Uuid;
+    /**
+     * The Amazon Resource Names (ARNs) of the contacts assigned to the override of the on-call rotation.
+     */
+    NewContactIds: SsmContactsArnList;
+    /**
+     * The time a rotation override begins.
+     */
+    StartTime: DateTime;
+    /**
+     * The time a rotation override ends.
+     */
+    EndTime: DateTime;
+    /**
+     * The time a rotation override was created.
+     */
+    CreateTime: DateTime;
+  }
+  export type RotationOverrideContactsArnList = SsmContactsArn[];
+  export type RotationOverridePreviewMemberList = Member[];
+  export type RotationOverrides = RotationOverride[];
+  export type RotationPreviewMemberList = Member[];
+  export interface RotationShift {
+    /**
+     * The Amazon Resource Names (ARNs) of the contacts who are part of the shift rotation. 
+     */
+    ContactIds?: SsmContactsArnList;
+    /**
+     * The time a shift rotation begins.
+     */
+    StartTime: DateTime;
+    /**
+     * The time a shift rotation ends.
+     */
+    EndTime: DateTime;
+    /**
+     * The type of shift rotation.
+     */
+    Type?: ShiftType;
+    /**
+     * Additional information about an on-call rotation shift.
+     */
+    ShiftDetails?: ShiftDetails;
+  }
+  export type RotationShifts = RotationShift[];
+  export type Rotations = Rotation[];
   export interface SendActivationCodeRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact channel.
@@ -906,8 +1488,17 @@ declare namespace SSMContacts {
   export interface SendActivationCodeResult {
   }
   export type Sender = string;
+  export type ShiftCoveragesMap = {[key: string]: CoverageTimes};
+  export interface ShiftDetails {
+    /**
+     * The Amazon Resources Names (ARNs) of the contacts who were replaced in a shift when an override was created. If the override is deleted, these contacts are restored to the shift.
+     */
+    OverriddenContactIds: SsmContactsArnList;
+  }
+  export type ShiftType = "REGULAR"|"OVERRIDDEN"|string;
   export type SimpleAddress = string;
   export type SsmContactsArn = string;
+  export type SsmContactsArnList = SsmContactsArn[];
   export interface Stage {
     /**
      * The time to wait until beginning the next stage. The duration can only be set to 0 if a target is specified.
@@ -919,6 +1510,7 @@ declare namespace SSMContacts {
     Targets: TargetsList;
   }
   export type StageDurationInMins = number;
+  export type StageIndex = number;
   export type StagesList = Stage[];
   export interface StartEngagementRequest {
     /**
@@ -966,7 +1558,7 @@ declare namespace SSMContacts {
      */
     EngagementId: SsmContactsArn;
     /**
-     * The reason that you're stopping the engagement. 
+     * The reason that you're stopping the engagement.
      */
     Reason?: StopReason;
   }
@@ -1021,6 +1613,7 @@ declare namespace SSMContacts {
      */
     EndTime?: DateTime;
   }
+  export type TimeZoneId = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact or escalation plan.
@@ -1043,7 +1636,7 @@ declare namespace SSMContacts {
      */
     Name?: ChannelName;
     /**
-     * The details that Incident Manager uses when trying to engage the contact channel. 
+     * The details that Incident Manager uses when trying to engage the contact channel.
      */
     DeliveryAddress?: ContactChannelAddress;
   }
@@ -1059,12 +1652,48 @@ declare namespace SSMContacts {
      */
     DisplayName?: ContactName;
     /**
-     * A list of stages. A contact has an engagement plan with stages for specified contact channels. An escalation plan uses these stages to contact specified contacts. 
+     * A list of stages. A contact has an engagement plan with stages for specified contact channels. An escalation plan uses these stages to contact specified contacts.
      */
     Plan?: Plan;
   }
   export interface UpdateContactResult {
   }
+  export interface UpdateRotationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the rotation to update.
+     */
+    RotationId: SsmContactsArn;
+    /**
+     * The Amazon Resource Names (ARNs) of the contacts to include in the updated rotation.  The order in which you list the contacts is their shift order in the rotation schedule.
+     */
+    ContactIds?: RotationContactsArnList;
+    /**
+     * The date and time the rotation goes into effect.
+     */
+    StartTime?: DateTime;
+    /**
+     * The time zone to base the updated rotation’s activity on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the Time Zone Database on the IANA website.  Designators for time zones that don’t support Daylight Savings Time Rules, such as Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren't supported. 
+     */
+    TimeZoneId?: TimeZoneId;
+    /**
+     * Information about how long the updated rotation lasts before restarting at the beginning of the shift order.
+     */
+    Recurrence: RecurrenceSettings;
+  }
+  export interface UpdateRotationResult {
+  }
+  export type Uuid = string;
+  export interface WeeklySetting {
+    /**
+     * The day of the week when weekly recurring on-call shift rotations begins.
+     */
+    DayOfWeek: DayOfWeek;
+    /**
+     * The time of day when a weekly recurring on-call shift rotation begins.
+     */
+    HandOffTime: HandOffTime;
+  }
+  export type WeeklySettings = WeeklySetting[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

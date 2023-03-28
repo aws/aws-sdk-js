@@ -29,11 +29,11 @@ declare class SSMIncidents extends Service {
    */
   createResponsePlan(callback?: (err: AWSError, data: SSMIncidents.Types.CreateResponsePlanOutput) => void): Request<SSMIncidents.Types.CreateResponsePlanOutput, AWSError>;
   /**
-   * Creates a custom timeline event on the incident details page of an incident record. Timeline events are automatically created by Incident Manager, marking key moment during an incident. You can create custom timeline events to mark important events that are automatically detected by Incident Manager.
+   * Creates a custom timeline event on the incident details page of an incident record. Incident Manager automatically creates timeline events that mark key moments during an incident. You can create custom timeline events to mark important events that Incident Manager can detect automatically.
    */
   createTimelineEvent(params: SSMIncidents.Types.CreateTimelineEventInput, callback?: (err: AWSError, data: SSMIncidents.Types.CreateTimelineEventOutput) => void): Request<SSMIncidents.Types.CreateTimelineEventOutput, AWSError>;
   /**
-   * Creates a custom timeline event on the incident details page of an incident record. Timeline events are automatically created by Incident Manager, marking key moment during an incident. You can create custom timeline events to mark important events that are automatically detected by Incident Manager.
+   * Creates a custom timeline event on the incident details page of an incident record. Incident Manager automatically creates timeline events that mark key moments during an incident. You can create custom timeline events to mark important events that Incident Manager can detect automatically.
    */
   createTimelineEvent(callback?: (err: AWSError, data: SSMIncidents.Types.CreateTimelineEventOutput) => void): Request<SSMIncidents.Types.CreateTimelineEventOutput, AWSError>;
   /**
@@ -390,7 +390,7 @@ declare namespace SSMIncidents {
   }
   export interface CreateTimelineEventInput {
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token that ensures that a client calls the action only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
@@ -398,7 +398,7 @@ declare namespace SSMIncidents {
      */
     eventData: EventData;
     /**
-     * Adds one or more references to the TimelineEvent. A reference can be an Amazon Web Services resource involved in the incident or in some way associated with it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the resource. You can also specify a related item. As an example, you could specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this example is the resource. You could also specify a Amazon CloudWatch metric for that table. The metric is the related item.
+     * Adds one or more references to the TimelineEvent. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter its Amazon Resource Name (ARN). You can also specify a related item associated with a resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a resource, use the table's ARN. You can also specify an Amazon CloudWatch metric associated with the DynamoDB table as a related item.
      */
     eventReferences?: EventReferenceList;
     /**
@@ -406,11 +406,11 @@ declare namespace SSMIncidents {
      */
     eventTime: Timestamp;
     /**
-     * The type of the event. You can create timeline events of type Custom Event.
+     * The type of event. You can create timeline events of type Custom Event.
      */
     eventType: TimelineEventType;
     /**
-     * The Amazon Resource Name (ARN) of the incident record to which the event will be added.
+     * The Amazon Resource Name (ARN) of the incident record that the action adds the incident to.
      */
     incidentRecordArn: Arn;
   }
@@ -469,7 +469,7 @@ declare namespace SSMIncidents {
   }
   export interface DeleteTimelineEventInput {
     /**
-     * The ID of the event you are updating. You can find this by using ListTimelineEvents.
+     * The ID of the event to update. You can use ListTimelineEvents to find an event's ID.
      */
     eventId: UUID;
     /**
@@ -824,7 +824,7 @@ declare namespace SSMIncidents {
   }
   export interface ListIncidentRecordsInput {
     /**
-     * Filters the list of incident records through which you are searching. You can filter on the following keys:    creationTime     impact     status     createdBy    Note the following when deciding how to use Filters:   If you don't specify a Filter, the response includes all incident records.   If you specify more than one filter in a single request, the response returns incident records that match all filters.   If you specify a filter with more than one value, the response returns incident records that match any of the values provided.  
+     * Filters the list of incident records you want to search through. You can filter on the following keys:    creationTime     impact     status     createdBy    Note the following when when you use Filters:   If you don't specify a Filter, the response includes all incident records.   If you specify more than one filter in a single request, the response returns incident records that match all filters.   If you specify a filter with more than one value, the response returns incident records that match any of the values provided.  
      */
     filters?: FilterList;
     /**
@@ -924,7 +924,7 @@ declare namespace SSMIncidents {
   }
   export interface ListTimelineEventsInput {
     /**
-     * Filters the timeline events based on the provided conditional values. You can filter timeline events using the following keys:    eventTime     eventType    Note the following when deciding how to use Filters:   If you don't specify a Filter, the response includes all timeline events.   If you specify more than one filter in a single request, the response returns timeline events that match all filters.   If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.  
+     * Filters the timeline events based on the provided conditional values. You can filter timeline events with the following keys:    eventTime     eventType    Note the following when deciding how to use Filters:   If you don't specify a Filter, the response includes all timeline events.   If you specify more than one filter in a single request, the response returns timeline events that match all filters.   If you specify a filter with more than one value, the response returns timeline events that match any of the values provided.  
      */
     filters?: FilterList;
     /**
@@ -940,7 +940,7 @@ declare namespace SSMIncidents {
      */
     nextToken?: NextToken;
     /**
-     * Sort by the specified key value pair.
+     * Sort timeline events by the specified key value pair.
      */
     sortBy?: TimelineEventSort;
     /**
@@ -1197,7 +1197,7 @@ declare namespace SSMIncidents {
      */
     impact?: Impact;
     /**
-     * Add related items to the incident for other responders to use. Related items are AWS resources, external links, or files uploaded to an Amazon S3 bucket. 
+     * Add related items to the incident for other responders to use. Related items are Amazon Web Services resources, external links, or files uploaded to an Amazon S3 bucket. 
      */
     relatedItems?: RelatedItemList;
     /**
@@ -1329,19 +1329,19 @@ declare namespace SSMIncidents {
      */
     chatChannel?: ChatChannel;
     /**
-     * A token that ensures that the operation is called only once with the specified details.
+     * A token that ensures that a client calls the operation only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
-     * Defines the impact of the incident to customers and applications. Providing an impact overwrites the impact provided by the response plan.  Possible impacts:     1 - Critical impact, full application failure that impacts many to all customers.     2 - High impact, partial application failure with impact to many customers.    3 - Medium impact, the application is providing reduced service to customers.    4 - Low impact, customer aren't impacted by the problem yet.    5 - No impact, customers aren't currently impacted but urgent action is needed to avoid impact.  
+     * Defines the impact of the incident to customers and applications. If you provide an impact for an incident, it overwrites the impact provided by the response plan.  Possible impacts:     1 - Critical impact, full application failure that impacts many to all customers.     2 - High impact, partial application failure with impact to many customers.    3 - Medium impact, the application is providing reduced service to customers.    4 - Low impact, customer aren't impacted by the problem yet.    5 - No impact, customers aren't currently impacted but urgent action is needed to avoid impact.  
      */
     impact?: Impact;
     /**
-     * The Amazon SNS targets that are notified when updates are made to an incident. Using multiple SNS topics creates redundancy in the event that a Region is down during the incident.
+     * The Amazon SNS targets that Incident Manager notifies when a client updates an incident. Using multiple SNS topics creates redundancy in the event that a Region is down during the incident.
      */
     notificationTargets?: NotificationTargetSet;
     /**
-     * The status of the incident. An incident can be Open or Resolved.
+     * The status of the incident. Possible statuses are Open or Resolved.
      */
     status?: IncidentRecordStatus;
     /**
@@ -1357,15 +1357,15 @@ declare namespace SSMIncidents {
   }
   export interface UpdateRelatedItemsInput {
     /**
-     * A token ensuring that the operation is called only once with the specified details.
+     * A token that ensures that a client calls the operation only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
-     * The Amazon Resource Name (ARN) of the incident record containing the related items you are updating.
+     * The Amazon Resource Name (ARN) of the incident record that contains the related items that you update.
      */
     incidentRecordArn: Arn;
     /**
-     * Details about the item you are adding or deleting.
+     * Details about the item that you are add to, or delete from, an incident.
      */
     relatedItemsUpdate: RelatedItemsUpdate;
   }
@@ -1456,7 +1456,7 @@ declare namespace SSMIncidents {
   }
   export interface UpdateTimelineEventInput {
     /**
-     * A token ensuring that the operation is called only once with the specified details.
+     * A token that ensures that a client calls the operation only once with the specified details.
      */
     clientToken?: ClientToken;
     /**
@@ -1464,11 +1464,11 @@ declare namespace SSMIncidents {
      */
     eventData?: EventData;
     /**
-     * The ID of the event you are updating. You can find this by using ListTimelineEvents.
+     * The ID of the event to update. You can use ListTimelineEvents to find an event's ID.
      */
     eventId: UUID;
     /**
-     * Updates all existing references in a TimelineEvent. A reference can be an Amazon Web Services resource involved in the incident or in some way associated with it. When you specify a reference, you enter the Amazon Resource Name (ARN) of the resource. You can also specify a related item. As an example, you could specify the ARN of an Amazon DynamoDB (DynamoDB) table. The table for this example is the resource. You could also specify a Amazon CloudWatch metric for that table. The metric is the related item.  This update action overrides all existing references. If you want to keep existing references, you must specify them in the call. If you don't, this action removes them and enters only new references. 
+     * Updates all existing references in a TimelineEvent. A reference is an Amazon Web Services resource involved or associated with the incident. To specify a reference, enter its Amazon Resource Name (ARN). You can also specify a related item associated with that resource. For example, to specify an Amazon DynamoDB (DynamoDB) table as a resource, use its ARN. You can also specify an Amazon CloudWatch metric associated with the DynamoDB table as a related item.  This update action overrides all existing references. If you want to keep existing references, you must specify them in the call. If you don't, this action removes any existing references and enters only new references. 
      */
     eventReferences?: EventReferenceList;
     /**
@@ -1476,7 +1476,7 @@ declare namespace SSMIncidents {
      */
     eventTime?: Timestamp;
     /**
-     * The type of the event. You can update events of type Custom Event.
+     * The type of event. You can update events of type Custom Event.
      */
     eventType?: TimelineEventType;
     /**
