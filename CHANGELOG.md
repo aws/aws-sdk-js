@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1345.0-->
+<!--LATEST=2.1346.0-->
 <!--ENTRYINSERT-->
+
+## 2.1346.0
+* feature: OpenSearchServerless: This release includes two new exception types "ServiceQuotaExceededException" and "OcuLimitExceededException".
+* feature: RDS: Add support for creating a read replica DB instance from a Multi-AZ DB cluster.
 
 ## 2.1345.0
 * feature: IotData: Add endpoint ruleset support for cn-north-1.

@@ -220,11 +220,11 @@ declare class OpenSearchServerless extends Service {
    */
   updateAccessPolicy(callback?: (err: AWSError, data: OpenSearchServerless.Types.UpdateAccessPolicyResponse) => void): Request<OpenSearchServerless.Types.UpdateAccessPolicyResponse, AWSError>;
   /**
-   * Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more information, see Autoscaling.
+   * Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more information, see Managing capacity limits for Amazon OpenSearch Serverless.
    */
   updateAccountSettings(params: OpenSearchServerless.Types.UpdateAccountSettingsRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.UpdateAccountSettingsResponse) => void): Request<OpenSearchServerless.Types.UpdateAccountSettingsResponse, AWSError>;
   /**
-   * Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more information, see Autoscaling.
+   * Update the OpenSearch Serverless settings for the current Amazon Web Services account. For more information, see Managing capacity limits for Amazon OpenSearch Serverless.
    */
   updateAccountSettings(callback?: (err: AWSError, data: OpenSearchServerless.Types.UpdateAccountSettingsResponse) => void): Request<OpenSearchServerless.Types.UpdateAccountSettingsResponse, AWSError>;
   /**
@@ -588,7 +588,7 @@ declare namespace OpenSearchServerless {
      */
     name: ConfigName;
     /**
-     * Describes SAML options in in the form of a key-value map.
+     * Describes SAML options in in the form of a key-value map. This field is required if you specify saml for the type parameter.
      */
     samlOptions?: SamlConfigOptions;
     /**
@@ -861,7 +861,7 @@ declare namespace OpenSearchServerless {
      */
     nextToken?: String;
     /**
-     * Resource filters (can be collection or indexes) that policies can apply to.
+     * Resource filters (can be collections or indexes) that policies can apply to.
      */
     resource?: ListAccessPoliciesRequestResourceList;
     /**
@@ -1014,7 +1014,7 @@ declare namespace OpenSearchServerless {
      */
     metadata: samlMetadata;
     /**
-     * The session timeout, in minutes. Minimum is 15 minutes and maximum is 1440 minutes (24 hours or 1 day). Default is 60 minutes.
+     * The session timeout, in minutes. Default is 60 minutes (12 hours).
      */
     sessionTimeout?: SamlConfigOptionsSessionTimeoutInteger;
     /**
@@ -1440,7 +1440,7 @@ declare namespace OpenSearchServerless {
      */
     subnetIds?: SubnetIds;
     /**
-     * The ID of the VPC from which you access OpenSearch Serverless
+     * The ID of the VPC from which you access OpenSearch Serverless.
      */
     vpcId?: VpcId;
   }

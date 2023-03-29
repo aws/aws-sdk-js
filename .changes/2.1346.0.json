@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "OpenSearchServerless",
+        "description": "This release includes two new exception types \"ServiceQuotaExceededException\" and \"OcuLimitExceededException\"."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Add support for creating a read replica DB instance from a Multi-AZ DB cluster."
+    }
+]
