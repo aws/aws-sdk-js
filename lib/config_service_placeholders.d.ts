@@ -343,6 +343,7 @@ export abstract class ConfigurationServicePlaceholders {
   tnb?: AWS.Tnb.Types.ClientConfiguration;
   internetmonitor?: AWS.InternetMonitor.Types.ClientConfiguration;
   ivsrealtime?: AWS.IVSRealTime.Types.ClientConfiguration;
+  vpclattice?: AWS.VPCLattice.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -688,4 +689,5 @@ export interface ConfigurationServiceApiVersions {
   tnb?: AWS.Tnb.Types.apiVersion;
   internetmonitor?: AWS.InternetMonitor.Types.apiVersion;
   ivsrealtime?: AWS.IVSRealTime.Types.apiVersion;
+  vpclattice?: AWS.VPCLattice.Types.apiVersion;
 }

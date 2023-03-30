@@ -884,6 +884,10 @@ declare namespace EMR {
      * A timeline that represents the status of a cluster over the lifetime of the cluster.
      */
     Timeline?: ClusterTimeline;
+    /**
+     * A list of tuples that provide information about the errors that caused a cluster termination. This structure may have up to 10 different ErrorDetail tuples.
+     */
+    ErrorDetails?: ErrorDetailList;
   }
   export interface ClusterSummary {
     /**
@@ -1344,6 +1348,22 @@ declare namespace EMR {
      */
     AdditionalSlaveSecurityGroups?: StringList;
   }
+  export type ErrorData = StringMap[];
+  export interface ErrorDetail {
+    /**
+     * The name or code that's associated with the error.
+     */
+    ErrorCode?: String;
+    /**
+     * A list of key value pairs that provide contextual information to explain why the error may have occured.
+     */
+    ErrorData?: ErrorData;
+    /**
+     * A message describing the error that occured.
+     */
+    ErrorMessage?: String;
+  }
+  export type ErrorDetailList = ErrorDetail[];
   export interface ExecutionEngineConfig {
     /**
      * The unique identifier of the execution engine. For an EMR cluster, this is the cluster ID.

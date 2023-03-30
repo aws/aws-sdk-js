@@ -1288,5 +1288,9 @@
   "ivsrealtime": {
     "prefix": "ivs-realtime",
     "name": "IVSRealTime"
+  },
+  "vpclattice": {
+    "prefix": "vpc-lattice",
+    "name": "VPCLattice"
   }
 }

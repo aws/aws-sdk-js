@@ -3621,6 +3621,14 @@ declare class EC2 extends Service {
    */
   getVpnConnectionDeviceTypes(callback?: (err: AWSError, data: EC2.Types.GetVpnConnectionDeviceTypesResult) => void): Request<EC2.Types.GetVpnConnectionDeviceTypesResult, AWSError>;
   /**
+   * Get details of available tunnel endpoint maintenance.
+   */
+  getVpnTunnelReplacementStatus(params: EC2.Types.GetVpnTunnelReplacementStatusRequest, callback?: (err: AWSError, data: EC2.Types.GetVpnTunnelReplacementStatusResult) => void): Request<EC2.Types.GetVpnTunnelReplacementStatusResult, AWSError>;
+  /**
+   * Get details of available tunnel endpoint maintenance.
+   */
+  getVpnTunnelReplacementStatus(callback?: (err: AWSError, data: EC2.Types.GetVpnTunnelReplacementStatusResult) => void): Request<EC2.Types.GetVpnTunnelReplacementStatusResult, AWSError>;
+  /**
    * Uploads a client certificate revocation list to the specified Client VPN endpoint. Uploading a client certificate revocation list overwrites the existing client certificate revocation list. Uploading a client certificate revocation list resets existing client connections.
    */
   importClientVpnClientCertificateRevocationList(params: EC2.Types.ImportClientVpnClientCertificateRevocationListRequest, callback?: (err: AWSError, data: EC2.Types.ImportClientVpnClientCertificateRevocationListResult) => void): Request<EC2.Types.ImportClientVpnClientCertificateRevocationListResult, AWSError>;
@@ -4420,6 +4428,14 @@ declare class EC2 extends Service {
    * Replaces the specified route in the specified transit gateway route table.
    */
   replaceTransitGatewayRoute(callback?: (err: AWSError, data: EC2.Types.ReplaceTransitGatewayRouteResult) => void): Request<EC2.Types.ReplaceTransitGatewayRouteResult, AWSError>;
+  /**
+   * Trigger replacement of specified VPN tunnel.
+   */
+  replaceVpnTunnel(params: EC2.Types.ReplaceVpnTunnelRequest, callback?: (err: AWSError, data: EC2.Types.ReplaceVpnTunnelResult) => void): Request<EC2.Types.ReplaceVpnTunnelResult, AWSError>;
+  /**
+   * Trigger replacement of specified VPN tunnel.
+   */
+  replaceVpnTunnel(callback?: (err: AWSError, data: EC2.Types.ReplaceVpnTunnelResult) => void): Request<EC2.Types.ReplaceVpnTunnelResult, AWSError>;
   /**
    * Submits feedback about the status of an instance. The instance must be in the running state. If your experience with the instance differs from the instance status returned by DescribeInstanceStatus, use ReportInstanceStatus to report your experience with the instance. Amazon EC2 collects this information to improve the accuracy of status checks. Use of this action does not change the value returned by DescribeInstanceStatus.
    */
@@ -6845,6 +6861,7 @@ declare namespace EC2 {
     Message?: String;
   }
   export type AvailabilityZoneMessageList = AvailabilityZoneMessage[];
+  export type AvailabilityZoneName = string;
   export type AvailabilityZoneOptInStatus = "opt-in-not-required"|"opted-in"|"not-opted-in"|string;
   export type AvailabilityZoneState = "available"|"information"|"impaired"|"unavailable"|string;
   export type AvailabilityZoneStringList = String[];
@@ -11026,7 +11043,7 @@ declare namespace EC2 {
     /**
      * The Availability Zone in which to create the volume.
      */
-    AvailabilityZone: String;
+    AvailabilityZone: AvailabilityZoneName;
     /**
      * Indicates whether the volume should be encrypted. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Encryption by default in the Amazon Elastic Compute Cloud User Guide. Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types.
      */
@@ -21491,6 +21508,46 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
   }
+  export interface GetVpnTunnelReplacementStatusRequest {
+    /**
+     * The ID of the Site-to-Site VPN connection. 
+     */
+    VpnConnectionId: VpnConnectionId;
+    /**
+     * The external IP address of the VPN tunnel.
+     */
+    VpnTunnelOutsideIpAddress: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetVpnTunnelReplacementStatusResult {
+    /**
+     * The ID of the Site-to-Site VPN connection. 
+     */
+    VpnConnectionId?: VpnConnectionId;
+    /**
+     * The ID of the transit gateway associated with the VPN connection.
+     */
+    TransitGatewayId?: TransitGatewayId;
+    /**
+     * The ID of the customer gateway.
+     */
+    CustomerGatewayId?: CustomerGatewayId;
+    /**
+     * The ID of the virtual private gateway.
+     */
+    VpnGatewayId?: VpnGatewayId;
+    /**
+     * The external IP address of the VPN tunnel.
+     */
+    VpnTunnelOutsideIpAddress?: String;
+    /**
+     * Get details of pending tunnel endpoint maintenance.
+     */
+    MaintenanceDetails?: MaintenanceDetails;
+  }
   export type GpuDeviceCount = number;
   export interface GpuDeviceInfo {
     /**
@@ -26156,6 +26213,20 @@ declare namespace EC2 {
   export type LocationType = "region"|"availability-zone"|"availability-zone-id"|string;
   export type LogDestinationType = "cloud-watch-logs"|"s3"|"kinesis-data-firehose"|string;
   export type Long = number;
+  export interface MaintenanceDetails {
+    /**
+     * Verify existence of a pending maintenance.
+     */
+    PendingMaintenance?: String;
+    /**
+     * The timestamp after which Amazon Web Services will automatically apply maintenance.
+     */
+    MaintenanceAutoAppliedAfter?: MillisecondDateTime;
+    /**
+     * Timestamp of last applied maintenance.
+     */
+    LastMaintenanceApplied?: MillisecondDateTime;
+  }
   export interface ManagedPrefixList {
     /**
      * The ID of the prefix list.
@@ -28323,6 +28394,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Choose whether or not to trigger immediate tunnel replacement. Valid values: True | False 
+     */
+    SkipTunnelReplacement?: Boolean;
   }
   export interface ModifyVpnTunnelOptionsResult {
     /**
@@ -28407,6 +28482,10 @@ declare namespace EC2 {
      * Options for logging VPN tunnel activity.
      */
     LogOptions?: VpnTunnelLogOptionsSpecification;
+    /**
+     * Turn on or off tunnel endpoint lifecycle control feature.
+     */
+    EnableTunnelLifecycleControl?: Boolean;
   }
   export interface MonitorInstancesRequest {
     /**
@@ -31004,6 +31083,30 @@ declare namespace EC2 {
      * Information about the modified route.
      */
     Route?: TransitGatewayRoute;
+  }
+  export interface ReplaceVpnTunnelRequest {
+    /**
+     * The ID of the Site-to-Site VPN connection. 
+     */
+    VpnConnectionId: VpnConnectionId;
+    /**
+     * The external IP address of the VPN tunnel.
+     */
+    VpnTunnelOutsideIpAddress: String;
+    /**
+     * Trigger pending tunnel endpoint maintenance.
+     */
+    ApplyPendingMaintenance?: Boolean;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ReplaceVpnTunnelResult {
+    /**
+     * Confirmation of replace tunnel operation.
+     */
+    Return?: Boolean;
   }
   export type ReplacementStrategy = "launch"|"launch-before-terminate"|string;
   export type ReportInstanceReasonCodes = "instance-stuck-in-state"|"unresponsive"|"not-accepting-credentials"|"password-not-available"|"performance-network"|"performance-instance-store"|"performance-ebs-volume"|"performance-other"|"other"|string;
@@ -36293,6 +36396,10 @@ declare namespace EC2 {
      * Options for logging VPN tunnel activity.
      */
     LogOptions?: VpnTunnelLogOptions;
+    /**
+     * Status of tunnel endpoint lifecycle control feature.
+     */
+    EnableTunnelLifecycleControl?: Boolean;
   }
   export type TunnelOptionsList = TunnelOption[];
   export interface UnassignIpv6AddressesRequest {
@@ -37984,6 +38091,10 @@ declare namespace EC2 {
      * Options for logging VPN tunnel activity.
      */
     LogOptions?: VpnTunnelLogOptionsSpecification;
+    /**
+     * Turn on or off tunnel endpoint lifecycle control feature.
+     */
+    EnableTunnelLifecycleControl?: Boolean;
   }
   export type VpnTunnelOptionsSpecificationsList = VpnTunnelOptionsSpecification[];
   export type WeekDay = "sunday"|"monday"|"tuesday"|"wednesday"|"thursday"|"friday"|"saturday"|string;

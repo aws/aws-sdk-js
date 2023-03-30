@@ -12506,10 +12506,6 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The new name of the ruleset, if you are renaming it.
-     */
-    UpdatedName?: NameString;
-    /**
      * A description of the ruleset.
      */
     Description?: DescriptionString;

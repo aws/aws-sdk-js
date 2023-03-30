@@ -36,6 +36,14 @@ declare class Kendra extends Service {
    */
   batchDeleteDocument(callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
+   * Removes one or more sets of featured results. Features results are placed above all other results for certain queries. If there's an exact match of a query, then one or more specific documents are featured in the search results.
+   */
+  batchDeleteFeaturedResultsSet(params: Kendra.Types.BatchDeleteFeaturedResultsSetRequest, callback?: (err: AWSError, data: Kendra.Types.BatchDeleteFeaturedResultsSetResponse) => void): Request<Kendra.Types.BatchDeleteFeaturedResultsSetResponse, AWSError>;
+  /**
+   * Removes one or more sets of featured results. Features results are placed above all other results for certain queries. If there's an exact match of a query, then one or more specific documents are featured in the search results.
+   */
+  batchDeleteFeaturedResultsSet(callback?: (err: AWSError, data: Kendra.Types.BatchDeleteFeaturedResultsSetResponse) => void): Request<Kendra.Types.BatchDeleteFeaturedResultsSetResponse, AWSError>;
+  /**
    * Returns the indexing status for one or more documents submitted with the  BatchPutDocument API. When you use the BatchPutDocument API, documents are indexed asynchronously. You can use the BatchGetDocumentStatus API to get the current status of a list of documents so that you can determine if they have been successfully indexed. You can also use the BatchGetDocumentStatus API to check the status of the  BatchDeleteDocument API. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND as the status.
    */
   batchGetDocumentStatus(params: Kendra.Types.BatchGetDocumentStatusRequest, callback?: (err: AWSError, data: Kendra.Types.BatchGetDocumentStatusResponse) => void): Request<Kendra.Types.BatchGetDocumentStatusResponse, AWSError>;
@@ -68,11 +76,11 @@ declare class Kendra extends Service {
    */
   createAccessControlConfiguration(callback?: (err: AWSError, data: Kendra.Types.CreateAccessControlConfigurationResponse) => void): Request<Kendra.Types.CreateAccessControlConfigurationResponse, AWSError>;
   /**
-   * Creates a data source connector that you want to use with an Amazon Kendra index. You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised. Amazon S3 and custom data sources are the only supported data sources in the Amazon Web Services GovCloud (US-West) region. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
+   * Creates a data source connector that you want to use with an Amazon Kendra index. You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
    */
   createDataSource(params: Kendra.Types.CreateDataSourceRequest, callback?: (err: AWSError, data: Kendra.Types.CreateDataSourceResponse) => void): Request<Kendra.Types.CreateDataSourceResponse, AWSError>;
   /**
-   * Creates a data source connector that you want to use with an Amazon Kendra index. You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised. Amazon S3 and custom data sources are the only supported data sources in the Amazon Web Services GovCloud (US-West) region. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
+   * Creates a data source connector that you want to use with an Amazon Kendra index. You specify a name, data source connector type and description for your data source. You also specify configuration information for the data source connector.  CreateDataSource is a synchronous operation. The operation returns 200 if the data source was successfully created. Otherwise, an exception is raised. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
    */
   createDataSource(callback?: (err: AWSError, data: Kendra.Types.CreateDataSourceResponse) => void): Request<Kendra.Types.CreateDataSourceResponse, AWSError>;
   /**
@@ -84,13 +92,21 @@ declare class Kendra extends Service {
    */
   createExperience(callback?: (err: AWSError, data: Kendra.Types.CreateExperienceResponse) => void): Request<Kendra.Types.CreateExperienceResponse, AWSError>;
   /**
-   * Creates an new set of frequently asked question (FAQ) questions and answers. Adding FAQs to an index is an asynchronous operation. For an example of adding an FAQ to an index using Python and Java SDKs, see Using your FAQ file.
+   * Creates a set of frequently ask questions (FAQs) using a specified FAQ file stored in an Amazon S3 bucket. Adding FAQs to an index is an asynchronous operation. For an example of adding an FAQ to an index using Python and Java SDKs, see Using your FAQ file.
    */
   createFaq(params: Kendra.Types.CreateFaqRequest, callback?: (err: AWSError, data: Kendra.Types.CreateFaqResponse) => void): Request<Kendra.Types.CreateFaqResponse, AWSError>;
   /**
-   * Creates an new set of frequently asked question (FAQ) questions and answers. Adding FAQs to an index is an asynchronous operation. For an example of adding an FAQ to an index using Python and Java SDKs, see Using your FAQ file.
+   * Creates a set of frequently ask questions (FAQs) using a specified FAQ file stored in an Amazon S3 bucket. Adding FAQs to an index is an asynchronous operation. For an example of adding an FAQ to an index using Python and Java SDKs, see Using your FAQ file.
    */
   createFaq(callback?: (err: AWSError, data: Kendra.Types.CreateFaqResponse) => void): Request<Kendra.Types.CreateFaqResponse, AWSError>;
+  /**
+   * Creates a set of featured results to display at the top of the search results page. Featured results are placed above all other results for certain queries. You map specific queries to specific documents for featuring in the results. If a query contains an exact match, then one or more specific documents are featured in the search results. You can create up to 50 sets of featured results per index. You can request to increase this limit by contacting Support.
+   */
+  createFeaturedResultsSet(params: Kendra.Types.CreateFeaturedResultsSetRequest, callback?: (err: AWSError, data: Kendra.Types.CreateFeaturedResultsSetResponse) => void): Request<Kendra.Types.CreateFeaturedResultsSetResponse, AWSError>;
+  /**
+   * Creates a set of featured results to display at the top of the search results page. Featured results are placed above all other results for certain queries. You map specific queries to specific documents for featuring in the results. If a query contains an exact match, then one or more specific documents are featured in the search results. You can create up to 50 sets of featured results per index. You can request to increase this limit by contacting Support.
+   */
+  createFeaturedResultsSet(callback?: (err: AWSError, data: Kendra.Types.CreateFeaturedResultsSetResponse) => void): Request<Kendra.Types.CreateFeaturedResultsSetResponse, AWSError>;
   /**
    * Creates an Amazon Kendra index. Index creation is an asynchronous API. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument API or using one of the supported data sources. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
    */
@@ -211,6 +227,14 @@ declare class Kendra extends Service {
    * Gets information about an FAQ list.
    */
   describeFaq(callback?: (err: AWSError, data: Kendra.Types.DescribeFaqResponse) => void): Request<Kendra.Types.DescribeFaqResponse, AWSError>;
+  /**
+   * Gets information about a set of featured results. Features results are placed above all other results for certain queries. If there's an exact match of a query, then one or more specific documents are featured in the search results.
+   */
+  describeFeaturedResultsSet(params: Kendra.Types.DescribeFeaturedResultsSetRequest, callback?: (err: AWSError, data: Kendra.Types.DescribeFeaturedResultsSetResponse) => void): Request<Kendra.Types.DescribeFeaturedResultsSetResponse, AWSError>;
+  /**
+   * Gets information about a set of featured results. Features results are placed above all other results for certain queries. If there's an exact match of a query, then one or more specific documents are featured in the search results.
+   */
+  describeFeaturedResultsSet(callback?: (err: AWSError, data: Kendra.Types.DescribeFeaturedResultsSetResponse) => void): Request<Kendra.Types.DescribeFeaturedResultsSetResponse, AWSError>;
   /**
    * Gets information about an existing Amazon Kendra index.
    */
@@ -340,6 +364,14 @@ declare class Kendra extends Service {
    */
   listFaqs(callback?: (err: AWSError, data: Kendra.Types.ListFaqsResponse) => void): Request<Kendra.Types.ListFaqsResponse, AWSError>;
   /**
+   * Lists all your sets of featured results for a given index. Features results are placed above all other results for certain queries. If there's an exact match of a query, then one or more specific documents are featured in the search results.
+   */
+  listFeaturedResultsSets(params: Kendra.Types.ListFeaturedResultsSetsRequest, callback?: (err: AWSError, data: Kendra.Types.ListFeaturedResultsSetsResponse) => void): Request<Kendra.Types.ListFeaturedResultsSetsResponse, AWSError>;
+  /**
+   * Lists all your sets of featured results for a given index. Features results are placed above all other results for certain queries. If there's an exact match of a query, then one or more specific documents are featured in the search results.
+   */
+  listFeaturedResultsSets(callback?: (err: AWSError, data: Kendra.Types.ListFeaturedResultsSetsResponse) => void): Request<Kendra.Types.ListFeaturedResultsSetsResponse, AWSError>;
+  /**
    * Provides a list of groups that are mapped to users before a given ordering or timestamp identifier.  ListGroupsOlderThanOrderingId is currently not supported in the Amazon Web Services GovCloud (US-West) region.
    */
   listGroupsOlderThanOrderingId(params: Kendra.Types.ListGroupsOlderThanOrderingIdRequest, callback?: (err: AWSError, data: Kendra.Types.ListGroupsOlderThanOrderingIdResponse) => void): Request<Kendra.Types.ListGroupsOlderThanOrderingIdResponse, AWSError>;
@@ -380,11 +412,11 @@ declare class Kendra extends Service {
    */
   listThesauri(callback?: (err: AWSError, data: Kendra.Types.ListThesauriResponse) => void): Request<Kendra.Types.ListThesauriResponse, AWSError>;
   /**
-   * Maps users to their groups so that you only need to provide the user ID when you issue the query. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents. For more information, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.  PutPrincipalMapping is currently not supported in the Amazon Web Services GovCloud (US-West) region.
+   * Maps users to their groups so that you only need to provide the user ID when you issue the query. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents. For more information, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.
    */
   putPrincipalMapping(params: Kendra.Types.PutPrincipalMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Maps users to their groups so that you only need to provide the user ID when you issue the query. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents. For more information, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.  PutPrincipalMapping is currently not supported in the Amazon Web Services GovCloud (US-West) region.
+   * Maps users to their groups so that you only need to provide the user ID when you issue the query. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. This is useful for user context filtering, where search results are filtered based on the user or their group access to documents. For more information, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.
    */
   putPrincipalMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -459,6 +491,14 @@ declare class Kendra extends Service {
    * Updates your Amazon Kendra experience such as a search application. For more information on creating a search application experience, see Building a search experience with no code.
    */
   updateExperience(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a set of featured results. Features results are placed above all other results for certain queries. You map specific queries to specific documents for featuring in the results. If a query contains an exact match of a query, then one or more specific documents are featured in the search results.
+   */
+  updateFeaturedResultsSet(params: Kendra.Types.UpdateFeaturedResultsSetRequest, callback?: (err: AWSError, data: Kendra.Types.UpdateFeaturedResultsSetResponse) => void): Request<Kendra.Types.UpdateFeaturedResultsSetResponse, AWSError>;
+  /**
+   * Updates a set of featured results. Features results are placed above all other results for certain queries. You map specific queries to specific documents for featuring in the results. If a query contains an exact match of a query, then one or more specific documents are featured in the search results.
+   */
+  updateFeaturedResultsSet(callback?: (err: AWSError, data: Kendra.Types.UpdateFeaturedResultsSetResponse) => void): Request<Kendra.Types.UpdateFeaturedResultsSetResponse, AWSError>;
   /**
    * Updates an existing Amazon Kendra index.
    */
@@ -730,6 +770,37 @@ declare namespace Kendra {
     ErrorMessage?: ErrorMessage;
   }
   export type BatchDeleteDocumentResponseFailedDocuments = BatchDeleteDocumentResponseFailedDocument[];
+  export interface BatchDeleteFeaturedResultsSetError {
+    /**
+     * The identifier of the set of featured results that couldn't be removed from the index.
+     */
+    Id: FeaturedResultsSetId;
+    /**
+     * The error code for why the set of featured results couldn't be removed from the index.
+     */
+    ErrorCode: ErrorCode;
+    /**
+     * An explanation for why the set of featured results couldn't be removed from the index.
+     */
+    ErrorMessage: ErrorMessage;
+  }
+  export type BatchDeleteFeaturedResultsSetErrors = BatchDeleteFeaturedResultsSetError[];
+  export interface BatchDeleteFeaturedResultsSetRequest {
+    /**
+     * The identifier of the index used for featuring results.
+     */
+    IndexId: IndexId;
+    /**
+     * The identifiers of the featured results sets that you want to delete.
+     */
+    FeaturedResultsSetIds: FeaturedResultsSetIdList;
+  }
+  export interface BatchDeleteFeaturedResultsSetResponse {
+    /**
+     * The list of errors for the featured results set IDs, explaining why they couldn't be removed from the index.
+     */
+    Errors: BatchDeleteFeaturedResultsSetErrors;
+  }
   export interface BatchGetDocumentStatusRequest {
     /**
      * The identifier of the index to add documents to. The index ID is returned by the CreateIndex  API.
@@ -771,11 +842,11 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of a role that is allowed to run the BatchPutDocument API. For more information, see IAM Roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket. For more information, see IAM access roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
-     * One or more documents to add to the index. Documents have the following file size limits.   5 MB total size for inline documents   50 MB total size for files from an S3 bucket   5 MB extracted text for any file   For more information about file size and transaction per second quotas, see Quotas.
+     * One or more documents to add to the index. Documents have the following file size limits.   50 MB total size for any file   5 MB extracted text for any file   For more information, see Quotas.
      */
     Documents: DocumentList;
     /**
@@ -884,7 +955,7 @@ declare namespace Kendra {
      */
     ResultId: ResultId;
     /**
-     * The Unix timestamp of the date and time that the result was clicked.
+     * The Unix timestamp when the result was clicked.
      */
     ClickTime: Timestamp;
   }
@@ -1191,15 +1262,15 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * Sets the frequency for Amazon Kendra to check the documents in your data source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception.
+     * Sets the frequency for Amazon Kendra to check the documents in your data source repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the StartDataSourceSyncJob API to update the index. Specify a cron- format schedule string or an empty string to indicate that the index is updated on demand. You can't specify the Schedule parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception.
      */
     Schedule?: ScanSchedule;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access the data source and required resources. For more information, see IAM roles for Amazon Kendra. You can't specify the RoleArn parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The RoleArn parameter is required for all other data sources.
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources. For more information, see IAM access roles for Amazon Kendra.. You can't specify the RoleArn parameter when the Type parameter is set to CUSTOM. If you do, you receive a ValidationException exception. The RoleArn parameter is required for all other data sources.
      */
     RoleArn?: RoleArn;
     /**
-     * A list of key-value pairs that identify the data source connector. You can use the tags to identify and organize your resources and to control access to resources.
+     * A list of key-value pairs that identify or categorize the data source connector. You can also use tags to help control access to the data source connector. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     Tags?: TagList;
     /**
@@ -1231,7 +1302,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and IAM Identity Center that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access Query API, GetQuerySuggestions API, and other required APIs. The role also must include permission to access IAM Identity Center (successor to Single Sign-On) that stores your user and group information. For more information, see IAM access roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
@@ -1249,7 +1320,7 @@ declare namespace Kendra {
   }
   export interface CreateExperienceResponse {
     /**
-     * The identifier for your created Amazon Kendra experience.
+     * The identifier of your Amazon Kendra experience.
      */
     Id: ExperienceId;
   }
@@ -1271,7 +1342,7 @@ declare namespace Kendra {
      */
     S3Path: S3Path;
     /**
-     * The Amazon Resource Name (ARN) of a role with permission to access the S3 bucket that contains the FAQs. For more information, see IAM Roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access the S3 bucket that contains the FAQs. For more information, see IAM access roles for Amazon Kendra.
      */
     RoleArn: RoleArn;
     /**
@@ -1297,17 +1368,57 @@ declare namespace Kendra {
      */
     Id?: FaqId;
   }
+  export interface CreateFeaturedResultsSetRequest {
+    /**
+     * The identifier of the index that you want to use for featuring results.
+     */
+    IndexId: IndexId;
+    /**
+     * A name for the set of featured results.
+     */
+    FeaturedResultsSetName: FeaturedResultsSetName;
+    /**
+     * A description for the set of featured results.
+     */
+    Description?: FeaturedResultsSetDescription;
+    /**
+     * A token that you provide to identify the request to create a set of featured results. Multiple calls to the CreateFeaturedResultsSet API with the same client token will create only one featured results set.
+     */
+    ClientToken?: ClientTokenName;
+    /**
+     * The current status of the set of featured results. When the value is ACTIVE, featured results are ready for use. You can still configure your settings before setting the status to ACTIVE. You can set the status to ACTIVE or INACTIVE using the UpdateFeaturedResultsSet API. The queries you specify for featured results must be unique per featured results set for each index, whether the status is ACTIVE or INACTIVE.
+     */
+    Status?: FeaturedResultsSetStatus;
+    /**
+     * A list of queries for featuring results. For more information on the list of queries, see FeaturedResultsSet.
+     */
+    QueryTexts?: QueryTextList;
+    /**
+     * A list of document IDs for the documents you want to feature at the top of the search results page. For more information on the list of documents, see FeaturedResultsSet.
+     */
+    FeaturedDocuments?: FeaturedDocumentList;
+    /**
+     * A list of key-value pairs that identify or categorize the featured results set. You can also use tags to help control access to the featured results set. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols:_ . : / = + - @.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateFeaturedResultsSetResponse {
+    /**
+     * Information on the set of featured results. This includes the identifier of the featured results set, whether the featured results set is active or inactive, when the featured results set was created, and more.
+     */
+    FeaturedResultsSet?: FeaturedResultsSet;
+  }
   export interface CreateIndexRequest {
     /**
      * A name for the index.
      */
     Name: IndexName;
     /**
-     * The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION for your production databases. Once you set the edition for an index, it can't be changed. The Edition parameter is optional. If you don't supply a value, the default is ENTERPRISE_EDITION. For more information on quota limits for enterprise and developer editions, see Quotas.
+     * The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION for production. Once you set the edition for an index, it can't be changed. The Edition parameter is optional. If you don't supply a value, the default is ENTERPRISE_EDITION. For more information on quota limits for Enterprise and Developer editions, see Quotas.
      */
     Edition?: IndexEdition;
     /**
-     * An Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role you use when you call the BatchPutDocument API to index documents from an Amazon S3 bucket.
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access your Amazon CloudWatch logs and metrics. For more information, see IAM access roles for Amazon Kendra.
      */
     RoleArn: RoleArn;
     /**
@@ -1323,7 +1434,7 @@ declare namespace Kendra {
      */
     ClientToken?: ClientTokenName;
     /**
-     * A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.
+     * A list of key-value pairs that identify or categorize the index. You can also use tags to help control access to the index. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     Tags?: TagList;
     /**
@@ -1335,7 +1446,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Enables fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see UserGroupResolutionConfiguration.
+     * Gets users and groups from IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see UserGroupResolutionConfiguration.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -1351,11 +1462,11 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * A user friendly name for the block list. For example, the block list named 'offensive-words' includes all offensive words that could appear in user queries and need to be blocked from suggestions.
+     * A name for the block list. For example, the name 'offensive-words', which includes all offensive words that could appear in user queries and need to be blocked from suggestions.
      */
     Name: QuerySuggestionsBlockListName;
     /**
-     * A user-friendly description for the block list. For example, the description "List of all offensive words that can appear in user queries and need to be blocked from suggestions."
+     * A description for the block list. For example, the description "List of all offensive words that can appear in user queries and need to be blocked from suggestions."
      */
     Description?: Description;
     /**
@@ -1367,17 +1478,17 @@ declare namespace Kendra {
      */
     ClientToken?: ClientTokenName;
     /**
-     * The IAM (Identity and Access Management) role used by Amazon Kendra to access the block list text file in your S3 bucket. You need permissions to the role ARN (Amazon Web Services Resource Name). The role needs S3 read permissions to your file in S3 and needs to give STS (Security Token Service) assume role permissions to Amazon Kendra.
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket that contains the block list text file. For more information, see IAM access roles for Amazon Kendra.
      */
     RoleArn: RoleArn;
     /**
-     * A tag that you can assign to a block list that categorizes the block list.
+     * A list of key-value pairs that identify or categorize the block list. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     Tags?: TagList;
   }
   export interface CreateQuerySuggestionsBlockListResponse {
     /**
-     * The identifier of the created block list.
+     * The identifier of the block list.
      */
     Id?: QuerySuggestionsBlockListId;
   }
@@ -1395,11 +1506,11 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * An IAM role that gives Amazon Kendra permissions to access thesaurus file specified in SourceS3Path. 
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket that contains the thesaurus file. For more information, see IAM access roles for Amazon Kendra.
      */
     RoleArn: RoleArn;
     /**
-     * A list of key-value pairs that identify the thesaurus. You can use the tags to identify and organize your resources and to control access to resources. 
+     * A list of key-value pairs that identify or categorize the thesaurus. You can also use tags to help control access to the thesaurus. Tag keys and values can consist of Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @.
      */
     Tags?: TagList;
     /**
@@ -1539,11 +1650,11 @@ declare namespace Kendra {
      */
     Type?: DataSourceType;
     /**
-     * The UNIX datetime that the data source was created.
+     * The Unix timestamp when the data source connector was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The UNIX datetime that the data source was lasted updated. 
+     * The Unix timestamp when the data source connector was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -1562,11 +1673,11 @@ declare namespace Kendra {
      */
     ExecutionId?: String;
     /**
-     * The UNIX datetime that the synchronization job started.
+     * The Unix timestamp when the synchronization job started.
      */
     StartTime?: Timestamp;
     /**
-     * The UNIX datetime that the synchronization job completed.
+     * The Unix timestamp when the synchronization job completed.
      */
     EndTime?: Timestamp;
     /**
@@ -1742,7 +1853,7 @@ declare namespace Kendra {
      */
     GroupId: GroupId;
     /**
-     * The timestamp identifier you specify to ensure Amazon Kendra does not override the latest DELETE action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action. The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling PutPrincipalMapping. This ensures your DELETE action for that updated group with the latest members list doesn't get overwritten by earlier DELETE actions for the same group which are yet to be processed. The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra. 
+     * The timestamp identifier you specify to ensure Amazon Kendra does not override the latest DELETE action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action. The ordering ID can be the Unix time of the last update you made to a group members list. You would then provide this list when calling PutPrincipalMapping. This ensures your DELETE action for that updated group with the latest members list doesn't get overwritten by earlier DELETE actions for the same group which are yet to be processed. The default ordering ID is the current Unix time in milliseconds that the action was received by Amazon Kendra. 
      */
     OrderingId?: PrincipalOrderingId;
   }
@@ -1834,11 +1945,11 @@ declare namespace Kendra {
      */
     VpcConfiguration?: DataSourceVpcConfiguration;
     /**
-     * The Unix timestamp of when the data source connector was created.
+     * The Unix timestamp when the data source connector was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The Unix timestamp of when the data source connector was last updated.
+     * The Unix timestamp when the data source connector was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -1902,11 +2013,11 @@ declare namespace Kendra {
      */
     Configuration?: ExperienceConfiguration;
     /**
-     * Shows the date-time your Amazon Kendra experience was created.
+     * The Unix timestamp when your Amazon Kendra experience was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * Shows the date-time your Amazon Kendra experience was last updated.
+     * The Unix timestamp when your Amazon Kendra experience was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -1954,11 +2065,11 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * The date and time that the FAQ was created.
+     * The Unix timestamp when the FAQ was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The date and time that the FAQ was last updated.
+     * The Unix timestamp when the FAQ was last updated.
      */
     UpdatedAt?: Timestamp;
     S3Path?: S3Path;
@@ -1982,6 +2093,54 @@ declare namespace Kendra {
      * The code for a language. This shows a supported language for the FAQ document. English is supported by default. For more information on supported languages, including their codes, see Adding documents in languages other than English.
      */
     LanguageCode?: LanguageCode;
+  }
+  export interface DescribeFeaturedResultsSetRequest {
+    /**
+     * The identifier of the index used for featuring results.
+     */
+    IndexId: IndexId;
+    /**
+     * The identifier of the set of featured results that you want to get information on.
+     */
+    FeaturedResultsSetId: FeaturedResultsSetId;
+  }
+  export interface DescribeFeaturedResultsSetResponse {
+    /**
+     * The identifier of the set of featured results.
+     */
+    FeaturedResultsSetId?: FeaturedResultsSetId;
+    /**
+     * The name for the set of featured results.
+     */
+    FeaturedResultsSetName?: FeaturedResultsSetName;
+    /**
+     * The description for the set of featured results.
+     */
+    Description?: FeaturedResultsSetDescription;
+    /**
+     * The current status of the set of featured results. When the value is ACTIVE, featured results are ready for use. You can still configure your settings before setting the status to ACTIVE. You can set the status to ACTIVE or INACTIVE using the UpdateFeaturedResultsSet API. The queries you specify for featured results must be unique per featured results set for each index, whether the status is ACTIVE or INACTIVE.
+     */
+    Status?: FeaturedResultsSetStatus;
+    /**
+     * The list of queries for featuring results. For more information on the list of queries, see FeaturedResultsSet.
+     */
+    QueryTexts?: QueryTextList;
+    /**
+     * The list of document IDs for the documents you want to feature with their metadata information. For more information on the list of featured documents, see FeaturedResultsSet.
+     */
+    FeaturedDocumentsWithMetadata?: FeaturedDocumentWithMetadataList;
+    /**
+     * The list of document IDs that don't exist but you have specified as featured documents. Amazon Kendra cannot feature these documents if they don't exist in the index. You can check the status of a document and its ID or check for documents with status errors using the BatchGetDocumentStatus API.
+     */
+    FeaturedDocumentsMissing?: FeaturedDocumentMissingList;
+    /**
+     * The timestamp when the set of featured results was last updated.
+     */
+    LastUpdatedTimestamp?: Long;
+    /**
+     * The Unix timestamp when the set of the featured results was created.
+     */
+    CreationTimestamp?: Long;
   }
   export interface DescribeIndexRequest {
     /**
@@ -2019,11 +2178,11 @@ declare namespace Kendra {
      */
     Description?: Description;
     /**
-     * The Unix datetime that the index was created.
+     * The Unix timestamp when the index was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The Unix datetime that the index was last updated.
+     * The Unix when the index was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -2083,7 +2242,7 @@ declare namespace Kendra {
      */
     GroupId?: GroupId;
     /**
-     * Shows the following information on the processing of PUT and DELETE actions for mapping users to their groups:   Status – the status can be either PROCESSING, SUCCEEDED, DELETING, DELETED, or FAILED.   Last updated – the last date-time an action was updated.   Received – the last date-time an action was received or submitted.   Ordering ID – the latest action that should process and apply after other actions.   Failure reason – the reason an action could not be processed.  
+     * Shows the following information on the processing of PUT and DELETE actions for mapping users to their groups:   Status—the status can be either PROCESSING, SUCCEEDED, DELETING, DELETED, or FAILED.   Last updated—the last date-time an action was updated.   Received—the last date-time an action was received or submitted.   Ordering ID—the latest action that should process and apply after other actions.   Failure reason—the reason an action could not be processed.  
      */
     GroupOrderingIdSummaries?: GroupOrderingIdSummaries;
   }
@@ -2123,11 +2282,11 @@ declare namespace Kendra {
      */
     ErrorMessage?: ErrorMessage;
     /**
-     * The date-time a block list for query suggestions was created.
+     * The Unix timestamp when a block list for query suggestions was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The date-time a block list for query suggestions was last updated.
+     * The Unix timestamp when a block list for query suggestions was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -2179,11 +2338,11 @@ declare namespace Kendra {
      */
     MinimumQueryCount?: MinimumQueryCount;
     /**
-     * The date-time query suggestions for an index was last updated.
+     * The Unix timestamp when query suggestions for an index was last updated.
      */
     LastSuggestionsBuildTime?: Timestamp;
     /**
-     * The date-time query suggestions for an index was last cleared. After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. Amazon Kendra only considers re-occurences of a query from the time you cleared suggestions. 
+     * The Unix timestamp when query suggestions for an index was last cleared. After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. Amazon Kendra only considers re-occurences of a query from the time you cleared suggestions. 
      */
     LastClearTime?: Timestamp;
     /**
@@ -2227,11 +2386,11 @@ declare namespace Kendra {
      */
     ErrorMessage?: ErrorMessage;
     /**
-     * The Unix datetime that the thesaurus was created.
+     * The Unix timestamp when the thesaurus was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The Unix datetime that the thesaurus was last updated.
+     * The Unix timestamp when the thesaurus was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -2400,7 +2559,7 @@ declare namespace Kendra {
      */
     Count?: Integer;
     /**
-     * Contains the results of a document attribute that is a nested facet. A FacetResult contains the counts for each facet nested within a facet. For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. The counts for documents that belong to "Frontend" and "Backend" within "Engineering" are returned for a query.
+     * Contains the results of a document attribute that is a nested facet. A FacetResult contains the counts for each facet nested within a facet. For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. The counts for documents that belong to "Frontend" and "Backend" within "Engineering" are returned for a query.  
      */
     FacetResults?: FacetResultList;
   }
@@ -2566,7 +2725,7 @@ declare namespace Kendra {
      */
     Id?: ExperienceId;
     /**
-     * The date-time your Amazon Kendra experience was created.
+     * The Unix timestamp when your Amazon Kendra experience was created.
      */
     CreatedAt?: Timestamp;
     /**
@@ -2646,11 +2805,11 @@ declare namespace Kendra {
      */
     Status?: FaqStatus;
     /**
-     * The UNIX datetime that the FAQ was added to the index.
+     * The Unix timestamp when the FAQ was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The UNIX datetime that the FAQ was last updated.
+     * The Unix timestamp when the FAQ was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -2663,6 +2822,130 @@ declare namespace Kendra {
     LanguageCode?: LanguageCode;
   }
   export type FaqSummaryItems = FaqSummary[];
+  export interface FeaturedDocument {
+    /**
+     * The identifier of the document to feature in the search results. You can use the Query API to search for specific documents with their document IDs included in the result items, or you can use the console.
+     */
+    Id?: DocumentId;
+  }
+  export type FeaturedDocumentList = FeaturedDocument[];
+  export interface FeaturedDocumentMissing {
+    /**
+     * The identifier of the document that doesn't exist but you have specified as a featured document.
+     */
+    Id?: DocumentId;
+  }
+  export type FeaturedDocumentMissingList = FeaturedDocumentMissing[];
+  export interface FeaturedDocumentWithMetadata {
+    /**
+     * The identifier of the featured document with its metadata. You can use the Query API to search for specific documents with their document IDs included in the result items, or you can use the console.
+     */
+    Id?: DocumentId;
+    /**
+     * The main title of the featured document.
+     */
+    Title?: String;
+    /**
+     * The source URI location of the featured document.
+     */
+    URI?: Url;
+  }
+  export type FeaturedDocumentWithMetadataList = FeaturedDocumentWithMetadata[];
+  export interface FeaturedResultsItem {
+    /**
+     * The identifier of the featured result.
+     */
+    Id?: ResultId;
+    /**
+     * The type of document within the featured result response. For example, a response could include a question-answer type that's relevant to the query.
+     */
+    Type?: QueryResultType;
+    /**
+     * One or more additional attributes associated with the featured result.
+     */
+    AdditionalAttributes?: AdditionalResultAttributeList;
+    /**
+     * The identifier of the featured document.
+     */
+    DocumentId?: DocumentId;
+    DocumentTitle?: TextWithHighlights;
+    DocumentExcerpt?: TextWithHighlights;
+    /**
+     * The source URI location of the featured document.
+     */
+    DocumentURI?: Url;
+    /**
+     * An array of document attributes assigned to a featured document in the search results. For example, the document author (_author) or the source URI (_source_uri) of the document.
+     */
+    DocumentAttributes?: DocumentAttributeList;
+    /**
+     * A token that identifies a particular featured result from a particular query. Use this token to provide click-through feedback for the result. For more information, see Submitting feedback.
+     */
+    FeedbackToken?: FeedbackToken;
+  }
+  export type FeaturedResultsItemList = FeaturedResultsItem[];
+  export interface FeaturedResultsSet {
+    /**
+     * The identifier of the set of featured results.
+     */
+    FeaturedResultsSetId?: FeaturedResultsSetId;
+    /**
+     * The name for the set of featured results.
+     */
+    FeaturedResultsSetName?: FeaturedResultsSetName;
+    /**
+     * The description for the set of featured results.
+     */
+    Description?: FeaturedResultsSetDescription;
+    /**
+     * The current status of the set of featured results. When the value is ACTIVE, featured results are ready for use. You can still configure your settings before setting the status to ACTIVE. You can set the status to ACTIVE or INACTIVE using the UpdateFeaturedResultsSet API. The queries you specify for featured results must be unique per featured results set for each index, whether the status is ACTIVE or INACTIVE.
+     */
+    Status?: FeaturedResultsSetStatus;
+    /**
+     * The list of queries for featuring results. Specific queries are mapped to specific documents for featuring in the results. If a query contains an exact match, then one or more specific documents are featured in the results. The exact match applies to the full query. For example, if you only specify 'Kendra', queries such as 'How does kendra semantically rank results?' will not render the featured results. Featured results are designed for specific queries, rather than queries that are too broad in scope.
+     */
+    QueryTexts?: QueryTextList;
+    /**
+     * The list of document IDs for the documents you want to feature at the top of the search results page. You can use the Query API to search for specific documents with their document IDs included in the result items, or you can use the console. You can add up to four featured documents. You can request to increase this limit by contacting Support. Specific queries are mapped to specific documents for featuring in the results. If a query contains an exact match, then one or more specific documents are featured in the results. The exact match applies to the full query. For example, if you only specify 'Kendra', queries such as 'How does kendra semantically rank results?' will not render the featured results. Featured results are designed for specific queries, rather than queries that are too broad in scope.
+     */
+    FeaturedDocuments?: FeaturedDocumentList;
+    /**
+     * The Unix timestamp when the set of featured results was last updated.
+     */
+    LastUpdatedTimestamp?: Long;
+    /**
+     * The Unix timestamp when the set of featured results was created.
+     */
+    CreationTimestamp?: Long;
+  }
+  export type FeaturedResultsSetDescription = string;
+  export type FeaturedResultsSetId = string;
+  export type FeaturedResultsSetIdList = FeaturedResultsSetId[];
+  export type FeaturedResultsSetName = string;
+  export type FeaturedResultsSetStatus = "ACTIVE"|"INACTIVE"|string;
+  export interface FeaturedResultsSetSummary {
+    /**
+     * The identifier of the set of featured results.
+     */
+    FeaturedResultsSetId?: FeaturedResultsSetId;
+    /**
+     * The name for the set of featured results.
+     */
+    FeaturedResultsSetName?: FeaturedResultsSetName;
+    /**
+     * The current status of the set of featured results. When the value is ACTIVE, featured results are ready for use. You can still configure your settings before setting the status to ACTIVE. You can set the status to ACTIVE or INACTIVE using the UpdateFeaturedResultsSet API. The queries you specify for featured results must be unique per featured results set for each index, whether the status is ACTIVE or INACTIVE.
+     */
+    Status?: FeaturedResultsSetStatus;
+    /**
+     * The Unix timestamp when the set of featured results was last updated.
+     */
+    LastUpdatedTimestamp?: Long;
+    /**
+     * The Unix timestamp when the set of featured results was created.
+     */
+    CreationTimestamp?: Long;
+  }
+  export type FeaturedResultsSetSummaryItems = FeaturedResultsSetSummary[];
   export type FeedbackToken = string;
   export type FileSystemId = string;
   export type FolderId = string;
@@ -2746,7 +3029,7 @@ declare namespace Kendra {
   }
   export interface GetSnapshotsResponse {
     /**
-     * The date-time for the beginning and end of the time window for the search metrics data.
+     * The Unix timestamp for the beginning and end of the time window for the search metrics data.
      */
     SnapShotTimeFilter?: TimeRange;
     /**
@@ -2935,11 +3218,11 @@ declare namespace Kendra {
      */
     Status?: PrincipalMappingStatus;
     /**
-     * The last date-time an action was updated. An action can be a PUT or DELETE action for mapping users to their groups.
+     * The Unix timestamp when an action was last updated. An action can be a PUT or DELETE action for mapping users to their groups.
      */
     LastUpdatedAt?: Timestamp;
     /**
-     * The date-time an action was received by Amazon Kendra. An action can be a PUT or DELETE action for mapping users to their groups.
+     * The Unix timestamp when an action was received by Amazon Kendra. An action can be a PUT or DELETE action for mapping users to their groups.
      */
     ReceivedAt?: Timestamp;
     /**
@@ -3024,7 +3307,7 @@ declare namespace Kendra {
      */
     CreatedAt: Timestamp;
     /**
-     * The Unix timestamp when the index was last updated by the UpdateIndex API.
+     * The Unix timestamp when the index was last updated.
      */
     UpdatedAt: Timestamp;
     /**
@@ -3364,6 +3647,30 @@ declare namespace Kendra {
      */
     FaqSummaryItems?: FaqSummaryItems;
   }
+  export interface ListFeaturedResultsSetsRequest {
+    /**
+     * The identifier of the index used for featuring results.
+     */
+    IndexId: IndexId;
+    /**
+     * If the response is truncated, Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of featured results sets.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of featured results sets to return.
+     */
+    MaxResults?: MaxResultsIntegerForListFeaturedResultsSetsRequest;
+  }
+  export interface ListFeaturedResultsSetsResponse {
+    /**
+     * An array of summary information for one or more featured results sets.
+     */
+    FeaturedResultsSetSummaryItems?: FeaturedResultsSetSummaryItems;
+    /**
+     * If the response is truncated, Amazon Kendra returns a pagination token in the response.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListGroupsOlderThanOrderingIdRequest {
     /**
      * The identifier of the index for getting a list of groups mapped to users before a given ordering or timestamp identifier.
@@ -3487,6 +3794,7 @@ declare namespace Kendra {
   export type MaxResultsIntegerForListEntityPersonasRequest = number;
   export type MaxResultsIntegerForListExperiencesRequest = number;
   export type MaxResultsIntegerForListFaqsRequest = number;
+  export type MaxResultsIntegerForListFeaturedResultsSetsRequest = number;
   export type MaxResultsIntegerForListIndicesRequest = number;
   export type MaxResultsIntegerForListPrincipalsRequest = number;
   export type MaxResultsIntegerForListQuerySuggestionsBlockLists = number;
@@ -3589,11 +3897,11 @@ declare namespace Kendra {
      */
     Persona?: Persona;
     /**
-     * The date-time the summary information was created.
+     * The Unix timestamp when the summary information was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The date-time the summary information was last updated.
+     * The Unix timestamp when the summary information was last updated.
      */
     UpdatedAt?: Timestamp;
   }
@@ -3657,7 +3965,7 @@ declare namespace Kendra {
      */
     GroupMembers: GroupMembers;
     /**
-     * The timestamp identifier you specify to ensure Amazon Kendra does not override the latest PUT action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action. The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling PutPrincipalMapping. This ensures your PUT action for that updated group with the latest members list doesn't get overwritten by earlier PUT actions for the same group which are yet to be processed. The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra.
+     * The timestamp identifier you specify to ensure Amazon Kendra does not override the latest PUT action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action. The ordering ID can be the Unix time of the last update you made to a group members list. You would then provide this list when calling PutPrincipalMapping. This ensures your PUT action for that updated group with the latest members list doesn't get overwritten by earlier PUT actions for the same group which are yet to be processed. The default ordering ID is the current Unix time in milliseconds that the action was received by Amazon Kendra.
      */
     OrderingId?: PrincipalOrderingId;
     /**
@@ -3747,6 +4055,10 @@ declare namespace Kendra {
      * A list of information related to suggested spell corrections for a query.
      */
     SpellCorrectedQueries?: SpellCorrectedQueryList;
+    /**
+     * The list of featured result items. Featured results are displayed at the top of the search results page, placed above all other results for certain queries. If there's an exact match of a query, then certain documents are featured in the search results.
+     */
+    FeaturedResultsItems?: FeaturedResultsItemList;
   }
   export type QueryResultFormat = "TABLE"|"TEXT"|string;
   export interface QueryResultItem {
@@ -3818,11 +4130,11 @@ declare namespace Kendra {
      */
     Status?: QuerySuggestionsBlockListStatus;
     /**
-     * The date-time summary information for a query suggestions block list was last created.
+     * The Unix timestamp when the block list was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The date-time the block list was last updated.
+     * The Unix timestamp when the block list was last updated.
      */
     UpdatedAt?: Timestamp;
     /**
@@ -3834,6 +4146,7 @@ declare namespace Kendra {
   export type QuerySuggestionsId = string;
   export type QuerySuggestionsStatus = "ACTIVE"|"UPDATING"|string;
   export type QueryText = string;
+  export type QueryTextList = QueryText[];
   export interface QuipConfiguration {
     /**
      * The Quip site domain. For example, https://quip-company.quipdomain.com/browse. The domain in this example is "quipdomain".
@@ -3913,7 +4226,7 @@ declare namespace Kendra {
      */
     ResultId: ResultId;
     /**
-     * Whether to document was relevant or not relevant to the search.
+     * Whether the document was relevant or not relevant to the search.
      */
     RelevanceValue: RelevanceType;
   }
@@ -3994,7 +4307,7 @@ declare namespace Kendra {
      */
     ServerUrl: Url;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:   authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.    consumerKey - The application public key generated when you created your Salesforce application.   consumerSecret - The application private key generated when you created your Salesforce application.   password - The password associated with the user logging in to the Salesforce instance.   securityToken - The token associated with the user account logging in to the Salesforce instance.   username - The user name of the user logging in to the Salesforce instance.  
+     * The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:   authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.    consumerKey - The application public key generated when you created your Salesforce application.   consumerSecret - The application private key generated when you created your Salesforce application.   password - The password associated with the user logging in to the Salesforce instance.   securityToken - The token associated with the user logging in to the Salesforce instance.   username - The user name of the user logging in to the Salesforce instance.  
      */
     SecretArn: SecretArn;
     /**
@@ -4141,7 +4454,7 @@ declare namespace Kendra {
      */
     SeedUrls: SeedUrlList;
     /**
-     * You can choose one of the following modes:    HOST_ONLY – crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.    SUBDOMAINS – crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.    EVERYTHING – crawl the website host names with subdomains and other domains that the webpages link to.   The default mode is set to HOST_ONLY.
+     * You can choose one of the following modes:    HOST_ONLY – crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.    SUBDOMAINS – crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.    EVERYTHING – crawl the website host names with subdomains and other domains that the web pages link to.   The default mode is set to HOST_ONLY.
      */
     WebCrawlerMode?: WebCrawlerMode;
   }
@@ -4248,7 +4561,7 @@ declare namespace Kendra {
      */
     Urls: SharePointUrlList;
     /**
-     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the SharePoint instance. If you use SharePoint Server, you also need to provide the sever domain name as part of the credentials. For more information, see Using a Microsoft SharePoint Data Source. You can also provide OAuth authentication credentials of user name, password, client ID, and client secret. For more information, see Using a SharePoint data source.
+     * The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the user name and password required to connect to the SharePoint instance. For more information, see Microsoft SharePoint.
      */
     SecretArn: SecretArn;
     /**
@@ -4284,11 +4597,11 @@ declare namespace Kendra {
      */
     DisableLocalGroups?: Boolean;
     /**
-     * The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to SharePoint Server if you require a secure SSL connection. You can simply generate a self-signed X509 certificate on any computer using OpenSSL. For an example of using OpenSSL to create an X509 certificate, see Create and sign an X509 certificate.
+     * The path to the SSL certificate stored in an Amazon S3 bucket. You use this to connect to SharePoint Server if you require a secure SSL connection. You can generate a self-signed X509 certificate on any computer using OpenSSL. For an example of using OpenSSL to create an X509 certificate, see Create and sign an X509 certificate.
      */
     SslCertificateS3Path?: S3Path;
     /**
-     * Whether you want to connect to SharePoint using basic authentication of user name and password, or OAuth authentication of user name, password, client ID, and client secret. You can use OAuth authentication for SharePoint Online.
+     * Whether you want to connect to SharePoint Online using basic authentication of user name and password, or OAuth authentication of user name, password, client ID, and client secret, or AD App-only authentication of client secret.
      */
     AuthenticationType?: SharePointOnlineAuthenticationType;
     /**
@@ -4625,22 +4938,22 @@ declare namespace Kendra {
      */
     Status?: ThesaurusStatus;
     /**
-     * The Unix datetime that the thesaurus was created.
+     * The Unix timestamp when the thesaurus was created.
      */
     CreatedAt?: Timestamp;
     /**
-     * The Unix datetime that the thesaurus was last updated.
+     * The Unix timestamp when the thesaurus was last updated.
      */
     UpdatedAt?: Timestamp;
   }
   export type ThesaurusSummaryItems = ThesaurusSummary[];
   export interface TimeRange {
     /**
-     * The UNIX datetime of the beginning of the time range.
+     * The Unix timestamp for the beginning of the time range.
      */
     StartTime?: Timestamp;
     /**
-     * The UNIX datetime of the end of the time range.
+     * The Unix timestamp for the end of the time range.
      */
     EndTime?: Timestamp;
   }
@@ -4756,6 +5069,42 @@ declare namespace Kendra {
      * A new description for your Amazon Kendra experience.
      */
     Description?: Description;
+  }
+  export interface UpdateFeaturedResultsSetRequest {
+    /**
+     * The identifier of the index used for featuring results.
+     */
+    IndexId: IndexId;
+    /**
+     * The identifier of the index used for featuring results.
+     */
+    FeaturedResultsSetId: FeaturedResultsSetId;
+    /**
+     * A new name for the set of featured results.
+     */
+    FeaturedResultsSetName?: FeaturedResultsSetName;
+    /**
+     * A new description for the set of featured results.
+     */
+    Description?: FeaturedResultsSetDescription;
+    /**
+     * You can set the status to ACTIVE or INACTIVE. When the value is ACTIVE, featured results are ready for use. You can still configure your settings before setting the status to ACTIVE. The queries you specify for featured results must be unique per featured results set for each index, whether the status is ACTIVE or INACTIVE.
+     */
+    Status?: FeaturedResultsSetStatus;
+    /**
+     * A list of queries for featuring results. For more information on the list of queries, see FeaturedResultsSet.
+     */
+    QueryTexts?: QueryTextList;
+    /**
+     * A list of document IDs for the documents you want to feature at the top of the search results page. For more information on the list of featured documents, see FeaturedResultsSet.
+     */
+    FeaturedDocuments?: FeaturedDocumentList;
+  }
+  export interface UpdateFeaturedResultsSetResponse {
+    /**
+     * Information on the set of featured results. This includes the identifier of the featured results set, whether the featured results set is active or inactive, when the featured results set was last updated, and more.
+     */
+    FeaturedResultsSet?: FeaturedResultsSet;
   }
   export interface UpdateIndexRequest {
     /**
@@ -4873,7 +5222,7 @@ declare namespace Kendra {
   export type Url = string;
   export interface Urls {
     /**
-     * Configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to. You can list up to 100 seed URLs.
+     * Configuration of the seed or starting point URLs of the websites you want to crawl. You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the web pages link to. You can list up to 100 seed URLs.
      */
     SeedUrlConfiguration?: SeedUrlConfiguration;
     /**
@@ -4903,7 +5252,7 @@ declare namespace Kendra {
   export type UserContextPolicy = "ATTRIBUTE_FILTER"|"USER_TOKEN"|string;
   export interface UserGroupResolutionConfiguration {
     /**
-     * The identity store provider (mode) you want to use to fetch access levels of groups and users. IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
+     * The identity store provider (mode) you want to use to get users and groups. IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
      */
     UserGroupResolutionMode: UserGroupResolutionMode;
   }
@@ -4946,19 +5295,19 @@ declare namespace Kendra {
   export type WarningMessage = string;
   export interface WebCrawlerConfiguration {
     /**
-     * Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.  When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own webpages, or webpages that you have authorization to index. 
+     * Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl. You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs. You can only crawl websites that use the secure communication protocol, Hypertext Transfer Protocol Secure (HTTPS). If you receive an error when crawling a website, it could be that the website is blocked from crawling.  When selecting websites to index, you must adhere to the Amazon Acceptable Use Policy and all other Amazon terms. Remember that you must only use Amazon Kendra Web Crawler to index your own web pages, or web pages that you have authorization to index. 
      */
     Urls: Urls;
     /**
-     * Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1. The default crawl depth is set to 2.
+     * Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has three levels—index level (the seed in this example), sections level, and subsections level—and you are only interested in crawling information up to the sections level (levels 0-1), you can set your depth to 1. The default crawl depth is set to 2.
      */
     CrawlDepth?: CrawlDepth;
     /**
-     * The maximum number of URLs on a webpage to include when crawling a website. This number is per webpage. As a website’s webpages are crawled, any URLs the webpages link to are also crawled. URLs on a webpage are crawled in order of appearance. The default maximum links per page is 100.
+     * The maximum number of URLs on a web page to include when crawling a website. This number is per web page. As a website’s web pages are crawled, any URLs the web pages link to are also crawled. URLs on a web page are crawled in order of appearance. The default maximum links per page is 100.
      */
     MaxLinksPerPage?: MaxLinksPerPage;
     /**
-     * The maximum size (in MB) of a webpage or attachment to crawl. Files larger than this size (in MB) are skipped/not crawled. The default maximum size of a webpage or attachment is set to 50 MB.
+     * The maximum size (in MB) of a web page or attachment to crawl. Files larger than this size (in MB) are skipped/not crawled. The default maximum size of a web page or attachment is set to 50 MB.
      */
     MaxContentSizePerPageInMegaBytes?: MaxContentSizePerPageInMegaBytes;
     /**

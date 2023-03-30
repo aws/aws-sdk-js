@@ -621,6 +621,9 @@ declare namespace Batch {
      * The platform configuration for jobs that are running on Fargate resources. Jobs that are running on EC2 resources must not specify this parameter.
      */
     fargatePlatformConfiguration?: FargatePlatformConfiguration;
+    /**
+     * The amount of ephemeral storage allocated for the task. This parameter is used to expand the total amount of ephemeral storage available, beyond the default amount, for tasks hosted on Fargate.
+     */
     ephemeralStorage?: EphemeralStorage;
   }
   export interface ContainerOverrides {
@@ -1285,6 +1288,9 @@ declare namespace Batch {
   export type EksLabelsMap = {[key: string]: String};
   export type EksLimits = {[key: string]: Quantity};
   export interface EksMetadata {
+    /**
+     * Key-value pairs used to identify, sort, and organize cube resources. Can contain up to 63 uppercase letters, lowercase letters, numbers, hyphens (-), and underscores (_). Labels can be added or modified at any time. Each resource can have multiple labels, but each key must be unique for a given object.
+     */
     labels?: EksLabelsMap;
   }
   export interface EksPodProperties {
@@ -1308,6 +1314,9 @@ declare namespace Batch {
      * Specifies the volumes for a job definition that uses Amazon EKS resources.
      */
     volumes?: EksVolumes;
+    /**
+     * Metadata about the Kubernetes pod. For more information, see Understanding Kubernetes Objects in the Kubernetes documentation.
+     */
     metadata?: EksMetadata;
   }
   export interface EksPodPropertiesDetail {
@@ -1339,12 +1348,16 @@ declare namespace Batch {
      * The name of the node for this job.
      */
     nodeName?: String;
+    metadata?: EksMetadata;
   }
   export interface EksPodPropertiesOverride {
     /**
      * The overrides for the container that's used on the Amazon EKS pod.
      */
     containers?: EksContainerOverrideList;
+    /**
+     * Metadata about the overrides for the container that's used on the Amazon EKS pod.
+     */
     metadata?: EksMetadata;
   }
   export interface EksProperties {

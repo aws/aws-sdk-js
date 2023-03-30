@@ -180,11 +180,11 @@ declare class Drs extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Drs.Types.ListTagsForResourceResponse) => void): Request<Drs.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state.
+   * WARNING: RetryDataReplication is deprecated. Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state. 
    */
   retryDataReplication(params: Drs.Types.RetryDataReplicationRequest, callback?: (err: AWSError, data: Drs.Types.SourceServer) => void): Request<Drs.Types.SourceServer, AWSError>;
   /**
-   * Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state.
+   * WARNING: RetryDataReplication is deprecated. Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state. 
    */
   retryDataReplication(callback?: (err: AWSError, data: Drs.Types.SourceServer) => void): Request<Drs.Types.SourceServer, AWSError>;
   /**
@@ -317,7 +317,7 @@ declare namespace Drs {
      */
     modelName?: BoundedString;
   }
-  export type ConversionMap = {[key: string]: ebsSnapshot};
+  export type ConversionMap = {[key: string]: EbsSnapshot};
   export interface ConversionProperties {
     /**
      * The timestamp of when the snapshot being converted was taken
@@ -362,6 +362,10 @@ declare namespace Drs {
      * Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
      */
     associateDefaultSecurityGroup: Boolean;
+    /**
+     * Whether to allow the AWS replication agent to automatically replicate newly added disks.
+     */
+    autoReplicateNewDisks?: Boolean;
     /**
      * Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
      */
@@ -766,7 +770,8 @@ declare namespace Drs {
   export type EC2InstanceID = string;
   export type EC2InstanceState = "PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"SHUTTING-DOWN"|"TERMINATED"|"NOT_FOUND"|string;
   export type EC2InstanceType = string;
-  export type EbsSnapshotsList = ebsSnapshot[];
+  export type EbsSnapshot = string;
+  export type EbsSnapshotsList = EbsSnapshot[];
   export type EbsVolumeID = string;
   export type ExtensionStatus = "EXTENDED"|"EXTENSION_ERROR"|"NOT_EXTENDED"|string;
   export type FailbackLaunchType = "RECOVERY"|"DRILL"|string;
@@ -1392,6 +1397,10 @@ declare namespace Drs {
      */
     associateDefaultSecurityGroup?: Boolean;
     /**
+     * Whether to allow the AWS replication agent to automatically replicate newly added disks.
+     */
+    autoReplicateNewDisks?: Boolean;
+    /**
      * Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
      */
     bandwidthThrottling?: PositiveInteger;
@@ -1492,6 +1501,10 @@ declare namespace Drs {
      * Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.
      */
     associateDefaultSecurityGroup?: Boolean;
+    /**
+     * Whether to allow the AWS replication agent to automatically replicate newly added disks.
+     */
+    autoReplicateNewDisks?: Boolean;
     /**
      * Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
      */
@@ -1880,6 +1893,10 @@ declare namespace Drs {
      */
     associateDefaultSecurityGroup?: Boolean;
     /**
+     * Whether to allow the AWS replication agent to automatically replicate newly added disks.
+     */
+    autoReplicateNewDisks?: Boolean;
+    /**
      * Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
      */
     bandwidthThrottling?: PositiveInteger;
@@ -1950,6 +1967,10 @@ declare namespace Drs {
      */
     associateDefaultSecurityGroup?: Boolean;
     /**
+     * Whether to allow the AWS replication agent to automatically replicate newly added disks.
+     */
+    autoReplicateNewDisks?: Boolean;
+    /**
      * Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.
      */
     bandwidthThrottling?: PositiveInteger;
@@ -2004,7 +2025,6 @@ declare namespace Drs {
   }
   export type VolumeToConversionMap = {[key: string]: ConversionMap};
   export type VolumeToSizeMap = {[key: string]: PositiveInteger};
-  export type ebsSnapshot = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

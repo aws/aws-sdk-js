@@ -228,6 +228,14 @@ declare class GuardDuty extends Service {
    */
   getAdministratorAccount(callback?: (err: AWSError, data: GuardDuty.Types.GetAdministratorAccountResponse) => void): Request<GuardDuty.Types.GetAdministratorAccountResponse, AWSError>;
   /**
+   * Retrieves aggregated statistics for your account. If you are a GuardDuty administrator, you can retrieve the statistics for all the resources associated with the active member accounts in your organization who have enabled EKS Runtime Monitoring and have the GuardDuty agent running on their EKS nodes.
+   */
+  getCoverageStatistics(params: GuardDuty.Types.GetCoverageStatisticsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetCoverageStatisticsResponse) => void): Request<GuardDuty.Types.GetCoverageStatisticsResponse, AWSError>;
+  /**
+   * Retrieves aggregated statistics for your account. If you are a GuardDuty administrator, you can retrieve the statistics for all the resources associated with the active member accounts in your organization who have enabled EKS Runtime Monitoring and have the GuardDuty agent running on their EKS nodes.
+   */
+  getCoverageStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetCoverageStatisticsResponse) => void): Request<GuardDuty.Types.GetCoverageStatisticsResponse, AWSError>;
+  /**
    * Retrieves an Amazon GuardDuty detector specified by the detectorId. There might be regional differences because some data sources might not be available in all the Amazon Web Services Regions where GuardDuty is presently supported. For more information, see Regions and endpoints.
    */
   getDetector(params: GuardDuty.Types.GetDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetDetectorResponse) => void): Request<GuardDuty.Types.GetDetectorResponse, AWSError>;
@@ -339,6 +347,14 @@ declare class GuardDuty extends Service {
    * Invites other Amazon Web Services accounts (created as members of the current Amazon Web Services account by CreateMembers) to enable GuardDuty, and allow the current Amazon Web Services account to view and manage these accounts' findings on their behalf as the GuardDuty administrator account.
    */
   inviteMembers(callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
+  /**
+   * Lists coverage details for your GuardDuty account. If you're a GuardDuty administrator, you can retrieve all resources associated with the active member accounts in your organization. Make sure the accounts have EKS Runtime Monitoring enabled and GuardDuty agent running on their EKS nodes.
+   */
+  listCoverage(params: GuardDuty.Types.ListCoverageRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListCoverageResponse) => void): Request<GuardDuty.Types.ListCoverageResponse, AWSError>;
+  /**
+   * Lists coverage details for your GuardDuty account. If you're a GuardDuty administrator, you can retrieve all resources associated with the active member accounts in your organization. Make sure the accounts have EKS Runtime Monitoring enabled and GuardDuty agent running on their EKS nodes.
+   */
+  listCoverage(callback?: (err: AWSError, data: GuardDuty.Types.ListCoverageResponse) => void): Request<GuardDuty.Types.ListCoverageResponse, AWSError>;
   /**
    * Lists detectorIds of all the existing Amazon GuardDuty detector resources.
    */
@@ -657,6 +673,16 @@ declare namespace GuardDuty {
      */
     RdsLoginAttemptAction?: RdsLoginAttemptAction;
   }
+  export interface AddonDetails {
+    /**
+     * Version of the installed EKS add-on.
+     */
+    AddonVersion?: String;
+    /**
+     * Status of the installed EKS add-on.
+     */
+    AddonStatus?: String;
+  }
   export interface AdminAccount {
     /**
      * The Amazon Web Services account ID for the account.
@@ -876,6 +902,8 @@ declare namespace GuardDuty {
     SecurityContext?: SecurityContext;
   }
   export type Containers = Container[];
+  export type CountByCoverageStatus = {[key: string]: Long};
+  export type CountByResourceType = {[key: string]: Long};
   export type CountBySeverity = {[key: string]: Integer};
   export interface Country {
     /**
@@ -887,6 +915,117 @@ declare namespace GuardDuty {
      */
     CountryName?: String;
   }
+  export interface CoverageEksClusterDetails {
+    /**
+     * Name of the EKS cluster.
+     */
+    ClusterName?: String;
+    /**
+     * Represents the nodes within the EKS cluster that have a HEALTHY coverage status.
+     */
+    CoveredNodes?: Long;
+    /**
+     * Represents all the nodes within the EKS cluster in your account.
+     */
+    CompatibleNodes?: Long;
+    /**
+     * Information about the installed EKS add-on.
+     */
+    AddonDetails?: AddonDetails;
+  }
+  export interface CoverageFilterCondition {
+    /**
+     * Represents an equal condition that is applied to a single field while retrieving the coverage details.
+     */
+    Equals?: Equals;
+    /**
+     * Represents a not equal condition that is applied to a single field while retrieving the coverage details.
+     */
+    NotEquals?: NotEquals;
+  }
+  export interface CoverageFilterCriteria {
+    /**
+     * Represents a condition that when matched will be added to the response of the operation.
+     */
+    FilterCriterion?: CoverageFilterCriterionList;
+  }
+  export interface CoverageFilterCriterion {
+    /**
+     * An enum value representing possible filter fields.
+     */
+    CriterionKey?: CoverageFilterCriterionKey;
+    /**
+     * Contains information about the condition.
+     */
+    FilterCondition?: CoverageFilterCondition;
+  }
+  export type CoverageFilterCriterionKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"RESOURCE_TYPE"|"COVERAGE_STATUS"|"ADDON_VERSION"|string;
+  export type CoverageFilterCriterionList = CoverageFilterCriterion[];
+  export interface CoverageResource {
+    /**
+     * The unique ID of the resource.
+     */
+    ResourceId?: String;
+    /**
+     * The unique ID of the GuardDuty detector associated with the resource.
+     */
+    DetectorId?: DetectorId;
+    /**
+     * The unique ID of the Amazon Web Services account.
+     */
+    AccountId?: AccountId;
+    /**
+     * Information about the resource for which the coverage statistics are retrieved.
+     */
+    ResourceDetails?: CoverageResourceDetails;
+    /**
+     * Represents the status of the EKS cluster coverage.
+     */
+    CoverageStatus?: CoverageStatus;
+    /**
+     * Represents the reason why a coverage status was UNHEALTHY for the EKS cluster.
+     */
+    Issue?: String;
+    /**
+     * The timestamp at which the coverage details for the resource were last updated. This is in UTC format.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export interface CoverageResourceDetails {
+    /**
+     * EKS cluster details involved in the coverage statistics.
+     */
+    EksClusterDetails?: CoverageEksClusterDetails;
+    /**
+     * The type of Amazon Web Services resource.
+     */
+    ResourceType?: ResourceType;
+  }
+  export type CoverageResources = CoverageResource[];
+  export interface CoverageSortCriteria {
+    /**
+     * Represents the field name used to sort the coverage details.
+     */
+    AttributeName?: CoverageSortKey;
+    /**
+     * The order in which the sorted findings are to be displayed.
+     */
+    OrderBy?: OrderBy;
+  }
+  export type CoverageSortKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"COVERAGE_STATUS"|"ISSUE"|"ADDON_VERSION"|"UPDATED_AT"|string;
+  export interface CoverageStatistics {
+    /**
+     * Represents coverage statistics for EKS clusters aggregated by resource type.
+     */
+    CountByResourceType?: CountByResourceType;
+    /**
+     * Represents coverage statistics for EKS clusters aggregated by coverage status.
+     */
+    CountByCoverageStatus?: CountByCoverageStatus;
+  }
+  export type CoverageStatisticsType = "COUNT_BY_RESOURCE_TYPE"|"COUNT_BY_COVERAGE_STATUS"|string;
+  export type CoverageStatisticsTypeList = CoverageStatisticsType[];
+  export type CoverageStatus = "HEALTHY"|"UNHEALTHY"|string;
   export interface CreateDetectorRequest {
     /**
      * A Boolean value that specifies whether the detector is to be enabled.
@@ -1324,7 +1463,7 @@ declare namespace GuardDuty {
   }
   export interface DescribeOrganizationConfigurationResponse {
     /**
-     * Indicates whether GuardDuty is automatically enabled for accounts added to the organization.
+     * Indicates whether GuardDuty is automatically enabled for accounts added to the organization. Even though this is still supported, we recommend using AutoEnableOrganizationMembers to achieve the similar results.
      */
     AutoEnable?: Boolean;
     /**
@@ -1344,7 +1483,7 @@ declare namespace GuardDuty {
      */
     NextToken?: String;
     /**
-     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.    NEW: Indicates that new accounts joining the organization are configured to have GuardDuty enabled automatically.    ALL: Indicates that all accounts (new and existing members) in the organization are configured to have GuardDuty enabled automatically.    NONE: Indicates that no account in the organization will be configured to have GuardDuty enabled automatically.  
+     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.    NEW: Indicates that when a new account joins the organization, they will have GuardDuty enabled automatically.     ALL: Indicates that all accounts in the Amazon Web Services Organization have GuardDuty enabled automatically. This includes NEW accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.    NONE: Indicates that GuardDuty will not be automatically enabled for any accounts in the organization. GuardDuty must be managed for each account individually by the administrator.  
      */
     AutoEnableOrganizationMembers?: AutoEnableMembers;
   }
@@ -1406,7 +1545,33 @@ declare namespace GuardDuty {
   }
   export type DestinationType = "S3"|string;
   export type Destinations = Destination[];
-  export type DetectorFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|string;
+  export interface DetectorAdditionalConfiguration {
+    /**
+     * Name of the additional configuration.
+     */
+    Name?: FeatureAdditionalConfiguration;
+    /**
+     * Status of the additional configuration.
+     */
+    Status?: FeatureStatus;
+  }
+  export interface DetectorAdditionalConfigurationResult {
+    /**
+     * Name of the additional configuration.
+     */
+    Name?: FeatureAdditionalConfiguration;
+    /**
+     * Status of the additional configuration.
+     */
+    Status?: FeatureStatus;
+    /**
+     * The timestamp at which the additional configuration was last updated. This is in UTC format.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export type DetectorAdditionalConfigurationResults = DetectorAdditionalConfigurationResult[];
+  export type DetectorAdditionalConfigurations = DetectorAdditionalConfiguration[];
+  export type DetectorFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|string;
   export interface DetectorFeatureConfiguration {
     /**
      * The name of the feature.
@@ -1416,6 +1581,10 @@ declare namespace GuardDuty {
      * The status of the feature.
      */
     Status?: FeatureStatus;
+    /**
+     * Additional configuration for a resource.
+     */
+    AdditionalConfiguration?: DetectorAdditionalConfigurations;
   }
   export interface DetectorFeatureConfigurationResult {
     /**
@@ -1430,10 +1599,14 @@ declare namespace GuardDuty {
      * The timestamp at which the feature object was updated.
      */
     UpdatedAt?: Timestamp;
+    /**
+     * Additional configuration for a resource.
+     */
+    AdditionalConfiguration?: DetectorAdditionalConfigurationResults;
   }
   export type DetectorFeatureConfigurations = DetectorFeatureConfiguration[];
   export type DetectorFeatureConfigurationsResults = DetectorFeatureConfigurationResult[];
-  export type DetectorFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|string;
+  export type DetectorFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|string;
   export type DetectorId = string;
   export type DetectorIds = DetectorId[];
   export type DetectorStatus = "ENABLED"|"DISABLED"|string;
@@ -1664,6 +1837,7 @@ declare namespace GuardDuty {
      */
     ThreatIntelligenceDetails?: ThreatIntelligenceDetails;
   }
+  export type FeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"|string;
   export type FeatureStatus = "ENABLED"|"DISABLED"|string;
   export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
   export type FilePaths = ScanFilePath[];
@@ -1779,6 +1953,7 @@ declare namespace GuardDuty {
   export type FindingType = string;
   export type FindingTypes = FindingType[];
   export type Findings = Finding[];
+  export type FlagsList = String[];
   export interface FlowLogsConfigurationResult {
     /**
      * Denotes whether VPC flow logs is enabled as a data source.
@@ -1796,7 +1971,7 @@ declare namespace GuardDuty {
     FreeTrialDaysRemaining?: Integer;
   }
   export type FreeTrialFeatureConfigurationsResults = FreeTrialFeatureConfigurationResult[];
-  export type FreeTrialFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|string;
+  export type FreeTrialFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|string;
   export interface GeoLocation {
     /**
      * The latitude information of the remote IP address.
@@ -1818,6 +1993,26 @@ declare namespace GuardDuty {
      * The administrator account details.
      */
     Administrator: Administrator;
+  }
+  export interface GetCoverageStatisticsRequest {
+    /**
+     * The unique ID of the GuardDuty detector associated to the coverage statistics.
+     */
+    DetectorId: DetectorId;
+    /**
+     * Represents the criteria used to filter the coverage statistics
+     */
+    FilterCriteria?: CoverageFilterCriteria;
+    /**
+     * Represents the statistics type used to aggregate the coverage details.
+     */
+    StatisticsType: CoverageStatisticsTypeList;
+  }
+  export interface GetCoverageStatisticsResponse {
+    /**
+     * Represents the count aggregated by the statusCode and resourceType.
+     */
+    CoverageStatistics?: CoverageStatistics;
   }
   export interface GetDetectorRequest {
     /**
@@ -2378,6 +2573,77 @@ declare namespace GuardDuty {
      */
     Volumes?: Volumes;
   }
+  export type Lineage = LineageObject[];
+  export interface LineageObject {
+    /**
+     * The time when the process started. This is in UTC format.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The process ID of the child process.
+     */
+    NamespacePid?: Integer;
+    /**
+     * The user ID of the user that executed the process.
+     */
+    UserId?: Integer;
+    /**
+     * The name of the process.
+     */
+    Name?: String;
+    /**
+     * The ID of the process.
+     */
+    Pid?: Integer;
+    /**
+     * The unique ID assigned to the process by GuardDuty.
+     */
+    Uuid?: String;
+    /**
+     * The absolute path of the process executable file.
+     */
+    ExecutablePath?: String;
+    /**
+     * The effective user ID that was used to execute the process.
+     */
+    Euid?: Integer;
+    /**
+     * The unique ID of the parent process. This ID is assigned to the parent process by GuardDuty.
+     */
+    ParentUuid?: String;
+  }
+  export interface ListCoverageRequest {
+    /**
+     * The unique ID of the detector whose coverage details you want to retrieve.
+     */
+    DetectorId: DetectorId;
+    /**
+     * A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in the response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Represents the criteria used to filter the coverage details.
+     */
+    FilterCriteria?: CoverageFilterCriteria;
+    /**
+     * Represents the criteria used to sort the coverage details.
+     */
+    SortCriteria?: CoverageSortCriteria;
+  }
+  export interface ListCoverageResponse {
+    /**
+     * A list of resources and their attributes providing cluster details.
+     */
+    Resources: CoverageResources;
+    /**
+     * The pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
+  }
   export interface ListDetectorsRequest {
     /**
      * You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 50. The maximum value is 50.
@@ -2720,6 +2986,32 @@ declare namespace GuardDuty {
      */
     AdministratorId?: String;
   }
+  export interface MemberAdditionalConfiguration {
+    /**
+     * Name of the additional configuration.
+     */
+    Name?: OrgFeatureAdditionalConfiguration;
+    /**
+     * Status of the additional configuration.
+     */
+    Status?: FeatureStatus;
+  }
+  export interface MemberAdditionalConfigurationResult {
+    /**
+     * Indicates the name of the additional configuration that is set for the member account.
+     */
+    Name?: OrgFeatureAdditionalConfiguration;
+    /**
+     * Indicates the status of the additional configuration that is set for the member account.
+     */
+    Status?: FeatureStatus;
+    /**
+     * The timestamp at which the additional configuration was set for the member account. This is in UTC format.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export type MemberAdditionalConfigurationResults = MemberAdditionalConfigurationResult[];
+  export type MemberAdditionalConfigurations = MemberAdditionalConfiguration[];
   export interface MemberDataSourceConfiguration {
     /**
      * The account ID for the member account.
@@ -2744,6 +3036,10 @@ declare namespace GuardDuty {
      * The status of the feature.
      */
     Status?: FeatureStatus;
+    /**
+     * Additional configuration of the feature for the member account.
+     */
+    AdditionalConfiguration?: MemberAdditionalConfigurations;
   }
   export interface MemberFeaturesConfigurationResult {
     /**
@@ -2758,10 +3054,15 @@ declare namespace GuardDuty {
      * The timestamp at which the feature object was updated.
      */
     UpdatedAt?: Timestamp;
+    /**
+     * Indicates the additional configuration of the feature that is configured for the member account.
+     */
+    AdditionalConfiguration?: MemberAdditionalConfigurationResults;
   }
   export type MemberFeaturesConfigurations = MemberFeaturesConfiguration[];
   export type MemberFeaturesConfigurationsResults = MemberFeaturesConfigurationResult[];
   export type Members = Member[];
+  export type MemoryRegionsList = String[];
   export type Name = string;
   export type Neq = String[];
   export interface NetworkConnectionAction {
@@ -2840,7 +3141,8 @@ declare namespace GuardDuty {
   export type NonEmptyString = string;
   export type NotEquals = String[];
   export type OrderBy = "ASC"|"DESC"|string;
-  export type OrgFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|string;
+  export type OrgFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|string;
+  export type OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"|string;
   export type OrgFeatureStatus = "NEW"|"NONE"|string;
   export interface Organization {
     /**
@@ -2860,6 +3162,28 @@ declare namespace GuardDuty {
      */
     Org?: String;
   }
+  export interface OrganizationAdditionalConfiguration {
+    /**
+     * The name of the additional configuration that will be configured for the organization.
+     */
+    Name?: OrgFeatureAdditionalConfiguration;
+    /**
+     * The status of the additional configuration that will be configured for the organization.
+     */
+    AutoEnable?: OrgFeatureStatus;
+  }
+  export interface OrganizationAdditionalConfigurationResult {
+    /**
+     * The name of the additional configuration that is configured for the member accounts within the organization.
+     */
+    Name?: OrgFeatureAdditionalConfiguration;
+    /**
+     * Describes how The status of the additional configuration that are configured for the member accounts within the organization. If you set AutoEnable to NEW, a feature will be configured for only the new accounts when they join the organization. If you set AutoEnable to NONE, no feature will be configured for the accounts when they join the organization.
+     */
+    AutoEnable?: OrgFeatureStatus;
+  }
+  export type OrganizationAdditionalConfigurationResults = OrganizationAdditionalConfigurationResult[];
+  export type OrganizationAdditionalConfigurations = OrganizationAdditionalConfiguration[];
   export interface OrganizationDataSourceConfigurations {
     /**
      * Describes whether S3 data event logs are enabled for new members of the organization.
@@ -2909,6 +3233,10 @@ declare namespace GuardDuty {
      * The status of the feature that will be configured for the organization.
      */
     AutoEnable?: OrgFeatureStatus;
+    /**
+     * The additional information that will be configured for the organization.
+     */
+    AdditionalConfiguration?: OrganizationAdditionalConfigurations;
   }
   export interface OrganizationFeatureConfigurationResult {
     /**
@@ -2919,6 +3247,10 @@ declare namespace GuardDuty {
      * Describes how The status of the feature that are configured for the member accounts within the organization. If you set AutoEnable to NEW, a feature will be configured for only the new accounts when they join the organization. If you set AutoEnable to NONE, no feature will be configured for the accounts when they join the organization.
      */
     AutoEnable?: OrgFeatureStatus;
+    /**
+     * The additional configuration that is configured for the member accounts within the organization.
+     */
+    AdditionalConfiguration?: OrganizationAdditionalConfigurationResults;
   }
   export type OrganizationFeaturesConfigurations = OrganizationFeatureConfiguration[];
   export type OrganizationFeaturesConfigurationsResults = OrganizationFeatureConfigurationResult[];
@@ -3035,6 +3367,60 @@ declare namespace GuardDuty {
     PrivateIpAddress?: String;
   }
   export type PrivateIpAddresses = PrivateIpAddressDetails[];
+  export interface ProcessDetails {
+    /**
+     * The name of the process.
+     */
+    Name?: String;
+    /**
+     * The absolute path of the process executable file.
+     */
+    ExecutablePath?: String;
+    /**
+     * The SHA256 hash of the process executable.
+     */
+    ExecutableSha256?: String;
+    /**
+     * The ID of the child process.
+     */
+    NamespacePid?: Integer;
+    /**
+     * The present working directory of the process.
+     */
+    Pwd?: String;
+    /**
+     * The ID of the process.
+     */
+    Pid?: Integer;
+    /**
+     * The time when the process started. This is in UTC format.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The unique ID assigned to the process by GuardDuty.
+     */
+    Uuid?: String;
+    /**
+     * The unique ID of the parent process. This ID is assigned to the parent process by GuardDuty.
+     */
+    ParentUuid?: String;
+    /**
+     * The user that executed the process.
+     */
+    User?: String;
+    /**
+     * The unique ID of the user that executed the process.
+     */
+    UserId?: Integer;
+    /**
+     * The effective user ID of the user that executed the process.
+     */
+    Euid?: Integer;
+    /**
+     * Information about the process's lineage.
+     */
+    Lineage?: Lineage;
+  }
   export interface ProductCode {
     /**
      * The product code information.
@@ -3204,6 +3590,99 @@ declare namespace GuardDuty {
     InstanceArn?: InstanceArn;
   }
   export type ResourceList = String[];
+  export type ResourceType = "EKS"|string;
+  export interface RuntimeContext {
+    /**
+     * Information about the process that modified the current process. This is available for multiple finding types.
+     */
+    ModifyingProcess?: ProcessDetails;
+    /**
+     * The timestamp at which the process modified the current process. The timestamp is in UTC date string format.
+     */
+    ModifiedAt?: Timestamp;
+    /**
+     * The path to the script that was executed.
+     */
+    ScriptPath?: String;
+    /**
+     * The path to the new library that was loaded.
+     */
+    LibraryPath?: String;
+    /**
+     * The value of the LD_PRELOAD environment variable.
+     */
+    LdPreloadValue?: String;
+    /**
+     * The path to the docket socket that was accessed.
+     */
+    SocketPath?: String;
+    /**
+     * The path to the leveraged runc implementation.
+     */
+    RuncBinaryPath?: String;
+    /**
+     * The path in the container that modified the release agent file.
+     */
+    ReleaseAgentPath?: String;
+    /**
+     * The path on the host that is mounted by the container.
+     */
+    MountSource?: String;
+    /**
+     * The path in the container that is mapped to the host directory.
+     */
+    MountTarget?: String;
+    /**
+     * Represents the type of mounted fileSystem.
+     */
+    FileSystemType?: String;
+    /**
+     * Represents options that control the behavior of a runtime operation or action. For example, a filesystem mount operation may contain a read-only flag.
+     */
+    Flags?: FlagsList;
+    /**
+     * The name of the module loaded into the kernel.
+     */
+    ModuleName?: String;
+    /**
+     * The path to the module loaded into the kernel.
+     */
+    ModuleFilePath?: String;
+    /**
+     * The SHA256 hash of the module.
+     */
+    ModuleSha256?: String;
+    /**
+     * The path to the modified shell history file.
+     */
+    ShellHistoryFilePath?: String;
+    /**
+     * Information about the process that had its memory overwritten by the current process.
+     */
+    TargetProcess?: ProcessDetails;
+    /**
+     * Represents the communication protocol associated with the address. For example, the address family AF_INET is used for IP version of 4 protocol.
+     */
+    AddressFamily?: String;
+    /**
+     * Specifies a particular protocol within the address family. Usually there is a single protocol in address families. For example, the address family AF_INET only has the IP protocol.
+     */
+    IanaProtocolNumber?: Integer;
+    /**
+     * Specifies the Region of a process's address space such as stack and heap.
+     */
+    MemoryRegions?: MemoryRegionsList;
+  }
+  export interface RuntimeDetails {
+    /**
+     * Information about the observed process.
+     */
+    Process?: ProcessDetails;
+    /**
+     * Additional information about the suspicious activity.
+     */
+    Context?: RuntimeContext;
+  }
   export interface S3BucketDetail {
     /**
      * The Amazon Resource Name (ARN) of the S3 bucket.
@@ -3497,6 +3976,10 @@ declare namespace GuardDuty {
      * Returns details from the malware scan that created a finding.
      */
     EbsVolumeScanDetails?: EbsVolumeScanDetails;
+    /**
+     * Information about the process and any required context values for a specific finding
+     */
+    RuntimeDetails?: RuntimeDetails;
   }
   export interface ServiceAdditionalInfo {
     /**
@@ -3824,7 +4307,7 @@ declare namespace GuardDuty {
      */
     DetectorId: DetectorId;
     /**
-     * Indicates whether to automatically enable member accounts in the organization.
+     * Indicates whether to automatically enable member accounts in the organization. Even though this is still supported, we recommend using AutoEnableOrganizationMembers to achieve the similar results.
      */
     AutoEnable?: Boolean;
     /**
@@ -3836,7 +4319,7 @@ declare namespace GuardDuty {
      */
     Features?: OrganizationFeaturesConfigurations;
     /**
-     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.     NEW: Indicates that new accounts joining the organization are configured to have GuardDuty enabled automatically.    ALL: Indicates that all accounts (new and existing members) in the organization are configured to have GuardDuty enabled automatically.    NONE: Indicates that no account in the organization will be configured to have GuardDuty enabled automatically.  
+     * Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.     NEW: Indicates that when a new account joins the organization, they will have GuardDuty enabled automatically.     ALL: Indicates that all accounts in the Amazon Web Services Organization have GuardDuty enabled automatically. This includes NEW accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty.    NONE: Indicates that GuardDuty will not be automatically enabled for any accounts in the organization. GuardDuty must be managed for each account individually by the administrator.  
      */
     AutoEnableOrganizationMembers?: AutoEnableMembers;
   }

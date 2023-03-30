@@ -317,6 +317,10 @@ declare namespace IVS {
      */
     ingestEndpoint?: IngestEndpoint;
     /**
+     * Whether the channel allows insecure RTMP ingest. Default: false.
+     */
+    insecureIngest?: InsecureIngest;
+    /**
      * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
      */
     latencyMode?: ChannelLatencyMode;
@@ -357,6 +361,10 @@ declare namespace IVS {
      */
     authorized?: IsAuthorized;
     /**
+     * Whether the channel allows insecure RTMP ingest. Default: false.
+     */
+    insecureIngest?: InsecureIngest;
+    /**
      * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
      */
     latencyMode?: ChannelLatencyMode;
@@ -380,6 +388,10 @@ declare namespace IVS {
      * Whether the channel is private (enabled for playback authorization). Default: false.
      */
     authorized?: Boolean;
+    /**
+     * Whether the channel allows insecure RTMP ingest. Default: false.
+     */
+    insecureIngest?: Boolean;
     /**
      * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.) Default: LOW.
      */
@@ -594,6 +606,7 @@ declare namespace IVS {
     video?: VideoConfiguration;
   }
   export type IngestEndpoint = string;
+  export type InsecureIngest = boolean;
   export type Integer = number;
   export type IsAuthorized = boolean;
   export interface ListChannelsRequest {
@@ -1096,6 +1109,10 @@ declare namespace IVS {
      * Whether the channel is private (enabled for playback authorization).
      */
     authorized?: Boolean;
+    /**
+     * Whether the channel allows insecure RTMP ingest. Default: false.
+     */
+    insecureIngest?: Boolean;
     /**
      * Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
      */

@@ -342,5 +342,6 @@ module.exports = {
   CloudTrailData: require('./cloudtraildata'),
   Tnb: require('./tnb'),
   InternetMonitor: require('./internetmonitor'),
-  IVSRealTime: require('./ivsrealtime')
+  IVSRealTime: require('./ivsrealtime'),
+  VPCLattice: require('./vpclattice')
 };

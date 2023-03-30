@@ -1,6 +1,24 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1346.0-->
+<!--LATEST=2.1347.0-->
 <!--ENTRYINSERT-->
+
+## 2.1347.0
+* feature: Athena: Make DefaultExecutorDpuSize and CoordinatorDpuSize  fields optional  in StartSession
+* feature: AutoScaling: Amazon EC2 Auto Scaling now supports Elastic Load Balancing traffic sources with the AttachTrafficSources, DetachTrafficSources, and DescribeTrafficSources APIs. This release also introduces a new activity status, "WaitingForConnectionDraining", for VPC Lattice to the DescribeScalingActivities API.
+* feature: Batch: This feature allows Batch on EKS to support configuration of Pod Labels through Metadata for Batch on EKS Jobs.
+* feature: ComputeOptimizer: This release adds support for HDD EBS volume types and io2 Block Express. We are also adding support for 61 new instance types and instances that have non consecutive runtime.
+* feature: Drs: Adding a field to the replication configuration APIs to support the auto replicate new disks feature. We also deprecated RetryDataReplication.
+* feature: EC2: This release adds support for Tunnel Endpoint Lifecycle control, a new feature that provides Site-to-Site VPN customers with better visibility and control of their VPN tunnel maintenance updates.
+* feature: EMR: Updated DescribeCluster and ListClusters API responses to include ErrorDetail that specifies error code, programmatically accessible error data,and an error message. ErrorDetail provides the underlying reason for cluster failure and recommends actions to simplify troubleshooting of EMR clusters.
+* feature: Glue: This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.
+* feature: GuardDuty: Added EKS Runtime Monitoring feature support to existing detector, finding APIs and introducing new Coverage APIs
+* feature: IVS: Amazon Interactive Video Service (IVS) now offers customers the ability to configure IVS channels to allow insecure RTMP ingest.
+* feature: Imagebuilder: Adds support for new image workflow details and image vulnerability detection.
+* feature: Kendra: AWS Kendra now supports featured results for a query.
+* feature: NetworkFirewall: AWS Network Firewall added TLS inspection configurations to allow TLS traffic inspection.
+* feature: SageMakerGeospatial: Amazon SageMaker geospatial capabilities now supports server-side encryption with customer managed KMS key and SageMaker notebooks with a SageMaker geospatial image in a Amazon SageMaker Domain with VPC only mode.
+* feature: VPCLattice: General Availability (GA) release of Amazon VPC Lattice
+* feature: WellArchitected: AWS Well-Architected SDK now supports getting consolidated report metrics and generating a consolidated report PDF.
 
 ## 2.1346.0
 * feature: OpenSearchServerless: This release includes two new exception types "ServiceQuotaExceededException" and "OcuLimitExceededException".

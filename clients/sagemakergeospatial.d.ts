@@ -29,19 +29,19 @@ declare class SageMakerGeospatial extends Service {
    */
   deleteVectorEnrichmentJob(callback?: (err: AWSError, data: SageMakerGeospatial.Types.DeleteVectorEnrichmentJobOutput) => void): Request<SageMakerGeospatial.Types.DeleteVectorEnrichmentJobOutput, AWSError>;
   /**
-   * Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an S3 location.
+   * Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an Amazon S3 location.
    */
   exportEarthObservationJob(params: SageMakerGeospatial.Types.ExportEarthObservationJobInput, callback?: (err: AWSError, data: SageMakerGeospatial.Types.ExportEarthObservationJobOutput) => void): Request<SageMakerGeospatial.Types.ExportEarthObservationJobOutput, AWSError>;
   /**
-   * Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an S3 location.
+   * Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an Amazon S3 location.
    */
   exportEarthObservationJob(callback?: (err: AWSError, data: SageMakerGeospatial.Types.ExportEarthObservationJobOutput) => void): Request<SageMakerGeospatial.Types.ExportEarthObservationJobOutput, AWSError>;
   /**
-   * Use this operation to copy results of a Vector Enrichment job to an S3 location.
+   * Use this operation to copy results of a Vector Enrichment job to an Amazon S3 location.
    */
   exportVectorEnrichmentJob(params: SageMakerGeospatial.Types.ExportVectorEnrichmentJobInput, callback?: (err: AWSError, data: SageMakerGeospatial.Types.ExportVectorEnrichmentJobOutput) => void): Request<SageMakerGeospatial.Types.ExportVectorEnrichmentJobOutput, AWSError>;
   /**
-   * Use this operation to copy results of a Vector Enrichment job to an S3 location.
+   * Use this operation to copy results of a Vector Enrichment job to an Amazon S3 location.
    */
   exportVectorEnrichmentJob(callback?: (err: AWSError, data: SageMakerGeospatial.Types.ExportVectorEnrichmentJobOutput) => void): Request<SageMakerGeospatial.Types.ExportVectorEnrichmentJobOutput, AWSError>;
   /**
@@ -171,35 +171,35 @@ declare namespace SageMakerGeospatial {
   export type AlgorithmNameResampling = "NEAR"|"BILINEAR"|"CUBIC"|"CUBICSPLINE"|"LANCZOS"|"AVERAGE"|"RMS"|"MODE"|"MAX"|"MIN"|"MED"|"Q1"|"Q3"|"SUM"|string;
   export interface AreaOfInterest {
     /**
-     * 
+     * A GeoJSON object representing the geographic extent in the coordinate space.
      */
     AreaOfInterestGeometry?: AreaOfInterestGeometry;
   }
   export interface AreaOfInterestGeometry {
     /**
-     * 
+     * The structure representing the MultiPolygon Geometry.
      */
     MultiPolygonGeometry?: MultiPolygonGeometryInput;
     /**
-     * 
+     * The structure representing Polygon Geometry.
      */
     PolygonGeometry?: PolygonGeometryInput;
   }
   export type Arn = string;
   export interface AssetValue {
     /**
-     * 
+     * Link to the asset object.
      */
     Href?: String;
   }
   export type AssetsMap = {[key: string]: AssetValue};
   export interface BandMathConfigInput {
     /**
-     * 
+     * CustomIndices that are computed.
      */
     CustomIndices?: CustomIndicesInput;
     /**
-     * 
+     * One or many of the supported predefined indices to compute. Allowed values: NDVI, EVI2, MSAVI, NDWI, NDMI, NDSI, and WDRVI.
      */
     PredefinedIndices?: StringListInput;
   }
@@ -217,14 +217,14 @@ declare namespace SageMakerGeospatial {
      */
     InterpolationValue?: String;
     /**
-     * 
+     * TargetBands to be returned in the output of CloudRemoval operation.
      */
     TargetBands?: StringListInput;
   }
   export type ComparisonOperator = "EQUALS"|"NOT_EQUALS"|"STARTS_WITH"|string;
   export interface CustomIndicesInput {
     /**
-     * 
+     * A list of BandMath indices to compute.
      */
     Operations?: OperationsListInput;
   }
@@ -251,11 +251,11 @@ declare namespace SageMakerGeospatial {
   export type EarthObservationJobArn = string;
   export interface EarthObservationJobErrorDetails {
     /**
-     * 
+     * A detailed message describing the error in an Earth Observation job.
      */
     Message?: String;
     /**
-     * 
+     * The type of error in an Earth Observation job.
      */
     Type?: EarthObservationJobErrorType;
   }
@@ -266,29 +266,34 @@ declare namespace SageMakerGeospatial {
   export type EarthObservationJobStatus = "INITIALIZING"|"IN_PROGRESS"|"STOPPING"|"COMPLETED"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|string;
   export interface EoCloudCoverInput {
     /**
-     * 
+     * Lower bound for EoCloudCover.
      */
     LowerBound: Float;
     /**
-     * 
+     * Upper bound for EoCloudCover.
      */
     UpperBound: Float;
   }
   export interface EojDataSourceConfigInput {
     /**
-     * 
+     * The input structure for S3Data; representing the Amazon S3 location of the input data objects.
      */
     S3Data?: S3DataInput;
   }
+  export type ExecutionRoleArn = string;
   export interface ExportEarthObservationJobInput {
     /**
      * The input Amazon Resource Name (ARN) of the Earth Observation job being exported.
      */
     Arn: EarthObservationJobArn;
     /**
+     * A unique token that guarantees that the call to this API is idempotent.
+     */
+    ClientToken?: ExportEarthObservationJobInputClientTokenString;
+    /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn: String;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * The source images provided to the Earth Observation job being exported.
      */
@@ -298,6 +303,7 @@ declare namespace SageMakerGeospatial {
      */
     OutputConfig: OutputConfigInput;
   }
+  export type ExportEarthObservationJobInputClientTokenString = string;
   export interface ExportEarthObservationJobOutput {
     /**
      * The output Amazon Resource Name (ARN) of the Earth Observation job being exported.
@@ -306,11 +312,11 @@ declare namespace SageMakerGeospatial {
     /**
      * The creation time.
      */
-    CreationTime: Timestamp;
+    CreationTime: SyntheticTimestamp_date_time;
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn: String;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * The source images provided to the Earth Observation job being exported.
      */
@@ -326,34 +332,34 @@ declare namespace SageMakerGeospatial {
   }
   export interface ExportErrorDetails {
     /**
-     * 
+     * The structure for returning the export error details while exporting results of an Earth Observation job.
      */
     ExportResults?: ExportErrorDetailsOutput;
     /**
-     * 
+     * The structure for returning the export error details while exporting the source images of an Earth Observation job.
      */
     ExportSourceImages?: ExportErrorDetailsOutput;
   }
   export interface ExportErrorDetailsOutput {
     /**
-     * 
+     * A detailed message describing the error in an export EarthObservationJob operation.
      */
     Message?: String;
     /**
-     * 
+     * The type of error in an export EarthObservationJob operation.
      */
     Type?: ExportErrorType;
   }
   export type ExportErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string;
   export interface ExportS3DataInput {
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
      * The URL to the Amazon S3 data input.
      */
-    S3Uri: String;
+    S3Uri: S3Uri;
   }
   export interface ExportVectorEnrichmentJobInput {
     /**
@@ -361,14 +367,19 @@ declare namespace SageMakerGeospatial {
      */
     Arn: VectorEnrichmentJobArn;
     /**
+     * A unique token that guarantees that the call to this API is idempotent.
+     */
+    ClientToken?: ExportVectorEnrichmentJobInputClientTokenString;
+    /**
      * The Amazon Resource Name (ARN) of the IAM rolewith permission to upload to the location in OutputConfig.
      */
-    ExecutionRoleArn: String;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * Output location information for exporting Vector Enrichment Job results. 
      */
     OutputConfig: ExportVectorEnrichmentJobOutputConfig;
   }
+  export type ExportVectorEnrichmentJobInputClientTokenString = string;
   export interface ExportVectorEnrichmentJobOutput {
     /**
      * The Amazon Resource Name (ARN) of the Vector Enrichment job being exported.
@@ -377,11 +388,11 @@ declare namespace SageMakerGeospatial {
     /**
      * The creation time.
      */
-    CreationTime: Timestamp;
+    CreationTime: SyntheticTimestamp_date_time;
     /**
      * The Amazon Resource Name (ARN) of the IAM role with permission to upload to the location in OutputConfig.
      */
-    ExecutionRoleArn: String;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * The status of the results the Vector Enrichment job being exported.
      */
@@ -393,7 +404,7 @@ declare namespace SageMakerGeospatial {
   }
   export interface ExportVectorEnrichmentJobOutputConfig {
     /**
-     * 
+     * The input structure for Amazon S3 data; representing the Amazon S3 location of the input data objects.
      */
     S3Data: VectorEnrichmentJobS3Data;
   }
@@ -429,11 +440,11 @@ declare namespace SageMakerGeospatial {
   }
   export interface Geometry {
     /**
-     * 
+     * The coordinates of the GeoJson Geometry.
      */
     Coordinates: LinearRings;
     /**
-     * 
+     * GeoJson Geometry types like Polygon and MultiPolygon.
      */
     Type: String;
   }
@@ -451,7 +462,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The creation time of the initiated Earth Observation job.
      */
-    CreationTime: Timestamp;
+    CreationTime: SyntheticTimestamp_date_time;
     /**
      * The duration of Earth Observation job, in seconds.
      */
@@ -463,7 +474,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn?: String;
+    ExecutionRoleArn?: ExecutionRoleArn;
     /**
      * Details about the errors generated during ExportEarthObservationJob.
      */
@@ -481,15 +492,15 @@ declare namespace SageMakerGeospatial {
      */
     JobConfig: JobConfigInput;
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
      * The name of the Earth Observation job.
      */
     Name: String;
     /**
-     * 
+     * Bands available in the output of an operation.
      */
     OutputBands?: EarthObservationJobOutputBands;
     /**
@@ -521,7 +532,7 @@ declare namespace SageMakerGeospatial {
      */
     DescriptionPageUrl: String;
     /**
-     * 
+     * The list of image source bands in the raster data collection.
      */
     ImageSourceBands: ImageSourceBandList;
     /**
@@ -546,6 +557,10 @@ declare namespace SageMakerGeospatial {
      * The Amazon Resource Name (ARN) of the tile operation.
      */
     Arn: EarthObservationJobArn;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that you specify.
+     */
+    ExecutionRoleArn?: ExecutionRoleArn;
     /**
      * The particular assets or bands to tile.
      */
@@ -607,7 +622,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The creation time.
      */
-    CreationTime: Timestamp;
+    CreationTime: SyntheticTimestamp_date_time;
     /**
      * The duration of the Vector Enrichment job, in seconds.
      */
@@ -619,7 +634,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn: String;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * Details about the errors generated during the ExportVectorEnrichmentJob.
      */
@@ -637,9 +652,9 @@ declare namespace SageMakerGeospatial {
      */
     JobConfig: VectorEnrichmentJobConfig;
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
      * The name of the Vector Enrichment job.
      */
@@ -667,9 +682,9 @@ declare namespace SageMakerGeospatial {
     /**
      * The Amazon Resource Name (ARN) of the previous Earth Observation job.
      */
-    PreviousEarthObservationJobArn?: String;
+    PreviousEarthObservationJobArn?: EarthObservationJobArn;
     /**
-     * 
+     * The structure representing the RasterDataCollection Query consisting of the Area of Interest, RasterDataCollectionArn,TimeRange and Property Filters.
      */
     RasterDataCollectionQuery?: RasterDataCollectionQueryInput;
   }
@@ -681,24 +696,24 @@ declare namespace SageMakerGeospatial {
     /**
      * The Amazon Resource Name (ARN) of the previous Earth Observation job.
      */
-    PreviousEarthObservationJobArn?: String;
+    PreviousEarthObservationJobArn?: EarthObservationJobArn;
     /**
-     * 
+     * The structure representing the RasterDataCollection Query consisting of the Area of Interest, RasterDataCollectionArn, RasterDataCollectionName, TimeRange, and Property Filters.
      */
     RasterDataCollectionQuery?: RasterDataCollectionQueryOutput;
   }
   export type Integer = number;
   export interface ItemSource {
     /**
-     * 
+     * This is a dictionary of Asset Objects data associated with the Item that can be downloaded or streamed, each with a unique key.
      */
     Assets?: AssetsMap;
     /**
-     * 
+     * The searchable date and time of the item, in UTC.
      */
     DateTime: Timestamp;
     /**
-     * 
+     * The item Geometry in GeoJson format.
      */
     Geometry: Geometry;
     /**
@@ -706,14 +721,14 @@ declare namespace SageMakerGeospatial {
      */
     Id: String;
     /**
-     * 
+     * This field contains additional properties of the item.
      */
     Properties?: Properties;
   }
   export type ItemSourceList = ItemSource[];
   export interface JobConfigInput {
     /**
-     * 
+     * An object containing information about the job configuration for BandMath.
      */
     BandMathConfig?: BandMathConfigInput;
     /**
@@ -737,7 +752,7 @@ declare namespace SageMakerGeospatial {
      */
     ResamplingConfig?: ResamplingConfigInput;
     /**
-     * 
+     * An object containing information about the job configuration for a Stacking Earth Observation job.
      */
     StackConfig?: StackConfigInput;
     /**
@@ -749,15 +764,16 @@ declare namespace SageMakerGeospatial {
      */
     ZonalStatisticsConfig?: ZonalStatisticsConfigInput;
   }
+  export type KmsKey = string;
   export interface LandCoverSegmentationConfigInput {
   }
   export interface LandsatCloudCoverLandInput {
     /**
-     * 
+     * The minimum value for Land Cloud Cover property filter. This will filter items having Land Cloud Cover greater than or equal to this value.
      */
     LowerBound: Float;
     /**
-     * 
+     * The maximum value for Land Cloud Cover property filter. This will filter items having Land Cloud Cover less than or equal to this value.
      */
     UpperBound: Float;
   }
@@ -805,7 +821,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The creation time.
      */
-    CreationTime: Timestamp;
+    CreationTime: SyntheticTimestamp_date_time;
     /**
      * The duration of the session, in seconds.
      */
@@ -815,7 +831,7 @@ declare namespace SageMakerGeospatial {
      */
     Name: String;
     /**
-     * 
+     * The operation type for an Earth Observation job.
      */
     OperationType: String;
     /**
@@ -901,7 +917,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The creation time.
      */
-    CreationTime: Timestamp;
+    CreationTime: SyntheticTimestamp_date_time;
     /**
      * The duration of the session, in seconds.
      */
@@ -926,7 +942,7 @@ declare namespace SageMakerGeospatial {
   export type LogicalOperator = "AND"|string;
   export interface MapMatchingConfig {
     /**
-     * 
+     * The field name for the data that describes the identifier representing a collection of GPS points belonging to an individual trace.
      */
     IdAttributeName: String;
     /**
@@ -952,7 +968,7 @@ declare namespace SageMakerGeospatial {
   export type NextToken = string;
   export interface Operation {
     /**
-     * 
+     * Textual representation of the math operation; Equation used to compute the spectral index.
      */
     Equation: String;
     /**
@@ -983,24 +999,24 @@ declare namespace SageMakerGeospatial {
   }
   export interface OutputResolutionResamplingInput {
     /**
-     * 
+     * User Defined Resolution for the output of Resampling operation defined by value and unit.
      */
     UserDefined: UserDefined;
   }
   export interface OutputResolutionStackInput {
     /**
-     * 
+     * A string value representing Predefined Output Resolution for a stacking operation. Allowed values are HIGHEST, LOWEST, and AVERAGE.
      */
     Predefined?: PredefinedResolution;
     /**
-     * 
+     * The structure representing User Output Resolution for a Stacking operation defined as a value and unit.
      */
     UserDefined?: UserDefined;
   }
   export type OutputType = "INT32"|"FLOAT32"|"INT16"|"FLOAT64"|"UINT16"|string;
   export interface PlatformInput {
     /**
-     * 
+     * The ComparisonOperator to use with PlatformInput.
      */
     ComparisonOperator?: ComparisonOperator;
     /**
@@ -1010,7 +1026,7 @@ declare namespace SageMakerGeospatial {
   }
   export interface PolygonGeometryInput {
     /**
-     * 
+     * Coordinates representing a Polygon based on the GeoJson spec.
      */
     Coordinates: LinearRings;
   }
@@ -1018,69 +1034,69 @@ declare namespace SageMakerGeospatial {
   export type PredefinedResolution = "HIGHEST"|"LOWEST"|"AVERAGE"|string;
   export interface Properties {
     /**
-     * 
+     * Estimate of cloud cover.
      */
     EoCloudCover?: Float;
     /**
-     * 
+     * Land cloud cover for Landsat Data Collection.
      */
     LandsatCloudCoverLand?: Float;
     /**
-     * 
+     * Platform property. Platform refers to the unique name of the specific platform the instrument is attached to. For satellites it is the name of the satellite, eg. landsat-8 (Landsat-8), sentinel-2a.
      */
     Platform?: String;
     /**
-     * 
+     * The angle from the sensor between nadir (straight down) and the scene center. Measured in degrees (0-90).
      */
     ViewOffNadir?: Float;
     /**
-     * 
+     * The sun azimuth angle. From the scene center point on the ground, this is the angle between truth north and the sun. Measured clockwise in degrees (0-360).
      */
     ViewSunAzimuth?: Float;
     /**
-     * 
+     * The sun elevation angle. The angle from the tangent of the scene center point to the sun. Measured from the horizon in degrees (-90-90). Negative values indicate the sun is below the horizon, e.g. sun elevation of -10° means the data was captured during nautical twilight.
      */
     ViewSunElevation?: Float;
   }
   export interface Property {
     /**
-     * 
+     * The structure representing EoCloudCover property filter containing a lower bound and upper bound.
      */
     EoCloudCover?: EoCloudCoverInput;
     /**
-     * 
+     * The structure representing Land Cloud Cover property filter for Landsat collection containing a lower bound and upper bound.
      */
     LandsatCloudCoverLand?: LandsatCloudCoverLandInput;
     /**
-     * 
+     * The structure representing Platform property filter consisting of value and comparison operator.
      */
     Platform?: PlatformInput;
     /**
-     * 
+     * The structure representing ViewOffNadir property filter containing a lower bound and upper bound.
      */
     ViewOffNadir?: ViewOffNadirInput;
     /**
-     * 
+     * The structure representing ViewSunAzimuth property filter containing a lower bound and upper bound.
      */
     ViewSunAzimuth?: ViewSunAzimuthInput;
     /**
-     * 
+     * The structure representing ViewSunElevation property filter containing a lower bound and upper bound.
      */
     ViewSunElevation?: ViewSunElevationInput;
   }
   export interface PropertyFilter {
     /**
-     * 
+     * Represents a single property to match with when searching a raster data collection.
      */
     Property: Property;
   }
   export interface PropertyFilters {
     /**
-     * 
+     * The Logical Operator used to combine the Property Filters.
      */
     LogicalOperator?: LogicalOperator;
     /**
-     * 
+     * A list of Property Filters.
      */
     Properties?: PropertyFiltersList;
   }
@@ -1103,7 +1119,7 @@ declare namespace SageMakerGeospatial {
      */
     Name: String;
     /**
-     * 
+     * The list of filters supported by the raster data collection.
      */
     SupportedFilters: FilterList;
     /**
@@ -1121,55 +1137,55 @@ declare namespace SageMakerGeospatial {
      */
     AreaOfInterest?: AreaOfInterest;
     /**
-     * 
+     * The list of Property filters used in the Raster Data Collection Query.
      */
     PropertyFilters?: PropertyFilters;
     /**
      * The Amazon Resource Name (ARN) of the raster data collection.
      */
-    RasterDataCollectionArn: String;
+    RasterDataCollectionArn: DataCollectionArn;
     /**
-     * 
+     * The TimeRange Filter used in the RasterDataCollection Query.
      */
     TimeRangeFilter: TimeRangeFilterInput;
   }
   export interface RasterDataCollectionQueryOutput {
     /**
-     * 
+     * The Area of Interest used in the search.
      */
     AreaOfInterest?: AreaOfInterest;
     /**
-     * 
+     * Property filters used in the search.
      */
     PropertyFilters?: PropertyFilters;
     /**
-     * 
+     * The ARN of the Raster Data Collection against which the search is done.
      */
-    RasterDataCollectionArn: String;
+    RasterDataCollectionArn: DataCollectionArn;
     /**
      * The name of the raster data collection.
      */
     RasterDataCollectionName: String;
     /**
-     * 
+     * The TimeRange filter used in the search.
      */
-    TimeRangeFilter: TimeRangeFilterInput;
+    TimeRangeFilter: TimeRangeFilterOutput;
   }
   export interface RasterDataCollectionQueryWithBandFilterInput {
     /**
-     * 
+     * The Area of interest to be used in the search query.
      */
     AreaOfInterest?: AreaOfInterest;
     /**
-     * 
+     * The list of Bands to be displayed in the result for each item.
      */
     BandFilter?: StringListInput;
     /**
-     * 
+     * The Property Filters used in the search query.
      */
     PropertyFilters?: PropertyFilters;
     /**
-     * 
+     * The TimeRange Filter used in the search query.
      */
     TimeRangeFilter: TimeRangeFilterInput;
   }
@@ -1179,38 +1195,39 @@ declare namespace SageMakerGeospatial {
      */
     AlgorithmName?: AlgorithmNameResampling;
     /**
-     * 
+     * The structure representing output resolution (in target georeferenced units) of the result of resampling operation.
      */
     OutputResolution: OutputResolutionResamplingInput;
     /**
-     * 
+     * Bands used in the operation. If no target bands are specified, it uses all bands available in the input.
      */
     TargetBands?: StringListInput;
   }
   export interface ReverseGeocodingConfig {
     /**
-     * 
+     * The field name for the data that describes x-axis coordinate, eg. longitude of a point.
      */
     XAttributeName: String;
     /**
-     * 
+     * The field name for the data that describes y-axis coordinate, eg. latitude of a point.
      */
     YAttributeName: String;
   }
   export interface S3DataInput {
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
-     * 
+     * Metadata provider from whom the Amazon S3 data has been acquired.
      */
     MetadataProvider: MetadataProvider;
     /**
      * The URL to the Amazon S3 input.
      */
-    S3Uri: String;
+    S3Uri: S3Uri;
   }
+  export type S3Uri = string;
   export interface SearchRasterDataCollectionInput {
     /**
      * The Amazon Resource Name (ARN) of the raster data collection.
@@ -1221,17 +1238,17 @@ declare namespace SageMakerGeospatial {
      */
     NextToken?: NextToken;
     /**
-     * 
+     * RasterDataCollectionQuery consisting of AreaOfInterest(AOI), PropertyFilters and TimeRangeFilterInput used in SearchRasterDataCollection.
      */
     RasterDataCollectionQuery: RasterDataCollectionQueryWithBandFilterInput;
   }
   export interface SearchRasterDataCollectionOutput {
     /**
-     * 
+     * Approximate number of results in the response.
      */
     ApproximateResultCount: Integer;
     /**
-     * 
+     * List of items matching the Raster DataCollectionQuery.
      */
     Items?: ItemSourceList;
     /**
@@ -1242,11 +1259,11 @@ declare namespace SageMakerGeospatial {
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface StackConfigInput {
     /**
-     * 
+     * The structure representing output resolution (in target georeferenced units) of the result of stacking operation.
      */
     OutputResolution?: OutputResolutionStackInput;
     /**
-     * 
+     * A list of bands to be stacked in the specified order. When the parameter is not provided, all the available bands in the data collection are stacked in the alphabetical order of their asset names.
      */
     TargetBands?: StringListInput;
   }
@@ -1254,11 +1271,11 @@ declare namespace SageMakerGeospatial {
     /**
      * A unique token that guarantees that the call to this API is idempotent.
      */
-    ClientToken?: String;
+    ClientToken?: StartEarthObservationJobInputClientTokenString;
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn?: String;
+    ExecutionRoleArn?: ExecutionRoleArn;
     /**
      * Input configuration information for the Earth Observation job.
      */
@@ -1268,18 +1285,20 @@ declare namespace SageMakerGeospatial {
      */
     JobConfig: JobConfigInput;
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
      * The name of the Earth Observation job.
      */
-    Name: String;
+    Name: StartEarthObservationJobInputNameString;
     /**
      * Each tag consists of a key and a value.
      */
     Tags?: Tags;
   }
+  export type StartEarthObservationJobInputClientTokenString = string;
+  export type StartEarthObservationJobInputNameString = string;
   export interface StartEarthObservationJobOutput {
     /**
      * The Amazon Resource Name (ARN) of the Earth Observation job.
@@ -1288,7 +1307,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The creation time.
      */
-    CreationTime: Timestamp;
+    CreationTime: SyntheticTimestamp_date_time;
     /**
      * The duration of the session, in seconds.
      */
@@ -1296,7 +1315,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn?: String;
+    ExecutionRoleArn?: ExecutionRoleArn;
     /**
      * Input configuration information for the Earth Observation job.
      */
@@ -1306,9 +1325,9 @@ declare namespace SageMakerGeospatial {
      */
     JobConfig: JobConfigInput;
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
      * The name of the Earth Observation job.
      */
@@ -1326,11 +1345,11 @@ declare namespace SageMakerGeospatial {
     /**
      * A unique token that guarantees that the call to this API is idempotent.
      */
-    ClientToken?: String;
+    ClientToken?: StartVectorEnrichmentJobInputClientTokenString;
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn: String;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * Input configuration information for the Vector Enrichment job.
      */
@@ -1340,18 +1359,20 @@ declare namespace SageMakerGeospatial {
      */
     JobConfig: VectorEnrichmentJobConfig;
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
      * The name of the Vector Enrichment job.
      */
-    Name: String;
+    Name: StartVectorEnrichmentJobInputNameString;
     /**
      * Each tag consists of a key and a value.
      */
     Tags?: Tags;
   }
+  export type StartVectorEnrichmentJobInputClientTokenString = string;
+  export type StartVectorEnrichmentJobInputNameString = string;
   export interface StartVectorEnrichmentJobOutput {
     /**
      * The Amazon Resource Name (ARN) of the Vector Enrichment job.
@@ -1360,7 +1381,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The creation time.
      */
-    CreationTime: Timestamp;
+    CreationTime: SyntheticTimestamp_date_time;
     /**
      * The duration of the Vector Enrichment job, in seconds.
      */
@@ -1368,7 +1389,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn: String;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * Input configuration information for starting the Vector Enrichment job.
      */
@@ -1378,9 +1399,9 @@ declare namespace SageMakerGeospatial {
      */
     JobConfig: VectorEnrichmentJobConfig;
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
      * The name of the Vector Enrichment job.
      */
@@ -1416,6 +1437,7 @@ declare namespace SageMakerGeospatial {
   }
   export type String = string;
   export type StringListInput = String[];
+  export type SyntheticTimestamp_date_time = Date;
   export type TagKeyList = String[];
   export interface TagResourceRequest {
     /**
@@ -1434,15 +1456,15 @@ declare namespace SageMakerGeospatial {
   export type TemporalStatistics = "MEAN"|"MEDIAN"|"STANDARD_DEVIATION"|string;
   export interface TemporalStatisticsConfigInput {
     /**
-     * 
+     * The input for the temporal statistics grouping by time frequency option.
      */
     GroupBy?: GroupBy;
     /**
-     * 
+     * The list of the statistics method options.
      */
     Statistics: TemporalStatisticsListInput;
     /**
-     * 
+     * The list of target band names for the temporal statistic to calculate.
      */
     TargetBands?: StringListInput;
   }
@@ -1456,6 +1478,16 @@ declare namespace SageMakerGeospatial {
      * The start time for the time-range filter.
      */
     StartTime: Timestamp;
+  }
+  export interface TimeRangeFilterOutput {
+    /**
+     * The ending time for the time range filter.
+     */
+    EndTime: SyntheticTimestamp_date_time;
+    /**
+     * The starting time for the time range filter.
+     */
+    StartTime: SyntheticTimestamp_date_time;
   }
   export type Timestamp = Date;
   export type Unit = "METERS"|string;
@@ -1473,28 +1505,28 @@ declare namespace SageMakerGeospatial {
   }
   export interface UserDefined {
     /**
-     * 
+     * The units for output resolution of the result.
      */
     Unit: Unit;
     /**
-     * 
+     * The value for output resolution of the result.
      */
     Value: Float;
   }
   export type VectorEnrichmentJobArn = string;
   export interface VectorEnrichmentJobConfig {
     /**
-     * 
+     * The input structure for Map Matching operation type.
      */
     MapMatchingConfig?: MapMatchingConfig;
     /**
-     * 
+     * The input structure for Reverse Geocoding operation type.
      */
     ReverseGeocodingConfig?: ReverseGeocodingConfig;
   }
   export interface VectorEnrichmentJobDataSourceConfigInput {
     /**
-     * 
+     * The input structure for the Amazon S3 data that represents the Amazon S3 location of the input data objects.
      */
     S3Data?: VectorEnrichmentJobS3Data;
   }
@@ -1516,7 +1548,7 @@ declare namespace SageMakerGeospatial {
      */
     Message?: String;
     /**
-     * 
+     * The output error details for an Export operation on a Vector Enrichment job.
      */
     Type?: VectorEnrichmentJobExportErrorType;
   }
@@ -1524,44 +1556,44 @@ declare namespace SageMakerGeospatial {
   export type VectorEnrichmentJobExportStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
   export interface VectorEnrichmentJobInputConfig {
     /**
-     * 
+     * The input structure for the data source that represents the storage type of the input data objects.
      */
     DataSourceConfig: VectorEnrichmentJobDataSourceConfigInput;
     /**
-     * 
+     * The input structure that defines the data source file type.
      */
     DocumentType: VectorEnrichmentJobDocumentType;
   }
   export type VectorEnrichmentJobList = ListVectorEnrichmentJobOutputConfig[];
   export interface VectorEnrichmentJobS3Data {
     /**
-     * The Amazon Key Management Service (KMS) key ID for server-side encryption.
+     * The Key Management Service key ID for server-side encryption.
      */
-    KmsKeyId?: String;
+    KmsKeyId?: KmsKey;
     /**
      * The URL to the Amazon S3 data for the Vector Enrichment job.
      */
-    S3Uri: String;
+    S3Uri: S3Uri;
   }
   export type VectorEnrichmentJobStatus = "INITIALIZING"|"IN_PROGRESS"|"STOPPING"|"STOPPED"|"COMPLETED"|"FAILED"|"DELETING"|"DELETED"|string;
   export type VectorEnrichmentJobType = "REVERSE_GEOCODING"|"MAP_MATCHING"|string;
   export interface ViewOffNadirInput {
     /**
-     * 
+     * The minimum value for ViewOffNadir property filter. This filters items having ViewOffNadir greater than or equal to this value. 
      */
     LowerBound: Float;
     /**
-     * 
+     * The maximum value for ViewOffNadir property filter. This filters items having ViewOffNadir lesser than or equal to this value.
      */
     UpperBound: Float;
   }
   export interface ViewSunAzimuthInput {
     /**
-     * 
+     * The minimum value for ViewSunAzimuth property filter. This filters items having ViewSunAzimuth greater than or equal to this value.
      */
     LowerBound: Float;
     /**
-     * 
+     * The maximum value for ViewSunAzimuth property filter. This filters items having ViewSunAzimuth lesser than or equal to this value.
      */
     UpperBound: Float;
   }
@@ -1578,17 +1610,21 @@ declare namespace SageMakerGeospatial {
   export type ZonalStatistics = "MEAN"|"MEDIAN"|"STANDARD_DEVIATION"|"MAX"|"MIN"|"SUM"|string;
   export interface ZonalStatisticsConfigInput {
     /**
-     * 
+     * List of zonal statistics to compute.
      */
     Statistics: ZonalStatisticsListInput;
     /**
-     * 
+     * Bands used in the operation. If no target bands are specified, it uses all bands available input.
      */
     TargetBands?: StringListInput;
     /**
-     * 
+     * The Amazon S3 path pointing to the GeoJSON containing the polygonal zones.
      */
-    ZoneS3Path: String;
+    ZoneS3Path: S3Uri;
+    /**
+     * The Amazon Resource Name (ARN) or an ID of a Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to decrypt your output artifacts with Amazon S3 server-side encryption. The SageMaker execution role must have kms:GenerateDataKey permission. The KmsKeyId can be any of the following formats:   // KMS Key ID  "1234abcd-12ab-34cd-56ef-1234567890ab"    // Amazon Resource Name (ARN) of a KMS Key  "arn:aws:kms:&lt;region&gt;:&lt;account&gt;:key/&lt;key-id-12ab-34cd-56ef-1234567890ab&gt;"    For more information about key identifiers, see Key identifiers (KeyID) in the Amazon Web Services Key Management Service (Amazon Web Services KMS) documentation.
+     */
+    ZoneS3PathKmsKeyId?: KmsKey;
   }
   export type ZonalStatisticsListInput = ZonalStatistics[];
   /**
