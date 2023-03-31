@@ -20550,7 +20550,7 @@ declare namespace EC2 {
   }
   export interface GetGroupsForCapacityReservationRequest {
     /**
-     * The ID of the Capacity Reservation.
+     * The ID of the Capacity Reservation. If you specify a Capacity Reservation that is shared with you, the operation returns only Capacity Reservation groups that you own.
      */
     CapacityReservationId: CapacityReservationId;
     /**
@@ -22849,7 +22849,7 @@ declare namespace EC2 {
      */
     ElasticGpuAssociations?: ElasticGpuAssociationList;
     /**
-     *  The elastic inference accelerator associated with the instance.
+     * The elastic inference accelerator associated with the instance.
      */
     ElasticInferenceAcceleratorAssociations?: ElasticInferenceAcceleratorAssociationList;
     /**
@@ -32645,7 +32645,7 @@ declare namespace EC2 {
      */
     ElasticGpuSpecification?: ElasticGpuSpecifications;
     /**
-     * An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads. You cannot specify accelerators from different generations in the same request.
+     * An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads. You cannot specify accelerators from different generations in the same request.  Starting April 15, 2023, Amazon Web Services will not onboard new customers to Amazon Elastic Inference (EI), and will help current customers migrate their workloads to options that offer better price and performance. After April 15, 2023, new customers will not be able to launch instances with Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least once during the past 30-day period are considered current customers and will be able to continue using the service. 
      */
     ElasticInferenceAccelerators?: ElasticInferenceAccelerators;
     /**

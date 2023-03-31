@@ -12,11 +12,11 @@ declare class InternetMonitor extends Service {
   constructor(options?: InternetMonitor.Types.ClientConfiguration)
   config: Config & InternetMonitor.Types.ClientConfiguration;
   /**
-   * Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Virtual Private Clouds (VPCs), Amazon CloudFront distributions, and WorkSpaces directories.  After you create a monitor, you can view the internet performance for your application, scoped to a location, as well as any health events that are impairing traffic. Internet Monitor can also diagnose whether the impairment is on the Amazon Web Services network or is an issue with an internet service provider (ISP).
+   * Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Amazon Virtual Private Clouds (VPCs), Amazon CloudFront distributions, and WorkSpaces directories. Internet Monitor then publishes internet measurements from Amazon Web Services that are specific to the city-networks, that is, the locations and ASNs (typically internet service providers or ISPs), where clients access your application. For more information, see Using Amazon CloudWatch Internet Monitor in the Amazon CloudWatch User Guide. When you create a monitor, you set a maximum limit for the number of city-networks where client traffic is monitored. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. You can change the maximum at any time by updating your monitor. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
    */
   createMonitor(params: InternetMonitor.Types.CreateMonitorInput, callback?: (err: AWSError, data: InternetMonitor.Types.CreateMonitorOutput) => void): Request<InternetMonitor.Types.CreateMonitorOutput, AWSError>;
   /**
-   * Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Virtual Private Clouds (VPCs), Amazon CloudFront distributions, and WorkSpaces directories.  After you create a monitor, you can view the internet performance for your application, scoped to a location, as well as any health events that are impairing traffic. Internet Monitor can also diagnose whether the impairment is on the Amazon Web Services network or is an issue with an internet service provider (ISP).
+   * Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Amazon Virtual Private Clouds (VPCs), Amazon CloudFront distributions, and WorkSpaces directories. Internet Monitor then publishes internet measurements from Amazon Web Services that are specific to the city-networks, that is, the locations and ASNs (typically internet service providers or ISPs), where clients access your application. For more information, see Using Amazon CloudWatch Internet Monitor in the Amazon CloudWatch User Guide. When you create a monitor, you set a maximum limit for the number of city-networks where client traffic is monitored. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. You can change the maximum at any time by updating your monitor. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
    */
   createMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.CreateMonitorOutput) => void): Request<InternetMonitor.Types.CreateMonitorOutput, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class InternetMonitor extends Service {
    */
   untagResource(callback?: (err: AWSError, data: InternetMonitor.Types.UntagResourceOutput) => void): Request<InternetMonitor.Types.UntagResourceOutput, AWSError>;
   /**
-   * Updates a monitor. You can update a monitor to add or remove resources, or to change the status of the monitor. You can't change the name of a monitor.
+   * Updates a monitor. You can update a monitor to change the maximum number of city-networks (locations and ASNs or internet service providers), to add or remove resources, or to change the status of the monitor. Note that you can't change the name of a monitor. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
    */
   updateMonitor(params: InternetMonitor.Types.UpdateMonitorInput, callback?: (err: AWSError, data: InternetMonitor.Types.UpdateMonitorOutput) => void): Request<InternetMonitor.Types.UpdateMonitorOutput, AWSError>;
   /**
-   * Updates a monitor. You can update a monitor to add or remove resources, or to change the status of the monitor. You can't change the name of a monitor.
+   * Updates a monitor. You can update a monitor to change the maximum number of city-networks (locations and ASNs or internet service providers), to add or remove resources, or to change the status of the monitor. Note that you can't change the name of a monitor. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
    */
   updateMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.UpdateMonitorOutput) => void): Request<InternetMonitor.Types.UpdateMonitorOutput, AWSError>;
 }
@@ -96,15 +96,15 @@ declare namespace InternetMonitor {
   export type Arn = string;
   export interface AvailabilityMeasurement {
     /**
-     * Experience scores, or health scores are calculated for different geographic and network provider combinations (that is, different granularities) and also summed into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor provides global health scores. The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and availability scores, and when it creates and resolves health events. For more information, see  How Amazon Web Services calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+     * Experience scores, or health scores are calculated for different geographic and network provider combinations (that is, different granularities) and also summed into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor provides global health scores. The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and availability scores, and when it creates and resolves health events. For more information, see How Amazon Web Services calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     ExperienceScore?: Double;
     /**
-     * The percentage of impact caused by a health event for total traffic globally. For information about how Internet Monitor calculates impact, see  Inside Internet Monitor in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.
+     * The percentage of impact caused by a health event for total traffic globally. For information about how Internet Monitor calculates impact, see Inside Internet Monitor in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.
      */
     PercentOfTotalTrafficImpacted?: Double;
     /**
-     * The percentage of impact caused by a health event for client location traffic globally. For information about how Internet Monitor calculates impact, see  Inside Internet Monitor in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.
+     * The percentage of impact caused by a health event for client location traffic globally. For information about how Internet Monitor calculates impact, see Inside Internet Monitor in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.
      */
     PercentOfClientLocationImpacted?: Double;
   }
@@ -126,9 +126,13 @@ declare namespace InternetMonitor {
      */
     Tags?: TagMap;
     /**
-     * The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored for your resources.
+     * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the network or ASN, such as an internet service provider (ISP), that clients access the resources through. This limit helps control billing costs. To learn more, see Choosing a city-network maximum value  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     MaxCityNetworksToMonitor: MaxCityNetworksToMonitor;
+    /**
+     * Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.
+     */
+    InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
   }
   export interface CreateMonitorOutput {
     /**
@@ -245,9 +249,13 @@ declare namespace InternetMonitor {
      */
     Tags?: TagMap;
     /**
-     * The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored for your resources.
+     * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the network or ASN, such as an internet service provider (ISP), that clients access the resources through. This limit helps control billing costs. To learn more, see Choosing a city-network maximum value  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     MaxCityNetworksToMonitor: MaxCityNetworksToMonitor;
+    /**
+     * Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.
+     */
+    InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
   }
   export interface HealthEvent {
     /**
@@ -356,13 +364,19 @@ declare namespace InternetMonitor {
   export type ImpactedLocationsList = ImpactedLocation[];
   export interface InternetHealth {
     /**
-     * Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99% for an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair. For more information, see  How Internet Monitor calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.
+     * Availability in Internet Monitor represents the estimated percentage of traffic that is not seeing an availability drop. For example, an availability score of 99% for an end user and service location pair is equivalent to 1% of the traffic experiencing an availability drop for that pair. For more information, see How Internet Monitor calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     Availability?: AvailabilityMeasurement;
     /**
-     * Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for an end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair. For more information, see  How Internet Monitor calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.
+     * Performance in Internet Monitor represents the estimated percentage of traffic that is not seeing a performance drop. For example, a performance score of 99% for an end user and service location pair is equivalent to 1% of the traffic experiencing a performance drop for that pair. For more information, see How Internet Monitor calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     Performance?: PerformanceMeasurement;
+  }
+  export interface InternetMeasurementsLogDelivery {
+    /**
+     * The configuration information for publishing Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix for the S3 bucket to store the measurements, and the delivery status. The delivery status is ENABLED or DISABLED, depending on whether you choose to deliver internet measurements to S3 logs.
+     */
+    S3Config?: S3Config;
   }
   export interface ListHealthEventsInput {
     /**
@@ -436,6 +450,7 @@ declare namespace InternetMonitor {
      */
     Tags?: TagMap;
   }
+  export type LogDeliveryStatus = "ENABLED"|"DISABLED"|string;
   export type Long = number;
   export type MaxCityNetworksToMonitor = number;
   export type MaxResults = number;
@@ -488,19 +503,19 @@ declare namespace InternetMonitor {
   export type NetworkList = Network[];
   export interface PerformanceMeasurement {
     /**
-     * Experience scores, or health scores, are calculated for different geographic and network provider combinations (that is, different granularities) and also totaled into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor provides global health scores. The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and availability scores, and when it creates and resolves health events. For more information, see  How Amazon Web Services calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+     * Experience scores, or health scores, are calculated for different geographic and network provider combinations (that is, different granularities) and also totaled into global scores. If you view performance or availability scores without filtering for any specific geography or service provider, Amazon CloudWatch Internet Monitor provides global health scores. The Amazon CloudWatch Internet Monitor chapter in the CloudWatch User Guide includes detailed information about how Internet Monitor calculates health scores, including performance and availability scores, and when it creates and resolves health events. For more information, see How Amazon Web Services calculates performance and availability scores in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     ExperienceScore?: Double;
     /**
-     * How much performance impact was caused by a health event for total traffic globally. For performance, this is the percentage of how much latency increased during the event compared to typical performance for your application traffic globally.  For more information, see  When Amazon Web Services creates and resolves health events in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+     * How much performance impact was caused by a health event for total traffic globally. For performance, this is the percentage of how much latency increased during the event compared to typical performance for your application traffic globally.  For more information, see When Amazon Web Services creates and resolves health events in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     PercentOfTotalTrafficImpacted?: Double;
     /**
-     * How much performance impact was caused by a health event at a client location. For performance, this is the percentage of how much latency increased during the event compared to typical performance for traffic, from this client location to an Amazon Web Services location, using a specific client network.  For more information, see  When Amazon Web Services creates and resolves health events in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+     * How much performance impact was caused by a health event at a client location. For performance, this is the percentage of how much latency increased during the event compared to typical performance for traffic, from this client location to an Amazon Web Services location, using a specific client network.  For more information, see When Amazon Web Services creates and resolves health events in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     PercentOfClientLocationImpacted?: Double;
     /**
-     * This is the percentage of how much round-trip time increased during the event compared to typical round-trip time for your application for traffic.  For more information, see  When Amazon Web Services creates and resolves health events in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+     * This is the percentage of how much round-trip time increased during the event compared to typical round-trip time for your application for traffic.  For more information, see When Amazon Web Services creates and resolves health events in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     RoundTripTime?: RoundTripTime;
   }
@@ -519,6 +534,21 @@ declare namespace InternetMonitor {
      */
     P95?: Double;
   }
+  export interface S3Config {
+    /**
+     * The Amazon S3 bucket name.
+     */
+    BucketName?: S3ConfigBucketNameString;
+    /**
+     * The Amazon S3 bucket prefix.
+     */
+    BucketPrefix?: String;
+    /**
+     * The status of publishing Internet Monitor internet measurements to an Amazon S3 bucket.
+     */
+    LogDeliveryStatus?: LogDeliveryStatus;
+  }
+  export type S3ConfigBucketNameString = string;
   export type SetOfARNs = Arn[];
   export type String = string;
   export type SyntheticTimestamp_date_time = Date;
@@ -573,9 +603,13 @@ declare namespace InternetMonitor {
      */
     ClientToken?: String;
     /**
-     * The maximum number of city-network combinations (that is, combinations of a city location and network, such as an ISP) to be monitored for your resources.
+     * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the network or ASN, such as an internet service provider, that clients access the resources through.
      */
     MaxCityNetworksToMonitor?: MaxCityNetworksToMonitor;
+    /**
+     * Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.
+     */
+    InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
   }
   export interface UpdateMonitorOutput {
     /**

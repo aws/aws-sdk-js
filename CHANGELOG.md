@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1347.0-->
+<!--LATEST=2.1348.0-->
 <!--ENTRYINSERT-->
+
+## 2.1348.0
+* feature: InternetMonitor: This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to deliver internet measurements to Amazon S3 buckets as well as CloudWatch Logs.
+* feature: SMS: Deprecating AWS Server Migration Service.
+* feature: SageMakerFeatureStoreRuntime: In this release, you can now chose between soft delete and hard delete when calling the DeleteRecord API, so you have more flexibility when it comes to managing online store data.
 
 ## 2.1347.0
 * feature: Athena: Make DefaultExecutorDpuSize and CoordinatorDpuSize  fields optional  in StartSession
