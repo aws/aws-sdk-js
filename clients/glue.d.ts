@@ -1737,7 +1737,7 @@ declare namespace Glue {
   export type AuditColumnNamesList = ColumnNameString[];
   export interface AuditContext {
     /**
-     * The context for the audit..
+     * A string containing the additional audit context information.
      */
     AdditionalAuditContext?: AuditContextString;
     /**
@@ -2982,7 +2982,7 @@ declare namespace Glue {
      */
     DateColumnStatisticsData?: DateColumnStatisticsData;
     /**
-     * Decimal column statistics data.
+     *  Decimal column statistics data. UnscaledValues within are Base64-encoded binary objects storing big-endian, two's complement representations of the decimal's unscaled value. 
      */
     DecimalColumnStatisticsData?: DecimalColumnStatisticsData;
     /**
@@ -4169,11 +4169,11 @@ declare namespace Glue {
      */
     Command: SessionCommand;
     /**
-     * The number of seconds before request times out. 
+     *  The number of minutes before session times out. Default for Spark ETL jobs is 48 hours (2880 minutes), the maximum session lifetime for this job type. Consult the documentation for other job types. 
      */
     Timeout?: Timeout;
     /**
-     * The number of seconds when idle before request times out. 
+     *  The number of minutes when idle before session times out. Default for Spark ETL jobs is value of Timeout. Consult the documentation for other job types. 
      */
     IdleTimeout?: Timeout;
     /**
@@ -4793,6 +4793,10 @@ declare namespace Glue {
      * The ID of the Data Catalog in which the database resides.
      */
     CatalogId?: CatalogIdString;
+    /**
+     * A FederatedDatabase structure that references an entity outside the Glue Data Catalog.
+     */
+    FederatedDatabase?: FederatedDatabase;
   }
   export interface DatabaseIdentifier {
     /**
@@ -4829,6 +4833,10 @@ declare namespace Glue {
      * A DatabaseIdentifier structure that describes a target database for resource linking.
      */
     TargetDatabase?: DatabaseIdentifier;
+    /**
+     * A FederatedDatabase structure that references an entity outside the Glue Data Catalog.
+     */
+    FederatedDatabase?: FederatedDatabase;
   }
   export type DatabaseList = Database[];
   export type DatabaseName = string;
@@ -5728,6 +5736,31 @@ declare namespace Glue {
     OutputS3Path?: UriString;
   }
   export type ExtendedString = string;
+  export interface FederatedDatabase {
+    /**
+     * A unique identifier for the federated database.
+     */
+    Identifier?: FederationIdentifier;
+    /**
+     * The name of the connection to the external metastore.
+     */
+    ConnectionName?: NameString;
+  }
+  export interface FederatedTable {
+    /**
+     * A unique identifier for the federated table.
+     */
+    Identifier?: FederationIdentifier;
+    /**
+     * A unique identifier for the federated database.
+     */
+    DatabaseIdentifier?: FederationIdentifier;
+    /**
+     * The name of the connection to the external metastore.
+     */
+    ConnectionName?: NameString;
+  }
+  export type FederationIdentifier = string;
   export type FieldName = "CRAWL_ID"|"STATE"|"START_TIME"|"END_TIME"|"DPU_HOUR"|string;
   export type FieldType = string;
   export interface FillMissingValues {
@@ -6018,7 +6051,7 @@ declare namespace Glue {
   }
   export interface GetColumnStatisticsForTableResponse {
     /**
-     * List of ColumnStatistics that failed to be retrieved.
+     * List of ColumnStatistics.
      */
     ColumnStatisticsList?: ColumnStatisticsList;
     /**
@@ -6418,7 +6451,7 @@ declare namespace Glue {
      */
     MaxResults?: CatalogGetterPageSize;
     /**
-     * Allows you to specify that you want to list the databases shared with your account. The allowable values are FOREIGN or ALL.    If set to FOREIGN, will list the databases shared with your account.    If set to ALL, will list the databases shared with your account, as well as the databases in yor local account.   
+     * Allows you to specify that you want to list the databases shared with your account. The allowable values are FEDERATED, FOREIGN or ALL.    If set to FEDERATED, will list the federated databases (referencing an external entity) shared with your account.   If set to FOREIGN, will list the databases shared with your account.    If set to ALL, will list the databases shared with your account, as well as the databases in yor local account.   
      */
     ResourceShareType?: ResourceShareType;
   }
@@ -8018,7 +8051,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate a minimum of 2 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.   For Glue version 2.0 jobs, you cannot instead specify a Maximum capacity. Instead, you should specify a Worker type and the Number of workers.
+     * For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.   For Glue version 2.0 jobs, you cannot instead specify a Maximum capacity. Instead, you should specify a Worker type and the Number of workers.
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -10134,7 +10167,7 @@ declare namespace Glue {
      */
     JobBookmarkEntry?: JobBookmarkEntry;
   }
-  export type ResourceShareType = "FOREIGN"|"ALL"|string;
+  export type ResourceShareType = "FOREIGN"|"ALL"|"FEDERATED"|string;
   export type ResourceType = "JAR"|"FILE"|"ARCHIVE"|string;
   export interface ResourceUri {
     /**
@@ -11822,6 +11855,10 @@ declare namespace Glue {
      * The ID of the table version.
      */
     VersionId?: VersionString;
+    /**
+     * A FederatedTable structure that references an entity outside the Glue Data Catalog.
+     */
+    FederatedTable?: FederatedTable;
   }
   export interface TableError {
     /**

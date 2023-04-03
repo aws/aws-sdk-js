@@ -580,6 +580,30 @@ declare class ServiceCatalog extends Service {
    */
   listTagOptions(callback?: (err: AWSError, data: ServiceCatalog.Types.ListTagOptionsOutput) => void): Request<ServiceCatalog.Types.ListTagOptionsOutput, AWSError>;
   /**
+   *  Notifies the result of the provisioning engine execution. 
+   */
+  notifyProvisionProductEngineWorkflowResult(params: ServiceCatalog.Types.NotifyProvisionProductEngineWorkflowResultInput, callback?: (err: AWSError, data: ServiceCatalog.Types.NotifyProvisionProductEngineWorkflowResultOutput) => void): Request<ServiceCatalog.Types.NotifyProvisionProductEngineWorkflowResultOutput, AWSError>;
+  /**
+   *  Notifies the result of the provisioning engine execution. 
+   */
+  notifyProvisionProductEngineWorkflowResult(callback?: (err: AWSError, data: ServiceCatalog.Types.NotifyProvisionProductEngineWorkflowResultOutput) => void): Request<ServiceCatalog.Types.NotifyProvisionProductEngineWorkflowResultOutput, AWSError>;
+  /**
+   *  Notifies the result of the terminate engine execution. 
+   */
+  notifyTerminateProvisionedProductEngineWorkflowResult(params: ServiceCatalog.Types.NotifyTerminateProvisionedProductEngineWorkflowResultInput, callback?: (err: AWSError, data: ServiceCatalog.Types.NotifyTerminateProvisionedProductEngineWorkflowResultOutput) => void): Request<ServiceCatalog.Types.NotifyTerminateProvisionedProductEngineWorkflowResultOutput, AWSError>;
+  /**
+   *  Notifies the result of the terminate engine execution. 
+   */
+  notifyTerminateProvisionedProductEngineWorkflowResult(callback?: (err: AWSError, data: ServiceCatalog.Types.NotifyTerminateProvisionedProductEngineWorkflowResultOutput) => void): Request<ServiceCatalog.Types.NotifyTerminateProvisionedProductEngineWorkflowResultOutput, AWSError>;
+  /**
+   *  Notifies the result of the update engine execution. 
+   */
+  notifyUpdateProvisionedProductEngineWorkflowResult(params: ServiceCatalog.Types.NotifyUpdateProvisionedProductEngineWorkflowResultInput, callback?: (err: AWSError, data: ServiceCatalog.Types.NotifyUpdateProvisionedProductEngineWorkflowResultOutput) => void): Request<ServiceCatalog.Types.NotifyUpdateProvisionedProductEngineWorkflowResultOutput, AWSError>;
+  /**
+   *  Notifies the result of the update engine execution. 
+   */
+  notifyUpdateProvisionedProductEngineWorkflowResult(callback?: (err: AWSError, data: ServiceCatalog.Types.NotifyUpdateProvisionedProductEngineWorkflowResultOutput) => void): Request<ServiceCatalog.Types.NotifyUpdateProvisionedProductEngineWorkflowResultOutput, AWSError>;
+  /**
    *  Provisions the specified product.   A provisioned product is a resourced instance of a product. For example, provisioning a product that's based on an CloudFormation template launches an CloudFormation stack and its underlying resources. You can check the status of this request using DescribeRecord.   If the request contains a tag key with an empty list of values, there's a tag conflict for that key. Don't include conflicted keys as tags, or this will cause the error "Parameter validation failed: Missing required parameter in Tags[N]:Value".    When provisioning a product that's been added to a portfolio, you must grant your user, group, or role access to the portfolio. For more information, see Granting users access in the Service Catalog User Guide.  
    */
   provisionProduct(params: ServiceCatalog.Types.ProvisionProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
@@ -712,7 +736,7 @@ declare namespace ServiceCatalog {
   export type AcceptLanguage = string;
   export interface AcceptPortfolioShareInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -758,7 +782,7 @@ declare namespace ServiceCatalog {
   }
   export interface AssociatePrincipalWithPortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -766,7 +790,7 @@ declare namespace ServiceCatalog {
      */
     PortfolioId: Id;
     /**
-     * The ARN of the principal (IAM user, role, or group). This field allows an ARN with no accountID if PrincipalType is IAM_PATTERN.  You can associate multiple IAM patterns even if the account has no principal with that name. This is useful in Principal Name Sharing if you want to share a principal without creating it in the account that owns the portfolio. 
+     * The ARN of the principal (user, role, or group). This field allows an ARN with no accountID if PrincipalType is IAM_PATTERN.  You can associate multiple IAM patterns even if the account has no principal with that name. This is useful in Principal Name Sharing if you want to share a principal without creating it in the account that owns the portfolio. 
      */
     PrincipalARN: PrincipalARN;
     /**
@@ -778,7 +802,7 @@ declare namespace ServiceCatalog {
   }
   export interface AssociateProductWithPortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -810,7 +834,7 @@ declare namespace ServiceCatalog {
      */
     ServiceActionId: Id;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -835,7 +859,7 @@ declare namespace ServiceCatalog {
      */
     ServiceActionAssociations: ServiceActionAssociations;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -851,7 +875,7 @@ declare namespace ServiceCatalog {
      */
     ServiceActionAssociations: ServiceActionAssociations;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -944,7 +968,7 @@ declare namespace ServiceCatalog {
   export type CopyOptions = CopyOption[];
   export interface CopyProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -981,7 +1005,7 @@ declare namespace ServiceCatalog {
   export type CopyProductStatus = "SUCCEEDED"|"IN_PROGRESS"|"FAILED"|string;
   export interface CreateConstraintInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1025,7 +1049,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreatePortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1061,7 +1085,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreatePortfolioShareInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1093,7 +1117,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreateProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1161,7 +1185,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreateProvisionedProductPlanInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1229,7 +1253,7 @@ declare namespace ServiceCatalog {
   }
   export interface CreateProvisioningArtifactInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1277,7 +1301,7 @@ declare namespace ServiceCatalog {
      */
     Description?: ServiceActionDescription;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1312,7 +1336,7 @@ declare namespace ServiceCatalog {
   export type DefaultValue = string;
   export interface DeleteConstraintInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1324,7 +1348,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeletePortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1336,7 +1360,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeletePortfolioShareInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1360,7 +1384,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeleteProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1372,7 +1396,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeleteProvisionedProductPlanInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1388,7 +1412,7 @@ declare namespace ServiceCatalog {
   }
   export interface DeleteProvisioningArtifactInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1408,7 +1432,7 @@ declare namespace ServiceCatalog {
      */
     Id: Id;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -1424,7 +1448,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeConstraintInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1448,7 +1472,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeCopyProductStatusInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1472,7 +1496,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribePortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1557,7 +1581,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProductAsAdminInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1597,7 +1621,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1629,7 +1653,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProductViewInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1649,7 +1673,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProvisionedProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1673,7 +1697,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProvisionedProductPlanInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1705,7 +1729,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProvisioningArtifactInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1745,7 +1769,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeProvisioningParametersInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1805,7 +1829,7 @@ declare namespace ServiceCatalog {
   }
   export interface DescribeRecordInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1845,7 +1869,7 @@ declare namespace ServiceCatalog {
      */
     ServiceActionId: Id;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -1861,7 +1885,7 @@ declare namespace ServiceCatalog {
      */
     Id: Id;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -1903,7 +1927,7 @@ declare namespace ServiceCatalog {
   }
   export interface DisassociatePrincipalFromPortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1911,7 +1935,7 @@ declare namespace ServiceCatalog {
      */
     PortfolioId: Id;
     /**
-     * The ARN of the principal (IAM user, role, or group). This field allows an ARN with no accountID if PrincipalType is IAM_PATTERN.
+     * The ARN of the principal (user, role, or group). This field allows an ARN with no accountID if PrincipalType is IAM_PATTERN.
      */
     PrincipalARN: PrincipalARN;
     /**
@@ -1923,7 +1947,7 @@ declare namespace ServiceCatalog {
   }
   export interface DisassociateProductFromPortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -1951,7 +1975,7 @@ declare namespace ServiceCatalog {
      */
     ServiceActionId: Id;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -1973,13 +1997,22 @@ declare namespace ServiceCatalog {
   }
   export interface EnableAWSOrganizationsAccessOutput {
   }
+  export type EngineWorkflowFailureReason = string;
+  export interface EngineWorkflowResourceIdentifier {
+    /**
+     *  The unique key-value pair for a tag that identifies provisioned product resources. 
+     */
+    UniqueTag?: UniqueTagResourceIdentifier;
+  }
+  export type EngineWorkflowStatus = "SUCCEEDED"|"FAILED"|string;
+  export type EngineWorkflowToken = string;
   export type Error = string;
   export type ErrorCode = string;
   export type ErrorDescription = string;
   export type EvaluationType = "STATIC"|"DYNAMIC"|string;
   export interface ExecuteProvisionedProductPlanInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2011,7 +2044,7 @@ declare namespace ServiceCatalog {
      */
     ExecuteToken: IdempotencyToken;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2078,7 +2111,7 @@ declare namespace ServiceCatalog {
   }
   export interface GetProvisionedProductOutputsInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2118,7 +2151,7 @@ declare namespace ServiceCatalog {
   export type IgnoreErrors = boolean;
   export interface ImportAsProvisionedProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2206,7 +2239,7 @@ declare namespace ServiceCatalog {
   export type LaunchPaths = LaunchPath[];
   export interface ListAcceptedPortfolioSharesInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2234,7 +2267,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListBudgetsForResourceInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2262,7 +2295,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListConstraintsForPortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2294,7 +2327,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListLaunchPathsInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2322,7 +2355,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListOrganizationPortfolioAccessInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2354,7 +2387,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPortfolioAccessInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2386,7 +2419,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPortfoliosForProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2414,7 +2447,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPortfoliosInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2438,7 +2471,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListPrincipalsForPortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2466,7 +2499,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListProvisionedProductPlansInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2510,7 +2543,7 @@ declare namespace ServiceCatalog {
      */
     PageToken?: PageToken;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -2526,7 +2559,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListProvisioningArtifactsInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2546,7 +2579,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListRecordHistoryInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2632,7 +2665,7 @@ declare namespace ServiceCatalog {
      */
     PageToken?: PageToken;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }
@@ -2648,7 +2681,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListServiceActionsInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2672,7 +2705,7 @@ declare namespace ServiceCatalog {
   }
   export interface ListStackInstancesForProvisionedProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -2742,6 +2775,90 @@ declare namespace ServiceCatalog {
   export type NoEcho = boolean;
   export type NotificationArn = string;
   export type NotificationArns = NotificationArn[];
+  export interface NotifyProvisionProductEngineWorkflowResultInput {
+    /**
+     *  The encrypted contents of the provisioning engine execution payload that Service Catalog sends after the Terraform product provisioning workflow starts. 
+     */
+    WorkflowToken: EngineWorkflowToken;
+    /**
+     *  The identifier of the record. 
+     */
+    RecordId: Id;
+    /**
+     *  The status of the provisioning engine execution. 
+     */
+    Status: EngineWorkflowStatus;
+    /**
+     *  The reason why the provisioning engine execution failed. 
+     */
+    FailureReason?: EngineWorkflowFailureReason;
+    /**
+     *  The ID for the provisioned product resources that are part of a resource group. 
+     */
+    ResourceIdentifier?: EngineWorkflowResourceIdentifier;
+    /**
+     *  The output of the provisioning engine execution. 
+     */
+    Outputs?: RecordOutputs;
+    /**
+     *  The idempotency token that identifies the provisioning engine execution. 
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface NotifyProvisionProductEngineWorkflowResultOutput {
+  }
+  export interface NotifyTerminateProvisionedProductEngineWorkflowResultInput {
+    /**
+     *  The encrypted contents of the terminate engine execution payload that Service Catalog sends after the Terraform product terminate workflow starts. 
+     */
+    WorkflowToken: EngineWorkflowToken;
+    /**
+     *  The identifier of the record. 
+     */
+    RecordId: Id;
+    /**
+     *  The status of the terminate engine execution. 
+     */
+    Status: EngineWorkflowStatus;
+    /**
+     *  The reason why the terminate engine execution failed. 
+     */
+    FailureReason?: EngineWorkflowFailureReason;
+    /**
+     *  The idempotency token that identifies the terminate engine execution. 
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface NotifyTerminateProvisionedProductEngineWorkflowResultOutput {
+  }
+  export interface NotifyUpdateProvisionedProductEngineWorkflowResultInput {
+    /**
+     *  The encrypted contents of the update engine execution payload that Service Catalog sends after the Terraform product update workflow starts. 
+     */
+    WorkflowToken: EngineWorkflowToken;
+    /**
+     *  The identifier of the record. 
+     */
+    RecordId: Id;
+    /**
+     *  The status of the update engine execution. 
+     */
+    Status: EngineWorkflowStatus;
+    /**
+     *  The reason why the update engine execution failed. 
+     */
+    FailureReason?: EngineWorkflowFailureReason;
+    /**
+     *  The output of the update engine execution. 
+     */
+    Outputs?: RecordOutputs;
+    /**
+     *  The idempotency token that identifies the update engine execution. 
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface NotifyUpdateProvisionedProductEngineWorkflowResultOutput {
+  }
   export type NullableBoolean = boolean;
   export interface OrganizationNode {
     /**
@@ -2856,7 +2973,7 @@ declare namespace ServiceCatalog {
   export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS"|string;
   export interface Principal {
     /**
-     * The ARN of the principal (IAM user, role, or group). This field allows for an ARN with no accountID if the PrincipalType is an IAM_PATTERN. 
+     * The ARN of the principal (user, role, or group). This field allows for an ARN with no accountID if the PrincipalType is an IAM_PATTERN. 
      */
     PrincipalARN?: PrincipalARN;
     /**
@@ -2869,7 +2986,7 @@ declare namespace ServiceCatalog {
   export type Principals = Principal[];
   export type ProductArn = string;
   export type ProductSource = "ACCOUNT"|string;
-  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|string;
+  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|"DEFAULT_CUSTOM"|"TERRAFORM_OPEN_SOURCE"|string;
   export type ProductViewAggregationType = string;
   export interface ProductViewAggregationValue {
     /**
@@ -2968,7 +3085,7 @@ declare namespace ServiceCatalog {
   export type ProviderName = string;
   export interface ProvisionProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -3096,11 +3213,11 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactName?: ProvisioningArtifactName;
     /**
-     * The Amazon Resource Name (ARN) of the IAM user.
+     * The Amazon Resource Name (ARN) of the user.
      */
     UserArn?: UserArn;
     /**
-     * The ARN of the IAM user in the session. This ARN might contain a session ID.
+     * The ARN of the user in the session. This ARN might contain a session ID.
      */
     UserArnSession?: UserArnSession;
   }
@@ -3428,7 +3545,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactMetadata?: ProvisioningArtifactInfo;
   }
-  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|string;
+  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|"DEFAULT_CUSTOM"|"TERRAFORM_OPEN_SOURCE"|string;
   export interface ProvisioningArtifactView {
     /**
      * Summary information about a product view.
@@ -3581,7 +3698,7 @@ declare namespace ServiceCatalog {
   export type Region = string;
   export interface RejectPortfolioShareInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -3696,7 +3813,7 @@ declare namespace ServiceCatalog {
   export type RoleArn = string;
   export interface ScanProvisionedProductsInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -3727,7 +3844,7 @@ declare namespace ServiceCatalog {
   export type SearchFilterValue = string;
   export interface SearchProductsAsAdminInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -3771,7 +3888,7 @@ declare namespace ServiceCatalog {
   }
   export interface SearchProductsInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -3811,7 +3928,7 @@ declare namespace ServiceCatalog {
   }
   export interface SearchProvisionedProductsInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -3868,7 +3985,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactId: Id;
   }
-  export type ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"|"INTERNAL_FAILURE"|"LIMIT_EXCEEDED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|string;
+  export type ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"|"INTERNAL_FAILURE"|"LIMIT_EXCEEDED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|"INVALID_PARAMETER"|string;
   export type ServiceActionAssociationErrorMessage = string;
   export type ServiceActionAssociations = ServiceActionAssociation[];
   export type ServiceActionDefinitionKey = "Name"|"Version"|"AssumeRole"|"Parameters"|string;
@@ -4070,7 +4187,7 @@ declare namespace ServiceCatalog {
      */
     IgnoreErrors?: IgnoreErrors;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -4085,9 +4202,21 @@ declare namespace ServiceCatalog {
     RecordDetail?: RecordDetail;
   }
   export type TotalResultsCount = number;
+  export type UniqueTagKey = string;
+  export interface UniqueTagResourceIdentifier {
+    /**
+     *  A unique key that's attached to a resource. 
+     */
+    Key?: UniqueTagKey;
+    /**
+     *  A unique value that's attached to a resource. 
+     */
+    Value?: UniqueTagValue;
+  }
+  export type UniqueTagValue = string;
   export interface UpdateConstraintInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -4119,7 +4248,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdatePortfolioInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -4159,7 +4288,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdatePortfolioShareInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -4192,7 +4321,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdateProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -4252,7 +4381,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdateProvisionedProductInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -4312,7 +4441,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdateProvisionedProductPropertiesInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -4320,7 +4449,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductId: Id;
     /**
-     * A map that contains the provisioned product properties to be updated. The LAUNCH_ROLE key accepts role ARNs. This key allows an administrator to call UpdateProvisionedProductProperties to update the launch role that is associated with a provisioned product. This role is used when an end user calls a provisioning operation such as UpdateProvisionedProduct, TerminateProvisionedProduct, or ExecuteProvisionedProductServiceAction. Only a role ARN is valid. A user ARN is invalid.  The OWNER key accepts IAM user ARNs, IAM role ARNs, and STS assumed-role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM or STS entity within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
+     * A map that contains the provisioned product properties to be updated. The LAUNCH_ROLE key accepts role ARNs. This key allows an administrator to call UpdateProvisionedProductProperties to update the launch role that is associated with a provisioned product. This role is used when an end user calls a provisioning operation such as UpdateProvisionedProduct, TerminateProvisionedProduct, or ExecuteProvisionedProductServiceAction. Only a role ARN is valid. A user ARN is invalid.  The OWNER key accepts user ARNs, IAM role ARNs, and STS assumed-role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM or STS entity within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
      */
     ProvisionedProductProperties: ProvisionedProductProperties;
     /**
@@ -4348,7 +4477,7 @@ declare namespace ServiceCatalog {
   }
   export interface UpdateProvisioningArtifactInput {
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
     /**
@@ -4453,7 +4582,7 @@ declare namespace ServiceCatalog {
      */
     Description?: ServiceActionDescription;
     /**
-     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     * The language code.    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
   }

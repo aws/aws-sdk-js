@@ -341,6 +341,12 @@
         },
         {
           "shape": "InvalidStateException"
+        },
+        {
+          "shape": "FederationSourceException"
+        },
+        {
+          "shape": "FederationSourceRetryableException"
         }
       ],
       "documentation": "<p>Retrieves partitions in a batch request.</p>"
@@ -811,6 +817,9 @@
         },
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "FederatedResourceAlreadyExistsException"
         }
       ],
       "documentation": "<p>Creates a new database in a Data Catalog.</p>"
@@ -2556,6 +2565,9 @@
         },
         {
           "shape": "GlueEncryptionException"
+        },
+        {
+          "shape": "FederationSourceException"
         }
       ],
       "documentation": "<p>Retrieves the definition of a specified database.</p>"
@@ -2979,6 +2991,12 @@
         },
         {
           "shape": "GlueEncryptionException"
+        },
+        {
+          "shape": "FederationSourceException"
+        },
+        {
+          "shape": "FederationSourceRetryableException"
         }
       ],
       "documentation": "<p>Retrieves information about a specified partition.</p>"
@@ -3047,6 +3065,12 @@
         },
         {
           "shape": "ResourceNotReadyException"
+        },
+        {
+          "shape": "FederationSourceException"
+        },
+        {
+          "shape": "FederationSourceRetryableException"
         }
       ],
       "documentation": "<p>Retrieves information about the partitions in a table.</p>"
@@ -3423,6 +3447,12 @@
         },
         {
           "shape": "ResourceNotReadyException"
+        },
+        {
+          "shape": "FederationSourceException"
+        },
+        {
+          "shape": "FederationSourceRetryableException"
         }
       ],
       "documentation": "<p>Retrieves the <code>Table</code> definition in a Data Catalog for a specified table.</p>"
@@ -3516,6 +3546,12 @@
         },
         {
           "shape": "GlueEncryptionException"
+        },
+        {
+          "shape": "FederationSourceException"
+        },
+        {
+          "shape": "FederationSourceRetryableException"
         }
       ],
       "documentation": "<p>Retrieves the definitions of some or all of the tables in a given <code>Database</code>.</p>"
@@ -3634,6 +3670,12 @@
         },
         {
           "shape": "PermissionTypeMismatchException"
+        },
+        {
+          "shape": "FederationSourceException"
+        },
+        {
+          "shape": "FederationSourceRetryableException"
         }
       ],
       "documentation": "<p>Retrieves partition metadata from the Data Catalog that contains unfiltered metadata.</p> <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetPartition</code>.</p>"
@@ -3668,6 +3710,12 @@
         },
         {
           "shape": "PermissionTypeMismatchException"
+        },
+        {
+          "shape": "FederationSourceException"
+        },
+        {
+          "shape": "FederationSourceRetryableException"
         }
       ],
       "documentation": "<p>Retrieves partition metadata from the Data Catalog that contains unfiltered metadata.</p> <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetPartitions</code>.</p>"
@@ -3702,6 +3750,12 @@
         },
         {
           "shape": "PermissionTypeMismatchException"
+        },
+        {
+          "shape": "FederationSourceException"
+        },
+        {
+          "shape": "FederationSourceRetryableException"
         }
       ],
       "documentation": "<p>Retrieves table metadata from the Data Catalog that contains unfiltered metadata.</p> <p>For IAM authorization, the public IAM action associated with this API is <code>glue:GetTable</code>.</p>"
@@ -6193,7 +6247,7 @@
       "members": {
         "AdditionalAuditContext": {
           "shape": "AuditContextString",
-          "documentation": "<p>The context for the audit..</p>"
+          "documentation": "<p>A string containing the additional audit context information.</p>"
         },
         "RequestedColumns": {
           "shape": "AuditColumnNamesList",
@@ -6204,7 +6258,7 @@
           "documentation": "<p>All columns request for audit.</p>"
         }
       },
-      "documentation": "<p>A structure containing information for audit.</p>"
+      "documentation": "<p>A structure containing the Lake Formation audit context.</p>"
     },
     "AuditContextString": {
       "type": "string",
@@ -8135,7 +8189,7 @@
         },
         "DecimalColumnStatisticsData": {
           "shape": "DecimalColumnStatisticsData",
-          "documentation": "<p>Decimal column statistics data.</p>"
+          "documentation": "<p> Decimal column statistics data. UnscaledValues within are Base64-encoded binary objects storing big-endian, two's complement representations of the decimal's unscaled value. </p>"
         },
         "DoubleColumnStatisticsData": {
           "shape": "DoubleColumnStatisticsData",
@@ -9785,11 +9839,11 @@
         },
         "Timeout": {
           "shape": "Timeout",
-          "documentation": "<p>The number of seconds before request times out. </p>"
+          "documentation": "<p> The number of minutes before session times out. Default for Spark ETL jobs is 48 hours (2880 minutes), the maximum session lifetime for this job type. Consult the documentation for other job types. </p>"
         },
         "IdleTimeout": {
           "shape": "Timeout",
-          "documentation": "<p>The number of seconds when idle before request times out. </p>"
+          "documentation": "<p> The number of minutes when idle before session times out. Default for Spark ETL jobs is value of Timeout. Consult the documentation for other job types. </p>"
         },
         "DefaultArguments": {
           "shape": "OrchestrationArgumentsMap",
@@ -10712,6 +10766,10 @@
         "CatalogId": {
           "shape": "CatalogIdString",
           "documentation": "<p>The ID of the Data Catalog in which the database resides.</p>"
+        },
+        "FederatedDatabase": {
+          "shape": "FederatedDatabase",
+          "documentation": "<p>A <code>FederatedDatabase</code> structure that references an entity outside the Glue Data Catalog.</p>"
         }
       },
       "documentation": "<p>The <code>Database</code> object represents a logical grouping of tables that might reside in a Hive metastore or an RDBMS.</p>"
@@ -10759,6 +10817,10 @@
         "TargetDatabase": {
           "shape": "DatabaseIdentifier",
           "documentation": "<p>A <code>DatabaseIdentifier</code> structure that describes a target database for resource linking.</p>"
+        },
+        "FederatedDatabase": {
+          "shape": "FederatedDatabase",
+          "documentation": "<p>A <code>FederatedDatabase</code> structure that references an entity outside the Glue Data Catalog.</p>"
         }
       },
       "documentation": "<p>The structure used to create or update a database.</p>"
@@ -12205,6 +12267,44 @@
       "type": "string",
       "pattern": "[\\s\\S]*"
     },
+    "FederatedDatabase": {
+      "type": "structure",
+      "members": {
+        "Identifier": {
+          "shape": "FederationIdentifier",
+          "documentation": "<p>A unique identifier for the federated database.</p>"
+        },
+        "ConnectionName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the connection to the external metastore.</p>"
+        }
+      },
+      "documentation": "<p>A database that points to an entity outside the Glue Data Catalog.</p>"
+    },
+    "FederatedTable": {
+      "type": "structure",
+      "members": {
+        "Identifier": {
+          "shape": "FederationIdentifier",
+          "documentation": "<p>A unique identifier for the federated table.</p>"
+        },
+        "DatabaseIdentifier": {
+          "shape": "FederationIdentifier",
+          "documentation": "<p>A unique identifier for the federated database.</p>"
+        },
+        "ConnectionName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the connection to the external metastore.</p>"
+        }
+      },
+      "documentation": "<p>A table that points to an entity outside the Glue Data Catalog.</p>"
+    },
+    "FederationIdentifier": {
+      "type": "string",
+      "max": 512,
+      "min": 1,
+      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
     "FieldName": {
       "type": "string",
       "enum": [
@@ -12706,7 +12806,7 @@
       "members": {
         "ColumnStatisticsList": {
           "shape": "ColumnStatisticsList",
-          "documentation": "<p>List of ColumnStatistics that failed to be retrieved.</p>"
+          "documentation": "<p>List of ColumnStatistics.</p>"
         },
         "Errors": {
           "shape": "ColumnErrors",
@@ -13209,7 +13309,7 @@
         },
         "ResourceShareType": {
           "shape": "ResourceShareType",
-          "documentation": "<p>Allows you to specify that you want to list the databases shared with your account. The allowable values are <code>FOREIGN</code> or <code>ALL</code>. </p> <ul> <li> <p>If set to <code>FOREIGN</code>, will list the databases shared with your account. </p> </li> <li> <p>If set to <code>ALL</code>, will list the databases shared with your account, as well as the databases in yor local account. </p> </li> </ul>"
+          "documentation": "<p>Allows you to specify that you want to list the databases shared with your account. The allowable values are <code>FEDERATED</code>, <code>FOREIGN</code> or <code>ALL</code>. </p> <ul> <li> <p>If set to <code>FEDERATED</code>, will list the federated databases (referencing an external entity) shared with your account.</p> </li> <li> <p>If set to <code>FOREIGN</code>, will list the databases shared with your account. </p> </li> <li> <p>If set to <code>ALL</code>, will list the databases shared with your account, as well as the databases in yor local account. </p> </li> </ul>"
         }
       }
     },
@@ -15488,7 +15588,7 @@
         },
         "MaxCapacity": {
           "shape": "NullableDouble",
-          "documentation": "<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate a minimum of 2 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul> <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>"
+          "documentation": "<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul> <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>"
         },
         "WorkerType": {
           "shape": "WorkerType",
@@ -18737,7 +18837,8 @@
       "type": "string",
       "enum": [
         "FOREIGN",
-        "ALL"
+        "ALL",
+        "FEDERATED"
       ]
     },
     "ResourceType": {
@@ -21200,6 +21301,10 @@
         "VersionId": {
           "shape": "VersionString",
           "documentation": "<p>The ID of the table version.</p>"
+        },
+        "FederatedTable": {
+          "shape": "FederatedTable",
+          "documentation": "<p>A <code>FederatedTable</code> structure that references an entity outside the Glue Data Catalog.</p>"
         }
       },
       "documentation": "<p>Represents a collection of related data organized in columns and rows.</p>"

@@ -1636,6 +1636,10 @@ declare namespace LakeFormation {
      * The identifier for the role that registers the resource.
      */
     RoleArn?: IAMRoleArn;
+    /**
+     * Whether or not the resource is a federated resource.
+     */
+    WithFederation?: NullableBoolean;
   }
   export interface RegisterResourceResponse {
   }
@@ -1707,6 +1711,10 @@ declare namespace LakeFormation {
      * The date and time the resource was last modified.
      */
     LastModified?: LastModifiedTimestamp;
+    /**
+     * Whether or not the resource is a federated resource.
+     */
+    WithFederation?: NullableBoolean;
   }
   export type ResourceInfoList = ResourceInfo[];
   export type ResourceShareList = RAMResourceShareArn[];
@@ -2021,6 +2029,10 @@ declare namespace LakeFormation {
      * The resource ARN.
      */
     ResourceArn: ResourceArnString;
+    /**
+     * Whether or not the resource is a federated resource.
+     */
+    WithFederation?: NullableBoolean;
   }
   export interface UpdateResourceResponse {
   }
