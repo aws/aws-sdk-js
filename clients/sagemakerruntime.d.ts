@@ -80,6 +80,10 @@ declare namespace SageMakerRuntime {
      * The Amazon S3 URI where the inference response payload is stored.
      */
     OutputLocation?: Header;
+    /**
+     * The Amazon S3 URI where the inference failure response payload is stored.
+     */
+    FailureLocation?: Header;
   }
   export interface InvokeEndpointInput {
     /**

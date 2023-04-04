@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1349.0-->
+<!--LATEST=2.1350.0-->
 <!--ENTRYINSERT-->
+
+## 2.1350.0
+* feature: AmplifyUIBuilder: Support StorageField and custom displays for data-bound options in form builder. Support non-string operands for predicates in collections. Support choosing client to get token from.
+* feature: DataExchange: This release updates the value of MaxResults.
+* feature: EC2: C6in, M6in, M6idn, R6in and R6idn bare metal instances are powered by 3rd Generation Intel Xeon Scalable processors and offer up to 200 Gbps of network bandwidth.
+* feature: ElasticInference: Updated public documentation for the Describe and Tagging APIs.
+* feature: SageMaker: Amazon SageMaker Asynchronous Inference now allows customer's to receive failure model responses in S3 and receive success/failure model responses in SNS notifications.
+* feature: SageMakerRuntime: Amazon SageMaker Asynchronous Inference now provides customers a FailureLocation as a response parameter in InvokeEndpointAsync API to capture the model failure responses.
+* feature: WAFV2: This release rolls back association config feature for webACLs that protect CloudFront protections.
 
 ## 2.1349.0
 * feature: Glue: Add support for database-level federation
