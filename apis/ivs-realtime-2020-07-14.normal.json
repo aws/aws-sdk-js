@@ -594,7 +594,8 @@
       "min": 1
     },
     "ParticipantTokenExpirationTime": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
     },
     "ParticipantTokenId": {
       "type": "string"
@@ -606,7 +607,8 @@
       }
     },
     "ParticipantTokenString": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
     },
     "ParticipantTokenUserId": {
       "type": "string",

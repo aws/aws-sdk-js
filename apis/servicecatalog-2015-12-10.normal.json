@@ -5468,7 +5468,6 @@
       "enum": [
         "CLOUD_FORMATION_TEMPLATE",
         "MARKETPLACE",
-        "DEFAULT_CUSTOM",
         "TERRAFORM_OPEN_SOURCE"
       ],
       "max": 8191
@@ -6338,7 +6337,6 @@
         "CLOUD_FORMATION_TEMPLATE",
         "MARKETPLACE_AMI",
         "MARKETPLACE_CAR",
-        "DEFAULT_CUSTOM",
         "TERRAFORM_OPEN_SOURCE"
       ]
     },

@@ -1118,7 +1118,7 @@ declare namespace NetworkFirewall {
      */
     DestinationPort: Port;
   }
-  export type IPAddressType = "DUALSTACK"|"IPV4"|string;
+  export type IPAddressType = "DUALSTACK"|"IPV4"|"IPV6"|string;
   export interface IPSet {
     /**
      * The list of IP addresses and address ranges, in CIDR notation. 

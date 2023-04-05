@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AppRunner",
+        "description": "App Runner adds support for seven new vCPU and memory configurations."
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "This release adds resourceType enums for types released in March 2023."
+    },
+    {
+        "type": "feature",
+        "category": "IVSRealTime",
+        "description": "Fix ParticipantToken ExpirationTime format"
+    },
+    {
+        "type": "feature",
+        "category": "NetworkFirewall",
+        "description": "AWS Network Firewall now supports IPv6-only subnets."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "removed incorrect product type value"
+    }
+]

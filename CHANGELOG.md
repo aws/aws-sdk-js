@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1350.0-->
+<!--LATEST=2.1351.0-->
 <!--ENTRYINSERT-->
+
+## 2.1351.0
+* feature: AppRunner: App Runner adds support for seven new vCPU and memory configurations.
+* feature: ConfigService: This release adds resourceType enums for types released in March 2023.
+* feature: IVSRealTime: Fix ParticipantToken ExpirationTime format
+* feature: NetworkFirewall: AWS Network Firewall now supports IPv6-only subnets.
+* feature: ServiceCatalog: removed incorrect product type value
 
 ## 2.1350.0
 * feature: AmplifyUIBuilder: Support StorageField and custom displays for data-bound options in form builder. Support non-string operands for predicates in collections. Support choosing client to get token from.

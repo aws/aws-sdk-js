@@ -28,11 +28,11 @@ declare class IdentityStore extends Service {
    */
   createGroupMembership(callback?: (err: AWSError, data: IdentityStore.Types.CreateGroupMembershipResponse) => void): Request<IdentityStore.Types.CreateGroupMembershipResponse, AWSError>;
   /**
-   * Creates a new user within the specified identity store.
+   * Creates a user within the specified identity store.
    */
   createUser(params: IdentityStore.Types.CreateUserRequest, callback?: (err: AWSError, data: IdentityStore.Types.CreateUserResponse) => void): Request<IdentityStore.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates a new user within the specified identity store.
+   * Creates a user within the specified identity store.
    */
   createUser(callback?: (err: AWSError, data: IdentityStore.Types.CreateUserResponse) => void): Request<IdentityStore.Types.CreateUserResponse, AWSError>;
   /**
@@ -254,7 +254,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A string containing the name of the group. This value is commonly displayed when the group is referenced.
+     * A string containing the name of the group. This value is commonly displayed when the group is referenced. "Administrator" and "AWSAdministrators" are reserved names and can't be used for users or groups.
      */
     DisplayName?: GroupDisplayName;
     /**
@@ -278,15 +278,15 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
+     * A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store. "Administrator" and "AWSAdministrators" are reserved names and can't be used for users or groups.
      */
     UserName?: UserName;
     /**
-     * An object containing the user's name.
+     * An object containing the name of the user.
      */
     Name?: Name;
     /**
-     * A string containing the user's name. This value is typically formatted for display when the user is referenced. For example, "John Doe."
+     * A string containing the name of the user. This value is typically formatted for display when the user is referenced. For example, "John Doe." 
      */
     DisplayName?: SensitiveStringType;
     /**
@@ -294,7 +294,7 @@ declare namespace IdentityStore {
      */
     NickName?: SensitiveStringType;
     /**
-     * A string containing a URL that may be associated with the user.
+     * A string containing a URL that might be associated with the user.
      */
     ProfileUrl?: SensitiveStringType;
     /**
@@ -310,11 +310,11 @@ declare namespace IdentityStore {
      */
     PhoneNumbers?: PhoneNumbers;
     /**
-     * A string indicating the user's type. Possible values depend on each customer's specific needs, so they are left unspecified.
+     * A string indicating the type of user. Possible values are left unspecified. The value can vary based on your specific use case.
      */
     UserType?: SensitiveStringType;
     /**
-     * A string containing the user's title. Possible values are left unspecified given that they depend on each customer's specific needs.
+     * A string containing the title of the user. Possible values are left unspecified. The value can vary based on your specific use case.
      */
     Title?: SensitiveStringType;
     /**
@@ -322,11 +322,11 @@ declare namespace IdentityStore {
      */
     PreferredLanguage?: SensitiveStringType;
     /**
-     * A string containing the user's geographical region or location.
+     * A string containing the geographical region or location of the user.
      */
     Locale?: SensitiveStringType;
     /**
-     * A string containing the user's time zone.
+     * A string containing the time zone of the user.
      */
     Timezone?: SensitiveStringType;
   }
@@ -461,7 +461,7 @@ declare namespace IdentityStore {
      */
     Name?: Name;
     /**
-     * The user's name value for display.
+     * The display name of the user.
      */
     DisplayName?: SensitiveStringType;
     /**
@@ -473,11 +473,11 @@ declare namespace IdentityStore {
      */
     ProfileUrl?: SensitiveStringType;
     /**
-     * The user's email value.
+     * The email address of the user.
      */
     Emails?: Emails;
     /**
-     * The user's physical address.
+     * The physical address of the user.
      */
     Addresses?: Addresses;
     /**
@@ -485,11 +485,11 @@ declare namespace IdentityStore {
      */
     PhoneNumbers?: PhoneNumbers;
     /**
-     * A string indicating the user's type.
+     * A string indicating the type of user.
      */
     UserType?: SensitiveStringType;
     /**
-     * A string containing the user's title.
+     * A string containing the title of the user.
      */
     Title?: SensitiveStringType;
     /**
@@ -497,7 +497,7 @@ declare namespace IdentityStore {
      */
     PreferredLanguage?: SensitiveStringType;
     /**
-     * A string containing the user's geographical region or location.
+     * A string containing the geographical region or location of the user.
      */
     Locale?: SensitiveStringType;
     /**
@@ -554,7 +554,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For example, a unique GroupDisplayName.
+     * A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid path is displayName.
      */
     AlternateIdentifier: AlternateIdentifier;
   }
@@ -598,7 +598,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For example, a unique UserDisplayName.
+     * A unique identifier for a user or group that is not the primary identifier. This value can be an identifier from an external identity provider (IdP) that is associated with the user, the group, or a unique attribute. For the unique attribute, the only valid paths are userName and emails.value.
      */
     AlternateIdentifier: AlternateIdentifier;
   }
@@ -618,7 +618,7 @@ declare namespace IdentityStore {
      */
     GroupId: ResourceId;
     /**
-     * The group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
+     * The display name value for the group. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
      */
     DisplayName?: GroupDisplayName;
     /**
@@ -912,11 +912,11 @@ declare namespace IdentityStore {
      */
     ExternalIds?: ExternalIds;
     /**
-     * An object containing the user's name.
+     * An object containing the name of the user.
      */
     Name?: Name;
     /**
-     * A string containing the user's name that's formatted for display when the user is referenced. For example, "John Doe."
+     * A string containing the name of the user that is formatted for display when the user is referenced. For example, "John Doe."
      */
     DisplayName?: SensitiveStringType;
     /**
@@ -924,7 +924,7 @@ declare namespace IdentityStore {
      */
     NickName?: SensitiveStringType;
     /**
-     * A string containing a URL that may be associated with the user.
+     * A string containing a URL that might be associated with the user.
      */
     ProfileUrl?: SensitiveStringType;
     /**
@@ -940,11 +940,11 @@ declare namespace IdentityStore {
      */
     PhoneNumbers?: PhoneNumbers;
     /**
-     * A string indicating the user's type. Possible values depend on each customer's specific needs, so they are left unspecified.
+     * A string indicating the type of user. Possible values are left unspecified. The value can vary based on your specific use case.
      */
     UserType?: SensitiveStringType;
     /**
-     * A string containing the user's title. Possible values depend on each customer's specific needs, so they are left unspecified.
+     * A string containing the title of the user. Possible values are left unspecified. The value can vary based on your specific use case.
      */
     Title?: SensitiveStringType;
     /**
@@ -952,11 +952,11 @@ declare namespace IdentityStore {
      */
     PreferredLanguage?: SensitiveStringType;
     /**
-     * A string containing the user's geographical region or location.
+     * A string containing the geographical region or location of the user.
      */
     Locale?: SensitiveStringType;
     /**
-     * A string containing the user's time zone.
+     * A string containing the time zone of the user.
      */
     Timezone?: SensitiveStringType;
     /**
