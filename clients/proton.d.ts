@@ -109,6 +109,22 @@ declare class Proton extends Service {
    */
   createService(callback?: (err: AWSError, data: Proton.Types.CreateServiceOutput) => void): Request<Proton.Types.CreateServiceOutput, AWSError>;
   /**
+   * Create a service instance.
+   */
+  createServiceInstance(params: Proton.Types.CreateServiceInstanceInput, callback?: (err: AWSError, data: Proton.Types.CreateServiceInstanceOutput) => void): Request<Proton.Types.CreateServiceInstanceOutput, AWSError>;
+  /**
+   * Create a service instance.
+   */
+  createServiceInstance(callback?: (err: AWSError, data: Proton.Types.CreateServiceInstanceOutput) => void): Request<Proton.Types.CreateServiceInstanceOutput, AWSError>;
+  /**
+   * Create the Proton Ops configuration file.
+   */
+  createServiceSyncConfig(params: Proton.Types.CreateServiceSyncConfigInput, callback?: (err: AWSError, data: Proton.Types.CreateServiceSyncConfigOutput) => void): Request<Proton.Types.CreateServiceSyncConfigOutput, AWSError>;
+  /**
+   * Create the Proton Ops configuration file.
+   */
+  createServiceSyncConfig(callback?: (err: AWSError, data: Proton.Types.CreateServiceSyncConfigOutput) => void): Request<Proton.Types.CreateServiceSyncConfigOutput, AWSError>;
+  /**
    * Create a service template. The administrator creates a service template to define standardized infrastructure and an optional CI/CD service pipeline. Developers, in turn, select the service template from Proton. If the selected service template includes a service pipeline definition, they provide a link to their source code repository. Proton then deploys and manages the infrastructure defined by the selected service template. For more information, see Proton templates in the Proton User Guide.
    */
   createServiceTemplate(params: Proton.Types.CreateServiceTemplateInput, callback?: (err: AWSError, data: Proton.Types.CreateServiceTemplateOutput) => void): Request<Proton.Types.CreateServiceTemplateOutput, AWSError>;
@@ -188,6 +204,14 @@ declare class Proton extends Service {
    * Delete a service, with its instances and pipeline.  You can't delete a service if it has any service instances that have components attached to them. For more information about components, see Proton components in the Proton User Guide. 
    */
   deleteService(callback?: (err: AWSError, data: Proton.Types.DeleteServiceOutput) => void): Request<Proton.Types.DeleteServiceOutput, AWSError>;
+  /**
+   * Delete the Proton Ops file.
+   */
+  deleteServiceSyncConfig(params: Proton.Types.DeleteServiceSyncConfigInput, callback?: (err: AWSError, data: Proton.Types.DeleteServiceSyncConfigOutput) => void): Request<Proton.Types.DeleteServiceSyncConfigOutput, AWSError>;
+  /**
+   * Delete the Proton Ops file.
+   */
+  deleteServiceSyncConfig(callback?: (err: AWSError, data: Proton.Types.DeleteServiceSyncConfigOutput) => void): Request<Proton.Types.DeleteServiceSyncConfigOutput, AWSError>;
   /**
    * If no other major or minor versions of the service template exist, delete the service template.
    */
@@ -277,11 +301,11 @@ declare class Proton extends Service {
    */
   getRepositorySyncStatus(callback?: (err: AWSError, data: Proton.Types.GetRepositorySyncStatusOutput) => void): Request<Proton.Types.GetRepositorySyncStatusOutput, AWSError>;
   /**
-   * Get counts of Proton resources. For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A resource is stale when it's behind the recommended version of the Proton template that it uses and it needs an update to become current. The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components, environments, and service templates are exceptions—see the components, environments, and serviceTemplates field descriptions. For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account. For more information, see Proton dashboard in the Proton User Guide.
+   * Get counts of Proton resources. For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A resource is stale when it's behind the recommended version of the Proton template that it uses and it needs an update to become current. The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components, environments, and service templates return less information - see the components, environments, and serviceTemplates field descriptions. For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account. For more information, see Proton dashboard in the Proton User Guide.
    */
   getResourcesSummary(params: Proton.Types.GetResourcesSummaryInput, callback?: (err: AWSError, data: Proton.Types.GetResourcesSummaryOutput) => void): Request<Proton.Types.GetResourcesSummaryOutput, AWSError>;
   /**
-   * Get counts of Proton resources. For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A resource is stale when it's behind the recommended version of the Proton template that it uses and it needs an update to become current. The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components, environments, and service templates are exceptions—see the components, environments, and serviceTemplates field descriptions. For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account. For more information, see Proton dashboard in the Proton User Guide.
+   * Get counts of Proton resources. For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A resource is stale when it's behind the recommended version of the Proton template that it uses and it needs an update to become current. The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components, environments, and service templates return less information - see the components, environments, and serviceTemplates field descriptions. For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account. For more information, see Proton dashboard in the Proton User Guide.
    */
   getResourcesSummary(callback?: (err: AWSError, data: Proton.Types.GetResourcesSummaryOutput) => void): Request<Proton.Types.GetResourcesSummaryOutput, AWSError>;
   /**
@@ -300,6 +324,30 @@ declare class Proton extends Service {
    * Get detailed data for a service instance. A service instance is an instantiation of service template and it runs in a specific environment.
    */
   getServiceInstance(callback?: (err: AWSError, data: Proton.Types.GetServiceInstanceOutput) => void): Request<Proton.Types.GetServiceInstanceOutput, AWSError>;
+  /**
+   * Get the status of the synced service instance.
+   */
+  getServiceInstanceSyncStatus(params: Proton.Types.GetServiceInstanceSyncStatusInput, callback?: (err: AWSError, data: Proton.Types.GetServiceInstanceSyncStatusOutput) => void): Request<Proton.Types.GetServiceInstanceSyncStatusOutput, AWSError>;
+  /**
+   * Get the status of the synced service instance.
+   */
+  getServiceInstanceSyncStatus(callback?: (err: AWSError, data: Proton.Types.GetServiceInstanceSyncStatusOutput) => void): Request<Proton.Types.GetServiceInstanceSyncStatusOutput, AWSError>;
+  /**
+   * Get detailed data for the service sync blocker summary.
+   */
+  getServiceSyncBlockerSummary(params: Proton.Types.GetServiceSyncBlockerSummaryInput, callback?: (err: AWSError, data: Proton.Types.GetServiceSyncBlockerSummaryOutput) => void): Request<Proton.Types.GetServiceSyncBlockerSummaryOutput, AWSError>;
+  /**
+   * Get detailed data for the service sync blocker summary.
+   */
+  getServiceSyncBlockerSummary(callback?: (err: AWSError, data: Proton.Types.GetServiceSyncBlockerSummaryOutput) => void): Request<Proton.Types.GetServiceSyncBlockerSummaryOutput, AWSError>;
+  /**
+   * Get detailed information for the service sync configuration.
+   */
+  getServiceSyncConfig(params: Proton.Types.GetServiceSyncConfigInput, callback?: (err: AWSError, data: Proton.Types.GetServiceSyncConfigOutput) => void): Request<Proton.Types.GetServiceSyncConfigOutput, AWSError>;
+  /**
+   * Get detailed information for the service sync configuration.
+   */
+  getServiceSyncConfig(callback?: (err: AWSError, data: Proton.Types.GetServiceSyncConfigOutput) => void): Request<Proton.Types.GetServiceSyncConfigOutput, AWSError>;
   /**
    * Get detailed data for a service template.
    */
@@ -597,6 +645,22 @@ declare class Proton extends Service {
    */
   updateServicePipeline(callback?: (err: AWSError, data: Proton.Types.UpdateServicePipelineOutput) => void): Request<Proton.Types.UpdateServicePipelineOutput, AWSError>;
   /**
+   * Update the service sync blocker by resolving it.
+   */
+  updateServiceSyncBlocker(params: Proton.Types.UpdateServiceSyncBlockerInput, callback?: (err: AWSError, data: Proton.Types.UpdateServiceSyncBlockerOutput) => void): Request<Proton.Types.UpdateServiceSyncBlockerOutput, AWSError>;
+  /**
+   * Update the service sync blocker by resolving it.
+   */
+  updateServiceSyncBlocker(callback?: (err: AWSError, data: Proton.Types.UpdateServiceSyncBlockerOutput) => void): Request<Proton.Types.UpdateServiceSyncBlockerOutput, AWSError>;
+  /**
+   * Update the Proton Ops config file.
+   */
+  updateServiceSyncConfig(params: Proton.Types.UpdateServiceSyncConfigInput, callback?: (err: AWSError, data: Proton.Types.UpdateServiceSyncConfigOutput) => void): Request<Proton.Types.UpdateServiceSyncConfigOutput, AWSError>;
+  /**
+   * Update the Proton Ops config file.
+   */
+  updateServiceSyncConfig(callback?: (err: AWSError, data: Proton.Types.UpdateServiceSyncConfigOutput) => void): Request<Proton.Types.UpdateServiceSyncConfigOutput, AWSError>;
+  /**
    * Update a service template.
    */
   updateServiceTemplate(params: Proton.Types.UpdateServiceTemplateInput, callback?: (err: AWSError, data: Proton.Types.UpdateServiceTemplateOutput) => void): Request<Proton.Types.UpdateServiceTemplateOutput, AWSError>;
@@ -730,6 +794,8 @@ declare namespace Proton {
   }
   export type Arn = string;
   export type AwsAccountId = string;
+  export type BlockerStatus = "ACTIVE"|"RESOLVED"|string;
+  export type BlockerType = "AUTOMATED"|string;
   export type Boolean = boolean;
   export interface CancelComponentDeploymentInput {
     /**
@@ -832,6 +898,10 @@ declare namespace Proton {
      */
     environmentName: ResourceName;
     /**
+     * The last token the client requested.
+     */
+    lastClientRequestToken?: String;
+    /**
      * The time when a deployment of the component was last attempted.
      */
     lastDeploymentAttemptedAt?: Timestamp;
@@ -915,7 +985,7 @@ declare namespace Proton {
      */
     components?: ResourceCountsSummary;
     /**
-     * The total number of environment templates in the Amazon Web Services account.
+     * The total number of environment templates in the Amazon Web Services account. The environmentTemplates object will only contain total members.
      */
     environmentTemplates?: ResourceCountsSummary;
     /**
@@ -940,6 +1010,10 @@ declare namespace Proton {
     services?: ResourceCountsSummary;
   }
   export interface CreateComponentInput {
+    /**
+     * The client token for the created component.
+     */
+    clientToken?: ClientToken;
     /**
      * An optional customer-provided description of the component.
      */
@@ -1209,11 +1283,75 @@ declare namespace Proton {
      */
     templateName: ResourceName;
   }
+  export interface CreateServiceInstanceInput {
+    /**
+     * The client token of the service instance to create.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The name of the service instance to create.
+     */
+    name: ResourceName;
+    /**
+     * The name of the service the service instance is added to.
+     */
+    serviceName: ResourceName;
+    /**
+     * The spec for the service instance you want to create.
+     */
+    spec: SpecContents;
+    /**
+     * An optional list of metadata items that you can associate with the Proton service instance. A tag is a key-value pair. For more information, see Proton resources and tagging in the Proton User Guide.
+     */
+    tags?: TagList;
+    /**
+     * To create a new major and minor version of the service template, exclude major Version.
+     */
+    templateMajorVersion?: TemplateVersionPart;
+    /**
+     * To create a new minor version of the service template, include a major Version.
+     */
+    templateMinorVersion?: TemplateVersionPart;
+  }
+  export interface CreateServiceInstanceOutput {
+    /**
+     * The detailed data of the service instance being created.
+     */
+    serviceInstance: ServiceInstance;
+  }
   export interface CreateServiceOutput {
     /**
      * The service detail data that's returned by Proton.
      */
     service: Service;
+  }
+  export interface CreateServiceSyncConfigInput {
+    /**
+     * The repository branch for your Proton Ops file.
+     */
+    branch: GitBranchName;
+    /**
+     * The path to the Proton Ops file.
+     */
+    filePath: OpsFilePath;
+    /**
+     * The repository name.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The provider type for your repository.
+     */
+    repositoryProvider: RepositoryProvider;
+    /**
+     * The name of the service the Proton Ops file is for.
+     */
+    serviceName: ResourceName;
+  }
+  export interface CreateServiceSyncConfigOutput {
+    /**
+     * The detailed data of the Proton Ops file.
+     */
+    serviceSyncConfig?: ServiceSyncConfig;
   }
   export interface CreateServiceTemplateInput {
     /**
@@ -1414,6 +1552,18 @@ declare namespace Proton {
      * The detailed data of the service being deleted.
      */
     service?: Service;
+  }
+  export interface DeleteServiceSyncConfigInput {
+    /**
+     * The name of the service that you want to delete the service sync configuration for.
+     */
+    serviceName: ResourceName;
+  }
+  export interface DeleteServiceSyncConfigOutput {
+    /**
+     * The detailed data for the service sync config.
+     */
+    serviceSyncConfig?: ServiceSyncConfig;
   }
   export interface DeleteServiceTemplateInput {
     /**
@@ -2021,7 +2171,7 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * The name of the service that the service instance belongs to.
+     * The name of the service that you want the service instance input for.
      */
     serviceName: ResourceName;
   }
@@ -2031,11 +2181,63 @@ declare namespace Proton {
      */
     serviceInstance: ServiceInstance;
   }
+  export interface GetServiceInstanceSyncStatusInput {
+    /**
+     * The name of the service instance that you want the sync status input for.
+     */
+    serviceInstanceName: ResourceName;
+    /**
+     * The name of the service that the service instance belongs to.
+     */
+    serviceName: ResourceName;
+  }
+  export interface GetServiceInstanceSyncStatusOutput {
+    /**
+     * The service instance sync desired state that's returned by Proton
+     */
+    desiredState?: Revision;
+    /**
+     * The detailed data of the latest successful sync with the service instance.
+     */
+    latestSuccessfulSync?: ResourceSyncAttempt;
+    /**
+     * The detailed data of the latest sync with the service instance.
+     */
+    latestSync?: ResourceSyncAttempt;
+  }
   export interface GetServiceOutput {
     /**
      * The detailed data of the requested service.
      */
     service?: Service;
+  }
+  export interface GetServiceSyncBlockerSummaryInput {
+    /**
+     * The name of the service instance that you want to get the service sync blocker summary for. If given bothe the instance name and the service name, only the instance is blocked.
+     */
+    serviceInstanceName?: ResourceName;
+    /**
+     * The name of the service that you want to get the service sync blocker summary for. If given only the service name, all instances are blocked.
+     */
+    serviceName: ResourceName;
+  }
+  export interface GetServiceSyncBlockerSummaryOutput {
+    /**
+     * The detailed data of the requested service sync blocker summary.
+     */
+    serviceSyncBlockerSummary?: ServiceSyncBlockerSummary;
+  }
+  export interface GetServiceSyncConfigInput {
+    /**
+     * The name of the service that you want to get the service sync configuration for.
+     */
+    serviceName: ResourceName;
+  }
+  export interface GetServiceSyncConfigOutput {
+    /**
+     * The detailed data of the requested service sync configuration.
+     */
+    serviceSyncConfig?: ServiceSyncConfig;
   }
   export interface GetServiceTemplateInput {
     /**
@@ -2115,6 +2317,7 @@ declare namespace Proton {
   }
   export type GitBranchName = string;
   export type Integer = number;
+  export type LatestSyncBlockers = SyncBlocker[];
   export interface ListComponentOutputsInput {
     /**
      * The name of the component whose outputs you want.
@@ -2637,6 +2840,7 @@ declare namespace Proton {
   export type NotifyResourceDeploymentStatusChangeInputStatusMessageString = string;
   export interface NotifyResourceDeploymentStatusChangeOutput {
   }
+  export type OpsFilePath = string;
   export interface Output {
     /**
      * The output key.
@@ -2744,6 +2948,10 @@ declare namespace Proton {
      * The Amazon Resource Name (ARN) of the linked repository.
      */
     arn: RepositoryArn;
+    /**
+     * The Amazon Resource Name (ARN) of the of your connection that connects Proton to your repository.
+     */
+    connectionArn: Arn;
     /**
      * The repository name.
      */
@@ -2992,6 +3200,10 @@ declare namespace Proton {
      */
     environmentName: ResourceName;
     /**
+     * The last client request token received.
+     */
+    lastClientRequestToken?: String;
+    /**
      * The time when a deployment of the service instance was last attempted.
      */
     lastDeploymentAttemptedAt: Timestamp;
@@ -3154,6 +3366,42 @@ declare namespace Proton {
     templateName: ResourceName;
   }
   export type ServiceSummaryList = ServiceSummary[];
+  export interface ServiceSyncBlockerSummary {
+    /**
+     * The latest active blockers for the synced service.
+     */
+    latestBlockers?: LatestSyncBlockers;
+    /**
+     * The name of the service instance that you want sync your service configuration with.
+     */
+    serviceInstanceName?: String;
+    /**
+     * The name of the service that you want to get the sync blocker summary for. If given a service instance name and a service name, it will return the blockers only applying to the instance that is blocked. If given only a service name, it will return the blockers that apply to all of the instances. In order to get the blockers for a single instance, you will need to make two distinct calls, one to get the sync blocker summary for the service and the other to get the sync blocker for the service instance.
+     */
+    serviceName: String;
+  }
+  export interface ServiceSyncConfig {
+    /**
+     * The name of the code repository branch that holds the service code Proton will sync with.
+     */
+    branch: GitBranchName;
+    /**
+     * The file path to the service sync configuration file.
+     */
+    filePath: OpsFilePath;
+    /**
+     * The name of the code repository that holds the service code Proton will sync with.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The name of the repository provider that holds the repository Proton will sync with.
+     */
+    repositoryProvider: RepositoryProvider;
+    /**
+     * The name of the service that the service instance is added to.
+     */
+    serviceName: ResourceName;
+  }
   export interface ServiceTemplate {
     /**
      * The Amazon Resource Name (ARN) of the service template.
@@ -3333,7 +3581,52 @@ declare namespace Proton {
   export type StatusMessage = string;
   export type String = string;
   export type Subdirectory = string;
-  export type SyncType = "TEMPLATE_SYNC"|string;
+  export interface SyncBlocker {
+    /**
+     * The contexts for the sync blocker.
+     */
+    contexts?: SyncBlockerContexts;
+    /**
+     * The time when the sync blocker was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The reason why the sync blocker was created.
+     */
+    createdReason: String;
+    /**
+     * The ID of the sync blocker.
+     */
+    id: String;
+    /**
+     * The time the sync blocker was resolved.
+     */
+    resolvedAt?: Timestamp;
+    /**
+     * The reason the sync blocker was resolved.
+     */
+    resolvedReason?: String;
+    /**
+     * The status of the sync blocker.
+     */
+    status: BlockerStatus;
+    /**
+     * The type of the sync blocker.
+     */
+    type: BlockerType;
+  }
+  export interface SyncBlockerContext {
+    /**
+     * The key for the sync blocker context.
+     */
+    key: String;
+    /**
+     * The value of the sync blocker context.
+     */
+    value: String;
+  }
+  export type SyncBlockerContexts = SyncBlockerContext[];
+  export type SyncType = "TEMPLATE_SYNC"|"SERVICE_SYNC"|string;
   export interface Tag {
     /**
      * The key of the resource tag.
@@ -3436,6 +3729,10 @@ declare namespace Proton {
     accountSettings: AccountSettings;
   }
   export interface UpdateComponentInput {
+    /**
+     * The client token for the updated component.
+     */
+    clientToken?: ClientToken;
     /**
      * The deployment type. It defines the mode for updating a component, as follows:     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated. You can only specify description in this mode.     CURRENT_VERSION  In this mode, the component is deployed and updated with the new serviceSpec, templateSource, and/or type that you provide. Only requested parameters are updated.  
      */
@@ -3611,6 +3908,10 @@ declare namespace Proton {
   }
   export interface UpdateServiceInstanceInput {
     /**
+     * The client token of the service instance to update.
+     */
+    clientToken?: ClientToken;
+    /**
      * The deployment type. It defines the mode for updating a service instance, as follows:     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the service instance is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include major or minor version parameters when you use this deployment type.     MINOR_VERSION  In this mode, the service instance is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the service instance is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can specify a different major version that's higher than the major version in use and a minor version.  
      */
     deploymentType: DeploymentUpdateType;
@@ -3674,6 +3975,58 @@ declare namespace Proton {
      * The pipeline details that are returned by Proton.
      */
     pipeline: ServicePipeline;
+  }
+  export interface UpdateServiceSyncBlockerInput {
+    /**
+     * The ID of the service sync blocker.
+     */
+    id: String;
+    /**
+     * The reason the service sync blocker was resolved.
+     */
+    resolvedReason: String;
+  }
+  export interface UpdateServiceSyncBlockerOutput {
+    /**
+     * The name of the service instance that you want to update the service sync blocker for.
+     */
+    serviceInstanceName?: ResourceName;
+    /**
+     * The name of the service that you want to update the service sync blocker for.
+     */
+    serviceName: ResourceName;
+    /**
+     * The detailed data on the service sync blocker that was updated.
+     */
+    serviceSyncBlocker: SyncBlocker;
+  }
+  export interface UpdateServiceSyncConfigInput {
+    /**
+     * The name of the code repository branch where the Proton Ops file is found.
+     */
+    branch: GitBranchName;
+    /**
+     * The path to the Proton Ops file.
+     */
+    filePath: OpsFilePath;
+    /**
+     * The name of the repository where the Proton Ops file is found.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The name of the repository provider where the Proton Ops file is found.
+     */
+    repositoryProvider: RepositoryProvider;
+    /**
+     * The name of the service the Proton Ops file is for.
+     */
+    serviceName: ResourceName;
+  }
+  export interface UpdateServiceSyncConfigOutput {
+    /**
+     * The detailed data of the Proton Ops file.
+     */
+    serviceSyncConfig?: ServiceSyncConfig;
   }
   export interface UpdateServiceTemplateInput {
     /**

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1351.0-->
+<!--LATEST=2.1352.0-->
 <!--ENTRYINSERT-->
+
+## 2.1352.0
+* feature: CloudFormation: Including UPDATE_COMPLETE as a failed status for DeleteStack waiter.
+* feature: GreengrassV2: Add support for SUCCEEDED value in coreDeviceExecutionStatus field. Documentation updates for Greengrass V2.
+* feature: Proton: This release adds support for the AWS Proton service sync feature. Service sync enables managing an AWS Proton service (creating and updating instances) and all of it's corresponding service instances from a Git repository.
 
 ## 2.1351.0
 * feature: AppRunner: App Runner adds support for seven new vCPU and memory configurations.

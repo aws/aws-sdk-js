@@ -833,7 +833,7 @@ declare namespace GreengrassV2 {
      */
     targetArn: TargetARN;
     /**
-     * The status of the deployment job on the Greengrass core device.
+     * The status of the deployment job on the Greengrass core device.    IN_PROGRESS – The deployment job is running.    QUEUED – The deployment job is in the job queue and waiting to run.    FAILED – The deployment failed. For more information, see the statusDetails field.    COMPLETED – The deployment to an IoT thing was completed successfully.    TIMED_OUT – The deployment didn't complete in the allotted time.     CANCELED – The deployment was canceled by the user.    REJECTED – The deployment was rejected. For more information, see the statusDetails field.    SUCCEEDED – The deployment to an IoT thing group was completed successfully.  
      */
     coreDeviceExecutionStatus: EffectiveDeploymentExecutionStatus;
     /**
@@ -857,7 +857,7 @@ declare namespace GreengrassV2 {
   export type EffectiveDeploymentErrorStack = EffectiveDeploymentErrorCode[];
   export type EffectiveDeploymentErrorType = string;
   export type EffectiveDeploymentErrorTypeList = EffectiveDeploymentErrorType[];
-  export type EffectiveDeploymentExecutionStatus = "IN_PROGRESS"|"QUEUED"|"FAILED"|"COMPLETED"|"TIMED_OUT"|"CANCELED"|"REJECTED"|string;
+  export type EffectiveDeploymentExecutionStatus = "IN_PROGRESS"|"QUEUED"|"FAILED"|"COMPLETED"|"TIMED_OUT"|"CANCELED"|"REJECTED"|"SUCCEEDED"|string;
   export interface EffectiveDeploymentStatusDetails {
     /**
      * Contains an ordered list of short error codes that range from the most generic error to the most specific one. The error codes describe the reason for failure whenever the coreDeviceExecutionStatus is in a failed state. The response will be an empty list if there is no error.
@@ -1066,11 +1066,11 @@ declare namespace GreengrassV2 {
      */
     lastStatusChangeTimestamp?: Timestamp;
     /**
-     * The last time the Greengrass core device sent a message containing a certain component to the Amazon Web Services Cloud. A component does not need to see a state change for this field to update.
+     * The last time the Greengrass core device sent a message containing a component's state to the Amazon Web Services Cloud. A component does not need to see a state change for this field to update.
      */
     lastReportedTimestamp?: Timestamp;
     /**
-     * The most recent deployment source that brought the component to the Greengrass core device. For a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for local deployments it will be LOCAL.
+     * The most recent deployment source that brought the component to the Greengrass core device. For a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for local deployments it will be LOCAL.  Any deployment will attempt to reinstall currently broken components on the device, which will update the last installation source. 
      */
     lastInstallationSource?: NonEmptyString;
     /**
