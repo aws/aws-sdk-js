@@ -5,6 +5,7 @@ import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
+import {EventStream} from '../lib/event-stream/event-stream';
 import {Readable} from 'stream';
 interface Blob {}
 declare class Lambda extends Service {
@@ -46,11 +47,11 @@ declare class Lambda extends Service {
    */
   createCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.CreateCodeSigningConfigResponse) => void): Request<Lambda.Types.CreateCodeSigningConfigResponse, AWSError>;
   /**
-   * Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka    The following error handling options are available only for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError – If the function returns an error, split the batch in two and retry.    DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor – Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka   
+   * Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka      Amazon DocumentDB    The following error handling options are available only for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError – If the function returns an error, split the batch in two and retry.    DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor – Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka      Amazon DocumentDB   
    */
   createEventSourceMapping(params: Lambda.Types.CreateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka    The following error handling options are available only for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError – If the function returns an error, split the batch in two and retry.    DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor – Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka   
+   * Creates a mapping between an event source and an Lambda function. Lambda reads items from the event source and invokes the function. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka      Amazon DocumentDB    The following error handling options are available only for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError – If the function returns an error, split the batch in two and retry.    DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor – Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka      Amazon DocumentDB   
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -294,6 +295,14 @@ declare class Lambda extends Service {
    */
   invokeAsync(callback?: (err: AWSError, data: Lambda.Types.InvokeAsyncResponse) => void): Request<Lambda.Types.InvokeAsyncResponse, AWSError>;
   /**
+   * Configure your Lambda functions to stream response payloads back to clients. For more information, see Configuring a Lambda function to stream responses.
+   */
+  invokeWithResponseStream(params: Lambda.Types.InvokeWithResponseStreamRequest, callback?: (err: AWSError, data: Lambda.Types.InvokeWithResponseStreamResponse) => void): Request<Lambda.Types.InvokeWithResponseStreamResponse, AWSError>;
+  /**
+   * Configure your Lambda functions to stream response payloads back to clients. For more information, see Configuring a Lambda function to stream responses.
+   */
+  invokeWithResponseStream(callback?: (err: AWSError, data: Lambda.Types.InvokeWithResponseStreamResponse) => void): Request<Lambda.Types.InvokeWithResponseStreamResponse, AWSError>;
+  /**
    * Returns a list of aliases for a Lambda function.
    */
   listAliases(params: Lambda.Types.ListAliasesRequest, callback?: (err: AWSError, data: Lambda.Types.ListAliasesResponse) => void): Request<Lambda.Types.ListAliasesResponse, AWSError>;
@@ -494,11 +503,11 @@ declare class Lambda extends Service {
    */
   updateCodeSigningConfig(callback?: (err: AWSError, data: Lambda.Types.UpdateCodeSigningConfigResponse) => void): Request<Lambda.Types.UpdateCodeSigningConfigResponse, AWSError>;
   /**
-   * Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka    The following error handling options are available only for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError – If the function returns an error, split the batch in two and retry.    DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor – Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka   
+   * Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka      Amazon DocumentDB    The following error handling options are available only for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError – If the function returns an error, split the batch in two and retry.    DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor – Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka      Amazon DocumentDB   
    */
   updateEventSourceMapping(params: Lambda.Types.UpdateEventSourceMappingRequest, callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka    The following error handling options are available only for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError – If the function returns an error, split the batch in two and retry.    DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor – Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka   
+   * Updates an event source mapping. You can change the function that Lambda invokes, or pause invocation and resume later from the same location. For details about how to configure different event sources, see the following topics.      Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka      Amazon DocumentDB    The following error handling options are available only for stream sources (DynamoDB and Kinesis):    BisectBatchOnFunctionError – If the function returns an error, split the batch in two and retry.    DestinationConfig – Send discarded records to an Amazon SQS queue or Amazon SNS topic.    MaximumRecordAgeInSeconds – Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires    MaximumRetryAttempts – Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.    ParallelizationFactor – Process multiple batches from each shard concurrently.   For information about which configuration parameters apply to each event source, see the following topics.     Amazon DynamoDB Streams      Amazon Kinesis      Amazon SQS      Amazon MQ and RabbitMQ      Amazon MSK      Apache Kafka      Amazon DocumentDB   
    */
   updateEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
@@ -882,7 +891,7 @@ declare namespace Lambda {
   }
   export interface CreateEventSourceMappingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis – The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams – The ARN of the stream.    Amazon Simple Queue Service – The ARN of the queue.    Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.    Amazon MQ – The ARN of the broker.  
+     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis – The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams – The ARN of the stream.    Amazon Simple Queue Service – The ARN of the queue.    Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.    Amazon MQ – The ARN of the broker.    Amazon DocumentDB – The ARN of the DocumentDB change stream.  
      */
     EventSourceArn?: Arn;
     /**
@@ -894,7 +903,7 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis – Default 100. Max 10,000.    Amazon DynamoDB Streams – Default 100. Max 10,000.    Amazon Simple Queue Service – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka – Default 100. Max 10,000.    Self-managed Apache Kafka – Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) – Default 100. Max 10,000.  
+     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis – Default 100. Max 10,000.    Amazon DynamoDB Streams – Default 100. Max 10,000.    Amazon Simple Queue Service – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka – Default 100. Max 10,000.    Self-managed Apache Kafka – Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) – Default 100. Max 10,000.    DocumentDB – Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
     /**
@@ -902,15 +911,15 @@ declare namespace Lambda {
      */
     FilterCriteria?: FilterCriteria;
     /**
-     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For streams and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
+     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For streams and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
-     * (Streams only) The number of batches to process from each shard concurrently.
+     * (Kinesis and DynamoDB Streams only) The number of batches to process from each shard concurrently.
      */
     ParallelizationFactor?: ParallelizationFactor;
     /**
-     * The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. AT_TIMESTAMP is supported only for Amazon Kinesis streams.
+     * The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. AT_TIMESTAMP is supported only for Amazon Kinesis streams and Amazon DocumentDB.
      */
     StartingPosition?: EventSourcePosition;
     /**
@@ -918,23 +927,23 @@ declare namespace Lambda {
      */
     StartingPositionTimestamp?: _Date;
     /**
-     * (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+     * (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard Amazon SNS topic destination for discarded records.
      */
     DestinationConfig?: DestinationConfig;
     /**
-     * (Streams only) Discard records older than the specified age. The default value is infinite (-1).
+     * (Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is infinite (-1).
      */
     MaximumRecordAgeInSeconds?: MaximumRecordAgeInSeconds;
     /**
-     * (Streams only) If the function returns an error, split the batch in two and retry.
+     * (Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry.
      */
     BisectBatchOnFunctionError?: BisectBatchOnFunctionError;
     /**
-     * (Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.
+     * (Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
     /**
-     * (Streams only) The duration in seconds of a processing window. The range is between 1 second and 900 seconds.
+     * (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
@@ -954,7 +963,7 @@ declare namespace Lambda {
      */
     SelfManagedEventSource?: SelfManagedEventSource;
     /**
-     * (Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.
+     * (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type enums applied to the event source mapping.
      */
     FunctionResponseTypes?: FunctionResponseTypeList;
     /**
@@ -1085,6 +1094,10 @@ declare namespace Lambda {
      * The cross-origin resource sharing (CORS) settings for your function URL.
      */
     Cors?: Cors;
+    /**
+     * Use one of the following options:    BUFFERED – This is the default option. Lambda invokes your function using the Invoke API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.    RESPONSE_STREAM – Your function streams payload results as they become available. Lambda invokes your function using the InvokeWithResponseStream API operation. The maximum response payload size is 20 MB, however, you can request a quota increase.  
+     */
+    InvokeMode?: InvokeMode;
   }
   export interface CreateFunctionUrlConfigResponse {
     /**
@@ -1107,6 +1120,10 @@ declare namespace Lambda {
      * When the function URL was created, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     CreationTime: Timestamp;
+    /**
+     * Use one of the following options:    BUFFERED – This is the default option. Lambda invokes your function using the Invoke API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.    RESPONSE_STREAM – Your function streams payload results as they become available. Lambda invokes your function using the InvokeWithResponseStream API operation. The maximum response payload size is 20 MB, however, you can request a quota increase.  
+     */
+    InvokeMode?: InvokeMode;
   }
   export type DatabaseName = string;
   export type _Date = Date;
@@ -1275,7 +1292,7 @@ declare namespace Lambda {
      */
     UUID?: String;
     /**
-     * The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. AT_TIMESTAMP is supported only for Amazon Kinesis streams.
+     * The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. AT_TIMESTAMP is supported only for Amazon Kinesis streams and Amazon DocumentDB.
      */
     StartingPosition?: EventSourcePosition;
     /**
@@ -1287,11 +1304,11 @@ declare namespace Lambda {
      */
     BatchSize?: BatchSize;
     /**
-     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For streams and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
+     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For streams and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
-     * (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
+     * (Kinesis and DynamoDB Streams only) The number of batches to process concurrently from each shard. The default value is 1.
      */
     ParallelizationFactor?: ParallelizationFactor;
     /**
@@ -1323,7 +1340,7 @@ declare namespace Lambda {
      */
     StateTransitionReason?: String;
     /**
-     * (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+     * (Kinesis and DynamoDB Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
      */
     DestinationConfig?: DestinationConfig;
     /**
@@ -1343,23 +1360,23 @@ declare namespace Lambda {
      */
     SelfManagedEventSource?: SelfManagedEventSource;
     /**
-     * (Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records. 
+     * (Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records. 
      */
     MaximumRecordAgeInSeconds?: MaximumRecordAgeInSeconds;
     /**
-     * (Streams only) If the function returns an error, split the batch in two and retry. The default value is false.
+     * (Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.
      */
     BisectBatchOnFunctionError?: BisectBatchOnFunctionError;
     /**
-     * (Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.
+     * (Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
     /**
-     * (Streams only) The duration in seconds of a processing window. The range is 1–900 seconds.
+     * (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
-     * (Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.
+     * (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type enums applied to the event source mapping.
      */
     FunctionResponseTypes?: FunctionResponseTypeList;
     /**
@@ -1610,7 +1627,7 @@ declare namespace Lambda {
      */
     MaximumEventAgeInSeconds?: MaximumEventAgeInSeconds;
     /**
-     * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of an SQS queue.    Topic - The ARN of an SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
+     * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of a standard SQS queue.    Topic - The ARN of a standard SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
      */
     DestinationConfig?: DestinationConfig;
   }
@@ -1646,6 +1663,10 @@ declare namespace Lambda {
      * The type of authentication that your function URL uses. Set to AWS_IAM if you want to restrict access to authenticated users only. Set to NONE if you want to bypass IAM authentication to create a public endpoint. For more information, see Security and auth model for Lambda function URLs.
      */
     AuthType: FunctionUrlAuthType;
+    /**
+     * Use one of the following options:    BUFFERED – This is the default option. Lambda invokes your function using the Invoke API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.    RESPONSE_STREAM – Your function streams payload results as they become available. Lambda invokes your function using the InvokeWithResponseStream API operation. The maximum response payload size is 20 MB, however, you can request a quota increase.  
+     */
+    InvokeMode?: InvokeMode;
   }
   export type FunctionUrlConfigList = FunctionUrlConfig[];
   export type FunctionUrlQualifier = string;
@@ -1801,6 +1822,10 @@ declare namespace Lambda {
      * When the function URL configuration was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     LastModifiedTime: Timestamp;
+    /**
+     * Use one of the following options:    BUFFERED – This is the default option. Lambda invokes your function using the Invoke API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.    RESPONSE_STREAM – Your function streams payload results as they become available. Lambda invokes your function using the InvokeWithResponseStream API operation. The maximum response payload size is 20 MB, however, you can request a quota increase.  
+     */
+    InvokeMode?: InvokeMode;
   }
   export interface GetLayerVersionByArnRequest {
     /**
@@ -2060,6 +2085,72 @@ declare namespace Lambda {
      */
     Status?: HttpStatus;
   }
+  export type InvokeMode = "BUFFERED"|"RESPONSE_STREAM"|string;
+  export interface InvokeResponseStreamUpdate {
+    /**
+     * Data returned by your Lambda function.
+     */
+    Payload?: Buffer;
+  }
+  export interface InvokeWithResponseStreamCompleteEvent {
+    /**
+     * An error code.
+     */
+    ErrorCode?: String;
+    /**
+     * The details of any returned error.
+     */
+    ErrorDetails?: String;
+    /**
+     * The last 4 KB of the execution log, which is base64-encoded.
+     */
+    LogResult?: String;
+  }
+  export interface InvokeWithResponseStreamRequest {
+    /**
+     * The name of the Lambda function.  Name formats     Function name – my-function.    Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.    Partial ARN – 123456789012:function:my-function.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     */
+    FunctionName: NamespacedFunctionName;
+    /**
+     * Use one of the following options:    RequestResponse (default) – Invoke the function synchronously. Keep the connection open until the function returns a response or times out. The API operation response includes the function response and additional data.    DryRun – Validate parameter values and verify that the IAM user or role has permission to invoke the function.  
+     */
+    InvocationType?: ResponseStreamingInvocationType;
+    /**
+     * Set to Tail to include the execution log in the response. Applies to synchronously invoked functions only.
+     */
+    LogType?: LogType;
+    /**
+     * Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.
+     */
+    ClientContext?: String;
+    /**
+     * The alias name.
+     */
+    Qualifier?: Qualifier;
+    /**
+     * The JSON that you want to provide to your Lambda function as input. You can enter the JSON directly. For example, --payload '{ "key": "value" }'. You can also specify a file path. For example, --payload file://payload.json.
+     */
+    Payload?: _Blob;
+  }
+  export interface InvokeWithResponseStreamResponse {
+    /**
+     * For a successful request, the HTTP status code is in the 200 range. For the RequestResponse invocation type, this status code is 200. For the DryRun invocation type, this status code is 204.
+     */
+    StatusCode?: Integer;
+    /**
+     * The version of the function that executed. When you invoke a function with an alias, this indicates which version the alias resolved to.
+     */
+    ExecutedVersion?: Version;
+    /**
+     * The stream of response payloads.
+     */
+    EventStream?: InvokeWithResponseStreamResponseEvent;
+    /**
+     * The type of data the stream is returning.
+     */
+    ResponseStreamContentType?: String;
+  }
+  export type InvokeWithResponseStreamResponseEvent = EventStream<{PayloadChunk?:InvokeResponseStreamUpdate,InvokeComplete?:InvokeWithResponseStreamCompleteEvent}>;
   export type KMSKeyArn = string;
   export type LastUpdateStatus = "Successful"|"Failed"|"InProgress"|string;
   export type LastUpdateStatusReason = string;
@@ -2227,7 +2318,7 @@ declare namespace Lambda {
   }
   export interface ListEventSourceMappingsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis – The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams – The ARN of the stream.    Amazon Simple Queue Service – The ARN of the queue.    Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.    Amazon MQ – The ARN of the broker.  
+     * The Amazon Resource Name (ARN) of the event source.    Amazon Kinesis – The ARN of the data stream or a stream consumer.    Amazon DynamoDB Streams – The ARN of the stream.    Amazon Simple Queue Service – The ARN of the queue.    Amazon Managed Streaming for Apache Kafka – The ARN of the cluster.    Amazon MQ – The ARN of the broker.    Amazon DocumentDB – The ARN of the DocumentDB change stream.  
      */
     EventSourceArn?: Arn;
     /**
@@ -2677,7 +2768,7 @@ declare namespace Lambda {
      */
     MaximumEventAgeInSeconds?: MaximumEventAgeInSeconds;
     /**
-     * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of an SQS queue.    Topic - The ARN of an SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
+     * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of a standard SQS queue.    Topic - The ARN of a standard SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
      */
     DestinationConfig?: DestinationConfig;
   }
@@ -2794,6 +2885,7 @@ declare namespace Lambda {
   }
   export type ReservedConcurrentExecutions = number;
   export type ResourceArn = string;
+  export type ResponseStreamingInvocationType = "RequestResponse"|"DryRun"|string;
   export type RoleArn = string;
   export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|"nodejs18.x"|string;
   export type RuntimeVersionArn = string;
@@ -2989,7 +3081,7 @@ declare namespace Lambda {
      */
     Enabled?: Enabled;
     /**
-     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis – Default 100. Max 10,000.    Amazon DynamoDB Streams – Default 100. Max 10,000.    Amazon Simple Queue Service – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka – Default 100. Max 10,000.    Self-managed Apache Kafka – Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) – Default 100. Max 10,000.  
+     * The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).    Amazon Kinesis – Default 100. Max 10,000.    Amazon DynamoDB Streams – Default 100. Max 10,000.    Amazon Simple Queue Service – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.    Amazon Managed Streaming for Apache Kafka – Default 100. Max 10,000.    Self-managed Apache Kafka – Default 100. Max 10,000.    Amazon MQ (ActiveMQ and RabbitMQ) – Default 100. Max 10,000.    DocumentDB – Default 100. Max 10,000.  
      */
     BatchSize?: BatchSize;
     /**
@@ -2997,27 +3089,27 @@ declare namespace Lambda {
      */
     FilterCriteria?: FilterCriteria;
     /**
-     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, and Amazon MQ event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For streams and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
+     * The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function. You can configure MaximumBatchingWindowInSeconds to any value from 0 seconds to 300 seconds in increments of seconds. For streams and Amazon SQS event sources, the default batching window is 0 seconds. For Amazon MSK, Self-managed Apache Kafka, Amazon MQ, and DocumentDB event sources, the default batching window is 500 ms. Note that because you can only change MaximumBatchingWindowInSeconds in increments of seconds, you cannot revert back to the 500 ms default batching window after you have changed it. To restore the default batching window, you must create a new event source mapping. Related setting: For streams and Amazon SQS event sources, when you set BatchSize to a value greater than 10, you must set MaximumBatchingWindowInSeconds to at least 1.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
-     * (Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.
+     * (Kinesis and DynamoDB Streams only) A standard Amazon SQS queue or standard Amazon SNS topic destination for discarded records.
      */
     DestinationConfig?: DestinationConfig;
     /**
-     * (Streams only) Discard records older than the specified age. The default value is infinite (-1).
+     * (Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is infinite (-1).
      */
     MaximumRecordAgeInSeconds?: MaximumRecordAgeInSeconds;
     /**
-     * (Streams only) If the function returns an error, split the batch in two and retry.
+     * (Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry.
      */
     BisectBatchOnFunctionError?: BisectBatchOnFunctionError;
     /**
-     * (Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.
+     * (Kinesis and DynamoDB Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
     /**
-     * (Streams only) The number of batches to process from each shard concurrently.
+     * (Kinesis and DynamoDB Streams only) The number of batches to process from each shard concurrently.
      */
     ParallelizationFactor?: ParallelizationFactor;
     /**
@@ -3025,11 +3117,11 @@ declare namespace Lambda {
      */
     SourceAccessConfigurations?: SourceAccessConfigurations;
     /**
-     * (Streams only) The duration in seconds of a processing window. The range is between 1 second and 900 seconds.
+     * (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
-     * (Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.
+     * (Kinesis, DynamoDB Streams, and Amazon SQS) A list of current response type enums applied to the event source mapping.
      */
     FunctionResponseTypes?: FunctionResponseTypeList;
     /**
@@ -3175,7 +3267,7 @@ declare namespace Lambda {
      */
     MaximumEventAgeInSeconds?: MaximumEventAgeInSeconds;
     /**
-     * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of an SQS queue.    Topic - The ARN of an SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
+     * A destination for events after they have been sent to a function for processing.  Destinations     Function - The Amazon Resource Name (ARN) of a Lambda function.    Queue - The ARN of a standard SQS queue.    Topic - The ARN of a standard SNS topic.    Event Bus - The ARN of an Amazon EventBridge event bus.  
      */
     DestinationConfig?: DestinationConfig;
   }
@@ -3196,6 +3288,10 @@ declare namespace Lambda {
      * The cross-origin resource sharing (CORS) settings for your function URL.
      */
     Cors?: Cors;
+    /**
+     * Use one of the following options:    BUFFERED – This is the default option. Lambda invokes your function using the Invoke API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.    RESPONSE_STREAM – Your function streams payload results as they become available. Lambda invokes your function using the InvokeWithResponseStream API operation. The maximum response payload size is 20 MB, however, you can request a quota increase.  
+     */
+    InvokeMode?: InvokeMode;
   }
   export interface UpdateFunctionUrlConfigResponse {
     /**
@@ -3222,6 +3318,10 @@ declare namespace Lambda {
      * When the function URL configuration was last updated, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
      */
     LastModifiedTime: Timestamp;
+    /**
+     * Use one of the following options:    BUFFERED – This is the default option. Lambda invokes your function using the Invoke API operation. Invocation results are available when the payload is complete. The maximum payload size is 6 MB.    RESPONSE_STREAM – Your function streams payload results as they become available. Lambda invokes your function using the InvokeWithResponseStream API operation. The maximum response payload size is 20 MB, however, you can request a quota increase.  
+     */
+    InvokeMode?: InvokeMode;
   }
   export type UpdateRuntimeOn = "Auto"|"Manual"|"FunctionUpdate"|string;
   export type Version = string;

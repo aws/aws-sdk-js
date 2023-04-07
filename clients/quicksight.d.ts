@@ -124,6 +124,14 @@ declare class QuickSight extends Service {
    */
   createNamespace(callback?: (err: AWSError, data: QuickSight.Types.CreateNamespaceResponse) => void): Request<QuickSight.Types.CreateNamespaceResponse, AWSError>;
   /**
+   * Creates a refresh schedule for a dataset. You can create up to 5 different schedules for a single dataset.
+   */
+  createRefreshSchedule(params: QuickSight.Types.CreateRefreshScheduleRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateRefreshScheduleResponse) => void): Request<QuickSight.Types.CreateRefreshScheduleResponse, AWSError>;
+  /**
+   * Creates a refresh schedule for a dataset. You can create up to 5 different schedules for a single dataset.
+   */
+  createRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.CreateRefreshScheduleResponse) => void): Request<QuickSight.Types.CreateRefreshScheduleResponse, AWSError>;
+  /**
    * Creates a template either from a TemplateDefinition or from an existing Amazon QuickSight analysis or template. You can use the resulting template to create additional dashboards, templates, or analyses. A template is an entity in Amazon QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(params: QuickSight.Types.CreateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
@@ -196,6 +204,14 @@ declare class QuickSight extends Service {
    */
   deleteDataSet(callback?: (err: AWSError, data: QuickSight.Types.DeleteDataSetResponse) => void): Request<QuickSight.Types.DeleteDataSetResponse, AWSError>;
   /**
+   * Deletes the dataset refresh properties of the dataset.
+   */
+  deleteDataSetRefreshProperties(params: QuickSight.Types.DeleteDataSetRefreshPropertiesRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteDataSetRefreshPropertiesResponse) => void): Request<QuickSight.Types.DeleteDataSetRefreshPropertiesResponse, AWSError>;
+  /**
+   * Deletes the dataset refresh properties of the dataset.
+   */
+  deleteDataSetRefreshProperties(callback?: (err: AWSError, data: QuickSight.Types.DeleteDataSetRefreshPropertiesResponse) => void): Request<QuickSight.Types.DeleteDataSetRefreshPropertiesResponse, AWSError>;
+  /**
    * Deletes the data source permanently. This operation breaks all the datasets that reference the deleted data source.
    */
   deleteDataSource(params: QuickSight.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteDataSourceResponse) => void): Request<QuickSight.Types.DeleteDataSourceResponse, AWSError>;
@@ -251,6 +267,14 @@ declare class QuickSight extends Service {
    * Deletes a namespace and the users and groups that are associated with the namespace. This is an asynchronous process. Assets including dashboards, analyses, datasets and data sources are not deleted. To delete these assets, you use the API operations for the relevant asset. 
    */
   deleteNamespace(callback?: (err: AWSError, data: QuickSight.Types.DeleteNamespaceResponse) => void): Request<QuickSight.Types.DeleteNamespaceResponse, AWSError>;
+  /**
+   * Deletes a refresh schedule from a dataset.
+   */
+  deleteRefreshSchedule(params: QuickSight.Types.DeleteRefreshScheduleRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteRefreshScheduleResponse) => void): Request<QuickSight.Types.DeleteRefreshScheduleResponse, AWSError>;
+  /**
+   * Deletes a refresh schedule from a dataset.
+   */
+  deleteRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.DeleteRefreshScheduleResponse) => void): Request<QuickSight.Types.DeleteRefreshScheduleResponse, AWSError>;
   /**
    * Deletes a template.
    */
@@ -388,6 +412,14 @@ declare class QuickSight extends Service {
    */
   describeDataSetPermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeDataSetPermissionsResponse) => void): Request<QuickSight.Types.DescribeDataSetPermissionsResponse, AWSError>;
   /**
+   * Describes the refresh properties of a dataset.
+   */
+  describeDataSetRefreshProperties(params: QuickSight.Types.DescribeDataSetRefreshPropertiesRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeDataSetRefreshPropertiesResponse) => void): Request<QuickSight.Types.DescribeDataSetRefreshPropertiesResponse, AWSError>;
+  /**
+   * Describes the refresh properties of a dataset.
+   */
+  describeDataSetRefreshProperties(callback?: (err: AWSError, data: QuickSight.Types.DescribeDataSetRefreshPropertiesResponse) => void): Request<QuickSight.Types.DescribeDataSetRefreshPropertiesResponse, AWSError>;
+  /**
    * Describes a data source.
    */
   describeDataSource(params: QuickSight.Types.DescribeDataSourceRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeDataSourceResponse) => void): Request<QuickSight.Types.DescribeDataSourceResponse, AWSError>;
@@ -475,6 +507,14 @@ declare class QuickSight extends Service {
    * Describes the current namespace.
    */
   describeNamespace(callback?: (err: AWSError, data: QuickSight.Types.DescribeNamespaceResponse) => void): Request<QuickSight.Types.DescribeNamespaceResponse, AWSError>;
+  /**
+   * Provides a summary of a refresh schedule.
+   */
+  describeRefreshSchedule(params: QuickSight.Types.DescribeRefreshScheduleRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeRefreshScheduleResponse) => void): Request<QuickSight.Types.DescribeRefreshScheduleResponse, AWSError>;
+  /**
+   * Provides a summary of a refresh schedule.
+   */
+  describeRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.DescribeRefreshScheduleResponse) => void): Request<QuickSight.Types.DescribeRefreshScheduleResponse, AWSError>;
   /**
    * Describes a template's metadata.
    */
@@ -676,6 +716,14 @@ declare class QuickSight extends Service {
    */
   listNamespaces(callback?: (err: AWSError, data: QuickSight.Types.ListNamespacesResponse) => void): Request<QuickSight.Types.ListNamespacesResponse, AWSError>;
   /**
+   * Lists the refresh schedules of a dataset. Each dataset can have up to 5 schedules. 
+   */
+  listRefreshSchedules(params: QuickSight.Types.ListRefreshSchedulesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListRefreshSchedulesResponse) => void): Request<QuickSight.Types.ListRefreshSchedulesResponse, AWSError>;
+  /**
+   * Lists the refresh schedules of a dataset. Each dataset can have up to 5 schedules. 
+   */
+  listRefreshSchedules(callback?: (err: AWSError, data: QuickSight.Types.ListRefreshSchedulesResponse) => void): Request<QuickSight.Types.ListRefreshSchedulesResponse, AWSError>;
+  /**
    * Lists the tags assigned to a resource.
    */
   listTagsForResource(params: QuickSight.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: QuickSight.Types.ListTagsForResourceResponse) => void): Request<QuickSight.Types.ListTagsForResourceResponse, AWSError>;
@@ -747,6 +795,14 @@ declare class QuickSight extends Service {
    * Returns a list of all of the Amazon QuickSight users belonging to this account. 
    */
   listUsers(callback?: (err: AWSError, data: QuickSight.Types.ListUsersResponse) => void): Request<QuickSight.Types.ListUsersResponse, AWSError>;
+  /**
+   * Creates or updates the dataset refresh properties for the dataset.
+   */
+  putDataSetRefreshProperties(params: QuickSight.Types.PutDataSetRefreshPropertiesRequest, callback?: (err: AWSError, data: QuickSight.Types.PutDataSetRefreshPropertiesResponse) => void): Request<QuickSight.Types.PutDataSetRefreshPropertiesResponse, AWSError>;
+  /**
+   * Creates or updates the dataset refresh properties for the dataset.
+   */
+  putDataSetRefreshProperties(callback?: (err: AWSError, data: QuickSight.Types.PutDataSetRefreshPropertiesResponse) => void): Request<QuickSight.Types.PutDataSetRefreshPropertiesResponse, AWSError>;
   /**
    * Creates an Amazon QuickSight user whose identity is associated with the Identity and Access Management (IAM) identity or role specified in the request. When you register a new user from the Amazon QuickSight API, Amazon QuickSight generates a registration URL. The user accesses this registration URL to create their account. Amazon QuickSight doesn't send a registration email to users who are registered from the Amazon QuickSight API. If you want new users to receive a registration email, then add those users in the Amazon QuickSight console. For more information on registering a new user in the Amazon QuickSight console, see  Inviting users to access Amazon QuickSight.
    */
@@ -963,6 +1019,14 @@ declare class QuickSight extends Service {
    * Use the UpdatePublicSharingSettings operation to turn on or turn off the public sharing settings of an Amazon QuickSight dashboard. To use this operation, turn on session capacity pricing for your Amazon QuickSight account. Before you can turn on public sharing on your account, make sure to give public sharing permissions to an administrative user in the Identity and Access Management (IAM) console. For more information on using IAM with Amazon QuickSight, see Using Amazon QuickSight with IAM in the Amazon QuickSight User Guide.
    */
   updatePublicSharingSettings(callback?: (err: AWSError, data: QuickSight.Types.UpdatePublicSharingSettingsResponse) => void): Request<QuickSight.Types.UpdatePublicSharingSettingsResponse, AWSError>;
+  /**
+   * Updates a refresh schedule for a dataset.
+   */
+  updateRefreshSchedule(params: QuickSight.Types.UpdateRefreshScheduleRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateRefreshScheduleResponse) => void): Request<QuickSight.Types.UpdateRefreshScheduleResponse, AWSError>;
+  /**
+   * Updates a refresh schedule for a dataset.
+   */
+  updateRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.UpdateRefreshScheduleResponse) => void): Request<QuickSight.Types.UpdateRefreshScheduleResponse, AWSError>;
   /**
    * Updates a template from an existing Amazon QuickSight analysis or another template.
    */
@@ -3220,6 +3284,38 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface CreateRefreshScheduleRequest {
+    /**
+     * The ID of the dataset.
+     */
+    DataSetId: ResourceId;
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The refresh schedule.
+     */
+    Schedule: RefreshSchedule;
+  }
+  export interface CreateRefreshScheduleResponse {
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The ID of the refresh schedule.
+     */
+    ScheduleId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the refresh schedule.
+     */
+    Arn?: Arn;
+  }
   export interface CreateTemplateAliasRequest {
     /**
      * The ID of the Amazon Web Services account that contains the template that you creating an alias for.
@@ -4189,6 +4285,12 @@ declare namespace QuickSight {
     DataSetArn: Arn;
   }
   export type DataSetReferenceList = DataSetReference[];
+  export interface DataSetRefreshProperties {
+    /**
+     * The refresh configuration for a dataset.
+     */
+    RefreshConfiguration: RefreshConfiguration;
+  }
   export interface DataSetSchema {
     /**
      * A structure containing the list of column schemas.
@@ -4629,6 +4731,8 @@ declare namespace QuickSight {
      */
     CustomValue?: SensitiveTimestamp;
   }
+  export type DayOfMonth = string;
+  export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
   export type DecimalDefaultValueList = SensitiveDoubleObject[];
   export interface DecimalDefaultValues {
     /**
@@ -4842,6 +4946,26 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface DeleteDataSetRefreshPropertiesRequest {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the dataset.
+     */
+    DataSetId: ResourceId;
+  }
+  export interface DeleteDataSetRefreshPropertiesResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DeleteDataSetRequest {
     /**
      * The Amazon Web Services account ID.
@@ -5053,6 +5177,38 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+  }
+  export interface DeleteRefreshScheduleRequest {
+    /**
+     * The ID of the dataset.
+     */
+    DataSetId: ResourceId;
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the refresh schedule.
+     */
+    ScheduleId: String;
+  }
+  export interface DeleteRefreshScheduleResponse {
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The ID of the refresh schedule.
+     */
+    ScheduleId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the refresh schedule.
+     */
+    Arn?: Arn;
   }
   export interface DeleteTemplateAliasRequest {
     /**
@@ -5575,6 +5731,30 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DescribeDataSetRefreshPropertiesRequest {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the dataset.
+     */
+    DataSetId: ResourceId;
+  }
+  export interface DescribeDataSetRefreshPropertiesResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The dataset refresh properties.
+     */
+    DataSetRefreshProperties?: DataSetRefreshProperties;
+  }
   export interface DescribeDataSetRequest {
     /**
      * The Amazon Web Services account ID.
@@ -5907,6 +6087,38 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+  }
+  export interface DescribeRefreshScheduleRequest {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the dataset.
+     */
+    DataSetId: ResourceId;
+    /**
+     * The ID of the refresh schedule.
+     */
+    ScheduleId: String;
+  }
+  export interface DescribeRefreshScheduleResponse {
+    /**
+     * The refresh schedule.
+     */
+    RefreshSchedule?: RefreshSchedule;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the refresh schedule.
+     */
+    Arn?: Arn;
   }
   export interface DescribeTemplateAliasRequest {
     /**
@@ -8121,6 +8333,12 @@ declare namespace QuickSight {
   export type IdentityNameList = IdentityName[];
   export type IdentityStore = "QUICKSIGHT"|string;
   export type IdentityType = "IAM"|"QUICKSIGHT"|string;
+  export interface IncrementalRefresh {
+    /**
+     * The lookback window setup for an incremental refresh configuration.
+     */
+    LookbackWindow: LookbackWindow;
+  }
   export interface Ingestion {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -8161,7 +8379,7 @@ declare namespace QuickSight {
      */
     RequestType?: IngestionRequestType;
   }
-  export type IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"|"INGESTION_SUPERSEDED"|"INGESTION_CANCELED"|"DATA_SET_DELETED"|"DATA_SET_NOT_SPICE"|"S3_UPLOADED_FILE_DELETED"|"S3_MANIFEST_ERROR"|"DATA_TOLERANCE_EXCEPTION"|"SPICE_TABLE_NOT_FOUND"|"DATA_SET_SIZE_LIMIT_EXCEEDED"|"ROW_SIZE_LIMIT_EXCEEDED"|"ACCOUNT_CAPACITY_LIMIT_EXCEEDED"|"CUSTOMER_ERROR"|"DATA_SOURCE_NOT_FOUND"|"IAM_ROLE_NOT_AVAILABLE"|"CONNECTION_FAILURE"|"SQL_TABLE_NOT_FOUND"|"PERMISSION_DENIED"|"SSL_CERTIFICATE_VALIDATION_FAILURE"|"OAUTH_TOKEN_FAILURE"|"SOURCE_API_LIMIT_EXCEEDED_FAILURE"|"PASSWORD_AUTHENTICATION_FAILURE"|"SQL_SCHEMA_MISMATCH_ERROR"|"INVALID_DATE_FORMAT"|"INVALID_DATAPREP_SYNTAX"|"SOURCE_RESOURCE_LIMIT_EXCEEDED"|"SQL_INVALID_PARAMETER_VALUE"|"QUERY_TIMEOUT"|"SQL_NUMERIC_OVERFLOW"|"UNRESOLVABLE_HOST"|"UNROUTABLE_HOST"|"SQL_EXCEPTION"|"S3_FILE_INACCESSIBLE"|"IOT_FILE_NOT_FOUND"|"IOT_DATA_SET_FILE_EMPTY"|"INVALID_DATA_SOURCE_CONFIG"|"DATA_SOURCE_AUTH_FAILED"|"DATA_SOURCE_CONNECTION_FAILED"|"FAILURE_TO_PROCESS_JSON_FILE"|"INTERNAL_SERVICE_ERROR"|"REFRESH_SUPPRESSED_BY_EDIT"|"PERMISSION_NOT_FOUND"|"ELASTICSEARCH_CURSOR_NOT_ENABLED"|"CURSOR_NOT_ENABLED"|string;
+  export type IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"|"INGESTION_SUPERSEDED"|"INGESTION_CANCELED"|"DATA_SET_DELETED"|"DATA_SET_NOT_SPICE"|"S3_UPLOADED_FILE_DELETED"|"S3_MANIFEST_ERROR"|"DATA_TOLERANCE_EXCEPTION"|"SPICE_TABLE_NOT_FOUND"|"DATA_SET_SIZE_LIMIT_EXCEEDED"|"ROW_SIZE_LIMIT_EXCEEDED"|"ACCOUNT_CAPACITY_LIMIT_EXCEEDED"|"CUSTOMER_ERROR"|"DATA_SOURCE_NOT_FOUND"|"IAM_ROLE_NOT_AVAILABLE"|"CONNECTION_FAILURE"|"SQL_TABLE_NOT_FOUND"|"PERMISSION_DENIED"|"SSL_CERTIFICATE_VALIDATION_FAILURE"|"OAUTH_TOKEN_FAILURE"|"SOURCE_API_LIMIT_EXCEEDED_FAILURE"|"PASSWORD_AUTHENTICATION_FAILURE"|"SQL_SCHEMA_MISMATCH_ERROR"|"INVALID_DATE_FORMAT"|"INVALID_DATAPREP_SYNTAX"|"SOURCE_RESOURCE_LIMIT_EXCEEDED"|"SQL_INVALID_PARAMETER_VALUE"|"QUERY_TIMEOUT"|"SQL_NUMERIC_OVERFLOW"|"UNRESOLVABLE_HOST"|"UNROUTABLE_HOST"|"SQL_EXCEPTION"|"S3_FILE_INACCESSIBLE"|"IOT_FILE_NOT_FOUND"|"IOT_DATA_SET_FILE_EMPTY"|"INVALID_DATA_SOURCE_CONFIG"|"DATA_SOURCE_AUTH_FAILED"|"DATA_SOURCE_CONNECTION_FAILED"|"FAILURE_TO_PROCESS_JSON_FILE"|"INTERNAL_SERVICE_ERROR"|"REFRESH_SUPPRESSED_BY_EDIT"|"PERMISSION_NOT_FOUND"|"ELASTICSEARCH_CURSOR_NOT_ENABLED"|"CURSOR_NOT_ENABLED"|"DUPLICATE_COLUMN_NAMES_FOUND"|string;
   export type IngestionId = string;
   export type IngestionMaxResults = number;
   export type IngestionRequestSource = "MANUAL"|"SCHEDULED"|string;
@@ -9220,6 +9438,30 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface ListRefreshSchedulesRequest {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the dataset.
+     */
+    DataSetId: ResourceId;
+  }
+  export interface ListRefreshSchedulesResponse {
+    /**
+     * The list of refresh schedules for the dataset.
+     */
+    RefreshSchedules?: RefreshSchedules;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want a list of tags for.
@@ -9585,6 +9827,21 @@ declare namespace QuickSight {
   export type LongPlainText = string;
   export type LongRichText = string;
   export type Longitude = number;
+  export interface LookbackWindow {
+    /**
+     * The name of the lookback window column.
+     */
+    ColumnName: String;
+    /**
+     * The lookback window column size.
+     */
+    Size: PositiveLong;
+    /**
+     * The size unit that is used for the lookback window column. Valid values for this structure are HOUR, DAY, and WEEK.
+     */
+    SizeUnit: LookbackWindowSizeUnit;
+  }
+  export type LookbackWindowSizeUnit = "HOUR"|"DAY"|"WEEK"|string;
   export interface ManifestFileLocation {
     /**
      * Amazon S3 bucket.
@@ -10816,6 +11073,7 @@ declare namespace QuickSight {
   export type PixelLength = string;
   export type Port = number;
   export type PositiveInteger = number;
+  export type PositiveLong = number;
   export interface PostgreSqlParameters {
     /**
      * Host.
@@ -10877,6 +11135,30 @@ declare namespace QuickSight {
     ProjectedColumns: ProjectedColumnList;
   }
   export type ProjectedColumnList = String[];
+  export interface PutDataSetRefreshPropertiesRequest {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the dataset.
+     */
+    DataSetId: ResourceId;
+    /**
+     * The dataset refresh properties.
+     */
+    DataSetRefreshProperties: DataSetRefreshProperties;
+  }
+  export interface PutDataSetRefreshPropertiesResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export type Query = string;
   export interface QueueInfo {
     /**
@@ -11171,6 +11453,54 @@ declare namespace QuickSight {
     FormatConfiguration?: NumericFormatConfiguration;
   }
   export type ReferenceLineValueLabelRelativePosition = "BEFORE_CUSTOM_LABEL"|"AFTER_CUSTOM_LABEL"|string;
+  export interface RefreshConfiguration {
+    /**
+     * The incremental refresh for the dataset.
+     */
+    IncrementalRefresh: IncrementalRefresh;
+  }
+  export interface RefreshFrequency {
+    /**
+     * The interval between scheduled refreshes. Valid values are as follows:    MINUTE15: The dataset refreshes every 15 minutes. This value is only supported for incremental refreshes. This interval can only be used for one schedule per dataset.    MINUTE30:The dataset refreshes every 30 minutes. This value is only supported for incremental refreshes. This interval can only be used for one schedule per dataset.    HOURLY: The dataset refreshes every hour. This interval can only be used for one schedule per dataset.    DAILY: The dataset refreshes every day.    WEEKLY: The dataset refreshes every week.    MONTHLY: The dataset refreshes every month.  
+     */
+    Interval: RefreshInterval;
+    /**
+     * The day of the week that you want to schedule the refresh on. This value is required for weekly and monthly refresh intervals.
+     */
+    RefreshOnDay?: ScheduleRefreshOnEntity;
+    /**
+     * The timezone that you want the refresh schedule to use. The timezone ID must match a corresponding ID found on java.util.time.getAvailableIDs().
+     */
+    Timezone?: String;
+    /**
+     * The time of day that you want the datset to refresh. This value is expressed in HH:MM format. This field is not required for schedules that refresh hourly.
+     */
+    TimeOfTheDay?: String;
+  }
+  export type RefreshInterval = "MINUTE15"|"MINUTE30"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string;
+  export interface RefreshSchedule {
+    /**
+     * An identifier for the refresh schedule.
+     */
+    ScheduleId: String;
+    /**
+     * The frequency for the refresh schedule.
+     */
+    ScheduleFrequency: RefreshFrequency;
+    /**
+     * Time after which the refresh schedule can be started, expressed in YYYY-MM-DDTHH:MM:SS format.
+     */
+    StartAfterDateTime?: Timestamp;
+    /**
+     * The type of refresh that a datset undergoes. Valid values are as follows:    FULL_REFRESH: A complete refresh of a dataset.    INCREMENTAL_REFRESH: A partial refresh of some rows of a dataset, based on the time window specified.   For more information on full and incremental refreshes, see Refreshing SPICE data in the Amazon QuickSight User Guide.
+     */
+    RefreshType: IngestionType;
+    /**
+     * The Amazon Resource Name (ARN) for the refresh schedule.
+     */
+    Arn?: Arn;
+  }
+  export type RefreshSchedules = RefreshSchedule[];
   export interface RegisterUserRequest {
     /**
      * Amazon QuickSight supports several ways of managing the identity of users. This parameter accepts two values:    IAM: A user whose identity maps to an existing IAM user or role.     QUICKSIGHT: A user whose identity is owned and managed internally by Amazon QuickSight.   
@@ -11505,6 +11835,10 @@ declare namespace QuickSight {
      * A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.
      */
     TagRules: RowLevelPermissionTagRuleList;
+    /**
+     * A list of tag configuration rules to apply to a dataset. All tag configurations have the OR condition. Tags within each tile will be joined (AND). At least one rule in this structure must have all tag values assigned to it to apply Row-level security (RLS) to the dataset.
+     */
+    TagRuleConfigurations?: RowLevelPermissionTagRuleConfigurationList;
   }
   export type RowLevelPermissionTagDelimiter = string;
   export interface RowLevelPermissionTagRule {
@@ -11525,6 +11859,8 @@ declare namespace QuickSight {
      */
     MatchAllValue?: SessionTagValue;
   }
+  export type RowLevelPermissionTagRuleConfiguration = SessionTagKey[];
+  export type RowLevelPermissionTagRuleConfigurationList = RowLevelPermissionTagRuleConfiguration[];
   export type RowLevelPermissionTagRuleList = RowLevelPermissionTagRule[];
   export type RowSortList = FieldSortOptions[];
   export type S3Bucket = string;
@@ -11738,6 +12074,16 @@ declare namespace QuickSight {
      * The column hierarchy that is used during drill-downs and drill-ups.
      */
     ColumnHierarchies?: ColumnHierarchyList;
+  }
+  export interface ScheduleRefreshOnEntity {
+    /**
+     * The day of the week that you want to schedule a refresh on.
+     */
+    DayOfWeek?: DayOfWeek;
+    /**
+     * The day of the month that you want to schedule refresh on.
+     */
+    DayOfMonth?: DayOfMonth;
   }
   export interface ScrollBarOptions {
     /**
@@ -14562,6 +14908,38 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+  }
+  export interface UpdateRefreshScheduleRequest {
+    /**
+     * The ID of the dataset.
+     */
+    DataSetId: ResourceId;
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The refresh schedule.
+     */
+    Schedule: RefreshSchedule;
+  }
+  export interface UpdateRefreshScheduleResponse {
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The ID of the refresh schedule.
+     */
+    ScheduleId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the refresh schedule.
+     */
+    Arn?: Arn;
   }
   export type UpdateResourcePermissionList = ResourcePermission[];
   export interface UpdateTemplateAliasRequest {

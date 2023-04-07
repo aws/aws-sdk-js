@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1352.0-->
+<!--LATEST=2.1353.0-->
 <!--ENTRYINSERT-->
+
+## 2.1353.0
+* feature: DLM: Updated timestamp format for GetLifecyclePolicy API
+* feature: DocDB: This release adds a new parameter 'DBClusterParameterGroupName' to 'RestoreDBClusterFromSnapshot' API to associate the name of the DB cluster parameter group while performing restore.
+* feature: Lambda: This release adds a new Lambda InvokeWithResponseStream API to support streaming Lambda function responses. The release also adds a new InvokeMode parameter to Function Url APIs to control whether the response will be streamed or buffered.
+* feature: QuickSight: This release has two changes: adding the OR condition to tag-based RLS rules in CreateDataSet and UpdateDataSet; adding RefreshSchedule and Incremental RefreshProperties operations for users to programmatically configure SPICE dataset ingestions.
 
 ## 2.1352.0
 * feature: CloudFormation: Including UPDATE_COMPLETE as a failed status for DeleteStack waiter.

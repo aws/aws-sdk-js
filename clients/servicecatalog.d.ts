@@ -3512,7 +3512,7 @@ declare namespace ServiceCatalog {
      */
     Info?: ProvisioningArtifactInfo;
     /**
-     * The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    MARKETPLACE_AMI - Amazon Web Services Marketplace AMI    MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources  
+     * The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    MARKETPLACE_AMI - Amazon Web Services Marketplace AMI    MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources    TERRAFORM_OPEN_SOURCE - Terraform open source configuration file  
      */
     Type?: ProvisioningArtifactType;
     /**
