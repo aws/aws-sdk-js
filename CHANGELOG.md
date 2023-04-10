@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1353.0-->
+<!--LATEST=2.1354.0-->
 <!--ENTRYINSERT-->
+
+## 2.1354.0
+* feature: Connect: This release adds the ability to configure an agent's routing profile to receive contacts from multiple channels at the same time via extending the UpdateRoutingProfileConcurrency, CreateRoutingProfile and DescribeRoutingProfile APIs.
+* feature: ECS: This release adds support for enabling FIPS compliance on Amazon ECS Fargate tasks
+* feature: MarketplaceCatalog: Added three new APIs to support resource sharing: GetResourcePolicy, PutResourcePolicy, and DeleteResourcePolicy. Added new OwnershipType field to ListEntities request to let users filter on entities that are shared with them. Increased max page size of ListEntities response from 20 to 50 results.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK now supports conversion of 608 paint-on captions to pop-on captions for SCC sources.
+* feature: Omics: Remove unexpected API changes.
+* feature: Rekognition: This release adds support for Face Liveness APIs in Amazon Rekognition. Updates UpdateStreamProcessor to return ResourceInUseException Exception. Minor updates to API documentation.
 
 ## 2.1353.0
 * feature: DLM: Updated timestamp format for GetLifecyclePolicy API

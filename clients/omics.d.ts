@@ -4157,10 +4157,10 @@ declare namespace Omics {
   export type WorkflowParameterName = string;
   export type WorkflowParameterTemplate = {[key: string]: WorkflowParameter};
   export type WorkflowRequestId = string;
-  export type WorkflowStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETED"|"FAILED"|"INACTIVE"|string;
+  export type WorkflowStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETED"|"FAILED"|string;
   export type WorkflowStatusMessage = string;
   export type WorkflowTimestamp = Date;
-  export type WorkflowType = "PRIVATE"|"SERVICE"|string;
+  export type WorkflowType = "PRIVATE"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

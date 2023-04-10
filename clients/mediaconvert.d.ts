@@ -3144,7 +3144,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Queue?: __string;
     /**
-     * Required for setting up a job to use queue hopping. Minimum wait time in minutes until the job can hop to the destination queue. Valid range is 1 to 1440 minutes, inclusive.
+     * Required for setting up a job to use queue hopping. Minimum wait time in minutes until the job can hop to the destination queue. Valid range is 1 to 4320 minutes, inclusive.
      */
     WaitMinutes?: __integer;
   }
@@ -3451,6 +3451,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     BillingTagsSource?: BillingTagsSource;
     /**
+     * Prevent duplicate jobs from being created and ensure idempotency for your requests. A client request token can be any string that includes up to 64 ASCII characters. If you reuse a client request token within one minute of a successful request, the API returns the job details of the original request instead. For more information see https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.
+     */
+    ClientRequestToken?: __string;
+    /**
      * The time, in Unix epoch format in seconds, when the job got created.
      */
     CreatedAt?: __timestampUnix;
@@ -3534,6 +3538,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
      */
     UserMetadata?: __mapOf__string;
+    /**
+     * Contains any warning messages for the job. Use to help identify potential issues with your input, output, or job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html
+     */
+    Warnings?: __listOfWarningGroup;
   }
   export interface JobMessages {
     /**
@@ -5871,6 +5879,16 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
      */
     RateControlMode?: Vp9RateControlMode;
   }
+  export interface WarningGroup {
+    /**
+     * Warning code that identifies a specific warning in the job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/warning_codes.html
+     */
+    Code: __integer;
+    /**
+     * The number of times this warning occurred in the job.
+     */
+    Count: __integer;
+  }
   export type WatermarkingStrength = "LIGHTEST"|"LIGHTER"|"DEFAULT"|"STRONGER"|"STRONGEST"|string;
   export type WavFormat = "RIFF"|"RF64"|string;
   export interface WavSettings {
@@ -6231,6 +6249,7 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
   export type __listOfQueue = Queue[];
   export type __listOfQueueTransition = QueueTransition[];
   export type __listOfTeletextPageType = TeletextPageType[];
+  export type __listOfWarningGroup = WarningGroup[];
   export type __listOf__doubleMinNegative60Max6 = __doubleMinNegative60Max6[];
   export type __listOf__integerMin1Max2147483647 = __integerMin1Max2147483647[];
   export type __listOf__integerMin32Max8182 = __integerMin32Max8182[];
