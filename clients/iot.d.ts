@@ -3454,6 +3454,10 @@ declare namespace Iot {
      * Metadata which can be used to manage the domain configuration.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
      */
     tags?: TagList;
+    /**
+     * An object that specifies the TLS configuration for a domain.
+     */
+    tlsConfig?: TlsConfig;
   }
   export interface CreateDomainConfigurationResponse {
     /**
@@ -4918,6 +4922,10 @@ declare namespace Iot {
      * The date and time the domain configuration's status was last changed.
      */
     lastStatusChangeDate?: DateType;
+    /**
+     * An object that specifies the TLS configuration for a domain.
+     */
+    tlsConfig?: TlsConfig;
   }
   export interface DescribeEndpointRequest {
     /**
@@ -9648,6 +9656,7 @@ declare namespace Iot {
   export type Seconds = number;
   export type SecurityGroupId = string;
   export type SecurityGroupList = SecurityGroupId[];
+  export type SecurityPolicy = string;
   export type SecurityProfileArn = string;
   export type SecurityProfileDescription = string;
   export interface SecurityProfileIdentifier {
@@ -10557,6 +10566,12 @@ declare namespace Iot {
   export type TimestreamTimestampUnit = string;
   export type TimestreamTimestampValue = string;
   export type TinyMaxResults = number;
+  export interface TlsConfig {
+    /**
+     * The security policy for a domain configuration. For more information, see Security policies  in the Amazon Web Services IoT Core developer guide.
+     */
+    securityPolicy?: SecurityPolicy;
+  }
   export interface TlsContext {
     /**
      * The value of the serverName key in a TLS authorization request.
@@ -11007,6 +11022,10 @@ declare namespace Iot {
      * Removes the authorization configuration from a domain.
      */
     removeAuthorizerConfig?: RemoveAuthorizerConfig;
+    /**
+     * An object that specifies the TLS configuration for a domain.
+     */
+    tlsConfig?: TlsConfig;
   }
   export interface UpdateDomainConfigurationResponse {
     /**

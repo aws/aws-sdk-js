@@ -2523,7 +2523,7 @@ declare namespace EventBridge {
     /**
      * The SQL statement text to run.
      */
-    Sql: Sql;
+    Sql?: Sql;
     /**
      * The name of the SQL statement. You can name the SQL statement when you create it to identify the query.
      */
@@ -2532,6 +2532,7 @@ declare namespace EventBridge {
      * Indicates whether to send an event back to EventBridge after the SQL statement runs.
      */
     WithEvent?: Boolean;
+    Sqls?: Sqls;
   }
   export type RedshiftSecretManagerArn = string;
   export type ReferenceId = string;
@@ -2766,6 +2767,7 @@ declare namespace EventBridge {
   }
   export type SecretsManagerSecretArn = string;
   export type Sql = string;
+  export type Sqls = Sql[];
   export interface SqsParameters {
     /**
      * The FIFO message group ID to use as the target.

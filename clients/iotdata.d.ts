@@ -110,6 +110,10 @@ declare namespace IotData {
      * The Epoch date and time, in milliseconds, when the retained message was stored by IoT.
      */
     lastModifiedTime?: Timestamp;
+    /**
+     * A base64-encoded JSON string that includes an array of JSON objects, or null if the retained message doesn't include any user properties. The following example userProperties parameter is a JSON string that represents two user properties. Note that it will be base64-encoded:  [{"deviceName": "alpha"}, {"deviceCnt": "45"}] 
+     */
+    userProperties?: UserPropertiesBlob;
   }
   export interface GetThingShadowRequest {
     /**
@@ -273,6 +277,7 @@ declare namespace IotData {
     payload?: JsonDocument;
   }
   export type UserProperties = string;
+  export type UserPropertiesBlob = Buffer|Uint8Array|Blob|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

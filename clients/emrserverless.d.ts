@@ -108,11 +108,11 @@ declare class EMRServerless extends Service {
    */
   stopApplication(callback?: (err: AWSError, data: EMRServerless.Types.StopApplicationResponse) => void): Request<EMRServerless.Types.StopApplicationResponse, AWSError>;
   /**
-   * Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. 
+   * Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. 
    */
   tagResource(params: EMRServerless.Types.TagResourceRequest, callback?: (err: AWSError, data: EMRServerless.Types.TagResourceResponse) => void): Request<EMRServerless.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns tags to resources. A tag is a label that you assign to an AWS resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your AWS resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. 
+   * Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When you have many resources of the same type, you can quickly identify a specific resource based on the tags you've assigned to it. 
    */
   tagResource(callback?: (err: AWSError, data: EMRServerless.Types.TagResourceResponse) => void): Request<EMRServerless.Types.TagResourceResponse, AWSError>;
   /**
@@ -574,6 +574,10 @@ declare namespace EMRServerless {
      * The job run total execution duration in seconds. This field is only available for job runs in a COMPLETED, FAILED, or CANCELLED state.
      */
     totalExecutionDurationSeconds?: Integer;
+    /**
+     * Maximum duration for the job run to run. If the job run runs beyond this duration, it will be automatically cancelled.
+     */
+    executionTimeoutMinutes?: Duration;
   }
   export type JobRunId = string;
   export type JobRunState = "SUBMITTED"|"PENDING"|"SCHEDULED"|"RUNNING"|"SUCCESS"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
@@ -834,7 +838,7 @@ declare namespace EMRServerless {
      */
     jobRunId: JobRunId;
     /**
-     * The output lists the execution role ARN of the job run.
+     * This output displays the ARN of the job run..
      */
     arn: JobArn;
   }

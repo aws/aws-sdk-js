@@ -10116,6 +10116,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>Metadata which can be used to manage the domain configuration.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>"
+        },
+        "tlsConfig": {
+          "shape": "TlsConfig",
+          "documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
         }
       }
     },
@@ -12432,6 +12436,10 @@
         "lastStatusChangeDate": {
           "shape": "DateType",
           "documentation": "<p>The date and time the domain configuration's status was last changed.</p>"
+        },
+        "tlsConfig": {
+          "shape": "TlsConfig",
+          "documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
         }
       }
     },
@@ -20340,6 +20348,11 @@
         "shape": "SecurityGroupId"
       }
     },
+    "SecurityPolicy": {
+      "type": "string",
+      "max": 128,
+      "pattern": "[\\s\\S]*"
+    },
     "SecurityProfileArn": {
       "type": "string"
     },
@@ -21966,6 +21979,16 @@
       "max": 10,
       "min": 1
     },
+    "TlsConfig": {
+      "type": "structure",
+      "members": {
+        "securityPolicy": {
+          "shape": "SecurityPolicy",
+          "documentation": "<p>The security policy for a domain configuration. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table\">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
+    },
     "TlsContext": {
       "type": "structure",
       "members": {
@@ -22644,6 +22667,10 @@
         "removeAuthorizerConfig": {
           "shape": "RemoveAuthorizerConfig",
           "documentation": "<p>Removes the authorization configuration from a domain.</p>"
+        },
+        "tlsConfig": {
+          "shape": "TlsConfig",
+          "documentation": "<p>An object that specifies the TLS configuration for a domain.</p>"
         }
       }
     },
