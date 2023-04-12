@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1356.0-->
+<!--LATEST=2.1357.0-->
 <!--ENTRYINSERT-->
+
+## 2.1357.0
+* feature: GroundStation: AWS Ground Station Wideband DigIF GA Release
 
 ## 2.1356.0
 * feature: Iot: Revert to remove unexpected API changes

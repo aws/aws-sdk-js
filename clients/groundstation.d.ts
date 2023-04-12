@@ -101,11 +101,11 @@ declare class GroundStation extends Service {
    */
   describeEphemeris(callback?: (err: AWSError, data: GroundStation.Types.DescribeEphemerisResponse) => void): Request<GroundStation.Types.DescribeEphemerisResponse, AWSError>;
   /**
-   * Gets the latest configuration information for a registered agent.
+   *   For use by AWS Ground Station Agent and shouldn't be called directly.  Gets the latest configuration information for a registered agent.
    */
   getAgentConfiguration(params: GroundStation.Types.GetAgentConfigurationRequest, callback?: (err: AWSError, data: GroundStation.Types.GetAgentConfigurationResponse) => void): Request<GroundStation.Types.GetAgentConfigurationResponse, AWSError>;
   /**
-   * Gets the latest configuration information for a registered agent.
+   *   For use by AWS Ground Station Agent and shouldn't be called directly.  Gets the latest configuration information for a registered agent.
    */
   getAgentConfiguration(callback?: (err: AWSError, data: GroundStation.Types.GetAgentConfigurationResponse) => void): Request<GroundStation.Types.GetAgentConfigurationResponse, AWSError>;
   /**
@@ -213,11 +213,11 @@ declare class GroundStation extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: GroundStation.Types.ListTagsForResourceResponse) => void): Request<GroundStation.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Registers a new agent with AWS Groundstation.
+   *   For use by AWS Ground Station Agent and shouldn't be called directly.   Registers a new agent with AWS Ground Station. 
    */
   registerAgent(params: GroundStation.Types.RegisterAgentRequest, callback?: (err: AWSError, data: GroundStation.Types.RegisterAgentResponse) => void): Request<GroundStation.Types.RegisterAgentResponse, AWSError>;
   /**
-   * Registers a new agent with AWS Groundstation.
+   *   For use by AWS Ground Station Agent and shouldn't be called directly.   Registers a new agent with AWS Ground Station. 
    */
   registerAgent(callback?: (err: AWSError, data: GroundStation.Types.RegisterAgentResponse) => void): Request<GroundStation.Types.RegisterAgentResponse, AWSError>;
   /**
@@ -245,11 +245,11 @@ declare class GroundStation extends Service {
    */
   untagResource(callback?: (err: AWSError, data: GroundStation.Types.UntagResourceResponse) => void): Request<GroundStation.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update the status of the agent.
+   *   For use by AWS Ground Station Agent and shouldn't be called directly.  Update the status of the agent.
    */
   updateAgentStatus(params: GroundStation.Types.UpdateAgentStatusRequest, callback?: (err: AWSError, data: GroundStation.Types.UpdateAgentStatusResponse) => void): Request<GroundStation.Types.UpdateAgentStatusResponse, AWSError>;
   /**
-   * Update the status of the agent.
+   *   For use by AWS Ground Station Agent and shouldn't be called directly.  Update the status of the agent.
    */
   updateAgentStatus(callback?: (err: AWSError, data: GroundStation.Types.UpdateAgentStatusResponse) => void): Request<GroundStation.Types.UpdateAgentStatusResponse, AWSError>;
   /**
@@ -287,7 +287,12 @@ declare class GroundStation extends Service {
 }
 declare namespace GroundStation {
   export type AWSRegion = string;
+  export type AgentCpuCoresList = Integer[];
   export interface AgentDetails {
+    /**
+     * List of CPU cores reserved for the agent.
+     */
+    agentCpuCores?: AgentCpuCoresList;
     /**
      * Current agent version.
      */
@@ -305,9 +310,9 @@ declare namespace GroundStation {
      */
     instanceType: InstanceType;
     /**
-     * Number of Cpu cores reserved for agent.
+     *  This field should not be used. Use agentCpuCores instead.  List of CPU cores reserved for processes other than the agent running on the EC2 instance.
      */
-    reservedCpuCores: ReservedCpuCoresList;
+    reservedCpuCores?: AgentCpuCoresList;
   }
   export type AgentStatus = "SUCCESS"|"FAILED"|"ACTIVE"|"INACTIVE"|string;
   export interface AggregateStatus {
@@ -396,6 +401,9 @@ declare namespace GroundStation {
   }
   export type CapabilityArn = string;
   export type CapabilityArnList = CapabilityArn[];
+  export type CapabilityHealth = "UNHEALTHY"|"HEALTHY"|string;
+  export type CapabilityHealthReason = "NO_REGISTERED_AGENT"|"INVALID_IP_OWNERSHIP"|"NOT_AUTHORIZED_TO_CREATE_SLR"|"UNVERIFIED_IP_OWNERSHIP"|"INITIALIZING_DATAPLANE"|"DATAPLANE_FAILURE"|"HEALTHY"|string;
+  export type CapabilityHealthReasonList = CapabilityHealthReason[];
   export interface ComponentStatusData {
     /**
      * Bytes received by the component.
@@ -412,7 +420,7 @@ declare namespace GroundStation {
     /**
      * The Component type.
      */
-    componentType: ComponentType;
+    componentType: ComponentTypeString;
     /**
      * Dataflow UUID associated with the component.
      */
@@ -427,12 +435,12 @@ declare namespace GroundStation {
     status: AgentStatus;
   }
   export type ComponentStatusList = ComponentStatusData[];
-  export type ComponentType = "LAMINAR_FLOW"|"PRISM"|"DIGITIZER"|string;
+  export type ComponentTypeString = string;
   export interface ComponentVersion {
     /**
      * Component type.
      */
-    componentType: ComponentType;
+    componentType: ComponentTypeString;
     /**
      * List of versions.
      */
@@ -603,11 +611,11 @@ declare namespace GroundStation {
   }
   export interface CreateDataflowEndpointGroupRequest {
     /**
-     * Amount of time, in seconds, after a contact ends for the contact to remain in a POSTPASS state. A CloudWatch event is emitted when the contact enters and exits the POSTPASS state.
+     * Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state.
      */
     contactPostPassDurationSeconds?: DataflowEndpointGroupDurationInSeconds;
     /**
-     * Amount of time, in seconds, prior to contact start for the contact to remain in a PREPASS state. A CloudWatch event is emitted when the contact enters and exits the PREPASS state.
+     * Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state.
      */
     contactPrePassDurationSeconds?: DataflowEndpointGroupDurationInSeconds;
     /**
@@ -969,6 +977,14 @@ declare namespace GroundStation {
      */
     endpoint?: DataflowEndpoint;
     /**
+     * Health reasons for a dataflow endpoint. This field is ignored when calling CreateDataflowEndpointGroup.
+     */
+    healthReasons?: CapabilityHealthReasonList;
+    /**
+     * A dataflow endpoint health status. This field is ignored when calling CreateDataflowEndpointGroup.
+     */
+    healthStatus?: CapabilityHealth;
+    /**
      * Endpoint security details including a list of subnets, a list of security groups and a role to connect streams to instances.
      */
     securityDetails?: SecurityDetails;
@@ -1134,11 +1150,11 @@ declare namespace GroundStation {
   }
   export interface GetDataflowEndpointGroupResponse {
     /**
-     * Amount of time, in seconds, after a contact ends for the contact to remain in a POSTPASS state. A CloudWatch event is emitted when the contact enters and exits the POSTPASS state.
+     * Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state.
      */
     contactPostPassDurationSeconds?: DataflowEndpointGroupDurationInSeconds;
     /**
-     * Amount of time, in seconds, prior to contact start for the contact to remain in a PREPASS state. A CloudWatch event is emitted when the contact enters and exits the PREPASS state.
+     * Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state.
      */
     contactPrePassDurationSeconds?: DataflowEndpointGroupDurationInSeconds;
     /**
@@ -1584,7 +1600,7 @@ declare namespace GroundStation {
      */
     agentDetails: AgentDetails;
     /**
-     * Data for associating and agent with the capabilities it is managing.
+     * Data for associating an agent with the capabilities it is managing.
      */
     discoveryData: DiscoveryData;
   }
@@ -1620,7 +1636,6 @@ declare namespace GroundStation {
      */
     tags?: TagsMap;
   }
-  export type ReservedCpuCoresList = Integer[];
   export type RoleArn = string;
   export type S3BucketName = string;
   export type S3KeyPrefix = string;

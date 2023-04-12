@@ -235,7 +235,7 @@ declare namespace ManagedBlockchain {
      */
     Id?: ResourceIdString;
     /**
-     * The type of the accessor.  Currently accessor type is restricted to BILLING_TOKEN. 
+     * The type of the accessor.  Currently, accessor type is restricted to BILLING_TOKEN. 
      */
     Type?: AccessorType;
     /**
@@ -309,7 +309,7 @@ declare namespace ManagedBlockchain {
      */
     ClientRequestToken: ClientRequestTokenString;
     /**
-     * The type of accessor.  Currently accessor type is restricted to BILLING_TOKEN. 
+     * The type of accessor.  Currently, accessor type is restricted to BILLING_TOKEN. 
      */
     AccessorType: AccessorType;
     /**
@@ -405,7 +405,7 @@ declare namespace ManagedBlockchain {
      */
     ClientRequestToken: ClientRequestTokenString;
     /**
-     * The unique identifier of the network for the node. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli     n-ethereum-rinkeby     n-ethereum-ropsten   
+     * The unique identifier of the network for the node. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli     n-ethereum-rinkeby   
      */
     NetworkId: ResourceIdString;
     /**
@@ -481,7 +481,7 @@ declare namespace ManagedBlockchain {
   }
   export interface DeleteNodeInput {
     /**
-     * The unique identifier of the network that the node is on. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli     n-ethereum-rinkeby     n-ethereum-ropsten   
+     * The unique identifier of the network that the node is on. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli     n-ethereum-rinkeby   
      */
     NetworkId: ResourceIdString;
     /**
@@ -915,7 +915,7 @@ declare namespace ManagedBlockchain {
      */
     AdminUsername: UsernameString;
     /**
-     * The password for the member's initial administrative user. The AdminPassword must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quotation mark (‘), a double quotation marks (“), a forward slash(/), a backward slash(\), @, or a space.
+     * The password for the member's initial administrative user. The AdminPassword must be at least 8 characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quotation mark (‘), a double quotation marks (“), a forward slash(/), a backward slash(\), @, or a space.
      */
     AdminPassword: PasswordString;
   }
@@ -1007,7 +1007,7 @@ declare namespace ManagedBlockchain {
      */
     VpcEndpointServiceName?: String;
     /**
-     * The voting rules for the network to decide if a proposal is accepted.
+     * The voting rules that the network uses to decide if a proposal is accepted.
      */
     VotingPolicy?: VotingPolicy;
     /**
@@ -1029,7 +1029,7 @@ declare namespace ManagedBlockchain {
   }
   export interface NetworkEthereumAttributes {
     /**
-     * The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as follows:   mainnet = 1    goerli = 5    rinkeby = 4    ropsten = 3   
+     * The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as follows:   mainnet = 1    goerli = 5    rinkeby = 4   
      */
     ChainId?: String;
   }
