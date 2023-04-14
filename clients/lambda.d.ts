@@ -295,11 +295,11 @@ declare class Lambda extends Service {
    */
   invokeAsync(callback?: (err: AWSError, data: Lambda.Types.InvokeAsyncResponse) => void): Request<Lambda.Types.InvokeAsyncResponse, AWSError>;
   /**
-   * Configure your Lambda functions to stream response payloads back to clients. For more information, see Configuring a Lambda function to stream responses.
+   * Configure your Lambda functions to stream response payloads back to clients. For more information, see Configuring a Lambda function to stream responses. This operation requires permission for the lambda:InvokeFunction action. For details on how to set up permissions for cross-account invocations, see Granting function access to other accounts.
    */
   invokeWithResponseStream(params: Lambda.Types.InvokeWithResponseStreamRequest, callback?: (err: AWSError, data: Lambda.Types.InvokeWithResponseStreamResponse) => void): Request<Lambda.Types.InvokeWithResponseStreamResponse, AWSError>;
   /**
-   * Configure your Lambda functions to stream response payloads back to clients. For more information, see Configuring a Lambda function to stream responses.
+   * Configure your Lambda functions to stream response payloads back to clients. For more information, see Configuring a Lambda function to stream responses. This operation requires permission for the lambda:InvokeFunction action. For details on how to set up permissions for cross-account invocations, see Granting function access to other accounts.
    */
   invokeWithResponseStream(callback?: (err: AWSError, data: Lambda.Types.InvokeWithResponseStreamResponse) => void): Request<Lambda.Types.InvokeWithResponseStreamResponse, AWSError>;
   /**
@@ -1360,7 +1360,7 @@ declare namespace Lambda {
      */
     SelfManagedEventSource?: SelfManagedEventSource;
     /**
-     * (Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records. 
+     * (Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.  The minimum value that can be set is 60 seconds. 
      */
     MaximumRecordAgeInSeconds?: MaximumRecordAgeInSeconds;
     /**
@@ -1477,7 +1477,7 @@ declare namespace Lambda {
      */
     FunctionArn?: NameSpacedFunctionArn;
     /**
-     * The runtime environment for the Lambda function.
+     * The identifier of the function's runtime. Runtime is required if the deployment package is a .zip file archive. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     Runtime?: Runtime;
     /**

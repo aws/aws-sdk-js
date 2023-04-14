@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1358.0-->
+<!--LATEST=2.1359.0-->
 <!--ENTRYINSERT-->
+
+## 2.1359.0
+* feature: Lambda: This release adds SnapStart related exceptions to InvokeWithResponseStream API. IAM access related documentation is also added for this API.
+* feature: RDS: This release adds support of modifying the engine mode of database clusters.
 
 ## 2.1358.0
 * feature: ChimeSDKVoice: This release adds tagging support for Voice Connectors and SIP Media Applications
