@@ -357,8 +357,7 @@
     "CreateMonitorInput": {
       "type": "structure",
       "required": [
-        "MonitorName",
-        "MaxCityNetworksToMonitor"
+        "MonitorName"
       ],
       "members": {
         "MonitorName": {
@@ -384,7 +383,11 @@
         },
         "InternetMeasurementsLogDelivery": {
           "shape": "InternetMeasurementsLogDelivery",
-          "documentation": "<p>Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.</p>"
+          "documentation": "<p>Publish internet measurements for Internet Monitor to an Amazon S3 bucket in addition to CloudWatch Logs.</p>"
+        },
+        "TrafficPercentageToMonitor": {
+          "shape": "TrafficPercentageToMonitor",
+          "documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
         }
       }
     },
@@ -524,8 +527,7 @@
         "Resources",
         "Status",
         "CreatedAt",
-        "ModifiedAt",
-        "MaxCityNetworksToMonitor"
+        "ModifiedAt"
       ],
       "members": {
         "MonitorName": {
@@ -571,6 +573,10 @@
         "InternetMeasurementsLogDelivery": {
           "shape": "InternetMeasurementsLogDelivery",
           "documentation": "<p>Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.</p>"
+        },
+        "TrafficPercentageToMonitor": {
+          "shape": "TrafficPercentageToMonitor",
+          "documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
         }
       }
     },
@@ -751,7 +757,7 @@
           "documentation": "<p>The configuration information for publishing Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix for the S3 bucket to store the measurements, and the delivery status. The delivery status is <code>ENABLED</code> or <code>DISABLED</code>, depending on whether you choose to deliver internet measurements to S3 logs.</p>"
         }
       },
-      "documentation": "<p>Configuration information for other locations that you choose to publish Amazon CloudWatch Internet Monitor internet measurements to, such as Amazon S3. The measurements are also published to Amazon CloudWatch Logs.</p>"
+      "documentation": "<p>Publish internet measurements to an Amazon S3 bucket in addition to CloudWatch Logs.</p>"
     },
     "ListHealthEventsInput": {
       "type": "structure",
@@ -1135,6 +1141,11 @@
       "max": 256,
       "min": 0
     },
+    "TrafficPercentageToMonitor": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
     "TriangulationEventType": {
       "type": "string",
       "enum": [
@@ -1203,6 +1214,10 @@
         "InternetMeasurementsLogDelivery": {
           "shape": "InternetMeasurementsLogDelivery",
           "documentation": "<p>Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.</p>"
+        },
+        "TrafficPercentageToMonitor": {
+          "shape": "TrafficPercentageToMonitor",
+          "documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
         }
       }
     },

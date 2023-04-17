@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1359.0-->
+<!--LATEST=2.1360.0-->
 <!--ENTRYINSERT-->
+
+## 2.1360.0
+* feature: Appflow: This release adds a Client Token parameter to the following AppFlow APIs: Create/Update Connector Profile, Create/Update Flow, Start Flow, Register Connector, Update Connector Registration. The Client Token parameter allows idempotent operations for these APIs.
+* feature: Drs: Changed existing APIs and added new APIs to support using an account-level launch configuration template with AWS Elastic Disaster Recovery.
+* feature: EMRServerless: The GetJobRun API has been updated to include the job's billed resource utilization. This utilization shows the aggregate vCPU, memory and storage that AWS has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker.
+* feature: InternetMonitor: This release includes a new configurable value, TrafficPercentageToMonitor, which allows users to adjust the amount of traffic monitored by percentage
+* feature: IoTWireless: Supports the new feature of LoRaWAN roaming, allows to configure MaxEirp for LoRaWAN gateway, and allows to configure PingSlotPeriod for LoRaWAN multicast group
+* feature: Lambda: Add Python 3.10 (python3.10) support to AWS Lambda
 
 ## 2.1359.0
 * feature: Lambda: This release adds SnapStart related exceptions to InvokeWithResponseStream API. IAM access related documentation is also added for this API.

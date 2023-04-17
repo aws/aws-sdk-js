@@ -128,11 +128,15 @@ declare namespace InternetMonitor {
     /**
      * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the network or ASN, such as an internet service provider (ISP), that clients access the resources through. This limit helps control billing costs. To learn more, see Choosing a city-network maximum value  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
-    MaxCityNetworksToMonitor: MaxCityNetworksToMonitor;
+    MaxCityNetworksToMonitor?: MaxCityNetworksToMonitor;
     /**
-     * Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.
+     * Publish internet measurements for Internet Monitor to an Amazon S3 bucket in addition to CloudWatch Logs.
      */
     InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
+    /**
+     * The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+     */
+    TrafficPercentageToMonitor?: TrafficPercentageToMonitor;
   }
   export interface CreateMonitorOutput {
     /**
@@ -251,11 +255,15 @@ declare namespace InternetMonitor {
     /**
      * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the network or ASN, such as an internet service provider (ISP), that clients access the resources through. This limit helps control billing costs. To learn more, see Choosing a city-network maximum value  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
-    MaxCityNetworksToMonitor: MaxCityNetworksToMonitor;
+    MaxCityNetworksToMonitor?: MaxCityNetworksToMonitor;
     /**
      * Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.
      */
     InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
+    /**
+     * The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+     */
+    TrafficPercentageToMonitor?: TrafficPercentageToMonitor;
   }
   export interface HealthEvent {
     /**
@@ -568,6 +576,7 @@ declare namespace InternetMonitor {
   export interface TagResourceOutput {
   }
   export type TagValue = string;
+  export type TrafficPercentageToMonitor = number;
   export type TriangulationEventType = "AWS"|"Internet"|string;
   export interface UntagResourceInput {
     /**
@@ -610,6 +619,10 @@ declare namespace InternetMonitor {
      * Publish internet measurements for Internet Monitor to another location, such as an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch Logs.
      */
     InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
+    /**
+     * The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+     */
+    TrafficPercentageToMonitor?: TrafficPercentageToMonitor;
   }
   export interface UpdateMonitorOutput {
     /**

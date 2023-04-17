@@ -327,6 +327,7 @@ declare namespace Appflow {
   export type ClientId = string;
   export type ClientNumber = string;
   export type ClientSecret = string;
+  export type ClientToken = string;
   export type ClusterIdentifier = string;
   export type ConnectionMode = "Public"|"Private"|string;
   export interface ConnectorConfiguration {
@@ -993,6 +994,10 @@ declare namespace Appflow {
      *  Defines the connector-specific configuration and credentials. 
      */
     connectorProfileConfig: ConnectorProfileConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your CreateConnectorProfile request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to CreateConnectorProfile. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface CreateConnectorProfileResponse {
     /**
@@ -1037,6 +1042,10 @@ declare namespace Appflow {
      * Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
      */
     metadataCatalogConfig?: MetadataCatalogConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your CreateFlow request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to CreateFlow. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface CreateFlowResponse {
     /**
@@ -2352,6 +2361,10 @@ declare namespace Appflow {
      * The provisioning type of the connector. Currently the only supported value is LAMBDA.
      */
     connectorProvisioningConfig?: ConnectorProvisioningConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your RegisterConnector request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to RegisterConnector. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface RegisterConnectorResponse {
     /**
@@ -2858,6 +2871,10 @@ declare namespace Appflow {
      *  The specified name of the flow. Spaces are not allowed. Use underscores (_) or hyphens (-) only. 
      */
     flowName: FlowName;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your StartFlow request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs for flows that run on a schedule or based on an event. However, the error doesn't occur for flows that run on demand. You set the conditions that initiate your flow for the triggerConfig parameter. If you use a different value for clientToken, Amazon AppFlow considers it a new call to StartFlow. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface StartFlowResponse {
     /**
@@ -3028,6 +3045,10 @@ declare namespace Appflow {
      *  Defines the connector-specific profile configuration and credentials. 
      */
     connectorProfileConfig: ConnectorProfileConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your UpdateConnectorProfile request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to UpdateConnectorProfile. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface UpdateConnectorProfileResponse {
     /**
@@ -3045,6 +3066,10 @@ declare namespace Appflow {
      */
     description?: Description;
     connectorProvisioningConfig?: ConnectorProvisioningConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your UpdateConnectorRegistration request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to UpdateConnectorRegistration. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface UpdateConnectorRegistrationResponse {
     /**
@@ -3078,6 +3103,10 @@ declare namespace Appflow {
      * Specifies the configuration that Amazon AppFlow uses when it catalogs the data that's transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
      */
     metadataCatalogConfig?: MetadataCatalogConfig;
+    /**
+     * The clientToken parameter is an idempotency token. It ensures that your UpdateFlow request completes only once. You choose the value to pass. For example, if you don't receive a response from your request, you can safely retry the request with the same clientToken parameter value. If you omit a clientToken value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases. If you specify input parameters that differ from your first request, an error occurs. If you use a different value for clientToken, Amazon AppFlow considers it a new call to UpdateFlow. The token is active for 8 hours.
+     */
+    clientToken?: ClientToken;
   }
   export interface UpdateFlowResponse {
     /**

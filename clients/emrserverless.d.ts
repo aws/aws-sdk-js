@@ -44,11 +44,11 @@ declare class EMRServerless extends Service {
    */
   getApplication(callback?: (err: AWSError, data: EMRServerless.Types.GetApplicationResponse) => void): Request<EMRServerless.Types.GetApplicationResponse, AWSError>;
   /**
-   * Returns a URL to access the job run dashboard.
+   * Returns a URL to access the job run dashboard. The generated URL is valid for one hour, after which you must invoke the API again to generate a new URL.
    */
   getDashboardForJobRun(params: EMRServerless.Types.GetDashboardForJobRunRequest, callback?: (err: AWSError, data: EMRServerless.Types.GetDashboardForJobRunResponse) => void): Request<EMRServerless.Types.GetDashboardForJobRunResponse, AWSError>;
   /**
-   * Returns a URL to access the job run dashboard.
+   * Returns a URL to access the job run dashboard. The generated URL is valid for one hour, after which you must invoke the API again to generate a new URL.
    */
   getDashboardForJobRun(callback?: (err: AWSError, data: EMRServerless.Types.GetDashboardForJobRunResponse) => void): Request<EMRServerless.Types.GetDashboardForJobRunResponse, AWSError>;
   /**
@@ -566,7 +566,7 @@ declare namespace EMRServerless {
      */
     tags?: TagMap;
     /**
-     * The aggregate vCPU, memory, and storage resources used from the time job start executing till the time job is terminated, rounded up to the nearest second.
+     * The aggregate vCPU, memory, and storage resources used from the time the job starts to execute, until the time the job terminates, rounded up to the nearest second.
      */
     totalResourceUtilization?: TotalResourceUtilization;
     networkConfiguration?: NetworkConfiguration;
@@ -575,9 +575,13 @@ declare namespace EMRServerless {
      */
     totalExecutionDurationSeconds?: Integer;
     /**
-     * Maximum duration for the job run to run. If the job run runs beyond this duration, it will be automatically cancelled.
+     * Returns the job run timeout value from the StartJobRun call. If no timeout was specified, then it returns the default timeout of 720 minutes.
      */
     executionTimeoutMinutes?: Duration;
+    /**
+     * The aggregate vCPU, memory, and storage that AWS has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker. Note that billed resources do not include usage for idle pre-initialized workers.
+     */
+    billedResourceUtilization?: ResourceUtilization;
   }
   export type JobRunId = string;
   export type JobRunState = "SUBMITTED"|"PENDING"|"SCHEDULED"|"RUNNING"|"SUCCESS"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
@@ -758,6 +762,20 @@ declare namespace EMRServerless {
   export type ReleaseLabel = string;
   export type RequestIdentityUserArn = string;
   export type ResourceArn = string;
+  export interface ResourceUtilization {
+    /**
+     * The aggregated vCPU used per hour from the time the job starts executing until the job is terminated.
+     */
+    vCPUHour?: Double;
+    /**
+     * The aggregated memory used per hour from the time the job starts executing until the job is terminated.
+     */
+    memoryGBHour?: Double;
+    /**
+     * The aggregated storage used per hour from the time the job starts executing until the job is terminated.
+     */
+    storageGBHour?: Double;
+  }
   export interface S3MonitoringConfiguration {
     /**
      * The Amazon S3 destination URI for log publishing.

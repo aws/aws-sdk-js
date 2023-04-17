@@ -1855,6 +1855,7 @@ declare namespace IoTWireless {
      */
     DownlinkFrequency: DownlinkFrequency;
   }
+  export type GatewayMaxEirp = number;
   export type GenAppKey = string;
   export type GeoJsonPayload = Buffer|Uint8Array|Blob|string;
   export type GeranCid = number;
@@ -3176,6 +3177,10 @@ declare namespace IoTWireless {
      * Beaconing object information, which consists of the data rate and frequency parameters.
      */
     Beaconing?: Beaconing;
+    /**
+     * The MaxEIRP value.
+     */
+    MaxEirp?: GatewayMaxEirp;
   }
   export interface LoRaWANGatewayCurrentVersion {
     /**
@@ -3326,6 +3331,10 @@ declare namespace IoTWireless {
     DlFreq?: DlFreq;
     SessionStartTime?: SessionStartTimeTimestamp;
     SessionTimeout?: SessionTimeout;
+    /**
+     * The PingSlotPeriod value.
+     */
+    PingSlotPeriod?: PingSlotPeriod;
   }
   export interface LoRaWANSendDataToDevice {
     FPort?: FPort;
@@ -3347,6 +3356,14 @@ declare namespace IoTWireless {
      * The DrMax value.
      */
     DrMax?: DrMaxBox;
+    /**
+     * The PRAllowed value that describes whether passive roaming is allowed.
+     */
+    PrAllowed?: PrAllowed;
+    /**
+     * The RAAllowed value that describes whether roaming activation is allowed.
+     */
+    RaAllowed?: RaAllowed;
   }
   export interface LoRaWANStartFuotaTask {
     StartTime?: StartTime;
@@ -4508,6 +4525,10 @@ declare namespace IoTWireless {
     Description?: Description;
     JoinEuiFilters?: JoinEuiFilters;
     NetIdFilters?: NetIdFilters;
+    /**
+     * The MaxEIRP value.
+     */
+    MaxEirp?: GatewayMaxEirp;
   }
   export interface UpdateWirelessGatewayResponse {
   }

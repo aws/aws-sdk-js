@@ -20,6 +20,14 @@ declare class Drs extends Service {
    */
   createExtendedSourceServer(callback?: (err: AWSError, data: Drs.Types.CreateExtendedSourceServerResponse) => void): Request<Drs.Types.CreateExtendedSourceServerResponse, AWSError>;
   /**
+   * Creates a new Launch Configuration Template.
+   */
+  createLaunchConfigurationTemplate(params: Drs.Types.CreateLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Drs.Types.CreateLaunchConfigurationTemplateResponse) => void): Request<Drs.Types.CreateLaunchConfigurationTemplateResponse, AWSError>;
+  /**
+   * Creates a new Launch Configuration Template.
+   */
+  createLaunchConfigurationTemplate(callback?: (err: AWSError, data: Drs.Types.CreateLaunchConfigurationTemplateResponse) => void): Request<Drs.Types.CreateLaunchConfigurationTemplateResponse, AWSError>;
+  /**
    * Creates a new ReplicationConfigurationTemplate.
    */
   createReplicationConfigurationTemplate(params: Drs.Types.CreateReplicationConfigurationTemplateRequest, callback?: (err: AWSError, data: Drs.Types.ReplicationConfigurationTemplate) => void): Request<Drs.Types.ReplicationConfigurationTemplate, AWSError>;
@@ -35,6 +43,14 @@ declare class Drs extends Service {
    * Deletes a single Job by ID.
    */
   deleteJob(callback?: (err: AWSError, data: Drs.Types.DeleteJobResponse) => void): Request<Drs.Types.DeleteJobResponse, AWSError>;
+  /**
+   * Deletes a single Launch Configuration Template by ID.
+   */
+  deleteLaunchConfigurationTemplate(params: Drs.Types.DeleteLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Drs.Types.DeleteLaunchConfigurationTemplateResponse) => void): Request<Drs.Types.DeleteLaunchConfigurationTemplateResponse, AWSError>;
+  /**
+   * Deletes a single Launch Configuration Template by ID.
+   */
+  deleteLaunchConfigurationTemplate(callback?: (err: AWSError, data: Drs.Types.DeleteLaunchConfigurationTemplateResponse) => void): Request<Drs.Types.DeleteLaunchConfigurationTemplateResponse, AWSError>;
   /**
    * Deletes a single Recovery Instance by ID. This deletes the Recovery Instance resource from Elastic Disaster Recovery. The Recovery Instance must be disconnected first in order to delete it.
    */
@@ -75,6 +91,14 @@ declare class Drs extends Service {
    * Returns a list of Jobs. Use the JobsID and fromDate and toDate filters to limit which jobs are returned. The response is sorted by creationDataTime - latest date first. Jobs are created by the StartRecovery, TerminateRecoveryInstances and StartFailbackLaunch APIs. Jobs are also created by DiagnosticLaunch and TerminateDiagnosticInstances, which are APIs available only to *Support* and only used in response to relevant support tickets.
    */
   describeJobs(callback?: (err: AWSError, data: Drs.Types.DescribeJobsResponse) => void): Request<Drs.Types.DescribeJobsResponse, AWSError>;
+  /**
+   * Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
+   */
+  describeLaunchConfigurationTemplates(params: Drs.Types.DescribeLaunchConfigurationTemplatesRequest, callback?: (err: AWSError, data: Drs.Types.DescribeLaunchConfigurationTemplatesResponse) => void): Request<Drs.Types.DescribeLaunchConfigurationTemplatesResponse, AWSError>;
+  /**
+   * Lists all Launch Configuration Templates, filtered by Launch Configuration Template IDs
+   */
+  describeLaunchConfigurationTemplates(callback?: (err: AWSError, data: Drs.Types.DescribeLaunchConfigurationTemplatesResponse) => void): Request<Drs.Types.DescribeLaunchConfigurationTemplatesResponse, AWSError>;
   /**
    * Lists all Recovery Instances or multiple Recovery Instances by ID.
    */
@@ -276,6 +300,14 @@ declare class Drs extends Service {
    */
   updateLaunchConfiguration(callback?: (err: AWSError, data: Drs.Types.LaunchConfiguration) => void): Request<Drs.Types.LaunchConfiguration, AWSError>;
   /**
+   * Updates an existing Launch Configuration Template by ID.
+   */
+  updateLaunchConfigurationTemplate(params: Drs.Types.UpdateLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Drs.Types.UpdateLaunchConfigurationTemplateResponse) => void): Request<Drs.Types.UpdateLaunchConfigurationTemplateResponse, AWSError>;
+  /**
+   * Updates an existing Launch Configuration Template by ID.
+   */
+  updateLaunchConfigurationTemplate(callback?: (err: AWSError, data: Drs.Types.UpdateLaunchConfigurationTemplateResponse) => void): Request<Drs.Types.UpdateLaunchConfigurationTemplateResponse, AWSError>;
+  /**
    * Allows you to update a ReplicationConfiguration by Source Server ID.
    */
   updateReplicationConfiguration(params: Drs.Types.UpdateReplicationConfigurationRequest, callback?: (err: AWSError, data: Drs.Types.ReplicationConfiguration) => void): Request<Drs.Types.ReplicationConfiguration, AWSError>;
@@ -356,6 +388,38 @@ declare namespace Drs {
      * Created extended source server.
      */
     sourceServer?: SourceServer;
+  }
+  export interface CreateLaunchConfigurationTemplateRequest {
+    /**
+     * Copy private IP.
+     */
+    copyPrivateIp?: Boolean;
+    /**
+     * Copy tags.
+     */
+    copyTags?: Boolean;
+    /**
+     * Launch disposition.
+     */
+    launchDisposition?: LaunchDisposition;
+    /**
+     * Licensing.
+     */
+    licensing?: Licensing;
+    /**
+     * Request to associate tags during creation of a Launch Configuration Template.
+     */
+    tags?: TagsMap;
+    /**
+     * Target instance type right-sizing method.
+     */
+    targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
+  }
+  export interface CreateLaunchConfigurationTemplateResponse {
+    /**
+     * Created Launch Configuration Template.
+     */
+    launchConfigurationTemplate?: LaunchConfigurationTemplate;
   }
   export interface CreateReplicationConfigurationTemplateRequest {
     /**
@@ -519,6 +583,14 @@ declare namespace Drs {
   }
   export interface DeleteJobResponse {
   }
+  export interface DeleteLaunchConfigurationTemplateRequest {
+    /**
+     * The ID of the Launch Configuration Template to be deleted.
+     */
+    launchConfigurationTemplateID: LaunchConfigurationTemplateID;
+  }
+  export interface DeleteLaunchConfigurationTemplateResponse {
+  }
   export interface DeleteRecoveryInstanceRequest {
     /**
      * The ID of the Recovery Instance to be deleted.
@@ -601,6 +673,30 @@ declare namespace Drs {
     items?: JobsList;
     /**
      * The token of the next Job to retrieve.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeLaunchConfigurationTemplatesRequest {
+    /**
+     * Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+     */
+    launchConfigurationTemplateIDs?: LaunchConfigurationTemplateIDs;
+    /**
+     * Maximum results to be returned in DescribeLaunchConfigurationTemplates.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * The token of the next Launch Configuration Template to retrieve.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeLaunchConfigurationTemplatesResponse {
+    /**
+     * List of items returned by DescribeLaunchConfigurationTemplates.
+     */
+    items?: LaunchConfigurationTemplates;
+    /**
+     * The token of the next Launch Configuration Template to retrieve.
      */
     nextToken?: PaginationToken;
   }
@@ -956,6 +1052,43 @@ declare namespace Drs {
      */
     targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
   }
+  export interface LaunchConfigurationTemplate {
+    /**
+     * ARN of the Launch Configuration Template.
+     */
+    arn?: ARN;
+    /**
+     * Copy private IP.
+     */
+    copyPrivateIp?: Boolean;
+    /**
+     * Copy tags.
+     */
+    copyTags?: Boolean;
+    /**
+     * ID of the Launch Configuration Template.
+     */
+    launchConfigurationTemplateID?: LaunchConfigurationTemplateID;
+    /**
+     * Launch disposition.
+     */
+    launchDisposition?: LaunchDisposition;
+    /**
+     * Licensing.
+     */
+    licensing?: Licensing;
+    /**
+     * Tags of the Launch Configuration Template.
+     */
+    tags?: TagsMap;
+    /**
+     * Target instance type right-sizing method.
+     */
+    targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
+  }
+  export type LaunchConfigurationTemplateID = string;
+  export type LaunchConfigurationTemplateIDs = LaunchConfigurationTemplateID[];
+  export type LaunchConfigurationTemplates = LaunchConfigurationTemplate[];
   export type LaunchDisposition = "STOPPED"|"STARTED"|string;
   export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED"|string;
   export interface Licensing {
@@ -1068,6 +1201,7 @@ declare namespace Drs {
     tags?: TagsMap;
   }
   export type MaxResultsReplicatingSourceServers = number;
+  export type MaxResultsType = number;
   export interface NetworkInterface {
     /**
      * Network interface IPs.
@@ -1634,6 +1768,10 @@ declare namespace Drs {
      * The recommended EC2 instance type that will be used when recovering the Source Server.
      */
     recommendedInstanceType?: EC2InstanceType;
+    /**
+     * Are EC2 nitro instance types supported when recovering the Source Server.
+     */
+    supportsNitroInstances?: Boolean;
   }
   export interface SourceServer {
     /**
@@ -1886,6 +2024,38 @@ declare namespace Drs {
      * Whether Elastic Disaster Recovery should try to automatically choose the instance type that best matches the OS, CPU, and RAM of your Source Server.
      */
     targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
+  }
+  export interface UpdateLaunchConfigurationTemplateRequest {
+    /**
+     * Copy private IP.
+     */
+    copyPrivateIp?: Boolean;
+    /**
+     * Copy tags.
+     */
+    copyTags?: Boolean;
+    /**
+     * Launch Configuration Template ID.
+     */
+    launchConfigurationTemplateID: LaunchConfigurationTemplateID;
+    /**
+     * Launch disposition.
+     */
+    launchDisposition?: LaunchDisposition;
+    /**
+     * Licensing.
+     */
+    licensing?: Licensing;
+    /**
+     * Target instance type right-sizing method.
+     */
+    targetInstanceTypeRightSizingMethod?: TargetInstanceTypeRightSizingMethod;
+  }
+  export interface UpdateLaunchConfigurationTemplateResponse {
+    /**
+     * Updated Launch Configuration Template.
+     */
+    launchConfigurationTemplate?: LaunchConfigurationTemplate;
   }
   export interface UpdateReplicationConfigurationRequest {
     /**
