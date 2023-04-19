@@ -1770,7 +1770,7 @@ declare namespace RDS {
      */
     DatabaseInstallationFilesS3Prefix?: String255;
     /**
-     * The ID of the AMI. An AMI ID is required to create a CEV for RDS Custom for SQL Server.
+     * The ID of the Amazon Machine Image (AMI). For RDS Custom for SQL Server, an AMI ID is required to create a CEV. For RDS Custom for Oracle, the default is the most recent AMI available, but you can specify an AMI ID that was used in a different Oracle CEV. Find the AMIs used by your CEVs by calling the DescribeDBEngineVersions operation.
      */
     ImageId?: String255;
     /**
@@ -2018,7 +2018,7 @@ declare namespace RDS {
      */
     DBClusterParameterGroupName: String;
     /**
-     * The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a database engine and engine version compatible with that DB cluster parameter group family.  Aurora MySQL  Example: aurora5.6, aurora-mysql5.7, aurora-mysql8.0   Aurora PostgreSQL  Example: aurora-postgresql9.6   RDS for MySQL  Example: mysql8.0   RDS for PostgreSQL  Example: postgres12  To list all of the available parameter group families for a DB engine, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine &lt;engine&gt;  For example, to list all of the available parameter group families for the Aurora PostgreSQL DB engine, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine aurora-postgresql   The output contains duplicates.  The following are the valid DB engine values:    aurora (for MySQL 5.6-compatible Aurora)    aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)    aurora-postgresql     mysql     postgres   
+     * The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster parameter group family, and can be applied only to a DB cluster running a database engine and engine version compatible with that DB cluster parameter group family.  Aurora MySQL  Example: aurora-mysql5.7, aurora-mysql8.0   Aurora PostgreSQL  Example: aurora-postgresql14   RDS for MySQL  Example: mysql8.0   RDS for PostgreSQL  Example: postgres12  To list all of the available parameter group families for a DB engine, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine &lt;engine&gt;  For example, to list all of the available parameter group families for the Aurora PostgreSQL DB engine, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine aurora-postgresql   The output contains duplicates.  The following are the valid DB engine values:    aurora-mysql     aurora-postgresql     mysql     postgres   
      */
     DBParameterGroupFamily: String;
     /**
@@ -2071,7 +2071,7 @@ declare namespace RDS {
      */
     DBInstanceClass: String;
     /**
-     * The name of the database engine to be used for this instance. Not every database engine is available for every Amazon Web Services Region. Valid Values:    aurora (for MySQL 5.6-compatible Aurora)    aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)    aurora-postgresql     custom-oracle-ee (for RDS Custom for Oracle DB instances)     custom-oracle-ee-cdb (for RDS Custom for Oracle DB instances)     custom-sqlserver-ee (for RDS Custom for SQL Server DB instances)     custom-sqlserver-se (for RDS Custom for SQL Server DB instances)     custom-sqlserver-web (for RDS Custom for SQL Server DB instances)     mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
+     * The name of the database engine to be used for this instance. Not every database engine is available for every Amazon Web Services Region. Valid Values:    aurora-mysql (for Aurora MySQL DB instances)    aurora-postgresql (for Aurora PostgreSQL DB instances)    custom-oracle-ee (for RDS Custom for Oracle DB instances)     custom-oracle-ee-cdb (for RDS Custom for Oracle DB instances)     custom-sqlserver-ee (for RDS Custom for SQL Server DB instances)     custom-sqlserver-se (for RDS Custom for SQL Server DB instances)     custom-sqlserver-web (for RDS Custom for SQL Server DB instances)     mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
      */
     Engine: String;
     /**
@@ -2442,7 +2442,7 @@ declare namespace RDS {
      */
     DBParameterGroupName: String;
     /**
-     * The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family. To list all of the available parameter group families for a DB engine, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine &lt;engine&gt;  For example, to list all of the available parameter group families for the MySQL DB engine, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine mysql   The output contains duplicates.  The following are the valid DB engine values:    aurora (for MySQL 5.6-compatible Aurora)    aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)    aurora-postgresql     mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
+     * The DB parameter group family name. A DB parameter group can be associated with one and only one DB parameter group family, and can be applied only to a DB instance running a database engine and engine version compatible with that DB parameter group family. To list all of the available parameter group families for a DB engine, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine &lt;engine&gt;  For example, to list all of the available parameter group families for the MySQL DB engine, use the following command:  aws rds describe-db-engine-versions --query "DBEngineVersions[].DBParameterGroupFamily" --engine mysql   The output contains duplicates.  The following are the valid DB engine values:    aurora-mysql     aurora-postgresql     mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
      */
     DBParameterGroupFamily: String;
     /**
@@ -3642,7 +3642,7 @@ declare namespace RDS {
      */
     Timezone?: String;
     /**
-     * True if mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false. IAM database authentication can be enabled for the following database engines   For MySQL 5.6, minor version 5.6.34 or higher   For MySQL 5.7, minor version 5.7.16 or higher   Aurora 5.6 or higher. To enable IAM database authentication for Aurora, see DBCluster Type.  
+     * True if mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false. IAM database authentication can be enabled for the following database engines:   For MySQL 5.7, minor version 5.7.16 or higher.   For Amazon Aurora, all versions of Aurora MySQL and Aurora PostgreSQL.  
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     /**
@@ -4822,7 +4822,7 @@ declare namespace RDS {
   }
   export interface DescribeDBEngineVersionsMessage {
     /**
-     * The database engine to return. Valid Values:    aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)    aurora-postgresql     mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
+     * The database engine to return. Valid Values:    aurora-mysql     aurora-postgresql     custom-oracle-ee     mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
      */
     Engine?: String;
     /**
@@ -5231,7 +5231,7 @@ declare namespace RDS {
   }
   export interface DescribeEngineDefaultParametersMessage {
     /**
-     * The name of the DB parameter group family. Valid Values:    aurora5.6     aurora-mysql5.7     aurora-mysql8.0     aurora-postgresql10     aurora-postgresql11     aurora-postgresql12     aurora-postgresql13     aurora-postgresql14     custom-oracle-ee-19     mariadb10.2     mariadb10.3     mariadb10.4     mariadb10.5     mariadb10.6     mysql5.7     mysql8.0     oracle-ee-19     oracle-ee-cdb-19     oracle-ee-cdb-21     oracle-se2-19     oracle-se2-cdb-19     oracle-se2-cdb-21     postgres10     postgres11     postgres12     postgres13     postgres14     sqlserver-ee-11.0     sqlserver-ee-12.0     sqlserver-ee-13.0     sqlserver-ee-14.0     sqlserver-ee-15.0     sqlserver-ex-11.0     sqlserver-ex-12.0     sqlserver-ex-13.0     sqlserver-ex-14.0     sqlserver-ex-15.0     sqlserver-se-11.0     sqlserver-se-12.0     sqlserver-se-13.0     sqlserver-se-14.0     sqlserver-se-15.0     sqlserver-web-11.0     sqlserver-web-12.0     sqlserver-web-13.0     sqlserver-web-14.0     sqlserver-web-15.0   
+     * The name of the DB parameter group family. Valid Values:    aurora-mysql5.7     aurora-mysql8.0     aurora-postgresql10     aurora-postgresql11     aurora-postgresql12     aurora-postgresql13     aurora-postgresql14     custom-oracle-ee-19     mariadb10.2     mariadb10.3     mariadb10.4     mariadb10.5     mariadb10.6     mysql5.7     mysql8.0     oracle-ee-19     oracle-ee-cdb-19     oracle-ee-cdb-21     oracle-se2-19     oracle-se2-cdb-19     oracle-se2-cdb-21     postgres10     postgres11     postgres12     postgres13     postgres14     sqlserver-ee-11.0     sqlserver-ee-12.0     sqlserver-ee-13.0     sqlserver-ee-14.0     sqlserver-ee-15.0     sqlserver-ex-11.0     sqlserver-ex-12.0     sqlserver-ex-13.0     sqlserver-ex-14.0     sqlserver-ex-15.0     sqlserver-se-11.0     sqlserver-se-12.0     sqlserver-se-13.0     sqlserver-se-14.0     sqlserver-se-15.0     sqlserver-web-11.0     sqlserver-web-12.0     sqlserver-web-13.0     sqlserver-web-14.0     sqlserver-web-15.0   
      */
     DBParameterGroupFamily: String;
     /**
@@ -5410,7 +5410,7 @@ declare namespace RDS {
   }
   export interface DescribeOrderableDBInstanceOptionsMessage {
     /**
-     * The name of the engine to retrieve DB instance options for. Valid Values:    aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)    aurora-postgresql     mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
+     * The name of the engine to retrieve DB instance options for. Valid Values:    aurora-mysql     aurora-postgresql     custom-oracle-ee     mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
      */
     Engine: String;
     /**
@@ -6222,7 +6222,7 @@ declare namespace RDS {
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
-     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless ApplyImmediately is enabled. If the cluster that you're modifying has one or more read replicas, all replicas must be running an engine version that's the same or later than the version you specify. To list all of the available engine versions for Aurora MySQL version 2 (5.7-compatible) and version 3 (MySQL 8.0-compatible), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for MySQL 5.6-compatible Aurora, use the following command:  aws rds describe-db-engine-versions --engine aurora --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for Aurora PostgreSQL, use the following command:  aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for RDS for MySQL, use the following command:  aws rds describe-db-engine-versions --engine mysql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for RDS for PostgreSQL, use the following command:  aws rds describe-db-engine-versions --engine postgres --query "DBEngineVersions[].EngineVersion"  Valid for: Aurora DB clusters and Multi-AZ DB clusters
+     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless ApplyImmediately is enabled. If the cluster that you're modifying has one or more read replicas, all replicas must be running an engine version that's the same or later than the version you specify. To list all of the available engine versions for Aurora MySQL, use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for Aurora PostgreSQL, use the following command:  aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for RDS for MySQL, use the following command:  aws rds describe-db-engine-versions --engine mysql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for RDS for PostgreSQL, use the following command:  aws rds describe-db-engine-versions --engine postgres --query "DBEngineVersions[].EngineVersion"  Valid for: Aurora DB clusters and Multi-AZ DB clusters
      */
     EngineVersion?: String;
     /**
@@ -6762,7 +6762,7 @@ declare namespace RDS {
      */
     DeletionProtection?: BooleanOptional;
     /**
-     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless ApplyImmediately is enabled. To list all of the available engine versions for aurora (for MySQL 5.6-compatible Aurora), use the following command:  aws rds describe-db-engine-versions --engine aurora --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'  To list all of the available engine versions for aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'  To list all of the available engine versions for aurora-postgresql, use the following command:  aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' 
+     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless ApplyImmediately is enabled. To list all of the available engine versions for aurora-mysql (for MySQL-based Aurora global databases), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'  To list all of the available engine versions for aurora-postgresql (for PostgreSQL-based Aurora global databases), use the following command:  aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' 
      */
     EngineVersion?: String;
     /**
@@ -7810,7 +7810,7 @@ declare namespace RDS {
      */
     DBClusterIdentifier: String;
     /**
-     * The name of the DB cluster parameter group to associate with the restored DB cluster. If this argument is omitted, default.aurora5.6 is used. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
+     * The name of the DB cluster parameter group to associate with the restored DB cluster. If this argument is omitted, the default parameter group for the engine version is used. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
      */
     DBClusterParameterGroupName?: String;
     /**
@@ -7822,11 +7822,11 @@ declare namespace RDS {
      */
     DBSubnetGroupName?: String;
     /**
-     * The name of the database engine to be used for this DB cluster. Valid Values: aurora-mysql (for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora)
+     * The name of the database engine to be used for this DB cluster. Valid Values: aurora-mysql (for Aurora MySQL)
      */
     Engine: String;
     /**
-     * The version number of the database engine to use. To list all of the available engine versions for aurora-mysql (MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"   Aurora MySQL  Examples: 5.7.mysql_aurora.2.07.1, 8.0.mysql_aurora.3.02.0 
+     * The version number of the database engine to use. To list all of the available engine versions for aurora-mysql (Aurora MySQL), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"   Aurora MySQL  Examples: 5.7.mysql_aurora.2.07.1, 8.0.mysql_aurora.3.02.0 
      */
     EngineVersion?: String;
     /**
@@ -7945,7 +7945,7 @@ declare namespace RDS {
      */
     Engine: String;
     /**
-     * The version of the database engine to use for the new DB cluster. If you don't specify an engine version, the default version for the database engine in the Amazon Web Services Region is used. To list all of the available engine versions for MySQL 5.7-compatible and MySQL 8.0-compatible Aurora, use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for Aurora PostgreSQL, use the following command:  aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for RDS for MySQL, use the following command:  aws rds describe-db-engine-versions --engine mysql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for RDS for PostgreSQL, use the following command:  aws rds describe-db-engine-versions --engine postgres --query "DBEngineVersions[].EngineVersion"   Aurora MySQL  See Database engine updates for Amazon Aurora MySQL in the Amazon Aurora User Guide.  Aurora PostgreSQL  See Amazon Aurora PostgreSQL releases and engine versions in the Amazon Aurora User Guide.  MySQL  See Amazon RDS for MySQL in the Amazon RDS User Guide.   PostgreSQL  See Amazon RDS for PostgreSQL versions and extensions in the Amazon RDS User Guide.  Valid for: Aurora DB clusters and Multi-AZ DB clusters
+     * The version of the database engine to use for the new DB cluster. If you don't specify an engine version, the default version for the database engine in the Amazon Web Services Region is used. To list all of the available engine versions for Aurora MySQL, use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for Aurora PostgreSQL, use the following command:  aws rds describe-db-engine-versions --engine aurora-postgresql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for RDS for MySQL, use the following command:  aws rds describe-db-engine-versions --engine mysql --query "DBEngineVersions[].EngineVersion"  To list all of the available engine versions for RDS for PostgreSQL, use the following command:  aws rds describe-db-engine-versions --engine postgres --query "DBEngineVersions[].EngineVersion"   Aurora MySQL  See Database engine updates for Amazon Aurora MySQL in the Amazon Aurora User Guide.  Aurora PostgreSQL  See Amazon Aurora PostgreSQL releases and engine versions in the Amazon Aurora User Guide.  MySQL  See Amazon RDS for MySQL in the Amazon RDS User Guide.   PostgreSQL  See Amazon RDS for PostgreSQL versions and extensions in the Amazon RDS User Guide.  Valid for: Aurora DB clusters and Multi-AZ DB clusters
      */
     EngineVersion?: String;
     /**
@@ -7989,7 +7989,7 @@ declare namespace RDS {
      */
     EnableCloudwatchLogsExports?: LogTypeList;
     /**
-     * The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster. For more information, see  CreateDBCluster. Valid for: Aurora DB clusters only
+     * The DB engine mode of the DB cluster, either provisioned or serverless. For more information, see  CreateDBCluster. Valid for: Aurora DB clusters only
      */
     EngineMode?: String;
     /**
@@ -8047,7 +8047,7 @@ declare namespace RDS {
      */
     DBClusterIdentifier: String;
     /**
-     * The type of restore to be performed. You can specify one of the following values:    full-copy - The new DB cluster is restored as a full copy of the source DB cluster.    copy-on-write - The new DB cluster is restored as a clone of the source DB cluster.   Constraints: You can't specify copy-on-write if the engine version of the source DB cluster is earlier than 1.11. If you don't specify a RestoreType value, then the new DB cluster is restored as a full copy of the source DB cluster. Valid for: Aurora DB clusters and Multi-AZ DB clusters
+     * The type of restore to be performed. You can specify one of the following values:    full-copy - The new DB cluster is restored as a full copy of the source DB cluster.    copy-on-write - The new DB cluster is restored as a clone of the source DB cluster.   If you don't specify a RestoreType value, then the new DB cluster is restored as a full copy of the source DB cluster. Valid for: Aurora DB clusters and Multi-AZ DB clusters
      */
     RestoreType?: String;
     /**

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1360.0-->
+<!--LATEST=2.1361.0-->
 <!--ENTRYINSERT-->
+
+## 2.1361.0
+* feature: Comprehend: This release supports native document models for custom classification, in addition to plain-text models. You train native document models using documents (PDF, Word, images) in their native format.
+* feature: ECS: This release supports the Account Setting "TagResourceAuthorization" that allows for enhanced Tagging security controls.
+* feature: RAM: This release adds support for customer managed permissions. Customer managed permissions enable customers to author and manage tailored permissions for resources shared using RAM.
+* feature: S3: Provides support for "Snow" Storage class.
+* feature: S3Control: Provides support for overriding endpoint when region is "snow". This will enable bucket APIs for Amazon S3 Compatible storage on Snow Family devices.
 
 ## 2.1360.0
 * feature: Appflow: This release adds a Client Token parameter to the following AppFlow APIs: Create/Update Connector Profile, Create/Update Flow, Start Flow, Register Connector, Update Connector Registration. The Client Token parameter allows idempotent operations for these APIs.

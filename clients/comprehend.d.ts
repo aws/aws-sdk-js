@@ -84,11 +84,11 @@ declare class Comprehend extends Service {
    */
   createDataset(callback?: (err: AWSError, data: Comprehend.Types.CreateDatasetResponse) => void): Request<Comprehend.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see Document Classification in the Comprehend Developer Guide. 
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that are labeled with the categories that you want to use. For more information, see Training classifier models in the Comprehend Developer Guide. 
    */
   createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
-   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see Document Classification in the Comprehend Developer Guide. 
+   * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that are labeled with the categories that you want to use. For more information, see Training classifier models in the Comprehend Developer Guide. 
    */
   createDocumentClassifier(callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
@@ -1078,6 +1078,10 @@ declare namespace Comprehend {
      * Page-level errors that the system detected while processing the input document. The field is empty if the system encountered no errors.
      */
     Errors?: ListOfErrors;
+    /**
+     * Warnings detected while processing the input document. The response includes a warning if there is a mismatch between the input document type and the model type associated with the endpoint that you specified. The response can also include warnings for individual pages that have a mismatch.  The field is empty if the system generated no warnings.
+     */
+    Warnings?: ListOfWarnings;
   }
   export type ClientRequestTokenString = string;
   export type ComprehendArn = string;
@@ -1161,7 +1165,7 @@ declare namespace Comprehend {
      */
     InputDataConfig: DocumentClassifierInputDataConfig;
     /**
-     * Enables the addition of output results configuration parameters for custom classifier jobs.
+     * Specifies the location for the output files from a custom classifier job. This parameter is required for a request that creates a native classifier model.
      */
     OutputDataConfig?: DocumentClassifierOutputDataConfig;
     /**
@@ -2001,6 +2005,17 @@ declare namespace Comprehend {
   export type DocumentClassifierArn = string;
   export type DocumentClassifierAugmentedManifestsList = AugmentedManifestsListItem[];
   export type DocumentClassifierDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
+  export type DocumentClassifierDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT"|string;
+  export interface DocumentClassifierDocuments {
+    /**
+     * The S3 URI location of the training documents specified in the S3Uri CSV file.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The S3 URI location of the test documents included in the TestS3Uri CSV file. This field is not required if you do not specify a test CSV file.
+     */
+    TestS3Uri?: S3Uri;
+  }
   export type DocumentClassifierEndpointArn = string;
   export interface DocumentClassifierFilter {
     /**
@@ -2041,11 +2056,20 @@ declare namespace Comprehend {
      * A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat to AUGMENTED_MANIFEST.
      */
     AugmentedManifests?: DocumentClassifierAugmentedManifestsList;
+    /**
+     * The type of input documents for training the model. Provide plain-text documents to create a plain-text model, and provide semi-structured documents to create a native model.
+     */
+    DocumentType?: DocumentClassifierDocumentTypeFormat;
+    /**
+     * The S3 location of the training documents. This parameter is required in a request to create a native classifier model.
+     */
+    Documents?: DocumentClassifierDocuments;
+    DocumentReaderConfig?: DocumentReaderConfig;
   }
   export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL"|string;
   export interface DocumentClassifierOutputDataConfig {
     /**
-     * When you use the OutputDataConfig object while creating a custom classifier, you specify the Amazon S3 location where you want to write the confusion matrix. The URI must be in the same Region as the API endpoint that you are calling. The location is used as the prefix for the actual location of this output file. When the custom classifier job is finished, the service creates the output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the confusion matrix.
+     * When you use the OutputDataConfig object while creating a custom classifier, you specify the Amazon S3 location where you want to write the confusion matrix and other output files. The URI must be in the same Region as the API endpoint that you are calling. The location is used as the prefix for the actual location of this output file. When the custom classifier job is finished, the service creates the output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the confusion matrix.
      */
     S3Uri?: S3Uri;
     /**
@@ -2067,7 +2091,7 @@ declare namespace Comprehend {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The status of the document classifier. If the status is TRAINED the classifier is ready to use. If the status is FAILED you can see additional information about why the classifier wasn't trained in the Message field.
+     * The status of the document classifier. If the status is TRAINED the classifier is ready to use. If the status is TRAINED_WITH_WARNINGS the classifier training succeeded, but you should review the warnings returned in the CreateDocumentClassifier response.  If the status is FAILED you can see additional information about why the classifier wasn't trained in the Message field.
      */
     Status?: ModelStatus;
     /**
@@ -3507,6 +3531,7 @@ declare namespace Comprehend {
   export type ListOfRelationships = RelationshipsListItem[];
   export type ListOfSyntaxTokens = SyntaxToken[];
   export type ListOfTargetedSentimentEntities = TargetedSentimentEntity[];
+  export type ListOfWarnings = WarningsListItem[];
   export interface ListPiiEntitiesDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -3643,6 +3668,7 @@ declare namespace Comprehend {
     KmsKeyId?: KmsKeyId;
   }
   export type PageBasedErrorCode = "TEXTRACT_BAD_PAGE"|"TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED"|"PAGE_CHARACTERS_EXCEEDED"|"PAGE_SIZE_EXCEEDED"|"INTERNAL_SERVER_ERROR"|string;
+  export type PageBasedWarningCode = "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL"|"INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL"|string;
   export interface PartOfSpeechTag {
     /**
      * Identifies the part of speech that the token represents.
@@ -4867,6 +4893,20 @@ declare namespace Comprehend {
      * The ID for each subnet being used in your private VPC. This subnet is a subset of the a range of IPv4 addresses used by the VPC and is specific to a given availability zone in the VPC’s Region. This ID number is preceded by "subnet-", for instance: "subnet-04ccf456919e69055". For more information, see VPCs and Subnets. 
      */
     Subnets: Subnets;
+  }
+  export interface WarningsListItem {
+    /**
+     * Page number in the input document.
+     */
+    Page?: Integer;
+    /**
+     * The type of warning.
+     */
+    WarnCode?: PageBasedWarningCode;
+    /**
+     * Text message associated with the warning.
+     */
+    WarnMessage?: String;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

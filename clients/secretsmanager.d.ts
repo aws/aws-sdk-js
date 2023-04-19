@@ -180,11 +180,11 @@ declare class SecretsManager extends Service {
    */
   updateSecretVersionStage(callback?: (err: AWSError, data: SecretsManager.Types.UpdateSecretVersionStageResponse) => void): Request<SecretsManager.Types.UpdateSecretVersionStageResponse, AWSError>;
   /**
-   * Validates that a resource policy does not grant a wide range of principals access to your secret. A resource-based policy is optional for secrets. The API performs three checks when validating the policy:   Sends a call to Zelkova, an automated reasoning engine, to ensure your resource policy does not allow broad access to your secret, for example policies that use a wildcard for the principal.   Checks for correct syntax in a policy.   Verifies the policy does not lock out a caller.   Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:ValidateResourcePolicy. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Validates that a resource policy does not grant a wide range of principals access to your secret. A resource-based policy is optional for secrets. The API performs three checks when validating the policy:   Sends a call to Zelkova, an automated reasoning engine, to ensure your resource policy does not allow broad access to your secret, for example policies that use a wildcard for the principal.   Checks for correct syntax in a policy.   Verifies the policy does not lock out a caller.   Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:ValidateResourcePolicy and secretsmanager:PutResourcePolicy. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   validateResourcePolicy(params: SecretsManager.Types.ValidateResourcePolicyRequest, callback?: (err: AWSError, data: SecretsManager.Types.ValidateResourcePolicyResponse) => void): Request<SecretsManager.Types.ValidateResourcePolicyResponse, AWSError>;
   /**
-   * Validates that a resource policy does not grant a wide range of principals access to your secret. A resource-based policy is optional for secrets. The API performs three checks when validating the policy:   Sends a call to Zelkova, an automated reasoning engine, to ensure your resource policy does not allow broad access to your secret, for example policies that use a wildcard for the principal.   Checks for correct syntax in a policy.   Verifies the policy does not lock out a caller.   Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:ValidateResourcePolicy. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
+   * Validates that a resource policy does not grant a wide range of principals access to your secret. A resource-based policy is optional for secrets. The API performs three checks when validating the policy:   Sends a call to Zelkova, an automated reasoning engine, to ensure your resource policy does not allow broad access to your secret, for example policies that use a wildcard for the principal.   Checks for correct syntax in a policy.   Verifies the policy does not lock out a caller.   Secrets Manager generates a CloudTrail log entry when you call this action. Do not include sensitive information in request parameters because it might be logged. For more information, see Logging Secrets Manager events with CloudTrail.  Required permissions:  secretsmanager:ValidateResourcePolicy and secretsmanager:PutResourcePolicy. For more information, see  IAM policy actions for Secrets Manager and Authentication and access control in Secrets Manager. 
    */
   validateResourcePolicy(callback?: (err: AWSError, data: SecretsManager.Types.ValidateResourcePolicyResponse) => void): Request<SecretsManager.Types.ValidateResourcePolicyResponse, AWSError>;
 }
@@ -247,7 +247,7 @@ declare namespace SecretsManager {
      */
     AddReplicaRegions?: AddReplicaRegionListType;
     /**
-     * Specifies whether to overwrite a secret with the same name in the destination Region.
+     * Specifies whether to overwrite a secret with the same name in the destination Region. By default, secrets aren't overwritten.
      */
     ForceOverwriteReplicaSecret?: BooleanType;
   }
@@ -292,11 +292,11 @@ declare namespace SecretsManager {
      */
     SecretId: SecretIdType;
     /**
-     * The number of days from 7 to 30 that Secrets Manager waits before permanently deleting the secret. You can't use both this parameter and ForceDeleteWithoutRecovery in the same call. If you don't use either, then Secrets Manager defaults to a 30 day recovery window.
+     * The number of days from 7 to 30 that Secrets Manager waits before permanently deleting the secret. You can't use both this parameter and ForceDeleteWithoutRecovery in the same call. If you don't use either, then by default Secrets Manager uses a 30 day recovery window.
      */
     RecoveryWindowInDays?: RecoveryWindowInDaysType;
     /**
-     * Specifies whether to delete the secret without any recovery window. You can't use both this parameter and RecoveryWindowInDays in the same call. If you don't use either, then Secrets Manager defaults to a 30 day recovery window. Secrets Manager performs the actual deletion with an asynchronous background process, so there might be a short delay before the secret is permanently deleted. If you delete a secret and then immediately create a secret with the same name, use appropriate back off and retry logic.  Use this parameter with caution. This parameter causes the operation to skip the normal recovery window before the permanent deletion that Secrets Manager would normally impose with the RecoveryWindowInDays parameter. If you delete a secret with the ForceDeleteWithoutRecovery parameter, then you have no opportunity to recover the secret. You lose the secret permanently. 
+     * Specifies whether to delete the secret without any recovery window. You can't use both this parameter and RecoveryWindowInDays in the same call. If you don't use either, then by default Secrets Manager uses a 30 day recovery window. Secrets Manager performs the actual deletion with an asynchronous background process, so there might be a short delay before the secret is permanently deleted. If you delete a secret and then immediately create a secret with the same name, use appropriate back off and retry logic.  Use this parameter with caution. This parameter causes the operation to skip the normal recovery window before the permanent deletion that Secrets Manager would normally impose with the RecoveryWindowInDays parameter. If you delete a secret with the ForceDeleteWithoutRecovery parameter, then you have no opportunity to recover the secret. You lose the secret permanently. 
      */
     ForceDeleteWithoutRecovery?: BooleanType;
   }
@@ -542,7 +542,7 @@ declare namespace SecretsManager {
      */
     NextToken?: NextTokenType;
     /**
-     * Specifies whether to include versions of secrets that don't have any staging labels attached to them. Versions without staging labels are considered deprecated and are subject to deletion by Secrets Manager.
+     * Specifies whether to include versions of secrets that don't have any staging labels attached to them. Versions without staging labels are considered deprecated and are subject to deletion by Secrets Manager. By default, versions without staging labels aren't included.
      */
     IncludeDeprecated?: BooleanType;
   }
@@ -566,7 +566,7 @@ declare namespace SecretsManager {
   }
   export interface ListSecretsRequest {
     /**
-     * Specifies whether to include secrets scheduled for deletion.
+     * Specifies whether to include secrets scheduled for deletion. By default, secrets scheduled for deletion aren't included.
      */
     IncludePlannedDeletion?: BooleanType;
     /**
@@ -613,7 +613,7 @@ declare namespace SecretsManager {
      */
     ResourcePolicy: NonEmptyResourcePolicyType;
     /**
-     * Specifies whether to block resource-based policies that allow broad access to the secret, for example those that use a wildcard for the principal.
+     * Specifies whether to block resource-based policies that allow broad access to the secret, for example those that use a wildcard for the principal. By default, public policies aren't blocked.
      */
     BlockPublicPolicy?: BooleanType;
   }
@@ -711,7 +711,7 @@ declare namespace SecretsManager {
      */
     AddReplicaRegions: AddReplicaRegionListType;
     /**
-     * Specifies whether to overwrite a secret with the same name in the destination Region.
+     * Specifies whether to overwrite a secret with the same name in the destination Region. By default, secrets aren't overwritten.
      */
     ForceOverwriteReplicaSecret?: BooleanType;
   }
@@ -783,7 +783,7 @@ declare namespace SecretsManager {
      */
     RotationRules?: RotationRulesType;
     /**
-     * Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window. The rotation schedule is defined in RotateSecretRequest$RotationRules. For secrets that use a Lambda rotation function to rotate, if you don't immediately rotate the secret, Secrets Manager tests the rotation configuration by running the  testSecret step of the Lambda rotation function. The test creates an AWSPENDING version of the secret and then removes it. If you don't specify this value, then by default, Secrets Manager rotates the secret immediately.
+     * Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window. The rotation schedule is defined in RotateSecretRequest$RotationRules. For secrets that use a Lambda rotation function to rotate, if you don't immediately rotate the secret, Secrets Manager tests the rotation configuration by running the  testSecret step of the Lambda rotation function. The test creates an AWSPENDING version of the secret and then removes it. By default, Secrets Manager rotates the secret immediately.
      */
     RotateImmediately?: BooleanType;
   }
