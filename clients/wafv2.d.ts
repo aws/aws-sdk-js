@@ -28,6 +28,14 @@ declare class WAFV2 extends Service {
    */
   checkCapacity(callback?: (err: AWSError, data: WAFV2.Types.CheckCapacityResponse) => void): Request<WAFV2.Types.CheckCapacityResponse, AWSError>;
   /**
+   * Creates an API key for use in the integration of the CAPTCHA API in your JavaScript client applications. The integration lets you customize the placement and characteristics of the CAPTCHA puzzle for your end users. For more information about the CAPTCHA JavaScript integration, see WAF client application integration in the WAF Developer Guide. The CAPTCHA API requires a key that authorizes CAPTCHA use from the client application domain. You can use a single key for up to 5 domains. After you generate a key, you can copy it for use in your JavaScript integration. 
+   */
+  createAPIKey(params: WAFV2.Types.CreateAPIKeyRequest, callback?: (err: AWSError, data: WAFV2.Types.CreateAPIKeyResponse) => void): Request<WAFV2.Types.CreateAPIKeyResponse, AWSError>;
+  /**
+   * Creates an API key for use in the integration of the CAPTCHA API in your JavaScript client applications. The integration lets you customize the placement and characteristics of the CAPTCHA puzzle for your end users. For more information about the CAPTCHA JavaScript integration, see WAF client application integration in the WAF Developer Guide. The CAPTCHA API requires a key that authorizes CAPTCHA use from the client application domain. You can use a single key for up to 5 domains. After you generate a key, you can copy it for use in your JavaScript integration. 
+   */
+  createAPIKey(callback?: (err: AWSError, data: WAFV2.Types.CreateAPIKeyResponse) => void): Request<WAFV2.Types.CreateAPIKeyResponse, AWSError>;
+  /**
    * Creates an IPSet, which you use to identify web requests that originate from specific IP addresses or ranges of IP addresses. For example, if you're receiving a lot of requests from a ranges of IP addresses, you can configure WAF to block them using an IPSet that lists those IP addresses. 
    */
   createIPSet(params: WAFV2.Types.CreateIPSetRequest, callback?: (err: AWSError, data: WAFV2.Types.CreateIPSetResponse) => void): Request<WAFV2.Types.CreateIPSetResponse, AWSError>;
@@ -140,6 +148,14 @@ declare class WAFV2 extends Service {
    */
   generateMobileSdkReleaseUrl(callback?: (err: AWSError, data: WAFV2.Types.GenerateMobileSdkReleaseUrlResponse) => void): Request<WAFV2.Types.GenerateMobileSdkReleaseUrlResponse, AWSError>;
   /**
+   * Returns your API key in decrypted form. Use this to check the token domains that you have defined for the key. 
+   */
+  getDecryptedAPIKey(params: WAFV2.Types.GetDecryptedAPIKeyRequest, callback?: (err: AWSError, data: WAFV2.Types.GetDecryptedAPIKeyResponse) => void): Request<WAFV2.Types.GetDecryptedAPIKeyResponse, AWSError>;
+  /**
+   * Returns your API key in decrypted form. Use this to check the token domains that you have defined for the key. 
+   */
+  getDecryptedAPIKey(callback?: (err: AWSError, data: WAFV2.Types.GetDecryptedAPIKeyResponse) => void): Request<WAFV2.Types.GetDecryptedAPIKeyResponse, AWSError>;
+  /**
    * Retrieves the specified IPSet.
    */
   getIPSet(params: WAFV2.Types.GetIPSetRequest, callback?: (err: AWSError, data: WAFV2.Types.GetIPSetResponse) => void): Request<WAFV2.Types.GetIPSetResponse, AWSError>;
@@ -227,6 +243,14 @@ declare class WAFV2 extends Service {
    * Retrieves the WebACL for the specified resource. 
    */
   getWebACLForResource(callback?: (err: AWSError, data: WAFV2.Types.GetWebACLForResourceResponse) => void): Request<WAFV2.Types.GetWebACLForResourceResponse, AWSError>;
+  /**
+   * Retrieves a list of the API keys that you've defined for the specified scope. 
+   */
+  listAPIKeys(params: WAFV2.Types.ListAPIKeysRequest, callback?: (err: AWSError, data: WAFV2.Types.ListAPIKeysResponse) => void): Request<WAFV2.Types.ListAPIKeysResponse, AWSError>;
+  /**
+   * Retrieves a list of the API keys that you've defined for the specified scope. 
+   */
+  listAPIKeys(callback?: (err: AWSError, data: WAFV2.Types.ListAPIKeysResponse) => void): Request<WAFV2.Types.ListAPIKeysResponse, AWSError>;
   /**
    * Returns a list of the available versions for the specified managed rule group. 
    */
@@ -397,6 +421,28 @@ declare class WAFV2 extends Service {
   updateWebACL(callback?: (err: AWSError, data: WAFV2.Types.UpdateWebACLResponse) => void): Request<WAFV2.Types.UpdateWebACLResponse, AWSError>;
 }
 declare namespace WAFV2 {
+  export type APIKey = string;
+  export type APIKeySummaries = APIKeySummary[];
+  export interface APIKeySummary {
+    /**
+     * The token domains that are defined in this API key. 
+     */
+    TokenDomains?: TokenDomains;
+    /**
+     * The generated, encrypted API key. You can copy this for use in your JavaScript CAPTCHA integration.  For information about how to use this in your CAPTCHA JavaScript integration, see WAF client application integration in the WAF Developer Guide.
+     */
+    APIKey?: APIKey;
+    /**
+     * The date and time that the key was created. 
+     */
+    CreationTimestamp?: Timestamp;
+    /**
+     * Internal value used by WAF to manage the key. 
+     */
+    Version?: APIKeyVersion;
+  }
+  export type APIKeyTokenDomains = TokenDomain[];
+  export type APIKeyVersion = number;
   export interface AWSManagedRulesATPRuleSet {
     /**
      * The path of the login endpoint for your application. For example, for the URL https://example.com/web/login, you would provide the path /web/login. The rule group inspects only HTTP POST requests to your specified login endpoint.
@@ -612,6 +658,22 @@ declare namespace WAFV2 {
   export type Country = string;
   export type CountryCode = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|"XK"|string;
   export type CountryCodes = CountryCode[];
+  export interface CreateAPIKeyRequest {
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * The client application domains that you want to use this API key for. 
+     */
+    TokenDomains: APIKeyTokenDomains;
+  }
+  export interface CreateAPIKeyResponse {
+    /**
+     * The generated, encrypted API key. You can copy this for use in your JavaScript CAPTCHA integration.  For information about how to use this in your CAPTCHA JavaScript integration, see WAF client application integration in the WAF Developer Guide.
+     */
+    APIKey?: APIKey;
+  }
   export interface CreateIPSetRequest {
     /**
      * The name of the IP set. You cannot change the name of an IPSet after you create it.
@@ -1137,6 +1199,26 @@ declare namespace WAFV2 {
      */
     ForwardedIPConfig?: ForwardedIPConfig;
   }
+  export interface GetDecryptedAPIKeyRequest {
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * The encrypted API key. 
+     */
+    APIKey: APIKey;
+  }
+  export interface GetDecryptedAPIKeyResponse {
+    /**
+     * The token domains that are defined in this API key. 
+     */
+    TokenDomains?: TokenDomains;
+    /**
+     * The date and time that the key was created. 
+     */
+    CreationTimestamp?: Timestamp;
+  }
   export interface GetIPSetRequest {
     /**
      * The name of the IP set. You cannot change the name of an IPSet after you create it.
@@ -1603,6 +1685,34 @@ declare namespace WAFV2 {
     Name?: LabelName;
   }
   export type Labels = Label[];
+  export interface ListAPIKeysRequest {
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, or an App Runner service.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * When you request a list of objects with a Limit setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a NextMarker value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * The maximum number of objects that you want WAF to return for this request. If more objects are available, in the response, WAF provides a NextMarker value that you can use in a subsequent call to get the next batch of objects.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListAPIKeysResponse {
+    /**
+     * When you request a list of objects with a Limit setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a NextMarker value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * The array of key summaries. If you specified a Limit in your request, this might not be the full list. 
+     */
+    APIKeySummaries?: APIKeySummaries;
+    /**
+     * The CAPTCHA application integration URL, for use in your JavaScript implementation.  For information about how to use this in your CAPTCHA JavaScript integration, see WAF client application integration in the WAF Developer Guide.
+     */
+    ApplicationIntegrationURL?: OutputUrl;
+  }
   export interface ListAvailableManagedRuleGroupVersionsRequest {
     /**
      * The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.
@@ -1631,7 +1741,7 @@ declare namespace WAFV2 {
      */
     NextMarker?: NextMarker;
     /**
-     * The versions that are currently available for the specified managed rule group. 
+     * The versions that are currently available for the specified managed rule group. If you specified a Limit in your request, this might not be the full list. 
      */
     Versions?: ManagedRuleGroupVersions;
     /**
@@ -1659,7 +1769,7 @@ declare namespace WAFV2 {
      */
     NextMarker?: NextMarker;
     /**
-     * 
+     * Array of managed rule groups that you can use. If you specified a Limit in your request, this might not be the full list. 
      */
     ManagedRuleGroups?: ManagedRuleGroupSummaries;
   }
@@ -1683,7 +1793,7 @@ declare namespace WAFV2 {
      */
     NextMarker?: NextMarker;
     /**
-     * Array of IPSets. This may not be the full list of IPSets that you have defined. See the Limit specification for this request.
+     * Array of IPSets. If you specified a Limit in your request, this might not be the full list. 
      */
     IPSets?: IPSetSummaries;
   }
@@ -1703,7 +1813,7 @@ declare namespace WAFV2 {
   }
   export interface ListLoggingConfigurationsResponse {
     /**
-     * 
+     * Array of logging configurations. If you specified a Limit in your request, this might not be the full list. 
      */
     LoggingConfigurations?: LoggingConfigurations;
     /**
@@ -1731,7 +1841,7 @@ declare namespace WAFV2 {
      */
     NextMarker?: NextMarker;
     /**
-     * Your managed rule sets. 
+     * Your managed rule sets. If you specified a Limit in your request, this might not be the full list. 
      */
     ManagedRuleSets?: ManagedRuleSetSummaries;
   }
@@ -1752,7 +1862,7 @@ declare namespace WAFV2 {
   }
   export interface ListMobileSdkReleasesResponse {
     /**
-     * High level information for the available SDK releases. 
+     * The high level information for the available SDK releases. If you specified a Limit in your request, this might not be the full list. 
      */
     ReleaseSummaries?: ReleaseSummaries;
     /**
@@ -1780,7 +1890,7 @@ declare namespace WAFV2 {
      */
     NextMarker?: NextMarker;
     /**
-     * 
+     * Array of regex pattern sets. If you specified a Limit in your request, this might not be the full list. 
      */
     RegexPatternSets?: RegexPatternSetSummaries;
   }
@@ -1820,7 +1930,7 @@ declare namespace WAFV2 {
      */
     NextMarker?: NextMarker;
     /**
-     * 
+     * Array of rule groups. If you specified a Limit in your request, this might not be the full list. 
      */
     RuleGroups?: RuleGroupSummaries;
   }
@@ -1844,7 +1954,7 @@ declare namespace WAFV2 {
      */
     NextMarker?: NextMarker;
     /**
-     * The collection of tagging definitions for the resource. 
+     * The collection of tagging definitions for the resource. If you specified a Limit in your request, this might not be the full list. 
      */
     TagInfoForResource?: TagInfoForResource;
   }
@@ -1868,7 +1978,7 @@ declare namespace WAFV2 {
      */
     NextMarker?: NextMarker;
     /**
-     * 
+     * Array of web ACLs. If you specified a Limit in your request, this might not be the full list. 
      */
     WebACLs?: WebACLSummaries;
   }

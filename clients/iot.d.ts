@@ -8870,7 +8870,7 @@ declare namespace Iot {
      */
     additionalParameters?: AdditionalParameterMap;
   }
-  export type OTAUpdateStatus = "CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|string;
+  export type OTAUpdateStatus = "CREATE_PENDING"|"CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|string;
   export interface OTAUpdateSummary {
     /**
      * The OTA update ID.

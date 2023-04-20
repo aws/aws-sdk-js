@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1361.0-->
+<!--LATEST=2.1362.0-->
 <!--ENTRYINSERT-->
+
+## 2.1362.0
+* feature: Chime: Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API.
+* feature: ChimeSDKMediaPipelines: This release adds support for specifying the recording file format in an S3 recording sink configuration.
+* feature: ChimeSDKMeetings: Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API.
+* feature: GameLift: Amazon GameLift supports creating Builds for Windows 2016 operating system.
+* feature: GuardDuty: This release adds support for the new Lambda Protection feature.
+* feature: Iot: Support additional OTA states in GetOTAUpdate API
+* feature: SageMaker: Amazon SageMaker Canvas adds ModelRegisterSettings support for CanvasAppSettings.
+* feature: Snowball: Adds support for Amazon S3 compatible storage. AWS Snow Family customers can now use Amazon S3 compatible storage on Snowball Edge devices. Also adds support for V3_5S. This is a refreshed AWS Snowball Edge Storage Optimized device type with 210TB SSD (customer usable).
+* feature: WAFV2: You can now create encrypted API keys to use in a client application integration of the JavaScript CAPTCHA API . You can also retrieve a list of your API keys and the JavaScript application integration URL.
 
 ## 2.1361.0
 * feature: Comprehend: This release supports native document models for custom classification, in addition to plain-text models. You train native document models using documents (PDF, Word, images) in their native format.

@@ -216,7 +216,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     PostCallAnalyticsSettings?: PostCallAnalyticsSettings;
     /**
-     * By default, all CategoryEvents will be sent to the insights target. If this parameter is specified, only included categories will be sent to the insights target. 
+     * By default, all CategoryEvents are sent to the insights target. If this parameter is specified, only included categories are sent to the insights target. 
      */
     CallAnalyticsStreamCategories?: CategoryNameList;
   }
@@ -258,7 +258,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     ContentRedactionType?: ContentType;
     /**
-     * The types of personally identifiable information (PII) to redact from a transcript. You can include as many types as you'd like, or you can select ALL. To include PiiEntityTypes in your Call Analytics request, you must also include ContentIdentificationType or ContentRedactionType, but you can't include both. Values must be comma-separated and can include: ADDRESS, BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, CREDIT_DEBIT_NUMBER, EMAIL, NAME, PHONE, PIN, SSN, or ALL. Length Constraints: Minimum length of 1. Maximum length of 300.
+     * The types of personally identifiable information (PII) to redact from a transcript. You can include as many types as you'd like, or you can select ALL. To include PiiEntityTypes in your Call Analytics request, you must also include ContentIdentificationType or ContentRedactionType, but you can't include both. Values must be comma-separated and can include: ADDRESS, BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, CREDIT_DEBIT_NUMBER, EMAIL, NAME, PHONE, PIN, SSN, or ALL. If you leave this parameter empty, the default behavior is equivalent to ALL.
      */
     PiiEntityTypes?: PiiEntityTypes;
     /**
@@ -715,7 +715,7 @@ declare namespace ChimeSDKMediaPipelines {
   export type KeywordMatchWordList = Keyword[];
   export interface KinesisDataStreamSinkConfiguration {
     /**
-     * The URL of the sink, https://aws.amazon.com/kinesis/data-streams/.
+     * The ARN of the sink.
      */
     InsightsTarget?: Arn;
   }
@@ -746,7 +746,7 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface LambdaFunctionSinkConfiguration {
     /**
-     * The URL of the sink, https://aws.amazon.com/kinesis/data-streams/.
+     * The ARN of the sink.
      */
     InsightsTarget?: Arn;
   }
@@ -1175,7 +1175,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     ContentRedactionOutput?: ContentRedactionOutput;
     /**
-     * The ID of the KMS (Key Management System) key used to encrypt the output.
+     * The ID of the KMS (Key Management Service) key used to encrypt the output.
      */
     OutputEncryptionKMSKeyId?: String;
   }
@@ -1235,17 +1235,21 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface S3RecordingSinkConfiguration {
     /**
-     * The URL of the Amazon S3 bucket used as the recording sink.
+     * The default URI of the Amazon S3 bucket used as the recording sink.
      */
     Destination?: Arn;
+    /**
+     * The default file format for the media files sent to the Amazon S3 bucket.
+     */
+    RecordingFileFormat?: RecordingFileFormat;
   }
   export interface S3RecordingSinkRuntimeConfiguration {
     /**
-     * The URL of the S3 bucket used as the runtime sink.
+     * The URI of the S3 bucket used as the sink.
      */
     Destination: Arn;
     /**
-     * The file formats for the audio and video files sent to the Amazon S3 bucket.
+     * The file format for the media files sent to the Amazon S3 bucket.
      */
     RecordingFileFormat: RecordingFileFormat;
   }
@@ -1278,7 +1282,7 @@ declare namespace ChimeSDKMediaPipelines {
   export type SentimentType = "NEGATIVE"|string;
   export interface SnsTopicSinkConfiguration {
     /**
-     * The URL of the SNS sink, https://aws.amazon.com/kinesis/data-streams/.
+     * The ARN of the SNS sink.
      */
     InsightsTarget?: Arn;
   }
@@ -1290,7 +1294,7 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export interface SqsQueueSinkConfiguration {
     /**
-     * The URL of the SQS sink, https://aws.amazon.com/kinesis/data-streams/.
+     * The ARN of the SQS sink.
      */
     InsightsTarget?: Arn;
   }

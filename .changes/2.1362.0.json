@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API."
+    },
+    {
+        "type": "feature",
+        "category": "ChimeSDKMediaPipelines",
+        "description": "This release adds support for specifying the recording file format in an S3 recording sink configuration."
+    },
+    {
+        "type": "feature",
+        "category": "ChimeSDKMeetings",
+        "description": "Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API."
+    },
+    {
+        "type": "feature",
+        "category": "GameLift",
+        "description": "Amazon GameLift supports creating Builds for Windows 2016 operating system."
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "This release adds support for the new Lambda Protection feature."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "Support additional OTA states in GetOTAUpdate API"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Amazon SageMaker Canvas adds ModelRegisterSettings support for CanvasAppSettings."
+    },
+    {
+        "type": "feature",
+        "category": "Snowball",
+        "description": "Adds support for Amazon S3 compatible storage. AWS Snow Family customers can now use Amazon S3 compatible storage on Snowball Edge devices. Also adds support for V3_5S. This is a refreshed AWS Snowball Edge Storage Optimized device type with 210TB SSD (customer usable)."
+    },
+    {
+        "type": "feature",
+        "category": "WAFV2",
+        "description": "You can now create encrypted API keys to use in a client application integration of the JavaScript CAPTCHA API . You can also retrieve a list of your API keys and the JavaScript application integration URL."
+    }
+]

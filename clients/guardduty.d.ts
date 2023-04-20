@@ -1571,7 +1571,7 @@ declare namespace GuardDuty {
   }
   export type DetectorAdditionalConfigurationResults = DetectorAdditionalConfigurationResult[];
   export type DetectorAdditionalConfigurations = DetectorAdditionalConfiguration[];
-  export type DetectorFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|string;
+  export type DetectorFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
   export interface DetectorFeatureConfiguration {
     /**
      * The name of the feature.
@@ -1606,7 +1606,7 @@ declare namespace GuardDuty {
   }
   export type DetectorFeatureConfigurations = DetectorFeatureConfiguration[];
   export type DetectorFeatureConfigurationsResults = DetectorFeatureConfigurationResult[];
-  export type DetectorFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|string;
+  export type DetectorFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
   export type DetectorId = string;
   export type DetectorIds = DetectorId[];
   export type DetectorStatus = "ENABLED"|"DISABLED"|string;
@@ -1971,7 +1971,7 @@ declare namespace GuardDuty {
     FreeTrialDaysRemaining?: Integer;
   }
   export type FreeTrialFeatureConfigurationsResults = FreeTrialFeatureConfigurationResult[];
-  export type FreeTrialFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|string;
+  export type FreeTrialFeatureResult = "FLOW_LOGS"|"CLOUD_TRAIL"|"DNS_LOGS"|"S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
   export interface GeoLocation {
     /**
      * The latitude information of the remote IP address.
@@ -2573,6 +2573,44 @@ declare namespace GuardDuty {
      */
     Volumes?: Volumes;
   }
+  export interface LambdaDetails {
+    /**
+     * Amazon Resource Name (ARN) of the Lambda function.
+     */
+    FunctionArn?: String;
+    /**
+     * Name of the Lambda function.
+     */
+    FunctionName?: String;
+    /**
+     * Description of the Lambda function.
+     */
+    Description?: String;
+    /**
+     * The timestamp when the Lambda function was last modified. This field is in the UTC date string format (2023-03-22T19:37:20.168Z).
+     */
+    LastModifiedAt?: Timestamp;
+    /**
+     * The revision ID of the Lambda function version.
+     */
+    RevisionId?: String;
+    /**
+     * The version of the Lambda function.
+     */
+    FunctionVersion?: String;
+    /**
+     * The execution role of the Lambda function.
+     */
+    Role?: String;
+    /**
+     * Amazon Virtual Private Cloud configuration details associated with your Lambda function.
+     */
+    VpcConfig?: VpcConfig;
+    /**
+     * A list of tags attached to this resource, listed in the format of key:value pair.
+     */
+    Tags?: Tags;
+  }
   export type Lineage = LineageObject[];
   export interface LineageObject {
     /**
@@ -3141,7 +3179,7 @@ declare namespace GuardDuty {
   export type NonEmptyString = string;
   export type NotEquals = String[];
   export type OrderBy = "ASC"|"DESC"|string;
-  export type OrgFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|string;
+  export type OrgFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
   export type OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"|string;
   export type OrgFeatureStatus = "NEW"|"NONE"|string;
   export interface Organization {
@@ -3582,6 +3620,10 @@ declare namespace GuardDuty {
      * Contains information about the user details through which anomalous login attempt was made.
      */
     RdsDbUserDetails?: RdsDbUserDetails;
+    /**
+     * Contains information about the Lambda function that was involved in a finding.
+     */
+    LambdaDetails?: LambdaDetails;
   }
   export interface ResourceDetails {
     /**
@@ -4036,6 +4078,7 @@ declare namespace GuardDuty {
     UnprocessedAccounts: UnprocessedAccounts;
   }
   export type String = string;
+  export type SubnetIds = String[];
   export interface Tag {
     /**
      * The EC2 instance tag key.
@@ -4502,6 +4545,20 @@ declare namespace GuardDuty {
   }
   export type VolumeMounts = VolumeMount[];
   export type Volumes = Volume[];
+  export interface VpcConfig {
+    /**
+     * The identifiers of the subnets that are associated with your Lambda function.
+     */
+    SubnetIds?: SubnetIds;
+    /**
+     * The identifier of the Amazon Virtual Private Cloud.
+     */
+    VpcId?: String;
+    /**
+     * The identifier of the security group attached to the Lambda function.
+     */
+    SecurityGroups?: SecurityGroups;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
