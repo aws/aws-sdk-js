@@ -594,6 +594,40 @@
       ],
       "documentation": "<p>Creates an Amazon Web Services resource association with an Amazon Connect instance.</p>"
     },
+    "CreateParticipant": {
+      "name": "CreateParticipant",
+      "http": {
+        "method": "POST",
+        "requestUri": "/contact/create-participant"
+      },
+      "input": {
+        "shape": "CreateParticipantRequest"
+      },
+      "output": {
+        "shape": "CreateParticipantResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Adds a new participant into an on-going chat contact. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat flow experiences by integrating custom participants</a>.</p>"
+    },
     "CreateQueue": {
       "name": "CreateQueue",
       "http": {
@@ -6817,6 +6851,46 @@
         }
       }
     },
+    "CreateParticipantRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "ContactId",
+        "ParticipantDetails"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance. </p>"
+        },
+        "ContactId": {
+          "shape": "ContactId",
+          "documentation": "<p>The identifier of the contact in this instance of Amazon Connect. Only contacts in the CHAT channel are supported.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+          "idempotencyToken": true
+        },
+        "ParticipantDetails": {
+          "shape": "ParticipantDetailsToAdd",
+          "documentation": "<p>Information identifying the participant.</p> <important> <p>The only Valid value for <code>ParticipantRole</code> is <code>CUSTOM_BOT</code>. </p> <p> <code>DisplayName</code> is <b>Required</b>.</p> </important>"
+        }
+      }
+    },
+    "CreateParticipantResponse": {
+      "type": "structure",
+      "members": {
+        "ParticipantCredentials": {
+          "shape": "ParticipantTokenCredentials",
+          "documentation": "<p>The token used by the chat participant to call <code>CreateParticipantConnection</code>. The participant token is valid for the lifetime of a chat participant.</p>"
+        },
+        "ParticipantId": {
+          "shape": "ParticipantId",
+          "documentation": "<p>The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat lifecycle.</p>"
+        }
+      }
+    },
     "CreateQueueRequest": {
       "type": "structure",
       "required": [
@@ -9864,6 +9938,9 @@
       },
       "documentation": "<p>The start time or end time for an hours of operation.</p>"
     },
+    "ISO8601Datetime": {
+      "type": "string"
+    },
     "InboundCallsEnabled": {
       "type": "boolean"
     },
@@ -11774,7 +11851,7 @@
       "members": {
         "MetricFilterKey": {
           "shape": "String",
-          "documentation": "<p>The key to use for filtering data. </p> <p>Valid metric filter keys: <code>INITIATION_METHOD</code>, <code>DISCONNECT_REASON</code> </p>"
+          "documentation": "<p>The key to use for filtering data. </p> <p>Valid metric filter keys: <code>INITIATION_METHOD</code>, <code>DISCONNECT_REASON</code>. These are the same values as the <code>InitiationMethod</code> and <code>DisconnectReason</code> in the contact record. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>"
         },
         "MetricFilterValues": {
           "shape": "MetricFilterValueList",
@@ -12014,10 +12091,33 @@
       },
       "documentation": "<p>The customer's details.</p>"
     },
+    "ParticipantDetailsToAdd": {
+      "type": "structure",
+      "members": {
+        "ParticipantRole": {
+          "shape": "ParticipantRole",
+          "documentation": "<p>The role of the participant being added.</p>"
+        },
+        "DisplayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The display name of the participant.</p>"
+        }
+      },
+      "documentation": "<p>The details to add for the participant.</p>"
+    },
     "ParticipantId": {
       "type": "string",
       "max": 256,
       "min": 1
+    },
+    "ParticipantRole": {
+      "type": "string",
+      "enum": [
+        "AGENT",
+        "CUSTOMER",
+        "SYSTEM",
+        "CUSTOM_BOT"
+      ]
     },
     "ParticipantTimerAction": {
       "type": "string",
@@ -12087,6 +12187,20 @@
       "type": "string",
       "max": 1000,
       "min": 1
+    },
+    "ParticipantTokenCredentials": {
+      "type": "structure",
+      "members": {
+        "ParticipantToken": {
+          "shape": "ParticipantToken",
+          "documentation": "<p>The token used by the chat participant to call <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a>. The participant token is valid for the lifetime of a chat participant. </p>"
+        },
+        "Expiry": {
+          "shape": "ISO8601Datetime",
+          "documentation": "<p>The expiration of the token. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>"
+        }
+      },
+      "documentation": "<p>The credentials used by the participant.</p>"
     },
     "Password": {
       "type": "string",

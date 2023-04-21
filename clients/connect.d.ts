@@ -148,6 +148,14 @@ declare class Connect extends Service {
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
+   * Adds a new participant into an on-going chat contact. For more information, see Customize chat flow experiences by integrating custom participants.
+   */
+  createParticipant(params: Connect.Types.CreateParticipantRequest, callback?: (err: AWSError, data: Connect.Types.CreateParticipantResponse) => void): Request<Connect.Types.CreateParticipantResponse, AWSError>;
+  /**
+   * Adds a new participant into an on-going chat contact. For more information, see Customize chat flow experiences by integrating custom participants.
+   */
+  createParticipant(callback?: (err: AWSError, data: Connect.Types.CreateParticipantResponse) => void): Request<Connect.Types.CreateParticipantResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   createQueue(params: Connect.Types.CreateQueueRequest, callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
@@ -2240,6 +2248,34 @@ declare namespace Connect {
      */
     IntegrationAssociationArn?: ARN;
   }
+  export interface CreateParticipantRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance. 
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact in this instance of Amazon Connect. Only contacts in the CHAT channel are supported.
+     */
+    ContactId: ContactId;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * Information identifying the participant.  The only Valid value for ParticipantRole is CUSTOM_BOT.   DisplayName is Required. 
+     */
+    ParticipantDetails: ParticipantDetailsToAdd;
+  }
+  export interface CreateParticipantResponse {
+    /**
+     * The token used by the chat participant to call CreateParticipantConnection. The participant token is valid for the lifetime of a chat participant.
+     */
+    ParticipantCredentials?: ParticipantTokenCredentials;
+    /**
+     * The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat lifecycle.
+     */
+    ParticipantId?: ParticipantId;
+  }
   export interface CreateQueueRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -4016,6 +4052,7 @@ declare namespace Connect {
      */
     Minutes: MinutesLimit60;
   }
+  export type ISO8601Datetime = string;
   export type InboundCallsEnabled = boolean;
   export interface Instance {
     /**
@@ -5145,7 +5182,7 @@ declare namespace Connect {
   }
   export interface MetricFilterV2 {
     /**
-     * The key to use for filtering data.  Valid metric filter keys: INITIATION_METHOD, DISCONNECT_REASON 
+     * The key to use for filtering data.  Valid metric filter keys: INITIATION_METHOD, DISCONNECT_REASON. These are the same values as the InitiationMethod and DisconnectReason in the contact record. For more information, see ContactTraceRecord in the Amazon Connect Administrator's Guide. 
      */
     MetricFilterKey?: String;
     /**
@@ -5267,7 +5304,18 @@ declare namespace Connect {
      */
     DisplayName: DisplayName;
   }
+  export interface ParticipantDetailsToAdd {
+    /**
+     * The role of the participant being added.
+     */
+    ParticipantRole?: ParticipantRole;
+    /**
+     * The display name of the participant.
+     */
+    DisplayName?: DisplayName;
+  }
   export type ParticipantId = string;
+  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|"CUSTOM_BOT"|string;
   export type ParticipantTimerAction = "Unset"|string;
   export type ParticipantTimerConfigList = ParticipantTimerConfiguration[];
   export interface ParticipantTimerConfiguration {
@@ -5297,6 +5345,16 @@ declare namespace Connect {
     ParticipantTimerDurationInMinutes?: ParticipantTimerDurationInMinutes;
   }
   export type ParticipantToken = string;
+  export interface ParticipantTokenCredentials {
+    /**
+     * The token used by the chat participant to call CreateParticipantConnection. The participant token is valid for the lifetime of a chat participant. 
+     */
+    ParticipantToken?: ParticipantToken;
+    /**
+     * The expiration of the token. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+     */
+    Expiry?: ISO8601Datetime;
+  }
   export type Password = string;
   export type Percentage = number;
   export type PermissionsList = SecurityProfilePermission[];

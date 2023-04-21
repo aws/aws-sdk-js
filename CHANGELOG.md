@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1362.0-->
+<!--LATEST=2.1363.0-->
 <!--ENTRYINSERT-->
+
+## 2.1363.0
+* feature: Connect: This release adds a new API CreateParticipant. For Amazon Connect Chat, you can use this new API to customize chat flow experiences.
+* feature: FMS: AWS Firewall Manager adds support for multiple administrators. You can now delegate more than one administrator per organization.
 
 ## 2.1362.0
 * feature: Chime: Adds support for Hindi and Thai languages and additional Amazon Transcribe parameters to the StartMeetingTranscription API.

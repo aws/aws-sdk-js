@@ -12,11 +12,11 @@ declare class FMS extends Service {
   constructor(options?: FMS.Types.ClientConfiguration)
   config: Config & FMS.Types.ClientConfiguration;
   /**
-   * Sets the Firewall Manager administrator account. The account must be a member of the organization in Organizations whose resources you want to protect. Firewall Manager sets the permissions that allow the account to administer your Firewall Manager policies. The account that you associate with Firewall Manager is called the Firewall Manager administrator account. 
+   * Sets a Firewall Manager default administrator account. The Firewall Manager default administrator account can manage third-party firewalls and has full administrative scope that allows administration of all policy types, accounts, organizational units, and Regions. This account must be a member account of the organization in Organizations whose resources you want to protect. For information about working with Firewall Manager administrator accounts, see Managing Firewall Manager administrators in the Firewall Manager Developer Guide.
    */
   associateAdminAccount(params: FMS.Types.AssociateAdminAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Firewall Manager administrator account. The account must be a member of the organization in Organizations whose resources you want to protect. Firewall Manager sets the permissions that allow the account to administer your Firewall Manager policies. The account that you associate with Firewall Manager is called the Firewall Manager administrator account. 
+   * Sets a Firewall Manager default administrator account. The Firewall Manager default administrator account can manage third-party firewalls and has full administrative scope that allows administration of all policy types, accounts, organizational units, and Regions. This account must be a member account of the organization in Organizations whose resources you want to protect. For information about working with Firewall Manager administrator accounts, see Managing Firewall Manager administrators in the Firewall Manager Developer Guide.
    */
   associateAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class FMS extends Service {
    */
   deleteResourceSet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disassociates the account that has been set as the Firewall Manager administrator account. To set a different account as the administrator account, you must submit an AssociateAdminAccount request.
+   * Disassociates an Firewall Manager administrator account. To set a different account as an Firewall Manager administrator, submit a PutAdminAccount request. To set an account as a default administrator account, you must submit an AssociateAdminAccount request. Disassociation of the default administrator account follows the first in, last out principle. If you are the default administrator, all Firewall Manager administrators within the organization must first disassociate their accounts before you can disassociate your account.
    */
   disassociateAdminAccount(params: FMS.Types.DisassociateAdminAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disassociates the account that has been set as the Firewall Manager administrator account. To set a different account as the administrator account, you must submit an AssociateAdminAccount request.
+   * Disassociates an Firewall Manager administrator account. To set a different account as an Firewall Manager administrator, submit a PutAdminAccount request. To set an account as a default administrator account, you must submit an AssociateAdminAccount request. Disassociation of the default administrator account follows the first in, last out principle. If you are the default administrator, all Firewall Manager administrators within the organization must first disassociate their accounts before you can disassociate your account.
    */
   disassociateAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -100,13 +100,21 @@ declare class FMS extends Service {
    */
   disassociateThirdPartyFirewall(callback?: (err: AWSError, data: FMS.Types.DisassociateThirdPartyFirewallResponse) => void): Request<FMS.Types.DisassociateThirdPartyFirewallResponse, AWSError>;
   /**
-   * Returns the Organizations account that is associated with Firewall Manager as the Firewall Manager administrator.
+   * Returns the Organizations account that is associated with Firewall Manager as the Firewall Manager default administrator.
    */
   getAdminAccount(params: FMS.Types.GetAdminAccountRequest, callback?: (err: AWSError, data: FMS.Types.GetAdminAccountResponse) => void): Request<FMS.Types.GetAdminAccountResponse, AWSError>;
   /**
-   * Returns the Organizations account that is associated with Firewall Manager as the Firewall Manager administrator.
+   * Returns the Organizations account that is associated with Firewall Manager as the Firewall Manager default administrator.
    */
   getAdminAccount(callback?: (err: AWSError, data: FMS.Types.GetAdminAccountResponse) => void): Request<FMS.Types.GetAdminAccountResponse, AWSError>;
+  /**
+   * Returns information about the specified account's administrative scope. The admistrative scope defines the resources that an Firewall Manager administrator can manage.
+   */
+  getAdminScope(params: FMS.Types.GetAdminScopeRequest, callback?: (err: AWSError, data: FMS.Types.GetAdminScopeResponse) => void): Request<FMS.Types.GetAdminScopeResponse, AWSError>;
+  /**
+   * Returns information about the specified account's administrative scope. The admistrative scope defines the resources that an Firewall Manager administrator can manage.
+   */
+  getAdminScope(callback?: (err: AWSError, data: FMS.Types.GetAdminScopeResponse) => void): Request<FMS.Types.GetAdminScopeResponse, AWSError>;
   /**
    * Returns information about the specified Firewall Manager applications list.
    */
@@ -180,6 +188,22 @@ declare class FMS extends Service {
    */
   getViolationDetails(callback?: (err: AWSError, data: FMS.Types.GetViolationDetailsResponse) => void): Request<FMS.Types.GetViolationDetailsResponse, AWSError>;
   /**
+   * Returns a AdminAccounts object that lists the Firewall Manager administrators within the organization that are onboarded to Firewall Manager by AssociateAdminAccount. This operation can be called only from the organization's management account.
+   */
+  listAdminAccountsForOrganization(params: FMS.Types.ListAdminAccountsForOrganizationRequest, callback?: (err: AWSError, data: FMS.Types.ListAdminAccountsForOrganizationResponse) => void): Request<FMS.Types.ListAdminAccountsForOrganizationResponse, AWSError>;
+  /**
+   * Returns a AdminAccounts object that lists the Firewall Manager administrators within the organization that are onboarded to Firewall Manager by AssociateAdminAccount. This operation can be called only from the organization's management account.
+   */
+  listAdminAccountsForOrganization(callback?: (err: AWSError, data: FMS.Types.ListAdminAccountsForOrganizationResponse) => void): Request<FMS.Types.ListAdminAccountsForOrganizationResponse, AWSError>;
+  /**
+   * Lists the accounts that are managing the specified Organizations member account. This is useful for any member account so that they can view the accounts who are managing their account. This operation only returns the managing administrators that have the requested account within their AdminScope.
+   */
+  listAdminsManagingAccount(params: FMS.Types.ListAdminsManagingAccountRequest, callback?: (err: AWSError, data: FMS.Types.ListAdminsManagingAccountResponse) => void): Request<FMS.Types.ListAdminsManagingAccountResponse, AWSError>;
+  /**
+   * Lists the accounts that are managing the specified Organizations member account. This is useful for any member account so that they can view the accounts who are managing their account. This operation only returns the managing administrators that have the requested account within their AdminScope.
+   */
+  listAdminsManagingAccount(callback?: (err: AWSError, data: FMS.Types.ListAdminsManagingAccountResponse) => void): Request<FMS.Types.ListAdminsManagingAccountResponse, AWSError>;
+  /**
    * Returns an array of AppsListDataSummary objects.
    */
   listAppsLists(params: FMS.Types.ListAppsListsRequest, callback?: (err: AWSError, data: FMS.Types.ListAppsListsResponse) => void): Request<FMS.Types.ListAppsListsResponse, AWSError>;
@@ -204,11 +228,11 @@ declare class FMS extends Service {
    */
   listDiscoveredResources(callback?: (err: AWSError, data: FMS.Types.ListDiscoveredResourcesResponse) => void): Request<FMS.Types.ListDiscoveredResourcesResponse, AWSError>;
   /**
-   * Returns a MemberAccounts object that lists the member accounts in the administrator's Amazon Web Services organization. The ListMemberAccounts must be submitted by the account that is set as the Firewall Manager administrator.
+   * Returns a MemberAccounts object that lists the member accounts in the administrator's Amazon Web Services organization. Either an Firewall Manager administrator or the organization's management account can make this request.
    */
   listMemberAccounts(params: FMS.Types.ListMemberAccountsRequest, callback?: (err: AWSError, data: FMS.Types.ListMemberAccountsResponse) => void): Request<FMS.Types.ListMemberAccountsResponse, AWSError>;
   /**
-   * Returns a MemberAccounts object that lists the member accounts in the administrator's Amazon Web Services organization. The ListMemberAccounts must be submitted by the account that is set as the Firewall Manager administrator.
+   * Returns a MemberAccounts object that lists the member accounts in the administrator's Amazon Web Services organization. Either an Firewall Manager administrator or the organization's management account can make this request.
    */
   listMemberAccounts(callback?: (err: AWSError, data: FMS.Types.ListMemberAccountsResponse) => void): Request<FMS.Types.ListMemberAccountsResponse, AWSError>;
   /**
@@ -260,6 +284,14 @@ declare class FMS extends Service {
    */
   listThirdPartyFirewallFirewallPolicies(callback?: (err: AWSError, data: FMS.Types.ListThirdPartyFirewallFirewallPoliciesResponse) => void): Request<FMS.Types.ListThirdPartyFirewallFirewallPoliciesResponse, AWSError>;
   /**
+   * Creates or updates an Firewall Manager administrator account. The account must be a member of the organization that was onboarded to Firewall Manager by AssociateAdminAccount. Only the organization's management account can create an Firewall Manager administrator account. When you create an Firewall Manager administrator account, the service checks to see if the account is already a delegated administrator within Organizations. If the account isn't a delegated administrator, Firewall Manager calls Organizations to delegate the account within Organizations. For more information about administrator accounts within Organizations, see Managing the Amazon Web Services Accounts in Your Organization.
+   */
+  putAdminAccount(params: FMS.Types.PutAdminAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Creates or updates an Firewall Manager administrator account. The account must be a member of the organization that was onboarded to Firewall Manager by AssociateAdminAccount. Only the organization's management account can create an Firewall Manager administrator account. When you create an Firewall Manager administrator account, the service checks to see if the account is already a delegated administrator within Organizations. If the account isn't a delegated administrator, Firewall Manager calls Organizations to delegate the account within Organizations. For more information about administrator accounts within Organizations, see Managing the Amazon Web Services Accounts in Your Organization.
+   */
+  putAdminAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Creates an Firewall Manager applications list.
    */
   putAppsList(params: FMS.Types.PutAppsListRequest, callback?: (err: AWSError, data: FMS.Types.PutAppsListResponse) => void): Request<FMS.Types.PutAppsListResponse, AWSError>;
@@ -268,11 +300,11 @@ declare class FMS extends Service {
    */
   putAppsList(callback?: (err: AWSError, data: FMS.Types.PutAppsListResponse) => void): Request<FMS.Types.PutAppsListResponse, AWSError>;
   /**
-   * Designates the IAM role and Amazon Simple Notification Service (SNS) topic that Firewall Manager uses to record SNS logs. To perform this action outside of the console, you must configure the SNS topic to allow the Firewall Manager role AWSServiceRoleForFMS to publish SNS logs. For more information, see Firewall Manager required permissions for API actions in the Firewall Manager Developer Guide.
+   * Designates the IAM role and Amazon Simple Notification Service (SNS) topic that Firewall Manager uses to record SNS logs. To perform this action outside of the console, you must first configure the SNS topic's access policy to allow the SnsRoleName to publish SNS logs. If the SnsRoleName provided is a role other than the AWSServiceRoleForFMS service-linked role, this role must have a trust relationship configured to allow the Firewall Manager service principal fms.amazonaws.com to assume this role. For information about configuring an SNS access policy, see Service roles for Firewall Manager in the Firewall Manager Developer Guide.
    */
   putNotificationChannel(params: FMS.Types.PutNotificationChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Designates the IAM role and Amazon Simple Notification Service (SNS) topic that Firewall Manager uses to record SNS logs. To perform this action outside of the console, you must configure the SNS topic to allow the Firewall Manager role AWSServiceRoleForFMS to publish SNS logs. For more information, see Firewall Manager required permissions for API actions in the Firewall Manager Developer Guide.
+   * Designates the IAM role and Amazon Simple Notification Service (SNS) topic that Firewall Manager uses to record SNS logs. To perform this action outside of the console, you must first configure the SNS topic's access policy to allow the SnsRoleName to publish SNS logs. If the SnsRoleName provided is a role other than the AWSServiceRoleForFMS service-linked role, this role must have a trust relationship configured to allow the Firewall Manager service principal fms.amazonaws.com to assume this role. For information about configuring an SNS access policy, see Service roles for Firewall Manager in the Firewall Manager Developer Guide.
    */
   putNotificationChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -319,7 +351,24 @@ declare class FMS extends Service {
 declare namespace FMS {
   export type AWSAccountId = string;
   export type AWSAccountIdList = AWSAccountId[];
+  export type AWSRegion = string;
+  export type AWSRegionList = AWSRegion[];
+  export type AccountIdList = AWSAccountId[];
   export type AccountRoleStatus = "READY"|"CREATING"|"PENDING_DELETION"|"DELETING"|"DELETED"|string;
+  export interface AccountScope {
+    /**
+     * The list of accounts within the organization that the specified Firewall Manager administrator either can or cannot apply policies to, based on the value of ExcludeSpecifiedAccounts. If ExcludeSpecifiedAccounts is set to true, then the Firewall Manager administrator can apply policies to all members of the organization except for the accounts in this list. If ExcludeSpecifiedAccounts is set to false, then the Firewall Manager administrator can only apply policies to the accounts in this list.
+     */
+    Accounts?: AccountIdList;
+    /**
+     * A boolean value that indicates if the administrator can apply policies to all accounts within an organization. If true, the administrator can apply policies to all accounts within the organization. You can either enable management of all accounts through this operation, or you can specify a list of accounts to manage in AccountScope$Accounts. You cannot specify both.
+     */
+    AllAccountsEnabled?: Boolean;
+    /**
+     * A boolean value that excludes the accounts in AccountScope$Accounts from the administrator's scope. If true, the Firewall Manager administrator can apply policies to all members of the organization except for the accounts listed in AccountScope$Accounts. You can either specify a list of accounts to exclude by AccountScope$Accounts, or you can enable management of all accounts by AccountScope$AllAccountsEnabled. You cannot specify both.
+     */
+    ExcludeSpecifiedAccounts?: Boolean;
+  }
   export interface ActionTarget {
     /**
      * The ID of the remediation target.
@@ -329,6 +378,39 @@ declare namespace FMS {
      * A description of the remediation action target.
      */
     Description?: LengthBoundedString;
+  }
+  export interface AdminAccountSummary {
+    /**
+     * The Amazon Web Services account ID of the Firewall Manager administrator's account.
+     */
+    AdminAccount?: AWSAccountId;
+    /**
+     * A boolean value that indicates if the administrator is the default administrator. If true, then this is the default administrator account. The default administrator can manage third-party firewalls and has full administrative scope. There is only one default administrator account per organization. For information about Firewall Manager default administrator accounts, see Managing Firewall Manager administrators in the Firewall Manager Developer Guide.
+     */
+    DefaultAdmin?: Boolean;
+    /**
+     * The current status of the request to onboard a member account as an Firewall Manager administator.    ONBOARDING - The account is onboarding to Firewall Manager as an administrator.    ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall Manager as an administrator, and can perform actions on the resources defined in their AdminScope.    OFFBOARDING - The account is being removed as an Firewall Manager administrator.    OFFBOARDING_COMPLETE - The account has been removed as an Firewall Manager administrator.  
+     */
+    Status?: OrganizationStatus;
+  }
+  export type AdminAccountSummaryList = AdminAccountSummary[];
+  export interface AdminScope {
+    /**
+     * Defines the accounts that the specified Firewall Manager administrator can apply policies to.
+     */
+    AccountScope?: AccountScope;
+    /**
+     * Defines the Organizations organizational units that the specified Firewall Manager administrator can apply policies to. For more information about OUs in Organizations, see Managing organizational units (OUs)  in the Organizations User Guide.
+     */
+    OrganizationalUnitScope?: OrganizationalUnitScope;
+    /**
+     * Defines the Amazon Web Services Regions that the specified Firewall Manager administrator can perform actions in.
+     */
+    RegionScope?: RegionScope;
+    /**
+     * Defines the Firewall Manager policy types that the specified Firewall Manager administrator can create and manage.
+     */
+    PolicyTypeScope?: PolicyTypeScope;
   }
   export interface App {
     /**
@@ -396,7 +478,7 @@ declare namespace FMS {
   export type AppsListsData = AppsListDataSummary[];
   export interface AssociateAdminAccountRequest {
     /**
-     * The Amazon Web Services account ID to associate with Firewall Manager as the Firewall Manager administrator account. This must be an Organizations member account. For more information about Organizations, see Managing the Amazon Web Services Accounts in Your Organization. 
+     * The Amazon Web Services account ID to associate with Firewall Manager as the Firewall Manager default administrator account. This account must be a member account of the organization in Organizations whose resources you want to protect. For more information about Organizations, see Managing the Amazon Web Services Accounts in Your Organization. 
      */
     AdminAccount: AWSAccountId;
   }
@@ -455,7 +537,7 @@ declare namespace FMS {
   export type BasicInteger = number;
   export interface BatchAssociateResourceRequest {
     /**
-     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     * A unique identifier for the resource set, used in a request to refer to the resource set.
      */
     ResourceSetIdentifier: Identifier;
     /**
@@ -465,7 +547,7 @@ declare namespace FMS {
   }
   export interface BatchAssociateResourceResponse {
     /**
-     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     * A unique identifier for the resource set, used in a request to refer to the resource set.
      */
     ResourceSetIdentifier: Identifier;
     /**
@@ -475,7 +557,7 @@ declare namespace FMS {
   }
   export interface BatchDisassociateResourceRequest {
     /**
-     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     * A unique identifier for the resource set, used in a request to refer to the resource set.
      */
     ResourceSetIdentifier: Identifier;
     /**
@@ -485,7 +567,7 @@ declare namespace FMS {
   }
   export interface BatchDisassociateResourceResponse {
     /**
-     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     * A unique identifier for the resource set, used in a request to refer to the resource set.
      */
     ResourceSetIdentifier: Identifier;
     /**
@@ -519,6 +601,7 @@ declare namespace FMS {
   export type CustomerPolicyScopeIdList = CustomerPolicyScopeId[];
   export type CustomerPolicyScopeIdType = "ACCOUNT"|"ORG_UNIT"|string;
   export type CustomerPolicyScopeMap = {[key: string]: CustomerPolicyScopeIdList};
+  export type CustomerPolicyStatus = "ACTIVE"|"OUT_OF_ADMIN_SCOPE"|string;
   export interface DeleteAppsListRequest {
     /**
      * The ID of the applications list that you want to delete. You can retrieve this ID from PutAppsList, ListAppsLists, and GetAppsList.
@@ -545,7 +628,7 @@ declare namespace FMS {
   }
   export interface DeleteResourceSetRequest {
     /**
-     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     * A unique identifier for the resource set, used in a request to refer to the resource set.
      */
     Identifier: Base62Id;
   }
@@ -879,13 +962,29 @@ declare namespace FMS {
   }
   export interface GetAdminAccountResponse {
     /**
-     * The Amazon Web Services account that is set as the Firewall Manager administrator.
+     * The account that is set as the Firewall Manager default administrator.
      */
     AdminAccount?: AWSAccountId;
     /**
-     * The status of the Amazon Web Services account that you set as the Firewall Manager administrator.
+     * The status of the account that you set as the Firewall Manager default administrator.
      */
     RoleStatus?: AccountRoleStatus;
+  }
+  export interface GetAdminScopeRequest {
+    /**
+     * The administator account that you want to get the details for.
+     */
+    AdminAccount: AWSAccountId;
+  }
+  export interface GetAdminScopeResponse {
+    /**
+     * Contains details about the administrative scope of the requested account.
+     */
+    AdminScope?: AdminScope;
+    /**
+     * The current status of the request to onboard a member account as an Firewall Manager administator.    ONBOARDING - The account is onboarding to Firewall Manager as an administrator.    ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall Manager as an administrator, and can perform actions on the resources defined in their AdminScope.    OFFBOARDING - The account is being removed as an Firewall Manager administrator.    OFFBOARDING_COMPLETE - The account has been removed as an Firewall Manager administrator.  
+     */
+    Status?: OrganizationStatus;
   }
   export interface GetAppsListRequest {
     /**
@@ -1017,7 +1116,7 @@ declare namespace FMS {
   }
   export interface GetResourceSetRequest {
     /**
-     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     * A unique identifier for the resource set, used in a request to refer to the resource set.
      */
     Identifier: Base62Id;
   }
@@ -1077,6 +1176,46 @@ declare namespace FMS {
   export type IssueInfoMap = {[key: string]: DetailedInfo};
   export type LengthBoundedString = string;
   export type LengthBoundedStringList = LengthBoundedString[];
+  export interface ListAdminAccountsForOrganizationRequest {
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of objects that you want Firewall Manager to return for this request. If more objects are available, in the response, Firewall Manager provides a NextToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: PaginationMaxResults;
+  }
+  export interface ListAdminAccountsForOrganizationResponse {
+    /**
+     * A list of Firewall Manager administrator accounts within the organization that were onboarded as administrators by AssociateAdminAccount or PutAdminAccount.
+     */
+    AdminAccounts?: AdminAccountSummaryList;
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListAdminsManagingAccountRequest {
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of objects that you want Firewall Manager to return for this request. If more objects are available, in the response, Firewall Manager provides a NextToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: PaginationMaxResults;
+  }
+  export interface ListAdminsManagingAccountResponse {
+    /**
+     * The list of accounts who manage member accounts within their AdminScope.
+     */
+    AdminAccounts?: AccountIdList;
+    /**
+     * When you request a list of objects with a MaxResults setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Firewall Manager returns a NextToken value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.
+     */
+    NextToken?: PaginationToken;
+  }
   export interface ListAppsListsRequest {
     /**
      * Specifies whether the lists to retrieve are default lists owned by Firewall Manager.
@@ -1220,7 +1359,7 @@ declare namespace FMS {
   }
   export interface ListResourceSetResourcesRequest {
     /**
-     * A unique identifier for the resource set, used in a TODO to refer to the resource set.
+     * A unique identifier for the resource set, used in a request to refer to the resource set.
      */
     Identifier: ResourceId;
     /**
@@ -1621,6 +1760,23 @@ declare namespace FMS {
     VpcId?: ResourceId;
   }
   export type OrderedRemediationActions = RemediationActionWithOrder[];
+  export type OrganizationStatus = "ONBOARDING"|"ONBOARDING_COMPLETE"|"OFFBOARDING"|"OFFBOARDING_COMPLETE"|string;
+  export type OrganizationalUnitId = string;
+  export type OrganizationalUnitIdList = OrganizationalUnitId[];
+  export interface OrganizationalUnitScope {
+    /**
+     * The list of OUs within the organization that the specified Firewall Manager administrator either can or cannot apply policies to, based on the value of OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits. If OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits is set to true, then the Firewall Manager administrator can apply policies to all OUs in the organization except for the OUs in this list. If OrganizationalUnitScope$ExcludeSpecifiedOrganizationalUnits is set to false, then the Firewall Manager administrator can only apply policies to the OUs in this list.
+     */
+    OrganizationalUnits?: OrganizationalUnitIdList;
+    /**
+     * A boolean value that indicates if the administrator can apply policies to all OUs within an organization. If true, the administrator can manage all OUs within the organization. You can either enable management of all OUs through this operation, or you can specify OUs to manage in OrganizationalUnitScope$OrganizationalUnits. You cannot specify both.
+     */
+    AllOrganizationalUnitsEnabled?: Boolean;
+    /**
+     * A boolean value that excludes the OUs in OrganizationalUnitScope$OrganizationalUnits from the administrator's scope. If true, the Firewall Manager administrator can apply policies to all OUs in the organization except for the OUs listed in OrganizationalUnitScope$OrganizationalUnits. You can either specify a list of OUs to exclude by OrganizationalUnitScope$OrganizationalUnits, or you can enable management of all OUs by OrganizationalUnitScope$AllOrganizationalUnitsEnabled. You cannot specify both.
+     */
+    ExcludeSpecifiedOrganizationalUnits?: Boolean;
+  }
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
   export interface PartialMatch {
@@ -1691,6 +1847,10 @@ declare namespace FMS {
      * The definition of the Network Firewall firewall policy.
      */
     PolicyDescription?: ResourceDescription;
+    /**
+     * Indicates whether the policy is in or out of an admin's policy or Region scope.    ACTIVE - The administrator can manage and delete the policy.    OUT_OF_ADMIN_SCOPE - The administrator can view the policy, but they can't edit or delete the policy. Existing policy protections stay in place. Any new resources that come into scope of the policy won't be protected.  
+     */
+    PolicyStatus?: CustomerPolicyStatus;
   }
   export interface PolicyComplianceDetail {
     /**
@@ -1794,8 +1954,22 @@ declare namespace FMS {
      * Indicates whether Firewall Manager should automatically remove protections from resources that leave the policy scope and clean up resources that Firewall Manager is managing for accounts when those accounts leave policy scope. For example, Firewall Manager will disassociate a Firewall Manager managed web ACL from a protected customer resource when the customer resource leaves policy scope.  By default, Firewall Manager doesn't remove protections or delete Firewall Manager managed resources.  This option is not available for Shield Advanced or WAF Classic policies.
      */
     DeleteUnusedFMManagedResources?: Boolean;
+    /**
+     * Indicates whether the policy is in or out of an admin's policy or Region scope.    ACTIVE - The administrator can manage and delete the policy.    OUT_OF_ADMIN_SCOPE - The administrator can view the policy, but they can't edit or delete the policy. Existing policy protections stay in place. Any new resources that come into scope of the policy won't be protected.  
+     */
+    PolicyStatus?: CustomerPolicyStatus;
   }
   export type PolicySummaryList = PolicySummary[];
+  export interface PolicyTypeScope {
+    /**
+     * The list of policy types that the specified Firewall Manager administrator can manage.
+     */
+    PolicyTypes?: SecurityServiceTypeList;
+    /**
+     * Allows the specified Firewall Manager administrator to manage all Firewall Manager policy types, except for third-party policy types. Third-party policy types can only be managed by the Firewall Manager default administrator.
+     */
+    AllPolicyTypesEnabled?: Boolean;
+  }
   export type PolicyUpdateToken = string;
   export interface PossibleRemediationAction {
     /**
@@ -1878,6 +2052,16 @@ declare namespace FMS {
     ProtocolsList?: ProtocolsList;
   }
   export type ProtocolsListsData = ProtocolsListDataSummary[];
+  export interface PutAdminAccountRequest {
+    /**
+     * The Amazon Web Services account ID to add as an Firewall Manager administrator account. The account must be a member of the organization that was onboarded to Firewall Manager by AssociateAdminAccount. For more information about Organizations, see Managing the Amazon Web Services Accounts in Your Organization.
+     */
+    AdminAccount: AWSAccountId;
+    /**
+     * Configures the resources that the specified Firewall Manager administrator can manage. As a best practice, set the administrative scope according to the principles of least privilege. Only grant the administrator the specific resources or permissions that they need to perform the duties of their role.
+     */
+    AdminScope?: AdminScope;
+  }
   export interface PutAppsListRequest {
     /**
      * The details of the Firewall Manager applications list to be created.
@@ -1969,6 +2153,16 @@ declare namespace FMS {
     ResourceSetArn: ResourceArn;
   }
   export type ReferenceRule = string;
+  export interface RegionScope {
+    /**
+     * The Amazon Web Services Regions that the specified Firewall Manager administrator can perform actions in.
+     */
+    Regions?: AWSRegionList;
+    /**
+     * Allows the specified Firewall Manager administrator to manage all Amazon Web Services Regions.
+     */
+    AllRegionsEnabled?: Boolean;
+  }
   export interface RemediationAction {
     /**
      * A description of a remediation action.
@@ -2061,8 +2255,13 @@ declare namespace FMS {
      * The last time that the resource set was changed.
      */
     LastUpdateTime?: TimeStamp;
+    /**
+     * Indicates whether the resource set is in or out of an admin's Region scope.    ACTIVE - The administrator can manage and delete the resource set.    OUT_OF_ADMIN_SCOPE - The administrator can view the resource set, but they can't edit or delete the resource set. Existing protections stay in place. Any new resource that come into scope of the resource set won't be protected.  
+     */
+    ResourceSetStatus?: ResourceSetStatus;
   }
   export type ResourceSetIds = Base62Id[];
+  export type ResourceSetStatus = "ACTIVE"|"OUT_OF_ADMIN_SCOPE"|string;
   export interface ResourceSetSummary {
     /**
      * A unique identifier for the resource set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2080,6 +2279,10 @@ declare namespace FMS {
      * The last time that the resource set was changed.
      */
     LastUpdateTime?: TimeStamp;
+    /**
+     * Indicates whether the resource set is in or out of an admin's Region scope.    ACTIVE - The administrator can manage and delete the resource set.    OUT_OF_ADMIN_SCOPE - The administrator can view the resource set, but they can't edit or delete the resource set. Existing protections stay in place. Any new resource that come into scope of the resource set won't be protected.  
+     */
+    ResourceSetStatus?: ResourceSetStatus;
   }
   export type ResourceSetSummaryList = ResourceSetSummary[];
   export interface ResourceTag {
@@ -2310,7 +2513,7 @@ declare namespace FMS {
      */
     Type: SecurityServiceType;
     /**
-     * Details about the service that are specific to the service type, in JSON format.    Example: DNS_FIREWALL   "{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"   Valid values for preProcessRuleGroups are between 1 and 99. Valid values for postProcessRuleGroups are between 9901 and 10000.    Example: NETWORK_FIREWALL - Centralized deployment model  "{\"type\":\"NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}},\"firewallDeploymentModel\":{\"centralizedFirewallDeploymentModel\":{\"centralizedFirewallOrchestrationConfig\":{\"inspectionVpcIds\":[{\"resourceId\":\"vpc-1234\",\"accountId\":\"123456789011\"}],\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneId\":null,\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"allowedIPV4CidrList\":[]}}}}"   To use the centralized deployment model, you must set PolicyOption to CENTRALIZED.    Example: NETWORK_FIREWALL - Distributed deployment model with automatic Availability Zone configuration   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":[\"10.0.0.0/28\",\"192.168.0.0/28\"],\"routeManagementAction\":\"OFF\"},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}}"    With automatic Availbility Zone configuration, Firewall Manager chooses which Availability Zones to create the endpoints in. To use the distributed deployment model, you must set PolicyOption to NULL.    Example: NETWORK_FIREWALL - Distributed deployment model with automatic Availability Zone configuration and route management   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":[\"10.0.0.0/28\",\"192.168.0.0/28\"],\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"]},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\": \"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}}"   To use the distributed deployment model, you must set PolicyOption to NULL.    Example: NETWORK_FIREWALL - Distributed deployment model with custom Availability Zone configuration  "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\", \"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{ \"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]},{\"availabilityZoneName\":\"us-east-1b\",\"allowedIPV4CidrList\":[ \"10.0.0.0/28\"]}]} },\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":null,\"routeManagementAction\":\"OFF\",\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":boolean}}"    With custom Availability Zone configuration, you define which specific Availability Zones to create endpoints in by configuring firewallCreationConfig. To configure the Availability Zones in firewallCreationConfig, specify either the availabilityZoneName or availabilityZoneId parameter, not both parameters.  To use the distributed deployment model, you must set PolicyOption to NULL.    Example: NETWORK_FIREWALL - Distributed deployment model with custom Availability Zone configuration and route management  "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]},{\"availabilityZoneName\":\"us-east-1b\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":null,\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"],\"routeManagementConfig\":{\"allowCrossAZTrafficIfNoEndpoint\":true}},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":boolean}}"   To use the distributed deployment model, you must set PolicyOption to NULL.    Example: THIRD_PARTY_FIREWALL   "{ "type":"THIRD_PARTY_FIREWALL", "thirdPartyFirewall":"PALO_ALTO_NETWORKS_CLOUD_NGFW", "thirdPartyFirewallConfig":{ "thirdPartyFirewallPolicyList":["global-1"] }, "firewallDeploymentModel":{ "distributedFirewallDeploymentModel":{ "distributedFirewallOrchestrationConfig":{ "firewallCreationConfig":{ "endpointLocation":{ "availabilityZoneConfigList":[ { "availabilityZoneName":"${AvailabilityZone}" } ] } }, "allowedIPV4CidrList":[ ] } } } }"    Example: SECURITY_GROUPS_COMMON   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"    Example: SECURITY_GROUPS_COMMON - Security group tag distribution   ""{\"type\":\"SECURITY_GROUPS_COMMON\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"revertManualSecurityGroupChanges\":true,\"exclusiveResourceSecurityGroupManagement\":false,\"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":false,\"enableTagDistribution\":true}""   Firewall Manager automatically distributes tags from the primary group to the security groups created by this policy. To use security group tag distribution, you must also set revertManualSecurityGroupChanges to true, otherwise Firewall Manager won't be able to create the policy. When you enable revertManualSecurityGroupChanges, Firewall Manager identifies and reports when the security groups created by this policy become non-compliant.   Firewall Manager won't distrubute system tags added by Amazon Web Services services into the replica security groups. System tags begin with the aws: prefix.    Example: Shared VPCs. Apply the preceding policy to resources in shared VPCs as well as to those in VPCs that the account owns   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":true,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"    Example: SECURITY_GROUPS_CONTENT_AUDIT   "{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"  The security group action for content audit can be ALLOW or DENY. For ALLOW, all in-scope security group rules must be within the allowed range of the policy's security group rules. For DENY, all in-scope security group rules must not contain a value or a range that matches a rule value or range in the policy security group.   Example: SECURITY_GROUPS_USAGE_AUDIT   "{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"    Specification for SHIELD_ADVANCED for Amazon CloudFront distributions   "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\": {\"automaticResponseStatus\":\"ENABLED|IGNORED|DISABLED\", \"automaticResponseAction\":\"BLOCK|COUNT\"}, \"overrideCustomerWebaclClassic\":true|false}"  For example: "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\": {\"automaticResponseStatus\":\"ENABLED\", \"automaticResponseAction\":\"COUNT\"}}"  The default value for automaticResponseStatus is IGNORED. The value for automaticResponseAction is only required when automaticResponseStatus is set to ENABLED. The default value for overrideCustomerWebaclClassic is false. For other resource types that you can protect with a Shield Advanced policy, this ManagedServiceData configuration is an empty string.   Example: WAFV2   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAmazonIpReputationList\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"  In the loggingConfiguration, you can specify one logDestinationConfigs, you can optionally provide up to 20 redactedFields, and the RedactedFieldType must be one of URI, QUERY_STRING, HEADER, or METHOD.   Example: WAFV2 - Firewall Manager support for WAF managed rule group versioning   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":true,\"version\":\"Version_2.0\",\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesCommonRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"   To use a specific version of a WAF managed rule group in your Firewall Manager policy, you must set versionEnabled to true, and set version to the version you'd like to use. If you don't set versionEnabled to true, or if you omit versionEnabled, then Firewall Manager uses the default version of the WAF managed rule group.    Example: WAF Classic   "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}"   
+     * Details about the service that are specific to the service type, in JSON format.    Example: DNS_FIREWALL   "{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"   Valid values for preProcessRuleGroups are between 1 and 99. Valid values for postProcessRuleGroups are between 9901 and 10000.    Example: IMPORT_NETWORK_FIREWALL "{\"type\":\"IMPORT_NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-2:000000000000:stateless-rulegroup\/rg1\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:drop\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:pass\"],\"networkFirewallStatelessCustomActions\":[],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-2:aws-managed:stateful-rulegroup\/ThreatSignaturesEmergingEventsStrictOrder\",\"priority\":8}],\"networkFirewallStatefulEngineOptions\":{\"ruleOrder\":\"STRICT_ORDER\"},\"networkFirewallStatefulDefaultActions\":[\"aws:drop_strict\"]}}"   "{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"   Valid values for preProcessRuleGroups are between 1 and 99. Valid values for postProcessRuleGroups are between 9901 and 10000.    Example: NETWORK_FIREWALL - Centralized deployment model  "{\"type\":\"NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}},\"firewallDeploymentModel\":{\"centralizedFirewallDeploymentModel\":{\"centralizedFirewallOrchestrationConfig\":{\"inspectionVpcIds\":[{\"resourceId\":\"vpc-1234\",\"accountId\":\"123456789011\"}],\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneId\":null,\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"allowedIPV4CidrList\":[]}}}}"   To use the centralized deployment model, you must set PolicyOption to CENTRALIZED.    Example: NETWORK_FIREWALL - Distributed deployment model with automatic Availability Zone configuration   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":[\"10.0.0.0/28\",\"192.168.0.0/28\"],\"routeManagementAction\":\"OFF\"},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}}"    With automatic Availbility Zone configuration, Firewall Manager chooses which Availability Zones to create the endpoints in. To use the distributed deployment model, you must set PolicyOption to NULL.    Example: NETWORK_FIREWALL - Distributed deployment model with automatic Availability Zone configuration and route management   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":[\"10.0.0.0/28\",\"192.168.0.0/28\"],\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"]},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\": \"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}}"   To use the distributed deployment model, you must set PolicyOption to NULL.    Example: NETWORK_FIREWALL - Distributed deployment model with custom Availability Zone configuration  "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\", \"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{ \"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]},{\"availabilityZoneName\":\"us-east-1b\",\"allowedIPV4CidrList\":[ \"10.0.0.0/28\"]}]} },\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":null,\"routeManagementAction\":\"OFF\",\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":boolean}}"    With custom Availability Zone configuration, you define which specific Availability Zones to create endpoints in by configuring firewallCreationConfig. To configure the Availability Zones in firewallCreationConfig, specify either the availabilityZoneName or availabilityZoneId parameter, not both parameters.  To use the distributed deployment model, you must set PolicyOption to NULL.    Example: NETWORK_FIREWALL - Distributed deployment model with custom Availability Zone configuration and route management  "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]},{\"availabilityZoneName\":\"us-east-1b\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":null,\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"],\"routeManagementConfig\":{\"allowCrossAZTrafficIfNoEndpoint\":true}},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":boolean}}"   To use the distributed deployment model, you must set PolicyOption to NULL.    Example: THIRD_PARTY_FIREWALL   "{ "type":"THIRD_PARTY_FIREWALL", "thirdPartyFirewall":"PALO_ALTO_NETWORKS_CLOUD_NGFW", "thirdPartyFirewallConfig":{ "thirdPartyFirewallPolicyList":["global-1"] }, "firewallDeploymentModel":{ "distributedFirewallDeploymentModel":{ "distributedFirewallOrchestrationConfig":{ "firewallCreationConfig":{ "endpointLocation":{ "availabilityZoneConfigList":[ { "availabilityZoneName":"${AvailabilityZone}" } ] } }, "allowedIPV4CidrList":[ ] } } } }"    Example: SECURITY_GROUPS_COMMON   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"    Example: SECURITY_GROUPS_COMMON - Security group tag distribution   ""{\"type\":\"SECURITY_GROUPS_COMMON\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"revertManualSecurityGroupChanges\":true,\"exclusiveResourceSecurityGroupManagement\":false,\"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":false,\"enableTagDistribution\":true}""   Firewall Manager automatically distributes tags from the primary group to the security groups created by this policy. To use security group tag distribution, you must also set revertManualSecurityGroupChanges to true, otherwise Firewall Manager won't be able to create the policy. When you enable revertManualSecurityGroupChanges, Firewall Manager identifies and reports when the security groups created by this policy become non-compliant.   Firewall Manager won't distrubute system tags added by Amazon Web Services services into the replica security groups. System tags begin with the aws: prefix.    Example: Shared VPCs. Apply the preceding policy to resources in shared VPCs as well as to those in VPCs that the account owns   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":true,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"    Example: SECURITY_GROUPS_CONTENT_AUDIT   "{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"  The security group action for content audit can be ALLOW or DENY. For ALLOW, all in-scope security group rules must be within the allowed range of the policy's security group rules. For DENY, all in-scope security group rules must not contain a value or a range that matches a rule value or range in the policy security group.   Example: SECURITY_GROUPS_USAGE_AUDIT   "{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"    Specification for SHIELD_ADVANCED for Amazon CloudFront distributions   "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\": {\"automaticResponseStatus\":\"ENABLED|IGNORED|DISABLED\", \"automaticResponseAction\":\"BLOCK|COUNT\"}, \"overrideCustomerWebaclClassic\":true|false}"  For example: "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\": {\"automaticResponseStatus\":\"ENABLED\", \"automaticResponseAction\":\"COUNT\"}}"  The default value for automaticResponseStatus is IGNORED. The value for automaticResponseAction is only required when automaticResponseStatus is set to ENABLED. The default value for overrideCustomerWebaclClassic is false. For other resource types that you can protect with a Shield Advanced policy, this ManagedServiceData configuration is an empty string.   Example: WAFV2 - Account takeover prevention and Bot Control managed rule groups, and rule action override   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesATPRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesATPRuleSet\":{\"loginPath\":\"/loginpath\",\"requestInspection\":{\"payloadType\":\"FORM_ENCODED|JSON\",\"usernameField\":{\"identifier\":\"/form/username\"},\"passwordField\":{\"identifier\":\"/form/password\"}}}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true},{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesBotControlRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesBotControlRuleSet\":{\"inspectionLevel\":\"TARGETED|COMMON\"}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true,\"ruleActionOverrides\":[{\"name\":\"Rule1\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}},{\"name\":\"Rule2\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true}"    Fraud Control account takeover prevention (ATP) - For information about the properties available for AWSManagedRulesATPRuleSet managed rule groups, see AWSManagedRulesATPRuleSet in the WAF API Reference.   Bot Control - For information about AWSManagedRulesBotControlRuleSet managed rule groups, see AWSManagedRulesBotControlRuleSet in the WAF API Reference.   Rule action overrides - Firewall Manager supports rule action overrides only for managed rule groups. To configure a RuleActionOverrides add the Name of the rule to override, and ActionToUse, which is the new action to use for the rule. For information about using rule action override, see RuleActionOverride in the WAF API Reference.     Example: WAFV2 - CAPTCHA and Challenge configs   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true,\"captchaConfig\":{\"immunityTimeProperty\":{\"immunityTime\":500}},\"challengeConfig\":{\"immunityTimeProperty\":{\"immunityTime\":800}},\"tokenDomains\":[\"google.com\",\"amazon.com\"]}"  If you update the policy's values for captchaConfig, challengeConfig, or tokenDomains, Firewall Manager will overwrite your local web ACLs to contain the new value(s). However, if you don't update the policy's captchaConfig, challengeConfig, or tokenDomains values, the values in your local web ACLs will remain unchanged. For information about CAPTCHA and Challenge configs, see CaptchaConfig and ChallengeConfig in the WAF API Reference.   Example: WAFV2 - Firewall Manager support for WAF managed rule group versioning   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":true,\"version\":\"Version_2.0\",\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesCommonRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"   To use a specific version of a WAF managed rule group in your Firewall Manager policy, you must set versionEnabled to true, and set version to the version you'd like to use. If you don't set versionEnabled to true, or if you omit versionEnabled, then Firewall Manager uses the default version of the WAF managed rule group.    Example: WAFV2 - Logging configurations   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null, \"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\": {\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\", \"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\"} ,\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[], \"sampledRequestsEnabled\":true}],\"postProcessRuleGroups\":[], \"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\" :null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\" :false,\"loggingConfiguration\":{\"logDestinationConfigs\": [\"arn:aws:s3:::aws-waf-logs-example-bucket\"] ,\"redactedFields\":[],\"loggingFilterConfigs\":{\"defaultBehavior\":\"KEEP\", \"filters\":[{\"behavior\":\"KEEP\",\"requirement\":\"MEETS_ALL\", \"conditions\":[{\"actionCondition\":\"CAPTCHA\"},{\"actionCondition\": \"CHALLENGE\"}, {\"actionCondition\":\"EXCLUDED_AS_COUNT\"}]}]}},\"sampledRequestsEnabledForDefaultActions\":true}"  Firewall Manager supports Amazon Kinesis Data Firehose and Amazon S3 as the logDestinationConfigs in your loggingConfiguration. For information about WAF logging configurations, see LoggingConfiguration in the WAF API Reference  In the loggingConfiguration, you can specify one logDestinationConfigs. Optionally provide as many as 20 redactedFields. The RedactedFieldType must be one of URI, QUERY_STRING, HEADER, or METHOD.   Example: WAF Classic   "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}"   
      */
     ManagedServiceData?: ManagedServiceData;
     /**
@@ -2319,6 +2522,7 @@ declare namespace FMS {
     PolicyOption?: PolicyOption;
   }
   export type SecurityServiceType = "WAF"|"WAFV2"|"SHIELD_ADVANCED"|"SECURITY_GROUPS_COMMON"|"SECURITY_GROUPS_CONTENT_AUDIT"|"SECURITY_GROUPS_USAGE_AUDIT"|"NETWORK_FIREWALL"|"DNS_FIREWALL"|"THIRD_PARTY_FIREWALL"|"IMPORT_NETWORK_FIREWALL"|string;
+  export type SecurityServiceTypeList = SecurityServiceType[];
   export interface StatefulEngineOptions {
     /**
      * Indicates how to manage the order of stateful rule evaluation for the policy. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the Network Firewall Developer Guide.
