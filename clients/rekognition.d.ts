@@ -45,11 +45,11 @@ declare class Rekognition extends Service {
    */
   createDataset(callback?: (err: AWSError, data: Rekognition.Types.CreateDatasetResponse) => void): Request<Rekognition.Types.CreateDatasetResponse, AWSError>;
   /**
-   * This API operation initiates a Face Liveness session. It returns a SessionId, which you can use to start streaming Face Liveness video and get the results for a Face Liveness session. You can use the OutputConfig option in the Settings parameter to provide an Amazon S3 bucket location. The Amazon S3 bucket stores reference images and audit images. You can use AuditImagesLimit to limit of audit images returned. This number is between 0 and 4. By default, it is set to 0. The limit is best effort and based on the duration of the selfie-video. 
+   * This API operation initiates a Face Liveness session. It returns a SessionId, which you can use to start streaming Face Liveness video and get the results for a Face Liveness session. You can use the OutputConfig option in the Settings parameter to provide an Amazon S3 bucket location. The Amazon S3 bucket stores reference images and audit images. You can use AuditImagesLimit to limit the number of audit images returned. This number is between 0 and 4. By default, it is set to 0. The limit is best effort and based on the duration of the selfie-video. 
    */
   createFaceLivenessSession(params: Rekognition.Types.CreateFaceLivenessSessionRequest, callback?: (err: AWSError, data: Rekognition.Types.CreateFaceLivenessSessionResponse) => void): Request<Rekognition.Types.CreateFaceLivenessSessionResponse, AWSError>;
   /**
-   * This API operation initiates a Face Liveness session. It returns a SessionId, which you can use to start streaming Face Liveness video and get the results for a Face Liveness session. You can use the OutputConfig option in the Settings parameter to provide an Amazon S3 bucket location. The Amazon S3 bucket stores reference images and audit images. You can use AuditImagesLimit to limit of audit images returned. This number is between 0 and 4. By default, it is set to 0. The limit is best effort and based on the duration of the selfie-video. 
+   * This API operation initiates a Face Liveness session. It returns a SessionId, which you can use to start streaming Face Liveness video and get the results for a Face Liveness session. You can use the OutputConfig option in the Settings parameter to provide an Amazon S3 bucket location. The Amazon S3 bucket stores reference images and audit images. You can use AuditImagesLimit to limit the number of audit images returned. This number is between 0 and 4. By default, it is set to 0. The limit is best effort and based on the duration of the selfie-video. 
    */
   createFaceLivenessSession(callback?: (err: AWSError, data: Rekognition.Types.CreateFaceLivenessSessionResponse) => void): Request<Rekognition.Types.CreateFaceLivenessSessionResponse, AWSError>;
   /**
@@ -2756,13 +2756,13 @@ declare namespace Rekognition {
      */
     S3Bucket: S3Bucket;
     /**
-     * The prefix appended to the output files for the Face Liveness session results.
+     * The prefix prepended to the output files for the Face Liveness session results.
      */
     S3KeyPrefix?: LivenessS3KeyPrefix;
   }
   export type LivenessS3KeyPrefix = string;
   export type LivenessSessionId = string;
-  export type LivenessSessionStatus = "CREATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type LivenessSessionStatus = "CREATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"EXPIRED"|string;
   export type MaxDurationInSecondsULong = number;
   export type MaxFaces = number;
   export type MaxFacesToIndex = number;

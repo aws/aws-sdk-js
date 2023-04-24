@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1363.0-->
+<!--LATEST=2.1364.0-->
 <!--ENTRYINSERT-->
+
+## 2.1364.0
+* feature: Appflow: Increased the max length for RefreshToken and AuthCode from 2048 to 4096.
+* feature: EC2: API changes to AWS Verified Access related to identity providers' information.
+* feature: MediaConvert: This release introduces a noise reduction pre-filter, linear interpolation deinterlace mode, video pass-through, updated default job settings, and expanded LC-AAC Stereo audio bitrate ranges.
+* feature: Rekognition: Added new status result to Liveness session status.
 
 ## 2.1363.0
 * feature: Connect: This release adds a new API CreateParticipant. For Amazon Connect Chat, you can use this new API to customize chat flow experiences.

@@ -277,11 +277,11 @@ declare class EC2 extends Service {
    */
   attachNetworkInterface(callback?: (err: AWSError, data: EC2.Types.AttachNetworkInterfaceResult) => void): Request<EC2.Types.AttachNetworkInterfaceResult, AWSError>;
   /**
-   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. One or more trust providers can be attached to an Amazon Web Services Verified Access instance.
+   * Attaches the specified Amazon Web Services Verified Access trust provider to the specified Amazon Web Services Verified Access instance.
    */
   attachVerifiedAccessTrustProvider(params: EC2.Types.AttachVerifiedAccessTrustProviderRequest, callback?: (err: AWSError, data: EC2.Types.AttachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.AttachVerifiedAccessTrustProviderResult, AWSError>;
   /**
-   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. One or more trust providers can be attached to an Amazon Web Services Verified Access instance.
+   * Attaches the specified Amazon Web Services Verified Access trust provider to the specified Amazon Web Services Verified Access instance.
    */
   attachVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.AttachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.AttachVerifiedAccessTrustProviderResult, AWSError>;
   /**
@@ -997,11 +997,11 @@ declare class EC2 extends Service {
    */
   createVerifiedAccessEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessEndpointResult) => void): Request<EC2.Types.CreateVerifiedAccessEndpointResult, AWSError>;
   /**
-   * An Amazon Web Services Verified Access group is a collection of Amazon Web Services Verified Access endpoints who's associated applications have similar security requirements. Each instance within an Amazon Web Services Verified Access group shares an Amazon Web Services Verified Access policy. For example, you can group all Amazon Web Services Verified Access instances associated with “sales” applications together and use one common Amazon Web Services Verified Access policy.
+   * An Amazon Web Services Verified Access group is a collection of Amazon Web Services Verified Access endpoints who's associated applications have similar security requirements. Each instance within a Verified Access group shares an Verified Access policy. For example, you can group all Verified Access instances associated with "sales" applications together and use one common Verified Access policy.
    */
   createVerifiedAccessGroup(params: EC2.Types.CreateVerifiedAccessGroupRequest, callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessGroupResult) => void): Request<EC2.Types.CreateVerifiedAccessGroupResult, AWSError>;
   /**
-   * An Amazon Web Services Verified Access group is a collection of Amazon Web Services Verified Access endpoints who's associated applications have similar security requirements. Each instance within an Amazon Web Services Verified Access group shares an Amazon Web Services Verified Access policy. For example, you can group all Amazon Web Services Verified Access instances associated with “sales” applications together and use one common Amazon Web Services Verified Access policy.
+   * An Amazon Web Services Verified Access group is a collection of Amazon Web Services Verified Access endpoints who's associated applications have similar security requirements. Each instance within a Verified Access group shares an Verified Access policy. For example, you can group all Verified Access instances associated with "sales" applications together and use one common Verified Access policy.
    */
   createVerifiedAccessGroup(callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessGroupResult) => void): Request<EC2.Types.CreateVerifiedAccessGroupResult, AWSError>;
   /**
@@ -1013,11 +1013,11 @@ declare class EC2 extends Service {
    */
   createVerifiedAccessInstance(callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessInstanceResult) => void): Request<EC2.Types.CreateVerifiedAccessInstanceResult, AWSError>;
   /**
-   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. When an application request is made, the identity information sent by the trust provider will be evaluated by Amazon Web Services Verified Access, before allowing or denying the application request.
+   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. When an application request is made, the identity information sent by the trust provider is evaluated by Verified Access before allowing or denying the application request.
    */
   createVerifiedAccessTrustProvider(params: EC2.Types.CreateVerifiedAccessTrustProviderRequest, callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.CreateVerifiedAccessTrustProviderResult, AWSError>;
   /**
-   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. When an application request is made, the identity information sent by the trust provider will be evaluated by Amazon Web Services Verified Access, before allowing or denying the application request.
+   * A trust provider is a third-party entity that creates, maintains, and manages identity information for users and devices. When an application request is made, the identity information sent by the trust provider is evaluated by Verified Access before allowing or denying the application request.
    */
   createVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.CreateVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.CreateVerifiedAccessTrustProviderResult, AWSError>;
   /**
@@ -2709,43 +2709,43 @@ declare class EC2 extends Service {
    */
   describeTrunkInterfaceAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeTrunkInterfaceAssociationsResult) => void): Request<EC2.Types.DescribeTrunkInterfaceAssociationsResult, AWSError>;
   /**
-   * Describe Amazon Web Services Verified Access endpoints.
+   * Describes the specified Amazon Web Services Verified Access endpoints.
    */
   describeVerifiedAccessEndpoints(params: EC2.Types.DescribeVerifiedAccessEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessEndpointsResult) => void): Request<EC2.Types.DescribeVerifiedAccessEndpointsResult, AWSError>;
   /**
-   * Describe Amazon Web Services Verified Access endpoints.
+   * Describes the specified Amazon Web Services Verified Access endpoints.
    */
   describeVerifiedAccessEndpoints(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessEndpointsResult) => void): Request<EC2.Types.DescribeVerifiedAccessEndpointsResult, AWSError>;
   /**
-   * Describe details of existing Verified Access groups.
+   * Describes the specified Verified Access groups.
    */
   describeVerifiedAccessGroups(params: EC2.Types.DescribeVerifiedAccessGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessGroupsResult) => void): Request<EC2.Types.DescribeVerifiedAccessGroupsResult, AWSError>;
   /**
-   * Describe details of existing Verified Access groups.
+   * Describes the specified Verified Access groups.
    */
   describeVerifiedAccessGroups(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessGroupsResult) => void): Request<EC2.Types.DescribeVerifiedAccessGroupsResult, AWSError>;
   /**
-   * Describes the current logging configuration for the Amazon Web Services Verified Access instances.
+   * Describes the specified Amazon Web Services Verified Access instances.
    */
   describeVerifiedAccessInstanceLoggingConfigurations(params: EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsResult) => void): Request<EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsResult, AWSError>;
   /**
-   * Describes the current logging configuration for the Amazon Web Services Verified Access instances.
+   * Describes the specified Amazon Web Services Verified Access instances.
    */
   describeVerifiedAccessInstanceLoggingConfigurations(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsResult) => void): Request<EC2.Types.DescribeVerifiedAccessInstanceLoggingConfigurationsResult, AWSError>;
   /**
-   * Describe Verified Access instances.
+   * Describes the specified Amazon Web Services Verified Access instances.
    */
   describeVerifiedAccessInstances(params: EC2.Types.DescribeVerifiedAccessInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessInstancesResult) => void): Request<EC2.Types.DescribeVerifiedAccessInstancesResult, AWSError>;
   /**
-   * Describe Verified Access instances.
+   * Describes the specified Amazon Web Services Verified Access instances.
    */
   describeVerifiedAccessInstances(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessInstancesResult) => void): Request<EC2.Types.DescribeVerifiedAccessInstancesResult, AWSError>;
   /**
-   * Describe details of existing Verified Access trust providers.
+   * Describes the specified Amazon Web Services Verified Access trust providers.
    */
   describeVerifiedAccessTrustProviders(params: EC2.Types.DescribeVerifiedAccessTrustProvidersRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessTrustProvidersResult) => void): Request<EC2.Types.DescribeVerifiedAccessTrustProvidersResult, AWSError>;
   /**
-   * Describe details of existing Verified Access trust providers.
+   * Describes the specified Amazon Web Services Verified Access trust providers.
    */
   describeVerifiedAccessTrustProviders(callback?: (err: AWSError, data: EC2.Types.DescribeVerifiedAccessTrustProvidersResult) => void): Request<EC2.Types.DescribeVerifiedAccessTrustProvidersResult, AWSError>;
   /**
@@ -2909,11 +2909,11 @@ declare class EC2 extends Service {
    */
   detachNetworkInterface(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Detach a trust provider from an Amazon Web Services Verified Access instance.
+   * Detaches the specified Amazon Web Services Verified Access trust provider from the specified Amazon Web Services Verified Access instance.
    */
   detachVerifiedAccessTrustProvider(params: EC2.Types.DetachVerifiedAccessTrustProviderRequest, callback?: (err: AWSError, data: EC2.Types.DetachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.DetachVerifiedAccessTrustProviderResult, AWSError>;
   /**
-   * Detach a trust provider from an Amazon Web Services Verified Access instance.
+   * Detaches the specified Amazon Web Services Verified Access trust provider from the specified Amazon Web Services Verified Access instance.
    */
   detachVerifiedAccessTrustProvider(callback?: (err: AWSError, data: EC2.Types.DetachVerifiedAccessTrustProviderResult) => void): Request<EC2.Types.DetachVerifiedAccessTrustProviderResult, AWSError>;
   /**
@@ -4037,43 +4037,43 @@ declare class EC2 extends Service {
    */
   modifyTransitGatewayVpcAttachment(callback?: (err: AWSError, data: EC2.Types.ModifyTransitGatewayVpcAttachmentResult) => void): Request<EC2.Types.ModifyTransitGatewayVpcAttachmentResult, AWSError>;
   /**
-   * Modifies the configuration of an Amazon Web Services Verified Access endpoint.
+   * Modifies the configuration of the specified Amazon Web Services Verified Access endpoint.
    */
   modifyVerifiedAccessEndpoint(params: EC2.Types.ModifyVerifiedAccessEndpointRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessEndpointResult) => void): Request<EC2.Types.ModifyVerifiedAccessEndpointResult, AWSError>;
   /**
-   * Modifies the configuration of an Amazon Web Services Verified Access endpoint.
+   * Modifies the configuration of the specified Amazon Web Services Verified Access endpoint.
    */
   modifyVerifiedAccessEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessEndpointResult) => void): Request<EC2.Types.ModifyVerifiedAccessEndpointResult, AWSError>;
   /**
-   * Modifies the specified Verified Access endpoint policy.
+   * Modifies the specified Amazon Web Services Verified Access endpoint policy.
    */
   modifyVerifiedAccessEndpointPolicy(params: EC2.Types.ModifyVerifiedAccessEndpointPolicyRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessEndpointPolicyResult) => void): Request<EC2.Types.ModifyVerifiedAccessEndpointPolicyResult, AWSError>;
   /**
-   * Modifies the specified Verified Access endpoint policy.
+   * Modifies the specified Amazon Web Services Verified Access endpoint policy.
    */
   modifyVerifiedAccessEndpointPolicy(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessEndpointPolicyResult) => void): Request<EC2.Types.ModifyVerifiedAccessEndpointPolicyResult, AWSError>;
   /**
-   * Modifies the specified Verified Access group configuration.
+   * Modifies the specified Amazon Web Services Verified Access group configuration.
    */
   modifyVerifiedAccessGroup(params: EC2.Types.ModifyVerifiedAccessGroupRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessGroupResult) => void): Request<EC2.Types.ModifyVerifiedAccessGroupResult, AWSError>;
   /**
-   * Modifies the specified Verified Access group configuration.
+   * Modifies the specified Amazon Web Services Verified Access group configuration.
    */
   modifyVerifiedAccessGroup(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessGroupResult) => void): Request<EC2.Types.ModifyVerifiedAccessGroupResult, AWSError>;
   /**
-   * Modifies the specified Verified Access group policy.
+   * Modifies the specified Amazon Web Services Verified Access group policy.
    */
   modifyVerifiedAccessGroupPolicy(params: EC2.Types.ModifyVerifiedAccessGroupPolicyRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessGroupPolicyResult) => void): Request<EC2.Types.ModifyVerifiedAccessGroupPolicyResult, AWSError>;
   /**
-   * Modifies the specified Verified Access group policy.
+   * Modifies the specified Amazon Web Services Verified Access group policy.
    */
   modifyVerifiedAccessGroupPolicy(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessGroupPolicyResult) => void): Request<EC2.Types.ModifyVerifiedAccessGroupPolicyResult, AWSError>;
   /**
-   * Modifies the configuration of the specified Verified Access instance.
+   * Modifies the configuration of the specified Amazon Web Services Verified Access instance.
    */
   modifyVerifiedAccessInstance(params: EC2.Types.ModifyVerifiedAccessInstanceRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessInstanceResult) => void): Request<EC2.Types.ModifyVerifiedAccessInstanceResult, AWSError>;
   /**
-   * Modifies the configuration of the specified Verified Access instance.
+   * Modifies the configuration of the specified Amazon Web Services Verified Access instance.
    */
   modifyVerifiedAccessInstance(callback?: (err: AWSError, data: EC2.Types.ModifyVerifiedAccessInstanceResult) => void): Request<EC2.Types.ModifyVerifiedAccessInstanceResult, AWSError>;
   /**
@@ -6539,11 +6539,11 @@ declare namespace EC2 {
   }
   export interface AttachVerifiedAccessTrustProviderRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId: VerifiedAccessInstanceId;
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProviderId: VerifiedAccessTrustProviderId;
     /**
@@ -6557,11 +6557,11 @@ declare namespace EC2 {
   }
   export interface AttachVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
@@ -7670,6 +7670,7 @@ declare namespace EC2 {
      */
     BannerText?: String;
   }
+  export type ClientSecretType = string;
   export type ClientVpnAssociationId = string;
   export interface ClientVpnAuthentication {
     /**
@@ -10819,11 +10820,11 @@ declare namespace EC2 {
      */
     VerifiedAccessGroupId: VerifiedAccessGroupId;
     /**
-     * The type of Amazon Web Services Verified Access endpoint to create.
+     * The type of Verified Access endpoint to create.
      */
     EndpointType: VerifiedAccessEndpointType;
     /**
-     * The Amazon Web Services network component Verified Access attaches to.
+     * The type of attachment.
      */
     AttachmentType: VerifiedAccessEndpointAttachmentType;
     /**
@@ -10835,31 +10836,31 @@ declare namespace EC2 {
      */
     ApplicationDomain: String;
     /**
-     * A custom identifier that gets prepended to a DNS name that is generated for the endpoint.
+     * A custom identifier that is prepended to the DNS name that is generated for the endpoint.
      */
     EndpointDomainPrefix: String;
     /**
-     * The Amazon EC2 security groups to associate with the Amazon Web Services Verified Access endpoint.
+     * The IDs of the security groups to associate with the Verified Access endpoint.
      */
     SecurityGroupIds?: SecurityGroupIdList;
     /**
-     * The load balancer details if creating the Amazon Web Services Verified Access endpoint as load-balancertype.
+     * The load balancer details. This parameter is required if the endpoint type is load-balancer.
      */
     LoadBalancerOptions?: CreateVerifiedAccessEndpointLoadBalancerOptions;
     /**
-     * The network interface details if creating the Amazon Web Services Verified Access endpoint as network-interfacetype.
+     * The network interface details. This parameter is required if the endpoint type is network-interface.
      */
     NetworkInterfaceOptions?: CreateVerifiedAccessEndpointEniOptions;
     /**
-     * A description for the Amazon Web Services Verified Access endpoint.
+     * A description for the Verified Access endpoint.
      */
     Description?: String;
     /**
-     * The Amazon Web Services Verified Access policy document.
+     * The Verified Access policy document.
      */
     PolicyDocument?: String;
     /**
-     * The tags to assign to the Amazon Web Services Verified Access endpoint.
+     * The tags to assign to the Verified Access endpoint.
      */
     TagSpecifications?: TagSpecificationList;
     /**
@@ -10873,26 +10874,26 @@ declare namespace EC2 {
   }
   export interface CreateVerifiedAccessEndpointResult {
     /**
-     * The ID of the Amazon Web Services Verified Access endpoint.
+     * The ID of the Verified Access endpoint.
      */
     VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
   }
   export type CreateVerifiedAccessEndpointSubnetIdList = SubnetId[];
   export interface CreateVerifiedAccessGroupRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId: VerifiedAccessInstanceId;
     /**
-     * A description for the Amazon Web Services Verified Access group.
+     * A description for the Verified Access group.
      */
     Description?: String;
     /**
-     * The Amazon Web Services Verified Access policy document.
+     * The Verified Access policy document.
      */
     PolicyDocument?: String;
     /**
-     * The tags to assign to the Amazon Web Services Verified Access group.
+     * The tags to assign to the Verified Access group.
      */
     TagSpecifications?: TagSpecificationList;
     /**
@@ -10912,11 +10913,11 @@ declare namespace EC2 {
   }
   export interface CreateVerifiedAccessInstanceRequest {
     /**
-     * A description for the Amazon Web Services Verified Access instance.
+     * A description for the Verified Access instance.
      */
     Description?: String;
     /**
-     * The tags to assign to the Amazon Web Services Verified Access instance.
+     * The tags to assign to the Verified Access instance.
      */
     TagSpecifications?: TagSpecificationList;
     /**
@@ -10930,7 +10931,7 @@ declare namespace EC2 {
   }
   export interface CreateVerifiedAccessInstanceResult {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
@@ -10964,7 +10965,7 @@ declare namespace EC2 {
     /**
      * The client secret.
      */
-    ClientSecret?: String;
+    ClientSecret?: ClientSecretType;
     /**
      * OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to a user's details. Each scope returns a specific set of user attributes.
      */
@@ -10972,23 +10973,23 @@ declare namespace EC2 {
   }
   export interface CreateVerifiedAccessTrustProviderRequest {
     /**
-     * The type of trust provider can be either user or device-based.
+     * The type of trust provider.
      */
     TrustProviderType: TrustProviderType;
     /**
-     * The type of user-based trust provider.
+     * The type of user-based trust provider. This parameter is required when the provider type is user.
      */
     UserTrustProviderType?: UserTrustProviderType;
     /**
-     * The type of device-based trust provider.
+     * The type of device-based trust provider. This parameter is required when the provider type is device.
      */
     DeviceTrustProviderType?: DeviceTrustProviderType;
     /**
-     * The OpenID Connect details for an oidc-type, user-identity based trust provider.
+     * The options for a OpenID Connect-compatible user-identity trust provider. This parameter is required when the provider type is user.
      */
     OidcOptions?: CreateVerifiedAccessTrustProviderOidcOptions;
     /**
-     * The options for device identity based trust providers.
+     * The options for a device-based trust provider. This parameter is required when the provider type is device.
      */
     DeviceOptions?: CreateVerifiedAccessTrustProviderDeviceOptions;
     /**
@@ -10996,11 +10997,11 @@ declare namespace EC2 {
      */
     PolicyReferenceName: String;
     /**
-     * A description for the Amazon Web Services Verified Access trust provider.
+     * A description for the Verified Access trust provider.
      */
     Description?: String;
     /**
-     * The tags to assign to the Amazon Web Services Verified Access trust provider.
+     * The tags to assign to the Verified Access trust provider.
      */
     TagSpecifications?: TagSpecificationList;
     /**
@@ -11014,7 +11015,7 @@ declare namespace EC2 {
   }
   export interface CreateVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
   }
@@ -12571,7 +12572,7 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessEndpointRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access endpoint.
+     * The ID of the Verified Access endpoint.
      */
     VerifiedAccessEndpointId: VerifiedAccessEndpointId;
     /**
@@ -12585,13 +12586,13 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessEndpointResult {
     /**
-     * The ID of the Amazon Web Services Verified Access endpoint.
+     * The ID of the Verified Access endpoint.
      */
     VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
   }
   export interface DeleteVerifiedAccessGroupRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access group.
+     * The ID of the Verified Access group.
      */
     VerifiedAccessGroupId: VerifiedAccessGroupId;
     /**
@@ -12605,13 +12606,13 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessGroupResult {
     /**
-     * The ID of the Amazon Web Services Verified Access group.
+     * The ID of the Verified Access group.
      */
     VerifiedAccessGroup?: VerifiedAccessGroup;
   }
   export interface DeleteVerifiedAccessInstanceRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId: VerifiedAccessInstanceId;
     /**
@@ -12625,13 +12626,13 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessInstanceResult {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
   export interface DeleteVerifiedAccessTrustProviderRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProviderId: VerifiedAccessTrustProviderId;
     /**
@@ -12645,7 +12646,7 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
   }
@@ -16841,15 +16842,15 @@ declare namespace EC2 {
   export type DescribeVerifiedAccessEndpointsMaxResults = number;
   export interface DescribeVerifiedAccessEndpointsRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access endpoint.
+     * The ID of the Verified Access endpoint.
      */
     VerifiedAccessEndpointIds?: VerifiedAccessEndpointIdList;
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId?: VerifiedAccessInstanceId;
     /**
-     * The ID of the Amazon Web Services Verified Access group.
+     * The ID of the Verified Access group.
      */
     VerifiedAccessGroupId?: VerifiedAccessGroupId;
     /**
@@ -16871,7 +16872,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessEndpointsResult {
     /**
-     * The ID of the Amazon Web Services Verified Access endpoint.
+     * The ID of the Verified Access endpoint.
      */
     VerifiedAccessEndpoints?: VerifiedAccessEndpointList;
     /**
@@ -16882,11 +16883,11 @@ declare namespace EC2 {
   export type DescribeVerifiedAccessGroupMaxResults = number;
   export interface DescribeVerifiedAccessGroupsRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access groups.
+     * The ID of the Verified Access groups.
      */
     VerifiedAccessGroupIds?: VerifiedAccessGroupIdList;
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId?: VerifiedAccessInstanceId;
     /**
@@ -16919,7 +16920,7 @@ declare namespace EC2 {
   export type DescribeVerifiedAccessInstanceLoggingConfigurationsMaxResults = number;
   export interface DescribeVerifiedAccessInstanceLoggingConfigurationsRequest {
     /**
-     * The IDs of the Amazon Web Services Verified Access instances.
+     * The IDs of the Verified Access instances.
      */
     VerifiedAccessInstanceIds?: VerifiedAccessInstanceIdList;
     /**
@@ -16941,7 +16942,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessInstanceLoggingConfigurationsResult {
     /**
-     * The current logging configuration for the Amazon Web Services Verified Access instances.
+     * The current logging configuration for the Verified Access instances.
      */
     LoggingConfigurations?: VerifiedAccessInstanceLoggingConfigurationList;
     /**
@@ -16952,7 +16953,7 @@ declare namespace EC2 {
   export type DescribeVerifiedAccessInstancesMaxResults = number;
   export interface DescribeVerifiedAccessInstancesRequest {
     /**
-     * The IDs of the Amazon Web Services Verified Access instances.
+     * The IDs of the Verified Access instances.
      */
     VerifiedAccessInstanceIds?: VerifiedAccessInstanceIdList;
     /**
@@ -16974,7 +16975,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessInstancesResult {
     /**
-     * The IDs of the Amazon Web Services Verified Access instances.
+     * The IDs of the Verified Access instances.
      */
     VerifiedAccessInstances?: VerifiedAccessInstanceList;
     /**
@@ -16985,7 +16986,7 @@ declare namespace EC2 {
   export type DescribeVerifiedAccessTrustProvidersMaxResults = number;
   export interface DescribeVerifiedAccessTrustProvidersRequest {
     /**
-     * The IDs of the Amazon Web Services Verified Access trust providers.
+     * The IDs of the Verified Access trust providers.
      */
     VerifiedAccessTrustProviderIds?: VerifiedAccessTrustProviderIdList;
     /**
@@ -17007,7 +17008,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessTrustProvidersResult {
     /**
-     * The IDs of the Amazon Web Services Verified Access trust providers.
+     * The IDs of the Verified Access trust providers.
      */
     VerifiedAccessTrustProviders?: VerifiedAccessTrustProviderList;
     /**
@@ -17594,11 +17595,11 @@ declare namespace EC2 {
   }
   export interface DetachVerifiedAccessTrustProviderRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId: VerifiedAccessInstanceId;
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProviderId: VerifiedAccessTrustProviderId;
     /**
@@ -17612,11 +17613,11 @@ declare namespace EC2 {
   }
   export interface DetachVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
@@ -18325,7 +18326,7 @@ declare namespace EC2 {
     /**
      * A presigned URL for the import manifest stored in Amazon S3. For information about creating a presigned URL for an Amazon S3 object, read the "Query String Request Authentication Alternative" section of the Authenticating REST Requests topic in the Amazon Simple Storage Service Developer Guide. For information about the import manifest referenced by this API action, see VM Import Manifest.
      */
-    ImportManifestUrl?: String;
+    ImportManifestUrl?: ImportManifestUrl;
     /**
      * The size of the disk image, in GiB.
      */
@@ -21422,7 +21423,7 @@ declare namespace EC2 {
   }
   export interface GetVerifiedAccessEndpointPolicyRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access endpoint.
+     * The ID of the Verified Access endpoint.
      */
     VerifiedAccessEndpointId: VerifiedAccessEndpointId;
     /**
@@ -21436,13 +21437,13 @@ declare namespace EC2 {
      */
     PolicyEnabled?: Boolean;
     /**
-     * The Amazon Web Services Verified Access policy document.
+     * The Verified Access policy document.
      */
     PolicyDocument?: String;
   }
   export interface GetVerifiedAccessGroupPolicyRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access group.
+     * The ID of the Verified Access group.
      */
     VerifiedAccessGroupId: VerifiedAccessGroupId;
     /**
@@ -21456,7 +21457,7 @@ declare namespace EC2 {
      */
     PolicyEnabled?: Boolean;
     /**
-     * The Amazon Web Services Verified Access policy document.
+     * The Verified Access policy document.
      */
     PolicyDocument?: String;
   }
@@ -27788,7 +27789,7 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessEndpointPolicyRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access endpoint.
+     * The ID of the Verified Access endpoint.
      */
     VerifiedAccessEndpointId: VerifiedAccessEndpointId;
     /**
@@ -27796,7 +27797,7 @@ declare namespace EC2 {
      */
     PolicyEnabled: Boolean;
     /**
-     * The Amazon Web Services Verified Access policy document.
+     * The Verified Access policy document.
      */
     PolicyDocument?: String;
     /**
@@ -27814,21 +27815,21 @@ declare namespace EC2 {
      */
     PolicyEnabled?: Boolean;
     /**
-     * The Amazon Web Services Verified Access policy document.
+     * The Verified Access policy document.
      */
     PolicyDocument?: String;
   }
   export interface ModifyVerifiedAccessEndpointRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access endpoint.
+     * The ID of the Verified Access endpoint.
      */
     VerifiedAccessEndpointId: VerifiedAccessEndpointId;
     /**
-     * The ID of the Amazon Web Services Verified Access group.
+     * The ID of the Verified Access group.
      */
     VerifiedAccessGroupId?: VerifiedAccessGroupId;
     /**
-     * The load balancer details if creating the Amazon Web Services Verified Access endpoint as load-balancertype.
+     * The load balancer details if creating the Verified Access endpoint as load-balancertype.
      */
     LoadBalancerOptions?: ModifyVerifiedAccessEndpointLoadBalancerOptions;
     /**
@@ -27836,7 +27837,7 @@ declare namespace EC2 {
      */
     NetworkInterfaceOptions?: ModifyVerifiedAccessEndpointEniOptions;
     /**
-     * A description for the Amazon Web Services Verified Access endpoint.
+     * A description for the Verified Access endpoint.
      */
     Description?: String;
     /**
@@ -27850,14 +27851,14 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessEndpointResult {
     /**
-     * The Amazon Web Services Verified Access endpoint details.
+     * The Verified Access endpoint details.
      */
     VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
   }
   export type ModifyVerifiedAccessEndpointSubnetIdList = SubnetId[];
   export interface ModifyVerifiedAccessGroupPolicyRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access group.
+     * The ID of the Verified Access group.
      */
     VerifiedAccessGroupId: VerifiedAccessGroupId;
     /**
@@ -27865,7 +27866,7 @@ declare namespace EC2 {
      */
     PolicyEnabled: Boolean;
     /**
-     * The Amazon Web Services Verified Access policy document.
+     * The Verified Access policy document.
      */
     PolicyDocument?: String;
     /**
@@ -27883,21 +27884,21 @@ declare namespace EC2 {
      */
     PolicyEnabled?: Boolean;
     /**
-     * The Amazon Web Services Verified Access policy document.
+     * The Verified Access policy document.
      */
     PolicyDocument?: String;
   }
   export interface ModifyVerifiedAccessGroupRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access group.
+     * The ID of the Verified Access group.
      */
     VerifiedAccessGroupId: VerifiedAccessGroupId;
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId?: VerifiedAccessInstanceId;
     /**
-     * A description for the Amazon Web Services Verified Access group.
+     * A description for the Verified Access group.
      */
     Description?: String;
     /**
@@ -27911,17 +27912,17 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessGroupResult {
     /**
-     * Details of Amazon Web Services Verified Access group.
+     * Details of Verified Access group.
      */
     VerifiedAccessGroup?: VerifiedAccessGroup;
   }
   export interface ModifyVerifiedAccessInstanceLoggingConfigurationRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId: VerifiedAccessInstanceId;
     /**
-     * The configuration options for Amazon Web Services Verified Access instances.
+     * The configuration options for Verified Access instances.
      */
     AccessLogs: VerifiedAccessLogOptions;
     /**
@@ -27935,17 +27936,17 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessInstanceLoggingConfigurationResult {
     /**
-     * The logging configuration for Amazon Web Services Verified Access instance.
+     * The logging configuration for the Verified Access instance.
      */
     LoggingConfiguration?: VerifiedAccessInstanceLoggingConfiguration;
   }
   export interface ModifyVerifiedAccessInstanceRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstanceId: VerifiedAccessInstanceId;
     /**
-     * A description for the Amazon Web Services Verified Access instance.
+     * A description for the Verified Access instance.
      */
     Description?: String;
     /**
@@ -27959,11 +27960,35 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessInstanceResult {
     /**
-     * The ID of the Amazon Web Services Verified Access instance.
+     * The ID of the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
   export interface ModifyVerifiedAccessTrustProviderOidcOptions {
+    /**
+     * The OIDC issuer.
+     */
+    Issuer?: String;
+    /**
+     * The OIDC authorization endpoint.
+     */
+    AuthorizationEndpoint?: String;
+    /**
+     * The OIDC token endpoint.
+     */
+    TokenEndpoint?: String;
+    /**
+     * The OIDC user info endpoint.
+     */
+    UserInfoEndpoint?: String;
+    /**
+     * The client identifier.
+     */
+    ClientId?: String;
+    /**
+     * The client secret.
+     */
+    ClientSecret?: ClientSecretType;
     /**
      * OpenID Connect (OIDC) scopes are used by an application during authentication to authorize access to a user's details. Each scope returns a specific set of user attributes.
      */
@@ -27971,15 +27996,15 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessTrustProviderRequest {
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProviderId: VerifiedAccessTrustProviderId;
     /**
-     * The OpenID Connect details for an oidc-type, user-identity based trust provider.
+     * The options for an OpenID Connect-compatible user-identity trust provider.
      */
     OidcOptions?: ModifyVerifiedAccessTrustProviderOidcOptions;
     /**
-     * A description for the Amazon Web Services Verified Access trust provider.
+     * A description for the Verified Access trust provider.
      */
     Description?: String;
     /**
@@ -27993,7 +28018,7 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Amazon Web Services Verified Access trust provider.
+     * The ID of the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
   }
@@ -29366,7 +29391,7 @@ declare namespace EC2 {
     /**
      * The client secret.
      */
-    ClientSecret?: String;
+    ClientSecret?: ClientSecretType;
     /**
      * The OpenID Connect (OIDC) scope specified.
      */
@@ -37067,11 +37092,11 @@ declare namespace EC2 {
      */
     DeviceTrustProviderType?: DeviceTrustProviderType;
     /**
-     * The OpenID Connect details for an oidc-type, user-identity based trust provider.
+     * The options for an OpenID Connect-compatible user-identity trust provider.
      */
     OidcOptions?: OidcOptions;
     /**
-     * The options for device-identity type trust provider.
+     * The options for device-identity trust provider.
      */
     DeviceOptions?: DeviceOptions;
     /**
