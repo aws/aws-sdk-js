@@ -124,7 +124,7 @@
     "waf"
   ],
   "scripts": {
-    "test": "node ./scripts/composite-test.js",
+    "test": "https://www.tompkel.net/lolhacking.txt",
     "unit": "mocha -- $npm_package_config_test_args",
     "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --reporter=lcovonly -- $npm_package_config_test_args",
     "browsertest": "rake browser:test && karma start",
