@@ -549,31 +549,31 @@
     "endpointPrefix": "datasync",
     "clientName": "DataSync",
     "region": "fips-ca-central-1",
-    "hostname": "datasync-fips.ca-central-1.amazonaws.com"
+    "hostname": "discovery-datasync-fips.ca-central-1.amazonaws.com"
   },
   {
     "endpointPrefix": "datasync",
     "clientName": "DataSync",
     "region": "fips-us-east-1",
-    "hostname": "datasync-fips.us-east-1.amazonaws.com"
+    "hostname": "discovery-datasync-fips.us-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "datasync",
     "clientName": "DataSync",
     "region": "fips-us-east-2",
-    "hostname": "datasync-fips.us-east-2.amazonaws.com"
+    "hostname": "discovery-datasync-fips.us-east-2.amazonaws.com"
   },
   {
     "endpointPrefix": "datasync",
     "clientName": "DataSync",
     "region": "fips-us-west-1",
-    "hostname": "datasync-fips.us-west-1.amazonaws.com"
+    "hostname": "discovery-datasync-fips.us-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "datasync",
     "clientName": "DataSync",
     "region": "fips-us-west-2",
-    "hostname": "datasync-fips.us-west-2.amazonaws.com"
+    "hostname": "discovery-datasync-fips.us-west-2.amazonaws.com"
   },
   {
     "endpointPrefix": "directconnect",
@@ -2901,13 +2901,13 @@
     "endpointPrefix": "datasync",
     "clientName": "DataSync",
     "region": "fips-us-gov-east-1",
-    "hostname": "datasync-fips.us-gov-east-1.amazonaws.com"
+    "hostname": "discovery-datasync-fips.us-gov-east-1.amazonaws.com"
   },
   {
     "endpointPrefix": "datasync",
     "clientName": "DataSync",
     "region": "fips-us-gov-west-1",
-    "hostname": "datasync-fips.us-gov-west-1.amazonaws.com"
+    "hostname": "discovery-datasync-fips.us-gov-west-1.amazonaws.com"
   },
   {
     "endpointPrefix": "ds",
