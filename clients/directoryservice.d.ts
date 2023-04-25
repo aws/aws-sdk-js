@@ -1406,6 +1406,7 @@ declare namespace DirectoryService {
   export type Description = string;
   export type DesiredNumberOfDomainControllers = number;
   export type DirectoryConfigurationSettingAllowedValues = string;
+  export type DirectoryConfigurationSettingDataType = string;
   export type DirectoryConfigurationSettingLastRequestedDateTime = Date;
   export type DirectoryConfigurationSettingLastUpdatedDateTime = Date;
   export type DirectoryConfigurationSettingName = string;
@@ -2322,7 +2323,7 @@ declare namespace DirectoryService {
   export type SettingEntries = SettingEntry[];
   export interface SettingEntry {
     /**
-     * The type of directory setting. For example, Protocol or Cipher.
+     * The type, or category, of a directory setting. Similar settings have the same type. For example, Protocol, Cipher, or Certificate-Based Authentication.
      */
     Type?: DirectoryConfigurationSettingType;
     /**
@@ -2330,7 +2331,7 @@ declare namespace DirectoryService {
      */
     Name?: DirectoryConfigurationSettingName;
     /**
-     * The valid range of values for the directory setting.
+     * The valid range of values for the directory setting. These values depend on the DataType of your directory.
      */
     AllowedValues?: DirectoryConfigurationSettingAllowedValues;
     /**
@@ -2361,6 +2362,10 @@ declare namespace DirectoryService {
      * The date and time when the request to update a directory setting was last submitted.
      */
     LastRequestedDateTime?: DirectoryConfigurationSettingLastRequestedDateTime;
+    /**
+     * The data type of a directory setting. This is used to define the AllowedValues of a setting. For example a data type can be Boolean, DurationInSeconds, or Enum.
+     */
+    DataType?: DirectoryConfigurationSettingDataType;
   }
   export type Settings = Setting[];
   export interface ShareDirectoryRequest {

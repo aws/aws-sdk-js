@@ -12,6 +12,14 @@ declare class DataSync extends Service {
   constructor(options?: DataSync.Types.ClientConfiguration)
   config: Config & DataSync.Types.ClientConfiguration;
   /**
+   * Creates an Amazon Web Services resource for an on-premises storage system that you want DataSync Discovery to collect information about.
+   */
+  addStorageSystem(params: DataSync.Types.AddStorageSystemRequest, callback?: (err: AWSError, data: DataSync.Types.AddStorageSystemResponse) => void): Request<DataSync.Types.AddStorageSystemResponse, AWSError>;
+  /**
+   * Creates an Amazon Web Services resource for an on-premises storage system that you want DataSync Discovery to collect information about.
+   */
+  addStorageSystem(callback?: (err: AWSError, data: DataSync.Types.AddStorageSystemResponse) => void): Request<DataSync.Types.AddStorageSystemResponse, AWSError>;
+  /**
    * Stops an DataSync task execution that's in progress. The transfer of some files are abruptly interrupted. File contents that're transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution using the same task and allow it to finish, file content on the destination will be complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully completes the transfer when you start the next task execution.
    */
   cancelTaskExecution(params: DataSync.Types.CancelTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
@@ -92,11 +100,11 @@ declare class DataSync extends Service {
    */
   createLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see Create an Amazon S3 location.
+   * A location is an endpoint for an Amazon S3 bucket. DataSync can use the location as a source or destination for copying data.  Before you create your location, make sure that you read the following sections:    Storage class considerations with Amazon S3 locations     Evaluating S3 request costs when using DataSync      For more information, see Creating an Amazon S3 location.
    */
   createLocationS3(params: DataSync.Types.CreateLocationS3Request, callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer. For more information, see Create an Amazon S3 location.
+   * A location is an endpoint for an Amazon S3 bucket. DataSync can use the location as a source or destination for copying data.  Before you create your location, make sure that you read the following sections:    Storage class considerations with Amazon S3 locations     Evaluating S3 request costs when using DataSync      For more information, see Creating an Amazon S3 location.
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
@@ -108,11 +116,11 @@ declare class DataSync extends Service {
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).
+   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
@@ -147,6 +155,14 @@ declare class DataSync extends Service {
    * Returns metadata about an DataSync agent, such as its name, endpoint type, and status.
    */
   describeAgent(callback?: (err: AWSError, data: DataSync.Types.DescribeAgentResponse) => void): Request<DataSync.Types.DescribeAgentResponse, AWSError>;
+  /**
+   * Returns information about a DataSync discovery job.
+   */
+  describeDiscoveryJob(params: DataSync.Types.DescribeDiscoveryJobRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeDiscoveryJobResponse) => void): Request<DataSync.Types.DescribeDiscoveryJobResponse, AWSError>;
+  /**
+   * Returns information about a DataSync discovery job.
+   */
+  describeDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.DescribeDiscoveryJobResponse) => void): Request<DataSync.Types.DescribeDiscoveryJobResponse, AWSError>;
   /**
    * Returns metadata about your DataSync location for an Amazon EFS file system.
    */
@@ -228,6 +244,30 @@ declare class DataSync extends Service {
    */
   describeLocationSmb(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationSmbResponse) => void): Request<DataSync.Types.DescribeLocationSmbResponse, AWSError>;
   /**
+   * Returns information about an on-premises storage system that you're using with DataSync Discovery.
+   */
+  describeStorageSystem(params: DataSync.Types.DescribeStorageSystemRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResponse) => void): Request<DataSync.Types.DescribeStorageSystemResponse, AWSError>;
+  /**
+   * Returns information about an on-premises storage system that you're using with DataSync Discovery.
+   */
+  describeStorageSystem(callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResponse) => void): Request<DataSync.Types.DescribeStorageSystemResponse, AWSError>;
+  /**
+   * Returns information, including performance data and capacity usage, which DataSync Discovery collects about a specific resource in your-premises storage system.
+   */
+  describeStorageSystemResourceMetrics(params: DataSync.Types.DescribeStorageSystemResourceMetricsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourceMetricsResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourceMetricsResponse, AWSError>;
+  /**
+   * Returns information, including performance data and capacity usage, which DataSync Discovery collects about a specific resource in your-premises storage system.
+   */
+  describeStorageSystemResourceMetrics(callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourceMetricsResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourceMetricsResponse, AWSError>;
+  /**
+   * Returns information that DataSync Discovery collects about resources in your on-premises storage system.
+   */
+  describeStorageSystemResources(params: DataSync.Types.DescribeStorageSystemResourcesRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourcesResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourcesResponse, AWSError>;
+  /**
+   * Returns information that DataSync Discovery collects about resources in your on-premises storage system.
+   */
+  describeStorageSystemResources(callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourcesResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourcesResponse, AWSError>;
+  /**
    * Returns metadata about a task.
    */
   describeTask(params: DataSync.Types.DescribeTaskRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeTaskResponse) => void): Request<DataSync.Types.DescribeTaskResponse, AWSError>;
@@ -244,6 +284,14 @@ declare class DataSync extends Service {
    */
   describeTaskExecution(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
+   * Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system's resources. For more information, see Recommendations provided by DataSync Discovery. Once generated, you can view your recommendations by using the DescribeStorageSystemResources operation.  If your discovery job completes successfully, you don't need to use this operation. DataSync Discovery generates the recommendations for you automatically. 
+   */
+  generateRecommendations(params: DataSync.Types.GenerateRecommendationsRequest, callback?: (err: AWSError, data: DataSync.Types.GenerateRecommendationsResponse) => void): Request<DataSync.Types.GenerateRecommendationsResponse, AWSError>;
+  /**
+   * Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system's resources. For more information, see Recommendations provided by DataSync Discovery. Once generated, you can view your recommendations by using the DescribeStorageSystemResources operation.  If your discovery job completes successfully, you don't need to use this operation. DataSync Discovery generates the recommendations for you automatically. 
+   */
+  generateRecommendations(callback?: (err: AWSError, data: DataSync.Types.GenerateRecommendationsResponse) => void): Request<DataSync.Types.GenerateRecommendationsResponse, AWSError>;
+  /**
    * Returns a list of DataSync agents that belong to an Amazon Web Services account in the Amazon Web Services Region specified in the request. With pagination, you can reduce the number of agents returned in a response. If you get a truncated list of agents in a response, the response contains a marker that you can specify in your next request to fetch the next page of agents.  ListAgents is eventually consistent. This means the result of running the operation might not reflect that you just created or deleted an agent. For example, if you create an agent with CreateAgent and then immediately run ListAgents, that agent might not show up in the list right away. In situations like this, you can always confirm whether an agent has been created (or deleted) by using DescribeAgent.
    */
   listAgents(params: DataSync.Types.ListAgentsRequest, callback?: (err: AWSError, data: DataSync.Types.ListAgentsResponse) => void): Request<DataSync.Types.ListAgentsResponse, AWSError>;
@@ -252,6 +300,14 @@ declare class DataSync extends Service {
    */
   listAgents(callback?: (err: AWSError, data: DataSync.Types.ListAgentsResponse) => void): Request<DataSync.Types.ListAgentsResponse, AWSError>;
   /**
+   * Provides a list of the existing discovery jobs in the Amazon Web Services Region and Amazon Web Services account where you're using DataSync Discovery.
+   */
+  listDiscoveryJobs(params: DataSync.Types.ListDiscoveryJobsRequest, callback?: (err: AWSError, data: DataSync.Types.ListDiscoveryJobsResponse) => void): Request<DataSync.Types.ListDiscoveryJobsResponse, AWSError>;
+  /**
+   * Provides a list of the existing discovery jobs in the Amazon Web Services Region and Amazon Web Services account where you're using DataSync Discovery.
+   */
+  listDiscoveryJobs(callback?: (err: AWSError, data: DataSync.Types.ListDiscoveryJobsResponse) => void): Request<DataSync.Types.ListDiscoveryJobsResponse, AWSError>;
+  /**
    * Returns a list of source and destination locations. If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.
    */
   listLocations(params: DataSync.Types.ListLocationsRequest, callback?: (err: AWSError, data: DataSync.Types.ListLocationsResponse) => void): Request<DataSync.Types.ListLocationsResponse, AWSError>;
@@ -259,6 +315,14 @@ declare class DataSync extends Service {
    * Returns a list of source and destination locations. If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.
    */
   listLocations(callback?: (err: AWSError, data: DataSync.Types.ListLocationsResponse) => void): Request<DataSync.Types.ListLocationsResponse, AWSError>;
+  /**
+   * Lists the on-premises storage systems that you're using with DataSync Discovery.
+   */
+  listStorageSystems(params: DataSync.Types.ListStorageSystemsRequest, callback?: (err: AWSError, data: DataSync.Types.ListStorageSystemsResponse) => void): Request<DataSync.Types.ListStorageSystemsResponse, AWSError>;
+  /**
+   * Lists the on-premises storage systems that you're using with DataSync Discovery.
+   */
+  listStorageSystems(callback?: (err: AWSError, data: DataSync.Types.ListStorageSystemsResponse) => void): Request<DataSync.Types.ListStorageSystemsResponse, AWSError>;
   /**
    * Returns all the tags associated with an Amazon Web Services resource.
    */
@@ -284,13 +348,37 @@ declare class DataSync extends Service {
    */
   listTasks(callback?: (err: AWSError, data: DataSync.Types.ListTasksResponse) => void): Request<DataSync.Types.ListTasksResponse, AWSError>;
   /**
-   * Starts an DataSync task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.
+   * Permanently removes a storage system resource from DataSync Discovery, including the associated discovery jobs, collected data, and recommendations.
+   */
+  removeStorageSystem(params: DataSync.Types.RemoveStorageSystemRequest, callback?: (err: AWSError, data: DataSync.Types.RemoveStorageSystemResponse) => void): Request<DataSync.Types.RemoveStorageSystemResponse, AWSError>;
+  /**
+   * Permanently removes a storage system resource from DataSync Discovery, including the associated discovery jobs, collected data, and recommendations.
+   */
+  removeStorageSystem(callback?: (err: AWSError, data: DataSync.Types.RemoveStorageSystemResponse) => void): Request<DataSync.Types.RemoveStorageSystemResponse, AWSError>;
+  /**
+   * Runs a DataSync discovery job on your on-premises storage system. If you haven't added the storage system to DataSync Discovery yet, do this first by using the AddStorageSystem operation.
+   */
+  startDiscoveryJob(params: DataSync.Types.StartDiscoveryJobRequest, callback?: (err: AWSError, data: DataSync.Types.StartDiscoveryJobResponse) => void): Request<DataSync.Types.StartDiscoveryJobResponse, AWSError>;
+  /**
+   * Runs a DataSync discovery job on your on-premises storage system. If you haven't added the storage system to DataSync Discovery yet, do this first by using the AddStorageSystem operation.
+   */
+  startDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.StartDiscoveryJobResponse) => void): Request<DataSync.Types.StartDiscoveryJobResponse, AWSError>;
+  /**
+   * Starts an DataSync task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   startTaskExecution(params: DataSync.Types.StartTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
-   * Starts an DataSync task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.
+   * Starts an DataSync task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   startTaskExecution(callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
+  /**
+   * Stops a running DataSync discovery job. You can stop a discovery job anytime. A job that's stopped before it's scheduled to end likely will provide you some information about your on-premises storage system resources. To get recommendations for a stopped job, you must use the GenerateRecommendations operation.
+   */
+  stopDiscoveryJob(params: DataSync.Types.StopDiscoveryJobRequest, callback?: (err: AWSError, data: DataSync.Types.StopDiscoveryJobResponse) => void): Request<DataSync.Types.StopDiscoveryJobResponse, AWSError>;
+  /**
+   * Stops a running DataSync discovery job. You can stop a discovery job anytime. A job that's stopped before it's scheduled to end likely will provide you some information about your on-premises storage system resources. To get recommendations for a stopped job, you must use the GenerateRecommendations operation.
+   */
+  stopDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.StopDiscoveryJobResponse) => void): Request<DataSync.Types.StopDiscoveryJobResponse, AWSError>;
   /**
    * Applies a tag to an Amazon Web Services resource. Tags are key-value pairs that can help you manage, filter, and search for your resources. These include DataSync resources, such as locations, tasks, and task executions.
    */
@@ -315,6 +403,14 @@ declare class DataSync extends Service {
    * Updates the name of an agent.
    */
   updateAgent(callback?: (err: AWSError, data: DataSync.Types.UpdateAgentResponse) => void): Request<DataSync.Types.UpdateAgentResponse, AWSError>;
+  /**
+   * Edits a DataSync discovery job configuration.
+   */
+  updateDiscoveryJob(params: DataSync.Types.UpdateDiscoveryJobRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateDiscoveryJobResponse) => void): Request<DataSync.Types.UpdateDiscoveryJobResponse, AWSError>;
+  /**
+   * Edits a DataSync discovery job configuration.
+   */
+  updateDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.UpdateDiscoveryJobResponse) => void): Request<DataSync.Types.UpdateDiscoveryJobResponse, AWSError>;
   /**
    * Updates some parameters of a previously created location for a Hadoop Distributed File System cluster.
    */
@@ -348,6 +444,14 @@ declare class DataSync extends Service {
    */
   updateLocationSmb(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
   /**
+   * Modifies some configurations of an on-premises storage system resource that you're using with DataSync Discovery.
+   */
+  updateStorageSystem(params: DataSync.Types.UpdateStorageSystemRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateStorageSystemResponse) => void): Request<DataSync.Types.UpdateStorageSystemResponse, AWSError>;
+  /**
+   * Modifies some configurations of an on-premises storage system resource that you're using with DataSync Discovery.
+   */
+  updateStorageSystem(callback?: (err: AWSError, data: DataSync.Types.UpdateStorageSystemResponse) => void): Request<DataSync.Types.UpdateStorageSystemResponse, AWSError>;
+  /**
    * Updates the metadata associated with a task.
    */
   updateTask(params: DataSync.Types.UpdateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
@@ -356,16 +460,56 @@ declare class DataSync extends Service {
    */
   updateTask(callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
   /**
-   * Updates execution of a task. You can modify bandwidth throttling for a task execution that is running or queued. For more information, see Adjusting Bandwidth Throttling for a Task Execution.  The only Option that can be modified by UpdateTaskExecution is  BytesPerSecond . 
+   * Modifies a running DataSync task.  Currently, the only Option that you can modify with UpdateTaskExecution is  BytesPerSecond , which throttles bandwidth for a running or queued task. 
    */
   updateTaskExecution(params: DataSync.Types.UpdateTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateTaskExecutionResponse) => void): Request<DataSync.Types.UpdateTaskExecutionResponse, AWSError>;
   /**
-   * Updates execution of a task. You can modify bandwidth throttling for a task execution that is running or queued. For more information, see Adjusting Bandwidth Throttling for a Task Execution.  The only Option that can be modified by UpdateTaskExecution is  BytesPerSecond . 
+   * Modifies a running DataSync task.  Currently, the only Option that you can modify with UpdateTaskExecution is  BytesPerSecond , which throttles bandwidth for a running or queued task. 
    */
   updateTaskExecution(callback?: (err: AWSError, data: DataSync.Types.UpdateTaskExecutionResponse) => void): Request<DataSync.Types.UpdateTaskExecutionResponse, AWSError>;
 }
 declare namespace DataSync {
   export type ActivationKey = string;
+  export interface AddStorageSystemRequest {
+    /**
+     * Specifies the server name and network port required to connect with the management interface of your on-premises storage system.
+     */
+    ServerConfiguration: DiscoveryServerConfiguration;
+    /**
+     * Specifies the type of on-premises storage system that you want DataSync Discovery to collect information about.  DataSync Discovery currently supports NetApp Fabric-Attached Storage (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or later. 
+     */
+    SystemType: DiscoverySystemType;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads from your on-premises storage system's management interface.
+     */
+    AgentArns: DiscoveryAgentArnList;
+    /**
+     * Specifies the ARN of the Amazon CloudWatch log group for monitoring and logging discovery job events.
+     */
+    CloudWatchLogGroupArn?: LogGroupArn;
+    /**
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your on-premises storage system.
+     */
+    Tags?: InputTagList;
+    /**
+     * Specifies a familiar name for your on-premises storage system.
+     */
+    Name?: Name;
+    /**
+     * Specifies a client token to make sure requests with this API operation are idempotent. If you don't specify a client token, DataSync generates one for you automatically.
+     */
+    ClientToken: PtolemyUUID;
+    /**
+     * Specifies the user name and password for accessing your on-premises storage system's management interface.
+     */
+    Credentials: Credentials;
+  }
+  export interface AddStorageSystemResponse {
+    /**
+     * The ARN of the on-premises storage system that you can use with DataSync Discovery.
+     */
+    StorageSystemArn: StorageSystemArn;
+  }
   export type AgentArn = string;
   export type AgentArnList = AgentArn[];
   export type AgentList = AgentListEntry[];
@@ -394,6 +538,21 @@ declare namespace DataSync {
   }
   export interface CancelTaskExecutionResponse {
   }
+  export interface Capacity {
+    /**
+     * The amount of space that's being used in a storage system resource.
+     */
+    Used?: NonNegativeLong;
+    /**
+     * The total amount of space available in a storage system resource.
+     */
+    Provisioned?: NonNegativeLong;
+    /**
+     * The amount of space that's being used in a storage system resource without accounting for compression or deduplication.
+     */
+    LogicalUsed?: NonNegativeLong;
+  }
+  export type CollectionDurationMinutes = number;
   export interface CreateAgentRequest {
     /**
      * Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the DataSync console. The redirect URL returned in the response provides you the activation key for your agent in the query string parameter activationKey. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent. For more information, see Activating an Agent in the DataSync User Guide. 
@@ -824,6 +983,16 @@ declare namespace DataSync {
      */
     TaskArn?: TaskArn;
   }
+  export interface Credentials {
+    /**
+     * Specifies the user name for your storage system's management interface.
+     */
+    Username: PtolemyUsername;
+    /**
+     * Specifies the password for your storage system's management interface.
+     */
+    Password: PtolemyPassword;
+  }
   export interface DeleteAgentRequest {
     /**
      * The Amazon Resource Name (ARN) of the agent to delete. Use the ListAgents operation to return a list of agents for your account and Amazon Web Services Region.
@@ -883,6 +1052,38 @@ declare namespace DataSync {
      * The subnet and the security group that DataSync used to access a VPC endpoint.
      */
     PrivateLinkConfig?: PrivateLinkConfig;
+  }
+  export interface DescribeDiscoveryJobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that you want information about.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+  }
+  export interface DescribeDiscoveryJobResponse {
+    /**
+     * The ARN of the on-premises storage system you're running the discovery job on.
+     */
+    StorageSystemArn?: StorageSystemArn;
+    /**
+     * The ARN of the discovery job.
+     */
+    DiscoveryJobArn?: DiscoveryJobArn;
+    /**
+     * The number of minutes that the discovery job runs.
+     */
+    CollectionDurationMinutes?: CollectionDurationMinutes;
+    /**
+     * Indicates the status of a discovery job. For more information, see Discovery job statuses.
+     */
+    Status?: DiscoveryJobStatus;
+    /**
+     * The time when the discovery job started.
+     */
+    JobStartTime?: DiscoveryTime;
+    /**
+     * The time when the discovery job ended.
+     */
+    JobEndTime?: DiscoveryTime;
   }
   export interface DescribeLocationEfsRequest {
     /**
@@ -1220,6 +1421,130 @@ declare namespace DataSync {
      */
     CreationTime?: Time;
   }
+  export interface DescribeStorageSystemRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of an on-premises storage system that you're using with DataSync Discovery.
+     */
+    StorageSystemArn: StorageSystemArn;
+  }
+  export interface DescribeStorageSystemResourceMetricsRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that collects information about your on-premises storage system.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+    /**
+     * Specifies the kind of storage system resource that you want information about.
+     */
+    ResourceType: DiscoveryResourceType;
+    /**
+     * Specifies the universally unique identifier (UUID) of the storage system resource that you want information about.
+     */
+    ResourceId: ResourceId;
+    /**
+     * Specifies a time within the total duration that the discovery job ran. To see information gathered during a certain time frame, use this parameter with EndTime.
+     */
+    StartTime?: DiscoveryTime;
+    /**
+     * Specifies a time within the total duration that the discovery job ran. To see information gathered during a certain time frame, use this parameter with StartTime.
+     */
+    EndTime?: DiscoveryTime;
+    /**
+     * Specifies how many results that you want in the response.
+     */
+    MaxResults?: DiscoveryMaxResults;
+    /**
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface DescribeStorageSystemResourceMetricsResponse {
+    /**
+     * The details that your discovery job collected about your storage system resource.
+     */
+    Metrics?: Metrics;
+    /**
+     * The opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface DescribeStorageSystemResourcesRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that's collecting data from your on-premises storage system.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+    /**
+     * Specifies what kind of storage system resources that you want information about.
+     */
+    ResourceType: DiscoveryResourceType;
+    /**
+     * Specifies the universally unique identifiers (UUIDs) of the storage system resources that you want information about. You can't use this parameter in combination with the Filter parameter.
+     */
+    ResourceIds?: ResourceIds;
+    /**
+     * Filters the storage system resources that you want returned. For example, this might be volumes associated with a specific storage virtual machine (SVM).
+     */
+    Filter?: ResourceFilters;
+    /**
+     * Specifies the maximum number of storage system resources that you want to list in a response.
+     */
+    MaxResults?: DiscoveryMaxResults;
+    /**
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface DescribeStorageSystemResourcesResponse {
+    /**
+     * The information collected about your storage system's resources. A response can also include Amazon Web Services storage service recommendations. For more information, see storage resource information collected by and recommendations provided by DataSync Discovery.
+     */
+    ResourceDetails?: ResourceDetails;
+    /**
+     * The opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface DescribeStorageSystemResponse {
+    /**
+     * The ARN of the on-premises storage system that the discovery job looked at.
+     */
+    StorageSystemArn?: StorageSystemArn;
+    /**
+     * The server name and network port required to connect with your on-premises storage system's management interface.
+     */
+    ServerConfiguration?: DiscoveryServerConfiguration;
+    /**
+     * The type of on-premises storage system.  DataSync Discovery currently only supports NetApp Fabric-Attached Storage (FAS) and All Flash FAS (AFF) systems running ONTAP 9.7 or later.  
+     */
+    SystemType?: DiscoverySystemType;
+    /**
+     * The ARN of the DataSync agent that connects to and reads from your on-premises storage system.
+     */
+    AgentArns?: DiscoveryAgentArnList;
+    /**
+     * The name that you gave your on-premises storage system when adding it to DataSync Discovery.
+     */
+    Name?: Name;
+    /**
+     * Describes the connectivity error that the DataSync agent is encountering with your on-premises storage system.
+     */
+    ErrorMessage?: ErrorMessage;
+    /**
+     * Indicates whether your DataSync agent can connect to your on-premises storage system.
+     */
+    ConnectivityStatus?: StorageSystemConnectivityStatus;
+    /**
+     * The ARN of the Amazon CloudWatch log group that's used to monitor and log discovery job events.
+     */
+    CloudWatchLogGroupArn?: LogGroupArn;
+    /**
+     * The time when you added the on-premises storage system to DataSync Discovery.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The ARN of the secret that stores your on-premises storage system's credentials. DataSync Discovery stores these credentials in Secrets Manager.
+     */
+    SecretsManagerArn?: SecretsManagerArn;
+  }
   export interface DescribeTaskExecutionRequest {
     /**
      * The Amazon Resource Name (ARN) of the task that is being executed.
@@ -1350,6 +1675,38 @@ declare namespace DataSync {
     Includes?: FilterList;
   }
   export type DestinationNetworkInterfaceArns = NetworkInterfaceArn[];
+  export type DiscoveryAgentArnList = AgentArn[];
+  export type DiscoveryJobArn = string;
+  export type DiscoveryJobList = DiscoveryJobListEntry[];
+  export interface DiscoveryJobListEntry {
+    /**
+     * The Amazon Resource Name (ARN) of a discovery job.
+     */
+    DiscoveryJobArn?: DiscoveryJobArn;
+    /**
+     * The status of a discovery job. For more information, see Discovery job statuses.
+     */
+    Status?: DiscoveryJobStatus;
+  }
+  export type DiscoveryJobStatus = "RUNNING"|"WARNING"|"TERMINATED"|"FAILED"|"STOPPED"|"COMPLETED"|"COMPLETED_WITH_ISSUES"|string;
+  export type DiscoveryMaxResults = number;
+  export type DiscoveryNextToken = string;
+  export type DiscoveryResourceFilter = "SVM"|string;
+  export type DiscoveryResourceType = "SVM"|"VOLUME"|"CLUSTER"|string;
+  export interface DiscoveryServerConfiguration {
+    /**
+     * The domain name or IP address of your storage system's management interface.
+     */
+    ServerHostname: DiscoveryServerHostname;
+    /**
+     * The network port for accessing the storage system's management interface.
+     */
+    ServerPort?: DiscoveryServerPort;
+  }
+  export type DiscoveryServerHostname = string;
+  export type DiscoveryServerPort = number;
+  export type DiscoverySystemType = "NetAppONTAP"|string;
+  export type DiscoveryTime = Date;
   export type Duration = number;
   export interface Ec2Config {
     /**
@@ -1368,10 +1725,13 @@ declare namespace DataSync {
   export type EfsFilesystemArn = string;
   export type EfsInTransitEncryption = "NONE"|"TLS1_2"|string;
   export type EfsSubdirectory = string;
+  export type EnabledProtocols = PtolemyString[];
   export type Endpoint = string;
   export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|"FIPS"|string;
+  export type ErrorMessage = string;
   export type FilterAttributeValue = string;
   export type FilterList = FilterRule[];
+  export type FilterMembers = PtolemyString[];
   export interface FilterRule {
     /**
      * The type of filter rule to apply. DataSync only supports the SIMPLE_PATTERN rule type.
@@ -1418,6 +1778,22 @@ declare namespace DataSync {
     User: SmbUser;
   }
   export type FsxWindowsSubdirectory = string;
+  export interface GenerateRecommendationsRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that collects information about your on-premises storage system.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+    /**
+     * Specifies the universally unique identifiers (UUIDs) of the resources in your storage system that you want recommendations on.
+     */
+    ResourceIds: ResourceIds;
+    /**
+     * Specifies the type of resource in your storage system that you want recommendations on.
+     */
+    ResourceType: DiscoveryResourceType;
+  }
+  export interface GenerateRecommendationsResponse {
+  }
   export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export type HdfsAuthenticationType = "SIMPLE"|"KERBEROS"|string;
   export type HdfsBlockSize = number;
@@ -1439,12 +1815,44 @@ declare namespace DataSync {
   export type HdfsServerPort = number;
   export type HdfsSubdirectory = string;
   export type HdfsUser = string;
+  export interface IOPS {
+    /**
+     * Peak IOPS related to read operations.
+     */
+    Read?: NonNegativeDouble;
+    /**
+     * Peak IOPS related to write operations.
+     */
+    Write?: NonNegativeDouble;
+    /**
+     * Peak IOPS unrelated to read and write operations.
+     */
+    Other?: NonNegativeDouble;
+    /**
+     * Peak total IOPS on your on-premises storage system resource.
+     */
+    Total?: NonNegativeDouble;
+  }
   export type IamRoleArn = string;
   export type InputTagList = TagListEntry[];
   export type KerberosKeytabFile = Buffer|Uint8Array|Blob|string;
   export type KerberosKrb5ConfFile = Buffer|Uint8Array|Blob|string;
   export type KerberosPrincipal = string;
   export type KmsKeyProviderUri = string;
+  export interface Latency {
+    /**
+     * Peak latency for read operations.
+     */
+    Read?: NonNegativeDouble;
+    /**
+     * Peak latency for write operations.
+     */
+    Write?: NonNegativeDouble;
+    /**
+     * Peak latency for operations unrelated to read and write operations.
+     */
+    Other?: NonNegativeDouble;
+  }
   export interface ListAgentsRequest {
     /**
      * Specifies the maximum number of DataSync agents to list in a response. By default, a response shows a maximum of 100 agents.
@@ -1464,6 +1872,30 @@ declare namespace DataSync {
      * The opaque string that indicates the position to begin the next list of results in the response.
      */
     NextToken?: NextToken;
+  }
+  export interface ListDiscoveryJobsRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of an on-premises storage system. Use this parameter if you only want to list the discovery jobs that are associated with a specific storage system.
+     */
+    StorageSystemArn?: StorageSystemArn;
+    /**
+     * Specifies how many results you want in the response.
+     */
+    MaxResults?: DiscoveryMaxResults;
+    /**
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface ListDiscoveryJobsResponse {
+    /**
+     * The discovery jobs that you've run.
+     */
+    DiscoveryJobs?: DiscoveryJobList;
+    /**
+     * The opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
   }
   export interface ListLocationsRequest {
     /**
@@ -1488,6 +1920,26 @@ declare namespace DataSync {
      * An opaque string that indicates the position at which to begin returning the next list of locations.
      */
     NextToken?: NextToken;
+  }
+  export interface ListStorageSystemsRequest {
+    /**
+     * Specifies how many results you want in the response.
+     */
+    MaxResults?: DiscoveryMaxResults;
+    /**
+     * Specifies an opaque string that indicates the position to begin the next list of results in the response. 
+     */
+    NextToken?: DiscoveryNextToken;
+  }
+  export interface ListStorageSystemsResponse {
+    /**
+     * The Amazon Resource Names ARNs) of the on-premises storage systems that you're using with DataSync Discovery.
+     */
+    StorageSystems?: StorageSystemList;
+    /**
+     * The opaque string that indicates the position to begin the next list of results in the response.
+     */
+    NextToken?: DiscoveryNextToken;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -1592,8 +2044,213 @@ declare namespace DataSync {
   export type LocationUri = string;
   export type LogGroupArn = string;
   export type LogLevel = "OFF"|"BASIC"|"TRANSFER"|string;
+  export interface MaxP95Performance {
+    /**
+     * Peak IOPS related to read operations.
+     */
+    IopsRead?: NonNegativeDouble;
+    /**
+     * Peak IOPS related to write operations.
+     */
+    IopsWrite?: NonNegativeDouble;
+    /**
+     * Peak IOPS unrelated to read and write operations.
+     */
+    IopsOther?: NonNegativeDouble;
+    /**
+     * Peak total IOPS on your on-premises storage system resource.
+     */
+    IopsTotal?: NonNegativeDouble;
+    /**
+     * Peak throughput related to read operations.
+     */
+    ThroughputRead?: NonNegativeDouble;
+    /**
+     * Peak throughput related to write operations.
+     */
+    ThroughputWrite?: NonNegativeDouble;
+    /**
+     * Peak throughput unrelated to read and write operations.
+     */
+    ThroughputOther?: NonNegativeDouble;
+    /**
+     * Peak total throughput on your on-premises storage system resource.
+     */
+    ThroughputTotal?: NonNegativeDouble;
+    /**
+     * Peak latency for read operations.
+     */
+    LatencyRead?: NonNegativeDouble;
+    /**
+     * Peak latency for write operations.
+     */
+    LatencyWrite?: NonNegativeDouble;
+    /**
+     * Peak latency for operations unrelated to read and write operations.
+     */
+    LatencyOther?: NonNegativeDouble;
+  }
   export type MaxResults = number;
+  export type Metrics = ResourceMetrics[];
   export type Mtime = "NONE"|"PRESERVE"|string;
+  export type Name = string;
+  export interface NetAppONTAPCluster {
+    /**
+     * The number of CIFS shares in the cluster.
+     */
+    CifsShareCount?: NonNegativeLong;
+    /**
+     * The number of NFS volumes in the cluster.
+     */
+    NfsExportedVolumes?: NonNegativeLong;
+    /**
+     * The universally unique identifier (UUID) of the cluster.
+     */
+    ResourceId?: PtolemyUUID;
+    /**
+     * The name of the cluster.
+     */
+    ClusterName?: PtolemyString;
+    /**
+     * The performance data that DataSync Discovery collects about the cluster.
+     */
+    MaxP95Performance?: MaxP95Performance;
+    /**
+     * The total storage space that's available in the cluster.
+     */
+    ClusterBlockStorageSize?: NonNegativeLong;
+    /**
+     * The storage space that's being used in a cluster.
+     */
+    ClusterBlockStorageUsed?: NonNegativeLong;
+    /**
+     * The storage space that's being used in the cluster without accounting for compression or deduplication.
+     */
+    ClusterBlockStorageLogicalUsed?: NonNegativeLong;
+    /**
+     * The Amazon Web Services storage services that DataSync Discovery recommends for the cluster. For more information, see Recommendations provided by DataSync Discovery.
+     */
+    Recommendations?: Recommendations;
+    /**
+     * Indicates whether DataSync Discovery recommendations for the cluster are ready to view, incomplete, or can't be determined. For more information, see Recommendation statuses.
+     */
+    RecommendationStatus?: RecommendationStatus;
+  }
+  export type NetAppONTAPClusters = NetAppONTAPCluster[];
+  export interface NetAppONTAPSVM {
+    /**
+     * The universally unique identifier (UUID) of the cluster associated with the SVM.
+     */
+    ClusterUuid?: PtolemyUUID;
+    /**
+     * The UUID of the SVM.
+     */
+    ResourceId?: PtolemyUUID;
+    /**
+     * The name of the SVM
+     */
+    SvmName?: PtolemyString;
+    /**
+     * The number of CIFS shares in the SVM.
+     */
+    CifsShareCount?: NonNegativeLong;
+    /**
+     * The data transfer protocols (such as NFS) configured for the SVM.
+     */
+    EnabledProtocols?: EnabledProtocols;
+    /**
+     * The storage space that's being used in the SVM.
+     */
+    TotalCapacityUsed?: NonNegativeLong;
+    /**
+     * The total storage space that's available in the SVM.
+     */
+    TotalCapacityProvisioned?: NonNegativeLong;
+    /**
+     * The storage space that's being used in the SVM without accounting for compression or deduplication.
+     */
+    TotalLogicalCapacityUsed?: NonNegativeLong;
+    /**
+     * The performance data that DataSync Discovery collects about the SVM.
+     */
+    MaxP95Performance?: MaxP95Performance;
+    /**
+     * The Amazon Web Services storage services that DataSync Discovery recommends for the SVM. For more information, see Recommendations provided by DataSync Discovery.
+     */
+    Recommendations?: Recommendations;
+    /**
+     * The number of NFS volumes in the SVM.
+     */
+    NfsExportedVolumes?: NonNegativeLong;
+    /**
+     * Indicates whether DataSync Discovery recommendations for the SVM are ready to view, incomplete, or can't be determined. For more information, see Recommendation statuses.
+     */
+    RecommendationStatus?: RecommendationStatus;
+    /**
+     * The amount of storage in the SVM that's being used for snapshots.
+     */
+    TotalSnapshotCapacityUsed?: NonNegativeLong;
+  }
+  export type NetAppONTAPSVMs = NetAppONTAPSVM[];
+  export interface NetAppONTAPVolume {
+    /**
+     * The name of the volume.
+     */
+    VolumeName?: PtolemyString;
+    /**
+     * The universally unique identifier (UUID) of the volume.
+     */
+    ResourceId?: PtolemyUUID;
+    /**
+     * The number of CIFS shares in the volume.
+     */
+    CifsShareCount?: NonNegativeLong;
+    /**
+     * The volume's security style (such as Unix or NTFS).
+     */
+    SecurityStyle?: PtolemyString;
+    /**
+     * The UUID of the storage virtual machine (SVM) associated with the volume.
+     */
+    SvmUuid?: PtolemyUUID;
+    /**
+     * The name of the SVM associated with the volume.
+     */
+    SvmName?: PtolemyString;
+    /**
+     * The storage space that's being used in the volume.
+     */
+    CapacityUsed?: NonNegativeLong;
+    /**
+     * The total storage space that's available in the volume.
+     */
+    CapacityProvisioned?: NonNegativeLong;
+    /**
+     * The storage space that's being used in the volume without accounting for compression or deduplication.
+     */
+    LogicalCapacityUsed?: NonNegativeLong;
+    /**
+     * The number of NFS volumes in the volume.
+     */
+    NfsExported?: PtolemyBoolean;
+    /**
+     * The amount of storage in the volume that's being used for snapshots.
+     */
+    SnapshotCapacityUsed?: NonNegativeLong;
+    /**
+     * The performance data that DataSync Discovery collects about the volume.
+     */
+    MaxP95Performance?: MaxP95Performance;
+    /**
+     * The Amazon Web Services storage services that DataSync Discovery recommends for the volume. For more information, see Recommendations provided by DataSync Discovery.
+     */
+    Recommendations?: Recommendations;
+    /**
+     * Indicates whether DataSync Discovery recommendations for the volume are ready to view, incomplete, or can't be determined. For more information, see Recommendation statuses.
+     */
+    RecommendationStatus?: RecommendationStatus;
+  }
+  export type NetAppONTAPVolumes = NetAppONTAPVolume[];
   export type NetworkInterfaceArn = string;
   export type NextToken = string;
   export interface NfsMountOptions {
@@ -1604,6 +2261,8 @@ declare namespace DataSync {
   }
   export type NfsSubdirectory = string;
   export type NfsVersion = "AUTOMATIC"|"NFS3"|"NFS4_0"|"NFS4_1"|string;
+  export type NonNegativeDouble = number;
+  export type NonNegativeLong = number;
   export type ObjectStorageAccessKey = string;
   export type ObjectStorageBucketName = string;
   export type ObjectStorageCertificate = Buffer|Uint8Array|Blob|string;
@@ -1682,6 +2341,20 @@ declare namespace DataSync {
   }
   export type OutputTagList = TagListEntry[];
   export type OverwriteMode = "ALWAYS"|"NEVER"|string;
+  export interface P95Metrics {
+    /**
+     * The IOPS peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+     */
+    IOPS?: IOPS;
+    /**
+     * The throughput peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+     */
+    Throughput?: Throughput;
+    /**
+     * The latency peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
+     */
+    Latency?: Latency;
+  }
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
   export type PLSubnetArnList = Ec2SubnetArn[];
   export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string;
@@ -1706,6 +2379,11 @@ declare namespace DataSync {
      */
     SecurityGroupArns?: PLSecurityGroupArnList;
   }
+  export type PtolemyBoolean = boolean;
+  export type PtolemyPassword = string;
+  export type PtolemyString = string;
+  export type PtolemyUUID = string;
+  export type PtolemyUsername = string;
   export interface QopConfiguration {
     /**
      * The RPC protection setting configured on the HDFS cluster. This setting corresponds to your hadoop.rpc.protection setting in your core-site.xml file on your Hadoop cluster.
@@ -1715,6 +2393,70 @@ declare namespace DataSync {
      * The data transfer protection setting configured on the HDFS cluster. This setting corresponds to your dfs.data.transfer.protection setting in the hdfs-site.xml file on your Hadoop cluster.
      */
     DataTransferProtection?: HdfsDataTransferProtection;
+  }
+  export interface Recommendation {
+    /**
+     * A recommended Amazon Web Services storage service that you can migrate data to based on information that DataSync Discovery collects about your on-premises storage system.
+     */
+    StorageType?: PtolemyString;
+    /**
+     * Information about how you can set up a recommended Amazon Web Services storage service.
+     */
+    StorageConfiguration?: RecommendationsConfigMap;
+    /**
+     * The estimated monthly cost of the recommended Amazon Web Services storage service.
+     */
+    EstimatedMonthlyStorageCost?: PtolemyString;
+  }
+  export type RecommendationStatus = "NONE"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type Recommendations = Recommendation[];
+  export type RecommendationsConfigMap = {[key: string]: PtolemyString};
+  export interface RemoveStorageSystemRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the storage system that you want to permanently remove from DataSync Discovery.
+     */
+    StorageSystemArn: StorageSystemArn;
+  }
+  export interface RemoveStorageSystemResponse {
+  }
+  export interface ResourceDetails {
+    /**
+     * The information that DataSync Discovery collects about storage virtual machines (SVMs) in your on-premises storage system.
+     */
+    NetAppONTAPSVMs?: NetAppONTAPSVMs;
+    /**
+     * The information that DataSync Discovery collects about volumes in your on-premises storage system.
+     */
+    NetAppONTAPVolumes?: NetAppONTAPVolumes;
+    /**
+     * The information that DataSync Discovery collects about the cluster in your on-premises storage system.
+     */
+    NetAppONTAPClusters?: NetAppONTAPClusters;
+  }
+  export type ResourceFilters = {[key: string]: FilterMembers};
+  export type ResourceId = string;
+  export type ResourceIds = ResourceId[];
+  export interface ResourceMetrics {
+    /**
+     * The time when DataSync Discovery collected this information from the resource.
+     */
+    Timestamp?: Timestamp;
+    /**
+     * The types of performance data that DataSync Discovery collects about the on-premises storage system resource.
+     */
+    P95Metrics?: P95Metrics;
+    /**
+     * The storage capacity of the on-premises storage system resource.
+     */
+    Capacity?: Capacity;
+    /**
+     * The universally unique identifier (UUID) of the on-premises storage system resource.
+     */
+    ResourceId?: ResourceId;
+    /**
+     * The type of on-premises storage system resource.
+     */
+    ResourceType?: DiscoveryResourceType;
   }
   export type S3BucketArn = string;
   export interface S3Config {
@@ -1726,11 +2468,12 @@ declare namespace DataSync {
   export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_INSTANT_RETRIEVAL"|string;
   export type S3Subdirectory = string;
   export type ScheduleExpressionCron = string;
+  export type SecretsManagerArn = string;
   export type ServerHostname = string;
   export type SmbDomain = string;
   export interface SmbMountOptions {
     /**
-     * By default, DataSync automatically chooses an SMB protocol version based on negotiation with your SMB file server. You also can configure DataSync to use a specific SMB version, but we recommend doing this only if DataSync has trouble negotiating with the SMB file server automatically. These are the following options for configuring the SMB version:    AUTOMATIC (default): DataSync and the SMB file server negotiate a protocol version that they mutually support. (DataSync supports SMB versions 1.0 and later.) This is the recommended option. If you instead choose a specific version that your file server doesn't support, you may get an Operation Not Supported error.    SMB3: Restricts the protocol negotiation to only SMB version 3.0.2.    SMB2: Restricts the protocol negotiation to only SMB version 2.1.    SMB2_0: Restricts the protocol negotiation to only SMB version 2.0.    SMB1: Restricts the protocol negotiation to only SMB version 1.0.  The SMB1 option isn't available when creating an Amazon FSx for NetApp ONTAP location.   
+     * By default, DataSync automatically chooses an SMB protocol version based on negotiation with your SMB file server. You also can configure DataSync to use a specific SMB version, but we recommend doing this only if DataSync has trouble negotiating with the SMB file server automatically. These are the following options for configuring the SMB version:    AUTOMATIC (default): DataSync and the SMB file server negotiate the highest version of SMB that they mutually support between 2.1 and 3.1.1. This is the recommended option. If you instead choose a specific version that your file server doesn't support, you may get an Operation Not Supported error.    SMB3: Restricts the protocol negotiation to only SMB version 3.0.2.    SMB2: Restricts the protocol negotiation to only SMB version 2.1.    SMB2_0: Restricts the protocol negotiation to only SMB version 2.0.    SMB1: Restricts the protocol negotiation to only SMB version 1.0.  The SMB1 option isn't available when creating an Amazon FSx for NetApp ONTAP location.   
      */
     Version?: SmbVersion;
   }
@@ -1740,6 +2483,30 @@ declare namespace DataSync {
   export type SmbUser = string;
   export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|"SMB1"|"SMB2_0"|string;
   export type SourceNetworkInterfaceArns = NetworkInterfaceArn[];
+  export interface StartDiscoveryJobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the on-premises storage system that you want to run the discovery job on.
+     */
+    StorageSystemArn: StorageSystemArn;
+    /**
+     * Specifies in minutes how long you want the discovery job to run.  For more accurate recommendations, we recommend a duration of at least 14 days. Longer durations allow time to collect a sufficient number of data points and provide a realistic representation of storage performance and utilization. 
+     */
+    CollectionDurationMinutes: CollectionDurationMinutes;
+    /**
+     * Specifies a client token to make sure requests with this API operation are idempotent. If you don't specify a client token, DataSync generates one for you automatically.
+     */
+    ClientToken: PtolemyUUID;
+    /**
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.
+     */
+    Tags?: InputTagList;
+  }
+  export interface StartDiscoveryJobResponse {
+    /**
+     * The ARN of the discovery job that you started.
+     */
+    DiscoveryJobArn?: DiscoveryJobArn;
+  }
   export interface StartTaskExecutionRequest {
     /**
      * Specifies the Amazon Resource Name (ARN) of the task that you want to start.
@@ -1764,6 +2531,27 @@ declare namespace DataSync {
      * The ARN of the running task execution.
      */
     TaskExecutionArn?: TaskExecutionArn;
+  }
+  export interface StopDiscoveryJobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that you want to stop. 
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+  }
+  export interface StopDiscoveryJobResponse {
+  }
+  export type StorageSystemArn = string;
+  export type StorageSystemConnectivityStatus = "PASS"|"FAIL"|"UNKNOWN"|string;
+  export type StorageSystemList = StorageSystemListEntry[];
+  export interface StorageSystemListEntry {
+    /**
+     * The Amazon Resource Names (ARN) of an on-premises storage system that you added to DataSync Discovery.
+     */
+    StorageSystemArn?: StorageSystemArn;
+    /**
+     * The name of an on-premises storage system that you added to DataSync Discovery.
+     */
+    Name?: Name;
   }
   export type StorageVirtualMachineArn = string;
   export type TagKey = string;
@@ -1883,7 +2671,26 @@ declare namespace DataSync {
     ScheduleExpression: ScheduleExpressionCron;
   }
   export type TaskStatus = "AVAILABLE"|"CREATING"|"QUEUED"|"RUNNING"|"UNAVAILABLE"|string;
+  export interface Throughput {
+    /**
+     * Peak throughput related to read operations.
+     */
+    Read?: NonNegativeDouble;
+    /**
+     * Peak throughput related to write operations.
+     */
+    Write?: NonNegativeDouble;
+    /**
+     * Peak throughput unrelated to read and write operations.
+     */
+    Other?: NonNegativeDouble;
+    /**
+     * Peak total throughput on your on-premises storage system resource.
+     */
+    Total?: NonNegativeDouble;
+  }
   export type Time = Date;
+  export type Timestamp = Date;
   export type TransferMode = "CHANGED"|"ALL"|string;
   export type Uid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
   export interface UntagResourceRequest {
@@ -1909,6 +2716,18 @@ declare namespace DataSync {
     Name?: TagValue;
   }
   export interface UpdateAgentResponse {
+  }
+  export interface UpdateDiscoveryJobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the discovery job that you want to update.
+     */
+    DiscoveryJobArn: DiscoveryJobArn;
+    /**
+     * Specifies in minutes how long that you want the discovery job to run. (You can't set this parameter to less than the number of minutes that the job has already run for.)
+     */
+    CollectionDurationMinutes: CollectionDurationMinutes;
+  }
+  export interface UpdateDiscoveryJobResponse {
   }
   export interface UpdateLocationHdfsRequest {
     /**
@@ -2045,9 +2864,37 @@ declare namespace DataSync {
   }
   export interface UpdateLocationSmbResponse {
   }
+  export interface UpdateStorageSystemRequest {
+    /**
+     * Specifies the ARN of the on-premises storage system that you want reconfigure.
+     */
+    StorageSystemArn: StorageSystemArn;
+    /**
+     * Specifies the server name and network port required to connect with your on-premises storage system's management interface.
+     */
+    ServerConfiguration?: DiscoveryServerConfiguration;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads your on-premises storage system.
+     */
+    AgentArns?: DiscoveryAgentArnList;
+    /**
+     * Specifies a familiar name for your on-premises storage system.
+     */
+    Name?: Name;
+    /**
+     * Specifies the ARN of the Amazon CloudWatch log group for monitoring and logging discovery job events.
+     */
+    CloudWatchLogGroupArn?: LogGroupArn;
+    /**
+     * Specifies the user name and password for accessing your on-premises storage system's management interface.
+     */
+    Credentials?: Credentials;
+  }
+  export interface UpdateStorageSystemResponse {
+  }
   export interface UpdateTaskExecutionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the specific task execution that is being updated. 
+     * Specifies the Amazon Resource Name (ARN) of the task execution that you're updating.
      */
     TaskExecutionArn: TaskExecutionArn;
     Options: Options;

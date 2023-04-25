@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1364.0-->
+<!--LATEST=2.1365.0-->
 <!--ENTRYINSERT-->
+
+## 2.1365.0
+* feature: ChimeSDKMessaging: Remove non actionable field from UpdateChannelReadMarker and DeleteChannelRequest.  Add precise exceptions to DeleteChannel and DeleteStreamingConfigurations error cases.
+* feature: Connect: Amazon Connect, Contact Lens Evaluation API release including ability to manage forms and to submit contact evaluations.
+* feature: DataSync: This release adds 13 new APIs to support AWS DataSync Discovery GA.
+* feature: DirectoryService: New field added in AWS Managed Microsoft AD DescribeSettings response and regex pattern update for UpdateSettings value.  Added length validation to RemoteDomainName.
+* feature: Pinpoint: Adds support for journey runs and querying journey execution metrics based on journey runs. Adds execution metrics to campaign activities. Updates docs for Advanced Quiet Time.
 
 ## 2.1364.0
 * feature: Appflow: Increased the max length for RefreshToken and AuthCode from 2048 to 4096.

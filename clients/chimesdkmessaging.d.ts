@@ -1214,10 +1214,6 @@ declare namespace ChimeSDKMessaging {
      * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
-    /**
-     * The ID of the SubChannel in the request.
-     */
-    SubChannelId?: SubChannelId;
   }
   export interface DeleteMessagingStreamingConfigurationsRequest {
     /**
@@ -2290,20 +2286,12 @@ declare namespace ChimeSDKMessaging {
      * The ARN of the AppInstanceUser or AppInstanceBot that makes the API call.
      */
     ChimeBearer: ChimeArn;
-    /**
-     * The ID of the SubChannel in the request.
-     */
-    SubChannelId?: SubChannelId;
   }
   export interface UpdateChannelReadMarkerResponse {
     /**
      * The ARN of the channel.
      */
     ChannelArn?: ChimeArn;
-    /**
-     * The ID of the SubChannel in the response.
-     */
-    SubChannelId?: SubChannelId;
   }
   export interface UpdateChannelRequest {
     /**

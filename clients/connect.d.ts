@@ -12,6 +12,14 @@ declare class Connect extends Service {
   constructor(options?: Connect.Types.ClientConfiguration)
   config: Config & Connect.Types.ClientConfiguration;
   /**
+   * Activates an evaluation form in the specified Amazon Connect instance. After the evaluation form is activated, it is available to start new evaluations based on the form. 
+   */
+  activateEvaluationForm(params: Connect.Types.ActivateEvaluationFormRequest, callback?: (err: AWSError, data: Connect.Types.ActivateEvaluationFormResponse) => void): Request<Connect.Types.ActivateEvaluationFormResponse, AWSError>;
+  /**
+   * Activates an evaluation form in the specified Amazon Connect instance. After the evaluation form is activated, it is available to start new evaluations based on the form. 
+   */
+  activateEvaluationForm(callback?: (err: AWSError, data: Connect.Types.ActivateEvaluationFormResponse) => void): Request<Connect.Types.ActivateEvaluationFormResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Associates an approved origin to an Amazon Connect instance.
    */
   associateApprovedOrigin(params: Connect.Types.AssociateApprovedOriginRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -123,6 +131,14 @@ declare class Connect extends Service {
    * Creates a flow module for the specified Amazon Connect instance. 
    */
   createContactFlowModule(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowModuleResponse) => void): Request<Connect.Types.CreateContactFlowModuleResponse, AWSError>;
+  /**
+   * Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form.
+   */
+  createEvaluationForm(params: Connect.Types.CreateEvaluationFormRequest, callback?: (err: AWSError, data: Connect.Types.CreateEvaluationFormResponse) => void): Request<Connect.Types.CreateEvaluationFormResponse, AWSError>;
+  /**
+   * Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form.
+   */
+  createEvaluationForm(callback?: (err: AWSError, data: Connect.Types.CreateEvaluationFormResponse) => void): Request<Connect.Types.CreateEvaluationFormResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Creates hours of operation. 
    */
@@ -244,6 +260,22 @@ declare class Connect extends Service {
    */
   createVocabulary(callback?: (err: AWSError, data: Connect.Types.CreateVocabularyResponse) => void): Request<Connect.Types.CreateVocabularyResponse, AWSError>;
   /**
+   * Deactivates an evaluation form in the specified Amazon Connect instance. After a form is deactivated, it is no longer available for users to start new evaluations based on the form. 
+   */
+  deactivateEvaluationForm(params: Connect.Types.DeactivateEvaluationFormRequest, callback?: (err: AWSError, data: Connect.Types.DeactivateEvaluationFormResponse) => void): Request<Connect.Types.DeactivateEvaluationFormResponse, AWSError>;
+  /**
+   * Deactivates an evaluation form in the specified Amazon Connect instance. After a form is deactivated, it is no longer available for users to start new evaluations based on the form. 
+   */
+  deactivateEvaluationForm(callback?: (err: AWSError, data: Connect.Types.DeactivateEvaluationFormResponse) => void): Request<Connect.Types.DeactivateEvaluationFormResponse, AWSError>;
+  /**
+   * Deletes a contact evaluation in the specified Amazon Connect instance.
+   */
+  deleteContactEvaluation(params: Connect.Types.DeleteContactEvaluationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a contact evaluation in the specified Amazon Connect instance.
+   */
+  deleteContactEvaluation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a flow for the specified Amazon Connect instance.
    */
   deleteContactFlow(params: Connect.Types.DeleteContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.DeleteContactFlowResponse) => void): Request<Connect.Types.DeleteContactFlowResponse, AWSError>;
@@ -259,6 +291,14 @@ declare class Connect extends Service {
    * Deletes the specified flow module.
    */
   deleteContactFlowModule(callback?: (err: AWSError, data: Connect.Types.DeleteContactFlowModuleResponse) => void): Request<Connect.Types.DeleteContactFlowModuleResponse, AWSError>;
+  /**
+   * Deletes an evaluation form in the specified Amazon Connect instance.    If the version property is provided, only the specified version of the evaluation form is deleted.   If no version is provided, then the full form (all versions) is deleted.  
+   */
+  deleteEvaluationForm(params: Connect.Types.DeleteEvaluationFormRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an evaluation form in the specified Amazon Connect instance.    If the version property is provided, only the specified version of the evaluation form is deleted.   If no version is provided, then the full form (all versions) is deleted.  
+   */
+  deleteEvaluationForm(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Deletes an hours of operation.
    */
@@ -372,6 +412,14 @@ declare class Connect extends Service {
    */
   describeContact(callback?: (err: AWSError, data: Connect.Types.DescribeContactResponse) => void): Request<Connect.Types.DescribeContactResponse, AWSError>;
   /**
+   * Describes a contact evaluation in the specified Amazon Connect instance.
+   */
+  describeContactEvaluation(params: Connect.Types.DescribeContactEvaluationRequest, callback?: (err: AWSError, data: Connect.Types.DescribeContactEvaluationResponse) => void): Request<Connect.Types.DescribeContactEvaluationResponse, AWSError>;
+  /**
+   * Describes a contact evaluation in the specified Amazon Connect instance.
+   */
+  describeContactEvaluation(callback?: (err: AWSError, data: Connect.Types.DescribeContactEvaluationResponse) => void): Request<Connect.Types.DescribeContactEvaluationResponse, AWSError>;
+  /**
    * Describes the specified flow. You can also create and update flows using the Amazon Connect Flow language.
    */
   describeContactFlow(params: Connect.Types.DescribeContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowResponse) => void): Request<Connect.Types.DescribeContactFlowResponse, AWSError>;
@@ -387,6 +435,14 @@ declare class Connect extends Service {
    * Describes the specified flow module.
    */
   describeContactFlowModule(callback?: (err: AWSError, data: Connect.Types.DescribeContactFlowModuleResponse) => void): Request<Connect.Types.DescribeContactFlowModuleResponse, AWSError>;
+  /**
+   * Describes an evaluation form in the specified Amazon Connect instance. If the version property is not provided, the latest version of the evaluation form is described.
+   */
+  describeEvaluationForm(params: Connect.Types.DescribeEvaluationFormRequest, callback?: (err: AWSError, data: Connect.Types.DescribeEvaluationFormResponse) => void): Request<Connect.Types.DescribeEvaluationFormResponse, AWSError>;
+  /**
+   * Describes an evaluation form in the specified Amazon Connect instance. If the version property is not provided, the latest version of the evaluation form is described.
+   */
+  describeEvaluationForm(callback?: (err: AWSError, data: Connect.Types.DescribeEvaluationFormResponse) => void): Request<Connect.Types.DescribeEvaluationFormResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Describes the hours of operation.
    */
@@ -676,6 +732,14 @@ declare class Connect extends Service {
    */
   listBots(callback?: (err: AWSError, data: Connect.Types.ListBotsResponse) => void): Request<Connect.Types.ListBotsResponse, AWSError>;
   /**
+   * Lists contact evaluations in the specified Amazon Connect instance.
+   */
+  listContactEvaluations(params: Connect.Types.ListContactEvaluationsRequest, callback?: (err: AWSError, data: Connect.Types.ListContactEvaluationsResponse) => void): Request<Connect.Types.ListContactEvaluationsResponse, AWSError>;
+  /**
+   * Lists contact evaluations in the specified Amazon Connect instance.
+   */
+  listContactEvaluations(callback?: (err: AWSError, data: Connect.Types.ListContactEvaluationsResponse) => void): Request<Connect.Types.ListContactEvaluationsResponse, AWSError>;
+  /**
    * Provides information about the flow modules for the specified Amazon Connect instance.
    */
   listContactFlowModules(params: Connect.Types.ListContactFlowModulesRequest, callback?: (err: AWSError, data: Connect.Types.ListContactFlowModulesResponse) => void): Request<Connect.Types.ListContactFlowModulesResponse, AWSError>;
@@ -707,6 +771,22 @@ declare class Connect extends Service {
    * Lists the default vocabularies for the specified Amazon Connect instance.
    */
   listDefaultVocabularies(callback?: (err: AWSError, data: Connect.Types.ListDefaultVocabulariesResponse) => void): Request<Connect.Types.ListDefaultVocabulariesResponse, AWSError>;
+  /**
+   * Lists versions of an evaluation form in the specified Amazon Connect instance.
+   */
+  listEvaluationFormVersions(params: Connect.Types.ListEvaluationFormVersionsRequest, callback?: (err: AWSError, data: Connect.Types.ListEvaluationFormVersionsResponse) => void): Request<Connect.Types.ListEvaluationFormVersionsResponse, AWSError>;
+  /**
+   * Lists versions of an evaluation form in the specified Amazon Connect instance.
+   */
+  listEvaluationFormVersions(callback?: (err: AWSError, data: Connect.Types.ListEvaluationFormVersionsResponse) => void): Request<Connect.Types.ListEvaluationFormVersionsResponse, AWSError>;
+  /**
+   * Lists evaluation forms in the specified Amazon Connect instance.
+   */
+  listEvaluationForms(params: Connect.Types.ListEvaluationFormsRequest, callback?: (err: AWSError, data: Connect.Types.ListEvaluationFormsResponse) => void): Request<Connect.Types.ListEvaluationFormsResponse, AWSError>;
+  /**
+   * Lists evaluation forms in the specified Amazon Connect instance.
+   */
+  listEvaluationForms(callback?: (err: AWSError, data: Connect.Types.ListEvaluationFormsResponse) => void): Request<Connect.Types.ListEvaluationFormsResponse, AWSError>;
   /**
    * Provides information about the hours of operation for the specified Amazon Connect instance. For more information about hours of operation, see Set the Hours of Operation for a Queue in the Amazon Connect Administrator Guide.
    */
@@ -1004,6 +1084,14 @@ declare class Connect extends Service {
    */
   startChatContact(callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
+   * Starts an empty evaluation in the specified Amazon Connect instance, using the given evaluation form for the particular contact. The evaluation form version used for the contact evaluation corresponds to the currently activated version. If no version is activated for the evaluation form, the contact evaluation cannot be started.   Evaluations created through the public API do not contain answer values suggested from automation. 
+   */
+  startContactEvaluation(params: Connect.Types.StartContactEvaluationRequest, callback?: (err: AWSError, data: Connect.Types.StartContactEvaluationResponse) => void): Request<Connect.Types.StartContactEvaluationResponse, AWSError>;
+  /**
+   * Starts an empty evaluation in the specified Amazon Connect instance, using the given evaluation form for the particular contact. The evaluation form version used for the contact evaluation corresponds to the currently activated version. If no version is activated for the evaluation form, the contact evaluation cannot be started.   Evaluations created through the public API do not contain answer values suggested from automation. 
+   */
+  startContactEvaluation(callback?: (err: AWSError, data: Connect.Types.StartContactEvaluationResponse) => void): Request<Connect.Types.StartContactEvaluationResponse, AWSError>;
+  /**
    * Starts recording the contact:    If the API is called before the agent joins the call, recording starts when the agent joins the call.   If the API is called after the agent joins the call, recording starts at the time of the API call.   StartContactRecording is a one-time action. For example, if you use StopContactRecording to stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios where the recording has started and you want to suspend and resume it, such as when collecting sensitive information (for example, a credit card number), use SuspendContactRecording and ResumeContactRecording. You can use this API to override the recording behavior configured in the Set recording behavior block. Only voice recordings are supported at this time.
    */
   startContactRecording(params: Connect.Types.StartContactRecordingRequest, callback?: (err: AWSError, data: Connect.Types.StartContactRecordingResponse) => void): Request<Connect.Types.StartContactRecordingResponse, AWSError>;
@@ -1059,6 +1147,14 @@ declare class Connect extends Service {
    *  Ends message streaming on a specified contact. To restart message streaming on that contact, call the StartContactStreaming API. 
    */
   stopContactStreaming(callback?: (err: AWSError, data: Connect.Types.StopContactStreamingResponse) => void): Request<Connect.Types.StopContactStreamingResponse, AWSError>;
+  /**
+   * Submits a contact evaluation in the specified Amazon Connect instance. Answers included in the request are merged with existing answers for the given evaluation. If no answers or notes are passed, the evaluation is submitted with the existing answers and notes. You can delete an answer or note by passing an empty object ({}) to the question identifier.  If a contact evaluation is already in submitted state, this operation will trigger a resubmission.
+   */
+  submitContactEvaluation(params: Connect.Types.SubmitContactEvaluationRequest, callback?: (err: AWSError, data: Connect.Types.SubmitContactEvaluationResponse) => void): Request<Connect.Types.SubmitContactEvaluationResponse, AWSError>;
+  /**
+   * Submits a contact evaluation in the specified Amazon Connect instance. Answers included in the request are merged with existing answers for the given evaluation. If no answers or notes are passed, the evaluation is submitted with the existing answers and notes. You can delete an answer or note by passing an empty object ({}) to the question identifier.  If a contact evaluation is already in submitted state, this operation will trigger a resubmission.
+   */
+  submitContactEvaluation(callback?: (err: AWSError, data: Connect.Types.SubmitContactEvaluationResponse) => void): Request<Connect.Types.SubmitContactEvaluationResponse, AWSError>;
   /**
    * When a contact is being recorded, this API suspends recording the call. For example, you might suspend the call recording while collecting sensitive information, such as a credit card number. Then use ResumeContactRecording to restart recording.  The period of time that the recording is suspended is filled with silence in the final recording.  Only voice recordings are supported at this time.
    */
@@ -1116,6 +1212,14 @@ declare class Connect extends Service {
    */
   updateContactAttributes(callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
+   * Updates details about a contact evaluation in the specified Amazon Connect instance. A contact evaluation must be in draft state. Answers included in the request are merged with existing answers for the given evaluation. An answer or note can be deleted by passing an empty object ({}) to the question identifier. 
+   */
+  updateContactEvaluation(params: Connect.Types.UpdateContactEvaluationRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactEvaluationResponse) => void): Request<Connect.Types.UpdateContactEvaluationResponse, AWSError>;
+  /**
+   * Updates details about a contact evaluation in the specified Amazon Connect instance. A contact evaluation must be in draft state. Answers included in the request are merged with existing answers for the given evaluation. An answer or note can be deleted by passing an empty object ({}) to the question identifier. 
+   */
+  updateContactEvaluation(callback?: (err: AWSError, data: Connect.Types.UpdateContactEvaluationResponse) => void): Request<Connect.Types.UpdateContactEvaluationResponse, AWSError>;
+  /**
    * Updates the specified flow. You can also create and update flows using the Amazon Connect Flow language.
    */
   updateContactFlowContent(params: Connect.Types.UpdateContactFlowContentRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactFlowContentResponse) => void): Request<Connect.Types.UpdateContactFlowContentResponse, AWSError>;
@@ -1163,6 +1267,14 @@ declare class Connect extends Service {
    * Updates the scheduled time of a task contact that is already scheduled.
    */
   updateContactSchedule(callback?: (err: AWSError, data: Connect.Types.UpdateContactScheduleResponse) => void): Request<Connect.Types.UpdateContactScheduleResponse, AWSError>;
+  /**
+   * Updates details about a specific evaluation form version in the specified Amazon Connect instance. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form. This operation does not support partial updates. Instead it does a full update of evaluation form content.
+   */
+  updateEvaluationForm(params: Connect.Types.UpdateEvaluationFormRequest, callback?: (err: AWSError, data: Connect.Types.UpdateEvaluationFormResponse) => void): Request<Connect.Types.UpdateEvaluationFormResponse, AWSError>;
+  /**
+   * Updates details about a specific evaluation form version in the specified Amazon Connect instance. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form. This operation does not support partial updates. Instead it does a full update of evaluation form content.
+   */
+  updateEvaluationForm(callback?: (err: AWSError, data: Connect.Types.UpdateEvaluationFormResponse) => void): Request<Connect.Types.UpdateEvaluationFormResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation.
    */
@@ -1390,6 +1502,34 @@ declare namespace Connect {
     ActionType: ActionType;
   }
   export type ActionType = "CREATE_TASK"|"ASSIGN_CONTACT_CATEGORY"|"GENERATE_EVENTBRIDGE_EVENT"|"SEND_NOTIFICATION"|string;
+  export interface ActivateEvaluationFormRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The version of the evaluation form to activate. If the version property is not provided, the latest version of the evaluation form is activated.
+     */
+    EvaluationFormVersion: VersionNumber;
+  }
+  export interface ActivateEvaluationFormResponse {
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the evaluation form resource.
+     */
+    EvaluationFormArn: ARN;
+    /**
+     * A version of the evaluation form.
+     */
+    EvaluationFormVersion: VersionNumber;
+  }
   export type AfterContactWorkTimeLimit = number;
   export interface AgentContactReference {
     /**
@@ -1708,6 +1848,7 @@ declare namespace Connect {
   export type BehaviorType = "ROUTE_CURRENT_CHANNEL_ONLY"|"ROUTE_ANY_CHANNEL"|string;
   export type Boolean = boolean;
   export type BotName = string;
+  export type BoxedBoolean = boolean;
   export type BucketName = string;
   export type CampaignId = string;
   export type Channel = "VOICE"|"CHAT"|"TASK"|string;
@@ -2135,6 +2276,42 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the flow.
      */
     ContactFlowArn?: ARN;
+  }
+  export interface CreateEvaluationFormRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique title of the evaluation form.
+     */
+    Title: EvaluationFormTitle;
+    /**
+     * The description of the evaluation form.
+     */
+    Description?: EvaluationFormDescription;
+    /**
+     * Items that are part of the evaluation form. The total number of sections and questions must not exceed 100 each. Questions must be contained in a section.
+     */
+    Items: EvaluationFormItemsList;
+    /**
+     * A scoring strategy of the evaluation form.
+     */
+    ScoringStrategy?: EvaluationFormScoringStrategy;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreateEvaluationFormResponse {
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the evaluation form resource.
+     */
+    EvaluationFormArn: ARN;
   }
   export interface CreateHoursOfOperationRequest {
     /**
@@ -2777,6 +2954,34 @@ declare namespace Connect {
      */
     Value?: ReferenceValue;
   }
+  export interface DeactivateEvaluationFormRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * A version of the evaluation form. If the version property is not provided, the latest version of the evaluation form is deactivated.
+     */
+    EvaluationFormVersion: VersionNumber;
+  }
+  export interface DeactivateEvaluationFormResponse {
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the evaluation form resource.
+     */
+    EvaluationFormArn: ARN;
+    /**
+     * The version of the deactivated evaluation form resource.
+     */
+    EvaluationFormVersion: VersionNumber;
+  }
   export interface DefaultVocabulary {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -2797,6 +3002,16 @@ declare namespace Connect {
   }
   export type DefaultVocabularyList = DefaultVocabulary[];
   export type Delay = number;
+  export interface DeleteContactEvaluationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+  }
   export interface DeleteContactFlowModuleRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -2820,6 +3035,20 @@ declare namespace Connect {
     ContactFlowId: ContactFlowId;
   }
   export interface DeleteContactFlowResponse {
+  }
+  export interface DeleteEvaluationFormRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormVersion?: VersionNumber;
   }
   export interface DeleteHoursOfOperationRequest {
     /**
@@ -2971,6 +3200,26 @@ declare namespace Connect {
      */
     AgentStatus?: AgentStatus;
   }
+  export interface DescribeContactEvaluationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+  }
+  export interface DescribeContactEvaluationResponse {
+    /**
+     * Information about the evaluation form completed for a specific contact.
+     */
+    Evaluation: Evaluation;
+    /**
+     * Information about the evaluation form.
+     */
+    EvaluationForm: EvaluationFormContent;
+  }
   export interface DescribeContactFlowModuleRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -3018,6 +3267,26 @@ declare namespace Connect {
      * Information about the contact.
      */
     Contact?: Contact;
+  }
+  export interface DescribeEvaluationFormRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * A version of the evaluation form.
+     */
+    EvaluationFormVersion?: VersionNumber;
+  }
+  export interface DescribeEvaluationFormResponse {
+    /**
+     * Information about the evaluation form.
+     */
+    EvaluationForm: EvaluationForm;
   }
   export interface DescribeHoursOfOperationRequest {
     /**
@@ -3424,6 +3693,528 @@ declare namespace Connect {
     KeyId: KeyId;
   }
   export type EncryptionType = "KMS"|string;
+  export interface Evaluation {
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the contact evaluation resource.
+     */
+    EvaluationArn: ARN;
+    /**
+     * Metadata about the contact evaluation.
+     */
+    Metadata: EvaluationMetadata;
+    /**
+     * A map of question identifiers to answer value.
+     */
+    Answers: EvaluationAnswersOutputMap;
+    /**
+     * A map of question identifiers to note value.
+     */
+    Notes: EvaluationNotesMap;
+    /**
+     * The status of the contact evaluation.
+     */
+    Status: EvaluationStatus;
+    /**
+     * A map of item (section or question) identifiers to score value.
+     */
+    Scores?: EvaluationScoresMap;
+    /**
+     * The timestamp for when the evaluation was created.
+     */
+    CreatedTime: Timestamp;
+    /**
+     * The timestamp for when the evaluation was last updated.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
+  export interface EvaluationAnswerData {
+    /**
+     * The string value for an answer in a contact evaluation.
+     */
+    StringValue?: EvaluationAnswerDataStringValue;
+    /**
+     * The numeric value for an answer in a contact evaluation.
+     */
+    NumericValue?: EvaluationAnswerDataNumericValue;
+    /**
+     * The flag to mark the question as not applicable.
+     */
+    NotApplicable?: Boolean;
+  }
+  export type EvaluationAnswerDataNumericValue = number;
+  export type EvaluationAnswerDataStringValue = string;
+  export interface EvaluationAnswerInput {
+    /**
+     * The value for an answer in a contact evaluation.
+     */
+    Value?: EvaluationAnswerData;
+  }
+  export interface EvaluationAnswerOutput {
+    /**
+     * The value for an answer in a contact evaluation.
+     */
+    Value?: EvaluationAnswerData;
+    /**
+     * The system suggested value for an answer in a contact evaluation.
+     */
+    SystemSuggestedValue?: EvaluationAnswerData;
+  }
+  export type EvaluationAnswersInputMap = {[key: string]: EvaluationAnswerInput};
+  export type EvaluationAnswersOutputMap = {[key: string]: EvaluationAnswerOutput};
+  export interface EvaluationForm {
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * A version of the evaluation form.
+     */
+    EvaluationFormVersion: VersionNumber;
+    /**
+     * The flag indicating whether the evaluation form is locked for changes.
+     */
+    Locked: EvaluationFormVersionIsLocked;
+    /**
+     * The Amazon Resource Name (ARN) for the evaluation form resource.
+     */
+    EvaluationFormArn: ARN;
+    /**
+     * A unique title of the evaluation form.
+     */
+    Title: EvaluationFormTitle;
+    /**
+     * The description of the evaluation form.
+     */
+    Description?: EvaluationFormDescription;
+    /**
+     * The status of the evaluation form.
+     */
+    Status: EvaluationFormVersionStatus;
+    /**
+     * Items that are part of the evaluation form. The total number of sections and questions must not exceed 100 each. Questions must be contained in a section.
+     */
+    Items: EvaluationFormItemsList;
+    /**
+     * A scoring strategy of the evaluation form.
+     */
+    ScoringStrategy?: EvaluationFormScoringStrategy;
+    /**
+     * The timestamp for when the evaluation form was created.
+     */
+    CreatedTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the user who created the evaluation form.
+     */
+    CreatedBy: ARN;
+    /**
+     * The timestamp for when the evaluation form was last updated.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the evaluation form.
+     */
+    LastModifiedBy: ARN;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
+  export interface EvaluationFormContent {
+    /**
+     * A version of the evaluation form.
+     */
+    EvaluationFormVersion: VersionNumber;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the evaluation form resource.
+     */
+    EvaluationFormArn: ARN;
+    /**
+     * A unique title of the evaluation form.
+     */
+    Title: EvaluationFormTitle;
+    /**
+     * The description of the evaluation form.
+     */
+    Description?: EvaluationFormDescription;
+    /**
+     * Items that are part of the evaluation form. The total number of sections and questions must not exceed 100 each. Questions must be contained in a section.
+     */
+    Items: EvaluationFormItemsList;
+    /**
+     * A scoring strategy of the evaluation form.
+     */
+    ScoringStrategy?: EvaluationFormScoringStrategy;
+  }
+  export type EvaluationFormDescription = string;
+  export interface EvaluationFormItem {
+    /**
+     * The information of the section.
+     */
+    Section?: EvaluationFormSection;
+    /**
+     * The information of the question.
+     */
+    Question?: EvaluationFormQuestion;
+  }
+  export type EvaluationFormItemWeight = number;
+  export type EvaluationFormItemsList = EvaluationFormItem[];
+  export interface EvaluationFormNumericQuestionAutomation {
+    /**
+     * The property value of the automation.
+     */
+    PropertyValue?: NumericQuestionPropertyValueAutomation;
+  }
+  export interface EvaluationFormNumericQuestionOption {
+    /**
+     * The minimum answer value of the range option.
+     */
+    MinValue: Integer;
+    /**
+     * The maximum answer value of the range option.
+     */
+    MaxValue: Integer;
+    /**
+     * The score assigned to answer values within the range option.
+     */
+    Score?: EvaluationFormQuestionAnswerScore;
+    /**
+     * The flag to mark the option as automatic fail. If an automatic fail answer is provided, the overall evaluation gets a score of 0.
+     */
+    AutomaticFail?: Boolean;
+  }
+  export type EvaluationFormNumericQuestionOptionList = EvaluationFormNumericQuestionOption[];
+  export interface EvaluationFormNumericQuestionProperties {
+    /**
+     * The minimum answer value.
+     */
+    MinValue: Integer;
+    /**
+     * The maximum answer value.
+     */
+    MaxValue: Integer;
+    /**
+     * The scoring options of the numeric question.
+     */
+    Options?: EvaluationFormNumericQuestionOptionList;
+    /**
+     * The automation properties of the numeric question.
+     */
+    Automation?: EvaluationFormNumericQuestionAutomation;
+  }
+  export interface EvaluationFormQuestion {
+    /**
+     * The title of the question.
+     */
+    Title: EvaluationFormQuestionTitle;
+    /**
+     * The instructions of the section.
+     */
+    Instructions?: EvaluationFormQuestionInstructions;
+    /**
+     * The identifier of the question. An identifier must be unique within the evaluation form.
+     */
+    RefId: ReferenceId;
+    /**
+     * The flag to enable not applicable answers to the question.
+     */
+    NotApplicableEnabled?: Boolean;
+    /**
+     * The type of the question.
+     */
+    QuestionType: EvaluationFormQuestionType;
+    /**
+     * The properties of the type of question. Text questions do not have to define question type properties.
+     */
+    QuestionTypeProperties?: EvaluationFormQuestionTypeProperties;
+    /**
+     * The scoring weight of the section.
+     */
+    Weight?: EvaluationFormItemWeight;
+  }
+  export type EvaluationFormQuestionAnswerScore = number;
+  export type EvaluationFormQuestionInstructions = string;
+  export type EvaluationFormQuestionTitle = string;
+  export type EvaluationFormQuestionType = "TEXT"|"SINGLESELECT"|"NUMERIC"|string;
+  export interface EvaluationFormQuestionTypeProperties {
+    /**
+     * The properties of the numeric question.
+     */
+    Numeric?: EvaluationFormNumericQuestionProperties;
+    /**
+     * The properties of the numeric question.
+     */
+    SingleSelect?: EvaluationFormSingleSelectQuestionProperties;
+  }
+  export type EvaluationFormScoringMode = "QUESTION_ONLY"|"SECTION_ONLY"|string;
+  export type EvaluationFormScoringStatus = "ENABLED"|"DISABLED"|string;
+  export interface EvaluationFormScoringStrategy {
+    /**
+     * The scoring mode of the evaluation form.
+     */
+    Mode: EvaluationFormScoringMode;
+    /**
+     * The scoring status of the evaluation form.
+     */
+    Status: EvaluationFormScoringStatus;
+  }
+  export interface EvaluationFormSection {
+    /**
+     * The title of the section.
+     */
+    Title: EvaluationFormSectionTitle;
+    /**
+     * The identifier of the section. An identifier must be unique within the evaluation form.
+     */
+    RefId: ReferenceId;
+    /**
+     * The instructions of the section.
+     */
+    Instructions?: EvaluationFormQuestionInstructions;
+    /**
+     * The items of the section.
+     */
+    Items?: EvaluationFormItemsList;
+    /**
+     * The scoring weight of the section.
+     */
+    Weight?: EvaluationFormItemWeight;
+  }
+  export type EvaluationFormSectionTitle = string;
+  export interface EvaluationFormSingleSelectQuestionAutomation {
+    /**
+     * The automation options of the single select question.
+     */
+    Options: EvaluationFormSingleSelectQuestionAutomationOptionList;
+    /**
+     * The identifier of the default answer option, when none of the automation options match the criteria.
+     */
+    DefaultOptionRefId?: ReferenceId;
+  }
+  export interface EvaluationFormSingleSelectQuestionAutomationOption {
+    /**
+     * The automation option based on a rule category for the single select question.
+     */
+    RuleCategory?: SingleSelectQuestionRuleCategoryAutomation;
+  }
+  export type EvaluationFormSingleSelectQuestionAutomationOptionList = EvaluationFormSingleSelectQuestionAutomationOption[];
+  export type EvaluationFormSingleSelectQuestionDisplayMode = "DROPDOWN"|"RADIO"|string;
+  export interface EvaluationFormSingleSelectQuestionOption {
+    /**
+     * The identifier of the answer option. An identifier must be unique within the question.
+     */
+    RefId: ReferenceId;
+    /**
+     * The title of the answer option.
+     */
+    Text: EvaluationFormSingleSelectQuestionOptionText;
+    /**
+     * The score assigned to the answer option.
+     */
+    Score?: EvaluationFormQuestionAnswerScore;
+    /**
+     * The flag to mark the option as automatic fail. If an automatic fail answer is provided, the overall evaluation gets a score of 0.
+     */
+    AutomaticFail?: Boolean;
+  }
+  export type EvaluationFormSingleSelectQuestionOptionList = EvaluationFormSingleSelectQuestionOption[];
+  export type EvaluationFormSingleSelectQuestionOptionText = string;
+  export interface EvaluationFormSingleSelectQuestionProperties {
+    /**
+     * The answer options of the single select question.
+     */
+    Options: EvaluationFormSingleSelectQuestionOptionList;
+    /**
+     * The display mode of the single select question.
+     */
+    DisplayAs?: EvaluationFormSingleSelectQuestionDisplayMode;
+    /**
+     * The display mode of the single select question.
+     */
+    Automation?: EvaluationFormSingleSelectQuestionAutomation;
+  }
+  export interface EvaluationFormSummary {
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the evaluation form resource.
+     */
+    EvaluationFormArn: ARN;
+    /**
+     * A unique title of the evaluation form.
+     */
+    Title: EvaluationFormTitle;
+    /**
+     * The timestamp for when the evaluation form was created.
+     */
+    CreatedTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the user who created the evaluation form.
+     */
+    CreatedBy: ARN;
+    /**
+     * The timestamp for when the evaluation form was last updated.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the evaluation form.
+     */
+    LastModifiedBy: ARN;
+    /**
+     * The timestamp for when the evaluation form was last activated.
+     */
+    LastActivatedTime?: Timestamp;
+    /**
+     *  The Amazon Resource Name (ARN) of the user who last activated the evaluation form.
+     */
+    LastActivatedBy?: ARN;
+    /**
+     * The version number of the latest evaluation form version.
+     */
+    LatestVersion: VersionNumber;
+    /**
+     * The version of the active evaluation form version.
+     */
+    ActiveVersion?: VersionNumber;
+  }
+  export type EvaluationFormSummaryList = EvaluationFormSummary[];
+  export type EvaluationFormTitle = string;
+  export type EvaluationFormVersionIsLocked = boolean;
+  export type EvaluationFormVersionStatus = "DRAFT"|"ACTIVE"|string;
+  export interface EvaluationFormVersionSummary {
+    /**
+     * The Amazon Resource Name (ARN) for the evaluation form resource.
+     */
+    EvaluationFormArn: ARN;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * A version of the evaluation form.
+     */
+    EvaluationFormVersion: VersionNumber;
+    /**
+     * The flag indicating whether the evaluation form is locked for changes.
+     */
+    Locked: EvaluationFormVersionIsLocked;
+    /**
+     * The status of the evaluation form.
+     */
+    Status: EvaluationFormVersionStatus;
+    /**
+     * The timestamp for when the evaluation form was created.
+     */
+    CreatedTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the user who created the evaluation form.
+     */
+    CreatedBy: ARN;
+    /**
+     * The timestamp for when the evaluation form was last updated.
+     */
+    LastModifiedTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the evaluation form.
+     */
+    LastModifiedBy: ARN;
+  }
+  export type EvaluationFormVersionSummaryList = EvaluationFormVersionSummary[];
+  export interface EvaluationMetadata {
+    /**
+     * The identifier of the contact in this instance of Amazon Connect. 
+     */
+    ContactId: ContactId;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the evaluation.
+     */
+    EvaluatorArn: ARN;
+    /**
+     * The identifier of the agent who performed the contact.
+     */
+    ContactAgentId?: ResourceId;
+    /**
+     * The overall score of the contact evaluation.
+     */
+    Score?: EvaluationScore;
+  }
+  export interface EvaluationNote {
+    /**
+     * The note for an item (section or question) in a contact evaluation.
+     */
+    Value?: EvaluationNoteString;
+  }
+  export type EvaluationNoteString = string;
+  export type EvaluationNotesMap = {[key: string]: EvaluationNote};
+  export interface EvaluationScore {
+    /**
+     * The score percentage for an item in a contact evaluation.
+     */
+    Percentage?: EvaluationScorePercentage;
+    /**
+     * The flag to mark the item as not applicable for scoring.
+     */
+    NotApplicable?: Boolean;
+    /**
+     * The flag that marks the item as automatic fail. If the item or a child item gets an automatic fail answer, this flag will be true.
+     */
+    AutomaticFail?: Boolean;
+  }
+  export type EvaluationScorePercentage = number;
+  export type EvaluationScoresMap = {[key: string]: EvaluationScore};
+  export type EvaluationStatus = "DRAFT"|"SUBMITTED"|string;
+  export interface EvaluationSummary {
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the contact evaluation resource.
+     */
+    EvaluationArn: ARN;
+    /**
+     * A unique title of the evaluation form.
+     */
+    EvaluationFormTitle: EvaluationFormTitle;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The status of the contact evaluation.
+     */
+    Status: EvaluationStatus;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the evaluation.
+     */
+    EvaluatorArn: ARN;
+    /**
+     * The overall score of the contact evaluation.
+     */
+    Score?: EvaluationScore;
+    /**
+     * The timestamp for when the evaluation was created.
+     */
+    CreatedTime: Timestamp;
+    /**
+     * The timestamp for when the evaluation was last updated.
+     */
+    LastModifiedTime: Timestamp;
+  }
+  export type EvaluationSummaryList = EvaluationSummary[];
   export interface EventBridgeActionDefinition {
     /**
      * The name.
@@ -4175,6 +4966,7 @@ declare namespace Connect {
     OutboundCallsEnabled?: OutboundCallsEnabled;
   }
   export type InstanceSummaryList = InstanceSummary[];
+  export type Integer = number;
   export type IntegerCount = number;
   export type IntegrationAssociationId = string;
   export interface IntegrationAssociationSummary {
@@ -4355,6 +5147,30 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListContactEvaluationsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact in this instance of Amazon Connect. 
+     */
+    ContactId: ContactId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.  This is not expected to be set because the value returned in the previous response is always null. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListContactEvaluationsResponse {
+    /**
+     * Provides details about a list of contact evaluations belonging to an instance.
+     */
+    EvaluationSummaryList: EvaluationSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.  This is always returned as null in the response. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListContactFlowModulesRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -4466,6 +5282,58 @@ declare namespace Connect {
      * If there are additional results, this is the token for the next set of results.
      */
     NextToken?: VocabularyNextToken;
+  }
+  export interface ListEvaluationFormVersionsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListEvaluationFormVersionsResponse {
+    /**
+     * Provides details about a list of evaluation forms belonging to an instance.
+     */
+    EvaluationFormVersionSummaryList: EvaluationFormVersionSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListEvaluationFormsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListEvaluationFormsResponse {
+    /**
+     * Provides details about a list of evaluation forms belonging to an instance.
+     */
+    EvaluationFormSummaryList: EvaluationFormSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
   }
   export interface ListHoursOfOperationsRequest {
     /**
@@ -5279,6 +6147,13 @@ declare namespace Connect {
      */
     Value?: ReferenceValue;
   }
+  export type NumericQuestionPropertyAutomationLabel = "OVERALL_CUSTOMER_SENTIMENT_SCORE"|"OVERALL_AGENT_SENTIMENT_SCORE"|"NON_TALK_TIME"|"NON_TALK_TIME_PERCENTAGE"|"NUMBER_OF_INTERRUPTIONS"|"CONTACT_DURATION"|"AGENT_INTERACTION_DURATION"|"CUSTOMER_HOLD_TIME"|string;
+  export interface NumericQuestionPropertyValueAutomation {
+    /**
+     * The property label of the automation.
+     */
+    Label: NumericQuestionPropertyAutomationLabel;
+  }
   export type Origin = string;
   export type OriginsList = Origin[];
   export interface OutboundCallerConfig {
@@ -5654,6 +6529,7 @@ declare namespace Connect {
      */
     Type: ReferenceType;
   }
+  export type ReferenceId = string;
   export type ReferenceKey = string;
   export type ReferenceStatus = "APPROVED"|"REJECTED"|string;
   export interface ReferenceSummary {
@@ -5733,6 +6609,7 @@ declare namespace Connect {
   }
   export type RequiredTaskTemplateFields = RequiredFieldInfo[];
   export type ResourceArnOrId = string;
+  export type ResourceId = string;
   export interface ResumeContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -6372,6 +7249,22 @@ declare namespace Connect {
     Recipient: NotificationRecipientType;
   }
   export type SingleSelectOptions = TaskTemplateSingleSelectOption[];
+  export interface SingleSelectQuestionRuleCategoryAutomation {
+    /**
+     *  The category name, as defined in Rules.
+     */
+    Category: SingleSelectQuestionRuleCategoryAutomationLabel;
+    /**
+     * The condition to apply for the automation option. If the condition is PRESENT, then the option is applied when the contact data includes the category. Similarly, if the condition is NOT_PRESENT, then the option is applied when the contact data does not include the category.
+     */
+    Condition: SingleSelectQuestionRuleCategoryAutomationCondition;
+    /**
+     * The identifier of the answer option tha
+     */
+    OptionRefId: ReferenceId;
+  }
+  export type SingleSelectQuestionRuleCategoryAutomationCondition = "PRESENT"|"NOT_PRESENT"|string;
+  export type SingleSelectQuestionRuleCategoryAutomationLabel = string;
   export type SnapshotVersion = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SourceApplicationName = string;
@@ -6435,6 +7328,34 @@ declare namespace Connect {
      * The contactId from which a persistent chat session is started. This field is populated only for persistent chats.
      */
     ContinuedFromContactId?: ContactId;
+  }
+  export interface StartContactEvaluationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the contact in this instance of Amazon Connect. 
+     */
+    ContactId: ContactId;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface StartContactEvaluationResponse {
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the contact evaluation resource.
+     */
+    EvaluationArn: ARN;
   }
   export interface StartContactRecordingRequest {
     /**
@@ -6658,6 +7579,34 @@ declare namespace Connect {
     Value?: ReferenceValue;
   }
   export type Subject = string;
+  export interface SubmitContactEvaluationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+    /**
+     * A map of question identifiers to answer value.
+     */
+    Answers?: EvaluationAnswersInputMap;
+    /**
+     * A map of question identifiers to note value.
+     */
+    Notes?: EvaluationNotesMap;
+  }
+  export interface SubmitContactEvaluationResponse {
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the contact evaluation resource.
+     */
+    EvaluationArn: ARN;
+  }
   export type SupportedMessagingContentType = string;
   export type SupportedMessagingContentTypes = SupportedMessagingContentType[];
   export interface SuspendContactRecordingRequest {
@@ -7005,6 +7954,34 @@ declare namespace Connect {
   }
   export interface UpdateContactAttributesResponse {
   }
+  export interface UpdateContactEvaluationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+    /**
+     * A map of question identifiers to answer value.
+     */
+    Answers?: EvaluationAnswersInputMap;
+    /**
+     * A map of question identifiers to note value.
+     */
+    Notes?: EvaluationNotesMap;
+  }
+  export interface UpdateContactEvaluationResponse {
+    /**
+     * A unique identifier for the contact evaluation.
+     */
+    EvaluationId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the contact evaluation resource.
+     */
+    EvaluationArn: ARN;
+  }
   export interface UpdateContactFlowContentRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -7144,6 +8121,58 @@ declare namespace Connect {
     ScheduledTime: Timestamp;
   }
   export interface UpdateContactScheduleResponse {
+  }
+  export interface UpdateEvaluationFormRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * A version of the evaluation form to update.
+     */
+    EvaluationFormVersion: VersionNumber;
+    /**
+     * A flag indicating whether the operation must create a new version.
+     */
+    CreateNewVersion?: BoxedBoolean;
+    /**
+     * A unique title of the evaluation form.
+     */
+    Title: EvaluationFormTitle;
+    /**
+     * The description of the evaluation form.
+     */
+    Description?: EvaluationFormDescription;
+    /**
+     * Items that are part of the evaluation form. The total number of sections and questions must not exceed 100 each. Questions must be contained in a section.
+     */
+    Items: EvaluationFormItemsList;
+    /**
+     * A scoring strategy of the evaluation form.
+     */
+    ScoringStrategy?: EvaluationFormScoringStrategy;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface UpdateEvaluationFormResponse {
+    /**
+     * The unique identifier for the evaluation form.
+     */
+    EvaluationFormId: ResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the contact evaluation resource.
+     */
+    EvaluationFormArn: ARN;
+    /**
+     * The version of the updated evaluation form resource.
+     */
+    EvaluationFormVersion: VersionNumber;
   }
   export type UpdateHoursOfOperationDescription = string;
   export interface UpdateHoursOfOperationRequest {
@@ -7943,6 +8972,7 @@ declare namespace Connect {
   export type UserSummaryList = UserSummary[];
   export type UserTagMap = {[key: string]: String};
   export type Value = number;
+  export type VersionNumber = number;
   export interface Vocabulary {
     /**
      * A unique name of the custom vocabulary.

@@ -548,6 +548,30 @@ declare class Pinpoint extends Service {
    */
   getJourneyExecutionMetrics(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyExecutionMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyExecutionMetricsResponse, AWSError>;
   /**
+   * Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey activity.
+   */
+  getJourneyRunExecutionActivityMetrics(params: Pinpoint.Types.GetJourneyRunExecutionActivityMetricsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunExecutionActivityMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyRunExecutionActivityMetricsResponse, AWSError>;
+  /**
+   * Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey activity.
+   */
+  getJourneyRunExecutionActivityMetrics(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunExecutionActivityMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyRunExecutionActivityMetricsResponse, AWSError>;
+  /**
+   * Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey.
+   */
+  getJourneyRunExecutionMetrics(params: Pinpoint.Types.GetJourneyRunExecutionMetricsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunExecutionMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyRunExecutionMetricsResponse, AWSError>;
+  /**
+   * Retrieves (queries) pre-aggregated data for a standard run execution metric that applies to a journey.
+   */
+  getJourneyRunExecutionMetrics(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunExecutionMetricsResponse) => void): Request<Pinpoint.Types.GetJourneyRunExecutionMetricsResponse, AWSError>;
+  /**
+   * Provides information about the runs of a journey.
+   */
+  getJourneyRuns(params: Pinpoint.Types.GetJourneyRunsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunsResponse) => void): Request<Pinpoint.Types.GetJourneyRunsResponse, AWSError>;
+  /**
+   * Provides information about the runs of a journey.
+   */
+  getJourneyRuns(callback?: (err: AWSError, data: Pinpoint.Types.GetJourneyRunsResponse) => void): Request<Pinpoint.Types.GetJourneyRunsResponse, AWSError>;
+  /**
    * Retrieves the content and settings of a message template for messages that are sent through a push notification channel.
    */
   getPushTemplate(params: Pinpoint.Types.GetPushTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetPushTemplateResponse) => void): Request<Pinpoint.Types.GetPushTemplateResponse, AWSError>;
@@ -1637,6 +1661,10 @@ declare namespace Pinpoint {
      * The unique identifier for the campaign treatment that the activity applies to. A treatment is a variation of a campaign that's used for A/B testing of a campaign.
      */
     TreatmentId?: __string;
+    /**
+     * A JSON object that contains metrics relating to the campaign execution for this campaign activity. For information about the structure and contents of the results, see Standard Amazon Pinpoint analytics metrics in the Amazon Pinpoint Developer Guide.
+     */
+    ExecutionMetrics?: MapOf__string;
   }
   export interface AddressConfiguration {
     /**
@@ -4240,6 +4268,81 @@ declare namespace Pinpoint {
   export interface GetJourneyResponse {
     JourneyResponse: JourneyResponse;
   }
+  export interface GetJourneyRunExecutionActivityMetricsRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the journey activity.
+     */
+    JourneyActivityId: __string;
+    /**
+     * The unique identifier for the journey.
+     */
+    JourneyId: __string;
+    /**
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    NextToken?: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    PageSize?: __string;
+    /**
+     * The unique identifier for the journey run.
+     */
+    RunId: __string;
+  }
+  export interface GetJourneyRunExecutionActivityMetricsResponse {
+    JourneyRunExecutionActivityMetricsResponse: JourneyRunExecutionActivityMetricsResponse;
+  }
+  export interface GetJourneyRunExecutionMetricsRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the journey.
+     */
+    JourneyId: __string;
+    /**
+     * The  string that specifies which page of results to return in a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    NextToken?: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    PageSize?: __string;
+    /**
+     * The unique identifier for the journey run.
+     */
+    RunId: __string;
+  }
+  export interface GetJourneyRunExecutionMetricsResponse {
+    JourneyRunExecutionMetricsResponse: JourneyRunExecutionMetricsResponse;
+  }
+  export interface GetJourneyRunsRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the journey.
+     */
+    JourneyId: __string;
+    /**
+     * The maximum number of items to include in each page of a paginated response. This parameter is not supported for application, campaign, and journey metrics.
+     */
+    PageSize?: __string;
+    /**
+     * The NextToken string that specifies which page of results to return in a paginated response.
+     */
+    Token?: __string;
+  }
+  export interface GetJourneyRunsResponse {
+    JourneyRunsResponse: JourneyRunsResponse;
+  }
   export interface GetPushTemplateRequest {
     /**
      * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
@@ -4848,7 +4951,7 @@ declare namespace Pinpoint {
   }
   export interface JourneyExecutionActivityMetricsResponse {
     /**
-     * The type of activity that the metric applies to. Possible values are: CONDITIONAL_SPLIT - For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey. HOLDOUT - For a holdout activity, which is an activity that stops a journey for a specified percentage of participants. MESSAGE - For an email activity, which is an activity that sends an email message to participants. MULTI_CONDITIONAL_SPLIT - For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey. RANDOM_SPLIT - For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey. WAIT - For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
+     * The type of activity that the metric applies to. Possible values are: CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey. HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants. MESSAGE – For an email activity, which is an activity that sends an email message to participants. MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey. RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey. WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
      */
     ActivityType: __string;
     /**
@@ -4986,11 +5089,11 @@ declare namespace Pinpoint {
      */
     tags?: MapOf__string;
     /**
-     * Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+     * Indicates whether endpoints in quiet hours should enter a wait activity until quiet hours have elapsed.
      */
     WaitForQuietTime?: __boolean;
     /**
-     * Specifies whether a journey should be refreshed on segment update.
+     * Indicates whether the journey participants should be refreshed when a segment is updated.
      */
     RefreshOnSegmentUpdate?: __boolean;
     /**
@@ -4998,18 +5101,99 @@ declare namespace Pinpoint {
      */
     JourneyChannelSettings?: JourneyChannelSettings;
     /**
-     * Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+     * Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.
      */
     SendingSchedule?: __boolean;
     /**
-     * The time when journey allow to send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     * The time when a journey can send messages. QuietTime should be configured first and SendingSchedule should be set to true.
      */
     OpenHours?: OpenHours;
     /**
-     * The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
+     * The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.
      */
     ClosedDays?: ClosedDays;
   }
+  export interface JourneyRunExecutionActivityMetricsResponse {
+    /**
+     * The type of activity that the metric applies to. Possible values are: CONDITIONAL_SPLIT – For a yes/no split activity, which is an activity that sends participants down one of two paths in a journey. HOLDOUT – For a holdout activity, which is an activity that stops a journey for a specified percentage of participants. MESSAGE – For an email activity, which is an activity that sends an email message to participants. MULTI_CONDITIONAL_SPLIT – For a multivariate split activity, which is an activity that sends participants down one of as many as five paths in a journey. RANDOM_SPLIT – For a random split activity, which is an activity that sends specified percentages of participants down one of as many as five paths in a journey. WAIT – For a wait activity, which is an activity that waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
+     */
+    ActivityType: __string;
+    /**
+     * The unique identifier for the application that the metric applies to.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the activity that the metric applies to.
+     */
+    JourneyActivityId: __string;
+    /**
+     * The unique identifier for the journey that the metric applies to.
+     */
+    JourneyId: __string;
+    /**
+     * The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the execution status of the activity for this journey run and updated the data for the metric.
+     */
+    LastEvaluatedTime: __string;
+    /**
+     * A JSON object that contains the results of the query. For information about the structure and contents of the results, see see Standard Amazon Pinpoint analytics metrics in the Amazon Pinpoint Developer Guide.
+     */
+    Metrics: MapOf__string;
+    /**
+     * The unique identifier for the journey run that the metric applies to.
+     */
+    RunId: __string;
+  }
+  export interface JourneyRunExecutionMetricsResponse {
+    /**
+     * The unique identifier for the application that the metric applies to.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the journey that the metric applies to.
+     */
+    JourneyId: __string;
+    /**
+     * The date and time, in ISO 8601 format, when Amazon Pinpoint last evaluated the journey run and updated the data for the metric.
+     */
+    LastEvaluatedTime: __string;
+    /**
+     * A JSON object that contains the results of the query. For information about the structure and contents of the results, see the Standard Amazon Pinpoint analytics metrics in the Amazon Pinpoint Developer Guide.
+     */
+    Metrics: MapOf__string;
+    /**
+     * The unique identifier for the journey run that the metric applies to.
+     */
+    RunId: __string;
+  }
+  export interface JourneyRunResponse {
+    /**
+     * The time when the journey run was created or scheduled, in ISO 8601 format.
+     */
+    CreationTime: __string;
+    /**
+     * The last time the journey run was updated, in ISO 8601 format..
+     */
+    LastUpdateTime: __string;
+    /**
+     * The unique identifier for the run.
+     */
+    RunId: __string;
+    /**
+     * The current status of the journey run.
+     */
+    Status: JourneyRunStatus;
+  }
+  export interface JourneyRunsResponse {
+    /**
+     * An array of responses, one for each run of the journey
+     */
+    Item: ListOfJourneyRunResponse;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    NextToken?: __string;
+  }
+  export type JourneyRunStatus = "SCHEDULED"|"RUNNING"|"COMPLETED"|"CANCELLED"|string;
   export interface JourneySMSMessage {
     /**
      * The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).
@@ -7273,7 +7457,7 @@ declare namespace Pinpoint {
      */
     WaitForQuietTime?: __boolean;
     /**
-     * Specifies whether a journey should be refreshed on segment update.
+     * Indicates whether the journey participants should be refreshed when a segment is updated.
      */
     RefreshOnSegmentUpdate?: __boolean;
     /**
@@ -7281,7 +7465,7 @@ declare namespace Pinpoint {
      */
     JourneyChannelSettings?: JourneyChannelSettings;
     /**
-     * Indicates if journey have Advance Quiet Time (OpenHours and ClosedDays). This flag should be set to true in order to allow (OpenHours and ClosedDays)
+     * Indicates if journey has Advance Quiet Time enabled. This flag should be set to true in order to allow using OpenHours and ClosedDays.
      */
     SendingSchedule?: __boolean;
     /**
@@ -7355,6 +7539,7 @@ declare namespace Pinpoint {
   export type ListOfInAppMessageCampaign = InAppMessageCampaign[];
   export type ListOfInAppMessageContent = InAppMessageContent[];
   export type ListOfJourneyResponse = JourneyResponse[];
+  export type ListOfJourneyRunResponse = JourneyRunResponse[];
   export type ListOfMultiConditionalBranch = MultiConditionalBranch[];
   export type ListOfRandomSplitEntry = RandomSplitEntry[];
   export type ListOfRecommenderConfigurationResponse = RecommenderConfigurationResponse[];
@@ -7393,11 +7578,11 @@ declare namespace Pinpoint {
   export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
   export interface OpenHoursRule {
     /**
-     * Local start time in ISO 8601 format.
+     * The start of the scheduled time, in ISO 8601 format, when the channel can send messages.
      */
     StartTime?: __string;
     /**
-     * Local start time in ISO 8601 format.
+     * The end of the scheduled time, in ISO 8601 format, when the channel can't send messages.
      */
     EndTime?: __string;
   }
@@ -7405,60 +7590,60 @@ declare namespace Pinpoint {
   export type MapOfListOfOpenHoursRules = {[key: string]: ListOfOpenHoursRules};
   export interface OpenHours {
     /**
-     * Rules for Email Channel.
+     * Specifies the schedule settings for the email channel.
      */
     EMAIL?: MapOfListOfOpenHoursRules;
     /**
-     * Rules for SMS Channel.
+     * Specifies the schedule settings for the SMS channel.
      */
     SMS?: MapOfListOfOpenHoursRules;
     /**
-     * Rules for Push Channel.
+     * Specifies the schedule settings for the push channel.
      */
     PUSH?: MapOfListOfOpenHoursRules;
     /**
-     * Rules for Voice Channel.
+     * Specifies the schedule settings for the voice channel.
      */
     VOICE?: MapOfListOfOpenHoursRules;
     /**
-     * Rules for Custom Channel.
+     * Specifies the schedule settings for the custom channel.
      */
     CUSTOM?: MapOfListOfOpenHoursRules;
   }
   export interface ClosedDaysRule {
     /**
-     * Name of the rule.
+     * The name of the closed day rule.
      */
     Name?: __string;
     /**
-     * Start Datetime in ISO 8601 format.
+     * Start DateTime ISO 8601 format
      */
     StartDateTime?: __string;
     /**
-     * End Datetime in ISO 8601 format.
+     * End DateTime ISO 8601 format
      */
     EndDateTime?: __string;
   }
   export type ListOfClosedDaysRules = ClosedDaysRule[];
   export interface ClosedDays {
     /**
-     * Rules for Email Channel.
+     * Rules for the Email channel.
      */
     EMAIL?: ListOfClosedDaysRules;
     /**
-     * Rules for SMS Channel.
+     * Rules for the SMS channel.
      */
     SMS?: ListOfClosedDaysRules;
     /**
-     * Rules for Push Channel.
+     * Rules for the Push channel.
      */
     PUSH?: ListOfClosedDaysRules;
     /**
-     * Rules for Voice Channel.
+     * Rules for the Voice channel.
      */
     VOICE?: ListOfClosedDaysRules;
     /**
-     * Rules for Custom Channel.
+     * Rules for the Custom channel.
      */
     CUSTOM?: ListOfClosedDaysRules;
   }
