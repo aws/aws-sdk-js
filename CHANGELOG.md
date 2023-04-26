@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1365.0-->
+<!--LATEST=2.1366.0-->
 <!--ENTRYINSERT-->
+
+## 2.1366.0
+* feature: OSIS: Initial release for OpenSearch Ingestion
 
 ## 2.1365.0
 * feature: ChimeSDKMessaging: Remove non actionable field from UpdateChannelReadMarker and DeleteChannelRequest.  Add precise exceptions to DeleteChannel and DeleteStreamingConfigurations error cases.

@@ -343,5 +343,6 @@ module.exports = {
   Tnb: require('./tnb'),
   InternetMonitor: require('./internetmonitor'),
   IVSRealTime: require('./ivsrealtime'),
-  VPCLattice: require('./vpclattice')
+  VPCLattice: require('./vpclattice'),
+  OSIS: require('./osis')
 };

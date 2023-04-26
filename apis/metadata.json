@@ -1292,5 +1292,8 @@
   "vpclattice": {
     "prefix": "vpc-lattice",
     "name": "VPCLattice"
+  },
+  "osis": {
+    "name": "OSIS"
   }
 }
