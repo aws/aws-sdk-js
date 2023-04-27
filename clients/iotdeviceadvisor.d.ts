@@ -126,6 +126,7 @@ declare class IotDeviceAdvisor extends Service {
 }
 declare namespace IotDeviceAdvisor {
   export type AmazonResourceName = string;
+  export type AuthenticationMethod = "X509ClientCertificate"|"SignatureVersion4"|string;
   export interface CreateSuiteDefinitionRequest {
     /**
      * Creates a Device Advisor test suite with suite definition configuration.
@@ -164,13 +165,17 @@ declare namespace IotDeviceAdvisor {
   }
   export interface DeviceUnderTest {
     /**
-     * Lists devices thing ARN.
+     * Lists device's thing ARN.
      */
     thingArn?: AmazonResourceName;
     /**
-     * Lists devices certificate ARN.
+     * Lists device's certificate ARN.
      */
     certificateArn?: AmazonResourceName;
+    /**
+     * Lists device's role ARN.
+     */
+    deviceRoleArn?: AmazonResourceName;
   }
   export type DeviceUnderTestList = DeviceUnderTest[];
   export type Endpoint = string;
@@ -185,6 +190,14 @@ declare namespace IotDeviceAdvisor {
      * The certificate ARN of the device. This is an optional parameter.
      */
     certificateArn?: AmazonResourceName;
+    /**
+     * The device role ARN of the device. This is an optional parameter.
+     */
+    deviceRoleArn?: AmazonResourceName;
+    /**
+     * The authentication method used during the device connection.
+     */
+    authenticationMethod?: AuthenticationMethod;
   }
   export interface GetEndpointResponse {
     /**
@@ -389,7 +402,7 @@ declare namespace IotDeviceAdvisor {
   export type LogUrl = string;
   export type MaxResults = number;
   export type ParallelRun = boolean;
-  export type Protocol = "MqttV3_1_1"|"MqttV5"|string;
+  export type Protocol = "MqttV3_1_1"|"MqttV5"|"MqttV3_1_1_OverWebSocket"|"MqttV5_OverWebSocket"|string;
   export type QualificationReportDownloadUrl = string;
   export type RootGroup = string;
   export type SelectedTestList = UUID[];

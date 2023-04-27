@@ -436,6 +436,14 @@ declare class GuardDuty extends Service {
    */
   listThreatIntelSets(callback?: (err: AWSError, data: GuardDuty.Types.ListThreatIntelSetsResponse) => void): Request<GuardDuty.Types.ListThreatIntelSetsResponse, AWSError>;
   /**
+   * Initiates the malware scan. Invoking this API will automatically create the Service-linked role  in the corresponding account.
+   */
+  startMalwareScan(params: GuardDuty.Types.StartMalwareScanRequest, callback?: (err: AWSError, data: GuardDuty.Types.StartMalwareScanResponse) => void): Request<GuardDuty.Types.StartMalwareScanResponse, AWSError>;
+  /**
+   * Initiates the malware scan. Invoking this API will automatically create the Service-linked role  in the corresponding account.
+   */
+  startMalwareScan(callback?: (err: AWSError, data: GuardDuty.Types.StartMalwareScanResponse) => void): Request<GuardDuty.Types.StartMalwareScanResponse, AWSError>;
+  /**
    * Turns on GuardDuty monitoring of the specified member accounts. Use this operation to restart monitoring of accounts that you stopped monitoring with the StopMonitoringMembers operation.
    */
   startMonitoringMembers(params: GuardDuty.Types.StartMonitoringMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.StartMonitoringMembersResponse) => void): Request<GuardDuty.Types.StartMonitoringMembersResponse, AWSError>;
@@ -1227,7 +1235,7 @@ declare namespace GuardDuty {
     ThreatIntelSetId: String;
   }
   export type Criterion = {[key: string]: Condition};
-  export type CriterionKey = "EC2_INSTANCE_ARN"|"SCAN_ID"|"ACCOUNT_ID"|"GUARDDUTY_FINDING_ID"|"SCAN_START_TIME"|"SCAN_STATUS"|string;
+  export type CriterionKey = "EC2_INSTANCE_ARN"|"SCAN_ID"|"ACCOUNT_ID"|"GUARDDUTY_FINDING_ID"|"SCAN_START_TIME"|"SCAN_STATUS"|"SCAN_TYPE"|string;
   export interface DNSLogsConfigurationResult {
     /**
      * Denotes whether DNS logs is enabled as a data source.
@@ -1707,6 +1715,10 @@ declare namespace GuardDuty {
      * Contains a complete view providing malware scan result details.
      */
     ScanDetections?: ScanDetections;
+    /**
+     * Specifies the scan type that invoked the malware scan.
+     */
+    ScanType?: ScanType;
   }
   export interface EbsVolumesResult {
     /**
@@ -3625,6 +3637,7 @@ declare namespace GuardDuty {
      */
     LambdaDetails?: LambdaDetails;
   }
+  export type ResourceArn = string;
   export interface ResourceDetails {
     /**
      * InstanceArn that was scanned in the scan entry.
@@ -3829,6 +3842,10 @@ declare namespace GuardDuty {
      * List of volumes that were attached to the original instance to be scanned.
      */
     AttachedVolumes?: VolumeDetails;
+    /**
+     * Specifies the scan type that invoked the malware scan.
+     */
+    ScanType?: ScanType;
   }
   export interface ScanCondition {
     /**
@@ -3913,7 +3930,7 @@ declare namespace GuardDuty {
      */
     ScanResult?: ScanResult;
   }
-  export type ScanStatus = "RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type ScanStatus = "RUNNING"|"COMPLETED"|"FAILED"|"SKIPPED"|string;
   export interface ScanThreatName {
     /**
      * The name of the identified threat.
@@ -3933,6 +3950,7 @@ declare namespace GuardDuty {
     FilePaths?: FilePaths;
   }
   export type ScanThreatNames = ScanThreatName[];
+  export type ScanType = "GUARDDUTY_INITIATED"|"ON_DEMAND"|string;
   export interface ScannedItemCount {
     /**
      * Total GB of files scanned for malware.
@@ -4045,6 +4063,18 @@ declare namespace GuardDuty {
   }
   export type SourceIps = String[];
   export type Sources = String[];
+  export interface StartMalwareScanRequest {
+    /**
+     * Amazon Resource Name (ARN) of the resource for which you invoked the API.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface StartMalwareScanResponse {
+    /**
+     * A unique identifier that gets generated when you invoke the API without any error. Each malware scan has a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.
+     */
+    ScanId?: NonEmptyString;
+  }
   export interface StartMonitoringMembersRequest {
     /**
      * The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.

@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1366.0-->
+<!--LATEST=2.1367.0-->
 <!--ENTRYINSERT-->
+
+## 2.1367.0
+* feature: EC2: This release adds support for AMD SEV-SNP on EC2 instances.
+* feature: EMRcontainers: This release adds GetManagedEndpointSessionCredentials, a new API that allows customers to generate an auth token to connect to a managed endpoint, enabling features such as self-hosted Jupyter notebooks for EMR on EKS.
+* feature: GuardDuty: Added API support to initiate on-demand malware scan on specific resources.
+* feature: IotDeviceAdvisor: AWS IoT Core Device Advisor now supports MQTT over WebSocket. With this update, customers can run all three test suites of AWS IoT Core Device Advisor - qualification, custom, and long duration tests - using Signature Version 4 for MQTT over WebSocket.
+* feature: Kafka: Amazon MSK has added new APIs that allows multi-VPC private connectivity and cluster policy support for Amazon MSK clusters that simplify connectivity and access between your Apache Kafka clients hosted in different VPCs and AWS accounts and your Amazon MSK clusters.
+* feature: Lambda: Add Java 17 (java17) support to AWS Lambda
+* feature: MarketplaceCatalog: Enabled Pagination for List Entities and List Change Sets operations
+* feature: SQS: handle XML/JSON protocol change in SQS tests
+* feature: SageMaker: Added ml.p4d.24xlarge and ml.p4de.24xlarge as supported instances for SageMaker Studio
 
 ## 2.1366.0
 * feature: OSIS: Initial release for OpenSearch Ingestion

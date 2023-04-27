@@ -39,7 +39,7 @@
           "shape": "ResourceAlreadyExistsException"
         }
       ],
-      "documentation": "<p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing OpenSearch Ingestion pipelines</a>.</p>"
+      "documentation": "<p>Creates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html\">Creating Amazon OpenSearch Ingestion pipelines</a>.</p>"
     },
     "DeletePipeline": {
       "name": "DeletePipeline",
@@ -70,7 +70,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#delete-pipeline\">Deleting pipelines</a>.</p>"
+      "documentation": "<p>Deletes an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html\">Deleting Amazon OpenSearch Ingestion pipelines</a>.</p>"
     },
     "GetPipeline": {
       "name": "GetPipeline",
@@ -126,7 +126,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are templates for the configuration needed for a <code>CreatePipeline</code> request.</p>"
+      "documentation": "<p>Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are templates for the configuration needed for a <code>CreatePipeline</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint\">Using blueprints to create a pipeline</a>.</p>"
     },
     "GetPipelineChangeProgress": {
       "name": "GetPipelineChangeProgress",
@@ -154,7 +154,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Returns progress information for the current change happening on an OpenSearch Ingestion pipeline. Currently, this operation only returns information when a pipeline is being created.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing OpenSearch Ingestion pipelines</a>.</p>"
+      "documentation": "<p>Returns progress information for the current change happening on an OpenSearch Ingestion pipeline. Currently, this operation only returns information when a pipeline is being created.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#get-pipeline-progress\">Tracking the status of pipeline creation</a>.</p>"
     },
     "ListPipelineBlueprints": {
       "name": "ListPipelineBlueprints",
@@ -182,7 +182,7 @@
           "shape": "InvalidPaginationTokenException"
         }
       ],
-      "documentation": "<p>Retrieves a list of all available blueprints for Data Prepper.</p>"
+      "documentation": "<p>Retrieves a list of all available blueprints for Data Prepper. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint\">Using blueprints to create a pipeline</a>.</p>"
     },
     "ListPipelines": {
       "name": "ListPipelines",
@@ -210,7 +210,7 @@
           "shape": "InvalidPaginationTokenException"
         }
       ],
-      "documentation": "<p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing OpenSearch Ingestion pipelines</a>.</p>"
+      "documentation": "<p>Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html\">Viewing Amazon OpenSearch Ingestion pipelines</a>.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -238,7 +238,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging OpenSearch Ingestion pipelines</a>.</p>"
+      "documentation": "<p>Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon OpenSearch Ingestion pipelines</a>.</p>"
     },
     "StartPipeline": {
       "name": "StartPipeline",
@@ -269,7 +269,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Starts an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#start-pipeline\">Starting pipelines</a>.</p>"
+      "documentation": "<p>Starts an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--start\">Starting an OpenSearch Ingestion pipeline</a>.</p>"
     },
     "StopPipeline": {
       "name": "StopPipeline",
@@ -300,7 +300,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#stop-pipeline\">Stopping pipelines</a>.</p>"
+      "documentation": "<p>Stops an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop\">Stopping an OpenSearch Ingestion pipeline</a>.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -331,7 +331,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging OpenSearch Ingestion pipelines</a>.</p>"
+      "documentation": "<p>Tags an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon OpenSearch Ingestion pipelines</a>.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -359,7 +359,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging OpenSearch Ingestion pipelines</a>.</p>"
+      "documentation": "<p>Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html\">Tagging Amazon OpenSearch Ingestion pipelines</a>.</p>"
     },
     "UpdatePipeline": {
       "name": "UpdatePipeline",
@@ -390,7 +390,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing OpenSearch Ingestion pipelines</a>.</p>"
+      "documentation": "<p>Updates an OpenSearch Ingestion pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/update-pipeline.html\">Updating Amazon OpenSearch Ingestion pipelines</a>.</p>"
     },
     "ValidatePipeline": {
       "name": "ValidatePipeline",
@@ -415,7 +415,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html\">Creating and managing OpenSearch Ingestion pipelines</a>.</p>"
+      "documentation": "<p>Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html\">Creating Amazon OpenSearch Ingestion pipelines</a>.</p>"
     }
   },
   "shapes": {

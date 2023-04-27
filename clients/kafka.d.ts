@@ -61,6 +61,18 @@ declare class Kafka extends Service {
   createConfiguration(callback?: (err: AWSError, data: Kafka.Types.CreateConfigurationResponse) => void): Request<Kafka.Types.CreateConfigurationResponse, AWSError>;
   /**
    * 
+            Creates a new MSK VPC connection.
+         
+   */
+  createVpcConnection(params: Kafka.Types.CreateVpcConnectionRequest, callback?: (err: AWSError, data: Kafka.Types.CreateVpcConnectionResponse) => void): Request<Kafka.Types.CreateVpcConnectionResponse, AWSError>;
+  /**
+   * 
+            Creates a new MSK VPC connection.
+         
+   */
+  createVpcConnection(callback?: (err: AWSError, data: Kafka.Types.CreateVpcConnectionResponse) => void): Request<Kafka.Types.CreateVpcConnectionResponse, AWSError>;
+  /**
+   * 
             Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
          
    */
@@ -73,6 +85,18 @@ declare class Kafka extends Service {
   deleteCluster(callback?: (err: AWSError, data: Kafka.Types.DeleteClusterResponse) => void): Request<Kafka.Types.DeleteClusterResponse, AWSError>;
   /**
    * 
+            Deletes the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.
+         
+   */
+  deleteClusterPolicy(params: Kafka.Types.DeleteClusterPolicyRequest, callback?: (err: AWSError, data: Kafka.Types.DeleteClusterPolicyResponse) => void): Request<Kafka.Types.DeleteClusterPolicyResponse, AWSError>;
+  /**
+   * 
+            Deletes the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.
+         
+   */
+  deleteClusterPolicy(callback?: (err: AWSError, data: Kafka.Types.DeleteClusterPolicyResponse) => void): Request<Kafka.Types.DeleteClusterPolicyResponse, AWSError>;
+  /**
+   * 
             Deletes an MSK Configuration.
          
    */
@@ -83,6 +107,18 @@ declare class Kafka extends Service {
          
    */
   deleteConfiguration(callback?: (err: AWSError, data: Kafka.Types.DeleteConfigurationResponse) => void): Request<Kafka.Types.DeleteConfigurationResponse, AWSError>;
+  /**
+   * 
+            Deletes a MSK VPC connection.
+         
+   */
+  deleteVpcConnection(params: Kafka.Types.DeleteVpcConnectionRequest, callback?: (err: AWSError, data: Kafka.Types.DeleteVpcConnectionResponse) => void): Request<Kafka.Types.DeleteVpcConnectionResponse, AWSError>;
+  /**
+   * 
+            Deletes a MSK VPC connection.
+         
+   */
+  deleteVpcConnection(callback?: (err: AWSError, data: Kafka.Types.DeleteVpcConnectionResponse) => void): Request<Kafka.Types.DeleteVpcConnectionResponse, AWSError>;
   /**
    * 
             Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
@@ -145,6 +181,18 @@ declare class Kafka extends Service {
   describeConfigurationRevision(callback?: (err: AWSError, data: Kafka.Types.DescribeConfigurationRevisionResponse) => void): Request<Kafka.Types.DescribeConfigurationRevisionResponse, AWSError>;
   /**
    * 
+            Returns a description of this MSK VPC connection.
+         
+   */
+  describeVpcConnection(params: Kafka.Types.DescribeVpcConnectionRequest, callback?: (err: AWSError, data: Kafka.Types.DescribeVpcConnectionResponse) => void): Request<Kafka.Types.DescribeVpcConnectionResponse, AWSError>;
+  /**
+   * 
+            Returns a description of this MSK VPC connection.
+         
+   */
+  describeVpcConnection(callback?: (err: AWSError, data: Kafka.Types.DescribeVpcConnectionResponse) => void): Request<Kafka.Types.DescribeVpcConnectionResponse, AWSError>;
+  /**
+   * 
             Disassociates one or more Scram Secrets from an Amazon MSK cluster.
          
    */
@@ -179,6 +227,18 @@ declare class Kafka extends Service {
          
    */
   getCompatibleKafkaVersions(callback?: (err: AWSError, data: Kafka.Types.GetCompatibleKafkaVersionsResponse) => void): Request<Kafka.Types.GetCompatibleKafkaVersionsResponse, AWSError>;
+  /**
+   * 
+            Get the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.
+         
+   */
+  getClusterPolicy(params: Kafka.Types.GetClusterPolicyRequest, callback?: (err: AWSError, data: Kafka.Types.GetClusterPolicyResponse) => void): Request<Kafka.Types.GetClusterPolicyResponse, AWSError>;
+  /**
+   * 
+            Get the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.
+         
+   */
+  getClusterPolicy(callback?: (err: AWSError, data: Kafka.Types.GetClusterPolicyResponse) => void): Request<Kafka.Types.GetClusterPolicyResponse, AWSError>;
   /**
    * 
             Returns a list of all the operations that have been performed on the specified MSK cluster.
@@ -287,6 +347,54 @@ declare class Kafka extends Service {
          
    */
   listTagsForResource(callback?: (err: AWSError, data: Kafka.Types.ListTagsForResourceResponse) => void): Request<Kafka.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * 
+            Returns a list of all the VPC connections in this Region.
+         
+   */
+  listClientVpcConnections(params: Kafka.Types.ListClientVpcConnectionsRequest, callback?: (err: AWSError, data: Kafka.Types.ListClientVpcConnectionsResponse) => void): Request<Kafka.Types.ListClientVpcConnectionsResponse, AWSError>;
+  /**
+   * 
+            Returns a list of all the VPC connections in this Region.
+         
+   */
+  listClientVpcConnections(callback?: (err: AWSError, data: Kafka.Types.ListClientVpcConnectionsResponse) => void): Request<Kafka.Types.ListClientVpcConnectionsResponse, AWSError>;
+  /**
+   * 
+            Returns a list of all the VPC connections in this Region.
+         
+   */
+  listVpcConnections(params: Kafka.Types.ListVpcConnectionsRequest, callback?: (err: AWSError, data: Kafka.Types.ListVpcConnectionsResponse) => void): Request<Kafka.Types.ListVpcConnectionsResponse, AWSError>;
+  /**
+   * 
+            Returns a list of all the VPC connections in this Region.
+         
+   */
+  listVpcConnections(callback?: (err: AWSError, data: Kafka.Types.ListVpcConnectionsResponse) => void): Request<Kafka.Types.ListVpcConnectionsResponse, AWSError>;
+  /**
+   * 
+            Returns empty response.
+         
+   */
+  rejectClientVpcConnection(params: Kafka.Types.RejectClientVpcConnectionRequest, callback?: (err: AWSError, data: Kafka.Types.RejectClientVpcConnectionResponse) => void): Request<Kafka.Types.RejectClientVpcConnectionResponse, AWSError>;
+  /**
+   * 
+            Returns empty response.
+         
+   */
+  rejectClientVpcConnection(callback?: (err: AWSError, data: Kafka.Types.RejectClientVpcConnectionResponse) => void): Request<Kafka.Types.RejectClientVpcConnectionResponse, AWSError>;
+  /**
+   * 
+            Creates or updates the MSK cluster policy specified by the cluster Amazon Resource Name (ARN) in the request.
+         
+   */
+  putClusterPolicy(params: Kafka.Types.PutClusterPolicyRequest, callback?: (err: AWSError, data: Kafka.Types.PutClusterPolicyResponse) => void): Request<Kafka.Types.PutClusterPolicyResponse, AWSError>;
+  /**
+   * 
+            Creates or updates the MSK cluster policy specified by the cluster Amazon Resource Name (ARN) in the request.
+         
+   */
+  putClusterPolicy(callback?: (err: AWSError, data: Kafka.Types.PutClusterPolicyResponse) => void): Request<Kafka.Types.PutClusterPolicyResponse, AWSError>;
   /**
    * Reboots brokers.
    */
@@ -530,6 +638,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ConnectivityInfo?: ConnectivityInfo;
+    /**
+     * 
+            The list of zoneIds for the cluster in the virtual private cloud (VPC).
+         
+     */
+    ZoneIds?: __listOf__string;
   }
   export interface BrokerNodeInfo {
     /**
@@ -608,6 +722,20 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     Unauthenticated?: Unauthenticated;
+  }
+  export interface VpcConnectivityClientAuthentication {
+    /**
+     * 
+            SASL authentication type details for VPC connectivity.
+         
+     */
+    Sasl?: VpcConnectivitySasl;
+    /**
+     * 
+            TLS authentication type details for VPC connectivity.
+         
+     */
+    Tls?: VpcConnectivityTls;
   }
   export interface ServerlessClientAuthentication {
     /**
@@ -863,6 +991,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     TargetClusterInfo?: MutableClusterInfo;
+    /**
+     * 
+            Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.
+         
+     */
+    VpcConnectionInfo?: VpcConnectionInfo;
   }
   export interface ClusterOperationStep {
     /**
@@ -1060,6 +1194,76 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ClientAuthentication?: ServerlessClientAuthentication;
   }
+  export interface ClientVpcConnection {
+    /**
+     * 
+            Information about the auth scheme of Vpc Connection.
+         
+     */
+    Authentication?: __string;
+    /**
+     * 
+            Creation time of the Vpc Connection.
+         
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * 
+            State of the Vpc Connection.
+         
+     */
+    State?: VpcConnectionState;
+    /**
+     * 
+            The ARN that identifies the Vpc Connection.
+         
+     */
+    VpcConnectionArn: __string;
+    /**
+     * 
+            The Owner of the Vpc Connection.
+         
+     */
+    Owner?: __string;
+  }
+  export interface VpcConnection {
+    /**
+     * 
+            The ARN that identifies the Vpc Connection.
+         
+     */
+    VpcConnectionArn: __string;
+    /**
+     * 
+            The ARN that identifies the Cluster which the Vpc Connection belongs to.
+         
+     */
+    TargetClusterArn: __string;
+    /**
+     * 
+            Creation time of the Vpc Connection.
+         
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * 
+            Information about the auth scheme of Vpc Connection.
+         
+     */
+    Authentication?: __string;
+    /**
+     * 
+            The vpcId that belongs to the Vpc Connection.
+         
+     */
+    VpcId?: __string;
+    /**
+     * 
+            State of the Vpc Connection.
+         
+     */
+    State?: VpcConnectionState;
+  }
   export interface CompatibleKafkaVersion {
     /**
      * 
@@ -1160,6 +1364,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     PublicAccess?: PublicAccess;
+    /**
+     * 
+            VPC connectivity access control for brokers.
+         
+     */
+    VpcConnectivity?: VpcConnectivity;
   }
   export interface CreateClusterV2Request {
     /**
@@ -1361,6 +1571,94 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     State?: ConfigurationState;
   }
+  export interface CreateVpcConnectionRequest {
+    /**
+     * 
+            The cluster Amazon Resource Name (ARN) for the VPC connection.
+         
+     */
+    TargetClusterArn: __string;
+    /**
+     * 
+            The authentication type of VPC connection.
+         
+     */
+    Authentication: __string;
+    /**
+     * 
+            The VPC ID of VPC connection.
+         
+     */
+    VpcId: __string;
+    /**
+     * 
+            The list of client subnets.
+         
+     */
+    ClientSubnets: __listOf__string;
+    /**
+     * 
+            The list of security groups.
+         
+     */
+    SecurityGroups: __listOf__string;
+    /**
+     * 
+            A map of tags for the VPC connection.
+         
+     */
+    Tags?: __mapOf__string;
+  }
+  export interface CreateVpcConnectionResponse {
+    /**
+     * 
+            The VPC connection ARN.
+         
+     */
+    VpcConnectionArn?: __string;
+    /**
+     * 
+            The State of Vpc Connection.
+         
+     */
+    State?: VpcConnectionState;
+    /**
+     * 
+            The authentication type of VPC connection.
+         
+     */
+    Authentication?: __string;
+    /**
+     * 
+            The VPC ID of the VPC connection.
+         
+     */
+    VpcId?: __string;
+    /**
+     * 
+            The list of client subnets.
+         
+     */
+    ClientSubnets?: __listOf__string;
+    /**
+     * 
+            The list of security groups.
+         
+     */
+    SecurityGroups?: __listOf__string;
+    /**
+     * 
+            The creation time of VPC connection.
+         
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * 
+            A map of tags for the VPC connection.
+         
+     */
+    Tags?: __mapOf__string;
+  }
   export interface DeleteClusterRequest {
     /**
      * 
@@ -1389,6 +1687,16 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     State?: ClusterState;
   }
+  export interface DeleteClusterPolicyRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn: __string;
+  }
+  export interface DeleteClusterPolicyResponse {
+  }
   export interface DeleteConfigurationRequest {
     /**
      * 
@@ -1410,6 +1718,28 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     State?: ConfigurationState;
+  }
+  export interface DeleteVpcConnectionRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.
+         
+     */
+    Arn: __string;
+  }
+  export interface DeleteVpcConnectionResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.
+         
+     */
+    VpcConnectionArn?: __string;
+    /**
+     * 
+            The state of the VPC connection.
+         
+     */
+    State?: VpcConnectionState;
   }
   export interface DescribeClusterOperationRequest {
     /**
@@ -1557,6 +1887,70 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ServerProperties?: __blob;
+  }
+  export interface DescribeVpcConnectionRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.
+   
+     */
+    Arn: __string;
+  }
+  export interface DescribeVpcConnectionResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.
+   
+     */
+    VpcConnectionArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies an MSK cluster.
+   
+     */
+    TargetClusterArn?: __string;
+    /**
+     * 
+            The state of VPC connection.
+   
+     */
+    State?: VpcConnectionState;
+    /**
+     * 
+            The authentication type of VPC connection.
+   
+     */
+    Authentication?: __string;
+    /**
+     * 
+            The VPC Id for the VPC connection.
+   
+     */
+    VpcId?: __string;
+    /**
+     * 
+            The list of subnets for the VPC connection.
+   
+     */
+    Subnets?: __listOf__string;
+    /**
+     * 
+            The list of security groups for the VPC connection.
+   
+     */
+    SecurityGroups?: __listOf__string;
+    /**
+     * 
+            The creation time of the VPC connection.
+   
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * 
+            A map of tags for the VPC connection.
+         
+     */
+    Tags?: __mapOf__string;
   }
   export interface BatchDisassociateScramSecretRequest {
     /**
@@ -1714,6 +2108,24 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     BootstrapBrokerStringPublicSaslIam?: __string;
+    /**
+     * 
+            A string containing one or more DNS names (or IP) and TLS port pairs for VPC connectivity.
+         
+     */
+    BootstrapBrokerStringVpcConnectivityTls?: __string;
+    /**
+     * 
+            A string containing one or more DNS names (or IP) and SASL/SCRAM port pairs for VPC connectivity.
+         
+     */
+    BootstrapBrokerStringVpcConnectivitySaslScram?: __string;
+    /**
+     * 
+            A string containing one or more DNS names (or IP) and SASL/IAM port pairs for VPC connectivity.
+         
+     */
+    BootstrapBrokerStringVpcConnectivitySaslIam?: __string;
   }
   export interface GetCompatibleKafkaVersionsRequest {
     /**
@@ -1730,6 +2142,28 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
             
      */
     CompatibleKafkaVersions?: __listOfCompatibleKafkaVersion;
+  }
+  export interface GetClusterPolicyRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+            
+     */
+    ClusterArn: __string;
+  }
+  export interface GetClusterPolicyResponse {
+    /**
+     * 
+            The version of cluster policy.
+            
+     */
+    CurrentVersion?: __string;
+    /**
+     * 
+            The cluster policy.
+            
+     */
+    Policy?: __string;
   }
   export interface KafkaVersion {
     Version?: __string;
@@ -2016,6 +2450,88 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Tags?: __mapOf__string;
   }
+  export interface ListClientVpcConnectionsRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.
+         
+     */
+    MaxResults?: MaxResults;
+    /**
+     * 
+            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+            To get the next batch, provide this token in your next request.
+         
+     */
+    NextToken?: __string;
+  }
+  export interface ListClientVpcConnectionsResponse {
+    /**
+     * 
+            List of client VPC connections.
+         
+     */
+    ClientVpcConnections?: __listOfClientVpcConnection;
+    /**
+     * 
+            The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. 
+               To get another batch of configurations, provide this token in your next request.
+         
+     */
+    NextToken?: __string;
+  }
+  export interface ListVpcConnectionsRequest {
+    /**
+     * 
+            The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.
+         
+     */
+    MaxResults?: MaxResults;
+    /**
+     * 
+            The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+            To get the next batch, provide this token in your next request.
+         
+     */
+    NextToken?: __string;
+  }
+  export interface ListVpcConnectionsResponse {
+    /**
+     * 
+            List of VPC connections.
+         
+     */
+    VpcConnections?: __listOfVpcConnection;
+    /**
+     * 
+            The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. 
+               To get another batch of configurations, provide this token in your next request.
+         
+     */
+    NextToken?: __string;
+  }
+  export interface RejectClientVpcConnectionRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The VPC connection ARN.
+         
+     */
+    VpcConnectionArn: __string;
+  }
+  export interface RejectClientVpcConnectionResponse {
+  }
   export type MaxResults = number;
   export interface LoggingInfo {
     BrokerLogs: BrokerLogs;
@@ -2192,6 +2708,34 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Type?: __string;
   }
+  export interface PutClusterPolicyRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The policy version.
+         
+     */
+    CurrentVersion?: __string;
+    /**
+     * 
+            The policy.
+         
+     */
+    Policy: __string;
+  }
+  export interface PutClusterPolicyResponse {
+    /**
+     * 
+            The policy version.
+         
+     */
+    CurrentVersion?: __string;
+  }
   export interface RebootBrokerRequest {
     /**
      * 
@@ -2247,6 +2791,20 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Iam?: Iam;
   }
+  export interface VpcConnectivitySasl {
+    /**
+     * 
+            Details for SASL/SCRAM client authentication for VPC connectivity.
+         
+     */
+    Scram?: VpcConnectivityScram;
+    /**
+     * 
+            Details for SASL/IAM client authentication for VPC connectivity.
+         
+     */
+    Iam?: VpcConnectivityIam;
+  }
   export interface Scram {
     /**
      * 
@@ -2255,10 +2813,26 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Enabled?: __boolean;
   }
+  export interface VpcConnectivityScram {
+    /**
+     * 
+            SASL/SCRAM authentication is on or off for VPC connectivity.
+         
+     */
+    Enabled?: __boolean;
+  }
   export interface Iam {
     /**
      * 
             Indicates whether IAM access control is enabled.
+         
+     */
+    Enabled?: __boolean;
+  }
+  export interface VpcConnectivityIam {
+    /**
+     * 
+            SASL/IAM authentication is on or off for VPC connectivity.
          
      */
     Enabled?: __boolean;
@@ -2339,6 +2913,14 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     /**
      * 
             Specifies whether you want to turn on or turn off TLS authentication.
+         
+     */
+    Enabled?: __boolean;
+  }
+  export interface VpcConnectivityTls {
+    /**
+     * 
+            TLS authentication is on or off for VPC connectivity.
          
      */
     Enabled?: __boolean;
@@ -2776,6 +3358,56 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ClusterOperationArn?: __string;
   }
+  export interface UserIdentity {
+    /**
+     * 
+            The identity type of the requester that calls the API operation.
+         
+     */
+    Type?: UserIdentityType;
+    /**
+     * 
+            A unique identifier for the requester that calls the API operation.
+         
+     */
+    PrincipalId?: __string;
+  }
+  export type UserIdentityType = "AWSACCOUNT"|"AWSSERVICE"|string;
+  export interface VpcConnectionInfo {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the VPC connection.
+         
+     */
+    VpcConnectionArn?: __string;
+    /**
+     * 
+            The owner of the VPC Connection.
+         
+     */
+    Owner?: __string;
+    /**
+     * 
+            Description of the requester that calls the API operation.
+         
+     */
+    UserIdentity?: UserIdentity;
+    /**
+     * 
+            The time when Amazon MSK creates the VPC Connnection.
+         
+     */
+    CreationTime?: __timestampIso8601;
+  }
+  export type VpcConnectionState = "CREATING"|"AVAILABLE"|"INACTIVE"|"DEACTIVATING"|"DELETING"|"FAILED"|"REJECTED"|"REJECTING"|string;
+  export interface VpcConnectivity {
+    /**
+     * 
+            Includes all client authentication information for VPC connectivity.
+         
+     */
+    ClientAuthentication?: VpcConnectivityClientAuthentication;
+  }
   export interface ZookeeperNodeInfo {
     /**
      * 
@@ -2825,6 +3457,8 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfConfigurationRevision = ConfigurationRevision[];
   export type __listOfKafkaVersion = KafkaVersion[];
   export type __listOfNodeInfo = NodeInfo[];
+  export type __listOfClientVpcConnection = ClientVpcConnection[];
+  export type __listOfVpcConnection = VpcConnection[];
   export type __listOfUnprocessedScramSecret = UnprocessedScramSecret[];
   export type __listOf__string = __string[];
   export type __long = number;

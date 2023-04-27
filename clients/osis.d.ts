@@ -12,19 +12,19 @@ declare class OSIS extends Service {
   constructor(options?: OSIS.Types.ClientConfiguration)
   config: Config & OSIS.Types.ClientConfiguration;
   /**
-   * Creates an OpenSearch Ingestion pipeline. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Creates an OpenSearch Ingestion pipeline. For more information, see Creating Amazon OpenSearch Ingestion pipelines.
    */
   createPipeline(params: OSIS.Types.CreatePipelineRequest, callback?: (err: AWSError, data: OSIS.Types.CreatePipelineResponse) => void): Request<OSIS.Types.CreatePipelineResponse, AWSError>;
   /**
-   * Creates an OpenSearch Ingestion pipeline. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Creates an OpenSearch Ingestion pipeline. For more information, see Creating Amazon OpenSearch Ingestion pipelines.
    */
   createPipeline(callback?: (err: AWSError, data: OSIS.Types.CreatePipelineResponse) => void): Request<OSIS.Types.CreatePipelineResponse, AWSError>;
   /**
-   * Deletes an OpenSearch Ingestion pipeline. For more information, see Deleting pipelines.
+   * Deletes an OpenSearch Ingestion pipeline. For more information, see Deleting Amazon OpenSearch Ingestion pipelines.
    */
   deletePipeline(params: OSIS.Types.DeletePipelineRequest, callback?: (err: AWSError, data: OSIS.Types.DeletePipelineResponse) => void): Request<OSIS.Types.DeletePipelineResponse, AWSError>;
   /**
-   * Deletes an OpenSearch Ingestion pipeline. For more information, see Deleting pipelines.
+   * Deletes an OpenSearch Ingestion pipeline. For more information, see Deleting Amazon OpenSearch Ingestion pipelines.
    */
   deletePipeline(callback?: (err: AWSError, data: OSIS.Types.DeletePipelineResponse) => void): Request<OSIS.Types.DeletePipelineResponse, AWSError>;
   /**
@@ -36,91 +36,91 @@ declare class OSIS extends Service {
    */
   getPipeline(callback?: (err: AWSError, data: OSIS.Types.GetPipelineResponse) => void): Request<OSIS.Types.GetPipelineResponse, AWSError>;
   /**
-   * Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are templates for the configuration needed for a CreatePipeline request.
+   * Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are templates for the configuration needed for a CreatePipeline request. For more information, see Using blueprints to create a pipeline.
    */
   getPipelineBlueprint(params: OSIS.Types.GetPipelineBlueprintRequest, callback?: (err: AWSError, data: OSIS.Types.GetPipelineBlueprintResponse) => void): Request<OSIS.Types.GetPipelineBlueprintResponse, AWSError>;
   /**
-   * Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are templates for the configuration needed for a CreatePipeline request.
+   * Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are templates for the configuration needed for a CreatePipeline request. For more information, see Using blueprints to create a pipeline.
    */
   getPipelineBlueprint(callback?: (err: AWSError, data: OSIS.Types.GetPipelineBlueprintResponse) => void): Request<OSIS.Types.GetPipelineBlueprintResponse, AWSError>;
   /**
-   * Returns progress information for the current change happening on an OpenSearch Ingestion pipeline. Currently, this operation only returns information when a pipeline is being created. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Returns progress information for the current change happening on an OpenSearch Ingestion pipeline. Currently, this operation only returns information when a pipeline is being created. For more information, see Tracking the status of pipeline creation.
    */
   getPipelineChangeProgress(params: OSIS.Types.GetPipelineChangeProgressRequest, callback?: (err: AWSError, data: OSIS.Types.GetPipelineChangeProgressResponse) => void): Request<OSIS.Types.GetPipelineChangeProgressResponse, AWSError>;
   /**
-   * Returns progress information for the current change happening on an OpenSearch Ingestion pipeline. Currently, this operation only returns information when a pipeline is being created. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Returns progress information for the current change happening on an OpenSearch Ingestion pipeline. Currently, this operation only returns information when a pipeline is being created. For more information, see Tracking the status of pipeline creation.
    */
   getPipelineChangeProgress(callback?: (err: AWSError, data: OSIS.Types.GetPipelineChangeProgressResponse) => void): Request<OSIS.Types.GetPipelineChangeProgressResponse, AWSError>;
   /**
-   * Retrieves a list of all available blueprints for Data Prepper.
+   * Retrieves a list of all available blueprints for Data Prepper. For more information, see Using blueprints to create a pipeline.
    */
   listPipelineBlueprints(params: OSIS.Types.ListPipelineBlueprintsRequest, callback?: (err: AWSError, data: OSIS.Types.ListPipelineBlueprintsResponse) => void): Request<OSIS.Types.ListPipelineBlueprintsResponse, AWSError>;
   /**
-   * Retrieves a list of all available blueprints for Data Prepper.
+   * Retrieves a list of all available blueprints for Data Prepper. For more information, see Using blueprints to create a pipeline.
    */
   listPipelineBlueprints(callback?: (err: AWSError, data: OSIS.Types.ListPipelineBlueprintsResponse) => void): Request<OSIS.Types.ListPipelineBlueprintsResponse, AWSError>;
   /**
-   * Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For more information, see Viewing Amazon OpenSearch Ingestion pipelines.
    */
   listPipelines(params: OSIS.Types.ListPipelinesRequest, callback?: (err: AWSError, data: OSIS.Types.ListPipelinesResponse) => void): Request<OSIS.Types.ListPipelinesResponse, AWSError>;
   /**
-   * Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For more information, see Viewing Amazon OpenSearch Ingestion pipelines.
    */
   listPipelines(callback?: (err: AWSError, data: OSIS.Types.ListPipelinesResponse) => void): Request<OSIS.Types.ListPipelinesResponse, AWSError>;
   /**
-   * Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information, see Tagging OpenSearch Ingestion pipelines.
+   * Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information, see Tagging Amazon OpenSearch Ingestion pipelines.
    */
   listTagsForResource(params: OSIS.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: OSIS.Types.ListTagsForResourceResponse) => void): Request<OSIS.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information, see Tagging OpenSearch Ingestion pipelines.
+   * Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information, see Tagging Amazon OpenSearch Ingestion pipelines.
    */
   listTagsForResource(callback?: (err: AWSError, data: OSIS.Types.ListTagsForResourceResponse) => void): Request<OSIS.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Starts an OpenSearch Ingestion pipeline. For more information, see Starting pipelines.
+   * Starts an OpenSearch Ingestion pipeline. For more information, see Starting an OpenSearch Ingestion pipeline.
    */
   startPipeline(params: OSIS.Types.StartPipelineRequest, callback?: (err: AWSError, data: OSIS.Types.StartPipelineResponse) => void): Request<OSIS.Types.StartPipelineResponse, AWSError>;
   /**
-   * Starts an OpenSearch Ingestion pipeline. For more information, see Starting pipelines.
+   * Starts an OpenSearch Ingestion pipeline. For more information, see Starting an OpenSearch Ingestion pipeline.
    */
   startPipeline(callback?: (err: AWSError, data: OSIS.Types.StartPipelineResponse) => void): Request<OSIS.Types.StartPipelineResponse, AWSError>;
   /**
-   * Stops an OpenSearch Ingestion pipeline. For more information, see Stopping pipelines.
+   * Stops an OpenSearch Ingestion pipeline. For more information, see Stopping an OpenSearch Ingestion pipeline.
    */
   stopPipeline(params: OSIS.Types.StopPipelineRequest, callback?: (err: AWSError, data: OSIS.Types.StopPipelineResponse) => void): Request<OSIS.Types.StopPipelineResponse, AWSError>;
   /**
-   * Stops an OpenSearch Ingestion pipeline. For more information, see Stopping pipelines.
+   * Stops an OpenSearch Ingestion pipeline. For more information, see Stopping an OpenSearch Ingestion pipeline.
    */
   stopPipeline(callback?: (err: AWSError, data: OSIS.Types.StopPipelineResponse) => void): Request<OSIS.Types.StopPipelineResponse, AWSError>;
   /**
-   * Tags an OpenSearch Ingestion pipeline. For more information, see Tagging OpenSearch Ingestion pipelines.
+   * Tags an OpenSearch Ingestion pipeline. For more information, see Tagging Amazon OpenSearch Ingestion pipelines.
    */
   tagResource(params: OSIS.Types.TagResourceRequest, callback?: (err: AWSError, data: OSIS.Types.TagResourceResponse) => void): Request<OSIS.Types.TagResourceResponse, AWSError>;
   /**
-   * Tags an OpenSearch Ingestion pipeline. For more information, see Tagging OpenSearch Ingestion pipelines.
+   * Tags an OpenSearch Ingestion pipeline. For more information, see Tagging Amazon OpenSearch Ingestion pipelines.
    */
   tagResource(callback?: (err: AWSError, data: OSIS.Types.TagResourceResponse) => void): Request<OSIS.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see Tagging OpenSearch Ingestion pipelines.
+   * Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see Tagging Amazon OpenSearch Ingestion pipelines.
    */
   untagResource(params: OSIS.Types.UntagResourceRequest, callback?: (err: AWSError, data: OSIS.Types.UntagResourceResponse) => void): Request<OSIS.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see Tagging OpenSearch Ingestion pipelines.
+   * Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see Tagging Amazon OpenSearch Ingestion pipelines.
    */
   untagResource(callback?: (err: AWSError, data: OSIS.Types.UntagResourceResponse) => void): Request<OSIS.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates an OpenSearch Ingestion pipeline. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Updates an OpenSearch Ingestion pipeline. For more information, see Updating Amazon OpenSearch Ingestion pipelines.
    */
   updatePipeline(params: OSIS.Types.UpdatePipelineRequest, callback?: (err: AWSError, data: OSIS.Types.UpdatePipelineResponse) => void): Request<OSIS.Types.UpdatePipelineResponse, AWSError>;
   /**
-   * Updates an OpenSearch Ingestion pipeline. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Updates an OpenSearch Ingestion pipeline. For more information, see Updating Amazon OpenSearch Ingestion pipelines.
    */
   updatePipeline(callback?: (err: AWSError, data: OSIS.Types.UpdatePipelineResponse) => void): Request<OSIS.Types.UpdatePipelineResponse, AWSError>;
   /**
-   * Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For more information, see Creating Amazon OpenSearch Ingestion pipelines.
    */
   validatePipeline(params: OSIS.Types.ValidatePipelineRequest, callback?: (err: AWSError, data: OSIS.Types.ValidatePipelineResponse) => void): Request<OSIS.Types.ValidatePipelineResponse, AWSError>;
   /**
-   * Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For more information, see Creating and managing OpenSearch Ingestion pipelines.
+   * Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For more information, see Creating Amazon OpenSearch Ingestion pipelines.
    */
   validatePipeline(callback?: (err: AWSError, data: OSIS.Types.ValidatePipelineResponse) => void): Request<OSIS.Types.ValidatePipelineResponse, AWSError>;
 }
