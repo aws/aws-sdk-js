@@ -2218,7 +2218,9 @@
         "ENABLED",
         "ENABLING",
         "DELETING",
-        "ERROR"
+        "ERROR",
+        "PAUSED",
+        "PAUSING"
       ]
     },
     "Resource": {

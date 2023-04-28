@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1367.0-->
+<!--LATEST=2.1368.0-->
 <!--ENTRYINSERT-->
+
+## 2.1368.0
+* feature: Appflow: Adds Jwt Support for Salesforce Credentials.
+* feature: Athena: You can now use capacity reservations on Amazon Athena to run SQL queries on fully-managed compute capacity.
+* feature: EFS: This release adds PAUSED and PAUSING state as a returned value for DescribeReplicationConfigurations response.
+* feature: Grafana: This release adds support for the grafanaVersion parameter in CreateWorkspace.
+* feature: Iot: This release allows AWS IoT Core users to specify a TLS security policy when creating and updating AWS IoT Domain Configurations.
+* feature: Rekognition: Added support for aggregating moderation labels by video segment timestamps for Stored Video Content Moderation APIs and added additional information about the job to all Stored Video Get API responses.
+* feature: SimSpaceWeaver: Added a new CreateSnapshot API. For the StartSimulation API, SchemaS3Location is now optional, added a new SnapshotS3Location parameter. For the DescribeSimulation API, added SNAPSHOT_IN_PROGRESS simulation state, deprecated SchemaError, added new fields: StartError and SnapshotS3Location.
+* feature: WAFV2: You can now associate a web ACL with a Verified Access instance.
 
 ## 2.1367.0
 * feature: EC2: This release adds support for AMD SEV-SNP on EC2 instances.

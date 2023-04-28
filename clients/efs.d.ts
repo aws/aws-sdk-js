@@ -1002,7 +1002,7 @@ declare namespace EFS {
     Destinations: Destinations;
   }
   export type ReplicationConfigurationDescriptions = ReplicationConfigurationDescription[];
-  export type ReplicationStatus = "ENABLED"|"ENABLING"|"DELETING"|"ERROR"|string;
+  export type ReplicationStatus = "ENABLED"|"ENABLING"|"DELETING"|"ERROR"|"PAUSED"|"PAUSING"|string;
   export type Resource = "FILE_SYSTEM"|"MOUNT_TARGET"|string;
   export type ResourceId = string;
   export interface ResourceIdPreference {

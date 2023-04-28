@@ -824,6 +824,7 @@ declare namespace Rekognition {
   }
   export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
   export type ContentClassifiers = ContentClassifier[];
+  export type ContentModerationAggregateBy = "TIMESTAMPS"|"SEGMENTS"|string;
   export interface ContentModerationDetection {
     /**
      * Time, in milliseconds from the beginning of the video, that the content moderation label was detected. Note that Timestamp is not guaranteed to be accurate to the individual frame where the moderated content first appears.
@@ -833,6 +834,18 @@ declare namespace Rekognition {
      * The content moderation label detected by in the stored video.
      */
     ModerationLabel?: ModerationLabel;
+    /**
+     * The time in milliseconds defining the start of the timeline segment containing a continuously detected moderation label.
+     */
+    StartTimestampMillis?: ULong;
+    /**
+     *  The time in milliseconds defining the end of the timeline segment containing a continuously detected moderation label. 
+     */
+    EndTimestampMillis?: ULong;
+    /**
+     *  The time duration of a segment in milliseconds, I.e. time elapsed from StartTimestampMillis to EndTimestampMillis. 
+     */
+    DurationMillis?: ULong;
   }
   export type ContentModerationDetections = ContentModerationDetection[];
   export type ContentModerationSortBy = "NAME"|"TIMESTAMP"|string;
@@ -2006,6 +2019,15 @@ declare namespace Rekognition {
      * Array of celebrities recognized in the video.
      */
     Celebrities?: CelebrityRecognitions;
+    /**
+     * Job identifier for the celebrity recognition operation for which you want to obtain results. The job identifer is returned by an initial call to StartCelebrityRecognition.
+     */
+    JobId?: JobId;
+    Video?: Video;
+    /**
+     * A job identifier specified in the call to StartCelebrityRecognition and returned in the job completion notification sent to your Amazon Simple Notification Service topic.
+     */
+    JobTag?: JobTag;
   }
   export interface GetContentModerationRequest {
     /**
@@ -2024,6 +2046,20 @@ declare namespace Rekognition {
      * Sort to use for elements in the ModerationLabelDetections array. Use TIMESTAMP to sort array elements by the time labels are detected. Use NAME to alphabetically group elements for a label together. Within each label group, the array element are sorted by detection confidence. The default sort is by TIMESTAMP.
      */
     SortBy?: ContentModerationSortBy;
+    /**
+     * Defines how to aggregate results of the StartContentModeration request. Default aggregation option is TIMESTAMPS. SEGMENTS mode aggregates moderation labels over time.
+     */
+    AggregateBy?: ContentModerationAggregateBy;
+  }
+  export interface GetContentModerationRequestMetadata {
+    /**
+     * The sorting method chosen for a GetContentModeration request.
+     */
+    SortBy?: ContentModerationSortBy;
+    /**
+     * The aggregation method chosen for a GetContentModeration request.
+     */
+    AggregateBy?: ContentModerationAggregateBy;
   }
   export interface GetContentModerationResponse {
     /**
@@ -2050,6 +2086,19 @@ declare namespace Rekognition {
      * Version number of the moderation detection model that was used to detect inappropriate, unwanted, or offensive content.
      */
     ModerationModelVersion?: String;
+    /**
+     * Job identifier for the content moderation operation for which you want to obtain results. The job identifer is returned by an initial call to StartContentModeration.
+     */
+    JobId?: JobId;
+    Video?: Video;
+    /**
+     * A job identifier specified in the call to StartContentModeration and returned in the job completion notification sent to your Amazon Simple Notification Service topic.
+     */
+    JobTag?: JobTag;
+    /**
+     * Information about the paramters used when getting a response. Includes information on aggregation and sorting methods.
+     */
+    GetRequestMetadata?: GetContentModerationRequestMetadata;
   }
   export interface GetFaceDetectionRequest {
     /**
@@ -2086,6 +2135,15 @@ declare namespace Rekognition {
      * An array of faces detected in the video. Each element contains a detected face's details and the time, in milliseconds from the start of the video, the face was detected. 
      */
     Faces?: FaceDetections;
+    /**
+     * Job identifier for the face detection operation for which you want to obtain results. The job identifer is returned by an initial call to StartFaceDetection.
+     */
+    JobId?: JobId;
+    Video?: Video;
+    /**
+     * A job identifier specified in the call to StartFaceDetection and returned in the job completion notification sent to your Amazon Simple Notification Service topic.
+     */
+    JobTag?: JobTag;
   }
   export interface GetFaceLivenessSessionResultsRequest {
     /**
@@ -2154,6 +2212,15 @@ declare namespace Rekognition {
      * An array of persons, PersonMatch, in the video whose face(s) match the face(s) in an Amazon Rekognition collection. It also includes time information for when persons are matched in the video. You specify the input collection in an initial call to StartFaceSearch. Each Persons element includes a time the person was matched, face match details (FaceMatches) for matching faces in the collection, and person information (Person) for the matched person. 
      */
     Persons?: PersonMatches;
+    /**
+     * Job identifier for the face search operation for which you want to obtain results. The job identifer is returned by an initial call to StartFaceSearch.
+     */
+    JobId?: JobId;
+    Video?: Video;
+    /**
+     * A job identifier specified in the call to StartFaceSearch and returned in the job completion notification sent to your Amazon Simple Notification Service topic.
+     */
+    JobTag?: JobTag;
   }
   export interface GetLabelDetectionRequest {
     /**
@@ -2174,6 +2241,16 @@ declare namespace Rekognition {
     SortBy?: LabelDetectionSortBy;
     /**
      * Defines how to aggregate the returned results. Results can be aggregated by timestamps or segments.
+     */
+    AggregateBy?: LabelDetectionAggregateBy;
+  }
+  export interface GetLabelDetectionRequestMetadata {
+    /**
+     * The sorting method chosen for a GetLabelDetection request.
+     */
+    SortBy?: LabelDetectionSortBy;
+    /**
+     * The aggregation method chosen for a GetLabelDetection request.
      */
     AggregateBy?: LabelDetectionAggregateBy;
   }
@@ -2202,6 +2279,19 @@ declare namespace Rekognition {
      * Version number of the label detection model that was used to detect labels.
      */
     LabelModelVersion?: String;
+    /**
+     * Job identifier for the label detection operation for which you want to obtain results. The job identifer is returned by an initial call to StartLabelDetection.
+     */
+    JobId?: JobId;
+    Video?: Video;
+    /**
+     * A job identifier specified in the call to StartLabelDetection and returned in the job completion notification sent to your Amazon Simple Notification Service topic.
+     */
+    JobTag?: JobTag;
+    /**
+     * Information about the paramters used when getting a response. Includes information on aggregation and sorting methods.
+     */
+    GetRequestMetadata?: GetLabelDetectionRequestMetadata;
   }
   export interface GetPersonTrackingRequest {
     /**
@@ -2242,6 +2332,15 @@ declare namespace Rekognition {
      * An array of the persons detected in the video and the time(s) their path was tracked throughout the video. An array element will exist for each time a person's path is tracked. 
      */
     Persons?: PersonDetections;
+    /**
+     * Job identifier for the person tracking operation for which you want to obtain results. The job identifer is returned by an initial call to StartPersonTracking.
+     */
+    JobId?: JobId;
+    Video?: Video;
+    /**
+     * A job identifier specified in the call to StartCelebrityRecognition and returned in the job completion notification sent to your Amazon Simple Notification Service topic.
+     */
+    JobTag?: JobTag;
   }
   export interface GetSegmentDetectionRequest {
     /**
@@ -2286,6 +2385,15 @@ declare namespace Rekognition {
      * An array containing the segment types requested in the call to StartSegmentDetection. 
      */
     SelectedSegmentTypes?: SegmentTypesInfo;
+    /**
+     * Job identifier for the segment detection operation for which you want to obtain results. The job identifer is returned by an initial call to StartSegmentDetection.
+     */
+    JobId?: JobId;
+    Video?: Video;
+    /**
+     * A job identifier specified in the call to StartSegmentDetection and returned in the job completion notification sent to your Amazon Simple Notification Service topic.
+     */
+    JobTag?: JobTag;
   }
   export interface GetTextDetectionRequest {
     /**
@@ -2323,6 +2431,15 @@ declare namespace Rekognition {
      * Version number of the text detection model that was used to detect text.
      */
     TextModelVersion?: String;
+    /**
+     * Job identifier for the text detection operation for which you want to obtain results. The job identifer is returned by an initial call to StartTextDetection.
+     */
+    JobId?: JobId;
+    Video?: Video;
+    /**
+     * A job identifier specified in the call to StartTextDetection and returned in the job completion notification sent to your Amazon Simple Notification Service topic.
+     */
+    JobTag?: JobTag;
   }
   export type GroundTruthBlob = Buffer|Uint8Array|Blob|string;
   export interface GroundTruthManifest {

@@ -290,6 +290,10 @@ declare namespace Grafana {
      */
     configuration?: OverridableConfigurationJson;
     /**
+     * Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4.
+     */
+    grafanaVersion?: GrafanaVersion;
+    /**
      * Configuration for network access to your workspace. When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required. If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.
      */
     networkAccessControl?: NetworkAccessConfiguration;

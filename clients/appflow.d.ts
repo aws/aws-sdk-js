@@ -1878,6 +1878,7 @@ declare namespace Appflow {
   }
   export type InstanceUrl = string;
   export type JavaBoolean = boolean;
+  export type JwtToken = string;
   export type KMSArn = string;
   export type Key = string;
   export type Label = string;
@@ -2123,7 +2124,7 @@ declare namespace Appflow {
      */
     oauth2CustomProperties?: OAuth2CustomPropertiesList;
   }
-  export type OAuth2GrantType = "CLIENT_CREDENTIALS"|"AUTHORIZATION_CODE"|string;
+  export type OAuth2GrantType = "CLIENT_CREDENTIALS"|"AUTHORIZATION_CODE"|"JWT_BEARER"|string;
   export type OAuth2GrantTypeSupportedList = OAuth2GrantType[];
   export interface OAuth2Properties {
     /**
@@ -2515,6 +2516,14 @@ declare namespace Appflow {
      *  The secret manager ARN, which contains the client ID and client secret of the connected app. 
      */
     clientCredentialsArn?: ClientCredentialsArn;
+    /**
+     * Specifies the OAuth 2.0 grant type that Amazon AppFlow uses when it requests an access token from Salesforce. Amazon AppFlow requires an access token each time it attempts to access your Salesforce records. You can specify one of the following values:  AUTHORIZATION_CODE  Amazon AppFlow passes an authorization code when it requests the access token from Salesforce. Amazon AppFlow receives the authorization code from Salesforce after you log in to your Salesforce account and authorize Amazon AppFlow to access your records.  CLIENT_CREDENTIALS  Amazon AppFlow passes client credentials (a client ID and client secret) when it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.  JWT_BEARER  Amazon AppFlow passes a JSON web token (JWT) when it requests the access token from Salesforce. You provide the JWT to Amazon AppFlow when you define the connection to your Salesforce account. When you use this grant type, you don't need to log in to your Salesforce account to authorize Amazon AppFlow to access your records.  
+     */
+    oAuth2GrantType?: OAuth2GrantType;
+    /**
+     * A JSON web token (JWT) that authorizes Amazon AppFlow to access your Salesforce records.
+     */
+    jwtToken?: JwtToken;
   }
   export interface SalesforceConnectorProfileProperties {
     /**
@@ -2563,6 +2572,10 @@ declare namespace Appflow {
      * The Salesforce APIs that you can have Amazon AppFlow use when your flows transfers data to or from Salesforce.
      */
     dataTransferApis?: SalesforceDataTransferApiList;
+    /**
+     * The OAuth 2.0 grant types that Amazon AppFlow can use when it requests an access token from Salesforce. Amazon AppFlow requires an access token each time it attempts to access your Salesforce records.  AUTHORIZATION_CODE  Amazon AppFlow passes an authorization code when it requests the access token from Salesforce. Amazon AppFlow receives the authorization code from Salesforce after you log in to your Salesforce account and authorize Amazon AppFlow to access your records.  CLIENT_CREDENTIALS  Amazon AppFlow passes client credentials (a client ID and client secret) when it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.  JWT_BEARER  Amazon AppFlow passes a JSON web token (JWT) when it requests the access token from Salesforce. You provide the JWT to Amazon AppFlow when you define the connection to your Salesforce account. When you use this grant type, you don't need to log in to your Salesforce account to authorize Amazon AppFlow to access your records.  
+     */
+    oauth2GrantTypesSupported?: OAuth2GrantTypeSupportedList;
   }
   export interface SalesforceSourceProperties {
     /**

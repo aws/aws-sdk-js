@@ -36,6 +36,22 @@ declare class Athena extends Service {
    */
   batchGetQueryExecution(callback?: (err: AWSError, data: Athena.Types.BatchGetQueryExecutionOutput) => void): Request<Athena.Types.BatchGetQueryExecutionOutput, AWSError>;
   /**
+   * Cancels the capacity reservation with the specified name.
+   */
+  cancelCapacityReservation(params: Athena.Types.CancelCapacityReservationInput, callback?: (err: AWSError, data: Athena.Types.CancelCapacityReservationOutput) => void): Request<Athena.Types.CancelCapacityReservationOutput, AWSError>;
+  /**
+   * Cancels the capacity reservation with the specified name.
+   */
+  cancelCapacityReservation(callback?: (err: AWSError, data: Athena.Types.CancelCapacityReservationOutput) => void): Request<Athena.Types.CancelCapacityReservationOutput, AWSError>;
+  /**
+   * Creates a capacity reservation with the specified name and number of requested data processing units.
+   */
+  createCapacityReservation(params: Athena.Types.CreateCapacityReservationInput, callback?: (err: AWSError, data: Athena.Types.CreateCapacityReservationOutput) => void): Request<Athena.Types.CreateCapacityReservationOutput, AWSError>;
+  /**
+   * Creates a capacity reservation with the specified name and number of requested data processing units.
+   */
+  createCapacityReservation(callback?: (err: AWSError, data: Athena.Types.CreateCapacityReservationOutput) => void): Request<Athena.Types.CreateCapacityReservationOutput, AWSError>;
+  /**
    * Creates (registers) a data catalog with the specified name and properties. Catalogs created are visible to all users of the same Amazon Web Services account.
    */
   createDataCatalog(params: Athena.Types.CreateDataCatalogInput, callback?: (err: AWSError, data: Athena.Types.CreateDataCatalogOutput) => void): Request<Athena.Types.CreateDataCatalogOutput, AWSError>;
@@ -155,6 +171,22 @@ declare class Athena extends Service {
    * Gets the status of a current calculation.
    */
   getCalculationExecutionStatus(callback?: (err: AWSError, data: Athena.Types.GetCalculationExecutionStatusResponse) => void): Request<Athena.Types.GetCalculationExecutionStatusResponse, AWSError>;
+  /**
+   * Gets the capacity assignment configuration for a capacity reservation, if one exists.
+   */
+  getCapacityAssignmentConfiguration(params: Athena.Types.GetCapacityAssignmentConfigurationInput, callback?: (err: AWSError, data: Athena.Types.GetCapacityAssignmentConfigurationOutput) => void): Request<Athena.Types.GetCapacityAssignmentConfigurationOutput, AWSError>;
+  /**
+   * Gets the capacity assignment configuration for a capacity reservation, if one exists.
+   */
+  getCapacityAssignmentConfiguration(callback?: (err: AWSError, data: Athena.Types.GetCapacityAssignmentConfigurationOutput) => void): Request<Athena.Types.GetCapacityAssignmentConfigurationOutput, AWSError>;
+  /**
+   * Returns information about the capacity reservation with the specified name.
+   */
+  getCapacityReservation(params: Athena.Types.GetCapacityReservationInput, callback?: (err: AWSError, data: Athena.Types.GetCapacityReservationOutput) => void): Request<Athena.Types.GetCapacityReservationOutput, AWSError>;
+  /**
+   * Returns information about the capacity reservation with the specified name.
+   */
+  getCapacityReservation(callback?: (err: AWSError, data: Athena.Types.GetCapacityReservationOutput) => void): Request<Athena.Types.GetCapacityReservationOutput, AWSError>;
   /**
    * Returns the specified data catalog.
    */
@@ -276,6 +308,14 @@ declare class Athena extends Service {
    */
   listCalculationExecutions(callback?: (err: AWSError, data: Athena.Types.ListCalculationExecutionsResponse) => void): Request<Athena.Types.ListCalculationExecutionsResponse, AWSError>;
   /**
+   * Lists the capacity reservations for the current account.
+   */
+  listCapacityReservations(params: Athena.Types.ListCapacityReservationsInput, callback?: (err: AWSError, data: Athena.Types.ListCapacityReservationsOutput) => void): Request<Athena.Types.ListCapacityReservationsOutput, AWSError>;
+  /**
+   * Lists the capacity reservations for the current account.
+   */
+  listCapacityReservations(callback?: (err: AWSError, data: Athena.Types.ListCapacityReservationsOutput) => void): Request<Athena.Types.ListCapacityReservationsOutput, AWSError>;
+  /**
    * Lists the data catalogs in the current Amazon Web Services account.  In the Athena console, data catalogs are listed as "data sources" on the Data sources page under the Data source name column. 
    */
   listDataCatalogs(params: Athena.Types.ListDataCatalogsInput, callback?: (err: AWSError, data: Athena.Types.ListDataCatalogsOutput) => void): Request<Athena.Types.ListDataCatalogsOutput, AWSError>;
@@ -364,11 +404,11 @@ declare class Athena extends Service {
    */
   listTableMetadata(callback?: (err: AWSError, data: Athena.Types.ListTableMetadataOutput) => void): Request<Athena.Types.ListTableMetadataOutput, AWSError>;
   /**
-   * Lists the tags associated with an Athena workgroup or data catalog resource.
+   * Lists the tags associated with an Athena resource.
    */
   listTagsForResource(params: Athena.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: Athena.Types.ListTagsForResourceOutput) => void): Request<Athena.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Lists the tags associated with an Athena workgroup or data catalog resource.
+   * Lists the tags associated with an Athena resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Athena.Types.ListTagsForResourceOutput) => void): Request<Athena.Types.ListTagsForResourceOutput, AWSError>;
   /**
@@ -379,6 +419,14 @@ declare class Athena extends Service {
    * Lists available workgroups for the account.
    */
   listWorkGroups(callback?: (err: AWSError, data: Athena.Types.ListWorkGroupsOutput) => void): Request<Athena.Types.ListWorkGroupsOutput, AWSError>;
+  /**
+   * Puts a new capacity assignment configuration for a specified capacity reservation. If a capacity assignment configuration already exists for the capacity reservation, replaces the existing capacity assignment configuration.
+   */
+  putCapacityAssignmentConfiguration(params: Athena.Types.PutCapacityAssignmentConfigurationInput, callback?: (err: AWSError, data: Athena.Types.PutCapacityAssignmentConfigurationOutput) => void): Request<Athena.Types.PutCapacityAssignmentConfigurationOutput, AWSError>;
+  /**
+   * Puts a new capacity assignment configuration for a specified capacity reservation. If a capacity assignment configuration already exists for the capacity reservation, replaces the existing capacity assignment configuration.
+   */
+  putCapacityAssignmentConfiguration(callback?: (err: AWSError, data: Athena.Types.PutCapacityAssignmentConfigurationOutput) => void): Request<Athena.Types.PutCapacityAssignmentConfigurationOutput, AWSError>;
   /**
    * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request.
    */
@@ -420,11 +468,11 @@ declare class Athena extends Service {
    */
   stopQueryExecution(callback?: (err: AWSError, data: Athena.Types.StopQueryExecutionOutput) => void): Request<Athena.Types.StopQueryExecutionOutput, AWSError>;
   /**
-   * Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see Tagging Best Practices. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.
+   * Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups, data catalogs, or capacity reservations by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter the resources in your account. For best practices, see Tagging Best Practices. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.
    */
   tagResource(params: Athena.Types.TagResourceInput, callback?: (err: AWSError, data: Athena.Types.TagResourceOutput) => void): Request<Athena.Types.TagResourceOutput, AWSError>;
   /**
-   * Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see Tagging Best Practices. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.
+   * Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups, data catalogs, or capacity reservations by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter the resources in your account. For best practices, see Tagging Best Practices. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.
    */
   tagResource(callback?: (err: AWSError, data: Athena.Types.TagResourceOutput) => void): Request<Athena.Types.TagResourceOutput, AWSError>;
   /**
@@ -436,13 +484,21 @@ declare class Athena extends Service {
    */
   terminateSession(callback?: (err: AWSError, data: Athena.Types.TerminateSessionResponse) => void): Request<Athena.Types.TerminateSessionResponse, AWSError>;
   /**
-   * Removes one or more tags from a data catalog or workgroup resource.
+   * Removes one or more tags from an Athena resource.
    */
   untagResource(params: Athena.Types.UntagResourceInput, callback?: (err: AWSError, data: Athena.Types.UntagResourceOutput) => void): Request<Athena.Types.UntagResourceOutput, AWSError>;
   /**
-   * Removes one or more tags from a data catalog or workgroup resource.
+   * Removes one or more tags from an Athena resource.
    */
   untagResource(callback?: (err: AWSError, data: Athena.Types.UntagResourceOutput) => void): Request<Athena.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Updates the number of requested data processing units for the capacity reservation with the specified name.
+   */
+  updateCapacityReservation(params: Athena.Types.UpdateCapacityReservationInput, callback?: (err: AWSError, data: Athena.Types.UpdateCapacityReservationOutput) => void): Request<Athena.Types.UpdateCapacityReservationOutput, AWSError>;
+  /**
+   * Updates the number of requested data processing units for the capacity reservation with the specified name.
+   */
+  updateCapacityReservation(callback?: (err: AWSError, data: Athena.Types.UpdateCapacityReservationOutput) => void): Request<Athena.Types.UpdateCapacityReservationOutput, AWSError>;
   /**
    * Updates the data catalog that has the specified name.
    */
@@ -500,6 +556,7 @@ declare namespace Athena {
     S3AclOption: S3AclOption;
   }
   export type Age = number;
+  export type AllocatedDpusInteger = number;
   export type AmazonResourceName = string;
   export interface ApplicationDPUSizes {
     /**
@@ -657,6 +714,80 @@ declare namespace Athena {
     Status?: CalculationStatus;
   }
   export type CalculationsList = CalculationSummary[];
+  export interface CancelCapacityReservationInput {
+    /**
+     * The name of the capacity reservation to cancel.
+     */
+    Name: CapacityReservationName;
+  }
+  export interface CancelCapacityReservationOutput {
+  }
+  export interface CapacityAllocation {
+    /**
+     * The status of the capacity allocation.
+     */
+    Status: CapacityAllocationStatus;
+    /**
+     * The status message of the capacity allocation.
+     */
+    StatusMessage?: String;
+    /**
+     * The time when the capacity allocation was requested.
+     */
+    RequestTime: Timestamp;
+    /**
+     * The time when the capacity allocation request was completed.
+     */
+    RequestCompletionTime?: Timestamp;
+  }
+  export type CapacityAllocationStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string;
+  export interface CapacityAssignment {
+    /**
+     * The list of workgroup names for the capacity assignment.
+     */
+    WorkGroupNames?: WorkGroupNamesList;
+  }
+  export interface CapacityAssignmentConfiguration {
+    /**
+     * The name of the reservation that the capacity assignment configuration is for.
+     */
+    CapacityReservationName?: CapacityReservationName;
+    /**
+     * The list of assignments that make up the capacity assignment configuration.
+     */
+    CapacityAssignments?: CapacityAssignmentsList;
+  }
+  export type CapacityAssignmentsList = CapacityAssignment[];
+  export interface CapacityReservation {
+    /**
+     * The name of the capacity reservation.
+     */
+    Name: CapacityReservationName;
+    /**
+     * The status of the capacity reservation.
+     */
+    Status: CapacityReservationStatus;
+    /**
+     * The number of data processing units requested.
+     */
+    TargetDpus: TargetDpusInteger;
+    /**
+     * The number of data processing units currently allocated.
+     */
+    AllocatedDpus: AllocatedDpusInteger;
+    LastAllocation?: CapacityAllocation;
+    /**
+     * The time of the most recent capacity allocation that succeeded.
+     */
+    LastSuccessfulAllocationTime?: Timestamp;
+    /**
+     * The time in UTC epoch millis when the capacity reservation was created.
+     */
+    CreationTime: Timestamp;
+  }
+  export type CapacityReservationName = string;
+  export type CapacityReservationStatus = "PENDING"|"ACTIVE"|"CANCELLING"|"CANCELLED"|"FAILED"|"UPDATE_PENDING"|string;
+  export type CapacityReservationsList = CapacityReservation[];
   export type CatalogNameString = string;
   export type ClientRequestToken = string;
   export type CodeBlock = string;
@@ -721,6 +852,22 @@ declare namespace Athena {
   export type ColumnNullable = "NOT_NULL"|"NULLABLE"|"UNKNOWN"|string;
   export type CommentString = string;
   export type CoordinatorDpuSize = number;
+  export interface CreateCapacityReservationInput {
+    /**
+     * The number of requested data processing units.
+     */
+    TargetDpus: TargetDpusInteger;
+    /**
+     * The name of the capacity reservation to create.
+     */
+    Name: CapacityReservationName;
+    /**
+     * The tags for the capacity reservation.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateCapacityReservationOutput {
+  }
   export interface CreateDataCatalogInput {
     /**
      * The name of the data catalog to create. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign, or hyphen characters. The remainder of the length constraint of 256 is reserved for use by Athena.
@@ -979,7 +1126,7 @@ declare namespace Athena {
   export type EncryptionOption = "SSE_S3"|"SSE_KMS"|"CSE_KMS"|string;
   export interface EngineConfiguration {
     /**
-     * The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session.
+     * The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.
      */
     CoordinatorDpuSize?: CoordinatorDpuSize;
     /**
@@ -987,7 +1134,7 @@ declare namespace Athena {
      */
     MaxConcurrentDpus: MaxConcurrentDpus;
     /**
-     * The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena.
+     * The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.
      */
     DefaultExecutorDpuSize?: DefaultExecutorDpuSize;
     /**
@@ -1128,6 +1275,30 @@ declare namespace Athena {
      * Contains information about the DPU execution time and progress.
      */
     Statistics?: CalculationStatistics;
+  }
+  export interface GetCapacityAssignmentConfigurationInput {
+    /**
+     * The name of the capacity reservation to retrieve the capacity assignment configuration for.
+     */
+    CapacityReservationName: CapacityReservationName;
+  }
+  export interface GetCapacityAssignmentConfigurationOutput {
+    /**
+     * The requested capacity assignment configuration for the specified capacity reservation.
+     */
+    CapacityAssignmentConfiguration: CapacityAssignmentConfiguration;
+  }
+  export interface GetCapacityReservationInput {
+    /**
+     * The name of the capacity reservation.
+     */
+    Name: CapacityReservationName;
+  }
+  export interface GetCapacityReservationOutput {
+    /**
+     * The requested capacity reservation structure.
+     */
+    CapacityReservation: CapacityReservation;
   }
   export interface GetDataCatalogInput {
     /**
@@ -1420,6 +1591,26 @@ declare namespace Athena {
      * A list of CalculationSummary objects.
      */
     Calculations?: CalculationsList;
+  }
+  export interface ListCapacityReservationsInput {
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated.
+     */
+    NextToken?: Token;
+    /**
+     * Specifies the maximum number of results to return.
+     */
+    MaxResults?: MaxCapacityReservationsCount;
+  }
+  export interface ListCapacityReservationsOutput {
+    /**
+     * A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.
+     */
+    NextToken?: Token;
+    /**
+     * The capacity reservations for the current account.
+     */
+    CapacityReservations: CapacityReservationsList;
   }
   export interface ListDataCatalogsInput {
     /**
@@ -1748,6 +1939,7 @@ declare namespace Athena {
   export type Long = number;
   export type MaxApplicationDPUSizesCount = number;
   export type MaxCalculationsCount = number;
+  export type MaxCapacityReservationsCount = number;
   export type MaxConcurrentDpus = number;
   export type MaxDataCatalogsCount = number;
   export type MaxDatabasesCount = number;
@@ -1872,6 +2064,18 @@ declare namespace Athena {
     LastModifiedTime?: _Date;
   }
   export type PreparedStatementsList = PreparedStatementSummary[];
+  export interface PutCapacityAssignmentConfigurationInput {
+    /**
+     * The name of the capacity reservation to put a capacity assignment configuration for.
+     */
+    CapacityReservationName: CapacityReservationName;
+    /**
+     * The list of assignments for the capacity assignment configuration.
+     */
+    CapacityAssignments: CapacityAssignmentsList;
+  }
+  export interface PutCapacityAssignmentConfigurationOutput {
+  }
   export interface QueryExecution {
     /**
      * The unique identifier for each query execution.
@@ -2450,17 +2654,18 @@ declare namespace Athena {
   export type TagList = Tag[];
   export interface TagResourceInput {
     /**
-     * Specifies the ARN of the Athena resource (workgroup or data catalog) to which tags are to be added.
+     * Specifies the ARN of the Athena resource to which tags are to be added.
      */
     ResourceARN: AmazonResourceName;
     /**
-     * A collection of one or more tags, separated by commas, to be added to an Athena workgroup or data catalog resource.
+     * A collection of one or more tags, separated by commas, to be added to an Athena resource.
      */
     Tags: TagList;
   }
   export interface TagResourceOutput {
   }
   export type TagValue = string;
+  export type TargetDpusInteger = number;
   export interface TerminateSessionRequest {
     /**
      * The session ID.
@@ -2532,6 +2737,18 @@ declare namespace Athena {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceOutput {
+  }
+  export interface UpdateCapacityReservationInput {
+    /**
+     * The new number of requested data processing units.
+     */
+    TargetDpus: TargetDpusInteger;
+    /**
+     * The name of the capacity reservation.
+     */
+    Name: CapacityReservationName;
+  }
+  export interface UpdateCapacityReservationOutput {
   }
   export interface UpdateDataCatalogInput {
     /**
@@ -2766,6 +2983,7 @@ declare namespace Athena {
   }
   export type WorkGroupDescriptionString = string;
   export type WorkGroupName = string;
+  export type WorkGroupNamesList = WorkGroupName[];
   export type WorkGroupState = "ENABLED"|"DISABLED"|string;
   export interface WorkGroupSummary {
     /**

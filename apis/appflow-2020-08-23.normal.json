@@ -3362,6 +3362,12 @@
     "JavaBoolean": {
       "type": "boolean"
     },
+    "JwtToken": {
+      "type": "string",
+      "max": 8000,
+      "pattern": "^([a-zA-Z0-9_=]+)\\.([a-zA-Z0-9_=]+)\\.([a-zA-Z0-9_\\-\\+\\/=]*)",
+      "sensitive": true
+    },
     "KMSArn": {
       "type": "string",
       "max": 2048,
@@ -3788,7 +3794,8 @@
       "type": "string",
       "enum": [
         "CLIENT_CREDENTIALS",
-        "AUTHORIZATION_CODE"
+        "AUTHORIZATION_CODE",
+        "JWT_BEARER"
       ]
     },
     "OAuth2GrantTypeSupportedList": {
@@ -4639,6 +4646,14 @@
         "clientCredentialsArn": {
           "shape": "ClientCredentialsArn",
           "documentation": "<p> The secret manager ARN, which contains the client ID and client secret of the connected app. </p>"
+        },
+        "oAuth2GrantType": {
+          "shape": "OAuth2GrantType",
+          "documentation": "<p>Specifies the OAuth 2.0 grant type that Amazon AppFlow uses when it requests an access token from Salesforce. Amazon AppFlow requires an access token each time it attempts to access your Salesforce records.</p> <p>You can specify one of the following values:</p> <dl> <dt>AUTHORIZATION_CODE</dt> <dd> <p>Amazon AppFlow passes an authorization code when it requests the access token from Salesforce. Amazon AppFlow receives the authorization code from Salesforce after you log in to your Salesforce account and authorize Amazon AppFlow to access your records.</p> </dd> <dt>CLIENT_CREDENTIALS</dt> <dd> <p>Amazon AppFlow passes client credentials (a client ID and client secret) when it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.</p> </dd> <dt>JWT_BEARER</dt> <dd> <p>Amazon AppFlow passes a JSON web token (JWT) when it requests the access token from Salesforce. You provide the JWT to Amazon AppFlow when you define the connection to your Salesforce account. When you use this grant type, you don't need to log in to your Salesforce account to authorize Amazon AppFlow to access your records.</p> </dd> </dl>"
+        },
+        "jwtToken": {
+          "shape": "JwtToken",
+          "documentation": "<p>A JSON web token (JWT) that authorizes Amazon AppFlow to access your Salesforce records.</p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required when using Salesforce. </p>"
@@ -4714,6 +4729,10 @@
         "dataTransferApis": {
           "shape": "SalesforceDataTransferApiList",
           "documentation": "<p>The Salesforce APIs that you can have Amazon AppFlow use when your flows transfers data to or from Salesforce.</p>"
+        },
+        "oauth2GrantTypesSupported": {
+          "shape": "OAuth2GrantTypeSupportedList",
+          "documentation": "<p>The OAuth 2.0 grant types that Amazon AppFlow can use when it requests an access token from Salesforce. Amazon AppFlow requires an access token each time it attempts to access your Salesforce records.</p> <dl> <dt>AUTHORIZATION_CODE</dt> <dd> <p>Amazon AppFlow passes an authorization code when it requests the access token from Salesforce. Amazon AppFlow receives the authorization code from Salesforce after you log in to your Salesforce account and authorize Amazon AppFlow to access your records.</p> </dd> <dt>CLIENT_CREDENTIALS</dt> <dd> <p>Amazon AppFlow passes client credentials (a client ID and client secret) when it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.</p> </dd> <dt>JWT_BEARER</dt> <dd> <p>Amazon AppFlow passes a JSON web token (JWT) when it requests the access token from Salesforce. You provide the JWT to Amazon AppFlow when you define the connection to your Salesforce account. When you use this grant type, you don't need to log in to your Salesforce account to authorize Amazon AppFlow to access your records.</p> </dd> </dl>"
         }
       },
       "documentation": "<p> The connector metadata specific to Salesforce. </p>"

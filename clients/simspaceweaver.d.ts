@@ -12,6 +12,14 @@ declare class SimSpaceWeaver extends Service {
   constructor(options?: SimSpaceWeaver.Types.ClientConfiguration)
   config: Config & SimSpaceWeaver.Types.ClientConfiguration;
   /**
+   * Creates a snapshot of the specified simulation. A snapshot is a file that contains simulation state data at a specific time. The state data saved in a snapshot includes entity data from the State Fabric, the simulation configuration specified in the schema, and the clock tick number. You can use the snapshot to initialize a new simulation. For more information about snapshots, see Snapshots in the SimSpace Weaver User Guide.  You specify a Destination when you create a snapshot. The Destination is the name of an Amazon S3 bucket and an optional ObjectKeyPrefix. The ObjectKeyPrefix is usually the name of a folder in the bucket. SimSpace Weaver creates a snapshot folder inside the Destination and places the snapshot file there. The snapshot file is an Amazon S3 object. It has an object key with the form:  object-key-prefix/snapshot/simulation-name-YYMMdd-HHmm-ss.zip, where:      YY  is the 2-digit year     MM  is the 2-digit month     dd  is the 2-digit day of the month     HH  is the 2-digit hour (24-hour clock)     mm  is the 2-digit minutes     ss  is the 2-digit seconds  
+   */
+  createSnapshot(params: SimSpaceWeaver.Types.CreateSnapshotInput, callback?: (err: AWSError, data: SimSpaceWeaver.Types.CreateSnapshotOutput) => void): Request<SimSpaceWeaver.Types.CreateSnapshotOutput, AWSError>;
+  /**
+   * Creates a snapshot of the specified simulation. A snapshot is a file that contains simulation state data at a specific time. The state data saved in a snapshot includes entity data from the State Fabric, the simulation configuration specified in the schema, and the clock tick number. You can use the snapshot to initialize a new simulation. For more information about snapshots, see Snapshots in the SimSpace Weaver User Guide.  You specify a Destination when you create a snapshot. The Destination is the name of an Amazon S3 bucket and an optional ObjectKeyPrefix. The ObjectKeyPrefix is usually the name of a folder in the bucket. SimSpace Weaver creates a snapshot folder inside the Destination and places the snapshot file there. The snapshot file is an Amazon S3 object. It has an object key with the form:  object-key-prefix/snapshot/simulation-name-YYMMdd-HHmm-ss.zip, where:      YY  is the 2-digit year     MM  is the 2-digit month     dd  is the 2-digit day of the month     HH  is the 2-digit hour (24-hour clock)     mm  is the 2-digit minutes     ss  is the 2-digit seconds  
+   */
+  createSnapshot(callback?: (err: AWSError, data: SimSpaceWeaver.Types.CreateSnapshotOutput) => void): Request<SimSpaceWeaver.Types.CreateSnapshotOutput, AWSError>;
+  /**
    * Deletes the instance of the given custom app.
    */
   deleteApp(params: SimSpaceWeaver.Types.DeleteAppInput, callback?: (err: AWSError, data: SimSpaceWeaver.Types.DeleteAppOutput) => void): Request<SimSpaceWeaver.Types.DeleteAppOutput, AWSError>;
@@ -20,11 +28,11 @@ declare class SimSpaceWeaver extends Service {
    */
   deleteApp(callback?: (err: AWSError, data: SimSpaceWeaver.Types.DeleteAppOutput) => void): Request<SimSpaceWeaver.Types.DeleteAppOutput, AWSError>;
   /**
-   * Deletes all SimSpace Weaver resources assigned to the given simulation.  Your simulation uses resources in other Amazon Web Services services. This API operation doesn't delete resources in other Amazon Web Services services. 
+   * Deletes all SimSpace Weaver resources assigned to the given simulation.  Your simulation uses resources in other Amazon Web Services. This API operation doesn't delete resources in other Amazon Web Services. 
    */
   deleteSimulation(params: SimSpaceWeaver.Types.DeleteSimulationInput, callback?: (err: AWSError, data: SimSpaceWeaver.Types.DeleteSimulationOutput) => void): Request<SimSpaceWeaver.Types.DeleteSimulationOutput, AWSError>;
   /**
-   * Deletes all SimSpace Weaver resources assigned to the given simulation.  Your simulation uses resources in other Amazon Web Services services. This API operation doesn't delete resources in other Amazon Web Services services. 
+   * Deletes all SimSpace Weaver resources assigned to the given simulation.  Your simulation uses resources in other Amazon Web Services. This API operation doesn't delete resources in other Amazon Web Services. 
    */
   deleteSimulation(callback?: (err: AWSError, data: SimSpaceWeaver.Types.DeleteSimulationOutput) => void): Request<SimSpaceWeaver.Types.DeleteSimulationOutput, AWSError>;
   /**
@@ -84,11 +92,11 @@ declare class SimSpaceWeaver extends Service {
    */
   startClock(callback?: (err: AWSError, data: SimSpaceWeaver.Types.StartClockOutput) => void): Request<SimSpaceWeaver.Types.StartClockOutput, AWSError>;
   /**
-   * Starts a simulation with the given name and schema.
+   * Starts a simulation with the given name. You must choose to start your simulation from a schema or from a snapshot. For more information about the schema, see the schema reference in the SimSpace Weaver User Guide. For more information about snapshots, see Snapshots in the SimSpace Weaver User Guide.
    */
   startSimulation(params: SimSpaceWeaver.Types.StartSimulationInput, callback?: (err: AWSError, data: SimSpaceWeaver.Types.StartSimulationOutput) => void): Request<SimSpaceWeaver.Types.StartSimulationOutput, AWSError>;
   /**
-   * Starts a simulation with the given name and schema.
+   * Starts a simulation with the given name. You must choose to start your simulation from a schema or from a snapshot. For more information about the schema, see the schema reference in the SimSpace Weaver User Guide. For more information about snapshots, see Snapshots in the SimSpace Weaver User Guide.
    */
   startSimulation(callback?: (err: AWSError, data: SimSpaceWeaver.Types.StartSimulationOutput) => void): Request<SimSpaceWeaver.Types.StartSimulationOutput, AWSError>;
   /**
@@ -108,11 +116,11 @@ declare class SimSpaceWeaver extends Service {
    */
   stopClock(callback?: (err: AWSError, data: SimSpaceWeaver.Types.StopClockOutput) => void): Request<SimSpaceWeaver.Types.StopClockOutput, AWSError>;
   /**
-   * Stops the given simulation.  You can't restart a simulation after you stop it. If you need to restart a simulation, you must stop it, delete it, and start a new instance of it. 
+   * Stops the given simulation.  You can't restart a simulation after you stop it. If you want to restart a simulation, then you must stop it, delete it, and start a new instance of it. 
    */
   stopSimulation(params: SimSpaceWeaver.Types.StopSimulationInput, callback?: (err: AWSError, data: SimSpaceWeaver.Types.StopSimulationOutput) => void): Request<SimSpaceWeaver.Types.StopSimulationOutput, AWSError>;
   /**
-   * Stops the given simulation.  You can't restart a simulation after you stop it. If you need to restart a simulation, you must stop it, delete it, and start a new instance of it. 
+   * Stops the given simulation.  You can't restart a simulation after you stop it. If you want to restart a simulation, then you must stop it, delete it, and start a new instance of it. 
    */
   stopSimulation(callback?: (err: AWSError, data: SimSpaceWeaver.Types.StopSimulationOutput) => void): Request<SimSpaceWeaver.Types.StopSimulationOutput, AWSError>;
   /**
@@ -144,6 +152,18 @@ declare namespace SimSpaceWeaver {
      */
     LogGroupArn?: LogGroupArn;
   }
+  export interface CreateSnapshotInput {
+    /**
+     * The Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates the snapshot file.
+     */
+    Destination: S3Destination;
+    /**
+     * The name of the simulation.
+     */
+    Simulation: SimSpaceWeaverResourceName;
+  }
+  export interface CreateSnapshotOutput {
+  }
   export interface DeleteAppInput {
     /**
      * The name of the app.
@@ -172,7 +192,7 @@ declare namespace SimSpaceWeaver {
     /**
      * The name of the app.
      */
-    App: SimSpaceWeaverResourceName;
+    App: SimSpaceWeaverLongResourceName;
     /**
      * The name of the domain of the app.
      */
@@ -199,7 +219,7 @@ declare namespace SimSpaceWeaver {
     /**
      * The name of the app.
      */
-    Name?: SimSpaceWeaverResourceName;
+    Name?: SimSpaceWeaverLongResourceName;
     /**
      * The name of the simulation of the app.
      */
@@ -245,7 +265,7 @@ declare namespace SimSpaceWeaver {
      */
     LoggingConfiguration?: LoggingConfiguration;
     /**
-     * The maximum running time of the simulation, specified as a number of months (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit.
+     * The maximum running time of the simulation, specified as a number of minutes (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit. The maximum value is 14D, or its equivalent in the other units. The default value is 14D. A value equivalent to 0 makes the simulation immediately transition to Stopping as soon as it reaches Started.
      */
     MaximumDuration?: TimeToLiveString;
     /**
@@ -264,6 +284,11 @@ declare namespace SimSpaceWeaver {
      * The location of the simulation schema in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the  Amazon Simple Storage Service User Guide .
      */
     SchemaS3Location?: S3Location;
+    SnapshotS3Location?: S3Location;
+    /**
+     * An error message that SimSpace Weaver returns only if a problem occurs when the simulation is in the STARTING state.
+     */
+    StartError?: OptionalString;
     /**
      * The current lifecycle state of the simulation.
      */
@@ -276,7 +301,7 @@ declare namespace SimSpaceWeaver {
   export type Description = string;
   export interface Domain {
     /**
-     * The type of lifecycle management for apps in the domain. This value indicates whether apps in this domain are managed (SimSpace Weaver starts and stops the apps) or unmanaged (you must start and stop the apps).  Lifecycle types     PerWorker – Managed: SimSpace Weaver starts 1 app on each worker    BySpatialSubdivision – Managed: SimSpace Weaver starts 1 app for each spatial partition    ByRequest – Unmanaged: You use the StartApp API to start the apps and use the StopApp API to stop the apps.    The lifecycle types will change when the service is released for general availability (GA). 
+     * The type of lifecycle management for apps in the domain. Indicates whether apps in this domain are managed (SimSpace Weaver starts and stops the apps) or unmanaged (you must start and stop the apps).  Lifecycle types     PerWorker – Managed: SimSpace Weaver starts one app on each worker.    BySpatialSubdivision – Managed: SimSpace Weaver starts one app for each spatial partition.    ByRequest – Unmanaged: You use the StartApp API to start the apps and use the StopApp API to stop the apps.  
      */
     Lifecycle?: LifecycleManagementStrategy;
     /**
@@ -303,7 +328,7 @@ declare namespace SimSpaceWeaver {
      */
     MaxResults?: PositiveInteger;
     /**
-     * If SimSpace Weaver returns nextToken, there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, you receive an HTTP 400 ValidationException error.
+     * If SimSpace Weaver returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
      */
     NextToken?: OptionalString;
     /**
@@ -317,7 +342,7 @@ declare namespace SimSpaceWeaver {
      */
     Apps?: SimulationAppList;
     /**
-     * If SimSpace Weaver returns nextToken, there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, you receive an HTTP 400 ValidationException error.
+     * If SimSpace Weaver returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
      */
     NextToken?: OptionalString;
   }
@@ -327,13 +352,13 @@ declare namespace SimSpaceWeaver {
      */
     MaxResults?: PositiveInteger;
     /**
-     * If SimSpace Weaver returns nextToken, there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, you receive an HTTP 400 ValidationException error.
+     * If SimSpace Weaver returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
      */
     NextToken?: OptionalString;
   }
   export interface ListSimulationsOutput {
     /**
-     * If SimSpace Weaver returns nextToken, there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, you receive an HTTP 400 ValidationException error.
+     * If SimSpace Weaver returns nextToken, then there are more results available. The value of nextToken is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then nextToken is set to null. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 ValidationException error.
      */
     NextToken?: OptionalString;
     /**
@@ -359,7 +384,7 @@ declare namespace SimSpaceWeaver {
      */
     Clocks?: SimulationClockList;
     /**
-     * A list of domains for the simulation. For more information about domains, see Key concepts in the Amazon Web Services SimSpace Weaver User Guide.
+     * A list of domains for the simulation. For more information about domains, see Key concepts: Domains in the SimSpace Weaver User Guide.
      */
     Domains?: DomainList;
   }
@@ -379,10 +404,21 @@ declare namespace SimSpaceWeaver {
   }
   export type NonEmptyString = string;
   export type ObjectKey = string;
+  export type ObjectKeyPrefix = string;
   export type OptionalString = string;
   export type PortNumber = number;
   export type PositiveInteger = number;
   export type RoleArn = string;
+  export interface S3Destination {
+    /**
+     * The name of an Amazon S3 bucket. For more information about buckets, see Creating, configuring, and working with Amazon S3 buckets in the Amazon Simple Storage Service User Guide.
+     */
+    BucketName?: BucketName;
+    /**
+     * A string prefix for an Amazon S3 object key. It's usually a folder name. For more information about folders in Amazon S3, see Organizing objects in the Amazon S3 console using folders in the Amazon Simple Storage Service User Guide.
+     */
+    ObjectKeyPrefix?: ObjectKeyPrefix;
+  }
   export interface S3Location {
     /**
      * The name of an Amazon S3 bucket. For more information about buckets, see Creating, configuring, and working with Amazon S3 buckets in the Amazon Simple Storage Service User Guide.
@@ -394,6 +430,7 @@ declare namespace SimSpaceWeaver {
     ObjectKey?: ObjectKey;
   }
   export type SimSpaceWeaverArn = string;
+  export type SimSpaceWeaverLongResourceName = string;
   export type SimSpaceWeaverResourceName = string;
   export interface SimulationAppEndpointInfo {
     /**
@@ -408,13 +445,13 @@ declare namespace SimSpaceWeaver {
   export type SimulationAppList = SimulationAppMetadata[];
   export interface SimulationAppMetadata {
     /**
-     * The domain of the app. For more information about domains, see Key concepts in the Amazon Web Services SimSpace Weaver User Guide.
+     * The domain of the app. For more information about domains, see Key concepts: Domains in the SimSpace Weaver User Guide.
      */
     Domain?: SimSpaceWeaverResourceName;
     /**
      * The name of the app.
      */
-    Name?: SimSpaceWeaverResourceName;
+    Name?: SimSpaceWeaverLongResourceName;
     /**
      * The name of the simulation of the app.
      */
@@ -474,7 +511,7 @@ declare namespace SimSpaceWeaver {
      */
     TargetStatus?: SimulationTargetStatus;
   }
-  export type SimulationStatus = "UNKNOWN"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|string;
+  export type SimulationStatus = "UNKNOWN"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|"SNAPSHOT_IN_PROGRESS"|string;
   export type SimulationTargetStatus = "UNKNOWN"|"STARTED"|"STOPPED"|"DELETED"|string;
   export interface StartAppInput {
     /**
@@ -531,7 +568,7 @@ declare namespace SimSpaceWeaver {
      */
     Description?: Description;
     /**
-     * The maximum running time of the simulation, specified as a number of months (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit.
+     * The maximum running time of the simulation, specified as a number of minutes (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit. The maximum value is 14D, or its equivalent in the other units. The default value is 14D. A value equivalent to 0 makes the simulation immediately transition to Stopping as soon as it reaches Started.
      */
     MaximumDuration?: TimeToLiveString;
     /**
@@ -543,9 +580,13 @@ declare namespace SimSpaceWeaver {
      */
     RoleArn: RoleArn;
     /**
-     * The location of the simulation schema in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the  Amazon Simple Storage Service User Guide .
+     * The location of the simulation schema in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the  Amazon Simple Storage Service User Guide . Provide a SchemaS3Location to start your simulation from a schema. If you provide a SchemaS3Location then you can't provide a SnapshotS3Location.
      */
-    SchemaS3Location: S3Location;
+    SchemaS3Location?: S3Location;
+    /**
+     * The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the  Amazon Simple Storage Service User Guide . Provide a SnapshotS3Location to start your simulation from a snapshot. If you provide a SnapshotS3Location then you can't provide a SchemaS3Location.
+     */
+    SnapshotS3Location?: S3Location;
     /**
      * A list of tags for the simulation. For more information about tags, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference.
      */

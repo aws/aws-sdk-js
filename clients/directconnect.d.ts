@@ -1074,7 +1074,7 @@ declare namespace DirectConnect {
   }
   export interface CreateLagRequest {
     /**
-     * The number of physical dedicated connections initially provisioned and bundled by the LAG.
+     * The number of physical dedicated connections initially provisioned and bundled by the LAG. You can have a maximum of four connections when the port speed is 1G or 10G, or two when the port speed is 100G. 
      */
     numberOfConnections: Count;
     /**
@@ -2177,7 +2177,7 @@ declare namespace DirectConnect {
      */
     asn?: ASN;
     /**
-     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.
+     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 8500. The default value is 1500.
      */
     mtu?: MTU;
     /**
