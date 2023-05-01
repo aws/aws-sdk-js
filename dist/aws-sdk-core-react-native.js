@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1368.0',
+	  VERSION: '2.1369.0',
 
 	  /**
 	   * @api private
@@ -2435,6 +2435,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var builder = new JsonBuilder();
 
 	  if (version === 1) version = '1.0';
+
+	  if (api.awsQueryCompatible) {
+	    if (!httpRequest.params) {
+	      httpRequest.params = {};
+	    }
+	    // because Query protocol does this.
+	    Object.assign(httpRequest.params, req.params);
+	  }
+
 	  httpRequest.body = builder.build(req.params || {}, input);
 	  httpRequest.headers['Content-Type'] = 'application/x-amz-json-' + version;
 	  httpRequest.headers['X-Amz-Target'] = target;

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1368.0-->
+<!--LATEST=2.1369.0-->
 <!--ENTRYINSERT-->
+
+## 2.1369.0
+* bugfix: SQS: add queryCompatibility fix to JSON protocol
+* feature: ComputeOptimizer: support for tag filtering within compute optimizer. ability to filter recommendation results by tag and tag key value pairs. ability to filter by inferred workload type added.
+* feature: KMS: This release makes the NitroEnclave request parameter Recipient and the response field for CiphertextForRecipient available in AWS SDKs. It also adds the regex pattern for CloudHsmClusterId validation.
 
 ## 2.1368.0
 * feature: Appflow: Adds Jwt Support for Salesforce Credentials.

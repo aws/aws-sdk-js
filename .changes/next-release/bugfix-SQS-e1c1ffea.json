@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "SQS",
-  "description": "add queryCompatibility fix to JSON protocol"
-}
