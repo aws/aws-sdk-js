@@ -12,6 +12,14 @@ declare class Appflow extends Service {
   constructor(options?: Appflow.Types.ClientConfiguration)
   config: Config & Appflow.Types.ClientConfiguration;
   /**
+   * Cancels active runs for a flow. You can cancel all of the active runs for a flow, or you can cancel specific runs by providing their IDs. You can cancel a flow run only when the run is in progress. You can't cancel a run that has already completed or failed. You also can't cancel a run that's scheduled to occur but hasn't started yet. To prevent a scheduled run, you can deactivate the flow with the StopFlow action. You cannot resume a run after you cancel it. When you send your request, the status for each run becomes CancelStarted. When the cancellation completes, the status becomes Canceled.  When you cancel a run, you still incur charges for any data that the run already processed before the cancellation. If the run had already written some data to the flow destination, then that data remains in the destination. If you configured the flow to use a batch API (such as the Salesforce Bulk API 2.0), then the run will finish reading or writing its entire batch of data after the cancellation. For these operations, the data processing charges for Amazon AppFlow apply. For the pricing information, see Amazon AppFlow pricing. 
+   */
+  cancelFlowExecutions(params: Appflow.Types.CancelFlowExecutionsRequest, callback?: (err: AWSError, data: Appflow.Types.CancelFlowExecutionsResponse) => void): Request<Appflow.Types.CancelFlowExecutionsResponse, AWSError>;
+  /**
+   * Cancels active runs for a flow. You can cancel all of the active runs for a flow, or you can cancel specific runs by providing their IDs. You can cancel a flow run only when the run is in progress. You can't cancel a run that has already completed or failed. You also can't cancel a run that's scheduled to occur but hasn't started yet. To prevent a scheduled run, you can deactivate the flow with the StopFlow action. You cannot resume a run after you cancel it. When you send your request, the status for each run becomes CancelStarted. When the cancellation completes, the status becomes Canceled.  When you cancel a run, you still incur charges for any data that the run already processed before the cancellation. If the run had already written some data to the flow destination, then that data remains in the destination. If you configured the flow to use a batch API (such as the Salesforce Bulk API 2.0), then the run will finish reading or writing its entire batch of data after the cancellation. For these operations, the data processing charges for Amazon AppFlow apply. For the pricing information, see Amazon AppFlow pricing. 
+   */
+  cancelFlowExecutions(callback?: (err: AWSError, data: Appflow.Types.CancelFlowExecutionsResponse) => void): Request<Appflow.Types.CancelFlowExecutionsResponse, AWSError>;
+  /**
    *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. In each connector profile that you create, you can provide the credentials and properties for only one connector.
    */
   createConnectorProfile(params: Appflow.Types.CreateConnectorProfileRequest, callback?: (err: AWSError, data: Appflow.Types.CreateConnectorProfileResponse) => void): Request<Appflow.Types.CreateConnectorProfileResponse, AWSError>;
@@ -322,6 +330,22 @@ declare namespace Appflow {
   export type BucketName = string;
   export type BucketPrefix = string;
   export type BusinessUnitId = string;
+  export interface CancelFlowExecutionsRequest {
+    /**
+     * The name of a flow with active runs that you want to cancel.
+     */
+    flowName: FlowName;
+    /**
+     * The ID of each active run to cancel. These runs must belong to the flow you specify in your request. If you omit this parameter, your request ends all active runs that belong to the flow.
+     */
+    executionIds?: ExecutionIds;
+  }
+  export interface CancelFlowExecutionsResponse {
+    /**
+     * The IDs of runs that Amazon AppFlow couldn't cancel. These runs might be ineligible for canceling because they haven't started yet or have already completed.
+     */
+    invalidExecutions?: ExecutionIds;
+  }
   export type CatalogType = "GLUE"|string;
   export type ClientCredentialsArn = string;
   export type ClientId = string;
@@ -1597,6 +1621,7 @@ declare namespace Appflow {
     mostRecentExecutionStatus?: ExecutionStatus;
   }
   export type ExecutionId = string;
+  export type ExecutionIds = ExecutionId[];
   export type ExecutionMessage = string;
   export interface ExecutionRecord {
     /**
@@ -1650,7 +1675,7 @@ declare namespace Appflow {
      */
     recordsProcessed?: Long;
   }
-  export type ExecutionStatus = "InProgress"|"Successful"|"Error"|string;
+  export type ExecutionStatus = "InProgress"|"Successful"|"Error"|"CancelStarted"|"Canceled"|string;
   export type FieldType = string;
   export interface FieldTypeDetails {
     /**

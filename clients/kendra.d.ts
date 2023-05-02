@@ -516,11 +516,11 @@ declare class Kendra extends Service {
    */
   updateQuerySuggestionsBlockList(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of query suggestions for an index. Amazon Kendra supports partial updates, so you only need to provide the fields you want to update. If an update is currently processing (i.e. 'happening'), you need to wait for the update to finish before making another update. Updates to query suggestions settings might not take effect right away. The time for your updated settings to take effect depends on the updates made and the number of search queries in your index. You can still enable/disable query suggestions at any time.  UpdateQuerySuggestionsConfig is currently not supported in the Amazon Web Services GovCloud (US-West) region.
+   * Updates the settings of query suggestions for an index. Amazon Kendra supports partial updates, so you only need to provide the fields you want to update. If an update is currently processing, you need to wait for the update to finish before making another update. Updates to query suggestions settings might not take effect right away. The time for your updated settings to take effect depends on the updates made and the number of search queries in your index. You can still enable/disable query suggestions at any time.  UpdateQuerySuggestionsConfig is currently not supported in the Amazon Web Services GovCloud (US-West) region.
    */
   updateQuerySuggestionsConfig(params: Kendra.Types.UpdateQuerySuggestionsConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of query suggestions for an index. Amazon Kendra supports partial updates, so you only need to provide the fields you want to update. If an update is currently processing (i.e. 'happening'), you need to wait for the update to finish before making another update. Updates to query suggestions settings might not take effect right away. The time for your updated settings to take effect depends on the updates made and the number of search queries in your index. You can still enable/disable query suggestions at any time.  UpdateQuerySuggestionsConfig is currently not supported in the Amazon Web Services GovCloud (US-West) region.
+   * Updates the settings of query suggestions for an index. Amazon Kendra supports partial updates, so you only need to provide the fields you want to update. If an update is currently processing, you need to wait for the update to finish before making another update. Updates to query suggestions settings might not take effect right away. The time for your updated settings to take effect depends on the updates made and the number of search queries in your index. You can still enable/disable query suggestions at any time.  UpdateQuerySuggestionsConfig is currently not supported in the Amazon Web Services GovCloud (US-West) region.
    */
   updateQuerySuggestionsConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -717,6 +717,45 @@ declare namespace Kendra {
     LessThanOrEquals?: DocumentAttribute;
   }
   export type AttributeFilterList = AttributeFilter[];
+  export interface AttributeSuggestionsDescribeConfig {
+    /**
+     * The list of fields/attributes that you want to set as suggestible for query suggestions.
+     */
+    SuggestableConfigList?: SuggestableConfigList;
+    /**
+     * The mode is set to either ACTIVE or INACTIVE. If the Mode for query history is set to ENABLED when calling UpdateQuerySuggestionsConfig and AttributeSuggestionsMode to use fields/attributes is set to ACTIVE, and you haven't set your SuggestionTypes preference to DOCUMENT_ATTRIBUTES, then Amazon Kendra uses the query history.
+     */
+    AttributeSuggestionsMode?: AttributeSuggestionsMode;
+  }
+  export interface AttributeSuggestionsGetConfig {
+    /**
+     * The list of document field/attribute keys or field names to use for query suggestions. If the content within any of the fields match what your user starts typing as their query, then the field content is returned as a query suggestion.
+     */
+    SuggestionAttributes?: DocumentAttributeKeyList;
+    /**
+     * The list of additional document field/attribute keys or field names to include in the response. You can use additional fields to provide extra information in the response. Additional fields are not used to based suggestions on.
+     */
+    AdditionalResponseAttributes?: DocumentAttributeKeyList;
+    /**
+     * Filters the search results based on document fields/attributes.
+     */
+    AttributeFilter?: AttributeFilter;
+    /**
+     * Applies user context filtering so that only users who are given access to certain documents see these document in their search results.
+     */
+    UserContext?: UserContext;
+  }
+  export type AttributeSuggestionsMode = "ACTIVE"|"INACTIVE"|string;
+  export interface AttributeSuggestionsUpdateConfig {
+    /**
+     * The list of fields/attributes that you want to set as suggestible for query suggestions.
+     */
+    SuggestableConfigList?: SuggestableConfigList;
+    /**
+     * You can set the mode to ACTIVE or INACTIVE. You must also set SuggestionTypes as either QUERY or DOCUMENT_ATTRIBUTES and then call GetQuerySuggestions. If Mode to use query history is set to ENABLED when calling UpdateQuerySuggestionsConfig and AttributeSuggestionsMode to use fields/attributes is set to ACTIVE, and you haven't set your SuggestionTypes preference to DOCUMENT_ATTRIBUTES, then Amazon Kendra uses the query history.
+     */
+    AttributeSuggestionsMode?: AttributeSuggestionsMode;
+  }
   export interface AuthenticationConfiguration {
     /**
      * The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials. The list includes the name and port number of the website host.
@@ -2338,7 +2377,7 @@ declare namespace Kendra {
      */
     MinimumQueryCount?: MinimumQueryCount;
     /**
-     * The Unix timestamp when query suggestions for an index was last updated.
+     * The Unix timestamp when query suggestions for an index was last updated. Amazon Kendra automatically updates suggestions every 24 hours, after you change a setting or after you apply a block list.
      */
     LastSuggestionsBuildTime?: Timestamp;
     /**
@@ -2346,9 +2385,13 @@ declare namespace Kendra {
      */
     LastClearTime?: Timestamp;
     /**
-     * The current total count of query suggestions for an index. This count can change when you update your query suggestions settings, if you filter out certain queries from suggestions using a block list, and as the query log accumulates more queries for Amazon Kendra to learn from.
+     * The current total count of query suggestions for an index. This count can change when you update your query suggestions settings, if you filter out certain queries from suggestions using a block list, and as the query log accumulates more queries for Amazon Kendra to learn from. If the count is much lower than you expected, it could be because Amazon Kendra needs more queries in the query history to learn from or your current query suggestions settings are too strict.
      */
     TotalSuggestionsCount?: Integer;
+    /**
+     * Configuration information for the document fields/attributes that you want to base query suggestions on.
+     */
+    AttributeSuggestionsConfig?: AttributeSuggestionsDescribeConfig;
   }
   export interface DescribeThesaurusRequest {
     /**
@@ -2994,6 +3037,14 @@ declare namespace Kendra {
      * The maximum number of query suggestions you want to show to your users.
      */
     MaxSuggestionsCount?: Integer;
+    /**
+     * The suggestions type to base query suggestions on. The suggestion types are query history or document fields/attributes. You can set one type or the other. If you set query history as your suggestions type, Amazon Kendra suggests queries relevant to your users based on popular queries in the query history. If you set document fields/attributes as your suggestions type, Amazon Kendra suggests queries relevant to your users based on the contents of document fields.
+     */
+    SuggestionTypes?: SuggestionTypes;
+    /**
+     * Configuration information for the document fields/attributes that you want to base query suggestions on.
+     */
+    AttributeSuggestionsConfig?: AttributeSuggestionsGetConfig;
   }
   export interface GetQuerySuggestionsResponse {
     /**
@@ -4698,6 +4749,21 @@ declare namespace Kendra {
      */
     SortOrder: SortOrder;
   }
+  export interface SourceDocument {
+    /**
+     * The identifier of the document used for a query suggestion.
+     */
+    DocumentId?: String;
+    /**
+     * The document fields/attributes used for a query suggestion.
+     */
+    SuggestionAttributes?: DocumentAttributeKeyList;
+    /**
+     * The additional fields/attributes to include in the response. You can use additional fields to provide extra information in the response. Additional fields are not used to based suggestions on.
+     */
+    AdditionalAttributes?: DocumentAttributeList;
+  }
+  export type SourceDocuments = SourceDocument[];
   export interface SpellCorrectedQuery {
     /**
      * The query with the suggested spell corrections.
@@ -4788,6 +4854,17 @@ declare namespace Kendra {
   }
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
+  export interface SuggestableConfig {
+    /**
+     * The name of the document field/attribute.
+     */
+    AttributeName?: DocumentAttributeKey;
+    /**
+     *  TRUE means the document field/attribute is suggestible, so the contents within the field can be used for query suggestions.
+     */
+    Suggestable?: ObjectBoolean;
+  }
+  export type SuggestableConfigList = SuggestableConfig[];
   export type SuggestedQueryText = string;
   export interface Suggestion {
     /**
@@ -4798,6 +4875,10 @@ declare namespace Kendra {
      * The value for the UUID (universally unique identifier) of a single query suggestion. The value is the text string of a suggestion.
      */
     Value?: SuggestionValue;
+    /**
+     * The list of document IDs and their fields/attributes that are used for a single query suggestion, if document fields set to use for query suggestions.
+     */
+    SourceDocuments?: SourceDocuments;
   }
   export interface SuggestionHighlight {
     /**
@@ -4822,6 +4903,8 @@ declare namespace Kendra {
      */
     Highlights?: SuggestionHighlightList;
   }
+  export type SuggestionType = "QUERY"|"DOCUMENT_ATTRIBUTES"|string;
+  export type SuggestionTypes = SuggestionType[];
   export interface SuggestionValue {
     /**
      * The SuggestionTextWithHighlights structure that contains the query suggestion text and highlights.
@@ -5076,7 +5159,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The identifier of the index used for featuring results.
+     * The identifier of the set of featured results that you want to update.
      */
     FeaturedResultsSetId: FeaturedResultsSetId;
     /**
@@ -5195,6 +5278,10 @@ declare namespace Kendra {
      * The the minimum number of times a query must be searched in order to be eligible to suggest to your users. Decreasing this number increases the number of suggestions. However, this affects the quality of suggestions as it sets a low bar for a query to be considered popular to suggest to users. How you tune this setting depends on your specific needs.
      */
     MinimumQueryCount?: MinimumQueryCount;
+    /**
+     * Configuration information for the document fields/attributes that you want to base query suggestions on.
+     */
+    AttributeSuggestionsConfig?: AttributeSuggestionsUpdateConfig;
   }
   export interface UpdateThesaurusRequest {
     /**

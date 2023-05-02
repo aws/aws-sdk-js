@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1369.0-->
+<!--LATEST=2.1370.0-->
 <!--ENTRYINSERT-->
+
+## 2.1370.0
+* feature: Appflow: This release adds new API to cancel flow executions.
+* feature: Connect: Amazon Connect Service Rules API update: Added OnContactEvaluationSubmit event source to support user configuring evaluation form rules.
+* feature: Kendra: AWS Kendra now supports configuring document fields/attributes via the GetQuerySuggestions API. You can now base query suggestions on the contents of document fields.
+* feature: Resiliencehub: This release will improve resource level transparency in applications by discovering previously hidden resources.
+* feature: SageMaker: Amazon Sagemaker Autopilot supports training models with sample weights and additional objective metrics.
 
 ## 2.1369.0
 * bugfix: SQS: add queryCompatibility fix to JSON protocol

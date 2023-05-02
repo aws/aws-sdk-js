@@ -2782,7 +2782,7 @@ declare namespace ECS {
      */
     name: SettingName;
     /**
-     * The account setting value for the specified principal ARN. Accepted values are enabled and disabled.
+     * The account setting value for the specified principal ARN. Accepted values are enabled, disabled, on, and off.
      */
     value: String;
   }
@@ -2798,7 +2798,7 @@ declare namespace ECS {
      */
     name: SettingName;
     /**
-     * The account setting value for the specified principal ARN. Accepted values are enabled and disabled.
+     * The account setting value for the specified principal ARN. Accepted values are enabled, disabled, on, and off.
      */
     value: String;
     /**
