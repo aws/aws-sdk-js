@@ -308,11 +308,11 @@ declare class WellArchitected extends Service {
    */
   updateAnswer(callback?: (err: AWSError, data: WellArchitected.Types.UpdateAnswerOutput) => void): Request<WellArchitected.Types.UpdateAnswerOutput, AWSError>;
   /**
-   * Updates whether the Amazon Web Services account is opted into organization sharing features.
+   * Updates whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
    */
   updateGlobalSettings(params: WellArchitected.Types.UpdateGlobalSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates whether the Amazon Web Services account is opted into organization sharing features.
+   * Updates whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
    */
   updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -700,6 +700,7 @@ declare namespace WellArchitected {
     WorkloadId?: WorkloadId;
     ShareId?: ShareId;
   }
+  export type DefinitionType = "WORKLOAD_METADATA"|"APP_REGISTRY"|string;
   export interface DeleteLensInput {
     LensAlias: LensAlias;
     ClientRequestToken: ClientRequestToken;
@@ -727,6 +728,7 @@ declare namespace WellArchitected {
     WorkloadId: WorkloadId;
     LensAliases: LensAliases;
   }
+  export type DiscoveryIntegrationStatus = "ENABLED"|"DISABLED"|string;
   export type DisplayText = string;
   export interface ExportLensInput {
     LensAlias: LensAlias;
@@ -1463,6 +1465,10 @@ declare namespace WellArchitected {
      * The status of organization sharing settings.
      */
     OrganizationSharingStatus?: OrganizationSharingStatus;
+    /**
+     * The status of discovery support settings.
+     */
+    DiscoveryIntegrationStatus?: DiscoveryIntegrationStatus;
   }
   export interface UpdateLensReviewInput {
     WorkloadId: WorkloadId;
@@ -1593,6 +1599,10 @@ declare namespace WellArchitected {
      * Discovery integration status in respect to Trusted Advisor for the workload.
      */
     TrustedAdvisorIntegrationStatus?: TrustedAdvisorIntegrationStatus;
+    /**
+     * The mode to use for identifying resources associated with the workload. You can specify WORKLOAD_METADATA, APP_REGISTRY, or both.
+     */
+    WorkloadResourceDefinition?: WorkloadResourceDefinition;
   }
   export type WorkloadEnvironment = "PRODUCTION"|"PREPRODUCTION"|string;
   export type WorkloadId = string;
@@ -1605,6 +1615,7 @@ declare namespace WellArchitected {
   export type WorkloadNonAwsRegion = string;
   export type WorkloadNonAwsRegions = WorkloadNonAwsRegion[];
   export type WorkloadPillarPriorities = PillarId[];
+  export type WorkloadResourceDefinition = DefinitionType[];
   export type WorkloadReviewOwner = string;
   export interface WorkloadShare {
     ShareId?: ShareId;

@@ -1305,6 +1305,10 @@ declare namespace IoTTwinMaker {
      * The generated scene metadata.
      */
     generatedSceneMetadata?: GeneratedSceneMetadataMap;
+    /**
+     * The SceneResponse error.
+     */
+    error?: SceneError;
   }
   export interface GetSyncJobRequest {
     /**
@@ -1920,6 +1924,17 @@ declare namespace IoTTwinMaker {
   export type S3Url = string;
   export type SceneCapabilities = SceneCapability[];
   export type SceneCapability = string;
+  export interface SceneError {
+    /**
+     * The SceneError code.
+     */
+    code?: SceneErrorCode;
+    /**
+     * The SceneError message.
+     */
+    message?: ErrorMessage;
+  }
+  export type SceneErrorCode = "MATTERPORT_ERROR"|string;
   export type SceneMetadataMap = {[key: string]: SceneMetadataValue};
   export type SceneMetadataValue = string;
   export type SceneSummaries = SceneSummary[];

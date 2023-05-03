@@ -156,6 +156,14 @@ declare class OpenSearch extends Service {
    */
   describeDomainConfig(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainConfigResponse) => void): Request<OpenSearch.Types.DescribeDomainConfigResponse, AWSError>;
   /**
+   * Returns information about domain and node health, the standby Availability Zone, number of nodes per Availability Zone, and shard count per node.
+   */
+  describeDomainHealth(params: OpenSearch.Types.DescribeDomainHealthRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainHealthResponse) => void): Request<OpenSearch.Types.DescribeDomainHealthResponse, AWSError>;
+  /**
+   * Returns information about domain and node health, the standby Availability Zone, number of nodes per Availability Zone, and shard count per node.
+   */
+  describeDomainHealth(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainHealthResponse) => void): Request<OpenSearch.Types.DescribeDomainHealthResponse, AWSError>;
+  /**
    * Returns domain configuration information about the specified Amazon OpenSearch Service domains.
    */
   describeDomains(params: OpenSearch.Types.DescribeDomainsRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainsResponse) => void): Request<OpenSearch.Types.DescribeDomainsResponse, AWSError>;
@@ -244,11 +252,11 @@ declare class OpenSearch extends Service {
    */
   getCompatibleVersions(callback?: (err: AWSError, data: OpenSearch.Types.GetCompatibleVersionsResponse) => void): Request<OpenSearch.Types.GetCompatibleVersionsResponse, AWSError>;
   /**
-   * Returns a list of Amazon OpenSearch Service package versions, along with their creation time and commit message. For more information, see Custom packages for Amazon OpenSearch Service.
+   * Returns a list of Amazon OpenSearch Service package versions, along with their creation time, commit message, and plugin properties (if the package is a zip plugin package). For more information, see Custom packages for Amazon OpenSearch Service.
    */
   getPackageVersionHistory(params: OpenSearch.Types.GetPackageVersionHistoryRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetPackageVersionHistoryResponse) => void): Request<OpenSearch.Types.GetPackageVersionHistoryResponse, AWSError>;
   /**
-   * Returns a list of Amazon OpenSearch Service package versions, along with their creation time and commit message. For more information, see Custom packages for Amazon OpenSearch Service.
+   * Returns a list of Amazon OpenSearch Service package versions, along with their creation time, commit message, and plugin properties (if the package is a zip plugin package). For more information, see Custom packages for Amazon OpenSearch Service.
    */
   getPackageVersionHistory(callback?: (err: AWSError, data: OpenSearch.Types.GetPackageVersionHistoryResponse) => void): Request<OpenSearch.Types.GetPackageVersionHistoryResponse, AWSError>;
   /**
@@ -717,6 +725,35 @@ declare namespace OpenSearch {
     PendingDeletion?: Boolean;
   }
   export type AutoTuneType = "SCHEDULED_ACTION"|string;
+  export type AvailabilityZone = string;
+  export interface AvailabilityZoneInfo {
+    /**
+     * The name of the Availability Zone.
+     */
+    AvailabilityZoneName?: AvailabilityZone;
+    /**
+     * The current state of the Availability Zone. Current options are Active and StandBy.    Active - Data nodes in the Availability Zone are in use.    StandBy - Data nodes in the Availability Zone are in a standby state.    NotAvailable - Unable to retrieve information.  
+     */
+    ZoneStatus?: ZoneStatus;
+    /**
+     * The total number of data nodes configured in the Availability Zone.
+     */
+    ConfiguredDataNodeCount?: NumberOfNodes;
+    /**
+     * The number of data nodes active in the Availability Zone.
+     */
+    AvailableDataNodeCount?: NumberOfNodes;
+    /**
+     * The total number of primary and replica shards in the Availability Zone.
+     */
+    TotalShards?: NumberOfShards;
+    /**
+     * The total number of primary and replica shards that aren't allocated to any of the nodes in the Availability Zone.
+     */
+    TotalUnAssignedShards?: NumberOfShards;
+  }
+  export type AvailabilityZoneInfoList = AvailabilityZoneInfo[];
+  export type AvailabilityZoneList = AvailabilityZone[];
   export type BackendRole = string;
   export type Boolean = boolean;
   export interface CancelServiceSoftwareUpdateRequest {
@@ -820,7 +857,7 @@ declare namespace OpenSearch {
      */
     DedicatedMasterType?: OpenSearchPartitionInstanceType;
     /**
-     * Number of dedicated master nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.
+     * Number of dedicated master nodes in the cluster. This number must be greater than 2 and not 4, otherwise you receive a validation exception.
      */
     DedicatedMasterCount?: IntegerClass;
     /**
@@ -839,6 +876,10 @@ declare namespace OpenSearch {
      * Container for cold storage configuration options.
      */
     ColdStorageOptions?: ColdStorageOptions;
+    /**
+     * A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more information, see Configuring a multi-AZ domain in Amazon OpenSearch Service. 
+     */
+    MultiAZWithStandbyEnabled?: Boolean;
   }
   export interface ClusterConfigStatus {
     /**
@@ -1040,7 +1081,7 @@ declare namespace OpenSearch {
      */
     PackageName: PackageName;
     /**
-     * Type of package.
+     * The type of package.
      */
     PackageType: PackageType;
     /**
@@ -1193,6 +1234,66 @@ declare namespace OpenSearch {
      * Container for the configuration of the OpenSearch Service domain.
      */
     DomainConfig: DomainConfig;
+  }
+  export interface DescribeDomainHealthRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+  }
+  export interface DescribeDomainHealthResponse {
+    /**
+     * The current state of the domain.    Processing - The domain has updates in progress.    Active - Requested changes have been processed and deployed to the domain.  
+     */
+    DomainState?: DomainState;
+    /**
+     * The number of Availability Zones configured for the domain. If the service is unable to fetch this information, it will return NotAvailable.
+     */
+    AvailabilityZoneCount?: NumberOfAZs;
+    /**
+     * The number of active Availability Zones configured for the domain. If the service is unable to fetch this information, it will return NotAvailable.
+     */
+    ActiveAvailabilityZoneCount?: NumberOfAZs;
+    /**
+     * The number of standby Availability Zones configured for the domain. If the service is unable to fetch this information, it will return NotAvailable.
+     */
+    StandByAvailabilityZoneCount?: NumberOfAZs;
+    /**
+     * The number of data nodes configured for the domain. If the service is unable to fetch this information, it will return NotAvailable.
+     */
+    DataNodeCount?: NumberOfNodes;
+    /**
+     * A boolean that indicates if dedicated master nodes are activated for the domain.
+     */
+    DedicatedMaster?: Boolean;
+    /**
+     * The number of nodes that can be elected as a master node. If dedicated master nodes is turned on, this value is the number of dedicated master nodes configured for the domain. If the service is unable to fetch this information, it will return NotAvailable.
+     */
+    MasterEligibleNodeCount?: NumberOfNodes;
+    /**
+     * The number of warm nodes configured for the domain.
+     */
+    WarmNodeCount?: NumberOfNodes;
+    /**
+     * Indicates whether the domain has an elected master node.    Available - The domain has an elected master node.    UnAvailable - The master node hasn't yet been elected, and a quorum to elect a new master node hasn't been reached.  
+     */
+    MasterNode?: MasterNodeStatus;
+    /**
+     * The current health status of your cluster.    Red - At least one primary shard is not allocated to any node.    Yellow - All primary shards are allocated to nodes, but some replicas aren’t.    Green - All primary shards and their replicas are allocated to nodes.    NotAvailable - Unable to retrieve cluster health.  
+     */
+    ClusterHealth?: DomainHealth;
+    /**
+     * The total number of primary and replica shards for the domain.
+     */
+    TotalShards?: NumberOfShards;
+    /**
+     * The total number of primary and replica shards not allocated to any of the nodes for the cluster.
+     */
+    TotalUnAssignedShards?: NumberOfShards;
+    /**
+     * A list of EnvironmentInfo for the domain. 
+     */
+    EnvironmentInformation?: EnvironmentInfoList;
   }
   export interface DescribeDomainRequest {
     /**
@@ -1537,6 +1638,7 @@ declare namespace OpenSearch {
      */
     Status: OptionStatus;
   }
+  export type DomainHealth = "Red"|"Yellow"|"Green"|"NotAvailable"|string;
   export type DomainId = string;
   export interface DomainInfo {
     /**
@@ -1588,7 +1690,7 @@ declare namespace OpenSearch {
      */
     PackageVersion?: PackageVersion;
     /**
-     * Denotes the location of the package on the OpenSearch Service cluster nodes. It's the same as synonym_path for dictionary files.
+     * The relative path of the package on the OpenSearch Service cluster nodes. This is synonym_path when the package is for synonym files.
      */
     ReferencePath?: ReferencePath;
     /**
@@ -1598,6 +1700,7 @@ declare namespace OpenSearch {
   }
   export type DomainPackageDetailsList = DomainPackageDetails[];
   export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
+  export type DomainState = "Active"|"Processing"|"NotAvailable"|string;
   export interface DomainStatus {
     /**
      * Unique identifier for the domain.
@@ -1810,6 +1913,13 @@ declare namespace OpenSearch {
   export type Endpoint = string;
   export type EndpointsMap = {[key: string]: ServiceUrl};
   export type EngineType = "OpenSearch"|"Elasticsearch"|string;
+  export interface EnvironmentInfo {
+    /**
+     *  A list of AvailabilityZoneInfo for the domain.
+     */
+    AvailabilityZoneInformation?: AvailabilityZoneInfoList;
+  }
+  export type EnvironmentInfoList = EnvironmentInfo[];
   export interface ErrorDetails {
     /**
      * The type of error that occurred.
@@ -2001,8 +2111,13 @@ declare namespace OpenSearch {
      * Whether the instance acts as a data node, a dedicated master node, or an UltraWarm node.
      */
     InstanceRole?: InstanceRoleList;
+    /**
+     * The supported Availability Zones for the instance type.
+     */
+    AvailabilityZones?: AvailabilityZoneList;
   }
   export type InstanceTypeDetailsList = InstanceTypeDetails[];
+  export type InstanceTypeString = string;
   export type Integer = number;
   export type IntegerClass = number;
   export type Issue = string;
@@ -2065,11 +2180,11 @@ declare namespace OpenSearch {
   }
   export interface ListInstanceTypeDetailsRequest {
     /**
-     * Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
+     * The version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
      */
     EngineVersion: VersionString;
     /**
-     * Name of the domain to list instance type details for.
+     * The name of the domain.
      */
     DomainName?: DomainName;
     /**
@@ -2080,6 +2195,14 @@ declare namespace OpenSearch {
      * If your initial ListInstanceTypeDetails operation returns a nextToken, you can include the returned nextToken in subsequent ListInstanceTypeDetails operations, which returns results in the next page.
      */
     NextToken?: NextToken;
+    /**
+     * An optional parameter that specifies the Availability Zones for the domain.
+     */
+    RetrieveAZs?: Boolean;
+    /**
+     * An optional parameter that lists information for a given instance type.
+     */
+    InstanceType?: InstanceTypeString;
   }
   export interface ListInstanceTypeDetailsResponse {
     /**
@@ -2250,6 +2373,7 @@ declare namespace OpenSearch {
   }
   export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|"AUDIT_LOGS"|string;
   export type Long = number;
+  export type MasterNodeStatus = "Available"|"UnAvailable"|string;
   export interface MasterUserOptions {
     /**
      * Amazon Resource Name (ARN) for the master user. Only specify if InternalUserDatabaseEnabled is false.
@@ -2286,6 +2410,9 @@ declare namespace OpenSearch {
     Status: OptionStatus;
   }
   export type NonEmptyString = string;
+  export type NumberOfAZs = string;
+  export type NumberOfNodes = string;
+  export type NumberOfShards = string;
   export interface OffPeakWindow {
     /**
      * A custom start time for the off-peak window, in Coordinated Universal Time (UTC). The window length will always be 10 hours, so you can't specify an end time. For example, if you specify 11:00 P.M. UTC as a start time, the end time will automatically be set to 9:00 A.M.
@@ -2294,7 +2421,7 @@ declare namespace OpenSearch {
   }
   export interface OffPeakWindowOptions {
     /**
-     * Whether to enable an off-peak window. This option is only available when modifying a domain created prior to February 13, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can't disable the off-peak window after it's enabled for a domain.
+     * Whether to enable an off-peak window. This option is only available when modifying a domain created prior to February 16, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can't disable the off-peak window after it's enabled for a domain.
      */
     Enabled?: Boolean;
     /**
@@ -2388,7 +2515,7 @@ declare namespace OpenSearch {
      */
     PackageID?: PackageID;
     /**
-     * User-specified name of the package.
+     * The user-specified name of the package.
      */
     PackageName?: PackageName;
     /**
@@ -2400,7 +2527,7 @@ declare namespace OpenSearch {
      */
     PackageDescription?: PackageDescription;
     /**
-     * Current status of the package.
+     * The current status of the package. The available options are AVAILABLE, COPYING, COPY_FAILED, VALIDATNG, VALIDATION_FAILED, DELETING, and DELETE_FAILED.
      */
     PackageStatus?: PackageStatus;
     /**
@@ -2915,7 +3042,7 @@ declare namespace OpenSearch {
      */
     CognitoOptions?: CognitoOptions;
     /**
-     * Key-value pairs to specify advanced configuration options. The following key-value pairs are supported:    "rest.action.multi.allow_explicit_index": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether explicit references to indexes are allowed inside the body of HTTP requests. If you want to configure access policies for domain sub-resources, such as specific indexes and domain APIs, you must disable this property. Default is true.    "indices.fielddata.cache.size": "80"  - Note the use of a string rather than a boolean. Specifies the percentage of heap space allocated to field data. Default is unbounded.    "indices.query.bool.max_clause_count": "1024" - Note the use of a string rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries with more than the permitted number of clauses result in a TooManyClauses error.    "override_main_response_version": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether the domain reports its version as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with it. Default is false when creating a domain and true when upgrading a domain.   For more information, see Advanced cluster parameters.
+     * Key-value pairs to specify advanced configuration options. The following key-value pairs are supported:    "rest.action.multi.allow_explicit_index": "true" | "false" - Note the use of a string rather than a boolean. Specifies whether explicit references to indexes are allowed inside the body of HTTP requests. If you want to configure access policies for domain sub-resources, such as specific indexes and domain APIs, you must disable this property. Default is true.    "indices.fielddata.cache.size": "80"  - Note the use of a string rather than a boolean. Specifies the percentage of heap space allocated to field data. Default is unbounded.    "indices.query.bool.max_clause_count": "1024" - Note the use of a string rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries with more than the permitted number of clauses result in a TooManyClauses error.   For more information, see Advanced cluster parameters.
      */
     AdvancedOptions?: AdvancedOptions;
     /**
@@ -3277,6 +3404,7 @@ declare namespace OpenSearch {
      */
     AvailabilityZoneCount?: IntegerClass;
   }
+  export type ZoneStatus = "Active"|"StandBy"|"NotAvailable"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

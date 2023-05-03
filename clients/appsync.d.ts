@@ -522,7 +522,7 @@ declare namespace AppSync {
      */
     domainName: DomainName;
     /**
-     * The API ID.
+     * The API ID. Private APIs can not be associated with custom domains.
      */
     apiId: String;
   }
@@ -831,6 +831,10 @@ declare namespace AppSync {
      * Configuration for Lambda function authorization.
      */
     lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
+    /**
+     * Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
+     */
+    visibility?: GraphQLApiVisibility;
   }
   export interface CreateGraphqlApiResponse {
     /**
@@ -1426,6 +1430,7 @@ declare namespace AppSync {
      */
     type?: Type;
   }
+  export type GraphQLApiVisibility = "GLOBAL"|"PRIVATE"|string;
   export interface GraphqlApi {
     /**
      * The API name.
@@ -1479,6 +1484,14 @@ declare namespace AppSync {
      * Configuration for Lambda function authorization.
      */
     lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
+    /**
+     * The DNS records for the API.
+     */
+    dns?: MapOfStringToString;
+    /**
+     * Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
+     */
+    visibility?: GraphQLApiVisibility;
   }
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {
@@ -1493,7 +1506,7 @@ declare namespace AppSync {
   }
   export interface LambdaAuthorizerConfig {
     /**
-     * The number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses.
+     * The number of seconds a response should be cached for. The default is 0 seconds, which disables caching. If you don't specify a value for authorizerResultTtlInSeconds, the default value is used. The maximum value is one hour (3600 seconds). The Lambda function can override this by returning a ttlOverride key in its response.
      */
     authorizerResultTtlInSeconds?: TTL;
     /**

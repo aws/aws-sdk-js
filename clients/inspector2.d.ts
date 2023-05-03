@@ -12,11 +12,11 @@ declare class Inspector2 extends Service {
   constructor(options?: Inspector2.Types.ClientConfiguration)
   config: Config & Inspector2.Types.ClientConfiguration;
   /**
-   * Associates an Amazon Web Services account with an Amazon Inspector delegated administrator.
+   * Associates an Amazon Web Services account with an Amazon Inspector delegated administrator. An HTTP 200 response indicates the association was successfully started, but doesn’t indicate whether it was completed. You can check if the association completed by using ListMembers for multiple accounts or GetMembers for a single account.
    */
   associateMember(params: Inspector2.Types.AssociateMemberRequest, callback?: (err: AWSError, data: Inspector2.Types.AssociateMemberResponse) => void): Request<Inspector2.Types.AssociateMemberResponse, AWSError>;
   /**
-   * Associates an Amazon Web Services account with an Amazon Inspector delegated administrator.
+   * Associates an Amazon Web Services account with an Amazon Inspector delegated administrator. An HTTP 200 response indicates the association was successfully started, but doesn’t indicate whether it was completed. You can check if the association completed by using ListMembers for multiple accounts or GetMembers for a single account.
    */
   associateMember(callback?: (err: AWSError, data: Inspector2.Types.AssociateMemberResponse) => void): Request<Inspector2.Types.AssociateMemberResponse, AWSError>;
   /**
@@ -36,6 +36,22 @@ declare class Inspector2 extends Service {
    */
   batchGetFreeTrialInfo(callback?: (err: AWSError, data: Inspector2.Types.BatchGetFreeTrialInfoResponse) => void): Request<Inspector2.Types.BatchGetFreeTrialInfoResponse, AWSError>;
   /**
+   * Retrieves Amazon Inspector deep inspection activation status of multiple member accounts within your organization. You must be the delegated administrator of an organization in Amazon Inspector to use this API.
+   */
+  batchGetMemberEc2DeepInspectionStatus(params: Inspector2.Types.BatchGetMemberEc2DeepInspectionStatusRequest, callback?: (err: AWSError, data: Inspector2.Types.BatchGetMemberEc2DeepInspectionStatusResponse) => void): Request<Inspector2.Types.BatchGetMemberEc2DeepInspectionStatusResponse, AWSError>;
+  /**
+   * Retrieves Amazon Inspector deep inspection activation status of multiple member accounts within your organization. You must be the delegated administrator of an organization in Amazon Inspector to use this API.
+   */
+  batchGetMemberEc2DeepInspectionStatus(callback?: (err: AWSError, data: Inspector2.Types.BatchGetMemberEc2DeepInspectionStatusResponse) => void): Request<Inspector2.Types.BatchGetMemberEc2DeepInspectionStatusResponse, AWSError>;
+  /**
+   * Activates or deactivates Amazon Inspector deep inspection for the provided member accounts in your organization. You must be the delegated administrator of an organization in Amazon Inspector to use this API.
+   */
+  batchUpdateMemberEc2DeepInspectionStatus(params: Inspector2.Types.BatchUpdateMemberEc2DeepInspectionStatusRequest, callback?: (err: AWSError, data: Inspector2.Types.BatchUpdateMemberEc2DeepInspectionStatusResponse) => void): Request<Inspector2.Types.BatchUpdateMemberEc2DeepInspectionStatusResponse, AWSError>;
+  /**
+   * Activates or deactivates Amazon Inspector deep inspection for the provided member accounts in your organization. You must be the delegated administrator of an organization in Amazon Inspector to use this API.
+   */
+  batchUpdateMemberEc2DeepInspectionStatus(callback?: (err: AWSError, data: Inspector2.Types.BatchUpdateMemberEc2DeepInspectionStatusResponse) => void): Request<Inspector2.Types.BatchUpdateMemberEc2DeepInspectionStatusResponse, AWSError>;
+  /**
    * Cancels the given findings report.
    */
   cancelFindingsReport(params: Inspector2.Types.CancelFindingsReportRequest, callback?: (err: AWSError, data: Inspector2.Types.CancelFindingsReportResponse) => void): Request<Inspector2.Types.CancelFindingsReportResponse, AWSError>;
@@ -52,11 +68,11 @@ declare class Inspector2 extends Service {
    */
   createFilter(callback?: (err: AWSError, data: Inspector2.Types.CreateFilterResponse) => void): Request<Inspector2.Types.CreateFilterResponse, AWSError>;
   /**
-   * Creates a finding report.
+   * Creates a finding report. By default only ACTIVE findings are returned in the report. To see SUPRESSED or CLOSED findings you must specify a value for the findingStatus filter criteria. 
    */
   createFindingsReport(params: Inspector2.Types.CreateFindingsReportRequest, callback?: (err: AWSError, data: Inspector2.Types.CreateFindingsReportResponse) => void): Request<Inspector2.Types.CreateFindingsReportResponse, AWSError>;
   /**
-   * Creates a finding report.
+   * Creates a finding report. By default only ACTIVE findings are returned in the report. To see SUPRESSED or CLOSED findings you must specify a value for the findingStatus filter criteria. 
    */
   createFindingsReport(callback?: (err: AWSError, data: Inspector2.Types.CreateFindingsReportResponse) => void): Request<Inspector2.Types.CreateFindingsReportResponse, AWSError>;
   /**
@@ -131,6 +147,14 @@ declare class Inspector2 extends Service {
    * Retrieves information about the Amazon Inspector delegated administrator for your organization.
    */
   getDelegatedAdminAccount(callback?: (err: AWSError, data: Inspector2.Types.GetDelegatedAdminAccountResponse) => void): Request<Inspector2.Types.GetDelegatedAdminAccountResponse, AWSError>;
+  /**
+   * Retrieves the activation status of Amazon Inspector deep inspection and custom paths associated with your account. 
+   */
+  getEc2DeepInspectionConfiguration(params: Inspector2.Types.GetEc2DeepInspectionConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.GetEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.GetEc2DeepInspectionConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the activation status of Amazon Inspector deep inspection and custom paths associated with your account. 
+   */
+  getEc2DeepInspectionConfiguration(callback?: (err: AWSError, data: Inspector2.Types.GetEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.GetEc2DeepInspectionConfigurationResponse, AWSError>;
   /**
    * Gets the status of a findings report.
    */
@@ -252,6 +276,14 @@ declare class Inspector2 extends Service {
    */
   updateConfiguration(callback?: (err: AWSError, data: Inspector2.Types.UpdateConfigurationResponse) => void): Request<Inspector2.Types.UpdateConfigurationResponse, AWSError>;
   /**
+   * Activates, deactivates Amazon Inspector deep inspection, or updates custom paths for your account. 
+   */
+  updateEc2DeepInspectionConfiguration(params: Inspector2.Types.UpdateEc2DeepInspectionConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.UpdateEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.UpdateEc2DeepInspectionConfigurationResponse, AWSError>;
+  /**
+   * Activates, deactivates Amazon Inspector deep inspection, or updates custom paths for your account. 
+   */
+  updateEc2DeepInspectionConfiguration(callback?: (err: AWSError, data: Inspector2.Types.UpdateEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.UpdateEc2DeepInspectionConfigurationResponse, AWSError>;
+  /**
    * Specifies the action that is to be applied to the findings that match the filter.
    */
   updateFilter(params: Inspector2.Types.UpdateFilterRequest, callback?: (err: AWSError, data: Inspector2.Types.UpdateFilterResponse) => void): Request<Inspector2.Types.UpdateFilterResponse, AWSError>;
@@ -259,6 +291,14 @@ declare class Inspector2 extends Service {
    * Specifies the action that is to be applied to the findings that match the filter.
    */
   updateFilter(callback?: (err: AWSError, data: Inspector2.Types.UpdateFilterResponse) => void): Request<Inspector2.Types.UpdateFilterResponse, AWSError>;
+  /**
+   * Updates the Amazon Inspector deep inspection custom paths for your organization. You must be an Amazon Inspector delegated administrator to use this API.
+   */
+  updateOrgEc2DeepInspectionConfiguration(params: Inspector2.Types.UpdateOrgEc2DeepInspectionConfigurationRequest, callback?: (err: AWSError, data: Inspector2.Types.UpdateOrgEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.UpdateOrgEc2DeepInspectionConfigurationResponse, AWSError>;
+  /**
+   * Updates the Amazon Inspector deep inspection custom paths for your organization. You must be an Amazon Inspector delegated administrator to use this API.
+   */
+  updateOrgEc2DeepInspectionConfiguration(callback?: (err: AWSError, data: Inspector2.Types.UpdateOrgEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.UpdateOrgEc2DeepInspectionConfigurationResponse, AWSError>;
   /**
    * Updates the configurations for your Amazon Inspector organization.
    */
@@ -486,7 +526,7 @@ declare namespace Inspector2 {
      */
     ecr: Boolean;
     /**
-     * Represents whether AWS Lambda scans are automatically enabled for new members of your Amazon Inspector organization. 
+     * Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization. 
      */
     lambda?: Boolean;
   }
@@ -701,6 +741,38 @@ declare namespace Inspector2 {
      * An array of objects detailing any accounts that free trial data could not be returned for.
      */
     failedAccounts: FreeTrialInfoErrorList;
+  }
+  export interface BatchGetMemberEc2DeepInspectionStatusRequest {
+    /**
+     * The unique identifiers for the Amazon Web Services accounts to retrieve Amazon Inspector deep inspection activation status for.  &lt;/p&gt; 
+     */
+    accountIds?: AccountIdSet;
+  }
+  export interface BatchGetMemberEc2DeepInspectionStatusResponse {
+    /**
+     * An array of objects that provide details on the activation status of Amazon Inspector deep inspection for each of the requested accounts.  &lt;/p&gt; 
+     */
+    accountIds?: MemberAccountEc2DeepInspectionStatusStateList;
+    /**
+     * An array of objects that provide details on any accounts that failed to activate Amazon Inspector deep inspection and why.  &lt;/p&gt; 
+     */
+    failedAccountIds?: FailedMemberAccountEc2DeepInspectionStatusStateList;
+  }
+  export interface BatchUpdateMemberEc2DeepInspectionStatusRequest {
+    /**
+     * The unique identifiers for the Amazon Web Services accounts to change Amazon Inspector deep inspection status for.
+     */
+    accountIds: MemberAccountEc2DeepInspectionStatusList;
+  }
+  export interface BatchUpdateMemberEc2DeepInspectionStatusResponse {
+    /**
+     * An array of objects that provide details for each of the accounts that Amazon Inspector deep inspection status was successfully changed for. 
+     */
+    accountIds?: MemberAccountEc2DeepInspectionStatusStateList;
+    /**
+     * An array of objects that provide details for each of the accounts that Amazon Inspector deep inspection status could not be successfully changed for. 
+     */
+    failedAccountIds?: FailedMemberAccountEc2DeepInspectionStatusStateList;
   }
   export type Boolean = boolean;
   export interface CancelFindingsReportRequest {
@@ -1009,7 +1081,7 @@ declare namespace Inspector2 {
      */
     bucketName: String;
     /**
-     * The prefix of the KMS key used to export findings.
+     * The prefix of the Amazon S3 bucket used to export findings.
      */
     keyPrefix?: String;
     /**
@@ -1063,6 +1135,7 @@ declare namespace Inspector2 {
     accountId: AccountId;
   }
   export type Double = number;
+  export type Ec2DeepInspectionStatus = "ACTIVATED"|"DEACTIVATED"|"PENDING"|"FAILED"|string;
   export interface Ec2InstanceAggregation {
     /**
      * The AMI IDs associated with the Amazon EC2 instances to aggregate findings for.
@@ -1255,6 +1328,21 @@ declare namespace Inspector2 {
     status?: Status;
   }
   export type FailedAccountList = FailedAccount[];
+  export interface FailedMemberAccountEc2DeepInspectionStatusState {
+    /**
+     * The unique identifier for the Amazon Web Services account of the organization member that failed to activate Amazon Inspector deep inspection.
+     */
+    accountId: AccountId;
+    /**
+     * The status of EC2 scanning in the account that failed to activate Amazon Inspector deep inspection.
+     */
+    ec2ScanStatus?: Status;
+    /**
+     * The error message explaining why the account failed to activate Amazon Inspector deep inspection.
+     */
+    errorMessage?: NonEmptyString;
+  }
+  export type FailedMemberAccountEc2DeepInspectionStatusStateList = FailedMemberAccountEc2DeepInspectionStatusState[];
   export type FilePath = string;
   export interface Filter {
     /**
@@ -1637,6 +1725,26 @@ declare namespace Inspector2 {
      * The Amazon Web Services account ID of the Amazon Inspector delegated administrator.
      */
     delegatedAdmin?: DelegatedAdmin;
+  }
+  export interface GetEc2DeepInspectionConfigurationRequest {
+  }
+  export interface GetEc2DeepInspectionConfigurationResponse {
+    /**
+     * An error message explaining why Amazon Inspector deep inspection configurations could not be retrieved for your account.
+     */
+    errorMessage?: NonEmptyString;
+    /**
+     * The Amazon Inspector deep inspection custom paths for your organization.
+     */
+    orgPackagePaths?: PathList;
+    /**
+     * The Amazon Inspector deep inspection custom paths for your account.
+     */
+    packagePaths?: PathList;
+    /**
+     * The activation status of Amazon Inspector deep inspection in your account.
+     */
+    status?: Ec2DeepInspectionStatus;
   }
   export interface GetFindingsReportStatusRequest {
     /**
@@ -2165,6 +2273,32 @@ declare namespace Inspector2 {
      */
     updatedAt?: DateTimeTimestamp;
   }
+  export interface MemberAccountEc2DeepInspectionStatus {
+    /**
+     * The unique identifier for the Amazon Web Services account of the organization member.
+     */
+    accountId: AccountId;
+    /**
+     * Whether Amazon Inspector deep inspection is active in the account. If TRUE Amazon Inspector deep inspection is active, if FALSE it is not active.
+     */
+    activateDeepInspection: Boolean;
+  }
+  export type MemberAccountEc2DeepInspectionStatusList = MemberAccountEc2DeepInspectionStatus[];
+  export interface MemberAccountEc2DeepInspectionStatusState {
+    /**
+     * The unique identifier for the Amazon Web Services account of the organization member
+     */
+    accountId: AccountId;
+    /**
+     * The error message explaining why the account failed to activate Amazon Inspector deep inspection.
+     */
+    errorMessage?: NonEmptyString;
+    /**
+     * The state of Amazon Inspector deep inspection in the member account.
+     */
+    status?: Ec2DeepInspectionStatus;
+  }
+  export type MemberAccountEc2DeepInspectionStatusStateList = MemberAccountEc2DeepInspectionStatusState[];
   export type MemberList = Member[];
   export type MeteringAccountId = string;
   export type MonthlyCostEstimate = number;
@@ -2263,7 +2397,7 @@ declare namespace Inspector2 {
     version?: StringFilter;
   }
   export type PackageFilterList = PackageFilter[];
-  export type PackageManager = "BUNDLER"|"CARGO"|"COMPOSER"|"NPM"|"NUGET"|"PIPENV"|"POETRY"|"YARN"|"GOBINARY"|"GOMOD"|"JAR"|"OS"|"PIP"|"PYTHONPKG"|"NODEPKG"|"POM"|string;
+  export type PackageManager = "BUNDLER"|"CARGO"|"COMPOSER"|"NPM"|"NUGET"|"PIPENV"|"POETRY"|"YARN"|"GOBINARY"|"GOMOD"|"JAR"|"OS"|"PIP"|"PYTHONPKG"|"NODEPKG"|"POM"|"GEMSPEC"|string;
   export type PackageName = string;
   export type PackageRelease = string;
   export type PackageSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
@@ -2311,6 +2445,8 @@ declare namespace Inspector2 {
      */
     vulnerablePackages?: VulnerablePackageList;
   }
+  export type Path = string;
+  export type PathList = Path[];
   export interface Permission {
     /**
      * The operations that can be performed with the given permissions.
@@ -2480,7 +2616,7 @@ declare namespace Inspector2 {
      */
     ecr: Status;
     /**
-     * The status of Amazon Inspector scanning for AWS Lambda function resources.
+     * The status of Amazon Inspector scanning for AWS Lambda function.
      */
     lambda?: Status;
   }
@@ -2497,7 +2633,7 @@ declare namespace Inspector2 {
     statusCode: ScanStatusCode;
   }
   export type ScanStatusCode = "ACTIVE"|"INACTIVE"|string;
-  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|"EXCLUDED_BY_TAG"|"UNSUPPORTED_RUNTIME"|string;
+  export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|"EXCLUDED_BY_TAG"|"UNSUPPORTED_RUNTIME"|"UNSUPPORTED_MEDIA_TYPE"|"UNSUPPORTED_CONFIG_FILE"|"DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED"|"DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"|"DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"|"DEEP_INSPECTION_NO_INVENTORY"|string;
   export type ScanType = "NETWORK"|"PACKAGE"|string;
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
@@ -2655,6 +2791,34 @@ declare namespace Inspector2 {
   }
   export interface UpdateConfigurationResponse {
   }
+  export interface UpdateEc2DeepInspectionConfigurationRequest {
+    /**
+     * Specify TRUE to activate Amazon Inspector deep inspection in your account, or FALSE to deactivate. Member accounts in an organization cannot deactivate deep inspection, instead the delegated administrator for the organization can deactivate a member account using BatchUpdateMemberEc2DeepInspectionStatus.
+     */
+    activateDeepInspection?: Boolean;
+    /**
+     * The Amazon Inspector deep inspection custom paths you are adding for your account.
+     */
+    packagePaths?: PathList;
+  }
+  export interface UpdateEc2DeepInspectionConfigurationResponse {
+    /**
+     * An error message explaining why new Amazon Inspector deep inspection custom paths could not be added.
+     */
+    errorMessage?: NonEmptyString;
+    /**
+     * The current Amazon Inspector deep inspection custom paths for the organization.
+     */
+    orgPackagePaths?: PathList;
+    /**
+     * The current Amazon Inspector deep inspection custom paths for your account.
+     */
+    packagePaths?: PathList;
+    /**
+     * The status of Amazon Inspector deep inspection in your account.
+     */
+    status?: Ec2DeepInspectionStatus;
+  }
   export interface UpdateFilterRequest {
     /**
      * Specifies the action that is to be applied to the findings that match the filter.
@@ -2686,6 +2850,14 @@ declare namespace Inspector2 {
      * The Amazon Resource Number (ARN) of the successfully updated filter.
      */
     arn: FilterArn;
+  }
+  export interface UpdateOrgEc2DeepInspectionConfigurationRequest {
+    /**
+     * The Amazon Inspector deep inspection custom paths you are adding for your organization.
+     */
+    orgPackagePaths: PathList;
+  }
+  export interface UpdateOrgEc2DeepInspectionConfigurationResponse {
   }
   export interface UpdateOrganizationConfigurationRequest {
     /**

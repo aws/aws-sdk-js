@@ -402,11 +402,11 @@ declare namespace NetworkFirewall {
      */
     Status?: AttachmentStatus;
     /**
-     * If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the failure and how to resolve it. Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the errors and solutions available for this field, see Troubleshooting firewall endpoint failures in the Network Firewall Developer Guide.
+     * If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it. A FAILED status indicates a non-recoverable state, and a ERROR status indicates an issue that you can fix. Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the causes for failiure or errors and solutions available for this field, see Troubleshooting firewall endpoint failures in the Network Firewall Developer Guide.
      */
     StatusMessage?: StatusMessage;
   }
-  export type AttachmentStatus = "CREATING"|"DELETING"|"SCALING"|"READY"|string;
+  export type AttachmentStatus = "CREATING"|"DELETING"|"SCALING"|"READY"|"FAILED"|"ERROR"|string;
   export type AvailabilityZone = string;
   export type AzSubnet = string;
   export type AzSubnets = AzSubnet[];
@@ -1011,6 +1011,10 @@ declare namespace NetworkFirewall {
      * The Amazon Resource Name (ARN) of the TLS inspection configuration.
      */
     TLSInspectionConfigurationArn?: ResourceArn;
+    /**
+     * Contains variables that you can use to override default Suricata settings in your firewall policy.
+     */
+    PolicyVariables?: PolicyVariables;
   }
   export interface FirewallPolicyMetadata {
     /**
@@ -1331,6 +1335,12 @@ declare namespace NetworkFirewall {
   }
   export type PerObjectSyncStatus = "PENDING"|"IN_SYNC"|"CAPACITY_CONSTRAINED"|string;
   export type PolicyString = string;
+  export interface PolicyVariables {
+    /**
+     * The IPv4 or IPv6 addresses in CIDR notation to use for the Suricata HOME_NET variable. If your firewall uses an inspection VPC, you might want to override the HOME_NET variable with the CIDRs of your home networks. If you don't override HOME_NET with your own CIDRs, Network Firewall by default uses the CIDR of your inspection VPC.
+     */
+    RuleVariables?: IPSets;
+  }
   export type Port = string;
   export interface PortRange {
     /**
@@ -1366,7 +1376,7 @@ declare namespace NetworkFirewall {
      */
     ResourceArn: ResourceArn;
     /**
-     * The IAM policy statement that lists the accounts that you want to share your rule group or firewall policy with and the operations that you want the accounts to be able to perform.  For a rule group resource, you can specify the following operations in the Actions section of the statement:   network-firewall:CreateFirewallPolicy   network-firewall:UpdateFirewallPolicy   network-firewall:ListRuleGroups   For a firewall policy resource, you can specify the following operations in the Actions section of the statement:   network-firewall:CreateFirewall   network-firewall:UpdateFirewall   network-firewall:AssociateFirewallPolicy   network-firewall:ListFirewallPolicies   In the Resource section of the statement, you specify the ARNs for the rule groups and firewall policies that you want to share with the account that you specified in Arn.
+     * The IAM policy statement that lists the accounts that you want to share your rule group or firewall policy with and the operations that you want the accounts to be able to perform.  For a rule group resource, you can specify the following operations in the Actions section of the statement:   network-firewall:CreateFirewallPolicy   network-firewall:UpdateFirewallPolicy   network-firewall:ListRuleGroups   For a firewall policy resource, you can specify the following operations in the Actions section of the statement:   network-firewall:AssociateFirewallPolicy   network-firewall:ListFirewallPolicies   In the Resource section of the statement, you specify the ARNs for the rule groups and firewall policies that you want to share with the account that you specified in Arn.
      */
     Policy: PolicyString;
   }
@@ -1608,7 +1618,7 @@ declare namespace NetworkFirewall {
   }
   export interface StatefulRule {
     /**
-     * Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow.  The actions for a stateful rule are defined as follows:     PASS - Permits the packets to go to the intended destination.    DROP - Blocks the packets from going to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.     ALERT - Permits the packets to go to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.  You can use this action to test a rule that you intend to use to drop traffic. You can enable the rule with ALERT action, verify in the logs that the rule is filtering as you want, then change the action to DROP.    REJECT - Drops TCP traffic that matches the conditions of the stateful rule, and sends a TCP reset packet back to sender of the packet. A TCP reset packet is a packet with no payload and a RST bit contained in the TCP header flags. Also sends an alert log mesage if alert logging is configured in the Firewall LoggingConfiguration.  REJECT isn't currently available for use with IMAP and FTP protocols.  
+     * Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow.  The actions for a stateful rule are defined as follows:     PASS - Permits the packets to go to the intended destination.    DROP - Blocks the packets from going to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.     ALERT - Permits the packets to go to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.  You can use this action to test a rule that you intend to use to drop traffic. You can enable the rule with ALERT action, verify in the logs that the rule is filtering as you want, then change the action to DROP.  
      */
     Action: StatefulAction;
     /**

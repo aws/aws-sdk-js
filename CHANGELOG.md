@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1370.0-->
+<!--LATEST=2.1371.0-->
 <!--ENTRYINSERT-->
+
+## 2.1371.0
+* feature: AppSync: Private API support for AWS AppSync. With Private APIs, you can now create GraphQL APIs that can only be accessed from your Amazon Virtual Private Cloud ("VPC").
+* feature: EC2: Adds an SDK paginator for GetNetworkInsightsAccessScopeAnalysisFindings
+* feature: Inspector2: This feature provides deep inspection for linux based instance
+* feature: IoTTwinMaker: This release adds a field for GetScene API to return error code and message from dependency services.
+* feature: NetworkFirewall: AWS Network Firewall now supports policy level HOME_NET variable overrides.
+* feature: OpenSearch: Amazon OpenSearch Service adds the option to deploy a domain across multiple Availability Zones, with each AZ containing a complete copy of data and with nodes in one AZ acting as a standby. This option provides 99.99% availability and consistent performance in the event of infrastructure failure.
+* feature: WellArchitected: This release deepens integration with AWS Service Catalog AppRegistry to improve workload resource discovery.
 
 ## 2.1370.0
 * feature: Appflow: This release adds new API to cancel flow executions.
