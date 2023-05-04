@@ -164,6 +164,14 @@ declare class OpenSearch extends Service {
    */
   describeDomainHealth(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainHealthResponse) => void): Request<OpenSearch.Types.DescribeDomainHealthResponse, AWSError>;
   /**
+   * Returns information about domain and nodes, including data nodes, master nodes, ultrawarm nodes, Availability Zone(s), standby nodes, node configurations, and node states.
+   */
+  describeDomainNodes(params: OpenSearch.Types.DescribeDomainNodesRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainNodesResponse) => void): Request<OpenSearch.Types.DescribeDomainNodesResponse, AWSError>;
+  /**
+   * Returns information about domain and nodes, including data nodes, master nodes, ultrawarm nodes, Availability Zone(s), standby nodes, node configurations, and node states.
+   */
+  describeDomainNodes(callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainNodesResponse) => void): Request<OpenSearch.Types.DescribeDomainNodesResponse, AWSError>;
+  /**
    * Returns domain configuration information about the specified Amazon OpenSearch Service domains.
    */
   describeDomains(params: OpenSearch.Types.DescribeDomainsRequest, callback?: (err: AWSError, data: OpenSearch.Types.DescribeDomainsResponse) => void): Request<OpenSearch.Types.DescribeDomainsResponse, AWSError>;
@@ -396,11 +404,11 @@ declare class OpenSearch extends Service {
    */
   startServiceSoftwareUpdate(callback?: (err: AWSError, data: OpenSearch.Types.StartServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.StartServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
+   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.sl
    */
   updateDomainConfig(params: OpenSearch.Types.UpdateDomainConfigRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateDomainConfigResponse) => void): Request<OpenSearch.Types.UpdateDomainConfigResponse, AWSError>;
   /**
-   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
+   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.sl
    */
   updateDomainConfig(callback?: (err: AWSError, data: OpenSearch.Types.UpdateDomainConfigResponse) => void): Request<OpenSearch.Types.UpdateDomainConfigResponse, AWSError>;
   /**
@@ -993,7 +1001,7 @@ declare namespace OpenSearch {
      */
     AdvancedOptions?: AdvancedOptions;
     /**
-     * Key-value pairs to configure slow log publishing.
+     * Key-value pairs to configure log publishing.
      */
     LogPublishingOptions?: LogPublishingOptions;
     /**
@@ -1295,6 +1303,18 @@ declare namespace OpenSearch {
      */
     EnvironmentInformation?: EnvironmentInfoList;
   }
+  export interface DescribeDomainNodesRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+  }
+  export interface DescribeDomainNodesResponse {
+    /**
+     * Contains nodes information list DomainNodesStatusList with details about the all nodes on the requested domain.
+     */
+    DomainNodesStatusList?: DomainNodesStatusList;
+  }
   export interface DescribeDomainRequest {
     /**
      * The name of the domain that you want information about.
@@ -1421,7 +1441,7 @@ declare namespace OpenSearch {
      */
     Name?: DescribePackagesFilterName;
     /**
-     * A list of values for the specified filter field.
+     * A non-empty list of values for the specified filter field.
      */
     Value?: DescribePackagesFilterValues;
   }
@@ -1578,7 +1598,7 @@ declare namespace OpenSearch {
      */
     AdvancedOptions?: AdvancedOptionsStatus;
     /**
-     * Key-value pairs to configure slow log publishing.
+     * Key-value pairs to configure log publishing.
      */
     LogPublishingOptions?: LogPublishingOptionsStatus;
     /**
@@ -1660,6 +1680,41 @@ declare namespace OpenSearch {
   export type DomainName = string;
   export type DomainNameFqdn = string;
   export type DomainNameList = DomainName[];
+  export interface DomainNodesStatus {
+    /**
+     * The ID of the node.
+     */
+    NodeId?: NodeId;
+    /**
+     * Indicates whether the nodes is a data, master, or ultrawarm node.
+     */
+    NodeType?: NodeType;
+    /**
+     * The Availability Zone of the node.
+     */
+    AvailabilityZone?: AvailabilityZone;
+    /**
+     * The instance type information of the node.
+     */
+    InstanceType?: OpenSearchPartitionInstanceType;
+    /**
+     * Indicates if the node is active or in standby.
+     */
+    NodeStatus?: NodeStatus;
+    /**
+     * Indicates if the node has EBS or instance storage. 
+     */
+    StorageType?: StorageTypeName;
+    /**
+     * If the nodes has EBS storage, indicates if the volume type is GP2 or GP3. Only applicable for data nodes. 
+     */
+    StorageVolumeType?: VolumeType;
+    /**
+     * The storage size of the node, in GiB.
+     */
+    StorageSize?: VolumeSize;
+  }
+  export type DomainNodesStatusList = DomainNodesStatus[];
   export interface DomainPackageDetails {
     /**
      * Internal ID of the package.
@@ -2393,6 +2448,8 @@ declare namespace OpenSearch {
   export type Message = string;
   export type MinimumInstanceCount = number;
   export type NextToken = string;
+  export type NodeId = string;
+  export type NodeStatus = "Active"|"StandBy"|"NotAvailable"|string;
   export interface NodeToNodeEncryptionOptions {
     /**
      * True to enable node-to-node encryption.
@@ -2409,6 +2466,7 @@ declare namespace OpenSearch {
      */
     Status: OptionStatus;
   }
+  export type NodeType = "Data"|"Ultrawarm"|"Master"|string;
   export type NonEmptyString = string;
   export type NumberOfAZs = string;
   export type NumberOfNodes = string;
@@ -3322,6 +3380,7 @@ declare namespace OpenSearch {
     Status: OptionStatus;
   }
   export type VersionString = string;
+  export type VolumeSize = string;
   export type VolumeType = "standard"|"gp2"|"io1"|"gp3"|string;
   export interface VpcEndpoint {
     /**

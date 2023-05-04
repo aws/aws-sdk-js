@@ -558,7 +558,7 @@
           "shape": "ResourceConflictException"
         }
       ],
-      "documentation": "<p>Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form.</p>",
+      "documentation": "<p>Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. Question and section identifiers cannot be duplicated within the same evaluation form.</p>",
       "idempotent": true
     },
     "CreateHoursOfOperation": {
@@ -675,9 +675,6 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
-        },
-        {
-          "shape": "InvalidParameterException"
         },
         {
           "shape": "ResourceNotFoundException"
@@ -4965,7 +4962,7 @@
           "shape": "ResourceConflictException"
         }
       ],
-      "documentation": "<p>Updates details about a specific evaluation form version in the specified Amazon Connect instance. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form.</p> <p>This operation does not support partial updates. Instead it does a full update of evaluation form content.</p>",
+      "documentation": "<p>Updates details about a specific evaluation form version in the specified Amazon Connect instance. Question and section identifiers cannot be duplicated within the same evaluation form.</p> <p>This operation does not support partial updates. Instead it does a full update of evaluation form content.</p>",
       "idempotent": true
     },
     "UpdateHoursOfOperation": {
@@ -7194,7 +7191,7 @@
         },
         "Title": {
           "shape": "EvaluationFormTitle",
-          "documentation": "<p>A unique title of the evaluation form.</p>"
+          "documentation": "<p>A title of the evaluation form.</p>"
         },
         "Description": {
           "shape": "EvaluationFormDescription",
@@ -9801,7 +9798,7 @@
         },
         "Title": {
           "shape": "EvaluationFormTitle",
-          "documentation": "<p>A unique title of the evaluation form.</p>"
+          "documentation": "<p>A title of the evaluation form.</p>"
         },
         "Description": {
           "shape": "EvaluationFormDescription",
@@ -9866,7 +9863,7 @@
         },
         "Title": {
           "shape": "EvaluationFormTitle",
-          "documentation": "<p>A unique title of the evaluation form.</p>"
+          "documentation": "<p>A title of the evaluation form.</p>"
         },
         "Description": {
           "shape": "EvaluationFormDescription",
@@ -10257,7 +10254,7 @@
         },
         "Title": {
           "shape": "EvaluationFormTitle",
-          "documentation": "<p>A unique title of the evaluation form.</p>"
+          "documentation": "<p>A title of the evaluation form.</p>"
         },
         "CreatedTime": {
           "shape": "Timestamp",
@@ -10488,7 +10485,7 @@
         },
         "EvaluationFormTitle": {
           "shape": "EvaluationFormTitle",
-          "documentation": "<p>A unique title of the evaluation form.</p>"
+          "documentation": "<p>A title of the evaluation form.</p>"
         },
         "EvaluationFormId": {
           "shape": "ResourceId",
@@ -13788,7 +13785,7 @@
           "documentation": "<p>The property label of the automation.</p>"
         }
       },
-      "documentation": "<p>Information about the property value used in automation of a numeric questions. Label values are associated with minimum and maximum values for the numeric question.</p> <ul> <li> <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p> </li> <li> <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>, <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value of 0 and maximum value of 28800.</p> </li> <li> <p>Percantages have a minimum value of 0 and maximum value of 100. </p> </li> <li> <p> <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of 100.</p> </li> </ul>"
+      "documentation": "<p>Information about the property value used in automation of a numeric questions. Label values are associated with minimum and maximum values for the numeric question.</p> <ul> <li> <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p> </li> <li> <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>, <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value of 0 and maximum value of 28800.</p> </li> <li> <p>Percentages have a minimum value of 0 and maximum value of 100. </p> </li> <li> <p> <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of 1000.</p> </li> </ul>"
     },
     "Origin": {
       "type": "string",
@@ -15958,7 +15955,7 @@
         },
         "OptionRefId": {
           "shape": "ReferenceId",
-          "documentation": "<p>The identifier of the answer option tha</p>"
+          "documentation": "<p>The identifier of the answer option.</p>"
         }
       },
       "documentation": "<p>Information about the automation option based on a rule category for a single select question.</p>"
@@ -17482,7 +17479,7 @@
         },
         "Title": {
           "shape": "EvaluationFormTitle",
-          "documentation": "<p>A unique title of the evaluation form.</p>"
+          "documentation": "<p>A title of the evaluation form.</p>"
         },
         "Description": {
           "shape": "EvaluationFormDescription",

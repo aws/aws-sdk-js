@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1371.0-->
+<!--LATEST=2.1372.0-->
 <!--ENTRYINSERT-->
+
+## 2.1372.0
+* feature: CloudWatch: Adds support for filtering by metric names in CloudWatch Metric Streams.
+* feature: ConfigService: Updated ResourceType enum with new resource types onboarded by AWS Config in April 2023.
+* feature: ECS: Documentation update for new error type NamespaceNotFoundException for CreateCluster and UpdateCluster
+* feature: NetworkFirewall: This release adds support for the Suricata REJECT option in midstream exception configurations.
+* feature: OpenSearch: DescribeDomainNodes: A new API that provides configuration information for nodes part of the domain
+* feature: QuickSight: Add support for Topic, Dataset parameters and VPC
+* feature: Rekognition: This release adds a new attribute FaceOccluded. Additionally, you can now select attributes individually (e.g. ["DEFAULT", "FACE_OCCLUDED", "AGE_RANGE"] instead of ["ALL"]), which can reduce response time.
+* feature: SQS: This release enables customers to call SQS using AWS JSON-1.0 protocol.
+* feature: SageMaker: We added support for ml.inf2 and ml.trn1 family of instances on Amazon SageMaker for deploying machine learning (ML) models for Real-time and Asynchronous inference. You can use these instances to achieve high performance at a low cost for generative artificial intelligence (AI) models.
+* feature: SecurityHub: Add support for Finding History.
 
 ## 2.1371.0
 * feature: AppSync: Private API support for AWS AppSync. With Private APIs, you can now create GraphQL APIs that can only be accessed from your Amazon Virtual Private Cloud ("VPC").

@@ -308,6 +308,14 @@ declare class SecurityHub extends Service {
    */
   getFindingAggregator(callback?: (err: AWSError, data: SecurityHub.Types.GetFindingAggregatorResponse) => void): Request<SecurityHub.Types.GetFindingAggregatorResponse, AWSError>;
   /**
+   *  Returns history for a Security Hub finding in the last 90 days. The history includes changes made to any fields in the Amazon Web Services Security Finding Format (ASFF). 
+   */
+  getFindingHistory(params: SecurityHub.Types.GetFindingHistoryRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetFindingHistoryResponse) => void): Request<SecurityHub.Types.GetFindingHistoryResponse, AWSError>;
+  /**
+   *  Returns history for a Security Hub finding in the last 90 days. The history includes changes made to any fields in the Amazon Web Services Security Finding Format (ASFF). 
+   */
+  getFindingHistory(callback?: (err: AWSError, data: SecurityHub.Types.GetFindingHistoryResponse) => void): Request<SecurityHub.Types.GetFindingHistoryResponse, AWSError>;
+  /**
    * Returns a list of findings that match the specified criteria. If finding aggregation is enabled, then when you call GetFindings from the aggregation Region, the results include all of the matching findings from both the aggregation Region and the linked Regions.
    */
   getFindings(params: SecurityHub.Types.GetFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetFindingsResponse) => void): Request<SecurityHub.Types.GetFindingsResponse, AWSError>;
@@ -9006,7 +9014,7 @@ declare namespace SecurityHub {
      */
     Region?: NonEmptyString;
     /**
-     * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc. 
+     * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc. 
      */
     GeneratorId: NonEmptyString;
     /**
@@ -9018,19 +9026,19 @@ declare namespace SecurityHub {
      */
     Types?: TypeList;
     /**
-     * Indicates when the security-findings provider first observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the security findings provider first observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     FirstObservedAt?: NonEmptyString;
     /**
-     * Indicates when the security-findings provider most recently observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the security findings provider most recently observed the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     LastObservedAt?: NonEmptyString;
     /**
-     * Indicates when the security-findings provider created the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the security findings provider created the potential security issue that a finding captured. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedAt: NonEmptyString;
     /**
-     * Indicates when the security-findings provider last updated the finding record. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the security findings provider last updated the finding record. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces, and date and time should be separated by T. For example, 2020-03-22T13:22:13.933Z.
      */
     UpdatedAt: NonEmptyString;
     /**
@@ -9058,11 +9066,11 @@ declare namespace SecurityHub {
      */
     Remediation?: Remediation;
     /**
-     * A URL that links to a page about the current finding in the security-findings provider's solution.
+     * A URL that links to a page about the current finding in the security findings provider's solution.
      */
     SourceUrl?: NonEmptyString;
     /**
-     * A data type where security-findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format. Can contain up to 50 key-value pairs. For each key-value pair, the key can contain up to 128 characters, and the value can contain up to 2048 characters.
+     * A data type where security findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format. Can contain up to 50 key-value pairs. For each key-value pair, the key can contain up to 128 characters, and the value can contain up to 2048 characters.
      */
     ProductFields?: FieldMap;
     /**
@@ -9160,7 +9168,7 @@ declare namespace SecurityHub {
      */
     Id?: StringFilterList;
     /**
-     * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.
+     * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.
      */
     GeneratorId?: StringFilterList;
     /**
@@ -9172,23 +9180,23 @@ declare namespace SecurityHub {
      */
     Type?: StringFilterList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider first observed the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
+     * An ISO8601-formatted timestamp that indicates when the security findings provider first observed the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     FirstObservedAt?: DateFilterList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider most recently observed the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
+     * An ISO8601-formatted timestamp that indicates when the security findings provider most recently observed the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     LastObservedAt?: DateFilterList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider captured the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
+     * An ISO8601-formatted timestamp that indicates when the security findings provider captured the potential security issue that a finding captured. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     CreatedAt?: DateFilterList;
     /**
-     * An ISO8601-formatted timestamp that indicates when the security-findings provider last updated the finding record.  A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
+     * An ISO8601-formatted timestamp that indicates when the security findings provider last updated the finding record.  A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format.
      */
     UpdatedAt?: DateFilterList;
     /**
-     * The native severity as defined by the security-findings provider's solution that generated the finding.
+     * The native severity as defined by the security findings provider's solution that generated the finding.
      */
     SeverityProduct?: NumberFilterList;
     /**
@@ -9220,11 +9228,11 @@ declare namespace SecurityHub {
      */
     RecommendationText?: StringFilterList;
     /**
-     * A URL that links to a page about the current finding in the security-findings provider's solution.
+     * A URL that links to a page about the current finding in the security findings provider's solution.
      */
     SourceUrl?: StringFilterList;
     /**
-     * A data type where security-findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format.
+     * A data type where security findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format.
      */
     ProductFields?: MapFilterList;
     /**
@@ -11053,6 +11061,56 @@ declare namespace SecurityHub {
     FindingAggregatorArn?: NonEmptyString;
   }
   export type FindingAggregatorList = FindingAggregator[];
+  export interface FindingHistoryRecord {
+    FindingIdentifier?: AwsSecurityFindingIdentifier;
+    /**
+     *  An ISO 8601-formatted timestamp that indicates when the security findings provider last updated the finding record. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format. 
+     */
+    UpdateTime?: Timestamp;
+    /**
+     *  Identifies whether the event marks the creation of a new finding. A value of True means that the finding is newly created. A value of False means that the finding isn’t newly created. 
+     */
+    FindingCreated?: Boolean;
+    /**
+     *  Identifies the source of the event that changed the finding. For example, an integrated Amazon Web Service or third-party partner integration may call  BatchImportFindings , or an Security Hub customer may call  BatchUpdateFindings . 
+     */
+    UpdateSource?: FindingHistoryUpdateSource;
+    /**
+     *  An array of objects that provides details about the finding change event, including the Amazon Web Services Security Finding Format (ASFF) field that changed, the value of the field before the change, and the value of the field after the change. 
+     */
+    Updates?: FindingHistoryUpdatesList;
+    /**
+     *  A token for pagination purposes. Provide this token in the subsequent request to  GetFindingsHistory  to get up to an additional 100 results of history for the same finding that you specified in your initial request. 
+     */
+    NextToken?: NextToken;
+  }
+  export type FindingHistoryRecordList = FindingHistoryRecord[];
+  export interface FindingHistoryUpdate {
+    /**
+     *  The ASFF field that changed during the finding change event. 
+     */
+    UpdatedField?: NonEmptyString;
+    /**
+     *  The value of the ASFF field before the finding change event. 
+     */
+    OldValue?: NonEmptyString;
+    /**
+     *  The value of the ASFF field after the finding change event. To preserve storage and readability, Security Hub omits this value if  FindingHistoryRecord  exceeds database limits. 
+     */
+    NewValue?: NonEmptyString;
+  }
+  export interface FindingHistoryUpdateSource {
+    /**
+     *  Describes the type of finding change event, such as a call to  BatchImportFindings  (by an integrated Amazon Web Service or third party partner integration) or  BatchUpdateFindings  (by a Security Hub customer). 
+     */
+    Type?: FindingHistoryUpdateSourceType;
+    /**
+     *  The identity of the source that initiated the finding change event. For example, the Amazon Resource Name (ARN) of a partner that calls BatchImportFindings or of a customer that calls BatchUpdateFindings. 
+     */
+    Identity?: NonEmptyString;
+  }
+  export type FindingHistoryUpdateSourceType = "BATCH_UPDATE_FINDINGS"|"BATCH_IMPORT_FINDINGS"|string;
+  export type FindingHistoryUpdatesList = FindingHistoryUpdate[];
   export interface FindingProviderFields {
     /**
      * A finding's confidence. Confidence is defined as the likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero percent confidence and 100 means 100 percent confidence.
@@ -11198,6 +11256,35 @@ declare namespace SecurityHub {
      * The list of excluded Regions or included Regions.
      */
     Regions?: StringList;
+  }
+  export interface GetFindingHistoryRequest {
+    FindingIdentifier: AwsSecurityFindingIdentifier;
+    /**
+     *  An ISO 8601-formatted timestamp that indicates the start time of the requested finding history. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format. If you provide values for both StartTime and EndTime, Security Hub returns finding history for the specified time period. If you provide a value for StartTime but not for EndTime, Security Hub returns finding history from the StartTime to the time at which the API is called. If you provide a value for EndTime but not for StartTime, Security Hub returns finding history from the CreatedAt timestamp of the finding to the EndTime. If you provide neither StartTime nor EndTime, Security Hub returns finding history from the CreatedAt timestamp of the finding to the time at which the API is called. In all of these scenarios, the response is limited to 100 results, and the maximum time period is limited to 90 days. 
+     */
+    StartTime?: Timestamp;
+    /**
+     *  An ISO 8601-formatted timestamp that indicates the end time of the requested finding history. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format. If you provide values for both StartTime and EndTime, Security Hub returns finding history for the specified time period. If you provide a value for StartTime but not for EndTime, Security Hub returns finding history from the StartTime to the time at which the API is called. If you provide a value for EndTime but not for StartTime, Security Hub returns finding history from the CreatedAt timestamp of the finding to the EndTime. If you provide neither StartTime nor EndTime, Security Hub returns finding history from the CreatedAt timestamp of the finding to the time at which the API is called. In all of these scenarios, the response is limited to 100 results, and the maximum time period is limited to 90 days.
+     */
+    EndTime?: Timestamp;
+    /**
+     *  A token for pagination purposes. Provide NULL as the initial value. In subsequent requests, provide the token included in the response to get up to an additional 100 results of finding history. If you don’t provide NextToken, Security Hub returns up to 100 results of finding history for each request. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  The maximum number of results to be returned. If you don’t provide it, Security Hub returns up to 100 results of finding history. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface GetFindingHistoryResponse {
+    /**
+     *  A list of events that altered the specified finding during the specified time period. 
+     */
+    Records?: FindingHistoryRecordList;
+    /**
+     *  A token for pagination purposes. Provide this token in the subsequent request to GetFindingsHistory to get up to an additional 100 results of history for the same finding that you specified in your initial request. 
+     */
+    NextToken?: NextToken;
   }
   export interface GetFindingsRequest {
     /**

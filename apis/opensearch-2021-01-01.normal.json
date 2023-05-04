@@ -569,6 +569,40 @@
       ],
       "documentation": "<p>Returns information about domain and node health, the standby Availability Zone, number of nodes per Availability Zone, and shard count per node.</p>"
     },
+    "DescribeDomainNodes": {
+      "name": "DescribeDomainNodes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2021-01-01/opensearch/domain/{DomainName}/nodes"
+      },
+      "input": {
+        "shape": "DescribeDomainNodesRequest"
+      },
+      "output": {
+        "shape": "DescribeDomainNodesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "DisabledOperationException"
+        },
+        {
+          "shape": "DependencyFailureException"
+        }
+      ],
+      "documentation": "<p>Returns information about domain and nodes, including data nodes, master nodes, ultrawarm nodes, Availability Zone(s), standby nodes, node configurations, and node states.</p>"
+    },
     "DescribeDomains": {
       "name": "DescribeDomains",
       "http": {
@@ -1425,7 +1459,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.</p>"
+      "documentation": "<p>Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.sl</p>"
     },
     "UpdatePackage": {
       "name": "UpdatePackage",
@@ -2496,7 +2530,7 @@
         },
         "LogPublishingOptions": {
           "shape": "LogPublishingOptions",
-          "documentation": "<p>Key-value pairs to configure slow log publishing.</p>"
+          "documentation": "<p>Key-value pairs to configure log publishing.</p>"
         },
         "DomainEndpointOptions": {
           "shape": "DomainEndpointOptions",
@@ -2981,6 +3015,31 @@
       },
       "documentation": "<p>The result of a <code>DescribeDomainHealth</code> request. Contains health information for the requested domain.</p>"
     },
+    "DescribeDomainNodesRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        }
+      },
+      "documentation": "<p>Container for the parameters to the <code>DescribeDomainNodes</code> operation.</p>"
+    },
+    "DescribeDomainNodesResponse": {
+      "type": "structure",
+      "members": {
+        "DomainNodesStatusList": {
+          "shape": "DomainNodesStatusList",
+          "documentation": "<p>Contains nodes information list <code>DomainNodesStatusList</code> with details about the all nodes on the requested domain.</p>"
+        }
+      },
+      "documentation": "<p>The result of a <code>DescribeDomainNodes</code> request. Contains information about the nodes on the requested domain. </p>"
+    },
     "DescribeDomainRequest": {
       "type": "structure",
       "required": [
@@ -3189,7 +3248,7 @@
         },
         "Value": {
           "shape": "DescribePackagesFilterValues",
-          "documentation": "<p>A list of values for the specified filter field.</p>"
+          "documentation": "<p>A non-empty list of values for the specified filter field.</p>"
         }
       },
       "documentation": "<p>A filter to apply to the <code>DescribePackage</code> response.</p>"
@@ -3445,7 +3504,7 @@
         },
         "LogPublishingOptions": {
           "shape": "LogPublishingOptionsStatus",
-          "documentation": "<p>Key-value pairs to configure slow log publishing.</p>"
+          "documentation": "<p>Key-value pairs to configure log publishing.</p>"
         },
         "DomainEndpointOptions": {
           "shape": "DomainEndpointOptionsStatus",
@@ -3583,6 +3642,51 @@
         "shape": "DomainName"
       },
       "documentation": "<p>A list of OpenSearch Service domain names.</p>"
+    },
+    "DomainNodesStatus": {
+      "type": "structure",
+      "members": {
+        "NodeId": {
+          "shape": "NodeId",
+          "documentation": "<p>The ID of the node.</p>"
+        },
+        "NodeType": {
+          "shape": "NodeType",
+          "documentation": "<p>Indicates whether the nodes is a data, master, or ultrawarm node.</p>"
+        },
+        "AvailabilityZone": {
+          "shape": "AvailabilityZone",
+          "documentation": "<p>The Availability Zone of the node.</p>"
+        },
+        "InstanceType": {
+          "shape": "OpenSearchPartitionInstanceType",
+          "documentation": "<p>The instance type information of the node.</p>"
+        },
+        "NodeStatus": {
+          "shape": "NodeStatus",
+          "documentation": "<p>Indicates if the node is active or in standby.</p>"
+        },
+        "StorageType": {
+          "shape": "StorageTypeName",
+          "documentation": "<p>Indicates if the node has EBS or instance storage. </p>"
+        },
+        "StorageVolumeType": {
+          "shape": "VolumeType",
+          "documentation": "<p>If the nodes has EBS storage, indicates if the volume type is GP2 or GP3. Only applicable for data nodes. </p>"
+        },
+        "StorageSize": {
+          "shape": "VolumeSize",
+          "documentation": "<p>The storage size of the node, in GiB.</p>"
+        }
+      },
+      "documentation": "<p>Container for information about nodes on the domain.</p>"
+    },
+    "DomainNodesStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "DomainNodesStatus"
+      },
+      "documentation": "<p>List of <code>DomainNodesStatus</code> with details about nodes on the requested domain.</p>"
     },
     "DomainPackageDetails": {
       "type": "structure",
@@ -4828,6 +4932,19 @@
       "type": "string",
       "documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
     },
+    "NodeId": {
+      "type": "string",
+      "max": 40,
+      "min": 10
+    },
+    "NodeStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "StandBy",
+        "NotAvailable"
+      ]
+    },
     "NodeToNodeEncryptionOptions": {
       "type": "structure",
       "members": {
@@ -4855,6 +4972,14 @@
         }
       },
       "documentation": "<p>Status of the node-to-node encryption options for the specified domain.</p>"
+    },
+    "NodeType": {
+      "type": "string",
+      "enum": [
+        "Data",
+        "Ultrawarm",
+        "Master"
+      ]
     },
     "NonEmptyString": {
       "type": "string",
@@ -6500,6 +6625,9 @@
       "max": 18,
       "min": 14,
       "pattern": "^Elasticsearch_[0-9]{1}\\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\\.[0-9]{1,2}$"
+    },
+    "VolumeSize": {
+      "type": "string"
     },
     "VolumeType": {
       "type": "string",

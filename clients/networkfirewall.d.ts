@@ -406,7 +406,7 @@ declare namespace NetworkFirewall {
      */
     StatusMessage?: StatusMessage;
   }
-  export type AttachmentStatus = "CREATING"|"DELETING"|"SCALING"|"READY"|"FAILED"|"ERROR"|string;
+  export type AttachmentStatus = "CREATING"|"DELETING"|"FAILED"|"ERROR"|"SCALING"|"READY"|string;
   export type AvailabilityZone = string;
   export type AzSubnet = string;
   export type AzSubnets = AzSubnet[];
@@ -1612,13 +1612,13 @@ declare namespace NetworkFirewall {
      */
     RuleOrder?: RuleOrder;
     /**
-     * Configures how Network Firewall processes traffic when a network connection breaks midstream. Network connections can break due to disruptions in external networks or within the firewall itself.    DROP - Network Firewall fails closed and drops all subsequent traffic going to the firewall. This is the default behavior.    CONTINUE - Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break. This impacts the behavior of rules that depend on this context. For example, if you have a stateful rule to drop http traffic, Network Firewall won't match the traffic for this rule because the service won't have the context from session initialization defining the application layer protocol as HTTP. However, this behavior is rule dependent—a TCP-layer rule using a flow:stateless rule would still match, as would the aws:drop_strict default action.  
+     * Configures how Network Firewall processes traffic when a network connection breaks midstream. Network connections can break due to disruptions in external networks or within the firewall itself.    DROP - Network Firewall fails closed and drops all subsequent traffic going to the firewall. This is the default behavior.    CONTINUE - Network Firewall continues to apply rules to the subsequent traffic without context from traffic before the break. This impacts the behavior of rules that depend on this context. For example, if you have a stateful rule to drop http traffic, Network Firewall won't match the traffic for this rule because the service won't have the context from session initialization defining the application layer protocol as HTTP. However, this behavior is rule dependent—a TCP-layer rule using a flow:stateless rule would still match, as would the aws:drop_strict default action.    REJECT - Network Firewall fails closed and drops all subsequent traffic going to the firewall. Network Firewall also sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall will have context about the new session and will apply rules to the subsequent traffic.  
      */
     StreamExceptionPolicy?: StreamExceptionPolicy;
   }
   export interface StatefulRule {
     /**
-     * Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow.  The actions for a stateful rule are defined as follows:     PASS - Permits the packets to go to the intended destination.    DROP - Blocks the packets from going to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.     ALERT - Permits the packets to go to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.  You can use this action to test a rule that you intend to use to drop traffic. You can enable the rule with ALERT action, verify in the logs that the rule is filtering as you want, then change the action to DROP.  
+     * Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow.  The actions for a stateful rule are defined as follows:     PASS - Permits the packets to go to the intended destination.    DROP - Blocks the packets from going to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.     ALERT - Permits the packets to go to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.  You can use this action to test a rule that you intend to use to drop traffic. You can enable the rule with ALERT action, verify in the logs that the rule is filtering as you want, then change the action to DROP.    REJECT - Drops TCP traffic that matches the conditions of the stateful rule, and sends a TCP reset packet back to sender of the packet. A TCP reset packet is a packet with no payload and a RST bit contained in the TCP header flags. Also sends an alert log mesage if alert logging is configured in the Firewall LoggingConfiguration.  REJECT isn't currently available for use with IMAP and FTP protocols.  
      */
     Action: StatefulAction;
     /**
@@ -1695,7 +1695,7 @@ declare namespace NetworkFirewall {
   }
   export type StatusMessage = string;
   export type StatusReason = string;
-  export type StreamExceptionPolicy = "DROP"|"CONTINUE"|string;
+  export type StreamExceptionPolicy = "DROP"|"CONTINUE"|"REJECT"|string;
   export interface SubnetMapping {
     /**
      * The unique identifier for the subnet. 

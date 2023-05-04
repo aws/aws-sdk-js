@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Adds support for filtering by metric names in CloudWatch Metric Streams."
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Updated ResourceType enum with new resource types onboarded by AWS Config in April 2023."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "Documentation update for new error type NamespaceNotFoundException for CreateCluster and UpdateCluster"
+    },
+    {
+        "type": "feature",
+        "category": "NetworkFirewall",
+        "description": "This release adds support for the Suricata REJECT option in midstream exception configurations."
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearch",
+        "description": "DescribeDomainNodes: A new API that provides configuration information for nodes part of the domain"
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Add support for Topic, Dataset parameters and VPC"
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "This release adds a new attribute FaceOccluded. Additionally, you can now select attributes individually (e.g. [\"DEFAULT\", \"FACE_OCCLUDED\", \"AGE_RANGE\"] instead of [\"ALL\"]), which can reduce response time."
+    },
+    {
+        "type": "feature",
+        "category": "SQS",
+        "description": "This release enables customers to call SQS using AWS JSON-1.0 protocol."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "We added support for ml.inf2 and ml.trn1 family of instances on Amazon SageMaker for deploying machine learning (ML) models for Real-time and Asynchronous inference. You can use these instances to achieve high performance at a low cost for generative artificial intelligence (AI) models."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Add support for Finding History."
+    }
+]

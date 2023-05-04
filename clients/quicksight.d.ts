@@ -164,6 +164,30 @@ declare class QuickSight extends Service {
    */
   createThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.CreateThemeAliasResponse) => void): Request<QuickSight.Types.CreateThemeAliasResponse, AWSError>;
   /**
+   * Creates a new Q topic.
+   */
+  createTopic(params: QuickSight.Types.CreateTopicRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateTopicResponse) => void): Request<QuickSight.Types.CreateTopicResponse, AWSError>;
+  /**
+   * Creates a new Q topic.
+   */
+  createTopic(callback?: (err: AWSError, data: QuickSight.Types.CreateTopicResponse) => void): Request<QuickSight.Types.CreateTopicResponse, AWSError>;
+  /**
+   * Creates a topic refresh schedule.
+   */
+  createTopicRefreshSchedule(params: QuickSight.Types.CreateTopicRefreshScheduleRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateTopicRefreshScheduleResponse) => void): Request<QuickSight.Types.CreateTopicRefreshScheduleResponse, AWSError>;
+  /**
+   * Creates a topic refresh schedule.
+   */
+  createTopicRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.CreateTopicRefreshScheduleResponse) => void): Request<QuickSight.Types.CreateTopicRefreshScheduleResponse, AWSError>;
+  /**
+   * Creates a new VPC connection.
+   */
+  createVPCConnection(params: QuickSight.Types.CreateVPCConnectionRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateVPCConnectionResponse) => void): Request<QuickSight.Types.CreateVPCConnectionResponse, AWSError>;
+  /**
+   * Creates a new VPC connection.
+   */
+  createVPCConnection(callback?: (err: AWSError, data: QuickSight.Types.CreateVPCConnectionResponse) => void): Request<QuickSight.Types.CreateVPCConnectionResponse, AWSError>;
+  /**
    * Deletes all Amazon QuickSight customizations in this Amazon Web Services Region for the specified Amazon Web Services account and Amazon QuickSight namespace.
    */
   deleteAccountCustomization(params: QuickSight.Types.DeleteAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteAccountCustomizationResponse) => void): Request<QuickSight.Types.DeleteAccountCustomizationResponse, AWSError>;
@@ -308,6 +332,22 @@ declare class QuickSight extends Service {
    */
   deleteThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.DeleteThemeAliasResponse) => void): Request<QuickSight.Types.DeleteThemeAliasResponse, AWSError>;
   /**
+   * Deletes a topic.
+   */
+  deleteTopic(params: QuickSight.Types.DeleteTopicRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteTopicResponse) => void): Request<QuickSight.Types.DeleteTopicResponse, AWSError>;
+  /**
+   * Deletes a topic.
+   */
+  deleteTopic(callback?: (err: AWSError, data: QuickSight.Types.DeleteTopicResponse) => void): Request<QuickSight.Types.DeleteTopicResponse, AWSError>;
+  /**
+   * Deletes a topic refresh schedule.
+   */
+  deleteTopicRefreshSchedule(params: QuickSight.Types.DeleteTopicRefreshScheduleRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteTopicRefreshScheduleResponse) => void): Request<QuickSight.Types.DeleteTopicRefreshScheduleResponse, AWSError>;
+  /**
+   * Deletes a topic refresh schedule.
+   */
+  deleteTopicRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.DeleteTopicRefreshScheduleResponse) => void): Request<QuickSight.Types.DeleteTopicRefreshScheduleResponse, AWSError>;
+  /**
    * Deletes the Amazon QuickSight user that is associated with the identity of the IAM user or role that's making the call. The IAM user isn't deleted as a result of this call. 
    */
   deleteUser(params: QuickSight.Types.DeleteUserRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteUserResponse) => void): Request<QuickSight.Types.DeleteUserResponse, AWSError>;
@@ -323,6 +363,14 @@ declare class QuickSight extends Service {
    * Deletes a user identified by its principal ID. 
    */
   deleteUserByPrincipalId(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserByPrincipalIdResponse) => void): Request<QuickSight.Types.DeleteUserByPrincipalIdResponse, AWSError>;
+  /**
+   * Deletes a VPC connection.
+   */
+  deleteVPCConnection(params: QuickSight.Types.DeleteVPCConnectionRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteVPCConnectionResponse) => void): Request<QuickSight.Types.DeleteVPCConnectionResponse, AWSError>;
+  /**
+   * Deletes a VPC connection.
+   */
+  deleteVPCConnection(callback?: (err: AWSError, data: QuickSight.Types.DeleteVPCConnectionResponse) => void): Request<QuickSight.Types.DeleteVPCConnectionResponse, AWSError>;
   /**
    * Describes the customizations associated with the provided Amazon Web Services account and Amazon Amazon QuickSight namespace in an Amazon Web Services Region. The Amazon QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     Amazon Web Services account - The Amazon Web Services account exists at the top of the hierarchy. It has the potential to use all of the Amazon Web Services Regions and Amazon Web Services Services. When you subscribe to Amazon QuickSight, you choose one Amazon Web Services Region to use as your home Region. That's where your free SPICE capacity is located. You can use Amazon QuickSight in any supported Amazon Web Services Region.     Amazon Web Services Region - In each Amazon Web Services Region where you sign in to Amazon QuickSight at least once, Amazon QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to Amazon QuickSight in any Amazon Web Services Region, unless they are constrained to a namespace.  To run the command in a different Amazon Web Services Region, you change your Region settings. If you're using the CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default Amazon Web Services Region. Use Enter to key the same settings for your keys. For more information, see Configuring the CLI.      Namespace - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account and Amazon Web Services Region.    Applied customizations - Within an Amazon Web Services Region, a set of Amazon QuickSight customizations can apply to an Amazon Web Services account or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account. All settings are isolated to a single Amazon Web Services Region. To apply them in other Amazon Web Services Regions, run the CreateAccountCustomization command in each Amazon Web Services Region where you want to apply the same customizations.   
    */
@@ -572,6 +620,38 @@ declare class QuickSight extends Service {
    */
   describeThemePermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeThemePermissionsResponse) => void): Request<QuickSight.Types.DescribeThemePermissionsResponse, AWSError>;
   /**
+   * Describes a topic.
+   */
+  describeTopic(params: QuickSight.Types.DescribeTopicRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeTopicResponse) => void): Request<QuickSight.Types.DescribeTopicResponse, AWSError>;
+  /**
+   * Describes a topic.
+   */
+  describeTopic(callback?: (err: AWSError, data: QuickSight.Types.DescribeTopicResponse) => void): Request<QuickSight.Types.DescribeTopicResponse, AWSError>;
+  /**
+   * Describes the permissions of a topic.
+   */
+  describeTopicPermissions(params: QuickSight.Types.DescribeTopicPermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeTopicPermissionsResponse) => void): Request<QuickSight.Types.DescribeTopicPermissionsResponse, AWSError>;
+  /**
+   * Describes the permissions of a topic.
+   */
+  describeTopicPermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeTopicPermissionsResponse) => void): Request<QuickSight.Types.DescribeTopicPermissionsResponse, AWSError>;
+  /**
+   * Describes the status of a topic refresh.
+   */
+  describeTopicRefresh(params: QuickSight.Types.DescribeTopicRefreshRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeTopicRefreshResponse) => void): Request<QuickSight.Types.DescribeTopicRefreshResponse, AWSError>;
+  /**
+   * Describes the status of a topic refresh.
+   */
+  describeTopicRefresh(callback?: (err: AWSError, data: QuickSight.Types.DescribeTopicRefreshResponse) => void): Request<QuickSight.Types.DescribeTopicRefreshResponse, AWSError>;
+  /**
+   * Deletes a topic refresh schedule.
+   */
+  describeTopicRefreshSchedule(params: QuickSight.Types.DescribeTopicRefreshScheduleRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeTopicRefreshScheduleResponse) => void): Request<QuickSight.Types.DescribeTopicRefreshScheduleResponse, AWSError>;
+  /**
+   * Deletes a topic refresh schedule.
+   */
+  describeTopicRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.DescribeTopicRefreshScheduleResponse) => void): Request<QuickSight.Types.DescribeTopicRefreshScheduleResponse, AWSError>;
+  /**
    * Returns information about a user, given the user name. 
    */
   describeUser(params: QuickSight.Types.DescribeUserRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeUserResponse) => void): Request<QuickSight.Types.DescribeUserResponse, AWSError>;
@@ -579,6 +659,14 @@ declare class QuickSight extends Service {
    * Returns information about a user, given the user name. 
    */
   describeUser(callback?: (err: AWSError, data: QuickSight.Types.DescribeUserResponse) => void): Request<QuickSight.Types.DescribeUserResponse, AWSError>;
+  /**
+   * Describes a VPC connection.
+   */
+  describeVPCConnection(params: QuickSight.Types.DescribeVPCConnectionRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeVPCConnectionResponse) => void): Request<QuickSight.Types.DescribeVPCConnectionResponse, AWSError>;
+  /**
+   * Describes a VPC connection.
+   */
+  describeVPCConnection(callback?: (err: AWSError, data: QuickSight.Types.DescribeVPCConnectionResponse) => void): Request<QuickSight.Types.DescribeVPCConnectionResponse, AWSError>;
   /**
    * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard or visual in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (minimum) to 10 hours (maximum). The default session duration is 10 hours.   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
@@ -684,19 +772,19 @@ declare class QuickSight extends Service {
    */
   listGroups(callback?: (err: AWSError, data: QuickSight.Types.ListGroupsResponse) => void): Request<QuickSight.Types.ListGroupsResponse, AWSError>;
   /**
-   * Lists IAM policy assignments in the current Amazon QuickSight account.
+   * Lists the IAM policy assignments in the current Amazon QuickSight account.
    */
   listIAMPolicyAssignments(params: QuickSight.Types.ListIAMPolicyAssignmentsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsResponse, AWSError>;
   /**
-   * Lists IAM policy assignments in the current Amazon QuickSight account.
+   * Lists the IAM policy assignments in the current Amazon QuickSight account.
    */
   listIAMPolicyAssignments(callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsResponse, AWSError>;
   /**
-   * Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs) for the IAM policies assigned to the specified user and group or groups that the user belongs to.
+   * Lists all of the IAM policy assignments, including the Amazon Resource Names (ARNs), for the IAM policies assigned to the specified user and group, or groups that the user belongs to.
    */
   listIAMPolicyAssignmentsForUser(params: QuickSight.Types.ListIAMPolicyAssignmentsForUserRequest, callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse, AWSError>;
   /**
-   * Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs) for the IAM policies assigned to the specified user and group or groups that the user belongs to.
+   * Lists all of the IAM policy assignments, including the Amazon Resource Names (ARNs), for the IAM policies assigned to the specified user and group, or groups that the user belongs to.
    */
   listIAMPolicyAssignmentsForUser(callback?: (err: AWSError, data: QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse) => void): Request<QuickSight.Types.ListIAMPolicyAssignmentsForUserResponse, AWSError>;
   /**
@@ -780,6 +868,22 @@ declare class QuickSight extends Service {
    */
   listThemes(callback?: (err: AWSError, data: QuickSight.Types.ListThemesResponse) => void): Request<QuickSight.Types.ListThemesResponse, AWSError>;
   /**
+   * Lists all of the refresh schedules for a topic.
+   */
+  listTopicRefreshSchedules(params: QuickSight.Types.ListTopicRefreshSchedulesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListTopicRefreshSchedulesResponse) => void): Request<QuickSight.Types.ListTopicRefreshSchedulesResponse, AWSError>;
+  /**
+   * Lists all of the refresh schedules for a topic.
+   */
+  listTopicRefreshSchedules(callback?: (err: AWSError, data: QuickSight.Types.ListTopicRefreshSchedulesResponse) => void): Request<QuickSight.Types.ListTopicRefreshSchedulesResponse, AWSError>;
+  /**
+   * Lists all of the topics within an account.
+   */
+  listTopics(params: QuickSight.Types.ListTopicsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListTopicsResponse) => void): Request<QuickSight.Types.ListTopicsResponse, AWSError>;
+  /**
+   * Lists all of the topics within an account.
+   */
+  listTopics(callback?: (err: AWSError, data: QuickSight.Types.ListTopicsResponse) => void): Request<QuickSight.Types.ListTopicsResponse, AWSError>;
+  /**
    * Lists the Amazon QuickSight groups that an Amazon QuickSight user is a member of.
    */
   listUserGroups(params: QuickSight.Types.ListUserGroupsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListUserGroupsResponse) => void): Request<QuickSight.Types.ListUserGroupsResponse, AWSError>;
@@ -795,6 +899,14 @@ declare class QuickSight extends Service {
    * Returns a list of all of the Amazon QuickSight users belonging to this account. 
    */
   listUsers(callback?: (err: AWSError, data: QuickSight.Types.ListUsersResponse) => void): Request<QuickSight.Types.ListUsersResponse, AWSError>;
+  /**
+   * Lists all of the VPC connections in the current set Amazon Web Services Region of an Amazon Web Services account.
+   */
+  listVPCConnections(params: QuickSight.Types.ListVPCConnectionsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListVPCConnectionsResponse) => void): Request<QuickSight.Types.ListVPCConnectionsResponse, AWSError>;
+  /**
+   * Lists all of the VPC connections in the current set Amazon Web Services Region of an Amazon Web Services account.
+   */
+  listVPCConnections(callback?: (err: AWSError, data: QuickSight.Types.ListVPCConnectionsResponse) => void): Request<QuickSight.Types.ListVPCConnectionsResponse, AWSError>;
   /**
    * Creates or updates the dataset refresh properties for the dataset.
    */
@@ -868,11 +980,11 @@ declare class QuickSight extends Service {
    */
   searchGroups(callback?: (err: AWSError, data: QuickSight.Types.SearchGroupsResponse) => void): Request<QuickSight.Types.SearchGroupsResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:   You can't use tags to track costs for Amazon QuickSight. This isn't possible because you can't tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.   Amazon QuickSight doesn't currently support the tag editor for Resource Groups.  
+   * Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, template, and topic.  Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:   You can't use tags to track costs for Amazon QuickSight. This isn't possible because you can't tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.   Amazon QuickSight doesn't currently support the tag editor for Resource Groups.  
    */
   tagResource(params: QuickSight.Types.TagResourceRequest, callback?: (err: AWSError, data: QuickSight.Types.TagResourceResponse) => void): Request<QuickSight.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:   You can't use tags to track costs for Amazon QuickSight. This isn't possible because you can't tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.   Amazon QuickSight doesn't currently support the tag editor for Resource Groups.  
+   * Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, template, and topic.  Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:   You can't use tags to track costs for Amazon QuickSight. This isn't possible because you can't tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.   Amazon QuickSight doesn't currently support the tag editor for Resource Groups.  
    */
   tagResource(callback?: (err: AWSError, data: QuickSight.Types.TagResourceResponse) => void): Request<QuickSight.Types.TagResourceResponse, AWSError>;
   /**
@@ -1004,11 +1116,11 @@ declare class QuickSight extends Service {
    */
   updateIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.UpdateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.UpdateIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Updates the content and status of IP rules. To use this operation, you need to provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
+   * Updates the content and status of IP rules. To use this operation, you must provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
    */
   updateIpRestriction(params: QuickSight.Types.UpdateIpRestrictionRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateIpRestrictionResponse) => void): Request<QuickSight.Types.UpdateIpRestrictionResponse, AWSError>;
   /**
-   * Updates the content and status of IP rules. To use this operation, you need to provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
+   * Updates the content and status of IP rules. To use this operation, you must provide the entire map of rules. You can use the DescribeIpRestriction operation to get the current rule map.
    */
   updateIpRestriction(callback?: (err: AWSError, data: QuickSight.Types.UpdateIpRestrictionResponse) => void): Request<QuickSight.Types.UpdateIpRestrictionResponse, AWSError>;
   /**
@@ -1076,6 +1188,30 @@ declare class QuickSight extends Service {
    */
   updateThemePermissions(callback?: (err: AWSError, data: QuickSight.Types.UpdateThemePermissionsResponse) => void): Request<QuickSight.Types.UpdateThemePermissionsResponse, AWSError>;
   /**
+   * Updates a topic.
+   */
+  updateTopic(params: QuickSight.Types.UpdateTopicRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTopicResponse) => void): Request<QuickSight.Types.UpdateTopicResponse, AWSError>;
+  /**
+   * Updates a topic.
+   */
+  updateTopic(callback?: (err: AWSError, data: QuickSight.Types.UpdateTopicResponse) => void): Request<QuickSight.Types.UpdateTopicResponse, AWSError>;
+  /**
+   * Updates the permissions of a topic.
+   */
+  updateTopicPermissions(params: QuickSight.Types.UpdateTopicPermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTopicPermissionsResponse) => void): Request<QuickSight.Types.UpdateTopicPermissionsResponse, AWSError>;
+  /**
+   * Updates the permissions of a topic.
+   */
+  updateTopicPermissions(callback?: (err: AWSError, data: QuickSight.Types.UpdateTopicPermissionsResponse) => void): Request<QuickSight.Types.UpdateTopicPermissionsResponse, AWSError>;
+  /**
+   * Updates a topic refresh schedule.
+   */
+  updateTopicRefreshSchedule(params: QuickSight.Types.UpdateTopicRefreshScheduleRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTopicRefreshScheduleResponse) => void): Request<QuickSight.Types.UpdateTopicRefreshScheduleResponse, AWSError>;
+  /**
+   * Updates a topic refresh schedule.
+   */
+  updateTopicRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.UpdateTopicRefreshScheduleResponse) => void): Request<QuickSight.Types.UpdateTopicRefreshScheduleResponse, AWSError>;
+  /**
    * Updates an Amazon QuickSight user.
    */
   updateUser(params: QuickSight.Types.UpdateUserRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateUserResponse) => void): Request<QuickSight.Types.UpdateUserResponse, AWSError>;
@@ -1083,6 +1219,14 @@ declare class QuickSight extends Service {
    * Updates an Amazon QuickSight user.
    */
   updateUser(callback?: (err: AWSError, data: QuickSight.Types.UpdateUserResponse) => void): Request<QuickSight.Types.UpdateUserResponse, AWSError>;
+  /**
+   * Updates a VPC connection.
+   */
+  updateVPCConnection(params: QuickSight.Types.UpdateVPCConnectionRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateVPCConnectionResponse) => void): Request<QuickSight.Types.UpdateVPCConnectionResponse, AWSError>;
+  /**
+   * Updates a VPC connection.
+   */
+  updateVPCConnection(callback?: (err: AWSError, data: QuickSight.Types.UpdateVPCConnectionResponse) => void): Request<QuickSight.Types.UpdateVPCConnectionResponse, AWSError>;
 }
 declare namespace QuickSight {
   export interface AccountCustomization {
@@ -1176,6 +1320,7 @@ declare namespace QuickSight {
      */
     DateAggregationFunction?: DateAggregationFunction;
   }
+  export type AggregationFunctionParameters = {[key: string]: LimitedString};
   export interface AggregationSortConfiguration {
     /**
      * The column that determines the sort order of aggregated values.
@@ -1478,6 +1623,8 @@ declare namespace QuickSight {
     Database: Database;
   }
   export type AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"|"IAM_ONLY"|"ACTIVE_DIRECTORY"|string;
+  export type AuthorSpecifiedAggregation = "COUNT"|"DISTINCT_COUNT"|"MIN"|"MAX"|"MEDIAN"|"SUM"|"AVERAGE"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|string;
+  export type AuthorSpecifiedAggregations = AuthorSpecifiedAggregation[];
   export type AwsAccountId = string;
   export type AwsAndAccountId = string;
   export interface AwsIotAnalyticsParameters {
@@ -1795,6 +1942,12 @@ declare namespace QuickSight {
      */
     Layout?: SectionLayoutConfiguration;
   }
+  export interface BookmarksConfigurations {
+    /**
+     * A Boolean value that determines whether a user can bookmark an embedded dashboard.
+     */
+    Enabled: Boolean;
+  }
   export type Boolean = boolean;
   export type BooleanObject = boolean;
   export interface BorderStyle {
@@ -1949,8 +2102,9 @@ declare namespace QuickSight {
     /**
      * The expression of the calculated field.
      */
-    Expression: Expression;
+    Expression: CalculatedFieldExpression;
   }
+  export type CalculatedFieldExpression = string;
   export type CalculatedFields = CalculatedField[];
   export interface CalculatedMeasureField {
     /**
@@ -2101,10 +2255,23 @@ declare namespace QuickSight {
      */
     CustomFilterConfiguration?: CustomFilterConfiguration;
   }
+  export type CategoryFilterFunction = "EXACT"|"CONTAINS"|string;
   export type CategoryFilterMatchOperator = "EQUALS"|"DOES_NOT_EQUAL"|"CONTAINS"|"DOES_NOT_CONTAIN"|"STARTS_WITH"|"ENDS_WITH"|string;
   export type CategoryFilterSelectAllOptions = "FILTER_ALL_VALUES"|string;
+  export type CategoryFilterType = "CUSTOM_FILTER"|"CUSTOM_FILTER_LIST"|"FILTER_LIST"|string;
   export type CategoryValue = string;
   export type CategoryValueList = CategoryValue[];
+  export interface CellValueSynonym {
+    /**
+     * The cell value.
+     */
+    CellValue?: LimitedString;
+    /**
+     * Other names or aliases for the cell value.
+     */
+    Synonyms?: StringList;
+  }
+  export type CellValueSynonyms = CellValueSynonym[];
   export interface ChartAxisLabelOptions {
     /**
      * The visibility of an axis label on a chart. Choose one of the following options:    VISIBLE: Shows the axis.    HIDDEN: Hides the axis.  
@@ -2131,6 +2298,12 @@ declare namespace QuickSight {
      * The cluster marker that is a part of the cluster marker configuration
      */
     ClusterMarker?: ClusterMarker;
+  }
+  export interface CollectiveConstant {
+    /**
+     * A list of values for the collective constant.
+     */
+    ValueList?: StringList;
   }
   export type ColorFillType = "DISCRETE"|"GRADIENT"|string;
   export type ColorList = HexColor[];
@@ -2164,6 +2337,7 @@ declare namespace QuickSight {
     Role?: ColumnRole;
   }
   export type ColumnConfigurationList = ColumnConfiguration[];
+  export type ColumnDataRole = "DIMENSION"|"MEASURE"|string;
   export type ColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|string;
   export interface ColumnDescription {
     /**
@@ -2238,6 +2412,7 @@ declare namespace QuickSight {
   export type ColumnList = ColumnName[];
   export type ColumnName = string;
   export type ColumnNameList = String[];
+  export type ColumnOrderingType = "GREATER_IS_BETTER"|"LESSER_IS_BETTER"|"SPECIFIED"|string;
   export type ColumnRole = "DIMENSION"|"MEASURE"|string;
   export interface ColumnSchema {
     /**
@@ -2430,6 +2605,20 @@ declare namespace QuickSight {
      */
     ColumnHierarchies?: ColumnHierarchyList;
   }
+  export interface ComparativeOrder {
+    /**
+     * The ordering type for a column. Valid values for this structure are GREATER_IS_BETTER, LESSER_IS_BETTER and SPECIFIED.
+     */
+    UseOrdering?: ColumnOrderingType;
+    /**
+     * The list of columns to be used in the ordering.
+     */
+    SpecifedOrder?: StringList;
+    /**
+     * The treat of undefined specified values. Valid values for this structure are LEAST and MOST.
+     */
+    TreatUndefinedSpecifiedValues?: UndefinedSpecifiedValueType;
+  }
   export interface ComparisonConfiguration {
     /**
      * The method of the comparison. Choose from the following options:    DIFFERENCE     PERCENT_DIFFERENCE     PERCENT   
@@ -2580,6 +2769,7 @@ declare namespace QuickSight {
      */
     Color?: HexColor;
   }
+  export type ConstantType = "SINGULAR"|"RANGE"|"COLLECTIVE"|string;
   export interface ContributionAnalysisDefault {
     /**
      * The measure field that is used in the contribution analysis.
@@ -2905,6 +3095,10 @@ declare namespace QuickSight {
      */
     Tags?: TagList;
     DataSetUsageConfiguration?: DataSetUsageConfiguration;
+    /**
+     * The parameter declarations of the dataset.
+     */
+    DatasetParameters?: DatasetParameterList;
   }
   export interface CreateDataSetResponse {
     /**
@@ -3146,7 +3340,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The name of the assignment, also called a rule. It must be unique within an Amazon Web Services account.
+     * The name of the assignment, also called a rule. The name must be unique within the Amazon Web Services account.
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
@@ -3168,7 +3362,7 @@ declare namespace QuickSight {
   }
   export interface CreateIAMPolicyAssignmentResponse {
     /**
-     * The name of the assignment. This name must be unique within the Amazon Web Services account.
+     * The name of the assignment. The name must be unique within the Amazon Web Services account.
      */
     AssignmentName?: IAMPolicyAssignmentName;
     /**
@@ -3500,6 +3694,150 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface CreateTopicRefreshScheduleRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topic you're creating a refresh schedule for.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset.
+     */
+    DatasetArn: Arn;
+    /**
+     * The name of the dataset.
+     */
+    DatasetName?: String;
+    /**
+     * The definition of a refresh schedule.
+     */
+    RefreshSchedule: TopicRefreshSchedule;
+  }
+  export interface CreateTopicRefreshScheduleResponse {
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset.
+     */
+    DatasetArn?: Arn;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface CreateTopicRequest {
+    /**
+     * The ID of the Amazon Web Services account that you want to create a topic in.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the topic that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The definition of a topic to create.
+     */
+    Topic: TopicDetails;
+    /**
+     * Contains a map of the key-value pairs for the resource tag or tags that are assigned to the dataset.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateTopicResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    Arn?: Arn;
+    /**
+     * The ID for the topic that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic refresh.
+     */
+    RefreshArn?: Arn;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface CreateVPCConnectionRequest {
+    /**
+     * The Amazon Web Services account ID of the account where you want to create a new VPC connection.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+     */
+    VPCConnectionId: VPCConnectionResourceIdRestricted;
+    /**
+     * The display name for the VPC connection.
+     */
+    Name: ResourceName;
+    /**
+     * A list of subnet IDs for the VPC connection.
+     */
+    SubnetIds: SubnetIdList;
+    /**
+     * A list of security group IDs for the VPC connection.
+     */
+    SecurityGroupIds: SecurityGroupIdList;
+    /**
+     * A list of IP addresses of DNS resolver endpoints for the VPC connection.
+     */
+    DnsResolvers?: DnsResolverList;
+    /**
+     * The IAM role to associate with the VPC connection.
+     */
+    RoleArn: RoleArn;
+    /**
+     * A map of the key-value pairs for the resource tag or tags assigned to the VPC connection.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateVPCConnectionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC connection.
+     */
+    Arn?: Arn;
+    /**
+     * The ID for the VPC connection that you're creating. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    VPCConnectionId?: VPCConnectionResourceIdRestricted;
+    /**
+     * The status of the creation of the VPC connection.
+     */
+    CreationStatus?: VPCConnectionResourceStatus;
+    /**
+     * The availability status of the VPC connection.
+     */
+    AvailabilityStatus?: VPCConnectionAvailabilityStatus;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface CredentialPair {
     /**
      * User name.
@@ -3550,6 +3888,7 @@ declare namespace QuickSight {
      */
     NullValueFormatConfiguration?: NullValueFormatConfiguration;
   }
+  export type CustomActionColumnList = ColumnIdentifier[];
   export interface CustomActionFilterOperation {
     /**
      * The configuration that chooses the fields to be filtered.
@@ -3989,6 +4328,16 @@ declare namespace QuickSight {
      */
     ExportHiddenFieldsOption?: ExportHiddenFieldsOption;
   }
+  export interface DataAggregation {
+    /**
+     * The level of time precision that is used to aggregate DateTime values.
+     */
+    DatasetRowDateGranularity?: TopicTimeGranularity;
+    /**
+     * The column name for the default date.
+     */
+    DefaultDateColumnName?: LimitedString;
+  }
   export interface DataBarsOptions {
     /**
      * The field ID for the data bars options.
@@ -4083,6 +4432,10 @@ declare namespace QuickSight {
      * Determines whether overlap is enabled or disabled for the data labels.
      */
     Overlap?: DataLabelOverlap;
+    /**
+     * Determines the visibility of the total.
+     */
+    TotalsVisibility?: Visibility;
   }
   export type DataLabelOverlap = "DISABLE_OVERLAP"|"ENABLE_OVERLAP"|string;
   export type DataLabelPosition = "INSIDE"|"OUTSIDE"|"LEFT"|"TOP"|"BOTTOM"|"RIGHT"|string;
@@ -4242,6 +4595,10 @@ declare namespace QuickSight {
      * The usage configuration to apply to child datasets that reference this dataset as a source.
      */
     DataSetUsageConfiguration?: DataSetUsageConfiguration;
+    /**
+     * The parameters that are declared in a dataset.
+     */
+    DatasetParameters?: DatasetParameterList;
   }
   export type DataSetArnsList = Arn[];
   export interface DataSetConfiguration {
@@ -4595,6 +4952,63 @@ declare namespace QuickSight {
      */
     SqlEndpointPath: SqlEndpointPath;
   }
+  export interface DatasetMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset.
+     */
+    DatasetArn: Arn;
+    /**
+     * The name of the dataset.
+     */
+    DatasetName?: LimitedString;
+    /**
+     * The description of the dataset.
+     */
+    DatasetDescription?: LimitedString;
+    /**
+     * The definition of a data aggregation.
+     */
+    DataAggregation?: DataAggregation;
+    /**
+     * The list of filter definitions.
+     */
+    Filters?: TopicFilters;
+    /**
+     * The list of column definitions.
+     */
+    Columns?: TopicColumns;
+    /**
+     * The list of calculated field definitions.
+     */
+    CalculatedFields?: TopicCalculatedFields;
+    /**
+     * The list of named entities definitions.
+     */
+    NamedEntities?: TopicNamedEntities;
+  }
+  export interface DatasetParameter {
+    /**
+     * A string parameter that is created in the dataset.
+     */
+    StringDatasetParameter?: StringDatasetParameter;
+    /**
+     * A decimal parameter that is created in the dataset.
+     */
+    DecimalDatasetParameter?: DecimalDatasetParameter;
+    /**
+     * An integer parameter that is created in the dataset.
+     */
+    IntegerDatasetParameter?: IntegerDatasetParameter;
+    /**
+     * A date time parameter that is created in the dataset.
+     */
+    DateTimeDatasetParameter?: DateTimeDatasetParameter;
+  }
+  export type DatasetParameterId = string;
+  export type DatasetParameterList = DatasetParameter[];
+  export type DatasetParameterName = string;
+  export type DatasetParameterValueType = "MULTI_VALUED"|"SINGLE_VALUED"|string;
+  export type Datasets = DatasetMetadata[];
   export type DateAggregationFunction = "COUNT"|"DISTINCT_COUNT"|"MIN"|"MAX"|string;
   export interface DateAxisOptions {
     /**
@@ -4642,6 +5056,36 @@ declare namespace QuickSight {
      */
     FormatConfiguration?: DateTimeFormatConfiguration;
   }
+  export interface DateTimeDatasetParameter {
+    /**
+     * An identifier for the parameter that is created in the dataset.
+     */
+    Id: DatasetParameterId;
+    /**
+     * The name of the date time parameter that is created in the dataset.
+     */
+    Name: DatasetParameterName;
+    /**
+     * The value type of the dataset parameter. Valid values are single value or multi value.
+     */
+    ValueType: DatasetParameterValueType;
+    /**
+     * The time granularity of the date time parameter.
+     */
+    TimeGranularity?: TimeGranularity;
+    /**
+     * A list of default values for a given date time parameter. This structure only accepts static values.
+     */
+    DefaultValues?: DateTimeDatasetParameterDefaultValues;
+  }
+  export type DateTimeDatasetParameterDefaultValue = Date;
+  export interface DateTimeDatasetParameterDefaultValues {
+    /**
+     * A list of static default values for a given date time parameter.
+     */
+    StaticValues?: DateTimeDatasetParameterValueList;
+  }
+  export type DateTimeDatasetParameterValueList = DateTimeDatasetParameterDefaultValue[];
   export type DateTimeDefaultValueList = SensitiveTimestamp[];
   export interface DateTimeDefaultValues {
     /**
@@ -4709,6 +5153,7 @@ declare namespace QuickSight {
      * The configuration that defines the default value of a DateTime parameter when a value has not been set.
      */
     ValueWhenUnset?: DateTimeValueWhenUnsetConfiguration;
+    MappedDataSetParameters?: MappedDataSetParameters;
   }
   export type DateTimeParameterList = DateTimeParameter[];
   export interface DateTimePickerControlDisplayOptions {
@@ -4733,6 +5178,32 @@ declare namespace QuickSight {
   }
   export type DayOfMonth = string;
   export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
+  export interface DecimalDatasetParameter {
+    /**
+     * An identifier for the decimal parameter created in the dataset.
+     */
+    Id: DatasetParameterId;
+    /**
+     * The name of the decimal parameter that is created in the dataset.
+     */
+    Name: DatasetParameterName;
+    /**
+     * The value type of the dataset parameter. Valid values are single value or multi value.
+     */
+    ValueType: DatasetParameterValueType;
+    /**
+     * A list of default values for a given decimal parameter. This structure only accepts static values.
+     */
+    DefaultValues?: DecimalDatasetParameterDefaultValues;
+  }
+  export type DecimalDatasetParameterDefaultValue = number;
+  export interface DecimalDatasetParameterDefaultValues {
+    /**
+     * A list of static default values for a given decimal parameter.
+     */
+    StaticValues?: DecimalDatasetParameterValueList;
+  }
+  export type DecimalDatasetParameterValueList = DecimalDatasetParameterDefaultValue[];
   export type DecimalDefaultValueList = SensitiveDoubleObject[];
   export interface DecimalDefaultValues {
     /**
@@ -4771,6 +5242,7 @@ declare namespace QuickSight {
      * The configuration that defines the default value of a Decimal parameter when a value has not been set.
      */
     ValueWhenUnset?: DecimalValueWhenUnsetConfiguration;
+    MappedDataSetParameters?: MappedDataSetParameters;
   }
   export type DecimalParameterList = DecimalParameter[];
   export type DecimalPlaces = number;
@@ -4789,6 +5261,17 @@ declare namespace QuickSight {
      * A custom value that's used when the value of a parameter isn't set.
      */
     CustomValue?: SensitiveDouble;
+  }
+  export type DefaultAggregation = "SUM"|"MAX"|"MIN"|"COUNT"|"DISTINCT_COUNT"|"AVERAGE"|string;
+  export interface DefaultFormatting {
+    /**
+     * The display format. Valid values for this structure are AUTO, PERCENT, CURRENCY, NUMBER, DATE, and STRING.
+     */
+    DisplayFormat?: DisplayFormat;
+    /**
+     * The additional options for display formatting.
+     */
+    DisplayFormatOptions?: DisplayFormatOptions;
   }
   export interface DefaultFreeFormLayoutConfiguration {
     /**
@@ -5346,6 +5829,70 @@ declare namespace QuickSight {
      */
     ThemeId?: ShortRestrictiveResourceId;
   }
+  export interface DeleteTopicRefreshScheduleRequest {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The ID of the dataset.
+     */
+    DatasetId: String;
+  }
+  export interface DeleteTopicRefreshScheduleResponse {
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset.
+     */
+    DatasetArn?: Arn;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface DeleteTopicRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topic that you want to delete.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+  }
+  export interface DeleteTopicResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    Arn?: Arn;
+    /**
+     * The ID of the topic that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DeleteUserByPrincipalIdRequest {
     /**
      * The principal ID of the user.
@@ -5385,6 +5932,42 @@ declare namespace QuickSight {
     Namespace: Namespace;
   }
   export interface DeleteUserResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface DeleteVPCConnectionRequest {
+    /**
+     * The Amazon Web Services account ID of the account where you want to delete a VPC connection.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+     */
+    VPCConnectionId: VPCConnectionResourceIdUnrestricted;
+  }
+  export interface DeleteVPCConnectionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the deleted VPC connection.
+     */
+    Arn?: Arn;
+    /**
+     * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+     */
+    VPCConnectionId?: VPCConnectionResourceIdUnrestricted;
+    /**
+     * The deletion status of the VPC connection.
+     */
+    DeletionStatus?: VPCConnectionResourceStatus;
+    /**
+     * The availability status of the VPC connection.
+     */
+    AvailabilityStatus?: VPCConnectionAvailabilityStatus;
     /**
      * The Amazon Web Services request ID for this operation.
      */
@@ -6356,6 +6939,138 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface DescribeTopicPermissionsRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topic that you want described.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+  }
+  export interface DescribeTopicPermissionsResponse {
+    /**
+     * The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * A list of resource permissions that are configured to the topic.
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface DescribeTopicRefreshRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topic whose refresh you want to describe.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The ID of the refresh, which is performed when the topic is created or updated.
+     */
+    RefreshId: ResourceId;
+  }
+  export interface DescribeTopicRefreshResponse {
+    /**
+     * Details of the refresh, which is performed when the topic is created or updated.
+     */
+    RefreshDetails?: TopicRefreshDetails;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface DescribeTopicRefreshScheduleRequest {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that contains the refresh schedule that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The ID of the dataset.
+     */
+    DatasetId: String;
+  }
+  export interface DescribeTopicRefreshScheduleResponse {
+    /**
+     * The ID of the topic that contains the refresh schedule that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset.
+     */
+    DatasetArn?: Arn;
+    /**
+     * The definition of a refresh schedule.
+     */
+    RefreshSchedule?: TopicRefreshSchedule;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface DescribeTopicRequest {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+  }
+  export interface DescribeTopicResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    Arn?: Arn;
+    /**
+     * The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The definition of a topic.
+     */
+    Topic?: TopicDetails;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DescribeUserRequest {
     /**
      * The name of the user that you want to describe.
@@ -6384,6 +7099,30 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DescribeVPCConnectionRequest {
+    /**
+     * The Amazon Web Services account ID of the account that contains the VPC connection that you want described.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+     */
+    VPCConnectionId: VPCConnectionResourceIdUnrestricted;
+  }
+  export interface DescribeVPCConnectionResponse {
+    /**
+     * A response object that provides information for the specified VPC connection.
+     */
+    VPCConnection?: VPCConnection;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DestinationParameterValueConfiguration {
     /**
      * The configuration of custom values for destination parameter in DestinationParameterValueConfiguration.
@@ -6401,6 +7140,7 @@ declare namespace QuickSight {
      * The source field ID of the destination parameter.
      */
     SourceField?: FieldId;
+    SourceColumn?: ColumnIdentifier;
   }
   export interface DimensionField {
     /**
@@ -6417,6 +7157,58 @@ declare namespace QuickSight {
     DateDimensionField?: DateDimensionField;
   }
   export type DimensionFieldList = DimensionField[];
+  export type DisplayFormat = "AUTO"|"PERCENT"|"CURRENCY"|"NUMBER"|"DATE"|"STRING"|string;
+  export interface DisplayFormatOptions {
+    /**
+     * A Boolean value that indicates whether to use blank cell format.
+     */
+    UseBlankCellFormat?: Boolean;
+    /**
+     * Determines the blank cell format.
+     */
+    BlankCellFormat?: LimitedString;
+    /**
+     * Determines the DateTime format.
+     */
+    DateFormat?: LimitedString;
+    /**
+     * Determines the decimal separator.
+     */
+    DecimalSeparator?: TopicNumericSeparatorSymbol;
+    /**
+     * Determines the grouping separator.
+     */
+    GroupingSeparator?: LimitedString;
+    /**
+     * A Boolean value that indicates whether to use grouping.
+     */
+    UseGrouping?: Boolean;
+    /**
+     * Determines the number of fraction digits.
+     */
+    FractionDigits?: Integer;
+    /**
+     * The prefix value for a display format.
+     */
+    Prefix?: LimitedString;
+    /**
+     * The suffix value for a display format.
+     */
+    Suffix?: LimitedString;
+    /**
+     * The unit scaler. Valid values for this structure are: NONE, AUTO, THOUSANDS, MILLIONS, BILLIONS, and TRILLIONS.
+     */
+    UnitScaler?: NumberScale;
+    /**
+     * The negative format.
+     */
+    NegativeFormat?: NegativeFormat;
+    /**
+     * The currency symbol, such as USD.
+     */
+    CurrencySymbol?: LimitedString;
+  }
+  export type DnsResolverList = IPv4Address[];
   export type Domain = string;
   export interface DonutCenterOptions {
     /**
@@ -6791,6 +7583,7 @@ declare namespace QuickSight {
      */
     TopBottomFilter?: TopBottomFilter;
   }
+  export type FilterClass = "ENFORCED_VALUE_FILTER"|"CONDITIONAL_VALUE_FILTER"|"NAMED_VALUE_FILTER"|string;
   export interface FilterControl {
     /**
      * A control from a date filter that is used to specify date and time.
@@ -6958,6 +7751,10 @@ declare namespace QuickSight {
      * A structure that contains the options that choose which fields are filtered in the CustomActionFilterOperation. Valid values are defined as follows:    ALL_FIELDS: Applies the filter operation to all fields.  
      */
     SelectedFieldOptions?: SelectedFieldOptions;
+    /**
+     * The selected columns of a dataset.
+     */
+    SelectedColumns?: CustomActionColumnList;
   }
   export interface FilterOperationTargetVisualsConfiguration {
     /**
@@ -8327,6 +9124,7 @@ declare namespace QuickSight {
     AssignmentStatus?: AssignmentStatus;
   }
   export type IAMPolicyAssignmentSummaryList = IAMPolicyAssignmentSummary[];
+  export type IPv4Address = string;
   export type Icon = "CARET_UP"|"CARET_DOWN"|"PLUS"|"MINUS"|"ARROW_UP"|"ARROW_DOWN"|"ARROW_LEFT"|"ARROW_UP_LEFT"|"ARROW_DOWN_LEFT"|"ARROW_RIGHT"|"ARROW_UP_RIGHT"|"ARROW_DOWN_RIGHT"|"FACE_UP"|"FACE_DOWN"|"FACE_FLAT"|"ONE_BAR"|"TWO_BAR"|"THREE_BAR"|"CIRCLE"|"TRIANGLE"|"SQUARE"|"FLAG"|"THUMBS_UP"|"THUMBS_DOWN"|"CHECKMARK"|"X"|string;
   export type IdentityMap = {[key: string]: IdentityNameList};
   export type IdentityName = string;
@@ -8437,6 +9235,32 @@ declare namespace QuickSight {
   }
   export type InstanceId = string;
   export type Integer = number;
+  export interface IntegerDatasetParameter {
+    /**
+     * An identifier for the integer parameter created in the dataset.
+     */
+    Id: DatasetParameterId;
+    /**
+     * The name of the integer parameter that is created in the dataset.
+     */
+    Name: DatasetParameterName;
+    /**
+     * The value type of the dataset parameter. Valid values are single value or multi value.
+     */
+    ValueType: DatasetParameterValueType;
+    /**
+     * A list of default values for a given integer parameter. This structure only accepts static values.
+     */
+    DefaultValues?: IntegerDatasetParameterDefaultValues;
+  }
+  export type IntegerDatasetParameterDefaultValue = number;
+  export interface IntegerDatasetParameterDefaultValues {
+    /**
+     * A list of static default values for a given integer parameter.
+     */
+    StaticValues?: IntegerDatasetParameterValueList;
+  }
+  export type IntegerDatasetParameterValueList = IntegerDatasetParameterDefaultValue[];
   export type IntegerDefaultValueList = SensitiveLongObject[];
   export interface IntegerDefaultValues {
     /**
@@ -8475,6 +9299,7 @@ declare namespace QuickSight {
      * A parameter declaration for the Integer data type.
      */
     ValueWhenUnset?: IntegerValueWhenUnsetConfiguration;
+    MappedDataSetParameters?: MappedDataSetParameters;
   }
   export type IntegerParameterList = IntegerParameter[];
   export interface IntegerValueWhenUnsetConfiguration {
@@ -8726,6 +9551,7 @@ declare namespace QuickSight {
   }
   export type LegendPosition = "AUTO"|"RIGHT"|"BOTTOM"|"TOP"|string;
   export type Length = string;
+  export type LimitedString = string;
   export interface LineChartAggregatedFieldWells {
     /**
      * The category field wells of a line chart. Values are grouped by category fields.
@@ -9694,6 +10520,70 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface ListTopicRefreshSchedulesRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topic whose refresh schedule you want described.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID for the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+  }
+  export interface ListTopicRefreshSchedulesResponse {
+    /**
+     * The ID for the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * The list of topic refresh schedules.
+     */
+    RefreshSchedules?: TopicRefreshScheduleSummaries;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface ListTopicsRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topics that you want to list.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListTopicsResponse {
+    /**
+     * A list of topic summaries.
+     */
+    TopicsSummaries?: TopicSummaries;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface ListUserGroupsRequest {
     /**
      * The Amazon QuickSight user name that you want to list group memberships for.
@@ -9759,6 +10649,38 @@ declare namespace QuickSight {
     UserList?: UserList;
     /**
      * A pagination token that can be used in a subsequent request.
+     */
+    NextToken?: String;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface ListVPCConnectionsRequest {
+    /**
+     * The Amazon Web Services account ID of the account that contains the VPC connections that you want to list.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListVPCConnectionsResponse {
+    /**
+     * A VPCConnectionSummaries object that returns a summary of VPC connection objects.
+     */
+    VPCConnectionSummaries?: VPCConnectionSummaryList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
      */
     NextToken?: String;
     /**
@@ -9853,6 +10775,17 @@ declare namespace QuickSight {
     Key: S3Key;
   }
   export type MapZoomMode = "AUTO"|"MANUAL"|string;
+  export interface MappedDataSetParameter {
+    /**
+     * A unique name that identifies a dataset within the analysis or dashboard.
+     */
+    DataSetIdentifier: DataSetIdentifier;
+    /**
+     * The name of the dataset parameter.
+     */
+    DataSetParameterName: ParameterName;
+  }
+  export type MappedDataSetParameters = MappedDataSetParameter[];
   export interface MarginStyle {
     /**
      * This Boolean value controls whether to display sheet margins.
@@ -9983,6 +10916,42 @@ declare namespace QuickSight {
      */
     Database: Database;
   }
+  export type NamedEntityAggType = "SUM"|"MIN"|"MAX"|"COUNT"|"AVERAGE"|"DISTINCT_COUNT"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|"MEDIAN"|"CUSTOM"|string;
+  export interface NamedEntityDefinition {
+    /**
+     * The name of the entity.
+     */
+    FieldName?: LimitedString;
+    /**
+     * The property name to be used for the named entity.
+     */
+    PropertyName?: LimitedString;
+    /**
+     * The property role. Valid values for this structure are PRIMARY and ID.
+     */
+    PropertyRole?: PropertyRole;
+    /**
+     * The property usage. Valid values for this structure are INHERIT, DIMENSION, and MEASURE.
+     */
+    PropertyUsage?: PropertyUsage;
+    /**
+     * The definition of a metric.
+     */
+    Metric?: NamedEntityDefinitionMetric;
+  }
+  export interface NamedEntityDefinitionMetric {
+    /**
+     * The aggregation of a named entity. Valid values for this structure are SUM, MIN, MAX, COUNT, AVERAGE, DISTINCT_COUNT, STDEV, STDEVP, VAR, VARP, PERCENTILE, MEDIAN, and CUSTOM.
+     */
+    Aggregation?: NamedEntityAggType;
+    /**
+     * The additional parameters for an aggregation function.
+     */
+    AggregationFunctionParameters?: AggregationFunctionParameters;
+  }
+  export type NamedEntityDefinitions = NamedEntityDefinition[];
+  export type NamedFilterAggType = "NO_AGGREGATION"|"SUM"|"AVERAGE"|"COUNT"|"DISTINCT_COUNT"|"MAX"|"MEDIAN"|"MIN"|"STDEV"|"STDEVP"|"VAR"|"VARP"|string;
+  export type NamedFilterType = "CATEGORY_FILTER"|"NUMERIC_EQUALITY_FILTER"|"NUMERIC_RANGE_FILTER"|"DATE_RANGE_FILTER"|"RELATIVE_DATE_FILTER"|string;
   export type Namespace = string;
   export interface NamespaceError {
     /**
@@ -10024,6 +10993,16 @@ declare namespace QuickSight {
   export type NamespaceStatus = "CREATED"|"CREATING"|"DELETING"|"RETRYABLE_FAILURE"|"NON_RETRYABLE_FAILURE"|string;
   export type Namespaces = NamespaceInfoV2[];
   export type NarrativeString = string;
+  export interface NegativeFormat {
+    /**
+     * The prefix for a negative format.
+     */
+    Prefix?: LimitedString;
+    /**
+     * The suffix for a negative format.
+     */
+    Suffix?: LimitedString;
+  }
   export interface NegativeValueConfiguration {
     /**
      * Determines the display mode of the negative value configuration.
@@ -10031,6 +11010,49 @@ declare namespace QuickSight {
     DisplayMode: NegativeValueDisplayMode;
   }
   export type NegativeValueDisplayMode = "POSITIVE"|"NEGATIVE"|string;
+  export interface NetworkInterface {
+    /**
+     * The subnet ID associated with the network interface.
+     */
+    SubnetId?: SubnetId;
+    /**
+     * The availability zone that the network interface resides in.
+     */
+    AvailabilityZone?: String;
+    /**
+     * An error message.
+     */
+    ErrorMessage?: String;
+    /**
+     * The status of the network interface.
+     */
+    Status?: NetworkInterfaceStatus;
+    /**
+     * The network interface ID.
+     */
+    NetworkInterfaceId?: NetworkInterfaceId;
+  }
+  export type NetworkInterfaceId = string;
+  export type NetworkInterfaceList = NetworkInterface[];
+  export type NetworkInterfaceStatus = "CREATING"|"AVAILABLE"|"CREATION_FAILED"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETED"|"DELETION_FAILED"|"DELETION_SCHEDULED"|"ATTACHMENT_FAILED_ROLLBACK_FAILED"|string;
+  export interface NewDefaultValues {
+    /**
+     * A list of static default values for a given string parameter.
+     */
+    StringStaticValues?: StringDatasetParameterValueList;
+    /**
+     * A list of static default values for a given decimal parameter.
+     */
+    DecimalStaticValues?: DecimalDatasetParameterValueList;
+    /**
+     * A list of static default values for a given date time parameter.
+     */
+    DateTimeStaticValues?: DateTimeDatasetParameterValueList;
+    /**
+     * A list of static default values for a given integer parameter.
+     */
+    IntegerStaticValues?: IntegerDatasetParameterValueList;
+  }
   export type NonEmptyString = string;
   export type NullString = string;
   export interface NullValueFormatConfiguration {
@@ -10260,11 +11282,11 @@ declare namespace QuickSight {
      */
     Host: Host;
     /**
-     * Port.
+     * The port.
      */
     Port: Port;
     /**
-     * Database.
+     * The database.
      */
     Database: Database;
   }
@@ -10279,11 +11301,25 @@ declare namespace QuickSight {
      */
     Description?: ColumnDescriptiveText;
     /**
-     * Type.
+     * The type.
      */
     Type?: ColumnDataType;
   }
   export type OutputColumnList = OutputColumn[];
+  export interface OverrideDatasetParameterOperation {
+    /**
+     * The name of the parameter to be overridden with different values.
+     */
+    ParameterName: DatasetParameterName;
+    /**
+     * The new name for the parameter.
+     */
+    NewParameterName?: DatasetParameterName;
+    /**
+     * The new default values for the parameter.
+     */
+    NewDefaultValues?: NewDefaultValues;
+  }
   export type PageNumber = number;
   export interface PaginationConfiguration {
     /**
@@ -11135,6 +12171,8 @@ declare namespace QuickSight {
     ProjectedColumns: ProjectedColumnList;
   }
   export type ProjectedColumnList = String[];
+  export type PropertyRole = "PRIMARY"|"ID"|string;
+  export type PropertyUsage = "INHERIT"|"DIMENSION"|"MEASURE"|string;
   export interface PutDataSetRefreshPropertiesRequest {
     /**
      * The Amazon Web Services account ID.
@@ -11309,6 +12347,16 @@ declare namespace QuickSight {
      */
     ColumnHierarchies?: ColumnHierarchyList;
   }
+  export interface RangeConstant {
+    /**
+     * The minimum value for a range constant.
+     */
+    Minimum?: LimitedString;
+    /**
+     * The maximum value for a range constant.
+     */
+    Maximum?: LimitedString;
+  }
   export interface RangeEndsLabelType {
     /**
      * The visibility of the range ends label.
@@ -11390,7 +12438,7 @@ declare namespace QuickSight {
     /**
      * The aggregation function that is used in the dynamic data.
      */
-    MeasureAggregationFunction: AggregationFunction;
+    MeasureAggregationFunction?: AggregationFunction;
     /**
      * The calculation that is used in the dynamic data.
      */
@@ -11590,6 +12638,10 @@ declare namespace QuickSight {
      * The state persistence settings of an embedded dashboard.
      */
     StatePersistence?: StatePersistenceConfigurations;
+    /**
+     * The bookmarks configuration for an embedded dashboard in Amazon QuickSight.
+     */
+    Bookmarks?: BookmarksConfigurations;
   }
   export interface RegisteredUserDashboardVisualEmbeddingConfiguration {
     /**
@@ -11986,6 +13038,10 @@ declare namespace QuickSight {
      * The size field well of a scatter plot.
      */
     Size?: MeasureFieldList;
+    /**
+     * The label field well of a scatter plot.
+     */
+    Label?: DimensionFieldList;
   }
   export interface ScatterPlotConfiguration {
     /**
@@ -12027,11 +13083,11 @@ declare namespace QuickSight {
   }
   export interface ScatterPlotFieldWells {
     /**
-     * The aggregated field wells of a scatter plot. Scatter plots that have a field in the category (group/color) field will have aggregated field wells. The x and y-axes of these scatter plots are aggregated by category.
+     * The aggregated field wells of a scatter plot. The x and y-axes of scatter plots with aggregated field wells are aggregated by category, label, or both.
      */
     ScatterPlotCategoricallyAggregatedFieldWells?: ScatterPlotCategoricallyAggregatedFieldWells;
     /**
-     * The unaggregated field wells of a scatter plot. Scatter plots without a category field well have unaggregated field wells. The x and y-axes of these scatter plots are unaggregated.
+     * The unaggregated field wells of a scatter plot. The x and y-axes of these scatter plots are unaggregated.
      */
     ScatterPlotUnaggregatedFieldWells?: ScatterPlotUnaggregatedFieldWells;
   }
@@ -12048,6 +13104,14 @@ declare namespace QuickSight {
      * The size field well of a scatter plot.
      */
     Size?: MeasureFieldList;
+    /**
+     * The category field well of a scatter plot.
+     */
+    Category?: DimensionFieldList;
+    /**
+     * The label field well of a scatter plot.
+     */
+    Label?: DimensionFieldList;
   }
   export interface ScatterPlotVisual {
     /**
@@ -12390,6 +13454,8 @@ declare namespace QuickSight {
      */
     Padding?: Spacing;
   }
+  export type SecurityGroupId = string;
+  export type SecurityGroupIdList = SecurityGroupId[];
   export type SelectAllValueOptions = "ALL_VALUES"|string;
   export type SelectedFieldList = FieldId[];
   export type SelectedFieldOptions = "ALL_FIELDS"|string;
@@ -12400,6 +13466,50 @@ declare namespace QuickSight {
     SheetVisualScopingConfigurations?: SheetVisualScopingConfigurations;
   }
   export type SelectedTooltipType = "BASIC"|"DETAILED"|string;
+  export interface SemanticEntityType {
+    /**
+     * The semantic entity type name.
+     */
+    TypeName?: LimitedString;
+    /**
+     * The semantic entity sub type name.
+     */
+    SubTypeName?: LimitedString;
+    /**
+     * The semantic entity type parameters.
+     */
+    TypeParameters?: TypeParameters;
+  }
+  export interface SemanticType {
+    /**
+     * The semantic type name.
+     */
+    TypeName?: LimitedString;
+    /**
+     * The semantic type sub type name.
+     */
+    SubTypeName?: LimitedString;
+    /**
+     * The semantic type parameters.
+     */
+    TypeParameters?: TypeParameters;
+    /**
+     * The semantic type truthy cell value.
+     */
+    TruthyCellValue?: SensitiveString;
+    /**
+     * The other names or aliases for the true cell value.
+     */
+    TruthyCellValueSynonyms?: SensitiveStringList;
+    /**
+     * The semantic type falsey cell value.
+     */
+    FalseyCellValue?: SensitiveString;
+    /**
+     * The other names or aliases for the false cell value.
+     */
+    FalseyCellValueSynonyms?: SensitiveStringList;
+  }
   export type SensitiveDouble = number;
   export type SensitiveDoubleList = SensitiveDouble[];
   export type SensitiveDoubleObject = number;
@@ -12735,6 +13845,32 @@ declare namespace QuickSight {
   export type Status = "ENABLED"|"DISABLED"|string;
   export type StatusCode = number;
   export type String = string;
+  export interface StringDatasetParameter {
+    /**
+     * An identifier for the string parameter that is created in the dataset.
+     */
+    Id: DatasetParameterId;
+    /**
+     * The name of the string parameter that is created in the dataset.
+     */
+    Name: DatasetParameterName;
+    /**
+     * The value type of the dataset parameter. Valid values are single value or multi value.
+     */
+    ValueType: DatasetParameterValueType;
+    /**
+     * A list of default values for a given string dataset parameter type. This structure only accepts static values.
+     */
+    DefaultValues?: StringDatasetParameterDefaultValues;
+  }
+  export type StringDatasetParameterDefaultValue = string;
+  export interface StringDatasetParameterDefaultValues {
+    /**
+     * A list of static default values for a given string parameter.
+     */
+    StaticValues?: StringDatasetParameterValueList;
+  }
+  export type StringDatasetParameterValueList = StringDatasetParameterDefaultValue[];
   export type StringDefaultValueList = SensitiveStringObject[];
   export interface StringDefaultValues {
     /**
@@ -12784,6 +13920,7 @@ declare namespace QuickSight {
      * The configuration that defines the default value of a String parameter when a value has not been set.
      */
     ValueWhenUnset?: StringValueWhenUnsetConfiguration;
+    MappedDataSetParameters?: MappedDataSetParameters;
   }
   export type StringParameterList = StringParameter[];
   export interface StringValueWhenUnsetConfiguration {
@@ -12796,6 +13933,8 @@ declare namespace QuickSight {
      */
     CustomValue?: SensitiveString;
   }
+  export type SubnetId = string;
+  export type SubnetIdList = SubnetId[];
   export interface SubtotalOptions {
     /**
      * The visibility configuration for the subtotal cells.
@@ -12827,6 +13966,7 @@ declare namespace QuickSight {
     MetricHeaderCellStyle?: TableCellStyle;
   }
   export type Suffix = string;
+  export type Synonyms = LimitedString[];
   export interface TableAggregatedFieldWells {
     /**
      * The group by field well for a pivot table. Values are grouped by group by fields.
@@ -13883,6 +15023,404 @@ declare namespace QuickSight {
   }
   export type TopBottomRankedComputationResultSize = number;
   export type TopBottomSortOrder = "PERCENT_DIFFERENCE"|"ABSOLUTE_DIFFERENCE"|string;
+  export interface TopicCalculatedField {
+    /**
+     * The calculated field name.
+     */
+    CalculatedFieldName: LimitedString;
+    /**
+     * The calculated field description.
+     */
+    CalculatedFieldDescription?: LimitedString;
+    /**
+     * The calculated field expression.
+     */
+    Expression: Expression;
+    /**
+     * The other names or aliases for the calculated field.
+     */
+    CalculatedFieldSynonyms?: Synonyms;
+    /**
+     * A boolean value that indicates if a calculated field is included in the topic.
+     */
+    IsIncludedInTopic?: Boolean;
+    /**
+     * A Boolean value that indicates if a calculated field is visible in the autocomplete.
+     */
+    DisableIndexing?: NullableBoolean;
+    /**
+     * The column data role for a calculated field. Valid values for this structure are DIMENSION and MEASURE.
+     */
+    ColumnDataRole?: ColumnDataRole;
+    /**
+     * The level of time precision that is used to aggregate DateTime values.
+     */
+    TimeGranularity?: TopicTimeGranularity;
+    /**
+     * The default formatting definition.
+     */
+    DefaultFormatting?: DefaultFormatting;
+    /**
+     * The default aggregation. Valid values for this structure are SUM, MAX, MIN, COUNT, DISTINCT_COUNT, and AVERAGE.
+     */
+    Aggregation?: DefaultAggregation;
+    /**
+     * The order in which data is displayed for the calculated field when it's used in a comparative context.
+     */
+    ComparativeOrder?: ComparativeOrder;
+    /**
+     * The semantic type.
+     */
+    SemanticType?: SemanticType;
+    /**
+     * The list of aggregation types that are allowed for the calculated field. Valid values for this structure are COUNT, DISTINCT_COUNT, MIN, MAX, MEDIAN, SUM, AVERAGE, STDEV, STDEVP, VAR, VARP, and PERCENTILE.
+     */
+    AllowedAggregations?: AuthorSpecifiedAggregations;
+    /**
+     * The list of aggregation types that are not allowed for the calculated field. Valid values for this structure are COUNT, DISTINCT_COUNT, MIN, MAX, MEDIAN, SUM, AVERAGE, STDEV, STDEVP, VAR, VARP, and PERCENTILE.
+     */
+    NotAllowedAggregations?: AuthorSpecifiedAggregations;
+    /**
+     * A Boolean value that indicates whether to never aggregate calculated field in filters.
+     */
+    NeverAggregateInFilter?: Boolean;
+    /**
+     * The other names or aliases for the calculated field cell value.
+     */
+    CellValueSynonyms?: CellValueSynonyms;
+  }
+  export type TopicCalculatedFields = TopicCalculatedField[];
+  export interface TopicCategoryFilter {
+    /**
+     * The category filter function. Valid values for this structure are EXACT and CONTAINS.
+     */
+    CategoryFilterFunction?: CategoryFilterFunction;
+    /**
+     * The category filter type. This element is used to specify whether a filter is a simple category filter or an inverse category filter.
+     */
+    CategoryFilterType?: CategoryFilterType;
+    /**
+     * The constant used in a category filter.
+     */
+    Constant?: TopicCategoryFilterConstant;
+    /**
+     * A Boolean value that indicates if the filter is inverse.
+     */
+    Inverse?: Boolean;
+  }
+  export interface TopicCategoryFilterConstant {
+    /**
+     * The type of category filter constant. This element is used to specify whether a constant is a singular or collective. Valid values are SINGULAR and COLLECTIVE.
+     */
+    ConstantType?: ConstantType;
+    /**
+     * A singular constant used in a category filter. This element is used to specify a single value for the constant.
+     */
+    SingularConstant?: LimitedString;
+    /**
+     * A collective constant used in a category filter. This element is used to specify a list of values for the constant.
+     */
+    CollectiveConstant?: CollectiveConstant;
+  }
+  export interface TopicColumn {
+    /**
+     * The name of the column.
+     */
+    ColumnName: LimitedString;
+    /**
+     * A user-friendly name for the column.
+     */
+    ColumnFriendlyName?: LimitedString;
+    /**
+     * A description of the column and its contents.
+     */
+    ColumnDescription?: LimitedString;
+    /**
+     * The other names or aliases for the column.
+     */
+    ColumnSynonyms?: Synonyms;
+    /**
+     * The role of the column in the data. Valid values are DIMENSION and MEASURE.
+     */
+    ColumnDataRole?: ColumnDataRole;
+    /**
+     * The type of aggregation that is performed on the column data when it's queried. Valid values for this structure are SUM, MAX, MIN, COUNT, DISTINCT_COUNT, and AVERAGE.
+     */
+    Aggregation?: DefaultAggregation;
+    /**
+     * A Boolean value that indicates whether the column is included in the query results.
+     */
+    IsIncludedInTopic?: Boolean;
+    /**
+     * A Boolean value that indicates whether the column shows in the autocomplete functionality.
+     */
+    DisableIndexing?: NullableBoolean;
+    /**
+     * The order in which data is displayed for the column when it's used in a comparative context.
+     */
+    ComparativeOrder?: ComparativeOrder;
+    /**
+     * The semantic type of data contained in the column.
+     */
+    SemanticType?: SemanticType;
+    /**
+     * The level of time precision that is used to aggregate DateTime values.
+     */
+    TimeGranularity?: TopicTimeGranularity;
+    /**
+     * The list of aggregation types that are allowed for the column. Valid values for this structure are COUNT, DISTINCT_COUNT, MIN, MAX, MEDIAN, SUM, AVERAGE, STDEV, STDEVP, VAR, VARP, and PERCENTILE.
+     */
+    AllowedAggregations?: AuthorSpecifiedAggregations;
+    /**
+     * The list of aggregation types that are not allowed for the column. Valid values for this structure are COUNT, DISTINCT_COUNT, MIN, MAX, MEDIAN, SUM, AVERAGE, STDEV, STDEVP, VAR, VARP, and PERCENTILE.
+     */
+    NotAllowedAggregations?: AuthorSpecifiedAggregations;
+    /**
+     * The default formatting used for values in the column.
+     */
+    DefaultFormatting?: DefaultFormatting;
+    /**
+     * A Boolean value that indicates whether to aggregate the column data when it's used in a filter context.
+     */
+    NeverAggregateInFilter?: Boolean;
+    /**
+     * The other names or aliases for the column cell value.
+     */
+    CellValueSynonyms?: CellValueSynonyms;
+  }
+  export type TopicColumns = TopicColumn[];
+  export interface TopicDateRangeFilter {
+    /**
+     * A Boolean value that indicates whether the date range filter should include the boundary values. If set to true, the filter includes the start and end dates. If set to false, the filter excludes them.
+     */
+    Inclusive?: Boolean;
+    /**
+     * The constant used in a date range filter.
+     */
+    Constant?: TopicRangeFilterConstant;
+  }
+  export interface TopicDetails {
+    /**
+     * The name of the topic.
+     */
+    Name?: ResourceName;
+    /**
+     * The description of the topic.
+     */
+    Description?: LimitedString;
+    /**
+     * The data sets that the topic is associated with.
+     */
+    DataSets?: Datasets;
+  }
+  export interface TopicFilter {
+    /**
+     * A description of the filter used to select items for a topic.
+     */
+    FilterDescription?: LimitedString;
+    /**
+     * The class of the filter. Valid values for this structure are ENFORCED_VALUE_FILTER, CONDITIONAL_VALUE_FILTER, and NAMED_VALUE_FILTER.
+     */
+    FilterClass?: FilterClass;
+    /**
+     * The name of the filter.
+     */
+    FilterName: LimitedString;
+    /**
+     * The other names or aliases for the filter.
+     */
+    FilterSynonyms?: Synonyms;
+    /**
+     * The name of the field that the filter operates on.
+     */
+    OperandFieldName: LimitedString;
+    /**
+     * The type of the filter. Valid values for this structure are CATEGORY_FILTER, NUMERIC_EQUALITY_FILTER, NUMERIC_RANGE_FILTER, DATE_RANGE_FILTER, and RELATIVE_DATE_FILTER.
+     */
+    FilterType?: NamedFilterType;
+    /**
+     * The category filter that is associated with this filter.
+     */
+    CategoryFilter?: TopicCategoryFilter;
+    /**
+     * The numeric equality filter.
+     */
+    NumericEqualityFilter?: TopicNumericEqualityFilter;
+    /**
+     * The numeric range filter.
+     */
+    NumericRangeFilter?: TopicNumericRangeFilter;
+    /**
+     * The date range filter.
+     */
+    DateRangeFilter?: TopicDateRangeFilter;
+    /**
+     * The relative date filter.
+     */
+    RelativeDateFilter?: TopicRelativeDateFilter;
+  }
+  export type TopicFilters = TopicFilter[];
+  export type TopicId = string;
+  export type TopicNamedEntities = TopicNamedEntity[];
+  export interface TopicNamedEntity {
+    /**
+     * The name of the named entity.
+     */
+    EntityName: LimitedString;
+    /**
+     * The description of the named entity.
+     */
+    EntityDescription?: LimitedString;
+    /**
+     * The other names or aliases for the named entity.
+     */
+    EntitySynonyms?: Synonyms;
+    /**
+     * The type of named entity that a topic represents.
+     */
+    SemanticEntityType?: SemanticEntityType;
+    /**
+     * The definition of a named entity.
+     */
+    Definition?: NamedEntityDefinitions;
+  }
+  export interface TopicNumericEqualityFilter {
+    /**
+     * The constant used in a numeric equality filter.
+     */
+    Constant?: TopicSingularFilterConstant;
+    /**
+     * An aggregation function that specifies how to calculate the value of a numeric field for a topic. Valid values for this structure are NO_AGGREGATION, SUM, AVERAGE, COUNT, DISTINCT_COUNT, MAX, MEDIAN, MIN, STDEV, STDEVP, VAR, and VARP.
+     */
+    Aggregation?: NamedFilterAggType;
+  }
+  export interface TopicNumericRangeFilter {
+    /**
+     * A Boolean value that indicates whether the endpoints of the numeric range are included in the filter. If set to true, topics whose numeric field value is equal to the endpoint values will be included in the filter. If set to false, topics whose numeric field value is equal to the endpoint values will be excluded from the filter.
+     */
+    Inclusive?: Boolean;
+    /**
+     * The constant used in a numeric range filter.
+     */
+    Constant?: TopicRangeFilterConstant;
+    /**
+     * An aggregation function that specifies how to calculate the value of a numeric field for a topic, Valid values for this structure are NO_AGGREGATION, SUM, AVERAGE, COUNT, DISTINCT_COUNT, MAX, MEDIAN, MIN, STDEV, STDEVP, VAR, and VARP.
+     */
+    Aggregation?: NamedFilterAggType;
+  }
+  export type TopicNumericSeparatorSymbol = "COMMA"|"DOT"|string;
+  export interface TopicRangeFilterConstant {
+    /**
+     * The data type of the constant value that is used in a range filter. Valid values for this structure are RANGE.
+     */
+    ConstantType?: ConstantType;
+    /**
+     * The value of the constant that is used to specify the endpoints of a range filter.
+     */
+    RangeConstant?: RangeConstant;
+  }
+  export interface TopicRefreshDetails {
+    /**
+     * The Amazon Resource Name (ARN) of the topic refresh.
+     */
+    RefreshArn?: Arn;
+    /**
+     * The ID of the refresh, which occurs as a result of topic creation or topic update.
+     */
+    RefreshId?: ResourceId;
+    /**
+     * The status of the refresh job that indicates whether the job is still running, completed successfully, or failed.
+     */
+    RefreshStatus?: TopicRefreshStatus;
+  }
+  export interface TopicRefreshSchedule {
+    /**
+     * A Boolean value that controls whether to schedule is enabled.
+     */
+    IsEnabled: NullableBoolean;
+    /**
+     * A Boolean value that controls whether to schedule runs at the same schedule that is specified in SPICE dataset.
+     */
+    BasedOnSpiceSchedule: Boolean;
+    /**
+     * The starting date and time for the refresh schedule.
+     */
+    StartingAt?: Timestamp;
+    /**
+     * The timezone that you want the refresh schedule to use.
+     */
+    Timezone?: LimitedString;
+    /**
+     * The time of day when the refresh should run, for example, Monday-Sunday.
+     */
+    RepeatAt?: LimitedString;
+    /**
+     * The type of refresh schedule. Valid values for this structure are HOURLY, DAILY, WEEKLY, and MONTHLY.
+     */
+    TopicScheduleType?: TopicScheduleType;
+  }
+  export type TopicRefreshScheduleSummaries = TopicRefreshScheduleSummary[];
+  export interface TopicRefreshScheduleSummary {
+    /**
+     * The ID of the dataset.
+     */
+    DatasetId?: LimitedString;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset.
+     */
+    DatasetArn?: Arn;
+    /**
+     * The name of the dataset.
+     */
+    DatasetName?: LimitedString;
+    /**
+     * The definition of a refresh schedule.
+     */
+    RefreshSchedule?: TopicRefreshSchedule;
+  }
+  export type TopicRefreshStatus = "INITIALIZED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string;
+  export interface TopicRelativeDateFilter {
+    /**
+     * The level of time precision that is used to aggregate DateTime values.
+     */
+    TimeGranularity?: TopicTimeGranularity;
+    /**
+     * The function to be used in a relative date filter to determine the range of dates to include in the results. Valid values for this structure are BEFORE, AFTER, and BETWEEN.
+     */
+    RelativeDateFilterFunction?: TopicRelativeDateFilterFunction;
+    /**
+     * The constant used in a relative date filter.
+     */
+    Constant?: TopicSingularFilterConstant;
+  }
+  export type TopicRelativeDateFilterFunction = "PREVIOUS"|"THIS"|"LAST"|"NEXT"|"NOW"|string;
+  export type TopicScheduleType = "HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string;
+  export interface TopicSingularFilterConstant {
+    /**
+     * The type of the singular filter constant. Valid values for this structure are SINGULAR.
+     */
+    ConstantType?: ConstantType;
+    /**
+     * The value of the singular filter constant.
+     */
+    SingularConstant?: LimitedString;
+  }
+  export type TopicSummaries = TopicSummary[];
+  export interface TopicSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    Arn?: Arn;
+    /**
+     * The ID for the topic. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The name of the topic.
+     */
+    Name?: ResourceName;
+  }
+  export type TopicTimeGranularity = "SECOND"|"MINUTE"|"HOUR"|"DAY"|"WEEK"|"MONTH"|"QUARTER"|"YEAR"|string;
   export interface TotalAggregationComputation {
     /**
      * The ID for a computation.
@@ -13945,6 +15483,7 @@ declare namespace QuickSight {
      */
     TagColumnOperation?: TagColumnOperation;
     UntagColumnOperation?: UntagColumnOperation;
+    OverrideDatasetParameterOperation?: OverrideDatasetParameterOperation;
   }
   export type TransformOperationList = TransformOperation[];
   export interface TreeMapAggregatedFieldWells {
@@ -14060,6 +15599,7 @@ declare namespace QuickSight {
     MaxRows: PositiveInteger;
   }
   export type TypeCastFormat = string;
+  export type TypeParameters = {[key: string]: LimitedString};
   export interface Typography {
     /**
      * Determines the list of font families.
@@ -14149,6 +15689,7 @@ declare namespace QuickSight {
     FormatConfiguration?: FormatConfiguration;
   }
   export type UnaggregatedFieldList = UnaggregatedField[];
+  export type UndefinedSpecifiedValueType = "LEAST"|"MOST"|string;
   export type UnicodeIcon = string;
   export interface UniqueValuesComputation {
     /**
@@ -14585,6 +16126,10 @@ declare namespace QuickSight {
      */
     ColumnLevelPermissionRules?: ColumnLevelPermissionRuleList;
     DataSetUsageConfiguration?: DataSetUsageConfiguration;
+    /**
+     * The parameter declarations of the dataset.
+     */
+    DatasetParameters?: DatasetParameterList;
   }
   export interface UpdateDataSetResponse {
     /**
@@ -14810,7 +16355,7 @@ declare namespace QuickSight {
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The name of the assignment, also called a rule. This name must be unique within an Amazon Web Services account.
+     * The name of the assignment, also called a rule. The name must be unique within the Amazon Web Services account.
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
@@ -15190,6 +16735,122 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface UpdateTopicPermissionsRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topic that you want to update the permissions for.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The resource permissions that you want to grant to the topic.
+     */
+    GrantPermissions?: UpdateResourcePermissionList;
+    /**
+     * The resource permissions that you want to revoke from the topic.
+     */
+    RevokePermissions?: UpdateResourcePermissionList;
+  }
+  export interface UpdateTopicPermissionsResponse {
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * A list of resource permissions on the topic.
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface UpdateTopicRefreshScheduleRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topic whose refresh schedule you want to update.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The ID of the dataset.
+     */
+    DatasetId: String;
+    /**
+     * The definition of a refresh schedule.
+     */
+    RefreshSchedule: TopicRefreshSchedule;
+  }
+  export interface UpdateTopicRefreshScheduleResponse {
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    TopicArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset.
+     */
+    DatasetArn?: Arn;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface UpdateTopicRequest {
+    /**
+     * The ID of the Amazon Web Services account that contains the topic that you want to update.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId: TopicId;
+    /**
+     * The definition of the topic that you want to update.
+     */
+    Topic: TopicDetails;
+  }
+  export interface UpdateTopicResponse {
+    /**
+     * The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+     */
+    TopicId?: TopicId;
+    /**
+     * The Amazon Resource Name (ARN) of the topic.
+     */
+    Arn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the topic refresh.
+     */
+    RefreshArn?: Arn;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface UpdateUserRequest {
     /**
      * The Amazon QuickSight user name that you want to update.
@@ -15237,6 +16898,62 @@ declare namespace QuickSight {
      * The Amazon QuickSight user.
      */
     User?: User;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface UpdateVPCConnectionRequest {
+    /**
+     * The Amazon Web Services account ID of the account that contains the VPC connection that you want to update.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the VPC connection that you're updating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+     */
+    VPCConnectionId: VPCConnectionResourceIdUnrestricted;
+    /**
+     * The display name for the VPC connection.
+     */
+    Name: ResourceName;
+    /**
+     * A list of subnet IDs for the VPC connection.
+     */
+    SubnetIds: SubnetIdList;
+    /**
+     * A list of security group IDs for the VPC connection.
+     */
+    SecurityGroupIds: SecurityGroupIdList;
+    /**
+     * A list of IP addresses of DNS resolver endpoints for the VPC connection.
+     */
+    DnsResolvers?: DnsResolverList;
+    /**
+     * An IAM role associated with the VPC connection.
+     */
+    RoleArn: RoleArn;
+  }
+  export interface UpdateVPCConnectionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC connection.
+     */
+    Arn?: Arn;
+    /**
+     * The ID of the VPC connection that you are updating. This ID is a unique identifier for each Amazon Web Services Region in anAmazon Web Services account.
+     */
+    VPCConnectionId?: VPCConnectionResourceIdUnrestricted;
+    /**
+     * The update status of the VPC connection's last update.
+     */
+    UpdateStatus?: VPCConnectionResourceStatus;
+    /**
+     * The availability status of the VPC connection.
+     */
+    AvailabilityStatus?: VPCConnectionAvailabilityStatus;
     /**
      * The Amazon Web Services request ID for this operation.
      */
@@ -15318,6 +17035,111 @@ declare namespace QuickSight {
   export type UserName = string;
   export type UserRole = "ADMIN"|"AUTHOR"|"READER"|"RESTRICTED_AUTHOR"|"RESTRICTED_READER"|string;
   export type Username = string;
+  export interface VPCConnection {
+    /**
+     * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+     */
+    VPCConnectionId?: VPCConnectionResourceIdUnrestricted;
+    /**
+     * The Amazon Resource Name (ARN) of the VPC connection.
+     */
+    Arn?: Arn;
+    /**
+     * The display name for the VPC connection.
+     */
+    Name?: ResourceName;
+    /**
+     * The Amazon EC2 VPC ID associated with the VPC connection.
+     */
+    VPCId?: String;
+    /**
+     * The Amazon EC2 security group IDs associated with the VPC connection.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * A list of IP addresses of DNS resolver endpoints for the VPC connection.
+     */
+    DnsResolvers?: StringList;
+    /**
+     * The status of the VPC connection.
+     */
+    Status?: VPCConnectionResourceStatus;
+    /**
+     * The availability status of the VPC connection.
+     */
+    AvailabilityStatus?: VPCConnectionAvailabilityStatus;
+    /**
+     * A list of network interfaces.
+     */
+    NetworkInterfaces?: NetworkInterfaceList;
+    /**
+     * The ARN of the IAM role associated with the VPC connection.
+     */
+    RoleArn?: String;
+    /**
+     * The time that the VPC connection was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The time that the VPC connection was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+  }
+  export type VPCConnectionAvailabilityStatus = "AVAILABLE"|"UNAVAILABLE"|"PARTIALLY_AVAILABLE"|string;
+  export type VPCConnectionResourceIdRestricted = string;
+  export type VPCConnectionResourceIdUnrestricted = string;
+  export type VPCConnectionResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"DELETION_IN_PROGRESS"|"DELETION_FAILED"|"DELETED"|string;
+  export interface VPCConnectionSummary {
+    /**
+     * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+     */
+    VPCConnectionId?: VPCConnectionResourceIdUnrestricted;
+    /**
+     * The Amazon Resource Name (ARN) of the VPC connection.
+     */
+    Arn?: Arn;
+    /**
+     * The display name for the VPC connection.
+     */
+    Name?: ResourceName;
+    /**
+     * The Amazon EC2 VPC ID associated with the VPC connection.
+     */
+    VPCId?: String;
+    /**
+     * The Amazon EC2 security group IDs associated with the VPC connection.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * A list of IP addresses of DNS resolver endpoints for the VPC connection.
+     */
+    DnsResolvers?: StringList;
+    /**
+     * The status of the VPC connection.
+     */
+    Status?: VPCConnectionResourceStatus;
+    /**
+     * The availability status of the VPC connection.
+     */
+    AvailabilityStatus?: VPCConnectionAvailabilityStatus;
+    /**
+     * A list of network interfaces.
+     */
+    NetworkInterfaces?: NetworkInterfaceList;
+    /**
+     * The ARN of the IAM role associated with the VPC connection.
+     */
+    RoleArn?: String;
+    /**
+     * The time that the VPC connection was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The time that the VPC connection was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+  }
+  export type VPCConnectionSummaryList = VPCConnectionSummary[];
   export type ValueWhenUnsetOption = "RECOMMENDED_VALUE"|"NULL"|string;
   export type VersionDescription = string;
   export type VersionNumber = number;

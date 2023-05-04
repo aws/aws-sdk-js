@@ -132,11 +132,11 @@ declare class Connect extends Service {
    */
   createContactFlowModule(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowModuleResponse) => void): Request<Connect.Types.CreateContactFlowModuleResponse, AWSError>;
   /**
-   * Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form.
+   * Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. Question and section identifiers cannot be duplicated within the same evaluation form.
    */
   createEvaluationForm(params: Connect.Types.CreateEvaluationFormRequest, callback?: (err: AWSError, data: Connect.Types.CreateEvaluationFormResponse) => void): Request<Connect.Types.CreateEvaluationFormResponse, AWSError>;
   /**
-   * Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form.
+   * Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. Question and section identifiers cannot be duplicated within the same evaluation form.
    */
   createEvaluationForm(callback?: (err: AWSError, data: Connect.Types.CreateEvaluationFormResponse) => void): Request<Connect.Types.CreateEvaluationFormResponse, AWSError>;
   /**
@@ -1268,11 +1268,11 @@ declare class Connect extends Service {
    */
   updateContactSchedule(callback?: (err: AWSError, data: Connect.Types.UpdateContactScheduleResponse) => void): Request<Connect.Types.UpdateContactScheduleResponse, AWSError>;
   /**
-   * Updates details about a specific evaluation form version in the specified Amazon Connect instance. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form. This operation does not support partial updates. Instead it does a full update of evaluation form content.
+   * Updates details about a specific evaluation form version in the specified Amazon Connect instance. Question and section identifiers cannot be duplicated within the same evaluation form. This operation does not support partial updates. Instead it does a full update of evaluation form content.
    */
   updateEvaluationForm(params: Connect.Types.UpdateEvaluationFormRequest, callback?: (err: AWSError, data: Connect.Types.UpdateEvaluationFormResponse) => void): Request<Connect.Types.UpdateEvaluationFormResponse, AWSError>;
   /**
-   * Updates details about a specific evaluation form version in the specified Amazon Connect instance. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form. This operation does not support partial updates. Instead it does a full update of evaluation form content.
+   * Updates details about a specific evaluation form version in the specified Amazon Connect instance. Question and section identifiers cannot be duplicated within the same evaluation form. This operation does not support partial updates. Instead it does a full update of evaluation form content.
    */
   updateEvaluationForm(callback?: (err: AWSError, data: Connect.Types.UpdateEvaluationFormResponse) => void): Request<Connect.Types.UpdateEvaluationFormResponse, AWSError>;
   /**
@@ -2283,7 +2283,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * A unique title of the evaluation form.
+     * A title of the evaluation form.
      */
     Title: EvaluationFormTitle;
     /**
@@ -3787,7 +3787,7 @@ declare namespace Connect {
      */
     EvaluationFormArn: ARN;
     /**
-     * A unique title of the evaluation form.
+     * A title of the evaluation form.
      */
     Title: EvaluationFormTitle;
     /**
@@ -3841,7 +3841,7 @@ declare namespace Connect {
      */
     EvaluationFormArn: ARN;
     /**
-     * A unique title of the evaluation form.
+     * A title of the evaluation form.
      */
     Title: EvaluationFormTitle;
     /**
@@ -4054,7 +4054,7 @@ declare namespace Connect {
      */
     EvaluationFormArn: ARN;
     /**
-     * A unique title of the evaluation form.
+     * A title of the evaluation form.
      */
     Title: EvaluationFormTitle;
     /**
@@ -4186,7 +4186,7 @@ declare namespace Connect {
      */
     EvaluationArn: ARN;
     /**
-     * A unique title of the evaluation form.
+     * A title of the evaluation form.
      */
     EvaluationFormTitle: EvaluationFormTitle;
     /**
@@ -7259,7 +7259,7 @@ declare namespace Connect {
      */
     Condition: SingleSelectQuestionRuleCategoryAutomationCondition;
     /**
-     * The identifier of the answer option tha
+     * The identifier of the answer option.
      */
     OptionRefId: ReferenceId;
   }
@@ -8140,7 +8140,7 @@ declare namespace Connect {
      */
     CreateNewVersion?: BoxedBoolean;
     /**
-     * A unique title of the evaluation form.
+     * A title of the evaluation form.
      */
     Title: EvaluationFormTitle;
     /**
