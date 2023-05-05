@@ -252,6 +252,14 @@ declare class Inspector2 extends Service {
    */
   listUsageTotals(callback?: (err: AWSError, data: Inspector2.Types.ListUsageTotalsResponse) => void): Request<Inspector2.Types.ListUsageTotalsResponse, AWSError>;
   /**
+   * Lists Amazon Inspector coverage details for a specific vulnerability.
+   */
+  searchVulnerabilities(params: Inspector2.Types.SearchVulnerabilitiesRequest, callback?: (err: AWSError, data: Inspector2.Types.SearchVulnerabilitiesResponse) => void): Request<Inspector2.Types.SearchVulnerabilitiesResponse, AWSError>;
+  /**
+   * Lists Amazon Inspector coverage details for a specific vulnerability.
+   */
+  searchVulnerabilities(callback?: (err: AWSError, data: Inspector2.Types.SearchVulnerabilitiesResponse) => void): Request<Inspector2.Types.SearchVulnerabilitiesResponse, AWSError>;
+  /**
    * Adds tags to a resource.
    */
   tagResource(params: Inspector2.Types.TagResourceRequest, callback?: (err: AWSError, data: Inspector2.Types.TagResourceResponse) => void): Request<Inspector2.Types.TagResourceResponse, AWSError>;
@@ -515,6 +523,24 @@ declare namespace Inspector2 {
      * The Amazon Web Services account ID of the successfully associated member account.
      */
     accountId: AccountId;
+  }
+  export interface AtigData {
+    /**
+     * The date and time this vulnerability was first observed.
+     */
+    firstSeen?: FirstSeen;
+    /**
+     * The date and time this vulnerability was last observed.
+     */
+    lastSeen?: LastSeen;
+    /**
+     * The commercial sectors this vulnerability targets.
+     */
+    targets?: Targets;
+    /**
+     * The MITRE ATT&amp;CK tactics, techniques, and procedures (TTPs) associated with vulnerability.
+     */
+    ttps?: Ttps;
   }
   export interface AutoEnable {
     /**
@@ -787,6 +813,23 @@ declare namespace Inspector2 {
      */
     reportId: ReportId;
   }
+  export type CisaAction = string;
+  export interface CisaData {
+    /**
+     * The remediation action recommended by CISA for this vulnerability.
+     */
+    action?: CisaAction;
+    /**
+     * The date and time CISA added this vulnerability to their catalogue.
+     */
+    dateAdded?: CisaDateAdded;
+    /**
+     * The date and time CISA expects a fix to have been provided vulnerability.
+     */
+    dateDue?: CisaDateDue;
+  }
+  export type CisaDateAdded = Date;
+  export type CisaDateDue = Date;
   export type ClientToken = string;
   export type Component = string;
   export type ComponentType = string;
@@ -961,6 +1004,30 @@ declare namespace Inspector2 {
     reportId?: ReportId;
   }
   export type Currency = "USD"|string;
+  export interface Cvss2 {
+    /**
+     * The CVSS v2 base score for the vulnerability.
+     */
+    baseScore?: Cvss2BaseScore;
+    /**
+     * The scoring vector associated with the CVSS v2 score.
+     */
+    scoringVector?: Cvss2ScoringVector;
+  }
+  export type Cvss2BaseScore = number;
+  export type Cvss2ScoringVector = string;
+  export interface Cvss3 {
+    /**
+     * The CVSS v3 base score for the vulnerability.
+     */
+    baseScore?: Cvss3BaseScore;
+    /**
+     * The scoring vector associated with the CVSS v3 score.
+     */
+    scoringVector?: Cvss3ScoringVector;
+  }
+  export type Cvss3BaseScore = number;
+  export type Cvss3ScoringVector = string;
   export interface CvssScore {
     /**
      * The base CVSS score used for the finding.
@@ -1017,6 +1084,8 @@ declare namespace Inspector2 {
     version: NonEmptyString;
   }
   export type CvssScoreList = CvssScore[];
+  export type Cwe = string;
+  export type Cwes = Cwe[];
   export interface DateFilter {
     /**
      * A timestamp representing the end of the time period filtered on.
@@ -1089,6 +1158,7 @@ declare namespace Inspector2 {
      */
     kmsKeyArn: String;
   }
+  export type DetectionPlatforms = NonEmptyString[];
   export interface DisableDelegatedAdminAccountRequest {
     /**
      * The Amazon Web Services account ID of the current Amazon Inspector delegated administrator.
@@ -1294,10 +1364,27 @@ declare namespace Inspector2 {
      */
     failedAccounts?: FailedAccountList;
   }
+  export interface Epss {
+    /**
+     * The Exploit Prediction Scoring System (EPSS) score.
+     */
+    score?: EpssScore;
+  }
+  export type EpssScore = number;
   export type ErrorCode = "ALREADY_ENABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"SUSPEND_IN_PROGRESS"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"SSM_UNAVAILABLE"|"SSM_THROTTLED"|"EVENTBRIDGE_UNAVAILABLE"|"EVENTBRIDGE_THROTTLED"|"RESOURCE_SCAN_NOT_DISABLED"|"DISASSOCIATE_ALL_MEMBERS"|"ACCOUNT_IS_ISOLATED"|string;
   export type ErrorMessage = string;
   export type ExecutionRoleArn = string;
   export type ExploitAvailable = "YES"|"NO"|string;
+  export interface ExploitObserved {
+    /**
+     * The date an time when the exploit was first seen.
+     */
+    firstSeen?: FirstSeen;
+    /**
+     * The date an time when the exploit was last seen.
+     */
+    lastSeen?: LastSeen;
+  }
   export interface ExploitabilityDetails {
     /**
      * The date and time of the last exploit associated with a finding discovered in your environment.
@@ -1660,6 +1747,7 @@ declare namespace Inspector2 {
     severityCounts?: SeverityCounts;
   }
   export type FindingTypeSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type FirstSeen = Date;
   export type FixAvailable = "YES"|"NO"|"PARTIAL"|string;
   export interface FreeTrialAccountInfo {
     /**
@@ -1978,6 +2066,7 @@ declare namespace Inspector2 {
      */
     vpcId?: VpcId;
   }
+  export type LastSeen = Date;
   export type LayerList = LambdaLayerArn[];
   export type ListAccountPermissionsMaxResults = number;
   export interface ListAccountPermissionsRequest {
@@ -2491,6 +2580,8 @@ declare namespace Inspector2 {
      */
     text?: NonEmptyString;
   }
+  export type RelatedVulnerabilities = RelatedVulnerability[];
+  export type RelatedVulnerability = string;
   export type RelationshipStatus = "CREATED"|"INVITED"|"DISABLED"|"ENABLED"|"REMOVED"|"RESIGNED"|"DELETED"|"EMAIL_VERIFICATION_IN_PROGRESS"|"EMAIL_VERIFICATION_FAILED"|"REGION_DISABLED"|"ACCOUNT_SUSPENDED"|"CANNOT_CREATE_DETECTOR_IN_ORG_MASTER"|string;
   export interface Remediation {
     /**
@@ -2635,6 +2726,32 @@ declare namespace Inspector2 {
   export type ScanStatusCode = "ACTIVE"|"INACTIVE"|string;
   export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|"EXCLUDED_BY_TAG"|"UNSUPPORTED_RUNTIME"|"UNSUPPORTED_MEDIA_TYPE"|"UNSUPPORTED_CONFIG_FILE"|"DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED"|"DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"|"DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"|"DEEP_INSPECTION_NO_INVENTORY"|string;
   export type ScanType = "NETWORK"|"PACKAGE"|string;
+  export interface SearchVulnerabilitiesFilterCriteria {
+    /**
+     * The IDs for specific vulnerabilities.
+     */
+    vulnerabilityIds: VulnIdList;
+  }
+  export interface SearchVulnerabilitiesRequest {
+    /**
+     * The criteria used to filter the results of a vulnerability search.
+     */
+    filterCriteria: SearchVulnerabilitiesFilterCriteria;
+    /**
+     * A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the NextToken value returned from the previous request to continue listing results after the first page.
+     */
+    nextToken?: NextToken;
+  }
+  export interface SearchVulnerabilitiesResponse {
+    /**
+     * The pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    nextToken?: NextToken;
+    /**
+     * Details about the listed vulnerability.
+     */
+    vulnerabilities: Vulnerabilities;
+  }
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
   export type Service = "EC2"|"ECR"|"LAMBDA"|string;
@@ -2729,6 +2846,8 @@ declare namespace Inspector2 {
   }
   export interface TagResourceResponse {
   }
+  export type Target = string;
+  export type Targets = Target[];
   export type Timestamp = Date;
   export interface TitleAggregation {
     /**
@@ -2771,6 +2890,8 @@ declare namespace Inspector2 {
     vulnerabilityId?: String;
   }
   export type TitleSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type Ttp = string;
+  export type Ttps = Ttp[];
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) for the resource to remove tags from.
@@ -2905,10 +3026,91 @@ declare namespace Inspector2 {
   export type UsageTotalList = UsageTotal[];
   export type UsageType = "EC2_INSTANCE_HOURS"|"ECR_INITIAL_SCAN"|"ECR_RESCAN"|"LAMBDA_FUNCTION_HOURS"|string;
   export type UsageValue = number;
+  export type VendorCreatedAt = Date;
+  export type VendorSeverity = string;
+  export type VendorUpdatedAt = Date;
   export type Version = string;
   export type VpcId = string;
+  export type VulnId = string;
+  export type VulnIdList = VulnId[];
+  export type Vulnerabilities = Vulnerability[];
+  export interface Vulnerability {
+    /**
+     * An object that contains information about the Amazon Web Services Threat Intel Group (ATIG) details for the vulnerability.
+     */
+    atigData?: AtigData;
+    /**
+     * An object that contains the Cybersecurity and Infrastructure Security Agency (CISA) details for the vulnerability.
+     */
+    cisaData?: CisaData;
+    /**
+     * An object that contains the Common Vulnerability Scoring System (CVSS) Version 2 details for the vulnerability.
+     */
+    cvss2?: Cvss2;
+    /**
+     * An object that contains the Common Vulnerability Scoring System (CVSS) Version 3 details for the vulnerability.
+     */
+    cvss3?: Cvss3;
+    /**
+     * The Common Weakness Enumeration (CWE) associated with the vulnerability.
+     */
+    cwes?: Cwes;
+    /**
+     * A description of the vulnerability.
+     */
+    description?: VulnerabilityDescription;
+    /**
+     * Platforms that the vulnerability can be detected on.
+     */
+    detectionPlatforms?: DetectionPlatforms;
+    /**
+     * An object that contains the Exploit Prediction Scoring System (EPSS) score.
+     */
+    epss?: Epss;
+    /**
+     * An object that contains details on when the exploit was observed.
+     */
+    exploitObserved?: ExploitObserved;
+    /**
+     * The ID for the specific vulnerability.
+     */
+    id: NonEmptyString;
+    /**
+     * Links to various resources with more information on this vulnerability. 
+     */
+    referenceUrls?: VulnerabilityReferenceUrls;
+    /**
+     * A list of related vulnerabilities.
+     */
+    relatedVulnerabilities?: RelatedVulnerabilities;
+    /**
+     * The source of the vulnerability information.
+     */
+    source?: VulnerabilitySource;
+    /**
+     * A link to the official source material for this vulnerability.
+     */
+    sourceUrl?: VulnerabilitySourceUrl;
+    /**
+     * The date and time when the vendor created this vulnerability.
+     */
+    vendorCreatedAt?: VendorCreatedAt;
+    /**
+     * The severity assigned by the vendor.
+     */
+    vendorSeverity?: VendorSeverity;
+    /**
+     * The date and time when the vendor last updated this vulnerability.
+     */
+    vendorUpdatedAt?: VendorUpdatedAt;
+  }
+  export type VulnerabilityDescription = string;
   export type VulnerabilityId = string;
   export type VulnerabilityIdList = VulnerabilityId[];
+  export type VulnerabilityReferenceUrl = string;
+  export type VulnerabilityReferenceUrls = VulnerabilityReferenceUrl[];
+  export type VulnerabilitySource = "NVD"|string;
+  export type VulnerabilitySourceUrl = string;
   export interface VulnerablePackage {
     /**
      * The architecture of the vulnerable package.
