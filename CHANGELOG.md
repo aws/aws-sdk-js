@@ -3,7 +3,7 @@
 <!--ENTRYINSERT-->
 
 ## 2.1374.0
-* feature: Glue: We don't do release notes https://w.amazon.com/bin/view/AWSDocs/common-tasks/release-notes
+* feature: Glue: Expand WorkerType enumeration
 * feature: GuardDuty: Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs
 * feature: IoTSiteWise: Provide support for 20,000 max results for GetAssetPropertyValueHistory/BatchGetAssetPropertyValueHistory and 15 minute aggregate resolution for GetAssetPropertyAggregates/BatchGetAssetPropertyAggregates
 * feature: STS: Documentation updates for AWS Security Token Service.

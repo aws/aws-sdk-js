@@ -2,7 +2,7 @@
     {
         "type": "feature",
         "category": "Glue",
-        "description": "We don't do release notes https://w.amazon.com/bin/view/AWSDocs/common-tasks/release-notes"
+        "description": "Expand WorkerType enumeration"
     },
     {
         "type": "feature",
