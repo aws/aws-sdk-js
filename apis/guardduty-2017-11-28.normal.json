@@ -1209,6 +1209,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerErrorException"
         }
       ],
@@ -1327,6 +1330,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "InternalServerErrorException"
         }
       ],
@@ -1371,6 +1377,9 @@
       "errors": [
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "AccessDeniedException"
         },
         {
           "shape": "InternalServerErrorException"

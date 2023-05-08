@@ -1313,7 +1313,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.   The size of the result set is less than 1 MB.   The number of data points in the result set is less than the value of maxResults. The maximum value of maxResults is 4000.  
+     * The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.   The size of the result set is equal to 1 MB.   The number of data points in the result set is equal to the value of maxResults. The maximum value of maxResults is 4000.  
      */
     maxResults?: BatchGetAssetPropertyAggregatesMaxResults;
   }
@@ -1478,7 +1478,7 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.   The size of the result set is less than 1 MB.   The number of data points in the result set is less than the value of maxResults. The maximum value of maxResults is 4000.  
+     * The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.   The size of the result set is equal to 4 MB.   The number of data points in the result set is equal to the value of maxResults. The maximum value of maxResults is 20000.  
      */
     maxResults?: BatchGetAssetPropertyValueHistoryMaxResults;
   }
@@ -2851,9 +2851,9 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return for each paginated request. Default: 100
+     * The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.   The size of the result set is equal to 1 MB.   The number of data points in the result set is equal to the value of maxResults. The maximum value of maxResults is 250.  
      */
-    maxResults?: MaxResults;
+    maxResults?: GetAssetPropertyValueAggregatesMaxResults;
   }
   export interface GetAssetPropertyAggregatesResponse {
     /**
@@ -2865,6 +2865,8 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
   }
+  export type GetAssetPropertyValueAggregatesMaxResults = number;
+  export type GetAssetPropertyValueHistoryMaxResults = number;
   export interface GetAssetPropertyValueHistoryRequest {
     /**
      * The ID of the asset.
@@ -2899,9 +2901,9 @@ declare namespace IoTSiteWise {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return for each paginated request. Default: 100
+     * The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.   The size of the result set is equal to 4 MB.   The number of data points in the result set is equal to the value of maxResults. The maximum value of maxResults is 20000.  
      */
-    maxResults?: MaxResults;
+    maxResults?: GetAssetPropertyValueHistoryMaxResults;
   }
   export interface GetAssetPropertyValueHistoryResponse {
     /**

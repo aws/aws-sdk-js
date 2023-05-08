@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1373.0-->
+<!--LATEST=2.1374.0-->
 <!--ENTRYINSERT-->
+
+## 2.1374.0
+* feature: Glue: We don't do release notes https://w.amazon.com/bin/view/AWSDocs/common-tasks/release-notes
+* feature: GuardDuty: Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs
+* feature: IoTSiteWise: Provide support for 20,000 max results for GetAssetPropertyValueHistory/BatchGetAssetPropertyValueHistory and 15 minute aggregate resolution for GetAssetPropertyAggregates/BatchGetAssetPropertyAggregates
+* feature: STS: Documentation updates for AWS Security Token Service.
 
 ## 2.1373.0
 * feature: EC2: This release adds support the inf2 and trn1n instances. inf2 instances are purpose built for deep learning inference while trn1n instances are powered by AWS Trainium accelerators and they build on the capabilities of Trainium-powered trn1 instances.
