@@ -4612,7 +4612,7 @@ declare namespace SageMaker {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
+     * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided. If setting up the domain for use with RStudio, this value must be set to Service.
      */
     AppSecurityGroupManagement?: AppSecurityGroupManagement;
     /**
@@ -10087,6 +10087,10 @@ declare namespace SageMaker {
      * The variant's capacity.
      */
     DesiredInstanceCount?: TaskCount;
+    /**
+     * Specifies the serverless update concurrency configuration for an endpoint variant.
+     */
+    ServerlessUpdateConfig?: ProductionVariantServerlessUpdateConfig;
   }
   export type DesiredWeightAndCapacityList = DesiredWeightAndCapacity[];
   export type DestinationS3Uri = string;
@@ -10333,7 +10337,7 @@ declare namespace SageMaker {
   }
   export interface DomainSettingsForUpdate {
     /**
-     * A collection of RStudioServerPro Domain-level app settings to update.
+     * A collection of RStudioServerPro Domain-level app settings to update. A single RStudioServerPro application is created for a domain.
      */
     RStudioServerProDomainSettingsForUpdate?: RStudioServerProDomainSettingsForUpdate;
     /**
@@ -18539,6 +18543,20 @@ declare namespace SageMaker {
      * The maximum number of concurrent invocations your serverless endpoint can process.
      */
     MaxConcurrency: ServerlessMaxConcurrency;
+    /**
+     * The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to MaxConcurrency.
+     */
+    ProvisionedConcurrency?: ServerlessProvisionedConcurrency;
+  }
+  export interface ProductionVariantServerlessUpdateConfig {
+    /**
+     * The updated maximum number of concurrent invocations your serverless endpoint can process.
+     */
+    MaxConcurrency?: ServerlessMaxConcurrency;
+    /**
+     * The updated amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to MaxConcurrency.
+     */
+    ProvisionedConcurrency?: ServerlessProvisionedConcurrency;
   }
   export interface ProductionVariantStatus {
     /**
@@ -19616,6 +19634,7 @@ declare namespace SageMaker {
   }
   export type ServerlessMaxConcurrency = number;
   export type ServerlessMemorySizeInMB = number;
+  export type ServerlessProvisionedConcurrency = number;
   export type ServiceCatalogEntityId = string;
   export interface ServiceCatalogProvisionedProductDetails {
     /**
@@ -21207,7 +21226,7 @@ declare namespace SageMaker {
      */
     DefaultSpaceSettings?: DefaultSpaceSettings;
     /**
-     * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
+     * The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided. If setting up the domain for use with RStudio, this value must be set to Service.
      */
     AppSecurityGroupManagement?: AppSecurityGroupManagement;
   }

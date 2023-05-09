@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1374.0-->
+<!--LATEST=2.1375.0-->
 <!--ENTRYINSERT-->
+
+## 2.1375.0
+* feature: ApplicationAutoScaling: With this release, Amazon SageMaker Serverless Inference customers can use Application Auto Scaling to auto scale the provisioned concurrency of their serverless endpoints.
+* feature: Glue: This release adds AmazonRedshift Source and Target nodes in addition to DynamicTransform OutputSchemas
+* feature: SageMaker: This release includes support for (1) Provisioned Concurrency for Amazon SageMaker Serverless Inference and (2) UpdateEndpointWeightsAndCapacities API for Serverless endpoints.
 
 ## 2.1374.0
 * feature: Glue: Support large worker types G.4x and G.8x for Glue Spark

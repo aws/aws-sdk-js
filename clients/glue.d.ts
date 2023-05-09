@@ -1689,6 +1689,147 @@ declare namespace Glue {
     AggFunc: AggFunction;
   }
   export type AggregateOperations = AggregateOperation[];
+  export interface AmazonRedshiftAdvancedOption {
+    /**
+     * The key when specifying a key-value pair.
+     */
+    Key?: GenericString;
+    /**
+     * The value when specifying a key-value pair.
+     */
+    Value?: GenericString;
+  }
+  export type AmazonRedshiftAdvancedOptions = AmazonRedshiftAdvancedOption[];
+  export interface AmazonRedshiftNodeData {
+    /**
+     * The access type for the Redshift connection. Can be a direct connection or catalog connections.
+     */
+    AccessType?: GenericLimitedString;
+    /**
+     * The source type to specify whether a specific table is the source or a custom query.
+     */
+    SourceType?: GenericLimitedString;
+    /**
+     * The Glue connection to the Redshift cluster.
+     */
+    Connection?: Option;
+    /**
+     * The Redshift schema name when working with a direct connection.
+     */
+    Schema?: Option;
+    /**
+     * The Redshift table name when working with a direct connection.
+     */
+    Table?: Option;
+    /**
+     * The name of the Glue Data Catalog database when working with a data catalog.
+     */
+    CatalogDatabase?: Option;
+    /**
+     * The Glue Data Catalog table name when working with a data catalog.
+     */
+    CatalogTable?: Option;
+    /**
+     * The Redshift schema name when working with a data catalog.
+     */
+    CatalogRedshiftSchema?: GenericString;
+    /**
+     * The database table to read from.
+     */
+    CatalogRedshiftTable?: GenericString;
+    /**
+     * The Amazon S3 path where temporary data can be staged when copying out of the database.
+     */
+    TempDir?: EnclosedInStringProperty;
+    /**
+     * Optional. The role name use when connection to S3. The IAM role ill default to the role on the job when left blank.
+     */
+    IamRole?: Option;
+    /**
+     * Optional values when connecting to the Redshift cluster.
+     */
+    AdvancedOptions?: AmazonRedshiftAdvancedOptions;
+    /**
+     * The SQL used to fetch the data from a Redshift sources when the SourceType is 'query'.
+     */
+    SampleQuery?: GenericString;
+    /**
+     * The SQL used before a MERGE or APPEND with upsert is run.
+     */
+    PreAction?: GenericString;
+    /**
+     * The SQL used before a MERGE or APPEND with upsert is run.
+     */
+    PostAction?: GenericString;
+    /**
+     * Specifies how writing to a Redshift cluser will occur.
+     */
+    Action?: GenericString;
+    /**
+     * Specifies the prefix to a table.
+     */
+    TablePrefix?: GenericLimitedString;
+    /**
+     * The action used on Redshift sinks when doing an APPEND.
+     */
+    Upsert?: BooleanValue;
+    /**
+     * The action used when to detemine how a MERGE in a Redshift sink will be handled.
+     */
+    MergeAction?: GenericLimitedString;
+    /**
+     * The action used when to detemine how a MERGE in a Redshift sink will be handled when an existing record matches a new record.
+     */
+    MergeWhenMatched?: GenericLimitedString;
+    /**
+     * The action used when to detemine how a MERGE in a Redshift sink will be handled when an existing record doesn't match a new record.
+     */
+    MergeWhenNotMatched?: GenericLimitedString;
+    /**
+     * The SQL used in a custom merge to deal with matching records.
+     */
+    MergeClause?: GenericString;
+    /**
+     * Specifies the name of the connection that is associated with the catalog table used.
+     */
+    CrawlerConnection?: GenericString;
+    /**
+     * The array of schema output for a given node.
+     */
+    TableSchema?: OptionList;
+    /**
+     * The name of the temporary staging table that is used when doing a MERGE or APPEND with upsert.
+     */
+    StagingTable?: GenericString;
+    /**
+     * The list of column names used to determine a matching record when doing a MERGE or APPEND with upsert.
+     */
+    SelectedColumns?: OptionList;
+  }
+  export interface AmazonRedshiftSource {
+    /**
+     * The name of the Amazon Redshift source.
+     */
+    Name?: NodeName;
+    /**
+     * Specifies the data of the Amazon Reshift source node.
+     */
+    Data?: AmazonRedshiftNodeData;
+  }
+  export interface AmazonRedshiftTarget {
+    /**
+     * The name of the Amazon Redshift target.
+     */
+    Name?: NodeName;
+    /**
+     * Specifies the data of the Amazon Reshift target node.
+     */
+    Data?: AmazonRedshiftNodeData;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs?: OneInput;
+  }
   export interface ApplyMapping {
     /**
      * The name of the transform node.
@@ -2846,6 +2987,14 @@ declare namespace Glue {
      * Specifies a target that writes to a Delta Lake data source in Amazon S3.
      */
     S3DeltaDirectTarget?: S3DeltaDirectTarget;
+    /**
+     * Specifies a target that writes to a data source in Amazon Redshift.
+     */
+    AmazonRedshiftSource?: AmazonRedshiftSource;
+    /**
+     * Specifies a target that writes to a data target in Amazon Redshift.
+     */
+    AmazonRedshiftTarget?: AmazonRedshiftTarget;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -5578,6 +5727,10 @@ declare namespace Glue {
      * This field is not used and will be deprecated in future release.
      */
     Version?: EnclosedInStringProperty;
+    /**
+     * Specifies the data schema for the dynamic transform.
+     */
+    OutputSchemas?: GlueSchemas;
   }
   export interface DynamoDBCatalogSource {
     /**
@@ -9473,6 +9626,21 @@ declare namespace Glue {
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type OneInput = NodeId[];
+  export interface Option {
+    /**
+     * Specifies the value of the option.
+     */
+    Value?: EnclosedInStringProperty;
+    /**
+     * Specifies the label of the option.
+     */
+    Label?: EnclosedInStringProperty;
+    /**
+     * Specifies the description of the option.
+     */
+    Description?: EnclosedInStringProperty;
+  }
+  export type OptionList = Option[];
   export interface OracleSQLCatalogSource {
     /**
      * The name of the data source.

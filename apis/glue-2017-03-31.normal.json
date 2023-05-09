@@ -6169,6 +6169,168 @@
       "max": 30,
       "min": 1
     },
+    "AmazonRedshiftAdvancedOption": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "GenericString",
+          "documentation": "<p>The key when specifying a key-value pair.</p>"
+        },
+        "Value": {
+          "shape": "GenericString",
+          "documentation": "<p>The value when specifying a key-value pair.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an Amazon Redshift data store.</p>"
+    },
+    "AmazonRedshiftAdvancedOptions": {
+      "type": "list",
+      "member": {
+        "shape": "AmazonRedshiftAdvancedOption"
+      }
+    },
+    "AmazonRedshiftNodeData": {
+      "type": "structure",
+      "members": {
+        "AccessType": {
+          "shape": "GenericLimitedString",
+          "documentation": "<p>The access type for the Redshift connection. Can be a direct connection or catalog connections.</p>"
+        },
+        "SourceType": {
+          "shape": "GenericLimitedString",
+          "documentation": "<p>The source type to specify whether a specific table is the source or a custom query.</p>"
+        },
+        "Connection": {
+          "shape": "Option",
+          "documentation": "<p>The Glue connection to the Redshift cluster.</p>"
+        },
+        "Schema": {
+          "shape": "Option",
+          "documentation": "<p>The Redshift schema name when working with a direct connection.</p>"
+        },
+        "Table": {
+          "shape": "Option",
+          "documentation": "<p>The Redshift table name when working with a direct connection.</p>"
+        },
+        "CatalogDatabase": {
+          "shape": "Option",
+          "documentation": "<p>The name of the Glue Data Catalog database when working with a data catalog.</p>"
+        },
+        "CatalogTable": {
+          "shape": "Option",
+          "documentation": "<p>The Glue Data Catalog table name when working with a data catalog.</p>"
+        },
+        "CatalogRedshiftSchema": {
+          "shape": "GenericString",
+          "documentation": "<p>The Redshift schema name when working with a data catalog.</p>"
+        },
+        "CatalogRedshiftTable": {
+          "shape": "GenericString",
+          "documentation": "<p>The database table to read from.</p>"
+        },
+        "TempDir": {
+          "shape": "EnclosedInStringProperty",
+          "documentation": "<p>The Amazon S3 path where temporary data can be staged when copying out of the database.</p>"
+        },
+        "IamRole": {
+          "shape": "Option",
+          "documentation": "<p>Optional. The role name use when connection to S3. The IAM role ill default to the role on the job when left blank.</p>"
+        },
+        "AdvancedOptions": {
+          "shape": "AmazonRedshiftAdvancedOptions",
+          "documentation": "<p>Optional values when connecting to the Redshift cluster.</p>"
+        },
+        "SampleQuery": {
+          "shape": "GenericString",
+          "documentation": "<p>The SQL used to fetch the data from a Redshift sources when the SourceType is 'query'.</p>"
+        },
+        "PreAction": {
+          "shape": "GenericString",
+          "documentation": "<p>The SQL used before a MERGE or APPEND with upsert is run.</p>"
+        },
+        "PostAction": {
+          "shape": "GenericString",
+          "documentation": "<p>The SQL used before a MERGE or APPEND with upsert is run.</p>"
+        },
+        "Action": {
+          "shape": "GenericString",
+          "documentation": "<p>Specifies how writing to a Redshift cluser will occur.</p>"
+        },
+        "TablePrefix": {
+          "shape": "GenericLimitedString",
+          "documentation": "<p>Specifies the prefix to a table.</p>"
+        },
+        "Upsert": {
+          "shape": "BooleanValue",
+          "documentation": "<p>The action used on Redshift sinks when doing an APPEND.</p>"
+        },
+        "MergeAction": {
+          "shape": "GenericLimitedString",
+          "documentation": "<p>The action used when to detemine how a MERGE in a Redshift sink will be handled.</p>"
+        },
+        "MergeWhenMatched": {
+          "shape": "GenericLimitedString",
+          "documentation": "<p>The action used when to detemine how a MERGE in a Redshift sink will be handled when an existing record matches a new record.</p>"
+        },
+        "MergeWhenNotMatched": {
+          "shape": "GenericLimitedString",
+          "documentation": "<p>The action used when to detemine how a MERGE in a Redshift sink will be handled when an existing record doesn't match a new record.</p>"
+        },
+        "MergeClause": {
+          "shape": "GenericString",
+          "documentation": "<p>The SQL used in a custom merge to deal with matching records.</p>"
+        },
+        "CrawlerConnection": {
+          "shape": "GenericString",
+          "documentation": "<p>Specifies the name of the connection that is associated with the catalog table used.</p>"
+        },
+        "TableSchema": {
+          "shape": "OptionList",
+          "documentation": "<p>The array of schema output for a given node.</p>"
+        },
+        "StagingTable": {
+          "shape": "GenericString",
+          "documentation": "<p>The name of the temporary staging table that is used when doing a MERGE or APPEND with upsert.</p>"
+        },
+        "SelectedColumns": {
+          "shape": "OptionList",
+          "documentation": "<p>The list of column names used to determine a matching record when doing a MERGE or APPEND with upsert.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an Amazon Redshift node.</p>"
+    },
+    "AmazonRedshiftSource": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NodeName",
+          "documentation": "<p>The name of the Amazon Redshift source.</p>"
+        },
+        "Data": {
+          "shape": "AmazonRedshiftNodeData",
+          "documentation": "<p>Specifies the data of the Amazon Reshift source node.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an Amazon Redshift source.</p>"
+    },
+    "AmazonRedshiftTarget": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NodeName",
+          "documentation": "<p>The name of the Amazon Redshift target.</p>"
+        },
+        "Data": {
+          "shape": "AmazonRedshiftNodeData",
+          "documentation": "<p>Specifies the data of the Amazon Reshift target node.</p>"
+        },
+        "Inputs": {
+          "shape": "OneInput",
+          "documentation": "<p>The nodes that are inputs to the data target.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an Amazon Redshift target.</p>"
+    },
     "ApplyMapping": {
       "type": "structure",
       "required": [
@@ -7940,6 +8102,14 @@
         "S3DeltaDirectTarget": {
           "shape": "S3DeltaDirectTarget",
           "documentation": "<p>Specifies a target that writes to a Delta Lake data source in Amazon S3.</p>"
+        },
+        "AmazonRedshiftSource": {
+          "shape": "AmazonRedshiftSource",
+          "documentation": "<p>Specifies a target that writes to a data source in Amazon Redshift.</p>"
+        },
+        "AmazonRedshiftTarget": {
+          "shape": "AmazonRedshiftTarget",
+          "documentation": "<p>Specifies a target that writes to a data target in Amazon Redshift.</p>"
         }
       },
       "documentation": "<p> <code>CodeGenConfigurationNode</code> enumerates all valid Node types. One and only one of its member variables can be populated.</p>"
@@ -11967,6 +12137,10 @@
         "Version": {
           "shape": "EnclosedInStringProperty",
           "documentation": "<p>This field is not used and will be deprecated in future release.</p>"
+        },
+        "OutputSchemas": {
+          "shape": "GlueSchemas",
+          "documentation": "<p>Specifies the data schema for the dynamic transform.</p>"
         }
       },
       "documentation": "<p>Specifies the set of parameters needed to perform the dynamic transform.</p>"
@@ -17642,6 +17816,30 @@
       },
       "max": 1,
       "min": 1
+    },
+    "Option": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "EnclosedInStringProperty",
+          "documentation": "<p>Specifies the value of the option.</p>"
+        },
+        "Label": {
+          "shape": "EnclosedInStringProperty",
+          "documentation": "<p>Specifies the label of the option.</p>"
+        },
+        "Description": {
+          "shape": "EnclosedInStringProperty",
+          "documentation": "<p>Specifies the description of the option.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an option value.</p>"
+    },
+    "OptionList": {
+      "type": "list",
+      "member": {
+        "shape": "Option"
+      }
     },
     "OracleSQLCatalogSource": {
       "type": "structure",
