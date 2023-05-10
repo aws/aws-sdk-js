@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "typings-generator",
-  "description": "generate exception shape types"
-}

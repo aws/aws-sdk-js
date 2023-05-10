@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1375.0-->
+<!--LATEST=2.1376.0-->
 <!--ENTRYINSERT-->
+
+## 2.1376.0
+* bugfix: typings-generator: generate exception shape types
+* feature: EMR: EMR Studio now supports programmatically executing a Notebooks on an EMR on EKS cluster.  In addition, notebooks can now be executed by specifying its location in S3.
+* feature: RDS: Amazon Relational Database Service (RDS) updates for the new Aurora I/O-Optimized storage type for Amazon Aurora DB clusters
+* feature: SWF: This release adds a new API parameter to exclude old history events from decision tasks.
 
 ## 2.1375.0
 * feature: ApplicationAutoScaling: With this release, Amazon SageMaker Serverless Inference customers can use Application Auto Scaling to auto scale the provisioned concurrency of their serverless endpoints.
