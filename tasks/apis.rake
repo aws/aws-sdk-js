@@ -102,7 +102,7 @@ end
 desc 'Builds the API for each service.'
 task :api => 'api:all'
 
-if File.exists?("#{root}/apis/metadata.json")
+if File.exist?("#{root}/apis/metadata.json")
   service_map = JSON.parse(File.read('apis/metadata.json'))
   service_map.each do |service, config|
     add_tasks(service, config)

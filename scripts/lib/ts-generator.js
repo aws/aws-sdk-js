@@ -305,7 +305,7 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
             // each member is an individual event type, so each must be optional
             return member + '?:' + shape.members[member].shape;
         });
-        return code += tabs(tabCount) + 'export type ' + shapeKey + ' = EventStream<{' + events.join(',') + '}>;\n'; 
+        return code += tabs(tabCount) + 'export type ' + shapeKey + ' = EventStream<{' + events.join(',') + '}>;\n';
     }
     if (type === 'structure') {
         if (shape.isDocument) {
@@ -614,10 +614,6 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     });
     shapeKeys.forEach(function (shapeKey) {
         var modelShape = modelShapes[shapeKey];
-        // ignore exceptions
-        if (modelShape.exception) {
-            return;
-        }
         code += self.generateTypingsFromShape(model, shapeKey, modelShape, 1, customClassNames);
     });
     //add extra dependencies like 'streaming'
