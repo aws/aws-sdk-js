@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1376.0-->
+<!--LATEST=2.1377.0-->
 <!--ENTRYINSERT-->
+
+## 2.1377.0
+* feature: ES: This release fixes DescribePackages API error with null filter value parameter.
+* feature: ElastiCache: Added support to modify the cluster mode configuration for the existing ElastiCache ReplicationGroups. Customers can now modify the configuration from cluster mode disabled to cluster mode enabled.
+* feature: Health: Add support for regional endpoints
+* feature: IVSRealTime: Add methods for inspecting and debugging stages: ListStageSessions, GetStageSession, ListParticipants, GetParticipant, and ListParticipantEvents.
+* feature: Omics: This release provides support for Ready2Run and GPU workflows, an improved read set filter, the direct upload of read sets into Omics Storage, and annotation parsing for analytics stores.
+* feature: OpenSearch: This release fixes DescribePackages API error with null filter value parameter.
+* feature: Route53Resolver: Update FIPS endpoints for GovCloud (US) regions in SDK.
+* feature: Support: This release adds 2 new Support APIs, DescribeCreateCaseOptions and DescribeSupportedLanguages. You can use these new APIs to get available support languages.
 
 ## 2.1376.0
 * bugfix: typings-generator: generate exception shape types

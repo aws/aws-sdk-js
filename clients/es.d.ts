@@ -1151,7 +1151,7 @@ declare namespace ES {
      */
     Name?: DescribePackagesFilterName;
     /**
-     * A list of values for the specified field.
+     * A non-empty list of values for the specified field.
      */
     Value?: DescribePackagesFilterValues;
   }

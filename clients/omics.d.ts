@@ -14,6 +14,14 @@ declare class Omics extends Service {
   constructor(options?: Omics.Types.ClientConfiguration)
   config: Config & Omics.Types.ClientConfiguration;
   /**
+   *  Stops a multipart upload. 
+   */
+  abortMultipartReadSetUpload(params: Omics.Types.AbortMultipartReadSetUploadRequest, callback?: (err: AWSError, data: Omics.Types.AbortMultipartReadSetUploadResponse) => void): Request<Omics.Types.AbortMultipartReadSetUploadResponse, AWSError>;
+  /**
+   *  Stops a multipart upload. 
+   */
+  abortMultipartReadSetUpload(callback?: (err: AWSError, data: Omics.Types.AbortMultipartReadSetUploadResponse) => void): Request<Omics.Types.AbortMultipartReadSetUploadResponse, AWSError>;
+  /**
    * Deletes one or more read sets.
    */
   batchDeleteReadSet(params: Omics.Types.BatchDeleteReadSetRequest, callback?: (err: AWSError, data: Omics.Types.BatchDeleteReadSetResponse) => void): Request<Omics.Types.BatchDeleteReadSetResponse, AWSError>;
@@ -46,6 +54,14 @@ declare class Omics extends Service {
    */
   cancelVariantImportJob(callback?: (err: AWSError, data: Omics.Types.CancelVariantImportResponse) => void): Request<Omics.Types.CancelVariantImportResponse, AWSError>;
   /**
+   *  Concludes a multipart upload once you have uploaded all the components. 
+   */
+  completeMultipartReadSetUpload(params: Omics.Types.CompleteMultipartReadSetUploadRequest, callback?: (err: AWSError, data: Omics.Types.CompleteMultipartReadSetUploadResponse) => void): Request<Omics.Types.CompleteMultipartReadSetUploadResponse, AWSError>;
+  /**
+   *  Concludes a multipart upload once you have uploaded all the components. 
+   */
+  completeMultipartReadSetUpload(callback?: (err: AWSError, data: Omics.Types.CompleteMultipartReadSetUploadResponse) => void): Request<Omics.Types.CompleteMultipartReadSetUploadResponse, AWSError>;
+  /**
    * Creates an annotation store.
    */
   createAnnotationStore(params: Omics.Types.CreateAnnotationStoreRequest, callback?: (err: AWSError, data: Omics.Types.CreateAnnotationStoreResponse) => void): Request<Omics.Types.CreateAnnotationStoreResponse, AWSError>;
@@ -53,6 +69,14 @@ declare class Omics extends Service {
    * Creates an annotation store.
    */
   createAnnotationStore(callback?: (err: AWSError, data: Omics.Types.CreateAnnotationStoreResponse) => void): Request<Omics.Types.CreateAnnotationStoreResponse, AWSError>;
+  /**
+   *  Begins a multipart read set upload. 
+   */
+  createMultipartReadSetUpload(params: Omics.Types.CreateMultipartReadSetUploadRequest, callback?: (err: AWSError, data: Omics.Types.CreateMultipartReadSetUploadResponse) => void): Request<Omics.Types.CreateMultipartReadSetUploadResponse, AWSError>;
+  /**
+   *  Begins a multipart read set upload. 
+   */
+  createMultipartReadSetUpload(callback?: (err: AWSError, data: Omics.Types.CreateMultipartReadSetUploadResponse) => void): Request<Omics.Types.CreateMultipartReadSetUploadResponse, AWSError>;
   /**
    * Creates a reference store.
    */
@@ -318,6 +342,14 @@ declare class Omics extends Service {
    */
   listAnnotationStores(callback?: (err: AWSError, data: Omics.Types.ListAnnotationStoresResponse) => void): Request<Omics.Types.ListAnnotationStoresResponse, AWSError>;
   /**
+   *  Lists all multipart read set uploads and their statuses. 
+   */
+  listMultipartReadSetUploads(params: Omics.Types.ListMultipartReadSetUploadsRequest, callback?: (err: AWSError, data: Omics.Types.ListMultipartReadSetUploadsResponse) => void): Request<Omics.Types.ListMultipartReadSetUploadsResponse, AWSError>;
+  /**
+   *  Lists all multipart read set uploads and their statuses. 
+   */
+  listMultipartReadSetUploads(callback?: (err: AWSError, data: Omics.Types.ListMultipartReadSetUploadsResponse) => void): Request<Omics.Types.ListMultipartReadSetUploadsResponse, AWSError>;
+  /**
    * Retrieves a list of read set activation jobs.
    */
   listReadSetActivationJobs(params: Omics.Types.ListReadSetActivationJobsRequest, callback?: (err: AWSError, data: Omics.Types.ListReadSetActivationJobsResponse) => void): Request<Omics.Types.ListReadSetActivationJobsResponse, AWSError>;
@@ -341,6 +373,14 @@ declare class Omics extends Service {
    * Retrieves a list of read set import jobs.
    */
   listReadSetImportJobs(callback?: (err: AWSError, data: Omics.Types.ListReadSetImportJobsResponse) => void): Request<Omics.Types.ListReadSetImportJobsResponse, AWSError>;
+  /**
+   *  This operation will list all parts in a requested multipart upload for a sequence store. 
+   */
+  listReadSetUploadParts(params: Omics.Types.ListReadSetUploadPartsRequest, callback?: (err: AWSError, data: Omics.Types.ListReadSetUploadPartsResponse) => void): Request<Omics.Types.ListReadSetUploadPartsResponse, AWSError>;
+  /**
+   *  This operation will list all parts in a requested multipart upload for a sequence store. 
+   */
+  listReadSetUploadParts(callback?: (err: AWSError, data: Omics.Types.ListReadSetUploadPartsResponse) => void): Request<Omics.Types.ListReadSetUploadPartsResponse, AWSError>;
   /**
    * Retrieves a list of read sets.
    */
@@ -542,6 +582,14 @@ declare class Omics extends Service {
    */
   updateWorkflow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   *  This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten. 
+   */
+  uploadReadSetPart(params: Omics.Types.UploadReadSetPartRequest, callback?: (err: AWSError, data: Omics.Types.UploadReadSetPartResponse) => void): Request<Omics.Types.UploadReadSetPartResponse, AWSError>;
+  /**
+   *  This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten. 
+   */
+  uploadReadSetPart(callback?: (err: AWSError, data: Omics.Types.UploadReadSetPartResponse) => void): Request<Omics.Types.UploadReadSetPartResponse, AWSError>;
+  /**
    * Waits for the annotationImportJobCreated state by periodically calling the underlying Omics.getAnnotationImportJoboperation every 30 seconds (at most 20 times). Wait until an annotation import is completed
    */
   waitFor(state: "annotationImportJobCreated", params: Omics.Types.GetAnnotationImportRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Omics.Types.GetAnnotationImportResponse) => void): Request<Omics.Types.GetAnnotationImportResponse, AWSError>;
@@ -663,7 +711,24 @@ declare class Omics extends Service {
   waitFor(state: "workflowActive", callback?: (err: AWSError, data: Omics.Types.GetWorkflowResponse) => void): Request<Omics.Types.GetWorkflowResponse, AWSError>;
 }
 declare namespace Omics {
+  export interface AbortMultipartReadSetUploadRequest {
+    /**
+     *  The sequence store ID for the store involved in the multipart upload. 
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     *  The ID for the multipart upload. 
+     */
+    uploadId: UploadId;
+  }
+  export interface AbortMultipartReadSetUploadResponse {
+  }
+  export type Accelerators = "GPU"|string;
   export interface ActivateReadSetFilter {
+    /**
+     * The filter's status.
+     */
+    status?: ReadSetActivationJobStatus;
     /**
      * The filter's start date.
      */
@@ -672,20 +737,8 @@ declare namespace Omics {
      * The filter's end date.
      */
     createdBefore?: SyntheticTimestamp_date_time;
-    /**
-     * The filter's status.
-     */
-    status?: ReadSetActivationJobStatus;
   }
   export interface ActivateReadSetJobItem {
-    /**
-     * When the job completed.
-     */
-    completionTime?: SyntheticTimestamp_date_time;
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
     /**
      * The job's ID.
      */
@@ -698,6 +751,14 @@ declare namespace Omics {
      * The job's status.
      */
     status: ReadSetActivationJobStatus;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     * When the job completed.
+     */
+    completionTime?: SyntheticTimestamp_date_time;
   }
   export type ActivateReadSetJobList = ActivateReadSetJobItem[];
   export interface ActivateReadSetSourceItem {
@@ -716,15 +777,18 @@ declare namespace Omics {
   }
   export type ActivateReadSetSourceList = ActivateReadSetSourceItem[];
   export type ActivationJobId = string;
+  export type AnnotationFieldMap = {[key: string]: AnnotationFieldMapValueString};
+  export type AnnotationFieldMapKeyString = string;
+  export type AnnotationFieldMapValueString = string;
   export interface AnnotationImportItemDetail {
-    /**
-     * The item's job status.
-     */
-    jobStatus: JobStatus;
     /**
      * The source file's location in Amazon S3.
      */
     source: S3Uri;
+    /**
+     * The item's job status.
+     */
+    jobStatus: JobStatus;
   }
   export type AnnotationImportItemDetails = AnnotationImportItemDetail[];
   export interface AnnotationImportItemSource {
@@ -736,88 +800,92 @@ declare namespace Omics {
   export type AnnotationImportItemSources = AnnotationImportItemSource[];
   export interface AnnotationImportJobItem {
     /**
-     * When the job completed.
+     * The job's ID.
      */
-    completionTime?: CompletionTime;
-    /**
-     * When the job was created.
-     */
-    creationTime: CreationTime;
+    id: String;
     /**
      * The job's destination annotation store.
      */
     destinationName: String;
     /**
-     * The job's ID.
-     */
-    id: String;
-    /**
      * The job's service role ARN.
      */
     roleArn: Arn;
-    /**
-     * The job's left normalization setting.
-     */
-    runLeftNormalization?: RunLeftNormalization;
     /**
      * The job's status.
      */
     status: JobStatus;
     /**
-     * When the job was updated.
-     */
-    updateTime: UpdateTime;
-  }
-  export type AnnotationImportJobItems = AnnotationImportJobItem[];
-  export interface AnnotationStoreItem {
-    /**
-     * The store's creation time.
+     * When the job was created.
      */
     creationTime: CreationTime;
     /**
-     * The store's description.
+     * When the job was updated.
      */
-    description: StoreDescription;
+    updateTime: UpdateTime;
+    /**
+     * When the job completed.
+     */
+    completionTime?: CompletionTime;
+    /**
+     * The job's left normalization setting.
+     */
+    runLeftNormalization?: RunLeftNormalization;
+    /**
+     *  The annotation schema generated by the parsed annotation data. 
+     */
+    annotationFields?: AnnotationFieldMap;
+  }
+  export type AnnotationImportJobItems = AnnotationImportJobItem[];
+  export interface AnnotationStoreItem {
     /**
      * The store's ID.
      */
     id: ResourceId;
     /**
-     * The store's name.
-     */
-    name: String;
-    /**
      * The store's genome reference.
      */
     reference: ReferenceItem;
-    /**
-     * The store's server-side encryption (SSE) settings.
-     */
-    sseConfig: SseConfig;
     /**
      * The store's status.
      */
     status: StoreStatus;
     /**
-     * The store's status message.
-     */
-    statusMessage: StatusMessage;
-    /**
      * The store's ARN.
      */
     storeArn: Arn;
+    /**
+     * The store's name.
+     */
+    name: String;
     /**
      * The store's file format.
      */
     storeFormat: StoreFormat;
     /**
-     * The store's size in bytes.
+     * The store's description.
      */
-    storeSizeBytes: Long;
+    description: StoreDescription;
+    /**
+     * The store's server-side encryption (SSE) settings.
+     */
+    sseConfig: SseConfig;
+    /**
+     * The store's creation time.
+     */
+    creationTime: CreationTime;
     /**
      * When the store was updated.
      */
     updateTime: UpdateTime;
+    /**
+     * The store's status message.
+     */
+    statusMessage: StatusMessage;
+    /**
+     * The store's size in bytes.
+     */
+    storeSizeBytes: Long;
   }
   export type AnnotationStoreItems = AnnotationStoreItem[];
   export type AnnotationType = "GENERIC"|"CHR_POS"|"CHR_POS_REF_ALT"|"CHR_START_END_ONE_BASE"|"CHR_START_END_REF_ALT_ONE_BASE"|"CHR_START_END_ZERO_BASE"|"CHR_START_END_REF_ALT_ZERO_BASE"|string;
@@ -864,20 +932,60 @@ declare namespace Omics {
   }
   export type ClientToken = string;
   export type CommentChar = string;
+  export interface CompleteMultipartReadSetUploadRequest {
+    /**
+     *  The sequence store ID for the store involved in the multipart upload. 
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     *  The ID for the multipart upload. 
+     */
+    uploadId: UploadId;
+    /**
+     *  The individual uploads or parts of a multipart upload. 
+     */
+    parts: CompleteReadSetUploadPartList;
+  }
+  export interface CompleteMultipartReadSetUploadResponse {
+    /**
+     *  The read set ID created for an uploaded read set. 
+     */
+    readSetId: ReadSetId;
+  }
+  export type CompleteReadSetUploadPartList = CompleteReadSetUploadPartListItem[];
+  export interface CompleteReadSetUploadPartListItem {
+    /**
+     *  A number identifying the part in a read set upload. 
+     */
+    partNumber: CompleteReadSetUploadPartListItemPartNumberInteger;
+    /**
+     *  The source file of the part being uploaded. 
+     */
+    partSource: ReadSetPartSource;
+    /**
+     *  A unique identifier used to confirm that parts are being added to the correct upload. 
+     */
+    checksum: String;
+  }
+  export type CompleteReadSetUploadPartListItemPartNumberInteger = number;
   export type CompletionTime = Date;
   export interface CreateAnnotationStoreRequest {
     /**
-     * A description for the store.
+     * The genome reference for the store's annotations.
      */
-    description?: StoreDescription;
+    reference?: ReferenceItem;
     /**
      * A name for the store.
      */
     name?: CreateAnnotationStoreRequestNameString;
     /**
-     * The genome reference for the store's annotations.
+     * A description for the store.
      */
-    reference?: ReferenceItem;
+    description?: StoreDescription;
+    /**
+     * Tags for the store.
+     */
+    tags?: TagMap;
     /**
      * Server-side encryption (SSE) settings for the store.
      */
@@ -890,33 +998,17 @@ declare namespace Omics {
      * File parsing options for the annotation store.
      */
     storeOptions?: StoreOptions;
-    /**
-     * Tags for the store.
-     */
-    tags?: TagMap;
   }
   export type CreateAnnotationStoreRequestNameString = string;
   export interface CreateAnnotationStoreResponse {
-    /**
-     * When the store was created.
-     */
-    creationTime: CreationTime;
     /**
      * The store's ID.
      */
     id: ResourceId;
     /**
-     * The store's name.
-     */
-    name: String;
-    /**
      * The store's genome reference. Required for all stores except TSV format with generic annotations.
      */
     reference?: ReferenceItem;
-    /**
-     * The store's status.
-     */
-    status: StoreStatus;
     /**
      * The annotation file format of the store.
      */
@@ -925,20 +1017,116 @@ declare namespace Omics {
      * The store's file parsing options.
      */
     storeOptions?: StoreOptions;
-  }
-  export interface CreateReferenceStoreRequest {
     /**
-     * To ensure that requests don't run multiple times, specify a unique token for each request.
+     * The store's status.
+     */
+    status: StoreStatus;
+    /**
+     * The store's name.
+     */
+    name: String;
+    /**
+     * When the store was created.
+     */
+    creationTime: CreationTime;
+  }
+  export interface CreateMultipartReadSetUploadRequest {
+    /**
+     *  The sequence store ID for the store that is the destination of the multipart uploads. 
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     *  An idempotency token that can be used to avoid triggering multiple multipart uploads. 
      */
     clientToken?: ClientToken;
     /**
-     * A description for the store.
+     *  The type of file being uploaded. 
      */
-    description?: ReferenceStoreDescription;
+    sourceFileType: FileType;
+    /**
+     *  The source's subject ID. 
+     */
+    subjectId: SubjectId;
+    /**
+     *  The source's sample ID. 
+     */
+    sampleId: SampleId;
+    /**
+     *  Where the source originated. 
+     */
+    generatedFrom?: GeneratedFrom;
+    /**
+     *  The ARN of the reference. 
+     */
+    referenceArn: ReferenceArn;
+    /**
+     *  The name of the read set. 
+     */
+    name: ReadSetName;
+    /**
+     *  The description of the read set. 
+     */
+    description?: ReadSetDescription;
+    /**
+     *  Any tags to add to the read set. 
+     */
+    tags?: TagMap;
+  }
+  export interface CreateMultipartReadSetUploadResponse {
+    /**
+     *  The sequence store ID for the store that the read set will be created in. 
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     *  he ID for the initiated multipart upload. 
+     */
+    uploadId: UploadId;
+    /**
+     *  The file type of the read set source. 
+     */
+    sourceFileType: FileType;
+    /**
+     *  The source's subject ID. 
+     */
+    subjectId: SubjectId;
+    /**
+     *  The source's sample ID. 
+     */
+    sampleId: SampleId;
+    /**
+     *  The source of the read set. 
+     */
+    generatedFrom?: GeneratedFrom;
+    /**
+     *  The read set source's reference ARN. 
+     */
+    referenceArn: ReferenceArn;
+    /**
+     *  The name of the read set. 
+     */
+    name?: ReadSetName;
+    /**
+     *  The description of the read set. 
+     */
+    description?: ReadSetDescription;
+    /**
+     *  The tags to add to the read set. 
+     */
+    tags?: TagMap;
+    /**
+     *  The creation time of the multipart upload. 
+     */
+    creationTime: SyntheticTimestamp_date_time;
+  }
+  export interface CreateReferenceStoreRequest {
     /**
      * A name for the store.
      */
     name: ReferenceStoreName;
+    /**
+     * A description for the store.
+     */
+    description?: ReferenceStoreDescription;
     /**
      * Server-side encryption (SSE) settings for the store.
      */
@@ -947,61 +1135,70 @@ declare namespace Omics {
      * Tags for the store.
      */
     tags?: TagMap;
+    /**
+     * To ensure that requests don't run multiple times, specify a unique token for each request.
+     */
+    clientToken?: ClientToken;
   }
   export interface CreateReferenceStoreResponse {
-    /**
-     * The store's ARN.
-     */
-    arn: ReferenceStoreArn;
-    /**
-     * When the store was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The store's description.
-     */
-    description?: ReferenceStoreDescription;
     /**
      * The store's ID.
      */
     id: ReferenceStoreId;
     /**
+     * The store's ARN.
+     */
+    arn: ReferenceStoreArn;
+    /**
      * The store's name.
      */
     name?: ReferenceStoreName;
     /**
+     * The store's description.
+     */
+    description?: ReferenceStoreDescription;
+    /**
      * The store's SSE settings.
      */
     sseConfig?: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
   }
   export interface CreateRunGroupRequest {
-    /**
-     * The maximum number of CPUs to use in the group.
-     */
-    maxCpus?: CreateRunGroupRequestMaxCpusInteger;
-    /**
-     * A maximum run time for the group in minutes.
-     */
-    maxDuration?: CreateRunGroupRequestMaxDurationInteger;
-    /**
-     * The maximum number of concurrent runs for the group.
-     */
-    maxRuns?: CreateRunGroupRequestMaxRunsInteger;
     /**
      * A name for the group.
      */
     name?: RunGroupName;
     /**
-     * To ensure that requests don't run multiple times, specify a unique ID for each request.
+     * The maximum number of CPUs to use in the group.
      */
-    requestId: RunGroupRequestId;
+    maxCpus?: CreateRunGroupRequestMaxCpusInteger;
+    /**
+     * The maximum number of concurrent runs for the group.
+     */
+    maxRuns?: CreateRunGroupRequestMaxRunsInteger;
+    /**
+     * A maximum run time for the group in minutes.
+     */
+    maxDuration?: CreateRunGroupRequestMaxDurationInteger;
     /**
      * Tags for the group.
      */
     tags?: TagMap;
+    /**
+     * To ensure that requests don't run multiple times, specify a unique ID for each request.
+     */
+    requestId: RunGroupRequestId;
+    /**
+     *  The maximum GPUs that can be used by a run group. 
+     */
+    maxGpus?: CreateRunGroupRequestMaxGpusInteger;
   }
   export type CreateRunGroupRequestMaxCpusInteger = number;
   export type CreateRunGroupRequestMaxDurationInteger = number;
+  export type CreateRunGroupRequestMaxGpusInteger = number;
   export type CreateRunGroupRequestMaxRunsInteger = number;
   export interface CreateRunGroupResponse {
     /**
@@ -1019,17 +1216,13 @@ declare namespace Omics {
   }
   export interface CreateSequenceStoreRequest {
     /**
-     * To ensure that requests don't run multiple times, specify a unique token for each request.
+     * A name for the store.
      */
-    clientToken?: ClientToken;
+    name: SequenceStoreName;
     /**
      * A description for the store.
      */
     description?: SequenceStoreDescription;
-    /**
-     * A name for the store.
-     */
-    name: SequenceStoreName;
     /**
      * Server-side encryption (SSE) settings for the store.
      */
@@ -1038,69 +1231,73 @@ declare namespace Omics {
      * Tags for the store.
      */
     tags?: TagMap;
+    /**
+     * To ensure that requests don't run multiple times, specify a unique token for each request.
+     */
+    clientToken?: ClientToken;
+    /**
+     *  An S3 location that is used to store files that have failed a direct upload. 
+     */
+    fallbackLocation?: S3Destination;
   }
   export interface CreateSequenceStoreResponse {
-    /**
-     * The store's ARN.
-     */
-    arn: SequenceStoreArn;
-    /**
-     * When the store was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The store's description.
-     */
-    description?: SequenceStoreDescription;
     /**
      * The store's ID.
      */
     id: SequenceStoreId;
     /**
+     * The store's ARN.
+     */
+    arn: SequenceStoreArn;
+    /**
      * The store's name.
      */
     name?: SequenceStoreName;
     /**
+     * The store's description.
+     */
+    description?: SequenceStoreDescription;
+    /**
      * The store's SSE settings.
      */
     sseConfig?: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     *  An S3 location that is used to store files that have failed a direct upload. 
+     */
+    fallbackLocation?: S3Destination;
   }
   export interface CreateVariantStoreRequest {
-    /**
-     * A description for the store.
-     */
-    description?: StoreDescription;
-    /**
-     * A name for the store.
-     */
-    name?: CreateVariantStoreRequestNameString;
     /**
      * The genome reference for the store's variants.
      */
     reference: ReferenceItem;
     /**
-     * Server-side encryption (SSE) settings for the store.
+     * A name for the store.
      */
-    sseConfig?: SseConfig;
+    name?: CreateVariantStoreRequestNameString;
+    /**
+     * A description for the store.
+     */
+    description?: StoreDescription;
     /**
      * Tags for the store.
      */
     tags?: TagMap;
+    /**
+     * Server-side encryption (SSE) settings for the store.
+     */
+    sseConfig?: SseConfig;
   }
   export type CreateVariantStoreRequestNameString = string;
   export interface CreateVariantStoreResponse {
     /**
-     * When the store was created.
-     */
-    creationTime: CreationTime;
-    /**
      * The store's ID.
      */
     id: ResourceId;
-    /**
-     * The store's name.
-     */
-    name: String;
     /**
      * The store's genome reference.
      */
@@ -1109,16 +1306,20 @@ declare namespace Omics {
      * The store's status.
      */
     status: StoreStatus;
+    /**
+     * The store's name.
+     */
+    name: String;
+    /**
+     * When the store was created.
+     */
+    creationTime: CreationTime;
   }
   export interface CreateWorkflowRequest {
     /**
-     * The URI of a definition for the workflow.
+     * A name for the workflow.
      */
-    definitionUri?: WorkflowDefinition;
-    /**
-     * A ZIP archive for the workflow.
-     */
-    definitionZip?: _Blob;
+    name?: WorkflowName;
     /**
      * A description for the workflow.
      */
@@ -1128,21 +1329,21 @@ declare namespace Omics {
      */
     engine?: WorkflowEngine;
     /**
+     * A ZIP archive for the workflow.
+     */
+    definitionZip?: _Blob;
+    /**
+     * The URI of a definition for the workflow.
+     */
+    definitionUri?: WorkflowDefinition;
+    /**
      * The path of the main definition file for the workflow.
      */
     main?: WorkflowMain;
     /**
-     * A name for the workflow.
-     */
-    name?: WorkflowName;
-    /**
      * A parameter template for the workflow.
      */
     parameterTemplate?: WorkflowParameterTemplate;
-    /**
-     * To ensure that requests don't run multiple times, specify a unique ID for each request.
-     */
-    requestId: WorkflowRequestId;
     /**
      * A storage capacity for the workflow in gigabytes.
      */
@@ -1151,6 +1352,14 @@ declare namespace Omics {
      * Tags for the workflow.
      */
     tags?: TagMap;
+    /**
+     * To ensure that requests don't run multiple times, specify a unique ID for each request.
+     */
+    requestId: WorkflowRequestId;
+    /**
+     *  The computational accelerator specified to run the workflow. 
+     */
+    accelerators?: Accelerators;
   }
   export type CreateWorkflowRequestStorageCapacityInteger = number;
   export interface CreateWorkflowResponse {
@@ -1174,13 +1383,13 @@ declare namespace Omics {
   export type CreationTime = Date;
   export interface DeleteAnnotationStoreRequest {
     /**
-     * Whether to force deletion.
-     */
-    force?: PrimitiveBoolean;
-    /**
      * The store's name.
      */
     name: String;
+    /**
+     * Whether to force deletion.
+     */
+    force?: PrimitiveBoolean;
   }
   export interface DeleteAnnotationStoreResponse {
     /**
@@ -1230,13 +1439,13 @@ declare namespace Omics {
   }
   export interface DeleteVariantStoreRequest {
     /**
-     * Whether to force deletion.
-     */
-    force?: PrimitiveBoolean;
-    /**
      * The store's name.
      */
     name: String;
+    /**
+     * Whether to force deletion.
+     */
+    force?: PrimitiveBoolean;
   }
   export interface DeleteVariantStoreResponse {
     /**
@@ -1278,6 +1487,10 @@ declare namespace Omics {
   export type ExportReadSetDetailList = ExportReadSetDetail[];
   export interface ExportReadSetFilter {
     /**
+     * A status to filter on.
+     */
+    status?: ReadSetExportJobStatus;
+    /**
      * The filter's start date.
      */
     createdAfter?: SyntheticTimestamp_date_time;
@@ -1285,24 +1498,8 @@ declare namespace Omics {
      * The filter's end date.
      */
     createdBefore?: SyntheticTimestamp_date_time;
-    /**
-     * A status to filter on.
-     */
-    status?: ReadSetExportJobStatus;
   }
   export interface ExportReadSetJobDetail {
-    /**
-     * When the job completed.
-     */
-    completionTime?: SyntheticTimestamp_date_time;
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The job's destination in Amazon S3.
-     */
-    destination: S3Destination;
     /**
      * The job's ID.
      */
@@ -1312,24 +1509,36 @@ declare namespace Omics {
      */
     sequenceStoreId: SequenceStoreId;
     /**
+     * The job's destination in Amazon S3.
+     */
+    destination: S3Destination;
+    /**
      * The job's status.
      */
     status: ReadSetExportJobStatus;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     * When the job completed.
+     */
+    completionTime?: SyntheticTimestamp_date_time;
   }
   export type ExportReadSetJobDetailList = ExportReadSetJobDetail[];
   export interface FileInformation {
     /**
-     * The file's content length.
+     * The file's total parts.
      */
-    contentLength?: FileInformationContentLengthLong;
+    totalParts?: FileInformationTotalPartsInteger;
     /**
      * The file's part size.
      */
     partSize?: FileInformationPartSizeLong;
     /**
-     * The file's total parts.
+     * The file's content length.
      */
-    totalParts?: FileInformationTotalPartsInteger;
+    contentLength?: FileInformationContentLengthLong;
   }
   export type FileInformationContentLengthLong = number;
   export type FileInformationPartSizeLong = number;
@@ -1357,34 +1566,17 @@ declare namespace Omics {
   }
   export interface GetAnnotationImportResponse {
     /**
-     * When the job completed.
-     */
-    completionTime: CompletionTime;
-    /**
-     * When the job was created.
-     */
-    creationTime: CreationTime;
-    /**
-     * The job's destination annotation store.
-     */
-    destinationName: StoreName;
-    formatOptions: FormatOptions;
-    /**
      * The job's ID.
      */
     id: ResourceId;
     /**
-     * The job's imported items.
+     * The job's destination annotation store.
      */
-    items: AnnotationImportItemDetails;
+    destinationName: StoreName;
     /**
      * The job's service role ARN.
      */
     roleArn: Arn;
-    /**
-     * The job's left normalization setting.
-     */
-    runLeftNormalization: RunLeftNormalization;
     /**
      * The job's status.
      */
@@ -1394,9 +1586,30 @@ declare namespace Omics {
      */
     statusMessage: JobStatusMsg;
     /**
+     * When the job was created.
+     */
+    creationTime: CreationTime;
+    /**
      * When the job was updated.
      */
     updateTime: UpdateTime;
+    /**
+     * When the job completed.
+     */
+    completionTime: CompletionTime;
+    /**
+     * The job's imported items.
+     */
+    items: AnnotationImportItemDetails;
+    /**
+     * The job's left normalization setting.
+     */
+    runLeftNormalization: RunLeftNormalization;
+    formatOptions: FormatOptions;
+    /**
+     *  The annotation schema generated by the parsed annotation data. 
+     */
+    annotationFields?: AnnotationFieldMap;
   }
   export interface GetAnnotationStoreRequest {
     /**
@@ -1406,61 +1619,61 @@ declare namespace Omics {
   }
   export interface GetAnnotationStoreResponse {
     /**
-     * When the store was created.
-     */
-    creationTime: CreationTime;
-    /**
-     * The store's description.
-     */
-    description: StoreDescription;
-    /**
      * The store's ID.
      */
     id: ResourceId;
-    /**
-     * The store's name.
-     */
-    name: String;
     /**
      * The store's genome reference.
      */
     reference: ReferenceItem;
     /**
-     * The store's server-side encryption (SSE) settings.
-     */
-    sseConfig: SseConfig;
-    /**
      * The store's status.
      */
     status: StoreStatus;
-    /**
-     * A status message.
-     */
-    statusMessage: StatusMessage;
     /**
      * The store's ARN.
      */
     storeArn: Arn;
     /**
-     * The store's annotation file format.
+     * The store's name.
      */
-    storeFormat?: StoreFormat;
+    name: String;
     /**
-     * The store's parsing options.
+     * The store's description.
      */
-    storeOptions?: StoreOptions;
+    description: StoreDescription;
     /**
-     * The store's size in bytes.
+     * The store's server-side encryption (SSE) settings.
      */
-    storeSizeBytes: Long;
+    sseConfig: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: CreationTime;
+    /**
+     * When the store was updated.
+     */
+    updateTime: UpdateTime;
     /**
      * The store's tags.
      */
     tags: TagMap;
     /**
-     * When the store was updated.
+     * The store's parsing options.
      */
-    updateTime: UpdateTime;
+    storeOptions?: StoreOptions;
+    /**
+     * The store's annotation file format.
+     */
+    storeFormat?: StoreFormat;
+    /**
+     * A status message.
+     */
+    statusMessage: StatusMessage;
+    /**
+     * The store's size in bytes.
+     */
+    storeSizeBytes: Long;
   }
   export interface GetReadSetActivationJobRequest {
     /**
@@ -1474,14 +1687,6 @@ declare namespace Omics {
   }
   export interface GetReadSetActivationJobResponse {
     /**
-     * When the job completed.
-     */
-    completionTime?: SyntheticTimestamp_date_time;
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
      * The job's ID.
      */
     id: ActivationJobId;
@@ -1490,10 +1695,6 @@ declare namespace Omics {
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     * The job's source files.
-     */
-    sources?: ActivateReadSetSourceList;
-    /**
      * The job's status.
      */
     status: ReadSetActivationJobStatus;
@@ -1501,42 +1702,42 @@ declare namespace Omics {
      * The job's status message.
      */
     statusMessage?: JobStatusMessage;
-  }
-  export interface GetReadSetExportJobRequest {
-    /**
-     * The job's ID.
-     */
-    id: ExportJobId;
-    /**
-     * The job's sequence store ID.
-     */
-    sequenceStoreId: SequenceStoreId;
-  }
-  export interface GetReadSetExportJobResponse {
-    /**
-     * When the job completed.
-     */
-    completionTime?: SyntheticTimestamp_date_time;
     /**
      * When the job was created.
      */
     creationTime: SyntheticTimestamp_date_time;
     /**
-     * The job's destination in Amazon S3.
+     * When the job completed.
      */
-    destination: S3Destination;
+    completionTime?: SyntheticTimestamp_date_time;
+    /**
+     * The job's source files.
+     */
+    sources?: ActivateReadSetSourceList;
+  }
+  export interface GetReadSetExportJobRequest {
+    /**
+     * The job's sequence store ID.
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     * The job's ID.
+     */
+    id: ExportJobId;
+  }
+  export interface GetReadSetExportJobResponse {
     /**
      * The job's ID.
      */
     id: ExportJobId;
     /**
-     * The job's read sets.
-     */
-    readSets?: ExportReadSetDetailList;
-    /**
      * The job's sequence store ID.
      */
     sequenceStoreId: SequenceStoreId;
+    /**
+     * The job's destination in Amazon S3.
+     */
+    destination: S3Destination;
     /**
      * The job's status.
      */
@@ -1545,6 +1746,18 @@ declare namespace Omics {
      * The job's status message.
      */
     statusMessage?: JobStatusMessage;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     * When the job completed.
+     */
+    completionTime?: SyntheticTimestamp_date_time;
+    /**
+     * The job's read sets.
+     */
+    readSets?: ExportReadSetDetailList;
   }
   export interface GetReadSetImportJobRequest {
     /**
@@ -1558,29 +1771,17 @@ declare namespace Omics {
   }
   export interface GetReadSetImportJobResponse {
     /**
-     * When the job completed.
-     */
-    completionTime?: SyntheticTimestamp_date_time;
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
      * The job's ID.
      */
     id: ImportJobId;
-    /**
-     * The job's service role ARN.
-     */
-    roleArn: RoleArn;
     /**
      * The job's sequence store ID.
      */
     sequenceStoreId: SequenceStoreId;
     /**
-     * The job's source files.
+     * The job's service role ARN.
      */
-    sources: ImportReadSetSourceList;
+    roleArn: RoleArn;
     /**
      * The job's status.
      */
@@ -1589,6 +1790,18 @@ declare namespace Omics {
      * The job's status message.
      */
     statusMessage?: JobStatusMessage;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     * When the job completed.
+     */
+    completionTime?: SyntheticTimestamp_date_time;
+    /**
+     * The job's source files.
+     */
+    sources: ImportReadSetSourceList;
   }
   export interface GetReadSetMetadataRequest {
     /**
@@ -1602,13 +1815,33 @@ declare namespace Omics {
   }
   export interface GetReadSetMetadataResponse {
     /**
+     * The read set's ID.
+     */
+    id: ReadSetId;
+    /**
      * The read set's ARN.
      */
     arn: ReadSetArn;
     /**
-     * When the read set was created.
+     * The read set's sequence store ID.
      */
-    creationTime: SyntheticTimestamp_date_time;
+    sequenceStoreId: SequenceStoreId;
+    /**
+     * The read set's subject ID.
+     */
+    subjectId?: SubjectId;
+    /**
+     * The read set's sample ID.
+     */
+    sampleId?: SampleId;
+    /**
+     * The read set's status.
+     */
+    status: ReadSetStatus;
+    /**
+     * The read set's name.
+     */
+    name?: ReadSetName;
     /**
      * The read set's description.
      */
@@ -1618,59 +1851,43 @@ declare namespace Omics {
      */
     fileType: FileType;
     /**
-     * The read set's files.
+     * When the read set was created.
      */
-    files?: ReadSetFiles;
-    /**
-     * The read set's ID.
-     */
-    id: ReadSetId;
-    /**
-     * The read set's name.
-     */
-    name?: ReadSetName;
-    /**
-     * The read set's genome reference ARN.
-     */
-    referenceArn?: ReferenceArn;
-    /**
-     * The read set's sample ID.
-     */
-    sampleId?: SampleId;
+    creationTime: SyntheticTimestamp_date_time;
     /**
      * The read set's sequence information.
      */
     sequenceInformation?: SequenceInformation;
     /**
-     * The read set's sequence store ID.
+     * The read set's genome reference ARN.
      */
-    sequenceStoreId: SequenceStoreId;
+    referenceArn?: ReferenceArn;
     /**
-     * The read set's status.
+     * The read set's files.
      */
-    status: ReadSetStatus;
+    files?: ReadSetFiles;
     /**
-     * The read set's subject ID.
+     *  The status message for a read set. It provides more detail as to why the read set has a status. 
      */
-    subjectId?: SubjectId;
+    statusMessage?: ReadSetStatusMessage;
   }
   export interface GetReadSetRequest {
-    /**
-     * The file to retrieve.
-     */
-    file?: ReadSetFile;
     /**
      * The read set's ID.
      */
     id: ReadSetId;
     /**
-     * The part number to retrieve.
-     */
-    partNumber: GetReadSetRequestPartNumberInteger;
-    /**
      * The read set's sequence store ID.
      */
     sequenceStoreId: SequenceStoreId;
+    /**
+     * The file to retrieve.
+     */
+    file?: ReadSetFile;
+    /**
+     * The part number to retrieve.
+     */
+    partNumber: GetReadSetRequestPartNumberInteger;
   }
   export type GetReadSetRequestPartNumberInteger = number;
   export interface GetReadSetResponse {
@@ -1691,14 +1908,6 @@ declare namespace Omics {
   }
   export interface GetReferenceImportJobResponse {
     /**
-     * When the job completed.
-     */
-    completionTime?: SyntheticTimestamp_date_time;
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
      * The job's ID.
      */
     id: ImportJobId;
@@ -1711,10 +1920,6 @@ declare namespace Omics {
      */
     roleArn: RoleArn;
     /**
-     * The job's source files.
-     */
-    sources: ImportReferenceSourceList;
-    /**
      * The job's status.
      */
     status: ReferenceImportJobStatus;
@@ -1722,6 +1927,18 @@ declare namespace Omics {
      * The job's status message.
      */
     statusMessage?: JobStatusMessage;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     * When the job completed.
+     */
+    completionTime?: SyntheticTimestamp_date_time;
+    /**
+     * The job's source files.
+     */
+    sources: ImportReferenceSourceList;
   }
   export interface GetReferenceMetadataRequest {
     /**
@@ -1735,67 +1952,67 @@ declare namespace Omics {
   }
   export interface GetReferenceMetadataResponse {
     /**
-     * The reference's ARN.
-     */
-    arn: ReferenceArn;
-    /**
-     * When the reference was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The reference's description.
-     */
-    description?: ReferenceDescription;
-    /**
-     * The reference's files.
-     */
-    files?: ReferenceFiles;
-    /**
      * The reference's ID.
      */
     id: ReferenceId;
     /**
-     * The reference's MD5 checksum.
+     * The reference's ARN.
      */
-    md5: Md5;
-    /**
-     * The reference's name.
-     */
-    name?: ReferenceName;
+    arn: ReferenceArn;
     /**
      * The reference's reference store ID.
      */
     referenceStoreId: ReferenceStoreId;
     /**
+     * The reference's MD5 checksum.
+     */
+    md5: Md5;
+    /**
      * The reference's status.
      */
     status?: ReferenceStatus;
     /**
+     * The reference's name.
+     */
+    name?: ReferenceName;
+    /**
+     * The reference's description.
+     */
+    description?: ReferenceDescription;
+    /**
+     * When the reference was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
      * When the reference was updated.
      */
     updateTime: SyntheticTimestamp_date_time;
+    /**
+     * The reference's files.
+     */
+    files?: ReferenceFiles;
   }
   export interface GetReferenceRequest {
-    /**
-     * The file to retrieve.
-     */
-    file?: ReferenceFile;
     /**
      * The reference's ID.
      */
     id: ReferenceId;
     /**
-     * The part number to retrieve.
+     * The reference's store ID.
      */
-    partNumber: GetReferenceRequestPartNumberInteger;
+    referenceStoreId: ReferenceStoreId;
     /**
      * The range to retrieve.
      */
     range?: Range;
     /**
-     * The reference's store ID.
+     * The part number to retrieve.
      */
-    referenceStoreId: ReferenceStoreId;
+    partNumber: GetReferenceRequestPartNumberInteger;
+    /**
+     * The file to retrieve.
+     */
+    file?: ReferenceFile;
   }
   export type GetReferenceRequestPartNumberInteger = number;
   export interface GetReferenceResponse {
@@ -1812,29 +2029,29 @@ declare namespace Omics {
   }
   export interface GetReferenceStoreResponse {
     /**
-     * The store's ARN.
-     */
-    arn: ReferenceStoreArn;
-    /**
-     * When the store was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The store's description.
-     */
-    description?: ReferenceStoreDescription;
-    /**
      * The store's ID.
      */
     id: ReferenceStoreId;
+    /**
+     * The store's ARN.
+     */
+    arn: ReferenceStoreArn;
     /**
      * The store's name.
      */
     name?: ReferenceStoreName;
     /**
+     * The store's description.
+     */
+    description?: ReferenceStoreDescription;
+    /**
      * The store's server-side encryption (SSE) settings.
      */
     sseConfig?: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
   }
   export interface GetRunGroupRequest {
     /**
@@ -1848,46 +2065,51 @@ declare namespace Omics {
      */
     arn?: RunGroupArn;
     /**
-     * When the group was created.
-     */
-    creationTime?: RunGroupTimestamp;
-    /**
      * The group's ID.
      */
     id?: RunGroupId;
-    /**
-     * The group's maximum number of CPUs to use.
-     */
-    maxCpus?: GetRunGroupResponseMaxCpusInteger;
-    /**
-     * The group's maximum run time in minutes.
-     */
-    maxDuration?: GetRunGroupResponseMaxDurationInteger;
-    /**
-     * The maximum number of concurrent runs for the group.
-     */
-    maxRuns?: GetRunGroupResponseMaxRunsInteger;
     /**
      * The group's name.
      */
     name?: RunGroupName;
     /**
+     * The group's maximum number of CPUs to use.
+     */
+    maxCpus?: GetRunGroupResponseMaxCpusInteger;
+    /**
+     * The maximum number of concurrent runs for the group.
+     */
+    maxRuns?: GetRunGroupResponseMaxRunsInteger;
+    /**
+     * The group's maximum run time in minutes.
+     */
+    maxDuration?: GetRunGroupResponseMaxDurationInteger;
+    /**
+     * When the group was created.
+     */
+    creationTime?: RunGroupTimestamp;
+    /**
      * The group's tags.
      */
     tags?: TagMap;
+    /**
+     *  The maximum GPUs that can be used by a run group. 
+     */
+    maxGpus?: GetRunGroupResponseMaxGpusInteger;
   }
   export type GetRunGroupResponseMaxCpusInteger = number;
   export type GetRunGroupResponseMaxDurationInteger = number;
+  export type GetRunGroupResponseMaxGpusInteger = number;
   export type GetRunGroupResponseMaxRunsInteger = number;
   export interface GetRunRequest {
-    /**
-     * The run's export format.
-     */
-    export?: RunExportList;
     /**
      * The run's ID.
      */
     id: RunId;
+    /**
+     * The run's export format.
+     */
+    export?: RunExportList;
   }
   export interface GetRunResponse {
     /**
@@ -1895,9 +2117,41 @@ declare namespace Omics {
      */
     arn?: RunArn;
     /**
-     * When the run was created.
+     * The run's ID.
      */
-    creationTime?: RunTimestamp;
+    id?: RunId;
+    /**
+     * The run's status.
+     */
+    status?: RunStatus;
+    /**
+     * The run's workflow ID.
+     */
+    workflowId?: WorkflowId;
+    /**
+     * The run's workflow type.
+     */
+    workflowType?: WorkflowType;
+    /**
+     * The run's ID.
+     */
+    runId?: RunId;
+    /**
+     * The run's service role ARN.
+     */
+    roleArn?: RunRoleArn;
+    /**
+     * The run's name.
+     */
+    name?: RunName;
+    /**
+     * The run's group ID.
+     */
+    runGroupId?: RunGroupId;
+    /**
+     * The run's priority.
+     */
+    priority?: GetRunResponsePriorityInteger;
     /**
      * The run's definition.
      */
@@ -1907,81 +2161,53 @@ declare namespace Omics {
      */
     digest?: WorkflowDigest;
     /**
-     * The run's ID.
-     */
-    id?: RunId;
-    /**
-     * The run's log level.
-     */
-    logLevel?: RunLogLevel;
-    /**
-     * The run's name.
-     */
-    name?: RunName;
-    /**
-     * The run's output URI.
-     */
-    outputUri?: RunOutputUri;
-    /**
      * The run's parameters.
      */
     parameters?: RunParameters;
-    /**
-     * The run's priority.
-     */
-    priority?: GetRunResponsePriorityInteger;
-    /**
-     * The run's resource digests.
-     */
-    resourceDigests?: RunResourceDigests;
-    /**
-     * The run's service role ARN.
-     */
-    roleArn?: RunRoleArn;
-    /**
-     * The run's group ID.
-     */
-    runGroupId?: RunGroupId;
-    /**
-     * The run's ID.
-     */
-    runId?: RunId;
-    /**
-     * When the run started.
-     */
-    startTime?: RunTimestamp;
-    /**
-     * Who started the run.
-     */
-    startedBy?: RunStartedBy;
-    /**
-     * The run's status.
-     */
-    status?: RunStatus;
-    /**
-     * The run's status message.
-     */
-    statusMessage?: RunStatusMessage;
-    /**
-     * The run's stop time.
-     */
-    stopTime?: RunTimestamp;
     /**
      * The run's storage capacity in gigabytes.
      */
     storageCapacity?: GetRunResponseStorageCapacityInteger;
     /**
+     * The run's output URI.
+     */
+    outputUri?: RunOutputUri;
+    /**
+     * The run's log level.
+     */
+    logLevel?: RunLogLevel;
+    /**
+     * The run's resource digests.
+     */
+    resourceDigests?: RunResourceDigests;
+    /**
+     * Who started the run.
+     */
+    startedBy?: RunStartedBy;
+    /**
+     * When the run was created.
+     */
+    creationTime?: RunTimestamp;
+    /**
+     * When the run started.
+     */
+    startTime?: RunTimestamp;
+    /**
+     * The run's stop time.
+     */
+    stopTime?: RunTimestamp;
+    /**
+     * The run's status message.
+     */
+    statusMessage?: RunStatusMessage;
+    /**
      * The run's tags.
      */
     tags?: TagMap;
     /**
-     * The run's workflow ID.
+     *  The computational accelerator used to run the workflow. 
      */
-    workflowId?: WorkflowId;
-    /**
-     * The run's workflow type.
-     */
-    workflowType?: WorkflowType;
+    accelerators?: Accelerators;
   }
   export type GetRunResponsePriorityInteger = number;
   export type GetRunResponseStorageCapacityInteger = number;
@@ -1997,47 +2223,52 @@ declare namespace Omics {
   }
   export interface GetRunTaskResponse {
     /**
-     * The task's CPU usage.
+     * The task's ID.
      */
-    cpus?: GetRunTaskResponseCpusInteger;
-    /**
-     * When the task was created.
-     */
-    creationTime?: TaskTimestamp;
-    /**
-     * The task's log stream.
-     */
-    logStream?: TaskLogStream;
-    /**
-     * The task's memory use in gigabytes.
-     */
-    memory?: GetRunTaskResponseMemoryInteger;
-    /**
-     * The task's name.
-     */
-    name?: TaskName;
-    /**
-     * The task's start time.
-     */
-    startTime?: TaskTimestamp;
+    taskId?: TaskId;
     /**
      * The task's status.
      */
     status?: TaskStatus;
     /**
-     * The task's status message.
+     * The task's name.
      */
-    statusMessage?: TaskStatusMessage;
+    name?: TaskName;
+    /**
+     * The task's CPU usage.
+     */
+    cpus?: GetRunTaskResponseCpusInteger;
+    /**
+     * The task's memory use in gigabytes.
+     */
+    memory?: GetRunTaskResponseMemoryInteger;
+    /**
+     * When the task was created.
+     */
+    creationTime?: TaskTimestamp;
+    /**
+     * The task's start time.
+     */
+    startTime?: TaskTimestamp;
     /**
      * The task's stop time.
      */
     stopTime?: TaskTimestamp;
     /**
-     * The task's ID.
+     * The task's status message.
      */
-    taskId?: TaskId;
+    statusMessage?: TaskStatusMessage;
+    /**
+     * The task's log stream.
+     */
+    logStream?: TaskLogStream;
+    /**
+     *  The number of Graphics Processing Units (GPU) specified in the task. 
+     */
+    gpus?: GetRunTaskResponseGpusInteger;
   }
   export type GetRunTaskResponseCpusInteger = number;
+  export type GetRunTaskResponseGpusInteger = number;
   export type GetRunTaskResponseMemoryInteger = number;
   export interface GetSequenceStoreRequest {
     /**
@@ -2047,29 +2278,33 @@ declare namespace Omics {
   }
   export interface GetSequenceStoreResponse {
     /**
-     * The store's ARN.
-     */
-    arn: SequenceStoreArn;
-    /**
-     * When the store was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The store's description.
-     */
-    description?: SequenceStoreDescription;
-    /**
      * The store's ID.
      */
     id: SequenceStoreId;
+    /**
+     * The store's ARN.
+     */
+    arn: SequenceStoreArn;
     /**
      * The store's name.
      */
     name?: SequenceStoreName;
     /**
+     * The store's description.
+     */
+    description?: SequenceStoreDescription;
+    /**
      * The store's server-side encryption (SSE) settings.
      */
     sseConfig?: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     *  An S3 location that is used to store files that have failed a direct upload. 
+     */
+    fallbackLocation?: S3Destination;
   }
   export interface GetVariantImportRequest {
     /**
@@ -2079,33 +2314,17 @@ declare namespace Omics {
   }
   export interface GetVariantImportResponse {
     /**
-     * When the job completed.
+     * The job's ID.
      */
-    completionTime?: CompletionTime;
-    /**
-     * When the job was created.
-     */
-    creationTime: CreationTime;
+    id: ResourceId;
     /**
      * The job's destination variant store.
      */
     destinationName: StoreName;
     /**
-     * The job's ID.
-     */
-    id: ResourceId;
-    /**
-     * The job's items.
-     */
-    items: VariantImportItemDetails;
-    /**
      * The job's service role ARN.
      */
     roleArn: Arn;
-    /**
-     * The job's left normalization setting.
-     */
-    runLeftNormalization: RunLeftNormalization;
     /**
      * The job's status.
      */
@@ -2115,9 +2334,29 @@ declare namespace Omics {
      */
     statusMessage: JobStatusMsg;
     /**
+     * When the job was created.
+     */
+    creationTime: CreationTime;
+    /**
      * When the job was updated.
      */
     updateTime: UpdateTime;
+    /**
+     * When the job completed.
+     */
+    completionTime?: CompletionTime;
+    /**
+     * The job's items.
+     */
+    items: VariantImportItemDetails;
+    /**
+     * The job's left normalization setting.
+     */
+    runLeftNormalization: RunLeftNormalization;
+    /**
+     *  The annotation schema generated by the parsed annotation data. 
+     */
+    annotationFields?: AnnotationFieldMap;
   }
   export interface GetVariantStoreRequest {
     /**
@@ -2127,59 +2366,55 @@ declare namespace Omics {
   }
   export interface GetVariantStoreResponse {
     /**
-     * When the store was created.
-     */
-    creationTime: CreationTime;
-    /**
-     * The store's description.
-     */
-    description: StoreDescription;
-    /**
      * The store's ID.
      */
     id: ResourceId;
-    /**
-     * The store's name.
-     */
-    name: String;
     /**
      * The store's genome reference.
      */
     reference: ReferenceItem;
     /**
-     * The store's server-side encryption (SSE) settings.
-     */
-    sseConfig: SseConfig;
-    /**
      * The store's status.
      */
     status: StoreStatus;
-    /**
-     * The store's status message.
-     */
-    statusMessage: StatusMessage;
     /**
      * The store's ARN.
      */
     storeArn: Arn;
     /**
-     * The store's size in bytes.
+     * The store's name.
      */
-    storeSizeBytes: Long;
+    name: String;
+    /**
+     * The store's description.
+     */
+    description: StoreDescription;
+    /**
+     * The store's server-side encryption (SSE) settings.
+     */
+    sseConfig: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: CreationTime;
+    /**
+     * When the store was updated.
+     */
+    updateTime: UpdateTime;
     /**
      * The store's tags.
      */
     tags: TagMap;
     /**
-     * When the store was updated.
+     * The store's status message.
      */
-    updateTime: UpdateTime;
+    statusMessage: StatusMessage;
+    /**
+     * The store's size in bytes.
+     */
+    storeSizeBytes: Long;
   }
   export interface GetWorkflowRequest {
-    /**
-     * The export format for the workflow.
-     */
-    export?: WorkflowExportList;
     /**
      * The workflow's ID.
      */
@@ -2188,6 +2423,10 @@ declare namespace Omics {
      * The workflow's type.
      */
     type?: WorkflowType;
+    /**
+     * The export format for the workflow.
+     */
+    export?: WorkflowExportList;
   }
   export interface GetWorkflowResponse {
     /**
@@ -2195,66 +2434,78 @@ declare namespace Omics {
      */
     arn?: WorkflowArn;
     /**
-     * When the workflow was created.
-     */
-    creationTime?: WorkflowTimestamp;
-    /**
-     * The workflow's definition.
-     */
-    definition?: WorkflowDefinition;
-    /**
-     * The workflow's description.
-     */
-    description?: WorkflowDescription;
-    /**
-     * The workflow's digest.
-     */
-    digest?: WorkflowDigest;
-    /**
-     * The workflow's engine.
-     */
-    engine?: WorkflowEngine;
-    /**
      * The workflow's ID.
      */
     id?: WorkflowId;
-    /**
-     * The path of the main definition file for the workflow.
-     */
-    main?: WorkflowMain;
-    /**
-     * The workflow's name.
-     */
-    name?: WorkflowName;
-    /**
-     * The workflow's parameter template.
-     */
-    parameterTemplate?: WorkflowParameterTemplate;
     /**
      * The workflow's status.
      */
     status?: WorkflowStatus;
     /**
-     * The workflow's status message.
+     * The workflow's type.
      */
-    statusMessage?: WorkflowStatusMessage;
+    type?: WorkflowType;
+    /**
+     * The workflow's name.
+     */
+    name?: WorkflowName;
+    /**
+     * The workflow's description.
+     */
+    description?: WorkflowDescription;
+    /**
+     * The workflow's engine.
+     */
+    engine?: WorkflowEngine;
+    /**
+     * The workflow's definition.
+     */
+    definition?: WorkflowDefinition;
+    /**
+     * The path of the main definition file for the workflow.
+     */
+    main?: WorkflowMain;
+    /**
+     * The workflow's digest.
+     */
+    digest?: WorkflowDigest;
+    /**
+     * The workflow's parameter template.
+     */
+    parameterTemplate?: WorkflowParameterTemplate;
     /**
      * The workflow's storage capacity in gigabytes.
      */
     storageCapacity?: GetWorkflowResponseStorageCapacityInteger;
     /**
+     * When the workflow was created.
+     */
+    creationTime?: WorkflowTimestamp;
+    /**
+     * The workflow's status message.
+     */
+    statusMessage?: WorkflowStatusMessage;
+    /**
      * The workflow's tags.
      */
     tags?: TagMap;
     /**
-     * The workflow's type.
+     *  Gets metadata for workflow. 
      */
-    type?: WorkflowType;
+    metadata?: WorkflowMetadata;
+    /**
+     *  The computational accelerator specified to run the workflow. 
+     */
+    accelerators?: Accelerators;
   }
   export type GetWorkflowResponseStorageCapacityInteger = number;
   export type Header = boolean;
   export type ImportJobId = string;
   export interface ImportReadSetFilter {
+    /**
+     * A status to filter on.
+     */
+    status?: ReadSetImportJobStatus;
     /**
      * The filter's start date.
      */
@@ -2263,67 +2514,43 @@ declare namespace Omics {
      * The filter's end date.
      */
     createdBefore?: SyntheticTimestamp_date_time;
-    /**
-     * A status to filter on.
-     */
-    status?: ReadSetImportJobStatus;
   }
   export interface ImportReadSetJobItem {
-    /**
-     * When the job completed.
-     */
-    completionTime?: SyntheticTimestamp_date_time;
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
     /**
      * The job's ID.
      */
     id: ImportJobId;
     /**
-     * The job's service role ARN.
-     */
-    roleArn: RoleArn;
-    /**
      * The job's sequence store ID.
      */
     sequenceStoreId: SequenceStoreId;
     /**
+     * The job's service role ARN.
+     */
+    roleArn: RoleArn;
+    /**
      * The job's status.
      */
     status: ReadSetImportJobStatus;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     * When the job completed.
+     */
+    completionTime?: SyntheticTimestamp_date_time;
   }
   export type ImportReadSetJobList = ImportReadSetJobItem[];
   export interface ImportReadSetSourceItem {
     /**
-     * The source's description.
+     * The source files' location in Amazon S3.
      */
-    description?: ReadSetDescription;
-    /**
-     * Where the source originated.
-     */
-    generatedFrom?: GeneratedFrom;
-    /**
-     * The source's name.
-     */
-    name?: ReadSetName;
-    /**
-     * The source's genome reference ARN.
-     */
-    referenceArn?: ReferenceArn;
-    /**
-     * The source's sample ID.
-     */
-    sampleId: SampleId;
+    sourceFiles: SourceFiles;
     /**
      * The source's file type.
      */
     sourceFileType: FileType;
-    /**
-     * The source files' location in Amazon S3.
-     */
-    sourceFiles: SourceFiles;
     /**
      * The source's status.
      */
@@ -2337,12 +2564,36 @@ declare namespace Omics {
      */
     subjectId: SubjectId;
     /**
+     * The source's sample ID.
+     */
+    sampleId: SampleId;
+    /**
+     * Where the source originated.
+     */
+    generatedFrom?: GeneratedFrom;
+    /**
+     * The source's genome reference ARN.
+     */
+    referenceArn?: ReferenceArn;
+    /**
+     * The source's name.
+     */
+    name?: ReadSetName;
+    /**
+     * The source's description.
+     */
+    description?: ReadSetDescription;
+    /**
      * The source's tags.
      */
     tags?: TagMap;
   }
   export type ImportReadSetSourceList = ImportReadSetSourceItem[];
   export interface ImportReferenceFilter {
+    /**
+     * A status to filter on.
+     */
+    status?: ReferenceImportJobStatus;
     /**
      * The filter's start date.
      */
@@ -2351,20 +2602,8 @@ declare namespace Omics {
      * The filter's end date.
      */
     createdBefore?: SyntheticTimestamp_date_time;
-    /**
-     * A status to filter on.
-     */
-    status?: ReferenceImportJobStatus;
   }
   export interface ImportReferenceJobItem {
-    /**
-     * When the job completed.
-     */
-    completionTime?: SyntheticTimestamp_date_time;
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
     /**
      * The job's ID.
      */
@@ -2381,17 +2620,17 @@ declare namespace Omics {
      * The job's status.
      */
     status: ReferenceImportJobStatus;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     * When the job completed.
+     */
+    completionTime?: SyntheticTimestamp_date_time;
   }
   export type ImportReferenceJobList = ImportReferenceJobItem[];
   export interface ImportReferenceSourceItem {
-    /**
-     * The source's description.
-     */
-    description?: ReferenceDescription;
-    /**
-     * The source's name.
-     */
-    name?: ReferenceName;
     /**
      * The source file's location in Amazon S3.
      */
@@ -2404,6 +2643,14 @@ declare namespace Omics {
      * The source's status message.
      */
     statusMessage?: JobStatusMessage;
+    /**
+     * The source's name.
+     */
+    name?: ReferenceName;
+    /**
+     * The source's description.
+     */
+    description?: ReferenceDescription;
     /**
      * The source's tags.
      */
@@ -2426,21 +2673,21 @@ declare namespace Omics {
   }
   export interface ListAnnotationImportJobsRequest {
     /**
-     * A filter to apply to the list.
+     * The maximum number of jobs to return in one page of results.
      */
-    filter?: ListAnnotationImportJobsFilter;
+    maxResults?: ListAnnotationImportJobsRequestMaxResultsInteger;
     /**
      * IDs of annotation import jobs to retrieve.
      */
     ids?: ListAnnotationImportJobsRequestIdsList;
     /**
-     * The maximum number of jobs to return in one page of results.
-     */
-    maxResults?: ListAnnotationImportJobsRequestMaxResultsInteger;
-    /**
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     nextToken?: ListAnnotationImportJobsRequestNextTokenString;
+    /**
+     * A filter to apply to the list.
+     */
+    filter?: ListAnnotationImportJobsFilter;
   }
   export type ListAnnotationImportJobsRequestIdsList = ResourceIdentifier[];
   export type ListAnnotationImportJobsRequestMaxResultsInteger = number;
@@ -2463,10 +2710,6 @@ declare namespace Omics {
   }
   export interface ListAnnotationStoresRequest {
     /**
-     * A filter to apply to the list.
-     */
-    filter?: ListAnnotationStoresFilter;
-    /**
      * IDs of stores to list.
      */
     ids?: ListAnnotationStoresRequestIdsList;
@@ -2478,6 +2721,10 @@ declare namespace Omics {
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     nextToken?: ListAnnotationStoresRequestNextTokenString;
+    /**
+     * A filter to apply to the list.
+     */
+    filter?: ListAnnotationStoresFilter;
   }
   export type ListAnnotationStoresRequestIdsList = ResourceIdentifier[];
   export type ListAnnotationStoresRequestMaxResultsInteger = number;
@@ -2492,11 +2739,36 @@ declare namespace Omics {
      */
     nextToken?: String;
   }
+  export interface ListMultipartReadSetUploadsRequest {
+    /**
+     *  The Sequence Store ID used for the multipart uploads. 
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     *  The maximum number of multipart uploads returned in a page. 
+     */
+    maxResults?: ListMultipartReadSetUploadsRequestMaxResultsInteger;
+    /**
+     *  Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. 
+     */
+    nextToken?: NextToken;
+  }
+  export type ListMultipartReadSetUploadsRequestMaxResultsInteger = number;
+  export interface ListMultipartReadSetUploadsResponse {
+    /**
+     *  Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  An array of multipart uploads. 
+     */
+    uploads?: MultipartReadSetUploadList;
+  }
   export interface ListReadSetActivationJobsRequest {
     /**
-     * A filter to apply to the list.
+     * The read set's sequence store ID.
      */
-    filter?: ActivateReadSetFilter;
+    sequenceStoreId: SequenceStoreId;
     /**
      * The maximum number of read set activation jobs to return in one page of results.
      */
@@ -2506,26 +2778,26 @@ declare namespace Omics {
      */
     nextToken?: NextToken;
     /**
-     * The read set's sequence store ID.
+     * A filter to apply to the list.
      */
-    sequenceStoreId: SequenceStoreId;
+    filter?: ActivateReadSetFilter;
   }
   export type ListReadSetActivationJobsRequestMaxResultsInteger = number;
   export interface ListReadSetActivationJobsResponse {
     /**
-     * A list of jobs.
-     */
-    activationJobs?: ActivateReadSetJobList;
-    /**
      * A pagination token that's included if more results are available.
      */
     nextToken?: NextToken;
+    /**
+     * A list of jobs.
+     */
+    activationJobs?: ActivateReadSetJobList;
   }
   export interface ListReadSetExportJobsRequest {
     /**
-     * A filter to apply to the list.
+     * The jobs' sequence store ID.
      */
-    filter?: ExportReadSetFilter;
+    sequenceStoreId: SequenceStoreId;
     /**
      * The maximum number of jobs to return in one page of results.
      */
@@ -2535,26 +2807,22 @@ declare namespace Omics {
      */
     nextToken?: NextToken;
     /**
-     * The jobs' sequence store ID.
+     * A filter to apply to the list.
      */
-    sequenceStoreId: SequenceStoreId;
+    filter?: ExportReadSetFilter;
   }
   export type ListReadSetExportJobsRequestMaxResultsInteger = number;
   export interface ListReadSetExportJobsResponse {
     /**
-     * A list of jobs.
-     */
-    exportJobs?: ExportReadSetJobDetailList;
-    /**
      * A pagination token that's included if more results are available.
      */
     nextToken?: NextToken;
+    /**
+     * A list of jobs.
+     */
+    exportJobs?: ExportReadSetJobDetailList;
   }
   export interface ListReadSetImportJobsRequest {
-    /**
-     * A filter to apply to the list.
-     */
-    filter?: ImportReadSetFilter;
     /**
      * The maximum number of jobs to return in one page of results.
      */
@@ -2567,23 +2835,64 @@ declare namespace Omics {
      * The jobs' sequence store ID.
      */
     sequenceStoreId: SequenceStoreId;
+    /**
+     * A filter to apply to the list.
+     */
+    filter?: ImportReadSetFilter;
   }
   export type ListReadSetImportJobsRequestMaxResultsInteger = number;
   export interface ListReadSetImportJobsResponse {
     /**
-     * A list of jobs.
-     */
-    importJobs?: ImportReadSetJobList;
-    /**
      * A pagination token that's included if more results are available.
      */
     nextToken?: NextToken;
+    /**
+     * A list of jobs.
+     */
+    importJobs?: ImportReadSetJobList;
+  }
+  export interface ListReadSetUploadPartsRequest {
+    /**
+     *  The Sequence Store ID used for the multipart uploads. 
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     *  The ID for the initiated multipart upload. 
+     */
+    uploadId: UploadId;
+    /**
+     *  The source file for the upload part. 
+     */
+    partSource: ReadSetPartSource;
+    /**
+     *  The maximum number of read set upload parts returned in a page. 
+     */
+    maxResults?: ListReadSetUploadPartsRequestMaxResultsInteger;
+    /**
+     *  Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  Attributes used to filter for a specific subset of read set part uploads. 
+     */
+    filter?: ReadSetUploadPartListFilter;
+  }
+  export type ListReadSetUploadPartsRequestMaxResultsInteger = number;
+  export interface ListReadSetUploadPartsResponse {
+    /**
+     *  Next token returned in the response of a previous ListReadSetUploadParts call. Used to get the next page of results. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  An array of upload parts. 
+     */
+    parts?: ReadSetUploadPartList;
   }
   export interface ListReadSetsRequest {
     /**
-     * A filter to apply to the list.
+     * The jobs' sequence store ID.
      */
-    filter?: ReadSetFilter;
+    sequenceStoreId: SequenceStoreId;
     /**
      * The maximum number of read sets to return in one page of results.
      */
@@ -2593,9 +2902,9 @@ declare namespace Omics {
      */
     nextToken?: NextToken;
     /**
-     * The jobs' sequence store ID.
+     * A filter to apply to the list.
      */
-    sequenceStoreId: SequenceStoreId;
+    filter?: ReadSetFilter;
   }
   export type ListReadSetsRequestMaxResultsInteger = number;
   export interface ListReadSetsResponse {
@@ -2610,10 +2919,6 @@ declare namespace Omics {
   }
   export interface ListReferenceImportJobsRequest {
     /**
-     * A filter to apply to the list.
-     */
-    filter?: ImportReferenceFilter;
-    /**
      * The maximum number of jobs to return in one page of results.
      */
     maxResults?: ListReferenceImportJobsRequestMaxResultsInteger;
@@ -2625,23 +2930,23 @@ declare namespace Omics {
      * The job's reference store ID.
      */
     referenceStoreId: ReferenceStoreId;
+    /**
+     * A filter to apply to the list.
+     */
+    filter?: ImportReferenceFilter;
   }
   export type ListReferenceImportJobsRequestMaxResultsInteger = number;
   export interface ListReferenceImportJobsResponse {
     /**
-     * A lis of jobs.
-     */
-    importJobs?: ImportReferenceJobList;
-    /**
      * A pagination token that's included if more results are available.
      */
     nextToken?: NextToken;
+    /**
+     * A lis of jobs.
+     */
+    importJobs?: ImportReferenceJobList;
   }
   export interface ListReferenceStoresRequest {
-    /**
-     * A filter to apply to the list.
-     */
-    filter?: ReferenceStoreFilter;
     /**
      * The maximum number of stores to return in one page of results.
      */
@@ -2650,6 +2955,10 @@ declare namespace Omics {
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     nextToken?: NextToken;
+    /**
+     * A filter to apply to the list.
+     */
+    filter?: ReferenceStoreFilter;
   }
   export type ListReferenceStoresRequestMaxResultsInteger = number;
   export interface ListReferenceStoresResponse {
@@ -2664,9 +2973,9 @@ declare namespace Omics {
   }
   export interface ListReferencesRequest {
     /**
-     * A filter to apply to the list.
+     * The references' reference store ID.
      */
-    filter?: ReferenceFilter;
+    referenceStoreId: ReferenceStoreId;
     /**
      * The maximum number of references to return in one page of results.
      */
@@ -2676,9 +2985,9 @@ declare namespace Omics {
      */
     nextToken?: NextToken;
     /**
-     * The references' reference store ID.
+     * A filter to apply to the list.
      */
-    referenceStoreId: ReferenceStoreId;
+    filter?: ReferenceFilter;
   }
   export type ListReferencesRequestMaxResultsInteger = number;
   export interface ListReferencesResponse {
@@ -2693,10 +3002,6 @@ declare namespace Omics {
   }
   export interface ListRunGroupsRequest {
     /**
-     * The maximum number of run groups to return in one page of results.
-     */
-    maxResults?: ListRunGroupsRequestMaxResultsInteger;
-    /**
      * The run groups' name.
      */
     name?: RunGroupName;
@@ -2704,6 +3009,10 @@ declare namespace Omics {
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     startingToken?: RunGroupListToken;
+    /**
+     * The maximum number of run groups to return in one page of results.
+     */
+    maxResults?: ListRunGroupsRequestMaxResultsInteger;
   }
   export type ListRunGroupsRequestMaxResultsInteger = number;
   export interface ListRunGroupsResponse {
@@ -2722,17 +3031,17 @@ declare namespace Omics {
      */
     id: RunId;
     /**
-     * The maximum number of run tasks to return in one page of results.
+     * Filter the list by status.
      */
-    maxResults?: ListRunTasksRequestMaxResultsInteger;
+    status?: TaskStatus;
     /**
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     startingToken?: TaskListToken;
     /**
-     * Filter the list by status.
+     * The maximum number of run tasks to return in one page of results.
      */
-    status?: TaskStatus;
+    maxResults?: ListRunTasksRequestMaxResultsInteger;
   }
   export type ListRunTasksRequestMaxResultsInteger = number;
   export interface ListRunTasksResponse {
@@ -2747,10 +3056,6 @@ declare namespace Omics {
   }
   export interface ListRunsRequest {
     /**
-     * The maximum number of runs to return in one page of results.
-     */
-    maxResults?: ListRunsRequestMaxResultsInteger;
-    /**
      * Filter the list by run name.
      */
     name?: RunName;
@@ -2762,6 +3067,14 @@ declare namespace Omics {
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     startingToken?: RunListToken;
+    /**
+     * The maximum number of runs to return in one page of results.
+     */
+    maxResults?: ListRunsRequestMaxResultsInteger;
+    /**
+     *  The status of a run. 
+     */
+    status?: RunStatus;
   }
   export type ListRunsRequestMaxResultsInteger = number;
   export interface ListRunsResponse {
@@ -2776,10 +3089,6 @@ declare namespace Omics {
   }
   export interface ListSequenceStoresRequest {
     /**
-     * A filter to apply to the list.
-     */
-    filter?: SequenceStoreFilter;
-    /**
      * The maximum number of stores to return in one page of results.
      */
     maxResults?: ListSequenceStoresRequestMaxResultsInteger;
@@ -2787,6 +3096,10 @@ declare namespace Omics {
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     nextToken?: NextToken;
+    /**
+     * A filter to apply to the list.
+     */
+    filter?: SequenceStoreFilter;
   }
   export type ListSequenceStoresRequestMaxResultsInteger = number;
   export interface ListSequenceStoresResponse {
@@ -2823,34 +3136,34 @@ declare namespace Omics {
   }
   export interface ListVariantImportJobsRequest {
     /**
-     * A filter to apply to the list.
+     * The maximum number of import jobs to return in one page of results.
      */
-    filter?: ListVariantImportJobsFilter;
+    maxResults?: ListVariantImportJobsRequestMaxResultsInteger;
     /**
      * A list of job IDs.
      */
     ids?: ListVariantImportJobsRequestIdsList;
     /**
-     * The maximum number of import jobs to return in one page of results.
-     */
-    maxResults?: ListVariantImportJobsRequestMaxResultsInteger;
-    /**
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     nextToken?: ListVariantImportJobsRequestNextTokenString;
+    /**
+     * A filter to apply to the list.
+     */
+    filter?: ListVariantImportJobsFilter;
   }
   export type ListVariantImportJobsRequestIdsList = ResourceIdentifier[];
   export type ListVariantImportJobsRequestMaxResultsInteger = number;
   export type ListVariantImportJobsRequestNextTokenString = string;
   export interface ListVariantImportJobsResponse {
     /**
-     * A pagination token that's included if more results are available.
-     */
-    nextToken?: String;
-    /**
      * A list of jobs.
      */
     variantImportJobs?: VariantImportJobItems;
+    /**
+     * A pagination token that's included if more results are available.
+     */
+    nextToken?: String;
   }
   export interface ListVariantStoresFilter {
     /**
@@ -2860,40 +3173,40 @@ declare namespace Omics {
   }
   export interface ListVariantStoresRequest {
     /**
-     * A filter to apply to the list.
+     * The maximum number of stores to return in one page of results.
      */
-    filter?: ListVariantStoresFilter;
+    maxResults?: ListVariantStoresRequestMaxResultsInteger;
     /**
      * A list of store IDs.
      */
     ids?: ListVariantStoresRequestIdsList;
     /**
-     * The maximum number of stores to return in one page of results.
-     */
-    maxResults?: ListVariantStoresRequestMaxResultsInteger;
-    /**
      * Specify the pagination token from a previous request to retrieve the next page of results.
      */
     nextToken?: ListVariantStoresRequestNextTokenString;
+    /**
+     * A filter to apply to the list.
+     */
+    filter?: ListVariantStoresFilter;
   }
   export type ListVariantStoresRequestIdsList = ResourceIdentifier[];
   export type ListVariantStoresRequestMaxResultsInteger = number;
   export type ListVariantStoresRequestNextTokenString = string;
   export interface ListVariantStoresResponse {
     /**
-     * A pagination token that's included if more results are available.
-     */
-    nextToken?: String;
-    /**
      * A list of variant stores.
      */
     variantStores?: VariantStoreItems;
+    /**
+     * A pagination token that's included if more results are available.
+     */
+    nextToken?: String;
   }
   export interface ListWorkflowsRequest {
     /**
-     * The maximum number of workflows to return in one page of results.
+     * The workflows' type.
      */
-    maxResults?: ListWorkflowsRequestMaxResultsInteger;
+    type?: WorkflowType;
     /**
      * The workflows' name.
      */
@@ -2903,9 +3216,9 @@ declare namespace Omics {
      */
     startingToken?: WorkflowListToken;
     /**
-     * The workflows' type.
+     * The maximum number of workflows to return in one page of results.
      */
-    type?: WorkflowType;
+    maxResults?: ListWorkflowsRequestMaxResultsInteger;
   }
   export type ListWorkflowsRequestMaxResultsInteger = number;
   export interface ListWorkflowsResponse {
@@ -2920,6 +3233,53 @@ declare namespace Omics {
   }
   export type Long = number;
   export type Md5 = string;
+  export type MultipartReadSetUploadList = MultipartReadSetUploadListItem[];
+  export interface MultipartReadSetUploadListItem {
+    /**
+     *  The sequence store ID used for the multipart upload. 
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     *  The ID for the initiated multipart upload. 
+     */
+    uploadId: UploadId;
+    /**
+     *  The type of file the read set originated from. 
+     */
+    sourceFileType: FileType;
+    /**
+     *  The read set source's subject ID. 
+     */
+    subjectId: SubjectId;
+    /**
+     *  The read set source's sample ID. 
+     */
+    sampleId: SampleId;
+    /**
+     *  The source of an uploaded part. 
+     */
+    generatedFrom: GeneratedFrom;
+    /**
+     *  The source's reference ARN. 
+     */
+    referenceArn: ReferenceArn;
+    /**
+     *  The name of a read set. 
+     */
+    name?: ReadSetName;
+    /**
+     *  The description of a read set. 
+     */
+    description?: ReadSetDescription;
+    /**
+     *  Any tags you wish to add to a read set. 
+     */
+    tags?: TagMap;
+    /**
+     *  The time stamp for when a direct upload was created. 
+     */
+    creationTime: SyntheticTimestamp_date_time;
+  }
   export type NextToken = string;
   export type PrimitiveBoolean = boolean;
   export type Quote = string;
@@ -2927,29 +3287,13 @@ declare namespace Omics {
   export type Range = string;
   export interface ReadOptions {
     /**
-     * The file's comment character.
+     * The file's field separator.
      */
-    comment?: CommentChar;
+    sep?: Separator;
     /**
      * The file's encoding.
      */
     encoding?: Encoding;
-    /**
-     * A character for escaping quotes in the file.
-     */
-    escape?: EscapeChar;
-    /**
-     * Whether quotes need to be escaped in the file.
-     */
-    escapeQuotes?: EscapeQuotes;
-    /**
-     * Whether the file has a header row.
-     */
-    header?: Header;
-    /**
-     * A line separator for the file.
-     */
-    lineSep?: LineSep;
     /**
      * The file's quote character.
      */
@@ -2959,22 +3303,38 @@ declare namespace Omics {
      */
     quoteAll?: QuoteAll;
     /**
-     * The file's field separator.
+     * A character for escaping quotes in the file.
      */
-    sep?: Separator;
+    escape?: EscapeChar;
+    /**
+     * Whether quotes need to be escaped in the file.
+     */
+    escapeQuotes?: EscapeQuotes;
+    /**
+     * The file's comment character.
+     */
+    comment?: CommentChar;
+    /**
+     * Whether the file has a header row.
+     */
+    header?: Header;
+    /**
+     * A line separator for the file.
+     */
+    lineSep?: LineSep;
   }
   export type ReadSetActivationJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string;
   export type ReadSetActivationJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string;
   export type ReadSetArn = string;
   export interface ReadSetBatchError {
     /**
-     * The error's code.
-     */
-    code: String;
-    /**
      * The error's ID.
      */
     id: ReadSetId;
+    /**
+     * The error's code.
+     */
+    code: String;
     /**
      * The error's message.
      */
@@ -2987,10 +3347,6 @@ declare namespace Omics {
   export type ReadSetFile = "SOURCE1"|"SOURCE2"|"INDEX"|string;
   export interface ReadSetFiles {
     /**
-     * The files' index.
-     */
-    index?: FileInformation;
-    /**
      * The location of the first file in Amazon S3.
      */
     source1?: FileInformation;
@@ -2998,8 +3354,24 @@ declare namespace Omics {
      * The location of the second file in Amazon S3.
      */
     source2?: FileInformation;
+    /**
+     * The files' index.
+     */
+    index?: FileInformation;
   }
   export interface ReadSetFilter {
+    /**
+     * A name to filter on.
+     */
+    name?: ReadSetName;
+    /**
+     * A status to filter on.
+     */
+    status?: ReadSetStatus;
+    /**
+     * A genome reference ARN to filter on.
+     */
+    referenceArn?: ReferenceArn;
     /**
      * The filter's start date.
      */
@@ -3009,17 +3381,17 @@ declare namespace Omics {
      */
     createdBefore?: SyntheticTimestamp_date_time;
     /**
-     * A name to filter on.
+     *  The read set source's sample ID. 
      */
-    name?: ReadSetName;
+    sampleId?: SampleId;
     /**
-     * A genome reference ARN to filter on.
+     *  The read set source's subject ID. 
      */
-    referenceArn?: ReferenceArn;
+    subjectId?: SubjectId;
     /**
-     * A status to filter on.
+     *  Where the source originated. 
      */
-    status?: ReadSetStatus;
+    generatedFrom?: GeneratedFrom;
   }
   export type ReadSetId = string;
   export type ReadSetIdList = ReadSetId[];
@@ -3028,68 +3400,122 @@ declare namespace Omics {
   export type ReadSetList = ReadSetListItem[];
   export interface ReadSetListItem {
     /**
-     * The read set's ARN.
-     */
-    arn: ReadSetArn;
-    /**
-     * When the read set was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The read set's description.
-     */
-    description?: ReadSetDescription;
-    /**
-     * The read set's file type.
-     */
-    fileType: FileType;
-    /**
      * The read set's ID.
      */
     id: ReadSetId;
     /**
-     * The read set's name.
+     * The read set's ARN.
      */
-    name?: ReadSetName;
-    /**
-     * The read set's genome reference ARN.
-     */
-    referenceArn?: ReferenceArn;
-    /**
-     * The read set's sample ID.
-     */
-    sampleId?: SampleId;
-    sequenceInformation?: SequenceInformation;
+    arn: ReadSetArn;
     /**
      * The read set's sequence store ID.
      */
     sequenceStoreId: SequenceStoreId;
     /**
+     * The read set's subject ID.
+     */
+    subjectId?: SubjectId;
+    /**
+     * The read set's sample ID.
+     */
+    sampleId?: SampleId;
+    /**
      * The read set's status.
      */
     status: ReadSetStatus;
     /**
-     * The read set's subject ID.
+     * The read set's name.
      */
-    subjectId?: SubjectId;
+    name?: ReadSetName;
+    /**
+     * The read set's description.
+     */
+    description?: ReadSetDescription;
+    /**
+     * The read set's genome reference ARN.
+     */
+    referenceArn?: ReferenceArn;
+    /**
+     * The read set's file type.
+     */
+    fileType: FileType;
+    sequenceInformation?: SequenceInformation;
+    /**
+     * When the read set was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     *  The status for a read set. It provides more detail as to why the read set has a status. 
+     */
+    statusMessage?: ReadSetStatusMessage;
   }
   export type ReadSetName = string;
-  export type ReadSetStatus = "ARCHIVED"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|string;
+  export type ReadSetPartSource = "SOURCE1"|"SOURCE2"|string;
+  export type ReadSetPartStreamingBlob = Buffer|Uint8Array|Blob|string|Readable;
+  export type ReadSetStatus = "ARCHIVED"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|"PROCESSING_UPLOAD"|"UPLOAD_FAILED"|string;
+  export type ReadSetStatusMessage = string;
   export type ReadSetStreamingBlob = Buffer|Uint8Array|Blob|string|Readable;
+  export type ReadSetUploadPartList = ReadSetUploadPartListItem[];
+  export interface ReadSetUploadPartListFilter {
+    /**
+     *  Filters for read set uploads after a specified time. 
+     */
+    createdAfter?: SyntheticTimestamp_date_time;
+    /**
+     *  Filters for read set part uploads before a specified time. 
+     */
+    createdBefore?: SyntheticTimestamp_date_time;
+  }
+  export interface ReadSetUploadPartListItem {
+    /**
+     *  The number identifying the part in an upload. 
+     */
+    partNumber: ReadSetUploadPartListItemPartNumberInteger;
+    /**
+     *  The size of the the part in an upload. 
+     */
+    partSize: ReadSetUploadPartListItemPartSizeLong;
+    /**
+     *  The origin of the part being direct uploaded. 
+     */
+    partSource: ReadSetPartSource;
+    /**
+     *  A unique identifier used to confirm that parts are being added to the correct upload. 
+     */
+    checksum: String;
+    /**
+     *  The time stamp for when a direct upload was created. 
+     */
+    creationTime?: SyntheticTimestamp_date_time;
+    /**
+     *  The time stamp for the most recent update to an uploaded part. 
+     */
+    lastUpdatedTime?: SyntheticTimestamp_date_time;
+  }
+  export type ReadSetUploadPartListItemPartNumberInteger = number;
+  export type ReadSetUploadPartListItemPartSizeLong = number;
   export type ReferenceArn = string;
   export type ReferenceDescription = string;
   export type ReferenceFile = "SOURCE"|"INDEX"|string;
   export interface ReferenceFiles {
     /**
-     * The files' index.
-     */
-    index?: FileInformation;
-    /**
      * The source file's location in Amazon S3.
      */
     source?: FileInformation;
+    /**
+     * The files' index.
+     */
+    index?: FileInformation;
   }
   export interface ReferenceFilter {
+    /**
+     * A name to filter on.
+     */
+    name?: ReferenceName;
+    /**
+     * An MD5 checksum to filter on.
+     */
+    md5?: Md5;
     /**
      * The filter's start date.
      */
@@ -3098,14 +3524,6 @@ declare namespace Omics {
      * The filter's end date.
      */
     createdBefore?: SyntheticTimestamp_date_time;
-    /**
-     * An MD5 checksum to filter on.
-     */
-    md5?: Md5;
-    /**
-     * A name to filter on.
-     */
-    name?: ReferenceName;
   }
   export type ReferenceId = string;
   export type ReferenceImportJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string;
@@ -3119,37 +3537,37 @@ declare namespace Omics {
   export type ReferenceList = ReferenceListItem[];
   export interface ReferenceListItem {
     /**
-     * The reference's ARN.
-     */
-    arn: ReferenceArn;
-    /**
-     * When the reference was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The reference's description.
-     */
-    description?: ReferenceDescription;
-    /**
      * The reference's ID.
      */
     id: ReferenceId;
     /**
-     * The reference's MD5 checksum.
+     * The reference's ARN.
      */
-    md5: Md5;
-    /**
-     * The reference's name.
-     */
-    name?: ReferenceName;
+    arn: ReferenceArn;
     /**
      * The reference's store ID.
      */
     referenceStoreId: ReferenceStoreId;
     /**
+     * The reference's MD5 checksum.
+     */
+    md5: Md5;
+    /**
      * The reference's status.
      */
     status?: ReferenceStatus;
+    /**
+     * The reference's name.
+     */
+    name?: ReferenceName;
+    /**
+     * The reference's description.
+     */
+    description?: ReferenceDescription;
+    /**
+     * When the reference was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
     /**
      * When the reference was updated.
      */
@@ -3165,14 +3583,6 @@ declare namespace Omics {
      */
     arn: ReferenceStoreArn;
     /**
-     * When the store was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The store's description.
-     */
-    description?: ReferenceStoreDescription;
-    /**
      * The store's ID.
      */
     id: ReferenceStoreId;
@@ -3181,12 +3591,24 @@ declare namespace Omics {
      */
     name?: ReferenceStoreName;
     /**
+     * The store's description.
+     */
+    description?: ReferenceStoreDescription;
+    /**
      * The store's server-side encryption (SSE) settings.
      */
     sseConfig?: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
   }
   export type ReferenceStoreDetailList = ReferenceStoreDetail[];
   export interface ReferenceStoreFilter {
+    /**
+     * The name to filter on.
+     */
+    name?: ReferenceStoreName;
     /**
      * The filter's start date.
      */
@@ -3195,10 +3617,6 @@ declare namespace Omics {
      * The filter's end date.
      */
     createdBefore?: SyntheticTimestamp_date_time;
-    /**
-     * The name to filter on.
-     */
-    name?: ReferenceStoreName;
   }
   export type ReferenceStoreId = string;
   export type ReferenceStoreName = string;
@@ -3218,32 +3636,37 @@ declare namespace Omics {
      */
     arn?: RunGroupArn;
     /**
-     * When the group was created.
-     */
-    creationTime?: RunGroupTimestamp;
-    /**
      * The group's ID.
      */
     id?: RunGroupId;
+    /**
+     * The group's name.
+     */
+    name?: RunGroupName;
     /**
      * The group's maximum CPU count setting.
      */
     maxCpus?: RunGroupListItemMaxCpusInteger;
     /**
-     * The group's maximum duration setting in minutes.
-     */
-    maxDuration?: RunGroupListItemMaxDurationInteger;
-    /**
      * The group's maximum concurrent run setting.
      */
     maxRuns?: RunGroupListItemMaxRunsInteger;
     /**
-     * The group's name.
+     * The group's maximum duration setting in minutes.
      */
-    name?: RunGroupName;
+    maxDuration?: RunGroupListItemMaxDurationInteger;
+    /**
+     * When the group was created.
+     */
+    creationTime?: RunGroupTimestamp;
+    /**
+     *  The maximum GPUs that can be used by a run group. 
+     */
+    maxGpus?: RunGroupListItemMaxGpusInteger;
   }
   export type RunGroupListItemMaxCpusInteger = number;
   export type RunGroupListItemMaxDurationInteger = number;
+  export type RunGroupListItemMaxGpusInteger = number;
   export type RunGroupListItemMaxRunsInteger = number;
   export type RunGroupListToken = string;
   export type RunGroupName = string;
@@ -3258,13 +3681,17 @@ declare namespace Omics {
      */
     arn?: RunArn;
     /**
-     * When the run was created.
-     */
-    creationTime?: RunTimestamp;
-    /**
      * The run's ID.
      */
     id?: RunId;
+    /**
+     * The run's status.
+     */
+    status?: RunStatus;
+    /**
+     * The run's workflow ID.
+     */
+    workflowId?: WorkflowId;
     /**
      * The run's name.
      */
@@ -3274,25 +3701,21 @@ declare namespace Omics {
      */
     priority?: RunListItemPriorityInteger;
     /**
-     * When the run started.
-     */
-    startTime?: RunTimestamp;
-    /**
-     * The run's status.
-     */
-    status?: RunStatus;
-    /**
-     * When the run stopped.
-     */
-    stopTime?: RunTimestamp;
-    /**
      * The run's storage capacity.
      */
     storageCapacity?: RunListItemStorageCapacityInteger;
     /**
-     * The run's workflow ID.
+     * When the run was created.
      */
-    workflowId?: WorkflowId;
+    creationTime?: RunTimestamp;
+    /**
+     * When the run started.
+     */
+    startTime?: RunTimestamp;
+    /**
+     * When the run stopped.
+     */
+    stopTime?: RunTimestamp;
   }
   export type RunListItemPriorityInteger = number;
   export type RunListItemStorageCapacityInteger = number;
@@ -3320,21 +3743,21 @@ declare namespace Omics {
   export type Separator = string;
   export interface SequenceInformation {
     /**
-     * The sequence's alignment setting.
+     * The sequence's total read count.
      */
-    alignment?: String;
-    /**
-     * Where the sequence originated.
-     */
-    generatedFrom?: GeneratedFrom;
+    totalReadCount?: Long;
     /**
      * The sequence's total base count.
      */
     totalBaseCount?: Long;
     /**
-     * The sequence's total read count.
+     * Where the sequence originated.
      */
-    totalReadCount?: Long;
+    generatedFrom?: GeneratedFrom;
+    /**
+     * The sequence's alignment setting.
+     */
+    alignment?: String;
   }
   export type SequenceStoreArn = string;
   export type SequenceStoreDescription = string;
@@ -3344,14 +3767,6 @@ declare namespace Omics {
      */
     arn: SequenceStoreArn;
     /**
-     * When the store was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The store's description.
-     */
-    description?: SequenceStoreDescription;
-    /**
      * The store's ID.
      */
     id: SequenceStoreId;
@@ -3360,12 +3775,28 @@ declare namespace Omics {
      */
     name?: SequenceStoreName;
     /**
+     * The store's description.
+     */
+    description?: SequenceStoreDescription;
+    /**
      * The store's server-side encryption (SSE) settings.
      */
     sseConfig?: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
+    /**
+     *  An S3 location that is used to store files that have failed a direct upload. 
+     */
+    fallbackLocation?: S3Destination;
   }
   export type SequenceStoreDetailList = SequenceStoreDetail[];
   export interface SequenceStoreFilter {
+    /**
+     * A name to filter on.
+     */
+    name?: SequenceStoreName;
     /**
      * The filter's start date.
      */
@@ -3374,10 +3805,6 @@ declare namespace Omics {
      * The filter's end date.
      */
     createdBefore?: SyntheticTimestamp_date_time;
-    /**
-     * A name to filter on.
-     */
-    name?: SequenceStoreName;
   }
   export type SequenceStoreId = string;
   export type SequenceStoreName = string;
@@ -3393,13 +3820,13 @@ declare namespace Omics {
   }
   export interface SseConfig {
     /**
-     * An encryption key ARN.
-     */
-    keyArn?: SseConfigKeyArnString;
-    /**
      * The encryption type.
      */
     type: EncryptionType;
+    /**
+     * An encryption key ARN.
+     */
+    keyArn?: SseConfigKeyArnString;
   }
   export type SseConfigKeyArnString = string;
   export interface StartAnnotationImportRequest {
@@ -3408,21 +3835,25 @@ declare namespace Omics {
      */
     destinationName: StoreName;
     /**
-     * Formatting options for the annotation file.
+     * A service role for the job.
      */
-    formatOptions?: FormatOptions;
+    roleArn: Arn;
     /**
      * Items to import.
      */
     items: AnnotationImportItemSources;
     /**
-     * A service role for the job.
+     * Formatting options for the annotation file.
      */
-    roleArn: Arn;
+    formatOptions?: FormatOptions;
     /**
      * The job's left normalization setting.
      */
     runLeftNormalization?: RunLeftNormalization;
+    /**
+     *  The annotation schema generated by the parsed annotation data. 
+     */
+    annotationFields?: AnnotationFieldMap;
   }
   export interface StartAnnotationImportResponse {
     /**
@@ -3432,13 +3863,13 @@ declare namespace Omics {
   }
   export interface StartReadSetActivationJobRequest {
     /**
-     * To ensure that jobs don't run multiple times, specify a unique token for each job.
-     */
-    clientToken?: ClientToken;
-    /**
      * The read set's sequence store ID.
      */
     sequenceStoreId: SequenceStoreId;
+    /**
+     * To ensure that jobs don't run multiple times, specify a unique token for each job.
+     */
+    clientToken?: ClientToken;
     /**
      * The job's source files.
      */
@@ -3446,10 +3877,6 @@ declare namespace Omics {
   }
   export type StartReadSetActivationJobRequestSourcesList = StartReadSetActivationJobSourceItem[];
   export interface StartReadSetActivationJobResponse {
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
     /**
      * The job's ID.
      */
@@ -3462,6 +3889,10 @@ declare namespace Omics {
      * The job's status.
      */
     status: ReadSetActivationJobStatus;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
   }
   export interface StartReadSetActivationJobSourceItem {
     /**
@@ -3471,9 +3902,9 @@ declare namespace Omics {
   }
   export interface StartReadSetExportJobRequest {
     /**
-     * To ensure that jobs don't run multiple times, specify a unique token for each job.
+     * The read set's sequence store ID.
      */
-    clientToken?: ClientToken;
+    sequenceStoreId: SequenceStoreId;
     /**
      * A location for exported files in Amazon S3.
      */
@@ -3483,9 +3914,9 @@ declare namespace Omics {
      */
     roleArn: RoleArn;
     /**
-     * The read set's sequence store ID.
+     * To ensure that jobs don't run multiple times, specify a unique token for each job.
      */
-    sequenceStoreId: SequenceStoreId;
+    clientToken?: ClientToken;
     /**
      * The job's source files.
      */
@@ -3493,14 +3924,6 @@ declare namespace Omics {
   }
   export type StartReadSetExportJobRequestSourcesList = ExportReadSet[];
   export interface StartReadSetExportJobResponse {
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
-     * The job's output location.
-     */
-    destination: S3Destination;
     /**
      * The job's ID.
      */
@@ -3510,23 +3933,31 @@ declare namespace Omics {
      */
     sequenceStoreId: SequenceStoreId;
     /**
+     * The job's output location.
+     */
+    destination: S3Destination;
+    /**
      * The job's status.
      */
     status: ReadSetExportJobStatus;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
   }
   export interface StartReadSetImportJobRequest {
     /**
-     * To ensure that jobs don't run multiple times, specify a unique token for each job.
+     * The read set's sequence store ID.
      */
-    clientToken?: ClientToken;
+    sequenceStoreId: SequenceStoreId;
     /**
      * A service role for the job.
      */
     roleArn: RoleArn;
     /**
-     * The read set's sequence store ID.
+     * To ensure that jobs don't run multiple times, specify a unique token for each job.
      */
-    sequenceStoreId: SequenceStoreId;
+    clientToken?: ClientToken;
     /**
      * The job's source files.
      */
@@ -3535,69 +3966,65 @@ declare namespace Omics {
   export type StartReadSetImportJobRequestSourcesList = StartReadSetImportJobSourceItem[];
   export interface StartReadSetImportJobResponse {
     /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
-    /**
      * The job's ID.
      */
     id: ImportJobId;
-    /**
-     * The job's service role ARN.
-     */
-    roleArn: RoleArn;
     /**
      * The read set's sequence store ID.
      */
     sequenceStoreId: SequenceStoreId;
     /**
+     * The job's service role ARN.
+     */
+    roleArn: RoleArn;
+    /**
      * The job's status.
      */
     status: ReadSetImportJobStatus;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
   }
   export interface StartReadSetImportJobSourceItem {
-    /**
-     * The source's description.
-     */
-    description?: ReadSetDescription;
-    /**
-     * Where the source originated.
-     */
-    generatedFrom?: GeneratedFrom;
-    /**
-     * The source's name.
-     */
-    name?: ReadSetName;
-    /**
-     * The source's reference ARN.
-     */
-    referenceArn: ReferenceArn;
-    /**
-     * The source's sample ID.
-     */
-    sampleId: SampleId;
-    /**
-     * The source's file type.
-     */
-    sourceFileType: FileType;
     /**
      * The source files' location in Amazon S3.
      */
     sourceFiles: SourceFiles;
     /**
+     * The source's file type.
+     */
+    sourceFileType: FileType;
+    /**
      * The source's subject ID.
      */
     subjectId: SubjectId;
+    /**
+     * The source's sample ID.
+     */
+    sampleId: SampleId;
+    /**
+     * Where the source originated.
+     */
+    generatedFrom?: GeneratedFrom;
+    /**
+     * The source's reference ARN.
+     */
+    referenceArn: ReferenceArn;
+    /**
+     * The source's name.
+     */
+    name?: ReadSetName;
+    /**
+     * The source's description.
+     */
+    description?: ReadSetDescription;
     /**
      * The source's tags.
      */
     tags?: TagMap;
   }
   export interface StartReferenceImportJobRequest {
-    /**
-     * To ensure that jobs don't run multiple times, specify a unique token for each job.
-     */
-    clientToken?: ClientToken;
     /**
      * The job's reference store ID.
      */
@@ -3607,16 +4034,16 @@ declare namespace Omics {
      */
     roleArn: RoleArn;
     /**
+     * To ensure that jobs don't run multiple times, specify a unique token for each job.
+     */
+    clientToken?: ClientToken;
+    /**
      * The job's source files.
      */
     sources: StartReferenceImportJobRequestSourcesList;
   }
   export type StartReferenceImportJobRequestSourcesList = StartReferenceImportJobSourceItem[];
   export interface StartReferenceImportJobResponse {
-    /**
-     * When the job was created.
-     */
-    creationTime: SyntheticTimestamp_date_time;
     /**
      * The job's ID.
      */
@@ -3633,70 +4060,30 @@ declare namespace Omics {
      * The job's status.
      */
     status: ReferenceImportJobStatus;
+    /**
+     * When the job was created.
+     */
+    creationTime: SyntheticTimestamp_date_time;
   }
   export interface StartReferenceImportJobSourceItem {
     /**
-     * The source's description.
+     * The source file's location in Amazon S3.
      */
-    description?: ReferenceDescription;
+    sourceFile: S3Uri;
     /**
      * The source's name.
      */
     name: ReferenceName;
     /**
-     * The source file's location in Amazon S3.
+     * The source's description.
      */
-    sourceFile: S3Uri;
+    description?: ReferenceDescription;
     /**
      * The source's tags.
      */
     tags?: TagMap;
   }
   export interface StartRunRequest {
-    /**
-     * A log level for the run.
-     */
-    logLevel?: RunLogLevel;
-    /**
-     * A name for the run.
-     */
-    name?: RunName;
-    /**
-     * An output URI for the run.
-     */
-    outputUri?: RunOutputUri;
-    /**
-     * Parameters for the run.
-     */
-    parameters?: RunParameters;
-    /**
-     * A priority for the run.
-     */
-    priority?: StartRunRequestPriorityInteger;
-    /**
-     * To ensure that requests don't run multiple times, specify a unique ID for each request.
-     */
-    requestId: RunRequestId;
-    /**
-     * A service role for the run.
-     */
-    roleArn: RunRoleArn;
-    /**
-     * The run's group ID.
-     */
-    runGroupId?: RunGroupId;
-    /**
-     * The run's ID.
-     */
-    runId?: RunId;
-    /**
-     * A storage capacity for the run in gigabytes.
-     */
-    storageCapacity?: StartRunRequestStorageCapacityInteger;
-    /**
-     * Tags for the run.
-     */
-    tags?: TagMap;
     /**
      * The run's workflow ID.
      */
@@ -3705,6 +4092,50 @@ declare namespace Omics {
      * The run's workflows type.
      */
     workflowType?: WorkflowType;
+    /**
+     * The run's ID.
+     */
+    runId?: RunId;
+    /**
+     * A service role for the run.
+     */
+    roleArn: RunRoleArn;
+    /**
+     * A name for the run.
+     */
+    name?: RunName;
+    /**
+     * The run's group ID.
+     */
+    runGroupId?: RunGroupId;
+    /**
+     * A priority for the run.
+     */
+    priority?: StartRunRequestPriorityInteger;
+    /**
+     * Parameters for the run.
+     */
+    parameters?: RunParameters;
+    /**
+     * A storage capacity for the run in gigabytes.
+     */
+    storageCapacity?: StartRunRequestStorageCapacityInteger;
+    /**
+     * An output URI for the run.
+     */
+    outputUri?: RunOutputUri;
+    /**
+     * A log level for the run.
+     */
+    logLevel?: RunLogLevel;
+    /**
+     * Tags for the run.
+     */
+    tags?: TagMap;
+    /**
+     * To ensure that requests don't run multiple times, specify a unique ID for each request.
+     */
+    requestId: RunRequestId;
   }
   export type StartRunRequestPriorityInteger = number;
   export type StartRunRequestStorageCapacityInteger = number;
@@ -3732,17 +4163,21 @@ declare namespace Omics {
      */
     destinationName: StoreName;
     /**
-     * Items to import.
-     */
-    items: VariantImportItemSources;
-    /**
      * A service role for the job.
      */
     roleArn: Arn;
     /**
+     * Items to import.
+     */
+    items: VariantImportItemSources;
+    /**
      * The job's left normalization setting.
      */
     runLeftNormalization?: RunLeftNormalization;
+    /**
+     *  The annotation schema generated by the parsed annotation data. 
+     */
+    annotationFields?: AnnotationFieldMap;
   }
   export interface StartVariantImportResponse {
     /**
@@ -3786,39 +4221,44 @@ declare namespace Omics {
   export type TaskList = TaskListItem[];
   export interface TaskListItem {
     /**
-     * The task's CPU count.
+     * The task's ID.
      */
-    cpus?: TaskListItemCpusInteger;
-    /**
-     * When the task was created.
-     */
-    creationTime?: TaskTimestamp;
-    /**
-     * The task's memory use in gigabyes.
-     */
-    memory?: TaskListItemMemoryInteger;
-    /**
-     * The task's name.
-     */
-    name?: TaskName;
-    /**
-     * When the task started.
-     */
-    startTime?: TaskTimestamp;
+    taskId?: TaskId;
     /**
      * The task's status.
      */
     status?: TaskStatus;
     /**
+     * The task's name.
+     */
+    name?: TaskName;
+    /**
+     * The task's CPU count.
+     */
+    cpus?: TaskListItemCpusInteger;
+    /**
+     * The task's memory use in gigabyes.
+     */
+    memory?: TaskListItemMemoryInteger;
+    /**
+     * When the task was created.
+     */
+    creationTime?: TaskTimestamp;
+    /**
+     * When the task started.
+     */
+    startTime?: TaskTimestamp;
+    /**
      * When the task stopped.
      */
     stopTime?: TaskTimestamp;
     /**
-     * The task's ID.
+     *  The number of Graphics Processing Units (GPU) specified for the task. 
      */
-    taskId?: TaskId;
+    gpus?: TaskListItemGpusInteger;
   }
   export type TaskListItemCpusInteger = number;
+  export type TaskListItemGpusInteger = number;
   export type TaskListItemMemoryInteger = number;
   export type TaskListToken = string;
   export type TaskLogStream = string;
@@ -3861,31 +4301,19 @@ declare namespace Omics {
   }
   export interface UpdateAnnotationStoreRequest {
     /**
-     * A description for the store.
-     */
-    description?: StoreDescription;
-    /**
      * A name for the store.
      */
     name: String;
+    /**
+     * A description for the store.
+     */
+    description?: StoreDescription;
   }
   export interface UpdateAnnotationStoreResponse {
-    /**
-     * When the store was created.
-     */
-    creationTime: CreationTime;
-    /**
-     * The store's description.
-     */
-    description: StoreDescription;
     /**
      * The store's ID.
      */
     id: ResourceId;
-    /**
-     * The store's name.
-     */
-    name: String;
     /**
      * The store's genome reference.
      */
@@ -3895,17 +4323,29 @@ declare namespace Omics {
      */
     status: StoreStatus;
     /**
-     * The annotation file format of the store.
+     * The store's name.
      */
-    storeFormat?: StoreFormat;
+    name: String;
+    /**
+     * The store's description.
+     */
+    description: StoreDescription;
+    /**
+     * When the store was created.
+     */
+    creationTime: CreationTime;
+    /**
+     * When the store was updated.
+     */
+    updateTime: UpdateTime;
     /**
      * Parsing options for the store.
      */
     storeOptions?: StoreOptions;
     /**
-     * When the store was updated.
+     * The annotation file format of the store.
      */
-    updateTime: UpdateTime;
+    storeFormat?: StoreFormat;
   }
   export interface UpdateRunGroupRequest {
     /**
@@ -3913,53 +4353,46 @@ declare namespace Omics {
      */
     id: RunGroupId;
     /**
+     * A name for the group.
+     */
+    name?: RunGroupName;
+    /**
      * The maximum number of CPUs to use.
      */
     maxCpus?: UpdateRunGroupRequestMaxCpusInteger;
-    /**
-     * A maximum run time for the group in minutes.
-     */
-    maxDuration?: UpdateRunGroupRequestMaxDurationInteger;
     /**
      * The maximum number of concurrent runs for the group.
      */
     maxRuns?: UpdateRunGroupRequestMaxRunsInteger;
     /**
-     * A name for the group.
+     * A maximum run time for the group in minutes.
      */
-    name?: RunGroupName;
+    maxDuration?: UpdateRunGroupRequestMaxDurationInteger;
+    /**
+     *  The maximum GPUs that can be used by a run group. 
+     */
+    maxGpus?: UpdateRunGroupRequestMaxGpusInteger;
   }
   export type UpdateRunGroupRequestMaxCpusInteger = number;
   export type UpdateRunGroupRequestMaxDurationInteger = number;
+  export type UpdateRunGroupRequestMaxGpusInteger = number;
   export type UpdateRunGroupRequestMaxRunsInteger = number;
   export type UpdateTime = Date;
   export interface UpdateVariantStoreRequest {
     /**
-     * A description for the store.
-     */
-    description?: StoreDescription;
-    /**
      * A name for the store.
      */
     name: String;
+    /**
+     * A description for the store.
+     */
+    description?: StoreDescription;
   }
   export interface UpdateVariantStoreResponse {
-    /**
-     * When the store was created.
-     */
-    creationTime: CreationTime;
-    /**
-     * The store's description.
-     */
-    description: StoreDescription;
     /**
      * The store's ID.
      */
     id: ResourceId;
-    /**
-     * The store's name.
-     */
-    name: String;
     /**
      * The store's genome reference.
      */
@@ -3969,15 +4402,23 @@ declare namespace Omics {
      */
     status: StoreStatus;
     /**
+     * The store's name.
+     */
+    name: String;
+    /**
+     * The store's description.
+     */
+    description: StoreDescription;
+    /**
+     * When the store was created.
+     */
+    creationTime: CreationTime;
+    /**
      * When the store was updated.
      */
     updateTime: UpdateTime;
   }
   export interface UpdateWorkflowRequest {
-    /**
-     * A description for the workflow.
-     */
-    description?: WorkflowDescription;
     /**
      * The workflow's ID.
      */
@@ -3986,16 +4427,50 @@ declare namespace Omics {
      * A name for the workflow.
      */
     name?: WorkflowName;
+    /**
+     * A description for the workflow.
+     */
+    description?: WorkflowDescription;
+  }
+  export type UploadId = string;
+  export interface UploadReadSetPartRequest {
+    /**
+     *  The Sequence Store ID used for the multipart upload. 
+     */
+    sequenceStoreId: SequenceStoreId;
+    /**
+     *  The ID for the initiated multipart upload. 
+     */
+    uploadId: UploadId;
+    /**
+     *  The source file for an upload part. 
+     */
+    partSource: ReadSetPartSource;
+    /**
+     *  The number of the part being uploaded. 
+     */
+    partNumber: UploadReadSetPartRequestPartNumberInteger;
+    /**
+     *  The read set data to upload for a part. 
+     */
+    payload: ReadSetPartStreamingBlob;
+  }
+  export type UploadReadSetPartRequestPartNumberInteger = number;
+  export interface UploadReadSetPartResponse {
+    /**
+     *  An identifier used to confirm that parts are being added to the intended upload. 
+     */
+    checksum: String;
   }
   export interface VariantImportItemDetail {
-    /**
-     * The item's job status.
-     */
-    jobStatus: JobStatus;
     /**
      * The source file's location in Amazon S3.
      */
     source: S3Uri;
+    /**
+     * The item's job status.
+     */
+    jobStatus: JobStatus;
     /**
      *  A message that provides additional context about a job 
      */
@@ -4011,95 +4486,99 @@ declare namespace Omics {
   export type VariantImportItemSources = VariantImportItemSource[];
   export interface VariantImportJobItem {
     /**
-     * When the job completed.
+     * The job's ID.
      */
-    completionTime?: CompletionTime;
-    /**
-     * When the job was created.
-     */
-    creationTime: CreationTime;
+    id: String;
     /**
      * The job's destination variant store.
      */
     destinationName: String;
     /**
-     * The job's ID.
-     */
-    id: String;
-    /**
      * The job's service role ARN.
      */
     roleArn: Arn;
-    /**
-     * The job's left normalization setting.
-     */
-    runLeftNormalization?: RunLeftNormalization;
     /**
      * The job's status.
      */
     status: JobStatus;
     /**
-     * When the job was updated.
-     */
-    updateTime: UpdateTime;
-  }
-  export type VariantImportJobItems = VariantImportJobItem[];
-  export interface VariantStoreItem {
-    /**
-     * When the store was created.
+     * When the job was created.
      */
     creationTime: CreationTime;
     /**
-     * The store's description.
+     * When the job was updated.
      */
-    description: StoreDescription;
+    updateTime: UpdateTime;
+    /**
+     * When the job completed.
+     */
+    completionTime?: CompletionTime;
+    /**
+     * The job's left normalization setting.
+     */
+    runLeftNormalization?: RunLeftNormalization;
+    /**
+     *  The annotation schema generated by the parsed annotation data. 
+     */
+    annotationFields?: AnnotationFieldMap;
+  }
+  export type VariantImportJobItems = VariantImportJobItem[];
+  export interface VariantStoreItem {
     /**
      * The store's ID.
      */
     id: ResourceId;
     /**
-     * The store's name.
-     */
-    name: String;
-    /**
      * The store's genome reference.
      */
     reference: ReferenceItem;
-    /**
-     * The store's server-side encryption (SSE) settings.
-     */
-    sseConfig: SseConfig;
     /**
      * The store's status.
      */
     status: StoreStatus;
     /**
-     * The store's status message.
-     */
-    statusMessage: StatusMessage;
-    /**
      * The store's ARN.
      */
     storeArn: Arn;
     /**
-     * The store's size in bytes.
+     * The store's name.
      */
-    storeSizeBytes: Long;
+    name: String;
+    /**
+     * The store's description.
+     */
+    description: StoreDescription;
+    /**
+     * The store's server-side encryption (SSE) settings.
+     */
+    sseConfig: SseConfig;
+    /**
+     * When the store was created.
+     */
+    creationTime: CreationTime;
     /**
      * When the store was updated.
      */
     updateTime: UpdateTime;
+    /**
+     * The store's status message.
+     */
+    statusMessage: StatusMessage;
+    /**
+     * The store's size in bytes.
+     */
+    storeSizeBytes: Long;
   }
   export type VariantStoreItems = VariantStoreItem[];
   export interface VcfOptions {
     /**
-     * The file's ignore filter field setting.
-     */
-    ignoreFilterField?: Boolean;
-    /**
      * The file's ignore qual field setting.
      */
     ignoreQualField?: Boolean;
+    /**
+     * The file's ignore filter field setting.
+     */
+    ignoreFilterField?: Boolean;
   }
   export type WorkflowArn = string;
   export type WorkflowDefinition = string;
@@ -4116,14 +4595,6 @@ declare namespace Omics {
      */
     arn?: WorkflowArn;
     /**
-     * When the workflow was created.
-     */
-    creationTime?: WorkflowTimestamp;
-    /**
-     * The workflow's digest.
-     */
-    digest?: WorkflowDigest;
-    /**
      * The workflow's ID.
      */
     id?: WorkflowId;
@@ -4139,9 +4610,24 @@ declare namespace Omics {
      * The workflow's type.
      */
     type?: WorkflowType;
+    /**
+     * The workflow's digest.
+     */
+    digest?: WorkflowDigest;
+    /**
+     * When the workflow was created.
+     */
+    creationTime?: WorkflowTimestamp;
+    /**
+     *  Any metadata available for workflow. The information listed may vary depending on the workflow, and there may also be no metadata to return. 
+     */
+    metadata?: WorkflowMetadata;
   }
   export type WorkflowListToken = string;
   export type WorkflowMain = string;
+  export type WorkflowMetadata = {[key: string]: WorkflowMetadataValue};
+  export type WorkflowMetadataKey = string;
+  export type WorkflowMetadataValue = string;
   export type WorkflowName = string;
   export interface WorkflowParameter {
     /**
@@ -4157,10 +4643,10 @@ declare namespace Omics {
   export type WorkflowParameterName = string;
   export type WorkflowParameterTemplate = {[key: string]: WorkflowParameter};
   export type WorkflowRequestId = string;
-  export type WorkflowStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETED"|"FAILED"|string;
+  export type WorkflowStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETED"|"FAILED"|"INACTIVE"|string;
   export type WorkflowStatusMessage = string;
   export type WorkflowTimestamp = Date;
-  export type WorkflowType = "PRIVATE"|string;
+  export type WorkflowType = "PRIVATE"|"READY2RUN"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

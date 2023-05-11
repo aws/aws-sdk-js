@@ -820,7 +820,7 @@ declare namespace ElastiCache {
      */
     EngineVersion?: String;
     /**
-     * The name of the cache parameter group family associated with this cache engine. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x 
+     * The name of the cache parameter group family associated with this cache engine. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7 
      */
     CacheParameterGroupFamily?: String;
     /**
@@ -970,7 +970,7 @@ declare namespace ElastiCache {
      */
     CacheParameterGroupName?: String;
     /**
-     * The name of the cache parameter group family that this cache parameter group is compatible with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | 
+     * The name of the cache parameter group family that this cache parameter group is compatible with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7 
      */
     CacheParameterGroupFamily?: String;
     /**
@@ -1121,6 +1121,7 @@ declare namespace ElastiCache {
     LogGroup?: String;
   }
   export type ClusterIdList = String[];
+  export type ClusterMode = "enabled"|"disabled"|"compatible"|string;
   export interface CompleteMigrationMessage {
     /**
      * The ID of the replication group to which data is being migrated.
@@ -1287,7 +1288,7 @@ declare namespace ElastiCache {
      */
     LogDeliveryConfigurations?: LogDeliveryConfigurationRequestList;
     /**
-     * A flag that enables in-transit encryption when set to true.  Only available when creating a cache cluster in an Amazon VPC using Memcached version 1.6.12 or later.
+     * A flag that enables in-transit encryption when set to true.
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
@@ -1308,7 +1309,7 @@ declare namespace ElastiCache {
      */
     CacheParameterGroupName: String;
     /**
-     * The name of the cache parameter group family that the cache parameter group can be used with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x 
+     * The name of the cache parameter group family that the cache parameter group can be used with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7 
      */
     CacheParameterGroupFamily: String;
     /**
@@ -1524,9 +1525,13 @@ declare namespace ElastiCache {
      */
     IpDiscovery?: IpDiscovery;
     /**
-     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. When setting TransitEncryptionEnabled to true, you can set your TransitEncryptionMode to preferred in the same request, to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can modify the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred first, after that you can set TransitEncryptionMode to required. 
+     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. When setting TransitEncryptionEnabled to true, you can set your TransitEncryptionMode to preferred in the same request, to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can modify the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred, after that you can set TransitEncryptionMode to required. This process will not trigger the replacement of the replication group.
      */
     TransitEncryptionMode?: TransitEncryptionMode;
+    /**
+     * Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible. Compatible mode allows your Redis clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled.
+     */
+    ClusterMode?: ClusterMode;
   }
   export interface CreateReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -2225,7 +2230,7 @@ declare namespace ElastiCache {
   }
   export interface EngineDefaults {
     /**
-     * Specifies the name of the cache parameter group family to which the engine default parameters apply. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.0 | redis6.x 
+     * Specifies the name of the cache parameter group family to which the engine default parameters apply. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.0 | redis6.x | redis7 
      */
     CacheParameterGroupFamily?: String;
     /**
@@ -2783,9 +2788,13 @@ declare namespace ElastiCache {
      */
     TransitEncryptionEnabled?: BooleanOptional;
     /**
-     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. You must set TransitEncryptionEnabled to true, for your existing cluster, and set TransitEncryptionMode to preferred in the same request to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can set the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred first, after that you can set TransitEncryptionMode to required. 
+     * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime. You must set TransitEncryptionEnabled to true, for your existing cluster, and set TransitEncryptionMode to preferred in the same request to allow both encrypted and unencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can set the value to required to allow encrypted connections only. Setting TransitEncryptionMode to required is a two-step process that requires you to first set the TransitEncryptionMode to preferred, after that you can set TransitEncryptionMode to required. 
      */
     TransitEncryptionMode?: TransitEncryptionMode;
+    /**
+     * Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible. Compatible mode allows your Redis clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled.
+     */
+    ClusterMode?: ClusterMode;
   }
   export interface ModifyReplicationGroupResult {
     ReplicationGroup?: ReplicationGroup;
@@ -3362,7 +3371,7 @@ declare namespace ElastiCache {
      */
     DataTiering?: DataTieringStatus;
     /**
-     *  If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions.  
+     * If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. 
      */
     AutoMinorVersionUpgrade?: Boolean;
     /**
@@ -3377,6 +3386,10 @@ declare namespace ElastiCache {
      * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.
      */
     TransitEncryptionMode?: TransitEncryptionMode;
+    /**
+     * Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible. Compatible mode allows your Redis clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled.
+     */
+    ClusterMode?: ClusterMode;
   }
   export type ReplicationGroupIdList = String[];
   export type ReplicationGroupList = ReplicationGroup[];
@@ -3424,6 +3437,10 @@ declare namespace ElastiCache {
      * A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.
      */
     TransitEncryptionMode?: TransitEncryptionMode;
+    /**
+     * Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible. Compatible mode allows your Redis clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled.
+     */
+    ClusterMode?: ClusterMode;
   }
   export interface ReservedCacheNode {
     /**

@@ -684,11 +684,11 @@ declare class Connect extends Service {
    */
   getMetricData(callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
-   * Gets metric data from the specified Amazon Connect instance.   GetMetricDataV2 offers more features than GetMetricData, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for the last 14 days, in 24-hour intervals. For a description of the historical metrics that are supported by GetMetricDataV2 and GetMetricData, see Historical metrics definitions in the Amazon Connect Administrator's Guide.  This API is not available in the Amazon Web Services GovCloud (US) Regions.
+   * Gets metric data from the specified Amazon Connect instance.   GetMetricDataV2 offers more features than GetMetricData, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for the last 35 days, in 24-hour intervals. For a description of the historical metrics that are supported by GetMetricDataV2 and GetMetricData, see Historical metrics definitions in the Amazon Connect Administrator's Guide.  This API is not available in the Amazon Web Services GovCloud (US) Regions.
    */
   getMetricDataV2(params: Connect.Types.GetMetricDataV2Request, callback?: (err: AWSError, data: Connect.Types.GetMetricDataV2Response) => void): Request<Connect.Types.GetMetricDataV2Response, AWSError>;
   /**
-   * Gets metric data from the specified Amazon Connect instance.   GetMetricDataV2 offers more features than GetMetricData, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for the last 14 days, in 24-hour intervals. For a description of the historical metrics that are supported by GetMetricDataV2 and GetMetricData, see Historical metrics definitions in the Amazon Connect Administrator's Guide.  This API is not available in the Amazon Web Services GovCloud (US) Regions.
+   * Gets metric data from the specified Amazon Connect instance.   GetMetricDataV2 offers more features than GetMetricData, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for the last 35 days, in 24-hour intervals. For a description of the historical metrics that are supported by GetMetricDataV2 and GetMetricData, see Historical metrics definitions in the Amazon Connect Administrator's Guide.  This API is not available in the Amazon Web Services GovCloud (US) Regions.
    */
   getMetricDataV2(callback?: (err: AWSError, data: Connect.Types.GetMetricDataV2Response) => void): Request<Connect.Types.GetMetricDataV2Response, AWSError>;
   /**
@@ -1308,11 +1308,11 @@ declare class Connect extends Service {
    */
   updateParticipantRoleConfig(callback?: (err: AWSError, data: Connect.Types.UpdateParticipantRoleConfigResponse) => void): Request<Connect.Types.UpdateParticipantRoleConfigResponse, AWSError>;
   /**
-   * Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.  You can call DescribePhoneNumber API to verify the status of a previous UpdatePhoneNumber operation. 
+   * Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.  After using this API, you must verify that the phone number is attached to the correct flow in the target instance or traffic distribution group. You need to do this because the API switches only the phone number to a new instance or traffic distribution group. It doesn't migrate the flow configuration of the phone number, too. You can call DescribePhoneNumber API to verify the status of a previous UpdatePhoneNumber operation. 
    */
   updatePhoneNumber(params: Connect.Types.UpdatePhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.UpdatePhoneNumberResponse) => void): Request<Connect.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.  You can call DescribePhoneNumber API to verify the status of a previous UpdatePhoneNumber operation. 
+   * Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.  After using this API, you must verify that the phone number is attached to the correct flow in the target instance or traffic distribution group. You need to do this because the API switches only the phone number to a new instance or traffic distribution group. It doesn't migrate the flow configuration of the phone number, too. You can call DescribePhoneNumber API to verify the status of a previous UpdatePhoneNumber operation. 
    */
   updatePhoneNumber(callback?: (err: AWSError, data: Connect.Types.UpdatePhoneNumberResponse) => void): Request<Connect.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
@@ -4421,7 +4421,7 @@ declare namespace Connect {
      */
     ResourceArn: ARN;
     /**
-     * The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be before the end time timestamp. The time range between the start and end time must be less than 24 hours. The start time cannot be earlier than 14 days before the time of the request. Historical metrics are available for 14 days.
+     * The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be before the end time timestamp. The time range between the start and end time must be less than 24 hours. The start time cannot be earlier than 35 days before the time of the request. Historical metrics are available for 35 days.
      */
     StartTime: Timestamp;
     /**
@@ -6074,7 +6074,7 @@ declare namespace Connect {
   export type MetricResultsV2 = MetricResultV2[];
   export interface MetricV2 {
     /**
-     * The name of the metric.
+     * The name of the metric.  This parameter is required. The following Required = No is incorrect. 
      */
     Name?: MetricNameV2;
     /**

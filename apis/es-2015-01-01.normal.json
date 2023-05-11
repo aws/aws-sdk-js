@@ -2737,7 +2737,7 @@
         },
         "Value": {
           "shape": "DescribePackagesFilterValues",
-          "documentation": "<p>A list of values for the specified field.</p>"
+          "documentation": "<p>A non-empty list of values for the specified field.</p>"
         }
       },
       "documentation": "<p>Filter to apply in <code>DescribePackage</code> response.</p>"
@@ -2765,7 +2765,8 @@
       "type": "list",
       "member": {
         "shape": "DescribePackagesFilterValue"
-      }
+      },
+      "min": 1
     },
     "DescribePackagesRequest": {
       "type": "structure",

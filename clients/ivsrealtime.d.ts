@@ -44,6 +44,14 @@ declare class IVSRealTime extends Service {
    */
   disconnectParticipant(callback?: (err: AWSError, data: IVSRealTime.Types.DisconnectParticipantResponse) => void): Request<IVSRealTime.Types.DisconnectParticipantResponse, AWSError>;
   /**
+   * Gets information about the specified participant token.
+   */
+  getParticipant(params: IVSRealTime.Types.GetParticipantRequest, callback?: (err: AWSError, data: IVSRealTime.Types.GetParticipantResponse) => void): Request<IVSRealTime.Types.GetParticipantResponse, AWSError>;
+  /**
+   * Gets information about the specified participant token.
+   */
+  getParticipant(callback?: (err: AWSError, data: IVSRealTime.Types.GetParticipantResponse) => void): Request<IVSRealTime.Types.GetParticipantResponse, AWSError>;
+  /**
    * Gets information for the specified stage.
    */
   getStage(params: IVSRealTime.Types.GetStageRequest, callback?: (err: AWSError, data: IVSRealTime.Types.GetStageResponse) => void): Request<IVSRealTime.Types.GetStageResponse, AWSError>;
@@ -51,6 +59,38 @@ declare class IVSRealTime extends Service {
    * Gets information for the specified stage.
    */
   getStage(callback?: (err: AWSError, data: IVSRealTime.Types.GetStageResponse) => void): Request<IVSRealTime.Types.GetStageResponse, AWSError>;
+  /**
+   * Gets information for the specified stage session.
+   */
+  getStageSession(params: IVSRealTime.Types.GetStageSessionRequest, callback?: (err: AWSError, data: IVSRealTime.Types.GetStageSessionResponse) => void): Request<IVSRealTime.Types.GetStageSessionResponse, AWSError>;
+  /**
+   * Gets information for the specified stage session.
+   */
+  getStageSession(callback?: (err: AWSError, data: IVSRealTime.Types.GetStageSessionResponse) => void): Request<IVSRealTime.Types.GetStageSessionResponse, AWSError>;
+  /**
+   * Lists events for a specified participant that occurred during a specified stage session.
+   */
+  listParticipantEvents(params: IVSRealTime.Types.ListParticipantEventsRequest, callback?: (err: AWSError, data: IVSRealTime.Types.ListParticipantEventsResponse) => void): Request<IVSRealTime.Types.ListParticipantEventsResponse, AWSError>;
+  /**
+   * Lists events for a specified participant that occurred during a specified stage session.
+   */
+  listParticipantEvents(callback?: (err: AWSError, data: IVSRealTime.Types.ListParticipantEventsResponse) => void): Request<IVSRealTime.Types.ListParticipantEventsResponse, AWSError>;
+  /**
+   * Lists all participants in a specified stage session.
+   */
+  listParticipants(params: IVSRealTime.Types.ListParticipantsRequest, callback?: (err: AWSError, data: IVSRealTime.Types.ListParticipantsResponse) => void): Request<IVSRealTime.Types.ListParticipantsResponse, AWSError>;
+  /**
+   * Lists all participants in a specified stage session.
+   */
+  listParticipants(callback?: (err: AWSError, data: IVSRealTime.Types.ListParticipantsResponse) => void): Request<IVSRealTime.Types.ListParticipantsResponse, AWSError>;
+  /**
+   * Gets all sessions for a specified stage.
+   */
+  listStageSessions(params: IVSRealTime.Types.ListStageSessionsRequest, callback?: (err: AWSError, data: IVSRealTime.Types.ListStageSessionsResponse) => void): Request<IVSRealTime.Types.ListStageSessionsResponse, AWSError>;
+  /**
+   * Gets all sessions for a specified stage.
+   */
+  listStageSessions(callback?: (err: AWSError, data: IVSRealTime.Types.ListStageSessionsResponse) => void): Request<IVSRealTime.Types.ListStageSessionsResponse, AWSError>;
   /**
    * Gets summary information about all stages in your account, in the AWS region where the API request is processed.
    */
@@ -103,7 +143,7 @@ declare namespace IVSRealTime {
      */
     capabilities?: ParticipantTokenCapabilities;
     /**
-     * Duration (in minutes), after which the token expires. Default: 60 (1 hour).
+     * Duration (in minutes), after which the token expires. Default: 720 (12 hours).
      */
     duration?: ParticipantTokenDurationMinutes;
     /**
@@ -156,7 +196,7 @@ declare namespace IVSRealTime {
   export type DisconnectParticipantReason = string;
   export interface DisconnectParticipantRequest {
     /**
-     * Identifier of the participant to be disconnected. This is returned by CreateParticipantToken.
+     * Identifier of the participant to be disconnected. This is assigned by IVS and returned by CreateParticipantToken.
      */
     participantId: ParticipantTokenId;
     /**
@@ -170,6 +210,51 @@ declare namespace IVSRealTime {
   }
   export interface DisconnectParticipantResponse {
   }
+  export interface Event {
+    /**
+     * If the event is an error event, the error code is provided to give insight into the specific error that occurred. If the event is not an error event, this field is null. INSUFFICIENT_CAPABILITIES indicates that the participant tried to take an action that the participant’s token is not allowed to do. For more information about participant capabilities, see the capabilities field in CreateParticipantToken.
+     */
+    errorCode?: EventErrorCode;
+    /**
+     * ISO 8601 timestamp (returned as a string) for when the event occurred.
+     */
+    eventTime?: Time;
+    /**
+     * The name of the event.
+     */
+    name?: EventName;
+    /**
+     * Unique identifier for the participant who triggered the event. This is assigned by IVS.
+     */
+    participantId?: ParticipantId;
+    /**
+     * Unique identifier for the remote participant. For a subscribe event, this is the publisher. For a publish or join event, this is null. This is assigned by IVS.
+     */
+    remoteParticipantId?: ParticipantId;
+  }
+  export type EventErrorCode = "INSUFFICIENT_CAPABILITIES"|string;
+  export type EventList = Event[];
+  export type EventName = "JOINED"|"LEFT"|"PUBLISH_STARTED"|"PUBLISH_STOPPED"|"SUBSCRIBE_STARTED"|"SUBSCRIBE_STOPPED"|"PUBLISH_ERROR"|"SUBSCRIBE_ERROR"|"JOIN_ERROR"|string;
+  export interface GetParticipantRequest {
+    /**
+     * Unique identifier for the participant. This is assigned by IVS and returned by CreateParticipantToken.
+     */
+    participantId: ParticipantId;
+    /**
+     * ID of a session within the stage.
+     */
+    sessionId: StageSessionId;
+    /**
+     * Stage ARN.
+     */
+    stageArn: StageArn;
+  }
+  export interface GetParticipantResponse {
+    /**
+     * The participant that is returned.
+     */
+    participant?: Participant;
+  }
   export interface GetStageRequest {
     /**
      * ARN of the stage for which the information is to be retrieved.
@@ -178,9 +263,121 @@ declare namespace IVSRealTime {
   }
   export interface GetStageResponse {
     /**
-     * 
+     * The stage that is returned.
      */
     stage?: Stage;
+  }
+  export interface GetStageSessionRequest {
+    /**
+     * ID of a session within the stage.
+     */
+    sessionId: StageSessionId;
+    /**
+     * ARN of the stage for which the information is to be retrieved.
+     */
+    stageArn: StageArn;
+  }
+  export interface GetStageSessionResponse {
+    /**
+     * The stage session that is returned.
+     */
+    stageSession?: StageSession;
+  }
+  export interface ListParticipantEventsRequest {
+    /**
+     * Maximum number of results to return. Default: 50.
+     */
+    maxResults?: MaxParticipantEventResults;
+    /**
+     * The first participant to retrieve. This is used for pagination; see the nextToken response field.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Unique identifier for this participant. This is assigned by IVS and returned by CreateParticipantToken.
+     */
+    participantId: ParticipantId;
+    /**
+     * ID of a session within the stage.
+     */
+    sessionId: StageSessionId;
+    /**
+     * Stage ARN.
+     */
+    stageArn: StageArn;
+  }
+  export interface ListParticipantEventsResponse {
+    /**
+     * List of the matching events.
+     */
+    events: EventList;
+    /**
+     * If there are more rooms than maxResults, use nextToken in the request to get the next set. 
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListParticipantsRequest {
+    /**
+     * Filters the response list to only show participants who published during the stage session. Only one of filterByUserId, filterByPublished, or filterByState can be provided per request.
+     */
+    filterByPublished?: Published;
+    /**
+     * Filters the response list to only show participants in the specified state. Only one of filterByUserId, filterByPublished, or filterByState can be provided per request.
+     */
+    filterByState?: ParticipantState;
+    /**
+     * Filters the response list to match the specified user ID. Only one of filterByUserId, filterByPublished, or filterByState can be provided per request. A userId is a customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems.
+     */
+    filterByUserId?: UserId;
+    /**
+     * Maximum number of results to return. Default: 50.
+     */
+    maxResults?: MaxParticipantResults;
+    /**
+     * The first participant to retrieve. This is used for pagination; see the nextToken response field.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * ID of the session within the stage.
+     */
+    sessionId: StageSessionId;
+    /**
+     * Stage ARN.
+     */
+    stageArn: StageArn;
+  }
+  export interface ListParticipantsResponse {
+    /**
+     * If there are more rooms than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * List of the matching participants (summary information only).
+     */
+    participants: ParticipantList;
+  }
+  export interface ListStageSessionsRequest {
+    /**
+     * Maximum number of results to return. Default: 50.
+     */
+    maxResults?: MaxStageSessionResults;
+    /**
+     * The first stage to retrieve. This is used for pagination; see the nextToken response field.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Stage ARN.
+     */
+    stageArn: StageArn;
+  }
+  export interface ListStageSessionsResponse {
+    /**
+     * If there are more rooms than maxResults, use nextToken in the request to get the next set.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * List of matching stage sessions.
+     */
+    stageSessions: StageSessionList;
   }
   export interface ListStagesRequest {
     /**
@@ -214,8 +411,63 @@ declare namespace IVSRealTime {
      */
     tags: Tags;
   }
+  export type MaxParticipantEventResults = number;
+  export type MaxParticipantResults = number;
   export type MaxStageResults = number;
+  export type MaxStageSessionResults = number;
   export type PaginationToken = string;
+  export interface Participant {
+    /**
+     * Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
+     */
+    attributes?: ParticipantAttributes;
+    /**
+     * ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
+     */
+    firstJoinTime?: Time;
+    /**
+     * Unique identifier for this participant, assigned by IVS.
+     */
+    participantId?: ParticipantId;
+    /**
+     * Whether the participant ever published to the stage session.
+     */
+    published?: Published;
+    /**
+     * Whether the participant is connected to or disconnected from the stage.
+     */
+    state?: ParticipantState;
+    /**
+     * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
+     */
+    userId?: UserId;
+  }
+  export type ParticipantAttributes = {[key: string]: String};
+  export type ParticipantId = string;
+  export type ParticipantList = ParticipantSummary[];
+  export type ParticipantState = "CONNECTED"|"DISCONNECTED"|string;
+  export interface ParticipantSummary {
+    /**
+     * ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
+     */
+    firstJoinTime?: Time;
+    /**
+     * Unique identifier for this participant, assigned by IVS.
+     */
+    participantId?: ParticipantId;
+    /**
+     * Whether the participant ever published to the stage session.
+     */
+    published?: Published;
+    /**
+     * Whether the participant is connected to or disconnected from the stage.
+     */
+    state?: ParticipantState;
+    /**
+     * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.
+     */
+    userId?: UserId;
+  }
   export interface ParticipantToken {
     /**
      * Application-provided attributes to encode into the token and attach to a stage. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
@@ -226,7 +478,7 @@ declare namespace IVSRealTime {
      */
     capabilities?: ParticipantTokenCapabilities;
     /**
-     * Duration (in minutes), after which the participant token expires. Default: 60 (1 hour).
+     * Duration (in minutes), after which the participant token expires. Default: 720 (12 hours).
      */
     duration?: ParticipantTokenDurationMinutes;
     /**
@@ -242,7 +494,7 @@ declare namespace IVSRealTime {
      */
     token?: ParticipantTokenString;
     /**
-     * Name to help identify the token. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
+     * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
      */
     userId?: ParticipantTokenUserId;
   }
@@ -259,11 +511,11 @@ declare namespace IVSRealTime {
      */
     capabilities?: ParticipantTokenCapabilities;
     /**
-     * Duration (in minutes), after which the corresponding participant token expires. Default: 60 (1 hour).
+     * Duration (in minutes), after which the corresponding participant token expires. Default: 720 (12 hours).
      */
     duration?: ParticipantTokenDurationMinutes;
     /**
-     * Name that can be specified to help identify the corresponding participant token. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
+     * Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 
      */
     userId?: ParticipantTokenUserId;
   }
@@ -274,6 +526,7 @@ declare namespace IVSRealTime {
   export type ParticipantTokenList = ParticipantToken[];
   export type ParticipantTokenString = string;
   export type ParticipantTokenUserId = string;
+  export type Published = boolean;
   export type ResourceArn = string;
   export interface Stage {
     /**
@@ -295,7 +548,36 @@ declare namespace IVSRealTime {
   }
   export type StageArn = string;
   export type StageName = string;
+  export interface StageSession {
+    /**
+     * ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.
+     */
+    endTime?: Time;
+    /**
+     * ID of the session within the stage.
+     */
+    sessionId?: StageSessionId;
+    /**
+     *  ISO 8601 timestamp (returned as a string) when this stage session began.
+     */
+    startTime?: Time;
+  }
   export type StageSessionId = string;
+  export type StageSessionList = StageSessionSummary[];
+  export interface StageSessionSummary {
+    /**
+     * ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.
+     */
+    endTime?: Time;
+    /**
+     * ID of the session within the stage.
+     */
+    sessionId?: StageSessionId;
+    /**
+     *  ISO 8601 timestamp (returned as a string) when this stage session began.
+     */
+    startTime?: Time;
+  }
   export interface StageSummary {
     /**
      * ID of the active session within the stage.
@@ -332,6 +614,7 @@ declare namespace IVSRealTime {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export type Time = Date;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource to be untagged. The ARN must be URL-encoded.
@@ -356,10 +639,11 @@ declare namespace IVSRealTime {
   }
   export interface UpdateStageResponse {
     /**
-     * The updated stage. 
+     * The updated stage.
      */
     stage?: Stage;
   }
+  export type UserId = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -3276,7 +3276,8 @@
       "type": "list",
       "member": {
         "shape": "DescribePackagesFilterValue"
-      }
+      },
+      "min": 1
     },
     "DescribePackagesRequest": {
       "type": "structure",
