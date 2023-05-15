@@ -116,6 +116,14 @@ declare class CodeCatalyst extends Service {
    */
   listAccessTokens(callback?: (err: AWSError, data: CodeCatalyst.Types.ListAccessTokensResponse) => void): Request<CodeCatalyst.Types.ListAccessTokensResponse, AWSError>;
   /**
+   * Retrieves a list of active sessions for a Dev Environment in a project.
+   */
+  listDevEnvironmentSessions(params: CodeCatalyst.Types.ListDevEnvironmentSessionsRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.ListDevEnvironmentSessionsResponse) => void): Request<CodeCatalyst.Types.ListDevEnvironmentSessionsResponse, AWSError>;
+  /**
+   * Retrieves a list of active sessions for a Dev Environment in a project.
+   */
+  listDevEnvironmentSessions(callback?: (err: AWSError, data: CodeCatalyst.Types.ListDevEnvironmentSessionsResponse) => void): Request<CodeCatalyst.Types.ListDevEnvironmentSessionsResponse, AWSError>;
+  /**
    * Retrieves a list of Dev Environments in a project.
    */
   listDevEnvironments(params: CodeCatalyst.Types.ListDevEnvironmentsRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.ListDevEnvironmentsResponse) => void): Request<CodeCatalyst.Types.ListDevEnvironmentsResponse, AWSError>;
@@ -450,7 +458,31 @@ declare namespace CodeCatalyst {
      */
     executeCommandSessionConfiguration?: ExecuteCommandSessionConfiguration;
   }
+  export interface DevEnvironmentSessionSummary {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The system-generated unique ID of the Dev Environment.
+     */
+    devEnvironmentId: Uuid;
+    /**
+     * The date and time the session started, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    startedTime: SyntheticTimestamp_date_time;
+    /**
+     * The system-generated unique ID of the Dev Environment session.
+     */
+    id: DevEnvironmentSessionSummaryIdString;
+  }
+  export type DevEnvironmentSessionSummaryIdString = string;
   export type DevEnvironmentSessionType = "SSM"|"SSH"|string;
+  export type DevEnvironmentSessionsSummaryList = DevEnvironmentSessionSummary[];
   export type DevEnvironmentStatus = "PENDING"|"RUNNING"|"STARTING"|"STOPPING"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|string;
   export interface DevEnvironmentSummary {
     /**
@@ -858,6 +890,40 @@ declare namespace CodeCatalyst {
      * A list of personal access tokens (PATs) associated with the calling user identity.
      */
     items: AccessTokenSummaries;
+    /**
+     * A token returned from a call to this API to indicate the next batch of results to return, if any.
+     */
+    nextToken?: String;
+  }
+  export interface ListDevEnvironmentSessionsRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The system-generated unique ID of the Dev Environment.
+     */
+    devEnvironmentId: Uuid;
+    /**
+     * A token returned from a call to this API to indicate the next batch of results to return, if any.
+     */
+    nextToken?: ListDevEnvironmentSessionsRequestNextTokenString;
+    /**
+     * The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a NextToken element, which you can use to obtain additional results.
+     */
+    maxResults?: ListDevEnvironmentSessionsRequestMaxResultsInteger;
+  }
+  export type ListDevEnvironmentSessionsRequestMaxResultsInteger = number;
+  export type ListDevEnvironmentSessionsRequestNextTokenString = string;
+  export interface ListDevEnvironmentSessionsResponse {
+    /**
+     * Information about each session retrieved in the list.
+     */
+    items: DevEnvironmentSessionsSummaryList;
     /**
      * A token returned from a call to this API to indicate the next batch of results to return, if any.
      */

@@ -564,7 +564,7 @@ declare namespace Rekognition {
     GroundTruthManifest?: GroundTruthManifest;
   }
   export type Assets = Asset[];
-  export type Attribute = "DEFAULT"|"ALL"|"AGE_RANGE"|"BEARD"|"EMOTIONS"|"EYEGLASSES"|"EYES_OPEN"|"GENDER"|"MOUTH_OPEN"|"MUSTACHE"|"FACE_OCCLUDED"|"SMILE"|"SUNGLASSES"|string;
+  export type Attribute = "DEFAULT"|"ALL"|"AGE_RANGE"|"BEARD"|"EMOTIONS"|"EYE_DIRECTION"|"EYEGLASSES"|"EYES_OPEN"|"GENDER"|"MOUTH_OPEN"|"MUSTACHE"|"FACE_OCCLUDED"|"SMILE"|"SUNGLASSES"|string;
   export type Attributes = Attribute[];
   export interface AudioMetadata {
     /**
@@ -1759,6 +1759,20 @@ declare namespace Rekognition {
   }
   export type ExtendedPaginationToken = string;
   export type ExternalImageId = string;
+  export interface EyeDirection {
+    /**
+     * Value representing eye direction on the yaw axis.
+     */
+    Yaw?: Degree;
+    /**
+     * Value representing eye direction on the pitch axis.
+     */
+    Pitch?: Degree;
+    /**
+     * The confidence that the service has in its predicted eye direction.
+     */
+    Confidence?: Percent;
+  }
   export interface EyeOpen {
     /**
      * Boolean value that indicates whether the eyes on the face are open.
@@ -1871,6 +1885,10 @@ declare namespace Rekognition {
      *  FaceOccluded should return "true" with a high confidence score if a detected face’s eyes, nose, and mouth are partially captured or if they are covered by masks, dark sunglasses, cell phones, hands, or other objects. FaceOccluded should return "false" with a high confidence score if common occurrences that do not impact face verification are detected, such as eye glasses, lightly tinted sunglasses, strands of hair, and others. 
      */
     FaceOccluded?: FaceOccluded;
+    /**
+     * Indicates the direction the eyes are gazing in, as defined by pitch and yaw.
+     */
+    EyeDirection?: EyeDirection;
   }
   export type FaceDetailList = FaceDetail[];
   export interface FaceDetection {

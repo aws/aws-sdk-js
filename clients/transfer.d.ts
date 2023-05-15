@@ -101,11 +101,11 @@ declare class Transfer extends Service {
    */
   deleteConnector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the host key that's specified in the HoskKeyId parameter.
+   * Deletes the host key that's specified in the HostKeyId parameter.
    */
   deleteHostKey(params: Transfer.Types.DeleteHostKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the host key that's specified in the HoskKeyId parameter.
+   * Deletes the host key that's specified in the HostKeyId parameter.
    */
   deleteHostKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -181,11 +181,11 @@ declare class Transfer extends Service {
    */
   describeConnector(callback?: (err: AWSError, data: Transfer.Types.DescribeConnectorResponse) => void): Request<Transfer.Types.DescribeConnectorResponse, AWSError>;
   /**
-   * You can use DescribeExecution to check the details of the execution of the specified workflow.
+   * You can use DescribeExecution to check the details of the execution of the specified workflow.  This API call only returns details for in-progress workflows.  If you provide an ID for an execution that is not in progress, or if the execution doesn't match the specified workflow ID, you receive a ResourceNotFound exception. 
    */
   describeExecution(params: Transfer.Types.DescribeExecutionRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeExecutionResponse) => void): Request<Transfer.Types.DescribeExecutionResponse, AWSError>;
   /**
-   * You can use DescribeExecution to check the details of the execution of the specified workflow.
+   * You can use DescribeExecution to check the details of the execution of the specified workflow.  This API call only returns details for in-progress workflows.  If you provide an ID for an execution that is not in progress, or if the execution doesn't match the specified workflow ID, you receive a ResourceNotFound exception. 
    */
   describeExecution(callback?: (err: AWSError, data: Transfer.Types.DescribeExecutionResponse) => void): Request<Transfer.Types.DescribeExecutionResponse, AWSError>;
   /**
@@ -253,11 +253,11 @@ declare class Transfer extends Service {
    */
   importHostKey(callback?: (err: AWSError, data: Transfer.Types.ImportHostKeyResponse) => void): Request<Transfer.Types.ImportHostKeyResponse, AWSError>;
   /**
-   * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
+   * Adds a Secure Shell (SSH) public key to a Transfer Family user identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
    */
   importSshPublicKey(params: Transfer.Types.ImportSshPublicKeyRequest, callback?: (err: AWSError, data: Transfer.Types.ImportSshPublicKeyResponse) => void): Request<Transfer.Types.ImportSshPublicKeyResponse, AWSError>;
   /**
-   * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
+   * Adds a Secure Shell (SSH) public key to a Transfer Family user identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
    */
   importSshPublicKey(callback?: (err: AWSError, data: Transfer.Types.ImportSshPublicKeyResponse) => void): Request<Transfer.Types.ImportSshPublicKeyResponse, AWSError>;
   /**
@@ -293,11 +293,11 @@ declare class Transfer extends Service {
    */
   listConnectors(callback?: (err: AWSError, data: Transfer.Types.ListConnectorsResponse) => void): Request<Transfer.Types.ListConnectorsResponse, AWSError>;
   /**
-   * Lists all executions for the specified workflow.
+   * Lists all in-progress executions for the specified workflow.  If the specified workflow ID cannot be found, ListExecutions returns a ResourceNotFound exception. 
    */
   listExecutions(params: Transfer.Types.ListExecutionsRequest, callback?: (err: AWSError, data: Transfer.Types.ListExecutionsResponse) => void): Request<Transfer.Types.ListExecutionsResponse, AWSError>;
   /**
-   * Lists all executions for the specified workflow.
+   * Lists all in-progress executions for the specified workflow.  If the specified workflow ID cannot be found, ListExecutions returns a ResourceNotFound exception. 
    */
   listExecutions(callback?: (err: AWSError, data: Transfer.Types.ListExecutionsResponse) => void): Request<Transfer.Types.ListExecutionsResponse, AWSError>;
   /**
@@ -349,11 +349,11 @@ declare class Transfer extends Service {
    */
   listUsers(callback?: (err: AWSError, data: Transfer.Types.ListUsersResponse) => void): Request<Transfer.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists all of your workflows.
+   * Lists all workflows associated with your Amazon Web Services account for your current region.
    */
   listWorkflows(params: Transfer.Types.ListWorkflowsRequest, callback?: (err: AWSError, data: Transfer.Types.ListWorkflowsResponse) => void): Request<Transfer.Types.ListWorkflowsResponse, AWSError>;
   /**
-   * Lists all of your workflows.
+   * Lists all workflows associated with your Amazon Web Services account for your current region.
    */
   listWorkflows(callback?: (err: AWSError, data: Transfer.Types.ListWorkflowsResponse) => void): Request<Transfer.Types.ListWorkflowsResponse, AWSError>;
   /**
@@ -397,11 +397,11 @@ declare class Transfer extends Service {
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.  The ServerId and UserName parameters are required. The ServerProtocol, SourceIp, and UserPassword are all optional.    You cannot use TestIdentityProvider if the IdentityProviderType of your server is SERVICE_MANAGED.      If you provide any incorrect values for any parameters, the Response field is empty.     If you provide a server ID for a server that uses service-managed users, you get an error:    An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-server-ID not configured for external auth      If you enter a Server ID for the --server-id parameter that does not identify an actual Transfer server, you receive the following error:   An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server   
+   * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.  The ServerId and UserName parameters are required. The ServerProtocol, SourceIp, and UserPassword are all optional.  Note the following:    You cannot use TestIdentityProvider if the IdentityProviderType of your server is SERVICE_MANAGED.    TestIdentityProvider does not work with keys: it only accepts passwords.    TestIdentityProvider can test the password operation for a custom Identity Provider that handles keys and passwords.    If you provide any incorrect values for any parameters, the Response field is empty.     If you provide a server ID for a server that uses service-managed users, you get an error:    An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-server-ID not configured for external auth      If you enter a Server ID for the --server-id parameter that does not identify an actual Transfer server, you receive the following error:   An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server.  It is possible your sever is in a different region. You can specify a region by adding the following: --region region-code, such as --region us-east-2 to specify a server in US East (Ohio).  
    */
   testIdentityProvider(params: Transfer.Types.TestIdentityProviderRequest, callback?: (err: AWSError, data: Transfer.Types.TestIdentityProviderResponse) => void): Request<Transfer.Types.TestIdentityProviderResponse, AWSError>;
   /**
-   * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.  The ServerId and UserName parameters are required. The ServerProtocol, SourceIp, and UserPassword are all optional.    You cannot use TestIdentityProvider if the IdentityProviderType of your server is SERVICE_MANAGED.      If you provide any incorrect values for any parameters, the Response field is empty.     If you provide a server ID for a server that uses service-managed users, you get an error:    An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-server-ID not configured for external auth      If you enter a Server ID for the --server-id parameter that does not identify an actual Transfer server, you receive the following error:   An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server   
+   * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.  The ServerId and UserName parameters are required. The ServerProtocol, SourceIp, and UserPassword are all optional.  Note the following:    You cannot use TestIdentityProvider if the IdentityProviderType of your server is SERVICE_MANAGED.    TestIdentityProvider does not work with keys: it only accepts passwords.    TestIdentityProvider can test the password operation for a custom Identity Provider that handles keys and passwords.    If you provide any incorrect values for any parameters, the Response field is empty.     If you provide a server ID for a server that uses service-managed users, you get an error:    An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-server-ID not configured for external auth      If you enter a Server ID for the --server-id parameter that does not identify an actual Transfer server, you receive the following error:   An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server.  It is possible your sever is in a different region. You can specify a region by adding the following: --region region-code, such as --region us-east-2 to specify a server in US East (Ohio).  
    */
   testIdentityProvider(callback?: (err: AWSError, data: Transfer.Types.TestIdentityProviderResponse) => void): Request<Transfer.Types.TestIdentityProviderResponse, AWSError>;
   /**
@@ -555,11 +555,11 @@ declare namespace Transfer {
      */
     Name?: WorkflowStepName;
     /**
-     * Specifies the location for the file being copied. Use ${Transfer:username} or ${Transfer:UploadDate} in this field to parametrize the destination prefix by username or uploaded date.   Set the value of DestinationFileLocation to ${Transfer:username} to copy uploaded files to an Amazon S3 bucket that is prefixed with the name of the Transfer Family user that uploaded the file.   Set the value of DestinationFileLocation to ${Transfer:UploadDate} to copy uploaded files to an Amazon S3 bucket that is prefixed with the date of the upload.  The system resolves UploadDate to a date format of YYYY-MM-DD, based on the date the file is uploaded.   
+     * Specifies the location for the file being copied. Use ${Transfer:UserName} or ${Transfer:UploadDate} in this field to parametrize the destination prefix by username or uploaded date.   Set the value of DestinationFileLocation to ${Transfer:UserName} to copy uploaded files to an Amazon S3 bucket that is prefixed with the name of the Transfer Family user that uploaded the file.   Set the value of DestinationFileLocation to ${Transfer:UploadDate} to copy uploaded files to an Amazon S3 bucket that is prefixed with the date of the upload.  The system resolves UploadDate to a date format of YYYY-MM-DD, based on the date the file is uploaded in UTC.   
      */
     DestinationFileLocation?: InputFileLocation;
     /**
-     * A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE.
+     * A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE. If the workflow is processing a file that has the same name as an existing file, the behavior is as follows:   If OverwriteExisting is TRUE, the existing file is replaced with the file being processed.   If OverwriteExisting is FALSE, nothing happens, and the workflow processing stops.  
      */
     OverwriteExisting?: OverwriteExisting;
     /**
@@ -722,11 +722,11 @@ declare namespace Transfer {
      */
     HostKey?: HostKey;
     /**
-     * Required when IdentityProviderType is set to AWS_DIRECTORY_SERVICE or API_GATEWAY. Accepts an array containing all of the information required to use a directory in AWS_DIRECTORY_SERVICE or invoke a customer-supplied authentication API, including the API Gateway URL. Not required when IdentityProviderType is set to SERVICE_MANAGED.
+     * Required when IdentityProviderType is set to AWS_DIRECTORY_SERVICE, Amazon Web Services_LAMBDA or API_GATEWAY. Accepts an array containing all of the information required to use a directory in AWS_DIRECTORY_SERVICE or invoke a customer-supplied authentication API, including the API Gateway URL. Not required when IdentityProviderType is set to SERVICE_MANAGED.
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * The mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the Function parameter or the IdentityProviderDetails data type.
+     * The mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the Function parameter for the IdentityProviderDetails data type.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
@@ -758,7 +758,7 @@ declare namespace Transfer {
      */
     Tags?: Tags;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -816,7 +816,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * A unique string that identifies a user account associated with a server.
+     * A unique string that identifies a Transfer Family user.
      */
     UserName: UserName;
   }
@@ -830,7 +830,7 @@ declare namespace Transfer {
      */
     Steps: WorkflowSteps;
     /**
-     * Specifies the steps (actions) to take if errors are encountered during execution of the workflow.  For custom steps, the lambda function needs to send FAILURE to the call back API to kick off the exception steps. Additionally, if the lambda does not send SUCCESS before it times out, the exception steps are executed. 
+     * Specifies the steps (actions) to take if errors are encountered during execution of the workflow.  For custom steps, the Lambda function needs to send FAILURE to the call back API to kick off the exception steps. Additionally, if the Lambda does not send SUCCESS before it times out, the exception steps are executed. 
      */
     OnExceptionSteps?: WorkflowSteps;
     /**
@@ -850,7 +850,7 @@ declare namespace Transfer {
      */
     Name?: WorkflowStepName;
     /**
-     * The ARN for the lambda function that is being called.
+     * The ARN for the Lambda function that is being called.
      */
     Target?: CustomStepTarget;
     /**
@@ -880,9 +880,12 @@ declare namespace Transfer {
      */
     SourceFileLocation?: SourceFileLocation;
     /**
-     * A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE.
+     * A flag that indicates whether to overwrite an existing file of the same name. The default is FALSE. If the workflow is processing a file that has the same name as an existing file, the behavior is as follows:   If OverwriteExisting is TRUE, the existing file is replaced with the file being processed.   If OverwriteExisting is FALSE, nothing happens, and the workflow processing stops.  
      */
     OverwriteExisting?: OverwriteExisting;
+    /**
+     * Specifies the location for the file being decrypted. Use ${Transfer:UserName} or ${Transfer:UploadDate} in this field to parametrize the destination prefix by username or uploaded date.   Set the value of DestinationFileLocation to ${Transfer:UserName} to decrypt uploaded files to an Amazon S3 bucket that is prefixed with the name of the Transfer Family user that uploaded the file.   Set the value of DestinationFileLocation to ${Transfer:UploadDate} to decrypt uploaded files to an Amazon S3 bucket that is prefixed with the date of the upload.  The system resolves UploadDate to a date format of YYYY-MM-DD, based on the date the file is uploaded in UTC.   
+     */
     DestinationFileLocation: InputFileLocation;
   }
   export interface DeleteAccessRequest {
@@ -1127,7 +1130,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * An array containing the properties of the user account for the ServerID value that you specified.
+     * An array containing the properties of the Transfer Family user for the ServerID value that you specified.
      */
     User: DescribedUser;
   }
@@ -1447,7 +1450,7 @@ declare namespace Transfer {
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
-     * The mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the Function parameter or the IdentityProviderDetails data type.
+     * The mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the Function parameter for the IdentityProviderDetails data type.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
@@ -1487,7 +1490,7 @@ declare namespace Transfer {
      */
     UserCount?: UserCount;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects.
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.
      */
     WorkflowDetails?: WorkflowDetails;
   }
@@ -1677,7 +1680,7 @@ declare namespace Transfer {
      */
     Url?: Url;
     /**
-     * Provides the type of InvocationRole used to authenticate the user account.
+     * This parameter is only applicable if your IdentityProviderType is API_GATEWAY. Provides the type of InvocationRole used to authenticate the user account.
      */
     InvocationRole?: Role;
     /**
@@ -1685,9 +1688,13 @@ declare namespace Transfer {
      */
     DirectoryId?: DirectoryId;
     /**
-     * The ARN for a lambda function to use for the Identity provider.
+     * The ARN for a Lambda function to use for the Identity provider.
      */
     Function?: Function;
+    /**
+     * For SFTP-enabled servers, and for custom identity providers only, you can specify whether to authenticate using a password, SSH key pair, or both.    PASSWORD - users must provide their password to connect.    PUBLIC_KEY - users must provide their private key to connect.    PUBLIC_KEY_OR_PASSWORD - users can authenticate with either their password or their key. This is the default value.    PUBLIC_KEY_AND_PASSWORD - users must provide both their private key and their password to connect. The server checks the key first, and then if the key is valid, the system prompts for a password. If the private key provided does not match the public key that is stored, authentication fails.  
+     */
+    SftpAuthenticationMethods?: SftpAuthenticationMethods;
   }
   export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|"AWS_DIRECTORY_SERVICE"|"AWS_LAMBDA"|string;
   export interface ImportCertificateRequest {
@@ -1768,7 +1775,7 @@ declare namespace Transfer {
      */
     SshPublicKeyBody: SshPublicKeyBody;
     /**
-     * The name of the user account that is assigned to one or more servers.
+     * The name of the Transfer Family user that is assigned to one or more servers.
      */
     UserName: UserName;
   }
@@ -1912,7 +1919,7 @@ declare namespace Transfer {
      */
     WorkflowId: WorkflowId;
     /**
-     * Returns the details for each execution.    NextToken: returned from a call to several APIs, you can use pass it to a subsequent command to continue listing additional executions.    StartTime: timestamp indicating when the execution began.    Executions: details of the execution, including the execution ID, initial file location, and Service metadata.    Status: one of the following values: IN_PROGRESS, COMPLETED, EXCEPTION, HANDLING_EXEPTION.   
+     * Returns the details for each execution, in a ListedExecution array.
      */
     Executions: ListedExecutions;
   }
@@ -2060,7 +2067,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * Returns the user accounts and their properties for the ServerId value that you specify.
+     * Returns the Transfer Family users and their properties for the ServerId value that you specify.
      */
     Users: ListedUsers;
   }
@@ -2259,7 +2266,7 @@ declare namespace Transfer {
      */
     Domain?: Domain;
     /**
-     * The mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the Function parameter or the IdentityProviderDetails data type.
+     * The mode of authentication for a server. The default value is SERVICE_MANAGED, which allows you to store and access user credentials within the Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to provide a Directory ID by using the IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with an identity provider of your choosing. The API_GATEWAY setting requires you to provide an Amazon API Gateway endpoint URL to call for authentication by using the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use an Lambda function as your identity provider. If you choose this value, you must specify the ARN for the Lambda function in the Function parameter for the IdentityProviderDetails data type.
      */
     IdentityProviderType?: IdentityProviderType;
     /**
@@ -2474,12 +2481,13 @@ declare namespace Transfer {
   }
   export type SessionId = string;
   export type SetStatOption = "DEFAULT"|"ENABLE_NO_OP"|string;
+  export type SftpAuthenticationMethods = "PASSWORD"|"PUBLIC_KEY"|"PUBLIC_KEY_OR_PASSWORD"|"PUBLIC_KEY_AND_PASSWORD"|string;
   export type SigningAlg = "SHA256"|"SHA384"|"SHA512"|"SHA1"|"NONE"|string;
   export type SourceFileLocation = string;
   export type SourceIp = string;
   export interface SshPublicKey {
     /**
-     * Specifies the date that the public key was added to the user account.
+     * Specifies the date that the public key was added to the Transfer Family user.
      */
     DateImported: DateImported;
     /**
@@ -2546,7 +2554,7 @@ declare namespace Transfer {
      */
     Arn: Arn;
     /**
-     * Key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to user accounts for any purpose.
+     * Key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (servers, users, workflows, and so on) for any purpose.
      */
     Tags: Tags;
   }
@@ -2572,29 +2580,29 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * The type of file transfer protocol to be tested. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP)   File Transfer Protocol Secure (FTPS)   File Transfer Protocol (FTP)  
+     * The type of file transfer protocol to be tested. The available protocols are:   Secure Shell (SSH) File Transfer Protocol (SFTP)   File Transfer Protocol Secure (FTPS)   File Transfer Protocol (FTP)   Applicability Statement 2 (AS2)  
      */
     ServerProtocol?: Protocol;
     /**
-     * The source IP address of the user account to be tested.
+     * The source IP address of the account to be tested.
      */
     SourceIp?: SourceIp;
     /**
-     * The name of the user account to be tested.
+     * The name of the account to be tested.
      */
     UserName: UserName;
     /**
-     * The password of the user account to be tested.
+     * The password of the account to be tested.
      */
     UserPassword?: UserPassword;
   }
   export interface TestIdentityProviderResponse {
     /**
-     * The response that is returned from your API Gateway.
+     * The response that is returned from your API Gateway or your Lambda function.
      */
     Response?: Response;
     /**
-     * The HTTP status code that is the response from your API Gateway.
+     * The HTTP status code that is the response from your API Gateway or your Lambda function.
      */
     StatusCode: StatusCode;
     /**
@@ -2837,17 +2845,17 @@ declare namespace Transfer {
      */
     SecurityPolicyName?: SecurityPolicyName;
     /**
-     * A system-assigned unique identifier for a server instance that the user account is assigned to.
+     * A system-assigned unique identifier for a server instance that the Transfer Family user is assigned to.
      */
     ServerId: ServerId;
     /**
-     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when the session disconnects. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
+     * Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow. In addition to a workflow to execute when a file is uploaded completely, WorkflowDetails can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded. To remove an associated workflow from a server, you can provide an empty OnUpload object, as in the following example.  aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}' 
      */
     WorkflowDetails?: WorkflowDetails;
   }
   export interface UpdateServerResponse {
     /**
-     * A system-assigned unique identifier for a server that the user account is assigned to.
+     * A system-assigned unique identifier for a server that the Transfer Family user is assigned to.
      */
     ServerId: ServerId;
   }
@@ -2877,7 +2885,7 @@ declare namespace Transfer {
      */
     Role?: Role;
     /**
-     * A system-assigned unique identifier for a server instance that the user account is assigned to.
+     * A system-assigned unique identifier for a Transfer Family server instance that the user is assigned to.
      */
     ServerId: ServerId;
     /**
@@ -2887,7 +2895,7 @@ declare namespace Transfer {
   }
   export interface UpdateUserResponse {
     /**
-     * A system-assigned unique identifier for a server instance that the user account is assigned to.
+     * A system-assigned unique identifier for a Transfer Family server instance that the account is assigned to.
      */
     ServerId: ServerId;
     /**
@@ -2899,7 +2907,7 @@ declare namespace Transfer {
   export type UserCount = number;
   export interface UserDetails {
     /**
-     * A unique string that identifies a user account associated with a server.
+     * A unique string that identifies a Transfer Family user associated with a server.
      */
     UserName: UserName;
     /**

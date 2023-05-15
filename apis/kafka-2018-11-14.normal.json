@@ -3968,7 +3968,10 @@
           "locationName": "nextToken",
           "documentation": "\n            <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. \n            To get the next batch, provide this token in your next request.</p>\n         "
         }
-      }
+      },
+      "required": [
+        "ClusterArn"
+      ]
     },
     "ListClientVpcConnectionsResponse": {
       "type": "structure",
@@ -4033,7 +4036,8 @@
         }
       },
       "required": [
-        "VpcConnectionArn"
+        "VpcConnectionArn",
+        "ClusterArn"
       ]
     },
     "RejectClientVpcConnectionResponse": {

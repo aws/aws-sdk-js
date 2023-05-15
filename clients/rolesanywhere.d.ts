@@ -12,19 +12,19 @@ declare class RolesAnywhere extends Service {
   constructor(options?: RolesAnywhere.Types.ClientConfiguration)
   config: Config & RolesAnywhere.Types.ClientConfiguration;
   /**
-   * Creates a profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can intersect permissions with IAM managed policies.  Required permissions:  rolesanywhere:CreateProfile. 
+   * Creates a profile, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.  Required permissions:  rolesanywhere:CreateProfile. 
    */
   createProfile(params: RolesAnywhere.Types.CreateProfileRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
-   * Creates a profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can intersect permissions with IAM managed policies.  Required permissions:  rolesanywhere:CreateProfile. 
+   * Creates a profile, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.  Required permissions:  rolesanywhere:CreateProfile. 
    */
   createProfile(callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
-   * Creates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.  Required permissions:  rolesanywhere:CreateTrustAnchor. 
+   * Creates a trust anchor to establish trust between IAM Roles Anywhere and your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.  Required permissions:  rolesanywhere:CreateTrustAnchor. 
    */
   createTrustAnchor(params: RolesAnywhere.Types.CreateTrustAnchorRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
   /**
-   * Creates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.  Required permissions:  rolesanywhere:CreateTrustAnchor. 
+   * Creates a trust anchor to establish trust between IAM Roles Anywhere and your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.  Required permissions:  rolesanywhere:CreateTrustAnchor. 
    */
   createTrustAnchor(callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
   /**
@@ -60,19 +60,19 @@ declare class RolesAnywhere extends Service {
    */
   disableCrl(callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
   /**
-   * Disables a profile. When disabled, CreateSession requests with this profile fail.  Required permissions:  rolesanywhere:DisableProfile. 
+   * Disables a profile. When disabled, temporary credential requests with this profile fail.  Required permissions:  rolesanywhere:DisableProfile. 
    */
   disableProfile(params: RolesAnywhere.Types.ScalarProfileRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
-   * Disables a profile. When disabled, CreateSession requests with this profile fail.  Required permissions:  rolesanywhere:DisableProfile. 
+   * Disables a profile. When disabled, temporary credential requests with this profile fail.  Required permissions:  rolesanywhere:DisableProfile. 
    */
   disableProfile(callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
-   * Disables a trust anchor. When disabled, CreateSession requests specifying this trust anchor are unauthorized.  Required permissions:  rolesanywhere:DisableTrustAnchor. 
+   * Disables a trust anchor. When disabled, temporary credential requests specifying this trust anchor are unauthorized.  Required permissions:  rolesanywhere:DisableTrustAnchor. 
    */
   disableTrustAnchor(params: RolesAnywhere.Types.ScalarTrustAnchorRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
   /**
-   * Disables a trust anchor. When disabled, CreateSession requests specifying this trust anchor are unauthorized.  Required permissions:  rolesanywhere:DisableTrustAnchor. 
+   * Disables a trust anchor. When disabled, temporary credential requests specifying this trust anchor are unauthorized.  Required permissions:  rolesanywhere:DisableTrustAnchor. 
    */
   disableTrustAnchor(callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class RolesAnywhere extends Service {
    */
   enableCrl(callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
   /**
-   * Enables the roles in a profile to receive session credentials in CreateSession.   Required permissions:  rolesanywhere:EnableProfile. 
+   * Enables temporary credential requests for a profile.   Required permissions:  rolesanywhere:EnableProfile. 
    */
   enableProfile(params: RolesAnywhere.Types.ScalarProfileRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
-   * Enables the roles in a profile to receive session credentials in CreateSession.   Required permissions:  rolesanywhere:EnableProfile. 
+   * Enables temporary credential requests for a profile.   Required permissions:  rolesanywhere:EnableProfile. 
    */
   enableProfile(callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class RolesAnywhere extends Service {
    */
   getProfile(callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
-   * Gets a Subject. A Subject associates a certificate identity with authentication attempts by CreateSession. The Subject resources stores audit information such as status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication.   Required permissions:  rolesanywhere:GetSubject. 
+   * Gets a subject, which associates a certificate identity with authentication attempts. The subject stores auditing information such as the status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication.   Required permissions:  rolesanywhere:GetSubject. 
    */
   getSubject(params: RolesAnywhere.Types.ScalarSubjectRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.SubjectDetailResponse) => void): Request<RolesAnywhere.Types.SubjectDetailResponse, AWSError>;
   /**
-   * Gets a Subject. A Subject associates a certificate identity with authentication attempts by CreateSession. The Subject resources stores audit information such as status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication.   Required permissions:  rolesanywhere:GetSubject. 
+   * Gets a subject, which associates a certificate identity with authentication attempts. The subject stores auditing information such as the status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication.   Required permissions:  rolesanywhere:GetSubject. 
    */
   getSubject(callback?: (err: AWSError, data: RolesAnywhere.Types.SubjectDetailResponse) => void): Request<RolesAnywhere.Types.SubjectDetailResponse, AWSError>;
   /**
@@ -132,19 +132,19 @@ declare class RolesAnywhere extends Service {
    */
   getTrustAnchor(callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
   /**
-   * Imports the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials.   Required permissions:  rolesanywhere:ImportCrl. 
+   * Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.   Required permissions:  rolesanywhere:ImportCrl. 
    */
   importCrl(params: RolesAnywhere.Types.ImportCrlRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
   /**
-   * Imports the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials.   Required permissions:  rolesanywhere:ImportCrl. 
+   * Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.   Required permissions:  rolesanywhere:ImportCrl. 
    */
   importCrl(callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
   /**
-   * Lists all Crls in the authenticated account and Amazon Web Services Region.  Required permissions:  rolesanywhere:ListCrls. 
+   * Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.  Required permissions:  rolesanywhere:ListCrls. 
    */
   listCrls(params: RolesAnywhere.Types.ListRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.ListCrlsResponse) => void): Request<RolesAnywhere.Types.ListCrlsResponse, AWSError>;
   /**
-   * Lists all Crls in the authenticated account and Amazon Web Services Region.  Required permissions:  rolesanywhere:ListCrls. 
+   * Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.  Required permissions:  rolesanywhere:ListCrls. 
    */
   listCrls(callback?: (err: AWSError, data: RolesAnywhere.Types.ListCrlsResponse) => void): Request<RolesAnywhere.Types.ListCrlsResponse, AWSError>;
   /**
@@ -180,6 +180,22 @@ declare class RolesAnywhere extends Service {
    */
   listTrustAnchors(callback?: (err: AWSError, data: RolesAnywhere.Types.ListTrustAnchorsResponse) => void): Request<RolesAnywhere.Types.ListTrustAnchorsResponse, AWSError>;
   /**
+   * Attaches a list of notification settings to a trust anchor. A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.  Required permissions:  rolesanywhere:PutNotificationSettings. 
+   */
+  putNotificationSettings(params: RolesAnywhere.Types.PutNotificationSettingsRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.PutNotificationSettingsResponse) => void): Request<RolesAnywhere.Types.PutNotificationSettingsResponse, AWSError>;
+  /**
+   * Attaches a list of notification settings to a trust anchor. A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.  Required permissions:  rolesanywhere:PutNotificationSettings. 
+   */
+  putNotificationSettings(callback?: (err: AWSError, data: RolesAnywhere.Types.PutNotificationSettingsResponse) => void): Request<RolesAnywhere.Types.PutNotificationSettingsResponse, AWSError>;
+  /**
+   * Resets the custom notification setting to IAM Roles Anywhere default setting.   Required permissions:  rolesanywhere:ResetNotificationSettings. 
+   */
+  resetNotificationSettings(params: RolesAnywhere.Types.ResetNotificationSettingsRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.ResetNotificationSettingsResponse) => void): Request<RolesAnywhere.Types.ResetNotificationSettingsResponse, AWSError>;
+  /**
+   * Resets the custom notification setting to IAM Roles Anywhere default setting.   Required permissions:  rolesanywhere:ResetNotificationSettings. 
+   */
+  resetNotificationSettings(callback?: (err: AWSError, data: RolesAnywhere.Types.ResetNotificationSettingsResponse) => void): Request<RolesAnywhere.Types.ResetNotificationSettingsResponse, AWSError>;
+  /**
    * Attaches tags to a resource.  Required permissions:  rolesanywhere:TagResource. 
    */
   tagResource(params: RolesAnywhere.Types.TagResourceRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.TagResourceResponse) => void): Request<RolesAnywhere.Types.TagResourceResponse, AWSError>;
@@ -196,27 +212,27 @@ declare class RolesAnywhere extends Service {
    */
   untagResource(callback?: (err: AWSError, data: RolesAnywhere.Types.UntagResourceResponse) => void): Request<RolesAnywhere.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials.  Required permissions:  rolesanywhere:UpdateCrl. 
+   * Updates the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.  Required permissions:  rolesanywhere:UpdateCrl. 
    */
   updateCrl(params: RolesAnywhere.Types.UpdateCrlRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
   /**
-   * Updates the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials.  Required permissions:  rolesanywhere:UpdateCrl. 
+   * Updates the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.  Required permissions:  rolesanywhere:UpdateCrl. 
    */
   updateCrl(callback?: (err: AWSError, data: RolesAnywhere.Types.CrlDetailResponse) => void): Request<RolesAnywhere.Types.CrlDetailResponse, AWSError>;
   /**
-   * Updates the profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can scope-down permissions with IAM managed policies.  Required permissions:  rolesanywhere:UpdateProfile. 
+   * Updates a profile, a list of the roles that IAM Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.  Required permissions:  rolesanywhere:UpdateProfile. 
    */
   updateProfile(params: RolesAnywhere.Types.UpdateProfileRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
-   * Updates the profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can scope-down permissions with IAM managed policies.  Required permissions:  rolesanywhere:UpdateProfile. 
+   * Updates a profile, a list of the roles that IAM Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.  Required permissions:  rolesanywhere:UpdateProfile. 
    */
   updateProfile(callback?: (err: AWSError, data: RolesAnywhere.Types.ProfileDetailResponse) => void): Request<RolesAnywhere.Types.ProfileDetailResponse, AWSError>;
   /**
-   * Updates the trust anchor.You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.  Required permissions:  rolesanywhere:UpdateTrustAnchor. 
+   * Updates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.  Required permissions:  rolesanywhere:UpdateTrustAnchor. 
    */
   updateTrustAnchor(params: RolesAnywhere.Types.UpdateTrustAnchorRequest, callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
   /**
-   * Updates the trust anchor.You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.  Required permissions:  rolesanywhere:UpdateTrustAnchor. 
+   * Updates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.  Required permissions:  rolesanywhere:UpdateTrustAnchor. 
    */
   updateTrustAnchor(callback?: (err: AWSError, data: RolesAnywhere.Types.TrustAnchorDetailResponse) => void): Request<RolesAnywhere.Types.TrustAnchorDetailResponse, AWSError>;
 }
@@ -242,11 +258,11 @@ declare namespace RolesAnywhere {
      */
     name: ResourceName;
     /**
-     * Specifies whether instance properties are required in CreateSession requests with this profile. 
+     * Specifies whether instance properties are required in temporary credential requests with this profile. 
      */
     requireInstanceProperties?: Boolean;
     /**
-     * A list of IAM roles that this profile can assume in a CreateSession operation.
+     * A list of IAM roles that this profile can assume in a temporary credential request.
      */
     roleArns: RoleArnList;
     /**
@@ -269,6 +285,10 @@ declare namespace RolesAnywhere {
      */
     name: ResourceName;
     /**
+     * A list of notification settings to be associated to the trust anchor.
+     */
+    notificationSettings?: NotificationSettings;
+    /**
      * The trust anchor type and its related certificate data.
      */
     source: Source;
@@ -284,7 +304,7 @@ declare namespace RolesAnywhere {
      */
     enabled?: Boolean;
     /**
-     * Indicates whether the CreateSession operation was successful. 
+     * Indicates whether the temporary credential request was successful. 
      */
     failed?: Boolean;
     /**
@@ -292,7 +312,7 @@ declare namespace RolesAnywhere {
      */
     issuer?: String;
     /**
-     * The ISO-8601 time stamp of when the certificate was last used in a CreateSession operation.
+     * The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.
      */
     seenAt?: SyntheticTimestamp_date_time;
     /**
@@ -347,7 +367,7 @@ declare namespace RolesAnywhere {
   export type CrlDetails = CrlDetail[];
   export interface ImportCrlRequest {
     /**
-     * The x509 v3 specified certificate revocation list
+     * The x509 v3 specified certificate revocation list (CRL).
      */
     crlData: ImportCrlRequestCrlDataBlob;
     /**
@@ -371,7 +391,7 @@ declare namespace RolesAnywhere {
   export type InstanceProperties = InstanceProperty[];
   export interface InstanceProperty {
     /**
-     * Indicates whether the CreateSession operation was successful. 
+     * Indicates whether the temporary credential request was successful. 
      */
     failed?: Boolean;
     /**
@@ -379,7 +399,7 @@ declare namespace RolesAnywhere {
      */
     properties?: InstancePropertyMap;
     /**
-     * The ISO-8601 time stamp of when the certificate was last used in a CreateSession operation.
+     * The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.
      */
     seenAt?: SyntheticTimestamp_date_time;
   }
@@ -393,13 +413,13 @@ declare namespace RolesAnywhere {
      */
     crls?: CrlDetails;
     /**
-     * A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.
+     * A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.
      */
     nextToken?: String;
   }
   export interface ListProfilesResponse {
     /**
-     * A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.
+     * A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.
      */
     nextToken?: String;
     /**
@@ -409,7 +429,7 @@ declare namespace RolesAnywhere {
   }
   export interface ListRequest {
     /**
-     * A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.
+     * A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.
      */
     nextToken?: ListRequestNextTokenString;
     /**
@@ -420,7 +440,7 @@ declare namespace RolesAnywhere {
   export type ListRequestNextTokenString = string;
   export interface ListSubjectsResponse {
     /**
-     * A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.
+     * A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.
      */
     nextToken?: String;
     /**
@@ -442,7 +462,7 @@ declare namespace RolesAnywhere {
   }
   export interface ListTrustAnchorsResponse {
     /**
-     * A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.
+     * A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.
      */
     nextToken?: String;
     /**
@@ -452,6 +472,64 @@ declare namespace RolesAnywhere {
   }
   export type ManagedPolicyList = ManagedPolicyListMemberString[];
   export type ManagedPolicyListMemberString = string;
+  export type NotificationChannel = "ALL"|string;
+  export type NotificationEvent = "CA_CERTIFICATE_EXPIRY"|"END_ENTITY_CERTIFICATE_EXPIRY"|string;
+  export interface NotificationSetting {
+    /**
+     * The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.  In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels. 
+     */
+    channel?: NotificationChannel;
+    /**
+     * Indicates whether the notification setting is enabled.
+     */
+    enabled: Boolean;
+    /**
+     * The event to which this notification setting is applied.
+     */
+    event: NotificationEvent;
+    /**
+     * The number of days before a notification event. This value is required for a notification setting that is enabled.
+     */
+    threshold?: NotificationSettingThresholdInteger;
+  }
+  export interface NotificationSettingDetail {
+    /**
+     * The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.  In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels. 
+     */
+    channel?: NotificationChannel;
+    /**
+     * The principal that configured the notification setting. For default settings configured by IAM Roles Anywhere, the value is rolesanywhere.amazonaws.com, and for customized notifications settings, it is the respective account ID. 
+     */
+    configuredBy?: NotificationSettingDetailConfiguredByString;
+    /**
+     * Indicates whether the notification setting is enabled.
+     */
+    enabled: Boolean;
+    /**
+     * The event to which this notification setting is applied.
+     */
+    event: NotificationEvent;
+    /**
+     * The number of days before a notification event.
+     */
+    threshold?: NotificationSettingDetailThresholdInteger;
+  }
+  export type NotificationSettingDetailConfiguredByString = string;
+  export type NotificationSettingDetailThresholdInteger = number;
+  export type NotificationSettingDetails = NotificationSettingDetail[];
+  export interface NotificationSettingKey {
+    /**
+     * The specified channel of notification.
+     */
+    channel?: NotificationChannel;
+    /**
+     * The notification setting event to reset.
+     */
+    event: NotificationEvent;
+  }
+  export type NotificationSettingKeys = NotificationSettingKey[];
+  export type NotificationSettingThresholdInteger = number;
+  export type NotificationSettings = NotificationSetting[];
   export type ProfileArn = string;
   export interface ProfileDetail {
     /**
@@ -487,11 +565,11 @@ declare namespace RolesAnywhere {
      */
     profileId?: Uuid;
     /**
-     * Specifies whether instance properties are required in CreateSession requests with this profile. 
+     * Specifies whether instance properties are required in temporary credential requests with this profile. 
      */
     requireInstanceProperties?: Boolean;
     /**
-     * A list of IAM roles that this profile can assume in a CreateSession operation.
+     * A list of IAM roles that this profile can assume in a temporary credential request.
      */
     roleArns?: RoleArnList;
     /**
@@ -510,6 +588,32 @@ declare namespace RolesAnywhere {
     profile?: ProfileDetail;
   }
   export type ProfileDetails = ProfileDetail[];
+  export interface PutNotificationSettingsRequest {
+    /**
+     * A list of notification settings to be associated to the trust anchor.
+     */
+    notificationSettings: NotificationSettings;
+    /**
+     * The unique identifier of the trust anchor.
+     */
+    trustAnchorId: Uuid;
+  }
+  export interface PutNotificationSettingsResponse {
+    trustAnchor: TrustAnchorDetail;
+  }
+  export interface ResetNotificationSettingsRequest {
+    /**
+     * A list of notification setting keys to reset. A notification setting key includes the event and the channel. 
+     */
+    notificationSettingKeys: NotificationSettingKeys;
+    /**
+     * The unique identifier of the trust anchor.
+     */
+    trustAnchorId: Uuid;
+  }
+  export interface ResetNotificationSettingsResponse {
+    trustAnchor: TrustAnchorDetail;
+  }
   export type ResourceName = string;
   export type RoleArn = string;
   export type RoleArnList = RoleArn[];
@@ -549,14 +653,15 @@ declare namespace RolesAnywhere {
   }
   export interface SourceData {
     /**
-     * The root certificate of the Certificate Manager Private Certificate Authority specified by this ARN is used in trust validation for CreateSession operations. Included for trust anchors of type AWS_ACM_PCA. 
+     *  The root certificate of the Private Certificate Authority specified by this ARN is used in trust validation for temporary credential requests. Included for trust anchors of type AWS_ACM_PCA. 
      */
     acmPcaArn?: String;
     /**
      * The PEM-encoded data for the certificate anchor. Included for trust anchors of type CERTIFICATE_BUNDLE. 
      */
-    x509CertificateData?: String;
+    x509CertificateData?: SourceDataX509CertificateDataString;
   }
+  export type SourceDataX509CertificateDataString = string;
   export type String = string;
   export interface SubjectDetail {
     /**
@@ -564,7 +669,7 @@ declare namespace RolesAnywhere {
      */
     createdAt?: SyntheticTimestamp_date_time;
     /**
-     * The temporary session credentials vended at the last authenticating call with this Subject.
+     * The temporary session credentials vended at the last authenticating call with this subject.
      */
     credentials?: CredentialSummaries;
     /**
@@ -576,7 +681,7 @@ declare namespace RolesAnywhere {
      */
     instanceProperties?: InstanceProperties;
     /**
-     * The ISO-8601 timestamp of the last time this Subject requested temporary session credentials.
+     * The ISO-8601 timestamp of the last time this subject requested temporary session credentials.
      */
     lastSeenAt?: SyntheticTimestamp_date_time;
     /**
@@ -605,15 +710,15 @@ declare namespace RolesAnywhere {
   export type SubjectSummaries = SubjectSummary[];
   export interface SubjectSummary {
     /**
-     * The ISO-8601 time stamp of when the certificate was first used in a CreateSession operation.
+     * The ISO-8601 time stamp of when the certificate was first used in a temporary credential request.
      */
     createdAt?: SyntheticTimestamp_date_time;
     /**
-     * The enabled status of the Subject. 
+     * The enabled status of the subject. 
      */
     enabled?: Boolean;
     /**
-     * The ISO-8601 time stamp of when the certificate was last used in a CreateSession operation.
+     * The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.
      */
     lastSeenAt?: SyntheticTimestamp_date_time;
     /**
@@ -675,6 +780,10 @@ declare namespace RolesAnywhere {
      */
     name?: ResourceName;
     /**
+     * A list of notification settings to be associated to the trust anchor.
+     */
+    notificationSettings?: NotificationSettingDetails;
+    /**
      * The trust anchor type and its related certificate data.
      */
     source?: Source;
@@ -713,7 +822,7 @@ declare namespace RolesAnywhere {
   }
   export interface UpdateCrlRequest {
     /**
-     * The x509 v3 specified certificate revocation list
+     * The x509 v3 specified certificate revocation list (CRL).
      */
     crlData?: UpdateCrlRequestCrlDataBlob;
     /**
@@ -744,7 +853,7 @@ declare namespace RolesAnywhere {
      */
     profileId: Uuid;
     /**
-     * A list of IAM roles that this profile can assume in a CreateSession operation.
+     * A list of IAM roles that this profile can assume in a temporary credential request.
      */
     roleArns?: RoleArnList;
     /**

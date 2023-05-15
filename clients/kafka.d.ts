@@ -2456,7 +2456,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
             The Amazon Resource Name (ARN) of the cluster.
          
      */
-    ClusterArn?: __string;
+    ClusterArn: __string;
     /**
      * 
             The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.
@@ -2522,7 +2522,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
             The Amazon Resource Name (ARN) of the cluster.
          
      */
-    ClusterArn?: __string;
+    ClusterArn: __string;
     /**
      * 
             The VPC connection ARN.
