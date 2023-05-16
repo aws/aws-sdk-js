@@ -314,7 +314,7 @@ declare namespace Detective {
      */
     UnprocessedAccounts?: UnprocessedAccountList;
   }
-  export type DatasourcePackage = "DETECTIVE_CORE"|"EKS_AUDIT"|string;
+  export type DatasourcePackage = "DETECTIVE_CORE"|"EKS_AUDIT"|"ASFF_SECURITYHUB_FINDING"|string;
   export interface DatasourcePackageIngestDetail {
     /**
      * Details on which data source packages are ingested for a member account.

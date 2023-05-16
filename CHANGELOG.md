@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1378.0-->
+<!--LATEST=2.1379.0-->
 <!--ENTRYINSERT-->
+
+## 2.1379.0
+* feature: Detective: Added and updated API operations in Detective to support the integration of ASFF Security Hub findings.
+* feature: Glue: Add Support for Tags for Custom Entity Types
+* feature: WAFV2: My AWS Service (placeholder) - You can now rate limit web requests based on aggregation keys other than IP addresses, and you can aggregate using combinations of keys. You can also rate limit all requests that match a scope-down statement, without further aggregation.
 
 ## 2.1378.0
 * feature: Athena: You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
