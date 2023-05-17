@@ -43,8 +43,13 @@
       "globalEndpoint": true,
       "signingRegion": "cn-north-1"
     },
-    "us-gov-*/iam": "globalGovCloud",
+    "us-iso-*/iam": {
+      "endpoint": "{service}.us-iso-east-1.c2s.ic.gov",
+      "globalEndpoint": true,
+      "signingRegion": "us-iso-east-1"
+    },
 
+    "us-gov-*/iam": "globalGovCloud",
     "us-gov-*/sts": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },

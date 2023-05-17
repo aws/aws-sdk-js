@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "IAM",
+  "description": "Fix endpoint for IAM in aws-iso partition"
+}
