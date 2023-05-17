@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "errors",
+  "description": "add error.body hidden field with original error body for JSON protocols"
+}
