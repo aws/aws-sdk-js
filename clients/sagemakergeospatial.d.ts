@@ -274,12 +274,6 @@ declare namespace SageMakerGeospatial {
      */
     UpperBound: Float;
   }
-  export interface EojDataSourceConfigInput {
-    /**
-     * The input structure for S3Data; representing the Amazon S3 location of the input data objects.
-     */
-    S3Data?: S3DataInput;
-  }
   export type ExecutionRoleArn = string;
   export interface ExportEarthObservationJobInput {
     /**
@@ -676,10 +670,6 @@ declare namespace SageMakerGeospatial {
   export type ImageSourceBandList = String[];
   export interface InputConfigInput {
     /**
-     * The location of the input data.&gt;
-     */
-    DataSourceConfig?: EojDataSourceConfigInput;
-    /**
      * The Amazon Resource Name (ARN) of the previous Earth Observation job.
      */
     PreviousEarthObservationJobArn?: EarthObservationJobArn;
@@ -689,10 +679,6 @@ declare namespace SageMakerGeospatial {
     RasterDataCollectionQuery?: RasterDataCollectionQueryInput;
   }
   export interface InputConfigOutput {
-    /**
-     * The location of the input data.
-     */
-    DataSourceConfig?: EojDataSourceConfigInput;
     /**
      * The Amazon Resource Name (ARN) of the previous Earth Observation job.
      */
@@ -958,7 +944,6 @@ declare namespace SageMakerGeospatial {
      */
     YAttributeName: String;
   }
-  export type MetadataProvider = "PLANET_ORDER"|string;
   export interface MultiPolygonGeometryInput {
     /**
      * The coordinates of the multipolygon geometry.
@@ -1213,20 +1198,6 @@ declare namespace SageMakerGeospatial {
      */
     YAttributeName: String;
   }
-  export interface S3DataInput {
-    /**
-     * The Key Management Service key ID for server-side encryption.
-     */
-    KmsKeyId?: KmsKey;
-    /**
-     * Metadata provider from whom the Amazon S3 data has been acquired.
-     */
-    MetadataProvider: MetadataProvider;
-    /**
-     * The URL to the Amazon S3 input.
-     */
-    S3Uri: S3Uri;
-  }
   export type S3Uri = string;
   export interface SearchRasterDataCollectionInput {
     /**
@@ -1275,7 +1246,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn?: ExecutionRoleArn;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * Input configuration information for the Earth Observation job.
      */
@@ -1315,7 +1286,7 @@ declare namespace SageMakerGeospatial {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
      */
-    ExecutionRoleArn?: ExecutionRoleArn;
+    ExecutionRoleArn: ExecutionRoleArn;
     /**
      * Input configuration information for the Earth Observation job.
      */

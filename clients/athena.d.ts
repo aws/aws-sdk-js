@@ -1141,10 +1141,6 @@ declare namespace Athena {
      * Contains additional notebook engine MAP&lt;string, string&gt; parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.
      */
     AdditionalConfigs?: ParametersMap;
-    /**
-     * Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.
-     */
-    SparkProperties?: ParametersMap;
   }
   export interface EngineVersion {
     /**

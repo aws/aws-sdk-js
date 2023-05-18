@@ -172,6 +172,14 @@ declare class Connect extends Service {
    */
   createParticipant(callback?: (err: AWSError, data: Connect.Types.CreateParticipantResponse) => void): Request<Connect.Types.CreateParticipantResponse, AWSError>;
   /**
+   * Creates a prompt. For more information about prompts, such as supported file types and maximum length, see Create prompts in the Amazon Connect Administrator's Guide.
+   */
+  createPrompt(params: Connect.Types.CreatePromptRequest, callback?: (err: AWSError, data: Connect.Types.CreatePromptResponse) => void): Request<Connect.Types.CreatePromptResponse, AWSError>;
+  /**
+   * Creates a prompt. For more information about prompts, such as supported file types and maximum length, see Create prompts in the Amazon Connect Administrator's Guide.
+   */
+  createPrompt(callback?: (err: AWSError, data: Connect.Types.CreatePromptResponse) => void): Request<Connect.Types.CreatePromptResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   createQueue(params: Connect.Types.CreateQueueRequest, callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
@@ -323,6 +331,14 @@ declare class Connect extends Service {
    * Deletes an Amazon Web Services resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a prompt.
+   */
+  deletePrompt(params: Connect.Types.DeletePromptRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a prompt.
+   */
+  deletePrompt(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a quick connect.
    */
@@ -483,6 +499,14 @@ declare class Connect extends Service {
    * Gets details and status of a phone number that’s claimed to your Amazon Connect instance or traffic distribution group.  If the number is claimed to a traffic distribution group, and you are calling in the Amazon Web Services Region where the traffic distribution group was created, you can use either a phone number ARN or UUID value for the PhoneNumberId URI request parameter. However, if the number is claimed to a traffic distribution group and you are calling this API in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. 
    */
   describePhoneNumber(callback?: (err: AWSError, data: Connect.Types.DescribePhoneNumberResponse) => void): Request<Connect.Types.DescribePhoneNumberResponse, AWSError>;
+  /**
+   * Describes the prompt.
+   */
+  describePrompt(params: Connect.Types.DescribePromptRequest, callback?: (err: AWSError, data: Connect.Types.DescribePromptResponse) => void): Request<Connect.Types.DescribePromptResponse, AWSError>;
+  /**
+   * Describes the prompt.
+   */
+  describePrompt(callback?: (err: AWSError, data: Connect.Types.DescribePromptResponse) => void): Request<Connect.Types.DescribePromptResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Describes the specified queue.
    */
@@ -691,6 +715,14 @@ declare class Connect extends Service {
    * Gets metric data from the specified Amazon Connect instance.   GetMetricDataV2 offers more features than GetMetricData, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for the last 35 days, in 24-hour intervals. For a description of the historical metrics that are supported by GetMetricDataV2 and GetMetricData, see Historical metrics definitions in the Amazon Connect Administrator's Guide.  This API is not available in the Amazon Web Services GovCloud (US) Regions.
    */
   getMetricDataV2(callback?: (err: AWSError, data: Connect.Types.GetMetricDataV2Response) => void): Request<Connect.Types.GetMetricDataV2Response, AWSError>;
+  /**
+   * Gets the prompt file.
+   */
+  getPromptFile(params: Connect.Types.GetPromptFileRequest, callback?: (err: AWSError, data: Connect.Types.GetPromptFileResponse) => void): Request<Connect.Types.GetPromptFileResponse, AWSError>;
+  /**
+   * Gets the prompt file.
+   */
+  getPromptFile(callback?: (err: AWSError, data: Connect.Types.GetPromptFileResponse) => void): Request<Connect.Types.GetPromptFileResponse, AWSError>;
   /**
    * Gets details about a specific task template in the specified Amazon Connect instance.
    */
@@ -1315,6 +1347,14 @@ declare class Connect extends Service {
    * Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.  After using this API, you must verify that the phone number is attached to the correct flow in the target instance or traffic distribution group. You need to do this because the API switches only the phone number to a new instance or traffic distribution group. It doesn't migrate the flow configuration of the phone number, too. You can call DescribePhoneNumber API to verify the status of a previous UpdatePhoneNumber operation. 
    */
   updatePhoneNumber(callback?: (err: AWSError, data: Connect.Types.UpdatePhoneNumberResponse) => void): Request<Connect.Types.UpdatePhoneNumberResponse, AWSError>;
+  /**
+   * Updates a prompt.
+   */
+  updatePrompt(params: Connect.Types.UpdatePromptRequest, callback?: (err: AWSError, data: Connect.Types.UpdatePromptResponse) => void): Request<Connect.Types.UpdatePromptResponse, AWSError>;
+  /**
+   * Updates a prompt.
+   */
+  updatePrompt(callback?: (err: AWSError, data: Connect.Types.UpdatePromptResponse) => void): Request<Connect.Types.UpdatePromptResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation for the specified queue.
    */
@@ -2453,6 +2493,38 @@ declare namespace Connect {
      */
     ParticipantId?: ParticipantId;
   }
+  export interface CreatePromptRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the prompt.
+     */
+    Name: CommonNameLength127;
+    /**
+     * The description of the prompt.
+     */
+    Description?: PromptDescription;
+    /**
+     * The URI for the S3 bucket where the prompt is stored.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreatePromptResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prompt.
+     */
+    PromptARN?: ARN;
+    /**
+     * A unique identifier for the prompt.
+     */
+    PromptId?: PromptId;
+  }
   export interface CreateQueueRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -3076,6 +3148,16 @@ declare namespace Connect {
      */
     IntegrationAssociationId: IntegrationAssociationId;
   }
+  export interface DeletePromptRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the prompt.
+     */
+    PromptId: PromptId;
+  }
   export interface DeleteQuickConnectRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -3363,6 +3445,22 @@ declare namespace Connect {
      * Information about a phone number that's been claimed to your Amazon Connect instance or traffic distribution group.
      */
     ClaimedPhoneNumberSummary?: ClaimedPhoneNumberSummary;
+  }
+  export interface DescribePromptRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the prompt.
+     */
+    PromptId: PromptId;
+  }
+  export interface DescribePromptResponse {
+    /**
+     * Information about the prompt.
+     */
+    Prompt?: Prompt;
   }
   export interface DescribeQueueRequest {
     /**
@@ -4458,6 +4556,22 @@ declare namespace Connect {
      * Information about the metrics requested in the API request If no grouping is specified, a summary of metric data is returned. 
      */
     MetricResults?: MetricResultsV2;
+  }
+  export interface GetPromptFileRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the prompt.
+     */
+    PromptId: PromptId;
+  }
+  export interface GetPromptFileResponse {
+    /**
+     * A generated URL to the prompt that can be given to an unauthorized user so they can access the prompt in S3.
+     */
+    PromptPresignedUrl?: PromptPresignedUrl;
   }
   export interface GetTaskTemplateRequest {
     /**
@@ -6295,8 +6409,32 @@ declare namespace Connect {
   export type PhoneType = "SOFT_PHONE"|"DESK_PHONE"|string;
   export type Prefix = string;
   export type Priority = number;
+  export interface Prompt {
+    /**
+     * The Amazon Resource Name (ARN) of the prompt.
+     */
+    PromptARN?: ARN;
+    /**
+     * A unique identifier for the prompt.
+     */
+    PromptId?: PromptId;
+    /**
+     * The name of the prompt.
+     */
+    Name?: CommonNameLength127;
+    /**
+     * A description for the prompt.
+     */
+    Description?: PromptDescription;
+    /**
+     * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
+  export type PromptDescription = string;
   export type PromptId = string;
   export type PromptName = string;
+  export type PromptPresignedUrl = string;
   export interface PromptSummary {
     /**
      * The identifier of the prompt.
@@ -6898,6 +7036,7 @@ declare namespace Connect {
      */
     EncryptionConfig?: EncryptionConfig;
   }
+  export type S3Uri = string;
   export interface SearchAvailablePhoneNumbersRequest {
     /**
      * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
@@ -8275,6 +8414,38 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the phone number.
      */
     PhoneNumberArn?: ARN;
+  }
+  export interface UpdatePromptRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A unique identifier for the prompt.
+     */
+    PromptId: PromptId;
+    /**
+     * The name of the prompt.
+     */
+    Name?: CommonNameLength127;
+    /**
+     * A description of the prompt.
+     */
+    Description?: PromptDescription;
+    /**
+     * The URI for the S3 bucket where the prompt is stored.
+     */
+    S3Uri?: S3Uri;
+  }
+  export interface UpdatePromptResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the prompt.
+     */
+    PromptARN?: ARN;
+    /**
+     * A unique identifier for the prompt.
+     */
+    PromptId?: PromptId;
   }
   export interface UpdateQueueHoursOfOperationRequest {
     /**

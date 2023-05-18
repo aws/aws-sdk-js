@@ -256,7 +256,7 @@ declare namespace MediaConvert {
      */
     CodecProfile?: AacCodecProfile;
     /**
-     * The Coding mode that you specify determines the number of audio channels and the audio channel layout metadata in your AAC output. Valid coding modes depend on the Rate control mode and Profile that you select. The following list shows the number of audio channels and channel layout for each coding mode. * 1.0 Audio Description (Receiver Mix): One channel, C. Includes audio description data from your stereo input. For more information see ETSI TS 101 154 Annex E. * 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Five channels, C, L, R, Ls, Rs, LFE.
+     * The Coding mode that you specify determines the number of audio channels and the audio channel layout metadata in your AAC output. Valid coding modes depend on the Rate control mode and Profile that you select. The following list shows the number of audio channels and channel layout for each coding mode. * 1.0 Audio Description (Receiver Mix): One channel, C. Includes audio description data from your stereo input. For more information see ETSI TS 101 154 Annex E. * 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Six channels, C, L, R, Ls, Rs, LFE.
      */
     CodingMode?: AacCodingMode;
     /**
@@ -3043,7 +3043,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     SegmentLengthControl?: HlsSegmentLengthControl;
     /**
-     * Number of segments to write to a subdirectory before starting a new one. directoryStructure must be SINGLE_DIRECTORY for this setting to have an effect.
+     * Specify the number of segments to write to a subdirectory before starting a new one. You  must also set Directory structure to Subdirectory per stream for this setting to have an effect.
      */
     SegmentsPerSubdirectory?: __integerMin1Max2147483647;
     /**
@@ -3200,7 +3200,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type ImscStylePassthrough = "ENABLED"|"DISABLED"|string;
   export interface Input {
     /**
-     * Use to remove noise, blocking, blurriness, or ringing from your input as a pre-filter step before encoding. The Advanced input filter removes more types of compression artifacts and is an improvement when compared to basic Deblock and Denoise filters. To remove video compression artifacts from your input and improve the video quality: Choose Enabled. Additionally, this filter can help increase the video quality of your output relative to its bitrate, since noisy inputs are more complex and require more bits to encode. To help restore loss of detail after applying the filter, you can optionally add texture or sharpening as an additional step.Jobs that use this feature incur pro-tier pricing. To not apply advanced input filtering: Choose Disabled. Note that you can still apply basic filtering with Deblock and Denoise.
+     * Use to remove noise, blocking, blurriness, or ringing from your input as a pre-filter step before encoding. The Advanced input filter removes more types of compression artifacts and is an improvement when compared to basic Deblock and Denoise filters. To remove video compression artifacts from your input and improve the video quality: Choose Enabled. Additionally, this filter can help increase the video quality of your output relative to its bitrate, since noisy inputs are more complex and require more bits to encode. To help restore loss of detail after applying the filter, you can optionally add texture or sharpening as an additional step. Jobs that use this feature incur pro-tier pricing. To not apply advanced input filtering: Choose Disabled. Note that you can still apply basic filtering with Deblock and Denoise.
      */
     AdvancedInputFilter?: AdvancedInputFilter;
     /**
@@ -3334,7 +3334,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type InputScanType = "AUTO"|"PSF"|string;
   export interface InputTemplate {
     /**
-     * Use to remove noise, blocking, blurriness, or ringing from your input as a pre-filter step before encoding. The Advanced input filter removes more types of compression artifacts and is an improvement when compared to basic Deblock and Denoise filters. To remove video compression artifacts from your input and improve the video quality: Choose Enabled. Additionally, this filter can help increase the video quality of your output relative to its bitrate, since noisy inputs are more complex and require more bits to encode. To help restore loss of detail after applying the filter, you can optionally add texture or sharpening as an additional step.Jobs that use this feature incur pro-tier pricing. To not apply advanced input filtering: Choose Disabled. Note that you can still apply basic filtering with Deblock and Denoise.
+     * Use to remove noise, blocking, blurriness, or ringing from your input as a pre-filter step before encoding. The Advanced input filter removes more types of compression artifacts and is an improvement when compared to basic Deblock and Denoise filters. To remove video compression artifacts from your input and improve the video quality: Choose Enabled. Additionally, this filter can help increase the video quality of your output relative to its bitrate, since noisy inputs are more complex and require more bits to encode. To help restore loss of detail after applying the filter, you can optionally add texture or sharpening as an additional step. Jobs that use this feature incur pro-tier pricing. To not apply advanced input filtering: Choose Disabled. Note that you can still apply basic filtering with Deblock and Denoise.
      */
     AdvancedInputFilter?: AdvancedInputFilter;
     /**
@@ -3768,7 +3768,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     /**
      * Provide the HTTPS endpoint to the Kantar server. You should get this endpoint from Kantar.
      */
-    KantarServerUrl?: __stringPatternHttpsKantarmediaComFr;
+    KantarServerUrl?: __stringPatternHttpsKantarmedia;
     /**
      * Optional. Specify the Amazon S3 bucket where you want MediaConvert to store your Kantar watermark XML logs. When you don't specify a bucket, MediaConvert doesn't save these logs. Note that your MediaConvert service role must provide access to this location. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html
      */
@@ -4623,7 +4623,7 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
   }
   export type MsSmoothManifestEncoding = "UTF8"|"UTF16"|string;
   export type MxfAfdSignaling = "NO_COPY"|"COPY_FROM_VIDEO"|string;
-  export type MxfProfile = "D_10"|"XDCAM"|"OP1A"|"XAVC"|string;
+  export type MxfProfile = "D_10"|"XDCAM"|"OP1A"|"XAVC"|"XDCAM_RDD9"|string;
   export interface MxfSettings {
     /**
      * Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output's video encoding settings.
@@ -5657,7 +5657,7 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
      */
     FixedAfd?: __integerMin0Max15;
     /**
-     * Use the Height (Height) setting to define the video resolution height for this output. Specify in pixels. If you don't provide a value here, the service will use the input height.
+     * Use Height to define the video resolution height, in pixels, for this output. To use the same resolution as your input: Leave both Width and Height blank. To evenly scale from your input resolution: Leave Height blank and enter a value for Width. For example, if your input is 1920x1080 and you set Width to 1280, your output will be 1280x720.
      */
     Height?: __integerMin32Max8192;
     /**
@@ -5685,7 +5685,7 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
      */
     VideoPreprocessors?: VideoPreprocessor;
     /**
-     * Use Width (Width) to define the video resolution width, in pixels, for this output. If you don't provide a value here, the service will use the input width.
+     * Use Width to define the video resolution width, in pixels, for this output. To use the same resolution as your input: Leave both Width and Height blank. To evenly scale from your input resolution: Leave Width blank and enter a value for Height. For example, if your input is 1920x1080 and you set Height to 720, your output will be 1280x720.
      */
     Width?: __integerMin32Max8192;
   }
@@ -6334,7 +6334,7 @@ When you specify Version 1, you must also set ID3 metadata (timedMetadata) to Pa
   export type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = string;
   export type __stringPatternDD = string;
   export type __stringPatternHttps = string;
-  export type __stringPatternHttpsKantarmediaComFr = string;
+  export type __stringPatternHttpsKantarmedia = string;
   export type __stringPatternIdentityAZaZ26AZaZ09163 = string;
   export type __stringPatternS3 = string;
   export type __stringPatternS3ASSETMAPXml = string;

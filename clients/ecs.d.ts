@@ -761,7 +761,7 @@ declare namespace ECS {
      */
     image?: String;
     /**
-     * The container image manifest digest.  The imageDigest is only returned if the container is using an image hosted in Amazon ECR, otherwise it is omitted. 
+     * The container image manifest digest.
      */
     imageDigest?: String;
     /**
@@ -1217,7 +1217,7 @@ declare namespace ECS {
      */
     serviceRegistries?: ServiceRegistries;
     /**
-     * The number of instantiations of the specified task definition to place and keep running on your cluster. This is required if schedulingStrategy is REPLICA or isn't specified. If schedulingStrategy is DAEMON then this isn't required.
+     * The number of instantiations of the specified task definition to place and keep running in your service. This is required if schedulingStrategy is REPLICA or isn't specified. If schedulingStrategy is DAEMON then this isn't required.
      */
     desiredCount?: BoxedInteger;
     /**

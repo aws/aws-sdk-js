@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1379.0-->
+<!--LATEST=2.1380.0-->
 <!--ENTRYINSERT-->
+
+## 2.1380.0
+* bugfix: IAM: Fix endpoint for IAM in aws-iso partition
+* feature: Athena: Removing SparkProperties from EngineConfiguration object for StartSession API call
+* feature: CloudTrail: Add ConflictException to PutEventSelectors, add (Channel/EDS)ARNInvalidException to Tag APIs. These exceptions provide customers with more specific error messages instead of internal errors.
+* feature: ComputeOptimizer: In this launch, we add support for showing integration status with external metric providers such as Instana, Datadog ...etc in GetEC2InstanceRecommendations and ExportEC2InstanceRecommendations apis
+* feature: Connect: You can programmatically create and manage prompts using APIs, for example, to extract prompts stored within Amazon Connect and add them to your Amazon S3 bucket. AWS CloudTrail, AWS CloudFormation and tagging are supported.
+* feature: EC2: Add support for i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge and i4g.16xlarge instances powered by AWS Graviton2 processors that deliver up to 15% better compute performance than our other storage-optimized instances.
+* feature: MediaConvert: This release introduces a new MXF Profile for XDCAM which is strictly compliant with the SMPTE RDD 9 standard and improved handling of output name modifiers.
+* feature: STS: API updates for the AWS Security Token Service
+* feature: SageMakerGeospatial: This release makes ExecutionRoleArn a required field in the StartEarthObservationJob API.
+* feature: errors: add error.body hidden field with original error body for JSON protocols
 
 ## 2.1379.0
 * feature: Detective: Added and updated API operations in Detective to support the integration of ASFF Security Hub findings.
