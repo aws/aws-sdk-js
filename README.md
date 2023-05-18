@@ -18,7 +18,8 @@ For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/ma
 ### We are excited to announce the [developer preview](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/preview/) of AWS SDK for JavaScript v3's new API documentation.
 
 ## Version 2.x Support
-We are formalizing our plans to enter **AWS SDK for JavaScript v2** into maintenance mode in 2023.
+We are formalizing our plans to make the *Maintenance Announcement (Phase 2)* for **AWS SDK for JavaScript v2** in 2023.
+Please refer to the [AWS SDKs and Tools maintenance policy][aws-sdks-maintenance-policy] for further details.
 
 [**AWS SDK for JavaScript v3**][aws-sdk-js-v3] is the latest and recommended version, 
 which has been GA since December 2020. Here is [why and how you should use
@@ -33,8 +34,6 @@ To give feedback on and report issues in the v3 repo, please refer to
 
 Watch this README and the [AWS Developer Tools Blog][aws-devtools-blog]
 for updates and announcements regarding the maintenance plans and timelines.
-Please refer to the [AWS SDKs and Tools maintenance policy][aws-sdks-maintenance-policy]
-for further details.
 
 A maintenance mode message may be emitted by this package on startup. 
 To suppress this message, use an environment variable:
