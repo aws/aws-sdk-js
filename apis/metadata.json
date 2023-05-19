@@ -1295,5 +1295,8 @@
   },
   "osis": {
     "name": "OSIS"
+  },
+  "mediapackagev2": {
+    "name": "MediaPackageV2"
   }
 }

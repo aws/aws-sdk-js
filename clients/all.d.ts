@@ -343,3 +343,4 @@ export import InternetMonitor = require('./internetmonitor');
 export import IVSRealTime = require('./ivsrealtime');
 export import VPCLattice = require('./vpclattice');
 export import OSIS = require('./osis');
+export import MediaPackageV2 = require('./mediapackagev2');

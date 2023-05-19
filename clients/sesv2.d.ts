@@ -540,6 +540,14 @@ declare class SESV2 extends Service {
    */
   putDedicatedIpInPool(callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpInPoolResponse) => void): Request<SESV2.Types.PutDedicatedIpInPoolResponse, AWSError>;
   /**
+   * Used to convert a dedicated IP pool to a different scaling mode.   MANAGED pools cannot be converted to STANDARD scaling mode. 
+   */
+  putDedicatedIpPoolScalingAttributes(params: SESV2.Types.PutDedicatedIpPoolScalingAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpPoolScalingAttributesResponse) => void): Request<SESV2.Types.PutDedicatedIpPoolScalingAttributesResponse, AWSError>;
+  /**
+   * Used to convert a dedicated IP pool to a different scaling mode.   MANAGED pools cannot be converted to STANDARD scaling mode. 
+   */
+  putDedicatedIpPoolScalingAttributes(callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpPoolScalingAttributesResponse) => void): Request<SESV2.Types.PutDedicatedIpPoolScalingAttributesResponse, AWSError>;
+  /**
    * 
    */
   putDedicatedIpWarmupAttributes(params: SESV2.Types.PutDedicatedIpWarmupAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutDedicatedIpWarmupAttributesResponse) => void): Request<SESV2.Types.PutDedicatedIpWarmupAttributesResponse, AWSError>;
@@ -1241,7 +1249,7 @@ declare namespace SESV2 {
      */
     PoolName: PoolName;
     /**
-     * The type of the dedicated IP pool.    STANDARD – A dedicated IP pool where the customer can control which IPs are part of the pool.    MANAGED – A dedicated IP pool where the reputation and number of IPs is automatically managed by Amazon SES.  
+     * The type of the dedicated IP pool.    STANDARD – A dedicated IP pool where you can control which IPs are part of the pool.    MANAGED – A dedicated IP pool where the reputation and number of IPs are automatically managed by Amazon SES.  
      */
     ScalingMode: ScalingMode;
   }
@@ -1809,7 +1817,7 @@ declare namespace SESV2 {
      */
     ContactListName: ContactListName;
     /**
-     * The contact's email addres.
+     * The contact's email address.
      */
     EmailAddress: EmailAddress;
   }
@@ -1819,7 +1827,7 @@ declare namespace SESV2 {
      */
     ContactListName?: ContactListName;
     /**
-     * The contact's email addres.
+     * The contact's email address.
      */
     EmailAddress?: EmailAddress;
     /**
@@ -2852,6 +2860,18 @@ declare namespace SESV2 {
   }
   export interface PutDedicatedIpInPoolResponse {
   }
+  export interface PutDedicatedIpPoolScalingAttributesRequest {
+    /**
+     * The name of the dedicated IP pool.
+     */
+    PoolName: PoolName;
+    /**
+     * The scaling mode to apply to the dedicated IP pool.  Changing the scaling mode from MANAGED to STANDARD is not supported. 
+     */
+    ScalingMode: ScalingMode;
+  }
+  export interface PutDedicatedIpPoolScalingAttributesResponse {
+  }
   export interface PutDedicatedIpWarmupAttributesRequest {
     /**
      * The dedicated IP address that you want to update the warm-up attributes for.
@@ -3414,7 +3434,7 @@ declare namespace SESV2 {
      */
     ContactListName: ContactListName;
     /**
-     * The contact's email addres.
+     * The contact's email address.
      */
     EmailAddress: EmailAddress;
     /**

@@ -345,6 +345,7 @@ export abstract class ConfigurationServicePlaceholders {
   ivsrealtime?: AWS.IVSRealTime.Types.ClientConfiguration;
   vpclattice?: AWS.VPCLattice.Types.ClientConfiguration;
   osis?: AWS.OSIS.Types.ClientConfiguration;
+  mediapackagev2?: AWS.MediaPackageV2.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -692,4 +693,5 @@ export interface ConfigurationServiceApiVersions {
   ivsrealtime?: AWS.IVSRealTime.Types.apiVersion;
   vpclattice?: AWS.VPCLattice.Types.apiVersion;
   osis?: AWS.OSIS.Types.apiVersion;
+  mediapackagev2?: AWS.MediaPackageV2.Types.apiVersion;
 }

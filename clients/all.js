@@ -344,5 +344,6 @@ module.exports = {
   InternetMonitor: require('./internetmonitor'),
   IVSRealTime: require('./ivsrealtime'),
   VPCLattice: require('./vpclattice'),
-  OSIS: require('./osis')
+  OSIS: require('./osis'),
+  MediaPackageV2: require('./mediapackagev2')
 };

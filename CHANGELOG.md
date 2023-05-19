@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1380.0-->
+<!--LATEST=2.1381.0-->
 <!--ENTRYINSERT-->
+
+## 2.1381.0
+* feature: Backup: Add  ResourceArn, ResourceType, and BackupVaultName to ListRecoveryPointsByLegalHold API response.
+* feature: ConnectCases: This release adds the ability to create fields with type Url through the CreateField API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* feature: MediaPackageV2: Adds support for the MediaPackage Live v2 API
+* feature: SESV2: This release allows customers to update scaling mode property of dedicated IP pools with PutDedicatedIpPoolScalingAttributes call.
 
 ## 2.1380.0
 * bugfix: IAM: Fix endpoint for IAM in aws-iso partition

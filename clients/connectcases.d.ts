@@ -727,7 +727,7 @@ declare namespace ConnectCases {
      */
     type: FieldType;
   }
-  export type FieldType = "Text"|"Number"|"Boolean"|"DateTime"|"SingleSelect"|string;
+  export type FieldType = "Text"|"Number"|"Boolean"|"DateTime"|"SingleSelect"|"Url"|string;
   export interface FieldValue {
     /**
      * Unique identifier of a field.
