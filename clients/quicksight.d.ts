@@ -420,6 +420,22 @@ declare class QuickSight extends Service {
    */
   describeAnalysisPermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeAnalysisPermissionsResponse) => void): Request<QuickSight.Types.DescribeAnalysisPermissionsResponse, AWSError>;
   /**
+   * Describes an existing export job. Poll job descriptions after a job starts to know the status of the job. When a job succeeds, a URL is provided to download the exported assets' data from. Download URLs are valid for five minutes after they are generated. You can call the DescribeAssetBundleExportJob API for a new download URL as needed. Job descriptions are available for 14 days after the job starts.
+   */
+  describeAssetBundleExportJob(params: QuickSight.Types.DescribeAssetBundleExportJobRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeAssetBundleExportJobResponse) => void): Request<QuickSight.Types.DescribeAssetBundleExportJobResponse, AWSError>;
+  /**
+   * Describes an existing export job. Poll job descriptions after a job starts to know the status of the job. When a job succeeds, a URL is provided to download the exported assets' data from. Download URLs are valid for five minutes after they are generated. You can call the DescribeAssetBundleExportJob API for a new download URL as needed. Job descriptions are available for 14 days after the job starts.
+   */
+  describeAssetBundleExportJob(callback?: (err: AWSError, data: QuickSight.Types.DescribeAssetBundleExportJobResponse) => void): Request<QuickSight.Types.DescribeAssetBundleExportJobResponse, AWSError>;
+  /**
+   * Describes an existing import job. Poll job descriptions after starting a job to know when it has succeeded or failed. Job descriptions are available for 14 days after job starts.
+   */
+  describeAssetBundleImportJob(params: QuickSight.Types.DescribeAssetBundleImportJobRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeAssetBundleImportJobResponse) => void): Request<QuickSight.Types.DescribeAssetBundleImportJobResponse, AWSError>;
+  /**
+   * Describes an existing import job. Poll job descriptions after starting a job to know when it has succeeded or failed. Job descriptions are available for 14 days after job starts.
+   */
+  describeAssetBundleImportJob(callback?: (err: AWSError, data: QuickSight.Types.DescribeAssetBundleImportJobResponse) => void): Request<QuickSight.Types.DescribeAssetBundleImportJobResponse, AWSError>;
+  /**
    * Provides a summary for a dashboard.
    */
   describeDashboard(params: QuickSight.Types.DescribeDashboardRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardResponse) => void): Request<QuickSight.Types.DescribeDashboardResponse, AWSError>;
@@ -708,6 +724,22 @@ declare class QuickSight extends Service {
    */
   listAnalyses(callback?: (err: AWSError, data: QuickSight.Types.ListAnalysesResponse) => void): Request<QuickSight.Types.ListAnalysesResponse, AWSError>;
   /**
+   * Lists all asset bundle export jobs that have been taken place in the last 14 days. Jobs created more than 14 days ago are deleted forever and are not returned. If you are using the same job ID for multiple jobs, ListAssetBundleExportJobs only returns the most recent job that uses the repeated job ID.
+   */
+  listAssetBundleExportJobs(params: QuickSight.Types.ListAssetBundleExportJobsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListAssetBundleExportJobsResponse) => void): Request<QuickSight.Types.ListAssetBundleExportJobsResponse, AWSError>;
+  /**
+   * Lists all asset bundle export jobs that have been taken place in the last 14 days. Jobs created more than 14 days ago are deleted forever and are not returned. If you are using the same job ID for multiple jobs, ListAssetBundleExportJobs only returns the most recent job that uses the repeated job ID.
+   */
+  listAssetBundleExportJobs(callback?: (err: AWSError, data: QuickSight.Types.ListAssetBundleExportJobsResponse) => void): Request<QuickSight.Types.ListAssetBundleExportJobsResponse, AWSError>;
+  /**
+   * Lists all asset bundle import jobs that have taken place in the last 14 days. Jobs created more than 14 days ago are deleted forever and are not returned. If you are using the same job ID for multiple jobs, ListAssetBundleImportJobs only returns the most recent job that uses the repeated job ID.
+   */
+  listAssetBundleImportJobs(params: QuickSight.Types.ListAssetBundleImportJobsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListAssetBundleImportJobsResponse) => void): Request<QuickSight.Types.ListAssetBundleImportJobsResponse, AWSError>;
+  /**
+   * Lists all asset bundle import jobs that have taken place in the last 14 days. Jobs created more than 14 days ago are deleted forever and are not returned. If you are using the same job ID for multiple jobs, ListAssetBundleImportJobs only returns the most recent job that uses the repeated job ID.
+   */
+  listAssetBundleImportJobs(callback?: (err: AWSError, data: QuickSight.Types.ListAssetBundleImportJobsResponse) => void): Request<QuickSight.Types.ListAssetBundleImportJobsResponse, AWSError>;
+  /**
    * Lists all the versions of the dashboards in the Amazon QuickSight subscription.
    */
   listDashboardVersions(params: QuickSight.Types.ListDashboardVersionsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDashboardVersionsResponse) => void): Request<QuickSight.Types.ListDashboardVersionsResponse, AWSError>;
@@ -979,6 +1011,22 @@ declare class QuickSight extends Service {
    * Use the SearchGroups operation to search groups in a specified Amazon QuickSight namespace using the supplied filters.
    */
   searchGroups(callback?: (err: AWSError, data: QuickSight.Types.SearchGroupsResponse) => void): Request<QuickSight.Types.SearchGroupsResponse, AWSError>;
+  /**
+   * Starts an Asset Bundle export job. An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a DescribeAssetBundleExportJob API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a DescribeAssetBundleExportJob API call. Each Amazon QuickSight account can run up to 10 export jobs concurrently. The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.
+   */
+  startAssetBundleExportJob(params: QuickSight.Types.StartAssetBundleExportJobRequest, callback?: (err: AWSError, data: QuickSight.Types.StartAssetBundleExportJobResponse) => void): Request<QuickSight.Types.StartAssetBundleExportJobResponse, AWSError>;
+  /**
+   * Starts an Asset Bundle export job. An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a DescribeAssetBundleExportJob API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a DescribeAssetBundleExportJob API call. Each Amazon QuickSight account can run up to 10 export jobs concurrently. The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.
+   */
+  startAssetBundleExportJob(callback?: (err: AWSError, data: QuickSight.Types.StartAssetBundleExportJobResponse) => void): Request<QuickSight.Types.StartAssetBundleExportJobResponse, AWSError>;
+  /**
+   * Starts an Asset Bundle import job. An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 10 import jobs concurrently. The API caller must have the necessary "create", "describe", and "update" permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.
+   */
+  startAssetBundleImportJob(params: QuickSight.Types.StartAssetBundleImportJobRequest, callback?: (err: AWSError, data: QuickSight.Types.StartAssetBundleImportJobResponse) => void): Request<QuickSight.Types.StartAssetBundleImportJobResponse, AWSError>;
+  /**
+   * Starts an Asset Bundle import job. An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 10 import jobs concurrently. The API caller must have the necessary "create", "describe", and "update" permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.
+   */
+  startAssetBundleImportJob(callback?: (err: AWSError, data: QuickSight.Types.StartAssetBundleImportJobResponse) => void): Request<QuickSight.Types.StartAssetBundleImportJobResponse, AWSError>;
   /**
    * Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, template, and topic.  Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:   You can't use tags to track costs for Amazon QuickSight. This isn't possible because you can't tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.   Amazon QuickSight doesn't currently support the tag editor for Resource Groups.  
    */
@@ -1583,6 +1631,407 @@ declare namespace QuickSight {
   export type ArcThicknessOptions = "SMALL"|"MEDIUM"|"LARGE"|string;
   export type Arn = string;
   export type ArnList = Arn[];
+  export interface AssetBundleCloudFormationOverridePropertyConfiguration {
+    /**
+     * An optional list of structures that control how resource IDs are parameterized in the returned CloudFormation template.
+     */
+    ResourceIdOverrideConfiguration?: AssetBundleExportJobResourceIdOverrideConfiguration;
+    /**
+     * An optional list of structures that control how VPCConnection resources are parameterized in the returned CloudFormation template.
+     */
+    VPCConnections?: AssetBundleExportJobVPCConnectionOverridePropertiesList;
+    /**
+     * An optional list of structures that control how RefreshSchedule resources are parameterized in the returned CloudFormation template.
+     */
+    RefreshSchedules?: AssetBundleExportJobRefreshScheduleOverridePropertiesList;
+    /**
+     * An optional list of structures that control how DataSource resources are parameterized in the returned CloudFormation template.
+     */
+    DataSources?: AssetBundleExportJobDataSourceOverridePropertiesList;
+    /**
+     * An optional list of structures that control how DataSet resources are parameterized in the returned CloudFormation template.
+     */
+    DataSets?: AssetBundleExportJobDataSetOverridePropertiesList;
+    /**
+     * An optional list of structures that control how Theme resources are parameterized in the returned CloudFormation template.
+     */
+    Themes?: AssetBundleExportJobThemeOverridePropertiesList;
+    /**
+     * An optional list of structures that control how Analysis resources are parameterized in the returned CloudFormation template.
+     */
+    Analyses?: AssetBundleExportJobAnalysisOverridePropertiesList;
+    /**
+     * An optional list of structures that control how Dashboard resources are parameterized in the returned CloudFormation template.
+     */
+    Dashboards?: AssetBundleExportJobDashboardOverridePropertiesList;
+  }
+  export type AssetBundleExportFormat = "CLOUDFORMATION_JSON"|"QUICKSIGHT_JSON"|string;
+  export interface AssetBundleExportJobAnalysisOverrideProperties {
+    /**
+     * The ARN of the specific Analysis resource whose override properties are configured in this structure.
+     */
+    Arn?: Arn;
+    /**
+     * A list of Analysis resource properties to generate variables for in the returned CloudFormation template.
+     */
+    Properties: AssetBundleExportJobAnalysisPropertyToOverrideList;
+  }
+  export type AssetBundleExportJobAnalysisOverridePropertiesList = AssetBundleExportJobAnalysisOverrideProperties[];
+  export type AssetBundleExportJobAnalysisPropertyToOverride = "Name"|string;
+  export type AssetBundleExportJobAnalysisPropertyToOverrideList = AssetBundleExportJobAnalysisPropertyToOverride[];
+  export interface AssetBundleExportJobDashboardOverrideProperties {
+    /**
+     * The ARN of the specific Dashboard resource whose override properties are configured in this structure.
+     */
+    Arn?: Arn;
+    /**
+     * A list of Dashboard resource properties to generate variables for in the returned CloudFormation template.
+     */
+    Properties: AssetBundleExportJobDashboardPropertyToOverrideList;
+  }
+  export type AssetBundleExportJobDashboardOverridePropertiesList = AssetBundleExportJobDashboardOverrideProperties[];
+  export type AssetBundleExportJobDashboardPropertyToOverride = "Name"|string;
+  export type AssetBundleExportJobDashboardPropertyToOverrideList = AssetBundleExportJobDashboardPropertyToOverride[];
+  export interface AssetBundleExportJobDataSetOverrideProperties {
+    /**
+     * The ARN of the specific DataSet resource whose override properties are configured in this structure.
+     */
+    Arn?: Arn;
+    /**
+     * A list of DataSet resource properties to generate variables for in the returned CloudFormation template.
+     */
+    Properties: AssetBundleExportJobDataSetPropertyToOverrideList;
+  }
+  export type AssetBundleExportJobDataSetOverridePropertiesList = AssetBundleExportJobDataSetOverrideProperties[];
+  export type AssetBundleExportJobDataSetPropertyToOverride = "Name"|string;
+  export type AssetBundleExportJobDataSetPropertyToOverrideList = AssetBundleExportJobDataSetPropertyToOverride[];
+  export interface AssetBundleExportJobDataSourceOverrideProperties {
+    /**
+     * The ARN of the specific DataSource resource whose override properties are configured in this structure.
+     */
+    Arn?: Arn;
+    /**
+     * A list of DataSource resource properties to generate variables for in the returned CloudFormation template.
+     */
+    Properties: AssetBundleExportJobDataSourcePropertyToOverrideList;
+  }
+  export type AssetBundleExportJobDataSourceOverridePropertiesList = AssetBundleExportJobDataSourceOverrideProperties[];
+  export type AssetBundleExportJobDataSourcePropertyToOverride = "Name"|"DisableSsl"|"SecretArn"|"Username"|"Password"|"Domain"|"WorkGroup"|"Host"|"Port"|"Database"|"DataSetName"|"Catalog"|"InstanceId"|"ClusterId"|"ManifestFileLocation"|"Warehouse"|"RoleArn"|string;
+  export type AssetBundleExportJobDataSourcePropertyToOverrideList = AssetBundleExportJobDataSourcePropertyToOverride[];
+  export interface AssetBundleExportJobError {
+    /**
+     * The ARN of the resource whose processing caused an error.
+     */
+    Arn?: Arn;
+    /**
+     * The specific error type of the error that occurred.
+     */
+    Type?: NonEmptyString;
+    /**
+     * A description of the error.
+     */
+    Message?: NonEmptyString;
+  }
+  export type AssetBundleExportJobErrorList = AssetBundleExportJobError[];
+  export interface AssetBundleExportJobRefreshScheduleOverrideProperties {
+    /**
+     * The ARN of the specific RefreshSchedule resource whose override properties are configured in this structure.
+     */
+    Arn?: Arn;
+    /**
+     * A list of RefreshSchedule resource properties to generate variables for in the returned CloudFormation template.
+     */
+    Properties: AssetBundleExportJobRefreshSchedulePropertyToOverrideList;
+  }
+  export type AssetBundleExportJobRefreshScheduleOverridePropertiesList = AssetBundleExportJobRefreshScheduleOverrideProperties[];
+  export type AssetBundleExportJobRefreshSchedulePropertyToOverride = "StartAfterDateTime"|string;
+  export type AssetBundleExportJobRefreshSchedulePropertyToOverrideList = AssetBundleExportJobRefreshSchedulePropertyToOverride[];
+  export interface AssetBundleExportJobResourceIdOverrideConfiguration {
+    /**
+     * An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.
+     */
+    PrefixForAllResources?: Boolean;
+  }
+  export type AssetBundleExportJobStatus = "QUEUED_FOR_IMMEDIATE_EXECUTION"|"IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|string;
+  export interface AssetBundleExportJobSummary {
+    /**
+     * The current status of the export job.
+     */
+    JobStatus?: AssetBundleExportJobStatus;
+    /**
+     * The ARN of the export job.
+     */
+    Arn?: Arn;
+    /**
+     * The time that the export job was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The ID of the export job.
+     */
+    AssetBundleExportJobId?: ShortRestrictiveResourceId;
+    /**
+     * The flag that determines the inclusion of resource dependencies in the returned asset bundle.
+     */
+    IncludeAllDependencies?: Boolean;
+    /**
+     * The format for the export job.
+     */
+    ExportFormat?: AssetBundleExportFormat;
+  }
+  export type AssetBundleExportJobSummaryList = AssetBundleExportJobSummary[];
+  export interface AssetBundleExportJobThemeOverrideProperties {
+    /**
+     * The ARN of the specific Theme resource whose override properties are configured in this structure.
+     */
+    Arn?: Arn;
+    /**
+     * A list of Theme resource properties to generate variables for in the returned CloudFormation template.
+     */
+    Properties: AssetBundleExportJobThemePropertyToOverrideList;
+  }
+  export type AssetBundleExportJobThemeOverridePropertiesList = AssetBundleExportJobThemeOverrideProperties[];
+  export type AssetBundleExportJobThemePropertyToOverride = "Name"|string;
+  export type AssetBundleExportJobThemePropertyToOverrideList = AssetBundleExportJobThemePropertyToOverride[];
+  export interface AssetBundleExportJobVPCConnectionOverrideProperties {
+    /**
+     * The ARN of the specific VPCConnection resource whose override properties are configured in this structure.
+     */
+    Arn?: Arn;
+    /**
+     * A list of VPCConnection resource properties to generate variables for in the returned CloudFormation template.
+     */
+    Properties: AssetBundleExportJobVPCConnectionPropertyToOverrideList;
+  }
+  export type AssetBundleExportJobVPCConnectionOverridePropertiesList = AssetBundleExportJobVPCConnectionOverrideProperties[];
+  export type AssetBundleExportJobVPCConnectionPropertyToOverride = "Name"|"DnsResolvers"|"RoleArn"|string;
+  export type AssetBundleExportJobVPCConnectionPropertyToOverrideList = AssetBundleExportJobVPCConnectionPropertyToOverride[];
+  export type AssetBundleImportBodyBlob = Buffer|Uint8Array|Blob|string;
+  export type AssetBundleImportFailureAction = "DO_NOTHING"|"ROLLBACK"|string;
+  export interface AssetBundleImportJobAnalysisOverrideParameters {
+    /**
+     * The ID of the analysis that you ant to apply overrides to.
+     */
+    AnalysisId: ResourceId;
+    /**
+     * A new name for the analysis.
+     */
+    Name?: ResourceName;
+  }
+  export type AssetBundleImportJobAnalysisOverrideParametersList = AssetBundleImportJobAnalysisOverrideParameters[];
+  export interface AssetBundleImportJobDashboardOverrideParameters {
+    /**
+     * The ID of the dashboard that you want to apply overrides to.
+     */
+    DashboardId: ResourceId;
+    /**
+     * A new name for the dashboard.
+     */
+    Name?: ResourceName;
+  }
+  export type AssetBundleImportJobDashboardOverrideParametersList = AssetBundleImportJobDashboardOverrideParameters[];
+  export interface AssetBundleImportJobDataSetOverrideParameters {
+    /**
+     * The ID of the dataset to apply overrides to.
+     */
+    DataSetId: ResourceId;
+    /**
+     * A new name for the dataset.
+     */
+    Name?: ResourceName;
+  }
+  export type AssetBundleImportJobDataSetOverrideParametersList = AssetBundleImportJobDataSetOverrideParameters[];
+  export interface AssetBundleImportJobDataSourceCredentialPair {
+    /**
+     * The username for the data source connection.
+     */
+    Username: DbUsername;
+    /**
+     * The password for the data source connection.
+     */
+    Password: Password;
+  }
+  export interface AssetBundleImportJobDataSourceCredentials {
+    /**
+     * A username and password credential pair to be used to create the imported data source. Leave this field blank if you are using an Secrets Manager Secret to provide credentials.
+     */
+    CredentialPair?: AssetBundleImportJobDataSourceCredentialPair;
+    /**
+     * The ARN of the Secrets Manager Secret to be used to create the imported data source leave this field blank if you aren't using a Secret in place of a credential pair.
+     */
+    SecretArn?: SecretArn;
+  }
+  export interface AssetBundleImportJobDataSourceOverrideParameters {
+    /**
+     * The ID of the data source to apply overrides to.
+     */
+    DataSourceId: ResourceId;
+    /**
+     * A new name for the data source.
+     */
+    Name?: ResourceName;
+    DataSourceParameters?: DataSourceParameters;
+    VpcConnectionProperties?: VpcConnectionProperties;
+    SslProperties?: SslProperties;
+    /**
+     * An optional structure that provides the credentials to be used to create the imported data source.
+     */
+    Credentials?: AssetBundleImportJobDataSourceCredentials;
+  }
+  export type AssetBundleImportJobDataSourceOverrideParametersList = AssetBundleImportJobDataSourceOverrideParameters[];
+  export interface AssetBundleImportJobError {
+    /**
+     * The ARN of the resource whose processing caused an error.
+     */
+    Arn?: Arn;
+    /**
+     * The specific error type or the error that occurred.
+     */
+    Type?: NonEmptyString;
+    /**
+     * A description of the error.
+     */
+    Message?: NonEmptyString;
+  }
+  export type AssetBundleImportJobErrorList = AssetBundleImportJobError[];
+  export interface AssetBundleImportJobOverrideParameters {
+    /**
+     * An optional structure that configures resource ID overrides to be applied within the import job.
+     */
+    ResourceIdOverrideConfiguration?: AssetBundleImportJobResourceIdOverrideConfiguration;
+    /**
+     * A list of overrides for any VPCConnection resources that are present in the asset bundle that is imported.
+     */
+    VPCConnections?: AssetBundleImportJobVPCConnectionOverrideParametersList;
+    /**
+     * A list of overrides for any RefreshSchedule resources that are present in the asset bundle that is imported.
+     */
+    RefreshSchedules?: AssetBundleImportJobRefreshScheduleOverrideParametersList;
+    /**
+     *  A list of overrides for any DataSource resources that are present in the asset bundle that is imported.
+     */
+    DataSources?: AssetBundleImportJobDataSourceOverrideParametersList;
+    /**
+     * A list of overrides for any DataSet resources that are present in the asset bundle that is imported.
+     */
+    DataSets?: AssetBundleImportJobDataSetOverrideParametersList;
+    /**
+     * A list of overrides for any Theme resources that are present in the asset bundle that is imported.
+     */
+    Themes?: AssetBundleImportJobThemeOverrideParametersList;
+    /**
+     * A list of overrides for any Analysis resources that are present in the asset bundle that is imported.
+     */
+    Analyses?: AssetBundleImportJobAnalysisOverrideParametersList;
+    /**
+     * A list of overrides for any Dashboard resources that are present in the asset bundle that is imported.
+     */
+    Dashboards?: AssetBundleImportJobDashboardOverrideParametersList;
+  }
+  export interface AssetBundleImportJobRefreshScheduleOverrideParameters {
+    /**
+     * A partial identifier for the specific RefreshSchedule resource that is being overridden. This structure is used together with the ScheduleID structure.
+     */
+    DataSetId: ResourceId;
+    /**
+     * A partial identifier for the specific RefreshSchedule resource being overridden. This structure is used together with the DataSetId structure.
+     */
+    ScheduleId: String;
+    /**
+     * An override for the StartAfterDateTime of a RefreshSchedule to ensure that the StartAfterDateTime is set to a time that takes place in the future.
+     */
+    StartAfterDateTime?: Timestamp;
+  }
+  export type AssetBundleImportJobRefreshScheduleOverrideParametersList = AssetBundleImportJobRefreshScheduleOverrideParameters[];
+  export interface AssetBundleImportJobResourceIdOverrideConfiguration {
+    /**
+     * An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.
+     */
+    PrefixForAllResources?: String;
+  }
+  export type AssetBundleImportJobStatus = "QUEUED_FOR_IMMEDIATE_EXECUTION"|"IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|"FAILED_ROLLBACK_IN_PROGRESS"|"FAILED_ROLLBACK_COMPLETED"|"FAILED_ROLLBACK_ERROR"|string;
+  export interface AssetBundleImportJobSummary {
+    /**
+     * The current status of the import job.
+     */
+    JobStatus?: AssetBundleImportJobStatus;
+    /**
+     * The ARN of the import job.
+     */
+    Arn?: Arn;
+    /**
+     * The time that the import job was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.
+     */
+    AssetBundleImportJobId?: ShortRestrictiveResourceId;
+    /**
+     * The failure action for the import job.
+     */
+    FailureAction?: AssetBundleImportFailureAction;
+  }
+  export type AssetBundleImportJobSummaryList = AssetBundleImportJobSummary[];
+  export interface AssetBundleImportJobThemeOverrideParameters {
+    /**
+     * The ID of the theme to apply overrides to.
+     */
+    ThemeId: ResourceId;
+    /**
+     * A new name for the theme.
+     */
+    Name?: ResourceName;
+  }
+  export type AssetBundleImportJobThemeOverrideParametersList = AssetBundleImportJobThemeOverrideParameters[];
+  export interface AssetBundleImportJobVPCConnectionOverrideParameters {
+    /**
+     * The ID of the VPC Connection to apply overrides to.
+     */
+    VPCConnectionId: VPCConnectionResourceIdUnrestricted;
+    /**
+     * A new name for the VPC connection.
+     */
+    Name?: ResourceName;
+    /**
+     * A list of new subnet IDs for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.
+     */
+    SubnetIds?: SubnetIdList;
+    /**
+     * A new security group ID for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.
+     */
+    SecurityGroupIds?: SecurityGroupIdList;
+    /**
+     * An optional override of dns resolvers to be used by the VPC connection.
+     */
+    DnsResolvers?: DnsResolverList;
+    /**
+     * An optional override of the role ARN to be used by the VPC connection.
+     */
+    RoleArn?: RoleArn;
+  }
+  export type AssetBundleImportJobVPCConnectionOverrideParametersList = AssetBundleImportJobVPCConnectionOverrideParameters[];
+  export interface AssetBundleImportSource {
+    /**
+     * The bytes of the Base64 encoded asset bundle import zip file. This file can't exceed 20MB. If you are calling the APIs from the Amazon Web Services Java, JavaScript, Python, or PHP SDKs, the SDK encodes Base64 automatically to allow the direct setting of the zip file's bytes. If you are using a SDK of a different language or are receiving related errors, try to Base64 encode your data.
+     */
+    Body?: AssetBundleImportBodyBlob;
+    /**
+     * The Amazon S3 uri for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 20MB.
+     */
+    S3Uri?: S3Uri;
+  }
+  export interface AssetBundleImportSourceDescription {
+    /**
+     * A HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for 5 minutes after issuance. Call DescribeAssetBundleExportJob again for a fresh URL if needed. The downloaded asset bundle is a .qs zip file.
+     */
+    Body?: String;
+    /**
+     * The Amazon S3 uri that you provided at the start of the import job.
+     */
+    S3Uri?: S3Uri;
+  }
+  export type AssetBundleResourceArns = Arn[];
   export type AssignmentStatus = "ENABLED"|"DRAFT"|"DISABLED"|string;
   export interface AthenaParameters {
     /**
@@ -2295,7 +2744,7 @@ declare namespace QuickSight {
   }
   export interface ClusterMarkerConfiguration {
     /**
-     * The cluster marker that is a part of the cluster marker configuration
+     * The cluster marker that is a part of the cluster marker configuration.
      */
     ClusterMarker?: ClusterMarker;
   }
@@ -3842,7 +4291,7 @@ declare namespace QuickSight {
     /**
      * User name.
      */
-    Username: Username;
+    Username: DbUsername;
     /**
      * Password.
      */
@@ -5178,6 +5627,7 @@ declare namespace QuickSight {
   }
   export type DayOfMonth = string;
   export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
+  export type DbUsername = string;
   export interface DecimalDatasetParameter {
     /**
      * An identifier for the decimal parameter created in the dataset.
@@ -6157,6 +6607,130 @@ declare namespace QuickSight {
      * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
+  }
+  export interface DescribeAssetBundleExportJobRequest {
+    /**
+     * The ID of the Amazon Web Services account the export job is executed in. 
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the job that you want described. The job ID is set when you start a new job with a StartAssetBundleExportJob API call.
+     */
+    AssetBundleExportJobId: ShortRestrictiveResourceId;
+  }
+  export interface DescribeAssetBundleExportJobResponse {
+    /**
+     * Indicates tha status of a job through its queueing and execution. Poll this DescribeAssetBundleExportApi until JobStatus is either SUCCESSFUL or FAILED.
+     */
+    JobStatus?: AssetBundleExportJobStatus;
+    /**
+     * The URL to download the exported asset bundle data from. This URL is available only after the job has succeeded. This URL is valid for 5 minutes after issuance. Call DescribeAssetBundleExportJob again for a fresh URL if needed. The downloaded asset bundle is a zip file named assetbundle-{jobId}.qs. The file has a .qs extension. This URL can't be used in a StartAssetBundleImportJob API call and should only be used for download purposes.
+     */
+    DownloadUrl?: String;
+    /**
+     * An array of error records that describes any failures that occurred during the export job processing. Error records accumulate while the job runs. The complete set of error records is available after the job has completed and failed.
+     */
+    Errors?: AssetBundleExportJobErrorList;
+    /**
+     * The Amazon Resource Name (ARN) for the export job.
+     */
+    Arn?: Arn;
+    /**
+     * The time that the export job was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The ID of the job. The job ID is set when you start a new job with a StartAssetBundleExportJob API call.
+     */
+    AssetBundleExportJobId?: ShortRestrictiveResourceId;
+    /**
+     * The ID of the Amazon Web Services account that the export job was executed in. 
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * A list of resource ARNs that exported with the job.
+     */
+    ResourceArns?: AssetBundleResourceArns;
+    /**
+     * The include dependencies flag.
+     */
+    IncludeAllDependencies?: Boolean;
+    /**
+     * The format of the export.
+     */
+    ExportFormat?: AssetBundleExportFormat;
+    /**
+     * The CloudFormation override property configuration for the export job.
+     */
+    CloudFormationOverridePropertyConfiguration?: AssetBundleCloudFormationOverridePropertyConfiguration;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the response.
+     */
+    Status?: StatusCode;
+  }
+  export interface DescribeAssetBundleImportJobRequest {
+    /**
+     * The ID of the Amazon Web Services account the import job was executed in. 
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the job. The job ID is set when you start a new job with a StartAssetBundleImportJob API call.
+     */
+    AssetBundleImportJobId: ShortRestrictiveResourceId;
+  }
+  export interface DescribeAssetBundleImportJobResponse {
+    /**
+     * Indicates tha status of a job through its queueing and execution. Poll this DescribeAssetBundleImport API until JobStatus returns one of the following values.    SUCCESSFUL     FAILED     FAILED_ROLLBACK_COMPLETED     FAILED_ROLLBACK_ERROR   
+     */
+    JobStatus?: AssetBundleImportJobStatus;
+    /**
+     * An array of error records that describes any failures that occurred during the export job processing. Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.
+     */
+    Errors?: AssetBundleImportJobErrorList;
+    /**
+     * An array of error records that describes any failures that occurred while an import job was attempting a rollback. Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.
+     */
+    RollbackErrors?: AssetBundleImportJobErrorList;
+    /**
+     * The Amazon Resource Name (ARN) for the import job.
+     */
+    Arn?: Arn;
+    /**
+     * The time that the import job was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The ID of the job. The job ID is set when you start a new job with a StartAssetBundleImportJob API call.
+     */
+    AssetBundleImportJobId?: ShortRestrictiveResourceId;
+    /**
+     * The ID of the Amazon Web Services account the import job was executed in. 
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * The source of the asset bundle zip file that contains the data that is imported by the job.
+     */
+    AssetBundleImportSource?: AssetBundleImportSourceDescription;
+    /**
+     * Optional overrides to be applied to the resource configuration before import.
+     */
+    OverrideParameters?: AssetBundleImportJobOverrideParameters;
+    /**
+     * The failure action for the import job.
+     */
+    FailureAction?: AssetBundleImportFailureAction;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the response.
+     */
+    Status?: StatusCode;
   }
   export interface DescribeDashboardDefinitionRequest {
     /**
@@ -8525,6 +9099,25 @@ declare namespace QuickSight {
      */
     East: Longitude;
   }
+  export interface GeospatialHeatmapColorScale {
+    /**
+     * The list of colors to be used in heatmap point style.
+     */
+    Colors?: GeospatialHeatmapDataColorList;
+  }
+  export interface GeospatialHeatmapConfiguration {
+    /**
+     * The color scale specification for the heatmap point style.
+     */
+    HeatmapColor?: GeospatialHeatmapColorScale;
+  }
+  export interface GeospatialHeatmapDataColor {
+    /**
+     * The hex color to be used in the heatmap point style.
+     */
+    Color: HexColor;
+  }
+  export type GeospatialHeatmapDataColorList = GeospatialHeatmapDataColor[];
   export interface GeospatialMapAggregatedFieldWells {
     /**
      * The geospatial field wells of a geospatial map. Values are grouped by geospatial fields.
@@ -8613,8 +9206,12 @@ declare namespace QuickSight {
      * The cluster marker configuration of the geospatial point style.
      */
     ClusterMarkerConfiguration?: ClusterMarkerConfiguration;
+    /**
+     * The heatmap configuration of the geospatial point style.
+     */
+    HeatmapConfiguration?: GeospatialHeatmapConfiguration;
   }
-  export type GeospatialSelectedPointStyle = "POINT"|"CLUSTER"|string;
+  export type GeospatialSelectedPointStyle = "POINT"|"CLUSTER"|"HEATMAP"|string;
   export interface GeospatialWindowOptions {
     /**
      * The bounds options (north, south, west, east) of the geospatial window options.
@@ -9813,6 +10410,70 @@ declare namespace QuickSight {
      * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
+  }
+  export interface ListAssetBundleExportJobsRequest {
+    /**
+     * The ID of the Amazon Web Services account that the export jobs were executed in. 
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListAssetBundleExportJobsResponse {
+    /**
+     * A list of export job summaries.
+     */
+    AssetBundleExportJobSummaryList?: AssetBundleExportJobSummaryList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface ListAssetBundleImportJobsRequest {
+    /**
+     * The ID of the Amazon Web Services account that the import jobs were executed in.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListAssetBundleImportJobsResponse {
+    /**
+     * A list of import job summaries.
+     */
+    AssetBundleImportJobSummaryList?: AssetBundleImportJobSummaryList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the response.
+     */
+    Status?: StatusCode;
   }
   export interface ListControlDisplayOptions {
     /**
@@ -12941,6 +13602,7 @@ declare namespace QuickSight {
      */
     InputColumns: InputColumnList;
   }
+  export type S3Uri = string;
   export interface SameSheetTargetVisualConfiguration {
     /**
      * A list of the target visual IDs that are located in the same sheet of the analysis.
@@ -13835,6 +14497,90 @@ declare namespace QuickSight {
      * A Boolean option to control whether SSL should be disabled.
      */
     DisableSsl?: Boolean;
+  }
+  export interface StartAssetBundleExportJobRequest {
+    /**
+     * The ID of the Amazon Web Services account to export assets from.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.
+     */
+    AssetBundleExportJobId: ShortRestrictiveResourceId;
+    /**
+     * An array of resource ARNs to export. The following resources are supported.    Analysis     Dashboard     DataSet     DataSource     RefreshSchedule     Theme     VPCConnection    The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.
+     */
+    ResourceArns: AssetBundleResourceArns;
+    /**
+     * A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the ResourceArns parameter. If you set IncludeAllDependencies to TRUE, any theme, dataset, and dataource resource that is a dependency of the dashboard is also exported.
+     */
+    IncludeAllDependencies?: Boolean;
+    /**
+     * The export data format.
+     */
+    ExportFormat: AssetBundleExportFormat;
+    /**
+     * An optional collection of structures that generate CloudFormation parameters to override the existing resource property values when the resource is exported to a new CloudFormation template. Use this field if the ExportFormat field of a StartAssetBundleExportJobRequest API call is set to CLOUDFORMATION_JSON.
+     */
+    CloudFormationOverridePropertyConfiguration?: AssetBundleCloudFormationOverridePropertyConfiguration;
+  }
+  export interface StartAssetBundleExportJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the export job.
+     */
+    Arn?: Arn;
+    /**
+     * The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.
+     */
+    AssetBundleExportJobId?: ShortRestrictiveResourceId;
+    /**
+     * The Amazon Web Services response ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the response.
+     */
+    Status?: StatusCode;
+  }
+  export interface StartAssetBundleImportJobRequest {
+    /**
+     * The ID of the Amazon Web Services account to import assets into. 
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.
+     */
+    AssetBundleImportJobId: ShortRestrictiveResourceId;
+    /**
+     * The source of the asset bundle zip file that contains the data that you want to import.
+     */
+    AssetBundleImportSource: AssetBundleImportSource;
+    /**
+     * Optional overrides to be applied to the resource configuration before import.
+     */
+    OverrideParameters?: AssetBundleImportJobOverrideParameters;
+    /**
+     * The failure action for the import job. If you choose ROLLBACK, failed import jobs will attempt to undo any asset changes caused by the failed job. If you choose DO_NOTHING, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly leaving the Amazon QuickSight account in an inconsistent state.
+     */
+    FailureAction?: AssetBundleImportFailureAction;
+  }
+  export interface StartAssetBundleImportJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the import job.
+     */
+    Arn?: Arn;
+    /**
+     * The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.
+     */
+    AssetBundleImportJobId?: ShortRestrictiveResourceId;
+    /**
+     * The Amazon Web Services response ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the response.
+     */
+    Status?: StatusCode;
   }
   export interface StatePersistenceConfigurations {
     /**
@@ -17034,7 +17780,6 @@ declare namespace QuickSight {
   export type UserList = User[];
   export type UserName = string;
   export type UserRole = "ADMIN"|"AUTHOR"|"READER"|"RESTRICTED_AUTHOR"|"RESTRICTED_READER"|string;
-  export type Username = string;
   export interface VPCConnection {
     /**
      * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.

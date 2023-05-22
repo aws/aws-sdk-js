@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1381.0-->
+<!--LATEST=2.1382.0-->
 <!--ENTRYINSERT-->
+
+## 2.1382.0
+* feature: Backup: Added support for tags on restore.
+* feature: QuickSight: Add support for Asset Bundle, Geospatial Heatmaps.
 
 ## 2.1381.0
 * feature: Backup: Add  ResourceArn, ResourceType, and BackupVaultName to ListRecoveryPointsByLegalHold API response.

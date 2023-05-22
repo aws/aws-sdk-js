@@ -3039,7 +3039,7 @@ declare namespace Pinpoint {
      */
     Subject?: __string;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -4841,7 +4841,7 @@ declare namespace Pinpoint {
      */
     Layout?: Layout;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -5710,7 +5710,7 @@ declare namespace Pinpoint {
      */
     RecommenderId?: __string;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -6074,7 +6074,7 @@ declare namespace Pinpoint {
      */
     RecommenderId?: __string;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -7220,7 +7220,7 @@ declare namespace Pinpoint {
      */
     LanguageCode?: __string;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -7371,7 +7371,7 @@ declare namespace Pinpoint {
      */
     SegmentVersion?: __integer;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the campaign. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
     /**
@@ -7491,7 +7491,7 @@ declare namespace Pinpoint {
      */
     SegmentGroups?: SegmentGroupList;
     /**
-     * A string-to-string map of key-value pairs that defines the tags to associate with the segment. Each tag consists of a required tag key and an associated tag value.
+     * As of 22-05-2023 tags has been deprecated for update operations. After this date any value in tags is not processed and an error code is not returned. To manage tags we recommend using either Tags in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi commands in the AWS Command Line Interface Documentation or resourcegroupstaggingapi in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that defines the tags to associate with the segment. Each tag consists of a required tag key and an associated tag value.
      */
     tags?: MapOf__string;
   }
