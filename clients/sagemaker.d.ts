@@ -5818,7 +5818,7 @@ declare namespace SageMaker {
      */
     RoleArn: RoleArn;
     /**
-     * An array of Channel objects. Each channel is a named input source. InputDataConfig describes the input data and its location.  Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of input data, training_data and validation_data. The configuration for each channel provides the S3, EFS, or FSx location where the input data is stored. It also provides information about the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.  Depending on the input mode that the algorithm supports, SageMaker either copies input data files from an S3 bucket to a local directory in the Docker container, or makes it available as input streams. For example, if you specify an EFS location, input data files are available as input streams. They do not need to be downloaded.
+     * An array of Channel objects. Each channel is a named input source. InputDataConfig describes the input data and its location.  Algorithms can accept input data from one or more channels. For example, an algorithm might have two channels of input data, training_data and validation_data. The configuration for each channel provides the S3, EFS, or FSx location where the input data is stored. It also provides information about the stored data: the MIME type, compression method, and whether the data is wrapped in RecordIO format.  Depending on the input mode that the algorithm supports, SageMaker either copies input data files from an S3 bucket to a local directory in the Docker container, or makes it available as input streams. For example, if you specify an EFS location, input data files are available as input streams. They do not need to be downloaded. Your input must be in the same Amazon Web Services region as your training job.
      */
     InputDataConfig?: InputDataConfig;
     /**
@@ -12346,6 +12346,14 @@ declare namespace SageMaker {
      * The recommendation ID which uniquely identifies each recommendation.
      */
     RecommendationId?: String;
+    /**
+     * A timestamp that shows when the benchmark completed.
+     */
+    InvocationEndTime?: InvocationEndTime;
+    /**
+     * A timestamp that shows when the benchmark started.
+     */
+    InvocationStartTime?: InvocationStartTime;
   }
   export type InferenceRecommendations = InferenceRecommendation[];
   export interface InferenceRecommendationsJob {
@@ -12389,6 +12397,18 @@ declare namespace SageMaker {
      * If the job fails, provides information why the job failed.
      */
     FailureReason?: FailureReason;
+    /**
+     * The name of the created model.
+     */
+    ModelName?: ModelName;
+    /**
+     * The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
+     */
+    SamplePayloadUrl?: S3Uri;
+    /**
+     * The Amazon Resource Name (ARN) of a versioned model package.
+     */
+    ModelPackageVersionArn?: ModelPackageArn;
   }
   export interface InferenceRecommendationsJobStep {
     /**
@@ -12511,6 +12531,8 @@ declare namespace SageMaker {
   }
   export type IntegerParameterRanges = IntegerParameterRange[];
   export type IntegerValue = number;
+  export type InvocationEndTime = Date;
+  export type InvocationStartTime = Date;
   export type InvocationsMaxRetries = number;
   export type InvocationsTimeoutInSeconds = number;
   export type IotRoleAlias = string;
@@ -14309,6 +14331,14 @@ declare namespace SageMaker {
      * The maximum number of recommendations to return in the response.
      */
     MaxResults?: MaxResults;
+    /**
+     * A filter that returns only jobs that were created for this model.
+     */
+    ModelNameEquals?: ModelName;
+    /**
+     * A filter that returns only jobs that were created for this versioned model package.
+     */
+    ModelPackageVersionArnEquals?: ModelPackageArn;
   }
   export interface ListInferenceRecommendationsJobsResponse {
     /**
@@ -19068,6 +19098,14 @@ declare namespace SageMaker {
      */
     FailureReason?: RecommendationFailureReason;
     EndpointMetrics?: InferenceMetrics;
+    /**
+     * A timestamp that shows when the benchmark completed.
+     */
+    InvocationEndTime?: InvocationEndTime;
+    /**
+     * A timestamp that shows when the benchmark started.
+     */
+    InvocationStartTime?: InvocationStartTime;
   }
   export interface RecommendationJobInputConfig {
     /**
@@ -19424,7 +19462,7 @@ declare namespace SageMaker {
      */
     S3DataType: S3DataType;
     /**
-     * Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest. For example:     A key name prefix might look like this: s3://bucketname/exampleprefix     A manifest might look like this: s3://bucketname/example.manifest   A manifest is an S3 object which is a JSON file consisting of an array of elements. The first element is a prefix which is followed by one or more suffixes. SageMaker appends the suffix elements to the prefix to get a full set of S3Uri. Note that the prefix must be a valid non-empty S3Uri that precludes users from specifying a manifest whose individual S3Uri is sourced from different S3 buckets.  The following code example shows a valid manifest format:   [ {"prefix": "s3://customer_bucket/some/prefix/"},    "relative/path/to/custdata-1",    "relative/path/custdata-2",    ...    "relative/path/custdata-N"   ]   This JSON is equivalent to the following S3Uri list:  s3://customer_bucket/some/prefix/relative/path/to/custdata-1   s3://customer_bucket/some/prefix/relative/path/custdata-2   ...   s3://customer_bucket/some/prefix/relative/path/custdata-N  The complete set of S3Uri in this manifest is the input data for the channel for this data source. The object that each S3Uri points to must be readable by the IAM role that SageMaker uses to perform tasks on your behalf.   
+     * Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest. For example:     A key name prefix might look like this: s3://bucketname/exampleprefix     A manifest might look like this: s3://bucketname/example.manifest   A manifest is an S3 object which is a JSON file consisting of an array of elements. The first element is a prefix which is followed by one or more suffixes. SageMaker appends the suffix elements to the prefix to get a full set of S3Uri. Note that the prefix must be a valid non-empty S3Uri that precludes users from specifying a manifest whose individual S3Uri is sourced from different S3 buckets.  The following code example shows a valid manifest format:   [ {"prefix": "s3://customer_bucket/some/prefix/"},    "relative/path/to/custdata-1",    "relative/path/custdata-2",    ...    "relative/path/custdata-N"   ]   This JSON is equivalent to the following S3Uri list:  s3://customer_bucket/some/prefix/relative/path/to/custdata-1   s3://customer_bucket/some/prefix/relative/path/custdata-2   ...   s3://customer_bucket/some/prefix/relative/path/custdata-N  The complete set of S3Uri in this manifest is the input data for the channel for this data source. The object that each S3Uri points to must be readable by the IAM role that SageMaker uses to perform tasks on your behalf.    Your input bucket must be located in same Amazon Web Services region as your training job.
      */
     S3Uri: S3Uri;
     /**
@@ -19733,7 +19771,7 @@ declare namespace SageMaker {
   export type SortTrialsBy = "Name"|"CreationTime"|string;
   export interface SourceAlgorithm {
     /**
-     * The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).  The model artifacts must be in an S3 bucket that is in the same region as the algorithm. 
+     * The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).  The model artifacts must be in an S3 bucket that is in the same Amazon Web Services region as the algorithm. 
      */
     ModelDataUrl?: Url;
     /**
@@ -20257,7 +20295,7 @@ declare namespace SageMaker {
      */
     RoleArn?: RoleArn;
     /**
-     * An array of Channel objects that describes each data input channel.
+     * An array of Channel objects that describes each data input channel. Your input must be in the same Amazon Web Services region as your training job.
      */
     InputDataConfig?: InputDataConfig;
     /**

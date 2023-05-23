@@ -132,6 +132,14 @@ declare class Translate extends Service {
    */
   tagResource(callback?: (err: AWSError, data: Translate.Types.TagResourceResponse) => void): Request<Translate.Types.TagResourceResponse, AWSError>;
   /**
+   * Translates the input document from the source language to the target language. This synchronous operation supports plain text or HTML for the input document. TranslateDocument supports translations from English to any supported language, and from any supported language to English. Therefore, specify either the source language code or the target language code as “en” (English).   TranslateDocument does not support language auto-detection.   If you set the Formality parameter, the request will fail if the target language does not support formality. For a list of target languages that support formality, see Setting formality. 
+   */
+  translateDocument(params: Translate.Types.TranslateDocumentRequest, callback?: (err: AWSError, data: Translate.Types.TranslateDocumentResponse) => void): Request<Translate.Types.TranslateDocumentResponse, AWSError>;
+  /**
+   * Translates the input document from the source language to the target language. This synchronous operation supports plain text or HTML for the input document. TranslateDocument supports translations from English to any supported language, and from any supported language to English. Therefore, specify either the source language code or the target language code as “en” (English).   TranslateDocument does not support language auto-detection.   If you set the Formality parameter, the request will fail if the target language does not support formality. For a list of target languages that support formality, see Setting formality. 
+   */
+  translateDocument(callback?: (err: AWSError, data: Translate.Types.TranslateDocumentResponse) => void): Request<Translate.Types.TranslateDocumentResponse, AWSError>;
+  /**
    * Translates input text from the source language to the target language. For a list of available languages and language codes, see Supported languages.
    */
   translateText(params: Translate.Types.TranslateTextRequest, callback?: (err: AWSError, data: Translate.Types.TranslateTextResponse) => void): Request<Translate.Types.TranslateTextResponse, AWSError>;
@@ -241,6 +249,17 @@ declare namespace Translate {
   export type Description = string;
   export type Directionality = "UNI"|"MULTI"|string;
   export type DisplayLanguageCode = "de"|"en"|"es"|"fr"|"it"|"ja"|"ko"|"pt"|"zh"|"zh-TW"|string;
+  export interface Document {
+    /**
+     * The Contentfield type is Binary large object (blob). This object contains the document content converted into base64-encoded binary data. If you use one of the AWS SDKs, the SDK performs the Base64-encoding on this field before sending the request. 
+     */
+    Content: DocumentContent;
+    /**
+     * Describes the format of the document. You can specify one of the following:   text/html - The input data consists of HTML content. Amazon Translate translates only the text in the HTML element.   text/plain - The input data consists of unformatted text. Amazon Translate translates every character in the content.   
+     */
+    ContentType: ContentType;
+  }
+  export type DocumentContent = Buffer|Uint8Array|Blob|string;
   export interface EncryptionKey {
     /**
      * The type of encryption key used by Amazon Translate to encrypt this object.
@@ -861,27 +880,65 @@ declare namespace Translate {
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
-     * Settings that configure the translation output.
+     * Settings that modify the translation output.
      */
     Settings?: TranslationSettings;
   }
   export type TextTranslationJobPropertiesList = TextTranslationJobProperties[];
   export type Timestamp = Date;
+  export interface TranslateDocumentRequest {
+    /**
+     * The content and content type for the document to be translated. The document size must not exceed 100 KB.
+     */
+    Document: Document;
+    /**
+     * The name of a terminology list file to add to the translation job. This file provides source terms and the desired translation for each term. A terminology list can contain a maximum of 256 terms. You can use one custom terminology resource in your translation request. Use the ListTerminologies operation to get the available terminology lists. For more information about custom terminology lists, see Custom terminology.
+     */
+    TerminologyNames?: ResourceNameList;
+    /**
+     * The language code for the language of the source text. Do not use auto, because TranslateDocument does not support language auto-detection. For a list of supported language codes, see Supported languages.
+     */
+    SourceLanguageCode: LanguageCodeString;
+    /**
+     * The language code requested for the translated document. For a list of supported language codes, see Supported languages.
+     */
+    TargetLanguageCode: LanguageCodeString;
+    Settings?: TranslationSettings;
+  }
+  export interface TranslateDocumentResponse {
+    /**
+     * The document containing the translated content. The document format matches the source document format.
+     */
+    TranslatedDocument: TranslatedDocument;
+    /**
+     * The language code of the source document.
+     */
+    SourceLanguageCode: LanguageCodeString;
+    /**
+     * The language code of the translated document. 
+     */
+    TargetLanguageCode: LanguageCodeString;
+    /**
+     * The names of the custom terminologies applied to the input text by Amazon Translate to produce the translated text document.
+     */
+    AppliedTerminologies?: AppliedTerminologyList;
+    AppliedSettings?: TranslationSettings;
+  }
   export interface TranslateTextRequest {
     /**
      * The text to translate. The text string can be a maximum of 10,000 bytes long. Depending on your character set, this may be fewer than 10,000 characters.
      */
     Text: BoundedLengthString;
     /**
-     * The name of the terminology list file to be used in the TranslateText request. You can use 1 terminology list at most in a TranslateText request. Terminology lists can contain a maximum of 256 terms.
+     * The name of a terminology list file to add to the translation job. This file provides source terms and the desired translation for each term. A terminology list can contain a maximum of 256 terms. You can use one custom terminology resource in your translation request. Use the ListTerminologies operation to get the available terminology lists. For more information about custom terminology lists, see Custom terminology.
      */
     TerminologyNames?: ResourceNameList;
     /**
-     * The language code for the language of the source text. The language must be a language supported by Amazon Translate. For a list of language codes, see Supported languages. To have Amazon Translate determine the source language of your text, you can specify auto in the SourceLanguageCode field. If you specify auto, Amazon Translate will call Amazon Comprehend to determine the source language.  If you specify auto, you must send the TranslateText request in a region that supports Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported.  
+     * The language code for the language of the source text. For a list of language codes, see Supported languages. To have Amazon Translate determine the source language of your text, you can specify auto in the SourceLanguageCode field. If you specify auto, Amazon Translate will call Amazon Comprehend to determine the source language.  If you specify auto, you must send the TranslateText request in a region that supports Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported.  
      */
     SourceLanguageCode: LanguageCodeString;
     /**
-     * The language code requested for the language of the target text. The language must be a language supported by Amazon Translate.
+     * The language code requested for the language of the target text. For a list of language codes, see Supported languages.
      */
     TargetLanguageCode: LanguageCodeString;
     /**
@@ -907,10 +964,17 @@ declare namespace Translate {
      */
     AppliedTerminologies?: AppliedTerminologyList;
     /**
-     * Settings that configure the translation output.
+     * Optional settings that modify the translation output.
      */
     AppliedSettings?: TranslationSettings;
   }
+  export interface TranslatedDocument {
+    /**
+     * The document containing the translated content.
+     */
+    Content: TranslatedDocumentContent;
+  }
+  export type TranslatedDocumentContent = Buffer|Uint8Array|Blob|string;
   export type TranslatedTextString = string;
   export interface TranslationSettings {
     /**

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1382.0-->
+<!--LATEST=2.1383.0-->
 <!--ENTRYINSERT-->
+
+## 2.1383.0
+* feature: FMS: Fixes issue that could cause calls to GetAdminScope and ListAdminAccountsForOrganization to return a 500 Internal Server error.
+* feature: SageMaker: Added ModelNameEquals, ModelPackageVersionArnEquals in request and ModelName, SamplePayloadUrl, ModelPackageVersionArn in response of ListInferenceRecommendationsJobs API. Added Invocation timestamps in response of DescribeInferenceRecommendationsJob API & ListInferenceRecommendationsJobSteps API.
+* feature: Translate: Added support for calling TranslateDocument API.
 
 ## 2.1382.0
 * feature: Backup: Added support for tags on restore.
