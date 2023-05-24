@@ -20,6 +20,22 @@ declare class AppSync extends Service {
    */
   associateApi(callback?: (err: AWSError, data: AppSync.Types.AssociateApiResponse) => void): Request<AppSync.Types.AssociateApiResponse, AWSError>;
   /**
+   * Creates an association between a Merged API and source API using the source API's identifier.
+   */
+  associateMergedGraphqlApi(params: AppSync.Types.AssociateMergedGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.AssociateMergedGraphqlApiResponse) => void): Request<AppSync.Types.AssociateMergedGraphqlApiResponse, AWSError>;
+  /**
+   * Creates an association between a Merged API and source API using the source API's identifier.
+   */
+  associateMergedGraphqlApi(callback?: (err: AWSError, data: AppSync.Types.AssociateMergedGraphqlApiResponse) => void): Request<AppSync.Types.AssociateMergedGraphqlApiResponse, AWSError>;
+  /**
+   * Creates an association between a Merged API and source API using the Merged API's identifier.
+   */
+  associateSourceGraphqlApi(params: AppSync.Types.AssociateSourceGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.AssociateSourceGraphqlApiResponse) => void): Request<AppSync.Types.AssociateSourceGraphqlApiResponse, AWSError>;
+  /**
+   * Creates an association between a Merged API and source API using the Merged API's identifier.
+   */
+  associateSourceGraphqlApi(callback?: (err: AWSError, data: AppSync.Types.AssociateSourceGraphqlApiResponse) => void): Request<AppSync.Types.AssociateSourceGraphqlApiResponse, AWSError>;
+  /**
    * Creates a cache for the GraphQL API.
    */
   createApiCache(params: AppSync.Types.CreateApiCacheRequest, callback?: (err: AWSError, data: AppSync.Types.CreateApiCacheResponse) => void): Request<AppSync.Types.CreateApiCacheResponse, AWSError>;
@@ -156,6 +172,22 @@ declare class AppSync extends Service {
    */
   disassociateApi(callback?: (err: AWSError, data: AppSync.Types.DisassociateApiResponse) => void): Request<AppSync.Types.DisassociateApiResponse, AWSError>;
   /**
+   * Deletes an association between a Merged API and source API using the source API's identifier and the association ID.
+   */
+  disassociateMergedGraphqlApi(params: AppSync.Types.DisassociateMergedGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.DisassociateMergedGraphqlApiResponse) => void): Request<AppSync.Types.DisassociateMergedGraphqlApiResponse, AWSError>;
+  /**
+   * Deletes an association between a Merged API and source API using the source API's identifier and the association ID.
+   */
+  disassociateMergedGraphqlApi(callback?: (err: AWSError, data: AppSync.Types.DisassociateMergedGraphqlApiResponse) => void): Request<AppSync.Types.DisassociateMergedGraphqlApiResponse, AWSError>;
+  /**
+   * Deletes an association between a Merged API and source API using the Merged API's identifier and the association ID.
+   */
+  disassociateSourceGraphqlApi(params: AppSync.Types.DisassociateSourceGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.DisassociateSourceGraphqlApiResponse) => void): Request<AppSync.Types.DisassociateSourceGraphqlApiResponse, AWSError>;
+  /**
+   * Deletes an association between a Merged API and source API using the Merged API's identifier and the association ID.
+   */
+  disassociateSourceGraphqlApi(callback?: (err: AWSError, data: AppSync.Types.DisassociateSourceGraphqlApiResponse) => void): Request<AppSync.Types.DisassociateSourceGraphqlApiResponse, AWSError>;
+  /**
    * Evaluates the given code and returns the response. The code definition requirements depend on the specified runtime. For APPSYNC_JS runtimes, the code defines the request and response functions. The request function takes the incoming request after a GraphQL operation is parsed and converts it into a request configuration for the selected data source operation. The response function interprets responses from the data source and maps it to the shape of the GraphQL field output type. 
    */
   evaluateCode(params: AppSync.Types.EvaluateCodeRequest, callback?: (err: AWSError, data: AppSync.Types.EvaluateCodeResponse) => void): Request<AppSync.Types.EvaluateCodeResponse, AWSError>;
@@ -252,6 +284,14 @@ declare class AppSync extends Service {
    */
   getSchemaCreationStatus(callback?: (err: AWSError, data: AppSync.Types.GetSchemaCreationStatusResponse) => void): Request<AppSync.Types.GetSchemaCreationStatusResponse, AWSError>;
   /**
+   * Retrieves a SourceApiAssociation object.
+   */
+  getSourceApiAssociation(params: AppSync.Types.GetSourceApiAssociationRequest, callback?: (err: AWSError, data: AppSync.Types.GetSourceApiAssociationResponse) => void): Request<AppSync.Types.GetSourceApiAssociationResponse, AWSError>;
+  /**
+   * Retrieves a SourceApiAssociation object.
+   */
+  getSourceApiAssociation(callback?: (err: AWSError, data: AppSync.Types.GetSourceApiAssociationResponse) => void): Request<AppSync.Types.GetSourceApiAssociationResponse, AWSError>;
+  /**
    * Retrieves a Type object.
    */
   getType(params: AppSync.Types.GetTypeRequest, callback?: (err: AWSError, data: AppSync.Types.GetTypeResponse) => void): Request<AppSync.Types.GetTypeResponse, AWSError>;
@@ -316,6 +356,14 @@ declare class AppSync extends Service {
    */
   listResolversByFunction(callback?: (err: AWSError, data: AppSync.Types.ListResolversByFunctionResponse) => void): Request<AppSync.Types.ListResolversByFunctionResponse, AWSError>;
   /**
+   * Lists the SourceApiAssociationSummary data.
+   */
+  listSourceApiAssociations(params: AppSync.Types.ListSourceApiAssociationsRequest, callback?: (err: AWSError, data: AppSync.Types.ListSourceApiAssociationsResponse) => void): Request<AppSync.Types.ListSourceApiAssociationsResponse, AWSError>;
+  /**
+   * Lists the SourceApiAssociationSummary data.
+   */
+  listSourceApiAssociations(callback?: (err: AWSError, data: AppSync.Types.ListSourceApiAssociationsResponse) => void): Request<AppSync.Types.ListSourceApiAssociationsResponse, AWSError>;
+  /**
    * Lists the tags for a resource.
    */
   listTagsForResource(params: AppSync.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppSync.Types.ListTagsForResourceResponse) => void): Request<AppSync.Types.ListTagsForResourceResponse, AWSError>;
@@ -332,6 +380,14 @@ declare class AppSync extends Service {
    */
   listTypes(callback?: (err: AWSError, data: AppSync.Types.ListTypesResponse) => void): Request<AppSync.Types.ListTypesResponse, AWSError>;
   /**
+   * Lists Type objects by the source API association ID.
+   */
+  listTypesByAssociation(params: AppSync.Types.ListTypesByAssociationRequest, callback?: (err: AWSError, data: AppSync.Types.ListTypesByAssociationResponse) => void): Request<AppSync.Types.ListTypesByAssociationResponse, AWSError>;
+  /**
+   * Lists Type objects by the source API association ID.
+   */
+  listTypesByAssociation(callback?: (err: AWSError, data: AppSync.Types.ListTypesByAssociationResponse) => void): Request<AppSync.Types.ListTypesByAssociationResponse, AWSError>;
+  /**
    * Adds a new schema to your GraphQL API. This operation is asynchronous. Use to determine when it has completed.
    */
   startSchemaCreation(params: AppSync.Types.StartSchemaCreationRequest, callback?: (err: AWSError, data: AppSync.Types.StartSchemaCreationResponse) => void): Request<AppSync.Types.StartSchemaCreationResponse, AWSError>;
@@ -339,6 +395,14 @@ declare class AppSync extends Service {
    * Adds a new schema to your GraphQL API. This operation is asynchronous. Use to determine when it has completed.
    */
   startSchemaCreation(callback?: (err: AWSError, data: AppSync.Types.StartSchemaCreationResponse) => void): Request<AppSync.Types.StartSchemaCreationResponse, AWSError>;
+  /**
+   * Initiates a merge operation. Returns a status that shows the result of the merge operation.
+   */
+  startSchemaMerge(params: AppSync.Types.StartSchemaMergeRequest, callback?: (err: AWSError, data: AppSync.Types.StartSchemaMergeResponse) => void): Request<AppSync.Types.StartSchemaMergeResponse, AWSError>;
+  /**
+   * Initiates a merge operation. Returns a status that shows the result of the merge operation.
+   */
+  startSchemaMerge(callback?: (err: AWSError, data: AppSync.Types.StartSchemaMergeResponse) => void): Request<AppSync.Types.StartSchemaMergeResponse, AWSError>;
   /**
    * Tags a resource with user-supplied tags.
    */
@@ -411,6 +475,14 @@ declare class AppSync extends Service {
    * Updates a Resolver object.
    */
   updateResolver(callback?: (err: AWSError, data: AppSync.Types.UpdateResolverResponse) => void): Request<AppSync.Types.UpdateResolverResponse, AWSError>;
+  /**
+   * Updates some of the configuration choices of a particular source API association.
+   */
+  updateSourceApiAssociation(params: AppSync.Types.UpdateSourceApiAssociationRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateSourceApiAssociationResponse) => void): Request<AppSync.Types.UpdateSourceApiAssociationResponse, AWSError>;
+  /**
+   * Updates some of the configuration choices of a particular source API association.
+   */
+  updateSourceApiAssociation(callback?: (err: AWSError, data: AppSync.Types.UpdateSourceApiAssociationResponse) => void): Request<AppSync.Types.UpdateSourceApiAssociationResponse, AWSError>;
   /**
    * Updates a Type object.
    */
@@ -531,6 +603,54 @@ declare namespace AppSync {
      * The ApiAssociation object.
      */
     apiAssociation?: ApiAssociation;
+  }
+  export interface AssociateMergedGraphqlApiRequest {
+    /**
+     * The identifier of the AppSync Source API. This is generated by the AppSync service. In most cases, source APIs (especially in your account) only require the API ID value or ARN of the source API. However, source APIs from other accounts (cross-account use cases) strictly require the full resource ARN of the source API.
+     */
+    sourceApiIdentifier: String;
+    /**
+     * The identifier of the AppSync Merged API. This is generated by the AppSync service. In most cases, Merged APIs (especially in your account) only require the API ID value or ARN of the merged API. However, Merged APIs in other accounts (cross-account use cases) strictly require the full resource ARN of the merged API.
+     */
+    mergedApiIdentifier: String;
+    /**
+     * The description field.
+     */
+    description?: String;
+    /**
+     * The SourceApiAssociationConfig object data.
+     */
+    sourceApiAssociationConfig?: SourceApiAssociationConfig;
+  }
+  export interface AssociateMergedGraphqlApiResponse {
+    /**
+     * The SourceApiAssociation object data.
+     */
+    sourceApiAssociation?: SourceApiAssociation;
+  }
+  export interface AssociateSourceGraphqlApiRequest {
+    /**
+     * The identifier of the AppSync Merged API. This is generated by the AppSync service. In most cases, Merged APIs (especially in your account) only require the API ID value or ARN of the merged API. However, Merged APIs in other accounts (cross-account use cases) strictly require the full resource ARN of the merged API.
+     */
+    mergedApiIdentifier: String;
+    /**
+     * The identifier of the AppSync Source API. This is generated by the AppSync service. In most cases, source APIs (especially in your account) only require the API ID value or ARN of the source API. However, source APIs from other accounts (cross-account use cases) strictly require the full resource ARN of the source API.
+     */
+    sourceApiIdentifier: String;
+    /**
+     * The description field.
+     */
+    description?: String;
+    /**
+     * The SourceApiAssociationConfig object data.
+     */
+    sourceApiAssociationConfig?: SourceApiAssociationConfig;
+  }
+  export interface AssociateSourceGraphqlApiResponse {
+    /**
+     * The SourceApiAssociation object data.
+     */
+    sourceApiAssociation?: SourceApiAssociation;
   }
   export type AssociationStatus = "PROCESSING"|"FAILED"|"SUCCESS"|string;
   export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|"AWS_LAMBDA"|string;
@@ -835,6 +955,18 @@ declare namespace AppSync {
      * Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
      */
     visibility?: GraphQLApiVisibility;
+    /**
+     * The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).
+     */
+    apiType?: GraphQLApiType;
+    /**
+     * The Identity and Access Management service role ARN for a merged API. The AppSync service assumes this role on behalf of the Merged API to validate access to source APIs at runtime and to prompt the AUTO_MERGE to update the merged API endpoint with the source API changes automatically.
+     */
+    mergedApiExecutionRoleArn?: String;
+    /**
+     * The owner contact information for an API resource. This field accepts any string input with a length of 0 - 256 characters.
+     */
+    ownerContact?: String;
   }
   export interface CreateGraphqlApiResponse {
     /**
@@ -971,6 +1103,7 @@ declare namespace AppSync {
   }
   export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE"|"AMAZON_EVENTBRIDGE"|string;
   export type DataSources = DataSource[];
+  export type _Date = Date;
   export type DefaultAction = "ALLOW"|"DENY"|string;
   export interface DeleteApiCacheRequest {
     /**
@@ -1082,6 +1215,38 @@ declare namespace AppSync {
     domainName: DomainName;
   }
   export interface DisassociateApiResponse {
+  }
+  export interface DisassociateMergedGraphqlApiRequest {
+    /**
+     * The identifier of the AppSync Source API. This is generated by the AppSync service. In most cases, source APIs (especially in your account) only require the API ID value or ARN of the source API. However, source APIs from other accounts (cross-account use cases) strictly require the full resource ARN of the source API.
+     */
+    sourceApiIdentifier: String;
+    /**
+     * The ID generated by the AppSync service for the source API association.
+     */
+    associationId: String;
+  }
+  export interface DisassociateMergedGraphqlApiResponse {
+    /**
+     * The state of the source API association.
+     */
+    sourceApiAssociationStatus?: SourceApiAssociationStatus;
+  }
+  export interface DisassociateSourceGraphqlApiRequest {
+    /**
+     * The identifier of the AppSync Merged API. This is generated by the AppSync service. In most cases, Merged APIs (especially in your account) only require the API ID value or ARN of the merged API. However, Merged APIs in other accounts (cross-account use cases) strictly require the full resource ARN of the merged API.
+     */
+    mergedApiIdentifier: String;
+    /**
+     * The ID generated by the AppSync service for the source API association.
+     */
+    associationId: String;
+  }
+  export interface DisassociateSourceGraphqlApiResponse {
+    /**
+     * The state of the source API association.
+     */
+    sourceApiAssociationStatus?: SourceApiAssociationStatus;
   }
   export type DomainName = string;
   export interface DomainNameConfig {
@@ -1410,6 +1575,22 @@ declare namespace AppSync {
      */
     details?: String;
   }
+  export interface GetSourceApiAssociationRequest {
+    /**
+     * The identifier of the AppSync Merged API. This is generated by the AppSync service. In most cases, Merged APIs (especially in your account) only require the API ID value or ARN of the merged API. However, Merged APIs in other accounts (cross-account use cases) strictly require the full resource ARN of the merged API.
+     */
+    mergedApiIdentifier: String;
+    /**
+     * The ID generated by the AppSync service for the source API association.
+     */
+    associationId: String;
+  }
+  export interface GetSourceApiAssociationResponse {
+    /**
+     * The SourceApiAssociation object data.
+     */
+    sourceApiAssociation?: SourceApiAssociation;
+  }
   export interface GetTypeRequest {
     /**
      * The API ID.
@@ -1430,6 +1611,7 @@ declare namespace AppSync {
      */
     type?: Type;
   }
+  export type GraphQLApiType = "GRAPHQL"|"MERGED"|string;
   export type GraphQLApiVisibility = "GLOBAL"|"PRIVATE"|string;
   export interface GraphqlApi {
     /**
@@ -1492,6 +1674,22 @@ declare namespace AppSync {
      * Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
      */
     visibility?: GraphQLApiVisibility;
+    /**
+     * The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).
+     */
+    apiType?: GraphQLApiType;
+    /**
+     * The Identity and Access Management service role ARN for a merged API. The AppSync service assumes this role on behalf of the Merged API to validate access to source APIs at runtime and to prompt the AUTO_MERGE to update the merged API endpoint with the source API changes automatically.
+     */
+    mergedApiExecutionRoleArn?: String;
+    /**
+     * The account owner of the GraphQL API.
+     */
+    owner?: String;
+    /**
+     * The owner contact information for an API resource. This field accepts any string input with a length of 0 - 256 characters.
+     */
+    ownerContact?: String;
   }
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {
@@ -1580,7 +1778,7 @@ declare namespace AppSync {
   }
   export interface ListDomainNamesRequest {
     /**
-     * The API token.
+     * An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
     /**
@@ -1594,7 +1792,7 @@ declare namespace AppSync {
      */
     domainNameConfigs?: DomainNameConfigs;
     /**
-     * The API token.
+     * An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -1631,6 +1829,14 @@ declare namespace AppSync {
      * The maximum number of results that you want the request to return.
      */
     maxResults?: MaxResults;
+    /**
+     * The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).
+     */
+    apiType?: GraphQLApiType;
+    /**
+     * The account owner of the GraphQL API.
+     */
+    owner?: Ownership;
   }
   export interface ListGraphqlApisResponse {
     /**
@@ -1698,6 +1904,30 @@ declare namespace AppSync {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListSourceApiAssociationsRequest {
+    /**
+     * The API ID.
+     */
+    apiId: String;
+    /**
+     * An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum number of results that you want the request to return.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListSourceApiAssociationsResponse {
+    /**
+     * The SourceApiAssociationSummary object data.
+     */
+    sourceApiAssociationSummaries?: SourceApiAssociationSummaryList;
+    /**
+     * An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The GraphqlApi Amazon Resource Name (ARN).
@@ -1709,6 +1939,38 @@ declare namespace AppSync {
      * A TagMap object.
      */
     tags?: TagMap;
+  }
+  export interface ListTypesByAssociationRequest {
+    /**
+     * The identifier of the AppSync Merged API. This is generated by the AppSync service. In most cases, Merged APIs (especially in your account) only require the API ID value or ARN of the merged API. However, Merged APIs in other accounts (cross-account use cases) strictly require the full resource ARN of the merged API.
+     */
+    mergedApiIdentifier: String;
+    /**
+     * The ID generated by the AppSync service for the source API association.
+     */
+    associationId: String;
+    /**
+     * The format type.
+     */
+    format: TypeDefinitionFormat;
+    /**
+     * An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum number of results that you want the request to return.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListTypesByAssociationResponse {
+    /**
+     * The Type objects.
+     */
+    types?: TypeList;
+    /**
+     * An identifier that was returned from the previous call to this operation, which you can use to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListTypesRequest {
     /**
@@ -1758,6 +2020,7 @@ declare namespace AppSync {
   export type MappingTemplate = string;
   export type MaxBatchSize = number;
   export type MaxResults = number;
+  export type MergeType = "MANUAL_MERGE"|"AUTO_MERGE"|string;
   export interface OpenIDConnectConfig {
     /**
      * The issuer for the OIDC configuration. The issuer returned by discovery must exactly match the value of iss in the ID token.
@@ -1787,6 +2050,7 @@ declare namespace AppSync {
     awsRegion: String;
   }
   export type OutputType = "SDL"|"JSON"|string;
+  export type Ownership = "CURRENT_ACCOUNT"|"OTHER_ACCOUNTS"|string;
   export type PaginationToken = string;
   export interface PipelineConfig {
     /**
@@ -1884,6 +2148,90 @@ declare namespace AppSync {
   export type ResourceName = string;
   export type RuntimeName = "APPSYNC_JS"|string;
   export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|"FAILED"|"SUCCESS"|"NOT_APPLICABLE"|string;
+  export interface SourceApiAssociation {
+    /**
+     * The ID generated by the AppSync service for the source API association.
+     */
+    associationId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the source API association.
+     */
+    associationArn?: String;
+    /**
+     * The ID of the AppSync source API.
+     */
+    sourceApiId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the AppSync source API.
+     */
+    sourceApiArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the AppSync Merged API.
+     */
+    mergedApiArn?: String;
+    /**
+     * The ID of the AppSync Merged API.
+     */
+    mergedApiId?: String;
+    /**
+     * The description field.
+     */
+    description?: String;
+    /**
+     * The SourceApiAssociationConfig object data.
+     */
+    sourceApiAssociationConfig?: SourceApiAssociationConfig;
+    /**
+     * The state of the source API association.
+     */
+    sourceApiAssociationStatus?: SourceApiAssociationStatus;
+    /**
+     * The detailed message related to the current state of the source API association.
+     */
+    sourceApiAssociationStatusDetail?: String;
+    /**
+     * The datetime value of the last successful merge of the source API association. The result will be in UTC format and your local time zone.
+     */
+    lastSuccessfulMergeDate?: _Date;
+  }
+  export interface SourceApiAssociationConfig {
+    /**
+     * The property that indicates which merging option is enabled in the source API association. Valid merge types are MANUAL_MERGE (default) and AUTO_MERGE. Manual merges are the default behavior and require the user to trigger any changes from the source APIs to the merged API manually. Auto merges subscribe the merged API to the changes performed on the source APIs so that any change in the source APIs are also made to the merged API. Auto merges use MergedApiExecutionRoleArn to perform merge operations.
+     */
+    mergeType?: MergeType;
+  }
+  export type SourceApiAssociationStatus = "MERGE_SCHEDULED"|"MERGE_FAILED"|"MERGE_SUCCESS"|"MERGE_IN_PROGRESS"|"AUTO_MERGE_SCHEDULE_FAILED"|"DELETION_SCHEDULED"|"DELETION_IN_PROGRESS"|"DELETION_FAILED"|string;
+  export interface SourceApiAssociationSummary {
+    /**
+     * The ID generated by the AppSync service for the source API association.
+     */
+    associationId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the source API association.
+     */
+    associationArn?: String;
+    /**
+     * The ID of the AppSync source API.
+     */
+    sourceApiId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the AppSync Source API.
+     */
+    sourceApiArn?: String;
+    /**
+     * The ID of the AppSync Merged API.
+     */
+    mergedApiId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the AppSync Merged API.
+     */
+    mergedApiArn?: String;
+    /**
+     * The description field.
+     */
+    description?: String;
+  }
+  export type SourceApiAssociationSummaryList = SourceApiAssociationSummary[];
   export interface StartSchemaCreationRequest {
     /**
      * The API ID.
@@ -1899,6 +2247,22 @@ declare namespace AppSync {
      * The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.
      */
     status?: SchemaStatus;
+  }
+  export interface StartSchemaMergeRequest {
+    /**
+     * The ID generated by the AppSync service for the source API association.
+     */
+    associationId: String;
+    /**
+     * The identifier of the AppSync Merged API. This is generated by the AppSync service. In most cases, Merged APIs (especially in your account) only require the API ID value or ARN of the merged API. However, Merged APIs in other accounts (cross-account use cases) strictly require the full resource ARN of the merged API.
+     */
+    mergedApiIdentifier: String;
+  }
+  export interface StartSchemaMergeResponse {
+    /**
+     * The state of the source API association.
+     */
+    sourceApiAssociationStatus?: SourceApiAssociationStatus;
   }
   export type String = string;
   export interface SyncConfig {
@@ -2176,6 +2540,14 @@ declare namespace AppSync {
      * Configuration for Lambda function authorization.
      */
     lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
+    /**
+     * The Identity and Access Management service role ARN for a merged API. The AppSync service assumes this role on behalf of the Merged API to validate access to source APIs at runtime and to prompt the AUTO_MERGE to update the merged API endpoint with the source API changes automatically.
+     */
+    mergedApiExecutionRoleArn?: String;
+    /**
+     * The owner contact information for an API resource. This field accepts any string input with a length of 0 - 256 characters.
+     */
+    ownerContact?: String;
   }
   export interface UpdateGraphqlApiResponse {
     /**
@@ -2239,6 +2611,30 @@ declare namespace AppSync {
      * The updated Resolver object.
      */
     resolver?: Resolver;
+  }
+  export interface UpdateSourceApiAssociationRequest {
+    /**
+     * The ID generated by the AppSync service for the source API association.
+     */
+    associationId: String;
+    /**
+     * The identifier of the AppSync Merged API. This is generated by the AppSync service. In most cases, Merged APIs (especially in your account) only require the API ID value or ARN of the merged API. However, Merged APIs in other accounts (cross-account use cases) strictly require the full resource ARN of the merged API.
+     */
+    mergedApiIdentifier: String;
+    /**
+     * The description field.
+     */
+    description?: String;
+    /**
+     * The SourceApiAssociationConfig object data.
+     */
+    sourceApiAssociationConfig?: SourceApiAssociationConfig;
+  }
+  export interface UpdateSourceApiAssociationResponse {
+    /**
+     * The SourceApiAssociation object data.
+     */
+    sourceApiAssociation?: SourceApiAssociation;
   }
   export interface UpdateTypeRequest {
     /**

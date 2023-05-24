@@ -12637,6 +12637,23 @@
       },
       "documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.</p>"
     },
+    "DeploymentRecommendation": {
+      "type": "structure",
+      "required": [
+        "RecommendationStatus"
+      ],
+      "members": {
+        "RecommendationStatus": {
+          "shape": "RecommendationStatus",
+          "documentation": "<p>Status of the deployment recommendation. <code>NOT_APPLICABLE</code> means that SageMaker is unable to provide a default recommendation for the model using the information provided.</p>"
+        },
+        "RealTimeInferenceRecommendations": {
+          "shape": "RealTimeInferenceRecommendations",
+          "documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html\">RealTimeInferenceRecommendation</a> items.</p>"
+        }
+      },
+      "documentation": "<p>A set of recommended deployment configurations for the model.</p>"
+    },
     "DeploymentStage": {
       "type": "structure",
       "required": [
@@ -15426,6 +15443,10 @@
         "EnableNetworkIsolation": {
           "shape": "Boolean",
           "documentation": "<p>If <code>True</code>, no inbound or outbound network calls can be made to or from the model container.</p>"
+        },
+        "DeploymentRecommendation": {
+          "shape": "DeploymentRecommendation",
+          "documentation": "<p>A set of recommended deployment configurations for the model.</p>"
         }
       }
     },
@@ -26243,6 +26264,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of key-value pairs associated with the model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
+        },
+        "DeploymentRecommendation": {
+          "shape": "DeploymentRecommendation",
+          "documentation": "<p>A set of recommended deployment configurations for the model.</p>"
         }
       },
       "documentation": "<p>The properties of a model as returned by the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html\">Search</a> API.</p>"
@@ -31537,6 +31562,36 @@
       },
       "documentation": "<p>The infrastructure configuration for deploying the model to a real-time inference endpoint.</p>"
     },
+    "RealTimeInferenceRecommendation": {
+      "type": "structure",
+      "required": [
+        "RecommendationId",
+        "InstanceType"
+      ],
+      "members": {
+        "RecommendationId": {
+          "shape": "String",
+          "documentation": "<p>The recommendation ID which uniquely identifies each recommendation.</p>"
+        },
+        "InstanceType": {
+          "shape": "ProductionVariantInstanceType",
+          "documentation": "<p>The recommended instance type for Real-Time Inference.</p>"
+        },
+        "Environment": {
+          "shape": "EnvironmentMap",
+          "documentation": "<p>The recommended environment variables to set in the model container for Real-Time Inference.</p>"
+        }
+      },
+      "documentation": "<p>The recommended configuration to use for Real-Time Inference.</p>"
+    },
+    "RealTimeInferenceRecommendations": {
+      "type": "list",
+      "member": {
+        "shape": "RealTimeInferenceRecommendation"
+      },
+      "max": 3,
+      "min": 0
+    },
     "RealtimeInferenceInstanceTypes": {
       "type": "list",
       "member": {
@@ -31865,6 +31920,15 @@
         }
       },
       "documentation": "<p>The metrics of recommendations.</p>"
+    },
+    "RecommendationStatus": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED",
+        "NOT_APPLICABLE"
+      ]
     },
     "RecommendationStepType": {
       "type": "string",

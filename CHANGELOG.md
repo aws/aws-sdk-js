@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1383.0-->
+<!--LATEST=2.1384.0-->
 <!--ENTRYINSERT-->
+
+## 2.1384.0
+* feature: AppSync: This release introduces AppSync Merged APIs, which provide the ability to compose multiple source APIs into a single federated/merged API.
+* feature: CUR: Add support for split cost allocation data on a report.
+* feature: Connect: Amazon Connect Evaluation Capabilities: validation improvements
+* feature: SageMaker: SageMaker now provides an instantaneous deployment recommendation through the DescribeModel API
 
 ## 2.1383.0
 * feature: FMS: Fixes issue that could cause calls to GetAdminScope and ListAdminAccountsForOrganization to return a 500 Internal Server error.

@@ -4083,7 +4083,7 @@ declare namespace Connect {
     /**
      * The items of the section.
      */
-    Items?: EvaluationFormItemsList;
+    Items: EvaluationFormItemsList;
     /**
      * The scoring weight of the section.
      */

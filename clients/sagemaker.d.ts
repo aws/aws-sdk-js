@@ -6804,6 +6804,16 @@ declare namespace SageMaker {
      */
     AutoRollbackConfiguration?: AutoRollbackConfig;
   }
+  export interface DeploymentRecommendation {
+    /**
+     * Status of the deployment recommendation. NOT_APPLICABLE means that SageMaker is unable to provide a default recommendation for the model using the information provided.
+     */
+    RecommendationStatus: RecommendationStatus;
+    /**
+     * A list of RealTimeInferenceRecommendation items.
+     */
+    RealTimeInferenceRecommendations?: RealTimeInferenceRecommendations;
+  }
   export interface DeploymentStage {
     /**
      * The name of the stage.
@@ -8933,6 +8943,10 @@ declare namespace SageMaker {
      * If True, no inbound or outbound network calls can be made to or from the model container.
      */
     EnableNetworkIsolation?: Boolean;
+    /**
+     * A set of recommended deployment configurations for the model.
+     */
+    DeploymentRecommendation?: DeploymentRecommendation;
   }
   export interface DescribeModelPackageGroupInput {
     /**
@@ -16114,6 +16128,10 @@ declare namespace SageMaker {
      * A list of key-value pairs associated with the model. For more information, see Tagging Amazon Web Services resources in the Amazon Web Services General Reference Guide.
      */
     Tags?: TagList;
+    /**
+     * A set of recommended deployment configurations for the model.
+     */
+    DeploymentRecommendation?: DeploymentRecommendation;
   }
   export type ModelApprovalStatus = "Approved"|"Rejected"|"PendingManualApproval"|string;
   export type ModelArn = string;
@@ -19043,6 +19061,21 @@ declare namespace SageMaker {
      */
     InstanceCount: TaskCount;
   }
+  export interface RealTimeInferenceRecommendation {
+    /**
+     * The recommendation ID which uniquely identifies each recommendation.
+     */
+    RecommendationId: String;
+    /**
+     * The recommended instance type for Real-Time Inference.
+     */
+    InstanceType: ProductionVariantInstanceType;
+    /**
+     * The recommended environment variables to set in the model container for Real-Time Inference.
+     */
+    Environment?: EnvironmentMap;
+  }
+  export type RealTimeInferenceRecommendations = RealTimeInferenceRecommendation[];
   export type RealtimeInferenceInstanceTypes = ProductionVariantInstanceType[];
   export type RecommendationFailureReason = string;
   export type RecommendationJobArn = string;
@@ -19234,6 +19267,7 @@ declare namespace SageMaker {
      */
     MemoryUtilization?: UtilizationMetric;
   }
+  export type RecommendationStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"NOT_APPLICABLE"|string;
   export type RecommendationStepType = "BENCHMARK"|string;
   export type RecordWrapper = "None"|"RecordIO"|string;
   export type RedshiftClusterId = string;

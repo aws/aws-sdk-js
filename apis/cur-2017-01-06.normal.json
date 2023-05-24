@@ -113,6 +113,7 @@
         "af-south-1",
         "ap-east-1",
         "ap-south-1",
+        "ap-south-2",
         "ap-southeast-1",
         "ap-southeast-2",
         "ap-southeast-3",
@@ -121,6 +122,7 @@
         "ap-northeast-3",
         "ca-central-1",
         "eu-central-1",
+        "eu-central-2",
         "eu-west-1",
         "eu-west-2",
         "eu-west-3",
@@ -371,7 +373,8 @@
       "type": "string",
       "documentation": "<p>Whether or not AWS includes resource IDs in the report. </p>",
       "enum": [
-        "RESOURCES"
+        "RESOURCES",
+        "SPLIT_COST_ALLOCATION_DATA"
       ]
     },
     "SchemaElementList": {
