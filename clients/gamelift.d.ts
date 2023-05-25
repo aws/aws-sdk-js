@@ -20,11 +20,11 @@ declare class GameLift extends Service {
    */
   acceptMatch(callback?: (err: AWSError, data: GameLift.Types.AcceptMatchOutput) => void): Request<GameLift.Types.AcceptMatchOutput, AWSError>;
   /**
-   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Locates an available game server and temporarily reserves it to host gameplay and players. This operation is called from a game client or client service (such as a matchmaker) to request hosting resources for a new game session. In response, Amazon GameLift FleetIQ locates an available game server, places it in CLAIMED status for 60 seconds, and returns connection information that players can use to connect to the game server.  To claim a game server, identify a game server group. You can also specify a game server ID, although this approach bypasses Amazon GameLift FleetIQ placement optimization. Optionally, include game data to pass to the game server at the start of a game session, such as a game map or player information.  When a game server is successfully claimed, connection information is returned. A claimed game server's utilization status remains AVAILABLE while the claim status is set to CLAIMED for up to 60 seconds. This time period gives the game server time to update its status to UTILIZED after players join. If the game server's status is not updated within 60 seconds, the game server reverts to unclaimed status and is available to be claimed by another request. The claim time period is a fixed value and is not configurable. If you try to claim a specific game server, this request will fail in the following cases:   If the game server utilization status is UTILIZED.   If the game server claim status is CLAIMED.    When claiming a specific game server, this request will succeed even if the game server is running on an instance in DRAINING status. To avoid this, first check the instance status by calling DescribeGameServerInstances .   Learn more   Amazon GameLift FleetIQ Guide 
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Locates an available game server and temporarily reserves it to host gameplay and players. This operation is called from a game client or client service (such as a matchmaker) to request hosting resources for a new game session. In response, Amazon GameLift FleetIQ locates an available game server, places it in CLAIMED status for 60 seconds, and returns connection information that players can use to connect to the game server.  To claim a game server, identify a game server group. You can also specify a game server ID, although this approach bypasses Amazon GameLift FleetIQ placement optimization. Optionally, include game data to pass to the game server at the start of a game session, such as a game map or player information. Filter options may be included to further restrict how a game server is chosen, such as only allowing game servers on ACTIVE instances to be claimed. When a game server is successfully claimed, connection information is returned. A claimed game server's utilization status remains AVAILABLE while the claim status is set to CLAIMED for up to 60 seconds. This time period gives the game server time to update its status to UTILIZED after players join. If the game server's status is not updated within 60 seconds, the game server reverts to unclaimed status and is available to be claimed by another request. The claim time period is a fixed value and is not configurable. If you try to claim a specific game server, this request will fail in the following cases:   If the game server utilization status is UTILIZED.   If the game server claim status is CLAIMED.   If the game server is running on an instance in DRAINING status and provided filter option does not allow placing on DRAINING instances.    Learn more   Amazon GameLift FleetIQ Guide 
    */
   claimGameServer(params: GameLift.Types.ClaimGameServerInput, callback?: (err: AWSError, data: GameLift.Types.ClaimGameServerOutput) => void): Request<GameLift.Types.ClaimGameServerOutput, AWSError>;
   /**
-   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Locates an available game server and temporarily reserves it to host gameplay and players. This operation is called from a game client or client service (such as a matchmaker) to request hosting resources for a new game session. In response, Amazon GameLift FleetIQ locates an available game server, places it in CLAIMED status for 60 seconds, and returns connection information that players can use to connect to the game server.  To claim a game server, identify a game server group. You can also specify a game server ID, although this approach bypasses Amazon GameLift FleetIQ placement optimization. Optionally, include game data to pass to the game server at the start of a game session, such as a game map or player information.  When a game server is successfully claimed, connection information is returned. A claimed game server's utilization status remains AVAILABLE while the claim status is set to CLAIMED for up to 60 seconds. This time period gives the game server time to update its status to UTILIZED after players join. If the game server's status is not updated within 60 seconds, the game server reverts to unclaimed status and is available to be claimed by another request. The claim time period is a fixed value and is not configurable. If you try to claim a specific game server, this request will fail in the following cases:   If the game server utilization status is UTILIZED.   If the game server claim status is CLAIMED.    When claiming a specific game server, this request will succeed even if the game server is running on an instance in DRAINING status. To avoid this, first check the instance status by calling DescribeGameServerInstances .   Learn more   Amazon GameLift FleetIQ Guide 
+   *  This operation is used with the Amazon GameLift FleetIQ solution and game server groups.  Locates an available game server and temporarily reserves it to host gameplay and players. This operation is called from a game client or client service (such as a matchmaker) to request hosting resources for a new game session. In response, Amazon GameLift FleetIQ locates an available game server, places it in CLAIMED status for 60 seconds, and returns connection information that players can use to connect to the game server.  To claim a game server, identify a game server group. You can also specify a game server ID, although this approach bypasses Amazon GameLift FleetIQ placement optimization. Optionally, include game data to pass to the game server at the start of a game session, such as a game map or player information. Filter options may be included to further restrict how a game server is chosen, such as only allowing game servers on ACTIVE instances to be claimed. When a game server is successfully claimed, connection information is returned. A claimed game server's utilization status remains AVAILABLE while the claim status is set to CLAIMED for up to 60 seconds. This time period gives the game server time to update its status to UTILIZED after players join. If the game server's status is not updated within 60 seconds, the game server reverts to unclaimed status and is available to be claimed by another request. The claim time period is a fixed value and is not configurable. If you try to claim a specific game server, this request will fail in the following cases:   If the game server utilization status is UTILIZED.   If the game server claim status is CLAIMED.   If the game server is running on an instance in DRAINING status and provided filter option does not allow placing on DRAINING instances.    Learn more   Amazon GameLift FleetIQ Guide 
    */
   claimGameServer(callback?: (err: AWSError, data: GameLift.Types.ClaimGameServerOutput) => void): Request<GameLift.Types.ClaimGameServerOutput, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class GameLift extends Service {
    */
   createAlias(callback?: (err: AWSError, data: GameLift.Types.CreateAliasOutput) => void): Request<GameLift.Types.CreateAliasOutput, AWSError>;
   /**
-   * Creates a new Amazon GameLift build resource for your game server binary files. Combine game server binaries into a zip file for use with Amazon GameLift.   When setting up a new game build for Amazon GameLift, we recommend using the CLI command  upload-build . This helper command combines two tasks: (1) it uploads your build files from a file directory to a Amazon GameLift Amazon S3 location, and (2) it creates a new build resource.  You can use the operation in the following scenarios:   To create a new game build with build files that are in an Amazon S3 location under an Amazon Web Services account that you control. To use this option, you give Amazon GameLift access to the Amazon S3 bucket. With permissions in place, specify a build name, operating system, and the Amazon S3 storage location of your game build.   To directly upload your build files to a Amazon GameLift Amazon S3 location. To use this option, specify a build name and operating system. This operation creates a new build resource and also returns an Amazon S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified Amazon S3 location. For more information, see Uploading Objects in the Amazon S3 Developer Guide. After you upload build files to the Amazon GameLift Amazon S3 location, you can't update them.    If successful, this operation creates a new build resource with a unique build ID and places it in INITIALIZED status. A build must be in READY status before you can create fleets with it.  Learn more   Uploading Your Game    Create a Build with Files in Amazon S3   All APIs by task 
+   * Creates a new Amazon GameLift build resource for your game server binary files. Combine game server binaries into a zip file for use with Amazon GameLift.   When setting up a new game build for Amazon GameLift, we recommend using the CLI command  upload-build . This helper command combines two tasks: (1) it uploads your build files from a file directory to an Amazon GameLift Amazon S3 location, and (2) it creates a new build resource.  You can use the CreateBuild operation in the following scenarios:   Create a new game build with build files that are in an Amazon S3 location under an Amazon Web Services account that you control. To use this option, you give Amazon GameLift access to the Amazon S3 bucket. With permissions in place, specify a build name, operating system, and the Amazon S3 storage location of your game build.   Upload your build files to a Amazon GameLift Amazon S3 location. To use this option, specify a build name and operating system. This operation creates a new build resource and also returns an Amazon S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified Amazon S3 location. For more information, see Uploading Objects in the Amazon S3 Developer Guide. After you upload build files to the Amazon GameLift Amazon S3 location, you can't update them.    If successful, this operation creates a new build resource with a unique build ID and places it in INITIALIZED status. A build must be in READY status before you can create fleets with it.  Learn more   Uploading Your Game    Create a Build with Files in Amazon S3   All APIs by task 
    */
   createBuild(params: GameLift.Types.CreateBuildInput, callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
-   * Creates a new Amazon GameLift build resource for your game server binary files. Combine game server binaries into a zip file for use with Amazon GameLift.   When setting up a new game build for Amazon GameLift, we recommend using the CLI command  upload-build . This helper command combines two tasks: (1) it uploads your build files from a file directory to a Amazon GameLift Amazon S3 location, and (2) it creates a new build resource.  You can use the operation in the following scenarios:   To create a new game build with build files that are in an Amazon S3 location under an Amazon Web Services account that you control. To use this option, you give Amazon GameLift access to the Amazon S3 bucket. With permissions in place, specify a build name, operating system, and the Amazon S3 storage location of your game build.   To directly upload your build files to a Amazon GameLift Amazon S3 location. To use this option, specify a build name and operating system. This operation creates a new build resource and also returns an Amazon S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified Amazon S3 location. For more information, see Uploading Objects in the Amazon S3 Developer Guide. After you upload build files to the Amazon GameLift Amazon S3 location, you can't update them.    If successful, this operation creates a new build resource with a unique build ID and places it in INITIALIZED status. A build must be in READY status before you can create fleets with it.  Learn more   Uploading Your Game    Create a Build with Files in Amazon S3   All APIs by task 
+   * Creates a new Amazon GameLift build resource for your game server binary files. Combine game server binaries into a zip file for use with Amazon GameLift.   When setting up a new game build for Amazon GameLift, we recommend using the CLI command  upload-build . This helper command combines two tasks: (1) it uploads your build files from a file directory to an Amazon GameLift Amazon S3 location, and (2) it creates a new build resource.  You can use the CreateBuild operation in the following scenarios:   Create a new game build with build files that are in an Amazon S3 location under an Amazon Web Services account that you control. To use this option, you give Amazon GameLift access to the Amazon S3 bucket. With permissions in place, specify a build name, operating system, and the Amazon S3 storage location of your game build.   Upload your build files to a Amazon GameLift Amazon S3 location. To use this option, specify a build name and operating system. This operation creates a new build resource and also returns an Amazon S3 location with temporary access credentials. Use the credentials to manually upload your build files to the specified Amazon S3 location. For more information, see Uploading Objects in the Amazon S3 Developer Guide. After you upload build files to the Amazon GameLift Amazon S3 location, you can't update them.    If successful, this operation creates a new build resource with a unique build ID and places it in INITIALIZED status. A build must be in READY status before you can create fleets with it.  Learn more   Uploading Your Game    Create a Build with Files in Amazon S3   All APIs by task 
    */
   createBuild(callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
@@ -516,11 +516,11 @@ declare class GameLift extends Service {
    */
   getComputeAuthToken(callback?: (err: AWSError, data: GameLift.Types.GetComputeAuthTokenOutput) => void): Request<GameLift.Types.GetComputeAuthTokenOutput, AWSError>;
   /**
-   * Retrieves the location of stored game session logs for a specified game session. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3 and retains them for 14 days. Use this URL to download the logs.  See the Amazon Web Services Service Limits page for maximum log file sizes. Log files that exceed this limit are not saved.   All APIs by task 
+   * Retrieves the location of stored game session logs for a specified game session on Amazon GameLift managed fleets. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3 and retains them for 14 days. Use this URL to download the logs.  See the Amazon Web Services Service Limits page for maximum log file sizes. Log files that exceed this limit are not saved.   All APIs by task 
    */
   getGameSessionLogUrl(params: GameLift.Types.GetGameSessionLogUrlInput, callback?: (err: AWSError, data: GameLift.Types.GetGameSessionLogUrlOutput) => void): Request<GameLift.Types.GetGameSessionLogUrlOutput, AWSError>;
   /**
-   * Retrieves the location of stored game session logs for a specified game session. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3 and retains them for 14 days. Use this URL to download the logs.  See the Amazon Web Services Service Limits page for maximum log file sizes. Log files that exceed this limit are not saved.   All APIs by task 
+   * Retrieves the location of stored game session logs for a specified game session on Amazon GameLift managed fleets. When a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3 and retains them for 14 days. Use this URL to download the logs.  See the Amazon Web Services Service Limits page for maximum log file sizes. Log files that exceed this limit are not saved.   All APIs by task 
    */
   getGameSessionLogUrl(callback?: (err: AWSError, data: GameLift.Types.GetGameSessionLogUrlOutput) => void): Request<GameLift.Types.GetGameSessionLogUrlOutput, AWSError>;
   /**
@@ -990,6 +990,12 @@ declare namespace GameLift {
     CertificateType: CertificateType;
   }
   export type CertificateType = "DISABLED"|"GENERATED"|string;
+  export interface ClaimFilterOption {
+    /**
+     * List of instance statuses that game servers may be claimed on. If provided, the list must contain the ACTIVE status.
+     */
+    InstanceStatuses?: FilterInstanceStatuses;
+  }
   export interface ClaimGameServerInput {
     /**
      * A unique identifier for the game server group where the game server is running. If you are not specifying a game server to claim, this value identifies where you want Amazon GameLift FleetIQ to look for an available game server to claim. 
@@ -1003,6 +1009,10 @@ declare namespace GameLift {
      * A set of custom game server properties, formatted as a single string value. This data is passed to a game client or service when it requests information on game servers. 
      */
     GameServerData?: GameServerData;
+    /**
+     * Object that restricts how a claimed game server is chosen.
+     */
+    FilterOption?: ClaimFilterOption;
   }
   export interface ClaimGameServerOutput {
     /**
@@ -1106,7 +1116,7 @@ declare namespace GameLift {
      */
     StorageLocation?: S3Location;
     /**
-     * The operating system that you built the game server binaries to run on. This value determines the type of fleet resources that you can use for this build. If your game build contains multiple executables, they all must run on the same operating system. If an operating system isn't specified when creating a build, Amazon GameLift uses the default value (WINDOWS_2012). This value can't be changed later.
+     * The operating system that your game server binaries run on. This value determines the type of fleet resources that you use for this build. If your game build contains multiple executables, they all must run on the same operating system. You must specify a valid operating system in this request. There is no default value. You can't change a build's operating system later.  If you have active fleets using the Windows Server 2012 operating system, you can continue to create new builds using this OS until October 10, 2023, when Microsoft ends its support. All others must use Windows Server 2016 when creating new Windows-based builds. 
      */
     OperatingSystem?: OperatingSystem;
     /**
@@ -1362,7 +1372,7 @@ declare namespace GameLift {
      */
     Name: GameSessionQueueName;
     /**
-     * The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status.
+     * The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status. By default, this property is set to 600.
      */
     TimeoutInSeconds?: WholeNumber;
     /**
@@ -2498,6 +2508,8 @@ declare namespace GameLift {
      */
     AllowedLocations?: LocationList;
   }
+  export type FilterInstanceStatus = "ACTIVE"|"DRAINING"|string;
+  export type FilterInstanceStatuses = FilterInstanceStatus[];
   export type FleetAction = "AUTO_SCALING"|string;
   export type FleetActionList = FleetAction[];
   export type FleetArn = string;
@@ -3013,7 +3025,7 @@ declare namespace GameLift {
      */
     GameSessionQueueArn?: GameSessionQueueArn;
     /**
-     * The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status.
+     * The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status. By default, this property is set to 600.
      */
     TimeoutInSeconds?: WholeNumber;
     /**
@@ -4678,7 +4690,7 @@ declare namespace GameLift {
      */
     Name: GameSessionQueueNameOrArn;
     /**
-     * The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status.
+     * The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a TIMED_OUT status. By default, this property is set to 600.
      */
     TimeoutInSeconds?: WholeNumber;
     /**

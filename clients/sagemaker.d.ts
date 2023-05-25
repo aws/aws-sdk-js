@@ -1045,11 +1045,11 @@ declare class SageMaker extends Service {
    */
   describeHumanTaskUi(callback?: (err: AWSError, data: SageMaker.Types.DescribeHumanTaskUiResponse) => void): Request<SageMaker.Types.DescribeHumanTaskUiResponse, AWSError>;
   /**
-   * Gets a description of a hyperparameter tuning job.
+   * Returns a description of a hyperparameter tuning job, depending on the fields selected. These fields can include the name, Amazon Resource Name (ARN), job status of your tuning job and more.
    */
   describeHyperParameterTuningJob(params: SageMaker.Types.DescribeHyperParameterTuningJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.DescribeHyperParameterTuningJobResponse, AWSError>;
   /**
-   * Gets a description of a hyperparameter tuning job.
+   * Returns a description of a hyperparameter tuning job, depending on the fields selected. These fields can include the name, Amazon Resource Name (ARN), job status of your tuning job and more.
    */
   describeHyperParameterTuningJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeHyperParameterTuningJobResponse) => void): Request<SageMaker.Types.DescribeHyperParameterTuningJobResponse, AWSError>;
   /**
@@ -3375,12 +3375,30 @@ declare namespace SageMaker {
   }
   export type AutoMLSortBy = "Name"|"CreationTime"|"Status"|string;
   export type AutoMLSortOrder = "Ascending"|"Descending"|string;
+  export interface AutoParameter {
+    /**
+     * The name of the hyperparameter to optimize using Autotune.
+     */
+    Name: ParameterKey;
+    /**
+     * An example value of the hyperparameter to optimize using Autotune.
+     */
+    ValueHint: ParameterValue;
+  }
+  export type AutoParameters = AutoParameter[];
   export interface AutoRollbackConfig {
     /**
      * List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint. If any alarms are tripped during a deployment, SageMaker rolls back the deployment.
      */
     Alarms?: AlarmList;
   }
+  export interface Autotune {
+    /**
+     * Set Mode to Enabled if you want to use Autotune.
+     */
+    Mode: AutotuneMode;
+  }
+  export type AutotuneMode = "Enabled"|string;
   export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
   export interface BatchDataCaptureConfig {
     /**
@@ -4942,6 +4960,10 @@ declare namespace SageMaker {
      * An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see Tagging Amazon Web Services Resources. Tags that you specify for the tuning job are also added to all training jobs that the tuning job launches.
      */
     Tags?: TagList;
+    /**
+     * Configures SageMaker Automatic model tuning (AMT) to automatically find optimal parameters for the following fields:    ParameterRanges: The names and ranges of parameters that a hyperparameter tuning job can optimize.    ResourceLimits: The maximum resources that can be used for a training job. These resources include the maximum number of training jobs, the maximum runtime of a tuning job, and the maximum number of training jobs to run at the same time.    TrainingJobEarlyStoppingType: A flag that specifies whether or not to use early stopping for training jobs launched by a hyperparameter tuning job.    RetryStrategy: The number of times to retry a training job.    Strategy: Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training jobs that it launches.    ConvergenceDetected: A flag to indicate that Automatic model tuning (AMT) has detected model convergence.  
+     */
+    Autotune?: Autotune;
   }
   export interface CreateHyperParameterTuningJobResponse {
     /**
@@ -8277,7 +8299,7 @@ declare namespace SageMaker {
   }
   export interface DescribeHyperParameterTuningJobResponse {
     /**
-     * The name of the tuning job.
+     * The name of the hyperparameter tuning job.
      */
     HyperParameterTuningJobName: HyperParameterTuningJobName;
     /**
@@ -8341,6 +8363,10 @@ declare namespace SageMaker {
      */
     TuningJobCompletionDetails?: HyperParameterTuningJobCompletionDetails;
     ConsumedResources?: HyperParameterTuningJobConsumedResources;
+    /**
+     * A flag to indicate if autotune is enabled for the hyperparameter tuning job.
+     */
+    Autotune?: Autotune;
   }
   export interface DescribeImageRequest {
     /**
@@ -17860,6 +17886,10 @@ declare namespace SageMaker {
      * The array of CategoricalParameterRange objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.
      */
     CategoricalParameterRanges?: CategoricalParameterRanges;
+    /**
+     * A list containing hyperparameter names and example values to be used by Autotune to determine optimal ranges for your tuning job.
+     */
+    AutoParameters?: AutoParameters;
   }
   export type ParameterType = "Integer"|"Continuous"|"Categorical"|"FreeText"|string;
   export type ParameterValue = string;

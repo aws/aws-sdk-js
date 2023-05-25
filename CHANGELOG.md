@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1384.0-->
+<!--LATEST=2.1385.0-->
 <!--ENTRYINSERT-->
+
+## 2.1385.0
+* feature: ApplicationAutoScaling: With this release, ElastiCache customers will be able to use predefined metricType "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage" for their ElastiCache instances.
+* feature: CodePipeline: Add PollingDisabledAt time information in PipelineMetadata object of GetPipeline API.
+* feature: GameLift: GameLift FleetIQ users can now filter game server claim requests to exclude servers on instances that are draining.
+* feature: Glue: Added ability to create data quality rulesets for shared, cross-account Glue Data Catalog tables. Added support for dataset comparison rules through a new parameter called AdditionalDataSources. Enhanced the data quality results with a map containing profiled metric values.
+* feature: MigrationHubRefactorSpaces: This SDK update allows for path parameter syntax to be passed to the CreateRoute API. Path parameter syntax require parameters to be enclosed in {} characters. This update also includes a new AppendSourcePath field which lets users forward the source path to the Service URL endpoint.
+* feature: SageMaker: Amazon SageMaker Automatic Model Tuning now supports enabling Autotune for tuning jobs which can choose tuning job configurations.
 
 ## 2.1384.0
 * feature: AppSync: This release introduces AppSync Merged APIs, which provide the ability to compose multiple source APIs into a single federated/merged API.

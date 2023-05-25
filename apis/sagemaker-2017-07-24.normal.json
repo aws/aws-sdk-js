@@ -2431,7 +2431,7 @@
           "shape": "ResourceNotFound"
         }
       ],
-      "documentation": "<p>Gets a description of a hyperparameter tuning job.</p>"
+      "documentation": "<p>Returns a description of a hyperparameter tuning job, depending on the fields selected. These fields can include the name, Amazon Resource Name (ARN), job status of your tuning job and more.</p>"
     },
     "DescribeImage": {
       "name": "DescribeImage",
@@ -7090,6 +7090,32 @@
         "Descending"
       ]
     },
+    "AutoParameter": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ValueHint"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ParameterKey",
+          "documentation": "<p>The name of the hyperparameter to optimize using Autotune.</p>"
+        },
+        "ValueHint": {
+          "shape": "ParameterValue",
+          "documentation": "<p>An example value of the hyperparameter to optimize using Autotune.</p>"
+        }
+      },
+      "documentation": "<p>The name and an example value of the hyperparameter that you want to use in Autotune. If Automatic model tuning (AMT) determines that your hyperparameter is eligible for Autotune, an optimal hyperparameter range is selected for you.</p>"
+    },
+    "AutoParameters": {
+      "type": "list",
+      "member": {
+        "shape": "AutoParameter"
+      },
+      "max": 100,
+      "min": 0
+    },
     "AutoRollbackConfig": {
       "type": "structure",
       "members": {
@@ -7099,6 +7125,25 @@
         }
       },
       "documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>"
+    },
+    "Autotune": {
+      "type": "structure",
+      "required": [
+        "Mode"
+      ],
+      "members": {
+        "Mode": {
+          "shape": "AutotuneMode",
+          "documentation": "<p>Set <code>Mode</code> to <code>Enabled</code> if you want to use Autotune.</p>"
+        }
+      },
+      "documentation": "<p>A flag to indicate if you want to use Autotune to automatically find optimal values for the following fields:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges\">ParameterRanges</a>: The names and ranges of parameters that a hyperparameter tuning job can optimize.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html\">ResourceLimits</a>: The maximum resources that can be used for a training job. These resources include the maximum number of training jobs, the maximum runtime of a tuning job, and the maximum number of training jobs to run at the same time.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType\">TrainingJobEarlyStoppingType</a>: A flag that specifies whether or not to use early stopping for training jobs launched by a hyperparameter tuning job.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy\">RetryStrategy</a>: The number of times to retry a training job.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html\">Strategy</a>: Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training jobs that it launches.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html\">ConvergenceDetected</a>: A flag to indicate that Automatic model tuning (AMT) has detected model convergence.</p> </li> </ul>"
+    },
+    "AutotuneMode": {
+      "type": "string",
+      "enum": [
+        "Enabled"
+      ]
     },
     "AwsManagedHumanLoopRequestSource": {
       "type": "string",
@@ -9806,6 +9851,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p> <p>Tags that you specify for the tuning job are also added to all training jobs that the tuning job launches.</p>"
+        },
+        "Autotune": {
+          "shape": "Autotune",
+          "documentation": "<p>Configures SageMaker Automatic model tuning (AMT) to automatically find optimal parameters for the following fields:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges\">ParameterRanges</a>: The names and ranges of parameters that a hyperparameter tuning job can optimize.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html\">ResourceLimits</a>: The maximum resources that can be used for a training job. These resources include the maximum number of training jobs, the maximum runtime of a tuning job, and the maximum number of training jobs to run at the same time.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType\">TrainingJobEarlyStoppingType</a>: A flag that specifies whether or not to use early stopping for training jobs launched by a hyperparameter tuning job.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy\">RetryStrategy</a>: The number of times to retry a training job.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html\">Strategy</a>: Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training jobs that it launches.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html\">ConvergenceDetected</a>: A flag to indicate that Automatic model tuning (AMT) has detected model convergence.</p> </li> </ul>"
         }
       }
     },
@@ -14582,7 +14631,7 @@
       "members": {
         "HyperParameterTuningJobName": {
           "shape": "HyperParameterTuningJobName",
-          "documentation": "<p>The name of the tuning job.</p>"
+          "documentation": "<p>The name of the hyperparameter tuning job.</p>"
         },
         "HyperParameterTuningJobArn": {
           "shape": "HyperParameterTuningJobArn",
@@ -14646,6 +14695,10 @@
         },
         "ConsumedResources": {
           "shape": "HyperParameterTuningJobConsumedResources"
+        },
+        "Autotune": {
+          "shape": "Autotune",
+          "documentation": "<p>A flag to indicate if autotune is enabled for the hyperparameter tuning job.</p>"
         }
       }
     },
@@ -29359,6 +29412,10 @@
         "CategoricalParameterRanges": {
           "shape": "CategoricalParameterRanges",
           "documentation": "<p>The array of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CategoricalParameterRange.html\">CategoricalParameterRange</a> objects that specify ranges of categorical hyperparameters that a hyperparameter tuning job searches.</p>"
+        },
+        "AutoParameters": {
+          "shape": "AutoParameters",
+          "documentation": "<p>A list containing hyperparameter names and example values to be used by Autotune to determine optimal ranges for your tuning job.</p>"
         }
       },
       "documentation": "<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs with hyperparameter values within these ranges to find the combination of values that result in the training job with the best performance as measured by the objective metric of the hyperparameter tuning job.</p> <note> <p>The maximum number of items specified for <code>Array Members</code> refers to the maximum number of hyperparameters for each range and also the maximum for the hyperparameter tuning job itself. That is, the sum of the number of hyperparameters for all the ranges can't exceed the maximum number specified.</p> </note>"

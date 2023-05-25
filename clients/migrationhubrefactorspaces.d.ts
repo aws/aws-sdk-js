@@ -243,7 +243,7 @@ declare namespace MigrationHubRefactorSpaces {
   }
   export interface ApiGatewayProxyInput {
     /**
-     * The type of endpoint to use for the API Gateway proxy. If no value is specified in the request, the value is set to REGIONAL by default. If the value is set to PRIVATE in the request, this creates a private API endpoint that is isolated from the public internet. The private endpoint can only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that have been granted access. 
+     * The type of endpoint to use for the API Gateway proxy. If no value is specified in the request, the value is set to REGIONAL by default. If the value is set to PRIVATE in the request, this creates a private API endpoint that is isolated from the public internet. The private endpoint can only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) interface endpoints for the Amazon API Gateway that has been granted access. For more information about creating a private connection with Refactor Spaces and interface endpoint (Amazon Web Services PrivateLink) availability, see Access Refactor Spaces using an interface endpoint (Amazon Web Services PrivateLink).
      */
     EndpointType?: ApiGatewayEndpointType;
     /**
@@ -1117,6 +1117,10 @@ declare namespace MigrationHubRefactorSpaces {
   }
   export interface GetRouteResponse {
     /**
+     * If set to true, this option appends the source path to the service URL endpoint.
+     */
+    AppendSourcePath?: Boolean;
+    /**
      * The ID of the application that the route belongs to. 
      */
     ApplicationId?: ApplicationId;
@@ -1173,7 +1177,7 @@ declare namespace MigrationHubRefactorSpaces {
      */
     ServiceId?: ServiceId;
     /**
-     * The path to use to match traffic. Paths must start with / and are relative to the base of the application. 
+     * This is the path that Refactor Spaces uses to match traffic. Paths must start with / and are relative to the base of the application. To use path parameters in the source path, add a variable in curly braces. For example, the resource path {user} represents a path parameter called 'user'.
      */
     SourcePath?: UriPath;
     /**
@@ -1457,6 +1461,10 @@ declare namespace MigrationHubRefactorSpaces {
   export type RouteSummaries = RouteSummary[];
   export interface RouteSummary {
     /**
+     * If set to true, this option appends the source path to the service URL endpoint.
+     */
+    AppendSourcePath?: Boolean;
+    /**
      * The unique identifier of the application. 
      */
     ApplicationId?: ApplicationId;
@@ -1513,7 +1521,7 @@ declare namespace MigrationHubRefactorSpaces {
      */
     ServiceId?: ServiceId;
     /**
-     * The path to use to match traffic. Paths must start with / and are relative to the base of the application.
+     * This is the path that Refactor Spaces uses to match traffic. Paths must start with / and are relative to the base of the application. To use path parameters in the source path, add a variable in curly braces. For example, the resource path {user} represents a path parameter called 'user'.
      */
     SourcePath?: UriPath;
     /**
@@ -1685,6 +1693,10 @@ declare namespace MigrationHubRefactorSpaces {
      */
     ActivationState: RouteActivationState;
     /**
+     * If set to true, this option appends the source path to the service URL endpoint.
+     */
+    AppendSourcePath?: Boolean;
+    /**
      * Indicates whether to match all subpaths of the given source path. If this value is false, requests must match the source path exactly before they are forwarded to this route's service. 
      */
     IncludeChildPaths?: Boolean;
@@ -1693,7 +1705,7 @@ declare namespace MigrationHubRefactorSpaces {
      */
     Methods?: HttpMethods;
     /**
-     * The path to use to match traffic. Paths must start with / and are relative to the base of the application.
+     * This is the path that Refactor Spaces uses to match traffic. Paths must start with / and are relative to the base of the application. To use path parameters in the source path, add a variable in curly braces. For example, the resource path {user} represents a path parameter called 'user'.
      */
     SourcePath: UriPath;
   }

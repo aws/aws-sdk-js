@@ -1657,6 +1657,7 @@ declare namespace Glue {
     CrawlerName?: NameString;
   }
   export type ActionList = Action[];
+  export type AdditionalOptionKeys = "performanceTuning.caching"|string;
   export type AdditionalOptions = {[key: string]: EnclosedInStringProperty};
   export type AdditionalPlanOptionsMap = {[key: string]: GenericString};
   export type AggFunction = "avg"|"countDistinct"|"count"|"first"|"last"|"kurtosis"|"max"|"min"|"skewness"|"stddev_samp"|"stddev_pop"|"sum"|"sumDistinct"|"var_samp"|"var_pop"|string;
@@ -1691,11 +1692,11 @@ declare namespace Glue {
   export type AggregateOperations = AggregateOperation[];
   export interface AmazonRedshiftAdvancedOption {
     /**
-     * The key when specifying a key-value pair.
+     * The key for the additional connection option.
      */
     Key?: GenericString;
     /**
-     * The value when specifying a key-value pair.
+     * The value for the additional connection option.
      */
     Value?: GenericString;
   }
@@ -2995,6 +2996,10 @@ declare namespace Glue {
      * Specifies a target that writes to a data target in Amazon Redshift.
      */
     AmazonRedshiftTarget?: AmazonRedshiftTarget;
+    /**
+     * Specifies your data quality evaluation criteria. Allows multiple input data and returns a collection of Dynamic Frames.
+     */
+    EvaluateDataQualityMultiFrame?: EvaluateDataQualityMultiFrame;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -4598,6 +4603,8 @@ declare namespace Glue {
   export type CustomEntityTypeNames = NameString[];
   export type CustomEntityTypes = CustomEntityType[];
   export type CustomPatterns = string;
+  export type DQAdditionalOptions = {[key: string]: GenericString};
+  export type DQDLAliases = {[key: string]: EnclosedInStringProperty};
   export type DQDLString = string;
   export interface DQResultsPublishingOptions {
     /**
@@ -4799,6 +4806,10 @@ declare namespace Glue {
      * A pass or fail status for the rule.
      */
     Result?: DataQualityRuleResultStatus;
+    /**
+     * A map of metrics associated with the evaluation of the rule.
+     */
+    EvaluatedMetrics?: EvaluatedMetricsMap;
   }
   export type DataQualityRuleResultStatus = "PASS"|"FAIL"|"ERROR"|string;
   export type DataQualityRuleResults = DataQualityRuleResult[];
@@ -4906,6 +4917,10 @@ declare namespace Glue {
      * The name of the database where the Glue table exists.
      */
     DatabaseName: NameString;
+    /**
+     * The catalog id where the Glue table exists.
+     */
+    CatalogId?: NameString;
   }
   export interface DataSource {
     /**
@@ -4913,6 +4928,7 @@ declare namespace Glue {
      */
     GlueTable: GlueTable;
   }
+  export type DataSourceMap = {[key: string]: DataSource};
   export interface Database {
     /**
      * The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
@@ -5856,6 +5872,37 @@ declare namespace Glue {
      */
     StopJobOnFailureOptions?: DQStopJobOnFailureOptions;
   }
+  export interface EvaluateDataQualityMultiFrame {
+    /**
+     * The name of the data quality evaluation.
+     */
+    Name: NodeName;
+    /**
+     * The inputs of your data quality evaluation. The first input in this list is the primary data source.
+     */
+    Inputs: ManyInputs;
+    /**
+     * The aliases of all data sources except primary.
+     */
+    AdditionalDataSources?: DQDLAliases;
+    /**
+     * The ruleset for your data quality evaluation.
+     */
+    Ruleset: DQDLString;
+    /**
+     * Options to configure how your results are published.
+     */
+    PublishingOptions?: DQResultsPublishingOptions;
+    /**
+     * Options to configure runtime behavior of the transform.
+     */
+    AdditionalOptions?: DQAdditionalOptions;
+    /**
+     * Options to configure how your job will stop if your data quality evaluation fails.
+     */
+    StopJobOnFailureOptions?: DQStopJobOnFailureOptions;
+  }
+  export type EvaluatedMetricsMap = {[key: string]: NullableDouble};
   export interface EvaluationMetrics {
     /**
      * The type of machine learning transform.
@@ -6541,6 +6588,10 @@ declare namespace Glue {
      * A list of result IDs for the data quality results for the run.
      */
     ResultIds?: DataQualityResultIdList;
+    /**
+     * A map of reference strings to additional data sources you can specify for an evaluation run.
+     */
+    AdditionalDataSources?: DataSourceMap;
   }
   export interface GetDataQualityRulesetRequest {
     /**
@@ -11581,6 +11632,10 @@ declare namespace Glue {
      * A list of ruleset names.
      */
     RulesetNames: RulesetNames;
+    /**
+     * A map of reference strings to additional data sources you can specify for an evaluation run.
+     */
+    AdditionalDataSources?: DataSourceMap;
   }
   export interface StartDataQualityRulesetEvaluationRunResponse {
     /**
