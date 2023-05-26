@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1385.0-->
+<!--LATEST=2.1386.0-->
 <!--ENTRYINSERT-->
+
+## 2.1386.0
+* feature: Connect: Documentation update for a new Initiation Method value in DescribeContact API
+* feature: IoTWireless: Add Multicast Group support in Network Analyzer Configuration.
+* feature: SageMaker: Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances.
 
 ## 2.1385.0
 * feature: ApplicationAutoScaling: With this release, ElastiCache customers will be able to use predefined metricType "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage" for their ElastiCache instances.
