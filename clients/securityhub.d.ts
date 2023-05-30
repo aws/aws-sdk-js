@@ -713,6 +713,189 @@ declare namespace SecurityHub {
     SubnetId?: NonEmptyString;
   }
   export type AvailabilityZones = AvailabilityZone[];
+  export interface AwsAmazonMqBrokerDetails {
+    /**
+     *  The authentication strategy used to secure the broker. The default is SIMPLE. 
+     */
+    AuthenticationStrategy?: NonEmptyString;
+    /**
+     *  Whether automatically upgrade new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. 
+     */
+    AutoMinorVersionUpgrade?: Boolean;
+    /**
+     *  The Amazon Resource Name (ARN) of the broker. 
+     */
+    BrokerArn?: NonEmptyString;
+    /**
+     * The broker's name. 
+     */
+    BrokerName?: NonEmptyString;
+    /**
+     *  The broker's deployment mode. 
+     */
+    DeploymentMode?: NonEmptyString;
+    /**
+     *  Encryption options for the broker. Doesn’t apply to RabbitMQ brokers. 
+     */
+    EncryptionOptions?: AwsAmazonMqBrokerEncryptionOptionsDetails;
+    /**
+     *  The type of broker engine. 
+     */
+    EngineType?: NonEmptyString;
+    /**
+     *  The version of the broker engine. 
+     */
+    EngineVersion?: NonEmptyString;
+    /**
+     *  The broker's instance type. 
+     */
+    HostInstanceType?: NonEmptyString;
+    /**
+     *  The unique ID that Amazon MQ generates for the broker. 
+     */
+    BrokerId?: NonEmptyString;
+    /**
+     *  The metadata of the Lightweight Directory Access Protocol (LDAP) server used to authenticate and authorize connections to the broker. This is an optional failover server. 
+     */
+    LdapServerMetadata?: AwsAmazonMqBrokerLdapServerMetadataDetails;
+    /**
+     *  Turns on Amazon CloudWatch logging for brokers. 
+     */
+    Logs?: AwsAmazonMqBrokerLogsDetails;
+    /**
+     *  The scheduled time period (UTC) during which Amazon MQ begins to apply pending updates or patches to the broker. 
+     */
+    MaintenanceWindowStartTime?: AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails;
+    /**
+     *  Permits connections from applications outside of the VPC that hosts the broker's subnets. 
+     */
+    PubliclyAccessible?: Boolean;
+    /**
+     *  The list of rules (one minimum, 125 maximum) that authorize connections to brokers. 
+     */
+    SecurityGroups?: StringList;
+    /**
+     *  The broker's storage type. 
+     */
+    StorageType?: NonEmptyString;
+    /**
+     *  The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. 
+     */
+    SubnetIds?: StringList;
+    /**
+     *  The list of all broker usernames for the specified broker. Doesn't apply to RabbitMQ brokers. 
+     */
+    Users?: AwsAmazonMqBrokerUsersList;
+  }
+  export interface AwsAmazonMqBrokerEncryptionOptionsDetails {
+    /**
+     *  The KMS key that’s used to encrypt your data at rest. If not provided, Amazon MQ will use a default KMS key to encrypt your data. 
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     *  Specifies that an KMS key should be used for at-rest encryption. Set to true by default if no value is provided (for example, for RabbitMQ brokers). 
+     */
+    UseAwsOwnedKey?: Boolean;
+  }
+  export interface AwsAmazonMqBrokerLdapServerMetadataDetails {
+    /**
+     *  Specifies the location of the LDAP server, such as Amazon Web Services Directory Service for Microsoft Active Directory. 
+     */
+    Hosts?: StringList;
+    /**
+     *  The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. 
+     */
+    RoleBase?: NonEmptyString;
+    /**
+     *  The group name attribute in a role entry whose value is the name of that role. 
+     */
+    RoleName?: NonEmptyString;
+    /**
+     *  The LDAP search filter used to find roles within the roleBase. 
+     */
+    RoleSearchMatching?: NonEmptyString;
+    /**
+     *  The directory search scope for the role. If set to true, the scope is to search the entire subtree. 
+     */
+    RoleSearchSubtree?: Boolean;
+    /**
+     *  A username for the service account, which is an account in your LDAP server that has access to initiate a connection. 
+     */
+    ServiceAccountUsername?: NonEmptyString;
+    /**
+     *  Selects a particular subtree of the directory information tree (DIT) to search for user entries. 
+     */
+    UserBase?: NonEmptyString;
+    /**
+     *  The name of the LDAP attribute in the user's directory entry for the user's group membership. 
+     */
+    UserRoleName?: NonEmptyString;
+    /**
+     *  The LDAP search filter used to find users within the userBase. 
+     */
+    UserSearchMatching?: NonEmptyString;
+    /**
+     *  The directory search scope for the user. If set to true, the scope is to search the entire subtree. 
+     */
+    UserSearchSubtree?: Boolean;
+  }
+  export interface AwsAmazonMqBrokerLogsDetails {
+    /**
+     *  Activates audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ brokers. 
+     */
+    Audit?: Boolean;
+    /**
+     *  Activates general logging. 
+     */
+    General?: Boolean;
+    /**
+     *  The location of the CloudWatch Logs log group where audit logs are sent. 
+     */
+    AuditLogGroup?: NonEmptyString;
+    /**
+     *  The location of the CloudWatch Logs log group where general logs are sent. 
+     */
+    GeneralLogGroup?: NonEmptyString;
+    /**
+     *  The list of information about logs that are to be turned on for the specified broker. 
+     */
+    Pending?: AwsAmazonMqBrokerLogsPendingDetails;
+  }
+  export interface AwsAmazonMqBrokerLogsPendingDetails {
+    /**
+     *  Activates audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ brokers. 
+     */
+    Audit?: Boolean;
+    /**
+     *  Activates general logging. 
+     */
+    General?: Boolean;
+  }
+  export interface AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails {
+    /**
+     *  The day of the week on which the maintenance window falls. 
+     */
+    DayOfWeek?: NonEmptyString;
+    /**
+     *  The time, in 24-hour format, on which the maintenance window falls. 
+     */
+    TimeOfDay?: NonEmptyString;
+    /**
+     *  The time zone in either the Country/City format or the UTC offset format. UTC is the default format. 
+     */
+    TimeZone?: NonEmptyString;
+  }
+  export interface AwsAmazonMqBrokerUsersDetails {
+    /**
+     *  The type of change pending for the broker user. 
+     */
+    PendingChange?: NonEmptyString;
+    /**
+     *  The username of the broker user. 
+     */
+    Username?: NonEmptyString;
+  }
+  export type AwsAmazonMqBrokerUsersList = AwsAmazonMqBrokerUsersDetails[];
   export interface AwsApiCallAction {
     /**
      * The name of the API method that was issued.
@@ -1059,6 +1242,139 @@ declare namespace SecurityHub {
      * Indicates whether the stage is managed by API Gateway.
      */
     ApiGatewayManaged?: Boolean;
+  }
+  export interface AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails {
+    /**
+     *  The type of security configuration for your GraphQL API: API key, Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda. 
+     */
+    AuthenticationType?: NonEmptyString;
+    /**
+     *  The configuration for Lambda function authorization. 
+     */
+    LambdaAuthorizerConfig?: AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails;
+    /**
+     *  The OpenID Connect configuration. 
+     */
+    OpenIdConnectConfig?: AwsAppSyncGraphQlApiOpenIdConnectConfigDetails;
+    /**
+     *  The Amazon Cognito user pools configuration. 
+     */
+    UserPoolConfig?: AwsAppSyncGraphQlApiUserPoolConfigDetails;
+  }
+  export type AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList = AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails[];
+  export interface AwsAppSyncGraphQlApiDetails {
+    /**
+     *  The unique identifier for the API. 
+     */
+    ApiId?: NonEmptyString;
+    /**
+     * The unique identifier for the API.
+     */
+    Id?: NonEmptyString;
+    /**
+     *  Specifies the authorization configuration for using an OpenID Connect compliant service with an AppSync GraphQL API endpoint. 
+     */
+    OpenIdConnectConfig?: AwsAppSyncGraphQlApiOpenIdConnectConfigDetails;
+    /**
+     *  The API name. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  Specifies the configuration for Lambda function authorization. 
+     */
+    LambdaAuthorizerConfig?: AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails;
+    /**
+     *  Indicates whether to use X-Ray tracing for the GraphQL API. 
+     */
+    XrayEnabled?: Boolean;
+    /**
+     *  The Amazon Resource Name (ARN) of the API. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  The Amazon Cognito user pools configuration. 
+     */
+    UserPoolConfig?: AwsAppSyncGraphQlApiUserPoolConfigDetails;
+    /**
+     *  The type of security configuration for your GraphQL API: API key, Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda. 
+     */
+    AuthenticationType?: NonEmptyString;
+    /**
+     *  The Amazon CloudWatch Logs configuration. 
+     */
+    LogConfig?: AwsAppSyncGraphQlApiLogConfigDetails;
+    /**
+     *  A list of additional authentication providers for the GraphQL API. 
+     */
+    AdditionalAuthenticationProviders?: AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList;
+    /**
+     *  The Amazon Resource Name (ARN) of the WAF web access control list (web ACL) associated with this GraphQL API, if one exists. 
+     */
+    WafWebAclArn?: NonEmptyString;
+  }
+  export interface AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails {
+    /**
+     *  The number of seconds a response should be cached for. The default is 5 minutes (300 seconds). 
+     */
+    AuthorizerResultTtlInSeconds?: Integer;
+    /**
+     *  The Amazon Resource Name (ARN) of the Lambda function to be called for authorization. This can be a standard Lambda ARN, a version ARN (.../v3), or an alias ARN. 
+     */
+    AuthorizerUri?: NonEmptyString;
+    /**
+     *  A regular expression for validation of tokens before the Lambda function is called. 
+     */
+    IdentityValidationExpression?: NonEmptyString;
+  }
+  export interface AwsAppSyncGraphQlApiLogConfigDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the service role that AppSync assumes to publish to CloudWatch Logs in your account. 
+     */
+    CloudWatchLogsRoleArn?: NonEmptyString;
+    /**
+     *  Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level. 
+     */
+    ExcludeVerboseContent?: Boolean;
+    /**
+     *  The field logging level. 
+     */
+    FieldLogLevel?: NonEmptyString;
+  }
+  export interface AwsAppSyncGraphQlApiOpenIdConnectConfigDetails {
+    /**
+     *  The number of milliseconds that a token is valid after being authenticated. 
+     */
+    AuthTtL?: Long;
+    /**
+     *  The client identifier of the relying party at the OpenID identity provider. This identifier is typically obtained when the relying party is registered with the OpenID identity provider. You can specify a regular expression so that AppSync can validate against multiple client identifiers at a time. 
+     */
+    ClientId?: NonEmptyString;
+    /**
+     *  The number of milliseconds that a token is valid after it's issued to a user. 
+     */
+    IatTtL?: Long;
+    /**
+     *  The issuer for the OIDC configuration. The issuer returned by discovery must exactly match the value of iss in the ID token. 
+     */
+    Issuer?: NonEmptyString;
+  }
+  export interface AwsAppSyncGraphQlApiUserPoolConfigDetails {
+    /**
+     *  A regular expression for validating the incoming Amazon Cognito user pools app client ID. If this value isn't set, no filtering is applied. 
+     */
+    AppIdClientRegex?: NonEmptyString;
+    /**
+     *  The Amazon Web Services Region in which the user pool was created. 
+     */
+    AwsRegion?: NonEmptyString;
+    /**
+     *  The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pools authentication doesn't match the Amazon Cognito user pools configuration. 
+     */
+    DefaultAction?: NonEmptyString;
+    /**
+     *  The user pool ID. 
+     */
+    UserPoolId?: NonEmptyString;
   }
   export type AwsAutoScalingAutoScalingGroupAvailabilityZonesList = AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails[];
   export interface AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails {
@@ -6127,6 +6443,141 @@ declare namespace SecurityHub {
      */
     LoadBalancerAttributes?: AwsElbv2LoadBalancerAttributes;
   }
+  export interface AwsEventSchemasRegistryDetails {
+    /**
+     *  A description of the registry to be created. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the registry. 
+     */
+    RegistryArn?: NonEmptyString;
+    /**
+     *  The name of the schema registry. 
+     */
+    RegistryName?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesCloudTrailDetails {
+    /**
+     *  Specifies whether CloudTrail is activated as a data source for the detector. 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesDetails {
+    /**
+     *  An object that contains information on the status of CloudTrail as a data source for the detector. 
+     */
+    CloudTrail?: AwsGuardDutyDetectorDataSourcesCloudTrailDetails;
+    /**
+     *  An object that contains information on the status of DNS logs as a data source for the detector. 
+     */
+    DnsLogs?: AwsGuardDutyDetectorDataSourcesDnsLogsDetails;
+    /**
+     *  An object that contains information on the status of VPC Flow Logs as a data source for the detector. 
+     */
+    FlowLogs?: AwsGuardDutyDetectorDataSourcesFlowLogsDetails;
+    /**
+     *  An object that contains information on the status of Kubernetes data sources for the detector. 
+     */
+    Kubernetes?: AwsGuardDutyDetectorDataSourcesKubernetesDetails;
+    /**
+     *  An object that contains information on the status of Malware Protection as a data source for the detector. 
+     */
+    MalwareProtection?: AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails;
+    /**
+     *  An object that contains information on the status of S3 Data event logs as a data source for the detector. 
+     */
+    S3Logs?: AwsGuardDutyDetectorDataSourcesS3LogsDetails;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesDnsLogsDetails {
+    /**
+     *  Describes whether DNS logs is enabled as a data source for the detector. 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesFlowLogsDetails {
+    /**
+     *  Describes whether VPC Flow Logs are activated as a data source for the detector. 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails {
+    /**
+     *  Describes whether Kubernetes audit logs are activated as a data source for the detector. 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesKubernetesDetails {
+    /**
+     *  Describes whether Kubernetes audit logs are activated as a data source for the detector. 
+     */
+    AuditLogs?: AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails {
+    /**
+     *  Describes the configuration of Malware Protection for EC2 instances with findings. 
+     */
+    ScanEc2InstanceWithFindings?: AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails;
+    /**
+     *  The GuardDuty Malware Protection service role. 
+     */
+    ServiceRole?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails {
+    /**
+     *  Describes the configuration of scanning EBS volumes (Malware Protection) as a data source. 
+     */
+    EbsVolumes?: AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails {
+    /**
+     *  Specifies the reason why scanning EBS volumes (Malware Protection) isn’t activated as a data source. 
+     */
+    Reason?: NonEmptyString;
+    /**
+     *  Describes whether scanning EBS volumes is activated as a data source for the detector. 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorDataSourcesS3LogsDetails {
+    /**
+     *  A value that describes whether S3 data event logs are automatically enabled for new members of an organization. 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorDetails {
+    /**
+     *  Describes which data sources are activated for the detector. 
+     */
+    DataSources?: AwsGuardDutyDetectorDataSourcesDetails;
+    /**
+     *  Describes which features are activated for the detector. 
+     */
+    Features?: AwsGuardDutyDetectorFeaturesList;
+    /**
+     *  The publishing frequency of the finding. 
+     */
+    FindingPublishingFrequency?: NonEmptyString;
+    /**
+     *  The GuardDuty service role. 
+     */
+    ServiceRole?: NonEmptyString;
+    /**
+     *  The activation status of the detector. 
+     */
+    Status?: NonEmptyString;
+  }
+  export interface AwsGuardDutyDetectorFeaturesDetails {
+    /**
+     *  Indicates the name of the feature that is activated for the detector. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  Indicates the status of the feature that is activated for the detector. 
+     */
+    Status?: NonEmptyString;
+  }
+  export type AwsGuardDutyDetectorFeaturesList = AwsGuardDutyDetectorFeaturesDetails[];
   export interface AwsIamAccessKeyDetails {
     /**
      * The user associated with the IAM access key related to a finding. The UserName parameter has been replaced with the PrincipalName parameter because access keys can also be assigned to principals that are not IAM users.
@@ -9717,6 +10168,73 @@ declare namespace SecurityHub {
      */
     Patch?: AwsSsmPatch;
   }
+  export interface AwsStepFunctionStateMachineDetails {
+    /**
+     *  A user-defined or an auto-generated string that identifies a Map state. This parameter is present only if the stateMachineArn specified in input is a qualified state machine ARN. 
+     */
+    Label?: NonEmptyString;
+    /**
+     *  Used to set CloudWatch Logs options. 
+     */
+    LoggingConfiguration?: AwsStepFunctionStateMachineLoggingConfigurationDetails;
+    /**
+     *  The name of the state machine. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. 
+     */
+    RoleArn?: NonEmptyString;
+    /**
+     *  The ARN that identifies the state machine. 
+     */
+    StateMachineArn?: NonEmptyString;
+    /**
+     *  The current status of the state machine. 
+     */
+    Status?: NonEmptyString;
+    /**
+     *  Specifies whether X-Ray tracing is enabled. 
+     */
+    TracingConfiguration?: AwsStepFunctionStateMachineTracingConfigurationDetails;
+    /**
+     *  The type of the state machine (STANDARD or EXPRESS). 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails {
+    /**
+     * The ARN (ends with :*) of the CloudWatch Logs log group to which you want your logs emitted.
+     */
+    LogGroupArn?: NonEmptyString;
+  }
+  export interface AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails {
+    /**
+     *  An object describing a CloudWatch Logs log group. For more information, see  Amazon Web Services::Logs::LogGroup in the CloudFormation User Guide. 
+     */
+    CloudWatchLogsLogGroup?: AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails;
+  }
+  export type AwsStepFunctionStateMachineLoggingConfigurationDestinationsList = AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails[];
+  export interface AwsStepFunctionStateMachineLoggingConfigurationDetails {
+    /**
+     *  An array of objects that describes where your execution history events will be logged. 
+     */
+    Destinations?: AwsStepFunctionStateMachineLoggingConfigurationDestinationsList;
+    /**
+     *  Determines whether execution data is included in your log. When set to false, data is excluded. 
+     */
+    IncludeExecutionData?: Boolean;
+    /**
+     *  Defines which category of execution history events are logged. 
+     */
+    Level?: NonEmptyString;
+  }
+  export interface AwsStepFunctionStateMachineTracingConfigurationDetails {
+    /**
+     *  When set to true, X-Ray tracing is enabled. 
+     */
+    Enabled?: Boolean;
+  }
   export interface AwsWafRateBasedRuleDetails {
     /**
      * The name of the metrics for the rate-based rule.
@@ -11064,7 +11582,7 @@ declare namespace SecurityHub {
   export interface FindingHistoryRecord {
     FindingIdentifier?: AwsSecurityFindingIdentifier;
     /**
-     *  An ISO 8601-formatted timestamp that indicates when the security findings provider last updated the finding record. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format. 
+     *  An ISO 8601-formatted timestamp that indicates when Security Hub processed the updated finding record. A correctly formatted example is 2020-05-21T20:16:34.724Z. The value cannot contain spaces, and date and time should be separated by T. For more information, see RFC 3339 section 5.6, Internet Date/Time Format. 
      */
     UpdateTime?: Timestamp;
     /**
@@ -12559,6 +13077,26 @@ declare namespace SecurityHub {
      *  Provides details about a route table. A route table contains a set of rules, called routes, that determine where to direct network traffic from your subnet or gateway. 
      */
     AwsEc2RouteTable?: AwsEc2RouteTableDetails;
+    /**
+     *  Provides details about AppSync message broker. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols. 
+     */
+    AwsAmazonMqBroker?: AwsAmazonMqBrokerDetails;
+    /**
+     *  Provides details about an AppSync Graph QL API, which lets you query multiple databases, microservices, and APIs from a single GraphQL endpoint. 
+     */
+    AwsAppSyncGraphQlApi?: AwsAppSyncGraphQlApiDetails;
+    /**
+     *  A schema defines the structure of events that are sent to Amazon EventBridge. Schema registries are containers for schemas. They collect and organize schemas so that your schemas are in logical groups. 
+     */
+    AwsEventSchemasRegistry?: AwsEventSchemasRegistryDetails;
+    /**
+     *  Provides details about an Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector is required for GuardDuty to become operational. 
+     */
+    AwsGuardDutyDetector?: AwsGuardDutyDetectorDetails;
+    /**
+     *  Provides details about an Step Functions state machine, which is a workflow consisting of a series of event-driven steps. 
+     */
+    AwsStepFunctionStateMachine?: AwsStepFunctionStateMachineDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {

@@ -389,7 +389,7 @@ declare namespace MemoryDB {
      */
     Passwords?: PasswordListInput;
   }
-  export type AuthenticationType = "password"|"no-password"|string;
+  export type AuthenticationType = "password"|"no-password"|"iam"|string;
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -1358,7 +1358,7 @@ declare namespace MemoryDB {
   export type FilterName = string;
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
-  export type InputAuthenticationType = "password"|string;
+  export type InputAuthenticationType = "password"|"iam"|string;
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];

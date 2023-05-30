@@ -514,7 +514,7 @@ declare namespace WAFV2 {
   }
   export interface Body {
     /**
-     * What WAF should do if the body is larger than WAF can inspect. WAF does not support inspecting the entire contents of the web request body if the body exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service only forwards the contents that are below the limit to WAF for inspection.  The default limit is 8 KB (8,192 kilobytes) for regional resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For CloudFront distributions, you can increase the limit in the web ACL AssociationConfig, for additional processing fees.  The options for oversize handling are the following:    CONTINUE - Inspect the body normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   You can combine the MATCH or NO_MATCH settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit.  Default: CONTINUE 
+     * What WAF should do if the body is larger than WAF can inspect. WAF does not support inspecting the entire contents of the web request body if the body exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service only forwards the contents that are below the limit to WAF for inspection.  The default limit is 8 KB (8,192 kilobytes) for regional resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For CloudFront distributions, you can increase the limit in the web ACL AssociationConfig, for additional processing fees.  The options for oversize handling are the following:    CONTINUE - Inspect the available body contents normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   You can combine the MATCH or NO_MATCH settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit.  Default: CONTINUE 
      */
     OversizeHandling?: OversizeHandling;
   }
@@ -522,7 +522,7 @@ declare namespace WAFV2 {
   export type Boolean = boolean;
   export interface ByteMatchStatement {
     /**
-     * A string value that you want WAF to search for. WAF searches only in the part of web requests that you designate for inspection in FieldToMatch. The maximum length of the value is 200 bytes. Valid values depend on the component that you specify for inspection in FieldToMatch:    Method: The HTTP method that you want WAF to search for. This indicates the type of operation specified in the request.     UriPath: The value that you want WAF to search for in the URI path, for example, /images/daily-ad.jpg.    If SearchString includes alphabetic characters A-Z and a-z, note that the value is case sensitive.  If you're using the WAF API  Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 200 bytes. For example, suppose the value of Type is HEADER and the value of Data is User-Agent. If you want to search the User-Agent header for the value BadBot, you base64-encode BadBot using MIME base64-encoding and include the resulting value, QmFkQm90, in the value of SearchString.  If you're using the CLI or one of the Amazon Web Services SDKs  The value that you want WAF to search for. The SDK automatically base64 encodes the value.
+     * A string value that you want WAF to search for. WAF searches only in the part of web requests that you designate for inspection in FieldToMatch. The maximum length of the value is 200 bytes. Valid values depend on the component that you specify for inspection in FieldToMatch:    Method: The HTTP method that you want WAF to search for. This indicates the type of operation specified in the request.     UriPath: The value that you want WAF to search for in the URI path, for example, /images/daily-ad.jpg.     HeaderOrder: The comma-separated list of header names to match for. WAF creates a string that contains the ordered list of header names, from the headers in the web request, and then matches against that string.    If SearchString includes alphabetic characters A-Z and a-z, note that the value is case sensitive.  If you're using the WAF API  Specify a base64-encoded version of the value. The maximum length of the value before you base64-encode it is 200 bytes. For example, suppose the value of Type is HEADER and the value of Data is User-Agent. If you want to search the User-Agent header for the value BadBot, you base64-encode BadBot using MIME base64-encoding and include the resulting value, QmFkQm90, in the value of SearchString.  If you're using the CLI or one of the Amazon Web Services SDKs  The value that you want WAF to search for. The SDK automatically base64 encodes the value.
      */
     SearchString: SearchString;
     /**
@@ -645,7 +645,7 @@ declare namespace WAFV2 {
      */
     MatchScope: MapMatchScope;
     /**
-     * What WAF should do if the cookies of the request are larger than WAF can inspect. WAF does not support inspecting the entire contents of request cookies when they exceed 8 KB (8192 bytes) or 200 total cookies. The underlying host service forwards a maximum of 200 cookies and at most 8 KB of cookie contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the cookies normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.  
+     * What WAF should do if the cookies of the request are more numerous or larger than WAF can inspect. WAF does not support inspecting the entire contents of request cookies when they exceed 8 KB (8192 bytes) or 200 total cookies. The underlying host service forwards a maximum of 200 cookies and at most 8 KB of cookie contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the available cookies normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.  
      */
     OversizeHandling: OversizeHandling;
   }
@@ -1109,6 +1109,10 @@ declare namespace WAFV2 {
      * Inspect the request cookies. You must configure scope and pattern matching filters in the Cookies object, to define the set of cookies and the parts of the cookies that WAF inspects.  Only the first 8 KB (8192 bytes) of a request's cookies and only the first 200 cookies are forwarded to WAF for inspection by the underlying host service. You must configure how to handle any oversize cookie content in the Cookies object. WAF applies the pattern matching filters to the cookies that it receives from the underlying host service. 
      */
     Cookies?: Cookies;
+    /**
+     * Inspect a string containing the list of the request's header names, ordered as they appear in the web request that WAF receives for inspection. WAF generates the string and then uses that as the field to match component in its inspection. WAF separates the header names in the string using commas and no added spaces. Matches against the header order string are case insensitive.
+     */
+    HeaderOrder?: HeaderOrder;
   }
   export type FieldToMatchData = string;
   export interface Filter {
@@ -1522,6 +1526,12 @@ declare namespace WAFV2 {
   }
   export type HeaderName = string;
   export type HeaderNames = FieldToMatchData[];
+  export interface HeaderOrder {
+    /**
+     * What WAF should do if the headers of the request are more numerous or larger than WAF can inspect. WAF does not support inspecting the entire contents of request headers when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host service forwards a maximum of 200 headers and at most 8 KB of header contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the available headers normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.  
+     */
+    OversizeHandling: OversizeHandling;
+  }
   export type HeaderValue = string;
   export interface Headers {
     /**
@@ -1533,7 +1543,7 @@ declare namespace WAFV2 {
      */
     MatchScope: MapMatchScope;
     /**
-     * What WAF should do if the headers of the request are larger than WAF can inspect. WAF does not support inspecting the entire contents of request headers when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host service forwards a maximum of 200 headers and at most 8 KB of header contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the headers normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.  
+     * What WAF should do if the headers of the request are more numerous or larger than WAF can inspect. WAF does not support inspecting the entire contents of request headers when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host service forwards a maximum of 200 headers and at most 8 KB of header contents to WAF.  The options for oversize handling are the following:    CONTINUE - Inspect the available headers normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.  
      */
     OversizeHandling: OversizeHandling;
   }
@@ -1635,7 +1645,7 @@ declare namespace WAFV2 {
      */
     InvalidFallbackBehavior?: BodyParsingFallbackBehavior;
     /**
-     * What WAF should do if the body is larger than WAF can inspect. WAF does not support inspecting the entire contents of the web request body if the body exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service only forwards the contents that are below the limit to WAF for inspection.  The default limit is 8 KB (8,192 kilobytes) for regional resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For CloudFront distributions, you can increase the limit in the web ACL AssociationConfig, for additional processing fees.  The options for oversize handling are the following:    CONTINUE - Inspect the body normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   You can combine the MATCH or NO_MATCH settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit.  Default: CONTINUE 
+     * What WAF should do if the body is larger than WAF can inspect. WAF does not support inspecting the entire contents of the web request body if the body exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service only forwards the contents that are below the limit to WAF for inspection.  The default limit is 8 KB (8,192 kilobytes) for regional resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For CloudFront distributions, you can increase the limit in the web ACL AssociationConfig, for additional processing fees.  The options for oversize handling are the following:    CONTINUE - Inspect the available body contents normally, according to the rule inspection criteria.     MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   You can combine the MATCH or NO_MATCH settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit.  Default: CONTINUE 
      */
     OversizeHandling?: OversizeHandling;
   }
@@ -3263,7 +3273,7 @@ declare namespace WAFV2 {
      */
     SampledRequestsEnabled: Boolean;
     /**
-     * A boolean indicating whether the associated resource sends metrics to Amazon CloudWatch. For the list of available metrics, see WAF Metrics in the WAF Developer Guide.
+     * A boolean indicating whether the associated resource sends metrics to Amazon CloudWatch. For the list of available metrics, see WAF Metrics in the WAF Developer Guide. For web ACLs, the metrics are for web requests that have the web ACL default action applied. WAF applies the default action to web requests that pass the inspection of all rules in the web ACL without being either allowed or blocked. For more information, see The web ACL default action in the WAF Developer Guide.
      */
     CloudWatchMetricsEnabled: Boolean;
     /**

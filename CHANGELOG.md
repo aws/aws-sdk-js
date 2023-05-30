@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1386.0-->
+<!--LATEST=2.1387.0-->
 <!--ENTRYINSERT-->
+
+## 2.1387.0
+* feature: ChimeSDKVoice: Added optional CallLeg field to StartSpeakerSearchTask API request
+* feature: Glue: Added Runtime parameter to allow selection of Ray Runtime
+* feature: IoTFleetWise: Campaigns now support selecting Timestream or S3 as the data destination, Signal catalogs now support "Deprecation" keyword released in VSS v2.1 and "Comment" keyword released in VSS v3.0
+* feature: Location: This release adds API support for political views for the maps service APIs: CreateMap, UpdateMap, DescribeMap.
+* feature: MemoryDB: Amazon MemoryDB for Redis now supports AWS Identity and Access Management authentication access to Redis clusters starting with redis-engine version 7.0
+* feature: Personalize: This release provides support for the exclusion of certain columns for training when creating a solution and creating or updating a recommender with Amazon Personalize.
+* feature: Polly: Amazon Polly adds 2 new voices - Sofie (da-DK) and Niamh (en-IE)
+* feature: SecurityHub: Added new resource detail objects to ASFF, including resources for AwsGuardDutyDetector, AwsAmazonMqBroker, AwsEventSchemasRegistry, AwsAppSyncGraphQlApi and AwsStepFunctionStateMachine.
+* feature: SecurityLake: Log sources are now versioned. AWS log sources and custom sources will now come with a version identifier that enables producers to vend multiple schema versions to subscribers. Security Lake API have been refactored to more closely align with AWS API conventions.
+* feature: WAFV2: This SDK release provides customers the ability to use Header Order as a field to match.
 
 ## 2.1386.0
 * feature: Connect: Documentation update for a new Initiation Method value in DescribeContact API

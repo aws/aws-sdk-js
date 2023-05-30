@@ -872,6 +872,7 @@ declare namespace ChimeSDKVoice {
      */
     IsCaller?: Boolean;
   }
+  export type CallLegType = "Caller"|"Callee"|string;
   export type CallingName = string;
   export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed"|string;
   export type CallingRegion = string;
@@ -2567,6 +2568,10 @@ declare namespace ChimeSDKVoice {
      * The unique identifier for the client request. Use a different token for different speaker search tasks.
      */
     ClientRequestToken?: ClientRequestId;
+    /**
+     * Specifies which call leg to stream for speaker search.
+     */
+    CallLeg?: CallLegType;
   }
   export interface StartSpeakerSearchTaskResponse {
     /**

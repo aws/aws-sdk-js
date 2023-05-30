@@ -125,11 +125,11 @@ declare class GroundStation extends Service {
    */
   getDataflowEndpointGroup(callback?: (err: AWSError, data: GroundStation.Types.GetDataflowEndpointGroupResponse) => void): Request<GroundStation.Types.GetDataflowEndpointGroupResponse, AWSError>;
   /**
-   * Returns the number of minutes used by account.
+   * Returns the number of reserved minutes used by account.
    */
   getMinuteUsage(params: GroundStation.Types.GetMinuteUsageRequest, callback?: (err: AWSError, data: GroundStation.Types.GetMinuteUsageResponse) => void): Request<GroundStation.Types.GetMinuteUsageResponse, AWSError>;
   /**
-   * Returns the number of minutes used by account.
+   * Returns the number of reserved minutes used by account.
    */
   getMinuteUsage(callback?: (err: AWSError, data: GroundStation.Types.GetMinuteUsageResponse) => void): Request<GroundStation.Types.GetMinuteUsageResponse, AWSError>;
   /**

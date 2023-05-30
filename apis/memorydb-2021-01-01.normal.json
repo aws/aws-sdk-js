@@ -1393,7 +1393,8 @@
       "type": "string",
       "enum": [
         "password",
-        "no-password"
+        "no-password",
+        "iam"
       ]
     },
     "AvailabilityZone": {
@@ -2672,7 +2673,8 @@
     "InputAuthenticationType": {
       "type": "string",
       "enum": [
-        "password"
+        "password",
+        "iam"
       ]
     },
     "Integer": {

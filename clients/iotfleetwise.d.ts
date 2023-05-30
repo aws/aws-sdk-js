@@ -76,11 +76,11 @@ declare class IoTFleetWise extends Service {
    */
   createSignalCatalog(callback?: (err: AWSError, data: IoTFleetWise.Types.CreateSignalCatalogResponse) => void): Request<IoTFleetWise.Types.CreateSignalCatalogResponse, AWSError>;
   /**
-   *  Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles created from the same vehicle model consist of the same signals inherited from the vehicle model.   If you have an existing Amazon Web Services IoT Thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and collect data from your thing.   For more information, see Create a vehicle (AWS CLI) in the Amazon Web Services IoT FleetWise Developer Guide.
+   *  Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles created from the same vehicle model consist of the same signals inherited from the vehicle model.   If you have an existing Amazon Web Services IoT thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and collect data from your thing.   For more information, see Create a vehicle (AWS CLI) in the Amazon Web Services IoT FleetWise Developer Guide.
    */
   createVehicle(params: IoTFleetWise.Types.CreateVehicleRequest, callback?: (err: AWSError, data: IoTFleetWise.Types.CreateVehicleResponse) => void): Request<IoTFleetWise.Types.CreateVehicleResponse, AWSError>;
   /**
-   *  Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles created from the same vehicle model consist of the same signals inherited from the vehicle model.   If you have an existing Amazon Web Services IoT Thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and collect data from your thing.   For more information, see Create a vehicle (AWS CLI) in the Amazon Web Services IoT FleetWise Developer Guide.
+   *  Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles created from the same vehicle model consist of the same signals inherited from the vehicle model.   If you have an existing Amazon Web Services IoT thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and collect data from your thing.   For more information, see Create a vehicle (AWS CLI) in the Amazon Web Services IoT FleetWise Developer Guide.
    */
   createVehicle(callback?: (err: AWSError, data: IoTFleetWise.Types.CreateVehicleResponse) => void): Request<IoTFleetWise.Types.CreateVehicleResponse, AWSError>;
   /**
@@ -340,11 +340,11 @@ declare class IoTFleetWise extends Service {
    */
   putLoggingOptions(callback?: (err: AWSError, data: IoTFleetWise.Types.PutLoggingOptionsResponse) => void): Request<IoTFleetWise.Types.PutLoggingOptionsResponse, AWSError>;
   /**
-   * Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see Setting up Amazon Web Services IoT FleetWise.   An Amazon Web Services account is not the same thing as a "user account". An Amazon Web Services user is an identity that you create using Identity and Access Management (IAM) and takes the form of either an IAM user or an IAM role, both with credentials. A single Amazon Web Services account can, and typically does, contain many users and roles. 
+   *  This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the CreateCampaign API operation. You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the DeleteCampaign API operation. If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see DeleteServiceLinkedRole in the Identity and Access Management API Reference.   &lt;p&gt;Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see &lt;a href=&quot;https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html&quot;&gt;Setting up Amazon Web Services IoT FleetWise&lt;/a&gt;. &lt;/p&gt; &lt;note&gt; &lt;p&gt;An Amazon Web Services account is &lt;b&gt;not&lt;/b&gt; the same thing as a &quot;user.&quot; An &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users&quot;&gt;Amazon Web Services user&lt;/a&gt; is an identity that you create using Identity and Access Management (IAM) and takes the form of either an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html&quot;&gt;IAM user&lt;/a&gt; or an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html&quot;&gt;IAM role, both with credentials&lt;/a&gt;. A single Amazon Web Services account can, and typically does, contain many users and roles.&lt;/p&gt; &lt;/note&gt; 
    */
   registerAccount(params: IoTFleetWise.Types.RegisterAccountRequest, callback?: (err: AWSError, data: IoTFleetWise.Types.RegisterAccountResponse) => void): Request<IoTFleetWise.Types.RegisterAccountResponse, AWSError>;
   /**
-   * Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see Setting up Amazon Web Services IoT FleetWise.   An Amazon Web Services account is not the same thing as a "user account". An Amazon Web Services user is an identity that you create using Identity and Access Management (IAM) and takes the form of either an IAM user or an IAM role, both with credentials. A single Amazon Web Services account can, and typically does, contain many users and roles. 
+   *  This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the CreateCampaign API operation. You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the DeleteCampaign API operation. If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see DeleteServiceLinkedRole in the Identity and Access Management API Reference.   &lt;p&gt;Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see &lt;a href=&quot;https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html&quot;&gt;Setting up Amazon Web Services IoT FleetWise&lt;/a&gt;. &lt;/p&gt; &lt;note&gt; &lt;p&gt;An Amazon Web Services account is &lt;b&gt;not&lt;/b&gt; the same thing as a &quot;user.&quot; An &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users&quot;&gt;Amazon Web Services user&lt;/a&gt; is an identity that you create using Identity and Access Management (IAM) and takes the form of either an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html&quot;&gt;IAM user&lt;/a&gt; or an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html&quot;&gt;IAM role, both with credentials&lt;/a&gt;. A single Amazon Web Services account can, and typically does, contain many users and roles.&lt;/p&gt; &lt;/note&gt; 
    */
   registerAccount(callback?: (err: AWSError, data: IoTFleetWise.Types.RegisterAccountResponse) => void): Request<IoTFleetWise.Types.RegisterAccountResponse, AWSError>;
   /**
@@ -446,6 +446,14 @@ declare namespace IoTFleetWise {
      * A specified value for the actuator.
      */
     assignedValue?: string;
+    /**
+     * The deprecation message for the node or the branch that was moved or deleted.
+     */
+    deprecationMessage?: message;
+    /**
+     * A comment in addition to the description.
+     */
+    comment?: message;
   }
   export type AmazonResourceName = string;
   export interface AssociateVehicleFleetRequest {
@@ -497,6 +505,14 @@ declare namespace IoTFleetWise {
      * The default value of the attribute.
      */
     defaultValue?: string;
+    /**
+     * The deprecation message for the node or the branch that was moved or deleted.
+     */
+    deprecationMessage?: message;
+    /**
+     * A comment in addition to the description.
+     */
+    comment?: message;
   }
   export interface BatchCreateVehicleRequest {
     /**
@@ -539,6 +555,14 @@ declare namespace IoTFleetWise {
      * A brief description of the branch.
      */
     description?: description;
+    /**
+     * The deprecation message for the node or the branch that was moved or deleted.
+     */
+    deprecationMessage?: message;
+    /**
+     * A comment in addition to the description.
+     */
+    comment?: message;
   }
   export type CampaignStatus = "CREATING"|"WAITING_FOR_APPROVAL"|"RUNNING"|"SUSPENDED"|string;
   export interface CampaignSummary {
@@ -618,11 +642,11 @@ declare namespace IoTFleetWise {
      */
     isSigned: boolean;
     /**
-     * Indicates the beginning of the CAN message.
+     * Indicates the beginning of the CAN signal. This should always be the least significant bit (LSB). This value might be different from the value in a DBC file. For little endian signals, startBit is the same value as in the DBC file. For big endian signals in a DBC file, the start bit is the most significant bit (MSB). You will have to calculate the LSB instead and pass it as the startBit.
      */
     startBit: nonNegativeInteger;
     /**
-     * Indicates where data appears in the CAN message.
+     * The offset used to calculate the signal value. Combined with factor, the calculation is value = raw_value * factor + offset.
      */
     offset: double;
     /**
@@ -701,7 +725,7 @@ declare namespace IoTFleetWise {
      */
     startTime?: timestamp;
     /**
-     *  (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at midnight UTC time). Vehicle data won't be collected after the campaign expires.  Default: 253402214400 (December 31, 9999, 00:00:00 UTC)
+     *  (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at midnight UTC time). Vehicle data isn't collected after the campaign expires.  Default: 253402214400 (December 31, 9999, 00:00:00 UTC)
      */
     expiryTime?: timestamp;
     /**
@@ -740,6 +764,10 @@ declare namespace IoTFleetWise {
      * Metadata that can be used to manage the campaign.
      */
     tags?: TagList;
+    /**
+     * The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream. Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics.  You can use Amazon Timestream to access and analyze time series data, and Timestream to query vehicle data so that you can identify trends and patterns.
+     */
+    dataDestinationConfigs?: DataDestinationConfigs;
   }
   export interface CreateCampaignResponse {
     /**
@@ -903,7 +931,7 @@ declare namespace IoTFleetWise {
      */
     decoderManifestArn: arn;
     /**
-     * Static information about a vehicle in a key-value pair. For example: "engineType" : "1.3 L R2" 
+     * Static information about a vehicle in a key-value pair. For example: "engineType" : "1.3 L R2"  A campaign must include the keys (attribute names) in dataExtraDimensions for them to display in Amazon Timestream.
      */
     attributes?: attributesMap;
     /**
@@ -969,7 +997,19 @@ declare namespace IoTFleetWise {
      */
     thingArn?: arn;
   }
+  export interface DataDestinationConfig {
+    /**
+     * The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends data.
+     */
+    s3Config?: S3Config;
+    /**
+     * The Amazon Timestream table where the campaign sends data.
+     */
+    timestreamConfig?: TimestreamConfig;
+  }
+  export type DataDestinationConfigs = DataDestinationConfig[];
   export type DataExtraDimensionNodePathList = NodePath[];
+  export type DataFormat = "JSON"|"PARQUET"|string;
   export interface DecoderManifestSummary {
     /**
      * The name of the decoder manifest.
@@ -1222,6 +1262,10 @@ declare namespace IoTFleetWise {
      * The last time the campaign was modified.
      */
     lastModificationTime?: timestamp;
+    /**
+     * The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream. Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics.  You can use Amazon Timestream to access and analyze time series data, and Timestream to query vehicle data so that you can identify trends and patterns.
+     */
+    dataDestinationConfigs?: DataDestinationConfigs;
   }
   export interface GetDecoderManifestRequest {
     /**
@@ -1349,7 +1393,7 @@ declare namespace IoTFleetWise {
     /**
      *  Information about the registered Amazon Timestream resources or errors, if any.
      */
-    timestreamRegistrationResponse: TimestreamRegistrationResponse;
+    timestreamRegistrationResponse?: TimestreamRegistrationResponse;
     /**
      *  Information about the registered IAM resources or errors, if any. 
      */
@@ -1972,7 +2016,7 @@ declare namespace IoTFleetWise {
      */
     scaling: double;
     /**
-     * Indicates where data appears in the message.
+     * The offset used to calculate the signal value. Combined with scaling, the calculation is value = raw_value * scaling + offset.
      */
     offset: double;
     /**
@@ -1993,6 +2037,7 @@ declare namespace IoTFleetWise {
     bitMaskLength?: ObdBitmaskLength;
   }
   export type ObdStandard = string;
+  export type Prefix = string;
   export type ProtocolName = string;
   export type ProtocolVersion = string;
   export interface PutLoggingOptionsRequest {
@@ -2004,7 +2049,7 @@ declare namespace IoTFleetWise {
   export interface PutLoggingOptionsResponse {
   }
   export interface RegisterAccountRequest {
-    timestreamResources: TimestreamResources;
+    timestreamResources?: TimestreamResources;
     /**
      * The IAM resource that allows Amazon Web Services IoT FleetWise to send data to Amazon Timestream.
      */
@@ -2015,7 +2060,7 @@ declare namespace IoTFleetWise {
      *  The status of registering your Amazon Web Services account, IAM role, and Timestream resources. 
      */
     registerAccountStatus: RegistrationStatus;
-    timestreamResources: TimestreamResources;
+    timestreamResources?: TimestreamResources;
     /**
      *  The registered IAM resource that allows Amazon Web Services IoT FleetWise to send data to Amazon Timestream. 
      */
@@ -2030,6 +2075,25 @@ declare namespace IoTFleetWise {
     lastModificationTime: timestamp;
   }
   export type RegistrationStatus = "REGISTRATION_PENDING"|"REGISTRATION_SUCCESS"|"REGISTRATION_FAILURE"|string;
+  export type S3BucketArn = string;
+  export interface S3Config {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+     */
+    bucketArn: S3BucketArn;
+    /**
+     * Specify the format that files are saved in the Amazon S3 bucket. You can save files in an Apache Parquet or JSON format.   Parquet - Store data in a columnar storage file format. Parquet is optimal for fast data retrieval and can reduce costs. This option is selected by default.   JSON - Store data in a standard text-based JSON file format.  
+     */
+    dataFormat?: DataFormat;
+    /**
+     * By default, stored data is compressed as a .gzip file. Compressed files have a reduced file size, which can optimize the cost of data storage.
+     */
+    storageCompressionFormat?: StorageCompressionFormat;
+    /**
+     * (Optional) Enter an S3 bucket prefix. The prefix is the string of characters after the bucket name and before the object name. You can use the prefix to organize data stored in Amazon S3 buckets. For more information, see Organizing objects using prefixes in the Amazon Simple Storage Service User Guide. By default, Amazon Web Services IoT FleetWise sets the prefix processed-data/year=YY/month=MM/date=DD/hour=HH/ (in UTC) to data it delivers to Amazon S3. You can enter a prefix to append it to this default prefix. For example, if you enter the prefix vehicles, the prefix will be vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/.
+     */
+    prefix?: Prefix;
+  }
   export interface Sensor {
     /**
      * The fully qualified name of the sensor. For example, the fully qualified name of a sensor might be Vehicle.Body.Engine.Battery.
@@ -2059,6 +2123,14 @@ declare namespace IoTFleetWise {
      * The specified possible maximum value of the sensor.
      */
     max?: double;
+    /**
+     * The deprecation message for the node or the branch that was moved or deleted.
+     */
+    deprecationMessage?: message;
+    /**
+     * A comment in addition to the description.
+     */
+    comment?: message;
   }
   export interface SignalCatalogSummary {
     /**
@@ -2118,6 +2190,7 @@ declare namespace IoTFleetWise {
   }
   export type SignalInformationList = SignalInformation[];
   export type SpoolingMode = "OFF"|"TO_DISK"|string;
+  export type StorageCompressionFormat = "NONE"|"GZIP"|string;
   export type String = string;
   export interface Tag {
     /**
@@ -2150,6 +2223,16 @@ declare namespace IoTFleetWise {
      * The time period (in milliseconds) to decide how often to collect data. For example, if the time period is 60000, the Edge Agent software collects data once every minute.
      */
     periodMs: collectionPeriodMs;
+  }
+  export interface TimestreamConfig {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Timestream table.
+     */
+    timestreamTableArn: TimestreamTableArn;
+    /**
+     * The Amazon Resource Name (ARN) of the task execution role that grants Amazon Web Services IoT FleetWise permission to deliver data to the Amazon Timestream table.
+     */
+    executionRoleArn: IAMRoleArn;
   }
   export type TimestreamDatabaseName = string;
   export interface TimestreamRegistrationResponse {
@@ -2188,6 +2271,7 @@ declare namespace IoTFleetWise {
      */
     timestreamTableName: TimestreamTableName;
   }
+  export type TimestreamTableArn = string;
   export type TimestreamTableName = string;
   export type TriggerMode = "ALWAYS"|"RISING_EDGE"|string;
   export interface UntagResourceRequest {
@@ -2217,7 +2301,7 @@ declare namespace IoTFleetWise {
      */
     dataExtraDimensions?: DataExtraDimensionNodePathList;
     /**
-     *  Specifies how to update a campaign. The action can be one of the following:    APPROVE - To approve delivering a data collection scheme to vehicles.     SUSPEND - To suspend collecting signal data.     RESUME - To resume collecting signal data.     UPDATE - To update a campaign.   
+     *  Specifies how to update a campaign. The action can be one of the following:    APPROVE - To approve delivering a data collection scheme to vehicles.     SUSPEND - To suspend collecting signal data. The campaign is deleted from vehicles and all vehicles in the suspended campaign will stop sending data.    RESUME - To reactivate the SUSPEND campaign. The campaign is redeployed to all vehicles and the vehicles will resume sending data.    UPDATE - To update a campaign.   
      */
     action: UpdateCampaignAction;
   }
@@ -2513,6 +2597,7 @@ declare namespace IoTFleetWise {
   export type listVehiclesMaxResults = number;
   export type maxResults = number;
   export type maxSampleCount = number;
+  export type message = string;
   export type modelManifestSummaries = ModelManifestSummary[];
   export type nextToken = string;
   export type nonNegativeInteger = number;
