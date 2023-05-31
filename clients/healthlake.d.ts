@@ -100,11 +100,11 @@ declare class HealthLake extends Service {
    */
   startFHIRImportJob(callback?: (err: AWSError, data: HealthLake.Types.StartFHIRImportJobResponse) => void): Request<HealthLake.Types.StartFHIRImportJobResponse, AWSError>;
   /**
-   *  Adds a user specifed key and value tag to a Data Store. 
+   *  Adds a user specified key and value tag to a Data Store. 
    */
   tagResource(params: HealthLake.Types.TagResourceRequest, callback?: (err: AWSError, data: HealthLake.Types.TagResourceResponse) => void): Request<HealthLake.Types.TagResourceResponse, AWSError>;
   /**
-   *  Adds a user specifed key and value tag to a Data Store. 
+   *  Adds a user specified key and value tag to a Data Store. 
    */
   tagResource(callback?: (err: AWSError, data: HealthLake.Types.TagResourceResponse) => void): Request<HealthLake.Types.TagResourceResponse, AWSError>;
   /**
@@ -118,9 +118,12 @@ declare class HealthLake extends Service {
 }
 declare namespace HealthLake {
   export type AmazonResourceName = string;
+  export type AuthorizationStrategy = "SMART_ON_FHIR_V1"|"AWS_AUTH"|string;
+  export type Boolean = boolean;
   export type BoundedLengthString = string;
   export type ClientTokenString = string;
   export type CmkType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY"|string;
+  export type ConfigurationMetadata = string;
   export interface CreateFHIRDatastoreRequest {
     /**
      * The user generated name for the Data Store.
@@ -146,6 +149,10 @@ declare namespace HealthLake {
      *  Resource tags that are applied to a Data Store when it is created. 
      */
     Tags?: TagList;
+    /**
+     * The configuration of the identity provider that you want to use for your Data Store.
+     */
+    IdentityProviderConfiguration?: IdentityProviderConfiguration;
   }
   export interface CreateFHIRDatastoreResponse {
     /**
@@ -153,7 +160,7 @@ declare namespace HealthLake {
      */
     DatastoreId: DatastoreId;
     /**
-     * The datastore ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
+     * The Data Store ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
      */
     DatastoreArn: DatastoreArn;
     /**
@@ -161,7 +168,7 @@ declare namespace HealthLake {
      */
     DatastoreStatus: DatastoreStatus;
     /**
-     * The AWS endpoint for the created Data Store. For preview, only US-east-1 endpoints are supported.
+     * The AWS endpoint for the created Data Store. 
      */
     DatastoreEndpoint: BoundedLengthString;
   }
@@ -223,6 +230,10 @@ declare namespace HealthLake {
      * The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
      */
     PreloadDataConfig?: PreloadDataConfig;
+    /**
+     * The identity provider that you selected when you created the Data Store.
+     */
+    IdentityProviderConfiguration?: IdentityProviderConfiguration;
   }
   export type DatastorePropertiesList = DatastoreProperties[];
   export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|string;
@@ -230,7 +241,7 @@ declare namespace HealthLake {
     /**
      *  The AWS-generated ID for the Data Store to be deleted.
      */
-    DatastoreId?: DatastoreId;
+    DatastoreId: DatastoreId;
   }
   export interface DeleteFHIRDatastoreResponse {
     /**
@@ -252,9 +263,9 @@ declare namespace HealthLake {
   }
   export interface DescribeFHIRDatastoreRequest {
     /**
-     * The AWS-generated Data Store id. This is part of the ‘CreateFHIRDatastore’ output.
+     * The AWS-generated Data Store ID.
      */
-    DatastoreId?: DatastoreId;
+    DatastoreId: DatastoreId;
   }
   export interface DescribeFHIRDatastoreResponse {
     /**
@@ -336,6 +347,24 @@ declare namespace HealthLake {
   export type ExportJobPropertiesList = ExportJobProperties[];
   export type FHIRVersion = "R4"|string;
   export type IamRoleArn = string;
+  export interface IdentityProviderConfiguration {
+    /**
+     * The authorization strategy that you selected when you created the Data Store.
+     */
+    AuthorizationStrategy: AuthorizationStrategy;
+    /**
+     * If you enabled fine-grained authorization when you created the Data Store.
+     */
+    FineGrainedAuthorizationEnabled?: Boolean;
+    /**
+     * The JSON metadata elements that you want to use in your identity provider configuration. Required elements are listed based on the launch specification of the SMART application. For more information on all possible elements, see Metadata in SMART's App Launch specification.  authorization_endpoint: The URL to the OAuth2 authorization endpoint.  grant_types_supported: An array of grant types that are supported at the token endpoint. You must provide at least one grant type option. Valid options are authorization_code and client_credentials.  token_endpoint: The URL to the OAuth2 token endpoint.  capabilities: An array of strings of the SMART capabilities that the authorization server supports.  code_challenge_methods_supported: An array of strings of supported PKCE code challenge methods. You must include the S256 method in the array of PKCE code challenge methods.
+     */
+    Metadata?: ConfigurationMetadata;
+    /**
+     * The Amazon Resource Name (ARN) of the Lambda function that you want to use to decode the access token created by the authorization server.
+     */
+    IdpLambdaArn?: LambdaArn;
+  }
   export interface ImportJobProperties {
     /**
      * The AWS-generated id number for the Import job.
@@ -346,7 +375,7 @@ declare namespace HealthLake {
      */
     JobName?: JobName;
     /**
-     * The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.
+     * The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED.
      */
     JobStatus: JobStatus;
     /**
@@ -384,7 +413,7 @@ declare namespace HealthLake {
   }
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED_WITH_ERRORS"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED_WITH_ERRORS"|"COMPLETED"|"FAILED"|"CANCEL_SUBMITTED"|"CANCEL_IN_PROGRESS"|"CANCEL_COMPLETED"|"CANCEL_FAILED"|string;
   export interface KmsEncryptionConfig {
     /**
      *  The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. 
@@ -395,6 +424,7 @@ declare namespace HealthLake {
      */
     KmsKeyId?: EncryptionKeyID;
   }
+  export type LambdaArn = string;
   export interface ListFHIRDatastoresRequest {
     /**
      * Lists all filters associated with a FHIR Data Store request.
@@ -624,7 +654,7 @@ declare namespace HealthLake {
      */
     Key: TagKey;
     /**
-     *  The value portion of tag. Tag values are case sensitive. 
+     *  The value portion of a tag. Tag values are case sensitive. 
      */
     Value: TagValue;
   }

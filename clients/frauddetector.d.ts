@@ -1572,6 +1572,12 @@ declare namespace FraudDetector {
   }
   export type EventAttributeMap = {[key: string]: attributeValue};
   export type EventIngestion = "ENABLED"|"DISABLED"|string;
+  export interface EventOrchestration {
+    /**
+     * Specifies if event orchestration is enabled through Amazon EventBridge.
+     */
+    eventBridgeEnabled: Boolean;
+  }
   export interface EventPredictionSummary {
     /**
      *  The event ID. 
@@ -1640,6 +1646,10 @@ declare namespace FraudDetector {
      * The entity type ARN.
      */
     arn?: fraudDetectorArn;
+    /**
+     * The event orchestration status. 
+     */
+    eventOrchestration?: EventOrchestration;
   }
   export type EventVariableMap = {[key: string]: variableValue};
   export interface EventVariableSummary {
@@ -2447,7 +2457,7 @@ declare namespace FraudDetector {
      */
     labelMapper?: labelMapper;
     /**
-     * The action to take for unlabeled events.   Use IGNORE if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.   Use FRAUD if you want to categorize all unlabeled events as “Fraud”. This is recommended when most of the events in your dataset are fraudulent.   Use LEGIT f you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.   Use AUTO if you want Amazon Fraud Detector to decide how to use the unlabeled data. This is recommended when there is significant unlabeled events in the dataset.   By default, Amazon Fraud Detector ignores the unlabeled data.
+     * The action to take for unlabeled events.   Use IGNORE if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.   Use FRAUD if you want to categorize all unlabeled events as “Fraud”. This is recommended when most of the events in your dataset are fraudulent.   Use LEGIT if you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.   Use AUTO if you want Amazon Fraud Detector to decide how to use the unlabeled data. This is recommended when there is significant unlabeled events in the dataset.   By default, Amazon Fraud Detector ignores the unlabeled data.
      */
     unlabeledEventsTreatment?: UnlabeledEventsTreatment;
   }
@@ -2888,13 +2898,17 @@ declare namespace FraudDetector {
      */
     entityTypes: NonEmptyListOfStrings;
     /**
-     * Specifies if ingenstion is enabled or disabled.
+     * Specifies if ingestion is enabled or disabled.
      */
     eventIngestion?: EventIngestion;
     /**
      * A collection of key and value pairs.
      */
     tags?: tagList;
+    /**
+     * Enables or disables event orchestration. If enabled, you can send event predictions to select AWS services for downstream processing of the events.
+     */
+    eventOrchestration?: EventOrchestration;
   }
   export interface PutEventTypeResult {
   }
@@ -2948,7 +2962,7 @@ declare namespace FraudDetector {
      */
     description?: description;
     /**
-     * 
+     * A collection of key and value pairs.
      */
     tags?: tagList;
   }
@@ -3198,7 +3212,7 @@ declare namespace FraudDetector {
      */
     lowerBoundValue: float;
     /**
-     *  The lower bound value of the area under curve (auc). 
+     *  The upper bound value of the area under curve (auc). 
      */
     upperBoundValue: float;
   }

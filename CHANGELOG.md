@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1387.0-->
+<!--LATEST=2.1388.0-->
 <!--ENTRYINSERT-->
+
+## 2.1388.0
+* feature: ConfigService: Resource Types Exclusion feature launch by AWS Config
+* feature: FraudDetector: This release enables publishing event predictions from Amazon Fraud Detector (AFD) to Amazon EventBridge. For example, after getting predictions from AFD, Amazon EventBridge rules can be configured to trigger notification through an SNS topic, send a message with SES, or trigger Lambda workflows.
+* feature: HealthLake: This release adds a new request parameter to the CreateFHIRDatastore API operation. IdentityProviderConfiguration specifies how you want to authenticate incoming requests to your Healthlake Data Store.
+* feature: M2: Adds an optional create-only 'roleArn' property to Application resources.  Enables PS and PO data set org types.
+* feature: RDS: This release adds support for changing the engine for Oracle using the ModifyDbInstance API
+* feature: WorkSpacesWeb: WorkSpaces Web now allows you to control which IP addresses your WorkSpaces Web portal may be accessed from.
 
 ## 2.1387.0
 * feature: ChimeSDKVoice: Added optional CallLeg field to StartSpeakerSearchTask API request

@@ -20,6 +20,14 @@ declare class WorkSpacesWeb extends Service {
    */
   associateBrowserSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.AssociateBrowserSettingsResponse) => void): Request<WorkSpacesWeb.Types.AssociateBrowserSettingsResponse, AWSError>;
   /**
+   * Associates an IP access settings resource with a web portal.
+   */
+  associateIpAccessSettings(params: WorkSpacesWeb.Types.AssociateIpAccessSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.AssociateIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.AssociateIpAccessSettingsResponse, AWSError>;
+  /**
+   * Associates an IP access settings resource with a web portal.
+   */
+  associateIpAccessSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.AssociateIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.AssociateIpAccessSettingsResponse, AWSError>;
+  /**
    * Associates a network settings resource with a web portal.
    */
   associateNetworkSettings(params: WorkSpacesWeb.Types.AssociateNetworkSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.AssociateNetworkSettingsResponse) => void): Request<WorkSpacesWeb.Types.AssociateNetworkSettingsResponse, AWSError>;
@@ -67,6 +75,14 @@ declare class WorkSpacesWeb extends Service {
    * Creates an identity provider resource that is then associated with a web portal.
    */
   createIdentityProvider(callback?: (err: AWSError, data: WorkSpacesWeb.Types.CreateIdentityProviderResponse) => void): Request<WorkSpacesWeb.Types.CreateIdentityProviderResponse, AWSError>;
+  /**
+   * Creates an IP access settings resource that can be associated with a web portal.
+   */
+  createIpAccessSettings(params: WorkSpacesWeb.Types.CreateIpAccessSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.CreateIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.CreateIpAccessSettingsResponse, AWSError>;
+  /**
+   * Creates an IP access settings resource that can be associated with a web portal.
+   */
+  createIpAccessSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.CreateIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.CreateIpAccessSettingsResponse, AWSError>;
   /**
    * Creates a network settings resource that can be associated with a web portal. Once associated with a web portal, network settings define how streaming instances will connect with your specified VPC. 
    */
@@ -124,6 +140,14 @@ declare class WorkSpacesWeb extends Service {
    */
   deleteIdentityProvider(callback?: (err: AWSError, data: WorkSpacesWeb.Types.DeleteIdentityProviderResponse) => void): Request<WorkSpacesWeb.Types.DeleteIdentityProviderResponse, AWSError>;
   /**
+   * Deletes IP access settings.
+   */
+  deleteIpAccessSettings(params: WorkSpacesWeb.Types.DeleteIpAccessSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.DeleteIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.DeleteIpAccessSettingsResponse, AWSError>;
+  /**
+   * Deletes IP access settings.
+   */
+  deleteIpAccessSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.DeleteIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.DeleteIpAccessSettingsResponse, AWSError>;
+  /**
    * Deletes network settings.
    */
   deleteNetworkSettings(params: WorkSpacesWeb.Types.DeleteNetworkSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.DeleteNetworkSettingsResponse) => void): Request<WorkSpacesWeb.Types.DeleteNetworkSettingsResponse, AWSError>;
@@ -172,6 +196,14 @@ declare class WorkSpacesWeb extends Service {
    */
   disassociateBrowserSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.DisassociateBrowserSettingsResponse) => void): Request<WorkSpacesWeb.Types.DisassociateBrowserSettingsResponse, AWSError>;
   /**
+   * Disassociates IP access settings from a web portal.
+   */
+  disassociateIpAccessSettings(params: WorkSpacesWeb.Types.DisassociateIpAccessSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.DisassociateIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.DisassociateIpAccessSettingsResponse, AWSError>;
+  /**
+   * Disassociates IP access settings from a web portal.
+   */
+  disassociateIpAccessSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.DisassociateIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.DisassociateIpAccessSettingsResponse, AWSError>;
+  /**
    * Disassociates network settings from a web portal.
    */
   disassociateNetworkSettings(params: WorkSpacesWeb.Types.DisassociateNetworkSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.DisassociateNetworkSettingsResponse) => void): Request<WorkSpacesWeb.Types.DisassociateNetworkSettingsResponse, AWSError>;
@@ -219,6 +251,14 @@ declare class WorkSpacesWeb extends Service {
    * Gets the identity provider.
    */
   getIdentityProvider(callback?: (err: AWSError, data: WorkSpacesWeb.Types.GetIdentityProviderResponse) => void): Request<WorkSpacesWeb.Types.GetIdentityProviderResponse, AWSError>;
+  /**
+   * Gets the IP access settings.
+   */
+  getIpAccessSettings(params: WorkSpacesWeb.Types.GetIpAccessSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.GetIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.GetIpAccessSettingsResponse, AWSError>;
+  /**
+   * Gets the IP access settings.
+   */
+  getIpAccessSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.GetIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.GetIpAccessSettingsResponse, AWSError>;
   /**
    * Gets the network settings.
    */
@@ -291,6 +331,14 @@ declare class WorkSpacesWeb extends Service {
    * Retrieves a list of identity providers for a specific web portal.
    */
   listIdentityProviders(callback?: (err: AWSError, data: WorkSpacesWeb.Types.ListIdentityProvidersResponse) => void): Request<WorkSpacesWeb.Types.ListIdentityProvidersResponse, AWSError>;
+  /**
+   * Retrieves a list of IP access settings.
+   */
+  listIpAccessSettings(params: WorkSpacesWeb.Types.ListIpAccessSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.ListIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.ListIpAccessSettingsResponse, AWSError>;
+  /**
+   * Retrieves a list of IP access settings.
+   */
+  listIpAccessSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.ListIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.ListIpAccessSettingsResponse, AWSError>;
   /**
    * Retrieves a list of network settings.
    */
@@ -380,6 +428,14 @@ declare class WorkSpacesWeb extends Service {
    */
   updateIdentityProvider(callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateIdentityProviderResponse) => void): Request<WorkSpacesWeb.Types.UpdateIdentityProviderResponse, AWSError>;
   /**
+   * Updates IP access settings.
+   */
+  updateIpAccessSettings(params: WorkSpacesWeb.Types.UpdateIpAccessSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.UpdateIpAccessSettingsResponse, AWSError>;
+  /**
+   * Updates IP access settings.
+   */
+  updateIpAccessSettings(callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateIpAccessSettingsResponse) => void): Request<WorkSpacesWeb.Types.UpdateIpAccessSettingsResponse, AWSError>;
+  /**
    * Updates network settings.
    */
   updateNetworkSettings(params: WorkSpacesWeb.Types.UpdateNetworkSettingsRequest, callback?: (err: AWSError, data: WorkSpacesWeb.Types.UpdateNetworkSettingsResponse) => void): Request<WorkSpacesWeb.Types.UpdateNetworkSettingsResponse, AWSError>;
@@ -438,6 +494,26 @@ declare namespace WorkSpacesWeb {
      * The ARN of the browser settings.
      */
     browserSettingsArn: ARN;
+    /**
+     * The ARN of the web portal.
+     */
+    portalArn: ARN;
+  }
+  export interface AssociateIpAccessSettingsRequest {
+    /**
+     * The ARN of the IP access settings.
+     */
+    ipAccessSettingsArn: ARN;
+    /**
+     * The ARN of the web portal.
+     */
+    portalArn: ARN;
+  }
+  export interface AssociateIpAccessSettingsResponse {
+    /**
+     * The ARN of the IP access settings resource.
+     */
+    ipAccessSettingsArn: ARN;
     /**
      * The ARN of the web portal.
      */
@@ -658,6 +734,42 @@ declare namespace WorkSpacesWeb {
      */
     identityProviderArn: ARN;
   }
+  export interface CreateIpAccessSettingsRequest {
+    /**
+     * Additional encryption context of the IP access settings.
+     */
+    additionalEncryptionContext?: EncryptionContextMap;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request.  If you do not specify a client token, one is automatically generated by the AWS SDK.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The custom managed key of the IP access settings.
+     */
+    customerManagedKey?: keyArn;
+    /**
+     * The description of the IP access settings.
+     */
+    description?: Description;
+    /**
+     * The display name of the IP access settings.
+     */
+    displayName?: DisplayName;
+    /**
+     * The IP rules of the IP access settings.
+     */
+    ipRules: IpRuleList;
+    /**
+     * The tags to add to the browser settings resource. A tag is a key-value pair.
+     */
+    tags?: TagList;
+  }
+  export interface CreateIpAccessSettingsResponse {
+    /**
+     * The ARN of the IP access settings resource.
+     */
+    ipAccessSettingsArn: ARN;
+  }
   export interface CreateNetworkSettingsRequest {
     /**
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request.  If you do not specify a client token, one is automatically generated by the AWS SDK.
@@ -822,6 +934,14 @@ declare namespace WorkSpacesWeb {
   }
   export interface DeleteIdentityProviderResponse {
   }
+  export interface DeleteIpAccessSettingsRequest {
+    /**
+     * The ARN of the IP access settings.
+     */
+    ipAccessSettingsArn: ARN;
+  }
+  export interface DeleteIpAccessSettingsResponse {
+  }
   export interface DeleteNetworkSettingsRequest {
     /**
      * The ARN of the network settings.
@@ -862,6 +982,7 @@ declare namespace WorkSpacesWeb {
   }
   export interface DeleteUserSettingsResponse {
   }
+  export type Description = string;
   export interface DisassociateBrowserSettingsRequest {
     /**
      * The ARN of the web portal.
@@ -869,6 +990,14 @@ declare namespace WorkSpacesWeb {
     portalArn: ARN;
   }
   export interface DisassociateBrowserSettingsResponse {
+  }
+  export interface DisassociateIpAccessSettingsRequest {
+    /**
+     * The ARN of the web portal.
+     */
+    portalArn: ARN;
+  }
+  export interface DisassociateIpAccessSettingsResponse {
   }
   export interface DisassociateNetworkSettingsRequest {
     /**
@@ -929,6 +1058,18 @@ declare namespace WorkSpacesWeb {
      * The identity provider.
      */
     identityProvider?: IdentityProvider;
+  }
+  export interface GetIpAccessSettingsRequest {
+    /**
+     * The ARN of the IP access settings.
+     */
+    ipAccessSettingsArn: ARN;
+  }
+  export interface GetIpAccessSettingsResponse {
+    /**
+     * The IP access settings.
+     */
+    ipAccessSettings?: IpAccessSettings;
   }
   export interface GetNetworkSettingsRequest {
     /**
@@ -1063,6 +1204,63 @@ declare namespace WorkSpacesWeb {
   }
   export type IdentityProviderType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string;
   export type IdleDisconnectTimeoutInMinutes = number;
+  export interface IpAccessSettings {
+    /**
+     * A list of web portal ARNs that this IP access settings resource is associated with.
+     */
+    associatedPortalArns?: ArnList;
+    /**
+     * The creation date timestamp of the IP access settings.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The description of the IP access settings.
+     */
+    description?: Description;
+    /**
+     *  The display name of the IP access settings.
+     */
+    displayName?: DisplayName;
+    /**
+     * The ARN of the IP access settings resource.
+     */
+    ipAccessSettingsArn: ARN;
+    /**
+     * The IP rules of the IP access settings.
+     */
+    ipRules?: IpRuleList;
+  }
+  export type IpAccessSettingsList = IpAccessSettingsSummary[];
+  export interface IpAccessSettingsSummary {
+    /**
+     * The creation date timestamp of the IP access settings.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The description of the IP access settings.
+     */
+    description?: Description;
+    /**
+     * The display name of the IP access settings.
+     */
+    displayName?: DisplayName;
+    /**
+     * The ARN of IP access settings.
+     */
+    ipAccessSettingsArn?: ARN;
+  }
+  export type IpRange = string;
+  export interface IpRule {
+    /**
+     * The description of the IP rule.
+     */
+    description?: Description;
+    /**
+     * The IP range of the IP rule.
+     */
+    ipRange: IpRange;
+  }
+  export type IpRuleList = IpRule[];
   export type KinesisStreamArn = string;
   export interface ListBrowserSettingsRequest {
     /**
@@ -1103,6 +1301,26 @@ declare namespace WorkSpacesWeb {
      * The identity providers.
      */
     identityProviders?: IdentityProviderList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListIpAccessSettingsRequest {
+    /**
+     * The maximum number of results to be included in the next page.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListIpAccessSettingsResponse {
+    /**
+     * The IP access settings.
+     */
+    ipAccessSettings?: IpAccessSettingsList;
     /**
      * The pagination token used to retrieve the next page of results for this operation.
      */
@@ -1305,6 +1523,10 @@ declare namespace WorkSpacesWeb {
      */
     displayName?: DisplayName;
     /**
+     * The ARN of the IP access settings.
+     */
+    ipAccessSettingsArn?: ARN;
+    /**
      * The ARN of the network settings that is associated with the web portal.
      */
     networkSettingsArn?: ARN;
@@ -1365,6 +1587,10 @@ declare namespace WorkSpacesWeb {
      * The name of the web portal.
      */
     displayName?: DisplayName;
+    /**
+     * The ARN of the IP access settings.
+     */
+    ipAccessSettingsArn?: ARN;
     /**
      * The ARN of the network settings that is associated with the web portal.
      */
@@ -1513,6 +1739,34 @@ declare namespace WorkSpacesWeb {
      * The identity provider.
      */
     identityProvider: IdentityProvider;
+  }
+  export interface UpdateIpAccessSettingsRequest {
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request.  If you do not specify a client token, one is automatically generated by the AWS SDK.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The description of the IP access settings.
+     */
+    description?: Description;
+    /**
+     * The display name of the IP access settings.
+     */
+    displayName?: DisplayName;
+    /**
+     * The ARN of the IP access settings.
+     */
+    ipAccessSettingsArn: ARN;
+    /**
+     * The updated IP rules of the IP access settings.
+     */
+    ipRules?: IpRuleList;
+  }
+  export interface UpdateIpAccessSettingsResponse {
+    /**
+     * The IP access settings.
+     */
+    ipAccessSettings: IpAccessSettings;
   }
   export interface UpdateNetworkSettingsRequest {
     /**

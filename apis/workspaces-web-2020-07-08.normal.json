@@ -48,6 +48,42 @@
       "documentation": "<p>Associates a browser settings resource with a web portal.</p>",
       "idempotent": true
     },
+    "AssociateIpAccessSettings": {
+      "name": "AssociateIpAccessSettings",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/portals/{portalArn+}/ipAccessSettings",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "AssociateIpAccessSettingsRequest"
+      },
+      "output": {
+        "shape": "AssociateIpAccessSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Associates an IP access settings resource with a web portal.</p>",
+      "idempotent": true
+    },
     "AssociateNetworkSettings": {
       "name": "AssociateNetworkSettings",
       "http": {
@@ -264,6 +300,41 @@
         }
       ],
       "documentation": "<p>Creates an identity provider resource that is then associated with a web portal.</p>"
+    },
+    "CreateIpAccessSettings": {
+      "name": "CreateIpAccessSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/ipAccessSettings",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "CreateIpAccessSettingsRequest"
+      },
+      "output": {
+        "shape": "CreateIpAccessSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Creates an IP access settings resource that can be associated with a web portal.</p>"
     },
     "CreateNetworkSettings": {
       "name": "CreateNetworkSettings",
@@ -509,6 +580,39 @@
       "documentation": "<p>Deletes the identity provider.</p>",
       "idempotent": true
     },
+    "DeleteIpAccessSettings": {
+      "name": "DeleteIpAccessSettings",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/ipAccessSettings/{ipAccessSettingsArn+}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DeleteIpAccessSettingsRequest"
+      },
+      "output": {
+        "shape": "DeleteIpAccessSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Deletes IP access settings.</p>",
+      "idempotent": true
+    },
     "DeleteNetworkSettings": {
       "name": "DeleteNetworkSettings",
       "http": {
@@ -707,6 +811,39 @@
       "documentation": "<p>Disassociates browser settings from a web portal.</p>",
       "idempotent": true
     },
+    "DisassociateIpAccessSettings": {
+      "name": "DisassociateIpAccessSettings",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/portals/{portalArn+}/ipAccessSettings",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DisassociateIpAccessSettingsRequest"
+      },
+      "output": {
+        "shape": "DisassociateIpAccessSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Disassociates IP access settings from a web portal.</p>",
+      "idempotent": true
+    },
     "DisassociateNetworkSettings": {
       "name": "DisassociateNetworkSettings",
       "http": {
@@ -902,6 +1039,38 @@
         }
       ],
       "documentation": "<p>Gets the identity provider.</p>"
+    },
+    "GetIpAccessSettings": {
+      "name": "GetIpAccessSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/ipAccessSettings/{ipAccessSettingsArn+}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetIpAccessSettingsRequest"
+      },
+      "output": {
+        "shape": "GetIpAccessSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Gets the IP access settings.</p>"
     },
     "GetNetworkSettings": {
       "name": "GetNetworkSettings",
@@ -1184,6 +1353,35 @@
         }
       ],
       "documentation": "<p>Retrieves a list of identity providers for a specific web portal.</p>"
+    },
+    "ListIpAccessSettings": {
+      "name": "ListIpAccessSettings",
+      "http": {
+        "method": "GET",
+        "requestUri": "/ipAccessSettings",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListIpAccessSettingsRequest"
+      },
+      "output": {
+        "shape": "ListIpAccessSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of IP access settings.</p>"
     },
     "ListNetworkSettings": {
       "name": "ListNetworkSettings",
@@ -1526,6 +1724,38 @@
       ],
       "documentation": "<p>Updates the identity provider. </p>"
     },
+    "UpdateIpAccessSettings": {
+      "name": "UpdateIpAccessSettings",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/ipAccessSettings/{ipAccessSettingsArn+}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateIpAccessSettingsRequest"
+      },
+      "output": {
+        "shape": "UpdateIpAccessSettingsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Updates IP access settings.</p>"
+    },
     "UpdateNetworkSettings": {
       "name": "UpdateNetworkSettings",
       "http": {
@@ -1586,6 +1816,9 @@
         },
         {
           "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates a web portal.</p>",
@@ -1735,6 +1968,44 @@
         "browserSettingsArn": {
           "shape": "ARN",
           "documentation": "<p>The ARN of the browser settings.</p>"
+        },
+        "portalArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the web portal.</p>"
+        }
+      }
+    },
+    "AssociateIpAccessSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "ipAccessSettingsArn",
+        "portalArn"
+      ],
+      "members": {
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings.</p>",
+          "location": "querystring",
+          "locationName": "ipAccessSettingsArn"
+        },
+        "portalArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the web portal.</p>",
+          "location": "uri",
+          "locationName": "portalArn"
+        }
+      }
+    },
+    "AssociateIpAccessSettingsResponse": {
+      "type": "structure",
+      "required": [
+        "ipAccessSettingsArn",
+        "portalArn"
+      ],
+      "members": {
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings resource.</p>"
         },
         "portalArn": {
           "shape": "ARN",
@@ -2130,6 +2401,55 @@
         }
       }
     },
+    "CreateIpAccessSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "ipRules"
+      ],
+      "members": {
+        "additionalEncryptionContext": {
+          "shape": "EncryptionContextMap",
+          "documentation": "<p>Additional encryption context of the IP access settings.</p>"
+        },
+        "clientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>",
+          "idempotencyToken": true
+        },
+        "customerManagedKey": {
+          "shape": "keyArn",
+          "documentation": "<p>The custom managed key of the IP access settings.</p>"
+        },
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the IP access settings.</p>"
+        },
+        "displayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The display name of the IP access settings.</p>"
+        },
+        "ipRules": {
+          "shape": "IpRuleList",
+          "documentation": "<p>The IP rules of the IP access settings.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags to add to the browser settings resource. A tag is a key-value pair.</p>"
+        }
+      }
+    },
+    "CreateIpAccessSettingsResponse": {
+      "type": "structure",
+      "required": [
+        "ipAccessSettingsArn"
+      ],
+      "members": {
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings resource.</p>"
+        }
+      }
+    },
     "CreateNetworkSettingsRequest": {
       "type": "structure",
       "required": [
@@ -2383,6 +2703,24 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteIpAccessSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "ipAccessSettingsArn"
+      ],
+      "members": {
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings.</p>",
+          "location": "uri",
+          "locationName": "ipAccessSettingsArn"
+        }
+      }
+    },
+    "DeleteIpAccessSettingsResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteNetworkSettingsRequest": {
       "type": "structure",
       "required": [
@@ -2473,6 +2811,13 @@
       "type": "structure",
       "members": {}
     },
+    "Description": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^.+$",
+      "sensitive": true
+    },
     "DisassociateBrowserSettingsRequest": {
       "type": "structure",
       "required": [
@@ -2488,6 +2833,24 @@
       }
     },
     "DisassociateBrowserSettingsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DisassociateIpAccessSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "portalArn"
+      ],
+      "members": {
+        "portalArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the web portal.</p>",
+          "location": "uri",
+          "locationName": "portalArn"
+        }
+      }
+    },
+    "DisassociateIpAccessSettingsResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2635,6 +2998,29 @@
         "identityProvider": {
           "shape": "IdentityProvider",
           "documentation": "<p>The identity provider.</p>"
+        }
+      }
+    },
+    "GetIpAccessSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "ipAccessSettingsArn"
+      ],
+      "members": {
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings.</p>",
+          "location": "uri",
+          "locationName": "ipAccessSettingsArn"
+        }
+      }
+    },
+    "GetIpAccessSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "ipAccessSettings": {
+          "shape": "IpAccessSettings",
+          "documentation": "<p>The IP access settings.</p>"
         }
       }
     },
@@ -2900,6 +3286,99 @@
       "max": 60,
       "min": 0
     },
+    "IpAccessSettings": {
+      "type": "structure",
+      "required": [
+        "ipAccessSettingsArn"
+      ],
+      "members": {
+        "associatedPortalArns": {
+          "shape": "ArnList",
+          "documentation": "<p>A list of web portal ARNs that this IP access settings resource is associated with.</p>"
+        },
+        "creationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The creation date timestamp of the IP access settings.</p>"
+        },
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the IP access settings.</p>"
+        },
+        "displayName": {
+          "shape": "DisplayName",
+          "documentation": "<p> The display name of the IP access settings.</p>"
+        },
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings resource.</p>"
+        },
+        "ipRules": {
+          "shape": "IpRuleList",
+          "documentation": "<p>The IP rules of the IP access settings.</p>"
+        }
+      },
+      "documentation": "<p>The IP access settings resource that can be associated with a web portal. </p>"
+    },
+    "IpAccessSettingsList": {
+      "type": "list",
+      "member": {
+        "shape": "IpAccessSettingsSummary"
+      }
+    },
+    "IpAccessSettingsSummary": {
+      "type": "structure",
+      "members": {
+        "creationDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The creation date timestamp of the IP access settings.</p>"
+        },
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the IP access settings.</p>"
+        },
+        "displayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The display name of the IP access settings.</p>"
+        },
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of IP access settings.</p>"
+        }
+      },
+      "documentation": "<p>The summary of IP access settings.</p>"
+    },
+    "IpRange": {
+      "type": "string",
+      "documentation": "<p>A single IP address or an IP address range in CIDR notation</p>",
+      "pattern": "^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}(?:/([0-9]|[12][0-9]|3[0-2])|)$",
+      "sensitive": true
+    },
+    "IpRule": {
+      "type": "structure",
+      "required": [
+        "ipRange"
+      ],
+      "members": {
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the IP rule.</p>"
+        },
+        "ipRange": {
+          "shape": "IpRange",
+          "documentation": "<p>The IP range of the IP rule.</p>"
+        }
+      },
+      "documentation": "<p>The IP rules of the IP access settings.</p>"
+    },
+    "IpRuleList": {
+      "type": "list",
+      "member": {
+        "shape": "IpRule"
+      },
+      "max": 100,
+      "min": 1,
+      "sensitive": true
+    },
     "KinesisStreamArn": {
       "type": "string",
       "documentation": "<p>Kinesis stream ARN to which log events are published.</p>",
@@ -2969,6 +3448,36 @@
         "identityProviders": {
           "shape": "IdentityProviderList",
           "documentation": "<p>The identity providers.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
+        }
+      }
+    },
+    "ListIpAccessSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be included in the next page.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The pagination token used to retrieve the next page of results for this operation.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "ListIpAccessSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "ipAccessSettings": {
+          "shape": "IpAccessSettingsList",
+          "documentation": "<p>The IP access settings.</p>"
         },
         "nextToken": {
           "shape": "PaginationToken",
@@ -3275,6 +3784,10 @@
           "shape": "DisplayName",
           "documentation": "<p>The name of the web portal.</p>"
         },
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings.</p>"
+        },
         "networkSettingsArn": {
           "shape": "ARN",
           "documentation": "<p>The ARN of the network settings that is associated with the web portal.</p>"
@@ -3356,6 +3869,10 @@
         "displayName": {
           "shape": "DisplayName",
           "documentation": "<p>The name of the web portal.</p>"
+        },
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings.</p>"
         },
         "networkSettingsArn": {
           "shape": "ARN",
@@ -3654,6 +4171,49 @@
         "identityProvider": {
           "shape": "IdentityProvider",
           "documentation": "<p>The identity provider.</p>"
+        }
+      }
+    },
+    "UpdateIpAccessSettingsRequest": {
+      "type": "structure",
+      "required": [
+        "ipAccessSettingsArn"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>",
+          "idempotencyToken": true
+        },
+        "description": {
+          "shape": "Description",
+          "documentation": "<p>The description of the IP access settings.</p>"
+        },
+        "displayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The display name of the IP access settings.</p>"
+        },
+        "ipAccessSettingsArn": {
+          "shape": "ARN",
+          "documentation": "<p>The ARN of the IP access settings.</p>",
+          "location": "uri",
+          "locationName": "ipAccessSettingsArn"
+        },
+        "ipRules": {
+          "shape": "IpRuleList",
+          "documentation": "<p>The updated IP rules of the IP access settings.</p>"
+        }
+      }
+    },
+    "UpdateIpAccessSettingsResponse": {
+      "type": "structure",
+      "required": [
+        "ipAccessSettings"
+      ],
+      "members": {
+        "ipAccessSettings": {
+          "shape": "IpAccessSettings",
+          "documentation": "<p>The IP access settings.</p>"
         }
       }
     },

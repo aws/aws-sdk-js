@@ -332,6 +332,10 @@ declare namespace M2 {
      */
     name: EntityName;
     /**
+     * The Amazon Resource Name (ARN) of the role associated with the application.
+     */
+    roleArn?: Arn;
+    /**
      * The status of the application.
      */
     status: ApplicationLifecycle;
@@ -380,6 +384,9 @@ declare namespace M2 {
      * The unique identifier of the application that hosts this batch job.
      */
     applicationId: Identifier;
+    /**
+     * The unique identifier of this batch job.
+     */
     batchJobIdentifier?: BatchJobIdentifier;
     /**
      * The timestamp when this batch job execution ended.
@@ -402,7 +409,7 @@ declare namespace M2 {
      */
     jobType?: BatchJobType;
     /**
-     * 
+     * The batch job return code from either the Blu Age or Micro Focus runtime engines. For more information, see Batch return codes in the IBM WebSphere Application Server documentation.
      */
     returnCode?: String;
     /**
@@ -468,6 +475,10 @@ declare namespace M2 {
      * The unique identifier of the application.
      */
     name: EntityName;
+    /**
+     * The Amazon Resource Name (ARN) of the role associated with the application.
+     */
+    roleArn?: Arn;
     /**
      * A list of tags to apply to the application.
      */
@@ -709,6 +720,14 @@ declare namespace M2 {
      */
     gdg?: GdgDetailAttributes;
     /**
+     * The details of a PO type data set.
+     */
+    po?: PoDetailAttributes;
+    /**
+     * The details of a PS type data set.
+     */
+    ps?: PsDetailAttributes;
+    /**
      * The details of a VSAM data set.
      */
     vsam?: VsamDetailAttributes;
@@ -718,6 +737,14 @@ declare namespace M2 {
      * The generation data group of the data set.
      */
     gdg?: GdgAttributes;
+    /**
+     * The details of a PO type data set.
+     */
+    po?: PoAttributes;
+    /**
+     * The details of a PS type data set.
+     */
+    ps?: PsAttributes;
     /**
      * The details of a VSAM data set.
      */
@@ -993,6 +1020,10 @@ declare namespace M2 {
      */
     name: EntityName;
     /**
+     * The Amazon Resource Name (ARN) of the role associated with the application.
+     */
+    roleArn?: Arn;
+    /**
      * The status of the application.
      */
     status: ApplicationLifecycle;
@@ -1064,6 +1095,9 @@ declare namespace M2 {
      * The identifier of the application.
      */
     applicationId: Identifier;
+    /**
+     * The unique identifier of this batch job.
+     */
     batchJobIdentifier?: BatchJobIdentifier;
     /**
      * The timestamp when the batch job execution ended.
@@ -1090,7 +1124,7 @@ declare namespace M2 {
      */
     jobUser?: String100;
     /**
-     * 
+     * The batch job return code from either the Blu Age or Micro Focus runtime engines. For more information, see Batch return codes in the IBM WebSphere Application Server documentation.
      */
     returnCode?: String;
     /**
@@ -1617,6 +1651,30 @@ declare namespace M2 {
      */
     schedule?: MaintenanceSchedule;
   }
+  export interface PoAttributes {
+    /**
+     * The character set encoding of the data set.
+     */
+    encoding?: String;
+    /**
+     * The format of the data set records.
+     */
+    format: String;
+    /**
+     * An array containing one or more filename extensions, allowing you to specify which files to be included as PDS member.
+     */
+    memberFileExtensions: String20List;
+  }
+  export interface PoDetailAttributes {
+    /**
+     * The character set encoding of the data set.
+     */
+    encoding: String;
+    /**
+     * The format of the data set records.
+     */
+    format: String;
+  }
   export type PortList = Integer[];
   export interface PrimaryKey {
     /**
@@ -1631,6 +1689,26 @@ declare namespace M2 {
      * A positive integer value representing the offset to mark the start of the primary key in the record byte array.
      */
     offset: Integer;
+  }
+  export interface PsAttributes {
+    /**
+     * The character set encoding of the data set.
+     */
+    encoding?: String;
+    /**
+     * The format of the data set records.
+     */
+    format: String;
+  }
+  export interface PsDetailAttributes {
+    /**
+     * The character set encoding of the data set.
+     */
+    encoding: String;
+    /**
+     * The format of the data set records.
+     */
+    format: String;
   }
   export interface RecordLength {
     /**
@@ -1710,6 +1788,7 @@ declare namespace M2 {
   export type String20 = string;
   export type String200 = string;
   export type String2000 = string;
+  export type String20List = String20[];
   export type String50 = string;
   export type String50List = String50[];
   export type StringFree65000 = string;

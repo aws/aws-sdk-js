@@ -228,19 +228,19 @@ declare class ConfigService extends Service {
    */
   describeConfigurationAggregators(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationAggregatorsResponse) => void): Request<ConfigService.Types.DescribeConfigurationAggregatorsResponse, AWSError>;
   /**
-   * Returns the current status of the specified configuration recorder as well as the status of the last recording event for the recorder. If a configuration recorder is not specified, this action returns the status of all configuration recorders associated with the account.  Currently, you can specify only one configuration recorder per region in your account. For a detailed status of recording events over time, add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics. 
+   * Returns the current status of the specified configuration recorder as well as the status of the last recording event for the recorder. If a configuration recorder is not specified, this action returns the status of all configuration recorders associated with the account.  &gt;You can specify only one configuration recorder for each Amazon Web Services Region for each account. For a detailed status of recording events over time, add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics. 
    */
   describeConfigurationRecorderStatus(params: ConfigService.Types.DescribeConfigurationRecorderStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationRecorderStatusResponse) => void): Request<ConfigService.Types.DescribeConfigurationRecorderStatusResponse, AWSError>;
   /**
-   * Returns the current status of the specified configuration recorder as well as the status of the last recording event for the recorder. If a configuration recorder is not specified, this action returns the status of all configuration recorders associated with the account.  Currently, you can specify only one configuration recorder per region in your account. For a detailed status of recording events over time, add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics. 
+   * Returns the current status of the specified configuration recorder as well as the status of the last recording event for the recorder. If a configuration recorder is not specified, this action returns the status of all configuration recorders associated with the account.  &gt;You can specify only one configuration recorder for each Amazon Web Services Region for each account. For a detailed status of recording events over time, add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics. 
    */
   describeConfigurationRecorderStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationRecorderStatusResponse) => void): Request<ConfigService.Types.DescribeConfigurationRecorderStatusResponse, AWSError>;
   /**
-   * Returns the details for the specified configuration recorders. If the configuration recorder is not specified, this action returns the details for all configuration recorders associated with the account.  Currently, you can specify only one configuration recorder per region in your account. 
+   * Returns the details for the specified configuration recorders. If the configuration recorder is not specified, this action returns the details for all configuration recorders associated with the account.  You can specify only one configuration recorder for each Amazon Web Services Region for each account. 
    */
   describeConfigurationRecorders(params: ConfigService.Types.DescribeConfigurationRecordersRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationRecordersResponse) => void): Request<ConfigService.Types.DescribeConfigurationRecordersResponse, AWSError>;
   /**
-   * Returns the details for the specified configuration recorders. If the configuration recorder is not specified, this action returns the details for all configuration recorders associated with the account.  Currently, you can specify only one configuration recorder per region in your account. 
+   * Returns the details for the specified configuration recorders. If the configuration recorder is not specified, this action returns the details for all configuration recorders associated with the account.  You can specify only one configuration recorder for each Amazon Web Services Region for each account. 
    */
   describeConfigurationRecorders(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationRecordersResponse) => void): Request<ConfigService.Types.DescribeConfigurationRecordersResponse, AWSError>;
   /**
@@ -576,11 +576,11 @@ declare class ConfigService extends Service {
    */
   putConfigurationAggregator(callback?: (err: AWSError, data: ConfigService.Types.PutConfigurationAggregatorResponse) => void): Request<ConfigService.Types.PutConfigurationAggregatorResponse, AWSError>;
   /**
-   * Creates a new configuration recorder to record the selected resource configurations. You can use this action to change the role roleARN or the recordingGroup of an existing recorder. To change the role, call the action on the existing configuration recorder and specify a role.  Currently, you can specify only one configuration recorder per region in your account. If ConfigurationRecorder does not have the recordingGroup parameter specified, the default is to record all supported resource types. 
+   * Creates a new configuration recorder to record configuration changes for specified resource types. You can also use this action to change the roleARN or the recordingGroup of an existing recorder. For more information, see  Managing the Configuration Recorder  in the Config Developer Guide.  You can specify only one configuration recorder for each Amazon Web Services Region for each account. If the configuration recorder does not have the recordingGroup field specified, the default is to record all supported resource types. 
    */
   putConfigurationRecorder(params: ConfigService.Types.PutConfigurationRecorderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a new configuration recorder to record the selected resource configurations. You can use this action to change the role roleARN or the recordingGroup of an existing recorder. To change the role, call the action on the existing configuration recorder and specify a role.  Currently, you can specify only one configuration recorder per region in your account. If ConfigurationRecorder does not have the recordingGroup parameter specified, the default is to record all supported resource types. 
+   * Creates a new configuration recorder to record configuration changes for specified resource types. You can also use this action to change the roleARN or the recordingGroup of an existing recorder. For more information, see  Managing the Configuration Recorder  in the Config Developer Guide.  You can specify only one configuration recorder for each Amazon Web Services Region for each account. If the configuration recorder does not have the recordingGroup field specified, the default is to record all supported resource types. 
    */
   putConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1476,15 +1476,15 @@ declare namespace ConfigService {
   export type ConfigurationItemStatus = "OK"|"ResourceDiscovered"|"ResourceNotRecorded"|"ResourceDeleted"|"ResourceDeletedNotRecorded"|string;
   export interface ConfigurationRecorder {
     /**
-     * The name of the recorder. By default, Config automatically assigns the name "default" when creating the configuration recorder. You cannot change the assigned name.
+     * The name of the configuration recorder. Config automatically assigns the name of "default" when creating the configuration recorder. You cannot change the name of the configuration recorder after it has been created. To change the configuration recorder name, you must delete it and create a new configuration recorder with a new name. 
      */
     name?: RecorderName;
     /**
-     * Amazon Resource Name (ARN) of the IAM role used to describe the Amazon Web Services resources associated with the account.  While the API model does not require this field, the server will reject a request without a defined roleARN for the configuration recorder. 
+     * Amazon Resource Name (ARN) of the IAM role assumed by Config and used by the configuration recorder.  While the API model does not require this field, the server will reject a request without a defined roleARN for the configuration recorder.    Pre-existing Config role  If you have used an Amazon Web Services service that uses Config, such as Security Hub or Control Tower, and an Config role has already been created, make sure that the IAM role that you use when setting up Config keeps the same minimum permissions as the already created Config role. You must do this so that the other Amazon Web Services service continues to run as expected.  For example, if Control Tower has an IAM role that allows Config to read Amazon Simple Storage Service (Amazon S3) objects, make sure that the same permissions are granted within the IAM role you use when setting up Config. Otherwise, it may interfere with how Control Tower operates. For more information about IAM roles for Config, see  Identity and Access Management for Config  in the Config Developer Guide.  
      */
     roleARN?: String;
     /**
-     * Specifies the types of Amazon Web Services resources for which Config records configuration changes.
+     * Specifies which resource types Config records for configuration changes.    High Number of Config Evaluations  You may notice increased activity in your account during your initial month recording with Config when compared to subsequent months. During the initial bootstrapping process, Config runs evaluations on all the resources in your account that you have selected for Config to record. If you are running ephemeral workloads, you may see increased activity from Config as it records configuration changes associated with creating and deleting these temporary resources. An ephemeral workload is a temporary use of computing resources that are loaded and run when needed. Examples include Amazon Elastic Compute Cloud (Amazon EC2) Spot Instances, Amazon EMR jobs, and Auto Scaling. If you want to avoid the increased activity from running ephemeral workloads, you can run these types of workloads in a separate account with Config turned off to avoid increased configuration recording and rule evaluations. 
      */
     recordingGroup?: RecordingGroup;
   }
@@ -2604,6 +2604,12 @@ declare namespace ConfigService {
   export type Evaluations = Evaluation[];
   export type EventSource = "aws.config"|string;
   export type ExcludedAccounts = AccountId[];
+  export interface ExclusionByResourceTypes {
+    /**
+     * A comma-separated list of resource types to exclude from recording by the configuration recorder.
+     */
+    resourceTypes?: ResourceTypeList;
+  }
   export interface ExecutionControls {
     /**
      * A SsmControls object.
@@ -3797,7 +3803,7 @@ declare namespace ConfigService {
   }
   export interface PutConfigurationRecorderRequest {
     /**
-     * The configuration recorder object that records each configuration change made to the resources.
+     * An object for the configuration recorder to record configuration changes for specified resource types.
      */
     ConfigurationRecorder: ConfigurationRecorder;
   }
@@ -4044,18 +4050,33 @@ declare namespace ConfigService {
   export type RecorderStatus = "Pending"|"Success"|"Failure"|string;
   export interface RecordingGroup {
     /**
-     * Specifies whether Config records configuration changes for every supported type of regional resource. If you set this option to true, when Config adds support for a new type of regional resource, it starts recording resources of that type automatically. If you set this option to true, you cannot enumerate a list of resourceTypes.
+     * Specifies whether Config records configuration changes for all supported regional resource types. If you set this field to true, when Config adds support for a new type of regional resource, Config starts recording resources of that type automatically. If you set this field to true, you cannot enumerate specific resource types to record in the resourceTypes field of RecordingGroup, or to exclude in the resourceTypes field of ExclusionByResourceTypes.
      */
     allSupported?: AllSupported;
     /**
-     * Specifies whether Config includes all supported types of global resources (for example, IAM resources) with the resources that it records. Before you can set this option to true, you must set the allSupported option to true. If you set this option to true, when Config adds support for a new type of global resource, it starts recording resources of that type automatically. The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing Config in only one region to record global resources.
+     * Specifies whether Config records configuration changes for all supported global resources. Before you set this field to true, set the allSupported field of RecordingGroup to true. Optionally, you can set the useOnly field of RecordingStrategy to ALL_SUPPORTED_RESOURCE_TYPES. If you set this field to true, when Config adds support for a new type of global resource in the Region where you set up the configuration recorder, Config starts recording resources of that type automatically.  If you set this field to false but list global resource types in the resourceTypes field of RecordingGroup, Config will still record configuration changes for those specified resource types regardless of if you set the includeGlobalResourceTypes field to false. If you do not want to record configuration changes to global resource types, make sure to not list them in the resourceTypes field in addition to setting the includeGlobalResourceTypes field to false. 
      */
     includeGlobalResourceTypes?: IncludeGlobalResourceTypes;
     /**
-     * A comma-separated list that specifies the types of Amazon Web Services resources for which Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). To record all configuration changes, you must set the allSupported option to true. If you set the AllSupported option to false and populate the ResourceTypes option with values, when Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group. For a list of valid resourceTypes values, see the resourceType Value column in Supported Amazon Web Services resource Types.
+     * A comma-separated list that specifies which resource types Config records. Optionally, you can set the useOnly field of RecordingStrategy to INCLUSION_BY_RESOURCE_TYPES. To record all configuration changes, set the allSupported field of RecordingGroup to true, and either omit this field or don't specify any resource types in this field. If you set the allSupported field to false and specify values for resourceTypes, when Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group. For a list of valid resourceTypes values, see the Resource Type Value column in Supported Amazon Web Services resource Types in the Config developer guide.   Region Availability  Before specifying a resource type for Config to track, check Resource Coverage by Region Availability to see if the resource type is supported in the Amazon Web Services Region where you set up Config. If a resource type is supported by Config in at least one Region, you can enable the recording of that resource type in all Regions supported by Config, even if the specified resource type is not supported in the Amazon Web Services Region where you set up Config. 
      */
     resourceTypes?: ResourceTypeList;
+    /**
+     * An object that specifies how Config excludes resource types from being recorded by the configuration recorder. To use this option, you must set the useOnly field of RecordingStrategy to EXCLUSION_BY_RESOURCE_TYPES.
+     */
+    exclusionByResourceTypes?: ExclusionByResourceTypes;
+    /**
+     * An object that specifies the recording strategy for the configuration recorder.   If you set the useOnly field of RecordingStrategy to ALL_SUPPORTED_RESOURCE_TYPES, Config records configuration changes for all supported regional resource types. You also must set the allSupported field of RecordingGroup to true. When Config adds support for a new type of regional resource, Config automatically starts recording resources of that type.   If you set the useOnly field of RecordingStrategy to INCLUSION_BY_RESOURCE_TYPES, Config records configuration changes for only the resource types you specify in the resourceTypes field of RecordingGroup.   If you set the useOnly field of RecordingStrategy to EXCLUSION_BY_RESOURCE_TYPES, Config records configuration changes for all supported resource types except the resource types that you specify as exemptions to exclude from being recorded in the resourceTypes field of ExclusionByResourceTypes.    The recordingStrategy field is optional when you set the allSupported field of RecordingGroup to true. The recordingStrategy field is optional when you list resource types in the resourceTypes field of RecordingGroup. The recordingStrategy field is required if you list resource types to exclude from recording in the resourceTypes field of ExclusionByResourceTypes.   If you choose EXCLUSION_BY_RESOURCE_TYPES for the recording strategy, the exclusionByResourceTypes field will override other properties in the request. For example, even if you set includeGlobalResourceTypes to false, global resource types will still be automatically recorded in this option unless those resource types are specifically listed as exemptions in the resourceTypes field of exclusionByResourceTypes. By default, if you choose the EXCLUSION_BY_RESOURCE_TYPES recording strategy, when Config adds support for a new resource type in the Region where you set up the configuration recorder, including global resource types, Config starts recording resources of that type automatically. 
+     */
+    recordingStrategy?: RecordingStrategy;
   }
+  export interface RecordingStrategy {
+    /**
+     * The recording strategy for the configuration recorder.   If you set this option to ALL_SUPPORTED_RESOURCE_TYPES, Config records configuration changes for all supported regional resource types. You also must set the allSupported field of RecordingGroup to true. When Config adds support for a new type of regional resource, Config automatically starts recording resources of that type. For a list of supported resource types, see Supported Resource Types in the Config developer guide.   If you set this option to INCLUSION_BY_RESOURCE_TYPES, Config records configuration changes for only the resource types that you specify in the resourceTypes field of RecordingGroup.   If you set this option to EXCLUSION_BY_RESOURCE_TYPES, Config records configuration changes for all supported resource types, except the resource types that you specify as exemptions to exclude from being recorded in the resourceTypes field of ExclusionByResourceTypes.    The recordingStrategy field is optional when you set the allSupported field of RecordingGroup to true. The recordingStrategy field is optional when you list resource types in the resourceTypes field of RecordingGroup. The recordingStrategy field is required if you list resource types to exclude from recording in the resourceTypes field of ExclusionByResourceTypes.   If you choose EXCLUSION_BY_RESOURCE_TYPES for the recording strategy, the exclusionByResourceTypes field will override other properties in the request. For example, even if you set includeGlobalResourceTypes to false, global resource types will still be automatically recorded in this option unless those resource types are specifically listed as exemptions in the resourceTypes field of exclusionByResourceTypes. By default, if you choose the EXCLUSION_BY_RESOURCE_TYPES recording strategy, when Config adds support for a new resource type in the Region where you set up the configuration recorder, including global resource types, Config starts recording resources of that type automatically. 
+     */
+    useOnly?: RecordingStrategyType;
+  }
+  export type RecordingStrategyType = "ALL_SUPPORTED_RESOURCE_TYPES"|"INCLUSION_BY_RESOURCE_TYPES"|"EXCLUSION_BY_RESOURCE_TYPES"|string;
   export type ReevaluateConfigRuleNames = ConfigRuleName[];
   export type RelatedEvent = string;
   export type RelatedEventList = RelatedEvent[];
