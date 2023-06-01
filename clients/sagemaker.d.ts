@@ -3211,7 +3211,7 @@ declare namespace SageMaker {
      */
     ChannelType?: AutoMLChannelType;
     /**
-     * The content type of the data from the input source. The following are the allowed content types for different problems:   ImageClassification: image/png, image/jpeg, image/*    TextClassification: text/csv;header=present   
+     * The content type of the data from the input source. The following are the allowed content types for different problems:   ImageClassification: image/png, image/jpeg, or image/*. The default value is image/*.   TextClassification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
      */
     ContentType?: ContentType;
     /**
@@ -6828,7 +6828,7 @@ declare namespace SageMaker {
   }
   export interface DeploymentRecommendation {
     /**
-     * Status of the deployment recommendation. NOT_APPLICABLE means that SageMaker is unable to provide a default recommendation for the model using the information provided.
+     * Status of the deployment recommendation. The status NOT_APPLICABLE means that SageMaker is unable to provide a default recommendation for the model using the information provided. If the deployment status is IN_PROGRESS, retry your API call after a few seconds to get a COMPLETED deployment recommendation.
      */
     RecommendationStatus: RecommendationStatus;
     /**

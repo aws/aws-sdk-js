@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "amazonprometheus",
-  "description": "Enable CORS for Amazon Prometheus"
-}

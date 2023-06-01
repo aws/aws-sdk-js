@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "amazonprometheus",
+        "description": "Enable CORS for Amazon Prometheus"
+    },
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "Added ability to select DataTransferApiType for DescribeConnector and CreateFlow requests when using Async supported connectors. Added supportedDataTransferType to DescribeConnector/DescribeConnectors/ListConnector response."
+    },
+    {
+        "type": "feature",
+        "category": "CustomerProfiles",
+        "description": "This release introduces calculated attribute related APIs."
+    },
+    {
+        "type": "feature",
+        "category": "IVS",
+        "description": "API Update for IVS Advanced Channel type"
+    }
+]

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1388.0-->
+<!--LATEST=2.1389.0-->
 <!--ENTRYINSERT-->
+
+## 2.1389.0
+* bugfix: amazonprometheus: Enable CORS for Amazon Prometheus
+* feature: Appflow: Added ability to select DataTransferApiType for DescribeConnector and CreateFlow requests when using Async supported connectors. Added supportedDataTransferType to DescribeConnector/DescribeConnectors/ListConnector response.
+* feature: CustomerProfiles: This release introduces calculated attribute related APIs.
+* feature: IVS: API Update for IVS Advanced Channel type
 
 ## 2.1388.0
 * feature: ConfigService: Resource Types Exclusion feature launch by AWS Config

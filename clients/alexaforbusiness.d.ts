@@ -1306,6 +1306,7 @@ declare namespace AlexaForBusiness {
      * Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.”
      */
     RequireCheckIn?: CreateRequireCheckIn;
+    ProactiveJoin?: CreateProactiveJoin;
   }
   export interface CreateNetworkProfileRequest {
     /**
@@ -1355,6 +1356,9 @@ declare namespace AlexaForBusiness {
      * The ARN of the network profile associated with a device.
      */
     NetworkProfileArn?: Arn;
+  }
+  export interface CreateProactiveJoin {
+    EnabledByMotion: Boolean;
   }
   export interface CreateProfileRequest {
     /**
@@ -2458,6 +2462,7 @@ declare namespace AlexaForBusiness {
      * Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into. This makes the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” 
      */
     RequireCheckIn?: RequireCheckIn;
+    ProactiveJoin?: ProactiveJoin;
   }
   export interface MeetingSetting {
     /**
@@ -2582,6 +2587,9 @@ declare namespace AlexaForBusiness {
   export type PhoneNumberList = PhoneNumber[];
   export type PhoneNumberType = "MOBILE"|"WORK"|"HOME"|string;
   export type PrivacyPolicy = string;
+  export interface ProactiveJoin {
+    EnabledByMotion?: Boolean;
+  }
   export type ProductDescription = string;
   export type ProductId = string;
   export interface Profile {
@@ -3652,6 +3660,7 @@ declare namespace AlexaForBusiness {
      * Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” 
      */
     RequireCheckIn?: UpdateRequireCheckIn;
+    ProactiveJoin?: UpdateProactiveJoin;
   }
   export interface UpdateNetworkProfileRequest {
     /**
@@ -3684,6 +3693,9 @@ declare namespace AlexaForBusiness {
     TrustAnchors?: TrustAnchorList;
   }
   export interface UpdateNetworkProfileResponse {
+  }
+  export interface UpdateProactiveJoin {
+    EnabledByMotion: Boolean;
   }
   export interface UpdateProfileRequest {
     /**

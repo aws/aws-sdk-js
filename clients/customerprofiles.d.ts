@@ -20,6 +20,14 @@ declare class CustomerProfiles extends Service {
    */
   addProfileKey(callback?: (err: AWSError, data: CustomerProfiles.Types.AddProfileKeyResponse) => void): Request<CustomerProfiles.Types.AddProfileKeyResponse, AWSError>;
   /**
+   * Creates a new calculated attribute definition. After creation, new object data ingested into Customer Profiles will be included in the calculated attribute, which can be retrieved for a profile using the GetCalculatedAttributeForProfile API. Defining a calculated attribute makes it available for all profiles within a domain. Each calculated attribute can only reference one ObjectType and at most, two fields from that ObjectType.
+   */
+  createCalculatedAttributeDefinition(params: CustomerProfiles.Types.CreateCalculatedAttributeDefinitionRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.CreateCalculatedAttributeDefinitionResponse, AWSError>;
+  /**
+   * Creates a new calculated attribute definition. After creation, new object data ingested into Customer Profiles will be included in the calculated attribute, which can be retrieved for a profile using the GetCalculatedAttributeForProfile API. Defining a calculated attribute makes it available for all profiles within a domain. Each calculated attribute can only reference one ObjectType and at most, two fields from that ObjectType.
+   */
+  createCalculatedAttributeDefinition(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.CreateCalculatedAttributeDefinitionResponse, AWSError>;
+  /**
    * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
    */
   createDomain(params: CustomerProfiles.Types.CreateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
@@ -43,6 +51,14 @@ declare class CustomerProfiles extends Service {
    * Creates a standard profile. A standard profile represents the following attributes for a customer profile in a domain.
    */
   createProfile(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateProfileResponse) => void): Request<CustomerProfiles.Types.CreateProfileResponse, AWSError>;
+  /**
+   * Deletes an existing calculated attribute definition. Note that deleting a default calculated attribute is possible, however once deleted, you will be unable to undo that action and will need to recreate it on your own using the CreateCalculatedAttributeDefinition API if you want it back.
+   */
+  deleteCalculatedAttributeDefinition(params: CustomerProfiles.Types.DeleteCalculatedAttributeDefinitionRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.DeleteCalculatedAttributeDefinitionResponse, AWSError>;
+  /**
+   * Deletes an existing calculated attribute definition. Note that deleting a default calculated attribute is possible, however once deleted, you will be unable to undo that action and will need to recreate it on your own using the CreateCalculatedAttributeDefinition API if you want it back.
+   */
+  deleteCalculatedAttributeDefinition(callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.DeleteCalculatedAttributeDefinitionResponse, AWSError>;
   /**
    * Deletes a specific domain and all of its customer data, such as customer profile attributes and their related objects.
    */
@@ -107,6 +123,22 @@ declare class CustomerProfiles extends Service {
    * Tests the auto-merging settings of your Identity Resolution Job without merging your data. It randomly selects a sample of matching groups from the existing matching results, and applies the automerging settings that you provided. You can then view the number of profiles in the sample, the number of matches, and the number of profiles identified to be merged. This enables you to evaluate the accuracy of the attributes in your matching list.  You can't view which profiles are matched and would be merged.  We strongly recommend you use this API to do a dry run of the automerging process before running the Identity Resolution Job. Include at least two matching attributes. If your matching list includes too few attributes (such as only FirstName or only LastName), there may be a large number of matches. This increases the chances of erroneous merges. 
    */
   getAutoMergingPreview(callback?: (err: AWSError, data: CustomerProfiles.Types.GetAutoMergingPreviewResponse) => void): Request<CustomerProfiles.Types.GetAutoMergingPreviewResponse, AWSError>;
+  /**
+   * Provides more information on a calculated attribute definition for Customer Profiles.
+   */
+  getCalculatedAttributeDefinition(params: CustomerProfiles.Types.GetCalculatedAttributeDefinitionRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.GetCalculatedAttributeDefinitionResponse, AWSError>;
+  /**
+   * Provides more information on a calculated attribute definition for Customer Profiles.
+   */
+  getCalculatedAttributeDefinition(callback?: (err: AWSError, data: CustomerProfiles.Types.GetCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.GetCalculatedAttributeDefinitionResponse, AWSError>;
+  /**
+   * Retrieve a calculated attribute for a customer profile.
+   */
+  getCalculatedAttributeForProfile(params: CustomerProfiles.Types.GetCalculatedAttributeForProfileRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetCalculatedAttributeForProfileResponse) => void): Request<CustomerProfiles.Types.GetCalculatedAttributeForProfileResponse, AWSError>;
+  /**
+   * Retrieve a calculated attribute for a customer profile.
+   */
+  getCalculatedAttributeForProfile(callback?: (err: AWSError, data: CustomerProfiles.Types.GetCalculatedAttributeForProfileResponse) => void): Request<CustomerProfiles.Types.GetCalculatedAttributeForProfileResponse, AWSError>;
   /**
    * Returns information about a specific domain.
    */
@@ -179,6 +211,22 @@ declare class CustomerProfiles extends Service {
    * Lists all of the integrations associated to a specific URI in the AWS account.
    */
   listAccountIntegrations(callback?: (err: AWSError, data: CustomerProfiles.Types.ListAccountIntegrationsResponse) => void): Request<CustomerProfiles.Types.ListAccountIntegrationsResponse, AWSError>;
+  /**
+   * Lists calculated attribute definitions for Customer Profiles
+   */
+  listCalculatedAttributeDefinitions(params: CustomerProfiles.Types.ListCalculatedAttributeDefinitionsRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.ListCalculatedAttributeDefinitionsResponse) => void): Request<CustomerProfiles.Types.ListCalculatedAttributeDefinitionsResponse, AWSError>;
+  /**
+   * Lists calculated attribute definitions for Customer Profiles
+   */
+  listCalculatedAttributeDefinitions(callback?: (err: AWSError, data: CustomerProfiles.Types.ListCalculatedAttributeDefinitionsResponse) => void): Request<CustomerProfiles.Types.ListCalculatedAttributeDefinitionsResponse, AWSError>;
+  /**
+   * Retrieve a list of calculated attributes for a customer profile.
+   */
+  listCalculatedAttributesForProfile(params: CustomerProfiles.Types.ListCalculatedAttributesForProfileRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.ListCalculatedAttributesForProfileResponse) => void): Request<CustomerProfiles.Types.ListCalculatedAttributesForProfileResponse, AWSError>;
+  /**
+   * Retrieve a list of calculated attributes for a customer profile.
+   */
+  listCalculatedAttributesForProfile(callback?: (err: AWSError, data: CustomerProfiles.Types.ListCalculatedAttributesForProfileResponse) => void): Request<CustomerProfiles.Types.ListCalculatedAttributesForProfileResponse, AWSError>;
   /**
    * Returns a list of all the domains for an AWS account that have been created.
    */
@@ -299,6 +347,14 @@ declare class CustomerProfiles extends Service {
    * Removes one or more tags from the specified Amazon Connect Customer Profiles resource. In Connect Customer Profiles, domains, profile object types, and integrations can be tagged.
    */
   untagResource(callback?: (err: AWSError, data: CustomerProfiles.Types.UntagResourceResponse) => void): Request<CustomerProfiles.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an existing calculated attribute definition. When updating the Conditions, note that increasing the date range of a calculated attribute will not trigger inclusion of historical data greater than the current date range.
+   */
+  updateCalculatedAttributeDefinition(params: CustomerProfiles.Types.UpdateCalculatedAttributeDefinitionRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.UpdateCalculatedAttributeDefinitionResponse, AWSError>;
+  /**
+   * Updates an existing calculated attribute definition. When updating the Conditions, note that increasing the date range of a calculated attribute will not trigger inclusion of historical data greater than the current date range.
+   */
+  updateCalculatedAttributeDefinition(callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.UpdateCalculatedAttributeDefinitionResponse, AWSError>;
   /**
    * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.  To add or remove tags on an existing Domain, see TagResource/UntagResource.
    */
@@ -467,6 +523,23 @@ declare namespace CustomerProfiles {
      */
     LastUpdatedAt: timestamp;
   }
+  export interface AttributeDetails {
+    /**
+     * A list of attribute items specified in the mathematical expression.
+     */
+    Attributes: AttributeList;
+    /**
+     * Mathematical expression that is performed on attribute items provided in the attribute list. Each element in the expression should follow the structure of \"{ObjectTypeName.AttributeName}\".
+     */
+    Expression: string1To255;
+  }
+  export interface AttributeItem {
+    /**
+     * The name of an attribute defined in a profile object type.
+     */
+    Name: attributeName;
+  }
+  export type AttributeList = AttributeItem[];
   export type AttributeSourceIdMap = {[key: string]: uuid};
   export type Attributes = {[key: string]: string1To255};
   export interface AutoMerging {
@@ -500,6 +573,22 @@ declare namespace CustomerProfiles {
   export type Batches = Batch[];
   export type BucketName = string;
   export type BucketPrefix = string;
+  export type CalculatedAttributeDefinitionsList = ListCalculatedAttributeDefinitionItem[];
+  export type CalculatedAttributesForProfileList = ListCalculatedAttributeForProfileItem[];
+  export interface Conditions {
+    /**
+     * The relative time period over which data is included in the aggregation.
+     */
+    Range?: Range;
+    /**
+     * The number of profile objects used for the calculated attribute.
+     */
+    ObjectCount?: ObjectCount;
+    /**
+     * The threshold for the calculated attribute.
+     */
+    Threshold?: Threshold;
+  }
   export interface ConflictResolution {
     /**
      * How the auto-merging process should resolve conflicts between different profiles.    RECENCY: Uses the data that was most recently updated.    SOURCE: Uses the data from a specific source. For example, if a company has been aquired or two departments have merged, data from the specified source is used. If two duplicate profiles are from the same source, then RECENCY is used again.  
@@ -539,6 +628,78 @@ declare namespace CustomerProfiles {
      * A list of matching criteria.
      */
     MatchingAttributesList: MatchingAttributesList;
+  }
+  export interface CreateCalculatedAttributeDefinitionRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName: typeName;
+    /**
+     * The display name of the calculated attribute.
+     */
+    DisplayName?: displayName;
+    /**
+     * The description of the calculated attribute.
+     */
+    Description?: text;
+    /**
+     * Mathematical expression and a list of attribute items specified in that expression.
+     */
+    AttributeDetails: AttributeDetails;
+    /**
+     * The conditions including range, object count, and threshold for the calculated attribute.
+     */
+    Conditions?: Conditions;
+    /**
+     * The aggregation operation to perform for the calculated attribute.
+     */
+    Statistic: Statistic;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateCalculatedAttributeDefinitionResponse {
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName?: typeName;
+    /**
+     * The display name of the calculated attribute.
+     */
+    DisplayName?: displayName;
+    /**
+     * The description of the calculated attribute.
+     */
+    Description?: text;
+    /**
+     * Mathematical expression and a list of attribute items specified in that expression.
+     */
+    AttributeDetails?: AttributeDetails;
+    /**
+     * The conditions including range, object count, and threshold for the calculated attribute.
+     */
+    Conditions?: Conditions;
+    /**
+     * The aggregation operation to perform for the calculated attribute.
+     */
+    Statistic?: Statistic;
+    /**
+     * The timestamp of when the calculated attribute definition was created.
+     */
+    CreatedAt?: timestamp;
+    /**
+     * The timestamp of when the calculated attribute definition was most recently edited.
+     */
+    LastUpdatedAt?: timestamp;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
   }
   export interface CreateDomainRequest {
     /**
@@ -743,6 +904,18 @@ declare namespace CustomerProfiles {
   export type DataPullMode = "Incremental"|"Complete"|string;
   export type _Date = Date;
   export type DatetimeTypeFieldName = string;
+  export interface DeleteCalculatedAttributeDefinitionRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName: typeName;
+  }
+  export interface DeleteCalculatedAttributeDefinitionResponse {
+  }
   export interface DeleteDomainRequest {
     /**
      * The unique name of the domain.
@@ -1060,6 +1233,86 @@ declare namespace CustomerProfiles {
      * The number of profiles that would be merged if this wasn't a preview dry run.
      */
     NumberOfProfilesWillBeMerged?: long;
+  }
+  export interface GetCalculatedAttributeDefinitionRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName: typeName;
+  }
+  export interface GetCalculatedAttributeDefinitionResponse {
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName?: typeName;
+    /**
+     * The display name of the calculated attribute.
+     */
+    DisplayName?: displayName;
+    /**
+     * The description of the calculated attribute.
+     */
+    Description?: text;
+    /**
+     * The timestamp of when the calculated attribute definition was created.
+     */
+    CreatedAt?: timestamp;
+    /**
+     * The timestamp of when the calculated attribute definition was most recently edited.
+     */
+    LastUpdatedAt?: timestamp;
+    /**
+     * The aggregation operation to perform for the calculated attribute.
+     */
+    Statistic?: Statistic;
+    /**
+     * The conditions including range, object count, and threshold for the calculated attribute.
+     */
+    Conditions?: Conditions;
+    /**
+     * Mathematical expression and a list of attribute items specified in that expression.
+     */
+    AttributeDetails?: AttributeDetails;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export interface GetCalculatedAttributeForProfileRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The unique identifier of a customer profile.
+     */
+    ProfileId: uuid;
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName: typeName;
+  }
+  export interface GetCalculatedAttributeForProfileResponse {
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName?: typeName;
+    /**
+     * The display name of the calculated attribute.
+     */
+    DisplayName?: displayName;
+    /**
+     * Indicates whether the calculated attribute’s value is based on partial data. If data is partial, it is set to true.
+     */
+    IsDataPartial?: string1To255;
+    /**
+     * The value of the calculated attribute.
+     */
+    Value?: string1To255;
   }
   export interface GetDomainRequest {
     /**
@@ -1522,6 +1775,102 @@ declare namespace CustomerProfiles {
      */
     NextToken?: token;
   }
+  export interface ListCalculatedAttributeDefinitionItem {
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName?: typeName;
+    /**
+     * The display name of the calculated attribute.
+     */
+    DisplayName?: displayName;
+    /**
+     * The threshold for the calculated attribute.
+     */
+    Description?: text;
+    /**
+     * The threshold for the calculated attribute.
+     */
+    CreatedAt?: timestamp;
+    /**
+     * The timestamp of when the calculated attribute definition was most recently edited.
+     */
+    LastUpdatedAt?: timestamp;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export interface ListCalculatedAttributeDefinitionsRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The pagination token from the previous call to ListCalculatedAttributeDefinitions.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of calculated attribute definitions returned per page.
+     */
+    MaxResults?: maxSize100;
+  }
+  export interface ListCalculatedAttributeDefinitionsResponse {
+    /**
+     * The list of calculated attribute definitions.
+     */
+    Items?: CalculatedAttributeDefinitionsList;
+    /**
+     * The pagination token from the previous call to ListCalculatedAttributeDefinitions.
+     */
+    NextToken?: token;
+  }
+  export interface ListCalculatedAttributeForProfileItem {
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName?: typeName;
+    /**
+     * The display name of the calculated attribute.
+     */
+    DisplayName?: displayName;
+    /**
+     * Indicates whether the calculated attribute’s value is based on partial data. If data is partial, it is set to true.
+     */
+    IsDataPartial?: string1To255;
+    /**
+     * The value of the calculated attribute.
+     */
+    Value?: string1To255;
+  }
+  export interface ListCalculatedAttributesForProfileRequest {
+    /**
+     * The pagination token from the previous call to ListCalculatedAttributesForProfile.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of calculated attributes returned per page.
+     */
+    MaxResults?: maxSize100;
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The unique identifier of a customer profile.
+     */
+    ProfileId: uuid;
+  }
+  export interface ListCalculatedAttributesForProfileResponse {
+    /**
+     * The list of calculated attributes.
+     */
+    Items?: CalculatedAttributesForProfileList;
+    /**
+     * The pagination token from the previous call to ListCalculatedAttributesForProfile.
+     */
+    NextToken?: token;
+  }
   export interface ListDomainItem {
     /**
      * The unique name of the domain.
@@ -1766,7 +2115,7 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
     /**
-     * Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.
+     * Applies a filter to the response to include profile objects with the specified index values.
      */
     ObjectFilter?: ObjectFilter;
   }
@@ -1943,9 +2292,10 @@ declare namespace CustomerProfiles {
     Message?: message;
   }
   export type Object = string;
+  export type ObjectCount = number;
   export interface ObjectFilter {
     /**
-     * A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId. The predefined keys you can use to search for _order include: _orderId.
+     * A searchable identifier of a profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, and _serialNumber. The predefined keys you can use to search for _case include: _caseId. The predefined keys you can use to search for _order include: _orderId.
      */
     KeyName: name;
     /**
@@ -1979,6 +2329,7 @@ declare namespace CustomerProfiles {
   }
   export type ObjectTypeKeyList = ObjectTypeKey[];
   export type ObjectTypeNames = {[key: string]: typeName};
+  export type Operator = "EQUAL_TO"|"GREATER_THAN"|"LESS_THAN"|"NOT_EQUAL_TO"|string;
   export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
   export type PartyType = "INDIVIDUAL"|"BUSINESS"|"OTHER"|string;
   export interface Profile {
@@ -2270,6 +2621,16 @@ declare namespace CustomerProfiles {
      */
     Tags?: TagMap;
   }
+  export interface Range {
+    /**
+     * The amount of time of the specified unit.
+     */
+    Value: Value;
+    /**
+     * The unit of time.
+     */
+    Unit: Unit;
+  }
   export type RoleArn = string;
   export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface S3ExportingConfig {
@@ -2440,6 +2801,7 @@ declare namespace CustomerProfiles {
   }
   export type StandardIdentifier = "PROFILE"|"ASSET"|"CASE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|"ORDER"|string;
   export type StandardIdentifierList = StandardIdentifier[];
+  export type Statistic = "FIRST_OCCURRENCE"|"LAST_OCCURRENCE"|"COUNT"|"SUM"|"MINIMUM"|"MAXIMUM"|"AVERAGE"|"MAX_OCCURRENCE"|string;
   export type Status = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"FAILED"|"SPLIT"|"RETRY"|"CANCELLED"|string;
   export type TagArn = string;
   export type TagKey = string;
@@ -2483,6 +2845,16 @@ declare namespace CustomerProfiles {
   export type TaskPropertiesMap = {[key: string]: Property};
   export type TaskType = "Arithmetic"|"Filter"|"Map"|"Mask"|"Merge"|"Truncate"|"Validate"|string;
   export type Tasks = Task[];
+  export interface Threshold {
+    /**
+     * The value of the threshold.
+     */
+    Value: string1To255;
+    /**
+     * The operator of the threshold.
+     */
+    Operator: Operator;
+  }
   export type Timezone = string;
   export interface TriggerConfig {
     /**
@@ -2501,6 +2873,7 @@ declare namespace CustomerProfiles {
     Scheduled?: ScheduledTriggerProperties;
   }
   export type TriggerType = "Scheduled"|"Event"|"OnDemand"|string;
+  export type Unit = "DAYS"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource from which you are removing tags.
@@ -2556,6 +2929,66 @@ declare namespace CustomerProfiles {
     PostalCode?: string0To255;
   }
   export type UpdateAttributes = {[key: string]: string0To255};
+  export interface UpdateCalculatedAttributeDefinitionRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName: typeName;
+    /**
+     * The display name of the calculated attribute.
+     */
+    DisplayName?: displayName;
+    /**
+     * The description of the calculated attribute.
+     */
+    Description?: text;
+    /**
+     * The conditions including range, object count, and threshold for the calculated attribute.
+     */
+    Conditions?: Conditions;
+  }
+  export interface UpdateCalculatedAttributeDefinitionResponse {
+    /**
+     * The unique name of the calculated attribute.
+     */
+    CalculatedAttributeName?: typeName;
+    /**
+     * The display name of the calculated attribute.
+     */
+    DisplayName?: displayName;
+    /**
+     * The description of the calculated attribute.
+     */
+    Description?: text;
+    /**
+     * The timestamp of when the calculated attribute definition was created.
+     */
+    CreatedAt?: timestamp;
+    /**
+     * The timestamp of when the calculated attribute definition was most recently edited.
+     */
+    LastUpdatedAt?: timestamp;
+    /**
+     * The aggregation operation to perform for the calculated attribute.
+     */
+    Statistic?: Statistic;
+    /**
+     * The conditions including range, object count, and threshold for the calculated attribute.
+     */
+    Conditions?: Conditions;
+    /**
+     * The mathematical expression and a list of attribute items specified in that expression.
+     */
+    AttributeDetails?: AttributeDetails;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
   export interface UpdateDomainRequest {
     /**
      * The unique name of the domain.
@@ -2724,6 +3157,7 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
   }
+  export type Value = number;
   export interface WorkflowAttributes {
     /**
      * Workflow attributes specific to APPFLOW_INTEGRATION workflow.
@@ -2753,6 +3187,8 @@ declare namespace CustomerProfiles {
     Object: Object;
   }
   export type additionalSearchKeysList = AdditionalSearchKey[];
+  export type attributeName = string;
+  export type displayName = string;
   export type encryptionKey = string;
   export type expirationDaysInteger = number;
   export type foundByList = FoundByKeyValue[];

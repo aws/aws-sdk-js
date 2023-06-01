@@ -89,6 +89,7 @@ module.exports = {
   ForecastQueryService: require('./forecastqueryservice'),
   MarketplaceCatalog: require('./marketplacecatalog'),
   KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels'),
+  Amp: require('./amp'),
   Location: require('./location'),
   LexRuntimeV2: require('./lexruntimev2')
 };

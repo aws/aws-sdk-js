@@ -87,5 +87,6 @@ export import ForecastService = require('./forecastservice');
 export import ForecastQueryService = require('./forecastqueryservice');
 export import MarketplaceCatalog = require('./marketplacecatalog');
 export import KinesisVideoSignalingChannels = require('./kinesisvideosignalingchannels');
+export import Amp = require('./amp');
 export import Location = require('./location');
 export import LexRuntimeV2 = require('./lexruntimev2');

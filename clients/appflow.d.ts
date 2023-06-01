@@ -459,6 +459,14 @@ declare namespace Appflow {
      * Information about who registered the connector.
      */
     registeredBy?: RegisteredBy;
+    /**
+     * The data transfer types that the connector supports.  RECORD  Structured records.  FILE  Files or binary data.  
+     */
+    supportedDataTransferTypes?: SupportedDataTransferTypeList;
+    /**
+     * The APIs of the connector application that Amazon AppFlow can use to transfer your data.
+     */
+    supportedDataTransferApis?: SupportedDataTransferApis;
   }
   export type ConnectorConfigurationsMap = {[key: string]: ConnectorConfiguration};
   export type ConnectorDescription = string;
@@ -507,6 +515,10 @@ declare namespace Appflow {
      * The connection mode that the connector supports.
      */
     connectorModes?: ConnectorModeList;
+    /**
+     * The data transfer types that the connector supports.  RECORD  Structured records.  FILE  Files or binary data.  
+     */
+    supportedDataTransferTypes?: SupportedDataTransferTypeList;
   }
   export interface ConnectorEntity {
     /**
@@ -1167,6 +1179,10 @@ declare namespace Appflow {
      * Custom properties that are required to use the custom connector as a source.
      */
     customProperties?: CustomProperties;
+    /**
+     * The API of the connector application that Amazon AppFlow uses to transfer your data.
+     */
+    dataTransferApi?: DataTransferApi;
   }
   export type CustomProperties = {[key: string]: CustomPropertyValue};
   export type CustomPropertyKey = string;
@@ -1185,6 +1201,18 @@ declare namespace Appflow {
   }
   export type DataApiRoleArn = string;
   export type DataPullMode = "Incremental"|"Complete"|string;
+  export interface DataTransferApi {
+    /**
+     * The name of the connector application API.
+     */
+    Name?: DataTransferApiTypeName;
+    /**
+     * You can specify one of the following types:  AUTOMATIC  The default. Optimizes a flow for datasets that fluctuate in size from small to large. For each flow run, Amazon AppFlow chooses to use the SYNC or ASYNC API type based on the amount of data that the run transfers.  SYNC  A synchronous API. This type of API optimizes a flow for small to medium-sized datasets.  ASYNC  An asynchronous API. This type of API optimizes a flow for large datasets.  
+     */
+    Type?: DataTransferApiType;
+  }
+  export type DataTransferApiType = "SYNC"|"ASYNC"|"AUTOMATIC"|string;
+  export type DataTransferApiTypeName = string;
   export type DatabaseName = string;
   export type DatabaseUrl = string;
   export type DatadogConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
@@ -2957,6 +2985,9 @@ declare namespace Appflow {
   }
   export type SupportedApiVersion = string;
   export type SupportedApiVersionList = SupportedApiVersion[];
+  export type SupportedDataTransferApis = DataTransferApi[];
+  export type SupportedDataTransferType = "RECORD"|"FILE"|string;
+  export type SupportedDataTransferTypeList = SupportedDataTransferType[];
   export interface SupportedFieldTypeDetails {
     /**
      *  The initial supported version for fieldType. If this is later changed to a different version, v2 will be introduced. 
