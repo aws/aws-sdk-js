@@ -198,3 +198,4 @@ Amazon DocumentDB with MongoDB compatibility | AWS.DocDB | 2014-10-31 |  |
 AWS Backup | AWS.Backup | 2018-11-15 |  |
 Amazon WorkLink | AWS.WorkLink | 2018-09-25 |  |
 Amazon Textract | AWS.Textract | 2018-06-27 |  |
+Amazon Managed Service for Prometheus | AWS.Amp | 2020-08-01 | :tada: |

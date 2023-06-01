@@ -974,7 +974,8 @@
     "name": "SagemakerEdge"
   },
   "amp": {
-    "name": "Amp"
+    "name": "Amp",
+    "cors": true
   },
   "greengrassv2": {
     "name": "GreengrassV2"
