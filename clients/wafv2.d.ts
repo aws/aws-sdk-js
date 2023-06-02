@@ -124,6 +124,22 @@ declare class WAFV2 extends Service {
    */
   deleteWebACL(callback?: (err: AWSError, data: WAFV2.Types.DeleteWebACLResponse) => void): Request<WAFV2.Types.DeleteWebACLResponse, AWSError>;
   /**
+   * Provides high-level information for the Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups. 
+   */
+  describeAllManagedProducts(params: WAFV2.Types.DescribeAllManagedProductsRequest, callback?: (err: AWSError, data: WAFV2.Types.DescribeAllManagedProductsResponse) => void): Request<WAFV2.Types.DescribeAllManagedProductsResponse, AWSError>;
+  /**
+   * Provides high-level information for the Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups. 
+   */
+  describeAllManagedProducts(callback?: (err: AWSError, data: WAFV2.Types.DescribeAllManagedProductsResponse) => void): Request<WAFV2.Types.DescribeAllManagedProductsResponse, AWSError>;
+  /**
+   * Provides high-level information for the managed rule groups owned by a specific vendor. 
+   */
+  describeManagedProductsByVendor(params: WAFV2.Types.DescribeManagedProductsByVendorRequest, callback?: (err: AWSError, data: WAFV2.Types.DescribeManagedProductsByVendorResponse) => void): Request<WAFV2.Types.DescribeManagedProductsByVendorResponse, AWSError>;
+  /**
+   * Provides high-level information for the managed rule groups owned by a specific vendor. 
+   */
+  describeManagedProductsByVendor(callback?: (err: AWSError, data: WAFV2.Types.DescribeManagedProductsByVendorResponse) => void): Request<WAFV2.Types.DescribeManagedProductsByVendorResponse, AWSError>;
+  /**
    * Provides high-level information for a managed rule group, including descriptions of the rules. 
    */
   describeManagedRuleGroup(params: WAFV2.Types.DescribeManagedRuleGroupRequest, callback?: (err: AWSError, data: WAFV2.Types.DescribeManagedRuleGroupResponse) => void): Request<WAFV2.Types.DescribeManagedRuleGroupResponse, AWSError>;
@@ -996,9 +1012,37 @@ declare namespace WAFV2 {
   }
   export interface DeleteWebACLResponse {
   }
+  export interface DescribeAllManagedProductsRequest {
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+  }
+  export interface DescribeAllManagedProductsResponse {
+    /**
+     * High-level information for the Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups. 
+     */
+    ManagedProducts?: ManagedProductDescriptors;
+  }
+  export interface DescribeManagedProductsByVendorRequest {
+    /**
+     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.
+     */
+    VendorName: VendorName;
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+  }
+  export interface DescribeManagedProductsByVendorResponse {
+    /**
+     * High-level information for the managed rule groups owned by the specified vendor. 
+     */
+    ManagedProducts?: ManagedProductDescriptors;
+  }
   export interface DescribeManagedRuleGroupRequest {
     /**
-     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.
+     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.
      */
     VendorName: VendorName;
     /**
@@ -1020,7 +1064,7 @@ declare namespace WAFV2 {
      */
     VersionName?: VersionKeyString;
     /**
-     * The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to record changes to the managed rule group. You can subscribe to the SNS topic to receive notifications when the managed rule group is modified, such as for new versions and for version expiration. For more information, see the Amazon Simple Notification Service Developer Guide.
+     * The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to provide notification of changes to the managed rule group. You can subscribe to the SNS topic to receive notifications when the managed rule group is modified, such as for new versions and for version expiration. For more information, see the Amazon Simple Notification Service Developer Guide.
      */
     SnsTopicArn?: ResourceArn;
     /**
@@ -1110,7 +1154,7 @@ declare namespace WAFV2 {
      */
     Cookies?: Cookies;
     /**
-     * Inspect a string containing the list of the request's header names, ordered as they appear in the web request that WAF receives for inspection. WAF generates the string and then uses that as the field to match component in its inspection. WAF separates the header names in the string using colons and no added spaces, for example Host:User-Agent:Accept:Authorization:Referer. Matches against the header order string are case insensitive.
+     * Inspect a string containing the list of the request's header names, ordered as they appear in the web request that WAF receives for inspection. WAF generates the string and then uses that as the field to match component in its inspection. WAF separates the header names in the string using commas and no added spaces. Matches against the header order string are case insensitive.
      */
     HeaderOrder?: HeaderOrder;
   }
@@ -1726,7 +1770,7 @@ declare namespace WAFV2 {
   }
   export interface ListAvailableManagedRuleGroupVersionsRequest {
     /**
-     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.
+     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.
      */
     VendorName: VendorName;
     /**
@@ -2029,6 +2073,45 @@ declare namespace WAFV2 {
     DefaultBehavior: FilterBehavior;
   }
   export type LoginPathString = string;
+  export interface ManagedProductDescriptor {
+    /**
+     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.
+     */
+    VendorName?: VendorName;
+    /**
+     * The name of the managed rule group. For example, AWSManagedRulesAnonymousIpList or AWSManagedRulesATPRuleSet.
+     */
+    ManagedRuleSetName?: EntityName;
+    /**
+     * A unique identifier for the rule group. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
+     */
+    ProductId?: ProductId;
+    /**
+     * For Amazon Web Services Marketplace managed rule groups only, the link to the rule group product page. 
+     */
+    ProductLink?: ProductLink;
+    /**
+     * The display name for the managed rule group. For example, Anonymous IP list or Account takeover prevention.
+     */
+    ProductTitle?: ProductTitle;
+    /**
+     * A short description of the managed rule group.
+     */
+    ProductDescription?: ProductDescription;
+    /**
+     * The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to provide notification of changes to the managed rule group. You can subscribe to the SNS topic to receive notifications when the managed rule group is modified, such as for new versions and for version expiration. For more information, see the Amazon Simple Notification Service Developer Guide.
+     */
+    SnsTopicArn?: ResourceArn;
+    /**
+     * Indicates whether the rule group is versioned. 
+     */
+    IsVersioningSupported?: Boolean;
+    /**
+     * Indicates whether the rule group provides an advanced set of protections, such as the the Amazon Web Services Managed Rules rule groups that are used for WAF intelligent threat mitigation. 
+     */
+    IsAdvancedManagedRuleSet?: Boolean;
+  }
+  export type ManagedProductDescriptors = ManagedProductDescriptor[];
   export interface ManagedRuleGroupConfig {
     /**
      *  Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet.  
@@ -2058,7 +2141,7 @@ declare namespace WAFV2 {
   export type ManagedRuleGroupConfigs = ManagedRuleGroupConfig[];
   export interface ManagedRuleGroupStatement {
     /**
-     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.
+     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.
      */
     VendorName: VendorName;
     /**
@@ -2089,7 +2172,7 @@ declare namespace WAFV2 {
   export type ManagedRuleGroupSummaries = ManagedRuleGroupSummary[];
   export interface ManagedRuleGroupSummary {
     /**
-     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.
+     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.
      */
     VendorName?: VendorName;
     /**
@@ -2260,6 +2343,10 @@ declare namespace WAFV2 {
   export type PolicyString = string;
   export type PopulationSize = number;
   export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD"|string;
+  export type ProductDescription = string;
+  export type ProductId = string;
+  export type ProductLink = string;
+  export type ProductTitle = string;
   export type PublishedVersions = {[key: string]: ManagedRuleSetVersion};
   export interface PutLoggingConfigurationRequest {
     /**
@@ -3269,11 +3356,11 @@ declare namespace WAFV2 {
   export type VersionsToPublish = {[key: string]: VersionToPublish};
   export interface VisibilityConfig {
     /**
-     * A boolean indicating whether WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the WAF console. 
+     * Indicates whether WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the WAF console. 
      */
     SampledRequestsEnabled: Boolean;
     /**
-     * A boolean indicating whether the associated resource sends metrics to Amazon CloudWatch. For the list of available metrics, see WAF Metrics in the WAF Developer Guide. For web ACLs, the metrics are for web requests that have the web ACL default action applied. WAF applies the default action to web requests that pass the inspection of all rules in the web ACL without being either allowed or blocked. For more information, see The web ACL default action in the WAF Developer Guide.
+     * Indicates whether the associated resource sends metrics to Amazon CloudWatch. For the list of available metrics, see WAF Metrics in the WAF Developer Guide. For web ACLs, the metrics are for web requests that have the web ACL default action applied. WAF applies the default action to web requests that pass the inspection of all rules in the web ACL without being either allowed or blocked. For more information, see The web ACL default action in the WAF Developer Guide.
      */
     CloudWatchMetricsEnabled: Boolean;
     /**

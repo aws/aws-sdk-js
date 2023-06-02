@@ -3211,7 +3211,7 @@ declare namespace SageMaker {
      */
     ChannelType?: AutoMLChannelType;
     /**
-     * The content type of the data from the input source. The following are the allowed content types for different problems:   ImageClassification: image/png, image/jpeg, or image/*. The default value is image/*.   TextClassification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
+     * The content type of the data from the input source. The following are the allowed content types for different problems:   ImageClassification: image/png, image/jpeg, image/*    TextClassification: text/csv;header=present   
      */
     ContentType?: ContentType;
     /**
@@ -9383,6 +9383,10 @@ declare namespace SageMaker {
      * The parallelism configuration applied to the pipeline.
      */
     ParallelismConfiguration?: ParallelismConfiguration;
+    /**
+     * The selective execution configuration applied to the pipeline run.
+     */
+    SelectiveExecutionConfig?: SelectiveExecutionConfig;
   }
   export interface DescribePipelineRequest {
     /**
@@ -18102,6 +18106,10 @@ declare namespace SageMaker {
      * Contains a list of pipeline parameters. This list can be empty. 
      */
     PipelineParameters?: ParameterList;
+    /**
+     * The selective execution configuration applied to the pipeline run.
+     */
+    SelectiveExecutionConfig?: SelectiveExecutionConfig;
   }
   export type PipelineExecutionArn = string;
   export type PipelineExecutionDescription = string;
@@ -18149,6 +18157,10 @@ declare namespace SageMaker {
      * Metadata to run the pipeline step.
      */
     Metadata?: PipelineExecutionStepMetadata;
+    /**
+     * The ARN from an execution of the current pipeline from which results are reused for this step.
+     */
+    SelectiveExecutionResult?: SelectiveExecutionResult;
   }
   export type PipelineExecutionStepList = PipelineExecutionStep[];
   export interface PipelineExecutionStepMetadata {
@@ -19694,6 +19706,29 @@ declare namespace SageMaker {
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type Seed = number;
+  export interface SelectedStep {
+    /**
+     * The name of the pipeline step.
+     */
+    StepName: String256;
+  }
+  export type SelectedStepList = SelectedStep[];
+  export interface SelectiveExecutionConfig {
+    /**
+     * The ARN from a reference execution of the current pipeline. Used to copy input collaterals needed for the selected steps to run. The execution status of the pipeline can be either Failed or Success.
+     */
+    SourcePipelineExecutionArn: PipelineExecutionArn;
+    /**
+     * A list of pipeline steps to run. All step(s) in all path(s) between two selected steps should be included.
+     */
+    SelectedSteps: SelectedStepList;
+  }
+  export interface SelectiveExecutionResult {
+    /**
+     * The ARN from an execution of the current pipeline.
+     */
+    SourcePipelineExecutionArn?: PipelineExecutionArn;
+  }
   export interface SendPipelineExecutionStepFailureRequest {
     /**
      * The pipeline generated token from the Amazon SQS queue.
@@ -19951,6 +19986,10 @@ declare namespace SageMaker {
      * This configuration, if specified, overrides the parallelism configuration of the parent pipeline for this specific run.
      */
     ParallelismConfiguration?: ParallelismConfiguration;
+    /**
+     * The selective execution configuration applied to the pipeline run.
+     */
+    SelectiveExecutionConfig?: SelectiveExecutionConfig;
   }
   export interface StartPipelineExecutionResponse {
     /**

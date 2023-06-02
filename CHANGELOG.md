@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1389.0-->
+<!--LATEST=2.1390.0-->
 <!--ENTRYINSERT-->
+
+## 2.1390.0
+* feature: Athena: This release introduces the DeleteCapacityReservation API and the ability to manage capacity reservations using CloudFormation
+* feature: CloudTrail: This feature allows users to start and stop event ingestion on a CloudTrail Lake event data store.
+* feature: SageMaker: This release adds Selective Execution feature that allows SageMaker Pipelines users to run selected steps in a pipeline.
+* feature: WAFV2: Added APIs to describe managed products. The APIs retrieve information about rule groups that are managed by AWS and by AWS Marketplace sellers.
 
 ## 2.1389.0
 * bugfix: amazonprometheus: Enable CORS for Amazon Prometheus

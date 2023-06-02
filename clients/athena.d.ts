@@ -36,11 +36,11 @@ declare class Athena extends Service {
    */
   batchGetQueryExecution(callback?: (err: AWSError, data: Athena.Types.BatchGetQueryExecutionOutput) => void): Request<Athena.Types.BatchGetQueryExecutionOutput, AWSError>;
   /**
-   * Cancels the capacity reservation with the specified name.
+   * Cancels the capacity reservation with the specified name. Cancelled reservations remain in your account and will be deleted 45 days after cancellation. During the 45 days, you cannot re-purpose or reuse a reservation that has been cancelled, but you can refer to its tags and view it for historical reference. 
    */
   cancelCapacityReservation(params: Athena.Types.CancelCapacityReservationInput, callback?: (err: AWSError, data: Athena.Types.CancelCapacityReservationOutput) => void): Request<Athena.Types.CancelCapacityReservationOutput, AWSError>;
   /**
-   * Cancels the capacity reservation with the specified name.
+   * Cancels the capacity reservation with the specified name. Cancelled reservations remain in your account and will be deleted 45 days after cancellation. During the 45 days, you cannot re-purpose or reuse a reservation that has been cancelled, but you can refer to its tags and view it for historical reference. 
    */
   cancelCapacityReservation(callback?: (err: AWSError, data: Athena.Types.CancelCapacityReservationOutput) => void): Request<Athena.Types.CancelCapacityReservationOutput, AWSError>;
   /**
@@ -99,6 +99,14 @@ declare class Athena extends Service {
    * Creates a workgroup with the specified name. A workgroup can be an Apache Spark enabled workgroup or an Athena SQL workgroup.
    */
   createWorkGroup(callback?: (err: AWSError, data: Athena.Types.CreateWorkGroupOutput) => void): Request<Athena.Types.CreateWorkGroupOutput, AWSError>;
+  /**
+   * Deletes a cancelled capacity reservation. A reservation must be cancelled before it can be deleted. A deleted reservation is immediately removed from your account and can no longer be referenced, including by its ARN. A deleted reservation cannot be called by GetCapacityReservation, and deleted reservations do not appear in the output of ListCapacityReservations.
+   */
+  deleteCapacityReservation(params: Athena.Types.DeleteCapacityReservationInput, callback?: (err: AWSError, data: Athena.Types.DeleteCapacityReservationOutput) => void): Request<Athena.Types.DeleteCapacityReservationOutput, AWSError>;
+  /**
+   * Deletes a cancelled capacity reservation. A reservation must be cancelled before it can be deleted. A deleted reservation is immediately removed from your account and can no longer be referenced, including by its ARN. A deleted reservation cannot be called by GetCapacityReservation, and deleted reservations do not appear in the output of ListCapacityReservations.
+   */
+  deleteCapacityReservation(callback?: (err: AWSError, data: Athena.Types.DeleteCapacityReservationOutput) => void): Request<Athena.Types.DeleteCapacityReservationOutput, AWSError>;
   /**
    * Deletes a data catalog.
    */
@@ -1064,6 +1072,14 @@ declare namespace Athena {
     VarCharValue?: datumString;
   }
   export type DefaultExecutorDpuSize = number;
+  export interface DeleteCapacityReservationInput {
+    /**
+     * The name of the capacity reservation to delete.
+     */
+    Name: CapacityReservationName;
+  }
+  export interface DeleteCapacityReservationOutput {
+  }
   export interface DeleteDataCatalogInput {
     /**
      * The name of the data catalog to delete.
@@ -2118,7 +2134,7 @@ declare namespace Athena {
      */
     EngineVersion?: EngineVersion;
     /**
-     * A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.
+     * A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur. The list of parameters is not returned in the response.
      */
     ExecutionParameters?: ExecutionParameters;
     /**

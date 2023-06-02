@@ -12,11 +12,11 @@ declare class CloudTrail extends Service {
   constructor(options?: CloudTrail.Types.ClientConfiguration)
   config: Config & CloudTrail.Types.ClientConfiguration;
   /**
-   * Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home region).
+   * Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home Region).
    */
   addTags(params: CloudTrail.Types.AddTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
-   * Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home region).
+   * Adds one or more tags to a trail, event data store, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. Tag key names must be unique; you cannot have two keys with the same name but different values. If you specify a key without a value, the tag will be created with the specified key and a value of null. You can tag a trail or event data store that applies to all Amazon Web Services Regions only from the Region in which the trail or event data store was created (also known as its home Region).
    */
   addTags(callback?: (err: AWSError, data: CloudTrail.Types.AddTagsResponse) => void): Request<CloudTrail.Types.AddTagsResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class CloudTrail extends Service {
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: CloudTrail.Types.DeleteResourcePolicyResponse) => void): Request<CloudTrail.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
-   * Deletes a trail. This operation must be called from the region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+   * Deletes a trail. This operation must be called from the Region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other Regions) of a trail that is enabled in all Regions.
    */
   deleteTrail(params: CloudTrail.Types.DeleteTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.DeleteTrailResponse) => void): Request<CloudTrail.Types.DeleteTrailResponse, AWSError>;
   /**
-   * Deletes a trail. This operation must be called from the region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+   * Deletes a trail. This operation must be called from the Region in which the trail was created. DeleteTrail cannot be called on the shadow trails (replicated trails in other Regions) of a trail that is enabled in all Regions.
    */
   deleteTrail(callback?: (err: AWSError, data: CloudTrail.Types.DeleteTrailResponse) => void): Request<CloudTrail.Types.DeleteTrailResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class CloudTrail extends Service {
    */
   describeQuery(callback?: (err: AWSError, data: CloudTrail.Types.DescribeQueryResponse) => void): Request<CloudTrail.Types.DescribeQueryResponse, AWSError>;
   /**
-   * Retrieves settings for one or more trails associated with the current region for your account.
+   * Retrieves settings for one or more trails associated with the current Region for your account.
    */
   describeTrails(params: CloudTrail.Types.DescribeTrailsRequest, callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
-   * Retrieves settings for one or more trails associated with the current region for your account.
+   * Retrieves settings for one or more trails associated with the current Region for your account.
    */
   describeTrails(callback?: (err: AWSError, data: CloudTrail.Types.DescribeTrailsResponse) => void): Request<CloudTrail.Types.DescribeTrailsResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class CloudTrail extends Service {
    */
   getTrail(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailResponse) => void): Request<CloudTrail.Types.GetTrailResponse, AWSError>;
   /**
-   * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.
+   * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single Region. To return trail status from all Regions, you must call the operation on each Region.
    */
   getTrailStatus(params: CloudTrail.Types.GetTrailStatusRequest, callback?: (err: AWSError, data: CloudTrail.Types.GetTrailStatusResponse) => void): Request<CloudTrail.Types.GetTrailStatusResponse, AWSError>;
   /**
-   * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single region. To return trail status from all regions, you must call the operation on each region.
+   * Returns a JSON-formatted list of information about the specified trail. Fields include information on delivery errors, Amazon SNS and Amazon S3 errors, and start and stop logging times for each trail. This operation returns trail status from a single Region. To return trail status from all Regions, you must call the operation on each Region.
    */
   getTrailStatus(callback?: (err: AWSError, data: CloudTrail.Types.GetTrailStatusResponse) => void): Request<CloudTrail.Types.GetTrailStatusResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class CloudTrail extends Service {
    */
   listChannels(callback?: (err: AWSError, data: CloudTrail.Types.ListChannelsResponse) => void): Request<CloudTrail.Types.ListChannelsResponse, AWSError>;
   /**
-   * Returns information about all event data stores in the account, in the current region.
+   * Returns information about all event data stores in the account, in the current Region.
    */
   listEventDataStores(params: CloudTrail.Types.ListEventDataStoresRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListEventDataStoresResponse) => void): Request<CloudTrail.Types.ListEventDataStoresResponse, AWSError>;
   /**
-   * Returns information about all event data stores in the account, in the current region.
+   * Returns information about all event data stores in the account, in the current Region.
    */
   listEventDataStores(callback?: (err: AWSError, data: CloudTrail.Types.ListEventDataStoresResponse) => void): Request<CloudTrail.Types.ListEventDataStoresResponse, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class CloudTrail extends Service {
    */
   listImports(callback?: (err: AWSError, data: CloudTrail.Types.ListImportsResponse) => void): Request<CloudTrail.Types.ListImportsResponse, AWSError>;
   /**
-   * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per region. Each digest file is signed with a private key unique to its region. When you validate a digest file from a specific region, you must look in the same region for its corresponding public key. 
+   * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per Region. Each digest file is signed with a private key unique to its Region. When you validate a digest file from a specific Region, you must look in the same Region for its corresponding public key. 
    */
   listPublicKeys(params: CloudTrail.Types.ListPublicKeysRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListPublicKeysResponse) => void): Request<CloudTrail.Types.ListPublicKeysResponse, AWSError>;
   /**
-   * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per region. Each digest file is signed with a private key unique to its region. When you validate a digest file from a specific region, you must look in the same region for its corresponding public key. 
+   * Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.  CloudTrail uses different private and public key pairs per Region. Each digest file is signed with a private key unique to its Region. When you validate a digest file from a specific Region, you must look in the same Region for its corresponding public key. 
    */
   listPublicKeys(callback?: (err: AWSError, data: CloudTrail.Types.ListPublicKeysResponse) => void): Request<CloudTrail.Types.ListPublicKeysResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class CloudTrail extends Service {
    */
   listQueries(callback?: (err: AWSError, data: CloudTrail.Types.ListQueriesResponse) => void): Request<CloudTrail.Types.ListQueriesResponse, AWSError>;
   /**
-   * Lists the tags for the trail, event data store, or channel in the current region.
+   * Lists the tags for the specified trails, event data stores, or channels in the current Region.
    */
   listTags(params: CloudTrail.Types.ListTagsRequest, callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
-   * Lists the tags for the trail, event data store, or channel in the current region.
+   * Lists the tags for the specified trails, event data stores, or channels in the current Region.
    */
   listTags(callback?: (err: AWSError, data: CloudTrail.Types.ListTagsResponse) => void): Request<CloudTrail.Types.ListTagsResponse, AWSError>;
   /**
@@ -244,19 +244,19 @@ declare class CloudTrail extends Service {
    */
   listTrails(callback?: (err: AWSError, data: CloudTrail.Types.ListTrailsResponse) => void): Request<CloudTrail.Types.ListTrailsResponse, AWSError>;
   /**
-   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   Amazon Web Services access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second, per account, per region. If this limit is exceeded, a throttling error occurs. 
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a Region within the last 90 days. Lookup supports the following attributes for management events:   Amazon Web Services access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second, per account, per Region. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(params: CloudTrail.Types.LookupEventsRequest, callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:   Amazon Web Services access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second, per account, per region. If this limit is exceeded, a throttling error occurs. 
+   * Looks up management events or CloudTrail Insights events that are captured by CloudTrail. You can look up events that occurred in a Region within the last 90 days. Lookup supports the following attributes for management events:   Amazon Web Services access key   Event ID   Event name   Event source   Read only   Resource name   Resource type   User name   Lookup supports the following attributes for Insights events:   Event ID   Event name   Event source   All attributes are optional. The default number of results returned is 50, with a maximum of 50 possible. The response includes a token that you can use to get the next page of results.  The rate of lookup requests is limited to two per second, per account, per Region. If this limit is exceeded, a throttling error occurs. 
    */
   lookupEvents(callback?: (err: AWSError, data: CloudTrail.Types.LookupEventsResponse) => void): Request<CloudTrail.Types.LookupEventsResponse, AWSError>;
   /**
-   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. If you want your trail to log Insights events, be sure the event selector enables logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see Logging Insights events for trails in the CloudTrail User Guide. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging management events, Logging data events, and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events in the CloudTrail User Guide.
+   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. If you want your trail to log Insights events, be sure the event selector enables logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see Logging Insights events for trails in the CloudTrail User Guide. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the Region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging management events, Logging data events, and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events in the CloudTrail User Guide.
    */
   putEventSelectors(params: CloudTrail.Types.PutEventSelectorsRequest, callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
-   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. If you want your trail to log Insights events, be sure the event selector enables logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see Logging Insights events for trails in the CloudTrail User Guide. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging management events, Logging data events, and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events in the CloudTrail User Guide.
+   * Configures an event selector or advanced event selectors for your trail. Use event selectors or advanced event selectors to specify management and data event settings for your trail. If you want your trail to log Insights events, be sure the event selector enables logging of the Insights event types you want configured for your trail. For more information about logging Insights events, see Logging Insights events for trails in the CloudTrail User Guide. By default, trails created without specific event selectors are configured to log all read and write management events, and no data events. When an event occurs in your account, CloudTrail evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches any event selector, the trail processes and logs the event. If the event doesn't match any event selector, the trail doesn't log the event. Example   You create an event selector for a trail and specify that you want write-only events.   The EC2 GetConsoleOutput and RunInstances API operations occur in your account.   CloudTrail evaluates whether the events match your event selectors.   The RunInstances is a write-only event and it matches your event selector. The trail logs the event.   The GetConsoleOutput is a read-only event that doesn't match your event selector. The trail doesn't log the event.    The PutEventSelectors operation must be called from the Region in which the trail was created; otherwise, an InvalidHomeRegionException exception is thrown. You can configure up to five event selectors for each trail. For more information, see Logging management events, Logging data events, and Quotas in CloudTrail in the CloudTrail User Guide. You can add advanced event selectors, and conditions for your advanced event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. You can use either AdvancedEventSelectors or EventSelectors, but not both. If you apply AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten. For more information about advanced event selectors, see Logging data events in the CloudTrail User Guide.
    */
   putEventSelectors(callback?: (err: AWSError, data: CloudTrail.Types.PutEventSelectorsResponse) => void): Request<CloudTrail.Types.PutEventSelectorsResponse, AWSError>;
   /**
@@ -300,6 +300,14 @@ declare class CloudTrail extends Service {
    */
   restoreEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.RestoreEventDataStoreResponse) => void): Request<CloudTrail.Types.RestoreEventDataStoreResponse, AWSError>;
   /**
+   * Starts the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To start ingestion, the event data store Status must be STOPPED_INGESTION and the eventCategory must be Management, Data, or ConfigurationItem.
+   */
+  startEventDataStoreIngestion(params: CloudTrail.Types.StartEventDataStoreIngestionRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartEventDataStoreIngestionResponse) => void): Request<CloudTrail.Types.StartEventDataStoreIngestionResponse, AWSError>;
+  /**
+   * Starts the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To start ingestion, the event data store Status must be STOPPED_INGESTION and the eventCategory must be Management, Data, or ConfigurationItem.
+   */
+  startEventDataStoreIngestion(callback?: (err: AWSError, data: CloudTrail.Types.StartEventDataStoreIngestionResponse) => void): Request<CloudTrail.Types.StartEventDataStoreIngestionResponse, AWSError>;
+  /**
    *  Starts an import of logged trail events from a source S3 bucket to a destination event data store. By default, CloudTrail only imports events contained in the S3 bucket's CloudTrail prefix and the prefixes inside the CloudTrail prefix, and does not check prefixes for other Amazon Web Services services. If you want to import CloudTrail events contained in another prefix, you must include the prefix in the S3LocationUri. For more considerations about importing trail events, see Considerations.   When you start a new import, the Destinations and ImportSource parameters are required. Before starting a new import, disable any access control lists (ACLs) attached to the source S3 bucket. For more information about disabling ACLs, see Controlling ownership of objects and disabling ACLs for your bucket.   When you retry an import, the ImportID parameter is required.    If the destination event data store is for an organization, you must use the management account to import trail events. You cannot use the delegated administrator account for the organization.  
    */
   startImport(params: CloudTrail.Types.StartImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
@@ -308,11 +316,11 @@ declare class CloudTrail extends Service {
    */
   startImport(callback?: (err: AWSError, data: CloudTrail.Types.StartImportResponse) => void): Request<CloudTrail.Types.StartImportResponse, AWSError>;
   /**
-   * Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+   * Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all Regions, this operation must be called from the Region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other Regions) of a trail that is enabled in all Regions.
    */
   startLogging(params: CloudTrail.Types.StartLoggingRequest, callback?: (err: AWSError, data: CloudTrail.Types.StartLoggingResponse) => void): Request<CloudTrail.Types.StartLoggingResponse, AWSError>;
   /**
-   * Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.
+   * Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all Regions, this operation must be called from the Region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other Regions) of a trail that is enabled in all Regions.
    */
   startLogging(callback?: (err: AWSError, data: CloudTrail.Types.StartLoggingResponse) => void): Request<CloudTrail.Types.StartLoggingResponse, AWSError>;
   /**
@@ -324,6 +332,14 @@ declare class CloudTrail extends Service {
    */
   startQuery(callback?: (err: AWSError, data: CloudTrail.Types.StartQueryResponse) => void): Request<CloudTrail.Types.StartQueryResponse, AWSError>;
   /**
+   * Stops the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To stop ingestion, the event data store Status must be ENABLED and the eventCategory must be Management, Data, or ConfigurationItem.
+   */
+  stopEventDataStoreIngestion(params: CloudTrail.Types.StopEventDataStoreIngestionRequest, callback?: (err: AWSError, data: CloudTrail.Types.StopEventDataStoreIngestionResponse) => void): Request<CloudTrail.Types.StopEventDataStoreIngestionResponse, AWSError>;
+  /**
+   * Stops the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN. To stop ingestion, the event data store Status must be ENABLED and the eventCategory must be Management, Data, or ConfigurationItem.
+   */
+  stopEventDataStoreIngestion(callback?: (err: AWSError, data: CloudTrail.Types.StopEventDataStoreIngestionResponse) => void): Request<CloudTrail.Types.StopEventDataStoreIngestionResponse, AWSError>;
+  /**
    *  Stops a specified import. 
    */
   stopImport(params: CloudTrail.Types.StopImportRequest, callback?: (err: AWSError, data: CloudTrail.Types.StopImportResponse) => void): Request<CloudTrail.Types.StopImportResponse, AWSError>;
@@ -332,11 +348,11 @@ declare class CloudTrail extends Service {
    */
   stopImport(callback?: (err: AWSError, data: CloudTrail.Types.StopImportResponse) => void): Request<CloudTrail.Types.StopImportResponse, AWSError>;
   /**
-   * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.
+   * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all Regions, this operation must be called from the Region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other Regions) of a trail enabled in all Regions.
    */
   stopLogging(params: CloudTrail.Types.StopLoggingRequest, callback?: (err: AWSError, data: CloudTrail.Types.StopLoggingResponse) => void): Request<CloudTrail.Types.StopLoggingResponse, AWSError>;
   /**
-   * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all regions, this operation must be called from the region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail enabled in all regions.
+   * Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail. Under most circumstances, there is no need to use this action. You can update a trail without stopping it first. This action is the only way to stop recording. For a trail enabled in all Regions, this operation must be called from the Region in which the trail was created, or an InvalidHomeRegionException will occur. This operation cannot be called on the shadow trails (replicated trails in other Regions) of a trail enabled in all Regions.
    */
   stopLogging(callback?: (err: AWSError, data: CloudTrail.Types.StopLoggingResponse) => void): Request<CloudTrail.Types.StopLoggingResponse, AWSError>;
   /**
@@ -356,11 +372,11 @@ declare class CloudTrail extends Service {
    */
   updateEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
   /**
-   * Updates trail settings that control what events you are logging, and how to handle log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
+   * Updates trail settings that control what events you are logging, and how to handle log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the Region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
    */
   updateTrail(params: CloudTrail.Types.UpdateTrailRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateTrailResponse) => void): Request<CloudTrail.Types.UpdateTrailResponse, AWSError>;
   /**
-   * Updates trail settings that control what events you are logging, and how to handle log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
+   * Updates trail settings that control what events you are logging, and how to handle log files. Changes to a trail do not require stopping the CloudTrail service. Use this action to designate an existing bucket for log delivery. If the existing bucket has previously been a target for CloudTrail log files, an IAM policy exists for the bucket. UpdateTrail must be called from the Region in which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
    */
   updateTrail(callback?: (err: AWSError, data: CloudTrail.Types.UpdateTrailResponse) => void): Request<CloudTrail.Types.UpdateTrailResponse, AWSError>;
 }
@@ -368,7 +384,7 @@ declare namespace CloudTrail {
   export type AccountId = string;
   export interface AddTagsRequest {
     /**
-     * Specifies the ARN of the trail, event data store, or channel to which one or more tags will be added. The format of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  The format of an event data store ARN is: arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  The format of a channel ARN is: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
+     * Specifies the ARN of the trail, event data store, or channel to which one or more tags will be added. The format of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  The format of an event data store ARN is: arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  The format of a channel ARN is: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
      */
     ResourceId: String;
     /**
@@ -499,7 +515,7 @@ declare namespace CloudTrail {
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * Specifies whether the event data store includes events from all regions, or only from the region in which the event data store is created.
+     * Specifies whether the event data store includes events from all Regions, or only from the Region in which the event data store is created.
      */
     MultiRegionEnabled?: Boolean;
     /**
@@ -519,6 +535,10 @@ declare namespace CloudTrail {
      * Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.  Disabling or deleting the KMS key, or removing CloudTrail permissions on the key, prevents CloudTrail from logging events to the event data store, and prevents users from querying the data in the event data store that was encrypted with the key. After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you disable or delete a KMS key that you are using with an event data store, delete or back up your event data store.  CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:    alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012     12345678-1234-1234-1234-123456789012   
      */
     KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * Specifies whether the event data store should start ingesting live events. The default is true.
+     */
+    StartIngestion?: Boolean;
   }
   export interface CreateEventDataStoreResponse {
     /**
@@ -538,7 +558,7 @@ declare namespace CloudTrail {
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * Indicates whether the event data store collects events from all regions, or only from the region in which it was created.
+     * Indicates whether the event data store collects events from all Regions, or only from the Region in which it was created.
      */
     MultiRegionEnabled?: Boolean;
     /**
@@ -589,7 +609,7 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail is created in the current region or in all regions. The default is false, which creates a trail only in the region where you are signed in. As a best practice, consider creating trails that log events in all regions.
+     * Specifies whether the trail is created in the current Region or in all Regions. The default is false, which creates a trail only in the Region where you are signed in. As a best practice, consider creating trails that log events in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
@@ -640,7 +660,7 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail exists in one region or in all regions.
+     * Specifies whether the trail exists in one Region or in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
@@ -765,11 +785,11 @@ declare namespace CloudTrail {
   }
   export interface DescribeTrailsRequest {
     /**
-     * Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  If an empty list is specified, information for the trail in the current region is returned.   If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current region is returned.   If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.    If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region and current account. To return information about a trail in another region, you must specify its trail ARN. 
+     * Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  If an empty list is specified, information for the trail in the current Region is returned.   If an empty list is specified and IncludeShadowTrails is false, then information for all trails in the current Region is returned.   If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current Region and any associated shadow trails in other Regions is returned.    If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current Region and current account. To return information about a trail in another Region, you must specify its trail ARN. 
      */
     trailNameList?: TrailNameList;
     /**
-     * Specifies whether to include shadow trails in the response. A shadow trail is the replication in a region of a trail that was created in a different region, or in the case of an organization trail, the replication of an organization trail in member accounts. If you do not include shadow trails, organization trails in a member account and region replication trails will not be returned. The default is true.
+     * Specifies whether to include shadow trails in the response. A shadow trail is the replication in a Region of a trail that was created in a different Region, or in the case of an organization trail, the replication of an organization trail in member accounts. If you do not include shadow trails, organization trails in a member account and Region replication trails will not be returned. The default is true.
      */
     includeShadowTrails?: Boolean;
   }
@@ -845,7 +865,7 @@ declare namespace CloudTrail {
      */
     TerminationProtectionEnabled?: TerminationProtectionEnabled;
     /**
-     * The status of an event data store. Values are ENABLED and PENDING_DELETION.
+     * The status of an event data store.
      */
     Status?: EventDataStoreStatus;
     /**
@@ -853,7 +873,7 @@ declare namespace CloudTrail {
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
+     * Indicates whether the event data store includes events from all Regions, or only from the Region in which it was created.
      */
     MultiRegionEnabled?: Boolean;
     /**
@@ -876,7 +896,7 @@ declare namespace CloudTrail {
   export type EventDataStoreArn = string;
   export type EventDataStoreKmsKeyId = string;
   export type EventDataStoreName = string;
-  export type EventDataStoreStatus = "CREATED"|"ENABLED"|"PENDING_DELETION"|string;
+  export type EventDataStoreStatus = "CREATED"|"ENABLED"|"PENDING_DELETION"|"STARTING_INGESTION"|"STOPPING_INGESTION"|"STOPPED_INGESTION"|string;
   export type EventDataStores = EventDataStore[];
   export interface EventSelector {
     /**
@@ -884,7 +904,7 @@ declare namespace CloudTrail {
      */
     ReadWriteType?: ReadWriteType;
     /**
-     * Specify if you want your event selector to include management events for your trail.  For more information, see Management Events in the CloudTrail User Guide. By default, the value is true. The first copy of management events is free. You are charged for additional copies of management events that you are logging on any subsequent trail in the same region. For more information about CloudTrail pricing, see CloudTrail Pricing.
+     * Specify if you want your event selector to include management events for your trail.  For more information, see Management Events in the CloudTrail User Guide. By default, the value is true. The first copy of management events is free. You are charged for additional copies of management events that you are logging on any subsequent trail in the same Region. For more information about CloudTrail pricing, see CloudTrail Pricing.
      */
     IncludeManagementEvents?: Boolean;
     /**
@@ -892,7 +912,7 @@ declare namespace CloudTrail {
      */
     DataResources?: DataResources;
     /**
-     * An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out Key Management Service or Amazon RDS Data API events by containing kms.amazonaws.com or rdsdata.amazonaws.com. By default, ExcludeManagementEventSources is empty, and KMS and Amazon RDS Data API events are logged to your trail. You can exclude management event sources only in regions that support the event source.
+     * An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out Key Management Service or Amazon RDS Data API events by containing kms.amazonaws.com or rdsdata.amazonaws.com. By default, ExcludeManagementEventSources is empty, and KMS and Amazon RDS Data API events are logged to your trail. You can exclude management event sources only in Regions that support the event source.
      */
     ExcludeManagementEventSources?: ExcludeManagementEventSources;
   }
@@ -919,7 +939,7 @@ declare namespace CloudTrail {
      */
     Source?: Source;
     /**
-     *  Provides information about the advanced event selectors configured for the channel, and whether the channel applies to all regions or a single region. 
+     *  Provides information about the advanced event selectors configured for the channel, and whether the channel applies to all Regions or a single Region. 
      */
     SourceConfig?: SourceConfig;
     /**
@@ -947,7 +967,7 @@ declare namespace CloudTrail {
      */
     Name?: EventDataStoreName;
     /**
-     * The status of an event data store. Values can be ENABLED and PENDING_DELETION.
+     * The status of an event data store.
      */
     Status?: EventDataStoreStatus;
     /**
@@ -955,7 +975,7 @@ declare namespace CloudTrail {
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
+     * Indicates whether the event data store includes events from all Regions, or only from the Region in which it was created.
      */
     MultiRegionEnabled?: Boolean;
     /**
@@ -1130,7 +1150,7 @@ declare namespace CloudTrail {
   }
   export interface GetTrailStatusRequest {
     /**
-     * Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
+     * Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another Region), you must specify its ARN. The following is the format of a trail ARN.  arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail 
      */
     Name: String;
   }
@@ -1346,7 +1366,7 @@ declare namespace CloudTrail {
   }
   export interface ListEventDataStoresResponse {
     /**
-     * Contains information about event data stores in the account, in the current region.
+     * Contains information about event data stores in the account, in the current Region.
      */
     EventDataStores?: EventDataStores;
     /**
@@ -1471,7 +1491,7 @@ declare namespace CloudTrail {
   }
   export interface ListTagsRequest {
     /**
-     * Specifies a list of trail, event data store, or channel ARNs whose tags will be listed. The list has a limit of 20 ARNs.
+     * Specifies a list of trail, event data store, or channel ARNs whose tags will be listed. The list has a limit of 20 ARNs.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  Example channel ARN format: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
      */
     ResourceIdList: ResourceIdList;
     /**
@@ -1497,7 +1517,7 @@ declare namespace CloudTrail {
   }
   export interface ListTrailsResponse {
     /**
-     * Returns the name, ARN, and home region of trails in the current account.
+     * Returns the name, ARN, and home Region of trails in the current account.
      */
     Trails?: Trails;
     /**
@@ -1718,7 +1738,7 @@ declare namespace CloudTrail {
   }
   export interface RemoveTagsRequest {
     /**
-     * Specifies the ARN of the trail, event data store, or channel from which tags should be removed.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  Example channel ARN format: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
+     * Specifies the ARN of the trail, event data store, or channel from which tags should be removed.  Example trail ARN format: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail  Example event data store ARN format: arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE  Example channel ARN format: arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890 
      */
     ResourceId: String;
     /**
@@ -1777,7 +1797,7 @@ declare namespace CloudTrail {
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * Indicates whether the event data store is collecting events from all regions, or only from the region in which the event data store was created.
+     * Indicates whether the event data store is collecting events from all Regions, or only from the Region in which the event data store was created.
      */
     MultiRegionEnabled?: Boolean;
     /**
@@ -1812,7 +1832,7 @@ declare namespace CloudTrail {
      */
     S3LocationUri: String;
     /**
-     *  The region associated with the source S3 bucket. 
+     *  The Region associated with the source S3 bucket. 
      */
     S3BucketRegion: String;
     /**
@@ -1825,13 +1845,21 @@ declare namespace CloudTrail {
   export type Source = string;
   export interface SourceConfig {
     /**
-     *  Specifies whether the channel applies to a single region or to all regions.
+     *  Specifies whether the channel applies to a single Region or to all Regions.
      */
     ApplyToAllRegions?: Boolean;
     /**
      *  The advanced event selectors that are configured for the channel.
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
+  }
+  export interface StartEventDataStoreIngestionRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store for which you want to start ingestion.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface StartEventDataStoreIngestionResponse {
   }
   export interface StartImportRequest {
     /**
@@ -1912,6 +1940,14 @@ declare namespace CloudTrail {
      * The ID of the started query.
      */
     QueryId?: UUID;
+  }
+  export interface StopEventDataStoreIngestionRequest {
+    /**
+     * The ARN (or ID suffix of the ARN) of the event data store for which you want to stop ingestion.
+     */
+    EventDataStore: EventDataStoreArn;
+  }
+  export interface StopEventDataStoreIngestionResponse {
   }
   export interface StopImportRequest {
     /**
@@ -2006,11 +2042,11 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail exists only in one region or exists in all regions.
+     * Specifies whether the trail exists only in one Region or exists in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * The region in which the trail was created.
+     * The Region in which the trail was created.
      */
     HomeRegion?: String;
     /**
@@ -2110,7 +2146,7 @@ declare namespace CloudTrail {
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * Specifies whether an event data store collects events from all regions, or only from the region in which it was created.
+     * Specifies whether an event data store collects events from all Regions, or only from the Region in which it was created.
      */
     MultiRegionEnabled?: Boolean;
     /**
@@ -2140,7 +2176,7 @@ declare namespace CloudTrail {
      */
     Name?: EventDataStoreName;
     /**
-     * The status of an event data store. Values can be ENABLED and PENDING_DELETION.
+     * The status of an event data store.
      */
     Status?: EventDataStoreStatus;
     /**
@@ -2148,7 +2184,7 @@ declare namespace CloudTrail {
      */
     AdvancedEventSelectors?: AdvancedEventSelectors;
     /**
-     * Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
+     * Indicates whether the event data store includes events from all Regions, or only from the Region in which it was created.
      */
     MultiRegionEnabled?: Boolean;
     /**
@@ -2198,7 +2234,7 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail applies only to the current region or to all regions. The default is false. If the trail exists only in the current region and this value is set to true, shadow trails (replications of the trail) will be created in the other regions. If the trail exists in all regions and this value is set to false, the trail will remain in the region where it was created, and its shadow trails in other regions will be deleted. As a best practice, consider using trails that log events in all regions.
+     * Specifies whether the trail applies only to the current Region or to all Regions. The default is false. If the trail exists only in the current Region and this value is set to true, shadow trails (replications of the trail) will be created in the other Regions. If the trail exists in all Regions and this value is set to false, the trail will remain in the Region where it was created, and its shadow trails in other Regions will be deleted. As a best practice, consider using trails that log events in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
@@ -2248,7 +2284,7 @@ declare namespace CloudTrail {
      */
     IncludeGlobalServiceEvents?: Boolean;
     /**
-     * Specifies whether the trail exists in one region or in all regions.
+     * Specifies whether the trail exists in one Region or in all Regions.
      */
     IsMultiRegionTrail?: Boolean;
     /**
