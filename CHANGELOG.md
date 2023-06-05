@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1390.0-->
+<!--LATEST=2.1391.0-->
 <!--ENTRYINSERT-->
+
+## 2.1391.0
+* feature: CloudFormation: AWS CloudFormation StackSets provides customers with three new APIs to activate, deactivate, and describe AWS Organizations trusted access which is needed to get started with service-managed StackSets.
+* feature: EC2: Making InstanceTagAttribute as the required parameter for the DeregisterInstanceEventNotificationAttributes and RegisterInstanceEventNotificationAttributes APIs.
+* feature: Finspace: Releasing new Managed kdb Insights APIs
+* feature: FraudDetector: Added new variable types, new DateTime data type, and new rules engine functions for interacting and working with DateTime data types.
+* feature: KMS: This release includes feature to import customer's asymmetric (RSA and ECC) and HMAC keys into KMS.  It also includes feature to allow customers to specify number of days to schedule a KMS key deletion as a policy condition key.
+* feature: Keyspaces: This release adds support for MRR GA launch, and includes multiregion support in create-keyspace, get-keyspace, and list-keyspace.
+* feature: Lambda: Add Ruby 3.2 (ruby3.2) Runtime support to AWS Lambda.
+* feature: MWAA: This release adds ROLLING_BACK and CREATING_SNAPSHOT environment statuses for Amazon MWAA environments.
 
 ## 2.1390.0
 * feature: Athena: This release introduces the DeleteCapacityReservation API and the ability to manage capacity reservations using CloudFormation

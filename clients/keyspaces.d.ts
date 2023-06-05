@@ -195,6 +195,10 @@ declare namespace Keyspaces {
      * A list of key-value pair tags to be attached to the keyspace. For more information, see Adding tags and labels to Amazon Keyspaces resources in the Amazon Keyspaces Developer Guide.
      */
     tags?: TagList;
+    /**
+     *  The replication specification of the keyspace includes:    replicationStrategy - the required value is SINGLE_REGION or MULTI_REGION.    regionList - if the replicationStrategy is MULTI_REGION, the regionList requires the current Region and at least one additional Amazon Web Services Region where the keyspace is going to be replicated in. The maximum number of supported replication Regions including the current Region is six.  
+     */
+    replicationSpecification?: ReplicationSpecification;
   }
   export interface CreateKeyspaceResponse {
     /**
@@ -299,9 +303,17 @@ declare namespace Keyspaces {
      */
     keyspaceName: KeyspaceName;
     /**
-     * The ARN of the keyspace.
+     * Returns the ARN of the keyspace.
      */
     resourceArn: ARN;
+    /**
+     *  Returns the replication strategy of the keyspace. The options are SINGLE_REGION or MULTI_REGION. 
+     */
+    replicationStrategy: rs;
+    /**
+     *  If the replicationStrategy of the keyspace is MULTI_REGION, a list of replication Regions is returned. 
+     */
+    replicationRegions?: RegionList;
   }
   export interface GetTableRequest {
     /**
@@ -377,6 +389,14 @@ declare namespace Keyspaces {
      * The unique identifier of the keyspace in the format of an Amazon Resource Name (ARN).
      */
     resourceArn: ARN;
+    /**
+     *  This property specifies if a keyspace is a single Region keyspace or a multi-Region keyspace. The available values are SINGLE_REGION or MULTI_REGION. 
+     */
+    replicationStrategy: rs;
+    /**
+     *  If the replicationStrategy of the keyspace is MULTI_REGION, a list of replication Regions is returned. 
+     */
+    replicationRegions?: RegionList;
   }
   export type KeyspaceSummaryList = KeyspaceSummary[];
   export interface ListKeyspacesRequest {
@@ -472,6 +492,17 @@ declare namespace Keyspaces {
      * Specifies the earliest possible restore point of the table in ISO 8601 format.
      */
     earliestRestorableTimestamp?: Timestamp;
+  }
+  export type RegionList = region[];
+  export interface ReplicationSpecification {
+    /**
+     *  The replicationStrategy of a keyspace, the required value is SINGLE_REGION or MULTI_REGION. 
+     */
+    replicationStrategy: rs;
+    /**
+     *  The regionList can contain up to six Amazon Web Services Regions where the keyspace is replicated in. 
+     */
+    regionList?: RegionList;
   }
   export interface RestoreTableRequest {
     /**
@@ -652,6 +683,8 @@ declare namespace Keyspaces {
     resourceArn: ARN;
   }
   export type kmsKeyARN = string;
+  export type region = string;
+  export type rs = "SINGLE_REGION"|"MULTI_REGION"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -12852,7 +12852,7 @@ declare namespace EC2 {
     /**
      * Information about the tag keys to deregister.
      */
-    InstanceTagAttribute?: DeregisterInstanceTagAttributeRequest;
+    InstanceTagAttribute: DeregisterInstanceTagAttributeRequest;
   }
   export interface DeregisterInstanceEventNotificationAttributesResult {
     /**
@@ -30658,7 +30658,7 @@ declare namespace EC2 {
     /**
      * Information about the tag keys to register.
      */
-    InstanceTagAttribute?: RegisterInstanceTagAttributeRequest;
+    InstanceTagAttribute: RegisterInstanceTagAttributeRequest;
   }
   export interface RegisterInstanceEventNotificationAttributesResult {
     /**

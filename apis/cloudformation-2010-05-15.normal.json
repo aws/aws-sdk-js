@@ -11,6 +11,29 @@
     "xmlNamespace": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
   },
   "operations": {
+    "ActivateOrganizationsAccess": {
+      "name": "ActivateOrganizationsAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ActivateOrganizationsAccessInput"
+      },
+      "output": {
+        "shape": "ActivateOrganizationsAccessOutput",
+        "resultWrapper": "ActivateOrganizationsAccessResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidOperationException"
+        },
+        {
+          "shape": "OperationNotFoundException"
+        }
+      ],
+      "documentation": "<p>Activate trusted access with Organizations. With trusted access between StackSets and Organizations activated, the management account has permissions to create and manage StackSets for your organization.</p>"
+    },
     "ActivateType": {
       "name": "ActivateType",
       "http": {
@@ -32,7 +55,7 @@
           "shape": "TypeNotFoundException"
         }
       ],
-      "documentation": "<p>Activates a public third-party extension, making it available for use in stack templates. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html\">Using public extensions</a> in the <i>CloudFormation User Guide</i>.</p> <p>Once you have activated a public third-party extension in your account and region, use <a href=\"AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
+      "documentation": "<p>Activates a public third-party extension, making it available for use in stack templates. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html\">Using public extensions</a> in the <i>CloudFormation User Guide</i>.</p> <p>Once you have activated a public third-party extension in your account and Region, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
       "idempotent": true
     },
     "BatchDescribeTypeConfigurations": {
@@ -56,7 +79,7 @@
           "shape": "CFNRegistryException"
         }
       ],
-      "documentation": "<p>Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry for the account and region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+      "documentation": "<p>Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry for the account and Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
     },
     "CancelUpdateStack": {
       "name": "CancelUpdateStack",
@@ -210,6 +233,29 @@
       ],
       "documentation": "<p>Creates a stack set.</p>"
     },
+    "DeactivateOrganizationsAccess": {
+      "name": "DeactivateOrganizationsAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeactivateOrganizationsAccessInput"
+      },
+      "output": {
+        "shape": "DeactivateOrganizationsAccessOutput",
+        "resultWrapper": "DeactivateOrganizationsAccessResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidOperationException"
+        },
+        {
+          "shape": "OperationNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deactivates trusted access with Organizations. If trusted access is deactivated, the management account does not have permissions to create and manage service-managed StackSets for your organization.</p>"
+    },
     "DeactivateType": {
       "name": "DeactivateType",
       "http": {
@@ -231,7 +277,7 @@
           "shape": "TypeNotFoundException"
         }
       ],
-      "documentation": "<p>Deactivates a public extension that was previously activated in this account and region.</p> <p>Once deactivated, an extension can't be used in any CloudFormation operation. This includes stack update operations where the stack template includes the extension, even if no updates are being made to the extension. In addition, deactivated extensions aren't automatically updated if a new version of the extension is released.</p>",
+      "documentation": "<p>Deactivates a public extension that was previously activated in this account and Region.</p> <p>Once deactivated, an extension can't be used in any CloudFormation operation. This includes stack update operations where the stack template includes the extension, even if no updates are being made to the extension. In addition, deactivated extensions aren't automatically updated if a new version of the extension is released.</p>",
       "idempotent": true
     },
     "DeleteChangeSet": {
@@ -404,6 +450,29 @@
       ],
       "documentation": "<p>Returns hook-related information for the change set and a list of changes that CloudFormation makes when you run the change set.</p>"
     },
+    "DescribeOrganizationsAccess": {
+      "name": "DescribeOrganizationsAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeOrganizationsAccessInput"
+      },
+      "output": {
+        "shape": "DescribeOrganizationsAccessOutput",
+        "resultWrapper": "DescribeOrganizationsAccessResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidOperationException"
+        },
+        {
+          "shape": "OperationNotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about the account's <code>OrganizationAccess</code> status. This API can be called either by the management account or the delegated administrator by using the <code>CallAs</code> parameter. This API can also be called without the <code>CallAs</code> parameter by the management account.</p>"
+    },
     "DescribePublisher": {
       "name": "DescribePublisher",
       "http": {
@@ -438,7 +507,7 @@
         "shape": "DescribeStackDriftDetectionStatusOutput",
         "resultWrapper": "DescribeStackDriftDetectionStatusResult"
       },
-      "documentation": "<p>Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has <i>drifted</i>, from it's expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information about stack and resource drift, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <a>DetectStackDrift</a> to initiate a stack drift detection operation. <code>DetectStackDrift</code> returns a <code>StackDriftDetectionId</code> you can use to monitor the progress of the operation using <code>DescribeStackDriftDetectionStatus</code>. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and its resources.</p>"
+      "documentation": "<p>Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information about stack and resource drift, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <a>DetectStackDrift</a> to initiate a stack drift detection operation. <code>DetectStackDrift</code> returns a <code>StackDriftDetectionId</code> you can use to monitor the progress of the operation using <code>DescribeStackDriftDetectionStatus</code>. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and its resources.</p>"
     },
     "DescribeStackEvents": {
       "name": "DescribeStackEvents",
@@ -476,7 +545,7 @@
           "shape": "StackInstanceNotFoundException"
         }
       ],
-      "documentation": "<p>Returns the stack instance that's associated with the specified stack set, Amazon Web Services account, and Region.</p> <p>For a list of stack instances that are associated with a specific stack set, use <a>ListStackInstances</a>.</p>"
+      "documentation": "<p>Returns the stack instance that's associated with the specified StackSet, Amazon Web Services account, and Amazon Web Services Region.</p> <p>For a list of stack instances that are associated with a specific StackSet, use <a>ListStackInstances</a>.</p>"
     },
     "DescribeStackResource": {
       "name": "DescribeStackResource",
@@ -541,7 +610,7 @@
           "shape": "StackSetNotFoundException"
         }
       ],
-      "documentation": "<p>Returns the description of the specified stack set.</p>"
+      "documentation": "<p>Returns the description of the specified StackSet.</p>"
     },
     "DescribeStackSetOperation": {
       "name": "DescribeStackSetOperation",
@@ -564,7 +633,7 @@
           "shape": "OperationNotFoundException"
         }
       ],
-      "documentation": "<p>Returns the description of the specified stack set operation.</p>"
+      "documentation": "<p>Returns the description of the specified StackSet operation.</p>"
     },
     "DescribeStacks": {
       "name": "DescribeStacks",
@@ -639,7 +708,7 @@
         "shape": "DetectStackDriftOutput",
         "resultWrapper": "DetectStackDriftResult"
       },
-      "documentation": "<p>Detects whether a stack's actual configuration differs, or has <i>drifted</i>, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For each resource in the stack that supports drift detection, CloudFormation compares the actual configuration of the resource with its expected template configuration. Only resource properties explicitly defined in the stack template are checked for drift. A stack is considered to have drifted if one or more of its resources differ from their expected template configurations. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <code>DetectStackDrift</code> to detect drift on all supported resources for a given stack, or <a>DetectStackResourceDrift</a> to detect drift on individual resources.</p> <p>For a list of stack resources that currently support drift detection, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html\">Resources that Support Drift Detection</a>.</p> <p> <code>DetectStackDrift</code> can take up to several minutes, depending on the number of resources contained within the stack. Use <a>DescribeStackDriftDetectionStatus</a> to monitor the progress of a detect stack drift operation. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and its resources.</p> <p>When detecting drift on a stack, CloudFormation doesn't detect drift on any nested stacks belonging to that stack. Perform <code>DetectStackDrift</code> directly on the nested stack itself.</p>"
+      "documentation": "<p>Detects whether a stack's actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For each resource in the stack that supports drift detection, CloudFormation compares the actual configuration of the resource with its expected template configuration. Only resource properties explicitly defined in the stack template are checked for drift. A stack is considered to have drifted if one or more of its resources differ from their expected template configurations. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <code>DetectStackDrift</code> to detect drift on all supported resources for a given stack, or <a>DetectStackResourceDrift</a> to detect drift on individual resources.</p> <p>For a list of stack resources that currently support drift detection, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html\">Resources that Support Drift Detection</a>.</p> <p> <code>DetectStackDrift</code> can take up to several minutes, depending on the number of resources contained within the stack. Use <a>DescribeStackDriftDetectionStatus</a> to monitor the progress of a detect stack drift operation. Once the drift detection operation has completed, use <a>DescribeStackResourceDrifts</a> to return drift information about the stack and its resources.</p> <p>When detecting drift on a stack, CloudFormation doesn't detect drift on any nested stacks belonging to that stack. Perform <code>DetectStackDrift</code> directly on the nested stack itself.</p>"
     },
     "DetectStackResourceDrift": {
       "name": "DetectStackResourceDrift",
@@ -654,7 +723,7 @@
         "shape": "DetectStackResourceDriftOutput",
         "resultWrapper": "DetectStackResourceDriftResult"
       },
-      "documentation": "<p>Returns information about whether a resource's actual configuration differs, or has <i>drifted</i>, from it's expected configuration, as defined in the stack template and any values specified as template parameters. This information includes actual and expected property values for resources in which CloudFormation detects drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information about stack and resource drift, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <code>DetectStackResourceDrift</code> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all resources in a given stack that support drift detection.</p> <p>Resources that don't currently support drift detection can't be checked. For a list of resources that support drift detection, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html\">Resources that Support Drift Detection</a>.</p>"
+      "documentation": "<p>Returns information about whether a resource's actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. This information includes actual and expected property values for resources in which CloudFormation detects drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information about stack and resource drift, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Use <code>DetectStackResourceDrift</code> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all resources in a given stack that support drift detection.</p> <p>Resources that don't currently support drift detection can't be checked. For a list of resources that support drift detection, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html\">Resources that Support Drift Detection</a>.</p>"
     },
     "DetectStackSetDrift": {
       "name": "DetectStackSetDrift",
@@ -817,7 +886,7 @@
           "shape": "StaleRequestException"
         }
       ],
-      "documentation": "<p>Import existing stacks into a new stack sets. Use the stack import operation to import up to 10 stacks into a new stack set in the same account as the source stack or in a different administrator account and Region, by specifying the stack ID of the stack you intend to import.</p> <note> <p> <code>ImportStacksToStackSet</code> is only supported by self-managed permissions.</p> </note>"
+      "documentation": "<p>Import existing stacks into a new stack sets. Use the stack import operation to import up to 10 stacks into a new stack set in the same account as the source stack or in a different administrator account and Region, by specifying the stack ID of the stack you intend to import.</p>"
     },
     "ListChangeSets": {
       "name": "ListChangeSets",
@@ -1056,7 +1125,7 @@
           "shape": "TypeNotFoundException"
         }
       ],
-      "documentation": "<p>Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information about publishing extensions, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html\">RegisterPublisher</a>.</p>",
+      "documentation": "<p>Publishes the specified extension to the CloudFormation registry as a public extension in this Region. Public extensions are available for use by all CloudFormation users. For more information about publishing extensions, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html\">RegisterPublisher</a>.</p>",
       "idempotent": true
     },
     "RecordHandlerProgress": {
@@ -1122,7 +1191,7 @@
           "shape": "CFNRegistryException"
         }
       ],
-      "documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:</p> <ul> <li> <p>Validating the extension schema.</p> </li> <li> <p>Determining which handlers, if any, have been specified for the extension.</p> </li> <li> <p>Making the extension available for use in your account.</p> </li> </ul> <p>For more information about how to develop extensions and ready them for registration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use <a href=\"AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p> <p>Once you have registered a private extension in your account and region, use <a href=\"AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
+      "documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your Amazon Web Services account, and includes:</p> <ul> <li> <p>Validating the extension schema.</p> </li> <li> <p>Determining which handlers, if any, have been specified for the extension.</p> </li> <li> <p>Making the extension available for use in your account.</p> </li> </ul> <p>For more information about how to develop extensions and ready them for registration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per Region. Use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p> <p>Once you have registered a private extension in your account and Region, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
       "idempotent": true
     },
     "RollbackStack": {
@@ -1177,7 +1246,7 @@
           "shape": "TypeNotFoundException"
         }
       ],
-      "documentation": "<p>Specifies the configuration data for a registered CloudFormation extension, in the given account and region.</p> <p>To view the current configuration data for an extension, refer to the <code>ConfigurationSchema</code> element of <a href=\"AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p> <important> <p>It's strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see <a href=\"https://docs.aws.amazon.com/\">Using dynamic references to specify template values</a> in the <i>CloudFormation User Guide</i>.</p> </important>"
+      "documentation": "<p>Specifies the configuration data for a registered CloudFormation extension, in the given account and Region.</p> <p>To view the current configuration data for an extension, refer to the <code>ConfigurationSchema</code> element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p> <important> <p>It's strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see <a href=\"https://docs.aws.amazon.com/\">Using dynamic references to specify template values</a> in the <i>CloudFormation User Guide</i>.</p> </important>"
     },
     "SetTypeDefaultVersion": {
       "name": "SetTypeDefaultVersion",
@@ -1261,7 +1330,7 @@
           "shape": "TypeNotFoundException"
         }
       ],
-      "documentation": "<p>Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.</p> <ul> <li> <p>For resource types, this includes passing all contracts tests defined for the type.</p> </li> <li> <p>For modules, this includes determining if the module's model meets all necessary requirements.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing\">Testing your public extension prior to publishing</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>If you don't specify a version, CloudFormation uses the default version of the extension in your account and region for testing.</p> <p>To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see <a href=\"AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p> <p>Once you've initiated testing on an extension using <code>TestType</code>, you can pass the returned <code>TypeVersionArn</code> into <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a> to monitor the current test status and test status description for the extension.</p> <p>An extension must have a test status of <code>PASSED</code> before it can be published. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>.</p>",
+      "documentation": "<p>Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.</p> <ul> <li> <p>For resource types, this includes passing all contracts tests defined for the type.</p> </li> <li> <p>For modules, this includes determining if the module's model meets all necessary requirements.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing\">Testing your public extension prior to publishing</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>If you don't specify a version, CloudFormation uses the default version of the extension in your account and Region for testing.</p> <p>To perform testing, CloudFormation assumes the execution role specified when the type was registered. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p> <p>Once you've initiated testing on an extension using <code>TestType</code>, you can pass the returned <code>TypeVersionArn</code> into <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a> to monitor the current test status and test status description for the extension.</p> <p>An extension must have a test status of <code>PASSED</code> before it can be published. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>.</p>",
       "idempotent": true
     },
     "UpdateStack": {
@@ -1462,6 +1531,14 @@
       "min": 1,
       "pattern": "(s3://|http(s?)://).+"
     },
+    "ActivateOrganizationsAccessInput": {
+      "type": "structure",
+      "members": {}
+    },
+    "ActivateOrganizationsAccessOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "ActivateTypeInput": {
       "type": "structure",
       "members": {
@@ -1483,14 +1560,15 @@
         },
         "TypeNameAlias": {
           "shape": "TypeName",
-          "documentation": "<p>An alias to assign to the public extension, in this account and region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.</p> <p>An extension alias must be unique within a given account and region. You can activate the same public resource multiple times in the same account and region, using different type name aliases.</p>"
+          "documentation": "<p>An alias to assign to the public extension, in this account and Region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and Region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.</p> <p>An extension alias must be unique within a given account and Region. You can activate the same public resource multiple times in the same account and Region, using different type name aliases.</p>"
         },
         "AutoUpdate": {
           "shape": "AutoUpdate",
-          "documentation": "<p>Whether to automatically update the extension in this account and region when a new <i>minor</i> version is published by the extension publisher. Major versions released by the publisher must be manually updated.</p> <p>The default is <code>true</code>.</p>"
+          "documentation": "<p>Whether to automatically update the extension in this account and Region when a new <i>minor</i> version is published by the extension publisher. Major versions released by the publisher must be manually updated.</p> <p>The default is <code>true</code>.</p>"
         },
         "LoggingConfig": {
-          "shape": "LoggingConfig"
+          "shape": "LoggingConfig",
+          "documentation": "<p>Contains logging configuration information for an extension.</p>"
         },
         "ExecutionRoleArn": {
           "shape": "RoleArn",
@@ -1511,7 +1589,7 @@
       "members": {
         "Arn": {
           "shape": "PrivateTypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the activated extension, in this account and region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the activated extension, in this account and Region.</p>"
         }
       }
     },
@@ -1559,7 +1637,8 @@
           "documentation": "<p>The error message.</p>"
         },
         "TypeConfigurationIdentifier": {
-          "shape": "TypeConfigurationIdentifier"
+          "shape": "TypeConfigurationIdentifier",
+          "documentation": "<p>Identifying information for the configuration of a CloudFormation extension.</p>"
         }
       },
       "documentation": "<p>Detailed information concerning an error generated during the setting of configuration data for a CloudFormation extension.</p>"
@@ -1624,7 +1703,7 @@
       "members": {
         "StackName": {
           "shape": "StackName",
-          "documentation": "<p>The name or the unique stack ID that's associated with the stack.</p>"
+          "documentation": "<note> <p>If you don't pass a parameter to <code>StackName</code>, the API returns a response that describes all resources in the account.</p> <p>The IAM policy below can be added to IAM policies when you want to limit resource-level permissions and avoid returning a response when no parameter is sent in the request:</p> <p> <code>{ \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Deny\", \"Action\": \"cloudformation:DescribeStacks\", \"NotResource\": \"arn:aws:cloudformation:*:*:stack/*/*\" }] }</code> </p> </note> <p>The name or the unique stack ID that's associated with the stack.</p>"
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
@@ -2253,12 +2332,20 @@
     "CreationTime": {
       "type": "timestamp"
     },
+    "DeactivateOrganizationsAccessInput": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeactivateOrganizationsAccessOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DeactivateTypeInput": {
       "type": "structure",
       "members": {
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The type name of the extension, in this account and region. If you specified a type name alias when enabling the extension, use the type name alias.</p> <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+          "documentation": "<p>The type name of the extension, in this account and Region. If you specified a type name alias when enabling the extension, use the type name alias.</p> <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
         },
         "Type": {
           "shape": "ThirdPartyType",
@@ -2266,7 +2353,7 @@
         },
         "Arn": {
           "shape": "PrivateTypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p> <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p> <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
         }
       }
     },
@@ -2634,6 +2721,24 @@
       },
       "documentation": "<p>The output for the <a>DescribeChangeSet</a> action.</p>"
     },
+    "DescribeOrganizationsAccessInput": {
+      "type": "structure",
+      "members": {
+        "CallAs": {
+          "shape": "CallAs",
+          "documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>CloudFormation User Guide</i>.</p> </li> </ul>"
+        }
+      }
+    },
+    "DescribeOrganizationsAccessOutput": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "OrganizationStatus",
+          "documentation": "<p>Presents the status of the <code>OrganizationAccess</code>.</p>"
+        }
+      }
+    },
     "DescribePublisherInput": {
       "type": "structure",
       "members": {
@@ -2934,7 +3039,7 @@
       "members": {
         "StackName": {
           "shape": "StackName",
-          "documentation": "<p>The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:</p> <ul> <li> <p>Running stacks: You can specify either the stack's name or its unique stack ID.</p> </li> <li> <p>Deleted stacks: You must specify the unique stack ID.</p> </li> </ul> <p>Default: There is no default value.</p>"
+          "documentation": "<note> <p>If you don't pass a parameter to <code>StackName</code>, the API returns a response that describes all resources in the account. This requires <code>ListStacks</code> and <code>DescribeStacks</code> permissions.</p> <p>The IAM policy below can be added to IAM policies when you want to limit resource-level permissions and avoid returning a response when no parameter is sent in the request:</p> <p>{ \"Version\": \"2012-10-17\", \"Statement\": [{ \"Effect\": \"Deny\", \"Action\": \"cloudformation:DescribeStacks\", \"NotResource\": \"arn:aws:cloudformation:*:*:stack/*/*\" }] }</p> </note> <p>The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:</p> <ul> <li> <p>Running stacks: You can specify either the stack's name or its unique stack ID.</p> </li> <li> <p>Deleted stacks: You must specify the unique stack ID.</p> </li> </ul> <p>Default: There is no default value.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -3067,7 +3172,7 @@
         },
         "ConfigurationSchema": {
           "shape": "ConfigurationSchema",
-          "documentation": "<p>A JSON string that represent the current configuration data for the extension in this account and region.</p> <p>To set the configuration data for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>A JSON string that represent the current configuration data for the extension in this account and Region.</p> <p>To set the configuration data for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
         },
         "PublisherId": {
           "shape": "PublisherId",
@@ -3075,11 +3180,11 @@
         },
         "OriginalTypeName": {
           "shape": "TypeName",
-          "documentation": "<p>For public extensions that have been activated for this account and region, the type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>For public extensions that have been activated for this account and Region, the type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and Region, CloudFormation treats that alias as the extension's type name within the account and Region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
         },
         "OriginalTypeArn": {
           "shape": "TypeArn",
-          "documentation": "<p>For public extensions that have been activated for this account and region, the Amazon Resource Name (ARN) of the public extension.</p>"
+          "documentation": "<p>For public extensions that have been activated for this account and Region, the Amazon Resource Name (ARN) of the public extension.</p>"
         },
         "PublicVersionNumber": {
           "shape": "PublicVersionNumber",
@@ -3091,11 +3196,11 @@
         },
         "IsActivated": {
           "shape": "IsActivated",
-          "documentation": "<p>Whether the extension is activated in the account and region.</p> <p>This only applies to public third-party extensions. For all other extensions, CloudFormation returns <code>null</code>.</p>"
+          "documentation": "<p>Whether the extension is activated in the account and Region.</p> <p>This only applies to public third-party extensions. For all other extensions, CloudFormation returns <code>null</code>.</p>"
         },
         "AutoUpdate": {
           "shape": "AutoUpdate",
-          "documentation": "<p>Whether CloudFormation automatically updates the extension in this account and region when a new <i>minor</i> version is published by the extension publisher. Major versions released by the publisher must be manually updated. For more information, see <a href=\"AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable\">Activating public extensions for use in your account</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>Whether CloudFormation automatically updates the extension in this account and Region when a new <i>minor</i> version is published by the extension publisher. Major versions released by the publisher must be manually updated. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable\">Activating public extensions for use in your account</a> in the <i>CloudFormation User Guide</i>.</p>"
         }
       }
     },
@@ -3205,7 +3310,8 @@
           "documentation": "<p>The name of the stack set on which to perform the drift detection operation.</p>"
         },
         "OperationPreferences": {
-          "shape": "StackSetOperationPreferences"
+          "shape": "StackSetOperationPreferences",
+          "documentation": "<p>The user-specified preferences for how CloudFormation performs a stack set operation.</p> <p>For more information about maximum concurrent accounts and failure tolerance, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options\">Stack set operation options</a>.</p>"
         },
         "OperationId": {
           "shape": "ClientRequestToken",
@@ -3627,7 +3733,8 @@
           "documentation": "<p>The list of OU ID's to which the stacks being imported has to be mapped as deployment target.</p>"
         },
         "OperationPreferences": {
-          "shape": "StackSetOperationPreferences"
+          "shape": "StackSetOperationPreferences",
+          "documentation": "<p>The user-specified preferences for how CloudFormation performs a stack set operation.</p> <p>For more information about maximum concurrent accounts and failure tolerance, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options\">Stack set operation options</a>.</p>"
         },
         "OperationId": {
           "shape": "ClientRequestToken",
@@ -4087,7 +4194,7 @@
       "members": {
         "Visibility": {
           "shape": "Visibility",
-          "documentation": "<p>The scope at which the extensions are visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: Extensions that are visible and usable within this account and region. This includes:</p> <ul> <li> <p>Private extensions you have registered in this account and region.</p> </li> <li> <p>Public extensions that you have activated in this account and region.</p> </li> </ul> </li> <li> <p> <code>PUBLIC</code>: Extensions that are publicly visible and available to be activated within any Amazon Web Services account. This includes extensions from Amazon Web Services, in addition to third-party publishers.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>"
+          "documentation": "<p>The scope at which the extensions are visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: Extensions that are visible and usable within this account and Region. This includes:</p> <ul> <li> <p>Private extensions you have registered in this account and Region.</p> </li> <li> <p>Public extensions that you have activated in this account and Region.</p> </li> </ul> </li> <li> <p> <code>PUBLIC</code>: Extensions that are publicly visible and available to be activated within any Amazon Web Services account. This includes extensions from Amazon Web Services, in addition to third-party publishers.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>"
         },
         "ProvisioningType": {
           "shape": "ProvisioningType",
@@ -4210,10 +4317,10 @@
         },
         "LogicalIdHierarchy": {
           "shape": "LogicalIdHierarchy",
-          "documentation": "<p>A concatenated list of the logical IDs of the module or modules containing the resource. Modules are listed starting with the inner-most nested module, and separated by <code>/</code>.</p> <p>In the following example, the resource was created from a module, <code>moduleA</code>, that's nested inside a parent module, <code>moduleB</code>.</p> <p> <code>moduleA/moduleB</code> </p> <p>For more information, see <a href=\"AWSCloudFormation/latest/UserGuide/modules.html#module-ref-resources\">Referencing resources in a module</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>A concatenated list of the logical IDs of the module or modules containing the resource. Modules are listed starting with the inner-most nested module, and separated by <code>/</code>.</p> <p>In the following example, the resource was created from a module, <code>moduleA</code>, that's nested inside a parent module, <code>moduleB</code>.</p> <p> <code>moduleA/moduleB</code> </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html#module-ref-resources\">Referencing resources in a module</a> in the <i>CloudFormation User Guide</i>.</p>"
         }
       },
-      "documentation": "<p>Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.</p> <p>For more information about modules, see <a href=\"AWSCloudFormation/latest/UserGuide/modules.html\">Using modules to encapsulate and reuse resource configurations</a> in the <i>CloudFormation User Guide</i>.</p>"
+      "documentation": "<p>Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.</p> <p>For more information about modules, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html\">Using modules to encapsulate and reuse resource configurations</a> in the <i>CloudFormation User Guide</i>.</p>"
     },
     "MonitoringTimeInMinutes": {
       "type": "integer",
@@ -4291,6 +4398,14 @@
     "OptionalSecureUrl": {
       "type": "string",
       "max": 4096
+    },
+    "OrganizationStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "DISABLED_PERMANENTLY"
+      ]
     },
     "OrganizationalUnitId": {
       "type": "string",
@@ -4680,7 +4795,7 @@
         },
         "ExecutionRoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension.</p> <p>For CloudFormation to assume the specified execution role, the role must contain a trust relationship with the CloudFormation service principle (<code>resources.cloudformation.amazonaws.com</code>). For more information about adding trust relationships, see <a href=\"IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy\">Modifying a role trust policy</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>If your extension calls Amazon Web Services APIs in any of its handlers, you must create an <i> <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution role</a> </i> that includes the necessary permissions to call those Amazon Web Services APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource type handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource type handler, thereby supplying your resource type with the appropriate credentials.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension.</p> <p>For CloudFormation to assume the specified execution role, the role must contain a trust relationship with the CloudFormation service principle (<code>resources.cloudformation.amazonaws.com</code>). For more information about adding trust relationships, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy\">Modifying a role trust policy</a> in the <i>Identity and Access Management User Guide</i>.</p> <p>If your extension calls Amazon Web Services APIs in any of its handlers, you must create an <i> <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution role</a> </i> that includes the necessary permissions to call those Amazon Web Services APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource type handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource type handler, thereby supplying your resource type with the appropriate credentials.</p>"
         },
         "ClientRequestToken": {
           "shape": "RequestToken",
@@ -4744,11 +4859,11 @@
       "members": {
         "TypeNameAlias": {
           "shape": "TypeName",
-          "documentation": "<p>An alias assigned to the public extension, in this account and region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.</p>"
+          "documentation": "<p>An alias assigned to the public extension, in this account and Region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and Region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.</p>"
         },
         "OriginalTypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>The type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and Region, CloudFormation treats that alias as the extension's type name within the account and Region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
         },
         "PublisherId": {
           "shape": "PublisherId",
@@ -5166,11 +5281,11 @@
       "members": {
         "TypeArn": {
           "shape": "TypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region.</p> <p>Do not include the extension versions suffix at the end of the ARN. You can set the configuration for an extension, but not for a specific extension version.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and Region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and Region.</p> <p>Do not include the extension versions suffix at the end of the ARN. You can set the configuration for an extension, but not for a specific extension version.</p>"
         },
         "Configuration": {
           "shape": "TypeConfiguration",
-          "documentation": "<p>The configuration data for the extension, in this account and region.</p> <p>The configuration data must be formatted as JSON, and validate against the schema returned in the <code>ConfigurationSchema</code> response element of <a href=\"AWSCloudFormation/latest/APIReference/API_DescribeType.html\">API_DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining account-level configuration data for an extension</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
+          "documentation": "<p>The configuration data for the extension, in this account and Region.</p> <p>The configuration data must be formatted as JSON, and validate against the schema returned in the <code>ConfigurationSchema</code> response element of <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining account-level configuration data for an extension</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
         },
         "ConfigurationAlias": {
           "shape": "TypeConfigurationAlias",
@@ -5191,7 +5306,7 @@
       "members": {
         "ConfigurationArn": {
           "shape": "TypeConfigurationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and region.</p> <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and <code>TypeName</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and Region.</p> <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and <code>TypeName</code>.</p>"
         }
       }
     },
@@ -5342,7 +5457,7 @@
         },
         "DriftInformation": {
           "shape": "StackDriftInformation",
-          "documentation": "<p>Information about whether a stack's actual configuration differs, or has <i>drifted</i>, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p>"
+          "documentation": "<p>Information about whether a stack's actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p>"
         }
       },
       "documentation": "<p>The Stack data type.</p>"
@@ -6058,7 +6173,8 @@
           "documentation": "<p>Describes whether StackSets performs non-conflicting operations concurrently and queues conflicting operations.</p>"
         },
         "Regions": {
-          "shape": "RegionList"
+          "shape": "RegionList",
+          "documentation": "<p>Returns a list of all Amazon Web Services Regions the given StackSet has stack instances deployed in. The Amazon Web Services Regions list output is in no particular order.</p>"
         }
       },
       "documentation": "<p>A structure that contains information about a stack set. A stack set enables you to provision stacks into Amazon Web Services accounts and across Regions by using a single CloudFormation template. In the stack set, you specify the template to use, in addition to any parameters and capabilities that the template requires.</p>"
@@ -6341,7 +6457,8 @@
           "documentation": "<p>Detailed information about the stack set operation.</p>"
         },
         "OperationPreferences": {
-          "shape": "StackSetOperationPreferences"
+          "shape": "StackSetOperationPreferences",
+          "documentation": "<p>The user-specified preferences for how CloudFormation performs a stack set operation.</p> <p>For more information about maximum concurrent accounts and failure tolerance, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options\">Stack set operation options</a>.</p>"
         }
       },
       "documentation": "<p>The structures that contain summary information about the specified operation.</p>"
@@ -6494,7 +6611,7 @@
         },
         "DriftInformation": {
           "shape": "StackDriftInformationSummary",
-          "documentation": "<p>Summarizes information about whether a stack's actual configuration differs, or has <i>drifted</i>, from it's expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p>"
+          "documentation": "<p>Summarizes information about whether a stack's actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html\">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p>"
         }
       },
       "documentation": "<p>The StackSummary Data Type</p>"
@@ -6650,7 +6767,7 @@
         },
         "VersionId": {
           "shape": "TypeVersionId",
-          "documentation": "<p>The version of the extension to test.</p> <p>You can specify the version id with either <code>Arn</code>, or with <code>TypeName</code> and <code>Type</code>.</p> <p>If you don't specify a version, CloudFormation uses the default version of the extension in this account and region for testing.</p>"
+          "documentation": "<p>The version of the extension to test.</p> <p>You can specify the version id with either <code>Arn</code>, or with <code>TypeName</code> and <code>Type</code>.</p> <p>If you don't specify a version, CloudFormation uses the default version of the extension in this account and Region for testing.</p>"
         },
         "LogDeliveryBucket": {
           "shape": "S3Bucket",
@@ -6730,7 +6847,7 @@
       "members": {
         "Arn": {
           "shape": "TypeConfigurationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and Region.</p>"
         },
         "Alias": {
           "shape": "TypeConfigurationAlias",
@@ -6738,7 +6855,7 @@
         },
         "Configuration": {
           "shape": "TypeConfiguration",
-          "documentation": "<p>A JSON string specifying the configuration data for the extension, in this account and region.</p> <p>If a configuration hasn't been set for a specified extension, CloudFormation returns <code>{}</code>.</p>"
+          "documentation": "<p>A JSON string specifying the configuration data for the extension, in this account and Region.</p> <p>If a configuration hasn't been set for a specified extension, CloudFormation returns <code>{}</code>.</p>"
         },
         "LastUpdated": {
           "shape": "Timestamp",
@@ -6746,7 +6863,7 @@
         },
         "TypeArn": {
           "shape": "TypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and Region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and Region.</p>"
         },
         "TypeName": {
           "shape": "TypeName",
@@ -6757,7 +6874,7 @@
           "documentation": "<p>Whether this configuration data is the default configuration for the extension.</p>"
         }
       },
-      "documentation": "<p>Detailed information concerning the specification of a CloudFormation extension in a given account and region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+      "documentation": "<p>Detailed information concerning the specification of a CloudFormation extension in a given account and Region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
     },
     "TypeConfigurationDetailsList": {
       "type": "list",
@@ -6770,7 +6887,7 @@
       "members": {
         "TypeArn": {
           "shape": "TypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and Region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and Region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and Region.</p>"
         },
         "TypeConfigurationAlias": {
           "shape": "TypeConfigurationAlias",
@@ -6778,7 +6895,7 @@
         },
         "TypeConfigurationArn": {
           "shape": "TypeConfigurationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration, in this account and region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration, in this account and Region.</p>"
         },
         "Type": {
           "shape": "ThirdPartyType",
@@ -6803,7 +6920,7 @@
       "members": {
         "Category": {
           "shape": "Category",
-          "documentation": "<p>The category of extensions to return.</p> <ul> <li> <p> <code>REGISTERED</code>: Private extensions that have been registered for this account and region.</p> </li> <li> <p> <code>ACTIVATED</code>: Public extensions that have been activated for this account and region.</p> </li> <li> <p> <code>THIRD_PARTY</code>: Extensions available for use from publishers other than Amazon. This includes:</p> <ul> <li> <p>Private extensions registered in the account.</p> </li> <li> <p>Public extensions from publishers other than Amazon, whether activated or not.</p> </li> </ul> </li> <li> <p> <code>AWS_TYPES</code>: Extensions available for use from Amazon.</p> </li> </ul>"
+          "documentation": "<p>The category of extensions to return.</p> <ul> <li> <p> <code>REGISTERED</code>: Private extensions that have been registered for this account and Region.</p> </li> <li> <p> <code>ACTIVATED</code>: Public extensions that have been activated for this account and Region.</p> </li> <li> <p> <code>THIRD_PARTY</code>: Extensions available for use from publishers other than Amazon. This includes:</p> <ul> <li> <p>Private extensions registered in the account.</p> </li> <li> <p>Public extensions from publishers other than Amazon, whether activated or not.</p> </li> </ul> </li> <li> <p> <code>AWS_TYPES</code>: Extensions available for use from Amazon.</p> </li> </ul>"
         },
         "PublisherId": {
           "shape": "PublisherId",
@@ -6851,7 +6968,7 @@
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the extension.</p> <p>If you specified a <code>TypeNameAlias</code> when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate this extension</a> in your account and region, CloudFormation considers that alias as the type name.</p>"
+          "documentation": "<p>The name of the extension.</p> <p>If you specified a <code>TypeNameAlias</code> when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate this extension</a> in your account and Region, CloudFormation considers that alias as the type name.</p>"
         },
         "DefaultVersionId": {
           "shape": "TypeVersionId",
@@ -6875,15 +6992,15 @@
         },
         "OriginalTypeName": {
           "shape": "TypeName",
-          "documentation": "<p>For public extensions that have been activated for this account and region, the type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>For public extensions that have been activated for this account and Region, the type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and Region, CloudFormation treats that alias as the extension's type name within the account and Region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
         },
         "PublicVersionNumber": {
           "shape": "PublicVersionNumber",
-          "documentation": "<p>For public extensions that have been activated for this account and region, the version of the public extension to be used for CloudFormation operations in this account and Region.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extension in this account and region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>For public extensions that have been activated for this account and Region, the version of the public extension to be used for CloudFormation operations in this account and Region.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extension in this account and Region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
         },
         "LatestPublicVersion": {
           "shape": "PublicVersionNumber",
-          "documentation": "<p>For public extensions that have been activated for this account and region, the latest version of the public extension <i>that is available</i>. For any extensions other than activated third-arty extensions, CloudFormation returns <code>null</code>.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extension in this account and region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>For public extensions that have been activated for this account and Region, the latest version of the public extension <i>that is available</i>. For any extensions other than activated third-arty extensions, CloudFormation returns <code>null</code>.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extension in this account and Region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
         },
         "PublisherIdentity": {
           "shape": "IdentityProvider",
@@ -6895,7 +7012,7 @@
         },
         "IsActivated": {
           "shape": "IsActivated",
-          "documentation": "<p>Whether the extension is activated for this account and region.</p> <p>This applies only to third-party public extensions. Extensions published by Amazon are activated by default.</p>"
+          "documentation": "<p>Whether the extension is activated for this account and Region.</p> <p>This applies only to third-party public extensions. Extensions published by Amazon are activated by default.</p>"
         }
       },
       "documentation": "<p>Contains summary information about the specified CloudFormation extension.</p>"
@@ -6960,7 +7077,7 @@
         },
         "PublicVersionNumber": {
           "shape": "PublicVersionNumber",
-          "documentation": "<p>For public extensions that have been activated for this account and region, the version of the public extension to be used for CloudFormation operations in this account and region. For any extensions other than activated third-arty extensions, CloudFormation returns <code>null</code>.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extension in this account and region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+          "documentation": "<p>For public extensions that have been activated for this account and Region, the version of the public extension to be used for CloudFormation operations in this account and Region. For any extensions other than activated third-arty extensions, CloudFormation returns <code>null</code>.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extension in this account and Region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
         }
       },
       "documentation": "<p>Contains summary information about a specific version of a CloudFormation extension.</p>"

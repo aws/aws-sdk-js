@@ -1037,7 +1037,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's environment variables. When Lambda SnapStart is activated, this key is also used to encrypt your function's snapshot. If you don't provide a customer managed key, Lambda uses a default service key.
+     * The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's environment variables. When Lambda SnapStart is activated, Lambda also uses this key is to encrypt your function's snapshot. If you deploy your function using a container image, Lambda also uses this key to encrypt your function when it's deployed. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR). If you don't provide a customer managed key, Lambda uses a default service key.
      */
     KMSKeyArn?: KMSKeyArn;
     /**
@@ -1360,7 +1360,7 @@ declare namespace Lambda {
      */
     SelfManagedEventSource?: SelfManagedEventSource;
     /**
-     * (Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.  The minimum value that can be set is 60 seconds. 
+     * (Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.  The minimum valid value for maximum record age is 60s. Although values less than 60 and greater than -1 fall within the parameter's absolute range, they are not allowed 
      */
     MaximumRecordAgeInSeconds?: MaximumRecordAgeInSeconds;
     /**
@@ -1889,7 +1889,7 @@ declare namespace Lambda {
      */
     Version?: LayerVersionNumber;
     /**
-     * The layer's compatible runtimes.
+     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     CompatibleRuntimes?: CompatibleRuntimes;
     /**
@@ -2239,7 +2239,7 @@ declare namespace Lambda {
      */
     CreatedDate?: Timestamp;
     /**
-     * The layer's compatible runtimes.
+     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     CompatibleRuntimes?: CompatibleRuntimes;
     /**
@@ -2446,7 +2446,7 @@ declare namespace Lambda {
   }
   export interface ListLayerVersionsRequest {
     /**
-     * A runtime identifier. For example, go1.x.
+     * A runtime identifier. For example, go1.x. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     CompatibleRuntime?: Runtime;
     /**
@@ -2478,7 +2478,7 @@ declare namespace Lambda {
   }
   export interface ListLayersRequest {
     /**
-     * A runtime identifier. For example, go1.x.
+     * A runtime identifier. For example, go1.x. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     CompatibleRuntime?: Runtime;
     /**
@@ -2652,7 +2652,7 @@ declare namespace Lambda {
      */
     Content: LayerVersionContentInput;
     /**
-     * A list of compatible function runtimes. Used for filtering with ListLayers and ListLayerVersions.
+     * A list of compatible function runtimes. Used for filtering with ListLayers and ListLayerVersions. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     CompatibleRuntimes?: CompatibleRuntimes;
     /**
@@ -2690,7 +2690,7 @@ declare namespace Lambda {
      */
     Version?: LayerVersionNumber;
     /**
-     * The layer's compatible runtimes.
+     * The layer's compatible runtimes. The following list includes deprecated runtimes. For more information, see Runtime deprecation policy.
      */
     CompatibleRuntimes?: CompatibleRuntimes;
     /**
@@ -2887,7 +2887,7 @@ declare namespace Lambda {
   export type ResourceArn = string;
   export type ResponseStreamingInvocationType = "RequestResponse"|"DryRun"|string;
   export type RoleArn = string;
-  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|"nodejs18.x"|"python3.10"|"java17"|string;
+  export type Runtime = "nodejs"|"nodejs4.3"|"nodejs6.10"|"nodejs8.10"|"nodejs10.x"|"nodejs12.x"|"nodejs14.x"|"nodejs16.x"|"java8"|"java8.al2"|"java11"|"python2.7"|"python3.6"|"python3.7"|"python3.8"|"python3.9"|"dotnetcore1.0"|"dotnetcore2.0"|"dotnetcore2.1"|"dotnetcore3.1"|"dotnet6"|"nodejs4.3-edge"|"go1.x"|"ruby2.5"|"ruby2.7"|"provided"|"provided.al2"|"nodejs18.x"|"python3.10"|"java17"|"ruby3.2"|string;
   export type RuntimeVersionArn = string;
   export interface RuntimeVersionConfig {
     /**
@@ -3217,7 +3217,7 @@ declare namespace Lambda {
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
-     * The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's environment variables. When Lambda SnapStart is activated, this key is also used to encrypt your function's snapshot. If you don't provide a customer managed key, Lambda uses a default service key.
+     * The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's environment variables. When Lambda SnapStart is activated, Lambda also uses this key is to encrypt your function's snapshot. If you deploy your function using a container image, Lambda also uses this key to encrypt your function when it's deployed. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR). If you don't provide a customer managed key, Lambda uses a default service key.
      */
     KMSKeyArn?: KMSKeyArn;
     /**

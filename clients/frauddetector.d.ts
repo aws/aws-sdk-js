@@ -148,11 +148,11 @@ declare class FraudDetector extends Service {
    */
   deleteEntityType(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEntityTypeResult) => void): Request<FraudDetector.Types.DeleteEntityTypeResult, AWSError>;
   /**
-   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector.
+   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector. If deleteAuditHistory is True, event data is available through search for up to 30 seconds after the delete operation is completed.
    */
   deleteEvent(params: FraudDetector.Types.DeleteEventRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventResult) => void): Request<FraudDetector.Types.DeleteEventResult, AWSError>;
   /**
-   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector.
+   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector. If deleteAuditHistory is True, event data is available through search for up to 30 seconds after the delete operation is completed.
    */
   deleteEvent(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventResult) => void): Request<FraudDetector.Types.DeleteEventResult, AWSError>;
   /**
@@ -1129,7 +1129,7 @@ declare namespace FraudDetector {
      */
     name: string;
     /**
-     * The data type.
+     * The data type of the variable.
      */
     dataType: DataType;
     /**
@@ -1157,7 +1157,7 @@ declare namespace FraudDetector {
   }
   export type CsvIndexToVariableMap = {[key: string]: string};
   export type DataSource = "EVENT"|"MODEL_SCORE"|"EXTERNAL_MODEL_SCORE"|string;
-  export type DataType = "STRING"|"INTEGER"|"FLOAT"|"BOOLEAN"|string;
+  export type DataType = "STRING"|"INTEGER"|"FLOAT"|"BOOLEAN"|"DATETIME"|string;
   export interface DataValidationMetrics {
     /**
      * The file-specific model training data validation messages.
@@ -1223,7 +1223,7 @@ declare namespace FraudDetector {
      */
     eventTypeName: identifier;
     /**
-     * Specifies whether or not to delete any predictions associated with the event.
+     * Specifies whether or not to delete any predictions associated with the event. If set to True, 
      */
     deleteAuditHistory?: DeleteAuditHistory;
   }
