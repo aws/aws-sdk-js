@@ -844,6 +844,17 @@ declare namespace Inspector2 {
     groupKey?: GroupKey;
   }
   export type CountsList = Counts[];
+  export interface CoverageDateFilter {
+    /**
+     * A timestamp representing the end of the time period to filter results by.
+     */
+    endInclusive?: DateTimeTimestamp;
+    /**
+     * A timestamp representing the start of the time period to filter results by.
+     */
+    startInclusive?: DateTimeTimestamp;
+  }
+  export type CoverageDateFilterList = CoverageDateFilter[];
   export interface CoverageFilterCriteria {
     /**
      * An array of Amazon Web Services account IDs to return coverage statistics for.
@@ -874,11 +885,15 @@ declare namespace Inspector2 {
      */
     lambdaFunctionTags?: CoverageMapFilterList;
     /**
+     * Filters Amazon Web Services resources based on whether Amazon Inspector has checked them for vulnerabilities within the specified time range.
+     */
+    lastScannedAt?: CoverageDateFilterList;
+    /**
      * An array of Amazon Web Services resource IDs to return coverage statistics for.
      */
     resourceId?: CoverageStringFilterList;
     /**
-     * An array of Amazon Web Services resource types to return coverage statistics for. The values can be AWS_EC2_INSTANCE or AWS_ECR_REPOSITORY.
+     * An array of Amazon Web Services resource types to return coverage statistics for. The values can be AWS_EC2_INSTANCE, AWS_LAMBDA_FUNCTION or AWS_ECR_REPOSITORY.
      */
     resourceType?: CoverageStringFilterList;
     /**
@@ -929,6 +944,10 @@ declare namespace Inspector2 {
      * The Amazon Web Services account ID of the covered resource.
      */
     accountId: AccountId;
+    /**
+     * The date and time the resource was last checked for vulnerabilities.
+     */
+    lastScannedAt?: DateTimeTimestamp;
     /**
      * The ID of the covered resource.
      */

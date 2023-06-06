@@ -164,11 +164,11 @@ declare class Iot extends Service {
    */
   createBillingGroup(callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-25 or NIST P-384 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
+   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
    */
   createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-25 or NIST P-384 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
+   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
@@ -251,6 +251,22 @@ declare class Iot extends Service {
    * Creates an IoT OTA update on a target group of things or groups. Requires permission to access the CreateOTAUpdate action.
    */
   createOTAUpdate(callback?: (err: AWSError, data: Iot.Types.CreateOTAUpdateResponse) => void): Request<Iot.Types.CreateOTAUpdateResponse, AWSError>;
+  /**
+   * Creates an IoT software package that can be deployed to your fleet. Requires permission to access the CreatePackage and GetIndexingConfiguration actions.
+   */
+  createPackage(params: Iot.Types.CreatePackageRequest, callback?: (err: AWSError, data: Iot.Types.CreatePackageResponse) => void): Request<Iot.Types.CreatePackageResponse, AWSError>;
+  /**
+   * Creates an IoT software package that can be deployed to your fleet. Requires permission to access the CreatePackage and GetIndexingConfiguration actions.
+   */
+  createPackage(callback?: (err: AWSError, data: Iot.Types.CreatePackageResponse) => void): Request<Iot.Types.CreatePackageResponse, AWSError>;
+  /**
+   * Creates a new version for an existing IoT software package. Requires permission to access the CreatePackageVersion and GetIndexingConfiguration actions.
+   */
+  createPackageVersion(params: Iot.Types.CreatePackageVersionRequest, callback?: (err: AWSError, data: Iot.Types.CreatePackageVersionResponse) => void): Request<Iot.Types.CreatePackageVersionResponse, AWSError>;
+  /**
+   * Creates a new version for an existing IoT software package. Requires permission to access the CreatePackageVersion and GetIndexingConfiguration actions.
+   */
+  createPackageVersion(callback?: (err: AWSError, data: Iot.Types.CreatePackageVersionResponse) => void): Request<Iot.Types.CreatePackageVersionResponse, AWSError>;
   /**
    * Creates an IoT policy. The created policy is the default version for the policy. This operation creates a policy version with a version identifier of 1 and sets 1 as the policy's default version. Requires permission to access the CreatePolicy action.
    */
@@ -491,6 +507,22 @@ declare class Iot extends Service {
    * Delete an OTA update. Requires permission to access the DeleteOTAUpdate action.
    */
   deleteOTAUpdate(callback?: (err: AWSError, data: Iot.Types.DeleteOTAUpdateResponse) => void): Request<Iot.Types.DeleteOTAUpdateResponse, AWSError>;
+  /**
+   * Deletes a specific version from a software package.  Note: All package versions must be deleted before deleting the software package. Requires permission to access the DeletePackageVersion action.
+   */
+  deletePackage(params: Iot.Types.DeletePackageRequest, callback?: (err: AWSError, data: Iot.Types.DeletePackageResponse) => void): Request<Iot.Types.DeletePackageResponse, AWSError>;
+  /**
+   * Deletes a specific version from a software package.  Note: All package versions must be deleted before deleting the software package. Requires permission to access the DeletePackageVersion action.
+   */
+  deletePackage(callback?: (err: AWSError, data: Iot.Types.DeletePackageResponse) => void): Request<Iot.Types.DeletePackageResponse, AWSError>;
+  /**
+   * Deletes a specific version from a software package.  Note: If a package version is designated as default, you must remove the designation from the package using the UpdatePackage action.
+   */
+  deletePackageVersion(params: Iot.Types.DeletePackageVersionRequest, callback?: (err: AWSError, data: Iot.Types.DeletePackageVersionResponse) => void): Request<Iot.Types.DeletePackageVersionResponse, AWSError>;
+  /**
+   * Deletes a specific version from a software package.  Note: If a package version is designated as default, you must remove the designation from the package using the UpdatePackage action.
+   */
+  deletePackageVersion(callback?: (err: AWSError, data: Iot.Types.DeletePackageVersionResponse) => void): Request<Iot.Types.DeletePackageVersionResponse, AWSError>;
   /**
    * Deletes the specified policy. A policy cannot be deleted if it has non-default versions or it is attached to any certificate. To delete a policy, use the DeletePolicyVersion action to delete all non-default versions of the policy; use the DetachPolicy action to detach the policy from any certificate; and then use the DeletePolicy action to delete the policy. When a policy is deleted using DeletePolicy, its default version is deleted with it.  Because of the distributed nature of Amazon Web Services, it can take up to five minutes after a policy is detached before it's ready to be deleted.  Requires permission to access the DeletePolicy action.
    */
@@ -996,6 +1028,30 @@ declare class Iot extends Service {
    */
   getOTAUpdate(callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
   /**
+   * Gets information about the specified software package. Requires permission to access the GetPackage action.
+   */
+  getPackage(params: Iot.Types.GetPackageRequest, callback?: (err: AWSError, data: Iot.Types.GetPackageResponse) => void): Request<Iot.Types.GetPackageResponse, AWSError>;
+  /**
+   * Gets information about the specified software package. Requires permission to access the GetPackage action.
+   */
+  getPackage(callback?: (err: AWSError, data: Iot.Types.GetPackageResponse) => void): Request<Iot.Types.GetPackageResponse, AWSError>;
+  /**
+   * Gets information about the specified software package's configuration. Requires permission to access the GetPackageConfiguration action.
+   */
+  getPackageConfiguration(params: Iot.Types.GetPackageConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.GetPackageConfigurationResponse) => void): Request<Iot.Types.GetPackageConfigurationResponse, AWSError>;
+  /**
+   * Gets information about the specified software package's configuration. Requires permission to access the GetPackageConfiguration action.
+   */
+  getPackageConfiguration(callback?: (err: AWSError, data: Iot.Types.GetPackageConfigurationResponse) => void): Request<Iot.Types.GetPackageConfigurationResponse, AWSError>;
+  /**
+   * Gets information about the specified package version.  Requires permission to access the GetPackageVersion action.
+   */
+  getPackageVersion(params: Iot.Types.GetPackageVersionRequest, callback?: (err: AWSError, data: Iot.Types.GetPackageVersionResponse) => void): Request<Iot.Types.GetPackageVersionResponse, AWSError>;
+  /**
+   * Gets information about the specified package version.  Requires permission to access the GetPackageVersion action.
+   */
+  getPackageVersion(callback?: (err: AWSError, data: Iot.Types.GetPackageVersionResponse) => void): Request<Iot.Types.GetPackageVersionResponse, AWSError>;
+  /**
    * Groups the aggregated values that match the query into percentile groupings. The default percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own when you call GetPercentiles. This function returns a value for each percentile group specified (or the default percentile groupings). The percentile group "1" contains the aggregated field value that occurs in approximately one percent of the values that match the query. The percentile group "5" contains the aggregated field value that occurs in approximately five percent of the values that match the query, and so on. The result is an approximation, the more values that match the query, the more accurate the percentile values. Requires permission to access the GetPercentiles action.
    */
   getPercentiles(params: Iot.Types.GetPercentilesRequest, callback?: (err: AWSError, data: Iot.Types.GetPercentilesResponse) => void): Request<Iot.Types.GetPercentilesResponse, AWSError>;
@@ -1283,6 +1339,22 @@ declare class Iot extends Service {
    * Lists certificates that are being transferred but not yet accepted. Requires permission to access the ListOutgoingCertificates action.
    */
   listOutgoingCertificates(callback?: (err: AWSError, data: Iot.Types.ListOutgoingCertificatesResponse) => void): Request<Iot.Types.ListOutgoingCertificatesResponse, AWSError>;
+  /**
+   * Lists the software package versions associated to the account. Requires permission to access the ListPackageVersions action.
+   */
+  listPackageVersions(params: Iot.Types.ListPackageVersionsRequest, callback?: (err: AWSError, data: Iot.Types.ListPackageVersionsResponse) => void): Request<Iot.Types.ListPackageVersionsResponse, AWSError>;
+  /**
+   * Lists the software package versions associated to the account. Requires permission to access the ListPackageVersions action.
+   */
+  listPackageVersions(callback?: (err: AWSError, data: Iot.Types.ListPackageVersionsResponse) => void): Request<Iot.Types.ListPackageVersionsResponse, AWSError>;
+  /**
+   * Lists the software packages associated to the account. Requires permission to access the ListPackages action.
+   */
+  listPackages(params: Iot.Types.ListPackagesRequest, callback?: (err: AWSError, data: Iot.Types.ListPackagesResponse) => void): Request<Iot.Types.ListPackagesResponse, AWSError>;
+  /**
+   * Lists the software packages associated to the account. Requires permission to access the ListPackages action.
+   */
+  listPackages(callback?: (err: AWSError, data: Iot.Types.ListPackagesResponse) => void): Request<Iot.Types.ListPackagesResponse, AWSError>;
   /**
    * Lists your policies. Requires permission to access the ListPolicies action.
    */
@@ -1835,6 +1907,30 @@ declare class Iot extends Service {
    * Updates the definition for the specified mitigation action. Requires permission to access the UpdateMitigationAction action.
    */
   updateMitigationAction(callback?: (err: AWSError, data: Iot.Types.UpdateMitigationActionResponse) => void): Request<Iot.Types.UpdateMitigationActionResponse, AWSError>;
+  /**
+   * Updates the supported fields for a specific package. Requires permission to access the UpdatePackage and GetIndexingConfiguration actions.
+   */
+  updatePackage(params: Iot.Types.UpdatePackageRequest, callback?: (err: AWSError, data: Iot.Types.UpdatePackageResponse) => void): Request<Iot.Types.UpdatePackageResponse, AWSError>;
+  /**
+   * Updates the supported fields for a specific package. Requires permission to access the UpdatePackage and GetIndexingConfiguration actions.
+   */
+  updatePackage(callback?: (err: AWSError, data: Iot.Types.UpdatePackageResponse) => void): Request<Iot.Types.UpdatePackageResponse, AWSError>;
+  /**
+   * Updates the package configuration. Requires permission to access the UpdatePackageConfiguration and iam:PassRole actions.
+   */
+  updatePackageConfiguration(params: Iot.Types.UpdatePackageConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdatePackageConfigurationResponse) => void): Request<Iot.Types.UpdatePackageConfigurationResponse, AWSError>;
+  /**
+   * Updates the package configuration. Requires permission to access the UpdatePackageConfiguration and iam:PassRole actions.
+   */
+  updatePackageConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdatePackageConfigurationResponse) => void): Request<Iot.Types.UpdatePackageConfigurationResponse, AWSError>;
+  /**
+   * Updates the supported fields for a specific package version. Requires permission to access the UpdatePackageVersion and GetIndexingConfiguration actions.
+   */
+  updatePackageVersion(params: Iot.Types.UpdatePackageVersionRequest, callback?: (err: AWSError, data: Iot.Types.UpdatePackageVersionResponse) => void): Request<Iot.Types.UpdatePackageVersionResponse, AWSError>;
+  /**
+   * Updates the supported fields for a specific package version. Requires permission to access the UpdatePackageVersion and GetIndexingConfiguration actions.
+   */
+  updatePackageVersion(callback?: (err: AWSError, data: Iot.Types.UpdatePackageVersionResponse) => void): Request<Iot.Types.UpdatePackageVersionResponse, AWSError>;
   /**
    * Updates a provisioning template. Requires permission to access the UpdateProvisioningTemplate action.
    */
@@ -3128,6 +3224,7 @@ declare namespace Iot {
   export type ClientId = string;
   export type ClientProperties = {[key: string]: String};
   export type ClientRequestToken = string;
+  export type ClientToken = string;
   export interface CloudwatchAlarmAction {
     /**
      * The IAM role that allows access to the CloudWatch alarm.
@@ -3583,7 +3680,7 @@ declare namespace Iot {
      */
     targets: JobTargets;
     /**
-     * An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for document. For example, --document-source https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0. For more information, see Methods for accessing a bucket.
+     * An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for document. For example, --document-source https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0  For more information, see Methods for accessing a bucket.
      */
     documentSource?: JobDocumentSource;
     /**
@@ -3638,6 +3735,10 @@ declare namespace Iot {
      * The configuration that allows you to schedule a job for a future date and time in addition to specifying the end behavior for each job execution.
      */
     schedulingConfig?: SchedulingConfig;
+    /**
+     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single string. Up to five strings are allowed.
+     */
+    destinationPackageVersions?: DestinationPackageVersions;
   }
   export interface CreateJobResponse {
     /**
@@ -3690,6 +3791,10 @@ declare namespace Iot {
      * Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
      */
     maintenanceWindows?: MaintenanceWindows;
+    /**
+     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single string. Up to five strings are allowed.
+     */
+    destinationPackageVersions?: DestinationPackageVersions;
   }
   export interface CreateJobTemplateResponse {
     /**
@@ -3828,6 +3933,94 @@ declare namespace Iot {
      * The OTA update status.
      */
     otaUpdateStatus?: OTAUpdateStatus;
+  }
+  export interface CreatePackageRequest {
+    /**
+     * The name of the new package.
+     */
+    packageName: PackageName;
+    /**
+     * A summary of the package being created. This can be used to outline the package's contents or purpose.
+     */
+    description?: ResourceDescription;
+    /**
+     * Metadata that can be used to manage the package.
+     */
+    tags?: TagMap;
+    /**
+     * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface CreatePackageResponse {
+    /**
+     * The name of the package.
+     */
+    packageName?: PackageName;
+    /**
+     * The Amazon Resource Name (ARN) for the package.
+     */
+    packageArn?: PackageArn;
+    /**
+     * The package description.
+     */
+    description?: ResourceDescription;
+  }
+  export interface CreatePackageVersionRequest {
+    /**
+     * The name of the associated package.
+     */
+    packageName: PackageName;
+    /**
+     * The name of the new package version.
+     */
+    versionName: VersionName;
+    /**
+     * A summary of the package version being created. This can be used to outline the package's contents or purpose.
+     */
+    description?: ResourceDescription;
+    /**
+     * Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet. The combined size of all the attributes on a package version is limited to 3KB.
+     */
+    attributes?: ResourceAttributes;
+    /**
+     * Metadata that can be used to manage the package version.
+     */
+    tags?: TagMap;
+    /**
+     * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface CreatePackageVersionResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the package.
+     */
+    packageVersionArn?: PackageVersionArn;
+    /**
+     * The name of the associated package.
+     */
+    packageName?: PackageName;
+    /**
+     * The name of the new package version.
+     */
+    versionName?: VersionName;
+    /**
+     * The package version description.
+     */
+    description?: ResourceDescription;
+    /**
+     * Metadata that were added to the package version that can be used to define a package version’s configuration.
+     */
+    attributes?: ResourceAttributes;
+    /**
+     * The status of the package version. For more information, see Package version lifecycle.
+     */
+    status?: PackageVersionStatus;
+    /**
+     * Error reason for a package version failure during creation or update.
+     */
+    errorReason?: PackageVersionErrorReason;
   }
   export interface CreatePolicyRequest {
     /**
@@ -4451,6 +4644,34 @@ declare namespace Iot {
     forceDeleteAWSJob?: ForceDeleteAWSJob;
   }
   export interface DeleteOTAUpdateResponse {
+  }
+  export interface DeletePackageRequest {
+    /**
+     * The name of the target package.
+     */
+    packageName: PackageName;
+    /**
+     * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface DeletePackageResponse {
+  }
+  export interface DeletePackageVersionRequest {
+    /**
+     * The name of the associated package.
+     */
+    packageName: PackageName;
+    /**
+     * The name of the target package version.
+     */
+    versionName: VersionName;
+    /**
+     * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface DeletePackageVersionResponse {
   }
   export interface DeletePolicyRequest {
     /**
@@ -5114,6 +5335,10 @@ declare namespace Iot {
      * Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
      */
     maintenanceWindows?: MaintenanceWindows;
+    /**
+     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single string. Up to five strings are allowed.
+     */
+    destinationPackageVersions?: DestinationPackageVersions;
   }
   export interface DescribeManagedJobTemplateRequest {
     /**
@@ -5558,6 +5783,7 @@ declare namespace Iot {
      */
     s3Destination?: S3Destination;
   }
+  export type DestinationPackageVersions = PackageVersionArn[];
   export interface DetachPolicyRequest {
     /**
      * The policy to detach.
@@ -5896,6 +6122,7 @@ declare namespace Iot {
     ruleName: RuleName;
   }
   export type Enabled = boolean;
+  export type EnabledBoolean = boolean;
   export type EndpointAddress = string;
   export type EndpointType = string;
   export type Environment = string;
@@ -6162,6 +6389,94 @@ declare namespace Iot {
      * The OTA update info.
      */
     otaUpdateInfo?: OTAUpdateInfo;
+  }
+  export interface GetPackageConfigurationRequest {
+  }
+  export interface GetPackageConfigurationResponse {
+    /**
+     * The version that is associated to a specific job.
+     */
+    versionUpdateByJobsConfig?: VersionUpdateByJobsConfig;
+  }
+  export interface GetPackageRequest {
+    /**
+     * The name of the target package.
+     */
+    packageName: PackageName;
+  }
+  export interface GetPackageResponse {
+    /**
+     * The name of the package.
+     */
+    packageName?: PackageName;
+    /**
+     * The ARN for the package.
+     */
+    packageArn?: PackageArn;
+    /**
+     * The package description.
+     */
+    description?: ResourceDescription;
+    /**
+     * The name of the default package version.
+     */
+    defaultVersionName?: VersionName;
+    /**
+     * The date the package was created.
+     */
+    creationDate?: CreationDate;
+    /**
+     * The date when the package was last updated.
+     */
+    lastModifiedDate?: LastModifiedDate;
+  }
+  export interface GetPackageVersionRequest {
+    /**
+     * The name of the associated package.
+     */
+    packageName: PackageName;
+    /**
+     * The name of the target package version.
+     */
+    versionName: VersionName;
+  }
+  export interface GetPackageVersionResponse {
+    /**
+     * The ARN for the package version.
+     */
+    packageVersionArn?: PackageVersionArn;
+    /**
+     * The name of the package.
+     */
+    packageName?: PackageName;
+    /**
+     * The name of the package version.
+     */
+    versionName?: VersionName;
+    /**
+     * The package version description.
+     */
+    description?: ResourceDescription;
+    /**
+     * Metadata that were added to the package version that can be used to define a package version’s configuration.
+     */
+    attributes?: ResourceAttributes;
+    /**
+     * The status associated to the package version. For more information, see Package version lifecycle.
+     */
+    status?: PackageVersionStatus;
+    /**
+     * Error reason for a package version failure during creation or update.
+     */
+    errorReason?: PackageVersionErrorReason;
+    /**
+     * The date when the package version was created.
+     */
+    creationDate?: CreationDate;
+    /**
+     * The date when the package version was last updated.
+     */
+    lastModifiedDate?: LastModifiedDate;
   }
   export interface GetPercentilesRequest {
     /**
@@ -6615,6 +6930,10 @@ declare namespace Iot {
      * Displays the next seven maintenance window occurrences and their start times.
      */
     scheduledJobRollouts?: ScheduledJobRolloutList;
+    /**
+     * The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes.   Note:The following Length Constraints relates to a single string. Up to five strings are allowed.
+     */
+    destinationPackageVersions?: DestinationPackageVersions;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -7712,6 +8031,54 @@ declare namespace Iot {
      * The marker for the next set of results.
      */
     nextMarker?: Marker;
+  }
+  export interface ListPackageVersionsRequest {
+    /**
+     * The name of the target package.
+     */
+    packageName: PackageName;
+    /**
+     * The status of the package version. For more information, see Package version lifecycle.
+     */
+    status?: PackageVersionStatus;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: PackageCatalogMaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListPackageVersionsResponse {
+    /**
+     * Lists the package versions associated to the package.
+     */
+    packageVersionSummaries?: PackageVersionSummaryList;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListPackagesRequest {
+    /**
+     * The maximum number of results returned at one time.
+     */
+    maxResults?: PackageCatalogMaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListPackagesResponse {
+    /**
+     * The software package summary.
+     */
+    packageSummaries?: PackageSummaryList;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListPoliciesRequest {
     /**
@@ -8946,6 +9313,55 @@ declare namespace Iot {
   }
   export type OutgoingCertificates = OutgoingCertificate[];
   export type OverrideDynamicGroups = boolean;
+  export type PackageArn = string;
+  export type PackageCatalogMaxResults = number;
+  export type PackageName = string;
+  export interface PackageSummary {
+    /**
+     * The name for the target package.
+     */
+    packageName?: PackageName;
+    /**
+     * The name of the default package version.
+     */
+    defaultVersionName?: VersionName;
+    /**
+     * The date that the package was created.
+     */
+    creationDate?: CreationDate;
+    /**
+     * The date that the package was last updated.
+     */
+    lastModifiedDate?: LastModifiedDate;
+  }
+  export type PackageSummaryList = PackageSummary[];
+  export type PackageVersionAction = "PUBLISH"|"DEPRECATE"|string;
+  export type PackageVersionArn = string;
+  export type PackageVersionErrorReason = string;
+  export type PackageVersionStatus = "DRAFT"|"PUBLISHED"|"DEPRECATED"|string;
+  export interface PackageVersionSummary {
+    /**
+     * The name of the associated software package.
+     */
+    packageName?: PackageName;
+    /**
+     * The name of the target package version.
+     */
+    versionName?: VersionName;
+    /**
+     * The status of the package version. For more information, see Package version lifecycle.
+     */
+    status?: PackageVersionStatus;
+    /**
+     * The date that the package version was created.
+     */
+    creationDate?: CreationDate;
+    /**
+     * The date that the package version was last updated.
+     */
+    lastModifiedDate?: LastModifiedDate;
+  }
+  export type PackageVersionSummaryList = PackageVersionSummary[];
   export type PageSize = number;
   export type Parameter = string;
   export type ParameterKey = string;
@@ -9410,6 +9826,10 @@ declare namespace Iot {
   export type Resource = string;
   export type ResourceArn = string;
   export type ResourceArns = {[key: string]: ResourceArn};
+  export type ResourceAttributeKey = string;
+  export type ResourceAttributeValue = string;
+  export type ResourceAttributes = {[key: string]: ResourceAttributeValue};
+  export type ResourceDescription = string;
   export interface ResourceIdentifier {
     /**
      * The ID of the certificate attached to the resource.
@@ -10118,6 +10538,7 @@ declare namespace Iot {
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = Tag[];
+  export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
      * The ARN of the resource.
@@ -10786,6 +11207,7 @@ declare namespace Iot {
     rejectDate?: DateType;
   }
   export type UndoDeprecate = boolean;
+  export type UnsetDefaultVersion = boolean;
   export type UnsignedLong = number;
   export interface UntagResourceRequest {
     /**
@@ -11189,6 +11611,70 @@ declare namespace Iot {
      */
     actionId?: MitigationActionId;
   }
+  export interface UpdatePackageConfigurationRequest {
+    /**
+     * Configuration to manage job's package version reporting. This updates the thing's reserved named shadow that the job targets.
+     */
+    versionUpdateByJobsConfig?: VersionUpdateByJobsConfig;
+    /**
+     * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface UpdatePackageConfigurationResponse {
+  }
+  export interface UpdatePackageRequest {
+    /**
+     * The name of the target package.
+     */
+    packageName: PackageName;
+    /**
+     * The package description.
+     */
+    description?: ResourceDescription;
+    /**
+     * The name of the default package version.  Note: You cannot name a defaultVersion and set unsetDefaultVersion equal to true at the same time.
+     */
+    defaultVersionName?: VersionName;
+    /**
+     * Indicates whether you want to remove the named default package version from the software package. Set as true to remove the default package version.   Note: You cannot name a defaultVersion and set unsetDefaultVersion equal to true at the same time.
+     */
+    unsetDefaultVersion?: UnsetDefaultVersion;
+    /**
+     * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface UpdatePackageResponse {
+  }
+  export interface UpdatePackageVersionRequest {
+    /**
+     * The name of the associated software package.
+     */
+    packageName: PackageName;
+    /**
+     * The name of the target package version.
+     */
+    versionName: VersionName;
+    /**
+     * The package version description.
+     */
+    description?: ResourceDescription;
+    /**
+     * Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet.   Note: Attributes can be updated only when the package version is in a draft state. The combined size of all the attributes on a package version is limited to 3KB.
+     */
+    attributes?: ResourceAttributes;
+    /**
+     * The status that the package version should be assigned. For more information, see Package version lifecycle.
+     */
+    action?: PackageVersionAction;
+    /**
+     * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+     */
+    clientToken?: ClientToken;
+  }
+  export interface UpdatePackageVersionResponse {
+  }
   export interface UpdateProvisioningTemplateRequest {
     /**
      * The name of the provisioning template.
@@ -11513,7 +11999,18 @@ declare namespace Iot {
   export type VerificationState = "FALSE_POSITIVE"|"BENIGN_POSITIVE"|"TRUE_POSITIVE"|"UNKNOWN"|string;
   export type VerificationStateDescription = string;
   export type Version = number;
+  export type VersionName = string;
   export type VersionNumber = number;
+  export interface VersionUpdateByJobsConfig {
+    /**
+     * Indicates whether the Job is enabled or not.
+     */
+    enabled?: EnabledBoolean;
+    /**
+     * The Amazon Resource Name (ARN) of the role that grants permission to the IoT jobs service to update the reserved named shadow when the job successfully completes.
+     */
+    roleArn?: RoleArn;
+  }
   export interface ViolationEvent {
     /**
      * The ID of the violation event.

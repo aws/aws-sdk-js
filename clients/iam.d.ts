@@ -77,11 +77,11 @@ declare class IAM extends Service {
    */
   createAccessKey(callback?: (err: AWSError, data: IAM.Types.CreateAccessKeyResponse) => void): Request<IAM.Types.CreateAccessKeyResponse, AWSError>;
   /**
-   * Creates an alias for your Amazon Web Services account. For information about using an Amazon Web Services account alias, see Using an alias for your Amazon Web Services account ID in the IAM User Guide.
+   * Creates an alias for your Amazon Web Services account. For information about using an Amazon Web Services account alias, see Creating, deleting, and listing an Amazon Web Services account alias in the Amazon Web Services Sign-In User Guide.
    */
   createAccountAlias(params: IAM.Types.CreateAccountAliasRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an alias for your Amazon Web Services account. For information about using an Amazon Web Services account alias, see Using an alias for your Amazon Web Services account ID in the IAM User Guide.
+   * Creates an alias for your Amazon Web Services account. For information about using an Amazon Web Services account alias, see Creating, deleting, and listing an Amazon Web Services account alias in the Amazon Web Services Sign-In User Guide.
    */
   createAccountAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -197,11 +197,11 @@ declare class IAM extends Service {
    */
   deleteAccessKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Deletes the specified Amazon Web Services account alias. For information about using an Amazon Web Services account alias, see Using an alias for your Amazon Web Services account ID in the IAM User Guide.
+   *  Deletes the specified Amazon Web Services account alias. For information about using an Amazon Web Services account alias, see Creating, deleting, and listing an Amazon Web Services account alias in the Amazon Web Services Sign-In User Guide.
    */
   deleteAccountAlias(params: IAM.Types.DeleteAccountAliasRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Deletes the specified Amazon Web Services account alias. For information about using an Amazon Web Services account alias, see Using an alias for your Amazon Web Services account ID in the IAM User Guide.
+   *  Deletes the specified Amazon Web Services account alias. For information about using an Amazon Web Services account alias, see Creating, deleting, and listing an Amazon Web Services account alias in the Amazon Web Services Sign-In User Guide.
    */
   deleteAccountAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -617,11 +617,11 @@ declare class IAM extends Service {
    */
   listAccessKeys(callback?: (err: AWSError, data: IAM.Types.ListAccessKeysResponse) => void): Request<IAM.Types.ListAccessKeysResponse, AWSError>;
   /**
-   * Lists the account alias associated with the Amazon Web Services account (Note: you can have only one). For information about using an Amazon Web Services account alias, see Using an alias for your Amazon Web Services account ID in the IAM User Guide.
+   * Lists the account alias associated with the Amazon Web Services account (Note: you can have only one). For information about using an Amazon Web Services account alias, see Creating, deleting, and listing an Amazon Web Services account alias in the Amazon Web Services Sign-In User Guide.
    */
   listAccountAliases(params: IAM.Types.ListAccountAliasesRequest, callback?: (err: AWSError, data: IAM.Types.ListAccountAliasesResponse) => void): Request<IAM.Types.ListAccountAliasesResponse, AWSError>;
   /**
-   * Lists the account alias associated with the Amazon Web Services account (Note: you can have only one). For information about using an Amazon Web Services account alias, see Using an alias for your Amazon Web Services account ID in the IAM User Guide.
+   * Lists the account alias associated with the Amazon Web Services account (Note: you can have only one). For information about using an Amazon Web Services account alias, see Creating, deleting, and listing an Amazon Web Services account alias in the Amazon Web Services Sign-In User Guide.
    */
   listAccountAliases(callback?: (err: AWSError, data: IAM.Types.ListAccountAliasesResponse) => void): Request<IAM.Types.ListAccountAliasesResponse, AWSError>;
   /**
@@ -5166,7 +5166,7 @@ declare namespace IAM {
      */
     SerialNumber: serialNumberType;
     /**
-     *  The base32 seed defined as specified in RFC3548. The Base32StringSeed is base64-encoded. 
+     *  The base32 seed defined as specified in RFC3548. The Base32StringSeed is base32-encoded. 
      */
     Base32StringSeed?: BootstrapDatum;
     /**

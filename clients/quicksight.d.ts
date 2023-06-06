@@ -1853,11 +1853,11 @@ declare namespace QuickSight {
   }
   export interface AssetBundleImportJobDataSourceCredentials {
     /**
-     * A username and password credential pair to be used to create the imported data source. Leave this field blank if you are using an Secrets Manager Secret to provide credentials.
+     * A username and password credential pair to be used to create the imported data source. Keep this field blank if you are using a Secrets Manager secret to provide credentials.
      */
     CredentialPair?: AssetBundleImportJobDataSourceCredentialPair;
     /**
-     * The ARN of the Secrets Manager Secret to be used to create the imported data source leave this field blank if you aren't using a Secret in place of a credential pair.
+     * The ARN of the Secrets Manager secret that's used to create the imported data source. Keep this field blank, unless you are using a secret in place of a credential pair.
      */
     SecretArn?: SecretArn;
   }
@@ -1938,7 +1938,7 @@ declare namespace QuickSight {
      */
     ScheduleId: String;
     /**
-     * An override for the StartAfterDateTime of a RefreshSchedule to ensure that the StartAfterDateTime is set to a time that takes place in the future.
+     * An override for the StartAfterDateTime of a RefreshSchedule. Make sure that the StartAfterDateTime is set to a time that takes place in the future.
      */
     StartAfterDateTime?: Timestamp;
   }
@@ -1994,15 +1994,15 @@ declare namespace QuickSight {
      */
     Name?: ResourceName;
     /**
-     * A list of new subnet IDs for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.
+     * A list of new subnet IDs for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or Region.
      */
     SubnetIds?: SubnetIdList;
     /**
-     * A new security group ID for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.
+     * A new security group ID for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or Region.
      */
     SecurityGroupIds?: SecurityGroupIdList;
     /**
-     * An optional override of dns resolvers to be used by the VPC connection.
+     * An optional override of DNS resolvers to be used by the VPC connection.
      */
     DnsResolvers?: DnsResolverList;
     /**
@@ -2013,21 +2013,21 @@ declare namespace QuickSight {
   export type AssetBundleImportJobVPCConnectionOverrideParametersList = AssetBundleImportJobVPCConnectionOverrideParameters[];
   export interface AssetBundleImportSource {
     /**
-     * The bytes of the Base64 encoded asset bundle import zip file. This file can't exceed 20MB. If you are calling the APIs from the Amazon Web Services Java, JavaScript, Python, or PHP SDKs, the SDK encodes Base64 automatically to allow the direct setting of the zip file's bytes. If you are using a SDK of a different language or are receiving related errors, try to Base64 encode your data.
+     * The bytes of the base64 encoded asset bundle import zip file. This file can't exceed 20 MB. If you are calling the API operations from the Amazon Web Services SDK for Java, JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow the direct setting of the zip file's bytes. If you are using an SDK for a different language or receiving related errors, try to base64 encode your data.
      */
     Body?: AssetBundleImportBodyBlob;
     /**
-     * The Amazon S3 uri for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 20MB.
+     * The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 20 MB.
      */
     S3Uri?: S3Uri;
   }
   export interface AssetBundleImportSourceDescription {
     /**
-     * A HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for 5 minutes after issuance. Call DescribeAssetBundleExportJob again for a fresh URL if needed. The downloaded asset bundle is a .qs zip file.
+     * An HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for five minutes after issuance. Call DescribeAssetBundleExportJob again for a fresh URL if needed. The downloaded asset bundle is a .qs zip file.
      */
     Body?: String;
     /**
-     * The Amazon S3 uri that you provided at the start of the import job.
+     * The Amazon S3 URI that you provided at the start of the import job.
      */
     S3Uri?: S3Uri;
   }
@@ -6620,7 +6620,7 @@ declare namespace QuickSight {
   }
   export interface DescribeAssetBundleExportJobResponse {
     /**
-     * Indicates tha status of a job through its queueing and execution. Poll this DescribeAssetBundleExportApi until JobStatus is either SUCCESSFUL or FAILED.
+     * Indicates the status of a job through its queuing and execution. Poll this DescribeAssetBundleExportApi until JobStatus is either SUCCESSFUL or FAILED.
      */
     JobStatus?: AssetBundleExportJobStatus;
     /**
@@ -6684,7 +6684,7 @@ declare namespace QuickSight {
   }
   export interface DescribeAssetBundleImportJobResponse {
     /**
-     * Indicates tha status of a job through its queueing and execution. Poll this DescribeAssetBundleImport API until JobStatus returns one of the following values.    SUCCESSFUL     FAILED     FAILED_ROLLBACK_COMPLETED     FAILED_ROLLBACK_ERROR   
+     * Indicates the status of a job through its queuing and execution. Poll the DescribeAssetBundleImport API until JobStatus returns one of the following values:    SUCCESSFUL     FAILED     FAILED_ROLLBACK_COMPLETED     FAILED_ROLLBACK_ERROR   
      */
     JobStatus?: AssetBundleImportJobStatus;
     /**
@@ -12522,6 +12522,10 @@ declare namespace QuickSight {
      * The scope of the cell for conditional formatting.
      */
     Scope?: PivotTableConditionalFormattingScope;
+    /**
+     * A list of cell scopes for conditional formatting.
+     */
+    Scopes?: PivotTableConditionalFormattingScopeList;
   }
   export interface PivotTableConditionalFormatting {
     /**
@@ -12542,6 +12546,7 @@ declare namespace QuickSight {
      */
     Role?: PivotTableConditionalFormattingScopeRole;
   }
+  export type PivotTableConditionalFormattingScopeList = PivotTableConditionalFormattingScope[];
   export type PivotTableConditionalFormattingScopeRole = "FIELD"|"FIELD_TOTAL"|"GRAND_TOTAL"|string;
   export interface PivotTableConfiguration {
     /**
@@ -12581,6 +12586,28 @@ declare namespace QuickSight {
   }
   export type PivotTableDataPathOptionList = PivotTableDataPathOption[];
   export type PivotTableDimensionList = DimensionField[];
+  export type PivotTableFieldCollapseState = "COLLAPSED"|"EXPANDED"|string;
+  export interface PivotTableFieldCollapseStateOption {
+    /**
+     * A tagged-union object that sets the collapse state.
+     */
+    Target: PivotTableFieldCollapseStateTarget;
+    /**
+     * The state of the field target of a pivot table. Choose one of the following options:    COLLAPSED     EXPANDED   
+     */
+    State?: PivotTableFieldCollapseState;
+  }
+  export type PivotTableFieldCollapseStateOptionList = PivotTableFieldCollapseStateOption[];
+  export interface PivotTableFieldCollapseStateTarget {
+    /**
+     * The field ID of the pivot table that the collapse state needs to be set to.
+     */
+    FieldId?: String;
+    /**
+     * The data path of the pivot table's header. Used to set the collapse state.
+     */
+    FieldDataPathValues?: DataPathValueList;
+  }
   export interface PivotTableFieldOption {
     /**
      * The field ID of the pivot table field.
@@ -12605,6 +12632,10 @@ declare namespace QuickSight {
      * The data path options for the pivot table field options.
      */
     DataPathOptions?: PivotTableDataPathOptionList;
+    /**
+     * The collapse state options for the pivot table field options.
+     */
+    CollapseStateOptions?: PivotTableFieldCollapseStateOptionList;
   }
   export interface PivotTableFieldSubtotalOptions {
     /**
@@ -12889,6 +12920,7 @@ declare namespace QuickSight {
      */
     Visibility?: Visibility;
   }
+  export type RadarChartAxesRangeScale = "AUTO"|"INDEPENDENT"|"SHARED"|string;
   export type RadarChartCategoryFieldList = DimensionField[];
   export type RadarChartColorFieldList = DimensionField[];
   export interface RadarChartConfiguration {
@@ -12948,6 +12980,10 @@ declare namespace QuickSight {
      * The legend display setup of the visual.
      */
     Legend?: LegendOptions;
+    /**
+     * The axis behavior options of a radar chart.
+     */
+    AxesRangeScale?: RadarChartAxesRangeScale;
   }
   export interface RadarChartFieldWells {
     /**
@@ -14512,7 +14548,7 @@ declare namespace QuickSight {
      */
     ResourceArns: AssetBundleResourceArns;
     /**
-     * A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the ResourceArns parameter. If you set IncludeAllDependencies to TRUE, any theme, dataset, and dataource resource that is a dependency of the dashboard is also exported.
+     * A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the ResourceArns parameter. If you set IncludeAllDependencies to TRUE, any theme, dataset, and data source resource that is a dependency of the dashboard is also exported.
      */
     IncludeAllDependencies?: Boolean;
     /**
@@ -14560,7 +14596,7 @@ declare namespace QuickSight {
      */
     OverrideParameters?: AssetBundleImportJobOverrideParameters;
     /**
-     * The failure action for the import job. If you choose ROLLBACK, failed import jobs will attempt to undo any asset changes caused by the failed job. If you choose DO_NOTHING, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly leaving the Amazon QuickSight account in an inconsistent state.
+     * The failure action for the import job. If you choose ROLLBACK, failed import jobs will attempt to undo any asset changes caused by the failed job. If you choose DO_NOTHING, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly keeping the Amazon QuickSight account in an inconsistent state.
      */
     FailureAction?: AssetBundleImportFailureAction;
   }

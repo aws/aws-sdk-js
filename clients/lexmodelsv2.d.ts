@@ -124,6 +124,14 @@ declare class LexModelsV2 extends Service {
    */
   createSlotType(callback?: (err: AWSError, data: LexModelsV2.Types.CreateSlotTypeResponse) => void): Request<LexModelsV2.Types.CreateSlotTypeResponse, AWSError>;
   /**
+   * Create a report that describes the differences between the bot and the test set.
+   */
+  createTestSetDiscrepancyReport(params: LexModelsV2.Types.CreateTestSetDiscrepancyReportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateTestSetDiscrepancyReportResponse) => void): Request<LexModelsV2.Types.CreateTestSetDiscrepancyReportResponse, AWSError>;
+  /**
+   * Create a report that describes the differences between the bot and the test set.
+   */
+  createTestSetDiscrepancyReport(callback?: (err: AWSError, data: LexModelsV2.Types.CreateTestSetDiscrepancyReportResponse) => void): Request<LexModelsV2.Types.CreateTestSetDiscrepancyReportResponse, AWSError>;
+  /**
    * Gets a pre-signed S3 write URL that you use to upload the zip archive when importing a bot or a bot locale. 
    */
   createUploadUrl(params: LexModelsV2.Types.CreateUploadUrlRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateUploadUrlResponse) => void): Request<LexModelsV2.Types.CreateUploadUrlResponse, AWSError>;
@@ -228,6 +236,14 @@ declare class LexModelsV2 extends Service {
    */
   deleteSlotType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * The action to delete the selected test set.
+   */
+  deleteTestSet(params: LexModelsV2.Types.DeleteTestSetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * The action to delete the selected test set.
+   */
+  deleteTestSet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the ListAggregatedUtterances operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.. Use the DeleteUtterances operation to manually delete utterances for a specific session. When you use the DeleteUtterances operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the ListAggregatedUtterances operation are deleted after 15 days.
    */
   deleteUtterances(params: LexModelsV2.Types.DeleteUtterancesRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteUtterancesResponse) => void): Request<LexModelsV2.Types.DeleteUtterancesResponse, AWSError>;
@@ -331,6 +347,46 @@ declare class LexModelsV2 extends Service {
    * Gets metadata information about a slot type.
    */
   describeSlotType(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeSlotTypeResponse) => void): Request<LexModelsV2.Types.DescribeSlotTypeResponse, AWSError>;
+  /**
+   * Gets metadata information about the test execution.
+   */
+  describeTestExecution(params: LexModelsV2.Types.DescribeTestExecutionRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestExecutionResponse) => void): Request<LexModelsV2.Types.DescribeTestExecutionResponse, AWSError>;
+  /**
+   * Gets metadata information about the test execution.
+   */
+  describeTestExecution(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestExecutionResponse) => void): Request<LexModelsV2.Types.DescribeTestExecutionResponse, AWSError>;
+  /**
+   * Gets metadata information about the test set.
+   */
+  describeTestSet(params: LexModelsV2.Types.DescribeTestSetRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestSetResponse) => void): Request<LexModelsV2.Types.DescribeTestSetResponse, AWSError>;
+  /**
+   * Gets metadata information about the test set.
+   */
+  describeTestSet(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestSetResponse) => void): Request<LexModelsV2.Types.DescribeTestSetResponse, AWSError>;
+  /**
+   * Gets metadata information about the test set discrepancy report.
+   */
+  describeTestSetDiscrepancyReport(params: LexModelsV2.Types.DescribeTestSetDiscrepancyReportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestSetDiscrepancyReportResponse) => void): Request<LexModelsV2.Types.DescribeTestSetDiscrepancyReportResponse, AWSError>;
+  /**
+   * Gets metadata information about the test set discrepancy report.
+   */
+  describeTestSetDiscrepancyReport(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestSetDiscrepancyReportResponse) => void): Request<LexModelsV2.Types.DescribeTestSetDiscrepancyReportResponse, AWSError>;
+  /**
+   * Gets metadata information about the test set generation.
+   */
+  describeTestSetGeneration(params: LexModelsV2.Types.DescribeTestSetGenerationRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestSetGenerationResponse) => void): Request<LexModelsV2.Types.DescribeTestSetGenerationResponse, AWSError>;
+  /**
+   * Gets metadata information about the test set generation.
+   */
+  describeTestSetGeneration(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeTestSetGenerationResponse) => void): Request<LexModelsV2.Types.DescribeTestSetGenerationResponse, AWSError>;
+  /**
+   * The pre-signed Amazon S3 URL to download the test execution result artifacts.
+   */
+  getTestExecutionArtifactsUrl(params: LexModelsV2.Types.GetTestExecutionArtifactsUrlRequest, callback?: (err: AWSError, data: LexModelsV2.Types.GetTestExecutionArtifactsUrlResponse) => void): Request<LexModelsV2.Types.GetTestExecutionArtifactsUrlResponse, AWSError>;
+  /**
+   * The pre-signed Amazon S3 URL to download the test execution result artifacts.
+   */
+  getTestExecutionArtifactsUrl(callback?: (err: AWSError, data: LexModelsV2.Types.GetTestExecutionArtifactsUrlResponse) => void): Request<LexModelsV2.Types.GetTestExecutionArtifactsUrlResponse, AWSError>;
   /**
    * Provides a list of utterances that users have sent to the bot. Utterances are aggregated by the text of the utterance. For example, all instances where customers used the phrase "I want to order pizza" are aggregated into the same line in the response. You can see both detected utterances and missed utterances. A detected utterance is where the bot properly recognized the utterance and activated the associated intent. A missed utterance was not recognized by the bot and didn't activate an intent. Utterances can be aggregated for a bot alias or for a bot version, but not both at the same time. Utterances statistics are not generated under the following conditions:   The childDirected field was set to true when the bot was created.   You are using slot obfuscation with one or more slots.   You opted out of participating in improving Amazon Lex.  
    */
@@ -460,6 +516,38 @@ declare class LexModelsV2 extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: LexModelsV2.Types.ListTagsForResourceResponse) => void): Request<LexModelsV2.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Gets a list of test execution result items.
+   */
+  listTestExecutionResultItems(params: LexModelsV2.Types.ListTestExecutionResultItemsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListTestExecutionResultItemsResponse) => void): Request<LexModelsV2.Types.ListTestExecutionResultItemsResponse, AWSError>;
+  /**
+   * Gets a list of test execution result items.
+   */
+  listTestExecutionResultItems(callback?: (err: AWSError, data: LexModelsV2.Types.ListTestExecutionResultItemsResponse) => void): Request<LexModelsV2.Types.ListTestExecutionResultItemsResponse, AWSError>;
+  /**
+   * The list of test set executions.
+   */
+  listTestExecutions(params: LexModelsV2.Types.ListTestExecutionsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListTestExecutionsResponse) => void): Request<LexModelsV2.Types.ListTestExecutionsResponse, AWSError>;
+  /**
+   * The list of test set executions.
+   */
+  listTestExecutions(callback?: (err: AWSError, data: LexModelsV2.Types.ListTestExecutionsResponse) => void): Request<LexModelsV2.Types.ListTestExecutionsResponse, AWSError>;
+  /**
+   * The list of test set records.
+   */
+  listTestSetRecords(params: LexModelsV2.Types.ListTestSetRecordsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListTestSetRecordsResponse) => void): Request<LexModelsV2.Types.ListTestSetRecordsResponse, AWSError>;
+  /**
+   * The list of test set records.
+   */
+  listTestSetRecords(callback?: (err: AWSError, data: LexModelsV2.Types.ListTestSetRecordsResponse) => void): Request<LexModelsV2.Types.ListTestSetRecordsResponse, AWSError>;
+  /**
+   * The list of the test sets
+   */
+  listTestSets(params: LexModelsV2.Types.ListTestSetsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListTestSetsResponse) => void): Request<LexModelsV2.Types.ListTestSetsResponse, AWSError>;
+  /**
+   * The list of the test sets
+   */
+  listTestSets(callback?: (err: AWSError, data: LexModelsV2.Types.ListTestSetsResponse) => void): Request<LexModelsV2.Types.ListTestSetsResponse, AWSError>;
+  /**
    * Search for associated transcripts that meet the specified criteria.
    */
   searchAssociatedTranscripts(params: LexModelsV2.Types.SearchAssociatedTranscriptsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.SearchAssociatedTranscriptsResponse) => void): Request<LexModelsV2.Types.SearchAssociatedTranscriptsResponse, AWSError>;
@@ -483,6 +571,22 @@ declare class LexModelsV2 extends Service {
    * Starts importing a bot, bot locale, or custom vocabulary from a zip archive that you uploaded to an S3 bucket.
    */
   startImport(callback?: (err: AWSError, data: LexModelsV2.Types.StartImportResponse) => void): Request<LexModelsV2.Types.StartImportResponse, AWSError>;
+  /**
+   * The action to start test set execution.
+   */
+  startTestExecution(params: LexModelsV2.Types.StartTestExecutionRequest, callback?: (err: AWSError, data: LexModelsV2.Types.StartTestExecutionResponse) => void): Request<LexModelsV2.Types.StartTestExecutionResponse, AWSError>;
+  /**
+   * The action to start test set execution.
+   */
+  startTestExecution(callback?: (err: AWSError, data: LexModelsV2.Types.StartTestExecutionResponse) => void): Request<LexModelsV2.Types.StartTestExecutionResponse, AWSError>;
+  /**
+   * The action to start the generation of test set.
+   */
+  startTestSetGeneration(params: LexModelsV2.Types.StartTestSetGenerationRequest, callback?: (err: AWSError, data: LexModelsV2.Types.StartTestSetGenerationResponse) => void): Request<LexModelsV2.Types.StartTestSetGenerationResponse, AWSError>;
+  /**
+   * The action to start the generation of test set.
+   */
+  startTestSetGeneration(callback?: (err: AWSError, data: LexModelsV2.Types.StartTestSetGenerationResponse) => void): Request<LexModelsV2.Types.StartTestSetGenerationResponse, AWSError>;
   /**
    * Stop an already running Bot Recommendation request.
    */
@@ -579,13 +683,54 @@ declare class LexModelsV2 extends Service {
    * Updates the configuration of an existing slot type.
    */
   updateSlotType(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateSlotTypeResponse) => void): Request<LexModelsV2.Types.UpdateSlotTypeResponse, AWSError>;
+  /**
+   * The action to update the test set.
+   */
+  updateTestSet(params: LexModelsV2.Types.UpdateTestSetRequest, callback?: (err: AWSError, data: LexModelsV2.Types.UpdateTestSetResponse) => void): Request<LexModelsV2.Types.UpdateTestSetResponse, AWSError>;
+  /**
+   * The action to update the test set.
+   */
+  updateTestSet(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateTestSetResponse) => void): Request<LexModelsV2.Types.UpdateTestSetResponse, AWSError>;
 }
 declare namespace LexModelsV2 {
+  export interface ActiveContext {
+    /**
+     * The name of active context.
+     */
+    name: ActiveContextName;
+  }
+  export type ActiveContextList = ActiveContext[];
+  export type ActiveContextName = string;
   export interface AdvancedRecognitionSetting {
     /**
      * Enables using the slot values as a custom vocabulary for recognizing user utterances.
      */
     audioRecognitionStrategy?: AudioRecognitionStrategy;
+  }
+  export interface AgentTurnResult {
+    /**
+     * The expected agent prompt for the agent turn in a test set execution.
+     */
+    expectedAgentPrompt: TestSetAgentPrompt;
+    /**
+     * The actual agent prompt for the agent turn in a test set execution.
+     */
+    actualAgentPrompt?: TestSetAgentPrompt;
+    errorDetails?: ExecutionErrorDetails;
+    /**
+     * The actual elicited slot for the agent turn in a test set execution.
+     */
+    actualElicitedSlot?: TestResultSlotName;
+    /**
+     * The actual intent for the agent turn in a test set execution.
+     */
+    actualIntent?: Name;
+  }
+  export interface AgentTurnSpecification {
+    /**
+     * The agent prompt for the agent turn in a test set.
+     */
+    agentPrompt: TestSetAgentPrompt;
   }
   export interface AggregatedUtterancesFilter {
     /**
@@ -688,6 +833,7 @@ declare namespace LexModelsV2 {
      */
     dtmfSpecification?: DTMFSpecification;
   }
+  export type AudioFileS3Location = string;
   export interface AudioLogDestination {
     /**
      * The Amazon S3 bucket where the audio log files are stored. The IAM role specified in the roleArn parameter of the CreateBot operation must have permission to write to this bucket.
@@ -894,6 +1040,20 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type BotAliasSummaryList = BotAliasSummary[];
+  export interface BotAliasTestExecutionTarget {
+    /**
+     * The bot Id of the bot alias used in the test set execution.
+     */
+    botId: Id;
+    /**
+     * The bot alias Id of the bot alias used in the test set execution.
+     */
+    botAliasId: BotAliasId;
+    /**
+     * The locale Id of the bot alias used in the test set execution.
+     */
+    localeId: LocaleId;
+  }
   export interface BotExportSpecification {
     /**
      * The identifier of the bot assigned by Amazon Lex.
@@ -1361,6 +1521,77 @@ declare namespace LexModelsV2 {
   export type ConfidenceThreshold = number;
   export type ContextTimeToLiveInSeconds = number;
   export type ContextTurnsToLive = number;
+  export interface ConversationLevelIntentClassificationResultItem {
+    /**
+     * The intent name used in the evaluation of intent level success or failure.
+     */
+    intentName: Name;
+    /**
+     * The number of times the specific intent is used in the evaluation of intent level success or failure.
+     */
+    matchResult: TestResultMatchStatus;
+  }
+  export type ConversationLevelIntentClassificationResults = ConversationLevelIntentClassificationResultItem[];
+  export interface ConversationLevelResultDetail {
+    /**
+     * The success or failure of the streaming of the conversation.
+     */
+    endToEndResult: TestResultMatchStatus;
+    /**
+     * The speech transcription success or failure details of the conversation.
+     */
+    speechTranscriptionResult?: TestResultMatchStatus;
+  }
+  export interface ConversationLevelSlotResolutionResultItem {
+    /**
+     * The intents used in the slots list for the slot resolution details.
+     */
+    intentName: Name;
+    /**
+     * The slot name in the slots list for the slot resolution details.
+     */
+    slotName: TestResultSlotName;
+    /**
+     * The number of matching slots used in the slots listings for the slot resolution evaluation.
+     */
+    matchResult: TestResultMatchStatus;
+  }
+  export type ConversationLevelSlotResolutionResults = ConversationLevelSlotResolutionResultItem[];
+  export interface ConversationLevelTestResultItem {
+    /**
+     * The conversation Id of the test result evaluation item.
+     */
+    conversationId: TestSetConversationId;
+    /**
+     * The end-to-end success or failure of the test result evaluation item.
+     */
+    endToEndResult: TestResultMatchStatus;
+    /**
+     * The speech transcription success or failure of the test result evaluation item.
+     */
+    speechTranscriptionResult?: TestResultMatchStatus;
+    /**
+     * The intent classification of the test result evaluation item.
+     */
+    intentClassificationResults: ConversationLevelIntentClassificationResults;
+    /**
+     * The slot success or failure of the test result evaluation item.
+     */
+    slotResolutionResults: ConversationLevelSlotResolutionResults;
+  }
+  export type ConversationLevelTestResultItemList = ConversationLevelTestResultItem[];
+  export interface ConversationLevelTestResults {
+    /**
+     * The item list in the test set results data at the conversation level.
+     */
+    items: ConversationLevelTestResultItemList;
+  }
+  export interface ConversationLevelTestResultsFilterBy {
+    /**
+     * The selection of matched or mismatched end-to-end status to filter test set results data at the conversation level.
+     */
+    endToEndResult?: TestResultMatchStatus;
+  }
   export interface ConversationLogSettings {
     /**
      * The Amazon CloudWatch Logs settings for logging text and metadata.
@@ -1371,6 +1602,39 @@ declare namespace LexModelsV2 {
      */
     audioLogSettings?: AudioLogSettingsList;
   }
+  export interface ConversationLogsDataSource {
+    /**
+     * The bot Id from the conversation logs.
+     */
+    botId: Id;
+    /**
+     * The bot alias Id from the conversation logs.
+     */
+    botAliasId: BotAliasId;
+    /**
+     * The locale Id of the conversation log.
+     */
+    localeId: LocaleId;
+    /**
+     * The filter for the data source of the conversation log.
+     */
+    filter: ConversationLogsDataSourceFilterBy;
+  }
+  export interface ConversationLogsDataSourceFilterBy {
+    /**
+     * The start time for the conversation log.
+     */
+    startTime: Timestamp;
+    /**
+     * The end time for the conversation log.
+     */
+    endTime: Timestamp;
+    /**
+     * The selection to filter by input mode for the conversation logs. 
+     */
+    inputMode: ConversationLogsInputModeFilter;
+  }
+  export type ConversationLogsInputModeFilter = "Speech"|"Text"|string;
   export type Count = number;
   export interface CreateBotAliasRequest {
     /**
@@ -1725,7 +1989,7 @@ declare namespace LexModelsV2 {
      */
     botId: Id;
     /**
-     * The identifier of the version of the bot associated with this intent.
+     * The version of the bot associated with this intent.
      */
     botVersion: DraftBotVersion;
     /**
@@ -1791,7 +2055,7 @@ declare namespace LexModelsV2 {
      */
     botId?: Id;
     /**
-     * The identifier of the version of the bot associated with the intent.
+     * The version of the bot associated with the intent.
      */
     botVersion?: DraftBotVersion;
     /**
@@ -1841,7 +2105,7 @@ declare namespace LexModelsV2 {
      */
     effect: Effect;
     /**
-     * An IAM principal, such as an IAM users, IAM roles, or AWS services that is allowed or denied access to a resource. For more information, see AWS JSON policy elements: Principal.
+     * An IAM principal, such as an IAM user, IAM role, or Amazon Web Services services that is allowed or denied access to a resource. For more information, see Amazon Web Services JSON policy elements: Principal.
      */
     principal: PrincipalList;
     /**
@@ -1969,7 +2233,7 @@ declare namespace LexModelsV2 {
   }
   export interface CreateSlotTypeRequest {
     /**
-     * The name for the slot. A slot type name must be unique within the account.
+     * The name for the slot. A slot type name must be unique within the intent.
      */
     slotTypeName: Name;
     /**
@@ -1981,7 +2245,7 @@ declare namespace LexModelsV2 {
      */
     slotTypeValues?: SlotTypeValues;
     /**
-     * Determines the strategy that Amazon Lex uses to select a value from the list of possible values. The field can be set to one of the following values:    OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.    TopResolution - If there is a resolution list for the slot, return the first value in the resolution list. If there is no resolution list, return null.   If you don't specify the valueSelectionSetting parameter, the default is OriginalValue.
+     * Determines the strategy that Amazon Lex uses to select a value from the list of possible values. The field can be set to one of the following values:    ORIGINAL_VALUE - Returns the value entered by the user, if the user value is similar to the slot value.    TOP_RESOLUTION - If there is a resolution list for the slot, return the first value in the resolution list. If there is no resolution list, return null.   If you don't specify the valueSelectionSetting parameter, the default is ORIGINAL_VALUE.
      */
     valueSelectionSetting?: SlotValueSelectionSetting;
     /**
@@ -2058,6 +2322,34 @@ declare namespace LexModelsV2 {
      * Specifications for a composite slot type.
      */
     compositeSlotTypeSetting?: CompositeSlotTypeSetting;
+  }
+  export interface CreateTestSetDiscrepancyReportRequest {
+    /**
+     * The test set Id for the test set discrepancy report.
+     */
+    testSetId: Id;
+    /**
+     * The target bot for the test set discrepancy report.
+     */
+    target: TestSetDiscrepancyReportResourceTarget;
+  }
+  export interface CreateTestSetDiscrepancyReportResponse {
+    /**
+     * The unique identifier of the test set discrepancy report to describe.
+     */
+    testSetDiscrepancyReportId?: Id;
+    /**
+     * The creation date and time for the test set discrepancy report.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The test set Id for the test set discrepancy report.
+     */
+    testSetId?: Id;
+    /**
+     * The target bot for the test set discrepancy report.
+     */
+    target?: TestSetDiscrepancyReportResourceTarget;
   }
   export interface CreateUploadUrlRequest {
   }
@@ -2453,6 +2745,12 @@ declare namespace LexModelsV2 {
      */
     skipResourceInUseCheck?: SkipResourceInUseCheck;
   }
+  export interface DeleteTestSetRequest {
+    /**
+     * The test set Id of the test set to be deleted.
+     */
+    testSetId: Id;
+  }
   export interface DeleteUtterancesRequest {
     /**
      * The unique identifier of the bot that contains the utterances.
@@ -2536,7 +2834,7 @@ declare namespace LexModelsV2 {
      */
     botId: Id;
     /**
-     * The identifier of the version of the bot associated with the locale.
+     * The version of the bot associated with the locale.
      */
     botVersion: BotVersion;
     /**
@@ -2550,7 +2848,7 @@ declare namespace LexModelsV2 {
      */
     botId?: Id;
     /**
-     * The identifier of the version of the bot associated with the locale.
+     * The version of the bot associated with the locale.
      */
     botVersion?: BotVersion;
     /**
@@ -3010,7 +3308,7 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
     /**
-     * 
+     * Configuration setting for a response sent to the user before Amazon Lex starts eliciting slots.
      */
     initialResponseSetting?: InitialResponseSetting;
   }
@@ -3183,6 +3481,198 @@ declare namespace LexModelsV2 {
      */
     compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
+  export interface DescribeTestExecutionRequest {
+    /**
+     * The execution Id of the test set execution.
+     */
+    testExecutionId: Id;
+  }
+  export interface DescribeTestExecutionResponse {
+    /**
+     * The execution Id for the test set execution.
+     */
+    testExecutionId?: Id;
+    /**
+     * The execution creation date and time for the test set execution.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time of the last update for the execution.
+     */
+    lastUpdatedDateTime?: Timestamp;
+    /**
+     * The test execution status for the test execution.
+     */
+    testExecutionStatus?: TestExecutionStatus;
+    /**
+     * The test set Id for the test set execution.
+     */
+    testSetId?: Id;
+    /**
+     * The test set name of the test set execution.
+     */
+    testSetName?: Name;
+    /**
+     * The target bot for the test set execution details.
+     */
+    target?: TestExecutionTarget;
+    /**
+     * Indicates whether we use streaming or non-streaming APIs are used for the test set execution. For streaming, StartConversation Amazon Lex Runtime API is used. Whereas for non-streaming, RecognizeUtterance and RecognizeText Amazon Lex Runtime API is used.
+     */
+    apiMode?: TestExecutionApiMode;
+    /**
+     * Indicates whether test set is audio or text.
+     */
+    testExecutionModality?: TestExecutionModality;
+    /**
+     * Reasons for the failure of the test set execution.
+     */
+    failureReasons?: FailureReasons;
+  }
+  export interface DescribeTestSetDiscrepancyReportRequest {
+    /**
+     * The unique identifier of the test set discrepancy report.
+     */
+    testSetDiscrepancyReportId: Id;
+  }
+  export interface DescribeTestSetDiscrepancyReportResponse {
+    /**
+     * The unique identifier of the test set discrepancy report to describe.
+     */
+    testSetDiscrepancyReportId?: Id;
+    /**
+     * The test set Id for the test set discrepancy report.
+     */
+    testSetId?: Id;
+    /**
+     * The time and date of creation for the test set discrepancy report.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The target bot location for the test set discrepancy report.
+     */
+    target?: TestSetDiscrepancyReportResourceTarget;
+    /**
+     * The status for the test set discrepancy report.
+     */
+    testSetDiscrepancyReportStatus?: TestSetDiscrepancyReportStatus;
+    /**
+     * The date and time of the last update for the test set discrepancy report.
+     */
+    lastUpdatedDataTime?: Timestamp;
+    /**
+     * The top 200 error results from the test set discrepancy report.
+     */
+    testSetDiscrepancyTopErrors?: TestSetDiscrepancyErrors;
+    /**
+     * Pre-signed Amazon S3 URL to download the test set discrepancy report.
+     */
+    testSetDiscrepancyRawOutputUrl?: PresignedS3Url;
+    /**
+     * The failure report for the test set discrepancy report generation action.
+     */
+    failureReasons?: FailureReasons;
+  }
+  export interface DescribeTestSetGenerationRequest {
+    /**
+     * The unique identifier of the test set generation.
+     */
+    testSetGenerationId: Id;
+  }
+  export interface DescribeTestSetGenerationResponse {
+    /**
+     * The unique identifier of the test set generation.
+     */
+    testSetGenerationId?: Id;
+    /**
+     * The status for the test set generation.
+     */
+    testSetGenerationStatus?: TestSetGenerationStatus;
+    /**
+     * The reasons the test set generation failed.
+     */
+    failureReasons?: FailureReasons;
+    /**
+     * The unique identifier for the test set created for the generated test set.
+     */
+    testSetId?: Id;
+    /**
+     * The test set name for the generated test set.
+     */
+    testSetName?: Name;
+    /**
+     * The test set description for the test set generation.
+     */
+    description?: Description;
+    /**
+     * The Amazon S3 storage location for the test set generation.
+     */
+    storageLocation?: TestSetStorageLocation;
+    /**
+     * The data source of the test set used for the test set generation.
+     */
+    generationDataSource?: TestSetGenerationDataSource;
+    /**
+     *  The roleARN of the test set used for the test set generation.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The creation date and time for the test set generation.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time of the last update for the test set generation.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
+  export interface DescribeTestSetRequest {
+    /**
+     * The test set Id for the test set request.
+     */
+    testSetId: Id;
+  }
+  export interface DescribeTestSetResponse {
+    /**
+     * The test set Id for the test set response.
+     */
+    testSetId?: Id;
+    /**
+     * The test set name of the test set.
+     */
+    testSetName?: Name;
+    /**
+     * The description of the test set.
+     */
+    description?: Description;
+    /**
+     * Indicates whether the test set is audio or text data.
+     */
+    modality?: TestSetModality;
+    /**
+     * The status of the test set.
+     */
+    status?: TestSetStatus;
+    /**
+     * The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The total number of agent and user turn in the test set.
+     */
+    numTurns?: Count;
+    /**
+     * The Amazon S3 storage location for the test set data.
+     */
+    storageLocation?: TestSetStorageLocation;
+    /**
+     * The creation date and time for the test set data.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time for the last update of the test set data.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
   export type Description = string;
   export interface DialogAction {
     /**
@@ -3259,6 +3749,16 @@ declare namespace LexModelsV2 {
   }
   export type ErrorCode = "DUPLICATE_INPUT"|"RESOURCE_DOES_NOT_EXIST"|"RESOURCE_ALREADY_EXISTS"|"INTERNAL_SERVER_FAILURE"|string;
   export type ErrorMessage = string;
+  export interface ExecutionErrorDetails {
+    /**
+     * The error code for the error.
+     */
+    errorCode: NonEmptyString;
+    /**
+     * The message describing the error.
+     */
+    errorMessage: NonEmptyString;
+  }
   export interface ExportFilter {
     /**
      * The name of the field to use for filtering.
@@ -3289,6 +3789,10 @@ declare namespace LexModelsV2 {
      * The parameters required to export a custom vocabulary.
      */
     customVocabularyExportSpecification?: CustomVocabularyExportSpecification;
+    /**
+     * Specifications for the test set that is exported as a resource.
+     */
+    testSetExportSpecification?: TestSetExportSpecification;
   }
   export type ExportSortAttribute = "LastUpdatedDateTime"|string;
   export interface ExportSortBy {
@@ -3380,7 +3884,7 @@ declare namespace LexModelsV2 {
      */
     delayInSeconds: FulfillmentStartResponseDelay;
     /**
-     * One to 5 message groups that contain start messages. Amazon Lex chooses one of the messages to play to the user.
+     * 1 - 5 message groups that contain start messages. Amazon Lex chooses one of the messages to play to the user.
      */
     messageGroups: MessageGroupsList;
     /**
@@ -3396,7 +3900,7 @@ declare namespace LexModelsV2 {
      */
     frequencyInSeconds: FulfillmentUpdateResponseFrequency;
     /**
-     * One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.
+     * 1 - 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.
      */
     messageGroups: MessageGroupsList;
     /**
@@ -3422,6 +3926,22 @@ declare namespace LexModelsV2 {
      */
     timeoutInSeconds?: FulfillmentTimeout;
   }
+  export interface GetTestExecutionArtifactsUrlRequest {
+    /**
+     * The unique identifier of the completed test execution.
+     */
+    testExecutionId: Id;
+  }
+  export interface GetTestExecutionArtifactsUrlResponse {
+    /**
+     * The unique identifier of the completed test execution.
+     */
+    testExecutionId?: Id;
+    /**
+     * The pre-signed Amazon S3 URL to download completed test execution.
+     */
+    downloadArtifactsUrl?: PresignedS3Url;
+  }
   export interface GrammarSlotTypeSetting {
     /**
      * The source of the grammar used to create the slot type.
@@ -3430,15 +3950,15 @@ declare namespace LexModelsV2 {
   }
   export interface GrammarSlotTypeSource {
     /**
-     * The name of the S3 bucket that contains the grammar source.
+     * The name of the Amazon S3 bucket that contains the grammar source.
      */
     s3BucketName: S3BucketName;
     /**
-     * The path to the grammar in the S3 bucket.
+     * The path to the grammar in the Amazon S3 bucket.
      */
     s3ObjectKey: S3ObjectPath;
     /**
-     * The Amazon KMS key required to decrypt the contents of the grammar, if any.
+     * The KMS key required to decrypt the contents of the grammar, if any.
      */
     kmsKeyArn?: KmsKeyArn;
   }
@@ -3462,7 +3982,7 @@ declare namespace LexModelsV2 {
      */
     buttons?: ButtonsList;
   }
-  export type ImportExportFileFormat = "LexJson"|"TSV"|string;
+  export type ImportExportFileFormat = "LexJson"|"TSV"|"CSV"|string;
   export type ImportExportFilePassword = string;
   export interface ImportFilter {
     /**
@@ -3491,8 +4011,12 @@ declare namespace LexModelsV2 {
      */
     botLocaleImportSpecification?: BotLocaleImportSpecification;
     customVocabularyImportSpecification?: CustomVocabularyImportSpecification;
+    /**
+     * Specifications for the test set that is imported.
+     */
+    testSetImportResourceSpecification?: TestSetImportResourceSpecification;
   }
-  export type ImportResourceType = "Bot"|"BotLocale"|"CustomVocabulary"|string;
+  export type ImportResourceType = "Bot"|"BotLocale"|"CustomVocabulary"|"TestSet"|string;
   export type ImportSortAttribute = "LastUpdatedDateTime"|string;
   export interface ImportSortBy {
     /**
@@ -3557,6 +4081,55 @@ declare namespace LexModelsV2 {
     name: Name;
   }
   export type InputContextsList = InputContext[];
+  export interface InputSessionStateSpecification {
+    /**
+     * Session attributes for the session state.
+     */
+    sessionAttributes?: StringMap;
+    /**
+     * Active contexts for the session state.
+     */
+    activeContexts?: ActiveContextList;
+    /**
+     * Runtime hints for the session state.
+     */
+    runtimeHints?: RuntimeHints;
+  }
+  export interface IntentClassificationTestResultItem {
+    /**
+     * The name of the intent.
+     */
+    intentName: Name;
+    /**
+     * Indicates whether the conversation involves multiple turns or not.
+     */
+    multiTurnConversation: Boolean;
+    /**
+     * The result of the intent classification test.
+     */
+    resultCounts: IntentClassificationTestResultItemCounts;
+  }
+  export interface IntentClassificationTestResultItemCounts {
+    /**
+     * The total number of results in the intent classification test.
+     */
+    totalResultCount: Count;
+    /**
+     * The number of matched, mismatched, and execution error results for speech transcription for the intent.
+     */
+    speechTranscriptionResultCounts?: TestResultMatchStatusCountMap;
+    /**
+     * The number of matched and mismatched results for intent recognition for the intent.
+     */
+    intentMatchResultCounts: TestResultMatchStatusCountMap;
+  }
+  export type IntentClassificationTestResultItemList = IntentClassificationTestResultItem[];
+  export interface IntentClassificationTestResults {
+    /**
+     * A list of the results for the intent classification test.
+     */
+    items: IntentClassificationTestResultItemList;
+  }
   export interface IntentClosingSetting {
     /**
      * The response that Amazon Lex sends to the user when the intent is complete.
@@ -3637,13 +4210,34 @@ declare namespace LexModelsV2 {
   export type IntentFilterName = "IntentName"|string;
   export type IntentFilterOperator = "CO"|"EQ"|string;
   export type IntentFilters = IntentFilter[];
+  export interface IntentLevelSlotResolutionTestResultItem {
+    /**
+     * The name of the intent that was recognized.
+     */
+    intentName: Name;
+    /**
+     * Indicates whether the conversation involves multiple turns or not.
+     */
+    multiTurnConversation: Boolean;
+    /**
+     * The results for the slot resolution in the test execution result.
+     */
+    slotResolutionResults: SlotResolutionTestResultItems;
+  }
+  export type IntentLevelSlotResolutionTestResultItemList = IntentLevelSlotResolutionTestResultItem[];
+  export interface IntentLevelSlotResolutionTestResults {
+    /**
+     * Indicates the items for the slot level resolution for the intents.
+     */
+    items: IntentLevelSlotResolutionTestResultItemList;
+  }
   export interface IntentOverride {
     /**
      * The name of the intent. Only required when you're switching intents.
      */
     name?: Name;
     /**
-     * A map of all of the slot value overrides for the intent. The name of the slot maps to the value of the slot. Slots that are not included in the map aren't overridden.,
+     * A map of all of the slot value overrides for the intent. The name of the slot maps to the value of the slot. Slots that are not included in the map aren't overridden.
      */
     slots?: SlotValueOverrideMap;
   }
@@ -4426,6 +5020,106 @@ declare namespace LexModelsV2 {
      */
     tags?: TagMap;
   }
+  export interface ListTestExecutionResultItemsRequest {
+    /**
+     * The unique identifier of the test execution to list the result items.
+     */
+    testExecutionId: Id;
+    /**
+     * The filter for the list of results from the test set execution.
+     */
+    resultFilterBy: TestExecutionResultFilterBy;
+    /**
+     * The maximum number of test execution result items to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListTestExecutionResultItems operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTestExecutionResultItemsResponse {
+    /**
+     * The list of results from the test execution.
+     */
+    testExecutionResults?: TestExecutionResultItems;
+    /**
+     * A token that indicates whether there are more results to return in a response to the ListTestExecutionResultItems operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListTestExecutionResultItems operation request to get the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTestExecutionsRequest {
+    /**
+     * The sort order of the test set executions.
+     */
+    sortBy?: TestExecutionSortBy;
+    /**
+     * The maximum number of test executions to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListTestExecutions operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTestExecutionsResponse {
+    /**
+     * The list of test executions.
+     */
+    testExecutions?: TestExecutionSummaryList;
+    /**
+     * A token that indicates whether there are more results to return in a response to the ListTestExecutions operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListTestExecutions operation request to get the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTestSetRecordsRequest {
+    /**
+     * The identifier of the test set to list its test set records.
+     */
+    testSetId: Id;
+    /**
+     * The maximum number of test set records to return in each page. If there are fewer records than the max page size, only the actual number of records are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListTestSetRecords operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTestSetRecordsResponse {
+    /**
+     * The list of records from the test set.
+     */
+    testSetRecords?: TestSetTurnRecordList;
+    /**
+     * A token that indicates whether there are more records to return in a response to the ListTestSetRecords operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListTestSetRecords operation request to get the next page of records.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTestSetsRequest {
+    /**
+     * The sort order for the list of test sets.
+     */
+    sortBy?: TestSetSortBy;
+    /**
+     * The maximum number of test sets to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListTestSets operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTestSetsResponse {
+    /**
+     * The selected test sets in a list of test sets.
+     */
+    testSets?: TestSetSummaryList;
+    /**
+     * A token that indicates whether there are more results to return in a response to the ListTestSets operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListTestSets operation request to get the next page of results.
+     */
+    nextToken?: NextToken;
+  }
   export type LocaleId = string;
   export type LocaleName = string;
   export type LogPrefix = string;
@@ -4515,6 +5209,31 @@ declare namespace LexModelsV2 {
     turnsToLive: ContextTurnsToLive;
   }
   export type OutputContextsList = OutputContext[];
+  export interface OverallTestResultItem {
+    /**
+     * Indicates whether the conversation contains multiple turns or not.
+     */
+    multiTurnConversation: Boolean;
+    /**
+     * The total number of overall results in the result of the test execution.
+     */
+    totalResultCount: Count;
+    /**
+     * The number of speech transcription results in the overall test.
+     */
+    speechTranscriptionResultCounts?: TestResultMatchStatusCountMap;
+    /**
+     * The number of results that succeeded.
+     */
+    endToEndResultCounts: TestResultMatchStatusCountMap;
+  }
+  export type OverallTestResultItemList = OverallTestResultItem[];
+  export interface OverallTestResults {
+    /**
+     * A list of the overall test results.
+     */
+    items: OverallTestResultItemList;
+  }
   export interface ParentBotNetwork {
     /**
      * The identifier of the network of bots assigned by Amazon Lex.
@@ -4602,7 +5321,7 @@ declare namespace LexModelsV2 {
   export type PresignedS3Url = string;
   export interface Principal {
     /**
-     * The name of the AWS service that should allowed or denied access to an Amazon Lex action.
+     * The name of the Amazon Web Services service that should allowed or denied access to an Amazon Lex action.
      */
     service?: ServicePrincipal;
     /**
@@ -4674,6 +5393,7 @@ declare namespace LexModelsV2 {
     sampleUtterancesCount?: SampleUtterancesCount;
   }
   export type RecommendedIntentSummaryList = RecommendedIntentSummary[];
+  export type RecordNumber = number;
   export type RegexPattern = string;
   export interface RelativeAggregationDuration {
     /**
@@ -4698,10 +5418,34 @@ declare namespace LexModelsV2 {
   }
   export type RevisionId = string;
   export type RoleArn = string;
+  export interface RuntimeHintDetails {
+    /**
+     * One or more strings that Amazon Lex should look for in the input to the bot. Each phrase is given preference when deciding on slot values.
+     */
+    runtimeHintValues?: RuntimeHintValuesList;
+    /**
+     * A map of constituent sub slot names inside a composite slot in the intent and the phrases that should be added for each sub slot. Inside each composite slot hints, this structure provides a mechanism to add granular sub slot phrases. Only sub slot hints are supported for composite slots. The intent name, composite slot name and the constituent sub slot names must exist.
+     */
+    subSlotHints?: SlotHintsSlotMap;
+  }
+  export type RuntimeHintPhrase = string;
+  export interface RuntimeHintValue {
+    /**
+     * The phrase that Amazon Lex should look for in the user's input to the bot.
+     */
+    phrase: RuntimeHintPhrase;
+  }
+  export type RuntimeHintValuesList = RuntimeHintValue[];
+  export interface RuntimeHints {
+    /**
+     * A list of the slots in the intent that should have runtime hints added, and the phrases that should be added for each slot. The first level of the slotHints map is the name of the intent. The second level is the name of the slot within the intent. For more information, see Using hints to improve accuracy. The intent name and slot name must exist.
+     */
+    slotHints?: SlotHintsIntentMap;
+  }
   export type S3BucketArn = string;
   export interface S3BucketLogDestination {
     /**
-     * The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.
+     * The Amazon Resource Name (ARN) of an Amazon Web Services Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.
      */
     kmsKeyArn?: KmsKeyArn;
     /**
@@ -4893,10 +5637,12 @@ declare namespace LexModelsV2 {
   export type SlotFilterName = "SlotName"|string;
   export type SlotFilterOperator = "CO"|"EQ"|string;
   export type SlotFilters = SlotFilter[];
+  export type SlotHintsIntentMap = {[key: string]: SlotHintsSlotMap};
+  export type SlotHintsSlotMap = {[key: string]: RuntimeHintDetails};
   export type SlotPrioritiesList = SlotPriority[];
   export interface SlotPriority {
     /**
-     * The priority that a slot should be elicited.
+     * The priority that Amazon Lex should apply to the slot.
      */
     priority: PriorityValue;
     /**
@@ -4904,6 +5650,31 @@ declare namespace LexModelsV2 {
      */
     slotId: Id;
   }
+  export interface SlotResolutionTestResultItem {
+    /**
+     * The name of the slot.
+     */
+    slotName: TestResultSlotName;
+    /**
+     * A result for slot resolution in the results of a test execution.
+     */
+    resultCounts: SlotResolutionTestResultItemCounts;
+  }
+  export interface SlotResolutionTestResultItemCounts {
+    /**
+     * The total number of results.
+     */
+    totalResultCount: Count;
+    /**
+     * The number of matched, mismatched and execution error results for speech transcription for the slot.
+     */
+    speechTranscriptionResultCounts?: TestResultMatchStatusCountMap;
+    /**
+     * The number of matched and mismatched results for slot resolution for the slot.
+     */
+    slotMatchResultCounts: TestResultMatchStatusCountMap;
+  }
+  export type SlotResolutionTestResultItems = SlotResolutionTestResultItem[];
   export type SlotShape = "Scalar"|"List"|string;
   export type SlotSortAttribute = "SlotName"|"LastUpdatedDateTime"|string;
   export interface SlotSortBy {
@@ -5005,7 +5776,7 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
     /**
-     * Indicates the type of the slot type.    Custom - A slot type that you created using custom values. For more information, see Creating custom slot types.    Extended - A slot type created by extending the AMAZON.AlphaNumeric built-in slot type. For more information, see AMAZON.AlphaNumeric.    ExternalGrammar - A slot type using a custom GRXML grammar to define values. For more information, see Using a custom grammar slot type.  
+     * Indicates the type of the slot type.    Custom - A slot type that you created using custom values. For more information, see Creating custom slot types.    Extended - A slot type created by extending the AMAZON.AlphaNumeric built-in slot type. For more information, see  AMAZON.AlphaNumeric .    ExternalGrammar - A slot type using a custom GRXML grammar to define values. For more information, see Using a custom grammar slot type.  
      */
     slotTypeCategory?: SlotTypeCategory;
   }
@@ -5067,14 +5838,14 @@ declare namespace LexModelsV2 {
   export type SlotValueOverrideMap = {[key: string]: SlotValueOverride};
   export interface SlotValueRegexFilter {
     /**
-     * A regular expression used to validate the value of a slot.  Use a standard regular expression. Amazon Lex supports the following characters in the regular expression:    A-Z, a-z   0-9   Unicode characters ("\ u&lt;Unicode&gt;")    Represent Unicode characters with four digits, for example "\u0041" or "\u005A".   The following regular expression operators are not supported:    Infinite repeaters: *, +, or {x,} with no upper bound.   Wild card (.)  
+     * A regular expression used to validate the value of a slot.  Use a standard regular expression. Amazon Lex supports the following characters in the regular expression:    A-Z, a-z   0-9   Unicode characters ("\⁠u&lt;Unicode&gt;")    Represent Unicode characters with four digits, for example "\⁠u0041" or "\⁠u005A".   The following regular expression operators are not supported:    Infinite repeaters: *, +, or {x,} with no upper bound.   Wild card (.)  
      */
     pattern: RegexPattern;
   }
   export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|"Concatenation"|string;
   export interface SlotValueSelectionSetting {
     /**
-     * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:   OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.   TopResolution - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is OriginalValue. 
+     * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:    ORIGINAL_VALUE - Returns the value entered by the user, if the user value is similar to the slot value.    TOP_RESOLUTION - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is ORIGINAL_VALUE.
      */
     resolutionStrategy: SlotValueResolutionStrategy;
     /**
@@ -5082,7 +5853,7 @@ declare namespace LexModelsV2 {
      */
     regexFilter?: SlotValueRegexFilter;
     /**
-     * Provides settings that enable advanced recognition settings for slot values.
+     * Provides settings that enable advanced recognition settings for slot values. You can use this to enable using slot values as a custom vocabulary for recognizing user utterances.
      */
     advancedRecognitionSetting?: AdvancedRecognitionSetting;
   }
@@ -5193,6 +5964,114 @@ declare namespace LexModelsV2 {
      * The date and time that the import request was created.
      */
     creationDateTime?: Timestamp;
+  }
+  export interface StartTestExecutionRequest {
+    /**
+     * The test set Id for the test set execution.
+     */
+    testSetId: Id;
+    /**
+     * The target bot for the test set execution.
+     */
+    target: TestExecutionTarget;
+    /**
+     * Indicates whether we use streaming or non-streaming APIs for the test set execution. For streaming, StartConversation Runtime API is used. Whereas, for non-streaming, RecognizeUtterance and RecognizeText Amazon Lex Runtime API are used.
+     */
+    apiMode: TestExecutionApiMode;
+    /**
+     * Indicates whether audio or text is used.
+     */
+    testExecutionModality?: TestExecutionModality;
+  }
+  export interface StartTestExecutionResponse {
+    /**
+     * The unique identifier of the test set execution.
+     */
+    testExecutionId?: Id;
+    /**
+     * The creation date and time for the test set execution.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The test set Id for the test set execution.
+     */
+    testSetId?: Id;
+    /**
+     * The target bot for the test set execution.
+     */
+    target?: TestExecutionTarget;
+    /**
+     * Indicates whether we use streaming or non-streaming APIs for the test set execution. For streaming, StartConversation Amazon Lex Runtime API is used. Whereas for non-streaming, RecognizeUtterance and RecognizeText Amazon Lex Runtime API are used.
+     */
+    apiMode?: TestExecutionApiMode;
+    /**
+     * Indicates whether audio or text is used.
+     */
+    testExecutionModality?: TestExecutionModality;
+  }
+  export interface StartTestSetGenerationRequest {
+    /**
+     * The test set name for the test set generation request.
+     */
+    testSetName: Name;
+    /**
+     * The test set description for the test set generation request.
+     */
+    description?: Description;
+    /**
+     * The Amazon S3 storage location for the test set generation.
+     */
+    storageLocation: TestSetStorageLocation;
+    /**
+     * The data source for the test set generation.
+     */
+    generationDataSource: TestSetGenerationDataSource;
+    /**
+     * The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+     */
+    roleArn: RoleArn;
+    /**
+     * A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can't use the UpdateTestSet operation to update tags. To update tags, use the TagResource operation.
+     */
+    testSetTags?: TagMap;
+  }
+  export interface StartTestSetGenerationResponse {
+    /**
+     * The unique identifier of the test set generation to describe.
+     */
+    testSetGenerationId?: Id;
+    /**
+     *  The creation date and time for the test set generation.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     *  The status for the test set generation.
+     */
+    testSetGenerationStatus?: TestSetGenerationStatus;
+    /**
+     * The test set name used for the test set generation.
+     */
+    testSetName?: Name;
+    /**
+     * The description used for the test set generation.
+     */
+    description?: Description;
+    /**
+     * The Amazon S3 storage location for the test set generation.
+     */
+    storageLocation?: TestSetStorageLocation;
+    /**
+     *  The data source for the test set generation.
+     */
+    generationDataSource?: TestSetGenerationDataSource;
+    /**
+     * The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+     */
+    roleArn?: RoleArn;
+    /**
+     * A list of tags that was used for the test set that is being generated.
+     */
+    testSetTags?: TagMap;
   }
   export type StillWaitingResponseFrequency = number;
   export interface StillWaitingResponseSpecification {
@@ -5305,6 +6184,313 @@ declare namespace LexModelsV2 {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TestExecutionApiMode = "Streaming"|"NonStreaming"|string;
+  export type TestExecutionModality = "Text"|"Audio"|string;
+  export interface TestExecutionResultFilterBy {
+    /**
+     * Specifies which results to filter. See Test result details"&gt;Test results details for details about different types of results.
+     */
+    resultTypeFilter: TestResultTypeFilter;
+    /**
+     * Contains information about the method for filtering Conversation level test results.
+     */
+    conversationLevelTestResultsFilterBy?: ConversationLevelTestResultsFilterBy;
+  }
+  export interface TestExecutionResultItems {
+    /**
+     * Overall results for the test execution, including the breakdown of conversations and single-input utterances.
+     */
+    overallTestResults?: OverallTestResults;
+    /**
+     * Results related to conversations in the test set, including metrics about success and failure of conversations and intent and slot failures.
+     */
+    conversationLevelTestResults?: ConversationLevelTestResults;
+    /**
+     * Intent recognition results aggregated by intent name. The aggregated results contain success and failure rates of intent recognition, speech transcriptions, and end-to-end conversations.
+     */
+    intentClassificationTestResults?: IntentClassificationTestResults;
+    /**
+     * Slot resolution results aggregated by intent and slot name. The aggregated results contain success and failure rates of slot resolution, speech transcriptions, and end-to-end conversations
+     */
+    intentLevelSlotResolutionTestResults?: IntentLevelSlotResolutionTestResults;
+    /**
+     * Results related to utterances in the test set.
+     */
+    utteranceLevelTestResults?: UtteranceLevelTestResults;
+  }
+  export type TestExecutionSortAttribute = "TestSetName"|"CreationDateTime"|string;
+  export interface TestExecutionSortBy {
+    /**
+     * Specifies whether to sort the test set executions by the date and time at which the test sets were created.
+     */
+    attribute: TestExecutionSortAttribute;
+    /**
+     * Specifies whether to sort in ascending or descending order.
+     */
+    order: SortOrder;
+  }
+  export type TestExecutionStatus = "Pending"|"Waiting"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
+  export interface TestExecutionSummary {
+    /**
+     * The unique identifier of the test execution.
+     */
+    testExecutionId?: Id;
+    /**
+     * The date and time at which the test execution was created.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time at which the test execution was last updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+    /**
+     * The current status of the test execution.
+     */
+    testExecutionStatus?: TestExecutionStatus;
+    /**
+     * The unique identifier of the test set used in the test execution.
+     */
+    testSetId?: Id;
+    /**
+     * The name of the test set used in the test execution.
+     */
+    testSetName?: Name;
+    /**
+     * Contains information about the bot used for the test execution..
+     */
+    target?: TestExecutionTarget;
+    /**
+     * Specifies whether the API mode for the test execution is streaming or non-streaming.
+     */
+    apiMode?: TestExecutionApiMode;
+    /**
+     * Specifies whether the data used for the test execution is written or spoken.
+     */
+    testExecutionModality?: TestExecutionModality;
+  }
+  export type TestExecutionSummaryList = TestExecutionSummary[];
+  export interface TestExecutionTarget {
+    /**
+     * Contains information about the bot alias used for the test execution.
+     */
+    botAliasTarget?: BotAliasTestExecutionTarget;
+  }
+  export type TestResultMatchStatus = "Matched"|"Mismatched"|"ExecutionError"|string;
+  export type TestResultMatchStatusCountMap = {[key: string]: Count};
+  export type TestResultSlotName = string;
+  export type TestResultTypeFilter = "OverallTestResults"|"ConversationLevelTestResults"|"IntentClassificationTestResults"|"SlotResolutionTestResults"|"UtteranceLevelResults"|string;
+  export type TestSetAgentPrompt = string;
+  export type TestSetConversationId = string;
+  export interface TestSetDiscrepancyErrors {
+    /**
+     * Contains information about discrepancies found for intents between the test set and the bot.
+     */
+    intentDiscrepancies: TestSetIntentDiscrepancyList;
+    /**
+     * Contains information about discrepancies found for slots between the test set and the bot.
+     */
+    slotDiscrepancies: TestSetSlotDiscrepancyList;
+  }
+  export interface TestSetDiscrepancyReportBotAliasTarget {
+    /**
+     * The unique identifier for the bot alias.
+     */
+    botId: Id;
+    /**
+     * The unique identifier for the bot associated with the bot alias.
+     */
+    botAliasId: BotAliasId;
+    /**
+     * The unique identifier of the locale associated with the bot alias.
+     */
+    localeId: LocaleId;
+  }
+  export interface TestSetDiscrepancyReportResourceTarget {
+    /**
+     * Contains information about the bot alias used as the resource for the test set discrepancy report.
+     */
+    botAliasTarget?: TestSetDiscrepancyReportBotAliasTarget;
+  }
+  export type TestSetDiscrepancyReportStatus = "InProgress"|"Completed"|"Failed"|string;
+  export interface TestSetExportSpecification {
+    /**
+     * The unique identifier of the test set.
+     */
+    testSetId: Id;
+  }
+  export interface TestSetGenerationDataSource {
+    /**
+     * Contains information about the bot from which the conversation logs are sourced.
+     */
+    conversationLogsDataSource?: ConversationLogsDataSource;
+  }
+  export type TestSetGenerationStatus = "Generating"|"Ready"|"Failed"|"Pending"|string;
+  export interface TestSetImportInputLocation {
+    /**
+     * The name of the Amazon S3 bucket.
+     */
+    s3BucketName: S3BucketName;
+    /**
+     * The path inside the Amazon S3 bucket pointing to the test-set CSV file.
+     */
+    s3Path: S3ObjectPath;
+  }
+  export interface TestSetImportResourceSpecification {
+    /**
+     * The name of the test set.
+     */
+    testSetName: Name;
+    /**
+     * The description of the test set.
+     */
+    description?: Description;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that has permission to access the test set.
+     */
+    roleArn: RoleArn;
+    /**
+     * Contains information about the location that Amazon Lex uses to store the test-set.
+     */
+    storageLocation: TestSetStorageLocation;
+    /**
+     * Contains information about the input location from where test-set should be imported.
+     */
+    importInputLocation: TestSetImportInputLocation;
+    /**
+     * Specifies whether the test-set being imported contains written or spoken data.
+     */
+    modality: TestSetModality;
+    /**
+     * A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can't use the UpdateTestSet operation to update tags. To update tags, use the TagResource operation.
+     */
+    testSetTags?: TagMap;
+  }
+  export interface TestSetIntentDiscrepancyItem {
+    /**
+     * The name of the intent in the discrepancy report.
+     */
+    intentName: Name;
+    /**
+     * The error message for a discrepancy for an intent between the test set and the bot.
+     */
+    errorMessage: String;
+  }
+  export type TestSetIntentDiscrepancyList = TestSetIntentDiscrepancyItem[];
+  export type TestSetModality = "Text"|"Audio"|string;
+  export interface TestSetSlotDiscrepancyItem {
+    /**
+     * The name of the intent associated with the slot in the discrepancy report.
+     */
+    intentName: Name;
+    /**
+     * The name of the slot in the discrepancy report.
+     */
+    slotName: Name;
+    /**
+     * The error message for a discrepancy for an intent between the test set and the bot.
+     */
+    errorMessage: String;
+  }
+  export type TestSetSlotDiscrepancyList = TestSetSlotDiscrepancyItem[];
+  export type TestSetSortAttribute = "TestSetName"|"LastUpdatedDateTime"|string;
+  export interface TestSetSortBy {
+    /**
+     * Specifies whether to sort the test sets by name or by the time they were last updated.
+     */
+    attribute: TestSetSortAttribute;
+    /**
+     * Specifies whether to sort in ascending or descending order.
+     */
+    order: SortOrder;
+  }
+  export type TestSetStatus = "Importing"|"PendingAnnotation"|"Deleting"|"ValidationError"|"Ready"|string;
+  export interface TestSetStorageLocation {
+    /**
+     * The name of the Amazon S3 bucket in which the test set is stored.
+     */
+    s3BucketName: S3BucketName;
+    /**
+     * The path inside the Amazon S3 bucket where the test set is stored.
+     */
+    s3Path: S3ObjectPath;
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon Web Services Key Management Service (KMS) key for encrypting the test set.
+     */
+    kmsKeyArn?: KmsKeyArn;
+  }
+  export interface TestSetSummary {
+    /**
+     * The unique identifier of the test set.
+     */
+    testSetId?: Id;
+    /**
+     * The name of the test set.
+     */
+    testSetName?: Name;
+    /**
+     * The description of the test set.
+     */
+    description?: Description;
+    /**
+     * Specifies whether the test set contains written or spoken data.
+     */
+    modality?: TestSetModality;
+    /**
+     * The status of the test set.
+     */
+    status?: TestSetStatus;
+    /**
+     * The Amazon Resource Name (ARN) of an IAM role that has permission to access the test set.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The number of turns in the test set.
+     */
+    numTurns?: Count;
+    /**
+     * Contains information about the location at which the test set is stored.
+     */
+    storageLocation?: TestSetStorageLocation;
+    /**
+     * The date and time at which the test set was created.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time at which the test set was last updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
+  export type TestSetSummaryList = TestSetSummary[];
+  export interface TestSetTurnRecord {
+    /**
+     * The record number associated with the turn.
+     */
+    recordNumber: RecordNumber;
+    /**
+     * The unique identifier for the conversation associated with the turn.
+     */
+    conversationId?: TestSetConversationId;
+    /**
+     * The number of turns that has elapsed up to that turn.
+     */
+    turnNumber?: TurnNumber;
+    /**
+     * Contains information about the agent or user turn depending upon type of turn.
+     */
+    turnSpecification: TurnSpecification;
+  }
+  export type TestSetTurnRecordList = TestSetTurnRecord[];
+  export interface TestSetTurnResult {
+    /**
+     * Contains information about the agent messages in the turn.
+     */
+    agent?: AgentTurnResult;
+    /**
+     * Contains information about the user messages in the turn.
+     */
+    user?: UserTurnResult;
+  }
+  export type TestSetUtteranceText = string;
   export interface TextInputSpecification {
     /**
      * Time for which a bot waits before re-prompting a customer for text input.
@@ -5342,6 +6528,17 @@ declare namespace LexModelsV2 {
      * Indicates the setting of the Amazon S3 bucket where the transcript is stored.
      */
     s3BucketTranscriptSource?: S3BucketTranscriptSource;
+  }
+  export type TurnNumber = number;
+  export interface TurnSpecification {
+    /**
+     * Contains information about the agent messages in the turn.
+     */
+    agentTurn?: AgentTurnSpecification;
+    /**
+     * Contains information about the user messages in the turn.
+     */
+    userTurn?: UserTurnSpecification;
   }
   export interface UntagResourceRequest {
     /**
@@ -5748,7 +6945,7 @@ declare namespace LexModelsV2 {
      */
     localeId: LocaleId;
     /**
-     * 
+     * Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.
      */
     initialResponseSetting?: InitialResponseSetting;
   }
@@ -5826,7 +7023,7 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
     /**
-     * 
+     * Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.
      */
     initialResponseSetting?: InitialResponseSetting;
   }
@@ -5934,7 +7131,7 @@ declare namespace LexModelsV2 {
      */
     botId?: Id;
     /**
-     * The identifier of the slot version that contains the slot. Will always be DRAFT.
+     * The version of the bot that contains the slot. Will always be DRAFT.
      */
     botVersion?: DraftBotVersion;
     /**
@@ -6056,12 +7253,204 @@ declare namespace LexModelsV2 {
      */
     compositeSlotTypeSetting?: CompositeSlotTypeSetting;
   }
+  export interface UpdateTestSetRequest {
+    /**
+     * The test set Id for which update test operation to be performed.
+     */
+    testSetId: Id;
+    /**
+     * The new test set name.
+     */
+    testSetName: Name;
+    /**
+     * The new test set description.
+     */
+    description?: Description;
+  }
+  export interface UpdateTestSetResponse {
+    /**
+     * The test set Id for which update test operation to be performed.
+     */
+    testSetId?: Id;
+    /**
+     * The test set name for the updated test set.
+     */
+    testSetName?: Name;
+    /**
+     * The test set description for the updated test set.
+     */
+    description?: Description;
+    /**
+     * Indicates whether audio or text is used for the updated test set.
+     */
+    modality?: TestSetModality;
+    /**
+     * The status for the updated test set.
+     */
+    status?: TestSetStatus;
+    /**
+     * The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The number of conversation turns from the updated test set.
+     */
+    numTurns?: Count;
+    /**
+     * The Amazon S3 storage location for the updated test set.
+     */
+    storageLocation?: TestSetStorageLocation;
+    /**
+     * The creation date and time for the updated test set.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     *  The date and time of the last update for the updated test set.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
+  export interface UserTurnInputSpecification {
+    /**
+     * The utterance input in the user turn.
+     */
+    utteranceInput: UtteranceInputSpecification;
+    /**
+     * Request attributes of the user turn.
+     */
+    requestAttributes?: StringMap;
+    /**
+     * Contains information about the session state in the input.
+     */
+    sessionState?: InputSessionStateSpecification;
+  }
+  export interface UserTurnIntentOutput {
+    /**
+     * The name of the intent.
+     */
+    name: Name;
+    /**
+     * The slots associated with the intent.
+     */
+    slots?: UserTurnSlotOutputMap;
+  }
+  export interface UserTurnOutputSpecification {
+    /**
+     * Contains information about the intent.
+     */
+    intent: UserTurnIntentOutput;
+    /**
+     * The contexts that are active in the turn.
+     */
+    activeContexts?: ActiveContextList;
+    /**
+     * The transcript that is output for the user turn by the test execution.
+     */
+    transcript?: TestSetUtteranceText;
+  }
+  export interface UserTurnResult {
+    /**
+     * Contains information about the user messages in the turn in the input.
+     */
+    input: UserTurnInputSpecification;
+    /**
+     * Contains information about the expected output for the user turn.
+     */
+    expectedOutput: UserTurnOutputSpecification;
+    /**
+     * Contains information about the actual output for the user turn.
+     */
+    actualOutput?: UserTurnOutputSpecification;
+    errorDetails?: ExecutionErrorDetails;
+    /**
+     * Specifies whether the expected and actual outputs match or not, or if there is an error in execution.
+     */
+    endToEndResult?: TestResultMatchStatus;
+    /**
+     * Specifies whether the expected and actual intents match or not.
+     */
+    intentMatchResult?: TestResultMatchStatus;
+    /**
+     * Specifies whether the expected and actual slots match or not.
+     */
+    slotMatchResult?: TestResultMatchStatus;
+    /**
+     * Specifies whether the expected and actual speech transcriptions match or not, or if there is an error in execution.
+     */
+    speechTranscriptionResult?: TestResultMatchStatus;
+    /**
+     * Contains information about the results related to the conversation associated with the user turn.
+     */
+    conversationLevelResult?: ConversationLevelResultDetail;
+  }
+  export interface UserTurnSlotOutput {
+    /**
+     * The value output by the slot recognition.
+     */
+    value?: NonEmptyString;
+    /**
+     * Values that are output by the slot recognition.
+     */
+    values?: UserTurnSlotOutputList;
+    /**
+     * A list of items mapping the name of the subslots to information about those subslots.
+     */
+    subSlots?: UserTurnSlotOutputMap;
+  }
+  export type UserTurnSlotOutputList = UserTurnSlotOutput[];
+  export type UserTurnSlotOutputMap = {[key: string]: UserTurnSlotOutput};
+  export interface UserTurnSpecification {
+    /**
+     * Contains information about the user messages in the turn in the input.
+     */
+    input: UserTurnInputSpecification;
+    /**
+     * Contains results about the expected output for the user turn.
+     */
+    expected: UserTurnOutputSpecification;
+  }
   export type Utterance = string;
   export interface UtteranceAggregationDuration {
     /**
      * The desired time window for aggregating utterances. 
      */
     relativeAggregationDuration: RelativeAggregationDuration;
+  }
+  export interface UtteranceAudioInputSpecification {
+    /**
+     * Amazon S3 file pointing to the audio.
+     */
+    audioFileS3Location: AudioFileS3Location;
+  }
+  export interface UtteranceInputSpecification {
+    /**
+     * A text input transcription of the utterance. It is only applicable for test-sets containing text data.
+     */
+    textInput?: TestSetUtteranceText;
+    /**
+     * Contains information about the audio input for an utterance.
+     */
+    audioInput?: UtteranceAudioInputSpecification;
+  }
+  export interface UtteranceLevelTestResultItem {
+    /**
+     * The record number of the result.
+     */
+    recordNumber: RecordNumber;
+    /**
+     * The unique identifier for the conversation associated with the result.
+     */
+    conversationId?: TestSetConversationId;
+    /**
+     * Contains information about the turn associated with the result.
+     */
+    turnResult: TestSetTurnResult;
+  }
+  export type UtteranceLevelTestResultItemList = UtteranceLevelTestResultItem[];
+  export interface UtteranceLevelTestResults {
+    /**
+     * Contains information about an utterance in the results of the test set execution.
+     */
+    items: UtteranceLevelTestResultItemList;
   }
   export type Value = string;
   export type VoiceEngine = "standard"|"neural"|string;

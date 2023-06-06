@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1391.0-->
+<!--LATEST=2.1392.0-->
 <!--ENTRYINSERT-->
+
+## 2.1392.0
+* feature: EMR: This release provides customers the ability to specify an allocation strategies amongst PRICE_CAPACITY_OPTIMIZED, CAPACITY_OPTIMIZED, LOWEST_PRICE, DIVERSIFIED for Spot instances in Instance Feet cluster. This enables customers to choose an allocation strategy best suited for their workload.
+* feature: IAM: This release updates the AccountAlias regex pattern with the same length restrictions enforced by the length constraint.
+* feature: Inspector2: Adds new response properties and request parameters for 'last scanned at' on the ListCoverage operation. This feature allows you to search and view the date of which your resources were last scanned by Inspector.
+* feature: Iot: Adding IoT Device Management Software Package Catalog APIs to register, store, and report system software packages, along with their versions and metadata in a centralized location.
+* feature: IotData: Update thing shadow name regex to allow '$' character
+* feature: LexModelsV2: This release adds support for Lex Developers to create test sets and to execute those test-sets against their bots.
+* feature: QuickSight: QuickSight support for pivot table field collapse state, radar chart range scale and multiple scope options in conditional formatting.
+* feature: SQS: Amazon SQS adds three new APIs - StartMessageMoveTask, CancelMessageMoveTask, and ListMessageMoveTasks to automate redriving messages from dead-letter queues to source queues or a custom destination.
+* feature: Signer: AWS Signer is launching Container Image Signing, a new feature that enables you to sign and verify container images. This feature enables you to validate that only container images you approve are used in your enterprise.
 
 ## 2.1391.0
 * feature: CloudFormation: AWS CloudFormation StackSets provides customers with three new APIs to activate, deactivate, and describe AWS Organizations trusted access which is needed to get started with service-managed StackSets.

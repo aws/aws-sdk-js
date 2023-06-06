@@ -3326,7 +3326,7 @@ declare namespace EMR {
     Version?: String;
   }
   export type SimplifiedApplicationList = SimplifiedApplication[];
-  export type SpotProvisioningAllocationStrategy = "capacity-optimized"|string;
+  export type SpotProvisioningAllocationStrategy = "capacity-optimized"|"price-capacity-optimized"|"lowest-price"|"diversified"|string;
   export interface SpotProvisioningSpecification {
     /**
      * The Spot provisioning timeout period in minutes. If Spot Instances are not provisioned within this time period, the TimeOutAction is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.
@@ -3341,7 +3341,7 @@ declare namespace EMR {
      */
     BlockDurationMinutes?: WholeNumber;
     /**
-     *  Specifies the strategy to use in launching Spot Instance fleets. Currently, the only option is capacity-optimized (the default), which launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. 
+     * Specifies one of the following strategies to launch Spot Instance fleets: price-capacity-optimized, capacity-optimized, lowest-price, or diversified. For more information on the provisioning strategies, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide for Linux Instances.  When you launch a Spot Instance fleet with the old console, it automatically launches with the capacity-optimized strategy. You can't change the allocation strategy from the old console. 
      */
     AllocationStrategy?: SpotProvisioningAllocationStrategy;
   }

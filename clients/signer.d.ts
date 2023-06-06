@@ -37,6 +37,14 @@ declare class Signer extends Service {
    */
   describeSigningJob(callback?: (err: AWSError, data: Signer.Types.DescribeSigningJobResponse) => void): Request<Signer.Types.DescribeSigningJobResponse, AWSError>;
   /**
+   * Retrieves the revocation status of one or more of the signing profile, signing job, and signing certificate.
+   */
+  getRevocationStatus(params: Signer.Types.GetRevocationStatusRequest, callback?: (err: AWSError, data: Signer.Types.GetRevocationStatusResponse) => void): Request<Signer.Types.GetRevocationStatusResponse, AWSError>;
+  /**
+   * Retrieves the revocation status of one or more of the signing profile, signing job, and signing certificate.
+   */
+  getRevocationStatus(callback?: (err: AWSError, data: Signer.Types.GetRevocationStatusResponse) => void): Request<Signer.Types.GetRevocationStatusResponse, AWSError>;
+  /**
    * Returns information on a specific signing platform.
    */
   getSigningPlatform(params: Signer.Types.GetSigningPlatformRequest, callback?: (err: AWSError, data: Signer.Types.GetSigningPlatformResponse) => void): Request<Signer.Types.GetSigningPlatformResponse, AWSError>;
@@ -93,11 +101,11 @@ declare class Signer extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Signer.Types.ListTagsForResourceResponse) => void): Request<Signer.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html 
+   * Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. 
    */
   putSigningProfile(params: Signer.Types.PutSigningProfileRequest, callback?: (err: AWSError, data: Signer.Types.PutSigningProfileResponse) => void): Request<Signer.Types.PutSigningProfileResponse, AWSError>;
   /**
-   * Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html 
+   * Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. 
    */
   putSigningProfile(callback?: (err: AWSError, data: Signer.Types.PutSigningProfileResponse) => void): Request<Signer.Types.PutSigningProfileResponse, AWSError>;
   /**
@@ -125,11 +133,19 @@ declare class Signer extends Service {
    */
   revokeSigningProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Create a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to code signing.   You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see http://docs.aws.amazon.com/acm/latest/userguide/ 
+   * Signs a binary payload and returns a signature envelope.
+   */
+  signPayload(params: Signer.Types.SignPayloadRequest, callback?: (err: AWSError, data: Signer.Types.SignPayloadResponse) => void): Request<Signer.Types.SignPayloadResponse, AWSError>;
+  /**
+   * Signs a binary payload and returns a signature envelope.
+   */
+  signPayload(callback?: (err: AWSError, data: Signer.Types.SignPayloadResponse) => void): Request<Signer.Types.SignPayloadResponse, AWSError>;
+  /**
+   * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Creating a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to code signing.   You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see StartSigningJob.
    */
   startSigningJob(params: Signer.Types.StartSigningJobRequest, callback?: (err: AWSError, data: Signer.Types.StartSigningJobResponse) => void): Request<Signer.Types.StartSigningJobResponse, AWSError>;
   /**
-   * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Create a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to code signing.   You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see http://docs.aws.amazon.com/acm/latest/userguide/ 
+   * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Creating a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to code signing.   You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see StartSigningJob.
    */
   startSigningJob(callback?: (err: AWSError, data: Signer.Types.StartSigningJobResponse) => void): Request<Signer.Types.StartSigningJobResponse, AWSError>;
   /**
@@ -192,6 +208,7 @@ declare namespace Signer {
     revisionId?: String;
   }
   export type Arn = string;
+  export type _Blob = Buffer|Uint8Array|Blob|string;
   export type BucketName = string;
   export interface CancelSigningProfileRequest {
     /**
@@ -201,6 +218,7 @@ declare namespace Signer {
   }
   export type Category = "AWSIoT"|string;
   export type CertificateArn = string;
+  export type CertificateHashes = String[];
   export type ClientRequestToken = string;
   export interface DescribeSigningJobRequest {
     /**
@@ -305,6 +323,34 @@ declare namespace Signer {
     defaultValue: EncryptionAlgorithm;
   }
   export type EncryptionAlgorithms = EncryptionAlgorithm[];
+  export interface GetRevocationStatusRequest {
+    /**
+     * The timestamp of the signature that validates the profile or job.
+     */
+    signatureTimestamp: Timestamp;
+    /**
+     * The ID of a signing platform. 
+     */
+    platformId: PlatformId;
+    /**
+     * The version of a signing profile.
+     */
+    profileVersionArn: Arn;
+    /**
+     * The ARN of a signing job.
+     */
+    jobArn: Arn;
+    /**
+     * A list of composite signed hashes that identify certificates. A certificate identifier consists of a subject certificate TBS hash (signed by the parent CA) combined with a parent CA TBS hash (signed by the parent CA’s CA). Root certificates are defined as their own CA.
+     */
+    certificateHashes: CertificateHashes;
+  }
+  export interface GetRevocationStatusResponse {
+    /**
+     * A list of revoked entities (including one or more of the signing profile ARN, signing job ID, and certificate hash) supplied as input to the API.
+     */
+    revokedEntities?: RevokedEntities;
+  }
   export interface GetSigningPlatformRequest {
     /**
      * The ID of the target signing platform.
@@ -582,7 +628,9 @@ declare namespace Signer {
   }
   export type MaxResults = number;
   export type MaxSizeInMB = number;
+  export type Metadata = {[key: string]: String};
   export type NextToken = string;
+  export type Payload = Buffer|Uint8Array|Blob|string;
   export interface Permission {
     /**
      * An AWS Signer action permitted as part of cross-account permissions.
@@ -705,6 +753,7 @@ declare namespace Signer {
      */
     effectiveTime: Timestamp;
   }
+  export type RevokedEntities = String[];
   export interface S3Destination {
     /**
      * Name of the S3 bucket.
@@ -738,6 +787,42 @@ declare namespace Signer {
      * Version of your source image in your version enabled S3 bucket.
      */
     version: Version;
+  }
+  export interface SignPayloadRequest {
+    /**
+     * The name of the signing profile.
+     */
+    profileName: ProfileName;
+    /**
+     * The AWS account ID of the profile owner.
+     */
+    profileOwner?: AccountId;
+    /**
+     * Specifies the object digest (hash) to sign.
+     */
+    payload: Payload;
+    /**
+     * Payload content type
+     */
+    payloadFormat: String;
+  }
+  export interface SignPayloadResponse {
+    /**
+     * Unique identifier of the signing job.
+     */
+    jobId?: JobId;
+    /**
+     * The AWS account ID of the job owner.
+     */
+    jobOwner?: AccountId;
+    /**
+     * Information including the signing profile ARN and the signing job ID. Clients use metadata to signature records, for example, as annotations added to the signature manifest inside an OCI registry.
+     */
+    metadata?: Metadata;
+    /**
+     * A cryptographic signature.
+     */
+    signature?: _Blob;
   }
   export interface SignatureValidityPeriod {
     /**
@@ -869,7 +954,7 @@ declare namespace Signer {
   export type SigningParameters = {[key: string]: SigningParameterValue};
   export interface SigningPlatform {
     /**
-     * The ID of a code signing; platform.
+     * The ID of a code signing platform.
      */
     platformId?: String;
     /**
