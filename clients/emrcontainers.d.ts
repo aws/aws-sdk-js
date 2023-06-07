@@ -248,6 +248,16 @@ declare namespace EMRcontainers {
      */
     eksInfo?: EksInfo;
   }
+  export interface ContainerLogRotationConfiguration {
+    /**
+     * The file size at which to rotate logs. Minimum of 2KB, Maximum of 2GB.
+     */
+    rotationSize: RotationSize;
+    /**
+     * The number of files to keep in container after rotation.
+     */
+    maxFilesToKeep: MaxFilesToKeep;
+  }
   export interface ContainerProvider {
     /**
      * The type of the container provider. Amazon EKS is the only supported type as of now.
@@ -950,6 +960,7 @@ declare namespace EMRcontainers {
   }
   export type LogContext = string;
   export type LogGroupName = string;
+  export type MaxFilesToKeep = number;
   export interface MonitoringConfiguration {
     /**
      * Monitoring configurations for the persistent application UI. 
@@ -963,6 +974,10 @@ declare namespace EMRcontainers {
      * Amazon S3 configuration for monitoring log publishing.
      */
     s3MonitoringConfiguration?: S3MonitoringConfiguration;
+    /**
+     * Enable or disable container log rotation.
+     */
+    containerLogRotationConfiguration?: ContainerLogRotationConfiguration;
   }
   export type NextToken = string;
   export interface ParametricCloudWatchMonitoringConfiguration {
@@ -1024,6 +1039,7 @@ declare namespace EMRcontainers {
      */
     currentAttemptCount: JavaInteger;
   }
+  export type RotationSize = string;
   export type RsiArn = string;
   export interface S3MonitoringConfiguration {
     /**

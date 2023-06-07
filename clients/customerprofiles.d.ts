@@ -36,6 +36,14 @@ declare class CustomerProfiles extends Service {
    */
   createDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
   /**
+   * Creates an event stream, which is a subscription to real-time events, such as when profiles are created and updated through Amazon Connect Customer Profiles. Each event stream can be associated with only one Kinesis Data Stream destination in the same region and Amazon Web Services account as the customer profiles domain
+   */
+  createEventStream(params: CustomerProfiles.Types.CreateEventStreamRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateEventStreamResponse) => void): Request<CustomerProfiles.Types.CreateEventStreamResponse, AWSError>;
+  /**
+   * Creates an event stream, which is a subscription to real-time events, such as when profiles are created and updated through Amazon Connect Customer Profiles. Each event stream can be associated with only one Kinesis Data Stream destination in the same region and Amazon Web Services account as the customer profiles domain
+   */
+  createEventStream(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateEventStreamResponse) => void): Request<CustomerProfiles.Types.CreateEventStreamResponse, AWSError>;
+  /**
    *  Creates an integration workflow. An integration workflow is an async process which ingests historic data and sets up an integration for ongoing updates. The supported Amazon AppFlow sources are Salesforce, ServiceNow, and Marketo. 
    */
   createIntegrationWorkflow(params: CustomerProfiles.Types.CreateIntegrationWorkflowRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateIntegrationWorkflowResponse) => void): Request<CustomerProfiles.Types.CreateIntegrationWorkflowResponse, AWSError>;
@@ -67,6 +75,14 @@ declare class CustomerProfiles extends Service {
    * Deletes a specific domain and all of its customer data, such as customer profile attributes and their related objects.
    */
   deleteDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteDomainResponse) => void): Request<CustomerProfiles.Types.DeleteDomainResponse, AWSError>;
+  /**
+   * Disables and deletes the specified event stream.
+   */
+  deleteEventStream(params: CustomerProfiles.Types.DeleteEventStreamRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteEventStreamResponse) => void): Request<CustomerProfiles.Types.DeleteEventStreamResponse, AWSError>;
+  /**
+   * Disables and deletes the specified event stream.
+   */
+  deleteEventStream(callback?: (err: AWSError, data: CustomerProfiles.Types.DeleteEventStreamResponse) => void): Request<CustomerProfiles.Types.DeleteEventStreamResponse, AWSError>;
   /**
    * Removes an integration from a specific domain.
    */
@@ -147,6 +163,14 @@ declare class CustomerProfiles extends Service {
    * Returns information about a specific domain.
    */
   getDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.GetDomainResponse) => void): Request<CustomerProfiles.Types.GetDomainResponse, AWSError>;
+  /**
+   * Returns information about the specified event stream in a specific domain.
+   */
+  getEventStream(params: CustomerProfiles.Types.GetEventStreamRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetEventStreamResponse) => void): Request<CustomerProfiles.Types.GetEventStreamResponse, AWSError>;
+  /**
+   * Returns information about the specified event stream in a specific domain.
+   */
+  getEventStream(callback?: (err: AWSError, data: CustomerProfiles.Types.GetEventStreamResponse) => void): Request<CustomerProfiles.Types.GetEventStreamResponse, AWSError>;
   /**
    * Returns information about an Identity Resolution Job in a specific domain.  Identity Resolution Jobs are set up using the Amazon Connect admin console. For more information, see Use Identity Resolution to consolidate similar profiles.
    */
@@ -235,6 +259,14 @@ declare class CustomerProfiles extends Service {
    * Returns a list of all the domains for an AWS account that have been created.
    */
   listDomains(callback?: (err: AWSError, data: CustomerProfiles.Types.ListDomainsResponse) => void): Request<CustomerProfiles.Types.ListDomainsResponse, AWSError>;
+  /**
+   * Returns a list of all the event streams in a specific domain.
+   */
+  listEventStreams(params: CustomerProfiles.Types.ListEventStreamsRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.ListEventStreamsResponse) => void): Request<CustomerProfiles.Types.ListEventStreamsResponse, AWSError>;
+  /**
+   * Returns a list of all the event streams in a specific domain.
+   */
+  listEventStreams(callback?: (err: AWSError, data: CustomerProfiles.Types.ListEventStreamsResponse) => void): Request<CustomerProfiles.Types.ListEventStreamsResponse, AWSError>;
   /**
    * Lists all of the Identity Resolution Jobs in your domain. The response sorts the list by JobStartTime.
    */
@@ -761,6 +793,34 @@ declare namespace CustomerProfiles {
      */
     Tags?: TagMap;
   }
+  export interface CreateEventStreamRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name
+     */
+    Uri: string1To255;
+    /**
+     * The name of the event stream.
+     */
+    EventStreamName: name;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateEventStreamResponse {
+    /**
+     * A unique identifier for the event stream.
+     */
+    EventStreamArn: string1To255;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
   export interface CreateIntegrationWorkflowRequest {
     /**
      * The unique name of the domain.
@@ -928,6 +988,18 @@ declare namespace CustomerProfiles {
      */
     Message: message;
   }
+  export interface DeleteEventStreamRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The name of the event stream
+     */
+    EventStreamName: name;
+  }
+  export interface DeleteEventStreamResponse {
+  }
   export interface DeleteIntegrationRequest {
     /**
      * The unique name of the domain.
@@ -1037,6 +1109,20 @@ declare namespace CustomerProfiles {
   export interface DeleteWorkflowResponse {
   }
   export type DestinationField = string;
+  export interface DestinationSummary {
+    /**
+     * The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name.
+     */
+    Uri: string1To255;
+    /**
+     * The status of enabling the Kinesis stream as a destination for export.
+     */
+    Status: EventStreamDestinationStatus;
+    /**
+     * The timestamp when the status last changed to UNHEALHY.
+     */
+    UnhealthySince?: timestamp;
+  }
   export type DomainList = ListDomainItem[];
   export interface DomainStats {
     /**
@@ -1058,6 +1144,57 @@ declare namespace CustomerProfiles {
   }
   export type Double = number;
   export type Double0To1 = number;
+  export interface EventStreamDestinationDetails {
+    /**
+     * The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name.
+     */
+    Uri: string1To255;
+    /**
+     * The status of enabling the Kinesis stream as a destination for export.
+     */
+    Status: EventStreamDestinationStatus;
+    /**
+     * The timestamp when the status last changed to UNHEALHY.
+     */
+    UnhealthySince?: timestamp;
+    /**
+     * The human-readable string that corresponds to the error or success while enabling the streaming destination.
+     */
+    Message?: string1To1000;
+  }
+  export type EventStreamDestinationStatus = "HEALTHY"|"UNHEALTHY"|string;
+  export type EventStreamState = "RUNNING"|"STOPPED"|string;
+  export interface EventStreamSummary {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The name of the event stream.
+     */
+    EventStreamName: name;
+    /**
+     * A unique identifier for the event stream.
+     */
+    EventStreamArn: string1To255;
+    /**
+     * The operational state of destination stream for export.
+     */
+    State: EventStreamState;
+    /**
+     * The timestamp when the State changed to STOPPED.
+     */
+    StoppedSince?: timestamp;
+    /**
+     * Summary information about the Kinesis data stream.
+     */
+    DestinationSummary?: DestinationSummary;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export type EventStreamSummaryList = EventStreamSummary[];
   export interface ExportingConfig {
     /**
      * The S3 location where Identity Resolution Jobs write result files.
@@ -1353,6 +1490,46 @@ declare namespace CustomerProfiles {
      * The timestamp of when the domain was most recently edited.
      */
     LastUpdatedAt: timestamp;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    Tags?: TagMap;
+  }
+  export interface GetEventStreamRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The name of the event stream provided during create operations.
+     */
+    EventStreamName: name;
+  }
+  export interface GetEventStreamResponse {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * A unique identifier for the event stream.
+     */
+    EventStreamArn: string1To255;
+    /**
+     * The timestamp of when the export was created.
+     */
+    CreatedAt: timestamp;
+    /**
+     * The operational state of destination stream for export.
+     */
+    State: EventStreamState;
+    /**
+     * The timestamp when the State changed to STOPPED.
+     */
+    StoppedSince?: timestamp;
+    /**
+     * Details regarding the Kinesis stream.
+     */
+    DestinationDetails: EventStreamDestinationDetails;
     /**
      * The tags used to organize, track, or control access for this resource.
      */
@@ -1906,6 +2083,30 @@ declare namespace CustomerProfiles {
     Items?: DomainList;
     /**
      * The pagination token from the previous ListDomains API call.
+     */
+    NextToken?: token;
+  }
+  export interface ListEventStreamsRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of objects returned per page.
+     */
+    MaxResults?: maxSize100;
+  }
+  export interface ListEventStreamsResponse {
+    /**
+     * Contains summary information about an EventStream.
+     */
+    Items?: EventStreamSummaryList;
+    /**
+     * Identifies the next page of results to return.
      */
     NextToken?: token;
   }
