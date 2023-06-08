@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1393.0-->
+<!--LATEST=2.1394.0-->
 <!--ENTRYINSERT-->
+
+## 2.1394.0
+* feature: Athena: You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
+* feature: ComprehendMedical: This release supports a new set of entities and traits.
+* feature: PaymentCryptography: Initial release of AWS Payment Cryptography Control Plane service for creating and managing cryptographic keys used during card payment processing.
+* feature: PaymentCryptographyData: Initial release of AWS Payment Cryptography DataPlane Plane service for performing cryptographic operations typically used during card payment processing.
+* feature: ServiceCatalog: New parameter added in ServiceCatalog DescribeProvisioningArtifact api - IncludeProvisioningArtifactParameters. This parameter can be used to return information about the parameters used to provision the product
+* feature: TimestreamWrite: This release adds the capability for customers to define how their data should be partitioned, optimizing for certain access patterns. This definition will take place as a part of the table creation.
 
 ## 2.1393.0
 * feature: CloudFormation: AWS CloudFormation StackSets is updating the deployment experience for all stackset operations to skip suspended AWS accounts during deployments. StackSets will skip target AWS accounts that are suspended and set the Detailed Status of the corresponding stack instances as SKIPPED_SUSPENDED_ACCOUNT

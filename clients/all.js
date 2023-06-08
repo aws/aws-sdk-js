@@ -345,5 +345,7 @@ module.exports = {
   IVSRealTime: require('./ivsrealtime'),
   VPCLattice: require('./vpclattice'),
   OSIS: require('./osis'),
-  MediaPackageV2: require('./mediapackagev2')
+  MediaPackageV2: require('./mediapackagev2'),
+  PaymentCryptography: require('./paymentcryptography'),
+  PaymentCryptographyData: require('./paymentcryptographydata')
 };

@@ -622,7 +622,7 @@ declare namespace ComprehendMedical {
   export type ICD10CMEntityCategory = "MEDICAL_CONDITION"|string;
   export type ICD10CMEntityList = ICD10CMEntity[];
   export type ICD10CMEntityType = "DX_NAME"|"TIME_EXPRESSION"|string;
-  export type ICD10CMRelationshipType = "OVERLAP"|"SYSTEM_ORGAN_SITE"|string;
+  export type ICD10CMRelationshipType = "OVERLAP"|"SYSTEM_ORGAN_SITE"|"QUALITY"|string;
   export interface ICD10CMTrait {
     /**
      * Provides a name or contextual description about the trait.
@@ -851,7 +851,7 @@ declare namespace ComprehendMedical {
      */
     S3Key?: S3Key;
   }
-  export type RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"TEST_UNIT"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"AMOUNT"|string;
+  export type RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"TEST_UNIT"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"AMOUNT"|"USAGE"|"QUALITY"|string;
   export interface RxNormAttribute {
     /**
      * The type of attribute. The types of attributes recognized by InferRxNorm are BRAND_NAME and GENERIC_NAME.
@@ -959,7 +959,7 @@ declare namespace ComprehendMedical {
     Score?: Float;
   }
   export type RxNormTraitList = RxNormTrait[];
-  export type RxNormTraitName = "NEGATION"|string;
+  export type RxNormTraitName = "NEGATION"|"PAST_HISTORY"|string;
   export type S3Bucket = string;
   export type S3Key = string;
   export interface SNOMEDCTAttribute {
@@ -1084,7 +1084,7 @@ declare namespace ComprehendMedical {
   export type SNOMEDCTEntityCategory = "MEDICAL_CONDITION"|"ANATOMY"|"TEST_TREATMENT_PROCEDURE"|string;
   export type SNOMEDCTEntityList = SNOMEDCTEntity[];
   export type SNOMEDCTEntityType = "DX_NAME"|"TEST_NAME"|"PROCEDURE_NAME"|"TREATMENT_NAME"|string;
-  export type SNOMEDCTRelationshipType = "ACUITY"|"QUALITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|string;
+  export type SNOMEDCTRelationshipType = "ACUITY"|"QUALITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"TEST_UNIT"|string;
   export interface SNOMEDCTTrait {
     /**
      *  The name or contextual description of a detected trait. 

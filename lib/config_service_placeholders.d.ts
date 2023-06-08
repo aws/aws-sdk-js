@@ -346,6 +346,8 @@ export abstract class ConfigurationServicePlaceholders {
   vpclattice?: AWS.VPCLattice.Types.ClientConfiguration;
   osis?: AWS.OSIS.Types.ClientConfiguration;
   mediapackagev2?: AWS.MediaPackageV2.Types.ClientConfiguration;
+  paymentcryptography?: AWS.PaymentCryptography.Types.ClientConfiguration;
+  paymentcryptographydata?: AWS.PaymentCryptographyData.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -694,4 +696,6 @@ export interface ConfigurationServiceApiVersions {
   vpclattice?: AWS.VPCLattice.Types.apiVersion;
   osis?: AWS.OSIS.Types.apiVersion;
   mediapackagev2?: AWS.MediaPackageV2.Types.apiVersion;
+  paymentcryptography?: AWS.PaymentCryptography.Types.apiVersion;
+  paymentcryptographydata?: AWS.PaymentCryptographyData.Types.apiVersion;
 }

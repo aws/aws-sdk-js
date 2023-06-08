@@ -12,11 +12,11 @@ declare class TimestreamWrite extends Service {
   constructor(options?: TimestreamWrite.Types.ClientConfiguration)
   config: Config & TimestreamWrite.Types.ClientConfiguration;
   /**
-   * Creates a new Timestream batch load task. A batch load task processes data from a CSV source in an S3 location and writes to a Timestream table. A mapping from source to target is defined in a batch load task. Errors and events are written to a report at an S3 location. For the report, if the KMS key is not specified, the batch load task will be encrypted with a Timestream managed KMS key located in your account. For more information, see Amazon Web Services managed keys. Service quotas apply. For details, see code sample.
+   * Creates a new Timestream batch load task. A batch load task processes data from a CSV source in an S3 location and writes to a Timestream table. A mapping from source to target is defined in a batch load task. Errors and events are written to a report at an S3 location. For the report, if the KMS key is not specified, the report will be encrypted with an S3 managed key when SSE_S3 is the option. Otherwise an error is thrown. For more information, see Amazon Web Services managed keys. Service quotas apply. For details, see code sample.
    */
   createBatchLoadTask(params: TimestreamWrite.Types.CreateBatchLoadTaskRequest, callback?: (err: AWSError, data: TimestreamWrite.Types.CreateBatchLoadTaskResponse) => void): Request<TimestreamWrite.Types.CreateBatchLoadTaskResponse, AWSError>;
   /**
-   * Creates a new Timestream batch load task. A batch load task processes data from a CSV source in an S3 location and writes to a Timestream table. A mapping from source to target is defined in a batch load task. Errors and events are written to a report at an S3 location. For the report, if the KMS key is not specified, the batch load task will be encrypted with a Timestream managed KMS key located in your account. For more information, see Amazon Web Services managed keys. Service quotas apply. For details, see code sample.
+   * Creates a new Timestream batch load task. A batch load task processes data from a CSV source in an S3 location and writes to a Timestream table. A mapping from source to target is defined in a batch load task. Errors and events are written to a report at an S3 location. For the report, if the KMS key is not specified, the report will be encrypted with an S3 managed key when SSE_S3 is the option. Otherwise an error is thrown. For more information, see Amazon Web Services managed keys. Service quotas apply. For details, see code sample.
    */
   createBatchLoadTask(callback?: (err: AWSError, data: TimestreamWrite.Types.CreateBatchLoadTaskResponse) => void): Request<TimestreamWrite.Types.CreateBatchLoadTaskResponse, AWSError>;
   /**
@@ -353,6 +353,10 @@ declare namespace TimestreamWrite {
      * Contains properties to set on the table when enabling magnetic store writes.
      */
     MagneticStoreWriteProperties?: MagneticStoreWriteProperties;
+    /**
+     *  The schema of the table. 
+     */
+    Schema?: Schema;
   }
   export interface CreateTableResponse {
     /**
@@ -684,7 +688,7 @@ declare namespace TimestreamWrite {
      */
     Name: SchemaName;
     /**
-     *  The value for the MeasureValue. 
+     *  The value for the MeasureValue. For information, see Data types.
      */
     Value: StringValue2048;
     /**
@@ -745,6 +749,23 @@ declare namespace TimestreamWrite {
   }
   export type PageLimit = number;
   export type PaginationLimit = number;
+  export interface PartitionKey {
+    /**
+     *  The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key). 
+     */
+    Type: PartitionKeyType;
+    /**
+     *  The name of the attribute used for a dimension key. 
+     */
+    Name?: SchemaName;
+    /**
+     *  The level of enforcement for the specification of a dimension key in ingested records. Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not have to be specified). 
+     */
+    EnforcementInRecord?: PartitionKeyEnforcementLevel;
+  }
+  export type PartitionKeyEnforcementLevel = "REQUIRED"|"OPTIONAL"|string;
+  export type PartitionKeyList = PartitionKey[];
+  export type PartitionKeyType = "DIMENSION"|"MEASURE"|string;
   export interface Record {
     /**
      * Contains the list of dimensions for time-series data points.
@@ -759,7 +780,7 @@ declare namespace TimestreamWrite {
      */
     MeasureValue?: StringValue2048;
     /**
-     *  Contains the data type of the measure value for the time-series data point. Default type is DOUBLE. 
+     *  Contains the data type of the measure value for the time-series data point. Default type is DOUBLE. For more information, see Data types.
      */
     MeasureValueType?: MeasureValueType;
     /**
@@ -862,6 +883,12 @@ declare namespace TimestreamWrite {
   export type S3ObjectKey = string;
   export type S3ObjectKeyPrefix = string;
   export type ScalarMeasureValueType = "DOUBLE"|"BIGINT"|"BOOLEAN"|"VARCHAR"|"TIMESTAMP"|string;
+  export interface Schema {
+    /**
+     * A non-empty list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed. 
+     */
+    CompositePartitionKey?: PartitionKeyList;
+  }
   export type SchemaName = string;
   export type SchemaValue = string;
   export type String = string;
@@ -901,6 +928,10 @@ declare namespace TimestreamWrite {
      * Contains properties to set on the table when enabling magnetic store writes.
      */
     MagneticStoreWriteProperties?: MagneticStoreWriteProperties;
+    /**
+     *  The schema of the table. 
+     */
+    Schema?: Schema;
   }
   export type TableList = Table[];
   export type TableStatus = "ACTIVE"|"DELETING"|"RESTORING"|string;
@@ -973,6 +1004,10 @@ declare namespace TimestreamWrite {
      * Contains properties to set on the table when enabling magnetic store writes.
      */
     MagneticStoreWriteProperties?: MagneticStoreWriteProperties;
+    /**
+     *  The schema of the table. 
+     */
+    Schema?: Schema;
   }
   export interface UpdateTableResponse {
     /**

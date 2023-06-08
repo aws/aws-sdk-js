@@ -790,11 +790,11 @@ declare namespace ServiceCatalog {
      */
     PortfolioId: Id;
     /**
-     * The ARN of the principal (user, role, or group). The supported value is a fully defined  IAM ARN if the PrincipalType is IAM. If the PrincipalType is IAM_PATTERN, the supported value is an IAM ARN without an AccountID in the following format:  arn:partition:iam:::resource-type/resource-id  The resource-id can be either of the following:   Fully formed, for example arn:aws:iam:::role/resource-name or arn:aws:iam:::role/resource-path/resource-name    A wildcard ARN. The wildcard ARN accepts IAM_PATTERN values with a "*" or "?" in the resource-id segment of the ARN, for example arn:partition:service:::resource-type/resource-path/resource-name. The new symbols are exclusive to the resource-path and resource-name and cannot be used to replace the resource-type or other ARN values.    Examples of an acceptable wildcard ARN:   arn:aws:iam:::role/ResourceName_*   arn:aws:iam:::role/*ResourceName_?   Examples of an unacceptable wildcard ARN:   arn:aws:iam:::*ResourceName   You can associate multiple IAM_PATTERNs even if the account has no principal with that name.     The ARN path and principal name allow unlimited wildcard characters.    The "?" wildcard character matches zero or one of any character. This is similar to ".?" in regular regex context.   The "*" wildcard character matches any number of any characters. This is similar ".*" in regular regex context.   In the IAM Principal ARNs format (arn:partition:iam:::resource-type/resource-path/resource-name), valid resource-type values include user/, group/, or role/. The "?" and "*" are allowed only after the resource-type, in the resource-id segment. You can use special characters anywhere within the resource-id.   The "*" also matches the "/" character, allowing paths to be formed within the resource-id. For example, arn:aws:iam:::role/*ResourceName_? matches both arn:aws:iam:::role/pathA/pathB/ResourceName_1 and arn:aws:iam:::role/pathA/ResourceName_1.   
+     * The ARN of the principal (user, role, or group). If the PrincipalType is IAM, the supported value is a fully defined IAM Amazon Resource Name (ARN). If the PrincipalType is IAM_PATTERN, the supported value is an IAM ARN without an AccountID in the following format:  arn:partition:iam:::resource-type/resource-id  The ARN resource-id can be either:   A fully formed resource-id. For example, arn:aws:iam:::role/resource-name or arn:aws:iam:::role/resource-path/resource-name    A wildcard ARN. The wildcard ARN accepts IAM_PATTERN values with a "*" or "?" in the resource-id segment of the ARN. For example arn:partition:service:::resource-type/resource-path/resource-name. The new symbols are exclusive to the resource-path and resource-name and cannot replace the resource-type or other ARN values.  The ARN path and principal name allow unlimited wildcard characters.   Examples of an acceptable wildcard ARN:   arn:aws:iam:::role/ResourceName_*   arn:aws:iam:::role/*ResourceName_?   Examples of an unacceptable wildcard ARN:   arn:aws:iam:::*ResourceName   You can associate multiple IAM_PATTERNs even if the account has no principal with that name.  The "?" wildcard character matches zero or one of any character. This is similar to ".?" in regular regex context. The "*" wildcard character matches any number of any characters. This is similar to ".*" in regular regex context. In the IAM Principal ARN format (arn:partition:iam:::resource-type/resource-path/resource-name), valid resource-type values include user/, group/, or role/. The "?" and "*" characters are allowed only after the resource-type in the resource-id segment. You can use special characters anywhere within the resource-id.  The "*" character also matches the "/" character, allowing paths to be formed within the resource-id. For example, arn:aws:iam:::role/*ResourceName_? matches both arn:aws:iam:::role/pathA/pathB/ResourceName_1 and arn:aws:iam:::role/pathA/ResourceName_1. 
      */
     PrincipalARN: PrincipalARN;
     /**
-     * The principal type. The supported value is IAM if you use a fully defined ARN, or IAM_PATTERN if you use an ARN with no accountID, with or without wildcard characters. 
+     * The principal type. The supported value is IAM if you use a fully defined Amazon Resource Name (ARN), or IAM_PATTERN if you use an ARN with no accountID, with or without wildcard characters. 
      */
     PrincipalType: PrincipalType;
   }
@@ -1752,6 +1752,10 @@ declare namespace ServiceCatalog {
      * Indicates whether a verbose level of detail is enabled.
      */
     Verbose?: Verbose;
+    /**
+     * Indicates if the API call response does or does not include additional details about the provisioning parameters. 
+     */
+    IncludeProvisioningArtifactParameters?: Boolean;
   }
   export interface DescribeProvisioningArtifactOutput {
     /**
@@ -1766,6 +1770,10 @@ declare namespace ServiceCatalog {
      * The status of the current request.
      */
     Status?: Status;
+    /**
+     * Information about the parameters used to provision the product. 
+     */
+    ProvisioningArtifactParameters?: ProvisioningArtifactParameters;
   }
   export interface DescribeProvisioningParametersInput {
     /**

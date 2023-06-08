@@ -1299,5 +1299,13 @@
   },
   "mediapackagev2": {
     "name": "MediaPackageV2"
+  },
+  "paymentcryptography": {
+    "prefix": "payment-cryptography",
+    "name": "PaymentCryptography"
+  },
+  "paymentcryptographydata": {
+    "prefix": "payment-cryptography-data",
+    "name": "PaymentCryptographyData"
   }
 }

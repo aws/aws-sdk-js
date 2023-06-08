@@ -1157,6 +1157,10 @@ declare namespace Athena {
      * Contains additional notebook engine MAP&lt;string, string&gt; parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the StartSessionRequest$NotebookVersion field, and then add a key named NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.
      */
     AdditionalConfigs?: ParametersMap;
+    /**
+     * Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.
+     */
+    SparkProperties?: ParametersMap;
   }
   export interface EngineVersion {
     /**
@@ -2942,7 +2946,7 @@ declare namespace Athena {
      */
     ExecutionRole?: RoleArn;
     /**
-     * Specifies the KMS key that is used to encrypt the user's data stores in Athena.
+     * Specifies the KMS key that is used to encrypt the user's data stores in Athena. This setting does not apply to Athena SQL workgroups.
      */
     CustomerContentEncryptionConfiguration?: CustomerContentEncryptionConfiguration;
     /**
@@ -2980,7 +2984,7 @@ declare namespace Athena {
      */
     EngineVersion?: EngineVersion;
     /**
-     * Removes content encryption configuration for a workgroup.
+     * Removes content encryption configuration from an Apache Spark-enabled Athena workgroup.
      */
     RemoveCustomerContentEncryptionConfiguration?: BoxedBoolean;
     /**

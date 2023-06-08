@@ -1431,7 +1431,8 @@
       "type": "string",
       "enum": [
         "OVERLAP",
-        "SYSTEM_ORGAN_SITE"
+        "SYSTEM_ORGAN_SITE",
+        "QUALITY"
       ]
     },
     "ICD10CMTrait": {
@@ -1838,7 +1839,9 @@
         "TEST_UNIT",
         "DIRECTION",
         "SYSTEM_ORGAN_SITE",
-        "AMOUNT"
+        "AMOUNT",
+        "USAGE",
+        "QUALITY"
       ]
     },
     "RxNormAttribute": {
@@ -2009,7 +2012,8 @@
     "RxNormTraitName": {
       "type": "string",
       "enum": [
-        "NEGATION"
+        "NEGATION",
+        "PAST_HISTORY"
       ]
     },
     "S3Bucket": {
@@ -2209,7 +2213,8 @@
         "TEST_VALUE",
         "TEST_UNITS",
         "DIRECTION",
-        "SYSTEM_ORGAN_SITE"
+        "SYSTEM_ORGAN_SITE",
+        "TEST_UNIT"
       ]
     },
     "SNOMEDCTTrait": {
