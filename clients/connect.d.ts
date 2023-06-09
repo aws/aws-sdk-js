@@ -1068,6 +1068,22 @@ declare class Connect extends Service {
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Connect.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Connect.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
+   * Searches the hours of operation in an Amazon Connect instance, with optional filtering.
+   */
+  searchHoursOfOperations(params: Connect.Types.SearchHoursOfOperationsRequest, callback?: (err: AWSError, data: Connect.Types.SearchHoursOfOperationsResponse) => void): Request<Connect.Types.SearchHoursOfOperationsResponse, AWSError>;
+  /**
+   * Searches the hours of operation in an Amazon Connect instance, with optional filtering.
+   */
+  searchHoursOfOperations(callback?: (err: AWSError, data: Connect.Types.SearchHoursOfOperationsResponse) => void): Request<Connect.Types.SearchHoursOfOperationsResponse, AWSError>;
+  /**
+   * Searches prompts in an Amazon Connect instance, with optional filtering.
+   */
+  searchPrompts(params: Connect.Types.SearchPromptsRequest, callback?: (err: AWSError, data: Connect.Types.SearchPromptsResponse) => void): Request<Connect.Types.SearchPromptsResponse, AWSError>;
+  /**
+   * Searches prompts in an Amazon Connect instance, with optional filtering.
+   */
+  searchPrompts(callback?: (err: AWSError, data: Connect.Types.SearchPromptsResponse) => void): Request<Connect.Types.SearchPromptsResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Searches queues in an Amazon Connect instance, with optional filtering.
    */
   searchQueues(params: Connect.Types.SearchQueuesRequest, callback?: (err: AWSError, data: Connect.Types.SearchQueuesResponse) => void): Request<Connect.Types.SearchQueuesResponse, AWSError>;
@@ -1075,6 +1091,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Searches queues in an Amazon Connect instance, with optional filtering.
    */
   searchQueues(callback?: (err: AWSError, data: Connect.Types.SearchQueuesResponse) => void): Request<Connect.Types.SearchQueuesResponse, AWSError>;
+  /**
+   * Searches quick connects in an Amazon Connect instance, with optional filtering.
+   */
+  searchQuickConnects(params: Connect.Types.SearchQuickConnectsRequest, callback?: (err: AWSError, data: Connect.Types.SearchQuickConnectsResponse) => void): Request<Connect.Types.SearchQuickConnectsResponse, AWSError>;
+  /**
+   * Searches quick connects in an Amazon Connect instance, with optional filtering.
+   */
+  searchQuickConnects(callback?: (err: AWSError, data: Connect.Types.SearchQuickConnectsResponse) => void): Request<Connect.Types.SearchQuickConnectsResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Searches routing profiles in an Amazon Connect instance, with optional filtering.
    */
@@ -4931,7 +4955,26 @@ declare namespace Connect {
   export type HoursOfOperationDays = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
   export type HoursOfOperationDescription = string;
   export type HoursOfOperationId = string;
+  export type HoursOfOperationList = HoursOfOperation[];
   export type HoursOfOperationName = string;
+  export type HoursOfOperationSearchConditionList = HoursOfOperationSearchCriteria[];
+  export interface HoursOfOperationSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: HoursOfOperationSearchConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndConditions?: HoursOfOperationSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name, description, timezone, and resourceID. 
+     */
+    StringCondition?: StringCondition;
+  }
+  export interface HoursOfOperationSearchFilter {
+    TagFilter?: ControlPlaneTagFilter;
+  }
   export interface HoursOfOperationSummary {
     /**
      * The identifier of the hours of operation.
@@ -6423,7 +6466,7 @@ declare namespace Connect {
      */
     Name?: CommonNameLength127;
     /**
-     * A description for the prompt.
+     * The description of the prompt.
      */
     Description?: PromptDescription;
     /**
@@ -6433,8 +6476,27 @@ declare namespace Connect {
   }
   export type PromptDescription = string;
   export type PromptId = string;
+  export type PromptList = Prompt[];
   export type PromptName = string;
   export type PromptPresignedUrl = string;
+  export type PromptSearchConditionList = PromptSearchCriteria[];
+  export interface PromptSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: PromptSearchConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndConditions?: PromptSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name, description, and resourceID. 
+     */
+    StringCondition?: StringCondition;
+  }
+  export interface PromptSearchFilter {
+    TagFilter?: ControlPlaneTagFilter;
+  }
   export interface PromptSummary {
     /**
      * The identifier of the prompt.
@@ -6548,6 +6610,9 @@ declare namespace Connect {
      * A list of conditions which would be applied together with an AND condition.
      */
     AndConditions?: QueueSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name, description, and resourceID. 
+     */
     StringCondition?: StringCondition;
     /**
      * The type of queue.
@@ -6628,6 +6693,25 @@ declare namespace Connect {
   export type QuickConnectDescription = string;
   export type QuickConnectId = string;
   export type QuickConnectName = string;
+  export type QuickConnectSearchConditionList = QuickConnectSearchCriteria[];
+  export interface QuickConnectSearchCriteria {
+    /**
+     * A list of conditions which would be applied together with an OR condition.
+     */
+    OrConditions?: QuickConnectSearchConditionList;
+    /**
+     * A list of conditions which would be applied together with an AND condition.
+     */
+    AndConditions?: QuickConnectSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name, description, and resourceID. 
+     */
+    StringCondition?: StringCondition;
+  }
+  export interface QuickConnectSearchFilter {
+    TagFilter?: ControlPlaneTagFilter;
+  }
+  export type QuickConnectSearchSummaryList = QuickConnect[];
   export interface QuickConnectSummary {
     /**
      * The identifier for the quick connect.
@@ -6883,6 +6967,9 @@ declare namespace Connect {
      * A list of conditions which would be applied together with an AND condition.
      */
     AndConditions?: RoutingProfileSearchConditionList;
+    /**
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name, description, and resourceID. 
+     */
     StringCondition?: StringCondition;
   }
   export interface RoutingProfileSearchFilter {
@@ -7073,6 +7160,78 @@ declare namespace Connect {
      */
     AvailableNumbersList?: AvailableNumbersList;
   }
+  export interface SearchHoursOfOperationsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: HoursOfOperationSearchFilter;
+    /**
+     * The search criteria to be used to return hours of operations.
+     */
+    SearchCriteria?: HoursOfOperationSearchCriteria;
+  }
+  export interface SearchHoursOfOperationsResponse {
+    /**
+     * Information about the hours of operations.
+     */
+    HoursOfOperations?: HoursOfOperationList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of hours of operations which matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
+  }
+  export interface SearchPromptsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: PromptSearchFilter;
+    /**
+     * The search criteria to be used to return prompts.
+     */
+    SearchCriteria?: PromptSearchCriteria;
+  }
+  export interface SearchPromptsResponse {
+    /**
+     * Information about the prompts.
+     */
+    Prompts?: PromptList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of quick connects which matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
+  }
   export interface SearchQueuesRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -7106,6 +7265,42 @@ declare namespace Connect {
     NextToken?: NextToken2500;
     /**
      * The total number of queues which matched your search query.
+     */
+    ApproximateTotalCount?: ApproximateTotalCount;
+  }
+  export interface SearchQuickConnectsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * Filters to be applied to search results.
+     */
+    SearchFilter?: QuickConnectSearchFilter;
+    /**
+     * The search criteria to be used to return quick connects.
+     */
+    SearchCriteria?: QuickConnectSearchCriteria;
+  }
+  export interface SearchQuickConnectsResponse {
+    /**
+     * Information about the quick connects.
+     */
+    QuickConnects?: QuickConnectSearchSummaryList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The total number of quick connects which matched your search query.
      */
     ApproximateTotalCount?: ApproximateTotalCount;
   }
@@ -9075,7 +9270,7 @@ declare namespace Connect {
      */
     AndConditions?: UserSearchConditionList;
     /**
-     * A leaf node condition which can be used to specify a string condition.
+     * A leaf node condition which can be used to specify a string condition.  The currently supported values for FieldName are name, description, and resourceID. 
      */
     StringCondition?: StringCondition;
     /**

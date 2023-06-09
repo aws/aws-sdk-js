@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1394.0-->
+<!--LATEST=2.1395.0-->
 <!--ENTRYINSERT-->
+
+## 2.1395.0
+* feature: Connect: This release adds search APIs for Prompts, Quick Connects and Hours of Operations, which can be used to search for those resources within a Connect Instance.
 
 ## 2.1394.0
 * feature: Athena: You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
