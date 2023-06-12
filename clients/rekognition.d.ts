@@ -13,6 +13,14 @@ declare class Rekognition extends Service {
   constructor(options?: Rekognition.Types.ClientConfiguration)
   config: Config & Rekognition.Types.ClientConfiguration;
   /**
+   * Associates one or more faces with an existing UserID. Takes an array of FaceIds. Each FaceId that are present in the FaceIds list is associated with the provided UserID. The maximum number of total FaceIds per UserID is 100.  The UserMatchThreshold parameter specifies the minimum user match confidence required for the face to be associated with a UserID that has at least one FaceID already associated. This ensures that the FaceIds are associated with the right UserID. The value ranges from 0-100 and default value is 75.  If successful, an array of AssociatedFace objects containing the associated FaceIds is returned. If a given face is already associated with the given UserID, it will be ignored and will not be returned in the response. If a given face is already associated to a different UserID, isn't found in the collection, doesn’t meet the UserMatchThreshold, or there are already 100 faces associated with the UserID, it will be returned as part of an array of UnsuccessfulFaceAssociations.  The UserStatus reflects the status of an operation which updates a UserID representation with a list of given faces. The UserStatus can be:    ACTIVE - All associations or disassociations of FaceID(s) for a UserID are complete.   CREATED - A UserID has been created, but has no FaceID(s) associated with it.   UPDATING - A UserID is being updated and there are current associations or disassociations of FaceID(s) taking place.  
+   */
+  associateFaces(params: Rekognition.Types.AssociateFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.AssociateFacesResponse) => void): Request<Rekognition.Types.AssociateFacesResponse, AWSError>;
+  /**
+   * Associates one or more faces with an existing UserID. Takes an array of FaceIds. Each FaceId that are present in the FaceIds list is associated with the provided UserID. The maximum number of total FaceIds per UserID is 100.  The UserMatchThreshold parameter specifies the minimum user match confidence required for the face to be associated with a UserID that has at least one FaceID already associated. This ensures that the FaceIds are associated with the right UserID. The value ranges from 0-100 and default value is 75.  If successful, an array of AssociatedFace objects containing the associated FaceIds is returned. If a given face is already associated with the given UserID, it will be ignored and will not be returned in the response. If a given face is already associated to a different UserID, isn't found in the collection, doesn’t meet the UserMatchThreshold, or there are already 100 faces associated with the UserID, it will be returned as part of an array of UnsuccessfulFaceAssociations.  The UserStatus reflects the status of an operation which updates a UserID representation with a list of given faces. The UserStatus can be:    ACTIVE - All associations or disassociations of FaceID(s) for a UserID are complete.   CREATED - A UserID has been created, but has no FaceID(s) associated with it.   UPDATING - A UserID is being updated and there are current associations or disassociations of FaceID(s) taking place.  
+   */
+  associateFaces(callback?: (err: AWSError, data: Rekognition.Types.AssociateFacesResponse) => void): Request<Rekognition.Types.AssociateFacesResponse, AWSError>;
+  /**
    * Compares a face in the source input image with each of the 100 largest faces detected in the target input image.   If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image.   CompareFaces uses machine learning algorithms, which are probabilistic. A false negative is an incorrect prediction that a face in the target image has a low similarity confidence score when compared to the face in the source image. To reduce the probability of false negatives, we recommend that you compare the target image against multiple source images. If you plan to use CompareFaces to make a decision that impacts an individual's rights, privacy, or access to services, we recommend that you pass the result to a human for review and further validation before taking action.  You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file.  In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, roll, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match.   By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the SimilarityThreshold parameter.   CompareFaces also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use QualityFilter to set the quality bar by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE. The default value is NONE.  If the image doesn't contain Exif metadata, CompareFaces returns orientation information for the source and target images. Use these values to display the images with the correct image orientation. If no faces are detected in the source or target images, CompareFaces returns an InvalidParameterException error.    This is a stateless API operation. That is, data returned by this operation doesn't persist.  For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide. This operation requires permissions to perform the rekognition:CompareFaces action.
    */
   compareFaces(params: Rekognition.Types.CompareFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.CompareFacesResponse) => void): Request<Rekognition.Types.CompareFacesResponse, AWSError>;
@@ -77,6 +85,14 @@ declare class Rekognition extends Service {
    */
   createStreamProcessor(callback?: (err: AWSError, data: Rekognition.Types.CreateStreamProcessorResponse) => void): Request<Rekognition.Types.CreateStreamProcessorResponse, AWSError>;
   /**
+   * Creates a new User within a collection specified by CollectionId. Takes UserId as a parameter, which is a user provided ID which should be unique within the collection. The provided UserId will alias the system generated UUID to make the UserId more user friendly.  Uses a ClientToken, an idempotency token that ensures a call to CreateUser completes only once. If the value is not supplied, the AWS SDK generates an idempotency token for the requests. This prevents retries after a network error results from making multiple CreateUser calls. 
+   */
+  createUser(params: Rekognition.Types.CreateUserRequest, callback?: (err: AWSError, data: Rekognition.Types.CreateUserResponse) => void): Request<Rekognition.Types.CreateUserResponse, AWSError>;
+  /**
+   * Creates a new User within a collection specified by CollectionId. Takes UserId as a parameter, which is a user provided ID which should be unique within the collection. The provided UserId will alias the system generated UUID to make the UserId more user friendly.  Uses a ClientToken, an idempotency token that ensures a call to CreateUser completes only once. If the value is not supplied, the AWS SDK generates an idempotency token for the requests. This prevents retries after a network error results from making multiple CreateUser calls. 
+   */
+  createUser(callback?: (err: AWSError, data: Rekognition.Types.CreateUserResponse) => void): Request<Rekognition.Types.CreateUserResponse, AWSError>;
+  /**
    * Deletes the specified collection. Note that this operation removes all faces in the collection. For an example, see Deleting a collection. This operation requires permissions to perform the rekognition:DeleteCollection action.
    */
   deleteCollection(params: Rekognition.Types.DeleteCollectionRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteCollectionResponse) => void): Request<Rekognition.Types.DeleteCollectionResponse, AWSError>;
@@ -132,6 +148,14 @@ declare class Rekognition extends Service {
    * Deletes the stream processor identified by Name. You assign the value for Name when you create the stream processor with CreateStreamProcessor. You might not be able to use the same name for a stream processor for a few seconds after calling DeleteStreamProcessor.
    */
   deleteStreamProcessor(callback?: (err: AWSError, data: Rekognition.Types.DeleteStreamProcessorResponse) => void): Request<Rekognition.Types.DeleteStreamProcessorResponse, AWSError>;
+  /**
+   * Deletes the specified UserID within the collection. Faces that are associated with the UserID are disassociated from the UserID before deleting the specified UserID. If the specified Collection or UserID is already deleted or not found, a ResourceNotFoundException will be thrown. If the action is successful with a 200 response, an empty HTTP body is returned. 
+   */
+  deleteUser(params: Rekognition.Types.DeleteUserRequest, callback?: (err: AWSError, data: Rekognition.Types.DeleteUserResponse) => void): Request<Rekognition.Types.DeleteUserResponse, AWSError>;
+  /**
+   * Deletes the specified UserID within the collection. Faces that are associated with the UserID are disassociated from the UserID before deleting the specified UserID. If the specified Collection or UserID is already deleted or not found, a ResourceNotFoundException will be thrown. If the action is successful with a 200 response, an empty HTTP body is returned. 
+   */
+  deleteUser(callback?: (err: AWSError, data: Rekognition.Types.DeleteUserResponse) => void): Request<Rekognition.Types.DeleteUserResponse, AWSError>;
   /**
    * Describes the specified collection. You can use DescribeCollection to get information, such as the number of faces indexed into a collection and the version of the model used by the collection for face detection. For more information, see Describing a Collection in the Amazon Rekognition Developer Guide.
    */
@@ -220,6 +244,14 @@ declare class Rekognition extends Service {
    * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of TextDetection elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more script characters that are not separated by spaces. DetectText can detect up to 100 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 90 degrees orientation of the horizontal axis. For more information, see Detecting text in the Amazon Rekognition Developer Guide.
    */
   detectText(callback?: (err: AWSError, data: Rekognition.Types.DetectTextResponse) => void): Request<Rekognition.Types.DetectTextResponse, AWSError>;
+  /**
+   * Removes the association between a Face supplied in an array of FaceIds and the User. If the User is not present already, then a ResourceNotFound exception is thrown. If successful, an array of faces that are disassociated from the User is returned. If a given face is already disassociated from the given UserID, it will be ignored and not be returned in the response. If a given face is already associated with a different User or not found in the collection it will be returned as part of UnsuccessfulDisassociations. You can remove 1 - 100 face IDs from a user at one time.
+   */
+  disassociateFaces(params: Rekognition.Types.DisassociateFacesRequest, callback?: (err: AWSError, data: Rekognition.Types.DisassociateFacesResponse) => void): Request<Rekognition.Types.DisassociateFacesResponse, AWSError>;
+  /**
+   * Removes the association between a Face supplied in an array of FaceIds and the User. If the User is not present already, then a ResourceNotFound exception is thrown. If successful, an array of faces that are disassociated from the User is returned. If a given face is already disassociated from the given UserID, it will be ignored and not be returned in the response. If a given face is already associated with a different User or not found in the collection it will be returned as part of UnsuccessfulDisassociations. You can remove 1 - 100 face IDs from a user at one time.
+   */
+  disassociateFaces(callback?: (err: AWSError, data: Rekognition.Types.DisassociateFacesResponse) => void): Request<Rekognition.Types.DisassociateFacesResponse, AWSError>;
   /**
    * Distributes the entries (images) in a training dataset across the training dataset and the test dataset for a project. DistributeDatasetEntries moves 20% of the training dataset images to the test dataset. An entry is a JSON Line that describes an image.  You supply the Amazon Resource Names (ARN) of a project's training dataset and test dataset. The training dataset must contain the images that you want to split. The test dataset must be empty. The datasets must belong to the same project. To create training and test datasets for a project, call CreateDataset. Distributing a dataset takes a while to complete. To check the status call DescribeDataset. The operation is complete when the Status field for the training dataset and the test dataset is UPDATE_COMPLETE. If the dataset split fails, the value of Status is UPDATE_FAILED. This operation requires permissions to perform the rekognition:DistributeDatasetEntries action.
    */
@@ -373,6 +405,14 @@ declare class Rekognition extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Rekognition.Types.ListTagsForResourceResponse) => void): Request<Rekognition.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Returns metadata of the User such as UserID in the specified collection. Anonymous User (to reserve faces without any identity) is not returned as part of this request. The results are sorted by system generated primary key ID. If the response is truncated, NextToken is returned in the response that can be used in the subsequent request to retrieve the next set of identities.
+   */
+  listUsers(params: Rekognition.Types.ListUsersRequest, callback?: (err: AWSError, data: Rekognition.Types.ListUsersResponse) => void): Request<Rekognition.Types.ListUsersResponse, AWSError>;
+  /**
+   * Returns metadata of the User such as UserID in the specified collection. Anonymous User (to reserve faces without any identity) is not returned as part of this request. The results are sorted by system generated primary key ID. If the response is truncated, NextToken is returned in the response that can be used in the subsequent request to retrieve the next set of identities.
+   */
+  listUsers(callback?: (err: AWSError, data: Rekognition.Types.ListUsersResponse) => void): Request<Rekognition.Types.ListUsersResponse, AWSError>;
+  /**
    * Attaches a project policy to a Amazon Rekognition Custom Labels project in a trusting AWS account. A project policy specifies that a trusted AWS account can copy a model version from a trusting AWS account to a project in the trusted AWS account. To copy a model version you use the CopyProjectVersion operation. For more information about the format of a project policy document, see Attaching a project policy (SDK) in the Amazon Rekognition Custom Labels Developer Guide.  The response from PutProjectPolicy is a revision ID for the project policy. You can attach multiple project policies to a project. You can also update an existing project policy by specifying the policy revision ID of the existing policy. To remove a project policy from a project, call DeleteProjectPolicy. To get a list of project policies attached to a project, call ListProjectPolicies.  You copy a model version by calling CopyProjectVersion. This operation requires permissions to perform the rekognition:PutProjectPolicy action.
    */
   putProjectPolicy(params: Rekognition.Types.PutProjectPolicyRequest, callback?: (err: AWSError, data: Rekognition.Types.PutProjectPolicyResponse) => void): Request<Rekognition.Types.PutProjectPolicyResponse, AWSError>;
@@ -404,6 +444,22 @@ declare class Rekognition extends Service {
    * For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection.   To search for all faces in an input image, you might first call the IndexFaces operation, and then use the face IDs returned in subsequent calls to the SearchFaces operation.   You can also call the DetectFaces operation and use the bounding boxes in the response to make face crops, which then you can pass in to the SearchFacesByImage operation.   You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file.   The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a similarity indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image.  If no faces are detected in the input image, SearchFacesByImage returns an InvalidParameterException error.  For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide. The QualityFilter input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use QualityFilter to set the quality bar for filtering by specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces, specify NONE. The default value is NONE.  To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call DescribeCollection.   This operation requires permissions to perform the rekognition:SearchFacesByImage action.
    */
   searchFacesByImage(callback?: (err: AWSError, data: Rekognition.Types.SearchFacesByImageResponse) => void): Request<Rekognition.Types.SearchFacesByImageResponse, AWSError>;
+  /**
+   * Searches for UserIDs within a collection based on a FaceId or UserId. This API can be used to find the closest UserID (with a highest similarity) to associate a face. The request must be provided with either FaceId or UserId. The operation returns an array of UserID that match the FaceId or UserId, ordered by similarity score with the highest similarity first. 
+   */
+  searchUsers(params: Rekognition.Types.SearchUsersRequest, callback?: (err: AWSError, data: Rekognition.Types.SearchUsersResponse) => void): Request<Rekognition.Types.SearchUsersResponse, AWSError>;
+  /**
+   * Searches for UserIDs within a collection based on a FaceId or UserId. This API can be used to find the closest UserID (with a highest similarity) to associate a face. The request must be provided with either FaceId or UserId. The operation returns an array of UserID that match the FaceId or UserId, ordered by similarity score with the highest similarity first. 
+   */
+  searchUsers(callback?: (err: AWSError, data: Rekognition.Types.SearchUsersResponse) => void): Request<Rekognition.Types.SearchUsersResponse, AWSError>;
+  /**
+   * Searches for UserIDs using a supplied image. It first detects the largest face in the image, and then searches a specified collection for matching UserIDs.  The operation returns an array of UserIDs that match the face in the supplied image, ordered by similarity score with the highest similarity first. It also returns a bounding box for the face found in the input image.  Information about faces detected in the supplied image, but not used for the search, is returned in an array of UnsearchedFace objects. If no valid face is detected in the image, the response will contain an empty UserMatches list and no SearchedFace object. 
+   */
+  searchUsersByImage(params: Rekognition.Types.SearchUsersByImageRequest, callback?: (err: AWSError, data: Rekognition.Types.SearchUsersByImageResponse) => void): Request<Rekognition.Types.SearchUsersByImageResponse, AWSError>;
+  /**
+   * Searches for UserIDs using a supplied image. It first detects the largest face in the image, and then searches a specified collection for matching UserIDs.  The operation returns an array of UserIDs that match the face in the supplied image, ordered by similarity score with the highest similarity first. It also returns a bounding box for the face found in the input image.  Information about faces detected in the supplied image, but not used for the search, is returned in an array of UnsearchedFace objects. If no valid face is detected in the image, the response will contain an empty UserMatches list and no SearchedFace object. 
+   */
+  searchUsersByImage(callback?: (err: AWSError, data: Rekognition.Types.SearchUsersByImageResponse) => void): Request<Rekognition.Types.SearchUsersByImageResponse, AWSError>;
   /**
    * Starts asynchronous recognition of celebrities in a stored video. Amazon Rekognition Video can detect celebrities in a video must be stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartCelebrityRecognition returns a job identifier (JobId) which you use to get the results of the analysis. When celebrity recognition analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. To get the results of the celebrity recognition analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetCelebrityRecognition and pass the job identifier (JobId) from the initial call to StartCelebrityRecognition.  For more information, see Recognizing celebrities in the Amazon Rekognition Developer Guide.
    */
@@ -564,6 +620,49 @@ declare namespace Rekognition {
     GroundTruthManifest?: GroundTruthManifest;
   }
   export type Assets = Asset[];
+  export interface AssociateFacesRequest {
+    /**
+     * The ID of an existing collection containing the UserID.
+     */
+    CollectionId: CollectionId;
+    /**
+     * The ID for the existing UserID.
+     */
+    UserId: UserId;
+    /**
+     * An array of FaceIDs to associate with the UserID.
+     */
+    FaceIds: UserFaceIdList;
+    /**
+     * An optional value specifying the minimum confidence in the UserID match to return. The default value is 75.
+     */
+    UserMatchThreshold?: Percent;
+    /**
+     * Idempotent token used to identify the request to AssociateFaces. If you use the same token with multiple AssociateFaces requests, the same response is returned. Use ClientRequestToken to prevent the same request from being processed more than once.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface AssociateFacesResponse {
+    /**
+     * An array of AssociatedFace objects containing FaceIDs that are successfully associated with the UserID is returned. Returned if the AssociateFaces action is successful.
+     */
+    AssociatedFaces?: AssociatedFacesList;
+    /**
+     * An array of UnsuccessfulAssociation objects containing FaceIDs that are not successfully associated along with the reasons. Returned if the AssociateFaces action is successful.
+     */
+    UnsuccessfulFaceAssociations?: UnsuccessfulFaceAssociationList;
+    /**
+     * The status of an update made to a UserID. Reflects if the UserID has been updated for every requested change.
+     */
+    UserStatus?: UserStatus;
+  }
+  export interface AssociatedFace {
+    /**
+     * Unique identifier assigned to the face.
+     */
+    FaceId?: FaceId;
+  }
+  export type AssociatedFacesList = AssociatedFace[];
   export type Attribute = "DEFAULT"|"ALL"|"AGE_RANGE"|"BEARD"|"EMOTIONS"|"EYE_DIRECTION"|"EYEGLASSES"|"EYES_OPEN"|"GENDER"|"MOUTH_OPEN"|"MUSTACHE"|"FACE_OCCLUDED"|"SMILE"|"SUNGLASSES"|string;
   export type Attributes = Attribute[];
   export interface AudioMetadata {
@@ -1062,6 +1161,22 @@ declare namespace Rekognition {
      */
     StreamProcessorArn?: StreamProcessorArn;
   }
+  export interface CreateUserRequest {
+    /**
+     * The ID of an existing collection to which the new UserID needs to be created.
+     */
+    CollectionId: CollectionId;
+    /**
+     * ID for the UserID to be created. This ID needs to be unique within the collection.
+     */
+    UserId: UserId;
+    /**
+     * Idempotent token used to identify the request to CreateUser. If you use the same token with multiple CreateUser requests, the same response is returned. Use ClientRequestToken to prevent the same request from being processed more than once.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateUserResponse {
+  }
   export interface CustomLabel {
     /**
      * The name of the custom label.
@@ -1227,6 +1342,10 @@ declare namespace Rekognition {
      * An array of strings (face IDs) of the faces that were deleted.
      */
     DeletedFaces?: FaceIdList;
+    /**
+     * An array of any faces that weren't deleted.
+     */
+    UnsuccessfulFaceDeletions?: UnsuccessfulFaceDeletionsList;
   }
   export interface DeleteProjectPolicyRequest {
     /**
@@ -1276,6 +1395,22 @@ declare namespace Rekognition {
   }
   export interface DeleteStreamProcessorResponse {
   }
+  export interface DeleteUserRequest {
+    /**
+     * The ID of an existing collection from which the UserID needs to be deleted. 
+     */
+    CollectionId: CollectionId;
+    /**
+     * ID for the UserID to be deleted. 
+     */
+    UserId: UserId;
+    /**
+     * Idempotent token used to identify the request to DeleteUser. If you use the same token with multiple DeleteUser requests, the same response is returned. Use ClientRequestToken to prevent the same request from being processed more than once.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface DeleteUserResponse {
+  }
   export interface DescribeCollectionRequest {
     /**
      * The ID of the collection to describe.
@@ -1299,6 +1434,10 @@ declare namespace Rekognition {
      * The number of milliseconds since the Unix epoch time until the creation of the collection. The Unix epoch time is 00:00:00 Coordinated Universal Time (UTC), Thursday, 1 January 1970.
      */
     CreationTimestamp?: DateTime;
+    /**
+     * The number of UserIDs assigned to the specified colleciton.
+     */
+    UserCount?: ULong;
   }
   export interface DescribeDatasetRequest {
     /**
@@ -1670,6 +1809,45 @@ declare namespace Rekognition {
      */
     MinBoundingBoxWidth?: BoundingBoxWidth;
   }
+  export interface DisassociateFacesRequest {
+    /**
+     * The ID of an existing collection containing the UserID.
+     */
+    CollectionId: CollectionId;
+    /**
+     * ID for the existing UserID.
+     */
+    UserId: UserId;
+    /**
+     * Idempotent token used to identify the request to DisassociateFaces. If you use the same token with multiple DisassociateFaces requests, the same response is returned. Use ClientRequestToken to prevent the same request from being processed more than once.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * An array of face IDs to disassociate from the UserID. 
+     */
+    FaceIds: UserFaceIdList;
+  }
+  export interface DisassociateFacesResponse {
+    /**
+     * An array of DissociatedFace objects containing FaceIds that are successfully disassociated with the UserID is returned. Returned if the DisassociatedFaces action is successful.
+     */
+    DisassociatedFaces?: DisassociatedFacesList;
+    /**
+     * An array of UnsuccessfulDisassociation objects containing FaceIds that are not successfully associated, along with the reasons for the failure to associate. Returned if the DisassociateFaces action is successful.
+     */
+    UnsuccessfulFaceDisassociations?: UnsuccessfulFaceDisassociationList;
+    /**
+     * The status of an update made to a User. Reflects if the User has been updated for every requested change.
+     */
+    UserStatus?: UserStatus;
+  }
+  export interface DisassociatedFace {
+    /**
+     * Unique identifier assigned to the face.
+     */
+    FaceId?: FaceId;
+  }
+  export type DisassociatedFacesList = DisassociatedFace[];
   export interface DistributeDataset {
     /**
      * The Amazon Resource Name (ARN) of the dataset that you want to use. 
@@ -1818,6 +1996,10 @@ declare namespace Rekognition {
      *  The version of the face detect and storage model that was used when indexing the face vector. 
      */
     IndexFacesModelVersion?: IndexFacesModelVersion;
+    /**
+     * Unique identifier assigned to the user.
+     */
+    UserId?: UserId;
   }
   export type FaceAttributes = "DEFAULT"|"ALL"|string;
   export interface FaceDetail {
@@ -2826,6 +3008,14 @@ declare namespace Rekognition {
      * Maximum number of faces to return.
      */
     MaxResults?: PageSize;
+    /**
+     * An array of user IDs to match when listing faces in a collection.
+     */
+    UserId?: UserId;
+    /**
+     * An array of face IDs to match when listing faces in a collection.
+     */
+    FaceIds?: FaceIdList;
   }
   export interface ListFacesResponse {
     /**
@@ -2898,6 +3088,30 @@ declare namespace Rekognition {
      */
     Tags?: TagMap;
   }
+  export interface ListUsersRequest {
+    /**
+     * The ID of an existing collection.
+     */
+    CollectionId: CollectionId;
+    /**
+     * Maximum number of UsersID to return. 
+     */
+    MaxResults?: MaxUserResults;
+    /**
+     * Pagingation token to receive the next set of UsersID.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListUsersResponse {
+    /**
+     * List of UsersID associated with the specified collection.
+     */
+    Users?: UserList;
+    /**
+     * A pagination token to be used with the subsequent request if the response is truncated.
+     */
+    NextToken?: PaginationToken;
+  }
   export type LivenessImageBlob = Buffer|Uint8Array|Blob|string;
   export interface LivenessOutputConfig {
     /**
@@ -2912,11 +3126,22 @@ declare namespace Rekognition {
   export type LivenessS3KeyPrefix = string;
   export type LivenessSessionId = string;
   export type LivenessSessionStatus = "CREATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"EXPIRED"|string;
+  export interface MatchedUser {
+    /**
+     * A provided ID for the UserID. Unique within the collection.
+     */
+    UserId?: UserId;
+    /**
+     * The status of the user matched to a provided FaceID.
+     */
+    UserStatus?: UserStatus;
+  }
   export type MaxDurationInSecondsULong = number;
   export type MaxFaces = number;
   export type MaxFacesToIndex = number;
   export type MaxPixelThreshold = number;
   export type MaxResults = number;
+  export type MaxUserResults = number;
   export type MinCoveragePercentage = number;
   export interface ModerationLabel {
     /**
@@ -3393,6 +3618,98 @@ declare namespace Rekognition {
      * Version number of the face detection model associated with the input collection (CollectionId).
      */
     FaceModelVersion?: String;
+  }
+  export interface SearchUsersByImageRequest {
+    /**
+     * The ID of an existing collection containing the UserID.
+     */
+    CollectionId: CollectionId;
+    Image: Image;
+    /**
+     * Specifies the minimum confidence in the UserID match to return. Default value is 80.
+     */
+    UserMatchThreshold?: Percent;
+    /**
+     * Maximum number of UserIDs to return.
+     */
+    MaxUsers?: MaxUserResults;
+    /**
+     * A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren't searched for in the collection. The default value is NONE.
+     */
+    QualityFilter?: QualityFilter;
+  }
+  export interface SearchUsersByImageResponse {
+    /**
+     * An array of UserID objects that matched the input face, along with the confidence in the match. The returned structure will be empty if there are no matches. Returned if the SearchUsersByImageResponse action is successful.
+     */
+    UserMatches?: UserMatchList;
+    /**
+     * Version number of the face detection model associated with the input collection CollectionId.
+     */
+    FaceModelVersion?: String;
+    /**
+     * A list of FaceDetail objects containing the BoundingBox for the largest face in image, as well as the confidence in the bounding box, that was searched for matches. If no valid face is detected in the image the response will contain no SearchedFace object.
+     */
+    SearchedFace?: SearchedFaceDetails;
+    /**
+     * List of UnsearchedFace objects. Contains the face details infered from the specified image but not used for search. Contains reasons that describe why a face wasn't used for Search. 
+     */
+    UnsearchedFaces?: UnsearchedFacesList;
+  }
+  export interface SearchUsersRequest {
+    /**
+     * The ID of an existing collection containing the UserID, used with a UserId or FaceId. If a FaceId is provided, UserId isn’t required to be present in the Collection.
+     */
+    CollectionId: CollectionId;
+    /**
+     * ID for the existing User.
+     */
+    UserId?: UserId;
+    /**
+     * ID for the existing face.
+     */
+    FaceId?: FaceId;
+    /**
+     * Optional value that specifies the minimum confidence in the matched UserID to return. Default value of 80.
+     */
+    UserMatchThreshold?: Percent;
+    /**
+     * Maximum number of identities to return.
+     */
+    MaxUsers?: MaxUserResults;
+  }
+  export interface SearchUsersResponse {
+    /**
+     * An array of UserMatch objects that matched the input face along with the confidence in the match. Array will be empty if there are no matches.
+     */
+    UserMatches?: UserMatchList;
+    /**
+     * Version number of the face detection model associated with the input CollectionId.
+     */
+    FaceModelVersion?: String;
+    /**
+     * Contains the ID of a face that was used to search for matches in a collection.
+     */
+    SearchedFace?: SearchedFace;
+    /**
+     * Contains the ID of the UserID that was used to search for matches in a collection.
+     */
+    SearchedUser?: SearchedUser;
+  }
+  export interface SearchedFace {
+    /**
+     *  Unique identifier assigned to the face.
+     */
+    FaceId?: FaceId;
+  }
+  export interface SearchedFaceDetails {
+    FaceDetail?: FaceDetail;
+  }
+  export interface SearchedUser {
+    /**
+     *  A provided ID for the UserID. Unique within the collection. 
+     */
+    UserId?: UserId;
   }
   export type SegmentConfidence = number;
   export interface SegmentDetection {
@@ -4008,6 +4325,71 @@ declare namespace Rekognition {
     FaceDetail?: FaceDetail;
   }
   export type UnindexedFaces = UnindexedFace[];
+  export interface UnsearchedFace {
+    FaceDetails?: FaceDetail;
+    /**
+     *  Reasons why a face wasn't used for Search. 
+     */
+    Reasons?: UnsearchedFaceReasons;
+  }
+  export type UnsearchedFaceReason = "FACE_NOT_LARGEST"|"EXCEEDS_MAX_FACES"|"EXTREME_POSE"|"LOW_BRIGHTNESS"|"LOW_SHARPNESS"|"LOW_CONFIDENCE"|"SMALL_BOUNDING_BOX"|"LOW_FACE_QUALITY"|string;
+  export type UnsearchedFaceReasons = UnsearchedFaceReason[];
+  export type UnsearchedFacesList = UnsearchedFace[];
+  export interface UnsuccessfulFaceAssociation {
+    /**
+     * A unique identifier assigned to the face. 
+     */
+    FaceId?: FaceId;
+    /**
+     * A provided ID for the UserID. Unique within the collection. 
+     */
+    UserId?: UserId;
+    /**
+     * Match confidence with the UserID, provides information regarding if a face association was unsuccessful because it didn't meet UserMatchThreshold.
+     */
+    Confidence?: Percent;
+    /**
+     *  The reason why the association was unsuccessful. 
+     */
+    Reasons?: UnsuccessfulFaceAssociationReasons;
+  }
+  export type UnsuccessfulFaceAssociationList = UnsuccessfulFaceAssociation[];
+  export type UnsuccessfulFaceAssociationReason = "FACE_NOT_FOUND"|"ASSOCIATED_TO_A_DIFFERENT_USER"|"LOW_MATCH_CONFIDENCE"|string;
+  export type UnsuccessfulFaceAssociationReasons = UnsuccessfulFaceAssociationReason[];
+  export interface UnsuccessfulFaceDeletion {
+    /**
+     *  A unique identifier assigned to the face.
+     */
+    FaceId?: FaceId;
+    /**
+     *  A provided ID for the UserID. Unique within the collection. 
+     */
+    UserId?: UserId;
+    /**
+     * The reason why the deletion was unsuccessful. 
+     */
+    Reasons?: UnsuccessfulFaceDeletionReasons;
+  }
+  export type UnsuccessfulFaceDeletionReason = "ASSOCIATED_TO_AN_EXISTING_USER"|"FACE_NOT_FOUND"|string;
+  export type UnsuccessfulFaceDeletionReasons = UnsuccessfulFaceDeletionReason[];
+  export type UnsuccessfulFaceDeletionsList = UnsuccessfulFaceDeletion[];
+  export interface UnsuccessfulFaceDisassociation {
+    /**
+     * A unique identifier assigned to the face. 
+     */
+    FaceId?: FaceId;
+    /**
+     * A provided ID for the UserID. Unique within the collection. 
+     */
+    UserId?: UserId;
+    /**
+     * The reason why the deletion was unsuccessful. 
+     */
+    Reasons?: UnsuccessfulFaceDisassociationReasons;
+  }
+  export type UnsuccessfulFaceDisassociationList = UnsuccessfulFaceDisassociation[];
+  export type UnsuccessfulFaceDisassociationReason = "FACE_NOT_FOUND"|"ASSOCIATED_TO_A_DIFFERENT_USER"|string;
+  export type UnsuccessfulFaceDisassociationReasons = UnsuccessfulFaceDisassociationReason[];
   export interface UntagResourceRequest {
     /**
      *  Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to remove the tags from. 
@@ -4058,6 +4440,31 @@ declare namespace Rekognition {
   }
   export type Url = string;
   export type Urls = Url[];
+  export interface User {
+    /**
+     *  A provided ID for the User. Unique within the collection.
+     */
+    UserId?: UserId;
+    /**
+     *  Communicates if the UserID has been updated with latest set of faces to be associated with the UserID. 
+     */
+    UserStatus?: UserStatus;
+  }
+  export type UserFaceIdList = FaceId[];
+  export type UserId = string;
+  export type UserList = User[];
+  export interface UserMatch {
+    /**
+     *  Describes the UserID metadata.
+     */
+    Similarity?: Percent;
+    /**
+     *  Confidence in the match of this UserID with the input face. 
+     */
+    User?: MatchedUser;
+  }
+  export type UserMatchList = UserMatch[];
+  export type UserStatus = "ACTIVE"|"UPDATING"|"CREATING"|"CREATED"|string;
   export interface ValidationData {
     /**
      * The assets that comprise the validation data. 

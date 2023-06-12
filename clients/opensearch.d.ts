@@ -950,9 +950,13 @@ declare namespace OpenSearch {
   export type ConnectionMode = "DIRECT"|"VPC_ENDPOINT"|string;
   export interface ConnectionProperties {
     /**
-     * The endpoint of the remote domain.
+     *  The Endpoint attribute cannot be modified.   The endpoint of the remote domain. Applicable for VPC_ENDPOINT connection mode.
      */
     Endpoint?: Endpoint;
+    /**
+     * The connection properties for cross cluster search.
+     */
+    CrossClusterSearch?: CrossClusterSearchConnectionProperties;
   }
   export type ConnectionStatusMessage = string;
   export interface CreateDomainRequest {
@@ -1052,6 +1056,10 @@ declare namespace OpenSearch {
      * The connection mode.
      */
     ConnectionMode?: ConnectionMode;
+    /**
+     * The ConnectionProperties for the outbound connection.
+     */
+    ConnectionProperties?: ConnectionProperties;
   }
   export interface CreateOutboundConnectionResponse {
     /**
@@ -1128,6 +1136,12 @@ declare namespace OpenSearch {
     VpcEndpoint: VpcEndpoint;
   }
   export type CreatedAt = Date;
+  export interface CrossClusterSearchConnectionProperties {
+    /**
+     * Status of SkipUnavailable param for outbound connection.
+     */
+    SkipUnavailable?: SkipUnavailableStatus;
+  }
   export interface DeleteDomainRequest {
     /**
      * The name of the domain you want to permanently delete.
@@ -2971,6 +2985,7 @@ declare namespace OpenSearch {
     OptionalDeployment?: Boolean;
   }
   export type ServiceUrl = string;
+  export type SkipUnavailableStatus = "ENABLED"|"DISABLED"|string;
   export interface SnapshotOptions {
     /**
      * The time, in UTC format, when OpenSearch Service takes a daily automated snapshot of the specified domain. Default is 0 hours.

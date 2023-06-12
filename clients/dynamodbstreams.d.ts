@@ -226,7 +226,7 @@ declare namespace DynamoDBStreams {
      */
     eventVersion?: String;
     /**
-     * The AWS service from which the stream record originated. For DynamoDB Streams, this is aws:dynamodb.
+     * The Amazon Web Services service from which the stream record originated. For DynamoDB Streams, this is aws:dynamodb.
      */
     eventSource?: String;
     /**
@@ -282,7 +282,7 @@ declare namespace DynamoDBStreams {
      */
     TableName?: TableName;
     /**
-     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   the AWS customer ID.   the table name   the StreamLabel   
+     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   the Amazon Web Services customer ID.   the table name   the StreamLabel   
      */
     StreamLabel?: String;
   }
@@ -293,7 +293,7 @@ declare namespace DynamoDBStreams {
      */
     StreamArn?: StreamArn;
     /**
-     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   the AWS customer ID.   the table name   the StreamLabel   
+     * A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is not a unique identifier for the stream, because it is possible that a stream from another table might have the same timestamp. However, the combination of the following three elements is guaranteed to be unique:   the Amazon Web Services customer ID.   the table name   the StreamLabel   
      */
     StreamLabel?: String;
     /**
@@ -328,7 +328,7 @@ declare namespace DynamoDBStreams {
   export type StreamList = Stream[];
   export interface StreamRecord {
     /**
-     * The approximate date and time when the stream record was created, in UNIX epoch time format.
+     * The approximate date and time when the stream record was created, in UNIX epoch time format and rounded down to the closest second.
      */
     ApproximateCreationDateTime?: _Date;
     /**

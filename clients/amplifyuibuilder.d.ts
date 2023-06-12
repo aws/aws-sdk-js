@@ -20,11 +20,11 @@ declare class AmplifyUIBuilder extends Service {
    */
   createComponent(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateComponentResponse) => void): Request<AmplifyUIBuilder.Types.CreateComponentResponse, AWSError>;
   /**
-   * Creates a new form for an Amplify app.
+   * Creates a new form for an Amplify.
    */
   createForm(params: AmplifyUIBuilder.Types.CreateFormRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateFormResponse) => void): Request<AmplifyUIBuilder.Types.CreateFormResponse, AWSError>;
   /**
-   * Creates a new form for an Amplify app.
+   * Creates a new form for an Amplify.
    */
   createForm(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateFormResponse) => void): Request<AmplifyUIBuilder.Types.CreateFormResponse, AWSError>;
   /**
@@ -92,6 +92,14 @@ declare class AmplifyUIBuilder extends Service {
    */
   exportThemes(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ExportThemesResponse) => void): Request<AmplifyUIBuilder.Types.ExportThemesResponse, AWSError>;
   /**
+   * Returns an existing code generation job.
+   */
+  getCodegenJob(params: AmplifyUIBuilder.Types.GetCodegenJobRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetCodegenJobResponse) => void): Request<AmplifyUIBuilder.Types.GetCodegenJobResponse, AWSError>;
+  /**
+   * Returns an existing code generation job.
+   */
+  getCodegenJob(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetCodegenJobResponse) => void): Request<AmplifyUIBuilder.Types.GetCodegenJobResponse, AWSError>;
+  /**
    * Returns an existing component for an Amplify app.
    */
   getComponent(params: AmplifyUIBuilder.Types.GetComponentRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetComponentResponse) => void): Request<AmplifyUIBuilder.Types.GetComponentResponse, AWSError>;
@@ -123,6 +131,14 @@ declare class AmplifyUIBuilder extends Service {
    * Returns an existing theme for an Amplify app.
    */
   getTheme(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.GetThemeResponse) => void): Request<AmplifyUIBuilder.Types.GetThemeResponse, AWSError>;
+  /**
+   * Retrieves a list of code generation jobs for a specified Amplify app and backend environment.
+   */
+  listCodegenJobs(params: AmplifyUIBuilder.Types.ListCodegenJobsRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListCodegenJobsResponse) => void): Request<AmplifyUIBuilder.Types.ListCodegenJobsResponse, AWSError>;
+  /**
+   * Retrieves a list of code generation jobs for a specified Amplify app and backend environment.
+   */
+  listCodegenJobs(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ListCodegenJobsResponse) => void): Request<AmplifyUIBuilder.Types.ListCodegenJobsResponse, AWSError>;
   /**
    * Retrieves a list of components for a specified Amplify app and backend environment.
    */
@@ -163,6 +179,14 @@ declare class AmplifyUIBuilder extends Service {
    * Refreshes a previously issued access token that might have expired.
    */
   refreshToken(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.RefreshTokenResponse) => void): Request<AmplifyUIBuilder.Types.RefreshTokenResponse, AWSError>;
+  /**
+   * Starts a code generation job for for a specified Amplify app and backend environment.
+   */
+  startCodegenJob(params: AmplifyUIBuilder.Types.StartCodegenJobRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.StartCodegenJobResponse) => void): Request<AmplifyUIBuilder.Types.StartCodegenJobResponse, AWSError>;
+  /**
+   * Starts a code generation job for for a specified Amplify app and backend environment.
+   */
+  startCodegenJob(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.StartCodegenJobResponse) => void): Request<AmplifyUIBuilder.Types.StartCodegenJobResponse, AWSError>;
   /**
    * Updates an existing component.
    */
@@ -227,7 +251,217 @@ declare namespace AmplifyUIBuilder {
      */
     state?: MutationActionSetStateParameter;
   }
+  export type AppId = string;
+  export type AssociatedFieldsList = String[];
   export type Boolean = boolean;
+  export interface CodegenFeatureFlags {
+    /**
+     * Specifes whether a code generation job supports data relationships.
+     */
+    isRelationshipSupported?: Boolean;
+    /**
+     * Specifies whether a code generation job supports non models.
+     */
+    isNonModelSupported?: Boolean;
+  }
+  export interface CodegenGenericDataEnum {
+    /**
+     * The list of enum values in the generic data schema.
+     */
+    values: CodegenGenericDataEnumValuesList;
+  }
+  export type CodegenGenericDataEnumValuesList = String[];
+  export type CodegenGenericDataEnums = {[key: string]: CodegenGenericDataEnum};
+  export interface CodegenGenericDataField {
+    /**
+     * The data type for the generic data field.
+     */
+    dataType: CodegenGenericDataFieldDataType;
+    /**
+     * The value of the data type for the generic data field.
+     */
+    dataTypeValue: String;
+    /**
+     * Specifies whether the generic data field is required.
+     */
+    required: Boolean;
+    /**
+     * Specifies whether the generic data field is read-only.
+     */
+    readOnly: Boolean;
+    /**
+     * Specifies whether the generic data field is an array.
+     */
+    isArray: Boolean;
+    /**
+     * The relationship of the generic data schema.
+     */
+    relationship?: CodegenGenericDataRelationshipType;
+  }
+  export type CodegenGenericDataFieldDataType = "ID"|"String"|"Int"|"Float"|"AWSDate"|"AWSTime"|"AWSDateTime"|"AWSTimestamp"|"AWSEmail"|"AWSURL"|"AWSIPAddress"|"Boolean"|"AWSJSON"|"AWSPhone"|"Enum"|"Model"|"NonModel"|string;
+  export type CodegenGenericDataFields = {[key: string]: CodegenGenericDataField};
+  export interface CodegenGenericDataModel {
+    /**
+     * The fields in the generic data model.
+     */
+    fields: CodegenGenericDataFields;
+    /**
+     * Specifies whether the generic data model is a join table.
+     */
+    isJoinTable?: Boolean;
+    /**
+     * The primary keys of the generic data model.
+     */
+    primaryKeys: CodegenPrimaryKeysList;
+  }
+  export type CodegenGenericDataModels = {[key: string]: CodegenGenericDataModel};
+  export interface CodegenGenericDataNonModel {
+    /**
+     * The fields in a generic data schema non model.
+     */
+    fields: CodegenGenericDataNonModelFields;
+  }
+  export type CodegenGenericDataNonModelFields = {[key: string]: CodegenGenericDataField};
+  export type CodegenGenericDataNonModels = {[key: string]: CodegenGenericDataNonModel};
+  export interface CodegenGenericDataRelationshipType {
+    /**
+     * The data relationship type.
+     */
+    type: GenericDataRelationshipType;
+    /**
+     * The name of the related model in the data relationship.
+     */
+    relatedModelName: String;
+    /**
+     * The related model fields in the data relationship.
+     */
+    relatedModelFields?: RelatedModelFieldsList;
+    /**
+     * Specifies whether the relationship can unlink the associated model.
+     */
+    canUnlinkAssociatedModel?: Boolean;
+    /**
+     * The name of the related join field in the data relationship.
+     */
+    relatedJoinFieldName?: String;
+    /**
+     * The name of the related join table in the data relationship.
+     */
+    relatedJoinTableName?: String;
+    /**
+     * The value of the belongsTo field on the related data model. 
+     */
+    belongsToFieldOnRelatedModel?: String;
+    /**
+     * The associated fields of the data relationship.
+     */
+    associatedFields?: AssociatedFieldsList;
+    /**
+     * Specifies whether the @index directive is supported for a hasMany data relationship.
+     */
+    isHasManyIndex?: Boolean;
+  }
+  export interface CodegenJob {
+    /**
+     * The unique ID for the code generation job.
+     */
+    id: Uuid;
+    /**
+     * The ID of the Amplify app associated with the code generation job.
+     */
+    appId: AppId;
+    /**
+     * The name of the backend environment associated with the code generation job.
+     */
+    environmentName: String;
+    renderConfig?: CodegenJobRenderConfig;
+    genericDataSchema?: CodegenJobGenericDataSchema;
+    /**
+     * Specifies whether to autogenerate forms in the code generation job.
+     */
+    autoGenerateForms?: Boolean;
+    features?: CodegenFeatureFlags;
+    /**
+     * The status of the code generation job.
+     */
+    status?: CodegenJobStatus;
+    /**
+     * The customized status message for the code generation job.
+     */
+    statusMessage?: String;
+    /**
+     * The CodegenJobAsset to use for the code generation job.
+     */
+    asset?: CodegenJobAsset;
+    /**
+     * One or more key-value pairs to use when tagging the code generation job.
+     */
+    tags?: Tags;
+    /**
+     * The time that the code generation job was created.
+     */
+    createdAt?: SyntheticTimestamp_date_time;
+    /**
+     * The time that the code generation job was modified.
+     */
+    modifiedAt?: SyntheticTimestamp_date_time;
+  }
+  export interface CodegenJobAsset {
+    /**
+     * The URL to use to access the asset.
+     */
+    downloadUrl?: String;
+  }
+  export interface CodegenJobGenericDataSchema {
+    /**
+     * The type of the data source for the schema. Currently, the only valid value is an Amplify DataStore.
+     */
+    dataSourceType: CodegenJobGenericDataSourceType;
+    /**
+     * The name of a CodegenGenericDataModel.
+     */
+    models: CodegenGenericDataModels;
+    /**
+     * The name of a CodegenGenericDataEnum.
+     */
+    enums: CodegenGenericDataEnums;
+    /**
+     * The name of a CodegenGenericDataNonModel.
+     */
+    nonModels: CodegenGenericDataNonModels;
+  }
+  export type CodegenJobGenericDataSourceType = "DataStore"|string;
+  export interface CodegenJobRenderConfig {
+    /**
+     * The name of the ReactStartCodegenJobData object.
+     */
+    react?: ReactStartCodegenJobData;
+  }
+  export type CodegenJobStatus = "in_progress"|"failed"|"succeeded"|string;
+  export interface CodegenJobSummary {
+    /**
+     * The unique ID of the Amplify app associated with the code generation job.
+     */
+    appId: AppId;
+    /**
+     * The name of the backend environment associated with the code generation job.
+     */
+    environmentName: String;
+    /**
+     * The unique ID for the code generation job summary.
+     */
+    id: Uuid;
+    /**
+     * The time that the code generation job summary was created.
+     */
+    createdAt?: SyntheticTimestamp_date_time;
+    /**
+     * The time that the code generation job summary was modified.
+     */
+    modifiedAt?: SyntheticTimestamp_date_time;
+  }
+  export type CodegenJobSummaryList = CodegenJobSummary[];
+  export type CodegenPrimaryKeysList = String[];
   export interface Component {
     /**
      * The unique ID of the Amplify app associated with the component.
@@ -1241,6 +1475,27 @@ declare namespace AmplifyUIBuilder {
     name: FormName;
   }
   export type FormSummaryList = FormSummary[];
+  export type GenericDataRelationshipType = "HAS_MANY"|"HAS_ONE"|"BELONGS_TO"|string;
+  export interface GetCodegenJobRequest {
+    /**
+     * The unique ID of the Amplify app associated with the code generation job.
+     */
+    appId: AppId;
+    /**
+     * The name of the backend environment that is a part of the Amplify app associated with the code generation job.
+     */
+    environmentName: String;
+    /**
+     * The unique ID of the code generation job.
+     */
+    id: Uuid;
+  }
+  export interface GetCodegenJobResponse {
+    /**
+     * The configuration settings for the code generation job.
+     */
+    job?: CodegenJob;
+  }
   export interface GetComponentRequest {
     /**
      * The unique ID of the Amplify app.
@@ -1319,7 +1574,39 @@ declare namespace AmplifyUIBuilder {
   }
   export type IdentifierList = String[];
   export type Integer = number;
+  export type JSModule = "es2020"|"esnext"|string;
+  export type JSScript = "jsx"|"tsx"|"js"|string;
+  export type JSTarget = "es2015"|"es2020"|string;
   export type LabelDecorator = "required"|"optional"|"none"|string;
+  export type ListCodegenJobsLimit = number;
+  export interface ListCodegenJobsRequest {
+    /**
+     * The unique ID for the Amplify app.
+     */
+    appId: AppId;
+    /**
+     * The name of the backend environment that is a part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The token to request the next page of results.
+     */
+    nextToken?: String;
+    /**
+     * The maximum number of jobs to retrieve.
+     */
+    maxResults?: ListCodegenJobsLimit;
+  }
+  export interface ListCodegenJobsResponse {
+    /**
+     * The list of code generation jobs for the Amplify app.
+     */
+    entities: CodegenJobSummaryList;
+    /**
+     * The pagination token that's included if more results are available.
+     */
+    nextToken?: String;
+  }
   export type ListComponentsLimit = number;
   export interface ListComponentsRequest {
     /**
@@ -1474,6 +1761,28 @@ declare namespace AmplifyUIBuilder {
      */
     body: PutMetadataFlagBody;
   }
+  export interface ReactStartCodegenJobData {
+    /**
+     * The JavaScript module type.
+     */
+    module?: JSModule;
+    /**
+     * The ECMAScript specification to use.
+     */
+    target?: JSTarget;
+    /**
+     * The file type to use for a JavaScript project.
+     */
+    script?: JSScript;
+    /**
+     * Specifies whether the code generation job should render type declaration files.
+     */
+    renderTypeDeclarations?: Boolean;
+    /**
+     * Specifies whether the code generation job should render inline source maps.
+     */
+    inlineSourceMap?: Boolean;
+  }
   export interface RefreshTokenRequest {
     /**
      * The third-party provider for the token. The only valid value is figma.
@@ -1504,6 +1813,7 @@ declare namespace AmplifyUIBuilder {
      */
     expiresIn: Integer;
   }
+  export type RelatedModelFieldsList = String[];
   export interface SectionalElement {
     /**
      * The type of sectional element. Valid values are Heading, Text, and Divider.
@@ -1544,6 +1854,52 @@ declare namespace AmplifyUIBuilder {
     direction: SortDirection;
   }
   export type SortPropertyList = SortProperty[];
+  export interface StartCodegenJobData {
+    /**
+     * The code generation configuration for the codegen job.
+     */
+    renderConfig: CodegenJobRenderConfig;
+    /**
+     * The data schema to use for a code generation job.
+     */
+    genericDataSchema?: CodegenJobGenericDataSchema;
+    /**
+     * Specifies whether to autogenerate forms in the code generation job.
+     */
+    autoGenerateForms?: Boolean;
+    /**
+     * The feature flags for a code generation job.
+     */
+    features?: CodegenFeatureFlags;
+    /**
+     * One or more key-value pairs to use when tagging the code generation job data.
+     */
+    tags?: Tags;
+  }
+  export interface StartCodegenJobRequest {
+    /**
+     * The unique ID for the Amplify app.
+     */
+    appId: AppId;
+    /**
+     * The name of the backend environment that is a part of the Amplify app.
+     */
+    environmentName: String;
+    /**
+     * The idempotency token used to ensure that the code generation job request completes only once.
+     */
+    clientToken?: String;
+    /**
+     * The code generation job resource configuration.
+     */
+    codegenJobToCreate: StartCodegenJobData;
+  }
+  export interface StartCodegenJobResponse {
+    /**
+     * The code generation job for a UI component that is associated with an Amplify app.
+     */
+    entity?: CodegenJob;
+  }
   export type StorageAccessLevel = "public"|"protected"|"private"|string;
   export type StrValues = String[];
   export type String = string;

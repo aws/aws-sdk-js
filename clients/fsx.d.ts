@@ -44,11 +44,11 @@ declare class FSx extends Service {
    */
   createBackup(callback?: (err: AWSError, data: FSx.Types.CreateBackupResponse) => void): Request<FSx.Types.CreateBackupResponse, AWSError>;
   /**
-   * Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported for all file systems except for Scratch_1 deployment type. Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.   CreateDataRepositoryAssociation isn't supported on Amazon File Cache resources. To create a DRA on Amazon File Cache, use the CreateFileCache operation. 
+   * Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported on all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment type. Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.   CreateDataRepositoryAssociation isn't supported on Amazon File Cache resources. To create a DRA on Amazon File Cache, use the CreateFileCache operation. 
    */
   createDataRepositoryAssociation(params: FSx.Types.CreateDataRepositoryAssociationRequest, callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryAssociationResponse) => void): Request<FSx.Types.CreateDataRepositoryAssociationResponse, AWSError>;
   /**
-   * Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported for all file systems except for Scratch_1 deployment type. Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.   CreateDataRepositoryAssociation isn't supported on Amazon File Cache resources. To create a DRA on Amazon File Cache, use the CreateFileCache operation. 
+   * Creates an Amazon FSx for Lustre data repository association (DRA). A data repository association is a link between a directory on the file system and an Amazon S3 bucket or prefix. You can have a maximum of 8 data repository associations on a file system. Data repository associations are supported on all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment type. Each data repository association must have a unique Amazon FSx file system directory and a unique S3 bucket or prefix associated with it. You can configure a data repository association for automatic import only, for automatic export only, or for both. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.   CreateDataRepositoryAssociation isn't supported on Amazon File Cache resources. To create a DRA on Amazon File Cache, use the CreateFileCache operation. 
    */
   createDataRepositoryAssociation(callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryAssociationResponse) => void): Request<FSx.Types.CreateDataRepositoryAssociationResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class FSx extends Service {
    */
   deleteBackup(callback?: (err: AWSError, data: FSx.Types.DeleteBackupResponse) => void): Request<FSx.Types.DeleteBackupResponse, AWSError>;
   /**
-   * Deletes a data repository association on an Amazon FSx for Lustre file system. Deleting the data repository association unlinks the file system from the Amazon S3 bucket. When deleting a data repository association, you have the option of deleting the data in the file system that corresponds to the data repository association. Data repository associations are supported for all file systems except for Scratch_1 deployment type.
+   * Deletes a data repository association on an Amazon FSx for Lustre file system. Deleting the data repository association unlinks the file system from the Amazon S3 bucket. When deleting a data repository association, you have the option of deleting the data in the file system that corresponds to the data repository association. Data repository associations are supported on all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment type.
    */
   deleteDataRepositoryAssociation(params: FSx.Types.DeleteDataRepositoryAssociationRequest, callback?: (err: AWSError, data: FSx.Types.DeleteDataRepositoryAssociationResponse) => void): Request<FSx.Types.DeleteDataRepositoryAssociationResponse, AWSError>;
   /**
-   * Deletes a data repository association on an Amazon FSx for Lustre file system. Deleting the data repository association unlinks the file system from the Amazon S3 bucket. When deleting a data repository association, you have the option of deleting the data in the file system that corresponds to the data repository association. Data repository associations are supported for all file systems except for Scratch_1 deployment type.
+   * Deletes a data repository association on an Amazon FSx for Lustre file system. Deleting the data repository association unlinks the file system from the Amazon S3 bucket. When deleting a data repository association, you have the option of deleting the data in the file system that corresponds to the data repository association. Data repository associations are supported on all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment type.
    */
   deleteDataRepositoryAssociation(callback?: (err: AWSError, data: FSx.Types.DeleteDataRepositoryAssociationResponse) => void): Request<FSx.Types.DeleteDataRepositoryAssociationResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class FSx extends Service {
    */
   describeBackups(callback?: (err: AWSError, data: FSx.Types.DescribeBackupsResponse) => void): Request<FSx.Types.DescribeBackupsResponse, AWSError>;
   /**
-   * Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository associations, if one or more AssociationIds values are provided in the request, or if filters are used in the request. Data repository associations are supported on Amazon File Cache resources and all Amazon FSx for Lustre file systems excluding Scratch_1 deployment types. You can use filters to narrow the response to include just data repository associations for specific file systems (use the file-system-id filter with the ID of the file system) or caches (use the file-cache-id filter with the ID of the cache), or data repository associations for a specific repository type (use the data-repository-type filter with a value of S3 or NFS). If you don't use filters, the response returns all data repository associations owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all data repository associations, you can paginate the response by using the optional MaxResults parameter to limit the number of data repository associations returned in a response. If more data repository associations remain, a NextToken value is returned in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
+   * Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository associations, if one or more AssociationIds values are provided in the request, or if filters are used in the request. Data repository associations are supported on Amazon File Cache resources and all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment type. You can use filters to narrow the response to include just data repository associations for specific file systems (use the file-system-id filter with the ID of the file system) or caches (use the file-cache-id filter with the ID of the cache), or data repository associations for a specific repository type (use the data-repository-type filter with a value of S3 or NFS). If you don't use filters, the response returns all data repository associations owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all data repository associations, you can paginate the response by using the optional MaxResults parameter to limit the number of data repository associations returned in a response. If more data repository associations remain, a NextToken value is returned in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
    */
   describeDataRepositoryAssociations(params: FSx.Types.DescribeDataRepositoryAssociationsRequest, callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryAssociationsResponse) => void): Request<FSx.Types.DescribeDataRepositoryAssociationsResponse, AWSError>;
   /**
-   * Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository associations, if one or more AssociationIds values are provided in the request, or if filters are used in the request. Data repository associations are supported on Amazon File Cache resources and all Amazon FSx for Lustre file systems excluding Scratch_1 deployment types. You can use filters to narrow the response to include just data repository associations for specific file systems (use the file-system-id filter with the ID of the file system) or caches (use the file-cache-id filter with the ID of the cache), or data repository associations for a specific repository type (use the data-repository-type filter with a value of S3 or NFS). If you don't use filters, the response returns all data repository associations owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all data repository associations, you can paginate the response by using the optional MaxResults parameter to limit the number of data repository associations returned in a response. If more data repository associations remain, a NextToken value is returned in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
+   * Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository associations, if one or more AssociationIds values are provided in the request, or if filters are used in the request. Data repository associations are supported on Amazon File Cache resources and all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment type. You can use filters to narrow the response to include just data repository associations for specific file systems (use the file-system-id filter with the ID of the file system) or caches (use the file-cache-id filter with the ID of the cache), or data repository associations for a specific repository type (use the data-repository-type filter with a value of S3 or NFS). If you don't use filters, the response returns all data repository associations owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling. When retrieving all data repository associations, you can paginate the response by using the optional MaxResults parameter to limit the number of data repository associations returned in a response. If more data repository associations remain, a NextToken value is returned in the response. In this case, send a later request with the NextToken request parameter set to the value of NextToken from the last response.
    */
   describeDataRepositoryAssociations(callback?: (err: AWSError, data: FSx.Types.DescribeDataRepositoryAssociationsResponse) => void): Request<FSx.Types.DescribeDataRepositoryAssociationsResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class FSx extends Service {
    */
   untagResource(callback?: (err: AWSError, data: FSx.Types.UntagResourceResponse) => void): Request<FSx.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the configuration of an existing data repository association on an Amazon FSx for Lustre file system. Data repository associations are supported for all file systems except for Scratch_1 deployment type.
+   * Updates the configuration of an existing data repository association on an Amazon FSx for Lustre file system. Data repository associations are supported on all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment type.
    */
   updateDataRepositoryAssociation(params: FSx.Types.UpdateDataRepositoryAssociationRequest, callback?: (err: AWSError, data: FSx.Types.UpdateDataRepositoryAssociationResponse) => void): Request<FSx.Types.UpdateDataRepositoryAssociationResponse, AWSError>;
   /**
-   * Updates the configuration of an existing data repository association on an Amazon FSx for Lustre file system. Data repository associations are supported for all file systems except for Scratch_1 deployment type.
+   * Updates the configuration of an existing data repository association on an Amazon FSx for Lustre file system. Data repository associations are supported on all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment type.
    */
   updateDataRepositoryAssociation(callback?: (err: AWSError, data: FSx.Types.UpdateDataRepositoryAssociationResponse) => void): Request<FSx.Types.UpdateDataRepositoryAssociationResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class FSx extends Service {
    */
   updateSnapshot(callback?: (err: AWSError, data: FSx.Types.UpdateSnapshotResponse) => void): Request<FSx.Types.UpdateSnapshotResponse, AWSError>;
   /**
-   * Updates an Amazon FSx for ONTAP storage virtual machine (SVM).
+   * Updates an FSx for ONTAP storage virtual machine (SVM).
    */
   updateStorageVirtualMachine(params: FSx.Types.UpdateStorageVirtualMachineRequest, callback?: (err: AWSError, data: FSx.Types.UpdateStorageVirtualMachineResponse) => void): Request<FSx.Types.UpdateStorageVirtualMachineResponse, AWSError>;
   /**
-   * Updates an Amazon FSx for ONTAP storage virtual machine (SVM).
+   * Updates an FSx for ONTAP storage virtual machine (SVM).
    */
   updateStorageVirtualMachine(callback?: (err: AWSError, data: FSx.Types.UpdateStorageVirtualMachineResponse) => void): Request<FSx.Types.UpdateStorageVirtualMachineResponse, AWSError>;
   /**
@@ -843,11 +843,11 @@ declare namespace FSx {
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the file system deployment type. Single AZ deployment types are configured for redundancy within a single Availability Zone in an Amazon Web Services Region . Valid values are the following:    SINGLE_AZ_1- (Default) Creates file systems with throughput capacities of 64 - 4,096 MB/s. Single_AZ_1 is available in all Amazon Web Services Regions where Amazon FSx for OpenZFS is available, except US West (Oregon).    SINGLE_AZ_2- Creates file systems with throughput capacities of 160 - 10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US East (N. Virginia), US East (Ohio), US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.   For more information, see: Deployment type availability and File system performance in the Amazon FSx for OpenZFS User Guide.
+     * Specifies the file system deployment type. Single AZ deployment types are configured for redundancy within a single Availability Zone in an Amazon Web Services Region . Valid values are the following:    SINGLE_AZ_1- (Default) Creates file systems with throughput capacities of 64 - 4,096 MBps. Single_AZ_1 is available in all Amazon Web Services Regions where Amazon FSx for OpenZFS is available, except US West (Oregon).    SINGLE_AZ_2- Creates file systems with throughput capacities of 160 - 10,240 MBps using an NVMe L2ARC cache. Single_AZ_2 is available only in the US East (N. Virginia), US East (Ohio), US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.   For more information, see: Deployment type availability and File system performance in the Amazon FSx for OpenZFS User Guide.
      */
     DeploymentType: OpenZFSDeploymentType;
     /**
-     * Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in megabytes per second (MB/s). Valid values depend on the DeploymentType you choose, as follows:   For SINGLE_AZ_1, valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.   For SINGLE_AZ_2, valid values are 160, 320, 640, 1280, 2560, 3840, 5120, 7680, or 10240 MB/s.   You pay for additional throughput capacity that you provision.
+     * Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in megabytes per second (MBps). Valid values depend on the DeploymentType you choose, as follows:   For SINGLE_AZ_1, valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MBps.   For SINGLE_AZ_2, valid values are 160, 320, 640, 1280, 2560, 3840, 5120, 7680, or 10240 MBps.   You pay for additional throughput capacity that you provision.
      */
     ThroughputCapacity: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
@@ -1757,7 +1757,7 @@ declare namespace FSx {
   }
   export interface DiskIopsConfiguration {
     /**
-     * Specifies whether the number of IOPS for the file system is using the system default (AUTOMATIC) or was provisioned by the customer (USER_PROVISIONED).
+     * Specifies whether the file system is using the AUTOMATIC setting of SSD IOPS of 3 IOPS per GB of storage capacity, , or if it using a USER_PROVISIONED value.
      */
     Mode?: DiskIopsConfigurationMode;
     /**
@@ -2239,6 +2239,10 @@ declare namespace FSx {
     RouteTableIds?: RouteTableIds;
     ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
+    /**
+     * You can use the fsxadmin user account to access the NetApp ONTAP CLI and REST API. The password value is always redacted in the response.
+     */
+    FsxAdminPassword?: AdminPassword;
   }
   export interface OntapVolumeConfiguration {
     /**
@@ -2563,17 +2567,29 @@ declare namespace FSx {
   }
   export interface SelfManagedActiveDirectoryConfigurationUpdates {
     /**
-     * The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in OrganizationalUnitDistinguishedName.
+     * Specifies the updated user name for the service account on your self-managed AD domain. Amazon FSx uses this account to join to your self-managed AD domain. This account must have the permissions required to join computers to the domain in the organizational unit provided in OrganizationalUnitDistinguishedName.
      */
     UserName?: DirectoryUserName;
     /**
-     * The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+     * Specifies the updated password for the service account on your self-managed AD domain. Amazon FSx uses this account to join to your self-managed AD domain.
      */
     Password?: DirectoryPassword;
     /**
-     * A list of up to three IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+     * A list of up to three DNS server or domain controller IP addresses in your self-managed AD domain.
      */
     DnsIps?: DnsIps;
+    /**
+     * Specifies an updated fully qualified domain name of your self-managed AD configuration.
+     */
+    DomainName?: ActiveDirectoryFullyQualifiedName;
+    /**
+     * Specifies an updated fully qualified distinguished name of the organization unit within your self-managed AD.
+     */
+    OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
+    /**
+     * Specifies the updated name of the self-managed AD domain group whose members are granted administrative privileges for the Amazon FSx resource.
+     */
+    FileSystemAdministratorsGroup?: FileSystemAdministratorsGroupName;
   }
   export interface Snapshot {
     ResourceARN?: ResourceARN;
@@ -2695,7 +2711,7 @@ declare namespace FSx {
   export type SucceededCount = number;
   export interface SvmActiveDirectoryConfiguration {
     /**
-     * The NetBIOS name of the Active Directory computer object that is joined to your SVM.
+     * The NetBIOS name of the AD computer object to which the SVM is joined.
      */
     NetBiosName?: NetBiosAlias;
     SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryAttributes;
@@ -2847,16 +2863,16 @@ declare namespace FSx {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * The ONTAP administrative password for the fsxadmin user.
+     * Update the password for the fsxadmin user by entering a new password. You use the fsxadmin user to access the NetApp ONTAP CLI and REST API to manage your file system resources. For more information, see Managing resources using NetApp Applicaton.
      */
     FsxAdminPassword?: AdminPassword;
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
-     * The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for NetApp ONTAP file system. The default is 3 IOPS per GB of storage capacity, but you can provision additional IOPS per GB of storage. The configuration consists of an IOPS mode (AUTOMATIC or USER_PROVISIONED), and in the case of USER_PROVISIONED IOPS, the total number of SSD IOPS provisioned.
+     * The SSD IOPS (input output operations per second) configuration for an Amazon FSx for NetApp ONTAP file system. The default is 3 IOPS per GB of storage capacity, but you can provision additional IOPS per GB of storage. The configuration consists of an IOPS mode (AUTOMATIC or USER_PROVISIONED), and in the case of USER_PROVISIONED IOPS, the total number of SSD IOPS provisioned. For more information, see Updating SSD storage capacity and IOPS.
      */
     DiskIopsConfiguration?: DiskIopsConfiguration;
     /**
-     * Specifies the throughput of an FSx for NetApp ONTAP file system, measured in megabytes per second (MBps). Valid values are 128, 256, 512, 1024, 2048, and 4096 MBps.
+     * Enter a new value to change the amount of throughput capacity for the file system. Throughput capacity is measured in megabytes per second (MBps). Valid values are 128, 256, 512, 1024, 2048, and 4096 MBps. For more information, see Managing throughput capacity in the FSx for ONTAP User Guide.
      */
     ThroughputCapacity?: MegabytesPerSecond;
     /**
@@ -2896,7 +2912,7 @@ declare namespace FSx {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * Use this parameter to increase the storage capacity of an FSx for Windows File Server, FSx for Lustre, FSx for OpenZFS, or FSx for ONTAP file system. Specifies the storage capacity target value, in GiB, to increase the storage capacity for the file system that you're updating.   You can't make a storage capacity increase request if there is an existing storage capacity increase request in progress.  For Lustre file systems, the storage capacity target value can be the following:   For SCRATCH_2, PERSISTENT_1, and PERSISTENT_2 SSD deployment types, valid values are in multiples of 2400 GiB. The value must be greater than the current storage capacity.   For PERSISTENT HDD file systems, valid values are multiples of 6000 GiB for 12-MBps throughput per TiB file systems and multiples of 1800 GiB for 40-MBps throughput per TiB file systems. The values must be greater than the current storage capacity.   For SCRATCH_1 file systems, you can't increase the storage capacity.   For more information, see Managing storage and throughput capacity in the FSx for Lustre User Guide. For FSx for OpenZFS file systems, the storage capacity target value must be at least 10 percent greater than the current storage capacity value. For more information, see Managing storage capacity in the FSx for OpenZFS User Guide. For Windows file systems, the storage capacity target value must be at least 10 percent greater than the current storage capacity value. To increase storage capacity, the file system must have at least 16 MBps of throughput capacity. For more information, see Managing storage capacity in the Amazon FSx for Windows File Server User Guide. For ONTAP file systems, the storage capacity target value must be at least 10 percent greater than the current storage capacity value. For more information, see Managing storage capacity and provisioned IOPS in the Amazon FSx for NetApp ONTAP User Guide.
+     * Use this parameter to increase the storage capacity of an FSx for Windows File Server, FSx for Lustre, FSx for OpenZFS, or FSx for ONTAP file system. Specifies the storage capacity target value, in GiB, to increase the storage capacity for the file system that you're updating.   You can't make a storage capacity increase request if there is an existing storage capacity increase request in progress.  For Lustre file systems, the storage capacity target value can be the following:   For SCRATCH_2, PERSISTENT_1, and PERSISTENT_2 SSD deployment types, valid values are in multiples of 2400 GiB. The value must be greater than the current storage capacity.   For PERSISTENT HDD file systems, valid values are multiples of 6000 GiB for 12-MBps throughput per TiB file systems and multiples of 1800 GiB for 40-MBps throughput per TiB file systems. The values must be greater than the current storage capacity.   For SCRATCH_1 file systems, you can't increase the storage capacity.   For more information, see Managing storage and throughput capacity in the FSx for Lustre User Guide. For FSx for OpenZFS file systems, the storage capacity target value must be at least 10 percent greater than the current storage capacity value. For more information, see Managing storage capacity in the FSx for OpenZFS User Guide. For Windows file systems, the storage capacity target value must be at least 10 percent greater than the current storage capacity value. To increase storage capacity, the file system must have at least 16 MBps of throughput capacity. For more information, see Managing storage capacity in the Amazon FSxfor Windows File Server User Guide. For ONTAP file systems, the storage capacity target value must be at least 10 percent greater than the current storage capacity value. For more information, see Managing storage capacity and provisioned IOPS in the Amazon FSx for NetApp ONTAP User Guide.
      */
     StorageCapacity?: StorageCapacity;
     /**
@@ -2906,7 +2922,7 @@ declare namespace FSx {
     LustreConfiguration?: UpdateFileSystemLustreConfiguration;
     OntapConfiguration?: UpdateFileSystemOntapConfiguration;
     /**
-     * The configuration updates for an Amazon FSx for OpenZFS file system.
+     * The configuration updates for an FSx for OpenZFS file system.
      */
     OpenZFSConfiguration?: UpdateFileSystemOpenZFSConfiguration;
   }
@@ -3021,7 +3037,7 @@ declare namespace FSx {
   }
   export interface UpdateStorageVirtualMachineRequest {
     /**
-     * Updates the Microsoft Active Directory (AD) configuration for an SVM that is joined to an AD.
+     * Specifies updates to an SVM's Microsoft Active Directory (AD) configuration.
      */
     ActiveDirectoryConfiguration?: UpdateSvmActiveDirectoryConfiguration;
     ClientRequestToken?: ClientRequestToken;
@@ -3030,7 +3046,7 @@ declare namespace FSx {
      */
     StorageVirtualMachineId: StorageVirtualMachineId;
     /**
-     * Enter a new SvmAdminPassword if you are updating it.
+     * Specifies a new SvmAdminPassword.
      */
     SvmAdminPassword?: AdminPassword;
   }
@@ -3039,6 +3055,10 @@ declare namespace FSx {
   }
   export interface UpdateSvmActiveDirectoryConfiguration {
     SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryConfigurationUpdates;
+    /**
+     * Specifies an updated NetBIOS name of the AD computer object NetBiosName to which an SVM is joined.
+     */
+    NetBiosName?: NetBiosAlias;
   }
   export interface UpdateVolumeRequest {
     ClientRequestToken?: ClientRequestToken;

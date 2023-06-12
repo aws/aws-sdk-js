@@ -3211,7 +3211,7 @@ declare namespace SageMaker {
      */
     ChannelType?: AutoMLChannelType;
     /**
-     * The content type of the data from the input source. The following are the allowed content types for different problems:   ImageClassification: image/png, image/jpeg, image/*    TextClassification: text/csv;header=present   
+     * The content type of the data from the input source. The following are the allowed content types for different problems:   ImageClassification: image/png, image/jpeg, or image/*. The default value is image/*.   TextClassification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
      */
     ContentType?: ContentType;
     /**
@@ -9390,7 +9390,7 @@ declare namespace SageMaker {
   }
   export interface DescribePipelineRequest {
     /**
-     * The name of the pipeline to describe.
+     * The name or Amazon Resource Name (ARN) of the pipeline to describe.
      */
     PipelineName: PipelineNameOrArn;
   }
@@ -11882,7 +11882,7 @@ declare namespace SageMaker {
      */
     InstanceType: TrainingInstanceType;
     /**
-     * The number of instances of the type specified by InstanceType. Choose an instance count larger than 1 for distributed training algorithms. See SageMaker distributed training jobs for more information.
+     * The number of instances of the type specified by InstanceType. Choose an instance count larger than 1 for distributed training algorithms. See Step 2: Launch a SageMaker Distributed Training Job Using the SageMaker Python SDK for more information.
      */
     InstanceCount: TrainingInstanceCount;
     /**
@@ -13024,7 +13024,7 @@ declare namespace SageMaker {
   }
   export interface ListAppImageConfigsRequest {
     /**
-     * The maximum number of AppImageConfigs to return in the response. The default value is 10. 
+     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -13076,7 +13076,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * Returns a list up to a specified limit.
+     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -13578,7 +13578,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * Returns a list up to a specified limit.
+     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
      */
     MaxResults?: MaxResults;
   }
@@ -15308,7 +15308,7 @@ declare namespace SageMaker {
   }
   export interface ListPipelineExecutionsRequest {
     /**
-     * The name of the pipeline.
+     * The name or Amazon Resource Name (ARN) of the pipeline.
      */
     PipelineName: PipelineNameOrArn;
     /**
@@ -15508,7 +15508,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * Returns a list up to a specified limit.
+     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -15572,7 +15572,7 @@ declare namespace SageMaker {
   }
   export interface ListStudioLifecycleConfigsRequest {
     /**
-     * The maximum number of Studio Lifecycle Configurations to return in the response. The default value is 10.
+     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -15614,7 +15614,7 @@ declare namespace SageMaker {
   }
   export interface ListStudioLifecycleConfigsResponse {
     /**
-     * A token for getting the next set of actions, if there are any.
+     * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
      */
     NextToken?: NextToken;
     /**
@@ -15914,7 +15914,7 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
     /**
-     * Returns a list up to a specified limit.
+     * The total number of items to return in the response. If the total number of items available is more than the value specified, a NextToken is provided in the response. To resume pagination, provide the NextToken value in the as part of a subsequent call. The default value is 10.
      */
     MaxResults?: MaxResults;
     /**
@@ -19963,7 +19963,7 @@ declare namespace SageMaker {
   }
   export interface StartPipelineExecutionRequest {
     /**
-     * The name of the pipeline.
+     * The name or Amazon Resource Name (ARN) of the pipeline.
      */
     PipelineName: PipelineNameOrArn;
     /**
@@ -20221,7 +20221,7 @@ declare namespace SageMaker {
   export type TagList = Tag[];
   export type TagValue = string;
   export type TargetAttributeName = string;
-  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv2"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|"imx8mplus"|string;
+  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_inf2"|"ml_trn1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv2"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|"imx8mplus"|string;
   export type TargetLabelColumn = string;
   export type TargetObjectiveMetricValue = number;
   export interface TargetPlatform {
