@@ -12,6 +12,14 @@ declare class Drs extends Service {
   constructor(options?: Drs.Types.ClientConfiguration)
   config: Config & Drs.Types.ClientConfiguration;
   /**
+   * Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network. Can be used for reverting to previously deployed CloudFormation stacks.
+   */
+  associateSourceNetworkStack(params: Drs.Types.AssociateSourceNetworkStackRequest, callback?: (err: AWSError, data: Drs.Types.AssociateSourceNetworkStackResponse) => void): Request<Drs.Types.AssociateSourceNetworkStackResponse, AWSError>;
+  /**
+   * Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network. Can be used for reverting to previously deployed CloudFormation stacks.
+   */
+  associateSourceNetworkStack(callback?: (err: AWSError, data: Drs.Types.AssociateSourceNetworkStackResponse) => void): Request<Drs.Types.AssociateSourceNetworkStackResponse, AWSError>;
+  /**
    * Create an extended source server in the target Account based on the source server in staging account.
    */
   createExtendedSourceServer(params: Drs.Types.CreateExtendedSourceServerRequest, callback?: (err: AWSError, data: Drs.Types.CreateExtendedSourceServerResponse) => void): Request<Drs.Types.CreateExtendedSourceServerResponse, AWSError>;
@@ -35,6 +43,14 @@ declare class Drs extends Service {
    * Creates a new ReplicationConfigurationTemplate.
    */
   createReplicationConfigurationTemplate(callback?: (err: AWSError, data: Drs.Types.ReplicationConfigurationTemplate) => void): Request<Drs.Types.ReplicationConfigurationTemplate, AWSError>;
+  /**
+   * Create a new Source Network resource for a provided VPC ID.
+   */
+  createSourceNetwork(params: Drs.Types.CreateSourceNetworkRequest, callback?: (err: AWSError, data: Drs.Types.CreateSourceNetworkResponse) => void): Request<Drs.Types.CreateSourceNetworkResponse, AWSError>;
+  /**
+   * Create a new Source Network resource for a provided VPC ID.
+   */
+  createSourceNetwork(callback?: (err: AWSError, data: Drs.Types.CreateSourceNetworkResponse) => void): Request<Drs.Types.CreateSourceNetworkResponse, AWSError>;
   /**
    * Deletes a single Job by ID.
    */
@@ -67,6 +83,14 @@ declare class Drs extends Service {
    * Deletes a single Replication Configuration Template by ID
    */
   deleteReplicationConfigurationTemplate(callback?: (err: AWSError, data: Drs.Types.DeleteReplicationConfigurationTemplateResponse) => void): Request<Drs.Types.DeleteReplicationConfigurationTemplateResponse, AWSError>;
+  /**
+   * Delete Source Network resource.
+   */
+  deleteSourceNetwork(params: Drs.Types.DeleteSourceNetworkRequest, callback?: (err: AWSError, data: Drs.Types.DeleteSourceNetworkResponse) => void): Request<Drs.Types.DeleteSourceNetworkResponse, AWSError>;
+  /**
+   * Delete Source Network resource.
+   */
+  deleteSourceNetwork(callback?: (err: AWSError, data: Drs.Types.DeleteSourceNetworkResponse) => void): Request<Drs.Types.DeleteSourceNetworkResponse, AWSError>;
   /**
    * Deletes a single Source Server by ID. The Source Server must be disconnected first.
    */
@@ -124,6 +148,14 @@ declare class Drs extends Service {
    */
   describeReplicationConfigurationTemplates(callback?: (err: AWSError, data: Drs.Types.DescribeReplicationConfigurationTemplatesResponse) => void): Request<Drs.Types.DescribeReplicationConfigurationTemplatesResponse, AWSError>;
   /**
+   * Lists all Source Networks or multiple Source Networks filtered by ID.
+   */
+  describeSourceNetworks(params: Drs.Types.DescribeSourceNetworksRequest, callback?: (err: AWSError, data: Drs.Types.DescribeSourceNetworksResponse) => void): Request<Drs.Types.DescribeSourceNetworksResponse, AWSError>;
+  /**
+   * Lists all Source Networks or multiple Source Networks filtered by ID.
+   */
+  describeSourceNetworks(callback?: (err: AWSError, data: Drs.Types.DescribeSourceNetworksResponse) => void): Request<Drs.Types.DescribeSourceNetworksResponse, AWSError>;
+  /**
    * Lists all Source Servers or multiple Source Servers filtered by ID.
    */
   describeSourceServers(params: Drs.Types.DescribeSourceServersRequest, callback?: (err: AWSError, data: Drs.Types.DescribeSourceServersResponse) => void): Request<Drs.Types.DescribeSourceServersResponse, AWSError>;
@@ -147,6 +179,14 @@ declare class Drs extends Service {
    * Disconnects a specific Source Server from Elastic Disaster Recovery. Data replication is stopped immediately. All AWS resources created by Elastic Disaster Recovery for enabling the replication of the Source Server will be terminated / deleted within 90 minutes. You cannot disconnect a Source Server if it has a Recovery Instance. If the agent on the Source Server has not been prevented from communicating with the Elastic Disaster Recovery service, then it will receive a command to uninstall itself (within approximately 10 minutes). The following properties of the SourceServer will be changed immediately: dataReplicationInfo.dataReplicationState will be set to DISCONNECTED; The totalStorageBytes property for each of dataReplicationInfo.replicatedDisks will be set to zero; dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be nullified.
    */
   disconnectSourceServer(callback?: (err: AWSError, data: Drs.Types.SourceServer) => void): Request<Drs.Types.SourceServer, AWSError>;
+  /**
+   * Export the Source Network CloudFormation template to an S3 bucket.
+   */
+  exportSourceNetworkCfnTemplate(params: Drs.Types.ExportSourceNetworkCfnTemplateRequest, callback?: (err: AWSError, data: Drs.Types.ExportSourceNetworkCfnTemplateResponse) => void): Request<Drs.Types.ExportSourceNetworkCfnTemplateResponse, AWSError>;
+  /**
+   * Export the Source Network CloudFormation template to an S3 bucket.
+   */
+  exportSourceNetworkCfnTemplate(callback?: (err: AWSError, data: Drs.Types.ExportSourceNetworkCfnTemplateResponse) => void): Request<Drs.Types.ExportSourceNetworkCfnTemplateResponse, AWSError>;
   /**
    * Lists all Failback ReplicationConfigurations, filtered by Recovery Instance ID.
    */
@@ -244,6 +284,22 @@ declare class Drs extends Service {
    */
   startReplication(callback?: (err: AWSError, data: Drs.Types.StartReplicationResponse) => void): Request<Drs.Types.StartReplicationResponse, AWSError>;
   /**
+   * Deploy VPC for the specified Source Network and modify launch templates to use this network. The VPC will be deployed using a dedicated CloudFormation stack.
+   */
+  startSourceNetworkRecovery(params: Drs.Types.StartSourceNetworkRecoveryRequest, callback?: (err: AWSError, data: Drs.Types.StartSourceNetworkRecoveryResponse) => void): Request<Drs.Types.StartSourceNetworkRecoveryResponse, AWSError>;
+  /**
+   * Deploy VPC for the specified Source Network and modify launch templates to use this network. The VPC will be deployed using a dedicated CloudFormation stack.
+   */
+  startSourceNetworkRecovery(callback?: (err: AWSError, data: Drs.Types.StartSourceNetworkRecoveryResponse) => void): Request<Drs.Types.StartSourceNetworkRecoveryResponse, AWSError>;
+  /**
+   * Starts replication for a Source Network. This action would make the Source Network protected.
+   */
+  startSourceNetworkReplication(params: Drs.Types.StartSourceNetworkReplicationRequest, callback?: (err: AWSError, data: Drs.Types.StartSourceNetworkReplicationResponse) => void): Request<Drs.Types.StartSourceNetworkReplicationResponse, AWSError>;
+  /**
+   * Starts replication for a Source Network. This action would make the Source Network protected.
+   */
+  startSourceNetworkReplication(callback?: (err: AWSError, data: Drs.Types.StartSourceNetworkReplicationResponse) => void): Request<Drs.Types.StartSourceNetworkReplicationResponse, AWSError>;
+  /**
    * Stops the failback process for a specified Recovery Instance. This changes the Failback State of the Recovery Instance back to FAILBACK_NOT_STARTED.
    */
   stopFailback(params: Drs.Types.StopFailbackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -259,6 +315,14 @@ declare class Drs extends Service {
    * Stops replication for a Source Server. This action would make the Source Server unprotected, delete its existing snapshots and stop billing for it.
    */
   stopReplication(callback?: (err: AWSError, data: Drs.Types.StopReplicationResponse) => void): Request<Drs.Types.StopReplicationResponse, AWSError>;
+  /**
+   * Stops replication for a Source Network. This action would make the Source Network unprotected.
+   */
+  stopSourceNetworkReplication(params: Drs.Types.StopSourceNetworkReplicationRequest, callback?: (err: AWSError, data: Drs.Types.StopSourceNetworkReplicationResponse) => void): Request<Drs.Types.StopSourceNetworkReplicationResponse, AWSError>;
+  /**
+   * Stops replication for a Source Network. This action would make the Source Network unprotected.
+   */
+  stopSourceNetworkReplication(callback?: (err: AWSError, data: Drs.Types.StopSourceNetworkReplicationResponse) => void): Request<Drs.Types.StopSourceNetworkReplicationResponse, AWSError>;
   /**
    * Adds or overwrites only the specified tags for the specified Elastic Disaster Recovery resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.
    */
@@ -335,6 +399,22 @@ declare namespace Drs {
   export type AccountID = string;
   export type AccountIDs = AccountID[];
   export type Accounts = Account[];
+  export interface AssociateSourceNetworkStackRequest {
+    /**
+     * CloudFormation template to associate with a Source Network.
+     */
+    cfnStackName: CfnStackName;
+    /**
+     * The Source Network ID to associate with CloudFormation template.
+     */
+    sourceNetworkID: SourceNetworkID;
+  }
+  export interface AssociateSourceNetworkStackResponse {
+    /**
+     * The Source Network association Job.
+     */
+    job?: Job;
+  }
   export type AwsAvailabilityZone = string;
   export type AwsRegion = string;
   export type Boolean = boolean;
@@ -349,6 +429,7 @@ declare namespace Drs {
      */
     modelName?: BoundedString;
   }
+  export type CfnStackName = string;
   export type ConversionMap = {[key: string]: EbsSnapshot};
   export interface ConversionProperties {
     /**
@@ -398,6 +479,10 @@ declare namespace Drs {
      * Copy tags.
      */
     copyTags?: Boolean;
+    /**
+     * S3 bucket ARN to export Source Network templates.
+     */
+    exportBucketArn?: ARN;
     /**
      * Launch disposition.
      */
@@ -482,6 +567,30 @@ declare namespace Drs {
      * Whether to use a dedicated Replication Server in the replication staging area.
      */
     useDedicatedReplicationServer: Boolean;
+  }
+  export interface CreateSourceNetworkRequest {
+    /**
+     * Account containing the VPC to protect.
+     */
+    originAccountID: AccountID;
+    /**
+     * Region containing the VPC to protect.
+     */
+    originRegion: AwsRegion;
+    /**
+     * A set of tags to be associated with the Source Network resource.
+     */
+    tags?: TagsMap;
+    /**
+     * Which VPC ID to protect.
+     */
+    vpcID: VpcID;
+  }
+  export interface CreateSourceNetworkResponse {
+    /**
+     * ID of the created Source Network.
+     */
+    sourceNetworkID?: SourceNetworkID;
   }
   export interface DataReplicationError {
     /**
@@ -604,6 +713,14 @@ declare namespace Drs {
     replicationConfigurationTemplateID: ReplicationConfigurationTemplateID;
   }
   export interface DeleteReplicationConfigurationTemplateResponse {
+  }
+  export interface DeleteSourceNetworkRequest {
+    /**
+     * ID of the Source Network to delete.
+     */
+    sourceNetworkID: SourceNetworkID;
+  }
+  export interface DeleteSourceNetworkResponse {
   }
   export interface DeleteSourceServerRequest {
     /**
@@ -801,6 +918,45 @@ declare namespace Drs {
      */
     nextToken?: PaginationToken;
   }
+  export interface DescribeSourceNetworksRequest {
+    /**
+     * A set of filters by which to return Source Networks.
+     */
+    filters?: DescribeSourceNetworksRequestFilters;
+    /**
+     * Maximum number of Source Networks to retrieve.
+     */
+    maxResults?: StrictlyPositiveInteger;
+    /**
+     * The token of the next Source Networks to retrieve.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeSourceNetworksRequestFilters {
+    /**
+     * Filter Source Networks by account ID containing the protected VPCs.
+     */
+    originAccountID?: AccountID;
+    /**
+     * Filter Source Networks by the region containing the protected VPCs.
+     */
+    originRegion?: AwsRegion;
+    /**
+     * An array of Source Network IDs that should be returned. An empty array means all Source Networks.
+     */
+    sourceNetworkIDs?: DescribeSourceNetworksRequestFiltersIDs;
+  }
+  export type DescribeSourceNetworksRequestFiltersIDs = SourceNetworkID[];
+  export interface DescribeSourceNetworksResponse {
+    /**
+     * An array of Source Networks.
+     */
+    items?: SourceNetworksList;
+    /**
+     * The token of the next Source Networks to retrieve.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface DescribeSourceServersRequest {
     /**
      * A set of filters by which to return Source Servers.
@@ -869,6 +1025,24 @@ declare namespace Drs {
   export type EbsSnapshot = string;
   export type EbsSnapshotsList = EbsSnapshot[];
   export type EbsVolumeID = string;
+  export interface EventResourceData {
+    /**
+     * Source Network properties.
+     */
+    sourceNetworkData?: SourceNetworkData;
+  }
+  export interface ExportSourceNetworkCfnTemplateRequest {
+    /**
+     * The Source Network ID to export its CloudFormation template to an S3 bucket.
+     */
+    sourceNetworkID: SourceNetworkID;
+  }
+  export interface ExportSourceNetworkCfnTemplateResponse {
+    /**
+     * S3 bucket URL where the Source Network CloudFormation template was exported to.
+     */
+    s3DestinationUrl?: LargeBoundedString;
+  }
   export type ExtensionStatus = "EXTENDED"|"EXTENSION_ERROR"|"NOT_EXTENDED"|string;
   export type FailbackLaunchType = "RECOVERY"|"DRILL"|string;
   export type FailbackReplicationError = "AGENT_NOT_SEEN"|"FAILBACK_CLIENT_NOT_SEEN"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"|"FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|"FAILED_GETTING_REPLICATION_STATE"|"SNAPSHOTS_FAILURE"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|string;
@@ -934,7 +1108,7 @@ declare namespace Drs {
   }
   export interface InitializeServiceResponse {
   }
-  export type InitiatedBy = "START_RECOVERY"|"START_DRILL"|"FAILBACK"|"DIAGNOSTIC"|"TERMINATE_RECOVERY_INSTANCES"|"TARGET_ACCOUNT"|string;
+  export type InitiatedBy = "START_RECOVERY"|"START_DRILL"|"FAILBACK"|"DIAGNOSTIC"|"TERMINATE_RECOVERY_INSTANCES"|"TARGET_ACCOUNT"|"CREATE_NETWORK_RECOVERY"|"UPDATE_NETWORK_RECOVERY"|"ASSOCIATE_NETWORK_RECOVERY"|string;
   export interface Job {
     /**
      * The ARN of a Job.
@@ -956,6 +1130,10 @@ declare namespace Drs {
      * The ID of the Job.
      */
     jobID: JobID;
+    /**
+     * A list of resources that the Job is acting upon.
+     */
+    participatingResources?: ParticipatingResources;
     /**
      * A list of servers that the Job is acting upon.
      */
@@ -988,7 +1166,7 @@ declare namespace Drs {
      */
     logDateTime?: ISO8601DatetimeString;
   }
-  export type JobLogEvent = "JOB_START"|"SERVER_SKIPPED"|"CLEANUP_START"|"CLEANUP_END"|"CLEANUP_FAIL"|"SNAPSHOT_START"|"SNAPSHOT_END"|"SNAPSHOT_FAIL"|"USING_PREVIOUS_SNAPSHOT"|"USING_PREVIOUS_SNAPSHOT_FAILED"|"CONVERSION_START"|"CONVERSION_END"|"CONVERSION_FAIL"|"LAUNCH_START"|"LAUNCH_FAILED"|"JOB_CANCEL"|"JOB_END"|string;
+  export type JobLogEvent = "JOB_START"|"SERVER_SKIPPED"|"CLEANUP_START"|"CLEANUP_END"|"CLEANUP_FAIL"|"SNAPSHOT_START"|"SNAPSHOT_END"|"SNAPSHOT_FAIL"|"USING_PREVIOUS_SNAPSHOT"|"USING_PREVIOUS_SNAPSHOT_FAILED"|"CONVERSION_START"|"CONVERSION_END"|"CONVERSION_FAIL"|"LAUNCH_START"|"LAUNCH_FAILED"|"JOB_CANCEL"|"JOB_END"|"DEPLOY_NETWORK_CONFIGURATION_START"|"DEPLOY_NETWORK_CONFIGURATION_END"|"DEPLOY_NETWORK_CONFIGURATION_FAILED"|"UPDATE_NETWORK_CONFIGURATION_START"|"UPDATE_NETWORK_CONFIGURATION_END"|"UPDATE_NETWORK_CONFIGURATION_FAILED"|"UPDATE_LAUNCH_TEMPLATE_START"|"UPDATE_LAUNCH_TEMPLATE_END"|"UPDATE_LAUNCH_TEMPLATE_FAILED"|"NETWORK_RECOVERY_FAIL"|string;
   export interface JobLogEventData {
     /**
      * Properties of a conversion job
@@ -998,6 +1176,10 @@ declare namespace Drs {
      * The ID of a conversion server.
      */
     conversionServerID?: EC2InstanceID;
+    /**
+     * Properties of resource related to a job event.
+     */
+    eventResourceData?: EventResourceData;
     /**
      * A string representing a job error.
      */
@@ -1065,6 +1247,10 @@ declare namespace Drs {
      * Copy tags.
      */
     copyTags?: Boolean;
+    /**
+     * S3 bucket ARN to export Source Network templates.
+     */
+    exportBucketArn?: ARN;
     /**
      * ID of the Launch Configuration Template.
      */
@@ -1249,6 +1435,23 @@ declare namespace Drs {
   }
   export type PITPolicyRuleUnits = "MINUTE"|"HOUR"|"DAY"|string;
   export type PaginationToken = string;
+  export interface ParticipatingResource {
+    /**
+     * The launch status of a participating resource.
+     */
+    launchStatus?: LaunchStatus;
+    /**
+     * The ID of a participating resource.
+     */
+    participatingResourceID?: ParticipatingResourceID;
+  }
+  export interface ParticipatingResourceID {
+    /**
+     * Source Network ID.
+     */
+    sourceNetworkID?: SourceNetworkID;
+  }
+  export type ParticipatingResources = ParticipatingResource[];
   export interface ParticipatingServer {
     /**
      * The launch status of a participating server.
@@ -1500,6 +1703,21 @@ declare namespace Drs {
     ramBytes?: PositiveInteger;
   }
   export type RecoveryInstancesForTerminationRequest = RecoveryInstanceID[];
+  export interface RecoveryLifeCycle {
+    /**
+     * The date and time the last Source Network recovery was initiated.
+     */
+    apiCallDateTime?: SyntheticTimestamp_date_time;
+    /**
+     * The ID of the Job that was used to last recover the Source Network.
+     */
+    jobID?: JobID;
+    /**
+     * The status of the last recovery status of this Source Network.
+     */
+    lastRecoveryResult?: RecoveryResult;
+  }
+  export type RecoveryResult = "NOT_STARTED"|"IN_PROGRESS"|"SUCCESS"|"FAIL"|"PARTIAL_SUCCESS"|"ASSOCIATE_SUCCESS"|"ASSOCIATE_FAIL"|string;
   export interface RecoverySnapshot {
     /**
      * A list of EBS snapshots.
@@ -1597,7 +1815,7 @@ declare namespace Drs {
   }
   export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP"|string;
   export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"GP3"|"ST1"|"AUTO"|string;
-  export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM"|string;
+  export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM"|"NONE"|string;
   export interface ReplicationConfigurationReplicatedDisk {
     /**
      * The name of the device.
@@ -1701,6 +1919,7 @@ declare namespace Drs {
   export type ReplicationConfigurationTemplates = ReplicationConfigurationTemplate[];
   export type ReplicationDirection = "FAILOVER"|"FAILBACK"|string;
   export type ReplicationServersSecurityGroupsIDs = SecurityGroupID[];
+  export type ReplicationStatus = "STOPPED"|"IN_PROGRESS"|"PROTECTED"|"ERROR"|string;
   export interface RetryDataReplicationRequest {
     /**
      * The ID of the Source Server whose data replication should be retried.
@@ -1720,6 +1939,7 @@ declare namespace Drs {
     reversedDirectionSourceServerArn?: SourceServerARN;
   }
   export type SecurityGroupID = string;
+  export type SensitiveBoundedString = string;
   export type SmallBoundedString = string;
   export interface SourceCloudProperties {
     /**
@@ -1735,6 +1955,72 @@ declare namespace Drs {
      */
     originRegion?: AwsRegion;
   }
+  export interface SourceNetwork {
+    /**
+     * The ARN of the Source Network.
+     */
+    arn?: ARN;
+    /**
+     * CloudFormation stack name that was deployed for recovering the Source Network.
+     */
+    cfnStackName?: CfnStackName;
+    /**
+     * An object containing information regarding the last recovery of the Source Network.
+     */
+    lastRecovery?: RecoveryLifeCycle;
+    /**
+     * ID of the recovered VPC following Source Network recovery.
+     */
+    launchedVpcID?: VpcID;
+    /**
+     * Status of Source Network Replication. Possible values: (a) STOPPED - Source Network is not replicating. (b) IN_PROGRESS - Source Network is being replicated. (c) PROTECTED - Source Network was replicated successfully and is being synchronized for changes. (d) ERROR - Source Network replication has failed
+     */
+    replicationStatus?: ReplicationStatus;
+    /**
+     * Error details in case Source Network replication status is ERROR.
+     */
+    replicationStatusDetails?: SensitiveBoundedString;
+    /**
+     * Account ID containing the VPC protected by the Source Network.
+     */
+    sourceAccountID?: AccountID;
+    /**
+     * Source Network ID.
+     */
+    sourceNetworkID?: SourceNetworkID;
+    /**
+     * Region containing the VPC protected by the Source Network.
+     */
+    sourceRegion?: AwsRegion;
+    /**
+     * VPC ID protected by the Source Network.
+     */
+    sourceVpcID?: VpcID;
+    /**
+     * A list of tags associated with the Source Network.
+     */
+    tags?: TagsMap;
+  }
+  export interface SourceNetworkData {
+    /**
+     * Source Network ID.
+     */
+    sourceNetworkID?: SourceNetworkID;
+    /**
+     * VPC ID protected by the Source Network.
+     */
+    sourceVpc?: VpcID;
+    /**
+     * CloudFormation stack name that was deployed for recovering the Source Network.
+     */
+    stackName?: LargeBoundedString;
+    /**
+     * ID of the recovered VPC following Source Network recovery.
+     */
+    targetVpc?: VpcID;
+  }
+  export type SourceNetworkID = string;
+  export type SourceNetworksList = SourceNetwork[];
   export interface SourceProperties {
     /**
      * An array of CPUs.
@@ -1806,6 +2092,10 @@ declare namespace Drs {
      * Source cloud properties of the Source Server.
      */
     sourceCloudProperties?: SourceCloudProperties;
+    /**
+     * ID of the Source Network which is protecting this Source Server's network.
+     */
+    sourceNetworkID?: SourceNetworkID;
     /**
      * The source properties of the Source Server.
      */
@@ -1920,6 +2210,49 @@ declare namespace Drs {
      */
     sourceServer?: SourceServer;
   }
+  export interface StartSourceNetworkRecoveryRequest {
+    /**
+     * Don't update existing CloudFormation Stack, recover the network using a new stack.
+     */
+    deployAsNew?: Boolean;
+    /**
+     * The Source Networks that we want to start a Recovery Job for.
+     */
+    sourceNetworks: StartSourceNetworkRecoveryRequestNetworkEntries;
+    /**
+     * The tags to be associated with the Source Network recovery Job.
+     */
+    tags?: TagsMap;
+  }
+  export type StartSourceNetworkRecoveryRequestNetworkEntries = StartSourceNetworkRecoveryRequestNetworkEntry[];
+  export interface StartSourceNetworkRecoveryRequestNetworkEntry {
+    /**
+     * CloudFormation stack name to be used for recovering the network.
+     */
+    cfnStackName?: CfnStackName;
+    /**
+     * The ID of the Source Network you want to recover.
+     */
+    sourceNetworkID: SourceNetworkID;
+  }
+  export interface StartSourceNetworkRecoveryResponse {
+    /**
+     * The Source Network recovery Job.
+     */
+    job?: Job;
+  }
+  export interface StartSourceNetworkReplicationRequest {
+    /**
+     * ID of the Source Network to replicate.
+     */
+    sourceNetworkID: SourceNetworkID;
+  }
+  export interface StartSourceNetworkReplicationResponse {
+    /**
+     * Source Network which was requested for replication.
+     */
+    sourceNetwork?: SourceNetwork;
+  }
   export interface StopFailbackRequest {
     /**
      * The ID of the Recovery Instance we want to stop failback for.
@@ -1938,8 +2271,21 @@ declare namespace Drs {
      */
     sourceServer?: SourceServer;
   }
+  export interface StopSourceNetworkReplicationRequest {
+    /**
+     * ID of the Source Network to stop replication.
+     */
+    sourceNetworkID: SourceNetworkID;
+  }
+  export interface StopSourceNetworkReplicationResponse {
+    /**
+     * Source Network which was requested to stop replication.
+     */
+    sourceNetwork?: SourceNetwork;
+  }
   export type StrictlyPositiveInteger = number;
   export type SubnetID = string;
+  export type SyntheticTimestamp_date_time = Date;
   export type TagKey = string;
   export type TagKeys = TagKey[];
   export interface TagResourceRequest {
@@ -2034,6 +2380,10 @@ declare namespace Drs {
      * Copy tags.
      */
     copyTags?: Boolean;
+    /**
+     * S3 bucket ARN to export Source Network templates.
+     */
+    exportBucketArn?: ARN;
     /**
      * Launch Configuration Template ID.
      */
@@ -2195,6 +2545,7 @@ declare namespace Drs {
   }
   export type VolumeToConversionMap = {[key: string]: ConversionMap};
   export type VolumeToSizeMap = {[key: string]: PositiveInteger};
+  export type VpcID = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

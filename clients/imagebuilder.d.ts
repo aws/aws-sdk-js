@@ -2220,7 +2220,7 @@ declare namespace Imagebuilder {
      */
     dateLastRun?: DateTime;
     /**
-     * This is no longer supported, and does not return a value.
+     * The next date when the pipeline is scheduled to run.
      */
     dateNextRun?: DateTime;
     /**

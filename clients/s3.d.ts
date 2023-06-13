@@ -5939,7 +5939,7 @@ declare namespace S3 {
      */
     OutputSerialization: OutputSerialization;
   }
-  export type ServerSideEncryption = "AES256"|"aws:kms"|string;
+  export type ServerSideEncryption = "AES256"|"aws:kms"|"aws:kms:dsse"|string;
   export interface ServerSideEncryptionByDefault {
     /**
      * Server-side encryption algorithm to use for the default encryption.

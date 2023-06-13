@@ -572,11 +572,11 @@ declare class Lightsail extends Service {
    */
   getBundles(callback?: (err: AWSError, data: Lightsail.Types.GetBundlesResult) => void): Request<Lightsail.Types.GetBundlesResult, AWSError>;
   /**
-   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, ommit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
+   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, omit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
    */
   getCertificates(params: Lightsail.Types.GetCertificatesRequest, callback?: (err: AWSError, data: Lightsail.Types.GetCertificatesResult) => void): Request<Lightsail.Types.GetCertificatesResult, AWSError>;
   /**
-   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, ommit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
+   * Returns information about one or more Amazon Lightsail SSL/TLS certificates.  To get a summary of a certificate, omit includeCertificateDetails from your request. The response will include only the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags. 
    */
   getCertificates(callback?: (err: AWSError, data: Lightsail.Types.GetCertificatesResult) => void): Request<Lightsail.Types.GetCertificatesResult, AWSError>;
   /**
@@ -4229,12 +4229,20 @@ declare namespace Lightsail {
      * The name for the certificate for which to return information. When omitted, the response includes all of your certificates in the Amazon Web Services Region where the request is made.
      */
     certificateName?: CertificateName;
+    /**
+     * The token to advance to the next page of results from your request. To get a page token, perform an initial GetCertificates request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.
+     */
+    pageToken?: string;
   }
   export interface GetCertificatesResult {
     /**
      * An object that describes certificates.
      */
     certificates?: CertificateSummaryList;
+    /**
+     * If NextPageToken is returned there are more results available. The value of NextPageToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged.
+     */
+    nextPageToken?: string;
   }
   export interface GetCloudFormationStackRecordsRequest {
     /**
@@ -4388,11 +4396,11 @@ declare namespace Lightsail {
      */
     resourceName: ResourceName;
     /**
-     * The cost estimate start time. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     * The cost estimate start time. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you want to use a start time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
      */
     startTime: IsoDate;
     /**
-     * The cost estimate end time. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
+     * The cost estimate end time. Constraints:   Specified in Coordinated Universal Time (UTC).   Specified in the Unix time format. For example, if you want to use an end time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.   You can convert a human-friendly time to Unix time format using a converter like Epoch converter.
      */
     endTime: IsoDate;
   }

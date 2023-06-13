@@ -347,5 +347,7 @@ module.exports = {
   OSIS: require('./osis'),
   MediaPackageV2: require('./mediapackagev2'),
   PaymentCryptography: require('./paymentcryptography'),
-  PaymentCryptographyData: require('./paymentcryptographydata')
+  PaymentCryptographyData: require('./paymentcryptographydata'),
+  CodeGuruSecurity: require('./codegurusecurity'),
+  VerifiedPermissions: require('./verifiedpermissions')
 };

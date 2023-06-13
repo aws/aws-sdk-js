@@ -20,6 +20,14 @@ declare class WellArchitected extends Service {
    */
   associateLenses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Associate a profile with a workload.
+   */
+  associateProfiles(params: WellArchitected.Types.AssociateProfilesInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associate a profile with a workload.
+   */
+  associateProfiles(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Create a lens share. The owner of a lens can share it with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Lenses provided by Amazon Web Services (Amazon Web Services Official Content) cannot be shared.  Shared access to a lens is not removed until the lens invitation is deleted. If you share a lens with an organization or OU, all accounts in the organization or OU are granted access to the lens. For more information, see Sharing a custom lens in the Well-Architected Tool User Guide.   Disclaimer  By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account. 
    */
   createLensShare(params: WellArchitected.Types.CreateLensShareInput, callback?: (err: AWSError, data: WellArchitected.Types.CreateLensShareOutput) => void): Request<WellArchitected.Types.CreateLensShareOutput, AWSError>;
@@ -43,6 +51,22 @@ declare class WellArchitected extends Service {
    * Create a milestone for an existing workload.
    */
   createMilestone(callback?: (err: AWSError, data: WellArchitected.Types.CreateMilestoneOutput) => void): Request<WellArchitected.Types.CreateMilestoneOutput, AWSError>;
+  /**
+   * Create a profile.
+   */
+  createProfile(params: WellArchitected.Types.CreateProfileInput, callback?: (err: AWSError, data: WellArchitected.Types.CreateProfileOutput) => void): Request<WellArchitected.Types.CreateProfileOutput, AWSError>;
+  /**
+   * Create a profile.
+   */
+  createProfile(callback?: (err: AWSError, data: WellArchitected.Types.CreateProfileOutput) => void): Request<WellArchitected.Types.CreateProfileOutput, AWSError>;
+  /**
+   * Create a profile share.
+   */
+  createProfileShare(params: WellArchitected.Types.CreateProfileShareInput, callback?: (err: AWSError, data: WellArchitected.Types.CreateProfileShareOutput) => void): Request<WellArchitected.Types.CreateProfileShareOutput, AWSError>;
+  /**
+   * Create a profile share.
+   */
+  createProfileShare(callback?: (err: AWSError, data: WellArchitected.Types.CreateProfileShareOutput) => void): Request<WellArchitected.Types.CreateProfileShareOutput, AWSError>;
   /**
    * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.  Either AwsRegions, NonAwsRegions, or both must be specified when creating a workload. You also must specify ReviewOwner, even though the parameter is listed as not being required in the following section.  
    */
@@ -76,6 +100,22 @@ declare class WellArchitected extends Service {
    */
   deleteLensShare(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Delete a profile.   Disclaimer  By sharing your profile with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your profile available to those other accounts. Those other accounts may continue to access and use your shared profile even if you delete the profile from your own Amazon Web Services account or terminate your Amazon Web Services account. 
+   */
+  deleteProfile(params: WellArchitected.Types.DeleteProfileInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a profile.   Disclaimer  By sharing your profile with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your profile available to those other accounts. Those other accounts may continue to access and use your shared profile even if you delete the profile from your own Amazon Web Services account or terminate your Amazon Web Services account. 
+   */
+  deleteProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a profile share.
+   */
+  deleteProfileShare(params: WellArchitected.Types.DeleteProfileShareInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a profile share.
+   */
+  deleteProfileShare(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Delete an existing workload.
    */
   deleteWorkload(params: WellArchitected.Types.DeleteWorkloadInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -99,6 +139,14 @@ declare class WellArchitected extends Service {
    * Disassociate a lens from a workload. Up to 10 lenses can be disassociated from a workload in a single API operation.  The Amazon Web Services Well-Architected Framework lens (wellarchitected) cannot be removed from a workload. 
    */
   disassociateLenses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociate a profile from a workload.
+   */
+  disassociateProfiles(params: WellArchitected.Types.DisassociateProfilesInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociate a profile from a workload.
+   */
+  disassociateProfiles(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Export an existing lens. Only the owner of a lens can export it. Lenses provided by Amazon Web Services (Amazon Web Services Official Content) cannot be exported. Lenses are defined in JSON. For more information, see JSON format specification in the Well-Architected Tool User Guide.   Disclaimer  Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data. 
    */
@@ -163,6 +211,22 @@ declare class WellArchitected extends Service {
    * Get a milestone for an existing workload.
    */
   getMilestone(callback?: (err: AWSError, data: WellArchitected.Types.GetMilestoneOutput) => void): Request<WellArchitected.Types.GetMilestoneOutput, AWSError>;
+  /**
+   * Get profile information.
+   */
+  getProfile(params: WellArchitected.Types.GetProfileInput, callback?: (err: AWSError, data: WellArchitected.Types.GetProfileOutput) => void): Request<WellArchitected.Types.GetProfileOutput, AWSError>;
+  /**
+   * Get profile information.
+   */
+  getProfile(callback?: (err: AWSError, data: WellArchitected.Types.GetProfileOutput) => void): Request<WellArchitected.Types.GetProfileOutput, AWSError>;
+  /**
+   * Get profile template.
+   */
+  getProfileTemplate(params: WellArchitected.Types.GetProfileTemplateInput, callback?: (err: AWSError, data: WellArchitected.Types.GetProfileTemplateOutput) => void): Request<WellArchitected.Types.GetProfileTemplateOutput, AWSError>;
+  /**
+   * Get profile template.
+   */
+  getProfileTemplate(callback?: (err: AWSError, data: WellArchitected.Types.GetProfileTemplateOutput) => void): Request<WellArchitected.Types.GetProfileTemplateOutput, AWSError>;
   /**
    * Get an existing workload.
    */
@@ -252,6 +316,30 @@ declare class WellArchitected extends Service {
    */
   listNotifications(callback?: (err: AWSError, data: WellArchitected.Types.ListNotificationsOutput) => void): Request<WellArchitected.Types.ListNotificationsOutput, AWSError>;
   /**
+   * List profile notifications.
+   */
+  listProfileNotifications(params: WellArchitected.Types.ListProfileNotificationsInput, callback?: (err: AWSError, data: WellArchitected.Types.ListProfileNotificationsOutput) => void): Request<WellArchitected.Types.ListProfileNotificationsOutput, AWSError>;
+  /**
+   * List profile notifications.
+   */
+  listProfileNotifications(callback?: (err: AWSError, data: WellArchitected.Types.ListProfileNotificationsOutput) => void): Request<WellArchitected.Types.ListProfileNotificationsOutput, AWSError>;
+  /**
+   * List profile shares.
+   */
+  listProfileShares(params: WellArchitected.Types.ListProfileSharesInput, callback?: (err: AWSError, data: WellArchitected.Types.ListProfileSharesOutput) => void): Request<WellArchitected.Types.ListProfileSharesOutput, AWSError>;
+  /**
+   * List profile shares.
+   */
+  listProfileShares(callback?: (err: AWSError, data: WellArchitected.Types.ListProfileSharesOutput) => void): Request<WellArchitected.Types.ListProfileSharesOutput, AWSError>;
+  /**
+   * List profiles.
+   */
+  listProfiles(params: WellArchitected.Types.ListProfilesInput, callback?: (err: AWSError, data: WellArchitected.Types.ListProfilesOutput) => void): Request<WellArchitected.Types.ListProfilesOutput, AWSError>;
+  /**
+   * List profiles.
+   */
+  listProfiles(callback?: (err: AWSError, data: WellArchitected.Types.ListProfilesOutput) => void): Request<WellArchitected.Types.ListProfilesOutput, AWSError>;
+  /**
    * List the workload invitations.
    */
   listShareInvitations(params: WellArchitected.Types.ListShareInvitationsInput, callback?: (err: AWSError, data: WellArchitected.Types.ListShareInvitationsOutput) => void): Request<WellArchitected.Types.ListShareInvitationsOutput, AWSError>;
@@ -260,11 +348,11 @@ declare class WellArchitected extends Service {
    */
   listShareInvitations(callback?: (err: AWSError, data: WellArchitected.Types.ListShareInvitationsOutput) => void): Request<WellArchitected.Types.ListShareInvitationsOutput, AWSError>;
   /**
-   * List the tags for a resource.  The WorkloadArn parameter can be either a workload ARN or a custom lens ARN. 
+   * List the tags for a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN. 
    */
   listTagsForResource(params: WellArchitected.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.ListTagsForResourceOutput) => void): Request<WellArchitected.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * List the tags for a resource.  The WorkloadArn parameter can be either a workload ARN or a custom lens ARN. 
+   * List the tags for a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN. 
    */
   listTagsForResource(callback?: (err: AWSError, data: WellArchitected.Types.ListTagsForResourceOutput) => void): Request<WellArchitected.Types.ListTagsForResourceOutput, AWSError>;
   /**
@@ -284,19 +372,19 @@ declare class WellArchitected extends Service {
    */
   listWorkloads(callback?: (err: AWSError, data: WellArchitected.Types.ListWorkloadsOutput) => void): Request<WellArchitected.Types.ListWorkloadsOutput, AWSError>;
   /**
-   * Adds one or more tags to the specified resource.  The WorkloadArn parameter can be either a workload ARN or a custom lens ARN. 
+   * Adds one or more tags to the specified resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN. 
    */
   tagResource(params: WellArchitected.Types.TagResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.TagResourceOutput) => void): Request<WellArchitected.Types.TagResourceOutput, AWSError>;
   /**
-   * Adds one or more tags to the specified resource.  The WorkloadArn parameter can be either a workload ARN or a custom lens ARN. 
+   * Adds one or more tags to the specified resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN. 
    */
   tagResource(callback?: (err: AWSError, data: WellArchitected.Types.TagResourceOutput) => void): Request<WellArchitected.Types.TagResourceOutput, AWSError>;
   /**
-   * Deletes specified tags from a resource.  The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.  To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
+   * Deletes specified tags from a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.  To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
    */
   untagResource(params: WellArchitected.Types.UntagResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.UntagResourceOutput) => void): Request<WellArchitected.Types.UntagResourceOutput, AWSError>;
   /**
-   * Deletes specified tags from a resource.  The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.  To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
+   * Deletes specified tags from a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.  To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
    */
   untagResource(callback?: (err: AWSError, data: WellArchitected.Types.UntagResourceOutput) => void): Request<WellArchitected.Types.UntagResourceOutput, AWSError>;
   /**
@@ -323,6 +411,14 @@ declare class WellArchitected extends Service {
    * Update lens review for a particular workload.
    */
   updateLensReview(callback?: (err: AWSError, data: WellArchitected.Types.UpdateLensReviewOutput) => void): Request<WellArchitected.Types.UpdateLensReviewOutput, AWSError>;
+  /**
+   * Update a profile.
+   */
+  updateProfile(params: WellArchitected.Types.UpdateProfileInput, callback?: (err: AWSError, data: WellArchitected.Types.UpdateProfileOutput) => void): Request<WellArchitected.Types.UpdateProfileOutput, AWSError>;
+  /**
+   * Update a profile.
+   */
+  updateProfile(callback?: (err: AWSError, data: WellArchitected.Types.UpdateProfileOutput) => void): Request<WellArchitected.Types.UpdateProfileOutput, AWSError>;
   /**
    * Update a workload or custom lens share invitation.  This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified. 
    */
@@ -355,6 +451,14 @@ declare class WellArchitected extends Service {
    * Upgrade lens review for a particular workload.
    */
   upgradeLensReview(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Upgrade a profile.
+   */
+  upgradeProfileVersion(params: WellArchitected.Types.UpgradeProfileVersionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Upgrade a profile.
+   */
+  upgradeProfileVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace WellArchitected {
   export type AccountSummary = {[key: string]: CheckStatusCount};
@@ -413,11 +517,22 @@ declare namespace WellArchitected {
      * The reason why a choice is non-applicable to a question in your workload.
      */
     Reason?: AnswerReason;
+    /**
+     * The type of the question.
+     */
+    QuestionType?: QuestionType;
   }
   export type ApplicationArn = string;
   export interface AssociateLensesInput {
     WorkloadId: WorkloadId;
     LensAliases: LensAliases;
+  }
+  export interface AssociateProfilesInput {
+    WorkloadId: WorkloadId;
+    /**
+     * The list of profile ARNs to associate with the workload.
+     */
+    ProfileArns: ProfileArns;
   }
   export type AwsAccountId = string;
   export type AwsRegion = string;
@@ -658,6 +773,50 @@ declare namespace WellArchitected {
     WorkloadId?: WorkloadId;
     MilestoneNumber?: MilestoneNumber;
   }
+  export interface CreateProfileInput {
+    /**
+     * Name of the profile.
+     */
+    ProfileName: ProfileName;
+    /**
+     * The profile description.
+     */
+    ProfileDescription: ProfileDescription;
+    /**
+     * The profile questions.
+     */
+    ProfileQuestions: ProfileQuestionUpdates;
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * The tags assigned to the profile.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateProfileOutput {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn?: ProfileArn;
+    /**
+     * Version of the profile.
+     */
+    ProfileVersion?: ProfileVersion;
+  }
+  export interface CreateProfileShareInput {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn: ProfileArn;
+    SharedWith: SharedWith;
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface CreateProfileShareOutput {
+    ShareId?: ShareId;
+    /**
+     * The profile ARN.
+     */
+    ProfileArn?: ProfileArn;
+  }
   export interface CreateWorkloadInput {
     WorkloadName: WorkloadName;
     Description: WorkloadDescription;
@@ -685,6 +844,10 @@ declare namespace WellArchitected {
      * List of AppRegistry application ARNs associated to the workload.
      */
     Applications?: WorkloadApplications;
+    /**
+     * The list of profile ARNs associated with the workload.
+     */
+    ProfileArns?: WorkloadProfileArns;
   }
   export interface CreateWorkloadOutput {
     WorkloadId?: WorkloadId;
@@ -714,6 +877,21 @@ declare namespace WellArchitected {
     LensAlias: LensAlias;
     ClientRequestToken: ClientRequestToken;
   }
+  export interface DeleteProfileInput {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn: ProfileArn;
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface DeleteProfileShareInput {
+    ShareId: ShareId;
+    /**
+     * The profile ARN.
+     */
+    ProfileArn: ProfileArn;
+    ClientRequestToken: ClientRequestToken;
+  }
   export interface DeleteWorkloadInput {
     WorkloadId: WorkloadId;
     ClientRequestToken: ClientRequestToken;
@@ -727,6 +905,13 @@ declare namespace WellArchitected {
   export interface DisassociateLensesInput {
     WorkloadId: WorkloadId;
     LensAliases: LensAliases;
+  }
+  export interface DisassociateProfilesInput {
+    WorkloadId: WorkloadId;
+    /**
+     * The list of profile ARNs to disassociate from the workload.
+     */
+    ProfileArns: ProfileArns;
   }
   export type DiscoveryIntegrationStatus = "ENABLED"|"DISABLED"|string;
   export type DisplayText = string;
@@ -856,6 +1041,30 @@ declare namespace WellArchitected {
     WorkloadId?: WorkloadId;
     Milestone?: Milestone;
   }
+  export interface GetProfileInput {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn: ProfileArn;
+    /**
+     * The profile version.
+     */
+    ProfileVersion?: ProfileVersion;
+  }
+  export interface GetProfileOutput {
+    /**
+     * The profile.
+     */
+    Profile?: Profile;
+  }
+  export interface GetProfileTemplateInput {
+  }
+  export interface GetProfileTemplateOutput {
+    /**
+     * The profile template.
+     */
+    ProfileTemplate?: ProfileTemplate;
+  }
   export interface GetWorkloadInput {
     WorkloadId: WorkloadId;
   }
@@ -967,6 +1176,11 @@ declare namespace WellArchitected {
     Notes?: Notes;
     RiskCounts?: RiskCounts;
     NextToken?: NextToken;
+    /**
+     * The profiles associated with the workload.
+     */
+    Profiles?: WorkloadProfiles;
+    PrioritizedRiskCounts?: RiskCounts;
   }
   export interface LensReviewReport {
     LensAlias?: LensAlias;
@@ -994,6 +1208,11 @@ declare namespace WellArchitected {
     LensStatus?: LensStatus;
     UpdatedAt?: Timestamp;
     RiskCounts?: RiskCounts;
+    /**
+     * The profiles associated with the workload.
+     */
+    Profiles?: WorkloadProfiles;
+    PrioritizedRiskCounts?: RiskCounts;
   }
   export type LensShareSummaries = LensShareSummary[];
   export interface LensShareSummary {
@@ -1062,6 +1281,10 @@ declare namespace WellArchitected {
      * The maximum number of results to return for this request.
      */
     MaxResults?: ListAnswersMaxResults;
+    /**
+     * The priority of the question.
+     */
+    QuestionPriority?: QuestionPriority;
   }
   export type ListAnswersMaxResults = number;
   export interface ListAnswersOutput {
@@ -1123,6 +1346,10 @@ declare namespace WellArchitected {
      * The maximum number of results to return for this request.
      */
     MaxResults?: ListLensReviewImprovementsMaxResults;
+    /**
+     * The priority of the question.
+     */
+    QuestionPriority?: QuestionPriority;
   }
   export type ListLensReviewImprovementsMaxResults = number;
   export interface ListLensReviewImprovementsOutput {
@@ -1211,6 +1438,61 @@ declare namespace WellArchitected {
     NotificationSummaries?: NotificationSummaries;
     NextToken?: NextToken;
   }
+  export interface ListProfileNotificationsInput {
+    WorkloadId?: WorkloadId;
+    NextToken?: NextToken;
+    MaxResults?: MaxResults;
+  }
+  export interface ListProfileNotificationsOutput {
+    /**
+     * Notification summaries.
+     */
+    NotificationSummaries?: ProfileNotificationSummaries;
+    NextToken?: NextToken;
+  }
+  export interface ListProfileSharesInput {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn: ProfileArn;
+    /**
+     * The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the profile is shared.
+     */
+    SharedWithPrefix?: SharedWithPrefix;
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return for this request.
+     */
+    MaxResults?: ListProfileSharesMaxResults;
+    Status?: ShareStatus;
+  }
+  export type ListProfileSharesMaxResults = number;
+  export interface ListProfileSharesOutput {
+    /**
+     * Profile share summaries.
+     */
+    ProfileShareSummaries?: ProfileShareSummaries;
+    NextToken?: NextToken;
+  }
+  export interface ListProfilesInput {
+    /**
+     * Prefix for profile name.
+     */
+    ProfileNamePrefix?: ProfileNamePrefix;
+    /**
+     * Profile owner type.
+     */
+    ProfileOwnerType?: ProfileOwnerType;
+    NextToken?: NextToken;
+    MaxResults?: MaxResults;
+  }
+  export interface ListProfilesOutput {
+    /**
+     * Profile summaries.
+     */
+    ProfileSummaries?: ProfileSummaries;
+    NextToken?: NextToken;
+  }
   export interface ListShareInvitationsInput {
     WorkloadNamePrefix?: WorkloadNamePrefix;
     /**
@@ -1226,6 +1508,10 @@ declare namespace WellArchitected {
      * The maximum number of results to return for this request.
      */
     MaxResults?: ListShareInvitationsMaxResults;
+    /**
+     * Profile name prefix.
+     */
+    ProfileNamePrefix?: ProfileNamePrefix;
   }
   export type ListShareInvitationsMaxResults = number;
   export interface ListShareInvitationsOutput {
@@ -1277,6 +1563,7 @@ declare namespace WellArchitected {
     NextToken?: NextToken;
   }
   export type MaxResults = number;
+  export type MaxSelectedProfileChoices = number;
   export type MetricType = "WORKLOAD"|string;
   export interface Milestone {
     MilestoneNumber?: MilestoneNumber;
@@ -1293,6 +1580,7 @@ declare namespace WellArchitected {
     RecordedAt?: Timestamp;
     WorkloadSummary?: WorkloadSummary;
   }
+  export type MinSelectedProfileChoices = number;
   export type NextToken = string;
   export type Notes = string;
   export type NotificationSummaries = NotificationSummary[];
@@ -1340,7 +1628,177 @@ declare namespace WellArchitected {
     PillarName?: PillarName;
     Notes?: Notes;
     RiskCounts?: RiskCounts;
+    PrioritizedRiskCounts?: RiskCounts;
   }
+  export interface Profile {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn?: ProfileArn;
+    /**
+     * The profile version.
+     */
+    ProfileVersion?: ProfileVersion;
+    /**
+     * The profile name.
+     */
+    ProfileName?: ProfileName;
+    /**
+     * The profile description.
+     */
+    ProfileDescription?: ProfileDescription;
+    /**
+     * Profile questions.
+     */
+    ProfileQuestions?: ProfileQuestions;
+    Owner?: AwsAccountId;
+    CreatedAt?: Timestamp;
+    UpdatedAt?: Timestamp;
+    /**
+     * The ID assigned to the share invitation.
+     */
+    ShareInvitationId?: ShareInvitationId;
+    /**
+     * The tags assigned to the profile.
+     */
+    Tags?: TagMap;
+  }
+  export type ProfileArn = string;
+  export type ProfileArns = ProfileArn[];
+  export interface ProfileChoice {
+    ChoiceId?: ChoiceId;
+    ChoiceTitle?: ChoiceTitle;
+    ChoiceDescription?: ChoiceDescription;
+  }
+  export type ProfileDescription = string;
+  export type ProfileName = string;
+  export type ProfileNamePrefix = string;
+  export type ProfileNotificationSummaries = ProfileNotificationSummary[];
+  export interface ProfileNotificationSummary {
+    /**
+     * The current profile version.
+     */
+    CurrentProfileVersion?: ProfileVersion;
+    /**
+     * The latest profile version.
+     */
+    LatestProfileVersion?: ProfileVersion;
+    /**
+     * Type of notification.
+     */
+    Type?: ProfileNotificationType;
+    /**
+     * The profile ARN.
+     */
+    ProfileArn?: ProfileArn;
+    /**
+     * The profile name.
+     */
+    ProfileName?: ProfileName;
+    WorkloadId?: WorkloadId;
+    WorkloadName?: WorkloadName;
+  }
+  export type ProfileNotificationType = "PROFILE_ANSWERS_UPDATED"|"PROFILE_DELETED"|string;
+  export type ProfileOwnerType = "SELF"|"SHARED"|string;
+  export interface ProfileQuestion {
+    QuestionId?: QuestionId;
+    QuestionTitle?: QuestionTitle;
+    QuestionDescription?: QuestionDescription;
+    /**
+     * The question choices.
+     */
+    QuestionChoices?: ProfileQuestionChoices;
+    /**
+     * The selected choices.
+     */
+    SelectedChoiceIds?: SelectedChoiceIds;
+    /**
+     * The minimum number of selected choices.
+     */
+    MinSelectedChoices?: MinSelectedProfileChoices;
+    /**
+     * The maximum number of selected choices.
+     */
+    MaxSelectedChoices?: MaxSelectedProfileChoices;
+  }
+  export type ProfileQuestionChoices = ProfileChoice[];
+  export interface ProfileQuestionUpdate {
+    QuestionId?: QuestionId;
+    /**
+     * The selected choices.
+     */
+    SelectedChoiceIds?: SelectedProfileChoiceIds;
+  }
+  export type ProfileQuestionUpdates = ProfileQuestionUpdate[];
+  export type ProfileQuestions = ProfileQuestion[];
+  export type ProfileShareSummaries = ProfileShareSummary[];
+  export interface ProfileShareSummary {
+    ShareId?: ShareId;
+    SharedWith?: SharedWith;
+    Status?: ShareStatus;
+    /**
+     * Profile share invitation status message.
+     */
+    StatusMessage?: StatusMessage;
+  }
+  export type ProfileSummaries = ProfileSummary[];
+  export interface ProfileSummary {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn?: ProfileArn;
+    /**
+     * The profile version.
+     */
+    ProfileVersion?: ProfileVersion;
+    /**
+     * The profile name.
+     */
+    ProfileName?: ProfileName;
+    /**
+     * The profile description.
+     */
+    ProfileDescription?: ProfileDescription;
+    Owner?: AwsAccountId;
+    CreatedAt?: Timestamp;
+    UpdatedAt?: Timestamp;
+  }
+  export interface ProfileTemplate {
+    /**
+     * The name of the profile template.
+     */
+    TemplateName?: ProfileName;
+    /**
+     * Profile template questions.
+     */
+    TemplateQuestions?: TemplateQuestions;
+    CreatedAt?: Timestamp;
+    UpdatedAt?: Timestamp;
+  }
+  export interface ProfileTemplateChoice {
+    ChoiceId?: ChoiceId;
+    ChoiceTitle?: ChoiceTitle;
+    ChoiceDescription?: ChoiceDescription;
+  }
+  export interface ProfileTemplateQuestion {
+    QuestionId?: QuestionId;
+    QuestionTitle?: QuestionTitle;
+    QuestionDescription?: QuestionDescription;
+    /**
+     * The question choices.
+     */
+    QuestionChoices?: ProfileTemplateQuestionChoices;
+    /**
+     * The minimum number of choices selected.
+     */
+    MinSelectedChoices?: MinSelectedProfileChoices;
+    /**
+     * The maximum number of choices selected.
+     */
+    MaxSelectedChoices?: MaxSelectedProfileChoices;
+  }
+  export type ProfileTemplateQuestionChoices = ProfileTemplateChoice[];
+  export type ProfileVersion = string;
   export type QuestionDescription = string;
   export interface QuestionDifference {
     QuestionId?: QuestionId;
@@ -1361,11 +1819,15 @@ declare namespace WellArchitected {
     BestPractices?: BestPractices;
   }
   export type QuestionMetrics = QuestionMetric[];
+  export type QuestionPriority = "PRIORITIZED"|"NONE"|string;
   export type QuestionTitle = string;
+  export type QuestionType = "PRIORITIZED"|"NON_PRIORITIZED"|string;
   export type ReportFormat = "PDF"|"JSON"|string;
   export type Risk = "UNANSWERED"|"HIGH"|"MEDIUM"|"NONE"|"NOT_APPLICABLE"|string;
   export type RiskCounts = {[key: string]: Count};
+  export type SelectedChoiceIds = ChoiceId[];
   export type SelectedChoices = ChoiceId[];
+  export type SelectedProfileChoiceIds = ChoiceId[];
   export type ShareId = string;
   export interface ShareInvitation {
     /**
@@ -1382,6 +1844,10 @@ declare namespace WellArchitected {
      * The ARN for the lens.
      */
     LensArn?: LensArn;
+    /**
+     * The profile ARN.
+     */
+    ProfileArn?: ProfileArn;
   }
   export type ShareInvitationAction = "ACCEPT"|"REJECT"|string;
   export type ShareInvitationId = string;
@@ -1405,8 +1871,16 @@ declare namespace WellArchitected {
      * The ARN for the lens.
      */
     LensArn?: LensArn;
+    /**
+     * The profile name.
+     */
+    ProfileName?: ProfileName;
+    /**
+     * The profile ARN.
+     */
+    ProfileArn?: ProfileArn;
   }
-  export type ShareResourceType = "WORKLOAD"|"LENS"|string;
+  export type ShareResourceType = "WORKLOAD"|"LENS"|"PROFILE"|string;
   export type ShareStatus = "ACCEPTED"|"REJECTED"|"PENDING"|"REVOKED"|"EXPIRED"|"ASSOCIATING"|"ASSOCIATED"|"FAILED"|string;
   export type SharedWith = string;
   export type SharedWithPrefix = string;
@@ -1424,6 +1898,7 @@ declare namespace WellArchitected {
   export interface TagResourceOutput {
   }
   export type TagValue = string;
+  export type TemplateQuestions = ProfileTemplateQuestion[];
   export type Timestamp = Date;
   export type TrustedAdvisorIntegrationStatus = "ENABLED"|"DISABLED"|string;
   export interface UntagResourceInput {
@@ -1479,6 +1954,26 @@ declare namespace WellArchitected {
   export interface UpdateLensReviewOutput {
     WorkloadId?: WorkloadId;
     LensReview?: LensReview;
+  }
+  export interface UpdateProfileInput {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn: ProfileArn;
+    /**
+     * The profile description.
+     */
+    ProfileDescription?: ProfileDescription;
+    /**
+     * Profile questions.
+     */
+    ProfileQuestions?: ProfileQuestionUpdates;
+  }
+  export interface UpdateProfileOutput {
+    /**
+     * The profile.
+     */
+    Profile?: Profile;
   }
   export interface UpdateShareInvitationInput {
     /**
@@ -1539,6 +2034,15 @@ declare namespace WellArchitected {
     MilestoneName: MilestoneName;
     ClientRequestToken?: ClientRequestToken;
   }
+  export interface UpgradeProfileVersionInput {
+    WorkloadId: WorkloadId;
+    /**
+     * The profile ARN.
+     */
+    ProfileArn: ProfileArn;
+    MilestoneName?: MilestoneName;
+    ClientRequestToken?: ClientRequestToken;
+  }
   export type Urls = ChoiceContent[];
   export interface VersionDifferences {
     /**
@@ -1587,6 +2091,11 @@ declare namespace WellArchitected {
      * List of AppRegistry application ARNs associated to the workload.
      */
     Applications?: WorkloadApplications;
+    /**
+     * Profile associated with a workload.
+     */
+    Profiles?: WorkloadProfiles;
+    PrioritizedRiskCounts?: RiskCounts;
   }
   export type WorkloadAccountIds = AwsAccountId[];
   export type WorkloadApplications = ApplicationArn[];
@@ -1615,6 +2124,18 @@ declare namespace WellArchitected {
   export type WorkloadNonAwsRegion = string;
   export type WorkloadNonAwsRegions = WorkloadNonAwsRegion[];
   export type WorkloadPillarPriorities = PillarId[];
+  export interface WorkloadProfile {
+    /**
+     * The profile ARN.
+     */
+    ProfileArn?: ProfileArn;
+    /**
+     * The profile version.
+     */
+    ProfileVersion?: ProfileVersion;
+  }
+  export type WorkloadProfileArns = ProfileArn[];
+  export type WorkloadProfiles = WorkloadProfile[];
   export type WorkloadResourceDefinition = DefinitionType[];
   export type WorkloadReviewOwner = string;
   export interface WorkloadShare {
@@ -1647,6 +2168,11 @@ declare namespace WellArchitected {
     Lenses?: WorkloadLenses;
     RiskCounts?: RiskCounts;
     ImprovementStatus?: WorkloadImprovementStatus;
+    /**
+     * Profile associated with a workload.
+     */
+    Profiles?: WorkloadProfiles;
+    PrioritizedRiskCounts?: RiskCounts;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

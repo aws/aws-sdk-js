@@ -459,6 +459,28 @@ declare namespace WAFV2 {
   }
   export type APIKeyTokenDomains = TokenDomain[];
   export type APIKeyVersion = number;
+  export interface AWSManagedRulesACFPRuleSet {
+    /**
+     * The path of the account creation endpoint for your application. This is the page on your website that accepts the completed registration form for a new user. This page must accept POST requests. For example, for the URL https://example.com/web/signup, you would provide the path /web/signup.
+     */
+    CreationPath: CreationPathString;
+    /**
+     * The path of the account registration endpoint for your application. This is the page on your website that presents the registration form to new users.   This page must accept GET text/html requests.  For example, for the URL https://example.com/web/register, you would provide the path /web/register.
+     */
+    RegistrationPagePath: RegistrationPagePathString;
+    /**
+     * The criteria for inspecting account creation requests, used by the ACFP rule group to validate and track account creation attempts. 
+     */
+    RequestInspection: RequestInspectionACFP;
+    /**
+     * The criteria for inspecting responses to account creation requests, used by the ACFP rule group to track account creation success rates.   Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.  The ACFP rule group evaluates the responses that your protected resources send back to client account creation attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels and mitigates requests from client sessions and IP addresses that have had too many successful account creation attempts in a short amount of time. 
+     */
+    ResponseInspection?: ResponseInspection;
+    /**
+     * Allow the use of regular expressions in the registration page path and the account creation path. 
+     */
+    EnableRegexInPath?: Boolean;
+  }
   export interface AWSManagedRulesATPRuleSet {
     /**
      * The path of the login endpoint for your application. For example, for the URL https://example.com/web/login, you would provide the path /web/login. The rule group inspects only HTTP POST requests to your specified login endpoint.
@@ -469,9 +491,13 @@ declare namespace WAFV2 {
      */
     RequestInspection?: RequestInspection;
     /**
-     * The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates.  The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time.   Response inspection is available only in web ACLs that protect Amazon CloudFront distributions. 
+     * The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates.   Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.  The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts for each IP address and client session. Using this information, the rule group labels and mitigates requests from client sessions and IP addresses that have had too many failed login attempts in a short amount of time. 
      */
     ResponseInspection?: ResponseInspection;
+    /**
+     * Allow the use of regular expressions in the login page path. 
+     */
+    EnableRegexInPath?: Boolean;
   }
   export interface AWSManagedRulesBotControlRuleSet {
     /**
@@ -487,6 +513,13 @@ declare namespace WAFV2 {
     Action: ActionValue;
   }
   export type ActionValue = "ALLOW"|"BLOCK"|"COUNT"|"CAPTCHA"|"CHALLENGE"|"EXCLUDED_AS_COUNT"|string;
+  export interface AddressField {
+    /**
+     * The name of a single primary address field.  How you specify the address fields depends on the request inspection payload type.   For JSON payloads, specify the field identifiers in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "primaryaddressline1": "THE_ADDRESS1", "primaryaddressline2": "THE_ADDRESS2", "primaryaddressline3": "THE_ADDRESS3" } }, the address field idenfiers are /form/primaryaddressline1, /form/primaryaddressline2, and /form/primaryaddressline3.   For form encoded payload types, use the HTML form names. For example, for an HTML form with input elements named primaryaddressline1, primaryaddressline2, and primaryaddressline3, the address fields identifiers are primaryaddressline1, primaryaddressline2, and primaryaddressline3.   
+     */
+    Identifier: FieldIdentifier;
+  }
+  export type AddressFields = AddressField[];
   export interface All {
   }
   export interface AllQueryArguments {
@@ -846,6 +879,7 @@ declare namespace WAFV2 {
      */
     Summary?: WebACLSummary;
   }
+  export type CreationPathString = string;
   export interface CustomHTTPHeader {
     /**
      * The name of the custom header.  For custom request header insertion, when WAF inserts the header into the request, it prefixes this name x-amzn-waf-, to avoid confusion with the headers that are already in the request. For example, for the header name sample, WAF inserts the header x-amzn-waf-sample.
@@ -1097,6 +1131,12 @@ declare namespace WAFV2 {
   export interface DisassociateWebACLResponse {
   }
   export type DownloadUrl = string;
+  export interface EmailField {
+    /**
+     * The name of the email field.  How you specify this depends on the request inspection payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "email": "THE_EMAIL" } }, the email field specification is /form/email.   For form encoded payload types, use the HTML form names. For example, for an HTML form with the input element named email1, the email field specification is email1.  
+     */
+    Identifier: FieldIdentifier;
+  }
   export type EntityDescription = string;
   export type EntityId = string;
   export type EntityName = string;
@@ -1154,7 +1194,7 @@ declare namespace WAFV2 {
      */
     Cookies?: Cookies;
     /**
-     * Inspect a string containing the list of the request's header names, ordered as they appear in the web request that WAF receives for inspection. WAF generates the string and then uses that as the field to match component in its inspection. WAF separates the header names in the string using commas and no added spaces. Matches against the header order string are case insensitive.
+     * Inspect a string containing the list of the request's header names, ordered as they appear in the web request that WAF receives for inspection. WAF generates the string and then uses that as the field to match component in its inspection. WAF separates the header names in the string using colons and no added spaces, for example host:user-agent:accept:authorization:referer.
      */
     HeaderOrder?: HeaderOrder;
   }
@@ -1511,7 +1551,7 @@ declare namespace WAFV2 {
      */
     LockToken?: LockToken;
     /**
-     * The URL to use in SDK integrations with Amazon Web Services managed rule groups. For example, you can use the integration SDKs with the account takeover prevention managed rule group AWSManagedRulesATPRuleSet. This is only populated if you are using a rule group in your web ACL that integrates with your applications in this way. For more information, see WAF client application integration in the WAF Developer Guide.
+     * The URL to use in SDK integrations with Amazon Web Services managed rule groups. For example, you can use the integration SDKs with the account takeover prevention managed rule group AWSManagedRulesATPRuleSet and the account creation fraud prevention managed rule group AWSManagedRulesACFPRuleSet. This is only populated if you are using a rule group in your web ACL that integrates with your applications in this way. For more information, see WAF client application integration in the WAF Developer Guide.
      */
     ApplicationIntegrationURL?: OutputUrl;
   }
@@ -2049,7 +2089,7 @@ declare namespace WAFV2 {
      */
     LogDestinationConfigs: LogDestinationConfigs;
     /**
-     * The parts of the request that you want to keep out of the logs. For example, if you redact the SingleHeader field, the HEADER field in the logs will be REDACTED.   You can specify only the following fields for redaction: UriPath, QueryString, SingleHeader, Method, and JsonBody. 
+     * The parts of the request that you want to keep out of the logs. For example, if you redact the SingleHeader field, the HEADER field in the logs will be REDACTED for all rules that use the SingleHeader FieldToMatch setting.  Redaction applies only to the component that's specified in the rule's FieldToMatch setting, so the SingleHeader redaction doesn't apply to rules that use the Headers FieldToMatch.  You can specify only the following fields for redaction: UriPath, QueryString, SingleHeader, and Method. 
      */
     RedactedFields?: RedactedFields;
     /**
@@ -2118,15 +2158,15 @@ declare namespace WAFV2 {
      */
     LoginPath?: LoginPathString;
     /**
-     *  Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet RequestInspection.  
+     *  Instead of this setting, provide your configuration under the request inspection configuration for AWSManagedRulesATPRuleSet or AWSManagedRulesACFPRuleSet.  
      */
     PayloadType?: PayloadType;
     /**
-     *  Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet RequestInspection.  
+     *  Instead of this setting, provide your configuration under the request inspection configuration for AWSManagedRulesATPRuleSet or AWSManagedRulesACFPRuleSet.  
      */
     UsernameField?: UsernameField;
     /**
-     *  Instead of this setting, provide your configuration under AWSManagedRulesATPRuleSet RequestInspection.  
+     *  Instead of this setting, provide your configuration under the request inspection configuration for AWSManagedRulesATPRuleSet or AWSManagedRulesACFPRuleSet.  
      */
     PasswordField?: PasswordField;
     /**
@@ -2137,6 +2177,10 @@ declare namespace WAFV2 {
      * Additional configuration for using the account takeover prevention (ATP) managed rule group, AWSManagedRulesATPRuleSet. Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide the information about how your distribution responds to login requests.  This configuration replaces the individual configuration fields in ManagedRuleGroupConfig and provides additional feature configuration.  For information about using the ATP managed rule group, see WAF Fraud Control account takeover prevention (ATP) rule group and WAF Fraud Control account takeover prevention (ATP) in the WAF Developer Guide.
      */
     AWSManagedRulesATPRuleSet?: AWSManagedRulesATPRuleSet;
+    /**
+     * Additional configuration for using the account creation fraud prevention (ACFP) managed rule group, AWSManagedRulesACFPRuleSet. Use this to provide account creation request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide the information about how your distribution responds to account creation requests.  For information about using the ACFP managed rule group, see WAF Fraud Control account creation fraud prevention (ACFP) rule group and WAF Fraud Control account creation fraud prevention (ACFP) in the WAF Developer Guide.
+     */
+    AWSManagedRulesACFPRuleSet?: AWSManagedRulesACFPRuleSet;
   }
   export type ManagedRuleGroupConfigs = ManagedRuleGroupConfig[];
   export interface ManagedRuleGroupStatement {
@@ -2161,7 +2205,7 @@ declare namespace WAFV2 {
      */
     ScopeDownStatement?: Statement;
     /**
-     * Additional information that's used by a managed rule group. Many managed rule groups don't require this. Use the AWSManagedRulesATPRuleSet configuration object for the account takeover prevention managed rule group, to provide information such as the sign-in page of your application and the type of content to accept or reject from the client.  Use the AWSManagedRulesBotControlRuleSet configuration object to configure the protection level that you want the Bot Control rule group to use. 
+     * Additional information that's used by a managed rule group. Many managed rule groups don't require this. The rule groups used for intelligent threat mitigation require additional configuration:    Use the AWSManagedRulesACFPRuleSet configuration object to configure the account creation fraud prevention managed rule group. The configuration includes the registration and sign-up pages of your application and the locations in the account creation request payload of data, such as the user email and phone number fields.    Use the AWSManagedRulesATPRuleSet configuration object to configure the account takeover prevention managed rule group. The configuration includes the sign-in page of your application and the locations in the login request payload of data such as the username and password.    Use the AWSManagedRulesBotControlRuleSet configuration object to configure the protection level that you want the Bot Control rule group to use.   
      */
     ManagedRuleGroupConfigs?: ManagedRuleGroupConfigs;
     /**
@@ -2334,11 +2378,18 @@ declare namespace WAFV2 {
   export type PaginationLimit = number;
   export interface PasswordField {
     /**
-     * The name of the password field. For example /form/password.
+     * The name of the password field.  How you specify this depends on the request inspection payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "password": "THE_PASSWORD" } }, the password field specification is /form/password.   For form encoded payload types, use the HTML form names. For example, for an HTML form with the input element named password1, the password field specification is password1.  
      */
     Identifier: FieldIdentifier;
   }
   export type PayloadType = "JSON"|"FORM_ENCODED"|string;
+  export interface PhoneNumberField {
+    /**
+     * The name of a single primary phone number field.  How you specify the phone number fields depends on the request inspection payload type.   For JSON payloads, specify the field identifiers in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "primaryphoneline1": "THE_PHONE1", "primaryphoneline2": "THE_PHONE2", "primaryphoneline3": "THE_PHONE3" } }, the phone number field identifiers are /form/primaryphoneline1, /form/primaryphoneline2, and /form/primaryphoneline3.   For form encoded payload types, use the HTML form names. For example, for an HTML form with input elements named primaryphoneline1, primaryphoneline2, and primaryphoneline3, the phone number field identifiers are primaryphoneline1, primaryphoneline2, and primaryphoneline3.   
+     */
+    Identifier: FieldIdentifier;
+  }
+  export type PhoneNumberFields = PhoneNumberField[];
   export type Platform = "IOS"|"ANDROID"|string;
   export type PolicyString = string;
   export type PopulationSize = number;
@@ -2604,6 +2655,7 @@ declare namespace WAFV2 {
     ARN?: ResourceArn;
   }
   export type RegexPatternString = string;
+  export type RegistrationPagePathString = string;
   export type RegularExpressionList = Regex[];
   export type ReleaseNotes = string;
   export type ReleaseSummaries = ReleaseSummary[];
@@ -2630,13 +2682,39 @@ declare namespace WAFV2 {
      */
     PayloadType: PayloadType;
     /**
-     * Details about your login page username field.  How you specify this depends on the payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "login": { "username": "THE_USERNAME", "password": "THE_PASSWORD" } }, the username field specification is /login/username and the password field specification is /login/password.   For form encoded payload types, use the HTML form names. For example, for an HTML form with input elements named username1 and password1, the username field specification is username1 and the password field specification is password1.  
+     * The name of the field in the request payload that contains your customer's username.  How you specify this depends on the request inspection payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "username": "THE_USERNAME" } }, the username field specification is /form/username.    For form encoded payload types, use the HTML form names. For example, for an HTML form with the input element named username1, the username field specification is username1   
      */
     UsernameField: UsernameField;
     /**
-     * Details about your login page password field.  How you specify this depends on the payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "login": { "username": "THE_USERNAME", "password": "THE_PASSWORD" } }, the username field specification is /login/username and the password field specification is /login/password.   For form encoded payload types, use the HTML form names. For example, for an HTML form with input elements named username1 and password1, the username field specification is username1 and the password field specification is password1.  
+     * The name of the field in the request payload that contains your customer's password.  How you specify this depends on the request inspection payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "password": "THE_PASSWORD" } }, the password field specification is /form/password.   For form encoded payload types, use the HTML form names. For example, for an HTML form with the input element named password1, the password field specification is password1.  
      */
     PasswordField: PasswordField;
+  }
+  export interface RequestInspectionACFP {
+    /**
+     * The payload type for your account creation endpoint, either JSON or form encoded.
+     */
+    PayloadType: PayloadType;
+    /**
+     * The name of the field in the request payload that contains your customer's username.  How you specify this depends on the request inspection payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "username": "THE_USERNAME" } }, the username field specification is /form/username.    For form encoded payload types, use the HTML form names. For example, for an HTML form with the input element named username1, the username field specification is username1   
+     */
+    UsernameField?: UsernameField;
+    /**
+     * The name of the field in the request payload that contains your customer's password.  How you specify this depends on the request inspection payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "password": "THE_PASSWORD" } }, the password field specification is /form/password.   For form encoded payload types, use the HTML form names. For example, for an HTML form with the input element named password1, the password field specification is password1.  
+     */
+    PasswordField?: PasswordField;
+    /**
+     * The name of the field in the request payload that contains your customer's email.  How you specify this depends on the request inspection payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "email": "THE_EMAIL" } }, the email field specification is /form/email.   For form encoded payload types, use the HTML form names. For example, for an HTML form with the input element named email1, the email field specification is email1.  
+     */
+    EmailField?: EmailField;
+    /**
+     * The names of the fields in the request payload that contain your customer's primary phone number.  Order the phone number fields in the array exactly as they are ordered in the request payload.  How you specify the phone number fields depends on the request inspection payload type.   For JSON payloads, specify the field identifiers in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "primaryphoneline1": "THE_PHONE1", "primaryphoneline2": "THE_PHONE2", "primaryphoneline3": "THE_PHONE3" } }, the phone number field identifiers are /form/primaryphoneline1, /form/primaryphoneline2, and /form/primaryphoneline3.   For form encoded payload types, use the HTML form names. For example, for an HTML form with input elements named primaryphoneline1, primaryphoneline2, and primaryphoneline3, the phone number field identifiers are primaryphoneline1, primaryphoneline2, and primaryphoneline3.   
+     */
+    PhoneNumberFields?: PhoneNumberFields;
+    /**
+     * The names of the fields in the request payload that contain your customer's primary physical address.  Order the address fields in the array exactly as they are ordered in the request payload.  How you specify the address fields depends on the request inspection payload type.   For JSON payloads, specify the field identifiers in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "primaryaddressline1": "THE_ADDRESS1", "primaryaddressline2": "THE_ADDRESS2", "primaryaddressline3": "THE_ADDRESS3" } }, the address field idenfiers are /form/primaryaddressline1, /form/primaryaddressline2, and /form/primaryaddressline3.   For form encoded payload types, use the HTML form names. For example, for an HTML form with input elements named primaryaddressline1, primaryaddressline2, and primaryaddressline3, the address fields identifiers are primaryaddressline1, primaryaddressline2, and primaryaddressline3.   
+     */
+    AddressFields?: AddressFields;
   }
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
@@ -2646,29 +2724,29 @@ declare namespace WAFV2 {
   export type ResponseContentType = "TEXT_PLAIN"|"TEXT_HTML"|"APPLICATION_JSON"|string;
   export interface ResponseInspection {
     /**
-     * Configures inspection of the response status code. 
+     * Configures inspection of the response status code for success and failure indicators. 
      */
     StatusCode?: ResponseInspectionStatusCode;
     /**
-     * Configures inspection of the response header. 
+     * Configures inspection of the response header for success and failure indicators. 
      */
     Header?: ResponseInspectionHeader;
     /**
-     * Configures inspection of the response body. WAF can inspect the first 65,536 bytes (64 KB) of the response body. 
+     * Configures inspection of the response body for success and failure indicators. WAF can inspect the first 65,536 bytes (64 KB) of the response body. 
      */
     BodyContains?: ResponseInspectionBodyContains;
     /**
-     * Configures inspection of the response JSON. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. 
+     * Configures inspection of the response JSON for success and failure indicators. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. 
      */
     Json?: ResponseInspectionJson;
   }
   export interface ResponseInspectionBodyContains {
     /**
-     * Strings in the body of the response that indicate a successful login attempt. To be counted as a successful login, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings.  JSON example: "SuccessStrings": [ "Login successful", "Welcome to our site!" ] 
+     * Strings in the body of the response that indicate a successful login or account creation attempt. To be counted as a success, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings.  JSON examples: "SuccessStrings": [ "Login successful" ] and "SuccessStrings": [ "Account creation successful", "Welcome to our site!" ] 
      */
     SuccessStrings: ResponseInspectionBodyContainsSuccessStrings;
     /**
-     * Strings in the body of the response that indicate a failed login attempt. To be counted as a failed login, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings.  JSON example: "FailureStrings": [ "Login failed" ] 
+     * Strings in the body of the response that indicate a failed login or account creation attempt. To be counted as a failure, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings.  JSON example: "FailureStrings": [ "Request failed" ] 
      */
     FailureStrings: ResponseInspectionBodyContainsFailureStrings;
   }
@@ -2676,15 +2754,15 @@ declare namespace WAFV2 {
   export type ResponseInspectionBodyContainsSuccessStrings = SuccessValue[];
   export interface ResponseInspectionHeader {
     /**
-     * The name of the header to match against. The name must be an exact match, including case. JSON example: "Name": [ "LoginResult" ] 
+     * The name of the header to match against. The name must be an exact match, including case. JSON example: "Name": [ "RequestResult" ] 
      */
     Name: ResponseInspectionHeaderName;
     /**
-     * Values in the response header with the specified name that indicate a successful login attempt. To be counted as a successful login, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "SuccessValues": [ "LoginPassed", "Successful login" ] 
+     * Values in the response header with the specified name that indicate a successful login or account creation attempt. To be counted as a success, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON examples: "SuccessValues": [ "LoginPassed", "Successful login" ] and "SuccessValues": [ "AccountCreated", "Successful account creation" ] 
      */
     SuccessValues: ResponseInspectionHeaderSuccessValues;
     /**
-     * Values in the response header with the specified name that indicate a failed login attempt. To be counted as a failed login, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "FailureValues": [ "LoginFailed", "Failed login" ] 
+     * Values in the response header with the specified name that indicate a failed login or account creation attempt. To be counted as a failure, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON examples: "FailureValues": [ "LoginFailed", "Failed login" ] and "FailureValues": [ "AccountCreationFailed" ] 
      */
     FailureValues: ResponseInspectionHeaderFailureValues;
   }
@@ -2693,15 +2771,15 @@ declare namespace WAFV2 {
   export type ResponseInspectionHeaderSuccessValues = SuccessValue[];
   export interface ResponseInspectionJson {
     /**
-     * The identifier for the value to match against in the JSON. The identifier must be an exact match, including case. JSON example: "Identifier": [ "/login/success" ] 
+     * The identifier for the value to match against in the JSON. The identifier must be an exact match, including case. JSON examples: "Identifier": [ "/login/success" ] and "Identifier": [ "/sign-up/success" ] 
      */
     Identifier: FieldIdentifier;
     /**
-     * Values for the specified identifier in the response JSON that indicate a successful login attempt. To be counted as a successful login, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "SuccessValues": [ "True", "Succeeded" ] 
+     * Values for the specified identifier in the response JSON that indicate a successful login or account creation attempt. To be counted as a success, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "SuccessValues": [ "True", "Succeeded" ] 
      */
     SuccessValues: ResponseInspectionJsonSuccessValues;
     /**
-     * Values for the specified identifier in the response JSON that indicate a failed login attempt. To be counted as a failed login, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "FailureValues": [ "False", "Failed" ] 
+     * Values for the specified identifier in the response JSON that indicate a failed login or account creation attempt. To be counted as a failure, the value must be an exact match, including case. Each value must be unique among the success and failure values.  JSON example: "FailureValues": [ "False", "Failed" ] 
      */
     FailureValues: ResponseInspectionJsonFailureValues;
   }
@@ -2709,11 +2787,11 @@ declare namespace WAFV2 {
   export type ResponseInspectionJsonSuccessValues = SuccessValue[];
   export interface ResponseInspectionStatusCode {
     /**
-     * Status codes in the response that indicate a successful login attempt. To be counted as a successful login, the response status code must match one of these. Each code must be unique among the success and failure status codes.  JSON example: "SuccessCodes": [ 200, 201 ] 
+     * Status codes in the response that indicate a successful login or account creation attempt. To be counted as a success, the response status code must match one of these. Each code must be unique among the success and failure status codes.  JSON example: "SuccessCodes": [ 200, 201 ] 
      */
     SuccessCodes: ResponseInspectionStatusCodeSuccessCodes;
     /**
-     * Status codes in the response that indicate a failed login attempt. To be counted as a failed login, the response status code must match one of these. Each code must be unique among the success and failure status codes.  JSON example: "FailureCodes": [ 400, 404 ] 
+     * Status codes in the response that indicate a failed login or account creation attempt. To be counted as a failure, the response status code must match one of these. Each code must be unique among the success and failure status codes.  JSON example: "FailureCodes": [ 400, 404 ] 
      */
     FailureCodes: ResponseInspectionStatusCodeFailureCodes;
   }
@@ -3036,7 +3114,7 @@ declare namespace WAFV2 {
      */
     NotStatement?: NotStatement;
     /**
-     * A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling ListAvailableManagedRuleGroups. You cannot nest a ManagedRuleGroupStatement, for example for use inside a NotStatement or OrStatement. It can only be referenced as a top-level statement within a rule.  You are charged additional fees when you use the WAF Bot Control managed rule group AWSManagedRulesBotControlRuleSet or the WAF Fraud Control account takeover prevention (ATP) managed rule group AWSManagedRulesATPRuleSet. For more information, see WAF Pricing. 
+     * A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling ListAvailableManagedRuleGroups. You cannot nest a ManagedRuleGroupStatement, for example for use inside a NotStatement or OrStatement. It can only be referenced as a top-level statement within a rule.  You are charged additional fees when you use the WAF Bot Control managed rule group AWSManagedRulesBotControlRuleSet, the WAF Fraud Control account takeover prevention (ATP) managed rule group AWSManagedRulesATPRuleSet, or the WAF Fraud Control account creation fraud prevention (ACFP) managed rule group AWSManagedRulesACFPRuleSet. For more information, see WAF Pricing. 
      */
     ManagedRuleGroupStatement?: ManagedRuleGroupStatement;
     /**
@@ -3337,7 +3415,7 @@ declare namespace WAFV2 {
   }
   export interface UsernameField {
     /**
-     * The name of the username field. For example /form/username.
+     * The name of the username field.  How you specify this depends on the request inspection payload type.   For JSON payloads, specify the field name in JSON pointer syntax. For information about the JSON Pointer syntax, see the Internet Engineering Task Force (IETF) documentation JavaScript Object Notation (JSON) Pointer.  For example, for the JSON payload { "form": { "username": "THE_USERNAME" } }, the username field specification is /form/username.    For form encoded payload types, use the HTML form names. For example, for an HTML form with the input element named username1, the username field specification is username1   
      */
     Identifier: FieldIdentifier;
   }

@@ -348,6 +348,8 @@ export abstract class ConfigurationServicePlaceholders {
   mediapackagev2?: AWS.MediaPackageV2.Types.ClientConfiguration;
   paymentcryptography?: AWS.PaymentCryptography.Types.ClientConfiguration;
   paymentcryptographydata?: AWS.PaymentCryptographyData.Types.ClientConfiguration;
+  codegurusecurity?: AWS.CodeGuruSecurity.Types.ClientConfiguration;
+  verifiedpermissions?: AWS.VerifiedPermissions.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -698,4 +700,6 @@ export interface ConfigurationServiceApiVersions {
   mediapackagev2?: AWS.MediaPackageV2.Types.apiVersion;
   paymentcryptography?: AWS.PaymentCryptography.Types.apiVersion;
   paymentcryptographydata?: AWS.PaymentCryptographyData.Types.apiVersion;
+  codegurusecurity?: AWS.CodeGuruSecurity.Types.apiVersion;
+  verifiedpermissions?: AWS.VerifiedPermissions.Types.apiVersion;
 }

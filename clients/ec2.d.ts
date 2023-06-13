@@ -77,11 +77,11 @@ declare class EC2 extends Service {
    */
   advertiseByoipCidr(callback?: (err: AWSError, data: EC2.Types.AdvertiseByoipCidrResult) => void): Request<EC2.Types.AdvertiseByoipCidrResult, AWSError>;
   /**
-   * Allocates an Elastic IP address to your Amazon Web Services account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different Amazon Web Services account. You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another Amazon Web Services account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance).   We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   * Allocates an Elastic IP address to your Amazon Web Services account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different Amazon Web Services account. You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another Amazon Web Services account. To attempt to recover an Elastic IP address that you released, specify it in this operation. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance).
    */
   allocateAddress(params: EC2.Types.AllocateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
-   * Allocates an Elastic IP address to your Amazon Web Services account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different Amazon Web Services account. You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. [EC2-VPC] If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another Amazon Web Services account. You cannot recover an Elastic IP address for EC2-Classic. To attempt to recover an Elastic IP address that you released, specify it in this operation. An Elastic IP address is for use either in the EC2-Classic platform or in a VPC. By default, you can allocate 5 Elastic IP addresses for EC2-Classic per Region and 5 Elastic IP addresses for EC2-VPC per Region. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance).   We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   * Allocates an Elastic IP address to your Amazon Web Services account. After you allocate the Elastic IP address you can associate it with an instance or network interface. After you release an Elastic IP address, it is released to the IP address pool and can be allocated to a different Amazon Web Services account. You can allocate an Elastic IP address from an address pool owned by Amazon Web Services or from an address pool created from a public IPv4 address range that you have brought to Amazon Web Services for use with your Amazon Web Services resources using bring your own IP addresses (BYOIP). For more information, see Bring Your Own IP Addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. If you release an Elastic IP address, you might be able to recover it. You cannot recover an Elastic IP address that you released after it is allocated to another Amazon Web Services account. To attempt to recover an Elastic IP address that you released, specify it in this operation. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP address which is a public IP address from a telecommunication carrier, to a network interface which resides in a subnet in a Wavelength Zone (for example an EC2 instance).
    */
   allocateAddress(callback?: (err: AWSError, data: EC2.Types.AllocateAddressResult) => void): Request<EC2.Types.AllocateAddressResult, AWSError>;
   /**
@@ -93,11 +93,11 @@ declare class EC2 extends Service {
    */
   allocateHosts(callback?: (err: AWSError, data: EC2.Types.AllocateHostsResult) => void): Request<EC2.Types.AllocateHostsResult, AWSError>;
   /**
-   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide.  This action creates an allocation with strong consistency. The returned CIDR will not overlap with any other allocations from the same pool. 
+   * Allocate a CIDR from an IPAM pool. The Region you use should be the IPAM pool locale. The locale is the Amazon Web Services Region where this IPAM pool is available for allocations. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide.  This action creates an allocation with strong consistency. The returned CIDR will not overlap with any other allocations from the same pool. 
    */
   allocateIpamPoolCidr(params: EC2.Types.AllocateIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
   /**
-   * Allocate a CIDR from an IPAM pool. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide.  This action creates an allocation with strong consistency. The returned CIDR will not overlap with any other allocations from the same pool. 
+   * Allocate a CIDR from an IPAM pool. The Region you use should be the IPAM pool locale. The locale is the Amazon Web Services Region where this IPAM pool is available for allocations. In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource. For more information, see Allocate CIDRs in the Amazon VPC IPAM User Guide.  This action creates an allocation with strong consistency. The returned CIDR will not overlap with any other allocations from the same pool. 
    */
   allocateIpamPoolCidr(callback?: (err: AWSError, data: EC2.Types.AllocateIpamPoolCidrResult) => void): Request<EC2.Types.AllocateIpamPoolCidrResult, AWSError>;
   /**
@@ -133,11 +133,11 @@ declare class EC2 extends Service {
    */
   assignPrivateNatGatewayAddress(callback?: (err: AWSError, data: EC2.Types.AssignPrivateNatGatewayAddressResult) => void): Request<EC2.Types.AssignPrivateNatGatewayAddressResult, AWSError>;
   /**
-   * Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. [Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface.  You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing.   We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   * Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface.  You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(params: EC2.Types.AssociateAddressRequest, callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
-   * Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. [EC2-Classic, VPC in an EC2-VPC-only account] If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [VPC in an EC2-Classic account] If you don't specify a private IP address, the Elastic IP address is associated with the primary IP address. If the Elastic IP address is already associated with a different instance or a network interface, you get an error unless you allow reassociation. You cannot associate an Elastic IP address with an instance or network interface that has an existing Elastic IP address. [Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface.  You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing.   We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   * Associates an Elastic IP address, or carrier IP address (for instances that are in subnets in Wavelength Zones) with an instance or a network interface. Before you can use an Elastic IP address, you must allocate it to your account. If the Elastic IP address is already associated with a different instance, it is disassociated from that instance and associated with the specified instance. If you associate an Elastic IP address with an instance that has an existing Elastic IP address, the existing address is disassociated from the instance, but remains allocated to your account. [Subnets in Wavelength Zones] You can associate an IP address from the telecommunication carrier to the instance or network interface.  You cannot associate an Elastic IP address with an interface in a different network border group.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error, and you may be charged for each time the Elastic IP address is remapped to the same instance. For more information, see the Elastic IP Addresses section of Amazon EC2 Pricing. 
    */
   associateAddress(callback?: (err: AWSError, data: EC2.Types.AssociateAddressResult) => void): Request<EC2.Types.AssociateAddressResult, AWSError>;
   /**
@@ -572,6 +572,14 @@ declare class EC2 extends Service {
    * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. By default, when Amazon EC2 creates the new AMI, it reboots the instance so that it can take snapshots of the attached volumes while data is at rest, in order to ensure a consistent state. You can set the NoReboot parameter to true in the API request, or use the --no-reboot option in the CLI to prevent Amazon EC2 from shutting down and rebooting the instance.  If you choose to bypass the shutdown and reboot process by setting the NoReboot parameter to true in the API request, or by using the --no-reboot option in the CLI, we can't guarantee the file system integrity of the created image.  If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Create an Amazon EBS-backed Linux AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   createImage(callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
+  /**
+   * Creates an EC2 Instance Connect Endpoint. An EC2 Instance Connect Endpoint allows you to connect to a resource, without requiring the resource to have a public IPv4 address. For more information, see Connect to your resources without requiring a public IPv4 address using EC2 Instance Connect Endpoint in the Amazon EC2 User Guide.
+   */
+  createInstanceConnectEndpoint(params: EC2.Types.CreateInstanceConnectEndpointRequest, callback?: (err: AWSError, data: EC2.Types.CreateInstanceConnectEndpointResult) => void): Request<EC2.Types.CreateInstanceConnectEndpointResult, AWSError>;
+  /**
+   * Creates an EC2 Instance Connect Endpoint. An EC2 Instance Connect Endpoint allows you to connect to a resource, without requiring the resource to have a public IPv4 address. For more information, see Connect to your resources without requiring a public IPv4 address using EC2 Instance Connect Endpoint in the Amazon EC2 User Guide.
+   */
+  createInstanceConnectEndpoint(callback?: (err: AWSError, data: EC2.Types.CreateInstanceConnectEndpointResult) => void): Request<EC2.Types.CreateInstanceConnectEndpointResult, AWSError>;
   /**
    * Creates an event window in which scheduled events for the associated Amazon EC2 instances can run. You can define either a set of time ranges or a cron expression when creating the event window, but not both. All event window times are in UTC. You can create up to 200 event windows per Amazon Web Services Region. When you create the event window, targets (instance IDs, Dedicated Host IDs, or tags) are not yet associated with it. To ensure that the event window can be used, you must associate one or more targets with it by using the AssociateInstanceEventWindow API.  Event windows are applicable only for scheduled events that stop, reboot, or terminate instances. Event windows are not applicable for:   Expedited scheduled events and network maintenance events.    Unscheduled maintenance such as AutoRecovery and unplanned reboots.    For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
    */
@@ -1181,6 +1189,14 @@ declare class EC2 extends Service {
    */
   deleteFpgaImage(callback?: (err: AWSError, data: EC2.Types.DeleteFpgaImageResult) => void): Request<EC2.Types.DeleteFpgaImageResult, AWSError>;
   /**
+   * Deletes the specified EC2 Instance Connect Endpoint.
+   */
+  deleteInstanceConnectEndpoint(params: EC2.Types.DeleteInstanceConnectEndpointRequest, callback?: (err: AWSError, data: EC2.Types.DeleteInstanceConnectEndpointResult) => void): Request<EC2.Types.DeleteInstanceConnectEndpointResult, AWSError>;
+  /**
+   * Deletes the specified EC2 Instance Connect Endpoint.
+   */
+  deleteInstanceConnectEndpoint(callback?: (err: AWSError, data: EC2.Types.DeleteInstanceConnectEndpointResult) => void): Request<EC2.Types.DeleteInstanceConnectEndpointResult, AWSError>;
+  /**
    * Deletes the specified event window. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
    */
   deleteInstanceEventWindow(params: EC2.Types.DeleteInstanceEventWindowRequest, callback?: (err: AWSError, data: EC2.Types.DeleteInstanceEventWindowResult) => void): Request<EC2.Types.DeleteInstanceEventWindowResult, AWSError>;
@@ -1741,19 +1757,19 @@ declare class EC2 extends Service {
    */
   describeAccountAttributes(callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
-   * Describes an Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide.
+   * Describes an Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide. When you transfer an Elastic IP address, there is a two-step handshake between the source and transfer Amazon Web Services accounts. When the source account starts the transfer, the transfer account has seven days to accept the Elastic IP address transfer. During those seven days, the source account can view the pending transfer by using this action. After seven days, the transfer expires and ownership of the Elastic IP address returns to the source account. Accepted transfers are visible to the source account for three days after the transfers have been accepted.
    */
   describeAddressTransfers(params: EC2.Types.DescribeAddressTransfersRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAddressTransfersResult) => void): Request<EC2.Types.DescribeAddressTransfersResult, AWSError>;
   /**
-   * Describes an Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide.
+   * Describes an Elastic IP address transfer. For more information, see Transfer Elastic IP addresses in the Amazon Virtual Private Cloud User Guide. When you transfer an Elastic IP address, there is a two-step handshake between the source and transfer Amazon Web Services accounts. When the source account starts the transfer, the transfer account has seven days to accept the Elastic IP address transfer. During those seven days, the source account can view the pending transfer by using this action. After seven days, the transfer expires and ownership of the Elastic IP address returns to the source account. Accepted transfers are visible to the source account for three days after the transfers have been accepted.
    */
   describeAddressTransfers(callback?: (err: AWSError, data: EC2.Types.DescribeAddressTransfersResult) => void): Request<EC2.Types.DescribeAddressTransfersResult, AWSError>;
   /**
-   * Describes the specified Elastic IP addresses or all of your Elastic IP addresses. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   * Describes the specified Elastic IP addresses or all of your Elastic IP addresses.
    */
   describeAddresses(params: EC2.Types.DescribeAddressesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAddressesResult) => void): Request<EC2.Types.DescribeAddressesResult, AWSError>;
   /**
-   * Describes the specified Elastic IP addresses or all of your Elastic IP addresses. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   * Describes the specified Elastic IP addresses or all of your Elastic IP addresses.
    */
   describeAddresses(callback?: (err: AWSError, data: EC2.Types.DescribeAddressesResult) => void): Request<EC2.Types.DescribeAddressesResult, AWSError>;
   /**
@@ -2093,6 +2109,14 @@ declare class EC2 extends Service {
    */
   describeInstanceAttribute(callback?: (err: AWSError, data: EC2.Types.InstanceAttribute) => void): Request<EC2.Types.InstanceAttribute, AWSError>;
   /**
+   * Describes the specified EC2 Instance Connect Endpoints or all EC2 Instance Connect Endpoints.
+   */
+  describeInstanceConnectEndpoints(params: EC2.Types.DescribeInstanceConnectEndpointsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceConnectEndpointsResult) => void): Request<EC2.Types.DescribeInstanceConnectEndpointsResult, AWSError>;
+  /**
+   * Describes the specified EC2 Instance Connect Endpoints or all EC2 Instance Connect Endpoints.
+   */
+  describeInstanceConnectEndpoints(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceConnectEndpointsResult) => void): Request<EC2.Types.DescribeInstanceConnectEndpointsResult, AWSError>;
+  /**
    * Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are standard and unlimited. If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the unlimited credit option, as well as instances that were previously configured as T2, T3, and T3a with the unlimited credit option. For example, if you resize a T2 instance, while it is configured as unlimited, to an M4 instance, Amazon EC2 returns the M4 instance. If you specify one or more instance IDs, Amazon EC2 returns the credit option (standard or unlimited) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a burstable performance instance, an error is returned. Recently terminated instances might appear in the returned results. This interval is usually less than one hour. If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally. For more information, see Burstable performance instances in the Amazon EC2 User Guide.
    */
   describeInstanceCreditSpecifications(params: EC2.Types.DescribeInstanceCreditSpecificationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceCreditSpecificationsResult) => void): Request<EC2.Types.DescribeInstanceCreditSpecificationsResult, AWSError>;
@@ -2285,11 +2309,11 @@ declare class EC2 extends Service {
    */
   describeManagedPrefixLists(callback?: (err: AWSError, data: EC2.Types.DescribeManagedPrefixListsResult) => void): Request<EC2.Types.DescribeManagedPrefixListsResult, AWSError>;
   /**
-   * Describes your Elastic IP addresses that are being moved to the EC2-VPC platform, or that are being restored to the EC2-Classic platform. This request does not return information about any other Elastic IP addresses in your account.
+   *  This action is deprecated.  Describes your Elastic IP addresses that are being moved from or being restored to the EC2-Classic platform. This request does not return information about any other Elastic IP addresses in your account.
    */
   describeMovingAddresses(params: EC2.Types.DescribeMovingAddressesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeMovingAddressesResult) => void): Request<EC2.Types.DescribeMovingAddressesResult, AWSError>;
   /**
-   * Describes your Elastic IP addresses that are being moved to the EC2-VPC platform, or that are being restored to the EC2-Classic platform. This request does not return information about any other Elastic IP addresses in your account.
+   *  This action is deprecated.  Describes your Elastic IP addresses that are being moved from or being restored to the EC2-Classic platform. This request does not return information about any other Elastic IP addresses in your account.
    */
   describeMovingAddresses(callback?: (err: AWSError, data: EC2.Types.DescribeMovingAddressesResult) => void): Request<EC2.Types.DescribeMovingAddressesResult, AWSError>;
   /**
@@ -3029,11 +3053,11 @@ declare class EC2 extends Service {
    */
   disableVpcClassicLinkDnsSupport(callback?: (err: AWSError, data: EC2.Types.DisableVpcClassicLinkDnsSupportResult) => void): Request<EC2.Types.DisableVpcClassicLinkDnsSupportResult, AWSError>;
   /**
-   * Disassociates an Elastic IP address from the instance or network interface it's associated with. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.
+   * Disassociates an Elastic IP address from the instance or network interface it's associated with. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.
    */
   disassociateAddress(params: EC2.Types.DisassociateAddressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disassociates an Elastic IP address from the instance or network interface it's associated with. An Elastic IP address is for use in either the EC2-Classic platform or in a VPC. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide.  This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.
+   * Disassociates an Elastic IP address from the instance or network interface it's associated with. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.
    */
   disassociateAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3429,11 +3453,11 @@ declare class EC2 extends Service {
    */
   getIpamDiscoveredResourceCidrs(callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredResourceCidrsResult) => void): Request<EC2.Types.GetIpamDiscoveredResourceCidrsResult, AWSError>;
   /**
-   * Get a list of all the CIDR allocations in an IPAM pool.  If you use this action after AllocateIpamPoolCidr or ReleaseIpamPoolAllocation, note that all EC2 API actions follow an eventual consistency model. 
+   * Get a list of all the CIDR allocations in an IPAM pool. The Region you use should be the IPAM pool locale. The locale is the Amazon Web Services Region where this IPAM pool is available for allocations.  If you use this action after AllocateIpamPoolCidr or ReleaseIpamPoolAllocation, note that all EC2 API actions follow an eventual consistency model. 
    */
   getIpamPoolAllocations(params: EC2.Types.GetIpamPoolAllocationsRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
   /**
-   * Get a list of all the CIDR allocations in an IPAM pool.  If you use this action after AllocateIpamPoolCidr or ReleaseIpamPoolAllocation, note that all EC2 API actions follow an eventual consistency model. 
+   * Get a list of all the CIDR allocations in an IPAM pool. The Region you use should be the IPAM pool locale. The locale is the Amazon Web Services Region where this IPAM pool is available for allocations.  If you use this action after AllocateIpamPoolCidr or ReleaseIpamPoolAllocation, note that all EC2 API actions follow an eventual consistency model. 
    */
   getIpamPoolAllocations(callback?: (err: AWSError, data: EC2.Types.GetIpamPoolAllocationsResult) => void): Request<EC2.Types.GetIpamPoolAllocationsResult, AWSError>;
   /**
@@ -4213,11 +4237,11 @@ declare class EC2 extends Service {
    */
   monitorInstances(callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
   /**
-   * Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the RestoreAddressToClassic request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   *  This action is deprecated.  Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the RestoreAddressToClassic request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform.
    */
   moveAddressToVpc(params: EC2.Types.MoveAddressToVpcRequest, callback?: (err: AWSError, data: EC2.Types.MoveAddressToVpcResult) => void): Request<EC2.Types.MoveAddressToVpcResult, AWSError>;
   /**
-   * Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the RestoreAddressToClassic request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   *  This action is deprecated.  Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC platform. The Elastic IP address must be allocated to your account for more than 24 hours, and it must not be associated with an instance. After the Elastic IP address is moved, it is no longer available for use in the EC2-Classic platform, unless you move it back using the RestoreAddressToClassic request. You cannot move an Elastic IP address that was originally allocated for use in the EC2-VPC platform to the EC2-Classic platform.
    */
   moveAddressToVpc(callback?: (err: AWSError, data: EC2.Types.MoveAddressToVpcResult) => void): Request<EC2.Types.MoveAddressToVpcResult, AWSError>;
   /**
@@ -4357,11 +4381,11 @@ declare class EC2 extends Service {
    */
   rejectVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.RejectVpcPeeringConnectionResult) => void): Request<EC2.Types.RejectVpcPeeringConnectionResult, AWSError>;
   /**
-   * Releases the specified Elastic IP address. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide.  [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another Amazon Web Services account. [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see AllocateAddress. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Releases the specified Elastic IP address. [Default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another Amazon Web Services account. After you release an Elastic IP address, you might be able to recover it. For more information, see AllocateAddress.
    */
   releaseAddress(params: EC2.Types.ReleaseAddressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases the specified Elastic IP address. [EC2-Classic, default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide.  [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another Amazon Web Services account. [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be able to recover it. For more information, see AllocateAddress. For more information, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide.
+   * Releases the specified Elastic IP address. [Default VPC] Releasing an Elastic IP address automatically disassociates it from any instance that it's associated with. To disassociate an Elastic IP address without releasing it, use DisassociateAddress. [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before you can release it. Otherwise, Amazon EC2 returns an error (InvalidIPAddress.InUse). After releasing an Elastic IP address, it is released to the IP address pool. Be sure to update your DNS records and any servers or devices that communicate with the address. If you attempt to release an Elastic IP address that you already released, you'll get an AuthFailure error if the address is already allocated to another Amazon Web Services account. After you release an Elastic IP address, you might be able to recover it. For more information, see AllocateAddress.
    */
   releaseAddress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -4373,11 +4397,11 @@ declare class EC2 extends Service {
    */
   releaseHosts(callback?: (err: AWSError, data: EC2.Types.ReleaseHostsResult) => void): Request<EC2.Types.ReleaseHostsResult, AWSError>;
   /**
-   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide.   All EC2 API actions follow an eventual consistency model. 
+   * Release an allocation within an IPAM pool. The Region you use should be the IPAM pool locale. The locale is the Amazon Web Services Region where this IPAM pool is available for allocations. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide.   All EC2 API actions follow an eventual consistency model. 
    */
   releaseIpamPoolAllocation(params: EC2.Types.ReleaseIpamPoolAllocationRequest, callback?: (err: AWSError, data: EC2.Types.ReleaseIpamPoolAllocationResult) => void): Request<EC2.Types.ReleaseIpamPoolAllocationResult, AWSError>;
   /**
-   * Release an allocation within an IPAM pool. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide.   All EC2 API actions follow an eventual consistency model. 
+   * Release an allocation within an IPAM pool. The Region you use should be the IPAM pool locale. The locale is the Amazon Web Services Region where this IPAM pool is available for allocations. You can only use this action to release manual allocations. To remove an allocation for a resource without deleting the resource, set its monitored state to false using ModifyIpamResourceCidr. For more information, see Release an allocation in the Amazon VPC IPAM User Guide.   All EC2 API actions follow an eventual consistency model. 
    */
   releaseIpamPoolAllocation(callback?: (err: AWSError, data: EC2.Types.ReleaseIpamPoolAllocationResult) => void): Request<EC2.Types.ReleaseIpamPoolAllocationResult, AWSError>;
   /**
@@ -4517,11 +4541,11 @@ declare class EC2 extends Service {
    */
   resetSnapshotAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   *  This action is deprecated.  Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.
    */
   restoreAddressToClassic(params: EC2.Types.RestoreAddressToClassicRequest, callback?: (err: AWSError, data: EC2.Types.RestoreAddressToClassicResult) => void): Request<EC2.Types.RestoreAddressToClassicResult, AWSError>;
   /**
-   * Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.  We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon Elastic Compute Cloud User Guide. 
+   *  This action is deprecated.  Restores an Elastic IP address that was previously moved to the EC2-VPC platform back to the EC2-Classic platform. You cannot move an Elastic IP address that was originally allocated for use in EC2-VPC. The Elastic IP address must not be associated with an instance or network interface.
    */
   restoreAddressToClassic(callback?: (err: AWSError, data: EC2.Types.RestoreAddressToClassicResult) => void): Request<EC2.Types.RestoreAddressToClassicResult, AWSError>;
   /**
@@ -5371,15 +5395,15 @@ declare namespace EC2 {
      */
     PublicIp?: String;
     /**
-     * The ID representing the allocation of the address for use with EC2-VPC.
+     * The ID representing the allocation of the address.
      */
     AllocationId?: String;
     /**
-     * The ID representing the association of the address with an instance in a VPC.
+     * The ID representing the association of the address with an instance.
      */
     AssociationId?: String;
     /**
-     * Indicates whether this Elastic IP address is for use with instances in EC2-Classic (standard) or instances in a VPC (vpc).
+     * The network (vpc).
      */
     Domain?: DomainType;
     /**
@@ -5489,11 +5513,11 @@ declare namespace EC2 {
   export type Affinity = "default"|"host"|string;
   export interface AllocateAddressRequest {
     /**
-     * Indicates whether the Elastic IP address is for use with instances in a VPC or instances in EC2-Classic. Default: If the Region supports EC2-Classic, the default is standard. Otherwise, the default is vpc.
+     * The network (vpc).
      */
     Domain?: DomainType;
     /**
-     * [EC2-VPC] The Elastic IP address to recover or an IPv4 address from an address pool.
+     * The Elastic IP address to recover or an IPv4 address from an address pool.
      */
     Address?: PublicIpAddress;
     /**
@@ -5523,7 +5547,7 @@ declare namespace EC2 {
      */
     PublicIp?: String;
     /**
-     * [EC2-VPC] The ID that Amazon Web Services assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.
+     * The ID that represents the allocation of the Elastic IP address.
      */
     AllocationId?: String;
     /**
@@ -5535,7 +5559,7 @@ declare namespace EC2 {
      */
     NetworkBorderGroup?: String;
     /**
-     * Indicates whether the Elastic IP address is for use with instances in a VPC (vpc) or instances in EC2-Classic (standard).
+     * The network (vpc).
      */
     Domain?: DomainType;
     /**
@@ -5547,7 +5571,7 @@ declare namespace EC2 {
      */
     CustomerOwnedIpv4Pool?: String;
     /**
-     * The carrier IP address. This option is only available for network interfaces which reside in a subnet in a Wavelength Zone (for example an EC2 instance). 
+     * The carrier IP address. This option is only available for network interfaces that reside in a subnet in a Wavelength Zone.
      */
     CarrierIp?: String;
   }
@@ -6002,19 +6026,19 @@ declare namespace EC2 {
   export type AssignedPrivateIpAddressList = AssignedPrivateIpAddress[];
   export interface AssociateAddressRequest {
     /**
-     * [EC2-VPC] The allocation ID. This is required for EC2-VPC.
+     * The allocation ID. This is required.
      */
     AllocationId?: AllocationId;
     /**
-     * The ID of the instance. The instance must have exactly one attached network interface. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. For EC2-Classic, you must specify an instance ID and the instance must be in the running state.
+     * The ID of the instance. The instance must have exactly one attached network interface. You can specify either the instance ID or the network interface ID, but not both.
      */
     InstanceId?: InstanceId;
     /**
-     * [EC2-Classic] The Elastic IP address to associate with the instance. This is required for EC2-Classic.
+     * Deprecated.
      */
     PublicIp?: EipAllocationPublicIp;
     /**
-     * [EC2-VPC] For a VPC in an EC2-Classic account, specify true to allow an Elastic IP address that is already associated with an instance or network interface to be reassociated with the specified instance or network interface. Otherwise, the operation fails. In a VPC in an EC2-VPC-only account, reassociation is automatic, therefore you can specify false to ensure the operation fails if the Elastic IP address is already associated with another resource.
+     * Reassociation is automatic, but you can specify false to ensure the operation fails if the Elastic IP address is already associated with another resource.
      */
     AllowReassociation?: Boolean;
     /**
@@ -6022,17 +6046,17 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * [EC2-VPC] The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. 
+     * The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID. You can specify either the instance ID or the network interface ID, but not both. 
      */
     NetworkInterfaceId?: NetworkInterfaceId;
     /**
-     * [EC2-VPC] The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
+     * The primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
      */
     PrivateIpAddress?: String;
   }
   export interface AssociateAddressResult {
     /**
-     * [EC2-VPC] The ID that represents the association of the Elastic IP address with an instance.
+     * The ID that represents the association of the Elastic IP address with an instance.
      */
     AssociationId?: String;
   }
@@ -9055,6 +9079,42 @@ declare namespace EC2 {
      */
     ImageId?: String;
   }
+  export interface CreateInstanceConnectEndpointRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the subnet in which to create the EC2 Instance Connect Endpoint.
+     */
+    SubnetId: SubnetId;
+    /**
+     * One or more security groups to associate with the endpoint. If you don't specify a security group, the default security group for your VPC will be associated with the endpoint.
+     */
+    SecurityGroupIds?: SecurityGroupIdStringListRequest;
+    /**
+     * Indicates whether your client's IP address is preserved as the source. The value is true or false.   If true, your client's IP address is used when you connect to a resource.   If false, the elastic network interface IP address is used when you connect to a resource.   Default: true 
+     */
+    PreserveClientIp?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    ClientToken?: String;
+    /**
+     * The tags to apply to the EC2 Instance Connect Endpoint during creation.
+     */
+    TagSpecifications?: TagSpecificationList;
+  }
+  export interface CreateInstanceConnectEndpointResult {
+    /**
+     * Information about the EC2 Instance Connect Endpoint.
+     */
+    InstanceConnectEndpoint?: Ec2InstanceConnectEndpoint;
+    /**
+     * Unique, case-sensitive idempotency token provided by the client in the the request.
+     */
+    ClientToken?: String;
+  }
   export interface CreateInstanceEventWindowRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -9801,7 +9861,7 @@ declare namespace EC2 {
      */
     Ipv6PrefixCount?: Integer;
     /**
-     * The type of network interface. The default is interface. The only supported values are efa and trunk.
+     * The type of network interface. The default is interface. The only supported values are interface, efa, and trunk.
      */
     InterfaceType?: NetworkInterfaceCreationType;
     /**
@@ -11751,6 +11811,22 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface DeleteInstanceConnectEndpointRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the EC2 Instance Connect Endpoint to delete.
+     */
+    InstanceConnectEndpointId: InstanceConnectEndpointId;
+  }
+  export interface DeleteInstanceConnectEndpointResult {
+    /**
+     * Information about the EC2 Instance Connect Endpoint.
+     */
+    InstanceConnectEndpoint?: Ec2InstanceConnectEndpoint;
+  }
   export interface DeleteInstanceEventWindowRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -12997,7 +13073,7 @@ declare namespace EC2 {
   }
   export interface DescribeAddressesRequest {
     /**
-     * One or more filters. Filter names and values are case-sensitive.    allocation-id - [EC2-VPC] The allocation ID for the address.    association-id - [EC2-VPC] The association ID for the address.    domain - Indicates whether the address is for use in EC2-Classic (standard) or in a VPC (vpc).    instance-id - The ID of the instance the address is associated with, if any.    network-border-group - A unique set of Availability Zones, Local Zones, or Wavelength Zones from where Amazon Web Services advertises IP addresses.     network-interface-id - [EC2-VPC] The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The Amazon Web Services account ID of the owner.    private-ip-address - [EC2-VPC] The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address, or the carrier IP address.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * One or more filters. Filter names and values are case-sensitive.    allocation-id - The allocation ID for the address.    association-id - The association ID for the address.    instance-id - The ID of the instance the address is associated with, if any.    network-border-group - A unique set of Availability Zones, Local Zones, or Wavelength Zones from where Amazon Web Services advertises IP addresses.     network-interface-id - The ID of the network interface that the address is associated with, if any.    network-interface-owner-id - The Amazon Web Services account ID of the owner.    private-ip-address - The private IP address associated with the Elastic IP address.    public-ip - The Elastic IP address, or the carrier IP address.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -13005,7 +13081,7 @@ declare namespace EC2 {
      */
     PublicIps?: PublicIpStringList;
     /**
-     * [EC2-VPC] Information about the allocation IDs.
+     * Information about the allocation IDs.
      */
     AllocationIds?: AllocationIdList;
     /**
@@ -14337,6 +14413,38 @@ declare namespace EC2 {
      * The ID of the instance.
      */
     InstanceId: InstanceId;
+  }
+  export interface DescribeInstanceConnectEndpointsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
+     */
+    MaxResults?: InstanceConnectEndpointMaxResults;
+    /**
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
+     */
+    NextToken?: NextToken;
+    /**
+     * One or more filters.    instance-connect-endpoint-id - The ID of the EC2 Instance Connect Endpoint.    state - The state of the EC2 Instance Connect Endpoint (create-in-progress | create-complete | create-failed | delete-in-progress | delete-complete | delete-failed).    subnet-id - The ID of the subnet in which the EC2 Instance Connect Endpoint was created.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    tag-value - The value of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific value, regardless of tag key.    vpc-id - The ID of the VPC in which the EC2 Instance Connect Endpoint was created.  
+     */
+    Filters?: FilterList;
+    /**
+     * One or more EC2 Instance Connect Endpoint IDs.
+     */
+    InstanceConnectEndpointIds?: ValueStringList;
+  }
+  export interface DescribeInstanceConnectEndpointsResult {
+    /**
+     * Information about the EC2 Instance Connect Endpoints.
+     */
+    InstanceConnectEndpoints?: InstanceConnectEndpointSet;
+    /**
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
+     */
+    NextToken?: NextToken;
   }
   export type DescribeInstanceCreditSpecificationsMaxResults = number;
   export interface DescribeInstanceCreditSpecificationsRequest {
@@ -18042,11 +18150,11 @@ declare namespace EC2 {
   }
   export interface DisassociateAddressRequest {
     /**
-     * [EC2-VPC] The association ID. Required for EC2-VPC.
+     * The association ID. This parameter is required.
      */
     AssociationId?: ElasticIpAssociationId;
     /**
-     * [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
+     * Deprecated.
      */
     PublicIp?: EipAllocationPublicIp;
     /**
@@ -18546,6 +18654,69 @@ declare namespace EC2 {
     MaximumIops?: MaximumIops;
   }
   export type EbsOptimizedSupport = "unsupported"|"supported"|"default"|string;
+  export interface Ec2InstanceConnectEndpoint {
+    /**
+     * The ID of the Amazon Web Services account that created the EC2 Instance Connect Endpoint.
+     */
+    OwnerId?: String;
+    /**
+     * The ID of the EC2 Instance Connect Endpoint.
+     */
+    InstanceConnectEndpointId?: InstanceConnectEndpointId;
+    /**
+     * The Amazon Resource Name (ARN) of the EC2 Instance Connect Endpoint.
+     */
+    InstanceConnectEndpointArn?: ResourceArn;
+    /**
+     * The current state of the EC2 Instance Connect Endpoint.
+     */
+    State?: Ec2InstanceConnectEndpointState;
+    /**
+     * The message for the current state of the EC2 Instance Connect Endpoint. Can include a failure message.
+     */
+    StateMessage?: String;
+    /**
+     * The DNS name of the EC2 Instance Connect Endpoint.
+     */
+    DnsName?: String;
+    /**
+     * 
+     */
+    FipsDnsName?: String;
+    /**
+     * The ID of the elastic network interface that Amazon EC2 automatically created when creating the EC2 Instance Connect Endpoint.
+     */
+    NetworkInterfaceIds?: NetworkInterfaceIdSet;
+    /**
+     * The ID of the VPC in which the EC2 Instance Connect Endpoint was created.
+     */
+    VpcId?: VpcId;
+    /**
+     * The Availability Zone of the EC2 Instance Connect Endpoint.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The date and time that the EC2 Instance Connect Endpoint was created.
+     */
+    CreatedAt?: MillisecondDateTime;
+    /**
+     * The ID of the subnet in which the EC2 Instance Connect Endpoint was created.
+     */
+    SubnetId?: SubnetId;
+    /**
+     * Indicates whether your client's IP address is preserved as the source. The value is true or false.   If true, your client's IP address is used when you connect to a resource.   If false, the elastic network interface IP address is used when you connect to a resource.   Default: true 
+     */
+    PreserveClientIp?: Boolean;
+    /**
+     * The security groups associated with the endpoint. If you didn't specify a security group, the default security group for your VPC is associated with the endpoint.
+     */
+    SecurityGroupIds?: SecurityGroupIdSet;
+    /**
+     * The tags assigned to the EC2 Instance Connect Endpoint.
+     */
+    Tags?: TagList;
+  }
+  export type Ec2InstanceConnectEndpointState = "create-in-progress"|"create-complete"|"create-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|string;
   export interface EfaInfo {
     /**
      * The maximum number of Elastic Fabric Adapters for the instance type.
@@ -23088,6 +23259,9 @@ declare namespace EC2 {
      */
     TotalCapacity?: Integer;
   }
+  export type InstanceConnectEndpointId = string;
+  export type InstanceConnectEndpointMaxResults = number;
+  export type InstanceConnectEndpointSet = Ec2InstanceConnectEndpoint[];
   export interface InstanceCount {
     /**
      * The number of listed Reserved Instances in the state specified by the state.
@@ -28599,7 +28773,7 @@ declare namespace EC2 {
   export type MoveStatus = "movingToVpc"|"restoringToClassic"|string;
   export interface MovingAddressStatus {
     /**
-     * The status of the Elastic IP address that's being moved to the EC2-VPC platform, or restored to the EC2-Classic platform.
+     * The status of the Elastic IP address that's being moved or restored.
      */
     MoveStatus?: MoveStatus;
     /**
@@ -29303,6 +29477,7 @@ declare namespace EC2 {
   export type NetworkInterfaceCreationType = "efa"|"branch"|"trunk"|string;
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceIdList = NetworkInterfaceId[];
+  export type NetworkInterfaceIdSet = String[];
   export interface NetworkInterfaceIpv6Address {
     /**
      * The IPv6 address.
@@ -30818,11 +30993,11 @@ declare namespace EC2 {
   }
   export interface ReleaseAddressRequest {
     /**
-     * [EC2-VPC] The allocation ID. Required for EC2-VPC.
+     * The allocation ID. This parameter is required.
      */
     AllocationId?: AllocationId;
     /**
-     * [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
+     * Deprecated.
      */
     PublicIp?: String;
     /**
@@ -31974,7 +32149,7 @@ declare namespace EC2 {
      */
     ResourceTypes?: ValueStringList;
   }
-  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|"vpc-block-public-access-exclusion"|"ipam-resource-discovery"|"ipam-resource-discovery-association"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"coip-pool"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipam"|"ipam-pool"|"ipam-scope"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"network-insights-access-scope"|"network-insights-access-scope-analysis"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"subnet-cidr-reservation"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-policy-table"|"transit-gateway-route-table"|"transit-gateway-route-table-announcement"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-connection"|"vpc-endpoint-service"|"vpc-endpoint-service-permission"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|"capacity-reservation-fleet"|"traffic-mirror-filter-rule"|"vpc-endpoint-connection-device-type"|"verified-access-instance"|"verified-access-group"|"verified-access-endpoint"|"verified-access-policy"|"verified-access-trust-provider"|"vpn-connection-device-type"|"vpc-block-public-access-exclusion"|"ipam-resource-discovery"|"ipam-resource-discovery-association"|"instance-connect-endpoint"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -33299,7 +33474,9 @@ declare namespace EC2 {
   }
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
+  export type SecurityGroupIdSet = SecurityGroupId[];
   export type SecurityGroupIdStringList = SecurityGroupId[];
+  export type SecurityGroupIdStringListRequest = SecurityGroupId[];
   export interface SecurityGroupIdentifier {
     /**
      * The ID of the security group.

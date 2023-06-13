@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1396.0-->
+<!--LATEST=2.1397.0-->
 <!--ENTRYINSERT-->
+
+## 2.1397.0
+* feature: CloudTrail: This feature allows users to view dashboards for CloudTrail Lake event data stores.
+* feature: CodeGuruSecurity: Initial release of Amazon CodeGuru Security APIs
+* feature: Drs: Added APIs to support network replication and recovery using AWS Elastic Disaster Recovery.
+* feature: EC2: This release introduces a new feature, EC2 Instance Connect Endpoint, that enables you to connect to a resource over TCP, without requiring the resource to have a public IPv4 address.
+* feature: Lightsail: This release adds pagination for the Get Certificates API operation.
+* feature: S3: Integrate double encryption feature to SDKs.
+* feature: SecurityHub: Add support for Security Hub Automation Rules
+* feature: SimSpaceWeaver: This release fixes using aws-us-gov ARNs in API calls and adds documentation for snapshot APIs.
+* feature: VerifiedPermissions: GA release of Amazon Verified Permissions.
+* feature: WAFV2: You can now detect and block fraudulent account creation attempts with the new AWS WAF Fraud Control account creation fraud prevention (ACFP) managed rule group AWSManagedRulesACFPRuleSet.
+* feature: WellArchitected: AWS Well-Architected now supports Profiles that help customers prioritize which questions to focus on first by providing a list of prioritized questions that are better aligned with their business goals and outcomes.
 
 ## 2.1396.0
 * feature: AmplifyUIBuilder: AWS Amplify UIBuilder is launching Codegen UI, a new feature that enables you to generate your amplify uibuilder components and forms.

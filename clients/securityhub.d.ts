@@ -28,6 +28,14 @@ declare class SecurityHub extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
+   *  Deletes one or more automation rules. 
+   */
+  batchDeleteAutomationRules(params: SecurityHub.Types.BatchDeleteAutomationRulesRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchDeleteAutomationRulesResponse) => void): Request<SecurityHub.Types.BatchDeleteAutomationRulesResponse, AWSError>;
+  /**
+   *  Deletes one or more automation rules. 
+   */
+  batchDeleteAutomationRules(callback?: (err: AWSError, data: SecurityHub.Types.BatchDeleteAutomationRulesResponse) => void): Request<SecurityHub.Types.BatchDeleteAutomationRulesResponse, AWSError>;
+  /**
    * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Security Standards section of the Security Hub User Guide.
    */
   batchDisableStandards(params: SecurityHub.Types.BatchDisableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
@@ -43,6 +51,14 @@ declare class SecurityHub extends Service {
    * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the DescribeStandards operation. For more information, see the Security Standards section of the Security Hub User Guide.
    */
   batchEnableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
+  /**
+   *  Retrieves a list of details for automation rules based on rule Amazon Resource Names (ARNs). 
+   */
+  batchGetAutomationRules(params: SecurityHub.Types.BatchGetAutomationRulesRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchGetAutomationRulesResponse) => void): Request<SecurityHub.Types.BatchGetAutomationRulesResponse, AWSError>;
+  /**
+   *  Retrieves a list of details for automation rules based on rule Amazon Resource Names (ARNs). 
+   */
+  batchGetAutomationRules(callback?: (err: AWSError, data: SecurityHub.Types.BatchGetAutomationRulesResponse) => void): Request<SecurityHub.Types.BatchGetAutomationRulesResponse, AWSError>;
   /**
    *  Provides details about a batch of security controls for the current Amazon Web Services account and Amazon Web Services Region. 
    */
@@ -68,6 +84,14 @@ declare class SecurityHub extends Service {
    */
   batchImportFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
+   *  Updates one or more automation rules based on rule Amazon Resource Names (ARNs) and input parameters. 
+   */
+  batchUpdateAutomationRules(params: SecurityHub.Types.BatchUpdateAutomationRulesRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateAutomationRulesResponse) => void): Request<SecurityHub.Types.BatchUpdateAutomationRulesResponse, AWSError>;
+  /**
+   *  Updates one or more automation rules based on rule Amazon Resource Names (ARNs) and input parameters. 
+   */
+  batchUpdateAutomationRules(callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateAutomationRulesResponse) => void): Request<SecurityHub.Types.BatchUpdateAutomationRulesResponse, AWSError>;
+  /**
    * Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Administrator and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the Security Hub User Guide.
    */
   batchUpdateFindings(params: SecurityHub.Types.BatchUpdateFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
@@ -91,6 +115,14 @@ declare class SecurityHub extends Service {
    * Creates a custom action target in Security Hub. You can use custom actions on findings and insights in Security Hub to trigger target actions in Amazon CloudWatch Events.
    */
   createActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.CreateActionTargetResponse) => void): Request<SecurityHub.Types.CreateActionTargetResponse, AWSError>;
+  /**
+   *  Creates an automation rule based on input parameters. 
+   */
+  createAutomationRule(params: SecurityHub.Types.CreateAutomationRuleRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateAutomationRuleResponse) => void): Request<SecurityHub.Types.CreateAutomationRuleResponse, AWSError>;
+  /**
+   *  Creates an automation rule based on input parameters. 
+   */
+  createAutomationRule(callback?: (err: AWSError, data: SecurityHub.Types.CreateAutomationRuleResponse) => void): Request<SecurityHub.Types.CreateAutomationRuleResponse, AWSError>;
   /**
    * Used to enable finding aggregation. Must be called from the aggregation Region. For more details about cross-Region replication, see Configuring finding aggregation in the Security Hub User Guide. 
    */
@@ -372,6 +404,14 @@ declare class SecurityHub extends Service {
    */
   inviteMembers(callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
+   *  A list of automation rules and their metadata for the calling account. 
+   */
+  listAutomationRules(params: SecurityHub.Types.ListAutomationRulesRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListAutomationRulesResponse) => void): Request<SecurityHub.Types.ListAutomationRulesResponse, AWSError>;
+  /**
+   *  A list of automation rules and their metadata for the calling account. 
+   */
+  listAutomationRules(callback?: (err: AWSError, data: SecurityHub.Types.ListAutomationRulesResponse) => void): Request<SecurityHub.Types.ListAutomationRulesResponse, AWSError>;
+  /**
    * Lists all findings-generating solutions (products) that you are subscribed to receive findings from in Security Hub.
    */
   listEnabledProductsForImport(params: SecurityHub.Types.ListEnabledProductsForImportRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListEnabledProductsForImportResponse) => void): Request<SecurityHub.Types.ListEnabledProductsForImportResponse, AWSError>;
@@ -568,6 +608,7 @@ declare namespace SecurityHub {
      */
     PortProbeAction?: PortProbeAction;
   }
+  export type ActionList = AutomationRulesAction[];
   export interface ActionLocalIpDetails {
     /**
      * The IP address.
@@ -702,6 +743,275 @@ declare namespace SecurityHub {
   }
   export type AssociationStatus = "ENABLED"|"DISABLED"|string;
   export type AutoEnableStandards = "NONE"|"DEFAULT"|string;
+  export interface AutomationRulesAction {
+    /**
+     *  Specifies that the rule action should update the Types finding field. The Types finding field provides one or more finding types in the format of namespace/category/classifier that classify a finding. For more information, see Types taxonomy for ASFF in the Security Hub User Guide. 
+     */
+    Type?: AutomationRulesActionType;
+    /**
+     *  Specifies that the automation rule action is an update to a finding field. 
+     */
+    FindingFieldsUpdate?: AutomationRulesFindingFieldsUpdate;
+  }
+  export type AutomationRulesActionType = "FINDING_FIELDS_UPDATE"|string;
+  export type AutomationRulesArnsList = NonEmptyString[];
+  export interface AutomationRulesConfig {
+    /**
+     *  The Amazon Resource Name (ARN) of a rule. 
+     */
+    RuleArn?: NonEmptyString;
+    /**
+     *  Whether the rule is active after it is created. If this parameter is equal to &gt;ENABLED, Security Hub will apply the rule to findings and finding updates after the rule is created. 
+     */
+    RuleStatus?: RuleStatus;
+    /**
+     *  An integer ranging from 1 to 1000 that represents the order in which the rule action is applied to findings. Security Hub applies rules with lower values for this parameter first. 
+     */
+    RuleOrder?: RuleOrderValue;
+    /**
+     *  The name of the rule. 
+     */
+    RuleName?: NonEmptyString;
+    /**
+     *  A description of the rule. 
+     */
+    Description?: NonEmptyString;
+    /**
+     * Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this field is set to true for a rule, Security Hub applies the rule action to a finding that matches the rule criteria and won't evaluate other rules for the finding.&#x2028; The default value of this field is false. 
+     */
+    IsTerminal?: Boolean;
+    /**
+     *  A set of Amazon Web Services Security Finding Format finding field attributes and corresponding expected values that Security Hub uses to filter findings. If a finding matches the conditions specified in this parameter, Security Hub applies the rule action to the finding. 
+     */
+    Criteria?: AutomationRulesFindingFilters;
+    /**
+     *  One or more actions to update finding fields if a finding matches the defined criteria of the rule. 
+     */
+    Actions?: ActionList;
+    /**
+     *  A timestamp that indicates when the rule was created.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     *  A timestamp that indicates when the rule was most recently updated.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  The principal that created a rule. 
+     */
+    CreatedBy?: NonEmptyString;
+  }
+  export type AutomationRulesConfigList = AutomationRulesConfig[];
+  export interface AutomationRulesFindingFieldsUpdate {
+    Note?: NoteUpdate;
+    Severity?: SeverityUpdate;
+    /**
+     *  The rule action will update the VerificationState field of a finding. 
+     */
+    VerificationState?: VerificationState;
+    /**
+     *  The rule action will update the Confidence field of a finding. 
+     */
+    Confidence?: RatioScale;
+    /**
+     *  The rule action will update the Criticality field of a finding. 
+     */
+    Criticality?: RatioScale;
+    /**
+     *  The rule action will update the Types field of a finding. 
+     */
+    Types?: TypeList;
+    /**
+     *  The rule action will update the UserDefinedFields field of a finding. 
+     */
+    UserDefinedFields?: FieldMap;
+    Workflow?: WorkflowUpdate;
+    /**
+     *  A list of findings that are related to a finding. 
+     */
+    RelatedFindings?: RelatedFindingList;
+  }
+  export interface AutomationRulesFindingFilters {
+    /**
+     *  The Amazon Resource Name (ARN) for a third-party product that generated a finding in Security Hub. 
+     */
+    ProductArn?: StringFilterList;
+    /**
+     *  The Amazon Web Services account ID in which a finding was generated. 
+     */
+    AwsAccountId?: StringFilterList;
+    /**
+     *  The product-specific identifier for a finding. 
+     */
+    Id?: StringFilterList;
+    /**
+     *  The identifier for the solution-specific component that generated a finding. 
+     */
+    GeneratorId?: StringFilterList;
+    /**
+     *  One or more finding types in the format of namespace/category/classifier that classify a finding. For a list of namespaces, classifiers, and categories, see Types taxonomy for ASFF in the Security Hub User Guide. 
+     */
+    Type?: StringFilterList;
+    /**
+     *  A timestamp that indicates when the potential security issue captured by a finding was first observed by the security findings product.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    FirstObservedAt?: DateFilterList;
+    /**
+     *  A timestamp that indicates when the potential security issue captured by a finding was most recently observed by the security findings product.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastObservedAt?: DateFilterList;
+    /**
+     *  A timestamp that indicates when this finding record was created.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedAt?: DateFilterList;
+    /**
+     *  A timestamp that indicates when the finding record was most recently updated.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    UpdatedAt?: DateFilterList;
+    /**
+     * The likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0–100 basis using a ratio scale. A value of 0 means 0 percent confidence, and a value of 100 means 100 percent confidence. For example, a data exfiltration detection based on a statistical deviation of network traffic has low confidence because an actual exfiltration hasn't been verified. For more information, see Confidence in the Security Hub User Guide. 
+     */
+    Confidence?: NumberFilterList;
+    /**
+     *  The level of importance that is assigned to the resources that are associated with a finding. Criticality is scored on a 0–100 basis, using a ratio scale that supports only full integers. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. For more information, see Criticality in the Security Hub User Guide.
+     */
+    Criticality?: NumberFilterList;
+    /**
+     *  A finding's title. 
+     */
+    Title?: StringFilterList;
+    /**
+     *  A finding's description. 
+     */
+    Description?: StringFilterList;
+    /**
+     *  Provides a URL that links to a page about the current finding in the finding product. 
+     */
+    SourceUrl?: StringFilterList;
+    /**
+     *  Provides the name of the product that generated the finding. For control-based findings, the product name is Security Hub. 
+     */
+    ProductName?: StringFilterList;
+    /**
+     *  The name of the company for the product that generated the finding. For control-based findings, the company is Amazon Web Services. 
+     */
+    CompanyName?: StringFilterList;
+    /**
+     *  The severity value of the finding. 
+     */
+    SeverityLabel?: StringFilterList;
+    /**
+     *  The type of resource that the finding pertains to. 
+     */
+    ResourceType?: StringFilterList;
+    /**
+     *  The identifier for the given resource type. For Amazon Web Services resources that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon Web Services resources that lack ARNs, this is the identifier as defined by the Amazon Web Service that created the resource. For non-Amazon Web Services resources, this is a unique identifier that is associated with the resource. 
+     */
+    ResourceId?: StringFilterList;
+    /**
+     *  The partition in which the resource that the finding pertains to is located. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition. 
+     */
+    ResourcePartition?: StringFilterList;
+    /**
+     *  The Amazon Web Services Region where the resource that a finding pertains to is located. 
+     */
+    ResourceRegion?: StringFilterList;
+    /**
+     *  A list of Amazon Web Services tags associated with a resource at the time the finding was processed. 
+     */
+    ResourceTags?: MapFilterList;
+    /**
+     *  Custom fields and values about the resource that a finding pertains to. 
+     */
+    ResourceDetailsOther?: MapFilterList;
+    /**
+     *  The result of a security check. This field is only used for findings generated from controls. 
+     */
+    ComplianceStatus?: StringFilterList;
+    /**
+     *  The security control ID for which a finding was generated. Security control IDs are the same across standards.
+     */
+    ComplianceSecurityControlId?: StringFilterList;
+    /**
+     * The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of the Amazon Resource Name (ARN) returned for a standard in the DescribeStandards API response.
+     */
+    ComplianceAssociatedStandardsId?: StringFilterList;
+    /**
+     *  Provides the veracity of a finding. 
+     */
+    VerificationState?: StringFilterList;
+    /**
+     *  Provides information about the status of the investigation into a finding. 
+     */
+    WorkflowStatus?: StringFilterList;
+    /**
+     *  Provides the current state of a finding. 
+     */
+    RecordState?: StringFilterList;
+    /**
+     *  The ARN for the product that generated a related finding. 
+     */
+    RelatedFindingsProductArn?: StringFilterList;
+    /**
+     *  The product-generated identifier for a related finding. 
+     */
+    RelatedFindingsId?: StringFilterList;
+    /**
+     *  The text of a user-defined note that's added to a finding. 
+     */
+    NoteText?: StringFilterList;
+    /**
+     *  The timestamp of when the note was updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z. 
+     */
+    NoteUpdatedAt?: DateFilterList;
+    /**
+     *  The principal that created a note. 
+     */
+    NoteUpdatedBy?: StringFilterList;
+    /**
+     *  A list of user-defined name and value string pairs added to a finding. 
+     */
+    UserDefinedFields?: MapFilterList;
+  }
+  export interface AutomationRulesMetadata {
+    /**
+     *  The Amazon Resource Name (ARN) for the rule. 
+     */
+    RuleArn?: NonEmptyString;
+    /**
+     *  Whether the rule is active after it is created. If this parameter is equal to ENABLED, Security Hub will apply the rule to findings and finding updates after the rule is created. To change the value of this parameter after creating a rule, use BatchUpdateAutomationRules. 
+     */
+    RuleStatus?: RuleStatus;
+    /**
+     * An integer ranging from 1 to 1000 that represents the order in which the rule action is applied to findings. Security Hub applies rules with lower values for this parameter first. 
+     */
+    RuleOrder?: RuleOrderValue;
+    /**
+     *  The name of the rule. 
+     */
+    RuleName?: NonEmptyString;
+    /**
+     *  A description of the rule. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this field is set to true for a rule, Security Hub applies the rule action to a finding that matches the rule criteria and won't evaluate other rules for the finding.&#x2028; The default value of this field is false. 
+     */
+    IsTerminal?: Boolean;
+    /**
+     *  A timestamp that indicates when the rule was created.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     *  A timestamp that indicates when the rule was most recently updated.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    UpdatedAt?: Timestamp;
+    /**
+     *  The principal that created a rule. 
+     */
+    CreatedBy?: NonEmptyString;
+  }
+  export type AutomationRulesMetadataList = AutomationRulesMetadata[];
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -10793,6 +11103,22 @@ declare namespace SecurityHub {
      */
     Type?: NonEmptyString;
   }
+  export interface BatchDeleteAutomationRulesRequest {
+    /**
+     *  A list of Amazon Resource Names (ARNs) for the rules that are to be deleted. 
+     */
+    AutomationRulesArns: AutomationRulesArnsList;
+  }
+  export interface BatchDeleteAutomationRulesResponse {
+    /**
+     *  A list of properly processed rule ARNs. 
+     */
+    ProcessedAutomationRules?: AutomationRulesArnsList;
+    /**
+     *  A list of objects containing RuleArn, ErrorCode, and ErrorMessage. This parameter tells you which automation rules the request didn't delete and why. 
+     */
+    UnprocessedAutomationRules?: UnprocessedAutomationRulesList;
+  }
   export interface BatchDisableStandardsRequest {
     /**
      * The ARNs of the standards subscriptions to disable.
@@ -10816,6 +11142,22 @@ declare namespace SecurityHub {
      * The details of the standards subscriptions that were enabled.
      */
     StandardsSubscriptions?: StandardsSubscriptions;
+  }
+  export interface BatchGetAutomationRulesRequest {
+    /**
+     *  A list of rule ARNs to get details for. 
+     */
+    AutomationRulesArns: AutomationRulesArnsList;
+  }
+  export interface BatchGetAutomationRulesResponse {
+    /**
+     *  A list of rule details for the provided rule ARNs. 
+     */
+    Rules?: AutomationRulesConfigList;
+    /**
+     *  A list of objects containing RuleArn, ErrorCode, and ErrorMessage. This parameter tells you which automation rules the request didn't retrieve and why. 
+     */
+    UnprocessedAutomationRules?: UnprocessedAutomationRulesList;
   }
   export interface BatchGetSecurityControlsRequest {
     /**
@@ -10869,6 +11211,22 @@ declare namespace SecurityHub {
      * The list of findings that failed to import.
      */
     FailedFindings?: ImportFindingsErrorList;
+  }
+  export interface BatchUpdateAutomationRulesRequest {
+    /**
+     *  An array of ARNs for the rules that are to be updated. Optionally, you can also include RuleStatus and RuleOrder. 
+     */
+    UpdateAutomationRulesRequestItems: UpdateAutomationRulesRequestItemsList;
+  }
+  export interface BatchUpdateAutomationRulesResponse {
+    /**
+     *  A list of properly processed rule ARNs. 
+     */
+    ProcessedAutomationRules?: AutomationRulesArnsList;
+    /**
+     *  A list of objects containing RuleArn, ErrorCode, and ErrorMessage. This parameter tells you which automation rules the request didn't update and why. 
+     */
+    UnprocessedAutomationRules?: UnprocessedAutomationRulesList;
   }
   export interface BatchUpdateFindingsRequest {
     /**
@@ -11115,6 +11473,46 @@ declare namespace SecurityHub {
      * The Amazon Resource Name (ARN) for the custom action target.
      */
     ActionTargetArn: NonEmptyString;
+  }
+  export interface CreateAutomationRuleRequest {
+    /**
+     *  User-defined tags that help you label the purpose of a rule. 
+     */
+    Tags?: TagMap;
+    /**
+     *  Whether the rule is active after it is created. If this parameter is equal to Enabled, Security Hub will apply the rule to findings and finding updates after the rule is created. To change the value of this parameter after creating a rule, use BatchUpdateAutomationRules. 
+     */
+    RuleStatus?: RuleStatus;
+    /**
+     * An integer ranging from 1 to 1000 that represents the order in which the rule action is applied to findings. Security Hub applies rules with lower values for this parameter first. 
+     */
+    RuleOrder: RuleOrderValue;
+    /**
+     *  The name of the rule. 
+     */
+    RuleName: NonEmptyString;
+    /**
+     *  A description of the rule. 
+     */
+    Description: NonEmptyString;
+    /**
+     * Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this field is set to true for a rule, Security Hub applies the rule action to a finding that matches the rule criteria and won't evaluate other rules for the finding. The default value of this field is false. 
+     */
+    IsTerminal?: Boolean;
+    /**
+     *  A set of ASFF finding field attributes and corresponding expected values that Security Hub uses to filter findings. If a finding matches the conditions specified in this parameter, Security Hub applies the rule action to the finding. 
+     */
+    Criteria: AutomationRulesFindingFilters;
+    /**
+     *  One or more actions to update finding fields if a finding matches the conditions specified in Criteria. 
+     */
+    Actions: ActionList;
+  }
+  export interface CreateAutomationRuleResponse {
+    /**
+     *  The Amazon Resource Name (ARN) of the automation rule that you created. 
+     */
+    RuleArn?: NonEmptyString;
   }
   export interface CreateFindingAggregatorRequest {
     /**
@@ -12051,6 +12449,26 @@ declare namespace SecurityHub {
     Value?: NonEmptyString;
   }
   export type KeywordFilterList = KeywordFilter[];
+  export interface ListAutomationRulesRequest {
+    /**
+     *  A token to specify where to start paginating the response. This is the NextToken from a previously truncated response. On your first call to the ListAutomationRules API, set the value of this parameter to NULL. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  The maximum number of rules to return in the response. This currently ranges from 1 to 100. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListAutomationRulesResponse {
+    /**
+     *  Metadata for rules in the calling account. The response includes rules with a RuleStatus of ENABLED and DISABLED. 
+     */
+    AutomationRulesMetadata?: AutomationRulesMetadataList;
+    /**
+     *  A pagination token for the response. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListEnabledProductsForImportRequest {
     /**
      * The token that is required for pagination. On your first call to the ListEnabledProductsForImport operation, set the value of this parameter to NULL. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.
@@ -13410,6 +13828,8 @@ declare namespace SecurityHub {
      */
     Definition?: NonEmptyStringList;
   }
+  export type RuleOrderValue = number;
+  export type RuleStatus = "ENABLED"|"DISABLED"|string;
   export interface SecurityControl {
     /**
      *  The unique identifier of a security control across standards. Values for this field typically consist of an Amazon Web Service name and a number, such as APIGateway.3. 
@@ -13935,6 +14355,21 @@ declare namespace SecurityHub {
   export type ThreatList = Threat[];
   export type Timestamp = Date;
   export type TypeList = NonEmptyString[];
+  export interface UnprocessedAutomationRule {
+    /**
+     *  The Amazon Resource Name (ARN) for the unprocessed automation rule. 
+     */
+    RuleArn?: NonEmptyString;
+    /**
+     *  The error code associated with the unprocessed automation rule. 
+     */
+    ErrorCode?: Integer;
+    /**
+     *  An error message describing why a request didn't process a specific rule. 
+     */
+    ErrorMessage?: NonEmptyString;
+  }
+  export type UnprocessedAutomationRulesList = UnprocessedAutomationRule[];
   export type UnprocessedErrorCode = "INVALID_INPUT"|"ACCESS_DENIED"|"NOT_FOUND"|"LIMIT_EXCEEDED"|string;
   export interface UnprocessedSecurityControl {
     /**
@@ -14009,6 +14444,41 @@ declare namespace SecurityHub {
   }
   export interface UpdateActionTargetResponse {
   }
+  export interface UpdateAutomationRulesRequestItem {
+    /**
+     *  The Amazon Resource Name (ARN) for the rule. 
+     */
+    RuleArn: NonEmptyString;
+    /**
+     *  Whether the rule is active after it is created. If this parameter is equal to ENABLED, Security Hub will apply the rule to findings and finding updates after the rule is created. To change the value of this parameter after creating a rule, use BatchUpdateAutomationRules. 
+     */
+    RuleStatus?: RuleStatus;
+    /**
+     *  An integer ranging from 1 to 1000 that represents the order in which the rule action is applied to findings. Security Hub applies rules with lower values for this parameter first. 
+     */
+    RuleOrder?: RuleOrderValue;
+    /**
+     *  A description of the rule. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The name of the rule. 
+     */
+    RuleName?: NonEmptyString;
+    /**
+     * Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this field is set to true for a rule, Security Hub applies the rule action to a finding that matches the rule criteria and won't evaluate other rules for the finding.&#x2028; The default value of this field is false. 
+     */
+    IsTerminal?: Boolean;
+    /**
+     *  A set of ASFF finding field attributes and corresponding expected values that Security Hub uses to filter findings. If a finding matches the conditions specified in this parameter, Security Hub applies the rule action to the finding. 
+     */
+    Criteria?: AutomationRulesFindingFilters;
+    /**
+     *  One or more actions to update finding fields if a finding matches the conditions specified in Criteria. 
+     */
+    Actions?: ActionList;
+  }
+  export type UpdateAutomationRulesRequestItemsList = UpdateAutomationRulesRequestItem[];
   export interface UpdateFindingAggregatorRequest {
     /**
      * The ARN of the finding aggregator. To obtain the ARN, use ListFindingAggregators.

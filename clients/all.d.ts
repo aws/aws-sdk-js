@@ -346,3 +346,5 @@ export import OSIS = require('./osis');
 export import MediaPackageV2 = require('./mediapackagev2');
 export import PaymentCryptography = require('./paymentcryptography');
 export import PaymentCryptographyData = require('./paymentcryptographydata');
+export import CodeGuruSecurity = require('./codegurusecurity');
+export import VerifiedPermissions = require('./verifiedpermissions');
