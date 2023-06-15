@@ -60,11 +60,11 @@ declare class Location extends Service {
    */
   batchPutGeofence(callback?: (err: AWSError, data: Location.Types.BatchPutGeofenceResponse) => void): Request<Location.Types.BatchPutGeofenceResponse, AWSError>;
   /**
-   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the default value { "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate. 
+   * Uploads position update data for one or more devices to a tracker resource (up to 10 devices per batch). Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the default value { "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate. 
    */
   batchUpdateDevicePosition(params: Location.Types.BatchUpdateDevicePositionRequest, callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   * Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the default value { "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate. 
+   * Uploads position update data for one or more devices to a tracker resource (up to 10 devices per batch). Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.  Position updates are handled based on the PositionFiltering property of the tracker. When PositionFiltering is set to TimeBased, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID. When PositionFiltering is set to DistanceBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft). When PositionFiltering is set to AccuracyBased filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the default value { "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate. 
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
@@ -673,6 +673,10 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
+     * Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
+     */
+    GeofenceProperties?: PropertyMap;
+    /**
      * Contains the details of the position of the geofence. Can be either a polygon or a circle. Including both will return a validation error.  Each  geofence polygon can have a maximum of 1,000 vertices. 
      */
     Geometry: GeofenceGeometry;
@@ -723,7 +727,7 @@ declare namespace Location {
      */
     TrackerName: ResourceName;
     /**
-     * Contains the position update details for each device.
+     * Contains the position update details for each device, up to 10 devices.
      */
     Updates: BatchUpdateDevicePositionRequestUpdatesList;
   }
@@ -1559,6 +1563,7 @@ declare namespace Location {
   }
   export type DistanceUnit = "Kilometers"|"Miles"|string;
   export type Double = number;
+  export type FilterPlaceCategoryList = PlaceCategory[];
   export type GeoArn = string;
   export interface GeofenceGeometry {
     /**
@@ -1662,6 +1667,10 @@ declare namespace Location {
      * The geofence identifier.
      */
     GeofenceId: Id;
+    /**
+     * Contains additional user-defined properties stored with the geofence. An array of key-value pairs.
+     */
+    GeofenceProperties?: PropertyMap;
     /**
      * Contains the geofence geometry details describing a polygon or a circle.
      */
@@ -1968,6 +1977,10 @@ declare namespace Location {
      * The geofence identifier.
      */
     GeofenceId: Id;
+    /**
+     * Contains additional user-defined properties stored with the geofence. An array of key-value pairs.
+     */
+    GeofenceProperties?: PropertyMap;
     /**
      * Contains the geofence geometry details describing a polygon or a circle.
      */
@@ -2308,6 +2321,10 @@ declare namespace Location {
      */
     AddressNumber?: String;
     /**
+     * The Amazon Location categories that describe this Place. For more information about using categories, including a list of Amazon Location categories, see Categories and filtering, in the Amazon Location Service Developer Guide.
+     */
+    Categories?: PlaceCategoryList;
+    /**
      * A country/region specified using ISO 3166 3-digit country/region code. For example, CAN.
      */
     Country?: String;
@@ -2345,18 +2362,24 @@ declare namespace Location {
      */
     SubRegion?: String;
     /**
-     * The time zone in which the Place is located. Returned only when using HERE as the selected partner.
+     * Categories from the data provider that describe the Place that are not mapped to any Amazon Location categories.
+     */
+    SupplementalCategories?: PlaceSupplementalCategoryList;
+    /**
+     * The time zone in which the Place is located. Returned only when using HERE or Grab as the selected partner.
      */
     TimeZone?: TimeZone;
     /**
-     * For addresses with multiple units, the unit identifier. Can include numbers and letters, for example 3B or Unit 123.  Returned only for a place index that uses Esri as a data provider. Is not returned for SearchPlaceIndexForPosition. 
+     * For addresses with multiple units, the unit identifier. Can include numbers and letters, for example 3B or Unit 123.  Returned only for a place index that uses Esri or Grab as a data provider. Is not returned for SearchPlaceIndexForPosition. 
      */
     UnitNumber?: String;
     /**
-     * For addresses with a UnitNumber, the type of unit. For example, Apartment.
+     * For addresses with a UnitNumber, the type of unit. For example, Apartment.  Returned only for a place index that uses Esri as a data provider. 
      */
     UnitType?: String;
   }
+  export type PlaceCategory = string;
+  export type PlaceCategoryList = PlaceCategory[];
   export interface PlaceGeometry {
     /**
      * A single point geometry specifies a location for a Place using WGS 84 coordinates:    x — Specifies the x coordinate or longitude.     y — Specifies the y coordinate or latitude.   
@@ -2365,6 +2388,8 @@ declare namespace Location {
   }
   export type PlaceId = string;
   export type PlaceIndexSearchResultLimit = number;
+  export type PlaceSupplementalCategory = string;
+  export type PlaceSupplementalCategoryList = PlaceSupplementalCategory[];
   export type Position = Double[];
   export type PositionFiltering = "TimeBased"|"DistanceBased"|"AccuracyBased"|string;
   export interface PositionalAccuracy {
@@ -2387,6 +2412,10 @@ declare namespace Location {
      * An identifier for the geofence. For example, ExampleGeofence-1.
      */
     GeofenceId: Id;
+    /**
+     * Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
+     */
+    GeofenceProperties?: PropertyMap;
     /**
      * Contains the details to specify the position of the geofence. Can be either a polygon or a circle. Including both will return a validation error.  Each  geofence polygon can have a maximum of 1,000 vertices. 
      */
@@ -2456,9 +2485,17 @@ declare namespace Location {
   export type SearchForPositionResultList = SearchForPositionResult[];
   export interface SearchForSuggestionsResult {
     /**
-     * The unique identifier of the place. You can use this with the GetPlace operation to find the place again later.  For SearchPlaceIndexForSuggestions operations, the PlaceId is returned by place indexes that use Esri, Grab, or HERE as data providers. 
+     * The Amazon Location categories that describe the Place. For more information about using categories, including a list of Amazon Location categories, see Categories and filtering, in the Amazon Location Service Developer Guide.
+     */
+    Categories?: PlaceCategoryList;
+    /**
+     * The unique identifier of the Place. You can use this with the GetPlace operation to find the place again later, or to get full information for the Place. The GetPlace request must use the same PlaceIndex resource as the SearchPlaceIndexForSuggestions that generated the Place ID.  For SearchPlaceIndexForSuggestions operations, the PlaceId is returned by place indexes that use Esri, Grab, or HERE as data providers. 
      */
     PlaceId?: PlaceId;
+    /**
+     * Categories from the data provider that describe the Place that are not mapped to any Amazon Location categories.
+     */
+    SupplementalCategories?: PlaceSupplementalCategoryList;
     /**
      * The text of the place suggestion, typically formatted as an address string.
      */
@@ -2542,6 +2579,10 @@ declare namespace Location {
      */
     FilterBBox?: BoundingBox;
     /**
+     * A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match any of the categories listed. For more information about using categories, including a list of Amazon Location categories, see Categories and filtering, in the Amazon Location Service Developer Guide.
+     */
+    FilterCategories?: FilterPlaceCategoryList;
+    /**
      * An optional parameter that limits the search results by returning only suggestions within the provided list of countries.   Use the ISO 3166 3-digit country code. For example, Australia uses three upper-case characters: AUS.  
      */
     FilterCountries?: CountryCodeList;
@@ -2588,6 +2629,10 @@ declare namespace Location {
      */
     FilterBBox?: BoundingBox;
     /**
+     * The optional category filter specified in the request.
+     */
+    FilterCategories?: FilterPlaceCategoryList;
+    /**
      * Contains the optional country filter specified in the request.
      */
     FilterCountries?: CountryCodeList;
@@ -2613,6 +2658,10 @@ declare namespace Location {
      * An optional parameter that limits the search results by returning only places that are within the provided bounding box.  If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box. For example, [-12.7935, -37.4835, -12.0684, -36.9542] represents a bounding box where the southwest corner has longitude -12.7935 and latitude -37.4835, and the northeast corner has longitude -12.0684 and latitude -36.9542.   FilterBBox and BiasPosition are mutually exclusive. Specifying both options results in an error.  
      */
     FilterBBox?: BoundingBox;
+    /**
+     * A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match any of the categories listed. For more information about using categories, including a list of Amazon Location categories, see Categories and filtering, in the Amazon Location Service Developer Guide.
+     */
+    FilterCategories?: FilterPlaceCategoryList;
     /**
      * An optional parameter that limits the search results by returning only places that are in a specified list of countries.   Valid values include ISO 3166 3-digit country codes. For example, Australia uses three upper-case characters: AUS.  
      */
@@ -2658,6 +2707,10 @@ declare namespace Location {
      * Contains the coordinates for the optional bounding box specified in the request.
      */
     FilterBBox?: BoundingBox;
+    /**
+     * The optional category filter specified in the request.
+     */
+    FilterCategories?: FilterPlaceCategoryList;
     /**
      * Contains the optional country filter specified in the request.
      */

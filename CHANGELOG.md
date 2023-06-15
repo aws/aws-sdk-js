@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1397.0-->
+<!--LATEST=2.1398.0-->
 <!--ENTRYINSERT-->
+
+## 2.1398.0
+* feature: AuditManager: This release introduces 2 Audit Manager features: CSV exports and new manual evidence options. You can now export your evidence finder results in CSV format. In addition, you can now add manual evidence to a control by entering free-form text or uploading a file from your browser.
+* feature: Location: Amazon Location Service adds categories to places, including filtering on those categories in searches. Also, you can now add metadata properties to your geofences.
 
 ## 2.1397.0
 * feature: CloudTrail: This feature allows users to view dashboards for CloudTrail Lake event data stores.

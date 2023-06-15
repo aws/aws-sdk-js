@@ -52,11 +52,11 @@ declare class AuditManager extends Service {
    */
   batchDisassociateAssessmentReportEvidence(callback?: (err: AWSError, data: AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse) => void): Request<AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse, AWSError>;
   /**
-   * Uploads one or more pieces of evidence to a control in an Audit Manager assessment. You can upload manual evidence from any Amazon Simple Storage Service (Amazon S3) bucket by specifying the S3 URI of the evidence.  You must upload manual evidence to your S3 bucket before you can upload it to your assessment. For instructions, see CreateBucket and PutObject in the Amazon Simple Storage Service API Reference.  The following restrictions apply to this action:   Maximum size of an individual evidence file: 100 MB   Number of daily manual evidence uploads per control: 100   Supported file formats: See Supported file types for manual evidence in the Audit Manager User Guide    For more information about Audit Manager service restrictions, see Quotas and restrictions for Audit Manager.
+   * Adds one or more pieces of evidence to a control in an Audit Manager assessment.  You can import manual evidence from any S3 bucket by specifying the S3 URI of the object. You can also upload a file from your browser, or enter plain text in response to a risk assessment question.  The following restrictions apply to this action:    manualEvidence can be only one of the following: evidenceFileName, s3ResourcePath, or textResponse    Maximum size of an individual evidence file: 100 MB   Number of daily manual evidence uploads per control: 100   Supported file formats: See Supported file types for manual evidence in the Audit Manager User Guide    For more information about Audit Manager service restrictions, see Quotas and restrictions for Audit Manager.
    */
   batchImportEvidenceToAssessmentControl(params: AuditManager.Types.BatchImportEvidenceToAssessmentControlRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse) => void): Request<AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse, AWSError>;
   /**
-   * Uploads one or more pieces of evidence to a control in an Audit Manager assessment. You can upload manual evidence from any Amazon Simple Storage Service (Amazon S3) bucket by specifying the S3 URI of the evidence.  You must upload manual evidence to your S3 bucket before you can upload it to your assessment. For instructions, see CreateBucket and PutObject in the Amazon Simple Storage Service API Reference.  The following restrictions apply to this action:   Maximum size of an individual evidence file: 100 MB   Number of daily manual evidence uploads per control: 100   Supported file formats: See Supported file types for manual evidence in the Audit Manager User Guide    For more information about Audit Manager service restrictions, see Quotas and restrictions for Audit Manager.
+   * Adds one or more pieces of evidence to a control in an Audit Manager assessment.  You can import manual evidence from any S3 bucket by specifying the S3 URI of the object. You can also upload a file from your browser, or enter plain text in response to a risk assessment question.  The following restrictions apply to this action:    manualEvidence can be only one of the following: evidenceFileName, s3ResourcePath, or textResponse    Maximum size of an individual evidence file: 100 MB   Number of daily manual evidence uploads per control: 100   Supported file formats: See Supported file types for manual evidence in the Audit Manager User Guide    For more information about Audit Manager service restrictions, see Quotas and restrictions for Audit Manager.
    */
   batchImportEvidenceToAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse) => void): Request<AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class AuditManager extends Service {
    */
   deleteAssessmentReport(callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentReportResponse) => void): Request<AuditManager.Types.DeleteAssessmentReportResponse, AWSError>;
   /**
-   *  Deletes a custom control in Audit Manager. 
+   *  Deletes a custom control in Audit Manager.   When you invoke this operation, the custom control is deleted from any frameworks or assessments that it’s currently part of. As a result, Audit Manager will stop collecting evidence for that custom control in all of your assessments. This includes assessments that you previously created before you deleted the custom control. 
    */
   deleteControl(params: AuditManager.Types.DeleteControlRequest, callback?: (err: AWSError, data: AuditManager.Types.DeleteControlResponse) => void): Request<AuditManager.Types.DeleteControlResponse, AWSError>;
   /**
-   *  Deletes a custom control in Audit Manager. 
+   *  Deletes a custom control in Audit Manager.   When you invoke this operation, the custom control is deleted from any frameworks or assessments that it’s currently part of. As a result, Audit Manager will stop collecting evidence for that custom control in all of your assessments. This includes assessments that you previously created before you deleted the custom control. 
    */
   deleteControl(callback?: (err: AWSError, data: AuditManager.Types.DeleteControlResponse) => void): Request<AuditManager.Types.DeleteControlResponse, AWSError>;
   /**
@@ -156,99 +156,107 @@ declare class AuditManager extends Service {
    */
   disassociateAssessmentReportEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.DisassociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.DisassociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns the registration status of an account in Audit Manager. 
+   *  Gets the registration status of an account in Audit Manager. 
    */
   getAccountStatus(params: AuditManager.Types.GetAccountStatusRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAccountStatusResponse) => void): Request<AuditManager.Types.GetAccountStatusResponse, AWSError>;
   /**
-   *  Returns the registration status of an account in Audit Manager. 
+   *  Gets the registration status of an account in Audit Manager. 
    */
   getAccountStatus(callback?: (err: AWSError, data: AuditManager.Types.GetAccountStatusResponse) => void): Request<AuditManager.Types.GetAccountStatusResponse, AWSError>;
   /**
-   * Returns an assessment from Audit Manager. 
+   * Gets information about a specified assessment. 
    */
   getAssessment(params: AuditManager.Types.GetAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentResponse) => void): Request<AuditManager.Types.GetAssessmentResponse, AWSError>;
   /**
-   * Returns an assessment from Audit Manager. 
+   * Gets information about a specified assessment. 
    */
   getAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentResponse) => void): Request<AuditManager.Types.GetAssessmentResponse, AWSError>;
   /**
-   * Returns a framework from Audit Manager. 
+   * Gets information about a specified framework.
    */
   getAssessmentFramework(params: AuditManager.Types.GetAssessmentFrameworkRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentFrameworkResponse) => void): Request<AuditManager.Types.GetAssessmentFrameworkResponse, AWSError>;
   /**
-   * Returns a framework from Audit Manager. 
+   * Gets information about a specified framework.
    */
   getAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentFrameworkResponse) => void): Request<AuditManager.Types.GetAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Returns the URL of an assessment report in Audit Manager. 
+   *  Gets the URL of an assessment report in Audit Manager. 
    */
   getAssessmentReportUrl(params: AuditManager.Types.GetAssessmentReportUrlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentReportUrlResponse) => void): Request<AuditManager.Types.GetAssessmentReportUrlResponse, AWSError>;
   /**
-   *  Returns the URL of an assessment report in Audit Manager. 
+   *  Gets the URL of an assessment report in Audit Manager. 
    */
   getAssessmentReportUrl(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentReportUrlResponse) => void): Request<AuditManager.Types.GetAssessmentReportUrlResponse, AWSError>;
   /**
-   *  Returns a list of changelogs from Audit Manager. 
+   *  Gets a list of changelogs from Audit Manager. 
    */
   getChangeLogs(params: AuditManager.Types.GetChangeLogsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetChangeLogsResponse) => void): Request<AuditManager.Types.GetChangeLogsResponse, AWSError>;
   /**
-   *  Returns a list of changelogs from Audit Manager. 
+   *  Gets a list of changelogs from Audit Manager. 
    */
   getChangeLogs(callback?: (err: AWSError, data: AuditManager.Types.GetChangeLogsResponse) => void): Request<AuditManager.Types.GetChangeLogsResponse, AWSError>;
   /**
-   *  Returns a control from Audit Manager. 
+   *  Gets information about a specified control.
    */
   getControl(params: AuditManager.Types.GetControlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetControlResponse) => void): Request<AuditManager.Types.GetControlResponse, AWSError>;
   /**
-   *  Returns a control from Audit Manager. 
+   *  Gets information about a specified control.
    */
   getControl(callback?: (err: AWSError, data: AuditManager.Types.GetControlResponse) => void): Request<AuditManager.Types.GetControlResponse, AWSError>;
   /**
-   *  Returns a list of delegations from an audit owner to a delegate. 
+   *  Gets a list of delegations from an audit owner to a delegate. 
    */
   getDelegations(params: AuditManager.Types.GetDelegationsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetDelegationsResponse) => void): Request<AuditManager.Types.GetDelegationsResponse, AWSError>;
   /**
-   *  Returns a list of delegations from an audit owner to a delegate. 
+   *  Gets a list of delegations from an audit owner to a delegate. 
    */
   getDelegations(callback?: (err: AWSError, data: AuditManager.Types.GetDelegationsResponse) => void): Request<AuditManager.Types.GetDelegationsResponse, AWSError>;
   /**
-   *  Returns evidence from Audit Manager. 
+   *  Gets information about a specified evidence item.
    */
   getEvidence(params: AuditManager.Types.GetEvidenceRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceResponse) => void): Request<AuditManager.Types.GetEvidenceResponse, AWSError>;
   /**
-   *  Returns evidence from Audit Manager. 
+   *  Gets information about a specified evidence item.
    */
   getEvidence(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceResponse) => void): Request<AuditManager.Types.GetEvidenceResponse, AWSError>;
   /**
-   *  Returns all evidence from a specified evidence folder in Audit Manager. 
+   *  Gets all evidence from a specified evidence folder in Audit Manager. 
    */
   getEvidenceByEvidenceFolder(params: AuditManager.Types.GetEvidenceByEvidenceFolderRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceByEvidenceFolderResponse) => void): Request<AuditManager.Types.GetEvidenceByEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns all evidence from a specified evidence folder in Audit Manager. 
+   *  Gets all evidence from a specified evidence folder in Audit Manager. 
    */
   getEvidenceByEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceByEvidenceFolderResponse) => void): Request<AuditManager.Types.GetEvidenceByEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns an evidence folder from the specified assessment in Audit Manager. 
+   * Creates a presigned Amazon S3 URL that can be used to upload a file as manual evidence. For instructions on how to use this operation, see Upload a file from your browser  in the Audit Manager User Guide. The following restrictions apply to this operation:   Maximum size of an individual evidence file: 100 MB   Number of daily manual evidence uploads per control: 100   Supported file formats: See Supported file types for manual evidence in the Audit Manager User Guide    For more information about Audit Manager service restrictions, see Quotas and restrictions for Audit Manager.
+   */
+  getEvidenceFileUploadUrl(params: AuditManager.Types.GetEvidenceFileUploadUrlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFileUploadUrlResponse) => void): Request<AuditManager.Types.GetEvidenceFileUploadUrlResponse, AWSError>;
+  /**
+   * Creates a presigned Amazon S3 URL that can be used to upload a file as manual evidence. For instructions on how to use this operation, see Upload a file from your browser  in the Audit Manager User Guide. The following restrictions apply to this operation:   Maximum size of an individual evidence file: 100 MB   Number of daily manual evidence uploads per control: 100   Supported file formats: See Supported file types for manual evidence in the Audit Manager User Guide    For more information about Audit Manager service restrictions, see Quotas and restrictions for Audit Manager.
+   */
+  getEvidenceFileUploadUrl(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFileUploadUrlResponse) => void): Request<AuditManager.Types.GetEvidenceFileUploadUrlResponse, AWSError>;
+  /**
+   *  Gets an evidence folder from a specified assessment in Audit Manager. 
    */
   getEvidenceFolder(params: AuditManager.Types.GetEvidenceFolderRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFolderResponse) => void): Request<AuditManager.Types.GetEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns an evidence folder from the specified assessment in Audit Manager. 
+   *  Gets an evidence folder from a specified assessment in Audit Manager. 
    */
   getEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFolderResponse) => void): Request<AuditManager.Types.GetEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns the evidence folders from a specified assessment in Audit Manager. 
+   *  Gets the evidence folders from a specified assessment in Audit Manager. 
    */
   getEvidenceFoldersByAssessment(params: AuditManager.Types.GetEvidenceFoldersByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentResponse, AWSError>;
   /**
-   *  Returns the evidence folders from a specified assessment in Audit Manager. 
+   *  Gets the evidence folders from a specified assessment in Audit Manager. 
    */
   getEvidenceFoldersByAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentResponse, AWSError>;
   /**
-   *  Returns a list of evidence folders that are associated with a specified control in an Audit Manager assessment. 
+   *  Gets a list of evidence folders that are associated with a specified control in an Audit Manager assessment. 
    */
   getEvidenceFoldersByAssessmentControl(params: AuditManager.Types.GetEvidenceFoldersByAssessmentControlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
   /**
-   *  Returns a list of evidence folders that are associated with a specified control in an Audit Manager assessment. 
+   *  Gets a list of evidence folders that are associated with a specified control in an Audit Manager assessment. 
    */
   getEvidenceFoldersByAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
   /**
@@ -268,27 +276,27 @@ declare class AuditManager extends Service {
    */
   getInsightsByAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetInsightsByAssessmentResponse) => void): Request<AuditManager.Types.GetInsightsByAssessmentResponse, AWSError>;
   /**
-   *  Returns the name of the delegated Amazon Web Services administrator account for the organization. 
+   *  Gets the name of the delegated Amazon Web Services administrator account for a specified organization. 
    */
   getOrganizationAdminAccount(params: AuditManager.Types.GetOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.GetOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.GetOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Returns the name of the delegated Amazon Web Services administrator account for the organization. 
+   *  Gets the name of the delegated Amazon Web Services administrator account for a specified organization. 
    */
   getOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.GetOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.GetOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Returns a list of all of the Amazon Web Services that you can choose to include in your assessment. When you create an assessment, specify which of these services you want to include to narrow the assessment's scope.
+   * Gets a list of all of the Amazon Web Services that you can choose to include in your assessment. When you create an assessment, specify which of these services you want to include to narrow the assessment's scope.
    */
   getServicesInScope(params: AuditManager.Types.GetServicesInScopeRequest, callback?: (err: AWSError, data: AuditManager.Types.GetServicesInScopeResponse) => void): Request<AuditManager.Types.GetServicesInScopeResponse, AWSError>;
   /**
-   * Returns a list of all of the Amazon Web Services that you can choose to include in your assessment. When you create an assessment, specify which of these services you want to include to narrow the assessment's scope.
+   * Gets a list of all of the Amazon Web Services that you can choose to include in your assessment. When you create an assessment, specify which of these services you want to include to narrow the assessment's scope.
    */
   getServicesInScope(callback?: (err: AWSError, data: AuditManager.Types.GetServicesInScopeResponse) => void): Request<AuditManager.Types.GetServicesInScopeResponse, AWSError>;
   /**
-   *  Returns the settings for the specified Amazon Web Services account. 
+   *  Gets the settings for a specified Amazon Web Services account. 
    */
   getSettings(params: AuditManager.Types.GetSettingsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
   /**
-   *  Returns the settings for the specified Amazon Web Services account. 
+   *  Gets the settings for a specified Amazon Web Services account. 
    */
   getSettings(callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
   /**
@@ -1006,7 +1014,7 @@ declare namespace AuditManager {
      */
     destinationType?: AssessmentReportDestinationType;
     /**
-     *  The destination of the assessment report. 
+     *  The destination bucket where Audit Manager stores assessment reports. 
      */
     destination?: S3Url;
   }
@@ -1214,7 +1222,7 @@ declare namespace AuditManager {
      */
     id?: UUID;
     /**
-     *  The type of control, such as a custom control or a standard control. 
+     *  Specifies whether the control is a standard control or a custom control.
      */
     type?: ControlType;
     /**
@@ -1375,7 +1383,7 @@ declare namespace AuditManager {
     sourceType?: SourceType;
     sourceKeyword?: SourceKeyword;
     /**
-     *  The frequency of evidence collection for the control mapping source. 
+     * Specifies how often evidence is collected from the control mapping source. 
      */
     sourceFrequency?: SourceFrequency;
     /**
@@ -1556,7 +1564,7 @@ declare namespace AuditManager {
     sourceType?: SourceType;
     sourceKeyword?: SourceKeyword;
     /**
-     *  The frequency of evidence collection for the control mapping source. 
+     * Specifies how often evidence is collected from the control mapping source. 
      */
     sourceFrequency?: SourceFrequency;
     /**
@@ -1621,6 +1629,16 @@ declare namespace AuditManager {
   }
   export type CreateDelegationRequests = CreateDelegationRequest[];
   export type CreatedBy = string;
+  export interface DefaultExportDestination {
+    /**
+     * The destination type, such as Amazon S3.
+     */
+    destinationType?: ExportDestinationType;
+    /**
+     * The destination bucket where Audit Manager stores exported files.
+     */
+    destination?: S3Url;
+  }
   export interface Delegation {
     /**
      *  The unique identifier for the delegation. 
@@ -1891,6 +1909,7 @@ declare namespace AuditManager {
   }
   export type EvidenceList = Evidence[];
   export type EvidenceSources = NonEmptyString[];
+  export type ExportDestinationType = "S3"|string;
   export type Filename = string;
   export interface Framework {
     /**
@@ -1906,11 +1925,11 @@ declare namespace AuditManager {
      */
     name?: FrameworkName;
     /**
-     *  The framework type, such as a custom framework or a standard framework. 
+     *  Specifies whether the framework is a standard framework or a custom framework.
      */
     type?: FrameworkType;
     /**
-     *  The compliance type that the new custom framework supports, such as CIS or HIPAA. 
+     *  The compliance type that the framework supports, such as CIS or HIPAA. 
      */
     complianceType?: ComplianceType;
     /**
@@ -1922,7 +1941,7 @@ declare namespace AuditManager {
      */
     logo?: Filename;
     /**
-     *  The sources that Audit Manager collects evidence from for the control. 
+     *  The control data sources where Audit Manager collects evidence from.
      */
     controlSources?: ControlSources;
     /**
@@ -2056,7 +2075,7 @@ declare namespace AuditManager {
   }
   export interface GetControlResponse {
     /**
-     *  The name of the control that the GetControl API returned. 
+     *  The details of the control that the GetControl API returned. 
      */
     control?: Control;
   }
@@ -2111,6 +2130,22 @@ declare namespace AuditManager {
      *  The pagination token that's used to fetch the next set of results. 
      */
     nextToken?: Token;
+  }
+  export interface GetEvidenceFileUploadUrlRequest {
+    /**
+     * The file that you want to upload. For a list of supported file formats, see Supported file types for manual evidence in the Audit Manager User Guide.
+     */
+    fileName: ManualEvidenceLocalFileName;
+  }
+  export interface GetEvidenceFileUploadUrlResponse {
+    /**
+     * The name of the uploaded manual evidence file that the presigned URL was generated for.
+     */
+    evidenceFileName?: NonEmptyString;
+    /**
+     * The presigned URL that was generated.
+     */
+    uploadUrl?: NonEmptyString;
   }
   export interface GetEvidenceFolderRequest {
     /**
@@ -2323,7 +2358,7 @@ declare namespace AuditManager {
     lastUpdated?: Timestamp;
   }
   export type Integer = number;
-  export type KeywordInputType = "SELECT_FROM_LIST"|string;
+  export type KeywordInputType = "SELECT_FROM_LIST"|"UPLOAD_FILE"|"INPUT_TEXT"|string;
   export type KeywordValue = string;
   export type Keywords = KeywordValue[];
   export type KmsKey = string;
@@ -2396,7 +2431,7 @@ declare namespace AuditManager {
   }
   export interface ListAssessmentFrameworksResponse {
     /**
-     *  The list of metadata objects for the framework. 
+     *  A list of metadata that the ListAssessmentFrameworks API returns for each framework.
      */
     frameworkMetadataList?: FrameworkMetadataList;
     /**
@@ -2441,7 +2476,7 @@ declare namespace AuditManager {
   }
   export interface ListAssessmentsResponse {
     /**
-     *  The metadata that's associated with the assessment. 
+     * The metadata that the ListAssessments API returns for each assessment.
      */
     assessmentMetadata?: ListAssessmentMetadata;
     /**
@@ -2533,7 +2568,7 @@ declare namespace AuditManager {
   }
   export interface ListControlsResponse {
     /**
-     *  The list of control metadata objects that the ListControls API returned. 
+     *  A list of metadata that the ListControls API returns for each control.
      */
     controlMetadataList?: ControlMetadataList;
     /**
@@ -2599,11 +2634,21 @@ declare namespace AuditManager {
   }
   export interface ManualEvidence {
     /**
-     *  The Amazon S3 URL that points to a manual evidence object. 
+     * The S3 URL of the object that's imported as manual evidence. 
      */
     s3ResourcePath?: S3Url;
+    /**
+     * The plain text response that's entered and saved as manual evidence.
+     */
+    textResponse?: ManualEvidenceTextResponse;
+    /**
+     * The name of the file that's uploaded as manual evidence. This name is populated using the evidenceFileName value from the  GetEvidenceFileUploadUrl  API response.
+     */
+    evidenceFileName?: ManualEvidenceLocalFileName;
   }
   export type ManualEvidenceList = ManualEvidence[];
+  export type ManualEvidenceLocalFileName = string;
+  export type ManualEvidenceTextResponse = string;
   export type MaxResults = number;
   export type NonEmptyString = string;
   export interface Notification {
@@ -2735,7 +2780,7 @@ declare namespace AuditManager {
     category?: NonEmptyString;
   }
   export type ServiceMetadataList = ServiceMetadata[];
-  export type SettingAttribute = "ALL"|"IS_AWS_ORG_ENABLED"|"SNS_TOPIC"|"DEFAULT_ASSESSMENT_REPORTS_DESTINATION"|"DEFAULT_PROCESS_OWNERS"|"EVIDENCE_FINDER_ENABLEMENT"|"DEREGISTRATION_POLICY"|string;
+  export type SettingAttribute = "ALL"|"IS_AWS_ORG_ENABLED"|"SNS_TOPIC"|"DEFAULT_ASSESSMENT_REPORTS_DESTINATION"|"DEFAULT_PROCESS_OWNERS"|"EVIDENCE_FINDER_ENABLEMENT"|"DEREGISTRATION_POLICY"|"DEFAULT_EXPORT_DESTINATION"|string;
   export interface Settings {
     /**
      *  Specifies whether Organizations is enabled. 
@@ -2746,7 +2791,7 @@ declare namespace AuditManager {
      */
     snsTopic?: SNSTopic;
     /**
-     *  The default storage destination for assessment reports. 
+     * The default S3 destination bucket for storing assessment reports.
      */
     defaultAssessmentReportsDestination?: AssessmentReportsDestination;
     /**
@@ -2765,6 +2810,10 @@ declare namespace AuditManager {
      * The deregistration policy for your Audit Manager data. You can use this attribute to determine how your data is handled when you deregister Audit Manager.
      */
     deregistrationPolicy?: DeregistrationPolicy;
+    /**
+     * The default S3 destination bucket for storing evidence finder exports.
+     */
+    defaultExportDestination?: DefaultExportDestination;
   }
   export type ShareRequestAction = "ACCEPT"|"DECLINE"|"REVOKE"|string;
   export type ShareRequestComment = string;
@@ -2775,11 +2824,11 @@ declare namespace AuditManager {
   export type SourceFrequency = "DAILY"|"WEEKLY"|"MONTHLY"|string;
   export interface SourceKeyword {
     /**
-     *  The input method for the keyword. 
+     *  The input method for the keyword.     SELECT_FROM_LIST is used when mapping a data source for automated evidence.   When keywordInputType is SELECT_FROM_LIST, a keyword must be selected to collect automated evidence. For example, this keyword can be a CloudTrail event name, a rule name for Config, a Security Hub control, or the name of an Amazon Web Services API call.      UPLOAD_FILE and INPUT_TEXT are only used when mapping a data source for manual evidence.   When keywordInputType is UPLOAD_FILE, a file must be uploaded as manual evidence.   When keywordInputType is INPUT_TEXT, text must be entered as manual evidence.    
      */
     keywordInputType?: KeywordInputType;
     /**
-     *  The value of the keyword that's used when mapping a control data source. For example, this can be a CloudTrail event name, a rule name for Config, a Security Hub control, or the name of an Amazon Web Services API call.  If you’re mapping a data source to a rule in Config, the keywordValue that you specify depends on the type of rule:   For managed rules, you can use the rule identifier as the keywordValue. You can find the rule identifier from the list of Config managed rules.   Managed rule name: s3-bucket-acl-prohibited   keywordValue: S3_BUCKET_ACL_PROHIBITED      For custom rules, you form the keywordValue by adding the Custom_ prefix to the rule name. This prefix distinguishes the rule from a managed rule.   Custom rule name: my-custom-config-rule  keywordValue: Custom_my-custom-config-rule      For service-linked rules, you form the keywordValue by adding the Custom_ prefix to the rule name. In addition, you remove the suffix ID that appears at the end of the rule name.   Service-linked rule name: CustomRuleForAccount-conformance-pack-szsm1uv0w  keywordValue: Custom_CustomRuleForAccount-conformance-pack    Service-linked rule name: OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba  keywordValue: Custom_OrgConfigRule-s3-bucket-versioning-enabled     
+     *  The value of the keyword that's used when mapping a control data source. For example, this can be a CloudTrail event name, a rule name for Config, a Security Hub control, or the name of an Amazon Web Services API call.  If you’re mapping a data source to a rule in Config, the keywordValue that you specify depends on the type of rule:   For managed rules, you can use the rule identifier as the keywordValue. You can find the rule identifier from the list of Config managed rules. For some rules, the rule identifier is different from the rule name. For example, the rule name restricted-ssh has the following rule identifier: INCOMING_SSH_DISABLED. Make sure to use the rule identifier, not the rule name.  Keyword example for managed rules:   Managed rule name: s3-bucket-acl-prohibited   keywordValue: S3_BUCKET_ACL_PROHIBITED      For custom rules, you form the keywordValue by adding the Custom_ prefix to the rule name. This prefix distinguishes the custom rule from a managed rule.  Keyword example for custom rules:   Custom rule name: my-custom-config-rule  keywordValue: Custom_my-custom-config-rule      For service-linked rules, you form the keywordValue by adding the Custom_ prefix to the rule name. In addition, you remove the suffix ID that appears at the end of the rule name.  Keyword examples for service-linked rules:   Service-linked rule name: CustomRuleForAccount-conformance-pack-szsm1uv0w  keywordValue: Custom_CustomRuleForAccount-conformance-pack    Service-linked rule name: OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba  keywordValue: Custom_OrgConfigRule-s3-bucket-versioning-enabled       The keywordValue is case sensitive. If you enter a value incorrectly, Audit Manager might not recognize the data source mapping. As a result, you might not successfully collect evidence from that data source as intended.  Keep in mind the following requirements, depending on the data source type that you're using.    For Config:    For managed rules, make sure that the keywordValue is the rule identifier in ALL_CAPS_WITH_UNDERSCORES. For example, CLOUDWATCH_LOG_GROUP_ENCRYPTED. For accuracy, we recommend that you reference the list of supported Config managed rules.   For custom rules, make sure that the keywordValue has the Custom_ prefix followed by the custom rule name. The format of the custom rule name itself may vary. For accuracy, we recommend that you visit the Config console to verify your custom rule name.     For Security Hub: The format varies for Security Hub control names. For accuracy, we recommend that you reference the list of supported Security Hub controls.   For Amazon Web Services API calls: Make sure that the keywordValue is written as serviceprefix_ActionName. For example, iam_ListGroups. For accuracy, we recommend that you reference the list of supported API calls.   For CloudTrail: Make sure that the keywordValue is written as serviceprefix_ActionName. For example, cloudtrail_StartLogging. For accuracy, we recommend that you review the Amazon Web Service prefix and action names in the Service Authorization Reference.   
      */
     keywordValue?: KeywordValue;
   }
@@ -3060,7 +3109,7 @@ declare namespace AuditManager {
      */
     snsTopic?: SnsArn;
     /**
-     *  The default storage destination for assessment reports. 
+     *  The default S3 destination bucket for storing assessment reports. 
      */
     defaultAssessmentReportsDestination?: AssessmentReportsDestination;
     /**
@@ -3079,6 +3128,10 @@ declare namespace AuditManager {
      * The deregistration policy for your Audit Manager data. You can use this attribute to determine how your data is handled when you deregister Audit Manager.
      */
     deregistrationPolicy?: DeregistrationPolicy;
+    /**
+     *  The default S3 destination bucket for storing evidence finder exports. 
+     */
+    defaultExportDestination?: DefaultExportDestination;
   }
   export interface UpdateSettingsResponse {
     /**
