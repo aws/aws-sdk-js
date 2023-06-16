@@ -785,11 +785,11 @@ declare class IAM extends Service {
    */
   listRoleTags(callback?: (err: AWSError, data: IAM.Types.ListRoleTagsResponse) => void): Request<IAM.Types.ListRoleTagsResponse, AWSError>;
   /**
-   * Lists the IAM roles that have the specified path prefix. If there are none, the operation returns an empty list. For more information about roles, see Working with roles.  IAM resource-listing operations return a subset of the available attributes for the resource. For example, this operation does not return tags, even though they are an attribute of the returned object. To view all of the information for a role, see GetRole.  You can paginate the results using the MaxItems and Marker parameters.
+   * Lists the IAM roles that have the specified path prefix. If there are none, the operation returns an empty list. For more information about roles, see Working with roles.  IAM resource-listing operations return a subset of the available attributes for the resource. This operation does not return the following attributes, even though they are an attribute of the returned object:   PermissionsBoundary   RoleLastUsed   Tags   To view all of the information for a role, see GetRole.  You can paginate the results using the MaxItems and Marker parameters.
    */
   listRoles(params: IAM.Types.ListRolesRequest, callback?: (err: AWSError, data: IAM.Types.ListRolesResponse) => void): Request<IAM.Types.ListRolesResponse, AWSError>;
   /**
-   * Lists the IAM roles that have the specified path prefix. If there are none, the operation returns an empty list. For more information about roles, see Working with roles.  IAM resource-listing operations return a subset of the available attributes for the resource. For example, this operation does not return tags, even though they are an attribute of the returned object. To view all of the information for a role, see GetRole.  You can paginate the results using the MaxItems and Marker parameters.
+   * Lists the IAM roles that have the specified path prefix. If there are none, the operation returns an empty list. For more information about roles, see Working with roles.  IAM resource-listing operations return a subset of the available attributes for the resource. This operation does not return the following attributes, even though they are an attribute of the returned object:   PermissionsBoundary   RoleLastUsed   Tags   To view all of the information for a role, see GetRole.  You can paginate the results using the MaxItems and Marker parameters.
    */
   listRoles(callback?: (err: AWSError, data: IAM.Types.ListRolesResponse) => void): Request<IAM.Types.ListRolesResponse, AWSError>;
   /**
@@ -865,11 +865,11 @@ declare class IAM extends Service {
    */
   listUserTags(callback?: (err: AWSError, data: IAM.Types.ListUserTagsResponse) => void): Request<IAM.Types.ListUserTagsResponse, AWSError>;
   /**
-   * Lists the IAM users that have the specified path prefix. If no path prefix is specified, the operation returns all users in the Amazon Web Services account. If there are none, the operation returns an empty list.  IAM resource-listing operations return a subset of the available attributes for the resource. For example, this operation does not return tags, even though they are an attribute of the returned object. To view all of the information for a user, see GetUser.  You can paginate the results using the MaxItems and Marker parameters.
+   * Lists the IAM users that have the specified path prefix. If no path prefix is specified, the operation returns all users in the Amazon Web Services account. If there are none, the operation returns an empty list.  IAM resource-listing operations return a subset of the available attributes for the resource. This operation does not return the following attributes, even though they are an attribute of the returned object:   PermissionsBoundary   Tags   To view all of the information for a user, see GetUser.  You can paginate the results using the MaxItems and Marker parameters.
    */
   listUsers(params: IAM.Types.ListUsersRequest, callback?: (err: AWSError, data: IAM.Types.ListUsersResponse) => void): Request<IAM.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists the IAM users that have the specified path prefix. If no path prefix is specified, the operation returns all users in the Amazon Web Services account. If there are none, the operation returns an empty list.  IAM resource-listing operations return a subset of the available attributes for the resource. For example, this operation does not return tags, even though they are an attribute of the returned object. To view all of the information for a user, see GetUser.  You can paginate the results using the MaxItems and Marker parameters.
+   * Lists the IAM users that have the specified path prefix. If no path prefix is specified, the operation returns all users in the Amazon Web Services account. If there are none, the operation returns an empty list.  IAM resource-listing operations return a subset of the available attributes for the resource. This operation does not return the following attributes, even though they are an attribute of the returned object:   PermissionsBoundary   Tags   To view all of the information for a user, see GetUser.  You can paginate the results using the MaxItems and Marker parameters.
    */
   listUsers(callback?: (err: AWSError, data: IAM.Types.ListUsersResponse) => void): Request<IAM.Types.ListUsersResponse, AWSError>;
   /**

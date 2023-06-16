@@ -60,11 +60,11 @@ declare class Discovery extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: Discovery.Types.DeleteTagsResponse) => void): Request<Discovery.Types.DeleteTagsResponse, AWSError>;
   /**
-   * Lists agents or connectors as specified by ID or other filters. All agents/connectors associated with your user account can be listed if you call DescribeAgents as is without passing any parameters.
+   * Lists agents or collectors as specified by ID or other filters. All agents/collectors associated with your user can be listed if you call DescribeAgents as is without passing any parameters.
    */
   describeAgents(params: Discovery.Types.DescribeAgentsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
-   * Lists agents or connectors as specified by ID or other filters. All agents/connectors associated with your user account can be listed if you call DescribeAgents as is without passing any parameters.
+   * Lists agents or collectors as specified by ID or other filters. All agents/collectors associated with your user can be listed if you call DescribeAgents as is without passing any parameters.
    */
   describeAgents(callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class Discovery extends Service {
    */
   describeConfigurations(callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
-   * Lists exports as specified by ID. All continuous exports associated with your user account can be listed if you call DescribeContinuousExports as is without passing any parameters.
+   * Lists exports as specified by ID. All continuous exports associated with your user can be listed if you call DescribeContinuousExports as is without passing any parameters.
    */
   describeContinuousExports(params: Discovery.Types.DescribeContinuousExportsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeContinuousExportsResponse) => void): Request<Discovery.Types.DescribeContinuousExportsResponse, AWSError>;
   /**
-   * Lists exports as specified by ID. All continuous exports associated with your user account can be listed if you call DescribeContinuousExports as is without passing any parameters.
+   * Lists exports as specified by ID. All continuous exports associated with your user can be listed if you call DescribeContinuousExports as is without passing any parameters.
    */
   describeContinuousExports(callback?: (err: AWSError, data: Discovery.Types.DescribeContinuousExportsResponse) => void): Request<Discovery.Types.DescribeContinuousExportsResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class Discovery extends Service {
    */
   describeImportTasks(callback?: (err: AWSError, data: Discovery.Types.DescribeImportTasksResponse) => void): Request<Discovery.Types.DescribeImportTasksResponse, AWSError>;
   /**
-   * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user account that have tags can be listed if you call DescribeTags as is without passing any parameters.
+   * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user that have tags can be listed if you call DescribeTags as is without passing any parameters.
    */
   describeTags(params: Discovery.Types.DescribeTagsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeTagsResponse) => void): Request<Discovery.Types.DescribeTagsResponse, AWSError>;
   /**
-   * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user account that have tags can be listed if you call DescribeTags as is without passing any parameters.
+   * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user that have tags can be listed if you call DescribeTags as is without passing any parameters.
    */
   describeTags(callback?: (err: AWSError, data: Discovery.Types.DescribeTagsResponse) => void): Request<Discovery.Types.DescribeTagsResponse, AWSError>;
   /**
@@ -160,27 +160,27 @@ declare class Discovery extends Service {
    */
   startContinuousExport(callback?: (err: AWSError, data: Discovery.Types.StartContinuousExportResponse) => void): Request<Discovery.Types.StartContinuousExportResponse, AWSError>;
   /**
-   * Instructs the specified agents or connectors to start collecting data.
+   * Instructs the specified agents to start collecting data.
    */
   startDataCollectionByAgentIds(params: Discovery.Types.StartDataCollectionByAgentIdsRequest, callback?: (err: AWSError, data: Discovery.Types.StartDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StartDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   * Instructs the specified agents or connectors to start collecting data.
+   * Instructs the specified agents to start collecting data.
    */
   startDataCollectionByAgentIds(callback?: (err: AWSError, data: Discovery.Types.StartDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StartDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   *  Begins the export of discovered data to an S3 bucket.  If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentIds filter, summary data is exported that includes both Amazon Web Services Agentless Discovery Connector data and summary data from Amazon Web Services Discovery Agents. Export of summary data is limited to two exports per day. 
+   * Begins the export of a discovered data report to an Amazon S3 bucket managed by Amazon Web Services.  Exports might provide an estimate of fees and savings based on certain information that you provide. Fee estimates do not include any taxes that might apply. Your actual fees and savings depend on a variety of factors, including your actual usage of Amazon Web Services services, which might vary from the estimates provided in this report.  If you do not specify preferences or agentIds in the filter, a summary of all servers, applications, tags, and performance is generated. This data is an aggregation of all server data collected through on-premises tooling, file import, application grouping and applying tags. If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports. Export of detailed agent data is limited to two exports per day. If you enable ec2RecommendationsPreferences in preferences , an Amazon EC2 instance matching the characteristics of each server in Application Discovery Service is generated. Changing the attributes of the ec2RecommendationsPreferences changes the criteria of the recommendation.
    */
   startExportTask(params: Discovery.Types.StartExportTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
   /**
-   *  Begins the export of discovered data to an S3 bucket.  If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentIds filter, summary data is exported that includes both Amazon Web Services Agentless Discovery Connector data and summary data from Amazon Web Services Discovery Agents. Export of summary data is limited to two exports per day. 
+   * Begins the export of a discovered data report to an Amazon S3 bucket managed by Amazon Web Services.  Exports might provide an estimate of fees and savings based on certain information that you provide. Fee estimates do not include any taxes that might apply. Your actual fees and savings depend on a variety of factors, including your actual usage of Amazon Web Services services, which might vary from the estimates provided in this report.  If you do not specify preferences or agentIds in the filter, a summary of all servers, applications, tags, and performance is generated. This data is an aggregation of all server data collected through on-premises tooling, file import, application grouping and applying tags. If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports. Export of detailed agent data is limited to two exports per day. If you enable ec2RecommendationsPreferences in preferences , an Amazon EC2 instance matching the characteristics of each server in Application Discovery Service is generated. Changing the attributes of the ec2RecommendationsPreferences changes the criteria of the recommendation.
    */
   startExportTask(callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
   /**
-   * Starts an import task, which allows you to import details of your on-premises environment directly into Amazon Web Services Migration Hub without having to use the Application Discovery Service (ADS) tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the Amazon Web Services CLI or one of the Amazon Web Services SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the Amazon Web Services Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an Amazon Web Services account. For more information, see Amazon Web Services Application Discovery Service Limits in the Amazon Web Services Application Discovery Service User Guide. 
+   * Starts an import task, which allows you to import details of your on-premises environment directly into Amazon Web Services Migration Hub without having to use the Amazon Web Services Application Discovery Service (Application Discovery Service) tools such as the Amazon Web Services Application Discovery Service Agentless Collector or Application Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the Amazon Web Services CLI or one of the Amazon Web Services SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the Amazon Web Services Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an Amazon Web Services account. For more information, see Amazon Web Services Application Discovery Service Limits in the Amazon Web Services Application Discovery Service User Guide. 
    */
   startImportTask(params: Discovery.Types.StartImportTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartImportTaskResponse) => void): Request<Discovery.Types.StartImportTaskResponse, AWSError>;
   /**
-   * Starts an import task, which allows you to import details of your on-premises environment directly into Amazon Web Services Migration Hub without having to use the Application Discovery Service (ADS) tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the Amazon Web Services CLI or one of the Amazon Web Services SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the Amazon Web Services Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an Amazon Web Services account. For more information, see Amazon Web Services Application Discovery Service Limits in the Amazon Web Services Application Discovery Service User Guide. 
+   * Starts an import task, which allows you to import details of your on-premises environment directly into Amazon Web Services Migration Hub without having to use the Amazon Web Services Application Discovery Service (Application Discovery Service) tools such as the Amazon Web Services Application Discovery Service Agentless Collector or Application Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3.us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the Amazon Web Services CLI or one of the Amazon Web Services SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the Amazon Web Services Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an Amazon Web Services account. For more information, see Amazon Web Services Application Discovery Service Limits in the Amazon Web Services Application Discovery Service User Guide. 
    */
   startImportTask(callback?: (err: AWSError, data: Discovery.Types.StartImportTaskResponse) => void): Request<Discovery.Types.StartImportTaskResponse, AWSError>;
   /**
@@ -192,11 +192,11 @@ declare class Discovery extends Service {
    */
   stopContinuousExport(callback?: (err: AWSError, data: Discovery.Types.StopContinuousExportResponse) => void): Request<Discovery.Types.StopContinuousExportResponse, AWSError>;
   /**
-   * Instructs the specified agents or connectors to stop collecting data.
+   * Instructs the specified agents to stop collecting data.
    */
   stopDataCollectionByAgentIds(params: Discovery.Types.StopDataCollectionByAgentIdsRequest, callback?: (err: AWSError, data: Discovery.Types.StopDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StopDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   * Instructs the specified agents or connectors to stop collecting data.
+   * Instructs the specified agents to stop collecting data.
    */
   stopDataCollectionByAgentIds(callback?: (err: AWSError, data: Discovery.Types.StopDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StopDataCollectionByAgentIdsResponse, AWSError>;
   /**
@@ -211,11 +211,11 @@ declare class Discovery extends Service {
 declare namespace Discovery {
   export interface AgentConfigurationStatus {
     /**
-     * The agent/connector ID.
+     * The agent ID.
      */
     agentId?: String;
     /**
-     * Information about the status of the StartDataCollection and StopDataCollection operations. The system has recorded the data collection operation. The agent/connector receives this command the next time it polls for a new command. 
+     * Information about the status of the StartDataCollection and StopDataCollection operations. The system has recorded the data collection operation. The agent receives this command the next time it polls for a new command. 
      */
     operationSucceeded?: Boolean;
     /**
@@ -228,15 +228,15 @@ declare namespace Discovery {
   export type AgentIds = AgentId[];
   export interface AgentInfo {
     /**
-     * The agent or connector ID.
+     * The agent or collector ID.
      */
     agentId?: AgentId;
     /**
-     * The name of the host where the agent or connector resides. The host can be a server or virtual machine.
+     * The name of the host where the agent or collector resides. The host can be a server or virtual machine.
      */
     hostName?: String;
     /**
-     * Network details about the host where the agent or connector resides.
+     * Network details about the host where the agent or collector resides.
      */
     agentNetworkInfoList?: AgentNetworkInfoList;
     /**
@@ -244,19 +244,19 @@ declare namespace Discovery {
      */
     connectorId?: String;
     /**
-     * The agent or connector version.
+     * The agent or collector version.
      */
     version?: String;
     /**
-     * The health of the agent or connector.
+     * The health of the agent.
      */
     health?: AgentStatus;
     /**
-     * Time since agent or connector health was reported.
+     * Time since agent health was reported.
      */
     lastHealthPingTime?: String;
     /**
-     * Status of the collection process for an agent or connector.
+     * Status of the collection process for an agent.
      */
     collectionStatus?: String;
     /**
@@ -270,11 +270,11 @@ declare namespace Discovery {
   }
   export interface AgentNetworkInfo {
     /**
-     * The IP address for the host where the agent/connector resides.
+     * The IP address for the host where the agent/collector resides.
      */
     ipAddress?: String;
     /**
-     * The MAC address for the host where the agent/connector resides.
+     * The MAC address for the host where the agent/collector resides.
      */
     macAddress?: String;
   }
@@ -370,7 +370,7 @@ declare namespace Discovery {
      */
     status?: ContinuousExportStatus;
     /**
-     * Contains information about any errors that have occurred. This data type can have the following values:   ACCESS_DENIED - You don’t have permission to start Data Exploration in Amazon Athena. Contact your Amazon Web Services administrator for help. For more information, see Setting Up Amazon Web Services Application Discovery Service in the Application Discovery Service User Guide.   DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis Data Firehose delivery streams. Reduce the number of streams or request a limit increase and try again. For more information, see Kinesis Data Streams Limits in the Amazon Kinesis Data Streams Developer Guide.   FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error state because your IAM User is missing the AWSApplicationDiscoveryServiceFirehose role. Turn on Data Exploration in Amazon Athena and try again. For more information, see Step 3: Provide Application Discovery Service Access to Non-Administrator Users by Attaching Policies in the Application Discovery Service User Guide.   FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an error state because your IAM User is missing one or more of the Kinesis data delivery streams.   INTERNAL_FAILURE - The Data Exploration feature is in an error state because of an internal failure. Try again later. If this problem persists, contact Amazon Web Services Support.   LAKE_FORMATION_ACCESS_DENIED - You don't have sufficient lake formation permissions to start continuous export. For more information, see  Upgrading Amazon Web Services Glue Data Permissions to the Amazon Web Services Lake Formation Model  in the Amazon Web Services Lake Formation Developer Guide.  You can use one of the following two ways to resolve this issue.   If you don’t want to use the Lake Formation permission model, you can change the default Data Catalog settings to use only Amazon Web Services Identity and Access Management (IAM) access control for new databases. For more information, see Change Data Catalog Settings in the Lake Formation Developer Guide.   You can give the service-linked IAM roles AWSServiceRoleForApplicationDiscoveryServiceContinuousExport and AWSApplicationDiscoveryServiceFirehose the required Lake Formation permissions. For more information, see  Granting Database Permissions in the Lake Formation Developer Guide.    AWSServiceRoleForApplicationDiscoveryServiceContinuousExport - Grant database creator permissions, which gives the role database creation ability and implicit permissions for any created tables. For more information, see  Implicit Lake Formation Permissions  in the Lake Formation Developer Guide.   AWSApplicationDiscoveryServiceFirehose - Grant describe permissions for all tables in the database.       S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce the number of S3 buckets or request a limit increase and try again. For more information, see Bucket Restrictions and Limitations in the Amazon Simple Storage Service Developer Guide.   S3_NOT_SIGNED_UP - Your account is not signed up for the Amazon S3 service. You must sign up before you can use Amazon S3. You can sign up at the following URL: https://aws.amazon.com/s3.  
+     * Contains information about any errors that have occurred. This data type can have the following values:   ACCESS_DENIED - You don’t have permission to start Data Exploration in Amazon Athena. Contact your Amazon Web Services administrator for help. For more information, see Setting Up Amazon Web Services Application Discovery Service in the Application Discovery Service User Guide.   DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis Data Firehose delivery streams. Reduce the number of streams or request a limit increase and try again. For more information, see Kinesis Data Streams Limits in the Amazon Kinesis Data Streams Developer Guide.   FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error state because your user is missing the Amazon Web ServicesApplicationDiscoveryServiceFirehose role. Turn on Data Exploration in Amazon Athena and try again. For more information, see Creating the Amazon Web ServicesApplicationDiscoveryServiceFirehose Role in the Application Discovery Service User Guide.   FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an error state because your user is missing one or more of the Kinesis data delivery streams.   INTERNAL_FAILURE - The Data Exploration feature is in an error state because of an internal failure. Try again later. If this problem persists, contact Amazon Web Services Support.   LAKE_FORMATION_ACCESS_DENIED - You don't have sufficient lake formation permissions to start continuous export. For more information, see  Upgrading Amazon Web Services Glue Data Permissions to the Amazon Web Services Lake Formation Model  in the Amazon Web Services Lake Formation Developer Guide.  You can use one of the following two ways to resolve this issue.   If you don’t want to use the Lake Formation permission model, you can change the default Data Catalog settings to use only Amazon Web Services Identity and Access Management (IAM) access control for new databases. For more information, see Change Data Catalog Settings in the Lake Formation Developer Guide.   You can give the service-linked IAM roles AWSServiceRoleForApplicationDiscoveryServiceContinuousExport and AWSApplicationDiscoveryServiceFirehose the required Lake Formation permissions. For more information, see  Granting Database Permissions in the Lake Formation Developer Guide.    AWSServiceRoleForApplicationDiscoveryServiceContinuousExport - Grant database creator permissions, which gives the role database creation ability and implicit permissions for any created tables. For more information, see  Implicit Lake Formation Permissions  in the Lake Formation Developer Guide.   AWSApplicationDiscoveryServiceFirehose - Grant describe permissions for all tables in the database.       S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce the number of S3 buckets or request a limit increase and try again. For more information, see Bucket Restrictions and Limitations in the Amazon Simple Storage Service Developer Guide.   S3_NOT_SIGNED_UP - Your account is not signed up for the Amazon S3 service. You must sign up before you can use Amazon S3. You can sign up at the following URL: https://aws.amazon.com/s3.  
      */
     statusDetail?: StringMax255;
     /**
@@ -456,12 +456,33 @@ declare namespace Discovery {
     unknownAgents: Integer;
   }
   export interface CustomerAgentlessCollectorInfo {
+    /**
+     * The number of active Agentless Collector collectors. 
+     */
     activeAgentlessCollectors: Integer;
+    /**
+     * The number of healthy Agentless Collector collectors. 
+     */
     healthyAgentlessCollectors: Integer;
+    /**
+     * The number of deny-listed Agentless Collector collectors. 
+     */
     denyListedAgentlessCollectors: Integer;
+    /**
+     * The number of Agentless Collector collectors with SHUTDOWN status. 
+     */
     shutdownAgentlessCollectors: Integer;
+    /**
+     *  The number of unhealthy Agentless Collector collectors. 
+     */
     unhealthyAgentlessCollectors: Integer;
+    /**
+     *  The total number of Agentless Collector collectors. 
+     */
     totalAgentlessCollectors: Integer;
+    /**
+     *  The number of unknown Agentless Collector collectors. 
+     */
     unknownAgentlessCollectors: Integer;
   }
   export interface CustomerConnectorInfo {
@@ -548,7 +569,7 @@ declare namespace Discovery {
   }
   export interface DescribeAgentsRequest {
     /**
-     * The agent or the Connector IDs for which you want information. If you specify no IDs, the system returns information about all agents/Connectors associated with your Amazon Web Services user account.
+     * The agent or the collector IDs for which you want information. If you specify no IDs, the system returns information about all agents/collectors associated with your user.
      */
     agentIds?: AgentIds;
     /**
@@ -556,7 +577,7 @@ declare namespace Discovery {
      */
     filters?: Filters;
     /**
-     * The total number of agents/Connectors to return in a single page of output. The maximum value is 100.
+     * The total number of agents/collectors to return in a single page of output. The maximum value is 100.
      */
     maxResults?: Integer;
     /**
@@ -566,7 +587,7 @@ declare namespace Discovery {
   }
   export interface DescribeAgentsResponse {
     /**
-     * Lists agents or the Connector by ID or lists all agents/Connectors associated with your user account if you did not specify an agent/Connector ID. The output includes agent/Connector IDs, IP addresses, media access control (MAC) addresses, agent/Connector health, host name where the agent/Connector resides, and the version number of each agent/Connector.
+     * Lists agents or the collector by ID or lists all agents/collectors associated with your user, if you did not specify an agent/collector ID. The output includes agent/collector IDs, IP addresses, media access control (MAC) addresses, agent/collector health, host name where the agent/collector resides, and the version number of each agent/collector.
      */
     agentsInfo?: AgentsInfo;
     /**
@@ -727,14 +748,47 @@ declare namespace Discovery {
   }
   export interface DisassociateConfigurationItemsFromApplicationResponse {
   }
+  export type EC2InstanceType = string;
+  export interface Ec2RecommendationsExportPreferences {
+    /**
+     *  If set to true, the export preferences is set to Ec2RecommendationsExportPreferences. 
+     */
+    enabled?: ExportEnabled;
+    /**
+     *  The recommended EC2 instance type that matches the CPU usage metric of server performance data. 
+     */
+    cpuPerformanceMetricBasis?: UsageMetricBasis;
+    /**
+     *  The recommended EC2 instance type that matches the Memory usage metric of server performance data. 
+     */
+    ramPerformanceMetricBasis?: UsageMetricBasis;
+    /**
+     *  The target tenancy to use for your recommended EC2 instances. 
+     */
+    tenancy?: Tenancy;
+    /**
+     *  An array of instance types to exclude from recommendations. 
+     */
+    excludedInstanceTypes?: ExcludedInstanceTypes;
+    /**
+     *  The target Amazon Web Services Region for the recommendations. You can use any of the Region codes available for the chosen service, as listed in Amazon Web Services service endpoints in the Amazon Web Services General Reference. 
+     */
+    preferredRegion?: UserPreferredRegion;
+    /**
+     *  The contract type for a reserved instance. If blank, we assume an On-Demand instance is preferred. 
+     */
+    reservedInstanceOptions?: ReservedInstanceOptions;
+  }
+  export type ExcludedInstanceTypes = EC2InstanceType[];
   export interface ExportConfigurationsResponse {
     /**
      * A unique identifier that you can use to query the export status.
      */
     exportId?: ConfigurationsExportId;
   }
-  export type ExportDataFormat = "CSV"|"GRAPHML"|string;
+  export type ExportDataFormat = "CSV"|string;
   export type ExportDataFormats = ExportDataFormat[];
+  export type ExportEnabled = boolean;
   export interface ExportFilter {
     /**
      * A single ExportFilter name. Supported filters: agentIds.
@@ -784,6 +838,12 @@ declare namespace Discovery {
      * The endTime used in the StartExportTask request. If no endTime was requested, this result does not appear in ExportInfo.
      */
     requestedEndTime?: TimeStamp;
+  }
+  export interface ExportPreferences {
+    /**
+     *  If enabled, exported data includes EC2 instance type matches for on-premises servers discovered through Amazon Web Services Application Discovery Service. 
+     */
+    ec2RecommendationsPreferences?: Ec2RecommendationsExportPreferences;
   }
   export type ExportRequestTime = Date;
   export type ExportStatus = "FAILED"|"SUCCEEDED"|"IN_PROGRESS"|string;
@@ -838,6 +898,9 @@ declare namespace Discovery {
      *  Details about Migration Evaluator collectors, including collector status and health. 
      */
     meCollectorSummary?: CustomerMeCollectorInfo;
+    /**
+     *  Details about Agentless Collector collectors, including status. 
+     */
     agentlessCollectorSummary?: CustomerAgentlessCollectorInfo;
   }
   export type ImportStatus = "IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_COMPLETE_WITH_ERRORS"|"IMPORT_FAILED"|"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"|"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_FAILED_LIMIT_EXCEEDED"|"INTERNAL_ERROR"|string;
@@ -1006,6 +1069,7 @@ declare namespace Discovery {
   }
   export type NeighborDetailsList = NeighborConnectionDetail[];
   export type NextToken = string;
+  export type OfferingClass = "STANDARD"|"CONVERTIBLE"|string;
   export interface OrderByElement {
     /**
      * The field on which to order.
@@ -1018,6 +1082,21 @@ declare namespace Discovery {
   }
   export type OrderByElementFieldName = string;
   export type OrderByList = OrderByElement[];
+  export type PurchasingOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
+  export interface ReservedInstanceOptions {
+    /**
+     *  The payment plan to use for your Reserved Instance. 
+     */
+    purchasingOption: PurchasingOption;
+    /**
+     *  The flexibility to change the instance types needed for your Reserved Instance. 
+     */
+    offeringClass: OfferingClass;
+    /**
+     *  The preferred duration of the Reserved Instance term. 
+     */
+    termLength: TermLength;
+  }
   export type S3Bucket = string;
   export type S3PresignedUrl = string;
   export type SchemaStorageConfig = {[key: string]: String};
@@ -1047,13 +1126,13 @@ declare namespace Discovery {
   }
   export interface StartDataCollectionByAgentIdsRequest {
     /**
-     * The IDs of the agents or connectors from which to start collecting data. If you send a request to an agent/connector ID that you do not have permission to contact, according to your Amazon Web Services account, the service does not throw an exception. Instead, it returns the error in the Description field. If you send a request to multiple agents/connectors and you do not have permission to contact some of those agents/connectors, the system does not throw an exception. Instead, the system shows Failed in the Description field.
+     * The IDs of the agents from which to start collecting data. If you send a request to an agent ID that you do not have permission to contact, according to your Amazon Web Services account, the service does not throw an exception. Instead, it returns the error in the Description field. If you send a request to multiple agents and you do not have permission to contact some of those agents, the system does not throw an exception. Instead, the system shows Failed in the Description field.
      */
     agentIds: AgentIds;
   }
   export interface StartDataCollectionByAgentIdsResponse {
     /**
-     * Information about agents or the connector that were instructed to start collecting data. Information includes the agent/connector ID, a description of the operation performed, and whether the agent/connector configuration was updated.
+     * Information about agents that were instructed to start collecting data. Information includes the agent ID, a description of the operation performed, and whether the agent configuration was updated.
      */
     agentsConfigurationStatus?: AgentConfigurationStatusList;
   }
@@ -1063,7 +1142,7 @@ declare namespace Discovery {
      */
     exportDataFormat?: ExportDataFormats;
     /**
-     * If a filter is present, it selects the single agentId of the Application Discovery Agent for which data is exported. The agentId can be found in the results of the DescribeAgents API or CLI. If no filter is present, startTime and endTime are ignored and exported data includes both Agentless Discovery Connector data and summary data from Application Discovery agents. 
+     * If a filter is present, it selects the single agentId of the Application Discovery Agent for which data is exported. The agentId can be found in the results of the DescribeAgents API or CLI. If no filter is present, startTime and endTime are ignored and exported data includes both Amazon Web Services Application Discovery Service Agentless Collector collectors data and summary data from Application Discovery Agent agents. 
      */
     filters?: ExportFilters;
     /**
@@ -1074,6 +1153,10 @@ declare namespace Discovery {
      * The end timestamp for exported data from the single Application Discovery Agent selected in the filters. If no value is specified, exported data includes the most recent data collected by the agent.
      */
     endTime?: TimeStamp;
+    /**
+     *  Indicates the type of data that needs to be exported. Only one ExportPreferences can be enabled at any time. 
+     */
+    preferences?: ExportPreferences;
   }
   export interface StartExportTaskResponse {
     /**
@@ -1119,13 +1202,13 @@ declare namespace Discovery {
   }
   export interface StopDataCollectionByAgentIdsRequest {
     /**
-     * The IDs of the agents or connectors from which to stop collecting data.
+     * The IDs of the agents from which to stop collecting data.
      */
     agentIds: AgentIds;
   }
   export interface StopDataCollectionByAgentIdsResponse {
     /**
-     * Information about the agents or connector that were instructed to stop collecting data. Information includes the agent/connector ID, a description of the operation performed, and whether the agent/connector configuration was updated.
+     * Information about the agents that were instructed to stop collecting data. Information includes the agent ID, a description of the operation performed, and whether the agent configuration was updated.
      */
     agentsConfigurationStatus?: AgentConfigurationStatusList;
   }
@@ -1155,6 +1238,8 @@ declare namespace Discovery {
   export type TagKey = string;
   export type TagSet = Tag[];
   export type TagValue = string;
+  export type Tenancy = "DEDICATED"|"SHARED"|string;
+  export type TermLength = "ONE_YEAR"|"THREE_YEAR"|string;
   export type TimeStamp = Date;
   export type ToDeleteIdentifierList = ImportTaskIdentifier[];
   export interface UpdateApplicationRequest {
@@ -1173,6 +1258,19 @@ declare namespace Discovery {
   }
   export interface UpdateApplicationResponse {
   }
+  export interface UsageMetricBasis {
+    /**
+     *  A utilization metric that is used by the recommendations. 
+     */
+    name?: UsageMetricBasisName;
+    /**
+     *  Specifies the percentage of the specified utilization metric that is used by the recommendations. 
+     */
+    percentageAdjust?: UsageMetricPercentageAdjust;
+  }
+  export type UsageMetricBasisName = string;
+  export type UsageMetricPercentageAdjust = number;
+  export type UserPreferredRegion = string;
   export type orderString = "ASC"|"DESC"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
