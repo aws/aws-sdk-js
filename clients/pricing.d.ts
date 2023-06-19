@@ -250,8 +250,7 @@ declare namespace Pricing {
     FileFormats?: FileFormats;
   }
   export type PriceListArn = string;
-  export type PriceListJsonItem = string;
-  export type PriceListJsonItems = PriceListJsonItem[];
+  export type PriceListJsonItems = SynthesizedJsonPriceListJsonItem[];
   export type PriceLists = PriceList[];
   export type RegionCode = string;
   export interface Service {
@@ -267,6 +266,7 @@ declare namespace Pricing {
   export type ServiceCode = string;
   export type ServiceList = Service[];
   export type String = string;
+  export type SynthesizedJsonPriceListJsonItem = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

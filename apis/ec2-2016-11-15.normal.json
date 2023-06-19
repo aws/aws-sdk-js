@@ -2978,7 +2978,7 @@
       "output": {
         "shape": "DescribeAccountAttributesResult"
       },
-      "documentation": "<p>Describes attributes of your Amazon Web Services account. The following are the supported account attributes:</p> <ul> <li> <p> <code>supported-platforms</code>: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.</p> </li> <li> <p> <code>default-vpc</code>: The ID of the default VPC for your account, or <code>none</code>.</p> </li> <li> <p> <code>max-instances</code>: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits\">On-Demand Instance Limits</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <code>vpc-max-security-groups-per-interface</code>: The maximum number of security groups that you can assign to a network interface.</p> </li> <li> <p> <code>max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic. </p> </li> <li> <p> <code>vpc-max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.</p> </li> </ul> <note> <p>We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html\">Migrate from EC2-Classic to a VPC</a> in the <i>Amazon EC2 User Guide</i>.</p> </note>"
+      "documentation": "<p>Describes attributes of your Amazon Web Services account. The following are the supported account attributes:</p> <ul> <li> <p> <code>default-vpc</code>: The ID of the default VPC for your account, or <code>none</code>.</p> </li> <li> <p> <code>max-instances</code>: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html#ec2-on-demand-instances-limits\">On-Demand Instance Limits</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </li> <li> <p> <code>max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate.</p> </li> <li> <p> <code>supported-platforms</code>: This attribute is deprecated.</p> </li> <li> <p> <code>vpc-max-elastic-ips</code>: The maximum number of Elastic IP addresses that you can allocate.</p> </li> <li> <p> <code>vpc-max-security-groups-per-interface</code>: The maximum number of security groups that you can assign to a network interface.</p> </li> </ul>"
     },
     "DescribeAddressTransfers": {
       "name": "DescribeAddressTransfers",
@@ -11166,6 +11166,9 @@
       },
       "documentation": "<p>Describes Availability Zones, Local Zones, and Wavelength Zones.</p>"
     },
+    "AvailabilityZoneId": {
+      "type": "string"
+    },
     "AvailabilityZoneList": {
       "type": "list",
       "member": {
@@ -13977,11 +13980,11 @@
           "documentation": "<p>The type of operating system for which to reserve capacity.</p>"
         },
         "AvailabilityZone": {
-          "shape": "String",
+          "shape": "AvailabilityZoneName",
           "documentation": "<p>The Availability Zone in which to create the Capacity Reservation.</p>"
         },
         "AvailabilityZoneId": {
-          "shape": "String",
+          "shape": "AvailabilityZoneId",
           "documentation": "<p>The ID of the Availability Zone in which to create the Capacity Reservation.</p>"
         },
         "Tenancy": {
@@ -59486,9 +59489,17 @@
         "KinesisDataFirehose": {
           "shape": "VerifiedAccessLogKinesisDataFirehoseDestinationOptions",
           "documentation": "<p>Sends Verified Access logs to Kinesis.</p>"
+        },
+        "LogVersion": {
+          "shape": "String",
+          "documentation": "<p> The logging version to use. </p> <p>Valid values: <code>ocsf-0.1</code> | <code>ocsf-1.0.0-rc.2</code> </p>"
+        },
+        "IncludeTrustContext": {
+          "shape": "Boolean",
+          "documentation": "<p> Include trust data sent by trust providers into the logs. </p>"
         }
       },
-      "documentation": "<p>Describes the destinations for Verified Access logs.</p>"
+      "documentation": "<p>Options for Verified Access logs.</p>"
     },
     "VerifiedAccessLogS3Destination": {
       "type": "structure",
@@ -59563,9 +59574,19 @@
           "shape": "VerifiedAccessLogKinesisDataFirehoseDestination",
           "documentation": "<p>Kinesis logging destination.</p>",
           "locationName": "kinesisDataFirehose"
+        },
+        "LogVersion": {
+          "shape": "String",
+          "documentation": "<p> Describes current setting for the logging version. </p>",
+          "locationName": "logVersion"
+        },
+        "IncludeTrustContext": {
+          "shape": "Boolean",
+          "documentation": "<p> Describes current setting for including trust data into the logs. </p>",
+          "locationName": "includeTrustContext"
         }
       },
-      "documentation": "<p>Describes the destinations for Verified Access logs.</p>"
+      "documentation": "<p>Describes the options for Verified Access logs.</p>"
     },
     "VerifiedAccessTrustProvider": {
       "type": "structure",

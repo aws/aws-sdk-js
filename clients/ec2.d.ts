@@ -1749,11 +1749,11 @@ declare class EC2 extends Service {
    */
   deregisterTransitGatewayMulticastGroupSources(callback?: (err: AWSError, data: EC2.Types.DeregisterTransitGatewayMulticastGroupSourcesResult) => void): Request<EC2.Types.DeregisterTransitGatewayMulticastGroupSourcesResult, AWSError>;
   /**
-   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.    We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon EC2 User Guide. 
+   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate.    supported-platforms: This attribute is deprecated.    vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.  
    */
   describeAccountAttributes(params: EC2.Types.DescribeAccountAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
-   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    supported-platforms: Indicates whether your account can launch instances into EC2-Classic and EC2-VPC, or only into EC2-VPC.    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-Classic.     vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate for use with EC2-VPC.    We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate from EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a VPC in the Amazon EC2 User Guide. 
+   * Describes attributes of your Amazon Web Services account. The following are the supported account attributes:    default-vpc: The ID of the default VPC for your account, or none.    max-instances: This attribute is no longer supported. The returned value does not reflect your actual vCPU limit for running On-Demand Instances. For more information, see On-Demand Instance Limits in the Amazon Elastic Compute Cloud User Guide.    max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate.    supported-platforms: This attribute is deprecated.    vpc-max-elastic-ips: The maximum number of Elastic IP addresses that you can allocate.    vpc-max-security-groups-per-interface: The maximum number of security groups that you can assign to a network interface.  
    */
   describeAccountAttributes(callback?: (err: AWSError, data: EC2.Types.DescribeAccountAttributesResult) => void): Request<EC2.Types.DescribeAccountAttributesResult, AWSError>;
   /**
@@ -6878,6 +6878,7 @@ declare namespace EC2 {
      */
     ParentZoneId?: String;
   }
+  export type AvailabilityZoneId = string;
   export type AvailabilityZoneList = AvailabilityZone[];
   export interface AvailabilityZoneMessage {
     /**
@@ -8457,11 +8458,11 @@ declare namespace EC2 {
     /**
      * The Availability Zone in which to create the Capacity Reservation.
      */
-    AvailabilityZone?: String;
+    AvailabilityZone?: AvailabilityZoneName;
     /**
      * The ID of the Availability Zone in which to create the Capacity Reservation.
      */
-    AvailabilityZoneId?: String;
+    AvailabilityZoneId?: AvailabilityZoneId;
     /**
      * Indicates the tenancy of the Capacity Reservation. A Capacity Reservation can have one of the following tenancy settings:    default - The Capacity Reservation is created on hardware that is shared with other Amazon Web Services accounts.    dedicated - The Capacity Reservation is created on single-tenant hardware that is dedicated to a single Amazon Web Services account.  
      */
@@ -37216,6 +37217,14 @@ declare namespace EC2 {
      * Sends Verified Access logs to Kinesis.
      */
     KinesisDataFirehose?: VerifiedAccessLogKinesisDataFirehoseDestinationOptions;
+    /**
+     *  The logging version to use.  Valid values: ocsf-0.1 | ocsf-1.0.0-rc.2 
+     */
+    LogVersion?: String;
+    /**
+     *  Include trust data sent by trust providers into the logs. 
+     */
+    IncludeTrustContext?: Boolean;
   }
   export interface VerifiedAccessLogS3Destination {
     /**
@@ -37270,6 +37279,14 @@ declare namespace EC2 {
      * Kinesis logging destination.
      */
     KinesisDataFirehose?: VerifiedAccessLogKinesisDataFirehoseDestination;
+    /**
+     *  Describes current setting for the logging version. 
+     */
+    LogVersion?: String;
+    /**
+     *  Describes current setting for including trust data into the logs. 
+     */
+    IncludeTrustContext?: Boolean;
   }
   export interface VerifiedAccessTrustProvider {
     /**

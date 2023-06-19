@@ -998,6 +998,10 @@ declare namespace CloudFormation {
      * Creates a change set for the all nested stacks specified in the template. The default behavior of this action is set to False. To include nested sets in a change set, specify True.
      */
     IncludeNestedStacks?: IncludeNestedStacks;
+    /**
+     * Determines what action will be taken if stack creation fails. If this parameter is specified, the DisableRollback parameter to the ExecuteChangeSet API operation must not be specified. This must be one of these values:    DELETE - Deletes the change set if the stack creation fails. This is only valid when the ChangeSetType parameter is set to CREATE. If the deletion of the stack fails, the status of the stack is DELETE_FAILED.    DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to specifying true for the DisableRollback parameter to the ExecuteChangeSet API operation.    ROLLBACK - if the stack creation fails, roll back the stack. This is equivalent to specifying false for the DisableRollback parameter to the ExecuteChangeSet API operation.   For nested stacks, when the OnStackFailure parameter is set to DELETE for the change set for the parent stack, any failure in a child stack will cause the parent stack creation to fail and all stacks to be deleted.
+     */
+    OnStackFailure?: OnStackFailure;
   }
   export interface CreateChangeSetOutput {
     /**
@@ -1491,6 +1495,10 @@ declare namespace CloudFormation {
      * Specifies the change set ID of the root change set in the current nested change set hierarchy.
      */
     RootChangeSetId?: ChangeSetId;
+    /**
+     * Determines what action will be taken if stack creation fails. When this parameter is specified, the DisableRollback parameter to the ExecuteChangeSet API operation must not be specified. This must be one of these values:    DELETE - Deletes the change set if the stack creation fails. This is only valid when the ChangeSetType parameter is set to CREATE. If the deletion of the stack fails, the status of the stack is DELETE_FAILED.    DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to specifying true for the DisableRollback parameter to the ExecuteChangeSet API operation.    ROLLBACK - if the stack creation fails, roll back the stack. This is equivalent to specifying false for the DisableRollback parameter to the ExecuteChangeSet API operation.  
+     */
+    OnStackFailure?: OnStackFailure;
   }
   export interface DescribeOrganizationsAccessInput {
     /**
@@ -1987,7 +1995,7 @@ declare namespace CloudFormation {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * Preserves the state of previously provisioned resources when an operation fails. Default: True 
+     * Preserves the state of previously provisioned resources when an operation fails. This parameter can't be specified when the OnStackFailure parameter to the CreateChangeSet API operation was specified.    True - if the stack creation fails, do nothing. This is equivalent to specifying DO_NOTHING for the OnStackFailure parameter to the CreateChangeSet API operation.    False - if the stack creation fails, roll back the stack. This is equivalent to specifying ROLLBACK for the OnStackFailure parameter to the CreateChangeSet API operation.   Default: True 
      */
     DisableRollback?: DisableRollback;
   }
@@ -2557,6 +2565,7 @@ declare namespace CloudFormation {
   export type NotificationARN = string;
   export type NotificationARNs = NotificationARN[];
   export type OnFailure = "DO_NOTHING"|"ROLLBACK"|"DELETE"|string;
+  export type OnStackFailure = "DO_NOTHING"|"ROLLBACK"|"DELETE"|string;
   export interface OperationResultFilter {
     /**
      * The type of filter to apply.

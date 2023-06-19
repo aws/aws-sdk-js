@@ -85,19 +85,19 @@ declare class SageMaker extends Service {
    */
   createArtifact(callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
   /**
-   * Creates an Autopilot job. Find the best-performing model after you run an Autopilot job by calling DescribeAutoMLJob. For information about how to use Autopilot, see Automate Model Development with Amazon SageMaker Autopilot.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job. Find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.   CreateAutoMLJob only accepts tabular input data. We recommend using CreateAutoMLJobV2 for all problem types. CreateAutoMLJobV2 can process the same tabular data as its previous version CreateAutoMLJob, as well as non-tabular data for problem types such as image or text classification. Find guidelines about how to migrate CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2. 
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job. Find the best-performing model after you run an Autopilot job by calling DescribeAutoMLJob. For information about how to use Autopilot, see Automate Model Development with Amazon SageMaker Autopilot.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job. Find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.   CreateAutoMLJob only accepts tabular input data. We recommend using CreateAutoMLJobV2 for all problem types. CreateAutoMLJobV2 can process the same tabular data as its previous version CreateAutoMLJob, as well as non-tabular data for problem types such as image or text classification. Find guidelines about how to migrate CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2. 
    */
   createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems. Find the resulting model after you run an AutoML job V2 by calling DescribeAutoMLJobV2. To create an AutoMLJob using tabular data, see CreateAutoMLJob.  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2. We recommend using CreateAutoMLJobV2 for all problem types. CreateAutoMLJobV2 can process the same tabular data as its previous version CreateAutoMLJob, as well as non-tabular data for problem types such as image or text classification. Find guidelines about how to migrate CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2. For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. Find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2. Calling DescribeAutoMLJob on a AutoML job V2 results in an error.
    */
   createAutoMLJobV2(params: SageMaker.Types.CreateAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
-   * Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems. Find the resulting model after you run an AutoML job V2 by calling DescribeAutoMLJobV2. To create an AutoMLJob using tabular data, see CreateAutoMLJob.  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2. We recommend using CreateAutoMLJobV2 for all problem types. CreateAutoMLJobV2 can process the same tabular data as its previous version CreateAutoMLJob, as well as non-tabular data for problem types such as image or text classification. Find guidelines about how to migrate CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2. For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. Find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2. Calling DescribeAutoMLJob on a AutoML job V2 results in an error.
    */
   createAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
@@ -885,19 +885,19 @@ declare class SageMaker extends Service {
    */
   describeArtifact(callback?: (err: AWSError, data: SageMaker.Types.DescribeArtifactResponse) => void): Request<SageMaker.Types.DescribeArtifactResponse, AWSError>;
   /**
-   * Returns information about an Amazon SageMaker AutoML job.
+   * Returns information about an AutoML job created by calling CreateAutoMLJob.
    */
   describeAutoMLJob(params: SageMaker.Types.DescribeAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
   /**
-   * Returns information about an Amazon SageMaker AutoML job.
+   * Returns information about an AutoML job created by calling CreateAutoMLJob.
    */
   describeAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
   /**
-   * Returns information about an Amazon SageMaker AutoML V2 job.  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   * Returns information about an AutoML job V2 created by calling CreateAutoMLJobV2.
    */
   describeAutoMLJobV2(params: SageMaker.Types.DescribeAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobV2Response) => void): Request<SageMaker.Types.DescribeAutoMLJobV2Response, AWSError>;
   /**
-   * Returns information about an Amazon SageMaker AutoML V2 job.  This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error. 
+   * Returns information about an AutoML job V2 created by calling CreateAutoMLJobV2.
    */
   describeAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobV2Response) => void): Request<SageMaker.Types.DescribeAutoMLJobV2Response, AWSError>;
   /**
@@ -3108,7 +3108,7 @@ declare namespace SageMaker {
      */
     CandidateProperties?: CandidateProperties;
     /**
-     * The mapping of all supported processing unit (CPU, GPU, etc...) to inference container definitions for the candidate. This field is populated for the V2 API only (for example, for jobs created by calling CreateAutoMLJobV2).
+     * The mapping of all supported processing unit (CPU, GPU, etc...) to inference container definitions for the candidate. This field is populated for the AutoML jobs V2 (for example, for jobs created by calling CreateAutoMLJobV2) related to image or text classification problem types only.
      */
     InferenceContainerDefinitions?: AutoMLInferenceContainerDefinitions;
   }
@@ -3211,25 +3211,25 @@ declare namespace SageMaker {
      */
     ChannelType?: AutoMLChannelType;
     /**
-     * The content type of the data from the input source. The following are the allowed content types for different problems:   ImageClassification: image/png, image/jpeg, or image/*. The default value is image/*.   TextClassification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
+     * The content type of the data from the input source. The following are the allowed content types for different problems:   For Tabular problem types: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For ImageClassification: image/png, image/jpeg, or image/*. The default value is image/*.   For TextClassification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
      */
     ContentType?: ContentType;
     /**
-     * The allowed compression types depend on the input format. We allow the compression type Gzip for S3Prefix inputs only. For all other inputs, the compression type should be None. If no compression type is provided, we default to None.
+     * The allowed compression types depend on the input format and problem type. We allow the compression type Gzip for S3Prefix inputs on tabular data only. For all other inputs, the compression type should be None. If no compression type is provided, we default to None.
      */
     CompressionType?: CompressionType;
     /**
-     * The data source for an AutoML channel.
+     * The data source for an AutoML channel (Required).
      */
     DataSource?: AutoMLDataSource;
   }
   export interface AutoMLJobCompletionCriteria {
     /**
-     * The maximum number of times a training job is allowed to run. For V2 jobs (jobs created by calling CreateAutoMLJobV2), the supported value is 1.
+     * The maximum number of times a training job is allowed to run. For job V2s (jobs created by calling CreateAutoMLJobV2), the supported value is 1.
      */
     MaxCandidates?: MaxCandidates;
     /**
-     * The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the StoppingCondition used by the CreateHyperParameterTuningJob action. For V2 jobs (jobs created by calling CreateAutoMLJobV2), this field controls the runtime of the job candidate.
+     * The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the StoppingCondition used by the CreateHyperParameterTuningJob action. For job V2s (jobs created by calling CreateAutoMLJobV2), this field controls the runtime of the job candidate.
      */
     MaxRuntimePerTrainingJobInSeconds?: MaxRuntimePerTrainingJobInSeconds;
     /**
@@ -3263,7 +3263,7 @@ declare namespace SageMaker {
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
     /**
-     * The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset. For the list of all available metrics supported by Autopilot, see Autopilot metrics. If you do not specify a metric explicitly, the default behavior is to automatically use:    MSE: for regression.    F1: for binary classification    Accuracy: for multiclass classification.  
+     * The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset. For the list of all available metrics supported by Autopilot, see Autopilot metrics. If you do not specify a metric explicitly, the default behavior is to automatically use:   For tabular problem types:   Regression: MSE.   Binary classification: F1.   Multiclass classification: Accuracy.     For image or text classification problem types: Accuracy   
      */
     MetricName: AutoMLMetricEnum;
   }
@@ -3339,15 +3339,34 @@ declare namespace SageMaker {
   export type AutoMLPartialFailureReasons = AutoMLPartialFailureReason[];
   export interface AutoMLProblemTypeConfig {
     /**
-     * Settings used to configure an AutoML job using the V2 API for the image classification problem type.
+     * Settings used to configure an AutoML job V2 for the image classification problem type.
      */
     ImageClassificationJobConfig?: ImageClassificationJobConfig;
     /**
-     * Settings used to configure an AutoML job using the V2 API for the text classification problem type.
+     * Settings used to configure an AutoML job V2 for the text classification problem type.
      */
     TextClassificationJobConfig?: TextClassificationJobConfig;
+    /**
+     * Settings used to configure an AutoML job V2 for a tabular problem type (regression, classification).
+     */
+    TabularJobConfig?: TabularJobConfig;
+  }
+  export type AutoMLProblemTypeConfigName = "ImageClassification"|"TextClassification"|"Tabular"|string;
+  export interface AutoMLProblemTypeResolvedAttributes {
+    /**
+     * Defines the resolved attributes for the TABULAR problem type.
+     */
+    TabularResolvedAttributes?: TabularResolvedAttributes;
   }
   export type AutoMLProcessingUnit = "CPU"|"GPU"|string;
+  export interface AutoMLResolvedAttributes {
+    AutoMLJobObjective?: AutoMLJobObjective;
+    CompletionCriteria?: AutoMLJobCompletionCriteria;
+    /**
+     * Defines the resolved attributes specific to a problem type.
+     */
+    AutoMLProblemTypeResolvedAttributes?: AutoMLProblemTypeResolvedAttributes;
+  }
   export interface AutoMLS3DataSource {
     /**
      * The data type.    If you choose S3Prefix, S3Uri identifies a key name prefix. SageMaker uses all objects that match the specified key name prefix for model training. The S3Prefix should have the following format:  s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER-OR-FILE    If you choose ManifestFile, S3Uri identifies an object that is a manifest file containing a list of object keys that you want SageMaker to use for model training. A ManifestFile should have the format shown below:  [ {"prefix": "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/DOC-EXAMPLE-PREFIX/"},    "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-1",   "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-2",   ... "DOC-EXAMPLE-RELATIVE-PATH/DOC-EXAMPLE-FOLDER/DATA-N" ]    If you choose AugmentedManifestFile, S3Uri identifies an object that is an augmented manifest file in JSON lines format. This file contains the data you want to use for model training. AugmentedManifestFile is available for V2 API jobs only (for example, for jobs created by calling CreateAutoMLJobV2). Here is a minimal, single-record example of an AugmentedManifestFile:  {"source-ref": "s3://DOC-EXAMPLE-BUCKET/DOC-EXAMPLE-FOLDER/cats/cat.jpg",   "label-metadata": {"class-name": "cat" } For more information on AugmentedManifestFile, see Provide Dataset Metadata to Training Jobs with an Augmented Manifest File.  
@@ -3591,6 +3610,12 @@ declare namespace SageMaker {
     ModelInsights?: ModelInsightsLocation;
   }
   export type CandidateDefinitionNotebookLocation = string;
+  export interface CandidateGenerationConfig {
+    /**
+     * Stores the configuration information for the selection of algorithms used to train model candidates on tabular data. The list of available algorithms to choose from depends on the training mode set in  TabularJobConfig.Mode .    AlgorithmsConfig should not be set in AUTO training mode.   When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be set and one only. If the list of algorithms provided as values for AutoMLAlgorithms is empty, CandidateGenerationConfig uses the full set of algorithms for the given training mode.   When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the full set of algorithms for the given training mode.   For the list of all algorithms per problem type and training mode, see  AutoMLAlgorithmConfig. For more information on each algorithm, see the Algorithm support section in Autopilot developer guide.
+     */
+    AlgorithmsConfig?: AutoMLAlgorithmsConfig;
+  }
   export type CandidateName = string;
   export interface CandidateProperties {
     /**
@@ -4357,7 +4382,7 @@ declare namespace SageMaker {
      */
     ProblemType?: ProblemType;
     /**
-     * Defines the objective metric used to measure the predictive quality of an AutoML job. You provide an AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or maximize it. For CreateAutoMLJobV2, only Accuracy is supported.
+     * Specifies a metric to minimize or maximize as the objective of a job. If not specified, the default objective metric depends on the problem type. See AutoMLJobObjective for the default values.
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -4393,7 +4418,7 @@ declare namespace SageMaker {
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to InputDataConfig supported by CreateAutoMLJob. The supported formats depend on the problem type:   ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile    TextClassification: S3Prefix  
+     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to InputDataConfig supported by CreateAutoMLJob. The supported formats depend on the problem type:   For Tabular problem types: S3Prefix, ManifestFile.   For ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile.   For TextClassification: S3Prefix.  
      */
     AutoMLJobInputDataConfig: AutoMLJobInputDataConfig;
     /**
@@ -4401,7 +4426,7 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * Defines the configuration settings of one of the supported problem types.
+     * Defines the configuration settings of one of the supported problem types.  For tabular problem types, you must either specify the type of supervised learning problem in AutoMLProblemTypeConfig (TabularJobConfig.ProblemType) and provide the AutoMLJobObjective, or none at all. 
      */
     AutoMLProblemTypeConfig: AutoMLProblemTypeConfig;
     /**
@@ -4417,7 +4442,7 @@ declare namespace SageMaker {
      */
     SecurityConfig?: AutoMLSecurityConfig;
     /**
-     * Specifies a metric to minimize or maximize as the objective of a job. For CreateAutoMLJobV2, only Accuracy is supported.
+     * Specifies a metric to minimize or maximize as the objective of a job. If not specified, the default objective metric depends on the problem type. For the list of default values per problem type, see AutoMLJobObjective.  For tabular problem types, you must either provide the AutoMLJobObjective and indicate the type of supervised learning problem in AutoMLProblemTypeConfig (TabularJobConfig.ProblemType), or none. 
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -4425,7 +4450,7 @@ declare namespace SageMaker {
      */
     ModelDeployConfig?: ModelDeployConfig;
     /**
-     * This structure specifies how to split the data into train and validation datasets. If you are using the V1 API (for example CreateAutoMLJob) or the V2 API for Natural Language Processing problems (for example CreateAutoMLJobV2 with a TextClassificationJobConfig problem type), the validation and training datasets must contain the same headers. Also, for V1 API jobs, the validation dataset must be less than 2 GB in size.
+     * This structure specifies how to split the data into train and validation datasets. The validation and training datasets must contain the same headers. For jobs created by calling CreateAutoMLJob, the validation dataset must be less than 2 GB in size.
      */
     DataSplitConfig?: AutoMLDataSplitConfig;
   }
@@ -7207,7 +7232,7 @@ declare namespace SageMaker {
      */
     AutoMLJobArtifacts?: AutoMLJobArtifacts;
     /**
-     * Contains ProblemType, AutoMLJobObjective, and CompletionCriteria. If you do not provide these values, they are auto-inferred. If you do provide them, the values used are the ones you provide.
+     * Contains ProblemType, AutoMLJobObjective, and CompletionCriteria. If you do not provide these values, they are inferred.
      */
     ResolvedAttributes?: ResolvedAttributes;
     /**
@@ -7221,17 +7246,17 @@ declare namespace SageMaker {
   }
   export interface DescribeAutoMLJobV2Request {
     /**
-     * Requests information about an AutoML V2 job using its unique name.
+     * Requests information about an AutoML job V2 using its unique name.
      */
     AutoMLJobName: AutoMLJobName;
   }
   export interface DescribeAutoMLJobV2Response {
     /**
-     * Returns the name of the AutoML V2 job.
+     * Returns the name of the AutoML job V2.
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * Returns the Amazon Resource Name (ARN) of the AutoML V2 job.
+     * Returns the Amazon Resource Name (ARN) of the AutoML job V2.
      */
     AutoMLJobArn: AutoMLJobArn;
     /**
@@ -7251,15 +7276,15 @@ declare namespace SageMaker {
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
-     * Returns the configuration settings of the problem type set for the AutoML V2 job.
+     * Returns the configuration settings of the problem type set for the AutoML job V2.
      */
     AutoMLProblemTypeConfig?: AutoMLProblemTypeConfig;
     /**
-     * Returns the creation time of the AutoML V2 job.
+     * Returns the creation time of the AutoML job V2.
      */
     CreationTime: Timestamp;
     /**
-     * Returns the end time of the AutoML V2 job.
+     * Returns the end time of the AutoML job V2.
      */
     EndTime?: Timestamp;
     /**
@@ -7267,11 +7292,11 @@ declare namespace SageMaker {
      */
     LastModifiedTime: Timestamp;
     /**
-     * Returns the reason for the failure of the AutoML V2 job, when applicable.
+     * Returns the reason for the failure of the AutoML job V2, when applicable.
      */
     FailureReason?: AutoMLFailureReason;
     /**
-     * Returns a list of reasons for partial failures within an AutoML V2 job.
+     * Returns a list of reasons for partial failures within an AutoML job V2.
      */
     PartialFailureReasons?: AutoMLPartialFailureReasons;
     /**
@@ -7279,11 +7304,11 @@ declare namespace SageMaker {
      */
     BestCandidate?: AutoMLCandidate;
     /**
-     * Returns the status of the AutoML V2 job.
+     * Returns the status of the AutoML job V2.
      */
     AutoMLJobStatus: AutoMLJobStatus;
     /**
-     * Returns the secondary status of the AutoML V2 job.
+     * Returns the secondary status of the AutoML job V2.
      */
     AutoMLJobSecondaryStatus: AutoMLJobSecondaryStatus;
     /**
@@ -7302,6 +7327,15 @@ declare namespace SageMaker {
      * Returns the security configuration for traffic encryption or Amazon VPC settings.
      */
     SecurityConfig?: AutoMLSecurityConfig;
+    AutoMLJobArtifacts?: AutoMLJobArtifacts;
+    /**
+     * Returns the resolved attributes used by the AutoML job V2.
+     */
+    ResolvedAttributes?: AutoMLResolvedAttributes;
+    /**
+     * Returns the name of the problem type configuration set for the AutoML job V2.
+     */
+    AutoMLProblemTypeConfigName?: AutoMLProblemTypeConfigName;
   }
   export interface DescribeCodeRepositoryInput {
     /**
@@ -17806,7 +17840,7 @@ declare namespace SageMaker {
      */
     S3OutputLocation: S3Uri;
     /**
-     * Identifies the target device or the machine learning instance that you want to run your model on after the compilation has completed. Alternatively, you can specify OS, architecture, and accelerator using TargetPlatform fields. It can be used instead of TargetPlatform.
+     * Identifies the target device or the machine learning instance that you want to run your model on after the compilation has completed. Alternatively, you can specify OS, architecture, and accelerator using TargetPlatform fields. It can be used instead of TargetPlatform.  Currently ml_trn1 is available only in US East (N. Virginia) Region, and ml_inf2 is available only in US East (Ohio) Region. 
      */
     TargetDevice?: TargetDevice;
     /**
@@ -20206,6 +20240,43 @@ declare namespace SageMaker {
   }
   export type TableFormat = "Glue"|"Iceberg"|string;
   export type TableName = string;
+  export interface TabularJobConfig {
+    /**
+     * The configuration information of how model candidates are generated.
+     */
+    CandidateGenerationConfig?: CandidateGenerationConfig;
+    CompletionCriteria?: AutoMLJobCompletionCriteria;
+    /**
+     * A URL to the Amazon S3 data source containing selected features from the input data source to run an Autopilot job V2. You can input FeatureAttributeNames (optional) in JSON format as shown below:   { "FeatureAttributeNames":["col1", "col2", ...] }. You can also specify the data type of the feature (optional) in the format shown below:  { "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } }   These column keys may not include the target column.  In ensembling mode, Autopilot only supports the following data types: numeric, categorical, text, and datetime. In HPO mode, Autopilot can support numeric, categorical, text, datetime, and sequence. If only FeatureDataTypes is provided, the column keys (col1, col2,..) should be a subset of the column names in the input data.  If both FeatureDataTypes and FeatureAttributeNames are provided, then the column keys should be a subset of the column names provided in FeatureAttributeNames.  The key name FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] are case sensitive and should be a list of strings containing unique values that are a subset of the column names in the input data. The list of columns provided must not include the target column.
+     */
+    FeatureSpecificationS3Uri?: S3Uri;
+    /**
+     * The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting AUTO. In AUTO mode, Autopilot chooses ENSEMBLING for datasets smaller than 100 MB, and HYPERPARAMETER_TUNING for larger ones. The ENSEMBLING mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See Autopilot algorithm support for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING (HPO) mode uses the best hyperparameters to train the best version of a model. HPO automatically selects an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See Autopilot algorithm support for a list of algorithms supported by HYPERPARAMETER_TUNING mode.
+     */
+    Mode?: AutoMLMode;
+    /**
+     * Generates possible candidates without training the models. A model candidate is a combination of data preprocessors, algorithms, and algorithm parameter settings.
+     */
+    GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
+    /**
+     * The type of supervised learning problem available for the model candidates of the AutoML job V2. For more information, see  Amazon SageMaker Autopilot problem types.
+     */
+    ProblemType?: ProblemType;
+    /**
+     * The name of the target variable in supervised learning, usually represented by 'y'.
+     */
+    TargetAttributeName: TargetAttributeName;
+    /**
+     * If specified, this column name indicates which column of the dataset should be treated as sample weights for use by the objective metric during the training, evaluation, and the selection of the best model. This column is not considered as a predictive feature. For more information on Autopilot metrics, see Metrics and validation. Sample weights should be numeric, non-negative, with larger values indicating which rows are more important than others. Data points that have invalid or no weight value are excluded. Support for sample weights is available in Ensembling mode only.
+     */
+    SampleWeightAttributeName?: SampleWeightAttributeName;
+  }
+  export interface TabularResolvedAttributes {
+    /**
+     * The type of supervised learning problem available for the model candidates of the AutoML job V2 (Binary Classification, Multiclass Classification, Regression). For more information, see  Amazon SageMaker Autopilot problem types.
+     */
+    ProblemType?: ProblemType;
+  }
   export interface Tag {
     /**
      * The tag key. Tag keys must be unique per resource.
@@ -20276,11 +20347,11 @@ declare namespace SageMaker {
      */
     CompletionCriteria?: AutoMLJobCompletionCriteria;
     /**
-     * The name of the column used to provide the sentences to be classified. It should not be the same as the target column.
+     * The name of the column used to provide the sentences to be classified. It should not be the same as the target column (Required).
      */
     ContentColumn?: ContentColumn;
     /**
-     * The name of the column used to provide the class labels. It should not be same as the content column.
+     * The name of the column used to provide the class labels. It should not be same as the content column (Required).
      */
     TargetLabelColumn?: TargetLabelColumn;
   }

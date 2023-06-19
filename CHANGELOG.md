@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1399.0-->
+<!--LATEST=2.1400.0-->
 <!--ENTRYINSERT-->
+
+## 2.1400.0
+* feature: CloudFormation: Specify desired CloudFormation behavior in the event of ChangeSet execution failure using the CreateChangeSet OnStackFailure parameter
+* feature: EC2: API changes to AWS Verified Access to include data from trust providers in logs
+* feature: Glue: This release adds support for creating cross region table/database resource links
+* feature: Pricing: This release updates the PriceListArn regex pattern.
+* feature: Route53Domains: Update MaxItems upper bound to 1000 for ListPricesRequest
+* feature: SageMaker: Amazon Sagemaker Autopilot releases CreateAutoMLJobV2 and DescribeAutoMLJobV2 for Autopilot customers with ImageClassification, TextClassification and Tabular problem type config support.
 
 ## 2.1399.0
 * feature: Account: Improve pagination support for ListRegions

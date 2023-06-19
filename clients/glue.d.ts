@@ -4976,6 +4976,10 @@ declare namespace Glue {
      * The name of the catalog database.
      */
     DatabaseName?: NameString;
+    /**
+     * Region of the target database.
+     */
+    Region?: NameString;
   }
   export interface DatabaseInput {
     /**
@@ -12120,6 +12124,10 @@ declare namespace Glue {
      * The name of the target table.
      */
     Name?: NameString;
+    /**
+     * Region of the target table.
+     */
+    Region?: NameString;
   }
   export interface TableInput {
     /**
