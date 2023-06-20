@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1400.0-->
+<!--LATEST=2.1401.0-->
 <!--ENTRYINSERT-->
+
+## 2.1401.0
+* feature: Appflow: This release adds new API to reset connector metadata cache
+* feature: ConfigService: Updated ResourceType enum with new resource types onboarded by AWS Config in May 2023.
+* feature: EC2: Adds support for targeting Dedicated Host allocations by assetIds in AWS Outposts
+* feature: Lambda: This release adds RecursiveInvocationException to the Invoke API and InvokeWithResponseStream API.
+* feature: Redshift: Added support for custom domain names for Redshift Provisioned clusters. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
 
 ## 2.1400.0
 * feature: CloudFormation: Specify desired CloudFormation behavior in the event of ChangeSet execution failure using the CreateChangeSet OnStackFailure parameter

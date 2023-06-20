@@ -149,6 +149,14 @@ declare class Redshift extends Service {
    */
   createClusterSubnetGroup(callback?: (err: AWSError, data: Redshift.Types.CreateClusterSubnetGroupResult) => void): Request<Redshift.Types.CreateClusterSubnetGroupResult, AWSError>;
   /**
+   * Used to create a custom domain name for a cluster. Properties include the custom domain name, the cluster the custom domain is associated with, and the certificate Amazon Resource Name (ARN).
+   */
+  createCustomDomainAssociation(params: Redshift.Types.CreateCustomDomainAssociationMessage, callback?: (err: AWSError, data: Redshift.Types.CreateCustomDomainAssociationResult) => void): Request<Redshift.Types.CreateCustomDomainAssociationResult, AWSError>;
+  /**
+   * Used to create a custom domain name for a cluster. Properties include the custom domain name, the cluster the custom domain is associated with, and the certificate Amazon Resource Name (ARN).
+   */
+  createCustomDomainAssociation(callback?: (err: AWSError, data: Redshift.Types.CreateCustomDomainAssociationResult) => void): Request<Redshift.Types.CreateCustomDomainAssociationResult, AWSError>;
+  /**
    * Creates a Redshift-managed VPC endpoint.
    */
   createEndpointAccess(params: Redshift.Types.CreateEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
@@ -276,6 +284,14 @@ declare class Redshift extends Service {
    * Deletes the specified cluster subnet group.
    */
   deleteClusterSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Contains information about deleting a custom domain association for a cluster.
+   */
+  deleteCustomDomainAssociation(params: Redshift.Types.DeleteCustomDomainAssociationMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Contains information about deleting a custom domain association for a cluster.
+   */
+  deleteCustomDomainAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Redshift-managed VPC endpoint.
    */
@@ -444,6 +460,14 @@ declare class Redshift extends Service {
    * Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all clusters that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all clusters that have any combination of those values are returned. If both tag keys and values are omitted from the request, clusters are returned regardless of whether they have tag keys or values associated with them.
    */
   describeClusters(callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
+  /**
+   * Contains information for custom domain associations for a cluster.
+   */
+  describeCustomDomainAssociations(params: Redshift.Types.DescribeCustomDomainAssociationsMessage, callback?: (err: AWSError, data: Redshift.Types.CustomDomainAssociationsMessage) => void): Request<Redshift.Types.CustomDomainAssociationsMessage, AWSError>;
+  /**
+   * Contains information for custom domain associations for a cluster.
+   */
+  describeCustomDomainAssociations(callback?: (err: AWSError, data: Redshift.Types.CustomDomainAssociationsMessage) => void): Request<Redshift.Types.CustomDomainAssociationsMessage, AWSError>;
   /**
    * Shows the status of any inbound or outbound datashares available in the specified account.
    */
@@ -801,6 +825,14 @@ declare class Redshift extends Service {
    */
   modifyClusterSubnetGroup(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSubnetGroupResult) => void): Request<Redshift.Types.ModifyClusterSubnetGroupResult, AWSError>;
   /**
+   * Contains information for changing a custom domain association.
+   */
+  modifyCustomDomainAssociation(params: Redshift.Types.ModifyCustomDomainAssociationMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyCustomDomainAssociationResult) => void): Request<Redshift.Types.ModifyCustomDomainAssociationResult, AWSError>;
+  /**
+   * Contains information for changing a custom domain association.
+   */
+  modifyCustomDomainAssociation(callback?: (err: AWSError, data: Redshift.Types.ModifyCustomDomainAssociationResult) => void): Request<Redshift.Types.ModifyCustomDomainAssociationResult, AWSError>;
+  /**
    * Modifies a Redshift-managed VPC endpoint.
    */
   modifyEndpointAccess(params: Redshift.Types.ModifyEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
@@ -1069,6 +1101,21 @@ declare namespace Redshift {
     ConsumerRegion?: String;
   }
   export type AssociatedClusterList = ClusterAssociatedToSchedule[];
+  export interface Association {
+    /**
+     * The Amazon Resource Name (ARN) for the certificate associated with the custom domain.
+     */
+    CustomDomainCertificateArn?: String;
+    /**
+     * The expiration date for the certificate.
+     */
+    CustomDomainCertificateExpiryDate?: TStamp;
+    /**
+     * A list of all associated clusters and domain names tied to a specific certificate.
+     */
+    CertificateAssociations?: CertificateAssociationList;
+  }
+  export type AssociationList = Association[];
   export type AttributeList = AccountAttribute[];
   export type AttributeNameList = String[];
   export type AttributeValueList = AttributeValueTarget[];
@@ -1146,7 +1193,7 @@ declare namespace Redshift {
      */
     SnapshotArn?: String;
     /**
-     * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+     * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */
     SnapshotClusterIdentifier?: String;
     /**
@@ -1218,6 +1265,17 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
   }
+  export interface CertificateAssociation {
+    /**
+     * The custom domain name for the certificate association.
+     */
+    CustomDomainName?: String;
+    /**
+     * The cluster identifier for the certificate association.
+     */
+    ClusterIdentifier?: String;
+  }
+  export type CertificateAssociationList = CertificateAssociation[];
   export interface Cluster {
     /**
      * The unique identifier of the cluster.
@@ -1427,6 +1485,18 @@ declare namespace Redshift {
      * The status of the reserved-node exchange request. Statuses include in-progress and requested.
      */
     ReservedNodeExchangeStatus?: ReservedNodeExchangeStatus;
+    /**
+     * The custom domain name associated with the cluster.
+     */
+    CustomDomainName?: String;
+    /**
+     * The certificate Amazon Resource Name (ARN) for the custom domain name.
+     */
+    CustomDomainCertificateArn?: String;
+    /**
+     * The expiration date for the certificate associated with the custom domain name.
+     */
+    CustomDomainCertificateExpiryDate?: TStamp;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -1745,7 +1815,7 @@ declare namespace Redshift {
      */
     SourceSnapshotIdentifier: String;
     /**
-     * The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name. Constraints:   Must be the identifier for a valid cluster.  
+     * The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name. Constraints:   Must be the identifier for a valid cluster.  
      */
     SourceSnapshotClusterIdentifier?: String;
     /**
@@ -1798,11 +1868,11 @@ declare namespace Redshift {
      */
     NodeType: String;
     /**
-     * The user name associated with the admin user for the cluster that is being created. Constraints:   Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be PUBLIC.   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   The first character must be a letter.   Must not contain a colon (:) or a slash (/).   Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.   
+     * The user name associated with the admin user account for the cluster that is being created. Constraints:   Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be PUBLIC.   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   The first character must be a letter.   Must not contain a colon (:) or a slash (/).   Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.   
      */
     MasterUsername: String;
     /**
-     * The password associated with the admin user for the cluster that is being created. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
+     * The password associated with the admin user account for the cluster that is being created. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
      */
     MasterUserPassword: String;
     /**
@@ -2000,6 +2070,38 @@ declare namespace Redshift {
   }
   export interface CreateClusterSubnetGroupResult {
     ClusterSubnetGroup?: ClusterSubnetGroup;
+  }
+  export interface CreateCustomDomainAssociationMessage {
+    /**
+     * The custom domain name for a custom domain association.
+     */
+    CustomDomainName: CustomDomainNameString;
+    /**
+     * The certificate Amazon Resource Name (ARN) for the custom domain name association.
+     */
+    CustomDomainCertificateArn: CustomDomainCertificateArnString;
+    /**
+     * The cluster identifier that the custom domain is associated with.
+     */
+    ClusterIdentifier: String;
+  }
+  export interface CreateCustomDomainAssociationResult {
+    /**
+     * The custom domain name for the association result.
+     */
+    CustomDomainName?: CustomDomainNameString;
+    /**
+     * The Amazon Resource Name (ARN) for the certificate associated with the custom domain name.
+     */
+    CustomDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The identifier of the cluster that the custom domain is associated with.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The expiration time for the certificate for the custom domain.
+     */
+    CustomDomainCertExpiryTime?: String;
   }
   export interface CreateEndpointAccessMessage {
     /**
@@ -2223,6 +2325,18 @@ declare namespace Redshift {
      */
     Tags?: TagList;
   }
+  export interface CustomDomainAssociationsMessage {
+    /**
+     * The marker for the custom domain association.
+     */
+    Marker?: String;
+    /**
+     * The associations for the custom domain.
+     */
+    Associations?: AssociationList;
+  }
+  export type CustomDomainCertificateArnString = string;
+  export type CustomDomainNameString = string;
   export interface CustomerStorageMessage {
     /**
      * The total amount of storage currently used for snapshots.
@@ -2399,7 +2513,7 @@ declare namespace Redshift {
      */
     SnapshotIdentifier: String;
     /**
-     * The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name. Constraints: Must be the name of valid cluster.
+     * The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name. Constraints: Must be the name of valid cluster.
      */
     SnapshotClusterIdentifier?: String;
   }
@@ -2412,6 +2526,12 @@ declare namespace Redshift {
      * The name of the cluster subnet group name to be deleted.
      */
     ClusterSubnetGroupName: String;
+  }
+  export interface DeleteCustomDomainAssociationMessage {
+    /**
+     * The identifier of the cluster to delete a custom domain association for.
+     */
+    ClusterIdentifier: String;
   }
   export interface DeleteEndpointAccessMessage {
     /**
@@ -2591,7 +2711,7 @@ declare namespace Redshift {
      */
     EndTime?: TStamp;
     /**
-     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: 100  Constraints: minimum 20, maximum 500.
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: 100  Constraints: minimum 20, maximum 100.
      */
     MaxRecords?: IntegerOptional;
     /**
@@ -2694,6 +2814,24 @@ declare namespace Redshift {
      * A tag value or values for which you want to return all matching clusters that are associated with the specified tag value or values. For example, suppose that you have clusters that are tagged with values called admin and test. If you specify both of these tag values in the request, Amazon Redshift returns a response with the clusters that have either or both of these tag values associated with them.
      */
     TagValues?: TagValueList;
+  }
+  export interface DescribeCustomDomainAssociationsMessage {
+    /**
+     * The custom domain name for the custom domain association.
+     */
+    CustomDomainName?: CustomDomainNameString;
+    /**
+     * The certificate Amazon Resource Name (ARN) for the custom domain association.
+     */
+    CustomDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The maximum records setting for the associated custom domain.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * The marker for the custom domain association.
+     */
+    Marker?: String;
   }
   export interface DescribeDataSharesForConsumerMessage {
     /**
@@ -3624,7 +3762,7 @@ declare namespace Redshift {
     /**
      * The unique identifier of the cluster that contains the database for which you are requesting credentials. This parameter is case sensitive.
      */
-    ClusterIdentifier: String;
+    ClusterIdentifier?: String;
     /**
      * The number of seconds until the returned temporary password expires. Constraint: minimum 900, maximum 3600. Default: 900
      */
@@ -3637,6 +3775,10 @@ declare namespace Redshift {
      * A list of the names of existing database groups that the user named in DbUser will join for the current session, in addition to any group memberships for an existing user. If not specified, a new user is added only to PUBLIC. Database group name constraints   Must be 1 to 64 alphanumeric characters or hyphens   Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
      */
     DbGroups?: DbGroupList;
+    /**
+     * The custom domain name for the cluster credentials.
+     */
+    CustomDomainName?: String;
   }
   export interface GetClusterCredentialsWithIAMMessage {
     /**
@@ -3646,11 +3788,15 @@ declare namespace Redshift {
     /**
      * The unique identifier of the cluster that contains the database for which you are requesting credentials. 
      */
-    ClusterIdentifier: String;
+    ClusterIdentifier?: String;
     /**
      * The number of seconds until the returned temporary password expires. Range: 900-3600. Default: 900.
      */
     DurationSeconds?: IntegerOptional;
+    /**
+     * The custom domain name for the IAM message cluster credentials.
+     */
+    CustomDomainName?: String;
   }
   export interface GetReservedNodeExchangeConfigurationOptionsInputMessage {
     /**
@@ -3979,7 +4125,7 @@ declare namespace Redshift {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the MasterUserPassword element exists in the PendingModifiedValues element of the operation response.   Operations never return the password, so this operation provides a way to regain access to the admin user for a cluster if the password is lost.  Default: Uses existing setting. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
+     * The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the MasterUserPassword element exists in the PendingModifiedValues element of the operation response.   Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.  Default: Uses existing setting. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
      */
     MasterUserPassword?: String;
     /**
@@ -4115,6 +4261,38 @@ declare namespace Redshift {
   }
   export interface ModifyClusterSubnetGroupResult {
     ClusterSubnetGroup?: ClusterSubnetGroup;
+  }
+  export interface ModifyCustomDomainAssociationMessage {
+    /**
+     * The custom domain name for a changed custom domain association.
+     */
+    CustomDomainName?: CustomDomainNameString;
+    /**
+     * The certificate Amazon Resource Name (ARN) for the changed custom domain association.
+     */
+    CustomDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The identifier of the cluster to change a custom domain association for.
+     */
+    ClusterIdentifier: String;
+  }
+  export interface ModifyCustomDomainAssociationResult {
+    /**
+     * The custom domain name associated with the result for the changed custom domain association.
+     */
+    CustomDomainName?: CustomDomainNameString;
+    /**
+     * The certificate Amazon Resource Name (ARN) associated with the result for the changed custom domain association.
+     */
+    CustomDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The identifier of the cluster associated with the result for the changed custom domain association.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The certificate expiration time associated with the result for the changed custom domain association.
+     */
+    CustomDomainCertExpiryTime?: String;
   }
   export interface ModifyEndpointAccessMessage {
     /**
@@ -4828,7 +5006,7 @@ declare namespace Redshift {
      */
     SnapshotArn?: String;
     /**
-     * The name of the cluster the source snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+     * The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */
     SnapshotClusterIdentifier?: String;
     /**
@@ -5091,7 +5269,7 @@ declare namespace Redshift {
      */
     SnapshotArn?: String;
     /**
-     * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+     * The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
      */
     SnapshotClusterIdentifier?: String;
     /**

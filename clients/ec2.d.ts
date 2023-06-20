@@ -541,11 +541,11 @@ declare class EC2 extends Service {
    */
   createEgressOnlyInternetGateway(callback?: (err: AWSError, data: EC2.Types.CreateEgressOnlyInternetGatewayResult) => void): Request<EC2.Types.CreateEgressOnlyInternetGatewayResult, AWSError>;
   /**
-   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see EC2 Fleet in the Amazon EC2 User Guide.
+   * Creates an EC2 Fleet that contains the configuration information for On-Demand Instances and Spot Instances. Instances are launched immediately if there is available capacity. A single EC2 Fleet can include multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see EC2 Fleet in the Amazon EC2 User Guide.
    */
   createFleet(params: EC2.Types.CreateFleetRequest, callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
   /**
-   * Launches an EC2 Fleet. You can create a single EC2 Fleet that includes multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see EC2 Fleet in the Amazon EC2 User Guide.
+   * Creates an EC2 Fleet that contains the configuration information for On-Demand Instances and Spot Instances. Instances are launched immediately if there is available capacity. A single EC2 Fleet can include multiple launch specifications that vary by instance type, AMI, Availability Zone, or subnet. For more information, see EC2 Fleet in the Amazon EC2 User Guide.
    */
   createFleet(callback?: (err: AWSError, data: EC2.Types.CreateFleetResult) => void): Request<EC2.Types.CreateFleetResult, AWSError>;
   /**
@@ -5597,9 +5597,9 @@ declare namespace EC2 {
      */
     InstanceFamily?: String;
     /**
-     * The number of Dedicated Hosts to allocate to your account with these parameters.
+     * The number of Dedicated Hosts to allocate to your account with these parameters. If you are allocating the Dedicated Hosts on an Outpost, and you specify AssetIds, you can omit this parameter. In this case, Amazon EC2 allocates a Dedicated Host on each specified hardware asset. If you specify both AssetIds and Quantity, then the value that you specify for Quantity must be equal to the number of asset IDs specified.
      */
-    Quantity: Integer;
+    Quantity?: Integer;
     /**
      * The tags to apply to the Dedicated Host during creation.
      */
@@ -5609,13 +5609,17 @@ declare namespace EC2 {
      */
     HostRecovery?: HostRecovery;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.
+     * The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host. If you specify OutpostArn, you can optionally specify AssetIds. If you are allocating the Dedicated Host in a Region, omit this parameter.
      */
     OutpostArn?: String;
     /**
      * Indicates whether to enable or disable host maintenance for the Dedicated Host. For more information, see Host maintenance in the Amazon EC2 User Guide.
      */
     HostMaintenance?: HostMaintenance;
+    /**
+     * The IDs of the Outpost hardware assets on which to allocate the Dedicated Hosts. Targeting specific hardware assets on an Outpost can help to minimize latency between your workloads. This parameter is supported only if you specify OutpostArn. If you are allocating the Dedicated Hosts in a Region, omit this parameter.   If you specify this parameter, you can omit Quantity. In this case, Amazon EC2 allocates a Dedicated Host on each specified hardware asset.   If you specify both AssetIds and Quantity, then the value for Quantity must be equal to the number of asset IDs specified.  
+     */
+    AssetIds?: AssetIdList;
   }
   export interface AllocateHostsResult {
     /**
@@ -5913,6 +5917,8 @@ declare namespace EC2 {
   export type ArchitectureTypeSet = ArchitectureType[];
   export type ArchitectureValues = "i386"|"x86_64"|"arm64"|"x86_64_mac"|"arm64_mac"|string;
   export type ArnList = ResourceArn[];
+  export type AssetId = string;
+  export type AssetIdList = AssetId[];
   export interface AssignIpv6AddressesRequest {
     /**
      * The number of additional IPv6 addresses to assign to the network interface. The specified number of IPv6 addresses are assigned in addition to the existing IPv6 addresses that are already assigned to the network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.
@@ -8340,7 +8346,7 @@ declare namespace EC2 {
      */
     ThreadsPerCore?: Integer;
     /**
-     * Indicates whether the instance is enabled for AMD SEV-SNP.
+     * Indicates whether the instance is enabled for AMD SEV-SNP. For more information, see AMD SEV-SNP.
      */
     AmdSevSnp?: AmdSevSnpSpecification;
   }
@@ -8354,7 +8360,7 @@ declare namespace EC2 {
      */
     ThreadsPerCore?: Integer;
     /**
-     * Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only.
+     * Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is supported with M6a, R6a, and C6a instance types only. For more information, see AMD SEV-SNP.
      */
     AmdSevSnp?: AmdSevSnpSpecification;
   }
@@ -14602,7 +14608,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: RequestInstanceTypeList;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether Amazon CloudWatch action based recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.encryption-support - Indicates whether data is encrypted at rest (required | supported | unsupported).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic Fabric Adapters (EFAs) per instance.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.encryption-in-transit-supported - Indicates whether the instance type automatically encrypts in-transit traffic between instances (true | false).    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-cards - The maximum number of network cards per instance.    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-boot-mode - The boot mode (legacy-bios | uefi).    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
+     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether Amazon CloudWatch action based recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.encryption-support - Indicates whether data is encrypted at rest (required | supported | unsupported).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic Fabric Adapters (EFAs) per instance.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.encryption-in-transit-supported - Indicates whether the instance type automatically encrypts in-transit traffic between instances (true | false).    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-cards - The maximum number of network cards per instance.    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    processor-info.supported-features - The supported CPU features (amd-sev-snp).    supported-boot-mode - The boot mode (legacy-bios | uefi).    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
      */
     Filters?: FilterList;
     /**
@@ -14616,7 +14622,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstanceTypesResult {
     /**
-     * The instance type. For more information, see Instance types in the Amazon EC2 User Guide.
+     * The instance type. For more information, see Instance types in the Amazon EC2 User Guide. When you change your EBS-backed instance type, instance restart or replacement behavior depends on the instance type compatibility between the old and new types. An instance that's backed by an instance store volume is always replaced. For more information, see Change the instance type in the Amazon EC2 User Guide.
      */
     InstanceTypes?: InstanceTypeInfoList;
     /**
@@ -20122,7 +20128,7 @@ declare namespace EC2 {
      */
     InstanceRequirements?: InstanceRequirements;
     /**
-     * The ID of the AMI. An AMI is required to launch an instance. The AMI ID must be specified here or in the launch template.
+     * The ID of the AMI. An AMI is required to launch an instance. This parameter is only available for fleets of type instant. For fleets of type maintain and request, you must specify the AMI ID in the launch template.
      */
     ImageId?: ImageId;
   }
@@ -20162,7 +20168,7 @@ declare namespace EC2 {
      */
     InstanceRequirements?: InstanceRequirementsRequest;
     /**
-     * The ID of the AMI. An AMI is required to launch an instance. The AMI ID must be specified here or in the launch template.
+     * The ID of the AMI. An AMI is required to launch an instance. This parameter is only available for fleets of type instant. For fleets of type maintain and request, you must specify the AMI ID in the launch template.
      */
     ImageId?: ImageId;
   }
@@ -21904,6 +21910,10 @@ declare namespace EC2 {
      * Indicates whether host maintenance is enabled or disabled for the Dedicated Host.
      */
     HostMaintenance?: HostMaintenance;
+    /**
+     * The ID of the Outpost hardware asset on which the Dedicated Host is allocated.
+     */
+    AssetId?: AssetId;
   }
   export interface HostInstance {
     /**
@@ -25328,7 +25338,7 @@ declare namespace EC2 {
   }
   export interface LaunchTemplateConfig {
     /**
-     * The launch template.
+     * The launch template to use. Make sure that the launch template does not contain the NetworkInterfaceId parameter because you can't specify a network interface ID in a Spot Fleet.
      */
     LaunchTemplateSpecification?: FleetLaunchTemplateSpecification;
     /**
@@ -27187,7 +27197,7 @@ declare namespace EC2 {
      */
     InstanceId: InstanceId;
     /**
-     * The tenancy for the instance.  For T3 instances, you can't change the tenancy from dedicated to host, or from host to dedicated. Attempting to make one of these unsupported tenancy changes results in the InvalidTenancy error code. 
+     * The tenancy for the instance.  For T3 instances, you must launch the instance on a Dedicated Host to use a tenancy of host. You can't change the tenancy from host to dedicated or default. Attempting to make one of these unsupported tenancy changes results in an InvalidRequest error code. 
      */
     Tenancy?: HostTenancy;
     /**
@@ -27195,7 +27205,7 @@ declare namespace EC2 {
      */
     PartitionNumber?: Integer;
     /**
-     * The ARN of the host resource group in which to place the instance.
+     * The ARN of the host resource group in which to place the instance. The instance must have a tenancy of host to specify this parameter.
      */
     HostResourceGroupArn?: String;
     /**
@@ -28634,7 +28644,7 @@ declare namespace EC2 {
     /**
      * The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and the customer gateway. Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).
      */
-    PreSharedKey?: String;
+    PreSharedKey?: preSharedKey;
     /**
      * The lifetime for phase 1 of the IKE negotiation, in seconds. Constraints: A value between 900 and 28,800. Default: 28800 
      */
@@ -30327,7 +30337,7 @@ declare namespace EC2 {
      */
     SustainedClockSpeedInGhz?: ProcessorSustainedClockSpeed;
     /**
-     * Indicates whether the instance type supports AMD SEV-SNP. If the request returns amd-sev-snp, AMD SEV-SNP is supported. Otherwise, it is not supported.
+     * Indicates whether the instance type supports AMD SEV-SNP. If the request returns amd-sev-snp, AMD SEV-SNP is supported. Otherwise, it is not supported. For more information, see  AMD SEV-SNP.
      */
     SupportedFeatures?: SupportedAdditionalProcessorFeatureList;
   }
@@ -32771,7 +32781,7 @@ declare namespace EC2 {
      */
     ImageId?: ImageId;
     /**
-     * The instance type. For more information, see Instance types in the Amazon EC2 User Guide. Default: m1.small 
+     * The instance type. For more information, see Instance types in the Amazon EC2 User Guide. When you change your EBS-backed instance type, instance restart or replacement behavior depends on the instance type compatibility between the old and new types. An instance that's backed by an instance store volume is always replaced. For more information, see Change the instance type in the Amazon EC2 User Guide. Default: m1.small 
      */
     InstanceType?: InstanceType;
     /**
@@ -36558,7 +36568,7 @@ declare namespace EC2 {
     /**
      * The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and the customer gateway.
      */
-    PreSharedKey?: String;
+    PreSharedKey?: preSharedKey;
     /**
      * The lifetime for phase 1 of the IKE negotiation, in seconds.
      */
@@ -38027,7 +38037,7 @@ declare namespace EC2 {
     /**
      * The configuration information for the VPN connection's customer gateway (in the native XML format). This element is always present in the CreateVpnConnection response; however, it's present in the DescribeVpnConnections response only if the VPN connection is in the pending or available state.
      */
-    CustomerGatewayConfiguration?: String;
+    CustomerGatewayConfiguration?: customerGatewayConfiguration;
     /**
      * The ID of the customer gateway at your end of the VPN connection.
      */
@@ -38269,7 +38279,7 @@ declare namespace EC2 {
     /**
      * The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway. Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).
      */
-    PreSharedKey?: String;
+    PreSharedKey?: preSharedKey;
     /**
      * The lifetime for phase 1 of the IKE negotiation, in seconds. Constraints: A value between 900 and 28,800. Default: 28800 
      */
@@ -38359,6 +38369,8 @@ declare namespace EC2 {
   }
   export type ZoneIdStringList = String[];
   export type ZoneNameStringList = String[];
+  export type customerGatewayConfiguration = string;
+  export type preSharedKey = string;
   export type scope = "Availability Zone"|"Region"|string;
   export type snapshotTierStatusSet = SnapshotTierStatus[];
   export type totalFpgaMemory = number;

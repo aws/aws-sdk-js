@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "This release adds new API to reset connector metadata cache"
+    },
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Updated ResourceType enum with new resource types onboarded by AWS Config in May 2023."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adds support for targeting Dedicated Host allocations by assetIds in AWS Outposts"
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "This release adds RecursiveInvocationException to the Invoke API and InvokeWithResponseStream API."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Added support for custom domain names for Redshift Provisioned clusters. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it."
+    }
+]
