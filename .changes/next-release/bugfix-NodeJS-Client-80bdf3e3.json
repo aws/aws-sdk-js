@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "NodeJS Client",
+  "description": "fix the nodejs client use undefined http agent"
+}
