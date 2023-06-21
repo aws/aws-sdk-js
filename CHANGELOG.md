@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1401.0-->
+<!--LATEST=2.1402.0-->
 <!--ENTRYINSERT-->
+
+## 2.1402.0
+* feature: EMR: This release introduces a new Amazon EMR EPI called ListSupportedInstanceTypes that returns a list of all instance types supported by a given EMR release.
+* feature: Inspector2: This release adds support for Software Bill of Materials (SBOM) export and the general availability of code scanning for AWS Lambda functions.
+* feature: MQ: The Cross Region Disaster Recovery feature allows to replicate a brokers state from one region to another in order to provide customers with multi-region resiliency in the event of a regional outage.
+* feature: MediaConvert: This release introduces the bandwidth reduction filter for the HEVC encoder, increases the limits of outputs per job, and updates support for the Nagra SDK to version 1.14.7.
+* feature: SageMaker: This release provides support in SageMaker for output files in training jobs to be uploaded without compression and enable customer to deploy uncompressed model from S3 to real-time inference Endpoints. In addition, ml.trn1n.32xlarge is added to supported instance type list in training job.
+* feature: Transfer: This release adds a new parameter StructuredLogDestinations to CreateServer, UpdateServer APIs.
 
 ## 2.1401.0
 * feature: Appflow: This release adds new API to reset connector metadata cache

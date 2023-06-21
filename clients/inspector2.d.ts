@@ -28,6 +28,14 @@ declare class Inspector2 extends Service {
    */
   batchGetAccountStatus(callback?: (err: AWSError, data: Inspector2.Types.BatchGetAccountStatusResponse) => void): Request<Inspector2.Types.BatchGetAccountStatusResponse, AWSError>;
   /**
+   * Retrieves code snippets from findings that Amazon Inspector detected code vulnerabilities in.
+   */
+  batchGetCodeSnippet(params: Inspector2.Types.BatchGetCodeSnippetRequest, callback?: (err: AWSError, data: Inspector2.Types.BatchGetCodeSnippetResponse) => void): Request<Inspector2.Types.BatchGetCodeSnippetResponse, AWSError>;
+  /**
+   * Retrieves code snippets from findings that Amazon Inspector detected code vulnerabilities in.
+   */
+  batchGetCodeSnippet(callback?: (err: AWSError, data: Inspector2.Types.BatchGetCodeSnippetResponse) => void): Request<Inspector2.Types.BatchGetCodeSnippetResponse, AWSError>;
+  /**
    * Gets free trial status for multiple Amazon Web Services accounts.
    */
   batchGetFreeTrialInfo(params: Inspector2.Types.BatchGetFreeTrialInfoRequest, callback?: (err: AWSError, data: Inspector2.Types.BatchGetFreeTrialInfoResponse) => void): Request<Inspector2.Types.BatchGetFreeTrialInfoResponse, AWSError>;
@@ -60,6 +68,14 @@ declare class Inspector2 extends Service {
    */
   cancelFindingsReport(callback?: (err: AWSError, data: Inspector2.Types.CancelFindingsReportResponse) => void): Request<Inspector2.Types.CancelFindingsReportResponse, AWSError>;
   /**
+   * Cancels a software bill of materials (SBOM) report.
+   */
+  cancelSbomExport(params: Inspector2.Types.CancelSbomExportRequest, callback?: (err: AWSError, data: Inspector2.Types.CancelSbomExportResponse) => void): Request<Inspector2.Types.CancelSbomExportResponse, AWSError>;
+  /**
+   * Cancels a software bill of materials (SBOM) report.
+   */
+  cancelSbomExport(callback?: (err: AWSError, data: Inspector2.Types.CancelSbomExportResponse) => void): Request<Inspector2.Types.CancelSbomExportResponse, AWSError>;
+  /**
    * Creates a filter resource using specified filter criteria.
    */
   createFilter(params: Inspector2.Types.CreateFilterRequest, callback?: (err: AWSError, data: Inspector2.Types.CreateFilterResponse) => void): Request<Inspector2.Types.CreateFilterResponse, AWSError>;
@@ -75,6 +91,14 @@ declare class Inspector2 extends Service {
    * Creates a finding report. By default only ACTIVE findings are returned in the report. To see SUPRESSED or CLOSED findings you must specify a value for the findingStatus filter criteria. 
    */
   createFindingsReport(callback?: (err: AWSError, data: Inspector2.Types.CreateFindingsReportResponse) => void): Request<Inspector2.Types.CreateFindingsReportResponse, AWSError>;
+  /**
+   * Creates a software bill of materials (SBOM) report.
+   */
+  createSbomExport(params: Inspector2.Types.CreateSbomExportRequest, callback?: (err: AWSError, data: Inspector2.Types.CreateSbomExportResponse) => void): Request<Inspector2.Types.CreateSbomExportResponse, AWSError>;
+  /**
+   * Creates a software bill of materials (SBOM) report.
+   */
+  createSbomExport(callback?: (err: AWSError, data: Inspector2.Types.CreateSbomExportResponse) => void): Request<Inspector2.Types.CreateSbomExportResponse, AWSError>;
   /**
    * Deletes a filter resource.
    */
@@ -156,6 +180,14 @@ declare class Inspector2 extends Service {
    */
   getEc2DeepInspectionConfiguration(callback?: (err: AWSError, data: Inspector2.Types.GetEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.GetEc2DeepInspectionConfigurationResponse, AWSError>;
   /**
+   * Gets an encryption key.
+   */
+  getEncryptionKey(params: Inspector2.Types.GetEncryptionKeyRequest, callback?: (err: AWSError, data: Inspector2.Types.GetEncryptionKeyResponse) => void): Request<Inspector2.Types.GetEncryptionKeyResponse, AWSError>;
+  /**
+   * Gets an encryption key.
+   */
+  getEncryptionKey(callback?: (err: AWSError, data: Inspector2.Types.GetEncryptionKeyResponse) => void): Request<Inspector2.Types.GetEncryptionKeyResponse, AWSError>;
+  /**
    * Gets the status of a findings report.
    */
   getFindingsReportStatus(params: Inspector2.Types.GetFindingsReportStatusRequest, callback?: (err: AWSError, data: Inspector2.Types.GetFindingsReportStatusResponse) => void): Request<Inspector2.Types.GetFindingsReportStatusResponse, AWSError>;
@@ -171,6 +203,14 @@ declare class Inspector2 extends Service {
    * Gets member information for your organization.
    */
   getMember(callback?: (err: AWSError, data: Inspector2.Types.GetMemberResponse) => void): Request<Inspector2.Types.GetMemberResponse, AWSError>;
+  /**
+   * Gets details of a software bill of materials (SBOM) report.
+   */
+  getSbomExport(params: Inspector2.Types.GetSbomExportRequest, callback?: (err: AWSError, data: Inspector2.Types.GetSbomExportResponse) => void): Request<Inspector2.Types.GetSbomExportResponse, AWSError>;
+  /**
+   * Gets details of a software bill of materials (SBOM) report.
+   */
+  getSbomExport(callback?: (err: AWSError, data: Inspector2.Types.GetSbomExportResponse) => void): Request<Inspector2.Types.GetSbomExportResponse, AWSError>;
   /**
    * Lists the permissions an account has to configure Amazon Inspector.
    */
@@ -252,6 +292,14 @@ declare class Inspector2 extends Service {
    */
   listUsageTotals(callback?: (err: AWSError, data: Inspector2.Types.ListUsageTotalsResponse) => void): Request<Inspector2.Types.ListUsageTotalsResponse, AWSError>;
   /**
+   * Resets an encryption key. After the key is reset your resources will be encrypted by an Amazon Web Services owned key.
+   */
+  resetEncryptionKey(params: Inspector2.Types.ResetEncryptionKeyRequest, callback?: (err: AWSError, data: Inspector2.Types.ResetEncryptionKeyResponse) => void): Request<Inspector2.Types.ResetEncryptionKeyResponse, AWSError>;
+  /**
+   * Resets an encryption key. After the key is reset your resources will be encrypted by an Amazon Web Services owned key.
+   */
+  resetEncryptionKey(callback?: (err: AWSError, data: Inspector2.Types.ResetEncryptionKeyResponse) => void): Request<Inspector2.Types.ResetEncryptionKeyResponse, AWSError>;
+  /**
    * Lists Amazon Inspector coverage details for a specific vulnerability.
    */
   searchVulnerabilities(params: Inspector2.Types.SearchVulnerabilitiesRequest, callback?: (err: AWSError, data: Inspector2.Types.SearchVulnerabilitiesResponse) => void): Request<Inspector2.Types.SearchVulnerabilitiesResponse, AWSError>;
@@ -291,6 +339,14 @@ declare class Inspector2 extends Service {
    * Activates, deactivates Amazon Inspector deep inspection, or updates custom paths for your account. 
    */
   updateEc2DeepInspectionConfiguration(callback?: (err: AWSError, data: Inspector2.Types.UpdateEc2DeepInspectionConfigurationResponse) => void): Request<Inspector2.Types.UpdateEc2DeepInspectionConfigurationResponse, AWSError>;
+  /**
+   * Updates an encryption key. A ResourceNotFoundException means that an AWS owned key is being used for encryption.
+   */
+  updateEncryptionKey(params: Inspector2.Types.UpdateEncryptionKeyRequest, callback?: (err: AWSError, data: Inspector2.Types.UpdateEncryptionKeyResponse) => void): Request<Inspector2.Types.UpdateEncryptionKeyResponse, AWSError>;
+  /**
+   * Updates an encryption key. A ResourceNotFoundException means that an AWS owned key is being used for encryption.
+   */
+  updateEncryptionKey(callback?: (err: AWSError, data: Inspector2.Types.UpdateEncryptionKeyResponse) => void): Request<Inspector2.Types.UpdateEncryptionKeyResponse, AWSError>;
   /**
    * Specifies the action that is to be applied to the findings that match the filter.
    */
@@ -379,7 +435,7 @@ declare namespace Inspector2 {
   }
   export type AccountStateList = AccountState[];
   export type AggCounts = number;
-  export type AggregationFindingType = "NETWORK_REACHABILITY"|"PACKAGE_VULNERABILITY"|string;
+  export type AggregationFindingType = "NETWORK_REACHABILITY"|"PACKAGE_VULNERABILITY"|"CODE_VULNERABILITY"|string;
   export interface AggregationRequest {
     /**
      * An object that contains details about an aggregation request based on Amazon Web Services account IDs.
@@ -555,6 +611,10 @@ declare namespace Inspector2 {
      * Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization. 
      */
     lambda?: Boolean;
+    /**
+     * Represents whether AWS Lambda code scans are automatically enabled for new members of your Amazon Inspector organization.  &lt;/p&gt; 
+     */
+    lambdaCode?: Boolean;
   }
   export interface AwsEc2InstanceDetails {
     /**
@@ -751,6 +811,23 @@ declare namespace Inspector2 {
      */
     failedAccounts?: FailedAccountList;
   }
+  export interface BatchGetCodeSnippetRequest {
+    /**
+     * An array of finding ARNs for the findings you want to retrieve code snippets from.
+     */
+    findingArns: BatchGetCodeSnippetRequestFindingArnsList;
+  }
+  export type BatchGetCodeSnippetRequestFindingArnsList = FindingArn[];
+  export interface BatchGetCodeSnippetResponse {
+    /**
+     * The retrieved code snippets associated with the provided finding ARNs.
+     */
+    codeSnippetResults?: CodeSnippetResultList;
+    /**
+     * Any errors Amazon Inspector encountered while trying to retrieve the requested code snippets.
+     */
+    errors?: CodeSnippetErrorList;
+  }
   export interface BatchGetFreeTrialInfoRequest {
     /**
      * The account IDs to get free trial status for.
@@ -813,6 +890,18 @@ declare namespace Inspector2 {
      */
     reportId: ReportId;
   }
+  export interface CancelSbomExportRequest {
+    /**
+     * The report ID of the SBOM export to cancel.
+     */
+    reportId: ReportId;
+  }
+  export interface CancelSbomExportResponse {
+    /**
+     * The report ID of the canceled SBOM export.
+     */
+    reportId?: ReportId;
+  }
   export type CisaAction = string;
   export interface CisaData {
     /**
@@ -831,6 +920,109 @@ declare namespace Inspector2 {
   export type CisaDateAdded = Date;
   export type CisaDateDue = Date;
   export type ClientToken = string;
+  export interface CodeFilePath {
+    /**
+     * The line number of the last line of code that a vulnerability was found in.
+     */
+    endLine: Integer;
+    /**
+     * The name of the file the code vulnerability was found in.
+     */
+    fileName: NonEmptyString;
+    /**
+     * The file path to the code that a vulnerability was found in.
+     */
+    filePath: NonEmptyString;
+    /**
+     * The line number of the first line of code that a vulnerability was found in.
+     */
+    startLine: Integer;
+  }
+  export interface CodeLine {
+    /**
+     * The content of a line of code
+     */
+    content: CodeLineContentString;
+    /**
+     * The line number that a section of code is located at.
+     */
+    lineNumber: Integer;
+  }
+  export type CodeLineContentString = string;
+  export type CodeLineList = CodeLine[];
+  export interface CodeSnippetError {
+    /**
+     * The error code for the error that prevented a code snippet from being retrieved.
+     */
+    errorCode: CodeSnippetErrorCode;
+    /**
+     * The error message received when Amazon Inspector failed to retrieve a code snippet.
+     */
+    errorMessage: NonEmptyString;
+    /**
+     * The ARN of the finding that a code snippet couldn't be retrieved for.
+     */
+    findingArn: FindingArn;
+  }
+  export type CodeSnippetErrorCode = "INTERNAL_ERROR"|"ACCESS_DENIED"|"CODE_SNIPPET_NOT_FOUND"|"INVALID_INPUT"|string;
+  export type CodeSnippetErrorList = CodeSnippetError[];
+  export interface CodeSnippetResult {
+    /**
+     * Contains information on the retrieved code snippet.
+     */
+    codeSnippet?: CodeLineList;
+    /**
+     * The line number of the last line of a code snippet.
+     */
+    endLine?: Integer;
+    /**
+     * The ARN of a finding that the code snippet is associated with.
+     */
+    findingArn?: FindingArn;
+    /**
+     * The line number of the first line of a code snippet.
+     */
+    startLine?: Integer;
+    /**
+     * Details of a suggested code fix.
+     */
+    suggestedFixes?: SuggestedFixes;
+  }
+  export type CodeSnippetResultList = CodeSnippetResult[];
+  export interface CodeVulnerabilityDetails {
+    /**
+     * The Common Weakness Enumeration (CWE) item associated with the detected vulnerability.
+     */
+    cwes: CweList;
+    /**
+     * The ID for the Amazon CodeGuru detector associated with the finding. For more information on detectors see Amazon CodeGuru Detector Library.
+     */
+    detectorId: NonEmptyString;
+    /**
+     * The name of the detector used to identify the code vulnerability. For more information on detectors see CodeGuru Detector Library.
+     */
+    detectorName: NonEmptyString;
+    /**
+     * The detector tag associated with the vulnerability. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see Java tags, or Python tags. 
+     */
+    detectorTags?: DetectorTagList;
+    /**
+     * Contains information on where the code vulnerability is located in your code.
+     */
+    filePath: CodeFilePath;
+    /**
+     * A URL containing supporting documentation about the code vulnerability detected.
+     */
+    referenceUrls?: ReferenceUrls;
+    /**
+     * The identifier for a rule that was used to detect the code vulnerability.
+     */
+    ruleId?: NonEmptyString;
+    /**
+     * The Amazon Resource Name (ARN) of the Lambda layer that the code vulnerability was detected in.
+     */
+    sourceLambdaLayerArn?: LambdaLayerArn;
+  }
   export type Component = string;
   export type ComponentType = string;
   export interface Counts {
@@ -1022,6 +1214,23 @@ declare namespace Inspector2 {
      */
     reportId?: ReportId;
   }
+  export interface CreateSbomExportRequest {
+    /**
+     * The output format for the software bill of materials (SBOM) report.
+     */
+    reportFormat: SbomReportFormat;
+    /**
+     * The resource filter criteria for the software bill of materials (SBOM) report.
+     */
+    resourceFilterCriteria?: ResourceFilterCriteria;
+    s3Destination: Destination;
+  }
+  export interface CreateSbomExportResponse {
+    /**
+     * The report ID for the software bill of materials (SBOM) report.
+     */
+    reportId?: ReportId;
+  }
   export type Currency = "USD"|string;
   export interface Cvss2 {
     /**
@@ -1104,6 +1313,7 @@ declare namespace Inspector2 {
   }
   export type CvssScoreList = CvssScore[];
   export type Cwe = string;
+  export type CweList = NonEmptyString[];
   export type Cwes = Cwe[];
   export interface DateFilter {
     /**
@@ -1178,6 +1388,7 @@ declare namespace Inspector2 {
     kmsKeyArn: String;
   }
   export type DetectionPlatforms = NonEmptyString[];
+  export type DetectorTagList = NonEmptyString[];
   export interface DisableDelegatedAdminAccountRequest {
     /**
      * The Amazon Web Services account ID of the current Amazon Inspector delegated administrator.
@@ -1389,7 +1600,14 @@ declare namespace Inspector2 {
      */
     score?: EpssScore;
   }
+  export interface EpssDetails {
+    /**
+     * The EPSS score.
+     */
+    score?: EpssScoreValue;
+  }
   export type EpssScore = number;
+  export type EpssScoreValue = number;
   export type ErrorCode = "ALREADY_ENABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"SUSPEND_IN_PROGRESS"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"SSM_UNAVAILABLE"|"SSM_THROTTLED"|"EVENTBRIDGE_UNAVAILABLE"|"EVENTBRIDGE_THROTTLED"|"RESOURCE_SCAN_NOT_DISABLED"|"DISASSOCIATE_ALL_MEMBERS"|"ACCOUNT_IS_ISOLATED"|string;
   export type ErrorMessage = string;
   export type ExecutionRoleArn = string;
@@ -1501,6 +1719,18 @@ declare namespace Inspector2 {
      */
     awsAccountId?: StringFilterList;
     /**
+     * The name of the detector used to identify a code vulnerability in a Lambda function used to filter findings.
+     */
+    codeVulnerabilityDetectorName?: StringFilterList;
+    /**
+     * The detector type tag associated with the vulnerability used to filter findings. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see Java tags, or Python tags. 
+     */
+    codeVulnerabilityDetectorTags?: StringFilterList;
+    /**
+     * The file path to the file in a Lambda function that contains a code vulnerability used to filter findings.
+     */
+    codeVulnerabilityFilePath?: StringFilterList;
+    /**
      * Details of the component IDs used to filter findings.
      */
     componentId?: StringFilterList;
@@ -1544,6 +1774,10 @@ declare namespace Inspector2 {
      * The tags attached to the Amazon ECR container image.
      */
     ecrImageTags?: StringFilterList;
+    /**
+     * The EPSS score used to filter findings.
+     */
+    epssScore?: NumberFilterList;
     /**
      * Filters the list of AWS Lambda findings by the availability of exploits.
      */
@@ -1659,9 +1893,17 @@ declare namespace Inspector2 {
      */
     awsAccountId: AccountId;
     /**
+     * Details about the code vulnerability identified in a Lambda function used to filter findings.
+     */
+    codeVulnerabilityDetails?: CodeVulnerabilityDetails;
+    /**
      * The description of the finding.
      */
     description: FindingDescription;
+    /**
+     * The finding's EPSS score.
+     */
+    epss?: EpssDetails;
     /**
      * If a finding discovered in your environment has an exploit available.
      */
@@ -1736,7 +1978,7 @@ declare namespace Inspector2 {
   export type FindingList = Finding[];
   export type FindingStatus = "ACTIVE"|"SUPPRESSED"|"CLOSED"|string;
   export type FindingTitle = string;
-  export type FindingType = "NETWORK_REACHABILITY"|"PACKAGE_VULNERABILITY"|string;
+  export type FindingType = "NETWORK_REACHABILITY"|"PACKAGE_VULNERABILITY"|"CODE_VULNERABILITY"|string;
   export interface FindingTypeAggregation {
     /**
      * The finding type to aggregate.
@@ -1815,7 +2057,7 @@ declare namespace Inspector2 {
   export type FreeTrialInfoErrorList = FreeTrialInfoError[];
   export type FreeTrialInfoList = FreeTrialInfo[];
   export type FreeTrialStatus = "ACTIVE"|"INACTIVE"|string;
-  export type FreeTrialType = "EC2"|"ECR"|"LAMBDA"|string;
+  export type FreeTrialType = "EC2"|"ECR"|"LAMBDA"|"LAMBDA_CODE"|string;
   export type FunctionName = string;
   export interface GetConfigurationRequest {
   }
@@ -1852,6 +2094,22 @@ declare namespace Inspector2 {
      * The activation status of Amazon Inspector deep inspection in your account.
      */
     status?: Ec2DeepInspectionStatus;
+  }
+  export interface GetEncryptionKeyRequest {
+    /**
+     * The resource type the key encrypts.
+     */
+    resourceType: ResourceType;
+    /**
+     * The scan type the key encrypts.
+     */
+    scanType: ScanType;
+  }
+  export interface GetEncryptionKeyResponse {
+    /**
+     * A kms key ID.
+     */
+    kmsKeyId: KmsKeyArn;
   }
   export interface GetFindingsReportStatusRequest {
     /**
@@ -1896,6 +2154,39 @@ declare namespace Inspector2 {
      * Details of the retrieved member account.
      */
     member?: Member;
+  }
+  export interface GetSbomExportRequest {
+    /**
+     * The report ID of the SBOM export to get details for.
+     */
+    reportId: ReportId;
+  }
+  export interface GetSbomExportResponse {
+    /**
+     * An error code.
+     */
+    errorCode?: ReportingErrorCode;
+    /**
+     * An error message.
+     */
+    errorMessage?: NonEmptyString;
+    /**
+     * Contains details about the resource filter criteria used for the software bill of materials (SBOM) report.
+     */
+    filterCriteria?: ResourceFilterCriteria;
+    /**
+     * The format of the software bill of materials (SBOM) report.
+     */
+    format?: SbomReportFormat;
+    /**
+     * The report ID of the software bill of materials (SBOM) report.
+     */
+    reportId?: ReportId;
+    s3Destination?: Destination;
+    /**
+     * The status of the software bill of materials (SBOM) report.
+     */
+    status?: ExternalReportStatus;
   }
   export type GroupKey = "SCAN_STATUS_CODE"|"SCAN_STATUS_REASON"|"ACCOUNT_ID"|"RESOURCE_TYPE"|"ECR_REPOSITORY_NAME"|string;
   export type ImageHash = string;
@@ -1951,10 +2242,12 @@ declare namespace Inspector2 {
      */
     adjustedCvss?: CvssScoreDetails;
   }
+  export type Integer = number;
   export type IpV4Address = string;
   export type IpV4AddressList = IpV4Address[];
   export type IpV6Address = string;
   export type IpV6AddressList = IpV6Address[];
+  export type KmsKeyArn = string;
   export interface LambdaFunctionAggregation {
     /**
      * The AWS Lambda function names to include in the aggregation results.
@@ -2599,6 +2892,7 @@ declare namespace Inspector2 {
      */
     text?: NonEmptyString;
   }
+  export type ReferenceUrls = NonEmptyString[];
   export type RelatedVulnerabilities = RelatedVulnerability[];
   export type RelatedVulnerability = string;
   export type RelationshipStatus = "CREATED"|"INVITED"|"DISABLED"|"ENABLED"|"REMOVED"|"RESIGNED"|"DELETED"|"EMAIL_VERIFICATION_IN_PROGRESS"|"EMAIL_VERIFICATION_FAILED"|"REGION_DISABLED"|"ACCOUNT_SUSPENDED"|"CANNOT_CREATE_DETECTOR_IN_ORG_MASTER"|string;
@@ -2644,6 +2938,18 @@ declare namespace Inspector2 {
     severityCounts?: SeverityCounts;
   }
   export type RepositorySortBy = "CRITICAL"|"HIGH"|"ALL"|"AFFECTED_IMAGES"|string;
+  export interface ResetEncryptionKeyRequest {
+    /**
+     * The resource type the key encrypts.
+     */
+    resourceType: ResourceType;
+    /**
+     * The scan type the key encrypts.
+     */
+    scanType: ScanType;
+  }
+  export interface ResetEncryptionKeyResponse {
+  }
   export interface Resource {
     /**
      * An object that contains details about the resource involved in a finding.
@@ -2684,8 +2990,58 @@ declare namespace Inspector2 {
      */
     awsLambdaFunction?: AwsLambdaFunctionDetails;
   }
+  export interface ResourceFilterCriteria {
+    /**
+     * The account IDs used as resource filter criteria.
+     */
+    accountId?: ResourceStringFilterList;
+    /**
+     * The EC2 instance tags used as resource filter criteria.
+     */
+    ec2InstanceTags?: ResourceMapFilterList;
+    /**
+     * The ECR image tags used as resource filter criteria.
+     */
+    ecrImageTags?: ResourceStringFilterList;
+    /**
+     * The ECR repository names used as resource filter criteria.
+     */
+    ecrRepositoryName?: ResourceStringFilterList;
+    /**
+     * The AWS Lambda function name used as resource filter criteria.
+     */
+    lambdaFunctionName?: ResourceStringFilterList;
+    /**
+     * The AWS Lambda function tags used as resource filter criteria.
+     */
+    lambdaFunctionTags?: ResourceMapFilterList;
+    /**
+     * The resource IDs used as resource filter criteria.
+     */
+    resourceId?: ResourceStringFilterList;
+    /**
+     * The resource types used as resource filter criteria.
+     */
+    resourceType?: ResourceStringFilterList;
+  }
   export type ResourceId = string;
   export type ResourceList = Resource[];
+  export type ResourceMapComparison = "EQUALS"|string;
+  export interface ResourceMapFilter {
+    /**
+     * The filter's comparison.
+     */
+    comparison: ResourceMapComparison;
+    /**
+     * The filter's key.
+     */
+    key: NonEmptyString;
+    /**
+     * The filter's value.
+     */
+    value?: NonEmptyString;
+  }
+  export type ResourceMapFilterList = ResourceMapFilter[];
   export interface ResourceScanMetadata {
     /**
      * An object that contains metadata details for an Amazon EC2 instance.
@@ -2704,7 +3060,7 @@ declare namespace Inspector2 {
      */
     lambdaFunction?: LambdaFunctionMetadata;
   }
-  export type ResourceScanType = "EC2"|"ECR"|"LAMBDA"|string;
+  export type ResourceScanType = "EC2"|"ECR"|"LAMBDA"|"LAMBDA_CODE"|string;
   export interface ResourceState {
     /**
      * An object detailing the state of Amazon Inspector scanning for Amazon EC2 resources.
@@ -2715,6 +3071,7 @@ declare namespace Inspector2 {
      */
     ecr: State;
     lambda?: State;
+    lambdaCode?: State;
   }
   export interface ResourceStatus {
     /**
@@ -2729,9 +3086,27 @@ declare namespace Inspector2 {
      * The status of Amazon Inspector scanning for AWS Lambda function.
      */
     lambda?: Status;
+    /**
+     * The status of Amazon Inspector scanning for custom application code for Amazon Web Services Lambda functions. 
+     */
+    lambdaCode?: Status;
   }
+  export type ResourceStringComparison = "EQUALS"|"NOT_EQUALS"|string;
+  export interface ResourceStringFilter {
+    /**
+     * The filter's comparison.
+     */
+    comparison: ResourceStringComparison;
+    /**
+     * The filter's value.
+     */
+    value: ResourceStringInput;
+  }
+  export type ResourceStringFilterList = ResourceStringFilter[];
+  export type ResourceStringInput = string;
   export type ResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|"AWS_LAMBDA_FUNCTION"|string;
-  export type Runtime = "NODEJS"|"NODEJS_12_X"|"NODEJS_14_X"|"NODEJS_16_X"|"JAVA_8"|"JAVA_8_AL2"|"JAVA_11"|"PYTHON_3_7"|"PYTHON_3_8"|"PYTHON_3_9"|"UNSUPPORTED"|"NODEJS_18_X"|"GO_1_X"|string;
+  export type Runtime = "NODEJS"|"NODEJS_12_X"|"NODEJS_14_X"|"NODEJS_16_X"|"JAVA_8"|"JAVA_8_AL2"|"JAVA_11"|"PYTHON_3_7"|"PYTHON_3_8"|"PYTHON_3_9"|"UNSUPPORTED"|"NODEJS_18_X"|"GO_1_X"|"JAVA_17"|"PYTHON_3_10"|string;
+  export type SbomReportFormat = "CYCLONEDX_1_4"|"SPDX_2_3"|string;
   export interface ScanStatus {
     /**
      * The reason for the scan.
@@ -2744,7 +3119,7 @@ declare namespace Inspector2 {
   }
   export type ScanStatusCode = "ACTIVE"|"INACTIVE"|string;
   export type ScanStatusReason = "PENDING_INITIAL_SCAN"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"UNMANAGED_EC2_INSTANCE"|"UNSUPPORTED_OS"|"SCAN_ELIGIBILITY_EXPIRED"|"RESOURCE_TERMINATED"|"SUCCESSFUL"|"NO_RESOURCES_FOUND"|"IMAGE_SIZE_EXCEEDED"|"SCAN_FREQUENCY_MANUAL"|"SCAN_FREQUENCY_SCAN_ON_PUSH"|"EC2_INSTANCE_STOPPED"|"PENDING_DISABLE"|"NO_INVENTORY"|"STALE_INVENTORY"|"EXCLUDED_BY_TAG"|"UNSUPPORTED_RUNTIME"|"UNSUPPORTED_MEDIA_TYPE"|"UNSUPPORTED_CONFIG_FILE"|"DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED"|"DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED"|"DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED"|"DEEP_INSPECTION_NO_INVENTORY"|string;
-  export type ScanType = "NETWORK"|"PACKAGE"|string;
+  export type ScanType = "NETWORK"|"PACKAGE"|"CODE"|string;
   export interface SearchVulnerabilitiesFilterCriteria {
     /**
      * The IDs for specific vulnerabilities.
@@ -2803,7 +3178,7 @@ declare namespace Inspector2 {
      */
     sortOrder: SortOrder;
   }
-  export type SortField = "AWS_ACCOUNT_ID"|"FINDING_TYPE"|"SEVERITY"|"FIRST_OBSERVED_AT"|"LAST_OBSERVED_AT"|"FINDING_STATUS"|"RESOURCE_TYPE"|"ECR_IMAGE_PUSHED_AT"|"ECR_IMAGE_REPOSITORY_NAME"|"ECR_IMAGE_REGISTRY"|"NETWORK_PROTOCOL"|"COMPONENT_TYPE"|"VULNERABILITY_ID"|"VULNERABILITY_SOURCE"|"INSPECTOR_SCORE"|"VENDOR_SEVERITY"|string;
+  export type SortField = "AWS_ACCOUNT_ID"|"FINDING_TYPE"|"SEVERITY"|"FIRST_OBSERVED_AT"|"LAST_OBSERVED_AT"|"FINDING_STATUS"|"RESOURCE_TYPE"|"ECR_IMAGE_PUSHED_AT"|"ECR_IMAGE_REPOSITORY_NAME"|"ECR_IMAGE_REGISTRY"|"NETWORK_PROTOCOL"|"COMPONENT_TYPE"|"VULNERABILITY_ID"|"VULNERABILITY_SOURCE"|"INSPECTOR_SCORE"|"VENDOR_SEVERITY"|"EPSS_SCORE"|string;
   export type SortOrder = "ASC"|"DESC"|string;
   export type SourceLayerHash = string;
   export interface State {
@@ -2849,6 +3224,19 @@ declare namespace Inspector2 {
   export type StringList = NonEmptyString[];
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
+  export interface SuggestedFix {
+    /**
+     * The fix's code.
+     */
+    code?: SuggestedFixCodeString;
+    /**
+     * The fix's description.
+     */
+    description?: SuggestedFixDescriptionString;
+  }
+  export type SuggestedFixCodeString = string;
+  export type SuggestedFixDescriptionString = string;
+  export type SuggestedFixes = SuggestedFix[];
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = String[];
@@ -2869,6 +3257,10 @@ declare namespace Inspector2 {
   export type Targets = Target[];
   export type Timestamp = Date;
   export interface TitleAggregation {
+    /**
+     * The type of finding to aggregate on.
+     */
+    findingType?: AggregationFindingType;
     /**
      * The resource type to aggregate on.
      */
@@ -2959,6 +3351,22 @@ declare namespace Inspector2 {
      */
     status?: Ec2DeepInspectionStatus;
   }
+  export interface UpdateEncryptionKeyRequest {
+    /**
+     * A KMS key ID for the encryption key.
+     */
+    kmsKeyId: KmsKeyArn;
+    /**
+     * The resource type for the encryption key.
+     */
+    resourceType: ResourceType;
+    /**
+     * The scan type for the encryption key.
+     */
+    scanType: ScanType;
+  }
+  export interface UpdateEncryptionKeyResponse {
+  }
   export interface UpdateFilterRequest {
     /**
      * Specifies the action that is to be applied to the findings that match the filter.
@@ -3043,7 +3451,7 @@ declare namespace Inspector2 {
     usage?: UsageList;
   }
   export type UsageTotalList = UsageTotal[];
-  export type UsageType = "EC2_INSTANCE_HOURS"|"ECR_INITIAL_SCAN"|"ECR_RESCAN"|"LAMBDA_FUNCTION_HOURS"|string;
+  export type UsageType = "EC2_INSTANCE_HOURS"|"ECR_INITIAL_SCAN"|"ECR_RESCAN"|"LAMBDA_FUNCTION_HOURS"|"LAMBDA_FUNCTION_CODE_HOURS"|string;
   export type UsageValue = number;
   export type VendorCreatedAt = Date;
   export type VendorSeverity = string;
@@ -3083,7 +3491,7 @@ declare namespace Inspector2 {
      */
     detectionPlatforms?: DetectionPlatforms;
     /**
-     * An object that contains the Exploit Prediction Scoring System (EPSS) score.
+     * An object that contains the Exploit Prediction Scoring System (EPSS) score for a vulnerability.
      */
     epss?: Epss;
     /**

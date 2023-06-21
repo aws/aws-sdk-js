@@ -85,19 +85,19 @@ declare class SageMaker extends Service {
    */
   createArtifact(callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job. Find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.   CreateAutoMLJob only accepts tabular input data. We recommend using CreateAutoMLJobV2 for all problem types. CreateAutoMLJobV2 can process the same tabular data as its previous version CreateAutoMLJob, as well as non-tabular data for problem types such as image or text classification. Find guidelines about how to migrate CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2. 
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job. Find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.   CreateAutoMLJob only accepts tabular input data. We recommend using CreateAutoMLJobV2 for all problem types. CreateAutoMLJobV2 can process the same tabular data as its previous version CreateAutoMLJob, as well as non-tabular data for problem types such as image or text classification. Find guidelines about how to migrate CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2. 
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
    */
   createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2. We recommend using CreateAutoMLJobV2 for all problem types. CreateAutoMLJobV2 can process the same tabular data as its previous version CreateAutoMLJob, as well as non-tabular data for problem types such as image or text classification. Find guidelines about how to migrate CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2. For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. Find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2. Calling DescribeAutoMLJob on a AutoML job V2 results in an error.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
    */
   createAutoMLJobV2(params: SageMaker.Types.CreateAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2. We recommend using CreateAutoMLJobV2 for all problem types. CreateAutoMLJobV2 can process the same tabular data as its previous version CreateAutoMLJob, as well as non-tabular data for problem types such as image or text classification. Find guidelines about how to migrate CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2. For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. Find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2. Calling DescribeAutoMLJob on a AutoML job V2 results in an error.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
    */
   createAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
@@ -885,19 +885,19 @@ declare class SageMaker extends Service {
    */
   describeArtifact(callback?: (err: AWSError, data: SageMaker.Types.DescribeArtifactResponse) => void): Request<SageMaker.Types.DescribeArtifactResponse, AWSError>;
   /**
-   * Returns information about an AutoML job created by calling CreateAutoMLJob.
+   * Returns information about an AutoML job created by calling CreateAutoMLJob.  AutoML jobs created by calling CreateAutoMLJobV2 cannot be described by DescribeAutoMLJob. 
    */
   describeAutoMLJob(params: SageMaker.Types.DescribeAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
   /**
-   * Returns information about an AutoML job created by calling CreateAutoMLJob.
+   * Returns information about an AutoML job created by calling CreateAutoMLJob.  AutoML jobs created by calling CreateAutoMLJobV2 cannot be described by DescribeAutoMLJob. 
    */
   describeAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobResponse) => void): Request<SageMaker.Types.DescribeAutoMLJobResponse, AWSError>;
   /**
-   * Returns information about an AutoML job V2 created by calling CreateAutoMLJobV2.
+   * Returns information about an AutoML job created by calling CreateAutoMLJobV2 or CreateAutoMLJob.
    */
   describeAutoMLJobV2(params: SageMaker.Types.DescribeAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobV2Response) => void): Request<SageMaker.Types.DescribeAutoMLJobV2Response, AWSError>;
   /**
-   * Returns information about an AutoML job V2 created by calling CreateAutoMLJobV2.
+   * Returns information about an AutoML job created by calling CreateAutoMLJobV2 or CreateAutoMLJob.
    */
   describeAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.DescribeAutoMLJobV2Response) => void): Request<SageMaker.Types.DescribeAutoMLJobV2Response, AWSError>;
   /**
@@ -4116,6 +4116,10 @@ declare namespace SageMaker {
      * Specifies additional configuration for multi-model endpoints.
      */
     MultiModelConfig?: MultiModelConfig;
+    /**
+     * Specifies the location of ML model data to deploy.  Currently you cannot use ModelDataSource in conjuction with SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker Marketplace. 
+     */
+    ModelDataSource?: ModelDataSource;
   }
   export type ContainerDefinitionList = ContainerDefinition[];
   export type ContainerEntrypoint = ContainerEntrypointString[];
@@ -4418,7 +4422,7 @@ declare namespace SageMaker {
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to InputDataConfig supported by CreateAutoMLJob. The supported formats depend on the problem type:   For Tabular problem types: S3Prefix, ManifestFile.   For ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile.   For TextClassification: S3Prefix.  
+     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to the InputDataConfig attribute in the CreateAutoMLJob input parameters. The supported formats depend on the problem type:   For Tabular problem types: S3Prefix, ManifestFile.   For ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile.   For TextClassification: S3Prefix.  
      */
     AutoMLJobInputDataConfig: AutoMLJobInputDataConfig;
     /**
@@ -4426,7 +4430,7 @@ declare namespace SageMaker {
      */
     OutputDataConfig: AutoMLOutputDataConfig;
     /**
-     * Defines the configuration settings of one of the supported problem types.  For tabular problem types, you must either specify the type of supervised learning problem in AutoMLProblemTypeConfig (TabularJobConfig.ProblemType) and provide the AutoMLJobObjective, or none at all. 
+     * Defines the configuration settings of one of the supported problem types.
      */
     AutoMLProblemTypeConfig: AutoMLProblemTypeConfig;
     /**
@@ -4442,7 +4446,7 @@ declare namespace SageMaker {
      */
     SecurityConfig?: AutoMLSecurityConfig;
     /**
-     * Specifies a metric to minimize or maximize as the objective of a job. If not specified, the default objective metric depends on the problem type. For the list of default values per problem type, see AutoMLJobObjective.  For tabular problem types, you must either provide the AutoMLJobObjective and indicate the type of supervised learning problem in AutoMLProblemTypeConfig (TabularJobConfig.ProblemType), or none. 
+     * Specifies a metric to minimize or maximize as the objective of a job. If not specified, the default objective metric depends on the problem type. For the list of default values per problem type, see AutoMLJobObjective.  For tabular problem types, you must either provide both the AutoMLJobObjective and indicate the type of supervised learning problem in AutoMLProblemTypeConfig (TabularJobConfig.ProblemType), or none at all. 
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -16406,6 +16410,7 @@ declare namespace SageMaker {
      */
     InvocationsMaxRetries?: InvocationsMaxRetries;
   }
+  export type ModelCompressionType = "None"|"Gzip"|string;
   export interface ModelConfiguration {
     /**
      * The inference specification name in the model package version.
@@ -16562,6 +16567,12 @@ declare namespace SageMaker {
      * Data quality constraints for a model.
      */
     Constraints?: MetricsSource;
+  }
+  export interface ModelDataSource {
+    /**
+     * Specifies the S3 location of ML model data to deploy.
+     */
+    S3DataSource: S3ModelDataSource;
   }
   export interface ModelDeployConfig {
     /**
@@ -17834,6 +17845,7 @@ declare namespace SageMaker {
   export type OptionalInteger = number;
   export type OptionalVolumeSizeInGB = number;
   export type OrderKey = "Ascending"|"Descending"|string;
+  export type OutputCompressionType = "GZIP"|"NONE"|string;
   export interface OutputConfig {
     /**
      * Identifies the S3 bucket where you want Amazon SageMaker to store the model artifacts. For example, s3://bucket-name/key-name-prefix.
@@ -17865,6 +17877,10 @@ declare namespace SageMaker {
      * Identifies the S3 path where you want SageMaker to store the model artifacts. For example, s3://bucket-name/key-name-prefix. 
      */
     S3OutputPath: S3Uri;
+    /**
+     * The model output compression type. Select None to output an uncompressed model, recommended for large model outputs. Defaults to gzip.
+     */
+    CompressionType?: OutputCompressionType;
   }
   export interface OutputParameter {
     /**
@@ -19589,6 +19605,22 @@ declare namespace SageMaker {
     InstanceGroupNames?: InstanceGroupNames;
   }
   export type S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile"|string;
+  export interface S3ModelDataSource {
+    /**
+     * Specifies the S3 path of ML model data to deploy.
+     */
+    S3Uri: S3ModelUri;
+    /**
+     * Specifies the type of ML model data to deploy. If you choose S3Prefix, S3Uri identifies a key name prefix. SageMaker uses all objects that match the specified key name prefix as part of the ML model data to deploy. A valid key name prefix identified by S3Uri always ends with a forward slash (/). If you choose S3Object, S3Uri identifies an object that is the ML model data to deploy.
+     */
+    S3DataType: S3ModelDataType;
+    /**
+     * Specifies how the ML model data is prepared. If you choose Gzip and choose S3Object as the value of S3DataType, S3Uri identifies an object that is a gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object during model deployment. If you choose None and chooose S3Object as the value of S3DataType, S3Uri identifies an object that represents an uncompressed ML model to deploy. If you choose None and choose S3Prefix as the value of S3DataType, S3Uri identifies a key name prefix, under which all objects represents the uncompressed ML model to deploy. If you choose None, then SageMaker will follow rules below when creating model data files under /opt/ml/model directory for use by your inference code:   If you choose S3Object as the value of S3DataType, then SageMaker will split the key of the S3 object referenced by S3Uri by slash (/), and use the last part as the filename of the file holding the content of the S3 object.   If you choose S3Prefix as the value of S3DataType, then for each S3 object under the key name pefix referenced by S3Uri, SageMaker will trim its key by the prefix, and use the remainder as the path (relative to /opt/ml/model) of the file holding the content of the S3 object. SageMaker will split the remainder by slash (/), using intermediate parts as directory names and the last part as filename of the file holding the content of the S3 object.   Do not use any of the following as file names or directory names:   An empty or blank string   A string which contains null bytes   A string longer than 255 bytes   A single dot (.)   A double dot (..)     Ambiguous file names will result in model deployment failure. For example, if your uncompressed ML model consists of two S3 objects s3://mybucket/model/weights and s3://mybucket/model/weights/part1 and you specify s3://mybucket/model/ as the value of S3Uri and S3Prefix as the value of S3DataType, then it will result in name clash between /opt/ml/model/weights (a regular file) and /opt/ml/model/weights/ (a directory).   Do not organize the model artifacts in S3 console using folders. When you create a folder in S3 console, S3 creates a 0-byte object with a key set to the folder name you provide. They key of the 0-byte object ends with a slash (/) which violates SageMaker restrictions on model artifact file names, leading to model deployment failure.   
+     */
+    CompressionType: ModelCompressionType;
+  }
+  export type S3ModelDataType = "S3Prefix"|"S3Object"|string;
+  export type S3ModelUri = string;
   export type S3OutputPath = string;
   export interface S3StorageConfig {
     /**
@@ -20259,7 +20291,7 @@ declare namespace SageMaker {
      */
     GenerateCandidateDefinitionsOnly?: GenerateCandidateDefinitionsOnly;
     /**
-     * The type of supervised learning problem available for the model candidates of the AutoML job V2. For more information, see  Amazon SageMaker Autopilot problem types.
+     * The type of supervised learning problem available for the model candidates of the AutoML job V2. For more information, see  Amazon SageMaker Autopilot problem types.  You must either specify the type of supervised learning problem in ProblemType and provide the AutoMLJobObjective metric, or none at all. 
      */
     ProblemType?: ProblemType;
     /**
@@ -20417,7 +20449,7 @@ declare namespace SageMaker {
   }
   export type TrainingInputMode = "Pipe"|"File"|"FastFile"|string;
   export type TrainingInstanceCount = number;
-  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.trn1.2xlarge"|"ml.trn1.32xlarge"|string;
+  export type TrainingInstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"|"ml.g5.xlarge"|"ml.g5.2xlarge"|"ml.g5.4xlarge"|"ml.g5.8xlarge"|"ml.g5.16xlarge"|"ml.g5.12xlarge"|"ml.g5.24xlarge"|"ml.g5.48xlarge"|"ml.trn1.2xlarge"|"ml.trn1.32xlarge"|"ml.trn1n.32xlarge"|string;
   export type TrainingInstanceTypes = TrainingInstanceType[];
   export interface TrainingJob {
     /**

@@ -111,11 +111,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeContributorInsights(callback?: (err: AWSError, data: DynamoDB.Types.DescribeContributorInsightsOutput) => void): Request<DynamoDB.Types.DescribeContributorInsightsOutput, AWSError>;
   /**
-   * Returns the regional endpoint information. This action must be included in your VPC endpoint policies, or access to the DescribeEndpoints API will be denied. For more information on policy permissions, please see Internetwork traffic privacy.
+   * Returns the regional endpoint information. For more information on policy permissions, please see Internetwork traffic privacy.
    */
   describeEndpoints(params: DynamoDB.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
   /**
-   * Returns the regional endpoint information. This action must be included in your VPC endpoint policies, or access to the DescribeEndpoints API will be denied. For more information on policy permissions, please see Internetwork traffic privacy.
+   * Returns the regional endpoint information. For more information on policy permissions, please see Internetwork traffic privacy.
    */
   describeEndpoints(callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
   /**

@@ -12,11 +12,11 @@ declare class MQ extends Service {
   constructor(options?: MQ.Types.ClientConfiguration)
   config: Config & MQ.Types.ClientConfiguration;
   /**
-   * Creates a broker. Note: This API is asynchronous. To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy. ec2:CreateNetworkInterface This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account. ec2:CreateNetworkInterfacePermission This permission is required to attach the ENI to the broker instance. ec2:DeleteNetworkInterface ec2:DeleteNetworkInterfacePermission ec2:DetachNetworkInterface ec2:DescribeInternetGateways ec2:DescribeNetworkInterfaces ec2:DescribeNetworkInterfacePermissions ec2:DescribeRouteTables ec2:DescribeSecurityGroups ec2:DescribeSubnets ec2:DescribeVpcs For more information, see Create an IAM User and Get Your AWS Credentials and Never Modify or Delete the Amazon MQ Elastic Network Interface in the Amazon MQ Developer Guide.
+   * Creates a broker. Note: This API is asynchronous. To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy. ec2:CreateNetworkInterface This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account. ec2:CreateNetworkInterfacePermission This permission is required to attach the ENI to the broker instance. ec2:DeleteNetworkInterface ec2:DeleteNetworkInterfacePermission ec2:DetachNetworkInterface ec2:DescribeInternetGateways ec2:DescribeNetworkInterfaces ec2:DescribeNetworkInterfacePermissions ec2:DescribeRouteTables ec2:DescribeSecurityGroups ec2:DescribeSubnets ec2:DescribeVpcs For more information, see Create an IAM User and Get Your Amazon Web Services Credentials and Never Modify or Delete the Amazon MQ Elastic Network Interface in the Amazon MQ Developer Guide.
    */
   createBroker(params: MQ.Types.CreateBrokerRequest, callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
   /**
-   * Creates a broker. Note: This API is asynchronous. To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy. ec2:CreateNetworkInterface This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account. ec2:CreateNetworkInterfacePermission This permission is required to attach the ENI to the broker instance. ec2:DeleteNetworkInterface ec2:DeleteNetworkInterfacePermission ec2:DetachNetworkInterface ec2:DescribeInternetGateways ec2:DescribeNetworkInterfaces ec2:DescribeNetworkInterfacePermissions ec2:DescribeRouteTables ec2:DescribeSecurityGroups ec2:DescribeSubnets ec2:DescribeVpcs For more information, see Create an IAM User and Get Your AWS Credentials and Never Modify or Delete the Amazon MQ Elastic Network Interface in the Amazon MQ Developer Guide.
+   * Creates a broker. Note: This API is asynchronous. To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy. ec2:CreateNetworkInterface This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account. ec2:CreateNetworkInterfacePermission This permission is required to attach the ENI to the broker instance. ec2:DeleteNetworkInterface ec2:DeleteNetworkInterfacePermission ec2:DetachNetworkInterface ec2:DescribeInternetGateways ec2:DescribeNetworkInterfaces ec2:DescribeNetworkInterfacePermissions ec2:DescribeRouteTables ec2:DescribeSecurityGroups ec2:DescribeSubnets ec2:DescribeVpcs For more information, see Create an IAM User and Get Your Amazon Web Services Credentials and Never Modify or Delete the Amazon MQ Elastic Network Interface in the Amazon MQ Developer Guide.
    */
   createBroker(callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class MQ extends Service {
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an ActiveMQ user.
+   * Creates an ActiveMQ user. Do not add personally identifiable information (PII) or other confidential or sensitive information in broker usernames. Broker usernames are accessible to other Amazon Web Services services, including CloudWatch Logs. Broker usernames are not intended to be used for private or sensitive data.
    */
   createUser(params: MQ.Types.CreateUserRequest, callback?: (err: AWSError, data: MQ.Types.CreateUserResponse) => void): Request<MQ.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates an ActiveMQ user.
+   * Creates an ActiveMQ user. Do not add personally identifiable information (PII) or other confidential or sensitive information in broker usernames. Broker usernames are accessible to other Amazon Web Services services, including CloudWatch Logs. Broker usernames are not intended to be used for private or sensitive data.
    */
   createUser(callback?: (err: AWSError, data: MQ.Types.CreateUserResponse) => void): Request<MQ.Types.CreateUserResponse, AWSError>;
   /**
@@ -156,6 +156,14 @@ declare class MQ extends Service {
    */
   listUsers(callback?: (err: AWSError, data: MQ.Types.ListUsersResponse) => void): Request<MQ.Types.ListUsersResponse, AWSError>;
   /**
+   * Promotes a data replication replica broker to the primary broker role.
+   */
+  promote(params: MQ.Types.PromoteRequest, callback?: (err: AWSError, data: MQ.Types.PromoteResponse) => void): Request<MQ.Types.PromoteResponse, AWSError>;
+  /**
+   * Promotes a data replication replica broker to the primary broker role.
+   */
+  promote(callback?: (err: AWSError, data: MQ.Types.PromoteResponse) => void): Request<MQ.Types.PromoteResponse, AWSError>;
+  /**
    * Reboots a broker. Note: This API is asynchronous.
    */
   rebootBroker(params: MQ.Types.RebootBrokerRequest, callback?: (err: AWSError, data: MQ.Types.RebootBrokerResponse) => void): Request<MQ.Types.RebootBrokerResponse, AWSError>;
@@ -191,11 +199,11 @@ declare class MQ extends Service {
 declare namespace MQ {
   export interface ActionRequired {
     /**
-     * The code you can use to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state. You can find instructions by choosing the link for your code from the list of action required codes in Amazon MQ action required codes. Each code references a topic with detailed information, instructions, and recommendations for how to resolve the issue and prevent future occurrences.
+     * The code you can use to find instructions on the action required to resolve your broker issue.
      */
     ActionRequiredCode?: __string;
     /**
-     * Information about the action required to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state.
+     * Information about the action required to resolve your broker issue.
      */
     ActionRequiredInfo?: __string;
   }
@@ -256,7 +264,7 @@ declare namespace MQ {
      */
     SupportedEngineVersions?: __listOf__string;
   }
-  export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|"CRITICAL_ACTION_REQUIRED"|string;
+  export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|"CRITICAL_ACTION_REQUIRED"|"REPLICA"|string;
   export type BrokerStorageType = "EBS"|"EFS"|string;
   export interface BrokerSummary {
     /**
@@ -268,7 +276,7 @@ declare namespace MQ {
      */
     BrokerId?: __string;
     /**
-     * The broker's name. This value is unique in your AWS account, 1-50 characters long, and containing only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
+     * The broker's name. This value is unique in your Amazon Web Services account, 1-50 characters long, and containing only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
      */
     BrokerName?: __string;
     /**
@@ -383,7 +391,7 @@ declare namespace MQ {
      */
     AutoMinorVersionUpgrade: __boolean;
     /**
-     * Required. The broker's name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
+     * Required. The broker's name. This value must be unique in your Amazon Web Services account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters. Do not add personally identifiable information (PII) or other confidential or sensitive information in broker names. Broker names are accessible to other Amazon Web Services services, including CloudWatch Logs. Broker names are not intended to be used for private or sensitive data.
      */
     BrokerName: __string;
     /**
@@ -391,7 +399,7 @@ declare namespace MQ {
      */
     Configuration?: ConfigurationId;
     /**
-     * The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.
+     * The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.
      */
     CreatorRequestId?: __string;
     /**
@@ -399,7 +407,7 @@ declare namespace MQ {
      */
     DeploymentMode: DeploymentMode;
     /**
-     * Encryption options for the broker. Does not apply to RabbitMQ brokers.
+     * Encryption options for the broker.
      */
     EncryptionOptions?: EncryptionOptions;
     /**
@@ -439,7 +447,7 @@ declare namespace MQ {
      */
     StorageType?: BrokerStorageType;
     /**
-     * The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet. If you specify subnets in a shared VPC for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your AWS account.
+     * The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet. If you specify subnets in a shared VPC for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your Amazon Web Services account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your Amazon Web Services account.
      */
     SubnetIds?: __listOf__string;
     /**
@@ -447,9 +455,17 @@ declare namespace MQ {
      */
     Tags?: __mapOf__string;
     /**
-     * Required. The list of broker users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long. Amazon MQ for RabbitMQ When you create an Amazon MQ for RabbitMQ broker, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.
+     * The list of broker users (persons or applications) who can access queues and topics. For Amazon MQ for RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.
      */
     Users: __listOfUser;
+    /**
+     * Defines whether this broker is a part of a data replication pair.
+     */
+    DataReplicationMode?: DataReplicationMode;
+    /**
+     * The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when dataReplicationMode is set to CRDR.
+     */
+    DataReplicationPrimaryBrokerArn?: __string;
   }
   export interface CreateBrokerResponse {
     /**
@@ -540,9 +556,34 @@ declare namespace MQ {
      * The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
     Username: __string;
+    /**
+     * Defines if this user is intended for CRDR replication purposes.
+     */
+    ReplicationUser?: __boolean;
   }
   export interface CreateUserResponse {
   }
+  export interface DataReplicationCounterpart {
+    /**
+     * Required. The unique broker id generated by Amazon MQ.
+     */
+    BrokerId: __string;
+    /**
+     * Required. The region of the broker.
+     */
+    Region: __string;
+  }
+  export interface DataReplicationMetadataOutput {
+    /**
+     * Describes the replica/primary broker. Only returned if this broker is currently set as a primary or replica in the broker's dataReplicationRole property.
+     */
+    DataReplicationCounterpart?: DataReplicationCounterpart;
+    /**
+     * Defines the role of this broker in a data replication pair. When a replica broker is promoted to primary, this role is interchanged.
+     */
+    DataReplicationRole: __string;
+  }
+  export type DataReplicationMode = "NONE"|"CRDR"|string;
   export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
   export interface DeleteBrokerRequest {
     /**
@@ -651,7 +692,7 @@ declare namespace MQ {
   }
   export interface DescribeBrokerResponse {
     /**
-     * A list of actions required for a broker.
+     * Actions required for a broker.
      */
     ActionsRequired?: __listOfActionRequired;
     /**
@@ -675,7 +716,7 @@ declare namespace MQ {
      */
     BrokerInstances?: __listOfBrokerInstance;
     /**
-     * The broker's name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
+     * The broker's name. This value must be unique in your Amazon Web Services account account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
      */
     BrokerName?: __string;
     /**
@@ -695,7 +736,7 @@ declare namespace MQ {
      */
     DeploymentMode?: DeploymentMode;
     /**
-     * Encryption options for the broker. Does not apply to RabbitMQ brokers.
+     * Encryption options for the broker.
      */
     EncryptionOptions?: EncryptionOptions;
     /**
@@ -766,6 +807,22 @@ declare namespace MQ {
      * The list of all broker usernames for the specified broker.
      */
     Users?: __listOfUserSummary;
+    /**
+     * The replication details of the data replication-enabled broker. Only returned if dataReplicationMode is set to CRDR.
+     */
+    DataReplicationMetadata?: DataReplicationMetadataOutput;
+    /**
+     * Describes whether this broker is a part of a data replication pair.
+     */
+    DataReplicationMode?: DataReplicationMode;
+    /**
+     * The pending replication details of the data replication-enabled broker. Only returned if pendingDataReplicationMode is set to CRDR.
+     */
+    PendingDataReplicationMetadata?: DataReplicationMetadataOutput;
+    /**
+     * Describes whether this broker will be a part of a data replication pair after reboot.
+     */
+    PendingDataReplicationMode?: DataReplicationMode;
   }
   export interface DescribeConfigurationRequest {
     /**
@@ -835,7 +892,7 @@ declare namespace MQ {
      */
     Created?: __timestampIso8601;
     /**
-     * Required. The base64-encoded XML configuration.
+     * Amazon MQ for ActiveMQ: the base64-encoded XML configuration. Amazon MQ for RabbitMQ: base64-encoded Cuttlefish.
      */
     Data?: __string;
     /**
@@ -874,14 +931,18 @@ declare namespace MQ {
      * Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
     Username?: __string;
+    /**
+     * Describes whether the user is intended for data replication
+     */
+    ReplicationUser?: __boolean;
   }
   export interface EncryptionOptions {
     /**
-     * The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
+     * The customer master key (CMK) to use for the A KMS (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
      */
     KmsKeyId?: __string;
     /**
-     * Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.
+     * Enables the use of an Amazon Web Services owned CMK using KMS (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.
      */
     UseAwsOwnedKey: __boolean;
   }
@@ -894,7 +955,7 @@ declare namespace MQ {
   }
   export interface LdapServerMetadataInput {
     /**
-     * Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+     * Specifies the location of the LDAP server such as Directory Service for Microsoft Active Directory. Optional failover server.
      */
     Hosts: __listOf__string;
     /**
@@ -945,7 +1006,7 @@ declare namespace MQ {
   }
   export interface LdapServerMetadataOutput {
     /**
-     * Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+     * Specifies the location of the LDAP server such as Directory Service for Microsoft Active Directory. Optional failover server.
      */
     Hosts: __listOf__string;
     /**
@@ -1152,6 +1213,23 @@ declare namespace MQ {
      */
     General?: __boolean;
   }
+  export type PromoteMode = "SWITCHOVER"|"FAILOVER"|string;
+  export interface PromoteRequest {
+    /**
+     * The unique ID that Amazon MQ generates for the broker.
+     */
+    BrokerId: __string;
+    /**
+     * The Promote mode requested. Note: Valid values for the parameter are SWITCHOVER, FAILOVER.
+     */
+    Mode: PromoteMode;
+  }
+  export interface PromoteResponse {
+    /**
+     * The unique ID that Amazon MQ generates for the broker.
+     */
+    BrokerId?: __string;
+  }
   export interface RebootBrokerRequest {
     /**
      * The unique ID that Amazon MQ generates for the broker.
@@ -1162,15 +1240,15 @@ declare namespace MQ {
   }
   export interface SanitizationWarning {
     /**
-     * The name of the XML attribute that has been sanitized.
+     * The name of the configuration attribute that has been sanitized.
      */
     AttributeName?: __string;
     /**
-     * The name of the XML element that has been sanitized.
+     * The name of the configuration element that has been sanitized.
      */
     ElementName?: __string;
     /**
-     * Required. The reason for which the XML elements or attributes were sanitized.
+     * The reason for which the configuration elements or attributes were sanitized.
      */
     Reason: SanitizationWarningReason;
   }
@@ -1216,6 +1294,10 @@ declare namespace MQ {
      * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
+    /**
+     * Defines whether this broker is a part of a data replication pair.
+     */
+    DataReplicationMode?: DataReplicationMode;
   }
   export interface UpdateBrokerResponse {
     /**
@@ -1258,6 +1340,22 @@ declare namespace MQ {
      * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
+    /**
+     * The replication details of the data replication-enabled broker. Only returned if dataReplicationMode is set to CRDR.
+     */
+    DataReplicationMetadata?: DataReplicationMetadataOutput;
+    /**
+     * Describes whether this broker is a part of a data replication pair.
+     */
+    DataReplicationMode?: DataReplicationMode;
+    /**
+     * The pending replication details of the data replication-enabled broker. Only returned if pendingDataReplicationMode is set to CRDR.
+     */
+    PendingDataReplicationMetadata?: DataReplicationMetadataOutput;
+    /**
+     * Describes whether this broker will be a part of a data replication pair after reboot.
+     */
+    PendingDataReplicationMode?: DataReplicationMode;
   }
   export interface UpdateConfigurationRequest {
     /**
@@ -1265,7 +1363,7 @@ declare namespace MQ {
      */
     ConfigurationId: __string;
     /**
-     * Required. The base64-encoded XML configuration.
+     * Amazon MQ for Active MQ: The base64-encoded XML configuration. Amazon MQ for RabbitMQ: the base64-encoded Cuttlefish configuration.
      */
     Data: __string;
     /**
@@ -1275,7 +1373,7 @@ declare namespace MQ {
   }
   export interface UpdateConfigurationResponse {
     /**
-     * Required. The Amazon Resource Name (ARN) of the configuration.
+     * The Amazon Resource Name (ARN) of the configuration.
      */
     Arn?: __string;
     /**
@@ -1283,7 +1381,7 @@ declare namespace MQ {
      */
     Created?: __timestampIso8601;
     /**
-     * Required. The unique ID that Amazon MQ generates for the configuration.
+     * The unique ID that Amazon MQ generates for the configuration.
      */
     Id?: __string;
     /**
@@ -1291,11 +1389,11 @@ declare namespace MQ {
      */
     LatestRevision?: ConfigurationRevision;
     /**
-     * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
+     * The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
      */
     Name?: __string;
     /**
-     * The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
+     * The list of the first 20 warnings about the configuration elements or attributes that were sanitized.
      */
     Warnings?: __listOfSanitizationWarning;
   }
@@ -1320,6 +1418,10 @@ declare namespace MQ {
      * The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
     Username: __string;
+    /**
+     * Defines whether the user is intended for data replication.
+     */
+    ReplicationUser?: __boolean;
   }
   export interface UpdateUserResponse {
   }
@@ -1337,9 +1439,13 @@ declare namespace MQ {
      */
     Password: __string;
     /**
-     * important>Amazon MQ for ActiveMQ For ActiveMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long./important> Amazon MQ for RabbitMQ For RabbitMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores (- . _). This value must not contain a tilde (~) character. Amazon MQ prohibts using guest as a valid usename. This value must be 2-100 characters long.
+     * The username of the broker user. The following restrictions apply to broker usernames: For Amazon MQ for ActiveMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long. para>For Amazon MQ for RabbitMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores (- . _). This value must not contain a tilde (~) character. Amazon MQ prohibts using guest as a valid usename. This value must be 2-100 characters long. Do not add personally identifiable information (PII) or other confidential or sensitive information in broker usernames. Broker usernames are accessible to other Amazon Web Services services, including CloudWatch Logs. Broker usernames are not intended to be used for private or sensitive data.
      */
     Username: __string;
+    /**
+     * Defines if this user is intended for CRDR replication purposes.
+     */
+    ReplicationUser?: __boolean;
   }
   export interface UserPendingChanges {
     /**

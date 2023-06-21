@@ -285,6 +285,14 @@ declare class EMR extends Service {
    */
   listStudios(callback?: (err: AWSError, data: EMR.Types.ListStudiosOutput) => void): Request<EMR.Types.ListStudiosOutput, AWSError>;
   /**
+   * A list of the instance types that Amazon EMR supports. You can filter the list by Amazon Web Services Region and Amazon EMR release. 
+   */
+  listSupportedInstanceTypes(params: EMR.Types.ListSupportedInstanceTypesInput, callback?: (err: AWSError, data: EMR.Types.ListSupportedInstanceTypesOutput) => void): Request<EMR.Types.ListSupportedInstanceTypesOutput, AWSError>;
+  /**
+   * A list of the instance types that Amazon EMR supports. You can filter the list by Amazon Web Services Region and Amazon EMR release. 
+   */
+  listSupportedInstanceTypes(callback?: (err: AWSError, data: EMR.Types.ListSupportedInstanceTypesOutput) => void): Request<EMR.Types.ListSupportedInstanceTypesOutput, AWSError>;
+  /**
    * Modifies the number of steps that can be executed concurrently for the cluster specified using ClusterID.
    */
   modifyCluster(params: EMR.Types.ModifyClusterInput, callback?: (err: AWSError, data: EMR.Types.ModifyClusterOutput) => void): Request<EMR.Types.ModifyClusterOutput, AWSError>;
@@ -1398,6 +1406,7 @@ declare namespace EMR {
      */
     LogFile?: String;
   }
+  export type Float = number;
   export interface GetAutoTerminationPolicyInput {
     /**
      * Specifies the ID of the Amazon EMR cluster for which the auto-termination policy will be fetched.
@@ -2623,6 +2632,26 @@ declare namespace EMR {
      */
     Marker?: Marker;
   }
+  export interface ListSupportedInstanceTypesInput {
+    /**
+     * The Amazon EMR release label determines the versions of open-source application packages that Amazon EMR has installed on the cluster. Release labels are in the format emr-x.x.x, where x.x.x is an Amazon EMR release number such as emr-6.10.0. For more information about Amazon EMR releases and their included application versions and features, see the  Amazon EMR Release Guide .
+     */
+    ReleaseLabel: String;
+    /**
+     * The pagination token that marks the next set of results to retrieve.
+     */
+    Marker?: String;
+  }
+  export interface ListSupportedInstanceTypesOutput {
+    /**
+     * The list of instance types that the release specified in ListSupportedInstanceTypesInput$ReleaseLabel supports, filtered by Amazon Web Services Region.
+     */
+    SupportedInstanceTypes?: SupportedInstanceTypesList;
+    /**
+     * The pagination token that marks the next set of results to retrieve.
+     */
+    Marker?: String;
+  }
   export type Long = number;
   export interface ManagedScalingPolicy {
     /**
@@ -3341,7 +3370,7 @@ declare namespace EMR {
      */
     BlockDurationMinutes?: WholeNumber;
     /**
-     * Specifies one of the following strategies to launch Spot Instance fleets: price-capacity-optimized, capacity-optimized, lowest-price, or diversified. For more information on the provisioning strategies, see Allocation strategies for Spot Instances in the Amazon EC2 User Guide for Linux Instances.  When you launch a Spot Instance fleet with the old console, it automatically launches with the capacity-optimized strategy. You can't change the allocation strategy from the old console. 
+     *  Specifies the strategy to use in launching Spot Instance fleets. Currently, the only option is capacity-optimized (the default), which launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. 
      */
     AllocationStrategy?: SpotProvisioningAllocationStrategy;
   }
@@ -3666,6 +3695,53 @@ declare namespace EMR {
   }
   export type StudioSummaryList = StudioSummary[];
   export type SubnetIdList = String[];
+  export interface SupportedInstanceType {
+    /**
+     * The Amazon EC2 instance type, for example m5.xlarge, of the SupportedInstanceType.
+     */
+    Type?: String;
+    /**
+     * The amount of memory that is available to Amazon EMR from the SupportedInstanceType. The kernel and hypervisor software consume some memory, so this value might be lower than the overall memory for the instance type.
+     */
+    MemoryGB?: Float;
+    /**
+     *  StorageGB represents the storage capacity of the SupportedInstanceType. This value is 0 for Amazon EBS-only instance types.
+     */
+    StorageGB?: Integer;
+    /**
+     * The number of vCPUs available for the SupportedInstanceType.
+     */
+    VCPU?: Integer;
+    /**
+     * Indicates whether the SupportedInstanceType only supports 64-bit architecture.
+     */
+    Is64BitsOnly?: Boolean;
+    /**
+     * The Amazon EC2 family and generation for the SupportedInstanceType.
+     */
+    InstanceFamilyId?: String;
+    /**
+     * Indicates whether the SupportedInstanceType supports Amazon EBS optimization.
+     */
+    EbsOptimizedAvailable?: Boolean;
+    /**
+     * Indicates whether the SupportedInstanceType uses Amazon EBS optimization by default.
+     */
+    EbsOptimizedByDefault?: Boolean;
+    /**
+     * Number of disks for the SupportedInstanceType. This value is 0 for Amazon EBS-only instance types.
+     */
+    NumberOfDisks?: Integer;
+    /**
+     * Indicates whether the SupportedInstanceType only supports Amazon EBS.
+     */
+    EbsStorageOnly?: Boolean;
+    /**
+     * The CPU architecture, for example X86_64 or AARCH64.
+     */
+    Architecture?: String;
+  }
+  export type SupportedInstanceTypesList = SupportedInstanceType[];
   export interface SupportedProductConfig {
     /**
      * The name of the product configuration.
