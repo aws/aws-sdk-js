@@ -420,13 +420,21 @@ declare class Kendra extends Service {
    */
   putPrincipalMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Searches an active index. Use this API to search your documents using query. The Query API enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results. Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeFilter parameter. Each query returns the 100 most relevant results. 
+   * Searches an index given an input query. You can configure boosting or relevance tuning at the query level to override boosting at the index level, filter based on document fields/attributes and faceted search, and filter based on the user or their group access to documents. You can also include certain fields in the response that might provide useful additional information. A query response contains three types of results.   Relevant suggested answers. The answers can be either a text excerpt or table excerpt. The answer can be highlighted in the excerpt.   Matching FAQs or questions-answer from your FAQ file.   Relevant documents. This result type includes an excerpt of the document with the document title. The searched terms can be highlighted in the excerpt.   You can specify that the query return only one type of result using the QueryResultTypeFilter parameter. Each query returns the 100 most relevant results. If you filter result type to only question-answers, a maximum of four results are returned. If you filter result type to only answers, a maximum of three results are returned.
    */
   query(params: Kendra.Types.QueryRequest, callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
-   * Searches an active index. Use this API to search your documents using query. The Query API enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results. Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeFilter parameter. Each query returns the 100 most relevant results. 
+   * Searches an index given an input query. You can configure boosting or relevance tuning at the query level to override boosting at the index level, filter based on document fields/attributes and faceted search, and filter based on the user or their group access to documents. You can also include certain fields in the response that might provide useful additional information. A query response contains three types of results.   Relevant suggested answers. The answers can be either a text excerpt or table excerpt. The answer can be highlighted in the excerpt.   Matching FAQs or questions-answer from your FAQ file.   Relevant documents. This result type includes an excerpt of the document with the document title. The searched terms can be highlighted in the excerpt.   You can specify that the query return only one type of result using the QueryResultTypeFilter parameter. Each query returns the 100 most relevant results. If you filter result type to only question-answers, a maximum of four results are returned. If you filter result type to only answers, a maximum of three results are returned.
    */
   query(callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
+  /**
+   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce no relevant passages using the Retrieve API, you can alternatively use the Query API. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   You can also include certain fields in the response that might provide useful additional information.
+   */
+  retrieve(params: Kendra.Types.RetrieveRequest, callback?: (err: AWSError, data: Kendra.Types.RetrieveResult) => void): Request<Kendra.Types.RetrieveResult, AWSError>;
+  /**
+   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce no relevant passages using the Retrieve API, you can alternatively use the Query API. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   You can also include certain fields in the response that might provide useful additional information.
+   */
+  retrieve(callback?: (err: AWSError, data: Kendra.Types.RetrieveResult) => void): Request<Kendra.Types.RetrieveResult, AWSError>;
   /**
    * Starts a synchronization job for a data source connector. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception.
    */
@@ -1208,6 +1216,7 @@ declare namespace Kendra {
      */
     SecretArn: SecretArn;
   }
+  export type Content = string;
   export interface ContentSourceConfiguration {
     /**
      * The identifier of the data sources you want to use for your Amazon Kendra experience.
@@ -1389,7 +1398,7 @@ declare namespace Kendra {
      */
     Tags?: TagList;
     /**
-     * The format of the FAQ input file. You can choose between a basic CSV format, a CSV format that includes customs attributes in a header, and a JSON format that includes custom attributes. The format must match the format of the file stored in the S3 bucket identified in the S3Path parameter. For more information, see Adding questions and answers.
+     * The format of the FAQ input file. You can choose between a basic CSV format, a CSV format that includes customs attributes in a header, and a JSON format that includes custom attributes. The default format is CSV. The format must match the format of the file stored in the S3 bucket identified in the S3Path parameter. For more information, see Adding questions and answers.
      */
     FileFormat?: FaqFileFormat;
     /**
@@ -1648,7 +1657,7 @@ declare namespace Kendra {
      */
     GitHubConfiguration?: GitHubConfiguration;
     /**
-     * Provides the configuration information to connect to Alfresco as your data source.
+     * Provides the configuration information to connect to Alfresco as your data source. Support for AlfrescoConfiguration ended May 2023. We recommend migrating to or using the Alfresco data source template schema / TemplateConfiguration API.
      */
     AlfrescoConfiguration?: AlfrescoConfiguration;
     /**
@@ -2523,7 +2532,7 @@ declare namespace Kendra {
      */
     HierarchicalAccessControlList?: HierarchicalPrincipalList;
     /**
-     * The file type of the document in the Blob field.
+     * The file type of the document in the Blob field. If you want to index snippets or subsets of HTML documents instead of the entirety of the HTML documents, you must add the HTML start and closing tags (&lt;HTML&gt;content&lt;/HTML&gt;) around the content.
      */
     ContentType?: ContentType;
     /**
@@ -2656,6 +2665,7 @@ declare namespace Kendra {
   export type DocumentRelevanceOverrideConfigurationList = DocumentRelevanceConfiguration[];
   export type DocumentStatus = "NOT_FOUND"|"PROCESSING"|"INDEXED"|"UPDATED"|"FAILED"|"UPDATE_FAILED"|string;
   export type DocumentStatusList = Status[];
+  export type DocumentTitle = string;
   export interface DocumentsMetadataConfiguration {
     /**
      * A prefix used to filter metadata configuration files in the Amazon Web Services S3 bucket. The S3 bucket might contain multiple metadata files. Use S3Prefix to include only the desired metadata files.
@@ -4029,7 +4039,7 @@ declare namespace Kendra {
   export type QueryIdentifiersEnclosingOption = "DOUBLE_QUOTES"|"NONE"|string;
   export interface QueryRequest {
     /**
-     * The identifier of the index to search. The identifier is returned in the response from the CreateIndex API.
+     * The identifier of the index for the search.
      */
     IndexId: IndexId;
     /**
@@ -4037,23 +4047,23 @@ declare namespace Kendra {
      */
     QueryText?: QueryText;
     /**
-     * Enables filtered searches based on document attributes. You can only provide one attribute filter; however, the AndAllFilters, NotFilter, and OrAllFilters parameters contain a list of other filters. The AttributeFilter parameter enables you to create a set of filtering rules that a document must satisfy to be included in the query results.
+     * Filters search results by document fields/attributes. You can only provide one attribute filter; however, the AndAllFilters, NotFilter, and OrAllFilters parameters contain a list of other filters. The AttributeFilter parameter means you can create a set of filtering rules that a document must satisfy to be included in the query results.
      */
     AttributeFilter?: AttributeFilter;
     /**
-     * An array of documents attributes. Amazon Kendra returns a count for each attribute key specified. This helps your users narrow their search.
+     * An array of documents fields/attributes for faceted search. Amazon Kendra returns a count for each field key specified. This helps your users narrow their search.
      */
     Facets?: FacetList;
     /**
-     * An array of document attributes to include in the response. You can limit the response to include certain document attributes. By default all document attributes are included in the response.
+     * An array of document fields/attributes to include in the response. You can limit the response to include certain document fields. By default, all document attributes are included in the response.
      */
     RequestedDocumentAttributes?: DocumentAttributeKeyList;
     /**
-     * Sets the type of query. Only results for the specified query type are returned.
+     * Sets the type of query result or response. Only results for the specified type are returned.
      */
     QueryResultTypeFilter?: QueryResultType;
     /**
-     * Overrides relevance tuning configurations of fields or attributes set at the index level. If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning. If there is relevance tuning configured at the index level, but you do not use this API to override any relevance tuning in the index, then Amazon Kendra uses the relevance tuning that is configured at the index level. If there is relevance tuning configured for fields at the index level, but you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.
+     * Overrides relevance tuning configurations of fields/attributes set at the index level. If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning. If there is relevance tuning configured for fields at the index level, and you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.
      */
     DocumentRelevanceOverrideConfigurations?: DocumentRelevanceOverrideConfigurationList;
     /**
@@ -4083,7 +4093,7 @@ declare namespace Kendra {
   }
   export interface QueryResult {
     /**
-     * The identifier for the search. You use QueryId to identify the search when using the feedback API.
+     * The identifier for the search. You also use QueryId to identify the search when using the SubmitFeedback API.
      */
     QueryId?: QueryId;
     /**
@@ -4091,11 +4101,11 @@ declare namespace Kendra {
      */
     ResultItems?: QueryResultItemList;
     /**
-     * Contains the facet results. A FacetResult contains the counts for each attribute key that was specified in the Facets input parameter.
+     * Contains the facet results. A FacetResult contains the counts for each field/attribute key that was specified in the Facets input parameter.
      */
     FacetResults?: FacetResultList;
     /**
-     * The total number of items found by the search; however, you can only retrieve up to 100 items. For example, if the search found 192 items, you can only retrieve the first 100 of the items.
+     * The total number of items found by the search. However, you can only retrieve up to 100 items. For example, if the search found 192 items, you can only retrieve the first 100 of the items.
      */
     TotalNumberOfResults?: Integer;
     /**
@@ -4126,7 +4136,7 @@ declare namespace Kendra {
      */
     Format?: QueryResultFormat;
     /**
-     * One or more additional attributes associated with the query result.
+     * One or more additional fields/attributes associated with the query result.
      */
     AdditionalAttributes?: AdditionalResultAttributeList;
     /**
@@ -4146,15 +4156,15 @@ declare namespace Kendra {
      */
     DocumentURI?: Url;
     /**
-     * An array of document attributes assigned to a document in the search results. For example, the document author (_author) or the source URI (_source_uri) of the document.
+     * An array of document fields/attributes assigned to a document in the search results. For example, the document author (_author) or the source URI (_source_uri) of the document.
      */
     DocumentAttributes?: DocumentAttributeList;
     /**
-     * Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, VERY_HIGH, HIGH, MEDIUM and LOW. You can use the score to determine if a response meets the confidence needed for your application. The field is only set to LOW when the Type field is set to DOCUMENT and Amazon Kendra is not confident that the result matches the query.
+     * Indicates the confidence level of Amazon Kendra providing a relevant result for the query. Each result is placed into a bin that indicates the confidence, VERY_HIGH, HIGH, MEDIUM and LOW. You can use the score to determine if a response meets the confidence needed for your application. The field is only set to LOW when the Type field is set to DOCUMENT and Amazon Kendra is not confident that the result is relevant to the query.
      */
     ScoreAttributes?: ScoreAttributes;
     /**
-     * A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see Submitting feedback .
+     * A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see Submitting feedback.
      */
     FeedbackToken?: FeedbackToken;
     /**
@@ -4286,6 +4296,77 @@ declare namespace Kendra {
   export type RepositoryName = string;
   export type RepositoryNames = RepositoryName[];
   export type ResultId = string;
+  export interface RetrieveRequest {
+    /**
+     * The identifier of the index to retrieve relevant passages for the search.
+     */
+    IndexId: IndexId;
+    /**
+     * The input query text to retrieve relevant passages for the search. Amazon Kendra truncates queries at 30 token words, which excludes punctuation and stop words. Truncation still applies if you use Boolean or more advanced, complex queries.
+     */
+    QueryText: QueryText;
+    /**
+     * Filters search results by document fields/attributes. You can only provide one attribute filter; however, the AndAllFilters, NotFilter, and OrAllFilters parameters contain a list of other filters. The AttributeFilter parameter means you can create a set of filtering rules that a document must satisfy to be included in the query results.
+     */
+    AttributeFilter?: AttributeFilter;
+    /**
+     * A list of document fields/attributes to include in the response. You can limit the response to include certain document fields. By default, all document fields are included in the response.
+     */
+    RequestedDocumentAttributes?: DocumentAttributeKeyList;
+    /**
+     * Overrides relevance tuning configurations of fields/attributes set at the index level. If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning. If there is relevance tuning configured for fields at the index level, and you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.
+     */
+    DocumentRelevanceOverrideConfigurations?: DocumentRelevanceOverrideConfigurationList;
+    /**
+     * Retrieved relevant passages are returned in pages the size of the PageSize parameter. By default, Amazon Kendra returns the first page of results. Use this parameter to get result pages after the first one.
+     */
+    PageNumber?: Integer;
+    /**
+     * Sets the number of retrieved relevant passages that are returned in each page of results. The default page size is 10. The maximum number of results returned is 100. If you ask for more than 100 results, only 100 are returned.
+     */
+    PageSize?: Integer;
+    /**
+     * The user context token or user and group information.
+     */
+    UserContext?: UserContext;
+  }
+  export interface RetrieveResult {
+    /**
+     * The identifier of query used for the search. You also use QueryId to identify the search when using the Submitfeedback API.
+     */
+    QueryId?: QueryId;
+    /**
+     * The results of the retrieved relevant passages for the search.
+     */
+    ResultItems?: RetrieveResultItemList;
+  }
+  export interface RetrieveResultItem {
+    /**
+     * The identifier of the relevant passage result.
+     */
+    Id?: ResultId;
+    /**
+     * The identifier of the document.
+     */
+    DocumentId?: DocumentId;
+    /**
+     * The title of the document.
+     */
+    DocumentTitle?: DocumentTitle;
+    /**
+     * The contents of the relevant passage.
+     */
+    Content?: Content;
+    /**
+     * The URI of the original location of the document.
+     */
+    DocumentURI?: Url;
+    /**
+     * An array of document fields/attributes assigned to a document in the search results. For example, the document author (_author) or the source URI (_source_uri) of the document.
+     */
+    DocumentAttributes?: DocumentAttributeList;
+  }
+  export type RetrieveResultItemList = RetrieveResultItem[];
   export type RoleArn = string;
   export type S3BucketName = string;
   export interface S3DataSourceConfiguration {
@@ -4473,7 +4554,7 @@ declare namespace Kendra {
   export type ScanSchedule = string;
   export interface ScoreAttributes {
     /**
-     * A relative ranking for how well the response matches the query.
+     * A relative ranking for how relevant the response is to the query.
      */
     ScoreConfidence?: ScoreConfidence;
   }
@@ -4505,7 +4586,7 @@ declare namespace Kendra {
      */
     SeedUrls: SeedUrlList;
     /**
-     * You can choose one of the following modes:    HOST_ONLY – crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.    SUBDOMAINS – crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.    EVERYTHING – crawl the website host names with subdomains and other domains that the web pages link to.   The default mode is set to HOST_ONLY.
+     * You can choose one of the following modes:    HOST_ONLY—crawl only the website host names. For example, if the seed URL is "abc.example.com", then only URLs with host name "abc.example.com" are crawled.    SUBDOMAINS—crawl the website host names with subdomains. For example, if the seed URL is "abc.example.com", then "a.abc.example.com" and "b.abc.example.com" are also crawled.    EVERYTHING—crawl the website host names with subdomains and other domains that the web pages link to.   The default mode is set to HOST_ONLY.
      */
     WebCrawlerMode?: WebCrawlerMode;
   }
@@ -4551,11 +4632,11 @@ declare namespace Kendra {
      */
     CrawlAttachments?: Boolean;
     /**
-     * A list of regular expression patterns to include certain attachments of knowledge articles in your ServiceNow. Item that match the patterns are included in the index. Items that don't match the patterns are excluded from the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index. The regex is applied to the field specified in the PatternTargetField.
+     * A list of regular expression patterns applied to include knowledge article attachments. Attachments that match the patterns are included in the index. Items that don't match the patterns are excluded from the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index.
      */
     IncludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
-     * A list of regular expression patterns to exclude certain attachments of knowledge articles in your ServiceNow. Item that match the patterns are excluded from the index. Items that don't match the patterns are included in the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index. The regex is applied to the field specified in the PatternTargetField.
+     * A list of regular expression patterns applied to exclude certain knowledge article attachments. Attachments that match the patterns are excluded from the index. Items that don't match the patterns are included in the index. If an item matches both an inclusion and exclusion pattern, the exclusion pattern takes precedence and the item isn't included in the index.
      */
     ExcludeAttachmentFilePatterns?: DataSourceInclusionsExclusionsStrings;
     /**
@@ -5386,7 +5467,7 @@ declare namespace Kendra {
      */
     Urls: Urls;
     /**
-     * Specifies the number of levels in a website that you want to crawl. The first level begins from the website seed or starting point URL. For example, if a website has three levels—index level (the seed in this example), sections level, and subsections level—and you are only interested in crawling information up to the sections level (levels 0-1), you can set your depth to 1. The default crawl depth is set to 2.
+     * The 'depth' or number of levels from the seed level to crawl. For example, the seed URL page is depth 1 and any hyperlinks on this page that are also crawled are depth 2.
      */
     CrawlDepth?: CrawlDepth;
     /**

@@ -20,13 +20,21 @@ declare class StepFunctions extends Service {
    */
   createActivity(callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the Step Functions User Guide. If you set the publish parameter of this API action to true, it publishes version 1 as the first revision of the state machine.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration, and TracingConfiguration. The check is also based on the publish and versionDescription parameters. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
    */
   createStateMachine(params: StepFunctions.Types.CreateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the Step Functions User Guide. If you set the publish parameter of this API action to true, it publishes version 1 as the first revision of the state machine.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration, and TracingConfiguration. The check is also based on the publish and versionDescription parameters. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
    */
   createStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
+  /**
+   * Creates an alias for a state machine that points to one or two versions of the same state machine. You can set your application to call StartExecution with an alias and update the version the alias uses without changing the client's code. You can also map an alias to split StartExecution requests between two versions of a state machine. To do this, add a second RoutingConfig object in the routingConfiguration parameter. You must also specify the percentage of execution run requests each version should receive in both RoutingConfig objects. Step Functions randomly chooses which version runs a given execution based on the percentage you specify. To create an alias that points to a single version, specify a single RoutingConfig object with a weight set to 100. You can create up to 100 aliases for each state machine. You must delete unused aliases using the DeleteStateMachineAlias API action.  CreateStateMachineAlias is an idempotent API. Step Functions bases the idempotency check on the stateMachineArn, description, name, and routingConfiguration parameters. Requests that contain the same values for these parameters return a successful idempotent response without creating a duplicate resource.  Related operations:     DescribeStateMachineAlias     ListStateMachineAliases     UpdateStateMachineAlias     DeleteStateMachineAlias   
+   */
+  createStateMachineAlias(params: StepFunctions.Types.CreateStateMachineAliasInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineAliasOutput) => void): Request<StepFunctions.Types.CreateStateMachineAliasOutput, AWSError>;
+  /**
+   * Creates an alias for a state machine that points to one or two versions of the same state machine. You can set your application to call StartExecution with an alias and update the version the alias uses without changing the client's code. You can also map an alias to split StartExecution requests between two versions of a state machine. To do this, add a second RoutingConfig object in the routingConfiguration parameter. You must also specify the percentage of execution run requests each version should receive in both RoutingConfig objects. Step Functions randomly chooses which version runs a given execution based on the percentage you specify. To create an alias that points to a single version, specify a single RoutingConfig object with a weight set to 100. You can create up to 100 aliases for each state machine. You must delete unused aliases using the DeleteStateMachineAlias API action.  CreateStateMachineAlias is an idempotent API. Step Functions bases the idempotency check on the stateMachineArn, description, name, and routingConfiguration parameters. Requests that contain the same values for these parameters return a successful idempotent response without creating a duplicate resource.  Related operations:     DescribeStateMachineAlias     ListStateMachineAliases     UpdateStateMachineAlias     DeleteStateMachineAlias   
+   */
+  createStateMachineAlias(callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineAliasOutput) => void): Request<StepFunctions.Types.CreateStateMachineAliasOutput, AWSError>;
   /**
    * Deletes an activity.
    */
@@ -36,13 +44,29 @@ declare class StepFunctions extends Service {
    */
   deleteActivity(callback?: (err: AWSError, data: StepFunctions.Types.DeleteActivityOutput) => void): Request<StepFunctions.Types.DeleteActivityOutput, AWSError>;
   /**
-   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process.  If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName.  For EXPRESS state machines, the deletion will happen eventually (usually less than a minute). Running executions may emit logs after DeleteStateMachine API is called. 
+   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process.  A qualified state machine ARN can either refer to a Distributed Map state defined within a state machine, a version ARN, or an alias ARN. The following are some examples of qualified and unqualified state machine ARNs:   The following qualified state machine ARN refers to a Distributed Map state with a label mapStateLabel in a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel   If you provide a qualified state machine ARN that refers to a Distributed Map state, the request fails with ValidationException.    The following unqualified state machine ARN refers to a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine    This API action also deletes all versions and aliases associated with a state machine.  For EXPRESS state machines, the deletion happens eventually (usually in less than a minute). Running executions may emit logs after DeleteStateMachine API is called. 
    */
   deleteStateMachine(params: StepFunctions.Types.DeleteStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
   /**
-   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process.  If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName.  For EXPRESS state machines, the deletion will happen eventually (usually less than a minute). Running executions may emit logs after DeleteStateMachine API is called. 
+   * Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to DELETING and begins the deletion process.  A qualified state machine ARN can either refer to a Distributed Map state defined within a state machine, a version ARN, or an alias ARN. The following are some examples of qualified and unqualified state machine ARNs:   The following qualified state machine ARN refers to a Distributed Map state with a label mapStateLabel in a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel   If you provide a qualified state machine ARN that refers to a Distributed Map state, the request fails with ValidationException.    The following unqualified state machine ARN refers to a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine    This API action also deletes all versions and aliases associated with a state machine.  For EXPRESS state machines, the deletion happens eventually (usually in less than a minute). Running executions may emit logs after DeleteStateMachine API is called. 
    */
   deleteStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineOutput) => void): Request<StepFunctions.Types.DeleteStateMachineOutput, AWSError>;
+  /**
+   * Deletes a state machine alias. After you delete a state machine alias, you can't use it to start executions. When you delete a state machine alias, Step Functions doesn't delete the state machine versions that alias references.  Related operations:     CreateStateMachineAlias     DescribeStateMachineAlias     ListStateMachineAliases     UpdateStateMachineAlias   
+   */
+  deleteStateMachineAlias(params: StepFunctions.Types.DeleteStateMachineAliasInput, callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineAliasOutput) => void): Request<StepFunctions.Types.DeleteStateMachineAliasOutput, AWSError>;
+  /**
+   * Deletes a state machine alias. After you delete a state machine alias, you can't use it to start executions. When you delete a state machine alias, Step Functions doesn't delete the state machine versions that alias references.  Related operations:     CreateStateMachineAlias     DescribeStateMachineAlias     ListStateMachineAliases     UpdateStateMachineAlias   
+   */
+  deleteStateMachineAlias(callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineAliasOutput) => void): Request<StepFunctions.Types.DeleteStateMachineAliasOutput, AWSError>;
+  /**
+   * Deletes a state machine version. After you delete a version, you can't call StartExecution using that version's ARN or use the version with a state machine alias.  Deleting a state machine version won't terminate its in-progress executions.   You can't delete a state machine version currently referenced by one or more aliases. Before you delete a version, you must either delete the aliases or update them to point to another state machine version.   Related operations:     PublishStateMachineVersion     ListStateMachineVersions   
+   */
+  deleteStateMachineVersion(params: StepFunctions.Types.DeleteStateMachineVersionInput, callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineVersionOutput) => void): Request<StepFunctions.Types.DeleteStateMachineVersionOutput, AWSError>;
+  /**
+   * Deletes a state machine version. After you delete a version, you can't call StartExecution using that version's ARN or use the version with a state machine alias.  Deleting a state machine version won't terminate its in-progress executions.   You can't delete a state machine version currently referenced by one or more aliases. Before you delete a version, you must either delete the aliases or update them to point to another state machine version.   Related operations:     PublishStateMachineVersion     ListStateMachineVersions   
+   */
+  deleteStateMachineVersion(callback?: (err: AWSError, data: StepFunctions.Types.DeleteStateMachineVersionOutput) => void): Request<StepFunctions.Types.DeleteStateMachineVersionOutput, AWSError>;
   /**
    * Describes an activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
@@ -52,11 +76,11 @@ declare class StepFunctions extends Service {
    */
   describeActivity(callback?: (err: AWSError, data: StepFunctions.Types.DescribeActivityOutput) => void): Request<StepFunctions.Types.DescribeActivityOutput, AWSError>;
   /**
-   * Provides all information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run ARN if the execution was dispatched by a Map Run.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machine executions unless they were dispatched by a Map Run.
+   * Provides information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run Amazon Resource Name (ARN) if the execution was dispatched by a Map Run. If you specify a version or alias ARN when you call the StartExecution API action, DescribeExecution returns that ARN.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  Executions of an EXPRESS state machinearen't supported by DescribeExecution unless a Map Run dispatched them.
    */
   describeExecution(params: StepFunctions.Types.DescribeExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeExecutionOutput) => void): Request<StepFunctions.Types.DescribeExecutionOutput, AWSError>;
   /**
-   * Provides all information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run ARN if the execution was dispatched by a Map Run.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machine executions unless they were dispatched by a Map Run.
+   * Provides information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run Amazon Resource Name (ARN) if the execution was dispatched by a Map Run. If you specify a version or alias ARN when you call the StartExecution API action, DescribeExecution returns that ARN.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  Executions of an EXPRESS state machinearen't supported by DescribeExecution unless a Map Run dispatched them.
    */
   describeExecution(callback?: (err: AWSError, data: StepFunctions.Types.DescribeExecutionOutput) => void): Request<StepFunctions.Types.DescribeExecutionOutput, AWSError>;
   /**
@@ -68,19 +92,27 @@ declare class StepFunctions extends Service {
    */
   describeMapRun(callback?: (err: AWSError, data: StepFunctions.Types.DescribeMapRunOutput) => void): Request<StepFunctions.Types.DescribeMapRunOutput, AWSError>;
   /**
-   * Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration. If the state machine ARN is a qualified state machine ARN, the response returned includes the Map state's label. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
+   * Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration. A qualified state machine ARN can either refer to a Distributed Map state defined within a state machine, a version ARN, or an alias ARN. The following are some examples of qualified and unqualified state machine ARNs:   The following qualified state machine ARN refers to a Distributed Map state with a label mapStateLabel in a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel   If you provide a qualified state machine ARN that refers to a Distributed Map state, the request fails with ValidationException.    The following qualified state machine ARN refers to an alias named PROD.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine:PROD&gt;   If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.    The following unqualified state machine ARN refers to a state machine named myStateMachine.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;    This API action returns the details for a state machine version if the stateMachineArn you specify is a state machine version ARN.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeStateMachine(params: StepFunctions.Types.DescribeStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineOutput) => void): Request<StepFunctions.Types.DescribeStateMachineOutput, AWSError>;
   /**
-   * Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration. If the state machine ARN is a qualified state machine ARN, the response returned includes the Map state's label. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
+   * Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration. A qualified state machine ARN can either refer to a Distributed Map state defined within a state machine, a version ARN, or an alias ARN. The following are some examples of qualified and unqualified state machine ARNs:   The following qualified state machine ARN refers to a Distributed Map state with a label mapStateLabel in a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel   If you provide a qualified state machine ARN that refers to a Distributed Map state, the request fails with ValidationException.    The following qualified state machine ARN refers to an alias named PROD.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine:PROD&gt;   If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.    The following unqualified state machine ARN refers to a state machine named myStateMachine.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;    This API action returns the details for a state machine version if the stateMachineArn you specify is a state machine version ARN.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   describeStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineOutput) => void): Request<StepFunctions.Types.DescribeStateMachineOutput, AWSError>;
   /**
-   * Provides information about a state machine's definition, its execution role ARN, and configuration. If an execution was dispatched by a Map Run, the Map Run is returned in the response. Additionally, the state machine returned will be the state machine associated with the Map Run.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machines.
+   * Returns details about a state machine alias.  Related operations:     CreateStateMachineAlias     ListStateMachineAliases     UpdateStateMachineAlias     DeleteStateMachineAlias   
+   */
+  describeStateMachineAlias(params: StepFunctions.Types.DescribeStateMachineAliasInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineAliasOutput) => void): Request<StepFunctions.Types.DescribeStateMachineAliasOutput, AWSError>;
+  /**
+   * Returns details about a state machine alias.  Related operations:     CreateStateMachineAlias     ListStateMachineAliases     UpdateStateMachineAlias     DeleteStateMachineAlias   
+   */
+  describeStateMachineAlias(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineAliasOutput) => void): Request<StepFunctions.Types.DescribeStateMachineAliasOutput, AWSError>;
+  /**
+   * Provides information about a state machine's definition, its execution role ARN, and configuration. If a Map Run dispatched the execution, this action returns the Map Run Amazon Resource Name (ARN) in the response. The state machine returned is the state machine associated with the Map Run.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machines.
    */
   describeStateMachineForExecution(params: StepFunctions.Types.DescribeStateMachineForExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineForExecutionOutput) => void): Request<StepFunctions.Types.DescribeStateMachineForExecutionOutput, AWSError>;
   /**
-   * Provides information about a state machine's definition, its execution role ARN, and configuration. If an execution was dispatched by a Map Run, the Map Run is returned in the response. Additionally, the state machine returned will be the state machine associated with the Map Run.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machines.
+   * Provides information about a state machine's definition, its execution role ARN, and configuration. If a Map Run dispatched the execution, this action returns the Map Run Amazon Resource Name (ARN) in the response. The state machine returned is the state machine associated with the Map Run.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machines.
    */
   describeStateMachineForExecution(callback?: (err: AWSError, data: StepFunctions.Types.DescribeStateMachineForExecutionOutput) => void): Request<StepFunctions.Types.DescribeStateMachineForExecutionOutput, AWSError>;
   /**
@@ -108,11 +140,11 @@ declare class StepFunctions extends Service {
    */
   listActivities(callback?: (err: AWSError, data: StepFunctions.Types.ListActivitiesOutput) => void): Request<StepFunctions.Types.ListActivitiesOutput, AWSError>;
   /**
-   * Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machines.
+   * Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN. You can also provide a state machine alias ARN or version ARN to list the executions associated with a specific alias or version. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machines.
    */
   listExecutions(params: StepFunctions.Types.ListExecutionsInput, callback?: (err: AWSError, data: StepFunctions.Types.ListExecutionsOutput) => void): Request<StepFunctions.Types.ListExecutionsOutput, AWSError>;
   /**
-   * Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machines.
+   * Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN. You can also provide a state machine alias ARN or version ARN to list the executions associated with a specific alias or version. Results are sorted by time, with the most recent execution first. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.  This API action is not supported by EXPRESS state machines.
    */
   listExecutions(callback?: (err: AWSError, data: StepFunctions.Types.ListExecutionsOutput) => void): Request<StepFunctions.Types.ListExecutionsOutput, AWSError>;
   /**
@@ -123,6 +155,22 @@ declare class StepFunctions extends Service {
    * Lists all Map Runs that were started by a given state machine execution. Use this API action to obtain Map Run ARNs, and then call DescribeMapRun to obtain more information, if needed.
    */
   listMapRuns(callback?: (err: AWSError, data: StepFunctions.Types.ListMapRunsOutput) => void): Request<StepFunctions.Types.ListMapRunsOutput, AWSError>;
+  /**
+   * Lists aliases for a specified state machine ARN. Results are sorted by time, with the most recently created aliases listed first.  To list aliases that reference a state machine version, you can specify the version ARN in the stateMachineArn parameter. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  Related operations:     CreateStateMachineAlias     DescribeStateMachineAlias     UpdateStateMachineAlias     DeleteStateMachineAlias   
+   */
+  listStateMachineAliases(params: StepFunctions.Types.ListStateMachineAliasesInput, callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachineAliasesOutput) => void): Request<StepFunctions.Types.ListStateMachineAliasesOutput, AWSError>;
+  /**
+   * Lists aliases for a specified state machine ARN. Results are sorted by time, with the most recently created aliases listed first.  To list aliases that reference a state machine version, you can specify the version ARN in the stateMachineArn parameter. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  Related operations:     CreateStateMachineAlias     DescribeStateMachineAlias     UpdateStateMachineAlias     DeleteStateMachineAlias   
+   */
+  listStateMachineAliases(callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachineAliasesOutput) => void): Request<StepFunctions.Types.ListStateMachineAliasesOutput, AWSError>;
+  /**
+   * Lists versions for the specified state machine Amazon Resource Name (ARN). The results are sorted in descending order of the version creation time. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  Related operations:     PublishStateMachineVersion     DeleteStateMachineVersion   
+   */
+  listStateMachineVersions(params: StepFunctions.Types.ListStateMachineVersionsInput, callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachineVersionsOutput) => void): Request<StepFunctions.Types.ListStateMachineVersionsOutput, AWSError>;
+  /**
+   * Lists versions for the specified state machine Amazon Resource Name (ARN). The results are sorted in descending order of the version creation time. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  Related operations:     PublishStateMachineVersion     DeleteStateMachineVersion   
+   */
+  listStateMachineVersions(callback?: (err: AWSError, data: StepFunctions.Types.ListStateMachineVersionsOutput) => void): Request<StepFunctions.Types.ListStateMachineVersionsOutput, AWSError>;
   /**
    * Lists the existing state machines. If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
@@ -139,6 +187,14 @@ declare class StepFunctions extends Service {
    * List tags for a given resource. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
    */
   listTagsForResource(callback?: (err: AWSError, data: StepFunctions.Types.ListTagsForResourceOutput) => void): Request<StepFunctions.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Creates a version from the current revision of a state machine. Use versions to create immutable snapshots of your state machine. You can start executions from versions either directly or with an alias. To create an alias, use CreateStateMachineAlias. You can publish up to 1000 versions for each state machine. You must manually delete unused versions using the DeleteStateMachineVersion API action.  PublishStateMachineVersion is an idempotent API. It doesn't create a duplicate state machine version if it already exists for the current revision. Step Functions bases PublishStateMachineVersion's idempotency check on the stateMachineArn, name, and revisionId parameters. Requests with the same parameters return a successful idempotent response. If you don't specify a revisionId, Step Functions checks for a previously published version of the state machine's current revision.  Related operations:     DeleteStateMachineVersion     ListStateMachineVersions   
+   */
+  publishStateMachineVersion(params: StepFunctions.Types.PublishStateMachineVersionInput, callback?: (err: AWSError, data: StepFunctions.Types.PublishStateMachineVersionOutput) => void): Request<StepFunctions.Types.PublishStateMachineVersionOutput, AWSError>;
+  /**
+   * Creates a version from the current revision of a state machine. Use versions to create immutable snapshots of your state machine. You can start executions from versions either directly or with an alias. To create an alias, use CreateStateMachineAlias. You can publish up to 1000 versions for each state machine. You must manually delete unused versions using the DeleteStateMachineVersion API action.  PublishStateMachineVersion is an idempotent API. It doesn't create a duplicate state machine version if it already exists for the current revision. Step Functions bases PublishStateMachineVersion's idempotency check on the stateMachineArn, name, and revisionId parameters. Requests with the same parameters return a successful idempotent response. If you don't specify a revisionId, Step Functions checks for a previously published version of the state machine's current revision.  Related operations:     DeleteStateMachineVersion     ListStateMachineVersions   
+   */
+  publishStateMachineVersion(callback?: (err: AWSError, data: StepFunctions.Types.PublishStateMachineVersionOutput) => void): Request<StepFunctions.Types.PublishStateMachineVersionOutput, AWSError>;
   /**
    * Used by activity workers and task states using the callback pattern to report that the task identified by the taskToken failed.
    */
@@ -164,11 +220,11 @@ declare class StepFunctions extends Service {
    */
   sendTaskSuccess(callback?: (err: AWSError, data: StepFunctions.Types.SendTaskSuccessOutput) => void): Request<StepFunctions.Types.SendTaskSuccessOutput, AWSError>;
   /**
-   * Starts a state machine execution. If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName.   StartExecution is idempotent for STANDARD workflows. For a STANDARD workflow, if StartExecution is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 ExecutionAlreadyExists error. Names can be reused after 90 days.   StartExecution is not idempotent for EXPRESS workflows.  
+   * Starts a state machine execution. A qualified state machine ARN can either refer to a Distributed Map state defined within a state machine, a version ARN, or an alias ARN. The following are some examples of qualified and unqualified state machine ARNs:   The following qualified state machine ARN refers to a Distributed Map state with a label mapStateLabel in a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel   If you provide a qualified state machine ARN that refers to a Distributed Map state, the request fails with ValidationException.    The following qualified state machine ARN refers to an alias named PROD.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine:PROD&gt;   If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.    The following unqualified state machine ARN refers to a state machine named myStateMachine.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;    If you start an execution with an unqualified state machine ARN, Step Functions uses the latest revision of the state machine for the execution. To start executions of a state machine version, call StartExecution and provide the version ARN or the ARN of an alias that points to the version.   StartExecution is idempotent for STANDARD workflows. For a STANDARD workflow, if you call StartExecution with the same name and input as a running execution, the call succeeds and return the same response as the original request. If the execution is closed or if the input is different, it returns a 400 ExecutionAlreadyExists error. You can reuse names after 90 days.   StartExecution isn't idempotent for EXPRESS workflows.  
    */
   startExecution(params: StepFunctions.Types.StartExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.StartExecutionOutput) => void): Request<StepFunctions.Types.StartExecutionOutput, AWSError>;
   /**
-   * Starts a state machine execution. If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName.   StartExecution is idempotent for STANDARD workflows. For a STANDARD workflow, if StartExecution is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 ExecutionAlreadyExists error. Names can be reused after 90 days.   StartExecution is not idempotent for EXPRESS workflows.  
+   * Starts a state machine execution. A qualified state machine ARN can either refer to a Distributed Map state defined within a state machine, a version ARN, or an alias ARN. The following are some examples of qualified and unqualified state machine ARNs:   The following qualified state machine ARN refers to a Distributed Map state with a label mapStateLabel in a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel   If you provide a qualified state machine ARN that refers to a Distributed Map state, the request fails with ValidationException.    The following qualified state machine ARN refers to an alias named PROD.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine:PROD&gt;   If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.    The following unqualified state machine ARN refers to a state machine named myStateMachine.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;    If you start an execution with an unqualified state machine ARN, Step Functions uses the latest revision of the state machine for the execution. To start executions of a state machine version, call StartExecution and provide the version ARN or the ARN of an alias that points to the version.   StartExecution is idempotent for STANDARD workflows. For a STANDARD workflow, if you call StartExecution with the same name and input as a running execution, the call succeeds and return the same response as the original request. If the execution is closed or if the input is different, it returns a 400 ExecutionAlreadyExists error. You can reuse names after 90 days.   StartExecution isn't idempotent for EXPRESS workflows.  
    */
   startExecution(callback?: (err: AWSError, data: StepFunctions.Types.StartExecutionOutput) => void): Request<StepFunctions.Types.StartExecutionOutput, AWSError>;
   /**
@@ -212,13 +268,21 @@ declare class StepFunctions extends Service {
    */
   updateMapRun(callback?: (err: AWSError, data: StepFunctions.Types.UpdateMapRunOutput) => void): Request<StepFunctions.Types.UpdateMapRunOutput, AWSError>;
   /**
-   * Updates an existing state machine by modifying its definition, roleArn, or loggingConfiguration. Running executions will continue to use the previous definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error. If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn.  
+   * Updates an existing state machine by modifying its definition, roleArn, or loggingConfiguration. Running executions will continue to use the previous definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName. A qualified state machine ARN can either refer to a Distributed Map state defined within a state machine, a version ARN, or an alias ARN. The following are some examples of qualified and unqualified state machine ARNs:   The following qualified state machine ARN refers to a Distributed Map state with a label mapStateLabel in a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel   If you provide a qualified state machine ARN that refers to a Distributed Map state, the request fails with ValidationException.    The following qualified state machine ARN refers to an alias named PROD.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine:PROD&gt;   If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.    The following unqualified state machine ARN refers to a state machine named myStateMachine.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;    After you update your state machine, you can set the publish parameter to true in the same action to publish a new version. This way, you can opt-in to strict versioning of your state machine.  Step Functions assigns monotonically increasing integers for state machine versions, starting at version number 1.   All StartExecution calls within a few seconds use the updated definition and roleArn. Executions started immediately after you call UpdateStateMachine may use the previous state machine definition and roleArn.  
    */
   updateStateMachine(params: StepFunctions.Types.UpdateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineOutput) => void): Request<StepFunctions.Types.UpdateStateMachineOutput, AWSError>;
   /**
-   * Updates an existing state machine by modifying its definition, roleArn, or loggingConfiguration. Running executions will continue to use the previous definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error. If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName.  All StartExecution calls within a few seconds will use the updated definition and roleArn. Executions started immediately after calling UpdateStateMachine may use the previous state machine definition and roleArn.  
+   * Updates an existing state machine by modifying its definition, roleArn, or loggingConfiguration. Running executions will continue to use the previous definition and roleArn. You must include at least one of definition or roleArn or you will receive a MissingRequiredParameter error. A qualified state machine ARN refers to a Distributed Map state defined within a state machine. For example, the qualified state machine ARN arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel refers to a Distributed Map state with a label mapStateLabel in the state machine named stateMachineName. A qualified state machine ARN can either refer to a Distributed Map state defined within a state machine, a version ARN, or an alias ARN. The following are some examples of qualified and unqualified state machine ARNs:   The following qualified state machine ARN refers to a Distributed Map state with a label mapStateLabel in a state machine named myStateMachine.  arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel   If you provide a qualified state machine ARN that refers to a Distributed Map state, the request fails with ValidationException.    The following qualified state machine ARN refers to an alias named PROD.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine:PROD&gt;   If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.    The following unqualified state machine ARN refers to a state machine named myStateMachine.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;    After you update your state machine, you can set the publish parameter to true in the same action to publish a new version. This way, you can opt-in to strict versioning of your state machine.  Step Functions assigns monotonically increasing integers for state machine versions, starting at version number 1.   All StartExecution calls within a few seconds use the updated definition and roleArn. Executions started immediately after you call UpdateStateMachine may use the previous state machine definition and roleArn.  
    */
   updateStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineOutput) => void): Request<StepFunctions.Types.UpdateStateMachineOutput, AWSError>;
+  /**
+   * Updates the configuration of an existing state machine alias by modifying its description or routingConfiguration. You must specify at least one of the description or routingConfiguration parameters to update a state machine alias.   UpdateStateMachineAlias is an idempotent API. Step Functions bases the idempotency check on the stateMachineAliasArn, description, and routingConfiguration parameters. Requests with the same parameters return an idempotent response.   This operation is eventually consistent. All StartExecution requests made within a few seconds use the latest alias configuration. Executions started immediately after calling UpdateStateMachineAlias may use the previous routing configuration.   Related operations:     CreateStateMachineAlias     DescribeStateMachineAlias     ListStateMachineAliases     DeleteStateMachineAlias   
+   */
+  updateStateMachineAlias(params: StepFunctions.Types.UpdateStateMachineAliasInput, callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineAliasOutput) => void): Request<StepFunctions.Types.UpdateStateMachineAliasOutput, AWSError>;
+  /**
+   * Updates the configuration of an existing state machine alias by modifying its description or routingConfiguration. You must specify at least one of the description or routingConfiguration parameters to update a state machine alias.   UpdateStateMachineAlias is an idempotent API. Step Functions bases the idempotency check on the stateMachineAliasArn, description, and routingConfiguration parameters. Requests with the same parameters return an idempotent response.   This operation is eventually consistent. All StartExecution requests made within a few seconds use the latest alias configuration. Executions started immediately after calling UpdateStateMachineAlias may use the previous routing configuration.   Related operations:     CreateStateMachineAlias     DescribeStateMachineAlias     ListStateMachineAliases     DeleteStateMachineAlias   
+   */
+  updateStateMachineAlias(callback?: (err: AWSError, data: StepFunctions.Types.UpdateStateMachineAliasOutput) => void): Request<StepFunctions.Types.UpdateStateMachineAliasOutput, AWSError>;
 }
 declare namespace StepFunctions {
   export interface ActivityFailedEventDetails {
@@ -304,6 +368,7 @@ declare namespace StepFunctions {
      */
     cause?: SensitiveCause;
   }
+  export type AliasDescription = string;
   export type Arn = string;
   export type BilledDuration = number;
   export type BilledMemoryUsed = number;
@@ -317,6 +382,7 @@ declare namespace StepFunctions {
      */
     billedDurationInMilliseconds?: BilledDuration;
   }
+  export type CharacterRestrictedName = string;
   export interface CloudWatchEventsExecutionDataDetails {
     /**
      * Indicates whether input or output was included in the response. Always true for API calls. 
@@ -350,6 +416,30 @@ declare namespace StepFunctions {
      */
     creationDate: Timestamp;
   }
+  export interface CreateStateMachineAliasInput {
+    /**
+     * A description for the state machine alias.
+     */
+    description?: AliasDescription;
+    /**
+     * The name of the state machine alias. To avoid conflict with version ARNs, don't use an integer in the name of the alias.
+     */
+    name: CharacterRestrictedName;
+    /**
+     * The routing configuration of a state machine alias. The routing configuration shifts execution traffic between two state machine versions. routingConfiguration contains an array of RoutingConfig objects that specify up to two state machine versions. Step Functions then randomly choses which version to run an execution with based on the weight assigned to each RoutingConfig.
+     */
+    routingConfiguration: RoutingConfigurationList;
+  }
+  export interface CreateStateMachineAliasOutput {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the created state machine alias.
+     */
+    stateMachineAliasArn: Arn;
+    /**
+     * The date the state machine alias was created.
+     */
+    creationDate: Timestamp;
+  }
   export interface CreateStateMachineInput {
     /**
      * The name of the state machine.  A name must not contain:   white space   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
@@ -379,6 +469,14 @@ declare namespace StepFunctions {
      * Selects whether X-Ray tracing is enabled.
      */
     tracingConfiguration?: TracingConfiguration;
+    /**
+     * Set to true to publish the first version of the state machine during creation. The default is false.
+     */
+    publish?: Publish;
+    /**
+     * Sets description about the state machine version. You can only set the description if the publish parameter is set to true. Otherwise, if you set versionDescription, but publish to false, this API action throws ValidationException.
+     */
+    versionDescription?: VersionDescription;
   }
   export interface CreateStateMachineOutput {
     /**
@@ -389,6 +487,10 @@ declare namespace StepFunctions {
      * The date the state machine is created.
      */
     creationDate: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the created state machine version. If you do not set the publish parameter to true, this field returns null value.
+     */
+    stateMachineVersionArn?: Arn;
   }
   export type Definition = string;
   export interface DeleteActivityInput {
@@ -399,6 +501,14 @@ declare namespace StepFunctions {
   }
   export interface DeleteActivityOutput {
   }
+  export interface DeleteStateMachineAliasInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine alias to delete.
+     */
+    stateMachineAliasArn: Arn;
+  }
+  export interface DeleteStateMachineAliasOutput {
+  }
   export interface DeleteStateMachineInput {
     /**
      * The Amazon Resource Name (ARN) of the state machine to delete.
@@ -406,6 +516,14 @@ declare namespace StepFunctions {
     stateMachineArn: Arn;
   }
   export interface DeleteStateMachineOutput {
+  }
+  export interface DeleteStateMachineVersionInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine version to delete.
+     */
+    stateMachineVersionArn: LongArn;
+  }
+  export interface DeleteStateMachineVersionOutput {
   }
   export interface DescribeActivityInput {
     /**
@@ -455,7 +573,7 @@ declare namespace StepFunctions {
      */
     startDate: Timestamp;
     /**
-     * If the execution has already ended, the date the execution stopped.
+     * If the execution ended, the date the execution stopped.
      */
     stopDate?: Timestamp;
     /**
@@ -484,6 +602,14 @@ declare namespace StepFunctions {
      * The cause string if the state machine execution failed.
      */
     cause?: SensitiveCause;
+    /**
+     * The Amazon Resource Name (ARN) of the state machine version associated with the execution. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, stateMachineARN:1. If you start an execution from a StartExecution request without specifying a state machine version or alias ARN, Step Functions returns a null value.
+     */
+    stateMachineVersionArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the state machine alias associated with the execution. The alias ARN is a combination of state machine ARN and the alias name separated by a colon (:). For example, stateMachineARN:PROD. If you start an execution from a StartExecution request with a state machine version ARN, this field will be null.
+     */
+    stateMachineAliasArn?: Arn;
   }
   export interface DescribeMapRunInput {
     /**
@@ -533,6 +659,38 @@ declare namespace StepFunctions {
      */
     executionCounts: MapRunExecutionCounts;
   }
+  export interface DescribeStateMachineAliasInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine alias.
+     */
+    stateMachineAliasArn: Arn;
+  }
+  export interface DescribeStateMachineAliasOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine alias.
+     */
+    stateMachineAliasArn?: Arn;
+    /**
+     * The name of the state machine alias.
+     */
+    name?: Name;
+    /**
+     * A description of the alias.
+     */
+    description?: AliasDescription;
+    /**
+     * The routing configuration of the alias.
+     */
+    routingConfiguration?: RoutingConfigurationList;
+    /**
+     * The date the state machine alias was created.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The date the state machine alias was last updated. For a newly created state machine, this is the same as the creation date.
+     */
+    updateDate?: Timestamp;
+  }
   export interface DescribeStateMachineForExecutionInput {
     /**
      * The Amazon Resource Name (ARN) of the execution you want state machine information for.
@@ -573,16 +731,20 @@ declare namespace StepFunctions {
      * A user-defined or an auto-generated string that identifies a Map state. This ﬁeld is returned only if the executionArn is a child workflow execution that was started by a Distributed Map state.
      */
     label?: MapRunLabel;
+    /**
+     * The revision identifier for the state machine. The first revision ID when you create the state machine is null. Use the state machine revisionId parameter to compare the revision of a state machine with the configuration of the state machine used for executions without performing a diff of the properties, such as definition and roleArn.
+     */
+    revisionId?: RevisionId;
   }
   export interface DescribeStateMachineInput {
     /**
-     * The Amazon Resource Name (ARN) of the state machine to describe.
+     * The Amazon Resource Name (ARN) of the state machine for which you want the information. If you specify a state machine version ARN, this API returns details about that version. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, stateMachineARN:1.
      */
     stateMachineArn: Arn;
   }
   export interface DescribeStateMachineOutput {
     /**
-     * The Amazon Resource Name (ARN) that identifies the state machine.
+     * The Amazon Resource Name (ARN) that identifies the state machine. If you specified a state machine version ARN in your request, the API returns the version ARN. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, stateMachineARN:1.
      */
     stateMachineArn: Arn;
     /**
@@ -606,7 +768,7 @@ declare namespace StepFunctions {
      */
     type: StateMachineType;
     /**
-     * The date the state machine is created.
+     * The date the state machine is created. For a state machine version, creationDate is the date the version was created.
      */
     creationDate: Timestamp;
     loggingConfiguration?: LoggingConfiguration;
@@ -618,6 +780,14 @@ declare namespace StepFunctions {
      * A user-defined or an auto-generated string that identifies a Map state. This parameter is present only if the stateMachineArn specified in input is a qualified state machine ARN.
      */
     label?: MapRunLabel;
+    /**
+     * The revision identifier for the state machine. Use the revisionId parameter to compare between versions of a state machine configuration used for executions without performing a diff of the properties, such as definition and roleArn.
+     */
+    revisionId?: RevisionId;
+    /**
+     * The description of the state machine version.
+     */
+    description?: VersionDescription;
   }
   export type Enabled = boolean;
   export type EventId = number;
@@ -648,7 +818,7 @@ declare namespace StepFunctions {
      */
     executionArn: Arn;
     /**
-     * The Amazon Resource Name (ARN) of the executed state machine.
+     * The Amazon Resource Name (ARN) of the state machine that ran the execution.
      */
     stateMachineArn: Arn;
     /**
@@ -675,6 +845,14 @@ declare namespace StepFunctions {
      * The total number of items processed in a child workflow execution. This field is returned only if mapRunArn was specified in the ListExecutions API action. If stateMachineArn was specified in ListExecutions, the itemCount field isn't returned.
      */
     itemCount?: UnsignedInteger;
+    /**
+     * The Amazon Resource Name (ARN) of the state machine version associated with the execution. If the state machine execution was started with an unqualified ARN, it returns null. If the execution was started using a stateMachineAliasArn, both the stateMachineAliasArn and stateMachineVersionArn parameters contain the respective values.
+     */
+    stateMachineVersionArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the state machine alias used to start an execution. If the state machine execution was started with an unqualified ARN or a version ARN, it returns null.
+     */
+    stateMachineAliasArn?: Arn;
   }
   export interface ExecutionStartedEventDetails {
     /**
@@ -689,6 +867,14 @@ declare namespace StepFunctions {
      * The Amazon Resource Name (ARN) of the IAM role used for executing Lambda tasks.
      */
     roleArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) that identifies a state machine alias used for starting the state machine execution.
+     */
+    stateMachineAliasArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) that identifies a state machine version used for starting the state machine execution.
+     */
+    stateMachineVersionArn?: Arn;
   }
   export type ExecutionStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"ABORTED"|string;
   export interface ExecutionSucceededEventDetails {
@@ -974,7 +1160,7 @@ declare namespace StepFunctions {
   }
   export interface ListExecutionsInput {
     /**
-     * The Amazon Resource Name (ARN) of the state machine whose executions is listed. You can specify either a mapRunArn or a stateMachineArn, but not both.
+     * The Amazon Resource Name (ARN) of the state machine whose executions is listed. You can specify either a mapRunArn or a stateMachineArn, but not both. You can also return a list of executions associated with a specific alias or version, by specifying an alias ARN or a version ARN in the stateMachineArn parameter.
      */
     stateMachineArn?: Arn;
     /**
@@ -1024,6 +1210,54 @@ declare namespace StepFunctions {
      * An array that lists information related to a Map Run, such as the Amazon Resource Name (ARN) of the Map Run and the ARN of the state machine that started the Map Run.
      */
     mapRuns: MapRunList;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     */
+    nextToken?: PageToken;
+  }
+  export interface ListStateMachineAliasesInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine for which you want to list aliases. If you specify a state machine version ARN, this API returns a list of aliases for that version.
+     */
+    stateMachineArn: Arn;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     */
+    nextToken?: PageToken;
+    /**
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+     */
+    maxResults?: PageSize;
+  }
+  export interface ListStateMachineAliasesOutput {
+    /**
+     * Aliases for the state machine.
+     */
+    stateMachineAliases: StateMachineAliasList;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     */
+    nextToken?: PageToken;
+  }
+  export interface ListStateMachineVersionsInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine.
+     */
+    stateMachineArn: Arn;
+    /**
+     * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
+     */
+    nextToken?: PageToken;
+    /**
+     * The maximum number of results that are returned per call. You can use nextToken to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default. This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+     */
+    maxResults?: PageSize;
+  }
+  export interface ListStateMachineVersionsOutput {
+    /**
+     * Versions for the state machine.
+     */
+    stateMachineVersions: StateMachineVersionList;
     /**
      * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
@@ -1210,7 +1444,44 @@ declare namespace StepFunctions {
   export type Name = string;
   export type PageSize = number;
   export type PageToken = string;
+  export type Publish = boolean;
+  export interface PublishStateMachineVersionInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine.
+     */
+    stateMachineArn: Arn;
+    /**
+     * Only publish the state machine version if the current state machine's revision ID matches the specified ID. Use this option to avoid publishing a version if the state machine changed since you last updated it. If the specified revision ID doesn't match the state machine's current revision ID, the API returns ConflictException.  To specify an initial revision ID for a state machine with no revision ID assigned, specify the string INITIAL for the revisionId parameter. For example, you can specify a revisionID of INITIAL when you create a state machine using the CreateStateMachine API action. 
+     */
+    revisionId?: RevisionId;
+    /**
+     * An optional description of the state machine version.
+     */
+    description?: VersionDescription;
+  }
+  export interface PublishStateMachineVersionOutput {
+    /**
+     * The date the version was created.
+     */
+    creationDate: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) (ARN) that identifies the state machine version.
+     */
+    stateMachineVersionArn: Arn;
+  }
   export type ReverseOrder = boolean;
+  export type RevisionId = string;
+  export type RoutingConfigurationList = RoutingConfigurationListItem[];
+  export interface RoutingConfigurationListItem {
+    /**
+     * The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration. If you specify the ARN of a second version, it must belong to the same state machine as the first version.
+     */
+    stateMachineVersionArn: Arn;
+    /**
+     * The percentage of traffic you want to route to the second state machine version. The sum of the weights in the routing configuration must be equal to 100.
+     */
+    weight: VersionWeight;
+  }
   export interface SendTaskFailureInput {
     /**
      * The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the context object when a workflow enters a task state. See GetActivityTaskOutput$taskToken.
@@ -1253,11 +1524,11 @@ declare namespace StepFunctions {
   export type SensitiveError = string;
   export interface StartExecutionInput {
     /**
-     * The Amazon Resource Name (ARN) of the state machine to execute.
+     * The Amazon Resource Name (ARN) of the state machine to execute. The stateMachineArn parameter accepts one of the following inputs:    An unqualified state machine ARN – Refers to a state machine ARN that isn't qualified with a version or alias ARN. The following is an example of an unqualified state machine ARN.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;  Step Functions doesn't associate state machine executions that you start with an unqualified ARN with a version. This is true even if that version uses the same revision that the execution used.    A state machine version ARN – Refers to a version ARN, which is a combination of state machine ARN and the version number separated by a colon (:). The following is an example of the ARN for version 10.   arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine&gt;:10  Step Functions doesn't associate executions that you start with a version ARN with any aliases that point to that version.    A state machine alias ARN – Refers to an alias ARN, which is a combination of state machine ARN and the alias name separated by a colon (:). The following is an example of the ARN for an alias named PROD.  arn:&lt;partition&gt;:states:&lt;region&gt;:&lt;account-id&gt;:stateMachine:&lt;myStateMachine:PROD&gt;  Step Functions associates executions that you start with an alias ARN with that alias and the state machine version used for that execution.  
      */
     stateMachineArn: Arn;
     /**
-     * The name of the execution. This name must be unique for your Amazon Web Services account, region, and state machine for 90 days. For more information, see  Limits Related to State Machine Executions in the Step Functions Developer Guide. A name must not contain:   white space   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+     * Optional name of the execution. This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information, see  Limits Related to State Machine Executions in the Step Functions Developer Guide. A name must not contain:   white space   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)   To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
      */
     name?: Name;
     /**
@@ -1377,6 +1648,17 @@ declare namespace StepFunctions {
      */
     outputDetails?: HistoryEventExecutionDataDetails;
   }
+  export type StateMachineAliasList = StateMachineAliasListItem[];
+  export interface StateMachineAliasListItem {
+    /**
+     * The Amazon Resource Name (ARN) that identifies a state machine alias. The alias ARN is a combination of state machine ARN and the alias name separated by a colon (:). For example, stateMachineARN:PROD.
+     */
+    stateMachineAliasArn: LongArn;
+    /**
+     * The creation date of a state machine alias.
+     */
+    creationDate: Timestamp;
+  }
   export type StateMachineList = StateMachineListItem[];
   export interface StateMachineListItem {
     /**
@@ -1398,6 +1680,17 @@ declare namespace StepFunctions {
   }
   export type StateMachineStatus = "ACTIVE"|"DELETING"|string;
   export type StateMachineType = "STANDARD"|"EXPRESS"|string;
+  export type StateMachineVersionList = StateMachineVersionListItem[];
+  export interface StateMachineVersionListItem {
+    /**
+     * The Amazon Resource Name (ARN) that identifies a state machine version. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, stateMachineARN:1.
+     */
+    stateMachineVersionArn: LongArn;
+    /**
+     * The creation date of a state machine version.
+     */
+    creationDate: Timestamp;
+  }
   export interface StopExecutionInput {
     /**
      * The Amazon Resource Name (ARN) of the execution to stop.
@@ -1645,6 +1938,26 @@ declare namespace StepFunctions {
   }
   export interface UpdateMapRunOutput {
   }
+  export interface UpdateStateMachineAliasInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine alias.
+     */
+    stateMachineAliasArn: Arn;
+    /**
+     * A description of the state machine alias.
+     */
+    description?: AliasDescription;
+    /**
+     * The routing configuration of the state machine alias. An array of RoutingConfig objects that specifies up to two state machine versions that the alias starts executions for.
+     */
+    routingConfiguration?: RoutingConfigurationList;
+  }
+  export interface UpdateStateMachineAliasOutput {
+    /**
+     * The date and time the state machine alias was updated.
+     */
+    updateDate: Timestamp;
+  }
   export interface UpdateStateMachineInput {
     /**
      * The Amazon Resource Name (ARN) of the state machine.
@@ -1659,20 +1972,38 @@ declare namespace StepFunctions {
      */
     roleArn?: Arn;
     /**
-     * The LoggingConfiguration data type is used to set CloudWatch Logs options.
+     * Use the LoggingConfiguration data type to set CloudWatch Logs options.
      */
     loggingConfiguration?: LoggingConfiguration;
     /**
      * Selects whether X-Ray tracing is enabled.
      */
     tracingConfiguration?: TracingConfiguration;
+    /**
+     * Specifies whether the state machine version is published. The default is false. To publish a version after updating the state machine, set publish to true.
+     */
+    publish?: Publish;
+    /**
+     * An optional description of the state machine version to publish. You can only specify the versionDescription parameter if you've set publish to true.
+     */
+    versionDescription?: VersionDescription;
   }
   export interface UpdateStateMachineOutput {
     /**
      * The date and time the state machine was updated.
      */
     updateDate: Timestamp;
+    /**
+     * The revision identifier for the updated state machine.
+     */
+    revisionId?: RevisionId;
+    /**
+     * The Amazon Resource Name (ARN) of the published state machine version. If the publish parameter isn't set to true, this field returns null.
+     */
+    stateMachineVersionArn?: Arn;
   }
+  export type VersionDescription = string;
+  export type VersionWeight = number;
   export type includedDetails = boolean;
   export type truncated = boolean;
   /**

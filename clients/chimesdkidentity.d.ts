@@ -389,11 +389,11 @@ declare namespace ChimeSDKIdentity {
     /**
      * The ARN of the AppInstanceUser.
      */
-    AppInstanceUserArn?: SensitiveChimeArn;
+    AppInstanceUserArn?: ChimeArn;
     /**
      * The unique identifier of the AppInstanceUserEndpoint.
      */
-    EndpointId?: SensitiveString64;
+    EndpointId?: String64;
     /**
      * The name of the AppInstanceUserEndpoint.
      */
@@ -431,11 +431,11 @@ declare namespace ChimeSDKIdentity {
     /**
      * The ARN of the AppInstanceUser.
      */
-    AppInstanceUserArn?: SensitiveChimeArn;
+    AppInstanceUserArn?: ChimeArn;
     /**
      * The unique identifier of the AppInstanceUserEndpoint.
      */
-    EndpointId?: SensitiveString64;
+    EndpointId?: String64;
     /**
      * The name of the AppInstanceUserEndpoint.
      */
@@ -628,11 +628,11 @@ declare namespace ChimeSDKIdentity {
     /**
      * The ARN of the AppInstanceUser.
      */
-    AppInstanceUserArn: SensitiveChimeArn;
+    AppInstanceUserArn: ChimeArn;
     /**
      * The unique identifier of the AppInstanceUserEndpoint.
      */
-    EndpointId: SensitiveString64;
+    EndpointId: String64;
   }
   export interface DescribeAppInstanceAdminRequest {
     /**
@@ -678,11 +678,11 @@ declare namespace ChimeSDKIdentity {
     /**
      * The ARN of the AppInstanceUser.
      */
-    AppInstanceUserArn: SensitiveString1600;
+    AppInstanceUserArn: String1600;
     /**
      * The unique identifier of the AppInstanceUserEndpoint.
      */
-    EndpointId: SensitiveString64;
+    EndpointId: String64;
   }
   export interface DescribeAppInstanceUserEndpointResponse {
     /**
@@ -762,12 +762,26 @@ declare namespace ChimeSDKIdentity {
      */
     Name?: ResourceName;
   }
+  export interface InvokedBy {
+    /**
+     * Sets standard messages as the bot trigger. For standard messages:    ALL: The bot processes all standard messages.    AUTO: The bot responds to ALL messages when the channel has one other non-hidden member, and responds to MENTIONS when the channel has more than one other non-hidden member.    MENTIONS: The bot processes all standard messages that have a message attribute with CHIME.mentions and a value of the bot ARN.    NONE: The bot processes no standard messages.  
+     */
+    StandardMessages: StandardMessages;
+    /**
+     * Sets targeted messages as the bot trigger. For targeted messages:    ALL: The bot processes all TargetedMessages sent to it. The bot then responds with a targeted message back to the sender.     NONE: The bot processes no targeted messages.  
+     */
+    TargetedMessages: TargetedMessages;
+  }
   export type LexBotAliasArn = string;
   export interface LexConfiguration {
     /**
-     * Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.
+     *   Deprecated. Use InvokedBy instead.  Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.
      */
-    RespondsTo: RespondsTo;
+    RespondsTo?: RespondsTo;
+    /**
+     * Specifies the type of message that triggers a bot.
+     */
+    InvokedBy?: InvokedBy;
     /**
      * The ARN of the Amazon Lex V2 bot's alias. The ARN uses this format: arn:aws:lex:REGION:ACCOUNT:bot-alias/MYBOTID/MYBOTALIAS 
      */
@@ -1001,19 +1015,21 @@ declare namespace ChimeSDKIdentity {
     /**
      * The ARN of the AppInstanceUser.
      */
-    AppInstanceUserArn?: SensitiveChimeArn;
+    AppInstanceUserArn?: ChimeArn;
     /**
      * The unique identifier of the AppInstanceUserEndpoint.
      */
-    EndpointId?: SensitiveString64;
+    EndpointId?: String64;
   }
   export type ResourceName = string;
   export type RespondsTo = "STANDARD_MESSAGES"|string;
   export type RetentionDays = number;
   export type SensitiveChimeArn = string;
   export type SensitiveString1600 = string;
-  export type SensitiveString64 = string;
+  export type StandardMessages = "AUTO"|"ALL"|"MENTIONS"|"NONE"|string;
   export type String = string;
+  export type String1600 = string;
+  export type String64 = string;
   export interface Tag {
     /**
      * The key in a tag.
@@ -1038,6 +1054,7 @@ declare namespace ChimeSDKIdentity {
     Tags: TagList;
   }
   export type TagValue = string;
+  export type TargetedMessages = "ALL"|"NONE"|string;
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -1062,6 +1079,10 @@ declare namespace ChimeSDKIdentity {
      * The metadata of the AppInstanceBot.
      */
     Metadata: Metadata;
+    /**
+     * The configuration for the bot update.
+     */
+    Configuration?: Configuration;
   }
   export interface UpdateAppInstanceBotResponse {
     /**
@@ -1093,11 +1114,11 @@ declare namespace ChimeSDKIdentity {
     /**
      * The ARN of the AppInstanceUser.
      */
-    AppInstanceUserArn: SensitiveChimeArn;
+    AppInstanceUserArn: ChimeArn;
     /**
      * The unique identifier of the AppInstanceUserEndpoint.
      */
-    EndpointId: SensitiveString64;
+    EndpointId: String64;
     /**
      * The name of the AppInstanceUserEndpoint.
      */
@@ -1111,11 +1132,11 @@ declare namespace ChimeSDKIdentity {
     /**
      * The ARN of the AppInstanceUser.
      */
-    AppInstanceUserArn?: SensitiveChimeArn;
+    AppInstanceUserArn?: ChimeArn;
     /**
      * The unique identifier of the AppInstanceUserEndpoint.
      */
-    EndpointId?: SensitiveString64;
+    EndpointId?: String64;
   }
   export interface UpdateAppInstanceUserRequest {
     /**
