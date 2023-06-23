@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1403.0-->
+<!--LATEST=2.1404.0-->
 <!--ENTRYINSERT-->
+
+## 2.1404.0
+* feature: DevOpsGuru: This release adds support for encryption via customer managed keys.
 
 ## 2.1403.0
 * feature: ChimeSDKIdentity: AppInstanceBots can be configured to be invoked or not using the Target or the CHIME.mentions attribute for ChannelMessages

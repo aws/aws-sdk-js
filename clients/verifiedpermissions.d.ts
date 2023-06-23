@@ -28,11 +28,11 @@ declare class VerifiedPermissions extends Service {
    */
   createPolicy(callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyOutput, AWSError>;
   /**
-   * Creates a policy store. A policy store is a container for policy resources.
+   * Creates a policy store. A policy store is a container for policy resources.  Although Cedar supports multiple namespaces, Verified Permissions currently supports only one namespace per policy store. 
    */
   createPolicyStore(params: VerifiedPermissions.Types.CreatePolicyStoreInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyStoreOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyStoreOutput, AWSError>;
   /**
-   * Creates a policy store. A policy store is a container for policy resources.
+   * Creates a policy store. A policy store is a container for policy resources.  Although Cedar supports multiple namespaces, Verified Permissions currently supports only one namespace per policy store. 
    */
   createPolicyStore(callback?: (err: AWSError, data: VerifiedPermissions.Types.CreatePolicyStoreOutput) => void): Request<VerifiedPermissions.Types.CreatePolicyStoreOutput, AWSError>;
   /**
@@ -249,7 +249,7 @@ declare namespace VerifiedPermissions {
   export type ClientIds = ClientId[];
   export interface CognitoUserPoolConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Cognito user pool that contains the identities to be authorized. Example: "UserPoolArn": "cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5" 
+     * The Amazon Resource Name (ARN) of the Amazon Cognito user pool that contains the identities to be authorized. Example: "UserPoolArn": "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5" 
      */
     userPoolArn: UserPoolArn;
     /**
@@ -259,7 +259,7 @@ declare namespace VerifiedPermissions {
   }
   export interface Configuration {
     /**
-     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}} 
+     * Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the Amazon Resource Name (ARN) of a Amazon Cognito user pool and one or more application client IDs. Example: "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}} 
      */
     cognitoUserPoolConfiguration?: CognitoUserPoolConfiguration;
   }
@@ -780,7 +780,7 @@ declare namespace VerifiedPermissions {
      */
     context?: ContextDefinition;
     /**
-     * Specifies the list of entities and their associated attributes that Verified Permissions can examine when evaluating the policies.
+     * Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies.   You can include only principal and resource entities in this parameter; you can't include actions. You must specify actions in the schema. 
      */
     entities?: EntitiesDefinition;
   }
@@ -824,7 +824,7 @@ declare namespace VerifiedPermissions {
      */
     context?: ContextDefinition;
     /**
-     * Specifies the list of entities and their associated attributes that Verified Permissions can examine when evaluating the policies.
+     * Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies.   You can include only principal and resource entities in this parameter; you can't include actions. You must specify actions in the schema. 
      */
     entities?: EntitiesDefinition;
   }
