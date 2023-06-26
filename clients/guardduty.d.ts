@@ -420,11 +420,11 @@ declare class GuardDuty extends Service {
    */
   listPublishingDestinations(callback?: (err: AWSError, data: GuardDuty.Types.ListPublishingDestinationsResponse) => void): Request<GuardDuty.Types.ListPublishingDestinationsResponse, AWSError>;
   /**
-   * Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and threat intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource.
+   * Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, threat intel sets, publishing destination, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource.
    */
   listTagsForResource(params: GuardDuty.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListTagsForResourceResponse) => void): Request<GuardDuty.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and threat intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource.
+   * Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, threat intel sets, publishing destination, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: GuardDuty.Types.ListTagsForResourceResponse) => void): Request<GuardDuty.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -2554,6 +2554,10 @@ declare namespace GuardDuty {
      * The groups that include the user who called the Kubernetes API.
      */
     Groups?: Groups;
+    /**
+     * Entity that assumes the IAM role when Kubernetes RBAC permissions are assigned to that role.
+     */
+    SessionName?: SessionNameList;
   }
   export interface KubernetesWorkloadDetails {
     /**
@@ -4051,6 +4055,7 @@ declare namespace GuardDuty {
      */
     Type?: String;
   }
+  export type SessionNameList = String[];
   export interface SortCriteria {
     /**
      * Represents the finding attribute, such as accountId, that sorts the findings.

@@ -5112,6 +5112,10 @@ declare namespace Pinpoint {
      * The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.
      */
     ClosedDays?: ClosedDays;
+    /**
+     * An array of time zone estimation methods, if any, to use for determining an Endpoints time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.  PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country. POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country. POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available. 
+     */
+    TimezoneEstimationMethods?: ListOf__TimezoneEstimationMethodsElement;
   }
   export interface JourneyRunExecutionActivityMetricsResponse {
     /**
@@ -7476,6 +7480,10 @@ declare namespace Pinpoint {
      * The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
      */
     ClosedDays?: ClosedDays;
+    /**
+     * An array of time zone estimation methods, if any, to use for determining an Endpoints time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.  PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country. POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country. POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available. 
+     */
+    TimezoneEstimationMethods?: ListOf__TimezoneEstimationMethodsElement;
   }
   export interface WriteSegmentRequest {
     /**
@@ -7526,6 +7534,7 @@ declare namespace Pinpoint {
     TreatmentName?: __string;
   }
   export type __EndpointTypesElement = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string;
+  export type __TimezoneEstimationMethodsElement = "PHONE_NUMBER"|"POSTAL_CODE"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
@@ -7555,6 +7564,7 @@ declare namespace Pinpoint {
   export type ListOfTreatmentResource = TreatmentResource[];
   export type ListOfWriteTreatmentResource = WriteTreatmentResource[];
   export type ListOf__EndpointTypesElement = __EndpointTypesElement[];
+  export type ListOf__TimezoneEstimationMethodsElement = __TimezoneEstimationMethodsElement[];
   export type ListOf__string = __string[];
   export type MapOfActivity = {[key: string]: Activity};
   export type MapOfAddressConfiguration = {[key: string]: AddressConfiguration};

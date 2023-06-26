@@ -100,11 +100,11 @@ declare class Connect extends Service {
    */
   associateSecurityKey(callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
   /**
-   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation. 
+   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   claimPhoneNumber(params: Connect.Types.ClaimPhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
-   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation. 
+   * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   claimPhoneNumber(callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
   /**
@@ -1036,11 +1036,11 @@ declare class Connect extends Service {
    */
   putUserStatus(callback?: (err: AWSError, data: Connect.Types.PutUserStatusResponse) => void): Request<Connect.Types.PutUserStatusResponse, AWSError>;
   /**
-   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect console. After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support. 
+   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect console. After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   releasePhoneNumber(params: Connect.Types.ReleasePhoneNumberRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect console. After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support. 
+   * Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You can call this API only in the Amazon Web Services Region where the number was claimed.  To release phone numbers from a traffic distribution group, use the ReleasePhoneNumber API, not the Amazon Connect console. After releasing a phone number, the phone number enters into a cooldown period of 30 days. It cannot be searched for or claimed again until the period has ended. If you accidentally release a phone number, contact Amazon Web Services Support.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   releasePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1099,6 +1099,14 @@ declare class Connect extends Service {
    * Searches quick connects in an Amazon Connect instance, with optional filtering.
    */
   searchQuickConnects(callback?: (err: AWSError, data: Connect.Types.SearchQuickConnectsResponse) => void): Request<Connect.Types.SearchQuickConnectsResponse, AWSError>;
+  /**
+   * Searches tags used in an Amazon Connect instance using optional search criteria.
+   */
+  searchResourceTags(params: Connect.Types.SearchResourceTagsRequest, callback?: (err: AWSError, data: Connect.Types.SearchResourceTagsResponse) => void): Request<Connect.Types.SearchResourceTagsResponse, AWSError>;
+  /**
+   * Searches tags used in an Amazon Connect instance using optional search criteria.
+   */
+  searchResourceTags(callback?: (err: AWSError, data: Connect.Types.SearchResourceTagsResponse) => void): Request<Connect.Types.SearchResourceTagsResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Searches routing profiles in an Amazon Connect instance, with optional filtering.
    */
@@ -6840,6 +6848,13 @@ declare namespace Connect {
   export type RequiredTaskTemplateFields = RequiredFieldInfo[];
   export type ResourceArnOrId = string;
   export type ResourceId = string;
+  export interface ResourceTagsSearchCriteria {
+    /**
+     * The search criteria to be used to return tags.
+     */
+    TagSearchCondition?: TagSearchCondition;
+  }
+  export type ResourceTypeList = String[];
   export interface ResumeContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -7311,6 +7326,38 @@ declare namespace Connect {
      * The total number of quick connects which matched your search query.
      */
     ApproximateTotalCount?: ApproximateTotalCount;
+  }
+  export interface SearchResourceTagsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceIdOrArn;
+    /**
+     * The list of resource types to be used to search tags from. If not provided or if any empty list is provided, this API will search from all supported resource types.
+     */
+    ResourceTypes?: ResourceTypeList;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken2500;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult100;
+    /**
+     * The search criteria to be used to return tags.
+     */
+    SearchCriteria?: ResourceTagsSearchCriteria;
+  }
+  export interface SearchResourceTagsResponse {
+    /**
+     * A list of tags used in the Amazon Connect instance.
+     */
+    Tags?: TagsList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken2500;
   }
   export interface SearchRoutingProfilesRequest {
     /**
@@ -7980,6 +8027,7 @@ declare namespace Connect {
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
+  export type TagKeyString = string;
   export type TagMap = {[key: string]: TagValue};
   export type TagOrConditionList = TagAndConditionList[];
   export interface TagResourceRequest {
@@ -7994,7 +8042,37 @@ declare namespace Connect {
   }
   export type TagRestrictedResourceList = TagRestrictedResourceName[];
   export type TagRestrictedResourceName = string;
+  export interface TagSearchCondition {
+    /**
+     * The tag key used in the tag search condition.
+     */
+    tagKey?: TagKeyString;
+    /**
+     * The tag value used in the tag search condition.
+     */
+    tagValue?: TagValueString;
+    /**
+     * The type of comparison to be made when evaluating the tag key in tag search condition.
+     */
+    tagKeyComparisonType?: StringComparisonType;
+    /**
+     * The type of comparison to be made when evaluating the tag value in tag search condition.
+     */
+    tagValueComparisonType?: StringComparisonType;
+  }
+  export interface TagSet {
+    /**
+     * The tag key in the tagSet.
+     */
+    key?: TagKey;
+    /**
+     * The tag value in the tagSet.
+     */
+    value?: TagValue;
+  }
   export type TagValue = string;
+  export type TagValueString = string;
+  export type TagsList = TagSet[];
   export interface TaskActionDefinition {
     /**
      * The name. Supports variable injection. For more information, see JSONPath reference in the Amazon Connect Administrators Guide.

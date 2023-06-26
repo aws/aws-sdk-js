@@ -8080,6 +8080,7 @@ declare namespace Glue {
   export type IntegerFlag = number;
   export type IntegerValue = number;
   export type IsVersionValid = boolean;
+  export type Iso8601DateTime = Date;
   export type JDBCConnectionType = "sqlserver"|"mysql"|"oracle"|"postgresql"|"redshift"|string;
   export interface JDBCConnectorOptions {
     /**
@@ -8676,6 +8677,10 @@ declare namespace Glue {
      * When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the topic and the time it arrives in Glue to CloudWatch. The metric's name is "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This option is supported in Glue version 4.0 or later.
      */
     EmitConsumerLagMetrics?: EnclosedInStringProperty;
+    /**
+     * The timestamp of the record in the Kafka topic to start reading data from. The possible values are a timestamp string in UTC format of the pattern yyyy-mm-ddTHH:MM:SSZ (where Z represents a UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00+08:00").  Only one of StartingTimestamp or StartingOffsets must be set.
+     */
+    StartingTimestamp?: Iso8601DateTime;
   }
   export type KeyList = NameString[];
   export interface KeySchemaElement {
@@ -8708,7 +8713,7 @@ declare namespace Glue {
      */
     Delimiter?: EnclosedInStringProperty;
     /**
-     * The starting position in the Kinesis data stream to read data from. The possible values are "latest", "trim_horizon", or "earliest". The default value is "latest".
+     * The starting position in the Kinesis data stream to read data from. The possible values are "latest", "trim_horizon", "earliest", or a timestamp string in UTC format in the pattern yyyy-mm-ddTHH:MM:SSZ (where Z represents a UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00-04:00"). The default value is "latest". Note: Using a value that is a timestamp string in UTC format for "startingPosition" is supported only for Glue version 4.0 or later.
      */
     StartingPosition?: StartingPosition;
     /**
@@ -8771,6 +8776,10 @@ declare namespace Glue {
      * When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the stream and the time it arrives in Glue to CloudWatch. The metric's name is "glue.driver.streaming.maxConsumerLagInMs". The default value is 'false'. This option is supported in Glue version 4.0 or later.
      */
     EmitConsumerLagMetrics?: EnclosedInStringProperty;
+    /**
+     * The timestamp of the record in the Kinesis data stream to start reading data from. The possible values are a timestamp string in UTC format of the pattern yyyy-mm-ddTHH:MM:SSZ (where Z represents a UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00+08:00"). 
+     */
+    StartingTimestamp?: Iso8601DateTime;
   }
   export type KmsKeyArn = string;
   export type LabelCount = number;
@@ -11806,7 +11815,7 @@ declare namespace Glue {
      */
     BatchWindow?: NullableInteger;
   }
-  export type StartingPosition = "latest"|"trim_horizon"|"earliest"|string;
+  export type StartingPosition = "latest"|"trim_horizon"|"earliest"|"timestamp"|string;
   export interface Statement {
     /**
      * The ID of the statement.

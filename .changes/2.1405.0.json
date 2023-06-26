@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job"
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Add support for user.extra.sessionName in Kubernetes Audit Logs Findings."
+    },
+    {
+        "type": "feature",
+        "category": "IAM",
+        "description": "Support for a new API \"GetMFADevice\" to present MFA device metadata such as device certifications"
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "Added time zone estimation support for journeys"
+    }
+]

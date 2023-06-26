@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1404.0-->
+<!--LATEST=2.1405.0-->
 <!--ENTRYINSERT-->
+
+## 2.1405.0
+* feature: Connect: This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.
+* feature: Glue: Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job
+* feature: GuardDuty: Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.
+* feature: IAM: Support for a new API "GetMFADevice" to present MFA device metadata such as device certifications
+* feature: Pinpoint: Added time zone estimation support for journeys
 
 ## 2.1404.0
 * feature: DevOpsGuru: This release adds support for encryption via customer managed keys.
