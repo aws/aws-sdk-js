@@ -47,6 +47,24 @@ describe('region_config.js', function() {
     expect(service.endpoint.host).to.equal('iam.cn-north-1.amazonaws.com.cn');
   });
 
+  it('uses "global" endpoint for Cost Explorer in us-east-2', function() {
+    var service = new AWS.CostExplorer({
+      region: 'us-east-2'
+    });
+    expect(service.isGlobalEndpoint).to.equal(true);
+    expect(service.signingRegion).to.equal('us-east-1');
+    expect(service.endpoint.host).to.equal('ce.us-east-1.amazonaws.com');
+  });
+
+  it('uses "global" endpoint for Cost Explorer in cn-north-1', function() {
+    var service = new AWS.CostExplorer({
+      region: 'cn-north-1'
+    });
+    expect(service.isGlobalEndpoint).to.equal(true);
+    expect(service.signingRegion).to.equal('cn-northwest-1');
+    expect(service.endpoint.host).to.equal('ce.cn-northwest-1.amazonaws.com.cn');
+  });
+
   [
     ['cn-north-1', 'cn-northwest-1', 'route53.amazonaws.com.cn'],
     ['us-gov-west-1', 'us-gov-west-1', 'route53.us-gov.amazonaws.com'],

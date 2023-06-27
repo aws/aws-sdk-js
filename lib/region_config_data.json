@@ -50,6 +50,18 @@
     },
 
     "us-gov-*/iam": "globalGovCloud",
+
+    "*/ce": {
+      "endpoint": "{service}.us-east-1.amazonaws.com",
+      "globalEndpoint": true,
+      "signingRegion": "us-east-1"
+    },
+    "cn-*/ce": {
+      "endpoint": "{service}.cn-northwest-1.amazonaws.com.cn",
+      "globalEndpoint": true,
+      "signingRegion": "cn-northwest-1"
+    },
+
     "us-gov-*/sts": {
       "endpoint": "{service}.{region}.amazonaws.com"
     },
