@@ -349,5 +349,6 @@ module.exports = {
   PaymentCryptography: require('./paymentcryptography'),
   PaymentCryptographyData: require('./paymentcryptographydata'),
   CodeGuruSecurity: require('./codegurusecurity'),
-  VerifiedPermissions: require('./verifiedpermissions')
+  VerifiedPermissions: require('./verifiedpermissions'),
+  AppFabric: require('./appfabric')
 };

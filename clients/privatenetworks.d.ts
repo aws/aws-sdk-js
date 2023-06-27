@@ -176,11 +176,11 @@ declare class PrivateNetworks extends Service {
    */
   ping(callback?: (err: AWSError, data: PrivateNetworks.Types.PingResponse) => void): Request<PrivateNetworks.Types.PingResponse, AWSError>;
   /**
-   * Starts an update of the specified network resource. After you submit a request to replace or return a network resource, the status of the network resource is CREATING_SHIPPING_LABEL. The shipping label is available when the status of the network resource is PENDING_RETURN. After the network resource is successfully returned, its status is DELETED. For more information, see Return a radio unit.
+   * Use this action to do the following tasks:   Update the duration and renewal status of the commitment period for a radio unit. The update goes into effect immediately.   Request a replacement for a network resource.   Request that you return a network resource.   After you submit a request to replace or return a network resource, the status of the network resource changes to CREATING_SHIPPING_LABEL. The shipping label is available when the status of the network resource is PENDING_RETURN. After the network resource is successfully returned, its status changes to DELETED. For more information, see Return a radio unit.
    */
   startNetworkResourceUpdate(params: PrivateNetworks.Types.StartNetworkResourceUpdateRequest, callback?: (err: AWSError, data: PrivateNetworks.Types.StartNetworkResourceUpdateResponse) => void): Request<PrivateNetworks.Types.StartNetworkResourceUpdateResponse, AWSError>;
   /**
-   * Starts an update of the specified network resource. After you submit a request to replace or return a network resource, the status of the network resource is CREATING_SHIPPING_LABEL. The shipping label is available when the status of the network resource is PENDING_RETURN. After the network resource is successfully returned, its status is DELETED. For more information, see Return a radio unit.
+   * Use this action to do the following tasks:   Update the duration and renewal status of the commitment period for a radio unit. The update goes into effect immediately.   Request a replacement for a network resource.   Request that you return a network resource.   After you submit a request to replace or return a network resource, the status of the network resource changes to CREATING_SHIPPING_LABEL. The shipping label is available when the status of the network resource is PENDING_RETURN. After the network resource is successfully returned, its status changes to DELETED. For more information, see Return a radio unit.
    */
   startNetworkResourceUpdate(callback?: (err: AWSError, data: PrivateNetworks.Types.StartNetworkResourceUpdateResponse) => void): Request<PrivateNetworks.Types.StartNetworkResourceUpdateResponse, AWSError>;
   /**
@@ -256,6 +256,10 @@ declare namespace PrivateNetworks {
      */
     clientToken?: ClientToken;
     /**
+     * Determines the duration and renewal status of the commitment period for all pending radio units. If you include commitmentConfiguration in the ActivateNetworkSiteRequest action, you must specify the following:   The commitment period for the radio unit. You can choose a 60-day, 1-year, or 3-year period.   Whether you want your commitment period to automatically renew for one more year after your current commitment period expires.   For pricing, see Amazon Web Services Private 5G Pricing. If you do not include commitmentConfiguration in the ActivateNetworkSiteRequest action, the commitment period is set to 60-days.
+     */
+    commitmentConfiguration?: CommitmentConfiguration;
+    /**
      * The Amazon Resource Name (ARN) of the network site.
      */
     networkSiteArn: Arn;
@@ -284,11 +288,15 @@ declare namespace PrivateNetworks {
      */
     country: AddressContent;
     /**
+     * The recipient's email address.
+     */
+    emailAddress?: AddressContent;
+    /**
      * The recipient's name for this address.
      */
     name: AddressContent;
     /**
-     * The phone number for this address.
+     * The recipient's phone number.
      */
     phoneNumber?: AddressContent;
     /**
@@ -314,7 +322,33 @@ declare namespace PrivateNetworks {
   }
   export type AddressContent = string;
   export type Arn = string;
+  export type Boolean = boolean;
   export type ClientToken = string;
+  export interface CommitmentConfiguration {
+    /**
+     * Determines whether the commitment period for a radio unit is set to automatically renew for an additional 1 year after your current commitment period expires. Set to True, if you want your commitment period to automatically renew. Set to False if you do not want your commitment to automatically renew. You can do the following:   Set a 1-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 1-year rate.   Set a 3-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 3-year rate.   Turn off a previously-enabled automatic renewal on a 1-year or 3-year commitment.   You cannot use the automatic-renewal option for a 60-day commitment.
+     */
+    automaticRenewal: Boolean;
+    /**
+     * The duration of the commitment period for the radio unit. You can choose a 60-day, 1-year, or 3-year period.
+     */
+    commitmentLength: CommitmentLength;
+  }
+  export interface CommitmentInformation {
+    /**
+     * The duration and renewal status of the commitment period for the radio unit.
+     */
+    commitmentConfiguration: CommitmentConfiguration;
+    /**
+     * The date and time that the commitment period ends. If you do not cancel or renew the commitment before the expiration date, you will be billed at the 60-day-commitment rate.
+     */
+    expiresOn?: Timestamp;
+    /**
+     * The date and time that the commitment period started.
+     */
+    startAt?: Timestamp;
+  }
+  export type CommitmentLength = "SIXTY_DAYS"|"ONE_YEAR"|"THREE_YEARS"|string;
   export interface ConfigureAccessPointRequest {
     /**
      * The Amazon Resource Name (ARN) of the network resource.
@@ -801,6 +835,10 @@ declare namespace PrivateNetworks {
      */
     attributes?: NameValuePairs;
     /**
+     * Information about the commitment period for the radio unit. Shows the duration, the date and time that the contract started and ends, and the renewal status of the commitment period.
+     */
+    commitmentInformation?: CommitmentInformation;
+    /**
      * The creation time of the network resource.
      */
     createdAt?: Timestamp;
@@ -959,6 +997,10 @@ declare namespace PrivateNetworks {
      */
     orderArn?: Arn;
     /**
+     * A list of the network resources placed in the order.
+     */
+    orderedResources?: OrderedResourceDefinitions;
+    /**
      * The shipping address of the order.
      */
     shippingAddress?: Address;
@@ -971,6 +1013,22 @@ declare namespace PrivateNetworks {
   export type OrderFilterValues = String[];
   export type OrderFilters = {[key: string]: OrderFilterValues};
   export type OrderList = Order[];
+  export interface OrderedResourceDefinition {
+    /**
+     * The duration and renewal status of the commitment period for each radio unit in the order. Does not show details if the resource type is DEVICE_IDENTIFIER.
+     */
+    commitmentConfiguration?: CommitmentConfiguration;
+    /**
+     * The number of network resources in the order.
+     */
+    count: OrderedResourceDefinitionCountInteger;
+    /**
+     * The type of network resource in the order.
+     */
+    type: NetworkResourceDefinitionType;
+  }
+  export type OrderedResourceDefinitionCountInteger = number;
+  export type OrderedResourceDefinitions = OrderedResourceDefinition[];
   export type PaginationToken = string;
   export interface PingResponse {
     /**
@@ -1030,6 +1088,10 @@ declare namespace PrivateNetworks {
   }
   export interface StartNetworkResourceUpdateRequest {
     /**
+     * Use this action to extend and automatically renew the commitment period for the radio unit. You can do the following:   Change a 60-day commitment to a 1-year or 3-year commitment. The change is immediate and the hourly rate decreases to the rate for the new commitment period.   Change a 1-year commitment to a 3-year commitment. The change is immediate and the hourly rate decreases to the rate for the 3-year commitment period.   Set a 1-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 1-year rate.   Set a 3-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 3-year rate.   Turn off a previously-enabled automatic renewal on a 1-year or 3-year commitment. You cannot use the automatic-renewal option for a 60-day commitment.   For pricing, see Amazon Web Services Private 5G Pricing.
+     */
+    commitmentConfiguration?: CommitmentConfiguration;
+    /**
      * The Amazon Resource Name (ARN) of the network resource.
      */
     networkResourceArn: Arn;
@@ -1042,7 +1104,7 @@ declare namespace PrivateNetworks {
      */
     shippingAddress?: Address;
     /**
-     * The update type.    REPLACE - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.    RETURN - Submits a request to replace a radio unit that you no longer need. We provide a shipping label that you can use for the return process.  
+     * The update type.    REPLACE - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.    RETURN - Submits a request to return a radio unit that you no longer need. We provide a shipping label that you can use for the return process.    COMMITMENT - Submits a request to change or renew the commitment period. If you choose this value, then you must set  commitmentConfiguration .  
      */
     updateType: UpdateType;
   }
@@ -1128,7 +1190,7 @@ declare namespace PrivateNetworks {
      */
     tags?: TagMap;
   }
-  export type UpdateType = "REPLACE"|"RETURN"|string;
+  export type UpdateType = "REPLACE"|"RETURN"|"COMMITMENT"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

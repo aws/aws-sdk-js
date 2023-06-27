@@ -20,11 +20,11 @@ declare class SageMakerFeatureStoreRuntime extends Service {
    */
   batchGetRecord(callback?: (err: AWSError, data: SageMakerFeatureStoreRuntime.Types.BatchGetRecordResponse) => void): Request<SageMakerFeatureStoreRuntime.Types.BatchGetRecordResponse, AWSError>;
   /**
-   * Deletes a Record from a FeatureGroup in the OnlineStore. Feature Store supports both SOFT_DELETE and HARD_DELETE. For SOFT_DELETE (default), feature columns are set to null and the record is no longer retrievable by GetRecord or BatchGetRecord. For HARD_DELETE, the complete Record is removed from the OnlineStore. In both cases, Feature Store appends the deleted record marker to the OfflineStore with feature values set to null, is_deleted value set to True, and EventTime set to the delete input EventTime. Note that the EventTime specified in DeleteRecord should be set later than the EventTime of the existing record in the OnlineStore for that RecordIdentifer. If it is not, the deletion does not occur:   For SOFT_DELETE, the existing (undeleted) record remains in the OnlineStore, though the delete record marker is still written to the OfflineStore.    HARD_DELETE returns EventTime: 400 ValidationException to indicate that the delete operation failed. No delete record marker is written to the OfflineStore.  
+   * Deletes a Record from a FeatureGroup in the OnlineStore. Feature Store supports both SoftDelete and HardDelete. For SoftDelete (default), feature columns are set to null and the record is no longer retrievable by GetRecord or BatchGetRecord. For HardDelete, the complete Record is removed from the OnlineStore. In both cases, Feature Store appends the deleted record marker to the OfflineStore with feature values set to null, is_deleted value set to True, and EventTime set to the delete input EventTime. Note that the EventTime specified in DeleteRecord should be set later than the EventTime of the existing record in the OnlineStore for that RecordIdentifer. If it is not, the deletion does not occur:   For SoftDelete, the existing (undeleted) record remains in the OnlineStore, though the delete record marker is still written to the OfflineStore.    HardDelete returns EventTime: 400 ValidationException to indicate that the delete operation failed. No delete record marker is written to the OfflineStore.  
    */
   deleteRecord(params: SageMakerFeatureStoreRuntime.Types.DeleteRecordRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Record from a FeatureGroup in the OnlineStore. Feature Store supports both SOFT_DELETE and HARD_DELETE. For SOFT_DELETE (default), feature columns are set to null and the record is no longer retrievable by GetRecord or BatchGetRecord. For HARD_DELETE, the complete Record is removed from the OnlineStore. In both cases, Feature Store appends the deleted record marker to the OfflineStore with feature values set to null, is_deleted value set to True, and EventTime set to the delete input EventTime. Note that the EventTime specified in DeleteRecord should be set later than the EventTime of the existing record in the OnlineStore for that RecordIdentifer. If it is not, the deletion does not occur:   For SOFT_DELETE, the existing (undeleted) record remains in the OnlineStore, though the delete record marker is still written to the OfflineStore.    HARD_DELETE returns EventTime: 400 ValidationException to indicate that the delete operation failed. No delete record marker is written to the OfflineStore.  
+   * Deletes a Record from a FeatureGroup in the OnlineStore. Feature Store supports both SoftDelete and HardDelete. For SoftDelete (default), feature columns are set to null and the record is no longer retrievable by GetRecord or BatchGetRecord. For HardDelete, the complete Record is removed from the OnlineStore. In both cases, Feature Store appends the deleted record marker to the OfflineStore with feature values set to null, is_deleted value set to True, and EventTime set to the delete input EventTime. Note that the EventTime specified in DeleteRecord should be set later than the EventTime of the existing record in the OnlineStore for that RecordIdentifer. If it is not, the deletion does not occur:   For SoftDelete, the existing (undeleted) record remains in the OnlineStore, though the delete record marker is still written to the OfflineStore.    HardDelete returns EventTime: 400 ValidationException to indicate that the delete operation failed. No delete record marker is written to the OfflineStore.  
    */
   deleteRecord(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -84,6 +84,10 @@ declare namespace SageMakerFeatureStoreRuntime {
      * A list of FeatureGroup names, with their corresponding RecordIdentifier value, and Feature name that have been requested to be retrieved in batch.
      */
     Identifiers: BatchGetRecordIdentifiers;
+    /**
+     * Parameter to request ExpiresAt in response. If Enabled, BatchGetRecord will return the value of ExpiresAt, if it is not null. If Disabled and null, BatchGetRecord will return null.
+     */
+    ExpirationTimeResponse?: ExpirationTimeResponse;
   }
   export interface BatchGetRecordResponse {
     /**
@@ -112,6 +116,10 @@ declare namespace SageMakerFeatureStoreRuntime {
      * The Record retrieved.
      */
     Record: Record;
+    /**
+     * The ExpiresAt ISO string of the requested record.
+     */
+    ExpiresAt?: ExpiresAt;
   }
   export type BatchGetRecordResultDetails = BatchGetRecordResultDetail[];
   export interface DeleteRecordRequest {
@@ -137,6 +145,8 @@ declare namespace SageMakerFeatureStoreRuntime {
     DeletionMode?: DeletionMode;
   }
   export type DeletionMode = "SoftDelete"|"HardDelete"|string;
+  export type ExpirationTimeResponse = "Enabled"|"Disabled"|string;
+  export type ExpiresAt = string;
   export type FeatureGroupName = string;
   export type FeatureName = string;
   export type FeatureNames = FeatureName[];
@@ -163,12 +173,20 @@ declare namespace SageMakerFeatureStoreRuntime {
      * List of names of Features to be retrieved. If not specified, the latest value for all the Features are returned.
      */
     FeatureNames?: FeatureNames;
+    /**
+     * Parameter to request ExpiresAt in response. If Enabled, BatchGetRecord will return the value of ExpiresAt, if it is not null. If Disabled and null, BatchGetRecord will return null.
+     */
+    ExpirationTimeResponse?: ExpirationTimeResponse;
   }
   export interface GetRecordResponse {
     /**
      * The record you requested. A list of FeatureValues.
      */
     Record?: Record;
+    /**
+     * The ExpiresAt ISO string of the requested record.
+     */
+    ExpiresAt?: ExpiresAt;
   }
   export type Message = string;
   export interface PutRecordRequest {
@@ -184,11 +202,27 @@ declare namespace SageMakerFeatureStoreRuntime {
      * A list of stores to which you're adding the record. By default, Feature Store adds the record to all of the stores that you're using for the FeatureGroup.
      */
     TargetStores?: TargetStores;
+    /**
+     * Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration. For information on HardDelete, see the DeleteRecord API in the Amazon SageMaker API Reference guide.
+     */
+    TtlDuration?: TtlDuration;
   }
   export type Record = FeatureValue[];
   export type RecordIdentifiers = ValueAsString[];
   export type TargetStore = "OnlineStore"|"OfflineStore"|string;
   export type TargetStores = TargetStore[];
+  export interface TtlDuration {
+    /**
+     *  TtlDuration time unit.
+     */
+    Unit: TtlDurationUnit;
+    /**
+     *  TtlDuration time value.
+     */
+    Value: TtlDurationValue;
+  }
+  export type TtlDurationUnit = "Seconds"|"Minutes"|"Hours"|"Days"|"Weeks"|string;
+  export type TtlDurationValue = number;
   export type UnprocessedIdentifiers = BatchGetRecordIdentifier[];
   export type ValueAsString = string;
   /**

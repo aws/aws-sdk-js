@@ -350,6 +350,7 @@ export abstract class ConfigurationServicePlaceholders {
   paymentcryptographydata?: AWS.PaymentCryptographyData.Types.ClientConfiguration;
   codegurusecurity?: AWS.CodeGuruSecurity.Types.ClientConfiguration;
   verifiedpermissions?: AWS.VerifiedPermissions.Types.ClientConfiguration;
+  appfabric?: AWS.AppFabric.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -702,4 +703,5 @@ export interface ConfigurationServiceApiVersions {
   paymentcryptographydata?: AWS.PaymentCryptographyData.Types.apiVersion;
   codegurusecurity?: AWS.CodeGuruSecurity.Types.apiVersion;
   verifiedpermissions?: AWS.VerifiedPermissions.Types.apiVersion;
+  appfabric?: AWS.AppFabric.Types.apiVersion;
 }

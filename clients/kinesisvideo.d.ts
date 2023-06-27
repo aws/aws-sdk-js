@@ -28,6 +28,14 @@ declare class KinesisVideo extends Service {
    */
   createStream(callback?: (err: AWSError, data: KinesisVideo.Types.CreateStreamOutput) => void): Request<KinesisVideo.Types.CreateStreamOutput, AWSError>;
   /**
+   * An asynchronous API that deletes a stream’s existing edge configuration, as well as the corresponding media from the Edge Agent. When you invoke this API, the sync status is set to DELETING. A deletion process starts, in which active edge jobs are stopped and all media is deleted from the edge device. The time to delete varies, depending on the total amount of stored media. If the deletion process fails, the sync status changes to DELETE_FAILED. You will need to re-try the deletion. When the deletion process has completed successfully, the edge configuration is no longer accessible.
+   */
+  deleteEdgeConfiguration(params: KinesisVideo.Types.DeleteEdgeConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DeleteEdgeConfigurationOutput) => void): Request<KinesisVideo.Types.DeleteEdgeConfigurationOutput, AWSError>;
+  /**
+   * An asynchronous API that deletes a stream’s existing edge configuration, as well as the corresponding media from the Edge Agent. When you invoke this API, the sync status is set to DELETING. A deletion process starts, in which active edge jobs are stopped and all media is deleted from the edge device. The time to delete varies, depending on the total amount of stored media. If the deletion process fails, the sync status changes to DELETE_FAILED. You will need to re-try the deletion. When the deletion process has completed successfully, the edge configuration is no longer accessible.
+   */
+  deleteEdgeConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DeleteEdgeConfigurationOutput) => void): Request<KinesisVideo.Types.DeleteEdgeConfigurationOutput, AWSError>;
+  /**
    * Deletes a specified signaling channel. DeleteSignalingChannel is an asynchronous operation. If you don't specify the channel's current version, the most recent version is deleted.
    */
   deleteSignalingChannel(params: KinesisVideo.Types.DeleteSignalingChannelInput, callback?: (err: AWSError, data: KinesisVideo.Types.DeleteSignalingChannelOutput) => void): Request<KinesisVideo.Types.DeleteSignalingChannelOutput, AWSError>;
@@ -44,11 +52,11 @@ declare class KinesisVideo extends Service {
    */
   deleteStream(callback?: (err: AWSError, data: KinesisVideo.Types.DeleteStreamOutput) => void): Request<KinesisVideo.Types.DeleteStreamOutput, AWSError>;
   /**
-   * Describes a stream’s edge configuration that was set using the StartEdgeConfigurationUpdate API. Use this API to get the status of the configuration if the configuration is in sync with the Edge Agent.
+   * Describes a stream’s edge configuration that was set using the StartEdgeConfigurationUpdate API and the latest status of the edge agent's recorder and uploader jobs. Use this API to get the status of the configuration to determine if the configuration is in sync with the Edge Agent. Use this API to evaluate the health of the Edge Agent.
    */
   describeEdgeConfiguration(params: KinesisVideo.Types.DescribeEdgeConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeEdgeConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeEdgeConfigurationOutput, AWSError>;
   /**
-   * Describes a stream’s edge configuration that was set using the StartEdgeConfigurationUpdate API. Use this API to get the status of the configuration if the configuration is in sync with the Edge Agent.
+   * Describes a stream’s edge configuration that was set using the StartEdgeConfigurationUpdate API and the latest status of the edge agent's recorder and uploader jobs. Use this API to get the status of the configuration to determine if the configuration is in sync with the Edge Agent. Use this API to evaluate the health of the Edge Agent.
    */
   describeEdgeConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeEdgeConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeEdgeConfigurationOutput, AWSError>;
   /**
@@ -60,11 +68,11 @@ declare class KinesisVideo extends Service {
    */
   describeImageGenerationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeImageGenerationConfigurationOutput, AWSError>;
   /**
-   * Returns the most current information about the stream. Either streamName or streamARN should be provided in the input. Returns the most current information about the stream. The streamName or streamARN should be provided in the input.
+   * Returns the most current information about the stream. The streamName or streamARN should be provided in the input.
    */
   describeMappedResourceConfiguration(params: KinesisVideo.Types.DescribeMappedResourceConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMappedResourceConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMappedResourceConfigurationOutput, AWSError>;
   /**
-   * Returns the most current information about the stream. Either streamName or streamARN should be provided in the input. Returns the most current information about the stream. The streamName or streamARN should be provided in the input.
+   * Returns the most current information about the stream. The streamName or streamARN should be provided in the input.
    */
   describeMappedResourceConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMappedResourceConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMappedResourceConfigurationOutput, AWSError>;
   /**
@@ -115,6 +123,14 @@ declare class KinesisVideo extends Service {
    * Provides an endpoint for the specified signaling channel to send and receive messages. This API uses the SingleMasterChannelEndpointConfiguration input parameter, which consists of the Protocols and Role properties.  Protocols is used to determine the communication mechanism. For example, if you specify WSS as the protocol, this API produces a secure websocket endpoint. If you specify HTTPS as the protocol, this API generates an HTTPS endpoint.   Role determines the messaging permissions. A MASTER role results in this API generating an endpoint that a client can use to communicate with any of the viewers on the channel. A VIEWER role results in this API generating an endpoint that a client can use to communicate only with a MASTER. 
    */
   getSignalingChannelEndpoint(callback?: (err: AWSError, data: KinesisVideo.Types.GetSignalingChannelEndpointOutput) => void): Request<KinesisVideo.Types.GetSignalingChannelEndpointOutput, AWSError>;
+  /**
+   * Returns an array of edge configurations associated with the specified Edge Agent. In the request, you must specify the Edge Agent HubDeviceArn.
+   */
+  listEdgeAgentConfigurations(params: KinesisVideo.Types.ListEdgeAgentConfigurationsInput, callback?: (err: AWSError, data: KinesisVideo.Types.ListEdgeAgentConfigurationsOutput) => void): Request<KinesisVideo.Types.ListEdgeAgentConfigurationsOutput, AWSError>;
+  /**
+   * Returns an array of edge configurations associated with the specified Edge Agent. In the request, you must specify the Edge Agent HubDeviceArn.
+   */
+  listEdgeAgentConfigurations(callback?: (err: AWSError, data: KinesisVideo.Types.ListEdgeAgentConfigurationsOutput) => void): Request<KinesisVideo.Types.ListEdgeAgentConfigurationsOutput, AWSError>;
   /**
    * Returns an array of ChannelInfo objects. Each object describes a signaling channel. To retrieve only those channels that satisfy a specific condition, you can specify a ChannelNameCondition.
    */
@@ -323,7 +339,7 @@ declare namespace KinesisVideo {
      */
     MediaType?: MediaType;
     /**
-     * The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (aws/kinesisvideo) is used.  For more information, see DescribeKey. 
+     * The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data. If no key ID is specified, the default, Kinesis Video-managed key (Amazon Web Services/kinesisvideo) is used.  For more information, see DescribeKey. 
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -345,6 +361,18 @@ declare namespace KinesisVideo {
   export type DataRetentionChangeInHours = number;
   export type DataRetentionInHours = number;
   export type DeleteAfterUpload = boolean;
+  export interface DeleteEdgeConfigurationInput {
+    /**
+     * The name of the stream from which to delete the edge configuration. Specify either the StreamName or the StreamARN.
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the stream. Specify either the StreamName or the StreamARN.
+     */
+    StreamARN?: ResourceARN;
+  }
+  export interface DeleteEdgeConfigurationOutput {
+  }
   export interface DeleteSignalingChannelInput {
     /**
      * The Amazon Resource Name (ARN) of the signaling channel that you want to delete.
@@ -379,7 +407,7 @@ declare namespace KinesisVideo {
      */
     LocalSizeConfig?: LocalSizeConfig;
     /**
-     * The boolean value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are set to true, such as when the limit for the EdgeRetentionInHours, or the MaxLocalMediaSizeInMB, has been reached.  Since the default value is set to true, configure the uploader schedule such that the media files are not being deleted before they are initially uploaded to AWS cloud.
+     * The boolean value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are set to true, such as when the limit for the EdgeRetentionInHours, or the MaxLocalMediaSizeInMB, has been reached.  Since the default value is set to true, configure the uploader schedule such that the media files are not being deleted before they are initially uploaded to the Amazon Web Services cloud.
      */
     DeleteAfterUpload?: DeleteAfterUpload;
   }
@@ -422,6 +450,10 @@ declare namespace KinesisVideo {
      * A description of the stream's edge configuration that will be used to sync with the Edge Agent IoT Greengrass component. The Edge Agent component will run on an IoT Hub Device setup at your premise.
      */
     EdgeConfig?: EdgeConfig;
+    /**
+     * An object that contains the latest status details for an edge agent's recorder and uploader jobs. Use this information to determine the current health of an edge agent.
+     */
+    EdgeAgentStatus?: EdgeAgentStatus;
   }
   export interface DescribeImageGenerationConfigurationInput {
     /**
@@ -535,6 +567,16 @@ declare namespace KinesisVideo {
   export type DestinationUri = string;
   export type DeviceName = string;
   export type DurationInSeconds = number;
+  export interface EdgeAgentStatus {
+    /**
+     * The latest status of a stream’s edge recording job.
+     */
+    LastRecorderStatus?: LastRecorderStatus;
+    /**
+     * The latest status of a stream’s edge to cloud uploader job.
+     */
+    LastUploaderStatus?: LastUploaderStatus;
+  }
   export interface EdgeConfig {
     /**
      * The "Internet of Things (IoT) Thing" Arn of the stream.
@@ -637,12 +679,102 @@ declare namespace KinesisVideo {
      */
     Uri: DestinationUri;
     /**
-     * The AWS Region of the S3 bucket where images will be delivered. This DestinationRegion must match the Region where the stream is located.
+     * The Amazon Web Services Region of the S3 bucket where images will be delivered. This DestinationRegion must match the Region where the stream is located.
      */
     DestinationRegion: DestinationRegion;
   }
   export type ImageSelectorType = "SERVER_TIMESTAMP"|"PRODUCER_TIMESTAMP"|string;
+  export type JobStatusDetails = string;
   export type KmsKeyId = string;
+  export interface LastRecorderStatus {
+    /**
+     * A description of a recorder job’s latest status.
+     */
+    JobStatusDetails?: JobStatusDetails;
+    /**
+     * The timestamp at which the recorder job was last executed and media stored to local disk.
+     */
+    LastCollectedTime?: Timestamp;
+    /**
+     * The timestamp at which the recorder status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The status of the latest recorder job.
+     */
+    RecorderStatus?: RecorderStatus;
+  }
+  export interface LastUploaderStatus {
+    /**
+     * A description of an uploader job’s latest status.
+     */
+    JobStatusDetails?: JobStatusDetails;
+    /**
+     * The timestamp at which the uploader job was last executed and media collected to the cloud.
+     */
+    LastCollectedTime?: Timestamp;
+    /**
+     * The timestamp at which the uploader status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The status of the latest uploader job.
+     */
+    UploaderStatus?: UploaderStatus;
+  }
+  export interface ListEdgeAgentConfigurationsEdgeConfig {
+    /**
+     * The name of the stream.
+     */
+    StreamName?: StreamName;
+    /**
+     * The Amazon Resource Name (ARN) of the stream.
+     */
+    StreamARN?: ResourceARN;
+    /**
+     * The timestamp when the stream first created the edge config.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The timestamp when the stream last updated the edge config.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The current sync status of the stream's edge configuration.
+     */
+    SyncStatus?: SyncStatus;
+    /**
+     * A description of the generated failure status.
+     */
+    FailedStatusDetails?: FailedStatusDetails;
+    EdgeConfig?: EdgeConfig;
+  }
+  export type ListEdgeAgentConfigurationsEdgeConfigList = ListEdgeAgentConfigurationsEdgeConfig[];
+  export interface ListEdgeAgentConfigurationsInput {
+    /**
+     * The "Internet of Things (IoT) Thing" Arn of the edge agent.
+     */
+    HubDeviceArn: HubDeviceArn;
+    /**
+     * The maximum number of edge configurations to return in the response. The default is 5.
+     */
+    MaxResults?: ListEdgeAgentConfigurationsInputLimit;
+    /**
+     * If you specify this parameter, when the result of a ListEdgeAgentConfigurations operation is truncated, the call returns the NextToken in the response. To get another batch of edge configurations, provide this token in your next request. 
+     */
+    NextToken?: NextToken;
+  }
+  export type ListEdgeAgentConfigurationsInputLimit = number;
+  export interface ListEdgeAgentConfigurationsOutput {
+    /**
+     * A description of a single stream's edge configuration.
+     */
+    EdgeConfigs?: ListEdgeAgentConfigurationsEdgeConfigList;
+    /**
+     * If the response is truncated, the call returns this element with a given token. To get the next batch of edge configurations, use this token in your next request.
+     */
+    NextToken?: NextToken;
+  }
   export type ListOfProtocols = ChannelProtocol[];
   export interface ListSignalingChannelsInput {
     /**
@@ -762,7 +894,7 @@ declare namespace KinesisVideo {
   export type MaxLocalMediaSizeInMB = number;
   export interface MediaSourceConfig {
     /**
-     * The AWS Secrets Manager ARN for the username and password of the camera, or a local media file location.
+     * The Amazon Web Services Secrets Manager ARN for the username and password of the camera, or a local media file location.
      */
     MediaUriSecretArn: MediaUriSecretArn;
     /**
@@ -812,6 +944,7 @@ declare namespace KinesisVideo {
      */
     ScheduleConfig?: ScheduleConfig;
   }
+  export type RecorderStatus = "SUCCESS"|"USER_ERROR"|"SYSTEM_ERROR"|string;
   export type ResourceARN = string;
   export type ResourceEndpoint = string;
   export type ResourceEndpointList = ResourceEndpointListItem[];
@@ -950,7 +1083,7 @@ declare namespace KinesisVideo {
      */
     ComparisonValue?: StreamName;
   }
-  export type SyncStatus = "SYNCING"|"ACKNOWLEDGED"|"IN_SYNC"|"SYNC_FAILED"|"DELETING"|"DELETE_FAILED"|string;
+  export type SyncStatus = "SYNCING"|"ACKNOWLEDGED"|"IN_SYNC"|"SYNC_FAILED"|"DELETING"|"DELETE_FAILED"|"DELETING_ACKNOWLEDGED"|string;
   export interface Tag {
     /**
      * The key of the tag that is associated with the specified signaling channel.
@@ -1135,10 +1268,11 @@ declare namespace KinesisVideo {
   }
   export interface UploaderConfig {
     /**
-     * The configuration that consists of the ScheduleExpression and the DurationInMinutesdetails that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the ScheduleExpression is not provided, then the Edge Agent will always be in recording mode.
+     * The configuration that consists of the ScheduleExpression and the DurationInMinutes details that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the ScheduleConfig is not provided in this UploaderConfig, then the Edge Agent will upload at regular intervals (every 1 hour).
      */
     ScheduleConfig: ScheduleConfig;
   }
+  export type UploaderStatus = "SUCCESS"|"USER_ERROR"|"SYSTEM_ERROR"|string;
   export type Version = string;
   export type WidthPixels = number;
   /**

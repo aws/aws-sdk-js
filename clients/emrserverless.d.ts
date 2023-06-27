@@ -147,7 +147,7 @@ declare namespace EMRServerless {
      */
     arn: ApplicationArn;
     /**
-     * The EMR release associated with the application.
+     * The Amazon EMR release associated with the application.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -227,7 +227,7 @@ declare namespace EMRServerless {
      */
     arn: ApplicationArn;
     /**
-     * The EMR release associated with the application.
+     * The Amazon EMR release associated with the application.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -327,7 +327,7 @@ declare namespace EMRServerless {
      */
     name?: ApplicationName;
     /**
-     * The EMR release associated with the application.
+     * The Amazon EMR release associated with the application.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -550,7 +550,7 @@ declare namespace EMRServerless {
      */
     stateDetails: String256;
     /**
-     * The EMR release associated with the application your job is running on.
+     * The Amazon EMR release associated with the application your job is running on.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -579,7 +579,7 @@ declare namespace EMRServerless {
      */
     executionTimeoutMinutes?: Duration;
     /**
-     * The aggregate vCPU, memory, and storage that AWS has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker. Note that billed resources do not include usage for idle pre-initialized workers.
+     * The aggregate vCPU, memory, and storage that Amazon Web Services has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker. Note that billed resources do not include usage for idle pre-initialized workers.
      */
     billedResourceUtilization?: ResourceUtilization;
   }
@@ -628,7 +628,7 @@ declare namespace EMRServerless {
      */
     stateDetails: String256;
     /**
-     * The EMR release associated with the application your job is running on.
+     * The Amazon EMR release associated with the application your job is running on.
      */
     releaseLabel: ReleaseLabel;
     /**
@@ -952,6 +952,10 @@ declare namespace EMRServerless {
      * The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types.
      */
     workerTypeSpecifications?: WorkerTypeSpecificationInputMap;
+    /**
+     * The Amazon EMR release label for the application. You can change the release label to use a different release of Amazon EMR.
+     */
+    releaseLabel?: ReleaseLabel;
   }
   export interface UpdateApplicationResponse {
     /**

@@ -4117,7 +4117,7 @@ declare namespace SageMaker {
      */
     MultiModelConfig?: MultiModelConfig;
     /**
-     * Specifies the location of ML model data to deploy.  Currently you cannot use ModelDataSource in conjuction with SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker Marketplace. 
+     * Specifies the location of ML model data to deploy.  Currently you cannot use ModelDataSource in conjunction with SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker Marketplace. 
      */
     ModelDataSource?: ModelDataSource;
   }
@@ -17832,6 +17832,16 @@ declare namespace SageMaker {
      * Turn OnlineStore off by specifying False for the EnableOnlineStore flag. Turn OnlineStore on by specifying True for the EnableOnlineStore flag.  The default value is False.
      */
     EnableOnlineStore?: Boolean;
+    /**
+     * Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration. For information on HardDelete, see the DeleteRecord API in the Amazon SageMaker API Reference guide.
+     */
+    TtlDuration?: TtlDuration;
+  }
+  export interface OnlineStoreConfigUpdate {
+    /**
+     * Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration. For information on HardDelete, see the DeleteRecord API in the Amazon SageMaker API Reference guide.
+     */
+    TtlDuration?: TtlDuration;
   }
   export interface OnlineStoreSecurityConfig {
     /**
@@ -21252,6 +21262,18 @@ declare namespace SageMaker {
      */
     LastModifiedTime?: Timestamp;
   }
+  export interface TtlDuration {
+    /**
+     *  TtlDuration time unit.
+     */
+    Unit?: TtlDurationUnit;
+    /**
+     *  TtlDuration time value.
+     */
+    Value?: TtlDurationValue;
+  }
+  export type TtlDurationUnit = "Seconds"|"Minutes"|"Hours"|"Days"|"Weeks"|string;
+  export type TtlDurationValue = number;
   export interface TuningJobCompletionCriteria {
     /**
      * The value of the objective metric.
@@ -21557,6 +21579,10 @@ declare namespace SageMaker {
      * Updates the feature group. Updating a feature group is an asynchronous operation. When you get an HTTP 200 response, you've made a valid request. It takes some time after you've made a valid request for Feature Store to update the feature group.
      */
     FeatureAdditions?: FeatureAdditions;
+    /**
+     * Updates the feature group online store configuration.
+     */
+    OnlineStoreConfig?: OnlineStoreConfigUpdate;
   }
   export interface UpdateFeatureGroupResponse {
     /**

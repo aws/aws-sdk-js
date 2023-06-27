@@ -28,6 +28,14 @@ declare class IVS extends Service {
    */
   batchGetStreamKey(callback?: (err: AWSError, data: IVS.Types.BatchGetStreamKeyResponse) => void): Request<IVS.Types.BatchGetStreamKeyResponse, AWSError>;
   /**
+   * Performs StartViewerSessionRevocation on multiple channel ARN and viewer ID pairs simultaneously.
+   */
+  batchStartViewerSessionRevocation(params: IVS.Types.BatchStartViewerSessionRevocationRequest, callback?: (err: AWSError, data: IVS.Types.BatchStartViewerSessionRevocationResponse) => void): Request<IVS.Types.BatchStartViewerSessionRevocationResponse, AWSError>;
+  /**
+   * Performs StartViewerSessionRevocation on multiple channel ARN and viewer ID pairs simultaneously.
+   */
+  batchStartViewerSessionRevocation(callback?: (err: AWSError, data: IVS.Types.BatchStartViewerSessionRevocationResponse) => void): Request<IVS.Types.BatchStartViewerSessionRevocationResponse, AWSError>;
+  /**
    * Creates a new channel and an associated stream key to start streaming.
    */
   createChannel(params: IVS.Types.CreateChannelRequest, callback?: (err: AWSError, data: IVS.Types.CreateChannelResponse) => void): Request<IVS.Types.CreateChannelResponse, AWSError>;
@@ -204,6 +212,14 @@ declare class IVS extends Service {
    */
   putMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Starts the process of revoking the viewer session associated with a specified channel ARN and viewer ID. Optionally, you can provide a version to revoke viewer sessions less than and including that version. For instructions on associating a viewer ID with a viewer session, see Setting Up Private Channels.
+   */
+  startViewerSessionRevocation(params: IVS.Types.StartViewerSessionRevocationRequest, callback?: (err: AWSError, data: IVS.Types.StartViewerSessionRevocationResponse) => void): Request<IVS.Types.StartViewerSessionRevocationResponse, AWSError>;
+  /**
+   * Starts the process of revoking the viewer session associated with a specified channel ARN and viewer ID. Optionally, you can provide a version to revoke viewer sessions less than and including that version. For instructions on associating a viewer ID with a viewer session, see Setting Up Private Channels.
+   */
+  startViewerSessionRevocation(callback?: (err: AWSError, data: IVS.Types.StartViewerSessionRevocationResponse) => void): Request<IVS.Types.StartViewerSessionRevocationResponse, AWSError>;
+  /**
    * Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with DeleteStreamKey to prevent further streaming to a channel.  Many streaming client-software libraries automatically reconnect a dropped RTMPS session, so to stop the stream permanently, you may want to first revoke the streamKey attached to the channel. 
    */
   stopStream(params: IVS.Types.StopStreamRequest, callback?: (err: AWSError, data: IVS.Types.StopStreamResponse) => void): Request<IVS.Types.StopStreamResponse, AWSError>;
@@ -302,6 +318,52 @@ declare namespace IVS {
      */
     streamKeys?: StreamKeys;
   }
+  export interface BatchStartViewerSessionRevocationError {
+    /**
+     * Channel ARN.
+     */
+    channelArn: ChannelArn;
+    /**
+     * Error code.
+     */
+    code?: errorCode;
+    /**
+     * Error message, determined by the application.
+     */
+    message?: errorMessage;
+    /**
+     * The ID of the viewer session to revoke.
+     */
+    viewerId: ViewerId;
+  }
+  export type BatchStartViewerSessionRevocationErrors = BatchStartViewerSessionRevocationError[];
+  export interface BatchStartViewerSessionRevocationRequest {
+    /**
+     * Array of viewer sessions, one per channel-ARN and viewer-ID pair.
+     */
+    viewerSessions: BatchStartViewerSessionRevocationViewerSessionList;
+  }
+  export interface BatchStartViewerSessionRevocationResponse {
+    /**
+     * Each error object is related to a specific channelArn and viewerId pair in the request.
+     */
+    errors?: BatchStartViewerSessionRevocationErrors;
+  }
+  export interface BatchStartViewerSessionRevocationViewerSession {
+    /**
+     * The ARN of the channel associated with the viewer session to revoke.
+     */
+    channelArn: ChannelArn;
+    /**
+     * The ID of the viewer associated with the viewer session to revoke. Do not use this field for personally identifying, confidential, or sensitive information.
+     */
+    viewerId: ViewerId;
+    /**
+     * An optional filter on which versions of the viewer session to revoke. All versions less than or equal to the specified version will be revoked. Default: 0.
+     */
+    viewerSessionVersionsLessThanOrEqualTo?: ViewerSessionVersion;
+  }
+  export type BatchStartViewerSessionRevocationViewerSessionList = BatchStartViewerSessionRevocationViewerSession[];
   export type Boolean = boolean;
   export interface Channel {
     /**
@@ -897,6 +959,22 @@ declare namespace IVS {
      */
     bucketName: S3DestinationBucketName;
   }
+  export interface StartViewerSessionRevocationRequest {
+    /**
+     * The ARN of the channel associated with the viewer session to revoke.
+     */
+    channelArn: ChannelArn;
+    /**
+     * The ID of the viewer associated with the viewer session to revoke. Do not use this field for personally identifying, confidential, or sensitive information.
+     */
+    viewerId: ViewerId;
+    /**
+     * An optional filter on which versions of the viewer session to revoke. All versions less than or equal to the specified version will be revoked. Default: 0.
+     */
+    viewerSessionVersionsLessThanOrEqualTo?: ViewerSessionVersion;
+  }
+  export interface StartViewerSessionRevocationResponse {
+  }
   export interface StopStreamRequest {
     /**
      * ARN of the channel for which the stream is to be stopped.
@@ -1188,6 +1266,8 @@ declare namespace IVS {
      */
     videoWidth?: Integer;
   }
+  export type ViewerId = string;
+  export type ViewerSessionVersion = number;
   export type errorCode = string;
   export type errorMessage = string;
   /**
