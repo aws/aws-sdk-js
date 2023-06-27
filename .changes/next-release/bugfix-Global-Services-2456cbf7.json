@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Global Services",
+  "description": "Recognize cost explorer service as service with global endpoints."
+}
