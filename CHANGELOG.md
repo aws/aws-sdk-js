@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1406.0-->
+<!--LATEST=2.1407.0-->
 <!--ENTRYINSERT-->
+
+## 2.1407.0
+* bugfix: Cost Explorer: recognize Cost Explorer global endpoints.
+* feature: InternetMonitor: This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to set custom thresholds, for performance and availability drops, for triggering when to create a health event.
+* feature: KinesisAnalyticsV2: Support for new runtime environment in Kinesis Data Analytics Studio: Zeppelin-0.10, Apache Flink-1.15
+* feature: Lambda: Surface ResourceConflictException in DeleteEventSourceMapping
+* feature: Omics: Add Common Workflow Language (CWL) as a supported language for Omics workflows
+* feature: RDS: Amazon Relational Database Service (RDS) now supports joining a RDS for SQL Server instance to a self-managed Active Directory.
+* feature: S3: The S3 LISTObjects, ListObjectsV2 and ListObjectVersions API now supports a new optional header x-amz-optional-object-attributes. If header contains RestoreStatus as the value, then S3 will include Glacier restore status i.e. isRestoreInProgress and RestoreExpiryDate in List response.
+* feature: SageMaker: This release adds support for Model Cards Model Registry integration.
 
 ## 2.1406.0
 * feature: AppFabric: Initial release of AWS AppFabric for connecting SaaS applications for better productivity and security.

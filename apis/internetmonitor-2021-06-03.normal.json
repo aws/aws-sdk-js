@@ -388,6 +388,10 @@
         "TrafficPercentageToMonitor": {
           "shape": "TrafficPercentageToMonitor",
           "documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
+        },
+        "HealthEventsConfig": {
+          "shape": "HealthEventsConfig",
+          "documentation": "<p>Defines the health event threshold percentages, for performance score and availability score. Internet Monitor creates a health event when there's an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you don't set a health event threshold, the default calue is 95%.</p>"
         }
       }
     },
@@ -502,6 +506,10 @@
         "ImpactType": {
           "shape": "HealthEventImpactType",
           "documentation": "<p>The type of impairment of a specific health event.</p>"
+        },
+        "HealthScoreThreshold": {
+          "shape": "Percentage",
+          "documentation": "<p>The threshold percentage for health events when Amazon CloudWatch Internet Monitor creates a health event.</p>"
         }
       }
     },
@@ -577,6 +585,10 @@
         "TrafficPercentageToMonitor": {
           "shape": "TrafficPercentageToMonitor",
           "documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
+        },
+        "HealthEventsConfig": {
+          "shape": "HealthEventsConfig",
+          "documentation": "<p>The list of health event thresholds. A health event threshold percentage, for performance and availability, determines the level of impact at which Amazon CloudWatch Internet Monitor creates a health event when there's an internet issue that affects your application end users.</p>"
         }
       }
     },
@@ -631,6 +643,10 @@
         "ImpactType": {
           "shape": "HealthEventImpactType",
           "documentation": "<p>The type of impairment for a health event.</p>"
+        },
+        "HealthScoreThreshold": {
+          "shape": "Percentage",
+          "documentation": "<p>The value of the threshold percentage for performance or availability that was configured when Amazon CloudWatch Internet Monitor created the health event.</p>"
         }
       },
       "documentation": "<p>Information about a health event created in a monitor in Amazon CloudWatch Internet Monitor.</p>"
@@ -660,6 +676,20 @@
         "ACTIVE",
         "RESOLVED"
       ]
+    },
+    "HealthEventsConfig": {
+      "type": "structure",
+      "members": {
+        "AvailabilityScoreThreshold": {
+          "shape": "Percentage",
+          "documentation": "<p>The health event threshold percentage set for availability scores.</p>"
+        },
+        "PerformanceScoreThreshold": {
+          "shape": "Percentage",
+          "documentation": "<p>The health event threshold percentage set for performance scores.</p>"
+        }
+      },
+      "documentation": "<p>A complex type for the configuration. Defines the health event threshold percentages, for performance score and availability score. Amazon CloudWatch Internet Monitor creates a health event when there's an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you don't set a health event threshold, the default value is 95%.</p>"
     },
     "ImpactedLocation": {
       "type": "structure",
@@ -1008,6 +1038,11 @@
         "shape": "Network"
       }
     },
+    "Percentage": {
+      "type": "double",
+      "max": 100,
+      "min": 0
+    },
     "PerformanceMeasurement": {
       "type": "structure",
       "members": {
@@ -1218,6 +1253,10 @@
         "TrafficPercentageToMonitor": {
           "shape": "TrafficPercentageToMonitor",
           "documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
+        },
+        "HealthEventsConfig": {
+          "shape": "HealthEventsConfig",
+          "documentation": "<p>The list of health event thresholds. A health event threshold percentage, for performance and availability, determines when Internet Monitor creates a health event when there's an internet issue that affects your application end users.</p>"
         }
       }
     },

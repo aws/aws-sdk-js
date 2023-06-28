@@ -2191,6 +2191,22 @@ declare namespace RDS {
      */
     Domain?: String;
     /**
+     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     */
+    DomainFqdn?: String;
+    /**
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     */
+    DomainOu?: String;
+    /**
+     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     */
+    DomainAuthSecretArn?: String;
+    /**
+     * The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers. Constraints:   Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.   Example: 123.124.125.126,234.235.236.237 
+     */
+    DomainDnsIps?: StringList;
+    /**
      * Spcifies whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied. This setting doesn't apply to Amazon Aurora DB instances. Copying tags to snapshots is managed by the DB cluster. Setting this value for an Aurora DB instance has no effect on the DB cluster setting.
      */
     CopyTagsToSnapshot?: BooleanOptional;
@@ -2397,6 +2413,22 @@ declare namespace RDS {
      * The name of the IAM role to be used when making API calls to the Directory Service. This setting doesn't apply to RDS Custom.
      */
     DomainIAMRoleName?: String;
+    /**
+     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     */
+    DomainFqdn?: String;
+    /**
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     */
+    DomainOu?: String;
+    /**
+     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     */
+    DomainAuthSecretArn?: String;
+    /**
+     * The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers. Constraints:   Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.   Example: 123.124.125.126,234.235.236.237 
+     */
+    DomainDnsIps?: StringList;
     /**
      * The open mode of the replica database: mounted or read-only.  This parameter is only supported for Oracle DB instances.  Mounted DB replicas are included in Oracle Database Enterprise Edition. The main use case for mounted replicas is cross-Region disaster recovery. The primary database doesn't use Active Data Guard to transmit information to the mounted replica. Because it doesn't accept user connections, a mounted replica can't serve a read-only workload. You can create a combination of mounted and read-only DB replicas for the same primary DB instance. For more information, see Working with Oracle Read Replicas for Amazon RDS in the Amazon RDS User Guide. For RDS Custom, you must specify this parameter and set it to mounted. The value won't be set by default. After replica creation, you can manage the open mode manually.
      */
@@ -5598,13 +5630,25 @@ declare namespace RDS {
      */
     Status?: String;
     /**
-     * The fully qualified domain name of the Active Directory Domain.
+     * The fully qualified domain name (FQDN) of the Active Directory Domain.
      */
     FQDN?: String;
     /**
      * The name of the IAM role to be used when making API calls to the Directory Service.
      */
     IAMRoleName?: String;
+    /**
+     * The Active Directory organizational unit for your DB instance to join.
+     */
+    OU?: String;
+    /**
+     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.
+     */
+    AuthSecretArn?: String;
+    /**
+     * The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+     */
+    DnsIps?: StringList;
   }
   export type DomainMembershipList = DomainMembership[];
   export type Double = number;
@@ -6475,6 +6519,22 @@ declare namespace RDS {
      */
     Domain?: String;
     /**
+     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     */
+    DomainFqdn?: String;
+    /**
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     */
+    DomainOu?: String;
+    /**
+     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     */
+    DomainAuthSecretArn?: String;
+    /**
+     * The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers. Constraints:   Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.   Example: 123.124.125.126,234.235.236.237 
+     */
+    DomainDnsIps?: StringList;
+    /**
      * Specifies whether to copy all tags from the DB instance to snapshots of the DB instance. By default, tags aren't copied. This setting doesn't apply to Amazon Aurora DB instances. Copying tags to snapshots is managed by the DB cluster. Setting this value for an Aurora DB instance has no effect on the DB cluster setting. For more information, see ModifyDBCluster.
      */
     CopyTagsToSnapshot?: BooleanOptional;
@@ -6498,6 +6558,10 @@ declare namespace RDS {
      * The name of the IAM role to use when making API calls to the Directory Service. This setting doesn't apply to RDS Custom DB instances.
      */
     DomainIAMRoleName?: String;
+    /**
+     * Boolean. If present, removes the instance from the Active Directory domain.
+     */
+    DisableDomain?: BooleanOptional;
     /**
      * The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance. For more information, see  Fault Tolerance for an Aurora DB Cluster in the Amazon Aurora User Guide. This setting doesn't apply to RDS Custom DB instances. Default: 1  Valid Values: 0 - 15 
      */
@@ -8251,6 +8315,22 @@ declare namespace RDS {
      */
     Domain?: String;
     /**
+     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     */
+    DomainFqdn?: String;
+    /**
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     */
+    DomainOu?: String;
+    /**
+     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Constraints: Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     */
+    DomainAuthSecretArn?: String;
+    /**
+     * The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers. Constraints:   Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.   Example: 123.124.125.126,234.235.236.237 
+     */
+    DomainDnsIps?: StringList;
+    /**
      * A value that indicates whether to copy all tags from the restored DB instance to snapshots of the DB instance. In most cases, tags aren't copied by default. However, when you restore a DB instance from a DB snapshot, RDS checks whether you specify new tags. If yes, the new tags are added to the restored DB instance. If there are no new tags, RDS looks for the tags from the source DB instance for the DB snapshot, and then adds those tags to the restored DB instance. For more information, see  Copying tags to DB instance snapshots in the Amazon RDS User Guide.
      */
     CopyTagsToSnapshot?: BooleanOptional;
@@ -8605,6 +8685,22 @@ declare namespace RDS {
      * Specify the name of the IAM role to be used when making API calls to the Directory Service. This setting doesn't apply to RDS Custom.
      */
     DomainIAMRoleName?: String;
+    /**
+     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     */
+    DomainFqdn?: String;
+    /**
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     */
+    DomainOu?: String;
+    /**
+     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Constraints:   Cannot be greater than 64 characters.   Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     */
+    DomainAuthSecretArn?: String;
+    /**
+     * The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers. Constraints:   Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.   Example: 123.124.125.126,234.235.236.237 
+     */
+    DomainDnsIps?: StringList;
     /**
      * A value that indicates whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts. By default, mapping isn't enabled. This setting doesn't apply to RDS Custom. For more information about IAM database authentication, see  IAM Database Authentication for MySQL and PostgreSQL in the Amazon RDS User Guide. 
      */

@@ -4584,7 +4584,7 @@ declare namespace Omics {
   export type WorkflowDefinition = string;
   export type WorkflowDescription = string;
   export type WorkflowDigest = string;
-  export type WorkflowEngine = "WDL"|"NEXTFLOW"|string;
+  export type WorkflowEngine = "WDL"|"NEXTFLOW"|"CWL"|string;
   export type WorkflowExport = "DEFINITION"|string;
   export type WorkflowExportList = WorkflowExport[];
   export type WorkflowId = string;

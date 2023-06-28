@@ -16289,6 +16289,10 @@ declare namespace SageMaker {
      * The risk rating of the model. Different organizations might have different criteria for model card risk ratings. For more information, see Risk ratings.
      */
     RiskRating?: String;
+    /**
+     * The model package group that contains the model package. Only relevant for model cards created for model packages in the Amazon SageMaker Model Registry. 
+     */
+    ModelPackageGroupName?: String;
   }
   export type ModelCardArn = string;
   export type ModelCardContent = string;
