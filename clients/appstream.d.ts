@@ -13,6 +13,14 @@ declare class AppStream extends Service {
   constructor(options?: AppStream.Types.ClientConfiguration)
   config: Config & AppStream.Types.ClientConfiguration;
   /**
+   * Associates the specified app block builder with the specified app block.
+   */
+  associateAppBlockBuilderAppBlock(params: AppStream.Types.AssociateAppBlockBuilderAppBlockRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateAppBlockBuilderAppBlockResult) => void): Request<AppStream.Types.AssociateAppBlockBuilderAppBlockResult, AWSError>;
+  /**
+   * Associates the specified app block builder with the specified app block.
+   */
+  associateAppBlockBuilderAppBlock(callback?: (err: AWSError, data: AppStream.Types.AssociateAppBlockBuilderAppBlockResult) => void): Request<AppStream.Types.AssociateAppBlockBuilderAppBlockResult, AWSError>;
+  /**
    * Associates the specified application with the specified fleet. This is only supported for Elastic fleets.
    */
   associateApplicationFleet(params: AppStream.Types.AssociateApplicationFleetRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateApplicationFleetResult) => void): Request<AppStream.Types.AssociateApplicationFleetResult, AWSError>;
@@ -68,6 +76,22 @@ declare class AppStream extends Service {
    * Creates an app block. App blocks are an Amazon AppStream 2.0 resource that stores the details about the virtual hard disk in an S3 bucket. It also stores the setup script with details about how to mount the virtual hard disk. The virtual hard disk includes the application binaries and other files necessary to launch your applications. Multiple applications can be assigned to a single app block. This is only supported for Elastic fleets.
    */
   createAppBlock(callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockResult) => void): Request<AppStream.Types.CreateAppBlockResult, AWSError>;
+  /**
+   * Creates an app block builder.
+   */
+  createAppBlockBuilder(params: AppStream.Types.CreateAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockBuilderResult) => void): Request<AppStream.Types.CreateAppBlockBuilderResult, AWSError>;
+  /**
+   * Creates an app block builder.
+   */
+  createAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockBuilderResult) => void): Request<AppStream.Types.CreateAppBlockBuilderResult, AWSError>;
+  /**
+   * Creates a URL to start a create app block builder streaming session.
+   */
+  createAppBlockBuilderStreamingURL(params: AppStream.Types.CreateAppBlockBuilderStreamingURLRequest, callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateAppBlockBuilderStreamingURLResult, AWSError>;
+  /**
+   * Creates a URL to start a create app block builder streaming session.
+   */
+  createAppBlockBuilderStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateAppBlockBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateAppBlockBuilderStreamingURLResult, AWSError>;
   /**
    * Creates an application. Applications are an Amazon AppStream 2.0 resource that stores the details about how to launch applications on Elastic fleet streaming instances. An application consists of the launch details, icon, and display name. Applications are associated with an app block that contains the application binaries and other files. The applications assigned to an Elastic fleet are the applications users can launch.  This is only supported for Elastic fleets.
    */
@@ -165,6 +189,14 @@ declare class AppStream extends Service {
    */
   deleteAppBlock(callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockResult) => void): Request<AppStream.Types.DeleteAppBlockResult, AWSError>;
   /**
+   * Deletes an app block builder. An app block builder can only be deleted when it has no association with an app block.
+   */
+  deleteAppBlockBuilder(params: AppStream.Types.DeleteAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockBuilderResult) => void): Request<AppStream.Types.DeleteAppBlockBuilderResult, AWSError>;
+  /**
+   * Deletes an app block builder. An app block builder can only be deleted when it has no association with an app block.
+   */
+  deleteAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.DeleteAppBlockBuilderResult) => void): Request<AppStream.Types.DeleteAppBlockBuilderResult, AWSError>;
+  /**
    * Deletes an application.
    */
   deleteApplication(params: AppStream.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteApplicationResult) => void): Request<AppStream.Types.DeleteApplicationResult, AWSError>;
@@ -244,6 +276,22 @@ declare class AppStream extends Service {
    * Deletes a user from the user pool.
    */
   deleteUser(callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app block builder associations.
+   */
+  describeAppBlockBuilderAppBlockAssociations(params: AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsResult) => void): Request<AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app block builder associations.
+   */
+  describeAppBlockBuilderAppBlockAssociations(callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsResult) => void): Request<AppStream.Types.DescribeAppBlockBuilderAppBlockAssociationsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app block builders.
+   */
+  describeAppBlockBuilders(params: AppStream.Types.DescribeAppBlockBuildersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlockBuildersResult) => void): Request<AppStream.Types.DescribeAppBlockBuildersResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more app block builders.
+   */
+  describeAppBlockBuilders(callback?: (err: AWSError, data: AppStream.Types.DescribeAppBlockBuildersResult) => void): Request<AppStream.Types.DescribeAppBlockBuildersResult, AWSError>;
   /**
    * Retrieves a list that describes one or more app blocks.
    */
@@ -365,6 +413,14 @@ declare class AppStream extends Service {
    */
   disableUser(callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
   /**
+   * Disassociates a specified app block builder from a specified app block.
+   */
+  disassociateAppBlockBuilderAppBlock(params: AppStream.Types.DisassociateAppBlockBuilderAppBlockRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateAppBlockBuilderAppBlockResult) => void): Request<AppStream.Types.DisassociateAppBlockBuilderAppBlockResult, AWSError>;
+  /**
+   * Disassociates a specified app block builder from a specified app block.
+   */
+  disassociateAppBlockBuilderAppBlock(callback?: (err: AWSError, data: AppStream.Types.DisassociateAppBlockBuilderAppBlockResult) => void): Request<AppStream.Types.DisassociateAppBlockBuilderAppBlockResult, AWSError>;
+  /**
    * Disassociates the specified application from the fleet.
    */
   disassociateApplicationFleet(params: AppStream.Types.DisassociateApplicationFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateApplicationFleetResult) => void): Request<AppStream.Types.DisassociateApplicationFleetResult, AWSError>;
@@ -437,6 +493,14 @@ declare class AppStream extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Starts an app block builder. An app block builder can only be started when it's associated with an app block. Starting an app block builder starts a new instance, which is equivalent to an elastic fleet instance with application builder assistance functionality.
+   */
+  startAppBlockBuilder(params: AppStream.Types.StartAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StartAppBlockBuilderResult) => void): Request<AppStream.Types.StartAppBlockBuilderResult, AWSError>;
+  /**
+   * Starts an app block builder. An app block builder can only be started when it's associated with an app block. Starting an app block builder starts a new instance, which is equivalent to an elastic fleet instance with application builder assistance functionality.
+   */
+  startAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.StartAppBlockBuilderResult) => void): Request<AppStream.Types.StartAppBlockBuilderResult, AWSError>;
+  /**
    * Starts the specified fleet.
    */
   startFleet(params: AppStream.Types.StartFleetRequest, callback?: (err: AWSError, data: AppStream.Types.StartFleetResult) => void): Request<AppStream.Types.StartFleetResult, AWSError>;
@@ -452,6 +516,14 @@ declare class AppStream extends Service {
    * Starts the specified image builder.
    */
   startImageBuilder(callback?: (err: AWSError, data: AppStream.Types.StartImageBuilderResult) => void): Request<AppStream.Types.StartImageBuilderResult, AWSError>;
+  /**
+   * Stops an app block builder. Stopping an app block builder terminates the instance, and the instance state is not persisted.
+   */
+  stopAppBlockBuilder(params: AppStream.Types.StopAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StopAppBlockBuilderResult) => void): Request<AppStream.Types.StopAppBlockBuilderResult, AWSError>;
+  /**
+   * Stops an app block builder. Stopping an app block builder terminates the instance, and the instance state is not persisted.
+   */
+  stopAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.StopAppBlockBuilderResult) => void): Request<AppStream.Types.StopAppBlockBuilderResult, AWSError>;
   /**
    * Stops the specified fleet.
    */
@@ -484,6 +556,14 @@ declare class AppStream extends Service {
    * Disassociates one or more specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
    */
   untagResource(callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an app block builder. If the app block builder is in the STARTING or STOPPING state, you can't update it. If the app block builder is in the RUNNING state, you can only update the DisplayName and Description. If the app block builder is in the STOPPED state, you can update any attribute except the Name.
+   */
+  updateAppBlockBuilder(params: AppStream.Types.UpdateAppBlockBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateAppBlockBuilderResult) => void): Request<AppStream.Types.UpdateAppBlockBuilderResult, AWSError>;
+  /**
+   * Updates an app block builder. If the app block builder is in the STARTING or STOPPING state, you can't update it. If the app block builder is in the RUNNING state, you can only update the DisplayName and Description. If the app block builder is in the STOPPED state, you can update any attribute except the Name.
+   */
+  updateAppBlockBuilder(callback?: (err: AWSError, data: AppStream.Types.UpdateAppBlockBuilderResult) => void): Request<AppStream.Types.UpdateAppBlockBuilderResult, AWSError>;
   /**
    * Updates the specified application.
    */
@@ -587,14 +667,116 @@ declare namespace AppStream {
      */
     SourceS3Location?: S3Location;
     /**
-     * The setup script details of the app block.
+     * The setup script details of the app block. This only applies to app blocks with PackagingType CUSTOM.
      */
-    SetupScriptDetails: ScriptDetails;
+    SetupScriptDetails?: ScriptDetails;
     /**
      * The created time of the app block.
      */
     CreatedTime?: Timestamp;
+    /**
+     * The post setup script details of the app block. This only applies to app blocks with PackagingType APPSTREAM2.
+     */
+    PostSetupScriptDetails?: ScriptDetails;
+    /**
+     * The packaging type of the app block.
+     */
+    PackagingType?: PackagingType;
+    /**
+     * The state of the app block. An app block with AppStream 2.0 packaging will be in the INACTIVE state if no application package (VHD) is assigned to it. After an application package (VHD) is created by an app block builder for an app block, it becomes ACTIVE.  Custom app blocks are always in the ACTIVE state and no action is required to use them.
+     */
+    State?: AppBlockState;
+    /**
+     * The errors of the app block.
+     */
+    AppBlockErrors?: ErrorDetailsList;
   }
+  export interface AppBlockBuilder {
+    /**
+     * The ARN of the app block builder.
+     */
+    Arn: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    Name: String;
+    /**
+     * The display name of the app block builder.
+     */
+    DisplayName?: String;
+    /**
+     * The description of the app block builder.
+     */
+    Description?: String;
+    /**
+     * The platform of the app block builder.  WINDOWS_SERVER_2019 is the only valid value.
+     */
+    Platform: AppBlockBuilderPlatformType;
+    /**
+     * The instance type of the app block builder.
+     */
+    InstanceType: String;
+    /**
+     * Indicates whether default internet access is enabled for the app block builder.
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * The ARN of the IAM role that is applied to the app block builder.
+     */
+    IamRoleArn?: Arn;
+    /**
+     * The VPC configuration for the app block builder.
+     */
+    VpcConfig: VpcConfig;
+    /**
+     * The state of the app block builder.
+     */
+    State: AppBlockBuilderState;
+    /**
+     * The creation time of the app block builder.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The app block builder errors.
+     */
+    AppBlockBuilderErrors?: ResourceErrors;
+    /**
+     * The state change reason.
+     */
+    StateChangeReason?: AppBlockBuilderStateChangeReason;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
+  }
+  export interface AppBlockBuilderAppBlockAssociation {
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName: Name;
+  }
+  export type AppBlockBuilderAppBlockAssociationsList = AppBlockBuilderAppBlockAssociation[];
+  export type AppBlockBuilderAttribute = "IAM_ROLE_ARN"|"ACCESS_ENDPOINTS"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|string;
+  export type AppBlockBuilderAttributes = AppBlockBuilderAttribute[];
+  export type AppBlockBuilderList = AppBlockBuilder[];
+  export type AppBlockBuilderPlatformType = "WINDOWS_SERVER_2019"|string;
+  export type AppBlockBuilderState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|string;
+  export interface AppBlockBuilderStateChangeReason {
+    /**
+     * The state change reason code.
+     */
+    Code?: AppBlockBuilderStateChangeReasonCode;
+    /**
+     * The state change reason message.
+     */
+    Message?: String;
+  }
+  export type AppBlockBuilderStateChangeReasonCode = "INTERNAL_ERROR"|string;
+  export type AppBlockState = "INACTIVE"|"ACTIVE"|string;
   export type AppBlocks = AppBlock[];
   export type AppVisibility = "ALL"|"ASSOCIATED"|string;
   export interface Application {
@@ -700,6 +882,22 @@ declare namespace AppStream {
   export type AppstreamAgentVersion = string;
   export type Arn = string;
   export type ArnList = Arn[];
+  export interface AssociateAppBlockBuilderAppBlockRequest {
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName: Name;
+  }
+  export interface AssociateAppBlockBuilderAppBlockResult {
+    /**
+     * The list of app block builders associated with app blocks.
+     */
+    AppBlockBuilderAppBlockAssociation?: AppBlockBuilderAppBlockAssociation;
+  }
   export interface AssociateApplicationFleetRequest {
     /**
      * The name of the fleet.
@@ -832,6 +1030,71 @@ declare namespace AppStream {
      */
     DestinationImageName?: Name;
   }
+  export interface CreateAppBlockBuilderRequest {
+    /**
+     * The unique name for the app block builder.
+     */
+    Name: Name;
+    /**
+     * The description of the app block builder.
+     */
+    Description?: Description;
+    /**
+     * The display name of the app block builder.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The tags to associate with the app block builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ For more information, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
+     */
+    Tags?: Tags;
+    /**
+     * The platform of the app block builder.  WINDOWS_SERVER_2019 is the only valid value.
+     */
+    Platform: AppBlockBuilderPlatformType;
+    /**
+     * The instance type to use when launching the app block builder. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
+     */
+    InstanceType: String;
+    /**
+     * The VPC configuration for the app block builder. App block builders require that you specify at least two subnets in different availability zones.
+     */
+    VpcConfig: VpcConfig;
+    /**
+     * Enables or disables default internet access for the app block builder.
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To assume a role, the app block builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
+  }
+  export interface CreateAppBlockBuilderResult {
+    AppBlockBuilder?: AppBlockBuilder;
+  }
+  export interface CreateAppBlockBuilderStreamingURLRequest {
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName: Name;
+    /**
+     * The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds. The default is 3600 seconds.
+     */
+    Validity?: Long;
+  }
+  export interface CreateAppBlockBuilderStreamingURLResult {
+    /**
+     * The URL to start the streaming session.
+     */
+    StreamingURL?: String;
+    /**
+     * The elapsed time, in seconds after the Unix epoch, when this URL expires.
+     */
+    Expires?: Timestamp;
+  }
   export interface CreateAppBlockRequest {
     /**
      * The name of the app block.
@@ -850,13 +1113,21 @@ declare namespace AppStream {
      */
     SourceS3Location: S3Location;
     /**
-     * The setup script details of the app block.
+     * The setup script details of the app block. This must be provided for the CUSTOM PackagingType.
      */
-    SetupScriptDetails: ScriptDetails;
+    SetupScriptDetails?: ScriptDetails;
     /**
      * The tags assigned to the app block.
      */
     Tags?: Tags;
+    /**
+     * The post setup script details of the app block. This can only be provided for the APPSTREAM2 PackagingType.
+     */
+    PostSetupScriptDetails?: ScriptDetails;
+    /**
+     * The packaging type of the app block.
+     */
+    PackagingType?: PackagingType;
   }
   export interface CreateAppBlockResult {
     /**
@@ -973,7 +1244,7 @@ declare namespace AppStream {
     /**
      * The name of the image used to create the fleet.
      */
-    ImageName?: String;
+    ImageName?: Name;
     /**
      * The ARN of the public, private, or shared image to use.
      */
@@ -1298,6 +1569,14 @@ declare namespace AppStream {
   }
   export interface CreateUserResult {
   }
+  export interface DeleteAppBlockBuilderRequest {
+    /**
+     * The name of the app block builder.
+     */
+    Name: Name;
+  }
+  export interface DeleteAppBlockBuilderResult {
+  }
   export interface DeleteAppBlockRequest {
     /**
      * The name of the app block.
@@ -1401,6 +1680,58 @@ declare namespace AppStream {
     AuthenticationType: AuthenticationType;
   }
   export interface DeleteUserResult {
+  }
+  export interface DescribeAppBlockBuilderAppBlockAssociationsRequest {
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn?: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName?: Name;
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeAppBlockBuilderAppBlockAssociationsResult {
+    /**
+     * This list of app block builders associated with app blocks.
+     */
+    AppBlockBuilderAppBlockAssociations?: AppBlockBuilderAppBlockAssociationsList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeAppBlockBuildersRequest {
+    /**
+     * The names of the app block builders.
+     */
+    Names?: StringList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
+    /**
+     * The maximum size of each page of results. The maximum value is 25.
+     */
+    MaxResults?: Integer;
+  }
+  export interface DescribeAppBlockBuildersResult {
+    /**
+     * The list that describes one or more app block builders.
+     */
+    AppBlockBuilders?: AppBlockBuilderList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation.
+     */
+    NextToken?: String;
   }
   export interface DescribeAppBlocksRequest {
     /**
@@ -1809,6 +2140,18 @@ declare namespace AppStream {
   }
   export interface DisableUserResult {
   }
+  export interface DisassociateAppBlockBuilderAppBlockRequest {
+    /**
+     * The ARN of the app block.
+     */
+    AppBlockArn: Arn;
+    /**
+     * The name of the app block builder.
+     */
+    AppBlockBuilderName: Name;
+  }
+  export interface DisassociateAppBlockBuilderAppBlockResult {
+  }
   export interface DisassociateApplicationFleetRequest {
     /**
      * The name of the fleet.
@@ -1925,6 +2268,17 @@ declare namespace AppStream {
   }
   export type EntitlementAttributeList = EntitlementAttribute[];
   export type EntitlementList = Entitlement[];
+  export interface ErrorDetails {
+    /**
+     * The error code.
+     */
+    ErrorCode?: String;
+    /**
+     * The error message.
+     */
+    ErrorMessage?: String;
+  }
+  export type ErrorDetailsList = ErrorDetails[];
   export interface ExpireSessionRequest {
     /**
      * The identifier of the streaming session.
@@ -2335,6 +2689,7 @@ declare namespace AppStream {
   }
   export type OrganizationalUnitDistinguishedName = string;
   export type OrganizationalUnitDistinguishedNamesList = OrganizationalUnitDistinguishedName[];
+  export type PackagingType = "CUSTOM"|"APPSTREAM2"|string;
   export type Permission = "ENABLED"|"DISABLED"|string;
   export type PlatformType = "WINDOWS"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"AMAZON_LINUX2"|string;
   export type Platforms = PlatformType[];
@@ -2365,9 +2720,9 @@ declare namespace AppStream {
      */
     S3Bucket: S3Bucket;
     /**
-     * The S3 key of the S3 object.
+     * The S3 key of the S3 object. This is required when used for the following:   IconS3Location (Actions: CreateApplication and UpdateApplication)   SessionScriptS3Location (Actions: CreateFleet and UpdateFleet)   ScriptDetails (Actions: CreateAppBlock)   SourceS3Location when creating an app block with CUSTOM PackagingType (Actions: CreateAppBlock)   SourceS3Location when creating an app block with APPSTREAM2 PackagingType, and using an existing application package (VHD file). In this case, S3Key refers to the VHD file. If a new application package is required, then S3Key is not required. (Actions: CreateAppBlock)  
      */
-    S3Key: S3Key;
+    S3Key?: S3Key;
   }
   export interface ScriptDetails {
     /**
@@ -2528,6 +2883,15 @@ declare namespace AppStream {
   export type StackErrorCode = "STORAGE_CONNECTOR_ERROR"|"INTERNAL_SERVICE_ERROR"|string;
   export type StackErrors = StackError[];
   export type StackList = Stack[];
+  export interface StartAppBlockBuilderRequest {
+    /**
+     * The name of the app block builder.
+     */
+    Name: Name;
+  }
+  export interface StartAppBlockBuilderResult {
+    AppBlockBuilder?: AppBlockBuilder;
+  }
   export interface StartFleetRequest {
     /**
      * The name of the fleet.
@@ -2551,6 +2915,15 @@ declare namespace AppStream {
      * Information about the image builder.
      */
     ImageBuilder?: ImageBuilder;
+  }
+  export interface StopAppBlockBuilderRequest {
+    /**
+     * The name of the app block builder.
+     */
+    Name: Name;
+  }
+  export interface StopAppBlockBuilderResult {
+    AppBlockBuilder?: AppBlockBuilder;
   }
   export interface StopFleetRequest {
     /**
@@ -2627,6 +3000,51 @@ declare namespace AppStream {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateAppBlockBuilderRequest {
+    /**
+     * The unique name for the app block builder.
+     */
+    Name: Name;
+    /**
+     * The description of the app block builder.
+     */
+    Description?: Description;
+    /**
+     * The display name of the app block builder.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The platform of the app block builder.  WINDOWS_SERVER_2019 is the only valid value.
+     */
+    Platform?: PlatformType;
+    /**
+     * The instance type to use when launching the app block builder. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
+     */
+    InstanceType?: String;
+    /**
+     * The VPC configuration for the app block builder. App block builders require that you specify at least two subnets in different availability zones.
+     */
+    VpcConfig?: VpcConfig;
+    /**
+     * Enables or disables default internet access for the app block builder.
+     */
+    EnableDefaultInternetAccess?: BooleanObject;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To assume a role, the app block builder calls the AWS Security Token Service (STS) AssumeRole API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the appstream_machine_role credential profile on the instance. For more information, see Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances in the Amazon AppStream 2.0 Administration Guide.
+     */
+    IamRoleArn?: Arn;
+    /**
+     * The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+     */
+    AccessEndpoints?: AccessEndpointList;
+    /**
+     * The attributes to delete from the app block builder.
+     */
+    AttributesToDelete?: AppBlockBuilderAttributes;
+  }
+  export interface UpdateAppBlockBuilderResult {
+    AppBlockBuilder?: AppBlockBuilder;
   }
   export interface UpdateApplicationRequest {
     /**
@@ -2747,7 +3165,7 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 360000.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 432000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**

@@ -236,11 +236,11 @@ declare class CleanRooms extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CleanRooms.Types.ListTagsForResourceOutput) => void): Request<CleanRooms.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Creates a protected query that is started by AWS Clean Rooms.
+   * Creates a protected query that is started by Clean Rooms .
    */
   startProtectedQuery(params: CleanRooms.Types.StartProtectedQueryInput, callback?: (err: AWSError, data: CleanRooms.Types.StartProtectedQueryOutput) => void): Request<CleanRooms.Types.StartProtectedQueryOutput, AWSError>;
   /**
-   * Creates a protected query that is started by AWS Clean Rooms.
+   * Creates a protected query that is started by Clean Rooms .
    */
   startProtectedQuery(callback?: (err: AWSError, data: CleanRooms.Types.StartProtectedQueryOutput) => void): Request<CleanRooms.Types.StartProtectedQueryOutput, AWSError>;
   /**
@@ -377,9 +377,13 @@ declare namespace CleanRooms {
      */
     joinColumns: AnalysisRuleColumnList;
     /**
-     * Control that requires member who runs query to do a join with their configured table and/or other configured table in query
+     * Control that requires member who runs query to do a join with their configured table and/or other configured table in query.
      */
     joinRequired?: JoinRequiredOption;
+    /**
+     * Which logical operators (if any) are to be used in an INNER JOIN match condition. Default is AND.
+     */
+    allowedJoinOperators?: JoinOperatorsList;
     /**
      * The columns that query runners are allowed to select, group by, or filter by.
      */
@@ -398,9 +402,13 @@ declare namespace CleanRooms {
   export type AnalysisRuleColumnName = string;
   export interface AnalysisRuleList {
     /**
-     * Columns that can be used to join a configured table with the table of the member who can query and another members' configured tables.
+     * Columns that can be used to join a configured table with the table of the member who can query and other members' configured tables.
      */
     joinColumns: AnalysisRuleListJoinColumnsList;
+    /**
+     * Which logical operators (if any) are to be used in an INNER JOIN match condition. Default is AND.
+     */
+    allowedJoinOperators?: JoinOperatorsList;
     /**
      * Columns that can be listed in the output.
      */
@@ -480,7 +488,7 @@ declare namespace CleanRooms {
      */
     description?: CollaborationDescription;
     /**
-     * The identifier used to reference members of the collaboration. Currently only supports AWS account ID.
+     * The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
      */
     creatorAccountId: AccountId;
     /**
@@ -535,7 +543,7 @@ declare namespace CleanRooms {
      */
     name: CollaborationName;
     /**
-     * The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+     * The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
      */
     creatorAccountId: AccountId;
     /**
@@ -595,7 +603,7 @@ declare namespace CleanRooms {
      */
     description?: TableDescription;
     /**
-     * The AWS Glue table that this configured table represents.
+     * The Glue table that this configured table represents.
      */
     tableReference: TableReference;
     /**
@@ -615,7 +623,7 @@ declare namespace CleanRooms {
      */
     analysisMethod: AnalysisMethod;
     /**
-     * The columns within the underlying AWS Glue table that can be utilized within collaborations.
+     * The columns within the underlying Glue table that can be utilized within collaborations.
      */
     allowedColumns: AllowedColumnList;
   }
@@ -881,7 +889,7 @@ declare namespace CleanRooms {
      */
     description?: TableDescription;
     /**
-     * A reference to the AWS Glue table being configured.
+     * A reference to the Glue table being configured.
      */
     tableReference: TableReference;
     /**
@@ -1123,17 +1131,20 @@ declare namespace CleanRooms {
      */
     schema: Schema;
   }
-  export type GlueResourceName = string;
+  export type GlueDatabaseName = string;
+  export type GlueTableName = string;
   export interface GlueTableReference {
     /**
-     * The name of the AWS Glue table.
+     * The name of the Glue table.
      */
-    tableName: GlueResourceName;
+    tableName: GlueTableName;
     /**
-     * The name of the database the AWS Glue table belongs to.
+     * The name of the database the Glue table belongs to.
      */
-    databaseName: GlueResourceName;
+    databaseName: GlueDatabaseName;
   }
+  export type JoinOperator = "OR"|"AND"|string;
+  export type JoinOperatorsList = JoinOperator[];
   export type JoinRequiredOption = "QUERY_RUNNER"|string;
   export type KeyPrefix = string;
   export interface ListCollaborationsInput {
@@ -1327,7 +1338,7 @@ declare namespace CleanRooms {
   export type MemberList = MemberSpecification[];
   export interface MemberSpecification {
     /**
-     * The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+     * The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
      */
     accountId: AccountId;
     /**
@@ -1342,7 +1353,7 @@ declare namespace CleanRooms {
   export type MemberStatus = "INVITED"|"ACTIVE"|"LEFT"|"REMOVED"|string;
   export interface MemberSummary {
     /**
-     * The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+     * The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
      */
     accountId: AccountId;
     /**
@@ -1393,7 +1404,7 @@ declare namespace CleanRooms {
      */
     collaborationId: UUID;
     /**
-     * The identifier used to reference members of the collaboration. Currently only supports AWS account ID.
+     * The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
      */
     collaborationCreatorAccountId: AccountId;
     /**
@@ -1447,7 +1458,7 @@ declare namespace CleanRooms {
      */
     collaborationId: CollaborationIdentifier;
     /**
-     * The identifier of the AWS principal that created the collaboration. Currently only supports AWS account ID.
+     * The identifier of the Amazon Web Services principal that created the collaboration. Currently only supports Amazon Web Services account ID.
      */
     collaborationCreatorAccountId: AccountId;
     /**
@@ -1579,7 +1590,7 @@ declare namespace CleanRooms {
     /**
      * The query string to be submitted.
      */
-    queryString: ProtectedQuerySQLParametersQueryStringString;
+    queryString?: ProtectedQuerySQLParametersQueryStringString;
   }
   export type ProtectedQuerySQLParametersQueryStringString = string;
   export interface ProtectedQueryStatistics {
@@ -1635,7 +1646,7 @@ declare namespace CleanRooms {
      */
     analysisMethod?: AnalysisMethod;
     /**
-     * The unique account ID for the AWS account that owns the schema.
+     * The unique account ID for the Amazon Web Services account that owns the schema.
      */
     creatorAccountId: AccountId;
     /**
@@ -1678,7 +1689,7 @@ declare namespace CleanRooms {
      */
     type: SchemaType;
     /**
-     * The unique account ID for the AWS account that owns the schema.
+     * The unique account ID for the Amazon Web Services account that owns the schema.
      */
     creatorAccountId: AccountId;
     /**
@@ -1738,7 +1749,7 @@ declare namespace CleanRooms {
   export type TableDescription = string;
   export interface TableReference {
     /**
-     * If present, a reference to the AWS Glue table referred to by this table reference.
+     * If present, a reference to the Glue table referred to by this table reference.
      */
     glue?: GlueTableReference;
   }

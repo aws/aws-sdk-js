@@ -3531,6 +3531,10 @@ declare namespace Glue {
      * Specifies Delta data store targets.
      */
     DeltaTargets?: DeltaTargetList;
+    /**
+     * Specifies Apache Iceberg data store targets.
+     */
+    IcebergTargets?: IcebergTargetList;
   }
   export interface CrawlsFilter {
     /**
@@ -8057,6 +8061,25 @@ declare namespace Glue {
   export type GrokPattern = string;
   export type HashString = string;
   export type HudiTargetCompressionType = "gzip"|"lzo"|"uncompressed"|"snappy"|string;
+  export interface IcebergTarget {
+    /**
+     * One or more Amazon S3 paths that contains Iceberg metadata folders as s3://bucket/prefix.
+     */
+    Paths?: PathList;
+    /**
+     * The name of the connection to use to connect to the Iceberg target.
+     */
+    ConnectionName?: ConnectionName;
+    /**
+     * A list of glob patterns used to exclude from the crawl. For more information, see Catalog Tables with a Crawler.
+     */
+    Exclusions?: PathList;
+    /**
+     * The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler run time.
+     */
+    MaximumTraversalDepth?: NullableInteger;
+  }
+  export type IcebergTargetList = IcebergTarget[];
   export type IdString = string;
   export interface ImportCatalogToGlueRequest {
     /**

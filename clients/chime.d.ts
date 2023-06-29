@@ -20,19 +20,19 @@ declare class Chime extends Service {
    */
   associatePhoneNumberWithUser(callback?: (err: AWSError, data: Chime.Types.AssociatePhoneNumberWithUserResponse) => void): Request<Chime.Types.AssociatePhoneNumberWithUserResponse, AWSError>;
   /**
-   * Associates phone numbers with the specified Amazon Chime Voice Connector.
+   * Associates phone numbers with the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, AssociatePhoneNumbersWithVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   associatePhoneNumbersWithVoiceConnector(params: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorRequest, callback?: (err: AWSError, data: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorResponse) => void): Request<Chime.Types.AssociatePhoneNumbersWithVoiceConnectorResponse, AWSError>;
   /**
-   * Associates phone numbers with the specified Amazon Chime Voice Connector.
+   * Associates phone numbers with the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, AssociatePhoneNumbersWithVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   associatePhoneNumbersWithVoiceConnector(callback?: (err: AWSError, data: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorResponse) => void): Request<Chime.Types.AssociatePhoneNumbersWithVoiceConnectorResponse, AWSError>;
   /**
-   * Associates phone numbers with the specified Amazon Chime Voice Connector group.
+   * Associates phone numbers with the specified Amazon Chime Voice Connector group.   This API is is no longer supported and will not be updated. We recommend using the latest version, AssociatePhoneNumbersWithVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   associatePhoneNumbersWithVoiceConnectorGroup(params: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupRequest, callback?: (err: AWSError, data: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse) => void): Request<Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Associates phone numbers with the specified Amazon Chime Voice Connector group.
+   * Associates phone numbers with the specified Amazon Chime Voice Connector group.   This API is is no longer supported and will not be updated. We recommend using the latest version, AssociatePhoneNumbersWithVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   associatePhoneNumbersWithVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse) => void): Request<Chime.Types.AssociatePhoneNumbersWithVoiceConnectorGroupResponse, AWSError>;
   /**
@@ -44,19 +44,19 @@ declare class Chime extends Service {
    */
   associateSigninDelegateGroupsWithAccount(callback?: (err: AWSError, data: Chime.Types.AssociateSigninDelegateGroupsWithAccountResponse) => void): Request<Chime.Types.AssociateSigninDelegateGroupsWithAccountResponse, AWSError>;
   /**
-   *  Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide. 
+   * Creates up to 100 new attendees for an active Amazon Chime SDK meeting.   This API is is no longer supported and will not be updated. We recommend using the latest version, BatchCreateAttendee, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide.  For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide. 
    */
   batchCreateAttendee(params: Chime.Types.BatchCreateAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
-   *  Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide. 
+   * Creates up to 100 new attendees for an active Amazon Chime SDK meeting.   This API is is no longer supported and will not be updated. We recommend using the latest version, BatchCreateAttendee, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide.  For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide. 
    */
   batchCreateAttendee(callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
-   * Adds a specified number of users to a channel.
+   * Adds a specified number of users to a channel.   This API is is no longer supported and will not be updated. We recommend using the latest version, BatchCreateChannelMembership, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   batchCreateChannelMembership(params: Chime.Types.BatchCreateChannelMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateChannelMembershipResponse) => void): Request<Chime.Types.BatchCreateChannelMembershipResponse, AWSError>;
   /**
-   * Adds a specified number of users to a channel.
+   * Adds a specified number of users to a channel.   This API is is no longer supported and will not be updated. We recommend using the latest version, BatchCreateChannelMembership, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   batchCreateChannelMembership(callback?: (err: AWSError, data: Chime.Types.BatchCreateChannelMembershipResponse) => void): Request<Chime.Types.BatchCreateChannelMembershipResponse, AWSError>;
   /**
@@ -76,19 +76,19 @@ declare class Chime extends Service {
    */
   batchDeletePhoneNumber(callback?: (err: AWSError, data: Chime.Types.BatchDeletePhoneNumberResponse) => void): Request<Chime.Types.BatchDeletePhoneNumberResponse, AWSError>;
   /**
-   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action. 
+   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
    */
   batchSuspendUser(params: Chime.Types.BatchSuspendUserRequest, callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
-   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action. 
+   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
    */
   batchSuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
-   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see  Managing Your Amazon Chime Accounts  in the account types, in the Amazon Chime Administration Guide.   Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored. 
+   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see  Managing Your Amazon Chime Accounts  in the account types, in the Amazon Chime Administration Guide.  Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored.
    */
   batchUnsuspendUser(params: Chime.Types.BatchUnsuspendUserRequest, callback?: (err: AWSError, data: Chime.Types.BatchUnsuspendUserResponse) => void): Request<Chime.Types.BatchUnsuspendUserResponse, AWSError>;
   /**
-   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see  Managing Your Amazon Chime Accounts  in the account types, in the Amazon Chime Administration Guide.   Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored. 
+   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see  Managing Your Amazon Chime Accounts  in the account types, in the Amazon Chime Administration Guide.  Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored.
    */
   batchUnsuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchUnsuspendUserResponse) => void): Request<Chime.Types.BatchUnsuspendUserResponse, AWSError>;
   /**
@@ -116,35 +116,35 @@ declare class Chime extends Service {
    */
   createAccount(callback?: (err: AWSError, data: Chime.Types.CreateAccountResponse) => void): Request<Chime.Types.CreateAccountResponse, AWSError>;
   /**
-   * Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only SDK messaging customers use this API. CreateAppInstance supports idempotency behavior as described in the AWS API Standard.
+   * Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only SDK messaging customers use this API. CreateAppInstance supports idempotency behavior as described in the AWS API Standard.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateAppInstance, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createAppInstance(params: Chime.Types.CreateAppInstanceRequest, callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceResponse) => void): Request<Chime.Types.CreateAppInstanceResponse, AWSError>;
   /**
-   * Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only SDK messaging customers use this API. CreateAppInstance supports idempotency behavior as described in the AWS API Standard.
+   * Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only SDK messaging customers use this API. CreateAppInstance supports idempotency behavior as described in the AWS API Standard.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateAppInstance, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createAppInstance(callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceResponse) => void): Request<Chime.Types.CreateAppInstanceResponse, AWSError>;
   /**
-   * Promotes an AppInstanceUser to an AppInstanceAdmin. The promoted user can perform the following actions.     ChannelModerator actions across all channels in the AppInstance.    DeleteChannelMessage actions.   Only an AppInstanceUser can be promoted to an AppInstanceAdmin role.
+   * Promotes an AppInstanceUser to an AppInstanceAdmin. The promoted user can perform the following actions.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateAppInstanceAdmin, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide.     ChannelModerator actions across all channels in the AppInstance.    DeleteChannelMessage actions.   Only an AppInstanceUser can be promoted to an AppInstanceAdmin role.
    */
   createAppInstanceAdmin(params: Chime.Types.CreateAppInstanceAdminRequest, callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceAdminResponse) => void): Request<Chime.Types.CreateAppInstanceAdminResponse, AWSError>;
   /**
-   * Promotes an AppInstanceUser to an AppInstanceAdmin. The promoted user can perform the following actions.     ChannelModerator actions across all channels in the AppInstance.    DeleteChannelMessage actions.   Only an AppInstanceUser can be promoted to an AppInstanceAdmin role.
+   * Promotes an AppInstanceUser to an AppInstanceAdmin. The promoted user can perform the following actions.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateAppInstanceAdmin, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide.     ChannelModerator actions across all channels in the AppInstance.    DeleteChannelMessage actions.   Only an AppInstanceUser can be promoted to an AppInstanceAdmin role.
    */
   createAppInstanceAdmin(callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceAdminResponse) => void): Request<Chime.Types.CreateAppInstanceAdminResponse, AWSError>;
   /**
-   * Creates a user under an Amazon Chime AppInstance. The request consists of a unique appInstanceUserId and Name for that user.
+   * Creates a user under an Amazon Chime AppInstance. The request consists of a unique appInstanceUserId and Name for that user.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createAppInstanceUser(params: Chime.Types.CreateAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceUserResponse) => void): Request<Chime.Types.CreateAppInstanceUserResponse, AWSError>;
   /**
-   * Creates a user under an Amazon Chime AppInstance. The request consists of a unique appInstanceUserId and Name for that user.
+   * Creates a user under an Amazon Chime AppInstance. The request consists of a unique appInstanceUserId and Name for that user.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceUserResponse) => void): Request<Chime.Types.CreateAppInstanceUserResponse, AWSError>;
   /**
-   *  Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide. 
+   *  Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateAttendee, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createAttendee(params: Chime.Types.CreateAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.CreateAttendeeResponse) => void): Request<Chime.Types.CreateAttendeeResponse, AWSError>;
   /**
-   *  Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide. 
+   *  Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateAttendee, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createAttendee(callback?: (err: AWSError, data: Chime.Types.CreateAttendeeResponse) => void): Request<Chime.Types.CreateAttendeeResponse, AWSError>;
   /**
@@ -156,67 +156,67 @@ declare class Chime extends Service {
    */
   createBot(callback?: (err: AWSError, data: Chime.Types.CreateBotResponse) => void): Request<Chime.Types.CreateBotResponse, AWSError>;
   /**
-   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateChannel, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createChannel(params: Chime.Types.CreateChannelRequest, callback?: (err: AWSError, data: Chime.Types.CreateChannelResponse) => void): Request<Chime.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateChannel, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createChannel(callback?: (err: AWSError, data: Chime.Types.CreateChannelResponse) => void): Request<Chime.Types.CreateChannelResponse, AWSError>;
   /**
-   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateChannelBan, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createChannelBan(params: Chime.Types.CreateChannelBanRequest, callback?: (err: AWSError, data: Chime.Types.CreateChannelBanResponse) => void): Request<Chime.Types.CreateChannelBanResponse, AWSError>;
   /**
-   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateChannelBan, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createChannelBan(callback?: (err: AWSError, data: Chime.Types.CreateChannelBanResponse) => void): Request<Chime.Types.CreateChannelBanResponse, AWSError>;
   /**
-   * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateChannelMembership, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createChannelMembership(params: Chime.Types.CreateChannelMembershipRequest, callback?: (err: AWSError, data: Chime.Types.CreateChannelMembershipResponse) => void): Request<Chime.Types.CreateChannelMembershipResponse, AWSError>;
   /**
-   * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateChannelMembership, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createChannelMembership(callback?: (err: AWSError, data: Chime.Types.CreateChannelMembershipResponse) => void): Request<Chime.Types.CreateChannelMembershipResponse, AWSError>;
   /**
-   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateChannelModerator, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createChannelModerator(params: Chime.Types.CreateChannelModeratorRequest, callback?: (err: AWSError, data: Chime.Types.CreateChannelModeratorResponse) => void): Request<Chime.Types.CreateChannelModeratorResponse, AWSError>;
   /**
-   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateChannelModerator, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createChannelModerator(callback?: (err: AWSError, data: Chime.Types.CreateChannelModeratorResponse) => void): Request<Chime.Types.CreateChannelModeratorResponse, AWSError>;
   /**
-   * Creates a media capture pipeline.
+   * Creates a media capture pipeline.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateMediaCapturePipeline, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createMediaCapturePipeline(params: Chime.Types.CreateMediaCapturePipelineRequest, callback?: (err: AWSError, data: Chime.Types.CreateMediaCapturePipelineResponse) => void): Request<Chime.Types.CreateMediaCapturePipelineResponse, AWSError>;
   /**
-   * Creates a media capture pipeline.
+   * Creates a media capture pipeline.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateMediaCapturePipeline, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createMediaCapturePipeline(callback?: (err: AWSError, data: Chime.Types.CreateMediaCapturePipelineResponse) => void): Request<Chime.Types.CreateMediaCapturePipelineResponse, AWSError>;
   /**
-   *  Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime SDK Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
+   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime SDK Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateMeeting, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createMeeting(params: Chime.Types.CreateMeetingRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
   /**
-   *  Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime SDK Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
+   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime SDK Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateMeeting, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createMeeting(callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
   /**
-   * Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer. To play welcome audio or implement an interactive voice response (IVR), use the CreateSipMediaApplicationCall action with the corresponding SIP media application ID.
+   * Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer. To play welcome audio or implement an interactive voice response (IVR), use the CreateSipMediaApplicationCall action with the corresponding SIP media application ID.   This API is is not available in a dedicated namespace.  
    */
   createMeetingDialOut(params: Chime.Types.CreateMeetingDialOutRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingDialOutResponse) => void): Request<Chime.Types.CreateMeetingDialOutResponse, AWSError>;
   /**
-   * Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer. To play welcome audio or implement an interactive voice response (IVR), use the CreateSipMediaApplicationCall action with the corresponding SIP media application ID.
+   * Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer. To play welcome audio or implement an interactive voice response (IVR), use the CreateSipMediaApplicationCall action with the corresponding SIP media application ID.   This API is is not available in a dedicated namespace.  
    */
   createMeetingDialOut(callback?: (err: AWSError, data: Chime.Types.CreateMeetingDialOutResponse) => void): Request<Chime.Types.CreateMeetingDialOutResponse, AWSError>;
   /**
-   *  Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime SDK Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
+   *  Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime SDK Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide .    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateMeetingWithAttendees, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createMeetingWithAttendees(params: Chime.Types.CreateMeetingWithAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingWithAttendeesResponse) => void): Request<Chime.Types.CreateMeetingWithAttendeesResponse, AWSError>;
   /**
-   *  Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime SDK Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
+   *  Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime SDK Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide .    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateMeetingWithAttendees, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createMeetingWithAttendees(callback?: (err: AWSError, data: Chime.Types.CreateMeetingWithAttendeesResponse) => void): Request<Chime.Types.CreateMeetingWithAttendeesResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class Chime extends Service {
    */
   createPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
-   * Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.
+   * Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateProxySession, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createProxySession(params: Chime.Types.CreateProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.CreateProxySessionResponse) => void): Request<Chime.Types.CreateProxySessionResponse, AWSError>;
   /**
-   * Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.
+   * Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateProxySession, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createProxySession(callback?: (err: AWSError, data: Chime.Types.CreateProxySessionResponse) => void): Request<Chime.Types.CreateProxySessionResponse, AWSError>;
   /**
@@ -252,27 +252,27 @@ declare class Chime extends Service {
    */
   createRoomMembership(callback?: (err: AWSError, data: Chime.Types.CreateRoomMembershipResponse) => void): Request<Chime.Types.CreateRoomMembershipResponse, AWSError>;
   /**
-   * Creates a SIP media application.
+   * Creates a SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateSipMediaApplication, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createSipMediaApplication(params: Chime.Types.CreateSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationResponse) => void): Request<Chime.Types.CreateSipMediaApplicationResponse, AWSError>;
   /**
-   * Creates a SIP media application.
+   * Creates a SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateSipMediaApplication, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationResponse) => void): Request<Chime.Types.CreateSipMediaApplicationResponse, AWSError>;
   /**
-   * Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified sipMediaApplicationId.
+   * Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified sipMediaApplicationId.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateSipMediaApplicationCall, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createSipMediaApplicationCall(params: Chime.Types.CreateSipMediaApplicationCallRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationCallResponse) => void): Request<Chime.Types.CreateSipMediaApplicationCallResponse, AWSError>;
   /**
-   * Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified sipMediaApplicationId.
+   * Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified sipMediaApplicationId.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateSipMediaApplicationCall, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createSipMediaApplicationCall(callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationCallResponse) => void): Request<Chime.Types.CreateSipMediaApplicationCallResponse, AWSError>;
   /**
-   * Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.
+   * Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateSipRule, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createSipRule(params: Chime.Types.CreateSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipRuleResponse) => void): Request<Chime.Types.CreateSipRuleResponse, AWSError>;
   /**
-   * Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.
+   * Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateSipRule, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createSipRule(callback?: (err: AWSError, data: Chime.Types.CreateSipRuleResponse) => void): Request<Chime.Types.CreateSipRuleResponse, AWSError>;
   /**
@@ -284,19 +284,19 @@ declare class Chime extends Service {
    */
   createUser(callback?: (err: AWSError, data: Chime.Types.CreateUserResponse) => void): Request<Chime.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.  Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked. 
+   * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region. Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createVoiceConnector(params: Chime.Types.CreateVoiceConnectorRequest, callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorResponse) => void): Request<Chime.Types.CreateVoiceConnectorResponse, AWSError>;
   /**
-   * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.  Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked. 
+   * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region. Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.    This API is is no longer supported and will not be updated. We recommend using the latest version, CreateVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createVoiceConnector(callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorResponse) => void): Request<Chime.Types.CreateVoiceConnectorResponse, AWSError>;
   /**
-   * Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including VoiceConnectorItems in the request. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.
+   * Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including VoiceConnectorItems in the request. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createVoiceConnectorGroup(params: Chime.Types.CreateVoiceConnectorGroupRequest, callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorGroupResponse) => void): Request<Chime.Types.CreateVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including VoiceConnectorItems in the request. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.
+   * Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including VoiceConnectorItems in the request. You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.   This API is is no longer supported and will not be updated. We recommend using the latest version, CreateVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   createVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorGroupResponse) => void): Request<Chime.Types.CreateVoiceConnectorGroupResponse, AWSError>;
   /**
@@ -308,83 +308,83 @@ declare class Chime extends Service {
    */
   deleteAccount(callback?: (err: AWSError, data: Chime.Types.DeleteAccountResponse) => void): Request<Chime.Types.DeleteAccountResponse, AWSError>;
   /**
-   * Deletes an AppInstance and all associated data asynchronously.
+   * Deletes an AppInstance and all associated data asynchronously.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAppInstance, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAppInstance(params: Chime.Types.DeleteAppInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AppInstance and all associated data asynchronously.
+   * Deletes an AppInstance and all associated data asynchronously.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAppInstance, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAppInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Demotes an AppInstanceAdmin to an AppInstanceUser. This action does not delete the user.
+   * Demotes an AppInstanceAdmin to an AppInstanceUser. This action does not delete the user.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAppInstanceAdmin, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAppInstanceAdmin(params: Chime.Types.DeleteAppInstanceAdminRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Demotes an AppInstanceAdmin to an AppInstanceUser. This action does not delete the user.
+   * Demotes an AppInstanceAdmin to an AppInstanceUser. This action does not delete the user.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAppInstanceAdmin, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAppInstanceAdmin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the streaming configurations of an AppInstance.
+   * Deletes the streaming configurations of an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAppInstanceStreamingConfigurations, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAppInstanceStreamingConfigurations(params: Chime.Types.DeleteAppInstanceStreamingConfigurationsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the streaming configurations of an AppInstance.
+   * Deletes the streaming configurations of an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAppInstanceStreamingConfigurations, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAppInstanceStreamingConfigurations(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AppInstanceUser.
+   * Deletes an AppInstanceUser.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAppInstanceUser(params: Chime.Types.DeleteAppInstanceUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AppInstanceUser.
+   * Deletes an AppInstanceUser.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAppInstanceUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.
+   * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAttendee, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAttendee(params: Chime.Types.DeleteAttendeeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.
+   * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteAttendee, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteAttendee(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannel, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannel(params: Chime.Types.DeleteChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannel, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannelBan, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannelBan(params: Chime.Types.DeleteChannelBanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannelBan, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannelBan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a member from a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Removes a member from a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannelMembership, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannelMembership(params: Chime.Types.DeleteChannelMembershipRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a member from a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Removes a member from a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannelMembership, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannelMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannelMessage(params: Chime.Types.DeleteChannelMessageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannelMessage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannelModerator, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannelModerator(params: Chime.Types.DeleteChannelModeratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteChannelModerator, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteChannelModerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -396,19 +396,19 @@ declare class Chime extends Service {
    */
   deleteEventsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the media capture pipeline.
+   * Deletes the media capture pipeline.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteMediaCapturePipeline, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteMediaCapturePipeline(params: Chime.Types.DeleteMediaCapturePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the media capture pipeline.
+   * Deletes the media capture pipeline.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteMediaCapturePipeline, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteMediaCapturePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.
+   * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteMeeting, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteMeeting(params: Chime.Types.DeleteMeetingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.
+   * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteMeeting, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -420,11 +420,11 @@ declare class Chime extends Service {
    */
   deletePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified proxy session from the specified Amazon Chime Voice Connector.
+   * Deletes the specified proxy session from the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteProxySession, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteProxySession(params: Chime.Types.DeleteProxySessionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified proxy session from the specified Amazon Chime Voice Connector.
+   * Deletes the specified proxy session from the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteProxySession, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteProxySession(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -444,155 +444,155 @@ declare class Chime extends Service {
    */
   deleteRoomMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a SIP media application.
+   * Deletes a SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteSipMediaApplication, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteSipMediaApplication(params: Chime.Types.DeleteSipMediaApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a SIP media application.
+   * Deletes a SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteSipMediaApplication, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteSipMediaApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a SIP rule. You must disable a SIP rule before you can delete it.
+   * Deletes a SIP rule. You must disable a SIP rule before you can delete it.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteSipRule, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteSipRule(params: Chime.Types.DeleteSipRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a SIP rule. You must disable a SIP rule before you can delete it.
+   * Deletes a SIP rule. You must disable a SIP rule before you can delete it.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteSipRule, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteSipRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.
+   * Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnector(params: Chime.Types.DeleteVoiceConnectorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.
+   * Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.
+   * Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorEmergencyCallingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorEmergencyCallingConfiguration(params: Chime.Types.DeleteVoiceConnectorEmergencyCallingConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.
+   * Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorEmergencyCallingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorEmergencyCallingConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted.
+   * Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorGroup(params: Chime.Types.DeleteVoiceConnectorGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted.
+   * Deletes the specified Amazon Chime Voice Connector group. Any VoiceConnectorItems and phone numbers associated with the group must be removed before it can be deleted.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings. 
+   * Deletes the origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorOrigination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorOrigination(params: Chime.Types.DeleteVoiceConnectorOriginationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings. 
+   * Deletes the origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorOrigination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorOrigination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the proxy configuration from the specified Amazon Chime Voice Connector.
+   * Deletes the proxy configuration from the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceProxy, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorProxy(params: Chime.Types.DeleteVoiceConnectorProxyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the proxy configuration from the specified Amazon Chime Voice Connector.
+   * Deletes the proxy configuration from the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceProxy, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorProxy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the streaming configuration for the specified Amazon Chime Voice Connector.
+   * Deletes the streaming configuration for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorStreamingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorStreamingConfiguration(params: Chime.Types.DeleteVoiceConnectorStreamingConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the streaming configuration for the specified Amazon Chime Voice Connector.
+   * Deletes the streaming configuration for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorStreamingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings. 
+   * Deletes the termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorTermination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorTermination(params: Chime.Types.DeleteVoiceConnectorTerminationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings. 
+   * Deletes the termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings.    This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorTermination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorTermination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified SIP credentials used by your equipment to authenticate during call termination.
+   * Deletes the specified SIP credentials used by your equipment to authenticate during call termination.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorTerminationCredentials, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorTerminationCredentials(params: Chime.Types.DeleteVoiceConnectorTerminationCredentialsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified SIP credentials used by your equipment to authenticate during call termination.
+   * Deletes the specified SIP credentials used by your equipment to authenticate during call termination.   This API is is no longer supported and will not be updated. We recommend using the latest version, DeleteVoiceConnectorTerminationCredentials, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   deleteVoiceConnectorTerminationCredentials(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns the full details of an AppInstance.
+   * Returns the full details of an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeAppInstance, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeAppInstance(params: Chime.Types.DescribeAppInstanceRequest, callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceResponse) => void): Request<Chime.Types.DescribeAppInstanceResponse, AWSError>;
   /**
-   * Returns the full details of an AppInstance.
+   * Returns the full details of an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeAppInstance, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeAppInstance(callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceResponse) => void): Request<Chime.Types.DescribeAppInstanceResponse, AWSError>;
   /**
-   * Returns the full details of an AppInstanceAdmin.
+   * Returns the full details of an AppInstanceAdmin.   This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeAppInstanceAdmin, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeAppInstanceAdmin(params: Chime.Types.DescribeAppInstanceAdminRequest, callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceAdminResponse) => void): Request<Chime.Types.DescribeAppInstanceAdminResponse, AWSError>;
   /**
-   * Returns the full details of an AppInstanceAdmin.
+   * Returns the full details of an AppInstanceAdmin.   This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeAppInstanceAdmin, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeAppInstanceAdmin(callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceAdminResponse) => void): Request<Chime.Types.DescribeAppInstanceAdminResponse, AWSError>;
   /**
-   * Returns the full details of an AppInstanceUser.
+   * Returns the full details of an AppInstanceUser.   This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeAppInstanceUser(params: Chime.Types.DescribeAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceUserResponse) => void): Request<Chime.Types.DescribeAppInstanceUserResponse, AWSError>;
   /**
-   * Returns the full details of an AppInstanceUser.
+   * Returns the full details of an AppInstanceUser.   This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceUserResponse) => void): Request<Chime.Types.DescribeAppInstanceUserResponse, AWSError>;
   /**
-   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannel, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannel(params: Chime.Types.DescribeChannelRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelResponse) => void): Request<Chime.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannel, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannel(callback?: (err: AWSError, data: Chime.Types.DescribeChannelResponse) => void): Request<Chime.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelBan, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelBan(params: Chime.Types.DescribeChannelBanRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelBanResponse) => void): Request<Chime.Types.DescribeChannelBanResponse, AWSError>;
   /**
-   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelBan, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelBan(callback?: (err: AWSError, data: Chime.Types.DescribeChannelBanResponse) => void): Request<Chime.Types.DescribeChannelBanResponse, AWSError>;
   /**
-   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelMembership, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelMembership(params: Chime.Types.DescribeChannelMembershipRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelMembershipResponse) => void): Request<Chime.Types.DescribeChannelMembershipResponse, AWSError>;
   /**
-   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelMembership, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelMembership(callback?: (err: AWSError, data: Chime.Types.DescribeChannelMembershipResponse) => void): Request<Chime.Types.DescribeChannelMembershipResponse, AWSError>;
   /**
-   *  Returns the details of a channel based on the membership of the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   *  Returns the details of a channel based on the membership of the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelMembershipForAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelMembershipForAppInstanceUser(params: Chime.Types.DescribeChannelMembershipForAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelMembershipForAppInstanceUserResponse) => void): Request<Chime.Types.DescribeChannelMembershipForAppInstanceUserResponse, AWSError>;
   /**
-   *  Returns the details of a channel based on the membership of the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   *  Returns the details of a channel based on the membership of the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelMembershipForAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelMembershipForAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.DescribeChannelMembershipForAppInstanceUserResponse) => void): Request<Chime.Types.DescribeChannelMembershipForAppInstanceUserResponse, AWSError>;
   /**
-   * Returns the full details of a channel moderated by the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel moderated by the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelModeratedByAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelModeratedByAppInstanceUser(params: Chime.Types.DescribeChannelModeratedByAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.DescribeChannelModeratedByAppInstanceUserResponse, AWSError>;
   /**
-   * Returns the full details of a channel moderated by the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a channel moderated by the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelModeratedByAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelModeratedByAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.DescribeChannelModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.DescribeChannelModeratedByAppInstanceUserResponse, AWSError>;
   /**
-   * Returns the full details of a single ChannelModerator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a single ChannelModerator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelModerator, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelModerator(params: Chime.Types.DescribeChannelModeratorRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelModeratorResponse) => void): Request<Chime.Types.DescribeChannelModeratorResponse, AWSError>;
   /**
-   * Returns the full details of a single ChannelModerator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Returns the full details of a single ChannelModerator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, DescribeChannelModerator, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   describeChannelModerator(callback?: (err: AWSError, data: Chime.Types.DescribeChannelModeratorResponse) => void): Request<Chime.Types.DescribeChannelModeratorResponse, AWSError>;
   /**
@@ -604,19 +604,19 @@ declare class Chime extends Service {
    */
   disassociatePhoneNumberFromUser(callback?: (err: AWSError, data: Chime.Types.DisassociatePhoneNumberFromUserResponse) => void): Request<Chime.Types.DisassociatePhoneNumberFromUserResponse, AWSError>;
   /**
-   * Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector.
+   * Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DisassociatePhoneNumbersFromVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   disassociatePhoneNumbersFromVoiceConnector(params: Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorRequest, callback?: (err: AWSError, data: Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorResponse) => void): Request<Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorResponse, AWSError>;
   /**
-   * Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector.
+   * Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, DisassociatePhoneNumbersFromVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   disassociatePhoneNumbersFromVoiceConnector(callback?: (err: AWSError, data: Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorResponse) => void): Request<Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorResponse, AWSError>;
   /**
-   * Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.
+   * Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.   This API is is no longer supported and will not be updated. We recommend using the latest version, DisassociatePhoneNumbersFromVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   disassociatePhoneNumbersFromVoiceConnectorGroup(params: Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorGroupRequest, callback?: (err: AWSError, data: Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse) => void): Request<Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.
+   * Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.   This API is is no longer supported and will not be updated. We recommend using the latest version, DisassociatePhoneNumbersFromVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   disassociatePhoneNumbersFromVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse) => void): Request<Chime.Types.DisassociatePhoneNumbersFromVoiceConnectorGroupResponse, AWSError>;
   /**
@@ -644,27 +644,27 @@ declare class Chime extends Service {
    */
   getAccountSettings(callback?: (err: AWSError, data: Chime.Types.GetAccountSettingsResponse) => void): Request<Chime.Types.GetAccountSettingsResponse, AWSError>;
   /**
-   * Gets the retention settings for an AppInstance.
+   * Gets the retention settings for an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMessagingRetentionSettings, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getAppInstanceRetentionSettings(params: Chime.Types.GetAppInstanceRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.GetAppInstanceRetentionSettingsResponse) => void): Request<Chime.Types.GetAppInstanceRetentionSettingsResponse, AWSError>;
   /**
-   * Gets the retention settings for an AppInstance.
+   * Gets the retention settings for an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMessagingRetentionSettings, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getAppInstanceRetentionSettings(callback?: (err: AWSError, data: Chime.Types.GetAppInstanceRetentionSettingsResponse) => void): Request<Chime.Types.GetAppInstanceRetentionSettingsResponse, AWSError>;
   /**
-   * Gets the streaming settings for an AppInstance.
+   * Gets the streaming settings for an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMessagingStreamingConfigurations, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getAppInstanceStreamingConfigurations(params: Chime.Types.GetAppInstanceStreamingConfigurationsRequest, callback?: (err: AWSError, data: Chime.Types.GetAppInstanceStreamingConfigurationsResponse) => void): Request<Chime.Types.GetAppInstanceStreamingConfigurationsResponse, AWSError>;
   /**
-   * Gets the streaming settings for an AppInstance.
+   * Gets the streaming settings for an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMessagingStreamingConfigurations, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getAppInstanceStreamingConfigurations(callback?: (err: AWSError, data: Chime.Types.GetAppInstanceStreamingConfigurationsResponse) => void): Request<Chime.Types.GetAppInstanceStreamingConfigurationsResponse, AWSError>;
   /**
-   *  Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
+   *  Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.    This API is is no longer supported and will not be updated. We recommend using the latest version, GetAttendee, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getAttendee(params: Chime.Types.GetAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.GetAttendeeResponse) => void): Request<Chime.Types.GetAttendeeResponse, AWSError>;
   /**
-   *  Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
+   *  Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.    This API is is no longer supported and will not be updated. We recommend using the latest version, GetAttendee, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getAttendee(callback?: (err: AWSError, data: Chime.Types.GetAttendeeResponse) => void): Request<Chime.Types.GetAttendeeResponse, AWSError>;
   /**
@@ -676,11 +676,11 @@ declare class Chime extends Service {
    */
   getBot(callback?: (err: AWSError, data: Chime.Types.GetBotResponse) => void): Request<Chime.Types.GetBotResponse, AWSError>;
   /**
-   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, GetChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getChannelMessage(params: Chime.Types.GetChannelMessageRequest, callback?: (err: AWSError, data: Chime.Types.GetChannelMessageResponse) => void): Request<Chime.Types.GetChannelMessageResponse, AWSError>;
   /**
-   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, GetChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getChannelMessage(callback?: (err: AWSError, data: Chime.Types.GetChannelMessageResponse) => void): Request<Chime.Types.GetChannelMessageResponse, AWSError>;
   /**
@@ -696,27 +696,27 @@ declare class Chime extends Service {
    */
   getGlobalSettings(callback?: (err: AWSError, data: Chime.Types.GetGlobalSettingsResponse) => void): Request<Chime.Types.GetGlobalSettingsResponse, AWSError>;
   /**
-   * Gets an existing media capture pipeline.
+   * Gets an existing media capture pipeline.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMediaCapturePipeline, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getMediaCapturePipeline(params: Chime.Types.GetMediaCapturePipelineRequest, callback?: (err: AWSError, data: Chime.Types.GetMediaCapturePipelineResponse) => void): Request<Chime.Types.GetMediaCapturePipelineResponse, AWSError>;
   /**
-   * Gets an existing media capture pipeline.
+   * Gets an existing media capture pipeline.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMediaCapturePipeline, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getMediaCapturePipeline(callback?: (err: AWSError, data: Chime.Types.GetMediaCapturePipelineResponse) => void): Request<Chime.Types.GetMediaCapturePipelineResponse, AWSError>;
   /**
-   *  Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
+   *   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMeeting, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide.   Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
    */
   getMeeting(params: Chime.Types.GetMeetingRequest, callback?: (err: AWSError, data: Chime.Types.GetMeetingResponse) => void): Request<Chime.Types.GetMeetingResponse, AWSError>;
   /**
-   *  Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
+   *   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMeeting, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide.   Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide . 
    */
   getMeeting(callback?: (err: AWSError, data: Chime.Types.GetMeetingResponse) => void): Request<Chime.Types.GetMeetingResponse, AWSError>;
   /**
-   * The details of the endpoint for the messaging session.
+   * The details of the endpoint for the messaging session.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMessagingSessionEndpoint, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getMessagingSessionEndpoint(params: Chime.Types.GetMessagingSessionEndpointRequest, callback?: (err: AWSError, data: Chime.Types.GetMessagingSessionEndpointResponse) => void): Request<Chime.Types.GetMessagingSessionEndpointResponse, AWSError>;
   /**
-   * The details of the endpoint for the messaging session.
+   * The details of the endpoint for the messaging session.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetMessagingSessionEndpoint, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getMessagingSessionEndpoint(callback?: (err: AWSError, data: Chime.Types.GetMessagingSessionEndpointResponse) => void): Request<Chime.Types.GetMessagingSessionEndpointResponse, AWSError>;
   /**
@@ -740,11 +740,11 @@ declare class Chime extends Service {
    */
   getPhoneNumberSettings(callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberSettingsResponse) => void): Request<Chime.Types.GetPhoneNumberSettingsResponse, AWSError>;
   /**
-   * Gets the specified proxy session details for the specified Amazon Chime Voice Connector.
+   * Gets the specified proxy session details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetProxySession, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getProxySession(params: Chime.Types.GetProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
   /**
-   * Gets the specified proxy session details for the specified Amazon Chime Voice Connector.
+   * Gets the specified proxy session details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetProxySession, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getProxySession(callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
   /**
@@ -764,27 +764,27 @@ declare class Chime extends Service {
    */
   getRoom(callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
   /**
-   * Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.
+   * Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetSipMediaApplication, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getSipMediaApplication(params: Chime.Types.GetSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationResponse) => void): Request<Chime.Types.GetSipMediaApplicationResponse, AWSError>;
   /**
-   * Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.
+   * Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetSipMediaApplication, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationResponse) => void): Request<Chime.Types.GetSipMediaApplicationResponse, AWSError>;
   /**
-   * Returns the logging configuration for the specified SIP media application.
+   * Returns the logging configuration for the specified SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetSipMediaApplicationLoggingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getSipMediaApplicationLoggingConfiguration(params: Chime.Types.GetSipMediaApplicationLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse, AWSError>;
   /**
-   * Returns the logging configuration for the specified SIP media application.
+   * Returns the logging configuration for the specified SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetSipMediaApplicationLoggingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getSipMediaApplicationLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse, AWSError>;
   /**
-   * Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.
+   * Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetSipRule, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getSipRule(params: Chime.Types.GetSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.GetSipRuleResponse) => void): Request<Chime.Types.GetSipRuleResponse, AWSError>;
   /**
-   * Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.
+   * Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetSipRule, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getSipRule(callback?: (err: AWSError, data: Chime.Types.GetSipRuleResponse) => void): Request<Chime.Types.GetSipRuleResponse, AWSError>;
   /**
@@ -804,75 +804,75 @@ declare class Chime extends Service {
    */
   getUserSettings(callback?: (err: AWSError, data: Chime.Types.GetUserSettingsResponse) => void): Request<Chime.Types.GetUserSettingsResponse, AWSError>;
   /**
-   * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.
+   * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnector(params: Chime.Types.GetVoiceConnectorRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorResponse) => void): Request<Chime.Types.GetVoiceConnectorResponse, AWSError>;
   /**
-   * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.
+   * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnector(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorResponse) => void): Request<Chime.Types.GetVoiceConnectorResponse, AWSError>;
   /**
-   * Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.
+   * Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorEmergencyCallingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorEmergencyCallingConfiguration(params: Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
   /**
-   * Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.
+   * Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorEmergencyCallingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorEmergencyCallingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
   /**
-   *  Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated VoiceConnectorItems.
+   *  Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated VoiceConnectorItems.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorGroup(params: Chime.Types.GetVoiceConnectorGroupRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorGroupResponse) => void): Request<Chime.Types.GetVoiceConnectorGroupResponse, AWSError>;
   /**
-   *  Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated VoiceConnectorItems.
+   *  Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated VoiceConnectorItems.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorGroupResponse) => void): Request<Chime.Types.GetVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+   * Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorLoggingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorLoggingConfiguration(params: Chime.Types.GetVoiceConnectorLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorLoggingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorLoggingConfigurationResponse, AWSError>;
   /**
-   * Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+   * Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorLoggingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorLoggingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorLoggingConfigurationResponse, AWSError>;
   /**
-   * Retrieves origination setting details for the specified Amazon Chime Voice Connector.
+   * Retrieves origination setting details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorOrigination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorOrigination(params: Chime.Types.GetVoiceConnectorOriginationRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorOriginationResponse) => void): Request<Chime.Types.GetVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * Retrieves origination setting details for the specified Amazon Chime Voice Connector.
+   * Retrieves origination setting details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorOrigination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorOriginationResponse) => void): Request<Chime.Types.GetVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * Gets the proxy configuration details for the specified Amazon Chime Voice Connector.
+   * Gets the proxy configuration details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorProxy, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorProxy(params: Chime.Types.GetVoiceConnectorProxyRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorProxyResponse) => void): Request<Chime.Types.GetVoiceConnectorProxyResponse, AWSError>;
   /**
-   * Gets the proxy configuration details for the specified Amazon Chime Voice Connector.
+   * Gets the proxy configuration details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorProxy, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorProxy(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorProxyResponse) => void): Request<Chime.Types.GetVoiceConnectorProxyResponse, AWSError>;
   /**
-   * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.
+   * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorStreamingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorStreamingConfiguration(params: Chime.Types.GetVoiceConnectorStreamingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.
+   * Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorStreamingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Retrieves termination setting details for the specified Amazon Chime Voice Connector.
+   * Retrieves termination setting details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorTermination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorTermination(params: Chime.Types.GetVoiceConnectorTerminationRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorTerminationResponse) => void): Request<Chime.Types.GetVoiceConnectorTerminationResponse, AWSError>;
   /**
-   * Retrieves termination setting details for the specified Amazon Chime Voice Connector.
+   * Retrieves termination setting details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorTermination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   getVoiceConnectorTermination(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorTerminationResponse) => void): Request<Chime.Types.GetVoiceConnectorTerminationResponse, AWSError>;
   /**
-   * Retrieves information about the last time a SIP OPTIONS ping was received from your SIP infrastructure for the specified Amazon Chime Voice Connector.
+   *   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorTerminationHealth, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide.  Retrieves information about the last time a SIP OPTIONS ping was received from your SIP infrastructure for the specified Amazon Chime Voice Connector.
    */
   getVoiceConnectorTerminationHealth(params: Chime.Types.GetVoiceConnectorTerminationHealthRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorTerminationHealthResponse) => void): Request<Chime.Types.GetVoiceConnectorTerminationHealthResponse, AWSError>;
   /**
-   * Retrieves information about the last time a SIP OPTIONS ping was received from your SIP infrastructure for the specified Amazon Chime Voice Connector.
+   *   This API is is no longer supported and will not be updated. We recommend using the latest version, GetVoiceConnectorTerminationHealth, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide.  Retrieves information about the last time a SIP OPTIONS ping was received from your SIP infrastructure for the specified Amazon Chime Voice Connector.
    */
   getVoiceConnectorTerminationHealth(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorTerminationHealthResponse) => void): Request<Chime.Types.GetVoiceConnectorTerminationHealthResponse, AWSError>;
   /**
@@ -892,43 +892,43 @@ declare class Chime extends Service {
    */
   listAccounts(callback?: (err: AWSError, data: Chime.Types.ListAccountsResponse) => void): Request<Chime.Types.ListAccountsResponse, AWSError>;
   /**
-   * Returns a list of the administrators in the AppInstance.
+   * Returns a list of the administrators in the AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListAppInstanceAdmins, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listAppInstanceAdmins(params: Chime.Types.ListAppInstanceAdminsRequest, callback?: (err: AWSError, data: Chime.Types.ListAppInstanceAdminsResponse) => void): Request<Chime.Types.ListAppInstanceAdminsResponse, AWSError>;
   /**
-   * Returns a list of the administrators in the AppInstance.
+   * Returns a list of the administrators in the AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListAppInstanceAdmins, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listAppInstanceAdmins(callback?: (err: AWSError, data: Chime.Types.ListAppInstanceAdminsResponse) => void): Request<Chime.Types.ListAppInstanceAdminsResponse, AWSError>;
   /**
-   * List all AppInstanceUsers created under a single AppInstance. 
+   * List all AppInstanceUsers created under a single AppInstance.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListAppInstanceUsers, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listAppInstanceUsers(params: Chime.Types.ListAppInstanceUsersRequest, callback?: (err: AWSError, data: Chime.Types.ListAppInstanceUsersResponse) => void): Request<Chime.Types.ListAppInstanceUsersResponse, AWSError>;
   /**
-   * List all AppInstanceUsers created under a single AppInstance. 
+   * List all AppInstanceUsers created under a single AppInstance.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListAppInstanceUsers, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listAppInstanceUsers(callback?: (err: AWSError, data: Chime.Types.ListAppInstanceUsersResponse) => void): Request<Chime.Types.ListAppInstanceUsersResponse, AWSError>;
   /**
-   * Lists all Amazon Chime AppInstances created under a single AWS account.
+   * Lists all Amazon Chime AppInstances created under a single AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListAppInstances, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listAppInstances(params: Chime.Types.ListAppInstancesRequest, callback?: (err: AWSError, data: Chime.Types.ListAppInstancesResponse) => void): Request<Chime.Types.ListAppInstancesResponse, AWSError>;
   /**
-   * Lists all Amazon Chime AppInstances created under a single AWS account.
+   * Lists all Amazon Chime AppInstances created under a single AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListAppInstances, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listAppInstances(callback?: (err: AWSError, data: Chime.Types.ListAppInstancesResponse) => void): Request<Chime.Types.ListAppInstancesResponse, AWSError>;
   /**
-   * Lists the tags applied to an Amazon Chime SDK attendee resource.
+   * Lists the tags applied to an Amazon Chime SDK attendee resource.  ListAttendeeTags is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API. 
    */
   listAttendeeTags(params: Chime.Types.ListAttendeeTagsRequest, callback?: (err: AWSError, data: Chime.Types.ListAttendeeTagsResponse) => void): Request<Chime.Types.ListAttendeeTagsResponse, AWSError>;
   /**
-   * Lists the tags applied to an Amazon Chime SDK attendee resource.
+   * Lists the tags applied to an Amazon Chime SDK attendee resource.  ListAttendeeTags is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API. 
    */
   listAttendeeTags(callback?: (err: AWSError, data: Chime.Types.ListAttendeeTagsResponse) => void): Request<Chime.Types.ListAttendeeTagsResponse, AWSError>;
   /**
-   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide. 
+   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListAttendees, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listAttendees(params: Chime.Types.ListAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
   /**
-   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide. 
+   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListAttendees, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listAttendees(callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
   /**
@@ -940,83 +940,83 @@ declare class Chime extends Service {
    */
   listBots(callback?: (err: AWSError, data: Chime.Types.ListBotsResponse) => void): Request<Chime.Types.ListBotsResponse, AWSError>;
   /**
-   * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelBans, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelBans(params: Chime.Types.ListChannelBansRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelBansResponse) => void): Request<Chime.Types.ListChannelBansResponse, AWSError>;
   /**
-   * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelBans, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelBans(callback?: (err: AWSError, data: Chime.Types.ListChannelBansResponse) => void): Request<Chime.Types.ListChannelBansResponse, AWSError>;
   /**
-   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelMemberships, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelMemberships(params: Chime.Types.ListChannelMembershipsRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsResponse) => void): Request<Chime.Types.ListChannelMembershipsResponse, AWSError>;
   /**
-   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelMemberships, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelMemberships(callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsResponse) => void): Request<Chime.Types.ListChannelMembershipsResponse, AWSError>;
   /**
-   *  Lists all channels that a particular AppInstanceUser is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   *  Lists all channels that a particular AppInstanceUser is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelMembershipsForAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelMembershipsForAppInstanceUser(params: Chime.Types.ListChannelMembershipsForAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsForAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelMembershipsForAppInstanceUserResponse, AWSError>;
   /**
-   *  Lists all channels that a particular AppInstanceUser is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   *  Lists all channels that a particular AppInstanceUser is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelMembershipsForAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelMembershipsForAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsForAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelMembershipsForAppInstanceUserResponse, AWSError>;
   /**
-   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelMessages, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelMessages(params: Chime.Types.ListChannelMessagesRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelMessagesResponse) => void): Request<Chime.Types.ListChannelMessagesResponse, AWSError>;
   /**
-   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelMessages, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelMessages(callback?: (err: AWSError, data: Chime.Types.ListChannelMessagesResponse) => void): Request<Chime.Types.ListChannelMessagesResponse, AWSError>;
   /**
-   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelModerators, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelModerators(params: Chime.Types.ListChannelModeratorsRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelModeratorsResponse) => void): Request<Chime.Types.ListChannelModeratorsResponse, AWSError>;
   /**
-   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelModerators, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelModerators(callback?: (err: AWSError, data: Chime.Types.ListChannelModeratorsResponse) => void): Request<Chime.Types.ListChannelModeratorsResponse, AWSError>;
   /**
-   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannels, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannels(params: Chime.Types.ListChannelsRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelsResponse) => void): Request<Chime.Types.ListChannelsResponse, AWSError>;
   /**
-   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannels, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannels(callback?: (err: AWSError, data: Chime.Types.ListChannelsResponse) => void): Request<Chime.Types.ListChannelsResponse, AWSError>;
   /**
-   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelsModeratedByAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelsModeratedByAppInstanceUser(params: Chime.Types.ListChannelsModeratedByAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
   /**
-   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, ListChannelsModeratedByAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listChannelsModeratedByAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
   /**
-   * Returns a list of media capture pipelines.
+   * Returns a list of media capture pipelines.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListMediaCapturePipelines, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listMediaCapturePipelines(params: Chime.Types.ListMediaCapturePipelinesRequest, callback?: (err: AWSError, data: Chime.Types.ListMediaCapturePipelinesResponse) => void): Request<Chime.Types.ListMediaCapturePipelinesResponse, AWSError>;
   /**
-   * Returns a list of media capture pipelines.
+   * Returns a list of media capture pipelines.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListMediaCapturePipelines, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listMediaCapturePipelines(callback?: (err: AWSError, data: Chime.Types.ListMediaCapturePipelinesResponse) => void): Request<Chime.Types.ListMediaCapturePipelinesResponse, AWSError>;
   /**
-   * Lists the tags applied to an Amazon Chime SDK meeting resource.
+   * Lists the tags applied to an Amazon Chime SDK meeting resource.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListTagsForResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listMeetingTags(params: Chime.Types.ListMeetingTagsRequest, callback?: (err: AWSError, data: Chime.Types.ListMeetingTagsResponse) => void): Request<Chime.Types.ListMeetingTagsResponse, AWSError>;
   /**
-   * Lists the tags applied to an Amazon Chime SDK meeting resource.
+   * Lists the tags applied to an Amazon Chime SDK meeting resource.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListTagsForResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listMeetingTags(callback?: (err: AWSError, data: Chime.Types.ListMeetingTagsResponse) => void): Request<Chime.Types.ListMeetingTagsResponse, AWSError>;
   /**
-   *  Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.
+   * Lists up to 100 active Amazon Chime SDK meetings.  ListMeetings is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API.  For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.
    */
   listMeetings(params: Chime.Types.ListMeetingsRequest, callback?: (err: AWSError, data: Chime.Types.ListMeetingsResponse) => void): Request<Chime.Types.ListMeetingsResponse, AWSError>;
   /**
-   *  Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.
+   * Lists up to 100 active Amazon Chime SDK meetings.  ListMeetings is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API.  For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime SDK Developer Guide.
    */
   listMeetings(callback?: (err: AWSError, data: Chime.Types.ListMeetingsResponse) => void): Request<Chime.Types.ListMeetingsResponse, AWSError>;
   /**
@@ -1036,11 +1036,11 @@ declare class Chime extends Service {
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Chime.Types.ListPhoneNumbersResponse) => void): Request<Chime.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Lists the proxy sessions for the specified Amazon Chime Voice Connector.
+   * Lists the proxy sessions for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListProxySessions, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listProxySessions(params: Chime.Types.ListProxySessionsRequest, callback?: (err: AWSError, data: Chime.Types.ListProxySessionsResponse) => void): Request<Chime.Types.ListProxySessionsResponse, AWSError>;
   /**
-   * Lists the proxy sessions for the specified Amazon Chime Voice Connector.
+   * Lists the proxy sessions for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListProxySessions, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listProxySessions(callback?: (err: AWSError, data: Chime.Types.ListProxySessionsResponse) => void): Request<Chime.Types.ListProxySessionsResponse, AWSError>;
   /**
@@ -1060,19 +1060,19 @@ declare class Chime extends Service {
    */
   listRooms(callback?: (err: AWSError, data: Chime.Types.ListRoomsResponse) => void): Request<Chime.Types.ListRoomsResponse, AWSError>;
   /**
-   * Lists the SIP media applications under the administrator's AWS account.
+   * Lists the SIP media applications under the administrator's AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListSipMediaApplications, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listSipMediaApplications(params: Chime.Types.ListSipMediaApplicationsRequest, callback?: (err: AWSError, data: Chime.Types.ListSipMediaApplicationsResponse) => void): Request<Chime.Types.ListSipMediaApplicationsResponse, AWSError>;
   /**
-   * Lists the SIP media applications under the administrator's AWS account.
+   * Lists the SIP media applications under the administrator's AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListSipMediaApplications, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listSipMediaApplications(callback?: (err: AWSError, data: Chime.Types.ListSipMediaApplicationsResponse) => void): Request<Chime.Types.ListSipMediaApplicationsResponse, AWSError>;
   /**
-   * Lists the SIP rules under the administrator's AWS account.
+   * Lists the SIP rules under the administrator's AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListSipRules, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listSipRules(params: Chime.Types.ListSipRulesRequest, callback?: (err: AWSError, data: Chime.Types.ListSipRulesResponse) => void): Request<Chime.Types.ListSipRulesResponse, AWSError>;
   /**
-   * Lists the SIP rules under the administrator's AWS account.
+   * Lists the SIP rules under the administrator's AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListSipRules, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listSipRules(callback?: (err: AWSError, data: Chime.Types.ListSipRulesResponse) => void): Request<Chime.Types.ListSipRulesResponse, AWSError>;
   /**
@@ -1084,11 +1084,11 @@ declare class Chime extends Service {
    */
   listSupportedPhoneNumberCountries(callback?: (err: AWSError, data: Chime.Types.ListSupportedPhoneNumberCountriesResponse) => void): Request<Chime.Types.ListSupportedPhoneNumberCountriesResponse, AWSError>;
   /**
-   * Lists the tags applied to an Amazon Chime SDK meeting resource.
+   * Lists the tags applied to an Amazon Chime SDK meeting and messaging resources.   This API is is no longer supported and will not be updated. We recommend using the applicable latest version in the Amazon Chime SDK.   For meetings: ListTagsForResource.   For messaging: ListTagsForResource.   Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listTagsForResource(params: Chime.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Chime.Types.ListTagsForResourceResponse) => void): Request<Chime.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the tags applied to an Amazon Chime SDK meeting resource.
+   * Lists the tags applied to an Amazon Chime SDK meeting and messaging resources.   This API is is no longer supported and will not be updated. We recommend using the applicable latest version in the Amazon Chime SDK.   For meetings: ListTagsForResource.   For messaging: ListTagsForResource.   Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listTagsForResource(callback?: (err: AWSError, data: Chime.Types.ListTagsForResourceResponse) => void): Request<Chime.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -1100,27 +1100,27 @@ declare class Chime extends Service {
    */
   listUsers(callback?: (err: AWSError, data: Chime.Types.ListUsersResponse) => void): Request<Chime.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists the Amazon Chime Voice Connector groups for the administrator's AWS account.
+   * Lists the Amazon Chime Voice Connector groups for the administrator's AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListVoiceConnectorGroups, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listVoiceConnectorGroups(params: Chime.Types.ListVoiceConnectorGroupsRequest, callback?: (err: AWSError, data: Chime.Types.ListVoiceConnectorGroupsResponse) => void): Request<Chime.Types.ListVoiceConnectorGroupsResponse, AWSError>;
   /**
-   * Lists the Amazon Chime Voice Connector groups for the administrator's AWS account.
+   * Lists the Amazon Chime Voice Connector groups for the administrator's AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListVoiceConnectorGroups, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listVoiceConnectorGroups(callback?: (err: AWSError, data: Chime.Types.ListVoiceConnectorGroupsResponse) => void): Request<Chime.Types.ListVoiceConnectorGroupsResponse, AWSError>;
   /**
-   * Lists the SIP credentials for the specified Amazon Chime Voice Connector.
+   * Lists the SIP credentials for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListVoiceConnectorTerminationCredentials, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listVoiceConnectorTerminationCredentials(params: Chime.Types.ListVoiceConnectorTerminationCredentialsRequest, callback?: (err: AWSError, data: Chime.Types.ListVoiceConnectorTerminationCredentialsResponse) => void): Request<Chime.Types.ListVoiceConnectorTerminationCredentialsResponse, AWSError>;
   /**
-   * Lists the SIP credentials for the specified Amazon Chime Voice Connector.
+   * Lists the SIP credentials for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListVoiceConnectorTerminationCredentials, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listVoiceConnectorTerminationCredentials(callback?: (err: AWSError, data: Chime.Types.ListVoiceConnectorTerminationCredentialsResponse) => void): Request<Chime.Types.ListVoiceConnectorTerminationCredentialsResponse, AWSError>;
   /**
-   * Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
+   * Lists the Amazon Chime Voice Connectors for the administrator's AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListVoiceConnectors, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listVoiceConnectors(params: Chime.Types.ListVoiceConnectorsRequest, callback?: (err: AWSError, data: Chime.Types.ListVoiceConnectorsResponse) => void): Request<Chime.Types.ListVoiceConnectorsResponse, AWSError>;
   /**
-   * Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
+   * Lists the Amazon Chime Voice Connectors for the administrator's AWS account.   This API is is no longer supported and will not be updated. We recommend using the latest version, ListVoiceConnectors, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   listVoiceConnectors(callback?: (err: AWSError, data: Chime.Types.ListVoiceConnectorsResponse) => void): Request<Chime.Types.ListVoiceConnectorsResponse, AWSError>;
   /**
@@ -1132,19 +1132,19 @@ declare class Chime extends Service {
    */
   logoutUser(callback?: (err: AWSError, data: Chime.Types.LogoutUserResponse) => void): Request<Chime.Types.LogoutUserResponse, AWSError>;
   /**
-   * Sets the amount of time in days that a given AppInstance retains data.
+   * Sets the amount of time in days that a given AppInstance retains data.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutAppInstanceRetentionSettings, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putAppInstanceRetentionSettings(params: Chime.Types.PutAppInstanceRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.PutAppInstanceRetentionSettingsResponse) => void): Request<Chime.Types.PutAppInstanceRetentionSettingsResponse, AWSError>;
   /**
-   * Sets the amount of time in days that a given AppInstance retains data.
+   * Sets the amount of time in days that a given AppInstance retains data.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutAppInstanceRetentionSettings, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putAppInstanceRetentionSettings(callback?: (err: AWSError, data: Chime.Types.PutAppInstanceRetentionSettingsResponse) => void): Request<Chime.Types.PutAppInstanceRetentionSettingsResponse, AWSError>;
   /**
-   * The data streaming configurations of an AppInstance.
+   * The data streaming configurations of an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutMessagingStreamingConfigurations, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putAppInstanceStreamingConfigurations(params: Chime.Types.PutAppInstanceStreamingConfigurationsRequest, callback?: (err: AWSError, data: Chime.Types.PutAppInstanceStreamingConfigurationsResponse) => void): Request<Chime.Types.PutAppInstanceStreamingConfigurationsResponse, AWSError>;
   /**
-   * The data streaming configurations of an AppInstance.
+   * The data streaming configurations of an AppInstance.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutMessagingStreamingConfigurations, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putAppInstanceStreamingConfigurations(callback?: (err: AWSError, data: Chime.Types.PutAppInstanceStreamingConfigurationsResponse) => void): Request<Chime.Types.PutAppInstanceStreamingConfigurationsResponse, AWSError>;
   /**
@@ -1164,75 +1164,75 @@ declare class Chime extends Service {
    */
   putRetentionSettings(callback?: (err: AWSError, data: Chime.Types.PutRetentionSettingsResponse) => void): Request<Chime.Types.PutRetentionSettingsResponse, AWSError>;
   /**
-   * Updates the logging configuration for the specified SIP media application.
+   * Updates the logging configuration for the specified SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutSipMediaApplicationLoggingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putSipMediaApplicationLoggingConfiguration(params: Chime.Types.PutSipMediaApplicationLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse, AWSError>;
   /**
-   * Updates the logging configuration for the specified SIP media application.
+   * Updates the logging configuration for the specified SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutSipMediaApplicationLoggingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putSipMediaApplicationLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse, AWSError>;
   /**
-   * Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.
+   * Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorEmergencyCallingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorEmergencyCallingConfiguration(params: Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
   /**
-   * Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.
+   * Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorEmergencyCallingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorEmergencyCallingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
   /**
-   * Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+   * Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorLoggingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorLoggingConfiguration(params: Chime.Types.PutVoiceConnectorLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorLoggingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorLoggingConfigurationResponse, AWSError>;
   /**
-   * Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+   * Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorLoggingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorLoggingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorLoggingConfigurationResponse, AWSError>;
   /**
-   * Adds origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings. 
+   * Adds origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings.    This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorOrigination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorOrigination(params: Chime.Types.PutVoiceConnectorOriginationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorOriginationResponse) => void): Request<Chime.Types.PutVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * Adds origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings. 
+   * Adds origination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings.    This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorOrigination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorOrigination(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorOriginationResponse) => void): Request<Chime.Types.PutVoiceConnectorOriginationResponse, AWSError>;
   /**
-   * Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.
+   * Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorProxy, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorProxy(params: Chime.Types.PutVoiceConnectorProxyRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorProxyResponse) => void): Request<Chime.Types.PutVoiceConnectorProxyResponse, AWSError>;
   /**
-   * Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.
+   * Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorProxy, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorProxy(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorProxyResponse) => void): Request<Chime.Types.PutVoiceConnectorProxyResponse, AWSError>;
   /**
-   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
+   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorStreamingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorStreamingConfiguration(params: Chime.Types.PutVoiceConnectorStreamingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
+   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorStreamingConfiguration, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Adds termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings. 
+   * Adds termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings.    This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorTermination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorTermination(params: Chime.Types.PutVoiceConnectorTerminationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorTerminationResponse) => void): Request<Chime.Types.PutVoiceConnectorTerminationResponse, AWSError>;
   /**
-   * Adds termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings. 
+   * Adds termination settings for the specified Amazon Chime Voice Connector.  If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings.    This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorTermination, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorTermination(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorTerminationResponse) => void): Request<Chime.Types.PutVoiceConnectorTerminationResponse, AWSError>;
   /**
-   * Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
+   * Adds termination SIP credentials for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorTerminationCredentials, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorTerminationCredentials(params: Chime.Types.PutVoiceConnectorTerminationCredentialsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
+   * Adds termination SIP credentials for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, PutVoiceConnectorTerminationCredentials, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   putVoiceConnectorTerminationCredentials(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, RedactChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   redactChannelMessage(params: Chime.Types.RedactChannelMessageRequest, callback?: (err: AWSError, data: Chime.Types.RedactChannelMessageResponse) => void): Request<Chime.Types.RedactChannelMessageResponse, AWSError>;
   /**
-   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, RedactChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   redactChannelMessage(callback?: (err: AWSError, data: Chime.Types.RedactChannelMessageResponse) => void): Request<Chime.Types.RedactChannelMessageResponse, AWSError>;
   /**
@@ -1284,75 +1284,75 @@ declare class Chime extends Service {
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Chime.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Chime.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
-   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
+   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata.    This API is is no longer supported and will not be updated. We recommend using the latest version, SendChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   sendChannelMessage(params: Chime.Types.SendChannelMessageRequest, callback?: (err: AWSError, data: Chime.Types.SendChannelMessageResponse) => void): Request<Chime.Types.SendChannelMessageResponse, AWSError>;
   /**
-   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
+   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata.    This API is is no longer supported and will not be updated. We recommend using the latest version, SendChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   sendChannelMessage(callback?: (err: AWSError, data: Chime.Types.SendChannelMessageResponse) => void): Request<Chime.Types.SendChannelMessageResponse, AWSError>;
   /**
-   * Starts transcription for the specified meetingId. For more information, refer to  Using Amazon Chime SDK live transcription  in the Amazon Chime SDK Developer Guide. If you specify an invalid configuration, a TranscriptFailed event will be sent with the contents of the BadRequestException generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the StartStreamTranscription API in the Amazon Transcribe Developer Guide.  Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS Service Terms, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services. 
+   * Starts transcription for the specified meetingId. For more information, refer to  Using Amazon Chime SDK live transcription  in the Amazon Chime SDK Developer Guide. If you specify an invalid configuration, a TranscriptFailed event will be sent with the contents of the BadRequestException generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the StartStreamTranscription API in the Amazon Transcribe Developer Guide.  Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS Service Terms, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services.    This API is is no longer supported and will not be updated. We recommend using the latest version, StartMeetingTranscription, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   startMeetingTranscription(params: Chime.Types.StartMeetingTranscriptionRequest, callback?: (err: AWSError, data: Chime.Types.StartMeetingTranscriptionResponse) => void): Request<Chime.Types.StartMeetingTranscriptionResponse, AWSError>;
   /**
-   * Starts transcription for the specified meetingId. For more information, refer to  Using Amazon Chime SDK live transcription  in the Amazon Chime SDK Developer Guide. If you specify an invalid configuration, a TranscriptFailed event will be sent with the contents of the BadRequestException generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the StartStreamTranscription API in the Amazon Transcribe Developer Guide.  Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS Service Terms, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services. 
+   * Starts transcription for the specified meetingId. For more information, refer to  Using Amazon Chime SDK live transcription  in the Amazon Chime SDK Developer Guide. If you specify an invalid configuration, a TranscriptFailed event will be sent with the contents of the BadRequestException generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the StartStreamTranscription API in the Amazon Transcribe Developer Guide.  Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the AWS Service Terms, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services.    This API is is no longer supported and will not be updated. We recommend using the latest version, StartMeetingTranscription, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   startMeetingTranscription(callback?: (err: AWSError, data: Chime.Types.StartMeetingTranscriptionResponse) => void): Request<Chime.Types.StartMeetingTranscriptionResponse, AWSError>;
   /**
-   * Stops transcription for the specified meetingId.
+   * Stops transcription for the specified meetingId.   This API is is no longer supported and will not be updated. We recommend using the latest version, StopMeetingTranscription, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   stopMeetingTranscription(params: Chime.Types.StopMeetingTranscriptionRequest, callback?: (err: AWSError, data: Chime.Types.StopMeetingTranscriptionResponse) => void): Request<Chime.Types.StopMeetingTranscriptionResponse, AWSError>;
   /**
-   * Stops transcription for the specified meetingId.
+   * Stops transcription for the specified meetingId.   This API is is no longer supported and will not be updated. We recommend using the latest version, StopMeetingTranscription, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   stopMeetingTranscription(callback?: (err: AWSError, data: Chime.Types.StopMeetingTranscriptionResponse) => void): Request<Chime.Types.StopMeetingTranscriptionResponse, AWSError>;
   /**
-   * Applies the specified tags to the specified Amazon Chime SDK attendee.
+   * Applies the specified tags to the specified Amazon Chime attendee.  TagAttendee is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API. 
    */
   tagAttendee(params: Chime.Types.TagAttendeeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies the specified tags to the specified Amazon Chime SDK attendee.
+   * Applies the specified tags to the specified Amazon Chime attendee.  TagAttendee is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API. 
    */
   tagAttendee(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies the specified tags to the specified Amazon Chime SDK meeting.
+   * Applies the specified tags to the specified Amazon Chime SDK meeting.   This API is is no longer supported and will not be updated. We recommend using the latest version, TagResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   tagMeeting(params: Chime.Types.TagMeetingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies the specified tags to the specified Amazon Chime SDK meeting.
+   * Applies the specified tags to the specified Amazon Chime SDK meeting.   This API is is no longer supported and will not be updated. We recommend using the latest version, TagResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   tagMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies the specified tags to the specified Amazon Chime SDK meeting resource.
+   * Applies the specified tags to the specified Amazon Chime SDK meeting resource.   This API is is no longer supported and will not be updated. We recommend using the latest version, TagResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   tagResource(params: Chime.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies the specified tags to the specified Amazon Chime SDK meeting resource.
+   * Applies the specified tags to the specified Amazon Chime SDK meeting resource.   This API is is no longer supported and will not be updated. We recommend using the latest version, TagResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Untags the specified tags from the specified Amazon Chime SDK attendee.
+   * Untags the specified tags from the specified Amazon Chime SDK attendee.  UntagAttendee is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API. 
    */
   untagAttendee(params: Chime.Types.UntagAttendeeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Untags the specified tags from the specified Amazon Chime SDK attendee.
+   * Untags the specified tags from the specified Amazon Chime SDK attendee.  UntagAttendee is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API. 
    */
   untagAttendee(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Untags the specified tags from the specified Amazon Chime SDK meeting.
+   * Untags the specified tags from the specified Amazon Chime SDK meeting.   This API is is no longer supported and will not be updated. We recommend using the latest version, UntagResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   untagMeeting(params: Chime.Types.UntagMeetingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Untags the specified tags from the specified Amazon Chime SDK meeting.
+   * Untags the specified tags from the specified Amazon Chime SDK meeting.   This API is is no longer supported and will not be updated. We recommend using the latest version, UntagResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   untagMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Untags the specified tags from the specified Amazon Chime SDK meeting resource.
+   * Untags the specified tags from the specified Amazon Chime SDK meeting resource. Applies the specified tags to the specified Amazon Chime SDK meeting resource.   This API is is no longer supported and will not be updated. We recommend using the latest version, UntagResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   untagResource(params: Chime.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Untags the specified tags from the specified Amazon Chime SDK meeting resource.
+   * Untags the specified tags from the specified Amazon Chime SDK meeting resource. Applies the specified tags to the specified Amazon Chime SDK meeting resource.   This API is is no longer supported and will not be updated. We recommend using the latest version, UntagResource, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1372,19 +1372,19 @@ declare class Chime extends Service {
    */
   updateAccountSettings(callback?: (err: AWSError, data: Chime.Types.UpdateAccountSettingsResponse) => void): Request<Chime.Types.UpdateAccountSettingsResponse, AWSError>;
   /**
-   * Updates AppInstance metadata.
+   * Updates AppInstance metadata.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateAppInstance, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateAppInstance(params: Chime.Types.UpdateAppInstanceRequest, callback?: (err: AWSError, data: Chime.Types.UpdateAppInstanceResponse) => void): Request<Chime.Types.UpdateAppInstanceResponse, AWSError>;
   /**
-   * Updates AppInstance metadata.
+   * Updates AppInstance metadata.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateAppInstance, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateAppInstance(callback?: (err: AWSError, data: Chime.Types.UpdateAppInstanceResponse) => void): Request<Chime.Types.UpdateAppInstanceResponse, AWSError>;
   /**
-   * Updates the details of an AppInstanceUser. You can update names and metadata.
+   * Updates the details of an AppInstanceUser. You can update names and metadata.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateAppInstanceUser(params: Chime.Types.UpdateAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.UpdateAppInstanceUserResponse) => void): Request<Chime.Types.UpdateAppInstanceUserResponse, AWSError>;
   /**
-   * Updates the details of an AppInstanceUser. You can update names and metadata.
+   * Updates the details of an AppInstanceUser. You can update names and metadata.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateAppInstanceUser, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.UpdateAppInstanceUserResponse) => void): Request<Chime.Types.UpdateAppInstanceUserResponse, AWSError>;
   /**
@@ -1396,27 +1396,27 @@ declare class Chime extends Service {
    */
   updateBot(callback?: (err: AWSError, data: Chime.Types.UpdateBotResponse) => void): Request<Chime.Types.UpdateBotResponse, AWSError>;
   /**
-   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateChannel, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateChannel(params: Chime.Types.UpdateChannelRequest, callback?: (err: AWSError, data: Chime.Types.UpdateChannelResponse) => void): Request<Chime.Types.UpdateChannelResponse, AWSError>;
   /**
-   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateChannel, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateChannel(callback?: (err: AWSError, data: Chime.Types.UpdateChannelResponse) => void): Request<Chime.Types.UpdateChannelResponse, AWSError>;
   /**
-   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateChannelMessage(params: Chime.Types.UpdateChannelMessageRequest, callback?: (err: AWSError, data: Chime.Types.UpdateChannelMessageResponse) => void): Request<Chime.Types.UpdateChannelMessageResponse, AWSError>;
   /**
-   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateChannelMessage, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateChannelMessage(callback?: (err: AWSError, data: Chime.Types.UpdateChannelMessageResponse) => void): Request<Chime.Types.UpdateChannelMessageResponse, AWSError>;
   /**
-   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateChannelReadMarker, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateChannelReadMarker(params: Chime.Types.UpdateChannelReadMarkerRequest, callback?: (err: AWSError, data: Chime.Types.UpdateChannelReadMarkerResponse) => void): Request<Chime.Types.UpdateChannelReadMarkerResponse, AWSError>;
   /**
-   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header.    This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateChannelReadMarker, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateChannelReadMarker(callback?: (err: AWSError, data: Chime.Types.UpdateChannelReadMarkerResponse) => void): Request<Chime.Types.UpdateChannelReadMarkerResponse, AWSError>;
   /**
@@ -1444,11 +1444,11 @@ declare class Chime extends Service {
    */
   updatePhoneNumberSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the specified proxy session details, such as voice or SMS capabilities.
+   * Updates the specified proxy session details, such as voice or SMS capabilities.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateProxySession, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateProxySession(params: Chime.Types.UpdateProxySessionRequest, callback?: (err: AWSError, data: Chime.Types.UpdateProxySessionResponse) => void): Request<Chime.Types.UpdateProxySessionResponse, AWSError>;
   /**
-   * Updates the specified proxy session details, such as voice or SMS capabilities.
+   * Updates the specified proxy session details, such as voice or SMS capabilities.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateProxySession, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateProxySession(callback?: (err: AWSError, data: Chime.Types.UpdateProxySessionResponse) => void): Request<Chime.Types.UpdateProxySessionResponse, AWSError>;
   /**
@@ -1468,27 +1468,27 @@ declare class Chime extends Service {
    */
   updateRoomMembership(callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
   /**
-   * Updates the details of the specified SIP media application.
+   * Updates the details of the specified SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateSipMediaApplication, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateSipMediaApplication(params: Chime.Types.UpdateSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationResponse, AWSError>;
   /**
-   * Updates the details of the specified SIP media application.
+   * Updates the details of the specified SIP media application.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateSipMediaApplication, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationResponse, AWSError>;
   /**
-   * Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.
+   * Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateSipMediaApplicationCall, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateSipMediaApplicationCall(params: Chime.Types.UpdateSipMediaApplicationCallRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationCallResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationCallResponse, AWSError>;
   /**
-   * Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.
+   * Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateSipMediaApplicationCall, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateSipMediaApplicationCall(callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationCallResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationCallResponse, AWSError>;
   /**
-   * Updates the details of the specified SIP rule.
+   * Updates the details of the specified SIP rule.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateSipRule, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateSipRule(params: Chime.Types.UpdateSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipRuleResponse) => void): Request<Chime.Types.UpdateSipRuleResponse, AWSError>;
   /**
-   * Updates the details of the specified SIP rule.
+   * Updates the details of the specified SIP rule.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateSipRule, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateSipRule(callback?: (err: AWSError, data: Chime.Types.UpdateSipRuleResponse) => void): Request<Chime.Types.UpdateSipRuleResponse, AWSError>;
   /**
@@ -1508,27 +1508,27 @@ declare class Chime extends Service {
    */
   updateUserSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates details for the specified Amazon Chime Voice Connector.
+   * Updates details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateVoiceConnector(params: Chime.Types.UpdateVoiceConnectorRequest, callback?: (err: AWSError, data: Chime.Types.UpdateVoiceConnectorResponse) => void): Request<Chime.Types.UpdateVoiceConnectorResponse, AWSError>;
   /**
-   * Updates details for the specified Amazon Chime Voice Connector.
+   * Updates details for the specified Amazon Chime Voice Connector.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateVoiceConnector, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateVoiceConnector(callback?: (err: AWSError, data: Chime.Types.UpdateVoiceConnectorResponse) => void): Request<Chime.Types.UpdateVoiceConnectorResponse, AWSError>;
   /**
-   * Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.
+   * Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateVoiceConnectorGroup(params: Chime.Types.UpdateVoiceConnectorGroupRequest, callback?: (err: AWSError, data: Chime.Types.UpdateVoiceConnectorGroupResponse) => void): Request<Chime.Types.UpdateVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.
+   * Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.   This API is is no longer supported and will not be updated. We recommend using the latest version, UpdateVoiceConnectorGroup, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   updateVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.UpdateVoiceConnectorGroupResponse) => void): Request<Chime.Types.UpdateVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.
+   * Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.   This API is is no longer supported and will not be updated. We recommend using the latest version, ValidateE911Address, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   validateE911Address(params: Chime.Types.ValidateE911AddressRequest, callback?: (err: AWSError, data: Chime.Types.ValidateE911AddressResponse) => void): Request<Chime.Types.ValidateE911AddressResponse, AWSError>;
   /**
-   * Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.
+   * Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.   This API is is no longer supported and will not be updated. We recommend using the latest version, ValidateE911Address, in the Amazon Chime SDK. Using the latest version requires migrating to a dedicated namespace. For more information, refer to Migrating from the Amazon Chime namespace in the Amazon Chime SDK Developer Guide. 
    */
   validateE911Address(callback?: (err: AWSError, data: Chime.Types.ValidateE911AddressResponse) => void): Request<Chime.Types.ValidateE911AddressResponse, AWSError>;
 }
@@ -4962,15 +4962,15 @@ declare namespace Chime {
      */
     AudioFallbackUrl?: UriType;
     /**
-     * The screen data URL.
+     * The screen data URL.   This parameter is is no longer supported and no longer used by the Amazon Chime SDK.  
      */
     ScreenDataUrl?: UriType;
     /**
-     * The screen sharing URL.
+     * The screen sharing URL.   This parameter is is no longer supported and no longer used by the Amazon Chime SDK.. 
      */
     ScreenSharingUrl?: UriType;
     /**
-     * The screen viewing URL.
+     * The screen viewing URL.   This parameter is is no longer supported and no longer used by the Amazon Chime SDK.  
      */
     ScreenViewingUrl?: UriType;
     /**
@@ -4978,7 +4978,7 @@ declare namespace Chime {
      */
     SignalingUrl?: UriType;
     /**
-     * The turn control URL.
+     * The turn control URL.   This parameter is is no longer supported and no longer used by the Amazon Chime SDK.  
      */
     TurnControlUrl?: UriType;
     /**

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1407.0-->
+<!--LATEST=2.1408.0-->
 <!--ENTRYINSERT-->
+
+## 2.1408.0
+* feature: AppStream: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
+* feature: Chime: The Amazon Chime SDK APIs in the Chime namespace are no longer supported.  Customers should use APIs in the dedicated Amazon Chime SDK namespaces: ChimeSDKIdentity, ChimeSDKMediaPipelines, ChimeSDKMeetings, ChimeSDKMessaging, and ChimeSDKVoice.
+* feature: CleanRooms: This release adds support for the OR operator in RSQL join match conditions and the ability to control which operators (AND, OR) are allowed in a join match condition.
+* feature: DynamoDB: This release adds ReturnValuesOnConditionCheckFailure parameter to PutItem, UpdateItem, DeleteItem, ExecuteStatement, BatchExecuteStatement and ExecuteTransaction APIs. When set to ALL_OLD,  API returns a copy of the item as it was when a conditional write failed
+* feature: GameLift: Amazon GameLift now supports game builds that use the Amazon Linux 2023 (AL2023) operating system.
+* feature: Glue: This release adds support for AWS Glue Crawler with Iceberg Tables, allowing Crawlers to discover Iceberg Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+* feature: SageMaker: Adding support for timeseries forecasting in the CreateAutoMLJobV2 API.
 
 ## 2.1407.0
 * bugfix: Cost Explorer: recognize Cost Explorer global endpoints.

@@ -421,6 +421,10 @@ export namespace DocumentClient {
      *  The error message associated with the PartiQL batch response. 
      */
     Message?: String;
+    /**
+     * The item which caused the condition check to fail. This will be set if ReturnValuesOnConditionCheckFailure is specified as ALL_OLD.
+     */
+    Item?: AttributeMap;
   }
   export type BatchStatementErrorCodeEnum = "ConditionalCheckFailed"|"ItemCollectionSizeLimitExceeded"|"RequestLimitExceeded"|"ValidationError"|"ProvisionedThroughputExceeded"|"TransactionConflict"|"ThrottlingError"|"InternalServerError"|"ResourceNotFound"|"AccessDenied"|"DuplicateItem"|string;
   export interface BatchStatementRequest {
@@ -436,6 +440,10 @@ export namespace DocumentClient {
      *  The read consistency of the PartiQL batch request. 
      */
     ConsistentRead?: ConsistentRead;
+    /**
+     * An optional parameter that returns the item attributes for a PartiQL batch request operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface BatchStatementResponse {
     /**
@@ -842,6 +850,10 @@ export namespace DocumentClient {
      * One or more values that can be substituted in an expression. Use the : (colon) character in an expression to dereference an attribute value. For example, suppose that you wanted to check whether the value of the ProductStatus attribute was one of the following:   Available | Backordered | Discontinued  You would first need to specify ExpressionAttributeValues as follows:  { ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }  You could then use these values in an expression, such as this:  ProductStatus IN (:avail, :back, :disc)  For more information on expression attribute values, see Condition Expressions in the Amazon DynamoDB Developer Guide.
      */
     ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * An optional parameter that returns the item attributes for a DeleteItem operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface DeleteItemOutput {
     /**
@@ -1118,6 +1130,10 @@ export namespace DocumentClient {
      * The maximum number of items to evaluate (not necessarily the number of matching items). If DynamoDB processes the number of items up to the limit while processing the results, it stops the operation and returns the matching values up to that point, along with a key in LastEvaluatedKey to apply in a subsequent operation so you can pick up where you left off. Also, if the processed dataset size exceeds 1 MB before DynamoDB reaches this limit, it stops the operation and returns the matching values up to the limit, and a key in LastEvaluatedKey to apply in a subsequent operation to continue the operation. 
      */
     Limit?: PositiveIntegerObject;
+    /**
+     * An optional parameter that returns the item attributes for an ExecuteStatement operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface ExecuteStatementOutput {
     /**
@@ -2061,6 +2077,10 @@ export namespace DocumentClient {
      *  The parameter values. 
      */
     Parameters?: PreparedStatementParameters;
+    /**
+     * An optional parameter that returns the item attributes for a PartiQL ParameterizedStatement operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export type ParameterizedStatements = ParameterizedStatement[];
   export type PartiQLBatchRequest = BatchStatementRequest[];
@@ -2206,6 +2226,10 @@ export namespace DocumentClient {
      * One or more values that can be substituted in an expression. Use the : (colon) character in an expression to dereference an attribute value. For example, suppose that you wanted to check whether the value of the ProductStatus attribute was one of the following:   Available | Backordered | Discontinued  You would first need to specify ExpressionAttributeValues as follows:  { ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }  You could then use these values in an expression, such as this:  ProductStatus IN (:avail, :back, :disc)  For more information on expression attribute values, see Condition Expressions in the Amazon DynamoDB Developer Guide.
      */
     ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * An optional parameter that returns the item attributes for a PutItem operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export type PutItemInputAttributeMap = {[key: string]: AttributeValue};
   export interface PutItemOutput {
@@ -3353,6 +3377,10 @@ export namespace DocumentClient {
      * One or more values that can be substituted in an expression. Use the : (colon) character in an expression to dereference an attribute value. For example, suppose that you wanted to check whether the value of the ProductStatus attribute was one of the following:   Available | Backordered | Discontinued  You would first need to specify ExpressionAttributeValues as follows:  { ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }  You could then use these values in an expression, such as this:  ProductStatus IN (:avail, :back, :disc)  For more information on expression attribute values, see Condition Expressions in the Amazon DynamoDB Developer Guide.
      */
     ExpressionAttributeValues?: ExpressionAttributeValueMap;
+    /**
+     * An optional parameter that returns the item attributes for an UpdateItem operation that failed a condition check. There is no additional cost associated with requesting a return value aside from the small network and processing overhead of receiving a larger response. No read capacity units are consumed.
+     */
+    ReturnValuesOnConditionCheckFailure?: ReturnValuesOnConditionCheckFailure;
   }
   export interface UpdateItemOutput {
     /**

@@ -2666,6 +2666,8 @@ declare namespace SageMaker {
     AgentCount: Long;
   }
   export type AgentVersions = AgentVersion[];
+  export type AggregationTransformationValue = "sum"|"avg"|"first"|"min"|"max"|string;
+  export type AggregationTransformations = {[key: string]: AggregationTransformationValue};
   export interface Alarm {
     /**
      * The name of a CloudWatch alarm in your account.
@@ -3207,11 +3209,11 @@ declare namespace SageMaker {
   }
   export interface AutoMLJobChannel {
     /**
-     * The type of channel. Defines whether the data are used for training or validation. The default value is training. Channels for training and validation must share the same ContentType 
+     * The type of channel. Defines whether the data are used for training or validation. The default value is training. Channels for training and validation must share the same ContentType   The type of channel defaults to training for the time-series forecasting problem type. 
      */
     ChannelType?: AutoMLChannelType;
     /**
-     * The content type of the data from the input source. The following are the allowed content types for different problems:   For Tabular problem types: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For ImageClassification: image/png, image/jpeg, or image/*. The default value is image/*.   For TextClassification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
+     * The content type of the data from the input source. The following are the allowed content types for different problems:   For tabular problem types: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For image classification: image/png, image/jpeg, or image/*. The default value is image/*.   For text classification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For time-series forecasting: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
      */
     ContentType?: ContentType;
     /**
@@ -3225,7 +3227,7 @@ declare namespace SageMaker {
   }
   export interface AutoMLJobCompletionCriteria {
     /**
-     * The maximum number of times a training job is allowed to run. For job V2s (jobs created by calling CreateAutoMLJobV2), the supported value is 1.
+     * The maximum number of times a training job is allowed to run. For text and image classification, as well as time-series forecasting problem types, the supported value is 1. For tabular problem types, the maximum value is 750.
      */
     MaxCandidates?: MaxCandidates;
     /**
@@ -3263,12 +3265,12 @@ declare namespace SageMaker {
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
     /**
-     * The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset. For the list of all available metrics supported by Autopilot, see Autopilot metrics. If you do not specify a metric explicitly, the default behavior is to automatically use:   For tabular problem types:   Regression: MSE.   Binary classification: F1.   Multiclass classification: Accuracy.     For image or text classification problem types: Accuracy   
+     * The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset. For the list of all available metrics supported by Autopilot, see Autopilot metrics. If you do not specify a metric explicitly, the default behavior is to automatically use:   For tabular problem types:   Regression: MSE.   Binary classification: F1.   Multiclass classification: Accuracy.     For image or text classification problem types: Accuracy    For time-series forecasting problem types: AverageWeightedQuantileLoss   
      */
     MetricName: AutoMLMetricEnum;
   }
   export type AutoMLJobObjectiveType = "Maximize"|"Minimize"|string;
-  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|"GeneratingModelInsightsReport"|"ModelInsightsError"|"TrainingModels"|string;
+  export type AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated"|"GeneratingExplainabilityReport"|"Completed"|"ExplainabilityError"|"DeployingModel"|"ModelDeploymentError"|"GeneratingModelInsightsReport"|"ModelInsightsError"|"TrainingModels"|"PreTraining"|string;
   export type AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
   export interface AutoMLJobStepMetadata {
     /**
@@ -3316,8 +3318,8 @@ declare namespace SageMaker {
     PartialFailureReasons?: AutoMLPartialFailureReasons;
   }
   export type AutoMLMaxResults = number;
-  export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|string;
-  export type AutoMLMetricExtendedEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"LogLoss"|"InferenceLatency"|string;
+  export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"MAPE"|"MASE"|"WAPE"|"AverageWeightedQuantileLoss"|string;
+  export type AutoMLMetricExtendedEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"LogLoss"|"InferenceLatency"|"MAPE"|"MASE"|"WAPE"|"AverageWeightedQuantileLoss"|string;
   export type AutoMLMode = "AUTO"|"ENSEMBLING"|"HYPERPARAMETER_TUNING"|string;
   export type AutoMLNameContains = string;
   export interface AutoMLOutputDataConfig {
@@ -3350,8 +3352,12 @@ declare namespace SageMaker {
      * Settings used to configure an AutoML job V2 for a tabular problem type (regression, classification).
      */
     TabularJobConfig?: TabularJobConfig;
+    /**
+     * Settings used to configure an AutoML job V2 for a time-series forecasting problem type.
+     */
+    TimeSeriesForecastingJobConfig?: TimeSeriesForecastingJobConfig;
   }
-  export type AutoMLProblemTypeConfigName = "ImageClassification"|"TextClassification"|"Tabular"|string;
+  export type AutoMLProblemTypeConfigName = "ImageClassification"|"TextClassification"|"Tabular"|"TimeSeriesForecasting"|string;
   export interface AutoMLProblemTypeResolvedAttributes {
     /**
      * Defines the resolved attributes for the TABULAR problem type.
@@ -3419,6 +3425,7 @@ declare namespace SageMaker {
   }
   export type AutotuneMode = "Enabled"|string;
   export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
+  export type BacktestResultsLocation = string;
   export interface BatchDataCaptureConfig {
     /**
      * The Amazon S3 location being used to capture the data.
@@ -3608,6 +3615,10 @@ declare namespace SageMaker {
      * The Amazon S3 prefix to the model insight artifacts generated for the AutoML candidate.
      */
     ModelInsights?: ModelInsightsLocation;
+    /**
+     * The Amazon S3 prefix to the accuracy metrics and the inference results observed over the testing window. Available only for the time-series forecasting problem type.
+     */
+    BacktestResults?: BacktestResultsLocation;
   }
   export type CandidateDefinitionNotebookLocation = string;
   export interface CandidateGenerationConfig {
@@ -4422,7 +4433,7 @@ declare namespace SageMaker {
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to the InputDataConfig attribute in the CreateAutoMLJob input parameters. The supported formats depend on the problem type:   For Tabular problem types: S3Prefix, ManifestFile.   For ImageClassification: S3Prefix, ManifestFile, AugmentedManifestFile.   For TextClassification: S3Prefix.  
+     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to the InputDataConfig attribute in the CreateAutoMLJob input parameters. The supported formats depend on the problem type:   For tabular problem types: S3Prefix, ManifestFile.   For image classification: S3Prefix, ManifestFile, AugmentedManifestFile.   For text classification: S3Prefix.   For time-series forecasting: S3Prefix.  
      */
     AutoMLJobInputDataConfig: AutoMLJobInputDataConfig;
     /**
@@ -4454,7 +4465,7 @@ declare namespace SageMaker {
      */
     ModelDeployConfig?: ModelDeployConfig;
     /**
-     * This structure specifies how to split the data into train and validation datasets. The validation and training datasets must contain the same headers. For jobs created by calling CreateAutoMLJob, the validation dataset must be less than 2 GB in size.
+     * This structure specifies how to split the data into train and validation datasets. The validation and training datasets must contain the same headers. For jobs created by calling CreateAutoMLJob, the validation dataset must be less than 2 GB in size.  This attribute must not be set for the time-series forecasting problem type, as Autopilot automatically splits the input dataset into training and validation sets. 
      */
     DataSplitConfig?: AutoMLDataSplitConfig;
   }
@@ -11295,6 +11306,10 @@ declare namespace SageMaker {
   }
   export type FileSystemId = string;
   export type FileSystemType = "EFS"|"FSxLustre"|string;
+  export type FillingTransformationMap = {[key: string]: FillingTransformationValue};
+  export type FillingTransformationValue = string;
+  export type FillingTransformations = {[key: string]: FillingTransformationMap};
+  export type FillingType = "frontfill"|"middlefill"|"backfill"|"futurefill"|"frontfill_value"|"middlefill_value"|"backfill_value"|"futurefill_value"|string;
   export interface Filter {
     /**
      * A resource property name. For example, TrainingJobName. For valid property names, see SearchRecord. You must specify a valid property for the resource.
@@ -11388,6 +11403,10 @@ declare namespace SageMaker {
   export type FlowDefinitionTaskKeywords = FlowDefinitionTaskKeyword[];
   export type FlowDefinitionTaskTimeLimitInSeconds = number;
   export type FlowDefinitionTaskTitle = string;
+  export type ForecastFrequency = string;
+  export type ForecastHorizon = number;
+  export type ForecastQuantile = string;
+  export type ForecastQuantiles = ForecastQuantile[];
   export type Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|"DARKNET"|"SKLEARN"|string;
   export type FrameworkVersion = string;
   export type GenerateCandidateDefinitionsOnly = boolean;
@@ -11505,6 +11524,8 @@ declare namespace SageMaker {
   }
   export type GitConfigUrl = string;
   export type Group = string;
+  export type GroupingAttributeName = string;
+  export type GroupingAttributeNames = GroupingAttributeName[];
   export type Groups = Group[];
   export type HookParameters = {[key: string]: ConfigValue};
   export type Horovod = boolean;
@@ -12618,6 +12639,7 @@ declare namespace SageMaker {
   export type InvocationsMaxRetries = number;
   export type InvocationsTimeoutInSeconds = number;
   export type IotRoleAlias = string;
+  export type ItemIdentifierAttributeName = string;
   export type JobDurationInSeconds = number;
   export type JobReferenceCode = string;
   export type JobReferenceCodeContains = string;
@@ -20402,6 +20424,51 @@ declare namespace SageMaker {
     TargetLabelColumn?: TargetLabelColumn;
   }
   export type ThingName = string;
+  export interface TimeSeriesConfig {
+    /**
+     * The name of the column representing the target variable that you want to predict for each item in your dataset. The data type of the target variable must be numerical.
+     */
+    TargetAttributeName: TargetAttributeName;
+    /**
+     * The name of the column indicating a point in time at which the target value of a given item is recorded.
+     */
+    TimestampAttributeName: TimestampAttributeName;
+    /**
+     * The name of the column that represents the set of item identifiers for which you want to predict the target value.
+     */
+    ItemIdentifierAttributeName: ItemIdentifierAttributeName;
+    /**
+     * A set of columns names that can be grouped with the item identifier column to create a composite key for which a target value is predicted.
+     */
+    GroupingAttributeNames?: GroupingAttributeNames;
+  }
+  export interface TimeSeriesForecastingJobConfig {
+    /**
+     * A URL to the Amazon S3 data source containing additional selected features that complement the target, itemID, timestamp, and grouped columns set in TimeSeriesConfig. When not provided, the AutoML job V2 includes all the columns from the original dataset that are not already declared in TimeSeriesConfig. If provided, the AutoML job V2 only considers these additional columns as a complement to the ones declared in TimeSeriesConfig.  You can input FeatureAttributeNames (optional) in JSON format as shown below:   { "FeatureAttributeNames":["col1", "col2", ...] }. You can also specify the data type of the feature (optional) in the format shown below:  { "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } }  Autopilot supports the following data types: numeric, categorical, text, and datetime.  These column keys must not include any column set in TimeSeriesConfig.  When not provided, the AutoML job V2 includes all the columns from the original dataset that are not already declared in TimeSeriesConfig. If provided, the AutoML job V2 only considers these additional columns as a complement to the ones declared in TimeSeriesConfig. Autopilot supports the following data types: numeric, categorical, text, and datetime.
+     */
+    FeatureSpecificationS3Uri?: S3Uri;
+    CompletionCriteria?: AutoMLJobCompletionCriteria;
+    /**
+     * The frequency of predictions in a forecast. Valid intervals are an integer followed by Y (Year), M (Month), W (Week), D (Day), H (Hour), and min (Minute). For example, 1D indicates every day and 15min indicates every 15 minutes. The value of a frequency must not overlap with the next larger frequency. For example, you must use a frequency of 1H instead of 60min. The valid values for each frequency are the following:   Minute - 1-59   Hour - 1-23   Day - 1-6   Week - 1-4   Month - 1-11   Year - 1  
+     */
+    ForecastFrequency: ForecastFrequency;
+    /**
+     * The number of time-steps that the model predicts. The forecast horizon is also called the prediction length. The maximum forecast horizon is the lesser of 500 time-steps or 1/4 of the time-steps in the dataset.
+     */
+    ForecastHorizon: ForecastHorizon;
+    /**
+     * The quantiles used to train the model for forecasts at a specified quantile. You can specify quantiles from 0.01 (p1) to 0.99 (p99), by increments of 0.01 or higher. Up to five forecast quantiles can be specified. When ForecastQuantiles is not provided, the AutoML job uses the quantiles p10, p50, and p90 as default.
+     */
+    ForecastQuantiles?: ForecastQuantiles;
+    /**
+     * The transformations modifying specific attributes of the time-series, such as filling strategies for missing values.
+     */
+    Transformations?: TimeSeriesTransformations;
+    /**
+     * The collection of components that defines the time-series.
+     */
+    TimeSeriesConfig: TimeSeriesConfig;
+  }
   export interface TimeSeriesForecastingSettings {
     /**
      * Describes whether time series forecasting is enabled or disabled in the Canvas application.
@@ -20412,7 +20479,18 @@ declare namespace SageMaker {
      */
     AmazonForecastRoleArn?: RoleArn;
   }
+  export interface TimeSeriesTransformations {
+    /**
+     * A key value pair defining the filling method for a column, where the key is the column name and the value is an object which defines the filling logic. You can specify multiple filling methods for a single column. The supported filling methods and their corresponding options are:    frontfill: none (Supported only for target column)    middlefill: zero, value, median, mean, min, max     backfill: zero, value, median, mean, min, max     futurefill: zero, value, median, mean, min, max    To set a filling method to a specific value, set the fill parameter to the chosen filling method value (for example "backfill" : "value"), and define the filling value in an additional parameter prefixed with "_value". For example, to set backfill to a value of 2, you must include two parameters: "backfill": "value" and "backfill_value":"2".
+     */
+    Filling?: FillingTransformations;
+    /**
+     * A key value pair defining the aggregation method for a column, where the key is the column name and the value is the aggregation method. The supported aggregation methods are sum (default), avg, first, min, max.  Aggregation is only supported for the target column. 
+     */
+    Aggregation?: AggregationTransformations;
+  }
   export type Timestamp = Date;
+  export type TimestampAttributeName = string;
   export type TrafficDurationInSeconds = number;
   export interface TrafficPattern {
     /**
@@ -20944,6 +21022,7 @@ declare namespace SageMaker {
      */
     S3Uri: S3Uri;
   }
+  export type TransformationAttributeName = string;
   export interface Trial {
     /**
      * The name of the trial.
