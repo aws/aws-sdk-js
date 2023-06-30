@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Amp",
+        "description": "AWS SDK service model  generation tool version upgrade."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "Added new field  \"credentialspecs\" to the ecs task definition to support gMSA of windows/linux in both domainless and domain-joined mode"
+    },
+    {
+        "type": "feature",
+        "category": "IVS",
+        "description": "Corrects the HTTP response code in the generated docs for PutMetadata and DeleteRecordingConfiguration APIs."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds support for rolling deployment in SageMaker Inference."
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Add outbound Basic authentication support to AS2 connectors"
+    }
+]

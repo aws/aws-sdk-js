@@ -7649,7 +7649,7 @@
           "documentation": "<p>Defines the capacity size, either as a number of instances or a capacity percentage.</p>"
         }
       },
-      "documentation": "<p>Specifies the endpoint capacity to activate for production.</p>"
+      "documentation": "<p>Specifies the type and size of the endpoint capacity to activate for a blue/green deployment, a rolling deployment, or a rollback strategy. You can specify your batches as either instance count or the overall percentage or your fleet.</p> <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> to 100%, then SageMaker uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>"
     },
     "CapacitySizeType": {
       "type": "string",
@@ -12767,9 +12767,6 @@
     },
     "DeploymentConfig": {
       "type": "structure",
-      "required": [
-        "BlueGreenUpdatePolicy"
-      ],
       "members": {
         "BlueGreenUpdatePolicy": {
           "shape": "BlueGreenUpdatePolicy",
@@ -12778,6 +12775,10 @@
         "AutoRollbackConfiguration": {
           "shape": "AutoRollbackConfig",
           "documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>"
+        },
+        "RollingUpdatePolicy": {
+          "shape": "RollingUpdatePolicy",
+          "documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>"
         }
       },
       "documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.</p>"
@@ -18426,7 +18427,8 @@
         "RollingBack",
         "InService",
         "Deleting",
-        "Failed"
+        "Failed",
+        "UpdateRollbackFailed"
       ]
     },
     "EndpointSummary": {
@@ -26292,7 +26294,7 @@
     },
     "MaximumExecutionTimeoutInSeconds": {
       "type": "integer",
-      "max": 14400,
+      "max": 28800,
       "min": 600
     },
     "MaximumRetryAttempts": {
@@ -32722,6 +32724,32 @@
       "max": 2048,
       "min": 20,
       "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+    },
+    "RollingUpdatePolicy": {
+      "type": "structure",
+      "required": [
+        "MaximumBatchSize",
+        "WaitIntervalInSeconds"
+      ],
+      "members": {
+        "MaximumBatchSize": {
+          "shape": "CapacitySize",
+          "documentation": "<p>Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant's total instance count.</p>"
+        },
+        "WaitIntervalInSeconds": {
+          "shape": "WaitIntervalInSeconds",
+          "documentation": "<p>The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet.</p>"
+        },
+        "MaximumExecutionTimeoutInSeconds": {
+          "shape": "MaximumExecutionTimeoutInSeconds",
+          "documentation": "<p>The time limit for the total deployment. Exceeding this limit causes a timeout.</p>"
+        },
+        "RollbackMaximumBatchSize": {
+          "shape": "CapacitySize",
+          "documentation": "<p>Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>"
     },
     "RootAccess": {
       "type": "string",

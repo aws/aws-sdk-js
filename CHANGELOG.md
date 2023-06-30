@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1408.0-->
+<!--LATEST=2.1409.0-->
 <!--ENTRYINSERT-->
+
+## 2.1409.0
+* feature: Amp: AWS SDK service model  generation tool version upgrade.
+* feature: ECS: Added new field  "credentialspecs" to the ecs task definition to support gMSA of windows/linux in both domainless and domain-joined mode
+* feature: IVS: Corrects the HTTP response code in the generated docs for PutMetadata and DeleteRecordingConfiguration APIs.
+* feature: SageMaker: This release adds support for rolling deployment in SageMaker Inference.
+* feature: Transfer: Add outbound Basic authentication support to AS2 connectors
 
 ## 2.1408.0
 * feature: AppStream: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block

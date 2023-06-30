@@ -201,21 +201,21 @@ declare namespace Amp {
   export type AlertManagerDefinitionData = Buffer|Uint8Array|Blob|string;
   export interface AlertManagerDefinitionDescription {
     /**
-     * The time when the alert manager definition was created.
+     * The status of alert manager definition.
      */
-    createdAt: Timestamp;
+    status: AlertManagerDefinitionStatus;
     /**
      * The alert manager definition.
      */
     data: AlertManagerDefinitionData;
     /**
+     * The time when the alert manager definition was created.
+     */
+    createdAt: Timestamp;
+    /**
      * The time when the alert manager definition was modified.
      */
     modifiedAt: Timestamp;
-    /**
-     * The status of alert manager definition.
-     */
-    status: AlertManagerDefinitionStatus;
   }
   export interface AlertManagerDefinitionStatus {
     /**
@@ -230,17 +230,17 @@ declare namespace Amp {
   export type AlertManagerDefinitionStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|"UPDATE_FAILED"|string;
   export interface CreateAlertManagerDefinitionRequest {
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace in which to create the alert manager definition.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
     /**
      * The alert manager definition data.
      */
     data: AlertManagerDefinitionData;
     /**
-     * The ID of the workspace in which to create the alert manager definition.
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
   }
   export interface CreateAlertManagerDefinitionResponse {
     /**
@@ -250,17 +250,17 @@ declare namespace Amp {
   }
   export interface CreateLoggingConfigurationRequest {
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace to vend logs to.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
     /**
      * The ARN of the CW log group to which the vended log data will be published.
      */
     logGroupArn: LogGroupArn;
     /**
-     * The ID of the workspace to vend logs to.
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
   }
   export interface CreateLoggingConfigurationResponse {
     /**
@@ -270,35 +270,35 @@ declare namespace Amp {
   }
   export interface CreateRuleGroupsNamespaceRequest {
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace in which to create the rule group namespace.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
+    /**
+     * The rule groups namespace name.
+     */
+    name: RuleGroupsNamespaceName;
     /**
      * The namespace data that define the rule groups.
      */
     data: RuleGroupsNamespaceData;
     /**
-     * The rule groups namespace name.
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
-    name: RuleGroupsNamespaceName;
+    clientToken?: IdempotencyToken;
     /**
      * Optional, user-provided tags for this rule groups namespace.
      */
     tags?: TagMap;
-    /**
-     * The ID of the workspace in which to create the rule group namespace.
-     */
-    workspaceId: WorkspaceId;
   }
   export interface CreateRuleGroupsNamespaceResponse {
-    /**
-     * The Amazon Resource Name (ARN) of this rule groups namespace.
-     */
-    arn: RuleGroupsNamespaceArn;
     /**
      * The rule groups namespace name.
      */
     name: RuleGroupsNamespaceName;
+    /**
+     * The Amazon Resource Name (ARN) of this rule groups namespace.
+     */
+    arn: RuleGroupsNamespaceArn;
     /**
      * The status of rule groups namespace.
      */
@@ -324,6 +324,10 @@ declare namespace Amp {
   }
   export interface CreateWorkspaceResponse {
     /**
+     * The generated ID of the workspace that was just created.
+     */
+    workspaceId: WorkspaceId;
+    /**
      * The ARN of the workspace that was just created.
      */
     arn: WorkspaceArn;
@@ -335,54 +339,50 @@ declare namespace Amp {
      * The tags of this workspace.
      */
     tags?: TagMap;
-    /**
-     * The generated ID of the workspace that was just created.
-     */
-    workspaceId: WorkspaceId;
   }
   export interface DeleteAlertManagerDefinitionRequest {
-    /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
-     */
-    clientToken?: IdempotencyToken;
     /**
      * The ID of the workspace in which to delete the alert manager definition.
      */
     workspaceId: WorkspaceId;
-  }
-  export interface DeleteLoggingConfigurationRequest {
     /**
      * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
     clientToken?: IdempotencyToken;
+  }
+  export interface DeleteLoggingConfigurationRequest {
     /**
      * The ID of the workspace to vend logs to.
      */
     workspaceId: WorkspaceId;
-  }
-  export interface DeleteRuleGroupsNamespaceRequest {
     /**
      * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
     clientToken?: IdempotencyToken;
+  }
+  export interface DeleteRuleGroupsNamespaceRequest {
+    /**
+     * The ID of the workspace to delete rule group definition.
+     */
+    workspaceId: WorkspaceId;
     /**
      * The rule groups namespace name.
      */
     name: RuleGroupsNamespaceName;
     /**
-     * The ID of the workspace to delete rule group definition.
-     */
-    workspaceId: WorkspaceId;
-  }
-  export interface DeleteWorkspaceRequest {
-    /**
      * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
     clientToken?: IdempotencyToken;
+  }
+  export interface DeleteWorkspaceRequest {
     /**
      * The ID of the workspace to delete.
      */
     workspaceId: WorkspaceId;
+    /**
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     */
+    clientToken?: IdempotencyToken;
   }
   export interface DescribeAlertManagerDefinitionRequest {
     /**
@@ -410,13 +410,13 @@ declare namespace Amp {
   }
   export interface DescribeRuleGroupsNamespaceRequest {
     /**
-     * The rule groups namespace.
-     */
-    name: RuleGroupsNamespaceName;
-    /**
      * The ID of the workspace to describe.
      */
     workspaceId: WorkspaceId;
+    /**
+     * The rule groups namespace.
+     */
+    name: RuleGroupsNamespaceName;
   }
   export interface DescribeRuleGroupsNamespaceResponse {
     /**
@@ -439,9 +439,9 @@ declare namespace Amp {
   export type IdempotencyToken = string;
   export interface ListRuleGroupsNamespacesRequest {
     /**
-     * Maximum results to return in response (default=100, maximum=1000).
+     * The ID of the workspace.
      */
-    maxResults?: ListRuleGroupsNamespacesRequestMaxResultsInteger;
+    workspaceId: WorkspaceId;
     /**
      * Optional filter for rule groups namespace name. Only the rule groups namespace that begin with this value will be returned.
      */
@@ -451,20 +451,20 @@ declare namespace Amp {
      */
     nextToken?: PaginationToken;
     /**
-     * The ID of the workspace.
+     * Maximum results to return in response (default=100, maximum=1000).
      */
-    workspaceId: WorkspaceId;
+    maxResults?: ListRuleGroupsNamespacesRequestMaxResultsInteger;
   }
   export type ListRuleGroupsNamespacesRequestMaxResultsInteger = number;
   export interface ListRuleGroupsNamespacesResponse {
     /**
-     * Pagination token to use when requesting the next page in this list.
-     */
-    nextToken?: PaginationToken;
-    /**
      * The list of the selected rule groups namespaces.
      */
     ruleGroupsNamespaces: RuleGroupsNamespaceSummaryList;
+    /**
+     * Pagination token to use when requesting the next page in this list.
+     */
+    nextToken?: PaginationToken;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -477,6 +477,10 @@ declare namespace Amp {
   }
   export interface ListWorkspacesRequest {
     /**
+     * Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListWorkspaces request.
+     */
+    nextToken?: PaginationToken;
+    /**
      * Optional filter for workspace alias. Only the workspaces with aliases that begin with this value will be returned.
      */
     alias?: WorkspaceAlias;
@@ -484,36 +488,20 @@ declare namespace Amp {
      * Maximum results to return in response (default=100, maximum=1000).
      */
     maxResults?: ListWorkspacesRequestMaxResultsInteger;
-    /**
-     * Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListWorkspaces request.
-     */
-    nextToken?: PaginationToken;
   }
   export type ListWorkspacesRequestMaxResultsInteger = number;
   export interface ListWorkspacesResponse {
     /**
-     * Pagination token to use when requesting the next page in this list.
-     */
-    nextToken?: PaginationToken;
-    /**
      * The list of existing workspaces, including those undergoing creation or deletion.
      */
     workspaces: WorkspaceSummaryList;
+    /**
+     * Pagination token to use when requesting the next page in this list.
+     */
+    nextToken?: PaginationToken;
   }
   export type LogGroupArn = string;
   export interface LoggingConfigurationMetadata {
-    /**
-     * The time when the logging configuration was created.
-     */
-    createdAt: Timestamp;
-    /**
-     * The ARN of the CW log group to which the vended log data will be published.
-     */
-    logGroupArn: LogGroupArn;
-    /**
-     * The time when the logging configuration was modified.
-     */
-    modifiedAt: Timestamp;
     /**
      * The status of the logging configuration.
      */
@@ -522,6 +510,18 @@ declare namespace Amp {
      * The workspace where the logging configuration exists.
      */
     workspace: WorkspaceId;
+    /**
+     * The ARN of the CW log group to which the vended log data will be published.
+     */
+    logGroupArn: LogGroupArn;
+    /**
+     * The time when the logging configuration was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The time when the logging configuration was modified.
+     */
+    modifiedAt: Timestamp;
   }
   export interface LoggingConfigurationStatus {
     /**
@@ -537,17 +537,17 @@ declare namespace Amp {
   export type PaginationToken = string;
   export interface PutAlertManagerDefinitionRequest {
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace in which to update the alert manager definition.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
     /**
      * The alert manager definition data.
      */
     data: AlertManagerDefinitionData;
     /**
-     * The ID of the workspace in which to update the alert manager definition.
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
   }
   export interface PutAlertManagerDefinitionResponse {
     /**
@@ -557,31 +557,31 @@ declare namespace Amp {
   }
   export interface PutRuleGroupsNamespaceRequest {
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace in which to update the rule group namespace.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
+    /**
+     * The rule groups namespace name.
+     */
+    name: RuleGroupsNamespaceName;
     /**
      * The namespace data that define the rule groups.
      */
     data: RuleGroupsNamespaceData;
     /**
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     */
+    clientToken?: IdempotencyToken;
+  }
+  export interface PutRuleGroupsNamespaceResponse {
+    /**
      * The rule groups namespace name.
      */
     name: RuleGroupsNamespaceName;
-    /**
-     * The ID of the workspace in which to update the rule group namespace.
-     */
-    workspaceId: WorkspaceId;
-  }
-  export interface PutRuleGroupsNamespaceResponse {
     /**
      * The Amazon Resource Name (ARN) of this rule groups namespace.
      */
     arn: RuleGroupsNamespaceArn;
-    /**
-     * The rule groups namespace name.
-     */
-    name: RuleGroupsNamespaceName;
     /**
      * The status of rule groups namespace.
      */
@@ -599,18 +599,6 @@ declare namespace Amp {
      */
     arn: RuleGroupsNamespaceArn;
     /**
-     * The time when the rule groups namespace was created.
-     */
-    createdAt: Timestamp;
-    /**
-     * The rule groups namespace data.
-     */
-    data: RuleGroupsNamespaceData;
-    /**
-     * The time when the rule groups namespace was modified.
-     */
-    modifiedAt: Timestamp;
-    /**
      * The rule groups namespace name.
      */
     name: RuleGroupsNamespaceName;
@@ -618,6 +606,18 @@ declare namespace Amp {
      * The status of rule groups namespace.
      */
     status: RuleGroupsNamespaceStatus;
+    /**
+     * The rule groups namespace data.
+     */
+    data: RuleGroupsNamespaceData;
+    /**
+     * The time when the rule groups namespace was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The time when the rule groups namespace was modified.
+     */
+    modifiedAt: Timestamp;
     /**
      * The tags of this rule groups namespace.
      */
@@ -641,14 +641,6 @@ declare namespace Amp {
      */
     arn: RuleGroupsNamespaceArn;
     /**
-     * The time when the rule groups namespace was created.
-     */
-    createdAt: Timestamp;
-    /**
-     * The time when the rule groups namespace was modified.
-     */
-    modifiedAt: Timestamp;
-    /**
      * The rule groups namespace name.
      */
     name: RuleGroupsNamespaceName;
@@ -656,6 +648,14 @@ declare namespace Amp {
      * The status of rule groups namespace.
      */
     status: RuleGroupsNamespaceStatus;
+    /**
+     * The time when the rule groups namespace was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The time when the rule groups namespace was modified.
+     */
+    modifiedAt: Timestamp;
     /**
      * The tags of this rule groups namespace.
      */
@@ -691,17 +691,17 @@ declare namespace Amp {
   }
   export interface UpdateLoggingConfigurationRequest {
     /**
-     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
+     * The ID of the workspace to vend logs to.
      */
-    clientToken?: IdempotencyToken;
+    workspaceId: WorkspaceId;
     /**
      * The ARN of the CW log group to which the vended log data will be published.
      */
     logGroupArn: LogGroupArn;
     /**
-     * The ID of the workspace to vend logs to.
+     * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
-    workspaceId: WorkspaceId;
+    clientToken?: IdempotencyToken;
   }
   export interface UpdateLoggingConfigurationResponse {
     /**
@@ -711,6 +711,10 @@ declare namespace Amp {
   }
   export interface UpdateWorkspaceAliasRequest {
     /**
+     * The ID of the workspace being updated.
+     */
+    workspaceId: WorkspaceId;
+    /**
      * The new alias of the workspace.
      */
     alias?: WorkspaceAlias;
@@ -718,15 +722,15 @@ declare namespace Amp {
      * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
     clientToken?: IdempotencyToken;
-    /**
-     * The ID of the workspace being updated.
-     */
-    workspaceId: WorkspaceId;
   }
   export type Uri = string;
   export type WorkspaceAlias = string;
   export type WorkspaceArn = string;
   export interface WorkspaceDescription {
+    /**
+     * Unique string identifying this workspace.
+     */
+    workspaceId: WorkspaceId;
     /**
      * Alias of this workspace.
      */
@@ -736,25 +740,21 @@ declare namespace Amp {
      */
     arn: WorkspaceArn;
     /**
-     * The time when the workspace was created.
+     * The status of this workspace.
      */
-    createdAt: Timestamp;
+    status: WorkspaceStatus;
     /**
      * Prometheus endpoint URI.
      */
     prometheusEndpoint?: Uri;
     /**
-     * The status of this workspace.
+     * The time when the workspace was created.
      */
-    status: WorkspaceStatus;
+    createdAt: Timestamp;
     /**
      * The tags of this workspace.
      */
     tags?: TagMap;
-    /**
-     * Unique string identifying this workspace.
-     */
-    workspaceId: WorkspaceId;
   }
   export type WorkspaceId = string;
   export interface WorkspaceStatus {
@@ -766,6 +766,10 @@ declare namespace Amp {
   export type WorkspaceStatusCode = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATION_FAILED"|string;
   export interface WorkspaceSummary {
     /**
+     * Unique string identifying this workspace.
+     */
+    workspaceId: WorkspaceId;
+    /**
      * Alias of this workspace.
      */
     alias?: WorkspaceAlias;
@@ -774,21 +778,17 @@ declare namespace Amp {
      */
     arn: WorkspaceArn;
     /**
-     * The time when the workspace was created.
-     */
-    createdAt: Timestamp;
-    /**
      * The status of this workspace.
      */
     status: WorkspaceStatus;
     /**
+     * The time when the workspace was created.
+     */
+    createdAt: Timestamp;
+    /**
      * The tags of this workspace.
      */
     tags?: TagMap;
-    /**
-     * Unique string identifying this workspace.
-     */
-    workspaceId: WorkspaceId;
   }
   export type WorkspaceSummaryList = WorkspaceSummary[];
   /**

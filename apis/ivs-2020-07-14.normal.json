@@ -225,7 +225,7 @@
       "http": {
         "method": "POST",
         "requestUri": "/DeleteRecordingConfiguration",
-        "responseCode": 200
+        "responseCode": 204
       },
       "input": {
         "shape": "DeleteRecordingConfigurationRequest"
@@ -650,7 +650,7 @@
       "http": {
         "method": "POST",
         "requestUri": "/PutMetadata",
-        "responseCode": 200
+        "responseCode": 204
       },
       "input": {
         "shape": "PutMetadataRequest"

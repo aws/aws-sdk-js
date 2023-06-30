@@ -6860,11 +6860,15 @@ declare namespace SageMaker {
     /**
      * Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default.
      */
-    BlueGreenUpdatePolicy: BlueGreenUpdatePolicy;
+    BlueGreenUpdatePolicy?: BlueGreenUpdatePolicy;
     /**
      * Automatic rollback configuration for handling endpoint deployment failures and recovery.
      */
     AutoRollbackConfiguration?: AutoRollbackConfig;
+    /**
+     * Specifies a rolling deployment strategy for updating a SageMaker endpoint.
+     */
+    RollingUpdatePolicy?: RollingUpdatePolicy;
   }
   export interface DeploymentRecommendation {
     /**
@@ -10936,7 +10940,7 @@ declare namespace SageMaker {
   }
   export type EndpointPerformances = EndpointPerformance[];
   export type EndpointSortKey = "Name"|"CreationTime"|"Status"|string;
-  export type EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed"|string;
+  export type EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed"|"UpdateRollbackFailed"|string;
   export interface EndpointSummary {
     /**
      * The name of the endpoint.
@@ -19613,6 +19617,24 @@ declare namespace SageMaker {
     MaximumRetryAttempts: MaximumRetryAttempts;
   }
   export type RoleArn = string;
+  export interface RollingUpdatePolicy {
+    /**
+     * Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant's total instance count.
+     */
+    MaximumBatchSize: CapacitySize;
+    /**
+     * The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet.
+     */
+    WaitIntervalInSeconds: WaitIntervalInSeconds;
+    /**
+     * The time limit for the total deployment. Exceeding this limit causes a timeout.
+     */
+    MaximumExecutionTimeoutInSeconds?: MaximumExecutionTimeoutInSeconds;
+    /**
+     * Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback.
+     */
+    RollbackMaximumBatchSize?: CapacitySize;
+  }
   export type RootAccess = "Enabled"|"Disabled"|string;
   export type RuleConfigurationName = string;
   export type RuleEvaluationStatus = "InProgress"|"NoIssuesFound"|"IssuesFound"|"Error"|"Stopping"|"Stopped"|string;
