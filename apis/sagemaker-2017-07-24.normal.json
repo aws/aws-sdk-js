@@ -7056,7 +7056,7 @@
         },
         "TimeSeriesForecastingJobConfig": {
           "shape": "TimeSeriesForecastingJobConfig",
-          "documentation": "<p>Settings used to configure an AutoML job V2 for a time-series forecasting problem type.</p>"
+          "documentation": "<p>Settings used to configure an AutoML job V2 for a time-series forecasting problem type.</p> <note> <p>The <code>TimeSeriesForecastingJobConfig</code> problem type is only available in private beta. Contact Amazon Web Services Support or your account manager to learn more about access privileges.</p> </note>"
         }
       },
       "documentation": "<p>A collection of settings specific to the problem type used to configure an AutoML job V2. There must be one and only one config of the following type.</p>",
@@ -18295,9 +18295,6 @@
     },
     "EndpointInputConfiguration": {
       "type": "structure",
-      "required": [
-        "InstanceType"
-      ],
       "members": {
         "InstanceType": {
           "shape": "ProductionVariantInstanceType",
@@ -18310,6 +18307,9 @@
         "EnvironmentParameterRanges": {
           "shape": "EnvironmentParameterRanges",
           "documentation": "<p> The parameter you want to benchmark against.</p>"
+        },
+        "ServerlessConfig": {
+          "shape": "ProductionVariantServerlessConfig"
         }
       },
       "documentation": "<p>The endpoint configuration for the load test.</p>"
@@ -18361,9 +18361,7 @@
       "type": "structure",
       "required": [
         "EndpointName",
-        "VariantName",
-        "InstanceType",
-        "InitialInstanceCount"
+        "VariantName"
       ],
       "members": {
         "EndpointName": {
@@ -18379,8 +18377,11 @@
           "documentation": "<p>The instance type recommended by Amazon SageMaker Inference Recommender.</p>"
         },
         "InitialInstanceCount": {
-          "shape": "Integer",
+          "shape": "InitialInstanceCount",
           "documentation": "<p>The number of instances recommended to launch initially.</p>"
+        },
+        "ServerlessConfig": {
+          "shape": "ProductionVariantServerlessConfig"
         }
       },
       "documentation": "<p>The endpoint configuration made by Inference Recommender during a recommendation job.</p>"
@@ -21523,6 +21524,10 @@
       "max": 63,
       "min": 1,
       "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+    },
+    "InitialInstanceCount": {
+      "type": "integer",
+      "min": 1
     },
     "InitialNumberOfUsers": {
       "type": "integer",
@@ -27987,6 +27992,10 @@
       },
       "documentation": "<p>The model registry settings for the SageMaker Canvas application.</p>"
     },
+    "ModelSetupTime": {
+      "type": "integer",
+      "min": 0
+    },
     "ModelSortKey": {
       "type": "string",
       "enum": [
@@ -31091,7 +31100,7 @@
         },
         "ProvisionedConcurrency": {
           "shape": "ServerlessProvisionedConcurrency",
-          "documentation": "<p>The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to <code>MaxConcurrency</code>.</p>"
+          "documentation": "<p>The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to <code>MaxConcurrency</code>.</p> <note> <p>This field is not supported for serverless endpoint recommendations for Inference Recommender jobs. For more information about creating an Inference Recommender job, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html\">CreateInferenceRecommendationsJobs</a>.</p> </note>"
         }
       },
       "documentation": "<p>Specifies the serverless configuration for an endpoint variant.</p>"
@@ -31972,6 +31981,10 @@
         "DataInputConfig": {
           "shape": "RecommendationJobDataInputConfig",
           "documentation": "<p>Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. This field is used for optimizing your model using SageMaker Neo. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig\">DataInputConfig</a>.</p>"
+        },
+        "SupportedEndpointType": {
+          "shape": "RecommendationJobSupportedEndpointType",
+          "documentation": "<p>The endpoint type to receive recommendations for. By default this is null, and the results of the inference recommendation job return a combined list of both real-time and serverless benchmarks. By specifying a value for this field, you can receive a longer list of benchmarks for the desired endpoint type.</p>"
         }
       },
       "documentation": "<p>Specifies mandatory fields for running an Inference Recommender job directly in the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html\">CreateInferenceRecommendationsJob</a> API. The fields specified in <code>ContainerConfig</code> override the corresponding fields in the model package. Use <code>ContainerConfig</code> if you want to specify these fields for the recommendation job but don't want to edit them in your model package.</p>"
@@ -32144,6 +32157,13 @@
         "shape": "String"
       }
     },
+    "RecommendationJobSupportedEndpointType": {
+      "type": "string",
+      "enum": [
+        "RealTime",
+        "Serverless"
+      ]
+    },
     "RecommendationJobSupportedInstanceTypes": {
       "type": "list",
       "member": {
@@ -32233,6 +32253,10 @@
         "MemoryUtilization": {
           "shape": "UtilizationMetric",
           "documentation": "<p>The expected memory utilization at maximum invocations per minute for the instance.</p> <p> <code>NaN</code> indicates that the value is not available.</p>"
+        },
+        "ModelSetupTime": {
+          "shape": "ModelSetupTime",
+          "documentation": "<p>The time it takes to launch new compute resources for a serverless endpoint. The time can vary depending on the model size, how long it takes to download the model, and the start-up time of the container.</p> <p> <code>NaN</code> indicates that the value is not available.</p>"
         }
       },
       "documentation": "<p>The metrics of recommendations.</p>"
@@ -32733,8 +32757,7 @@
       ],
       "members": {
         "MaximumBatchSize": {
-          "shape": "CapacitySize",
-          "documentation": "<p>Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant's total instance count.</p>"
+          "shape": "CapacitySize"
         },
         "WaitIntervalInSeconds": {
           "shape": "WaitIntervalInSeconds",
@@ -32745,8 +32768,7 @@
           "documentation": "<p>The time limit for the total deployment. Exceeding this limit causes a timeout.</p>"
         },
         "RollbackMaximumBatchSize": {
-          "shape": "CapacitySize",
-          "documentation": "<p>Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback.</p>"
+          "shape": "CapacitySize"
         }
       },
       "documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>"

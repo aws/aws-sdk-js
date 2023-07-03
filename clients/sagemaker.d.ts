@@ -3353,7 +3353,7 @@ declare namespace SageMaker {
      */
     TabularJobConfig?: TabularJobConfig;
     /**
-     * Settings used to configure an AutoML job V2 for a time-series forecasting problem type.
+     * Settings used to configure an AutoML job V2 for a time-series forecasting problem type.  The TimeSeriesForecastingJobConfig problem type is only available in private beta. Contact Amazon Web Services Support or your account manager to learn more about access privileges. 
      */
     TimeSeriesForecastingJobConfig?: TimeSeriesForecastingJobConfig;
   }
@@ -10882,7 +10882,7 @@ declare namespace SageMaker {
     /**
      * The instance types to use for the load test.
      */
-    InstanceType: ProductionVariantInstanceType;
+    InstanceType?: ProductionVariantInstanceType;
     /**
      * The inference specification name in the model package version.
      */
@@ -10891,6 +10891,7 @@ declare namespace SageMaker {
      *  The parameter you want to benchmark against.
      */
     EnvironmentParameterRanges?: EnvironmentParameterRanges;
+    ServerlessConfig?: ProductionVariantServerlessConfig;
   }
   export type EndpointInputConfigurations = EndpointInputConfiguration[];
   export interface EndpointMetadata {
@@ -10925,11 +10926,12 @@ declare namespace SageMaker {
     /**
      * The instance type recommended by Amazon SageMaker Inference Recommender.
      */
-    InstanceType: ProductionVariantInstanceType;
+    InstanceType?: ProductionVariantInstanceType;
     /**
      * The number of instances recommended to launch initially.
      */
-    InitialInstanceCount: Integer;
+    InitialInstanceCount?: InitialInstanceCount;
+    ServerlessConfig?: ProductionVariantServerlessConfig;
   }
   export interface EndpointPerformance {
     /**
@@ -12560,6 +12562,7 @@ declare namespace SageMaker {
     SupportedResponseMIMETypes: ResponseMIMETypes;
   }
   export type InferenceSpecificationName = string;
+  export type InitialInstanceCount = number;
   export type InitialNumberOfUsers = number;
   export type InitialTaskCount = number;
   export interface InputConfig {
@@ -17103,6 +17106,7 @@ declare namespace SageMaker {
      */
     CrossAccountModelRegisterRoleArn?: RoleArn;
   }
+  export type ModelSetupTime = number;
   export type ModelSortKey = "Name"|"CreationTime"|string;
   export interface ModelStepMetadata {
     /**
@@ -18724,7 +18728,7 @@ declare namespace SageMaker {
      */
     MaxConcurrency: ServerlessMaxConcurrency;
     /**
-     * The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to MaxConcurrency.
+     * The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to MaxConcurrency.  This field is not supported for serverless endpoint recommendations for Inference Recommender jobs. For more information about creating an Inference Recommender job, see CreateInferenceRecommendationsJobs. 
      */
     ProvisionedConcurrency?: ServerlessProvisionedConcurrency;
   }
@@ -19251,6 +19255,10 @@ declare namespace SageMaker {
      * Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. This field is used for optimizing your model using SageMaker Neo. For more information, see DataInputConfig.
      */
     DataInputConfig?: RecommendationJobDataInputConfig;
+    /**
+     * The endpoint type to receive recommendations for. By default this is null, and the results of the inference recommendation job return a combined list of both real-time and serverless benchmarks. By specifying a value for this field, you can receive a longer list of benchmarks for the desired endpoint type.
+     */
+    SupportedEndpointType?: RecommendationJobSupportedEndpointType;
   }
   export type RecommendationJobDataInputConfig = string;
   export type RecommendationJobDescription = string;
@@ -19357,6 +19365,7 @@ declare namespace SageMaker {
     ModelLatencyThresholds?: ModelLatencyThresholds;
   }
   export type RecommendationJobSupportedContentTypes = String[];
+  export type RecommendationJobSupportedEndpointType = "RealTime"|"Serverless"|string;
   export type RecommendationJobSupportedInstanceTypes = String[];
   export type RecommendationJobType = "Default"|"Advanced"|string;
   export interface RecommendationJobVpcConfig {
@@ -19398,6 +19407,10 @@ declare namespace SageMaker {
      * The expected memory utilization at maximum invocations per minute for the instance.  NaN indicates that the value is not available.
      */
     MemoryUtilization?: UtilizationMetric;
+    /**
+     * The time it takes to launch new compute resources for a serverless endpoint. The time can vary depending on the model size, how long it takes to download the model, and the start-up time of the container.  NaN indicates that the value is not available.
+     */
+    ModelSetupTime?: ModelSetupTime;
   }
   export type RecommendationStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"NOT_APPLICABLE"|string;
   export type RecommendationStepType = "BENCHMARK"|string;
@@ -19618,9 +19631,6 @@ declare namespace SageMaker {
   }
   export type RoleArn = string;
   export interface RollingUpdatePolicy {
-    /**
-     * Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant's total instance count.
-     */
     MaximumBatchSize: CapacitySize;
     /**
      * The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet.
@@ -19630,9 +19640,6 @@ declare namespace SageMaker {
      * The time limit for the total deployment. Exceeding this limit causes a timeout.
      */
     MaximumExecutionTimeoutInSeconds?: MaximumExecutionTimeoutInSeconds;
-    /**
-     * Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback.
-     */
     RollbackMaximumBatchSize?: CapacitySize;
   }
   export type RootAccess = "Enabled"|"Disabled"|string;

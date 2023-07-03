@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1409.0-->
+<!--LATEST=2.1410.0-->
 <!--ENTRYINSERT-->
+
+## 2.1410.0
+* feature: Batch: This feature allows customers to use AWS Batch with Linux with ARM64 CPU Architecture and X86_64 CPU Architecture with Windows OS on Fargate Platform.
+* feature: SageMaker: SageMaker Inference Recommender now accepts new fields SupportedEndpointType and ServerlessConfiguration to support serverless endpoints.
 
 ## 2.1409.0
 * feature: Amp: AWS SDK service model  generation tool version upgrade.
