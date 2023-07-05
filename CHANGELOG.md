@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1410.0-->
+<!--LATEST=2.1411.0-->
 <!--ENTRYINSERT-->
+
+## 2.1411.0
+* feature: KMS: Added Dry Run Feature to cryptographic and cross-account mutating KMS APIs (14 in all). This feature allows users to test their permissions and parameters before making the actual API call.
+* feature: Mgn: This release introduces the Global view feature and new Replication state APIs.
 
 ## 2.1410.0
 * feature: Batch: This feature allows customers to use AWS Batch with Linux with ARM64 CPU Architecture and X86_64 CPU Architecture with Windows OS on Fargate Platform.

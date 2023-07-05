@@ -52,11 +52,11 @@ declare class ComprehendMedical extends Service {
    */
   describeSNOMEDCTInferenceJob(callback?: (err: AWSError, data: ComprehendMedical.Types.DescribeSNOMEDCTInferenceJobResponse) => void): Request<ComprehendMedical.Types.DescribeSNOMEDCTInferenceJobResponse, AWSError>;
   /**
-   * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead.  Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .
+   * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead. Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information.
    */
   detectEntities(params: ComprehendMedical.Types.DetectEntitiesRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesResponse) => void): Request<ComprehendMedical.Types.DetectEntitiesResponse, AWSError>;
   /**
-   * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead.  Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .
+   * The DetectEntities operation is deprecated. You should use the DetectEntitiesV2 operation instead. Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information.
    */
   detectEntities(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesResponse) => void): Request<ComprehendMedical.Types.DetectEntitiesResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class ComprehendMedical extends Service {
    */
   detectEntitiesV2(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesV2Response) => void): Request<ComprehendMedical.Types.DetectEntitiesV2Response, AWSError>;
   /**
-   *  Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
+   * Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
    */
   detectPHI(params: ComprehendMedical.Types.DetectPHIRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectPHIResponse) => void): Request<ComprehendMedical.Types.DetectPHIResponse, AWSError>;
   /**
-   *  Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
+   * Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.
    */
   detectPHI(callback?: (err: AWSError, data: ComprehendMedical.Types.DetectPHIResponse) => void): Request<ComprehendMedical.Types.DetectPHIResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class ComprehendMedical extends Service {
    */
   listICD10CMInferenceJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListICD10CMInferenceJobsResponse) => void): Request<ComprehendMedical.Types.ListICD10CMInferenceJobsResponse, AWSError>;
   /**
-   * Gets a list of protected health information (PHI) detection jobs that you have submitted.
+   * Gets a list of protected health information (PHI) detection jobs you have submitted.
    */
   listPHIDetectionJobs(params: ComprehendMedical.Types.ListPHIDetectionJobsRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.ListPHIDetectionJobsResponse) => void): Request<ComprehendMedical.Types.ListPHIDetectionJobsResponse, AWSError>;
   /**
-   * Gets a list of protected health information (PHI) detection jobs that you have submitted.
+   * Gets a list of protected health information (PHI) detection jobs you have submitted.
    */
   listPHIDetectionJobs(callback?: (err: AWSError, data: ComprehendMedical.Types.ListPHIDetectionJobsResponse) => void): Request<ComprehendMedical.Types.ListPHIDetectionJobsResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare namespace ComprehendMedical {
      */
     Type?: EntitySubType;
     /**
-     *  The level of confidence that Comprehend Medical; has that the segment of text is correctly recognized as an attribute. 
+     *  The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute. 
      */
     Score?: Float;
     /**
-     *  The level of confidence that Comprehend Medical; has that this attribute is correctly related to this entity. 
+     *  The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. 
      */
     RelationshipScore?: Float;
     /**
@@ -269,7 +269,7 @@ declare namespace ComprehendMedical {
   export type BoundedLengthString = string;
   export interface Characters {
     /**
-     *  The number of characters present in the input text document as processed by Comprehend Medical. 
+     *  The number of characters present in the input text document as processed by Amazon Comprehend Medical. 
      */
     OriginalTextCharacters?: Integer;
   }
@@ -334,7 +334,7 @@ declare namespace ComprehendMedical {
      */
     LanguageCode?: LanguageCode;
     /**
-     * The Amazon Resource Name (ARN) that gives Comprehend Medical; read access to your input data.
+     * The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -353,7 +353,7 @@ declare namespace ComprehendMedical {
   export type ComprehendMedicalAsyncJobPropertiesList = ComprehendMedicalAsyncJobProperties[];
   export interface DescribeEntitiesDetectionV2JobRequest {
     /**
-     * The identifier that Comprehend Medical; generated for the job. The StartEntitiesDetectionV2Job operation returns this identifier in its response.
+     * The identifier that Amazon Comprehend Medical generated for the job. The StartEntitiesDetectionV2Job operation returns this identifier in its response.
      */
     JobId: JobId;
   }
@@ -377,7 +377,7 @@ declare namespace ComprehendMedical {
   }
   export interface DescribePHIDetectionJobRequest {
     /**
-     * The identifier that Comprehend Medical; generated for the job. The StartPHIDetectionJob operation returns this identifier in its response.
+     * The identifier that Amazon Comprehend Medical generated for the job. The StartPHIDetectionJob operation returns this identifier in its response.
      */
     JobId: JobId;
   }
@@ -410,21 +410,21 @@ declare namespace ComprehendMedical {
   }
   export interface DetectEntitiesRequest {
     /**
-     *  A UTF-8 text string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.
+     *  A UTF-8 text string containing the clinical content being examined for entities.
      */
     Text: BoundedLengthString;
   }
   export interface DetectEntitiesResponse {
     /**
-     *  The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical; has in the detection and analysis. Attributes and traits of the entity are also returned.
+     * The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.
      */
     Entities: EntityList;
     /**
-     *  Attributes extracted from the input text that we were unable to relate to an entity.
+     * Attributes extracted from the input text that we were unable to relate to an entity.
      */
     UnmappedAttributes?: UnmappedAttributeList;
     /**
-     *  If the result of the previous request to DetectEntities was truncated, include the PaginationToken to fetch the next page of entities.
+     * If the result of the previous request to DetectEntities was truncated, include the PaginationToken to fetch the next page of entities.
      */
     PaginationToken?: String;
     /**
@@ -434,7 +434,7 @@ declare namespace ComprehendMedical {
   }
   export interface DetectEntitiesV2Request {
     /**
-     * A UTF-8 string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.
+     * A UTF-8 string containing the clinical content being examined for entities.
      */
     Text: BoundedLengthString;
   }
@@ -458,17 +458,17 @@ declare namespace ComprehendMedical {
   }
   export interface DetectPHIRequest {
     /**
-     *  A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters.
+     * A UTF-8 text string containing the clinical content being examined for PHI entities.
      */
     Text: BoundedLengthString;
   }
   export interface DetectPHIResponse {
     /**
-     *  The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical; has in its detection. 
+     * The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in its detection.
      */
     Entities: EntityList;
     /**
-     *  If the result of the previous request to DetectPHI was truncated, include the PaginationToken to fetch the next page of PHI entities. 
+     * If the result of the previous request to DetectPHI was truncated, include the PaginationToken to fetch the next page of PHI entities. 
      */
     PaginationToken?: String;
     /**
@@ -490,7 +490,7 @@ declare namespace ComprehendMedical {
      */
     EndOffset?: Integer;
     /**
-     * The level of confidence that Comprehend Medical; has in the accuracy of the detection.
+     * The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.
      */
     Score?: Float;
     /**
@@ -629,7 +629,7 @@ declare namespace ComprehendMedical {
      */
     Name?: ICD10CMTraitName;
     /**
-     * The level of confidence that Comprehend Medical; has that the segment of text is correctly recognized as a trait.
+     * The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as a trait.
      */
     Score?: Float;
   }
@@ -638,7 +638,7 @@ declare namespace ComprehendMedical {
   export type IamRoleArn = string;
   export interface InferICD10CMRequest {
     /**
-     * The input text used for analysis. The input for InferICD10CM is a string from 1 to 10000 characters.
+     * The input text used for analysis.
      */
     Text: OntologyLinkingBoundedLengthString;
   }
@@ -658,7 +658,7 @@ declare namespace ComprehendMedical {
   }
   export interface InferRxNormRequest {
     /**
-     * The input text used for analysis. The input for InferRxNorm is a string from 1 to 10000 characters.
+     * The input text used for analysis.
      */
     Text: OntologyLinkingBoundedLengthString;
   }
@@ -678,13 +678,13 @@ declare namespace ComprehendMedical {
   }
   export interface InferSNOMEDCTRequest {
     /**
-     *  The input text to be analyzed using InferSNOMEDCT. The text should be a string with 1 to 10000 characters. 
+     * The input text to be analyzed using InferSNOMEDCT.
      */
     Text: OntologyLinkingBoundedLengthString;
   }
   export interface InferSNOMEDCTResponse {
     /**
-     *  The collection of medical concept entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. 
+     *  The collection of medical concept entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. 
      */
     Entities: SNOMEDCTEntityList;
     /**
@@ -706,7 +706,7 @@ declare namespace ComprehendMedical {
   }
   export interface InputDataConfig {
     /**
-     * The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling. Each file in the document collection must be less than 40 KB. You can store a maximum of 30 GB in the bucket.
+     * The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling.
      */
     S3Bucket: S3Bucket;
     /**
@@ -847,7 +847,7 @@ declare namespace ComprehendMedical {
      */
     S3Bucket: S3Bucket;
     /**
-     * The path to the output data files in the S3 bucket. Comprehend Medical; creates an output directory using the job ID so that the output from one job does not overwrite the output of another.
+     * The path to the output data files in the S3 bucket. Amazon Comprehend Medical creates an output directory using the job ID so that the output from one job does not overwrite the output of another.
      */
     S3Key?: S3Key;
   }
@@ -858,7 +858,7 @@ declare namespace ComprehendMedical {
      */
     Type?: RxNormAttributeType;
     /**
-     * The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute.
+     * The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute.
      */
     Score?: Float;
     /**
@@ -937,11 +937,11 @@ declare namespace ComprehendMedical {
      */
     Attributes?: RxNormAttributeList;
     /**
-     *  Contextual information for the entity.
+     * Contextual information for the entity.
      */
     Traits?: RxNormTraitList;
     /**
-     *  The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.
+     * The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.
      */
     RxNormConcepts?: RxNormConceptList;
   }
@@ -972,11 +972,11 @@ declare namespace ComprehendMedical {
      */
     Type?: SNOMEDCTAttributeType;
     /**
-     *  The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute. 
+     *  The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute. 
      */
     Score?: Float;
     /**
-     *  The level of confidence that Comprehend Medical has that this attribute is correctly related to this entity. 
+     *  The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. 
      */
     RelationshipScore?: Float;
     /**
@@ -1020,7 +1020,7 @@ declare namespace ComprehendMedical {
      */
     Code?: String;
     /**
-     *  The level of confidence Comprehend Medical has that the entity should be linked to the identified SNOMED-CT concept. 
+     *  The level of confidence Amazon Comprehend Medical has that the entity should be linked to the identified SNOMED-CT concept. 
      */
     Score?: Float;
   }
@@ -1057,7 +1057,7 @@ declare namespace ComprehendMedical {
      */
     Type?: SNOMEDCTEntityType;
     /**
-     *  The level of confidence that Comprehend Medical has in the accuracy of the detected entity. 
+     *  The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected entity. 
      */
     Score?: Float;
     /**
@@ -1091,7 +1091,7 @@ declare namespace ComprehendMedical {
      */
     Name?: SNOMEDCTTraitName;
     /**
-     *  The level of confidence that Comprehend Medical has in the accuracy of a detected trait. 
+     *  The level of confidence that Amazon Comprehend Medical has in the accuracy of a detected trait. 
      */
     Score?: Float;
   }
@@ -1107,7 +1107,7 @@ declare namespace ComprehendMedical {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Comprehend Medical; read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see Role-Based Permissions Required for Asynchronous Operations.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1115,7 +1115,7 @@ declare namespace ComprehendMedical {
      */
     JobName?: JobName;
     /**
-     * A unique identifier for the request. If you don't set the client request token, Comprehend Medical; generates one for you.
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one for you.
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
@@ -1123,7 +1123,7 @@ declare namespace ComprehendMedical {
      */
     KMSKey?: KMSKey;
     /**
-     * The language of the input documents. All documents must be in the same language. Comprehend Medical; processes files in US English (en).
+     * The language of the input documents. All documents must be in the same language. Amazon Comprehend Medical processes files in US English (en).
      */
     LanguageCode: LanguageCode;
   }
@@ -1143,7 +1143,7 @@ declare namespace ComprehendMedical {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Comprehend Medical; read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1151,7 +1151,7 @@ declare namespace ComprehendMedical {
      */
     JobName?: JobName;
     /**
-     * A unique identifier for the request. If you don't set the client request token, Comprehend Medical; generates one.
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
@@ -1179,7 +1179,7 @@ declare namespace ComprehendMedical {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Comprehend Medical; read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1187,7 +1187,7 @@ declare namespace ComprehendMedical {
      */
     JobName?: JobName;
     /**
-     * A unique identifier for the request. If you don't set the client request token, Comprehend Medical; generates one.
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
@@ -1215,7 +1215,7 @@ declare namespace ComprehendMedical {
      */
     OutputDataConfig: OutputDataConfig;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Comprehend Medical; read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see  Role-Based Permissions Required for Asynchronous Operations.
      */
     DataAccessRoleArn: IamRoleArn;
     /**
@@ -1223,7 +1223,7 @@ declare namespace ComprehendMedical {
      */
     JobName?: JobName;
     /**
-     * A unique identifier for the request. If you don't set the client request token, Comprehend Medical; generates one.
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend Medical generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
     /**
@@ -1339,7 +1339,7 @@ declare namespace ComprehendMedical {
      */
     Name?: AttributeName;
     /**
-     *  The level of confidence that Comprehend Medical; has in the accuracy of this trait.
+     *  The level of confidence that Amazon Comprehend Medical has in the accuracy of this trait.
      */
     Score?: Float;
   }

@@ -284,6 +284,14 @@ declare class Mgn extends Service {
    */
   listImports(callback?: (err: AWSError, data: Mgn.Types.ListImportsResponse) => void): Request<Mgn.Types.ListImportsResponse, AWSError>;
   /**
+   * List Managed Accounts.
+   */
+  listManagedAccounts(params: Mgn.Types.ListManagedAccountsRequest, callback?: (err: AWSError, data: Mgn.Types.ListManagedAccountsResponse) => void): Request<Mgn.Types.ListManagedAccountsResponse, AWSError>;
+  /**
+   * List Managed Accounts.
+   */
+  listManagedAccounts(callback?: (err: AWSError, data: Mgn.Types.ListManagedAccountsResponse) => void): Request<Mgn.Types.ListManagedAccountsResponse, AWSError>;
+  /**
    * List source server post migration custom actions.
    */
   listSourceServerActions(params: Mgn.Types.ListSourceServerActionsRequest, callback?: (err: AWSError, data: Mgn.Types.ListSourceServerActionsResponse) => void): Request<Mgn.Types.ListSourceServerActionsResponse, AWSError>;
@@ -324,6 +332,14 @@ declare class Mgn extends Service {
    */
   markAsArchived(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
+   * Pause Replication.
+   */
+  pauseReplication(params: Mgn.Types.PauseReplicationRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Pause Replication.
+   */
+  pauseReplication(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
    * Put source server post migration custom action.
    */
   putSourceServerAction(params: Mgn.Types.PutSourceServerActionRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServerActionDocument) => void): Request<Mgn.Types.SourceServerActionDocument, AWSError>;
@@ -355,6 +371,14 @@ declare class Mgn extends Service {
    * Remove template post migration custom action.
    */
   removeTemplateAction(callback?: (err: AWSError, data: Mgn.Types.RemoveTemplateActionResponse) => void): Request<Mgn.Types.RemoveTemplateActionResponse, AWSError>;
+  /**
+   * Resume Replication.
+   */
+  resumeReplication(params: Mgn.Types.ResumeReplicationRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Resume Replication.
+   */
+  resumeReplication(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
    * Causes the data replication initiation sequence to begin immediately upon next Handshake for specified SourceServer IDs, regardless of when the previous initiation started. This command will not work if the SourceServer is not stalled or is in a DISCONNECTED or STOPPED state.
    */
@@ -403,6 +427,14 @@ declare class Mgn extends Service {
    * Launches a Test Instance for specific Source Servers. This command starts a LAUNCH job whose initiatedBy property is StartTest and changes the SourceServer.lifeCycle.state property to TESTING.
    */
   startTest(callback?: (err: AWSError, data: Mgn.Types.StartTestResponse) => void): Request<Mgn.Types.StartTestResponse, AWSError>;
+  /**
+   * Stop Replication.
+   */
+  stopReplication(params: Mgn.Types.StopReplicationRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Stop Replication.
+   */
+  stopReplication(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
    * Adds or overwrites only the specified tags for the specified Application Migration Service resource or resources. When you specify an existing tag key, the value is overwritten with the new value. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value.
    */
@@ -578,17 +610,29 @@ declare namespace Mgn {
   export type ApplicationsList = Application[];
   export interface ArchiveApplicationRequest {
     /**
+     * Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Application ID.
      */
     applicationID: ApplicationID;
   }
   export interface ArchiveWaveRequest {
     /**
+     * Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Wave ID.
      */
     waveID: WaveID;
   }
   export interface AssociateApplicationsRequest {
+    /**
+     * Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Application IDs list.
      */
@@ -602,6 +646,10 @@ declare namespace Mgn {
   }
   export interface AssociateSourceServersRequest {
     /**
+     * Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Application ID.
      */
     applicationID: ApplicationID;
@@ -613,6 +661,7 @@ declare namespace Mgn {
   export type AssociateSourceServersRequestSourceServerIDs = SourceServerID[];
   export interface AssociateSourceServersResponse {
   }
+  export type BandwidthThrottling = number;
   export type Boolean = boolean;
   export type BootMode = "LEGACY_BIOS"|"UEFI"|string;
   export type BoundedString = string;
@@ -627,6 +676,10 @@ declare namespace Mgn {
     modelName?: BoundedString;
   }
   export interface ChangeServerLifeCycleStateRequest {
+    /**
+     * The request to change the source server migration account ID.
+     */
+    accountID?: AccountID;
     /**
      * The request to change the source server migration lifecycle state.
      */
@@ -647,6 +700,10 @@ declare namespace Mgn {
   export type CloudWatchLogGroupName = string;
   export type Cpus = CPU[];
   export interface CreateApplicationRequest {
+    /**
+     * Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Application description.
      */
@@ -723,7 +780,7 @@ declare namespace Mgn {
     /**
      * Request to configure bandwidth throttling during Replication Settings template creation.
      */
-    bandwidthThrottling: PositiveInteger;
+    bandwidthThrottling: BandwidthThrottling;
     /**
      * Request to create Public IP during Replication Settings template creation.
      */
@@ -768,8 +825,16 @@ declare namespace Mgn {
      * Request to use Dedicated Replication Servers during Replication Settings template creation.
      */
     useDedicatedReplicationServer: Boolean;
+    /**
+     * Request to use Fips Endpoint during Replication Settings template creation.
+     */
+    useFipsEndpoint?: Boolean;
   }
   export interface CreateWaveRequest {
+    /**
+     * Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Wave description.
      */
@@ -877,6 +942,10 @@ declare namespace Mgn {
   export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"PENDING_SNAPSHOT_SHIPPING"|"SHIPPING_SNAPSHOT"|string;
   export interface DeleteApplicationRequest {
     /**
+     * Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Application ID.
      */
     applicationID: ApplicationID;
@@ -884,6 +953,10 @@ declare namespace Mgn {
   export interface DeleteApplicationResponse {
   }
   export interface DeleteJobRequest {
+    /**
+     * Request to delete Job from service by Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Request to delete Job from service by Job ID.
      */
@@ -909,6 +982,10 @@ declare namespace Mgn {
   }
   export interface DeleteSourceServerRequest {
     /**
+     * Request to delete Source Server from service by Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Request to delete Source Server from service by Server ID.
      */
     sourceServerID: SourceServerID;
@@ -923,6 +1000,10 @@ declare namespace Mgn {
   }
   export interface DeleteWaveRequest {
     /**
+     * Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Wave ID.
      */
     waveID: WaveID;
@@ -930,6 +1011,10 @@ declare namespace Mgn {
   export interface DeleteWaveResponse {
   }
   export interface DescribeJobLogItemsRequest {
+    /**
+     * Request to describe Job log Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Request to describe Job log job ID.
      */
@@ -954,6 +1039,10 @@ declare namespace Mgn {
     nextToken?: PaginationToken;
   }
   export interface DescribeJobsRequest {
+    /**
+     * Request to describe job log items by Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Request to describe Job log filters.
      */
@@ -1042,6 +1131,10 @@ declare namespace Mgn {
   }
   export interface DescribeSourceServersRequest {
     /**
+     * Request to filter Source Servers list by Accoun ID.
+     */
+    accountID?: AccountID;
+    /**
      * Request to filter Source Servers list.
      */
     filters?: DescribeSourceServersRequestFilters;
@@ -1110,6 +1203,10 @@ declare namespace Mgn {
   }
   export interface DisassociateApplicationsRequest {
     /**
+     * Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Application IDs list.
      */
     applicationIDs: ApplicationIDs;
@@ -1121,6 +1218,10 @@ declare namespace Mgn {
   export interface DisassociateApplicationsResponse {
   }
   export interface DisassociateSourceServersRequest {
+    /**
+     * Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Application ID.
      */
@@ -1134,6 +1235,10 @@ declare namespace Mgn {
   export interface DisassociateSourceServersResponse {
   }
   export interface DisconnectFromServiceRequest {
+    /**
+     * Request to disconnect Source Server from service by Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Request to disconnect Source Server from service by Server ID.
      */
@@ -1228,6 +1333,10 @@ declare namespace Mgn {
   export type ExportsList = ExportTask[];
   export interface FinalizeCutoverRequest {
     /**
+     * Request to finalize Cutover by Source Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Request to finalize Cutover by Source Server ID.
      */
     sourceServerID: SourceServerID;
@@ -1236,11 +1345,19 @@ declare namespace Mgn {
   export type Float = number;
   export interface GetLaunchConfigurationRequest {
     /**
+     * Request to get Launch Configuration information by Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Request to get Launch Configuration information by Source Server ID.
      */
     sourceServerID: SourceServerID;
   }
   export interface GetReplicationConfigurationRequest {
+    /**
+     * Request to get Replication Configuration by Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Request to get Replication Configuration by Source Server ID.
      */
@@ -1272,6 +1389,10 @@ declare namespace Mgn {
     vmWareUuid?: BoundedString;
   }
   export interface ImportErrorData {
+    /**
+     * Import error data source account ID.
+     */
+    accountID?: AccountID;
     /**
      * Import error data application ID.
      */
@@ -1396,6 +1517,7 @@ declare namespace Mgn {
   export interface InitializeServiceResponse {
   }
   export type InitiatedBy = "START_TEST"|"START_CUTOVER"|"DIAGNOSTIC"|"TERMINATE"|string;
+  export type Iops = number;
   export type JmesPathString = string;
   export interface Job {
     /**
@@ -1619,11 +1741,11 @@ declare namespace Mgn {
     /**
      * Launch template disk iops configuration.
      */
-    iops?: PositiveInteger;
+    iops?: Iops;
     /**
      * Launch template disk throughput configuration.
      */
-    throughput?: PositiveInteger;
+    throughput?: Throughput;
     /**
      * Launch template disk volume type configuration.
      */
@@ -1754,6 +1876,10 @@ declare namespace Mgn {
   export type LifeCycleState = "STOPPED"|"NOT_READY"|"READY_FOR_TEST"|"TESTING"|"READY_FOR_CUTOVER"|"CUTTING_OVER"|"CUTOVER"|"DISCONNECTED"|"DISCOVERED"|"PENDING_INSTALLATION"|string;
   export type LifeCycleStates = LifeCycleState[];
   export interface ListApplicationsRequest {
+    /**
+     * Applications list Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Applications list filters.
      */
@@ -1897,7 +2023,31 @@ declare namespace Mgn {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListManagedAccountsRequest {
+    /**
+     * List managed accounts request max results.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * List managed accounts request next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListManagedAccountsResponse {
+    /**
+     * List managed accounts response items.
+     */
+    items: ManagedAccounts;
+    /**
+     * List managed accounts response next token.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListSourceServerActionsRequest {
+    /**
+     * Account ID to return when listing source server post migration custom actions.
+     */
+    accountID?: AccountID;
     /**
      * Filters to apply when listing source server post migration custom actions.
      */
@@ -1967,6 +2117,10 @@ declare namespace Mgn {
   }
   export interface ListWavesRequest {
     /**
+     * Request account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Waves list filters.
      */
     filters?: ListWavesRequestFilters;
@@ -1999,7 +2153,18 @@ declare namespace Mgn {
      */
     nextToken?: PaginationToken;
   }
+  export interface ManagedAccount {
+    /**
+     * Managed account, account ID.
+     */
+    accountId?: AccountID;
+  }
+  export type ManagedAccounts = ManagedAccount[];
   export interface MarkAsArchivedRequest {
+    /**
+     * Mark as archived by Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Mark as archived by Source Server ID.
      */
@@ -2049,6 +2214,16 @@ declare namespace Mgn {
     sourceServerID: SourceServerID;
   }
   export type ParticipatingServers = ParticipatingServer[];
+  export interface PauseReplicationRequest {
+    /**
+     * Pause Replication Request account ID.
+     */
+    accountID?: AccountID;
+    /**
+     * Pause Replication Request source server ID.
+     */
+    sourceServerID: SourceServerID;
+  }
   export type PositiveInteger = number;
   export type PostLaunchActionExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
   export interface PostLaunchActions {
@@ -2086,6 +2261,10 @@ declare namespace Mgn {
     ssmAgentDiscoveryDatetime?: ISO8601DatetimeString;
   }
   export interface PutSourceServerActionRequest {
+    /**
+     * Source server post migration custom account ID.
+     */
+    accountID?: AccountID;
     /**
      * Source server post migration custom action ID.
      */
@@ -2199,6 +2378,10 @@ declare namespace Mgn {
   }
   export interface RemoveSourceServerActionRequest {
     /**
+     * Source server post migration account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Source server post migration custom action ID to remove.
      */
     actionID: ActionID;
@@ -2229,7 +2412,7 @@ declare namespace Mgn {
     /**
      * Replication Configuration set bandwidth throttling.
      */
-    bandwidthThrottling?: PositiveInteger;
+    bandwidthThrottling?: BandwidthThrottling;
     /**
      * Replication Configuration create Public IP.
      */
@@ -2282,6 +2465,10 @@ declare namespace Mgn {
      * Replication Configuration use Dedicated Replication Server.
      */
     useDedicatedReplicationServer?: Boolean;
+    /**
+     * Replication Configuration use Fips Endpoint.
+     */
+    useFipsEndpoint?: Boolean;
   }
   export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP"|string;
   export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"ST1"|"GP3"|string;
@@ -2322,7 +2509,7 @@ declare namespace Mgn {
     /**
      * Replication Configuration template bandwidth throttling.
      */
-    bandwidthThrottling?: PositiveInteger;
+    bandwidthThrottling?: BandwidthThrottling;
     /**
      * Replication Configuration template create Public IP.
      */
@@ -2371,6 +2558,10 @@ declare namespace Mgn {
      * Replication Configuration template use Dedicated Replication Server.
      */
     useDedicatedReplicationServer?: Boolean;
+    /**
+     * Replication Configuration template use Fips Endpoint.
+     */
+    useFipsEndpoint?: Boolean;
   }
   export type ReplicationConfigurationTemplateID = string;
   export type ReplicationConfigurationTemplateIDs = ReplicationConfigurationTemplateID[];
@@ -2378,7 +2569,21 @@ declare namespace Mgn {
   export type ReplicationServersSecurityGroupsIDs = SecurityGroupID[];
   export type ReplicationType = "AGENT_BASED"|"SNAPSHOT_SHIPPING"|string;
   export type ReplicationTypes = ReplicationType[];
+  export interface ResumeReplicationRequest {
+    /**
+     * Resume Replication Request account ID.
+     */
+    accountID?: AccountID;
+    /**
+     * Resume Replication Request source server ID.
+     */
+    sourceServerID: SourceServerID;
+  }
   export interface RetryDataReplicationRequest {
+    /**
+     * Retry data replication for Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Retry data replication for Source Server ID.
      */
@@ -2603,6 +2808,10 @@ declare namespace Mgn {
   export type SsmParameterStoreParameters = SsmParameterStoreParameter[];
   export interface StartCutoverRequest {
     /**
+     * Start Cutover by Account IDs
+     */
+    accountID?: AccountID;
+    /**
      * Start Cutover by Source Server IDs.
      */
     sourceServerIDs: StartCutoverRequestSourceServerIDs;
@@ -2656,11 +2865,19 @@ declare namespace Mgn {
   }
   export interface StartReplicationRequest {
     /**
+     * Account ID on which to start replication.
+     */
+    accountID?: AccountID;
+    /**
      * ID of source server on which to start replication.
      */
     sourceServerID: SourceServerID;
   }
   export interface StartTestRequest {
+    /**
+     * Start Test for Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Start Test for Source Server IDs.
      */
@@ -2676,6 +2893,16 @@ declare namespace Mgn {
      * Start Test Job response.
      */
     job?: Job;
+  }
+  export interface StopReplicationRequest {
+    /**
+     * Stop Replication Request account ID.
+     */
+    accountID?: AccountID;
+    /**
+     * Stop Replication Request source server ID.
+     */
+    sourceServerID: SourceServerID;
   }
   export type StrictlyPositiveInteger = number;
   export type SubnetID = string;
@@ -2757,6 +2984,10 @@ declare namespace Mgn {
   }
   export interface TerminateTargetInstancesRequest {
     /**
+     * Terminate Target instance by Account ID
+     */
+    accountID?: AccountID;
+    /**
      * Terminate Target instance by Source Server IDs.
      */
     sourceServerIDs: TerminateTargetInstancesRequestSourceServerIDs;
@@ -2772,13 +3003,22 @@ declare namespace Mgn {
      */
     job?: Job;
   }
+  export type Throughput = number;
   export interface UnarchiveApplicationRequest {
+    /**
+     * Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Application ID.
      */
     applicationID: ApplicationID;
   }
   export interface UnarchiveWaveRequest {
+    /**
+     * Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Wave ID.
      */
@@ -2796,6 +3036,10 @@ declare namespace Mgn {
   }
   export interface UpdateApplicationRequest {
     /**
+     * Account ID.
+     */
+    accountID?: AccountID;
+    /**
      * Application ID.
      */
     applicationID: ApplicationID;
@@ -2809,6 +3053,10 @@ declare namespace Mgn {
     name?: ApplicationName;
   }
   export interface UpdateLaunchConfigurationRequest {
+    /**
+     * Update Launch configuration Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Update Launch configuration boot mode request.
      */
@@ -2908,13 +3156,17 @@ declare namespace Mgn {
   }
   export interface UpdateReplicationConfigurationRequest {
     /**
+     * Update replication configuration Account ID request.
+     */
+    accountID?: AccountID;
+    /**
      * Update replication configuration associate default Application Migration Service Security group request.
      */
     associateDefaultSecurityGroup?: Boolean;
     /**
      * Update replication configuration bandwidth throttling request.
      */
-    bandwidthThrottling?: PositiveInteger;
+    bandwidthThrottling?: BandwidthThrottling;
     /**
      * Update replication configuration create Public IP request.
      */
@@ -2967,6 +3219,10 @@ declare namespace Mgn {
      * Update replication configuration use dedicated Replication Server request.
      */
     useDedicatedReplicationServer?: Boolean;
+    /**
+     * Update replication configuration use Fips Endpoint.
+     */
+    useFipsEndpoint?: Boolean;
   }
   export interface UpdateReplicationConfigurationTemplateRequest {
     /**
@@ -2980,7 +3236,7 @@ declare namespace Mgn {
     /**
      * Update replication configuration template bandwidth throttling request.
      */
-    bandwidthThrottling?: PositiveInteger;
+    bandwidthThrottling?: BandwidthThrottling;
     /**
      * Update replication configuration template create Public IP request.
      */
@@ -3025,8 +3281,16 @@ declare namespace Mgn {
      * Update replication configuration template use dedicated Replication Server request.
      */
     useDedicatedReplicationServer?: Boolean;
+    /**
+     * Update replication configuration template use Fips Endpoint request.
+     */
+    useFipsEndpoint?: Boolean;
   }
   export interface UpdateSourceServerReplicationTypeRequest {
+    /**
+     * Account ID on which to update replication type.
+     */
+    accountID?: AccountID;
     /**
      * Replication type to which to update source server.
      */
@@ -3037,6 +3301,10 @@ declare namespace Mgn {
     sourceServerID: SourceServerID;
   }
   export interface UpdateWaveRequest {
+    /**
+     * Account ID.
+     */
+    accountID?: AccountID;
     /**
      * Wave description.
      */

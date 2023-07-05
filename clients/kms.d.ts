@@ -332,11 +332,11 @@ declare class KMS extends Service {
    */
   revokeGrant(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Schedules the deletion of a KMS key. By default, KMS applies a waiting period of 30 days, but you can specify a waiting period of 7-30 days. When this operation is successful, the key state of the KMS key changes to PendingDeletion and the key can't be used in any cryptographic operations. It remains in this state for the duration of the waiting period. Before the waiting period ends, you can use CancelKeyDeletion to cancel the deletion of the KMS key. After the waiting period ends, KMS deletes the KMS key, its key material, and all KMS data associated with it, including all aliases that refer to it.  Deleting a KMS key is a destructive and potentially dangerous operation. When a KMS key is deleted, all data that was encrypted under the KMS key is unrecoverable. (The only exception is a multi-Region replica key, or an asymmetric or HMAC KMS key with imported key material[BUGBUG-link to importing-keys-managing.html#import-delete-key.) To prevent the use of a KMS key without deleting it, use DisableKey.   You can schedule the deletion of a multi-Region primary key and its replica keys at any time. However, KMS will not delete a multi-Region primary key with existing replica keys. If you schedule the deletion of a primary key with replicas, its key state changes to PendingReplicaDeletion and it cannot be replicated or used in cryptographic operations. This status can continue indefinitely. When the last of its replicas keys is deleted (not just scheduled), the key state of the primary key changes to PendingDeletion and its waiting period (PendingWindowInDays) begins. For details, see Deleting multi-Region keys in the Key Management Service Developer Guide. When KMS deletes a KMS key from an CloudHSM key store, it makes a best effort to delete the associated key material from the associated CloudHSM cluster. However, you might need to manually delete the orphaned key material from the cluster and its backups. Deleting a KMS key from an external key store has no effect on the associated external key. However, for both types of custom key stores, deleting a KMS key is destructive and irreversible. You cannot decrypt ciphertext encrypted under the KMS key by using only its associated external key or CloudHSM key. Also, you cannot recreate a KMS key in an external key store by creating a new KMS key with the same key material. For more information about scheduling a KMS key for deletion, see Deleting KMS keys in the Key Management Service Developer Guide. The KMS key that you use for this operation must be in a compatible key state. For details, see Key states of KMS keys in the Key Management Service Developer Guide.  Cross-account use: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.  Required permissions: kms:ScheduleKeyDeletion (key policy)  Related operations     CancelKeyDeletion     DisableKey   
+   * Schedules the deletion of a KMS key. By default, KMS applies a waiting period of 30 days, but you can specify a waiting period of 7-30 days. When this operation is successful, the key state of the KMS key changes to PendingDeletion and the key can't be used in any cryptographic operations. It remains in this state for the duration of the waiting period. Before the waiting period ends, you can use CancelKeyDeletion to cancel the deletion of the KMS key. After the waiting period ends, KMS deletes the KMS key, its key material, and all KMS data associated with it, including all aliases that refer to it.  Deleting a KMS key is a destructive and potentially dangerous operation. When a KMS key is deleted, all data that was encrypted under the KMS key is unrecoverable. (The only exception is a multi-Region replica key, or an asymmetric or HMAC KMS key with imported key material.) To prevent the use of a KMS key without deleting it, use DisableKey.   You can schedule the deletion of a multi-Region primary key and its replica keys at any time. However, KMS will not delete a multi-Region primary key with existing replica keys. If you schedule the deletion of a primary key with replicas, its key state changes to PendingReplicaDeletion and it cannot be replicated or used in cryptographic operations. This status can continue indefinitely. When the last of its replicas keys is deleted (not just scheduled), the key state of the primary key changes to PendingDeletion and its waiting period (PendingWindowInDays) begins. For details, see Deleting multi-Region keys in the Key Management Service Developer Guide. When KMS deletes a KMS key from an CloudHSM key store, it makes a best effort to delete the associated key material from the associated CloudHSM cluster. However, you might need to manually delete the orphaned key material from the cluster and its backups. Deleting a KMS key from an external key store has no effect on the associated external key. However, for both types of custom key stores, deleting a KMS key is destructive and irreversible. You cannot decrypt ciphertext encrypted under the KMS key by using only its associated external key or CloudHSM key. Also, you cannot recreate a KMS key in an external key store by creating a new KMS key with the same key material. For more information about scheduling a KMS key for deletion, see Deleting KMS keys in the Key Management Service Developer Guide. The KMS key that you use for this operation must be in a compatible key state. For details, see Key states of KMS keys in the Key Management Service Developer Guide.  Cross-account use: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.  Required permissions: kms:ScheduleKeyDeletion (key policy)  Related operations     CancelKeyDeletion     DisableKey   
    */
   scheduleKeyDeletion(params: KMS.Types.ScheduleKeyDeletionRequest, callback?: (err: AWSError, data: KMS.Types.ScheduleKeyDeletionResponse) => void): Request<KMS.Types.ScheduleKeyDeletionResponse, AWSError>;
   /**
-   * Schedules the deletion of a KMS key. By default, KMS applies a waiting period of 30 days, but you can specify a waiting period of 7-30 days. When this operation is successful, the key state of the KMS key changes to PendingDeletion and the key can't be used in any cryptographic operations. It remains in this state for the duration of the waiting period. Before the waiting period ends, you can use CancelKeyDeletion to cancel the deletion of the KMS key. After the waiting period ends, KMS deletes the KMS key, its key material, and all KMS data associated with it, including all aliases that refer to it.  Deleting a KMS key is a destructive and potentially dangerous operation. When a KMS key is deleted, all data that was encrypted under the KMS key is unrecoverable. (The only exception is a multi-Region replica key, or an asymmetric or HMAC KMS key with imported key material[BUGBUG-link to importing-keys-managing.html#import-delete-key.) To prevent the use of a KMS key without deleting it, use DisableKey.   You can schedule the deletion of a multi-Region primary key and its replica keys at any time. However, KMS will not delete a multi-Region primary key with existing replica keys. If you schedule the deletion of a primary key with replicas, its key state changes to PendingReplicaDeletion and it cannot be replicated or used in cryptographic operations. This status can continue indefinitely. When the last of its replicas keys is deleted (not just scheduled), the key state of the primary key changes to PendingDeletion and its waiting period (PendingWindowInDays) begins. For details, see Deleting multi-Region keys in the Key Management Service Developer Guide. When KMS deletes a KMS key from an CloudHSM key store, it makes a best effort to delete the associated key material from the associated CloudHSM cluster. However, you might need to manually delete the orphaned key material from the cluster and its backups. Deleting a KMS key from an external key store has no effect on the associated external key. However, for both types of custom key stores, deleting a KMS key is destructive and irreversible. You cannot decrypt ciphertext encrypted under the KMS key by using only its associated external key or CloudHSM key. Also, you cannot recreate a KMS key in an external key store by creating a new KMS key with the same key material. For more information about scheduling a KMS key for deletion, see Deleting KMS keys in the Key Management Service Developer Guide. The KMS key that you use for this operation must be in a compatible key state. For details, see Key states of KMS keys in the Key Management Service Developer Guide.  Cross-account use: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.  Required permissions: kms:ScheduleKeyDeletion (key policy)  Related operations     CancelKeyDeletion     DisableKey   
+   * Schedules the deletion of a KMS key. By default, KMS applies a waiting period of 30 days, but you can specify a waiting period of 7-30 days. When this operation is successful, the key state of the KMS key changes to PendingDeletion and the key can't be used in any cryptographic operations. It remains in this state for the duration of the waiting period. Before the waiting period ends, you can use CancelKeyDeletion to cancel the deletion of the KMS key. After the waiting period ends, KMS deletes the KMS key, its key material, and all KMS data associated with it, including all aliases that refer to it.  Deleting a KMS key is a destructive and potentially dangerous operation. When a KMS key is deleted, all data that was encrypted under the KMS key is unrecoverable. (The only exception is a multi-Region replica key, or an asymmetric or HMAC KMS key with imported key material.) To prevent the use of a KMS key without deleting it, use DisableKey.   You can schedule the deletion of a multi-Region primary key and its replica keys at any time. However, KMS will not delete a multi-Region primary key with existing replica keys. If you schedule the deletion of a primary key with replicas, its key state changes to PendingReplicaDeletion and it cannot be replicated or used in cryptographic operations. This status can continue indefinitely. When the last of its replicas keys is deleted (not just scheduled), the key state of the primary key changes to PendingDeletion and its waiting period (PendingWindowInDays) begins. For details, see Deleting multi-Region keys in the Key Management Service Developer Guide. When KMS deletes a KMS key from an CloudHSM key store, it makes a best effort to delete the associated key material from the associated CloudHSM cluster. However, you might need to manually delete the orphaned key material from the cluster and its backups. Deleting a KMS key from an external key store has no effect on the associated external key. However, for both types of custom key stores, deleting a KMS key is destructive and irreversible. You cannot decrypt ciphertext encrypted under the KMS key by using only its associated external key or CloudHSM key. Also, you cannot recreate a KMS key in an external key store by creating a new KMS key with the same key material. For more information about scheduling a KMS key for deletion, see Deleting KMS keys in the Key Management Service Developer Guide. The KMS key that you use for this operation must be in a compatible key state. For details, see Key states of KMS keys in the Key Management Service Developer Guide.  Cross-account use: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.  Required permissions: kms:ScheduleKeyDeletion (key policy)  Related operations     CancelKeyDeletion     DisableKey   
    */
   scheduleKeyDeletion(callback?: (err: AWSError, data: KMS.Types.ScheduleKeyDeletionResponse) => void): Request<KMS.Types.ScheduleKeyDeletionResponse, AWSError>;
   /**
@@ -553,6 +553,10 @@ declare namespace KMS {
      * A friendly name for the grant. Use this value to prevent the unintended creation of duplicate grants when retrying this request.  Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.  When this value is absent, all CreateGrant requests result in a new grant with a unique GrantId even if all the supplied parameters are identical. This can result in unintended duplicates when you retry the CreateGrant request. When this value is present, you can retry a CreateGrant request with identical parameters; if the grant already exists, the original GrantId is returned without creating a new grant. Note that the returned grant token is unique with every CreateGrant request, even when a duplicate GrantId is returned. All grant tokens for the same grant ID can be used interchangeably.
      */
     Name?: GrantNameType;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface CreateGrantResponse {
     /**
@@ -687,6 +691,10 @@ declare namespace KMS {
      * A signed attestation document from an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave's public key. The only valid encryption algorithm is RSAES_OAEP_SHA_256.  This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this parameter, use the Amazon Web Services Nitro Enclaves SDK or any Amazon Web Services SDK. When you use this parameter, instead of returning the plaintext data, KMS encrypts the plaintext data with the public key in the attestation document, and returns the resulting ciphertext in the CiphertextForRecipient field in the response. This ciphertext can be decrypted only with the private key in the enclave. The Plaintext field in the response is null or empty. For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see How Amazon Web Services Nitro Enclaves uses KMS in the Key Management Service Developer Guide.
      */
     Recipient?: RecipientInfo;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface DecryptResponse {
     /**
@@ -828,6 +836,10 @@ declare namespace KMS {
      * Specifies the encryption algorithm that KMS will use to encrypt the plaintext message. The algorithm must be compatible with the KMS key that you specify. This parameter is required only for asymmetric KMS keys. The default value, SYMMETRIC_DEFAULT, is the algorithm used for symmetric encryption KMS keys. If you are using an asymmetric KMS key, we recommend RSAES_OAEP_SHA_256. The SM2PKE algorithm is only available in China Regions.
      */
     EncryptionAlgorithm?: EncryptionAlgorithmSpec;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface EncryptResponse {
     /**
@@ -870,6 +882,10 @@ declare namespace KMS {
      * A signed attestation document from an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave's public key. The only valid encryption algorithm is RSAES_OAEP_SHA_256.  This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this parameter, use the Amazon Web Services Nitro Enclaves SDK or any Amazon Web Services SDK. When you use this parameter, instead of returning a plaintext copy of the private data key, KMS encrypts the plaintext private data key under the public key in the attestation document, and returns the resulting ciphertext in the CiphertextForRecipient field in the response. This ciphertext can be decrypted only with the private key in the enclave. The CiphertextBlob field in the response contains a copy of the private data key encrypted under the KMS key specified by the KeyId parameter. The PrivateKeyPlaintext field in the response is null or empty. For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see How Amazon Web Services Nitro Enclaves uses KMS in the Key Management Service Developer Guide.
      */
     Recipient?: RecipientInfo;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface GenerateDataKeyPairResponse {
     /**
@@ -914,6 +930,10 @@ declare namespace KMS {
      * A list of grant tokens. Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved eventual consistency. For more information, see Grant token and Using a grant token in the Key Management Service Developer Guide.
      */
     GrantTokens?: GrantTokenList;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface GenerateDataKeyPairWithoutPlaintextResponse {
     /**
@@ -958,6 +978,10 @@ declare namespace KMS {
      * A signed attestation document from an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave's public key. The only valid encryption algorithm is RSAES_OAEP_SHA_256.  This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this parameter, use the Amazon Web Services Nitro Enclaves SDK or any Amazon Web Services SDK. When you use this parameter, instead of returning the plaintext data key, KMS encrypts the plaintext data key under the public key in the attestation document, and returns the resulting ciphertext in the CiphertextForRecipient field in the response. This ciphertext can be decrypted only with the private key in the enclave. The CiphertextBlob field in the response contains a copy of the data key encrypted under the KMS key specified by the KeyId parameter. The Plaintext field in the response is null or empty. For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see How Amazon Web Services Nitro Enclaves uses KMS in the Key Management Service Developer Guide.
      */
     Recipient?: RecipientInfo;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface GenerateDataKeyResponse {
     /**
@@ -998,6 +1022,10 @@ declare namespace KMS {
      * A list of grant tokens. Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved eventual consistency. For more information, see Grant token and Using a grant token in the Key Management Service Developer Guide.
      */
     GrantTokens?: GrantTokenList;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface GenerateDataKeyWithoutPlaintextResponse {
     /**
@@ -1026,6 +1054,10 @@ declare namespace KMS {
      * A list of grant tokens. Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved eventual consistency. For more information, see Grant token and Using a grant token in the Key Management Service Developer Guide.
      */
     GrantTokens?: GrantTokenList;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface GenerateMacResponse {
     /**
@@ -1610,6 +1642,10 @@ declare namespace KMS {
      * A list of grant tokens. Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved eventual consistency. For more information, see Grant token and Using a grant token in the Key Management Service Developer Guide.
      */
     GrantTokens?: GrantTokenList;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface ReEncryptResponse {
     /**
@@ -1697,6 +1733,10 @@ declare namespace KMS {
      * Identifies the grant to retire. To get the grant ID, use CreateGrant, ListGrants, or ListRetirableGrants.   Grant ID Example - 0123456789012345678901234567890123456789012345678901234567890123  
      */
     GrantId?: GrantIdType;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface RevokeGrantRequest {
     /**
@@ -1707,6 +1747,10 @@ declare namespace KMS {
      * Identifies the grant to revoke. To get the grant ID, use CreateGrant, ListGrants, or ListRetirableGrants.
      */
     GrantId: GrantIdType;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface ScheduleKeyDeletionRequest {
     /**
@@ -1757,6 +1801,10 @@ declare namespace KMS {
      * Specifies the signing algorithm to use when signing the message.  Choose an algorithm that is compatible with the type and size of the specified asymmetric KMS key. When signing with RSA key pairs, RSASSA-PSS algorithms are preferred. We include RSASSA-PKCS1-v1_5 algorithms for compatibility with existing applications.
      */
     SigningAlgorithm: SigningAlgorithmSpec;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface SignResponse {
     /**
@@ -1900,6 +1948,10 @@ declare namespace KMS {
      * A list of grant tokens. Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved eventual consistency. For more information, see Grant token and Using a grant token in the Key Management Service Developer Guide.
      */
     GrantTokens?: GrantTokenList;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface VerifyMacResponse {
     /**
@@ -1940,6 +1992,10 @@ declare namespace KMS {
      * A list of grant tokens. Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved eventual consistency. For more information, see Grant token and Using a grant token in the Key Management Service Developer Guide.
      */
     GrantTokens?: GrantTokenList;
+    /**
+     * Checks if your request will succeed. DryRun is an optional parameter.  To learn more about how to use this parameter, see Testing your KMS API calls in the Key Management Service Developer Guide.
+     */
+    DryRun?: NullableBooleanType;
   }
   export interface VerifyResponse {
     /**
