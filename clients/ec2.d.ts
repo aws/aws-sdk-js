@@ -21793,13 +21793,13 @@ declare namespace EC2 {
   export type HibernationFlag = boolean;
   export interface HibernationOptions {
     /**
-     * If this parameter is set to true, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.
+     * If true, your instance is enabled for hibernation; otherwise, it is not enabled for hibernation.
      */
     Configured?: Boolean;
   }
   export interface HibernationOptionsRequest {
     /**
-     * If you set this parameter to true, your instance is enabled for hibernation. Default: false 
+     * Set to true to enable your instance for hibernation. Default: false 
      */
     Configured?: Boolean;
   }
@@ -24256,6 +24256,10 @@ declare namespace EC2 {
      * The supported boot modes. For more information, see Boot modes in the Amazon EC2 User Guide.
      */
     SupportedBootModes?: BootModeTypeList;
+    /**
+     * Indicates whether Nitro Enclaves is supported.
+     */
+    NitroEnclavesSupport?: NitroEnclavesSupport;
   }
   export interface InstanceTypeInfoFromInstanceRequirements {
     /**
@@ -29565,6 +29569,7 @@ declare namespace EC2 {
   }
   export type NewDhcpConfigurationList = NewDhcpConfiguration[];
   export type NextToken = string;
+  export type NitroEnclavesSupport = "unsupported"|"supported"|string;
   export type OccurrenceDayRequestSet = Integer[];
   export type OccurrenceDaySet = Integer[];
   export type OfferingClassType = "standard"|"convertible"|string;
@@ -32905,7 +32910,7 @@ declare namespace EC2 {
      */
     CapacityReservationSpecification?: CapacityReservationSpecification;
     /**
-     * Indicates whether an instance is enabled for hibernation. For more information, see Hibernate your instance in the Amazon EC2 User Guide. You can't enable hibernation and Amazon Web Services Nitro Enclaves on the same instance.
+     * Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the hibernation prerequisites. For more information, see Hibernate your instance in the Amazon EC2 User Guide. You can't enable hibernation and Amazon Web Services Nitro Enclaves on the same instance.
      */
     HibernationOptions?: HibernationOptionsRequest;
     /**
@@ -32917,7 +32922,7 @@ declare namespace EC2 {
      */
     MetadataOptions?: InstanceMetadataOptionsRequest;
     /**
-     * Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves? in the Amazon Web Services Nitro Enclaves User Guide. You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same instance.
+     * Indicates whether the instance is enabled for Amazon Web Services Nitro Enclaves. For more information, see What is Amazon Web Services Nitro Enclaves? in the Amazon Web Services Nitro Enclaves User Guide. You can't enable Amazon Web Services Nitro Enclaves and hibernation on the same instance.
      */
     EnclaveOptions?: EnclaveOptionsRequest;
     /**
@@ -35232,7 +35237,7 @@ declare namespace EC2 {
     /**
      * The ID of the client connection to be terminated.
      */
-    ConnectionId?: VpnConnectionId;
+    ConnectionId?: String;
     /**
      * The name of the user who initiated the connection. Use this option to terminate all active connections for the specified user. This option can only be used if the user has established up to five connections.
      */

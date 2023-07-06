@@ -303,7 +303,7 @@ declare namespace Outposts {
      */
     RackElevation?: RackElevation;
   }
-  export type AssetState = "ACTIVE"|"RETIRING"|string;
+  export type AssetState = "ACTIVE"|"RETIRING"|"ISOLATED"|string;
   export type AssetType = "COMPUTE"|string;
   export type AvailabilityZone = string;
   export type AvailabilityZoneId = string;
@@ -640,7 +640,7 @@ declare namespace Outposts {
      */
     PreviousLineItemId?: LineItemId;
     /**
-     * The ID of the previous order.
+     * The ID of the previous order item.
      */
     PreviousOrderId?: OrderId;
   }
@@ -826,7 +826,7 @@ declare namespace Outposts {
      */
     PaymentTerm?: PaymentTerm;
     /**
-     * The type of order.
+     * Type of order.
      */
     OrderType?: OrderType;
   }
@@ -842,7 +842,7 @@ declare namespace Outposts {
      */
     OrderId?: OrderId;
     /**
-     * The type of order.
+     *  The type of order. 
      */
     OrderType?: OrderType;
     /**

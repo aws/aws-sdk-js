@@ -238,11 +238,11 @@ declare class RDS extends Service {
    */
   createEventSubscription(callback?: (err: AWSError, data: RDS.Types.CreateEventSubscriptionResult) => void): Request<RDS.Types.CreateEventSubscriptionResult, AWSError>;
   /**
-   * Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.  This action applies only to Aurora DB clusters. 
+   * Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.  This operation applies only to Aurora DB clusters. 
    */
   createGlobalCluster(params: RDS.Types.CreateGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.CreateGlobalClusterResult) => void): Request<RDS.Types.CreateGlobalClusterResult, AWSError>;
   /**
-   * Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.  This action applies only to Aurora DB clusters. 
+   * Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.  This operation applies only to Aurora DB clusters. 
    */
   createGlobalCluster(callback?: (err: AWSError, data: RDS.Types.CreateGlobalClusterResult) => void): Request<RDS.Types.CreateGlobalClusterResult, AWSError>;
   /**
@@ -2059,7 +2059,7 @@ declare namespace RDS {
   }
   export interface CreateDBInstanceMessage {
     /**
-     * The meaning of this parameter differs depending on the database engine.  Amazon Aurora MySQL Amazon Aurora PostgreSQL Amazon RDS Custom for Oracle Amazon RDS Custom for SQL Server RDS for MariaDB RDS for MySQL RDS for Oracle RDS for PostgreSQL RDS for SQL Server  The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is created. If you don't specify a value, Amazon RDS doesn't create a database in the DB cluster. Constraints:   Must contain 1 to 64 alphanumeric characters.   Can't be a word reserved by the database engine.     The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is created. Default: postgres  Constraints:   Must contain 1 to 63 alphanumeric characters.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0 to 9).   Can't be a word reserved by the database engine.     The Oracle System ID (SID) of the created RDS Custom DB instance. Default: ORCL  Constraints:   Must contain 1 to 8 alphanumeric characters.   Must contain a letter.   Can't be a word reserved by the database engine.     Not applicable. Must be null.   The name of the database to create when the DB instance is created. If you don't specify a value, Amazon RDS doesn't create a database in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the database engine.     The name of the database to create when the DB instance is created. If you don't specify a value, Amazon RDS doesn't create a database in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the database engine.     The Oracle System ID (SID) of the created DB instance. Default: ORCL  Constraints:   Can't be longer than 8 characters.   Can't be a word reserved by the database engine, such as the string NULL.     The name of the database to create when the DB instance is created. Default: postgres  Constraints:   Must contain 1 to 63 letters, numbers, or underscores.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the database engine.     Not applicable. Must be null.  
+     * The meaning of this parameter differs depending on the database engine.  Amazon Aurora MySQL  The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is created. If you don't specify a value, Amazon RDS doesn't create a database in the DB cluster. Constraints:   Must contain 1 to 64 alphanumeric characters.   Can't be a word reserved by the database engine.    Amazon Aurora PostgreSQL  The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is created. Default: postgres  Constraints:   Must contain 1 to 63 alphanumeric characters.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0 to 9).   Can't be a word reserved by the database engine.    Amazon RDS Custom for Oracle  The Oracle System ID (SID) of the created RDS Custom DB instance. Default: ORCL  Constraints:   Must contain 1 to 8 alphanumeric characters.   Must contain a letter.   Can't be a word reserved by the database engine.    Amazon RDS Custom for SQL Server  Not applicable. Must be null.  RDS for MariaDB  The name of the database to create when the DB instance is created. If you don't specify a value, Amazon RDS doesn't create a database in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the database engine.    RDS for MySQL  The name of the database to create when the DB instance is created. If you don't specify a value, Amazon RDS doesn't create a database in the DB instance. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the database engine.    RDS for Oracle  The Oracle System ID (SID) of the created DB instance. Default: ORCL  Constraints:   Can't be longer than 8 characters.   Can't be a word reserved by the database engine, such as the string NULL.    RDS for PostgreSQL  The name of the database to create when the DB instance is created. Default: postgres  Constraints:   Must contain 1 to 63 letters, numbers, or underscores.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).   Can't be a word reserved by the database engine.    RDS for SQL Server  Not applicable. Must be null.  
      */
     DBName?: String;
     /**
@@ -2067,7 +2067,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier: String;
     /**
-     * The amount of storage in gibibytes (GiB) to allocate for the DB instance. This setting doesn't apply to Amazon Aurora DB instances. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  Amazon RDS Custom RDS for MariaDB RDS for MySQL RDS for Oracle RDS for PostgreSQL RDS for SQL Server  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.   Provisioned IOPS storage (io1): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.     Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.     Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.     Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 10 to 3072.     Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.     Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3):   Enterprise and Standard editions: Must be an integer from 20 to 16384.   Web and Express editions: Must be an integer from 20 to 16384.     Provisioned IOPS storage (io1):   Enterprise and Standard editions: Must be an integer from 100 to 16384.   Web and Express editions: Must be an integer from 100 to 16384.     Magnetic storage (standard):   Enterprise and Standard editions: Must be an integer from 20 to 1024.   Web and Express editions: Must be an integer from 20 to 1024.      
+     * The amount of storage in gibibytes (GiB) to allocate for the DB instance. This setting doesn't apply to Amazon Aurora DB instances. Aurora cluster volumes automatically grow as the amount of data in your database increases, though you are only charged for the space that you use in an Aurora cluster volume.  Amazon RDS Custom  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.   Provisioned IOPS storage (io1): Must be an integer from 40 to 65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.    RDS for MariaDB  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for MySQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for Oracle  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 10 to 3072.    RDS for PostgreSQL  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.   Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.   Magnetic storage (standard): Must be an integer from 5 to 3072.    RDS for SQL Server  Constraints to the amount of storage for each storage type are the following:   General Purpose (SSD) storage (gp2, gp3):   Enterprise and Standard editions: Must be an integer from 20 to 16384.   Web and Express editions: Must be an integer from 20 to 16384.     Provisioned IOPS storage (io1):   Enterprise and Standard editions: Must be an integer from 100 to 16384.   Web and Express editions: Must be an integer from 100 to 16384.     Magnetic storage (standard):   Enterprise and Standard editions: Must be an integer from 20 to 1024.   Web and Express editions: Must be an integer from 20 to 1024.      
      */
     AllocatedStorage?: IntegerOptional;
     /**
@@ -2127,7 +2127,7 @@ declare namespace RDS {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * The version number of the database engine to use. This setting doesn't apply to Amazon Aurora DB instances. The version number of the database engine the DB instance uses is managed by the DB cluster. For a list of valid engine versions, use the DescribeDBEngineVersions operation. The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every Amazon Web Services Region.  Amazon RDS Custom for Oracle Amazon RDS Custom for SQL Server RDS for MariaDB RDS for Microsoft SQL Server RDS for MySQL RDS for Oracle RDS for PostgreSQL  A custom engine version (CEV) that you have previously created. This setting is required for RDS Custom for Oracle. The CEV name has the following format: 19.customized_string. A valid CEV name is 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB instance in the Amazon RDS User Guide.   See RDS Custom for SQL Server general requirements in the Amazon RDS User Guide.   For information, see MariaDB on Amazon RDS versions in the Amazon RDS User Guide.   For information, see Microsoft SQL Server versions on Amazon RDS in the Amazon RDS User Guide.   For information, see MySQL on Amazon RDS versions in the Amazon RDS User Guide.   For information, see Oracle Database Engine release notes in the Amazon RDS User Guide.   For information, see Amazon RDS for PostgreSQL versions and extensions in the Amazon RDS User Guide.  
+     * The version number of the database engine to use. This setting doesn't apply to Amazon Aurora DB instances. The version number of the database engine the DB instance uses is managed by the DB cluster. For a list of valid engine versions, use the DescribeDBEngineVersions operation. The following are the database engines and links to information about the major and minor versions that are available with Amazon RDS. Not every database engine is available for every Amazon Web Services Region.  Amazon RDS Custom for Oracle  A custom engine version (CEV) that you have previously created. This setting is required for RDS Custom for Oracle. The CEV name has the following format: 19.customized_string. A valid CEV name is 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB instance in the Amazon RDS User Guide.  Amazon RDS Custom for SQL Server  See RDS Custom for SQL Server general requirements in the Amazon RDS User Guide.  RDS for MariaDB  For information, see MariaDB on Amazon RDS versions in the Amazon RDS User Guide.  RDS for Microsoft SQL Server  For information, see Microsoft SQL Server versions on Amazon RDS in the Amazon RDS User Guide.  RDS for MySQL  For information, see MySQL on Amazon RDS versions in the Amazon RDS User Guide.  RDS for Oracle  For information, see Oracle Database Engine release notes in the Amazon RDS User Guide.  RDS for PostgreSQL  For information, see Amazon RDS for PostgreSQL versions and extensions in the Amazon RDS User Guide.  
      */
     EngineVersion?: String;
     /**
@@ -2191,15 +2191,15 @@ declare namespace RDS {
      */
     Domain?: String;
     /**
-     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     * The fully qualified domain name (FQDN) of an Active Directory domain. Constraints:   Can't be longer than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
      */
     DomainFqdn?: String;
     /**
-     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Can't be longer than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
      */
     DomainOu?: String;
     /**
-     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     * The ARN for the Secrets Manager secret with the credentials for the user joining the domain. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
      */
     DomainAuthSecretArn?: String;
     /**
@@ -2207,7 +2207,7 @@ declare namespace RDS {
      */
     DomainDnsIps?: StringList;
     /**
-     * Spcifies whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied. This setting doesn't apply to Amazon Aurora DB instances. Copying tags to snapshots is managed by the DB cluster. Setting this value for an Aurora DB instance has no effect on the DB cluster setting.
+     * Specifies whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied. This setting doesn't apply to Amazon Aurora DB instances. Copying tags to snapshots is managed by the DB cluster. Setting this value for an Aurora DB instance has no effect on the DB cluster setting.
      */
     CopyTagsToSnapshot?: BooleanOptional;
     /**
@@ -2414,15 +2414,15 @@ declare namespace RDS {
      */
     DomainIAMRoleName?: String;
     /**
-     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     * The fully qualified domain name (FQDN) of an Active Directory domain. Constraints:   Can't be longer than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
      */
     DomainFqdn?: String;
     /**
-     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Can't be longer than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
      */
     DomainOu?: String;
     /**
-     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     * The ARN for the Secrets Manager secret with the credentials for the user joining the domain. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
      */
     DomainAuthSecretArn?: String;
     /**
@@ -2654,31 +2654,31 @@ declare namespace RDS {
   }
   export interface CreateGlobalClusterMessage {
     /**
-     * The cluster identifier of the new global database cluster. This parameter is stored as a lowercase string.
+     * The cluster identifier for this global database cluster. This parameter is stored as a lowercase string.
      */
     GlobalClusterIdentifier?: String;
     /**
-     * The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional.
+     * The Amazon Resource Name (ARN) to use as the primary cluster of the global database. If you provide a value for this parameter, don't specify values for the following settings because Amazon Aurora uses the values from the specified source DB cluster:    DatabaseName     Engine     EngineVersion     StorageEncrypted   
      */
     SourceDBClusterIdentifier?: String;
     /**
-     * The name of the database engine to be used for this DB cluster.
+     * The database engine to use for this global database cluster. Valid Values: aurora-mysql | aurora-postgresql  Constraints:   Can't be specified if SourceDBClusterIdentifier is specified. In this case, Amazon Aurora uses the engine of the source DB cluster.  
      */
     Engine?: String;
     /**
-     * The engine version of the Aurora global database.
+     * The engine version to use for this global database cluster. Constraints:   Can't be specified if SourceDBClusterIdentifier is specified. In this case, Amazon Aurora uses the engine version of the source DB cluster.  
      */
     EngineVersion?: String;
     /**
-     * The deletion protection setting for the new global database. The global database can't be deleted when deletion protection is enabled.
+     * Specifies whether to enable deletion protection for the new global database cluster. The global database can't be deleted when deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
     /**
-     * The name for your database of up to 64 alphanumeric characters. If you do not provide a name, Amazon Aurora will not create a database in the global database cluster you are creating.
+     * The name for your database of up to 64 alphanumeric characters. If you don't specify a name, Amazon Aurora doesn't create a database in the global database cluster. Constraints:   Can't be specified if SourceDBClusterIdentifier is specified. In this case, Amazon Aurora uses the database name from the source DB cluster.  
      */
     DatabaseName?: String;
     /**
-     * The storage encryption setting for the new global database cluster.
+     * Specifies whether to enable storage encryption for the new global database cluster. Constraints:   Can't be specified if SourceDBClusterIdentifier is specified. In this case, Amazon Aurora uses the setting from the source DB cluster.  
      */
     StorageEncrypted?: BooleanOptional;
   }
@@ -5634,19 +5634,19 @@ declare namespace RDS {
      */
     FQDN?: String;
     /**
-     * The name of the IAM role to be used when making API calls to the Directory Service.
+     * The name of the IAM role used when making API calls to the Directory Service.
      */
     IAMRoleName?: String;
     /**
-     * The Active Directory organizational unit for your DB instance to join.
+     * The Active Directory organizational unit for the DB instance or cluster.
      */
     OU?: String;
     /**
-     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.
+     * The ARN for the Secrets Manager secret with the credentials for the user that's a member of the domain.
      */
     AuthSecretArn?: String;
     /**
-     * The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+     * The IPv4 DNS IP addresses of the primary and secondary Active Directory domain controllers.
      */
     DnsIps?: StringList;
   }
@@ -6519,15 +6519,15 @@ declare namespace RDS {
      */
     Domain?: String;
     /**
-     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     * The fully qualified domain name (FQDN) of an Active Directory domain. Constraints:   Can't be longer than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
      */
     DomainFqdn?: String;
     /**
-     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Can't be longer than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
      */
     DomainOu?: String;
     /**
-     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     * The ARN for the Secrets Manager secret with the credentials for the user joining the domain. Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
      */
     DomainAuthSecretArn?: String;
     /**
@@ -6559,7 +6559,7 @@ declare namespace RDS {
      */
     DomainIAMRoleName?: String;
     /**
-     * Boolean. If present, removes the instance from the Active Directory domain.
+     * Specifies whether to remove the DB instance from the Active Directory domain.
      */
     DisableDomain?: BooleanOptional;
     /**
@@ -8315,15 +8315,15 @@ declare namespace RDS {
      */
     Domain?: String;
     /**
-     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     * The fully qualified domain name (FQDN) of an Active Directory domain. Constraints:   Can't be longer than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
      */
     DomainFqdn?: String;
     /**
-     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Can't be longer than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
      */
     DomainOu?: String;
     /**
-     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Constraints: Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     * The ARN for the Secrets Manager secret with the credentials for the user joining the domain. Constraints: Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
      */
     DomainAuthSecretArn?: String;
     /**
@@ -8335,7 +8335,7 @@ declare namespace RDS {
      */
     CopyTagsToSnapshot?: BooleanOptional;
     /**
-     * Specify the name of the IAM role to be used when making API calls to the Directory Service. This setting doesn't apply to RDS Custom.
+     * The name of the IAM role to use when making API calls to the Directory Service. This setting doesn't apply to RDS Custom DB instances.
      */
     DomainIAMRoleName?: String;
     /**
@@ -8682,19 +8682,19 @@ declare namespace RDS {
      */
     Domain?: String;
     /**
-     * Specify the name of the IAM role to be used when making API calls to the Directory Service. This setting doesn't apply to RDS Custom.
+     * The name of the IAM role to use when making API calls to the Directory Service. This setting doesn't apply to RDS Custom DB instances.
      */
     DomainIAMRoleName?: String;
     /**
-     * Specifies the fully qualified domain name of an Active Directory domain. Constraints:   Cannot be greater than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
+     * The fully qualified domain name (FQDN) of an Active Directory domain. Constraints:   Can't be longer than 64 characters.   Example: mymanagedADtest.mymanagedAD.mydomain 
      */
     DomainFqdn?: String;
     /**
-     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Cannot be greater than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
+     * The Active Directory organizational unit for your DB instance to join. Constraints:   Must be in the distinguished name format.   Can't be longer than 64 characters.   Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain 
      */
     DomainOu?: String;
     /**
-     * The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join. Constraints:   Cannot be greater than 64 characters.   Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
+     * The ARN for the Secrets Manager secret with the credentials for the user joining the domain. Constraints:   Can't be longer than 64 characters.   Example: arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456 
      */
     DomainAuthSecretArn?: String;
     /**

@@ -92,11 +92,11 @@ declare class Location extends Service {
    */
   createGeofenceCollection(callback?: (err: AWSError, data: Location.Types.CreateGeofenceCollectionResponse) => void): Request<Location.Types.CreateGeofenceCollectionResponse, AWSError>;
   /**
-   * Creates an API key resource in your Amazon Web Services account, which lets you grant geo:GetMap* actions for Amazon Location Map resources to the API key bearer.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   * Creates an API key resource in your Amazon Web Services account, which lets you grant actions for Amazon Location resources to the API key bearer.  For more information, see Using API keys. 
    */
   createKey(params: Location.Types.CreateKeyRequest, callback?: (err: AWSError, data: Location.Types.CreateKeyResponse) => void): Request<Location.Types.CreateKeyResponse, AWSError>;
   /**
-   * Creates an API key resource in your Amazon Web Services account, which lets you grant geo:GetMap* actions for Amazon Location Map resources to the API key bearer.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   * Creates an API key resource in your Amazon Web Services account, which lets you grant actions for Amazon Location resources to the API key bearer.  For more information, see Using API keys. 
    */
   createKey(callback?: (err: AWSError, data: Location.Types.CreateKeyResponse) => void): Request<Location.Types.CreateKeyResponse, AWSError>;
   /**
@@ -188,11 +188,11 @@ declare class Location extends Service {
    */
   describeGeofenceCollection(callback?: (err: AWSError, data: Location.Types.DescribeGeofenceCollectionResponse) => void): Request<Location.Types.DescribeGeofenceCollectionResponse, AWSError>;
   /**
-   * Retrieves the API key resource details.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   * Retrieves the API key resource details.
    */
   describeKey(params: Location.Types.DescribeKeyRequest, callback?: (err: AWSError, data: Location.Types.DescribeKeyResponse) => void): Request<Location.Types.DescribeKeyResponse, AWSError>;
   /**
-   * Retrieves the API key resource details.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   * Retrieves the API key resource details.
    */
   describeKey(callback?: (err: AWSError, data: Location.Types.DescribeKeyResponse) => void): Request<Location.Types.DescribeKeyResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class Location extends Service {
    */
   listGeofences(callback?: (err: AWSError, data: Location.Types.ListGeofencesResponse) => void): Request<Location.Types.ListGeofencesResponse, AWSError>;
   /**
-   * Lists API key resources in your Amazon Web Services account.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   * Lists API key resources in your Amazon Web Services account.
    */
   listKeys(params: Location.Types.ListKeysRequest, callback?: (err: AWSError, data: Location.Types.ListKeysResponse) => void): Request<Location.Types.ListKeysResponse, AWSError>;
   /**
-   * Lists API key resources in your Amazon Web Services account.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   * Lists API key resources in your Amazon Web Services account.
    */
   listKeys(callback?: (err: AWSError, data: Location.Types.ListKeysResponse) => void): Request<Location.Types.ListKeysResponse, AWSError>;
   /**
@@ -436,11 +436,11 @@ declare class Location extends Service {
    */
   updateGeofenceCollection(callback?: (err: AWSError, data: Location.Types.UpdateGeofenceCollectionResponse) => void): Request<Location.Types.UpdateGeofenceCollectionResponse, AWSError>;
   /**
-   * Updates the specified properties of a given API key resource.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   * Updates the specified properties of a given API key resource.
    */
   updateKey(params: Location.Types.UpdateKeyRequest, callback?: (err: AWSError, data: Location.Types.UpdateKeyResponse) => void): Request<Location.Types.UpdateKeyResponse, AWSError>;
   /**
-   * Updates the specified properties of a given API key resource.  The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see Using API keys. 
+   * Updates the specified properties of a given API key resource.
    */
   updateKey(callback?: (err: AWSError, data: Location.Types.UpdateKeyResponse) => void): Request<Location.Types.UpdateKeyResponse, AWSError>;
   /**
@@ -487,7 +487,7 @@ declare namespace Location {
   }
   export interface ApiKeyRestrictions {
     /**
-     * A list of allowed actions that an API key resource grants permissions to perform  Currently, the only valid action is geo:GetMap* as an input to the list. For example, ["geo:GetMap*"] is valid but ["geo:GetMapTile"] is not. 
+     * A list of allowed actions that an API key resource grants permissions to perform. You must have at least one action for each type of resource. For example, if you have a place resource, you must include at least one place action. The following are valid values for the actions.    Map actions     geo:GetMap* - Allows all actions needed for map rendering.      Place actions     geo:SearchPlaceIndexForText - Allows geocoding.    geo:SearchPlaceIndexForPosition - Allows reverse geocoding.    geo:SearchPlaceIndexForSuggestions - Allows generating suggestions from text.    GetPlace - Allows finding a place by place ID.      Route actions     geo:CalculateRoute - Allows point to point routing.    geo:CalculateRouteMatrix - Allows calculating a matrix of routes.      You must use these strings exactly. For example, to provide access to map rendering, the only valid action is geo:GetMap* as an input to the list. ["geo:GetMap*"] is valid but ["geo:GetMapTile"] is not. Similarly, you cannot use ["geo:SearchPlaceIndexFor*"] - you must list each of the Place actions separately. 
      */
     AllowActions: ApiKeyRestrictionsAllowActionsList;
     /**
@@ -495,7 +495,7 @@ declare namespace Location {
      */
     AllowReferers?: ApiKeyRestrictionsAllowReferersList;
     /**
-     * A list of allowed resource ARNs that a API key bearer can perform actions on For more information about ARN format, see Amazon Resource Names (ARNs).  In this preview, you can allow only map resources.  Requirements:   Must be prefixed with arn.    partition and service must not be empty and should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).    region and account-id can be empty or should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).    resource-id can begin with any character except for forward slash (/) and contain any characters after, including forward slashes to form a path.  resource-id can also include wildcard characters, denoted by an asterisk (*).    arn, partition, service, region, account-id and resource-id must be delimited by a colon (:).   No spaces allowed. For example, arn:aws:geo:region:account-id:map/ExampleMap*.  
+     * A list of allowed resource ARNs that a API key bearer can perform actions on.   The ARN must be the correct ARN for a map, place, or route ARN. You may include wildcards in the resource-id to match multiple resources of the same type.   The resources must be in the same partition, region, and account-id as the key that is being created.   Other than wildcards, you must include the full ARN, including the arn, partition, service, region, account-id and resource-id, delimited by colons (:).   No spaces allowed, even with wildcards. For example, arn:aws:geo:region:account-id:map/ExampleMap*.   For more information about ARN format, see Amazon Resource Names (ARNs).
      */
     AllowResources: ApiKeyRestrictionsAllowResourcesList;
   }
@@ -673,7 +673,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
+     * Associates one of more properties with the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence. Format: "key" : "value" 
      */
     GeofenceProperties?: PropertyMap;
     /**
@@ -781,6 +781,10 @@ declare namespace Location {
      */
     DistanceUnit?: DistanceUnit;
     /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
+    /**
      * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.     Bicycle or Motorcycle are only valid when using Grab as a data provider, and only within Southeast Asia.  Truck is not available for Grab. For more information about using Grab as a data provider, see GrabMaps in the Amazon Location Service Developer Guide.  Default Value: Car 
      */
     TravelMode?: TravelMode;
@@ -864,6 +868,10 @@ declare namespace Location {
      * Set to include the geometry details in the result for each path between a pair of positions. Default Value: false  Valid Values: false | true 
      */
     IncludeLegGeometry?: Boolean;
+    /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
     /**
      * Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. You can choose Car, Truck, Walking, Bicycle or Motorcycle as options for the TravelMode.   Bicycle and Motorcycle are only valid when using Grab as a data provider, and only within Southeast Asia.  Truck is not available for Grab. For more details on the using Grab for routing, including areas of coverage, see GrabMaps in the Amazon Location Service Developer Guide.  The TravelMode you specify also determines how you specify route preferences:    If traveling by Car use the CarModeOptions parameter.   If traveling by Truck use the TruckModeOptions parameter.   Default Value: Car 
      */
@@ -1145,6 +1153,10 @@ declare namespace Location {
      * An optional description for the tracker resource.
      */
     Description?: ResourceDescription;
+    /**
+     * Whether to enable position UPDATE events from this tracker to be sent to EventBridge.  You do not need enable this feature to get ENTER and EXIT events for geofences with this tracker. Those events are always sent to EventBridge. 
+     */
+    EventBridgeEnabled?: Boolean;
     /**
      * A key identifier for an Amazon Web Services KMS customer managed key. Enter a key ID, key ARN, alias name, or alias ARN.
      */
@@ -1467,6 +1479,10 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
+     * Whether UPDATE events from this tracker in EventBridge are enabled. If set to true these events will be sent to EventBridge.
+     */
+    EventBridgeEnabled?: Boolean;
+    /**
      * A key identifier for an Amazon Web Services KMS customer managed key assigned to the Amazon Location resource.
      */
     KmsKeyId?: KmsKeyId;
@@ -1668,7 +1684,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Contains additional user-defined properties stored with the geofence. An array of key-value pairs.
+     * User defined properties of the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence. Format: "key" : "value" 
      */
     GeofenceProperties?: PropertyMap;
     /**
@@ -1814,6 +1830,10 @@ declare namespace Location {
      * The name of the place index resource that you want to use for the search.
      */
     IndexName: ResourceName;
+    /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
     /**
      * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the language parameter set to en. The city in the results will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the city in the results will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
      */
@@ -1978,7 +1998,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Contains additional user-defined properties stored with the geofence. An array of key-value pairs.
+     * User defined properties of the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence. Format: "key" : "value" 
      */
     GeofenceProperties?: PropertyMap;
     /**
@@ -2413,7 +2433,7 @@ declare namespace Location {
      */
     GeofenceId: Id;
     /**
-     * Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
+     * Associates one of more properties with the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence. Format: "key" : "value" 
      */
     GeofenceProperties?: PropertyMap;
     /**
@@ -2529,6 +2549,10 @@ declare namespace Location {
      */
     IndexName: ResourceName;
     /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
+    /**
      * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the language parameter set to en. The city in the results will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the city in the results will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
      */
     Language?: LanguageTag;
@@ -2590,6 +2614,10 @@ declare namespace Location {
      * The name of the place index resource you want to use for the search.
      */
     IndexName: ResourceName;
+    /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
     /**
      * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for Athens, Gr to get suggestions with the language parameter set to en. The results found will most likely be returned as Athens, Greece. If you set the language parameter to el, for Greek, then the result found will more likely be returned as Αθήνα, Ελλάδα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
      */
@@ -2670,6 +2698,10 @@ declare namespace Location {
      * The name of the place index resource you want to use for the search.
      */
     IndexName: ResourceName;
+    /**
+     * The optional API key to authorize the request.
+     */
+    Key?: ApiKey;
     /**
      * The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, en for English. This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result. For an example, we'll use the Greek language. You search for Athens, Greece, with the language parameter set to en. The result found will most likely be returned as Athens. If you set the language parameter to el, for Greek, then the result found will more likely be returned as Αθήνα. If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
      */
@@ -3003,6 +3035,10 @@ declare namespace Location {
      * Updates the description for the tracker resource.
      */
     Description?: ResourceDescription;
+    /**
+     * Whether to enable position UPDATE events from this tracker to be sent to EventBridge.  You do not need enable this feature to get ENTER and EXIT events for geofences with this tracker. Those events are always sent to EventBridge. 
+     */
+    EventBridgeEnabled?: Boolean;
     /**
      * Updates the position filtering for the tracker resource. Valid values:    TimeBased - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.     DistanceBased - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.     AccuracyBased - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This helps educe the effects of GPS noise when displaying device trajectories on a map, and can help control costs by reducing the number of geofence evaluations.   
      */

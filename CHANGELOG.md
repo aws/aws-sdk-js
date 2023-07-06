@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1411.0-->
+<!--LATEST=2.1412.0-->
 <!--ENTRYINSERT-->
+
+## 2.1412.0
+* feature: EC2: Add Nitro Enclaves support on DescribeInstanceTypes
+* feature: Location: This release adds support for authenticating with Amazon Location Service's Places & Routes APIs with an API Key. Also, with this release developers can publish tracked device position updates to Amazon EventBridge.
+* feature: Outposts: Added paginator support to several APIs. Added the ISOLATED enum value to AssetState.
+* feature: QuickSight: This release includes below three changes: small multiples axes improvement, field based coloring, removed required trait from Aggregation function for TopBottomFilter.
+* feature: SharedIniFileCredentials: Make duration_seconds work for chained profiles
 
 ## 2.1411.0
 * feature: KMS: Added Dry Run Feature to cryptographic and cross-account mutating KMS APIs (14 in all). This feature allows users to test their permissions and parameters before making the actual API call.
