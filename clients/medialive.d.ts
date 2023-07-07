@@ -270,6 +270,22 @@ declare class MediaLive extends Service {
    */
   describeSchedule(callback?: (err: AWSError, data: MediaLive.Types.DescribeScheduleResponse) => void): Request<MediaLive.Types.DescribeScheduleResponse, AWSError>;
   /**
+   * Get account configuration
+   */
+  describeAccountConfiguration(params: MediaLive.Types.DescribeAccountConfigurationRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeAccountConfigurationResponse) => void): Request<MediaLive.Types.DescribeAccountConfigurationResponse, AWSError>;
+  /**
+   * Get account configuration
+   */
+  describeAccountConfiguration(callback?: (err: AWSError, data: MediaLive.Types.DescribeAccountConfigurationResponse) => void): Request<MediaLive.Types.DescribeAccountConfigurationResponse, AWSError>;
+  /**
+   * Describe the latest thumbnails data.
+   */
+  describeThumbnails(params: MediaLive.Types.DescribeThumbnailsRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeThumbnailsResponse) => void): Request<MediaLive.Types.DescribeThumbnailsResponse, AWSError>;
+  /**
+   * Describe the latest thumbnails data.
+   */
+  describeThumbnails(callback?: (err: AWSError, data: MediaLive.Types.DescribeThumbnailsResponse) => void): Request<MediaLive.Types.DescribeThumbnailsResponse, AWSError>;
+  /**
    * Produces list of channels that have been created
    */
   listChannels(params: MediaLive.Types.ListChannelsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListChannelsResponse) => void): Request<MediaLive.Types.ListChannelsResponse, AWSError>;
@@ -373,6 +389,14 @@ declare class MediaLive extends Service {
    * Reject the transfer of the specified input device to your AWS account.
    */
   rejectInputDeviceTransfer(callback?: (err: AWSError, data: MediaLive.Types.RejectInputDeviceTransferResponse) => void): Request<MediaLive.Types.RejectInputDeviceTransferResponse, AWSError>;
+  /**
+   * Update account configuration
+   */
+  updateAccountConfiguration(params: MediaLive.Types.UpdateAccountConfigurationRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateAccountConfigurationResponse) => void): Request<MediaLive.Types.UpdateAccountConfigurationResponse, AWSError>;
+  /**
+   * Update account configuration
+   */
+  updateAccountConfiguration(callback?: (err: AWSError, data: MediaLive.Types.UpdateAccountConfigurationResponse) => void): Request<MediaLive.Types.UpdateAccountConfigurationResponse, AWSError>;
   /**
    * Starts an existing channel
    */
@@ -666,6 +690,12 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   export interface AcceptInputDeviceTransferResponse {
   }
   export type AccessibilityType = "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"|"IMPLEMENTS_ACCESSIBILITY_FEATURES"|string;
+  export interface AccountConfiguration {
+    /**
+     * Specifies the KMS key to use for all features that use key encryption. Specify the ARN of a KMS key that you have created. Or leave blank to use the key that MediaLive creates and manages for you.
+     */
+    KmsKeyId?: __string;
+  }
   export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string;
   export interface AncillarySourceSettings {
     /**
@@ -2818,6 +2848,10 @@ You specify only the font family. All other style information (color, bold, posi
      */
     TimecodeConfig: TimecodeConfig;
     VideoDescriptions: __listOfVideoDescription;
+    /**
+     * Thumbnail configuration settings.
+     */
+    ThumbnailConfiguration?: ThumbnailConfiguration;
   }
   export interface Esam {
     /**
@@ -2963,6 +2997,28 @@ If you disable the feature on an existing schedule, make sure that you first del
      * Timecode burn-in settings
      */
     TimecodeBurninSettings?: TimecodeBurninSettings;
+  }
+  export interface DescribeAccountConfigurationRequest {
+  }
+  export interface DescribeAccountConfigurationResponse {
+    AccountConfiguration?: AccountConfiguration;
+  }
+  export interface DescribeThumbnailsRequest {
+    /**
+     * Unique ID of the channel
+     */
+    ChannelId: __string;
+    /**
+     * Pipeline ID ("0" or "1")
+     */
+    PipelineId: __string;
+    /**
+     * thumbnail type
+     */
+    ThumbnailType: __string;
+  }
+  export interface DescribeThumbnailsResponse {
+    ThumbnailDetails?: __listOfThumbnailDetail;
   }
   export interface GlobalConfiguration {
     /**
@@ -6220,6 +6276,12 @@ provide the language to consider when translating the image-based source to text
     Scte35Descriptors: __listOfScte35Descriptor;
   }
   export type Scte35WebDeliveryAllowedFlag = "WEB_DELIVERY_NOT_ALLOWED"|"WEB_DELIVERY_ALLOWED"|string;
+  export interface UpdateAccountConfigurationRequest {
+    AccountConfiguration?: AccountConfiguration;
+  }
+  export interface UpdateAccountConfigurationResponse {
+    AccountConfiguration?: AccountConfiguration;
+  }
   export type SmoothGroupAudioOnlyTimecodeControl = "PASSTHROUGH"|"USE_CONFIGURED_CLOCK"|string;
   export type SmoothGroupCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string;
   export type SmoothGroupEventIdMode = "NO_EVENT_ID"|"USE_CONFIGURED"|"USE_TIMESTAMP"|string;
@@ -6601,6 +6663,42 @@ one destination per packager.
     Strength?: TemporalFilterStrength;
   }
   export type TemporalFilterStrength = "AUTO"|"STRENGTH_1"|"STRENGTH_2"|"STRENGTH_3"|"STRENGTH_4"|"STRENGTH_5"|"STRENGTH_6"|"STRENGTH_7"|"STRENGTH_8"|"STRENGTH_9"|"STRENGTH_10"|"STRENGTH_11"|"STRENGTH_12"|"STRENGTH_13"|"STRENGTH_14"|"STRENGTH_15"|"STRENGTH_16"|string;
+  export interface Thumbnail {
+    /**
+     * The binary data for the latest thumbnail.
+     */
+    Body?: __string;
+    /**
+     * The content type for the latest thumbnail.
+     */
+    ContentType?: __string;
+    /**
+     * Thumbnail Type
+     */
+    ThumbnailType?: ThumbnailType;
+    /**
+     * Time stamp for the latest thumbnail.
+     */
+    TimeStamp?: __timestampIso8601;
+  }
+  export interface ThumbnailConfiguration {
+    /**
+     * Whether Thumbnail is enabled.
+     */
+    State: ThumbnailState;
+  }
+  export interface ThumbnailDetail {
+    /**
+     * Pipeline ID
+     */
+    PipelineId?: __string;
+    /**
+     * thumbnails of a single pipeline
+     */
+    Thumbnails?: __listOfThumbnail;
+  }
+  export type ThumbnailState = "AUTO"|"DISABLED"|string;
+  export type ThumbnailType = "UNSPECIFIED"|"CURRENT_ACTIVE"|string;
   export type TimecodeBurninFontSize = "EXTRA_SMALL_10"|"LARGE_48"|"MEDIUM_32"|"SMALL_16"|string;
   export type TimecodeBurninPosition = "BOTTOM_CENTER"|"BOTTOM_LEFT"|"BOTTOM_RIGHT"|"MIDDLE_CENTER"|"MIDDLE_LEFT"|"MIDDLE_RIGHT"|"TOP_CENTER"|"TOP_LEFT"|"TOP_RIGHT"|string;
   export interface TimecodeBurninSettings {
@@ -7218,6 +7316,8 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __listOfRtmpAdMarkers = RtmpAdMarkers[];
   export type __listOfScheduleAction = ScheduleAction[];
   export type __listOfScte35Descriptor = Scte35Descriptor[];
+  export type __listOfThumbnail = Thumbnail[];
+  export type __listOfThumbnailDetail = ThumbnailDetail[];
   export type __listOfTransferringInputDeviceSummary = TransferringInputDeviceSummary[];
   export type __listOfVideoDescription = VideoDescription[];
   export type __listOf__integer = __integer[];
@@ -7244,6 +7344,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __stringMin3Max3 = string;
   export type __stringMin6Max6 = string;
   export type __stringPattern010920300 = string;
+  export type __timestampIso8601 = Date;
   export type InputDeviceThumbnail = Buffer|Uint8Array|Blob|string|Readable;
   export type AcceptHeader = "image/jpeg"|string;
   export type ContentType = "image/jpeg"|string;

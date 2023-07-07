@@ -69,6 +69,14 @@ declare class DMS extends Service {
    */
   createFleetAdvisorCollector(callback?: (err: AWSError, data: DMS.Types.CreateFleetAdvisorCollectorResponse) => void): Request<DMS.Types.CreateFleetAdvisorCollectorResponse, AWSError>;
   /**
+   * Creates a configuration that you can later provide to configure and start an DMS Serverless replication. You can also provide options to validate the configuration inputs before you start the replication.
+   */
+  createReplicationConfig(params: DMS.Types.CreateReplicationConfigMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationConfigResponse) => void): Request<DMS.Types.CreateReplicationConfigResponse, AWSError>;
+  /**
+   * Creates a configuration that you can later provide to configure and start an DMS Serverless replication. You can also provide options to validate the configuration inputs before you start the replication.
+   */
+  createReplicationConfig(callback?: (err: AWSError, data: DMS.Types.CreateReplicationConfigResponse) => void): Request<DMS.Types.CreateReplicationConfigResponse, AWSError>;
+  /**
    * Creates the replication instance using the specified parameters. DMS requires that your account have certain roles with appropriate permissions before you can create a replication instance. For information on the required roles, see Creating the IAM Roles to Use With the CLI and DMS API. For information on the required permissions, see IAM Permissions Needed to Use DMS.
    */
   createReplicationInstance(params: DMS.Types.CreateReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
@@ -77,11 +85,11 @@ declare class DMS extends Service {
    */
   createReplicationInstance(callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
   /**
-   * Creates a replication subnet group given a list of the subnet IDs in a VPC. The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a ReplicationSubnetGroupDoesNotCoverEnoughAZs exception.
+   * Creates a replication subnet group given a list of the subnet IDs in a VPC. The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a ReplicationSubnetGroupDoesNotCoverEnoughAZs exception. If a replication subnet group exists in your Amazon Web Services account, the CreateReplicationSubnetGroup action returns the following error message: The Replication Subnet Group already exists. In this case, delete the existing replication subnet group. To do so, use the DeleteReplicationSubnetGroup action. Optionally, choose Subnet groups in the DMS console, then choose your subnet group. Next, choose Delete from Actions.
    */
   createReplicationSubnetGroup(params: DMS.Types.CreateReplicationSubnetGroupMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationSubnetGroupResponse) => void): Request<DMS.Types.CreateReplicationSubnetGroupResponse, AWSError>;
   /**
-   * Creates a replication subnet group given a list of the subnet IDs in a VPC. The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a ReplicationSubnetGroupDoesNotCoverEnoughAZs exception.
+   * Creates a replication subnet group given a list of the subnet IDs in a VPC. The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a ReplicationSubnetGroupDoesNotCoverEnoughAZs exception. If a replication subnet group exists in your Amazon Web Services account, the CreateReplicationSubnetGroup action returns the following error message: The Replication Subnet Group already exists. In this case, delete the existing replication subnet group. To do so, use the DeleteReplicationSubnetGroup action. Optionally, choose Subnet groups in the DMS console, then choose your subnet group. Next, choose Delete from Actions.
    */
   createReplicationSubnetGroup(callback?: (err: AWSError, data: DMS.Types.CreateReplicationSubnetGroupResponse) => void): Request<DMS.Types.CreateReplicationSubnetGroupResponse, AWSError>;
   /**
@@ -140,6 +148,14 @@ declare class DMS extends Service {
    * Deletes the specified Fleet Advisor collector databases.
    */
   deleteFleetAdvisorDatabases(callback?: (err: AWSError, data: DMS.Types.DeleteFleetAdvisorDatabasesResponse) => void): Request<DMS.Types.DeleteFleetAdvisorDatabasesResponse, AWSError>;
+  /**
+   * Deletes an DMS Serverless replication configuration. This effectively deprovisions any and all replications that use this configuration. You can't delete the configuration for an DMS Serverless replication that is ongoing. You can delete the configuration when the replication is in a non-RUNNING and non-STARTING state.
+   */
+  deleteReplicationConfig(params: DMS.Types.DeleteReplicationConfigMessage, callback?: (err: AWSError, data: DMS.Types.DeleteReplicationConfigResponse) => void): Request<DMS.Types.DeleteReplicationConfigResponse, AWSError>;
+  /**
+   * Deletes an DMS Serverless replication configuration. This effectively deprovisions any and all replications that use this configuration. You can't delete the configuration for an DMS Serverless replication that is ongoing. You can delete the configuration when the replication is in a non-RUNNING and non-STARTING state.
+   */
+  deleteReplicationConfig(callback?: (err: AWSError, data: DMS.Types.DeleteReplicationConfigResponse) => void): Request<DMS.Types.DeleteReplicationConfigResponse, AWSError>;
   /**
    * Deletes the specified replication instance.  You must delete any migration tasks that are associated with the replication instance before you can delete it.  
    */
@@ -333,6 +349,14 @@ declare class DMS extends Service {
    */
   describeRefreshSchemasStatus(callback?: (err: AWSError, data: DMS.Types.DescribeRefreshSchemasStatusResponse) => void): Request<DMS.Types.DescribeRefreshSchemasStatusResponse, AWSError>;
   /**
+   * Returns one or more existing DMS Serverless replication configurations as a list of structures.
+   */
+  describeReplicationConfigs(params: DMS.Types.DescribeReplicationConfigsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationConfigsResponse) => void): Request<DMS.Types.DescribeReplicationConfigsResponse, AWSError>;
+  /**
+   * Returns one or more existing DMS Serverless replication configurations as a list of structures.
+   */
+  describeReplicationConfigs(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationConfigsResponse) => void): Request<DMS.Types.DescribeReplicationConfigsResponse, AWSError>;
+  /**
    * Returns information about the task logs for the specified task.
    */
   describeReplicationInstanceTaskLogs(params: DMS.Types.DescribeReplicationInstanceTaskLogsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstanceTaskLogsResponse) => void): Request<DMS.Types.DescribeReplicationInstanceTaskLogsResponse, AWSError>;
@@ -356,6 +380,14 @@ declare class DMS extends Service {
    * Returns information about the replication subnet groups.
    */
   describeReplicationSubnetGroups(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationSubnetGroupsResponse) => void): Request<DMS.Types.DescribeReplicationSubnetGroupsResponse, AWSError>;
+  /**
+   * Returns table and schema statistics for one or more provisioned replications that use a given DMS Serverless replication configuration.
+   */
+  describeReplicationTableStatistics(params: DMS.Types.DescribeReplicationTableStatisticsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTableStatisticsResponse) => void): Request<DMS.Types.DescribeReplicationTableStatisticsResponse, AWSError>;
+  /**
+   * Returns table and schema statistics for one or more provisioned replications that use a given DMS Serverless replication configuration.
+   */
+  describeReplicationTableStatistics(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTableStatisticsResponse) => void): Request<DMS.Types.DescribeReplicationTableStatisticsResponse, AWSError>;
   /**
    * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the Database Migration Service User Guide.
    */
@@ -388,6 +420,14 @@ declare class DMS extends Service {
    * Returns information about replication tasks for your account in the current region.
    */
   describeReplicationTasks(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  /**
+   * Provides details on replication progress by returning status information for one or more provisioned DMS Serverless replications.
+   */
+  describeReplications(params: DMS.Types.DescribeReplicationsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationsResponse) => void): Request<DMS.Types.DescribeReplicationsResponse, AWSError>;
+  /**
+   * Provides details on replication progress by returning status information for one or more provisioned DMS Serverless replications.
+   */
+  describeReplications(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationsResponse) => void): Request<DMS.Types.DescribeReplicationsResponse, AWSError>;
   /**
    * Returns information about the schema for the specified endpoint. 
    */
@@ -437,6 +477,14 @@ declare class DMS extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: DMS.Types.ModifyEventSubscriptionResponse) => void): Request<DMS.Types.ModifyEventSubscriptionResponse, AWSError>;
   /**
+   * Modifies an existing DMS Serverless replication configuration that you can use to start a replication. This command includes input validation and logic to check the state of any replication that uses this configuration. You can only modify a replication configuration before any replication that uses it has started. As soon as you have initially started a replication with a given configuiration, you can't modify that configuration, even if you stop it. Other run statuses that allow you to run this command include FAILED and CREATED. A provisioning state that allows you to run this command is FAILED_PROVISION.
+   */
+  modifyReplicationConfig(params: DMS.Types.ModifyReplicationConfigMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationConfigResponse) => void): Request<DMS.Types.ModifyReplicationConfigResponse, AWSError>;
+  /**
+   * Modifies an existing DMS Serverless replication configuration that you can use to start a replication. This command includes input validation and logic to check the state of any replication that uses this configuration. You can only modify a replication configuration before any replication that uses it has started. As soon as you have initially started a replication with a given configuiration, you can't modify that configuration, even if you stop it. Other run statuses that allow you to run this command include FAILED and CREATED. A provisioning state that allows you to run this command is FAILED_PROVISION.
+   */
+  modifyReplicationConfig(callback?: (err: AWSError, data: DMS.Types.ModifyReplicationConfigResponse) => void): Request<DMS.Types.ModifyReplicationConfigResponse, AWSError>;
+  /**
    * Modifies the replication instance to apply new settings. You can change one or more parameters by specifying these parameters and the new values in the request. Some settings are applied during the maintenance window. 
    */
   modifyReplicationInstance(params: DMS.Types.ModifyReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationInstanceResponse) => void): Request<DMS.Types.ModifyReplicationInstanceResponse, AWSError>;
@@ -485,6 +533,14 @@ declare class DMS extends Service {
    */
   refreshSchemas(callback?: (err: AWSError, data: DMS.Types.RefreshSchemasResponse) => void): Request<DMS.Types.RefreshSchemasResponse, AWSError>;
   /**
+   * Reloads the target database table with the source data for a given DMS Serverless replication configuration. You can only use this operation with a task in the RUNNING state, otherwise the service will throw an InvalidResourceStateFault exception.
+   */
+  reloadReplicationTables(params: DMS.Types.ReloadReplicationTablesMessage, callback?: (err: AWSError, data: DMS.Types.ReloadReplicationTablesResponse) => void): Request<DMS.Types.ReloadReplicationTablesResponse, AWSError>;
+  /**
+   * Reloads the target database table with the source data for a given DMS Serverless replication configuration. You can only use this operation with a task in the RUNNING state, otherwise the service will throw an InvalidResourceStateFault exception.
+   */
+  reloadReplicationTables(callback?: (err: AWSError, data: DMS.Types.ReloadReplicationTablesResponse) => void): Request<DMS.Types.ReloadReplicationTablesResponse, AWSError>;
+  /**
    * Reloads the target database table with the source data.  You can only use this operation with a task in the RUNNING state, otherwise the service will throw an InvalidResourceStateFault exception.
    */
   reloadTables(params: DMS.Types.ReloadTablesMessage, callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
@@ -513,6 +569,14 @@ declare class DMS extends Service {
    */
   startRecommendations(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * For a given DMS Serverless replication configuration, DMS connects to the source endpoint and collects the metadata to analyze the replication workload. Using this metadata, DMS then computes and provisions the required capacity and starts replicating to the target endpoint using the server resources that DMS has provisioned for the DMS Serverless replication.
+   */
+  startReplication(params: DMS.Types.StartReplicationMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationResponse) => void): Request<DMS.Types.StartReplicationResponse, AWSError>;
+  /**
+   * For a given DMS Serverless replication configuration, DMS connects to the source endpoint and collects the metadata to analyze the replication workload. Using this metadata, DMS then computes and provisions the required capacity and starts replicating to the target endpoint using the server resources that DMS has provisioned for the DMS Serverless replication.
+   */
+  startReplication(callback?: (err: AWSError, data: DMS.Types.StartReplicationResponse) => void): Request<DMS.Types.StartReplicationResponse, AWSError>;
+  /**
    * Starts the replication task. For more information about DMS tasks, see Working with Migration Tasks  in the Database Migration Service User Guide. 
    */
   startReplicationTask(params: DMS.Types.StartReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
@@ -536,6 +600,14 @@ declare class DMS extends Service {
    * Starts a new premigration assessment run for one or more individual assessments of a migration task. The assessments that you can specify depend on the source and target database engine and the migration type defined for the given task. To run this operation, your migration task must already be created. After you run this operation, you can review the status of each individual assessment. You can also run the migration task manually after the assessment run and its individual assessments complete.
    */
   startReplicationTaskAssessmentRun(callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentRunResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentRunResponse, AWSError>;
+  /**
+   * For a given DMS Serverless replication configuration, DMS stops any and all ongoing DMS Serverless replications. This command doesn't deprovision the stopped replications.
+   */
+  stopReplication(params: DMS.Types.StopReplicationMessage, callback?: (err: AWSError, data: DMS.Types.StopReplicationResponse) => void): Request<DMS.Types.StopReplicationResponse, AWSError>;
+  /**
+   * For a given DMS Serverless replication configuration, DMS stops any and all ongoing DMS Serverless replications. This command doesn't deprovision the stopped replications.
+   */
+  stopReplication(callback?: (err: AWSError, data: DMS.Types.StopReplicationResponse) => void): Request<DMS.Types.StopReplicationResponse, AWSError>;
   /**
    * Stops the replication task.
    */
@@ -850,6 +922,44 @@ declare namespace DMS {
   export type CollectorStatus = "UNREGISTERED"|"ACTIVE"|string;
   export type CollectorsList = CollectorShortInfoResponse[];
   export type CompressionTypeValue = "none"|"gzip"|string;
+  export interface ComputeConfig {
+    /**
+     * The Availability Zone where the DMS Serverless replication using this configuration will run. The default value is a random, system-chosen Availability Zone in the configuration's Amazon Web Services Region, for example, "us-west-2". You can't set this parameter if the MultiAZ parameter is set to true.
+     */
+    AvailabilityZone?: String;
+    /**
+     * A list of custom DNS name servers supported for the DMS Serverless replication to access your source or target database. This list overrides the default name servers supported by the DMS Serverless replication. You can specify a comma-separated list of internet addresses for up to four DNS name servers. For example: "1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4" 
+     */
+    DnsNameServers?: String;
+    /**
+     * An Key Management Service (KMS) key Amazon Resource Name (ARN) that is used to encrypt the data during DMS Serverless replication. If you don't specify a value for the KmsKeyId parameter, DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
+     */
+    KmsKeyId?: String;
+    /**
+     * Specifies the maximum value of the DMS capacity units (DCUs) for which a given DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value that you can specify for DMS Serverless is 384. The MaxCapacityUnits parameter is the only DCU parameter you are required to specify.
+     */
+    MaxCapacityUnits?: IntegerOptional;
+    /**
+     * Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU value that you can specify for DMS Serverless is 2. You don't have to specify a value for the MinCapacityUnits parameter. If you don't set this value, DMS scans the current activity of available source tables to identify an optimum setting for this parameter. If there is no current source activity or DMS can't otherwise identify a more appropriate value, it sets this parameter to the minimum DCU value allowed, 2.
+     */
+    MinCapacityUnits?: IntegerOptional;
+    /**
+     * Specifies whether the DMS Serverless replication is a Multi-AZ deployment. You can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true.
+     */
+    MultiAZ?: BooleanOptional;
+    /**
+     * The weekly time range during which system maintenance can occur for the DMS Serverless replication, in Universal Coordinated Time (UTC). The format is ddd:hh24:mi-ddd:hh24:mi. The default is a 30-minute window selected at random from an 8-hour block of time per Amazon Web Services Region. This maintenance occurs on a random day of the week. Valid values for days of the week include Mon, Tue, Wed, Thu, Fri, Sat, and Sun. Constraints include a minimum 30-minute window.
+     */
+    PreferredMaintenanceWindow?: String;
+    /**
+     * Specifies a subnet group identifier to associate with the DMS Serverless replication.
+     */
+    ReplicationSubnetGroupId?: String;
+    /**
+     * Specifies the virtual private cloud (VPC) security group to use with the DMS Serverless replication. The VPC security group must work with the VPC containing the replication.
+     */
+    VpcSecurityGroupIds?: StringList;
+  }
   export interface Connection {
     /**
      * The ARN of the replication instance.
@@ -1008,6 +1118,10 @@ declare namespace DMS {
      * Settings in JSON format for the source GCP MySQL endpoint.
      */
     GcpMySQLSettings?: GcpMySQLSettings;
+    /**
+     * Settings in JSON format for the target Amazon Timestream endpoint.
+     */
+    TimestreamSettings?: TimestreamSettings;
   }
   export interface CreateEndpointResponse {
     /**
@@ -1091,6 +1205,54 @@ declare namespace DMS {
      */
     S3BucketName?: String;
   }
+  export interface CreateReplicationConfigMessage {
+    /**
+     * A unique identifier that you want to use to create a ReplicationConfigArn that is returned as part of the output from this action. You can then pass this output ReplicationConfigArn as the value of the ReplicationConfigArn option for other actions to identify both DMS Serverless replications and replication configurations that you want those actions to operate on. For some actions, you can also use either this unique identifier or a corresponding ARN in action filters to identify the specific replication and replication configuration to operate on.
+     */
+    ReplicationConfigIdentifier: String;
+    /**
+     * The Amazon Resource Name (ARN) of the source endpoint for this DMS Serverless replication configuration.
+     */
+    SourceEndpointArn: String;
+    /**
+     * The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless replication configuration.
+     */
+    TargetEndpointArn: String;
+    /**
+     * Configuration parameters for provisioning an DMS Serverless replication.
+     */
+    ComputeConfig: ComputeConfig;
+    /**
+     * The type of DMS Serverless replication to provision using this replication configuration. Possible values:    "full-load"     "cdc"     "full-load-and-cdc"   
+     */
+    ReplicationType: MigrationTypeValue;
+    /**
+     * JSON table mappings for DMS Serverless replications that are provisioned using this replication configuration. For more information, see  Specifying table selection and transformations rules using JSON.
+     */
+    TableMappings: String;
+    /**
+     * Optional JSON settings for DMS Serverless replications that are provisioned using this replication configuration. For example, see  Change processing tuning settings.
+     */
+    ReplicationSettings?: String;
+    /**
+     * Optional JSON settings for specifying supplemental data. For more information, see  Specifying supplemental data for task settings.
+     */
+    SupplementalSettings?: String;
+    /**
+     * Optional unique value or name that you set for a given resource that can be used to construct an Amazon Resource Name (ARN) for that resource. For more information, see  Fine-grained access control using resource names and tags.
+     */
+    ResourceIdentifier?: String;
+    /**
+     * One or more optional tags associated with resources used by the DMS Serverless replication. For more information, see  Tagging resources in Database Migration Service.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateReplicationConfigResponse {
+    /**
+     * Configuration parameters returned from the DMS Serverless replication after it is created.
+     */
+    ReplicationConfig?: ReplicationConfig;
+  }
   export interface CreateReplicationInstanceMessage {
     /**
      * The replication instance identifier. This parameter is stored as a lowercase string. Constraints:   Must contain 1-63 alphanumeric characters or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: myrepinstance 
@@ -1101,7 +1263,7 @@ declare namespace DMS {
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * The compute and memory capacity of the replication instance as defined for the specified replication instance class. For example to specify the instance class dms.c4.large, set this parameter to "dms.c4.large". For more information on the settings and capacities for the available replication instance classes, see  Selecting the right DMS replication instance for your migration. 
+     * The compute and memory capacity of the replication instance as defined for the specified replication instance class. For example to specify the instance class dms.c4.large, set this parameter to "dms.c4.large". For more information on the settings and capacities for the available replication instance classes, see  Choosing the right DMS replication instance; and, Selecting the best size for a replication instance. 
      */
     ReplicationInstanceClass: String;
     /**
@@ -1109,7 +1271,7 @@ declare namespace DMS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, for example: us-east-1d 
+     * The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, for example: us-east-1d.
      */
     AvailabilityZone?: String;
     /**
@@ -1399,6 +1561,18 @@ declare namespace DMS {
      */
     DatabaseIds?: StringList;
   }
+  export interface DeleteReplicationConfigMessage {
+    /**
+     * The replication config to delete.
+     */
+    ReplicationConfigArn: String;
+  }
+  export interface DeleteReplicationConfigResponse {
+    /**
+     * Configuration parameters returned for the DMS Serverless replication after it is deleted.
+     */
+    ReplicationConfig?: ReplicationConfig;
+  }
   export interface DeleteReplicationInstanceMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication instance to be deleted.
@@ -1545,7 +1719,7 @@ declare namespace DMS {
   }
   export interface DescribeEndpointSettingsMessage {
     /**
-     * The databse engine used for your source or target endpoint.
+     * The database engine used for your source or target endpoint.
      */
     EngineName: String;
     /**
@@ -1931,6 +2105,30 @@ declare namespace DMS {
      */
     RefreshSchemasStatus?: RefreshSchemasStatus;
   }
+  export interface DescribeReplicationConfigsMessage {
+    /**
+     * Filters applied to the replication configs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeReplicationConfigsResponse {
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * Returned configuration parameters that describe each provisioned DMS Serverless replication.
+     */
+    ReplicationConfigs?: ReplicationConfigList;
+  }
   export interface DescribeReplicationInstanceTaskLogsMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication instance.
@@ -2006,6 +2204,38 @@ declare namespace DMS {
      * A description of the replication subnet groups.
      */
     ReplicationSubnetGroups?: ReplicationSubnetGroups;
+  }
+  export interface DescribeReplicationTableStatisticsMessage {
+    /**
+     * The replication config to describe.
+     */
+    ReplicationConfigArn: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * Filters applied to the replication table statistics.
+     */
+    Filters?: FilterList;
+  }
+  export interface DescribeReplicationTableStatisticsResponse {
+    /**
+     * The Amazon Resource Name of the replication config.
+     */
+    ReplicationConfigArn?: String;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * Returns table statistics on the replication, including table name, rows inserted, rows updated, and rows deleted.
+     */
+    ReplicationTableStatistics?: ReplicationTableStatisticsList;
   }
   export interface DescribeReplicationTaskAssessmentResultsMessage {
     /**
@@ -2110,6 +2340,30 @@ declare namespace DMS {
      * A description of the replication tasks.
      */
     ReplicationTasks?: ReplicationTaskList;
+  }
+  export interface DescribeReplicationsMessage {
+    /**
+     * Filters applied to the replications.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeReplicationsResponse {
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     * The replication descriptions.
+     */
+    Replications?: ReplicationList;
   }
   export interface DescribeSchemasMessage {
     /**
@@ -2223,6 +2477,14 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the DocumentDB endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * If true, DMS retrieves the entire document from the DocumentDB source during migration. This may cause a migration failure if the server response exceeds bandwidth limits. To fetch only updates and deletes during migration, set this parameter to false.
+     */
+    UseUpdateLookUp?: BooleanOptional;
+    /**
+     * If true, DMS replicates data to shard collections. DMS only uses this setting if the target endpoint is a DocumentDB elastic cluster. When this setting is true, note the following:   You must set TargetTablePrepMode to nothing.   DMS automatically sets useUpdateLookup to false.  
+     */
+    ReplicateShardCollections?: BooleanOptional;
   }
   export type DoubleOptional = number;
   export interface DynamoDbSettings {
@@ -2393,6 +2655,10 @@ declare namespace DMS {
      * Settings in JSON format for the source GCP MySQL endpoint.
      */
     GcpMySQLSettings?: GcpMySQLSettings;
+    /**
+     * The settings for the Amazon Timestream target endpoint. For more information, see the TimestreamSettings structure.
+     */
+    TimestreamSettings?: TimestreamSettings;
   }
   export type EndpointList = Endpoint[];
   export interface EndpointSetting {
@@ -2776,7 +3042,12 @@ declare namespace DMS {
      * For SASL/SSL authentication, DMS supports the SCRAM-SHA-512 mechanism by default. DMS versions 3.5.0 and later also support the PLAIN mechanism. To use the PLAIN mechanism, set this parameter to PLAIN. 
      */
     SaslMechanism?: KafkaSaslMechanism;
+    /**
+     * Sets hostname verification for the certificate. This setting is supported in DMS version 3.5.1 and later. 
+     */
+    SslEndpointIdentificationAlgorithm?: KafkaSslEndpointIdentificationAlgorithm;
   }
+  export type KafkaSslEndpointIdentificationAlgorithm = "none"|"https"|string;
   export type KeyList = String[];
   export interface KinesisSettings {
     /**
@@ -2865,6 +3136,7 @@ declare namespace DMS {
   }
   export type Long = number;
   export type LongOptional = number;
+  export type LongVarcharMappingType = "wstring"|"clob"|"nclob"|string;
   export type MessageFormatValue = "json"|"json-unformatted"|string;
   export interface MicrosoftSQLServerSettings {
     /**
@@ -3067,6 +3339,10 @@ declare namespace DMS {
      * Settings in JSON format for the source GCP MySQL endpoint.
      */
     GcpMySQLSettings?: GcpMySQLSettings;
+    /**
+     * Settings in JSON format for the target Amazon Timestream endpoint.
+     */
+    TimestreamSettings?: TimestreamSettings;
   }
   export interface ModifyEndpointResponse {
     /**
@@ -3101,6 +3377,50 @@ declare namespace DMS {
      * The modified event subscription.
      */
     EventSubscription?: EventSubscription;
+  }
+  export interface ModifyReplicationConfigMessage {
+    /**
+     * The Amazon Resource Name of the replication to modify.
+     */
+    ReplicationConfigArn: String;
+    /**
+     * The new replication config to apply to the replication.
+     */
+    ReplicationConfigIdentifier?: String;
+    /**
+     * The type of replication.
+     */
+    ReplicationType?: MigrationTypeValue;
+    /**
+     * Table mappings specified in the replication.
+     */
+    TableMappings?: String;
+    /**
+     * The settings for the replication.
+     */
+    ReplicationSettings?: String;
+    /**
+     * Additional settings for the replication.
+     */
+    SupplementalSettings?: String;
+    /**
+     * Configuration parameters for provisioning an DMS Serverless replication.
+     */
+    ComputeConfig?: ComputeConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the source endpoint for this DMS serverless replication configuration.
+     */
+    SourceEndpointArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless replication configuration.
+     */
+    TargetEndpointArn?: String;
+  }
+  export interface ModifyReplicationConfigResponse {
+    /**
+     * Information about the serverless replication config that was modified.
+     */
+    ReplicationConfig?: ReplicationConfig;
   }
   export interface ModifyReplicationInstanceMessage {
     /**
@@ -3279,6 +3599,14 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the MongoDB endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * If true, DMS retrieves the entire document from the MongoDB source during migration. This may cause a migration failure if the server response exceeds bandwidth limits. To fetch only updates and deletes during migration, set this parameter to false.
+     */
+    UseUpdateLookUp?: BooleanOptional;
+    /**
+     * If true, DMS replicates data to shard collections. DMS only uses this setting if the target endpoint is a DocumentDB elastic cluster. When this setting is true, note the following:   You must set TargetTablePrepMode to nothing.   DMS automatically sets useUpdateLookup to false.  
+     */
+    ReplicateShardCollections?: BooleanOptional;
   }
   export interface MoveReplicationTaskMessage {
     /**
@@ -3554,6 +3882,10 @@ declare namespace DMS {
      * When true, converts timestamps with the timezone datatype to their UTC value.
      */
     ConvertTimestampWithZoneToUTC?: BooleanOptional;
+    /**
+     * The timeframe in minutes to check for open transactions for a CDC-only task. You can specify an integer value between 0 (the default) and 240 (the maximum).   This parameter is only valid in DMS version 3.5.0 and later. DMS supports a window of up to 9.5 hours including the value for OpenTransactionWindow. 
+     */
+    OpenTransactionWindow?: IntegerOptional;
   }
   export interface OrderableReplicationInstance {
     /**
@@ -3705,6 +4037,40 @@ declare namespace DMS {
      * When true, lets PostgreSQL migrate the boolean type as boolean. By default, PostgreSQL migrates booleans as varchar(5).
      */
     MapBooleanAsBoolean?: BooleanOptional;
+    /**
+     * When true, DMS migrates JSONB values as CLOB.
+     */
+    MapJsonbAsClob?: BooleanOptional;
+    /**
+     * When true, DMS migrates LONG values as VARCHAR.
+     */
+    MapLongVarcharAs?: LongVarcharMappingType;
+  }
+  export interface ProvisionData {
+    /**
+     * The current provisioning state 
+     */
+    ProvisionState?: String;
+    /**
+     * The number of capacity units the replication is using.
+     */
+    ProvisionedCapacityUnits?: Integer;
+    /**
+     * The timestamp when DMS provisioned replication resources.
+     */
+    DateProvisioned?: TStamp;
+    /**
+     * Whether the new provisioning is available to the replication.
+     */
+    IsNewProvisioningAvailable?: Boolean;
+    /**
+     * The timestamp when provisioning became available.
+     */
+    DateNewProvisioningDataAvailable?: TStamp;
+    /**
+     * A message describing the reason that DMS provisioned new resources for the serverless replication.
+     */
+    ReasonForNewProvisioningData?: String;
   }
   export interface RdsConfiguration {
     /**
@@ -3739,6 +4105,10 @@ declare namespace DMS {
      * Describes the deployment option for the recommended Amazon RDS DB instance. The deployment options include Multi-AZ and Single-AZ deployments. Valid values include "MULTI_AZ" and "SINGLE_AZ".
      */
     DeploymentOption?: String;
+    /**
+     * Describes the recommended target Amazon RDS engine version.
+     */
+    EngineVersion?: String;
   }
   export interface RdsRecommendation {
     /**
@@ -3775,6 +4145,10 @@ declare namespace DMS {
      * The required deployment option for the Amazon RDS DB instance. Valid values include "MULTI_AZ" for Multi-AZ deployments and "SINGLE_AZ" for Single-AZ deployments.
      */
     DeploymentOption?: String;
+    /**
+     * The required target Amazon RDS engine version.
+     */
+    EngineVersion?: String;
   }
   export interface RebootReplicationInstanceMessage {
     /**
@@ -4041,6 +4415,26 @@ declare namespace DMS {
   export type RefreshSchemasStatusTypeValue = "successful"|"failed"|"refreshing"|string;
   export type ReleaseStatusValues = "beta"|"prod"|string;
   export type ReloadOptionValue = "data-reload"|"validate-only"|string;
+  export interface ReloadReplicationTablesMessage {
+    /**
+     * The Amazon Resource Name of the replication config for which to reload tables.
+     */
+    ReplicationConfigArn: String;
+    /**
+     * The list of tables to reload.
+     */
+    TablesToReload: TableListToReload;
+    /**
+     * Options for reload. Specify data-reload to reload the data and re-validate it if validation is enabled. Specify validate-only to re-validate the table. This option applies only when validation is enabled for the replication. 
+     */
+    ReloadOption?: ReloadOptionValue;
+  }
+  export interface ReloadReplicationTablesResponse {
+    /**
+     * The Amazon Resource Name of the replication config for which to reload tables.
+     */
+    ReplicationConfigArn?: String;
+  }
   export interface ReloadTablesMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication task. 
@@ -4073,6 +4467,127 @@ declare namespace DMS {
   }
   export interface RemoveTagsFromResourceResponse {
   }
+  export interface Replication {
+    /**
+     * The identifier for the ReplicationConfig associated with the replication.
+     */
+    ReplicationConfigIdentifier?: String;
+    /**
+     * The Amazon Resource Name for the ReplicationConfig associated with the replication.
+     */
+    ReplicationConfigArn?: String;
+    /**
+     * The Amazon Resource Name for an existing Endpoint the serverless replication uses for its data source.
+     */
+    SourceEndpointArn?: String;
+    /**
+     * The Amazon Resource Name for an existing Endpoint the serverless replication uses for its data target.
+     */
+    TargetEndpointArn?: String;
+    /**
+     * The type of the serverless replication.
+     */
+    ReplicationType?: MigrationTypeValue;
+    /**
+     * The current status of the serverless replication.
+     */
+    Status?: String;
+    /**
+     * Information about provisioning resources for an DMS serverless replication.
+     */
+    ProvisionData?: ProvisionData;
+    /**
+     * The reason the replication task was stopped. This response parameter can return one of the following values:    "Stop Reason NORMAL"     "Stop Reason RECOVERABLE_ERROR"     "Stop Reason FATAL_ERROR"     "Stop Reason FULL_LOAD_ONLY_FINISHED"     "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load completed, with cached changes not applied    "Stop Reason STOPPED_AFTER_CACHED_EVENTS" – Full load completed, with cached changes applied    "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"     "Stop Reason STOPPED_AFTER_DDL_APPLY" – User-defined stop task after DDL applied    "Stop Reason STOPPED_DUE_TO_LOW_MEMORY"     "Stop Reason STOPPED_DUE_TO_LOW_DISK"     "Stop Reason STOPPED_AT_SERVER_TIME" – User-defined server time for stopping task    "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for stopping task    "Stop Reason RECONFIGURATION_RESTART"     "Stop Reason RECYCLE_TASK"   
+     */
+    StopReason?: String;
+    /**
+     * Error and other information about why a serverless replication failed.
+     */
+    FailureMessages?: StringList;
+    /**
+     * This object provides a collection of statistics about a serverless replication.
+     */
+    ReplicationStats?: ReplicationStats;
+    /**
+     * The replication type.
+     */
+    StartReplicationType?: String;
+    /**
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+     */
+    CdcStartTime?: TStamp;
+    /**
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+     */
+    CdcStartPosition?: String;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.
+     */
+    CdcStopPosition?: String;
+    /**
+     * Indicates the last checkpoint that occurred during a change data capture (CDC) operation. You can provide this value to the CdcStartPosition parameter to start a CDC operation that begins at that checkpoint.
+     */
+    RecoveryCheckpoint?: String;
+    /**
+     * The time the serverless replication was created.
+     */
+    ReplicationCreateTime?: TStamp;
+    /**
+     * The time the serverless replication was updated.
+     */
+    ReplicationUpdateTime?: TStamp;
+    /**
+     * The timestamp when replication was last stopped.
+     */
+    ReplicationLastStopTime?: TStamp;
+  }
+  export interface ReplicationConfig {
+    /**
+     * The identifier for the ReplicationConfig associated with the replication.
+     */
+    ReplicationConfigIdentifier?: String;
+    /**
+     * The Amazon Resource Name (ARN) of this DMS Serverless replication configuration.
+     */
+    ReplicationConfigArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the source endpoint for this DMS serverless replication configuration.
+     */
+    SourceEndpointArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless replication configuration.
+     */
+    TargetEndpointArn?: String;
+    /**
+     * The type of the replication.
+     */
+    ReplicationType?: MigrationTypeValue;
+    /**
+     * Configuration parameters for provisioning an DMS serverless replication.
+     */
+    ComputeConfig?: ComputeConfig;
+    /**
+     * Configuration parameters for an DMS serverless replication.
+     */
+    ReplicationSettings?: String;
+    /**
+     * Additional parameters for an DMS serverless replication.
+     */
+    SupplementalSettings?: String;
+    /**
+     * Table mappings specified in the replication.
+     */
+    TableMappings?: String;
+    /**
+     * The time the serverless replication config was created.
+     */
+    ReplicationConfigCreateTime?: TStamp;
+    /**
+     * The time the serverless replication config was updated.
+     */
+    ReplicationConfigUpdateTime?: TStamp;
+  }
+  export type ReplicationConfigList = ReplicationConfig[];
   export type ReplicationEndpointTypeValue = "source"|"target"|string;
   export interface ReplicationInstance {
     /**
@@ -4195,6 +4710,7 @@ declare namespace DMS {
     ReplicationInstanceTaskLogSize?: Long;
   }
   export type ReplicationInstanceTaskLogsList = ReplicationInstanceTaskLog[];
+  export type ReplicationList = Replication[];
   export interface ReplicationPendingModifiedValues {
     /**
      * The compute and memory capacity of the replication instance as defined for the specified replication instance class. For more information on the settings and capacities for the available replication instance classes, see  Selecting the right DMS replication instance for your migration. 
@@ -4216,6 +4732,52 @@ declare namespace DMS {
      * The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.
      */
     NetworkType?: String;
+  }
+  export interface ReplicationStats {
+    /**
+     * The percent complete for the full load serverless replication.
+     */
+    FullLoadProgressPercent?: Integer;
+    /**
+     * The elapsed time of the replication, in milliseconds.
+     */
+    ElapsedTimeMillis?: Long;
+    /**
+     * The number of tables loaded for this replication.
+     */
+    TablesLoaded?: Integer;
+    /**
+     * The number of tables currently loading for this replication.
+     */
+    TablesLoading?: Integer;
+    /**
+     * The number of tables queued for this replication.
+     */
+    TablesQueued?: Integer;
+    /**
+     * The number of errors that have occured for this replication.
+     */
+    TablesErrored?: Integer;
+    /**
+     * The date the replication was started either with a fresh start or a target reload.
+     */
+    FreshStartDate?: TStamp;
+    /**
+     * The date the replication is scheduled to start.
+     */
+    StartDate?: TStamp;
+    /**
+     * The date the replication was stopped.
+     */
+    StopDate?: TStamp;
+    /**
+     * The date the replication full load was started.
+     */
+    FullLoadStartDate?: TStamp;
+    /**
+     * The date the replication full load was finished.
+     */
+    FullLoadFinishDate?: TStamp;
   }
   export interface ReplicationSubnetGroup {
     /**
@@ -4244,6 +4806,7 @@ declare namespace DMS {
     SupportedNetworkTypes?: StringList;
   }
   export type ReplicationSubnetGroups = ReplicationSubnetGroup[];
+  export type ReplicationTableStatisticsList = TableStatistics[];
   export interface ReplicationTask {
     /**
      * The user-assigned replication task identifier or name. Constraints:   Must contain 1-255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
@@ -4570,7 +5133,7 @@ declare namespace DMS {
      */
     EnableStatistics?: BooleanOptional;
     /**
-     * A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.  DMS supports the IncludeOpForFullLoad parameter in versions 3.1.4 and later.  For full load, records can only be inserted. By default (the false setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If IncludeOpForFullLoad is set to true or y, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.  This setting works together with the CdcInsertsOnly and the CdcInsertsAndUpdates parameters for output to .csv files only. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the Database Migration Service User Guide.. 
+     * A value that enables a full load to write INSERT operations to the comma-separated value (.csv) or .parquet output files only to indicate how the rows were added to the source database.  DMS supports the IncludeOpForFullLoad parameter in versions 3.1.4 and later. DMS supports the use of the .parquet files with the IncludeOpForFullLoad parameter in versions 3.4.7 and later.  For full load, records can only be inserted. By default (the false setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If IncludeOpForFullLoad is set to true or y, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.  This setting works together with the CdcInsertsOnly and the CdcInsertsAndUpdates parameters for output to .csv files only. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the Database Migration Service User Guide.. 
      */
     IncludeOpForFullLoad?: BooleanOptional;
     /**
@@ -4586,7 +5149,7 @@ declare namespace DMS {
      */
     ParquetTimestampInMillisecond?: BooleanOptional;
     /**
-     * A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is false, but when CdcInsertsAndUpdates is set to true or y, only INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file.  For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the IncludeOpForFullLoad parameter. If IncludeOpForFullLoad is set to true, the first field of every CDC record is set to either I or U to indicate INSERT and UPDATE operations at the source. But if IncludeOpForFullLoad is set to false, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the Database Migration Service User Guide..  DMS supports the use of the CdcInsertsAndUpdates parameter in versions 3.3.1 and later.  CdcInsertsOnly and CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set either CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but not both. 
+     * A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is false, but when CdcInsertsAndUpdates is set to true or y, only INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file.  DMS supports the use of the .parquet files in versions 3.4.7 and later.  How these INSERTs and UPDATEs are recorded depends on the value of the IncludeOpForFullLoad parameter. If IncludeOpForFullLoad is set to true, the first field of every CDC record is set to either I or U to indicate INSERT and UPDATE operations at the source. But if IncludeOpForFullLoad is set to false, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see Indicating Source DB Operations in Migrated S3 Data in the Database Migration Service User Guide..  DMS supports the use of the CdcInsertsAndUpdates parameter in versions 3.3.1 and later.  CdcInsertsOnly and CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set either CdcInsertsOnly or CdcInsertsAndUpdates to true for the same endpoint, but not both. 
      */
     CdcInsertsAndUpdates?: BooleanOptional;
     /**
@@ -4768,6 +5331,34 @@ declare namespace DMS {
     Settings: RecommendationSettings;
   }
   export type StartRecommendationsRequestEntryList = StartRecommendationsRequestEntry[];
+  export interface StartReplicationMessage {
+    /**
+     * The Amazon Resource Name of the replication for which to start replication.
+     */
+    ReplicationConfigArn: String;
+    /**
+     * The replication type.
+     */
+    StartReplicationType: String;
+    /**
+     * Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.
+     */
+    CdcStartTime?: TStamp;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to start. Use either CdcStartPosition or CdcStartTime to specify when you want a CDC operation to start. Specifying both values results in an error. The value can be in date, checkpoint, or LSN/SCN format.
+     */
+    CdcStartPosition?: String;
+    /**
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.
+     */
+    CdcStopPosition?: String;
+  }
+  export interface StartReplicationResponse {
+    /**
+     * The replication that DMS started.
+     */
+    Replication?: Replication;
+  }
   export interface StartReplicationTaskAssessmentMessage {
     /**
      *  The Amazon Resource Name (ARN) of the replication task. 
@@ -4853,6 +5444,18 @@ declare namespace DMS {
     ReplicationTask?: ReplicationTask;
   }
   export type StartReplicationTaskTypeValue = "start-replication"|"resume-processing"|"reload-target"|string;
+  export interface StopReplicationMessage {
+    /**
+     * The Amazon Resource Name of the replication to stop.
+     */
+    ReplicationConfigArn: String;
+  }
+  export interface StopReplicationResponse {
+    /**
+     * The replication that DMS stopped.
+     */
+    Replication?: Replication;
+  }
   export interface StopReplicationTaskMessage {
     /**
      * The Amazon Resource Name(ARN) of the replication task to be stopped.
@@ -5074,6 +5677,28 @@ declare namespace DMS {
      * The connection tested.
      */
     Connection?: Connection;
+  }
+  export interface TimestreamSettings {
+    /**
+     * Database name for the endpoint.
+     */
+    DatabaseName: String;
+    /**
+     * Set this attribute to specify the length of time to store all of the tables in memory that are migrated into Amazon Timestream from the source database. Time is measured in units of hours. When Timestream data comes in, it first resides in memory for the specified duration, which allows quick access to it.
+     */
+    MemoryDuration: IntegerOptional;
+    /**
+     * Set this attribute to specify the default magnetic duration applied to the Amazon Timestream tables in days. This is the number of days that records remain in magnetic store before being discarded. For more information, see Storage in the Amazon Timestream Developer Guide.
+     */
+    MagneticDuration: IntegerOptional;
+    /**
+     * Set this attribute to true to specify that DMS only applies inserts and updates, and not deletes. Amazon Timestream does not allow deleting records, so if this value is false, DMS nulls out the corresponding record in the Timestream database rather than deleting it.
+     */
+    CdcInsertsAndUpdates?: BooleanOptional;
+    /**
+     * Set this attribute to true to enable memory store writes. When this value is false, DMS does not write records that are older in days than the value specified in MagneticDuration, because Amazon Timestream does not allow memory writes by default. For more information, see Storage in the Amazon Timestream Developer Guide.
+     */
+    EnableMagneticStoreWrites?: BooleanOptional;
   }
   export type TlogAccessMode = "BackupOnly"|"PreferBackup"|"PreferTlog"|"TlogOnly"|string;
   export interface UpdateSubscriptionsToEventBridgeMessage {

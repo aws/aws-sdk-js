@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1412.0-->
+<!--LATEST=2.1413.0-->
 <!--ENTRYINSERT-->
+
+## 2.1413.0
+* feature: CloudWatchLogs: Add CMK encryption support for CloudWatch Logs Insights query result data
+* feature: DMS: Releasing DMS Serverless. Adding support for PostgreSQL 15.x as source and target endpoint. Adding support for DocDB Elastic Clusters with sharded collections, PostgreSQL datatype mapping customization and disabling hostname validation of the certificate authority in Kafka endpoint settings
+* feature: Glue: This release enables customers to create new Apache Iceberg tables and associated metadata in Amazon S3 by using native AWS Glue CreateTable operation.
+* feature: MediaLive: This release enables the use of Thumbnails in AWS Elemental MediaLive.
+* feature: MediaTailor: The AWS Elemental MediaTailor SDK for Channel Assembly has added support for EXT-X-CUE-OUT and EXT-X-CUE-IN tags to specify ad breaks in HLS outputs, including support for EXT-OATCLS, EXT-X-ASSET, and EXT-X-CUE-OUT-CONT accessory tags.
 
 ## 2.1412.0
 * feature: EC2: Add Nitro Enclaves support on DescribeInstanceTypes

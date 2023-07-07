@@ -4402,6 +4402,10 @@ declare namespace Glue {
      * The ID of the transaction.
      */
     TransactionId?: TransactionIdString;
+    /**
+     * Specifies an OpenTableFormatInput structure when creating an open format table.
+     */
+    OpenTableFormatInput?: OpenTableFormatInput;
   }
   export interface CreateTableResponse {
   }
@@ -8061,6 +8065,16 @@ declare namespace Glue {
   export type GrokPattern = string;
   export type HashString = string;
   export type HudiTargetCompressionType = "gzip"|"lzo"|"uncompressed"|"snappy"|string;
+  export interface IcebergInput {
+    /**
+     * A required metadata operation. Can only be set to CREATE.
+     */
+    MetadataOperation: MetadataOperation;
+    /**
+     * The table version for the Iceberg table. Defaults to 2.
+     */
+    Version?: VersionString;
+  }
   export interface IcebergTarget {
     /**
      * One or more Amazon S3 paths that contains Iceberg metadata folders as s3://bucket/prefix.
@@ -9571,6 +9585,7 @@ declare namespace Glue {
     MetadataValue?: MetadataValueString;
   }
   export type MetadataList = MetadataKeyValuePair[];
+  export type MetadataOperation = "CREATE"|string;
   export type MetadataValueString = string;
   export interface MicrosoftSQLServerCatalogSource {
     /**
@@ -9725,6 +9740,12 @@ declare namespace Glue {
   export type NullableDouble = number;
   export type NullableInteger = number;
   export type OneInput = NodeId[];
+  export interface OpenTableFormatInput {
+    /**
+     * Specifies an IcebergInput structure that defines an Apache Iceberg metadata table.
+     */
+    IcebergInput?: IcebergInput;
+  }
   export interface Option {
     /**
      * Specifies the value of the option.

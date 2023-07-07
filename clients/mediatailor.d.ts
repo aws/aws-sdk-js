@@ -378,6 +378,10 @@ declare namespace MediaTailor {
   export type AccessType = "S3_SIGV4"|"SECRETS_MANAGER_ACCESS_TOKEN"|string;
   export interface AdBreak {
     /**
+     * Defines a list of key/value pairs that MediaTailor generates within the EXT-X-ASSETtag for SCTE35_ENHANCED output.
+     */
+    AdBreakMetadata?: AdBreakMetadataList;
+    /**
      * The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT, TIME_SIGNAL.
      */
     MessageType?: MessageType;
@@ -398,12 +402,14 @@ declare namespace MediaTailor {
      */
     TimeSignalMessage?: TimeSignalMessage;
   }
+  export type AdBreakMetadataList = KeyValuePair[];
   export interface AdMarkerPassthrough {
     /**
      * Enables ad marker passthrough for your configuration.
      */
     Enabled?: __boolean;
   }
+  export type AdMarkupType = "DATERANGE"|"SCTE35_ENHANCED"|string;
   export interface Alert {
     /**
      * The code for the alert. For example, NOT_PROCESSED.
@@ -1446,6 +1452,10 @@ declare namespace MediaTailor {
   }
   export interface HlsPlaylistSettings {
     /**
+     * Determines the type of SCTE 35 tags to use in ad markup. Specify DATERANGE to use DATERANGE tags (for live or VOD content). Specify SCTE35_ENHANCED to use EXT-X-CUE-OUT and EXT-X-CUE-IN tags (for VOD content only).
+     */
+    AdMarkupType?: adMarkupTypes;
+    /**
      * The total duration (in seconds) of each manifest. Minimum value: 30 seconds. Maximum value: 3600 seconds.
      */
     ManifestWindowSeconds?: __integer;
@@ -1472,6 +1482,16 @@ declare namespace MediaTailor {
   }
   export type HttpPackageConfigurations = HttpPackageConfiguration[];
   export type Integer = number;
+  export interface KeyValuePair {
+    /**
+     * For SCTE35_ENHANCED output, defines a key. MediaTailor takes this key, and its associated value, and generates the key/value pair within the EXT-X-ASSETtag. If you specify a key, you must also specify a corresponding value.
+     */
+    Key: String;
+    /**
+     * For SCTE35_ENHANCED output, defines a vaue. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the EXT-X-ASSETtag. If you specify a value, you must also specify a corresponding key.
+     */
+    Value: String;
+  }
   export interface ListAlertsRequest {
     /**
      * The maximum number of alerts that you want MediaTailor to return in response to the current request. If there are more than MaxResults alerts, use the value of NextToken in the response to get the next page of results.
@@ -2636,6 +2656,7 @@ declare namespace MediaTailor {
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __timestampUnix = Date;
+  export type adMarkupTypes = AdMarkupType[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
