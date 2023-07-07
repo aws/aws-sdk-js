@@ -35,4 +35,19 @@ export class IniLoader{
  * @returns {Record<string, string>} object of all sso sessions information in the file
  */
   loadSsoSessionsFrom(options: LoadFileOptions): IniFileContent;
+
+  /**
+   * Get default file path for config/credentials files.
+   * 
+   * @param isConfig whether the file is a config file or a credentials file
+   * @returns {string} default file path
+   */
+  getDefaultFilePath(isConfig: boolean): string;
+
+  /**
+   * Get Home directory of the current user.
+   * 
+   * @returns {string} home directory path
+   * */
+   getHomeDir(): string;
 }
