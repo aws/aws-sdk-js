@@ -47,6 +47,22 @@
           AWS.NodeHttpClient.agent = undefined;
           AWS.NodeHttpClient.sslAgent = undefined;
         });
+        it('should use default agent when the agent is passed as undefined', function(done) {
+          process.env.AWS_NODEJS_CONNECTION_REUSE_ENABLED = '1';
+          var req;
+          req = new AWS.HttpRequest('http://invalid');
+          return http.handleRequest(req, { timeout: 1, agent: undefined }, null, function(err) {
+            expect(AWS.NodeHttpClient.agent).not.to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent).to.be.undefined;
+            if (httpModule.globalAgent && httpModule.globalAgent.keepAlive !== undefined) {
+              //keepAlive is introduced only after v0.12
+              expect(AWS.NodeHttpClient.agent.keepAlive).to.equal(true);
+            }
+            expect(req.stream.agent.keepAlive).to.equal(true);
+            delete process.env.AWS_NODEJS_CONNECTION_REUSE_ENABLED;
+            return done();
+          });
+        });
         it('should conform connection reuse opt-in environment variable', function(done) {
           process.env.AWS_NODEJS_CONNECTION_REUSE_ENABLED = '1';
           var req;

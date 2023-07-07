@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "node",
+  "description": "use undefined node http agent if explicitly passed by user"
+}
