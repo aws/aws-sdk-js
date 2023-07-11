@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1413.0',
+	  VERSION: '2.1414.0',
 
 	  /**
 	   * @api private
@@ -10062,6 +10062,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var forEach = __webpack_require__(67);
 	var availableTypedArrays = __webpack_require__(69);
+	var callBind = __webpack_require__(64);
 	var callBound = __webpack_require__(57);
 	var gOPD = __webpack_require__(70);
 
@@ -10072,7 +10073,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var typedArrays = availableTypedArrays();
 
 	var $slice = callBound('String.prototype.slice');
-	var toStrTags = {};
+	var toStrTags = { __proto__: null };
 	var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
 	if (hasToStringTag && gOPD && getPrototypeOf) {
 		forEach(typedArrays, function (typedArray) {
@@ -10085,7 +10086,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						var superProto = getPrototypeOf(proto);
 						descriptor = gOPD(superProto, Symbol.toStringTag);
 					}
-					toStrTags[typedArray] = descriptor.get;
+					toStrTags[typedArray] = callBind(descriptor.get);
 				}
 			}
 		});
@@ -10096,7 +10097,7 @@ return /******/ (function(modules) { // webpackBootstrap
 		forEach(toStrTags, function (getter, typedArray) {
 			if (!foundName) {
 				try {
-					var name = getter.call(value);
+					var name = getter(value);
 					if (name === typedArray) {
 						foundName = name;
 					}

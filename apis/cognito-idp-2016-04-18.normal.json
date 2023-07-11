@@ -5370,7 +5370,8 @@
       },
       "value": {
         "shape": "StringType"
-      }
+      },
+      "sensitive": true
     },
     "ChangePasswordRequest": {
       "type": "structure",
@@ -8566,7 +8567,8 @@
     "SessionType": {
       "type": "string",
       "max": 2048,
-      "min": 20
+      "min": 20,
+      "sensitive": true
     },
     "SetRiskConfigurationRequest": {
       "type": "structure",

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1413.0-->
+<!--LATEST=2.1414.0-->
 <!--ENTRYINSERT-->
+
+## 2.1414.0
+* bugfix: node: use undefined node http agent if explicitly passed by user
+* feature: CognitoIdentityServiceProvider: API model updated in Amazon Cognito
 
 ## 2.1413.0
 * feature: CloudWatchLogs: Add CMK encryption support for CloudWatch Logs Insights query result data
