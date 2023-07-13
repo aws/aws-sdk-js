@@ -2909,6 +2909,13 @@
         "shape": "DatabaseResponse"
       }
     },
+    "DatabaseMode": {
+      "type": "string",
+      "enum": [
+        "default",
+        "babelfish"
+      ]
+    },
     "DatabaseResponse": {
       "type": "structure",
       "members": {
@@ -6321,6 +6328,14 @@
         "MapLongVarcharAs": {
           "shape": "LongVarcharMappingType",
           "documentation": "<p>When true, DMS migrates LONG values as VARCHAR.</p>"
+        },
+        "DatabaseMode": {
+          "shape": "DatabaseMode",
+          "documentation": "<p>Specifies whether to use default or custom replication behavior for PostgreSQL-compatible endpoints. You can use this setting to specify replication behavior for endpoints that require additional configuration, such as Babelfish endpoints.</p>"
+        },
+        "BabelfishDatabaseName": {
+          "shape": "String",
+          "documentation": "<p>The Babelfish for Aurora PostgreSQL database name for the endpoint.</p>"
         }
       },
       "documentation": "<p>Provides information that defines a PostgreSQL endpoint.</p>"

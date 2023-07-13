@@ -340,6 +340,14 @@ declare class Connect extends Service {
    */
   deletePrompt(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a queue.
+   */
+  deleteQueue(params: Connect.Types.DeleteQueueRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a queue.
+   */
+  deleteQueue(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a quick connect.
    */
   deleteQuickConnect(params: Connect.Types.DeleteQuickConnectRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -347,6 +355,14 @@ declare class Connect extends Service {
    * Deletes a quick connect.
    */
   deleteQuickConnect(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a routing profile.
+   */
+  deleteRoutingProfile(params: Connect.Types.DeleteRoutingProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a routing profile.
+   */
+  deleteRoutingProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a rule for the specified Amazon Connect instance.
    */
@@ -3190,6 +3206,16 @@ declare namespace Connect {
      */
     PromptId: PromptId;
   }
+  export interface DeleteQueueRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the queue.
+     */
+    QueueId: QueueId;
+  }
   export interface DeleteQuickConnectRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -3199,6 +3225,16 @@ declare namespace Connect {
      * The identifier for the quick connect.
      */
     QuickConnectId: QuickConnectId;
+  }
+  export interface DeleteRoutingProfileRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
   }
   export interface DeleteRuleRequest {
     /**
@@ -5052,7 +5088,7 @@ declare namespace Connect {
      */
     OutboundCallsEnabled?: OutboundCallsEnabled;
     /**
-     * This URL allows contact center users to access Amazon Connect admin website.
+     * This URL allows contact center users to access the Amazon Connect admin website.
      */
     InstanceAccessUrl?: Url;
   }
@@ -5134,7 +5170,7 @@ declare namespace Connect {
      */
     OutboundCallsEnabled?: OutboundCallsEnabled;
     /**
-     * This URL allows contact center users to access Amazon Connect admin website.
+     * This URL allows contact center users to access the Amazon Connect admin website.
      */
     InstanceAccessUrl?: Url;
   }

@@ -157,6 +157,14 @@ declare class Proton extends Service {
    */
   deleteComponent(callback?: (err: AWSError, data: Proton.Types.DeleteComponentOutput) => void): Request<Proton.Types.DeleteComponentOutput, AWSError>;
   /**
+   * Delete the deployment.
+   */
+  deleteDeployment(params: Proton.Types.DeleteDeploymentInput, callback?: (err: AWSError, data: Proton.Types.DeleteDeploymentOutput) => void): Request<Proton.Types.DeleteDeploymentOutput, AWSError>;
+  /**
+   * Delete the deployment.
+   */
+  deleteDeployment(callback?: (err: AWSError, data: Proton.Types.DeleteDeploymentOutput) => void): Request<Proton.Types.DeleteDeploymentOutput, AWSError>;
+  /**
    * Delete an environment.
    */
   deleteEnvironment(params: Proton.Types.DeleteEnvironmentInput, callback?: (err: AWSError, data: Proton.Types.DeleteEnvironmentOutput) => void): Request<Proton.Types.DeleteEnvironmentOutput, AWSError>;
@@ -252,6 +260,14 @@ declare class Proton extends Service {
    * Get detailed data for a component. For more information about components, see Proton components in the Proton User Guide.
    */
   getComponent(callback?: (err: AWSError, data: Proton.Types.GetComponentOutput) => void): Request<Proton.Types.GetComponentOutput, AWSError>;
+  /**
+   * Get detailed data for a deployment.
+   */
+  getDeployment(params: Proton.Types.GetDeploymentInput, callback?: (err: AWSError, data: Proton.Types.GetDeploymentOutput) => void): Request<Proton.Types.GetDeploymentOutput, AWSError>;
+  /**
+   * Get detailed data for a deployment.
+   */
+  getDeployment(callback?: (err: AWSError, data: Proton.Types.GetDeploymentOutput) => void): Request<Proton.Types.GetDeploymentOutput, AWSError>;
   /**
    * Get detailed data for an environment.
    */
@@ -404,6 +420,14 @@ declare class Proton extends Service {
    * List components with summary data. You can filter the result list by environment, service, or a single service instance. For more information about components, see Proton components in the Proton User Guide.
    */
   listComponents(callback?: (err: AWSError, data: Proton.Types.ListComponentsOutput) => void): Request<Proton.Types.ListComponentsOutput, AWSError>;
+  /**
+   * List deployments. You can filter the result list by environment, service, or a single service instance.
+   */
+  listDeployments(params: Proton.Types.ListDeploymentsInput, callback?: (err: AWSError, data: Proton.Types.ListDeploymentsOutput) => void): Request<Proton.Types.ListDeploymentsOutput, AWSError>;
+  /**
+   * List deployments. You can filter the result list by environment, service, or a single service instance.
+   */
+  listDeployments(callback?: (err: AWSError, data: Proton.Types.ListDeploymentsOutput) => void): Request<Proton.Types.ListDeploymentsOutput, AWSError>;
   /**
    * View a list of environment account connections. For more information, see Environment account connections in the Proton User guide.
    */
@@ -898,6 +922,10 @@ declare namespace Proton {
      */
     environmentName: ResourceName;
     /**
+     * The ID of the last attempted deployment of this component.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
      * The last token the client requested.
      */
     lastClientRequestToken?: String;
@@ -913,6 +941,10 @@ declare namespace Proton {
      * The time when the component was last modified.
      */
     lastModifiedAt: Timestamp;
+    /**
+     * The ID of the last successful deployment of this component.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
     /**
      * The name of the component.
      */
@@ -931,7 +963,26 @@ declare namespace Proton {
     serviceSpec?: SpecContents;
   }
   export type ComponentArn = string;
+  export type ComponentDeploymentIdList = DeploymentId[];
   export type ComponentDeploymentUpdateType = "NONE"|"CURRENT_VERSION"|string;
+  export interface ComponentState {
+    /**
+     * The name of the service instance that this component is attached to. Provided when a component is attached to a service instance.
+     */
+    serviceInstanceName?: ResourceNameOrEmpty;
+    /**
+     * The name of the service that serviceInstanceName is associated with. Provided when a component is attached to a service instance.
+     */
+    serviceName?: ResourceNameOrEmpty;
+    /**
+     * The service spec that the component uses to access service inputs. Provided when a component is attached to a service instance.
+     */
+    serviceSpec?: SpecContents;
+    /**
+     * The template file used.
+     */
+    templateFile?: TemplateFileContents;
+  }
   export interface ComponentSummary {
     /**
      * The Amazon Resource Name (ARN) of the component.
@@ -954,6 +1005,10 @@ declare namespace Proton {
      */
     environmentName: ResourceName;
     /**
+     * The ID of the last attempted deployment of this component.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
      * The time when a deployment of the component was last attempted.
      */
     lastDeploymentAttemptedAt?: Timestamp;
@@ -965,6 +1020,10 @@ declare namespace Proton {
      * The time when the component was last modified.
      */
     lastModifiedAt: Timestamp;
+    /**
+     * The ID of the last successful deployment of this component.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
     /**
      * The name of the component.
      */
@@ -1469,6 +1528,18 @@ declare namespace Proton {
      */
     component?: Component;
   }
+  export interface DeleteDeploymentInput {
+    /**
+     * The ID of the deployment to delete.
+     */
+    id: DeploymentId;
+  }
+  export interface DeleteDeploymentOutput {
+    /**
+     * The detailed data of the deployment being deleted.
+     */
+    deployment?: Deployment;
+  }
   export interface DeleteEnvironmentAccountConnectionInput {
     /**
      * The ID of the environment account connection to delete.
@@ -1613,8 +1684,165 @@ declare namespace Proton {
      */
     templateSyncConfig?: TemplateSyncConfig;
   }
+  export interface Deployment {
+    /**
+     * The Amazon Resource Name (ARN) of the deployment.
+     */
+    arn: DeploymentArn;
+    /**
+     * The date and time the deployment was completed.
+     */
+    completedAt?: Timestamp;
+    /**
+     * The name of the component associated with this deployment.
+     */
+    componentName?: ResourceName;
+    /**
+     * The date and time the deployment was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The status of the deployment.
+     */
+    deploymentStatus: DeploymentStatus;
+    /**
+     * The deployment status message.
+     */
+    deploymentStatusMessage?: StatusMessage;
+    /**
+     * The name of the environment associated with this deployment.
+     */
+    environmentName: ResourceName;
+    /**
+     * The ID of the deployment.
+     */
+    id: DeploymentId;
+    /**
+     * The initial state of the target resource at the time of the deployment.
+     */
+    initialState?: DeploymentState;
+    /**
+     * The ID of the last attempted deployment.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
+     * The date and time the deployment was last modified.
+     */
+    lastModifiedAt: Timestamp;
+    /**
+     * The ID of the last successful deployment.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
+    /**
+     * The name of the deployment's service instance.
+     */
+    serviceInstanceName?: ResourceName;
+    /**
+     * The name of the service in this deployment.
+     */
+    serviceName?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the target of the deployment.
+     */
+    targetArn: Arn;
+    /**
+     * The date and time the depoyment target was created.
+     */
+    targetResourceCreatedAt: Timestamp;
+    /**
+     * The resource type of the deployment target. It can be an environment, service, service instance, or component.
+     */
+    targetResourceType: DeploymentTargetResourceType;
+    /**
+     * The target state of the target resource at the time of the deployment.
+     */
+    targetState?: DeploymentState;
+  }
+  export type DeploymentArn = string;
   export type DeploymentId = string;
+  export interface DeploymentState {
+    /**
+     * The state of the component associated with the deployment.
+     */
+    component?: ComponentState;
+    /**
+     * The state of the environment associated with the deployment.
+     */
+    environment?: EnvironmentState;
+    /**
+     * The state of the service instance associated with the deployment.
+     */
+    serviceInstance?: ServiceInstanceState;
+    /**
+     * The state of the service pipeline associated with the deployment.
+     */
+    servicePipeline?: ServicePipelineState;
+  }
   export type DeploymentStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETE_COMPLETE"|"CANCELLING"|"CANCELLED"|string;
+  export interface DeploymentSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the deployment.
+     */
+    arn: DeploymentArn;
+    /**
+     * The date and time the deployment was completed.
+     */
+    completedAt?: Timestamp;
+    /**
+     * The name of the component associated with the deployment.
+     */
+    componentName?: ResourceName;
+    /**
+     * The date and time the deployment was created.
+     */
+    createdAt: Timestamp;
+    /**
+     * The current status of the deployment.
+     */
+    deploymentStatus: DeploymentStatus;
+    /**
+     * The name of the environment associated with the deployment.
+     */
+    environmentName: ResourceName;
+    /**
+     * The ID of the deployment.
+     */
+    id: DeploymentId;
+    /**
+     * The ID of the last attempted deployment.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
+     * The date and time the deployment was last modified.
+     */
+    lastModifiedAt: Timestamp;
+    /**
+     * The ID of the last successful deployment.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
+    /**
+     * The name of the service instance associated with the deployment.
+     */
+    serviceInstanceName?: ResourceName;
+    /**
+     * The name of the service associated with the deployment.
+     */
+    serviceName?: ResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the target of the deployment.
+     */
+    targetArn: Arn;
+    /**
+     * The date and time the target resource was created.
+     */
+    targetResourceCreatedAt: Timestamp;
+    /**
+     * The resource type of the deployment target. It can be an environment, service, service instance, or component.
+     */
+    targetResourceType: DeploymentTargetResourceType;
+  }
+  export type DeploymentSummaryList = DeploymentSummary[];
+  export type DeploymentTargetResourceType = "ENVIRONMENT"|"SERVICE_PIPELINE"|"SERVICE_INSTANCE"|"COMPONENT"|string;
   export type DeploymentUpdateType = "NONE"|"CURRENT_VERSION"|"MINOR_VERSION"|"MAJOR_VERSION"|string;
   export type Description = string;
   export type DisplayName = string;
@@ -1657,6 +1885,10 @@ declare namespace Proton {
      */
     environmentAccountId?: AwsAccountId;
     /**
+     * The ID of the last attempted deployment of this environment.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
      * The time when a deployment of the environment was last attempted.
      */
     lastDeploymentAttemptedAt: Timestamp;
@@ -1664,6 +1896,10 @@ declare namespace Proton {
      * The time when the environment was last deployed successfully.
      */
     lastDeploymentSucceededAt: Timestamp;
+    /**
+     * The ID of the last successful deployment of this environment.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
     /**
      * The name of the environment.
      */
@@ -1792,6 +2028,24 @@ declare namespace Proton {
   }
   export type EnvironmentAccountConnectionSummaryList = EnvironmentAccountConnectionSummary[];
   export type EnvironmentArn = string;
+  export interface EnvironmentState {
+    /**
+     * The environment spec that was used to create the environment.
+     */
+    spec?: SpecContents;
+    /**
+     * The major version of the environment template that was used to create the environment.
+     */
+    templateMajorVersion: TemplateVersionPart;
+    /**
+     * The minor version of the environment template that was used to create the environment.
+     */
+    templateMinorVersion: TemplateVersionPart;
+    /**
+     * The name of the environment template that was used to create the environment.
+     */
+    templateName: ResourceName;
+  }
   export interface EnvironmentSummary {
     /**
      * The Amazon Resource Name (ARN) of the environment.
@@ -1826,6 +2080,10 @@ declare namespace Proton {
      */
     environmentAccountId?: AwsAccountId;
     /**
+     * The ID of the last attempted deployment of this environment.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
      * The time when a deployment of the environment was last attempted.
      */
     lastDeploymentAttemptedAt: Timestamp;
@@ -1833,6 +2091,10 @@ declare namespace Proton {
      * The time when the environment was last deployed successfully.
      */
     lastDeploymentSucceededAt: Timestamp;
+    /**
+     * The ID of the last successful deployment of this environment.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
     /**
      * The name of the environment.
      */
@@ -2054,6 +2316,34 @@ declare namespace Proton {
      * The detailed data of the requested component.
      */
     component?: Component;
+  }
+  export interface GetDeploymentInput {
+    /**
+     * The name of a component that you want to get the detailed data for.
+     */
+    componentName?: ResourceName;
+    /**
+     * The name of a environment that you want to get the detailed data for.
+     */
+    environmentName?: ResourceName;
+    /**
+     * The ID of the deployment that you want to get the detailed data for.
+     */
+    id: DeploymentId;
+    /**
+     * The name of the service instance associated with the given deployment ID. serviceName must be specified to identify the service instance.
+     */
+    serviceInstanceName?: ResourceName;
+    /**
+     * The name of the service associated with the given deployment ID.
+     */
+    serviceName?: ResourceName;
+  }
+  export interface GetDeploymentOutput {
+    /**
+     * The detailed data of the requested deployment.
+     */
+    deployment?: Deployment;
   }
   export interface GetEnvironmentAccountConnectionInput {
     /**
@@ -2324,6 +2614,10 @@ declare namespace Proton {
      */
     componentName: ResourceName;
     /**
+     * The ID of the deployment whose outputs you want.
+     */
+    deploymentId?: DeploymentId;
+    /**
      * A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
      */
     nextToken?: EmptyNextToken;
@@ -2390,6 +2684,42 @@ declare namespace Proton {
      */
     nextToken?: NextToken;
   }
+  export interface ListDeploymentsInput {
+    /**
+     * The name of a component for result list filtering. Proton returns deployments associated with that component.
+     */
+    componentName?: ResourceName;
+    /**
+     * The name of an environment for result list filtering. Proton returns deployments associated with the environment.
+     */
+    environmentName?: ResourceName;
+    /**
+     * The maximum number of deployments to list.
+     */
+    maxResults?: MaxPageResults;
+    /**
+     * A token that indicates the location of the next deployment in the array of deployment, after the list of deployment that was previously requested.
+     */
+    nextToken?: NextToken;
+    /**
+     * The name of a service instance for result list filtering. Proton returns the deployments associated with the service instance.
+     */
+    serviceInstanceName?: ResourceName;
+    /**
+     * The name of a service for result list filtering. Proton returns deployments associated with service instances of the service.
+     */
+    serviceName?: ResourceName;
+  }
+  export interface ListDeploymentsOutput {
+    /**
+     * An array of deployment with summary data.
+     */
+    deployments: DeploymentSummaryList;
+    /**
+     * A token that indicates the location of the next deployment in the array of deployment, after the current requested list of deployment.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListEnvironmentAccountConnectionsInput {
     /**
      * The environment name that's associated with each listed environment account connection.
@@ -2423,6 +2753,10 @@ declare namespace Proton {
     nextToken?: NextToken;
   }
   export interface ListEnvironmentOutputsInput {
+    /**
+     * The ID of the deployment whose outputs you want.
+     */
+    deploymentId?: DeploymentId;
     /**
      * The environment name.
      */
@@ -2584,6 +2918,10 @@ declare namespace Proton {
   }
   export interface ListServiceInstanceOutputsInput {
     /**
+     * The ID of the deployment whose outputs you want.
+     */
+    deploymentId?: DeploymentId;
+    /**
      * A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
      */
     nextToken?: EmptyNextToken;
@@ -2681,6 +3019,10 @@ declare namespace Proton {
   }
   export type ListServiceInstancesSortBy = "name"|"deploymentStatus"|"templateName"|"serviceName"|"environmentName"|"lastDeploymentAttemptedAt"|"createdAt"|string;
   export interface ListServicePipelineOutputsInput {
+    /**
+     * The ID of the deployment you want the outputs for.
+     */
+    deploymentId?: DeploymentId;
     /**
      * A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.
      */
@@ -3200,6 +3542,10 @@ declare namespace Proton {
      */
     environmentName: ResourceName;
     /**
+     * The ID of the last attempted deployment of this service instance.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
      * The last client request token received.
      */
     lastClientRequestToken?: String;
@@ -3211,6 +3557,10 @@ declare namespace Proton {
      * The time when the service instance was last deployed successfully.
      */
     lastDeploymentSucceededAt: Timestamp;
+    /**
+     * The ID of the last successful deployment of this service instance.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
     /**
      * The name of the service instance.
      */
@@ -3237,6 +3587,36 @@ declare namespace Proton {
     templateName: ResourceName;
   }
   export type ServiceInstanceArn = string;
+  export interface ServiceInstanceState {
+    /**
+     * The IDs for the last successful components deployed for this service instance.
+     */
+    lastSuccessfulComponentDeploymentIds?: ComponentDeploymentIdList;
+    /**
+     * The ID for the last successful environment deployed for this service instance.
+     */
+    lastSuccessfulEnvironmentDeploymentId?: DeploymentId;
+    /**
+     * The ID for the last successful service pipeline deployed for this service instance.
+     */
+    lastSuccessfulServicePipelineDeploymentId?: DeploymentId;
+    /**
+     * The service spec that was used to create the service instance.
+     */
+    spec: SpecContents;
+    /**
+     * The major version of the service template that was used to create the service pipeline.
+     */
+    templateMajorVersion: TemplateVersionPart;
+    /**
+     * The minor version of the service template that was used to create the service pipeline.
+     */
+    templateMinorVersion: TemplateVersionPart;
+    /**
+     * The name of the service template that was used to create the service instance.
+     */
+    templateName: ResourceName;
+  }
   export interface ServiceInstanceSummary {
     /**
      * The Amazon Resource Name (ARN) of the service instance.
@@ -3259,6 +3639,10 @@ declare namespace Proton {
      */
     environmentName: ResourceName;
     /**
+     * The ID of the last attempted deployment of this service instance.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
      * The time when a deployment of the service was last attempted.
      */
     lastDeploymentAttemptedAt: Timestamp;
@@ -3266,6 +3650,10 @@ declare namespace Proton {
      * The time when the service was last deployed successfully.
      */
     lastDeploymentSucceededAt: Timestamp;
+    /**
+     * The ID of the last successful deployment of this service instance.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
     /**
      * The name of the service instance.
      */
@@ -3306,6 +3694,10 @@ declare namespace Proton {
      */
     deploymentStatusMessage?: StatusMessage;
     /**
+     * The ID of the last attempted deployment of this service pipeline.
+     */
+    lastAttemptedDeploymentId?: DeploymentId;
+    /**
      * The time when a deployment of the service pipeline was last attempted.
      */
     lastDeploymentAttemptedAt: Timestamp;
@@ -3313,6 +3705,28 @@ declare namespace Proton {
      * The time when the service pipeline was last deployed successfully.
      */
     lastDeploymentSucceededAt: Timestamp;
+    /**
+     * The ID of the last successful deployment of this service pipeline.
+     */
+    lastSucceededDeploymentId?: DeploymentId;
+    /**
+     * The service spec that was used to create the service pipeline.
+     */
+    spec?: SpecContents;
+    /**
+     * The major version of the service template that was used to create the service pipeline.
+     */
+    templateMajorVersion: TemplateVersionPart;
+    /**
+     * The minor version of the service template that was used to create the service pipeline.
+     */
+    templateMinorVersion: TemplateVersionPart;
+    /**
+     * The name of the service template that was used to create the service pipeline.
+     */
+    templateName: ResourceName;
+  }
+  export interface ServicePipelineState {
     /**
      * The service spec that was used to create the service pipeline.
      */

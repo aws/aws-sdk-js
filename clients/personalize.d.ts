@@ -524,6 +524,14 @@ declare class Personalize extends Service {
    */
   updateCampaign(callback?: (err: AWSError, data: Personalize.Types.UpdateCampaignResponse) => void): Request<Personalize.Types.UpdateCampaignResponse, AWSError>;
   /**
+   * Update a dataset to replace its schema with a new or existing one. For more information, see Replacing a dataset's schema. 
+   */
+  updateDataset(params: Personalize.Types.UpdateDatasetRequest, callback?: (err: AWSError, data: Personalize.Types.UpdateDatasetResponse) => void): Request<Personalize.Types.UpdateDatasetResponse, AWSError>;
+  /**
+   * Update a dataset to replace its schema with a new or existing one. For more information, see Replacing a dataset's schema. 
+   */
+  updateDataset(callback?: (err: AWSError, data: Personalize.Types.UpdateDatasetResponse) => void): Request<Personalize.Types.UpdateDatasetResponse, AWSError>;
+  /**
    * Updates a metric attribution.
    */
   updateMetricAttribution(params: Personalize.Types.UpdateMetricAttributionRequest, callback?: (err: AWSError, data: Personalize.Types.UpdateMetricAttributionResponse) => void): Request<Personalize.Types.UpdateMetricAttributionResponse, AWSError>;
@@ -1309,7 +1317,7 @@ declare namespace Personalize {
      */
     performAutoML?: PerformAutoML;
     /**
-     * The ARN of the recipe to use for model training. Only specified when performAutoML is false.
+     * The ARN of the recipe to use for model training. This is required when performAutoML is false.
      */
     recipeArn?: Arn;
     /**
@@ -1398,6 +1406,10 @@ declare namespace Personalize {
      * A time stamp that shows when the dataset was updated.
      */
     lastUpdatedDateTime?: _Date;
+    /**
+     * Describes the latest update to the dataset.
+     */
+    latestDatasetUpdate?: DatasetUpdateSummary;
   }
   export interface DatasetExportJob {
     /**
@@ -1692,6 +1704,28 @@ declare namespace Personalize {
     lastUpdatedDateTime?: _Date;
   }
   export type DatasetType = string;
+  export interface DatasetUpdateSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the schema that replaced the previous schema of the dataset.
+     */
+    schemaArn?: Arn;
+    /**
+     * The status of the dataset update. 
+     */
+    status?: Status;
+    /**
+     * If updating a dataset fails, provides the reason why.
+     */
+    failureReason?: FailureReason;
+    /**
+     * The creation date and time (in Unix time) of the dataset update.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The last update date and time (in Unix time) of the dataset.
+     */
+    lastUpdatedDateTime?: _Date;
+  }
   export type Datasets = DatasetSummary[];
   export type _Date = Date;
   export interface DefaultCategoricalHyperParameterRange {
@@ -2985,7 +3019,7 @@ declare namespace Personalize {
      */
     performAutoML?: PerformAutoML;
     /**
-     * The ARN of the recipe used to create the solution.
+     * The ARN of the recipe used to create the solution. This is required when performAutoML is false.
      */
     recipeArn?: Arn;
     /**
@@ -3277,6 +3311,22 @@ declare namespace Personalize {
      * The same campaign ARN as given in the request.
      */
     campaignArn?: Arn;
+  }
+  export interface UpdateDatasetRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset that you want to update.
+     */
+    datasetArn: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the new schema you want use.
+     */
+    schemaArn: Arn;
+  }
+  export interface UpdateDatasetResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset you updated.
+     */
+    datasetArn?: Arn;
   }
   export interface UpdateMetricAttributionRequest {
     /**

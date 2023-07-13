@@ -801,6 +801,10 @@
           "shape": "__string",
           "documentation": "<p>If an alert is generated for a resource, an explanation of the reason for the alert.</p>"
         },
+        "Category": {
+          "shape": "AlertCategory",
+          "documentation": "<p>The category that MediaTailor assigns to the alert.</p>"
+        },
         "LastModifiedTime": {
           "shape": "__timestampUnix",
           "documentation": "<p>The timestamp when the alert was last modified.</p>"
@@ -815,6 +819,14 @@
         }
       },
       "documentation": "<p>Alert configuration parameters.</p>"
+    },
+    "AlertCategory": {
+      "type": "string",
+      "enum": [
+        "SCHEDULING_ERROR",
+        "PLAYBACK_WARNING",
+        "INFO"
+      ]
     },
     "AvailMatchingCriteria": {
       "type": "structure",
@@ -2339,7 +2351,7 @@
         },
         "Value": {
           "shape": "String",
-          "documentation": "<p>For <code>SCTE35_ENHANCED</code> output, defines a vaue. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a value, you must also specify a corresponding key.</p>"
+          "documentation": "<p>For <code>SCTE35_ENHANCED</code> output, defines a value. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a value, you must also specify a corresponding key.</p>"
         }
       },
       "documentation": "<p>For <code>SCTE35_ENHANCED</code> output, defines a key and corresponding value. MediaTailor generates these pairs within the <code>EXT-X-ASSET</code>tag.</p>"

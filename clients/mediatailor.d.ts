@@ -420,6 +420,10 @@ declare namespace MediaTailor {
      */
     AlertMessage: __string;
     /**
+     * The category that MediaTailor assigns to the alert.
+     */
+    Category?: AlertCategory;
+    /**
      * The timestamp when the alert was last modified.
      */
     LastModifiedTime: __timestampUnix;
@@ -432,6 +436,7 @@ declare namespace MediaTailor {
      */
     ResourceArn: __string;
   }
+  export type AlertCategory = "SCHEDULING_ERROR"|"PLAYBACK_WARNING"|"INFO"|string;
   export interface AvailMatchingCriteria {
     /**
      * The dynamic variable(s) that MediaTailor should use as avail matching criteria. MediaTailor only places the prefetched ads into the avail if the avail matches the criteria defined by the dynamic variable. For information about dynamic variables, see Using dynamic ad variables in the MediaTailor User Guide. You can include up to 100 dynamic variables.
@@ -1488,7 +1493,7 @@ declare namespace MediaTailor {
      */
     Key: String;
     /**
-     * For SCTE35_ENHANCED output, defines a vaue. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the EXT-X-ASSETtag. If you specify a value, you must also specify a corresponding key.
+     * For SCTE35_ENHANCED output, defines a value. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the EXT-X-ASSETtag. If you specify a value, you must also specify a corresponding key.
      */
     Value: String;
   }

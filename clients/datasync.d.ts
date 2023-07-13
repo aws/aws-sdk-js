@@ -28,11 +28,11 @@ declare class DataSync extends Service {
    */
   cancelTaskExecution(callback?: (err: AWSError, data: DataSync.Types.CancelTaskExecutionResponse) => void): Request<DataSync.Types.CancelTaskExecutionResponse, AWSError>;
   /**
-   * Activates an DataSync agent that you have deployed in your storage environment. The activation process associates your agent with your account. In the activation process, you specify information such as the Amazon Web Services Region that you want to activate the agent in. You activate the agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that ensures minimal interruption to your tasks.
+   * Activates an DataSync agent that you've deployed in your storage environment. The activation process associates the agent with your Amazon Web Services account. If you haven't deployed an agent yet, see the following topics to learn more:    Agent requirements     Create an agent     If you're transferring between Amazon Web Services storage services, you don't need a DataSync agent.  
    */
   createAgent(params: DataSync.Types.CreateAgentRequest, callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
-   * Activates an DataSync agent that you have deployed in your storage environment. The activation process associates your agent with your account. In the activation process, you specify information such as the Amazon Web Services Region that you want to activate the agent in. You activate the agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region. You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet. You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run.  Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that ensures minimal interruption to your tasks.
+   * Activates an DataSync agent that you've deployed in your storage environment. The activation process associates the agent with your Amazon Web Services account. If you haven't deployed an agent yet, see the following topics to learn more:    Agent requirements     Create an agent     If you're transferring between Amazon Web Services storage services, you don't need a DataSync agent.  
    */
   createAgent(callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
@@ -555,33 +555,33 @@ declare namespace DataSync {
   export type CollectionDurationMinutes = number;
   export interface CreateAgentRequest {
     /**
-     * Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the DataSync console. The redirect URL returned in the response provides you the activation key for your agent in the query string parameter activationKey. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent. For more information, see Activating an Agent in the DataSync User Guide. 
+     * Specifies your DataSync agent's activation key. If you don't have an activation key, see Activate your agent.
      */
     ActivationKey: ActivationKey;
     /**
-     * The name you configured for your agent. This value is a text reference that is used to identify the agent in the console.
+     * Specifies a name for your agent. You can see this name in the DataSync console.
      */
     AgentName?: TagValue;
     /**
-     * The key-value pair that represents the tag that you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @.  
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least one tag for your agent.
      */
     Tags?: InputTagList;
     /**
-     * The ID of the VPC (virtual private cloud) endpoint that the agent has access to. This is the client-side VPC endpoint, also called a PrivateLink. If you don't have a PrivateLink VPC endpoint, see Creating a VPC Endpoint Service Configuration in the Amazon VPC User Guide. VPC endpoint ID looks like this: vpce-01234d5aff67890e1.
+     * Specifies the ID of the VPC endpoint that you want your agent to connect to. For example, a VPC endpoint ID looks like vpce-01234d5aff67890e1.  The VPC endpoint you use must include the DataSync service name (for example, com.amazonaws.us-east-2.datasync). 
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * The Amazon Resource Names (ARNs) of the subnets in which DataSync will create elastic network interfaces for each data transfer task. The agent that runs a task must be private. When you start a task that is associated with an agent created in a VPC, or one that has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four network interfaces for each task in your subnet. For a data transfer to work, the agent must be able to route to all these four network interfaces.
+     * Specifies the ARN of the subnet where you want to run your DataSync task when using a VPC endpoint. This is the subnet where DataSync creates and manages the network interfaces for your transfer.
      */
     SubnetArns?: PLSubnetArnList;
     /**
-     * The ARNs of the security groups used to protect your data transfer task subnets. See SecurityGroupArns.
+     * Specifies the Amazon Resource Name (ARN) of the security group that protects your task's network interfaces when using a virtual private cloud (VPC) endpoint.
      */
     SecurityGroupArns?: PLSecurityGroupArnList;
   }
   export interface CreateAgentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the agent. Use the ListAgents operation to return a list of agents for your account and Amazon Web Services Region.
+     * The ARN of the agent that you just activated. Use the ListAgents operation to return a list of agents in your Amazon Web Services account and Amazon Web Services Region.
      */
     AgentArn?: AgentArn;
   }
@@ -716,7 +716,7 @@ declare namespace DataSync {
      */
     Tags?: InputTagList;
     /**
-     * Specifies the user who has the permissions to access files and folders in the file system. For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see user.
+     * Specifies the user who has the permissions to access files, folders, and metadata in your file system. For information about choosing a user with sufficient permissions, see Required permissions.
      */
     User: SmbUser;
     /**
@@ -860,7 +860,7 @@ declare namespace DataSync {
      */
     Tags?: InputTagList;
     /**
-     * Specifies a certificate to authenticate with an object storage system that uses a private or self-signed certificate authority (CA). You must specify a Base64-encoded .pem file (for example, file:///home/user/.ssh/storage_sys_certificate.pem). The certificate can be up to 32768 bytes (before Base64 encoding). To use this parameter, configure ServerProtocol to HTTPS.
+     * Specifies a file with the certificates that are used to sign the object storage server's certificate (for example, file:///home/user/.ssh/storage_sys_certificate.pem). The file you specify must include the following:   The certificate of the signing certificate authority (CA)   Any intermediate certificates   base64 encoding   A .pem extension   The file can be up to 32768 bytes (before base64 encoding). To use this parameter, configure ServerProtocol to HTTPS.
      */
     ServerCertificate?: ObjectStorageCertificate;
   }
@@ -2135,6 +2135,10 @@ declare namespace DataSync {
      * Indicates whether DataSync Discovery recommendations for the cluster are ready to view, incomplete, or can't be determined. For more information, see Recommendation statuses.
      */
     RecommendationStatus?: RecommendationStatus;
+    /**
+     * The number of LUNs (logical unit numbers) in the cluster.
+     */
+    LunCount?: NonNegativeLong;
   }
   export type NetAppONTAPClusters = NetAppONTAPCluster[];
   export interface NetAppONTAPSVM {
@@ -2190,6 +2194,10 @@ declare namespace DataSync {
      * The amount of storage in the SVM that's being used for snapshots.
      */
     TotalSnapshotCapacityUsed?: NonNegativeLong;
+    /**
+     * The number of LUNs (logical unit numbers) in the SVM.
+     */
+    LunCount?: NonNegativeLong;
   }
   export type NetAppONTAPSVMs = NetAppONTAPSVM[];
   export interface NetAppONTAPVolume {
@@ -2249,6 +2257,10 @@ declare namespace DataSync {
      * Indicates whether DataSync Discovery recommendations for the volume are ready to view, incomplete, or can't be determined. For more information, see Recommendation statuses.
      */
     RecommendationStatus?: RecommendationStatus;
+    /**
+     * The number of LUNs (logical unit numbers) in the volume.
+     */
+    LunCount?: NonNegativeLong;
   }
   export type NetAppONTAPVolumes = NetAppONTAPVolume[];
   export type NetworkInterfaceArn = string;
@@ -2319,7 +2331,7 @@ declare namespace DataSync {
      */
     BytesPerSecond?: BytesPerSecond;
     /**
-     * Specifies whether tasks should be queued before executing the tasks. The default is ENABLED, which means the tasks will be queued. If you use the same agent to run multiple tasks, you can enable the tasks to run in series. For more information, see Queueing task executions.
+     * Specifies whether your transfer tasks should be put into a queue during certain scenarios when running multiple tasks. This is ENABLED by default.
      */
     TaskQueueing?: TaskQueueing;
     /**

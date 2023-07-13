@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1414.0-->
+<!--LATEST=2.1415.0-->
 <!--ENTRYINSERT-->
+
+## 2.1415.0
+* feature: CognitoIdentityServiceProvider: API model updated in Amazon Cognito
+* feature: Connect: Add support for deleting Queues and Routing Profiles.
+* feature: DMS: Enhanced PostgreSQL target endpoint settings for providing Babelfish support.
+* feature: DataSync: Added LunCount to the response object of DescribeStorageSystemResourcesResponse, LunCount represents the number of LUNs on a storage system resource.
+* feature: EC2: This release adds support for the C7gn and Hpc7g instances. C7gn instances are powered by AWS Graviton3 processors and the fifth-generation AWS Nitro Cards. Hpc7g instances are powered by AWS Graviton 3E processors and provide up to 200 Gbps network bandwidth.
+* feature: FSx: Amazon FSx for NetApp ONTAP now supports SnapLock, an ONTAP feature that enables you to protect your files in a volume by transitioning them to a write once, read many (WORM) state.
+* feature: MediaTailor: Adds categories to MediaTailor channel assembly alerts
+* feature: Personalize: This release provides ability to customers to change schema associated with their datasets in Amazon Personalize
+* feature: Proton: This release adds support for deployment history for Proton provisioned resources
+* feature: S3: S3 Inventory now supports Object Access Control List and Object Owner as available object metadata fields in inventory reports.
+* feature: SageMaker: Amazon SageMaker Canvas adds WorkspeceSettings support for CanvasAppSettings
 
 ## 2.1414.0
 * bugfix: node: use undefined node http agent if explicitly passed by user

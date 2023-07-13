@@ -1441,6 +1441,7 @@ declare namespace DMS {
     Tooltip?: String;
   }
   export type DatabaseList = DatabaseResponse[];
+  export type DatabaseMode = "default"|"babelfish"|string;
   export interface DatabaseResponse {
     /**
      * The ID of a database in a Fleet Advisor collector inventory.
@@ -4045,6 +4046,14 @@ declare namespace DMS {
      * When true, DMS migrates LONG values as VARCHAR.
      */
     MapLongVarcharAs?: LongVarcharMappingType;
+    /**
+     * Specifies whether to use default or custom replication behavior for PostgreSQL-compatible endpoints. You can use this setting to specify replication behavior for endpoints that require additional configuration, such as Babelfish endpoints.
+     */
+    DatabaseMode?: DatabaseMode;
+    /**
+     * The Babelfish for Aurora PostgreSQL database name for the endpoint.
+     */
+    BabelfishDatabaseName?: String;
   }
   export interface ProvisionData {
     /**

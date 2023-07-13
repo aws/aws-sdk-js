@@ -8855,7 +8855,8 @@
       "type": "string",
       "max": 6,
       "min": 6,
-      "pattern": "[0-9]+"
+      "pattern": "[0-9]+",
+      "sensitive": true
     },
     "SoftwareTokenMfaConfigType": {
       "type": "structure",
@@ -9555,7 +9556,8 @@
           "documentation": "<p>Encoded device-fingerprint details that your app collected with the Amazon Cognito context data collection library. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-adaptive-authentication.html#user-pool-settings-adaptive-authentication-device-fingerprint\">Adding user device and session data to API requests</a>.</p>"
         }
       },
-      "documentation": "<p>Contextual data, such as the user's device fingerprint, IP address, or location, used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.</p>"
+      "documentation": "<p>Contextual data, such as the user's device fingerprint, IP address, or location, used for evaluating the risk of an unexpected event by Amazon Cognito advanced security.</p>",
+      "sensitive": true
     },
     "UserFilterType": {
       "type": "string",
