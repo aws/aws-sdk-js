@@ -1641,7 +1641,7 @@ declare namespace CodeArtifact {
      */
     repository: RepositoryName;
     /**
-     * A format that specifies the type of the package version with the requested asset file.
+     * A format that specifies the type of the package version with the requested asset file. The only supported value is generic.
      */
     format: PackageFormat;
     /**

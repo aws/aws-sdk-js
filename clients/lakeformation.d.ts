@@ -631,7 +631,7 @@ declare namespace LakeFormation {
      */
     RowFilter?: RowFilter;
     /**
-     * A list of column names.
+     * A list of column names and/or nested column attributes. When specifying nested attributes, use a qualified dot (.) delimited format such as "address"."zip". Nested attributes within this list may not exceed a depth of 5.
      */
     ColumnNames?: ColumnNames;
     /**
@@ -677,6 +677,10 @@ declare namespace LakeFormation {
      */
     DataLakeAdmins?: DataLakePrincipalList;
     /**
+     * A list of Lake Formation principals with only view access to the resources, without the ability to make changes. Supported principals are IAM users or IAM roles.
+     */
+    ReadOnlyAdmins?: DataLakePrincipalList;
+    /**
      * Specifies whether access control on newly created database is managed by Lake Formation permissions or exclusively by IAM permissions. A null value indicates access control by Lake Formation permissions. A value that assigns ALL to IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is referred to as the setting "Use only IAM access control," and is for backward compatibility with the Glue permission model implemented by IAM permissions. The only permitted values are an empty array or an array that contains a single JSON object that grants ALL to IAM_ALLOWED_PRINCIPALS. For more information, see Changing the Default Security Settings for Your Data Lake.
      */
     CreateDatabaseDefaultPermissions?: PrincipalPermissionsList;
@@ -693,9 +697,13 @@ declare namespace LakeFormation {
      */
     TrustedResourceOwners?: TrustedResourceOwners;
     /**
-     * Whether to allow Amazon EMR clusters to access data managed by Lake Formation.  If true, you allow Amazon EMR clusters to access data in Amazon S3 locations that are registered with Lake Formation. If false or null, no Amazon EMR clusters will be able to access data in Amazon S3 locations that are registered with Lake Formation. For more information, see (Optional) Allow Data Filtering on Amazon EMR.
+     * Whether to allow Amazon EMR clusters to access data managed by Lake Formation.  If true, you allow Amazon EMR clusters to access data in Amazon S3 locations that are registered with Lake Formation. If false or null, no Amazon EMR clusters will be able to access data in Amazon S3 locations that are registered with Lake Formation. For more information, see (Optional) Allow external data filtering.
      */
     AllowExternalDataFiltering?: NullableBoolean;
+    /**
+     * Whether to allow a third-party query engine to get data access credentials without session tags when a caller has full data access permissions.
+     */
+    AllowFullTableExternalDataAccess?: NullableBoolean;
     /**
      * A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.&gt;
      */
@@ -1110,7 +1118,7 @@ declare namespace LakeFormation {
     /**
      * A list of supported permission types for the partition. Valid values are COLUMN_PERMISSION and CELL_FILTER_PERMISSION.
      */
-    SupportedPermissionTypes: PermissionTypeList;
+    SupportedPermissionTypes?: PermissionTypeList;
   }
   export interface GetTemporaryGluePartitionCredentialsResponse {
     /**
@@ -1150,7 +1158,7 @@ declare namespace LakeFormation {
     /**
      * A list of supported permission types for the table. Valid values are COLUMN_PERMISSION and CELL_FILTER_PERMISSION.
      */
-    SupportedPermissionTypes: PermissionTypeList;
+    SupportedPermissionTypes?: PermissionTypeList;
   }
   export interface GetTemporaryGlueTableCredentialsResponse {
     /**
@@ -1527,9 +1535,9 @@ declare namespace LakeFormation {
   export type PartitionValueString = string;
   export type PartitionValuesList = PartitionValueString[];
   export type PartitionedTableObjectsList = PartitionObjects[];
-  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|"CREATE_TAG"|"ASSOCIATE"|string;
+  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|"CREATE_LF_TAG"|"ASSOCIATE"|"GRANT_WITH_LF_TAG_EXPRESSION"|string;
   export type PermissionList = Permission[];
-  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|string;
+  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|"NESTED_PERMISSION"|"NESTED_CELL_PERMISSION"|string;
   export type PermissionTypeList = PermissionType[];
   export interface PlanningStatistics {
     /**

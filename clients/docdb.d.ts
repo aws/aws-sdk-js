@@ -2111,9 +2111,13 @@ declare namespace DocDB {
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
-     * The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.
+     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless ApplyImmediately is enabled. To list all of the available engine versions for Amazon DocumentDB use the following command:  aws docdb describe-db-engine-versions --engine docdb --query "DBEngineVersions[].EngineVersion" 
      */
     EngineVersion?: String;
+    /**
+     * A value that indicates whether major version upgrades are allowed. Constraints: You must allow major version upgrades when specifying a value for the EngineVersion parameter that is a different major version than the DB cluster's current version.
+     */
+    AllowMajorVersionUpgrade?: Boolean;
     /**
      * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
      */

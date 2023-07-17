@@ -9978,7 +9978,7 @@ declare namespace Glue {
   export type PathList = Path[];
   export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|string;
   export type PermissionList = Permission[];
-  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|string;
+  export type PermissionType = "COLUMN_PERMISSION"|"CELL_FILTER_PERMISSION"|"NESTED_PERMISSION"|"NESTED_CELL_PERMISSION"|string;
   export type PermissionTypeList = PermissionType[];
   export interface PhysicalConnectionRequirements {
     /**

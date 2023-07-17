@@ -24260,6 +24260,14 @@ declare namespace EC2 {
      * Indicates whether Nitro Enclaves is supported.
      */
     NitroEnclavesSupport?: NitroEnclavesSupport;
+    /**
+     * Indicates whether NitroTPM is supported.
+     */
+    NitroTpmSupport?: NitroTpmSupport;
+    /**
+     * Describes the supported NitroTPM versions for the instance type.
+     */
+    NitroTpmInfo?: NitroTpmInfo;
   }
   export interface InstanceTypeInfoFromInstanceRequirements {
     /**
@@ -29570,6 +29578,15 @@ declare namespace EC2 {
   export type NewDhcpConfigurationList = NewDhcpConfiguration[];
   export type NextToken = string;
   export type NitroEnclavesSupport = "unsupported"|"supported"|string;
+  export interface NitroTpmInfo {
+    /**
+     * Indicates the supported NitroTPM versions.
+     */
+    SupportedVersions?: NitroTpmSupportedVersionsList;
+  }
+  export type NitroTpmSupport = "unsupported"|"supported"|string;
+  export type NitroTpmSupportedVersionType = string;
+  export type NitroTpmSupportedVersionsList = NitroTpmSupportedVersionType[];
   export type OccurrenceDayRequestSet = Integer[];
   export type OccurrenceDaySet = Integer[];
   export type OfferingClassType = "standard"|"convertible"|string;

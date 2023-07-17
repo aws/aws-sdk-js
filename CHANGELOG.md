@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1415.0-->
+<!--LATEST=2.1416.0-->
 <!--ENTRYINSERT-->
+
+## 2.1416.0
+* feature: DocDB: Added major version upgrade option in ModifyDBCluster API
+* feature: EC2: Add Nitro TPM support on DescribeInstanceTypes
+* feature: Glue: Adding new supported permission type flags to get-unfiltered endpoints that callers may pass to indicate support for enforcing Lake Formation fine-grained access control on nested column attributes.
+* feature: IVS: This release provides the flexibility to configure what renditions or thumbnail qualities to record when creating recording configuration.
+* feature: LakeFormation: Adds supports for ReadOnlyAdmins and AllowFullTableExternalDataAccess. Adds NESTED_PERMISSION and NESTED_CELL_PERMISSION to SUPPORTED_PERMISSION_TYPES enum. Adds CREATE_LF_TAG on catalog resource and ALTER, DROP, and GRANT_WITH_LF_TAG_EXPRESSION on LF Tag resource.
 
 ## 2.1415.0
 * feature: CognitoIdentityServiceProvider: API model updated in Amazon Cognito
