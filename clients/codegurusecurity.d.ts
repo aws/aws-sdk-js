@@ -76,11 +76,11 @@ declare class CodeGuruSecurity extends Service {
    */
   listFindingsMetrics(callback?: (err: AWSError, data: CodeGuruSecurity.Types.ListFindingsMetricsResponse) => void): Request<CodeGuruSecurity.Types.ListFindingsMetricsResponse, AWSError>;
   /**
-   * Returns a list of all the scans in an account.
+   * Returns a list of all the standard scans in an account. Does not return express scans.
    */
   listScans(params: CodeGuruSecurity.Types.ListScansRequest, callback?: (err: AWSError, data: CodeGuruSecurity.Types.ListScansResponse) => void): Request<CodeGuruSecurity.Types.ListScansResponse, AWSError>;
   /**
-   * Returns a list of all the scans in an account.
+   * Returns a list of all the standard scans in an account. Does not return express scans.
    */
   listScans(callback?: (err: AWSError, data: CodeGuruSecurity.Types.ListScansResponse) => void): Request<CodeGuruSecurity.Types.ListScansResponse, AWSError>;
   /**
@@ -200,7 +200,7 @@ declare namespace CodeGuruSecurity {
   export type CodeSnippet = CodeLine[];
   export interface CreateScanRequest {
     /**
-     * The type of analysis you want CodeGuru Security to perform in the scan, either Security or All. The Secuirty type only generates findings related to security. The All type generates both security findings and quality findings. Defaults to Security type if missing.
+     * The type of analysis you want CodeGuru Security to perform in the scan, either Security or All. The Security type only generates findings related to security. The All type generates both security findings and quality findings. Defaults to Security type if missing.
      */
     analysisType?: AnalysisType;
     /**

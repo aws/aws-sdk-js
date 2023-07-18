@@ -44,11 +44,11 @@ declare class Snowball extends Service {
    */
   createCluster(callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your Amazon Web Services account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by Amazon Web Services Region. For more information about Region availability, see Amazon Web Services Regional Services.    Snow Family devices and their capacities.    Device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region.        Device type: V3_5C    Capacity: T32   Description: Snowball Edge Compute Optimized without GPU      Device type: V3_5S    Capacity: T240   Description: Snowball Edge Storage Optimized 210TB     
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your Amazon Web Services account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by Amazon Web Services Region. For more information about Region availability, see Amazon Web Services Regional Services.    Snow Family devices and their capacities.    Device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute    This device is replaced with T98.     Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region.        Snow Family device type: RACK_5U_C    Capacity: T13    Description: Snowblade.     Device type: V3_5S    Capacity: T240   Description: Snowball Edge Storage Optimized 210TB    
    */
   createJob(params: Snowball.Types.CreateJobRequest, callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your Amazon Web Services account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by Amazon Web Services Region. For more information about Region availability, see Amazon Web Services Regional Services.    Snow Family devices and their capacities.    Device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region.        Device type: V3_5C    Capacity: T32   Description: Snowball Edge Compute Optimized without GPU      Device type: V3_5S    Capacity: T240   Description: Snowball Edge Storage Optimized 210TB     
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your Amazon Web Services account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by Amazon Web Services Region. For more information about Region availability, see Amazon Web Services Regional Services.    Snow Family devices and their capacities.    Device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute    This device is replaced with T98.     Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region.        Snow Family device type: RACK_5U_C    Capacity: T13    Description: Snowblade.     Device type: V3_5S    Capacity: T240   Description: Snowball Edge Storage Optimized 210TB    
    */
   createJob(callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class Snowball extends Service {
    */
   listClusters(callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
   /**
-   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device. Currently, supported AMIs are based on the Amazon Linux-2, Ubuntu 20.04 LTS - Focal, or Ubuntu 22.04 LTS - Jammy images, available on the Amazon Web Services Marketplace. Ubuntu 16.04 LTS - Xenial (HVM) images are no longer supported in the Market, but still supported for use on devices through Amazon EC2 VM Import/Export and running locally in AMIs.
+   * This action returns a list of the different Amazon EC2-compatible Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device. Currently, supported AMIs are based on the Amazon Linux-2, Ubuntu 20.04 LTS - Focal, or Ubuntu 22.04 LTS - Jammy images, available on the Amazon Web Services Marketplace. Ubuntu 16.04 LTS - Xenial (HVM) images are no longer supported in the Market, but still supported for use on devices through Amazon EC2 VM Import/Export and running locally in AMIs.
    */
   listCompatibleImages(params: Snowball.Types.ListCompatibleImagesRequest, callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
   /**
-   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device. Currently, supported AMIs are based on the Amazon Linux-2, Ubuntu 20.04 LTS - Focal, or Ubuntu 22.04 LTS - Jammy images, available on the Amazon Web Services Marketplace. Ubuntu 16.04 LTS - Xenial (HVM) images are no longer supported in the Market, but still supported for use on devices through Amazon EC2 VM Import/Export and running locally in AMIs.
+   * This action returns a list of the different Amazon EC2-compatible Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device. Currently, supported AMIs are based on the Amazon Linux-2, Ubuntu 20.04 LTS - Focal, or Ubuntu 22.04 LTS - Jammy images, available on the Amazon Web Services Marketplace. Ubuntu 16.04 LTS - Xenial (HVM) images are no longer supported in the Market, but still supported for use on devices through Amazon EC2 VM Import/Export and running locally in AMIs.
    */
   listCompatibleImages(callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
   /**
@@ -179,6 +179,14 @@ declare class Snowball extends Service {
    * Lists all long-term pricing types.
    */
   listLongTermPricing(callback?: (err: AWSError, data: Snowball.Types.ListLongTermPricingResult) => void): Request<Snowball.Types.ListLongTermPricingResult, AWSError>;
+  /**
+   * A list of locations from which the customer can choose to pickup a device.
+   */
+  listPickupLocations(params: Snowball.Types.ListPickupLocationsRequest, callback?: (err: AWSError, data: Snowball.Types.ListPickupLocationsResult) => void): Request<Snowball.Types.ListPickupLocationsResult, AWSError>;
+  /**
+   * A list of locations from which the customer can choose to pickup a device.
+   */
+  listPickupLocations(callback?: (err: AWSError, data: Snowball.Types.ListPickupLocationsResult) => void): Request<Snowball.Types.ListPickupLocationsResult, AWSError>;
   /**
    * Lists all supported versions for Snow on-device services. Returns an array of ServiceVersion object containing the supported versions for a particular service.
    */
@@ -278,9 +286,14 @@ declare namespace Snowball {
      * If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.
      */
     IsRestricted?: Boolean;
+    /**
+     * Differentiates between delivery address and pickup address in the customer account. Provided at job creation.
+     */
+    Type?: AddressType;
   }
   export type AddressId = string;
   export type AddressList = Address[];
+  export type AddressType = "CUST_PICKUP"|"AWS_SHIP"|string;
   export type AmiId = string;
   export type Boolean = boolean;
   export interface CancelClusterRequest {
@@ -547,13 +560,21 @@ declare namespace Snowball {
      */
     DeviceConfiguration?: DeviceConfiguration;
     /**
-     * Allows you to securely operate and manage Snowcone devices remotely from outside of your internal network. When set to INSTALLED_AUTOSTART, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Client to manage the device.
+     * Allows you to securely operate and manage Snowcone devices remotely from outside of your internal network. When set to INSTALLED_AUTOSTART, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Edge client to manage the device. When set to NOT_INSTALLED, remote management will not be available on the device. 
      */
     RemoteManagement?: RemoteManagement;
     /**
      * The ID of the long-term pricing type for the device.
      */
     LongTermPricingId?: LongTermPricingId;
+    /**
+     * The highest impact level of data that will be stored or processed on the device, provided at job creation.
+     */
+    ImpactLevel?: ImpactLevel;
+    /**
+     * Information identifying the person picking up the device.
+     */
+    PickupDetails?: PickupDetails;
   }
   export interface CreateJobResult {
     /**
@@ -573,7 +594,7 @@ declare namespace Snowball {
     /**
      * The type of Snow Family devices to use for the long-term pricing job.
      */
-    SnowballType?: SnowballType;
+    SnowballType: SnowballType;
   }
   export interface CreateLongTermPricingResult {
     /**
@@ -712,6 +733,7 @@ declare namespace Snowball {
      */
     SnowconeDeviceConfiguration?: SnowconeDeviceConfiguration;
   }
+  export type DevicePickupId = string;
   export type DeviceServiceName = "NFS_ON_DEVICE_SERVICE"|"S3_ON_DEVICE_SERVICE"|string;
   export interface EKSOnDeviceServiceConfiguration {
     /**
@@ -734,6 +756,7 @@ declare namespace Snowball {
     SnowballAmiId?: String;
   }
   export type Ec2AmiResourceList = Ec2AmiResource[];
+  export type Email = string;
   export interface EventTriggerDefinition {
     /**
      * The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an Lambda function's event trigger associated with this job.
@@ -796,6 +819,7 @@ declare namespace Snowball {
      */
     GSTIN?: GSTIN;
   }
+  export type ImpactLevel = "IL2"|"IL4"|"IL5"|"IL6"|"IL99"|string;
   export type InitialClusterSize = number;
   export type Integer = number;
   export type JavaBoolean = boolean;
@@ -931,6 +955,18 @@ declare namespace Snowball {
      * Represents metadata and configuration settings for services on an Amazon Web Services Snow Family device.
      */
     OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
+    /**
+     * The highest impact level of data that will be stored or processed on the device, provided at job creation.
+     */
+    ImpactLevel?: ImpactLevel;
+    /**
+     * Information identifying the person picking up the device.
+     */
+    PickupDetails?: PickupDetails;
+    /**
+     * Unique ID associated with a device.
+     */
+    SnowballId?: String;
   }
   export type JobMetadataList = JobMetadata[];
   export interface JobResource {
@@ -1077,6 +1113,26 @@ declare namespace Snowball {
      */
     NextToken?: String;
   }
+  export interface ListPickupLocationsRequest {
+    /**
+     * The maximum number of locations to list per page.
+     */
+    MaxResults?: ListLimit;
+    /**
+     * HTTP requests are stateless. To identify what object comes "next" in the list of ListPickupLocationsRequest objects, you have the option of specifying NextToken as the starting point for your returned list.
+     */
+    NextToken?: String;
+  }
+  export interface ListPickupLocationsResult {
+    /**
+     * Information about the address of pickup locations.
+     */
+    Addresses?: AddressList;
+    /**
+     * HTTP requests are stateless. To identify what object comes "next" in the list of ListPickupLocationsResult objects, you have the option of specifying NextToken as the starting point for your returned list.
+     */
+    NextToken?: String;
+  }
   export interface ListServiceVersionsRequest {
     /**
      * The name of the service for which you're requesting supported versions.
@@ -1185,6 +1241,10 @@ declare namespace Snowball {
      * Any change in job state will trigger a notification for this job.
      */
     NotifyAll?: Boolean;
+    /**
+     * Used to send SNS notifications for the person picking up the device (identified during job creation).
+     */
+    DevicePickupSnsTopicARN?: SnsTopicARN;
   }
   export interface OnDeviceServiceConfiguration {
     /**
@@ -1204,7 +1264,38 @@ declare namespace Snowball {
      */
     S3OnDeviceService?: S3OnDeviceServiceConfiguration;
   }
-  export type RemoteManagement = "INSTALLED_ONLY"|"INSTALLED_AUTOSTART"|string;
+  export type PhoneNumber = string;
+  export interface PickupDetails {
+    /**
+     * The name of the person picking up the device.
+     */
+    Name?: String;
+    /**
+     * The phone number of the person picking up the device.
+     */
+    PhoneNumber?: PhoneNumber;
+    /**
+     * The email address of the person picking up the device.
+     */
+    Email?: Email;
+    /**
+     * The number on the credential identifying the person picking up the device.
+     */
+    IdentificationNumber?: String;
+    /**
+     * Expiration date of the credential identifying the person picking up the device.
+     */
+    IdentificationExpirationDate?: Timestamp;
+    /**
+     * Organization that issued the credential identifying the person picking up the device.
+     */
+    IdentificationIssuingOrg?: String;
+    /**
+     * The unique ID for a device that will be picked up.
+     */
+    DevicePickupId?: DevicePickupId;
+  }
+  export type RemoteManagement = "INSTALLED_ONLY"|"INSTALLED_AUTOSTART"|"NOT_INSTALLED"|string;
   export type ResourceARN = string;
   export type RoleARN = string;
   export interface S3OnDeviceServiceConfiguration {
@@ -1277,8 +1368,8 @@ declare namespace Snowball {
   }
   export type ShippingLabelStatus = "InProgress"|"TimedOut"|"Succeeded"|"Failed"|string;
   export type ShippingOption = "SECOND_DAY"|"NEXT_DAY"|"EXPRESS"|"STANDARD"|string;
-  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"T8"|"T14"|"T32"|"NoPreference"|"T240"|string;
-  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|"SNC1_HDD"|"SNC1_SSD"|"V3_5C"|"V3_5S"|string;
+  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"T8"|"T14"|"T32"|"NoPreference"|"T240"|"T13"|string;
+  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|"SNC1_HDD"|"SNC1_SSD"|"V3_5C"|"V3_5S"|"RACK_5U_C"|string;
   export interface SnowconeDeviceConfiguration {
     /**
      * Configures the wireless connection for the Snowcone device.
@@ -1396,6 +1487,7 @@ declare namespace Snowball {
      * The updated ID for the forwarding address for a job. This field is not supported in most regions.
      */
     ForwardingAddressId?: AddressId;
+    PickupDetails?: PickupDetails;
   }
   export interface UpdateJobResult {
   }

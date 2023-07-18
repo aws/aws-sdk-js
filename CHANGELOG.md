@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1416.0-->
+<!--LATEST=2.1417.0-->
 <!--ENTRYINSERT-->
+
+## 2.1417.0
+* feature: ES: Regex Validation on the ElasticSearch Engine Version attribute
+* feature: LexModelsV2: This release adds support for Lex Developers to view analytics for their bots.
+* feature: M2: Allows UpdateEnvironment to update the environment to 0 host capacity. New GetSignedBluinsightsUrl API
+* feature: Snowball: Adds support for RACK_5U_C. This is the first AWS Snow Family device designed to meet U.S. Military Ruggedization Standards (MIL-STD-810H) with 208 vCPU device in a portable, compact 5U, half-rack width form-factor.
 
 ## 2.1416.0
 * feature: DocDB: Added major version upgrade option in ModifyDBCluster API

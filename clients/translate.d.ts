@@ -255,7 +255,7 @@ declare namespace Translate {
      */
     Content: DocumentContent;
     /**
-     * Describes the format of the document. You can specify one of the following:   text/html - The input data consists of HTML content. Amazon Translate translates only the text in the HTML element.   text/plain - The input data consists of unformatted text. Amazon Translate translates every character in the content.   
+     * Describes the format of the document. You can specify one of the following:    text/html - The input data consists of HTML content. Amazon Translate translates only the text in the HTML element.    text/plain - The input data consists of unformatted text. Amazon Translate translates every character in the content.     application/vnd.openxmlformats-officedocument.wordprocessingml.document - The input data consists of a Word document (.docx).  
      */
     ContentType: ContentType;
   }

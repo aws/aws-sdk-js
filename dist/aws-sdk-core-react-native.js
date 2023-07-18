@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1416.0',
+	  VERSION: '2.1417.0',
 
 	  /**
 	   * @api private
@@ -10073,45 +10073,78 @@ return /******/ (function(modules) { // webpackBootstrap
 	var typedArrays = availableTypedArrays();
 
 	var $slice = callBound('String.prototype.slice');
-	var toStrTags = { __proto__: null };
 	var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
+
+	var $indexOf = callBound('Array.prototype.indexOf', true) || function indexOf(array, value) {
+		for (var i = 0; i < array.length; i += 1) {
+			if (array[i] === value) {
+				return i;
+			}
+		}
+		return -1;
+	};
+	var cache = { __proto__: null };
 	if (hasToStringTag && gOPD && getPrototypeOf) {
 		forEach(typedArrays, function (typedArray) {
-			if (typeof g[typedArray] === 'function') {
-				var arr = new g[typedArray]();
-				if (Symbol.toStringTag in arr) {
-					var proto = getPrototypeOf(arr);
-					var descriptor = gOPD(proto, Symbol.toStringTag);
-					if (!descriptor) {
-						var superProto = getPrototypeOf(proto);
-						descriptor = gOPD(superProto, Symbol.toStringTag);
-					}
-					toStrTags[typedArray] = callBind(descriptor.get);
+			var arr = new g[typedArray]();
+			if (Symbol.toStringTag in arr) {
+				var proto = getPrototypeOf(arr);
+				var descriptor = gOPD(proto, Symbol.toStringTag);
+				if (!descriptor) {
+					var superProto = getPrototypeOf(proto);
+					descriptor = gOPD(superProto, Symbol.toStringTag);
 				}
+				cache['$' + typedArray] = callBind(descriptor.get);
 			}
+		});
+	} else {
+		forEach(typedArrays, function (typedArray) {
+			var arr = new g[typedArray]();
+			cache['$' + typedArray] = callBind(arr.slice);
 		});
 	}
 
 	var tryTypedArrays = function tryAllTypedArrays(value) {
-		var foundName = false;
-		forEach(toStrTags, function (getter, typedArray) {
-			if (!foundName) {
+		var found = false;
+		forEach(cache, function (getter, typedArray) {
+			if (!found) {
 				try {
-					var name = getter(value);
-					if (name === typedArray) {
-						foundName = name;
+					if ('$' + getter(value) === typedArray) {
+						found = $slice(typedArray, 1);
 					}
-				} catch (e) {}
+				} catch (e) { /**/ }
 			}
 		});
-		return foundName;
+		return found;
 	};
 
-	var isTypedArray = __webpack_require__(71);
+	var trySlices = function tryAllSlices(value) {
+		var found = false;
+		forEach(cache, function (getter, name) {
+			if (!found) {
+				try {
+					getter(value);
+					found = $slice(name, 1);
+				} catch (e) { /**/ }
+			}
+		});
+		return found;
+	};
 
 	module.exports = function whichTypedArray(value) {
-		if (!isTypedArray(value)) { return false; }
-		if (!hasToStringTag || !(Symbol.toStringTag in value)) { return $slice($toString(value), 8, -1); }
+		if (!value || typeof value !== 'object') { return false; }
+		if (!hasToStringTag) {
+			var tag = $slice($toString(value), 8, -1);
+			if ($indexOf(typedArrays, tag) > -1) {
+				return tag;
+			}
+			if (tag !== 'Object') {
+				return false;
+			}
+			// node < 0.6 hits here on real Typed Arrays
+			return trySlices(value);
+		}
+		if (!gOPD) { return null; } // unknown engine
 		return tryTypedArrays(value);
 	};
 
@@ -10352,68 +10385,14 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+	'use strict';
 
-	var forEach = __webpack_require__(67);
-	var availableTypedArrays = __webpack_require__(69);
-	var callBound = __webpack_require__(57);
-
-	var $toString = callBound('Object.prototype.toString');
-	var hasToStringTag = __webpack_require__(55)();
-	var gOPD = __webpack_require__(70);
-
-	var g = typeof globalThis === 'undefined' ? global : globalThis;
-	var typedArrays = availableTypedArrays();
-
-	var $indexOf = callBound('Array.prototype.indexOf', true) || function indexOf(array, value) {
-		for (var i = 0; i < array.length; i += 1) {
-			if (array[i] === value) {
-				return i;
-			}
-		}
-		return -1;
-	};
-	var $slice = callBound('String.prototype.slice');
-	var toStrTags = {};
-	var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
-	if (hasToStringTag && gOPD && getPrototypeOf) {
-		forEach(typedArrays, function (typedArray) {
-			var arr = new g[typedArray]();
-			if (Symbol.toStringTag in arr) {
-				var proto = getPrototypeOf(arr);
-				var descriptor = gOPD(proto, Symbol.toStringTag);
-				if (!descriptor) {
-					var superProto = getPrototypeOf(proto);
-					descriptor = gOPD(superProto, Symbol.toStringTag);
-				}
-				toStrTags[typedArray] = descriptor.get;
-			}
-		});
-	}
-
-	var tryTypedArrays = function tryAllTypedArrays(value) {
-		var anyTrue = false;
-		forEach(toStrTags, function (getter, typedArray) {
-			if (!anyTrue) {
-				try {
-					anyTrue = getter.call(value) === typedArray;
-				} catch (e) { /**/ }
-			}
-		});
-		return anyTrue;
-	};
+	var whichTypedArray = __webpack_require__(66);
 
 	module.exports = function isTypedArray(value) {
-		if (!value || typeof value !== 'object') { return false; }
-		if (!hasToStringTag || !(Symbol.toStringTag in value)) {
-			var tag = $slice($toString(value), 8, -1);
-			return $indexOf(typedArrays, tag) > -1;
-		}
-		if (!gOPD) { return false; }
-		return tryTypedArrays(value);
+		return !!whichTypedArray(value);
 	};
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
 /* 72 */

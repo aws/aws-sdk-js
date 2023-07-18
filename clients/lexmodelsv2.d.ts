@@ -476,6 +476,30 @@ declare class LexModelsV2 extends Service {
    */
   listImports(callback?: (err: AWSError, data: LexModelsV2.Types.ListImportsResponse) => void): Request<LexModelsV2.Types.ListImportsResponse, AWSError>;
   /**
+   * Retrieves summary metrics for the intents in your bot. The following fields are required:    metrics – A list of AnalyticsIntentMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. You can specify only one order in a given request.
+   */
+  listIntentMetrics(params: LexModelsV2.Types.ListIntentMetricsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentMetricsResponse) => void): Request<LexModelsV2.Types.ListIntentMetricsResponse, AWSError>;
+  /**
+   * Retrieves summary metrics for the intents in your bot. The following fields are required:    metrics – A list of AnalyticsIntentMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. You can specify only one order in a given request.
+   */
+  listIntentMetrics(callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentMetricsResponse) => void): Request<LexModelsV2.Types.ListIntentMetricsResponse, AWSError>;
+  /**
+   * Retrieves summary statistics for a path of intents that users take over sessions with your bot. The following fields are required:    startDateTime and endDateTime – Define a time range for which you want to retrieve results.    intentPath – Define an order of intents for which you want to retrieve metrics. Separate intents in the path with a forward slash. For example, populate the intentPath field with /BookCar/BookHotel to see details about how many times users invoked the BookCar and BookHotel intents in that order.   Use the optional filters field to filter the results.
+   */
+  listIntentPaths(params: LexModelsV2.Types.ListIntentPathsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentPathsResponse) => void): Request<LexModelsV2.Types.ListIntentPathsResponse, AWSError>;
+  /**
+   * Retrieves summary statistics for a path of intents that users take over sessions with your bot. The following fields are required:    startDateTime and endDateTime – Define a time range for which you want to retrieve results.    intentPath – Define an order of intents for which you want to retrieve metrics. Separate intents in the path with a forward slash. For example, populate the intentPath field with /BookCar/BookHotel to see details about how many times users invoked the BookCar and BookHotel intents in that order.   Use the optional filters field to filter the results.
+   */
+  listIntentPaths(callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentPathsResponse) => void): Request<LexModelsV2.Types.ListIntentPathsResponse, AWSError>;
+  /**
+   * Retrieves summary metrics for the intent stages in your bot. The following fields are required:    metrics – A list of AnalyticsIntentStageMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. You can only specify one order in a given request.
+   */
+  listIntentStageMetrics(params: LexModelsV2.Types.ListIntentStageMetricsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentStageMetricsResponse) => void): Request<LexModelsV2.Types.ListIntentStageMetricsResponse, AWSError>;
+  /**
+   * Retrieves summary metrics for the intent stages in your bot. The following fields are required:    metrics – A list of AnalyticsIntentStageMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. You can only specify one order in a given request.
+   */
+  listIntentStageMetrics(callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentStageMetricsResponse) => void): Request<LexModelsV2.Types.ListIntentStageMetricsResponse, AWSError>;
+  /**
    * Get a list of intents that meet the specified criteria.
    */
   listIntents(params: LexModelsV2.Types.ListIntentsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentsResponse) => void): Request<LexModelsV2.Types.ListIntentsResponse, AWSError>;
@@ -491,6 +515,22 @@ declare class LexModelsV2 extends Service {
    * Gets a list of recommended intents provided by the bot recommendation that you can use in your bot. Intents in the response are ordered by relevance.
    */
   listRecommendedIntents(callback?: (err: AWSError, data: LexModelsV2.Types.ListRecommendedIntentsResponse) => void): Request<LexModelsV2.Types.ListRecommendedIntentsResponse, AWSError>;
+  /**
+   * Retrieves a list of metadata for individual user sessions with your bot. The startDateTime and endDateTime fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results and the sortBy field to specify the values by which to sort the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.  
+   */
+  listSessionAnalyticsData(params: LexModelsV2.Types.ListSessionAnalyticsDataRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListSessionAnalyticsDataResponse) => void): Request<LexModelsV2.Types.ListSessionAnalyticsDataResponse, AWSError>;
+  /**
+   * Retrieves a list of metadata for individual user sessions with your bot. The startDateTime and endDateTime fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results and the sortBy field to specify the values by which to sort the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.  
+   */
+  listSessionAnalyticsData(callback?: (err: AWSError, data: LexModelsV2.Types.ListSessionAnalyticsDataResponse) => void): Request<LexModelsV2.Types.ListSessionAnalyticsDataResponse, AWSError>;
+  /**
+   * Retrieves summary metrics for the user sessions with your bot. The following fields are required:    metrics – A list of AnalyticsSessionMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. Currently, you can specify it in either field, but not in both.
+   */
+  listSessionMetrics(params: LexModelsV2.Types.ListSessionMetricsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListSessionMetricsResponse) => void): Request<LexModelsV2.Types.ListSessionMetricsResponse, AWSError>;
+  /**
+   * Retrieves summary metrics for the user sessions with your bot. The following fields are required:    metrics – A list of AnalyticsSessionMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. Currently, you can specify it in either field, but not in both.
+   */
+  listSessionMetrics(callback?: (err: AWSError, data: LexModelsV2.Types.ListSessionMetricsResponse) => void): Request<LexModelsV2.Types.ListSessionMetricsResponse, AWSError>;
   /**
    * Gets a list of slot types that match the specified criteria.
    */
@@ -547,6 +587,22 @@ declare class LexModelsV2 extends Service {
    * The list of the test sets
    */
   listTestSets(callback?: (err: AWSError, data: LexModelsV2.Types.ListTestSetsResponse) => void): Request<LexModelsV2.Types.ListTestSetsResponse, AWSError>;
+  /**
+   * Retrieves a list of metadata for individual user utterances to your bot. The startDateTime and endDateTime fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results and the sortBy field to specify the values by which to sort the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.  
+   */
+  listUtteranceAnalyticsData(params: LexModelsV2.Types.ListUtteranceAnalyticsDataRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListUtteranceAnalyticsDataResponse) => void): Request<LexModelsV2.Types.ListUtteranceAnalyticsDataResponse, AWSError>;
+  /**
+   * Retrieves a list of metadata for individual user utterances to your bot. The startDateTime and endDateTime fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results and the sortBy field to specify the values by which to sort the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.  
+   */
+  listUtteranceAnalyticsData(callback?: (err: AWSError, data: LexModelsV2.Types.ListUtteranceAnalyticsDataResponse) => void): Request<LexModelsV2.Types.ListUtteranceAnalyticsDataResponse, AWSError>;
+  /**
+   * Retrieves summary metrics for the utterances in your bot. The following fields are required:    metrics – A list of AnalyticsUtteranceMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. Currently, you can specify it in either field, but not in both.
+   */
+  listUtteranceMetrics(params: LexModelsV2.Types.ListUtteranceMetricsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListUtteranceMetricsResponse) => void): Request<LexModelsV2.Types.ListUtteranceMetricsResponse, AWSError>;
+  /**
+   * Retrieves summary metrics for the utterances in your bot. The following fields are required:    metrics – A list of AnalyticsUtteranceMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. Currently, you can specify it in either field, but not in both.
+   */
+  listUtteranceMetrics(callback?: (err: AWSError, data: LexModelsV2.Types.ListUtteranceMetricsResponse) => void): Request<LexModelsV2.Types.ListUtteranceMetricsResponse, AWSError>;
   /**
    * Search for associated transcripts that meet the specified criteria.
    */
@@ -798,6 +854,434 @@ declare namespace LexModelsV2 {
     allowDTMFInput: BoxedBoolean;
   }
   export type AmazonResourceName = string;
+  export type AnalyticsBinByList = AnalyticsBinBySpecification[];
+  export type AnalyticsBinByName = "ConversationStartTime"|"UtteranceTimestamp"|string;
+  export interface AnalyticsBinBySpecification {
+    /**
+     * Specifies the time metric by which to bin the analytics data.
+     */
+    name: AnalyticsBinByName;
+    /**
+     * Specifies the interval of time by which to bin the analytics data.
+     */
+    interval: AnalyticsInterval;
+    /**
+     * Specifies whether to bin the analytics data in ascending or descending order. If this field is left blank, the default order is by the key of the bin in descending order.
+     */
+    order?: AnalyticsSortOrder;
+  }
+  export interface AnalyticsBinKey {
+    /**
+     * The criterion by which to bin the results.
+     */
+    name?: AnalyticsBinByName;
+    /**
+     * The value of the criterion that defines the bin.
+     */
+    value?: AnalyticsBinValue;
+  }
+  export type AnalyticsBinKeys = AnalyticsBinKey[];
+  export type AnalyticsBinValue = number;
+  export type AnalyticsCommonFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|string;
+  export type AnalyticsFilterOperator = "EQ"|"GT"|"LT"|string;
+  export type AnalyticsFilterValue = string;
+  export type AnalyticsFilterValues = AnalyticsFilterValue[];
+  export type AnalyticsGroupByValue = string;
+  export type AnalyticsIntentField = "IntentName"|"IntentEndState"|"IntentLevel"|string;
+  export interface AnalyticsIntentFilter {
+    /**
+     * The category by which to filter the intents. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.    SessionId – The identifier of the session with the bot.    OriginatingRequestId – The identifier of the first request in a session.    IntentName – The name of the intent.    IntentEndState – The final state of the intent.  
+     */
+    name: AnalyticsIntentFilterName;
+    /**
+     * The operation by which to filter the category. The following operations are possible:    CO – Contains    EQ – Equals    GT – Greater than    LT – Less than   The operators that each filter supports are listed below:    BotAlias – EQ.    BotVersion – EQ.    LocaleId – EQ.    Modality – EQ.    Channel – EQ.    SessionId – EQ.    OriginatingRequestId – EQ.    IntentName – EQ, CO.    IntentEndState – EQ, CO.  
+     */
+    operator: AnalyticsFilterOperator;
+    /**
+     * An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is EQ or CO. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the name, operator, and values fields are Modality, EQ, and [Speech, Text], the operation filters for results where the modality was either Speech or Text.
+     */
+    values: AnalyticsFilterValues;
+  }
+  export type AnalyticsIntentFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"IntentName"|"IntentEndState"|string;
+  export type AnalyticsIntentFilters = AnalyticsIntentFilter[];
+  export interface AnalyticsIntentGroupByKey {
+    /**
+     * A category by which the intent analytics were grouped.
+     */
+    name?: AnalyticsIntentField;
+    /**
+     * A member of the category by which the intent analytics were grouped.
+     */
+    value?: AnalyticsGroupByValue;
+  }
+  export type AnalyticsIntentGroupByKeys = AnalyticsIntentGroupByKey[];
+  export type AnalyticsIntentGroupByList = AnalyticsIntentGroupBySpecification[];
+  export interface AnalyticsIntentGroupBySpecification {
+    /**
+     * Specifies whether to group the intent stages by their name or their end state.
+     */
+    name: AnalyticsIntentField;
+  }
+  export interface AnalyticsIntentMetric {
+    /**
+     * The metric for which you want to get intent summary statistics.    Count – The number of times the intent was invoked.    Success – The number of times the intent succeeded.    Failure – The number of times the intent failed.    Switched – The number of times there was a switch to a different intent.    Dropped – The number of times the user dropped the intent.  
+     */
+    name: AnalyticsIntentMetricName;
+    /**
+     * The summary statistic to calculate.    Sum – The total count for the category you provide in name.    Average – The total count divided by the number of intents in the category you provide in name.    Max – The highest count in the category you provide in name.  
+     */
+    statistic: AnalyticsMetricStatistic;
+    /**
+     * Specifies whether to sort the results in ascending or descending order.
+     */
+    order?: AnalyticsSortOrder;
+  }
+  export type AnalyticsIntentMetricName = "Count"|"Success"|"Failure"|"Switched"|"Dropped"|string;
+  export interface AnalyticsIntentMetricResult {
+    /**
+     * The metric that you requested. See Key definitions for more details about these metrics.    Count – The number of times the intent was invoked.    Success – The number of times the intent succeeded.    Failure – The number of times the intent failed.    Switched – The number of times there was a switch to a different intent.    Dropped – The number of times the user dropped the intent.  
+     */
+    name?: AnalyticsIntentMetricName;
+    /**
+     * The statistic that you requested to calculate.    Sum – The total count for the category you provide in name.    Average – The total count divided by the number of intents in the category you provide in name.    Max – The highest count in the category you provide in name.  
+     */
+    statistic?: AnalyticsMetricStatistic;
+    /**
+     * The value of the summary statistic for the metric that you requested.
+     */
+    value?: AnalyticsMetricValue;
+  }
+  export type AnalyticsIntentMetricResults = AnalyticsIntentMetricResult[];
+  export type AnalyticsIntentMetrics = AnalyticsIntentMetric[];
+  export type AnalyticsIntentNodeSummaries = AnalyticsIntentNodeSummary[];
+  export interface AnalyticsIntentNodeSummary {
+    /**
+     * The name of the intent at the end of the requested path.
+     */
+    intentName?: Name;
+    /**
+     * The path.
+     */
+    intentPath?: AnalyticsPath;
+    /**
+     * The total number of sessions that follow the given path to the given intent.
+     */
+    intentCount?: AnalyticsNodeCount;
+    /**
+     * The number of intents up to and including the requested path.
+     */
+    intentLevel?: AnalyticsNodeLevel;
+    /**
+     * Specifies whether the node is the end of a path (Exit) or not (Inner).
+     */
+    nodeType?: AnalyticsNodeType;
+  }
+  export interface AnalyticsIntentResult {
+    /**
+     * A list of objects containing the criteria you requested for binning results and the values of the bins.
+     */
+    binKeys?: AnalyticsBinKeys;
+    /**
+     * A list of objects containing the criteria you requested for grouping results and the values of the groups.
+     */
+    groupByKeys?: AnalyticsIntentGroupByKeys;
+    /**
+     * A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.
+     */
+    metricsResults?: AnalyticsIntentMetricResults;
+  }
+  export type AnalyticsIntentResults = AnalyticsIntentResult[];
+  export type AnalyticsIntentStageField = "IntentStageName"|"SwitchedToIntent"|string;
+  export interface AnalyticsIntentStageFilter {
+    /**
+     * The category by which to filter the intent stages. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.    SessionId – The identifier of the session with the bot.    OriginatingRequestId – The identifier of the first request in a session.    IntentName – The name of the intent.    IntentStageName – The stage in the intent.  
+     */
+    name: AnalyticsIntentStageFilterName;
+    /**
+     * The operation by which to filter the category. The following operations are possible:    CO – Contains    EQ – Equals    GT – Greater than    LT – Less than   The operators that each filter supports are listed below:    BotAlias – EQ.    BotVersion – EQ.    LocaleId – EQ.    Modality – EQ.    Channel – EQ.    SessionId – EQ.    OriginatingRequestId – EQ.    IntentName – EQ, CO.    IntentStageName – EQ, CO.  
+     */
+    operator: AnalyticsFilterOperator;
+    /**
+     * An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is EQ or CO. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the name, operator, and values fields are Modality, EQ, and [Speech, Text], the operation filters for results where the modality was either Speech or Text.
+     */
+    values: AnalyticsFilterValues;
+  }
+  export type AnalyticsIntentStageFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"IntentName"|"IntentStageName"|string;
+  export type AnalyticsIntentStageFilters = AnalyticsIntentStageFilter[];
+  export interface AnalyticsIntentStageGroupByKey {
+    /**
+     * A category by which the intent stage analytics were grouped.
+     */
+    name?: AnalyticsIntentStageField;
+    /**
+     * A member of the category by which the intent stage analytics were grouped.
+     */
+    value?: AnalyticsGroupByValue;
+  }
+  export type AnalyticsIntentStageGroupByKeys = AnalyticsIntentStageGroupByKey[];
+  export type AnalyticsIntentStageGroupByList = AnalyticsIntentStageGroupBySpecification[];
+  export interface AnalyticsIntentStageGroupBySpecification {
+    /**
+     * Specifies whether to group the intent stages by their name or the intent to which the session was switched.
+     */
+    name: AnalyticsIntentStageField;
+  }
+  export interface AnalyticsIntentStageMetric {
+    /**
+     * The metric for which you want to get intent stage summary statistics. See Key definitions for more details about these metrics.    Count – The number of times the intent stage occurred.    Success – The number of times the intent stage succeeded.    Failure – The number of times the intent stage failed.    Dropped – The number of times the user dropped the intent stage.    Retry – The number of times the bot tried to elicit a response from the user at this stage.  
+     */
+    name: AnalyticsIntentStageMetricName;
+    /**
+     * The summary statistic to calculate.    Sum – The total count for the category you provide in name.    Average – The total count divided by the number of intent stages in the category you provide in name.    Max – The highest count in the category you provide in name.  
+     */
+    statistic: AnalyticsMetricStatistic;
+    /**
+     * Specifies whether to sort the results in ascending or descending order of the summary statistic (value in the response).
+     */
+    order?: AnalyticsSortOrder;
+  }
+  export type AnalyticsIntentStageMetricName = "Count"|"Success"|"Failed"|"Dropped"|"Retry"|string;
+  export interface AnalyticsIntentStageMetricResult {
+    /**
+     * The metric that you requested.    Count – The number of times the intent stage occurred.    Success – The number of times the intent stage succeeded.    Failure – The number of times the intent stage failed.    Dropped – The number of times the user dropped the intent stage.    Retry – The number of times the bot tried to elicit a response from the user at this stage.  
+     */
+    name?: AnalyticsIntentStageMetricName;
+    /**
+     * The summary statistic that you requested to calculate.    Sum – The total count for the category you provide in name.    Average – The total count divided by the number of intent stages in the category you provide in name.    Max – The highest count in the category you provide in name.  
+     */
+    statistic?: AnalyticsMetricStatistic;
+    /**
+     * The value of the summary statistic for the metric that you requested.
+     */
+    value?: AnalyticsMetricValue;
+  }
+  export type AnalyticsIntentStageMetricResults = AnalyticsIntentStageMetricResult[];
+  export type AnalyticsIntentStageMetrics = AnalyticsIntentStageMetric[];
+  export interface AnalyticsIntentStageResult {
+    /**
+     * A list of objects containing the criteria you requested for binning results and the values of the bins.
+     */
+    binKeys?: AnalyticsBinKeys;
+    /**
+     * A list of objects containing the criteria you requested for grouping results and the values of the bins.
+     */
+    groupByKeys?: AnalyticsIntentStageGroupByKeys;
+    /**
+     * A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.
+     */
+    metricsResults?: AnalyticsIntentStageMetricResults;
+  }
+  export type AnalyticsIntentStageResults = AnalyticsIntentStageResult[];
+  export type AnalyticsInterval = "OneHour"|"OneDay"|string;
+  export type AnalyticsLongValue = number;
+  export type AnalyticsMetricStatistic = "Sum"|"Avg"|"Max"|string;
+  export type AnalyticsMetricValue = number;
+  export type AnalyticsModality = "Speech"|"Text"|"DTMF"|"MultiMode"|string;
+  export type AnalyticsNodeCount = number;
+  export type AnalyticsNodeLevel = number;
+  export type AnalyticsNodeType = "Inner"|"Exit"|string;
+  export type AnalyticsOriginatingRequestId = string;
+  export type AnalyticsPath = string;
+  export interface AnalyticsPathFilter {
+    /**
+     * The category by which to filter the intent paths. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.  
+     */
+    name: AnalyticsCommonFilterName;
+    /**
+     * The operation by which to filter the category. The following operations are possible:    CO – Contains    EQ – Equals    GT – Greater than    LT – Less than   The operators that each filter supports are listed below:    BotAlias – EQ.    BotVersion – EQ.    LocaleId – EQ.    Modality – EQ.    Channel – EQ.  
+     */
+    operator: AnalyticsFilterOperator;
+    /**
+     * An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is EQ or CO. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the name, operator, and values fields are Modality, EQ, and [Speech, Text], the operation filters for results where the modality was either Speech or Text.
+     */
+    values: AnalyticsFilterValues;
+  }
+  export type AnalyticsPathFilters = AnalyticsPathFilter[];
+  export type AnalyticsSessionField = "ConversationEndState"|"LocaleId"|string;
+  export interface AnalyticsSessionFilter {
+    /**
+     * The category by which to filter the sessions. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.    Duration – The duration of the session.    conversationEndState – The final state of the session.    SessionId – The identifier of the session with the bot.    OriginatingRequestId – The identifier of the first request in a session.    IntentPath – The order of intents taken in a session.  
+     */
+    name: AnalyticsSessionFilterName;
+    /**
+     * The operation by which to filter the category. The following operations are possible:    CO – Contains    EQ – Equals    GT – Greater than    LT – Less than   The operators that each filter supports are listed below:    BotAlias – EQ.    BotVersion – EQ.    LocaleId – EQ.    Modality – EQ.    Channel – EQ.    Duration – EQ, GT, LT.    conversationEndState – EQ, CO.    SessionId – EQ.    OriginatingRequestId – EQ.    IntentPath – EQ.  
+     */
+    operator: AnalyticsFilterOperator;
+    /**
+     * An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is EQ or CO. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the name, operator, and values fields are Modality, EQ, and [Speech, Text], the operation filters for results where the modality was either Speech or Text.
+     */
+    values: AnalyticsFilterValues;
+  }
+  export type AnalyticsSessionFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"Duration"|"ConversationEndState"|"SessionId"|"OriginatingRequestId"|"IntentPath"|string;
+  export type AnalyticsSessionFilters = AnalyticsSessionFilter[];
+  export interface AnalyticsSessionGroupByKey {
+    /**
+     * The category by which the session analytics were grouped.
+     */
+    name?: AnalyticsSessionField;
+    /**
+     * A member of the category by which the session analytics were grouped.
+     */
+    value?: AnalyticsGroupByValue;
+  }
+  export type AnalyticsSessionGroupByKeys = AnalyticsSessionGroupByKey[];
+  export type AnalyticsSessionGroupByList = AnalyticsSessionGroupBySpecification[];
+  export interface AnalyticsSessionGroupBySpecification {
+    /**
+     * Specifies whether to group the session by their end state or their locale.
+     */
+    name: AnalyticsSessionField;
+  }
+  export type AnalyticsSessionId = string;
+  export interface AnalyticsSessionMetric {
+    /**
+     * The metric for which you want to get session summary statistics.    Count – The number of sessions.    Success – The number of sessions that succeeded.    Failure – The number of sessions that failed.    Dropped – The number of sessions that the user dropped.    Duration – The duration of sessions.    TurnsPerSession – The number of turns in the sessions.    Concurrency – The number of sessions occurring in the same period of time.  
+     */
+    name: AnalyticsSessionMetricName;
+    /**
+     * The summary statistic to calculate.    Sum – The total count for the category you provide in name.    Average – The total count divided by the number of sessions in the category you provide in name.    Max – The highest count in the category you provide in name.  
+     */
+    statistic: AnalyticsMetricStatistic;
+    /**
+     * Specifies whether to sort the results in ascending or descending order.
+     */
+    order?: AnalyticsSortOrder;
+  }
+  export type AnalyticsSessionMetricName = "Count"|"Success"|"Failure"|"Dropped"|"Duration"|"TurnsPerConversation"|"Concurrency"|string;
+  export interface AnalyticsSessionMetricResult {
+    /**
+     * The metric that you requested.    Count – The number of sessions.    Success – The number of sessions that succeeded.    Failure – The number of sessions that failed.    Dropped – The number of sessions that the user dropped.    Duration – The duration of sessions.    TurnPersession – The number of turns in the sessions.    Concurrency – The number of sessions occurring in the same period of time.  
+     */
+    name?: AnalyticsSessionMetricName;
+    /**
+     * The summary statistic that you requested to calculate.    Sum – The total count for the category you provide in name.    Average – The total count divided by the number of sessions in the category you provide in name.    Max – The highest count in the category you provide in name.  
+     */
+    statistic?: AnalyticsMetricStatistic;
+    /**
+     * The value of the summary statistic for the metric that you requested.
+     */
+    value?: AnalyticsMetricValue;
+  }
+  export type AnalyticsSessionMetricResults = AnalyticsSessionMetricResult[];
+  export type AnalyticsSessionMetrics = AnalyticsSessionMetric[];
+  export interface AnalyticsSessionResult {
+    /**
+     * A list of objects containing the criteria you requested for binning results and the values of the bins.
+     */
+    binKeys?: AnalyticsBinKeys;
+    /**
+     * A list of objects containing the criteria you requested for grouping results and the values of the bins.
+     */
+    groupByKeys?: AnalyticsSessionGroupByKeys;
+    /**
+     * A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.
+     */
+    metricsResults?: AnalyticsSessionMetricResults;
+  }
+  export type AnalyticsSessionResults = AnalyticsSessionResult[];
+  export type AnalyticsSessionSortByName = "ConversationStartTime"|"NumberOfTurns"|"Duration"|string;
+  export type AnalyticsSortOrder = "Ascending"|"Descending"|string;
+  export interface AnalyticsUtteranceAttribute {
+    /**
+     * An attribute to return. The only available attribute is the intent that the bot mapped the utterance to.
+     */
+    name: AnalyticsUtteranceAttributeName;
+  }
+  export type AnalyticsUtteranceAttributeName = "LastUsedIntent"|string;
+  export interface AnalyticsUtteranceAttributeResult {
+    /**
+     * The intent that the bot mapped the utterance to.
+     */
+    lastUsedIntent?: Name;
+  }
+  export type AnalyticsUtteranceAttributeResults = AnalyticsUtteranceAttributeResult[];
+  export type AnalyticsUtteranceAttributes = AnalyticsUtteranceAttribute[];
+  export type AnalyticsUtteranceField = "UtteranceText"|"UtteranceState"|string;
+  export interface AnalyticsUtteranceFilter {
+    /**
+     * The category by which to filter the utterances. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.    SessionId – The identifier of the session with the bot.    OriginatingRequestId – The identifier of the first request in a session.    UtteranceState – The state of the utterance.    UtteranceText – The text in the utterance.  
+     */
+    name: AnalyticsUtteranceFilterName;
+    /**
+     * The operation by which to filter the category. The following operations are possible:    CO – Contains    EQ – Equals    GT – Greater than    LT – Less than   The operators that each filter supports are listed below:    BotAlias – EQ.    BotVersion – EQ.    LocaleId – EQ.    Modality – EQ.    Channel – EQ.    SessionId – EQ.    OriginatingRequestId – EQ.    UtteranceState – EQ.    UtteranceText – EQ, CO.  
+     */
+    operator: AnalyticsFilterOperator;
+    /**
+     * An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is EQ or CO. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the name, operator, and values fields are Modality, EQ, and [Speech, Text], the operation filters for results where the modality was either Speech or Text.
+     */
+    values: AnalyticsFilterValues;
+  }
+  export type AnalyticsUtteranceFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"UtteranceState"|"UtteranceText"|string;
+  export type AnalyticsUtteranceFilters = AnalyticsUtteranceFilter[];
+  export interface AnalyticsUtteranceGroupByKey {
+    /**
+     * The category by which the utterance analytics were grouped.
+     */
+    name?: AnalyticsUtteranceField;
+    /**
+     * A member of the category by which the utterance analytics were grouped.
+     */
+    value?: AnalyticsGroupByValue;
+  }
+  export type AnalyticsUtteranceGroupByKeys = AnalyticsUtteranceGroupByKey[];
+  export type AnalyticsUtteranceGroupByList = AnalyticsUtteranceGroupBySpecification[];
+  export interface AnalyticsUtteranceGroupBySpecification {
+    /**
+     * Specifies whether to group the utterances by their text or their state.
+     */
+    name: AnalyticsUtteranceField;
+  }
+  export interface AnalyticsUtteranceMetric {
+    /**
+     * The metric for which you want to get utterance summary statistics.    Count – The number of utterances.    Missed – The number of utterances that Amazon Lex failed to recognize.    Detected – The number of utterances that Amazon Lex managed to detect.    UtteranceTimestamp – The date and time of the utterance.  
+     */
+    name: AnalyticsUtteranceMetricName;
+    /**
+     * The summary statistic to calculate.    Sum – The total count for the category you provide in name.    Average – The total count divided by the number of utterances in the category you provide in name.    Max – The highest count in the category you provide in name.  
+     */
+    statistic: AnalyticsMetricStatistic;
+    /**
+     * Specifies whether to sort the results in ascending or descending order.
+     */
+    order?: AnalyticsSortOrder;
+  }
+  export type AnalyticsUtteranceMetricName = "Count"|"Missed"|"Detected"|"UtteranceTimestamp"|string;
+  export interface AnalyticsUtteranceMetricResult {
+    /**
+     * The metric that you requested.    Count – The number of utterances.    Missed – The number of utterances that Amazon Lex failed to recognize.    Detected – The number of utterances that Amazon Lex managed to detect.    UtteranceTimeStamp – The date and time of the utterance.  
+     */
+    name?: AnalyticsUtteranceMetricName;
+    /**
+     * The summary statistic that you requested to calculate.    Sum – The total count for the category you provide in name.    Average – The total count divided by the number of utterances in the category you provide in name.    Max – The highest count in the category you provide in name.  
+     */
+    statistic?: AnalyticsMetricStatistic;
+    /**
+     * The value of the summary statistic for the metric that you requested.
+     */
+    value?: AnalyticsMetricValue;
+  }
+  export type AnalyticsUtteranceMetricResults = AnalyticsUtteranceMetricResult[];
+  export type AnalyticsUtteranceMetrics = AnalyticsUtteranceMetric[];
+  export interface AnalyticsUtteranceResult {
+    /**
+     * A list of objects containing the criteria you requested for binning results and the values of the bins.
+     */
+    binKeys?: AnalyticsBinKeys;
+    /**
+     * A list of objects containing the criteria you requested for grouping results and the values of the bins.
+     */
+    groupByKeys?: AnalyticsUtteranceGroupByKeys;
+    /**
+     * A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.
+     */
+    metricsResults?: AnalyticsUtteranceMetricResults;
+    /**
+     * A list of objects containing information about the last used intent at the time of an utterance.
+     */
+    attributeResults?: AnalyticsUtteranceAttributeResults;
+  }
+  export type AnalyticsUtteranceResults = AnalyticsUtteranceResult[];
+  export type AnalyticsUtteranceSortByName = "UtteranceTimestamp"|string;
   export interface AssociatedTranscript {
     /**
      * The content of the transcript that meets the search filter criteria. For the JSON format of the transcript, see Output transcript format.
@@ -1054,6 +1538,7 @@ declare namespace LexModelsV2 {
      */
     localeId: LocaleId;
   }
+  export type BotChannelType = "Facebook"|"Slack"|"TwilioSms"|string;
   export interface BotExportSpecification {
     /**
      * The identifier of the bot assigned by Amazon Lex.
@@ -1521,6 +2006,7 @@ declare namespace LexModelsV2 {
   export type ConfidenceThreshold = number;
   export type ContextTimeToLiveInSeconds = number;
   export type ContextTurnsToLive = number;
+  export type ConversationEndState = "Success"|"Failure"|"Dropped"|string;
   export interface ConversationLevelIntentClassificationResultItem {
     /**
      * The intent name used in the evaluation of intent level success or failure.
@@ -4253,6 +4739,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
+  export type IntentState = "Failed"|"Fulfilled"|"InProgress"|"ReadyForFulfillment"|"Waiting"|"FulfillmentInProgress"|string;
   export interface IntentStatistics {
     /**
      * The number of recommended intents associated with the bot recommendation.
@@ -4290,6 +4777,13 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type IntentSummaryList = IntentSummary[];
+  export interface InvokedIntentSample {
+    /**
+     * The name of an intent that was invoked.
+     */
+    intentName?: Name;
+  }
+  export type InvokedIntentSamples = InvokedIntentSample[];
   export type ItemId = string;
   export interface KendraConfiguration {
     /**
@@ -4792,6 +5286,138 @@ declare namespace LexModelsV2 {
      */
     localeId?: LocaleId;
   }
+  export interface ListIntentMetricsRequest {
+    /**
+     * The identifier for the bot for which you want to retrieve intent metrics.
+     */
+    botId: Id;
+    /**
+     * The timestamp that marks the beginning of the range of time for which you want to see intent metrics.
+     */
+    startDateTime: Timestamp;
+    /**
+     * The date and time that marks the end of the range of time for which you want to see intent metrics.
+     */
+    endDateTime: Timestamp;
+    /**
+     * A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the order by which to organize the results.
+     */
+    metrics: AnalyticsIntentMetrics;
+    /**
+     * A list of objects, each of which contains specifications for organizing the results by time.
+     */
+    binBy?: AnalyticsBinByList;
+    /**
+     * A list of objects, each of which specifies how to group the results. You can group by the following criteria:    IntentName – The name of the intent.    IntentEndState – The final state of the intent. The possible end states are detailed in Key definitions in the user guide.  
+     */
+    groupBy?: AnalyticsIntentGroupByList;
+    /**
+     * A list of objects, each of which describes a condition by which you want to filter the results.
+     */
+    filters?: AnalyticsIntentFilters;
+    /**
+     * The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListIntentMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListIntentMetricsResponse {
+    /**
+     * The identifier for the bot for which you retrieved intent metrics.
+     */
+    botId?: Id;
+    /**
+     * The results for the intent metrics.
+     */
+    results?: AnalyticsIntentResults;
+    /**
+     * If the response from the ListIntentMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListIntentPathsRequest {
+    /**
+     * The identifier for the bot for which you want to retrieve intent path metrics.
+     */
+    botId: Id;
+    /**
+     * The date and time that marks the beginning of the range of time for which you want to see intent path metrics.
+     */
+    startDateTime: Timestamp;
+    /**
+     * The date and time that marks the end of the range of time for which you want to see intent path metrics.
+     */
+    endDateTime: Timestamp;
+    /**
+     * The intent path for which you want to retrieve metrics. Use a forward slash to separate intents in the path. For example:   /BookCar   /BookCar/BookHotel   /BookHotel/BookCar  
+     */
+    intentPath: AnalyticsPath;
+    /**
+     * A list of objects, each describes a condition by which you want to filter the results.
+     */
+    filters?: AnalyticsPathFilters;
+  }
+  export interface ListIntentPathsResponse {
+    /**
+     * A list of objects, each of which contains information about a node in the intent path for which you requested metrics.
+     */
+    nodeSummaries?: AnalyticsIntentNodeSummaries;
+  }
+  export interface ListIntentStageMetricsRequest {
+    /**
+     * The identifier for the bot for which you want to retrieve intent stage metrics.
+     */
+    botId: Id;
+    /**
+     * The date and time that marks the beginning of the range of time for which you want to see intent stage metrics.
+     */
+    startDateTime: Timestamp;
+    /**
+     * The date and time that marks the end of the range of time for which you want to see intent stage metrics.
+     */
+    endDateTime: Timestamp;
+    /**
+     * A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.
+     */
+    metrics: AnalyticsIntentStageMetrics;
+    /**
+     * A list of objects, each of which contains specifications for organizing the results by time.
+     */
+    binBy?: AnalyticsBinByList;
+    /**
+     * A list of objects, each of which specifies how to group the results. You can group by the following criteria:    IntentStageName – The name of the intent stage.    SwitchedToIntent – The intent to which the conversation was switched (if any).  
+     */
+    groupBy?: AnalyticsIntentStageGroupByList;
+    /**
+     * A list of objects, each of which describes a condition by which you want to filter the results.
+     */
+    filters?: AnalyticsIntentStageFilters;
+    /**
+     * The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListIntentStageMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListIntentStageMetricsResponse {
+    /**
+     * The identifier for the bot for which you retrieved intent stage metrics.
+     */
+    botId?: Id;
+    /**
+     * The results for the intent stage metrics.
+     */
+    results?: AnalyticsIntentStageResults;
+    /**
+     * If the response from the ListIntentStageMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListIntentsRequest {
     /**
      * The unique identifier of the bot that contains the intent.
@@ -4893,6 +5519,102 @@ declare namespace LexModelsV2 {
     summaryList?: RecommendedIntentSummaryList;
     /**
      * A token that indicates whether there are more results to return in a response to the ListRecommendedIntents operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListRecommendedIntents operation request to get the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSessionAnalyticsDataRequest {
+    /**
+     * The identifier for the bot for which you want to retrieve session analytics.
+     */
+    botId: Id;
+    /**
+     * The date and time that marks the beginning of the range of time for which you want to see session analytics.
+     */
+    startDateTime: Timestamp;
+    /**
+     * The date and time that marks the end of the range of time for which you want to see session analytics.
+     */
+    endDateTime: Timestamp;
+    /**
+     * An object specifying the measure and method by which to sort the session analytics data.
+     */
+    sortBy?: SessionDataSortBy;
+    /**
+     * A list of objects, each of which describes a condition by which you want to filter the results.
+     */
+    filters?: AnalyticsSessionFilters;
+    /**
+     * The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListSessionAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListSessionAnalyticsData request to return the next page of results. For a complete set of results, call the ListSessionAnalyticsData operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSessionAnalyticsDataResponse {
+    /**
+     * The unique identifier of the bot that the sessions belong to.
+     */
+    botId?: Id;
+    /**
+     * If the response from the ListSessionAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListSessionAnalyticsData request to return the next page of results. For a complete set of results, call the ListSessionAnalyticsData operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+    /**
+     * A list of objects, each of which contains information about a session with the bot.
+     */
+    sessions?: SessionSpecifications;
+  }
+  export interface ListSessionMetricsRequest {
+    /**
+     * The identifier for the bot for which you want to retrieve session metrics.
+     */
+    botId: Id;
+    /**
+     * The date and time that marks the beginning of the range of time for which you want to see session metrics.
+     */
+    startDateTime: Timestamp;
+    /**
+     * The date and time that marks the end of the range of time for which you want to see session metrics.
+     */
+    endDateTime: Timestamp;
+    /**
+     * A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.
+     */
+    metrics: AnalyticsSessionMetrics;
+    /**
+     * A list of objects, each of which contains specifications for organizing the results by time.
+     */
+    binBy?: AnalyticsBinByList;
+    /**
+     * A list of objects, each of which specifies how to group the results. You can group by the following criteria:    ConversationEndState – The final state of the conversation. The possible end states are detailed in Key definitions in the user guide.    LocaleId – The unique identifier of the bot locale.  
+     */
+    groupBy?: AnalyticsSessionGroupByList;
+    /**
+     * A list of objects, each of which describes a condition by which you want to filter the results.
+     */
+    filters?: AnalyticsSessionFilters;
+    /**
+     * The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListSessionMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSessionMetricsResponse {
+    /**
+     * The identifier for the bot for which you retrieved session metrics.
+     */
+    botId?: Id;
+    /**
+     * The results for the session metrics.
+     */
+    results?: AnalyticsSessionResults;
+    /**
+     * If the response from the ListSessionMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.
      */
     nextToken?: NextToken;
   }
@@ -5117,6 +5839,106 @@ declare namespace LexModelsV2 {
     testSets?: TestSetSummaryList;
     /**
      * A token that indicates whether there are more results to return in a response to the ListTestSets operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListTestSets operation request to get the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListUtteranceAnalyticsDataRequest {
+    /**
+     * The identifier for the bot for which you want to retrieve utterance analytics.
+     */
+    botId: Id;
+    /**
+     * The date and time that marks the beginning of the range of time for which you want to see utterance analytics.
+     */
+    startDateTime: Timestamp;
+    /**
+     * The date and time that marks the end of the range of time for which you want to see utterance analytics.
+     */
+    endDateTime: Timestamp;
+    /**
+     * An object specifying the measure and method by which to sort the utterance analytics data.
+     */
+    sortBy?: UtteranceDataSortBy;
+    /**
+     * A list of objects, each of which describes a condition by which you want to filter the results.
+     */
+    filters?: AnalyticsUtteranceFilters;
+    /**
+     * The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListUtteranceAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListUtteranceAnalyticsData request to return the next page of results. For a complete set of results, call the ListUtteranceAnalyticsData operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListUtteranceAnalyticsDataResponse {
+    /**
+     * The unique identifier of the bot that the utterances belong to.
+     */
+    botId?: Id;
+    /**
+     * If the response from the ListUtteranceAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListUtteranceAnalyticsData request to return the next page of results. For a complete set of results, call the ListUtteranceAnalyticsData operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+    /**
+     * A list of objects, each of which contains information about an utterance in a user session with your bot.
+     */
+    utterances?: UtteranceSpecifications;
+  }
+  export interface ListUtteranceMetricsRequest {
+    /**
+     * The identifier for the bot for which you want to retrieve utterance metrics.
+     */
+    botId: Id;
+    /**
+     * The date and time that marks the beginning of the range of time for which you want to see utterance metrics.
+     */
+    startDateTime: Timestamp;
+    /**
+     * The date and time that marks the end of the range of time for which you want to see utterance metrics.
+     */
+    endDateTime: Timestamp;
+    /**
+     * A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.
+     */
+    metrics: AnalyticsUtteranceMetrics;
+    /**
+     * A list of objects, each of which contains specifications for organizing the results by time.
+     */
+    binBy?: AnalyticsBinByList;
+    /**
+     * A list of objects, each of which specifies how to group the results. You can group by the following criteria:    UtteranceText – The transcription of the utterance.    UtteranceState – The state of the utterance. The possible states are detailed in Key definitions in the user guide.  
+     */
+    groupBy?: AnalyticsUtteranceGroupByList;
+    /**
+     * A list containing attributes related to the utterance that you want the response to return. The following attributes are possible:    LastUsedIntent – The last used intent at the time of the utterance.  
+     */
+    attributes?: AnalyticsUtteranceAttributes;
+    /**
+     * A list of objects, each of which describes a condition by which you want to filter the results.
+     */
+    filters?: AnalyticsUtteranceFilters;
+    /**
+     * The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListUtteranceMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListUtteranceMetricsResponse {
+    /**
+     * The identifier for the bot for which you retrieved utterance metrics.
+     */
+    botId?: Id;
+    /**
+     * The results for the utterance metrics.
+     */
+    results?: AnalyticsUtteranceResults;
+    /**
+     * If the response from the ListUtteranceMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.
      */
     nextToken?: NextToken;
   }
@@ -5574,7 +6396,72 @@ declare namespace LexModelsV2 {
     detectSentiment: Boolean;
   }
   export type ServicePrincipal = string;
+  export interface SessionDataSortBy {
+    /**
+     * The measure by which to sort the session analytics data.    conversationStartTime – The date and time when the conversation began. A conversation is defined as a unique combination of a sessionId and an originatingRequestId.    numberOfTurns – The number of turns that the session took.    conversationDurationSeconds – The duration of the conversation in seconds.  
+     */
+    name: AnalyticsSessionSortByName;
+    /**
+     * Specifies whether to sort the results in ascending or descending order.
+     */
+    order: AnalyticsSortOrder;
+  }
   export type SessionId = string;
+  export interface SessionSpecification {
+    /**
+     * The identifier of the alias of the bot that the session was held with.
+     */
+    botAliasId?: BotAliasId;
+    /**
+     * The version of the bot that the session was held with.
+     */
+    botVersion?: NumericalBotVersion;
+    /**
+     * The locale of the bot that the session was held with.
+     */
+    localeId?: LocaleId;
+    /**
+     * The channel that is integrated with the bot that the session was held with.
+     */
+    channel?: BotChannelType;
+    /**
+     * The identifier of the session.
+     */
+    sessionId?: AnalyticsSessionId;
+    /**
+     * The date and time when the conversation began. A conversation is defined as a unique combination of a sessionId and an originatingRequestId.
+     */
+    conversationStartTime?: Timestamp;
+    /**
+     * The date and time when the conversation ended. A conversation is defined as a unique combination of a sessionId and an originatingRequestId.
+     */
+    conversationEndTime?: Timestamp;
+    /**
+     * The duration of the conversation in seconds. A conversation is defined as a unique combination of a sessionId and an originatingRequestId.
+     */
+    conversationDurationSeconds?: AnalyticsLongValue;
+    /**
+     * The final state of the conversation. A conversation is defined as a unique combination of a sessionId and an originatingRequestId.
+     */
+    conversationEndState?: ConversationEndState;
+    /**
+     * The mode of the session. The possible values are as follows:    Speech – The session was spoken.    Text – The session was written.    DTMF – The session used a touch-tone keypad (Dual Tone Multi-Frequency).    MultiMode – The session used multiple modes.  
+     */
+    mode?: AnalyticsModality;
+    /**
+     * The number of turns that the session took.
+     */
+    numberOfTurns?: AnalyticsLongValue;
+    /**
+     * A list of objects containing the name of an intent that was invoked.
+     */
+    invokedIntentSamples?: InvokedIntentSamples;
+    /**
+     * The identifier of the first request in a session.
+     */
+    originatingRequestId?: AnalyticsOriginatingRequestId;
+  }
+  export type SessionSpecifications = SessionSpecification[];
   export type SessionTTL = number;
   export type SkipResourceInUseCheck = boolean;
   export interface SlotCaptureSetting {
@@ -7421,6 +8308,29 @@ declare namespace LexModelsV2 {
      */
     audioFileS3Location: AudioFileS3Location;
   }
+  export interface UtteranceBotResponse {
+    /**
+     * The text of the response to the utterance from the bot.
+     */
+    content?: String;
+    /**
+     * The type of the response. The following values are possible:    PlainText – A plain text string.    CustomPayload – A response string that you can customize to include data or metadata for your application.    SSML – A string that includes Speech Synthesis Markup Language to customize the audio response.    ImageResponseCard – An image with buttons that the customer can select. See ImageResponseCard for more information.  
+     */
+    contentType?: UtteranceContentType;
+    imageResponseCard?: ImageResponseCard;
+  }
+  export type UtteranceBotResponses = UtteranceBotResponse[];
+  export type UtteranceContentType = "PlainText"|"CustomPayload"|"SSML"|"ImageResponseCard"|string;
+  export interface UtteranceDataSortBy {
+    /**
+     * The measure by which to sort the utterance analytics data.    Count – The number of utterances.    UtteranceTimeStamp – The date and time of the utterance.  
+     */
+    name: AnalyticsUtteranceSortByName;
+    /**
+     * Specifies whether to sort the results in ascending or descending order.
+     */
+    order: AnalyticsSortOrder;
+  }
   export interface UtteranceInputSpecification {
     /**
      * A text input transcription of the utterance. It is only applicable for test-sets containing text data.
@@ -7452,6 +8362,98 @@ declare namespace LexModelsV2 {
      */
     items: UtteranceLevelTestResultItemList;
   }
+  export interface UtteranceSpecification {
+    /**
+     * The identifier of the alias of the bot that the utterance was made to.
+     */
+    botAliasId?: BotAliasId;
+    /**
+     * The version of the bot that the utterance was made to.
+     */
+    botVersion?: NumericalBotVersion;
+    /**
+     * The locale of the bot that the utterance was made to.
+     */
+    localeId?: LocaleId;
+    /**
+     * The identifier of the session that the utterance was made in.
+     */
+    sessionId?: AnalyticsSessionId;
+    /**
+     * The channel that is integrated with the bot that the utterance was made to.
+     */
+    channel?: BotChannelType;
+    /**
+     * The mode of the session. The possible values are as follows:    Speech – The session consisted of spoken dialogue.    Text – The session consisted of written dialogue.    DTMF – The session consisted of touch-tone keypad (Dual Tone Multi-Frequency) key presses.    MultiMode – The session consisted of multiple modes.  
+     */
+    mode?: AnalyticsModality;
+    /**
+     * The date and time when the conversation in which the utterance took place began. A conversation is defined as a unique combination of a sessionId and an originatingRequestId.
+     */
+    conversationStartTime?: Timestamp;
+    /**
+     * The date and time when the conversation in which the utterance took place ended. A conversation is defined as a unique combination of a sessionId and an originatingRequestId.
+     */
+    conversationEndTime?: Timestamp;
+    /**
+     * The text of the utterance.
+     */
+    utterance?: String;
+    /**
+     * The date and time when the utterance took place.
+     */
+    utteranceTimestamp?: Timestamp;
+    /**
+     * The duration in milliseconds of the audio associated with the utterance.
+     */
+    audioVoiceDurationMillis?: AnalyticsLongValue;
+    /**
+     * Specifies whether the bot understood the utterance or not.
+     */
+    utteranceUnderstood?: UtteranceUnderstood;
+    /**
+     * The input type of the utterance. The possible values are as follows:   PCM format: audio data must be in little-endian byte order.    audio/l16; rate=16000; channels=1     audio/x-l16; sample-rate=16000; channel-count=1     audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false      Opus format    audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4      Text format    text/plain; charset=utf-8     
+     */
+    inputType?: String;
+    /**
+     * The output type of the utterance. The possible values are as follows:    audio/mpeg     audio/ogg     audio/pcm (16 KHz)     audio/ (defaults to mpeg)    text/plain; charset=utf-8   
+     */
+    outputType?: String;
+    /**
+     * The name of the intent that the utterance is associated to.
+     */
+    associatedIntentName?: Name;
+    /**
+     * The name of the slot that the utterance is associated to.
+     */
+    associatedSlotName?: Name;
+    /**
+     * The state of the intent that the utterance is associated to.
+     */
+    intentState?: IntentState;
+    /**
+     * The type of dialog action that the utterance is associated to. See the type field in DialogAction for more information.
+     */
+    dialogActionType?: String;
+    /**
+     * The identifier for the audio of the bot response.
+     */
+    botResponseAudioVoiceId?: String;
+    /**
+     * The slots that have been filled in the session by the time of the utterance.
+     */
+    slotsFilledInSession?: String;
+    /**
+     * The identifier of the request associated with the utterance.
+     */
+    utteranceRequestId?: Id;
+    /**
+     * A list of objects containing information about the bot response to the utterance.
+     */
+    botResponses?: UtteranceBotResponses;
+  }
+  export type UtteranceSpecifications = UtteranceSpecification[];
+  export type UtteranceUnderstood = boolean;
   export type Value = string;
   export type VoiceEngine = "standard"|"neural"|string;
   export type VoiceId = string;

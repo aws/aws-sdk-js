@@ -132,6 +132,10 @@ declare class M2 extends Service {
    */
   getEnvironment(callback?: (err: AWSError, data: M2.Types.GetEnvironmentResponse) => void): Request<M2.Types.GetEnvironmentResponse, AWSError>;
   /**
+   * Gets a single sign-on URL that can be used to connect to AWS Blu Insights.
+   */
+  getSignedBluinsightsUrl(callback?: (err: AWSError, data: M2.Types.GetSignedBluinsightsUrlResponse) => void): Request<M2.Types.GetSignedBluinsightsUrlResponse, AWSError>;
+  /**
    * Returns a list of the application versions for a specific application.
    */
   listApplicationVersions(params: M2.Types.ListApplicationVersionsRequest, callback?: (err: AWSError, data: M2.Types.ListApplicationVersionsResponse) => void): Request<M2.Types.ListApplicationVersionsResponse, AWSError>;
@@ -476,7 +480,7 @@ declare namespace M2 {
      */
     name: EntityName;
     /**
-     * The Amazon Resource Name (ARN) of the role associated with the application.
+     * The Amazon Resource Name (ARN) that identifies a role that the application uses to access Amazon Web Services resources that are not part of the application or are in a different Amazon Web Services account.
      */
     roleArn?: Arn;
     /**
@@ -860,7 +864,7 @@ declare namespace M2 {
   export type EntityDescription = string;
   export type EntityName = string;
   export type EntityNameList = EntityName[];
-  export type EnvironmentLifecycle = "Creating"|"Available"|"Deleting"|"Failed"|"Updating"|string;
+  export type EnvironmentLifecycle = "Creating"|"Available"|"Updating"|"Deleting"|"Failed"|string;
   export interface EnvironmentSummary {
     /**
      * The timestamp when the runtime environment was created.
@@ -1344,9 +1348,15 @@ declare namespace M2 {
      */
     vpcId: String50;
   }
+  export interface GetSignedBluinsightsUrlResponse {
+    /**
+     * Single sign-on AWS Blu Insights URL.
+     */
+    signedBiUrl: String;
+  }
   export interface HighAvailabilityConfig {
     /**
-     * The number of instances in a high availability configuration.
+     * The number of instances in a high availability configuration. The minimum possible value is 1 and the maximum is 100.
      */
     desiredCapacity: CapacityValue;
   }
@@ -1851,7 +1861,7 @@ declare namespace M2 {
      */
     applyDuringMaintenanceWindow?: Boolean;
     /**
-     * The desired capacity for the runtime environment to update.
+     * The desired capacity for the runtime environment to update. The minimum possible value is 0 and the maximum is 100.
      */
     desiredCapacity?: CapacityValue;
     /**
