@@ -350,5 +350,6 @@ module.exports = {
   PaymentCryptographyData: require('./paymentcryptographydata'),
   CodeGuruSecurity: require('./codegurusecurity'),
   VerifiedPermissions: require('./verifiedpermissions'),
-  AppFabric: require('./appfabric')
+  AppFabric: require('./appfabric'),
+  MedicalImaging: require('./medicalimaging')
 };

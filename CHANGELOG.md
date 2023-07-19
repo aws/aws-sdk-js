@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1417.0-->
+<!--LATEST=2.1418.0-->
 <!--ENTRYINSERT-->
+
+## 2.1418.0
+* feature: CloudFormation: SDK and documentation updates for GetTemplateSummary API (unrecognized resources)
+* feature: Grafana: Amazon Managed Grafana now supports grafanaVersion update for existing workspaces with UpdateWorkspaceConfiguration API. DescribeWorkspaceConfiguration API additionally returns grafanaVersion. A new ListVersions API lists available versions or, if given a workspaceId, the versions it can upgrade to.
+* feature: MedicalImaging: General Availability (GA) release of AWS Health Imaging, enabling customers to store, transform, and analyze medical imaging data at petabyte-scale.
+* feature: RAM: This release adds support for securely sharing with AWS service principals.
+* feature: SsmSap: Added support for SAP Hana High Availability discovery (primary and secondary nodes) and Backint agent installation with SSM for SAP.
+* feature: WAFV2: Added the URI path to the custom aggregation keys that you can specify for a rate-based rule.
 
 ## 2.1417.0
 * feature: ES: Regex Validation on the ElasticSearch Engine Version attribute

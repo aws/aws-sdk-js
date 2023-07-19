@@ -2080,6 +2080,10 @@ declare namespace CloudFormation {
      * [Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. By default, SELF is specified. Use SELF for stack sets with self-managed permissions.   If you are signed in to the management account, specify SELF.   If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator in the CloudFormation User Guide.  
      */
     CallAs?: CallAs;
+    /**
+     * Specifies options for the GetTemplateSummary API action.
+     */
+    TemplateSummaryConfig?: TemplateSummaryConfig;
   }
   export interface GetTemplateSummaryOutput {
     /**
@@ -2118,6 +2122,10 @@ declare namespace CloudFormation {
      * A list of resource identifier summaries that describe the target resources of an import operation and the properties you can provide during the import to identify the target resources. For example, BucketName is a possible identifier property for an AWS::S3::Bucket resource.
      */
     ResourceIdentifierSummaries?: ResourceIdentifierSummaries;
+    /**
+     * An object containing any warnings returned.
+     */
+    Warnings?: Warnings;
   }
   export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"NetworkFailure"|"InternalFailure"|"InvalidTypeConfiguration"|"HandlerInternalFailure"|"NonCompliant"|"Unknown"|"UnsupportedTarget"|string;
   export type HookFailureMode = "FAIL"|"WARN"|string;
@@ -4004,6 +4012,12 @@ declare namespace CloudFormation {
   }
   export type TemplateParameters = TemplateParameter[];
   export type TemplateStage = "Original"|"Processed"|string;
+  export interface TemplateSummaryConfig {
+    /**
+     * If set to True, any unrecognized resource types generate warnings and not an error. Any unrecognized resource types are returned in the Warnings output parameter.
+     */
+    TreatUnrecognizedResourceTypesAsWarnings?: TreatUnrecognizedResourceTypesAsWarnings;
+  }
   export type TemplateURL = string;
   export interface TestTypeInput {
     /**
@@ -4040,6 +4054,7 @@ declare namespace CloudFormation {
   export type TotalStackInstancesCount = number;
   export type TransformName = string;
   export type TransformsList = TransformName[];
+  export type TreatUnrecognizedResourceTypesAsWarnings = boolean;
   export type Type = string;
   export type TypeArn = string;
   export type TypeConfiguration = string;
@@ -4466,6 +4481,12 @@ declare namespace CloudFormation {
   export type Version = string;
   export type VersionBump = "MAJOR"|"MINOR"|string;
   export type Visibility = "PUBLIC"|"PRIVATE"|string;
+  export interface Warnings {
+    /**
+     * A list of all of the unrecognized resource types. This is only returned if the TemplateSummaryConfig parameter has the TreatUnrecognizedResourceTypesAsWarning configuration set to True.
+     */
+    UnrecognizedResourceTypes?: ResourceTypes;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

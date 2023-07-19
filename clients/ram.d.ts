@@ -354,6 +354,10 @@ declare namespace RAM {
      * Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an IdempotentParameterMismatch error.
      */
     clientToken?: String;
+    /**
+     * Specifies from which source accounts the service principal has access to the resources in this resource share.
+     */
+    sources?: SourceArnOrAccountList;
   }
   export interface AssociateResourceShareResponse {
     /**
@@ -483,6 +487,10 @@ declare namespace RAM {
      * Specifies the Amazon Resource Names (ARNs) of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.
      */
     permissionArns?: PermissionArnList;
+    /**
+     * Specifies from which source accounts the service principal has access to the resources in this resource share.
+     */
+    sources?: SourceArnOrAccountList;
   }
   export interface CreateResourceShareResponse {
     /**
@@ -608,6 +616,10 @@ declare namespace RAM {
      * Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a UUID type of value.. If you don't provide this value, then Amazon Web Services generates a random one for you. If you retry the operation with the same ClientToken, but with different parameters, the retry fails with an IdempotentParameterMismatch error.
      */
     clientToken?: String;
+    /**
+     * Specifies from which source accounts the service principal no longer has access to the resources in this resource share.
+     */
+    sources?: SourceArnOrAccountList;
   }
   export interface DisassociateResourceShareResponse {
     /**
@@ -685,7 +697,7 @@ declare namespace RAM {
      */
     resourceArn?: String;
     /**
-     * Specifies the ID of the principal whose resource shares you want to retrieve. This can be an Amazon Web Services account ID, an organization ID, an organizational unit ID, or the Amazon Resource Name (ARN) of an individual IAM user or role. You cannot specify this parameter if the association type is RESOURCE.
+     * Specifies the ID of the principal whose resource shares you want to retrieve. This can be an Amazon Web Services account ID, an organization ID, an organizational unit ID, or the Amazon Resource Name (ARN) of an individual IAM role or user. You cannot specify this parameter if the association type is RESOURCE.
      */
     principal?: String;
     /**
@@ -1543,6 +1555,7 @@ declare namespace RAM {
      */
     clientToken?: String;
   }
+  export type SourceArnOrAccountList = String[];
   export type String = string;
   export interface Tag {
     /**

@@ -349,3 +349,4 @@ export import PaymentCryptographyData = require('./paymentcryptographydata');
 export import CodeGuruSecurity = require('./codegurusecurity');
 export import VerifiedPermissions = require('./verifiedpermissions');
 export import AppFabric = require('./appfabric');
+export import MedicalImaging = require('./medicalimaging');

@@ -351,6 +351,7 @@ export abstract class ConfigurationServicePlaceholders {
   codegurusecurity?: AWS.CodeGuruSecurity.Types.ClientConfiguration;
   verifiedpermissions?: AWS.VerifiedPermissions.Types.ClientConfiguration;
   appfabric?: AWS.AppFabric.Types.ClientConfiguration;
+  medicalimaging?: AWS.MedicalImaging.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -704,4 +705,5 @@ export interface ConfigurationServiceApiVersions {
   codegurusecurity?: AWS.CodeGuruSecurity.Types.apiVersion;
   verifiedpermissions?: AWS.VerifiedPermissions.Types.apiVersion;
   appfabric?: AWS.AppFabric.Types.apiVersion;
+  medicalimaging?: AWS.MedicalImaging.Types.apiVersion;
 }

@@ -124,6 +124,14 @@ declare class SsmSap extends Service {
    */
   registerApplication(callback?: (err: AWSError, data: SsmSap.Types.RegisterApplicationOutput) => void): Request<SsmSap.Types.RegisterApplicationOutput, AWSError>;
   /**
+   * Refreshes a registered application.
+   */
+  startApplicationRefresh(params: SsmSap.Types.StartApplicationRefreshInput, callback?: (err: AWSError, data: SsmSap.Types.StartApplicationRefreshOutput) => void): Request<SsmSap.Types.StartApplicationRefreshOutput, AWSError>;
+  /**
+   * Refreshes a registered application.
+   */
+  startApplicationRefresh(callback?: (err: AWSError, data: SsmSap.Types.StartApplicationRefreshOutput) => void): Request<SsmSap.Types.StartApplicationRefreshOutput, AWSError>;
+  /**
    * Creates tag for a resource by specifying the ARN.
    */
   tagResource(params: SsmSap.Types.TagResourceRequest, callback?: (err: AWSError, data: SsmSap.Types.TagResourceResponse) => void): Request<SsmSap.Types.TagResourceResponse, AWSError>;
@@ -172,6 +180,10 @@ declare namespace SsmSap {
      */
     Status?: ApplicationStatus;
     /**
+     * The latest discovery result for the application.
+     */
+    DiscoveryStatus?: ApplicationDiscoveryStatus;
+    /**
      * The components of the application.
      */
     Components?: ComponentIdList;
@@ -199,6 +211,7 @@ declare namespace SsmSap {
     SecretId: SecretId;
   }
   export type ApplicationCredentialList = ApplicationCredential[];
+  export type ApplicationDiscoveryStatus = "SUCCESS"|"REGISTRATION_FAILED"|"REFRESH_FAILED"|"REGISTERING"|"DELETING"|string;
   export type ApplicationId = string;
   export type ApplicationStatus = "ACTIVATED"|"STARTING"|"STOPPED"|"STOPPING"|"FAILED"|"REGISTERING"|"DELETING"|"UNKNOWN"|string;
   export interface ApplicationSummary {
@@ -222,11 +235,46 @@ declare namespace SsmSap {
   export type ApplicationSummaryList = ApplicationSummary[];
   export type ApplicationType = "HANA"|string;
   export type Arn = string;
+  export interface AssociatedHost {
+    /**
+     * The name of the host.
+     */
+    Hostname?: String;
+    /**
+     * The ID of the Amazon EC2 instance.
+     */
+    Ec2InstanceId?: String;
+    /**
+     * The version of the operating system.
+     */
+    OsVersion?: String;
+  }
+  export interface BackintConfig {
+    /**
+     * AWS service for your database backup.
+     */
+    BackintMode: BackintMode;
+    /**
+     * 
+     */
+    EnsureNoBackupInProcess: Boolean;
+  }
+  export type BackintMode = "AWSBackup"|string;
+  export type Boolean = boolean;
+  export type ClusterStatus = "ONLINE"|"STANDBY"|"MAINTENANCE"|"OFFLINE"|"NONE"|string;
   export interface Component {
     /**
      * The ID of the component.
      */
     ComponentId?: ComponentId;
+    /**
+     * The parent component of a highly available environment. For example, in a highly available SAP on AWS workload, the parent component consists of the entire setup, including the child components.
+     */
+    ParentComponent?: ComponentId;
+    /**
+     * The child components of a highly available environment. For example, in a highly available SAP on AWS workload, the child component consists of the primary and secondar instances.
+     */
+    ChildComponents?: ComponentIdList;
     /**
      * The ID of the application.
      */
@@ -239,6 +287,26 @@ declare namespace SsmSap {
      * The status of the component.
      */
     Status?: ComponentStatus;
+    /**
+     * The hostname of the component.
+     */
+    SapHostname?: String;
+    /**
+     * The kernel version of the component.
+     */
+    SapKernelVersion?: String;
+    /**
+     * The SAP HANA version of the component.
+     */
+    HdbVersion?: String;
+    /**
+     * Details of the SAP HANA system replication for the component.
+     */
+    Resilience?: Resilience;
+    /**
+     * The associated host of the component.
+     */
+    AssociatedHost?: AssociatedHost;
     /**
      * The SAP HANA databases of the component.
      */
@@ -255,10 +323,14 @@ declare namespace SsmSap {
      * The time at which the component was last updated.
      */
     LastUpdated?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the component.
+     */
+    Arn?: SsmSapArn;
   }
   export type ComponentId = string;
   export type ComponentIdList = ComponentId[];
-  export type ComponentStatus = "ACTIVATED"|string;
+  export type ComponentStatus = "ACTIVATED"|"STARTING"|"STOPPED"|"STOPPING"|"RUNNING"|"RUNNING_WITH_ERROR"|"UNDEFINED"|string;
   export interface ComponentSummary {
     /**
      * The ID of the application.
@@ -276,9 +348,13 @@ declare namespace SsmSap {
      * The tags of the component.
      */
     Tags?: TagMap;
+    /**
+     * The Amazon Resource Name (ARN) of the component summary.
+     */
+    Arn?: SsmSapArn;
   }
   export type ComponentSummaryList = ComponentSummary[];
-  export type ComponentType = "HANA"|string;
+  export type ComponentType = "HANA"|"HANA_NODE"|string;
   export type CredentialType = "ADMIN"|string;
   export interface Database {
     /**
@@ -329,7 +405,7 @@ declare namespace SsmSap {
   export type DatabaseId = string;
   export type DatabaseIdList = DatabaseId[];
   export type DatabaseName = string;
-  export type DatabaseStatus = "RUNNING"|"STARTING"|"STOPPED"|"WARNING"|"UNKNOWN"|string;
+  export type DatabaseStatus = "RUNNING"|"STARTING"|"STOPPED"|"WARNING"|"UNKNOWN"|"ERROR"|string;
   export interface DatabaseSummary {
     /**
      * The ID of the application.
@@ -443,6 +519,10 @@ declare namespace SsmSap {
      * The component of an application registered with AWS Systems Manager for SAP.
      */
     Component?: Component;
+    /**
+     * The tags of a component.
+     */
+    Tags?: TagMap;
   }
   export interface GetDatabaseInput {
     /**
@@ -506,17 +586,25 @@ declare namespace SsmSap {
      */
     HostName?: String;
     /**
-     * The role of the Dedicated Host.
-     */
-    HostRole?: HostRole;
-    /**
      * The IP address of the Dedicated Host. 
      */
     HostIp?: String;
     /**
+     * The ID of Amazon EC2 instance.
+     */
+    EC2InstanceId?: String;
+    /**
      * The instance ID of the instance on the Dedicated Host.
      */
     InstanceId?: String;
+    /**
+     * The role of the Dedicated Host.
+     */
+    HostRole?: HostRole;
+    /**
+     * The version of the operating system.
+     */
+    OsVersion?: String;
   }
   export type HostList = Host[];
   export type HostRole = "LEADER"|"WORKER"|"STANDBY"|"UNKNOWN"|string;
@@ -686,6 +774,7 @@ declare namespace SsmSap {
   export type OperationId = string;
   export type OperationIdList = OperationId[];
   export type OperationList = Operation[];
+  export type OperationMode = "PRIMARY"|"LOGREPLAY"|"DELTA_DATASHIPPING"|"LOGREPLAY_READACCESS"|"NONE"|string;
   export type OperationProperties = {[key: string]: String};
   export type OperationStatus = "INPROGRESS"|"SUCCESS"|"ERROR"|string;
   export type OperationType = string;
@@ -750,12 +839,43 @@ declare namespace SsmSap {
      */
     OperationId?: OperationId;
   }
+  export type ReplicationMode = "PRIMARY"|"NONE"|"SYNC"|"SYNCMEM"|"ASYNC"|string;
+  export interface Resilience {
+    /**
+     * The tier of the component.
+     */
+    HsrTier?: String;
+    /**
+     * The replication mode of the component.
+     */
+    HsrReplicationMode?: ReplicationMode;
+    /**
+     * The operation mode of the component.
+     */
+    HsrOperationMode?: OperationMode;
+    /**
+     * The cluster status of the component.
+     */
+    ClusterStatus?: ClusterStatus;
+  }
   export type ResourceId = string;
   export type ResourceType = string;
   export type SAPInstanceNumber = string;
   export type SID = string;
   export type SecretId = string;
   export type SsmSapArn = string;
+  export interface StartApplicationRefreshInput {
+    /**
+     * The ID of the application.
+     */
+    ApplicationId: ApplicationId;
+  }
+  export interface StartApplicationRefreshOutput {
+    /**
+     * The ID of the operation.
+     */
+    OperationId?: OperationId;
+  }
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -799,6 +919,10 @@ declare namespace SsmSap {
      * The credentials to be removed.
      */
     CredentialsToRemove?: ApplicationCredentialList;
+    /**
+     * Installation of AWS Backint Agent for SAP HANA.
+     */
+    Backint?: BackintConfig;
   }
   export interface UpdateApplicationSettingsOutput {
     /**

@@ -100,6 +100,14 @@ declare class Grafana extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Grafana.Types.ListTagsForResourceResponse) => void): Request<Grafana.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Lists available versions of Grafana. These are available when calling CreateWorkspace. Optionally, include a workspace to list the versions to which it can be upgraded.
+   */
+  listVersions(params: Grafana.Types.ListVersionsRequest, callback?: (err: AWSError, data: Grafana.Types.ListVersionsResponse) => void): Request<Grafana.Types.ListVersionsResponse, AWSError>;
+  /**
+   * Lists available versions of Grafana. These are available when calling CreateWorkspace. Optionally, include a workspace to list the versions to which it can be upgraded.
+   */
+  listVersions(callback?: (err: AWSError, data: Grafana.Types.ListVersionsResponse) => void): Request<Grafana.Types.ListVersionsResponse, AWSError>;
+  /**
    * Returns a list of Amazon Managed Grafana workspaces in the account, with some information about each workspace. For more complete information about one workspace, use DescribeWorkspace.
    */
   listWorkspaces(params: Grafana.Types.ListWorkspacesRequest, callback?: (err: AWSError, data: Grafana.Types.ListWorkspacesResponse) => void): Request<Grafana.Types.ListWorkspacesResponse, AWSError>;
@@ -290,7 +298,7 @@ declare namespace Grafana {
      */
     configuration?: OverridableConfigurationJson;
     /**
-     * Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4.
+     * Specifies the version of Grafana to support in the new workspace. To get a list of supported version, use the ListVersions operation.
      */
     grafanaVersion?: GrafanaVersion;
     /**
@@ -314,7 +322,7 @@ declare namespace Grafana {
      */
     tags?: TagMap;
     /**
-     * The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.
+     * The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.  Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) Region (ap-northeast-2). 
      */
     vpcConfiguration?: VpcConfiguration;
     /**
@@ -405,6 +413,10 @@ declare namespace Grafana {
      * The configuration string for the workspace that you requested. For more information about the format and configuration options available, see Working in your Grafana workspace.
      */
     configuration: OverridableConfigurationJson;
+    /**
+     * The supported Grafana version for the workspace.
+     */
+    grafanaVersion?: GrafanaVersion;
   }
   export interface DescribeWorkspaceRequest {
     /**
@@ -437,6 +449,7 @@ declare namespace Grafana {
   }
   export type Endpoint = string;
   export type GrafanaVersion = string;
+  export type GrafanaVersionList = GrafanaVersion[];
   export type IamRoleArn = string;
   export interface IdpMetadata {
     /**
@@ -499,6 +512,31 @@ declare namespace Grafana {
      */
     tags?: TagMap;
   }
+  export interface ListVersionsRequest {
+    /**
+     * The maximum number of results to include in the response.
+     */
+    maxResults?: ListVersionsRequestMaxResultsInteger;
+    /**
+     * The token to use when requesting the next set of results. You receive this token from a previous ListVersions operation.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The ID of the workspace to list the available upgrade versions. If not included, lists all versions of Grafana that are supported for CreateWorkspace.
+     */
+    workspaceId?: WorkspaceId;
+  }
+  export type ListVersionsRequestMaxResultsInteger = number;
+  export interface ListVersionsResponse {
+    /**
+     * The Grafana versions available to create. If a workspace ID is included in the request, the Grafana versions to which this workspace can be upgraded.
+     */
+    grafanaVersions?: GrafanaVersionList;
+    /**
+     * The token to use in a subsequent ListVersions operation to return the next set of results.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListWorkspacesRequest {
     /**
      * The maximum number of workspaces to include in the results.
@@ -523,11 +561,11 @@ declare namespace Grafana {
   export type LoginValidityDuration = number;
   export interface NetworkAccessConfiguration {
     /**
-     * An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace. You create a prefix list using the Amazon VPC console. Prefix list IDs have the format pl-1a2b3c4d . For more information about prefix lists, see Group CIDR blocks using managed prefix listsin the Amazon Virtual Private Cloud User Guide.
+     * An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration (passed an empty array) then no IP addresses are allowed to access the workspace. You create a prefix list using the Amazon VPC console. Prefix list IDs have the format pl-1a2b3c4d . For more information about prefix lists, see Group CIDR blocks using managed prefix listsin the Amazon Virtual Private Cloud User Guide.
      */
     prefixListIds: PrefixListIds;
     /**
-     * An array of Amazon VPC endpoint IDs for the workspace. You can create VPC endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace. VPC endpoint IDs have the format vpce-1a2b3c4d . For more information about creating an interface VPC endpoint, see Interface VPC endpoints in the Amazon Managed Grafana User Guide.  The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored. 
+     * An array of Amazon VPC endpoint IDs for the workspace. You can create VPC endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here are allowed to access the workspace. If you pass in an empty array of strings, then no VPCs are allowed to access the workspace. VPC endpoint IDs have the format vpce-1a2b3c4d . For more information about creating an interface VPC endpoint, see Interface VPC endpoints in the Amazon Managed Grafana User Guide.  The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints are ignored. 
      */
     vpceIds: VpceIds;
   }
@@ -708,6 +746,10 @@ declare namespace Grafana {
      * The new configuration string for the workspace. For more information about the format and configuration options available, see Working in your Grafana workspace.
      */
     configuration: OverridableConfigurationJson;
+    /**
+     * Specifies the version of Grafana to support in the new workspace. Can only be used to upgrade (for example, from 8.4 to 9.4), not downgrade (for example, from 9.4 to 8.4). To know what versions are available to upgrade to for a specific workspace, see the ListVersions operation.
+     */
+    grafanaVersion?: GrafanaVersion;
     /**
      * The ID of the workspace to update.
      */
@@ -908,7 +950,7 @@ declare namespace Grafana {
   export type WorkspaceId = string;
   export type WorkspaceList = WorkspaceSummary[];
   export type WorkspaceName = string;
-  export type WorkspaceStatus = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"UPDATING"|"UPGRADING"|"DELETION_FAILED"|"CREATION_FAILED"|"UPDATE_FAILED"|"UPGRADE_FAILED"|"LICENSE_REMOVAL_FAILED"|string;
+  export type WorkspaceStatus = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"UPDATING"|"UPGRADING"|"DELETION_FAILED"|"CREATION_FAILED"|"UPDATE_FAILED"|"UPGRADE_FAILED"|"LICENSE_REMOVAL_FAILED"|"VERSION_UPDATING"|"VERSION_UPDATE_FAILED"|string;
   export interface WorkspaceSummary {
     /**
      * A structure containing information about the authentication methods used in the workspace.

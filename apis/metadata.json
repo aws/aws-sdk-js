@@ -1317,5 +1317,9 @@
   },
   "appfabric": {
     "name": "AppFabric"
+  },
+  "medicalimaging": {
+    "prefix": "medical-imaging",
+    "name": "MedicalImaging"
   }
 }

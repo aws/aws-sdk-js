@@ -686,7 +686,7 @@ declare namespace WAFV2 {
   export type CookieNames = SingleCookieName[];
   export interface Cookies {
     /**
-     * The filter to use to identify the subset of cookies to inspect in a web request.  You must specify exactly one setting: either All, IncludedCookies, or ExcludedCookies. Example JSON: "MatchPattern": { "IncludedCookies": {"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"} } 
+     * The filter to use to identify the subset of cookies to inspect in a web request.  You must specify exactly one setting: either All, IncludedCookies, or ExcludedCookies. Example JSON: "MatchPattern": { "IncludedCookies": [ "session-id-time", "session-id" ] } 
      */
     MatchPattern: CookieMatchPattern;
     /**
@@ -1619,7 +1619,7 @@ declare namespace WAFV2 {
   export type HeaderValue = string;
   export interface Headers {
     /**
-     * The filter to use to identify the subset of headers to inspect in a web request.  You must specify exactly one setting: either All, IncludedHeaders, or ExcludedHeaders. Example JSON: "MatchPattern": { "ExcludedHeaders": {"KeyToExclude1", "KeyToExclude2"} } 
+     * The filter to use to identify the subset of headers to inspect in a web request.  You must specify exactly one setting: either All, IncludedHeaders, or ExcludedHeaders. Example JSON: "MatchPattern": { "ExcludedHeaders": [ "KeyToExclude1", "KeyToExclude2" ] } 
      */
     MatchPattern: HeaderMatchPattern;
     /**
@@ -2513,6 +2513,10 @@ declare namespace WAFV2 {
      * Use the specified label namespace as an aggregate key. Each distinct fully qualified label name that has the specified label namespace contributes to the aggregation instance. If you use just one label namespace as your custom key, then each label name fully defines an aggregation instance.  This uses only labels that have been added to the request by rules that are evaluated before this rate-based rule in the web ACL.  For information about label namespaces and names, see Label syntax and naming requirements in the WAF Developer Guide.
      */
     LabelNamespace?: RateLimitLabelNamespace;
+    /**
+     * Use the request's URI path as an aggregate key. Each distinct URI path contributes to the aggregation instance. If you use just the URI path as your custom key, then each URI path fully defines an aggregation instance. 
+     */
+    UriPath?: RateLimitUriPath;
   }
   export type RateBasedStatementCustomKeys = RateBasedStatementCustomKey[];
   export interface RateBasedStatementManagedKeysIPSet {
@@ -2569,6 +2573,12 @@ declare namespace WAFV2 {
     TextTransformations: TextTransformations;
   }
   export interface RateLimitQueryString {
+    /**
+     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the FieldToMatch request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the component contents. 
+     */
+    TextTransformations: TextTransformations;
+  }
+  export interface RateLimitUriPath {
     /**
      * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. Text transformations are used in rule match statements, to transform the FieldToMatch request component before inspecting it, and they're used in rate-based rule statements, to transform request components before using them as custom aggregation keys. If you specify one or more transformations to apply, WAF performs all transformations on the specified content, starting from the lowest priority setting, and then uses the component contents. 
      */
