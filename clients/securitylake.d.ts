@@ -12,11 +12,11 @@ declare class SecurityLake extends Service {
   constructor(options?: SecurityLake.Types.ClientConfiguration)
   config: Config & SecurityLake.Types.ClientConfiguration;
   /**
-   * Adds a natively supported Amazon Web Service as an Amazon Security Lake source. Enables source types for member accounts in required Amazon Web Services Regions, based on the parameters you specify. You can choose any source type in any Region for either accounts that are part of a trusted organization or standalone accounts. Once you add an Amazon Web Service as a source, Security Lake starts collecting logs and events from it,  You can use this API only to enable natively supported Amazon Web Services as a source. Use CreateCustomLogSource to enable data collection from a custom source.
+   * Adds a natively supported Amazon Web Service as an Amazon Security Lake source. Enables source types for member accounts in required Amazon Web Services Regions, based on the parameters you specify. You can choose any source type in any Region for either accounts that are part of a trusted organization or standalone accounts. Once you add an Amazon Web Service as a source, Security Lake starts collecting logs and events from it. You can use this API only to enable natively supported Amazon Web Services as a source. Use CreateCustomLogSource to enable data collection from a custom source.
    */
   createAwsLogSource(params: SecurityLake.Types.CreateAwsLogSourceRequest, callback?: (err: AWSError, data: SecurityLake.Types.CreateAwsLogSourceResponse) => void): Request<SecurityLake.Types.CreateAwsLogSourceResponse, AWSError>;
   /**
-   * Adds a natively supported Amazon Web Service as an Amazon Security Lake source. Enables source types for member accounts in required Amazon Web Services Regions, based on the parameters you specify. You can choose any source type in any Region for either accounts that are part of a trusted organization or standalone accounts. Once you add an Amazon Web Service as a source, Security Lake starts collecting logs and events from it,  You can use this API only to enable natively supported Amazon Web Services as a source. Use CreateCustomLogSource to enable data collection from a custom source.
+   * Adds a natively supported Amazon Web Service as an Amazon Security Lake source. Enables source types for member accounts in required Amazon Web Services Regions, based on the parameters you specify. You can choose any source type in any Region for either accounts that are part of a trusted organization or standalone accounts. Once you add an Amazon Web Service as a source, Security Lake starts collecting logs and events from it. You can use this API only to enable natively supported Amazon Web Services as a source. Use CreateCustomLogSource to enable data collection from a custom source.
    */
   createAwsLogSource(callback?: (err: AWSError, data: SecurityLake.Types.CreateAwsLogSourceResponse) => void): Request<SecurityLake.Types.CreateAwsLogSourceResponse, AWSError>;
   /**
@@ -28,11 +28,11 @@ declare class SecurityLake extends Service {
    */
   createCustomLogSource(callback?: (err: AWSError, data: SecurityLake.Types.CreateCustomLogSourceResponse) => void): Request<SecurityLake.Types.CreateCustomLogSourceResponse, AWSError>;
   /**
-   * Initializes an Amazon Security Lake instance with the provided (or default) configuration. You can enable Security Lake in Amazon Web Services Regions with customized settings before enabling log collection in Regions. By default, the CreateDataLake Security Lake in all Regions. To specify particular Regions, configure these Regions using the configurations parameter. If you have already enabled Security Lake in a Region when you call this command, the command will update the Region if you provide new configuration parameters. If you have not already enabled Security Lake in the Region when you call this API, it will set up the data lake in the Region with the specified configurations. When you enable Security Lake, it starts ingesting security data after the CreateAwsLogSource call. This includes ingesting security data from sources, storing data, and making data accessible to subscribers. Security Lake also enables all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For more information, see the Amazon Security Lake User Guide.
+   * Initializes an Amazon Security Lake instance with the provided (or default) configuration. You can enable Security Lake in Amazon Web Services Regions with customized settings before enabling log collection in Regions. To specify particular Regions, configure these Regions using the configurations parameter. If you have already enabled Security Lake in a Region when you call this command, the command will update the Region if you provide new configuration parameters. If you have not already enabled Security Lake in the Region when you call this API, it will set up the data lake in the Region with the specified configurations. When you enable Security Lake, it starts ingesting security data after the CreateAwsLogSource call. This includes ingesting security data from sources, storing data, and making data accessible to subscribers. Security Lake also enables all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For more information, see the Amazon Security Lake User Guide.
    */
   createDataLake(params: SecurityLake.Types.CreateDataLakeRequest, callback?: (err: AWSError, data: SecurityLake.Types.CreateDataLakeResponse) => void): Request<SecurityLake.Types.CreateDataLakeResponse, AWSError>;
   /**
-   * Initializes an Amazon Security Lake instance with the provided (or default) configuration. You can enable Security Lake in Amazon Web Services Regions with customized settings before enabling log collection in Regions. By default, the CreateDataLake Security Lake in all Regions. To specify particular Regions, configure these Regions using the configurations parameter. If you have already enabled Security Lake in a Region when you call this command, the command will update the Region if you provide new configuration parameters. If you have not already enabled Security Lake in the Region when you call this API, it will set up the data lake in the Region with the specified configurations. When you enable Security Lake, it starts ingesting security data after the CreateAwsLogSource call. This includes ingesting security data from sources, storing data, and making data accessible to subscribers. Security Lake also enables all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For more information, see the Amazon Security Lake User Guide.
+   * Initializes an Amazon Security Lake instance with the provided (or default) configuration. You can enable Security Lake in Amazon Web Services Regions with customized settings before enabling log collection in Regions. To specify particular Regions, configure these Regions using the configurations parameter. If you have already enabled Security Lake in a Region when you call this command, the command will update the Region if you provide new configuration parameters. If you have not already enabled Security Lake in the Region when you call this API, it will set up the data lake in the Region with the specified configurations. When you enable Security Lake, it starts ingesting security data after the CreateAwsLogSource call. This includes ingesting security data from sources, storing data, and making data accessible to subscribers. Security Lake also enables all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For more information, see the Amazon Security Lake User Guide.
    */
   createDataLake(callback?: (err: AWSError, data: SecurityLake.Types.CreateDataLakeResponse) => void): Request<SecurityLake.Types.CreateDataLakeResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class SecurityLake extends Service {
    */
   deleteDataLakeExceptionSubscription(callback?: (err: AWSError, data: SecurityLake.Types.DeleteDataLakeExceptionSubscriptionResponse) => void): Request<SecurityLake.Types.DeleteDataLakeExceptionSubscriptionResponse, AWSError>;
   /**
-   * Removes automatic the enablement of configuration settings for new member accounts (but retains the settings for the delegated administrator) from Amazon Security Lake. You must run this API using the credentials of the delegated administrator. When you run this API, new member accounts that are added after the organization enables Security Lake won't contribute to the data lake.
+   * Turns off automatic enablement of Amazon Security Lake for member accounts that are added to an organization in Organizations. Only the delegated Security Lake administrator for an organization can perform this operation. If the delegated Security Lake administrator performs this operation, new member accounts won't automatically contribute data to the data lake.
    */
   deleteDataLakeOrganizationConfiguration(params: SecurityLake.Types.DeleteDataLakeOrganizationConfigurationRequest, callback?: (err: AWSError, data: SecurityLake.Types.DeleteDataLakeOrganizationConfigurationResponse) => void): Request<SecurityLake.Types.DeleteDataLakeOrganizationConfigurationResponse, AWSError>;
   /**
-   * Removes automatic the enablement of configuration settings for new member accounts (but retains the settings for the delegated administrator) from Amazon Security Lake. You must run this API using the credentials of the delegated administrator. When you run this API, new member accounts that are added after the organization enables Security Lake won't contribute to the data lake.
+   * Turns off automatic enablement of Amazon Security Lake for member accounts that are added to an organization in Organizations. Only the delegated Security Lake administrator for an organization can perform this operation. If the delegated Security Lake administrator performs this operation, new member accounts won't automatically contribute data to the data lake.
    */
   deleteDataLakeOrganizationConfiguration(callback?: (err: AWSError, data: SecurityLake.Types.DeleteDataLakeOrganizationConfigurationResponse) => void): Request<SecurityLake.Types.DeleteDataLakeOrganizationConfigurationResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class SecurityLake extends Service {
    */
   listDataLakeExceptions(callback?: (err: AWSError, data: SecurityLake.Types.ListDataLakeExceptionsResponse) => void): Request<SecurityLake.Types.ListDataLakeExceptionsResponse, AWSError>;
   /**
-   * Retrieves the Amazon Security Lake configuration object for the specified Amazon Web Services account ID. You can use the ListDataLakes API to know whether Security Lake is enabled for any region.
+   * Retrieves the Amazon Security Lake configuration object for the specified Amazon Web Services Regions. You can use this operation to determine whether Security Lake is enabled for a Region.
    */
   listDataLakes(params: SecurityLake.Types.ListDataLakesRequest, callback?: (err: AWSError, data: SecurityLake.Types.ListDataLakesResponse) => void): Request<SecurityLake.Types.ListDataLakesResponse, AWSError>;
   /**
-   * Retrieves the Amazon Security Lake configuration object for the specified Amazon Web Services account ID. You can use the ListDataLakes API to know whether Security Lake is enabled for any region.
+   * Retrieves the Amazon Security Lake configuration object for the specified Amazon Web Services Regions. You can use this operation to determine whether Security Lake is enabled for a Region.
    */
   listDataLakes(callback?: (err: AWSError, data: SecurityLake.Types.ListDataLakesResponse) => void): Request<SecurityLake.Types.ListDataLakesResponse, AWSError>;
   /**
@@ -196,6 +196,14 @@ declare class SecurityLake extends Service {
    */
   listSubscribers(callback?: (err: AWSError, data: SecurityLake.Types.ListSubscribersResponse) => void): Request<SecurityLake.Types.ListSubscribersResponse, AWSError>;
   /**
+   * Retrieves the tags (keys and values) that are associated with an Amazon Security Lake resource: a subscriber, or the data lake configuration for your Amazon Web Services account in a particular Amazon Web Services Region.
+   */
+  listTagsForResource(params: SecurityLake.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: SecurityLake.Types.ListTagsForResourceResponse) => void): Request<SecurityLake.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves the tags (keys and values) that are associated with an Amazon Security Lake resource: a subscriber, or the data lake configuration for your Amazon Web Services account in a particular Amazon Web Services Region.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: SecurityLake.Types.ListTagsForResourceResponse) => void): Request<SecurityLake.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Designates the Amazon Security Lake delegated administrator account for the organization. This API can only be called by the organization management account. The organization management account cannot be the delegated administrator account.
    */
   registerDataLakeDelegatedAdministrator(params: SecurityLake.Types.RegisterDataLakeDelegatedAdministratorRequest, callback?: (err: AWSError, data: SecurityLake.Types.RegisterDataLakeDelegatedAdministratorResponse) => void): Request<SecurityLake.Types.RegisterDataLakeDelegatedAdministratorResponse, AWSError>;
@@ -203,6 +211,22 @@ declare class SecurityLake extends Service {
    * Designates the Amazon Security Lake delegated administrator account for the organization. This API can only be called by the organization management account. The organization management account cannot be the delegated administrator account.
    */
   registerDataLakeDelegatedAdministrator(callback?: (err: AWSError, data: SecurityLake.Types.RegisterDataLakeDelegatedAdministratorResponse) => void): Request<SecurityLake.Types.RegisterDataLakeDelegatedAdministratorResponse, AWSError>;
+  /**
+   * Adds or updates one or more tags that are associated with an Amazon Security Lake resource: a subscriber, or the data lake configuration for your Amazon Web Services account in a particular Amazon Web Services Region. A tag is a label that you can define and associate with Amazon Web Services resources. Each tag consists of a required tag key and an associated tag value. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor for a tag key. Tags can help you identify, categorize, and manage resources in different ways, such as by owner, environment, or other criteria. For more information, see Tagging Amazon Security Lake resources in the Amazon Security Lake User Guide.
+   */
+  tagResource(params: SecurityLake.Types.TagResourceRequest, callback?: (err: AWSError, data: SecurityLake.Types.TagResourceResponse) => void): Request<SecurityLake.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds or updates one or more tags that are associated with an Amazon Security Lake resource: a subscriber, or the data lake configuration for your Amazon Web Services account in a particular Amazon Web Services Region. A tag is a label that you can define and associate with Amazon Web Services resources. Each tag consists of a required tag key and an associated tag value. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor for a tag key. Tags can help you identify, categorize, and manage resources in different ways, such as by owner, environment, or other criteria. For more information, see Tagging Amazon Security Lake resources in the Amazon Security Lake User Guide.
+   */
+  tagResource(callback?: (err: AWSError, data: SecurityLake.Types.TagResourceResponse) => void): Request<SecurityLake.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags (keys and values) from an Amazon Security Lake resource: a subscriber, or the data lake configuration for your Amazon Web Services account in a particular Amazon Web Services Region.
+   */
+  untagResource(params: SecurityLake.Types.UntagResourceRequest, callback?: (err: AWSError, data: SecurityLake.Types.UntagResourceResponse) => void): Request<SecurityLake.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags (keys and values) from an Amazon Security Lake resource: a subscriber, or the data lake configuration for your Amazon Web Services account in a particular Amazon Web Services Region.
+   */
+  untagResource(callback?: (err: AWSError, data: SecurityLake.Types.UntagResourceResponse) => void): Request<SecurityLake.Types.UntagResourceResponse, AWSError>;
   /**
    * Specifies where to store your security data and for how long. You can add a rollup Region to consolidate data from multiple Amazon Web Services Regions.
    */
@@ -355,6 +379,10 @@ declare namespace SecurityLake {
      * The Amazon Resource Name (ARN) used to create and update the Glue table. This table contains partitions generated by the ingestion and normalization of Amazon Web Services log sources and custom sources.
      */
     metaStoreManagerRoleArn: RoleArn;
+    /**
+     * An array of objects, one for each tag to associate with the data lake configuration. For each tag, you must specify both a tag key and a tag value. A tag value cannot be null, but it can be an empty string.
+     */
+    tags?: TagList;
   }
   export interface CreateDataLakeResponse {
     /**
@@ -399,6 +427,10 @@ declare namespace SecurityLake {
      * The name of your Security Lake subscriber account.
      */
     subscriberName: CreateSubscriberRequestSubscriberNameString;
+    /**
+     * An array of objects, one for each tag to associate with the subscriber. For each tag, you must specify both a tag key and a tag value. A tag value cannot be null, but it can be an empty string.
+     */
+    tags?: TagList;
   }
   export type CreateSubscriberRequestSubscriberNameString = string;
   export interface CreateSubscriberResponse {
@@ -682,7 +714,7 @@ declare namespace SecurityLake {
   }
   export interface DeleteDataLakeOrganizationConfigurationRequest {
     /**
-     * Removes the automatic enablement of configuration settings for new member accounts in Security Lake.
+     * Turns off automatic enablement of Security Lake for member accounts that are added to an organization.
      */
     autoEnableNewAccount: DataLakeAutoEnableNewAccountConfigurationList;
   }
@@ -894,6 +926,18 @@ declare namespace SecurityLake {
      */
     subscribers?: SubscriberResourceList;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Security Lake resource to retrieve the tags for.
+     */
+    resourceArn: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * An array of objects, one for each tag (key and value) that’s associated with the Amazon Security Lake resource.
+     */
+    tags?: TagList;
+  }
   export interface LogSource {
     /**
      * Specify the account from which you want to collect logs.
@@ -911,11 +955,11 @@ declare namespace SecurityLake {
   export type LogSourceList = LogSource[];
   export interface LogSourceResource {
     /**
-     * Amazon Security Lake supports log and event collection for natively supported Amazon Web Services.
+     * Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. For more information, see the Amazon Security Lake User Guide.
      */
     awsLogSource?: AwsLogSourceResource;
     /**
-     * Amazon Security Lake supports custom source types. For a detailed list, see the Amazon Security Lake User Guide.
+     * Amazon Security Lake supports custom source types. For more information, see the Amazon Security Lake User Guide.
      */
     customLogSource?: CustomLogSourceResource;
   }
@@ -1021,7 +1065,45 @@ declare namespace SecurityLake {
   export type SubscriberStatus = "ACTIVE"|"DEACTIVATED"|"PENDING"|"READY"|string;
   export type SubscriptionProtocol = string;
   export type SyntheticTimestamp_date_time = Date;
+  export interface Tag {
+    /**
+     * The name of the tag. This is a general label that acts as a category for a more specific tag value (value).
+     */
+    key: TagKey;
+    /**
+     * The value that’s associated with the specified tag key (key). This value acts as a descriptor for the tag key. A tag value cannot be null, but it can be an empty string.
+     */
+    value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Security Lake resource to add or update the tags for.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * An array of objects, one for each tag (key and value) to associate with the Amazon Security Lake resource. For each tag, you must specify both a tag key and a tag value. A tag value cannot be null, but it can be an empty string.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type UUID = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Security Lake resource to remove one or more tags from.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * A list of one or more tag keys. For each value in the list, specify the tag key for a tag to remove from the Amazon Security Lake resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateDataLakeExceptionSubscriptionRequest {
     /**
      * The time-to-live (TTL) for the exception message to remain.

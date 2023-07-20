@@ -1744,6 +1744,10 @@ declare namespace TranscribeService {
      * If using automatic language identification in your request and you want to apply a custom language model, a custom vocabulary, or a custom vocabulary filter, include LanguageIdSettings with the relevant sub-parameters (VocabularyName, LanguageModelName, and VocabularyFilterName). Note that multi-language identification (IdentifyMultipleLanguages) doesn't support custom language models.  LanguageIdSettings supports two to five language codes. Each language code you include can have an associated custom language model, custom vocabulary, and custom vocabulary filter. The language codes that you specify must match the languages of the associated custom language models, custom vocabularies, and custom vocabulary filters. It's recommended that you include LanguageOptions when using LanguageIdSettings to ensure that the correct language dialect is identified. For example, if you specify a custom vocabulary that is in en-US but Amazon Transcribe determines that the language spoken in your media is en-AU, your custom vocabulary is not applied to your transcription. If you include LanguageOptions and include en-US as the only English language dialect, your custom vocabulary is applied to your transcription. If you want to include a custom language model with your request but do not want to use automatic language identification, use instead the  parameter with the LanguageModelName sub-parameter. If you want to include a custom vocabulary or a custom vocabulary filter (or both) with your request but do not want to use automatic language identification, use instead the  parameter with the VocabularyName or VocabularyFilterName (or both) sub-parameter.
      */
     LanguageIdSettings?: LanguageIdSettingsMap;
+    /**
+     * Enables toxic speech detection in your transcript. If you include ToxicityDetection in your request, you must also include ToxicityCategories. For information on the types of toxic speech Amazon Transcribe can detect, see Detecting toxic speech.
+     */
+    ToxicityDetection?: ToxicityDetection;
   }
   export interface StartTranscriptionJobResponse {
     /**
@@ -1807,6 +1811,15 @@ declare namespace TranscribeService {
   }
   export type TagValue = string;
   export type TimestampMilliseconds = number;
+  export type ToxicityCategories = ToxicityCategory[];
+  export type ToxicityCategory = "ALL"|string;
+  export type ToxicityDetection = ToxicityDetectionSettings[];
+  export interface ToxicityDetectionSettings {
+    /**
+     *  If you include ToxicityDetection in your transcription request, you must also include ToxicityCategories. The only accepted value for this parameter is ALL.
+     */
+    ToxicityCategories: ToxicityCategories;
+  }
   export type TranscribeArn = string;
   export interface Transcript {
     /**
@@ -1938,6 +1951,10 @@ declare namespace TranscribeService {
      * Provides the name and language of all custom language models, custom vocabularies, and custom vocabulary filters that you included in your request.
      */
     LanguageIdSettings?: LanguageIdSettingsMap;
+    /**
+     * Provides information about the toxicity detection settings applied to your transcription.
+     */
+    ToxicityDetection?: ToxicityDetection;
   }
   export type TranscriptionJobName = string;
   export type TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
@@ -1996,6 +2013,10 @@ declare namespace TranscribeService {
      * The language codes used to create your transcription job. This parameter is used with multi-language identification. For single-language identification, the singular version of this parameter, LanguageCode, is present.
      */
     LanguageCodes?: LanguageCodeList;
+    /**
+     * Indicates whether toxicity detection was enabled for the specified transcription job.
+     */
+    ToxicityDetection?: ToxicityDetection;
   }
   export type Type = "CONVERSATION"|"DICTATION"|string;
   export interface UntagResourceRequest {

@@ -36,11 +36,11 @@ declare class SageMakerFeatureStoreRuntime extends Service {
    */
   getRecord(callback?: (err: AWSError, data: SageMakerFeatureStoreRuntime.Types.GetRecordResponse) => void): Request<SageMakerFeatureStoreRuntime.Types.GetRecordResponse, AWSError>;
   /**
-   * Used for data ingestion into the FeatureStore. The PutRecord API writes to both the OnlineStore and OfflineStore. If the record is the latest record for the recordIdentifier, the record is written to both the OnlineStore and OfflineStore. If the record is a historic record, it is written only to the OfflineStore.
+   * The PutRecord API is used to ingest a list of Records into your feature group.  If a new record’s EventTime is greater, the new record is written to both the OnlineStore and OfflineStore. Otherwise, the record is a historic record and it is written only to the OfflineStore.  You can specify the ingestion to be applied to the OnlineStore, OfflineStore, or both by using the TargetStores request parameter.  You can set the ingested record to expire at a given time to live (TTL) duration after the record’s event time, ExpiresAt = EventTime + TtlDuration, by specifying the TtlDuration parameter. A record level TtlDuration is set when specifying the TtlDuration parameter using the PutRecord API call. If the input TtlDuration is null or unspecified, TtlDuration is set to the default feature group level TtlDuration. A record level TtlDuration supersedes the group level TtlDuration.
    */
   putRecord(params: SageMakerFeatureStoreRuntime.Types.PutRecordRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Used for data ingestion into the FeatureStore. The PutRecord API writes to both the OnlineStore and OfflineStore. If the record is the latest record for the recordIdentifier, the record is written to both the OnlineStore and OfflineStore. If the record is a historic record, it is written only to the OfflineStore.
+   * The PutRecord API is used to ingest a list of Records into your feature group.  If a new record’s EventTime is greater, the new record is written to both the OnlineStore and OfflineStore. Otherwise, the record is a historic record and it is written only to the OfflineStore.  You can specify the ingestion to be applied to the OnlineStore, OfflineStore, or both by using the TargetStores request parameter.  You can set the ingested record to expire at a given time to live (TTL) duration after the record’s event time, ExpiresAt = EventTime + TtlDuration, by specifying the TtlDuration parameter. A record level TtlDuration is set when specifying the TtlDuration parameter using the PutRecord API call. If the input TtlDuration is null or unspecified, TtlDuration is set to the default feature group level TtlDuration. A record level TtlDuration supersedes the group level TtlDuration.
    */
   putRecord(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -66,9 +66,9 @@ declare namespace SageMakerFeatureStoreRuntime {
   export type BatchGetRecordErrors = BatchGetRecordError[];
   export interface BatchGetRecordIdentifier {
     /**
-     * A FeatureGroupName containing Records you are retrieving in a batch.
+     * The name or Amazon Resource Name (ARN) of the FeatureGroup containing the records you are retrieving in a batch.
      */
-    FeatureGroupName: FeatureGroupName;
+    FeatureGroupName: FeatureGroupNameOrArn;
     /**
      * The value for a list of record identifiers in string format.
      */
@@ -81,7 +81,7 @@ declare namespace SageMakerFeatureStoreRuntime {
   export type BatchGetRecordIdentifiers = BatchGetRecordIdentifier[];
   export interface BatchGetRecordRequest {
     /**
-     * A list of FeatureGroup names, with their corresponding RecordIdentifier value, and Feature name that have been requested to be retrieved in batch.
+     * A list containing the name or Amazon Resource Name (ARN) of the FeatureGroup, the list of names of Features to be retrieved, and the corresponding RecordIdentifier values as strings.
      */
     Identifiers: BatchGetRecordIdentifiers;
     /**
@@ -124,9 +124,9 @@ declare namespace SageMakerFeatureStoreRuntime {
   export type BatchGetRecordResultDetails = BatchGetRecordResultDetail[];
   export interface DeleteRecordRequest {
     /**
-     * The name of the feature group to delete the record from. 
+     * The name or Amazon Resource Name (ARN) of the feature group to delete the record from. 
      */
-    FeatureGroupName: FeatureGroupName;
+    FeatureGroupName: FeatureGroupNameOrArn;
     /**
      * The value for the RecordIdentifier that uniquely identifies the record, in string format. 
      */
@@ -147,7 +147,7 @@ declare namespace SageMakerFeatureStoreRuntime {
   export type DeletionMode = "SoftDelete"|"HardDelete"|string;
   export type ExpirationTimeResponse = "Enabled"|"Disabled"|string;
   export type ExpiresAt = string;
-  export type FeatureGroupName = string;
+  export type FeatureGroupNameOrArn = string;
   export type FeatureName = string;
   export type FeatureNames = FeatureName[];
   export interface FeatureValue {
@@ -162,9 +162,9 @@ declare namespace SageMakerFeatureStoreRuntime {
   }
   export interface GetRecordRequest {
     /**
-     * The name of the feature group from which you want to retrieve a record.
+     * The name or Amazon Resource Name (ARN) of the feature group from which you want to retrieve a record.
      */
-    FeatureGroupName: FeatureGroupName;
+    FeatureGroupName: FeatureGroupNameOrArn;
     /**
      * The value that corresponds to RecordIdentifier type and uniquely identifies the record in the FeatureGroup. 
      */
@@ -174,7 +174,7 @@ declare namespace SageMakerFeatureStoreRuntime {
      */
     FeatureNames?: FeatureNames;
     /**
-     * Parameter to request ExpiresAt in response. If Enabled, BatchGetRecord will return the value of ExpiresAt, if it is not null. If Disabled and null, BatchGetRecord will return null.
+     * Parameter to request ExpiresAt in response. If Enabled, GetRecord will return the value of ExpiresAt, if it is not null. If Disabled and null, GetRecord will return null.
      */
     ExpirationTimeResponse?: ExpirationTimeResponse;
   }
@@ -191,9 +191,9 @@ declare namespace SageMakerFeatureStoreRuntime {
   export type Message = string;
   export interface PutRecordRequest {
     /**
-     * The name of the feature group that you want to insert the record into.
+     * The name or Amazon Resource Name (ARN) of the feature group that you want to insert the record into.
      */
-    FeatureGroupName: FeatureGroupName;
+    FeatureGroupName: FeatureGroupNameOrArn;
     /**
      * List of FeatureValues to be inserted. This will be a full over-write. If you only want to update few of the feature values, do the following:   Use GetRecord to retrieve the latest record.   Update the record returned from GetRecord.    Use PutRecord to update feature values.  
      */

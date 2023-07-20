@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1418.0-->
+<!--LATEST=2.1419.0-->
 <!--ENTRYINSERT-->
+
+## 2.1419.0
+* feature: CodeCatalyst: This release adds support for updating and deleting spaces and projects in Amazon CodeCatalyst. It also adds support for creating, getting, and deleting source repositories in CodeCatalyst projects.
+* feature: ConnectCases: This release adds the ability to assign a case to a queue or user.
+* feature: LexModelsV2: This release updates type for Channel field in SessionSpecification and UtteranceSpecification
+* feature: Route53Resolver: This release adds support for Route 53 On Outposts, a new feature that allows customers to run Route 53 Resolver and Resolver endpoints locally on their Outposts.
+* feature: S3: Improve performance of S3 clients by simplifying and optimizing endpoint resolution.
+* feature: SageMaker: Cross account support for SageMaker Feature Store
+* feature: SageMakerFeatureStoreRuntime: Cross account support for SageMaker Feature Store
+* feature: SecurityLake: Adding support for Tags on Create and Resource Tagging API.
+* feature: TranscribeService: Added API argument --toxicity-detection to startTranscriptionJob API, which allows users to view toxicity scores of submitted audio.
 
 ## 2.1418.0
 * feature: CloudFormation: SDK and documentation updates for GetTemplateSummary API (unrecognized resources)

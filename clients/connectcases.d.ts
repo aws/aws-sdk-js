@@ -36,11 +36,11 @@ declare class ConnectCases extends Service {
    */
   createCase(callback?: (err: AWSError, data: ConnectCases.Types.CreateCaseResponse) => void): Request<ConnectCases.Types.CreateCaseResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.  This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see Onboard to Cases. 
+   * Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.  This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see Onboard to Cases.  &lt;/important&gt; 
    */
   createDomain(params: ConnectCases.Types.CreateDomainRequest, callback?: (err: AWSError, data: ConnectCases.Types.CreateDomainResponse) => void): Request<ConnectCases.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.  This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see Onboard to Cases. 
+   * Creates a domain, which is a container for all case data, such as cases, fields, templates and layouts. Each Amazon Connect instance can be associated with only one Cases domain.  This will not associate your connect instance to Cases domain. Instead, use the Amazon Connect CreateIntegrationAssociation API. You need specific IAM permissions to successfully associate the Cases domain. For more information, see Onboard to Cases.  &lt;/important&gt; 
    */
   createDomain(callback?: (err: AWSError, data: ConnectCases.Types.CreateDomainResponse) => void): Request<ConnectCases.Types.CreateDomainResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class ConnectCases extends Service {
    */
   createTemplate(callback?: (err: AWSError, data: ConnectCases.Types.CreateTemplateResponse) => void): Request<ConnectCases.Types.CreateTemplateResponse, AWSError>;
   /**
-   * Deletes a domain.
+   * Deletes a Cases domain.  &lt;note&gt; &lt;p&gt;After deleting your domain you must disassociate the deleted domain from your Amazon Connect instance with another API call before being able to use Cases again with this Amazon Connect instance. See &lt;a href=&quot;https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html&quot;&gt;DeleteIntegrationAssociation&lt;/a&gt;.&lt;/p&gt; &lt;/note&gt; 
    */
   deleteDomain(params: ConnectCases.Types.DeleteDomainRequest, callback?: (err: AWSError, data: ConnectCases.Types.DeleteDomainResponse) => void): Request<ConnectCases.Types.DeleteDomainResponse, AWSError>;
   /**
-   * Deletes a domain.
+   * Deletes a Cases domain.  &lt;note&gt; &lt;p&gt;After deleting your domain you must disassociate the deleted domain from your Amazon Connect instance with another API call before being able to use Cases again with this Amazon Connect instance. See &lt;a href=&quot;https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteIntegrationAssociation.html&quot;&gt;DeleteIntegrationAssociation&lt;/a&gt;.&lt;/p&gt; &lt;/note&gt; 
    */
   deleteDomain(callback?: (err: AWSError, data: ConnectCases.Types.DeleteDomainResponse) => void): Request<ConnectCases.Types.DeleteDomainResponse, AWSError>;
   /**
@@ -329,8 +329,13 @@ declare namespace ConnectCases {
      */
     field?: FieldFilter;
     not?: CaseFilter;
+    /**
+     * Provides "or all" filtering.
+     */
+    orAll?: CaseFilterOrAllList;
   }
   export type CaseFilterAndAllList = CaseFilter[];
+  export type CaseFilterOrAllList = CaseFilter[];
   export type CaseId = string;
   export interface CaseSummary {
     /**
@@ -585,6 +590,8 @@ declare namespace ConnectCases {
   }
   export type DomainSummaryList = DomainSummary[];
   export type Double = number;
+  export interface EmptyFieldValue {
+  }
   export interface EventBridgeConfiguration {
     /**
      * Indicates whether the to broadcast case event data to the customer.
@@ -747,6 +754,10 @@ declare namespace ConnectCases {
      * Can be either null, or have a Double number value type. Only one value can be provided.
      */
     doubleValue?: Double;
+    /**
+     * An empty value.
+     */
+    emptyValue?: EmptyFieldValue;
     /**
      * String value type.
      */

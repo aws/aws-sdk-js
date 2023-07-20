@@ -158,7 +158,7 @@ declare namespace SavingsPlans {
      */
     searchResults?: SavingsPlanRateList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     nextToken?: PaginationToken;
   }

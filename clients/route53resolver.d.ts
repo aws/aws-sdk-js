@@ -68,6 +68,14 @@ declare class Route53Resolver extends Service {
    */
   createFirewallRuleGroup(callback?: (err: AWSError, data: Route53Resolver.Types.CreateFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.CreateFirewallRuleGroupResponse, AWSError>;
   /**
+   * Creates an Route 53 Resolver on an Outpost.
+   */
+  createOutpostResolver(params: Route53Resolver.Types.CreateOutpostResolverRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateOutpostResolverResponse) => void): Request<Route53Resolver.Types.CreateOutpostResolverResponse, AWSError>;
+  /**
+   * Creates an Route 53 Resolver on an Outpost.
+   */
+  createOutpostResolver(callback?: (err: AWSError, data: Route53Resolver.Types.CreateOutpostResolverResponse) => void): Request<Route53Resolver.Types.CreateOutpostResolverResponse, AWSError>;
+  /**
    * Creates a Resolver endpoint. There are two types of Resolver endpoints, inbound and outbound:   An inbound Resolver endpoint forwards DNS queries to the DNS service for a VPC from your network.   An outbound Resolver endpoint forwards DNS queries from the DNS service for a VPC to your network.  
    */
   createResolverEndpoint(params: Route53Resolver.Types.CreateResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverEndpointResponse) => void): Request<Route53Resolver.Types.CreateResolverEndpointResponse, AWSError>;
@@ -115,6 +123,14 @@ declare class Route53Resolver extends Service {
    * Deletes the specified firewall rule group. 
    */
   deleteFirewallRuleGroup(callback?: (err: AWSError, data: Route53Resolver.Types.DeleteFirewallRuleGroupResponse) => void): Request<Route53Resolver.Types.DeleteFirewallRuleGroupResponse, AWSError>;
+  /**
+   * Deletes a Resolver on the Outpost.
+   */
+  deleteOutpostResolver(params: Route53Resolver.Types.DeleteOutpostResolverRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteOutpostResolverResponse) => void): Request<Route53Resolver.Types.DeleteOutpostResolverResponse, AWSError>;
+  /**
+   * Deletes a Resolver on the Outpost.
+   */
+  deleteOutpostResolver(callback?: (err: AWSError, data: Route53Resolver.Types.DeleteOutpostResolverResponse) => void): Request<Route53Resolver.Types.DeleteOutpostResolverResponse, AWSError>;
   /**
    * Deletes a Resolver endpoint. The effect of deleting a Resolver endpoint depends on whether it's an inbound or an outbound Resolver endpoint:    Inbound: DNS queries from your network are no longer routed to the DNS service for the specified VPC.    Outbound: DNS queries from a VPC are no longer routed to your network.  
    */
@@ -211,6 +227,14 @@ declare class Route53Resolver extends Service {
    * Returns the Identity and Access Management (Amazon Web Services IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using Resource Access Manager (RAM). 
    */
   getFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
+  /**
+   * Gets information about a specified Resolver on the Outpost, such as its instance count and type, name, and the current status of the Resolver.
+   */
+  getOutpostResolver(params: Route53Resolver.Types.GetOutpostResolverRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetOutpostResolverResponse) => void): Request<Route53Resolver.Types.GetOutpostResolverResponse, AWSError>;
+  /**
+   * Gets information about a specified Resolver on the Outpost, such as its instance count and type, name, and the current status of the Resolver.
+   */
+  getOutpostResolver(callback?: (err: AWSError, data: Route53Resolver.Types.GetOutpostResolverResponse) => void): Request<Route53Resolver.Types.GetOutpostResolverResponse, AWSError>;
   /**
    * Retrieves the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
    */
@@ -339,6 +363,14 @@ declare class Route53Resolver extends Service {
    * Retrieves the firewall rules that you have defined for the specified firewall rule group. DNS Firewall uses the rules in a rule group to filter DNS network traffic for a VPC.  A single call might return only a partial list of the rules. For information, see MaxResults. 
    */
   listFirewallRules(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRulesResponse) => void): Request<Route53Resolver.Types.ListFirewallRulesResponse, AWSError>;
+  /**
+   * Lists all the Resolvers on Outposts that were created using the current Amazon Web Services account.
+   */
+  listOutpostResolvers(params: Route53Resolver.Types.ListOutpostResolversRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListOutpostResolversResponse) => void): Request<Route53Resolver.Types.ListOutpostResolversResponse, AWSError>;
+  /**
+   * Lists all the Resolvers on Outposts that were created using the current Amazon Web Services account.
+   */
+  listOutpostResolvers(callback?: (err: AWSError, data: Route53Resolver.Types.ListOutpostResolversResponse) => void): Request<Route53Resolver.Types.ListOutpostResolversResponse, AWSError>;
   /**
    * Retrieves the Resolver configurations that you have defined. Route 53 Resolver uses the configurations to manage DNS resolution behavior for your VPCs.
    */
@@ -483,6 +515,14 @@ declare class Route53Resolver extends Service {
    * Changes the association of a FirewallRuleGroup with a VPC. The association enables DNS filtering for the VPC. 
    */
   updateFirewallRuleGroupAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.UpdateFirewallRuleGroupAssociationResponse, AWSError>;
+  /**
+   * You can use UpdateOutpostResolver to update the instance count, type, or name of a Resolver on an Outpost.
+   */
+  updateOutpostResolver(params: Route53Resolver.Types.UpdateOutpostResolverRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateOutpostResolverResponse) => void): Request<Route53Resolver.Types.UpdateOutpostResolverResponse, AWSError>;
+  /**
+   * You can use UpdateOutpostResolver to update the instance count, type, or name of a Resolver on an Outpost.
+   */
+  updateOutpostResolver(callback?: (err: AWSError, data: Route53Resolver.Types.UpdateOutpostResolverResponse) => void): Request<Route53Resolver.Types.UpdateOutpostResolverResponse, AWSError>;
   /**
    * Updates the behavior configuration of Route 53 Resolver behavior for a single VPC from Amazon Virtual Private Cloud.
    */
@@ -703,6 +743,38 @@ declare namespace Route53Resolver {
      */
     FirewallRule?: FirewallRule;
   }
+  export interface CreateOutpostResolverRequest {
+    /**
+     * A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice.   CreatorRequestId can be any unique string, for example, a date/time stamp.
+     */
+    CreatorRequestId: CreatorRequestId;
+    /**
+     * A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.
+     */
+    Name: OutpostResolverName;
+    /**
+     * Number of Amazon EC2 instances for the Resolver on Outpost. The default and minimal value is 4.
+     */
+    InstanceCount?: InstanceCount;
+    /**
+     *  The Amazon EC2 instance type. If you specify this, you must also specify a value for the OutpostArn. 
+     */
+    PreferredInstanceType: OutpostInstanceType;
+    /**
+     * The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a value for the PreferredInstanceType.
+     */
+    OutpostArn: OutpostArn;
+    /**
+     *  A string that helps identify the Route 53 Resolvers on Outpost. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateOutpostResolverResponse {
+    /**
+     * Information about the CreateOutpostResolver request, including the status of the request.
+     */
+    OutpostResolver?: OutpostResolver;
+  }
   export interface CreateResolverEndpointRequest {
     /**
      * A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. CreatorRequestId can be any unique string, for example, a date/time stamp. 
@@ -729,9 +801,17 @@ declare namespace Route53Resolver {
      */
     Tags?: TagList;
     /**
-     *  For the endpoint type you can choose either IPv4, IPv6. or dual-stack. A dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This endpoint type is applied to all IP addresses. 
+     *  For the endpoint type you can choose either IPv4, IPv6, or dual-stack. A dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This endpoint type is applied to all IP addresses. 
      */
     ResolverEndpointType?: ResolverEndpointType;
+    /**
+     * The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a value for the PreferredInstanceType. 
+     */
+    OutpostArn?: OutpostArn;
+    /**
+     * The instance type. If you specify this, you must also specify a value for the OutpostArn.
+     */
+    PreferredInstanceType?: OutpostInstanceType;
   }
   export interface CreateResolverEndpointResponse {
     /**
@@ -781,7 +861,7 @@ declare namespace Route53Resolver {
      */
     DomainName: DomainName;
     /**
-     * The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a space.  TargetIps is available only when the value of Rule type is FORWARD.
+     * The IPs that you want Resolver to forward DNS queries to. You can specify either Ipv4 or Ipv6 addresses but not both in the same rule. Separate IP addresses with a space.  TargetIps is available only when the value of Rule type is FORWARD.
      */
     TargetIps?: TargetList;
     /**
@@ -839,6 +919,18 @@ declare namespace Route53Resolver {
      * The specification for the firewall rule that you just deleted.
      */
     FirewallRule?: FirewallRule;
+  }
+  export interface DeleteOutpostResolverRequest {
+    /**
+     * A unique string that identifies the Resolver on the Outpost.
+     */
+    Id: ResourceId;
+  }
+  export interface DeleteOutpostResolverResponse {
+    /**
+     * Information about the DeleteOutpostResolver request, including the status of the request.
+     */
+    OutpostResolver?: OutpostResolver;
   }
   export interface DeleteResolverEndpointRequest {
     /**
@@ -1285,6 +1377,18 @@ declare namespace Route53Resolver {
      */
     FirewallRuleGroup?: FirewallRuleGroup;
   }
+  export interface GetOutpostResolverRequest {
+    /**
+     * The ID of the Resolver on the Outpost.
+     */
+    Id: ResourceId;
+  }
+  export interface GetOutpostResolverResponse {
+    /**
+     * Information about the GetOutpostResolver request, including the status of the request.
+     */
+    OutpostResolver?: OutpostResolver;
+  }
   export interface GetResolverConfigRequest {
     /**
      * Resource ID of the Amazon VPC that you want to get information about.
@@ -1425,6 +1529,7 @@ declare namespace Route53Resolver {
      */
     StatusMessage?: StatusMessage;
   }
+  export type InstanceCount = number;
   export type Ip = string;
   export type IpAddressCount = number;
   export interface IpAddressRequest {
@@ -1475,7 +1580,7 @@ declare namespace Route53Resolver {
      */
     ModificationTime?: Rfc3339TimeString;
   }
-  export type IpAddressStatus = "CREATING"|"FAILED_CREATION"|"ATTACHING"|"ATTACHED"|"REMAP_DETACHING"|"REMAP_ATTACHING"|"DETACHING"|"FAILED_RESOURCE_GONE"|"DELETING"|"DELETE_FAILED_FAS_EXPIRED"|"UPDATING"|string;
+  export type IpAddressStatus = "CREATING"|"FAILED_CREATION"|"ATTACHING"|"ATTACHED"|"REMAP_DETACHING"|"REMAP_ATTACHING"|"DETACHING"|"FAILED_RESOURCE_GONE"|"DELETING"|"DELETE_FAILED_FAS_EXPIRED"|"UPDATING"|"UPDATE_FAILED"|string;
   export interface IpAddressUpdate {
     /**
      *  Only when removing an IP address from a Resolver endpoint: The ID of the IP address that you want to remove. To get this ID, use GetResolverEndpoint.
@@ -1650,6 +1755,30 @@ declare namespace Route53Resolver {
      * A list of the rules that you have defined.  This might be a partial list of the firewall rules that you've defined. For information, see MaxResults. 
      */
     FirewallRules?: FirewallRules;
+  }
+  export interface ListOutpostResolversRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the Outpost.
+     */
+    OutpostArn?: OutpostArn;
+    /**
+     * The maximum number of Resolvers on the Outpost that you want to return in the response to a ListOutpostResolver request. If you don't specify a value for MaxResults, the request returns up to 100 Resolvers.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * For the first ListOutpostResolver request, omit this value. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListOutpostResolversResponse {
+    /**
+     * The Resolvers on Outposts that were created by using the current Amazon Web Services account, and that match the specified filters, if any.
+     */
+    OutpostResolvers?: OutpostResolverList;
+    /**
+     * If more than MaxResults Resolvers match the specified criteria, you can submit another ListOutpostResolver request to get the next group of results. In the next request, specify the value of NextToken from the previous response.
+     */
+    NextToken?: NextToken;
   }
   export type ListResolverConfigsMaxResult = number;
   export interface ListResolverConfigsRequest {
@@ -1916,6 +2045,58 @@ declare namespace Route53Resolver {
   export type MutationProtectionStatus = "ENABLED"|"DISABLED"|string;
   export type Name = string;
   export type NextToken = string;
+  export type OutpostArn = string;
+  export type OutpostInstanceType = string;
+  export interface OutpostResolver {
+    /**
+     * The ARN (Amazon Resource Name) for the Resolver on an Outpost.
+     */
+    Arn?: Arn;
+    /**
+     * The date and time that the Outpost Resolver was created, in Unix time format and Coordinated Universal Time (UTC).
+     */
+    CreationTime?: Rfc3339TimeString;
+    /**
+     * The date and time that the Outpost Resolver was modified, in Unix time format and Coordinated Universal Time (UTC).
+     */
+    ModificationTime?: Rfc3339TimeString;
+    /**
+     * A unique string that identifies the request that created the Resolver endpoint. The CreatorRequestId allows failed requests to be retried without the risk of running the operation twice.
+     */
+    CreatorRequestId?: CreatorRequestId;
+    /**
+     * The ID of the Resolver on Outpost.
+     */
+    Id?: ResourceId;
+    /**
+     * Amazon EC2 instance count for the Resolver on the Outpost.
+     */
+    InstanceCount?: InstanceCount;
+    /**
+     *  The Amazon EC2 instance type. 
+     */
+    PreferredInstanceType?: OutpostInstanceType;
+    /**
+     * Name of the Resolver.
+     */
+    Name?: OutpostResolverName;
+    /**
+     * Status of the Resolver.
+     */
+    Status?: OutpostResolverStatus;
+    /**
+     * A detailed description of the Resolver.
+     */
+    StatusMessage?: OutpostResolverStatusMessage;
+    /**
+     * The ARN (Amazon Resource Name) for the Outpost.
+     */
+    OutpostArn?: OutpostArn;
+  }
+  export type OutpostResolverList = OutpostResolver[];
+  export type OutpostResolverName = string;
+  export type OutpostResolverStatus = "CREATING"|"OPERATIONAL"|"UPDATING"|"DELETING"|"ACTION_NEEDED"|"FAILED_CREATION"|"FAILED_DELETION"|string;
+  export type OutpostResolverStatusMessage = string;
   export type Port = number;
   export type Priority = number;
   export interface PutFirewallRuleGroupPolicyRequest {
@@ -1940,7 +2121,7 @@ declare namespace Route53Resolver {
      */
     Arn: Arn;
     /**
-     * An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account and the operations that you want the account to be able to perform. You can specify the following operations in the Actions section of the statement:    route53resolver:AssociateResolverQueryLogConfig     route53resolver:DisassociateResolverQueryLogConfig     route53resolver:ListResolverQueryLogConfigAssociations     route53resolver:ListResolverQueryLogConfigs    In the Resource section of the statement, you specify the ARNs for the query logging configurations that you want to share with the account that you specified in Arn. 
+     * An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account and the operations that you want the account to be able to perform. You can specify the following operations in the Actions section of the statement:    route53resolver:AssociateResolverQueryLogConfig     route53resolver:DisassociateResolverQueryLogConfig     route53resolver:ListResolverQueryLogConfigs    In the Resource section of the statement, you specify the ARNs for the query logging configurations that you want to share with the account that you specified in Arn. 
      */
     ResolverQueryLogConfigPolicy: ResolverQueryLogConfigPolicy;
   }
@@ -2059,6 +2240,14 @@ declare namespace Route53Resolver {
      *  The Resolver endpoint IP address type. 
      */
     ResolverEndpointType?: ResolverEndpointType;
+    /**
+     * The ARN (Amazon Resource Name) for the Outpost.
+     */
+    OutpostArn?: OutpostArn;
+    /**
+     *  The Amazon EC2 instance type. 
+     */
+    PreferredInstanceType?: OutpostInstanceType;
   }
   export type ResolverEndpointDirection = "INBOUND"|"OUTBOUND"|string;
   export type ResolverEndpointStatus = "CREATING"|"OPERATIONAL"|"UPDATING"|"AUTO_RECOVERING"|"ACTION_NEEDED"|"DELETING"|string;
@@ -2178,7 +2367,7 @@ declare namespace Route53Resolver {
      */
     Name?: Name;
     /**
-     * An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported.
+     * An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers on your network. 
      */
     TargetIps?: TargetList;
     /**
@@ -2438,6 +2627,30 @@ declare namespace Route53Resolver {
     Ipv6: Ipv6;
   }
   export type UpdateIpAddresses = UpdateIpAddress[];
+  export interface UpdateOutpostResolverRequest {
+    /**
+     * A unique string that identifies Resolver on an Outpost.
+     */
+    Id: ResourceId;
+    /**
+     * Name of the Resolver on the Outpost.
+     */
+    Name?: OutpostResolverName;
+    /**
+     * The Amazon EC2 instance count for a Resolver on the Outpost.
+     */
+    InstanceCount?: InstanceCount;
+    /**
+     *  Amazon EC2 instance type. 
+     */
+    PreferredInstanceType?: OutpostInstanceType;
+  }
+  export interface UpdateOutpostResolverResponse {
+    /**
+     * The response to an UpdateOutpostResolver request.
+     */
+    OutpostResolver?: OutpostResolver;
+  }
   export interface UpdateResolverConfigRequest {
     /**
      * Resource ID of the Amazon VPC that you want to update the Resolver configuration for.
@@ -2480,11 +2693,11 @@ declare namespace Route53Resolver {
      */
     Name?: Name;
     /**
-     *  Specifies the endpoint type for what type of IP address the endpoint uses to forward DNS queries. 
+     *  Specifies the endpoint type for what type of IP address the endpoint uses to forward DNS queries.  Updating to IPV6 type isn't currently supported.
      */
     ResolverEndpointType?: ResolverEndpointType;
     /**
-     *  Updates the Resolver endpoint type to IpV4, Ipv6, or dual-stack. 
+     *  Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack. If you don't specify an IPv6 address, one will be automatically chosen from your subnet. 
      */
     UpdateIpAddresses?: UpdateIpAddresses;
   }

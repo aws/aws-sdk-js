@@ -36,6 +36,14 @@ declare class CodeCatalyst extends Service {
    */
   createProject(callback?: (err: AWSError, data: CodeCatalyst.Types.CreateProjectResponse) => void): Request<CodeCatalyst.Types.CreateProjectResponse, AWSError>;
   /**
+   * Creates an empty Git-based source repository in a specified project. The repository is created with an initial empty commit with a default branch named main.
+   */
+  createSourceRepository(params: CodeCatalyst.Types.CreateSourceRepositoryRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.CreateSourceRepositoryResponse) => void): Request<CodeCatalyst.Types.CreateSourceRepositoryResponse, AWSError>;
+  /**
+   * Creates an empty Git-based source repository in a specified project. The repository is created with an initial empty commit with a default branch named main.
+   */
+  createSourceRepository(callback?: (err: AWSError, data: CodeCatalyst.Types.CreateSourceRepositoryResponse) => void): Request<CodeCatalyst.Types.CreateSourceRepositoryResponse, AWSError>;
+  /**
    * Creates a branch in a specified source repository in Amazon CodeCatalyst.   This API only creates a branch in a source repository hosted in Amazon CodeCatalyst. You cannot use this API to create a branch in a linked repository. 
    */
   createSourceRepositoryBranch(params: CodeCatalyst.Types.CreateSourceRepositoryBranchRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.CreateSourceRepositoryBranchResponse) => void): Request<CodeCatalyst.Types.CreateSourceRepositoryBranchResponse, AWSError>;
@@ -60,6 +68,30 @@ declare class CodeCatalyst extends Service {
    */
   deleteDevEnvironment(callback?: (err: AWSError, data: CodeCatalyst.Types.DeleteDevEnvironmentResponse) => void): Request<CodeCatalyst.Types.DeleteDevEnvironmentResponse, AWSError>;
   /**
+   * Deletes a project in a space.
+   */
+  deleteProject(params: CodeCatalyst.Types.DeleteProjectRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.DeleteProjectResponse) => void): Request<CodeCatalyst.Types.DeleteProjectResponse, AWSError>;
+  /**
+   * Deletes a project in a space.
+   */
+  deleteProject(callback?: (err: AWSError, data: CodeCatalyst.Types.DeleteProjectResponse) => void): Request<CodeCatalyst.Types.DeleteProjectResponse, AWSError>;
+  /**
+   * Deletes a source repository in Amazon CodeCatalyst. You cannot use this API to delete a linked repository. It can only be used to delete a Amazon CodeCatalyst source repository.
+   */
+  deleteSourceRepository(params: CodeCatalyst.Types.DeleteSourceRepositoryRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.DeleteSourceRepositoryResponse) => void): Request<CodeCatalyst.Types.DeleteSourceRepositoryResponse, AWSError>;
+  /**
+   * Deletes a source repository in Amazon CodeCatalyst. You cannot use this API to delete a linked repository. It can only be used to delete a Amazon CodeCatalyst source repository.
+   */
+  deleteSourceRepository(callback?: (err: AWSError, data: CodeCatalyst.Types.DeleteSourceRepositoryResponse) => void): Request<CodeCatalyst.Types.DeleteSourceRepositoryResponse, AWSError>;
+  /**
+   * Deletes a space.  Deleting a space cannot be undone. Additionally, since space names must be unique across Amazon CodeCatalyst, you cannot reuse names of deleted spaces. 
+   */
+  deleteSpace(params: CodeCatalyst.Types.DeleteSpaceRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.DeleteSpaceResponse) => void): Request<CodeCatalyst.Types.DeleteSpaceResponse, AWSError>;
+  /**
+   * Deletes a space.  Deleting a space cannot be undone. Additionally, since space names must be unique across Amazon CodeCatalyst, you cannot reuse names of deleted spaces. 
+   */
+  deleteSpace(callback?: (err: AWSError, data: CodeCatalyst.Types.DeleteSpaceResponse) => void): Request<CodeCatalyst.Types.DeleteSpaceResponse, AWSError>;
+  /**
    * Returns information about a Dev Environment for a source repository in a project. Dev Environments are specific to the user who creates them.
    */
   getDevEnvironment(params: CodeCatalyst.Types.GetDevEnvironmentRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.GetDevEnvironmentResponse) => void): Request<CodeCatalyst.Types.GetDevEnvironmentResponse, AWSError>;
@@ -75,6 +107,14 @@ declare class CodeCatalyst extends Service {
    * Returns information about a project.
    */
   getProject(callback?: (err: AWSError, data: CodeCatalyst.Types.GetProjectResponse) => void): Request<CodeCatalyst.Types.GetProjectResponse, AWSError>;
+  /**
+   * Returns information about a source repository.
+   */
+  getSourceRepository(params: CodeCatalyst.Types.GetSourceRepositoryRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.GetSourceRepositoryResponse) => void): Request<CodeCatalyst.Types.GetSourceRepositoryResponse, AWSError>;
+  /**
+   * Returns information about a source repository.
+   */
+  getSourceRepository(callback?: (err: AWSError, data: CodeCatalyst.Types.GetSourceRepositoryResponse) => void): Request<CodeCatalyst.Types.GetSourceRepositoryResponse, AWSError>;
   /**
    * Returns information about the URLs that can be used with a Git client to clone a source repository.
    */
@@ -212,6 +252,22 @@ declare class CodeCatalyst extends Service {
    */
   updateDevEnvironment(callback?: (err: AWSError, data: CodeCatalyst.Types.UpdateDevEnvironmentResponse) => void): Request<CodeCatalyst.Types.UpdateDevEnvironmentResponse, AWSError>;
   /**
+   * Changes one or more values for a project.
+   */
+  updateProject(params: CodeCatalyst.Types.UpdateProjectRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.UpdateProjectResponse) => void): Request<CodeCatalyst.Types.UpdateProjectResponse, AWSError>;
+  /**
+   * Changes one or more values for a project.
+   */
+  updateProject(callback?: (err: AWSError, data: CodeCatalyst.Types.UpdateProjectResponse) => void): Request<CodeCatalyst.Types.UpdateProjectResponse, AWSError>;
+  /**
+   * Changes one or more values for a space.
+   */
+  updateSpace(params: CodeCatalyst.Types.UpdateSpaceRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.UpdateSpaceResponse) => void): Request<CodeCatalyst.Types.UpdateSpaceResponse, AWSError>;
+  /**
+   * Changes one or more values for a space.
+   */
+  updateSpace(callback?: (err: AWSError, data: CodeCatalyst.Types.UpdateSpaceResponse) => void): Request<CodeCatalyst.Types.UpdateSpaceResponse, AWSError>;
+  /**
    * Verifies whether the calling user has a valid Amazon CodeCatalyst login and session. If successful, this returns the ID of the user in Amazon CodeCatalyst.
    */
   verifySession(callback?: (err: AWSError, data: CodeCatalyst.Types.VerifySessionResponse) => void): Request<CodeCatalyst.Types.VerifySessionResponse, AWSError>;
@@ -288,7 +344,7 @@ declare namespace CodeCatalyst {
      */
     alias?: CreateDevEnvironmentRequestAliasString;
     /**
-     * Information about the integrated development environment (IDE) configured for a Dev Environment.  An IDE is required to create a Dev Environment. For Dev Environment creation, this field contains configuration information and must be provided. 
+     * Information about the integrated development environment (IDE) configured for a Dev Environment.  An IDE is required to create a Dev Environment. For Dev Environment creation, this field contains configuration information and must be provided.  
      */
     ides?: IdeConfigurationList;
     /**
@@ -391,6 +447,42 @@ declare namespace CodeCatalyst {
      */
     headCommitId?: String;
   }
+  export interface CreateSourceRepositoryRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The name of the source repository. For more information about name requirements, see Quotas for source repositories.
+     */
+    name: SourceRepositoryNameString;
+    /**
+     * The description of the source repository.
+     */
+    description?: SourceRepositoryDescriptionString;
+  }
+  export interface CreateSourceRepositoryResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The name of the source repository.
+     */
+    name: SourceRepositoryNameString;
+    /**
+     * The description of the source repository.
+     */
+    description?: SourceRepositoryDescriptionString;
+  }
   export interface DeleteAccessTokenRequest {
     /**
      * The ID of the personal access token to delete. You can find the IDs of all PATs associated with your Amazon Web Services Builder ID in a space by calling ListAccessTokens.
@@ -426,6 +518,74 @@ declare namespace CodeCatalyst {
      * The system-generated unique ID of the deleted Dev Environment. 
      */
     id: Uuid;
+  }
+  export interface DeleteProjectRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space. To retrieve a list of project names, use ListProjects.
+     */
+    name: NameString;
+  }
+  export interface DeleteProjectResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    name: NameString;
+    /**
+     * The friendly name displayed to users of the project in Amazon CodeCatalyst.
+     */
+    displayName?: String;
+  }
+  export interface DeleteSourceRepositoryRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The name of the source repository.
+     */
+    name: SourceRepositoryNameString;
+  }
+  export interface DeleteSourceRepositoryResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The name of the repository.
+     */
+    name: SourceRepositoryNameString;
+  }
+  export interface DeleteSpaceRequest {
+    /**
+     * The name of the space. To retrieve a list of space names, use ListSpaces.
+     */
+    name: NameString;
+  }
+  export interface DeleteSpaceResponse {
+    /**
+     * The name of the space.
+     */
+    name: NameString;
+    /**
+     * The friendly name of the space displayed to users of the space in Amazon CodeCatalyst.
+     */
+    displayName?: String;
   }
   export interface DevEnvironmentAccessDetails {
     /**
@@ -610,7 +770,7 @@ declare namespace CodeCatalyst {
      */
     sourceIpAddress?: String;
     /**
-     * 
+     * The user agent whose actions are recorded in the event.
      */
     userAgent?: String;
   }
@@ -639,15 +799,15 @@ declare namespace CodeCatalyst {
   export type ExecuteCommandSessionConfigurationCommandString = string;
   export interface Filter {
     /**
-     * 
+     * A key that can be used to sort results.
      */
     key: String;
     /**
-     * 
+     * The values of the key.
      */
     values: StringList;
     /**
-     * 
+     * The operator used to compare the fields.
      */
     comparisonOperator?: String;
   }
@@ -770,6 +930,46 @@ declare namespace CodeCatalyst {
      * The HTTPS URL to use when cloning the source repository.
      */
     https: String;
+  }
+  export interface GetSourceRepositoryRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The name of the source repository.
+     */
+    name: SourceRepositoryNameString;
+  }
+  export interface GetSourceRepositoryResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The name of the source repository.
+     */
+    name: SourceRepositoryNameString;
+    /**
+     * The description of the source repository.
+     */
+    description?: SourceRepositoryDescriptionString;
+    /**
+     * The time the source repository was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339.
+     */
+    lastUpdatedTime: Timestamp;
+    /**
+     * The time the source repository was created, in coordinated universal time (UTC) timestamp format as specified in RFC 3339.
+     */
+    createdTime: Timestamp;
   }
   export interface GetSpaceRequest {
     /**
@@ -1188,7 +1388,7 @@ declare namespace CodeCatalyst {
      */
     key: FilterKey;
     /**
-     * The value of the key.
+     * The values of the key.
      */
     values: StringList;
     /**
@@ -1230,6 +1430,7 @@ declare namespace CodeCatalyst {
   export type SourceRepositoryDescriptionString = string;
   export type SourceRepositoryIdString = string;
   export type SourceRepositoryNameString = string;
+  export type SpaceDescription = string;
   export type SpaceSummaries = SpaceSummary[];
   export interface SpaceSummary {
     /**
@@ -1473,13 +1674,69 @@ declare namespace CodeCatalyst {
     clientToken?: ClientToken;
   }
   export type UpdateDevEnvironmentResponseAliasString = string;
+  export interface UpdateProjectRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project.
+     */
+    name: NameString;
+    /**
+     * The description of the project.
+     */
+    description?: ProjectDescription;
+  }
+  export interface UpdateProjectResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName?: NameString;
+    /**
+     * The name of the project.
+     */
+    name?: NameString;
+    /**
+     * The friendly name of the project displayed to users in Amazon CodeCatalyst.
+     */
+    displayName?: String;
+    /**
+     * The description of the project.
+     */
+    description?: String;
+  }
+  export interface UpdateSpaceRequest {
+    /**
+     * The name of the space.
+     */
+    name: NameString;
+    /**
+     * The description of the space.
+     */
+    description?: SpaceDescription;
+  }
+  export interface UpdateSpaceResponse {
+    /**
+     * The name of the space.
+     */
+    name?: NameString;
+    /**
+     * The friendly name of the space displayed to users in Amazon CodeCatalyst.
+     */
+    displayName?: String;
+    /**
+     * The description of the space.
+     */
+    description?: String;
+  }
   export interface UserIdentity {
     /**
      * The role assigned to the user in a Amazon CodeCatalyst space or project when the event occurred.
      */
     userType: UserType;
     /**
-     * 
+     * The ID of the Amazon CodeCatalyst service principal.
      */
     principalId: String;
     /**

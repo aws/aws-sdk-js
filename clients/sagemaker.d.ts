@@ -1845,6 +1845,14 @@ declare class SageMaker extends Service {
    */
   listProjects(callback?: (err: AWSError, data: SageMaker.Types.ListProjectsOutput) => void): Request<SageMaker.Types.ListProjectsOutput, AWSError>;
   /**
+   *  Lists Amazon SageMaker Catalogs based on given filters and orders. The maximum number of ResourceCatalogs viewable is 1000. 
+   */
+  listResourceCatalogs(params: SageMaker.Types.ListResourceCatalogsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListResourceCatalogsResponse) => void): Request<SageMaker.Types.ListResourceCatalogsResponse, AWSError>;
+  /**
+   *  Lists Amazon SageMaker Catalogs based on given filters and orders. The maximum number of ResourceCatalogs viewable is 1000. 
+   */
+  listResourceCatalogs(callback?: (err: AWSError, data: SageMaker.Types.ListResourceCatalogsResponse) => void): Request<SageMaker.Types.ListResourceCatalogsResponse, AWSError>;
+  /**
    * Lists spaces.
    */
   listSpaces(params: SageMaker.Types.ListSpacesRequest, callback?: (err: AWSError, data: SageMaker.Types.ListSpacesResponse) => void): Request<SageMaker.Types.ListSpacesResponse, AWSError>;
@@ -2253,11 +2261,11 @@ declare class SageMaker extends Service {
    */
   updateExperiment(callback?: (err: AWSError, data: SageMaker.Types.UpdateExperimentResponse) => void): Request<SageMaker.Types.UpdateExperimentResponse, AWSError>;
   /**
-   * Updates the feature group.
+   * Updates the feature group by either adding features or updating the online store configuration. Use one of the following request parameters at a time while using the UpdateFeatureGroup API. You can add features for your feature group using the FeatureAdditions request parameter. Features cannot be removed from a feature group. You can update the online store configuration by using the OnlineStoreConfig request parameter. If a TtlDuration is specified, the default TtlDuration applies for all records added to the feature group after the feature group is updated. If a record level TtlDuration exists from using the PutRecord API, the record level TtlDuration applies to that record instead of the default TtlDuration.
    */
   updateFeatureGroup(params: SageMaker.Types.UpdateFeatureGroupRequest, callback?: (err: AWSError, data: SageMaker.Types.UpdateFeatureGroupResponse) => void): Request<SageMaker.Types.UpdateFeatureGroupResponse, AWSError>;
   /**
-   * Updates the feature group.
+   * Updates the feature group by either adding features or updating the online store configuration. Use one of the following request parameters at a time while using the UpdateFeatureGroup API. You can add features for your feature group using the FeatureAdditions request parameter. Features cannot be removed from a feature group. You can update the online store configuration by using the OnlineStoreConfig request parameter. If a TtlDuration is specified, the default TtlDuration applies for all records added to the feature group after the feature group is updated. If a record level TtlDuration exists from using the PutRecord API, the record level TtlDuration applies to that record instead of the default TtlDuration.
    */
   updateFeatureGroup(callback?: (err: AWSError, data: SageMaker.Types.UpdateFeatureGroupResponse) => void): Request<SageMaker.Types.UpdateFeatureGroupResponse, AWSError>;
   /**
@@ -6175,6 +6183,7 @@ declare namespace SageMaker {
     WorkteamArn?: WorkteamArn;
   }
   export type CreationTime = Date;
+  export type CrossAccountFilterOption = "SameAccount"|"CrossAccount"|string;
   export type CsvContentType = string;
   export type CsvContentTypes = CsvContentType[];
   export interface CustomImage {
@@ -8021,9 +8030,9 @@ declare namespace SageMaker {
   }
   export interface DescribeFeatureGroupRequest {
     /**
-     * The name of the FeatureGroup you want described. 
+     * The name or Amazon Resource Name (ARN) of the FeatureGroup you want described. 
      */
-    FeatureGroupName: FeatureGroupName;
+    FeatureGroupName: FeatureGroupNameOrArn;
     /**
      * A token to resume pagination of the list of Features (FeatureDefinitions). 2,500 Features are returned by default.
      */
@@ -8101,9 +8110,9 @@ declare namespace SageMaker {
   }
   export interface DescribeFeatureMetadataRequest {
     /**
-     * The name of the feature group containing the feature.
+     * The name or Amazon Resource Name (ARN) of the feature group containing the feature.
      */
-    FeatureGroupName: FeatureGroupName;
+    FeatureGroupName: FeatureGroupNameOrArn;
     /**
      * The name of the feature.
      */
@@ -11189,6 +11198,7 @@ declare namespace SageMaker {
   export type FeatureGroupMaxResults = number;
   export type FeatureGroupName = string;
   export type FeatureGroupNameContains = string;
+  export type FeatureGroupNameOrArn = string;
   export type FeatureGroupSortBy = "Name"|"FeatureGroupStatus"|"OfflineStoreStatus"|"CreationTime"|string;
   export type FeatureGroupSortOrder = "Ascending"|"Descending"|string;
   export type FeatureGroupStatus = "Creating"|"Created"|"CreateFailed"|"Deleting"|"DeleteFailed"|string;
@@ -15573,6 +15583,46 @@ declare namespace SageMaker {
      */
     NextToken?: NextToken;
   }
+  export interface ListResourceCatalogsRequest {
+    /**
+     *  A string that partially matches one or more ResourceCatalogs names. Filters ResourceCatalog by name. 
+     */
+    NameContains?: ResourceCatalogName;
+    /**
+     *  Use this parameter to search for ResourceCatalogs created after a specific date and time. 
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     *  Use this parameter to search for ResourceCatalogs created before a specific date and time. 
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     *  The order in which the resource catalogs are listed. 
+     */
+    SortOrder?: ResourceCatalogSortOrder;
+    /**
+     *  The value on which the resource catalog list is sorted. 
+     */
+    SortBy?: ResourceCatalogSortBy;
+    /**
+     *  The maximum number of results returned by ListResourceCatalogs. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  A token to resume pagination of ListResourceCatalogs results. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListResourceCatalogsResponse {
+    /**
+     *  A list of the requested ResourceCatalogs. 
+     */
+    ResourceCatalogs?: ResourceCatalogList;
+    /**
+     *  A token to resume pagination of ListResourceCatalogs results. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSpacesRequest {
     /**
      * If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.
@@ -19529,6 +19579,30 @@ declare namespace SageMaker {
     CompletionCriteria?: AutoMLJobCompletionCriteria;
   }
   export type ResourceArn = string;
+  export interface ResourceCatalog {
+    /**
+     *  The Amazon Resource Name (ARN) of the ResourceCatalog. 
+     */
+    ResourceCatalogArn: ResourceCatalogArn;
+    /**
+     *  The name of the ResourceCatalog. 
+     */
+    ResourceCatalogName: ResourceCatalogName;
+    /**
+     *  A free form description of the ResourceCatalog. 
+     */
+    Description: ResourceCatalogDescription;
+    /**
+     *  The time the ResourceCatalog was created. 
+     */
+    CreationTime: Timestamp;
+  }
+  export type ResourceCatalogArn = string;
+  export type ResourceCatalogDescription = string;
+  export type ResourceCatalogList = ResourceCatalog[];
+  export type ResourceCatalogName = string;
+  export type ResourceCatalogSortBy = "CreationTime"|string;
+  export type ResourceCatalogSortOrder = "Ascending"|"Descending"|string;
   export interface ResourceConfig {
     /**
      * The ML compute instance type.   SageMaker Training on Amazon Elastic Compute Cloud (EC2) P4de instances is in preview release starting December 9th, 2022.   Amazon EC2 P4de instances (currently in preview) are powered by 8 NVIDIA A100 GPUs with 80GB high-performance HBM2e GPU memory, which accelerate the speed of training ML models that need to be trained on large datasets of high-resolution data. In this preview release, Amazon SageMaker supports ML training jobs on P4de instances (ml.p4de.24xlarge) to reduce model training time. The ml.p4de.24xlarge instances are available in the following Amazon Web Services Regions.    US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   To request quota limit increase and start using P4de instances, contact the SageMaker Training service team through your account team. 
@@ -19810,6 +19884,10 @@ declare namespace SageMaker {
      * The maximum number of results to return.
      */
     MaxResults?: MaxResults;
+    /**
+     *  A cross account filter option. When the value is "CrossAccount" the search results will only include resources made discoverable to you from other accounts. When the value is "SameAccount" or null the search results will only include resources from your account. Default is null. For more information on searching for resources made discoverable to your account, see  Search discoverable resources in the SageMaker Developer Guide. The maximum number of ResourceCatalogs viewable is 1000. 
+     */
+    CrossAccountFilterOption?: CrossAccountFilterOption;
   }
   export interface SearchResponse {
     /**
@@ -21694,9 +21772,9 @@ declare namespace SageMaker {
   }
   export interface UpdateFeatureGroupRequest {
     /**
-     * The name of the feature group that you're updating.
+     * The name or Amazon Resource Name (ARN) of the feature group that you're updating.
      */
-    FeatureGroupName: FeatureGroupName;
+    FeatureGroupName: FeatureGroupNameOrArn;
     /**
      * Updates the feature group. Updating a feature group is an asynchronous operation. When you get an HTTP 200 response, you've made a valid request. It takes some time after you've made a valid request for Feature Store to update the feature group.
      */
@@ -21714,9 +21792,9 @@ declare namespace SageMaker {
   }
   export interface UpdateFeatureMetadataRequest {
     /**
-     * The name of the feature group containing the feature that you're updating.
+     * The name or Amazon Resource Name (ARN) of the feature group containing the feature that you're updating.
      */
-    FeatureGroupName: FeatureGroupName;
+    FeatureGroupName: FeatureGroupNameOrArn;
     /**
      * The name of the feature that you're updating.
      */

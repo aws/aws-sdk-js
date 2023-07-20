@@ -492,11 +492,11 @@ declare class LexModelsV2 extends Service {
    */
   listIntentPaths(callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentPathsResponse) => void): Request<LexModelsV2.Types.ListIntentPathsResponse, AWSError>;
   /**
-   * Retrieves summary metrics for the intent stages in your bot. The following fields are required:    metrics – A list of AnalyticsIntentStageMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. You can only specify one order in a given request.
+   * Retrieves summary metrics for the stages within intents in your bot. The following fields are required:    metrics – A list of AnalyticsIntentStageMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. You can only specify one order in a given request.
    */
   listIntentStageMetrics(params: LexModelsV2.Types.ListIntentStageMetricsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentStageMetricsResponse) => void): Request<LexModelsV2.Types.ListIntentStageMetricsResponse, AWSError>;
   /**
-   * Retrieves summary metrics for the intent stages in your bot. The following fields are required:    metrics – A list of AnalyticsIntentStageMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. You can only specify one order in a given request.
+   * Retrieves summary metrics for the stages within intents in your bot. The following fields are required:    metrics – A list of AnalyticsIntentStageMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. You can only specify one order in a given request.
    */
   listIntentStageMetrics(callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentStageMetricsResponse) => void): Request<LexModelsV2.Types.ListIntentStageMetricsResponse, AWSError>;
   /**
@@ -588,19 +588,19 @@ declare class LexModelsV2 extends Service {
    */
   listTestSets(callback?: (err: AWSError, data: LexModelsV2.Types.ListTestSetsResponse) => void): Request<LexModelsV2.Types.ListTestSetsResponse, AWSError>;
   /**
-   * Retrieves a list of metadata for individual user utterances to your bot. The startDateTime and endDateTime fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results and the sortBy field to specify the values by which to sort the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.  
+   *  To use this API operation, your IAM role must have permissions to perform the ListAggregatedUtterances operation, which provides access to utterance-related analytics. See Viewing utterance statistics for the IAM policy to apply to the IAM role.  Retrieves a list of metadata for individual user utterances to your bot. The following fields are required:    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results and the sortBy field to specify the values by which to sort the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.  
    */
   listUtteranceAnalyticsData(params: LexModelsV2.Types.ListUtteranceAnalyticsDataRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListUtteranceAnalyticsDataResponse) => void): Request<LexModelsV2.Types.ListUtteranceAnalyticsDataResponse, AWSError>;
   /**
-   * Retrieves a list of metadata for individual user utterances to your bot. The startDateTime and endDateTime fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results and the sortBy field to specify the values by which to sort the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.  
+   *  To use this API operation, your IAM role must have permissions to perform the ListAggregatedUtterances operation, which provides access to utterance-related analytics. See Viewing utterance statistics for the IAM policy to apply to the IAM role.  Retrieves a list of metadata for individual user utterances to your bot. The following fields are required:    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results and the sortBy field to specify the values by which to sort the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.  
    */
   listUtteranceAnalyticsData(callback?: (err: AWSError, data: LexModelsV2.Types.ListUtteranceAnalyticsDataResponse) => void): Request<LexModelsV2.Types.ListUtteranceAnalyticsDataResponse, AWSError>;
   /**
-   * Retrieves summary metrics for the utterances in your bot. The following fields are required:    metrics – A list of AnalyticsUtteranceMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. Currently, you can specify it in either field, but not in both.
+   *  To use this API operation, your IAM role must have permissions to perform the ListAggregatedUtterances operation, which provides access to utterance-related analytics. See Viewing utterance statistics for the IAM policy to apply to the IAM role.  Retrieves summary metrics for the utterances in your bot. The following fields are required:    metrics – A list of AnalyticsUtteranceMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. Currently, you can specify it in either field, but not in both.
    */
   listUtteranceMetrics(params: LexModelsV2.Types.ListUtteranceMetricsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListUtteranceMetricsResponse) => void): Request<LexModelsV2.Types.ListUtteranceMetricsResponse, AWSError>;
   /**
-   * Retrieves summary metrics for the utterances in your bot. The following fields are required:    metrics – A list of AnalyticsUtteranceMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. Currently, you can specify it in either field, but not in both.
+   *  To use this API operation, your IAM role must have permissions to perform the ListAggregatedUtterances operation, which provides access to utterance-related analytics. See Viewing utterance statistics for the IAM policy to apply to the IAM role.  Retrieves summary metrics for the utterances in your bot. The following fields are required:    metrics – A list of AnalyticsUtteranceMetric objects. In each object, use the name field to specify the metric to calculate, the statistic field to specify whether to calculate the Sum, Average, or Max number, and the order field to specify whether to sort the results in Ascending or Descending order.    startDateTime and endDateTime – Define a time range for which you want to retrieve results.   Of the optional fields, you can organize the results in the following ways:   Use the filters field to filter the results, the groupBy field to specify categories by which to group the results, and the binBy field to specify time intervals by which to group the results.   Use the maxResults field to limit the number of results to return in a single response and the nextToken field to return the next batch of results if the response does not return the full set of results.   Note that an order field exists in both binBy and metrics. Currently, you can specify it in either field, but not in both.
    */
   listUtteranceMetrics(callback?: (err: AWSError, data: LexModelsV2.Types.ListUtteranceMetricsResponse) => void): Request<LexModelsV2.Types.ListUtteranceMetricsResponse, AWSError>;
   /**
@@ -882,6 +882,7 @@ declare namespace LexModelsV2 {
   }
   export type AnalyticsBinKeys = AnalyticsBinKey[];
   export type AnalyticsBinValue = number;
+  export type AnalyticsChannel = string;
   export type AnalyticsCommonFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|string;
   export type AnalyticsFilterOperator = "EQ"|"GT"|"LT"|string;
   export type AnalyticsFilterValue = string;
@@ -1248,7 +1249,7 @@ declare namespace LexModelsV2 {
   export type AnalyticsUtteranceMetricName = "Count"|"Missed"|"Detected"|"UtteranceTimestamp"|string;
   export interface AnalyticsUtteranceMetricResult {
     /**
-     * The metric that you requested.    Count – The number of utterances.    Missed – The number of utterances that Amazon Lex failed to recognize.    Detected – The number of utterances that Amazon Lex managed to detect.    UtteranceTimeStamp – The date and time of the utterance.  
+     * The metric that you requested.    Count – The number of utterances.    Missed – The number of utterances that Amazon Lex failed to recognize.    Detected – The number of utterances that Amazon Lex managed to detect.    UtteranceTimestamp – The date and time of the utterance.  
      */
     name?: AnalyticsUtteranceMetricName;
     /**
@@ -1538,7 +1539,6 @@ declare namespace LexModelsV2 {
      */
     localeId: LocaleId;
   }
-  export type BotChannelType = "Facebook"|"Slack"|"TwilioSms"|string;
   export interface BotExportSpecification {
     /**
      * The identifier of the bot assigned by Amazon Lex.
@@ -6423,7 +6423,7 @@ declare namespace LexModelsV2 {
     /**
      * The channel that is integrated with the bot that the session was held with.
      */
-    channel?: BotChannelType;
+    channel?: AnalyticsChannel;
     /**
      * The identifier of the session.
      */
@@ -8323,7 +8323,7 @@ declare namespace LexModelsV2 {
   export type UtteranceContentType = "PlainText"|"CustomPayload"|"SSML"|"ImageResponseCard"|string;
   export interface UtteranceDataSortBy {
     /**
-     * The measure by which to sort the utterance analytics data.    Count – The number of utterances.    UtteranceTimeStamp – The date and time of the utterance.  
+     * The measure by which to sort the utterance analytics data.    Count – The number of utterances.    UtteranceTimestamp – The date and time of the utterance.  
      */
     name: AnalyticsUtteranceSortByName;
     /**
@@ -8382,7 +8382,7 @@ declare namespace LexModelsV2 {
     /**
      * The channel that is integrated with the bot that the utterance was made to.
      */
-    channel?: BotChannelType;
+    channel?: AnalyticsChannel;
     /**
      * The mode of the session. The possible values are as follows:    Speech – The session consisted of spoken dialogue.    Text – The session consisted of written dialogue.    DTMF – The session consisted of touch-tone keypad (Dual Tone Multi-Frequency) key presses.    MultiMode – The session consisted of multiple modes.  
      */
