@@ -2355,7 +2355,7 @@ declare namespace WorkSpaces {
      */
     ComputerName?: ComputerName;
     /**
-     * The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
+     * The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
      */
     VolumeEncryptionKey?: VolumeEncryptionKey;
     /**
@@ -2686,7 +2686,7 @@ declare namespace WorkSpaces {
      */
     BundleId: BundleId;
     /**
-     * The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
+     * The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
      */
     VolumeEncryptionKey?: VolumeEncryptionKey;
     /**
