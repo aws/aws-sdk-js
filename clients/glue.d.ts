@@ -3000,6 +3000,10 @@ declare namespace Glue {
      * Specifies your data quality evaluation criteria. Allows multiple input data and returns a collection of Dynamic Frames.
      */
     EvaluateDataQualityMultiFrame?: EvaluateDataQualityMultiFrame;
+    /**
+     * Specifies a Glue DataBrew recipe node.
+     */
+    Recipe?: Recipe;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -10255,6 +10259,31 @@ declare namespace Glue {
     NextToken?: SchemaRegistryTokenString;
   }
   export type QuoteChar = "quote"|"quillemet"|"single_quote"|"disabled"|string;
+  export interface Recipe {
+    /**
+     * The name of the Glue Studio node.
+     */
+    Name: NodeName;
+    /**
+     * The nodes that are inputs to the recipe node, identified by id.
+     */
+    Inputs: OneInput;
+    /**
+     * A reference to the DataBrew recipe used by the node.
+     */
+    RecipeReference: RecipeReference;
+  }
+  export interface RecipeReference {
+    /**
+     * The ARN of the DataBrew recipe.
+     */
+    RecipeArn: EnclosedInStringProperty;
+    /**
+     * The RecipeVersion of the DataBrew recipe.
+     */
+    RecipeVersion: RecipeVersion;
+  }
+  export type RecipeVersion = string;
   export type RecordsCount = number;
   export type RecrawlBehavior = "CRAWL_EVERYTHING"|"CRAWL_NEW_FOLDERS_ONLY"|"CRAWL_EVENT_MODE"|string;
   export interface RecrawlPolicy {

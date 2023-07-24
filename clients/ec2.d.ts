@@ -34468,7 +34468,7 @@ declare namespace EC2 {
   export type SpotInstanceRequestId = string;
   export type SpotInstanceRequestIdList = SpotInstanceRequestId[];
   export type SpotInstanceRequestList = SpotInstanceRequest[];
-  export type SpotInstanceState = "open"|"active"|"closed"|"cancelled"|"failed"|string;
+  export type SpotInstanceState = "open"|"active"|"closed"|"cancelled"|"failed"|"disabled"|string;
   export interface SpotInstanceStateFault {
     /**
      * The reason code for the Spot Instance state change.

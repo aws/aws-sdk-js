@@ -460,6 +460,22 @@ declare class QuickSight extends Service {
    */
   describeDashboardPermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardPermissionsResponse) => void): Request<QuickSight.Types.DescribeDashboardPermissionsResponse, AWSError>;
   /**
+   * Describes an existing snapshot job. Poll job descriptions after a job starts to know the status of the job. For information on available status codes, see JobStatus.
+   */
+  describeDashboardSnapshotJob(params: QuickSight.Types.DescribeDashboardSnapshotJobRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.DescribeDashboardSnapshotJobResponse, AWSError>;
+  /**
+   * Describes an existing snapshot job. Poll job descriptions after a job starts to know the status of the job. For information on available status codes, see JobStatus.
+   */
+  describeDashboardSnapshotJob(callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.DescribeDashboardSnapshotJobResponse, AWSError>;
+  /**
+   * Describes the result of an existing snapshot job that has finished running. A finished snapshot job will return a COMPLETED or FAILED status when you poll the job with a DescribeDashboardSnapshotJob API call. If the job has not finished running, this operation returns a message that says Dashboard Snapshot Job with id &lt;SnapshotjobId&gt; has not reached a terminal state..
+   */
+  describeDashboardSnapshotJobResult(params: QuickSight.Types.DescribeDashboardSnapshotJobResultRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardSnapshotJobResultResponse) => void): Request<QuickSight.Types.DescribeDashboardSnapshotJobResultResponse, AWSError>;
+  /**
+   * Describes the result of an existing snapshot job that has finished running. A finished snapshot job will return a COMPLETED or FAILED status when you poll the job with a DescribeDashboardSnapshotJob API call. If the job has not finished running, this operation returns a message that says Dashboard Snapshot Job with id &lt;SnapshotjobId&gt; has not reached a terminal state..
+   */
+  describeDashboardSnapshotJobResult(callback?: (err: AWSError, data: QuickSight.Types.DescribeDashboardSnapshotJobResultResponse) => void): Request<QuickSight.Types.DescribeDashboardSnapshotJobResultResponse, AWSError>;
+  /**
    * Describes a dataset. This operation doesn't support datasets that include uploaded files as a source.
    */
   describeDataSet(params: QuickSight.Types.DescribeDataSetRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeDataSetResponse) => void): Request<QuickSight.Types.DescribeDataSetResponse, AWSError>;
@@ -1028,6 +1044,14 @@ declare class QuickSight extends Service {
    */
   startAssetBundleImportJob(callback?: (err: AWSError, data: QuickSight.Types.StartAssetBundleImportJobResponse) => void): Request<QuickSight.Types.StartAssetBundleImportJobResponse, AWSError>;
   /**
+   * Starts an asynchronous job that generates a dashboard snapshot. You can request up to one paginated PDF and up to five CSVs per API call. Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
+   */
+  startDashboardSnapshotJob(params: QuickSight.Types.StartDashboardSnapshotJobRequest, callback?: (err: AWSError, data: QuickSight.Types.StartDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.StartDashboardSnapshotJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous job that generates a dashboard snapshot. You can request up to one paginated PDF and up to five CSVs per API call. Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
+   */
+  startDashboardSnapshotJob(callback?: (err: AWSError, data: QuickSight.Types.StartDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.StartDashboardSnapshotJobResponse, AWSError>;
+  /**
    * Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, template, and topic.  Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:   You can't use tags to track costs for Amazon QuickSight. This isn't possible because you can't tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.   Amazon QuickSight doesn't currently support the tag editor for Resource Groups.  
    */
   tagResource(params: QuickSight.Types.TagResourceRequest, callback?: (err: AWSError, data: QuickSight.Types.TagResourceResponse) => void): Request<QuickSight.Types.TagResourceResponse, AWSError>;
@@ -1367,6 +1391,10 @@ declare namespace QuickSight {
      * Aggregation for date values.    COUNT: Aggregate by the total number of values, including duplicates.    DISTINCT_COUNT: Aggregate by the total number of distinct values.    MIN: Select the smallest date value.    MAX: Select the largest date value.  
      */
     DateAggregationFunction?: DateAggregationFunction;
+    /**
+     * Aggregation for attributes.
+     */
+    AttributeAggregationFunction?: AttributeAggregationFunction;
   }
   export type AggregationFunctionParameters = {[key: string]: LimitedString};
   export interface AggregationSortConfiguration {
@@ -1591,6 +1619,13 @@ declare namespace QuickSight {
      */
     InitialTopicId: RestrictiveResourceId;
   }
+  export interface AnonymousUserSnapshotJobResult {
+    /**
+     * A list of SnapshotJobResultFileGroup objects that contain information on the files that are requested during a StartDashboardSnapshotJob API call. If the job succeeds, these objects contain the location where the snapshot artifacts are stored. If the job fails, the objects contain information about the error that caused the job to fail.
+     */
+    FileGroups?: SnapshotJobResultFileGroupList;
+  }
+  export type AnonymousUserSnapshotJobResultList = AnonymousUserSnapshotJobResult[];
   export interface ArcAxisConfiguration {
     /**
      * The arc axis range of a GaugeChartVisual.
@@ -2042,6 +2077,16 @@ declare namespace QuickSight {
      * Use the RoleArn structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use RoleArn to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.
      */
     RoleArn?: RoleArn;
+  }
+  export interface AttributeAggregationFunction {
+    /**
+     * The built-in aggregation functions for attributes.    UNIQUE_VALUE: Returns the unique value for a field, aggregated by the dimension fields.  
+     */
+    SimpleAttributeAggregation?: SimpleAttributeAggregationFunction;
+    /**
+     * Used by the UNIQUE_VALUE aggregation function. If there are multiple values for the field used by the aggregation, the value for this property will be returned instead. Defaults to '*'.
+     */
+    ValueForMultipleValues?: String;
   }
   export interface AuroraParameters {
     /**
@@ -5639,6 +5684,10 @@ declare namespace QuickSight {
      * Customize how dates are formatted in controls.
      */
     DateTimeFormat?: DateTimeFormat;
+    /**
+     * The configuration of info icon label options.
+     */
+    InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
   export interface DateTimeValueWhenUnsetConfiguration {
     /**
@@ -6881,6 +6930,114 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface DescribeDashboardSnapshotJobRequest {
+    /**
+     * The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the dashboard that you have started a snapshot job for.
+     */
+    DashboardId: ShortRestrictiveResourceId;
+    /**
+     * The ID of the job to be described. The job ID is set when you start a new job with a StartDashboardSnapshotJob API call.
+     */
+    SnapshotJobId: ShortRestrictiveResourceId;
+  }
+  export interface DescribeDashboardSnapshotJobResponse {
+    /**
+     *  The ID of the Amazon Web Services account that the dashboard snapshot job is executed in. 
+     */
+    AwsAccountId?: AwsAccountId;
+    /**
+     * The ID of the dashboard that you have started a snapshot job for.
+     */
+    DashboardId?: ShortRestrictiveResourceId;
+    /**
+     * The ID of the job to be described. The job ID is set when you start a new job with a StartDashboardSnapshotJob API call.
+     */
+    SnapshotJobId?: ShortRestrictiveResourceId;
+    /**
+     * The user configuration for the snapshot job. This information is provided when you make a StartDashboardSnapshotJob API call.
+     */
+    UserConfiguration?: SnapshotUserConfigurationRedacted;
+    /**
+     * The snapshot configuration of the job. This information is provided when you make a StartDashboardSnapshotJob API call.
+     */
+    SnapshotConfiguration?: SnapshotConfiguration;
+    /**
+     * The Amazon Resource Name (ARN) for the snapshot job. The job ARN is generated when you start a new job with a StartDashboardSnapshotJob API call.
+     */
+    Arn?: Arn;
+    /**
+     * Indicates the status of a job. The status updates as the job executes. This shows one of the following values.    COMPLETED - The job was completed successfully.    FAILED - The job failed to execute.    QUEUED - The job is queued and hasn't started yet.    RUNNING - The job is still running.  
+     */
+    JobStatus?: SnapshotJobStatus;
+    /**
+     *  The time that the snapshot job was created. 
+     */
+    CreatedTime?: Timestamp;
+    /**
+     *  The time that the snapshot job status was last updated. 
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     *  The Amazon Web Services request ID for this operation. 
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the request
+     */
+    Status?: StatusCode;
+  }
+  export interface DescribeDashboardSnapshotJobResultRequest {
+    /**
+     * The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the dashboard that you have started a snapshot job for.
+     */
+    DashboardId: ShortRestrictiveResourceId;
+    /**
+     * The ID of the job to be described. The job ID is set when you start a new job with a StartDashboardSnapshotJob API call.
+     */
+    SnapshotJobId: ShortRestrictiveResourceId;
+  }
+  export interface DescribeDashboardSnapshotJobResultResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the snapshot job. The job ARN is generated when you start a new job with a StartDashboardSnapshotJob API call.
+     */
+    Arn?: Arn;
+    /**
+     * Indicates the status of a job after it has reached a terminal state. A finished snapshot job will retuen a COMPLETED or FAILED status.
+     */
+    JobStatus?: SnapshotJobStatus;
+    /**
+     * The time that a snapshot job was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The time that a snapshot job status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The result of the snapshot job. Jobs that have successfully completed will return the S3Uri where they are located. Jobs that have failedwill return information on the error that caused the job to fail.
+     */
+    Result?: SnapshotJobResult;
+    /**
+     * Displays information for the error that caused a job to fail.
+     */
+    ErrorInfo?: SnapshotJobErrorInfo;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the request
+     */
+    Status?: StatusCode;
+  }
   export interface DescribeDataSetPermissionsRequest {
     /**
      * The Amazon Web Services account ID.
@@ -7850,6 +8007,10 @@ declare namespace QuickSight {
      * The options to configure the title visibility, name, and font size.
      */
     TitleOptions?: LabelOptions;
+    /**
+     * The configuration of info icon label options.
+     */
+    InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
   export interface DynamicDefaultValue {
     /**
@@ -10513,6 +10674,10 @@ declare namespace QuickSight {
      * The options to configure the title visibility, name, and font size.
      */
     TitleOptions?: LabelOptions;
+    /**
+     * The configuration of info icon label options.
+     */
+    InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
   export interface ListControlSearchOptions {
     /**
@@ -13439,6 +13604,10 @@ declare namespace QuickSight {
      * Customize how dates are formatted in controls.
      */
     DateTimeFormat?: DateTimeFormat;
+    /**
+     * The configuration of info icon label options.
+     */
+    InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
   export type RelativeDateType = "PREVIOUS"|"THIS"|"LAST"|"NOW"|"NEXT"|string;
   export interface RelativeDatesFilter {
@@ -13638,6 +13807,20 @@ declare namespace QuickSight {
   export type RowLevelPermissionTagRuleList = RowLevelPermissionTagRule[];
   export type RowSortList = FieldSortOptions[];
   export type S3Bucket = string;
+  export interface S3BucketConfiguration {
+    /**
+     * The name of an existing Amazon S3 bucket where the generated snapshot artifacts are sent.
+     */
+    BucketName: NonEmptyString;
+    /**
+     * The prefix of the Amazon S3 bucket that the generated snapshots are stored in.
+     */
+    BucketPrefix: NonEmptyString;
+    /**
+     * The region that the Amazon S3 bucket is located in. The bucket must be located in the same region that the StartDashboardSnapshotJob API call is made.
+     */
+    BucketRegion: NonEmptyString;
+  }
   export type S3Key = string;
   export interface S3Parameters {
     /**
@@ -14239,6 +14422,7 @@ declare namespace QuickSight {
   export type SensitiveLong = number;
   export type SensitiveLongList = SensitiveLong[];
   export type SensitiveLongObject = number;
+  export type SensitiveS3Uri = string;
   export type SensitiveString = string;
   export type SensitiveStringList = SensitiveString[];
   export type SensitiveStringObject = string;
@@ -14273,6 +14457,7 @@ declare namespace QuickSight {
     Value: SessionTagValue;
   }
   export type SessionTagKey = string;
+  export type SessionTagKeyList = SessionTagKey[];
   export type SessionTagList = SessionTag[];
   export type SessionTagValue = string;
   export interface SetParameterValueConfiguration {
@@ -14301,6 +14486,17 @@ declare namespace QuickSight {
   }
   export type SheetContentType = "PAGINATED"|"INTERACTIVE"|string;
   export type SheetControlDateTimePickerType = "SINGLE_VALUED"|"DATE_RANGE"|string;
+  export interface SheetControlInfoIconLabelOptions {
+    /**
+     * The visibility configuration of info icon label options.
+     */
+    Visibility?: Visibility;
+    /**
+     *  The text content of info icon.
+     */
+    InfoIconText?: SheetControlInfoIconText;
+  }
+  export type SheetControlInfoIconText = string;
   export interface SheetControlLayout {
     /**
      * The configuration that determines the elements and canvas size options of sheet control.
@@ -14465,6 +14661,7 @@ declare namespace QuickSight {
      */
     directoryType?: String;
   }
+  export type SimpleAttributeAggregationFunction = "UNIQUE_VALUE"|string;
   export interface SimpleClusterMarker {
     /**
      * The color of the simple cluster marker.
@@ -14478,6 +14675,10 @@ declare namespace QuickSight {
      * The options to configure the title visibility, name, and font size.
      */
     TitleOptions?: LabelOptions;
+    /**
+     * The configuration of info icon label options.
+     */
+    InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
   export type SmallMultiplesAxisPlacement = "OUTSIDE"|"INSIDE"|string;
   export interface SmallMultiplesAxisProperties {
@@ -14513,6 +14714,146 @@ declare namespace QuickSight {
      * The properties of a small multiples Y axis.
      */
     YAxis?: SmallMultiplesAxisProperties;
+  }
+  export interface SnapshotAnonymousUser {
+    /**
+     * The tags to be used for row-level security (RLS). Make sure that the relevant datasets have RLS tags configured before you start a snapshot export job. You can configure the RLS tags of a dataset with a DataSet$RowLevelPermissionTagConfiguration API call. These are not the tags that are used for Amazon Web Services resource tagging. For more information on row level security in Amazon QuickSight, see Using Row-Level Security (RLS) with Tagsin the Amazon QuickSight User Guide.
+     */
+    RowLevelPermissionTags?: SessionTagList;
+  }
+  export type SnapshotAnonymousUserList = SnapshotAnonymousUser[];
+  export interface SnapshotAnonymousUserRedacted {
+    /**
+     * The tag keys for the RowLevelPermissionTags.
+     */
+    RowLevelPermissionTagKeys?: SessionTagKeyList;
+  }
+  export type SnapshotAnonymousUserRedactedList = SnapshotAnonymousUserRedacted[];
+  export interface SnapshotConfiguration {
+    /**
+     * A list of SnapshotJobResultFileGroup objects that contain information about the snapshot that is generated. This list can hold a maximum of 6 FileGroup configurations.
+     */
+    FileGroups: SnapshotFileGroupList;
+    /**
+     * A structure that contains information on the Amazon S3 bucket that the generated snapshot is stored in.
+     */
+    DestinationConfiguration?: SnapshotDestinationConfiguration;
+    Parameters?: Parameters;
+  }
+  export interface SnapshotDestinationConfiguration {
+    /**
+     *  A list of SnapshotS3DestinationConfiguration objects that contain Amazon S3 destination configurations. This structure can hold a maximum of 1 S3DestinationConfiguration. 
+     */
+    S3Destinations?: SnapshotS3DestinationConfigurationList;
+  }
+  export interface SnapshotFile {
+    /**
+     * A list of SnapshotFileSheetSelection objects that contain information on the dashboard sheet that is exported. These objects provide information about the snapshot artifacts that are generated during the job. This structure can hold a maximum of 5 CSV configurations or 1 configuration for PDF.
+     */
+    SheetSelections: SnapshotFileSheetSelectionList;
+    /**
+     * The format of the snapshot file to be generated. You can choose between CSV and PDF.
+     */
+    FormatType: SnapshotFileFormatType;
+  }
+  export type SnapshotFileFormatType = "CSV"|"PDF"|string;
+  export interface SnapshotFileGroup {
+    /**
+     * A list of SnapshotFile objects that contain the information on the snapshot files that need to be generated. This structure can hold 1 configuration at a time.
+     */
+    Files?: SnapshotFileList;
+  }
+  export type SnapshotFileGroupList = SnapshotFileGroup[];
+  export type SnapshotFileList = SnapshotFile[];
+  export interface SnapshotFileSheetSelection {
+    /**
+     * The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV or PDF format types.
+     */
+    SheetId: ShortRestrictiveResourceId;
+    /**
+     * The selection scope of the visuals on a sheet of a dashboard that you are generating a snapthot of. You can choose one of the following options.    ALL_VISUALS - Selects all visuals that are on the sheet. This value is required if the snapshot is a PDF.    SELECTED_VISUALS - Select the visual that you want to add to the snapshot. This value is required if the snapshot is a CSV.  
+     */
+    SelectionScope: SnapshotFileSheetSelectionScope;
+    /**
+     *  A structure that lists the IDs of the visuals in the selected sheet. Supported visual types are table, pivot table visuals. This value is required if you are generating a CSV. This value supports a maximum of 1 visual ID. 
+     */
+    VisualIds?: SnapshotFileSheetSelectionVisualIdList;
+  }
+  export type SnapshotFileSheetSelectionList = SnapshotFileSheetSelection[];
+  export type SnapshotFileSheetSelectionScope = "ALL_VISUALS"|"SELECTED_VISUALS"|string;
+  export type SnapshotFileSheetSelectionVisualIdList = ShortRestrictiveResourceId[];
+  export interface SnapshotJobErrorInfo {
+    /**
+     * The error message.
+     */
+    ErrorMessage?: String;
+    /**
+     * The error type.
+     */
+    ErrorType?: String;
+  }
+  export interface SnapshotJobResult {
+    /**
+     *  A list of AnonymousUserSnapshotJobResult objects that contain information on anonymous users and their user configurations. This data provided by you when you make a StartDashboardSnapshotJob API call.
+     */
+    AnonymousUsers?: AnonymousUserSnapshotJobResultList;
+  }
+  export interface SnapshotJobResultErrorInfo {
+    /**
+     * The error message.
+     */
+    ErrorMessage?: String;
+    /**
+     * The error type.
+     */
+    ErrorType?: String;
+  }
+  export type SnapshotJobResultErrorInfoList = SnapshotJobResultErrorInfo[];
+  export interface SnapshotJobResultFileGroup {
+    /**
+     *  A list of SnapshotFile objects.
+     */
+    Files?: SnapshotFileList;
+    /**
+     *  A list of SnapshotJobS3Result objects.
+     */
+    S3Results?: SnapshotJobS3ResultList;
+  }
+  export type SnapshotJobResultFileGroupList = SnapshotJobResultFileGroup[];
+  export interface SnapshotJobS3Result {
+    /**
+     * A list of Amazon S3 bucket configurations that are provided when you make a StartDashboardSnapshotJob API call. 
+     */
+    S3DestinationConfiguration?: SnapshotS3DestinationConfiguration;
+    /**
+     * The Amazon S3 Uri.
+     */
+    S3Uri?: SensitiveS3Uri;
+    /**
+     * An array of error records that describe any failures that occur while the dashboard snapshot job runs.
+     */
+    ErrorInfo?: SnapshotJobResultErrorInfoList;
+  }
+  export type SnapshotJobS3ResultList = SnapshotJobS3Result[];
+  export type SnapshotJobStatus = "QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|string;
+  export interface SnapshotS3DestinationConfiguration {
+    /**
+     * A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.
+     */
+    BucketConfiguration?: S3BucketConfiguration;
+  }
+  export type SnapshotS3DestinationConfigurationList = SnapshotS3DestinationConfiguration[];
+  export interface SnapshotUserConfiguration {
+    /**
+     * An array of records that describe the anonymous users that the dashboard snapshot is generated for.
+     */
+    AnonymousUsers?: SnapshotAnonymousUserList;
+  }
+  export interface SnapshotUserConfigurationRedacted {
+    /**
+     *  An array of records that describe anonymous users that the dashboard snapshot is generated for. Sensitive user information is excluded. 
+     */
+    AnonymousUsers?: SnapshotAnonymousUserRedactedList;
   }
   export interface SnowflakeParameters {
     /**
@@ -14661,6 +15002,46 @@ declare namespace QuickSight {
     RequestId?: NonEmptyString;
     /**
      * The HTTP status of the response.
+     */
+    Status?: StatusCode;
+  }
+  export interface StartDashboardSnapshotJobRequest {
+    /**
+     * The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The ID of the dashboard that you want to start a snapshot job for. 
+     */
+    DashboardId: ShortRestrictiveResourceId;
+    /**
+     * An ID for the dashboard snapshot job. This ID is unique to the dashboard while the job is running. This ID can be used to poll the status of a job with a DescribeDashboardSnapshotJob while the job runs. You can reuse this ID for another job 24 hours after the current job is completed.
+     */
+    SnapshotJobId: ShortRestrictiveResourceId;
+    /**
+     *  A structure that contains information about the anonymous users that the generated snapshot is for. This API will not return information about registered Amazon QuickSight.
+     */
+    UserConfiguration: SnapshotUserConfiguration;
+    /**
+     * A structure that describes the configuration of the dashboard snapshot.
+     */
+    SnapshotConfiguration: SnapshotConfiguration;
+  }
+  export interface StartDashboardSnapshotJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) for the dashboard snapshot job.
+     */
+    Arn?: Arn;
+    /**
+     * The ID of the job. The job ID is set when you start a new job with a StartDashboardSnapshotJob API call.
+     */
+    SnapshotJobId?: ShortRestrictiveResourceId;
+    /**
+     *  The Amazon Web Services request ID for this operation. 
+     */
+    RequestId?: NonEmptyString;
+    /**
+     * The HTTP status of the request
      */
     Status?: StatusCode;
   }
@@ -15401,6 +15782,10 @@ declare namespace QuickSight {
      * The configuration of the placeholder options in a text area control.
      */
     PlaceholderOptions?: TextControlPlaceholderOptions;
+    /**
+     * The configuration of info icon label options.
+     */
+    InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
   export interface TextConditionalFormat {
     /**
@@ -15431,6 +15816,10 @@ declare namespace QuickSight {
      * The configuration of the placeholder options in a text field control.
      */
     PlaceholderOptions?: TextControlPlaceholderOptions;
+    /**
+     * The configuration of info icon label options.
+     */
+    InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
   export type TextQualifier = "DOUBLE_QUOTE"|"SINGLE_QUOTE"|string;
   export type TextWrap = "NONE"|"WRAP"|string;

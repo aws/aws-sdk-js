@@ -164,6 +164,14 @@ declare class CostExplorer extends Service {
    */
   getRightsizingRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetRightsizingRecommendationResponse) => void): Request<CostExplorer.Types.GetRightsizingRecommendationResponse, AWSError>;
   /**
+   * Retrieves the details for a Savings Plan recommendation. These details include the hourly data-points that construct the new cost, coverage, and utilization charts.
+   */
+  getSavingsPlanPurchaseRecommendationDetails(params: CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsResponse) => void): Request<CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsResponse, AWSError>;
+  /**
+   * Retrieves the details for a Savings Plan recommendation. These details include the hourly data-points that construct the new cost, coverage, and utilization charts.
+   */
+  getSavingsPlanPurchaseRecommendationDetails(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsResponse) => void): Request<CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsResponse, AWSError>;
+  /**
    * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
    */
   getSavingsPlansCoverage(params: CostExplorer.Types.GetSavingsPlansCoverageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
@@ -284,11 +292,11 @@ declare class CostExplorer extends Service {
    */
   updateAnomalyMonitor(callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.UpdateAnomalyMonitorResponse, AWSError>;
   /**
-   * Updates an existing cost anomaly monitor subscription. 
+   * Updates an existing cost anomaly subscription. Specify the fields that you want to update. Omitted fields are unchanged.  The JSON below describes the generic construct for each type. See Request Parameters for possible values as they apply to AnomalySubscription. 
    */
   updateAnomalySubscription(params: CostExplorer.Types.UpdateAnomalySubscriptionRequest, callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.UpdateAnomalySubscriptionResponse, AWSError>;
   /**
-   * Updates an existing cost anomaly monitor subscription. 
+   * Updates an existing cost anomaly subscription. Specify the fields that you want to update. Omitted fields are unchanged.  The JSON below describes the generic construct for each type. See Request Parameters for possible values as they apply to AnomalySubscription. 
    */
   updateAnomalySubscription(callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.UpdateAnomalySubscriptionResponse, AWSError>;
   /**
@@ -426,11 +434,11 @@ declare namespace CostExplorer {
      */
     Subscribers: Subscribers;
     /**
-     * (deprecated) The dollar value that triggers a notification if the threshold is exceeded.  This field has been deprecated. To specify a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression. One of Threshold or ThresholdExpression is required for this resource.
+     * (deprecated) An absolute dollar value that must be exceeded by the anomaly's total impact (see Impact for more details) for an anomaly notification to be generated. This field has been deprecated. To specify a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression. One of Threshold or ThresholdExpression is required for this resource. You cannot specify both.
      */
     Threshold?: NullableNonNegativeDouble;
     /**
-     * The frequency that anomaly reports are sent over email. 
+     * The frequency that anomaly notifications are sent. Notifications are sent either over email (for DAILY and WEEKLY frequencies) or SNS (for IMMEDIATE frequency). For more information, see Creating an Amazon SNS topic for anomaly notifications.
      */
     Frequency: AnomalySubscriptionFrequency;
     /**
@@ -438,7 +446,7 @@ declare namespace CostExplorer {
      */
     SubscriptionName: GenericString;
     /**
-     * An Expression object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE. The supported nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and 10,000,000,000. One of Threshold or ThresholdExpression is required for this resource. The following are examples of valid ThresholdExpressions:   Absolute threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }    Percentage threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }     AND two thresholds together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }     OR two thresholds together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }   
+     * An Expression object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE, corresponding to an anomaly’s TotalImpact and TotalImpactPercentage, respectively (see Impact for more details). The supported nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and 10,000,000,000 in string format. One of Threshold or ThresholdExpression is required for this resource. You cannot specify both. The following are examples of valid ThresholdExpressions:   Absolute threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }    Percentage threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }     AND two thresholds together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }     OR two thresholds together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }   
      */
     ThresholdExpression?: Expression;
   }
@@ -565,7 +573,7 @@ declare namespace CostExplorer {
   export interface CostCategoryRule {
     Value?: CostCategoryValue;
     /**
-     * An Expression object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are LINKED_ACCOUNT, SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME. Root level OR isn't supported. We recommend that you create a separate rule instead.  RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you're using the console or API/JSON editor. For a detailed comparison, see Term Comparisons in the Billing and Cost Management User Guide.
+     * An Expression object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are LINKED_ACCOUNT, SERVICE_CODE, RECORD_TYPE, LINKED_ACCOUNT_NAME, REGION, and USAGE_TYPE.  RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you're using the console or API/JSON editor. For a detailed comparison, see Term Comparisons in the Billing and Cost Management User Guide.
      */
     Rule?: Expression;
     /**
@@ -1644,6 +1652,22 @@ declare namespace CostExplorer {
      */
     Configuration?: RightsizingRecommendationConfiguration;
   }
+  export interface GetSavingsPlanPurchaseRecommendationDetailsRequest {
+    /**
+     * The ID that is associated with the Savings Plan recommendation.
+     */
+    RecommendationDetailId: RecommendationDetailId;
+  }
+  export interface GetSavingsPlanPurchaseRecommendationDetailsResponse {
+    /**
+     * The ID that is associated with the Savings Plan recommendation.
+     */
+    RecommendationDetailId?: RecommendationDetailId;
+    /**
+     * Contains detailed information about a specific Savings Plan recommendation.
+     */
+    RecommendationDetailData?: RecommendationDetailData;
+  }
   export interface GetSavingsPlansCoverageRequest {
     /**
      * The time period that you want the usage and costs for. The Start date must be within 13 months. The End date must be after the Start date, and before the current date. Future dates can't be used as an End date.
@@ -2069,6 +2093,7 @@ declare namespace CostExplorer {
     Unit?: MetricUnit;
   }
   export type Metrics = {[key: string]: MetricValue};
+  export type MetricsOverLookbackPeriod = RecommendationDetailHourlyMetrics[];
   export interface ModifyRecommendationDetail {
     /**
      * Determines whether this instance type is the Amazon Web Services default recommendation.
@@ -2169,6 +2194,138 @@ declare namespace CostExplorer {
   }
   export type RICostForUnusedHours = string;
   export type RealizedSavings = string;
+  export interface RecommendationDetailData {
+    /**
+     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the management account and member accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual member accounts only.
+     */
+    AccountScope?: AccountScope;
+    /**
+     * How many days of previous usage that Amazon Web Services considers when making this recommendation.
+     */
+    LookbackPeriodInDays?: LookbackPeriodInDays;
+    /**
+     * The requested Savings Plan recommendation type.
+     */
+    SavingsPlansType?: SupportedSavingsPlansType;
+    /**
+     * The term of the commitment in years.
+     */
+    TermInYears?: TermInYears;
+    /**
+     * The payment option for the commitment (for example, All Upfront or No Upfront).
+     */
+    PaymentOption?: PaymentOption;
+    /**
+     * The AccountID that the recommendation is generated for.
+     */
+    AccountId?: GenericString;
+    /**
+     * The currency code that Amazon Web Services used to generate the recommendation and present potential savings.
+     */
+    CurrencyCode?: GenericString;
+    /**
+     * The instance family of the recommended Savings Plan.
+     */
+    InstanceFamily?: GenericString;
+    /**
+     * The region the recommendation is generated for.
+     */
+    Region?: GenericString;
+    /**
+     * The unique ID that's used to distinguish Savings Plans from one another.
+     */
+    OfferingId?: GenericString;
+    GenerationTimestamp?: ZonedDateTime;
+    LatestUsageTimestamp?: ZonedDateTime;
+    /**
+     * The average value of hourly On-Demand spend over the lookback period of the applicable usage type.
+     */
+    CurrentAverageHourlyOnDemandSpend?: GenericString;
+    /**
+     * The highest value of hourly On-Demand spend over the lookback period of the applicable usage type.
+     */
+    CurrentMaximumHourlyOnDemandSpend?: GenericString;
+    /**
+     * The lowest value of hourly On-Demand spend over the lookback period of the applicable usage type.
+     */
+    CurrentMinimumHourlyOnDemandSpend?: GenericString;
+    /**
+     * The estimated utilization of the recommended Savings Plan.
+     */
+    EstimatedAverageUtilization?: GenericString;
+    /**
+     * The estimated monthly savings amount based on the recommended Savings Plan.
+     */
+    EstimatedMonthlySavingsAmount?: GenericString;
+    /**
+     * The remaining On-Demand cost estimated to not be covered by the recommended Savings Plan, over the length of the lookback period.
+     */
+    EstimatedOnDemandCost?: GenericString;
+    /**
+     * The estimated On-Demand costs you expect with no additional commitment, based on your usage of the selected time period and the Savings Plan you own.
+     */
+    EstimatedOnDemandCostWithCurrentCommitment?: GenericString;
+    /**
+     * The estimated return on investment that's based on the recommended Savings Plan that you purchased. This is calculated as estimatedSavingsAmount/estimatedSPCost*100.
+     */
+    EstimatedROI?: GenericString;
+    /**
+     * The cost of the recommended Savings Plan over the length of the lookback period.
+     */
+    EstimatedSPCost?: GenericString;
+    /**
+     * The estimated savings amount that's based on the recommended Savings Plan over the length of the lookback period.
+     */
+    EstimatedSavingsAmount?: GenericString;
+    /**
+     * The estimated savings percentage relative to the total cost of applicable On-Demand usage over the lookback period.
+     */
+    EstimatedSavingsPercentage?: GenericString;
+    /**
+     * The existing hourly commitment for the Savings Plan type.
+     */
+    ExistingHourlyCommitment?: GenericString;
+    /**
+     * The recommended hourly commitment level for the Savings Plan type and the configuration that's based on the usage during the lookback period.
+     */
+    HourlyCommitmentToPurchase?: GenericString;
+    /**
+     * The upfront cost of the recommended Savings Plan, based on the selected payment option.
+     */
+    UpfrontCost?: GenericString;
+    /**
+     * The average value of hourly coverage over the lookback period.
+     */
+    CurrentAverageCoverage?: GenericString;
+    /**
+     * The estimated coverage of the recommended Savings Plan.
+     */
+    EstimatedAverageCoverage?: GenericString;
+    /**
+     * The related hourly cost, coverage, and utilization metrics over the lookback period.
+     */
+    MetricsOverLookbackPeriod?: MetricsOverLookbackPeriod;
+  }
+  export interface RecommendationDetailHourlyMetrics {
+    StartTime?: ZonedDateTime;
+    /**
+     * The remaining On-Demand cost estimated to not be covered by the recommended Savings Plan, over the length of the lookback period.
+     */
+    EstimatedOnDemandCost?: GenericString;
+    /**
+     * The current amount of Savings Plans eligible usage that the Savings Plan covered.
+     */
+    CurrentCoverage?: GenericString;
+    /**
+     * The estimated coverage amount based on the recommended Savings Plan.
+     */
+    EstimatedCoverage?: GenericString;
+    /**
+     * The estimated utilization for the recommended Savings Plan.
+     */
+    EstimatedNewCommitmentUtilization?: GenericString;
+  }
+  export type RecommendationDetailId = string;
   export type RecommendationId = string;
   export type RecommendationIdList = RecommendationId[];
   export type RecommendationTarget = "SAME_INSTANCE_FAMILY"|"CROSS_INSTANCE_FAMILY"|string;
@@ -2730,6 +2887,10 @@ declare namespace CostExplorer {
      * The average value of hourly On-Demand spend over the lookback period of the applicable usage type.
      */
     CurrentAverageHourlyOnDemandSpend?: GenericString;
+    /**
+     * Contains detailed information about a specific Savings Plan recommendation.
+     */
+    RecommendationDetailId?: RecommendationDetailId;
   }
   export type SavingsPlansPurchaseRecommendationDetailList = SavingsPlansPurchaseRecommendationDetail[];
   export interface SavingsPlansPurchaseRecommendationMetadata {
@@ -3056,7 +3217,7 @@ declare namespace CostExplorer {
      */
     SubscriptionArn: GenericString;
     /**
-     * (deprecated) The update to the threshold value for receiving notifications.  This field has been deprecated. To update a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression.
+     * (deprecated) The update to the threshold value for receiving notifications.  This field has been deprecated. To update a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression. You can specify either Threshold or ThresholdExpression, but not both.
      */
     Threshold?: NullableNonNegativeDouble;
     /**
@@ -3076,7 +3237,7 @@ declare namespace CostExplorer {
      */
     SubscriptionName?: GenericString;
     /**
-     * The update to the Expression object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE. The supported nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and 10,000,000,000. The following are examples of valid ThresholdExpressions:   Absolute threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }    Percentage threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }     AND two thresholds together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }     OR two thresholds together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }   
+     * The update to the Expression object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE, corresponding to an anomaly’s TotalImpact and TotalImpactPercentage, respectively (see Impact for more details). The supported nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between 0 and 10,000,000,000 in string format. You can specify either Threshold or ThresholdExpression, but not both. The following are examples of valid ThresholdExpressions:   Absolute threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }    Percentage threshold: { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }     AND two thresholds together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }     OR two thresholds together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }   
      */
     ThresholdExpression?: Expression;
   }

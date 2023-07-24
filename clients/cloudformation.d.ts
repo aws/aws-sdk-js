@@ -365,6 +365,14 @@ declare class CloudFormation extends Service {
    */
   listImports(callback?: (err: AWSError, data: CloudFormation.Types.ListImportsOutput) => void): Request<CloudFormation.Types.ListImportsOutput, AWSError>;
   /**
+   * Returns drift information for resources in a stack instance.   ListStackInstanceResourceDrifts returns drift information for the most recent drift detection operation. If an operation is in progress, it may only return partial results. 
+   */
+  listStackInstanceResourceDrifts(params: CloudFormation.Types.ListStackInstanceResourceDriftsInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstanceResourceDriftsOutput) => void): Request<CloudFormation.Types.ListStackInstanceResourceDriftsOutput, AWSError>;
+  /**
+   * Returns drift information for resources in a stack instance.   ListStackInstanceResourceDrifts returns drift information for the most recent drift detection operation. If an operation is in progress, it may only return partial results. 
+   */
+  listStackInstanceResourceDrifts(callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstanceResourceDriftsOutput) => void): Request<CloudFormation.Types.ListStackInstanceResourceDriftsOutput, AWSError>;
+  /**
    * Returns summary information about stack instances that are associated with the specified stack set. You can filter for stack instances that are associated with a specific Amazon Web Services account name or Region, or that have a specific status.
    */
   listStackInstances(params: CloudFormation.Types.ListStackInstancesInput, callback?: (err: AWSError, data: CloudFormation.Types.ListStackInstancesOutput) => void): Request<CloudFormation.Types.ListStackInstancesOutput, AWSError>;
@@ -2243,6 +2251,50 @@ declare namespace CloudFormation {
      */
     NextToken?: NextToken;
   }
+  export interface ListStackInstanceResourceDriftsInput {
+    /**
+     * The name or unique ID of the stack set that you want to list drifted resources for.
+     */
+    StackSetName: StackSetNameOrId;
+    /**
+     * If the previous paginated request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The resource drift status of the stack instance.     DELETED: The resource differs from its expected template configuration in that the resource has been deleted.    MODIFIED: One or more resource properties differ from their expected template values.    IN_SYNC: The resource's actual configuration matches its expected template configuration.    NOT_CHECKED: CloudFormation doesn't currently return this value.  
+     */
+    StackInstanceResourceDriftStatuses?: StackResourceDriftStatusFilters;
+    /**
+     * The name of the Amazon Web Services account that you want to list resource drifts for.
+     */
+    StackInstanceAccount: Account;
+    /**
+     * The name of the Region where you want to list resource drifts.
+     */
+    StackInstanceRegion: Region;
+    /**
+     * The unique ID of the drift operation.
+     */
+    OperationId: ClientRequestToken;
+    /**
+     * [Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account. By default, SELF is specified. Use SELF for stack sets with self-managed permissions.   If you are signed in to the management account, specify SELF.   If you are signed in to a delegated administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see Register a delegated administrator in the CloudFormation User Guide.  
+     */
+    CallAs?: CallAs;
+  }
+  export interface ListStackInstanceResourceDriftsOutput {
+    /**
+     * A list of StackInstanceResourceDriftSummary structures that contain information about the specified stack instances.
+     */
+    Summaries?: StackInstanceResourceDriftsSummaries;
+    /**
+     * If the previous paginated request didn't return all of the remaining results, the response object's NextToken parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object's NextToken parameter. If there are no remaining results, the previous response object's NextToken parameter is set to null.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListStackInstancesInput {
     /**
      * The name or unique ID of the stack set that you want to list stack instances for.
@@ -3342,9 +3394,44 @@ declare namespace CloudFormation {
      */
     Values?: StackInstanceFilterValues;
   }
-  export type StackInstanceFilterName = "DETAILED_STATUS"|"LAST_OPERATION_ID"|string;
+  export type StackInstanceFilterName = "DETAILED_STATUS"|"LAST_OPERATION_ID"|"DRIFT_STATUS"|string;
   export type StackInstanceFilterValues = string;
   export type StackInstanceFilters = StackInstanceFilter[];
+  export type StackInstanceResourceDriftsSummaries = StackInstanceResourceDriftsSummary[];
+  export interface StackInstanceResourceDriftsSummary {
+    /**
+     * The ID of the stack instance.
+     */
+    StackId: StackId;
+    /**
+     * The logical name of the resource specified in the template.
+     */
+    LogicalResourceId: LogicalResourceId;
+    /**
+     * The name or unique identifier that corresponds to a physical instance ID of a resource supported by CloudFormation.
+     */
+    PhysicalResourceId?: PhysicalResourceId;
+    /**
+     * Context information that enables CloudFormation to uniquely identify a resource. CloudFormation uses context key-value pairs in cases where a resource's logical and physical IDs aren't enough to uniquely identify that resource. Each context key-value pair specifies a unique resource that contains the targeted resource.
+     */
+    PhysicalResourceIdContext?: PhysicalResourceIdContext;
+    /**
+     * Type of resource. For more information, go to Amazon Web Services Resource Types Reference in the CloudFormation User Guide.
+     */
+    ResourceType: ResourceType;
+    /**
+     * Status of the actual configuration of the resource compared to its expected configuration. These will be present only for resources whose StackInstanceResourceDriftStatus is MODIFIED. 
+     */
+    PropertyDifferences?: PropertyDifferences;
+    /**
+     * The drift status of the resource in a stack instance.    DELETED: The resource differs from its expected template configuration in that the resource has been deleted.    MODIFIED: One or more resource properties differ from their expected template values.    IN_SYNC: The resource's actual configuration matches its expected template configuration.    NOT_CHECKED: CloudFormation doesn't currently return this value.  
+     */
+    StackResourceDriftStatus: StackResourceDriftStatus;
+    /**
+     * Time at which the stack instance drift detection operation was initiated.
+     */
+    Timestamp: Timestamp;
+  }
   export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE"|string;
   export type StackInstanceSummaries = StackInstanceSummary[];
   export interface StackInstanceSummary {

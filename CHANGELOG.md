@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1420.0-->
+<!--LATEST=2.1421.0-->
 <!--ENTRYINSERT-->
+
+## 2.1421.0
+* feature: ChimeSDKMediaPipelines: AWS Media Pipeline compositing enhancement and Media Insights Pipeline auto language identification.
+* feature: CloudFormation: This release supports filtering by DRIFT_STATUS for existing API ListStackInstances and adds support for a new API ListStackInstanceResourceDrifts. Customers can now view resource drift information from their StackSet management accounts.
+* feature: CostExplorer: This release introduces the new API 'GetSavingsPlanPurchaseRecommendationDetails', which retrieves the details for a Savings Plan recommendation. It also updates the existing API 'GetSavingsPlansPurchaseRecommendation' to include the recommendation detail ID.
+* feature: EC2: Add "disabled" enum value to SpotInstanceState.
+* feature: Glue: Added support for Data Preparation Recipe node in Glue Studio jobs
+* feature: QuickSight: This release launches new Snapshot APIs for CSV and PDF exports, adds support for info icon for filters and parameters in Exploration APIs, adds modeled exception to the DeleteAccountCustomization API, and introduces AttributeAggregationFunction's ability to add UNIQUE_VALUE aggregation in tooltips.
 
 ## 2.1420.0
 * feature: Glue: This release adds support for AWS Glue Crawler with Apache Hudi Tables, allowing Crawlers to discover Hudi Tables in S3 and register them in Glue Data Catalog for query engines to query against.

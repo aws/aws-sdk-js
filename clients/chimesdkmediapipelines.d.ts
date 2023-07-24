@@ -165,6 +165,13 @@ declare class ChimeSDKMediaPipelines extends Service {
   updateMediaInsightsPipelineStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace ChimeSDKMediaPipelines {
+  export interface ActiveSpeakerOnlyConfiguration {
+    /**
+     * The position of the ActiveSpeakerOnly video tile.
+     */
+    ActiveSpeakerPosition?: ActiveSpeakerPosition;
+  }
+  export type ActiveSpeakerPosition = "TopLeft"|"TopRight"|"BottomLeft"|"BottomRight"|string;
   export type AmazonResourceName = string;
   export interface AmazonTranscribeCallAnalyticsProcessorConfiguration {
     /**
@@ -224,7 +231,7 @@ declare namespace ChimeSDKMediaPipelines {
     /**
      * The language code that represents the language spoken in your audio. If you're unsure of the language spoken in your audio, consider using IdentifyLanguage to enable automatic language identification. For a list of languages that real-time Call Analytics supports, see the Supported languages table in the Amazon Transcribe Developer Guide.
      */
-    LanguageCode: CallAnalyticsLanguageCode;
+    LanguageCode?: CallAnalyticsLanguageCode;
     /**
      * The name of the custom vocabulary that you specified in your Call Analytics request. Length Constraints: Minimum length of 1. Maximum length of 200.
      */
@@ -269,6 +276,26 @@ declare namespace ChimeSDKMediaPipelines {
      * If true, TranscriptEvents with IsPartial: true are filtered out of the insights target.
      */
     FilterPartialResults?: Boolean;
+    /**
+     * Turns language identification on or off.
+     */
+    IdentifyLanguage?: Boolean;
+    /**
+     * The language options for the transcription, such as automatic language detection.
+     */
+    LanguageOptions?: LanguageOptions;
+    /**
+     * The preferred language for the transcription.
+     */
+    PreferredLanguage?: CallAnalyticsLanguageCode;
+    /**
+     * The names of the custom vocabulary or vocabularies used during transcription.
+     */
+    VocabularyNames?: VocabularyNames;
+    /**
+     * The names of the custom vocabulary filter or filters using during transcription.
+     */
+    VocabularyFilterNames?: VocabularyFilterNames;
   }
   export type Arn = string;
   export interface ArtifactsConcatenationConfiguration {
@@ -339,7 +366,10 @@ declare namespace ChimeSDKMediaPipelines {
   export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|"AudioWithCompositedVideo"|string;
   export type AudioSampleRateOption = string;
   export type Boolean = boolean;
+  export type BorderColor = "Black"|"Blue"|"Red"|"Green"|"White"|"Yellow"|string;
+  export type BorderThickness = number;
   export type CallAnalyticsLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|string;
+  export type CanvasOrientation = "Landscape"|"Portrait"|string;
   export type CategoryName = string;
   export type CategoryNameList = CategoryName[];
   export interface ChannelDefinition {
@@ -451,8 +481,9 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export type ContentMuxType = "ContentOnly"|string;
   export type ContentRedactionOutput = "redacted"|"redacted_and_unredacted"|string;
-  export type ContentShareLayoutOption = "PresenterOnly"|"Horizontal"|"Vertical"|string;
+  export type ContentShareLayoutOption = "PresenterOnly"|"Horizontal"|"Vertical"|"ActiveSpeakerOnly"|string;
   export type ContentType = "PII"|string;
+  export type CornerRadius = number;
   export interface CreateMediaCapturePipelineRequest {
     /**
      * Source type from which the media artifacts are captured. A Chime SDK Meeting is the only supported source.
@@ -563,7 +594,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     KinesisVideoStreamRecordingSourceRuntimeConfiguration?: KinesisVideoStreamRecordingSourceRuntimeConfiguration;
     /**
-     * The runtime configuration for the S3 recording sink.
+     * The runtime configuration for the S3 recording sink. If specified, the settings in this structure override any settings in S3RecordingSinkConfiguration.
      */
     S3RecordingSinkRuntimeConfiguration?: S3RecordingSinkRuntimeConfiguration;
     /**
@@ -688,8 +719,48 @@ declare namespace ChimeSDKMediaPipelines {
      * Defines the configuration options for a presenter only video tile.
      */
     PresenterOnlyConfiguration?: PresenterOnlyConfiguration;
+    /**
+     * The configuration settings for an ActiveSpeakerOnly video tile.
+     */
+    ActiveSpeakerOnlyConfiguration?: ActiveSpeakerOnlyConfiguration;
+    /**
+     * The configuration settings for a horizontal layout.
+     */
+    HorizontalLayoutConfiguration?: HorizontalLayoutConfiguration;
+    /**
+     * The configuration settings for a vertical layout.
+     */
+    VerticalLayoutConfiguration?: VerticalLayoutConfiguration;
+    /**
+     * The attribute settings for the video tiles.
+     */
+    VideoAttribute?: VideoAttribute;
+    /**
+     * The orientation setting, horizontal or vertical.
+     */
+    CanvasOrientation?: CanvasOrientation;
   }
   export type GuidString = string;
+  export type HighlightColor = "Black"|"Blue"|"Red"|"Green"|"White"|"Yellow"|string;
+  export interface HorizontalLayoutConfiguration {
+    /**
+     * Sets the automatic ordering of the video tiles.
+     */
+    TileOrder?: TileOrder;
+    /**
+     * Sets the position of horizontal tiles.
+     */
+    TilePosition?: HorizontalTilePosition;
+    /**
+     * The maximum number of video tiles to display.
+     */
+    TileCount?: TileCount;
+    /**
+     * Sets the aspect ratio of the video tiles, such as 16:9.
+     */
+    TileAspectRatio?: TileAspectRatio;
+  }
+  export type HorizontalTilePosition = "Top"|"Bottom"|string;
   export type Iso8601Timestamp = Date;
   export interface IssueDetectionConfiguration {
     /**
@@ -750,6 +821,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     InsightsTarget?: Arn;
   }
+  export type LanguageOptions = string;
   export type LayoutOption = "GridView"|string;
   export interface ListMediaCapturePipelinesRequest {
     /**
@@ -1350,6 +1422,9 @@ declare namespace ChimeSDKMediaPipelines {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TileAspectRatio = string;
+  export type TileCount = number;
+  export type TileOrder = "JoinSequence"|"SpeakerSequence"|string;
   export type Timestamp = Date;
   export interface TimestampRange {
     /**
@@ -1413,6 +1488,25 @@ declare namespace ChimeSDKMediaPipelines {
      */
     UpdateStatus: MediaPipelineStatusUpdate;
   }
+  export interface VerticalLayoutConfiguration {
+    /**
+     * Sets the automatic ordering of the video tiles.
+     */
+    TileOrder?: TileOrder;
+    /**
+     * Sets the position of vertical tiles.
+     */
+    TilePosition?: VerticalTilePosition;
+    /**
+     * The maximum number of tiles to display.
+     */
+    TileCount?: TileCount;
+    /**
+     * Sets the aspect ratio of the video tiles, such as 16:9.
+     */
+    TileAspectRatio?: TileAspectRatio;
+  }
+  export type VerticalTilePosition = "Left"|"Right"|string;
   export interface VideoArtifactsConfiguration {
     /**
      * Indicates whether the video artifact is enabled or disabled.
@@ -1423,6 +1517,24 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MuxType?: VideoMuxType;
   }
+  export interface VideoAttribute {
+    /**
+     * Sets the corner radius of all video tiles.
+     */
+    CornerRadius?: CornerRadius;
+    /**
+     * Defines the border color of all video tiles.
+     */
+    BorderColor?: BorderColor;
+    /**
+     * Defines the highlight color for the active video tile.
+     */
+    HighlightColor?: HighlightColor;
+    /**
+     * Defines the border thickness for all video tiles.
+     */
+    BorderThickness?: BorderThickness;
+  }
   export interface VideoConcatenationConfiguration {
     /**
      * Enables or disables the configuration object.
@@ -1432,7 +1544,9 @@ declare namespace ChimeSDKMediaPipelines {
   export type VideoMuxType = "VideoOnly"|string;
   export type VocabularyFilterMethod = "remove"|"mask"|"tag"|string;
   export type VocabularyFilterName = string;
+  export type VocabularyFilterNames = string;
   export type VocabularyName = string;
+  export type VocabularyNames = string;
   export type VoiceAnalyticsConfigurationStatus = "Enabled"|"Disabled"|string;
   export interface VoiceAnalyticsProcessorConfiguration {
     /**
