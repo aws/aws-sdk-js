@@ -1,6 +1,20 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1421.0-->
+<!--LATEST=2.1422.0-->
 <!--ENTRYINSERT-->
+
+## 2.1422.0
+* feature: Billingconductor: Added support for Auto-Assocate Billing Groups for CreateBillingGroup, UpdateBillingGroup, and ListBillingGroups.
+* feature: CustomerProfiles: Amazon Connect Customer Profiles now supports rule-based resolution to match and merge similar profiles into unified profiles, helping companies deliver faster and more personalized customer service by providing access to relevant customer information for agents and automated experiences.
+* feature: DataSync: AWS DataSync now supports Microsoft Azure Blob Storage locations.
+* feature: EC2: This release adds an instance's peak and baseline network bandwidth as well as the memory sizes of an instance's inference accelerators to DescribeInstanceTypes.
+* feature: EMRServerless: This release adds support for publishing application logs to CloudWatch.
+* feature: Lambda: Add Python 3.11 (python3.11) support to AWS Lambda
+* feature: RDS: This release adds support for monitoring storage optimization progress on the DescribeDBInstances API.
+* feature: STS: API updates for the AWS Security Token Service
+* feature: SageMaker: Mark ContentColumn and TargetLabelColumn as required Targets in TextClassificationJobConfig in CreateAutoMLJobV2API
+* feature: SecurityHub: Add support for CONTAINS and NOT_CONTAINS comparison operators for Automation Rules string filters and map filters
+* feature: Transfer: This release adds support for SFTP Connectors.
+* feature: Wisdom: This release added two new data types: AssistantIntegrationConfiguration, and SessionIntegrationConfiguration to support Wisdom integration with Amazon Connect Chat
 
 ## 2.1421.0
 * feature: ChimeSDKMediaPipelines: AWS Media Pipeline compositing enhancement and Media Insights Pipeline auto language identification.

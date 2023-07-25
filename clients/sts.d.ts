@@ -122,6 +122,10 @@ declare namespace STS {
      * The source identity specified by the principal that is calling the AssumeRole operation. You can require users to specify a source identity when they assume a role. You do this by using the sts:SourceIdentity condition key in a role trust policy. You can use source identity information in CloudTrail logs to determine who took actions with a role. You can use the aws:SourceIdentity condition key to further control access to Amazon Web Services resources based on the value of source identity. For more information about using source identity, see Monitor and control actions taken with assumed roles in the IAM User Guide. The regex used to validate this parameter is a string of characters consisting of upper- and lower-case alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@-. You cannot use a value that begins with the text aws:. This prefix is reserved for Amazon Web Services internal use.
      */
     SourceIdentity?: sourceIdentityType;
+    /**
+     * Reserved for future use.
+     */
+    ProvidedContexts?: ProvidedContextsListType;
   }
   export interface AssumeRoleResponse {
     /**
@@ -215,7 +219,7 @@ declare namespace STS {
      */
     RoleSessionName: roleSessionNameType;
     /**
-     * The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider. Your application must get this token by authenticating the user who is using your application with a web identity provider before the application makes an AssumeRoleWithWebIdentity call. 
+     * The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider. Your application must get this token by authenticating the user who is using your application with a web identity provider before the application makes an AssumeRoleWithWebIdentity call. Only tokens with RSA algorithms (RS256) are supported.
      */
     WebIdentityToken: clientTokenType;
     /**
@@ -408,6 +412,17 @@ declare namespace STS {
      */
     arn?: arnType;
   }
+  export interface ProvidedContext {
+    /**
+     * Reserved for future use.
+     */
+    ProviderArn?: arnType;
+    /**
+     * Reserved for future use.
+     */
+    ContextAssertion?: contextAssertionType;
+  }
+  export type ProvidedContextsListType = ProvidedContext[];
   export type SAMLAssertionType = string;
   export type Subject = string;
   export type SubjectType = string;
@@ -427,6 +442,7 @@ declare namespace STS {
   export type arnType = string;
   export type assumedRoleIdType = string;
   export type clientTokenType = string;
+  export type contextAssertionType = string;
   export type dateType = Date;
   export type decodedMessageType = string;
   export type durationSecondsType = number;

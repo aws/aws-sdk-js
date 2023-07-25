@@ -238,11 +238,11 @@ declare class RDS extends Service {
    */
   createEventSubscription(callback?: (err: AWSError, data: RDS.Types.CreateEventSubscriptionResult) => void): Request<RDS.Types.CreateEventSubscriptionResult, AWSError>;
   /**
-   * Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.  This operation applies only to Aurora DB clusters. 
+   * Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. You can create a global database that is initially empty, and then create the primary and secondary DB clusters in the global database. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.  This operation applies only to Aurora DB clusters. 
    */
   createGlobalCluster(params: RDS.Types.CreateGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.CreateGlobalClusterResult) => void): Request<RDS.Types.CreateGlobalClusterResult, AWSError>;
   /**
-   * Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.  This operation applies only to Aurora DB clusters. 
+   * Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem. You can create a global database that is initially empty, and then create the primary and secondary DB clusters in the global database. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.  This operation applies only to Aurora DB clusters. 
    */
   createGlobalCluster(callback?: (err: AWSError, data: RDS.Types.CreateGlobalClusterResult) => void): Request<RDS.Types.CreateGlobalClusterResult, AWSError>;
   /**
@@ -878,11 +878,11 @@ declare class RDS extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: RDS.Types.ModifyEventSubscriptionResult) => void): Request<RDS.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
-   * Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This action only applies to Aurora DB clusters. 
+   * Modifies a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This operation only applies to Aurora global database clusters. 
    */
   modifyGlobalCluster(params: RDS.Types.ModifyGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.ModifyGlobalClusterResult) => void): Request<RDS.Types.ModifyGlobalClusterResult, AWSError>;
   /**
-   * Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This action only applies to Aurora DB clusters. 
+   * Modifies a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This operation only applies to Aurora global database clusters. 
    */
   modifyGlobalCluster(callback?: (err: AWSError, data: RDS.Types.ModifyGlobalClusterResult) => void): Request<RDS.Types.ModifyGlobalClusterResult, AWSError>;
   /**
@@ -3806,6 +3806,10 @@ declare namespace RDS {
      * The identifier of the source DB cluster if this DB instance is a read replica.
      */
     ReadReplicaSourceDBClusterIdentifier?: String;
+    /**
+     * The progress of the storage optimization operation as a percentage.
+     */
+    PercentProgress?: String;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -6519,7 +6523,7 @@ declare namespace RDS {
      */
     TdeCredentialPassword?: String;
     /**
-     * The CA certificate identifier to use for the DB instance6's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
+     * The CA certificate identifier to use for the DB instance's server certificate. This setting doesn't apply to RDS Custom DB instances. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
      */
     CACertificateIdentifier?: String;
     /**
@@ -6838,23 +6842,23 @@ declare namespace RDS {
   }
   export interface ModifyGlobalClusterMessage {
     /**
-     * The DB cluster identifier for the global cluster being modified. This parameter isn't case-sensitive. Constraints:   Must match the identifier of an existing global database cluster.  
+     * The cluster identifier for the global cluster to modify. This parameter isn't case-sensitive. Constraints:   Must match the identifier of an existing global database cluster.  
      */
     GlobalClusterIdentifier?: String;
     /**
-     * The new cluster identifier for the global database cluster when modifying a global database cluster. This value is stored as a lowercase string. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens   The first character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2 
+     * The new cluster identifier for the global database cluster. This value is stored as a lowercase string. Constraints:   Must contain from 1 to 63 letters, numbers, or hyphens.   The first character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: my-cluster2 
      */
     NewGlobalClusterIdentifier?: String;
     /**
-     * Indicates if the global database cluster has deletion protection enabled. The global database cluster can't be deleted when deletion protection is enabled.
+     * Specifies whether to enable deletion protection for the global database cluster. The global database cluster can't be deleted when deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
     /**
-     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless ApplyImmediately is enabled. To list all of the available engine versions for aurora-mysql (for MySQL-based Aurora global databases), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'  To list all of the available engine versions for aurora-postgresql (for PostgreSQL-based Aurora global databases), use the following command:  aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' 
+     * The version number of the database engine to which you want to upgrade.  To list all of the available engine versions for aurora-mysql (for MySQL-based Aurora global databases), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'  To list all of the available engine versions for aurora-postgresql (for PostgreSQL-based Aurora global databases), use the following command:  aws rds describe-db-engine-versions --engine aurora-postgresql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' 
      */
     EngineVersion?: String;
     /**
-     * A value that indicates whether major version upgrades are allowed. Constraints: You must allow major version upgrades when specifying a value for the EngineVersion parameter that is a different major version than the DB cluster's current version. If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version. Apply any custom parameter groups after completing the upgrade.
+     * Specifies whether to allow major version upgrades. Constraints: Must be enabled if you specify a value for the EngineVersion parameter that's a different major version than the global cluster's current version. If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version. Apply any custom parameter groups after completing the upgrade.
      */
     AllowMajorVersionUpgrade?: BooleanOptional;
   }

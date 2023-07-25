@@ -36,6 +36,14 @@ declare class DataSync extends Service {
    */
   createAgent(callback?: (err: AWSError, data: DataSync.Types.CreateAgentResponse) => void): Request<DataSync.Types.CreateAgentResponse, AWSError>;
   /**
+   * Creates an endpoint for a Microsoft Azure Blob Storage container that DataSync can use as a transfer source or destination. Before you begin, make sure you know how DataSync accesses Azure Blob Storage and works with access tiers and blob types. You also need a DataSync agent that can connect to your container.
+   */
+  createLocationAzureBlob(params: DataSync.Types.CreateLocationAzureBlobRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationAzureBlobResponse) => void): Request<DataSync.Types.CreateLocationAzureBlobResponse, AWSError>;
+  /**
+   * Creates an endpoint for a Microsoft Azure Blob Storage container that DataSync can use as a transfer source or destination. Before you begin, make sure you know how DataSync accesses Azure Blob Storage and works with access tiers and blob types. You also need a DataSync agent that can connect to your container.
+   */
+  createLocationAzureBlob(callback?: (err: AWSError, data: DataSync.Types.CreateLocationAzureBlobResponse) => void): Request<DataSync.Types.CreateLocationAzureBlobResponse, AWSError>;
+  /**
    * Creates an endpoint for an Amazon EFS file system that DataSync can access for a transfer. For more information, see Creating a location for Amazon EFS.
    */
   createLocationEfs(params: DataSync.Types.CreateLocationEfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationEfsResponse) => void): Request<DataSync.Types.CreateLocationEfsResponse, AWSError>;
@@ -84,11 +92,11 @@ declare class DataSync extends Service {
    */
   createLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationHdfsResponse) => void): Request<DataSync.Types.CreateLocationHdfsResponse, AWSError>;
   /**
-   * Defines a file system on a Network File System (NFS) server that can be read from or written to.
+   * Creates an endpoint for an Network File System (NFS) file server that DataSync can use for a data transfer.
    */
   createLocationNfs(params: DataSync.Types.CreateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Defines a file system on a Network File System (NFS) server that can be read from or written to.
+   * Creates an endpoint for an Network File System (NFS) file server that DataSync can use for a data transfer.
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
@@ -108,11 +116,11 @@ declare class DataSync extends Service {
    */
   createLocationS3(callback?: (err: AWSError, data: DataSync.Types.CreateLocationS3Response) => void): Request<DataSync.Types.CreateLocationS3Response, AWSError>;
   /**
-   * Creates an endpoint for a Server Message Block (SMB) file server that DataSync can access for a transfer. For more information, see Creating an SMB location.
+   * Creates an endpoint for a Server Message Block (SMB) file server that DataSync can use for a data transfer. Before you begin, make sure that you understand how DataSync accesses an SMB file server.
    */
   createLocationSmb(params: DataSync.Types.CreateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Creates an endpoint for a Server Message Block (SMB) file server that DataSync can access for a transfer. For more information, see Creating an SMB location.
+   * Creates an endpoint for a Server Message Block (SMB) file server that DataSync can use for a data transfer. Before you begin, make sure that you understand how DataSync accesses an SMB file server.
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
@@ -163,6 +171,14 @@ declare class DataSync extends Service {
    * Returns information about a DataSync discovery job.
    */
   describeDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.DescribeDiscoveryJobResponse) => void): Request<DataSync.Types.DescribeDiscoveryJobResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for Microsoft Azure Blob Storage is configured.
+   */
+  describeLocationAzureBlob(params: DataSync.Types.DescribeLocationAzureBlobRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationAzureBlobResponse) => void): Request<DataSync.Types.DescribeLocationAzureBlobResponse, AWSError>;
+  /**
+   * Provides details about how an DataSync transfer location for Microsoft Azure Blob Storage is configured.
+   */
+  describeLocationAzureBlob(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationAzureBlobResponse) => void): Request<DataSync.Types.DescribeLocationAzureBlobResponse, AWSError>;
   /**
    * Returns metadata about your DataSync location for an Amazon EFS file system.
    */
@@ -268,19 +284,19 @@ declare class DataSync extends Service {
    */
   describeStorageSystemResources(callback?: (err: AWSError, data: DataSync.Types.DescribeStorageSystemResourcesResponse) => void): Request<DataSync.Types.DescribeStorageSystemResourcesResponse, AWSError>;
   /**
-   * Returns metadata about a task.
+   * Provides information about an DataSync transfer task.
    */
   describeTask(params: DataSync.Types.DescribeTaskRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeTaskResponse) => void): Request<DataSync.Types.DescribeTaskResponse, AWSError>;
   /**
-   * Returns metadata about a task.
+   * Provides information about an DataSync transfer task.
    */
   describeTask(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskResponse) => void): Request<DataSync.Types.DescribeTaskResponse, AWSError>;
   /**
-   * Returns detailed metadata about a task that is being executed.
+   * Provides information about an DataSync transfer task that's running.
    */
   describeTaskExecution(params: DataSync.Types.DescribeTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
-   * Returns detailed metadata about a task that is being executed.
+   * Provides information about an DataSync transfer task that's running.
    */
   describeTaskExecution(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
@@ -412,6 +428,14 @@ declare class DataSync extends Service {
    */
   updateDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.UpdateDiscoveryJobResponse) => void): Request<DataSync.Types.UpdateDiscoveryJobResponse, AWSError>;
   /**
+   * Modifies some configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.
+   */
+  updateLocationAzureBlob(params: DataSync.Types.UpdateLocationAzureBlobRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationAzureBlobResponse) => void): Request<DataSync.Types.UpdateLocationAzureBlobResponse, AWSError>;
+  /**
+   * Modifies some configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.
+   */
+  updateLocationAzureBlob(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationAzureBlobResponse) => void): Request<DataSync.Types.UpdateLocationAzureBlobResponse, AWSError>;
+  /**
    * Updates some parameters of a previously created location for a Hadoop Distributed File System cluster.
    */
   updateLocationHdfs(params: DataSync.Types.UpdateLocationHdfsRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationHdfsResponse) => void): Request<DataSync.Types.UpdateLocationHdfsResponse, AWSError>;
@@ -480,7 +504,7 @@ declare namespace DataSync {
      */
     SystemType: DiscoverySystemType;
     /**
-     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads from your on-premises storage system's management interface.
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads from your on-premises storage system's management interface. You can only specify one ARN.
      */
     AgentArns: DiscoveryAgentArnList;
     /**
@@ -529,6 +553,18 @@ declare namespace DataSync {
   }
   export type AgentStatus = "ONLINE"|"OFFLINE"|string;
   export type Atime = "NONE"|"BEST_EFFORT"|string;
+  export type AzureAccessTier = "HOT"|"COOL"|"ARCHIVE"|string;
+  export type AzureBlobAuthenticationType = "SAS"|string;
+  export type AzureBlobContainerUrl = string;
+  export interface AzureBlobSasConfiguration {
+    /**
+     * Specifies a SAS token that provides permissions at the Azure storage account, container, or folder level. The token is part of the SAS URI string that comes after the storage resource URI and a question mark. A token looks something like this:  sp=r&amp;st=2023-12-20T14:54:52Z&amp;se=2023-12-20T22:54:52Z&amp;spr=https&amp;sv=2021-06-08&amp;sr=c&amp;sig=aBBKDWQvyuVcTPH9EBp%2FXTI9E%2F%2Fmq171%2BZU178wcwqU%3D 
+     */
+    Token: AzureBlobSasToken;
+  }
+  export type AzureBlobSasToken = string;
+  export type AzureBlobSubdirectory = string;
+  export type AzureBlobType = "BLOCK"|string;
   export type BytesPerSecond = number;
   export interface CancelTaskExecutionRequest {
     /**
@@ -571,11 +607,11 @@ declare namespace DataSync {
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * Specifies the ARN of the subnet where you want to run your DataSync task when using a VPC endpoint. This is the subnet where DataSync creates and manages the network interfaces for your transfer.
+     * Specifies the ARN of the subnet where you want to run your DataSync task when using a VPC endpoint. This is the subnet where DataSync creates and manages the network interfaces for your transfer. You can only specify one ARN.
      */
     SubnetArns?: PLSubnetArnList;
     /**
-     * Specifies the Amazon Resource Name (ARN) of the security group that protects your task's network interfaces when using a virtual private cloud (VPC) endpoint.
+     * Specifies the Amazon Resource Name (ARN) of the security group that protects your task's network interfaces when using a virtual private cloud (VPC) endpoint. You can only specify one ARN.
      */
     SecurityGroupArns?: PLSecurityGroupArnList;
   }
@@ -584,6 +620,46 @@ declare namespace DataSync {
      * The ARN of the agent that you just activated. Use the ListAgents operation to return a list of agents in your Amazon Web Services account and Amazon Web Services Region.
      */
     AgentArn?: AgentArn;
+  }
+  export interface CreateLocationAzureBlobRequest {
+    /**
+     * Specifies the URL of the Azure Blob Storage container involved in your transfer.
+     */
+    ContainerUrl: AzureBlobContainerUrl;
+    /**
+     * Specifies the authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+     */
+    AuthenticationType: AzureBlobAuthenticationType;
+    /**
+     * Specifies the SAS configuration that allows DataSync to access your Azure Blob Storage.
+     */
+    SasConfiguration?: AzureBlobSasConfiguration;
+    /**
+     * Specifies the type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the Azure Blob Storage documentation.
+     */
+    BlobType?: AzureBlobType;
+    /**
+     * Specifies the access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see Access tiers.
+     */
+    AccessTier?: AzureAccessTier;
+    /**
+     * Specifies path segments if you want to limit your transfer to a virtual directory in your container (for example, /my/images).
+     */
+    Subdirectory?: AzureBlobSubdirectory;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container. You can specify more than one agent. For more information, see Using multiple agents for your transfer.
+     */
+    AgentArns: AgentArnList;
+    /**
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your transfer location.
+     */
+    Tags?: InputTagList;
+  }
+  export interface CreateLocationAzureBlobResponse {
+    /**
+     * The ARN of the Azure Blob Storage transfer location that you created.
+     */
+    LocationArn?: LocationArn;
   }
   export interface CreateLocationEfsRequest {
     /**
@@ -796,29 +872,29 @@ declare namespace DataSync {
   }
   export interface CreateLocationNfsRequest {
     /**
-     * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server, run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information. For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.
+     * Specifies the subdirectory in the NFS file server that DataSync transfers to or from. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server, run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.
      */
     Subdirectory: NfsSubdirectory;
     /**
-     * The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this hostname to mount the NFS server in a network.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.  This name must either be DNS-compliant or must be an IP version 4 (IPv4) address. 
+     * Specifies the IP address or domain name of your NFS file server. An agent that is installed on-premises uses this hostname to mount the NFS server in a network.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.  You must specify be an IP version 4 address or Domain Name System (DNS)-compliant name. 
      */
     ServerHostname: ServerHostname;
     /**
-     * Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.
+     * Specifies the Amazon Resource Names (ARNs) of agents that DataSync uses to connect to your NFS file server.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.
      */
     OnPremConfig: OnPremConfig;
     /**
-     * The NFS mount options that DataSync can use to mount your NFS share.
+     * Specifies the mount options that DataSync can use to mount your NFS share.
      */
     MountOptions?: NfsMountOptions;
     /**
-     * The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+     * Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.
      */
     Tags?: InputTagList;
   }
   export interface CreateLocationNfsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the source NFS file system location that is created.
+     * The ARN of the transfer location that you created for your NFS file server.
      */
     LocationArn?: LocationArn;
   }
@@ -1085,6 +1161,42 @@ declare namespace DataSync {
      */
     JobEndTime?: DiscoveryTime;
   }
+  export interface DescribeLocationAzureBlobRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of your Azure Blob Storage transfer location.
+     */
+    LocationArn: LocationArn;
+  }
+  export interface DescribeLocationAzureBlobResponse {
+    /**
+     * The ARN of your Azure Blob Storage transfer location.
+     */
+    LocationArn?: LocationArn;
+    /**
+     * The URL of the Azure Blob Storage container involved in your transfer.
+     */
+    LocationUri?: LocationUri;
+    /**
+     * The authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+     */
+    AuthenticationType?: AzureBlobAuthenticationType;
+    /**
+     * The type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the Azure Blob Storage documentation.
+     */
+    BlobType?: AzureBlobType;
+    /**
+     * The access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see Access tiers.
+     */
+    AccessTier?: AzureAccessTier;
+    /**
+     * The ARNs of the DataSync agents that can connect with your Azure Blob Storage container.
+     */
+    AgentArns?: AgentArnList;
+    /**
+     * The time that your Azure Blob Storage transfer location was created.
+     */
+    CreationTime?: Time;
+  }
   export interface DescribeLocationEfsRequest {
     /**
      * The Amazon Resource Name (ARN) of the Amazon EFS file system location that you want information about.
@@ -1308,7 +1420,7 @@ declare namespace DataSync {
     LocationUri?: LocationUri;
     OnPremConfig?: OnPremConfig;
     /**
-     * The NFS mount options that DataSync used to mount your NFS share.
+     * The mount options that DataSync uses to mount your NFS share.
      */
     MountOptions?: NfsMountOptions;
     /**
@@ -1547,7 +1659,7 @@ declare namespace DataSync {
   }
   export interface DescribeTaskExecutionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task that is being executed.
+     * Specifies the Amazon Resource Name (ARN) of the transfer task that's running.
      */
     TaskExecutionArn: TaskExecutionArn;
   }
@@ -1604,7 +1716,7 @@ declare namespace DataSync {
   }
   export interface DescribeTaskRequest {
     /**
-     * The Amazon Resource Name (ARN) of the task to describe.
+     * Specifies the Amazon Resource Name (ARN) of the transfer task.
      */
     TaskArn: TaskArn;
   }
@@ -2375,19 +2487,19 @@ declare namespace DataSync {
   export type PreserveDevices = "NONE"|"PRESERVE"|string;
   export interface PrivateLinkConfig {
     /**
-     * The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public internet.
+     * Specifies the ID of the VPC endpoint that your agent connects to.
      */
     VpcEndpointId?: VpcEndpointId;
     /**
-     * The private endpoint that is configured for an agent that has access to IP addresses in a PrivateLink. An agent that is configured with this endpoint will not be accessible over the public internet.
+     * Specifies the VPC endpoint provided by Amazon Web Services PrivateLink that your agent connects to.
      */
     PrivateLinkEndpoint?: Endpoint;
     /**
-     * The Amazon Resource Names (ARNs) of the subnets that are configured for an agent activated in a VPC or an agent that has access to a VPC endpoint.
+     * Specifies the ARN of the subnet where your VPC endpoint is located. You can only specify one ARN.
      */
     SubnetArns?: PLSubnetArnList;
     /**
-     * The Amazon Resource Names (ARNs) of the security groups that are configured for the EC2 resource that hosts an agent activated in a VPC or an agent that has access to a VPC endpoint.
+     * Specifies the Amazon Resource Names (ARN) of the security group that provides DataSync access to your VPC endpoint. You can only specify one ARN.
      */
     SecurityGroupArns?: PLSecurityGroupArnList;
   }
@@ -2741,6 +2853,38 @@ declare namespace DataSync {
   }
   export interface UpdateDiscoveryJobResponse {
   }
+  export interface UpdateLocationAzureBlobRequest {
+    /**
+     * Specifies the ARN of the Azure Blob Storage transfer location that you're updating.
+     */
+    LocationArn: LocationArn;
+    /**
+     * Specifies path segments if you want to limit your transfer to a virtual directory in your container (for example, /my/images).
+     */
+    Subdirectory?: AzureBlobSubdirectory;
+    /**
+     * Specifies the authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+     */
+    AuthenticationType?: AzureBlobAuthenticationType;
+    /**
+     * Specifies the SAS configuration that allows DataSync to access your Azure Blob Storage.
+     */
+    SasConfiguration?: AzureBlobSasConfiguration;
+    /**
+     * Specifies the type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the Azure Blob Storage documentation.
+     */
+    BlobType?: AzureBlobType;
+    /**
+     * Specifies the access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see Access tiers.
+     */
+    AccessTier?: AzureAccessTier;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container. You can specify more than one agent. For more information, see Using multiple agents for your transfer.
+     */
+    AgentArns?: AgentArnList;
+  }
+  export interface UpdateLocationAzureBlobResponse {
+  }
   export interface UpdateLocationHdfsRequest {
     /**
      * The Amazon Resource Name (ARN) of the source HDFS cluster location.
@@ -2799,11 +2943,11 @@ declare namespace DataSync {
   }
   export interface UpdateLocationNfsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the NFS location to update.
+     * Specifies the Amazon Resource Name (ARN) of the NFS location that you want to update.
      */
     LocationArn: LocationArn;
     /**
-     * The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. To see all the paths exported by your NFS server, run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information. For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.
+     * Specifies the subdirectory in your NFS file system that DataSync uses to read from or write to during a transfer. The NFS path should be exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. To see all the paths exported by your NFS server, run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.
      */
     Subdirectory?: NfsSubdirectory;
     OnPremConfig?: OnPremConfig;
@@ -2886,7 +3030,7 @@ declare namespace DataSync {
      */
     ServerConfiguration?: DiscoveryServerConfiguration;
     /**
-     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads your on-premises storage system.
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads your on-premises storage system. You can only specify one ARN.
      */
     AgentArns?: DiscoveryAgentArnList;
     /**

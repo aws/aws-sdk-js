@@ -44,11 +44,11 @@ declare class EMRServerless extends Service {
    */
   getApplication(callback?: (err: AWSError, data: EMRServerless.Types.GetApplicationResponse) => void): Request<EMRServerless.Types.GetApplicationResponse, AWSError>;
   /**
-   * Returns a URL to access the job run dashboard. The generated URL is valid for one hour, after which you must invoke the API again to generate a new URL.
+   * Creates and returns a URL that you can use to access the application UIs for a job run. For jobs in a running state, the application UI is a live user interface such as the Spark or Tez web UI. For completed jobs, the application UI is a persistent application user interface such as the Spark History Server or persistent Tez UI.  The URL is valid for one hour after you generate it. To access the application UI after that hour elapses, you must invoke the API again to generate a new URL. 
    */
   getDashboardForJobRun(params: EMRServerless.Types.GetDashboardForJobRunRequest, callback?: (err: AWSError, data: EMRServerless.Types.GetDashboardForJobRunResponse) => void): Request<EMRServerless.Types.GetDashboardForJobRunResponse, AWSError>;
   /**
-   * Returns a URL to access the job run dashboard. The generated URL is valid for one hour, after which you must invoke the API again to generate a new URL.
+   * Creates and returns a URL that you can use to access the application UIs for a job run. For jobs in a running state, the application UI is a live user interface such as the Spark or Tez web UI. For completed jobs, the application UI is a persistent application user interface such as the Spark History Server or persistent Tez UI.  The URL is valid for one hour after you generate it. To access the application UI after that hour elapses, you must invoke the API again to generate a new URL. 
    */
   getDashboardForJobRun(callback?: (err: AWSError, data: EMRServerless.Types.GetDashboardForJobRunResponse) => void): Request<EMRServerless.Types.GetDashboardForJobRunResponse, AWSError>;
   /**
@@ -295,6 +295,28 @@ declare namespace EMRServerless {
     jobRunId: JobRunId;
   }
   export type ClientToken = string;
+  export interface CloudWatchLoggingConfiguration {
+    /**
+     * Enables CloudWatch logging.
+     */
+    enabled: Boolean;
+    /**
+     * The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+     */
+    logGroupName?: LogGroupName;
+    /**
+     * Prefix for the CloudWatch log stream name.
+     */
+    logStreamNamePrefix?: LogStreamNamePrefix;
+    /**
+     * The Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+     */
+    encryptionKeyArn?: EncryptionKeyArn;
+    /**
+     * The types of logs that you want to publish to CloudWatch. If you don't specify any log types, driver STDOUT and STDERR logs will be published to CloudWatch Logs by default. For more information including the supported worker types for Hive and Spark, see Logging for EMR Serverless with CloudWatch.    Key Valid Values: SPARK_DRIVER, SPARK_EXECUTOR, HIVE_DRIVER, TEZ_TASK     Array Members Valid Values: STDOUT, STDERR, HIVE_LOG, TEZ_AM, SYSTEM_LOGS   
+     */
+    logTypes?: LogTypeMap;
+  }
   export interface Configuration {
     /**
      * The classification within a configuration.
@@ -712,6 +734,11 @@ declare namespace EMRServerless {
      */
     tags?: TagMap;
   }
+  export type LogGroupName = string;
+  export type LogStreamNamePrefix = string;
+  export type LogTypeList = LogTypeString[];
+  export type LogTypeMap = {[key: string]: LogTypeList};
+  export type LogTypeString = string;
   export interface ManagedPersistenceMonitoringConfiguration {
     /**
      * Enables managed logging and defaults to true. If set to false, managed logging will be turned off.
@@ -746,6 +773,10 @@ declare namespace EMRServerless {
      * The managed log persistence configuration for a job run.
      */
     managedPersistenceMonitoringConfiguration?: ManagedPersistenceMonitoringConfiguration;
+    /**
+     * The Amazon CloudWatch configuration for monitoring logs. You can configure your jobs to send log information to CloudWatch.
+     */
+    cloudWatchLoggingConfiguration?: CloudWatchLoggingConfiguration;
   }
   export interface NetworkConfiguration {
     /**

@@ -11268,6 +11268,9 @@
     "BareMetalFlag": {
       "type": "boolean"
     },
+    "BaselineBandwidthInGbps": {
+      "type": "double"
+    },
     "BaselineBandwidthInMbps": {
       "type": "integer"
     },
@@ -35465,6 +35468,11 @@
           "shape": "InferenceDeviceInfoList",
           "documentation": "<p>Describes the Inference accelerators for the instance type.</p>",
           "locationName": "accelerators"
+        },
+        "TotalInferenceMemoryInMiB": {
+          "shape": "totalInferenceMemory",
+          "documentation": "<p>The total size of the memory for the inference accelerators for the instance type, in MiB.</p>",
+          "locationName": "totalInferenceMemoryInMiB"
         }
       },
       "documentation": "<p>Describes the Inference accelerators for the instance type.</p>"
@@ -35489,6 +35497,11 @@
           "shape": "InferenceDeviceManufacturerName",
           "documentation": "<p>The manufacturer of the Inference accelerator.</p>",
           "locationName": "manufacturer"
+        },
+        "MemoryInfo": {
+          "shape": "InferenceDeviceMemoryInfo",
+          "documentation": "<p>Describes the memory available to the inference accelerator.</p>",
+          "locationName": "memoryInfo"
         }
       },
       "documentation": "<p>Describes the Inference accelerators for the instance type.</p>"
@@ -35502,6 +35515,20 @@
     },
     "InferenceDeviceManufacturerName": {
       "type": "string"
+    },
+    "InferenceDeviceMemoryInfo": {
+      "type": "structure",
+      "members": {
+        "SizeInMiB": {
+          "shape": "InferenceDeviceMemorySize",
+          "documentation": "<p>The size of the memory available to the inference accelerator, in MiB.</p>",
+          "locationName": "sizeInMiB"
+        }
+      },
+      "documentation": "<p>Describes the memory available to the inference accelerator.</p>"
+    },
+    "InferenceDeviceMemorySize": {
+      "type": "integer"
     },
     "InferenceDeviceName": {
       "type": "string"
@@ -45814,6 +45841,16 @@
           "shape": "MaxNetworkInterfaces",
           "documentation": "<p>The maximum number of network interfaces for the network card.</p>",
           "locationName": "maximumNetworkInterfaces"
+        },
+        "BaselineBandwidthInGbps": {
+          "shape": "BaselineBandwidthInGbps",
+          "documentation": "<p>The baseline network performance of the network card, in Gbps.</p>",
+          "locationName": "baselineBandwidthInGbps"
+        },
+        "PeakBandwidthInGbps": {
+          "shape": "PeakBandwidthInGbps",
+          "documentation": "<p>The peak (burst) network performance of the network card, in Gbps.</p>",
+          "locationName": "peakBandwidthInGbps"
         }
       },
       "documentation": "<p>Describes the network card support of the instance type.</p>"
@@ -47284,6 +47321,9 @@
         }
       },
       "documentation": "<p>Describes the data that identifies an Amazon FPGA image (AFI) on the PCI bus.</p>"
+    },
+    "PeakBandwidthInGbps": {
+      "type": "double"
     },
     "PeeringAttachmentStatus": {
       "type": "structure",
@@ -61546,6 +61586,9 @@
       "type": "integer"
     },
     "totalGpuMemory": {
+      "type": "integer"
+    },
+    "totalInferenceMemory": {
       "type": "integer"
     }
   },

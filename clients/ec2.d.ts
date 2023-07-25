@@ -6910,6 +6910,7 @@ declare namespace EC2 {
   export type AvailableInstanceCapacityList = InstanceCapacity[];
   export type BareMetal = "included"|"required"|"excluded"|string;
   export type BareMetalFlag = boolean;
+  export type BaselineBandwidthInGbps = number;
   export type BaselineBandwidthInMbps = number;
   export interface BaselineEbsBandwidthMbps {
     /**
@@ -22903,6 +22904,10 @@ declare namespace EC2 {
      * Describes the Inference accelerators for the instance type.
      */
     Accelerators?: InferenceDeviceInfoList;
+    /**
+     * The total size of the memory for the inference accelerators for the instance type, in MiB.
+     */
+    TotalInferenceMemoryInMiB?: totalInferenceMemory;
   }
   export type InferenceDeviceCount = number;
   export interface InferenceDeviceInfo {
@@ -22918,9 +22923,20 @@ declare namespace EC2 {
      * The manufacturer of the Inference accelerator.
      */
     Manufacturer?: InferenceDeviceManufacturerName;
+    /**
+     * Describes the memory available to the inference accelerator.
+     */
+    MemoryInfo?: InferenceDeviceMemoryInfo;
   }
   export type InferenceDeviceInfoList = InferenceDeviceInfo[];
   export type InferenceDeviceManufacturerName = string;
+  export interface InferenceDeviceMemoryInfo {
+    /**
+     * The size of the memory available to the inference accelerator, in MiB.
+     */
+    SizeInMiB?: InferenceDeviceMemorySize;
+  }
+  export type InferenceDeviceMemorySize = number;
   export type InferenceDeviceName = string;
   export type InsideCidrBlocksStringList = String[];
   export interface Instance {
@@ -29015,6 +29031,14 @@ declare namespace EC2 {
      * The maximum number of network interfaces for the network card.
      */
     MaximumNetworkInterfaces?: MaxNetworkInterfaces;
+    /**
+     * The baseline network performance of the network card, in Gbps.
+     */
+    BaselineBandwidthInGbps?: BaselineBandwidthInGbps;
+    /**
+     * The peak (burst) network performance of the network card, in Gbps.
+     */
+    PeakBandwidthInGbps?: PeakBandwidthInGbps;
   }
   export type NetworkCardInfoList = NetworkCardInfo[];
   export interface NetworkInfo {
@@ -29900,6 +29924,7 @@ declare namespace EC2 {
      */
     SubsystemVendorId?: String;
   }
+  export type PeakBandwidthInGbps = number;
   export interface PeeringAttachmentStatus {
     /**
      * The status code.
@@ -38397,6 +38422,7 @@ declare namespace EC2 {
   export type snapshotTierStatusSet = SnapshotTierStatus[];
   export type totalFpgaMemory = number;
   export type totalGpuMemory = number;
+  export type totalInferenceMemory = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

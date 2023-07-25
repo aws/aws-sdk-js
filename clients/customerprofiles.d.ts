@@ -28,11 +28,11 @@ declare class CustomerProfiles extends Service {
    */
   createCalculatedAttributeDefinition(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.CreateCalculatedAttributeDefinitionResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
+   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
    */
   createDomain(params: CustomerProfiles.Types.CreateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
+   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply. 
    */
   createDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
   /**
@@ -212,6 +212,14 @@ declare class CustomerProfiles extends Service {
    */
   getProfileObjectTypeTemplate(callback?: (err: AWSError, data: CustomerProfiles.Types.GetProfileObjectTypeTemplateResponse) => void): Request<CustomerProfiles.Types.GetProfileObjectTypeTemplateResponse, AWSError>;
   /**
+   * Returns a set of profiles that belong to the same matching group using the matchId or profileId. You can also specify the type of matching that you want for finding similar profiles using either RULE_BASED_MATCHING or ML_BASED_MATCHING.
+   */
+  getSimilarProfiles(params: CustomerProfiles.Types.GetSimilarProfilesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetSimilarProfilesResponse) => void): Request<CustomerProfiles.Types.GetSimilarProfilesResponse, AWSError>;
+  /**
+   * Returns a set of profiles that belong to the same matching group using the matchId or profileId. You can also specify the type of matching that you want for finding similar profiles using either RULE_BASED_MATCHING or ML_BASED_MATCHING.
+   */
+  getSimilarProfiles(callback?: (err: AWSError, data: CustomerProfiles.Types.GetSimilarProfilesResponse) => void): Request<CustomerProfiles.Types.GetSimilarProfilesResponse, AWSError>;
+  /**
    * Get details of specified workflow.
    */
   getWorkflow(params: CustomerProfiles.Types.GetWorkflowRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetWorkflowResponse) => void): Request<CustomerProfiles.Types.GetWorkflowResponse, AWSError>;
@@ -308,6 +316,14 @@ declare class CustomerProfiles extends Service {
    */
   listProfileObjects(callback?: (err: AWSError, data: CustomerProfiles.Types.ListProfileObjectsResponse) => void): Request<CustomerProfiles.Types.ListProfileObjectsResponse, AWSError>;
   /**
+   * Returns a set of MatchIds that belong to the given domain.
+   */
+  listRuleBasedMatches(params: CustomerProfiles.Types.ListRuleBasedMatchesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.ListRuleBasedMatchesResponse) => void): Request<CustomerProfiles.Types.ListRuleBasedMatchesResponse, AWSError>;
+  /**
+   * Returns a set of MatchIds that belong to the given domain.
+   */
+  listRuleBasedMatches(callback?: (err: AWSError, data: CustomerProfiles.Types.ListRuleBasedMatchesResponse) => void): Request<CustomerProfiles.Types.ListRuleBasedMatchesResponse, AWSError>;
+  /**
    * Displays the tags associated with an Amazon Connect Customer Profiles resource. In Connect Customer Profiles, domains, profile object types, and integrations can be tagged.
    */
   listTagsForResource(params: CustomerProfiles.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.ListTagsForResourceResponse) => void): Request<CustomerProfiles.Types.ListTagsForResourceResponse, AWSError>;
@@ -388,11 +404,11 @@ declare class CustomerProfiles extends Service {
    */
   updateCalculatedAttributeDefinition(callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateCalculatedAttributeDefinitionResponse) => void): Request<CustomerProfiles.Types.UpdateCalculatedAttributeDefinitionResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.  To add or remove tags on an existing Domain, see TagResource/UntagResource.
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true. To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.  To add or remove tags on an existing Domain, see TagResource/UntagResource.
    */
   updateDomain(params: CustomerProfiles.Types.UpdateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true.  To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.  To add or remove tags on an existing Domain, see TagResource/UntagResource.
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true. To prevent cross-service impersonation when you call this API, see Cross-service confused deputy prevention for sample policies that you should apply.  To add or remove tags on an existing Domain, see TagResource/UntagResource.
    */
   updateDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
@@ -486,6 +502,7 @@ declare namespace CustomerProfiles {
      */
     PostalCode?: string1To255;
   }
+  export type AddressList = string1To255[];
   export interface AppflowIntegration {
     FlowDefinition: FlowDefinition;
     /**
@@ -572,7 +589,26 @@ declare namespace CustomerProfiles {
     Name: attributeName;
   }
   export type AttributeList = AttributeItem[];
+  export type AttributeMatchingModel = "ONE_TO_ONE"|"MANY_TO_MANY"|string;
   export type AttributeSourceIdMap = {[key: string]: uuid};
+  export interface AttributeTypesSelector {
+    /**
+     * Configures the AttributeMatchingModel, you can either choose ONE_TO_ONE or MANY_TO_MANY.
+     */
+    AttributeMatchingModel: AttributeMatchingModel;
+    /**
+     * The Address type. You can choose from Address, BusinessAddress, MaillingAddress, and ShippingAddress. You only can use the Address type in the MatchingRule. For example, if you want to match profile based on BusinessAddress.City or MaillingAddress.City, you need to choose the BusinessAddress and the MaillingAddress to represent the Address type and specify the Address.City on the matching rule.
+     */
+    Address?: AddressList;
+    /**
+     * The PhoneNumber type. You can choose from PhoneNumber, HomePhoneNumber, and MobilePhoneNumber. You only can use the PhoneNumber type in the MatchingRule. For example, if you want to match a profile based on Phone or HomePhone, you need to choose the Phone and the HomePhone to represent the PhoneNumber type and only specify the PhoneNumber on the matching rule.
+     */
+    PhoneNumber?: PhoneNumberList;
+    /**
+     * The Email type. You can choose from EmailAddress, BusinessEmailAddress and PersonalEmailAddress. You only can use the EmailAddress type in the MatchingRule. For example, if you want to match profile based on PersonalEmailAddress or BusinessEmailAddress, you need to choose the PersonalEmailAddress and the BusinessEmailAddress to represent the EmailAddress type and only specify the EmailAddress on the matching rule.
+     */
+    EmailAddress?: EmailList;
+  }
   export type Attributes = {[key: string]: string1To255};
   export interface AutoMerging {
     /**
@@ -755,6 +791,10 @@ declare namespace CustomerProfiles {
      */
     Matching?: MatchingRequest;
     /**
+     * The process of matching duplicate profiles using the Rule-Based matching. If RuleBasedMatching = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the RuleBasedMatchingRequest. You can use the ListRuleBasedMatches and GetSimilarProfiles API to return and review the results. Also, if you have configured ExportingConfig in the RuleBasedMatchingRequest, you can download the results from S3.
+     */
+    RuleBasedMatching?: RuleBasedMatchingRequest;
+    /**
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
@@ -780,6 +820,10 @@ declare namespace CustomerProfiles {
      * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.
      */
     Matching?: MatchingResponse;
+    /**
+     * The process of matching duplicate profiles using the Rule-Based matching. If RuleBasedMatching = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the RuleBasedMatchingRequest. You can use the ListRuleBasedMatches and GetSimilarProfiles API to return and review the results. Also, if you have configured ExportingConfig in the RuleBasedMatchingRequest, you can download the results from S3.
+     */
+    RuleBasedMatching?: RuleBasedMatchingResponse;
     /**
      * The timestamp of when the domain was created.
      */
@@ -1144,6 +1188,7 @@ declare namespace CustomerProfiles {
   }
   export type Double = number;
   export type Double0To1 = number;
+  export type EmailList = string1To255[];
   export interface EventStreamDestinationDetails {
     /**
      * The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name.
@@ -1483,6 +1528,10 @@ declare namespace CustomerProfiles {
      */
     Matching?: MatchingResponse;
     /**
+     * The process of matching duplicate profiles using the Rule-Based matching. If RuleBasedMatching = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the RuleBasedMatchingRequest. You can use the ListRuleBasedMatches and GetSimilarProfiles API to return and review the results. Also, if you have configured ExportingConfig in the RuleBasedMatchingRequest, you can download the results from S3.
+     */
+    RuleBasedMatching?: RuleBasedMatchingResponse;
+    /**
      * The timestamp of when the domain was created.
      */
     CreatedAt: timestamp;
@@ -1766,6 +1815,58 @@ declare namespace CustomerProfiles {
      * A list of unique keys that can be used to map data to the profile.
      */
     Keys?: KeyMap;
+  }
+  export interface GetSimilarProfilesRequest {
+    /**
+     * The pagination token from the previous GetSimilarProfiles API call.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of objects returned per page.
+     */
+    MaxResults?: maxSize100;
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * Specify the type of matching to get similar profiles for.
+     */
+    MatchType: MatchType;
+    /**
+     * The string indicating the search key to be used.
+     */
+    SearchKey: string1To255;
+    /**
+     * The string based on SearchKey to be searched for similar profiles.
+     */
+    SearchValue: string1To255;
+  }
+  export interface GetSimilarProfilesResponse {
+    /**
+     * Set of profileIds that belong to the same matching group.
+     */
+    ProfileIds?: ProfileIdList;
+    /**
+     * The string matchId that the similar profiles belong to.
+     */
+    MatchId?: string1To255;
+    /**
+     * Specify the type of matching to get similar profiles for.
+     */
+    MatchType?: MatchType;
+    /**
+     * The integer rule level that the profiles matched on.
+     */
+    RuleLevel?: RuleLevel;
+    /**
+     * It only has value when the MatchType is ML_BASED_MATCHING.A number between 0 and 1, where a higher score means higher similarity. Examining match confidence scores lets you distinguish between groups of similar records in which the system is highly confident (which you may decide to merge), groups of similar records about which the system is uncertain (which you may decide to have reviewed by a human), and groups of similar records that the system deems to be unlikely (which you may decide to reject). Given confidence scores vary as per the data input, it should not be used as an absolute measure of matching quality.
+     */
+    ConfidenceScore?: Double;
+    /**
+     * The pagination token from the previous GetSimilarProfiles API call.
+     */
+    NextToken?: token;
   }
   export interface GetWorkflowRequest {
     /**
@@ -2330,6 +2431,30 @@ declare namespace CustomerProfiles {
      */
     NextToken?: token;
   }
+  export interface ListRuleBasedMatchesRequest {
+    /**
+     * The pagination token from the previous ListRuleBasedMatches API call.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of MatchIds returned per page.
+     */
+    MaxResults?: maxSize100;
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+  }
+  export interface ListRuleBasedMatchesResponse {
+    /**
+     * The list of MatchIds for the given domain.
+     */
+    MatchIds?: MatchIdList;
+    /**
+     * The pagination token from the previous ListRuleBasedMatches API call.
+     */
+    NextToken?: token;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the resource for which you want to view tags.
@@ -2415,6 +2540,7 @@ declare namespace CustomerProfiles {
      */
     Object: Object;
   }
+  export type MatchIdList = string1To255[];
   export interface MatchItem {
     /**
      * The unique identifiers for this group of profiles that match.
@@ -2429,6 +2555,7 @@ declare namespace CustomerProfiles {
      */
     ConfidenceScore?: Double;
   }
+  export type MatchType = "RULE_BASED_MATCHING"|"ML_BASED_MATCHING"|string;
   export type MatchesList = MatchItem[];
   export type MatchingAttributes = string1To255[];
   export type MatchingAttributesList = MatchingAttributes[];
@@ -2468,6 +2595,16 @@ declare namespace CustomerProfiles {
      */
     ExportingConfig?: ExportingConfig;
   }
+  export interface MatchingRule {
+    /**
+     * A single rule level of the MatchRules. Configures how the rule-based matching process should match profiles.
+     */
+    Rule: MatchingRuleAttributeList;
+  }
+  export type MatchingRuleAttributeList = string1To255[];
+  export type MatchingRules = MatchingRule[];
+  export type MaxAllowedRuleLevelForMatching = number;
+  export type MaxAllowedRuleLevelForMerging = number;
   export interface MergeProfilesRequest {
     /**
      * The unique name of the domain.
@@ -2533,6 +2670,7 @@ declare namespace CustomerProfiles {
   export type Operator = "EQUAL_TO"|"GREATER_THAN"|"LESS_THAN"|"NOT_EQUAL_TO"|string;
   export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
   export type PartyType = "INDIVIDUAL"|"BUSINESS"|"OTHER"|string;
+  export type PhoneNumberList = string1To255[];
   export interface Profile {
     /**
      * The unique identifier of a customer profile.
@@ -2833,6 +2971,60 @@ declare namespace CustomerProfiles {
     Unit: Unit;
   }
   export type RoleArn = string;
+  export interface RuleBasedMatchingRequest {
+    /**
+     * The flag that enables the rule-based matching process of duplicate profiles.
+     */
+    Enabled: optionalBoolean;
+    /**
+     * Configures how the rule-based matching process should match profiles. You can have up to 15 MatchingRule in the MatchingRules.
+     */
+    MatchingRules?: MatchingRules;
+    /**
+     *  MatchingRule 
+     */
+    MaxAllowedRuleLevelForMerging?: MaxAllowedRuleLevelForMerging;
+    /**
+     * Indicates the maximum allowed rule level.
+     */
+    MaxAllowedRuleLevelForMatching?: MaxAllowedRuleLevelForMatching;
+    /**
+     * Configures information about the AttributeTypesSelector where the rule-based identity resolution uses to match profiles.
+     */
+    AttributeTypesSelector?: AttributeTypesSelector;
+    ConflictResolution?: ConflictResolution;
+    ExportingConfig?: ExportingConfig;
+  }
+  export interface RuleBasedMatchingResponse {
+    /**
+     * The flag that enables the rule-based matching process of duplicate profiles.
+     */
+    Enabled?: optionalBoolean;
+    /**
+     * Configures how the rule-based matching process should match profiles. You can have up to 15 MatchingRule in the MatchingRules.
+     */
+    MatchingRules?: MatchingRules;
+    /**
+     * PENDING   The first status after configuration a rule-based matching rule. If it is an existing domain, the rule-based Identity Resolution waits one hour before creating the matching rule. If it is a new domain, the system will skip the PENDING stage.   IN_PROGRESS   The system is creating the rule-based matching rule. Under this status, the system is evaluating the existing data and you can no longer change the Rule-based matching configuration.   ACTIVE   The rule is ready to use. You can change the rule a day after the status is in ACTIVE.  
+     */
+    Status?: RuleBasedMatchingStatus;
+    /**
+     *  MatchingRule 
+     */
+    MaxAllowedRuleLevelForMerging?: MaxAllowedRuleLevelForMerging;
+    /**
+     * Indicates the maximum allowed rule level.
+     */
+    MaxAllowedRuleLevelForMatching?: MaxAllowedRuleLevelForMatching;
+    /**
+     * Configures information about the AttributeTypesSelector where the rule-based identity resolution uses to match profiles.
+     */
+    AttributeTypesSelector?: AttributeTypesSelector;
+    ConflictResolution?: ConflictResolution;
+    ExportingConfig?: ExportingConfig;
+  }
+  export type RuleBasedMatchingStatus = "PENDING"|"IN_PROGRESS"|"ACTIVE"|string;
+  export type RuleLevel = number;
   export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface S3ExportingConfig {
     /**
@@ -3212,6 +3404,10 @@ declare namespace CustomerProfiles {
      */
     Matching?: MatchingRequest;
     /**
+     * The process of matching duplicate profiles using the rule-Based matching. If RuleBasedMatching = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the RuleBasedMatchingRequest. You can use the ListRuleBasedMatches and GetSimilarProfiles API to return and review the results. Also, if you have configured ExportingConfig in the RuleBasedMatchingRequest, you can download the results from S3.
+     */
+    RuleBasedMatching?: RuleBasedMatchingRequest;
+    /**
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
@@ -3237,6 +3433,10 @@ declare namespace CustomerProfiles {
      * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains.  After the Identity Resolution Job completes, use the GetMatches API to return and review the results. Or, if you have configured ExportingConfig in the MatchingRequest, you can download the results from S3.
      */
     Matching?: MatchingResponse;
+    /**
+     * The process of matching duplicate profiles using the rule-Based matching. If RuleBasedMatching = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the RuleBasedMatchingRequest. You can use the ListRuleBasedMatches and GetSimilarProfiles API to return and review the results. Also, if you have configured ExportingConfig in the RuleBasedMatchingRequest, you can download the results from S3.
+     */
+    RuleBasedMatching?: RuleBasedMatchingResponse;
     /**
      * The timestamp of when the domain was created.
      */

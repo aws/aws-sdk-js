@@ -29,11 +29,11 @@ declare class Transfer extends Service {
    */
   createAgreement(callback?: (err: AWSError, data: Transfer.Types.CreateAgreementResponse) => void): Request<Transfer.Types.CreateAgreementResponse, AWSError>;
   /**
-   * Creates the connector, which captures the parameters for an outbound connection for the AS2 protocol. The connector is required for sending files to an externally hosted AS2 server. For more details about connectors, see Create AS2 connectors.
+   * Creates the connector, which captures the parameters for an outbound connection for the AS2 or SFTP protocol. The connector is required for sending files to an externally hosted AS2 or SFTP server. For more details about AS2 connectors, see Create AS2 connectors.  You must specify exactly one configuration object: either for AS2 (As2Config) or SFTP (SftpConfig). 
    */
   createConnector(params: Transfer.Types.CreateConnectorRequest, callback?: (err: AWSError, data: Transfer.Types.CreateConnectorResponse) => void): Request<Transfer.Types.CreateConnectorResponse, AWSError>;
   /**
-   * Creates the connector, which captures the parameters for an outbound connection for the AS2 protocol. The connector is required for sending files to an externally hosted AS2 server. For more details about connectors, see Create AS2 connectors.
+   * Creates the connector, which captures the parameters for an outbound connection for the AS2 or SFTP protocol. The connector is required for sending files to an externally hosted AS2 or SFTP server. For more details about AS2 connectors, see Create AS2 connectors.  You must specify exactly one configuration object: either for AS2 (As2Config) or SFTP (SftpConfig). 
    */
   createConnector(callback?: (err: AWSError, data: Transfer.Types.CreateConnectorResponse) => void): Request<Transfer.Types.CreateConnectorResponse, AWSError>;
   /**
@@ -93,11 +93,11 @@ declare class Transfer extends Service {
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the agreement that's specified in the provided ConnectorId.
+   * Deletes the connector that's specified in the provided ConnectorId.
    */
   deleteConnector(params: Transfer.Types.DeleteConnectorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the agreement that's specified in the provided ConnectorId.
+   * Deletes the connector that's specified in the provided ConnectorId.
    */
   deleteConnector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -365,11 +365,11 @@ declare class Transfer extends Service {
    */
   sendWorkflowStepState(callback?: (err: AWSError, data: Transfer.Types.SendWorkflowStepStateResponse) => void): Request<Transfer.Types.SendWorkflowStepStateResponse, AWSError>;
   /**
-   * Begins an outbound file transfer to a remote AS2 server. You specify the ConnectorId and the file paths for where to send the files. 
+   * Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.   For an AS2 connector, you specify the ConnectorId and one or more SendFilePaths to identify the files you want to transfer.   For an SFTP connector, the file transfer can be either outbound or inbound. In both cases, you specify the ConnectorId. Depending on the direction of the transfer, you also specify the following items:   If you are transferring file from a partner's SFTP server to a Transfer Family server, you specify one or more RetreiveFilePaths to identify the files you want to transfer, and a LocalDirectoryPath to specify the destination folder.   If you are transferring file to a partner's SFTP server from Amazon Web Services storage, you specify one or more SendFilePaths to identify the files you want to transfer, and a RemoteDirectoryPath to specify the destination folder.    
    */
   startFileTransfer(params: Transfer.Types.StartFileTransferRequest, callback?: (err: AWSError, data: Transfer.Types.StartFileTransferResponse) => void): Request<Transfer.Types.StartFileTransferResponse, AWSError>;
   /**
-   * Begins an outbound file transfer to a remote AS2 server. You specify the ConnectorId and the file paths for where to send the files. 
+   * Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.   For an AS2 connector, you specify the ConnectorId and one or more SendFilePaths to identify the files you want to transfer.   For an SFTP connector, the file transfer can be either outbound or inbound. In both cases, you specify the ConnectorId. Depending on the direction of the transfer, you also specify the following items:   If you are transferring file from a partner's SFTP server to a Transfer Family server, you specify one or more RetreiveFilePaths to identify the files you want to transfer, and a LocalDirectoryPath to specify the destination folder.   If you are transferring file to a partner's SFTP server from Amazon Web Services storage, you specify one or more SendFilePaths to identify the files you want to transfer, and a RemoteDirectoryPath to specify the destination folder.    
    */
   startFileTransfer(callback?: (err: AWSError, data: Transfer.Types.StartFileTransferResponse) => void): Request<Transfer.Types.StartFileTransferResponse, AWSError>;
   /**
@@ -396,6 +396,14 @@ declare class Transfer extends Service {
    * Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN). Resources are users, servers, roles, and other entities. There is no response returned from this call.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Tests whether your SFTP connector is set up successfully. We highly recommend that you call this operation to test your ability to transfer files between a Transfer Family server and a trading partner's SFTP server.
+   */
+  testConnection(params: Transfer.Types.TestConnectionRequest, callback?: (err: AWSError, data: Transfer.Types.TestConnectionResponse) => void): Request<Transfer.Types.TestConnectionResponse, AWSError>;
+  /**
+   * Tests whether your SFTP connector is set up successfully. We highly recommend that you call this operation to test your ability to transfer files between a Transfer Family server and a trading partner's SFTP server.
+   */
+  testConnection(callback?: (err: AWSError, data: Transfer.Types.TestConnectionResponse) => void): Request<Transfer.Types.TestConnectionResponse, AWSError>;
   /**
    * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.  The ServerId and UserName parameters are required. The ServerProtocol, SourceIp, and UserPassword are all optional.  Note the following:    You cannot use TestIdentityProvider if the IdentityProviderType of your server is SERVICE_MANAGED.    TestIdentityProvider does not work with keys: it only accepts passwords.    TestIdentityProvider can test the password operation for a custom Identity Provider that handles keys and passwords.    If you provide any incorrect values for any parameters, the Response field is empty.     If you provide a server ID for a server that uses service-managed users, you get an error:    An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-server-ID not configured for external auth      If you enter a Server ID for the --server-id parameter that does not identify an actual Transfer server, you receive the following error:   An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server.  It is possible your sever is in a different region. You can specify a region by adding the following: --region region-code, such as --region us-east-2 to specify a server in US East (Ohio).  
    */
@@ -655,13 +663,13 @@ declare namespace Transfer {
   }
   export interface CreateConnectorRequest {
     /**
-     * The URL of the partner's AS2 endpoint.
+     * The URL of the partner's AS2 or SFTP endpoint.
      */
     Url: Url;
     /**
-     * A structure that contains the parameters for a connector object.
+     * A structure that contains the parameters for an AS2 connector object.
      */
-    As2Config: As2ConnectorConfig;
+    As2Config?: As2ConnectorConfig;
     /**
      * With AS2, you can send files by calling StartFileTransfer and specifying the file paths in the request parameter, SendFilePaths. We use the file’s parent directory (for example, for --send-file-paths /bucket/dir/file.txt, parent directory is /bucket/dir/) to temporarily store a processed AS2 message file, store the MDN when we receive them from the partner, and write a final JSON file containing relevant metadata of the transmission. So, the AccessRole needs to provide read and write access to the parent directory of the file location used in the StartFileTransfer request. Additionally, you need to provide read and write access to the parent directory of the files that you intend to send with StartFileTransfer. If you are using Basic authentication for your AS2 connector, the access role requires the secretsmanager:GetSecretValue permission for the secret. If the secret is encrypted using a customer-managed key instead of the Amazon Web Services managed key in Secrets Manager, then the role also needs the kms:Decrypt permission for that key.
      */
@@ -674,6 +682,10 @@ declare namespace Transfer {
      * Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.
      */
     Tags?: Tags;
+    /**
+     * A structure that contains the parameters for an SFTP connector object.
+     */
+    SftpConfig?: SftpConnectorConfig;
   }
   export interface CreateConnectorResponse {
     /**
@@ -787,7 +799,7 @@ declare namespace Transfer {
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) role provides access to paths in Target. This value can be set only when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ] 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) role provides access to paths in Target. This value can be set only when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]  In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the value the user should see for their home directory when they log in. The following is an Entry and Target pair example for chroot.  [ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ] 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
@@ -1292,11 +1304,11 @@ declare namespace Transfer {
      */
     ConnectorId?: ConnectorId;
     /**
-     * The URL of the partner's AS2 endpoint.
+     * The URL of the partner's AS2 or SFTP endpoint.
      */
     Url?: Url;
     /**
-     * A structure that contains the parameters for a connector object.
+     * A structure that contains the parameters for an AS2 connector object.
      */
     As2Config?: As2ConnectorConfig;
     /**
@@ -1311,6 +1323,10 @@ declare namespace Transfer {
      * Key-value pairs that can be used to group and search for connectors.
      */
     Tags?: Tags;
+    /**
+     * A structure that contains the parameters for an SFTP connector object.
+     */
+    SftpConfig?: SftpConnectorConfig;
   }
   export interface DescribedExecution {
     /**
@@ -2199,7 +2215,7 @@ declare namespace Transfer {
      */
     ConnectorId?: ConnectorId;
     /**
-     * The URL of the partner's AS2 endpoint.
+     * The URL of the partner's AS2 or SFTP endpoint.
      */
     Url?: Url;
   }
@@ -2459,6 +2475,7 @@ declare namespace Transfer {
   export type S3Tags = S3Tag[];
   export type S3VersionId = string;
   export type SecondaryGids = PosixId[];
+  export type SecretId = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SecurityPolicyName = string;
@@ -2495,6 +2512,18 @@ declare namespace Transfer {
   export type SessionId = string;
   export type SetStatOption = "DEFAULT"|"ENABLE_NO_OP"|string;
   export type SftpAuthenticationMethods = "PASSWORD"|"PUBLIC_KEY"|"PUBLIC_KEY_OR_PASSWORD"|"PUBLIC_KEY_AND_PASSWORD"|string;
+  export interface SftpConnectorConfig {
+    /**
+     * The identifiers for the secrets (in Amazon Web Services Secrets Manager) that contain the SFTP user's private keys or passwords.
+     */
+    UserSecretId?: SecretId;
+    /**
+     * The public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting. You can use the ssh-keyscan command against the SFTP server to retrieve the necessary key. The three standard SSH public key format elements are &lt;key type&gt;, &lt;body base64&gt;, and an optional &lt;comment&gt;, with spaces between each element. For the trusted host key, Transfer Family accepts RSA and ECDSA keys.   For RSA keys, the key type is ssh-rsa.   For ECDSA keys, the key type is either ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521, depending on the size of the key you generated.  
+     */
+    TrustedHostKeys?: SftpConnectorTrustedHostKeyList;
+  }
+  export type SftpConnectorTrustedHostKey = string;
+  export type SftpConnectorTrustedHostKeyList = SftpConnectorTrustedHostKey[];
   export type SigningAlg = "SHA256"|"SHA384"|"SHA512"|"SHA1"|"NONE"|string;
   export type SourceFileLocation = string;
   export type SourceIp = string;
@@ -2518,17 +2547,29 @@ declare namespace Transfer {
   export type SshPublicKeys = SshPublicKey[];
   export interface StartFileTransferRequest {
     /**
-     * The unique identifier for the connector. 
+     * The unique identifier for the connector.
      */
     ConnectorId: ConnectorId;
     /**
-     * An array of strings. Each string represents the absolute path for one outbound file transfer. For example,  DOC-EXAMPLE-BUCKET/myfile.txt . 
+     * One or more source paths for the Transfer Family server. Each string represents a source file path for one outbound file transfer. For example,  DOC-EXAMPLE-BUCKET/myfile.txt .
      */
-    SendFilePaths: FilePaths;
+    SendFilePaths?: FilePaths;
+    /**
+     * One or more source paths for the partner's SFTP server. Each string represents a source file path for one inbound file transfer.
+     */
+    RetrieveFilePaths?: FilePaths;
+    /**
+     * For an inbound transfer, the LocaDirectoryPath specifies the destination for one or more files that are transferred from the partner's SFTP server.
+     */
+    LocalDirectoryPath?: FilePath;
+    /**
+     * For an outbound transfer, the RemoteDirectoryPath specifies the destination for one or more files that are transferred to the partner's SFTP server. If you don't specify a RemoteDirectoryPath, the destination for transferred files is the SFTP user's home directory.
+     */
+    RemoteDirectoryPath?: FilePath;
   }
   export interface StartFileTransferResponse {
     /**
-     * Returns the unique identifier for this file transfer. 
+     * Returns the unique identifier for the file transfer.
      */
     TransferId: TransferId;
   }
@@ -2539,6 +2580,7 @@ declare namespace Transfer {
     ServerId: ServerId;
   }
   export type State = "OFFLINE"|"ONLINE"|"STARTING"|"STOPPING"|"START_FAILED"|"STOP_FAILED"|string;
+  export type Status = string;
   export type StatusCode = number;
   export type StepResultOutputsJson = string;
   export interface StopServerRequest {
@@ -2588,6 +2630,26 @@ declare namespace Transfer {
   }
   export type TagValue = string;
   export type Tags = Tag[];
+  export interface TestConnectionRequest {
+    /**
+     * The unique identifier for the connector.
+     */
+    ConnectorId: ConnectorId;
+  }
+  export interface TestConnectionResponse {
+    /**
+     * Returns the identifier of the connector object that you are testing.
+     */
+    ConnectorId?: ConnectorId;
+    /**
+     * Returns OK for successful test, or ERROR if the test fails.
+     */
+    Status?: Status;
+    /**
+     * Returns Connection succeeded if the test is successful. Or, returns a descriptive error message if the test fails. The following list provides the details for some error messages and troubleshooting steps for each.    Unable to access secrets manager: Verify that your secret name aligns with the one in Transfer Role permissions.    Unknown Host/Connection failed: Verify the server URL in the connector configuration , and verify that the login credentials work successfully outside of the connector.    Private key not found: Verify that the secret exists and is formatted correctly.    Invalid trusted host keys: Verify that the trusted host key in the connector configuration matches the ssh-keyscan output.  
+     */
+    StatusMessage?: Message;
+  }
   export interface TestIdentityProviderRequest {
     /**
      * A system-assigned identifier for a specific server. That server's user authentication method is tested with a user name and password.
@@ -2751,11 +2813,11 @@ declare namespace Transfer {
      */
     ConnectorId: ConnectorId;
     /**
-     * The URL of the partner's AS2 endpoint.
+     * The URL of the partner's AS2 or SFTP endpoint.
      */
     Url?: Url;
     /**
-     * A structure that contains the parameters for a connector object.
+     * A structure that contains the parameters for an AS2 connector object.
      */
     As2Config?: As2ConnectorConfig;
     /**
@@ -2766,6 +2828,10 @@ declare namespace Transfer {
      * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a connector to turn on CloudWatch logging for Amazon S3 events. When set, you can view connector activity in your CloudWatch logs.
      */
     LoggingRole?: Role;
+    /**
+     * A structure that contains the parameters for an SFTP connector object.
+     */
+    SftpConfig?: SftpConnectorConfig;
   }
   export interface UpdateConnectorResponse {
     /**

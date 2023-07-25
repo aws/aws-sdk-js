@@ -359,6 +359,10 @@ declare namespace Wisdom {
      */
     description?: Description;
     /**
+     * The configuration information for the Wisdom assistant integration.
+     */
+    integrationConfiguration?: AssistantIntegrationConfiguration;
+    /**
      * The name.
      */
     name: Name;
@@ -379,6 +383,12 @@ declare namespace Wisdom {
      */
     type: AssistantType;
   }
+  export interface AssistantIntegrationConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for streaming chat messages.
+     */
+    topicIntegrationArn?: GenericArn;
+  }
   export type AssistantList = AssistantSummary[];
   export type AssistantStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|string;
   export interface AssistantSummary {
@@ -394,6 +404,10 @@ declare namespace Wisdom {
      * The description of the assistant.
      */
     description?: Description;
+    /**
+     * The configuration information for the Wisdom assistant integration.
+     */
+    integrationConfiguration?: AssistantIntegrationConfiguration;
     /**
      * The name of the assistant.
      */
@@ -1365,6 +1379,10 @@ declare namespace Wisdom {
      */
     description?: Description;
     /**
+     * The configuration information for the session integration.
+     */
+    integrationConfiguration?: SessionIntegrationConfiguration;
+    /**
      * The name of the session.
      */
     name: Name;
@@ -1380,6 +1398,12 @@ declare namespace Wisdom {
      * The tags used to organize, track, or control access for this resource.
      */
     tags?: Tags;
+  }
+  export interface SessionIntegrationConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for streaming chat messages.
+     */
+    topicIntegrationArn?: GenericArn;
   }
   export type SessionSummaries = SessionSummary[];
   export interface SessionSummary {

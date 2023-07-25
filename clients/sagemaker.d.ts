@@ -20532,13 +20532,13 @@ declare namespace SageMaker {
      */
     CompletionCriteria?: AutoMLJobCompletionCriteria;
     /**
-     * The name of the column used to provide the sentences to be classified. It should not be the same as the target column (Required).
+     * The name of the column used to provide the sentences to be classified. It should not be the same as the target column.
      */
-    ContentColumn?: ContentColumn;
+    ContentColumn: ContentColumn;
     /**
-     * The name of the column used to provide the class labels. It should not be same as the content column (Required).
+     * The name of the column used to provide the class labels. It should not be same as the content column.
      */
-    TargetLabelColumn?: TargetLabelColumn;
+    TargetLabelColumn: TargetLabelColumn;
   }
   export type ThingName = string;
   export interface TimeSeriesConfig {
