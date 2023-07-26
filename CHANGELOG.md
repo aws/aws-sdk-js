@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1422.0-->
+<!--LATEST=2.1423.0-->
 <!--ENTRYINSERT-->
+
+## 2.1423.0
+* feature: EntityResolution: AWS Entity Resolution can effectively match a source record from a customer relationship management (CRM) system with a source record from a marketing system containing campaign information.
+* feature: Glue: Release Glue Studio Snowflake Connector Node for SDK/CLI
+* feature: ManagedBlockchainQuery: Amazon Managed Blockchain (AMB) Query provides serverless access to standardized, multi-blockchain datasets with developer-friendly APIs.
+* feature: OpenSearchServerless: This release adds new collection type VectorSearch.
+* feature: Polly: Amazon Polly adds 1 new voice - Lisa (nl-BE)
 
 ## 2.1422.0
 * feature: Billingconductor: Added support for Auto-Assocate Billing Groups for CreateBillingGroup, UpdateBillingGroup, and ListBillingGroups.

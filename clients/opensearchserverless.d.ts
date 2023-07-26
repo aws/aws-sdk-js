@@ -476,7 +476,7 @@ declare namespace OpenSearchServerless {
      */
     status?: CollectionStatus;
   }
-  export type CollectionType = "SEARCH"|"TIMESERIES"|string;
+  export type CollectionType = "SEARCH"|"TIMESERIES"|"VECTORSEARCH"|string;
   export type ConfigDescription = string;
   export type ConfigName = string;
   export interface CreateAccessPolicyRequest {

@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "EntityResolution",
+        "description": "AWS Entity Resolution can effectively match a source record from a customer relationship management (CRM) system with a source record from a marketing system containing campaign information."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Release Glue Studio Snowflake Connector Node for SDK/CLI"
+    },
+    {
+        "type": "feature",
+        "category": "ManagedBlockchainQuery",
+        "description": "Amazon Managed Blockchain (AMB) Query provides serverless access to standardized, multi-blockchain datasets with developer-friendly APIs."
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearchServerless",
+        "description": "This release adds new collection type VectorSearch."
+    },
+    {
+        "type": "feature",
+        "category": "Polly",
+        "description": "Amazon Polly adds 1 new voice - Lisa (nl-BE)"
+    }
+]

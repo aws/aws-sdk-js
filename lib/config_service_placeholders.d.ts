@@ -352,6 +352,8 @@ export abstract class ConfigurationServicePlaceholders {
   verifiedpermissions?: AWS.VerifiedPermissions.Types.ClientConfiguration;
   appfabric?: AWS.AppFabric.Types.ClientConfiguration;
   medicalimaging?: AWS.MedicalImaging.Types.ClientConfiguration;
+  entityresolution?: AWS.EntityResolution.Types.ClientConfiguration;
+  managedblockchainquery?: AWS.ManagedBlockchainQuery.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -706,4 +708,6 @@ export interface ConfigurationServiceApiVersions {
   verifiedpermissions?: AWS.VerifiedPermissions.Types.apiVersion;
   appfabric?: AWS.AppFabric.Types.apiVersion;
   medicalimaging?: AWS.MedicalImaging.Types.apiVersion;
+  entityresolution?: AWS.EntityResolution.Types.apiVersion;
+  managedblockchainquery?: AWS.ManagedBlockchainQuery.Types.apiVersion;
 }

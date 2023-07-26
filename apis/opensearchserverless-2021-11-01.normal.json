@@ -1163,7 +1163,8 @@
       "type": "string",
       "enum": [
         "SEARCH",
-        "TIMESERIES"
+        "TIMESERIES",
+        "VECTORSEARCH"
       ]
     },
     "ConfigDescription": {
@@ -2749,7 +2750,7 @@
     },
     "samlMetadata": {
       "type": "string",
-      "max": 20480,
+      "max": 51200,
       "min": 1,
       "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u00A1-\\u00FF]+"
     },

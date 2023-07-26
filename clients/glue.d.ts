@@ -1823,7 +1823,7 @@ declare namespace Glue {
      */
     Name?: NodeName;
     /**
-     * Specifies the data of the Amazon Reshift target node.
+     * Specifies the data of the Amazon Redshift target node.
      */
     Data?: AmazonRedshiftNodeData;
     /**
@@ -3004,6 +3004,14 @@ declare namespace Glue {
      * Specifies a Glue DataBrew recipe node.
      */
     Recipe?: Recipe;
+    /**
+     * Specifies a Snowflake data source.
+     */
+    SnowflakeSource?: SnowflakeSource;
+    /**
+     * Specifies a target that writes to a Snowflake data source.
+     */
+    SnowflakeTarget?: SnowflakeTarget;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -11473,6 +11481,120 @@ declare namespace Glue {
      * A mapping of skewed values to the columns that contain them.
      */
     SkewedColumnValueLocationMaps?: LocationMap;
+  }
+  export interface SnowflakeNodeData {
+    /**
+     * Specifies how retrieved data is specified. Valid values: "table",  "query".
+     */
+    SourceType?: GenericLimitedString;
+    /**
+     * Specifies a Glue Data Catalog Connection to a Snowflake endpoint.
+     */
+    Connection?: Option;
+    /**
+     * Specifies a Snowflake database schema for your node to use.
+     */
+    Schema?: GenericString;
+    /**
+     * Specifies a Snowflake table for your node to use.
+     */
+    Table?: GenericString;
+    /**
+     * Specifies a Snowflake database for your node to use.
+     */
+    Database?: GenericString;
+    /**
+     * Not currently used.
+     */
+    TempDir?: EnclosedInStringProperty;
+    /**
+     * Not currently used.
+     */
+    IamRole?: Option;
+    /**
+     * Specifies additional options passed to the Snowflake connector. If options are specified elsewhere in this node, this will take precedence.
+     */
+    AdditionalOptions?: AdditionalOptions;
+    /**
+     * A SQL string used to retrieve data with the query sourcetype.
+     */
+    SampleQuery?: GenericString;
+    /**
+     * A SQL string run before the Snowflake connector performs its standard actions.
+     */
+    PreAction?: GenericString;
+    /**
+     * A SQL string run after the Snowflake connector performs its standard actions.
+     */
+    PostAction?: GenericString;
+    /**
+     * Specifies what action to take when writing to a table with preexisting data. Valid values:  append, merge, truncate, drop.
+     */
+    Action?: GenericString;
+    /**
+     * Used when Action is append. Specifies the resolution behavior when a row already exists. If true, preexisting rows will be updated. If false, those rows will be inserted.
+     */
+    Upsert?: BooleanValue;
+    /**
+     * Specifies a merge action. Valid values: simple, custom. If simple, merge behavior is defined by MergeWhenMatched and  MergeWhenNotMatched. If custom, defined by MergeClause.
+     */
+    MergeAction?: GenericLimitedString;
+    /**
+     * Specifies how to resolve records that match preexisting data when merging. Valid values:  update, delete.
+     */
+    MergeWhenMatched?: GenericLimitedString;
+    /**
+     * Specifies how to process records that do not match preexisting data when merging. Valid values: insert, none.
+     */
+    MergeWhenNotMatched?: GenericLimitedString;
+    /**
+     * A SQL statement that specifies a custom merge behavior.
+     */
+    MergeClause?: GenericString;
+    /**
+     * The name of a staging table used when performing merge or upsert append actions. Data is written to this table, then moved to table by a generated postaction.
+     */
+    StagingTable?: GenericString;
+    /**
+     * Specifies the columns combined to identify a record when detecting matches for merges and upserts. A list of structures with value, label and  description keys. Each structure describes a column.
+     */
+    SelectedColumns?: OptionList;
+    /**
+     * Specifies whether automatic query pushdown is enabled. If pushdown is enabled, then when a query is run on Spark, if part of the query can be "pushed down" to the Snowflake server, it is pushed down. This improves performance of some queries.
+     */
+    AutoPushdown?: BooleanValue;
+    /**
+     * Manually defines the target schema for the node. A list of structures with value , label and description keys. Each structure defines a column.
+     */
+    TableSchema?: OptionList;
+  }
+  export interface SnowflakeSource {
+    /**
+     * The name of the Snowflake data source.
+     */
+    Name: NodeName;
+    /**
+     * Configuration for the Snowflake data source.
+     */
+    Data: SnowflakeNodeData;
+    /**
+     * Specifies user-defined schemas for your output data.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface SnowflakeTarget {
+    /**
+     * The name of the Snowflake target.
+     */
+    Name: NodeName;
+    /**
+     * Specifies the data of the Snowflake target node.
+     */
+    Data: SnowflakeNodeData;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs?: OneInput;
   }
   export type Sort = "ASC"|"DESC"|string;
   export type SortCriteria = SortCriterion[];

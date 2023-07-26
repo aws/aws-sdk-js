@@ -350,3 +350,5 @@ export import CodeGuruSecurity = require('./codegurusecurity');
 export import VerifiedPermissions = require('./verifiedpermissions');
 export import AppFabric = require('./appfabric');
 export import MedicalImaging = require('./medicalimaging');
+export import EntityResolution = require('./entityresolution');
+export import ManagedBlockchainQuery = require('./managedblockchainquery');

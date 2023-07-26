@@ -351,5 +351,7 @@ module.exports = {
   CodeGuruSecurity: require('./codegurusecurity'),
   VerifiedPermissions: require('./verifiedpermissions'),
   AppFabric: require('./appfabric'),
-  MedicalImaging: require('./medicalimaging')
+  MedicalImaging: require('./medicalimaging'),
+  EntityResolution: require('./entityresolution'),
+  ManagedBlockchainQuery: require('./managedblockchainquery')
 };
