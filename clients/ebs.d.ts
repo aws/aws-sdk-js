@@ -13,51 +13,51 @@ declare class EBS extends Service {
   constructor(options?: EBS.Types.ClientConfiguration)
   config: Config & EBS.Types.ClientConfiguration;
   /**
-   * Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to completed. You cannot write new blocks to a snapshot after it has been completed.
+   * Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to completed. You cannot write new blocks to a snapshot after it has been completed.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   completeSnapshot(params: EBS.Types.CompleteSnapshotRequest, callback?: (err: AWSError, data: EBS.Types.CompleteSnapshotResponse) => void): Request<EBS.Types.CompleteSnapshotResponse, AWSError>;
   /**
-   * Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to completed. You cannot write new blocks to a snapshot after it has been completed.
+   * Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to completed. You cannot write new blocks to a snapshot after it has been completed.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   completeSnapshot(callback?: (err: AWSError, data: EBS.Types.CompleteSnapshotResponse) => void): Request<EBS.Types.CompleteSnapshotResponse, AWSError>;
   /**
-   * Returns the data in a block in an Amazon Elastic Block Store snapshot.
+   * Returns the data in a block in an Amazon Elastic Block Store snapshot.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   getSnapshotBlock(params: EBS.Types.GetSnapshotBlockRequest, callback?: (err: AWSError, data: EBS.Types.GetSnapshotBlockResponse) => void): Request<EBS.Types.GetSnapshotBlockResponse, AWSError>;
   /**
-   * Returns the data in a block in an Amazon Elastic Block Store snapshot.
+   * Returns the data in a block in an Amazon Elastic Block Store snapshot.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   getSnapshotBlock(callback?: (err: AWSError, data: EBS.Types.GetSnapshotBlockResponse) => void): Request<EBS.Types.GetSnapshotBlockResponse, AWSError>;
   /**
-   * Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
+   * Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   listChangedBlocks(params: EBS.Types.ListChangedBlocksRequest, callback?: (err: AWSError, data: EBS.Types.ListChangedBlocksResponse) => void): Request<EBS.Types.ListChangedBlocksResponse, AWSError>;
   /**
-   * Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
+   * Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   listChangedBlocks(callback?: (err: AWSError, data: EBS.Types.ListChangedBlocksResponse) => void): Request<EBS.Types.ListChangedBlocksResponse, AWSError>;
   /**
-   * Returns information about the blocks in an Amazon Elastic Block Store snapshot.
+   * Returns information about the blocks in an Amazon Elastic Block Store snapshot.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   listSnapshotBlocks(params: EBS.Types.ListSnapshotBlocksRequest, callback?: (err: AWSError, data: EBS.Types.ListSnapshotBlocksResponse) => void): Request<EBS.Types.ListSnapshotBlocksResponse, AWSError>;
   /**
-   * Returns information about the blocks in an Amazon Elastic Block Store snapshot.
+   * Returns information about the blocks in an Amazon Elastic Block Store snapshot.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   listSnapshotBlocks(callback?: (err: AWSError, data: EBS.Types.ListSnapshotBlocksResponse) => void): Request<EBS.Types.ListSnapshotBlocksResponse, AWSError>;
   /**
-   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-KiB sectors.
+   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-KiB sectors.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   putSnapshotBlock(params: EBS.Types.PutSnapshotBlockRequest, callback?: (err: AWSError, data: EBS.Types.PutSnapshotBlockResponse) => void): Request<EBS.Types.PutSnapshotBlockResponse, AWSError>;
   /**
-   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-KiB sectors.
+   * Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the pending state. Data written to a snapshot must be aligned with 512-KiB sectors.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   putSnapshotBlock(callback?: (err: AWSError, data: EBS.Types.PutSnapshotBlockResponse) => void): Request<EBS.Types.PutSnapshotBlockResponse, AWSError>;
   /**
-   * Creates a new Amazon EBS snapshot. The new snapshot enters the pending state after the request completes.  After creating the snapshot, use  PutSnapshotBlock to write blocks of data to the snapshot.
+   * Creates a new Amazon EBS snapshot. The new snapshot enters the pending state after the request completes.  After creating the snapshot, use  PutSnapshotBlock to write blocks of data to the snapshot.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   startSnapshot(params: EBS.Types.StartSnapshotRequest, callback?: (err: AWSError, data: EBS.Types.StartSnapshotResponse) => void): Request<EBS.Types.StartSnapshotResponse, AWSError>;
   /**
-   * Creates a new Amazon EBS snapshot. The new snapshot enters the pending state after the request completes.  After creating the snapshot, use  PutSnapshotBlock to write blocks of data to the snapshot.
+   * Creates a new Amazon EBS snapshot. The new snapshot enters the pending state after the request completes.  After creating the snapshot, use  PutSnapshotBlock to write blocks of data to the snapshot.  You should always retry requests that receive server (5xx) error responses, and ThrottlingException and RequestThrottledException client error responses. For more information see Error retries in the Amazon Elastic Compute Cloud User Guide. 
    */
   startSnapshot(callback?: (err: AWSError, data: EBS.Types.StartSnapshotResponse) => void): Request<EBS.Types.StartSnapshotResponse, AWSError>;
 }
@@ -289,6 +289,7 @@ declare namespace EBS {
      */
     ChecksumAlgorithm?: ChecksumAlgorithm;
   }
+  export type SSEType = "sse-ebs"|"sse-kms"|"none"|string;
   export type SnapshotId = string;
   export interface StartSnapshotRequest {
     /**
@@ -365,6 +366,10 @@ declare namespace EBS {
      * The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.
      */
     KmsKeyArn?: KmsKeyArn;
+    /**
+     * Reserved for future use.
+     */
+    SseType?: SSEType;
   }
   export type Status = "completed"|"pending"|"error"|string;
   export interface Tag {

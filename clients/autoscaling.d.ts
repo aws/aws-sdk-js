@@ -68,11 +68,11 @@ declare class AutoScaling extends Service {
    */
   cancelInstanceRefresh(callback?: (err: AWSError, data: AutoScaling.Types.CancelInstanceRefreshAnswer) => void): Request<AutoScaling.Types.CancelInstanceRefreshAnswer, AWSError>;
   /**
-   * Completes the lifecycle action for the specified token or instance with the specified result. This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:   (Optional) Create a launch template or launch configuration with a user data script that runs while an instance is in a wait state due to a lifecycle hook.   (Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda function when an instance is put into a wait state due to a lifecycle hook.   (Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.   Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.   If you need more time, record the lifecycle action heartbeat to keep the instance in a wait state.    If you finish before the timeout period ends, send a callback by using the CompleteLifecycleAction API call.    For more information, see Amazon EC2 Auto Scaling lifecycle hooks in the Amazon EC2 Auto Scaling User Guide.
+   * Completes the lifecycle action for the specified token or instance with the specified result. This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:   (Optional) Create a launch template or launch configuration with a user data script that runs while an instance is in a wait state due to a lifecycle hook.   (Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda function when an instance is put into a wait state due to a lifecycle hook.   (Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.   Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.   If you need more time, record the lifecycle action heartbeat to keep the instance in a wait state.    If you finish before the timeout period ends, send a callback by using the CompleteLifecycleAction API call.    For more information, see Complete a lifecycle action in the Amazon EC2 Auto Scaling User Guide.
    */
   completeLifecycleAction(params: AutoScaling.Types.CompleteLifecycleActionType, callback?: (err: AWSError, data: AutoScaling.Types.CompleteLifecycleActionAnswer) => void): Request<AutoScaling.Types.CompleteLifecycleActionAnswer, AWSError>;
   /**
-   * Completes the lifecycle action for the specified token or instance with the specified result. This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:   (Optional) Create a launch template or launch configuration with a user data script that runs while an instance is in a wait state due to a lifecycle hook.   (Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda function when an instance is put into a wait state due to a lifecycle hook.   (Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.   Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.   If you need more time, record the lifecycle action heartbeat to keep the instance in a wait state.    If you finish before the timeout period ends, send a callback by using the CompleteLifecycleAction API call.    For more information, see Amazon EC2 Auto Scaling lifecycle hooks in the Amazon EC2 Auto Scaling User Guide.
+   * Completes the lifecycle action for the specified token or instance with the specified result. This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:   (Optional) Create a launch template or launch configuration with a user data script that runs while an instance is in a wait state due to a lifecycle hook.   (Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda function when an instance is put into a wait state due to a lifecycle hook.   (Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.   Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.   If you need more time, record the lifecycle action heartbeat to keep the instance in a wait state.    If you finish before the timeout period ends, send a callback by using the CompleteLifecycleAction API call.    For more information, see Complete a lifecycle action in the Amazon EC2 Auto Scaling User Guide.
    */
   completeLifecycleAction(callback?: (err: AWSError, data: AutoScaling.Types.CompleteLifecycleActionAnswer) => void): Request<AutoScaling.Types.CompleteLifecycleActionAnswer, AWSError>;
   /**
@@ -328,11 +328,11 @@ declare class AutoScaling extends Service {
    */
   detachLoadBalancers(callback?: (err: AWSError, data: AutoScaling.Types.DetachLoadBalancersResultType) => void): Request<AutoScaling.Types.DetachLoadBalancersResultType, AWSError>;
   /**
-   * Detaches one or more traffic sources from the specified Auto Scaling group. When you detach a taffic, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the DescribeTrafficSources API call. The instances continue to run.
+   * Detaches one or more traffic sources from the specified Auto Scaling group. When you detach a traffic source, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the DescribeTrafficSources API call. The instances continue to run.
    */
   detachTrafficSources(params: AutoScaling.Types.DetachTrafficSourcesType, callback?: (err: AWSError, data: AutoScaling.Types.DetachTrafficSourcesResultType) => void): Request<AutoScaling.Types.DetachTrafficSourcesResultType, AWSError>;
   /**
-   * Detaches one or more traffic sources from the specified Auto Scaling group. When you detach a taffic, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the DescribeTrafficSources API call. The instances continue to run.
+   * Detaches one or more traffic sources from the specified Auto Scaling group. When you detach a traffic source, it enters the Removing state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the DescribeTrafficSources API call. The instances continue to run.
    */
   detachTrafficSources(callback?: (err: AWSError, data: AutoScaling.Types.DetachTrafficSourcesResultType) => void): Request<AutoScaling.Types.DetachTrafficSourcesResultType, AWSError>;
   /**
@@ -2846,7 +2846,7 @@ declare namespace AutoScaling {
      */
     MinAdjustmentMagnitude?: MinAdjustmentMagnitude;
     /**
-     * The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value. Required if the policy type is SimpleScaling. (Not used with any other policy type.) 
+     * The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a non-negative value. Required if the policy type is SimpleScaling. (Not used with any other policy type.) 
      */
     ScalingAdjustment?: PolicyIncrement;
     /**
@@ -3035,7 +3035,7 @@ declare namespace AutoScaling {
     /**
      * The name of the Auto Scaling group.
      */
-    AutoScalingGroupName?: XmlStringMaxLen255;
+    AutoScalingGroupName: XmlStringMaxLen255;
   }
   export type ScaleInProtectedInstances = "Refresh"|"Ignore"|"Wait"|string;
   export type ScalingActivityStatusCode = "PendingSpotBidPlacement"|"WaitingForSpotInstanceRequestId"|"WaitingForSpotInstanceId"|"WaitingForInstanceId"|"PreInService"|"InProgress"|"WaitingForELBConnectionDraining"|"MidLifecycleAction"|"WaitingForInstanceWarmup"|"Successful"|"Failed"|"Cancelled"|"WaitingForConnectionDraining"|string;
@@ -3295,7 +3295,7 @@ declare namespace AutoScaling {
      */
     MetricIntervalUpperBound?: MetricScale;
     /**
-     * The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. The amount by which to scale. The adjustment is based on the value that you specified in the AdjustmentType property (either an absolute number or a percentage). A positive value adds to the current capacity and a negative number subtracts from the current capacity. 
+     * The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a non-negative value.
      */
     ScalingAdjustment: PolicyIncrement;
   }

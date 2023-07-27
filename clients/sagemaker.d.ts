@@ -20785,6 +20785,7 @@ declare namespace SageMaker {
      * Information about the evaluation status of the rules for the training job.
      */
     DebugRuleEvaluationStatuses?: DebugRuleEvaluationStatuses;
+    ProfilerConfig?: ProfilerConfig;
     /**
      * The environment variables to set in the Docker container.
      */

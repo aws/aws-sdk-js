@@ -4957,6 +4957,14 @@ declare class EC2 extends Service {
    */
   waitFor(state: "spotInstanceRequestFulfilled", callback?: (err: AWSError, data: EC2.Types.DescribeSpotInstanceRequestsResult) => void): Request<EC2.Types.DescribeSpotInstanceRequestsResult, AWSError>;
   /**
+   * Waits for the storeImageTaskComplete state by periodically calling the underlying EC2.describeStoreImageTasksoperation every 5 seconds (at most 40 times).
+   */
+  waitFor(state: "storeImageTaskComplete", params: EC2.Types.DescribeStoreImageTasksRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeStoreImageTasksResult) => void): Request<EC2.Types.DescribeStoreImageTasksResult, AWSError>;
+  /**
+   * Waits for the storeImageTaskComplete state by periodically calling the underlying EC2.describeStoreImageTasksoperation every 5 seconds (at most 40 times).
+   */
+  waitFor(state: "storeImageTaskComplete", callback?: (err: AWSError, data: EC2.Types.DescribeStoreImageTasksResult) => void): Request<EC2.Types.DescribeStoreImageTasksResult, AWSError>;
+  /**
    * Waits for the subnetAvailable state by periodically calling the underlying EC2.describeSubnetsoperation every 15 seconds (at most 40 times).
    */
   waitFor(state: "subnetAvailable", params: EC2.Types.DescribeSubnetsRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EC2.Types.DescribeSubnetsResult) => void): Request<EC2.Types.DescribeSubnetsResult, AWSError>;
@@ -20712,6 +20720,10 @@ declare namespace EC2 {
      * Indicates whether encryption by default is enabled.
      */
     EbsEncryptionByDefault?: Boolean;
+    /**
+     * Reserved for future use.
+     */
+    SseType?: SSEType;
   }
   export interface GetFlowLogsIntegrationTemplateRequest {
     /**
@@ -32458,6 +32470,10 @@ declare namespace EC2 {
      * The size of the volume, in GiB.
      */
     VolumeSize?: Integer;
+    /**
+     * Reserved for future use.
+     */
+    SseType?: SSEType;
   }
   export interface RestoreSnapshotTierRequest {
     /**
@@ -33042,6 +33058,7 @@ declare namespace EC2 {
      */
     UploadPolicySignature?: String;
   }
+  export type SSEType = "sse-ebs"|"sse-kms"|"none"|string;
   export interface ScheduledInstance {
     /**
      * The Availability Zone.
@@ -33915,6 +33932,10 @@ declare namespace EC2 {
      * Only for archived snapshots that are temporarily restored. Indicates the date and time when a temporarily restored snapshot will be automatically re-archived.
      */
     RestoreExpiryTime?: MillisecondDateTime;
+    /**
+     * Reserved for future use.
+     */
+    SseType?: SSEType;
   }
   export type SnapshotAttributeName = "productCodes"|"createVolumePermission"|string;
   export interface SnapshotDetail {
@@ -34025,6 +34046,10 @@ declare namespace EC2 {
      * The ARN of the Outpost on which the snapshot is stored. For more information, see Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide.
      */
     OutpostArn?: String;
+    /**
+     * Reserved for future use.
+     */
+    SseType?: SSEType;
   }
   export type SnapshotList = Snapshot[];
   export interface SnapshotRecycleBinInfo {
@@ -37514,6 +37539,10 @@ declare namespace EC2 {
      * The throughput that the volume supports, in MiB/s.
      */
     Throughput?: Integer;
+    /**
+     * Reserved for future use.
+     */
+    SseType?: SSEType;
   }
   export interface VolumeAttachment {
     /**

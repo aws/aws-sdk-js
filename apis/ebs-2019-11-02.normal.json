@@ -45,7 +45,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to <code>completed</code>. You cannot write new blocks to a snapshot after it has been completed.</p>"
+      "documentation": "<p>Seals and completes the snapshot after all of the required blocks of data have been written to it. Completing the snapshot changes the status to <code>completed</code>. You cannot write new blocks to a snapshot after it has been completed.</p> <note> <p>You should always retry requests that receive server (<code>5xx</code>) error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </note>"
     },
     "GetSnapshotBlock": {
       "name": "GetSnapshotBlock",
@@ -79,7 +79,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Returns the data in a block in an Amazon Elastic Block Store snapshot.</p>"
+      "documentation": "<p>Returns the data in a block in an Amazon Elastic Block Store snapshot.</p> <note> <p>You should always retry requests that receive server (<code>5xx</code>) error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </note>"
     },
     "ListChangedBlocks": {
       "name": "ListChangedBlocks",
@@ -113,7 +113,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.</p>"
+      "documentation": "<p>Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.</p> <note> <p>You should always retry requests that receive server (<code>5xx</code>) error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </note>"
     },
     "ListSnapshotBlocks": {
       "name": "ListSnapshotBlocks",
@@ -147,7 +147,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Returns information about the blocks in an Amazon Elastic Block Store snapshot.</p>"
+      "documentation": "<p>Returns information about the blocks in an Amazon Elastic Block Store snapshot.</p> <note> <p>You should always retry requests that receive server (<code>5xx</code>) error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </note>"
     },
     "PutSnapshotBlock": {
       "name": "PutSnapshotBlock",
@@ -182,7 +182,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the <code>pending</code> state.</p> <p>Data written to a snapshot must be aligned with 512-KiB sectors.</p>",
+      "documentation": "<p>Writes a block of data to a snapshot. If the specified block contains data, the existing data is overwritten. The target snapshot must be in the <code>pending</code> state.</p> <p>Data written to a snapshot must be aligned with 512-KiB sectors.</p> <note> <p>You should always retry requests that receive server (<code>5xx</code>) error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </note>",
       "authtype": "v4-unsigned-body"
     },
     "StartSnapshot": {
@@ -224,7 +224,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Creates a new Amazon EBS snapshot. The new snapshot enters the <code>pending</code> state after the request completes. </p> <p>After creating the snapshot, use <a href=\"https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html\"> PutSnapshotBlock</a> to write blocks of data to the snapshot.</p>"
+      "documentation": "<p>Creates a new Amazon EBS snapshot. The new snapshot enters the <code>pending</code> state after the request completes. </p> <p>After creating the snapshot, use <a href=\"https://docs.aws.amazon.com/ebs/latest/APIReference/API_PutSnapshotBlock.html\"> PutSnapshotBlock</a> to write blocks of data to the snapshot.</p> <note> <p>You should always retry requests that receive server (<code>5xx</code>) error responses, and <code>ThrottlingException</code> and <code>RequestThrottledException</code> client error responses. For more information see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html\">Error retries</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </note>"
     }
   },
   "shapes": {
@@ -655,6 +655,14 @@
         }
       }
     },
+    "SSEType": {
+      "type": "string",
+      "enum": [
+        "sse-ebs",
+        "sse-kms",
+        "none"
+      ]
+    },
     "SnapshotId": {
       "type": "string",
       "max": 64,
@@ -744,6 +752,10 @@
         "KmsKeyArn": {
           "shape": "KmsKeyArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.</p>"
+        },
+        "SseType": {
+          "shape": "SSEType",
+          "documentation": "<p>Reserved for future use.</p>"
         }
       }
     },

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1423.0-->
+<!--LATEST=2.1424.0-->
 <!--ENTRYINSERT-->
+
+## 2.1424.0
+* feature: AutoScaling: This release updates validation for instance types used in the AllowedInstanceTypes and ExcludedInstanceTypes parameters of the InstanceRequirements property of a MixedInstancesPolicy.
+* feature: EBS: SDK and documentation updates for Amazon Elastic Block Store API
+* feature: EC2: SDK and documentation updates for Amazon Elastic Block Store APIs
+* feature: EKS: Add multiple customer error code to handle customer caused failure when managing EKS node groups
+* feature: SageMaker: Expose ProfilerConfig attribute in SageMaker Search API response.
 
 ## 2.1423.0
 * feature: EntityResolution: AWS Entity Resolution can effectively match a source record from a customer relationship management (CRM) system with a source record from a marketing system containing campaign information.
