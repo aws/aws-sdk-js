@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1424.0-->
+<!--LATEST=2.1425.0-->
 <!--ENTRYINSERT-->
+
+## 2.1425.0
+* feature: ApplicationInsights: This release enable customer to add/remove/update more than one workload for a component
+* feature: CloudFormation: This SDK release is for the feature launch of AWS CloudFormation RetainExceptOnCreate. It adds a new parameter retainExceptOnCreate in the following APIs: CreateStack, UpdateStack, RollbackStack, ExecuteChangeSet.
+* feature: CloudFront: Add a new JavaScript runtime version for CloudFront Functions.
+* feature: Connect: This release adds support for new number types.
+* feature: Kafka: Amazon MSK has introduced new versions of ListClusterOperations and DescribeClusterOperation APIs. These v2 APIs provide information and insights into the ongoing operations of both MSK Provisioned and MSK Serverless clusters.
+* feature: Pinpoint: Added support for sending push notifications using the FCM v1 API with json credentials. Amazon Pinpoint customers can now deliver messages to Android devices using both FCM v1 API and the legacy FCM/GCM API
 
 ## 2.1424.0
 * feature: AutoScaling: This release updates validation for instance types used in the AllowedInstanceTypes and ExcludedInstanceTypes parameters of the InstanceRequirements property of a MixedInstancesPolicy.

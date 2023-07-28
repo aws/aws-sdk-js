@@ -12,6 +12,14 @@ declare class ApplicationInsights extends Service {
   constructor(options?: ApplicationInsights.Types.ClientConfiguration)
   config: Config & ApplicationInsights.Types.ClientConfiguration;
   /**
+   * Adds a workload to a component. Each component can have at most five workloads.
+   */
+  addWorkload(params: ApplicationInsights.Types.AddWorkloadRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.AddWorkloadResponse) => void): Request<ApplicationInsights.Types.AddWorkloadResponse, AWSError>;
+  /**
+   * Adds a workload to a component. Each component can have at most five workloads.
+   */
+  addWorkload(callback?: (err: AWSError, data: ApplicationInsights.Types.AddWorkloadResponse) => void): Request<ApplicationInsights.Types.AddWorkloadResponse, AWSError>;
+  /**
    * Adds an application that is created from a resource group.
    */
   createApplication(params: ApplicationInsights.Types.CreateApplicationRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.CreateApplicationResponse) => void): Request<ApplicationInsights.Types.CreateApplicationResponse, AWSError>;
@@ -124,6 +132,14 @@ declare class ApplicationInsights extends Service {
    */
   describeProblemObservations(callback?: (err: AWSError, data: ApplicationInsights.Types.DescribeProblemObservationsResponse) => void): Request<ApplicationInsights.Types.DescribeProblemObservationsResponse, AWSError>;
   /**
+   * Describes a workload and its configuration.
+   */
+  describeWorkload(params: ApplicationInsights.Types.DescribeWorkloadRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.DescribeWorkloadResponse) => void): Request<ApplicationInsights.Types.DescribeWorkloadResponse, AWSError>;
+  /**
+   * Describes a workload and its configuration.
+   */
+  describeWorkload(callback?: (err: AWSError, data: ApplicationInsights.Types.DescribeWorkloadResponse) => void): Request<ApplicationInsights.Types.DescribeWorkloadResponse, AWSError>;
+  /**
    * Lists the IDs of the applications that you are monitoring. 
    */
   listApplications(params: ApplicationInsights.Types.ListApplicationsRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.ListApplicationsResponse) => void): Request<ApplicationInsights.Types.ListApplicationsResponse, AWSError>;
@@ -180,6 +196,22 @@ declare class ApplicationInsights extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ApplicationInsights.Types.ListTagsForResourceResponse) => void): Request<ApplicationInsights.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Lists the workloads that are configured on a given component.
+   */
+  listWorkloads(params: ApplicationInsights.Types.ListWorkloadsRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.ListWorkloadsResponse) => void): Request<ApplicationInsights.Types.ListWorkloadsResponse, AWSError>;
+  /**
+   * Lists the workloads that are configured on a given component.
+   */
+  listWorkloads(callback?: (err: AWSError, data: ApplicationInsights.Types.ListWorkloadsResponse) => void): Request<ApplicationInsights.Types.ListWorkloadsResponse, AWSError>;
+  /**
+   * Remove workload from a component.
+   */
+  removeWorkload(params: ApplicationInsights.Types.RemoveWorkloadRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.RemoveWorkloadResponse) => void): Request<ApplicationInsights.Types.RemoveWorkloadResponse, AWSError>;
+  /**
+   * Remove workload from a component.
+   */
+  removeWorkload(callback?: (err: AWSError, data: ApplicationInsights.Types.RemoveWorkloadResponse) => void): Request<ApplicationInsights.Types.RemoveWorkloadResponse, AWSError>;
+  /**
    * Add one or more tags (keys and values) to a specified application. A tag is a label that you optionally define and associate with an application. Tags can help you categorize and manage application in different ways, such as by purpose, owner, environment, or other criteria.  Each tag consists of a required tag key and an associated tag value, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
    */
   tagResource(params: ApplicationInsights.Types.TagResourceRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.TagResourceResponse) => void): Request<ApplicationInsights.Types.TagResourceResponse, AWSError>;
@@ -227,8 +259,49 @@ declare class ApplicationInsights extends Service {
    * Adds a log pattern to a LogPatternSet.
    */
   updateLogPattern(callback?: (err: AWSError, data: ApplicationInsights.Types.UpdateLogPatternResponse) => void): Request<ApplicationInsights.Types.UpdateLogPatternResponse, AWSError>;
+  /**
+   * Updates the visibility of the problem or specifies the problem as RESOLVED.
+   */
+  updateProblem(params: ApplicationInsights.Types.UpdateProblemRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.UpdateProblemResponse) => void): Request<ApplicationInsights.Types.UpdateProblemResponse, AWSError>;
+  /**
+   * Updates the visibility of the problem or specifies the problem as RESOLVED.
+   */
+  updateProblem(callback?: (err: AWSError, data: ApplicationInsights.Types.UpdateProblemResponse) => void): Request<ApplicationInsights.Types.UpdateProblemResponse, AWSError>;
+  /**
+   * Adds a workload to a component. Each component can have at most five workloads.
+   */
+  updateWorkload(params: ApplicationInsights.Types.UpdateWorkloadRequest, callback?: (err: AWSError, data: ApplicationInsights.Types.UpdateWorkloadResponse) => void): Request<ApplicationInsights.Types.UpdateWorkloadResponse, AWSError>;
+  /**
+   * Adds a workload to a component. Each component can have at most five workloads.
+   */
+  updateWorkload(callback?: (err: AWSError, data: ApplicationInsights.Types.UpdateWorkloadResponse) => void): Request<ApplicationInsights.Types.UpdateWorkloadResponse, AWSError>;
 }
 declare namespace ApplicationInsights {
+  export type AccountId = string;
+  export interface AddWorkloadRequest {
+    /**
+     * The name of the resource group.
+     */
+    ResourceGroupName: ResourceGroupName;
+    /**
+     * The name of the component.
+     */
+    ComponentName: ComponentName;
+    /**
+     * The configuration settings of the workload. The value is the escaped JSON of the configuration.
+     */
+    WorkloadConfiguration: WorkloadConfiguration;
+  }
+  export interface AddWorkloadResponse {
+    /**
+     * The ID of the workload.
+     */
+    WorkloadId?: WorkloadId;
+    /**
+     * The configuration settings of the workload. The value is the escaped JSON of the configuration.
+     */
+    WorkloadConfiguration?: WorkloadConfiguration;
+  }
   export type AffectedResource = string;
   export type AmazonResourceName = string;
   export interface ApplicationComponent {
@@ -263,6 +336,10 @@ declare namespace ApplicationInsights {
   }
   export type ApplicationComponentList = ApplicationComponent[];
   export interface ApplicationInfo {
+    /**
+     * The AWS account ID for the owner of the application.
+     */
+    AccountId?: AccountId;
     /**
      * The name of the resource group used for the application.
      */
@@ -311,6 +388,14 @@ declare namespace ApplicationInsights {
   export type ComponentConfiguration = string;
   export type ComponentName = string;
   export interface ConfigurationEvent {
+    /**
+     * The name of the resource group of the application to which the configuration event belongs.
+     */
+    ResourceGroupName?: ResourceGroupName;
+    /**
+     * The AWS account ID for the owner of the application to which the configuration event belongs.
+     */
+    AccountId?: AccountId;
     /**
      *  The resource monitored by Application Insights. 
      */
@@ -473,6 +558,10 @@ declare namespace ApplicationInsights {
      * The name of the resource group.
      */
     ResourceGroupName: ResourceGroupName;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface DescribeApplicationResponse {
     /**
@@ -493,6 +582,10 @@ declare namespace ApplicationInsights {
      * The tier of the application component.
      */
     Tier: Tier;
+    /**
+     * The recommended configuration type.
+     */
+    RecommendationType?: RecommendationType;
   }
   export interface DescribeComponentConfigurationRecommendationResponse {
     /**
@@ -509,6 +602,10 @@ declare namespace ApplicationInsights {
      * The name of the component.
      */
     ComponentName: ComponentName;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface DescribeComponentConfigurationResponse {
     /**
@@ -533,6 +630,10 @@ declare namespace ApplicationInsights {
      * The name of the component.
      */
     ComponentName: ComponentName;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface DescribeComponentResponse {
     ApplicationComponent?: ApplicationComponent;
@@ -554,12 +655,20 @@ declare namespace ApplicationInsights {
      * The name of the log pattern.
      */
     PatternName: LogPatternName;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface DescribeLogPatternResponse {
     /**
      * The name of the resource group.
      */
     ResourceGroupName?: ResourceGroupName;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
     /**
      * The successfully created log pattern.
      */
@@ -570,6 +679,10 @@ declare namespace ApplicationInsights {
      * The ID of the observation.
      */
     ObservationId: ObservationId;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface DescribeObservationResponse {
     /**
@@ -582,6 +695,10 @@ declare namespace ApplicationInsights {
      * The ID of the problem.
      */
     ProblemId: ProblemId;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface DescribeProblemObservationsResponse {
     /**
@@ -594,12 +711,48 @@ declare namespace ApplicationInsights {
      * The ID of the problem.
      */
     ProblemId: ProblemId;
+    /**
+     * The AWS account ID for the owner of the resource group affected by the problem.
+     */
+    AccountId?: AccountId;
   }
   export interface DescribeProblemResponse {
     /**
      * Information about the problem. 
      */
     Problem?: Problem;
+  }
+  export interface DescribeWorkloadRequest {
+    /**
+     * The name of the resource group.
+     */
+    ResourceGroupName: ResourceGroupName;
+    /**
+     * The name of the component.
+     */
+    ComponentName: ComponentName;
+    /**
+     * The ID of the workload.
+     */
+    WorkloadId: WorkloadId;
+    /**
+     * The AWS account ID for the workload owner.
+     */
+    AccountId?: AccountId;
+  }
+  export interface DescribeWorkloadResponse {
+    /**
+     * The ID of the workload.
+     */
+    WorkloadId?: WorkloadId;
+    /**
+     * If logging is supported for the resource type, shows whether the component has configured logs to be monitored.
+     */
+    WorkloadRemarks?: Remarks;
+    /**
+     * The configuration settings of the workload. The value is the escaped JSON of the configuration.
+     */
+    WorkloadConfiguration?: WorkloadConfiguration;
   }
   export type DetectedWorkload = {[key: string]: WorkloadMetaData};
   export type DiscoveryType = "RESOURCE_GROUP_BASED"|"ACCOUNT_BASED"|string;
@@ -631,6 +784,10 @@ declare namespace ApplicationInsights {
      * The token to request the next page of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface ListApplicationsResponse {
     /**
@@ -655,6 +812,10 @@ declare namespace ApplicationInsights {
      * The token to request the next page of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface ListComponentsResponse {
     /**
@@ -691,6 +852,10 @@ declare namespace ApplicationInsights {
      * The NextToken value returned from a previous paginated ListConfigurationHistory request where MaxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the NextToken value. This value is null when there are no more results to return.
      */
     NextToken?: PaginationToken;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface ListConfigurationHistoryResponse {
     /**
@@ -715,12 +880,20 @@ declare namespace ApplicationInsights {
      * The token to request the next page of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface ListLogPatternSetsResponse {
     /**
      * The name of the resource group.
      */
     ResourceGroupName?: ResourceGroupName;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
     /**
      * The list of log pattern sets.
      */
@@ -747,12 +920,20 @@ declare namespace ApplicationInsights {
      * The token to request the next page of results.
      */
     NextToken?: PaginationToken;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface ListLogPatternsResponse {
     /**
      * The name of the resource group.
      */
     ResourceGroupName?: ResourceGroupName;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
     /**
      * The list of log patterns.
      */
@@ -763,6 +944,10 @@ declare namespace ApplicationInsights {
     NextToken?: PaginationToken;
   }
   export interface ListProblemsRequest {
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
     /**
      * The name of the resource group.
      */
@@ -787,6 +972,10 @@ declare namespace ApplicationInsights {
      *  The name of the component. 
      */
     ComponentName?: ComponentName;
+    /**
+     * Specifies whether or not you can view the problem. If not specified, visible and ignored problems are returned.
+     */
+    Visibility?: Visibility;
   }
   export interface ListProblemsResponse {
     /**
@@ -801,6 +990,10 @@ declare namespace ApplicationInsights {
      *  The name of the resource group. 
      */
     ResourceGroupName?: ResourceGroupName;
+    /**
+     * The AWS account ID for the resource group owner.
+     */
+    AccountId?: AccountId;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -813,6 +1006,38 @@ declare namespace ApplicationInsights {
      * An array that lists all the tags that are associated with the application. Each tag consists of a required tag key (Key) and an associated tag value (Value).
      */
     Tags?: TagList;
+  }
+  export interface ListWorkloadsRequest {
+    /**
+     * The name of the resource group.
+     */
+    ResourceGroupName: ResourceGroupName;
+    /**
+     * The name of the component.
+     */
+    ComponentName: ComponentName;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.
+     */
+    MaxResults?: MaxEntities;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The AWS account ID of the owner of the workload.
+     */
+    AccountId?: AccountId;
+  }
+  export interface ListWorkloadsResponse {
+    /**
+     * The list of workloads.
+     */
+    WorkloadList?: WorkloadList;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: PaginationToken;
   }
   export type LogFilter = "ERROR"|"WARN"|"INFO"|string;
   export type LogGroup = string;
@@ -1069,6 +1294,10 @@ declare namespace ApplicationInsights {
      */
     SeverityLevel?: SeverityLevel;
     /**
+     * The AWS account ID for the owner of the resource group affected by the problem.
+     */
+    AccountId?: AccountId;
+    /**
      * The name of the resource group affected by the problem.
      */
     ResourceGroupName?: ResourceGroupName;
@@ -1084,11 +1313,20 @@ declare namespace ApplicationInsights {
      *  The last time that the problem reoccurred after its last resolution. 
      */
     LastRecurrenceTime?: LastRecurrenceTime;
+    /**
+     * Specifies whether or not you can view the problem. Updates to ignored problems do not generate notifications.
+     */
+    Visibility?: Visibility;
+    /**
+     * Specifies how the problem was resolved. If the value is AUTOMATIC, the system resolved the problem. If the value is MANUAL, the user resolved the problem. If the value is UNRESOLVED, then the problem is not resolved.
+     */
+    ResolutionMethod?: ResolutionMethod;
   }
   export type ProblemId = string;
   export type ProblemList = Problem[];
   export type RdsEventCategories = string;
   export type RdsEventMessage = string;
+  export type RecommendationType = "INFRA_ONLY"|"WORKLOAD_ONLY"|"ALL"|string;
   export type RecurringCount = number;
   export interface RelatedObservations {
     /**
@@ -1098,6 +1336,23 @@ declare namespace ApplicationInsights {
   }
   export type Remarks = string;
   export type RemoveSNSTopic = boolean;
+  export interface RemoveWorkloadRequest {
+    /**
+     * The name of the resource group.
+     */
+    ResourceGroupName: ResourceGroupName;
+    /**
+     * The name of the component.
+     */
+    ComponentName: ComponentName;
+    /**
+     * The ID of the workload.
+     */
+    WorkloadId: WorkloadId;
+  }
+  export interface RemoveWorkloadResponse {
+  }
+  export type ResolutionMethod = "MANUAL"|"AUTOMATIC"|"UNRESOLVED"|string;
   export type ResourceARN = string;
   export type ResourceGroupName = string;
   export type ResourceList = ResourceARN[];
@@ -1111,7 +1366,7 @@ declare namespace ApplicationInsights {
   export type StatesExecutionArn = string;
   export type StatesInput = string;
   export type StatesStatus = string;
-  export type Status = "IGNORE"|"RESOLVED"|"PENDING"|"RECURRING"|string;
+  export type Status = "IGNORE"|"RESOLVED"|"PENDING"|"RECURRING"|"RECOVERING"|string;
   export interface Tag {
     /**
      * One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.
@@ -1138,7 +1393,7 @@ declare namespace ApplicationInsights {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type Tier = "CUSTOM"|"DEFAULT"|"DOT_NET_CORE"|"DOT_NET_WORKER"|"DOT_NET_WEB_TIER"|"DOT_NET_WEB"|"SQL_SERVER"|"SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"|"MYSQL"|"POSTGRESQL"|"JAVA_JMX"|"ORACLE"|"SAP_HANA_MULTI_NODE"|"SAP_HANA_SINGLE_NODE"|"SAP_HANA_HIGH_AVAILABILITY"|"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"|"SHAREPOINT"|"ACTIVE_DIRECTORY"|string;
+  export type Tier = "CUSTOM"|"DEFAULT"|"DOT_NET_CORE"|"DOT_NET_WORKER"|"DOT_NET_WEB_TIER"|"DOT_NET_WEB"|"SQL_SERVER"|"SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"|"MYSQL"|"POSTGRESQL"|"JAVA_JMX"|"ORACLE"|"SAP_HANA_MULTI_NODE"|"SAP_HANA_SINGLE_NODE"|"SAP_HANA_HIGH_AVAILABILITY"|"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"|"SHAREPOINT"|"ACTIVE_DIRECTORY"|"SAP_NETWEAVER_STANDARD"|"SAP_NETWEAVER_DISTRIBUTED"|"SAP_NETWEAVER_HIGH_AVAILABILITY"|string;
   export type Title = string;
   export type Unit = string;
   export interface UntagResourceRequest {
@@ -1265,8 +1520,93 @@ declare namespace ApplicationInsights {
      */
     LogPattern?: LogPattern;
   }
+  export interface UpdateProblemRequest {
+    /**
+     * The ID of the problem.
+     */
+    ProblemId: ProblemId;
+    /**
+     * The status of the problem. Arguments can be passed for only problems that show a status of RECOVERING.
+     */
+    UpdateStatus?: UpdateStatus;
+    /**
+     * The visibility of a problem. When you pass a value of IGNORED, the problem is removed from the default view, and all notifications for the problem are suspended. When VISIBLE is passed, the IGNORED action is reversed.
+     */
+    Visibility?: Visibility;
+  }
+  export interface UpdateProblemResponse {
+  }
+  export type UpdateStatus = "RESOLVED"|string;
+  export interface UpdateWorkloadRequest {
+    /**
+     * The name of the resource group.
+     */
+    ResourceGroupName: ResourceGroupName;
+    /**
+     *  The name of the component. 
+     */
+    ComponentName: ComponentName;
+    /**
+     * The ID of the workload.
+     */
+    WorkloadId?: WorkloadId;
+    /**
+     * The configuration settings of the workload. The value is the escaped JSON of the configuration.
+     */
+    WorkloadConfiguration: WorkloadConfiguration;
+  }
+  export interface UpdateWorkloadResponse {
+    /**
+     * The ID of the workload.
+     */
+    WorkloadId?: WorkloadId;
+    /**
+     * The configuration settings of the workload. The value is the escaped JSON of the configuration.
+     */
+    WorkloadConfiguration?: WorkloadConfiguration;
+  }
   export type Value = number;
+  export type Visibility = "IGNORED"|"VISIBLE"|string;
+  export interface Workload {
+    /**
+     * The ID of the workload.
+     */
+    WorkloadId?: WorkloadId;
+    /**
+     * The name of the component.
+     */
+    ComponentName?: ComponentName;
+    /**
+     * The name of the workload.
+     */
+    WorkloadName?: WorkloadName;
+    /**
+     * The tier of the workload.
+     */
+    Tier?: Tier;
+    /**
+     * If logging is supported for the resource type, shows whether the component has configured logs to be monitored.
+     */
+    WorkloadRemarks?: Remarks;
+  }
+  export interface WorkloadConfiguration {
+    /**
+     * The name of the workload.
+     */
+    WorkloadName?: WorkloadName;
+    /**
+     * The configuration of the workload tier.
+     */
+    Tier?: Tier;
+    /**
+     * The configuration settings of the workload.
+     */
+    Configuration?: ComponentConfiguration;
+  }
+  export type WorkloadId = string;
+  export type WorkloadList = Workload[];
   export type WorkloadMetaData = {[key: string]: MetaDataValue};
+  export type WorkloadName = string;
   export type XRayErrorPercent = number;
   export type XRayFaultPercent = number;
   export type XRayNodeName = string;

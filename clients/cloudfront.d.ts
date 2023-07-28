@@ -22,11 +22,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   associateAlias(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a staging distribution using the configuration of the provided primary distribution. A staging distribution is a copy of an existing distribution (called the primary distribution) that you can use in a continuous deployment workflow. After you create a staging distribution, you can use UpdateDistribution to modify the staging distribution's configuration. Then you can use CreateContinuousDeploymentPolicy to incrementally move traffic to the staging distribution.
+   * Creates a staging distribution using the configuration of the provided primary distribution. A staging distribution is a copy of an existing distribution (called the primary distribution) that you can use in a continuous deployment workflow. After you create a staging distribution, you can use UpdateDistribution to modify the staging distribution's configuration. Then you can use CreateContinuousDeploymentPolicy to incrementally move traffic to the staging distribution. This API operation requires the following IAM permissions:    GetDistribution     CreateDistribution     CopyDistribution   
    */
   copyDistribution(params: CloudFront.Types.CopyDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CopyDistributionResult) => void): Request<CloudFront.Types.CopyDistributionResult, AWSError>;
   /**
-   * Creates a staging distribution using the configuration of the provided primary distribution. A staging distribution is a copy of an existing distribution (called the primary distribution) that you can use in a continuous deployment workflow. After you create a staging distribution, you can use UpdateDistribution to modify the staging distribution's configuration. Then you can use CreateContinuousDeploymentPolicy to incrementally move traffic to the staging distribution.
+   * Creates a staging distribution using the configuration of the provided primary distribution. A staging distribution is a copy of an existing distribution (called the primary distribution) that you can use in a continuous deployment workflow. After you create a staging distribution, you can use UpdateDistribution to modify the staging distribution's configuration. Then you can use CreateContinuousDeploymentPolicy to incrementally move traffic to the staging distribution. This API operation requires the following IAM permissions:    GetDistribution     CreateDistribution     CopyDistribution   
    */
   copyDistribution(callback?: (err: AWSError, data: CloudFront.Types.CopyDistributionResult) => void): Request<CloudFront.Types.CopyDistributionResult, AWSError>;
   /**
@@ -62,11 +62,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createDistribution(callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
   /**
-   * Create a new distribution with tags.
+   * Create a new distribution with tags. This API operation requires the following IAM permissions:    CreateDistribution     TagResource   
    */
   createDistributionWithTags(params: CloudFront.Types.CreateDistributionWithTagsRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateDistributionWithTagsResult, AWSError>;
   /**
-   * Create a new distribution with tags.
+   * Create a new distribution with tags. This API operation requires the following IAM permissions:    CreateDistribution     TagResource   
    */
   createDistributionWithTags(callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateDistributionWithTagsResult, AWSError>;
   /**
@@ -774,11 +774,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   updateDistribution(callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
   /**
-   * Copies the staging distribution's configuration to its corresponding primary distribution. The primary distribution retains its Aliases (also known as alternate domain names or CNAMEs) and ContinuousDeploymentPolicyId value, but otherwise its configuration is overwritten to match the staging distribution. You can use this operation in a continuous deployment workflow after you have tested configuration changes on the staging distribution. After using a continuous deployment policy to move a portion of your domain name's traffic to the staging distribution and verifying that it works as intended, you can use this operation to copy the staging distribution's configuration to the primary distribution. This action will disable the continuous deployment policy and move your domain's traffic back to the primary distribution.
+   * Copies the staging distribution's configuration to its corresponding primary distribution. The primary distribution retains its Aliases (also known as alternate domain names or CNAMEs) and ContinuousDeploymentPolicyId value, but otherwise its configuration is overwritten to match the staging distribution. You can use this operation in a continuous deployment workflow after you have tested configuration changes on the staging distribution. After using a continuous deployment policy to move a portion of your domain name's traffic to the staging distribution and verifying that it works as intended, you can use this operation to copy the staging distribution's configuration to the primary distribution. This action will disable the continuous deployment policy and move your domain's traffic back to the primary distribution. This API operation requires the following IAM permissions:    GetDistribution     UpdateDistribution   
    */
   updateDistributionWithStagingConfig(params: CloudFront.Types.UpdateDistributionWithStagingConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionWithStagingConfigResult) => void): Request<CloudFront.Types.UpdateDistributionWithStagingConfigResult, AWSError>;
   /**
-   * Copies the staging distribution's configuration to its corresponding primary distribution. The primary distribution retains its Aliases (also known as alternate domain names or CNAMEs) and ContinuousDeploymentPolicyId value, but otherwise its configuration is overwritten to match the staging distribution. You can use this operation in a continuous deployment workflow after you have tested configuration changes on the staging distribution. After using a continuous deployment policy to move a portion of your domain name's traffic to the staging distribution and verifying that it works as intended, you can use this operation to copy the staging distribution's configuration to the primary distribution. This action will disable the continuous deployment policy and move your domain's traffic back to the primary distribution.
+   * Copies the staging distribution's configuration to its corresponding primary distribution. The primary distribution retains its Aliases (also known as alternate domain names or CNAMEs) and ContinuousDeploymentPolicyId value, but otherwise its configuration is overwritten to match the staging distribution. You can use this operation in a continuous deployment workflow after you have tested configuration changes on the staging distribution. After using a continuous deployment policy to move a portion of your domain name's traffic to the staging distribution and verifying that it works as intended, you can use this operation to copy the staging distribution's configuration to the primary distribution. This action will disable the continuous deployment policy and move your domain's traffic back to the primary distribution. This API operation requires the following IAM permissions:    GetDistribution     UpdateDistribution   
    */
   updateDistributionWithStagingConfig(callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionWithStagingConfigResult) => void): Request<CloudFront.Types.UpdateDistributionWithStagingConfigResult, AWSError>;
   /**
@@ -910,7 +910,7 @@ declare namespace CloudFront {
   }
   export interface ActiveTrustedSigners {
     /**
-     * This field is true if any of the Amazon Web Services accounts in the list have active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
+     * This field is true if any of the Amazon Web Services accounts in the list are configured as trusted signers. If not, this field is false.
      */
     Enabled: boolean;
     /**
@@ -1400,6 +1400,10 @@ declare namespace CloudFront {
      * A value that uniquely identifies a request to create a resource. This helps to prevent CloudFront from creating a duplicate resource if you accidentally resubmit an identical request.
      */
     CallerReference: string;
+    /**
+     * A Boolean flag to specify the state of the staging distribution when it's created. When you set this value to True, the staging distribution is enabled. When you set this value to False, the staging distribution is disabled. If you omit this field, the default value is True.
+     */
+    Enabled?: boolean;
   }
   export interface CopyDistributionResult {
     Distribution?: Distribution;
@@ -2598,7 +2602,7 @@ declare namespace CloudFront {
      */
     Comment: string;
     /**
-     * The function's runtime environment. The only valid value is cloudfront-js-1.0.
+     * The function's runtime environment verion.
      */
     Runtime: FunctionRuntime;
   }
@@ -2641,7 +2645,7 @@ declare namespace CloudFront {
     LastModifiedTime: timestamp;
   }
   export type FunctionName = string;
-  export type FunctionRuntime = "cloudfront-js-1.0"|string;
+  export type FunctionRuntime = "cloudfront-js-1.0"|"cloudfront-js-2.0"|string;
   export type FunctionStage = "DEVELOPMENT"|"LIVE"|string;
   export interface FunctionSummary {
     /**
@@ -4940,7 +4944,7 @@ declare namespace CloudFront {
   }
   export interface TrustedSigners {
     /**
-     * This field is true if any of the Amazon Web Services accounts have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is false.
+     * This field is true if any of the Amazon Web Services accounts in the list are configured as trusted signers. If not, this field is false.
      */
     Enabled: boolean;
     /**

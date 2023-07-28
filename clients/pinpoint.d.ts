@@ -1779,6 +1779,20 @@ declare namespace Pinpoint {
      */
     CreationDate?: __string;
   }
+  export interface ApplicationSettingsJourneyLimits {
+    /**
+     * The daily number of messages that an endpoint can receive from all journeys. The maximum value is 100. If set to 0, this limit will not apply.
+     */
+    DailyCap?: __integer;
+    /**
+     * The default maximum number of messages that can be sent to an endpoint during the specified timeframe for all journeys.
+     */
+    TimeframeCap?: JourneyTimeframeCap;
+    /**
+     * The default maximum number of messages that a single journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.
+     */
+    TotalCap?: __integer;
+  }
   export interface ApplicationSettingsResource {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -1800,6 +1814,10 @@ declare namespace Pinpoint {
      * The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.
      */
     QuietTime?: QuietTime;
+    /**
+     * The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.
+     */
+    JourneyLimits?: ApplicationSettingsJourneyLimits;
   }
   export interface ApplicationsResponse {
     /**
@@ -3650,11 +3668,19 @@ declare namespace Pinpoint {
     /**
      * The Web API Key, also referred to as an API_KEY or server key, that you received from Google to communicate with Google services.
      */
-    ApiKey: __string;
+    ApiKey?: __string;
+    /**
+     * The default authentication method used for GCM. Values are either "TOKEN" or "KEY". Defaults to "KEY".
+     */
+    DefaultAuthenticationMethod?: __string;
     /**
      * Specifies whether to enable the GCM channel for the application.
      */
     Enabled?: __boolean;
+    /**
+     * The contents of the JSON file provided by Google during registration in order to generate an access token for authentication. For more information see Migrate from legacy FCM APIs to HTTP v1.
+     */
+    ServiceJson?: __string;
   }
   export interface GCMChannelResponse {
     /**
@@ -3668,7 +3694,11 @@ declare namespace Pinpoint {
     /**
      * The Web API Key, also referred to as an API_KEY or server key, that you received from Google to communicate with Google services.
      */
-    Credential: __string;
+    Credential?: __string;
+    /**
+     * The default authentication method used for GCM. Values are either "TOKEN" or "KEY". Defaults to "KEY".
+     */
+    DefaultAuthenticationMethod?: __string;
     /**
      * Specifies whether the GCM channel is enabled for the application.
      */
@@ -3677,6 +3707,10 @@ declare namespace Pinpoint {
      * (Not used) This property is retained only for backward compatibility.
      */
     HasCredential?: __boolean;
+    /**
+     * Returns true if the JSON file provided by Google during registration process was used in the ServiceJson field of the request.
+     */
+    HasFcmServiceCredentials?: __boolean;
     /**
      * (Deprecated) An identifier for the GCM channel. This property is retained only for backward compatibility.
      */
@@ -3732,7 +3766,11 @@ declare namespace Pinpoint {
      */
     ImageUrl?: __string;
     /**
-     * para>normal - The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required./listitem> high - The notification is sent immediately and might wake a sleeping device./para> Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM. The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.
+     * The preferred authentication method, with valid values "KEY" or "TOKEN". If a value isn't provided then the DefaultAuthenticationMethod is used.
+     */
+    PreferredAuthenticationMethod?: __string;
+    /**
+     * para>normal – The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required./listitem> high – The notification is sent immediately and might wake a sleeping device./para> Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM. The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.
      */
     Priority?: __string;
     /**
@@ -5010,6 +5048,14 @@ declare namespace Pinpoint {
      * Minimum time that must pass before an endpoint can re-enter a given journey. The duration should use an ISO 8601 format, such as PT1H. 
      */
     EndpointReentryInterval?: __string;
+    /**
+     * The number of messages that an endpoint can receive during the specified timeframe.
+     */
+    TimeframeCap?: JourneyTimeframeCap;
+    /**
+     * The maximum number of messages a journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.
+     */
+    TotalCap?: __integer;
   }
   export interface JourneyPushMessage {
     /**
@@ -5244,6 +5290,16 @@ declare namespace Pinpoint {
      * The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and CANCELLED If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey. After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started. When the journey is paused, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Endpoints will stop entering journeys when the journey is paused and will resume entering the journey after the journey is resumed. For wait activities, wait time is paused when the journey is paused. Currently, PAUSED only supports journeys with a segment refresh interval.
      */
     State?: State;
+  }
+  export interface JourneyTimeframeCap {
+    /**
+     * The maximum number of messages that all journeys can send to an endpoint during the specified timeframe. The maximum value is 100. If set to 0, this limit will not apply.
+     */
+    Cap?: __integer;
+    /**
+     * The length of the timeframe in days. The maximum value is 30. If set to 0, this limit will not apply.
+     */
+    Days?: __integer;
   }
   export interface JourneysResponse {
     /**
@@ -6601,6 +6657,10 @@ declare namespace Pinpoint {
      * The voice template to use for the message. This object isn't supported for campaigns.
      */
     VoiceTemplate?: Template;
+    /**
+     * The InApp template to use for the message. The InApp template object is not supported for SendMessages.
+     */
+    InAppTemplate?: Template;
   }
   export interface TemplateCreateMessageBody {
     /**
@@ -6646,7 +6706,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.
+     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.
      */
     TemplateType: TemplateType;
     /**
@@ -6677,7 +6737,7 @@ declare namespace Pinpoint {
      */
     TemplateName: __string;
     /**
-     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.
+     * The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.
      */
     TemplateType: __string;
     /**
@@ -7324,6 +7384,10 @@ declare namespace Pinpoint {
      * The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled. To override the default quiet time settings for a specific campaign or journey, use the Campaign resource or the Journey resource to define a custom quiet time for the campaign or journey.
      */
     QuietTime?: QuietTime;
+    /**
+     * The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.
+     */
+    JourneyLimits?: ApplicationSettingsJourneyLimits;
   }
   export interface WriteCampaignRequest {
     /**

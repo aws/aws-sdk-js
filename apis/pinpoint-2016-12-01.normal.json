@@ -6411,6 +6411,24 @@
         "Name"
       ]
     },
+    "ApplicationSettingsJourneyLimits": {
+      "type": "structure",
+      "members": {
+        "DailyCap": {
+          "shape": "__integer",
+          "documentation": "<p>The daily number of messages that an endpoint can receive from all journeys. The maximum value is 100. If set to 0, this limit will not apply.</p>"
+        },
+        "TimeframeCap": {
+          "shape": "JourneyTimeframeCap",
+          "documentation": "<p>The default maximum number of messages that can be sent to an endpoint during the specified timeframe for all journeys.</p>"
+        },
+        "TotalCap": {
+          "shape": "__integer",
+          "documentation": "<p>The default maximum number of messages that a single journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.</p>"
+        }
+      },
+      "documentation": "<p>The default sending limits for journeys in the application. To override these limits and define custom limits for a specific journey, use the Journey resource.</p>"
+    },
     "ApplicationSettingsResource": {
       "type": "structure",
       "members": {
@@ -6433,6 +6451,10 @@
         "QuietTime": {
           "shape": "QuietTime",
           "documentation": "<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p>"
+        },
+        "JourneyLimits": {
+          "shape": "ApplicationSettingsJourneyLimits",
+          "documentation": "<p>The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.</p>"
         }
       },
       "documentation": "<p>Provides information about an application, including the default settings for an application.</p>",
@@ -9430,15 +9452,20 @@
           "shape": "__string",
           "documentation": "<p>The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.</p>"
         },
+        "DefaultAuthenticationMethod": {
+          "shape": "__string",
+          "documentation": "<p>The default authentication method used for GCM. Values are either \"TOKEN\" or \"KEY\". Defaults to \"KEY\".</p>"
+        },
         "Enabled": {
           "shape": "__boolean",
           "documentation": "<p>Specifies whether to enable the GCM channel for the application.</p>"
+        },
+        "ServiceJson": {
+          "shape": "__string",
+          "documentation": "<p>The contents of the JSON file provided by Google during registration in order to generate an access token for authentication. For more information see <a href=\"https://firebase.google.com/docs/cloud-messaging/migrate-v1\">Migrate from legacy FCM APIs to HTTP v1</a>.</p>"
         }
       },
-      "documentation": "<p>Specifies the status and settings of the GCM channel for an application. This channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>",
-      "required": [
-        "ApiKey"
-      ]
+      "documentation": "<p>Specifies the status and settings of the GCM channel for an application. This channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>"
     },
     "GCMChannelResponse": {
       "type": "structure",
@@ -9455,6 +9482,10 @@
           "shape": "__string",
           "documentation": "<p>The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.</p>"
         },
+        "DefaultAuthenticationMethod": {
+          "shape": "__string",
+          "documentation": "<p>The default authentication method used for GCM. Values are either \"TOKEN\" or \"KEY\". Defaults to \"KEY\".</p>"
+        },
         "Enabled": {
           "shape": "__boolean",
           "documentation": "<p>Specifies whether the GCM channel is enabled for the application.</p>"
@@ -9462,6 +9493,10 @@
         "HasCredential": {
           "shape": "__boolean",
           "documentation": "<p>(Not used) This property is retained only for backward compatibility.</p>"
+        },
+        "HasFcmServiceCredentials": {
+          "shape": "__boolean",
+          "documentation": "<p>Returns true if the JSON file provided by Google during registration process was used in the <b>ServiceJson</b> field of the request.</p>"
         },
         "Id": {
           "shape": "__string",
@@ -9490,7 +9525,6 @@
       },
       "documentation": "<p>Provides information about the status and settings of the GCM channel for an application. The GCM channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>",
       "required": [
-        "Credential",
         "Platform"
       ]
     },
@@ -9525,9 +9559,13 @@
           "shape": "__string",
           "documentation": "<p>The URL of an image to display in the push notification.</p>"
         },
+        "PreferredAuthenticationMethod": {
+          "shape": "__string",
+          "documentation": "<p>The preferred authentication method, with valid values \"KEY\" or \"TOKEN\". If a value isn't provided then the <b>DefaultAuthenticationMethod</b> is used.</p>"
+        },
         "Priority": {
           "shape": "__string",
-          "documentation": "<p>para>normal - The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required.</p>/listitem> <li><p>high - The notification is sent immediately and might wake a sleeping device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM.</p> <p>The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.</p>"
+          "documentation": "<p>para>normal – The notification might be delayed. Delivery is optimized for battery usage on the recipient's device. Use this value unless immediate delivery is required.</p>/listitem> <li><p>high – The notification is sent immediately and might wake a sleeping device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM.</p> <p>The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.</p>"
         },
         "RawContent": {
           "shape": "__string",
@@ -12004,6 +12042,14 @@
         "EndpointReentryInterval": {
           "shape": "__string",
           "documentation": "<p>Minimum time that must pass before an endpoint can re-enter a given journey. The duration should use an ISO 8601 format, such as PT1H. </p>"
+        },
+        "TimeframeCap": {
+          "shape": "JourneyTimeframeCap",
+          "documentation": "<p>The number of messages that an endpoint can receive during the specified timeframe.</p>"
+        },
+        "TotalCap": {
+          "shape": "__integer",
+          "documentation": "<p>The maximum number of messages a journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.</p>"
         }
       },
       "documentation": "<p>Specifies limits on the messages that a journey can send and the number of times participants can enter a journey.</p>"
@@ -12315,6 +12361,20 @@
         }
       },
       "documentation": "<p>Changes the status of a journey.</p>"
+    },
+    "JourneyTimeframeCap": {
+      "type": "structure",
+      "members": {
+        "Cap": {
+          "shape": "__integer",
+          "documentation": "<p>The maximum number of messages that all journeys can send to an endpoint during the specified timeframe. The maximum value is 100. If set to 0, this limit will not apply.</p>"
+        },
+        "Days": {
+          "shape": "__integer",
+          "documentation": "<p>The length of the timeframe in days. The maximum value is 30. If set to 0, this limit will not apply.</p>"
+        }
+      },
+      "documentation": "<p>The number of messages that can be sent to an endpoint during the specified timeframe for all journeys.</p>"
     },
     "JourneysResponse": {
       "type": "structure",
@@ -14310,6 +14370,10 @@
         "VoiceTemplate": {
           "shape": "Template",
           "documentation": "<p>The voice template to use for the message. This object isn't supported for campaigns.</p>"
+        },
+        "InAppTemplate": {
+          "shape": "Template",
+          "documentation": "<p>The InApp template to use for the message. The InApp template object is not supported for SendMessages.</p>"
         }
       },
       "documentation": "<p>Specifies the message template to use for the message, for each type of channel.</p>"
@@ -14366,7 +14430,7 @@
         },
         "TemplateType": {
           "shape": "TemplateType",
-          "documentation": "<p>The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.</p>"
+          "documentation": "<p>The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.</p>"
         },
         "Version": {
           "shape": "__string",
@@ -14416,7 +14480,7 @@
         },
         "TemplateType": {
           "shape": "__string",
-          "documentation": "<p>The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.</p>"
+          "documentation": "<p>The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.</p>"
         },
         "Version": {
           "shape": "__string",
@@ -15740,6 +15804,10 @@
         "QuietTime": {
           "shape": "QuietTime",
           "documentation": "<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p> <p>To override the default quiet time settings for a specific campaign or journey, use the <link  linkend=\"apps-application-id-campaigns-campaign-id\">Campaign</link> resource or the <link  linkend=\"apps-application-id-journeys-journey-id\">Journey</link> resource to define a custom quiet time for the campaign or journey.</p>"
+        },
+        "JourneyLimits": {
+          "shape": "ApplicationSettingsJourneyLimits",
+          "documentation": "<p>The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.</p>"
         }
       },
       "documentation": "<p>Specifies the default settings for an application.</p>"

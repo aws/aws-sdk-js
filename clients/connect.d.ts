@@ -6497,7 +6497,7 @@ declare namespace Connect {
     PhoneNumberCountryCode?: PhoneNumberCountryCode;
   }
   export type PhoneNumberSummaryList = PhoneNumberSummary[];
-  export type PhoneNumberType = "TOLL_FREE"|"DID"|string;
+  export type PhoneNumberType = "TOLL_FREE"|"DID"|"UIFN"|"SHARED"|"THIRD_PARTY_TF"|"THIRD_PARTY_DID"|string;
   export type PhoneNumberTypes = PhoneNumberType[];
   export type PhoneNumberWorkflowMessage = string;
   export type PhoneNumberWorkflowStatus = "CLAIMED"|"IN_PROGRESS"|"FAILED"|string;

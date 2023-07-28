@@ -20,11 +20,11 @@ declare class SQS extends Service {
    */
   addPermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Cancels a specified message movement task.    A message movement can only be cancelled when the current status is RUNNING.   Cancelling a message movement task does not revert the messages that have already been moved. It can only stop the messages that have not been moved yet.   
+   * Cancels a specified message movement task. A message movement can only be cancelled when the current status is RUNNING. Cancelling a message movement task does not revert the messages that have already been moved. It can only stop the messages that have not been moved yet.    This action is currently limited to supporting message redrive from dead-letter queues (DLQs) only. In this context, the source queue is the dead-letter queue (DLQ), while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.    Currently, only standard queues are supported.   Only one active message movement task is supported per queue at any given time.   
    */
   cancelMessageMoveTask(params: SQS.Types.CancelMessageMoveTaskRequest, callback?: (err: AWSError, data: SQS.Types.CancelMessageMoveTaskResult) => void): Request<SQS.Types.CancelMessageMoveTaskResult, AWSError>;
   /**
-   * Cancels a specified message movement task.    A message movement can only be cancelled when the current status is RUNNING.   Cancelling a message movement task does not revert the messages that have already been moved. It can only stop the messages that have not been moved yet.   
+   * Cancels a specified message movement task. A message movement can only be cancelled when the current status is RUNNING. Cancelling a message movement task does not revert the messages that have already been moved. It can only stop the messages that have not been moved yet.    This action is currently limited to supporting message redrive from dead-letter queues (DLQs) only. In this context, the source queue is the dead-letter queue (DLQ), while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.    Currently, only standard queues are supported.   Only one active message movement task is supported per queue at any given time.   
    */
   cancelMessageMoveTask(callback?: (err: AWSError, data: SQS.Types.CancelMessageMoveTaskResult) => void): Request<SQS.Types.CancelMessageMoveTaskResult, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class SQS extends Service {
    */
   listDeadLetterSourceQueues(callback?: (err: AWSError, data: SQS.Types.ListDeadLetterSourceQueuesResult) => void): Request<SQS.Types.ListDeadLetterSourceQueuesResult, AWSError>;
   /**
-   * Gets the most recent message movement tasks (up to 10) under a specific source queue.
+   * Gets the most recent message movement tasks (up to 10) under a specific source queue.    This action is currently limited to supporting message redrive from dead-letter queues (DLQs) only. In this context, the source queue is the dead-letter queue (DLQ), while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.    Currently, only standard queues are supported.   Only one active message movement task is supported per queue at any given time.   
    */
   listMessageMoveTasks(params: SQS.Types.ListMessageMoveTasksRequest, callback?: (err: AWSError, data: SQS.Types.ListMessageMoveTasksResult) => void): Request<SQS.Types.ListMessageMoveTasksResult, AWSError>;
   /**
-   * Gets the most recent message movement tasks (up to 10) under a specific source queue.
+   * Gets the most recent message movement tasks (up to 10) under a specific source queue.    This action is currently limited to supporting message redrive from dead-letter queues (DLQs) only. In this context, the source queue is the dead-letter queue (DLQ), while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.    Currently, only standard queues are supported.   Only one active message movement task is supported per queue at any given time.   
    */
   listMessageMoveTasks(callback?: (err: AWSError, data: SQS.Types.ListMessageMoveTasksResult) => void): Request<SQS.Types.ListMessageMoveTasksResult, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class SQS extends Service {
    */
   listQueues(callback?: (err: AWSError, data: SQS.Types.ListQueuesResult) => void): Request<SQS.Types.ListQueuesResult, AWSError>;
   /**
-   * Deletes the messages in a queue specified by the QueueURL parameter.  When you use the PurgeQueue action, you can't retrieve any messages deleted from a queue. The message deletion process takes up to 60 seconds. We recommend waiting for 60 seconds regardless of your queue's size.   Messages sent to the queue before you call PurgeQueue might be received but are deleted within the next minute. Messages sent to the queue after you call PurgeQueue might be deleted while the queue is being purged.
+   * Deletes available messages in a queue (including in-flight messages) specified by the QueueURL parameter.  When you use the PurgeQueue action, you can't retrieve any messages deleted from a queue. The message deletion process takes up to 60 seconds. We recommend waiting for 60 seconds regardless of your queue's size.   Messages sent to the queue before you call PurgeQueue might be received but are deleted within the next minute. Messages sent to the queue after you call PurgeQueue might be deleted while the queue is being purged.
    */
   purgeQueue(params: SQS.Types.PurgeQueueRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the messages in a queue specified by the QueueURL parameter.  When you use the PurgeQueue action, you can't retrieve any messages deleted from a queue. The message deletion process takes up to 60 seconds. We recommend waiting for 60 seconds regardless of your queue's size.   Messages sent to the queue before you call PurgeQueue might be received but are deleted within the next minute. Messages sent to the queue after you call PurgeQueue might be deleted while the queue is being purged.
+   * Deletes available messages in a queue (including in-flight messages) specified by the QueueURL parameter.  When you use the PurgeQueue action, you can't retrieve any messages deleted from a queue. The message deletion process takes up to 60 seconds. We recommend waiting for 60 seconds regardless of your queue's size.   Messages sent to the queue before you call PurgeQueue might be received but are deleted within the next minute. Messages sent to the queue after you call PurgeQueue might be deleted while the queue is being purged.
    */
   purgeQueue(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class SQS extends Service {
    */
   setQueueAttributes(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts an asynchronous task to move messages from a specified source queue to a specified destination queue.    This action is currently limited to supporting message redrive from dead-letter queues (DLQs) only. In this context, the source queue is the dead-letter queue (DLQ), while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.    Currently, only standard queues are supported.   Only one active message movement task is supported per queue at any given time.   
+   * Starts an asynchronous task to move messages from a specified source queue to a specified destination queue.    This action is currently limited to supporting message redrive from queues that are configured as dead-letter queues (DLQs) of other Amazon SQS queues only. Non-SQS queue sources of dead-letter queues, such as Lambda or Amazon SNS topics, are currently not supported.   In dead-letter queues redrive context, the StartMessageMoveTask the source queue is the DLQ, while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.   Currently, only standard queues support redrive. FIFO queues don't support redrive.   Only one active message movement task is supported per queue at any given time.   
    */
   startMessageMoveTask(params: SQS.Types.StartMessageMoveTaskRequest, callback?: (err: AWSError, data: SQS.Types.StartMessageMoveTaskResult) => void): Request<SQS.Types.StartMessageMoveTaskResult, AWSError>;
   /**
-   * Starts an asynchronous task to move messages from a specified source queue to a specified destination queue.    This action is currently limited to supporting message redrive from dead-letter queues (DLQs) only. In this context, the source queue is the dead-letter queue (DLQ), while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.    Currently, only standard queues are supported.   Only one active message movement task is supported per queue at any given time.   
+   * Starts an asynchronous task to move messages from a specified source queue to a specified destination queue.    This action is currently limited to supporting message redrive from queues that are configured as dead-letter queues (DLQs) of other Amazon SQS queues only. Non-SQS queue sources of dead-letter queues, such as Lambda or Amazon SNS topics, are currently not supported.   In dead-letter queues redrive context, the StartMessageMoveTask the source queue is the DLQ, while the destination queue can be the original source queue (from which the messages were driven to the dead-letter-queue), or a custom destination queue.   Currently, only standard queues support redrive. FIFO queues don't support redrive.   Only one active message movement task is supported per queue at any given time.   
    */
   startMessageMoveTask(callback?: (err: AWSError, data: SQS.Types.StartMessageMoveTaskResult) => void): Request<SQS.Types.StartMessageMoveTaskResult, AWSError>;
   /**
@@ -811,7 +811,7 @@ declare namespace SQS {
   }
   export interface StartMessageMoveTaskRequest {
     /**
-     * The ARN of the queue that contains the messages to be moved to another queue. Currently, only dead-letter queue (DLQ) ARNs are accepted.
+     * The ARN of the queue that contains the messages to be moved to another queue. Currently, only ARNs of dead-letter queues (DLQs) whose sources are other Amazon SQS queues are accepted. DLQs whose sources are non-SQS queues, such as Lambda or Amazon SNS topics, are not currently supported.
      */
     SourceArn: String;
     /**

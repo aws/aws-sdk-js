@@ -157,6 +157,18 @@ declare class Kafka extends Service {
   describeClusterOperation(callback?: (err: AWSError, data: Kafka.Types.DescribeClusterOperationResponse) => void): Request<Kafka.Types.DescribeClusterOperationResponse, AWSError>;
   /**
    * 
+            Returns a description of the cluster operation specified by the ARN.
+
+   */
+  describeClusterOperationV2(params: Kafka.Types.DescribeClusterOperationV2Request, callback?: (err: AWSError, data: Kafka.Types.DescribeClusterOperationV2Response) => void): Request<Kafka.Types.DescribeClusterOperationV2Response, AWSError>;
+  /**
+   * 
+            Returns a description of the cluster operation specified by the ARN.
+
+   */
+  describeClusterOperationV2(callback?: (err: AWSError, data: Kafka.Types.DescribeClusterOperationV2Response) => void): Request<Kafka.Types.DescribeClusterOperationV2Response, AWSError>;
+  /**
+   * 
             Returns a description of this MSK configuration.
          
    */
@@ -251,6 +263,18 @@ declare class Kafka extends Service {
          
    */
   listClusterOperations(callback?: (err: AWSError, data: Kafka.Types.ListClusterOperationsResponse) => void): Request<Kafka.Types.ListClusterOperationsResponse, AWSError>;
+  /**
+   * 
+            Returns a list of all the operations that have been performed on the specified MSK cluster.
+         
+   */
+  listClusterOperationsV2(params: Kafka.Types.ListClusterOperationsV2Request, callback?: (err: AWSError, data: Kafka.Types.ListClusterOperationsV2Response) => void): Request<Kafka.Types.ListClusterOperationsV2Response, AWSError>;
+  /**
+   * 
+            Returns a list of all the operations that have been performed on the specified MSK cluster.
+         
+   */
+  listClusterOperationsV2(callback?: (err: AWSError, data: Kafka.Types.ListClusterOperationsV2Response) => void): Request<Kafka.Types.ListClusterOperationsV2Response, AWSError>;
   /**
    * 
             Returns a list of all the MSK clusters in the current Region.
@@ -1659,6 +1683,124 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Tags?: __mapOf__string;
   }
+  export interface ClusterOperationV2 {
+    /**
+     * 
+            ARN of the cluster.
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            Type of the backend cluster.
+     */
+    ClusterType?: ClusterType;
+    /**
+     * 
+            The time at which operation was started.
+     */
+    StartTime?: __timestampIso8601;
+    /**
+     * 
+            The time at which the operation finished.
+     */
+    EndTime?: __timestampIso8601;
+    /**
+     * 
+            If cluster operation failed from an error, it describes the error.
+     */
+    ErrorInfo?: ErrorInfo;
+    /**
+     * 
+            ARN of the cluster operation.
+     */
+    OperationArn?: __string;
+    /**
+     * 
+            State of the cluster operation.
+     */
+    OperationState?: __string;
+    /**
+     * 
+            Type of the cluster operation.
+     */
+    OperationType?: __string;
+    /**
+     * 
+            Properties of a provisioned cluster.
+     */
+    Provisioned?: ClusterOperationV2Provisioned;
+    /**
+     * 
+            Properties of a serverless cluster.
+     */
+    Serverless?: ClusterOperationV2Serverless;
+  }
+  export interface ClusterOperationV2Provisioned {
+    /**
+     * 
+            Steps completed during the operation.
+     */
+    OperationSteps?: __listOfClusterOperationStep;
+    /**
+     * 
+            Information about cluster attributes before a cluster is updated.
+     */
+    SourceClusterInfo?: MutableClusterInfo;
+    /**
+     * 
+            Information about cluster attributes after a cluster is updated.
+     */
+    TargetClusterInfo?: MutableClusterInfo;
+    /**
+     * 
+            Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.
+     */
+    VpcConnectionInfo?: VpcConnectionInfo;
+  }
+  export interface ClusterOperationV2Serverless {
+    /**
+     * 
+            Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.
+     */
+    VpcConnectionInfo?: VpcConnectionInfoServerless;
+  }
+  export interface ClusterOperationV2Summary {
+    /**
+     * 
+            ARN of the cluster.
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            Type of the backend cluster.
+     */
+    ClusterType?: ClusterType;
+    /**
+     * 
+            The time at which operation was started.
+     */
+    StartTime?: __timestampIso8601;
+    /**
+     * 
+            The time at which the operation finished.
+     */
+    EndTime?: __timestampIso8601;
+    /**
+     * 
+            ARN of the cluster operation.
+     */
+    OperationArn?: __string;
+    /**
+     * 
+            State of the cluster operation.
+     */
+    OperationState?: __string;
+    /**
+     * 
+            Type of the cluster operation.
+     */
+    OperationType?: __string;
+  }
   export interface DeleteClusterRequest {
     /**
      * 
@@ -1749,6 +1891,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ClusterOperationArn: __string;
   }
+  export interface DescribeClusterOperationV2Request {
+    /**
+     * ARN of the cluster operation to describe.
+     */
+    ClusterOperationArn: __string;
+  }
   export interface DescribeClusterOperationResponse {
     /**
      * 
@@ -1756,6 +1904,13 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ClusterOperationInfo?: ClusterOperationInfo;
+  }
+  export interface DescribeClusterOperationV2Response {
+    /**
+     * 
+            Cluster operation information
+     */
+    ClusterOperationInfo?: ClusterOperationV2;
   }
   export interface DescribeClusterRequest {
     /**
@@ -2191,6 +2346,20 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     NextToken?: __string;
   }
+  export interface ListClusterOperationsV2Request {
+    /**
+     * The arn of the cluster whose operations are being requested.
+     */
+    ClusterArn: __string;
+    /**
+     * The maxResults of the query.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The nextToken of the query.
+     */
+    NextToken?: __string;
+  }
   export interface ListClusterOperationsResponse {
     /**
      * 
@@ -2202,6 +2371,18 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      * 
             If the response of ListClusterOperations is truncated, it returns a NextToken in the response. This Nexttoken should be sent in the subsequent request to ListClusterOperations.
          
+     */
+    NextToken?: __string;
+  }
+  export interface ListClusterOperationsV2Response {
+    /**
+     * 
+            An array of cluster operation information objects.
+     */
+    ClusterOperationInfoList?: __listOfClusterOperationV2Summary;
+    /**
+     * 
+            If the response of ListClusterOperationsV2 is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListClusterOperationsV2.
      */
     NextToken?: __string;
   }
@@ -3399,6 +3580,28 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     CreationTime?: __timestampIso8601;
   }
+  export interface VpcConnectionInfoServerless {
+    /**
+     * 
+            The time when Amazon MSK creates the VPC Connnection.
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * 
+            The owner of the VPC Connection.
+     */
+    Owner?: __string;
+    /**
+     * 
+            Description of the requester that calls the API operation.
+     */
+    UserIdentity?: UserIdentity;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the VPC connection.
+     */
+    VpcConnectionArn?: __string;
+  }
   export type VpcConnectionState = "CREATING"|"AVAILABLE"|"INACTIVE"|"DEACTIVATING"|"DELETING"|"FAILED"|"REJECTED"|"REJECTING"|string;
   export interface VpcConnectivity {
     /**
@@ -3450,6 +3653,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfClusterInfo = ClusterInfo[];
   export type __listOfCluster = Cluster[];
   export type __listOfClusterOperationInfo = ClusterOperationInfo[];
+  export type __listOfClusterOperationV2Summary = ClusterOperationV2Summary[];
   export type __listOfClusterOperationStep = ClusterOperationStep[];
   export type __listOfCompatibleKafkaVersion = CompatibleKafkaVersion[];
   export type __listOfVpcConfig = VpcConfig[];
