@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1425.0-->
+<!--LATEST=2.1426.0-->
 <!--ENTRYINSERT-->
+
+## 2.1426.0
+* feature: AmplifyUIBuilder: Amplify Studio releases GraphQL support for codegen job action.
+* feature: AutoScaling: You can now configure an instance refresh to set its status to 'failed' when it detects that a specified CloudWatch alarm has gone into the ALARM state. You can also choose to roll back the instance refresh automatically when the alarm threshold is met.
+* feature: CleanRooms: This release introduces custom SQL queries - an expanded set of SQL you can run. This release adds analysis templates, a new resource for storing pre-defined custom SQL queries ahead of time. This release also adds the Custom analysis rule, which lets you approve analysis templates for querying.
+* feature: CodeStarconnections: New integration with the Gitlab provider type.
+* feature: Drs: Add support for in-aws right sizing
+* feature: Inspector2: This release adds 1 new API: BatchGetFindingDetails to retrieve enhanced vulnerability intelligence details for findings.
+* feature: LookoutEquipment: This release includes new import resource, model versioning and resource policy features.
+* feature: Omics: Add CreationType filter for ListReadSets
+* feature: RDS: This release adds support for Aurora MySQL local write forwarding, which allows for forwarding of write operations from reader DB instances to the writer DB instance.
+* feature: Route53: Amazon Route 53 now supports the Israel (Tel Aviv) Region (il-central-1) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+* feature: Scheduler: This release introduces automatic deletion of schedules in EventBridge Scheduler. If configured, EventBridge Scheduler automatically deletes a schedule after the schedule has completed its last invocation.
 
 ## 2.1425.0
 * feature: ApplicationInsights: This release enable customer to add/remove/update more than one workload for a component

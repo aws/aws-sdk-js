@@ -4024,6 +4024,13 @@
       "type": "timestamp",
       "timestampFormat": "iso8601"
     },
+    "CreationType": {
+      "type": "string",
+      "enum": [
+        "IMPORT",
+        "UPLOAD"
+      ]
+    },
     "DeleteAnnotationStoreRequest": {
       "type": "structure",
       "required": [
@@ -4854,6 +4861,10 @@
         "statusMessage": {
           "shape": "ReadSetStatusMessage",
           "documentation": "<p> The status message for a read set. It provides more detail as to why the read set has a status. </p>"
+        },
+        "creationType": {
+          "shape": "CreationType",
+          "documentation": "<p> The creation type of the read set. </p>"
         }
       }
     },
@@ -7291,6 +7302,10 @@
         "generatedFrom": {
           "shape": "GeneratedFrom",
           "documentation": "<p> Where the source originated. </p>"
+        },
+        "creationType": {
+          "shape": "CreationType",
+          "documentation": "<p> The creation type of the read set. </p>"
         }
       },
       "documentation": "<p>A filter for read sets.</p>"
@@ -7397,6 +7412,10 @@
         "statusMessage": {
           "shape": "ReadSetStatusMessage",
           "documentation": "<p> The status for a read set. It provides more detail as to why the read set has a status. </p>"
+        },
+        "creationType": {
+          "shape": "CreationType",
+          "documentation": "<p> The creation type of the read set. </p>"
         }
       },
       "documentation": "<p>A read set.</p>"

@@ -36,6 +36,14 @@ declare class Inspector2 extends Service {
    */
   batchGetCodeSnippet(callback?: (err: AWSError, data: Inspector2.Types.BatchGetCodeSnippetResponse) => void): Request<Inspector2.Types.BatchGetCodeSnippetResponse, AWSError>;
   /**
+   * Gets vulnerability details for findings.
+   */
+  batchGetFindingDetails(params: Inspector2.Types.BatchGetFindingDetailsRequest, callback?: (err: AWSError, data: Inspector2.Types.BatchGetFindingDetailsResponse) => void): Request<Inspector2.Types.BatchGetFindingDetailsResponse, AWSError>;
+  /**
+   * Gets vulnerability details for findings.
+   */
+  batchGetFindingDetails(callback?: (err: AWSError, data: Inspector2.Types.BatchGetFindingDetailsResponse) => void): Request<Inspector2.Types.BatchGetFindingDetailsResponse, AWSError>;
+  /**
    * Gets free trial status for multiple Amazon Web Services accounts.
    */
   batchGetFreeTrialInfo(params: Inspector2.Types.BatchGetFreeTrialInfoRequest, callback?: (err: AWSError, data: Inspector2.Types.BatchGetFreeTrialInfoResponse) => void): Request<Inspector2.Types.BatchGetFreeTrialInfoResponse, AWSError>;
@@ -828,6 +836,22 @@ declare namespace Inspector2 {
      */
     errors?: CodeSnippetErrorList;
   }
+  export interface BatchGetFindingDetailsRequest {
+    /**
+     * A list of finding ARNs.
+     */
+    findingArns: FindingArnList;
+  }
+  export interface BatchGetFindingDetailsResponse {
+    /**
+     * Error information for findings that details could not be returned for.
+     */
+    errors?: FindingDetailsErrorList;
+    /**
+     * A finding's vulnerability details.
+     */
+    findingDetails?: FindingDetails;
+  }
   export interface BatchGetFreeTrialInfoRequest {
     /**
      * The account IDs to get free trial status for.
@@ -1379,7 +1403,7 @@ declare namespace Inspector2 {
      */
     bucketName: String;
     /**
-     * The prefix of the Amazon S3 bucket used to export findings.
+     * The prefix that the findings will be written under.
      */
     keyPrefix?: String;
     /**
@@ -1610,6 +1634,24 @@ declare namespace Inspector2 {
   export type EpssScoreValue = number;
   export type ErrorCode = "ALREADY_ENABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"SUSPEND_IN_PROGRESS"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_ERROR"|"SSM_UNAVAILABLE"|"SSM_THROTTLED"|"EVENTBRIDGE_UNAVAILABLE"|"EVENTBRIDGE_THROTTLED"|"RESOURCE_SCAN_NOT_DISABLED"|"DISASSOCIATE_ALL_MEMBERS"|"ACCOUNT_IS_ISOLATED"|string;
   export type ErrorMessage = string;
+  export interface Evidence {
+    /**
+     * The evidence details.
+     */
+    evidenceDetail?: EvidenceDetail;
+    /**
+     * The evidence rule.
+     */
+    evidenceRule?: EvidenceRule;
+    /**
+     * The evidence severity.
+     */
+    severity?: EvidenceSeverity;
+  }
+  export type EvidenceDetail = string;
+  export type EvidenceList = Evidence[];
+  export type EvidenceRule = string;
+  export type EvidenceSeverity = string;
   export type ExecutionRoleArn = string;
   export type ExploitAvailable = "YES"|"NO"|string;
   export interface ExploitObserved {
@@ -1831,7 +1873,7 @@ declare namespace Inspector2 {
      */
     lastObservedAt?: DateFilterList;
     /**
-     * Details on the ingress source addresses used to filter findings.
+     * Details on network protocol used to filter findings.
      */
     networkProtocol?: StringFilterList;
     /**
@@ -1974,7 +2016,61 @@ declare namespace Inspector2 {
     updatedAt?: DateTimeTimestamp;
   }
   export type FindingArn = string;
+  export type FindingArnList = FindingArn[];
   export type FindingDescription = string;
+  export interface FindingDetail {
+    cisaData?: CisaData;
+    /**
+     * The Common Weakness Enumerations (CWEs) associated with the vulnerability.
+     */
+    cwes?: Cwes;
+    /**
+     * The Exploit Prediction Scoring System (EPSS) score of the vulnerability.
+     */
+    epssScore?: Double;
+    /**
+     * Information on the evidence of the vulnerability.
+     */
+    evidences?: EvidenceList;
+    exploitObserved?: ExploitObserved;
+    /**
+     * The finding ARN that the vulnerability details are associated with.
+     */
+    findingArn?: FindingArn;
+    /**
+     * The reference URLs for the vulnerability data.
+     */
+    referenceUrls?: VulnerabilityReferenceUrls;
+    /**
+     * The risk score of the vulnerability.
+     */
+    riskScore?: RiskScore;
+    /**
+     * The known malware tools or kits that can exploit the vulnerability.
+     */
+    tools?: Tools;
+    /**
+     * The MITRE adversary tactics, techniques, or procedures (TTPs) associated with the vulnerability.
+     */
+    ttps?: Ttps;
+  }
+  export type FindingDetails = FindingDetail[];
+  export interface FindingDetailsError {
+    /**
+     * The error code.
+     */
+    errorCode: FindingDetailsErrorCode;
+    /**
+     * The error message.
+     */
+    errorMessage: NonEmptyString;
+    /**
+     * The finding ARN that returned an error.
+     */
+    findingArn: FindingArn;
+  }
+  export type FindingDetailsErrorCode = "INTERNAL_ERROR"|"ACCESS_DENIED"|"FINDING_DETAILS_NOT_FOUND"|"INVALID_INPUT"|string;
+  export type FindingDetailsErrorList = FindingDetailsError[];
   export type FindingList = Finding[];
   export type FindingStatus = "ACTIVE"|"SUPPRESSED"|"CLOSED"|string;
   export type FindingTitle = string;
@@ -3105,6 +3201,7 @@ declare namespace Inspector2 {
   export type ResourceStringFilterList = ResourceStringFilter[];
   export type ResourceStringInput = string;
   export type ResourceType = "AWS_EC2_INSTANCE"|"AWS_ECR_CONTAINER_IMAGE"|"AWS_ECR_REPOSITORY"|"AWS_LAMBDA_FUNCTION"|string;
+  export type RiskScore = number;
   export type Runtime = "NODEJS"|"NODEJS_12_X"|"NODEJS_14_X"|"NODEJS_16_X"|"JAVA_8"|"JAVA_8_AL2"|"JAVA_11"|"PYTHON_3_7"|"PYTHON_3_8"|"PYTHON_3_9"|"UNSUPPORTED"|"NODEJS_18_X"|"GO_1_X"|"JAVA_17"|"PYTHON_3_10"|string;
   export type SbomReportFormat = "CYCLONEDX_1_4"|"SPDX_2_3"|string;
   export interface ScanStatus {
@@ -3301,6 +3398,8 @@ declare namespace Inspector2 {
     vulnerabilityId?: String;
   }
   export type TitleSortBy = "CRITICAL"|"HIGH"|"ALL"|string;
+  export type Tool = string;
+  export type Tools = Tool[];
   export type Ttp = string;
   export type Ttps = Ttp[];
   export interface UntagResourceRequest {

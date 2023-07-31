@@ -2012,6 +2012,10 @@ declare namespace RDS {
      */
     MasterUserSecretKmsKeyId?: String;
     /**
+     * Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. Valid for: Aurora DB clusters only
+     */
+    EnableLocalWriteForwarding?: BooleanOptional;
+    /**
      * The ID of the region that contains the source for the read replica.
      */
     SourceRegion?: String;
@@ -3008,6 +3012,10 @@ declare namespace RDS {
      * The next time you can modify the DB cluster to use the aurora-iopt1 storage type. This setting is only for Aurora DB clusters.
      */
     IOOptimizedNextAllowedModificationTime?: TStamp;
+    /**
+     * Specifies whether an Aurora DB cluster has in-cluster write forwarding enabled, not enabled, requested, or is in the process of enabling it.
+     */
+    LocalWriteForwardingStatus?: LocalWriteForwardingStatus;
   }
   export interface DBClusterBacktrack {
     /**
@@ -3472,6 +3480,10 @@ declare namespace RDS {
      * A list of the supported CA certificate identifiers. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
      */
     SupportedCACertificateIdentifiers?: CACertificateIdentifiersList;
+    /**
+     * A value that indicates whether the DB engine version supports forwarding write operations from reader DB instances to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. Valid for: Aurora DB clusters only
+     */
+    SupportsLocalWriteForwarding?: BooleanOptional;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -6100,6 +6112,7 @@ declare namespace RDS {
      */
     Filters?: FilterList;
   }
+  export type LocalWriteForwardingStatus = "enabled"|"disabled"|"enabling"|"disabling"|"requested"|string;
   export type LogTypeList = String[];
   export type Long = number;
   export type LongOptional = number;
@@ -6394,6 +6407,10 @@ declare namespace RDS {
      * Specifies whether engine mode changes from serverless to provisioned are allowed. Valid for Cluster Type: Aurora Serverless v1 DB clusters only Constraints:   You must allow engine mode changes when specifying a different value for the EngineMode parameter from the DB cluster's current engine mode.  
      */
     AllowEngineModeChange?: Boolean;
+    /**
+     * Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. Valid for: Aurora DB clusters only
+     */
+    EnableLocalWriteForwarding?: BooleanOptional;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -9232,6 +9249,10 @@ declare namespace RDS {
      * A value that indicates whether you can use Babelfish for Aurora PostgreSQL with the target engine version.
      */
     SupportsBabelfish?: BooleanOptional;
+    /**
+     * A value that indicates whether the target engine version supports forwarding write operations from reader DB instances to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. Valid for: Aurora DB clusters only
+     */
+    SupportsLocalWriteForwarding?: BooleanOptional;
   }
   export interface UserAuthConfig {
     /**

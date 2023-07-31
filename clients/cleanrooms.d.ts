@@ -12,6 +12,14 @@ declare class CleanRooms extends Service {
   constructor(options?: CleanRooms.Types.ClientConfiguration)
   config: Config & CleanRooms.Types.ClientConfiguration;
   /**
+   * Retrieves multiple analysis templates within a collaboration by their Amazon Resource Names (ARNs).
+   */
+  batchGetCollaborationAnalysisTemplate(params: CleanRooms.Types.BatchGetCollaborationAnalysisTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.BatchGetCollaborationAnalysisTemplateOutput) => void): Request<CleanRooms.Types.BatchGetCollaborationAnalysisTemplateOutput, AWSError>;
+  /**
+   * Retrieves multiple analysis templates within a collaboration by their Amazon Resource Names (ARNs).
+   */
+  batchGetCollaborationAnalysisTemplate(callback?: (err: AWSError, data: CleanRooms.Types.BatchGetCollaborationAnalysisTemplateOutput) => void): Request<CleanRooms.Types.BatchGetCollaborationAnalysisTemplateOutput, AWSError>;
+  /**
    * Retrieves multiple schemas by their identifiers.
    */
   batchGetSchema(params: CleanRooms.Types.BatchGetSchemaInput, callback?: (err: AWSError, data: CleanRooms.Types.BatchGetSchemaOutput) => void): Request<CleanRooms.Types.BatchGetSchemaOutput, AWSError>;
@@ -19,6 +27,14 @@ declare class CleanRooms extends Service {
    * Retrieves multiple schemas by their identifiers.
    */
   batchGetSchema(callback?: (err: AWSError, data: CleanRooms.Types.BatchGetSchemaOutput) => void): Request<CleanRooms.Types.BatchGetSchemaOutput, AWSError>;
+  /**
+   * Creates a new analysis template.
+   */
+  createAnalysisTemplate(params: CleanRooms.Types.CreateAnalysisTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.CreateAnalysisTemplateOutput) => void): Request<CleanRooms.Types.CreateAnalysisTemplateOutput, AWSError>;
+  /**
+   * Creates a new analysis template.
+   */
+  createAnalysisTemplate(callback?: (err: AWSError, data: CleanRooms.Types.CreateAnalysisTemplateOutput) => void): Request<CleanRooms.Types.CreateAnalysisTemplateOutput, AWSError>;
   /**
    * Creates a new collaboration.
    */
@@ -59,6 +75,14 @@ declare class CleanRooms extends Service {
    * Creates a membership for a specific collaboration identifier and joins the collaboration.
    */
   createMembership(callback?: (err: AWSError, data: CleanRooms.Types.CreateMembershipOutput) => void): Request<CleanRooms.Types.CreateMembershipOutput, AWSError>;
+  /**
+   * Deletes an analysis template.
+   */
+  deleteAnalysisTemplate(params: CleanRooms.Types.DeleteAnalysisTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.DeleteAnalysisTemplateOutput) => void): Request<CleanRooms.Types.DeleteAnalysisTemplateOutput, AWSError>;
+  /**
+   * Deletes an analysis template.
+   */
+  deleteAnalysisTemplate(callback?: (err: AWSError, data: CleanRooms.Types.DeleteAnalysisTemplateOutput) => void): Request<CleanRooms.Types.DeleteAnalysisTemplateOutput, AWSError>;
   /**
    * Deletes a collaboration. It can only be called by the collaboration owner.
    */
@@ -108,6 +132,14 @@ declare class CleanRooms extends Service {
    */
   deleteMembership(callback?: (err: AWSError, data: CleanRooms.Types.DeleteMembershipOutput) => void): Request<CleanRooms.Types.DeleteMembershipOutput, AWSError>;
   /**
+   * Retrieves an analysis template.
+   */
+  getAnalysisTemplate(params: CleanRooms.Types.GetAnalysisTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.GetAnalysisTemplateOutput) => void): Request<CleanRooms.Types.GetAnalysisTemplateOutput, AWSError>;
+  /**
+   * Retrieves an analysis template.
+   */
+  getAnalysisTemplate(callback?: (err: AWSError, data: CleanRooms.Types.GetAnalysisTemplateOutput) => void): Request<CleanRooms.Types.GetAnalysisTemplateOutput, AWSError>;
+  /**
    * Returns metadata about a collaboration.
    */
   getCollaboration(params: CleanRooms.Types.GetCollaborationInput, callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationOutput) => void): Request<CleanRooms.Types.GetCollaborationOutput, AWSError>;
@@ -115,6 +147,14 @@ declare class CleanRooms extends Service {
    * Returns metadata about a collaboration.
    */
   getCollaboration(callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationOutput) => void): Request<CleanRooms.Types.GetCollaborationOutput, AWSError>;
+  /**
+   * Retrieves an analysis template within a collaboration.
+   */
+  getCollaborationAnalysisTemplate(params: CleanRooms.Types.GetCollaborationAnalysisTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationAnalysisTemplateOutput) => void): Request<CleanRooms.Types.GetCollaborationAnalysisTemplateOutput, AWSError>;
+  /**
+   * Retrieves an analysis template within a collaboration.
+   */
+  getCollaborationAnalysisTemplate(callback?: (err: AWSError, data: CleanRooms.Types.GetCollaborationAnalysisTemplateOutput) => void): Request<CleanRooms.Types.GetCollaborationAnalysisTemplateOutput, AWSError>;
   /**
    * Retrieves a configured table.
    */
@@ -171,6 +211,22 @@ declare class CleanRooms extends Service {
    * Retrieves a schema analysis rule.
    */
   getSchemaAnalysisRule(callback?: (err: AWSError, data: CleanRooms.Types.GetSchemaAnalysisRuleOutput) => void): Request<CleanRooms.Types.GetSchemaAnalysisRuleOutput, AWSError>;
+  /**
+   * Lists analysis templates that the caller owns.
+   */
+  listAnalysisTemplates(params: CleanRooms.Types.ListAnalysisTemplatesInput, callback?: (err: AWSError, data: CleanRooms.Types.ListAnalysisTemplatesOutput) => void): Request<CleanRooms.Types.ListAnalysisTemplatesOutput, AWSError>;
+  /**
+   * Lists analysis templates that the caller owns.
+   */
+  listAnalysisTemplates(callback?: (err: AWSError, data: CleanRooms.Types.ListAnalysisTemplatesOutput) => void): Request<CleanRooms.Types.ListAnalysisTemplatesOutput, AWSError>;
+  /**
+   * Lists analysis templates within a collaboration.
+   */
+  listCollaborationAnalysisTemplates(params: CleanRooms.Types.ListCollaborationAnalysisTemplatesInput, callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationAnalysisTemplatesOutput) => void): Request<CleanRooms.Types.ListCollaborationAnalysisTemplatesOutput, AWSError>;
+  /**
+   * Lists analysis templates within a collaboration.
+   */
+  listCollaborationAnalysisTemplates(callback?: (err: AWSError, data: CleanRooms.Types.ListCollaborationAnalysisTemplatesOutput) => void): Request<CleanRooms.Types.ListCollaborationAnalysisTemplatesOutput, AWSError>;
   /**
    * Lists collaborations the caller owns, is active in, or has been invited to.
    */
@@ -260,6 +316,14 @@ declare class CleanRooms extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CleanRooms.Types.UntagResourceOutput) => void): Request<CleanRooms.Types.UntagResourceOutput, AWSError>;
   /**
+   * Updates the analysis template metadata.
+   */
+  updateAnalysisTemplate(params: CleanRooms.Types.UpdateAnalysisTemplateInput, callback?: (err: AWSError, data: CleanRooms.Types.UpdateAnalysisTemplateOutput) => void): Request<CleanRooms.Types.UpdateAnalysisTemplateOutput, AWSError>;
+  /**
+   * Updates the analysis template metadata.
+   */
+  updateAnalysisTemplate(callback?: (err: AWSError, data: CleanRooms.Types.UpdateAnalysisTemplateOutput) => void): Request<CleanRooms.Types.UpdateAnalysisTemplateOutput, AWSError>;
+  /**
    * Updates collaboration metadata and can only be called by the collaboration owner.
    */
   updateCollaboration(params: CleanRooms.Types.UpdateCollaborationInput, callback?: (err: AWSError, data: CleanRooms.Types.UpdateCollaborationOutput) => void): Request<CleanRooms.Types.UpdateCollaborationOutput, AWSError>;
@@ -340,14 +404,30 @@ declare namespace CleanRooms {
   export type AggregationConstraints = AggregationConstraint[];
   export type AggregationType = "COUNT_DISTINCT"|string;
   export type AllowedColumnList = ColumnName[];
+  export type AnalysisFormat = "SQL"|string;
   export type AnalysisMethod = "DIRECT_QUERY"|string;
+  export interface AnalysisParameter {
+    /**
+     * The name of the parameter. The name must use only alphanumeric, underscore (_), or hyphen (-) characters but cannot start or end with a hyphen.
+     */
+    name: ParameterName;
+    /**
+     * The type of parameter.
+     */
+    type: ParameterType;
+    /**
+     * Optional. The default value that is applied in the analysis template. The member who can query can override this value in the query editor.
+     */
+    defaultValue?: ParameterValue;
+  }
+  export type AnalysisParameterList = AnalysisParameter[];
   export interface AnalysisRule {
     /**
      * The unique ID for the associated collaboration.
      */
     collaborationId: CollaborationIdentifier;
     /**
-     * The type of analysis rule. Valid values are `AGGREGATION` and `LIST`.
+     * The type of analysis rule.
      */
     type: AnalysisRuleType;
     /**
@@ -400,13 +480,25 @@ declare namespace CleanRooms {
   export type AnalysisRuleAggregationAggregateColumnsList = AggregateColumn[];
   export type AnalysisRuleColumnList = AnalysisRuleColumnName[];
   export type AnalysisRuleColumnName = string;
+  export interface AnalysisRuleCustom {
+    /**
+     * The analysis templates that are allowed by the custom analysis rule.
+     */
+    allowedAnalyses: AnalysisRuleCustomAllowedAnalysesList;
+    /**
+     * The Amazon Web Services accounts that are allowed to query by the custom analysis rule. Required when allowedAnalyses is ANY_QUERY.
+     */
+    allowedAnalysisProviders?: AnalysisRuleCustomAllowedAnalysisProvidersList;
+  }
+  export type AnalysisRuleCustomAllowedAnalysesList = AnalysisTemplateArnOrQueryWildcard[];
+  export type AnalysisRuleCustomAllowedAnalysisProvidersList = AccountId[];
   export interface AnalysisRuleList {
     /**
      * Columns that can be used to join a configured table with the table of the member who can query and other members' configured tables.
      */
     joinColumns: AnalysisRuleListJoinColumnsList;
     /**
-     * Which logical operators (if any) are to be used in an INNER JOIN match condition. Default is AND.
+     * The logical operators (if any) that are to be used in an INNER JOIN match condition. Default is AND.
      */
     allowedJoinOperators?: JoinOperatorsList;
     /**
@@ -417,7 +509,7 @@ declare namespace CleanRooms {
   export type AnalysisRuleListJoinColumnsList = AnalysisRuleColumnName[];
   export interface AnalysisRulePolicy {
     /**
-     * Controls on the query specifications that can be run on configured table..
+     * Controls on the query specifications that can be run on configured table.
      */
     v1?: AnalysisRulePolicyV1;
   }
@@ -430,9 +522,166 @@ declare namespace CleanRooms {
      * Analysis rule type that enables only aggregation queries on a configured table.
      */
     aggregation?: AnalysisRuleAggregation;
+    /**
+     * Analysis rule type that enables custom SQL queries on a configured table.
+     */
+    custom?: AnalysisRuleCustom;
   }
-  export type AnalysisRuleType = "AGGREGATION"|"LIST"|string;
+  export type AnalysisRuleType = "AGGREGATION"|"LIST"|"CUSTOM"|string;
   export type AnalysisRuleTypeList = AnalysisRuleType[];
+  export interface AnalysisSchema {
+    /**
+     * The tables referenced in the analysis schema.
+     */
+    referencedTables?: QueryTables;
+  }
+  export interface AnalysisSource {
+    /**
+     * The query text.
+     */
+    text?: AnalysisTemplateText;
+  }
+  export interface AnalysisTemplate {
+    /**
+     * The identifier for the analysis template.
+     */
+    id: AnalysisTemplateIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) of the analysis template.
+     */
+    arn: AnalysisTemplateArn;
+    /**
+     * The unique ID for the associated collaboration of the analysis template.
+     */
+    collaborationId: UUID;
+    /**
+     * The unique ARN for the analysis template’s associated collaboration.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The identifier of a member who created the analysis template.
+     */
+    membershipId: UUID;
+    /**
+     * The Amazon Resource Name (ARN) of the member who created the analysis template.
+     */
+    membershipArn: MembershipArn;
+    /**
+     * The description of the analysis template.
+     */
+    description?: ResourceDescription;
+    /**
+     * The name of the analysis template.
+     */
+    name: ResourceAlias;
+    /**
+     * The time that the analysis template was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The time that the analysis template was last updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * The entire schema object.
+     */
+    schema: AnalysisSchema;
+    /**
+     * The format of the analysis template.
+     */
+    format: AnalysisFormat;
+    /**
+     * The source of the analysis template.
+     */
+    source: AnalysisSource;
+    /**
+     * The parameters of the analysis template.
+     */
+    analysisParameters?: AnalysisParameterList;
+  }
+  export type AnalysisTemplateArn = string;
+  export type AnalysisTemplateArnList = AnalysisTemplateArn[];
+  export type AnalysisTemplateArnOrQueryWildcard = string;
+  export type AnalysisTemplateIdentifier = string;
+  export interface AnalysisTemplateSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the analysis template.
+     */
+    arn: AnalysisTemplateArn;
+    /**
+     * The time that the analysis template summary was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The identifier of the analysis template.
+     */
+    id: AnalysisTemplateIdentifier;
+    /**
+     * The name of the analysis template. 
+     */
+    name: ResourceAlias;
+    /**
+     * The time that the analysis template summary was last updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the member who created the analysis template.
+     */
+    membershipArn: MembershipArn;
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipId: UUID;
+    /**
+     * The unique ARN for the analysis template summary’s associated collaboration.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * A unique identifier for the collaboration that the analysis template summary belongs to. Currently accepts collaboration ID.
+     */
+    collaborationId: UUID;
+    /**
+     * The description of the analysis template.
+     */
+    description?: ResourceDescription;
+  }
+  export type AnalysisTemplateSummaryList = AnalysisTemplateSummary[];
+  export type AnalysisTemplateText = string;
+  export interface BatchGetCollaborationAnalysisTemplateError {
+    /**
+     * The Amazon Resource Name (ARN) of the analysis template.
+     */
+    arn: AnalysisTemplateArn;
+    /**
+     * An error code for the error.
+     */
+    code: String;
+    /**
+     * A description of why the call failed.
+     */
+    message: String;
+  }
+  export type BatchGetCollaborationAnalysisTemplateErrorList = BatchGetCollaborationAnalysisTemplateError[];
+  export interface BatchGetCollaborationAnalysisTemplateInput {
+    /**
+     * A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+     */
+    collaborationIdentifier: CollaborationIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+     */
+    analysisTemplateArns: AnalysisTemplateArnList;
+  }
+  export interface BatchGetCollaborationAnalysisTemplateOutput {
+    /**
+     * The retrieved list of analysis templates within a collaboration.
+     */
+    collaborationAnalysisTemplates: CollaborationAnalysisTemplateList;
+    /**
+     * Error reasons for collaboration analysis templates that could not be retrieved. One error is returned for every collaboration analysis template that could not be retrieved.
+     */
+    errors: BatchGetCollaborationAnalysisTemplateErrorList;
+  }
   export interface BatchGetSchemaError {
     /**
      * An error name for the error.
@@ -524,6 +773,100 @@ declare namespace CleanRooms {
      */
     queryLogStatus: CollaborationQueryLogStatus;
   }
+  export interface CollaborationAnalysisTemplate {
+    /**
+     * The identifier of the analysis template.
+     */
+    id: AnalysisTemplateIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) of the analysis template.
+     */
+    arn: AnalysisTemplateArn;
+    /**
+     * A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+     */
+    collaborationId: UUID;
+    /**
+     * The unique ARN for the analysis template’s associated collaboration.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * The description of the analysis template.
+     */
+    description?: ResourceDescription;
+    /**
+     * The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
+     */
+    creatorAccountId: AccountId;
+    /**
+     * The name of the analysis template.
+     */
+    name: ResourceAlias;
+    /**
+     * The time that the analysis template within a collaboration was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The time that the analysis template in the collaboration was last updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * The entire schema object.
+     */
+    schema: AnalysisSchema;
+    /**
+     * The format of the analysis template in the collaboration.
+     */
+    format: AnalysisFormat;
+    /**
+     * The source of the analysis template within a collaboration.
+     */
+    source: AnalysisSource;
+    /**
+     * The analysis parameters that have been specified in the analysis template.
+     */
+    analysisParameters?: AnalysisParameterList;
+  }
+  export type CollaborationAnalysisTemplateList = CollaborationAnalysisTemplate[];
+  export interface CollaborationAnalysisTemplateSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the analysis template.
+     */
+    arn: AnalysisTemplateArn;
+    /**
+     * The time that the summary of the analysis template in a collaboration was created.
+     */
+    createTime: Timestamp;
+    /**
+     * The identifier of the analysis template.
+     */
+    id: AnalysisTemplateIdentifier;
+    /**
+     * The name of the analysis template.
+     */
+    name: ResourceAlias;
+    /**
+     * The time that the summary of the analysis template in the collaboration was last updated.
+     */
+    updateTime: Timestamp;
+    /**
+     * The unique ARN for the analysis template’s associated collaboration.
+     */
+    collaborationArn: CollaborationArn;
+    /**
+     * A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+     */
+    collaborationId: UUID;
+    /**
+     * The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
+     */
+    creatorAccountId: AccountId;
+    /**
+     * The description of the analysis template.
+     */
+    description?: ResourceDescription;
+  }
+  export type CollaborationAnalysisTemplateSummaryList = CollaborationAnalysisTemplateSummary[];
   export type CollaborationArn = string;
   export type CollaborationDescription = string;
   export type CollaborationIdentifier = string;
@@ -615,7 +958,7 @@ declare namespace CleanRooms {
      */
     updateTime: Timestamp;
     /**
-     * The types of analysis rules associated with this configured table. Valid values are `AGGREGATION` and `LIST`. Currently, only one analysis rule may be associated with a configured table.
+     * The types of analysis rules associated with this configured table. Currently, only one analysis rule may be associated with a configured table.
      */
     analysisRuleTypes: ConfiguredTableAnalysisRuleTypeList;
     /**
@@ -641,7 +984,7 @@ declare namespace CleanRooms {
      */
     policy: ConfiguredTableAnalysisRulePolicy;
     /**
-     * The type of configured table analysis rule. Valid values are `AGGREGATION` and `LIST`.
+     * The type of configured table analysis rule.
      */
     type: ConfiguredTableAnalysisRuleType;
     /**
@@ -668,8 +1011,9 @@ declare namespace CleanRooms {
      * Analysis rule type that enables only aggregation queries on a configured table.
      */
     aggregation?: AnalysisRuleAggregation;
+    custom?: AnalysisRuleCustom;
   }
-  export type ConfiguredTableAnalysisRuleType = "AGGREGATION"|"LIST"|string;
+  export type ConfiguredTableAnalysisRuleType = "AGGREGATION"|"LIST"|"CUSTOM"|string;
   export type ConfiguredTableAnalysisRuleTypeList = ConfiguredTableAnalysisRuleType[];
   export type ConfiguredTableArn = string;
   export interface ConfiguredTableAssociation {
@@ -787,6 +1131,42 @@ declare namespace CleanRooms {
     analysisMethod: AnalysisMethod;
   }
   export type ConfiguredTableSummaryList = ConfiguredTableSummary[];
+  export interface CreateAnalysisTemplateInput {
+    /**
+     * The description of the analysis template.
+     */
+    description?: ResourceDescription;
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The name of the analysis template.
+     */
+    name: TableAlias;
+    /**
+     * The format of the analysis template.
+     */
+    format: AnalysisFormat;
+    /**
+     * The information in the analysis template. Currently supports text, the query text for the analysis template.
+     */
+    source: AnalysisSource;
+    /**
+     * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
+     */
+    tags?: TagMap;
+    /**
+     * The parameters of the analysis template.
+     */
+    analysisParameters?: AnalysisParameterList;
+  }
+  export interface CreateAnalysisTemplateOutput {
+    /**
+     * The analysis template.
+     */
+    analysisTemplate: AnalysisTemplate;
+  }
   export interface CreateCollaborationInput {
     /**
      * A list of initial members, not including the creator. This list is immutable.
@@ -833,7 +1213,7 @@ declare namespace CleanRooms {
      */
     configuredTableIdentifier: ConfiguredTableIdentifier;
     /**
-     * The type of analysis rule. Valid values are AGGREGATION and LIST.
+     * The type of analysis rule.
      */
     analysisRuleType: ConfiguredTableAnalysisRuleType;
     /**
@@ -949,6 +1329,18 @@ declare namespace CleanRooms {
      */
     preserveNulls: Boolean;
   }
+  export interface DeleteAnalysisTemplateInput {
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The identifier for the analysis template resource.
+     */
+    analysisTemplateIdentifier: AnalysisTemplateIdentifier;
+  }
+  export interface DeleteAnalysisTemplateOutput {
+  }
   export interface DeleteCollaborationInput {
     /**
      * The identifier for the collaboration.
@@ -1011,6 +1403,38 @@ declare namespace CleanRooms {
   }
   export type DisplayName = string;
   export type FilterableMemberStatus = "INVITED"|"ACTIVE"|string;
+  export interface GetAnalysisTemplateInput {
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The identifier for the analysis template resource.
+     */
+    analysisTemplateIdentifier: AnalysisTemplateIdentifier;
+  }
+  export interface GetAnalysisTemplateOutput {
+    /**
+     * The analysis template.
+     */
+    analysisTemplate: AnalysisTemplate;
+  }
+  export interface GetCollaborationAnalysisTemplateInput {
+    /**
+     * A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+     */
+    collaborationIdentifier: CollaborationIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+     */
+    analysisTemplateArn: AnalysisTemplateArn;
+  }
+  export interface GetCollaborationAnalysisTemplateOutput {
+    /**
+     * The analysis template within a collaboration.
+     */
+    collaborationAnalysisTemplate: CollaborationAnalysisTemplate;
+  }
   export interface GetCollaborationInput {
     /**
      * The identifier for the collaboration.
@@ -1147,6 +1571,54 @@ declare namespace CleanRooms {
   export type JoinOperatorsList = JoinOperator[];
   export type JoinRequiredOption = "QUERY_RUNNER"|string;
   export type KeyPrefix = string;
+  export interface ListAnalysisTemplatesInput {
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum size of the results that is returned per call.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAnalysisTemplatesOutput {
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * Lists analysis template metadata.
+     */
+    analysisTemplateSummaries: AnalysisTemplateSummaryList;
+  }
+  export interface ListCollaborationAnalysisTemplatesInput {
+    /**
+     * A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+     */
+    collaborationIdentifier: CollaborationIdentifier;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The maximum size of the results that is returned per call.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListCollaborationAnalysisTemplatesOutput {
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The metadata of the analysis template within a collaboration.
+     */
+    collaborationAnalysisTemplateSummaries: CollaborationAnalysisTemplateSummaryList;
+  }
   export interface ListCollaborationsInput {
     /**
      * The token value retrieved from a previous call to access the next page of results.
@@ -1488,6 +1960,10 @@ declare namespace CleanRooms {
   }
   export type MembershipSummaryList = MembershipSummary[];
   export type PaginationToken = string;
+  export type ParameterMap = {[key: string]: ParameterValue};
+  export type ParameterName = string;
+  export type ParameterType = "SMALLINT"|"INTEGER"|"BIGINT"|"DECIMAL"|"REAL"|"DOUBLE_PRECISION"|"BOOLEAN"|"CHAR"|"VARCHAR"|"DATE"|"TIMESTAMP"|"TIMESTAMPTZ"|"TIME"|"TIMETZ"|"VARBYTE"|string;
+  export type ParameterValue = string;
   export interface ProtectedQuery {
     /**
      * The identifier for a protected query instance.
@@ -1591,6 +2067,14 @@ declare namespace CleanRooms {
      * The query string to be submitted.
      */
     queryString?: ProtectedQuerySQLParametersQueryStringString;
+    /**
+     * The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+     */
+    analysisTemplateArn?: AnalysisTemplateArn;
+    /**
+     * The protected query SQL parameters.
+     */
+    parameters?: ParameterMap;
   }
   export type ProtectedQuerySQLParametersQueryStringString = string;
   export interface ProtectedQueryStatistics {
@@ -1624,6 +2108,9 @@ declare namespace CleanRooms {
   }
   export type ProtectedQuerySummaryList = ProtectedQuerySummary[];
   export type ProtectedQueryType = "SQL"|string;
+  export type QueryTables = TableAlias[];
+  export type ResourceAlias = string;
+  export type ResourceDescription = string;
   export type ResultFormat = "CSV"|"PARQUET"|string;
   export type RoleArn = string;
   export type ScalarFunctions = "TRUNC"|"ABS"|"CEILING"|"FLOOR"|"LN"|"LOG"|"ROUND"|"SQRT"|"CAST"|"LOWER"|"RTRIM"|"UPPER"|"COALESCE"|string;
@@ -1638,7 +2125,7 @@ declare namespace CleanRooms {
      */
     partitionKeys: ColumnList;
     /**
-     * The analysis rule types associated with the schema. Valued values are LIST and AGGREGATION. Currently, only one entry is present.
+     * The analysis rule types associated with the schema. Currently, only one entry is present.
      */
     analysisRuleTypes: AnalysisRuleTypeList;
     /**
@@ -1783,6 +2270,26 @@ declare namespace CleanRooms {
     tagKeys: TagKeys;
   }
   export interface UntagResourceOutput {
+  }
+  export interface UpdateAnalysisTemplateInput {
+    /**
+     * The identifier for a membership resource.
+     */
+    membershipIdentifier: MembershipIdentifier;
+    /**
+     * The identifier for the analysis template resource.
+     */
+    analysisTemplateIdentifier: AnalysisTemplateIdentifier;
+    /**
+     * A new description for the analysis template.
+     */
+    description?: ResourceDescription;
+  }
+  export interface UpdateAnalysisTemplateOutput {
+    /**
+     * The analysis template.
+     */
+    analysisTemplate: AnalysisTemplate;
   }
   export interface UpdateCollaborationInput {
     /**

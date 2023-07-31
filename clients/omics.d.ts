@@ -1381,6 +1381,7 @@ declare namespace Omics {
     tags?: TagMap;
   }
   export type CreationTime = Date;
+  export type CreationType = "IMPORT"|"UPLOAD"|string;
   export interface DeleteAnnotationStoreRequest {
     /**
      * The store's name.
@@ -1870,6 +1871,10 @@ declare namespace Omics {
      *  The status message for a read set. It provides more detail as to why the read set has a status. 
      */
     statusMessage?: ReadSetStatusMessage;
+    /**
+     *  The creation type of the read set. 
+     */
+    creationType?: CreationType;
   }
   export interface GetReadSetRequest {
     /**
@@ -3392,6 +3397,10 @@ declare namespace Omics {
      *  Where the source originated. 
      */
     generatedFrom?: GeneratedFrom;
+    /**
+     *  The creation type of the read set. 
+     */
+    creationType?: CreationType;
   }
   export type ReadSetId = string;
   export type ReadSetIdList = ReadSetId[];
@@ -3448,6 +3457,10 @@ declare namespace Omics {
      *  The status for a read set. It provides more detail as to why the read set has a status. 
      */
     statusMessage?: ReadSetStatusMessage;
+    /**
+     *  The creation type of the read set. 
+     */
+    creationType?: CreationType;
   }
   export type ReadSetName = string;
   export type ReadSetPartSource = "SOURCE1"|"SOURCE2"|string;

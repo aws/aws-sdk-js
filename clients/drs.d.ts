@@ -2300,7 +2300,7 @@ declare namespace Drs {
   }
   export type TagValue = string;
   export type TagsMap = {[key: string]: TagValue};
-  export type TargetInstanceTypeRightSizingMethod = "NONE"|"BASIC"|string;
+  export type TargetInstanceTypeRightSizingMethod = "NONE"|"BASIC"|"IN_AWS"|string;
   export interface TerminateRecoveryInstancesRequest {
     /**
      * The IDs of the Recovery Instances that should be terminated.

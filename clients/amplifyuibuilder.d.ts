@@ -20,11 +20,11 @@ declare class AmplifyUIBuilder extends Service {
    */
   createComponent(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateComponentResponse) => void): Request<AmplifyUIBuilder.Types.CreateComponentResponse, AWSError>;
   /**
-   * Creates a new form for an Amplify.
+   * Creates a new form for an Amplify app.
    */
   createForm(params: AmplifyUIBuilder.Types.CreateFormRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateFormResponse) => void): Request<AmplifyUIBuilder.Types.CreateFormResponse, AWSError>;
   /**
-   * Creates a new form for an Amplify.
+   * Creates a new form for an Amplify app.
    */
   createForm(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.CreateFormResponse) => void): Request<AmplifyUIBuilder.Types.CreateFormResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class AmplifyUIBuilder extends Service {
    */
   refreshToken(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.RefreshTokenResponse) => void): Request<AmplifyUIBuilder.Types.RefreshTokenResponse, AWSError>;
   /**
-   * Starts a code generation job for for a specified Amplify app and backend environment.
+   * Starts a code generation job for a specified Amplify app and backend environment.
    */
   startCodegenJob(params: AmplifyUIBuilder.Types.StartCodegenJobRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.StartCodegenJobResponse) => void): Request<AmplifyUIBuilder.Types.StartCodegenJobResponse, AWSError>;
   /**
-   * Starts a code generation job for for a specified Amplify app and backend environment.
+   * Starts a code generation job for a specified Amplify app and backend environment.
    */
   startCodegenJob(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.StartCodegenJobResponse) => void): Request<AmplifyUIBuilder.Types.StartCodegenJobResponse, AWSError>;
   /**
@@ -250,6 +250,20 @@ declare namespace AmplifyUIBuilder {
      * A key-value pair that specifies the state property name and its initial value.
      */
     state?: MutationActionSetStateParameter;
+  }
+  export interface ApiConfiguration {
+    /**
+     * The configuration for an application using GraphQL APIs.
+     */
+    graphQLConfig?: GraphQLRenderConfig;
+    /**
+     * The configuration for an application using DataStore APIs.
+     */
+    dataStoreConfig?: DataStoreRenderConfig;
+    /**
+     * The configuration for an application with no API being used.
+     */
+    noApiConfig?: NoApiRenderConfig;
   }
   export type AppId = string;
   export type AssociatedFieldsList = String[];
@@ -968,6 +982,8 @@ declare namespace AmplifyUIBuilder {
      */
     entity?: Theme;
   }
+  export interface DataStoreRenderConfig {
+  }
   export interface DeleteComponentRequest {
     /**
      * The unique ID of the Amplify app associated with the component to delete.
@@ -1572,6 +1588,28 @@ declare namespace AmplifyUIBuilder {
      */
     theme?: Theme;
   }
+  export interface GraphQLRenderConfig {
+    /**
+     * The path to the GraphQL types file, relative to the component output directory.
+     */
+    typesFilePath: String;
+    /**
+     * The path to the GraphQL queries file, relative to the component output directory.
+     */
+    queriesFilePath: String;
+    /**
+     * The path to the GraphQL mutations file, relative to the component output directory.
+     */
+    mutationsFilePath: String;
+    /**
+     * The path to the GraphQL subscriptions file, relative to the component output directory.
+     */
+    subscriptionsFilePath: String;
+    /**
+     * The path to the GraphQL fragments file, relative to the component output directory.
+     */
+    fragmentsFilePath: String;
+  }
   export type IdentifierList = String[];
   export type Integer = number;
   export type JSModule = "es2020"|"esnext"|string;
@@ -1708,6 +1746,8 @@ declare namespace AmplifyUIBuilder {
      */
     set: ComponentProperty;
   }
+  export interface NoApiRenderConfig {
+  }
   export type NumValues = Integer[];
   export type OperandType = string;
   export interface Predicate {
@@ -1782,6 +1822,10 @@ declare namespace AmplifyUIBuilder {
      * Specifies whether the code generation job should render inline source maps.
      */
     inlineSourceMap?: Boolean;
+    /**
+     * The API configuration for the code generation job.
+     */
+    apiConfiguration?: ApiConfiguration;
   }
   export interface RefreshTokenRequest {
     /**

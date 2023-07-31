@@ -12,11 +12,11 @@ declare class CodeStarconnections extends Service {
   constructor(options?: CodeStarconnections.Types.ClientConfiguration)
   config: Config & CodeStarconnections.Types.ClientConfiguration;
   /**
-   * Creates a connection that can then be given to other AWS services like CodePipeline so that it can access third-party code repositories. The connection is in pending status until the third-party connection handshake is completed from the console.
+   * Creates a connection that can then be given to other Amazon Web Services services like CodePipeline so that it can access third-party code repositories. The connection is in pending status until the third-party connection handshake is completed from the console.
    */
   createConnection(params: CodeStarconnections.Types.CreateConnectionInput, callback?: (err: AWSError, data: CodeStarconnections.Types.CreateConnectionOutput) => void): Request<CodeStarconnections.Types.CreateConnectionOutput, AWSError>;
   /**
-   * Creates a connection that can then be given to other AWS services like CodePipeline so that it can access third-party code repositories. The connection is in pending status until the third-party connection handshake is completed from the console.
+   * Creates a connection that can then be given to other Amazon Web Services services like CodePipeline so that it can access third-party code repositories. The connection is in pending status until the third-party connection handshake is completed from the console.
    */
   createConnection(callback?: (err: AWSError, data: CodeStarconnections.Types.CreateConnectionOutput) => void): Request<CodeStarconnections.Types.CreateConnectionOutput, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class CodeStarconnections extends Service {
    */
   tagResource(callback?: (err: AWSError, data: CodeStarconnections.Types.TagResourceOutput) => void): Request<CodeStarconnections.Types.TagResourceOutput, AWSError>;
   /**
-   * Removes tags from an AWS resource.
+   * Removes tags from an Amazon Web Services resource.
    */
   untagResource(params: CodeStarconnections.Types.UntagResourceInput, callback?: (err: AWSError, data: CodeStarconnections.Types.UntagResourceOutput) => void): Request<CodeStarconnections.Types.UntagResourceOutput, AWSError>;
   /**
-   * Removes tags from an AWS resource.
+   * Removes tags from an Amazon Web Services resource.
    */
   untagResource(callback?: (err: AWSError, data: CodeStarconnections.Types.UntagResourceOutput) => void): Request<CodeStarconnections.Types.UntagResourceOutput, AWSError>;
   /**
@@ -113,11 +113,11 @@ declare namespace CodeStarconnections {
   export type AmazonResourceName = string;
   export interface Connection {
     /**
-     * The name of the connection. Connection names must be unique in an AWS user account.
+     * The name of the connection. Connection names must be unique in an Amazon Web Services account.
      */
     ConnectionName?: ConnectionName;
     /**
-     * The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection reference when the connection is shared between AWS services.  The ARN is never reused if the connection is deleted. 
+     * The Amazon Resource Name (ARN) of the connection. The ARN is used as the connection reference when the connection is shared between Amazon Web Services.  The ARN is never reused if the connection is deleted. 
      */
     ConnectionArn?: ConnectionArn;
     /**
@@ -147,7 +147,7 @@ declare namespace CodeStarconnections {
      */
     ProviderType?: ProviderType;
     /**
-     * The name of the connection to be created. The name must be unique in the calling AWS account.
+     * The name of the connection to be created.
      */
     ConnectionName: ConnectionName;
     /**
@@ -161,7 +161,7 @@ declare namespace CodeStarconnections {
   }
   export interface CreateConnectionOutput {
     /**
-     * The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between AWS services.  The ARN is never reused if the connection is deleted. 
+     * The Amazon Resource Name (ARN) of the connection to be created. The ARN is used as the connection reference when the connection is shared between Amazon Web Services services.  The ARN is never reused if the connection is deleted. 
      */
     ConnectionArn: ConnectionArn;
     /**
@@ -171,7 +171,7 @@ declare namespace CodeStarconnections {
   }
   export interface CreateHostInput {
     /**
-     * The name of the host to be created. The name must be unique in the calling AWS account.
+     * The name of the host to be created.
      */
     Name: HostName;
     /**
@@ -348,7 +348,7 @@ declare namespace CodeStarconnections {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type ProviderType = "Bitbucket"|"GitHub"|"GitHubEnterpriseServer"|string;
+  export type ProviderType = "Bitbucket"|"GitHub"|"GitHubEnterpriseServer"|"GitLab"|string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SubnetId = string;

@@ -12,11 +12,11 @@ declare class LookoutEquipment extends Service {
   constructor(options?: LookoutEquipment.Types.ClientConfiguration)
   config: Config & LookoutEquipment.Types.ClientConfiguration;
   /**
-   * Creates a container for a collection of data being ingested for analysis. The dataset contains the metadata describing where the data is and what the data actually looks like. In other words, it contains the location of the data source, the data schema, and other information. A dataset also contains any tags associated with the ingested data. 
+   * Creates a container for a collection of data being ingested for analysis. The dataset contains the metadata describing where the data is and what the data actually looks like. For example, it contains the location of the data source, the data schema, and other information. A dataset also contains any tags associated with the ingested data. 
    */
   createDataset(params: LookoutEquipment.Types.CreateDatasetRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.CreateDatasetResponse) => void): Request<LookoutEquipment.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates a container for a collection of data being ingested for analysis. The dataset contains the metadata describing where the data is and what the data actually looks like. In other words, it contains the location of the data source, the data schema, and other information. A dataset also contains any tags associated with the ingested data. 
+   * Creates a container for a collection of data being ingested for analysis. The dataset contains the metadata describing where the data is and what the data actually looks like. For example, it contains the location of the data source, the data schema, and other information. A dataset also contains any tags associated with the ingested data. 
    */
   createDataset(callback?: (err: AWSError, data: LookoutEquipment.Types.CreateDatasetResponse) => void): Request<LookoutEquipment.Types.CreateDatasetResponse, AWSError>;
   /**
@@ -92,6 +92,14 @@ declare class LookoutEquipment extends Service {
    */
   deleteModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the resource policy attached to the resource.
+   */
+  deleteResourcePolicy(params: LookoutEquipment.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the resource policy attached to the resource.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Provides information on a specific data ingestion job such as creation time, dataset ARN, and status.
    */
   describeDataIngestionJob(params: LookoutEquipment.Types.DescribeDataIngestionJobRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeDataIngestionJobResponse) => void): Request<LookoutEquipment.Types.DescribeDataIngestionJobResponse, AWSError>;
@@ -139,6 +147,38 @@ declare class LookoutEquipment extends Service {
    * Provides a JSON containing the overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
    */
   describeModel(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeModelResponse) => void): Request<LookoutEquipment.Types.DescribeModelResponse, AWSError>;
+  /**
+   * Retrieves information about a specific machine learning model version.
+   */
+  describeModelVersion(params: LookoutEquipment.Types.DescribeModelVersionRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeModelVersionResponse) => void): Request<LookoutEquipment.Types.DescribeModelVersionResponse, AWSError>;
+  /**
+   * Retrieves information about a specific machine learning model version.
+   */
+  describeModelVersion(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeModelVersionResponse) => void): Request<LookoutEquipment.Types.DescribeModelVersionResponse, AWSError>;
+  /**
+   * Provides the details of a resource policy attached to a resource.
+   */
+  describeResourcePolicy(params: LookoutEquipment.Types.DescribeResourcePolicyRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeResourcePolicyResponse) => void): Request<LookoutEquipment.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
+   * Provides the details of a resource policy attached to a resource.
+   */
+  describeResourcePolicy(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeResourcePolicyResponse) => void): Request<LookoutEquipment.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
+   * Imports a dataset.
+   */
+  importDataset(params: LookoutEquipment.Types.ImportDatasetRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ImportDatasetResponse) => void): Request<LookoutEquipment.Types.ImportDatasetResponse, AWSError>;
+  /**
+   * Imports a dataset.
+   */
+  importDataset(callback?: (err: AWSError, data: LookoutEquipment.Types.ImportDatasetResponse) => void): Request<LookoutEquipment.Types.ImportDatasetResponse, AWSError>;
+  /**
+   * Imports a model that has been trained successfully.
+   */
+  importModelVersion(params: LookoutEquipment.Types.ImportModelVersionRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ImportModelVersionResponse) => void): Request<LookoutEquipment.Types.ImportModelVersionResponse, AWSError>;
+  /**
+   * Imports a model that has been trained successfully.
+   */
+  importModelVersion(callback?: (err: AWSError, data: LookoutEquipment.Types.ImportModelVersionResponse) => void): Request<LookoutEquipment.Types.ImportModelVersionResponse, AWSError>;
   /**
    * Provides a list of all data ingestion jobs, including dataset name and ARN, S3 location of the input data, status, and so on. 
    */
@@ -196,6 +236,14 @@ declare class LookoutEquipment extends Service {
    */
   listLabels(callback?: (err: AWSError, data: LookoutEquipment.Types.ListLabelsResponse) => void): Request<LookoutEquipment.Types.ListLabelsResponse, AWSError>;
   /**
+   * Generates a list of all model versions for a given model, including the model version, model version ARN, and status. To list a subset of versions, use the MaxModelVersion and MinModelVersion fields.
+   */
+  listModelVersions(params: LookoutEquipment.Types.ListModelVersionsRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListModelVersionsResponse) => void): Request<LookoutEquipment.Types.ListModelVersionsResponse, AWSError>;
+  /**
+   * Generates a list of all model versions for a given model, including the model version, model version ARN, and status. To list a subset of versions, use the MaxModelVersion and MinModelVersion fields.
+   */
+  listModelVersions(callback?: (err: AWSError, data: LookoutEquipment.Types.ListModelVersionsResponse) => void): Request<LookoutEquipment.Types.ListModelVersionsResponse, AWSError>;
+  /**
    * Generates a list of all models in the account, including model name and ARN, dataset, and status. 
    */
   listModels(params: LookoutEquipment.Types.ListModelsRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListModelsResponse) => void): Request<LookoutEquipment.Types.ListModelsResponse, AWSError>;
@@ -219,6 +267,14 @@ declare class LookoutEquipment extends Service {
    * Lists all the tags for a specified resource, including key and value. 
    */
   listTagsForResource(callback?: (err: AWSError, data: LookoutEquipment.Types.ListTagsForResourceResponse) => void): Request<LookoutEquipment.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Creates a resource control policy for a given resource.
+   */
+  putResourcePolicy(params: LookoutEquipment.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.PutResourcePolicyResponse) => void): Request<LookoutEquipment.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Creates a resource control policy for a given resource.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: LookoutEquipment.Types.PutResourcePolicyResponse) => void): Request<LookoutEquipment.Types.PutResourcePolicyResponse, AWSError>;
   /**
    * Starts a data ingestion job. Amazon Lookout for Equipment returns the job status. 
    */
@@ -259,6 +315,14 @@ declare class LookoutEquipment extends Service {
    * Removes a specific tag from a given resource. The tag is specified by its key. 
    */
   untagResource(callback?: (err: AWSError, data: LookoutEquipment.Types.UntagResourceResponse) => void): Request<LookoutEquipment.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Sets the active model version for a given machine learning model.
+   */
+  updateActiveModelVersion(params: LookoutEquipment.Types.UpdateActiveModelVersionRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.UpdateActiveModelVersionResponse) => void): Request<LookoutEquipment.Types.UpdateActiveModelVersionResponse, AWSError>;
+  /**
+   * Sets the active model version for a given machine learning model.
+   */
+  updateActiveModelVersion(callback?: (err: AWSError, data: LookoutEquipment.Types.UpdateActiveModelVersionResponse) => void): Request<LookoutEquipment.Types.UpdateActiveModelVersionResponse, AWSError>;
   /**
    * Updates an inference scheduler. 
    */
@@ -419,7 +483,7 @@ declare namespace LookoutEquipment {
      */
     LabelGroupName?: LabelGroupName;
     /**
-     *  The ARN of the label group that you have created. 
+     *  The Amazon Resource Name (ARN) of the label group that you have created. 
      */
     LabelGroupArn?: LabelGroupArn;
   }
@@ -594,7 +658,7 @@ declare namespace LookoutEquipment {
      */
     InlineDataSchema?: InlineDataSchema;
   }
-  export type DatasetStatus = "CREATED"|"INGESTION_IN_PROGRESS"|"ACTIVE"|string;
+  export type DatasetStatus = "CREATED"|"INGESTION_IN_PROGRESS"|"ACTIVE"|"IMPORT_IN_PROGRESS"|string;
   export type DatasetSummaries = DatasetSummary[];
   export interface DatasetSummary {
     /**
@@ -647,6 +711,12 @@ declare namespace LookoutEquipment {
      * The name of the ML model to be deleted. 
      */
     ModelName: ModelName;
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.
+     */
+    ResourceArn: ResourceArn;
   }
   export interface DescribeDataIngestionJobRequest {
     /**
@@ -704,6 +774,10 @@ declare namespace LookoutEquipment {
      *  Indicates the latest timestamp corresponding to data that was successfully ingested during this specific ingestion job. 
      */
     DataEndTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the source dataset from which the data used for the data ingestion job was imported from.
+     */
+    SourceDatasetArn?: DatasetArn;
   }
   export interface DescribeDatasetRequest {
     /**
@@ -764,6 +838,10 @@ declare namespace LookoutEquipment {
      *  Indicates the latest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset. 
      */
     DataEndTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the source dataset from which the current data being described was imported from.
+     */
+    SourceDatasetArn?: DatasetArn;
   }
   export interface DescribeInferenceSchedulerRequest {
     /**
@@ -841,7 +919,7 @@ declare namespace LookoutEquipment {
      */
     LabelGroupName?: LabelGroupName;
     /**
-     *  The ARN of the label group. 
+     *  The Amazon Resource Name (ARN) of the label group. 
      */
     LabelGroupArn?: LabelGroupArn;
     /**
@@ -873,7 +951,7 @@ declare namespace LookoutEquipment {
      */
     LabelGroupName?: LabelGroupName;
     /**
-     *  The ARN of the requested label group. 
+     *  The Amazon Resource Name (ARN) of the requested label group. 
      */
     LabelGroupArn?: LabelGroupArn;
     /**
@@ -1000,6 +1078,184 @@ declare namespace LookoutEquipment {
      * Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.
      */
     OffCondition?: OffCondition;
+    /**
+     * The Amazon Resource Name (ARN) of the source model version. This field appears if the active model version was imported.
+     */
+    SourceModelVersionArn?: ModelVersionArn;
+    /**
+     * The date and time when the import job was started. This field appears if the active model version was imported.
+     */
+    ImportJobStartTime?: Timestamp;
+    /**
+     * The date and time when the import job was completed. This field appears if the active model version was imported.
+     */
+    ImportJobEndTime?: Timestamp;
+    /**
+     * The name of the model version used by the inference schedular when running a scheduled inference execution.
+     */
+    ActiveModelVersion?: ModelVersion;
+    /**
+     * The Amazon Resource Name (ARN) of the model version used by the inference scheduler when running a scheduled inference execution.
+     */
+    ActiveModelVersionArn?: ModelVersionArn;
+    /**
+     * The date the active model version was activated.
+     */
+    ModelVersionActivatedAt?: Timestamp;
+    /**
+     * The model version that was set as the active model version prior to the current active model version.
+     */
+    PreviousActiveModelVersion?: ModelVersion;
+    /**
+     * The ARN of the model version that was set as the active model version prior to the current active model version.
+     */
+    PreviousActiveModelVersionArn?: ModelVersionArn;
+    /**
+     * The date and time when the previous active model version was activated.
+     */
+    PreviousModelVersionActivatedAt?: Timestamp;
+  }
+  export interface DescribeModelVersionRequest {
+    /**
+     * The name of the machine learning model that this version belongs to.
+     */
+    ModelName: ModelName;
+    /**
+     * The version of the machine learning model.
+     */
+    ModelVersion: ModelVersion;
+  }
+  export interface DescribeModelVersionResponse {
+    /**
+     * The name of the machine learning model that this version belongs to.
+     */
+    ModelName?: ModelName;
+    /**
+     * The Amazon Resource Name (ARN) of the parent machine learning model that this version belong to.
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The version of the machine learning model.
+     */
+    ModelVersion?: ModelVersion;
+    /**
+     * The Amazon Resource Name (ARN) of the model version.
+     */
+    ModelVersionArn?: ModelVersionArn;
+    /**
+     * The current status of the model version.
+     */
+    Status?: ModelVersionStatus;
+    /**
+     * Indicates whether this model version was created by training or by importing.
+     */
+    SourceType?: ModelVersionSourceType;
+    /**
+     * The name of the dataset used to train the model version.
+     */
+    DatasetName?: DatasetName;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset used to train the model version.
+     */
+    DatasetArn?: DatasetArn;
+    /**
+     * The schema of the data used to train the model version.
+     */
+    Schema?: InlineDataSchema;
+    LabelsInputConfiguration?: LabelsInputConfiguration;
+    /**
+     * The date on which the training data began being gathered. If you imported the version, this is the date that the training data in the source version began being gathered.
+     */
+    TrainingDataStartTime?: Timestamp;
+    /**
+     * The date on which the training data finished being gathered. If you imported the version, this is the date that the training data in the source version finished being gathered.
+     */
+    TrainingDataEndTime?: Timestamp;
+    /**
+     * The date on which the data in the evaluation set began being gathered. If you imported the version, this is the date that the evaluation set data in the source version began being gathered.
+     */
+    EvaluationDataStartTime?: Timestamp;
+    /**
+     * The date on which the data in the evaluation set began being gathered. If you imported the version, this is the date that the evaluation set data in the source version finished being gathered.
+     */
+    EvaluationDataEndTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the role that was used to train the model version.
+     */
+    RoleArn?: IamRoleArn;
+    DataPreProcessingConfiguration?: DataPreProcessingConfiguration;
+    /**
+     * The time when the training of the version began.
+     */
+    TrainingExecutionStartTime?: Timestamp;
+    /**
+     * The time when the training of the version completed.
+     */
+    TrainingExecutionEndTime?: Timestamp;
+    /**
+     * The failure message if the training of the model version failed.
+     */
+    FailedReason?: BoundedLengthString;
+    /**
+     * Shows an aggregated summary, in JSON format, of the model's performance within the evaluation time range. These metrics are created when evaluating the model.
+     */
+    ModelMetrics?: ModelMetrics;
+    /**
+     * Indicates the last time the machine learning model version was updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * Indicates the time and date at which the machine learning model version was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The identifier of the KMS key key used to encrypt model version data by Amazon Lookout for Equipment.
+     */
+    ServerSideKmsKeyId?: KmsKeyArn;
+    /**
+     * Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.
+     */
+    OffCondition?: OffCondition;
+    /**
+     * If model version was imported, then this field is the arn of the source model version.
+     */
+    SourceModelVersionArn?: ModelVersionArn;
+    /**
+     * The date and time when the import job began. This field appears if the model version was imported.
+     */
+    ImportJobStartTime?: Timestamp;
+    /**
+     * The date and time when the import job completed. This field appears if the model version was imported.
+     */
+    ImportJobEndTime?: Timestamp;
+    /**
+     * The size in bytes of the imported data. This field appears if the model version was imported.
+     */
+    ImportedDataSizeInBytes?: DataSizeInBytes;
+  }
+  export interface DescribeResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that is associated with the resource policy.
+     */
+    ResourceArn: ResourceArn;
+  }
+  export interface DescribeResourcePolicyResponse {
+    /**
+     * A unique identifier for a revision of the resource policy.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+    /**
+     * The resource policy in a JSON-formatted string.
+     */
+    ResourcePolicy?: Policy;
+    /**
+     * The time when the resource policy was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time when the resource policy was last modified.
+     */
+    LastModifiedTime?: Timestamp;
   }
   export interface DuplicateTimestamps {
     /**
@@ -1015,6 +1271,99 @@ declare namespace LookoutEquipment {
   export type Float = number;
   export type IamRoleArn = string;
   export type IdempotenceToken = string;
+  export interface ImportDatasetRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset to import.
+     */
+    SourceDatasetArn: DatasetArn;
+    /**
+     * The name of the machine learning dataset to be created. If the dataset already exists, Amazon Lookout for Equipment overwrites the existing dataset. If you don't specify this field, it is filled with the name of the source dataset.
+     */
+    DatasetName?: DatasetName;
+    /**
+     * A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. 
+     */
+    ClientToken: IdempotenceToken;
+    /**
+     * Provides the identifier of the KMS key key used to encrypt model data by Amazon Lookout for Equipment. 
+     */
+    ServerSideKmsKeyId?: NameOrArn;
+    /**
+     * Any tags associated with the dataset to be created.
+     */
+    Tags?: TagList;
+  }
+  export interface ImportDatasetResponse {
+    /**
+     * The name of the created machine learning dataset.
+     */
+    DatasetName?: DatasetName;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset that was imported.
+     */
+    DatasetArn?: DatasetArn;
+    /**
+     * The status of the ImportDataset operation.
+     */
+    Status?: DatasetStatus;
+    /**
+     * A unique identifier for the job of importing the dataset.
+     */
+    JobId?: IngestionJobId;
+  }
+  export interface ImportModelVersionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the model version to import.
+     */
+    SourceModelVersionArn: ModelVersionArn;
+    /**
+     * The name for the machine learning model to be created. If the model already exists, Amazon Lookout for Equipment creates a new version. If you do not specify this field, it is filled with the name of the source model.
+     */
+    ModelName?: ModelName;
+    /**
+     * The name of the dataset for the machine learning model being imported. 
+     */
+    DatasetName: DatasetIdentifier;
+    LabelsInputConfiguration?: LabelsInputConfiguration;
+    /**
+     * A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. 
+     */
+    ClientToken: IdempotenceToken;
+    /**
+     * The Amazon Resource Name (ARN) of a role with permission to access the data source being used to create the machine learning model. 
+     */
+    RoleArn?: IamRoleArn;
+    /**
+     * Provides the identifier of the KMS key key used to encrypt model data by Amazon Lookout for Equipment. 
+     */
+    ServerSideKmsKeyId?: NameOrArn;
+    /**
+     * The tags associated with the machine learning model to be created. 
+     */
+    Tags?: TagList;
+  }
+  export interface ImportModelVersionResponse {
+    /**
+     * The name for the machine learning model.
+     */
+    ModelName?: ModelName;
+    /**
+     * The Amazon Resource Name (ARN) of the model being created. 
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The Amazon Resource Name (ARN) of the model version being created. 
+     */
+    ModelVersionArn?: ModelVersionArn;
+    /**
+     * The version of the model being created.
+     */
+    ModelVersion?: ModelVersion;
+    /**
+     * The status of the ImportModelVersion operation. 
+     */
+    Status?: ModelVersionStatus;
+  }
   export type InferenceEventSummaries = InferenceEventSummary[];
   export interface InferenceEventSummary {
     /**
@@ -1124,7 +1473,7 @@ declare namespace LookoutEquipment {
      */
     S3OutputConfiguration: InferenceS3OutputConfiguration;
     /**
-     * The ID number for the AWS KMS key used to encrypt the inference output. 
+     * The ID number for the KMS key key used to encrypt the inference output. 
      */
     KmsKeyId?: NameOrArn;
   }
@@ -1208,7 +1557,7 @@ declare namespace LookoutEquipment {
     S3InputConfiguration: IngestionS3InputConfiguration;
   }
   export type IngestionJobId = string;
-  export type IngestionJobStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
+  export type IngestionJobStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|string;
   export interface IngestionS3InputConfiguration {
     /**
      * The name of the S3 bucket used for the input data for the data ingestion. 
@@ -1219,7 +1568,7 @@ declare namespace LookoutEquipment {
      */
     Prefix?: S3Prefix;
     /**
-     *  Pattern for matching the Amazon S3 files which will be used for ingestion. If no KeyPattern is provided, we will use the default hierarchy file structure, which is same as KeyPattern {prefix}/{component_name}/* 
+     *  The pattern for matching the Amazon S3 files that will be used for ingestion. If the schema was created previously without any KeyPattern, then the default KeyPattern {prefix}/{component_name}/* is used to download files from Amazon S3 according to the schema. This field is required when ingestion is being done for the first time. Valid Values: {prefix}/{component_name}_* | {prefix}/{component_name}/* | {prefix}/{component_name}[DELIMITER]* (Allowed delimiters : space, dot, underscore, hyphen)
      */
     KeyPattern?: KeyPattern;
   }
@@ -1256,7 +1605,7 @@ declare namespace LookoutEquipment {
      */
     LabelGroupName?: LabelGroupName;
     /**
-     *  The ARN of the label group. 
+     *  The Amazon Resource Name (ARN) of the label group. 
      */
     LabelGroupArn?: LabelGroupArn;
     /**
@@ -1281,7 +1630,7 @@ declare namespace LookoutEquipment {
      */
     LabelId?: LabelId;
     /**
-     *  The ARN of the label group. 
+     *  The Amazon Resource Name (ARN) of the label group. 
      */
     LabelGroupArn?: LabelGroupArn;
     /**
@@ -1414,7 +1763,7 @@ declare namespace LookoutEquipment {
      */
     IntervalStartTime: Timestamp;
     /**
-     * Returns all the inference events with an end start time equal to or greater than less than the end time given
+     * Returns all the inference events with an end start time equal to or greater than less than the end time given.
      */
     IntervalEndTime: Timestamp;
   }
@@ -1482,7 +1831,7 @@ declare namespace LookoutEquipment {
      */
     ModelName?: ModelName;
     /**
-     * Specifies the current status of the inference schedulers to list.
+     * Specifies the current status of the inference schedulers.
      */
     Status?: InferenceSchedulerStatus;
   }
@@ -1559,6 +1908,54 @@ declare namespace LookoutEquipment {
      *  A summary of the items in the label group. 
      */
     LabelSummaries?: LabelSummaries;
+  }
+  export interface ListModelVersionsRequest {
+    /**
+     * Then name of the machine learning model for which the model versions are to be listed.
+     */
+    ModelName: ModelName;
+    /**
+     * If the total number of results exceeds the limit that the response can display, the response returns an opaque pagination token indicating where to continue the listing of machine learning model versions. Use this token in the NextToken field in the request to list the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Specifies the maximum number of machine learning model versions to list.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Filter the results based on the current status of the model version.
+     */
+    Status?: ModelVersionStatus;
+    /**
+     * Filter the results based on the way the model version was generated.
+     */
+    SourceType?: ModelVersionSourceType;
+    /**
+     * Filter results to return all the model versions created before this time.
+     */
+    CreatedAtEndTime?: Timestamp;
+    /**
+     * Filter results to return all the model versions created after this time.
+     */
+    CreatedAtStartTime?: Timestamp;
+    /**
+     * Specifies the highest version of the model to return in the list.
+     */
+    MaxModelVersion?: ModelVersion;
+    /**
+     * Specifies the lowest version of the model to return in the list.
+     */
+    MinModelVersion?: ModelVersion;
+  }
+  export interface ListModelVersionsResponse {
+    /**
+     * If the total number of results exceeds the limit that the response can display, the response returns an opaque pagination token indicating where to continue the listing of machine learning model versions. Use this token in the NextToken field in the request to list the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * Provides information on the specified model version, including the created time, model and dataset ARNs, and status.
+     */
+    ModelVersionSummaries?: ModelVersionSummaries;
   }
   export interface ListModelsRequest {
     /**
@@ -1653,7 +2050,7 @@ declare namespace LookoutEquipment {
   export type ModelArn = string;
   export type ModelMetrics = string;
   export type ModelName = string;
-  export type ModelStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
+  export type ModelStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|string;
   export type ModelSummaries = ModelSummary[];
   export interface ModelSummary {
     /**
@@ -1680,6 +2077,49 @@ declare namespace LookoutEquipment {
      * The time at which the specific model was created. 
      */
     CreatedAt?: Timestamp;
+    /**
+     * The model version that the inference scheduler uses to run an inference execution.
+     */
+    ActiveModelVersion?: ModelVersion;
+    /**
+     * The Amazon Resource Name (ARN) of the model version that is set as active. The active model version is the model version that the inference scheduler uses to run an inference execution.
+     */
+    ActiveModelVersionArn?: ModelVersionArn;
+  }
+  export type ModelVersion = number;
+  export type ModelVersionArn = string;
+  export type ModelVersionSourceType = "TRAINING"|"RETRAINING"|"IMPORT"|string;
+  export type ModelVersionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|"CANCELED"|string;
+  export type ModelVersionSummaries = ModelVersionSummary[];
+  export interface ModelVersionSummary {
+    /**
+     * The name of the model that this model version is a version of.
+     */
+    ModelName?: ModelName;
+    /**
+     * The Amazon Resource Name (ARN) of the model that this model version is a version of.
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The version of the model.
+     */
+    ModelVersion?: ModelVersion;
+    /**
+     * The Amazon Resource Name (ARN) of the model version.
+     */
+    ModelVersionArn?: ModelVersionArn;
+    /**
+     * The time when this model version was created.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * The current status of the model version.
+     */
+    Status?: ModelVersionStatus;
+    /**
+     * Indicates how this model version was generated.
+     */
+    SourceType?: ModelVersionSourceType;
   }
   export interface MonotonicValues {
     /**
@@ -1701,6 +2141,37 @@ declare namespace LookoutEquipment {
   export type NameOrArn = string;
   export type NextToken = string;
   export type OffCondition = string;
+  export type Policy = string;
+  export type PolicyRevisionId = string;
+  export interface PutResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which the policy is being created.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The JSON-formatted resource policy to create.
+     */
+    ResourcePolicy: Policy;
+    /**
+     * A unique identifier for a revision of the resource policy.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+    /**
+     * A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. 
+     */
+    ClientToken: IdempotenceToken;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which the policy was created.
+     */
+    ResourceArn?: ResourceArn;
+    /**
+     * A unique identifier for a revision of the resource policy.
+     */
+    PolicyRevisionId?: PolicyRevisionId;
+  }
+  export type ResourceArn = string;
   export type S3Bucket = string;
   export type S3Key = string;
   export interface S3Object {
@@ -1709,7 +2180,7 @@ declare namespace LookoutEquipment {
      */
     Bucket: S3Bucket;
     /**
-     * The AWS Key Management Service (AWS KMS) key being used to encrypt the S3 object. Without this key, data in the bucket is not accessible. 
+     * The Amazon Web Services Key Management Service (KMS key) key being used to encrypt the S3 object. Without this key, data in the bucket is not accessible. 
      */
     Key: S3Key;
   }
@@ -1907,6 +2378,42 @@ declare namespace LookoutEquipment {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateActiveModelVersionRequest {
+    /**
+     * The name of the machine learning model for which the active model version is being set.
+     */
+    ModelName: ModelName;
+    /**
+     * The version of the machine learning model for which the active model version is being set.
+     */
+    ModelVersion: ModelVersion;
+  }
+  export interface UpdateActiveModelVersionResponse {
+    /**
+     * The name of the machine learning model for which the active model version was set.
+     */
+    ModelName?: ModelName;
+    /**
+     * The Amazon Resource Name (ARN) of the machine learning model for which the active model version was set.
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The version that is currently active of the machine learning model for which the active model version was set.
+     */
+    CurrentActiveVersion?: ModelVersion;
+    /**
+     * The previous version that was active of the machine learning model for which the active model version was set.
+     */
+    PreviousActiveVersion?: ModelVersion;
+    /**
+     * The Amazon Resource Name (ARN) of the machine learning model version that is the current active model version.
+     */
+    CurrentActiveVersionArn?: ModelVersionArn;
+    /**
+     * The Amazon Resource Name (ARN) of the machine learning model version that was the previous active model version.
+     */
+    PreviousActiveVersionArn?: ModelVersionArn;
   }
   export interface UpdateInferenceSchedulerRequest {
     /**

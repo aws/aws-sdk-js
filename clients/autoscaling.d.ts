@@ -616,6 +616,13 @@ declare namespace AutoScaling {
      */
     AlarmARN?: ResourceName;
   }
+  export type AlarmList = XmlStringMaxLen255[];
+  export interface AlarmSpecification {
+    /**
+     * The names of one or more CloudWatch alarms to monitor for the instance refresh.
+     */
+    Alarms?: AlarmList;
+  }
   export type Alarms = Alarm[];
   export type AllowedInstanceType = string;
   export type AllowedInstanceTypes = AllowedInstanceType[];
@@ -2987,7 +2994,7 @@ declare namespace AutoScaling {
      */
     SkipMatching?: SkipMatching;
     /**
-     * (Optional) Indicates whether to roll back the Auto Scaling group to its previous configuration if the instance refresh fails. The default is false. A rollback is not supported in the following situations:    There is no desired configuration specified for the instance refresh.   The Auto Scaling group has a launch template that uses an Amazon Web Services Systems Manager parameter instead of an AMI ID for the ImageId property.   The Auto Scaling group uses the launch template's $Latest or $Default version.  
+     * (Optional) Indicates whether to roll back the Auto Scaling group to its previous configuration if the instance refresh fails or a CloudWatch alarm threshold is met. The default is false. A rollback is not supported in the following situations:    There is no desired configuration specified for the instance refresh.   The Auto Scaling group has a launch template that uses an Amazon Web Services Systems Manager parameter instead of an AMI ID for the ImageId property.   The Auto Scaling group uses the launch template's $Latest or $Default version.   For more information, see Undo changes with a rollback in the Amazon EC2 Auto Scaling User Guide.
      */
     AutoRollback?: AutoRollback;
     /**
@@ -2998,6 +3005,10 @@ declare namespace AutoScaling {
      * Choose the behavior that you want Amazon EC2 Auto Scaling to use if instances in Standby state are found. The following lists the valid values:  Terminate  Amazon EC2 Auto Scaling terminates instances that are in Standby.  Ignore  Amazon EC2 Auto Scaling ignores instances that are in Standby and continues to replace instances that are in the InService state.  Wait (default)  Amazon EC2 Auto Scaling waits one hour for you to return the instances to service. Otherwise, the instance refresh will fail.  
      */
     StandbyInstances?: StandbyInstances;
+    /**
+     * (Optional) The CloudWatch alarm specification. CloudWatch alarms can be used to identify any issues and fail the operation if an alarm threshold is met.
+     */
+    AlarmSpecification?: AlarmSpecification;
   }
   export type RefreshStrategy = "Rolling"|string;
   export type ResourceName = string;
@@ -3281,7 +3292,7 @@ declare namespace AutoScaling {
      */
     DesiredConfiguration?: DesiredConfiguration;
     /**
-     * Sets your preferences for the instance refresh so that it performs as expected when you start it. Includes the instance warmup time, the minimum healthy percentage, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in Standby state or protected from scale in are found. You can also choose to enable additional features, such as the following:   Auto rollback   Checkpoints   Skip matching  
+     * Sets your preferences for the instance refresh so that it performs as expected when you start it. Includes the instance warmup time, the minimum healthy percentage, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in Standby state or protected from scale in are found. You can also choose to enable additional features, such as the following:   Auto rollback   Checkpoints   CloudWatch alarms   Skip matching  
      */
     Preferences?: RefreshPreferences;
   }
