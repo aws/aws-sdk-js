@@ -3549,7 +3549,7 @@ declare namespace SageMaker {
      */
     StartTimeOffset?: MonitoringTimeOffsetString;
     /**
-     * If specified, monitoring jobs substract this time from the end time. For information about using offsets for scheduling monitoring jobs, see Schedule Model Quality Monitoring Jobs.
+     * If specified, monitoring jobs subtract this time from the end time. For information about using offsets for scheduling monitoring jobs, see Schedule Model Quality Monitoring Jobs.
      */
     EndTimeOffset?: MonitoringTimeOffsetString;
   }
@@ -7948,7 +7948,7 @@ declare namespace SageMaker {
     ProductionVariants?: ProductionVariantSummaryList;
     DataCaptureConfig?: DataCaptureConfigSummary;
     /**
-     * The status of the endpoint.    OutOfService: Endpoint is not available to take incoming requests.    Creating: CreateEndpoint is executing.    Updating: UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.    SystemUpdating: Endpoint is undergoing maintenance and cannot be updated or deleted or re-scaled until it has completed. This maintenance operation does not change any customer-specified values such as VPC config, KMS encryption, model, instance type, or instance count.    RollingBack: Endpoint fails to scale up or down or change its variant weight and is in the process of rolling back to its previous configuration. Once the rollback completes, endpoint returns to an InService status. This transitional status only applies to an endpoint that has autoscaling enabled and is undergoing variant weight or capacity changes as part of an UpdateEndpointWeightsAndCapacities call or when the UpdateEndpointWeightsAndCapacities operation is called explicitly.    InService: Endpoint is available to process incoming requests.    Deleting: DeleteEndpoint is executing.    Failed: Endpoint could not be created, updated, or re-scaled. Use the FailureReason value returned by DescribeEndpoint for information about the failure. DeleteEndpoint is the only operation that can be performed on a failed endpoint.  
+     * The status of the endpoint.    OutOfService: Endpoint is not available to take incoming requests.    Creating: CreateEndpoint is executing.    Updating: UpdateEndpoint or UpdateEndpointWeightsAndCapacities is executing.    SystemUpdating: Endpoint is undergoing maintenance and cannot be updated or deleted or re-scaled until it has completed. This maintenance operation does not change any customer-specified values such as VPC config, KMS encryption, model, instance type, or instance count.    RollingBack: Endpoint fails to scale up or down or change its variant weight and is in the process of rolling back to its previous configuration. Once the rollback completes, endpoint returns to an InService status. This transitional status only applies to an endpoint that has autoscaling enabled and is undergoing variant weight or capacity changes as part of an UpdateEndpointWeightsAndCapacities call or when the UpdateEndpointWeightsAndCapacities operation is called explicitly.    InService: Endpoint is available to process incoming requests.    Deleting: DeleteEndpoint is executing.    Failed: Endpoint could not be created, updated, or re-scaled. Use the FailureReason value returned by DescribeEndpoint for information about the failure. DeleteEndpoint is the only operation that can be performed on a failed endpoint.    UpdateRollbackFailed: Both the rolling deployment and auto-rollback failed. Your endpoint is in service with a mix of the old and new endpoint configurations. For information about how to remedy this issue and restore the endpoint's status to InService, see Rolling Deployments.  
      */
     EndpointStatus: EndpointStatus;
     /**
@@ -11379,6 +11379,7 @@ declare namespace SageMaker {
     Value: MetricValue;
   }
   export type FinalMetricDataList = MetricData[];
+  export type FlatInvocations = "Continue"|"Stop"|string;
   export type Float = number;
   export type FlowDefinitionArn = string;
   export type FlowDefinitionName = string;
@@ -16731,7 +16732,7 @@ declare namespace SageMaker {
   export type ModelInsightsLocation = string;
   export interface ModelLatencyThreshold {
     /**
-     * The model latency percentile threshold.
+     * The model latency percentile threshold. For custom load tests, specify the value as P95.
      */
     Percentile?: String64;
     /**
@@ -17795,6 +17796,7 @@ declare namespace SageMaker {
   }
   export type NotificationTopicArn = string;
   export type NumberOfHumanWorkersPerDataObject = number;
+  export type NumberOfSteps = number;
   export type ObjectiveStatus = "Succeeded"|"Pending"|"Failed"|string;
   export type ObjectiveStatusCounter = number;
   export interface ObjectiveStatusCounters {
@@ -18132,7 +18134,7 @@ declare namespace SageMaker {
   export type Percentage = number;
   export interface Phase {
     /**
-     * Specifies how many concurrent users to start with.
+     * Specifies how many concurrent users to start with. The value should be between 1 and 3.
      */
     InitialNumberOfUsers?: InitialNumberOfUsers;
     /**
@@ -18140,7 +18142,7 @@ declare namespace SageMaker {
      */
     SpawnRate?: SpawnRate;
     /**
-     * Specifies how long traffic phase should be.
+     * Specifies how long a traffic phase should be. For custom load tests, the value should be between 120 and 3600. This value should not exceed JobDurationInSeconds.
      */
     DurationInSeconds?: TrafficDurationInSeconds;
   }
@@ -19340,7 +19342,7 @@ declare namespace SageMaker {
      */
     ModelPackageVersionArn?: ModelPackageArn;
     /**
-     * Specifies the maximum duration of the job, in seconds.&gt;
+     * Specifies the maximum duration of the job, in seconds. The maximum value is 7200.
      */
     JobDurationInSeconds?: JobDurationInSeconds;
     /**
@@ -19417,6 +19419,10 @@ declare namespace SageMaker {
      * The interval of time taken by a model to respond as viewed from SageMaker. The interval includes the local communication time taken to send the request and to fetch the response from the container of a model and the time taken to complete the inference in the container.
      */
     ModelLatencyThresholds?: ModelLatencyThresholds;
+    /**
+     * Stops a load test when the number of invocations (TPS) peaks and flattens, which means that the instance has reached capacity. The default value is Stop. If you want the load test to continue after invocations have flattened, set the value to Continue.
+     */
+    FlatInvocations?: FlatInvocations;
   }
   export type RecommendationJobSupportedContentTypes = String[];
   export type RecommendationJobSupportedEndpointType = "RealTime"|"Serverless"|string;
@@ -20146,6 +20152,20 @@ declare namespace SageMaker {
   export type SpawnRate = number;
   export type SplitType = "None"|"Line"|"RecordIO"|"TFRecord"|string;
   export type StageStatus = "CREATING"|"READYTODEPLOY"|"STARTING"|"INPROGRESS"|"DEPLOYED"|"FAILED"|"STOPPING"|"STOPPED"|string;
+  export interface Stairs {
+    /**
+     * Defines how long each traffic step should be.
+     */
+    DurationInSeconds?: TrafficDurationInSeconds;
+    /**
+     * Specifies how many steps to perform during traffic.
+     */
+    NumberOfSteps?: NumberOfSteps;
+    /**
+     * Specifies how many new users to spawn in each step.
+     */
+    UsersPerStep?: UsersPerStep;
+  }
   export interface StartEdgeDeploymentStageRequest {
     /**
      * The name of the edge deployment plan to start.
@@ -20611,13 +20631,17 @@ declare namespace SageMaker {
   export type TrafficDurationInSeconds = number;
   export interface TrafficPattern {
     /**
-     * Defines the traffic patterns.
+     * Defines the traffic patterns. Choose either PHASES or STAIRS.
      */
     TrafficType?: TrafficType;
     /**
      * Defines the phases traffic specification.
      */
     Phases?: Phases;
+    /**
+     * Defines the stairs traffic pattern.
+     */
+    Stairs?: Stairs;
   }
   export interface TrafficRoutingConfig {
     /**
@@ -20638,7 +20662,7 @@ declare namespace SageMaker {
     LinearStepSize?: CapacitySize;
   }
   export type TrafficRoutingConfigType = "ALL_AT_ONCE"|"CANARY"|"LINEAR"|string;
-  export type TrafficType = "PHASES"|string;
+  export type TrafficType = "PHASES"|"STAIRS"|string;
   export type TrainingContainerArgument = string;
   export type TrainingContainerArguments = TrainingContainerArgument[];
   export type TrainingContainerEntrypoint = TrainingContainerEntrypointString[];
@@ -22473,6 +22497,7 @@ declare namespace SageMaker {
      */
     CanvasAppSettings?: CanvasAppSettings;
   }
+  export type UsersPerStep = number;
   export type UtilizationMetric = number;
   export type ValidationFraction = number;
   export type VariantName = string;

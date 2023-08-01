@@ -278,6 +278,14 @@ declare class RDS extends Service {
    */
   deleteDBCluster(callback?: (err: AWSError, data: RDS.Types.DeleteDBClusterResult) => void): Request<RDS.Types.DeleteDBClusterResult, AWSError>;
   /**
+   * Deletes automated backups using the DbClusterResourceId value of the source DB cluster or the Amazon Resource Name (ARN) of the automated backups.
+   */
+  deleteDBClusterAutomatedBackup(params: RDS.Types.DeleteDBClusterAutomatedBackupMessage, callback?: (err: AWSError, data: RDS.Types.DeleteDBClusterAutomatedBackupResult) => void): Request<RDS.Types.DeleteDBClusterAutomatedBackupResult, AWSError>;
+  /**
+   * Deletes automated backups using the DbClusterResourceId value of the source DB cluster or the Amazon Resource Name (ARN) of the automated backups.
+   */
+  deleteDBClusterAutomatedBackup(callback?: (err: AWSError, data: RDS.Types.DeleteDBClusterAutomatedBackupResult) => void): Request<RDS.Types.DeleteDBClusterAutomatedBackupResult, AWSError>;
+  /**
    * Deletes a custom endpoint and removes it from an Amazon Aurora DB cluster.  This action only applies to Aurora DB clusters. 
    */
   deleteDBClusterEndpoint(params: RDS.Types.DeleteDBClusterEndpointMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterEndpoint) => void): Request<RDS.Types.DBClusterEndpoint, AWSError>;
@@ -421,6 +429,14 @@ declare class RDS extends Service {
    * Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account. For more information, see Using SSL/TLS to encrypt a connection to a DB instance in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB cluster in the Amazon Aurora User Guide.
    */
   describeCertificates(callback?: (err: AWSError, data: RDS.Types.CertificateMessage) => void): Request<RDS.Types.CertificateMessage, AWSError>;
+  /**
+   * Displays backups for both current and deleted DB clusters. For example, use this operation to find details about automated backups for previously deleted clusters. Current clusters are returned for both the DescribeDBClusterAutomatedBackups and DescribeDBClusters operations. All parameters are optional.
+   */
+  describeDBClusterAutomatedBackups(params: RDS.Types.DescribeDBClusterAutomatedBackupsMessage, callback?: (err: AWSError, data: RDS.Types.DBClusterAutomatedBackupMessage) => void): Request<RDS.Types.DBClusterAutomatedBackupMessage, AWSError>;
+  /**
+   * Displays backups for both current and deleted DB clusters. For example, use this operation to find details about automated backups for previously deleted clusters. Current clusters are returned for both the DescribeDBClusterAutomatedBackups and DescribeDBClusters operations. All parameters are optional.
+   */
+  describeDBClusterAutomatedBackups(callback?: (err: AWSError, data: RDS.Types.DBClusterAutomatedBackupMessage) => void): Request<RDS.Types.DBClusterAutomatedBackupMessage, AWSError>;
   /**
    * Returns information about backtracks for a DB cluster. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This action only applies to Aurora MySQL DB clusters. 
    */
@@ -3017,6 +3033,108 @@ declare namespace RDS {
      */
     LocalWriteForwardingStatus?: LocalWriteForwardingStatus;
   }
+  export interface DBClusterAutomatedBackup {
+    /**
+     * The name of the database engine for this automated backup.
+     */
+    Engine?: String;
+    /**
+     * The VPC ID associated with the DB cluster.
+     */
+    VpcId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the automated backups.
+     */
+    DBClusterAutomatedBackupsArn?: String;
+    /**
+     * The identifier for the source DB cluster, which can't be changed and which is unique to an Amazon Web Services Region.
+     */
+    DBClusterIdentifier?: String;
+    RestoreWindow?: RestoreWindow;
+    /**
+     * The master user name of the automated backup.
+     */
+    MasterUsername?: String;
+    /**
+     * The resource ID for the source DB cluster, which can't be changed and which is unique to an Amazon Web Services Region.
+     */
+    DbClusterResourceId?: String;
+    /**
+     * The Amazon Web Services Region associated with the automated backup.
+     */
+    Region?: String;
+    /**
+     * The license model information for this DB cluster automated backup.
+     */
+    LicenseModel?: String;
+    /**
+     * A list of status information for an automated backup:    retained - Automated backups for deleted clusters.  
+     */
+    Status?: String;
+    /**
+     * True if mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
+     */
+    IAMDatabaseAuthenticationEnabled?: Boolean;
+    /**
+     * The time when the DB cluster was created, in Universal Coordinated Time (UTC).
+     */
+    ClusterCreateTime?: TStamp;
+    /**
+     * Specifies whether the source DB cluster is encrypted.
+     */
+    StorageEncrypted?: Boolean;
+    /**
+     * For all database engines except Amazon Aurora, AllocatedStorage specifies the allocated storage size in gibibytes (GiB). For Aurora, AllocatedStorage always returns 1, because Aurora DB cluster storage size isn't fixed, but instead automatically adjusts as needed.
+     */
+    AllocatedStorage?: Integer;
+    /**
+     * The version of the database engine for the automated backup.
+     */
+    EngineVersion?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the source DB cluster.
+     */
+    DBClusterArn?: String;
+    /**
+     * The retention period for the automated backups.
+     */
+    BackupRetentionPeriod?: IntegerOptional;
+    /**
+     * The engine mode of the database engine for the automated backup.
+     */
+    EngineMode?: String;
+    /**
+     * The Availability Zones where instances in the DB cluster can be created. For information on Amazon Web Services Regions and Availability Zones, see Regions and Availability Zones.
+     */
+    AvailabilityZones?: AvailabilityZones;
+    /**
+     * The port number that the automated backup used for connections. Default: Inherits from the source DB cluster Valid Values: 1150-65535 
+     */
+    Port?: Integer;
+    /**
+     * The Amazon Web Services KMS key ID for an automated backup. The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+     */
+    KmsKeyId?: String;
+    /**
+     * The storage type associated with the DB cluster. This setting is only for non-Aurora Multi-AZ DB clusters.
+     */
+    StorageType?: String;
+    /**
+     * The IOPS (I/O operations per second) value for the automated backup. This setting is only for non-Aurora Multi-AZ DB clusters.
+     */
+    Iops?: IntegerOptional;
+  }
+  export type DBClusterAutomatedBackupList = DBClusterAutomatedBackup[];
+  export interface DBClusterAutomatedBackupMessage {
+    /**
+     * The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * A list of DBClusterAutomatedBackup backups.
+     */
+    DBClusterAutomatedBackups?: DBClusterAutomatedBackupList;
+  }
   export interface DBClusterBacktrack {
     /**
      * Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster.
@@ -3305,7 +3423,7 @@ declare namespace RDS {
      */
     KmsKeyId?: String;
     /**
-     * The Amazon Resource Name (ARN) for the DB cluster snapshot.
+     * Specifies the Amazon Resource Name (ARN) for the DB cluster snapshot.
      */
     DBClusterSnapshotArn?: String;
     /**
@@ -3325,6 +3443,10 @@ declare namespace RDS {
      * The storage type associated with the DB cluster snapshot. This setting is only for Aurora DB clusters.
      */
     StorageType?: String;
+    /**
+     * Specifies the resource ID of the DB cluster that this DB cluster snapshot was created from.
+     */
+    DbClusterResourceId?: String;
   }
   export interface DBClusterSnapshotAttribute {
     /**
@@ -3829,7 +3951,7 @@ declare namespace RDS {
      */
     DBInstanceArn?: String;
     /**
-     * The identifier for the source DB instance, which can't be changed and which is unique to an Amazon Web Services Region.
+     * The resource ID for the source DB instance, which can't be changed and which is unique to an Amazon Web Services Region.
      */
     DbiResourceId?: String;
     /**
@@ -3837,7 +3959,7 @@ declare namespace RDS {
      */
     Region?: String;
     /**
-     * The customer id of the instance that is/was associated with the automated backup.
+     * The identifier for the source DB instance, which can't be changed and which is unique to an Amazon Web Services Region.
      */
     DBInstanceIdentifier?: String;
     /**
@@ -3849,7 +3971,7 @@ declare namespace RDS {
      */
     AllocatedStorage?: Integer;
     /**
-     * Provides a list of status information for an automated backup:    active - automated backups for current instances    retained - automated backups for deleted instances    creating - automated backups that are waiting for the first automated snapshot to be available.  
+     * Provides a list of status information for an automated backup:    active - Automated backups for current instances.    retained - Automated backups for deleted instances.    creating - Automated backups that are waiting for the first automated snapshot to be available.  
      */
     Status?: String;
     /**
@@ -3869,7 +3991,7 @@ declare namespace RDS {
      */
     InstanceCreateTime?: TStamp;
     /**
-     * The license model of an automated backup.
+     * The master user name of an automated backup.
      */
     MasterUsername?: String;
     /**
@@ -4524,6 +4646,15 @@ declare namespace RDS {
      */
     EngineVersion: CustomEngineVersion;
   }
+  export interface DeleteDBClusterAutomatedBackupMessage {
+    /**
+     * The identifier for the source DB cluster, which can't be changed and which is unique to an Amazon Web Services Region.
+     */
+    DbClusterResourceId: String;
+  }
+  export interface DeleteDBClusterAutomatedBackupResult {
+    DBClusterAutomatedBackup?: DBClusterAutomatedBackup;
+  }
   export interface DeleteDBClusterEndpointMessage {
     /**
      * The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.
@@ -4543,6 +4674,10 @@ declare namespace RDS {
      * The DB cluster snapshot identifier of the new DB cluster snapshot created when SkipFinalSnapshot is disabled.  Specifying this parameter and also skipping the creation of a final DB cluster snapshot with the SkipFinalShapshot parameter results in an error.  Constraints:   Must be 1 to 255 letters, numbers, or hyphens.   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens  
      */
     FinalDBSnapshotIdentifier?: String;
+    /**
+     * A value that indicates whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted.
+     */
+    DeleteAutomatedBackups?: BooleanOptional;
   }
   export interface DeleteDBClusterParameterGroupMessage {
     /**
@@ -4739,6 +4874,28 @@ declare namespace RDS {
      */
     Marker?: String;
   }
+  export interface DescribeDBClusterAutomatedBackupsMessage {
+    /**
+     * The resource ID of the DB cluster that is the source of the automated backup. This parameter isn't case-sensitive.
+     */
+    DbClusterResourceId?: String;
+    /**
+     * (Optional) The user-supplied DB cluster identifier. If this parameter is specified, it must match the identifier of an existing DB cluster. It returns information from the specific DB cluster's automated backup. This parameter isn't case-sensitive.
+     */
+    DBClusterIdentifier?: String;
+    /**
+     * A filter that specifies which resources to return based on status. Supported filters are the following:    status     retained - Automated backups for deleted clusters and after backup replication is stopped.      db-cluster-id - Accepts DB cluster identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB cluster automated backups identified by these ARNs.    db-cluster-resource-id - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB cluster resources identified by these ARNs.   Returns all resources by default. The status for each resource is specified in the response.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to MaxRecords.
+     */
+    Marker?: String;
+  }
   export interface DescribeDBClusterBacktracksMessage {
     /**
      * The DB cluster identifier of the DB cluster to be described. This parameter is stored as a lowercase string. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Can't end with a hyphen or contain two consecutive hyphens.   Example: my-cluster1 
@@ -4865,6 +5022,10 @@ declare namespace RDS {
      * A value that indicates whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account. By default, the public snapshots are not included. You can share a manual DB cluster snapshot as public by using the ModifyDBClusterSnapshotAttribute API action.
      */
     IncludePublic?: Boolean;
+    /**
+     * A specific DB cluster resource ID to describe.
+     */
+    DbClusterResourceId?: String;
   }
   export interface DescribeDBClustersMessage {
     /**
@@ -4936,11 +5097,11 @@ declare namespace RDS {
      */
     DbiResourceId?: String;
     /**
-     * (Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance' automated backup. This parameter isn't case-sensitive.
+     * (Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance's automated backup. This parameter isn't case-sensitive.
      */
     DBInstanceIdentifier?: String;
     /**
-     * A filter that specifies which resources to return based on status. Supported filters are the following:    status     active - automated backups for current instances    retained - automated backups for deleted instances and after backup replication is stopped    creating - automated backups that are waiting for the first automated snapshot to be available      db-instance-id - Accepts DB instance identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance automated backups identified by these ARNs.    dbi-resource-id - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance resources identified by these ARNs.   Returns all resources by default. The status for each resource is specified in the response.
+     * A filter that specifies which resources to return based on status. Supported filters are the following:    status     active - Automated backups for current instances.    creating - Automated backups that are waiting for the first automated snapshot to be available.    retained - Automated backups for deleted instances and after backup replication is stopped.      db-instance-id - Accepts DB instance identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance automated backups identified by these ARNs.    dbi-resource-id - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance resources identified by these ARNs.   Returns all resources by default. The status for each resource is specified in the response.
      */
     Filters?: FilterList;
     /**
@@ -8170,7 +8331,7 @@ declare namespace RDS {
     /**
      * The identifier of the source DB cluster from which to restore. Constraints:   Must match the identifier of an existing DBCluster.   Valid for: Aurora DB clusters and Multi-AZ DB clusters
      */
-    SourceDBClusterIdentifier: String;
+    SourceDBClusterIdentifier?: String;
     /**
      * The date and time to restore the DB cluster to. Valid Values: Value must be a time in Universal Coordinated Time (UTC) format Constraints:   Must be before the latest restorable time for the DB instance   Must be specified if UseLatestRestorableTime parameter isn't provided   Can't be specified if the UseLatestRestorableTime parameter is enabled   Can't be specified if the RestoreType parameter is copy-on-write    Example: 2015-03-07T23:45:00Z  Valid for: Aurora DB clusters and Multi-AZ DB clusters
      */
@@ -8261,6 +8422,10 @@ declare namespace RDS {
      * The network type of the DB cluster. Valid values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB cluster. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon Aurora User Guide.  Valid for: Aurora DB clusters only
      */
     NetworkType?: String;
+    /**
+     * The resource ID of the source DB cluster from which to restore.
+     */
+    SourceDbClusterResourceId?: String;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;

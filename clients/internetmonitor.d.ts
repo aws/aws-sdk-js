@@ -12,11 +12,11 @@ declare class InternetMonitor extends Service {
   constructor(options?: InternetMonitor.Types.ClientConfiguration)
   config: Config & InternetMonitor.Types.ClientConfiguration;
   /**
-   * Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Amazon Virtual Private Clouds (VPCs), Amazon CloudFront distributions, and WorkSpaces directories. Internet Monitor then publishes internet measurements from Amazon Web Services that are specific to the city-networks, that is, the locations and ASNs (typically internet service providers or ISPs), where clients access your application. For more information, see Using Amazon CloudWatch Internet Monitor in the Amazon CloudWatch User Guide. When you create a monitor, you set a maximum limit for the number of city-networks where client traffic is monitored. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. You can change the maximum at any time by updating your monitor. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
+   * Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: VPCs, Network Load Balancers (NLBs), Amazon CloudFront distributions, and Amazon WorkSpaces directories. Internet Monitor then publishes internet measurements from Amazon Web Services that are specific to the city-networks. That is, the locations and ASNs (typically internet service providers or ISPs), where clients access your application. For more information, see Using Amazon CloudWatch Internet Monitor in the Amazon CloudWatch User Guide. When you create a monitor, you choose the percentage of traffic that you want to monitor. You can also set a maximum limit for the number of city-networks where client traffic is monitored, that caps the total traffic that Internet Monitor monitors. A city-network maximum is the limit of city-networks, but you only pay for the number of city-networks that are actually monitored. You can update your monitor at any time to change the percentage of traffic to monitor or the city-networks maximum. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
    */
   createMonitor(params: InternetMonitor.Types.CreateMonitorInput, callback?: (err: AWSError, data: InternetMonitor.Types.CreateMonitorOutput) => void): Request<InternetMonitor.Types.CreateMonitorOutput, AWSError>;
   /**
-   * Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: Amazon Virtual Private Clouds (VPCs), Amazon CloudFront distributions, and WorkSpaces directories. Internet Monitor then publishes internet measurements from Amazon Web Services that are specific to the city-networks, that is, the locations and ASNs (typically internet service providers or ISPs), where clients access your application. For more information, see Using Amazon CloudWatch Internet Monitor in the Amazon CloudWatch User Guide. When you create a monitor, you set a maximum limit for the number of city-networks where client traffic is monitored. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. You can change the maximum at any time by updating your monitor. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
+   * Creates a monitor in Amazon CloudWatch Internet Monitor. A monitor is built based on information from the application resources that you add: VPCs, Network Load Balancers (NLBs), Amazon CloudFront distributions, and Amazon WorkSpaces directories. Internet Monitor then publishes internet measurements from Amazon Web Services that are specific to the city-networks. That is, the locations and ASNs (typically internet service providers or ISPs), where clients access your application. For more information, see Using Amazon CloudWatch Internet Monitor in the Amazon CloudWatch User Guide. When you create a monitor, you choose the percentage of traffic that you want to monitor. You can also set a maximum limit for the number of city-networks where client traffic is monitored, that caps the total traffic that Internet Monitor monitors. A city-network maximum is the limit of city-networks, but you only pay for the number of city-networks that are actually monitored. You can update your monitor at any time to change the percentage of traffic to monitor or the city-networks maximum. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
    */
   createMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.CreateMonitorOutput) => void): Request<InternetMonitor.Types.CreateMonitorOutput, AWSError>;
   /**
@@ -28,11 +28,11 @@ declare class InternetMonitor extends Service {
    */
   deleteMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.DeleteMonitorOutput) => void): Request<InternetMonitor.Types.DeleteMonitorOutput, AWSError>;
   /**
-   * Gets information the Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations, and all of the information related to the event by location. The information returned includes the performance, availability, and round-trip time impact, information about the network providers, the event type, and so on. Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.
+   * Gets information the Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations, and all the information related to the event, by location. The information returned includes the impact on performance, availability, and round-trip time, information about the network providers (ASNs), the event type, and so on. Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.
    */
   getHealthEvent(params: InternetMonitor.Types.GetHealthEventInput, callback?: (err: AWSError, data: InternetMonitor.Types.GetHealthEventOutput) => void): Request<InternetMonitor.Types.GetHealthEventOutput, AWSError>;
   /**
-   * Gets information the Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations, and all of the information related to the event by location. The information returned includes the performance, availability, and round-trip time impact, information about the network providers, the event type, and so on. Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.
+   * Gets information the Amazon CloudWatch Internet Monitor has created and stored about a health event for a specified monitor. This information includes the impacted locations, and all the information related to the event, by location. The information returned includes the impact on performance, availability, and round-trip time, information about the network providers (ASNs), the event type, and so on. Information rolled up at the global traffic level is also returned, including the impact type and total traffic impact.
    */
   getHealthEvent(callback?: (err: AWSError, data: InternetMonitor.Types.GetHealthEventOutput) => void): Request<InternetMonitor.Types.GetHealthEventOutput, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class InternetMonitor extends Service {
    */
   getMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.GetMonitorOutput) => void): Request<InternetMonitor.Types.GetMonitorOutput, AWSError>;
   /**
-   * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns all information for health events including the client location information the network cause and status, event start and end time, percentage of total traffic impacted, and status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
+   * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and the status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
    */
   listHealthEvents(params: InternetMonitor.Types.ListHealthEventsInput, callback?: (err: AWSError, data: InternetMonitor.Types.ListHealthEventsOutput) => void): Request<InternetMonitor.Types.ListHealthEventsOutput, AWSError>;
   /**
-   * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns all information for health events including the client location information the network cause and status, event start and end time, percentage of total traffic impacted, and status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
+   * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and the status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
    */
   listHealthEvents(callback?: (err: AWSError, data: InternetMonitor.Types.ListHealthEventsOutput) => void): Request<InternetMonitor.Types.ListHealthEventsOutput, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class InternetMonitor extends Service {
    */
   untagResource(callback?: (err: AWSError, data: InternetMonitor.Types.UntagResourceOutput) => void): Request<InternetMonitor.Types.UntagResourceOutput, AWSError>;
   /**
-   * Updates a monitor. You can update a monitor to change the maximum number of city-networks (locations and ASNs or internet service providers), to add or remove resources, or to change the status of the monitor. Note that you can't change the name of a monitor. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
+   * Updates a monitor. You can update a monitor to change the percentage of traffic to monitor or the maximum number of city-networks (locations and ASNs), to add or remove resources, or to change the status of the monitor. Note that you can't change the name of a monitor. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
    */
   updateMonitor(params: InternetMonitor.Types.UpdateMonitorInput, callback?: (err: AWSError, data: InternetMonitor.Types.UpdateMonitorOutput) => void): Request<InternetMonitor.Types.UpdateMonitorOutput, AWSError>;
   /**
-   * Updates a monitor. You can update a monitor to change the maximum number of city-networks (locations and ASNs or internet service providers), to add or remove resources, or to change the status of the monitor. Note that you can't change the name of a monitor. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
+   * Updates a monitor. You can update a monitor to change the percentage of traffic to monitor or the maximum number of city-networks (locations and ASNs), to add or remove resources, or to change the status of the monitor. Note that you can't change the name of a monitor. The city-network maximum that you choose is the limit, but you only pay for the number of city-networks that are actually monitored. For more information, see Choosing a city-network maximum value in the Amazon CloudWatch User Guide.
    */
   updateMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.UpdateMonitorOutput) => void): Request<InternetMonitor.Types.UpdateMonitorOutput, AWSError>;
 }
@@ -100,7 +100,7 @@ declare namespace InternetMonitor {
      */
     ExperienceScore?: Double;
     /**
-     * The percentage of impact caused by a health event for total traffic globally. For information about how Internet Monitor calculates impact, see Inside Internet Monitor in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.
+     * The impact on total traffic that a health event has, in increased latency or reduced availability. This is the percentage of how much latency has increased or availability has decreased during the event, compared to what is typical for traffic from this client location to the Amazon Web Services location using this client network. For information about how Internet Monitor calculates impact, see How Internet Monitor works in the Amazon CloudWatch Internet Monitor section of the Amazon CloudWatch User Guide.
      */
     PercentOfTotalTrafficImpacted?: Double;
     /**
@@ -114,7 +114,7 @@ declare namespace InternetMonitor {
      */
     MonitorName: ResourceName;
     /**
-     * The resources to include in a monitor, which you provide as a set of Amazon Resource Names (ARNs). You can add a combination of Amazon Virtual Private Clouds (VPCs) and Amazon CloudFront distributions, or you can add Amazon WorkSpaces directories. You can't add all three types of resources.  If you add only VPC resources, at least one VPC must have an Internet Gateway attached to it, to make sure that it has internet connectivity. 
+     * The resources to include in a monitor, which you provide as a set of Amazon Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon CloudFront distributions, or Amazon WorkSpaces directories. You can add a combination of VPCs and CloudFront distributions, or you can add WorkSpaces directories, or you can add NLBs. You can't add NLBs or WorkSpaces directories together with any other resources.  If you add only Amazon VPC resources, at least one VPC must have an Internet Gateway attached to it, to make sure that it has internet connectivity. 
      */
     Resources?: SetOfARNs;
     /**
@@ -126,7 +126,7 @@ declare namespace InternetMonitor {
      */
     Tags?: TagMap;
     /**
-     * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the network or ASN, such as an internet service provider (ISP), that clients access the resources through. This limit helps control billing costs. To learn more, see Choosing a city-network maximum value  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+     * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the ASN or network provider, such as an internet service provider (ISP), that clients access the resources through. Setting this limit can help control billing costs. To learn more, see Choosing a city-network maximum value  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     MaxCityNetworksToMonitor?: MaxCityNetworksToMonitor;
     /**
@@ -134,11 +134,11 @@ declare namespace InternetMonitor {
      */
     InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
     /**
-     * The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+     * The percentage of the internet-facing traffic for your application that you want to monitor with this monitor. If you set a city-networks maximum, that limit overrides the traffic percentage that you set. To learn more, see Choosing an application traffic percentage to monitor  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     TrafficPercentageToMonitor?: TrafficPercentageToMonitor;
     /**
-     * Defines the health event threshold percentages, for performance score and availability score. Internet Monitor creates a health event when there's an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you don't set a health event threshold, the default calue is 95%.
+     * Defines the threshold percentages and other configuration information for when Amazon CloudWatch Internet Monitor creates a health event. Internet Monitor creates a health event when an internet issue that affects your application end users has a health score percentage that is at or below a specific threshold, and, sometimes, when other criteria are met. If you don't set a health event threshold, the default value is 95%. For more information, see  Change health event thresholds in the Internet Monitor section of the CloudWatch User Guide.
      */
     HealthEventsConfig?: HealthEventsConfig;
   }
@@ -205,7 +205,7 @@ declare namespace InternetMonitor {
      */
     Status: HealthEventStatus;
     /**
-     * The impact on total traffic that a health event has.
+     * The impact on total traffic that a health event has, in increased latency or reduced availability. This is the percentage of how much latency has increased or availability has decreased during the event, compared to what is typical for traffic from this client location to the Amazon Web Services location using this client network.
      */
     PercentOfTotalTrafficImpacted?: Double;
     /**
@@ -213,7 +213,7 @@ declare namespace InternetMonitor {
      */
     ImpactType: HealthEventImpactType;
     /**
-     * The threshold percentage for health events when Amazon CloudWatch Internet Monitor creates a health event.
+     * The threshold percentage for a health score that determines, along with other configuration information, when Internet Monitor creates a health event when there's an internet issue that affects your application end users.
      */
     HealthScoreThreshold?: Percentage;
   }
@@ -233,7 +233,7 @@ declare namespace InternetMonitor {
      */
     MonitorArn: MonitorArn;
     /**
-     * The resources that have been added for the monitor. Resources are listed by their Amazon Resource Names (ARNs).
+     * The resources monitored by the monitor. Resources are listed by their Amazon Resource Names (ARNs).
      */
     Resources: SetOfARNs;
     /**
@@ -261,7 +261,7 @@ declare namespace InternetMonitor {
      */
     Tags?: TagMap;
     /**
-     * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the network or ASN, such as an internet service provider (ISP), that clients access the resources through. This limit helps control billing costs. To learn more, see Choosing a city-network maximum value  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+     * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the ASN or network provider, such as an internet service provider (ISP), that clients access the resources through. This limit can help control billing costs. To learn more, see Choosing a city-network maximum value  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     MaxCityNetworksToMonitor?: MaxCityNetworksToMonitor;
     /**
@@ -269,11 +269,11 @@ declare namespace InternetMonitor {
      */
     InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
     /**
-     * The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+     * The percentage of the internet-facing traffic for your application to monitor with this monitor. If you set a city-networks maximum, that limit overrides the traffic percentage that you set. To learn more, see Choosing an application traffic percentage to monitor  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     TrafficPercentageToMonitor?: TrafficPercentageToMonitor;
     /**
-     * The list of health event thresholds. A health event threshold percentage, for performance and availability, determines the level of impact at which Amazon CloudWatch Internet Monitor creates a health event when there's an internet issue that affects your application end users.
+     * The list of health event threshold configurations. The threshold percentage for a health score determines, along with other configuration information, when Internet Monitor creates a health event when there's an internet issue that affects your application end users. For more information, see  Change health event thresholds in the Internet Monitor section of the CloudWatch User Guide.
      */
     HealthEventsConfig?: HealthEventsConfig;
   }
@@ -311,7 +311,7 @@ declare namespace InternetMonitor {
      */
     Status: HealthEventStatus;
     /**
-     * The impact on global traffic monitored by this monitor for this health event.
+     * The impact on total traffic that a health event has, in increased latency or reduced availability. This is the percentage of how much latency has increased or availability has decreased during the event, compared to what is typical for traffic from this client location to the Amazon Web Services location using this client network.
      */
     PercentOfTotalTrafficImpacted?: Double;
     /**
@@ -323,7 +323,7 @@ declare namespace InternetMonitor {
      */
     HealthScoreThreshold?: Percentage;
   }
-  export type HealthEventImpactType = "AVAILABILITY"|"PERFORMANCE"|string;
+  export type HealthEventImpactType = "AVAILABILITY"|"PERFORMANCE"|"LOCAL_AVAILABILITY"|"LOCAL_PERFORMANCE"|string;
   export type HealthEventList = HealthEvent[];
   export type HealthEventName = string;
   export type HealthEventStatus = "ACTIVE"|"RESOLVED"|string;
@@ -336,6 +336,14 @@ declare namespace InternetMonitor {
      * The health event threshold percentage set for performance scores.
      */
     PerformanceScoreThreshold?: Percentage;
+    /**
+     * The configuration that determines the threshold and other conditions for when Internet Monitor creates a health event for a local availability issue.
+     */
+    AvailabilityLocalHealthEventsConfig?: LocalHealthEventsConfig;
+    /**
+     * The configuration that determines the threshold and other conditions for when Internet Monitor creates a health event for a local performance issue.
+     */
+    PerformanceLocalHealthEventsConfig?: LocalHealthEventsConfig;
   }
   export interface ImpactedLocation {
     /**
@@ -484,6 +492,21 @@ declare namespace InternetMonitor {
      */
     Tags?: TagMap;
   }
+  export interface LocalHealthEventsConfig {
+    /**
+     * The status of whether Internet Monitor creates a health event based on a threshold percentage set for a local health score. The status can be ENABLED or DISABLED.
+     */
+    Status?: LocalHealthEventsConfigStatus;
+    /**
+     * The health event threshold percentage set for a local health score.
+     */
+    HealthScoreThreshold?: Percentage;
+    /**
+     * The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a threshold is crossed for a local health score.
+     */
+    MinTrafficImpact?: Percentage;
+  }
+  export type LocalHealthEventsConfigStatus = "ENABLED"|"DISABLED"|string;
   export type LogDeliveryStatus = "ENABLED"|"DISABLED"|string;
   export type Long = number;
   export type MaxCityNetworksToMonitor = number;
@@ -542,7 +565,7 @@ declare namespace InternetMonitor {
      */
     ExperienceScore?: Double;
     /**
-     * How much performance impact was caused by a health event for total traffic globally. For performance, this is the percentage of how much latency increased during the event compared to typical performance for your application traffic globally.  For more information, see When Amazon Web Services creates and resolves health events in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+     * The impact on total traffic that a health event has, in increased latency or reduced availability. This is the percentage of how much latency has increased or availability has decreased during the event, compared to what is typical for traffic from this client location to the Amazon Web Services location using this client network. For more information, see When Amazon Web Services creates and resolves health events in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     PercentOfTotalTrafficImpacted?: Double;
     /**
@@ -623,7 +646,7 @@ declare namespace InternetMonitor {
      */
     MonitorName: ResourceName;
     /**
-     * The resources to include in a monitor, which you provide as a set of Amazon Resource Names (ARNs). You can add a combination of Amazon Virtual Private Clouds (VPCs) and Amazon CloudFront distributions, or you can add Amazon WorkSpaces directories. You can't add all three types of resources.  If you add only VPC resources, at least one VPC must have an Internet Gateway attached to it, to make sure that it has internet connectivity. 
+     * The resources to include in a monitor, which you provide as a set of Amazon Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon CloudFront distributions, or Amazon WorkSpaces directories. You can add a combination of VPCs and CloudFront distributions, or you can add WorkSpaces directories, or you can add NLBs. You can't add NLBs or WorkSpaces directories together with any other resources.  If you add only Amazon Virtual Private Clouds resources, at least one VPC must have an Internet Gateway attached to it, to make sure that it has internet connectivity. 
      */
     ResourcesToAdd?: SetOfARNs;
     /**
@@ -639,7 +662,7 @@ declare namespace InternetMonitor {
      */
     ClientToken?: String;
     /**
-     * The maximum number of city-networks to monitor for your resources. A city-network is the location (city) where clients access your application resources from and the network or ASN, such as an internet service provider, that clients access the resources through.
+     * The maximum number of city-networks to monitor for your application. A city-network is the location (city) where clients access your application resources from and the ASN or network provider, such as an internet service provider (ISP), that clients access the resources through. Setting this limit can help control billing costs.
      */
     MaxCityNetworksToMonitor?: MaxCityNetworksToMonitor;
     /**
@@ -647,11 +670,11 @@ declare namespace InternetMonitor {
      */
     InternetMeasurementsLogDelivery?: InternetMeasurementsLogDelivery;
     /**
-     * The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+     * The percentage of the internet-facing traffic for your application that you want to monitor with this monitor. If you set a city-networks maximum, that limit overrides the traffic percentage that you set. To learn more, see Choosing an application traffic percentage to monitor  in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
      */
     TrafficPercentageToMonitor?: TrafficPercentageToMonitor;
     /**
-     * The list of health event thresholds. A health event threshold percentage, for performance and availability, determines when Internet Monitor creates a health event when there's an internet issue that affects your application end users.
+     * The list of health score thresholds. A threshold percentage for health scores, along with other configuration information, determines when Internet Monitor creates a health event when there's an internet issue that affects your application end users. For more information, see  Change health event thresholds in the Internet Monitor section of the CloudWatch User Guide.
      */
     HealthEventsConfig?: HealthEventsConfig;
   }

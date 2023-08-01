@@ -2122,6 +2122,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * The Availability Zone associated with this input device.
+     */
+    AvailabilityZone?: __string;
   }
   export interface DescribeInputDeviceThumbnailRequest {
     /**
@@ -4163,6 +4167,10 @@ to.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * The Availability Zone associated with this input device.
+     */
+    AvailabilityZone?: __string;
   }
   export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
   export type InputDeviceType = "HD"|"UHD"|string;
@@ -6883,6 +6891,10 @@ one destination per packager.
      * The settings that you want to apply to the UHD input device.
      */
     UhdDeviceSettings?: InputDeviceConfigurableSettings;
+    /**
+     * The Availability Zone you want associated with this input device.
+     */
+    AvailabilityZone?: __string;
   }
   export interface UpdateInputDeviceResponse {
     /**
@@ -6937,6 +6949,10 @@ one destination per packager.
      * A collection of key-value pairs.
      */
     Tags?: Tags;
+    /**
+     * The Availability Zone associated with this input device.
+     */
+    AvailabilityZone?: __string;
   }
   export interface UpdateInputRequest {
     /**

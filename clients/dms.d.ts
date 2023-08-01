@@ -245,6 +245,14 @@ declare class DMS extends Service {
    */
   describeEndpoints(callback?: (err: AWSError, data: DMS.Types.DescribeEndpointsResponse) => void): Request<DMS.Types.DescribeEndpointsResponse, AWSError>;
   /**
+   * Returns information about the replication instance versions used in the project.
+   */
+  describeEngineVersions(params: DMS.Types.DescribeEngineVersionsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEngineVersionsResponse) => void): Request<DMS.Types.DescribeEngineVersionsResponse, AWSError>;
+  /**
+   * Returns information about the replication instance versions used in the project.
+   */
+  describeEngineVersions(callback?: (err: AWSError, data: DMS.Types.DescribeEngineVersionsResponse) => void): Request<DMS.Types.DescribeEngineVersionsResponse, AWSError>;
+  /**
    * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in Working with Events and Notifications in the Database Migration Service User Guide. 
    */
   describeEventCategories(params: DMS.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventCategoriesResponse) => void): Request<DMS.Types.DescribeEventCategoriesResponse, AWSError>;
@@ -755,6 +763,7 @@ declare namespace DMS {
     Name?: String;
   }
   export type AvailabilityZonesList = String[];
+  export type AvailableUpgradesList = String[];
   export interface BatchStartRecommendationsErrorEntry {
     /**
      * The identifier of the source database.
@@ -1790,6 +1799,26 @@ declare namespace DMS {
      */
     Endpoints?: EndpointList;
   }
+  export interface DescribeEngineVersionsMessage {
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeEngineVersionsResponse {
+    /**
+     * Returned EngineVersion objects that describe the replication instance engine versions used in the project.
+     */
+    EngineVersions?: EngineVersionList;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
   export interface DescribeEventCategoriesMessage {
     /**
      *  The type of DMS resource that generates events.  Valid values: replication-instance | replication-task
@@ -2703,6 +2732,41 @@ declare namespace DMS {
   export type EndpointSettingEnumValues = String[];
   export type EndpointSettingTypeValue = "string"|"boolean"|"integer"|"enum"|string;
   export type EndpointSettingsList = EndpointSetting[];
+  export interface EngineVersion {
+    /**
+     * The version number of the replication instance.
+     */
+    Version?: String;
+    /**
+     * The lifecycle status of the replication instance version. Valid values are DEPRECATED, DEFAULT_VERSION, and ACTIVE.
+     */
+    Lifecycle?: String;
+    /**
+     * The release status of the replication instance version.
+     */
+    ReleaseStatus?: ReleaseStatusValues;
+    /**
+     * The date when the replication instance version became publicly available.
+     */
+    LaunchDate?: TStamp;
+    /**
+     * The date when the replication instance will be automatically upgraded. This setting only applies if the auto-minor-version setting is enabled.
+     */
+    AutoUpgradeDate?: TStamp;
+    /**
+     * The date when the replication instance version will be deprecated and can no longer be requested.
+     */
+    DeprecationDate?: TStamp;
+    /**
+     * The date when the replication instance will have a version upgrade forced.
+     */
+    ForceUpgradeDate?: TStamp;
+    /**
+     * The list of valid replication instance versions that you can upgrade to.
+     */
+    AvailableUpgrades?: AvailableUpgradesList;
+  }
+  export type EngineVersionList = EngineVersion[];
   export interface Event {
     /**
      *  The identifier of an event source.
@@ -4047,7 +4111,7 @@ declare namespace DMS {
      */
     MapLongVarcharAs?: LongVarcharMappingType;
     /**
-     * Specifies whether to use default or custom replication behavior for PostgreSQL-compatible endpoints. You can use this setting to specify replication behavior for endpoints that require additional configuration, such as Babelfish endpoints.
+     * Specifies the default behavior of the replication's handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.
      */
     DatabaseMode?: DatabaseMode;
     /**

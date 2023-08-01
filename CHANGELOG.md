@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1426.0-->
+<!--LATEST=2.1427.0-->
 <!--ENTRYINSERT-->
+
+## 2.1427.0
+* feature: Batch: This release adds support for price capacity optimized allocation strategy for Spot Instances.
+* feature: DMS: Adding new API describe-engine-versions which provides information about the lifecycle of a replication instance's version.
+* feature: InternetMonitor: This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to set custom thresholds, for performance and availability drops, for impact limited to a single city-network to trigger creation of a health event.
+* feature: MediaLive: AWS Elemental Link devices now report their Availability Zone. Link devices now support the ability to change their Availability Zone.
+* feature: Polly: Amazon Polly adds new French Belgian voice - Isabelle. Isabelle is available as Neural voice only.
+* feature: RDS: Added support for deleted clusters PiTR.
+* feature: SageMaker: Add Stairs TrafficPattern and FlatInvocations to RecommendationJobStoppingConditions
 
 ## 2.1426.0
 * feature: AmplifyUIBuilder: Amplify Studio releases GraphQL support for codegen job action.
