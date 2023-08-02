@@ -1365,6 +1365,14 @@ declare class SageMaker extends Service {
    */
   getSagemakerServicecatalogPortfolioStatus(callback?: (err: AWSError, data: SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusOutput) => void): Request<SageMaker.Types.GetSagemakerServicecatalogPortfolioStatusOutput, AWSError>;
   /**
+   * Starts an Amazon SageMaker Inference Recommender autoscaling recommendation job. Returns recommendations for autoscaling policies that you can apply to your SageMaker endpoint.
+   */
+  getScalingConfigurationRecommendation(params: SageMaker.Types.GetScalingConfigurationRecommendationRequest, callback?: (err: AWSError, data: SageMaker.Types.GetScalingConfigurationRecommendationResponse) => void): Request<SageMaker.Types.GetScalingConfigurationRecommendationResponse, AWSError>;
+  /**
+   * Starts an Amazon SageMaker Inference Recommender autoscaling recommendation job. Returns recommendations for autoscaling policies that you can apply to your SageMaker endpoint.
+   */
+  getScalingConfigurationRecommendation(callback?: (err: AWSError, data: SageMaker.Types.GetScalingConfigurationRecommendationResponse) => void): Request<SageMaker.Types.GetScalingConfigurationRecommendationResponse, AWSError>;
+  /**
    * An auto-complete API for the search functionality in the SageMaker console. It returns suggestions of possible matches for the property name to use in Search queries. Provides suggestions for HyperParameters, Tags, and Metrics.
    */
   getSearchSuggestions(params: SageMaker.Types.GetSearchSuggestionsRequest, callback?: (err: AWSError, data: SageMaker.Types.GetSearchSuggestionsResponse) => void): Request<SageMaker.Types.GetSearchSuggestionsResponse, AWSError>;
@@ -6205,6 +6213,20 @@ declare namespace SageMaker {
   export type CustomerMetadataKeyList = CustomerMetadataKey[];
   export type CustomerMetadataMap = {[key: string]: CustomerMetadataValue};
   export type CustomerMetadataValue = string;
+  export interface CustomizedMetricSpecification {
+    /**
+     * The name of the customized metric.
+     */
+    MetricName?: String;
+    /**
+     * The namespace of the customized metric.
+     */
+    Namespace?: String;
+    /**
+     * The statistic of the customized metric.
+     */
+    Statistic?: Statistic;
+  }
   export interface DataCaptureConfig {
     /**
      * Whether data capture should be enabled or disabled (defaults to enabled).
@@ -10460,6 +10482,7 @@ declare namespace SageMaker {
     SecurityGroupIds?: DomainSecurityGroupIds;
   }
   export type DomainStatus = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed"|string;
+  export type Double = number;
   export type DoubleParameterValue = number;
   export interface DriftCheckBaselines {
     /**
@@ -10522,6 +10545,28 @@ declare namespace SageMaker {
      * The drift check model quality constraints.
      */
     Constraints?: MetricsSource;
+  }
+  export interface DynamicScalingConfiguration {
+    /**
+     * The recommended minimum capacity to specify for your autoscaling policy.
+     */
+    MinCapacity?: Integer;
+    /**
+     * The recommended maximum capacity to specify for your autoscaling policy.
+     */
+    MaxCapacity?: Integer;
+    /**
+     * The recommended scale in cooldown time for your autoscaling policy.
+     */
+    ScaleInCooldown?: Integer;
+    /**
+     * The recommended scale out cooldown time for your autoscaling policy.
+     */
+    ScaleOutCooldown?: Integer;
+    /**
+     * An object of the scaling policies for each metric.
+     */
+    ScalingPolicies?: ScalingPolicies;
   }
   export interface EMRStepMetadata {
     /**
@@ -11506,6 +11551,58 @@ declare namespace SageMaker {
      * Whether Service Catalog is enabled or disabled in SageMaker.
      */
     Status?: SagemakerServicecatalogStatus;
+  }
+  export interface GetScalingConfigurationRecommendationRequest {
+    /**
+     * The name of a previously completed Inference Recommender job.
+     */
+    InferenceRecommendationsJobName: RecommendationJobName;
+    /**
+     * The recommendation ID of a previously completed inference recommendation. This ID should come from one of the recommendations returned by the job specified in the InferenceRecommendationsJobName field. Specify either this field or the EndpointName field.
+     */
+    RecommendationId?: String;
+    /**
+     * The name of an endpoint benchmarked during a previously completed inference recommendation job. This name should come from one of the recommendations returned by the job specified in the InferenceRecommendationsJobName field. Specify either this field or the RecommendationId field.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * The percentage of how much utilization you want an instance to use before autoscaling. The default value is 50%.
+     */
+    TargetCpuUtilizationPerCore?: UtilizationPercentagePerCore;
+    /**
+     * An object where you specify the anticipated traffic pattern for an endpoint.
+     */
+    ScalingPolicyObjective?: ScalingPolicyObjective;
+  }
+  export interface GetScalingConfigurationRecommendationResponse {
+    /**
+     * The name of a previously completed Inference Recommender job.
+     */
+    InferenceRecommendationsJobName?: RecommendationJobName;
+    /**
+     * The recommendation ID of a previously completed inference recommendation.
+     */
+    RecommendationId?: String;
+    /**
+     * The name of an endpoint benchmarked during a previously completed Inference Recommender job.
+     */
+    EndpointName?: EndpointName;
+    /**
+     * The percentage of how much utilization you want an instance to use before autoscaling, which you specified in the request. The default value is 50%.
+     */
+    TargetCpuUtilizationPerCore?: UtilizationPercentagePerCore;
+    /**
+     * An object representing the anticipated traffic pattern for an endpoint that you specified in the request.
+     */
+    ScalingPolicyObjective?: ScalingPolicyObjective;
+    /**
+     * An object with a list of metrics that were benchmarked during the previously completed Inference Recommender job.
+     */
+    Metric?: ScalingPolicyMetric;
+    /**
+     * An object with the recommended values for you to specify when creating an autoscaling policy.
+     */
+    DynamicScalingConfiguration?: DynamicScalingConfiguration;
   }
   export interface GetSearchSuggestionsRequest {
     /**
@@ -16232,6 +16329,16 @@ declare namespace SageMaker {
   export type MetricName = string;
   export type MetricRegex = string;
   export type MetricSetSource = "Train"|"Validation"|"Test"|string;
+  export interface MetricSpecification {
+    /**
+     * Information about a predefined metric.
+     */
+    Predefined?: PredefinedMetricSpecification;
+    /**
+     * Information about a customized metric.
+     */
+    Customized?: CustomizedMetricSpecification;
+  }
   export type MetricValue = number;
   export interface MetricsSource {
     /**
@@ -18449,6 +18556,12 @@ declare namespace SageMaker {
   export type PipelineSummaryList = PipelineSummary[];
   export type PlatformIdentifier = string;
   export type PolicyString = string;
+  export interface PredefinedMetricSpecification {
+    /**
+     * The metric type. You can only apply SageMaker metric types to SageMaker endpoints.
+     */
+    PredefinedMetricType?: String;
+  }
   export type PresignedDomainUrl = string;
   export type ProbabilityThresholdAttribute = number;
   export type ProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression"|string;
@@ -19797,6 +19910,33 @@ declare namespace SageMaker {
   export type SagemakerServicecatalogStatus = "Enabled"|"Disabled"|string;
   export type SampleWeightAttributeName = string;
   export type SamplingPercentage = number;
+  export type ScalingPolicies = ScalingPolicy[];
+  export interface ScalingPolicy {
+    /**
+     * A target tracking scaling policy. Includes support for predefined or customized metrics.
+     */
+    TargetTracking?: TargetTrackingScalingPolicyConfiguration;
+  }
+  export interface ScalingPolicyMetric {
+    /**
+     * The number of invocations sent to a model, normalized by InstanceCount in each ProductionVariant. 1/numberOfInstances is sent as the value on each request, where numberOfInstances is the number of active instances for the ProductionVariant behind the endpoint at the time of the request.
+     */
+    InvocationsPerInstance?: Integer;
+    /**
+     * The interval of time taken by a model to respond as viewed from SageMaker. This interval includes the local communication times taken to send the request and to fetch the response from the container of a model and the time taken to complete the inference in the container.
+     */
+    ModelLatency?: Integer;
+  }
+  export interface ScalingPolicyObjective {
+    /**
+     * The minimum number of expected requests to your endpoint per minute.
+     */
+    MinInvocationsPerMinute?: Integer;
+    /**
+     * The maximum number of expected requests to your endpoint per minute.
+     */
+    MaxInvocationsPerMinute?: Integer;
+  }
   export interface ScheduleConfig {
     /**
      * A cron expression that describes details about the monitoring schedule. Currently the only supported cron expressions are:   If you want to set the job to start every hour, please use the following:  Hourly: cron(0 * ? * * *)    If you want to start the job daily:  cron(0 [00-23] ? * * *)    For example, the following are valid cron expressions:   Daily at noon UTC: cron(0 12 ? * * *)    Daily at midnight UTC: cron(0 0 ? * * *)    To support running every 6, 12 hours, the following are also supported:  cron(0 [00-23]/[01-24] ? * * *)  For example, the following are valid cron expressions:   Every 12 hours, starting at 5pm UTC: cron(0 17/12 ? * * *)    Every two hours starting at midnight: cron(0 0/2 ? * * *)       Even though the cron expression is set to start at 5PM UTC, note that there could be a delay of 0-20 minutes from the actual requested time to run the execution.    We recommend that if you would like a daily schedule, you do not provide this parameter. Amazon SageMaker will pick a time for running every day.   
@@ -20236,6 +20376,7 @@ declare namespace SageMaker {
      */
     PipelineExecutionArn?: PipelineExecutionArn;
   }
+  export type Statistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum"|string;
   export type StatusDetails = string;
   export type StatusMessage = string;
   export type StepDescription = string;
@@ -20517,6 +20658,16 @@ declare namespace SageMaker {
   export type TargetPlatformAccelerator = "INTEL_GRAPHICS"|"MALI"|"NVIDIA"|"NNA"|string;
   export type TargetPlatformArch = "X86_64"|"X86"|"ARM64"|"ARM_EABI"|"ARM_EABIHF"|string;
   export type TargetPlatformOs = "ANDROID"|"LINUX"|string;
+  export interface TargetTrackingScalingPolicyConfiguration {
+    /**
+     * An object containing information about a metric.
+     */
+    MetricSpecification?: MetricSpecification;
+    /**
+     * The recommended target value to specify for the metric when creating a scaling policy.
+     */
+    TargetValue?: Double;
+  }
   export type TaskAvailabilityLifetimeInSeconds = number;
   export type TaskCount = number;
   export type TaskDescription = string;
@@ -22499,6 +22650,7 @@ declare namespace SageMaker {
   }
   export type UsersPerStep = number;
   export type UtilizationMetric = number;
+  export type UtilizationPercentagePerCore = number;
   export type ValidationFraction = number;
   export type VariantName = string;
   export interface VariantProperty {

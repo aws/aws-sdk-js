@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1427.0-->
+<!--LATEST=2.1428.0-->
 <!--ENTRYINSERT-->
+
+## 2.1428.0
+* feature: Budgets: As part of CAE tagging integration we need to update our budget names regex filter to prevent customers from using "/action/" in their budget names.
+* feature: CognitoIdentityServiceProvider: New feature that logs Cognito user pool error messages to CloudWatch logs.
+* feature: Glue: This release includes additional Glue Streaming KAKFA SASL property types.
+* feature: Resiliencehub: Drift Detection capability added when applications policy has moved from a meet to breach state. Customers will be able to exclude operational recommendations and receive credit in their resilience score. Customers can now add ARH permissions to an existing or new role.
+* feature: SageMaker: SageMaker Inference Recommender introduces a new API GetScalingConfigurationRecommendation to recommend auto scaling policies based on completed Inference Recommender jobs.
 
 ## 2.1427.0
 * feature: Batch: This release adds support for price capacity optimized allocation strategy for Spot Instances.

@@ -282,7 +282,7 @@ declare namespace Budgets {
   export type AutoAdjustType = "HISTORICAL"|"FORECAST"|string;
   export interface Budget {
     /**
-     * The name of a budget. The name must be unique within an account. The : and \ characters aren't allowed in BudgetName.
+     * The name of a budget. The name must be unique within an account. The : and \ characters, and the "/action/" substring, aren't allowed in BudgetName.
      */
     BudgetName: BudgetName;
     /**

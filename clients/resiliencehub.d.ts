@@ -20,11 +20,19 @@ declare class Resiliencehub extends Service {
    */
   addDraftAppVersionResourceMappings(callback?: (err: AWSError, data: Resiliencehub.Types.AddDraftAppVersionResourceMappingsResponse) => void): Request<Resiliencehub.Types.AddDraftAppVersionResourceMappingsResponse, AWSError>;
   /**
-   * Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe an Resilience Hub application, you provide an application name, resources from one or more CloudFormation stacks, Resource Groups, Terraform state files, AppRegistry applications, and an appropriate resiliency policy. For more information about the number of resources supported per application, see Service Quotas. After you create an Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).
+   * Enables you to include or exclude one or more operational recommendations.
+   */
+  batchUpdateRecommendationStatus(params: Resiliencehub.Types.BatchUpdateRecommendationStatusRequest, callback?: (err: AWSError, data: Resiliencehub.Types.BatchUpdateRecommendationStatusResponse) => void): Request<Resiliencehub.Types.BatchUpdateRecommendationStatusResponse, AWSError>;
+  /**
+   * Enables you to include or exclude one or more operational recommendations.
+   */
+  batchUpdateRecommendationStatus(callback?: (err: AWSError, data: Resiliencehub.Types.BatchUpdateRecommendationStatusResponse) => void): Request<Resiliencehub.Types.BatchUpdateRecommendationStatusResponse, AWSError>;
+  /**
+   * Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe a Resilience Hub application, you provide an application name, resources from one or more CloudFormation stacks, Resource Groups, Terraform state files, AppRegistry applications, and an appropriate resiliency policy. In addition, you can also add resources that are located on Amazon Elastic Kubernetes Service (Amazon EKS) clusters as optional resources. For more information about the number of resources supported per application, see Service quotas. After you create an Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).
    */
   createApp(params: Resiliencehub.Types.CreateAppRequest, callback?: (err: AWSError, data: Resiliencehub.Types.CreateAppResponse) => void): Request<Resiliencehub.Types.CreateAppResponse, AWSError>;
   /**
-   * Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe an Resilience Hub application, you provide an application name, resources from one or more CloudFormation stacks, Resource Groups, Terraform state files, AppRegistry applications, and an appropriate resiliency policy. For more information about the number of resources supported per application, see Service Quotas. After you create an Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).
+   * Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe a Resilience Hub application, you provide an application name, resources from one or more CloudFormation stacks, Resource Groups, Terraform state files, AppRegistry applications, and an appropriate resiliency policy. In addition, you can also add resources that are located on Amazon Elastic Kubernetes Service (Amazon EKS) clusters as optional resources. For more information about the number of resources supported per application, see Service quotas. After you create an Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).
    */
   createApp(callback?: (err: AWSError, data: Resiliencehub.Types.CreateAppResponse) => void): Request<Resiliencehub.Types.CreateAppResponse, AWSError>;
   /**
@@ -203,6 +211,14 @@ declare class Resiliencehub extends Service {
    * Lists the alarm recommendations for an Resilience Hub application.
    */
   listAlarmRecommendations(callback?: (err: AWSError, data: Resiliencehub.Types.ListAlarmRecommendationsResponse) => void): Request<Resiliencehub.Types.ListAlarmRecommendationsResponse, AWSError>;
+  /**
+   * List of compliance drifts that were detected while running an assessment.
+   */
+  listAppAssessmentComplianceDrifts(params: Resiliencehub.Types.ListAppAssessmentComplianceDriftsRequest, callback?: (err: AWSError, data: Resiliencehub.Types.ListAppAssessmentComplianceDriftsResponse) => void): Request<Resiliencehub.Types.ListAppAssessmentComplianceDriftsResponse, AWSError>;
+  /**
+   * List of compliance drifts that were detected while running an assessment.
+   */
+  listAppAssessmentComplianceDrifts(callback?: (err: AWSError, data: Resiliencehub.Types.ListAppAssessmentComplianceDriftsResponse) => void): Request<Resiliencehub.Types.ListAppAssessmentComplianceDriftsResponse, AWSError>;
   /**
    * Lists the assessments for an Resilience Hub application. You can use request parameters to refine the results for the response object.
    */
@@ -431,7 +447,7 @@ declare class Resiliencehub extends Service {
 declare namespace Resiliencehub {
   export interface AddDraftAppVersionResourceMappingsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -441,7 +457,7 @@ declare namespace Resiliencehub {
   }
   export interface AddDraftAppVersionResourceMappingsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -449,7 +465,7 @@ declare namespace Resiliencehub {
      */
     appVersion: EntityVersion;
     /**
-     * Mappings used to map logical resources from the template to physical resources. You can use the mapping type CFN_STACK if the application template uses a logical stack name. Or you can map individual resources by using the mapping type RESOURCE. We recommend using the mapping type CFN_STACK if the application is backed by a CloudFormation stack.
+     * List of sources that are used to map a logical resource from the template to a physical resource. You can use sources such as CloudFormation, Terraform state files, AppRegistry applications, or Amazon EKS.
      */
     resourceMappings: ResourceMappingList;
   }
@@ -457,19 +473,23 @@ declare namespace Resiliencehub {
   export type AdditionalInfoValueList = String1024[];
   export interface AlarmRecommendation {
     /**
-     * The Application Component for the CloudWatch alarm recommendation.
+     * Application Component name for the CloudWatch alarm recommendation. This name is saved as the first item in the appComponentNames list.
      */
     appComponentName?: EntityId;
     /**
-     * The description of the recommendation.
+     * List of Application Component names for the CloudWatch alarm recommendation.
+     */
+    appComponentNames?: AppComponentNameList;
+    /**
+     * Description of the alarm recommendation.
      */
     description?: EntityDescription;
     /**
-     * The list of CloudWatch alarm recommendations.
+     * List of CloudWatch alarm recommendations.
      */
     items?: RecommendationItemList;
     /**
-     * The name of the alarm recommendation.
+     * Name of the alarm recommendation.
      */
     name: String500;
     /**
@@ -477,15 +497,15 @@ declare namespace Resiliencehub {
      */
     prerequisite?: String500;
     /**
-     * The identifier of the alarm recommendation.
+     * Identifier of the alarm recommendation.
      */
     recommendationId: Uuid;
     /**
-     * The reference identifier of the alarm recommendation.
+     * Reference identifier of the alarm recommendation.
      */
     referenceId: SpecReferenceId;
     /**
-     * The type of alarm recommendation.
+     * Type of alarm recommendation.
      */
     type: AlarmType;
   }
@@ -494,89 +514,109 @@ declare namespace Resiliencehub {
   export type AlarmType = "Metric"|"Composite"|"Canary"|"Logs"|"Event"|string;
   export interface App {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     *  Assessment execution schedule with 'Daily' or 'Disabled' values. 
+     * Assessment execution schedule with 'Daily' or 'Disabled' values. 
      */
     assessmentSchedule?: AppAssessmentScheduleType;
     /**
-     * The current status of compliance for the resiliency policy.
+     * Current status of compliance for the resiliency policy.
      */
     complianceStatus?: AppComplianceStatusType;
     /**
-     * The timestamp for when the app was created.
+     * Timestamp for when the app was created.
      */
     creationTime: TimeStamp;
     /**
-     * The optional description for an app.
+     * Optional description for an application.
      */
     description?: EntityDescription;
     /**
-     * The timestamp for the most recent compliance evaluation.
+     * Indicates if compliance drifts (deviations) were detected while running an assessment for your application.
+     */
+    driftStatus?: AppDriftStatusType;
+    /**
+     * The list of events you would like to subscribe and get notification for. Currently, Resilience Hub supports notifications only for Drift detected and Scheduled assessment failure events.
+     */
+    eventSubscriptions?: EventSubscriptionList;
+    /**
+     * Timestamp for the most recent compliance evaluation.
      */
     lastAppComplianceEvaluationTime?: TimeStamp;
     /**
-     * The timestamp for the most recent resiliency score evaluation.
+     * Indicates the last time that a drift was evaluated.
+     */
+    lastDriftEvaluationTime?: TimeStamp;
+    /**
+     * Timestamp for the most recent resiliency score evaluation.
      */
     lastResiliencyScoreEvaluationTime?: TimeStamp;
     /**
-     * The name for the application.
+     * Name for the application.
      */
     name: EntityName;
     /**
-     * The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Defines the roles and credentials that Resilience Hub would use while creating the application, importing its resources, and running an assessment.
+     */
+    permissionModel?: PermissionModel;
+    /**
+     * Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     policyArn?: Arn;
     /**
-     * The current resiliency score for the application.
+     * Current resiliency score for the application.
      */
     resiliencyScore?: Double;
     /**
-     * The status of the application.
+     * Status of the application.
      */
     status?: AppStatusType;
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
   }
   export interface AppAssessment {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn?: Arn;
     /**
-     * The version of the application.
+     * Version of an application.
      */
     appVersion?: EntityVersion;
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
-     * The name of the assessment.
+     * Name of the assessment.
      */
     assessmentName?: EntityName;
     /**
-     * The current status of the assessment for the resiliency policy.
+     * Current status of the assessment for the resiliency policy.
      */
     assessmentStatus: AssessmentStatus;
     /**
-     * The application compliance against the resiliency policy.
+     * Application compliance against the resiliency policy.
      */
     compliance?: AssessmentCompliance;
     /**
-     * The current status of the compliance for the resiliency policy.
+     * Current status of the compliance for the resiliency policy.
      */
     complianceStatus?: ComplianceStatus;
     /**
-     * The cost for the application.
+     * Cost for the application.
      */
     cost?: Cost;
     /**
-     * The end time for the action.
+     * Indicates if compliance drifts (deviations) were detected while running an assessment for your application.
+     */
+    driftStatus?: DriftStatus;
+    /**
+     * End time for the action.
      */
     endTime?: TimeStamp;
     /**
@@ -588,11 +628,11 @@ declare namespace Resiliencehub {
      */
     message?: String500;
     /**
-     * The resiliency policy.
+     * Resiliency policy of an application.
      */
     policy?: ResiliencyPolicy;
     /**
-     * The current resiliency score for the application.
+     * Current resiliency score for an application.
      */
     resiliencyScore?: ResiliencyScore;
     /**
@@ -600,64 +640,76 @@ declare namespace Resiliencehub {
      */
     resourceErrorsDetails?: ResourceErrorsDetails;
     /**
-     * The starting time for the action.
+     * Starting time for the action.
      */
     startTime?: TimeStamp;
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
+    /**
+     * Version name of the published application.
+     */
+    versionName?: EntityVersion;
   }
   export type AppAssessmentScheduleType = "Disabled"|"Daily"|string;
   export interface AppAssessmentSummary {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn?: Arn;
     /**
-     * The version of the application.
+     * Version of an application.
      */
     appVersion?: EntityVersion;
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
-     * The name of the assessment.
+     * Name of the assessment.
      */
     assessmentName?: EntityName;
     /**
-     * The current status of the assessment for the resiliency policy.
+     * Current status of the assessment for the resiliency policy.
      */
     assessmentStatus: AssessmentStatus;
     /**
-     * The current status of compliance for the resiliency policy.
+     * TCurrent status of compliance for the resiliency policy.
      */
     complianceStatus?: ComplianceStatus;
     /**
-     * The cost for the application.
+     * Cost for an application.
      */
     cost?: Cost;
     /**
-     * The end time for the action.
+     * Indicates if compliance drifts (deviations) were detected while running an assessment for your application.
+     */
+    driftStatus?: DriftStatus;
+    /**
+     * End time for the action.
      */
     endTime?: TimeStamp;
     /**
-     * The entity that invoked the assessment.
+     * Entity that invoked the assessment.
      */
     invoker?: AssessmentInvoker;
     /**
-     * The message from the assessment run.
+     * Message from the assessment run.
      */
     message?: String500;
     /**
-     * The current resiliency score for the application.
+     * Current resiliency score for the application.
      */
     resiliencyScore?: Double;
     /**
-     * The starting time for the action.
+     * Starting time for the action.
      */
     startTime?: TimeStamp;
+    /**
+     * Name of an application version.
+     */
+    versionName?: EntityVersion;
   }
   export type AppAssessmentSummaryList = AppAssessmentSummary[];
   export type AppComplianceStatusType = "PolicyBreached"|"PolicyMet"|"NotAssessed"|"ChangesDetected"|string;
@@ -667,11 +719,11 @@ declare namespace Resiliencehub {
      */
     additionalInfo?: AdditionalInfoMap;
     /**
-     * Unique identifier of the Application Component.
+     * Identifier of the Application Component.
      */
     id?: String255;
     /**
-     * The name of the Application Component.
+     * Name of the Application Component.
      */
     name: String255;
     /**
@@ -681,7 +733,7 @@ declare namespace Resiliencehub {
   }
   export interface AppComponentCompliance {
     /**
-     * The name of the Application Component.
+     * Name of the Application Component.
      */
     appComponentName?: EntityId;
     /**
@@ -701,12 +753,13 @@ declare namespace Resiliencehub {
      */
     resiliencyScore?: ResiliencyScore;
     /**
-     * The status of the action.
+     * Status of the action.
      */
     status?: ComplianceStatus;
   }
   export type AppComponentList = AppComponent[];
   export type AppComponentNameList = String255[];
+  export type AppDriftStatusType = "NotChecked"|"NotDetected"|"Detected"|string;
   export interface AppInputSource {
     /**
      * The namespace on your Amazon Elastic Kubernetes Service cluster.
@@ -737,7 +790,7 @@ declare namespace Resiliencehub {
   export type AppStatusType = "Active"|"Deleting"|string;
   export interface AppSummary {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -757,6 +810,10 @@ declare namespace Resiliencehub {
      */
     description?: EntityDescription;
     /**
+     * Indicates if compliance drifts (deviations) were detected while running an assessment for your application.
+     */
+    driftStatus?: AppDriftStatusType;
+    /**
      * The name of the application.
      */
     name: EntityName;
@@ -765,7 +822,7 @@ declare namespace Resiliencehub {
      */
     resiliencyScore?: Double;
     /**
-     * The status of the application.
+     * Status of the application.
      */
     status?: AppStatusType;
   }
@@ -774,9 +831,21 @@ declare namespace Resiliencehub {
   export type AppVersionList = AppVersionSummary[];
   export interface AppVersionSummary {
     /**
-     * The version of the application.
+     * Version of an application.
      */
     appVersion: EntityVersion;
+    /**
+     * Creation time of the application version.
+     */
+    creationTime?: TimeStamp;
+    /**
+     * Identifier of the application version.
+     */
+    identifier?: LongOptional;
+    /**
+     * Name of the application version.
+     */
+    versionName?: EntityVersion;
   }
   export type Arn = string;
   export type ArnList = Arn[];
@@ -785,28 +854,129 @@ declare namespace Resiliencehub {
   export type AssessmentStatus = "Pending"|"InProgress"|"Failed"|"Success"|string;
   export type AssessmentStatusList = AssessmentStatus[];
   export type AwsRegion = string;
+  export type BatchUpdateRecommendationStatusFailedEntries = BatchUpdateRecommendationStatusFailedEntry[];
+  export interface BatchUpdateRecommendationStatusFailedEntry {
+    /**
+     * An identifier of an entry in this batch that is used to communicate the result.  The entryIds of a batch request need to be unique within a request. 
+     */
+    entryId: String255;
+    /**
+     * Indicates the error that occurred while excluding an operational recommendation.
+     */
+    errorMessage: ErrorMessage;
+  }
+  export interface BatchUpdateRecommendationStatusRequest {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     */
+    appArn: Arn;
+    /**
+     * Defines the list of operational recommendations that need to be included or excluded.
+     */
+    requestEntries: UpdateRecommendationStatusRequestEntries;
+  }
+  export interface BatchUpdateRecommendationStatusResponse {
+    /**
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     */
+    appArn: Arn;
+    /**
+     * A list of items with error details about each item, which could not be included or excluded.
+     */
+    failedEntries: BatchUpdateRecommendationStatusFailedEntries;
+    /**
+     * A list of items that were included or excluded.
+     */
+    successfulEntries: BatchUpdateRecommendationStatusSuccessfulEntries;
+  }
+  export type BatchUpdateRecommendationStatusSuccessfulEntries = BatchUpdateRecommendationStatusSuccessfulEntry[];
+  export interface BatchUpdateRecommendationStatusSuccessfulEntry {
+    /**
+     * An identifier for an entry in this batch that is used to communicate the result.  The entryIds of a batch request need to be unique within a request. 
+     */
+    entryId: String255;
+    /**
+     * Indicates the reason for excluding an operational recommendation.
+     */
+    excludeReason?: ExcludeRecommendationReason;
+    /**
+     * Indicates if the operational recommendation was successfully excluded.
+     */
+    excluded: BooleanOptional;
+    /**
+     * The operational recommendation item.
+     */
+    item: UpdateRecommendationStatusItem;
+    /**
+     * Reference identifier of the operational recommendation.
+     */
+    referenceId: SpecReferenceId;
+  }
   export type BooleanOptional = boolean;
   export type ClientToken = string;
+  export interface ComplianceDrift {
+    /**
+     * Assessment identifier that is associated with this drift item.
+     */
+    actualReferenceId?: String255;
+    /**
+     * Actual compliance value of the entity.
+     */
+    actualValue?: AssessmentCompliance;
+    /**
+     * Identifier of your application.
+     */
+    appId?: String255;
+    /**
+     * Published version of your application on which drift was detected.
+     */
+    appVersion?: String255;
+    /**
+     * Difference type between actual and expected recovery point objective (RPO) and recovery time objective (RTO) values. Currently, Resilience Hub supports only NotEqual difference type.
+     */
+    diffType?: DifferenceType;
+    /**
+     * The type of drift detected. Currently, Resilience Hub supports only ApplicationCompliance drift type.
+     */
+    driftType?: DriftType;
+    /**
+     * Identifier of an entity in which drift was detected. For compliance drift, the entity ID can be either application ID or the AppComponent ID.
+     */
+    entityId?: String255;
+    /**
+     * The type of entity in which drift was detected. For compliance drifts, Resilience Hub supports AWS::ResilienceHub::AppComponent and AWS::ResilienceHub::Application.
+     */
+    entityType?: String255;
+    /**
+     * Assessment identifier of a previous assessment of the same application version. Resilience Hub uses the previous assessment (associated with the reference identifier) to compare the compliance with the current assessment to identify drifts.
+     */
+    expectedReferenceId?: String255;
+    /**
+     * The expected compliance value of an entity.
+     */
+    expectedValue?: AssessmentCompliance;
+  }
+  export type ComplianceDriftList = ComplianceDrift[];
   export type ComplianceStatus = "PolicyBreached"|"PolicyMet"|string;
   export type ComponentCompliancesList = AppComponentCompliance[];
   export interface ComponentRecommendation {
     /**
-     * The name of the Application Component.
+     * Name of the Application Component.
      */
     appComponentName: EntityId;
     /**
-     * The list of recommendations.
+     * List of recommendations.
      */
     configRecommendations: ConfigRecommendationList;
     /**
-     * The recommendation status.
+     * Status of the recommendation.
      */
     recommendationStatus: RecommendationComplianceStatus;
   }
   export type ComponentRecommendationList = ComponentRecommendation[];
   export interface ConfigRecommendation {
     /**
-     * The name of the Application Component.
+     * Name of the Application Component.
      */
     appComponentName?: EntityId;
     /**
@@ -838,7 +1008,7 @@ declare namespace Resiliencehub {
      */
     recommendationCompliance?: RecommendationCompliance;
     /**
-     * The reference identifier for the recommendation configuration.
+     * Reference identifier for the recommendation configuration.
      */
     referenceId: SpecReferenceId;
     /**
@@ -877,15 +1047,23 @@ declare namespace Resiliencehub {
      */
     description?: EntityDescription;
     /**
-     * The name for the application.
+     * The list of events you would like to subscribe and get notification for. Currently, Resilience Hub supports only Drift detected and Scheduled assessment failure events notification.
+     */
+    eventSubscriptions?: EventSubscriptionList;
+    /**
+     * Name of the application.
      */
     name: EntityName;
     /**
-     * The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Defines the roles and credentials that Resilience Hub would use while creating the application, importing its resources, and running an assessment.
+     */
+    permissionModel?: PermissionModel;
+    /**
+     * Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     policyArn?: Arn;
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
   }
@@ -901,7 +1079,7 @@ declare namespace Resiliencehub {
      */
     additionalInfo?: AdditionalInfoMap;
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -909,29 +1087,29 @@ declare namespace Resiliencehub {
      */
     clientToken?: ClientToken;
     /**
-     * The identifier of the Application Component.
+     * Identifier of the Application Component.
      */
     id?: String255;
     /**
-     * The name of the Application Component.
+     * Name of the Application Component.
      */
     name: String255;
     /**
-     * The type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent.
+     * Type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent.
      */
     type: String255;
   }
   export interface CreateAppVersionAppComponentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The list of Application Components that belong to this resource.
+     * List of Application Components that belong to this resource.
      */
     appComponent?: AppComponent;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
   }
@@ -941,19 +1119,19 @@ declare namespace Resiliencehub {
      */
     additionalInfo?: AdditionalInfoMap;
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The list of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added.
+     * List of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added.
      */
     appComponents: AppComponentNameList;
     /**
-     * The Amazon Web Services account that owns the physical resource.
+     * Amazon Web Services account that owns the physical resource.
      */
     awsAccountId?: CustomerId;
     /**
-     * The Amazon Web Services region that owns the physical resource.
+     * Amazon Web Services region that owns the physical resource.
      */
     awsRegion?: AwsRegion;
     /**
@@ -961,29 +1139,29 @@ declare namespace Resiliencehub {
      */
     clientToken?: ClientToken;
     /**
-     * The logical identifier of the resource.
+     * Logical identifier of the resource.
      */
     logicalResourceId: LogicalResourceId;
     /**
-     * The physical identifier of the resource.
+     * Physical identifier of the resource.
      */
     physicalResourceId: String2048;
     /**
-     * The name of the resource.
+     * Name of the resource.
      */
     resourceName?: EntityName;
     /**
-     * The type of resource.
+     * Type of resource.
      */
     resourceType: String255;
   }
   export interface CreateAppVersionResourceResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
     /**
@@ -993,7 +1171,7 @@ declare namespace Resiliencehub {
   }
   export interface CreateRecommendationTemplateRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
@@ -1021,7 +1199,7 @@ declare namespace Resiliencehub {
      */
     recommendationTypes?: RenderRecommendationTypeList;
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
   }
@@ -1053,7 +1231,7 @@ declare namespace Resiliencehub {
      */
     policyName: EntityName;
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
     /**
@@ -1072,7 +1250,7 @@ declare namespace Resiliencehub {
   export type DataLocationConstraint = "AnyLocation"|"SameContinent"|"SameCountry"|string;
   export interface DeleteAppAssessmentRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
@@ -1082,7 +1260,7 @@ declare namespace Resiliencehub {
   }
   export interface DeleteAppAssessmentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
@@ -1092,7 +1270,7 @@ declare namespace Resiliencehub {
   }
   export interface DeleteAppInputSourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1114,17 +1292,17 @@ declare namespace Resiliencehub {
   }
   export interface DeleteAppInputSourceResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn?: Arn;
     /**
-     * The name of the input source from where the application resource is imported from.
+     * Name of the input source from where the application resource is imported from.
      */
     appInputSource?: AppInputSource;
   }
   export interface DeleteAppRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1138,13 +1316,13 @@ declare namespace Resiliencehub {
   }
   export interface DeleteAppResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
   }
   export interface DeleteAppVersionAppComponentRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1152,35 +1330,35 @@ declare namespace Resiliencehub {
      */
     clientToken?: ClientToken;
     /**
-     * The identifier of the Application Component.
+     * Identifier of the Application Component.
      */
     id: String255;
   }
   export interface DeleteAppVersionAppComponentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The list of Application Components that belong to this resource.
+     * List of Application Components that belong to this resource.
      */
     appComponent?: AppComponent;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
   }
   export interface DeleteAppVersionResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Amazon Web Services account that owns the physical resource.
+     * Amazon Web Services account that owns the physical resource.
      */
     awsAccountId?: CustomerId;
     /**
-     * The Amazon Web Services region that owns the physical resource.
+     * Amazon Web Services region that owns the physical resource.
      */
     awsRegion?: AwsRegion;
     /**
@@ -1188,25 +1366,25 @@ declare namespace Resiliencehub {
      */
     clientToken?: ClientToken;
     /**
-     * The logical identifier of the resource.
+     * Logical identifier of the resource.
      */
     logicalResourceId?: LogicalResourceId;
     /**
-     * The physical identifier of the resource.
+     * Physical identifier of the resource.
      */
     physicalResourceId?: String2048;
     /**
-     * The name of the resource.
+     * Name of the resource.
      */
     resourceName?: EntityName;
   }
   export interface DeleteAppVersionResourceResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
     /**
@@ -1230,7 +1408,7 @@ declare namespace Resiliencehub {
      */
     recommendationTemplateArn: Arn;
     /**
-     * The status of the action.
+     * Status of the action.
      */
     status: RecommendationTemplateStatus;
   }
@@ -1240,19 +1418,19 @@ declare namespace Resiliencehub {
      */
     clientToken?: ClientToken;
     /**
-     * The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     policyArn: Arn;
   }
   export interface DeleteResiliencyPolicyResponse {
     /**
-     * The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     policyArn: Arn;
   }
   export interface DescribeAppAssessmentRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
   }
@@ -1264,7 +1442,7 @@ declare namespace Resiliencehub {
   }
   export interface DescribeAppRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
   }
@@ -1276,79 +1454,79 @@ declare namespace Resiliencehub {
   }
   export interface DescribeAppVersionAppComponentRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
     /**
-     * The identifier of the Application Component.
+     * Identifier of the Application Component.
      */
     id: String255;
   }
   export interface DescribeAppVersionAppComponentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The list of Application Components that belong to this resource.
+     * List of Application Components that belong to this resource.
      */
     appComponent?: AppComponent;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
   }
   export interface DescribeAppVersionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
   }
   export interface DescribeAppVersionResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
     /**
-     * The Amazon Web Services account that owns the physical resource.
+     * Amazon Web Services account that owns the physical resource.
      */
     awsAccountId?: CustomerId;
     /**
-     * The Amazon Web Services region that owns the physical resource.
+     * Amazon Web Services region that owns the physical resource.
      */
     awsRegion?: AwsRegion;
     /**
-     * The logical identifier of the resource.
+     * Logical identifier of the resource.
      */
     logicalResourceId?: LogicalResourceId;
     /**
-     * The physical identifier of the resource.
+     * Physical identifier of the resource.
      */
     physicalResourceId?: String2048;
     /**
-     * The name of the resource.
+     * Name of the resource.
      */
     resourceName?: EntityName;
   }
   export interface DescribeAppVersionResourceResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
     /**
@@ -1358,7 +1536,7 @@ declare namespace Resiliencehub {
   }
   export interface DescribeAppVersionResourcesResolutionStatusRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1372,7 +1550,7 @@ declare namespace Resiliencehub {
   }
   export interface DescribeAppVersionResourcesResolutionStatusResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1388,7 +1566,7 @@ declare namespace Resiliencehub {
      */
     resolutionId: String255;
     /**
-     * The status of the action.
+     * Status of the action.
      */
     status: ResourceResolutionStatusType;
   }
@@ -1398,17 +1576,17 @@ declare namespace Resiliencehub {
      */
     additionalInfo?: AdditionalInfoMap;
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
   }
   export interface DescribeAppVersionTemplateRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1418,11 +1596,11 @@ declare namespace Resiliencehub {
   }
   export interface DescribeAppVersionTemplateResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * A JSON string that provides information about your application structure. To learn more about the appTemplateBody template, see the sample template provided in the Examples section. The appTemplateBody JSON string has the following structure:     resources   The list of logical resources that must be included in the Resilience Hub application. Type: Array  Don't add the resources that you want to exclude.  Each resources array item includes the following fields:     logicalResourceId   The logical identifier of the resource. Type: Object Each logicalResourceId object includes the following fields:    identifier  The identifier of the resource. Type: String    logicalStackName  The name of the CloudFormation stack this resource belongs to. Type: String    resourceGroupName  The name of the resource group this resource belongs to. Type: String    terraformSourceName  The name of the Terraform S3 state file this resource belongs to. Type: String    eksSourceName  The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format.  Type: String       type   The type of resource. Type: string     name   The name of the resource. Type: String    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"         appComponents   The list of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added. Type: Array Each appComponents array item includes the following fields:    name  The name of the Application Component. Type: String    type  The type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent. Type: String    resourceNames  The list of included resources that are assigned to the Application Component. Type: Array of strings    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"         excludedResources   The list of logical resource identifiers to be excluded from the application. Type: Array  Don't add the resources that you want to include.  Each excludedResources array item includes the following fields:     logicalResourceIds   The logical identifier of the resource. Type: Object  You can configure only one of the following fields:    logicalStackName     resourceGroupName     terraformSourceName     eksSourceName     Each logicalResourceIds object includes the following fields:    identifier  The identifier of the resource. Type: String    logicalStackName  The name of the CloudFormation stack this resource belongs to. Type: String    resourceGroupName  The name of the resource group this resource belongs to. Type: String    terraformSourceName  The name of the Terraform S3 state file this resource belongs to. Type: String    eksSourceName  The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format.  Type: String         version   The Resilience Hub application version.    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"    
+     * A JSON string that provides information about your application structure. To learn more about the appTemplateBody template, see the sample template provided in the Examples section. The appTemplateBody JSON string has the following structure:     resources   The list of logical resources that must be included in the Resilience Hub application. Type: Array  Don't add the resources that you want to exclude.  Each resources array item includes the following fields:     logicalResourceId   Logical identifier of the resource. Type: Object Each logicalResourceId object includes the following fields:    identifier  Identifier of the resource. Type: String    logicalStackName  The name of the CloudFormation stack this resource belongs to. Type: String    resourceGroupName  The name of the resource group this resource belongs to. Type: String    terraformSourceName  The name of the Terraform S3 state file this resource belongs to. Type: String    eksSourceName  Name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format.  Type: String       type   The type of resource. Type: string     name   The name of the resource. Type: String    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"         appComponents   List of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added. Type: Array Each appComponents array item includes the following fields:    name  Name of the Application Component. Type: String    type  Type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent. Type: String    resourceNames  The list of included resources that are assigned to the Application Component. Type: Array of strings    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"         excludedResources   The list of logical resource identifiers to be excluded from the application. Type: Array  Don't add the resources that you want to include.  Each excludedResources array item includes the following fields:     logicalResourceIds   Logical identifier of the resource. Type: Object  You can configure only one of the following fields:    logicalStackName     resourceGroupName     terraformSourceName     eksSourceName     Each logicalResourceIds object includes the following fields:    identifier  Identifier of the resource. Type: String    logicalStackName  The name of the CloudFormation stack this resource belongs to. Type: String    resourceGroupName  The name of the resource group this resource belongs to. Type: String    terraformSourceName  The name of the Terraform S3 state file this resource belongs to. Type: String    eksSourceName  Name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format.  Type: String         version   Resilience Hub application version.    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"    
      */
     appTemplateBody: AppTemplateBody;
     /**
@@ -1432,13 +1610,13 @@ declare namespace Resiliencehub {
   }
   export interface DescribeDraftAppVersionResourcesImportStatusRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
   }
   export interface DescribeDraftAppVersionResourcesImportStatusResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1450,7 +1628,7 @@ declare namespace Resiliencehub {
      */
     errorMessage?: String500;
     /**
-     * The status of the action.
+     * Status of the action.
      */
     status: ResourceImportStatusType;
     /**
@@ -1460,7 +1638,7 @@ declare namespace Resiliencehub {
   }
   export interface DescribeResiliencyPolicyRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     policyArn: Arn;
   }
@@ -1470,6 +1648,7 @@ declare namespace Resiliencehub {
      */
     policy: ResiliencyPolicy;
   }
+  export type DifferenceType = "NotEqual"|string;
   export interface DisruptionCompliance {
     /**
      * The Recovery Point Objective (RPO) that is achievable, in seconds.
@@ -1500,7 +1679,7 @@ declare namespace Resiliencehub {
      */
     rpoDescription?: String500;
     /**
-     * The RPO reference identifier.
+     * Reference identifier of the RPO .
      */
     rpoReferenceId?: String500;
     /**
@@ -1508,7 +1687,7 @@ declare namespace Resiliencehub {
      */
     rtoDescription?: String500;
     /**
-     * The RTO reference identifier.
+     * Reference identifier of the RTO.
      */
     rtoReferenceId?: String500;
   }
@@ -1517,11 +1696,13 @@ declare namespace Resiliencehub {
   export type DisruptionType = "Software"|"Hardware"|"AZ"|"Region"|string;
   export type DocumentName = string;
   export type Double = number;
+  export type DriftStatus = "NotChecked"|"NotDetected"|"Detected"|string;
+  export type DriftType = "ApplicationCompliance"|string;
   export type EksNamespace = string;
   export type EksNamespaceList = EksNamespace[];
   export interface EksSource {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: arn:aws:eks:region:account-id:cluster/cluster-name. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: arn:aws:eks:region:account-id:cluster/cluster-name. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     eksClusterArn: Arn;
     /**
@@ -1531,7 +1712,7 @@ declare namespace Resiliencehub {
   }
   export interface EksSourceClusterNamespace {
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: arn:aws:eks:region:account-id:cluster/cluster-name. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Amazon Elastic Kubernetes Service cluster. The format for this ARN is: arn:aws:eks:region:account-id:cluster/cluster-name. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     eksClusterArn: Arn;
     /**
@@ -1547,6 +1728,23 @@ declare namespace Resiliencehub {
   export type EntityVersion = string;
   export type ErrorMessage = string;
   export type EstimatedCostTier = "L1"|"L2"|"L3"|"L4"|string;
+  export interface EventSubscription {
+    /**
+     * The type of event you would like to subscribe and get notification for. Currently, Resilience Hub supports notifications only for Drift detected (DriftDetected) and Scheduled assessment failure (ScheduledAssessmentFailure) events.
+     */
+    eventType: EventType;
+    /**
+     * Unique name to identify an event subscription.
+     */
+    name: String255;
+    /**
+     * Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     */
+    snsTopicArn?: Arn;
+  }
+  export type EventSubscriptionList = EventSubscription[];
+  export type EventType = "ScheduledAssessmentFailure"|"DriftDetected"|string;
+  export type ExcludeRecommendationReason = "AlreadyImplemented"|"NotRelevant"|"ComplexityOfImplementation"|string;
   export interface FailurePolicy {
     /**
      * The Recovery Point Objective (RPO), in seconds.
@@ -1558,9 +1756,12 @@ declare namespace Resiliencehub {
     rtoInSecs: Seconds;
   }
   export type HaArchitecture = "MultiSite"|"WarmStandby"|"PilotLight"|"BackupAndRestore"|"NoRecoveryPlan"|string;
+  export type IamRoleArn = string;
+  export type IamRoleArnList = IamRoleArn[];
+  export type IamRoleName = string;
   export interface ImportResourcesToDraftAppVersionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1582,7 +1783,7 @@ declare namespace Resiliencehub {
   }
   export interface ImportResourcesToDraftAppVersionResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1598,7 +1799,7 @@ declare namespace Resiliencehub {
      */
     sourceArns?: ArnList;
     /**
-     * The status of the action.
+     * Status of the action.
      */
     status: ResourceImportStatusType;
     /**
@@ -1609,11 +1810,11 @@ declare namespace Resiliencehub {
   export type Integer = number;
   export interface ListAlarmRecommendationsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1627,13 +1828,37 @@ declare namespace Resiliencehub {
      */
     alarmRecommendations: AlarmRecommendationList;
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAppAssessmentComplianceDriftsRequest {
+    /**
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     */
+    assessmentArn: Arn;
+    /**
+     * Indicates the maximum number of applications requested.
+     */
+    maxResults?: MaxResults;
+    /**
+     * Indicates the unique token number of the next application to be checked for compliance and regulatory requirements from the list of applications.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAppAssessmentComplianceDriftsResponse {
+    /**
+     * Indicates compliance drifts (recovery time objective (RTO) and recovery point objective (RPO)) detected for an assessed entity.
+     */
+    complianceDrifts: ComplianceDriftList;
+    /**
+     * Token number of the next application to be checked for compliance and regulatory requirements from the list of applications.
      */
     nextToken?: NextToken;
   }
   export interface ListAppAssessmentsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn?: Arn;
     /**
@@ -1653,7 +1878,7 @@ declare namespace Resiliencehub {
      */
     invoker?: AssessmentInvoker;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1671,17 +1896,17 @@ declare namespace Resiliencehub {
      */
     assessmentSummaries: AppAssessmentSummaryList;
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListAppComponentCompliancesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1695,17 +1920,17 @@ declare namespace Resiliencehub {
      */
     componentCompliances: ComponentCompliancesList;
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListAppComponentRecommendationsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1719,17 +1944,17 @@ declare namespace Resiliencehub {
      */
     componentRecommendations: ComponentRecommendationList;
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListAppInputSourcesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
     /**
@@ -1747,17 +1972,17 @@ declare namespace Resiliencehub {
      */
     appInputSources: AppInputSourceList;
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListAppVersionAppComponentsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The version of the Application Component.
+     * Version of the Application Component.
      */
     appVersion: EntityVersion;
     /**
@@ -1771,7 +1996,7 @@ declare namespace Resiliencehub {
   }
   export interface ListAppVersionAppComponentsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1779,17 +2004,17 @@ declare namespace Resiliencehub {
      */
     appComponents?: AppComponentList;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListAppVersionResourceMappingsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1797,7 +2022,7 @@ declare namespace Resiliencehub {
      */
     appVersion: EntityVersion;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1807,7 +2032,7 @@ declare namespace Resiliencehub {
   }
   export interface ListAppVersionResourceMappingsResponse {
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
     /**
@@ -1817,7 +2042,7 @@ declare namespace Resiliencehub {
   }
   export interface ListAppVersionResourcesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -1825,7 +2050,7 @@ declare namespace Resiliencehub {
      */
     appVersion: EntityVersion;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1839,7 +2064,7 @@ declare namespace Resiliencehub {
   }
   export interface ListAppVersionResourcesResponse {
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
     /**
@@ -1853,17 +2078,25 @@ declare namespace Resiliencehub {
   }
   export interface ListAppVersionsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Upper limit of the time range to filter the application versions.
+     */
+    endTime?: TimeStamp;
+    /**
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
      * Null, or the token from a previous call to get the next set of results.
      */
     nextToken?: NextToken;
+    /**
+     * Lower limit of the time range to filter the application versions.
+     */
+    startTime?: TimeStamp;
   }
   export interface ListAppVersionsResponse {
     /**
@@ -1871,17 +2104,17 @@ declare namespace Resiliencehub {
      */
     appVersions: AppVersionList;
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListAppsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn?: Arn;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1899,17 +2132,17 @@ declare namespace Resiliencehub {
      */
     appSummaries: AppSummaryList;
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
   export interface ListRecommendationTemplatesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1929,13 +2162,13 @@ declare namespace Resiliencehub {
      */
     reverseOrder?: BooleanOptional;
     /**
-     * The status of the action.
+     * Status of the action.
      */
     status?: RecommendationTemplateStatusList;
   }
   export interface ListRecommendationTemplatesResponse {
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
     /**
@@ -1945,7 +2178,7 @@ declare namespace Resiliencehub {
   }
   export interface ListResiliencyPoliciesRequest {
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1959,7 +2192,7 @@ declare namespace Resiliencehub {
   }
   export interface ListResiliencyPoliciesResponse {
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
     /**
@@ -1969,11 +2202,11 @@ declare namespace Resiliencehub {
   }
   export interface ListSopRecommendationsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -1983,7 +2216,7 @@ declare namespace Resiliencehub {
   }
   export interface ListSopRecommendationsResponse {
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
     /**
@@ -1993,7 +2226,7 @@ declare namespace Resiliencehub {
   }
   export interface ListSuggestedResiliencyPoliciesRequest {
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -2003,7 +2236,7 @@ declare namespace Resiliencehub {
   }
   export interface ListSuggestedResiliencyPoliciesResponse {
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
     /**
@@ -2019,17 +2252,17 @@ declare namespace Resiliencehub {
   }
   export interface ListTagsForResourceResponse {
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
   }
   export interface ListTestRecommendationsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -2039,7 +2272,7 @@ declare namespace Resiliencehub {
   }
   export interface ListTestRecommendationsResponse {
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
     /**
@@ -2049,7 +2282,7 @@ declare namespace Resiliencehub {
   }
   export interface ListUnsupportedAppVersionResourcesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -2057,7 +2290,7 @@ declare namespace Resiliencehub {
      */
     appVersion: EntityVersion;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * Maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
      */
     maxResults?: MaxResults;
     /**
@@ -2071,7 +2304,7 @@ declare namespace Resiliencehub {
   }
   export interface ListUnsupportedAppVersionResourcesResponse {
     /**
-     * The token for the next set of results, or null if there are no more results.
+     * Token for the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
     /**
@@ -2085,11 +2318,11 @@ declare namespace Resiliencehub {
   }
   export interface LogicalResourceId {
     /**
-     * The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format. 
+     * Name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format. 
      */
     eksSourceName?: String255;
     /**
-     * The identifier of the resource.
+     * Identifier of the resource.
      */
     identifier: String255;
     /**
@@ -2105,8 +2338,24 @@ declare namespace Resiliencehub {
      */
     terraformSourceName?: String255;
   }
+  export type LongOptional = number;
   export type MaxResults = number;
   export type NextToken = string;
+  export interface PermissionModel {
+    /**
+     * Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.    These ARNs are required only when your resources are in other accounts and you have different role name in these accounts. Else, the invoker role name will be used in the other accounts.   These roles must have a trust policy with iam:AssumeRole permission to the invoker role in the primary account.   
+     */
+    crossAccountRoleArns?: IamRoleArnList;
+    /**
+     * Existing Amazon Web Services IAM role name in the primary Amazon Web Services account that will be assumed by Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.  You must have iam:passRole permission for this role while creating or updating the application. 
+     */
+    invokerRoleName?: IamRoleName;
+    /**
+     * Defines how Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your Amazon Web Services account, or by using the credentials of the current IAM user.
+     */
+    type: PermissionModelType;
+  }
+  export type PermissionModelType = "LegacyIAMUser"|"RoleBased"|string;
   export type PhysicalIdentifierType = "Arn"|"Native"|string;
   export interface PhysicalResource {
     /**
@@ -2122,15 +2371,15 @@ declare namespace Resiliencehub {
      */
     excluded?: BooleanOptional;
     /**
-     * The logical identifier of the resource.
+     * Logical identifier of the resource.
      */
     logicalResourceId: LogicalResourceId;
     /**
-     * The name of the parent resource.
+     * Name of the parent resource.
      */
     parentResourceName?: EntityName;
     /**
-     * The physical identifier of the resource.
+     * Identifier of the physical resource.
      */
     physicalResourceId: PhysicalResourceId;
     /**
@@ -2142,7 +2391,7 @@ declare namespace Resiliencehub {
      */
     resourceType: String255;
     /**
-     * The type of input source.
+     * Type of input source.
      */
     sourceType?: ResourceSourceType;
   }
@@ -2156,44 +2405,56 @@ declare namespace Resiliencehub {
      */
     awsRegion?: AwsRegion;
     /**
-     * The identifier of the physical resource.
+     * Identifier of the physical resource.
      */
     identifier: String255;
     /**
-     * Specifies the type of physical resource identifier.  Arn  The resource identifier is an Amazon Resource Name (ARN) .  Native  The resource identifier is an Resilience Hub-native identifier.  
+     * Specifies the type of physical resource identifier.  Arn  The resource identifier is an Amazon Resource Name (ARN) and it can identify the following list of resources:    AWS::ECS::Service     AWS::EFS::FileSystem     AWS::ElasticLoadBalancingV2::LoadBalancer     AWS::Lambda::Function     AWS::SNS::Topic     Native  The resource identifier is an Resilience Hub-native identifier and it can identify the following list of resources:    AWS::ApiGateway::RestApi     AWS::ApiGatewayV2::Api     AWS::AutoScaling::AutoScalingGroup     AWS::DocDB::DBCluster     AWS::DocDB::DBGlobalCluster     AWS::DocDB::DBInstance     AWS::DynamoDB::GlobalTable     AWS::DynamoDB::Table     AWS::EC2::EC2Fleet     AWS::EC2::Instance     AWS::EC2::NatGateway     AWS::EC2::Volume     AWS::ElasticLoadBalancing::LoadBalancer     AWS::RDS::DBCluster     AWS::RDS::DBInstance     AWS::RDS::GlobalCluster     AWS::Route53::RecordSet     AWS::S3::Bucket     AWS::SQS::Queue     
      */
     type: PhysicalIdentifierType;
   }
   export type PhysicalResourceList = PhysicalResource[];
   export interface PublishAppVersionRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
+    /**
+     * Name of the application version.
+     */
+    versionName?: EntityVersion;
   }
   export interface PublishAppVersionResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
      * The version of the application.
      */
     appVersion?: EntityVersion;
+    /**
+     * Identifier of the application version.
+     */
+    identifier?: LongOptional;
+    /**
+     * Name of the application version.
+     */
+    versionName?: EntityVersion;
   }
   export interface PutDraftAppVersionTemplateRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * A JSON string that provides information about your application structure. To learn more about the appTemplateBody template, see the sample template provided in the Examples section. The appTemplateBody JSON string has the following structure:     resources   The list of logical resources that must be included in the Resilience Hub application. Type: Array  Don't add the resources that you want to exclude.  Each resources array item includes the following fields:     logicalResourceId   The logical identifier of the resource. Type: Object Each logicalResourceId object includes the following fields:    identifier  The identifier of the resource. Type: String    logicalStackName  The name of the CloudFormation stack this resource belongs to. Type: String    resourceGroupName  The name of the resource group this resource belongs to. Type: String    terraformSourceName  The name of the Terraform S3 state file this resource belongs to. Type: String    eksSourceName  The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format.  Type: String       type   The type of resource. Type: string     name   The name of the resource. Type: String    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"         appComponents   The list of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added. Type: Array Each appComponents array item includes the following fields:    name  The name of the Application Component. Type: String    type  The type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent. Type: String    resourceNames  The list of included resources that are assigned to the Application Component. Type: Array of strings    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"         excludedResources   The list of logical resource identifiers to be excluded from the application. Type: Array  Don't add the resources that you want to include.  Each excludedResources array item includes the following fields:     logicalResourceIds   The logical identifier of the resource. Type: Object  You can configure only one of the following fields:    logicalStackName     resourceGroupName     terraformSourceName     eksSourceName     Each logicalResourceIds object includes the following fields:    identifier  The identifier of the resource. Type: String    logicalStackName  The name of the CloudFormation stack this resource belongs to. Type: String    resourceGroupName  The name of the resource group this resource belongs to. Type: String    terraformSourceName  The name of the Terraform S3 state file this resource belongs to. Type: String    eksSourceName  The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format.  Type: String         version   The Resilience Hub application version.    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"    
+     * A JSON string that provides information about your application structure. To learn more about the appTemplateBody template, see the sample template provided in the Examples section. The appTemplateBody JSON string has the following structure:     resources   The list of logical resources that must be included in the Resilience Hub application. Type: Array  Don't add the resources that you want to exclude.  Each resources array item includes the following fields:     logicalResourceId   Logical identifier of the resource. Type: Object Each logicalResourceId object includes the following fields:    identifier  Identifier of the resource. Type: String    logicalStackName  The name of the CloudFormation stack this resource belongs to. Type: String    resourceGroupName  The name of the resource group this resource belongs to. Type: String    terraformSourceName  The name of the Terraform S3 state file this resource belongs to. Type: String    eksSourceName  Name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format.  Type: String       type   The type of resource. Type: string     name   The name of the resource. Type: String    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"         appComponents   List of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added. Type: Array Each appComponents array item includes the following fields:    name  Name of the Application Component. Type: String    type  Type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent. Type: String    resourceNames  The list of included resources that are assigned to the Application Component. Type: Array of strings    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"         excludedResources   The list of logical resource identifiers to be excluded from the application. Type: Array  Don't add the resources that you want to include.  Each excludedResources array item includes the following fields:     logicalResourceIds   Logical identifier of the resource. Type: Object  You can configure only one of the following fields:    logicalStackName     resourceGroupName     terraformSourceName     eksSourceName     Each logicalResourceIds object includes the following fields:    identifier  Identifier of the resource. Type: String    logicalStackName  The name of the CloudFormation stack this resource belongs to. Type: String    resourceGroupName  The name of the resource group this resource belongs to. Type: String    terraformSourceName  The name of the Terraform S3 state file this resource belongs to. Type: String    eksSourceName  Name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format.  Type: String         version   Resilience Hub application version.    additionalInfo  Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"    
      */
     appTemplateBody: AppTemplateBody;
   }
   export interface PutDraftAppVersionTemplateResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn?: Arn;
     /**
@@ -2232,11 +2493,19 @@ declare namespace Resiliencehub {
      */
     alreadyImplemented?: BooleanOptional;
     /**
-     * The resource identifier.
+     * Indicates the reason for excluding an operational recommendation.
+     */
+    excludeReason?: ExcludeRecommendationReason;
+    /**
+     * Indicates if an operational recommendation item is excluded.
+     */
+    excluded?: BooleanOptional;
+    /**
+     * Identifier of the resource.
      */
     resourceId?: String500;
     /**
-     * The target account identifier.
+     * Identifier of the target account.
      */
     targetAccountId?: CustomerId;
     /**
@@ -2247,11 +2516,11 @@ declare namespace Resiliencehub {
   export type RecommendationItemList = RecommendationItem[];
   export interface RecommendationTemplate {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn?: Arn;
     /**
-     * The Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     assessmentArn: Arn;
     /**
@@ -2259,15 +2528,15 @@ declare namespace Resiliencehub {
      */
     endTime?: TimeStamp;
     /**
-     * The format of the recommendation template.  CfnJson  The template is CloudFormation JSON.  CfnYaml  The template is CloudFormation YAML.  
+     * Format of the recommendation template.  CfnJson  The template is CloudFormation JSON.  CfnYaml  The template is CloudFormation YAML.  
      */
     format: TemplateFormat;
     /**
-     * The message for the recommendation template.
+     * Message for the recommendation template.
      */
     message?: String500;
     /**
-     * The name for the recommendation template.
+     * Name for the recommendation template.
      */
     name: EntityName;
     /**
@@ -2279,7 +2548,7 @@ declare namespace Resiliencehub {
      */
     recommendationIds?: RecommendationIdList;
     /**
-     * The Amazon Resource Name (ARN) for the recommendation template.
+     * Amazon Resource Name (ARN) for the recommendation template.
      */
     recommendationTemplateArn: Arn;
     /**
@@ -2291,11 +2560,11 @@ declare namespace Resiliencehub {
      */
     startTime?: TimeStamp;
     /**
-     * The status of the action.
+     * Status of the action.
      */
     status: RecommendationTemplateStatus;
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
     /**
@@ -2308,7 +2577,7 @@ declare namespace Resiliencehub {
   export type RecommendationTemplateStatusList = RecommendationTemplateStatus[];
   export interface RemoveDraftAppVersionResourceMappingsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -2338,7 +2607,7 @@ declare namespace Resiliencehub {
   }
   export interface RemoveDraftAppVersionResourceMappingsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn?: Arn;
     /**
@@ -2367,7 +2636,7 @@ declare namespace Resiliencehub {
      */
     policy?: DisruptionPolicy;
     /**
-     * The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     policyArn?: Arn;
     /**
@@ -2379,7 +2648,7 @@ declare namespace Resiliencehub {
      */
     policyName?: EntityName;
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
     /**
@@ -2387,7 +2656,7 @@ declare namespace Resiliencehub {
      */
     tier?: ResiliencyPolicyTier;
   }
-  export type ResiliencyPolicyTier = "MissionCritical"|"Critical"|"Important"|"CoreServices"|"NonCritical"|string;
+  export type ResiliencyPolicyTier = "MissionCritical"|"Critical"|"Important"|"CoreServices"|"NonCritical"|"NotApplicable"|string;
   export interface ResiliencyScore {
     /**
      * The disruption score for a valid key.
@@ -2400,7 +2669,7 @@ declare namespace Resiliencehub {
   }
   export interface ResolveAppVersionResourcesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -2410,7 +2679,7 @@ declare namespace Resiliencehub {
   }
   export interface ResolveAppVersionResourcesResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -2422,17 +2691,17 @@ declare namespace Resiliencehub {
      */
     resolutionId: String255;
     /**
-     * The status of the action.
+     * Status of the action.
      */
     status: ResourceResolutionStatusType;
   }
   export interface ResourceError {
     /**
-     *  This is the identifier of the resource. 
+     * Identifier of the logical resource. 
      */
     logicalResourceId?: String255;
     /**
-     *  This is the identifier of the physical resource. 
+     * Identifier of the physical resource. 
      */
     physicalResourceId?: String255;
     /**
@@ -2459,7 +2728,7 @@ declare namespace Resiliencehub {
      */
     appRegistryAppName?: EntityName;
     /**
-     * The name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format. 
+     * Name of the Amazon Elastic Kubernetes Service cluster and namespace this resource belongs to.  This parameter accepts values in "eks-cluster/namespace" format. 
      */
     eksSourceName?: String255;
     /**
@@ -2471,15 +2740,15 @@ declare namespace Resiliencehub {
      */
     mappingType: ResourceMappingType;
     /**
-     * The identifier of this resource.
+     * Identifier of the physical resource.
      */
     physicalResourceId: PhysicalResourceId;
     /**
-     * The name of the resource group this resource is mapped to.
+     * Name of the resource group that the resource is mapped to.
      */
     resourceGroupName?: EntityName;
     /**
-     * The name of the resource this resource is mapped to.
+     * Name of the resource that the resource is mapped to.
      */
     resourceName?: EntityName;
     /**
@@ -2505,11 +2774,11 @@ declare namespace Resiliencehub {
   export type Seconds = number;
   export interface SopRecommendation {
     /**
-     * The name of the Application Component.
+     * Name of the Application Component.
      */
     appComponentName?: EntityId;
     /**
-     * The description of the SOP recommendation.
+     * Description of the SOP recommendation.
      */
     description?: String500;
     /**
@@ -2517,11 +2786,11 @@ declare namespace Resiliencehub {
      */
     items?: RecommendationItemList;
     /**
-     * The name of the SOP recommendation.
+     * Name of the SOP recommendation.
      */
     name?: DocumentName;
     /**
-     * The prerequisite for the SOP recommendation.
+     * Prerequisite for the SOP recommendation.
      */
     prerequisite?: String500;
     /**
@@ -2529,7 +2798,7 @@ declare namespace Resiliencehub {
      */
     recommendationId: Uuid;
     /**
-     * The reference identifier for the SOP recommendation.
+     * Reference identifier for the SOP recommendation.
      */
     referenceId: SpecReferenceId;
     /**
@@ -2542,7 +2811,7 @@ declare namespace Resiliencehub {
   export type SpecReferenceId = string;
   export interface StartAppAssessmentRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -2558,7 +2827,7 @@ declare namespace Resiliencehub {
      */
     clientToken?: ClientToken;
     /**
-     * The tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
+     * Tags assigned to the resource. A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key/value pair.
      */
     tags?: TagMap;
   }
@@ -2580,7 +2849,7 @@ declare namespace Resiliencehub {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource. 
+     * Amazon Resource Name (ARN) of the resource. 
      */
     resourceArn: Arn;
     /**
@@ -2601,7 +2870,7 @@ declare namespace Resiliencehub {
   export type TerraformSourceList = TerraformSource[];
   export interface TestRecommendation {
     /**
-     * The name of the Application Component.
+     * Name of the Application Component.
      */
     appComponentName?: EntityId;
     /**
@@ -2609,11 +2878,11 @@ declare namespace Resiliencehub {
      */
     dependsOnAlarms?: AlarmReferenceIdList;
     /**
-     * The description for the test recommendation.
+     * Description for the test recommendation.
      */
     description?: String500;
     /**
-     * The intent of the test recommendation.
+     * Intent of the test recommendation.
      */
     intent?: EntityDescription;
     /**
@@ -2621,11 +2890,11 @@ declare namespace Resiliencehub {
      */
     items?: RecommendationItemList;
     /**
-     * The name of the test recommendation.
+     * Name of the test recommendation.
      */
     name?: DocumentName;
     /**
-     * The prerequisite of the test recommendation.
+     * Prerequisite of the test recommendation.
      */
     prerequisite?: String500;
     /**
@@ -2633,15 +2902,15 @@ declare namespace Resiliencehub {
      */
     recommendationId?: Uuid;
     /**
-     * The reference identifier for the test recommendation.
+     * Reference identifier for the test recommendation.
      */
     referenceId: SpecReferenceId;
     /**
-     * The level of risk for this test recommendation.
+     * Level of risk for this test recommendation.
      */
     risk?: TestRisk;
     /**
-     * The type of test recommendation.
+     * Type of test recommendation.
      */
     type?: TestType;
   }
@@ -2651,11 +2920,11 @@ declare namespace Resiliencehub {
   export type TimeStamp = Date;
   export interface UnsupportedResource {
     /**
-     * The logical resource identifier for the unsupported resource.
+     * Logical resource identifier for the unsupported resource.
      */
     logicalResourceId: LogicalResourceId;
     /**
-     * The physical resource identifier for the unsupported resource.
+     * Physical resource identifier for the unsupported resource.
      */
     physicalResourceId: PhysicalResourceId;
     /**
@@ -2670,7 +2939,7 @@ declare namespace Resiliencehub {
   export type UnsupportedResourceList = UnsupportedResource[];
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource. 
+     * Amazon Resource Name (ARN) of the resource. 
      */
     resourceArn: Arn;
     /**
@@ -2682,7 +2951,7 @@ declare namespace Resiliencehub {
   }
   export interface UpdateAppRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
@@ -2698,7 +2967,15 @@ declare namespace Resiliencehub {
      */
     description?: EntityDescription;
     /**
-     * The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * The list of events you would like to subscribe and get notification for. Currently, Resilience Hub supports notifications only for Drift detected and Scheduled assessment failure events.
+     */
+    eventSubscriptions?: EventSubscriptionList;
+    /**
+     * Defines the roles and credentials that Resilience Hub would use while creating an application, importing its resources, and running an assessment.
+     */
+    permissionModel?: PermissionModel;
+    /**
+     * Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     policyArn?: Arn;
   }
@@ -2714,33 +2991,33 @@ declare namespace Resiliencehub {
      */
     additionalInfo?: AdditionalInfoMap;
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The identifier of the Application Component.
+     * Identifier of the Application Component.
      */
     id: String255;
     /**
-     * The name of the Application Component.
+     * Name of the Application Component.
      */
     name?: String255;
     /**
-     * The type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent.
+     * Type of Application Component. For more information about the types of Application Component, see Grouping resources in an AppComponent.
      */
     type?: String255;
   }
   export interface UpdateAppVersionAppComponentResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The list of Application Components that belong to this resource.
+     * List of Application Components that belong to this resource.
      */
     appComponent?: AppComponent;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
   }
@@ -2750,7 +3027,7 @@ declare namespace Resiliencehub {
      */
     additionalInfo?: AdditionalInfoMap;
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
   }
@@ -2760,19 +3037,19 @@ declare namespace Resiliencehub {
      */
     additionalInfo?: AdditionalInfoMap;
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The list of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added.
+     * List of Application Components that this resource belongs to. If an Application Component is not part of the Resilience Hub application, it will be added.
      */
     appComponents?: AppComponentNameList;
     /**
-     * The Amazon Web Services account that owns the physical resource.
+     * Amazon Web Services account that owns the physical resource.
      */
     awsAccountId?: CustomerId;
     /**
-     * The Amazon Web Services region that owns the physical resource.
+     * Amazon Web Services region that owns the physical resource.
      */
     awsRegion?: AwsRegion;
     /**
@@ -2780,29 +3057,29 @@ declare namespace Resiliencehub {
      */
     excluded?: BooleanOptional;
     /**
-     * The logical identifier of the resource.
+     * Logical identifier of the resource.
      */
     logicalResourceId?: LogicalResourceId;
     /**
-     * The physical identifier of the resource.
+     * Physical identifier of the resource.
      */
     physicalResourceId?: String2048;
     /**
-     * The name of the resource.
+     * Name of the resource.
      */
     resourceName?: EntityName;
     /**
-     * The type of resource.
+     * Type of resource.
      */
     resourceType?: String255;
   }
   export interface UpdateAppVersionResourceResponse {
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
     /**
@@ -2816,13 +3093,50 @@ declare namespace Resiliencehub {
      */
     additionalInfo?: AdditionalInfoMap;
     /**
-     * The Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     appArn: Arn;
     /**
-     * The Resilience Hub application version.
+     * Resilience Hub application version.
      */
     appVersion: EntityVersion;
+  }
+  export interface UpdateRecommendationStatusItem {
+    /**
+     * Resource identifier of the operational recommendation item.
+     */
+    resourceId?: String500;
+    /**
+     * Identifier of the target Amazon Web Services account.
+     */
+    targetAccountId?: CustomerId;
+    /**
+     * Identifier of the target Amazon Web Services Region.
+     */
+    targetRegion?: AwsRegion;
+  }
+  export type UpdateRecommendationStatusRequestEntries = UpdateRecommendationStatusRequestEntry[];
+  export interface UpdateRecommendationStatusRequestEntry {
+    /**
+     * An identifier for an entry in this batch that is used to communicate the result.  The entryIds of a batch request need to be unique within a request. 
+     */
+    entryId: String255;
+    /**
+     * Indicates the reason for excluding an operational recommendation.
+     */
+    excludeReason?: ExcludeRecommendationReason;
+    /**
+     * Indicates if the operational recommendation needs to be excluded. If set to True, the operational recommendation will be excluded.
+     */
+    excluded: BooleanOptional;
+    /**
+     * The operational recommendation item.
+     */
+    item: UpdateRecommendationStatusItem;
+    /**
+     * Reference identifier of the operational recommendation item.
+     */
+    referenceId: SpecReferenceId;
   }
   export interface UpdateResiliencyPolicyRequest {
     /**
@@ -2834,7 +3148,7 @@ declare namespace Resiliencehub {
      */
     policy?: DisruptionPolicy;
     /**
-     * The Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
+     * Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN is: arn:partition:resiliencehub:region:account:resiliency-policy/policy-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
      */
     policyArn: Arn;
     /**
