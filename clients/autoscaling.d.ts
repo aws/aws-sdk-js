@@ -619,7 +619,7 @@ declare namespace AutoScaling {
   export type AlarmList = XmlStringMaxLen255[];
   export interface AlarmSpecification {
     /**
-     * The names of one or more CloudWatch alarms to monitor for the instance refresh.
+     * The names of one or more CloudWatch alarms to monitor for the instance refresh. You can specify up to 10 alarms.
      */
     Alarms?: AlarmList;
   }

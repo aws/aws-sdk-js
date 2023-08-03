@@ -45,6 +45,14 @@ declare class DMS extends Service {
    */
   cancelReplicationTaskAssessmentRun(callback?: (err: AWSError, data: DMS.Types.CancelReplicationTaskAssessmentRunResponse) => void): Request<DMS.Types.CancelReplicationTaskAssessmentRunResponse, AWSError>;
   /**
+   * Creates a data provider using the provided settings. A data provider stores a data store type and location information about your database. 
+   */
+  createDataProvider(params: DMS.Types.CreateDataProviderMessage, callback?: (err: AWSError, data: DMS.Types.CreateDataProviderResponse) => void): Request<DMS.Types.CreateDataProviderResponse, AWSError>;
+  /**
+   * Creates a data provider using the provided settings. A data provider stores a data store type and location information about your database. 
+   */
+  createDataProvider(callback?: (err: AWSError, data: DMS.Types.CreateDataProviderResponse) => void): Request<DMS.Types.CreateDataProviderResponse, AWSError>;
+  /**
    * Creates an endpoint using the provided settings.  For a MySQL source or target endpoint, don't explicitly specify the database using the DatabaseName request parameter on the CreateEndpoint API call. Specifying DatabaseName when you create a MySQL endpoint replicates all the task tables to this single database. For MySQL endpoints, you specify the database only when you specify the schema in the table-mapping rules of the DMS task. 
    */
   createEndpoint(params: DMS.Types.CreateEndpointMessage, callback?: (err: AWSError, data: DMS.Types.CreateEndpointResponse) => void): Request<DMS.Types.CreateEndpointResponse, AWSError>;
@@ -68,6 +76,22 @@ declare class DMS extends Service {
    * Creates a Fleet Advisor collector using the specified parameters.
    */
   createFleetAdvisorCollector(callback?: (err: AWSError, data: DMS.Types.CreateFleetAdvisorCollectorResponse) => void): Request<DMS.Types.CreateFleetAdvisorCollectorResponse, AWSError>;
+  /**
+   * Creates the instance profile using the specified parameters.
+   */
+  createInstanceProfile(params: DMS.Types.CreateInstanceProfileMessage, callback?: (err: AWSError, data: DMS.Types.CreateInstanceProfileResponse) => void): Request<DMS.Types.CreateInstanceProfileResponse, AWSError>;
+  /**
+   * Creates the instance profile using the specified parameters.
+   */
+  createInstanceProfile(callback?: (err: AWSError, data: DMS.Types.CreateInstanceProfileResponse) => void): Request<DMS.Types.CreateInstanceProfileResponse, AWSError>;
+  /**
+   * Creates the migration project using the specified parameters. You can run this action only after you create an instance profile and data providers using CreateInstanceProfile and CreateDataProvider.
+   */
+  createMigrationProject(params: DMS.Types.CreateMigrationProjectMessage, callback?: (err: AWSError, data: DMS.Types.CreateMigrationProjectResponse) => void): Request<DMS.Types.CreateMigrationProjectResponse, AWSError>;
+  /**
+   * Creates the migration project using the specified parameters. You can run this action only after you create an instance profile and data providers using CreateInstanceProfile and CreateDataProvider.
+   */
+  createMigrationProject(callback?: (err: AWSError, data: DMS.Types.CreateMigrationProjectResponse) => void): Request<DMS.Types.CreateMigrationProjectResponse, AWSError>;
   /**
    * Creates a configuration that you can later provide to configure and start an DMS Serverless replication. You can also provide options to validate the configuration inputs before you start the replication.
    */
@@ -117,6 +141,14 @@ declare class DMS extends Service {
    */
   deleteConnection(callback?: (err: AWSError, data: DMS.Types.DeleteConnectionResponse) => void): Request<DMS.Types.DeleteConnectionResponse, AWSError>;
   /**
+   * Deletes the specified data provider.  All migration projects associated with the data provider must be deleted or modified before you can delete the data provider. 
+   */
+  deleteDataProvider(params: DMS.Types.DeleteDataProviderMessage, callback?: (err: AWSError, data: DMS.Types.DeleteDataProviderResponse) => void): Request<DMS.Types.DeleteDataProviderResponse, AWSError>;
+  /**
+   * Deletes the specified data provider.  All migration projects associated with the data provider must be deleted or modified before you can delete the data provider. 
+   */
+  deleteDataProvider(callback?: (err: AWSError, data: DMS.Types.DeleteDataProviderResponse) => void): Request<DMS.Types.DeleteDataProviderResponse, AWSError>;
+  /**
    * Deletes the specified endpoint.  All tasks associated with the endpoint must be deleted before you can delete the endpoint.  
    */
   deleteEndpoint(params: DMS.Types.DeleteEndpointMessage, callback?: (err: AWSError, data: DMS.Types.DeleteEndpointResponse) => void): Request<DMS.Types.DeleteEndpointResponse, AWSError>;
@@ -148,6 +180,22 @@ declare class DMS extends Service {
    * Deletes the specified Fleet Advisor collector databases.
    */
   deleteFleetAdvisorDatabases(callback?: (err: AWSError, data: DMS.Types.DeleteFleetAdvisorDatabasesResponse) => void): Request<DMS.Types.DeleteFleetAdvisorDatabasesResponse, AWSError>;
+  /**
+   * Deletes the specified instance profile.  All migration projects associated with the instance profile must be deleted or modified before you can delete the instance profile. 
+   */
+  deleteInstanceProfile(params: DMS.Types.DeleteInstanceProfileMessage, callback?: (err: AWSError, data: DMS.Types.DeleteInstanceProfileResponse) => void): Request<DMS.Types.DeleteInstanceProfileResponse, AWSError>;
+  /**
+   * Deletes the specified instance profile.  All migration projects associated with the instance profile must be deleted or modified before you can delete the instance profile. 
+   */
+  deleteInstanceProfile(callback?: (err: AWSError, data: DMS.Types.DeleteInstanceProfileResponse) => void): Request<DMS.Types.DeleteInstanceProfileResponse, AWSError>;
+  /**
+   * Deletes the specified migration project.  The migration project must be closed before you can delete it. 
+   */
+  deleteMigrationProject(params: DMS.Types.DeleteMigrationProjectMessage, callback?: (err: AWSError, data: DMS.Types.DeleteMigrationProjectResponse) => void): Request<DMS.Types.DeleteMigrationProjectResponse, AWSError>;
+  /**
+   * Deletes the specified migration project.  The migration project must be closed before you can delete it. 
+   */
+  deleteMigrationProject(callback?: (err: AWSError, data: DMS.Types.DeleteMigrationProjectResponse) => void): Request<DMS.Types.DeleteMigrationProjectResponse, AWSError>;
   /**
    * Deletes an DMS Serverless replication configuration. This effectively deprovisions any and all replications that use this configuration. You can't delete the configuration for an DMS Serverless replication that is ongoing. You can delete the configuration when the replication is in a non-RUNNING and non-STARTING state.
    */
@@ -221,6 +269,22 @@ declare class DMS extends Service {
    */
   describeConnections(callback?: (err: AWSError, data: DMS.Types.DescribeConnectionsResponse) => void): Request<DMS.Types.DescribeConnectionsResponse, AWSError>;
   /**
+   * Returns configuration parameters for a schema conversion project.
+   */
+  describeConversionConfiguration(params: DMS.Types.DescribeConversionConfigurationMessage, callback?: (err: AWSError, data: DMS.Types.DescribeConversionConfigurationResponse) => void): Request<DMS.Types.DescribeConversionConfigurationResponse, AWSError>;
+  /**
+   * Returns configuration parameters for a schema conversion project.
+   */
+  describeConversionConfiguration(callback?: (err: AWSError, data: DMS.Types.DescribeConversionConfigurationResponse) => void): Request<DMS.Types.DescribeConversionConfigurationResponse, AWSError>;
+  /**
+   * Returns a paginated list of data providers for your account in the current region.
+   */
+  describeDataProviders(params: DMS.Types.DescribeDataProvidersMessage, callback?: (err: AWSError, data: DMS.Types.DescribeDataProvidersResponse) => void): Request<DMS.Types.DescribeDataProvidersResponse, AWSError>;
+  /**
+   * Returns a paginated list of data providers for your account in the current region.
+   */
+  describeDataProviders(callback?: (err: AWSError, data: DMS.Types.DescribeDataProvidersResponse) => void): Request<DMS.Types.DescribeDataProvidersResponse, AWSError>;
+  /**
    * Returns information about the possible endpoint settings available when you create an endpoint for a specific database engine.
    */
   describeEndpointSettings(params: DMS.Types.DescribeEndpointSettingsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEndpointSettingsResponse) => void): Request<DMS.Types.DescribeEndpointSettingsResponse, AWSError>;
@@ -277,6 +341,14 @@ declare class DMS extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: DMS.Types.DescribeEventsResponse) => void): Request<DMS.Types.DescribeEventsResponse, AWSError>;
   /**
+   * Returns a paginated list of extension pack associations for the specified migration project. An extension pack is an add-on module that emulates functions present in a source database that are required when converting objects to the target database.
+   */
+  describeExtensionPackAssociations(params: DMS.Types.DescribeExtensionPackAssociationsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeExtensionPackAssociationsResponse) => void): Request<DMS.Types.DescribeExtensionPackAssociationsResponse, AWSError>;
+  /**
+   * Returns a paginated list of extension pack associations for the specified migration project. An extension pack is an add-on module that emulates functions present in a source database that are required when converting objects to the target database.
+   */
+  describeExtensionPackAssociations(callback?: (err: AWSError, data: DMS.Types.DescribeExtensionPackAssociationsResponse) => void): Request<DMS.Types.DescribeExtensionPackAssociationsResponse, AWSError>;
+  /**
    * Returns a list of the Fleet Advisor collectors in your account.
    */
   describeFleetAdvisorCollectors(params: DMS.Types.DescribeFleetAdvisorCollectorsRequest, callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorCollectorsResponse) => void): Request<DMS.Types.DescribeFleetAdvisorCollectorsResponse, AWSError>;
@@ -316,6 +388,62 @@ declare class DMS extends Service {
    * Returns a list of schemas detected by Fleet Advisor Collectors in your account.
    */
   describeFleetAdvisorSchemas(callback?: (err: AWSError, data: DMS.Types.DescribeFleetAdvisorSchemasResponse) => void): Request<DMS.Types.DescribeFleetAdvisorSchemasResponse, AWSError>;
+  /**
+   * Returns a paginated list of instance profiles for your account in the current region.
+   */
+  describeInstanceProfiles(params: DMS.Types.DescribeInstanceProfilesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeInstanceProfilesResponse) => void): Request<DMS.Types.DescribeInstanceProfilesResponse, AWSError>;
+  /**
+   * Returns a paginated list of instance profiles for your account in the current region.
+   */
+  describeInstanceProfiles(callback?: (err: AWSError, data: DMS.Types.DescribeInstanceProfilesResponse) => void): Request<DMS.Types.DescribeInstanceProfilesResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model assessments for your account in the current region.
+   */
+  describeMetadataModelAssessments(params: DMS.Types.DescribeMetadataModelAssessmentsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelAssessmentsResponse) => void): Request<DMS.Types.DescribeMetadataModelAssessmentsResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model assessments for your account in the current region.
+   */
+  describeMetadataModelAssessments(callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelAssessmentsResponse) => void): Request<DMS.Types.DescribeMetadataModelAssessmentsResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model conversions for a migration project.
+   */
+  describeMetadataModelConversions(params: DMS.Types.DescribeMetadataModelConversionsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelConversionsResponse) => void): Request<DMS.Types.DescribeMetadataModelConversionsResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model conversions for a migration project.
+   */
+  describeMetadataModelConversions(callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelConversionsResponse) => void): Request<DMS.Types.DescribeMetadataModelConversionsResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model exports.
+   */
+  describeMetadataModelExportsAsScript(params: DMS.Types.DescribeMetadataModelExportsAsScriptMessage, callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelExportsAsScriptResponse) => void): Request<DMS.Types.DescribeMetadataModelExportsAsScriptResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model exports.
+   */
+  describeMetadataModelExportsAsScript(callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelExportsAsScriptResponse) => void): Request<DMS.Types.DescribeMetadataModelExportsAsScriptResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model exports.
+   */
+  describeMetadataModelExportsToTarget(params: DMS.Types.DescribeMetadataModelExportsToTargetMessage, callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelExportsToTargetResponse) => void): Request<DMS.Types.DescribeMetadataModelExportsToTargetResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model exports.
+   */
+  describeMetadataModelExportsToTarget(callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelExportsToTargetResponse) => void): Request<DMS.Types.DescribeMetadataModelExportsToTargetResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model imports.
+   */
+  describeMetadataModelImports(params: DMS.Types.DescribeMetadataModelImportsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelImportsResponse) => void): Request<DMS.Types.DescribeMetadataModelImportsResponse, AWSError>;
+  /**
+   * Returns a paginated list of metadata model imports.
+   */
+  describeMetadataModelImports(callback?: (err: AWSError, data: DMS.Types.DescribeMetadataModelImportsResponse) => void): Request<DMS.Types.DescribeMetadataModelImportsResponse, AWSError>;
+  /**
+   * Returns a paginated list of migration projects for your account in the current region.
+   */
+  describeMigrationProjects(params: DMS.Types.DescribeMigrationProjectsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeMigrationProjectsResponse) => void): Request<DMS.Types.DescribeMigrationProjectsResponse, AWSError>;
+  /**
+   * Returns a paginated list of migration projects for your account in the current region.
+   */
+  describeMigrationProjects(callback?: (err: AWSError, data: DMS.Types.DescribeMigrationProjectsResponse) => void): Request<DMS.Types.DescribeMigrationProjectsResponse, AWSError>;
   /**
    * Returns information about the replication instance types that can be created in the specified region.
    */
@@ -453,6 +581,14 @@ declare class DMS extends Service {
    */
   describeTableStatistics(callback?: (err: AWSError, data: DMS.Types.DescribeTableStatisticsResponse) => void): Request<DMS.Types.DescribeTableStatisticsResponse, AWSError>;
   /**
+   * Saves a copy of a database migration assessment report to your Amazon S3 bucket. DMS can save your assessment report as a comma-separated value (CSV) or a PDF file. 
+   */
+  exportMetadataModelAssessment(params: DMS.Types.ExportMetadataModelAssessmentMessage, callback?: (err: AWSError, data: DMS.Types.ExportMetadataModelAssessmentResponse) => void): Request<DMS.Types.ExportMetadataModelAssessmentResponse, AWSError>;
+  /**
+   * Saves a copy of a database migration assessment report to your Amazon S3 bucket. DMS can save your assessment report as a comma-separated value (CSV) or a PDF file. 
+   */
+  exportMetadataModelAssessment(callback?: (err: AWSError, data: DMS.Types.ExportMetadataModelAssessmentResponse) => void): Request<DMS.Types.ExportMetadataModelAssessmentResponse, AWSError>;
+  /**
    * Uploads the specified certificate.
    */
   importCertificate(params: DMS.Types.ImportCertificateMessage, callback?: (err: AWSError, data: DMS.Types.ImportCertificateResponse) => void): Request<DMS.Types.ImportCertificateResponse, AWSError>;
@@ -469,6 +605,22 @@ declare class DMS extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: DMS.Types.ListTagsForResourceResponse) => void): Request<DMS.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * Modifies the specified schema conversion configuration using the provided parameters. 
+   */
+  modifyConversionConfiguration(params: DMS.Types.ModifyConversionConfigurationMessage, callback?: (err: AWSError, data: DMS.Types.ModifyConversionConfigurationResponse) => void): Request<DMS.Types.ModifyConversionConfigurationResponse, AWSError>;
+  /**
+   * Modifies the specified schema conversion configuration using the provided parameters. 
+   */
+  modifyConversionConfiguration(callback?: (err: AWSError, data: DMS.Types.ModifyConversionConfigurationResponse) => void): Request<DMS.Types.ModifyConversionConfigurationResponse, AWSError>;
+  /**
+   * Modifies the specified data provider using the provided settings.  You must remove the data provider from all migration projects before you can modify it. 
+   */
+  modifyDataProvider(params: DMS.Types.ModifyDataProviderMessage, callback?: (err: AWSError, data: DMS.Types.ModifyDataProviderResponse) => void): Request<DMS.Types.ModifyDataProviderResponse, AWSError>;
+  /**
+   * Modifies the specified data provider using the provided settings.  You must remove the data provider from all migration projects before you can modify it. 
+   */
+  modifyDataProvider(callback?: (err: AWSError, data: DMS.Types.ModifyDataProviderResponse) => void): Request<DMS.Types.ModifyDataProviderResponse, AWSError>;
+  /**
    * Modifies the specified endpoint.  For a MySQL source or target endpoint, don't explicitly specify the database using the DatabaseName request parameter on the ModifyEndpoint API call. Specifying DatabaseName when you modify a MySQL endpoint replicates all the task tables to this single database. For MySQL endpoints, you specify the database only when you specify the schema in the table-mapping rules of the DMS task. 
    */
   modifyEndpoint(params: DMS.Types.ModifyEndpointMessage, callback?: (err: AWSError, data: DMS.Types.ModifyEndpointResponse) => void): Request<DMS.Types.ModifyEndpointResponse, AWSError>;
@@ -484,6 +636,22 @@ declare class DMS extends Service {
    * Modifies an existing DMS event notification subscription. 
    */
   modifyEventSubscription(callback?: (err: AWSError, data: DMS.Types.ModifyEventSubscriptionResponse) => void): Request<DMS.Types.ModifyEventSubscriptionResponse, AWSError>;
+  /**
+   * Modifies the specified instance profile using the provided parameters.  All migration projects associated with the instance profile must be deleted or modified before you can modify the instance profile. 
+   */
+  modifyInstanceProfile(params: DMS.Types.ModifyInstanceProfileMessage, callback?: (err: AWSError, data: DMS.Types.ModifyInstanceProfileResponse) => void): Request<DMS.Types.ModifyInstanceProfileResponse, AWSError>;
+  /**
+   * Modifies the specified instance profile using the provided parameters.  All migration projects associated with the instance profile must be deleted or modified before you can modify the instance profile. 
+   */
+  modifyInstanceProfile(callback?: (err: AWSError, data: DMS.Types.ModifyInstanceProfileResponse) => void): Request<DMS.Types.ModifyInstanceProfileResponse, AWSError>;
+  /**
+   * Modifies the specified migration project using the provided parameters.  The migration project must be closed before you can modify it. 
+   */
+  modifyMigrationProject(params: DMS.Types.ModifyMigrationProjectMessage, callback?: (err: AWSError, data: DMS.Types.ModifyMigrationProjectResponse) => void): Request<DMS.Types.ModifyMigrationProjectResponse, AWSError>;
+  /**
+   * Modifies the specified migration project using the provided parameters.  The migration project must be closed before you can modify it. 
+   */
+  modifyMigrationProject(callback?: (err: AWSError, data: DMS.Types.ModifyMigrationProjectResponse) => void): Request<DMS.Types.ModifyMigrationProjectResponse, AWSError>;
   /**
    * Modifies an existing DMS Serverless replication configuration that you can use to start a replication. This command includes input validation and logic to check the state of any replication that uses this configuration. You can only modify a replication configuration before any replication that uses it has started. As soon as you have initially started a replication with a given configuiration, you can't modify that configuration, even if you stop it. Other run statuses that allow you to run this command include FAILED and CREATED. A provisioning state that allows you to run this command is FAILED_PROVISION.
    */
@@ -568,6 +736,54 @@ declare class DMS extends Service {
    * Runs large-scale assessment (LSA) analysis on every Fleet Advisor collector in your account.
    */
   runFleetAdvisorLsaAnalysis(callback?: (err: AWSError, data: DMS.Types.RunFleetAdvisorLsaAnalysisResponse) => void): Request<DMS.Types.RunFleetAdvisorLsaAnalysisResponse, AWSError>;
+  /**
+   * Applies the extension pack to your target database. An extension pack is an add-on module that emulates functions present in a source database that are required when converting objects to the target database. 
+   */
+  startExtensionPackAssociation(params: DMS.Types.StartExtensionPackAssociationMessage, callback?: (err: AWSError, data: DMS.Types.StartExtensionPackAssociationResponse) => void): Request<DMS.Types.StartExtensionPackAssociationResponse, AWSError>;
+  /**
+   * Applies the extension pack to your target database. An extension pack is an add-on module that emulates functions present in a source database that are required when converting objects to the target database. 
+   */
+  startExtensionPackAssociation(callback?: (err: AWSError, data: DMS.Types.StartExtensionPackAssociationResponse) => void): Request<DMS.Types.StartExtensionPackAssociationResponse, AWSError>;
+  /**
+   * Creates a database migration assessment report by assessing the migration complexity for your source database. A database migration assessment report summarizes all of the schema conversion tasks. It also details the action items for database objects that can't be converted to the database engine of your target database instance. 
+   */
+  startMetadataModelAssessment(params: DMS.Types.StartMetadataModelAssessmentMessage, callback?: (err: AWSError, data: DMS.Types.StartMetadataModelAssessmentResponse) => void): Request<DMS.Types.StartMetadataModelAssessmentResponse, AWSError>;
+  /**
+   * Creates a database migration assessment report by assessing the migration complexity for your source database. A database migration assessment report summarizes all of the schema conversion tasks. It also details the action items for database objects that can't be converted to the database engine of your target database instance. 
+   */
+  startMetadataModelAssessment(callback?: (err: AWSError, data: DMS.Types.StartMetadataModelAssessmentResponse) => void): Request<DMS.Types.StartMetadataModelAssessmentResponse, AWSError>;
+  /**
+   * Converts your source database objects to a format compatible with the target database. 
+   */
+  startMetadataModelConversion(params: DMS.Types.StartMetadataModelConversionMessage, callback?: (err: AWSError, data: DMS.Types.StartMetadataModelConversionResponse) => void): Request<DMS.Types.StartMetadataModelConversionResponse, AWSError>;
+  /**
+   * Converts your source database objects to a format compatible with the target database. 
+   */
+  startMetadataModelConversion(callback?: (err: AWSError, data: DMS.Types.StartMetadataModelConversionResponse) => void): Request<DMS.Types.StartMetadataModelConversionResponse, AWSError>;
+  /**
+   * Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3 bucket.
+   */
+  startMetadataModelExportAsScript(params: DMS.Types.StartMetadataModelExportAsScriptMessage, callback?: (err: AWSError, data: DMS.Types.StartMetadataModelExportAsScriptResponse) => void): Request<DMS.Types.StartMetadataModelExportAsScriptResponse, AWSError>;
+  /**
+   * Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3 bucket.
+   */
+  startMetadataModelExportAsScript(callback?: (err: AWSError, data: DMS.Types.StartMetadataModelExportAsScriptResponse) => void): Request<DMS.Types.StartMetadataModelExportAsScriptResponse, AWSError>;
+  /**
+   * Applies converted database objects to your target database. 
+   */
+  startMetadataModelExportToTarget(params: DMS.Types.StartMetadataModelExportToTargetMessage, callback?: (err: AWSError, data: DMS.Types.StartMetadataModelExportToTargetResponse) => void): Request<DMS.Types.StartMetadataModelExportToTargetResponse, AWSError>;
+  /**
+   * Applies converted database objects to your target database. 
+   */
+  startMetadataModelExportToTarget(callback?: (err: AWSError, data: DMS.Types.StartMetadataModelExportToTargetResponse) => void): Request<DMS.Types.StartMetadataModelExportToTargetResponse, AWSError>;
+  /**
+   * Loads the metadata for all the dependent database objects of the parent object. This operation uses your project's Amazon S3 bucket as a metadata cache to improve performance.
+   */
+  startMetadataModelImport(params: DMS.Types.StartMetadataModelImportMessage, callback?: (err: AWSError, data: DMS.Types.StartMetadataModelImportResponse) => void): Request<DMS.Types.StartMetadataModelImportResponse, AWSError>;
+  /**
+   * Loads the metadata for all the dependent database objects of the parent object. This operation uses your project's Amazon S3 bucket as a metadata cache to improve performance.
+   */
+  startMetadataModelImport(callback?: (err: AWSError, data: DMS.Types.StartMetadataModelImportResponse) => void): Request<DMS.Types.StartMetadataModelImportResponse, AWSError>;
   /**
    * Starts the analysis of your source database to provide recommendations of target engines. You can create recommendations for multiple source databases using BatchStartRecommendations.
    */
@@ -754,6 +970,8 @@ declare namespace DMS {
     ResourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
   }
   export type ArnList = String[];
+  export type AssessmentReportType = "pdf"|"csv"|string;
+  export type AssessmentReportTypesList = AssessmentReportType[];
   export type AuthMechanismValue = "default"|"mongodb_cr"|"scram_sha_1"|string;
   export type AuthTypeValue = "no"|"password"|string;
   export interface AvailabilityZone {
@@ -996,6 +1214,34 @@ declare namespace DMS {
     ReplicationInstanceIdentifier?: String;
   }
   export type ConnectionList = Connection[];
+  export interface CreateDataProviderMessage {
+    /**
+     * A user-friendly name for the data provider.
+     */
+    DataProviderName?: String;
+    /**
+     * A user-friendly description of the data provider.
+     */
+    Description?: String;
+    /**
+     * The type of database engine for the data provider. Valid values include "aurora", "aurora_postgresql", "mysql", "oracle", "postgres", and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+     */
+    Engine: String;
+    /**
+     * The settings in JSON format for a data provider.
+     */
+    Settings: DataProviderSettings;
+    /**
+     * One or more tags to be assigned to the data provider.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateDataProviderResponse {
+    /**
+     * The data provider that was created.
+     */
+    DataProvider?: DataProvider;
+  }
   export interface CreateEndpointMessage {
     /**
      * The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.
@@ -1214,6 +1460,90 @@ declare namespace DMS {
      */
     S3BucketName?: String;
   }
+  export interface CreateInstanceProfileMessage {
+    /**
+     * The Availability Zone where the instance profile will be created. The default value is a random, system-chosen Availability Zone in the Amazon Web Services Region where your data provider is created, for examplem us-east-1d.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile. If you don't specify a value for the KmsKeyArn parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
+     */
+    KmsKeyArn?: String;
+    /**
+     * Specifies the accessibility options for the instance profile. A value of true represents an instance profile with a public IP address. A value of false represents an instance profile with a private IP address. The default value is true.
+     */
+    PubliclyAccessible?: BooleanOptional;
+    /**
+     * One or more tags to be assigned to the instance profile.
+     */
+    Tags?: TagList;
+    /**
+     * Specifies the network type for the instance profile. A value of IPV4 represents an instance profile with IPv4 network type and only supports IPv4 addressing. A value of IPV6 represents an instance profile with IPv6 network type and only supports IPv6 addressing. A value of DUAL represents an instance profile with dual network type that supports IPv4 and IPv6 addressing.
+     */
+    NetworkType?: String;
+    /**
+     * A user-friendly name for the instance profile.
+     */
+    InstanceProfileName?: String;
+    /**
+     * A user-friendly description of the instance profile.
+     */
+    Description?: String;
+    /**
+     * A subnet group to associate with the instance profile.
+     */
+    SubnetGroupIdentifier?: String;
+    /**
+     * Specifies the VPC security group names to be used with the instance profile. The VPC security group must work with the VPC containing the instance profile.
+     */
+    VpcSecurityGroups?: StringList;
+  }
+  export interface CreateInstanceProfileResponse {
+    /**
+     * The instance profile that was created.
+     */
+    InstanceProfile?: InstanceProfile;
+  }
+  export interface CreateMigrationProjectMessage {
+    /**
+     * A user-friendly name for the migration project.
+     */
+    MigrationProjectName?: String;
+    /**
+     * Information about the source data provider, including the name, ARN, and Secrets Manager parameters.
+     */
+    SourceDataProviderDescriptors: DataProviderDescriptorDefinitionList;
+    /**
+     * Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
+     */
+    TargetDataProviderDescriptors: DataProviderDescriptorDefinitionList;
+    /**
+     * The identifier of the associated instance profile. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.
+     */
+    InstanceProfileIdentifier: String;
+    /**
+     * The settings in JSON format for migration rules. Migration rules make it possible for you to change the object names according to the rules that you specify. For example, you can change an object name to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.
+     */
+    TransformationRules?: String;
+    /**
+     * A user-friendly description of the migration project.
+     */
+    Description?: String;
+    /**
+     * One or more tags to be assigned to the migration project.
+     */
+    Tags?: TagList;
+    /**
+     * The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.
+     */
+    SchemaConversionApplicationAttributes?: SCApplicationAttributes;
+  }
+  export interface CreateMigrationProjectResponse {
+    /**
+     * The migration project that was created.
+     */
+    MigrationProject?: MigrationProject;
+  }
   export interface CreateReplicationConfigMessage {
     /**
      * A unique identifier that you want to use to create a ReplicationConfigArn that is returned as part of the output from this action. You can then pass this output ReplicationConfigArn as the value of the ReplicationConfigArn option for other actions to identify both DMS Serverless replications and replication configurations that you want those actions to operate on. For some actions, you can also use either this unique identifier or a corresponding ARN in action filters to identify the specific replication and replication configuration to operate on.
@@ -1419,6 +1749,73 @@ declare namespace DMS {
     ReplicationTask?: ReplicationTask;
   }
   export type DataFormatValue = "csv"|"parquet"|string;
+  export interface DataProvider {
+    /**
+     * The name of the data provider.
+     */
+    DataProviderName?: String;
+    /**
+     * The Amazon Resource Name (ARN) string that uniquely identifies the data provider.
+     */
+    DataProviderArn?: String;
+    /**
+     * The time the data provider was created.
+     */
+    DataProviderCreationTime?: Iso8601DateTime;
+    /**
+     * A description of the data provider. Descriptions can have up to 31 characters. A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.
+     */
+    Description?: String;
+    /**
+     * The type of database engine for the data provider. Valid values include "aurora", "aurora_postgresql", "mysql", "oracle", "postgres", and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+     */
+    Engine?: String;
+    /**
+     * The settings in JSON format for a data provider.
+     */
+    Settings?: DataProviderSettings;
+  }
+  export interface DataProviderDescriptor {
+    /**
+     * The identifier of the Amazon Web Services Secrets Manager Secret used to store access credentials for the data provider.
+     */
+    SecretsManagerSecretId?: String;
+    /**
+     * The ARN of the role used to access Amazon Web Services Secrets Manager.
+     */
+    SecretsManagerAccessRoleArn?: String;
+    /**
+     * The user-friendly name of the data provider.
+     */
+    DataProviderName?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the data provider.
+     */
+    DataProviderArn?: String;
+  }
+  export interface DataProviderDescriptorDefinition {
+    /**
+     * The name or Amazon Resource Name (ARN) of the data provider.
+     */
+    DataProviderIdentifier: String;
+    /**
+     * The identifier of the Amazon Web Services Secrets Manager Secret used to store access credentials for the data provider.
+     */
+    SecretsManagerSecretId?: String;
+    /**
+     * The ARN of the role used to access Amazon Web Services Secrets Manager.
+     */
+    SecretsManagerAccessRoleArn?: String;
+  }
+  export type DataProviderDescriptorDefinitionList = DataProviderDescriptorDefinition[];
+  export type DataProviderDescriptorList = DataProviderDescriptor[];
+  export type DataProviderList = DataProvider[];
+  export interface DataProviderSettings {
+    PostgreSqlSettings?: PostgreSqlDataProviderSettings;
+    MySqlSettings?: MySqlDataProviderSettings;
+    OracleSettings?: OracleDataProviderSettings;
+    MicrosoftSqlServerSettings?: MicrosoftSqlServerDataProviderSettings;
+  }
   export interface DatabaseInstanceSoftwareDetailsResponse {
     /**
      * The database engine of a database in a Fleet Advisor collector inventory, for example Microsoft SQL Server.
@@ -1501,6 +1898,12 @@ declare namespace DMS {
   }
   export type DatePartitionDelimiterValue = "SLASH"|"UNDERSCORE"|"DASH"|"NONE"|string;
   export type DatePartitionSequenceValue = "YYYYMMDD"|"YYYYMMDDHH"|"YYYYMM"|"MMYYYYDD"|"DDMMYYYY"|string;
+  export interface DefaultErrorDetails {
+    /**
+     * The error message.
+     */
+    Message?: String;
+  }
   export interface DeleteCertificateMessage {
     /**
      * The Amazon Resource Name (ARN) of the certificate.
@@ -1534,6 +1937,18 @@ declare namespace DMS {
      * The connection that is being deleted.
      */
     Connection?: Connection;
+  }
+  export interface DeleteDataProviderMessage {
+    /**
+     * The identifier of the data provider to delete.
+     */
+    DataProviderIdentifier: String;
+  }
+  export interface DeleteDataProviderResponse {
+    /**
+     * The data provider that was deleted.
+     */
+    DataProvider?: DataProvider;
   }
   export interface DeleteEndpointMessage {
     /**
@@ -1570,6 +1985,30 @@ declare namespace DMS {
      * The IDs of the databases that the operation deleted.
      */
     DatabaseIds?: StringList;
+  }
+  export interface DeleteInstanceProfileMessage {
+    /**
+     * The identifier of the instance profile to delete.
+     */
+    InstanceProfileIdentifier: String;
+  }
+  export interface DeleteInstanceProfileResponse {
+    /**
+     * The instance profile that was deleted.
+     */
+    InstanceProfile?: InstanceProfile;
+  }
+  export interface DeleteMigrationProjectMessage {
+    /**
+     * The name or Amazon Resource Name (ARN) of the migration project to delete.
+     */
+    MigrationProjectIdentifier: String;
+  }
+  export interface DeleteMigrationProjectResponse {
+    /**
+     * The migration project that was deleted.
+     */
+    MigrationProject?: MigrationProject;
   }
   export interface DeleteReplicationConfigMessage {
     /**
@@ -1726,6 +2165,46 @@ declare namespace DMS {
      * A description of the connections.
      */
     Connections?: ConnectionList;
+  }
+  export interface DescribeConversionConfigurationMessage {
+    /**
+     * The name or Amazon Resource Name (ARN) for the schema conversion project to describe.
+     */
+    MigrationProjectIdentifier: String;
+  }
+  export interface DescribeConversionConfigurationResponse {
+    /**
+     * The name or Amazon Resource Name (ARN) for the schema conversion project.
+     */
+    MigrationProjectIdentifier?: String;
+    /**
+     * The configuration parameters for the schema conversion project.
+     */
+    ConversionConfiguration?: String;
+  }
+  export interface DescribeDataProvidersMessage {
+    /**
+     * Filters applied to the data providers described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, DMS includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+  }
+  export interface DescribeDataProvidersResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A description of data providers.
+     */
+    DataProviders?: DataProviderList;
   }
   export interface DescribeEndpointSettingsMessage {
     /**
@@ -1911,6 +2390,34 @@ declare namespace DMS {
      */
     Events?: EventList;
   }
+  export interface DescribeExtensionPackAssociationsMessage {
+    /**
+     * The name or Amazon Resource Name (ARN) for the migration project.
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * Filters applied to the extension pack associations described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, DMS includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+  }
+  export interface DescribeExtensionPackAssociationsResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A paginated list of extension pack associations for the specified migration project.
+     */
+    Requests?: SchemaConversionRequestList;
+  }
   export interface DescribeFleetAdvisorCollectorsRequest {
     /**
      *  If you specify any of the following filters, the output includes information for only those collectors that meet the filter criteria:    collector-referenced-id – The ID of the collector agent, for example d4610ac5-e323-4ad9-bc50-eaf7249dfe9d.    collector-name – The name of the collector agent.   An example is: describe-fleet-advisor-collectors --filter Name="collector-referenced-id",Values="d4610ac5-e323-4ad9-bc50-eaf7249dfe9d" 
@@ -2026,6 +2533,194 @@ declare namespace DMS {
      * If NextToken is returned, there are more results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. 
      */
     NextToken?: String;
+  }
+  export interface DescribeInstanceProfilesMessage {
+    /**
+     * Filters applied to the instance profiles described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, DMS includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+  }
+  export interface DescribeInstanceProfilesResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A description of instance profiles.
+     */
+    InstanceProfiles?: InstanceProfileList;
+  }
+  export interface DescribeMetadataModelAssessmentsMessage {
+    /**
+     * The name or Amazon Resource Name (ARN) of the migration project.
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * Filters applied to the metadata model assessments described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, DMS includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+  }
+  export interface DescribeMetadataModelAssessmentsResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A paginated list of metadata model assessments for the specified migration project.
+     */
+    Requests?: SchemaConversionRequestList;
+  }
+  export interface DescribeMetadataModelConversionsMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * Filters applied to the metadata model conversions described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, DMS includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+  }
+  export interface DescribeMetadataModelConversionsResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A paginated list of metadata model conversions.
+     */
+    Requests?: SchemaConversionRequestList;
+  }
+  export interface DescribeMetadataModelExportsAsScriptMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * Filters applied to the metadata model exports described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, DMS includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+  }
+  export interface DescribeMetadataModelExportsAsScriptResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A paginated list of metadata model exports.
+     */
+    Requests?: SchemaConversionRequestList;
+  }
+  export interface DescribeMetadataModelExportsToTargetMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * Filters applied to the metadata model exports described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, DMS includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+  }
+  export interface DescribeMetadataModelExportsToTargetResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A paginated list of metadata model exports.
+     */
+    Requests?: SchemaConversionRequestList;
+  }
+  export interface DescribeMetadataModelImportsMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * Filters applied to the metadata model imports described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A paginated list of metadata model imports.
+     */
+    MaxRecords?: IntegerOptional;
+  }
+  export interface DescribeMetadataModelImportsResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A paginated list of metadata model imports.
+     */
+    Requests?: SchemaConversionRequestList;
+  }
+  export interface DescribeMigrationProjectsMessage {
+    /**
+     * Filters applied to the migration projects described in the form of key-value pairs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, DMS includes a pagination token in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+  }
+  export interface DescribeMigrationProjectsResponse {
+    /**
+     * Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. If Marker is returned by a previous response, there are more results available. The value of Marker is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.
+     */
+    Marker?: String;
+    /**
+     * A description of migration projects.
+     */
+    MigrationProjects?: MigrationProjectList;
   }
   export interface DescribeOrderableReplicationInstancesMessage {
     /**
@@ -2767,6 +3462,12 @@ declare namespace DMS {
     AvailableUpgrades?: AvailableUpgradesList;
   }
   export type EngineVersionList = EngineVersion[];
+  export interface ErrorDetails {
+    /**
+     * Error information about a project.
+     */
+    defaultErrorDetails?: DefaultErrorDetails;
+  }
   export interface Event {
     /**
      *  The identifier of an event source.
@@ -2842,6 +3543,54 @@ declare namespace DMS {
   }
   export type EventSubscriptionsList = EventSubscription[];
   export type ExcludeTestList = String[];
+  export interface ExportMetadataModelAssessmentMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * A value that specifies the database objects to assess.
+     */
+    SelectionRules: String;
+    /**
+     * The name of the assessment file to create in your Amazon S3 bucket.
+     */
+    FileName?: String;
+    /**
+     * The file format of the assessment file.
+     */
+    AssessmentReportTypes?: AssessmentReportTypesList;
+  }
+  export interface ExportMetadataModelAssessmentResponse {
+    /**
+     * The Amazon S3 details for an assessment exported in PDF format.
+     */
+    PdfReport?: ExportMetadataModelAssessmentResultEntry;
+    /**
+     * The Amazon S3 details for an assessment exported in CSV format.
+     */
+    CsvReport?: ExportMetadataModelAssessmentResultEntry;
+  }
+  export interface ExportMetadataModelAssessmentResultEntry {
+    /**
+     * The object key for the object containing the exported metadata model assessment.
+     */
+    S3ObjectKey?: String;
+    /**
+     * The URL for the object containing the exported metadata model assessment.
+     */
+    ObjectURL?: String;
+  }
+  export interface ExportSqlDetails {
+    /**
+     * The Amazon S3 object key for the object containing the exported metadata model assessment.
+     */
+    S3ObjectKey?: String;
+    /**
+     * The URL for the object containing the exported metadata model assessment.
+     */
+    ObjectURL?: String;
+  }
   export interface Filter {
     /**
      * The name of the filter as specified for a Describe* or similar operation.
@@ -3015,6 +3764,49 @@ declare namespace DMS {
   }
   export type IncludeTestList = String[];
   export type IndividualAssessmentNameList = String[];
+  export interface InstanceProfile {
+    /**
+     * The Amazon Resource Name (ARN) string that uniquely identifies the instance profile.
+     */
+    InstanceProfileArn?: String;
+    /**
+     * The Availability Zone where the instance profile runs.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile. If you don't specify a value for the KmsKeyArn parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
+     */
+    KmsKeyArn?: String;
+    /**
+     * Specifies the accessibility options for the instance profile. A value of true represents an instance profile with a public IP address. A value of false represents an instance profile with a private IP address. The default value is true.
+     */
+    PubliclyAccessible?: BooleanOptional;
+    /**
+     * Specifies the network type for the instance profile. A value of IPV4 represents an instance profile with IPv4 network type and only supports IPv4 addressing. A value of IPV6 represents an instance profile with IPv6 network type and only supports IPv6 addressing. A value of DUAL represents an instance profile with dual network type that supports IPv4 and IPv6 addressing.
+     */
+    NetworkType?: String;
+    /**
+     * The user-friendly name for the instance profile.
+     */
+    InstanceProfileName?: String;
+    /**
+     * A description of the instance profile. Descriptions can have up to 31 characters. A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.
+     */
+    Description?: String;
+    /**
+     * The time the instance profile was created.
+     */
+    InstanceProfileCreationTime?: Iso8601DateTime;
+    /**
+     * The identifier of the subnet group that is associated with the instance profile.
+     */
+    SubnetGroupIdentifier?: String;
+    /**
+     * The VPC security groups that are used with the instance profile. The VPC security group must work with the VPC containing the instance profile.
+     */
+    VpcSecurityGroups?: StringList;
+  }
+  export type InstanceProfileList = InstanceProfile[];
   export type Integer = number;
   export type IntegerList = Integer[];
   export type IntegerOptional = number;
@@ -3028,6 +3820,7 @@ declare namespace DMS {
      */
     NumberOfSchemas?: IntegerOptional;
   }
+  export type Iso8601DateTime = Date;
   export type KafkaSaslMechanism = "scram-sha-512"|"plain"|string;
   export type KafkaSecurityProtocol = "plaintext"|"ssl-authentication"|"ssl-encryption"|"sasl-ssl"|string;
   export interface KafkaSettings {
@@ -3273,7 +4066,120 @@ declare namespace DMS {
      */
     ForceLobLookup?: BooleanOptional;
   }
+  export interface MicrosoftSqlServerDataProviderSettings {
+    /**
+     * The name of the Microsoft SQL Server server.
+     */
+    ServerName?: String;
+    /**
+     * The port value for the Microsoft SQL Server data provider.
+     */
+    Port?: IntegerOptional;
+    /**
+     * The database name on the Microsoft SQL Server data provider.
+     */
+    DatabaseName?: String;
+    /**
+     * The SSL mode used to connect to the Microsoft SQL Server data provider. The default value is none.
+     */
+    SslMode?: DmsSslModeValue;
+    /**
+     * The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+     */
+    CertificateArn?: String;
+  }
+  export interface MigrationProject {
+    /**
+     * The name of the migration project.
+     */
+    MigrationProjectName?: String;
+    /**
+     * The ARN string that uniquely identifies the migration project.
+     */
+    MigrationProjectArn?: String;
+    /**
+     * The time when the migration project was created.
+     */
+    MigrationProjectCreationTime?: Iso8601DateTime;
+    /**
+     * Information about the source data provider, including the name or ARN, and Secrets Manager parameters.
+     */
+    SourceDataProviderDescriptors?: DataProviderDescriptorList;
+    /**
+     * Information about the target data provider, including the name or ARN, and Secrets Manager parameters.
+     */
+    TargetDataProviderDescriptors?: DataProviderDescriptorList;
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile for your migration project.
+     */
+    InstanceProfileArn?: String;
+    /**
+     * The name of the associated instance profile.
+     */
+    InstanceProfileName?: String;
+    /**
+     * The settings in JSON format for migration rules. Migration rules make it possible for you to change the object names according to the rules that you specify. For example, you can change an object name to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.
+     */
+    TransformationRules?: String;
+    /**
+     * A user-friendly description of the migration project.
+     */
+    Description?: String;
+    /**
+     * The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.
+     */
+    SchemaConversionApplicationAttributes?: SCApplicationAttributes;
+  }
+  export type MigrationProjectList = MigrationProject[];
   export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string;
+  export interface ModifyConversionConfigurationMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * The new conversion configuration.
+     */
+    ConversionConfiguration: String;
+  }
+  export interface ModifyConversionConfigurationResponse {
+    /**
+     * The name or Amazon Resource Name (ARN) of the modified configuration.
+     */
+    MigrationProjectIdentifier?: String;
+  }
+  export interface ModifyDataProviderMessage {
+    /**
+     * The identifier of the data provider. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.
+     */
+    DataProviderIdentifier: String;
+    /**
+     * The name of the data provider.
+     */
+    DataProviderName?: String;
+    /**
+     * A user-friendly description of the data provider.
+     */
+    Description?: String;
+    /**
+     * The type of database engine for the data provider. Valid values include "aurora", "aurora_postgresql", "mysql", "oracle", "postgres", and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+     */
+    Engine?: String;
+    /**
+     * If this attribute is Y, the current call to ModifyDataProvider replaces all existing data provider settings with the exact settings that you specify in this call. If this attribute is N, the current call to ModifyDataProvider does two things:    It replaces any data provider settings that already exist with new values, for settings with the same names.   It creates new data provider settings that you specify in the call, for settings with different names.   
+     */
+    ExactSettings?: BooleanOptional;
+    /**
+     * The settings in JSON format for a data provider.
+     */
+    Settings?: DataProviderSettings;
+  }
+  export interface ModifyDataProviderResponse {
+    /**
+     * The data provider that was modified.
+     */
+    DataProvider?: DataProvider;
+  }
   export interface ModifyEndpointMessage {
     /**
      * The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -3442,6 +4348,90 @@ declare namespace DMS {
      * The modified event subscription.
      */
     EventSubscription?: EventSubscription;
+  }
+  export interface ModifyInstanceProfileMessage {
+    /**
+     * The identifier of the instance profile. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.
+     */
+    InstanceProfileIdentifier: String;
+    /**
+     * The Availability Zone where the instance profile runs.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile. If you don't specify a value for the KmsKeyArn parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
+     */
+    KmsKeyArn?: String;
+    /**
+     * Specifies the accessibility options for the instance profile. A value of true represents an instance profile with a public IP address. A value of false represents an instance profile with a private IP address. The default value is true.
+     */
+    PubliclyAccessible?: BooleanOptional;
+    /**
+     * Specifies the network type for the instance profile. A value of IPV4 represents an instance profile with IPv4 network type and only supports IPv4 addressing. A value of IPV6 represents an instance profile with IPv6 network type and only supports IPv6 addressing. A value of DUAL represents an instance profile with dual network type that supports IPv4 and IPv6 addressing.
+     */
+    NetworkType?: String;
+    /**
+     * A user-friendly name for the instance profile.
+     */
+    InstanceProfileName?: String;
+    /**
+     * A user-friendly description for the instance profile.
+     */
+    Description?: String;
+    /**
+     * A subnet group to associate with the instance profile.
+     */
+    SubnetGroupIdentifier?: String;
+    /**
+     * Specifies the VPC security groups to be used with the instance profile. The VPC security group must work with the VPC containing the instance profile.
+     */
+    VpcSecurityGroups?: StringList;
+  }
+  export interface ModifyInstanceProfileResponse {
+    /**
+     * The instance profile that was modified.
+     */
+    InstanceProfile?: InstanceProfile;
+  }
+  export interface ModifyMigrationProjectMessage {
+    /**
+     * The identifier of the migration project. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive hyphens.
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * A user-friendly name for the migration project.
+     */
+    MigrationProjectName?: String;
+    /**
+     * Information about the source data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
+     */
+    SourceDataProviderDescriptors?: DataProviderDescriptorDefinitionList;
+    /**
+     * Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
+     */
+    TargetDataProviderDescriptors?: DataProviderDescriptorDefinitionList;
+    /**
+     * The name or Amazon Resource Name (ARN) for the instance profile.
+     */
+    InstanceProfileIdentifier?: String;
+    /**
+     * The settings in JSON format for migration rules. Migration rules make it possible for you to change the object names according to the rules that you specify. For example, you can change an object name to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.
+     */
+    TransformationRules?: String;
+    /**
+     * A user-friendly description of the migration project.
+     */
+    Description?: String;
+    /**
+     * The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.
+     */
+    SchemaConversionApplicationAttributes?: SCApplicationAttributes;
+  }
+  export interface ModifyMigrationProjectResponse {
+    /**
+     * The migration project that was modified.
+     */
+    MigrationProject?: MigrationProject;
   }
   export interface ModifyReplicationConfigMessage {
     /**
@@ -3747,6 +4737,24 @@ declare namespace DMS {
      */
     SecretsManagerSecretId?: String;
   }
+  export interface MySqlDataProviderSettings {
+    /**
+     * The name of the MySQL server.
+     */
+    ServerName?: String;
+    /**
+     * The port value for the MySQL data provider.
+     */
+    Port?: IntegerOptional;
+    /**
+     * The SSL mode used to connect to the MySQL data provider. The default value is none.
+     */
+    SslMode?: DmsSslModeValue;
+    /**
+     * The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+     */
+    CertificateArn?: String;
+  }
   export interface NeptuneSettings {
     /**
      * The Amazon Resource Name (ARN) of the service role that you created for the Neptune target endpoint. The role must allow the iam:PassRole action. For more information, see Creating an IAM Service Role for Accessing Amazon Neptune as a Target in the Database Migration Service User Guide.  
@@ -3778,6 +4786,48 @@ declare namespace DMS {
     IamAuthEnabled?: BooleanOptional;
   }
   export type NestingLevelValue = "none"|"one"|string;
+  export interface OracleDataProviderSettings {
+    /**
+     * The name of the Oracle server.
+     */
+    ServerName?: String;
+    /**
+     * The port value for the Oracle data provider.
+     */
+    Port?: IntegerOptional;
+    /**
+     * The database name on the Oracle data provider.
+     */
+    DatabaseName?: String;
+    /**
+     * The SSL mode used to connect to the Oracle data provider. The default value is none.
+     */
+    SslMode?: DmsSslModeValue;
+    /**
+     * The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+     */
+    CertificateArn?: String;
+    /**
+     * The address of your Oracle Automatic Storage Management (ASM) server. You can set this value from the asm_server value. You set asm_server as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see Configuration for change data capture (CDC) on an Oracle source database.
+     */
+    AsmServer?: String;
+    /**
+     * The identifier of the secret in Secrets Manager that contains the Oracle ASM connection details. Required only if your data provider uses the Oracle ASM server.
+     */
+    SecretsManagerOracleAsmSecretId?: String;
+    /**
+     * The ARN of the IAM role that provides access to the secret in Secrets Manager that contains the Oracle ASM connection details.
+     */
+    SecretsManagerOracleAsmAccessRoleArn?: String;
+    /**
+     * The identifier of the secret in Secrets Manager that contains the transparent data encryption (TDE) password. DMS requires this password to access Oracle redo logs encrypted by TDE using Binary Reader.
+     */
+    SecretsManagerSecurityDbEncryptionSecretId?: String;
+    /**
+     * The ARN of the IAM role that provides access to the secret in Secrets Manager that contains the TDE password.
+     */
+    SecretsManagerSecurityDbEncryptionAccessRoleArn?: String;
+  }
   export interface OracleSettings {
     /**
      * Set this attribute to set up table-level supplemental logging for the Oracle database. This attribute enables PRIMARY KEY supplemental logging on all tables selected for a migration task. If you use this option, you still need to enable database-level supplemental logging.
@@ -3991,6 +5041,7 @@ declare namespace DMS {
     ReleaseStatus?: ReleaseStatusValues;
   }
   export type OrderableReplicationInstanceList = OrderableReplicationInstance[];
+  export type OriginTypeValue = "SOURCE"|"TARGET"|string;
   export type ParquetVersionValue = "parquet-1-0"|"parquet-2-0"|string;
   export interface PendingMaintenanceAction {
     /**
@@ -4118,6 +5169,28 @@ declare namespace DMS {
      * The Babelfish for Aurora PostgreSQL database name for the endpoint.
      */
     BabelfishDatabaseName?: String;
+  }
+  export interface PostgreSqlDataProviderSettings {
+    /**
+     * The name of the PostgreSQL server.
+     */
+    ServerName?: String;
+    /**
+     * The port value for the PostgreSQL data provider.
+     */
+    Port?: IntegerOptional;
+    /**
+     * The database name on the PostgreSQL data provider.
+     */
+    DatabaseName?: String;
+    /**
+     * The SSL mode used to connect to the PostgreSQL data provider. The default value is none.
+     */
+    SslMode?: DmsSslModeValue;
+    /**
+     * The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+     */
+    CertificateArn?: String;
   }
   export interface ProvisionData {
     /**
@@ -5306,7 +6379,34 @@ declare namespace DMS {
      */
     GlueCatalogGeneration?: BooleanOptional;
   }
+  export interface SCApplicationAttributes {
+    /**
+     * The path for the Amazon S3 bucket that the application uses for exporting assessment reports.
+     */
+    S3BucketPath?: String;
+    /**
+     * The ARN for the role the application uses to access its Amazon S3 bucket.
+     */
+    S3BucketRoleArn?: String;
+  }
   export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string;
+  export interface SchemaConversionRequest {
+    /**
+     * The schema conversion action status.
+     */
+    Status?: String;
+    /**
+     * The identifier for the schema conversion action.
+     */
+    RequestIdentifier?: String;
+    /**
+     * The migration project ARN.
+     */
+    MigrationProjectArn?: String;
+    Error?: ErrorDetails;
+    ExportSqlDetails?: ExportSqlDetails;
+  }
+  export type SchemaConversionRequestList = SchemaConversionRequest[];
   export type SchemaList = String[];
   export interface SchemaResponse {
     /**
@@ -5383,6 +6483,118 @@ declare namespace DMS {
   export type SourceIdsList = String[];
   export type SourceType = "replication-instance"|string;
   export type SslSecurityProtocolValue = "plaintext"|"ssl-encryption"|string;
+  export interface StartExtensionPackAssociationMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+  }
+  export interface StartExtensionPackAssociationResponse {
+    /**
+     * The identifier for the request operation.
+     */
+    RequestIdentifier?: String;
+  }
+  export interface StartMetadataModelAssessmentMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * A value that specifies the database objects to assess.
+     */
+    SelectionRules: String;
+  }
+  export interface StartMetadataModelAssessmentResponse {
+    /**
+     * The identifier for the assessment operation.
+     */
+    RequestIdentifier?: String;
+  }
+  export interface StartMetadataModelConversionMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * A value that specifies the database objects to convert.
+     */
+    SelectionRules: String;
+  }
+  export interface StartMetadataModelConversionResponse {
+    /**
+     * The identifier for the conversion operation.
+     */
+    RequestIdentifier?: String;
+  }
+  export interface StartMetadataModelExportAsScriptMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * A value that specifies the database objects to export.
+     */
+    SelectionRules: String;
+    /**
+     * Whether to export the metadata model from the source or the target.
+     */
+    Origin: OriginTypeValue;
+    /**
+     * The name of the model file to create in the Amazon S3 bucket.
+     */
+    FileName?: String;
+  }
+  export interface StartMetadataModelExportAsScriptResponse {
+    /**
+     * The identifier for the export operation.
+     */
+    RequestIdentifier?: String;
+  }
+  export interface StartMetadataModelExportToTargetMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * A value that specifies the database objects to export.
+     */
+    SelectionRules: String;
+    /**
+     * Whether to overwrite the migration project extension pack. An extension pack is an add-on module that emulates functions present in a source database that are required when converting objects to the target database.
+     */
+    OverwriteExtensionPack?: BooleanOptional;
+  }
+  export interface StartMetadataModelExportToTargetResponse {
+    /**
+     * The identifier for the export operation.
+     */
+    RequestIdentifier?: String;
+  }
+  export interface StartMetadataModelImportMessage {
+    /**
+     * The migration project name or Amazon Resource Name (ARN).
+     */
+    MigrationProjectIdentifier: String;
+    /**
+     * A value that specifies the database objects to import.
+     */
+    SelectionRules: String;
+    /**
+     * Whether to load metadata to the source or target database.
+     */
+    Origin: OriginTypeValue;
+    /**
+     * If true, DMS loads metadata for the specified objects from the source database.
+     */
+    Refresh?: Boolean;
+  }
+  export interface StartMetadataModelImportResponse {
+    /**
+     * The identifier for the import operation.
+     */
+    RequestIdentifier?: String;
+  }
   export interface StartRecommendationsRequest {
     /**
      * The identifier of the source database to analyze and provide recommendations for.
