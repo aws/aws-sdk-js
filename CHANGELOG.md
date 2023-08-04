@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1429.0-->
+<!--LATEST=2.1430.0-->
 <!--ENTRYINSERT-->
+
+## 2.1430.0
+* feature: Connect: Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile.
+* feature: DataSync: Display cloud storage used capacity at a cluster level.
+* feature: SageMaker: Including DataCaptureConfig key in the Amazon Sagemaker Search's transform job object
 
 ## 2.1429.0
 * feature: DMS: The release makes public API for DMS Schema Conversion feature.

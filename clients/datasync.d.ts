@@ -92,11 +92,11 @@ declare class DataSync extends Service {
    */
   createLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationHdfsResponse) => void): Request<DataSync.Types.CreateLocationHdfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Network File System (NFS) file server that DataSync can use for a data transfer.
+   * Creates an endpoint for a Network File System (NFS) file server that DataSync can use for a data transfer. For more information, see Configuring transfers to or from an NFS file server.  If you're copying data to or from an Snowcone device, you can also use CreateLocationNfs to create your transfer location. For more information, see Configuring transfers with Snowcone. 
    */
   createLocationNfs(params: DataSync.Types.CreateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Network File System (NFS) file server that DataSync can use for a data transfer.
+   * Creates an endpoint for a Network File System (NFS) file server that DataSync can use for a data transfer. For more information, see Configuring transfers to or from an NFS file server.  If you're copying data to or from an Snowcone device, you can also use CreateLocationNfs to create your transfer location. For more information, see Configuring transfers with Snowcone. 
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class DataSync extends Service {
    */
   describeLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationHdfsResponse) => void): Request<DataSync.Types.DescribeLocationHdfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information, about an NFS location.
+   * Provides details about how an DataSync transfer location for a Network File System (NFS) file server is configured.
    */
   describeLocationNfs(params: DataSync.Types.DescribeLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationNfsResponse) => void): Request<DataSync.Types.DescribeLocationNfsResponse, AWSError>;
   /**
-   * Returns metadata, such as the path information, about an NFS location.
+   * Provides details about how an DataSync transfer location for a Network File System (NFS) file server is configured.
    */
   describeLocationNfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationNfsResponse) => void): Request<DataSync.Types.DescribeLocationNfsResponse, AWSError>;
   /**
@@ -444,11 +444,11 @@ declare class DataSync extends Service {
    */
   updateLocationHdfs(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationHdfsResponse) => void): Request<DataSync.Types.UpdateLocationHdfsResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see Creating a location for NFS.
+   * Modifies some configurations of the Network File System (NFS) transfer location that you're using with DataSync. For more information, see Configuring transfers to or from an NFS file server.
    */
   updateLocationNfs(params: DataSync.Types.UpdateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see Creating a location for NFS.
+   * Modifies some configurations of the Network File System (NFS) transfer location that you're using with DataSync. For more information, see Configuring transfers to or from an NFS file server.
    */
   updateLocationNfs(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
   /**
@@ -587,6 +587,10 @@ declare namespace DataSync {
      * The amount of space that's being used in a storage system resource without accounting for compression or deduplication.
      */
     LogicalUsed?: NonNegativeLong;
+    /**
+     * The amount of space in the cluster that's in cloud storage (for example, if you're using data tiering).
+     */
+    ClusterCloudStorageUsed?: NonNegativeLong;
   }
   export type CollectionDurationMinutes = number;
   export interface CreateAgentRequest {
@@ -872,19 +876,19 @@ declare namespace DataSync {
   }
   export interface CreateLocationNfsRequest {
     /**
-     * Specifies the subdirectory in the NFS file server that DataSync transfers to or from. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.  To see all the paths exported by your NFS server, run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.
+     * Specifies the export path in your NFS file server that you want DataSync to mount. This path (or a subdirectory of the path) is where DataSync transfers data to or from. For information on configuring an export for DataSync, see Accessing NFS file servers.
      */
     Subdirectory: NfsSubdirectory;
     /**
-     * Specifies the IP address or domain name of your NFS file server. An agent that is installed on-premises uses this hostname to mount the NFS server in a network.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.  You must specify be an IP version 4 address or Domain Name System (DNS)-compliant name. 
+     * Specifies the Domain Name System (DNS) name or IP version 4 address of the NFS file server that your DataSync agent connects to.
      */
     ServerHostname: ServerHostname;
     /**
-     * Specifies the Amazon Resource Names (ARNs) of agents that DataSync uses to connect to your NFS file server.  If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that want to connect to your NFS file server. You can specify more than one agent. For more information, see Using multiple agents for transfers.
      */
     OnPremConfig: OnPremConfig;
     /**
-     * Specifies the mount options that DataSync can use to mount your NFS share.
+     * Specifies the options that DataSync can use to mount your NFS file server.
      */
     MountOptions?: NfsMountOptions;
     /**
@@ -1405,26 +1409,26 @@ declare namespace DataSync {
   }
   export interface DescribeLocationNfsRequest {
     /**
-     * The Amazon Resource Name (ARN) of the NFS location to describe.
+     * Specifies the Amazon Resource Name (ARN) of the NFS location that you want information about.
      */
     LocationArn: LocationArn;
   }
   export interface DescribeLocationNfsResponse {
     /**
-     * The Amazon Resource Name (ARN) of the NFS location that was described.
+     * The ARN of the NFS location.
      */
     LocationArn?: LocationArn;
     /**
-     * The URL of the source NFS location that was described.
+     * The URL of the NFS location.
      */
     LocationUri?: LocationUri;
     OnPremConfig?: OnPremConfig;
     /**
-     * The mount options that DataSync uses to mount your NFS share.
+     * The mount options that DataSync uses to mount your NFS file server.
      */
     MountOptions?: NfsMountOptions;
     /**
-     * The time that the NFS location was created.
+     * The time when the NFS location was created.
      */
     CreationTime?: Time;
   }
@@ -2251,6 +2255,10 @@ declare namespace DataSync {
      * The number of LUNs (logical unit numbers) in the cluster.
      */
     LunCount?: NonNegativeLong;
+    /**
+     * The amount of space in the cluster that's in cloud storage (for example, if you're using data tiering).
+     */
+    ClusterCloudStorageUsed?: NonNegativeLong;
   }
   export type NetAppONTAPClusters = NetAppONTAPCluster[];
   export interface NetAppONTAPSVM {
@@ -2396,7 +2404,7 @@ declare namespace DataSync {
   export type ObjectTags = "PRESERVE"|"NONE"|string;
   export interface OnPremConfig {
     /**
-     * ARNs of the agents to use for an NFS location.
+     * The Amazon Resource Names (ARNs) of the agents connecting to a transfer location.
      */
     AgentArns: AgentArnList;
   }
@@ -2943,11 +2951,11 @@ declare namespace DataSync {
   }
   export interface UpdateLocationNfsRequest {
     /**
-     * Specifies the Amazon Resource Name (ARN) of the NFS location that you want to update.
+     * Specifies the Amazon Resource Name (ARN) of the NFS transfer location that you want to update.
      */
     LocationArn: LocationArn;
     /**
-     * Specifies the subdirectory in your NFS file system that DataSync uses to read from or write to during a transfer. The NFS path should be exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. To see all the paths exported by your NFS server, run "showmount -e nfs-server-name" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication.  To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with no_root_squash, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. If you are copying data to or from your Snowcone device, see NFS Server on Snowcone for more information.
+     * Specifies the export path in your NFS file server that you want DataSync to mount. This path (or a subdirectory of the path) is where DataSync transfers data to or from. For information on configuring an export for DataSync, see Accessing NFS file servers.
      */
     Subdirectory?: NfsSubdirectory;
     OnPremConfig?: OnPremConfig;

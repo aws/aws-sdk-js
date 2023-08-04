@@ -21202,6 +21202,7 @@ declare namespace SageMaker {
      * A list of tags associated with the transform job.
      */
     Tags?: TagList;
+    DataCaptureConfig?: BatchDataCaptureConfig;
   }
   export type TransformJobArn = string;
   export interface TransformJobDefinition {

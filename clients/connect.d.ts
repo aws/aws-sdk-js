@@ -1460,6 +1460,14 @@ declare class Connect extends Service {
    */
   updateQuickConnectName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Whether agents with this routing profile will have their routing order calculated based on time since their last inbound contact or longest idle time. 
+   */
+  updateRoutingProfileAgentAvailabilityTimer(params: Connect.Types.UpdateRoutingProfileAgentAvailabilityTimerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Whether agents with this routing profile will have their routing order calculated based on time since their last inbound contact or longest idle time. 
+   */
+  updateRoutingProfileAgentAvailabilityTimer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates the channels that agents can handle in the Contact Control Panel (CCP) for a routing profile.
    */
   updateRoutingProfileConcurrency(params: Connect.Types.UpdateRoutingProfileConcurrencyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1619,6 +1627,7 @@ declare namespace Connect {
     EvaluationFormVersion: VersionNumber;
   }
   export type AfterContactWorkTimeLimit = number;
+  export type AgentAvailabilityTimer = "TIME_SINCE_LAST_ACTIVITY"|"TIME_SINCE_LAST_INBOUND"|string;
   export interface AgentContactReference {
     /**
      * The identifier of the contact in this instance of Amazon Connect. 
@@ -2678,6 +2687,10 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * Whether agents with this routing profile will have their routing order calculated based on time since their last inbound contact or longest idle time. 
+     */
+    AgentAvailabilityTimer?: AgentAvailabilityTimer;
   }
   export interface CreateRoutingProfileResponse {
     /**
@@ -6948,6 +6961,10 @@ declare namespace Connect {
      * The number of associated users in routing profile.
      */
     NumberOfAssociatedUsers?: Long;
+    /**
+     * Whether agents with this routing profile will have their routing order calculated based on time since their last inbound contact or longest idle time. 
+     */
+    AgentAvailabilityTimer?: AgentAvailabilityTimer;
   }
   export type RoutingProfileDescription = string;
   export type RoutingProfileId = string;
@@ -8870,6 +8887,20 @@ declare namespace Connect {
      * The description of the quick connect.
      */
     Description?: UpdateQuickConnectDescription;
+  }
+  export interface UpdateRoutingProfileAgentAvailabilityTimerRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the routing profile.
+     */
+    RoutingProfileId: RoutingProfileId;
+    /**
+     * Whether agents with this routing profile will have their routing order calculated based on time since their last inbound contact or longest idle time. 
+     */
+    AgentAvailabilityTimer: AgentAvailabilityTimer;
   }
   export interface UpdateRoutingProfileConcurrencyRequest {
     /**
