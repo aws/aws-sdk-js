@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Detective",
+        "description": "Updated the email validation regex to be in line with the TLD name specifications."
+    },
+    {
+        "type": "feature",
+        "category": "IVSRealTime",
+        "description": "Add QUOTA_EXCEEDED and PUBLISHER_NOT_FOUND to EventErrorCode for stage health events."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisVideo",
+        "description": "This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisVideoArchivedMedia",
+        "description": "This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature."
+    }
+]

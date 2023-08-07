@@ -220,11 +220,11 @@ declare class KinesisVideo extends Service {
    */
   updateImageGenerationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateImageGenerationConfigurationOutput, AWSError>;
   /**
-   * Associates a SignalingChannel to a stream to store the media. There are two signaling modes that can specified :   If the StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.    If the StorageStatus is enabled, the data will be stored in the StreamARN provided.   
+   * Associates a SignalingChannel to a stream to store the media. There are two signaling modes that can specified :   If the StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.    If the StorageStatus is enabled, the data will be stored in the StreamARN provided.     If StorageStatus is enabled, direct peer-to-peer (master-viewer) connections no longer occur. Peers connect directly to the storage session. You must call the JoinStorageSession API to trigger an SDP offer send and establish a connection between a peer and the storage session.  
    */
   updateMediaStorageConfiguration(params: KinesisVideo.Types.UpdateMediaStorageConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateMediaStorageConfigurationOutput, AWSError>;
   /**
-   * Associates a SignalingChannel to a stream to store the media. There are two signaling modes that can specified :   If the StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.    If the StorageStatus is enabled, the data will be stored in the StreamARN provided.   
+   * Associates a SignalingChannel to a stream to store the media. There are two signaling modes that can specified :   If the StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.    If the StorageStatus is enabled, the data will be stored in the StreamARN provided.     If StorageStatus is enabled, direct peer-to-peer (master-viewer) connections no longer occur. Peers connect directly to the storage session. You must call the JoinStorageSession API to trigger an SDP offer send and establish a connection between a peer and the storage session.  
    */
   updateMediaStorageConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateMediaStorageConfigurationOutput, AWSError>;
   /**

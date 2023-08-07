@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1430.0-->
+<!--LATEST=2.1431.0-->
 <!--ENTRYINSERT-->
+
+## 2.1431.0
+* feature: Detective: Updated the email validation regex to be in line with the TLD name specifications.
+* feature: IVSRealTime: Add QUOTA_EXCEEDED and PUBLISHER_NOT_FOUND to EventErrorCode for stage health events.
+* feature: KinesisVideo: This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature.
+* feature: KinesisVideoArchivedMedia: This release enables minimum of Images SamplingInterval to be as low as 200 milliseconds in Kinesis Video Stream Image feature.
 
 ## 2.1430.0
 * feature: Connect: Added a new API UpdateRoutingProfileAgentAvailabilityTimer to update agent availability timer of a routing profile.
