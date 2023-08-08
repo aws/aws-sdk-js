@@ -533,6 +533,14 @@ declare class ElastiCache extends Service {
    */
   testFailover(callback?: (err: AWSError, data: ElastiCache.Types.TestFailoverResult) => void): Request<ElastiCache.Types.TestFailoverResult, AWSError>;
   /**
+   *  Async API to test connection between source and target replication group. 
+   */
+  testMigration(params: ElastiCache.Types.TestMigrationMessage, callback?: (err: AWSError, data: ElastiCache.Types.TestMigrationResponse) => void): Request<ElastiCache.Types.TestMigrationResponse, AWSError>;
+  /**
+   *  Async API to test connection between source and target replication group. 
+   */
+  testMigration(callback?: (err: AWSError, data: ElastiCache.Types.TestMigrationResponse) => void): Request<ElastiCache.Types.TestMigrationResponse, AWSError>;
+  /**
    * Waits for the cacheClusterAvailable state by periodically calling the underlying ElastiCache.describeCacheClustersoperation every 15 seconds (at most 40 times). Wait until ElastiCache cluster is available.
    */
   waitFor(state: "cacheClusterAvailable", params: ElastiCache.Types.DescribeCacheClustersMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ElastiCache.Types.CacheClusterMessage) => void): Request<ElastiCache.Types.CacheClusterMessage, AWSError>;
@@ -2413,7 +2421,7 @@ declare namespace ElastiCache {
      */
     GlobalReplicationGroupId: String;
     /**
-     * The number of node groups you wish to add
+     * Total number of node groups you want
      */
     NodeGroupCount: Integer;
     /**
@@ -3870,6 +3878,19 @@ declare namespace ElastiCache {
     NodeGroupId: AllowedNodeGroupId;
   }
   export interface TestFailoverResult {
+    ReplicationGroup?: ReplicationGroup;
+  }
+  export interface TestMigrationMessage {
+    /**
+     *  The ID of the replication group to which data is to be migrated. 
+     */
+    ReplicationGroupId: String;
+    /**
+     *  List of endpoints from which data should be migrated. List should have only one element. 
+     */
+    CustomerNodeEndpointList: CustomerNodeEndpointList;
+  }
+  export interface TestMigrationResponse {
     ReplicationGroup?: ReplicationGroup;
   }
   export interface TimeRangeFilter {

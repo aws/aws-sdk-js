@@ -60,6 +60,14 @@ declare class Backup extends Service {
    */
   createLegalHold(callback?: (err: AWSError, data: Backup.Types.CreateLegalHoldOutput) => void): Request<Backup.Types.CreateLegalHoldOutput, AWSError>;
   /**
+   * This request creates a logical container where backups are stored. This request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Do not include sensitive data, such as passport numbers, in the name of a backup vault. 
+   */
+  createLogicallyAirGappedBackupVault(params: Backup.Types.CreateLogicallyAirGappedBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.CreateLogicallyAirGappedBackupVaultOutput) => void): Request<Backup.Types.CreateLogicallyAirGappedBackupVaultOutput, AWSError>;
+  /**
+   * This request creates a logical container where backups are stored. This request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Do not include sensitive data, such as passport numbers, in the name of a backup vault. 
+   */
+  createLogicallyAirGappedBackupVault(callback?: (err: AWSError, data: Backup.Types.CreateLogicallyAirGappedBackupVaultOutput) => void): Request<Backup.Types.CreateLogicallyAirGappedBackupVaultOutput, AWSError>;
+  /**
    * Creates a report plan. A report plan is a document that contains information about the contents of the report and where Backup will deliver it. If you call CreateReportPlan with a plan that already exists, you receive an AlreadyExistsException exception.
    */
   createReportPlan(params: Backup.Types.CreateReportPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateReportPlanOutput) => void): Request<Backup.Types.CreateReportPlanOutput, AWSError>;
@@ -400,6 +408,14 @@ declare class Backup extends Service {
    */
   listProtectedResources(callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesOutput) => void): Request<Backup.Types.ListProtectedResourcesOutput, AWSError>;
   /**
+   * This request lists the protected resources corresponding to each backup vault.
+   */
+  listProtectedResourcesByBackupVault(params: Backup.Types.ListProtectedResourcesByBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesByBackupVaultOutput) => void): Request<Backup.Types.ListProtectedResourcesByBackupVaultOutput, AWSError>;
+  /**
+   * This request lists the protected resources corresponding to each backup vault.
+   */
+  listProtectedResourcesByBackupVault(callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesByBackupVaultOutput) => void): Request<Backup.Types.ListProtectedResourcesByBackupVaultOutput, AWSError>;
+  /**
    * Returns detailed information about the recovery points stored in a backup vault.
    */
   listRecoveryPointsByBackupVault(params: Backup.Types.ListRecoveryPointsByBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByBackupVaultOutput) => void): Request<Backup.Types.ListRecoveryPointsByBackupVaultOutput, AWSError>;
@@ -632,7 +648,7 @@ declare namespace Backup {
      */
     CompletionDate?: timestamp;
     /**
-     * The current state of a resource recovery point.
+     * The current state of a backup job.
      */
     State?: BackupJobState;
     /**
@@ -834,7 +850,7 @@ declare namespace Backup {
      */
     ScheduleExpression?: CronExpression;
     /**
-     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional. If this value is included, it must be at least 60 minutes to avoid errors. During the start window, the backup job status remains in CREATED status until it has successfully begun or until the start window time has run out. If within the start window time Backup receives an error that allows the job to be retried, Backup will automatically retry to begin the job at least every 10 minutes until the backup successfully begins (the job status changes to RUNNING) or until the job status changes to EXPIRED (which is expected to occur when the start window time is over).
+     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional. If this value is included, it must be at least 60 minutes to avoid errors. This parameter has a maximum value of 100 years (52,560,000 minutes). During the start window, the backup job status remains in CREATED status until it has successfully begun or until the start window time has run out. If within the start window time Backup receives an error that allows the job to be retried, Backup will automatically retry to begin the job at least every 10 minutes until the backup successfully begins (the job status changes to RUNNING) or until the job status changes to EXPIRED (which is expected to occur when the start window time is over).
      */
     StartWindowMinutes?: WindowMinutes;
     /**
@@ -842,7 +858,7 @@ declare namespace Backup {
      */
     CompletionWindowMinutes?: WindowMinutes;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup will transition and expire backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “retention” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. Resource types that are able to be transitioned to cold storage are listed in the "Lifecycle to cold storage" section of the  Feature availability by resource table. Backup ignores this expression for other resource types.
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup will transition and expire backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “retention” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. Resource types that are able to be transitioned to cold storage are listed in the "Lifecycle to cold storage" section of the  Feature availability by resource table. Backup ignores this expression for other resource types. This parameter has a maximum value of 100 years (36,500 days).
      */
     Lifecycle?: Lifecycle;
     /**
@@ -1335,6 +1351,46 @@ declare namespace Backup {
      */
     RecoveryPointSelection?: RecoveryPointSelection;
   }
+  export interface CreateLogicallyAirGappedBackupVaultInput {
+    /**
+     * This is the name of the vault that is being created.
+     */
+    BackupVaultName: BackupVaultName;
+    /**
+     * These are the tags that will be included in the newly-created vault.
+     */
+    BackupVaultTags?: Tags;
+    /**
+     * This is the ID of the creation request.
+     */
+    CreatorRequestId?: string;
+    /**
+     * This setting specifies the minimum retention period that the vault retains its recovery points. If this parameter is not specified, no minimum retention period is enforced. If specified, any backup or copy job to the vault must have a lifecycle policy with a retention period equal to or longer than the minimum retention period. If a job retention period is shorter than that minimum retention period, then the vault fails the backup or copy job, and you should either modify your lifecycle settings or use a different vault.
+     */
+    MinRetentionDays: Long;
+    /**
+     * This is the setting that specifies the maximum retention period that the vault retains its recovery points. If this parameter is not specified, Backup does not enforce a maximum retention period on the recovery points in the vault (allowing indefinite storage). If specified, any backup or copy job to the vault must have a lifecycle policy with a retention period equal to or shorter than the maximum retention period. If the job retention period is longer than that maximum retention period, then the vault fails the backup or copy job, and you should either modify your lifecycle settings or use a different vault.
+     */
+    MaxRetentionDays: Long;
+  }
+  export interface CreateLogicallyAirGappedBackupVaultOutput {
+    /**
+     * The name of a logical container where backups are stored. Logically air-gapped backup vaults are identified by names that are unique to the account used to create them and the Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     */
+    BackupVaultName?: BackupVaultName;
+    /**
+     * This is the ARN (Amazon Resource Name) of the vault being created.
+     */
+    BackupVaultArn?: ARN;
+    /**
+     * The date and time when the vault was created. This value is in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationDate?: timestamp;
+    /**
+     * This is the current state of the vault.
+     */
+    VaultState?: VaultState;
+  }
   export interface CreateReportPlanInput {
     /**
      * The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
@@ -1506,7 +1562,7 @@ declare namespace Backup {
      */
     CompletionDate?: timestamp;
     /**
-     * The current state of a resource recovery point.
+     * The current state of a backup job.
      */
     State?: BackupJobState;
     /**
@@ -1579,6 +1635,10 @@ declare namespace Backup {
      * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: string;
+    /**
+     * This is the account ID of the specified backup vault.
+     */
+    BackupVaultAccountId?: string;
   }
   export interface DescribeBackupVaultOutput {
     /**
@@ -1589,6 +1649,10 @@ declare namespace Backup {
      * An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
      */
     BackupVaultArn?: ARN;
+    /**
+     * This is the type of vault described.
+     */
+    VaultType?: VaultType;
     /**
      * The server-side encryption key that is used to protect your backups; for example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
      */
@@ -1719,6 +1783,10 @@ declare namespace Backup {
      * An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
      */
     RecoveryPointArn: ARN;
+    /**
+     * This is the account ID of the specified backup vault.
+     */
+    BackupVaultAccountId?: AccountId;
   }
   export interface DescribeRecoveryPointOutput {
     /**
@@ -2192,6 +2260,10 @@ declare namespace Backup {
      * An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
      */
     RecoveryPointArn: ARN;
+    /**
+     * This is the account ID of the specified backup vault.
+     */
+    BackupVaultAccountId?: AccountId;
   }
   export interface GetRecoveryPointRestoreMetadataOutput {
     /**
@@ -2415,6 +2487,14 @@ declare namespace Backup {
   }
   export interface ListBackupVaultsInput {
     /**
+     * This parameter will sort the list of vaults by vault type.
+     */
+    ByVaultType?: VaultType;
+    /**
+     * This parameter will sort the list of vaults by shared vaults.
+     */
+    ByShared?: boolean;
+    /**
      * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
     NextToken?: string;
@@ -2534,6 +2614,34 @@ declare namespace Backup {
     LegalHolds?: LegalHoldsList;
   }
   export type ListOfTags = Condition[];
+  export interface ListProtectedResourcesByBackupVaultInput {
+    /**
+     * This is the list of protected resources by backup vault within the vault(s) you specify by name.
+     */
+    BackupVaultName: BackupVaultName;
+    /**
+     * This is the list of protected resources by backup vault within the vault(s) you specify by account ID.
+     */
+    BackupVaultAccountId?: AccountId;
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+    /**
+     * The maximum number of items to be returned.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListProtectedResourcesByBackupVaultOutput {
+    /**
+     * These are the results returned for the request ListProtectedResourcesByBackupVault.
+     */
+    Results?: ProtectedResourcesList;
+    /**
+     * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
   export interface ListProtectedResourcesInput {
     /**
      * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
@@ -2559,6 +2667,10 @@ declare namespace Backup {
      * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.  Backup vault name might not be available when a supported service creates the backup. 
      */
     BackupVaultName: BackupVaultName;
+    /**
+     * This parameter will sort the list of recovery points by account ID.
+     */
+    BackupVaultAccountId?: AccountId;
     /**
      * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
      */
@@ -3235,15 +3347,15 @@ declare namespace Backup {
      */
     IdempotencyToken?: string;
     /**
-     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional, and the default is 8 hours. If this value is included, it must be at least 60 minutes to avoid errors. During the start window, the backup job status remains in CREATED status until it has successfully begun or until the start window time has run out. If within the start window time Backup receives an error that allows the job to be retried, Backup will automatically retry to begin the job at least every 10 minutes until the backup successfully begins (the job status changes to RUNNING) or until the job status changes to EXPIRED (which is expected to occur when the start window time is over).
+     * A value in minutes after a backup is scheduled before a job will be canceled if it doesn't start successfully. This value is optional, and the default is 8 hours. If this value is included, it must be at least 60 minutes to avoid errors. This parameter has a maximum value of 100 years (52,560,000 minutes). During the start window, the backup job status remains in CREATED status until it has successfully begun or until the start window time has run out. If within the start window time Backup receives an error that allows the job to be retried, Backup will automatically retry to begin the job at least every 10 minutes until the backup successfully begins (the job status changes to RUNNING) or until the job status changes to EXPIRED (which is expected to occur when the start window time is over).
      */
     StartWindowMinutes?: WindowMinutes;
     /**
-     * A value in minutes during which a successfully started backup must complete, or else Backup will cancel the job. This value is optional. This value begins counting down from when the backup was scheduled. It does not add additional time for StartWindowMinutes, or if the backup started later than scheduled.
+     * A value in minutes during which a successfully started backup must complete, or else Backup will cancel the job. This value is optional. This value begins counting down from when the backup was scheduled. It does not add additional time for StartWindowMinutes, or if the backup started later than scheduled. Like StartWindowMinutes, this parameter has a maximum value of 100 years (52,560,000 minutes).
      */
     CompleteWindowMinutes?: WindowMinutes;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup will transition and expire backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “retention” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Resource types that are able to be transitioned to cold storage are listed in the "Lifecycle to cold storage" section of the  Feature availability by resource table. Backup ignores this expression for other resource types.
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup will transition and expire backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “retention” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Resource types that are able to be transitioned to cold storage are listed in the "Lifecycle to cold storage" section of the  Feature availability by resource table. Backup ignores this expression for other resource types. This parameter has a maximum value of 100 years (36,500 days).
      */
     Lifecycle?: Lifecycle;
     /**
@@ -3538,6 +3650,8 @@ declare namespace Backup {
     CreationTime?: timestamp;
   }
   export type VaultNames = string[];
+  export type VaultState = "CREATING"|"AVAILABLE"|"FAILED"|string;
+  export type VaultType = "BACKUP_VAULT"|"LOGICALLY_AIR_GAPPED_BACKUP_VAULT"|string;
   export type WindowMinutes = number;
   export type integer = number;
   export type long = number;

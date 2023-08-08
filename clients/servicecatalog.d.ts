@@ -428,11 +428,11 @@ declare class ServiceCatalog extends Service {
    */
   getProvisionedProductOutputs(callback?: (err: AWSError, data: ServiceCatalog.Types.GetProvisionedProductOutputsOutput) => void): Request<ServiceCatalog.Types.GetProvisionedProductOutputsOutput, AWSError>;
   /**
-   *  Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact. Once imported, all supported governance actions are supported on the provisioned product.   Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets, and non-root nested stacks are not supported.   The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, and IMPORT_ROLLBACK_COMPLETE.   Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.    When you import an existing CloudFormation stack into a portfolio, constraints that are associated with the product aren't applied during the import process. The constraints are applied after you call UpdateProvisionedProduct for the provisioned product.    The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions. 
+   *  Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact. Once imported, all supported governance actions are supported on the provisioned product.   Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets, and non-root nested stacks, are not supported.   The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, and IMPORT_ROLLBACK_COMPLETE.   Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.    When you import an existing CloudFormation stack into a portfolio, Service Catalog does not apply the product's associated constraints during the import process. Service Catalog applies the constraints after you call UpdateProvisionedProduct for the provisioned product.    The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions.  You can only import one provisioned product at a time. The product's CloudFormation stack must have the IMPORT_COMPLETE status before you import another. 
    */
   importAsProvisionedProduct(params: ServiceCatalog.Types.ImportAsProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ImportAsProvisionedProductOutput) => void): Request<ServiceCatalog.Types.ImportAsProvisionedProductOutput, AWSError>;
   /**
-   *  Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact. Once imported, all supported governance actions are supported on the provisioned product.   Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets, and non-root nested stacks are not supported.   The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, and IMPORT_ROLLBACK_COMPLETE.   Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.    When you import an existing CloudFormation stack into a portfolio, constraints that are associated with the product aren't applied during the import process. The constraints are applied after you call UpdateProvisionedProduct for the provisioned product.    The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions. 
+   *  Requests the import of a resource as an Service Catalog provisioned product that is associated to an Service Catalog product and provisioning artifact. Once imported, all supported governance actions are supported on the provisioned product.   Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets, and non-root nested stacks, are not supported.   The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, and IMPORT_ROLLBACK_COMPLETE.   Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.    When you import an existing CloudFormation stack into a portfolio, Service Catalog does not apply the product's associated constraints during the import process. Service Catalog applies the constraints after you call UpdateProvisionedProduct for the provisioned product.    The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions.  You can only import one provisioned product at a time. The product's CloudFormation stack must have the IMPORT_COMPLETE status before you import another. 
    */
   importAsProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ImportAsProvisionedProductOutput) => void): Request<ServiceCatalog.Types.ImportAsProvisionedProductOutput, AWSError>;
   /**
@@ -676,11 +676,11 @@ declare class ServiceCatalog extends Service {
    */
   updatePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
   /**
-   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing or Principal sharing for an existing portfolio share.  The portfolio share cannot be updated if the CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action.   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
+   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing or Principal sharing for an existing portfolio share.  The portfolio share cannot be updated if the CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be completed. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action.   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
    */
   updatePortfolioShare(params: ServiceCatalog.Types.UpdatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioShareOutput, AWSError>;
   /**
-   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing or Principal sharing for an existing portfolio share.  The portfolio share cannot be updated if the CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action.   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
+   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing or Principal sharing for an existing portfolio share.  The portfolio share cannot be updated if the CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be completed. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action.   When you associate a principal with portfolio, a potential privilege escalation path may occur when that portfolio is then shared with other accounts. For a user in a recipient account who is not an Service Catalog Admin, but still has the ability to create Principals (Users/Groups/Roles), that user could create a role that matches a principal name association for the portfolio. Although this user may not know which principal names are associated through Service Catalog, they may be able to guess the user. If this potential escalation path is a concern, then Service Catalog recommends using PrincipalType as IAM. With this configuration, the PrincipalARN must already exist in the recipient account before it can be associated.  
    */
   updatePortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioShareOutput, AWSError>;
   /**
@@ -756,7 +756,7 @@ declare namespace ServiceCatalog {
      */
     Key?: AccessLevelFilterKey;
     /**
-     * The user to which the access level applies. The only supported value is Self.
+     * The user to which the access level applies. The only supported value is self.
      */
     Value?: AccessLevelFilterValue;
   }
@@ -2994,7 +2994,7 @@ declare namespace ServiceCatalog {
   export type Principals = Principal[];
   export type ProductArn = string;
   export type ProductSource = "ACCOUNT"|string;
-  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|"TERRAFORM_OPEN_SOURCE"|string;
+  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|"TERRAFORM_OPEN_SOURCE"|"TERRAFORM_CLOUD"|string;
   export type ProductViewAggregationType = string;
   export interface ProductViewAggregationValue {
     /**
@@ -3189,11 +3189,11 @@ declare namespace ServiceCatalog {
      */
     LastRecordId?: Id;
     /**
-     * The record identifier of the last request performed on this provisioned product of the following types:    ProvisionedProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
+     * The record identifier of the last request performed on this provisioned product of the following types:    ProvisionProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
      */
     LastProvisioningRecordId?: Id;
     /**
-     * The record identifier of the last successful request performed on this provisioned product of the following types:    ProvisionedProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
+     * The record identifier of the last successful request performed on this provisioned product of the following types:    ProvisionProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
      */
     LastSuccessfulProvisioningRecordId?: Id;
     /**
@@ -3268,11 +3268,11 @@ declare namespace ServiceCatalog {
      */
     LastRecordId?: LastRequestId;
     /**
-     * The record identifier of the last request performed on this provisioned product of the following types:    ProvisionedProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
+     * The record identifier of the last request performed on this provisioned product of the following types:    ProvisionProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
      */
     LastProvisioningRecordId?: Id;
     /**
-     * The record identifier of the last successful request performed on this provisioned product of the following types:    ProvisionedProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
+     * The record identifier of the last successful request performed on this provisioned product of the following types:    ProvisionProduct     UpdateProvisionedProduct     ExecuteProvisionedProductPlan     TerminateProvisionedProduct   
      */
     LastSuccessfulProvisioningRecordId?: Id;
     /**
@@ -3431,7 +3431,7 @@ declare namespace ServiceCatalog {
      */
     Description?: ProvisioningArtifactName;
     /**
-     * The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    MARKETPLACE_AMI - Amazon Web Services Marketplace AMI    MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources  
+     * The type of provisioning artifact.  CLOUD_FORMATION_TEMPLATE - CloudFormation template
      */
     Type?: ProvisioningArtifactType;
     /**
@@ -3520,11 +3520,11 @@ declare namespace ServiceCatalog {
      */
     Info?: ProvisioningArtifactInfo;
     /**
-     * The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    MARKETPLACE_AMI - Amazon Web Services Marketplace AMI    MARKETPLACE_CAR - Amazon Web Services Marketplace Clusters and Amazon Web Services Resources    TERRAFORM_OPEN_SOURCE - Terraform open source configuration file  
+     * The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - CloudFormation template    TERRAFORM_OPEN_SOURCE - Terraform open source configuration file  
      */
     Type?: ProvisioningArtifactType;
     /**
-     * If set to true, Service Catalog stops validating the specified provisioning artifact even if it is invalid.
+     * If set to true, Service Catalog stops validating the specified provisioning artifact even if it is invalid.  Service Catalog does not support template validation for the TERRAFORM_OS product type. 
      */
     DisableTemplateValidation?: DisableTemplateValidation;
   }
@@ -3553,7 +3553,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactMetadata?: ProvisioningArtifactInfo;
   }
-  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|"TERRAFORM_OPEN_SOURCE"|string;
+  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|"TERRAFORM_OPEN_SOURCE"|"TERRAFORM_CLOUD"|string;
   export interface ProvisioningArtifactView {
     /**
      * Summary information about a product view.
@@ -3625,7 +3625,7 @@ declare namespace ServiceCatalog {
      */
     UpdatedTime?: UpdatedTime;
     /**
-     * The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
+     * The type of provisioned product. The supported values are CFN_STACK, CFN_STACKSET, TERRAFORM_OPEN_SOURCE, and TERRAFORM_CLOUD.
      */
     ProvisionedProductType?: ProvisionedProductType;
     /**
@@ -3944,7 +3944,7 @@ declare namespace ServiceCatalog {
      */
     AccessLevelFilter?: AccessLevelFilter;
     /**
-     * The search filters. When the key is SearchQuery, the searchable fields are arn, createdTime, id, lastRecordId, idempotencyToken, name, physicalId, productId, provisioningArtifact, type, status, tags, userArn, userArnSession, lastProvisioningRecordId, lastSuccessfulProvisioningRecordId, productName, and provisioningArtifactName. Example: "SearchQuery":["status:AVAILABLE"] 
+     * The search filters. When the key is SearchQuery, the searchable fields are arn, createdTime, id, lastRecordId, idempotencyToken, name, physicalId, productId, provisioningArtifactId, type, status, tags, userArn, userArnSession, lastProvisioningRecordId, lastSuccessfulProvisioningRecordId, productName, and provisioningArtifactName. Example: "SearchQuery":["status:AVAILABLE"] 
      */
     Filters?: ProvisionedProductFilters;
     /**
