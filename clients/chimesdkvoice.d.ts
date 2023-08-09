@@ -924,6 +924,10 @@ declare namespace ChimeSDKVoice {
      * List of phone numbers, in E.164 format.
      */
     E164PhoneNumbers: E164PhoneNumberList;
+    /**
+     * Specifies the name assigned to one or more phone numbers.
+     */
+    Name?: PhoneNumberName;
   }
   export interface CreatePhoneNumberOrderResponse {
     /**
@@ -1978,6 +1982,10 @@ declare namespace ChimeSDKVoice {
      * The phone number's order ID.
      */
     OrderId?: GuidString;
+    /**
+     * The name of the phone number.
+     */
+    Name?: PhoneNumberName;
   }
   export interface PhoneNumberAssociation {
     /**
@@ -2049,6 +2057,7 @@ declare namespace ChimeSDKVoice {
   export type PhoneNumberErrorList = PhoneNumberError[];
   export type PhoneNumberList = PhoneNumber[];
   export type PhoneNumberMaxResults = number;
+  export type PhoneNumberName = string;
   export interface PhoneNumberOrder {
     /**
      * The ID of the phone order.
@@ -2737,6 +2746,10 @@ declare namespace ChimeSDKVoice {
      * The outbound calling name associated with the phone number.
      */
     CallingName?: CallingName;
+    /**
+     * Specifies the name assigned to one or more phone numbers.
+     */
+    Name?: PhoneNumberName;
   }
   export interface UpdatePhoneNumberRequestItem {
     /**
@@ -2751,6 +2764,10 @@ declare namespace ChimeSDKVoice {
      * The outbound calling name to update.
      */
     CallingName?: CallingName;
+    /**
+     * The name of the phone number.
+     */
+    Name?: PhoneNumberName;
   }
   export type UpdatePhoneNumberRequestItemList = UpdatePhoneNumberRequestItem[];
   export interface UpdatePhoneNumberResponse {

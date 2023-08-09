@@ -20,11 +20,11 @@ declare class FSx extends Service {
    */
   associateFileSystemAliases(callback?: (err: AWSError, data: FSx.Types.AssociateFileSystemAliasesResponse) => void): Request<FSx.Types.AssociateFileSystemAliasesResponse, AWSError>;
   /**
-   * Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the PENDING or EXECUTING state. When you cancel a task, Amazon FSx does the following.   Any files that FSx has already exported are not reverted.   FSx continues to export any files that are "in-flight" when the cancel operation is received.   FSx does not export any files that have not yet been exported.  
+   * Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the PENDING or EXECUTING state. When you cancel am export task, Amazon FSx does the following.   Any files that FSx has already exported are not reverted.   FSx continues to export any files that are in-flight when the cancel operation is received.   FSx does not export any files that have not yet been exported.   For a release task, Amazon FSx will stop releasing files upon cancellation. Any files that have already been released will remain in the released state.
    */
   cancelDataRepositoryTask(params: FSx.Types.CancelDataRepositoryTaskRequest, callback?: (err: AWSError, data: FSx.Types.CancelDataRepositoryTaskResponse) => void): Request<FSx.Types.CancelDataRepositoryTaskResponse, AWSError>;
   /**
-   * Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the PENDING or EXECUTING state. When you cancel a task, Amazon FSx does the following.   Any files that FSx has already exported are not reverted.   FSx continues to export any files that are "in-flight" when the cancel operation is received.   FSx does not export any files that have not yet been exported.  
+   * Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the PENDING or EXECUTING state. When you cancel am export task, Amazon FSx does the following.   Any files that FSx has already exported are not reverted.   FSx continues to export any files that are in-flight when the cancel operation is received.   FSx does not export any files that have not yet been exported.   For a release task, Amazon FSx will stop releasing files upon cancellation. Any files that have already been released will remain in the released state.
    */
   cancelDataRepositoryTask(callback?: (err: AWSError, data: FSx.Types.CancelDataRepositoryTaskResponse) => void): Request<FSx.Types.CancelDataRepositoryTaskResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class FSx extends Service {
    */
   createDataRepositoryAssociation(callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryAssociationResponse) => void): Request<FSx.Types.CreateDataRepositoryAssociationResponse, AWSError>;
   /**
-   * Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repositories. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to a linked data repository. A CreateDataRepositoryTask operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see Data Repository Tasks. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.
+   * Creates an Amazon FSx for Lustre data repository task. A CreateDataRepositoryTask operation will fail if a data repository is not linked to the FSx file system. You use import and export data repository tasks to perform bulk operations between your FSx for Lustre file system and its linked data repositories. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to a linked data repository. You use release data repository tasks to release data from your file system for files that are archived to S3. The metadata of released files remains on the file system so users or applications can still access released files by reading the files again, which will restore data from Amazon S3 to the FSx for Lustre file system. To learn more about data repository tasks, see Data Repository Tasks. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.
    */
   createDataRepositoryTask(params: FSx.Types.CreateDataRepositoryTaskRequest, callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryTaskResponse) => void): Request<FSx.Types.CreateDataRepositoryTaskResponse, AWSError>;
   /**
-   * Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repositories. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to a linked data repository. A CreateDataRepositoryTask operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see Data Repository Tasks. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.
+   * Creates an Amazon FSx for Lustre data repository task. A CreateDataRepositoryTask operation will fail if a data repository is not linked to the FSx file system. You use import and export data repository tasks to perform bulk operations between your FSx for Lustre file system and its linked data repositories. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to a linked data repository. You use release data repository tasks to release data from your file system for files that are archived to S3. The metadata of released files remains on the file system so users or applications can still access released files by reading the files again, which will restore data from Amazon S3 to the FSx for Lustre file system. To learn more about data repository tasks, see Data Repository Tasks. To learn more about linking a data repository to your file system, see Linking your file system to an S3 bucket.
    */
   createDataRepositoryTask(callback?: (err: AWSError, data: FSx.Types.CreateDataRepositoryTaskResponse) => void): Request<FSx.Types.CreateDataRepositoryTaskResponse, AWSError>;
   /**
@@ -308,11 +308,11 @@ declare class FSx extends Service {
    */
   updateFileCache(callback?: (err: AWSError, data: FSx.Types.UpdateFileCacheResponse) => void): Request<FSx.Types.UpdateFileCacheResponse, AWSError>;
   /**
-   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LogConfiguration     LustreRootSquashConfiguration     StorageCapacity     WeeklyMaintenanceStartTime    For FSx for ONTAP file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     DiskIopsConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime   
+   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     StorageType     ThroughputCapacity     DiskIopsConfiguration     WeeklyMaintenanceStartTime    For FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LogConfiguration     LustreRootSquashConfiguration     StorageCapacity     WeeklyMaintenanceStartTime    For FSx for ONTAP file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     DiskIopsConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime   
    */
   updateFileSystem(params: FSx.Types.UpdateFileSystemRequest, callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
   /**
-   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LogConfiguration     LustreRootSquashConfiguration     StorageCapacity     WeeklyMaintenanceStartTime    For FSx for ONTAP file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     DiskIopsConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime   
+   * Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request. For FSx for Windows File Server file systems, you can update the following properties:    AuditLogConfiguration     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     SelfManagedActiveDirectoryConfiguration     StorageCapacity     StorageType     ThroughputCapacity     DiskIopsConfiguration     WeeklyMaintenanceStartTime    For FSx for Lustre file systems, you can update the following properties:    AutoImportPolicy     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DataCompressionType     LogConfiguration     LustreRootSquashConfiguration     StorageCapacity     WeeklyMaintenanceStartTime    For FSx for ONTAP file systems, you can update the following properties:    AddRouteTableIds     AutomaticBackupRetentionDays     DailyAutomaticBackupStartTime     DiskIopsConfiguration     FsxAdminPassword     RemoveRouteTableIds     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime    For FSx for OpenZFS file systems, you can update the following properties:    AutomaticBackupRetentionDays     CopyTagsToBackups     CopyTagsToVolumes     DailyAutomaticBackupStartTime     DiskIopsConfiguration     StorageCapacity     ThroughputCapacity     WeeklyMaintenanceStartTime   
    */
   updateFileSystem(callback?: (err: AWSError, data: FSx.Types.UpdateFileSystemResponse) => void): Request<FSx.Types.UpdateFileSystemResponse, AWSError>;
   /**
@@ -383,7 +383,7 @@ declare namespace FSx {
      */
     Message?: ErrorMessage;
   }
-  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|string;
+  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|"THROUGHPUT_OPTIMIZATION"|"IOPS_OPTIMIZATION"|"STORAGE_TYPE_OPTIMIZATION"|string;
   export type AdministrativeActions = AdministrativeAction[];
   export interface Alias {
     /**
@@ -624,11 +624,11 @@ declare namespace FSx {
   }
   export interface CreateDataRepositoryTaskRequest {
     /**
-     * Specifies the type of data repository task to create.
+     * Specifies the type of data repository task to create.    EXPORT_TO_REPOSITORY tasks export from your Amazon FSx for Lustre file system to a linked data repository.    IMPORT_METADATA_FROM_REPOSITORY tasks import metadata changes from a linked S3 bucket to your Amazon FSx for Lustre file system.    RELEASE_DATA_FROM_FILESYSTEM tasks release files in your Amazon FSx for Lustre file system that are archived and that meet your specified release criteria.    AUTO_RELEASE_DATA tasks automatically release files from an Amazon File Cache resource.  
      */
     Type: DataRepositoryTaskType;
     /**
-     * A list of paths for the data repository task to use when the task is processed. If a path that you provide isn't valid, the task fails.   For export tasks, the list contains paths on the Amazon FSx file system from which the files are exported to the Amazon S3 bucket. The default path is the file system root directory. The paths you provide need to be relative to the mount point of the file system. If the mount point is /mnt/fsx and /mnt/fsx/path1 is a directory or file on the file system you want to export, then the path to provide is path1.   For import tasks, the list contains paths in the Amazon S3 bucket from which POSIX metadata changes are imported to the Amazon FSx file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where myPrefix is optional).  
+     * A list of paths for the data repository task to use when the task is processed. If a path that you provide isn't valid, the task fails. If you don't provide paths, the default behavior is to export all files to S3 (for export tasks), import all files from S3 (for import tasks), or release all archived files that meet the last accessed time criteria (for release tasks).   For export tasks, the list contains paths on the FSx for Lustre file system from which the files are exported to the Amazon S3 bucket. The default path is the file system root directory. The paths you provide need to be relative to the mount point of the file system. If the mount point is /mnt/fsx and /mnt/fsx/path1 is a directory or file on the file system you want to export, then the path to provide is path1.   For import tasks, the list contains paths in the Amazon S3 bucket from which POSIX metadata changes are imported to the FSx for Lustre file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix (where myPrefix is optional).    For release tasks, the list contains directory or file paths on the FSx for Lustre file system from which to release archived files. If a directory is specified, files within the directory are released. If a file path is specified, only that file is released. To release all archived files in the file system, specify a forward slash (/) as the path.  A file must also meet the last accessed time criteria specified in for the file to be released.   
      */
     Paths?: DataRepositoryTaskPaths;
     FileSystemId: FileSystemId;
@@ -642,6 +642,10 @@ declare namespace FSx {
      * Specifies the amount of data to release, in GiB, by an Amazon File Cache AUTO_RELEASE_DATA task that automatically releases files from the cache.
      */
     CapacityToRelease?: CapacityToRelease;
+    /**
+     * The configuration that specifies the last accessed time criteria for files that will be released from an Amazon FSx for Lustre file system.
+     */
+    ReleaseConfiguration?: ReleaseConfiguration;
   }
   export interface CreateDataRepositoryTaskResponse {
     /**
@@ -858,7 +862,7 @@ declare namespace FSx {
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the file system deployment type. Single AZ deployment types are configured for redundancy within a single Availability Zone in an Amazon Web Services Region . Valid values are the following:    SINGLE_AZ_1- (Default) Creates file systems with throughput capacities of 64 - 4,096 MBps. Single_AZ_1 is available in all Amazon Web Services Regions where Amazon FSx for OpenZFS is available.    SINGLE_AZ_2- Creates file systems with throughput capacities of 160 - 10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US East (N. Virginia), US East (Ohio), US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.   For more information, see: Deployment type availability and File system performance in the Amazon FSx for OpenZFS User Guide.
+     * Specifies the file system deployment type. Single AZ deployment types are configured for redundancy within a single Availability Zone in an Amazon Web Services Region . Valid values are the following:    MULTI_AZ_1- Creates file systems with high availability that are configured for Multi-AZ redundancy to tolerate temporary unavailability in Availability Zones (AZs). Multi_AZ_1 is available in the following Amazon Web Services Regions:     SINGLE_AZ_1- (Default) Creates file systems with throughput capacities of 64 - 4,096 MB/s. Single_AZ_1 is available in all Amazon Web Services Regions where Amazon FSx for OpenZFS is available.    SINGLE_AZ_2- Creates file systems with throughput capacities of 160 - 10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US East (N. Virginia), US East (Ohio), US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.   For more information, see: Deployment type availability and File system performance in the Amazon FSx for OpenZFS User Guide.
      */
     DeploymentType: OpenZFSDeploymentType;
     /**
@@ -871,6 +875,18 @@ declare namespace FSx {
      * The configuration Amazon FSx uses when creating the root value of the Amazon FSx for OpenZFS file system. All volumes are children of the root volume. 
      */
     RootVolumeConfiguration?: OpenZFSCreateRootVolumeConfiguration;
+    /**
+     * Required when DeploymentType is set to MULTI_AZ_1. This specifies the subnet in which you want the preferred file server to be located.
+     */
+    PreferredSubnetId?: SubnetId;
+    /**
+     * (Multi-AZ only) Specifies the IP address range in which the endpoints to access your file system will be created. By default in the Amazon FSx API and Amazon FSx console, Amazon FSx selects an available /28 IP address range for you from one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for file systems deployed in the same VPC/route tables.
+     */
+    EndpointIpAddressRange?: IpAddressRange;
+    /**
+     * (Multi-AZ only) Specifies the virtual private cloud (VPC) route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.
+     */
+    RouteTableIds?: RouteTableIds;
   }
   export interface CreateFileSystemRequest {
     /**
@@ -965,6 +981,10 @@ declare namespace FSx {
      * The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.
      */
     AuditLogConfiguration?: WindowsAuditLogCreateConfiguration;
+    /**
+     * The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system. By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.
+     */
+    DiskIopsConfiguration?: DiskIopsConfiguration;
   }
   export interface CreateOntapVolumeConfiguration {
     /**
@@ -1272,7 +1292,7 @@ declare namespace FSx {
      */
     Lifecycle: DataRepositoryTaskLifecycle;
     /**
-     * The type of data repository task.    EXPORT_TO_REPOSITORY tasks export from your Amazon FSx for Lustre file system to a linked data repository.    IMPORT_METADATA_FROM_REPOSITORY tasks import metadata changes from a linked S3 bucket to your Amazon FSx for Lustre file system.    AUTO_RELEASE_DATA tasks automatically release files from an Amazon File Cache resource.    RELEASE_DATA_FROM_FILESYSTEM tasks are not supported.  
+     * The type of data repository task.    EXPORT_TO_REPOSITORY tasks export from your Amazon FSx for Lustre file system to a linked data repository.    IMPORT_METADATA_FROM_REPOSITORY tasks import metadata changes from a linked S3 bucket to your Amazon FSx for Lustre file system.    RELEASE_DATA_FROM_FILESYSTEM tasks release files in your Amazon FSx for Lustre file system that are archived and that meet your specified release criteria.    AUTO_RELEASE_DATA tasks automatically release files from an Amazon File Cache resource.  
      */
     Type: DataRepositoryTaskType;
     CreationTime: CreationTime;
@@ -1311,6 +1331,10 @@ declare namespace FSx {
      * The system-generated, unique ID of the cache.
      */
     FileCacheId?: FileCacheId;
+    /**
+     * The configuration that specifies the last accessed time criteria for files that will be released from an Amazon FSx for Lustre file system.
+     */
+    ReleaseConfiguration?: ReleaseConfiguration;
   }
   export interface DataRepositoryTaskFailureDetails {
     Message?: ErrorMessage;
@@ -1554,7 +1578,7 @@ declare namespace FSx {
     SkipFinalBackup?: Flag;
     FinalBackupTags?: Tags;
     /**
-     * Setting this to true allows a SnapLock administrator to delete an FSx for ONTAP SnapLock Enterprise volume with unexpired write once, read many (WORM) files. The IAM permission fsx:BypassSnaplockEnterpriseRetention is also required to delete SnapLock Enterprise volumes with unexpired WORM files. The default value is false.  For more information, see  Deleting a SnapLock volume . 
+     * Setting this to true allows a SnapLock administrator to delete an FSx for ONTAP SnapLock Enterprise volume with unexpired write once, read many (WORM) files. The IAM permission fsx:BypassSnaplockEnterpriseRetention is also required to delete SnapLock Enterprise volumes with unexpired WORM files. The default value is false.  For more information, see  Deleting a SnapLock volume. 
      */
     BypassSnaplockEnterpriseRetention?: Flag;
   }
@@ -1817,6 +1841,16 @@ declare namespace FSx {
   export type DiskIopsConfigurationMode = "AUTOMATIC"|"USER_PROVISIONED"|string;
   export type DnsIps = IpAddress[];
   export type DriveCacheType = "NONE"|"READ"|string;
+  export interface DurationSinceLastAccess {
+    /**
+     * The unit of time used by the Value parameter to determine if a file can be released, based on when it was last accessed. DAYS is the only supported value. This is a required parameter.
+     */
+    Unit?: Unit;
+    /**
+     * An integer that represents the minimum amount of time (in days) since a file was last accessed in the file system. Only archived files with a MAX(atime, ctime, mtime) timestamp that is more than this amount of time in the past (relative to the task create time) will be released. The default of Value is 0. This is a required parameter.  If an archived file meets the last accessed time criteria, its file or directory path must also be specified in the Paths parameter of the operation in order for the file to be released. 
+     */
+    Value?: Value;
+  }
   export type EndTime = Date;
   export type ErrorMessage = string;
   export type EventType = "NEW"|"CHANGED"|"DELETED"|string;
@@ -2388,7 +2422,7 @@ declare namespace FSx {
     ReadOnly?: ReadOnly;
   }
   export type OpenZFSDataCompressionType = "NONE"|"ZSTD"|"LZ4"|string;
-  export type OpenZFSDeploymentType = "SINGLE_AZ_1"|"SINGLE_AZ_2"|string;
+  export type OpenZFSDeploymentType = "SINGLE_AZ_1"|"SINGLE_AZ_2"|"MULTI_AZ_1"|string;
   export interface OpenZFSFileSystemConfiguration {
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
@@ -2401,7 +2435,7 @@ declare namespace FSx {
     CopyTagsToVolumes?: Flag;
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
-     * Specifies the file-system deployment type. Amazon FSx for OpenZFS supports&#x2028; SINGLE_AZ_1 and SINGLE_AZ_2.
+     * Specifies the file-system deployment type. Amazon FSx for OpenZFS supports&#x2028; MULTI_AZ_1, SINGLE_AZ_1, and SINGLE_AZ_2.
      */
     DeploymentType?: OpenZFSDeploymentType;
     /**
@@ -2414,6 +2448,22 @@ declare namespace FSx {
      * The ID of the root volume of the OpenZFS file system. 
      */
     RootVolumeId?: VolumeId;
+    /**
+     * Required when DeploymentType is set to MULTI_AZ_1. This specifies the subnet in which you want the preferred file server to be located.
+     */
+    PreferredSubnetId?: SubnetId;
+    /**
+     * (Multi-AZ only) Specifies the IP address range in which the endpoints to access your file system will be created. By default in the Amazon FSx API and Amazon FSx console, Amazon FSx selects an available /28 IP address range for you from one of the VPC's CIDR ranges. You can have overlapping endpoint IP addresses for file systems deployed in the same VPC/route tables.
+     */
+    EndpointIpAddressRange?: IpAddressRange;
+    /**
+     * (Multi-AZ only) The VPC route tables in which your file system's endpoints are created.
+     */
+    RouteTableIds?: RouteTableIds;
+    /**
+     * The IP address of the endpoint that is used to access data or to manage the file system.
+     */
+    EndpointIpAddress?: IpAddress;
   }
   export interface OpenZFSNfsExport {
     /**
@@ -2511,6 +2561,12 @@ declare namespace FSx {
   export type ProgressPercent = number;
   export type ReadOnly = boolean;
   export type Region = string;
+  export interface ReleaseConfiguration {
+    /**
+     * Defines the point-in-time since an archived file was last accessed, in order for that file to be eligible for release. Only files that were last accessed before this point-in-time are eligible to be released from the file system.
+     */
+    DurationSinceLastAccess?: DurationSinceLastAccess;
+  }
   export interface ReleaseFileSystemNfsV3LocksRequest {
     FileSystemId: FileSystemId;
     ClientRequestToken?: ClientRequestToken;
@@ -2889,6 +2945,7 @@ declare namespace FSx {
   export type TieringPolicyName = "SNAPSHOT_ONLY"|"AUTO"|"ALL"|"NONE"|string;
   export type TotalCount = number;
   export type UUID = string;
+  export type Unit = "DAYS"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the Amazon FSx resource to untag.
@@ -3011,6 +3068,14 @@ declare namespace FSx {
     ThroughputCapacity?: MegabytesPerSecond;
     WeeklyMaintenanceStartTime?: WeeklyTime;
     DiskIopsConfiguration?: DiskIopsConfiguration;
+    /**
+     * (Multi-AZ only) A list of IDs of new virtual private cloud (VPC) route tables to associate (add) with your Amazon FSx for OpenZFS file system.
+     */
+    AddRouteTableIds?: RouteTableIds;
+    /**
+     * (Multi-AZ only) A list of IDs of existing virtual private cloud (VPC) route tables to disassociate (remove) from your Amazon FSx for OpenZFS file system. You can use the API operation to retrieve the list of VPC route table IDs for a file system.
+     */
+    RemoveRouteTableIds?: RouteTableIds;
   }
   export interface UpdateFileSystemRequest {
     /**
@@ -3035,6 +3100,7 @@ declare namespace FSx {
      * The configuration updates for an FSx for OpenZFS file system.
      */
     OpenZFSConfiguration?: UpdateFileSystemOpenZFSConfiguration;
+    StorageType?: StorageType;
   }
   export interface UpdateFileSystemResponse {
     /**
@@ -3067,6 +3133,10 @@ declare namespace FSx {
      * The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system..
      */
     AuditLogConfiguration?: WindowsAuditLogCreateConfiguration;
+    /**
+     * The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system. By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.
+     */
+    DiskIopsConfiguration?: DiskIopsConfiguration;
   }
   export interface UpdateOntapVolumeConfiguration {
     /**
@@ -3221,6 +3291,7 @@ declare namespace FSx {
      */
     Volume?: Volume;
   }
+  export type Value = number;
   export interface Volume {
     CreationTime?: CreationTime;
     FileSystemId?: FileSystemId;
@@ -3291,7 +3362,7 @@ declare namespace FSx {
      */
     FileShareAccessAuditLogLevel: WindowsAccessAuditLogLevel;
     /**
-     * The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx prefix. The destination ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.
+     * The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehose delivery stream must begin with the aws-fsx prefix. The destination ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.
      */
     AuditLogDestination?: GeneralARN;
   }
@@ -3305,7 +3376,7 @@ declare namespace FSx {
      */
     FileShareAccessAuditLogLevel: WindowsAccessAuditLogLevel;
     /**
-     * The Amazon Resource Name (ARN) that specifies the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN, with the following requirements:   The destination ARN that you provide (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.   The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx prefix.   If you do not provide a destination in AuditLogDestination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.   If AuditLogDestination is provided and the resource does not exist, the request will fail with a BadRequest error.   If FileAccessAuditLogLevel and FileShareAccessAuditLogLevel are both set to DISABLED, you cannot specify a destination in AuditLogDestination.  
+     * The Amazon Resource Name (ARN) that specifies the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN, with the following requirements:   The destination ARN that you provide (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.   The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehose delivery stream must begin with the aws-fsx prefix.   If you do not provide a destination in AuditLogDestination, Amazon FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log group.   If AuditLogDestination is provided and the resource does not exist, the request will fail with a BadRequest error.   If FileAccessAuditLogLevel and FileShareAccessAuditLogLevel are both set to DISABLED, you cannot specify a destination in AuditLogDestination.  
      */
     AuditLogDestination?: GeneralARN;
   }
@@ -3361,6 +3432,10 @@ declare namespace FSx {
      * The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.
      */
     AuditLogConfiguration?: WindowsAuditLogConfiguration;
+    /**
+     * The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for Windows file system. By default, Amazon FSx automatically provisions 3 IOPS per GiB of storage capacity. You can provision additional IOPS per GiB of storage, up to the maximum limit associated with your chosen throughput capacity.
+     */
+    DiskIopsConfiguration?: DiskIopsConfiguration;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

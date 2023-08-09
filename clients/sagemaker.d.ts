@@ -5292,9 +5292,9 @@ declare namespace SageMaker {
   }
   export interface CreateModelCardExportJobRequest {
     /**
-     * The name of the model card to export.
+     * The name or Amazon Resource Name (ARN) of the model card to export.
      */
-    ModelCardName: EntityName;
+    ModelCardName: ModelCardNameOrArn;
     /**
      * The version of the model card to export. If a version is not provided, then the latest version of the model card is exported.
      */
@@ -8893,7 +8893,7 @@ declare namespace SageMaker {
      */
     Status: ModelCardExportJobStatus;
     /**
-     * The name of the model card that the model export job exports.
+     * The name or Amazon Resource Name (ARN) of the model card that the model export job exports.
      */
     ModelCardName: EntityName;
     /**
@@ -8923,9 +8923,9 @@ declare namespace SageMaker {
   }
   export interface DescribeModelCardRequest {
     /**
-     * The name of the model card to describe.
+     * The name or Amazon Resource Name (ARN) of the model card to describe.
      */
-    ModelCardName: EntityName;
+    ModelCardName: ModelCardNameOrArn;
     /**
      * The version of the model card to describe. If a version is not provided, then the latest version of the model card is described.
      */
@@ -14819,9 +14819,9 @@ declare namespace SageMaker {
      */
     MaxResults?: MaxResults;
     /**
-     * List model card versions for the model card with the specified name.
+     * List model card versions for the model card with the specified name or Amazon Resource Name (ARN).
      */
-    ModelCardName: EntityName;
+    ModelCardName: ModelCardNameOrArn;
     /**
      * Only list model card versions with the specified approval status.
      */
@@ -16534,6 +16534,7 @@ declare namespace SageMaker {
      */
     S3OutputPath: S3Uri;
   }
+  export type ModelCardNameOrArn = string;
   export type ModelCardProcessingStatus = "DeleteInProgress"|"DeletePending"|"ContentDeleted"|"ExportJobsDeleted"|"DeleteCompleted"|"DeleteFailed"|string;
   export interface ModelCardSecurityConfig {
     /**
@@ -18067,7 +18068,7 @@ declare namespace SageMaker {
      */
     TargetPlatform?: TargetPlatform;
     /**
-     * Specifies additional parameters for compiler options in JSON format. The compiler options are TargetPlatform specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify CompilerOptions.     DTYPE: Specifies the data type for the input. When compiling for ml_* (except for ml_inf) instances using PyTorch framework, provide the data type (dtype) of the model's input. "float32" is used if "DTYPE" is not specified. Options for data type are:   float32: Use either "float" or "float32".   int64: Use either "int64" or "long".    For example, {"dtype" : "float32"}.    CPU: Compilation for CPU supports the following compiler options.    mcpu: CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}     mattr: CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}       ARM: Details of ARM CPU compilations.    NEON: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors. For example, add {'mattr': ['+neon']} to the compiler options if compiling for ARM 32-bit platform with the NEON support.      NVIDIA: Compilation for NVIDIA GPU supports the following compiler options.    gpu_code: Specifies the targeted architecture.    trt-ver: Specifies the TensorRT versions in x.y.z. format.    cuda-ver: Specifies the CUDA version in x.y format.   For example, {'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}     ANDROID: Compilation for the Android OS supports the following compiler options:    ANDROID_PLATFORM: Specifies the Android API levels. Available levels range from 21 to 29. For example, {'ANDROID_PLATFORM': 28}.    mattr: Add {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform with NEON support.      INFERENTIA: Compilation for target ml_inf1 uses compiler options passed in as a JSON string. For example, "CompilerOptions": "\"--verbose 1 --num-neuroncores 2 -O2\"".  For information about supported compiler options, see  Neuron Compiler CLI.     CoreML: Compilation for the CoreML OutputConfig TargetDevice supports the following compiler options:    class_labels: Specifies the classification labels file name inside input tar.gz file. For example, {"class_labels": "imagenet_labels_1000.txt"}. Labels inside the txt file should be separated by newlines.      EIA: Compilation for the Elastic Inference Accelerator supports the following compiler options:    precision_mode: Specifies the precision of compiled artifacts. Supported values are "FP16" and "FP32". Default is "FP32".    signature_def_key: Specifies the signature to use for models in SavedModel format. Defaults is TensorFlow's default signature def key.    output_names: Specifies a list of output tensor names for models in FrozenGraph format. Set at most one API field, either: signature_def_key or output_names.   For example: {"precision_mode": "FP32", "output_names": ["output:0"]}   
+     * Specifies additional parameters for compiler options in JSON format. The compiler options are TargetPlatform specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify CompilerOptions.     DTYPE: Specifies the data type for the input. When compiling for ml_* (except for ml_inf) instances using PyTorch framework, provide the data type (dtype) of the model's input. "float32" is used if "DTYPE" is not specified. Options for data type are:   float32: Use either "float" or "float32".   int64: Use either "int64" or "long".    For example, {"dtype" : "float32"}.    CPU: Compilation for CPU supports the following compiler options.    mcpu: CPU micro-architecture. For example, {'mcpu': 'skylake-avx512'}     mattr: CPU flags. For example, {'mattr': ['+neon', '+vfpv4']}       ARM: Details of ARM CPU compilations.    NEON: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors. For example, add {'mattr': ['+neon']} to the compiler options if compiling for ARM 32-bit platform with the NEON support.      NVIDIA: Compilation for NVIDIA GPU supports the following compiler options.    gpu_code: Specifies the targeted architecture.    trt-ver: Specifies the TensorRT versions in x.y.z. format.    cuda-ver: Specifies the CUDA version in x.y format.   For example, {'gpu-code': 'sm_72', 'trt-ver': '6.0.1', 'cuda-ver': '10.1'}     ANDROID: Compilation for the Android OS supports the following compiler options:    ANDROID_PLATFORM: Specifies the Android API levels. Available levels range from 21 to 29. For example, {'ANDROID_PLATFORM': 28}.    mattr: Add {'mattr': ['+neon']} to compiler options if compiling for ARM 32-bit platform with NEON support.      INFERENTIA: Compilation for target ml_inf1 uses compiler options passed in as a JSON string. For example, "CompilerOptions": "\"--verbose 1 --num-neuroncores 2 -O2\"".  For information about supported compiler options, see  Neuron Compiler CLI Reference Guide.     CoreML: Compilation for the CoreML OutputConfig TargetDevice supports the following compiler options:    class_labels: Specifies the classification labels file name inside input tar.gz file. For example, {"class_labels": "imagenet_labels_1000.txt"}. Labels inside the txt file should be separated by newlines.      EIA: Compilation for the Elastic Inference Accelerator supports the following compiler options:    precision_mode: Specifies the precision of compiled artifacts. Supported values are "FP16" and "FP32". Default is "FP32".    signature_def_key: Specifies the signature to use for models in SavedModel format. Defaults is TensorFlow's default signature def key.    output_names: Specifies a list of output tensor names for models in FrozenGraph format. Set at most one API field, either: signature_def_key or output_names.   For example: {"precision_mode": "FP32", "output_names": ["output:0"]}   
      */
     CompilerOptions?: CompilerOptions;
     /**
@@ -22131,9 +22132,9 @@ declare namespace SageMaker {
   }
   export interface UpdateModelCardRequest {
     /**
-     * The name of the model card to update.
+     * The name or Amazon Resource Name (ARN) of the model card to update.
      */
-    ModelCardName: EntityName;
+    ModelCardName: ModelCardNameOrArn;
     /**
      * The updated model card content. Content must be in model card JSON schema and provided as a string. When updating model card content, be sure to include the full content and not just updated content.
      */
