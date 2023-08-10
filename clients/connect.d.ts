@@ -100,6 +100,14 @@ declare class Connect extends Service {
    */
   associateSecurityKey(callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
   /**
+   * Associates an agent with a traffic distribution group.
+   */
+  associateTrafficDistributionGroupUser(params: Connect.Types.AssociateTrafficDistributionGroupUserRequest, callback?: (err: AWSError, data: Connect.Types.AssociateTrafficDistributionGroupUserResponse) => void): Request<Connect.Types.AssociateTrafficDistributionGroupUserResponse, AWSError>;
+  /**
+   * Associates an agent with a traffic distribution group.
+   */
+  associateTrafficDistributionGroupUser(callback?: (err: AWSError, data: Connect.Types.AssociateTrafficDistributionGroupUserResponse) => void): Request<Connect.Types.AssociateTrafficDistributionGroupUserResponse, AWSError>;
+  /**
    * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   claimPhoneNumber(params: Connect.Types.ClaimPhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
@@ -676,6 +684,14 @@ declare class Connect extends Service {
    */
   disassociateSecurityKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Disassociates an agent from a traffic distribution group.
+   */
+  disassociateTrafficDistributionGroupUser(params: Connect.Types.DisassociateTrafficDistributionGroupUserRequest, callback?: (err: AWSError, data: Connect.Types.DisassociateTrafficDistributionGroupUserResponse) => void): Request<Connect.Types.DisassociateTrafficDistributionGroupUserResponse, AWSError>;
+  /**
+   * Disassociates an agent from a traffic distribution group.
+   */
+  disassociateTrafficDistributionGroupUser(callback?: (err: AWSError, data: Connect.Types.DisassociateTrafficDistributionGroupUserResponse) => void): Request<Connect.Types.DisassociateTrafficDistributionGroupUserResponse, AWSError>;
+  /**
    * Dismisses contacts from an agent’s CCP and returns the agent to an available state, which allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a MISSED, ERROR, ENDED, or REJECTED state in the Agent Event Stream.
    */
   dismissUserContact(params: Connect.Types.DismissUserContactRequest, callback?: (err: AWSError, data: Connect.Types.DismissUserContactResponse) => void): Request<Connect.Types.DismissUserContactResponse, AWSError>;
@@ -900,11 +916,11 @@ declare class Connect extends Service {
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersResponse) => void): Request<Connect.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Lists phone numbers claimed to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with traffic distribution group. For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
+   * Lists phone numbers claimed to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with traffic distribution group. For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.    When given an instance ARN, ListPhoneNumbersV2 returns only the phone numbers claimed to the instance.   When given a traffic distribution group ARN ListPhoneNumbersV2 returns only the phone numbers claimed to the traffic distribution group.   
    */
   listPhoneNumbersV2(params: Connect.Types.ListPhoneNumbersV2Request, callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersV2Response) => void): Request<Connect.Types.ListPhoneNumbersV2Response, AWSError>;
   /**
-   * Lists phone numbers claimed to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with traffic distribution group. For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.
+   * Lists phone numbers claimed to your Amazon Connect instance or traffic distribution group. If the provided TargetArn is a traffic distribution group, you can call this API in both Amazon Web Services Regions associated with traffic distribution group. For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.    When given an instance ARN, ListPhoneNumbersV2 returns only the phone numbers claimed to the instance.   When given a traffic distribution group ARN ListPhoneNumbersV2 returns only the phone numbers claimed to the traffic distribution group.   
    */
   listPhoneNumbersV2(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersV2Response) => void): Request<Connect.Types.ListPhoneNumbersV2Response, AWSError>;
   /**
@@ -1003,6 +1019,14 @@ declare class Connect extends Service {
    * Lists task templates for the specified Amazon Connect instance.
    */
   listTaskTemplates(callback?: (err: AWSError, data: Connect.Types.ListTaskTemplatesResponse) => void): Request<Connect.Types.ListTaskTemplatesResponse, AWSError>;
+  /**
+   * Lists traffic distribution group users.
+   */
+  listTrafficDistributionGroupUsers(params: Connect.Types.ListTrafficDistributionGroupUsersRequest, callback?: (err: AWSError, data: Connect.Types.ListTrafficDistributionGroupUsersResponse) => void): Request<Connect.Types.ListTrafficDistributionGroupUsersResponse, AWSError>;
+  /**
+   * Lists traffic distribution group users.
+   */
+  listTrafficDistributionGroupUsers(callback?: (err: AWSError, data: Connect.Types.ListTrafficDistributionGroupUsersResponse) => void): Request<Connect.Types.ListTrafficDistributionGroupUsersResponse, AWSError>;
   /**
    * Lists traffic distribution groups.
    */
@@ -1524,11 +1548,11 @@ declare class Connect extends Service {
    */
   updateTaskTemplate(callback?: (err: AWSError, data: Connect.Types.UpdateTaskTemplateResponse) => void): Request<Connect.Types.UpdateTaskTemplateResponse, AWSError>;
   /**
-   * Updates the traffic distribution for a given traffic distribution group.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   * Updates the traffic distribution for a given traffic distribution group.   You can change the SignInConfig only for a default TrafficDistributionGroup. If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
    */
   updateTrafficDistribution(params: Connect.Types.UpdateTrafficDistributionRequest, callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
-   * Updates the traffic distribution for a given traffic distribution group.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   * Updates the traffic distribution for a given traffic distribution group.   You can change the SignInConfig only for a default TrafficDistributionGroup. If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
    */
   updateTrafficDistribution(callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
@@ -1628,6 +1652,12 @@ declare namespace Connect {
   }
   export type AfterContactWorkTimeLimit = number;
   export type AgentAvailabilityTimer = "TIME_SINCE_LAST_ACTIVITY"|"TIME_SINCE_LAST_INBOUND"|string;
+  export interface AgentConfig {
+    /**
+     * Information about traffic distributions.
+     */
+    Distributions: DistributionList;
+  }
   export interface AgentContactReference {
     /**
      * The identifier of the contact in this instance of Amazon Connect. 
@@ -1895,6 +1925,22 @@ declare namespace Connect {
      * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
      */
     AssociationId?: AssociationId;
+  }
+  export interface AssociateTrafficDistributionGroupUserRequest {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    TrafficDistributionGroupId: TrafficDistributionGroupIdOrArn;
+    /**
+     * The identifier of the user account. This can be the ID or the ARN of the user. 
+     */
+    UserId: UserId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+  }
+  export interface AssociateTrafficDistributionGroupUserResponse {
   }
   export type AssociationId = string;
   export interface AttachmentReference {
@@ -2688,7 +2734,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * Whether agents with this routing profile will have their routing order calculated based on time since their last inbound contact or longest idle time. 
+     * Whether agents with this routing profile will have their routing order calculated based on longest idle time or time since their last inbound contact. 
      */
     AgentAvailabilityTimer?: AgentAvailabilityTimer;
   }
@@ -3822,6 +3868,22 @@ declare namespace Connect {
      */
     AssociationId: AssociationId;
   }
+  export interface DisassociateTrafficDistributionGroupUserRequest {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    TrafficDistributionGroupId: TrafficDistributionGroupIdOrArn;
+    /**
+     * The identifier for the user. This can be the ID or the ARN of the user.
+     */
+    UserId: UserId;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+  }
+  export interface DisassociateTrafficDistributionGroupUserResponse {
+  }
   export interface DismissUserContactRequest {
     /**
      * The identifier of the user account.
@@ -4546,7 +4608,7 @@ declare namespace Connect {
      */
     UserArn?: ARN;
     /**
-     * The identifier for the user.
+     * The identifier for the user. This can be the ID or the ARN of the user.
      */
     UserId?: AgentResourceId;
   }
@@ -4741,6 +4803,14 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the traffic distribution group.
      */
     Arn?: TrafficDistributionGroupArn;
+    /**
+     * The distribution of allowing signing in to the instance and its replica(s).
+     */
+    SignInConfig?: SignInConfig;
+    /**
+     * The distribution of agents between the instance and its replica(s).
+     */
+    AgentConfig?: AgentConfig;
   }
   export type Grouping = "QUEUE"|"CHANNEL"|"ROUTING_PROFILE"|string;
   export type GroupingV2 = string;
@@ -6135,6 +6205,30 @@ declare namespace Connect {
      * If there are additional results, this is the token for the next set of results.  This is always returned as a null in the response. 
      */
     NextToken?: NextToken;
+  }
+  export interface ListTrafficDistributionGroupUsersRequest {
+    /**
+     * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
+     */
+    TrafficDistributionGroupId: TrafficDistributionGroupIdOrArn;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult10;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTrafficDistributionGroupUsersResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of traffic distribution group users.
+     */
+    TrafficDistributionGroupUserSummaryList?: TrafficDistributionGroupUserSummaryList;
   }
   export interface ListTrafficDistributionGroupsRequest {
     /**
@@ -7690,6 +7784,23 @@ declare namespace Connect {
      */
     Recipient: NotificationRecipientType;
   }
+  export interface SignInConfig {
+    /**
+     * Information about traffic distributions.
+     */
+    Distributions: SignInDistributionList;
+  }
+  export interface SignInDistribution {
+    /**
+     * The Amazon Web Services Region of the sign in distribution.
+     */
+    Region: AwsRegion;
+    /**
+     * Whether sign in distribution is enabled.
+     */
+    Enabled: Boolean;
+  }
+  export type SignInDistributionList = SignInDistribution[];
   export type SingleSelectOptions = TaskTemplateSingleSelectOption[];
   export interface SingleSelectQuestionRuleCategoryAutomation {
     /**
@@ -8303,6 +8414,10 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the DeleteTrafficDistributionGroup API. The default traffic distribution group is deleted as part of the process for deleting a replica.  You can change the SignInConfig only for a default TrafficDistributionGroup. If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned. 
+     */
+    IsDefault?: Boolean;
   }
   export type TrafficDistributionGroupArn = string;
   export type TrafficDistributionGroupId = string;
@@ -8329,8 +8444,19 @@ declare namespace Connect {
      * The status of the traffic distribution group.     CREATION_IN_PROGRESS means the previous CreateTrafficDistributionGroup operation is still in progress and has not yet completed.    ACTIVE means the previous CreateTrafficDistributionGroup operation has succeeded.    CREATION_FAILED indicates that the previous CreateTrafficDistributionGroup operation has failed.    PENDING_DELETION means the previous DeleteTrafficDistributionGroup operation is still in progress and has not yet completed.    DELETION_FAILED means the previous DeleteTrafficDistributionGroup operation has failed.    UPDATE_IN_PROGRESS means the previous UpdateTrafficDistributionGroup operation is still in progress and has not yet completed.  
      */
     Status?: TrafficDistributionGroupStatus;
+    /**
+     * Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the DeleteTrafficDistributionGroup API. The default traffic distribution group is deleted as part of the process for deleting a replica.
+     */
+    IsDefault?: Boolean;
   }
   export type TrafficDistributionGroupSummaryList = TrafficDistributionGroupSummary[];
+  export interface TrafficDistributionGroupUserSummary {
+    /**
+     * The identifier for the user. This can be the ID or the ARN of the user.
+     */
+    UserId?: UserId;
+  }
+  export type TrafficDistributionGroupUserSummaryList = TrafficDistributionGroupUserSummary[];
   export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
   export interface TransferContactRequest {
     /**
@@ -8346,7 +8472,7 @@ declare namespace Connect {
      */
     QueueId?: QueueId;
     /**
-     * The identifier for the user.
+     * The identifier for the user. This can be the ID or the ARN of the user.
      */
     UserId?: AgentResourceId;
     /**
@@ -9111,6 +9237,14 @@ declare namespace Connect {
      * The distribution of traffic between the instance and its replica(s).
      */
     TelephonyConfig?: TelephonyConfig;
+    /**
+     * The distribution of allowing signing in to the instance and its replica(s).
+     */
+    SignInConfig?: SignInConfig;
+    /**
+     * The distribution of agents between the instance and its replica(s).
+     */
+    AgentConfig?: AgentConfig;
   }
   export interface UpdateTrafficDistributionResponse {
   }

@@ -2271,6 +2271,10 @@ declare namespace Omics {
      *  The number of Graphics Processing Units (GPU) specified in the task. 
      */
     gpus?: GetRunTaskResponseGpusInteger;
+    /**
+     *  The instance type for a task. 
+     */
+    instanceType?: TaskInstanceType;
   }
   export type GetRunTaskResponseCpusInteger = number;
   export type GetRunTaskResponseGpusInteger = number;
@@ -2686,7 +2690,7 @@ declare namespace Omics {
      */
     ids?: ListAnnotationImportJobsRequestIdsList;
     /**
-     * Specify the pagination token from a previous request to retrieve the next page of results.
+     * Specifies the pagination token from a previous request to retrieve the next page of results.
      */
     nextToken?: ListAnnotationImportJobsRequestNextTokenString;
     /**
@@ -2703,7 +2707,7 @@ declare namespace Omics {
      */
     annotationImportJobs?: AnnotationImportJobItems;
     /**
-     * A pagination token that's included if more results are available.
+     * Specifies the pagination token from a previous request to retrieve the next page of results.
      */
     nextToken?: String;
   }
@@ -4231,6 +4235,7 @@ declare namespace Omics {
   }
   export type TagValue = string;
   export type TaskId = string;
+  export type TaskInstanceType = string;
   export type TaskList = TaskListItem[];
   export interface TaskListItem {
     /**
@@ -4269,6 +4274,10 @@ declare namespace Omics {
      *  The number of Graphics Processing Units (GPU) specified for the task. 
      */
     gpus?: TaskListItemGpusInteger;
+    /**
+     *  The instance type for a task. 
+     */
+    instanceType?: TaskInstanceType;
   }
   export type TaskListItemCpusInteger = number;
   export type TaskListItemGpusInteger = number;

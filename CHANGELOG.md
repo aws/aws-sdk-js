@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1433.0-->
+<!--LATEST=2.1434.0-->
 <!--ENTRYINSERT-->
+
+## 2.1434.0
+* feature: Connect: This release adds APIs to provision agents that are global / available in multiple AWS regions and distribute them across these regions by percentage.
+* feature: ELBv2: This release enables configuring security groups for Network Load Balancers
+* feature: Omics: This release adds instanceType to GetRunTask & ListRunTasks responses.
+* feature: SecretsManager: Add additional InvalidRequestException to list of possible exceptions for ListSecret.
 
 ## 2.1433.0
 * feature: ChimeSDKVoice: Updating CreatePhoneNumberOrder, UpdatePhoneNumber and BatchUpdatePhoneNumbers APIs, adding phone number name

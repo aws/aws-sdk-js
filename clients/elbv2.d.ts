@@ -93,11 +93,11 @@ declare class ELBv2 extends Service {
    */
   deleteTargetGroup(callback?: (err: AWSError, data: ELBv2.Types.DeleteTargetGroupOutput) => void): Request<ELBv2.Types.DeleteTargetGroupOutput, AWSError>;
   /**
-   * Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.
+   * Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer. Note: If the specified target does not exist, the action returns successfully.
    */
   deregisterTargets(params: ELBv2.Types.DeregisterTargetsInput, callback?: (err: AWSError, data: ELBv2.Types.DeregisterTargetsOutput) => void): Request<ELBv2.Types.DeregisterTargetsOutput, AWSError>;
   /**
-   * Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer.
+   * Deregisters the specified targets from the specified target group. After the targets are deregistered, they no longer receive traffic from the load balancer. Note: If the specified target does not exist, the action returns successfully.
    */
   deregisterTargets(callback?: (err: AWSError, data: ELBv2.Types.DeregisterTargetsOutput) => void): Request<ELBv2.Types.DeregisterTargetsOutput, AWSError>;
   /**
@@ -269,11 +269,11 @@ declare class ELBv2 extends Service {
    */
   setRulePriorities(callback?: (err: AWSError, data: ELBv2.Types.SetRulePrioritiesOutput) => void): Request<ELBv2.Types.SetRulePrioritiesOutput, AWSError>;
   /**
-   * Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups. You can't specify a security group for a Network Load Balancer or Gateway Load Balancer.
+   * Associates the specified security groups with the specified Application Load Balancer or Network Load Balancer. The specified security groups override the previously associated security groups. You can't perform this operation on a Network Load Balancer unless you specified a security group for the load balancer when you created it. You can't associate a security group with a Gateway Load Balancer.
    */
   setSecurityGroups(params: ELBv2.Types.SetSecurityGroupsInput, callback?: (err: AWSError, data: ELBv2.Types.SetSecurityGroupsOutput) => void): Request<ELBv2.Types.SetSecurityGroupsOutput, AWSError>;
   /**
-   * Associates the specified security groups with the specified Application Load Balancer. The specified security groups override the previously associated security groups. You can't specify a security group for a Network Load Balancer or Gateway Load Balancer.
+   * Associates the specified security groups with the specified Application Load Balancer or Network Load Balancer. The specified security groups override the previously associated security groups. You can't perform this operation on a Network Load Balancer unless you specified a security group for the load balancer when you created it. You can't associate a security group with a Gateway Load Balancer.
    */
   setSecurityGroups(callback?: (err: AWSError, data: ELBv2.Types.SetSecurityGroupsOutput) => void): Request<ELBv2.Types.SetSecurityGroupsOutput, AWSError>;
   /**
@@ -602,7 +602,7 @@ declare namespace ELBv2 {
      */
     SubnetMappings?: SubnetMappings;
     /**
-     * [Application Load Balancers] The IDs of the security groups for the load balancer.
+     * [Application Load Balancers and Network Load Balancers] The IDs of the security groups for the load balancer.
      */
     SecurityGroups?: SecurityGroups;
     /**
@@ -1025,6 +1025,8 @@ declare namespace ELBv2 {
     TargetHealthDescriptions?: TargetHealthDescriptions;
   }
   export type Description = string;
+  export type EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic = string;
+  export type EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum = "on"|"off"|string;
   export interface FixedResponseActionConfig {
     /**
      * The message.
@@ -1188,6 +1190,10 @@ declare namespace ELBv2 {
      * [Application Load Balancers on Outposts] The ID of the customer-owned address pool.
      */
     CustomerOwnedIpv4Pool?: CustomerOwnedIpv4Pool;
+    /**
+     * Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through Amazon Web Services PrivateLink.
+     */
+    EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic?: EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic;
   }
   export interface LoadBalancerAddress {
     /**
@@ -1599,12 +1605,20 @@ declare namespace ELBv2 {
      * The IDs of the security groups.
      */
     SecurityGroups: SecurityGroups;
+    /**
+     * Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through Amazon Web Services PrivateLink. The default is on.
+     */
+    EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic?: EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum;
   }
   export interface SetSecurityGroupsOutput {
     /**
      * The IDs of the security groups associated with the load balancer.
      */
     SecurityGroupIds?: SecurityGroups;
+    /**
+     * Indicates whether to evaluate inbound security group rules for traffic sent to a Network Load Balancer through Amazon Web Services PrivateLink.
+     */
+    EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic?: EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum;
   }
   export interface SetSubnetsInput {
     /**
@@ -1620,7 +1634,7 @@ declare namespace ELBv2 {
      */
     SubnetMappings?: SubnetMappings;
     /**
-     * [Network Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener. .
+     * [Network Load Balancers] The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer with a UDP or TCP_UDP listener.
      */
     IpAddressType?: IpAddressType;
   }
@@ -1718,7 +1732,7 @@ declare namespace ELBv2 {
      */
     Id: TargetId;
     /**
-     * The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. Not used if the target is a Lambda function.
+     * The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. This parameter is not used if the target is a Lambda function.
      */
     Port?: Port;
     /**
@@ -1741,7 +1755,7 @@ declare namespace ELBv2 {
      */
     Protocol?: ProtocolEnum;
     /**
-     * The port on which the targets are listening. Not used if the target is a Lambda function.
+     * The port on which the targets are listening. This parameter is not used if the target is a Lambda function.
      */
     Port?: Port;
     /**
@@ -1785,7 +1799,7 @@ declare namespace ELBv2 {
      */
     Matcher?: Matcher;
     /**
-     * The Amazon Resource Names (ARN) of the load balancers that route traffic to this target group.
+     * The Amazon Resource Name (ARN) of the load balancer that routes traffic to this target group. You can use each target group with only one load balancer.
      */
     LoadBalancerArns?: LoadBalancerArns;
     /**
