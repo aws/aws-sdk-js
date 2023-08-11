@@ -1044,11 +1044,11 @@ declare class QuickSight extends Service {
    */
   startAssetBundleImportJob(callback?: (err: AWSError, data: QuickSight.Types.StartAssetBundleImportJobResponse) => void): Request<QuickSight.Types.StartAssetBundleImportJobResponse, AWSError>;
   /**
-   * Starts an asynchronous job that generates a dashboard snapshot. You can request up to one paginated PDF and up to five CSVs per API call. Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
+   * Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.   1 paginated PDF   5 CSVs   Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
    */
   startDashboardSnapshotJob(params: QuickSight.Types.StartDashboardSnapshotJobRequest, callback?: (err: AWSError, data: QuickSight.Types.StartDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.StartDashboardSnapshotJobResponse, AWSError>;
   /**
-   * Starts an asynchronous job that generates a dashboard snapshot. You can request up to one paginated PDF and up to five CSVs per API call. Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
+   * Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.   1 paginated PDF   5 CSVs   Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
    */
   startDashboardSnapshotJob(callback?: (err: AWSError, data: QuickSight.Types.StartDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.StartDashboardSnapshotJobResponse, AWSError>;
   /**
@@ -1332,7 +1332,12 @@ declare namespace QuickSight {
      * The status of your account subscription.
      */
     AccountSubscriptionStatus?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the IAM Identity Center instance.
+     */
+    IAMIdentityCenterInstanceArn?: String;
   }
+  export type AccountName = string;
   export interface AccountSettings {
     /**
      * The "account name" you provided for the Amazon QuickSight subscription in your Amazon Web Services account. You create this name when you sign up for Amazon QuickSight. It is unique in all of Amazon Web Services and it appears only when users sign in.
@@ -2116,7 +2121,7 @@ declare namespace QuickSight {
      */
     Database: Database;
   }
-  export type AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"|"IAM_ONLY"|"ACTIVE_DIRECTORY"|string;
+  export type AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"|"IAM_ONLY"|"ACTIVE_DIRECTORY"|"IAM_IDENTITY_CENTER"|string;
   export type AuthorSpecifiedAggregation = "COUNT"|"DISTINCT_COUNT"|"MIN"|"MAX"|"MEDIAN"|"SUM"|"AVERAGE"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|string;
   export type AuthorSpecifiedAggregations = AuthorSpecifiedAggregation[];
   export type AwsAccountId = string;
@@ -3347,7 +3352,7 @@ declare namespace QuickSight {
     /**
      * The name of your Amazon QuickSight account. This name is unique over all of Amazon Web Services, and it appears only when users sign in. You can't change AccountName value after the Amazon QuickSight account is created.
      */
-    AccountName: String;
+    AccountName: AccountName;
     /**
      * The email address that you want Amazon QuickSight to send notifications to regarding your Amazon QuickSight account or Amazon QuickSight subscription.
      */
@@ -5786,7 +5791,7 @@ declare namespace QuickSight {
      */
     CustomValue?: SensitiveDouble;
   }
-  export type DefaultAggregation = "SUM"|"MAX"|"MIN"|"COUNT"|"DISTINCT_COUNT"|"AVERAGE"|string;
+  export type DefaultAggregation = "SUM"|"MAX"|"MIN"|"COUNT"|"DISTINCT_COUNT"|"AVERAGE"|"MEDIAN"|"STDEV"|"STDEVP"|"VAR"|"VARP"|string;
   export interface DefaultFormatting {
     /**
      * The display format. Valid values for this structure are AUTO, PERCENT, CURRENCY, NUMBER, DATE, and STRING.
@@ -9913,7 +9918,7 @@ declare namespace QuickSight {
   export type IdentityName = string;
   export type IdentityNameList = IdentityName[];
   export type IdentityStore = "QUICKSIGHT"|string;
-  export type IdentityType = "IAM"|"QUICKSIGHT"|string;
+  export type IdentityType = "IAM"|"QUICKSIGHT"|"IAM_IDENTITY_CENTER"|string;
   export interface IncrementalRefresh {
     /**
      * The lookback window setup for an incremental refresh configuration.
@@ -12882,6 +12887,18 @@ declare namespace QuickSight {
      * The visibility setting of a pivot table's collapsed row dimension fields. If the value of this structure is HIDDEN, all collapsed columns in a pivot table are automatically hidden. The default value is VISIBLE.
      */
     CollapsedRowDimensionsVisibility?: Visibility;
+    /**
+     * The layout for the row dimension headers of a pivot table. Choose one of the following options.    TABULAR: (Default) Each row field is displayed in a separate column.    HIERARCHY: All row fields are displayed in a single column. Indentation is used to differentiate row headers of different fields.  
+     */
+    RowsLayout?: PivotTableRowsLayout;
+    /**
+     * The options for the label that is located above the row headers. This option is only applicable when RowsLayout is set to HIERARCHY.
+     */
+    RowsLabelOptions?: PivotTableRowsLabelOptions;
+    /**
+     * The default cell width of the pivot table.
+     */
+    DefaultCellWidth?: PixelLength;
   }
   export interface PivotTablePaginatedReportOptions {
     /**
@@ -12893,6 +12910,18 @@ declare namespace QuickSight {
      */
     OverflowColumnHeaderVisibility?: Visibility;
   }
+  export interface PivotTableRowsLabelOptions {
+    /**
+     * The visibility of the rows label.
+     */
+    Visibility?: Visibility;
+    /**
+     * The custom label string for the rows label.
+     */
+    CustomLabel?: PivotTableRowsLabelText;
+  }
+  export type PivotTableRowsLabelText = string;
+  export type PivotTableRowsLayout = "TABULAR"|"HIERARCHY"|string;
   export interface PivotTableSortBy {
     /**
      * The field sort (field id, direction) for the pivot table sort by options.
@@ -13730,6 +13759,10 @@ declare namespace QuickSight {
      * Determines the list of row alternate colors.
      */
     RowAlternateColors?: RowAlternateColorList;
+    /**
+     * The primary background color options for alternate rows.
+     */
+    UsePrimaryBackgroundColor?: WidgetStatus;
   }
   export interface RowInfo {
     /**
@@ -14752,7 +14785,7 @@ declare namespace QuickSight {
      */
     SheetSelections: SnapshotFileSheetSelectionList;
     /**
-     * The format of the snapshot file to be generated. You can choose between CSV and PDF.
+     * The format of the snapshot file to be generated. You can choose between CSV or PDF.
      */
     FormatType: SnapshotFileFormatType;
   }
@@ -14767,7 +14800,7 @@ declare namespace QuickSight {
   export type SnapshotFileList = SnapshotFile[];
   export interface SnapshotFileSheetSelection {
     /**
-     * The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV or PDF format types.
+     * The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV and PDF format types.
      */
     SheetId: ShortRestrictiveResourceId;
     /**
@@ -14775,7 +14808,7 @@ declare namespace QuickSight {
      */
     SelectionScope: SnapshotFileSheetSelectionScope;
     /**
-     *  A structure that lists the IDs of the visuals in the selected sheet. Supported visual types are table, pivot table visuals. This value is required if you are generating a CSV. This value supports a maximum of 1 visual ID. 
+     *  A list of visual IDs that are located in the selected sheet. This structure supports tables and pivot tables. This structure is required if you are generating a CSV. You can add a maximum of 1 visual ID to this structure. 
      */
     VisualIds?: SnapshotFileSheetSelectionVisualIdList;
   }
@@ -15142,6 +15175,7 @@ declare namespace QuickSight {
      */
     CustomValue?: SensitiveString;
   }
+  export type StyledCellType = "TOTAL"|"METRIC_HEADER"|"VALUE"|string;
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
   export interface SubtotalOptions {
@@ -15173,6 +15207,10 @@ declare namespace QuickSight {
      * The cell styling options for the subtotals of header cells.
      */
     MetricHeaderCellStyle?: TableCellStyle;
+    /**
+     * The style targets options for subtotals.
+     */
+    StyleTargets?: TableStyleTargetList;
   }
   export type Suffix = string;
   export type Synonyms = LimitedString[];
@@ -15479,6 +15517,13 @@ declare namespace QuickSight {
      */
     PaginationConfiguration?: PaginationConfiguration;
   }
+  export interface TableStyleTarget {
+    /**
+     * The cell type of the table style target.
+     */
+    CellType: StyledCellType;
+  }
+  export type TableStyleTargetList = TableStyleTarget[];
   export type TableTotalsPlacement = "START"|"END"|string;
   export type TableTotalsScrollStatus = "PINNED"|"SCROLLED"|string;
   export interface TableUnaggregatedFieldWells {
@@ -16305,6 +16350,10 @@ declare namespace QuickSight {
      * The other names or aliases for the calculated field cell value.
      */
     CellValueSynonyms?: CellValueSynonyms;
+    /**
+     * The non additive for the table style target.
+     */
+    NonAdditive?: NullableBoolean;
   }
   export type TopicCalculatedFields = TopicCalculatedField[];
   export interface TopicCategoryFilter {
@@ -16361,7 +16410,7 @@ declare namespace QuickSight {
      */
     ColumnDataRole?: ColumnDataRole;
     /**
-     * The type of aggregation that is performed on the column data when it's queried. Valid values for this structure are SUM, MAX, MIN, COUNT, DISTINCT_COUNT, and AVERAGE.
+     * The type of aggregation that is performed on the column data when it's queried.
      */
     Aggregation?: DefaultAggregation;
     /**
@@ -16404,6 +16453,10 @@ declare namespace QuickSight {
      * The other names or aliases for the column cell value.
      */
     CellValueSynonyms?: CellValueSynonyms;
+    /**
+     * The non additive value for the column.
+     */
+    NonAdditive?: NullableBoolean;
   }
   export type TopicColumns = TopicColumn[];
   export interface TopicDateRangeFilter {
@@ -18359,7 +18412,7 @@ declare namespace QuickSight {
   export type ValueWhenUnsetOption = "RECOMMENDED_VALUE"|"NULL"|string;
   export type VersionDescription = string;
   export type VersionNumber = number;
-  export type VerticalTextAlignment = "TOP"|"MIDDLE"|"BOTTOM"|string;
+  export type VerticalTextAlignment = "TOP"|"MIDDLE"|"BOTTOM"|"AUTO"|string;
   export type Visibility = "HIDDEN"|"VISIBLE"|string;
   export type VisiblePanelColumns = number;
   export type VisiblePanelRows = number;

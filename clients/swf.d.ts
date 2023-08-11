@@ -971,6 +971,11 @@ declare namespace SWF {
      * The ID of the DecisionTaskStarted event recorded when this decision task was started. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.
      */
     startedEventId: EventId;
+    taskList?: TaskList;
+    /**
+     * The maximum amount of time the decision task can wait to be assigned to a worker.
+     */
+    taskListScheduleToStartTimeout?: DurationInSecondsOptional;
   }
   export interface DecisionTaskScheduledEventAttributes {
     /**
@@ -985,6 +990,10 @@ declare namespace SWF {
      * The maximum duration for this decision task. The task is considered timed out if it doesn't completed within this duration. The duration is specified in seconds, an integer greater than or equal to 0. You can use NONE to specify unlimited duration.
      */
     startToCloseTimeout?: DurationInSecondsOptional;
+    /**
+     * The maximum amount of time the decision task can wait to be assigned to a worker.
+     */
+    scheduleToStartTimeout?: DurationInSecondsOptional;
   }
   export interface DecisionTaskStartedEventAttributes {
     /**
@@ -1010,7 +1019,7 @@ declare namespace SWF {
      */
     startedEventId: EventId;
   }
-  export type DecisionTaskTimeoutType = "START_TO_CLOSE"|string;
+  export type DecisionTaskTimeoutType = "START_TO_CLOSE"|"SCHEDULE_TO_START"|string;
   export type DecisionType = "ScheduleActivityTask"|"RequestCancelActivityTask"|"CompleteWorkflowExecution"|"FailWorkflowExecution"|"CancelWorkflowExecution"|"ContinueAsNewWorkflowExecution"|"RecordMarker"|"StartTimer"|"CancelTimer"|"SignalExternalWorkflowExecution"|"RequestCancelExternalWorkflowExecution"|"StartChildWorkflowExecution"|"ScheduleLambdaFunction"|string;
   export interface DeprecateActivityTypeInput {
     /**
@@ -2050,6 +2059,14 @@ declare namespace SWF {
      * User defined context to add to workflow execution.
      */
     executionContext?: Data;
+    /**
+     * The task list to use for the future decision tasks of this workflow execution. This list overrides the original task list you specified while starting the workflow execution. 
+     */
+    taskList?: TaskList;
+    /**
+     * Specifies a timeout (in seconds) for the task list override. When this parameter is missing, the task list override is permanent. This parameter makes it possible to temporarily override the task list. If a decision task scheduled on the override task list is not started within the timeout, the decision task will time out. Amazon SWF will revert the override and schedule a new decision task to the original task list. If a decision task scheduled on the override task list is started within the timeout, but not completed within the start-to-close timeout, Amazon SWF will also revert the override and schedule a new decision task to the original task list.
+     */
+    taskListScheduleToStartTimeout?: DurationInSecondsOptional;
   }
   export type ReverseOrder = boolean;
   export interface Run {

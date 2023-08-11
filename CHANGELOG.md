@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1434.0-->
+<!--LATEST=2.1435.0-->
 <!--ENTRYINSERT-->
+
+## 2.1435.0
+* feature: AmplifyBackend: Adds sensitive trait to required input shapes.
+* feature: ConfigService: Updated ResourceType enum with new resource types onboarded by AWS Config in July 2023.
+* feature: EC2: Amazon EC2 P5 instances, powered by the latest NVIDIA H100 Tensor Core GPUs, deliver the highest performance in EC2 for deep learning (DL) and HPC applications. M7i-flex and M7i instances are next-generation general purpose instances powered by custom 4th Generation Intel Xeon Scalable processors.
+* feature: QuickSight: New Authentication method for Account subscription - IAM Identity Center. Hierarchy layout support, default column width support and related style properties for pivot table visuals. Non-additive topic field aggregations for Topic API
+* feature: SWF: This release adds new API parameters to override workflow task list for workflow executions.
 
 ## 2.1434.0
 * feature: Connect: This release adds APIs to provision agents that are global / available in multiple AWS regions and distribute them across these regions by percentage.
