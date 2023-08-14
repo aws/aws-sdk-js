@@ -22,6 +22,14 @@ declare class Omics extends Service {
    */
   abortMultipartReadSetUpload(callback?: (err: AWSError, data: Omics.Types.AbortMultipartReadSetUploadResponse) => void): Request<Omics.Types.AbortMultipartReadSetUploadResponse, AWSError>;
   /**
+   *  Accepts a share for an analytics store. 
+   */
+  acceptShare(params: Omics.Types.AcceptShareRequest, callback?: (err: AWSError, data: Omics.Types.AcceptShareResponse) => void): Request<Omics.Types.AcceptShareResponse, AWSError>;
+  /**
+   *  Accepts a share for an analytics store. 
+   */
+  acceptShare(callback?: (err: AWSError, data: Omics.Types.AcceptShareResponse) => void): Request<Omics.Types.AcceptShareResponse, AWSError>;
+  /**
    * Deletes one or more read sets.
    */
   batchDeleteReadSet(params: Omics.Types.BatchDeleteReadSetRequest, callback?: (err: AWSError, data: Omics.Types.BatchDeleteReadSetResponse) => void): Request<Omics.Types.BatchDeleteReadSetResponse, AWSError>;
@@ -70,6 +78,14 @@ declare class Omics extends Service {
    */
   createAnnotationStore(callback?: (err: AWSError, data: Omics.Types.CreateAnnotationStoreResponse) => void): Request<Omics.Types.CreateAnnotationStoreResponse, AWSError>;
   /**
+   *  Creates a new version of an annotation store. 
+   */
+  createAnnotationStoreVersion(params: Omics.Types.CreateAnnotationStoreVersionRequest, callback?: (err: AWSError, data: Omics.Types.CreateAnnotationStoreVersionResponse) => void): Request<Omics.Types.CreateAnnotationStoreVersionResponse, AWSError>;
+  /**
+   *  Creates a new version of an annotation store. 
+   */
+  createAnnotationStoreVersion(callback?: (err: AWSError, data: Omics.Types.CreateAnnotationStoreVersionResponse) => void): Request<Omics.Types.CreateAnnotationStoreVersionResponse, AWSError>;
+  /**
    *  Begins a multipart read set upload. 
    */
   createMultipartReadSetUpload(params: Omics.Types.CreateMultipartReadSetUploadRequest, callback?: (err: AWSError, data: Omics.Types.CreateMultipartReadSetUploadResponse) => void): Request<Omics.Types.CreateMultipartReadSetUploadResponse, AWSError>;
@@ -102,6 +118,14 @@ declare class Omics extends Service {
    */
   createSequenceStore(callback?: (err: AWSError, data: Omics.Types.CreateSequenceStoreResponse) => void): Request<Omics.Types.CreateSequenceStoreResponse, AWSError>;
   /**
+   *  Creates a share offer that can be accepted outside the account by a subscriber. The share is created by the owner and accepted by the principal subscriber. 
+   */
+  createShare(params: Omics.Types.CreateShareRequest, callback?: (err: AWSError, data: Omics.Types.CreateShareResponse) => void): Request<Omics.Types.CreateShareResponse, AWSError>;
+  /**
+   *  Creates a share offer that can be accepted outside the account by a subscriber. The share is created by the owner and accepted by the principal subscriber. 
+   */
+  createShare(callback?: (err: AWSError, data: Omics.Types.CreateShareResponse) => void): Request<Omics.Types.CreateShareResponse, AWSError>;
+  /**
    * Creates a variant store.
    */
   createVariantStore(params: Omics.Types.CreateVariantStoreRequest, callback?: (err: AWSError, data: Omics.Types.CreateVariantStoreResponse) => void): Request<Omics.Types.CreateVariantStoreResponse, AWSError>;
@@ -125,6 +149,14 @@ declare class Omics extends Service {
    * Deletes an annotation store.
    */
   deleteAnnotationStore(callback?: (err: AWSError, data: Omics.Types.DeleteAnnotationStoreResponse) => void): Request<Omics.Types.DeleteAnnotationStoreResponse, AWSError>;
+  /**
+   *  Deletes one or multiple versions of an annotation store. 
+   */
+  deleteAnnotationStoreVersions(params: Omics.Types.DeleteAnnotationStoreVersionsRequest, callback?: (err: AWSError, data: Omics.Types.DeleteAnnotationStoreVersionsResponse) => void): Request<Omics.Types.DeleteAnnotationStoreVersionsResponse, AWSError>;
+  /**
+   *  Deletes one or multiple versions of an annotation store. 
+   */
+  deleteAnnotationStoreVersions(callback?: (err: AWSError, data: Omics.Types.DeleteAnnotationStoreVersionsResponse) => void): Request<Omics.Types.DeleteAnnotationStoreVersionsResponse, AWSError>;
   /**
    * Deletes a genome reference.
    */
@@ -166,6 +198,14 @@ declare class Omics extends Service {
    */
   deleteSequenceStore(callback?: (err: AWSError, data: Omics.Types.DeleteSequenceStoreResponse) => void): Request<Omics.Types.DeleteSequenceStoreResponse, AWSError>;
   /**
+   *  Deletes a share of an analytics store. 
+   */
+  deleteShare(params: Omics.Types.DeleteShareRequest, callback?: (err: AWSError, data: Omics.Types.DeleteShareResponse) => void): Request<Omics.Types.DeleteShareResponse, AWSError>;
+  /**
+   *  Deletes a share of an analytics store. 
+   */
+  deleteShare(callback?: (err: AWSError, data: Omics.Types.DeleteShareResponse) => void): Request<Omics.Types.DeleteShareResponse, AWSError>;
+  /**
    * Deletes a variant store.
    */
   deleteVariantStore(params: Omics.Types.DeleteVariantStoreRequest, callback?: (err: AWSError, data: Omics.Types.DeleteVariantStoreResponse) => void): Request<Omics.Types.DeleteVariantStoreResponse, AWSError>;
@@ -197,6 +237,14 @@ declare class Omics extends Service {
    * Gets information about an annotation store.
    */
   getAnnotationStore(callback?: (err: AWSError, data: Omics.Types.GetAnnotationStoreResponse) => void): Request<Omics.Types.GetAnnotationStoreResponse, AWSError>;
+  /**
+   *  Retrieves the metadata for an annotation store version. 
+   */
+  getAnnotationStoreVersion(params: Omics.Types.GetAnnotationStoreVersionRequest, callback?: (err: AWSError, data: Omics.Types.GetAnnotationStoreVersionResponse) => void): Request<Omics.Types.GetAnnotationStoreVersionResponse, AWSError>;
+  /**
+   *  Retrieves the metadata for an annotation store version. 
+   */
+  getAnnotationStoreVersion(callback?: (err: AWSError, data: Omics.Types.GetAnnotationStoreVersionResponse) => void): Request<Omics.Types.GetAnnotationStoreVersionResponse, AWSError>;
   /**
    * Gets a file from a read set.
    */
@@ -302,6 +350,14 @@ declare class Omics extends Service {
    */
   getSequenceStore(callback?: (err: AWSError, data: Omics.Types.GetSequenceStoreResponse) => void): Request<Omics.Types.GetSequenceStoreResponse, AWSError>;
   /**
+   *  Retrieves the metadata for a share. 
+   */
+  getShare(params: Omics.Types.GetShareRequest, callback?: (err: AWSError, data: Omics.Types.GetShareResponse) => void): Request<Omics.Types.GetShareResponse, AWSError>;
+  /**
+   *  Retrieves the metadata for a share. 
+   */
+  getShare(callback?: (err: AWSError, data: Omics.Types.GetShareResponse) => void): Request<Omics.Types.GetShareResponse, AWSError>;
+  /**
    * Gets information about a variant import job.
    */
   getVariantImportJob(params: Omics.Types.GetVariantImportRequest, callback?: (err: AWSError, data: Omics.Types.GetVariantImportResponse) => void): Request<Omics.Types.GetVariantImportResponse, AWSError>;
@@ -333,6 +389,14 @@ declare class Omics extends Service {
    * Retrieves a list of annotation import jobs.
    */
   listAnnotationImportJobs(callback?: (err: AWSError, data: Omics.Types.ListAnnotationImportJobsResponse) => void): Request<Omics.Types.ListAnnotationImportJobsResponse, AWSError>;
+  /**
+   *  Lists the versions of an annotation store. 
+   */
+  listAnnotationStoreVersions(params: Omics.Types.ListAnnotationStoreVersionsRequest, callback?: (err: AWSError, data: Omics.Types.ListAnnotationStoreVersionsResponse) => void): Request<Omics.Types.ListAnnotationStoreVersionsResponse, AWSError>;
+  /**
+   *  Lists the versions of an annotation store. 
+   */
+  listAnnotationStoreVersions(callback?: (err: AWSError, data: Omics.Types.ListAnnotationStoreVersionsResponse) => void): Request<Omics.Types.ListAnnotationStoreVersionsResponse, AWSError>;
   /**
    * Retrieves a list of annotation stores.
    */
@@ -446,6 +510,14 @@ declare class Omics extends Service {
    */
   listSequenceStores(callback?: (err: AWSError, data: Omics.Types.ListSequenceStoresResponse) => void): Request<Omics.Types.ListSequenceStoresResponse, AWSError>;
   /**
+   *  Lists all shares associated with an account. 
+   */
+  listShares(params: Omics.Types.ListSharesRequest, callback?: (err: AWSError, data: Omics.Types.ListSharesResponse) => void): Request<Omics.Types.ListSharesResponse, AWSError>;
+  /**
+   *  Lists all shares associated with an account. 
+   */
+  listShares(callback?: (err: AWSError, data: Omics.Types.ListSharesResponse) => void): Request<Omics.Types.ListSharesResponse, AWSError>;
+  /**
    * Retrieves a list of tags for a resource.
    */
   listTagsForResource(params: Omics.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Omics.Types.ListTagsForResourceResponse) => void): Request<Omics.Types.ListTagsForResourceResponse, AWSError>;
@@ -558,6 +630,14 @@ declare class Omics extends Service {
    */
   updateAnnotationStore(callback?: (err: AWSError, data: Omics.Types.UpdateAnnotationStoreResponse) => void): Request<Omics.Types.UpdateAnnotationStoreResponse, AWSError>;
   /**
+   *  Updates the description of an annotation store version. 
+   */
+  updateAnnotationStoreVersion(params: Omics.Types.UpdateAnnotationStoreVersionRequest, callback?: (err: AWSError, data: Omics.Types.UpdateAnnotationStoreVersionResponse) => void): Request<Omics.Types.UpdateAnnotationStoreVersionResponse, AWSError>;
+  /**
+   *  Updates the description of an annotation store version. 
+   */
+  updateAnnotationStoreVersion(callback?: (err: AWSError, data: Omics.Types.UpdateAnnotationStoreVersionResponse) => void): Request<Omics.Types.UpdateAnnotationStoreVersionResponse, AWSError>;
+  /**
    * Updates a run group.
    */
   updateRunGroup(params: Omics.Types.UpdateRunGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -613,6 +693,22 @@ declare class Omics extends Service {
    * Waits for the annotationStoreDeleted state by periodically calling the underlying Omics.getAnnotationStoreoperation every 30 seconds (at most 20 times). Wait until an annotation store is deleted.
    */
   waitFor(state: "annotationStoreDeleted", callback?: (err: AWSError, data: Omics.Types.GetAnnotationStoreResponse) => void): Request<Omics.Types.GetAnnotationStoreResponse, AWSError>;
+  /**
+   * Waits for the annotationStoreVersionCreated state by periodically calling the underlying Omics.getAnnotationStoreVersionoperation every 30 seconds (at most 20 times). Wait until an annotation store version is created
+   */
+  waitFor(state: "annotationStoreVersionCreated", params: Omics.Types.GetAnnotationStoreVersionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Omics.Types.GetAnnotationStoreVersionResponse) => void): Request<Omics.Types.GetAnnotationStoreVersionResponse, AWSError>;
+  /**
+   * Waits for the annotationStoreVersionCreated state by periodically calling the underlying Omics.getAnnotationStoreVersionoperation every 30 seconds (at most 20 times). Wait until an annotation store version is created
+   */
+  waitFor(state: "annotationStoreVersionCreated", callback?: (err: AWSError, data: Omics.Types.GetAnnotationStoreVersionResponse) => void): Request<Omics.Types.GetAnnotationStoreVersionResponse, AWSError>;
+  /**
+   * Waits for the annotationStoreVersionDeleted state by periodically calling the underlying Omics.getAnnotationStoreVersionoperation every 30 seconds (at most 20 times). Wait until an annotation store version is deleted.
+   */
+  waitFor(state: "annotationStoreVersionDeleted", params: Omics.Types.GetAnnotationStoreVersionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Omics.Types.GetAnnotationStoreVersionResponse) => void): Request<Omics.Types.GetAnnotationStoreVersionResponse, AWSError>;
+  /**
+   * Waits for the annotationStoreVersionDeleted state by periodically calling the underlying Omics.getAnnotationStoreVersionoperation every 30 seconds (at most 20 times). Wait until an annotation store version is deleted.
+   */
+  waitFor(state: "annotationStoreVersionDeleted", callback?: (err: AWSError, data: Omics.Types.GetAnnotationStoreVersionResponse) => void): Request<Omics.Types.GetAnnotationStoreVersionResponse, AWSError>;
   /**
    * Waits for the readSetActivationJobCompleted state by periodically calling the underlying Omics.getReadSetActivationJoboperation every 30 seconds (at most 20 times). Wait until a job is completed.
    */
@@ -724,6 +820,18 @@ declare namespace Omics {
   export interface AbortMultipartReadSetUploadResponse {
   }
   export type Accelerators = "GPU"|string;
+  export interface AcceptShareRequest {
+    /**
+     *  The ID for a share offer for analytics store data. 
+     */
+    shareId: String;
+  }
+  export interface AcceptShareResponse {
+    /**
+     *  The status of an analytics store share. 
+     */
+    status?: ShareStatus;
+  }
   export interface ActivateReadSetFilter {
     /**
      * The filter's status.
@@ -808,6 +916,10 @@ declare namespace Omics {
      */
     destinationName: String;
     /**
+     *  The name of the annotation store version. 
+     */
+    versionName: VersionName;
+    /**
      * The job's service role ARN.
      */
     roleArn: Arn;
@@ -865,7 +977,7 @@ declare namespace Omics {
     /**
      * The store's description.
      */
-    description: StoreDescription;
+    description: Description;
     /**
      * The store's server-side encryption (SSE) settings.
      */
@@ -888,8 +1000,56 @@ declare namespace Omics {
     storeSizeBytes: Long;
   }
   export type AnnotationStoreItems = AnnotationStoreItem[];
+  export interface AnnotationStoreVersionItem {
+    /**
+     *  The store ID for an annotation store version. 
+     */
+    storeId: ResourceId;
+    /**
+     *  The annotation store version ID. 
+     */
+    id: ResourceId;
+    /**
+     *  The status of an annotation store version. 
+     */
+    status: VersionStatus;
+    /**
+     *  The Arn for an annotation store version. 
+     */
+    versionArn: Arn;
+    /**
+     *  A name given to an annotation store version to distinguish it from others. 
+     */
+    name: StoreName;
+    /**
+     *  The name of an annotation store version. 
+     */
+    versionName: VersionName;
+    /**
+     *  The description of an annotation store version. 
+     */
+    description: Description;
+    /**
+     *  The time stamp for when an annotation store version was created. 
+     */
+    creationTime: CreationTime;
+    /**
+     *  The time stamp for when an annotation store version was updated. 
+     */
+    updateTime: UpdateTime;
+    /**
+     *  The status of an annotation store version. 
+     */
+    statusMessage: StatusMessage;
+    /**
+     *  The size of an annotation store version in Bytes. 
+     */
+    versionSizeBytes: Long;
+  }
+  export type AnnotationStoreVersionItems = AnnotationStoreVersionItem[];
   export type AnnotationType = "GENERIC"|"CHR_POS"|"CHR_POS_REF_ALT"|"CHR_START_END_ONE_BASE"|"CHR_START_END_REF_ALT_ONE_BASE"|"CHR_START_END_ZERO_BASE"|"CHR_START_END_REF_ALT_ZERO_BASE"|string;
   export type Arn = string;
+  export type ArnList = String[];
   export interface BatchDeleteReadSetRequest {
     /**
      * The read sets' IDs.
@@ -977,15 +1137,19 @@ declare namespace Omics {
     /**
      * A name for the store.
      */
-    name?: CreateAnnotationStoreRequestNameString;
+    name?: StoreName;
     /**
      * A description for the store.
      */
-    description?: StoreDescription;
+    description?: Description;
     /**
      * Tags for the store.
      */
     tags?: TagMap;
+    /**
+     *  The name given to an annotation store version to distinguish it from other versions. 
+     */
+    versionName?: VersionName;
     /**
      * Server-side encryption (SSE) settings for the store.
      */
@@ -999,7 +1163,6 @@ declare namespace Omics {
      */
     storeOptions?: StoreOptions;
   }
-  export type CreateAnnotationStoreRequestNameString = string;
   export interface CreateAnnotationStoreResponse {
     /**
      * The store's ID.
@@ -1026,7 +1189,63 @@ declare namespace Omics {
      */
     name: String;
     /**
+     *  The name given to an annotation store version to distinguish it from other versions. 
+     */
+    versionName: VersionName;
+    /**
      * When the store was created.
+     */
+    creationTime: CreationTime;
+  }
+  export interface CreateAnnotationStoreVersionRequest {
+    /**
+     *  The name of an annotation store version from which versions are being created. 
+     */
+    name: StoreName;
+    /**
+     *  The name given to an annotation store version to distinguish it from other versions. 
+     */
+    versionName: VersionName;
+    /**
+     *  The description of an annotation store version. 
+     */
+    description?: Description;
+    /**
+     *  The options for an annotation store version. 
+     */
+    versionOptions?: VersionOptions;
+    /**
+     *  Any tags added to annotation store version. 
+     */
+    tags?: TagMap;
+  }
+  export interface CreateAnnotationStoreVersionResponse {
+    /**
+     *  A generated ID for the annotation store 
+     */
+    id: ResourceId;
+    /**
+     *  The name given to an annotation store version to distinguish it from other versions. 
+     */
+    versionName: VersionName;
+    /**
+     *  The ID for the annotation store from which new versions are being created. 
+     */
+    storeId: ResourceId;
+    /**
+     *  The options for an annotation store version. 
+     */
+    versionOptions?: VersionOptions;
+    /**
+     *  The name given to an annotation store version to distinguish it from other versions. 
+     */
+    name: StoreName;
+    /**
+     *  The status of a annotation store version. 
+     */
+    status: VersionStatus;
+    /**
+     *  The time stamp for the creation of an annotation store version. 
      */
     creationTime: CreationTime;
   }
@@ -1270,6 +1489,34 @@ declare namespace Omics {
      */
     fallbackLocation?: S3Destination;
   }
+  export interface CreateShareRequest {
+    /**
+     *  The resource ARN for the analytics store to be shared. 
+     */
+    resourceArn: String;
+    /**
+     *  The principal subscriber is the account being given access to the analytics store data through the share offer. 
+     */
+    principalSubscriber: String;
+    /**
+     *  A name given to the share. 
+     */
+    shareName?: ShareName;
+  }
+  export interface CreateShareResponse {
+    /**
+     *  An ID generated for the share. 
+     */
+    shareId?: String;
+    /**
+     *  The status of a share. 
+     */
+    status?: ShareStatus;
+    /**
+     *  A name given to the share. 
+     */
+    shareName?: ShareName;
+  }
   export interface CreateVariantStoreRequest {
     /**
      * The genome reference for the store's variants.
@@ -1278,11 +1525,11 @@ declare namespace Omics {
     /**
      * A name for the store.
      */
-    name?: CreateVariantStoreRequestNameString;
+    name?: StoreName;
     /**
      * A description for the store.
      */
-    description?: StoreDescription;
+    description?: Description;
     /**
      * Tags for the store.
      */
@@ -1292,7 +1539,6 @@ declare namespace Omics {
      */
     sseConfig?: SseConfig;
   }
-  export type CreateVariantStoreRequestNameString = string;
   export interface CreateVariantStoreResponse {
     /**
      * The store's ID.
@@ -1398,6 +1644,26 @@ declare namespace Omics {
      */
     status: StoreStatus;
   }
+  export interface DeleteAnnotationStoreVersionsRequest {
+    /**
+     *  The name of the annotation store from which versions are being deleted. 
+     */
+    name: String;
+    /**
+     *  The versions of an annotation store to be deleted. 
+     */
+    versions: VersionList;
+    /**
+     *  Forces the deletion of an annotation store version when imports are in-progress.. 
+     */
+    force?: PrimitiveBoolean;
+  }
+  export interface DeleteAnnotationStoreVersionsResponse {
+    /**
+     *  Any errors that occur when attempting to delete an annotation store version. 
+     */
+    errors?: VersionDeleteErrorList;
+  }
   export interface DeleteReferenceRequest {
     /**
      * The reference's ID.
@@ -1438,6 +1704,18 @@ declare namespace Omics {
   }
   export interface DeleteSequenceStoreResponse {
   }
+  export interface DeleteShareRequest {
+    /**
+     *  The ID for the share request to be deleted. 
+     */
+    shareId: String;
+  }
+  export interface DeleteShareResponse {
+    /**
+     *  The status of the share being deleted. 
+     */
+    status?: ShareStatus;
+  }
   export interface DeleteVariantStoreRequest {
     /**
      * The store's name.
@@ -1460,6 +1738,7 @@ declare namespace Omics {
      */
     id: WorkflowId;
   }
+  export type Description = string;
   export type Encoding = string;
   export type EncryptionType = "KMS"|string;
   export type EscapeChar = string;
@@ -1545,6 +1824,16 @@ declare namespace Omics {
   export type FileInformationPartSizeLong = number;
   export type FileInformationTotalPartsInteger = number;
   export type FileType = "FASTQ"|"BAM"|"CRAM"|string;
+  export interface Filter {
+    /**
+     *  The Amazon Resource Number (Arn) for an analytics store. 
+     */
+    resourceArns?: ArnList;
+    /**
+     *  The status of an annotation store version. 
+     */
+    status?: StatusList;
+  }
   export interface FormatOptions {
     /**
      * Options for a TSV file.
@@ -1574,6 +1863,10 @@ declare namespace Omics {
      * The job's destination annotation store.
      */
     destinationName: StoreName;
+    /**
+     *  The name of the annotation store version. 
+     */
+    versionName: VersionName;
     /**
      * The job's service role ARN.
      */
@@ -1642,7 +1935,7 @@ declare namespace Omics {
     /**
      * The store's description.
      */
-    description: StoreDescription;
+    description: Description;
     /**
      * The store's server-side encryption (SSE) settings.
      */
@@ -1675,6 +1968,74 @@ declare namespace Omics {
      * The store's size in bytes.
      */
     storeSizeBytes: Long;
+    /**
+     *  An integer indicating how many versions of an annotation store exist. 
+     */
+    numVersions: Integer;
+  }
+  export interface GetAnnotationStoreVersionRequest {
+    /**
+     *  The name given to an annotation store version to distinguish it from others. 
+     */
+    name: String;
+    /**
+     *  The name given to an annotation store version to distinguish it from others. 
+     */
+    versionName: String;
+  }
+  export interface GetAnnotationStoreVersionResponse {
+    /**
+     *  The store ID for annotation store version. 
+     */
+    storeId: ResourceId;
+    /**
+     *  The annotation store version ID. 
+     */
+    id: ResourceId;
+    /**
+     *  The status of an annotation store version. 
+     */
+    status: VersionStatus;
+    /**
+     *  The Arn for the annotation store. 
+     */
+    versionArn: Arn;
+    /**
+     *  The name of the annotation store. 
+     */
+    name: StoreName;
+    /**
+     *  The name given to an annotation store version to distinguish it from others. 
+     */
+    versionName: VersionName;
+    /**
+     *  The description for an annotation store version. 
+     */
+    description: Description;
+    /**
+     *  The time stamp for when an annotation store version was created. 
+     */
+    creationTime: CreationTime;
+    /**
+     *  The time stamp for when an annotation store version was updated. 
+     */
+    updateTime: UpdateTime;
+    /**
+     *  Any tags associated with an annotation store version. 
+     */
+    tags: TagMap;
+    /**
+     *  The options for an annotation store version. 
+     */
+    versionOptions?: VersionOptions;
+    /**
+     *  The status of an annotation store version. 
+     */
+    statusMessage: StatusMessage;
+    /**
+     *  The size of the annotation store version in Bytes. 
+     */
+    versionSizeBytes: Long;
   }
   export interface GetReadSetActivationJobRequest {
     /**
@@ -2315,6 +2676,18 @@ declare namespace Omics {
      */
     fallbackLocation?: S3Destination;
   }
+  export interface GetShareRequest {
+    /**
+     *  The generated ID for a share. 
+     */
+    shareId: String;
+  }
+  export interface GetShareResponse {
+    /**
+     *  An analytic store share details object. contains status, resourceArn, ownerId, etc. 
+     */
+    share?: ShareDetails;
+  }
   export interface GetVariantImportRequest {
     /**
      * The job's ID.
@@ -2397,7 +2770,7 @@ declare namespace Omics {
     /**
      * The store's description.
      */
-    description: StoreDescription;
+    description: Description;
     /**
      * The store's server-side encryption (SSE) settings.
      */
@@ -2666,6 +3039,7 @@ declare namespace Omics {
     tags?: TagMap;
   }
   export type ImportReferenceSourceList = ImportReferenceSourceItem[];
+  export type Integer = number;
   export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLED"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES"|string;
   export type JobStatusMessage = string;
   export type JobStatusMsg = string;
@@ -2708,6 +3082,42 @@ declare namespace Omics {
     annotationImportJobs?: AnnotationImportJobItems;
     /**
      * Specifies the pagination token from a previous request to retrieve the next page of results.
+     */
+    nextToken?: String;
+  }
+  export interface ListAnnotationStoreVersionsFilter {
+    /**
+     *  The status of an annotation store version. 
+     */
+    status?: VersionStatus;
+  }
+  export interface ListAnnotationStoreVersionsRequest {
+    /**
+     *  The name of an annotation store. 
+     */
+    name: String;
+    /**
+     *  The maximum number of annotation store versions to return in one page of results. 
+     */
+    maxResults?: ListAnnotationStoreVersionsRequestMaxResultsInteger;
+    /**
+     *  Specifies the pagination token from a previous request to retrieve the next page of results. 
+     */
+    nextToken?: ListAnnotationStoreVersionsRequestNextTokenString;
+    /**
+     *  A filter to apply to the list of annotation store versions. 
+     */
+    filter?: ListAnnotationStoreVersionsFilter;
+  }
+  export type ListAnnotationStoreVersionsRequestMaxResultsInteger = number;
+  export type ListAnnotationStoreVersionsRequestNextTokenString = string;
+  export interface ListAnnotationStoreVersionsResponse {
+    /**
+     *  Lists all versions of an annotation store. 
+     */
+    annotationStoreVersions?: AnnotationStoreVersionItems;
+    /**
+     *  Specifies the pagination token from a previous request to retrieve the next page of results. 
      */
     nextToken?: String;
   }
@@ -3120,6 +3530,34 @@ declare namespace Omics {
      * A list of sequence stores.
      */
     sequenceStores: SequenceStoreDetailList;
+  }
+  export interface ListSharesRequest {
+    /**
+     *  The account that owns the analytics store shared. 
+     */
+    resourceOwner: ResourceOwner;
+    /**
+     *  Attributes used to filter for a specific subset of shares. 
+     */
+    filter?: Filter;
+    /**
+     *  Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results. 
+     */
+    nextToken?: String;
+    /**
+     *  The maximum number of shares to return in one page of results. 
+     */
+    maxResults?: Integer;
+  }
+  export interface ListSharesResponse {
+    /**
+     *  The shares available and their meta details. 
+     */
+    shares: ShareDetailsList;
+    /**
+     *  Next token returned in the response of a previous ListSharesResponse call. Used to get the next page of results. 
+     */
+    nextToken?: String;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -3640,6 +4078,7 @@ declare namespace Omics {
   export type ReferenceStreamingBlob = Buffer|Uint8Array|Blob|string|Readable;
   export type ResourceId = string;
   export type ResourceIdentifier = string;
+  export type ResourceOwner = "SELF"|"OTHER"|string;
   export type RoleArn = string;
   export type RunArn = string;
   export type RunExport = "DEFINITION"|string;
@@ -3825,6 +4264,47 @@ declare namespace Omics {
   }
   export type SequenceStoreId = string;
   export type SequenceStoreName = string;
+  export interface ShareDetails {
+    /**
+     *  The ID for a share offer for an analytics store . 
+     */
+    shareId?: String;
+    /**
+     *  The resource Arn of the analytics store being shared. 
+     */
+    resourceArn?: String;
+    /**
+     *  The principal subscriber is the account the analytics store data is being shared with. 
+     */
+    principalSubscriber?: String;
+    /**
+     *  The account ID for the data owner. The owner creates the share offer. 
+     */
+    ownerId?: String;
+    /**
+     *  The status of a share. 
+     */
+    status?: ShareStatus;
+    /**
+     *  The status message for a share. It provides more details on the status of the share. 
+     */
+    statusMessage?: StatusMessage;
+    /**
+     *  The name of the share. 
+     */
+    shareName?: ShareName;
+    /**
+     *  The timestamp for when the share was created. 
+     */
+    creationTime?: CreationTime;
+    /**
+     *  The timestamp of the share update. 
+     */
+    updateTime?: UpdateTime;
+  }
+  export type ShareDetailsList = ShareDetails[];
+  export type ShareName = string;
+  export type ShareStatus = "PENDING"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|"FAILED"|string;
   export interface SourceFiles {
     /**
      * The location of the first file in Amazon S3.
@@ -3859,6 +4339,10 @@ declare namespace Omics {
      * Items to import.
      */
     items: AnnotationImportItemSources;
+    /**
+     *  The name of the annotation store version. 
+     */
+    versionName?: VersionName;
     /**
      * Formatting options for the annotation file.
      */
@@ -4202,8 +4686,8 @@ declare namespace Omics {
      */
     jobId: ResourceId;
   }
+  export type StatusList = ShareStatus[];
   export type StatusMessage = string;
-  export type StoreDescription = string;
   export type StoreFormat = "GFF"|"TSV"|"VCF"|string;
   export type StoreName = string;
   export interface StoreOptions {
@@ -4309,6 +4793,21 @@ declare namespace Omics {
     schema?: TsvStoreOptionsSchemaList;
   }
   export type TsvStoreOptionsSchemaList = SchemaItem[];
+  export interface TsvVersionOptions {
+    /**
+     *  The store version's annotation type. 
+     */
+    annotationType?: AnnotationType;
+    /**
+     *  The annotation store version's header key to column name mapping. 
+     */
+    formatToHeader?: FormatToHeader;
+    /**
+     *  The TSV schema for an annotation store version. 
+     */
+    schema?: TsvVersionOptionsSchemaList;
+  }
+  export type TsvVersionOptionsSchemaList = SchemaItem[];
   export interface UntagResourceRequest {
     /**
      * The resource's ARN.
@@ -4329,7 +4828,7 @@ declare namespace Omics {
     /**
      * A description for the store.
      */
-    description?: StoreDescription;
+    description?: Description;
   }
   export interface UpdateAnnotationStoreResponse {
     /**
@@ -4351,7 +4850,7 @@ declare namespace Omics {
     /**
      * The store's description.
      */
-    description: StoreDescription;
+    description: Description;
     /**
      * When the store was created.
      */
@@ -4368,6 +4867,54 @@ declare namespace Omics {
      * The annotation file format of the store.
      */
     storeFormat?: StoreFormat;
+  }
+  export interface UpdateAnnotationStoreVersionRequest {
+    /**
+     *  The name of an annotation store. 
+     */
+    name: String;
+    /**
+     *  The name of an annotation store version. 
+     */
+    versionName: String;
+    /**
+     *  The description of an annotation store. 
+     */
+    description?: Description;
+  }
+  export interface UpdateAnnotationStoreVersionResponse {
+    /**
+     *  The annotation store ID. 
+     */
+    storeId: ResourceId;
+    /**
+     *  The annotation store version ID. 
+     */
+    id: ResourceId;
+    /**
+     *  The status of an annotation store version. 
+     */
+    status: VersionStatus;
+    /**
+     *  The name of an annotation store. 
+     */
+    name: StoreName;
+    /**
+     *  The name of an annotation store version. 
+     */
+    versionName: VersionName;
+    /**
+     *  The description of an annotation store version. 
+     */
+    description: Description;
+    /**
+     *  The time stamp for when an annotation store version was created. 
+     */
+    creationTime: CreationTime;
+    /**
+     *  The time stamp for when an annotation store version was updated. 
+     */
+    updateTime: UpdateTime;
   }
   export interface UpdateRunGroupRequest {
     /**
@@ -4408,7 +4955,7 @@ declare namespace Omics {
     /**
      * A description for the store.
      */
-    description?: StoreDescription;
+    description?: Description;
   }
   export interface UpdateVariantStoreResponse {
     /**
@@ -4430,7 +4977,7 @@ declare namespace Omics {
     /**
      * The store's description.
      */
-    description: StoreDescription;
+    description: Description;
     /**
      * When the store was created.
      */
@@ -4569,7 +5116,7 @@ declare namespace Omics {
     /**
      * The store's description.
      */
-    description: StoreDescription;
+    description: Description;
     /**
      * The store's server-side encryption (SSE) settings.
      */
@@ -4602,6 +5149,26 @@ declare namespace Omics {
      */
     ignoreFilterField?: Boolean;
   }
+  export interface VersionDeleteError {
+    /**
+     *  The name given to an annotation store version. 
+     */
+    versionName: VersionName;
+    /**
+     *  The message explaining the error in annotation store deletion. 
+     */
+    message: String;
+  }
+  export type VersionDeleteErrorList = VersionDeleteError[];
+  export type VersionList = VersionName[];
+  export type VersionName = string;
+  export interface VersionOptions {
+    /**
+     *  File settings for a version of a TSV store. 
+     */
+    tsvVersionOptions?: TsvVersionOptions;
+  }
+  export type VersionStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED"|string;
   export type WorkflowArn = string;
   export type WorkflowDefinition = string;
   export type WorkflowDescription = string;

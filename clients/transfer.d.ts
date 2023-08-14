@@ -2514,7 +2514,7 @@ declare namespace Transfer {
   export type SftpAuthenticationMethods = "PASSWORD"|"PUBLIC_KEY"|"PUBLIC_KEY_OR_PASSWORD"|"PUBLIC_KEY_AND_PASSWORD"|string;
   export interface SftpConnectorConfig {
     /**
-     * The identifiers for the secrets (in Amazon Web Services Secrets Manager) that contain the SFTP user's private keys or passwords.
+     * The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
      */
     UserSecretId?: SecretId;
     /**
@@ -2551,7 +2551,7 @@ declare namespace Transfer {
      */
     ConnectorId: ConnectorId;
     /**
-     * One or more source paths for the Transfer Family server. Each string represents a source file path for one outbound file transfer. For example,  DOC-EXAMPLE-BUCKET/myfile.txt .  Replace  DOC-EXAMPLE-BUCKET with one of your actual buckets. 
+     * One or more source paths for the Amazon S3 storage. Each string represents a source file path for one outbound file transfer. For example,  DOC-EXAMPLE-BUCKET/myfile.txt .  Replace  DOC-EXAMPLE-BUCKET  with one of your actual buckets. 
      */
     SendFilePaths?: FilePaths;
     /**

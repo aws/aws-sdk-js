@@ -997,7 +997,7 @@ rounded to the nearest multiple of the source fragment duration.
     /**
      * The system generated password for ingest authentication.
      */
-    Password?: __string;
+    Password?: SensitiveString;
     /**
      * The ingest URL to which the source stream should be sent.
      */
@@ -1005,7 +1005,7 @@ rounded to the nearest multiple of the source fragment duration.
     /**
      * The system generated username for ingest authentication.
      */
-    Username?: __string;
+    Username?: SensitiveString;
   }
   export interface IngressAccessLogs {
     /**
@@ -1250,6 +1250,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     RoleArn: __string;
   }
   export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
+  export type SensitiveString = string;
   export interface SpekeKeyProvider {
     /**
      * An Amazon Resource Name (ARN) of a Certificate Manager certificate

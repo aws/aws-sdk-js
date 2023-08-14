@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1435.0-->
+<!--LATEST=2.1436.0-->
 <!--ENTRYINSERT-->
+
+## 2.1436.0
+* feature: MediaPackage: Fix SDK logging of certain fields.
+* feature: Omics: This release provides support for annotation store versioning and cross account sharing for Omics Analytics
 
 ## 2.1435.0
 * feature: AmplifyBackend: Adds sensitive trait to required input shapes.
