@@ -12,6 +12,22 @@ declare class PI extends Service {
   constructor(options?: PI.Types.ClientConfiguration)
   config: Config & PI.Types.ClientConfiguration;
   /**
+   * Creates a new performance analysis report for a specific time period for the DB instance.
+   */
+  createPerformanceAnalysisReport(params: PI.Types.CreatePerformanceAnalysisReportRequest, callback?: (err: AWSError, data: PI.Types.CreatePerformanceAnalysisReportResponse) => void): Request<PI.Types.CreatePerformanceAnalysisReportResponse, AWSError>;
+  /**
+   * Creates a new performance analysis report for a specific time period for the DB instance.
+   */
+  createPerformanceAnalysisReport(callback?: (err: AWSError, data: PI.Types.CreatePerformanceAnalysisReportResponse) => void): Request<PI.Types.CreatePerformanceAnalysisReportResponse, AWSError>;
+  /**
+   * Deletes a performance analysis report.
+   */
+  deletePerformanceAnalysisReport(params: PI.Types.DeletePerformanceAnalysisReportRequest, callback?: (err: AWSError, data: PI.Types.DeletePerformanceAnalysisReportResponse) => void): Request<PI.Types.DeletePerformanceAnalysisReportResponse, AWSError>;
+  /**
+   * Deletes a performance analysis report.
+   */
+  deletePerformanceAnalysisReport(callback?: (err: AWSError, data: PI.Types.DeletePerformanceAnalysisReportResponse) => void): Request<PI.Types.DeletePerformanceAnalysisReportResponse, AWSError>;
+  /**
    * For a specific time period, retrieve the top N dimension keys for a metric.   Each response element returns a maximum of 500 bytes. For larger elements, such as SQL statements, only the first 500 bytes are returned. 
    */
   describeDimensionKeys(params: PI.Types.DescribeDimensionKeysRequest, callback?: (err: AWSError, data: PI.Types.DescribeDimensionKeysResponse) => void): Request<PI.Types.DescribeDimensionKeysResponse, AWSError>;
@@ -27,6 +43,14 @@ declare class PI extends Service {
    * Get the attributes of the specified dimension group for a DB instance or data source. For example, if you specify a SQL ID, GetDimensionKeyDetails retrieves the full text of the dimension db.sql.statement associated with this ID. This operation is useful because GetResourceMetrics and DescribeDimensionKeys don't support retrieval of large SQL statement text.
    */
   getDimensionKeyDetails(callback?: (err: AWSError, data: PI.Types.GetDimensionKeyDetailsResponse) => void): Request<PI.Types.GetDimensionKeyDetailsResponse, AWSError>;
+  /**
+   * Retrieves the report including the report ID, status, time details, and the insights with recommendations. The report status can be RUNNING, SUCCEEDED, or FAILED. The insights include the description and recommendation fields. 
+   */
+  getPerformanceAnalysisReport(params: PI.Types.GetPerformanceAnalysisReportRequest, callback?: (err: AWSError, data: PI.Types.GetPerformanceAnalysisReportResponse) => void): Request<PI.Types.GetPerformanceAnalysisReportResponse, AWSError>;
+  /**
+   * Retrieves the report including the report ID, status, time details, and the insights with recommendations. The report status can be RUNNING, SUCCEEDED, or FAILED. The insights include the description and recommendation fields. 
+   */
+  getPerformanceAnalysisReport(callback?: (err: AWSError, data: PI.Types.GetPerformanceAnalysisReportResponse) => void): Request<PI.Types.GetPerformanceAnalysisReportResponse, AWSError>;
   /**
    * Retrieve the metadata for different features. For example, the metadata might indicate that a feature is turned on or off on a specific DB instance. 
    */
@@ -59,10 +83,144 @@ declare class PI extends Service {
    * Retrieve metrics of the specified types that can be queried for a specified DB instance. 
    */
   listAvailableResourceMetrics(callback?: (err: AWSError, data: PI.Types.ListAvailableResourceMetricsResponse) => void): Request<PI.Types.ListAvailableResourceMetricsResponse, AWSError>;
+  /**
+   * Lists all the analysis reports created for the DB instance. The reports are sorted based on the start time of each report.
+   */
+  listPerformanceAnalysisReports(params: PI.Types.ListPerformanceAnalysisReportsRequest, callback?: (err: AWSError, data: PI.Types.ListPerformanceAnalysisReportsResponse) => void): Request<PI.Types.ListPerformanceAnalysisReportsResponse, AWSError>;
+  /**
+   * Lists all the analysis reports created for the DB instance. The reports are sorted based on the start time of each report.
+   */
+  listPerformanceAnalysisReports(callback?: (err: AWSError, data: PI.Types.ListPerformanceAnalysisReportsResponse) => void): Request<PI.Types.ListPerformanceAnalysisReportsResponse, AWSError>;
+  /**
+   * Retrieves all the metadata tags associated with Amazon RDS Performance Insights resource.
+   */
+  listTagsForResource(params: PI.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: PI.Types.ListTagsForResourceResponse) => void): Request<PI.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves all the metadata tags associated with Amazon RDS Performance Insights resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: PI.Types.ListTagsForResourceResponse) => void): Request<PI.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds metadata tags to the Amazon RDS Performance Insights resource.
+   */
+  tagResource(params: PI.Types.TagResourceRequest, callback?: (err: AWSError, data: PI.Types.TagResourceResponse) => void): Request<PI.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds metadata tags to the Amazon RDS Performance Insights resource.
+   */
+  tagResource(callback?: (err: AWSError, data: PI.Types.TagResourceResponse) => void): Request<PI.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes the metadata tags from the Amazon RDS Performance Insights resource.
+   */
+  untagResource(params: PI.Types.UntagResourceRequest, callback?: (err: AWSError, data: PI.Types.UntagResourceResponse) => void): Request<PI.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes the metadata tags from the Amazon RDS Performance Insights resource.
+   */
+  untagResource(callback?: (err: AWSError, data: PI.Types.UntagResourceResponse) => void): Request<PI.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace PI {
+  export type AcceptLanguage = "EN_US"|string;
   export type AdditionalMetricsList = RequestString[];
   export type AdditionalMetricsMap = {[key: string]: Double};
+  export type AmazonResourceName = string;
+  export interface AnalysisReport {
+    /**
+     * The name of the analysis report.
+     */
+    AnalysisReportId: AnalysisReportId;
+    /**
+     * The unique identifier of the analysis report.
+     */
+    Identifier?: IdentifierString;
+    /**
+     * List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid values are as follows:    RDS     DOCDB   
+     */
+    ServiceType?: ServiceType;
+    /**
+     * The time you created the analysis report.
+     */
+    CreateTime?: ISOTimestamp;
+    /**
+     * The analysis start time in the report.
+     */
+    StartTime?: ISOTimestamp;
+    /**
+     * The analysis end time in the report.
+     */
+    EndTime?: ISOTimestamp;
+    /**
+     * The status of the created analysis report.
+     */
+    Status?: AnalysisStatus;
+    /**
+     * The list of identified insights in the analysis report.
+     */
+    Insights?: InsightList;
+  }
+  export type AnalysisReportId = string;
+  export interface AnalysisReportSummary {
+    /**
+     * The name of the analysis report.
+     */
+    AnalysisReportId?: String;
+    /**
+     * The time you created the analysis report.
+     */
+    CreateTime?: ISOTimestamp;
+    /**
+     * The start time of the analysis in the report.
+     */
+    StartTime?: ISOTimestamp;
+    /**
+     * The end time of the analysis in the report.
+     */
+    EndTime?: ISOTimestamp;
+    /**
+     * The status of the analysis report.
+     */
+    Status?: AnalysisStatus;
+    /**
+     * List of all the tags added to the analysis report.
+     */
+    Tags?: TagList;
+  }
+  export type AnalysisReportSummaryList = AnalysisReportSummary[];
+  export type AnalysisStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|string;
+  export type Boolean = boolean;
+  export type ContextType = "CAUSAL"|"CONTEXTUAL"|string;
+  export interface CreatePerformanceAnalysisReportRequest {
+    /**
+     * The Amazon Web Services service for which Performance Insights will return metrics. Valid value is RDS.
+     */
+    ServiceType: ServiceType;
+    /**
+     * An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from this data source. To use an Amazon RDS instance as a data source, you specify its DbiResourceId value. For example, specify db-ADECBTYHKTSAUMUZQYPDS2GW4A.
+     */
+    Identifier: IdentifierString;
+    /**
+     * The start time defined for the analysis report.
+     */
+    StartTime: ISOTimestamp;
+    /**
+     * The end time defined for the analysis report.
+     */
+    EndTime: ISOTimestamp;
+    /**
+     * The metadata assigned to the analysis report consisting of a key-value pair.
+     */
+    Tags?: TagList;
+  }
+  export interface CreatePerformanceAnalysisReportResponse {
+    /**
+     * A unique identifier for the created analysis report.
+     */
+    AnalysisReportId?: AnalysisReportId;
+  }
+  export interface Data {
+    /**
+     * This field determines the Performance Insights metric to render for the insight. The name field refers to a Performance Insights metric. 
+     */
+    PerformanceInsightsMetric?: PerformanceInsightsMetric;
+  }
+  export type DataList = Data[];
   export interface DataPoint {
     /**
      * The time, in epoch format, associated with a particular Value.
@@ -74,6 +232,22 @@ declare namespace PI {
     Value: Double;
   }
   export type DataPointsList = DataPoint[];
+  export interface DeletePerformanceAnalysisReportRequest {
+    /**
+     * The Amazon Web Services service for which Performance Insights will return metrics. Valid value is RDS.
+     */
+    ServiceType: ServiceType;
+    /**
+     * An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the console, the identifier is shown as ResourceID. When you call DescribeDBInstances, the identifier is returned as DbiResourceId. To use a DB instance as a data source, specify its DbiResourceId value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
+     */
+    Identifier: IdentifierString;
+    /**
+     * The unique identifier of the analysis report for deletion.
+     */
+    AnalysisReportId: AnalysisReportId;
+  }
+  export interface DeletePerformanceAnalysisReportResponse {
+  }
   export interface DescribeDimensionKeysRequest {
     /**
      * The Amazon Web Services service for which Performance Insights will return metrics. Valid values are as follows:    RDS     DOCDB   
@@ -82,7 +256,7 @@ declare namespace PI {
     /**
      * An immutable, Amazon Web Services Region-unique identifier for a data source. Performance Insights gathers metrics from this data source. To use an Amazon RDS instance as a data source, you specify its DbiResourceId value. For example, specify db-FAIHNTYBKTGAUSUZQYPDS2GW4A. 
      */
-    Identifier: RequestString;
+    Identifier: IdentifierString;
     /**
      * The date and time specifying the beginning of the requested time series data. You must specify a StartTime within the past 7 days. The value specified is inclusive, which means that data points equal to or greater than StartTime are returned.  The value for StartTime must be earlier than the value for EndTime. 
      */
@@ -147,6 +321,8 @@ declare namespace PI {
     NextToken?: NextToken;
   }
   export type Description = string;
+  export type DescriptiveMap = {[key: string]: DescriptiveString};
+  export type DescriptiveString = string;
   export type DetailStatus = "AVAILABLE"|"PROCESSING"|"UNAVAILABLE"|string;
   export interface DimensionDetail {
     /**
@@ -253,6 +429,34 @@ declare namespace PI {
      */
     Dimensions?: DimensionKeyDetailList;
   }
+  export interface GetPerformanceAnalysisReportRequest {
+    /**
+     * The Amazon Web Services service for which Performance Insights will return metrics. Valid value is RDS.
+     */
+    ServiceType: ServiceType;
+    /**
+     * An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the console, the identifier is shown as ResourceID. When you call DescribeDBInstances, the identifier is returned as DbiResourceId. To use a DB instance as a data source, specify its DbiResourceId value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
+     */
+    Identifier: IdentifierString;
+    /**
+     * A unique identifier of the created analysis report. For example, report-12345678901234567 
+     */
+    AnalysisReportId: AnalysisReportId;
+    /**
+     * Indicates the text format in the report. The options are PLAIN_TEXT or MARKDOWN. The default value is plain text.
+     */
+    TextFormat?: TextFormat;
+    /**
+     * The text language in the report. The default language is EN_US (English). 
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface GetPerformanceAnalysisReportResponse {
+    /**
+     * The summary of the performance analysis report created for a time period.
+     */
+    AnalysisReport?: AnalysisReport;
+  }
   export interface GetResourceMetadataRequest {
     /**
      * The Amazon Web Services service for which Performance Insights returns metrics.
@@ -261,7 +465,7 @@ declare namespace PI {
     /**
      * An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. To use a DB instance as a data source, specify its DbiResourceId value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X. 
      */
-    Identifier: RequestString;
+    Identifier: IdentifierString;
   }
   export interface GetResourceMetadataResponse {
     /**
@@ -281,7 +485,7 @@ declare namespace PI {
     /**
      * An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the console, the identifier is shown as ResourceID. When you call DescribeDBInstances, the identifier is returned as DbiResourceId. To use a DB instance as a data source, specify its DbiResourceId value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
      */
-    Identifier: RequestString;
+    Identifier: IdentifierString;
     /**
      * An array of one or more queries to perform. Each query must specify a Performance Insights metric, and can optionally specify aggregation and filtering criteria.
      */
@@ -335,6 +539,53 @@ declare namespace PI {
   }
   export type ISOTimestamp = Date;
   export type IdentifierString = string;
+  export interface Insight {
+    /**
+     * The unique identifier for the insight. For example, insight-12345678901234567.
+     */
+    InsightId: String;
+    /**
+     * The type of insight. For example, HighDBLoad, HighCPU, or DominatingSQLs.
+     */
+    InsightType?: String;
+    /**
+     * Indicates if the insight is causal or correlated insight.
+     */
+    Context?: ContextType;
+    /**
+     * The start time of the insight. For example, 2018-10-30T00:00:00Z.
+     */
+    StartTime?: ISOTimestamp;
+    /**
+     * The end time of the insight. For example, 2018-10-30T00:00:00Z.
+     */
+    EndTime?: ISOTimestamp;
+    /**
+     * The severity of the insight. The values are: Low, Medium, or High.
+     */
+    Severity?: Severity;
+    /**
+     * List of supporting insights that provide additional factors for the insight.
+     */
+    SupportingInsights?: InsightList;
+    /**
+     * Description of the insight. For example: A high severity Insight found between 02:00 to 02:30, where there was an unusually high DB load 600x above baseline. Likely performance impact.
+     */
+    Description?: MarkdownString;
+    /**
+     * List of recommendations for the insight. For example, Investigate the following SQLs that contributed to 100% of the total DBLoad during that time period: sql-id.
+     */
+    Recommendations?: RecommendationList;
+    /**
+     * List of data objects containing metrics and references from the time range while generating the insight.
+     */
+    InsightData?: DataList;
+    /**
+     *  Metric names and values from the timeframe used as baseline to generate the insight.
+     */
+    BaselineData?: DataList;
+  }
+  export type InsightList = Insight[];
   export type Integer = number;
   export type Limit = number;
   export interface ListAvailableResourceDimensionsRequest {
@@ -345,7 +596,7 @@ declare namespace PI {
     /**
      * An immutable identifier for a data source that is unique within an Amazon Web Services Region. Performance Insights gathers metrics from this data source. To use an Amazon RDS DB instance as a data source, specify its DbiResourceId value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VWZ. 
      */
-    Identifier: RequestString;
+    Identifier: IdentifierString;
     /**
      * The types of metrics for which to retrieve dimensions. Valid values include db.load.
      */
@@ -377,7 +628,7 @@ declare namespace PI {
     /**
      * An immutable identifier for a data source that is unique within an Amazon Web Services Region. Performance Insights gathers metrics from this data source. To use an Amazon RDS DB instance as a data source, specify its DbiResourceId value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VWZ. 
      */
-    Identifier: RequestString;
+    Identifier: IdentifierString;
     /**
      * The types of metrics to return in the response. Valid values in the array include the following:    os (OS counter metrics) - All engines    db (DB load metrics) - All engines except for Amazon DocumentDB    db.sql.stats (per-SQL metrics) - All engines except for Amazon DocumentDB    db.sql_tokenized.stats (per-SQL digest metrics) - All engines except for Amazon DocumentDB  
      */
@@ -401,6 +652,55 @@ declare namespace PI {
      */
     NextToken?: NextToken;
   }
+  export interface ListPerformanceAnalysisReportsRequest {
+    /**
+     * The Amazon Web Services service for which Performance Insights returns metrics. Valid value is RDS.
+     */
+    ServiceType: ServiceType;
+    /**
+     * An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the console, the identifier is shown as ResourceID. When you call DescribeDBInstances, the identifier is returned as DbiResourceId. To use a DB instance as a data source, specify its DbiResourceId value. For example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X.
+     */
+    Identifier: IdentifierString;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by MaxResults.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return in the response. If more items exist than the specified MaxResults value, a pagination token is included in the response so that the remaining results can be retrieved. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Specifies whether or not to include the list of tags in the response.
+     */
+    ListTags?: Boolean;
+  }
+  export interface ListPerformanceAnalysisReportsResponse {
+    /**
+     * List of reports including the report identifier, start and end time, creation time, and status.
+     */
+    AnalysisReports?: AnalysisReportSummaryList;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the token, up to the value specified by MaxResults.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is RDS.
+     */
+    ServiceType: ServiceType;
+    /**
+     * Lists all the tags for the Amazon RDS Performance Insights resource. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see  Constructing an RDS Amazon Resource Name (ARN).
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The metadata assigned to an Amazon RDS resource consisting of a key-value pair.
+     */
+    Tags?: TagList;
+  }
+  export type MarkdownString = string;
   export type MaxResults = number;
   export interface MetricDimensionGroups {
     /**
@@ -443,7 +743,36 @@ declare namespace PI {
   export type MetricTypeList = RequestString[];
   export type MetricValuesList = Double[];
   export type NextToken = string;
+  export interface PerformanceInsightsMetric {
+    /**
+     * The Performance Insights metric.
+     */
+    Metric?: DescriptiveString;
+    /**
+     * The Performance Insights metric name.
+     */
+    DisplayName?: DescriptiveString;
+    /**
+     * A dimension map that contains the dimensions for this partition.
+     */
+    Dimensions?: DescriptiveMap;
+    /**
+     * The value of the metric. For example, 9 for db.load.avg.
+     */
+    Value?: Double;
+  }
   export type PeriodAlignment = "END_TIME"|"START_TIME"|string;
+  export interface Recommendation {
+    /**
+     * The unique identifier for the recommendation.
+     */
+    RecommendationId?: String;
+    /**
+     * The recommendation details to help resolve the performance issue. For example, Investigate the following SQLs that contributed to 100% of the total DBLoad during that time period: sql-id 
+     */
+    RecommendationDescription?: MarkdownString;
+  }
+  export type RecommendationList = Recommendation[];
   export type RequestString = string;
   export type RequestStringList = RequestString[];
   export type RequestedDimensionList = RequestString[];
@@ -480,7 +809,55 @@ declare namespace PI {
   }
   export type ResponseResourceMetricList = ResponseResourceMetric[];
   export type ServiceType = "RDS"|"DOCDB"|string;
+  export type Severity = "LOW"|"MEDIUM"|"HIGH"|string;
   export type String = string;
+  export interface Tag {
+    /**
+     * A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with aws: or rds:. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+     */
+    Key: TagKey;
+    /**
+     * A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with aws: or rds:. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$").
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Web Services service for which Performance Insights returns metrics. Valid value is RDS.
+     */
+    ServiceType: ServiceType;
+    /**
+     * The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see  Constructing an RDS Amazon Resource Name (ARN).
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The metadata assigned to an Amazon RDS resource consisting of a key-value pair.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type TextFormat = "PLAIN_TEXT"|"MARKDOWN"|string;
+  export interface UntagResourceRequest {
+    /**
+     * List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is RDS.
+     */
+    ServiceType: ServiceType;
+    /**
+     * The Amazon RDS Performance Insights resource that the tags are added to. This value is an Amazon Resource Name (ARN). For information about creating an ARN, see  Constructing an RDS Amazon Resource Name (ARN).
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The metadata assigned to an Amazon RDS Performance Insights resource consisting of a key-value pair.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -3728,6 +3728,10 @@ declare namespace Glue {
      * Creates a list of supported custom datatypes.
      */
     CustomDatatypes?: CustomDatatypes;
+    /**
+     * Sets the SerDe for processing CSV in the classifier, which will be applied in the Data Catalog. Valid values are OpenCSVSerDe, LazySimpleSerDe, and None. You can specify the None value when you want the crawler to do the detection.
+     */
+    Serde?: CsvSerdeOption;
   }
   export interface CreateCustomEntityTypeRequest {
     /**
@@ -4582,11 +4586,16 @@ declare namespace Glue {
      * A list of custom datatypes including "BINARY", "BOOLEAN", "DATE", "DECIMAL", "DOUBLE", "FLOAT", "INT", "LONG", "SHORT", "STRING", "TIMESTAMP".
      */
     CustomDatatypes?: CustomDatatypes;
+    /**
+     * Sets the SerDe for processing CSV in the classifier, which will be applied in the Data Catalog. Valid values are OpenCSVSerDe, LazySimpleSerDe, and None. You can specify the None value when you want the crawler to do the detection.
+     */
+    Serde?: CsvSerdeOption;
   }
   export type CsvColumnDelimiter = string;
   export type CsvHeader = NameString[];
   export type CsvHeaderOption = "UNKNOWN"|"PRESENT"|"ABSENT"|string;
   export type CsvQuoteSymbol = string;
+  export type CsvSerdeOption = "OpenCSVSerDe"|"LazySimpleSerDe"|"None"|string;
   export interface CustomCode {
     /**
      * The name of the transform node.
@@ -13007,6 +13016,10 @@ declare namespace Glue {
      * Specifies a list of supported custom datatypes.
      */
     CustomDatatypes?: CustomDatatypes;
+    /**
+     * Sets the SerDe for processing CSV in the classifier, which will be applied in the Data Catalog. Valid values are OpenCSVSerDe, LazySimpleSerDe, and None. You can specify the None value when you want the crawler to do the detection.
+     */
+    Serde?: CsvSerdeOption;
   }
   export interface UpdateDataQualityRulesetRequest {
     /**

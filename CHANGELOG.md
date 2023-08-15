@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1436.0-->
+<!--LATEST=2.1437.0-->
 <!--ENTRYINSERT-->
+
+## 2.1437.0
+* feature: ChimeSDKMeetings: Updated API documentation to include additional exceptions.
+* feature: EC2: Documentation updates for Elastic Compute Cloud (EC2).
+* feature: Glue: AWS Glue Crawlers can now accept SerDe overrides from a custom csv classifier. The two SerDe options are LazySimpleSerDe and OpenCSVSerDe. In case, the user wants crawler to do the selection, "None" can be selected for this purpose.
+* feature: PI: AWS Performance Insights for Amazon RDS is launching Performance Analysis On Demand, a new feature that allows you to analyze database performance metrics and find out the performance issues. You can now use SDK to create, list, get, delete, and manage tags of performance analysis reports.
+* feature: Route53Domains: Provide explanation if CheckDomainTransferability return false. Provide requestId if a request is already submitted.  Add sensitive protection for customer information
+* feature: SageMaker: SageMaker Inference Recommender now provides SupportedResponseMIMETypes from DescribeInferenceRecommendationsJob response
 
 ## 2.1436.0
 * feature: MediaPackage: Fix SDK logging of certain fields.

@@ -293,7 +293,7 @@ declare namespace Route53Domains {
     /**
      * The password that was returned by the TransferDomainToAnotherAwsAccount request. 
      */
-    Password: String;
+    Password: Password;
   }
   export interface AcceptDomainTransferFromAnotherAwsAccountResponse {
     /**
@@ -386,6 +386,10 @@ declare namespace Route53Domains {
      * A complex type that contains information about whether the specified domain can be transferred to Route 53.
      */
     Transferability?: DomainTransferability;
+    /**
+     * Provides an explanation for when a domain can't be transferred.
+     */
+    Message?: Message;
   }
   export type City = string;
   export interface Consent {
@@ -973,6 +977,7 @@ declare namespace Route53Domains {
      */
     TagList?: TagList;
   }
+  export type Message = string;
   export interface Nameserver {
     /**
      * The fully qualified host name of the name server. Constraint: Maximum 255 characters
@@ -1028,6 +1033,7 @@ declare namespace Route53Domains {
   export type Operator = "LE"|"GE"|"BEGINS_WITH"|string;
   export type PageMarker = string;
   export type PageMaxItems = number;
+  export type Password = string;
   export type Price = number;
   export interface PriceWithCurrency {
     /**
@@ -1277,7 +1283,7 @@ declare namespace Route53Domains {
     /**
      * To finish transferring a domain to another Amazon Web Services account, the account that the domain is being transferred to must submit an AcceptDomainTransferFromAnotherAwsAccount request. The request must include the value of the Password element that was returned in the TransferDomainToAnotherAwsAccount response.
      */
-    Password?: String;
+    Password?: Password;
   }
   export type Transferable = "TRANSFERABLE"|"UNTRANSFERABLE"|"DONT_KNOW"|"DOMAIN_IN_OWN_ACCOUNT"|"DOMAIN_IN_ANOTHER_ACCOUNT"|"PREMIUM_DOMAIN"|string;
   export interface UpdateDomainContactPrivacyRequest {
