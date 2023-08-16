@@ -15494,7 +15494,7 @@
       "type": "integer",
       "box": true,
       "max": 3,
-      "min": 1
+      "min": 0
     }
   },
   "documentation": "<p/>"

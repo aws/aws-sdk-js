@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1437.0-->
+<!--LATEST=2.1438.0-->
 <!--ENTRYINSERT-->
+
+## 2.1438.0
+* feature: LexModelsV2: This release updates the Custom Vocabulary Weight field to support a value of 0.
 
 ## 2.1437.0
 * feature: ChimeSDKMeetings: Updated API documentation to include additional exceptions.
