@@ -11245,11 +11245,11 @@ declare namespace EC2 {
      */
     RouteTableIds?: VpcEndpointRouteTableIdList;
     /**
-     * (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to create an endpoint network interface. For a Gateway Load Balancer endpoint, you can specify only one subnet.
+     * (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to create endpoint network interfaces. For a Gateway Load Balancer endpoint, you can specify only one subnet.
      */
     SubnetIds?: VpcEndpointSubnetIdList;
     /**
-     * (Interface endpoint) The IDs of the security groups to associate with the endpoint network interface. If this parameter is not specified, we use the default security group for the VPC.
+     * (Interface endpoint) The IDs of the security groups to associate with the endpoint network interfaces. If this parameter is not specified, we use the default security group for the VPC.
      */
     SecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
@@ -11272,6 +11272,10 @@ declare namespace EC2 {
      * The tags to associate with the endpoint.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The subnet configurations for the endpoint.
+     */
+    SubnetConfigurations?: SubnetConfigurationsList;
   }
   export interface CreateVpcEndpointResult {
     /**
@@ -28414,11 +28418,11 @@ declare namespace EC2 {
      */
     RemoveSubnetIds?: VpcEndpointSubnetIdList;
     /**
-     * (Interface endpoint) The IDs of the security groups to associate with the network interface.
+     * (Interface endpoint) The IDs of the security groups to associate with the endpoint network interfaces.
      */
     AddSecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
-     * (Interface endpoint) The IDs of the security groups to disassociate from the network interface.
+     * (Interface endpoint) The IDs of the security groups to disassociate from the endpoint network interfaces.
      */
     RemoveSecurityGroupIds?: VpcEndpointSecurityGroupIdList;
     /**
@@ -28433,6 +28437,10 @@ declare namespace EC2 {
      * (Interface endpoint) Indicates whether a private hosted zone is associated with the VPC.
      */
     PrivateDnsEnabled?: Boolean;
+    /**
+     * The subnet configurations for the endpoint.
+     */
+    SubnetConfigurations?: SubnetConfigurationsList;
   }
   export interface ModifyVpcEndpointResult {
     /**
@@ -35106,6 +35114,21 @@ declare namespace EC2 {
   export type SubnetCidrReservationId = string;
   export type SubnetCidrReservationList = SubnetCidrReservation[];
   export type SubnetCidrReservationType = "prefix"|"explicit"|string;
+  export interface SubnetConfiguration {
+    /**
+     * The ID of the subnet.
+     */
+    SubnetId?: SubnetId;
+    /**
+     * The IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4. If you specify an IPv4 address when modifying a VPC endpoint, we replace the existing endpoint network interface with a new endpoint network interface with this IP address. This process temporarily disconnects the subnet and the VPC endpoint.
+     */
+    Ipv4?: String;
+    /**
+     * The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6. If you specify an IPv6 address when modifying a VPC endpoint, we replace the existing endpoint network interface with a new endpoint network interface with this IP address. This process temporarily disconnects the subnet and the VPC endpoint.
+     */
+    Ipv6?: String;
+  }
+  export type SubnetConfigurationsList = SubnetConfiguration[];
   export type SubnetId = string;
   export type SubnetIdStringList = SubnetId[];
   export interface SubnetIpv6CidrBlockAssociation {
