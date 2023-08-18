@@ -188,11 +188,11 @@ declare class SecurityHub extends Service {
    */
   deleteInvitations(callback?: (err: AWSError, data: SecurityHub.Types.DeleteInvitationsResponse) => void): Request<SecurityHub.Types.DeleteInvitationsResponse, AWSError>;
   /**
-   * Deletes the specified member accounts from Security Hub. Can be used to delete member accounts that belong to an organization as well as member accounts that were invited manually.
+   * Deletes the specified member accounts from Security Hub. You can invoke this API only to delete accounts that became members through invitation. You can't invoke this API to delete accounts that belong to an Organizations organization.
    */
   deleteMembers(params: SecurityHub.Types.DeleteMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteMembersResponse) => void): Request<SecurityHub.Types.DeleteMembersResponse, AWSError>;
   /**
-   * Deletes the specified member accounts from Security Hub. Can be used to delete member accounts that belong to an organization as well as member accounts that were invited manually.
+   * Deletes the specified member accounts from Security Hub. You can invoke this API only to delete accounts that became members through invitation. You can't invoke this API to delete accounts that belong to an Organizations organization.
    */
   deleteMembers(callback?: (err: AWSError, data: SecurityHub.Types.DeleteMembersResponse) => void): Request<SecurityHub.Types.DeleteMembersResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class SecurityHub extends Service {
    */
   disableOrganizationAdminAccount(callback?: (err: AWSError, data: SecurityHub.Types.DisableOrganizationAdminAccountResponse) => void): Request<SecurityHub.Types.DisableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for an administrator account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your administrator and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
+   * Disables Security Hub in your account only in the current Amazon Web Services Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. You can't disable Security Hub in an account that is currently the Security Hub administrator. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your administrator and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
    */
   disableSecurityHub(params: SecurityHub.Types.DisableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisableSecurityHubResponse) => void): Request<SecurityHub.Types.DisableSecurityHubResponse, AWSError>;
   /**
-   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for an administrator account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your administrator and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
+   * Disables Security Hub in your account only in the current Amazon Web Services Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. You can't disable Security Hub in an account that is currently the Security Hub administrator. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and cannot be recovered. Any standards that were enabled are disabled, and your administrator and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
    */
   disableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.DisableSecurityHubResponse) => void): Request<SecurityHub.Types.DisableSecurityHubResponse, AWSError>;
   /**
@@ -9969,6 +9969,10 @@ declare namespace SecurityHub {
      * Indicates whether the finding is a sample finding.
      */
     Sample?: Boolean;
+    /**
+     * Provides metadata for the Amazon CodeGuru detector associated with a finding. This field pertains to findings that relate to Lambda functions. Amazon Inspector identifies policy violations and vulnerabilities in Lambda function code based on internal detectors developed in collaboration with Amazon CodeGuru. Security Hub receives those findings. 
+     */
+    GeneratorDetails?: GeneratorDetails;
   }
   export interface AwsSecurityFindingFilters {
     /**
@@ -11444,6 +11448,24 @@ declare namespace SecurityHub {
      */
     Reason?: NonEmptyString;
   }
+  export interface CodeVulnerabilitiesFilePath {
+    /**
+     *  The line number of the last line of code in which the vulnerability is located. 
+     */
+    EndLine?: Integer;
+    /**
+     *  The name of the file in which the code vulnerability is located. 
+     */
+    FileName?: NonEmptyString;
+    /**
+     *  The file path to the code in which the vulnerability is located. 
+     */
+    FilePath?: NonEmptyString;
+    /**
+     *  The line number of the first line of code in which the vulnerability is located. 
+     */
+    StartLine?: Integer;
+  }
   export interface Compliance {
     /**
      * The result of a standards check. The valid values for Status are as follows.      PASSED - Standards check passed for all evaluated resources.    WARNING - Some information is missing or this check is not supported for your configuration.    FAILED - Standards check failed for at least one evaluated resource.    NOT_AVAILABLE - Check could not be performed due to a service outage, API error, or because the result of the Config evaluation was NOT_APPLICABLE. If the Config evaluation result was NOT_APPLICABLE, then after 3 days, Security Hub automatically archives the finding.    
@@ -12165,6 +12187,20 @@ declare namespace SecurityHub {
     ResourceArn?: NonEmptyString;
   }
   export type FirewallPolicyStatelessRuleGroupReferencesList = FirewallPolicyStatelessRuleGroupReferencesDetails[];
+  export interface GeneratorDetails {
+    /**
+     *  The name of the detector used to identify the code vulnerability. 
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The description of the detector used to identify the code vulnerability. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  An array of tags used to identify the detector associated with the finding. 
+     */
+    Labels?: TypeList;
+  }
   export interface GeoLocation {
     /**
      * The longitude of the location.
@@ -14715,7 +14751,35 @@ declare namespace SecurityHub {
      * Specifies if all vulnerable packages in a finding have a value for FixedInVersion and Remediation. This field is evaluated for each vulnerability Id based on the number of vulnerable packages that have a value for both FixedInVersion and Remediation. Valid values are as follows:    YES if all vulnerable packages have a value for both FixedInVersion and Remediation     NO if no vulnerable packages have a value for FixedInVersion and Remediation     PARTIAL otherwise  
      */
     FixAvailable?: VulnerabilityFixAvailable;
+    /**
+     * The Exploit Prediction Scoring System (EPSS) score for a finding. 
+     */
+    EpssScore?: Double;
+    /**
+     * Whether an exploit is available for a finding. 
+     */
+    ExploitAvailable?: VulnerabilityExploitAvailable;
+    /**
+     * The vulnerabilities found in your Lambda function code. This field pertains to findings that Security Hub receives from Amazon Inspector. 
+     */
+    CodeVulnerabilities?: VulnerabilityCodeVulnerabilitiesList;
   }
+  export interface VulnerabilityCodeVulnerabilities {
+    /**
+     *  The Common Weakness Enumeration (CWE) item associated with the detected code vulnerability. 
+     */
+    Cwes?: TypeList;
+    /**
+     *  Provides details about where a code vulnerability is located in your Lambda function. 
+     */
+    FilePath?: CodeVulnerabilitiesFilePath;
+    /**
+     *  The Amazon Resource Name (ARN) of the Lambda layer in which the code vulnerability is located. 
+     */
+    SourceArn?: NonEmptyString;
+  }
+  export type VulnerabilityCodeVulnerabilitiesList = VulnerabilityCodeVulnerabilities[];
+  export type VulnerabilityExploitAvailable = "YES"|"NO"|string;
   export type VulnerabilityFixAvailable = "YES"|"NO"|"PARTIAL"|string;
   export type VulnerabilityList = Vulnerability[];
   export interface VulnerabilityVendor {

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1439.0-->
+<!--LATEST=2.1440.0-->
 <!--ENTRYINSERT-->
+
+## 2.1440.0
+* feature: CodeCommit: Add new ListFileCommitHistory operation to retrieve commits which introduced changes to a specific file.
+* feature: SecurityHub: Added Inspector Lambda code Vulnerability section to ASFF, including GeneratorDetails, EpssScore, ExploitAvailable, and CodeVulnerabilities.
 
 ## 2.1439.0
 * feature: EC2: Adds support for SubnetConfigurations to allow users to select their own IPv4 and IPv6 addresses for Interface VPC endpoints
