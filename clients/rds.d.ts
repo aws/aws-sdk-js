@@ -742,11 +742,11 @@ declare class RDS extends Service {
    */
   failoverDBCluster(callback?: (err: AWSError, data: RDS.Types.FailoverDBClusterResult) => void): Request<RDS.Types.FailoverDBClusterResult, AWSError>;
   /**
-   * Initiates the failover process for an Aurora global database (GlobalCluster). A failover for an Aurora global database promotes one of secondary read-only DB clusters to be the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words, the role of the current primary DB cluster and the selected (target) DB cluster are switched. The selected secondary DB cluster assumes full read/write capabilities for the Aurora global database. For more information about failing over an Amazon Aurora global database, see Managed planned failover for Amazon Aurora global databases in the Amazon Aurora User Guide.  This action applies to GlobalCluster (Aurora global databases) only. Use this action only on healthy Aurora global databases with running Aurora DB clusters and no Region-wide outages, to test disaster recovery scenarios or to reconfigure your Aurora global database topology. 
+   * Promotes the specified secondary DB cluster to be the primary DB cluster in the global database cluster to fail over or switch over a global database. Switchover operations were previously called "managed planned failovers."  Although this operation can be used either to fail over or to switch over a global database cluster, its intended use is for global database failover. To switch over a global database cluster, we recommend that you use the SwitchoverGlobalCluster operation instead.  How you use this operation depends on whether you are failing over or switching over your global database cluster:   Failing over - Specify the AllowDataLoss parameter and don't specify the Switchover parameter.   Switching over - Specify the Switchover parameter or omit it, but don't specify the AllowDataLoss parameter.    About failing over and switching over  While failing over and switching over a global database cluster both change the primary DB cluster, you use these operations for different reasons:    Failing over - Use this operation to respond to an unplanned event, such as a Regional disaster in the primary Region. Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred. However, the recovery process that promotes a DB instance on the chosen seconday DB cluster to be the primary writer DB instance guarantees that the data is in a transactionally consistent state. For more information about failing over an Amazon Aurora global database, see Performing managed failovers for Aurora global databases in the Amazon Aurora User Guide.    Switching over - Use this operation on a healthy global database cluster for planned events, such as Regional rotation or to fail back to the original primary DB cluster after a failover operation. With this operation, there is no data loss. For more information about switching over an Amazon Aurora global database, see Performing switchovers for Aurora global databases in the Amazon Aurora User Guide.  
    */
   failoverGlobalCluster(params: RDS.Types.FailoverGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.FailoverGlobalClusterResult) => void): Request<RDS.Types.FailoverGlobalClusterResult, AWSError>;
   /**
-   * Initiates the failover process for an Aurora global database (GlobalCluster). A failover for an Aurora global database promotes one of secondary read-only DB clusters to be the primary DB cluster and demotes the primary DB cluster to being a secondary (read-only) DB cluster. In other words, the role of the current primary DB cluster and the selected (target) DB cluster are switched. The selected secondary DB cluster assumes full read/write capabilities for the Aurora global database. For more information about failing over an Amazon Aurora global database, see Managed planned failover for Amazon Aurora global databases in the Amazon Aurora User Guide.  This action applies to GlobalCluster (Aurora global databases) only. Use this action only on healthy Aurora global databases with running Aurora DB clusters and no Region-wide outages, to test disaster recovery scenarios or to reconfigure your Aurora global database topology. 
+   * Promotes the specified secondary DB cluster to be the primary DB cluster in the global database cluster to fail over or switch over a global database. Switchover operations were previously called "managed planned failovers."  Although this operation can be used either to fail over or to switch over a global database cluster, its intended use is for global database failover. To switch over a global database cluster, we recommend that you use the SwitchoverGlobalCluster operation instead.  How you use this operation depends on whether you are failing over or switching over your global database cluster:   Failing over - Specify the AllowDataLoss parameter and don't specify the Switchover parameter.   Switching over - Specify the Switchover parameter or omit it, but don't specify the AllowDataLoss parameter.    About failing over and switching over  While failing over and switching over a global database cluster both change the primary DB cluster, you use these operations for different reasons:    Failing over - Use this operation to respond to an unplanned event, such as a Regional disaster in the primary Region. Failing over can result in a loss of write transaction data that wasn't replicated to the chosen secondary before the failover event occurred. However, the recovery process that promotes a DB instance on the chosen seconday DB cluster to be the primary writer DB instance guarantees that the data is in a transactionally consistent state. For more information about failing over an Amazon Aurora global database, see Performing managed failovers for Aurora global databases in the Amazon Aurora User Guide.    Switching over - Use this operation on a healthy global database cluster for planned events, such as Regional rotation or to fail back to the original primary DB cluster after a failover operation. With this operation, there is no data loss. For more information about switching over an Amazon Aurora global database, see Performing switchovers for Aurora global databases in the Amazon Aurora User Guide.  
    */
   failoverGlobalCluster(callback?: (err: AWSError, data: RDS.Types.FailoverGlobalClusterResult) => void): Request<RDS.Types.FailoverGlobalClusterResult, AWSError>;
   /**
@@ -894,11 +894,11 @@ declare class RDS extends Service {
    */
   modifyEventSubscription(callback?: (err: AWSError, data: RDS.Types.ModifyEventSubscriptionResult) => void): Request<RDS.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
-   * Modifies a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This operation only applies to Aurora global database clusters. 
+   * Modifies a setting for an Amazon Aurora global database cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This operation only applies to Aurora global database clusters. 
    */
   modifyGlobalCluster(params: RDS.Types.ModifyGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.ModifyGlobalClusterResult) => void): Request<RDS.Types.ModifyGlobalClusterResult, AWSError>;
   /**
-   * Modifies a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This operation only applies to Aurora global database clusters. 
+   * Modifies a setting for an Amazon Aurora global database cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This operation only applies to Aurora global database clusters. 
    */
   modifyGlobalCluster(callback?: (err: AWSError, data: RDS.Types.ModifyGlobalClusterResult) => void): Request<RDS.Types.ModifyGlobalClusterResult, AWSError>;
   /**
@@ -1149,6 +1149,14 @@ declare class RDS extends Service {
    * Switches over a blue/green deployment. Before you switch over, production traffic is routed to the databases in the blue environment. After you switch over, production traffic is routed to the databases in the green environment. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
    */
   switchoverBlueGreenDeployment(callback?: (err: AWSError, data: RDS.Types.SwitchoverBlueGreenDeploymentResponse) => void): Request<RDS.Types.SwitchoverBlueGreenDeploymentResponse, AWSError>;
+  /**
+   * Switches over the specified secondary DB cluster to be the new primary DB cluster in the global database cluster. Switchover operations were previously called "managed planned failovers." Aurora promotes the specified secondary cluster to assume full read/write capabilities and demotes the current primary cluster to a secondary (read-only) cluster, maintaining the orginal replication topology. All secondary clusters are synchronized with the primary at the beginning of the process so the new primary continues operations for the Aurora global database without losing any data. Your database is unavailable for a short time while the primary and selected secondary clusters are assuming their new roles. For more information about switching over an Aurora global database, see Performing switchovers for Amazon Aurora global databases in the Amazon Aurora User Guide.  This operation is intended for controlled environments, for operations such as "regional rotation" or to fall back to the original primary after a global database failover. 
+   */
+  switchoverGlobalCluster(params: RDS.Types.SwitchoverGlobalClusterMessage, callback?: (err: AWSError, data: RDS.Types.SwitchoverGlobalClusterResult) => void): Request<RDS.Types.SwitchoverGlobalClusterResult, AWSError>;
+  /**
+   * Switches over the specified secondary DB cluster to be the new primary DB cluster in the global database cluster. Switchover operations were previously called "managed planned failovers." Aurora promotes the specified secondary cluster to assume full read/write capabilities and demotes the current primary cluster to a secondary (read-only) cluster, maintaining the orginal replication topology. All secondary clusters are synchronized with the primary at the beginning of the process so the new primary continues operations for the Aurora global database without losing any data. Your database is unavailable for a short time while the primary and selected secondary clusters are assuming their new roles. For more information about switching over an Aurora global database, see Performing switchovers for Amazon Aurora global databases in the Amazon Aurora User Guide.  This operation is intended for controlled environments, for operations such as "regional rotation" or to fall back to the original primary after a global database failover. 
+   */
+  switchoverGlobalCluster(callback?: (err: AWSError, data: RDS.Types.SwitchoverGlobalClusterResult) => void): Request<RDS.Types.SwitchoverGlobalClusterResult, AWSError>;
   /**
    * Switches over an Oracle standby database in an Oracle Data Guard environment, making it the new primary database. Issue this command in the Region that hosts the current standby database.
    */
@@ -1975,7 +1983,7 @@ declare namespace RDS {
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * The storage type to associate with the DB cluster. For information on storage types for Aurora DB clusters, see Storage configurations for Amazon Aurora DB clusters. For information on storage types for Multi-AZ DB clusters, see Settings for creating Multi-AZ DB clusters. This setting is required to create a Multi-AZ DB cluster. When specified for a Multi-AZ DB cluster, a value for the Iops parameter is required. Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters Valid Values:   Aurora DB clusters - aurora | aurora-iopt1    Multi-AZ DB clusters - io1    Default:   Aurora DB clusters - aurora    Multi-AZ DB clusters - io1   
+     * The storage type to associate with the DB cluster. For information on storage types for Aurora DB clusters, see Storage configurations for Amazon Aurora DB clusters. For information on storage types for Multi-AZ DB clusters, see Settings for creating Multi-AZ DB clusters. This setting is required to create a Multi-AZ DB cluster. When specified for a Multi-AZ DB cluster, a value for the Iops parameter is required. Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters Valid Values:   Aurora DB clusters - aurora | aurora-iopt1    Multi-AZ DB clusters - io1    Default:   Aurora DB clusters - aurora    Multi-AZ DB clusters - io1     When you create an Aurora DB cluster with the storage type set to aurora-iopt1, the storage type is returned in the response. The storage type isn't returned when you set it to aurora. 
      */
     StorageType?: String;
     /**
@@ -6131,20 +6139,28 @@ declare namespace RDS {
   }
   export interface FailoverGlobalClusterMessage {
     /**
-     * Identifier of the Aurora global database (GlobalCluster) that should be failed over. The identifier is the unique key assigned by the user when the Aurora global database was created. In other words, it's the name of the Aurora global database that you want to fail over. Constraints:   Must match the identifier of an existing GlobalCluster (Aurora global database).  
+     * The identifier of the global database cluster (Aurora global database) this operation should apply to. The identifier is the unique key assigned by the user when the Aurora global database is created. In other words, it's the name of the Aurora global database. Constraints:   Must match the identifier of an existing global database cluster.  
      */
     GlobalClusterIdentifier: GlobalClusterIdentifier;
     /**
-     * Identifier of the secondary Aurora DB cluster that you want to promote to primary for the Aurora global database (GlobalCluster.) Use the Amazon Resource Name (ARN) for the identifier so that Aurora can locate the cluster in its Amazon Web Services Region.
+     * The identifier of the secondary Aurora DB cluster that you want to promote to the primary for the global database cluster. Use the Amazon Resource Name (ARN) for the identifier so that Aurora can locate the cluster in its Amazon Web Services Region.
      */
     TargetDbClusterIdentifier: DBClusterIdentifier;
+    /**
+     * Specifies whether to allow data loss for this global database cluster operation. Allowing data loss triggers a global failover operation. If you don't specify AllowDataLoss, the global database cluster operation defaults to a switchover. Constraints:   Can't be specified together with the Switchover parameter.  
+     */
+    AllowDataLoss?: BooleanOptional;
+    /**
+     * Specifies whether to switch over this global database cluster. Constraints:   Can't be specified together with the AllowDataLoss parameter.  
+     */
+    Switchover?: BooleanOptional;
   }
   export interface FailoverGlobalClusterResult {
     GlobalCluster?: GlobalCluster;
   }
   export interface FailoverState {
     /**
-     * The current status of the Aurora global database (GlobalCluster). Possible values are as follows:   pending &#x96; A request to fail over the Aurora global database (GlobalCluster) has been received by the service. The GlobalCluster's primary DB cluster and the specified secondary DB cluster are being verified before the failover process can start.   failing-over &#x96; This status covers the range of Aurora internal operations that take place during the failover process, such as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB, and synchronizing replicas.   cancelling &#x96; The request to fail over the Aurora global database (GlobalCluster) was cancelled and the primary Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states.  
+     * The current status of the global cluster. Possible values are as follows:   pending &#x96; The service received a request to switch over or fail over the global cluster. The global cluster's primary DB cluster and the specified secondary DB cluster are being verified before the operation starts.   failing-over &#x96; This status covers the range of Aurora internal operations that take place during the switchover or failover process, such as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB cluster, and synchronizing replicas.   cancelling &#x96; The request to switch over or fail over the global cluster was cancelled and the primary Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states.  
      */
     Status?: FailoverStatus;
     /**
@@ -6155,6 +6171,10 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being promoted, and which is associated with this state.
      */
     ToDbClusterArn?: String;
+    /**
+     * Indicates whether the operation is a global switchover or a global failover. If data loss is allowed, then the operation is a global failover. Otherwise, it's a switchover.
+     */
+    IsDataLossAllowed?: Boolean;
   }
   export type FailoverStatus = "pending"|"failing-over"|"cancelling"|string;
   export type FeatureNameList = String[];
@@ -6212,7 +6232,7 @@ declare namespace RDS {
      */
     GlobalClusterMembers?: GlobalClusterMemberList;
     /**
-     * A data object containing all properties for the current state of an in-process or pending failover process for this Aurora global database. This object is empty unless the FailoverGlobalCluster API operation has been called on this Aurora global database (GlobalCluster).
+     * A data object containing all properties for the current state of an in-process or pending switchover or failover process for this global cluster (Aurora global database). This object is empty unless the SwitchoverGlobalCluster or FailoverGlobalCluster operation was called on this global cluster.
      */
     FailoverState?: FailoverState;
   }
@@ -6220,23 +6240,28 @@ declare namespace RDS {
   export type GlobalClusterList = GlobalCluster[];
   export interface GlobalClusterMember {
     /**
-     * The Amazon Resource Name (ARN) for each Aurora cluster.
+     * The Amazon Resource Name (ARN) for each Aurora DB cluster in the global cluster.
      */
     DBClusterArn?: String;
     /**
-     * The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global database.
+     * The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the global cluster.
      */
     Readers?: ReadersArnList;
     /**
-     * Specifies whether the Aurora cluster is the primary cluster (that is, has read-write capability) for the Aurora global database with which it is associated.
+     * Specifies whether the Aurora DB cluster is the primary cluster (that is, has read-write capability) for the global cluster with which it is associated.
      */
     IsWriter?: Boolean;
     /**
-     * Specifies whether a secondary cluster in an Aurora global database has write forwarding enabled, not enabled, or is in the process of enabling it.
+     * Specifies whether a secondary cluster in the global cluster has write forwarding enabled, not enabled, or is in the process of enabling it.
      */
     GlobalWriteForwardingStatus?: WriteForwardingStatus;
+    /**
+     * The status of synchronization of each Aurora DB cluster in the global cluster.
+     */
+    SynchronizationStatus?: GlobalClusterMemberSynchronizationStatus;
   }
   export type GlobalClusterMemberList = GlobalClusterMember[];
+  export type GlobalClusterMemberSynchronizationStatus = "connected"|"pending-resync"|string;
   export interface GlobalClustersMessage {
     /**
      * An optional pagination token provided by a previous DescribeGlobalClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
@@ -9320,6 +9345,19 @@ declare namespace RDS {
   }
   export type SwitchoverDetailList = SwitchoverDetail[];
   export type SwitchoverDetailStatus = string;
+  export interface SwitchoverGlobalClusterMessage {
+    /**
+     * The identifier of the global database cluster to switch over. This parameter isn't case-sensitive. Constraints:   Must match the identifier of an existing global database cluster (Aurora global database).  
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The identifier of the secondary Aurora DB cluster to promote to the new primary for the global database cluster. Use the Amazon Resource Name (ARN) for the identifier so that Aurora can locate the cluster in its Amazon Web Services Region.
+     */
+    TargetDbClusterIdentifier: DBClusterIdentifier;
+  }
+  export interface SwitchoverGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface SwitchoverReadReplicaMessage {
     /**
      * The DB instance identifier of the current standby database. This value is stored as a lowercase string. Constraints:   Must match the identiﬁer of an existing Oracle read replica DB instance.  

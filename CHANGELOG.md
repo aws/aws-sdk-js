@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1440.0-->
+<!--LATEST=2.1441.0-->
 <!--ENTRYINSERT-->
+
+## 2.1441.0
+* feature: EC2: The DeleteKeyPair API has been updated to return the keyPairId when an existing key pair is deleted.
+* feature: Finspace: Allow customers to manage outbound traffic from their Kx Environment when attaching a transit gateway by providing network acl entries. Allow the customer to choose how they want to update the databases on a cluster allowing updates to possibly be faster than usual.
+* feature: RDS: Adding support for RDS Aurora Global Database Unplanned Failover
 
 ## 2.1440.0
 * feature: CodeCommit: Add new ListFileCommitHistory operation to retrieve commits which introduced changes to a specific file.

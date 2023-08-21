@@ -1247,11 +1247,11 @@ declare class EC2 extends Service {
   /**
    * Deletes the specified key pair, by removing the public key from Amazon EC2.
    */
-  deleteKeyPair(params: EC2.Types.DeleteKeyPairRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteKeyPair(params: EC2.Types.DeleteKeyPairRequest, callback?: (err: AWSError, data: EC2.Types.DeleteKeyPairResult) => void): Request<EC2.Types.DeleteKeyPairResult, AWSError>;
   /**
    * Deletes the specified key pair, by removing the public key from Amazon EC2.
    */
-  deleteKeyPair(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteKeyPair(callback?: (err: AWSError, data: EC2.Types.DeleteKeyPairResult) => void): Request<EC2.Types.DeleteKeyPairResult, AWSError>;
   /**
    * Deletes a launch template. Deleting a launch template deletes all of its versions.
    */
@@ -11962,6 +11962,16 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+  }
+  export interface DeleteKeyPairResult {
+    /**
+     * Is true if the request succeeds, and an error otherwise.
+     */
+    Return?: Boolean;
+    /**
+     * The ID of the key pair.
+     */
+    KeyPairId?: String;
   }
   export interface DeleteLaunchTemplateRequest {
     /**

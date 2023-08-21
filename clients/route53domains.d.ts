@@ -925,7 +925,7 @@ declare namespace Route53Domains {
      */
     SortBy?: ListOperationsSortAttributeName;
     /**
-     *  The sort order ofr returned values, either ascending or descending. 
+     *  The sort order for returned values, either ascending or descending. 
      */
     SortOrder?: SortOrder;
   }

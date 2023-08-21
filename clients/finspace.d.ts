@@ -496,7 +496,7 @@ declare namespace Finspace {
      */
     clusterDescription?: KxClusterDescription;
     /**
-     * A structure for the metadata of a cluster. It includes information about like the CPUs needed, memory of instances, number of instances, and the port used while establishing a connection.
+     * A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.
      */
     capacityConfiguration: CapacityConfiguration;
     /**
@@ -578,7 +578,7 @@ declare namespace Finspace {
      */
     clusterDescription?: KxClusterDescription;
     /**
-     * A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, number of instances, and the port used while establishing a connection.
+     * A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.
      */
     capacityConfiguration?: CapacityConfiguration;
     /**
@@ -1053,7 +1053,7 @@ declare namespace Finspace {
      */
     clusterDescription?: KxClusterDescription;
     /**
-     * A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, number of instances, and the port used while establishing a connection.
+     * A structure for the metadata of a cluster. It includes information like the CPUs needed, memory of instances, and number of instances.
      */
     capacityConfiguration?: CapacityConfiguration;
     /**
@@ -1275,6 +1275,17 @@ declare namespace Finspace {
     iamRole?: RoleArn;
   }
   export type IPAddressType = "IP_V4"|string;
+  export interface IcmpTypeCode {
+    /**
+     * The ICMP type. A value of -1 means all types. 
+     */
+    type: IcmpTypeOrCode;
+    /**
+     *  The ICMP code. A value of -1 means all codes for the specified ICMP type. 
+     */
+    code: IcmpTypeOrCode;
+  }
+  export type IcmpTypeOrCode = number;
   export type IdType = string;
   export type InitializationScriptFilePath = string;
   export type KmsKeyARN = string;
@@ -1350,7 +1361,7 @@ declare namespace Finspace {
      */
     executionRole?: ExecutionRoleArn;
     /**
-     * The number of availability zones assigned per cluster. This can be one of the following     SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
+     * The number of availability zones assigned per cluster. This can be one of the following:    SINGLE – Assigns one availability zone per cluster.    MULTI – Assigns all the availability zones per cluster.  
      */
     azMode?: KxAzMode;
     /**
@@ -1427,6 +1438,13 @@ declare namespace Finspace {
     lastModifiedTimestamp?: Timestamp;
   }
   export type KxDatabases = KxDatabaseListEntry[];
+  export interface KxDeploymentConfiguration {
+    /**
+     *  The type of deployment that you want on a cluster.    ROLLING – This options loads the updated database by stopping the exiting q process and starting a new q process with updated configuration.   NO_RESTART – This option loads the updated database on the running q process without stopping it. This option is quicker as it reduces the turn around time to update a kdb database changeset configuration on a cluster.  
+     */
+    deploymentStrategy: KxDeploymentStrategy;
+  }
+  export type KxDeploymentStrategy = "NO_RESTART"|"ROLLING"|string;
   export interface KxEnvironment {
     /**
      * The name of the kdb environment.
@@ -1521,7 +1539,7 @@ declare namespace Finspace {
      */
     type: KxSavedownStorageType;
     /**
-     * The size of temporary storage in bytes.
+     * The size of temporary storage in gibibytes.
      */
     size: KxSavedownStorageSize;
   }
@@ -1738,12 +1756,53 @@ declare namespace Finspace {
   }
   export type MaxResults = number;
   export type NameString = string;
+  export type NetworkACLConfiguration = NetworkACLEntry[];
+  export interface NetworkACLEntry {
+    /**
+     *  The rule number for the entry. For example 100. All the network ACL entries are processed in ascending order by rule number. 
+     */
+    ruleNumber: RuleNumber;
+    /**
+     *  The protocol number. A value of -1 means all the protocols. 
+     */
+    protocol: Protocol;
+    /**
+     *  Indicates whether to allow or deny the traffic that matches the rule. 
+     */
+    ruleAction: RuleAction;
+    /**
+     *  The range of ports the rule applies to. 
+     */
+    portRange?: PortRange;
+    /**
+     *  Defines the ICMP protocol that consists of the ICMP type and code. 
+     */
+    icmpTypeCode?: IcmpTypeCode;
+    /**
+     *  The IPv4 network range to allow or deny, in CIDR notation. For example, 172.16.0.0/24. We modify the specified CIDR block to its canonical form. For example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18. 
+     */
+    cidrBlock: ValidCIDRBlock;
+  }
   export type NodeCount = number;
   export type NodeType = string;
   export type PaginationToken = string;
+  export type Port = number;
+  export interface PortRange {
+    /**
+     *  The first port in the range. 
+     */
+    from: Port;
+    /**
+     *  The last port in the range. 
+     */
+    to: Port;
+  }
+  export type Protocol = string;
   export type ReleaseLabel = string;
   export type ResultLimit = number;
   export type RoleArn = string;
+  export type RuleAction = "allow"|"deny"|string;
+  export type RuleNumber = number;
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3ObjectVersion = string;
@@ -1795,6 +1854,10 @@ declare namespace Finspace {
      * The routing CIDR on behalf of kdb environment. It could be any "/26 range in the 100.64.0.0 CIDR space. After providing, it will be added to the customer's transit gateway routing table so that the traffics could be routed to kdb network.
      */
     routableCIDRSpace: ValidCIDRSpace;
+    /**
+     *  The rules that define how you manage the outbound traffic from kdb network to your internal network. 
+     */
+    attachmentNetworkAclConfiguration?: NetworkACLConfiguration;
   }
   export type TransitGatewayID = string;
   export interface UntagResourceRequest {
@@ -1851,6 +1914,10 @@ declare namespace Finspace {
      *  The structure of databases mounted on the cluster.
      */
     databases: KxDatabaseConfigurations;
+    /**
+     *  The configuration that allows you to choose how you want to update the databases on a cluster. 
+     */
+    deploymentConfiguration?: KxDeploymentConfiguration;
   }
   export interface UpdateKxClusterDatabasesResponse {
   }
@@ -2088,6 +2155,7 @@ declare namespace Finspace {
      */
     iamRole?: RoleArn;
   }
+  export type ValidCIDRBlock = string;
   export type ValidCIDRSpace = string;
   export type ValidHostname = string;
   export type ValidIPAddress = string;
