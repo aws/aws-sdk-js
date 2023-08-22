@@ -5105,6 +5105,14 @@
         },
         "Tags": {
           "shape": "TagList"
+        },
+        "SourceCustomDbEngineVersionIdentifier": {
+          "shape": "String255",
+          "documentation": "<p>Reserved for future use.</p>"
+        },
+        "UseAwsProvidedLatestImage": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Reserved for future use.</p>"
         }
       }
     },

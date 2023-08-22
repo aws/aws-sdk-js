@@ -1122,7 +1122,7 @@ declare namespace GlobalAccelerator {
      */
     Weight?: EndpointWeight;
     /**
-     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers and Amazon EC2 instances. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
+     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers, Amazon EC2 instances, and Network Load Balancers with Security Groups. IMPORTANT: You cannot use client IP address preservation with Network Load Balancers with TLS listeners. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
      */
     ClientIPPreservationEnabled?: GenericBoolean;
   }
@@ -1145,7 +1145,7 @@ declare namespace GlobalAccelerator {
      */
     HealthReason?: GenericString;
     /**
-     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers and Amazon EC2 instances. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
+     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers, Amazon EC2 instances, and Network Load Balancers with Security Groups. IMPORTANT: You cannot use client IP address preservation with Network Load Balancers with TLS listeners. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
      */
     ClientIPPreservationEnabled?: GenericBoolean;
   }

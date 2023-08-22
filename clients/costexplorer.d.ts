@@ -164,11 +164,11 @@ declare class CostExplorer extends Service {
    */
   getRightsizingRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetRightsizingRecommendationResponse) => void): Request<CostExplorer.Types.GetRightsizingRecommendationResponse, AWSError>;
   /**
-   * Retrieves the details for a Savings Plan recommendation. These details include the hourly data-points that construct the new cost, coverage, and utilization charts.
+   * Retrieves the details for a Savings Plan recommendation. These details include the hourly data-points that construct the cost, coverage, and utilization charts.
    */
   getSavingsPlanPurchaseRecommendationDetails(params: CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsResponse) => void): Request<CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsResponse, AWSError>;
   /**
-   * Retrieves the details for a Savings Plan recommendation. These details include the hourly data-points that construct the new cost, coverage, and utilization charts.
+   * Retrieves the details for a Savings Plan recommendation. These details include the hourly data-points that construct the cost, coverage, and utilization charts.
    */
   getSavingsPlanPurchaseRecommendationDetails(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsResponse) => void): Request<CostExplorer.Types.GetSavingsPlanPurchaseRecommendationDetailsResponse, AWSError>;
   /**
@@ -470,6 +470,14 @@ declare namespace CostExplorer {
      * The status of a cost allocation tag. 
      */
     Status: CostAllocationTagStatus;
+    /**
+     * The last date that the tag was either activated or deactivated.
+     */
+    LastUpdatedDate?: ZonedDateTime;
+    /**
+     * The last month that the tag was used on an Amazon Web Services resource.
+     */
+    LastUsedDate?: ZonedDateTime;
   }
   export type CostAllocationTagKeyList = TagKey[];
   export type CostAllocationTagList = CostAllocationTag[];

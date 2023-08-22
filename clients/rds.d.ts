@@ -1814,6 +1814,14 @@ declare namespace RDS {
      */
     Manifest?: CustomDBEngineVersionManifest;
     Tags?: TagList;
+    /**
+     * Reserved for future use.
+     */
+    SourceCustomDbEngineVersionIdentifier?: String255;
+    /**
+     * Reserved for future use.
+     */
+    UseAwsProvidedLatestImage?: BooleanOptional;
   }
   export interface CreateDBClusterEndpointMessage {
     /**

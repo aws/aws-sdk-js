@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1441.0-->
+<!--LATEST=2.1442.0-->
 <!--ENTRYINSERT-->
+
+## 2.1442.0
+* feature: CostExplorer: This release adds the LastUpdatedDate and LastUsedDate timestamps to help you manage your cost allocation tags.
+* feature: RDS: Adding parameters to CreateCustomDbEngineVersion reserved for future use.
+* feature: VerifiedPermissions: Documentation updates for Amazon Verified Permissions. Increases max results per page for ListPolicyStores, ListPolicies, and ListPolicyTemplates APIs from 20 to 50.
 
 ## 2.1441.0
 * feature: EC2: The DeleteKeyPair API has been updated to return the keyPairId when an existing key pair is deleted.
