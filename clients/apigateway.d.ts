@@ -1015,7 +1015,7 @@ declare namespace APIGateway {
      */
     name?: String;
     /**
-     * An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.
+     * An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.
      */
     customerId?: String;
     /**
@@ -1234,7 +1234,7 @@ declare namespace APIGateway {
      */
     stageKeys?: ListOfStageKeys;
     /**
-     * An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.
+     * An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.
      */
     customerId?: String;
     /**
@@ -1394,7 +1394,7 @@ declare namespace APIGateway {
      */
     certificateChain?: String;
     /**
-     * The reference to an AWS-managed certificate that will be used by edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
+     * The reference to an Amazon Web Services-managed certificate that will be used by edge-optimized endpoint for this domain name. Certificate Manager is the only supported source.
      */
     certificateArn?: String;
     /**
@@ -1402,7 +1402,7 @@ declare namespace APIGateway {
      */
     regionalCertificateName?: String;
     /**
-     * The reference to an AWS-managed certificate that will be used by regional endpoint for this domain name. AWS Certificate Manager is the only supported source.
+     * The reference to an Amazon Web Services-managed certificate that will be used by regional endpoint for this domain name. Certificate Manager is the only supported source.
      */
     regionalCertificateArn?: String;
     /**
@@ -1503,7 +1503,7 @@ declare namespace APIGateway {
      */
     minimumCompressionSize?: NullableInteger;
     /**
-     * The source of the API key for metering requests according to a usage plan. Valid values are: &gt;HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer.
+     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer.
      */
     apiKeySource?: ApiKeySourceType;
     /**
@@ -1619,7 +1619,7 @@ declare namespace APIGateway {
      */
     description?: String;
     /**
-     * The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
+     * The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same Amazon Web Services account of the API owner.
      */
     targetArns: ListOfString;
     /**
@@ -1962,7 +1962,7 @@ declare namespace APIGateway {
      */
     certificateName?: String;
     /**
-     * The reference to an AWS-managed certificate that will be used by edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
+     * The reference to an Amazon Web Services-managed certificate that will be used by edge-optimized endpoint for this domain name. Certificate Manager is the only supported source.
      */
     certificateArn?: String;
     /**
@@ -1982,7 +1982,7 @@ declare namespace APIGateway {
      */
     regionalCertificateName?: String;
     /**
-     * The reference to an AWS-managed certificate that will be used for validating the regional domain name. AWS Certificate Manager is the only supported source.
+     * The reference to an Amazon Web Services-managed certificate that will be used for validating the regional domain name. Certificate Manager is the only supported source.
      */
     regionalCertificateArn?: String;
     /**
@@ -2142,7 +2142,7 @@ declare namespace APIGateway {
      */
     nameQuery?: String;
     /**
-     * The identifier of a customer in AWS Marketplace or an external system, such as a developer portal.
+     * The identifier of a customer in Amazon Web Services Marketplace or an external system, such as a developer portal.
      */
     customerId?: String;
     /**
@@ -2720,7 +2720,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * A query parameter to indicate whether to overwrite (OVERWRITE) any existing DocumentationParts definition or to merge (MERGE) the new definition into the existing one. The default value is MERGE.
+     * A query parameter to indicate whether to overwrite (overwrite) any existing DocumentationParts definition or to merge (merge) the new definition into the existing one. The default value is merge.
      */
     mode?: PutMode;
     /**
@@ -2738,7 +2738,7 @@ declare namespace APIGateway {
      */
     failOnWarnings?: Boolean;
     /**
-     * A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.  To exclude DocumentationParts from the import, set parameters as ignore=documentation.  To configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE, endpointConfigurationTypes=REGIONAL, or endpointConfigurationTypes=PRIVATE. The default endpoint type is EDGE.  To handle imported basepath, set parameters as basepath=ignore, basepath=prepend or basepath=split. For example, the AWS CLI command to exclude documentation from the imported API is: The AWS CLI command to set the regional endpoint on the imported API is:
+     * A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.  To exclude DocumentationParts from the import, set parameters as ignore=documentation.  To configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE, endpointConfigurationTypes=REGIONAL, or endpointConfigurationTypes=PRIVATE. The default endpoint type is EDGE.  To handle imported basepath, set parameters as basepath=ignore, basepath=prepend or basepath=split.
      */
     parameters?: MapOfStringToString;
     /**
@@ -2753,11 +2753,11 @@ declare namespace APIGateway {
      */
     type?: IntegrationType;
     /**
-     * Specifies the integration's HTTP method type.
+     * Specifies the integration's HTTP method type. For the Type property, if you specify MOCK, this property is optional. For Lambda integrations, you must set the integration method to POST. For all other types, you must specify this property.
      */
     httpMethod?: String;
     /**
-     * Specifies Uniform Resource Identifier (URI) of the integration endpoint. For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing. For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated Amazon Web Services service (e.g., s3); and {subdomain} is a designated subdomain supported by certain Amazon Web Services service for fast host-name lookup. action can be used for an Amazon Web Services service action-based API, using an Action={name}&amp;{p1}={v1}&amp;p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an Amazon Web Services service resource, including the region of the integrated Amazon Web Services service, if applicable. For example, for integration with the S3 API of GetObject, the uri can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&amp;Bucket={bucket}&amp;Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key} 
+     * Specifies Uniform Resource Identifier (URI) of the integration endpoint. For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification for standard integrations. If connectionType is VPC_LINK specify the Network Load Balancer DNS name. For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated Amazon Web Services service (e.g., s3); and {subdomain} is a designated subdomain supported by certain Amazon Web Services service for fast host-name lookup. action can be used for an Amazon Web Services service action-based API, using an Action={name}&amp;{p1}={v1}&amp;p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an Amazon Web Services service path-based API. The ensuing service_api refers to the path to an Amazon Web Services service resource, including the region of the integrated Amazon Web Services service, if applicable. For example, for integration with the S3 API of GetObject, the uri can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&amp;Bucket={bucket}&amp;Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key} 
      */
     uri?: String;
     /**
@@ -2769,7 +2769,7 @@ declare namespace APIGateway {
      */
     connectionId?: String;
     /**
-     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*. To use resource-based permissions on supported AWS services, specify null.
+     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*. To use resource-based permissions on supported Amazon Web Services services, specify null.
      */
     credentials?: String;
     /**
@@ -2815,7 +2815,7 @@ declare namespace APIGateway {
      */
     statusCode?: StatusCode;
     /**
-     * Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the .+ regex to match error response. However, make sure that the error response does not contain any newline (\n) character in such cases. If the back end is an AWS Lambda function, the AWS Lambda function error header is matched. For all other HTTP and AWS back ends, the HTTP status code is matched.
+     * Specifies the regular expression (regex) pattern used to choose an integration response based on the response from the back end. For example, if the success response returns nothing and the error response returns some string, you could use the .+ regex to match error response. However, make sure that the error response does not contain any newline (\n) character in such cases. If the back end is an Lambda function, the Lambda function error header is matched. For all other HTTP and Amazon Web Services back ends, the HTTP status code is matched.
      */
     selectionPattern?: String;
     /**
@@ -2933,43 +2933,43 @@ declare namespace APIGateway {
   }
   export interface MethodSetting {
     /**
-     * Specifies whether Amazon CloudWatch metrics are enabled for this method. The PATCH path for this setting is /{method_setting_key}/metrics/enabled, and the value is a Boolean.
+     * Specifies whether Amazon CloudWatch metrics are enabled for this method.
      */
     metricsEnabled?: Boolean;
     /**
-     * Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/loglevel, and the available levels are OFF, ERROR, and INFO. Choose ERROR to write only error-level entries to CloudWatch Logs, or choose INFO to include all ERROR events as well as extra informational events.
+     * Specifies the logging level for this method, which affects the log entries pushed to Amazon CloudWatch Logs. Valid values are OFF, ERROR, and INFO. Choose ERROR to write only error-level entries to CloudWatch Logs, or choose INFO to include all ERROR events as well as extra informational events.
      */
     loggingLevel?: String;
     /**
-     * Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
+     * Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs.
      */
     dataTraceEnabled?: Boolean;
     /**
-     * Specifies the throttling burst limit. The PATCH path for this setting is /{method_setting_key}/throttling/burstLimit, and the value is an integer.
+     * Specifies the throttling burst limit.
      */
     throttlingBurstLimit?: Integer;
     /**
-     * Specifies the throttling rate limit. The PATCH path for this setting is /{method_setting_key}/throttling/rateLimit, and the value is a double.
+     * Specifies the throttling rate limit.
      */
     throttlingRateLimit?: Double;
     /**
-     * Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached. The PATCH path for this setting is /{method_setting_key}/caching/enabled, and the value is a Boolean.
+     * Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached.
      */
     cachingEnabled?: Boolean;
     /**
-     * Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached. The PATCH path for this setting is /{method_setting_key}/caching/ttlInSeconds, and the value is an integer.
+     * Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached.
      */
     cacheTtlInSeconds?: Integer;
     /**
-     * Specifies whether the cached responses are encrypted. The PATCH path for this setting is /{method_setting_key}/caching/dataEncrypted, and the value is a Boolean.
+     * Specifies whether the cached responses are encrypted.
      */
     cacheDataEncrypted?: Boolean;
     /**
-     * Specifies whether authorization is required for a cache invalidation request. The PATCH path for this setting is /{method_setting_key}/caching/requireAuthorizationForCacheControl, and the value is a Boolean.
+     * Specifies whether authorization is required for a cache invalidation request.
      */
     requireAuthorizationForCacheControl?: Boolean;
     /**
-     * Specifies how to handle unauthorized requests for cache invalidation. The PATCH path for this setting is /{method_setting_key}/caching/unauthorizedCacheControlHeaderStrategy, and the available values are FAIL_WITH_403, SUCCEED_WITH_RESPONSE_HEADER, SUCCEED_WITHOUT_RESPONSE_HEADER.
+     * Specifies how to handle unauthorized requests for cache invalidation.
      */
     unauthorizedCacheControlHeaderStrategy?: UnauthorizedCacheControlHeaderStrategy;
   }
@@ -3399,6 +3399,10 @@ declare namespace APIGateway {
      * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
      */
     disableExecuteApiEndpoint?: Boolean;
+    /**
+     * The API's root resource ID.
+     */
+    rootResourceId?: String;
   }
   export interface RestApis {
     position?: String;
@@ -3623,7 +3627,7 @@ declare namespace APIGateway {
      */
     log?: String;
     /**
-     * The execution latency of the test authorizer request.
+     * The execution latency, in ms, of the test authorizer request.
      */
     latency?: Long;
     /**
@@ -3703,7 +3707,7 @@ declare namespace APIGateway {
      */
     log?: String;
     /**
-     * The execution latency of the test invoke request.
+     * The execution latency, in ms, of the test invoke request.
      */
     latency?: Long;
   }
@@ -3819,7 +3823,7 @@ declare namespace APIGateway {
   }
   export interface UpdateDocumentationVersionRequest {
     /**
-     * The string identifier of the associated RestApi..
+     * The string identifier of the associated RestApi.
      */
     restApiId: String;
     /**
@@ -4080,7 +4084,7 @@ declare namespace APIGateway {
      */
     quota?: QuotaSettings;
     /**
-     * The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
+     * The Amazon Web Services Marketplace product identifier to associate with the usage plan as a SaaS product on the Amazon Web Services Marketplace.
      */
     productCode?: String;
     /**
@@ -4134,7 +4138,7 @@ declare namespace APIGateway {
      */
     description?: String;
     /**
-     * The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same AWS account of the API owner.
+     * The ARN of the network load balancer of the VPC targeted by the VPC link. The network load balancer must be owned by the same Amazon Web Services account of the API owner.
      */
     targetArns?: ListOfString;
     /**

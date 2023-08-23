@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1442.0-->
+<!--LATEST=2.1443.0-->
 <!--ENTRYINSERT-->
+
+## 2.1443.0
+* feature: APIGateway: This release adds RootResourceId to GetRestApi response.
+* feature: EC2: Marking fields as sensitive on BundleTask and GetPasswordData
+* feature: Polly: Amazon Polly adds 1 new voice - Zayd (ar-AE)
 
 ## 2.1442.0
 * feature: CostExplorer: This release adds the LastUpdatedDate and LastUsedDate timestamps to help you manage your cost allocation tags.

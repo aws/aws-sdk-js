@@ -21264,7 +21264,7 @@ declare namespace EC2 {
     /**
      * The password of the instance. Returns an empty string if the password is not available.
      */
-    PasswordData?: String;
+    PasswordData?: PasswordData;
     /**
      * The time the data was last updated.
      */
@@ -29823,6 +29823,7 @@ declare namespace EC2 {
     Protocols?: ProtocolList;
   }
   export type PartitionLoadFrequency = "none"|"daily"|"weekly"|"monthly"|string;
+  export type PasswordData = string;
   export interface PathComponent {
     /**
      * The sequence number.
@@ -33106,8 +33107,9 @@ declare namespace EC2 {
     /**
      * The signature of the JSON document.
      */
-    UploadPolicySignature?: String;
+    UploadPolicySignature?: S3StorageUploadPolicySignature;
   }
+  export type S3StorageUploadPolicySignature = string;
   export type SSEType = "sse-ebs"|"sse-kms"|"none"|string;
   export interface ScheduledInstance {
     /**
