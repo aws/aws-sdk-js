@@ -646,6 +646,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   }
   export type AacSpec = "MPEG2"|"MPEG4"|string;
   export type AacVbrQuality = "HIGH"|"LOW"|"MEDIUM_HIGH"|"MEDIUM_LOW"|string;
+  export type Ac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
   export type Ac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"DIALOGUE"|"EMERGENCY"|"HEARING_IMPAIRED"|"MUSIC_AND_EFFECTS"|"VISUALLY_IMPAIRED"|"VOICE_OVER"|string;
   export type Ac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_3_2_LFE"|string;
   export type Ac3DrcProfile = "FILM_STANDARD"|"NONE"|string;
@@ -680,6 +681,10 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      * When set to "followInput", encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.
      */
     MetadataControl?: Ac3MetadataControl;
+    /**
+     * Applies a 3 dB attenuation to the surround channels. Applies only when the coding mode parameter is CODING_MODE_3_2_LFE.
+     */
+    AttenuationControl?: Ac3AttenuationControl;
   }
   export interface AcceptInputDeviceTransferRequest {
     /**
@@ -3873,6 +3878,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
   export type IFrameOnlyPlaylistType = "DISABLED"|"STANDARD"|string;
   export interface ImmediateModeScheduleActionStartSettings {
   }
+  export type IncludeFillerNalUnits = "AUTO"|"DROP"|"INCLUDE"|string;
   export interface Input {
     /**
      * The Unique ARN of the input (generated, immutable).
@@ -4883,6 +4889,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
     Scte35PrerollPullupMilliseconds?: __doubleMin0Max5000;
   }
   export type M2tsTimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type M3u8KlvBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export type M3u8NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export type M3u8PcrControl = "CONFIGURED_PCR_PERIOD"|"PCR_EVERY_PES_PACKET"|string;
   export type M3u8Scte35Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
@@ -4955,6 +4962,14 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      * Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.
      */
     VideoPid?: __string;
+    /**
+     * If set to passthrough, passes any KLV data from the input source to this output.
+     */
+    KlvBehavior?: M3u8KlvBehavior;
+    /**
+     * Packet Identifier (PID) for input source KLV data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation. Can be entered as decimal or hexadecimal values.  Each PID specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
+     */
+    KlvDataPids?: __string;
   }
   export type M3u8TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
   export interface MaintenanceCreateSettings {
@@ -6004,6 +6019,10 @@ Valid values: 1, 2, 4, 6, 8
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */
     RestartDelay?: __integerMin0;
+    /**
+     * Applies only when the rate control mode (in the codec settings) is CBR (constant bit rate). Controls whether the RTMP output stream is padded (with FILL NAL units) in order to achieve a constant bit rate that is truly constant. When there is no padding, the bandwidth varies (up to the bitrate value in the codec settings). We recommend that you choose Auto.
+     */
+    IncludeFillerNalUnits?: IncludeFillerNalUnits;
   }
   export type RtmpOutputCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string;
   export interface RtmpOutputSettings {

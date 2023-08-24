@@ -108,11 +108,11 @@ declare class MediaConvert extends Service {
    */
   disassociateCertificate(callback?: (err: AWSError, data: MediaConvert.Types.DisassociateCertificateResponse) => void): Request<MediaConvert.Types.DisassociateCertificateResponse, AWSError>;
   /**
-   * Retrieve the JSON for a specific completed transcoding job.
+   * Retrieve the JSON for a specific transcoding job.
    */
   getJob(params: MediaConvert.Types.GetJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetJobResponse) => void): Request<MediaConvert.Types.GetJobResponse, AWSError>;
   /**
-   * Retrieve the JSON for a specific completed transcoding job.
+   * Retrieve the JSON for a specific transcoding job.
    */
   getJob(callback?: (err: AWSError, data: MediaConvert.Types.GetJobResponse) => void): Request<MediaConvert.Types.GetJobResponse, AWSError>;
   /**
@@ -407,14 +407,14 @@ declare namespace MediaConvert {
   }
   export interface AssociateCertificateResponse {
   }
-  export type AudioChannelTag = "L"|"R"|"C"|"LFE"|"LS"|"RS"|"LC"|"RC"|"CS"|"LSD"|"RSD"|"TCS"|"VHL"|"VHC"|"VHR"|string;
+  export type AudioChannelTag = "L"|"R"|"C"|"LFE"|"LS"|"RS"|"LC"|"RC"|"CS"|"LSD"|"RSD"|"TCS"|"VHL"|"VHC"|"VHR"|"TBL"|"TBC"|"TBR"|"RSL"|"RSR"|"LW"|"RW"|"LFE2"|"LT"|"RT"|"HI"|"NAR"|"M"|string;
   export interface AudioChannelTaggingSettings {
     /**
      * You can add a tag for this mono-channel audio track to mimic its placement in a multi-channel layout. For example, if this track is the left surround channel, choose Left surround (LS).
      */
     ChannelTag?: AudioChannelTag;
   }
-  export type AudioCodec = "AAC"|"MP2"|"MP3"|"WAV"|"AIFF"|"AC3"|"EAC3"|"EAC3_ATMOS"|"VORBIS"|"OPUS"|"PASSTHROUGH"|string;
+  export type AudioCodec = "AAC"|"MP2"|"MP3"|"WAV"|"AIFF"|"AC3"|"EAC3"|"EAC3_ATMOS"|"VORBIS"|"OPUS"|"PASSTHROUGH"|"FLAC"|string;
   export interface AudioCodecSettings {
     /**
      * Required when you set Codec to the value AAC. The service accepts one of two mutually exclusive groups of AAC settings--VBR and CBR. To select one of these modes, set the value of Bitrate control mode to "VBR" or "CBR". In VBR mode, you control the audio quality with the setting VBR quality. In CBR mode, you use the setting Bitrate. Defaults and valid values depend on the rate control mode.
@@ -440,6 +440,10 @@ declare namespace MediaConvert {
      * Required when you set Codec to the value EAC3.
      */
     Eac3Settings?: Eac3Settings;
+    /**
+     * Required when you set Codec, under AudioDescriptions>CodecSettings, to the value FLAC.
+     */
+    FlacSettings?: FlacSettings;
     /**
      * Required when you set Codec to the value MP2.
      */
@@ -626,7 +630,7 @@ declare namespace MediaConvert {
   }
   export interface AutomatedAbrSettings {
     /**
-     * Optional. The maximum target bit rate used in your automated ABR stack. Use this value to set an upper limit on the bandwidth consumed by the highest-quality rendition. This is the rendition that is delivered to viewers with the fastest internet connections. If you don't specify a value, MediaConvert uses 8,000,000 (8 mb/s) by default.
+     * Specify the maximum average bitrate for MediaConvert to use in your automated ABR stack. If you don't specify a value, MediaConvert uses 8,000,000 (8 mb/s) by default. The average bitrate of your highest-quality rendition will be equal to or below this value, depending on the quality, complexity, and resolution of your content. Note that the instantaneous maximum bitrate may vary above the value that you specify.
      */
     MaxAbrBitrate?: __integerMin100000Max100000000;
     /**
@@ -634,7 +638,7 @@ declare namespace MediaConvert {
      */
     MaxRenditions?: __integerMin3Max15;
     /**
-     * Optional. The minimum target bitrate used in your automated ABR stack. Use this value to set a lower limit on the bitrate of video delivered to viewers with slow internet connections. If you don't specify a value, MediaConvert uses 600,000 (600 kb/s) by default.
+     * Specify the minimum average bitrate for MediaConvert to use in your automated ABR stack. If you don't specify a value, MediaConvert uses 600,000 (600 kb/s) by default. The average bitrate of your lowest-quality rendition will be near this value. Note that the instantaneous minimum bitrate may vary below the value that you specify.
      */
     MinAbrBitrate?: __integerMin100000Max100000000;
     /**
@@ -650,6 +654,7 @@ declare namespace MediaConvert {
   }
   export type Av1AdaptiveQuantization = "OFF"|"LOW"|"MEDIUM"|"HIGH"|"HIGHER"|"MAX"|string;
   export type Av1BitDepth = "BIT_8"|"BIT_10"|string;
+  export type Av1FilmGrainSynthesis = "DISABLED"|"ENABLED"|string;
   export type Av1FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
   export interface Av1QvbrSettings {
@@ -672,6 +677,10 @@ declare namespace MediaConvert {
      * Specify the Bit depth. You can choose 8-bit or 10-bit.
      */
     BitDepth?: Av1BitDepth;
+    /**
+     * Film grain synthesis replaces film grain present in your content with similar quality synthesized AV1 film grain. We recommend that you choose Enabled to reduce the bandwidth of your QVBR quality level 5, 6, 7, or 8 outputs. For QVBR quality level 9 or 10 outputs we recommend that you keep the default value, Disabled. When you include Film grain synthesis, you cannot include the Noise reducer preprocessor.
+     */
+    FilmGrainSynthesis?: Av1FilmGrainSynthesis;
     /**
      * Use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction.
      */
@@ -2316,6 +2325,20 @@ Within your job settings, all of your DVB-Sub settings must be identical.
     TimeDeltaUnits?: FileSourceTimeDeltaUnits;
   }
   export type FileSourceTimeDeltaUnits = "SECONDS"|"MILLISECONDS"|string;
+  export interface FlacSettings {
+    /**
+     * Specify Bit depth (BitDepth), in bits per sample, to choose the encoding quality for this audio track.
+     */
+    BitDepth?: __integerMin16Max24;
+    /**
+     * Specify the number of channels in this output audio track. Choosing Mono on the console gives you 1 output channel; choosing Stereo gives you 2. In the API, valid values are between 1 and 8.
+     */
+    Channels?: __integerMin1Max8;
+    /**
+     * Sample rate in hz.
+     */
+    SampleRate?: __integerMin22050Max48000;
+  }
   export type FontScript = "AUTOMATIC"|"HANS"|"HANT"|string;
   export interface ForceIncludeRenditionSize {
     /**
@@ -4090,6 +4113,14 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ProgramNumber?: __integerMin0Max65535;
     /**
+     * Manually specify the initial PTS offset, in seconds, when you set PTS offset to Seconds. Enter an integer from 0 to 3600. Leave blank to keep the default value 2.
+     */
+    PtsOffset?: __integerMin0Max3600;
+    /**
+     * Specify the initial presentation timestamp (PTS) offset for your transport stream output. To let MediaConvert automatically determine the initial PTS offset: Keep the default value, Auto. We recommend that you choose Auto for the widest player compatibility. The initial PTS will be at least two seconds and vary depending on your output's bitrate, HRD buffer size and HRD buffer initial fill percentage. To manually specify an initial PTS offset: Choose Seconds. Then specify the number of seconds with PTS offset.
+     */
+    PtsOffsetMode?: TsPtsOffset;
+    /**
      * When set to CBR, inserts null packets into transport stream to fill specified bitrate. When set to VBR, the bitrate setting acts as the maximum bitrate, but the output will not be padded up to that bitrate.
      */
     RateMode?: M2tsRateMode;
@@ -4188,6 +4219,14 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * The value of the program number field in the Program Map Table.
      */
     ProgramNumber?: __integerMin0Max65535;
+    /**
+     * Manually specify the initial PTS offset, in seconds, when you set PTS offset to Seconds. Enter an integer from 0 to 3600. Leave blank to keep the default value 2.
+     */
+    PtsOffset?: __integerMin0Max3600;
+    /**
+     * Specify the initial presentation timestamp (PTS) offset for your transport stream output. To let MediaConvert automatically determine the initial PTS offset: Keep the default value, Auto. We recommend that you choose Auto for the widest player compatibility. The initial PTS will be at least two seconds and vary depending on your output's bitrate, HRD buffer size and HRD buffer initial fill percentage. To manually specify an initial PTS offset: Choose Seconds. Then specify the number of seconds with PTS offset.
+     */
+    PtsOffsetMode?: TsPtsOffset;
     /**
      * Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
      */
@@ -5250,6 +5289,10 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      * Settings for how your job outputs are encrypted as they are uploaded to Amazon S3.
      */
     Encryption?: S3EncryptionSettings;
+    /**
+     * Specify the S3 storage class to use for this destination.
+     */
+    StorageClass?: S3StorageClass;
   }
   export interface S3EncryptionSettings {
     /**
@@ -5267,6 +5310,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   }
   export type S3ObjectCannedAcl = "PUBLIC_READ"|"AUTHENTICATED_READ"|"BUCKET_OWNER_READ"|"BUCKET_OWNER_FULL_CONTROL"|string;
   export type S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_S3"|"SERVER_SIDE_ENCRYPTION_KMS"|string;
+  export type S3StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
   export type SampleRangeConversion = "LIMITED_RANGE_SQUEEZE"|"NONE"|"LIMITED_RANGE_CLIP"|string;
   export type ScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string;
   export type SccDestinationFramerate = "FRAMERATE_23_97"|"FRAMERATE_24"|"FRAMERATE_25"|"FRAMERATE_29_97_DROPFRAME"|"FRAMERATE_29_97_NON_DROPFRAME"|string;
@@ -5434,6 +5478,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     TrackNumber?: __integerMin1Max2147483647;
   }
+  export type TsPtsOffset = "AUTO"|"SECONDS"|string;
   export interface TtmlDestinationSettings {
     /**
      * Pass through style and position information from a TTML-like input source (TTML, IMSC, SMPTE-TT) to the TTML output.
@@ -6233,6 +6278,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __integerMin1Max6 = number;
   export type __integerMin1Max60000 = number;
   export type __integerMin1Max64 = number;
+  export type __integerMin1Max8 = number;
   export type __integerMin22050Max48000 = number;
   export type __integerMin24Max60000 = number;
   export type __integerMin25Max10000 = number;

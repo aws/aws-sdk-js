@@ -1044,11 +1044,11 @@ declare class QuickSight extends Service {
    */
   startAssetBundleImportJob(callback?: (err: AWSError, data: QuickSight.Types.StartAssetBundleImportJobResponse) => void): Request<QuickSight.Types.StartAssetBundleImportJobResponse, AWSError>;
   /**
-   * Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.   1 paginated PDF   5 CSVs   Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
+   * Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.   1 paginated PDF   1 Excel workbook   5 CSVs   Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
    */
   startDashboardSnapshotJob(params: QuickSight.Types.StartDashboardSnapshotJobRequest, callback?: (err: AWSError, data: QuickSight.Types.StartDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.StartDashboardSnapshotJobResponse, AWSError>;
   /**
-   * Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.   1 paginated PDF   5 CSVs   Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
+   * Starts an asynchronous job that generates a dashboard snapshot. You can request one of the following format configurations per API call.   1 paginated PDF   1 Excel workbook   5 CSVs   Poll job descriptions with a DescribeDashboardSnapshotJob API call. Once the job succeeds, use the DescribeDashboardSnapshotJobResult API to obtain the download URIs that the job generates.
    */
   startDashboardSnapshotJob(callback?: (err: AWSError, data: QuickSight.Types.StartDashboardSnapshotJobResponse) => void): Request<QuickSight.Types.StartDashboardSnapshotJobResponse, AWSError>;
   /**
@@ -1418,6 +1418,8 @@ declare namespace QuickSight {
   }
   export type AggregationSortConfigurationList = AggregationSortConfiguration[];
   export type AliasName = string;
+  export interface AllSheetsFilterScopeConfiguration {
+  }
   export interface AmazonElasticsearchParameters {
     /**
      * The OpenSearch domain.
@@ -3709,11 +3711,11 @@ declare namespace QuickSight {
      */
     FolderId: RestrictiveResourceId;
     /**
-     * The ID of the asset (the dashboard, analysis, or dataset).
+     * The ID of the asset that you want to add to the folder.
      */
     MemberId: RestrictiveResourceId;
     /**
-     * The type of the member, including DASHBOARD, ANALYSIS, and DATASET.
+     * The member type of the asset that you want to add to a folder.
      */
     MemberType: MemberType;
   }
@@ -3760,6 +3762,10 @@ declare namespace QuickSight {
      * Tags for the folder.
      */
     Tags?: TagList;
+    /**
+     * An optional parameter that determines the sharing scope of the folder. The default value for this parameter is ACCOUNT.
+     */
+    SharingModel?: SharingModel;
   }
   export interface CreateFolderResponse {
     /**
@@ -6044,11 +6050,11 @@ declare namespace QuickSight {
      */
     FolderId: RestrictiveResourceId;
     /**
-     * The ID of the asset (the dashboard, analysis, or dataset) that you want to delete.
+     * The ID of the asset that you want to delete.
      */
     MemberId: RestrictiveResourceId;
     /**
-     * The type of the member, including DASHBOARD, ANALYSIS, and DATASET 
+     * The member type of the asset that you want to delete from a folder.
      */
     MemberType: MemberType;
   }
@@ -7188,6 +7194,18 @@ declare namespace QuickSight {
      * The ID of the folder.
      */
     FolderId: RestrictiveResourceId;
+    /**
+     * The namespace of the folder whose permissions you want described.
+     */
+    Namespace?: Namespace;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A pagination token for the next set of results.
+     */
+    NextToken?: String;
   }
   export interface DescribeFolderPermissionsResponse {
     /**
@@ -7210,6 +7228,10 @@ declare namespace QuickSight {
      * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
+    /**
+     * The pagination token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
   }
   export interface DescribeFolderRequest {
     /**
@@ -7230,6 +7252,18 @@ declare namespace QuickSight {
      * The ID of the folder.
      */
     FolderId: RestrictiveResourceId;
+    /**
+     * The namespace of the folder whose permissions you want described.
+     */
+    Namespace?: Namespace;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A pagination token for the next set of results.
+     */
+    NextToken?: String;
   }
   export interface DescribeFolderResolvedPermissionsResponse {
     /**
@@ -7252,6 +7286,10 @@ declare namespace QuickSight {
      * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
+    /**
+     * A pagination token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
   }
   export interface DescribeFolderResponse {
     /**
@@ -8551,6 +8589,10 @@ declare namespace QuickSight {
      * The configuration for applying a filter to specific sheets.
      */
     SelectedSheets?: SelectedSheetsFilterScopeConfiguration;
+    /**
+     * The configuration for applying a filter to all sheets.
+     */
+    AllSheets?: AllSheetsFilterScopeConfiguration;
   }
   export interface FilterSelectableValues {
     /**
@@ -8663,6 +8705,10 @@ declare namespace QuickSight {
      * The time that the folder was last updated.
      */
     LastUpdatedTime?: Timestamp;
+    /**
+     * The sharing scope of the folder.
+     */
+    SharingModel?: SharingModel;
   }
   export type FolderColumnList = String[];
   export type FolderFilterAttribute = "PARENT_FOLDER_ARN"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"QUICKSIGHT_VIEWER_OR_OWNER"|"FOLDER_NAME"|string;
@@ -8718,6 +8764,10 @@ declare namespace QuickSight {
      * The time that the folder was last updated.
      */
     LastUpdatedTime?: Timestamp;
+    /**
+     * The sharing scope of the folder.
+     */
+    SharingModel?: SharingModel;
   }
   export type FolderSummaryList = FolderSummary[];
   export type FolderType = "SHARED"|string;
@@ -8777,7 +8827,7 @@ declare namespace QuickSight {
     /**
      * The time field that is used in a computation.
      */
-    Time: DimensionField;
+    Time?: DimensionField;
     /**
      * The value field that is used in a computation.
      */
@@ -9649,7 +9699,7 @@ declare namespace QuickSight {
     /**
      * The time field that is used in a computation.
      */
-    Time: DimensionField;
+    Time?: DimensionField;
     /**
      * The value field that is used in a computation.
      */
@@ -11681,7 +11731,7 @@ declare namespace QuickSight {
     /**
      * The time field that is used in a computation.
      */
-    Time: DimensionField;
+    Time?: DimensionField;
     /**
      * The value field that is used in a computation.
      */
@@ -11734,15 +11784,15 @@ declare namespace QuickSight {
     /**
      * The time field that is used in a computation.
      */
-    Time: DimensionField;
+    Time?: DimensionField;
     /**
      * The field that is used in a metric comparison from value setup.
      */
-    FromValue: MeasureField;
+    FromValue?: MeasureField;
     /**
      * The field that is used in a metric comparison to value setup.
      */
-    TargetValue: MeasureField;
+    TargetValue?: MeasureField;
   }
   export interface MinimumLabelType {
     /**
@@ -12522,7 +12572,7 @@ declare namespace QuickSight {
     /**
      * The time field that is used in a computation.
      */
-    Time: DimensionField;
+    Time?: DimensionField;
     /**
      * The value field that is used in a computation.
      */
@@ -12540,7 +12590,7 @@ declare namespace QuickSight {
     /**
      * The time field that is used in a computation.
      */
-    Time: DimensionField;
+    Time?: DimensionField;
     /**
      * The value field that is used in a computation.
      */
@@ -14507,6 +14557,7 @@ declare namespace QuickSight {
      */
     BackgroundColor: ConditionalFormattingColor;
   }
+  export type SharingModel = "ACCOUNT"|"NAMESPACE"|string;
   export interface Sheet {
     /**
      * The unique identifier associated with a sheet.
@@ -14781,15 +14832,15 @@ declare namespace QuickSight {
   }
   export interface SnapshotFile {
     /**
-     * A list of SnapshotFileSheetSelection objects that contain information on the dashboard sheet that is exported. These objects provide information about the snapshot artifacts that are generated during the job. This structure can hold a maximum of 5 CSV configurations or 1 configuration for PDF.
+     * A list of SnapshotFileSheetSelection objects that contain information on the dashboard sheet that is exported. These objects provide information about the snapshot artifacts that are generated during the job. This structure can hold a maximum of 5 CSV configurations, 5 Excel configurations, or 1 configuration for PDF.
      */
     SheetSelections: SnapshotFileSheetSelectionList;
     /**
-     * The format of the snapshot file to be generated. You can choose between CSV or PDF.
+     * The format of the snapshot file to be generated. You can choose between CSV, Excel, or PDF.
      */
     FormatType: SnapshotFileFormatType;
   }
-  export type SnapshotFileFormatType = "CSV"|"PDF"|string;
+  export type SnapshotFileFormatType = "CSV"|"PDF"|"EXCEL"|string;
   export interface SnapshotFileGroup {
     /**
      * A list of SnapshotFile objects that contain the information on the snapshot files that need to be generated. This structure can hold 1 configuration at a time.
@@ -14800,15 +14851,15 @@ declare namespace QuickSight {
   export type SnapshotFileList = SnapshotFile[];
   export interface SnapshotFileSheetSelection {
     /**
-     * The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV and PDF format types.
+     * The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV, Excel, and PDF format types.
      */
     SheetId: ShortRestrictiveResourceId;
     /**
-     * The selection scope of the visuals on a sheet of a dashboard that you are generating a snapthot of. You can choose one of the following options.    ALL_VISUALS - Selects all visuals that are on the sheet. This value is required if the snapshot is a PDF.    SELECTED_VISUALS - Select the visual that you want to add to the snapshot. This value is required if the snapshot is a CSV.  
+     * The selection scope of the visuals on a sheet of a dashboard that you are generating a snapthot of. You can choose one of the following options.    ALL_VISUALS - Selects all visuals that are on the sheet. This value is required if the snapshot is a PDF.    SELECTED_VISUALS - Select the visual that you want to add to the snapshot. This value is required if the snapshot is a CSV or Excel workbook.  
      */
     SelectionScope: SnapshotFileSheetSelectionScope;
     /**
-     *  A list of visual IDs that are located in the selected sheet. This structure supports tables and pivot tables. This structure is required if you are generating a CSV. You can add a maximum of 1 visual ID to this structure. 
+     *  A structure that lists the IDs of the visuals in the selected sheet. Supported visual types are table, pivot table visuals. This value is required if you are generating a CSV or Excel workbook. This value supports a maximum of 1 visual ID for CSV and 5 visual IDs across up to 5 sheet selections for Excel. If you are generating an Excel workbook, the order of the visual IDs provided in this structure determines the order of the worksheets in the Excel file. 
      */
     VisualIds?: SnapshotFileSheetSelectionVisualIdList;
   }
@@ -15407,14 +15458,19 @@ declare namespace QuickSight {
   export type TableFieldOptionList = TableFieldOption[];
   export interface TableFieldOptions {
     /**
-     * The selected field options for the table field options.
+     * The field options to be configured to a table.
      */
     SelectedFieldOptions?: TableFieldOptionList;
     /**
-     * The order of field IDs of the field options for a table visual.
+     * The order of the field IDs that are configured as field options for a table visual.
      */
     Order?: FieldOrderList;
+    /**
+     * The settings for the pinned columns of a table visual.
+     */
+    PinnedFieldOptions?: TablePinnedFieldOptions;
   }
+  export type TableFieldOrderList = FieldId[];
   export interface TableFieldURLConfiguration {
     /**
      * The link configuration of a table field URL.
@@ -15470,6 +15526,12 @@ declare namespace QuickSight {
      * The visibility of repeating header rows on each page.
      */
     OverflowColumnHeaderVisibility?: Visibility;
+  }
+  export interface TablePinnedFieldOptions {
+    /**
+     * A list of columns to be pinned to the left of a table visual.
+     */
+    PinnedLeftFields?: TableFieldOrderList;
   }
   export interface TableRowConditionalFormatting {
     /**
@@ -16234,11 +16296,11 @@ declare namespace QuickSight {
     /**
      * The time field that is used in a computation.
      */
-    Time: DimensionField;
+    Time?: DimensionField;
     /**
      * The category field that is used in a computation.
      */
-    Category: DimensionField;
+    Category?: DimensionField;
     /**
      * The value field that is used in a computation.
      */
@@ -16269,7 +16331,7 @@ declare namespace QuickSight {
     /**
      * The category field that is used in a computation.
      */
-    Category: DimensionField;
+    Category?: DimensionField;
     /**
      * The value field that is used in a computation.
      */
@@ -16703,7 +16765,7 @@ declare namespace QuickSight {
     /**
      * The value field that is used in a computation.
      */
-    Value: MeasureField;
+    Value?: MeasureField;
   }
   export interface TotalOptions {
     /**
@@ -16973,7 +17035,7 @@ declare namespace QuickSight {
     /**
      * The category field that is used in a computation.
      */
-    Category: DimensionField;
+    Category?: DimensionField;
   }
   export type UnlimitedPixelLength = string;
   export interface UntagColumnOperation {

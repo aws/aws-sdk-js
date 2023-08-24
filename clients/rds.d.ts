@@ -8133,7 +8133,7 @@ declare namespace RDS {
      */
     Engine: String;
     /**
-     * The version number of the database engine to use. To list all of the available engine versions for aurora-mysql (Aurora MySQL), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"   Aurora MySQL  Examples: 5.7.mysql_aurora.2.07.1, 8.0.mysql_aurora.3.02.0 
+     * The version number of the database engine to use. To list all of the available engine versions for aurora-mysql (Aurora MySQL), use the following command:  aws rds describe-db-engine-versions --engine aurora-mysql --query "DBEngineVersions[].EngineVersion"   Aurora MySQL  Examples: 5.7.mysql_aurora.2.12.0, 8.0.mysql_aurora.3.04.0 
      */
     EngineVersion?: String;
     /**
@@ -8178,7 +8178,7 @@ declare namespace RDS {
      */
     SourceEngine: String;
     /**
-     * The version of the database that the backup files were created from. MySQL versions 5.5, 5.6, and 5.7 are supported. Example: 5.6.40, 5.7.28 
+     * The version of the database that the backup files were created from. MySQL versions 5.7 and 8.0 are supported. Example: 5.7.40, 8.0.28 
      */
     SourceEngineVersion: String;
     /**

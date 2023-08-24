@@ -8139,6 +8139,7 @@ declare namespace Glue {
   }
   export type IcebergTargetList = IcebergTarget[];
   export type IdString = string;
+  export type IdleTimeout = number;
   export interface ImportCatalogToGlueRequest {
     /**
      * The ID of the catalog to import. Currently, this should be the Amazon Web Services account ID.
@@ -11463,6 +11464,30 @@ declare namespace Glue {
      * The Glue version determines the versions of Apache Spark and Python that Glue supports. The GlueVersion must be greater than 2.0.
      */
     GlueVersion?: GlueVersionString;
+    /**
+     * The number of workers of a defined WorkerType to use for the session.
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The type of predefined worker that is allocated when a session runs. Accepts a value of G.1X, G.2X, G.4X, or G.8X for Spark sessions. Accepts the value Z.2X for Ray sessions.
+     */
+    WorkerType?: WorkerType;
+    /**
+     * The date and time that this session is completed.
+     */
+    CompletedOn?: TimestampValue;
+    /**
+     * The total time the session ran for.
+     */
+    ExecutionTime?: NullableDouble;
+    /**
+     * The DPUs consumed by the session (formula: ExecutionTime * MaxCapacity).
+     */
+    DPUSeconds?: NullableDouble;
+    /**
+     * The number of minutes when idle before the session times out.
+     */
+    IdleTimeout?: IdleTimeout;
   }
   export interface SessionCommand {
     /**
