@@ -323,10 +323,10 @@ declare namespace InternetMonitor {
      */
     HealthScoreThreshold?: Percentage;
   }
-  export type HealthEventImpactType = "AVAILABILITY"|"PERFORMANCE"|"LOCAL_AVAILABILITY"|"LOCAL_PERFORMANCE"|string;
+  export type HealthEventImpactType = "AVAILABILITY"|"PERFORMANCE"|"LOCAL_AVAILABILITY"|"LOCAL_PERFORMANCE"|string&{};
   export type HealthEventList = HealthEvent[];
   export type HealthEventName = string;
-  export type HealthEventStatus = "ACTIVE"|"RESOLVED"|string;
+  export type HealthEventStatus = "ACTIVE"|"RESOLVED"|string&{};
   export interface HealthEventsConfig {
     /**
      * The health event threshold percentage set for availability scores.
@@ -506,8 +506,8 @@ declare namespace InternetMonitor {
      */
     MinTrafficImpact?: Percentage;
   }
-  export type LocalHealthEventsConfigStatus = "ENABLED"|"DISABLED"|string;
-  export type LogDeliveryStatus = "ENABLED"|"DISABLED"|string;
+  export type LocalHealthEventsConfigStatus = "ENABLED"|"DISABLED"|string&{};
+  export type LogDeliveryStatus = "ENABLED"|"DISABLED"|string&{};
   export type Long = number;
   export type MaxCityNetworksToMonitor = number;
   export type MaxResults = number;
@@ -530,9 +530,9 @@ declare namespace InternetMonitor {
     ProcessingStatus?: MonitorProcessingStatusCode;
   }
   export type MonitorArn = string;
-  export type MonitorConfigState = "PENDING"|"ACTIVE"|"INACTIVE"|"ERROR"|string;
+  export type MonitorConfigState = "PENDING"|"ACTIVE"|"INACTIVE"|"ERROR"|string&{};
   export type MonitorList = Monitor[];
-  export type MonitorProcessingStatusCode = "OK"|"INACTIVE"|"COLLECTING_DATA"|"INSUFFICIENT_DATA"|"FAULT_SERVICE"|"FAULT_ACCESS_CLOUDWATCH"|string;
+  export type MonitorProcessingStatusCode = "OK"|"INACTIVE"|"COLLECTING_DATA"|"INSUFFICIENT_DATA"|"FAULT_SERVICE"|"FAULT_ACCESS_CLOUDWATCH"|string&{};
   export interface Network {
     /**
      * The internet provider name or network name.
@@ -627,7 +627,7 @@ declare namespace InternetMonitor {
   }
   export type TagValue = string;
   export type TrafficPercentageToMonitor = number;
-  export type TriangulationEventType = "AWS"|"Internet"|string;
+  export type TriangulationEventType = "AWS"|"Internet"|string&{};
   export interface UntagResourceInput {
     /**
      * The Amazon Resource Name (ARN) for a tag you remove a resource from.

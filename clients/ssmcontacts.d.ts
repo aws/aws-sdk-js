@@ -326,7 +326,7 @@ declare class SSMContacts extends Service {
 }
 declare namespace SSMContacts {
   export type AcceptCode = string;
-  export type AcceptCodeValidation = "IGNORE"|"ENFORCE"|string;
+  export type AcceptCodeValidation = "IGNORE"|"ENFORCE"|string&{};
   export interface AcceptPageRequest {
     /**
      * The Amazon Resource Name (ARN) of the engagement to a contact channel.
@@ -355,7 +355,7 @@ declare namespace SSMContacts {
   }
   export interface AcceptPageResult {
   }
-  export type AcceptType = "DELIVERED"|"READ"|string;
+  export type AcceptType = "DELIVERED"|"READ"|string&{};
   export interface ActivateContactChannelRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact channel.
@@ -369,7 +369,7 @@ declare namespace SSMContacts {
   export interface ActivateContactChannelResult {
   }
   export type ActivationCode = string;
-  export type ActivationStatus = "ACTIVATED"|"NOT_ACTIVATED"|string;
+  export type ActivationStatus = "ACTIVATED"|"NOT_ACTIVATED"|string&{};
   export type AmazonResourceName = string;
   export type ChannelName = string;
   export interface ChannelTargetInfo {
@@ -382,7 +382,7 @@ declare namespace SSMContacts {
      */
     RetryIntervalInMinutes?: RetryIntervalInMinutes;
   }
-  export type ChannelType = "SMS"|"VOICE"|"EMAIL"|string;
+  export type ChannelType = "SMS"|"VOICE"|"EMAIL"|string&{};
   export interface Contact {
     /**
      * The Amazon Resource Name (ARN) of the contact or escalation plan.
@@ -446,7 +446,7 @@ declare namespace SSMContacts {
      */
     IsEssential: IsEssential;
   }
-  export type ContactType = "PERSONAL"|"ESCALATION"|"ONCALL_SCHEDULE"|string;
+  export type ContactType = "PERSONAL"|"ESCALATION"|"ONCALL_SCHEDULE"|string&{};
   export type ContactsList = Contact[];
   export type Content = string;
   export interface CoverageTime {
@@ -591,7 +591,7 @@ declare namespace SSMContacts {
   export type DailySettings = HandOffTime[];
   export type DateTime = Date;
   export type DayOfMonth = number;
-  export type DayOfWeek = "MON"|"TUE"|"WED"|"THU"|"FRI"|"SAT"|"SUN"|string;
+  export type DayOfWeek = "MON"|"TUE"|"WED"|"THU"|"FRI"|"SAT"|"SUN"|string&{};
   export interface DeactivateContactChannelRequest {
     /**
      * The Amazon Resource Name (ARN) of the contact channel you're deactivating.
@@ -1356,7 +1356,7 @@ declare namespace SSMContacts {
     ReceiptTime: DateTime;
   }
   export type ReceiptInfo = string;
-  export type ReceiptType = "DELIVERED"|"ERROR"|"READ"|"SENT"|"STOP"|string;
+  export type ReceiptType = "DELIVERED"|"ERROR"|"READ"|"SENT"|"STOP"|string&{};
   export type ReceiptsList = Receipt[];
   export type RecurrenceMultiplier = number;
   export interface RecurrenceSettings {
@@ -1495,7 +1495,7 @@ declare namespace SSMContacts {
      */
     OverriddenContactIds: SsmContactsArnList;
   }
-  export type ShiftType = "REGULAR"|"OVERRIDDEN"|string;
+  export type ShiftType = "REGULAR"|"OVERRIDDEN"|string&{};
   export type SimpleAddress = string;
   export type SsmContactsArn = string;
   export type SsmContactsArnList = SsmContactsArn[];

@@ -145,7 +145,7 @@ declare namespace OSIS {
     LastUpdatedAt?: Timestamp;
   }
   export type ChangeProgressStageList = ChangeProgressStage[];
-  export type ChangeProgressStageStatuses = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type ChangeProgressStageStatuses = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string&{};
   export interface ChangeProgressStatus {
     /**
      * The time at which the configuration change is made on the pipeline.
@@ -165,7 +165,7 @@ declare namespace OSIS {
     ChangeProgressStages?: ChangeProgressStageList;
   }
   export type ChangeProgressStatusList = ChangeProgressStatus[];
-  export type ChangeProgressStatuses = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type ChangeProgressStatuses = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string&{};
   export interface CloudWatchLogDestination {
     /**
      * The name of the CloudWatch Logs group to send pipeline logs to. You can specify an existing log group or create a new one. For example, /aws/OpenSearchService/IngestionService/my-pipeline.
@@ -377,7 +377,7 @@ declare namespace OSIS {
   export type PipelineBlueprintsSummaryList = PipelineBlueprintSummary[];
   export type PipelineConfigurationBody = string;
   export type PipelineName = string;
-  export type PipelineStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"UPDATE_FAILED"|"STARTING"|"START_FAILED"|"STOPPING"|"STOPPED"|string;
+  export type PipelineStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"UPDATE_FAILED"|"STARTING"|"START_FAILED"|"STOPPING"|"STOPPED"|string&{};
   export interface PipelineStatusReason {
     /**
      * A description of why a pipeline has a certain status.

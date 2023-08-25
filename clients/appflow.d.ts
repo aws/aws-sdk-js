@@ -227,8 +227,8 @@ declare namespace Appflow {
      */
     targetFileSize?: Long;
   }
-  export type AggregationType = "None"|"SingleFile"|string;
-  export type AmplitudeConnectorOperator = "BETWEEN"|string;
+  export type AggregationType = "None"|"SingleFile"|string&{};
+  export type AmplitudeConnectorOperator = "BETWEEN"|string&{};
   export interface AmplitudeConnectorProfileCredentials {
     /**
      *  A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. 
@@ -323,7 +323,7 @@ declare namespace Appflow {
      */
     customAuthConfigs?: CustomAuthConfigList;
   }
-  export type AuthenticationType = "OAUTH2"|"APIKEY"|"BASIC"|"CUSTOM"|string;
+  export type AuthenticationType = "OAUTH2"|"APIKEY"|"BASIC"|"CUSTOM"|string&{};
   export interface BasicAuthCredentials {
     /**
      *  The username to use to connect to a resource. 
@@ -354,14 +354,14 @@ declare namespace Appflow {
      */
     invalidExecutions?: ExecutionIds;
   }
-  export type CatalogType = "GLUE"|string;
+  export type CatalogType = "GLUE"|string&{};
   export type ClientCredentialsArn = string;
   export type ClientId = string;
   export type ClientNumber = string;
   export type ClientSecret = string;
   export type ClientToken = string;
   export type ClusterIdentifier = string;
-  export type ConnectionMode = "Public"|"Private"|string;
+  export type ConnectionMode = "Public"|"Private"|string&{};
   export interface ConnectorConfiguration {
     /**
      *  Specifies whether the connector can be used as a source. 
@@ -973,7 +973,7 @@ declare namespace Appflow {
      */
     lambda?: LambdaConnectorProvisioningConfig;
   }
-  export type ConnectorProvisioningType = "LAMBDA"|string;
+  export type ConnectorProvisioningType = "LAMBDA"|string&{};
   export interface ConnectorRuntimeSetting {
     /**
      * Contains value information about the connector runtime setting.
@@ -1010,7 +1010,7 @@ declare namespace Appflow {
   export type ConnectorSuppliedValue = string;
   export type ConnectorSuppliedValueList = ConnectorSuppliedValue[];
   export type ConnectorSuppliedValueOptionList = ConnectorSuppliedValue[];
-  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"LookoutMetrics"|"Upsolver"|"Honeycode"|"CustomerProfiles"|"SAPOData"|"CustomConnector"|"Pardot"|string;
+  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"LookoutMetrics"|"Upsolver"|"Honeycode"|"CustomerProfiles"|"SAPOData"|"CustomConnector"|"Pardot"|string&{};
   export type ConnectorTypeList = ConnectorType[];
   export type ConnectorVersion = string;
   export interface CreateConnectorProfileRequest {
@@ -1208,7 +1208,7 @@ declare namespace Appflow {
   export interface CustomerProfilesMetadata {
   }
   export type DataApiRoleArn = string;
-  export type DataPullMode = "Incremental"|"Complete"|string;
+  export type DataPullMode = "Incremental"|"Complete"|string&{};
   export interface DataTransferApi {
     /**
      * The name of the connector application API.
@@ -1219,11 +1219,11 @@ declare namespace Appflow {
      */
     Type?: DataTransferApiType;
   }
-  export type DataTransferApiType = "SYNC"|"ASYNC"|"AUTOMATIC"|string;
+  export type DataTransferApiType = "SYNC"|"ASYNC"|"AUTOMATIC"|string&{};
   export type DataTransferApiTypeName = string;
   export type DatabaseName = string;
   export type DatabaseUrl = string;
-  export type DatadogConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type DatadogConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface DatadogConnectorProfileCredentials {
     /**
      *  A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. 
@@ -1586,7 +1586,7 @@ declare namespace Appflow {
   export type DocumentType = string;
   export type DomainName = string;
   export type Double = number;
-  export type DynatraceConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type DynatraceConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface DynatraceConnectorProfileCredentials {
     /**
      *  The API tokens used by Dynatrace API to authenticate various API calls. 
@@ -1711,7 +1711,7 @@ declare namespace Appflow {
      */
     recordsProcessed?: Long;
   }
-  export type ExecutionStatus = "InProgress"|"Successful"|"Error"|"CancelStarted"|"Canceled"|string;
+  export type ExecutionStatus = "InProgress"|"Successful"|"Error"|"CancelStarted"|"Canceled"|string&{};
   export type FieldType = string;
   export interface FieldTypeDetails {
     /**
@@ -1743,7 +1743,7 @@ declare namespace Appflow {
      */
     fieldLengthRange?: Range;
   }
-  export type FileType = "CSV"|"JSON"|"PARQUET"|string;
+  export type FileType = "CSV"|"JSON"|"PARQUET"|string&{};
   export type FilterOperatorList = Operator[];
   export type FlowArn = string;
   export interface FlowDefinition {
@@ -1813,7 +1813,7 @@ declare namespace Appflow {
   export type FlowExecutionList = ExecutionRecord[];
   export type FlowList = FlowDefinition[];
   export type FlowName = string;
-  export type FlowStatus = "Active"|"Deprecated"|"Deleted"|"Draft"|"Errored"|"Suspended"|string;
+  export type FlowStatus = "Active"|"Deprecated"|"Deleted"|"Draft"|"Errored"|"Suspended"|string&{};
   export type FlowStatusMessage = string;
   export interface GlueDataCatalogConfig {
     /**
@@ -1832,7 +1832,7 @@ declare namespace Appflow {
   export type GlueDataCatalogDatabaseName = string;
   export type GlueDataCatalogIAMRole = string;
   export type GlueDataCatalogTablePrefix = string;
-  export type GoogleAnalyticsConnectorOperator = "PROJECTION"|"BETWEEN"|string;
+  export type GoogleAnalyticsConnectorOperator = "PROJECTION"|"BETWEEN"|string&{};
   export interface GoogleAnalyticsConnectorProfileCredentials {
     /**
      *  The identifier for the desired client. 
@@ -1904,7 +1904,7 @@ declare namespace Appflow {
      */
     datetimeTypeFieldName?: DatetimeTypeFieldName;
   }
-  export type InforNexusConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type InforNexusConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface InforNexusConnectorProfileCredentials {
     /**
      *  The Access Key portion of the credentials. 
@@ -2043,7 +2043,7 @@ declare namespace Appflow {
   export type Long = number;
   export interface LookoutMetricsDestinationProperties {
   }
-  export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface MarketoConnectorProfileCredentials {
     /**
      *  The identifier for the desired client. 
@@ -2161,7 +2161,7 @@ declare namespace Appflow {
      */
     type?: OAuth2CustomPropType;
   }
-  export type OAuth2CustomPropType = "TOKEN_URL"|"AUTH_URL"|string;
+  export type OAuth2CustomPropType = "TOKEN_URL"|"AUTH_URL"|string&{};
   export type OAuth2CustomPropertiesList = OAuth2CustomParameter[];
   export interface OAuth2Defaults {
     /**
@@ -2185,7 +2185,7 @@ declare namespace Appflow {
      */
     oauth2CustomProperties?: OAuth2CustomPropertiesList;
   }
-  export type OAuth2GrantType = "CLIENT_CREDENTIALS"|"AUTHORIZATION_CODE"|"JWT_BEARER"|string;
+  export type OAuth2GrantType = "CLIENT_CREDENTIALS"|"AUTHORIZATION_CODE"|"JWT_BEARER"|string&{};
   export type OAuth2GrantTypeSupportedList = OAuth2GrantType[];
   export interface OAuth2Properties {
     /**
@@ -2241,10 +2241,10 @@ declare namespace Appflow {
   export type OAuthScopeList = OAuthScope[];
   export type Object = string;
   export type ObjectTypeName = string;
-  export type Operator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
-  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|"EXCLUDE_SOURCE_FIELDS_LIST"|"INCLUDE_NEW_FIELDS"|"ORDERED_PARTITION_KEYS_LIST"|string;
-  export type Operators = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
-  export type PardotConnectorOperator = "PROJECTION"|"EQUAL_TO"|"NO_OP"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|string;
+  export type Operator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
+  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|"EXCLUDE_SOURCE_FIELDS_LIST"|"INCLUDE_NEW_FIELDS"|"ORDERED_PARTITION_KEYS_LIST"|string&{};
+  export type Operators = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
+  export type PardotConnectorOperator = "PROJECTION"|"EQUAL_TO"|"NO_OP"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|string&{};
   export interface PardotConnectorProfileCredentials {
     /**
      * The credentials used to access protected Salesforce Pardot resources.
@@ -2283,7 +2283,7 @@ declare namespace Appflow {
     object: Object;
   }
   export type Password = string;
-  export type PathPrefix = "EXECUTION_ID"|"SCHEMA_VERSION"|string;
+  export type PathPrefix = "EXECUTION_ID"|"SCHEMA_VERSION"|string&{};
   export type PathPrefixHierarchy = PathPrefix[];
   export type PortNumber = number;
   export interface PrefixConfig {
@@ -2300,9 +2300,9 @@ declare namespace Appflow {
      */
     pathPrefixHierarchy?: PathPrefixHierarchy;
   }
-  export type PrefixFormat = "YEAR"|"MONTH"|"DAY"|"HOUR"|"MINUTE"|string;
-  export type PrefixType = "FILENAME"|"PATH"|"PATH_AND_FILENAME"|string;
-  export type PrivateConnectionProvisioningFailureCause = "CONNECTOR_AUTHENTICATION"|"CONNECTOR_SERVER"|"INTERNAL_SERVER"|"ACCESS_DENIED"|"VALIDATION"|string;
+  export type PrefixFormat = "YEAR"|"MONTH"|"DAY"|"HOUR"|"MINUTE"|string&{};
+  export type PrefixType = "FILENAME"|"PATH"|"PATH_AND_FILENAME"|string&{};
+  export type PrivateConnectionProvisioningFailureCause = "CONNECTOR_AUTHENTICATION"|"CONNECTOR_SERVER"|"INTERNAL_SERVER"|"ACCESS_DENIED"|"VALIDATION"|string&{};
   export type PrivateConnectionProvisioningFailureMessage = string;
   export interface PrivateConnectionProvisioningState {
     /**
@@ -2318,7 +2318,7 @@ declare namespace Appflow {
      */
     failureCause?: PrivateConnectionProvisioningFailureCause;
   }
-  export type PrivateConnectionProvisioningStatus = "FAILED"|"PENDING"|"CREATED"|string;
+  export type PrivateConnectionProvisioningStatus = "FAILED"|"PENDING"|"CREATED"|string&{};
   export type PrivateLinkServiceName = string;
   export type ProfilePropertiesMap = {[key: string]: ProfilePropertyValue};
   export type ProfilePropertyKey = string;
@@ -2474,7 +2474,7 @@ declare namespace Appflow {
   export interface ResetConnectorMetadataCacheResponse {
   }
   export type RoleArn = string;
-  export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface S3DestinationProperties {
     /**
      *  The Amazon S3 bucket name in which Amazon AppFlow places the transferred data. 
@@ -2486,7 +2486,7 @@ declare namespace Appflow {
     bucketPrefix?: BucketPrefix;
     s3OutputFormatConfig?: S3OutputFormatConfig;
   }
-  export type S3InputFileType = "CSV"|"JSON"|string;
+  export type S3InputFileType = "CSV"|"JSON"|string&{};
   export interface S3InputFormatConfig {
     /**
      *  The file type that Amazon AppFlow gets from your Amazon S3 bucket. 
@@ -2521,7 +2521,7 @@ declare namespace Appflow {
     bucketPrefix?: BucketPrefix;
     s3InputFormatConfig?: S3InputFormatConfig;
   }
-  export type SAPODataConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type SAPODataConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface SAPODataConnectorProfileCredentials {
     /**
      *  The SAPOData basic authentication credentials. 
@@ -2587,7 +2587,7 @@ declare namespace Appflow {
      */
     objectPath?: Object;
   }
-  export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface SalesforceConnectorProfileCredentials {
     /**
      *  The credentials used to access protected Salesforce resources. 
@@ -2628,7 +2628,7 @@ declare namespace Appflow {
      */
     usePrivateLinkForMetadataAndAuthorization?: Boolean;
   }
-  export type SalesforceDataTransferApi = "AUTOMATIC"|"BULKV2"|"REST_SYNC"|string;
+  export type SalesforceDataTransferApi = "AUTOMATIC"|"BULKV2"|"REST_SYNC"|string&{};
   export type SalesforceDataTransferApiList = SalesforceDataTransferApi[];
   export interface SalesforceDestinationProperties {
     /**
@@ -2685,7 +2685,7 @@ declare namespace Appflow {
     dataTransferApi?: SalesforceDataTransferApi;
   }
   export type ScheduleExpression = string;
-  export type ScheduleFrequencyType = "BYMINUTE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"ONCE"|string;
+  export type ScheduleFrequencyType = "BYMINUTE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"ONCE"|string&{};
   export type ScheduleOffset = number;
   export interface ScheduledTriggerProperties {
     /**
@@ -2723,7 +2723,7 @@ declare namespace Appflow {
   }
   export type SchedulingFrequencyTypeList = ScheduleFrequencyType[];
   export type SecretKey = string;
-  export type ServiceNowConnectorOperator = "PROJECTION"|"CONTAINS"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type ServiceNowConnectorOperator = "PROJECTION"|"CONTAINS"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface ServiceNowConnectorProfileCredentials {
     /**
      *  The name of the user. 
@@ -2748,7 +2748,7 @@ declare namespace Appflow {
      */
     object: Object;
   }
-  export type SingularConnectorOperator = "PROJECTION"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type SingularConnectorOperator = "PROJECTION"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface SingularConnectorProfileCredentials {
     /**
      *  A unique alphanumeric identifier used to authenticate a user, developer, or calling program to your API. 
@@ -2765,7 +2765,7 @@ declare namespace Appflow {
      */
     object: Object;
   }
-  export type SlackConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type SlackConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface SlackConnectorProfileCredentials {
     /**
      *  The identifier for the client. 
@@ -3022,7 +3022,7 @@ declare namespace Appflow {
   export type SupportedApiVersion = string;
   export type SupportedApiVersionList = SupportedApiVersion[];
   export type SupportedDataTransferApis = DataTransferApi[];
-  export type SupportedDataTransferType = "RECORD"|"FILE"|string;
+  export type SupportedDataTransferType = "RECORD"|"FILE"|string&{};
   export type SupportedDataTransferTypeList = SupportedDataTransferType[];
   export interface SupportedFieldTypeDetails {
     /**
@@ -3072,13 +3072,13 @@ declare namespace Appflow {
     taskProperties?: TaskPropertiesMap;
   }
   export type TaskPropertiesMap = {[key: string]: Property};
-  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Map_all"|"Mask"|"Merge"|"Passthrough"|"Truncate"|"Validate"|"Partition"|string;
+  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Map_all"|"Mask"|"Merge"|"Passthrough"|"Truncate"|"Validate"|"Partition"|string&{};
   export type Tasks = Task[];
   export type Timezone = string;
   export type TokenUrl = string;
   export type TokenUrlCustomProperties = {[key: string]: CustomPropertyValue};
   export type TokenUrlList = TokenUrl[];
-  export type TrendmicroConnectorOperator = "PROJECTION"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type TrendmicroConnectorOperator = "PROJECTION"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface TrendmicroConnectorProfileCredentials {
     /**
      *  The Secret Access Key portion of the credentials. 
@@ -3111,7 +3111,7 @@ declare namespace Appflow {
      */
     Scheduled?: ScheduledTriggerProperties;
   }
-  export type TriggerType = "Scheduled"|"Event"|"OnDemand"|string;
+  export type TriggerType = "Scheduled"|"Event"|"OnDemand"|string&{};
   export type TriggerTypeList = TriggerType[];
   export interface UnregisterConnectorRequest {
     /**
@@ -3247,7 +3247,7 @@ declare namespace Appflow {
   }
   export type Username = string;
   export type Value = string;
-  export type VeevaConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type VeevaConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface VeevaConnectorProfileCredentials {
     /**
      *  The name of the user. 
@@ -3290,8 +3290,8 @@ declare namespace Appflow {
   }
   export type Warehouse = string;
   export type WorkgroupName = string;
-  export type WriteOperationType = "INSERT"|"UPSERT"|"UPDATE"|"DELETE"|string;
-  export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export type WriteOperationType = "INSERT"|"UPSERT"|"UPDATE"|"DELETE"|string&{};
+  export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string&{};
   export interface ZendeskConnectorProfileCredentials {
     /**
      *  The identifier for the desired client. 

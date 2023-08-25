@@ -307,10 +307,10 @@ declare namespace ACMPCA {
      */
     AccessMethodType?: AccessMethodType;
   }
-  export type AccessMethodType = "CA_REPOSITORY"|"RESOURCE_PKI_MANIFEST"|"RESOURCE_PKI_NOTIFY"|string;
+  export type AccessMethodType = "CA_REPOSITORY"|"RESOURCE_PKI_MANIFEST"|"RESOURCE_PKI_NOTIFY"|string&{};
   export type AccountId = string;
   export type ActionList = ActionType[];
-  export type ActionType = "IssueCertificate"|"GetCertificate"|"ListPermissions"|string;
+  export type ActionType = "IssueCertificate"|"GetCertificate"|"ListPermissions"|string&{};
   export interface ApiPassthrough {
     /**
      * Specifies X.509 extension information for a certificate.
@@ -320,8 +320,8 @@ declare namespace ACMPCA {
   }
   export type Arn = string;
   export type AuditReportId = string;
-  export type AuditReportResponseFormat = "JSON"|"CSV"|string;
-  export type AuditReportStatus = "CREATING"|"SUCCESS"|"FAILED"|string;
+  export type AuditReportResponseFormat = "JSON"|"CSV"|string&{};
+  export type AuditReportStatus = "CREATING"|"SUCCESS"|"FAILED"|string&{};
   export type Base64String1To4096 = string;
   export type Boolean = boolean;
   export type CertificateAuthorities = CertificateAuthority[];
@@ -405,9 +405,9 @@ declare namespace ACMPCA {
      */
     CsrExtensions?: CsrExtensions;
   }
-  export type CertificateAuthorityStatus = "CREATING"|"PENDING_CERTIFICATE"|"ACTIVE"|"DELETED"|"DISABLED"|"EXPIRED"|"FAILED"|string;
-  export type CertificateAuthorityType = "ROOT"|"SUBORDINATE"|string;
-  export type CertificateAuthorityUsageMode = "GENERAL_PURPOSE"|"SHORT_LIVED_CERTIFICATE"|string;
+  export type CertificateAuthorityStatus = "CREATING"|"PENDING_CERTIFICATE"|"ACTIVE"|"DELETED"|"DISABLED"|"EXPIRED"|"FAILED"|string&{};
+  export type CertificateAuthorityType = "ROOT"|"SUBORDINATE"|string&{};
+  export type CertificateAuthorityUsageMode = "GENERAL_PURPOSE"|"SHORT_LIVED_CERTIFICATE"|string&{};
   export type CertificateBody = string;
   export type CertificateBodyBlob = Buffer|Uint8Array|Blob|string;
   export type CertificateChain = string;
@@ -645,7 +645,7 @@ declare namespace ACMPCA {
     ExtendedKeyUsageObjectIdentifier?: CustomObjectIdentifier;
   }
   export type ExtendedKeyUsageList = ExtendedKeyUsage[];
-  export type ExtendedKeyUsageType = "SERVER_AUTH"|"CLIENT_AUTH"|"CODE_SIGNING"|"EMAIL_PROTECTION"|"TIME_STAMPING"|"OCSP_SIGNING"|"SMART_CARD_LOGIN"|"DOCUMENT_SIGNING"|"CERTIFICATE_TRANSPARENCY"|string;
+  export type ExtendedKeyUsageType = "SERVER_AUTH"|"CLIENT_AUTH"|"CODE_SIGNING"|"EMAIL_PROTECTION"|"TIME_STAMPING"|"OCSP_SIGNING"|"SMART_CARD_LOGIN"|"DOCUMENT_SIGNING"|"CERTIFICATE_TRANSPARENCY"|string&{};
   export interface Extensions {
     /**
      * Contains a sequence of one or more policy information terms, each of which consists of an object identifier (OID) and optional qualifiers. For more information, see NIST's definition of Object Identifier (OID). In an end-entity certificate, these terms indicate the policy under which the certificate was issued and the purposes for which it may be used. In a CA certificate, these terms limit the set of policies for certification paths that include this certificate.
@@ -665,7 +665,7 @@ declare namespace ACMPCA {
      */
     CustomExtensions?: CustomExtensionList;
   }
-  export type FailureReason = "REQUEST_TIMED_OUT"|"UNSUPPORTED_ALGORITHM"|"OTHER"|string;
+  export type FailureReason = "REQUEST_TIMED_OUT"|"UNSUPPORTED_ALGORITHM"|"OTHER"|string&{};
   export interface GeneralName {
     /**
      * Represents GeneralName using an OtherName object.
@@ -814,8 +814,8 @@ declare namespace ACMPCA {
      */
     CertificateArn?: Arn;
   }
-  export type KeyAlgorithm = "RSA_2048"|"RSA_4096"|"EC_prime256v1"|"EC_secp384r1"|string;
-  export type KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_2_OR_HIGHER"|"FIPS_140_2_LEVEL_3_OR_HIGHER"|string;
+  export type KeyAlgorithm = "RSA_2048"|"RSA_4096"|"EC_prime256v1"|"EC_secp384r1"|string&{};
+  export type KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_2_OR_HIGHER"|"FIPS_140_2_LEVEL_3_OR_HIGHER"|string&{};
   export interface KeyUsage {
     /**
      *  Key can be used for digital signing.
@@ -986,7 +986,7 @@ declare namespace ACMPCA {
      */
     PolicyQualifiers?: PolicyQualifierInfoList;
   }
-  export type PolicyQualifierId = "CPS"|string;
+  export type PolicyQualifierId = "CPS"|string&{};
   export interface PolicyQualifierInfo {
     /**
      * Identifies the qualifier modifying a CertPolicyId.
@@ -1016,7 +1016,7 @@ declare namespace ACMPCA {
      */
     CpsUri: String256;
   }
-  export type ResourceOwner = "SELF"|"OTHER_ACCOUNTS"|string;
+  export type ResourceOwner = "SELF"|"OTHER_ACCOUNTS"|string&{};
   export interface RestoreCertificateAuthorityRequest {
     /**
      * The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority action. This must be of the form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012  
@@ -1033,7 +1033,7 @@ declare namespace ACMPCA {
      */
     OcspConfiguration?: OcspConfiguration;
   }
-  export type RevocationReason = "UNSPECIFIED"|"KEY_COMPROMISE"|"CERTIFICATE_AUTHORITY_COMPROMISE"|"AFFILIATION_CHANGED"|"SUPERSEDED"|"CESSATION_OF_OPERATION"|"PRIVILEGE_WITHDRAWN"|"A_A_COMPROMISE"|string;
+  export type RevocationReason = "UNSPECIFIED"|"KEY_COMPROMISE"|"CERTIFICATE_AUTHORITY_COMPROMISE"|"AFFILIATION_CHANGED"|"SUPERSEDED"|"CESSATION_OF_OPERATION"|"PRIVILEGE_WITHDRAWN"|"A_A_COMPROMISE"|string&{};
   export interface RevokeCertificateRequest {
     /**
      * Amazon Resource Name (ARN) of the private CA that issued the certificate to be revoked. This must be of the form:  arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012  
@@ -1051,8 +1051,8 @@ declare namespace ACMPCA {
   export type S3BucketName = string;
   export type S3BucketName3To255 = string;
   export type S3Key = string;
-  export type S3ObjectAcl = "PUBLIC_READ"|"BUCKET_OWNER_FULL_CONTROL"|string;
-  export type SigningAlgorithm = "SHA256WITHECDSA"|"SHA384WITHECDSA"|"SHA512WITHECDSA"|"SHA256WITHRSA"|"SHA384WITHRSA"|"SHA512WITHRSA"|string;
+  export type S3ObjectAcl = "PUBLIC_READ"|"BUCKET_OWNER_FULL_CONTROL"|string&{};
+  export type SigningAlgorithm = "SHA256WITHECDSA"|"SHA384WITHECDSA"|"SHA512WITHECDSA"|"SHA256WITHRSA"|"SHA384WITHRSA"|"SHA512WITHRSA"|string&{};
   export type String = string;
   export type String128 = string;
   export type String16 = string;
@@ -1122,7 +1122,7 @@ declare namespace ACMPCA {
      */
     Type: ValidityPeriodType;
   }
-  export type ValidityPeriodType = "END_DATE"|"ABSOLUTE"|"DAYS"|"MONTHS"|"YEARS"|string;
+  export type ValidityPeriodType = "END_DATE"|"ABSOLUTE"|"DAYS"|"MONTHS"|"YEARS"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

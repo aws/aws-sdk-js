@@ -314,7 +314,7 @@ declare namespace GroundStation {
      */
     reservedCpuCores?: AgentCpuCoresList;
   }
-  export type AgentStatus = "SUCCESS"|"FAILED"|"ACTIVE"|"INACTIVE"|string;
+  export type AgentStatus = "SUCCESS"|"FAILED"|"ACTIVE"|"INACTIVE"|string&{};
   export interface AggregateStatus {
     /**
      * Sparse map of failure signatures.
@@ -325,7 +325,7 @@ declare namespace GroundStation {
      */
     status: AgentStatus;
   }
-  export type AngleUnits = "DEGREE_ANGLE"|"RADIAN"|string;
+  export type AngleUnits = "DEGREE_ANGLE"|"RADIAN"|string&{};
   export interface AntennaDemodDecodeDetails {
     /**
      * Name of an antenna demod decode output node used in a contact.
@@ -367,7 +367,7 @@ declare namespace GroundStation {
     transmitDisabled?: Boolean;
   }
   export type AnyArn = string;
-  export type AuditResults = "HEALTHY"|"UNHEALTHY"|string;
+  export type AuditResults = "HEALTHY"|"UNHEALTHY"|string&{};
   export interface AwsGroundStationAgentEndpoint {
     /**
      * The status of AgentEndpoint.
@@ -390,7 +390,7 @@ declare namespace GroundStation {
      */
     name: SafeName;
   }
-  export type BandwidthUnits = "GHz"|"MHz"|"kHz"|string;
+  export type BandwidthUnits = "GHz"|"MHz"|"kHz"|string&{};
   export type Boolean = boolean;
   export type BucketArn = string;
   export interface CancelContactRequest {
@@ -401,8 +401,8 @@ declare namespace GroundStation {
   }
   export type CapabilityArn = string;
   export type CapabilityArnList = CapabilityArn[];
-  export type CapabilityHealth = "UNHEALTHY"|"HEALTHY"|string;
-  export type CapabilityHealthReason = "NO_REGISTERED_AGENT"|"INVALID_IP_OWNERSHIP"|"NOT_AUTHORIZED_TO_CREATE_SLR"|"UNVERIFIED_IP_OWNERSHIP"|"INITIALIZING_DATAPLANE"|"DATAPLANE_FAILURE"|"HEALTHY"|string;
+  export type CapabilityHealth = "UNHEALTHY"|"HEALTHY"|string&{};
+  export type CapabilityHealthReason = "NO_REGISTERED_AGENT"|"INVALID_IP_OWNERSHIP"|"NOT_AUTHORIZED_TO_CREATE_SLR"|"UNVERIFIED_IP_OWNERSHIP"|"INITIALIZING_DATAPLANE"|"DATAPLANE_FAILURE"|"HEALTHY"|string&{};
   export type CapabilityHealthReasonList = CapabilityHealthReason[];
   export interface ComponentStatusData {
     /**
@@ -448,7 +448,7 @@ declare namespace GroundStation {
   }
   export type ComponentVersionList = ComponentVersion[];
   export type ConfigArn = string;
-  export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|"s3-recording"|string;
+  export type ConfigCapabilityType = "antenna-downlink"|"antenna-downlink-demod-decode"|"antenna-uplink"|"dataflow-endpoint"|"tracking"|"uplink-echo"|"s3-recording"|string&{};
   export interface ConfigDetails {
     /**
      * Details for antenna demod decode Config in a contact.
@@ -594,7 +594,7 @@ declare namespace GroundStation {
     contactId?: Uuid;
   }
   export type ContactList = ContactData[];
-  export type ContactStatus = "AVAILABLE"|"AWS_CANCELLED"|"AWS_FAILED"|"CANCELLED"|"CANCELLING"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|"PASS"|"POSTPASS"|"PREPASS"|"SCHEDULED"|"SCHEDULING"|string;
+  export type ContactStatus = "AVAILABLE"|"AWS_CANCELLED"|"AWS_FAILED"|"CANCELLED"|"CANCELLING"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|"PASS"|"POSTPASS"|"PREPASS"|"SCHEDULED"|"SCHEDULING"|string&{};
   export interface CreateConfigRequest {
     /**
      * Parameters of a Config.
@@ -699,7 +699,7 @@ declare namespace GroundStation {
      */
     trackingConfigArn: ConfigArn;
   }
-  export type Criticality = "PREFERRED"|"REMOVED"|"REQUIRED"|string;
+  export type Criticality = "PREFERRED"|"REMOVED"|"REQUIRED"|string&{};
   export type CustomerEphemerisPriority = number;
   export interface DataflowDetail {
     destination?: Destination;
@@ -956,7 +956,7 @@ declare namespace GroundStation {
      */
     value: Double;
   }
-  export type EirpUnits = "dBW"|string;
+  export type EirpUnits = "dBW"|string&{};
   export interface Elevation {
     /**
      * Elevation angle units.
@@ -990,7 +990,7 @@ declare namespace GroundStation {
     securityDetails?: SecurityDetails;
   }
   export type EndpointDetailsList = EndpointDetails[];
-  export type EndpointStatus = "created"|"creating"|"deleted"|"deleting"|"failed"|string;
+  export type EndpointStatus = "created"|"creating"|"deleted"|"deleting"|"failed"|string&{};
   export type EphemeridesList = EphemerisItem[];
   export interface EphemerisData {
     oem?: OEMEphemeris;
@@ -1012,7 +1012,7 @@ declare namespace GroundStation {
      */
     ephemerisId?: Uuid;
   }
-  export type EphemerisInvalidReason = "METADATA_INVALID"|"TIME_RANGE_INVALID"|"TRAJECTORY_INVALID"|"KMS_KEY_INVALID"|"VALIDATION_ERROR"|string;
+  export type EphemerisInvalidReason = "METADATA_INVALID"|"TIME_RANGE_INVALID"|"TRAJECTORY_INVALID"|"KMS_KEY_INVALID"|"VALIDATION_ERROR"|string&{};
   export interface EphemerisItem {
     /**
      * The time the ephemeris was uploaded in UTC.
@@ -1062,8 +1062,8 @@ declare namespace GroundStation {
     source: EphemerisSource;
   }
   export type EphemerisPriority = number;
-  export type EphemerisSource = "CUSTOMER_PROVIDED"|"SPACE_TRACK"|string;
-  export type EphemerisStatus = "VALIDATING"|"INVALID"|"ERROR"|"ENABLED"|"DISABLED"|"EXPIRED"|string;
+  export type EphemerisSource = "CUSTOMER_PROVIDED"|"SPACE_TRACK"|string&{};
+  export type EphemerisStatus = "VALIDATING"|"INVALID"|"ERROR"|"ENABLED"|"DISABLED"|"EXPIRED"|string&{};
   export type EphemerisStatusList = EphemerisStatus[];
   export interface EphemerisTypeDescription {
     oem?: EphemerisDescription;
@@ -1089,7 +1089,7 @@ declare namespace GroundStation {
      */
     value: Double;
   }
-  export type FrequencyUnits = "GHz"|"MHz"|"kHz"|string;
+  export type FrequencyUnits = "GHz"|"MHz"|"kHz"|string&{};
   export interface GetAgentConfigurationRequest {
     /**
      * UUID of agent to get configuration information for.
@@ -1571,7 +1571,7 @@ declare namespace GroundStation {
   }
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
-  export type Polarization = "LEFT_HAND"|"NONE"|"RIGHT_HAND"|string;
+  export type Polarization = "LEFT_HAND"|"NONE"|"RIGHT_HAND"|string&{};
   export type PositiveDurationInSeconds = number;
   export interface RangedConnectionDetails {
     /**

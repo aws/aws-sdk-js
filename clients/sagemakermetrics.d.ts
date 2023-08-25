@@ -52,7 +52,7 @@ declare namespace SageMakerMetrics {
   export type ExperimentEntityName = string;
   export type Integer = number;
   export type MetricName = string;
-  export type PutMetricsErrorCode = "METRIC_LIMIT_EXCEEDED"|"INTERNAL_ERROR"|"VALIDATION_ERROR"|"CONFLICT_ERROR"|string;
+  export type PutMetricsErrorCode = "METRIC_LIMIT_EXCEEDED"|"INTERNAL_ERROR"|"VALIDATION_ERROR"|"CONFLICT_ERROR"|string&{};
   export interface RawMetricData {
     /**
      * The name of the metric.

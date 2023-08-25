@@ -534,8 +534,8 @@ declare namespace AuditManager {
   export type AWSServices = AWSService[];
   export type AccountId = string;
   export type AccountName = string;
-  export type AccountStatus = "ACTIVE"|"INACTIVE"|"PENDING_ACTIVATION"|string;
-  export type ActionEnum = "CREATE"|"UPDATE_METADATA"|"ACTIVE"|"INACTIVE"|"DELETE"|"UNDER_REVIEW"|"REVIEWED"|"IMPORT_EVIDENCE"|string;
+  export type AccountStatus = "ACTIVE"|"INACTIVE"|"PENDING_ACTIVATION"|string&{};
+  export type ActionEnum = "CREATE"|"UPDATE_METADATA"|"ACTIVE"|"INACTIVE"|"DELETE"|"UNDER_REVIEW"|"REVIEWED"|"IMPORT_EVIDENCE"|string&{};
   export type ActionPlanInstructions = string;
   export type ActionPlanTitle = string;
   export interface Assessment {
@@ -956,7 +956,7 @@ declare namespace AuditManager {
     creationTime?: Timestamp;
   }
   export type AssessmentReportDescription = string;
-  export type AssessmentReportDestinationType = "S3"|string;
+  export type AssessmentReportDestinationType = "S3"|string&{};
   export interface AssessmentReportEvidenceError {
     /**
      *  The identifier for the evidence. 
@@ -1007,7 +1007,7 @@ declare namespace AuditManager {
     creationTime?: Timestamp;
   }
   export type AssessmentReportName = string;
-  export type AssessmentReportStatus = "COMPLETE"|"IN_PROGRESS"|"FAILED"|string;
+  export type AssessmentReportStatus = "COMPLETE"|"IN_PROGRESS"|"FAILED"|string&{};
   export interface AssessmentReportsDestination {
     /**
      *  The destination type, such as Amazon S3. 
@@ -1019,7 +1019,7 @@ declare namespace AuditManager {
     destination?: S3Url;
   }
   export type AssessmentReportsMetadata = AssessmentReportMetadata[];
-  export type AssessmentStatus = "ACTIVE"|"INACTIVE"|string;
+  export type AssessmentStatus = "ACTIVE"|"INACTIVE"|string&{};
   export interface AssociateAssessmentReportEvidenceFolderRequest {
     /**
      *  The identifier for the assessment. 
@@ -1420,7 +1420,7 @@ declare namespace AuditManager {
   }
   export type ControlMetadataList = ControlMetadata[];
   export type ControlName = string;
-  export type ControlResponse = "MANUAL"|"AUTOMATE"|"DEFER"|"IGNORE"|string;
+  export type ControlResponse = "MANUAL"|"AUTOMATE"|"DEFER"|"IGNORE"|string&{};
   export interface ControlSet {
     /**
      *  The identifier of the control set in the assessment. This is the control set name in a plain string format. 
@@ -1437,12 +1437,12 @@ declare namespace AuditManager {
   }
   export type ControlSetId = string;
   export type ControlSetName = string;
-  export type ControlSetStatus = "ACTIVE"|"UNDER_REVIEW"|"REVIEWED"|string;
+  export type ControlSetStatus = "ACTIVE"|"UNDER_REVIEW"|"REVIEWED"|string&{};
   export type ControlSets = ControlSet[];
   export type ControlSetsCount = number;
   export type ControlSources = string;
-  export type ControlStatus = "UNDER_REVIEW"|"REVIEWED"|"INACTIVE"|string;
-  export type ControlType = "Standard"|"Custom"|string;
+  export type ControlStatus = "UNDER_REVIEW"|"REVIEWED"|"INACTIVE"|string&{};
+  export type ControlType = "Standard"|"Custom"|string&{};
   export type Controls = Control[];
   export type ControlsCount = number;
   export interface CreateAssessmentFrameworkControl {
@@ -1718,7 +1718,7 @@ declare namespace AuditManager {
     controlSetName?: NonEmptyString;
   }
   export type DelegationMetadataList = DelegationMetadata[];
-  export type DelegationStatus = "IN_PROGRESS"|"UNDER_REVIEW"|"COMPLETE"|string;
+  export type DelegationStatus = "IN_PROGRESS"|"UNDER_REVIEW"|"COMPLETE"|string&{};
   export type Delegations = Delegation[];
   export interface DeleteAssessmentFrameworkRequest {
     /**
@@ -1768,7 +1768,7 @@ declare namespace AuditManager {
   }
   export interface DeleteControlResponse {
   }
-  export type DeleteResources = "ALL"|"DEFAULT"|string;
+  export type DeleteResources = "ALL"|"DEFAULT"|string&{};
   export interface DeregisterAccountRequest {
   }
   export interface DeregisterAccountResponse {
@@ -1872,7 +1872,7 @@ declare namespace AuditManager {
   export type EvidenceAttributeKey = string;
   export type EvidenceAttributeValue = string;
   export type EvidenceAttributes = {[key: string]: EvidenceAttributeValue};
-  export type EvidenceFinderBackfillStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|string;
+  export type EvidenceFinderBackfillStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|string&{};
   export interface EvidenceFinderEnablement {
     /**
      * The Amazon Resource Name (ARN) of the CloudTrail Lake event data store that’s used by evidence finder. The event data store is the lake of evidence data that evidence finder runs queries against.
@@ -1891,7 +1891,7 @@ declare namespace AuditManager {
      */
     error?: ErrorMessage;
   }
-  export type EvidenceFinderEnablementStatus = "ENABLED"|"DISABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|string;
+  export type EvidenceFinderEnablementStatus = "ENABLED"|"DISABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|string&{};
   export type EvidenceIds = UUID[];
   export interface EvidenceInsights {
     /**
@@ -1909,7 +1909,7 @@ declare namespace AuditManager {
   }
   export type EvidenceList = Evidence[];
   export type EvidenceSources = NonEmptyString[];
-  export type ExportDestinationType = "S3"|string;
+  export type ExportDestinationType = "S3"|string&{};
   export type Filename = string;
   export interface Framework {
     /**
@@ -1990,7 +1990,7 @@ declare namespace AuditManager {
   }
   export type FrameworkMetadataList = AssessmentFrameworkMetadata[];
   export type FrameworkName = string;
-  export type FrameworkType = "Standard"|"Custom"|string;
+  export type FrameworkType = "Standard"|"Custom"|string&{};
   export type GenericArn = string;
   export interface GetAccountStatusRequest {
   }
@@ -2358,7 +2358,7 @@ declare namespace AuditManager {
     lastUpdated?: Timestamp;
   }
   export type Integer = number;
-  export type KeywordInputType = "SELECT_FROM_LIST"|"UPLOAD_FILE"|"INPUT_TEXT"|string;
+  export type KeywordInputType = "SELECT_FROM_LIST"|"UPLOAD_FILE"|"INPUT_TEXT"|string&{};
   export type KeywordValue = string;
   export type Keywords = KeywordValue[];
   export type KmsKey = string;
@@ -2687,7 +2687,7 @@ declare namespace AuditManager {
   }
   export type Notifications = Notification[];
   export type NullableInteger = number;
-  export type ObjectTypeEnum = "ASSESSMENT"|"CONTROL_SET"|"CONTROL"|"DELEGATION"|"ASSESSMENT_REPORT"|string;
+  export type ObjectTypeEnum = "ASSESSMENT"|"CONTROL_SET"|"CONTROL"|"DELEGATION"|"ASSESSMENT_REPORT"|string&{};
   export type QueryStatement = string;
   export type Region = string;
   export interface RegisterAccountRequest {
@@ -2747,7 +2747,7 @@ declare namespace AuditManager {
      */
     roleArn: IamArn;
   }
-  export type RoleType = "PROCESS_OWNER"|"RESOURCE_OWNER"|string;
+  export type RoleType = "PROCESS_OWNER"|"RESOURCE_OWNER"|string&{};
   export type Roles = Role[];
   export type S3Url = string;
   export type SNSTopic = string;
@@ -2780,7 +2780,7 @@ declare namespace AuditManager {
     category?: NonEmptyString;
   }
   export type ServiceMetadataList = ServiceMetadata[];
-  export type SettingAttribute = "ALL"|"IS_AWS_ORG_ENABLED"|"SNS_TOPIC"|"DEFAULT_ASSESSMENT_REPORTS_DESTINATION"|"DEFAULT_PROCESS_OWNERS"|"EVIDENCE_FINDER_ENABLEMENT"|"DEREGISTRATION_POLICY"|"DEFAULT_EXPORT_DESTINATION"|string;
+  export type SettingAttribute = "ALL"|"IS_AWS_ORG_ENABLED"|"SNS_TOPIC"|"DEFAULT_ASSESSMENT_REPORTS_DESTINATION"|"DEFAULT_PROCESS_OWNERS"|"EVIDENCE_FINDER_ENABLEMENT"|"DEREGISTRATION_POLICY"|"DEFAULT_EXPORT_DESTINATION"|string&{};
   export interface Settings {
     /**
      *  Specifies whether Organizations is enabled. 
@@ -2815,13 +2815,13 @@ declare namespace AuditManager {
      */
     defaultExportDestination?: DefaultExportDestination;
   }
-  export type ShareRequestAction = "ACCEPT"|"DECLINE"|"REVOKE"|string;
+  export type ShareRequestAction = "ACCEPT"|"DECLINE"|"REVOKE"|string&{};
   export type ShareRequestComment = string;
-  export type ShareRequestStatus = "ACTIVE"|"REPLICATING"|"SHARED"|"EXPIRING"|"FAILED"|"EXPIRED"|"DECLINED"|"REVOKED"|string;
-  export type ShareRequestType = "SENT"|"RECEIVED"|string;
+  export type ShareRequestStatus = "ACTIVE"|"REPLICATING"|"SHARED"|"EXPIRING"|"FAILED"|"EXPIRED"|"DECLINED"|"REVOKED"|string&{};
+  export type ShareRequestType = "SENT"|"RECEIVED"|string&{};
   export type SnsArn = string;
   export type SourceDescription = string;
-  export type SourceFrequency = "DAILY"|"WEEKLY"|"MONTHLY"|string;
+  export type SourceFrequency = "DAILY"|"WEEKLY"|"MONTHLY"|string&{};
   export interface SourceKeyword {
     /**
      *  The input method for the keyword.     SELECT_FROM_LIST is used when mapping a data source for automated evidence.   When keywordInputType is SELECT_FROM_LIST, a keyword must be selected to collect automated evidence. For example, this keyword can be a CloudTrail event name, a rule name for Config, a Security Hub control, or the name of an Amazon Web Services API call.      UPLOAD_FILE and INPUT_TEXT are only used when mapping a data source for manual evidence.   When keywordInputType is UPLOAD_FILE, a file must be uploaded as manual evidence.   When keywordInputType is INPUT_TEXT, text must be entered as manual evidence.    
@@ -2833,8 +2833,8 @@ declare namespace AuditManager {
     keywordValue?: KeywordValue;
   }
   export type SourceName = string;
-  export type SourceSetUpOption = "System_Controls_Mapping"|"Procedural_Controls_Mapping"|string;
-  export type SourceType = "AWS_Cloudtrail"|"AWS_Config"|"AWS_Security_Hub"|"AWS_API_Call"|"MANUAL"|string;
+  export type SourceSetUpOption = "System_Controls_Mapping"|"Procedural_Controls_Mapping"|string&{};
+  export type SourceType = "AWS_Cloudtrail"|"AWS_Config"|"AWS_Security_Hub"|"AWS_API_Call"|"MANUAL"|string&{};
   export interface StartAssessmentFrameworkShareRequest {
     /**
      *  The unique identifier for the custom framework to be shared. 

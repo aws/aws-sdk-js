@@ -970,10 +970,10 @@ declare namespace DMS {
     ResourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
   }
   export type ArnList = String[];
-  export type AssessmentReportType = "pdf"|"csv"|string;
+  export type AssessmentReportType = "pdf"|"csv"|string&{};
   export type AssessmentReportTypesList = AssessmentReportType[];
-  export type AuthMechanismValue = "default"|"mongodb_cr"|"scram_sha_1"|string;
-  export type AuthTypeValue = "no"|"password"|string;
+  export type AuthMechanismValue = "default"|"mongodb_cr"|"scram_sha_1"|string&{};
+  export type AuthTypeValue = "no"|"password"|string&{};
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -1023,7 +1023,7 @@ declare namespace DMS {
      */
     ReplicationTaskAssessmentRun?: ReplicationTaskAssessmentRun;
   }
-  export type CannedAclForObjectsValue = "none"|"private"|"public-read"|"public-read-write"|"authenticated-read"|"aws-exec-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
+  export type CannedAclForObjectsValue = "none"|"private"|"public-read"|"public-read-write"|"authenticated-read"|"aws-exec-read"|"bucket-owner-read"|"bucket-owner-full-control"|string&{};
   export interface Certificate {
     /**
      * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
@@ -1068,7 +1068,7 @@ declare namespace DMS {
   }
   export type CertificateList = Certificate[];
   export type CertificateWallet = Buffer|Uint8Array|Blob|string;
-  export type CharLengthSemantics = "default"|"char"|"byte"|string;
+  export type CharLengthSemantics = "default"|"char"|"byte"|string&{};
   export interface CollectorHealthCheck {
     /**
      * The status of the Fleet Advisor collector.
@@ -1146,9 +1146,9 @@ declare namespace DMS {
      */
     CollectorName?: String;
   }
-  export type CollectorStatus = "UNREGISTERED"|"ACTIVE"|string;
+  export type CollectorStatus = "UNREGISTERED"|"ACTIVE"|string&{};
   export type CollectorsList = CollectorShortInfoResponse[];
-  export type CompressionTypeValue = "none"|"gzip"|string;
+  export type CompressionTypeValue = "none"|"gzip"|string&{};
   export interface ComputeConfig {
     /**
      * The Availability Zone where the DMS Serverless replication using this configuration will run. The default value is a random, system-chosen Availability Zone in the configuration's Amazon Web Services Region, for example, "us-west-2". You can't set this parameter if the MultiAZ parameter is set to true.
@@ -1748,7 +1748,7 @@ declare namespace DMS {
      */
     ReplicationTask?: ReplicationTask;
   }
-  export type DataFormatValue = "csv"|"parquet"|string;
+  export type DataFormatValue = "csv"|"parquet"|string&{};
   export interface DataProvider {
     /**
      * The name of the data provider.
@@ -1847,7 +1847,7 @@ declare namespace DMS {
     Tooltip?: String;
   }
   export type DatabaseList = DatabaseResponse[];
-  export type DatabaseMode = "default"|"babelfish"|string;
+  export type DatabaseMode = "default"|"babelfish"|string&{};
   export interface DatabaseResponse {
     /**
      * The ID of a database in a Fleet Advisor collector inventory.
@@ -1896,8 +1896,8 @@ declare namespace DMS {
      */
     DatabaseEngine?: String;
   }
-  export type DatePartitionDelimiterValue = "SLASH"|"UNDERSCORE"|"DASH"|"NONE"|string;
-  export type DatePartitionSequenceValue = "YYYYMMDD"|"YYYYMMDDHH"|"YYYYMM"|"MMYYYYDD"|"DDMMYYYY"|string;
+  export type DatePartitionDelimiterValue = "SLASH"|"UNDERSCORE"|"DASH"|"NONE"|string&{};
+  export type DatePartitionSequenceValue = "YYYYMMDD"|"YYYYMMDDHH"|"YYYYMM"|"MMYYYYDD"|"DDMMYYYY"|string&{};
   export interface DefaultErrorDetails {
     /**
      * The error message.
@@ -3146,7 +3146,7 @@ declare namespace DMS {
      */
     Marker?: String;
   }
-  export type DmsSslModeValue = "none"|"require"|"verify-ca"|"verify-full"|string;
+  export type DmsSslModeValue = "none"|"require"|"verify-ca"|"verify-full"|string&{};
   export interface DmsTransferSettings {
     /**
      * The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the iam:PassRole action.
@@ -3240,8 +3240,8 @@ declare namespace DMS {
      */
     UseNewMappingType?: BooleanOptional;
   }
-  export type EncodingTypeValue = "plain"|"plain-dictionary"|"rle-dictionary"|string;
-  export type EncryptionModeValue = "sse-s3"|"sse-kms"|string;
+  export type EncodingTypeValue = "plain"|"plain-dictionary"|"rle-dictionary"|string&{};
+  export type EncryptionModeValue = "sse-s3"|"sse-kms"|string&{};
   export interface Endpoint {
     /**
      * The database endpoint identifier. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
@@ -3425,7 +3425,7 @@ declare namespace DMS {
     DefaultValue?: String;
   }
   export type EndpointSettingEnumValues = String[];
-  export type EndpointSettingTypeValue = "string"|"boolean"|"integer"|"enum"|string;
+  export type EndpointSettingTypeValue = "string"|"boolean"|"integer"|"enum"|string&{};
   export type EndpointSettingsList = EndpointSetting[];
   export interface EngineVersion {
     /**
@@ -3821,8 +3821,8 @@ declare namespace DMS {
     NumberOfSchemas?: IntegerOptional;
   }
   export type Iso8601DateTime = Date;
-  export type KafkaSaslMechanism = "scram-sha-512"|"plain"|string;
-  export type KafkaSecurityProtocol = "plaintext"|"ssl-authentication"|"ssl-encryption"|"sasl-ssl"|string;
+  export type KafkaSaslMechanism = "scram-sha-512"|"plain"|string&{};
+  export type KafkaSecurityProtocol = "plaintext"|"ssl-authentication"|"ssl-encryption"|"sasl-ssl"|string&{};
   export interface KafkaSettings {
     /**
      * A comma-separated list of one or more broker locations in your Kafka cluster that host your Kafka instance. Specify each broker location in the form  broker-hostname-or-ip:port . For example, "ec2-12-345-678-901.compute-1.amazonaws.com:2345". For more information and examples of specifying a list of broker locations, see Using Apache Kafka as a target for Database Migration Service in the Database Migration Service User Guide. 
@@ -3905,7 +3905,7 @@ declare namespace DMS {
      */
     SslEndpointIdentificationAlgorithm?: KafkaSslEndpointIdentificationAlgorithm;
   }
-  export type KafkaSslEndpointIdentificationAlgorithm = "none"|"https"|string;
+  export type KafkaSslEndpointIdentificationAlgorithm = "none"|"https"|string&{};
   export type KeyList = String[];
   export interface KinesisSettings {
     /**
@@ -3994,8 +3994,8 @@ declare namespace DMS {
   }
   export type Long = number;
   export type LongOptional = number;
-  export type LongVarcharMappingType = "wstring"|"clob"|"nclob"|string;
-  export type MessageFormatValue = "json"|"json-unformatted"|string;
+  export type LongVarcharMappingType = "wstring"|"clob"|"nclob"|string&{};
+  export type MessageFormatValue = "json"|"json-unformatted"|string&{};
   export interface MicrosoftSQLServerSettings {
     /**
      * Endpoint TCP port.
@@ -4131,7 +4131,7 @@ declare namespace DMS {
     SchemaConversionApplicationAttributes?: SCApplicationAttributes;
   }
   export type MigrationProjectList = MigrationProject[];
-  export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string;
+  export type MigrationTypeValue = "full-load"|"cdc"|"full-load-and-cdc"|string&{};
   export interface ModifyConversionConfigurationMessage {
     /**
      * The migration project name or Amazon Resource Name (ARN).
@@ -4785,7 +4785,7 @@ declare namespace DMS {
      */
     IamAuthEnabled?: BooleanOptional;
   }
-  export type NestingLevelValue = "none"|"one"|string;
+  export type NestingLevelValue = "none"|"one"|string&{};
   export interface OracleDataProviderSettings {
     /**
      * The name of the Oracle server.
@@ -5041,8 +5041,8 @@ declare namespace DMS {
     ReleaseStatus?: ReleaseStatusValues;
   }
   export type OrderableReplicationInstanceList = OrderableReplicationInstance[];
-  export type OriginTypeValue = "SOURCE"|"TARGET"|string;
-  export type ParquetVersionValue = "parquet-1-0"|"parquet-2-0"|string;
+  export type OriginTypeValue = "SOURCE"|"TARGET"|string&{};
+  export type ParquetVersionValue = "parquet-1-0"|"parquet-2-0"|string&{};
   export interface PendingMaintenanceAction {
     /**
      * The type of pending maintenance action that is available for the resource.
@@ -5071,7 +5071,7 @@ declare namespace DMS {
   }
   export type PendingMaintenanceActionDetails = PendingMaintenanceAction[];
   export type PendingMaintenanceActions = ResourcePendingMaintenanceActions[];
-  export type PluginNameValue = "no-preference"|"test-decoding"|"pglogical"|string;
+  export type PluginNameValue = "no-preference"|"test-decoding"|"pglogical"|string&{};
   export interface PostgreSQLSettings {
     /**
      * For use with change data capture (CDC) only, this attribute has DMS bypass foreign keys and user triggers to reduce the time it takes to bulk load data. Example: afterConnectScript=SET session_replication_role='replica' 
@@ -5363,7 +5363,7 @@ declare namespace DMS {
      */
     WorkloadType: String;
   }
-  export type RedisAuthTypeValue = "none"|"auth-role"|"auth-token"|string;
+  export type RedisAuthTypeValue = "none"|"auth-role"|"auth-token"|string&{};
   export interface RedisSettings {
     /**
      * Fully qualified domain name of the endpoint.
@@ -5558,9 +5558,9 @@ declare namespace DMS {
      */
     LastFailureMessage?: String;
   }
-  export type RefreshSchemasStatusTypeValue = "successful"|"failed"|"refreshing"|string;
-  export type ReleaseStatusValues = "beta"|"prod"|string;
-  export type ReloadOptionValue = "data-reload"|"validate-only"|string;
+  export type RefreshSchemasStatusTypeValue = "successful"|"failed"|"refreshing"|string&{};
+  export type ReleaseStatusValues = "beta"|"prod"|string&{};
+  export type ReloadOptionValue = "data-reload"|"validate-only"|string&{};
   export interface ReloadReplicationTablesMessage {
     /**
      * The Amazon Resource Name of the replication config for which to reload tables.
@@ -5734,7 +5734,7 @@ declare namespace DMS {
     ReplicationConfigUpdateTime?: TStamp;
   }
   export type ReplicationConfigList = ReplicationConfig[];
-  export type ReplicationEndpointTypeValue = "source"|"target"|string;
+  export type ReplicationEndpointTypeValue = "source"|"target"|string&{};
   export interface ReplicationInstance {
     /**
      * The replication instance identifier is a required parameter. This parameter is stored as a lowercase string. Constraints:   Must contain 1-63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Example: myrepinstance 
@@ -6389,7 +6389,7 @@ declare namespace DMS {
      */
     S3BucketRoleArn?: String;
   }
-  export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string;
+  export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string&{};
   export interface SchemaConversionRequest {
     /**
      * The schema conversion action status.
@@ -6481,8 +6481,8 @@ declare namespace DMS {
     ServerName?: String;
   }
   export type SourceIdsList = String[];
-  export type SourceType = "replication-instance"|string;
-  export type SslSecurityProtocolValue = "plaintext"|"ssl-encryption"|string;
+  export type SourceType = "replication-instance"|string&{};
+  export type SslSecurityProtocolValue = "plaintext"|"ssl-encryption"|string&{};
   export interface StartExtensionPackAssociationMessage {
     /**
      * The migration project name or Amazon Resource Name (ARN).
@@ -6728,7 +6728,7 @@ declare namespace DMS {
      */
     ReplicationTask?: ReplicationTask;
   }
-  export type StartReplicationTaskTypeValue = "start-replication"|"resume-processing"|"reload-target"|string;
+  export type StartReplicationTaskTypeValue = "start-replication"|"resume-processing"|"reload-target"|string&{};
   export interface StopReplicationMessage {
     /**
      * The Amazon Resource Name of the replication to stop.
@@ -6946,7 +6946,7 @@ declare namespace DMS {
     ResourceArn?: String;
   }
   export type TagList = Tag[];
-  export type TargetDbType = "specific-database"|"multiple-databases"|string;
+  export type TargetDbType = "specific-database"|"multiple-databases"|string&{};
   export interface TestConnectionMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication instance.
@@ -6985,7 +6985,7 @@ declare namespace DMS {
      */
     EnableMagneticStoreWrites?: BooleanOptional;
   }
-  export type TlogAccessMode = "BackupOnly"|"PreferBackup"|"PreferTlog"|"TlogOnly"|string;
+  export type TlogAccessMode = "BackupOnly"|"PreferBackup"|"PreferTlog"|"TlogOnly"|string&{};
   export interface UpdateSubscriptionsToEventBridgeMessage {
     /**
      * When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is. If not set or set to false, this operation runs only when all your replication instances are from DMS version 3.4.6 or higher. 
@@ -6998,7 +6998,7 @@ declare namespace DMS {
      */
     Result?: String;
   }
-  export type VersionStatus = "UP_TO_DATE"|"OUTDATED"|"UNSUPPORTED"|string;
+  export type VersionStatus = "UP_TO_DATE"|"OUTDATED"|"UNSUPPORTED"|string&{};
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {
     /**

@@ -1035,7 +1035,7 @@ declare namespace RedshiftServerless {
      */
     workgroups: WorkgroupList;
   }
-  export type LogExport = "useractivitylog"|"userlog"|"connectionlog"|string;
+  export type LogExport = "useractivitylog"|"userlog"|"connectionlog"|string&{};
   export type LogExportList = LogExport[];
   export type Long = number;
   export interface Namespace {
@@ -1086,7 +1086,7 @@ declare namespace RedshiftServerless {
   }
   export type NamespaceList = Namespace[];
   export type NamespaceName = string;
-  export type NamespaceStatus = "AVAILABLE"|"MODIFYING"|"DELETING"|string;
+  export type NamespaceStatus = "AVAILABLE"|"MODIFYING"|"DELETING"|string&{};
   export interface NetworkInterface {
     /**
      * The availability Zone.
@@ -1352,7 +1352,7 @@ declare namespace RedshiftServerless {
     totalBackupSizeInMegaBytes?: Double;
   }
   export type SnapshotList = Snapshot[];
-  export type SnapshotStatus = "AVAILABLE"|"CREATING"|"DELETED"|"CANCELLED"|"FAILED"|"COPYING"|string;
+  export type SnapshotStatus = "AVAILABLE"|"CREATING"|"DELETED"|"CANCELLED"|"FAILED"|"COPYING"|string&{};
   export type String = string;
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
@@ -1617,9 +1617,9 @@ declare namespace RedshiftServerless {
      */
     usageType?: UsageLimitUsageType;
   }
-  export type UsageLimitBreachAction = "log"|"emit-metric"|"deactivate"|string;
-  export type UsageLimitPeriod = "daily"|"weekly"|"monthly"|string;
-  export type UsageLimitUsageType = "serverless-compute"|"cross-region-datasharing"|string;
+  export type UsageLimitBreachAction = "log"|"emit-metric"|"deactivate"|string&{};
+  export type UsageLimitPeriod = "daily"|"weekly"|"monthly"|string&{};
+  export type UsageLimitUsageType = "serverless-compute"|"cross-region-datasharing"|string&{};
   export type UsageLimits = UsageLimit[];
   export interface VpcEndpoint {
     /**
@@ -1709,7 +1709,7 @@ declare namespace RedshiftServerless {
   }
   export type WorkgroupList = Workgroup[];
   export type WorkgroupName = string;
-  export type WorkgroupStatus = "CREATING"|"AVAILABLE"|"MODIFYING"|"DELETING"|string;
+  export type WorkgroupStatus = "CREATING"|"AVAILABLE"|"MODIFYING"|"DELETING"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

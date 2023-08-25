@@ -466,9 +466,9 @@ declare namespace VPCLattice {
   }
   export type AccountId = string;
   export type Arn = string;
-  export type AuthPolicyState = "Active"|"Inactive"|string;
+  export type AuthPolicyState = "Active"|"Inactive"|string&{};
   export type AuthPolicyString = string;
-  export type AuthType = "NONE"|"AWS_IAM"|string;
+  export type AuthType = "NONE"|"AWS_IAM"|string&{};
   export interface BatchUpdateRuleRequest {
     /**
      * The ID or Amazon Resource Name (ARN) of the listener.
@@ -1612,7 +1612,7 @@ declare namespace VPCLattice {
   export type HealthCheckIntervalSeconds = number;
   export type HealthCheckPath = string;
   export type HealthCheckPort = number;
-  export type HealthCheckProtocolVersion = "HTTP1"|"HTTP2"|string;
+  export type HealthCheckProtocolVersion = "HTTP1"|"HTTP2"|string&{};
   export type HealthCheckTimeoutSeconds = number;
   export type HealthyThresholdCount = number;
   export type HttpCodeMatcher = string;
@@ -1632,7 +1632,7 @@ declare namespace VPCLattice {
   }
   export type HttpMethod = string;
   export type HttpStatusCode = number;
-  export type IpAddressType = "IPV4"|"IPV6"|string;
+  export type IpAddressType = "IPV4"|"IPV6"|string&{};
   export interface ListAccessLogSubscriptionsRequest {
     /**
      * The maximum number of results to return.
@@ -1878,7 +1878,7 @@ declare namespace VPCLattice {
   export type ListenerId = string;
   export type ListenerIdentifier = string;
   export type ListenerName = string;
-  export type ListenerProtocol = "HTTP"|"HTTPS"|string;
+  export type ListenerProtocol = "HTTP"|"HTTPS"|string&{};
   export interface ListenerSummary {
     /**
      * The Amazon Resource Name (ARN) of the listener.
@@ -2133,7 +2133,7 @@ declare namespace VPCLattice {
   export type ServiceNetworkServiceAssociationArn = string;
   export type ServiceNetworkServiceAssociationIdentifier = string;
   export type ServiceNetworkServiceAssociationList = ServiceNetworkServiceAssociationSummary[];
-  export type ServiceNetworkServiceAssociationStatus = "CREATE_IN_PROGRESS"|"ACTIVE"|"DELETE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_FAILED"|string;
+  export type ServiceNetworkServiceAssociationStatus = "CREATE_IN_PROGRESS"|"ACTIVE"|"DELETE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_FAILED"|string&{};
   export interface ServiceNetworkServiceAssociationSummary {
     /**
      * The Amazon Resource Name (ARN) of the association.
@@ -2222,7 +2222,7 @@ declare namespace VPCLattice {
   export type ServiceNetworkVpcAssociationId = string;
   export type ServiceNetworkVpcAssociationIdentifier = string;
   export type ServiceNetworkVpcAssociationList = ServiceNetworkVpcAssociationSummary[];
-  export type ServiceNetworkVpcAssociationStatus = "CREATE_IN_PROGRESS"|"ACTIVE"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_FAILED"|"UPDATE_FAILED"|string;
+  export type ServiceNetworkVpcAssociationStatus = "CREATE_IN_PROGRESS"|"ACTIVE"|"UPDATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_FAILED"|"UPDATE_FAILED"|string&{};
   export interface ServiceNetworkVpcAssociationSummary {
     /**
      * The Amazon Resource Name (ARN) of the association.
@@ -2265,7 +2265,7 @@ declare namespace VPCLattice {
      */
     vpcId?: VpcId;
   }
-  export type ServiceStatus = "ACTIVE"|"CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_FAILED"|string;
+  export type ServiceStatus = "ACTIVE"|"CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_FAILED"|string&{};
   export interface ServiceSummary {
     /**
      * The Amazon Resource Name (ARN) of the service.
@@ -2377,9 +2377,9 @@ declare namespace VPCLattice {
   export type TargetGroupIdentifier = string;
   export type TargetGroupList = TargetGroupSummary[];
   export type TargetGroupName = string;
-  export type TargetGroupProtocol = "HTTP"|"HTTPS"|string;
-  export type TargetGroupProtocolVersion = "HTTP1"|"HTTP2"|"GRPC"|string;
-  export type TargetGroupStatus = "CREATE_IN_PROGRESS"|"ACTIVE"|"DELETE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_FAILED"|string;
+  export type TargetGroupProtocol = "HTTP"|"HTTPS"|string&{};
+  export type TargetGroupProtocolVersion = "HTTP1"|"HTTP2"|"GRPC"|string&{};
+  export type TargetGroupStatus = "CREATE_IN_PROGRESS"|"ACTIVE"|"DELETE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_FAILED"|string&{};
   export interface TargetGroupSummary {
     /**
      * The ARN (Amazon Resource Name) of the target group.
@@ -2430,11 +2430,11 @@ declare namespace VPCLattice {
      */
     vpcIdentifier?: VpcId;
   }
-  export type TargetGroupType = "IP"|"LAMBDA"|"INSTANCE"|"ALB"|string;
+  export type TargetGroupType = "IP"|"LAMBDA"|"INSTANCE"|"ALB"|string&{};
   export type TargetGroupWeight = number;
   export type TargetIdString = string;
   export type TargetList = Target[];
-  export type TargetStatus = "DRAINING"|"UNAVAILABLE"|"HEALTHY"|"UNHEALTHY"|"INITIAL"|"UNUSED"|string;
+  export type TargetStatus = "DRAINING"|"UNAVAILABLE"|"HEALTHY"|"UNHEALTHY"|"INITIAL"|"UNUSED"|string&{};
   export interface TargetSummary {
     /**
      * The ID of the target. If the target type of the target group is INSTANCE, this is an instance ID. If the target type is IP , this is an IP address. If the target type is LAMBDA, this is the ARN of the Lambda function. If the target type is ALB, this is the ARN of the Application Load Balancer.

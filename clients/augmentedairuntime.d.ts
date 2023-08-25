@@ -53,7 +53,7 @@ declare class AugmentedAIRuntime extends Service {
   stopHumanLoop(callback?: (err: AWSError, data: AugmentedAIRuntime.Types.StopHumanLoopResponse) => void): Request<AugmentedAIRuntime.Types.StopHumanLoopResponse, AWSError>;
 }
 declare namespace AugmentedAIRuntime {
-  export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
+  export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string&{};
   export type ContentClassifiers = ContentClassifier[];
   export interface DeleteHumanLoopRequest {
     /**
@@ -125,7 +125,7 @@ declare namespace AugmentedAIRuntime {
      */
     OutputS3Uri: String;
   }
-  export type HumanLoopStatus = "InProgress"|"Failed"|"Completed"|"Stopped"|"Stopping"|string;
+  export type HumanLoopStatus = "InProgress"|"Failed"|"Completed"|"Stopped"|"Stopping"|string&{};
   export type HumanLoopSummaries = HumanLoopSummary[];
   export interface HumanLoopSummary {
     /**
@@ -188,7 +188,7 @@ declare namespace AugmentedAIRuntime {
   }
   export type MaxResults = number;
   export type NextToken = string;
-  export type SortOrder = "Ascending"|"Descending"|string;
+  export type SortOrder = "Ascending"|"Descending"|string&{};
   export interface StartHumanLoopRequest {
     /**
      * The name of the human loop.

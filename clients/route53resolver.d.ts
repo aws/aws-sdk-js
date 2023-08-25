@@ -558,7 +558,7 @@ declare class Route53Resolver extends Service {
 }
 declare namespace Route53Resolver {
   export type AccountId = string;
-  export type Action = "ALLOW"|"BLOCK"|"ALERT"|string;
+  export type Action = "ALLOW"|"BLOCK"|"ALERT"|string&{};
   export type Arn = string;
   export interface AssociateFirewallRuleGroupRequest {
     /**
@@ -648,11 +648,11 @@ declare namespace Route53Resolver {
      */
     ResolverRuleAssociation?: ResolverRuleAssociation;
   }
-  export type AutodefinedReverseFlag = "ENABLE"|"DISABLE"|"USE_LOCAL_RESOURCE_SETTING"|string;
-  export type BlockOverrideDnsType = "CNAME"|string;
+  export type AutodefinedReverseFlag = "ENABLE"|"DISABLE"|"USE_LOCAL_RESOURCE_SETTING"|string&{};
+  export type BlockOverrideDnsType = "CNAME"|string&{};
   export type BlockOverrideDomain = string;
   export type BlockOverrideTtl = number;
-  export type BlockResponse = "NODATA"|"NXDOMAIN"|"OVERRIDE"|string;
+  export type BlockResponse = "NODATA"|"NXDOMAIN"|"OVERRIDE"|string&{};
   export type Boolean = boolean;
   export type Count = number;
   export interface CreateFirewallDomainListRequest {
@@ -1064,7 +1064,7 @@ declare namespace Route53Resolver {
     FirewallFailOpen?: FirewallFailOpenStatus;
   }
   export type FirewallConfigList = FirewallConfig[];
-  export type FirewallDomainImportOperation = "REPLACE"|string;
+  export type FirewallDomainImportOperation = "REPLACE"|string&{};
   export interface FirewallDomainList {
     /**
      * The ID of the domain list. 
@@ -1130,11 +1130,11 @@ declare namespace Route53Resolver {
     ManagedOwnerName?: ServicePrinciple;
   }
   export type FirewallDomainListMetadataList = FirewallDomainListMetadata[];
-  export type FirewallDomainListStatus = "COMPLETE"|"COMPLETE_IMPORT_FAILED"|"IMPORTING"|"DELETING"|"UPDATING"|string;
+  export type FirewallDomainListStatus = "COMPLETE"|"COMPLETE_IMPORT_FAILED"|"IMPORTING"|"DELETING"|"UPDATING"|string&{};
   export type FirewallDomainName = string;
-  export type FirewallDomainUpdateOperation = "ADD"|"REMOVE"|"REPLACE"|string;
+  export type FirewallDomainUpdateOperation = "ADD"|"REMOVE"|"REPLACE"|string&{};
   export type FirewallDomains = FirewallDomainName[];
-  export type FirewallFailOpenStatus = "ENABLED"|"DISABLED"|"USE_LOCAL_RESOURCE_SETTING"|string;
+  export type FirewallFailOpenStatus = "ENABLED"|"DISABLED"|"USE_LOCAL_RESOURCE_SETTING"|string&{};
   export interface FirewallRule {
     /**
      * The unique identifier of the firewall rule group of the rule. 
@@ -1285,7 +1285,7 @@ declare namespace Route53Resolver {
      */
     ModificationTime?: Rfc3339TimeString;
   }
-  export type FirewallRuleGroupAssociationStatus = "COMPLETE"|"DELETING"|"UPDATING"|string;
+  export type FirewallRuleGroupAssociationStatus = "COMPLETE"|"DELETING"|"UPDATING"|string&{};
   export type FirewallRuleGroupAssociations = FirewallRuleGroupAssociation[];
   export interface FirewallRuleGroupMetadata {
     /**
@@ -1315,7 +1315,7 @@ declare namespace Route53Resolver {
   }
   export type FirewallRuleGroupMetadataList = FirewallRuleGroupMetadata[];
   export type FirewallRuleGroupPolicy = string;
-  export type FirewallRuleGroupStatus = "COMPLETE"|"DELETING"|"UPDATING"|string;
+  export type FirewallRuleGroupStatus = "COMPLETE"|"DELETING"|"UPDATING"|string&{};
   export type FirewallRules = FirewallRule[];
   export interface GetFirewallConfigRequest {
     /**
@@ -1580,7 +1580,7 @@ declare namespace Route53Resolver {
      */
     ModificationTime?: Rfc3339TimeString;
   }
-  export type IpAddressStatus = "CREATING"|"FAILED_CREATION"|"ATTACHING"|"ATTACHED"|"REMAP_DETACHING"|"REMAP_ATTACHING"|"DETACHING"|"FAILED_RESOURCE_GONE"|"DELETING"|"DELETE_FAILED_FAS_EXPIRED"|"UPDATING"|"UPDATE_FAILED"|string;
+  export type IpAddressStatus = "CREATING"|"FAILED_CREATION"|"ATTACHING"|"ATTACHED"|"REMAP_DETACHING"|"REMAP_ATTACHING"|"DETACHING"|"FAILED_RESOURCE_GONE"|"DELETING"|"DELETE_FAILED_FAS_EXPIRED"|"UPDATING"|"UPDATE_FAILED"|string&{};
   export interface IpAddressUpdate {
     /**
      *  Only when removing an IP address from a Resolver endpoint: The ID of the IP address that you want to remove. To get this ID, use GetResolverEndpoint.
@@ -2042,7 +2042,7 @@ declare namespace Route53Resolver {
     NextToken?: NextToken;
   }
   export type MaxResults = number;
-  export type MutationProtectionStatus = "ENABLED"|"DISABLED"|string;
+  export type MutationProtectionStatus = "ENABLED"|"DISABLED"|string&{};
   export type Name = string;
   export type NextToken = string;
   export type OutpostArn = string;
@@ -2095,7 +2095,7 @@ declare namespace Route53Resolver {
   }
   export type OutpostResolverList = OutpostResolver[];
   export type OutpostResolverName = string;
-  export type OutpostResolverStatus = "CREATING"|"OPERATIONAL"|"UPDATING"|"DELETING"|"ACTION_NEEDED"|"FAILED_CREATION"|"FAILED_DELETION"|string;
+  export type OutpostResolverStatus = "CREATING"|"OPERATIONAL"|"UPDATING"|"DELETING"|"ACTION_NEEDED"|"FAILED_CREATION"|"FAILED_DELETION"|string&{};
   export type OutpostResolverStatusMessage = string;
   export type Port = number;
   export type Priority = number;
@@ -2147,7 +2147,7 @@ declare namespace Route53Resolver {
      */
     ReturnValue?: Boolean;
   }
-  export type ResolverAutodefinedReverseStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"|"USE_LOCAL_RESOURCE_SETTING"|string;
+  export type ResolverAutodefinedReverseStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"|"USE_LOCAL_RESOURCE_SETTING"|string&{};
   export interface ResolverConfig {
     /**
      * ID for the Resolver configuration.
@@ -2167,7 +2167,7 @@ declare namespace Route53Resolver {
     AutodefinedReverse?: ResolverAutodefinedReverseStatus;
   }
   export type ResolverConfigList = ResolverConfig[];
-  export type ResolverDNSSECValidationStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"|"USE_LOCAL_RESOURCE_SETTING"|string;
+  export type ResolverDNSSECValidationStatus = "ENABLING"|"ENABLED"|"DISABLING"|"DISABLED"|"UPDATING_TO_USE_LOCAL_RESOURCE_SETTING"|"USE_LOCAL_RESOURCE_SETTING"|string&{};
   export interface ResolverDnssecConfig {
     /**
      * The ID for a configuration for DNSSEC validation.
@@ -2249,9 +2249,9 @@ declare namespace Route53Resolver {
      */
     PreferredInstanceType?: OutpostInstanceType;
   }
-  export type ResolverEndpointDirection = "INBOUND"|"OUTBOUND"|string;
-  export type ResolverEndpointStatus = "CREATING"|"OPERATIONAL"|"UPDATING"|"AUTO_RECOVERING"|"ACTION_NEEDED"|"DELETING"|string;
-  export type ResolverEndpointType = "IPV6"|"IPV4"|"DUALSTACK"|string;
+  export type ResolverEndpointDirection = "INBOUND"|"OUTBOUND"|string&{};
+  export type ResolverEndpointStatus = "CREATING"|"OPERATIONAL"|"UPDATING"|"AUTO_RECOVERING"|"ACTION_NEEDED"|"DELETING"|string&{};
+  export type ResolverEndpointType = "IPV6"|"IPV4"|"DUALSTACK"|string&{};
   export type ResolverEndpoints = ResolverEndpoint[];
   export interface ResolverQueryLogConfig {
     /**
@@ -2325,14 +2325,14 @@ declare namespace Route53Resolver {
      */
     CreationTime?: Rfc3339TimeString;
   }
-  export type ResolverQueryLogConfigAssociationError = "NONE"|"DESTINATION_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_SERVICE_ERROR"|string;
+  export type ResolverQueryLogConfigAssociationError = "NONE"|"DESTINATION_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_SERVICE_ERROR"|string&{};
   export type ResolverQueryLogConfigAssociationErrorMessage = string;
   export type ResolverQueryLogConfigAssociationList = ResolverQueryLogConfigAssociation[];
-  export type ResolverQueryLogConfigAssociationStatus = "CREATING"|"ACTIVE"|"ACTION_NEEDED"|"DELETING"|"FAILED"|string;
+  export type ResolverQueryLogConfigAssociationStatus = "CREATING"|"ACTIVE"|"ACTION_NEEDED"|"DELETING"|"FAILED"|string&{};
   export type ResolverQueryLogConfigList = ResolverQueryLogConfig[];
   export type ResolverQueryLogConfigName = string;
   export type ResolverQueryLogConfigPolicy = string;
-  export type ResolverQueryLogConfigStatus = "CREATING"|"CREATED"|"DELETING"|"FAILED"|string;
+  export type ResolverQueryLogConfigStatus = "CREATING"|"CREATED"|"DELETING"|"FAILED"|string&{};
   export interface ResolverRule {
     /**
      * The ID that Resolver assigned to the Resolver rule when you created it.
@@ -2417,7 +2417,7 @@ declare namespace Route53Resolver {
      */
     StatusMessage?: StatusMessage;
   }
-  export type ResolverRuleAssociationStatus = "CREATING"|"COMPLETE"|"DELETING"|"FAILED"|"OVERRIDDEN"|string;
+  export type ResolverRuleAssociationStatus = "CREATING"|"COMPLETE"|"DELETING"|"FAILED"|"OVERRIDDEN"|string&{};
   export type ResolverRuleAssociations = ResolverRuleAssociation[];
   export interface ResolverRuleConfig {
     /**
@@ -2434,16 +2434,16 @@ declare namespace Route53Resolver {
     ResolverEndpointId?: ResourceId;
   }
   export type ResolverRulePolicy = string;
-  export type ResolverRuleStatus = "COMPLETE"|"DELETING"|"UPDATING"|"FAILED"|string;
+  export type ResolverRuleStatus = "COMPLETE"|"DELETING"|"UPDATING"|"FAILED"|string&{};
   export type ResolverRules = ResolverRule[];
   export type ResourceId = string;
   export type Rfc3339TimeString = string;
-  export type RuleTypeOption = "FORWARD"|"SYSTEM"|"RECURSIVE"|string;
+  export type RuleTypeOption = "FORWARD"|"SYSTEM"|"RECURSIVE"|string&{};
   export type SecurityGroupIds = ResourceId[];
   export type ServicePrinciple = string;
-  export type ShareStatus = "NOT_SHARED"|"SHARED_WITH_ME"|"SHARED_BY_ME"|string;
+  export type ShareStatus = "NOT_SHARED"|"SHARED_WITH_ME"|"SHARED_BY_ME"|string&{};
   export type SortByKey = string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export type StatusMessage = string;
   export type SubnetId = string;
   export interface Tag {
@@ -2723,7 +2723,7 @@ declare namespace Route53Resolver {
      */
     ResolverRule?: ResolverRule;
   }
-  export type Validation = "ENABLE"|"DISABLE"|"USE_LOCAL_RESOURCE_SETTING"|string;
+  export type Validation = "ENABLE"|"DISABLE"|"USE_LOCAL_RESOURCE_SETTING"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

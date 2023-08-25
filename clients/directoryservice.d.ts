@@ -694,9 +694,9 @@ declare namespace DirectoryService {
     Type?: CertificateType;
   }
   export type CertificateRegisteredDateTime = Date;
-  export type CertificateState = "Registering"|"Registered"|"RegisterFailed"|"Deregistering"|"Deregistered"|"DeregisterFailed"|string;
+  export type CertificateState = "Registering"|"Registered"|"RegisterFailed"|"Deregistering"|"Deregistered"|"DeregisterFailed"|string&{};
   export type CertificateStateReason = string;
-  export type CertificateType = "ClientCertAuth"|"ClientLDAPS"|string;
+  export type CertificateType = "ClientCertAuth"|"ClientLDAPS"|string&{};
   export type CertificatesInfo = CertificateInfo[];
   export type CidrIp = string;
   export type CidrIps = CidrIp[];
@@ -715,8 +715,8 @@ declare namespace DirectoryService {
     LastUpdatedDateTime?: LastUpdatedDateTime;
   }
   export type ClientAuthenticationSettingsInfo = ClientAuthenticationSettingInfo[];
-  export type ClientAuthenticationStatus = "Enabled"|"Disabled"|string;
-  export type ClientAuthenticationType = "SmartCard"|"SmartCardOrPassword"|string;
+  export type ClientAuthenticationStatus = "Enabled"|"Disabled"|string&{};
+  export type ClientAuthenticationType = "SmartCard"|"SmartCardOrPassword"|string&{};
   export interface ClientCertAuthSettings {
     /**
      * Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.
@@ -1414,7 +1414,7 @@ declare namespace DirectoryService {
   export type DirectoryConfigurationSettingRequestStatusMessage = string;
   export type DirectoryConfigurationSettingType = string;
   export type DirectoryConfigurationSettingValue = string;
-  export type DirectoryConfigurationStatus = "Requested"|"Updating"|"Updated"|"Failed"|"Default"|string;
+  export type DirectoryConfigurationStatus = "Requested"|"Updating"|"Updated"|"Failed"|"Default"|string&{};
   export interface DirectoryConnectSettings {
     /**
      * The identifier of the VPC in which the AD Connector is created.
@@ -1566,7 +1566,7 @@ declare namespace DirectoryService {
     OsVersion?: OSVersion;
   }
   export type DirectoryDescriptions = DirectoryDescription[];
-  export type DirectoryEdition = "Enterprise"|"Standard"|string;
+  export type DirectoryEdition = "Enterprise"|"Standard"|string&{};
   export type DirectoryId = string;
   export type DirectoryIds = DirectoryId[];
   export interface DirectoryLimits {
@@ -1609,9 +1609,9 @@ declare namespace DirectoryService {
   }
   export type DirectoryName = string;
   export type DirectoryShortName = string;
-  export type DirectorySize = "Small"|"Large"|string;
-  export type DirectoryStage = "Requested"|"Creating"|"Created"|"Active"|"Inoperable"|"Impaired"|"Restoring"|"RestoreFailed"|"Deleting"|"Deleted"|"Failed"|string;
-  export type DirectoryType = "SimpleAD"|"ADConnector"|"MicrosoftAD"|"SharedMicrosoftAD"|string;
+  export type DirectorySize = "Small"|"Large"|string&{};
+  export type DirectoryStage = "Requested"|"Creating"|"Created"|"Active"|"Inoperable"|"Impaired"|"Restoring"|"RestoreFailed"|"Deleting"|"Deleted"|"Failed"|string&{};
+  export type DirectoryType = "SimpleAD"|"ADConnector"|"MicrosoftAD"|"SharedMicrosoftAD"|string&{};
   export interface DirectoryVpcSettings {
     /**
      * The identifier of the VPC in which to create the directory.
@@ -1733,7 +1733,7 @@ declare namespace DirectoryService {
   }
   export type DomainControllerId = string;
   export type DomainControllerIds = DomainControllerId[];
-  export type DomainControllerStatus = "Creating"|"Active"|"Impaired"|"Restoring"|"Deleting"|"Deleted"|"Failed"|string;
+  export type DomainControllerStatus = "Creating"|"Active"|"Impaired"|"Restoring"|"Deleting"|"Deleted"|"Failed"|string&{};
   export type DomainControllerStatusReason = string;
   export type DomainControllers = DomainController[];
   export interface EnableClientAuthenticationRequest {
@@ -1871,7 +1871,7 @@ declare namespace DirectoryService {
      */
     Description?: Description;
   }
-  export type IpRouteStatusMsg = "Adding"|"Added"|"Removing"|"Removed"|"AddFailed"|"RemoveFailed"|string;
+  export type IpRouteStatusMsg = "Adding"|"Added"|"Removing"|"Removed"|"AddFailed"|"RemoveFailed"|string&{};
   export type IpRouteStatusReason = string;
   export type IpRoutes = IpRoute[];
   export type IpRoutesInfo = IpRouteInfo[];
@@ -1890,9 +1890,9 @@ declare namespace DirectoryService {
     LastUpdatedDateTime?: LastUpdatedDateTime;
   }
   export type LDAPSSettingsInfo = LDAPSSettingInfo[];
-  export type LDAPSStatus = "Enabling"|"Enabled"|"EnableFailed"|"Disabled"|string;
+  export type LDAPSStatus = "Enabling"|"Enabled"|"EnableFailed"|"Disabled"|string&{};
   export type LDAPSStatusReason = string;
-  export type LDAPSType = "Client"|string;
+  export type LDAPSType = "Client"|string&{};
   export type LastUpdatedDateTime = Date;
   export type LaunchTime = Date;
   export type LdifContent = string;
@@ -2043,7 +2043,7 @@ declare namespace DirectoryService {
      */
     OSVersion?: OSVersion;
   }
-  export type OSVersion = "SERVER_2012"|"SERVER_2019"|string;
+  export type OSVersion = "SERVER_2012"|"SERVER_2019"|string&{};
   export type OrganizationalUnitDN = string;
   export interface OwnerDirectoryDescription {
     /**
@@ -2074,7 +2074,7 @@ declare namespace DirectoryService {
   export type PageLimit = number;
   export type Password = string;
   export type PortNumber = number;
-  export type RadiusAuthenticationProtocol = "PAP"|"CHAP"|"MS-CHAPv1"|"MS-CHAPv2"|string;
+  export type RadiusAuthenticationProtocol = "PAP"|"CHAP"|"MS-CHAPv1"|"MS-CHAPv2"|string&{};
   export type RadiusDisplayLabel = string;
   export type RadiusRetries = number;
   export interface RadiusSettings {
@@ -2112,7 +2112,7 @@ declare namespace DirectoryService {
     UseSameUsername?: UseSameUsername;
   }
   export type RadiusSharedSecret = string;
-  export type RadiusStatus = "Creating"|"Completed"|"Failed"|string;
+  export type RadiusStatus = "Creating"|"Completed"|"Failed"|string&{};
   export type RadiusTimeout = number;
   export interface RegionDescription {
     /**
@@ -2150,7 +2150,7 @@ declare namespace DirectoryService {
     LastUpdatedDateTime?: LastUpdatedDateTime;
   }
   export type RegionName = string;
-  export type RegionType = "Primary"|"Additional"|string;
+  export type RegionType = "Primary"|"Additional"|string&{};
   export type RegionsDescription = RegionDescription[];
   export interface RegionsInfo {
     /**
@@ -2244,7 +2244,7 @@ declare namespace DirectoryService {
   }
   export interface RemoveTagsFromResourceResult {
   }
-  export type ReplicationScope = "Domain"|string;
+  export type ReplicationScope = "Domain"|string&{};
   export type RequestId = string;
   export interface ResetUserPasswordRequest {
     /**
@@ -2303,11 +2303,11 @@ declare namespace DirectoryService {
      */
     EndDateTime?: EndDateTime;
   }
-  export type SchemaExtensionStatus = "Initializing"|"CreatingSnapshot"|"UpdatingSchema"|"Replicating"|"CancelInProgress"|"RollbackInProgress"|"Cancelled"|"Failed"|"Completed"|string;
+  export type SchemaExtensionStatus = "Initializing"|"CreatingSnapshot"|"UpdatingSchema"|"Replicating"|"CancelInProgress"|"RollbackInProgress"|"Cancelled"|"Failed"|"Completed"|string&{};
   export type SchemaExtensionStatusReason = string;
   export type SchemaExtensionsInfo = SchemaExtensionInfo[];
   export type SecurityGroupId = string;
-  export type SelectiveAuth = "Enabled"|"Disabled"|string;
+  export type SelectiveAuth = "Enabled"|"Disabled"|string&{};
   export type Server = string;
   export type Servers = Server[];
   export interface Setting {
@@ -2392,8 +2392,8 @@ declare namespace DirectoryService {
      */
     SharedDirectoryId?: DirectoryId;
   }
-  export type ShareMethod = "ORGANIZATIONS"|"HANDSHAKE"|string;
-  export type ShareStatus = "Shared"|"PendingAcceptance"|"Rejected"|"Rejecting"|"RejectFailed"|"Sharing"|"ShareFailed"|"Deleted"|"Deleting"|string;
+  export type ShareMethod = "ORGANIZATIONS"|"HANDSHAKE"|string&{};
+  export type ShareStatus = "Shared"|"PendingAcceptance"|"Rejected"|"Rejecting"|"RejectFailed"|"Sharing"|"ShareFailed"|"Deleted"|"Deleting"|string&{};
   export interface ShareTarget {
     /**
      * Identifier of the directory consumer account.
@@ -2486,8 +2486,8 @@ declare namespace DirectoryService {
     ManualSnapshotsLimitReached?: ManualSnapshotsLimitReached;
   }
   export type SnapshotName = string;
-  export type SnapshotStatus = "Creating"|"Completed"|"Failed"|string;
-  export type SnapshotType = "Auto"|"Manual"|string;
+  export type SnapshotStatus = "Creating"|"Completed"|"Failed"|string&{};
+  export type SnapshotType = "Auto"|"Manual"|string&{};
   export type Snapshots = Snapshot[];
   export type SsoEnabled = boolean;
   export type StageReason = string;
@@ -2536,11 +2536,11 @@ declare namespace DirectoryService {
   export type TagValue = string;
   export type Tags = Tag[];
   export type TargetId = string;
-  export type TargetType = "ACCOUNT"|string;
+  export type TargetType = "ACCOUNT"|string&{};
   export type TopicArn = string;
   export type TopicName = string;
   export type TopicNames = TopicName[];
-  export type TopicStatus = "Registered"|"Topic not found"|"Failed"|"Deleted"|string;
+  export type TopicStatus = "Registered"|"Topic not found"|"Failed"|"Deleted"|string&{};
   export interface Trust {
     /**
      * The Directory ID of the Amazon Web Services directory involved in the trust relationship.
@@ -2587,13 +2587,13 @@ declare namespace DirectoryService {
      */
     SelectiveAuth?: SelectiveAuth;
   }
-  export type TrustDirection = "One-Way: Outgoing"|"One-Way: Incoming"|"Two-Way"|string;
+  export type TrustDirection = "One-Way: Outgoing"|"One-Way: Incoming"|"Two-Way"|string&{};
   export type TrustId = string;
   export type TrustIds = TrustId[];
   export type TrustPassword = string;
-  export type TrustState = "Creating"|"Created"|"Verifying"|"VerifyFailed"|"Verified"|"Updating"|"UpdateFailed"|"Updated"|"Deleting"|"Deleted"|"Failed"|string;
+  export type TrustState = "Creating"|"Created"|"Verifying"|"VerifyFailed"|"Verified"|"Updating"|"UpdateFailed"|"Updated"|"Deleting"|"Deleted"|"Failed"|string&{};
   export type TrustStateReason = string;
-  export type TrustType = "Forest"|"External"|string;
+  export type TrustType = "Forest"|"External"|string&{};
   export type Trusts = Trust[];
   export interface UnshareDirectoryRequest {
     /**
@@ -2733,7 +2733,7 @@ declare namespace DirectoryService {
      */
     DirectoryId?: DirectoryId;
   }
-  export type UpdateStatus = "Updated"|"Updating"|"UpdateFailed"|string;
+  export type UpdateStatus = "Updated"|"Updating"|"UpdateFailed"|string&{};
   export type UpdateStatusReason = string;
   export interface UpdateTrustRequest {
     /**
@@ -2752,7 +2752,7 @@ declare namespace DirectoryService {
      */
     TrustId?: TrustId;
   }
-  export type UpdateType = "OS"|string;
+  export type UpdateType = "OS"|string&{};
   export interface UpdateValue {
     /**
      *  The OS update related settings. 

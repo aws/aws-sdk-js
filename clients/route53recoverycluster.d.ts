@@ -117,7 +117,7 @@ declare namespace Route53RecoveryCluster {
     RoutingControlState?: RoutingControlState;
   }
   export type RoutingControlName = string;
-  export type RoutingControlState = "On"|"Off"|string;
+  export type RoutingControlState = "On"|"Off"|string&{};
   export type RoutingControls = RoutingControl[];
   export type UpdateRoutingControlStateEntries = UpdateRoutingControlStateEntry[];
   export interface UpdateRoutingControlStateEntry {

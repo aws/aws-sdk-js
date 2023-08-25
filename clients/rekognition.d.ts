@@ -663,7 +663,7 @@ declare namespace Rekognition {
     FaceId?: FaceId;
   }
   export type AssociatedFacesList = AssociatedFace[];
-  export type Attribute = "DEFAULT"|"ALL"|"AGE_RANGE"|"BEARD"|"EMOTIONS"|"EYE_DIRECTION"|"EYEGLASSES"|"EYES_OPEN"|"GENDER"|"MOUTH_OPEN"|"MUSTACHE"|"FACE_OCCLUDED"|"SMILE"|"SUNGLASSES"|string;
+  export type Attribute = "DEFAULT"|"ALL"|"AGE_RANGE"|"BEARD"|"EMOTIONS"|"EYE_DIRECTION"|"EYEGLASSES"|"EYES_OPEN"|"GENDER"|"MOUTH_OPEN"|"MUSTACHE"|"FACE_OCCLUDED"|"SMILE"|"SUNGLASSES"|string&{};
   export type Attributes = Attribute[];
   export interface AudioMetadata {
     /**
@@ -714,7 +714,7 @@ declare namespace Rekognition {
      */
     MinCoveragePercentage?: MinCoveragePercentage;
   }
-  export type BodyPart = "FACE"|"HEAD"|"LEFT_HAND"|"RIGHT_HAND"|string;
+  export type BodyPart = "FACE"|"HEAD"|"LEFT_HAND"|"RIGHT_HAND"|string&{};
   export type BodyParts = ProtectiveEquipmentBodyPart[];
   export type Boolean = boolean;
   export interface BoundingBox {
@@ -801,7 +801,7 @@ declare namespace Rekognition {
      */
     Celebrity?: CelebrityDetail;
   }
-  export type CelebrityRecognitionSortBy = "ID"|"TIMESTAMP"|string;
+  export type CelebrityRecognitionSortBy = "ID"|"TIMESTAMP"|string&{};
   export type CelebrityRecognitions = CelebrityRecognition[];
   export type ClientRequestToken = string;
   export type CollectionId = string;
@@ -921,9 +921,9 @@ declare namespace Rekognition {
      */
     MinConfidence?: Percent;
   }
-  export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
+  export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string&{};
   export type ContentClassifiers = ContentClassifier[];
-  export type ContentModerationAggregateBy = "TIMESTAMPS"|"SEGMENTS"|string;
+  export type ContentModerationAggregateBy = "TIMESTAMPS"|"SEGMENTS"|string&{};
   export interface ContentModerationDetection {
     /**
      * Time, in milliseconds from the beginning of the video, that the content moderation label was detected. Note that Timestamp is not guaranteed to be accurate to the individual frame where the moderated content first appears.
@@ -947,7 +947,7 @@ declare namespace Rekognition {
     DurationMillis?: ULong;
   }
   export type ContentModerationDetections = ContentModerationDetection[];
-  export type ContentModerationSortBy = "NAME"|"TIMESTAMP"|string;
+  export type ContentModerationSortBy = "NAME"|"TIMESTAMP"|string&{};
   export interface CopyProjectVersionRequest {
     /**
      * The ARN of the source project in the trusting AWS account.
@@ -1302,9 +1302,9 @@ declare namespace Rekognition {
      */
     ErrorEntries?: UInteger;
   }
-  export type DatasetStatus = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|"DELETE_IN_PROGRESS"|string;
-  export type DatasetStatusMessageCode = "SUCCESS"|"SERVICE_ERROR"|"CLIENT_ERROR"|string;
-  export type DatasetType = "TRAIN"|"TEST"|string;
+  export type DatasetStatus = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|"DELETE_IN_PROGRESS"|string&{};
+  export type DatasetStatusMessageCode = "SUCCESS"|"SERVICE_ERROR"|"CLIENT_ERROR"|string&{};
+  export type DatasetType = "TRAIN"|"TEST"|string&{};
   export type DateTime = Date;
   export type Degree = number;
   export interface DeleteCollectionRequest {
@@ -1606,7 +1606,7 @@ declare namespace Rekognition {
     OrientationCorrection?: OrientationCorrection;
   }
   export type DetectLabelsFeatureList = DetectLabelsFeatureName[];
-  export type DetectLabelsFeatureName = "GENERAL_LABELS"|"IMAGE_PROPERTIES"|string;
+  export type DetectLabelsFeatureName = "GENERAL_LABELS"|"IMAGE_PROPERTIES"|string&{};
   export interface DetectLabelsImageBackground {
     /**
      * The quality of the image background as defined by brightness and sharpness.
@@ -1904,7 +1904,7 @@ declare namespace Rekognition {
      */
     Confidence?: Percent;
   }
-  export type EmotionName = "HAPPY"|"SAD"|"ANGRY"|"CONFUSED"|"DISGUSTED"|"SURPRISED"|"CALM"|"UNKNOWN"|"FEAR"|string;
+  export type EmotionName = "HAPPY"|"SAD"|"ANGRY"|"CONFUSED"|"DISGUSTED"|"SURPRISED"|"CALM"|"UNKNOWN"|"FEAR"|string&{};
   export type Emotions = Emotion[];
   export interface EquipmentDetection {
     /**
@@ -2001,7 +2001,7 @@ declare namespace Rekognition {
      */
     UserId?: UserId;
   }
-  export type FaceAttributes = "DEFAULT"|"ALL"|string;
+  export type FaceAttributes = "DEFAULT"|"ALL"|string&{};
   export interface FaceDetail {
     /**
      * Bounding box of the face. Default attribute.
@@ -2130,7 +2130,7 @@ declare namespace Rekognition {
      */
     FaceMatchThreshold?: Percent;
   }
-  export type FaceSearchSortBy = "INDEX"|"TIMESTAMP"|string;
+  export type FaceSearchSortBy = "INDEX"|"TIMESTAMP"|string&{};
   export type Float = number;
   export type FlowDefinitionArn = string;
   export interface Gender {
@@ -2143,7 +2143,7 @@ declare namespace Rekognition {
      */
     Confidence?: Percent;
   }
-  export type GenderType = "Male"|"Female"|string;
+  export type GenderType = "Male"|"Female"|string&{};
   export type GeneralLabelsFilterList = GeneralLabelsFilterValue[];
   export type GeneralLabelsFilterValue = string;
   export interface GeneralLabelsSettings {
@@ -2817,7 +2817,7 @@ declare namespace Rekognition {
      */
     Type?: KnownGenderType;
   }
-  export type KnownGenderType = "Male"|"Female"|"Nonbinary"|"Unlisted"|string;
+  export type KnownGenderType = "Male"|"Female"|"Nonbinary"|"Unlisted"|string&{};
   export interface Label {
     /**
      * The name (label) of the object or scene.
@@ -2880,13 +2880,13 @@ declare namespace Rekognition {
      */
     DurationMillis?: ULong;
   }
-  export type LabelDetectionAggregateBy = "TIMESTAMPS"|"SEGMENTS"|string;
+  export type LabelDetectionAggregateBy = "TIMESTAMPS"|"SEGMENTS"|string&{};
   export type LabelDetectionFeatureList = LabelDetectionFeatureName[];
-  export type LabelDetectionFeatureName = "GENERAL_LABELS"|string;
+  export type LabelDetectionFeatureName = "GENERAL_LABELS"|string&{};
   export interface LabelDetectionSettings {
     GeneralLabels?: GeneralLabelsSettings;
   }
-  export type LabelDetectionSortBy = "NAME"|"TIMESTAMP"|string;
+  export type LabelDetectionSortBy = "NAME"|"TIMESTAMP"|string&{};
   export type LabelDetections = LabelDetection[];
   export type Labels = Label[];
   export interface Landmark {
@@ -2903,7 +2903,7 @@ declare namespace Rekognition {
      */
     Y?: Float;
   }
-  export type LandmarkType = "eyeLeft"|"eyeRight"|"nose"|"mouthLeft"|"mouthRight"|"leftEyeBrowLeft"|"leftEyeBrowRight"|"leftEyeBrowUp"|"rightEyeBrowLeft"|"rightEyeBrowRight"|"rightEyeBrowUp"|"leftEyeLeft"|"leftEyeRight"|"leftEyeUp"|"leftEyeDown"|"rightEyeLeft"|"rightEyeRight"|"rightEyeUp"|"rightEyeDown"|"noseLeft"|"noseRight"|"mouthUp"|"mouthDown"|"leftPupil"|"rightPupil"|"upperJawlineLeft"|"midJawlineLeft"|"chinBottom"|"midJawlineRight"|"upperJawlineRight"|string;
+  export type LandmarkType = "eyeLeft"|"eyeRight"|"nose"|"mouthLeft"|"mouthRight"|"leftEyeBrowLeft"|"leftEyeBrowRight"|"leftEyeBrowUp"|"rightEyeBrowLeft"|"rightEyeBrowRight"|"rightEyeBrowUp"|"leftEyeLeft"|"leftEyeRight"|"leftEyeUp"|"leftEyeDown"|"rightEyeLeft"|"rightEyeRight"|"rightEyeUp"|"rightEyeDown"|"noseLeft"|"noseRight"|"mouthUp"|"mouthDown"|"leftPupil"|"rightPupil"|"upperJawlineLeft"|"midJawlineLeft"|"chinBottom"|"midJawlineRight"|"upperJawlineRight"|string&{};
   export type Landmarks = Landmark[];
   export interface ListCollectionsRequest {
     /**
@@ -3125,7 +3125,7 @@ declare namespace Rekognition {
   }
   export type LivenessS3KeyPrefix = string;
   export type LivenessSessionId = string;
-  export type LivenessSessionStatus = "CREATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"EXPIRED"|string;
+  export type LivenessSessionStatus = "CREATED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"EXPIRED"|string&{};
   export interface MatchedUser {
     /**
      * A provided ID for the UserID. Unique within the collection.
@@ -3188,7 +3188,7 @@ declare namespace Rekognition {
      */
     RoleArn: RoleArn;
   }
-  export type OrientationCorrection = "ROTATE_0"|"ROTATE_90"|"ROTATE_180"|"ROTATE_270"|string;
+  export type OrientationCorrection = "ROTATE_0"|"ROTATE_90"|"ROTATE_180"|"ROTATE_270"|string&{};
   export interface OutputConfig {
     /**
      * The S3 bucket where training output is placed.
@@ -3250,7 +3250,7 @@ declare namespace Rekognition {
     FaceMatches?: FaceMatchList;
   }
   export type PersonMatches = PersonMatch[];
-  export type PersonTrackingSortBy = "INDEX"|"TIMESTAMP"|string;
+  export type PersonTrackingSortBy = "INDEX"|"TIMESTAMP"|string&{};
   export interface Point {
     /**
      * The value of the X coordinate for a point on a Polygon.
@@ -3328,7 +3328,7 @@ declare namespace Rekognition {
   export type ProjectPolicyDocument = string;
   export type ProjectPolicyName = string;
   export type ProjectPolicyRevisionId = string;
-  export type ProjectStatus = "CREATING"|"CREATED"|"DELETING"|string;
+  export type ProjectStatus = "CREATING"|"CREATED"|"DELETING"|string&{};
   export type ProjectVersionArn = string;
   export interface ProjectVersionDescription {
     /**
@@ -3393,7 +3393,7 @@ declare namespace Rekognition {
     SourceProjectVersionArn?: ProjectVersionArn;
   }
   export type ProjectVersionDescriptions = ProjectVersionDescription[];
-  export type ProjectVersionStatus = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETED"|"TRAINING_FAILED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"|"COPYING_IN_PROGRESS"|"COPYING_COMPLETED"|"COPYING_FAILED"|string;
+  export type ProjectVersionStatus = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETED"|"TRAINING_FAILED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"|"COPYING_IN_PROGRESS"|"COPYING_COMPLETED"|"COPYING_FAILED"|string&{};
   export type ProjectVersionsPageSize = number;
   export type ProjectsPageSize = number;
   export interface ProtectiveEquipmentBodyPart {
@@ -3454,7 +3454,7 @@ declare namespace Rekognition {
      */
     PersonsIndeterminate?: ProtectiveEquipmentPersonIds;
   }
-  export type ProtectiveEquipmentType = "FACE_COVER"|"HAND_COVER"|"HEAD_COVER"|string;
+  export type ProtectiveEquipmentType = "FACE_COVER"|"HAND_COVER"|"HEAD_COVER"|string&{};
   export type ProtectiveEquipmentTypes = ProtectiveEquipmentType[];
   export interface PutProjectPolicyRequest {
     /**
@@ -3480,9 +3480,9 @@ declare namespace Rekognition {
      */
     PolicyRevisionId?: ProjectPolicyRevisionId;
   }
-  export type QualityFilter = "NONE"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|string;
+  export type QualityFilter = "NONE"|"AUTO"|"LOW"|"MEDIUM"|"HIGH"|string&{};
   export type QueryString = string;
-  export type Reason = "EXCEEDS_MAX_FACES"|"EXTREME_POSE"|"LOW_BRIGHTNESS"|"LOW_SHARPNESS"|"LOW_CONFIDENCE"|"SMALL_BOUNDING_BOX"|"LOW_FACE_QUALITY"|string;
+  export type Reason = "EXCEEDS_MAX_FACES"|"EXTREME_POSE"|"LOW_BRIGHTNESS"|"LOW_SHARPNESS"|"LOW_CONFIDENCE"|"SMALL_BOUNDING_BOX"|"LOW_FACE_QUALITY"|string&{};
   export type Reasons = Reason[];
   export interface RecognizeCelebritiesRequest {
     /**
@@ -3763,7 +3763,7 @@ declare namespace Rekognition {
     DurationFrames?: ULong;
   }
   export type SegmentDetections = SegmentDetection[];
-  export type SegmentType = "TECHNICAL_CUE"|"SHOT"|string;
+  export type SegmentType = "TECHNICAL_CUE"|"SHOT"|string&{};
   export interface SegmentTypeInfo {
     /**
      * The type of a segment (technical cue or shot detection).
@@ -4170,7 +4170,7 @@ declare namespace Rekognition {
      */
     S3Destination?: S3Destination;
   }
-  export type StreamProcessorParameterToDelete = "ConnectedHomeMinConfidence"|"RegionsOfInterest"|string;
+  export type StreamProcessorParameterToDelete = "ConnectedHomeMinConfidence"|"RegionsOfInterest"|string&{};
   export type StreamProcessorParametersToDelete = StreamProcessorParameterToDelete[];
   export interface StreamProcessorSettings {
     /**
@@ -4185,7 +4185,7 @@ declare namespace Rekognition {
      */
     ConnectedHomeForUpdate?: ConnectedHomeSettingsForUpdate;
   }
-  export type StreamProcessorStatus = "STOPPED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"UPDATING"|string;
+  export type StreamProcessorStatus = "STOPPED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"UPDATING"|string&{};
   export type String = string;
   export interface Summary {
     S3Object?: S3Object;
@@ -4226,7 +4226,7 @@ declare namespace Rekognition {
      */
     Confidence?: SegmentConfidence;
   }
-  export type TechnicalCueType = "ColorBars"|"EndCredits"|"BlackFrames"|"OpeningCredits"|"StudioLogo"|"Slate"|"Content"|string;
+  export type TechnicalCueType = "ColorBars"|"EndCredits"|"BlackFrames"|"OpeningCredits"|"StudioLogo"|"Slate"|"Content"|string&{};
   export interface TestingData {
     /**
      * The assets used for testing.
@@ -4289,7 +4289,7 @@ declare namespace Rekognition {
     TextDetection?: TextDetection;
   }
   export type TextDetectionResults = TextDetectionResult[];
-  export type TextTypes = "LINE"|"WORD"|string;
+  export type TextTypes = "LINE"|"WORD"|string&{};
   export type Timecode = string;
   export type Timestamp = number;
   export interface TrainingData {
@@ -4332,7 +4332,7 @@ declare namespace Rekognition {
      */
     Reasons?: UnsearchedFaceReasons;
   }
-  export type UnsearchedFaceReason = "FACE_NOT_LARGEST"|"EXCEEDS_MAX_FACES"|"EXTREME_POSE"|"LOW_BRIGHTNESS"|"LOW_SHARPNESS"|"LOW_CONFIDENCE"|"SMALL_BOUNDING_BOX"|"LOW_FACE_QUALITY"|string;
+  export type UnsearchedFaceReason = "FACE_NOT_LARGEST"|"EXCEEDS_MAX_FACES"|"EXTREME_POSE"|"LOW_BRIGHTNESS"|"LOW_SHARPNESS"|"LOW_CONFIDENCE"|"SMALL_BOUNDING_BOX"|"LOW_FACE_QUALITY"|string&{};
   export type UnsearchedFaceReasons = UnsearchedFaceReason[];
   export type UnsearchedFacesList = UnsearchedFace[];
   export interface UnsuccessfulFaceAssociation {
@@ -4354,7 +4354,7 @@ declare namespace Rekognition {
     Reasons?: UnsuccessfulFaceAssociationReasons;
   }
   export type UnsuccessfulFaceAssociationList = UnsuccessfulFaceAssociation[];
-  export type UnsuccessfulFaceAssociationReason = "FACE_NOT_FOUND"|"ASSOCIATED_TO_A_DIFFERENT_USER"|"LOW_MATCH_CONFIDENCE"|string;
+  export type UnsuccessfulFaceAssociationReason = "FACE_NOT_FOUND"|"ASSOCIATED_TO_A_DIFFERENT_USER"|"LOW_MATCH_CONFIDENCE"|string&{};
   export type UnsuccessfulFaceAssociationReasons = UnsuccessfulFaceAssociationReason[];
   export interface UnsuccessfulFaceDeletion {
     /**
@@ -4370,7 +4370,7 @@ declare namespace Rekognition {
      */
     Reasons?: UnsuccessfulFaceDeletionReasons;
   }
-  export type UnsuccessfulFaceDeletionReason = "ASSOCIATED_TO_AN_EXISTING_USER"|"FACE_NOT_FOUND"|string;
+  export type UnsuccessfulFaceDeletionReason = "ASSOCIATED_TO_AN_EXISTING_USER"|"FACE_NOT_FOUND"|string&{};
   export type UnsuccessfulFaceDeletionReasons = UnsuccessfulFaceDeletionReason[];
   export type UnsuccessfulFaceDeletionsList = UnsuccessfulFaceDeletion[];
   export interface UnsuccessfulFaceDisassociation {
@@ -4388,7 +4388,7 @@ declare namespace Rekognition {
     Reasons?: UnsuccessfulFaceDisassociationReasons;
   }
   export type UnsuccessfulFaceDisassociationList = UnsuccessfulFaceDisassociation[];
-  export type UnsuccessfulFaceDisassociationReason = "FACE_NOT_FOUND"|"ASSOCIATED_TO_A_DIFFERENT_USER"|string;
+  export type UnsuccessfulFaceDisassociationReason = "FACE_NOT_FOUND"|"ASSOCIATED_TO_A_DIFFERENT_USER"|string&{};
   export type UnsuccessfulFaceDisassociationReasons = UnsuccessfulFaceDisassociationReason[];
   export interface UntagResourceRequest {
     /**
@@ -4464,7 +4464,7 @@ declare namespace Rekognition {
     User?: MatchedUser;
   }
   export type UserMatchList = UserMatch[];
-  export type UserStatus = "ACTIVE"|"UPDATING"|"CREATING"|"CREATED"|string;
+  export type UserStatus = "ACTIVE"|"UPDATING"|"CREATING"|"CREATED"|string&{};
   export interface ValidationData {
     /**
      * The assets that comprise the validation data. 
@@ -4479,8 +4479,8 @@ declare namespace Rekognition {
      */
     S3Object?: S3Object;
   }
-  export type VideoColorRange = "FULL"|"LIMITED"|string;
-  export type VideoJobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type VideoColorRange = "FULL"|"LIMITED"|string&{};
+  export type VideoJobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string&{};
   export interface VideoMetadata {
     /**
      * Type of compression used in the analyzed video. 

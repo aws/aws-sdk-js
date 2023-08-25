@@ -354,7 +354,7 @@ declare namespace FMS {
   export type AWSRegion = string;
   export type AWSRegionList = AWSRegion[];
   export type AccountIdList = AWSAccountId[];
-  export type AccountRoleStatus = "READY"|"CREATING"|"PENDING_DELETION"|"DELETING"|"DELETED"|string;
+  export type AccountRoleStatus = "READY"|"CREATING"|"PENDING_DELETION"|"DELETING"|"DELETED"|string&{};
   export interface AccountScope {
     /**
      * The list of accounts within the organization that the specified Firewall Manager administrator either can or cannot apply policies to, based on the value of ExcludeSpecifiedAccounts. If ExcludeSpecifiedAccounts is set to true, then the Firewall Manager administrator can apply policies to all members of the organization except for the accounts in this list. If ExcludeSpecifiedAccounts is set to false, then the Firewall Manager administrator can only apply policies to the accounts in this list.
@@ -599,9 +599,9 @@ declare namespace FMS {
   export type ComplianceViolators = ComplianceViolator[];
   export type CustomerPolicyScopeId = string;
   export type CustomerPolicyScopeIdList = CustomerPolicyScopeId[];
-  export type CustomerPolicyScopeIdType = "ACCOUNT"|"ORG_UNIT"|string;
+  export type CustomerPolicyScopeIdType = "ACCOUNT"|"ORG_UNIT"|string&{};
   export type CustomerPolicyScopeMap = {[key: string]: CustomerPolicyScopeIdList};
-  export type CustomerPolicyStatus = "ACTIVE"|"OUT_OF_ADMIN_SCOPE"|string;
+  export type CustomerPolicyStatus = "ACTIVE"|"OUT_OF_ADMIN_SCOPE"|string&{};
   export interface DeleteAppsListRequest {
     /**
      * The ID of the applications list that you want to delete. You can retrieve this ID from PutAppsList, ListAppsLists, and GetAppsList.
@@ -632,9 +632,9 @@ declare namespace FMS {
      */
     Identifier: Base62Id;
   }
-  export type DependentServiceName = "AWSCONFIG"|"AWSWAF"|"AWSSHIELD_ADVANCED"|"AWSVPC"|string;
+  export type DependentServiceName = "AWSCONFIG"|"AWSWAF"|"AWSSHIELD_ADVANCED"|"AWSVPC"|string&{};
   export type Description = string;
-  export type DestinationType = "IPV4"|"IPV6"|"PREFIX_LIST"|string;
+  export type DestinationType = "IPV4"|"IPV6"|"PREFIX_LIST"|string&{};
   export type DetailedInfo = string;
   export interface DisassociateAdminAccountRequest {
   }
@@ -914,8 +914,8 @@ declare namespace FMS {
     Reason?: FailedItemReason;
   }
   export type FailedItemList = FailedItem[];
-  export type FailedItemReason = "NOT_VALID_ARN"|"NOT_VALID_PARTITION"|"NOT_VALID_REGION"|"NOT_VALID_SERVICE"|"NOT_VALID_RESOURCE_TYPE"|"NOT_VALID_ACCOUNT_ID"|string;
-  export type FirewallDeploymentModel = "CENTRALIZED"|"DISTRIBUTED"|string;
+  export type FailedItemReason = "NOT_VALID_ARN"|"NOT_VALID_PARTITION"|"NOT_VALID_REGION"|"NOT_VALID_SERVICE"|"NOT_VALID_RESOURCE_TYPE"|"NOT_VALID_ACCOUNT_ID"|string&{};
+  export type FirewallDeploymentModel = "CENTRALIZED"|"DISTRIBUTED"|string&{};
   export type FirewallPolicyId = string;
   export type FirewallPolicyName = string;
   export interface FirewallSubnetIsOutOfScopeViolation {
@@ -1438,7 +1438,7 @@ declare namespace FMS {
     NextToken?: PaginationToken;
   }
   export type ManagedServiceData = string;
-  export type MarketplaceSubscriptionOnboardingStatus = "NO_SUBSCRIPTION"|"NOT_COMPLETE"|"COMPLETE"|string;
+  export type MarketplaceSubscriptionOnboardingStatus = "NO_SUBSCRIPTION"|"NOT_COMPLETE"|"COMPLETE"|string&{};
   export type MemberAccounts = AWSAccountId[];
   export type Name = string;
   export type NetworkFirewallAction = string;
@@ -1661,7 +1661,7 @@ declare namespace FMS {
      */
     TargetViolationReason?: TargetViolationReason;
   }
-  export type NetworkFirewallOverrideAction = "DROP_TO_ALERT"|string;
+  export type NetworkFirewallOverrideAction = "DROP_TO_ALERT"|string&{};
   export interface NetworkFirewallPolicy {
     /**
      * Defines the deployment model to use for the firewall policy. To use a distributed model, set PolicyOption to NULL.
@@ -1760,7 +1760,7 @@ declare namespace FMS {
     VpcId?: ResourceId;
   }
   export type OrderedRemediationActions = RemediationActionWithOrder[];
-  export type OrganizationStatus = "ONBOARDING"|"ONBOARDING_COMPLETE"|"OFFBOARDING"|"OFFBOARDING_COMPLETE"|string;
+  export type OrganizationStatus = "ONBOARDING"|"ONBOARDING_COMPLETE"|"OFFBOARDING"|"OFFBOARDING_COMPLETE"|string&{};
   export type OrganizationalUnitId = string;
   export type OrganizationalUnitIdList = OrganizationalUnitId[];
   export interface OrganizationalUnitScope {
@@ -1913,7 +1913,7 @@ declare namespace FMS {
     IssueInfoMap?: IssueInfoMap;
   }
   export type PolicyComplianceStatusList = PolicyComplianceStatus[];
-  export type PolicyComplianceStatusType = "COMPLIANT"|"NON_COMPLIANT"|string;
+  export type PolicyComplianceStatusType = "COMPLIANT"|"NON_COMPLIANT"|string&{};
   export type PolicyId = string;
   export interface PolicyOption {
     /**
@@ -2202,7 +2202,7 @@ declare namespace FMS {
     FMSPolicyUpdateFirewallCreationConfigAction?: FMSPolicyUpdateFirewallCreationConfigAction;
   }
   export type RemediationActionDescription = string;
-  export type RemediationActionType = "REMOVE"|"MODIFY"|string;
+  export type RemediationActionType = "REMOVE"|"MODIFY"|string&{};
   export interface RemediationActionWithOrder {
     /**
      * Information about an action you can take to remediate a violation.
@@ -2261,7 +2261,7 @@ declare namespace FMS {
     ResourceSetStatus?: ResourceSetStatus;
   }
   export type ResourceSetIds = Base62Id[];
-  export type ResourceSetStatus = "ACTIVE"|"OUT_OF_ADMIN_SCOPE"|string;
+  export type ResourceSetStatus = "ACTIVE"|"OUT_OF_ADMIN_SCOPE"|string&{};
   export interface ResourceSetSummary {
     /**
      * A unique identifier for the resource set. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.
@@ -2461,7 +2461,7 @@ declare namespace FMS {
     InternetGatewayRoutes?: Routes;
   }
   export type Routes = Route[];
-  export type RuleOrder = "STRICT_ORDER"|"DEFAULT_ACTION_ORDER"|string;
+  export type RuleOrder = "STRICT_ORDER"|"DEFAULT_ACTION_ORDER"|string&{};
   export interface SecurityGroupRemediationAction {
     /**
      * The remediation action that will be performed.
@@ -2521,7 +2521,7 @@ declare namespace FMS {
      */
     PolicyOption?: PolicyOption;
   }
-  export type SecurityServiceType = "WAF"|"WAFV2"|"SHIELD_ADVANCED"|"SECURITY_GROUPS_COMMON"|"SECURITY_GROUPS_CONTENT_AUDIT"|"SECURITY_GROUPS_USAGE_AUDIT"|"NETWORK_FIREWALL"|"DNS_FIREWALL"|"THIRD_PARTY_FIREWALL"|"IMPORT_NETWORK_FIREWALL"|string;
+  export type SecurityServiceType = "WAF"|"WAFV2"|"SHIELD_ADVANCED"|"SECURITY_GROUPS_COMMON"|"SECURITY_GROUPS_CONTENT_AUDIT"|"SECURITY_GROUPS_USAGE_AUDIT"|"NETWORK_FIREWALL"|"DNS_FIREWALL"|"THIRD_PARTY_FIREWALL"|"IMPORT_NETWORK_FIREWALL"|string&{};
   export type SecurityServiceTypeList = SecurityServiceType[];
   export interface StatefulEngineOptions {
     /**
@@ -2590,11 +2590,11 @@ declare namespace FMS {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TargetType = "GATEWAY"|"CARRIER_GATEWAY"|"INSTANCE"|"LOCAL_GATEWAY"|"NAT_GATEWAY"|"NETWORK_INTERFACE"|"VPC_ENDPOINT"|"VPC_PEERING_CONNECTION"|"EGRESS_ONLY_INTERNET_GATEWAY"|"TRANSIT_GATEWAY"|string;
+  export type TargetType = "GATEWAY"|"CARRIER_GATEWAY"|"INSTANCE"|"LOCAL_GATEWAY"|"NAT_GATEWAY"|"NETWORK_INTERFACE"|"VPC_ENDPOINT"|"VPC_PEERING_CONNECTION"|"EGRESS_ONLY_INTERNET_GATEWAY"|"TRANSIT_GATEWAY"|string&{};
   export type TargetViolationReason = string;
   export type TargetViolationReasons = TargetViolationReason[];
-  export type ThirdPartyFirewall = "PALO_ALTO_NETWORKS_CLOUD_NGFW"|"FORTIGATE_CLOUD_NATIVE_FIREWALL"|string;
-  export type ThirdPartyFirewallAssociationStatus = "ONBOARDING"|"ONBOARD_COMPLETE"|"OFFBOARDING"|"OFFBOARD_COMPLETE"|"NOT_EXIST"|string;
+  export type ThirdPartyFirewall = "PALO_ALTO_NETWORKS_CLOUD_NGFW"|"FORTIGATE_CLOUD_NATIVE_FIREWALL"|string&{};
+  export type ThirdPartyFirewallAssociationStatus = "ONBOARDING"|"ONBOARD_COMPLETE"|"OFFBOARDING"|"OFFBOARD_COMPLETE"|"NOT_EXIST"|string&{};
   export type ThirdPartyFirewallFirewallPolicies = ThirdPartyFirewallFirewallPolicy[];
   export interface ThirdPartyFirewallFirewallPolicy {
     /**
@@ -2714,7 +2714,7 @@ declare namespace FMS {
      */
     ResourceDescription?: LengthBoundedString;
   }
-  export type ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"|"RESOURCE_MISSING_WEB_ACL"|"RESOURCE_INCORRECT_WEB_ACL"|"RESOURCE_MISSING_SHIELD_PROTECTION"|"RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"|"RESOURCE_MISSING_SECURITY_GROUP"|"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"|"SECURITY_GROUP_UNUSED"|"SECURITY_GROUP_REDUNDANT"|"FMS_CREATED_SECURITY_GROUP_EDITED"|"MISSING_FIREWALL"|"MISSING_FIREWALL_SUBNET_IN_AZ"|"MISSING_EXPECTED_ROUTE_TABLE"|"NETWORK_FIREWALL_POLICY_MODIFIED"|"FIREWALL_SUBNET_IS_OUT_OF_SCOPE"|"INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE"|"FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE"|"UNEXPECTED_FIREWALL_ROUTES"|"UNEXPECTED_TARGET_GATEWAY_ROUTES"|"TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY"|"INVALID_ROUTE_CONFIGURATION"|"MISSING_TARGET_GATEWAY"|"INTERNET_TRAFFIC_NOT_INSPECTED"|"BLACK_HOLE_ROUTE_DETECTED"|"BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET"|"RESOURCE_MISSING_DNS_FIREWALL"|"ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT"|"FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT"|string;
+  export type ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"|"RESOURCE_MISSING_WEB_ACL"|"RESOURCE_INCORRECT_WEB_ACL"|"RESOURCE_MISSING_SHIELD_PROTECTION"|"RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"|"RESOURCE_MISSING_SECURITY_GROUP"|"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"|"SECURITY_GROUP_UNUSED"|"SECURITY_GROUP_REDUNDANT"|"FMS_CREATED_SECURITY_GROUP_EDITED"|"MISSING_FIREWALL"|"MISSING_FIREWALL_SUBNET_IN_AZ"|"MISSING_EXPECTED_ROUTE_TABLE"|"NETWORK_FIREWALL_POLICY_MODIFIED"|"FIREWALL_SUBNET_IS_OUT_OF_SCOPE"|"INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE"|"FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE"|"UNEXPECTED_FIREWALL_ROUTES"|"UNEXPECTED_TARGET_GATEWAY_ROUTES"|"TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY"|"INVALID_ROUTE_CONFIGURATION"|"MISSING_TARGET_GATEWAY"|"INTERNET_TRAFFIC_NOT_INSPECTED"|"BLACK_HOLE_ROUTE_DETECTED"|"BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET"|"RESOURCE_MISSING_DNS_FIREWALL"|"ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT"|"FIREWALL_SUBNET_MISSING_VPCE_ENDPOINT"|string&{};
   export type ViolationTarget = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

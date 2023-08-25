@@ -515,9 +515,9 @@ declare namespace AutoScaling {
      */
     Max?: NullablePositiveInteger;
   }
-  export type AcceleratorManufacturer = "nvidia"|"amd"|"amazon-web-services"|"xilinx"|string;
+  export type AcceleratorManufacturer = "nvidia"|"amd"|"amazon-web-services"|"xilinx"|string&{};
   export type AcceleratorManufacturers = AcceleratorManufacturer[];
-  export type AcceleratorName = "a100"|"v100"|"k80"|"t4"|"m60"|"radeon-pro-v520"|"vu9p"|string;
+  export type AcceleratorName = "a100"|"v100"|"k80"|"t4"|"m60"|"radeon-pro-v520"|"vu9p"|string&{};
   export type AcceleratorNames = AcceleratorName[];
   export interface AcceleratorTotalMemoryMiBRequest {
     /**
@@ -529,7 +529,7 @@ declare namespace AutoScaling {
      */
     Max?: NullablePositiveInteger;
   }
-  export type AcceleratorType = "gpu"|"fpga"|"inference"|string;
+  export type AcceleratorType = "gpu"|"fpga"|"inference"|string&{};
   export type AcceleratorTypes = AcceleratorType[];
   export type Activities = Activity[];
   export interface ActivitiesType {
@@ -903,7 +903,7 @@ declare namespace AutoScaling {
   }
   export type AutoScalingNotificationTypes = XmlStringMaxLen255[];
   export type AvailabilityZones = XmlStringMaxLen255[];
-  export type BareMetal = "included"|"excluded"|"required"|string;
+  export type BareMetal = "included"|"excluded"|"required"|string&{};
   export interface BaselineEbsBandwidthMbpsRequest {
     /**
      * The minimum value in Mbps.
@@ -971,7 +971,7 @@ declare namespace AutoScaling {
     NoDevice?: NoDevice;
   }
   export type BlockDeviceMappings = BlockDeviceMapping[];
-  export type BurstablePerformance = "included"|"excluded"|"required"|string;
+  export type BurstablePerformance = "included"|"excluded"|"required"|string&{};
   export interface CancelInstanceRefreshAnswer {
     /**
      * The instance refresh ID associated with the request. This is the unique ID assigned to the instance refresh when it was started.
@@ -1024,7 +1024,7 @@ declare namespace AutoScaling {
   }
   export type Context = string;
   export type Cooldown = number;
-  export type CpuManufacturer = "intel"|"amd"|"amazon-web-services"|string;
+  export type CpuManufacturer = "intel"|"amd"|"amazon-web-services"|string&{};
   export type CpuManufacturers = CpuManufacturer[];
   export interface CreateAutoScalingGroupType {
     /**
@@ -1935,12 +1935,12 @@ declare namespace AutoScaling {
      */
     WeightedCapacity?: XmlStringMaxLen32;
   }
-  export type InstanceGeneration = "current"|"previous"|string;
+  export type InstanceGeneration = "current"|"previous"|string&{};
   export type InstanceGenerations = InstanceGeneration[];
   export type InstanceIds = XmlStringMaxLen19[];
-  export type InstanceMetadataEndpointState = "disabled"|"enabled"|string;
+  export type InstanceMetadataEndpointState = "disabled"|"enabled"|string&{};
   export type InstanceMetadataHttpPutResponseHopLimit = number;
-  export type InstanceMetadataHttpTokensState = "optional"|"required"|string;
+  export type InstanceMetadataHttpTokensState = "optional"|"required"|string&{};
   export interface InstanceMetadataOptions {
     /**
      * The state of token usage for your instance metadata requests. If the parameter is not specified in the request, the default state is optional. If the state is optional, you can choose to retrieve instance metadata with or without a signed token header on your request. If you retrieve the IAM role credentials without a token, the version 1.0 role credentials are returned. If you retrieve the IAM role credentials using a valid signed token, the version 2.0 role credentials are returned. If the state is required, you must send a signed token header with any instance metadata retrieval requests. In this state, retrieving the IAM role credentials always returns the version 2.0 credentials; the version 1.0 credentials are not available.
@@ -2033,7 +2033,7 @@ declare namespace AutoScaling {
      */
     WarmPoolProgress?: InstanceRefreshWarmPoolProgress;
   }
-  export type InstanceRefreshStatus = "Pending"|"InProgress"|"Successful"|"Failed"|"Cancelling"|"Cancelled"|"RollbackInProgress"|"RollbackFailed"|"RollbackSuccessful"|string;
+  export type InstanceRefreshStatus = "Pending"|"InProgress"|"Successful"|"Failed"|"Cancelling"|"Cancelled"|"RollbackInProgress"|"RollbackFailed"|"RollbackSuccessful"|string&{};
   export interface InstanceRefreshWarmPoolProgress {
     /**
      * The percentage of instances in the warm pool that have been replaced. For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the instance's health status changes to healthy and the specified warm-up time passes, the instance is considered updated and is added to the percentage complete.
@@ -2404,7 +2404,7 @@ declare namespace AutoScaling {
   }
   export type LifecycleHookSpecifications = LifecycleHookSpecification[];
   export type LifecycleHooks = LifecycleHook[];
-  export type LifecycleState = "Pending"|"Pending:Wait"|"Pending:Proceed"|"Quarantined"|"InService"|"Terminating"|"Terminating:Wait"|"Terminating:Proceed"|"Terminated"|"Detaching"|"Detached"|"EnteringStandby"|"Standby"|"Warmed:Pending"|"Warmed:Pending:Wait"|"Warmed:Pending:Proceed"|"Warmed:Terminating"|"Warmed:Terminating:Wait"|"Warmed:Terminating:Proceed"|"Warmed:Terminated"|"Warmed:Stopped"|"Warmed:Running"|"Warmed:Hibernated"|string;
+  export type LifecycleState = "Pending"|"Pending:Wait"|"Pending:Proceed"|"Quarantined"|"InService"|"Terminating"|"Terminating:Wait"|"Terminating:Proceed"|"Terminated"|"Detaching"|"Detached"|"EnteringStandby"|"Standby"|"Warmed:Pending"|"Warmed:Pending:Wait"|"Warmed:Pending:Proceed"|"Warmed:Terminating"|"Warmed:Terminating:Wait"|"Warmed:Terminating:Proceed"|"Warmed:Terminated"|"Warmed:Stopped"|"Warmed:Running"|"Warmed:Hibernated"|string&{};
   export type LifecycleTransition = string;
   export type LoadBalancerNames = XmlStringMaxLen255[];
   export interface LoadBalancerState {
@@ -2444,8 +2444,8 @@ declare namespace AutoScaling {
     MetricSpecification: PredictiveScalingMetricSpecification;
   }
   export type LoadForecasts = LoadForecast[];
-  export type LocalStorage = "included"|"excluded"|"required"|string;
-  export type LocalStorageType = "hdd"|"ssd"|string;
+  export type LocalStorage = "included"|"excluded"|"required"|string&{};
+  export type LocalStorageType = "hdd"|"ssd"|string&{};
   export type LocalStorageTypes = LocalStorageType[];
   export type MaxGroupPreparedCapacity = number;
   export type MaxInstanceLifetime = number;
@@ -2553,8 +2553,8 @@ declare namespace AutoScaling {
      */
     Unit?: MetricUnit;
   }
-  export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum"|string;
-  export type MetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"ALBRequestCountPerTarget"|string;
+  export type MetricStatistic = "Average"|"Minimum"|"Maximum"|"SampleCount"|"Sum"|string&{};
+  export type MetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"ALBRequestCountPerTarget"|string&{};
   export type MetricUnit = string;
   export type Metrics = XmlStringMaxLen255[];
   export type MinAdjustmentMagnitude = number;
@@ -2640,8 +2640,8 @@ declare namespace AutoScaling {
   export type PolicyIncrement = number;
   export type PolicyNames = ResourceName[];
   export type PolicyTypes = XmlStringMaxLen64[];
-  export type PredefinedLoadMetricType = "ASGTotalCPUUtilization"|"ASGTotalNetworkIn"|"ASGTotalNetworkOut"|"ALBTargetGroupRequestCount"|string;
-  export type PredefinedMetricPairType = "ASGCPUUtilization"|"ASGNetworkIn"|"ASGNetworkOut"|"ALBRequestCount"|string;
+  export type PredefinedLoadMetricType = "ASGTotalCPUUtilization"|"ASGTotalNetworkIn"|"ASGTotalNetworkOut"|"ALBTargetGroupRequestCount"|string&{};
+  export type PredefinedMetricPairType = "ASGCPUUtilization"|"ASGNetworkIn"|"ASGNetworkOut"|"ALBRequestCount"|string&{};
   export interface PredefinedMetricSpecification {
     /**
      * The metric type. The following predefined metrics are available:    ASGAverageCPUUtilization - Average CPU utilization of the Auto Scaling group.    ASGAverageNetworkIn - Average number of bytes received on all network interfaces by the Auto Scaling group.    ASGAverageNetworkOut - Average number of bytes sent out on all network interfaces by the Auto Scaling group.    ALBRequestCountPerTarget - Average Application Load Balancer request count per target for your Auto Scaling group.  
@@ -2652,7 +2652,7 @@ declare namespace AutoScaling {
      */
     ResourceLabel?: XmlStringMaxLen1023;
   }
-  export type PredefinedScalingMetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"ALBRequestCountPerTarget"|string;
+  export type PredefinedScalingMetricType = "ASGAverageCPUUtilization"|"ASGAverageNetworkIn"|"ASGAverageNetworkOut"|"ALBRequestCountPerTarget"|string&{};
   export interface PredictiveScalingConfiguration {
     /**
      * This structure includes the metrics and target utilization to use for predictive scaling.  This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.
@@ -2695,7 +2695,7 @@ declare namespace AutoScaling {
   }
   export type PredictiveScalingForecastTimestamps = TimestampType[];
   export type PredictiveScalingForecastValues = MetricScale[];
-  export type PredictiveScalingMaxCapacityBreachBehavior = "HonorMaxCapacity"|"IncreaseMaxCapacity"|string;
+  export type PredictiveScalingMaxCapacityBreachBehavior = "HonorMaxCapacity"|"IncreaseMaxCapacity"|string&{};
   export type PredictiveScalingMaxCapacityBuffer = number;
   export interface PredictiveScalingMetricSpecification {
     /**
@@ -2728,7 +2728,7 @@ declare namespace AutoScaling {
     CustomizedCapacityMetricSpecification?: PredictiveScalingCustomizedCapacityMetric;
   }
   export type PredictiveScalingMetricSpecifications = PredictiveScalingMetricSpecification[];
-  export type PredictiveScalingMode = "ForecastAndScale"|"ForecastOnly"|string;
+  export type PredictiveScalingMode = "ForecastAndScale"|"ForecastOnly"|string&{};
   export interface PredictiveScalingPredefinedLoadMetric {
     /**
      * The metric type.
@@ -3010,7 +3010,7 @@ declare namespace AutoScaling {
      */
     AlarmSpecification?: AlarmSpecification;
   }
-  export type RefreshStrategy = "Rolling"|string;
+  export type RefreshStrategy = "Rolling"|string&{};
   export type ResourceName = string;
   export type ReturnData = boolean;
   export type ReuseOnScaleIn = boolean;
@@ -3048,8 +3048,8 @@ declare namespace AutoScaling {
      */
     AutoScalingGroupName: XmlStringMaxLen255;
   }
-  export type ScaleInProtectedInstances = "Refresh"|"Ignore"|"Wait"|string;
-  export type ScalingActivityStatusCode = "PendingSpotBidPlacement"|"WaitingForSpotInstanceRequestId"|"WaitingForSpotInstanceId"|"WaitingForInstanceId"|"PreInService"|"InProgress"|"WaitingForELBConnectionDraining"|"MidLifecycleAction"|"WaitingForInstanceWarmup"|"Successful"|"Failed"|"Cancelled"|"WaitingForConnectionDraining"|string;
+  export type ScaleInProtectedInstances = "Refresh"|"Ignore"|"Wait"|string&{};
+  export type ScalingActivityStatusCode = "PendingSpotBidPlacement"|"WaitingForSpotInstanceRequestId"|"WaitingForSpotInstanceId"|"WaitingForInstanceId"|"PreInService"|"InProgress"|"WaitingForELBConnectionDraining"|"MidLifecycleAction"|"WaitingForInstanceWarmup"|"Successful"|"Failed"|"Cancelled"|"WaitingForConnectionDraining"|string&{};
   export type ScalingPolicies = ScalingPolicy[];
   export interface ScalingPolicy {
     /**
@@ -3271,7 +3271,7 @@ declare namespace AutoScaling {
   export type SkipMatching = boolean;
   export type SpotInstancePools = number;
   export type SpotPrice = string;
-  export type StandbyInstances = "Terminate"|"Ignore"|"Wait"|string;
+  export type StandbyInstances = "Terminate"|"Ignore"|"Wait"|string&{};
   export interface StartInstanceRefreshAnswer {
     /**
      * A unique ID for tracking the progress of the instance refresh.
@@ -3609,8 +3609,8 @@ declare namespace AutoScaling {
   }
   export type WarmPoolMinSize = number;
   export type WarmPoolSize = number;
-  export type WarmPoolState = "Stopped"|"Running"|"Hibernated"|string;
-  export type WarmPoolStatus = "PendingDelete"|string;
+  export type WarmPoolState = "Stopped"|"Running"|"Hibernated"|string&{};
+  export type WarmPoolStatus = "PendingDelete"|string&{};
   export type XmlString = string;
   export type XmlStringMaxLen1023 = string;
   export type XmlStringMaxLen1600 = string;

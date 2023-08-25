@@ -211,9 +211,9 @@ declare namespace SsmSap {
     SecretId: SecretId;
   }
   export type ApplicationCredentialList = ApplicationCredential[];
-  export type ApplicationDiscoveryStatus = "SUCCESS"|"REGISTRATION_FAILED"|"REFRESH_FAILED"|"REGISTERING"|"DELETING"|string;
+  export type ApplicationDiscoveryStatus = "SUCCESS"|"REGISTRATION_FAILED"|"REFRESH_FAILED"|"REGISTERING"|"DELETING"|string&{};
   export type ApplicationId = string;
-  export type ApplicationStatus = "ACTIVATED"|"STARTING"|"STOPPED"|"STOPPING"|"FAILED"|"REGISTERING"|"DELETING"|"UNKNOWN"|string;
+  export type ApplicationStatus = "ACTIVATED"|"STARTING"|"STOPPED"|"STOPPING"|"FAILED"|"REGISTERING"|"DELETING"|"UNKNOWN"|string&{};
   export interface ApplicationSummary {
     /**
      * The ID of the application.
@@ -233,7 +233,7 @@ declare namespace SsmSap {
     Tags?: TagMap;
   }
   export type ApplicationSummaryList = ApplicationSummary[];
-  export type ApplicationType = "HANA"|string;
+  export type ApplicationType = "HANA"|string&{};
   export type Arn = string;
   export interface AssociatedHost {
     /**
@@ -259,9 +259,9 @@ declare namespace SsmSap {
      */
     EnsureNoBackupInProcess: Boolean;
   }
-  export type BackintMode = "AWSBackup"|string;
+  export type BackintMode = "AWSBackup"|string&{};
   export type Boolean = boolean;
-  export type ClusterStatus = "ONLINE"|"STANDBY"|"MAINTENANCE"|"OFFLINE"|"NONE"|string;
+  export type ClusterStatus = "ONLINE"|"STANDBY"|"MAINTENANCE"|"OFFLINE"|"NONE"|string&{};
   export interface Component {
     /**
      * The ID of the component.
@@ -330,7 +330,7 @@ declare namespace SsmSap {
   }
   export type ComponentId = string;
   export type ComponentIdList = ComponentId[];
-  export type ComponentStatus = "ACTIVATED"|"STARTING"|"STOPPED"|"STOPPING"|"RUNNING"|"RUNNING_WITH_ERROR"|"UNDEFINED"|string;
+  export type ComponentStatus = "ACTIVATED"|"STARTING"|"STOPPED"|"STOPPING"|"RUNNING"|"RUNNING_WITH_ERROR"|"UNDEFINED"|string&{};
   export interface ComponentSummary {
     /**
      * The ID of the application.
@@ -354,8 +354,8 @@ declare namespace SsmSap {
     Arn?: SsmSapArn;
   }
   export type ComponentSummaryList = ComponentSummary[];
-  export type ComponentType = "HANA"|"HANA_NODE"|string;
-  export type CredentialType = "ADMIN"|string;
+  export type ComponentType = "HANA"|"HANA_NODE"|string&{};
+  export type CredentialType = "ADMIN"|string&{};
   export interface Database {
     /**
      * The ID of the application.
@@ -405,7 +405,7 @@ declare namespace SsmSap {
   export type DatabaseId = string;
   export type DatabaseIdList = DatabaseId[];
   export type DatabaseName = string;
-  export type DatabaseStatus = "RUNNING"|"STARTING"|"STOPPED"|"WARNING"|"UNKNOWN"|"ERROR"|string;
+  export type DatabaseStatus = "RUNNING"|"STARTING"|"STOPPED"|"WARNING"|"UNKNOWN"|"ERROR"|string&{};
   export interface DatabaseSummary {
     /**
      * The ID of the application.
@@ -433,7 +433,7 @@ declare namespace SsmSap {
     Tags?: TagMap;
   }
   export type DatabaseSummaryList = DatabaseSummary[];
-  export type DatabaseType = "SYSTEM"|"TENANT"|string;
+  export type DatabaseType = "SYSTEM"|"TENANT"|string&{};
   export interface DeleteResourcePermissionInput {
     /**
      * Delete or restore the permissions on the target database.
@@ -478,7 +478,7 @@ declare namespace SsmSap {
   }
   export type FilterList = Filter[];
   export type FilterName = string;
-  export type FilterOperator = "Equals"|"GreaterThanOrEquals"|"LessThanOrEquals"|string;
+  export type FilterOperator = "Equals"|"GreaterThanOrEquals"|"LessThanOrEquals"|string&{};
   export type FilterValue = string;
   export interface GetApplicationInput {
     /**
@@ -607,7 +607,7 @@ declare namespace SsmSap {
     OsVersion?: String;
   }
   export type HostList = Host[];
-  export type HostRole = "LEADER"|"WORKER"|"STANDBY"|"UNKNOWN"|string;
+  export type HostRole = "LEADER"|"WORKER"|"STANDBY"|"UNKNOWN"|string&{};
   export type InstanceId = string;
   export type InstanceList = InstanceId[];
   export type Integer = number;
@@ -774,11 +774,11 @@ declare namespace SsmSap {
   export type OperationId = string;
   export type OperationIdList = OperationId[];
   export type OperationList = Operation[];
-  export type OperationMode = "PRIMARY"|"LOGREPLAY"|"DELTA_DATASHIPPING"|"LOGREPLAY_READACCESS"|"NONE"|string;
+  export type OperationMode = "PRIMARY"|"LOGREPLAY"|"DELTA_DATASHIPPING"|"LOGREPLAY_READACCESS"|"NONE"|string&{};
   export type OperationProperties = {[key: string]: String};
-  export type OperationStatus = "INPROGRESS"|"SUCCESS"|"ERROR"|string;
+  export type OperationStatus = "INPROGRESS"|"SUCCESS"|"ERROR"|string&{};
   export type OperationType = string;
-  export type PermissionActionType = "RESTORE"|string;
+  export type PermissionActionType = "RESTORE"|string&{};
   export interface PutResourcePermissionInput {
     /**
      * 
@@ -839,7 +839,7 @@ declare namespace SsmSap {
      */
     OperationId?: OperationId;
   }
-  export type ReplicationMode = "PRIMARY"|"NONE"|"SYNC"|"SYNCMEM"|"ASYNC"|string;
+  export type ReplicationMode = "PRIMARY"|"NONE"|"SYNC"|"SYNCMEM"|"ASYNC"|string&{};
   export interface Resilience {
     /**
      * The tier of the component.

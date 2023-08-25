@@ -96,7 +96,7 @@ declare namespace Pipes {
   export type Arn = string;
   export type ArnOrJsonPath = string;
   export type ArnOrUrl = string;
-  export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
+  export type AssignPublicIp = "ENABLED"|"DISABLED"|string&{};
   export interface AwsVpcConfiguration {
     /**
      * Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE.
@@ -158,7 +158,7 @@ declare namespace Pipes {
      */
     Type?: BatchJobDependencyType;
   }
-  export type BatchJobDependencyType = "N_TO_N"|"SEQUENTIAL"|string;
+  export type BatchJobDependencyType = "N_TO_N"|"SEQUENTIAL"|string&{};
   export type BatchParametersMap = {[key: string]: String};
   export interface BatchResourceRequirement {
     /**
@@ -170,7 +170,7 @@ declare namespace Pipes {
      */
     Value: String;
   }
-  export type BatchResourceRequirementType = "GPU"|"MEMORY"|"VCPU"|string;
+  export type BatchResourceRequirementType = "GPU"|"MEMORY"|"VCPU"|string&{};
   export type BatchResourceRequirementsList = BatchResourceRequirement[];
   export type BatchRetryAttempts = number;
   export interface BatchRetryStrategy {
@@ -382,7 +382,7 @@ declare namespace Pipes {
      */
     TargetParameters?: PipeTargetParameters;
   }
-  export type DynamoDBStreamStartPosition = "TRIM_HORIZON"|"LATEST"|string;
+  export type DynamoDBStreamStartPosition = "TRIM_HORIZON"|"LATEST"|string&{};
   export interface EcsContainerOverride {
     /**
      * The command to send to the container that overrides the default command from the Docker image or the task definition. You must also specify a container name.
@@ -429,7 +429,7 @@ declare namespace Pipes {
     value: String;
   }
   export type EcsEnvironmentFileList = EcsEnvironmentFile[];
-  export type EcsEnvironmentFileType = "s3"|string;
+  export type EcsEnvironmentFileType = "s3"|string&{};
   export interface EcsEnvironmentVariable {
     /**
      * The name of the key-value pair. For environment variables, this is the name of the environment variable.
@@ -468,7 +468,7 @@ declare namespace Pipes {
      */
     value: String;
   }
-  export type EcsResourceRequirementType = "GPU"|"InferenceAccelerator"|string;
+  export type EcsResourceRequirementType = "GPU"|"InferenceAccelerator"|string&{};
   export type EcsResourceRequirementsList = EcsResourceRequirement[];
   export interface EcsTaskOverride {
     /**
@@ -529,8 +529,8 @@ declare namespace Pipes {
   export type KafkaBootstrapServers = EndpointString[];
   export type KafkaTopicName = string;
   export type KinesisPartitionKey = string;
-  export type KinesisStreamStartPosition = "TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP"|string;
-  export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL"|string;
+  export type KinesisStreamStartPosition = "TRIM_HORIZON"|"LATEST"|"AT_TIMESTAMP"|string&{};
+  export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL"|string&{};
   export type LimitMax10 = number;
   export type LimitMax100 = number;
   export type LimitMax10000 = number;
@@ -605,7 +605,7 @@ declare namespace Pipes {
      */
     SaslScram512Auth?: SecretManagerArn;
   }
-  export type MSKStartPosition = "TRIM_HORIZON"|"LATEST"|string;
+  export type MSKStartPosition = "TRIM_HORIZON"|"LATEST"|string&{};
   export type MaximumBatchingWindowInSeconds = number;
   export type MaximumRecordAgeInSeconds = number;
   export type MaximumRetryAttemptsESM = number;
@@ -618,7 +618,7 @@ declare namespace Pipes {
     awsvpcConfiguration?: AwsVpcConfiguration;
   }
   export type NextToken = string;
-  export type OnPartialBatchItemFailureStreams = "AUTOMATIC_BISECT"|string;
+  export type OnPartialBatchItemFailureStreams = "AUTOMATIC_BISECT"|string&{};
   export type OptionalArn = string;
   export type PathParameter = string;
   export type PathParameterList = PathParameter[];
@@ -912,7 +912,7 @@ declare namespace Pipes {
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
   }
-  export type PipeState = "RUNNING"|"STOPPED"|"CREATING"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"CREATE_FAILED"|"UPDATE_FAILED"|"START_FAILED"|"STOP_FAILED"|string;
+  export type PipeState = "RUNNING"|"STOPPED"|"CREATING"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"CREATE_FAILED"|"UPDATE_FAILED"|"START_FAILED"|"STOP_FAILED"|string&{};
   export type PipeStateReason = string;
   export interface PipeTargetBatchJobParameters {
     /**
@@ -1052,7 +1052,7 @@ declare namespace Pipes {
      */
     QueryStringParameters?: QueryStringParametersMap;
   }
-  export type PipeTargetInvocationType = "REQUEST_RESPONSE"|"FIRE_AND_FORGET"|string;
+  export type PipeTargetInvocationType = "REQUEST_RESPONSE"|"FIRE_AND_FORGET"|string&{};
   export interface PipeTargetKinesisStreamParameters {
     /**
      * Determines which shard in the stream the data record is assigned to. Partition keys are Unicode strings with a maximum length limit of 256 characters for each key. Amazon Kinesis Data Streams uses the partition key as input to a hash function that maps the partition key and associated data to a specific shard. Specifically, an MD5 hash function is used to map partition keys to 128-bit integer values and to map associated data records to shards. As a result of this hashing mechanism, all data records with the same partition key map to the same shard within the stream.
@@ -1174,7 +1174,7 @@ declare namespace Pipes {
     type?: PlacementConstraintType;
   }
   export type PlacementConstraintExpression = string;
-  export type PlacementConstraintType = "distinctInstance"|"memberOf"|string;
+  export type PlacementConstraintType = "distinctInstance"|"memberOf"|string&{};
   export type PlacementConstraints = PlacementConstraint[];
   export type PlacementStrategies = PlacementStrategy[];
   export interface PlacementStrategy {
@@ -1188,14 +1188,14 @@ declare namespace Pipes {
     type?: PlacementStrategyType;
   }
   export type PlacementStrategyField = string;
-  export type PlacementStrategyType = "random"|"spread"|"binpack"|string;
-  export type PropagateTags = "TASK_DEFINITION"|string;
+  export type PlacementStrategyType = "random"|"spread"|"binpack"|string&{};
+  export type PropagateTags = "TASK_DEFINITION"|string&{};
   export type QueryStringKey = string;
   export type QueryStringParametersMap = {[key: string]: QueryStringValue};
   export type QueryStringValue = string;
   export type ReferenceId = string;
-  export type RequestedPipeState = "RUNNING"|"STOPPED"|string;
-  export type RequestedPipeStateDescribeResponse = "RUNNING"|"STOPPED"|"DELETED"|string;
+  export type RequestedPipeState = "RUNNING"|"STOPPED"|string&{};
+  export type RequestedPipeStateDescribeResponse = "RUNNING"|"STOPPED"|"DELETED"|string&{};
   export type ResourceArn = string;
   export type RoleArn = string;
   export interface SageMakerPipelineParameter {
@@ -1245,7 +1245,7 @@ declare namespace Pipes {
      */
     Subnets?: SubnetIds;
   }
-  export type SelfManagedKafkaStartPosition = "TRIM_HORIZON"|"LATEST"|string;
+  export type SelfManagedKafkaStartPosition = "TRIM_HORIZON"|"LATEST"|string&{};
   export type Sql = string;
   export type Sqls = Sql[];
   export interface StartPipeRequest {

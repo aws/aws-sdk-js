@@ -293,7 +293,7 @@ declare namespace CodeCatalyst {
   }
   export type Boolean = boolean;
   export type ClientToken = string;
-  export type ComparisonOperator = "EQ"|"GT"|"GE"|"LT"|"LE"|string;
+  export type ComparisonOperator = "EQ"|"GT"|"GE"|"LT"|"LE"|string&{};
   export interface CreateAccessTokenRequest {
     /**
      * The friendly name of the personal access token.
@@ -641,9 +641,9 @@ declare namespace CodeCatalyst {
     id: DevEnvironmentSessionSummaryIdString;
   }
   export type DevEnvironmentSessionSummaryIdString = string;
-  export type DevEnvironmentSessionType = "SSM"|"SSH"|string;
+  export type DevEnvironmentSessionType = "SSM"|"SSH"|string&{};
   export type DevEnvironmentSessionsSummaryList = DevEnvironmentSessionSummary[];
-  export type DevEnvironmentStatus = "PENDING"|"RUNNING"|"STARTING"|"STOPPING"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|string;
+  export type DevEnvironmentStatus = "PENDING"|"RUNNING"|"STARTING"|"STOPPING"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|string&{};
   export interface DevEnvironmentSummary {
     /**
      * The name of the space.
@@ -811,7 +811,7 @@ declare namespace CodeCatalyst {
      */
     comparisonOperator?: String;
   }
-  export type FilterKey = "hasAccessTo"|string;
+  export type FilterKey = "hasAccessTo"|string&{};
   export type Filters = Filter[];
   export interface GetDevEnvironmentRequest {
     /**
@@ -1072,7 +1072,7 @@ declare namespace CodeCatalyst {
   export type IdeRuntimeString = string;
   export type Ides = Ide[];
   export type InactivityTimeoutMinutes = number;
-  export type InstanceType = "dev.standard1.small"|"dev.standard1.medium"|"dev.standard1.large"|"dev.standard1.xlarge"|string;
+  export type InstanceType = "dev.standard1.small"|"dev.standard1.medium"|"dev.standard1.large"|"dev.standard1.xlarge"|string&{};
   export interface ListAccessTokensRequest {
     /**
      * The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a NextToken element, which you can use to obtain additional results.
@@ -1355,7 +1355,7 @@ declare namespace CodeCatalyst {
     items?: SpaceSummaries;
   }
   export type NameString = string;
-  export type OperationType = "READONLY"|"MUTATION"|string;
+  export type OperationType = "READONLY"|"MUTATION"|string&{};
   export interface PersistentStorage {
     /**
      * The size of the persistent storage in gigabytes (specifically GiB).  Valid values for storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64. 
@@ -1748,7 +1748,7 @@ declare namespace CodeCatalyst {
      */
     awsAccountId?: String;
   }
-  export type UserType = "USER"|"AWS_ACCOUNT"|"UNKNOWN"|string;
+  export type UserType = "USER"|"AWS_ACCOUNT"|"UNKNOWN"|string&{};
   export type Uuid = string;
   export interface VerifySessionResponse {
     /**

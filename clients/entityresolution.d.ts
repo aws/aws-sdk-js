@@ -141,7 +141,7 @@ declare class EntityResolution extends Service {
   updateMatchingWorkflow(callback?: (err: AWSError, data: EntityResolution.Types.UpdateMatchingWorkflowOutput) => void): Request<EntityResolution.Types.UpdateMatchingWorkflowOutput, AWSError>;
 }
 declare namespace EntityResolution {
-  export type AttributeMatchingModel = "ONE_TO_ONE"|"MANY_TO_MANY"|string;
+  export type AttributeMatchingModel = "ONE_TO_ONE"|"MANY_TO_MANY"|string&{};
   export type AttributeName = string;
   export type Boolean = boolean;
   export interface CreateMatchingWorkflowInput {
@@ -427,7 +427,7 @@ declare namespace EntityResolution {
      */
     incrementalRunType?: IncrementalRunType;
   }
-  export type IncrementalRunType = "IMMEDIATE"|string;
+  export type IncrementalRunType = "IMMEDIATE"|string&{};
   export interface InputSource {
     /**
      * Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an AttributeType of PHONE_NUMBER, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.
@@ -465,7 +465,7 @@ declare namespace EntityResolution {
      */
     totalRecordsProcessed?: Integer;
   }
-  export type JobStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"QUEUED"|string;
+  export type JobStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"QUEUED"|string&{};
   export interface JobSummary {
     /**
      * The time at which the job has finished.
@@ -629,7 +629,7 @@ declare namespace EntityResolution {
      */
     ruleBasedProperties?: RuleBasedProperties;
   }
-  export type ResolutionType = "RULE_MATCHING"|"ML_MATCHING"|string;
+  export type ResolutionType = "RULE_MATCHING"|"ML_MATCHING"|string&{};
   export interface Rule {
     /**
      * A list of MatchingKeys. The MatchingKeys must have been defined in the SchemaMapping. Two records are considered to match according to this rule if all of the MatchingKeys match.
@@ -653,7 +653,7 @@ declare namespace EntityResolution {
   export type RuleBasedPropertiesRulesList = Rule[];
   export type RuleMatchingKeysList = AttributeName[];
   export type RuleRuleNameString = string;
-  export type SchemaAttributeType = "NAME"|"NAME_FIRST"|"NAME_MIDDLE"|"NAME_LAST"|"ADDRESS"|"ADDRESS_STREET1"|"ADDRESS_STREET2"|"ADDRESS_STREET3"|"ADDRESS_CITY"|"ADDRESS_STATE"|"ADDRESS_COUNTRY"|"ADDRESS_POSTALCODE"|"PHONE"|"PHONE_NUMBER"|"PHONE_COUNTRYCODE"|"EMAIL_ADDRESS"|"UNIQUE_ID"|"DATE"|"STRING"|string;
+  export type SchemaAttributeType = "NAME"|"NAME_FIRST"|"NAME_MIDDLE"|"NAME_LAST"|"ADDRESS"|"ADDRESS_STREET1"|"ADDRESS_STREET2"|"ADDRESS_STREET3"|"ADDRESS_CITY"|"ADDRESS_STATE"|"ADDRESS_COUNTRY"|"ADDRESS_POSTALCODE"|"PHONE"|"PHONE_NUMBER"|"PHONE_COUNTRYCODE"|"EMAIL_ADDRESS"|"UNIQUE_ID"|"DATE"|"STRING"|string&{};
   export interface SchemaInputAttribute {
     /**
      * A string containing the field name.

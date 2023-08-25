@@ -61,7 +61,7 @@ declare class ARCZonalShift extends Service {
   updateZonalShift(callback?: (err: AWSError, data: ARCZonalShift.Types.ZonalShift) => void): Request<ARCZonalShift.Types.ZonalShift, AWSError>;
 }
 declare namespace ARCZonalShift {
-  export type AppliedStatus = "APPLIED"|"NOT_APPLIED"|string;
+  export type AppliedStatus = "APPLIED"|"NOT_APPLIED"|string&{};
   export type AppliedWeights = {[key: string]: Weight};
   export type AvailabilityZone = string;
   export type AvailabilityZones = AvailabilityZone[];
@@ -257,7 +257,7 @@ declare namespace ARCZonalShift {
      */
     zonalShiftId: ZonalShiftId;
   }
-  export type ZonalShiftStatus = "ACTIVE"|"EXPIRED"|"CANCELED"|string;
+  export type ZonalShiftStatus = "ACTIVE"|"EXPIRED"|"CANCELED"|string&{};
   export type ZonalShiftSummaries = ZonalShiftSummary[];
   export interface ZonalShiftSummary {
     /**

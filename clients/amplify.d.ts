@@ -1043,7 +1043,7 @@ declare namespace Amplify {
   export type DomainAssociations = DomainAssociation[];
   export type DomainName = string;
   export type DomainPrefix = string;
-  export type DomainStatus = "PENDING_VERIFICATION"|"IN_PROGRESS"|"AVAILABLE"|"PENDING_DEPLOYMENT"|"FAILED"|"CREATING"|"REQUESTING_CERTIFICATE"|"UPDATING"|string;
+  export type DomainStatus = "PENDING_VERIFICATION"|"IN_PROGRESS"|"AVAILABLE"|"PENDING_DEPLOYMENT"|"FAILED"|"CREATING"|"REQUESTING_CERTIFICATE"|"UPDATING"|string&{};
   export type EnableAutoBranchCreation = boolean;
   export type EnableAutoBuild = boolean;
   export type EnableAutoSubDomain = boolean;
@@ -1198,7 +1198,7 @@ declare namespace Amplify {
   export type JobArn = string;
   export type JobId = string;
   export type JobReason = string;
-  export type JobStatus = "PENDING"|"PROVISIONING"|"RUNNING"|"FAILED"|"SUCCEED"|"CANCELLING"|"CANCELLED"|string;
+  export type JobStatus = "PENDING"|"PROVISIONING"|"RUNNING"|"FAILED"|"SUCCEED"|"CANCELLING"|"CANCELLED"|string&{};
   export type JobSummaries = JobSummary[];
   export interface JobSummary {
     /**
@@ -1238,7 +1238,7 @@ declare namespace Amplify {
      */
     jobType: JobType;
   }
-  export type JobType = "RELEASE"|"RETRY"|"MANUAL"|"WEB_HOOK"|string;
+  export type JobType = "RELEASE"|"RETRY"|"MANUAL"|"WEB_HOOK"|string&{};
   export type LastDeployTime = Date;
   export interface ListAppsRequest {
     /**
@@ -1438,7 +1438,7 @@ declare namespace Amplify {
   export type Name = string;
   export type NextToken = string;
   export type OauthToken = string;
-  export type Platform = "WEB"|"WEB_DYNAMIC"|"WEB_COMPUTE"|string;
+  export type Platform = "WEB"|"WEB_DYNAMIC"|"WEB_COMPUTE"|string&{};
   export interface ProductionBranch {
     /**
      *  The last deploy time of the production branch. 
@@ -1459,14 +1459,14 @@ declare namespace Amplify {
   }
   export type PullRequestEnvironmentName = string;
   export type Repository = string;
-  export type RepositoryCloneMethod = "SSH"|"TOKEN"|"SIGV4"|string;
+  export type RepositoryCloneMethod = "SSH"|"TOKEN"|"SIGV4"|string&{};
   export type ResourceArn = string;
   export type Screenshots = {[key: string]: ThumbnailUrl};
   export type ServiceRoleArn = string;
   export type Source = string;
   export type SourceUrl = string;
   export type StackName = string;
-  export type Stage = "PRODUCTION"|"BETA"|"DEVELOPMENT"|"EXPERIMENTAL"|"PULL_REQUEST"|string;
+  export type Stage = "PRODUCTION"|"BETA"|"DEVELOPMENT"|"EXPERIMENTAL"|"PULL_REQUEST"|string&{};
   export interface StartDeploymentRequest {
     /**
      *  The unique ID for an Amplify app. 

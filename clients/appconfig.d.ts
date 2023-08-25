@@ -407,7 +407,7 @@ declare namespace AppConfig {
   }
   export type ActionInvocations = ActionInvocation[];
   export type ActionList = Action[];
-  export type ActionPoint = "PRE_CREATE_HOSTED_CONFIGURATION_VERSION"|"PRE_START_DEPLOYMENT"|"ON_DEPLOYMENT_START"|"ON_DEPLOYMENT_STEP"|"ON_DEPLOYMENT_BAKING"|"ON_DEPLOYMENT_COMPLETE"|"ON_DEPLOYMENT_ROLLED_BACK"|string;
+  export type ActionPoint = "PRE_CREATE_HOSTED_CONFIGURATION_VERSION"|"PRE_START_DEPLOYMENT"|"ON_DEPLOYMENT_START"|"ON_DEPLOYMENT_STEP"|"ON_DEPLOYMENT_BAKING"|"ON_DEPLOYMENT_COMPLETE"|"ON_DEPLOYMENT_ROLLED_BACK"|string&{};
   export type ActionsMap = {[key: string]: ActionList};
   export interface Application {
     /**
@@ -894,10 +894,10 @@ declare namespace AppConfig {
      */
     OccurredAt?: Iso8601DateTime;
   }
-  export type DeploymentEventType = "PERCENTAGE_UPDATED"|"ROLLBACK_STARTED"|"ROLLBACK_COMPLETED"|"BAKE_TIME_STARTED"|"DEPLOYMENT_STARTED"|"DEPLOYMENT_COMPLETED"|string;
+  export type DeploymentEventType = "PERCENTAGE_UPDATED"|"ROLLBACK_STARTED"|"ROLLBACK_COMPLETED"|"BAKE_TIME_STARTED"|"DEPLOYMENT_STARTED"|"DEPLOYMENT_COMPLETED"|string&{};
   export type DeploymentEvents = DeploymentEvent[];
   export type DeploymentList = DeploymentSummary[];
-  export type DeploymentState = "BAKING"|"VALIDATING"|"DEPLOYING"|"COMPLETE"|"ROLLING_BACK"|"ROLLED_BACK"|string;
+  export type DeploymentState = "BAKING"|"VALIDATING"|"DEPLOYING"|"COMPLETE"|"ROLLING_BACK"|"ROLLED_BACK"|string&{};
   export interface DeploymentStrategies {
     /**
      * The elements from this collection.
@@ -1028,7 +1028,7 @@ declare namespace AppConfig {
     Monitors?: MonitorList;
   }
   export type EnvironmentList = Environment[];
-  export type EnvironmentState = "READY_FOR_DEPLOYMENT"|"DEPLOYING"|"ROLLING_BACK"|"ROLLED_BACK"|string;
+  export type EnvironmentState = "READY_FOR_DEPLOYMENT"|"DEPLOYING"|"ROLLING_BACK"|"ROLLED_BACK"|string&{};
   export interface Environments {
     /**
      * The elements from this collection.
@@ -1252,7 +1252,7 @@ declare namespace AppConfig {
     VersionNumber: Integer;
   }
   export type GrowthFactor = number;
-  export type GrowthType = "LINEAR"|"EXPONENTIAL"|string;
+  export type GrowthType = "LINEAR"|"EXPONENTIAL"|string&{};
   export interface HostedConfigurationVersion {
     /**
      * The application ID.
@@ -1488,7 +1488,7 @@ declare namespace AppConfig {
   export type ParameterValueMap = {[key: string]: StringWithLengthBetween1And2048};
   export type Percentage = number;
   export type QueryName = string;
-  export type ReplicateTo = "NONE"|"SSM_DOCUMENT"|string;
+  export type ReplicateTo = "NONE"|"SSM_DOCUMENT"|string&{};
   export interface ResourceTags {
     /**
      * Metadata to assign to AppConfig resources. Tags help organize and categorize your AppConfig resources. Each tag consists of a key and an optional value, both of which you define.
@@ -1563,7 +1563,7 @@ declare namespace AppConfig {
     Tags: TagMap;
   }
   export type TagValue = string;
-  export type TriggeredBy = "USER"|"APPCONFIG"|"CLOUDWATCH_ALARM"|"INTERNAL_ERROR"|string;
+  export type TriggeredBy = "USER"|"APPCONFIG"|"CLOUDWATCH_ALARM"|"INTERNAL_ERROR"|string&{};
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource for which to remove tags.
@@ -1720,7 +1720,7 @@ declare namespace AppConfig {
     Content: StringWithLengthBetween0And32768;
   }
   export type ValidatorList = Validator[];
-  export type ValidatorType = "JSON_SCHEMA"|"LAMBDA"|string;
+  export type ValidatorType = "JSON_SCHEMA"|"LAMBDA"|string&{};
   export type ValidatorTypeList = ValidatorType[];
   export type Version = string;
   export type VersionLabel = string;

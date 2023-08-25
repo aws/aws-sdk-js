@@ -186,7 +186,7 @@ declare namespace IotData {
   export type NextToken = string;
   export type PageSize = number;
   export type Payload = Buffer|Uint8Array|Blob|string;
-  export type PayloadFormatIndicator = "UNSPECIFIED_BYTES"|"UTF8_DATA"|string;
+  export type PayloadFormatIndicator = "UNSPECIFIED_BYTES"|"UTF8_DATA"|string&{};
   export type PayloadSize = number;
   export interface PublishRequest {
     /**

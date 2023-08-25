@@ -271,7 +271,7 @@ declare namespace Outposts {
   export type AddressLine1 = string;
   export type AddressLine2 = string;
   export type AddressLine3 = string;
-  export type AddressType = "SHIPPING_ADDRESS"|"OPERATING_ADDRESS"|string;
+  export type AddressType = "SHIPPING_ADDRESS"|"OPERATING_ADDRESS"|string&{};
   export type Arn = string;
   export type AssetId = string;
   export interface AssetInfo {
@@ -303,8 +303,8 @@ declare namespace Outposts {
      */
     RackElevation?: RackElevation;
   }
-  export type AssetState = "ACTIVE"|"RETIRING"|"ISOLATED"|string;
-  export type AssetType = "COMPUTE"|string;
+  export type AssetState = "ACTIVE"|"RETIRING"|"ISOLATED"|string&{};
+  export type AssetType = "COMPUTE"|string&{};
   export type AvailabilityZone = string;
   export type AvailabilityZoneId = string;
   export type AvailabilityZoneIdList = AvailabilityZoneId[];
@@ -349,15 +349,15 @@ declare namespace Outposts {
      */
     SupportedStorage?: SupportedStorageList;
   }
-  export type CatalogItemClass = "RACK"|"SERVER"|string;
+  export type CatalogItemClass = "RACK"|"SERVER"|string&{};
   export type CatalogItemClassList = CatalogItemClass[];
   export type CatalogItemListDefinition = CatalogItem[];
   export type CatalogItemPowerKva = number;
-  export type CatalogItemStatus = "AVAILABLE"|"DISCONTINUED"|string;
+  export type CatalogItemStatus = "AVAILABLE"|"DISCONTINUED"|string&{};
   export type CatalogItemWeightLbs = number;
   export type City = string;
   export type CityList = City[];
-  export type ComputeAssetState = "ACTIVE"|"ISOLATED"|"RETIRING"|string;
+  export type ComputeAssetState = "ACTIVE"|"ISOLATED"|"RETIRING"|string&{};
   export interface ComputeAttributes {
     /**
      *  The host ID of the Dedicated Host on the asset. 
@@ -506,7 +506,7 @@ declare namespace Outposts {
   export type EC2CapacityListDefinition = EC2Capacity[];
   export type EC2FamilyList = Family[];
   export type Family = string;
-  export type FiberOpticCableType = "SINGLE_MODE"|"MULTI_MODE"|string;
+  export type FiberOpticCableType = "SINGLE_MODE"|"MULTI_MODE"|string&{};
   export interface GetCatalogItemInput {
     /**
      * The ID of the catalog item.
@@ -669,7 +669,7 @@ declare namespace Outposts {
     Quantity?: LineItemQuantity;
   }
   export type LineItemRequestListDefinition = LineItemRequest[];
-  export type LineItemStatus = "PREPARING"|"BUILDING"|"SHIPPED"|"DELIVERED"|"INSTALLING"|"INSTALLED"|"ERROR"|"CANCELLED"|"REPLACED"|string;
+  export type LineItemStatus = "PREPARING"|"BUILDING"|"SHIPPED"|"DELIVERED"|"INSTALLING"|"INSTALLED"|"ERROR"|"CANCELLED"|"REPLACED"|string&{};
   export type LineItemStatusCounts = {[key: string]: LineItemQuantity};
   export interface ListAssetsInput {
     /**
@@ -788,10 +788,10 @@ declare namespace Outposts {
   export type MacAddressList = MacAddress[];
   export type MaxResults1000 = number;
   export type MaxSize = string;
-  export type MaximumSupportedWeightLbs = "NO_LIMIT"|"MAX_1400_LBS"|"MAX_1600_LBS"|"MAX_1800_LBS"|"MAX_2000_LBS"|string;
+  export type MaximumSupportedWeightLbs = "NO_LIMIT"|"MAX_1400_LBS"|"MAX_1600_LBS"|"MAX_1800_LBS"|"MAX_2000_LBS"|string&{};
   export type Municipality = string;
   export type NetworkInterfaceDeviceIndex = number;
-  export type OpticalStandard = "OPTIC_10GBASE_SR"|"OPTIC_10GBASE_IR"|"OPTIC_10GBASE_LR"|"OPTIC_40GBASE_SR"|"OPTIC_40GBASE_ESR"|"OPTIC_40GBASE_IR4_LR4L"|"OPTIC_40GBASE_LR4"|"OPTIC_100GBASE_SR4"|"OPTIC_100GBASE_CWDM4"|"OPTIC_100GBASE_LR4"|"OPTIC_100G_PSM4_MSA"|"OPTIC_1000BASE_LX"|"OPTIC_1000BASE_SX"|string;
+  export type OpticalStandard = "OPTIC_10GBASE_SR"|"OPTIC_10GBASE_IR"|"OPTIC_10GBASE_LR"|"OPTIC_40GBASE_SR"|"OPTIC_40GBASE_ESR"|"OPTIC_40GBASE_IR4_LR4L"|"OPTIC_40GBASE_LR4"|"OPTIC_100GBASE_SR4"|"OPTIC_100GBASE_CWDM4"|"OPTIC_100GBASE_LR4"|"OPTIC_100G_PSM4_MSA"|"OPTIC_1000BASE_LX"|"OPTIC_1000BASE_SX"|string&{};
   export interface Order {
     /**
      *  The ID of the Outpost in the order. 
@@ -831,7 +831,7 @@ declare namespace Outposts {
     OrderType?: OrderType;
   }
   export type OrderId = string;
-  export type OrderStatus = "RECEIVED"|"PENDING"|"PROCESSING"|"INSTALLING"|"FULFILLED"|"CANCELLED"|"PREPARING"|"IN_PROGRESS"|"COMPLETED"|"ERROR"|string;
+  export type OrderStatus = "RECEIVED"|"PENDING"|"PROCESSING"|"INSTALLING"|"FULFILLED"|"CANCELLED"|"PREPARING"|"IN_PROGRESS"|"COMPLETED"|"ERROR"|string&{};
   export interface OrderSummary {
     /**
      *  The ID of the Outpost. 
@@ -863,7 +863,7 @@ declare namespace Outposts {
     OrderFulfilledDate?: ISO8601Timestamp;
   }
   export type OrderSummaryListDefinition = OrderSummary[];
-  export type OrderType = "OUTPOST"|"REPLACEMENT"|string;
+  export type OrderType = "OUTPOST"|"REPLACEMENT"|string&{};
   export interface Outpost {
     /**
      *  The ID of the Outpost. 
@@ -894,13 +894,13 @@ declare namespace Outposts {
   export type OutpostIdentifier = string;
   export type OutpostName = string;
   export type OwnerId = string;
-  export type PaymentOption = "ALL_UPFRONT"|"NO_UPFRONT"|"PARTIAL_UPFRONT"|string;
-  export type PaymentTerm = "THREE_YEARS"|"ONE_YEAR"|string;
+  export type PaymentOption = "ALL_UPFRONT"|"NO_UPFRONT"|"PARTIAL_UPFRONT"|string&{};
+  export type PaymentTerm = "THREE_YEARS"|"ONE_YEAR"|string&{};
   export type PostalCode = string;
-  export type PowerConnector = "L6_30P"|"IEC309"|"AH530P7W"|"AH532P6W"|string;
-  export type PowerDrawKva = "POWER_5_KVA"|"POWER_10_KVA"|"POWER_15_KVA"|"POWER_30_KVA"|string;
-  export type PowerFeedDrop = "ABOVE_RACK"|"BELOW_RACK"|string;
-  export type PowerPhase = "SINGLE_PHASE"|"THREE_PHASE"|string;
+  export type PowerConnector = "L6_30P"|"IEC309"|"AH530P7W"|"AH532P6W"|string&{};
+  export type PowerDrawKva = "POWER_5_KVA"|"POWER_10_KVA"|"POWER_15_KVA"|"POWER_30_KVA"|string&{};
+  export type PowerFeedDrop = "ABOVE_RACK"|"BELOW_RACK"|string&{};
+  export type PowerPhase = "SINGLE_PHASE"|"THREE_PHASE"|string&{};
   export type Quantity = string;
   export type RackElevation = number;
   export type RackId = string;
@@ -943,7 +943,7 @@ declare namespace Outposts {
     MaximumSupportedWeightLbs?: MaximumSupportedWeightLbs;
   }
   export type ServerEndpoint = string;
-  export type ShipmentCarrier = "DHL"|"DBS"|"FEDEX"|"UPS"|string;
+  export type ShipmentCarrier = "DHL"|"DBS"|"FEDEX"|"UPS"|string&{};
   export interface ShipmentInformation {
     /**
      *  The tracking number of the shipment. 
@@ -1022,8 +1022,8 @@ declare namespace Outposts {
   export type StateOrRegion = string;
   export type StateOrRegionList = StateOrRegion[];
   export type StatusList = AssetState[];
-  export type SupportedHardwareType = "RACK"|"SERVER"|string;
-  export type SupportedStorageEnum = "EBS"|"S3"|string;
+  export type SupportedHardwareType = "RACK"|"SERVER"|string&{};
+  export type SupportedStorageEnum = "EBS"|"S3"|string&{};
   export type SupportedStorageList = SupportedStorageEnum[];
   export type SupportedUplinkGbps = number;
   export type SupportedUplinkGbpsListDefinition = SupportedUplinkGbps[];
@@ -1157,8 +1157,8 @@ declare namespace Outposts {
   export interface UpdateSiteRackPhysicalPropertiesOutput {
     Site?: Site;
   }
-  export type UplinkCount = "UPLINK_COUNT_1"|"UPLINK_COUNT_2"|"UPLINK_COUNT_3"|"UPLINK_COUNT_4"|"UPLINK_COUNT_5"|"UPLINK_COUNT_6"|"UPLINK_COUNT_7"|"UPLINK_COUNT_8"|"UPLINK_COUNT_12"|"UPLINK_COUNT_16"|string;
-  export type UplinkGbps = "UPLINK_1G"|"UPLINK_10G"|"UPLINK_40G"|"UPLINK_100G"|string;
+  export type UplinkCount = "UPLINK_COUNT_1"|"UPLINK_COUNT_2"|"UPLINK_COUNT_3"|"UPLINK_COUNT_4"|"UPLINK_COUNT_5"|"UPLINK_COUNT_6"|"UPLINK_COUNT_7"|"UPLINK_COUNT_8"|"UPLINK_COUNT_12"|"UPLINK_COUNT_16"|string&{};
+  export type UplinkGbps = "UPLINK_1G"|"UPLINK_10G"|"UPLINK_40G"|"UPLINK_100G"|string&{};
   export type WireGuardPublicKey = string;
   export type outpostListDefinition = Outpost[];
   export type siteListDefinition = Site[];

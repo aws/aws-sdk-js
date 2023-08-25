@@ -272,7 +272,7 @@ declare namespace EMRcontainers {
      */
     info?: ContainerInfo;
   }
-  export type ContainerProviderType = "EKS"|string;
+  export type ContainerProviderType = "EKS"|string&{};
   export interface CreateJobTemplateRequest {
     /**
      * The specified name of the job template.
@@ -590,7 +590,7 @@ declare namespace EMRcontainers {
     tags?: TagMap;
   }
   export type EndpointArn = string;
-  export type EndpointState = "CREATING"|"ACTIVE"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
+  export type EndpointState = "CREATING"|"ACTIVE"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string&{};
   export type EndpointStates = EndpointState[];
   export type EndpointType = string;
   export type EndpointTypes = EndpointType[];
@@ -598,7 +598,7 @@ declare namespace EMRcontainers {
   export type EntryPointArgument = string;
   export type EntryPointArguments = EntryPointArgument[];
   export type EntryPointPath = string;
-  export type FailureReason = "INTERNAL_ERROR"|"USER_ERROR"|"VALIDATION_ERROR"|"CLUSTER_UNAVAILABLE"|string;
+  export type FailureReason = "INTERNAL_ERROR"|"USER_ERROR"|"VALIDATION_ERROR"|"CLUSTER_UNAVAILABLE"|string&{};
   export interface GetManagedEndpointSessionCredentialsRequest {
     /**
      * The ARN of the managed endpoint for which the request is submitted. 
@@ -730,7 +730,7 @@ declare namespace EMRcontainers {
      */
     retryPolicyExecution?: RetryPolicyExecution;
   }
-  export type JobRunState = "PENDING"|"SUBMITTED"|"RUNNING"|"FAILED"|"CANCELLED"|"CANCEL_PENDING"|"COMPLETED"|string;
+  export type JobRunState = "PENDING"|"SUBMITTED"|"RUNNING"|"FAILED"|"CANCELLED"|"CANCEL_PENDING"|"COMPLETED"|string&{};
   export type JobRunStates = JobRunState[];
   export type JobRuns = JobRun[];
   export interface JobTemplate {
@@ -1022,7 +1022,7 @@ declare namespace EMRcontainers {
      */
     logUri?: UriString;
   }
-  export type PersistentAppUI = "ENABLED"|"DISABLED"|string;
+  export type PersistentAppUI = "ENABLED"|"DISABLED"|string&{};
   export type ReleaseLabel = string;
   export type RequestIdentityUserArn = string;
   export type ResourceIdString = string;
@@ -1170,7 +1170,7 @@ declare namespace EMRcontainers {
     defaultValue?: String1024;
   }
   export type TemplateParameterConfigurationMap = {[key: string]: TemplateParameterConfiguration};
-  export type TemplateParameterDataType = "NUMBER"|"STRING"|string;
+  export type TemplateParameterDataType = "NUMBER"|"STRING"|string&{};
   export type TemplateParameterInputMap = {[key: string]: String1024};
   export type TemplateParameterName = string;
   export type Token = string;
@@ -1218,7 +1218,7 @@ declare namespace EMRcontainers {
     tags?: TagMap;
   }
   export type VirtualClusterArn = string;
-  export type VirtualClusterState = "RUNNING"|"TERMINATING"|"TERMINATED"|"ARRESTED"|string;
+  export type VirtualClusterState = "RUNNING"|"TERMINATING"|"TERMINATED"|"ARRESTED"|string&{};
   export type VirtualClusterStates = VirtualClusterState[];
   export type VirtualClusters = VirtualCluster[];
   /**

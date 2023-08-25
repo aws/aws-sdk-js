@@ -413,7 +413,7 @@ declare namespace IVS {
   }
   export type ChannelArn = string;
   export type ChannelArnList = ChannelArn[];
-  export type ChannelLatencyMode = "NORMAL"|"LOW"|string;
+  export type ChannelLatencyMode = "NORMAL"|"LOW"|string&{};
   export type ChannelList = ChannelSummary[];
   export type ChannelName = string;
   export type ChannelRecordingConfigurationArn = string;
@@ -455,7 +455,7 @@ declare namespace IVS {
      */
     type?: ChannelType;
   }
-  export type ChannelType = "BASIC"|"STANDARD"|"ADVANCED_SD"|"ADVANCED_HD"|string;
+  export type ChannelType = "BASIC"|"STANDARD"|"ADVANCED_SD"|"ADVANCED_HD"|string&{};
   export type Channels = Channel[];
   export interface CreateChannelRequest {
     /**
@@ -934,7 +934,7 @@ declare namespace IVS {
   export type RecordingConfigurationArn = string;
   export type RecordingConfigurationList = RecordingConfigurationSummary[];
   export type RecordingConfigurationName = string;
-  export type RecordingConfigurationState = "CREATING"|"CREATE_FAILED"|"ACTIVE"|string;
+  export type RecordingConfigurationState = "CREATING"|"CREATE_FAILED"|"ACTIVE"|string&{};
   export interface RecordingConfigurationSummary {
     /**
      * Recording-configuration ARN.
@@ -957,7 +957,7 @@ declare namespace IVS {
      */
     tags?: Tags;
   }
-  export type RecordingMode = "DISABLED"|"INTERVAL"|string;
+  export type RecordingMode = "DISABLED"|"INTERVAL"|string&{};
   export type RecordingReconnectWindowSeconds = number;
   export interface RenditionConfiguration {
     /**
@@ -969,9 +969,9 @@ declare namespace IVS {
      */
     renditions?: RenditionConfigurationRenditionList;
   }
-  export type RenditionConfigurationRendition = "FULL_HD"|"HD"|"SD"|"LOWEST_RESOLUTION"|string;
+  export type RenditionConfigurationRendition = "FULL_HD"|"HD"|"SD"|"LOWEST_RESOLUTION"|string&{};
   export type RenditionConfigurationRenditionList = RenditionConfigurationRendition[];
-  export type RenditionConfigurationRenditionSelection = "ALL"|"NONE"|"CUSTOM"|string;
+  export type RenditionConfigurationRenditionSelection = "ALL"|"NONE"|"CUSTOM"|string&{};
   export type ResourceArn = string;
   export type S3DestinationBucketName = string;
   export interface S3DestinationConfiguration {
@@ -1055,7 +1055,7 @@ declare namespace IVS {
      */
     health?: StreamHealth;
   }
-  export type StreamHealth = "HEALTHY"|"STARVING"|"UNKNOWN"|string;
+  export type StreamHealth = "HEALTHY"|"STARVING"|"UNKNOWN"|string&{};
   export type StreamId = string;
   export interface StreamKey {
     /**
@@ -1146,7 +1146,7 @@ declare namespace IVS {
     streamId?: StreamId;
   }
   export type StreamStartTime = Date;
-  export type StreamState = "LIVE"|"OFFLINE"|string;
+  export type StreamState = "LIVE"|"OFFLINE"|string&{};
   export interface StreamSummary {
     /**
      * Channel ARN for the stream.
@@ -1210,11 +1210,11 @@ declare namespace IVS {
      */
     targetIntervalSeconds?: TargetIntervalSeconds;
   }
-  export type ThumbnailConfigurationResolution = "FULL_HD"|"HD"|"SD"|"LOWEST_RESOLUTION"|string;
-  export type ThumbnailConfigurationStorage = "SEQUENTIAL"|"LATEST"|string;
+  export type ThumbnailConfigurationResolution = "FULL_HD"|"HD"|"SD"|"LOWEST_RESOLUTION"|string&{};
+  export type ThumbnailConfigurationStorage = "SEQUENTIAL"|"LATEST"|string&{};
   export type ThumbnailConfigurationStorageList = ThumbnailConfigurationStorage[];
   export type Time = Date;
-  export type TranscodePreset = "HIGHER_BANDWIDTH_DELIVERY"|"CONSTRAINED_BANDWIDTH_DELIVERY"|string;
+  export type TranscodePreset = "HIGHER_BANDWIDTH_DELIVERY"|"CONSTRAINED_BANDWIDTH_DELIVERY"|string&{};
   export interface UntagResourceRequest {
     /**
      * ARN of the resource for which tags are to be removed. The ARN must be URL-encoded.

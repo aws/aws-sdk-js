@@ -440,7 +440,7 @@ declare namespace Fis {
      */
     reason?: ExperimentActionStatusReason;
   }
-  export type ExperimentActionStatus = "pending"|"initiating"|"running"|"completed"|"cancelled"|"stopping"|"stopped"|"failed"|string;
+  export type ExperimentActionStatus = "pending"|"initiating"|"running"|"completed"|"cancelled"|"stopping"|"stopped"|"failed"|string&{};
   export type ExperimentActionStatusReason = string;
   export type ExperimentActionTargetMap = {[key: string]: ExperimentTargetName};
   export type ExperimentActionTargetName = string;
@@ -487,7 +487,7 @@ declare namespace Fis {
      */
     reason?: ExperimentStatusReason;
   }
-  export type ExperimentStatus = "pending"|"initiating"|"running"|"completed"|"stopping"|"stopped"|"failed"|string;
+  export type ExperimentStatus = "pending"|"initiating"|"running"|"completed"|"stopping"|"stopped"|"failed"|string&{};
   export type ExperimentStatusReason = string;
   export interface ExperimentStopCondition {
     /**

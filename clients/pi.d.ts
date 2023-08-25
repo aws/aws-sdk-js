@@ -117,7 +117,7 @@ declare class PI extends Service {
   untagResource(callback?: (err: AWSError, data: PI.Types.UntagResourceResponse) => void): Request<PI.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace PI {
-  export type AcceptLanguage = "EN_US"|string;
+  export type AcceptLanguage = "EN_US"|string&{};
   export type AdditionalMetricsList = RequestString[];
   export type AdditionalMetricsMap = {[key: string]: Double};
   export type AmazonResourceName = string;
@@ -183,9 +183,9 @@ declare namespace PI {
     Tags?: TagList;
   }
   export type AnalysisReportSummaryList = AnalysisReportSummary[];
-  export type AnalysisStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|string;
+  export type AnalysisStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|string&{};
   export type Boolean = boolean;
-  export type ContextType = "CAUSAL"|"CONTEXTUAL"|string;
+  export type ContextType = "CAUSAL"|"CONTEXTUAL"|string&{};
   export interface CreatePerformanceAnalysisReportRequest {
     /**
      * The Amazon Web Services service for which Performance Insights will return metrics. Valid value is RDS.
@@ -323,7 +323,7 @@ declare namespace PI {
   export type Description = string;
   export type DescriptiveMap = {[key: string]: DescriptiveString};
   export type DescriptiveString = string;
-  export type DetailStatus = "AVAILABLE"|"PROCESSING"|"UNAVAILABLE"|string;
+  export type DetailStatus = "AVAILABLE"|"PROCESSING"|"UNAVAILABLE"|string&{};
   export interface DimensionDetail {
     /**
      * The identifier of a dimension.
@@ -400,7 +400,7 @@ declare namespace PI {
     Status?: FeatureStatus;
   }
   export type FeatureMetadataMap = {[key: string]: FeatureMetadata};
-  export type FeatureStatus = "ENABLED"|"DISABLED"|"UNSUPPORTED"|"ENABLED_PENDING_REBOOT"|"DISABLED_PENDING_REBOOT"|"UNKNOWN"|string;
+  export type FeatureStatus = "ENABLED"|"DISABLED"|"UNSUPPORTED"|"ENABLED_PENDING_REBOOT"|"DISABLED_PENDING_REBOOT"|"UNKNOWN"|string&{};
   export interface GetDimensionKeyDetailsRequest {
     /**
      * The Amazon Web Services service for which Performance Insights returns data. The only valid value is RDS.
@@ -761,7 +761,7 @@ declare namespace PI {
      */
     Value?: Double;
   }
-  export type PeriodAlignment = "END_TIME"|"START_TIME"|string;
+  export type PeriodAlignment = "END_TIME"|"START_TIME"|string&{};
   export interface Recommendation {
     /**
      * The unique identifier for the recommendation.
@@ -808,8 +808,8 @@ declare namespace PI {
     Dimensions?: DimensionMap;
   }
   export type ResponseResourceMetricList = ResponseResourceMetric[];
-  export type ServiceType = "RDS"|"DOCDB"|string;
-  export type Severity = "LOW"|"MEDIUM"|"HIGH"|string;
+  export type ServiceType = "RDS"|"DOCDB"|string&{};
+  export type Severity = "LOW"|"MEDIUM"|"HIGH"|string&{};
   export type String = string;
   export interface Tag {
     /**
@@ -841,7 +841,7 @@ declare namespace PI {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TextFormat = "PLAIN_TEXT"|"MARKDOWN"|string;
+  export type TextFormat = "PLAIN_TEXT"|"MARKDOWN"|string&{};
   export interface UntagResourceRequest {
     /**
      * List the tags for the Amazon Web Services service for which Performance Insights returns metrics. Valid value is RDS.

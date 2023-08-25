@@ -205,7 +205,7 @@ declare class MediaPackageV2 extends Service {
   updateOriginEndpoint(callback?: (err: AWSError, data: MediaPackageV2.Types.UpdateOriginEndpointResponse) => void): Request<MediaPackageV2.Types.UpdateOriginEndpointResponse, AWSError>;
 }
 declare namespace MediaPackageV2 {
-  export type AdMarkerHls = "DATERANGE"|string;
+  export type AdMarkerHls = "DATERANGE"|string&{};
   export type Boolean = boolean;
   export interface ChannelGroupListConfiguration {
     /**
@@ -257,8 +257,8 @@ declare namespace MediaPackageV2 {
      */
     Description?: String;
   }
-  export type CmafEncryptionMethod = "CENC"|"CBCS"|string;
-  export type ContainerType = "TS"|"CMAF"|string;
+  export type CmafEncryptionMethod = "CENC"|"CBCS"|string&{};
+  export type ContainerType = "TS"|"CMAF"|string&{};
   export interface CreateChannelGroupRequest {
     /**
      * The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region. You can't use spaces in the name. You can't change the name after you create the channel group.
@@ -569,7 +569,7 @@ declare namespace MediaPackageV2 {
   }
   export interface DeleteOriginEndpointResponse {
   }
-  export type DrmSystem = "CLEAR_KEY_AES_128"|"FAIRPLAY"|"PLAYREADY"|"WIDEVINE"|string;
+  export type DrmSystem = "CLEAR_KEY_AES_128"|"FAIRPLAY"|"PLAYREADY"|"WIDEVINE"|string&{};
   export interface Encryption {
     /**
      * A 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
@@ -1029,8 +1029,8 @@ declare namespace MediaPackageV2 {
   }
   export type OriginEndpointsList = OriginEndpointListConfiguration[];
   export type PolicyText = string;
-  export type PresetSpeke20Audio = "PRESET_AUDIO_1"|"PRESET_AUDIO_2"|"PRESET_AUDIO_3"|"SHARED"|"UNENCRYPTED"|string;
-  export type PresetSpeke20Video = "PRESET_VIDEO_1"|"PRESET_VIDEO_2"|"PRESET_VIDEO_3"|"PRESET_VIDEO_4"|"PRESET_VIDEO_5"|"PRESET_VIDEO_6"|"PRESET_VIDEO_7"|"PRESET_VIDEO_8"|"SHARED"|"UNENCRYPTED"|string;
+  export type PresetSpeke20Audio = "PRESET_AUDIO_1"|"PRESET_AUDIO_2"|"PRESET_AUDIO_3"|"SHARED"|"UNENCRYPTED"|string&{};
+  export type PresetSpeke20Video = "PRESET_VIDEO_1"|"PRESET_VIDEO_2"|"PRESET_VIDEO_3"|"PRESET_VIDEO_4"|"PRESET_VIDEO_5"|"PRESET_VIDEO_6"|"PRESET_VIDEO_7"|"PRESET_VIDEO_8"|"SHARED"|"UNENCRYPTED"|string&{};
   export interface PutChannelPolicyRequest {
     /**
      * The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.
@@ -1075,7 +1075,7 @@ declare namespace MediaPackageV2 {
      */
     ScteFilter?: ScteFilterList;
   }
-  export type ScteFilter = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|"PROGRAM"|string;
+  export type ScteFilter = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|"PROGRAM"|string&{};
   export type ScteFilterList = ScteFilter[];
   export interface ScteHls {
     /**
@@ -1155,7 +1155,7 @@ declare namespace MediaPackageV2 {
   }
   export type TagValue = string;
   export type Timestamp = Date;
-  export type TsEncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
+  export type TsEncryptionMethod = "AES_128"|"SAMPLE_AES"|string&{};
   export interface UntagResourceRequest {
     /**
      * The ARN of the MediaPackage resource that you're removing tags from.

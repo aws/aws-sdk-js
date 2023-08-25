@@ -215,7 +215,7 @@ declare namespace ElasticInference {
     tags?: TagMap;
   }
   export type Location = string;
-  export type LocationType = "region"|"availability-zone"|"availability-zone-id"|string;
+  export type LocationType = "region"|"availability-zone"|"availability-zone-id"|string&{};
   export type MaxResults = number;
   export interface MemoryInfo {
     /**

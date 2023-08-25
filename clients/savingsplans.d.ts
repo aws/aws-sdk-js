@@ -119,7 +119,7 @@ declare namespace SavingsPlans {
      */
     savingsPlanId?: SavingsPlanId;
   }
-  export type CurrencyCode = "CNY"|"USD"|string;
+  export type CurrencyCode = "CNY"|"USD"|string&{};
   export type CurrencyList = CurrencyCode[];
   export type DateTime = Date;
   export interface DeleteQueuedSavingsPlanRequest {
@@ -499,7 +499,7 @@ declare namespace SavingsPlans {
      */
     properties?: SavingsPlanOfferingPropertyList;
   }
-  export type SavingsPlanOfferingFilterAttribute = "region"|"instanceFamily"|string;
+  export type SavingsPlanOfferingFilterAttribute = "region"|"instanceFamily"|string&{};
   export interface SavingsPlanOfferingFilterElement {
     /**
      * The filter name.
@@ -522,7 +522,7 @@ declare namespace SavingsPlans {
      */
     value?: JsonSafeFilterValueString;
   }
-  export type SavingsPlanOfferingPropertyKey = "region"|"instanceFamily"|string;
+  export type SavingsPlanOfferingPropertyKey = "region"|"instanceFamily"|string&{};
   export type SavingsPlanOfferingPropertyList = SavingsPlanOfferingProperty[];
   export interface SavingsPlanOfferingRate {
     /**
@@ -584,9 +584,9 @@ declare namespace SavingsPlans {
   export type SavingsPlanOfferingsList = SavingsPlanOffering[];
   export type SavingsPlanOperation = string;
   export type SavingsPlanOperationList = SavingsPlanOperation[];
-  export type SavingsPlanPaymentOption = "All Upfront"|"Partial Upfront"|"No Upfront"|string;
+  export type SavingsPlanPaymentOption = "All Upfront"|"Partial Upfront"|"No Upfront"|string&{};
   export type SavingsPlanPaymentOptionList = SavingsPlanPaymentOption[];
-  export type SavingsPlanProductType = "EC2"|"Fargate"|"Lambda"|"SageMaker"|string;
+  export type SavingsPlanProductType = "EC2"|"Fargate"|"Lambda"|"SageMaker"|string&{};
   export type SavingsPlanProductTypeList = SavingsPlanProductType[];
   export interface SavingsPlanRate {
     /**
@@ -632,9 +632,9 @@ declare namespace SavingsPlans {
      */
     values?: ListOfStrings;
   }
-  export type SavingsPlanRateFilterAttribute = "region"|"instanceFamily"|"instanceType"|"productDescription"|"tenancy"|"productId"|string;
+  export type SavingsPlanRateFilterAttribute = "region"|"instanceFamily"|"instanceType"|"productDescription"|"tenancy"|"productId"|string&{};
   export type SavingsPlanRateFilterList = SavingsPlanRateFilter[];
-  export type SavingsPlanRateFilterName = "region"|"instanceType"|"productDescription"|"tenancy"|"productType"|"serviceCode"|"usageType"|"operation"|string;
+  export type SavingsPlanRateFilterName = "region"|"instanceType"|"productDescription"|"tenancy"|"productType"|"serviceCode"|"usageType"|"operation"|string&{};
   export type SavingsPlanRateList = SavingsPlanRate[];
   export type SavingsPlanRateOperation = string;
   export type SavingsPlanRateOperationList = SavingsPlanRateOperation[];
@@ -649,23 +649,23 @@ declare namespace SavingsPlans {
      */
     value?: JsonSafeFilterValueString;
   }
-  export type SavingsPlanRatePropertyKey = "region"|"instanceType"|"instanceFamily"|"productDescription"|"tenancy"|string;
+  export type SavingsPlanRatePropertyKey = "region"|"instanceType"|"instanceFamily"|"productDescription"|"tenancy"|string&{};
   export type SavingsPlanRatePropertyList = SavingsPlanRateProperty[];
-  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AmazonEKS"|"AWSLambda"|"AmazonSageMaker"|string;
+  export type SavingsPlanRateServiceCode = "AmazonEC2"|"AmazonECS"|"AmazonEKS"|"AWSLambda"|"AmazonSageMaker"|string&{};
   export type SavingsPlanRateServiceCodeList = SavingsPlanRateServiceCode[];
-  export type SavingsPlanRateUnit = "Hrs"|"Lambda-GB-Second"|"Request"|string;
+  export type SavingsPlanRateUnit = "Hrs"|"Lambda-GB-Second"|"Request"|string&{};
   export type SavingsPlanRateUsageType = string;
   export type SavingsPlanRateUsageTypeList = SavingsPlanRateUsageType[];
   export type SavingsPlanServiceCode = string;
   export type SavingsPlanServiceCodeList = SavingsPlanServiceCode[];
-  export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|"queued"|"queued-deleted"|string;
+  export type SavingsPlanState = "payment-pending"|"payment-failed"|"active"|"retired"|"queued"|"queued-deleted"|string&{};
   export type SavingsPlanStateList = SavingsPlanState[];
-  export type SavingsPlanType = "Compute"|"EC2Instance"|"SageMaker"|string;
+  export type SavingsPlanType = "Compute"|"EC2Instance"|"SageMaker"|string&{};
   export type SavingsPlanTypeList = SavingsPlanType[];
   export type SavingsPlanUsageType = string;
   export type SavingsPlanUsageTypeList = SavingsPlanUsageType[];
   export type SavingsPlansDuration = number;
-  export type SavingsPlansFilterName = "region"|"ec2-instance-family"|"commitment"|"upfront"|"term"|"savings-plan-type"|"payment-option"|"start"|"end"|string;
+  export type SavingsPlansFilterName = "region"|"ec2-instance-family"|"commitment"|"upfront"|"term"|"savings-plan-type"|"payment-option"|"start"|"end"|string&{};
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];

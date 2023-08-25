@@ -597,7 +597,7 @@ declare namespace Kafka {
      */
     UnprocessedScramSecrets?: __listOfUnprocessedScramSecret;
   }
-  export type BrokerAZDistribution = "DEFAULT"|string;
+  export type BrokerAZDistribution = "DEFAULT"|string&{};
   export interface BrokerEBSVolumeInfo {
     /**
      * 
@@ -769,7 +769,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Sasl?: ServerlessSasl;
   }
-  export type ClientBroker = "TLS"|"TLS_PLAINTEXT"|"PLAINTEXT"|string;
+  export type ClientBroker = "TLS"|"TLS_PLAINTEXT"|"PLAINTEXT"|string&{};
   export interface CloudWatchLogs {
     Enabled: __boolean;
     LogGroup?: __string;
@@ -1044,8 +1044,8 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     StepStatus?: __string;
   }
-  export type ClusterState = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"HEALING"|"MAINTENANCE"|"REBOOTING_BROKER"|"UPDATING"|string;
-  export type ClusterType = "PROVISIONED"|"SERVERLESS"|string;
+  export type ClusterState = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"HEALING"|"MAINTENANCE"|"REBOOTING_BROKER"|"UPDATING"|string&{};
+  export type ClusterType = "PROVISIONED"|"SERVERLESS"|string&{};
   export interface ProvisionedRequest {
     /**
      * 
@@ -1380,7 +1380,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Revision: __long;
   }
-  export type ConfigurationState = "ACTIVE"|"DELETING"|"DELETE_FAILED"|string;
+  export type ConfigurationState = "ACTIVE"|"DELETING"|"DELETE_FAILED"|string&{};
   export interface ConnectivityInfo {
     /**
      * 
@@ -2193,7 +2193,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     EncryptionInTransit?: EncryptionInTransit;
   }
-  export type EnhancedMonitoring = "DEFAULT"|"PER_BROKER"|"PER_TOPIC_PER_BROKER"|"PER_TOPIC_PER_PARTITION"|string;
+  export type EnhancedMonitoring = "DEFAULT"|"PER_BROKER"|"PER_TOPIC_PER_BROKER"|"PER_TOPIC_PER_PARTITION"|string&{};
   export interface ErrorInfo {
     /**
      * 
@@ -2324,7 +2324,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     Version?: __string;
     Status?: KafkaVersionStatus;
   }
-  export type KafkaVersionStatus = "ACTIVE"|"DEPRECATED"|string;
+  export type KafkaVersionStatus = "ACTIVE"|"DEPRECATED"|string&{};
   export interface ListClusterOperationsRequest {
     /**
      * 
@@ -3056,7 +3056,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ZookeeperNodeInfo?: ZookeeperNodeInfo;
   }
-  export type NodeType = "BROKER"|string;
+  export type NodeType = "BROKER"|string&{};
   export interface StateInfo {
     Code?: __string;
     Message?: __string;
@@ -3069,7 +3069,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     EbsStorageInfo?: EBSStorageInfo;
   }
-  export type StorageMode = "LOCAL"|"TIERED"|string;
+  export type StorageMode = "LOCAL"|"TIERED"|string&{};
   export interface TagResourceRequest {
     /**
      * 
@@ -3553,7 +3553,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     PrincipalId?: __string;
   }
-  export type UserIdentityType = "AWSACCOUNT"|"AWSSERVICE"|string;
+  export type UserIdentityType = "AWSACCOUNT"|"AWSSERVICE"|string&{};
   export interface VpcConnectionInfo {
     /**
      * 
@@ -3602,7 +3602,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     VpcConnectionArn?: __string;
   }
-  export type VpcConnectionState = "CREATING"|"AVAILABLE"|"INACTIVE"|"DEACTIVATING"|"DELETING"|"FAILED"|"REJECTED"|"REJECTING"|string;
+  export type VpcConnectionState = "CREATING"|"AVAILABLE"|"INACTIVE"|"DEACTIVATING"|"DELETING"|"FAILED"|"REJECTED"|"REJECTING"|string&{};
   export interface VpcConnectivity {
     /**
      * 

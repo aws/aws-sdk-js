@@ -944,7 +944,7 @@ declare namespace IoTWireless {
      */
     DestinationName?: DestinationName;
   }
-  export type ApplicationConfigType = "SemtechGeolocation"|string;
+  export type ApplicationConfigType = "SemtechGeolocation"|string&{};
   export type ApplicationServerPublicKey = string;
   export type Applications = ApplicationConfig[];
   export type AssistPosition = Coordinate[];
@@ -1036,7 +1036,7 @@ declare namespace IoTWireless {
   export type BaseLat = number;
   export type BaseLng = number;
   export type BaseStationId = number;
-  export type BatteryLevel = "normal"|"low"|"critical"|string;
+  export type BatteryLevel = "normal"|"low"|"critical"|string&{};
   export interface Beaconing {
     /**
      * The data rate for gateways that are sending the beacons.
@@ -1164,7 +1164,7 @@ declare namespace IoTWireless {
   export type ClassBTimeout = number;
   export type ClassCTimeout = number;
   export type ClientRequestToken = string;
-  export type ConnectionStatus = "Connected"|"Disconnected"|string;
+  export type ConnectionStatus = "Connected"|"Disconnected"|string&{};
   export interface ConnectionStatusEventConfiguration {
     /**
      * Connection status event configuration object for enabling or disabling LoRaWAN related event topics.
@@ -1663,7 +1663,7 @@ declare namespace IoTWireless {
   export type DeviceProfileId = string;
   export type DeviceProfileList = DeviceProfile[];
   export type DeviceProfileName = string;
-  export type DeviceProfileType = "Sidewalk"|"LoRaWAN"|string;
+  export type DeviceProfileType = "Sidewalk"|"LoRaWAN"|string&{};
   export interface DeviceRegistrationStateEventConfiguration {
     /**
      * Device registration state event configuration object for enabling or disabling Sidewalk related event topics.
@@ -1680,7 +1680,7 @@ declare namespace IoTWireless {
      */
     Sidewalk?: SidewalkResourceTypeEventConfiguration;
   }
-  export type DeviceState = "Provisioned"|"RegisteredNotSeen"|"RegisteredReachable"|"RegisteredUnreachable"|string;
+  export type DeviceState = "Provisioned"|"RegisteredNotSeen"|"RegisteredReachable"|"RegisteredUnreachable"|string&{};
   export type DeviceTypeId = string;
   export interface DisassociateAwsAccountFromPartnerAccountRequest {
     /**
@@ -1737,14 +1737,14 @@ declare namespace IoTWireless {
   export interface DisassociateWirelessGatewayFromThingResponse {
   }
   export type DlBucketSize = number;
-  export type DlClass = "ClassB"|"ClassC"|string;
+  export type DlClass = "ClassB"|"ClassC"|string&{};
   export type DlDr = number;
   export type DlFreq = number;
   export type DlRate = number;
   export type DlRatePolicy = string;
   export type Double = number;
   export type DownlinkFrequency = number;
-  export type DownlinkMode = "SEQUENTIAL"|"CONCURRENT"|"USING_UPLINK_GATEWAY"|string;
+  export type DownlinkMode = "SEQUENTIAL"|"CONCURRENT"|"USING_UPLINK_GATEWAY"|string&{};
   export interface DownlinkQueueMessage {
     /**
      *  The message ID assigned by IoT Wireless to each downlink message, which helps identify the message.
@@ -1768,7 +1768,7 @@ declare namespace IoTWireless {
   export type EARFCN = number;
   export type EndPoint = string;
   export type EutranCid = number;
-  export type Event = "discovered"|"lost"|"ack"|"nack"|"passthrough"|string;
+  export type Event = "discovered"|"lost"|"ack"|"nack"|"passthrough"|string&{};
   export interface EventConfigurationItem {
     /**
      * Resource identifier opted in for event messaging.
@@ -1807,11 +1807,11 @@ declare namespace IoTWireless {
      */
     MessageDeliveryStatus?: MessageDeliveryStatusEventConfiguration;
   }
-  export type EventNotificationPartnerType = "Sidewalk"|string;
-  export type EventNotificationResourceType = "SidewalkAccount"|"WirelessDevice"|"WirelessGateway"|string;
-  export type EventNotificationTopicStatus = "Enabled"|"Disabled"|string;
+  export type EventNotificationPartnerType = "Sidewalk"|string&{};
+  export type EventNotificationResourceType = "SidewalkAccount"|"WirelessDevice"|"WirelessGateway"|string&{};
+  export type EventNotificationTopicStatus = "Enabled"|"Disabled"|string&{};
   export type Expression = string;
-  export type ExpressionType = "RuleName"|"MqttTopic"|string;
+  export type ExpressionType = "RuleName"|"MqttTopic"|string&{};
   export type FCntStart = number;
   export type FNwkSIntKey = string;
   export type FPort = number;
@@ -1835,7 +1835,7 @@ declare namespace IoTWireless {
   export type FirmwareUpdateRole = string;
   export type FragmentIntervalMS = number;
   export type FragmentSizeBytes = number;
-  export type FuotaDeviceStatus = "Initial"|"Package_Not_Supported"|"FragAlgo_unsupported"|"Not_enough_memory"|"FragIndex_unsupported"|"Wrong_descriptor"|"SessionCnt_replay"|"MissingFrag"|"MemoryError"|"MICError"|"Successful"|string;
+  export type FuotaDeviceStatus = "Initial"|"Package_Not_Supported"|"FragAlgo_unsupported"|"Not_enough_memory"|"FragIndex_unsupported"|"Wrong_descriptor"|"SessionCnt_replay"|"MissingFrag"|"MemoryError"|"MICError"|"Successful"|string&{};
   export interface FuotaTask {
     Id?: FuotaTaskId;
     Arn?: FuotaTaskArn;
@@ -1845,7 +1845,7 @@ declare namespace IoTWireless {
   export type FuotaTaskId = string;
   export type FuotaTaskList = FuotaTask[];
   export type FuotaTaskName = string;
-  export type FuotaTaskStatus = "Pending"|"FuotaSession_Waiting"|"In_FuotaSession"|"FuotaDone"|"Delete_Waiting"|string;
+  export type FuotaTaskStatus = "Pending"|"FuotaSession_Waiting"|"In_FuotaSession"|"FuotaDone"|"Delete_Waiting"|string&{};
   export type GPST = number;
   export type GatewayEui = string;
   export type GatewayList = GatewayListItem[];
@@ -2602,10 +2602,10 @@ declare namespace IoTWireless {
   export type IPAddress = string;
   export type ISODateTimeString = string;
   export type Identifier = string;
-  export type IdentifierType = "PartnerAccountId"|"DevEui"|"GatewayEui"|"WirelessDeviceId"|"WirelessGatewayId"|string;
+  export type IdentifierType = "PartnerAccountId"|"DevEui"|"GatewayEui"|"WirelessDeviceId"|"WirelessGatewayId"|string&{};
   export type ImportTaskArn = string;
   export type ImportTaskId = string;
-  export type ImportTaskStatus = "INITIALIZING"|"INITIALIZED"|"PENDING"|"COMPLETE"|"FAILED"|"DELETING"|string;
+  export type ImportTaskStatus = "INITIALIZING"|"INITIALIZED"|"PENDING"|"COMPLETE"|"FAILED"|"DELETING"|string&{};
   export interface ImportedSidewalkDevice {
     /**
      * The Sidewalk manufacturing serial number (SMSN) of the Sidewalk device.
@@ -3426,7 +3426,7 @@ declare namespace IoTWireless {
      */
     UpdateVersion?: LoRaWANGatewayVersion;
   }
-  export type LogLevel = "INFO"|"ERROR"|"DISABLED"|string;
+  export type LogLevel = "INFO"|"ERROR"|"DISABLED"|string&{};
   export type LteList = LteObj[];
   export interface LteLocalId {
     /**
@@ -3524,11 +3524,11 @@ declare namespace IoTWireless {
     Sidewalk?: SidewalkResourceTypeEventConfiguration;
   }
   export type MessageId = string;
-  export type MessageType = "CUSTOM_COMMAND_ID_NOTIFY"|"CUSTOM_COMMAND_ID_GET"|"CUSTOM_COMMAND_ID_SET"|"CUSTOM_COMMAND_ID_RESP"|string;
+  export type MessageType = "CUSTOM_COMMAND_ID_NOTIFY"|"CUSTOM_COMMAND_ID_GET"|"CUSTOM_COMMAND_ID_SET"|"CUSTOM_COMMAND_ID_RESP"|string&{};
   export type MinGwDiversity = number;
   export type Model = string;
   export type MulticastDeviceStatus = string;
-  export type MulticastFrameInfo = "ENABLED"|"DISABLED"|string;
+  export type MulticastFrameInfo = "ENABLED"|"DISABLED"|string&{};
   export interface MulticastGroup {
     Id?: MulticastGroupId;
     Arn?: MulticastGroupArn;
@@ -3569,7 +3569,7 @@ declare namespace IoTWireless {
   export type NwkKey = string;
   export type NwkSEncKey = string;
   export type NwkSKey = string;
-  export type OnboardStatus = "INITIALIZED"|"PENDING"|"ONBOARDED"|"FAILED"|string;
+  export type OnboardStatus = "INITIALIZED"|"PENDING"|"ONBOARDED"|"FAILED"|string&{};
   export type OnboardStatusReason = string;
   export interface OtaaV1_0_x {
     /**
@@ -3618,7 +3618,7 @@ declare namespace IoTWireless {
   }
   export type PartnerAccountArn = string;
   export type PartnerAccountId = string;
-  export type PartnerType = "Sidewalk"|string;
+  export type PartnerType = "Sidewalk"|string&{};
   export type PathLoss = number;
   export type PayloadData = string;
   export type PilotPower = number;
@@ -3626,7 +3626,7 @@ declare namespace IoTWireless {
   export type PingSlotFreq = number;
   export type PingSlotPeriod = number;
   export type PnOffset = number;
-  export type PositionConfigurationFec = "ROSE"|"NONE"|string;
+  export type PositionConfigurationFec = "ROSE"|"NONE"|string&{};
   export interface PositionConfigurationItem {
     /**
      * Resource identifier for the position configuration.
@@ -3646,11 +3646,11 @@ declare namespace IoTWireless {
     Destination?: DestinationName;
   }
   export type PositionConfigurationList = PositionConfigurationItem[];
-  export type PositionConfigurationStatus = "Enabled"|"Disabled"|string;
+  export type PositionConfigurationStatus = "Enabled"|"Disabled"|string&{};
   export type PositionCoordinate = PositionCoordinateValue[];
   export type PositionCoordinateValue = number;
   export type PositionResourceIdentifier = string;
-  export type PositionResourceType = "WirelessDevice"|"WirelessGateway"|string;
+  export type PositionResourceType = "WirelessDevice"|"WirelessGateway"|string&{};
   export interface PositionSolverConfigurations {
     /**
      * The Semtech GNSS solver configuration object.
@@ -3663,15 +3663,15 @@ declare namespace IoTWireless {
      */
     SemtechGnss?: SemtechGnssDetail;
   }
-  export type PositionSolverProvider = "Semtech"|string;
-  export type PositionSolverType = "GNSS"|string;
+  export type PositionSolverProvider = "Semtech"|string&{};
+  export type PositionSolverType = "GNSS"|string&{};
   export type PositionSolverVersion = string;
   export interface Positioning {
     ClockSync?: FPort;
     Stream?: FPort;
     Gnss?: FPort;
   }
-  export type PositioningConfigStatus = "Enabled"|"Disabled"|string;
+  export type PositioningConfigStatus = "Enabled"|"Disabled"|string&{};
   export type PrAllowed = boolean;
   export type PresetFreq = number;
   export type PrivateKeysList = CertificateList[];
@@ -4049,7 +4049,7 @@ declare namespace IoTWireless {
      */
     DeviceCreationFile?: DeviceCreationFile;
   }
-  export type SigningAlg = "Ed25519"|"P256r1"|string;
+  export type SigningAlg = "Ed25519"|"P256r1"|string&{};
   export interface StartBulkAssociateWirelessDeviceWithMulticastGroupRequest {
     Id: MulticastGroupId;
     QueryString?: QueryString;
@@ -4129,7 +4129,7 @@ declare namespace IoTWireless {
   export type StatusReason = string;
   export type SubBand = number;
   export type SubBands = SubBand[];
-  export type SupportedRfRegion = "EU868"|"US915"|"AU915"|"AS923-1"|"AS923-2"|"AS923-3"|"AS923-4"|"EU433"|"CN470"|"CN779"|"RU864"|"KR920"|"IN865"|string;
+  export type SupportedRfRegion = "EU868"|"US915"|"AU915"|"AS923-1"|"AS923-2"|"AS923-3"|"AS923-4"|"EU433"|"CN470"|"CN779"|"RU864"|"KR920"|"IN865"|string&{};
   export type Supports32BitFCnt = boolean;
   export type SupportsClassB = boolean;
   export type SupportsClassC = boolean;
@@ -4662,15 +4662,15 @@ declare namespace IoTWireless {
   }
   export type WiFiAccessPoints = WiFiAccessPoint[];
   export type WirelessDeviceArn = string;
-  export type WirelessDeviceEvent = "Join"|"Rejoin"|"Uplink_Data"|"Downlink_Data"|"Registration"|string;
+  export type WirelessDeviceEvent = "Join"|"Rejoin"|"Uplink_Data"|"Downlink_Data"|"Registration"|string&{};
   export interface WirelessDeviceEventLogOption {
     Event: WirelessDeviceEvent;
     LogLevel: LogLevel;
   }
   export type WirelessDeviceEventLogOptionList = WirelessDeviceEventLogOption[];
-  export type WirelessDeviceFrameInfo = "ENABLED"|"DISABLED"|string;
+  export type WirelessDeviceFrameInfo = "ENABLED"|"DISABLED"|string&{};
   export type WirelessDeviceId = string;
-  export type WirelessDeviceIdType = "WirelessDeviceId"|"DevEui"|"ThingName"|"SidewalkManufacturingSn"|string;
+  export type WirelessDeviceIdType = "WirelessDeviceId"|"DevEui"|"ThingName"|"SidewalkManufacturingSn"|string&{};
   export interface WirelessDeviceImportTask {
     /**
      * The ID of the wireless device import task.
@@ -4729,7 +4729,7 @@ declare namespace IoTWireless {
   }
   export type WirelessDeviceLogOptionList = WirelessDeviceLogOption[];
   export type WirelessDeviceName = string;
-  export type WirelessDeviceSidewalkStatus = "PROVISIONED"|"REGISTERED"|"ACTIVATED"|"UNKNOWN"|string;
+  export type WirelessDeviceSidewalkStatus = "PROVISIONED"|"REGISTERED"|"ACTIVATED"|"UNKNOWN"|string&{};
   export interface WirelessDeviceStatistics {
     /**
      * The Amazon Resource Name of the resource.
@@ -4771,16 +4771,16 @@ declare namespace IoTWireless {
     McGroupId?: McGroupId;
   }
   export type WirelessDeviceStatisticsList = WirelessDeviceStatistics[];
-  export type WirelessDeviceType = "Sidewalk"|"LoRaWAN"|string;
+  export type WirelessDeviceType = "Sidewalk"|"LoRaWAN"|string&{};
   export type WirelessGatewayArn = string;
-  export type WirelessGatewayEvent = "CUPS_Request"|"Certificate"|string;
+  export type WirelessGatewayEvent = "CUPS_Request"|"Certificate"|string&{};
   export interface WirelessGatewayEventLogOption {
     Event: WirelessGatewayEvent;
     LogLevel: LogLevel;
   }
   export type WirelessGatewayEventLogOptionList = WirelessGatewayEventLogOption[];
   export type WirelessGatewayId = string;
-  export type WirelessGatewayIdType = "GatewayEui"|"WirelessGatewayId"|"ThingName"|string;
+  export type WirelessGatewayIdType = "GatewayEui"|"WirelessGatewayId"|"ThingName"|string&{};
   export type WirelessGatewayList = WirelessGatewayId[];
   export interface WirelessGatewayLogOption {
     Type: WirelessGatewayType;
@@ -4789,7 +4789,7 @@ declare namespace IoTWireless {
   }
   export type WirelessGatewayLogOptionList = WirelessGatewayLogOption[];
   export type WirelessGatewayName = string;
-  export type WirelessGatewayServiceType = "CUPS"|"LNS"|string;
+  export type WirelessGatewayServiceType = "CUPS"|"LNS"|string&{};
   export interface WirelessGatewayStatistics {
     /**
      * The Amazon Resource Name of the resource.
@@ -4820,10 +4820,10 @@ declare namespace IoTWireless {
   export type WirelessGatewayTaskDefinitionArn = string;
   export type WirelessGatewayTaskDefinitionId = string;
   export type WirelessGatewayTaskDefinitionList = UpdateWirelessGatewayTaskEntry[];
-  export type WirelessGatewayTaskDefinitionType = "UPDATE"|string;
+  export type WirelessGatewayTaskDefinitionType = "UPDATE"|string&{};
   export type WirelessGatewayTaskName = string;
-  export type WirelessGatewayTaskStatus = "PENDING"|"IN_PROGRESS"|"FIRST_RETRY"|"SECOND_RETRY"|"COMPLETED"|"FAILED"|string;
-  export type WirelessGatewayType = "LoRaWAN"|string;
+  export type WirelessGatewayTaskStatus = "PENDING"|"IN_PROGRESS"|"FIRST_RETRY"|"SECOND_RETRY"|"COMPLETED"|"FAILED"|string&{};
+  export type WirelessGatewayType = "LoRaWAN"|string&{};
   export interface WirelessMetadata {
     /**
      * LoRaWAN device info.

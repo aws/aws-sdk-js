@@ -511,7 +511,7 @@ declare namespace Resiliencehub {
   }
   export type AlarmRecommendationList = AlarmRecommendation[];
   export type AlarmReferenceIdList = String500[];
-  export type AlarmType = "Metric"|"Composite"|"Canary"|"Logs"|"Event"|string;
+  export type AlarmType = "Metric"|"Composite"|"Canary"|"Logs"|"Event"|string&{};
   export interface App {
     /**
      * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
@@ -652,7 +652,7 @@ declare namespace Resiliencehub {
      */
     versionName?: EntityVersion;
   }
-  export type AppAssessmentScheduleType = "Disabled"|"Daily"|string;
+  export type AppAssessmentScheduleType = "Disabled"|"Daily"|string&{};
   export interface AppAssessmentSummary {
     /**
      * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
@@ -712,7 +712,7 @@ declare namespace Resiliencehub {
     versionName?: EntityVersion;
   }
   export type AppAssessmentSummaryList = AppAssessmentSummary[];
-  export type AppComplianceStatusType = "PolicyBreached"|"PolicyMet"|"NotAssessed"|"ChangesDetected"|string;
+  export type AppComplianceStatusType = "PolicyBreached"|"PolicyMet"|"NotAssessed"|"ChangesDetected"|string&{};
   export interface AppComponent {
     /**
      * Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"  
@@ -759,7 +759,7 @@ declare namespace Resiliencehub {
   }
   export type AppComponentList = AppComponent[];
   export type AppComponentNameList = String255[];
-  export type AppDriftStatusType = "NotChecked"|"NotDetected"|"Detected"|string;
+  export type AppDriftStatusType = "NotChecked"|"NotDetected"|"Detected"|string&{};
   export interface AppInputSource {
     /**
      * The namespace on your Amazon Elastic Kubernetes Service cluster.
@@ -787,7 +787,7 @@ declare namespace Resiliencehub {
     terraformSource?: TerraformSource;
   }
   export type AppInputSourceList = AppInputSource[];
-  export type AppStatusType = "Active"|"Deleting"|string;
+  export type AppStatusType = "Active"|"Deleting"|string&{};
   export interface AppSummary {
     /**
      * Amazon Resource Name (ARN) of the Resilience Hub application. The format for this ARN is: arn:partition:resiliencehub:region:account:app/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
@@ -850,8 +850,8 @@ declare namespace Resiliencehub {
   export type Arn = string;
   export type ArnList = Arn[];
   export type AssessmentCompliance = {[key: string]: DisruptionCompliance};
-  export type AssessmentInvoker = "User"|"System"|string;
-  export type AssessmentStatus = "Pending"|"InProgress"|"Failed"|"Success"|string;
+  export type AssessmentInvoker = "User"|"System"|string&{};
+  export type AssessmentStatus = "Pending"|"InProgress"|"Failed"|"Success"|string&{};
   export type AssessmentStatusList = AssessmentStatus[];
   export type AwsRegion = string;
   export type BatchUpdateRecommendationStatusFailedEntries = BatchUpdateRecommendationStatusFailedEntry[];
@@ -957,7 +957,7 @@ declare namespace Resiliencehub {
     expectedValue?: AssessmentCompliance;
   }
   export type ComplianceDriftList = ComplianceDrift[];
-  export type ComplianceStatus = "PolicyBreached"|"PolicyMet"|string;
+  export type ComplianceStatus = "PolicyBreached"|"PolicyMet"|string&{};
   export type ComponentCompliancesList = AppComponentCompliance[];
   export interface ComponentRecommendation {
     /**
@@ -1017,7 +1017,7 @@ declare namespace Resiliencehub {
     suggestedChanges?: SuggestedChangesList;
   }
   export type ConfigRecommendationList = ConfigRecommendation[];
-  export type ConfigRecommendationOptimizationType = "LeastCost"|"LeastChange"|"BestAZRecovery"|"LeastErrors"|"BestAttainable"|"BestRegionRecovery"|string;
+  export type ConfigRecommendationOptimizationType = "LeastCost"|"LeastChange"|"BestAZRecovery"|"LeastErrors"|"BestAttainable"|"BestRegionRecovery"|string&{};
   export interface Cost {
     /**
      * The cost amount.
@@ -1032,7 +1032,7 @@ declare namespace Resiliencehub {
      */
     frequency: CostFrequency;
   }
-  export type CostFrequency = "Hourly"|"Daily"|"Monthly"|"Yearly"|string;
+  export type CostFrequency = "Hourly"|"Daily"|"Monthly"|"Yearly"|string&{};
   export interface CreateAppRequest {
     /**
      *  Assessment execution schedule with 'Daily' or 'Disabled' values. 
@@ -1247,7 +1247,7 @@ declare namespace Resiliencehub {
   }
   export type CurrencyCode = string;
   export type CustomerId = string;
-  export type DataLocationConstraint = "AnyLocation"|"SameContinent"|"SameCountry"|string;
+  export type DataLocationConstraint = "AnyLocation"|"SameContinent"|"SameCountry"|string&{};
   export interface DeleteAppAssessmentRequest {
     /**
      * Amazon Resource Name (ARN) of the assessment. The format for this ARN is: arn:partition:resiliencehub:region:account:app-assessment/app-id. For more information about ARNs, see  Amazon Resource Names (ARNs) in the AWS General Reference guide.
@@ -1648,7 +1648,7 @@ declare namespace Resiliencehub {
      */
     policy: ResiliencyPolicy;
   }
-  export type DifferenceType = "NotEqual"|string;
+  export type DifferenceType = "NotEqual"|string&{};
   export interface DisruptionCompliance {
     /**
      * The Recovery Point Objective (RPO) that is achievable, in seconds.
@@ -1693,11 +1693,11 @@ declare namespace Resiliencehub {
   }
   export type DisruptionPolicy = {[key: string]: FailurePolicy};
   export type DisruptionResiliencyScore = {[key: string]: Double};
-  export type DisruptionType = "Software"|"Hardware"|"AZ"|"Region"|string;
+  export type DisruptionType = "Software"|"Hardware"|"AZ"|"Region"|string&{};
   export type DocumentName = string;
   export type Double = number;
-  export type DriftStatus = "NotChecked"|"NotDetected"|"Detected"|string;
-  export type DriftType = "ApplicationCompliance"|string;
+  export type DriftStatus = "NotChecked"|"NotDetected"|"Detected"|string&{};
+  export type DriftType = "ApplicationCompliance"|string&{};
   export type EksNamespace = string;
   export type EksNamespaceList = EksNamespace[];
   export interface EksSource {
@@ -1727,7 +1727,7 @@ declare namespace Resiliencehub {
   export type EntityNameList = EntityName[];
   export type EntityVersion = string;
   export type ErrorMessage = string;
-  export type EstimatedCostTier = "L1"|"L2"|"L3"|"L4"|string;
+  export type EstimatedCostTier = "L1"|"L2"|"L3"|"L4"|string&{};
   export interface EventSubscription {
     /**
      * The type of event you would like to subscribe and get notification for. Currently, Resilience Hub supports notifications only for Drift detected (DriftDetected) and Scheduled assessment failure (ScheduledAssessmentFailure) events.
@@ -1743,8 +1743,8 @@ declare namespace Resiliencehub {
     snsTopicArn?: Arn;
   }
   export type EventSubscriptionList = EventSubscription[];
-  export type EventType = "ScheduledAssessmentFailure"|"DriftDetected"|string;
-  export type ExcludeRecommendationReason = "AlreadyImplemented"|"NotRelevant"|"ComplexityOfImplementation"|string;
+  export type EventType = "ScheduledAssessmentFailure"|"DriftDetected"|string&{};
+  export type ExcludeRecommendationReason = "AlreadyImplemented"|"NotRelevant"|"ComplexityOfImplementation"|string&{};
   export interface FailurePolicy {
     /**
      * The Recovery Point Objective (RPO), in seconds.
@@ -1755,7 +1755,7 @@ declare namespace Resiliencehub {
      */
     rtoInSecs: Seconds;
   }
-  export type HaArchitecture = "MultiSite"|"WarmStandby"|"PilotLight"|"BackupAndRestore"|"NoRecoveryPlan"|string;
+  export type HaArchitecture = "MultiSite"|"WarmStandby"|"PilotLight"|"BackupAndRestore"|"NoRecoveryPlan"|string&{};
   export type IamRoleArn = string;
   export type IamRoleArnList = IamRoleArn[];
   export type IamRoleName = string;
@@ -2355,8 +2355,8 @@ declare namespace Resiliencehub {
      */
     type: PermissionModelType;
   }
-  export type PermissionModelType = "LegacyIAMUser"|"RoleBased"|string;
-  export type PhysicalIdentifierType = "Arn"|"Native"|string;
+  export type PermissionModelType = "LegacyIAMUser"|"RoleBased"|string&{};
+  export type PhysicalIdentifierType = "Arn"|"Native"|string&{};
   export interface PhysicalResource {
     /**
      * Additional configuration parameters for an Resilience Hub application. If you want to implement additionalInfo through the Resilience Hub console rather than using an API call, see Configure the application configuration parameters.  Currently, this parameter accepts a key-value mapping (in a string format) of only one failover region and one associated account. Key: "failover-regions"  Value: "[{"region":"&lt;REGION&gt;", "accounts":[{"id":"&lt;ACCOUNT_ID&gt;"}]}]"  
@@ -2463,7 +2463,7 @@ declare namespace Resiliencehub {
     appVersion?: EntityVersion;
   }
   export type RecommendationCompliance = {[key: string]: RecommendationDisruptionCompliance};
-  export type RecommendationComplianceStatus = "BreachedUnattainable"|"BreachedCanMeet"|"MetCanImprove"|string;
+  export type RecommendationComplianceStatus = "BreachedUnattainable"|"BreachedCanMeet"|"MetCanImprove"|string&{};
   export interface RecommendationDisruptionCompliance {
     /**
      * The expected compliance status after applying the recommended configuration change.
@@ -2573,7 +2573,7 @@ declare namespace Resiliencehub {
     templatesLocation?: S3Location;
   }
   export type RecommendationTemplateList = RecommendationTemplate[];
-  export type RecommendationTemplateStatus = "Pending"|"InProgress"|"Failed"|"Success"|string;
+  export type RecommendationTemplateStatus = "Pending"|"InProgress"|"Failed"|"Success"|string&{};
   export type RecommendationTemplateStatusList = RecommendationTemplateStatus[];
   export interface RemoveDraftAppVersionResourceMappingsRequest {
     /**
@@ -2615,7 +2615,7 @@ declare namespace Resiliencehub {
      */
     appVersion?: EntityVersion;
   }
-  export type RenderRecommendationType = "Alarm"|"Sop"|"Test"|string;
+  export type RenderRecommendationType = "Alarm"|"Sop"|"Test"|string&{};
   export type RenderRecommendationTypeList = RenderRecommendationType[];
   export type ResiliencyPolicies = ResiliencyPolicy[];
   export interface ResiliencyPolicy {
@@ -2656,7 +2656,7 @@ declare namespace Resiliencehub {
      */
     tier?: ResiliencyPolicyTier;
   }
-  export type ResiliencyPolicyTier = "MissionCritical"|"Critical"|"Important"|"CoreServices"|"NonCritical"|"NotApplicable"|string;
+  export type ResiliencyPolicyTier = "MissionCritical"|"Critical"|"Important"|"CoreServices"|"NonCritical"|"NotApplicable"|string&{};
   export interface ResiliencyScore {
     /**
      * The disruption score for a valid key.
@@ -2720,8 +2720,8 @@ declare namespace Resiliencehub {
      */
     resourceErrors?: ResourceErrorList;
   }
-  export type ResourceImportStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string;
-  export type ResourceImportStrategyType = "AddOnly"|"ReplaceAll"|string;
+  export type ResourceImportStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string&{};
+  export type ResourceImportStrategyType = "AddOnly"|"ReplaceAll"|string&{};
   export interface ResourceMapping {
     /**
      * The name of the application this resource is mapped to.
@@ -2757,9 +2757,9 @@ declare namespace Resiliencehub {
     terraformSourceName?: String255;
   }
   export type ResourceMappingList = ResourceMapping[];
-  export type ResourceMappingType = "CfnStack"|"Resource"|"AppRegistryApp"|"ResourceGroup"|"Terraform"|"EKS"|string;
-  export type ResourceResolutionStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string;
-  export type ResourceSourceType = "AppTemplate"|"Discovered"|string;
+  export type ResourceMappingType = "CfnStack"|"Resource"|"AppRegistryApp"|"ResourceGroup"|"Terraform"|"EKS"|string&{};
+  export type ResourceResolutionStatusType = "Pending"|"InProgress"|"Failed"|"Success"|string&{};
+  export type ResourceSourceType = "AppTemplate"|"Discovered"|string&{};
   export interface S3Location {
     /**
      * The name of the Amazon S3 bucket.
@@ -2807,7 +2807,7 @@ declare namespace Resiliencehub {
     serviceType: SopServiceType;
   }
   export type SopRecommendationList = SopRecommendation[];
-  export type SopServiceType = "SSM"|string;
+  export type SopServiceType = "SSM"|string&{};
   export type SpecReferenceId = string;
   export interface StartAppAssessmentRequest {
     /**
@@ -2860,7 +2860,7 @@ declare namespace Resiliencehub {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TemplateFormat = "CfnYaml"|"CfnJson"|string;
+  export type TemplateFormat = "CfnYaml"|"CfnJson"|string&{};
   export interface TerraformSource {
     /**
      *  The URL of the Terraform s3 state file you need to import. 
@@ -2915,8 +2915,8 @@ declare namespace Resiliencehub {
     type?: TestType;
   }
   export type TestRecommendationList = TestRecommendation[];
-  export type TestRisk = "Small"|"Medium"|"High"|string;
-  export type TestType = "Software"|"Hardware"|"AZ"|"Region"|string;
+  export type TestRisk = "Small"|"Medium"|"High"|string&{};
+  export type TestType = "Software"|"Hardware"|"AZ"|"Region"|string&{};
   export type TimeStamp = Date;
   export interface UnsupportedResource {
     /**

@@ -840,9 +840,9 @@ declare namespace Greengrass {
     GroupArn?: __string;
   }
   export type BulkDeploymentResults = BulkDeploymentResult[];
-  export type BulkDeploymentStatus = "Initializing"|"Running"|"Completed"|"Stopping"|"Stopped"|"Failed"|string;
+  export type BulkDeploymentStatus = "Initializing"|"Running"|"Completed"|"Stopping"|"Stopped"|"Failed"|string&{};
   export type BulkDeployments = BulkDeployment[];
-  export type ConfigurationSyncStatus = "InSync"|"OutOfSync"|string;
+  export type ConfigurationSyncStatus = "InSync"|"OutOfSync"|string&{};
   export interface ConnectivityInfo {
     /**
      * The endpoint for the Greengrass core. Can be an IP address or DNS.
@@ -1767,7 +1767,7 @@ declare namespace Greengrass {
      */
     GroupArn?: __string;
   }
-  export type DeploymentType = "NewDeployment"|"Redeployment"|"ResetDeployment"|"ForceResetDeployment"|string;
+  export type DeploymentType = "NewDeployment"|"Redeployment"|"ResetDeployment"|"ForceResetDeployment"|string&{};
   export type Deployments = Deployment[];
   export interface Device {
     /**
@@ -1813,7 +1813,7 @@ declare namespace Greengrass {
      */
     DisassociatedAt?: __string;
   }
-  export type EncodingType = "binary"|"json"|string;
+  export type EncodingType = "binary"|"json"|string&{};
   export interface ErrorDetail {
     /**
      * A detailed error code.
@@ -1912,7 +1912,7 @@ declare namespace Greengrass {
     IsolationMode?: FunctionIsolationMode;
     RunAs?: FunctionRunAsConfig;
   }
-  export type FunctionIsolationMode = "GreengrassContainer"|"NoContainer"|string;
+  export type FunctionIsolationMode = "GreengrassContainer"|"NoContainer"|string&{};
   export interface FunctionRunAsConfig {
     /**
      * The group ID whose permissions are used to run a Lambda function.
@@ -3270,16 +3270,16 @@ declare namespace Greengrass {
      */
     Type: LoggerType;
   }
-  export type LoggerComponent = "GreengrassSystem"|"Lambda"|string;
+  export type LoggerComponent = "GreengrassSystem"|"Lambda"|string&{};
   export interface LoggerDefinitionVersion {
     /**
      * A list of loggers.
      */
     Loggers?: __listOfLogger;
   }
-  export type LoggerLevel = "DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
-  export type LoggerType = "FileSystem"|"AWSCloudWatch"|string;
-  export type Permission = "ro"|"rw"|string;
+  export type LoggerLevel = "DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string&{};
+  export type LoggerType = "FileSystem"|"AWSCloudWatch"|string&{};
+  export type Permission = "ro"|"rw"|string&{};
   export interface ResetDeploymentsRequest {
     /**
      * A client token used to correlate requests and responses.
@@ -3405,7 +3405,7 @@ declare namespace Greengrass {
      */
     AdditionalStagingLabelsToDownload?: __listOf__string;
   }
-  export type SoftwareToUpdate = "core"|"ota_agent"|string;
+  export type SoftwareToUpdate = "core"|"ota_agent"|string&{};
   export interface StartBulkDeploymentRequest {
     /**
      * A client token used to correlate requests and responses.
@@ -3474,7 +3474,7 @@ declare namespace Greengrass {
     tags?: Tags;
   }
   export type Tags = {[key: string]: __string};
-  export type Telemetry = "On"|"Off"|string;
+  export type Telemetry = "On"|"Off"|string&{};
   export interface TelemetryConfiguration {
     /**
      * Synchronization status of the device reported configuration with the desired configuration.
@@ -3501,7 +3501,7 @@ declare namespace Greengrass {
      */
     TagKeys: __listOf__string;
   }
-  export type UpdateAgentLogLevel = "NONE"|"TRACE"|"DEBUG"|"VERBOSE"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
+  export type UpdateAgentLogLevel = "NONE"|"TRACE"|"DEBUG"|"VERBOSE"|"INFO"|"WARN"|"ERROR"|"FATAL"|string&{};
   export interface UpdateConnectivityInfoRequest {
     /**
      * A list of connectivity info.
@@ -3643,8 +3643,8 @@ declare namespace Greengrass {
   export interface UpdateSubscriptionDefinitionResponse {
   }
   export type UpdateTargets = __string[];
-  export type UpdateTargetsArchitecture = "armv6l"|"armv7l"|"x86_64"|"aarch64"|string;
-  export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|"openwrt"|string;
+  export type UpdateTargetsArchitecture = "armv6l"|"armv7l"|"x86_64"|"aarch64"|string&{};
+  export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|"openwrt"|string&{};
   export interface UpdateThingRuntimeConfigurationRequest {
     /**
      * Configuration for telemetry service.

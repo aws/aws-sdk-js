@@ -253,7 +253,7 @@ declare class ChimeSDKIdentity extends Service {
   updateAppInstanceUserEndpoint(callback?: (err: AWSError, data: ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointResponse) => void): Request<ChimeSDKIdentity.Types.UpdateAppInstanceUserEndpointResponse, AWSError>;
 }
 declare namespace ChimeSDKIdentity {
-  export type AllowMessages = "ALL"|"NONE"|string;
+  export type AllowMessages = "ALL"|"NONE"|string&{};
   export interface AppInstance {
     /**
      * The ARN of the messaging instance.
@@ -454,7 +454,7 @@ declare namespace ChimeSDKIdentity {
     EndpointState?: EndpointState;
   }
   export type AppInstanceUserEndpointSummaryList = AppInstanceUserEndpointSummary[];
-  export type AppInstanceUserEndpointType = "APNS"|"APNS_SANDBOX"|"GCM"|string;
+  export type AppInstanceUserEndpointType = "APNS"|"APNS_SANDBOX"|"GCM"|string&{};
   export type AppInstanceUserList = AppInstanceUserSummary[];
   export interface AppInstanceUserSummary {
     /**
@@ -722,9 +722,9 @@ declare namespace ChimeSDKIdentity {
      */
     StatusReason?: EndpointStatusReason;
   }
-  export type EndpointStatus = "ACTIVE"|"INACTIVE"|string;
-  export type EndpointStatusReason = "INVALID_DEVICE_TOKEN"|"INVALID_PINPOINT_ARN"|string;
-  export type ExpirationCriterion = "CREATED_TIMESTAMP"|string;
+  export type EndpointStatus = "ACTIVE"|"INACTIVE"|string&{};
+  export type EndpointStatusReason = "INVALID_DEVICE_TOKEN"|"INVALID_PINPOINT_ARN"|string&{};
+  export type ExpirationCriterion = "CREATED_TIMESTAMP"|string&{};
   export type ExpirationDays = number;
   export interface ExpirationSettings {
     /**
@@ -1022,11 +1022,11 @@ declare namespace ChimeSDKIdentity {
     EndpointId?: String64;
   }
   export type ResourceName = string;
-  export type RespondsTo = "STANDARD_MESSAGES"|string;
+  export type RespondsTo = "STANDARD_MESSAGES"|string&{};
   export type RetentionDays = number;
   export type SensitiveChimeArn = string;
   export type SensitiveString1600 = string;
-  export type StandardMessages = "AUTO"|"ALL"|"MENTIONS"|"NONE"|string;
+  export type StandardMessages = "AUTO"|"ALL"|"MENTIONS"|"NONE"|string&{};
   export type String = string;
   export type String1600 = string;
   export type String64 = string;
@@ -1054,7 +1054,7 @@ declare namespace ChimeSDKIdentity {
     Tags: TagList;
   }
   export type TagValue = string;
-  export type TargetedMessages = "ALL"|"NONE"|string;
+  export type TargetedMessages = "ALL"|"NONE"|string&{};
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**

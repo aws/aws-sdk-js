@@ -202,7 +202,7 @@ declare namespace ComputeOptimizer {
   export type AccountEnrollmentStatuses = AccountEnrollmentStatus[];
   export type AccountId = string;
   export type AccountIds = AccountId[];
-  export type AutoScalingConfiguration = "TargetTrackingScalingCpu"|"TargetTrackingScalingMemory"|string;
+  export type AutoScalingConfiguration = "TargetTrackingScalingCpu"|"TargetTrackingScalingMemory"|string&{};
   export type AutoScalingGroupArn = string;
   export type AutoScalingGroupArns = AutoScalingGroupArn[];
   export interface AutoScalingGroupConfiguration {
@@ -335,12 +335,12 @@ declare namespace ComputeOptimizer {
   }
   export type ContainerRecommendations = ContainerRecommendation[];
   export type CpuSize = number;
-  export type CpuVendorArchitecture = "AWS_ARM64"|"CURRENT"|string;
+  export type CpuVendorArchitecture = "AWS_ARM64"|"CURRENT"|string&{};
   export type CpuVendorArchitectures = CpuVendorArchitecture[];
   export type CreationTimestamp = Date;
-  export type Currency = "USD"|"CNY"|string;
+  export type Currency = "USD"|"CNY"|string&{};
   export type CurrentInstanceType = string;
-  export type CurrentPerformanceRisk = "VeryLow"|"Low"|"Medium"|"High"|string;
+  export type CurrentPerformanceRisk = "VeryLow"|"Low"|"Medium"|"High"|string&{};
   export interface CurrentPerformanceRiskRatings {
     /**
      * A count of the applicable resource types with a high performance risk rating.
@@ -417,10 +417,10 @@ declare namespace ComputeOptimizer {
      */
     values?: FilterValues;
   }
-  export type EBSFilterName = "Finding"|string;
+  export type EBSFilterName = "Finding"|string&{};
   export type EBSFilters = EBSFilter[];
-  export type EBSFinding = "Optimized"|"NotOptimized"|string;
-  export type EBSMetricName = "VolumeReadOpsPerSecond"|"VolumeWriteOpsPerSecond"|"VolumeReadBytesPerSecond"|"VolumeWriteBytesPerSecond"|string;
+  export type EBSFinding = "Optimized"|"NotOptimized"|string&{};
+  export type EBSMetricName = "VolumeReadOpsPerSecond"|"VolumeWriteOpsPerSecond"|"VolumeReadBytesPerSecond"|"VolumeWriteBytesPerSecond"|string&{};
   export interface EBSUtilizationMetric {
     /**
      * The name of the utilization metric. The following utilization metrics are available:    VolumeReadOpsPerSecond - The completed read operations per second from the volume in a specified period of time. Unit: Count    VolumeWriteOpsPerSecond - The completed write operations per second to the volume in a specified period of time. Unit: Count    VolumeReadBytesPerSecond - The bytes read per second from the volume in a specified period of time. Unit: Bytes    VolumeWriteBytesPerSecond - The bytes written to the volume in a specified period of time. Unit: Bytes  
@@ -436,9 +436,9 @@ declare namespace ComputeOptimizer {
     value?: MetricValue;
   }
   export type EBSUtilizationMetrics = EBSUtilizationMetric[];
-  export type ECSServiceLaunchType = "EC2"|"Fargate"|string;
-  export type ECSServiceMetricName = "Cpu"|"Memory"|string;
-  export type ECSServiceMetricStatistic = "Maximum"|"Average"|string;
+  export type ECSServiceLaunchType = "EC2"|"Fargate"|string&{};
+  export type ECSServiceMetricName = "Cpu"|"Memory"|string&{};
+  export type ECSServiceMetricStatistic = "Maximum"|"Average"|string&{};
   export interface ECSServiceProjectedMetric {
     /**
      *  The name of the projected metric.  The following metrics are available:    Cpu — The percentage of allocated compute units that are currently in use on the service tasks.    Memory — The percentage of memory that's currently in use on the service tasks.  
@@ -537,10 +537,10 @@ declare namespace ComputeOptimizer {
      */
     values?: FilterValues;
   }
-  export type ECSServiceRecommendationFilterName = "Finding"|"FindingReasonCode"|string;
+  export type ECSServiceRecommendationFilterName = "Finding"|"FindingReasonCode"|string&{};
   export type ECSServiceRecommendationFilters = ECSServiceRecommendationFilter[];
-  export type ECSServiceRecommendationFinding = "Optimized"|"Underprovisioned"|"Overprovisioned"|string;
-  export type ECSServiceRecommendationFindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|"CPUOverprovisioned"|"CPUUnderprovisioned"|string;
+  export type ECSServiceRecommendationFinding = "Optimized"|"Underprovisioned"|"Overprovisioned"|string&{};
+  export type ECSServiceRecommendationFindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|"CPUOverprovisioned"|"CPUUnderprovisioned"|string&{};
   export type ECSServiceRecommendationFindingReasonCodes = ECSServiceRecommendationFindingReasonCode[];
   export interface ECSServiceRecommendationOption {
     /**
@@ -611,7 +611,7 @@ declare namespace ComputeOptimizer {
      */
     externalMetricsPreference?: ExternalMetricsPreference;
   }
-  export type EnhancedInfrastructureMetrics = "Active"|"Inactive"|string;
+  export type EnhancedInfrastructureMetrics = "Active"|"Inactive"|string&{};
   export interface EnrollmentFilter {
     /**
      * The name of the filter. Specify Status to return accounts with a specific enrollment status (for example, Active).
@@ -622,7 +622,7 @@ declare namespace ComputeOptimizer {
      */
     values?: FilterValues;
   }
-  export type EnrollmentFilterName = "Status"|string;
+  export type EnrollmentFilterName = "Status"|string&{};
   export type EnrollmentFilters = EnrollmentFilter[];
   export interface EstimatedMonthlySavings {
     /**
@@ -810,15 +810,15 @@ declare namespace ComputeOptimizer {
     jobId?: JobId;
     s3Destination?: S3Destination;
   }
-  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|string;
+  export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|string&{};
   export type ExportableAutoScalingGroupFields = ExportableAutoScalingGroupField[];
-  export type ExportableECSServiceField = "AccountId"|"ServiceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"LaunchType"|"CurrentPerformanceRisk"|"CurrentServiceConfigurationMemory"|"CurrentServiceConfigurationCpu"|"CurrentServiceConfigurationTaskDefinitionArn"|"CurrentServiceConfigurationAutoScalingConfiguration"|"CurrentServiceContainerConfigurations"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"Finding"|"FindingReasonCodes"|"RecommendationOptionsMemory"|"RecommendationOptionsCpu"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RecommendationOptionsContainerRecommendations"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"Tags"|string;
+  export type ExportableECSServiceField = "AccountId"|"ServiceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"LaunchType"|"CurrentPerformanceRisk"|"CurrentServiceConfigurationMemory"|"CurrentServiceConfigurationCpu"|"CurrentServiceConfigurationTaskDefinitionArn"|"CurrentServiceConfigurationAutoScalingConfiguration"|"CurrentServiceContainerConfigurations"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"Finding"|"FindingReasonCodes"|"RecommendationOptionsMemory"|"RecommendationOptionsCpu"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RecommendationOptionsContainerRecommendations"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"Tags"|string&{};
   export type ExportableECSServiceFields = ExportableECSServiceField[];
-  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"EffectiveRecommendationPreferencesExternalMetricsSource"|"InstanceState"|"Tags"|"ExternalMetricStatusCode"|"ExternalMetricStatusReason"|string;
+  export type ExportableInstanceField = "AccountId"|"InstanceArn"|"InstanceName"|"Finding"|"FindingReasonCodes"|"LookbackPeriodInDays"|"CurrentInstanceType"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsInstanceType"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPlatformDifferences"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationsSourcesRecommendationSourceArn"|"RecommendationsSourcesRecommendationSourceType"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|"EffectiveRecommendationPreferencesExternalMetricsSource"|"InstanceState"|"Tags"|"ExternalMetricStatusCode"|"ExternalMetricStatusReason"|string&{};
   export type ExportableInstanceFields = ExportableInstanceField[];
-  export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|string;
+  export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|string&{};
   export type ExportableLambdaFunctionFields = ExportableLambdaFunctionField[];
-  export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RootVolume"|"Tags"|string;
+  export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RootVolume"|"Tags"|string&{};
   export type ExportableVolumeFields = ExportableVolumeField[];
   export interface ExternalMetricStatus {
     /**
@@ -830,7 +830,7 @@ declare namespace ComputeOptimizer {
      */
     statusReason?: ExternalMetricStatusReason;
   }
-  export type ExternalMetricStatusCode = "NO_EXTERNAL_METRIC_SET"|"INTEGRATION_SUCCESS"|"DATADOG_INTEGRATION_ERROR"|"DYNATRACE_INTEGRATION_ERROR"|"NEWRELIC_INTEGRATION_ERROR"|"INSTANA_INTEGRATION_ERROR"|"INSUFFICIENT_DATADOG_METRICS"|"INSUFFICIENT_DYNATRACE_METRICS"|"INSUFFICIENT_NEWRELIC_METRICS"|"INSUFFICIENT_INSTANA_METRICS"|string;
+  export type ExternalMetricStatusCode = "NO_EXTERNAL_METRIC_SET"|"INTEGRATION_SUCCESS"|"DATADOG_INTEGRATION_ERROR"|"DYNATRACE_INTEGRATION_ERROR"|"NEWRELIC_INTEGRATION_ERROR"|"INSTANA_INTEGRATION_ERROR"|"INSUFFICIENT_DATADOG_METRICS"|"INSUFFICIENT_DYNATRACE_METRICS"|"INSUFFICIENT_NEWRELIC_METRICS"|"INSUFFICIENT_INSTANA_METRICS"|string&{};
   export type ExternalMetricStatusReason = string;
   export interface ExternalMetricsPreference {
     /**
@@ -838,9 +838,9 @@ declare namespace ComputeOptimizer {
      */
     source?: ExternalMetricsSource;
   }
-  export type ExternalMetricsSource = "Datadog"|"Dynatrace"|"NewRelic"|"Instana"|string;
+  export type ExternalMetricsSource = "Datadog"|"Dynatrace"|"NewRelic"|"Instana"|string&{};
   export type FailureReason = string;
-  export type FileFormat = "Csv"|string;
+  export type FileFormat = "Csv"|string&{};
   export interface Filter {
     /**
      * The name of the filter. Specify Finding to return recommendations with a specific finding classification. For example, Underprovisioned. Specify RecommendationSourceType to return recommendations of a specific resource type. For example, Ec2Instance. Specify FindingReasonCodes to return recommendations with a specific finding reason code. For example, CPUUnderprovisioned. Specify InferredWorkloadTypes to return recommendations of a specific inferred workload. For example, Redis. You can filter your EC2 instance recommendations by tag:key and tag-key tags. A tag:key is a key and value combination of a tag assigned to your recommendations. Use the tag key in the filter name and the tag value as the filter value. For example, to find all recommendations that have a tag with the key of Owner and the value of TeamA, specify tag:Owner for the filter name and TeamA for the filter value. A tag-key is the key of a tag assigned to your recommendations. Use this filter to find all of your recommendations that have a tag with a specific key. This doesn’t consider the tag value. For example, you can find your recommendations with a tag key value of Owner or without any tag keys assigned.
@@ -851,12 +851,12 @@ declare namespace ComputeOptimizer {
      */
     values?: FilterValues;
   }
-  export type FilterName = "Finding"|"FindingReasonCodes"|"RecommendationSourceType"|"InferredWorkloadTypes"|string;
+  export type FilterName = "Finding"|"FindingReasonCodes"|"RecommendationSourceType"|"InferredWorkloadTypes"|string&{};
   export type FilterValue = string;
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
-  export type Finding = "Underprovisioned"|"Overprovisioned"|"Optimized"|"NotOptimized"|string;
-  export type FindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|string;
+  export type Finding = "Underprovisioned"|"Overprovisioned"|"Optimized"|"NotOptimized"|string&{};
+  export type FindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|string&{};
   export type FunctionArn = string;
   export type FunctionArns = FunctionArn[];
   export type FunctionVersion = string;
@@ -1249,9 +1249,9 @@ declare namespace ComputeOptimizer {
     estimatedMonthlySavings?: EstimatedMonthlySavings;
   }
   export type InferredWorkloadSavings = InferredWorkloadSaving[];
-  export type InferredWorkloadType = "AmazonEmr"|"ApacheCassandra"|"ApacheHadoop"|"Memcached"|"Nginx"|"PostgreSql"|"Redis"|"Kafka"|"SQLServer"|string;
+  export type InferredWorkloadType = "AmazonEmr"|"ApacheCassandra"|"ApacheHadoop"|"Memcached"|"Nginx"|"PostgreSql"|"Redis"|"Kafka"|"SQLServer"|string&{};
   export type InferredWorkloadTypes = InferredWorkloadType[];
-  export type InferredWorkloadTypesPreference = "Active"|"Inactive"|string;
+  export type InferredWorkloadTypesPreference = "Active"|"Inactive"|string&{};
   export type InstanceArn = string;
   export type InstanceArns = InstanceArn[];
   export type InstanceName = string;
@@ -1325,7 +1325,7 @@ declare namespace ComputeOptimizer {
      */
     externalMetricStatus?: ExternalMetricStatus;
   }
-  export type InstanceRecommendationFindingReasonCode = "CPUOverprovisioned"|"CPUUnderprovisioned"|"MemoryOverprovisioned"|"MemoryUnderprovisioned"|"EBSThroughputOverprovisioned"|"EBSThroughputUnderprovisioned"|"EBSIOPSOverprovisioned"|"EBSIOPSUnderprovisioned"|"NetworkBandwidthOverprovisioned"|"NetworkBandwidthUnderprovisioned"|"NetworkPPSOverprovisioned"|"NetworkPPSUnderprovisioned"|"DiskIOPSOverprovisioned"|"DiskIOPSUnderprovisioned"|"DiskThroughputOverprovisioned"|"DiskThroughputUnderprovisioned"|string;
+  export type InstanceRecommendationFindingReasonCode = "CPUOverprovisioned"|"CPUUnderprovisioned"|"MemoryOverprovisioned"|"MemoryUnderprovisioned"|"EBSThroughputOverprovisioned"|"EBSThroughputUnderprovisioned"|"EBSIOPSOverprovisioned"|"EBSIOPSUnderprovisioned"|"NetworkBandwidthOverprovisioned"|"NetworkBandwidthUnderprovisioned"|"NetworkPPSOverprovisioned"|"NetworkPPSUnderprovisioned"|"DiskIOPSOverprovisioned"|"DiskIOPSUnderprovisioned"|"DiskThroughputOverprovisioned"|"DiskThroughputUnderprovisioned"|string&{};
   export type InstanceRecommendationFindingReasonCodes = InstanceRecommendationFindingReasonCode[];
   export interface InstanceRecommendationOption {
     /**
@@ -1358,7 +1358,7 @@ declare namespace ComputeOptimizer {
     migrationEffort?: MigrationEffort;
   }
   export type InstanceRecommendations = InstanceRecommendation[];
-  export type InstanceState = "pending"|"running"|"shutting-down"|"terminated"|"stopping"|"stopped"|string;
+  export type InstanceState = "pending"|"running"|"shutting-down"|"terminated"|"stopping"|"stopped"|string&{};
   export type InstanceType = string;
   export interface JobFilter {
     /**
@@ -1370,13 +1370,13 @@ declare namespace ComputeOptimizer {
      */
     values?: FilterValues;
   }
-  export type JobFilterName = "ResourceType"|"JobStatus"|string;
+  export type JobFilterName = "ResourceType"|"JobStatus"|string&{};
   export type JobFilters = JobFilter[];
   export type JobId = string;
   export type JobIds = JobId[];
-  export type JobStatus = "Queued"|"InProgress"|"Complete"|"Failed"|string;
-  export type LambdaFunctionMemoryMetricName = "Duration"|string;
-  export type LambdaFunctionMemoryMetricStatistic = "LowerBound"|"UpperBound"|"Expected"|string;
+  export type JobStatus = "Queued"|"InProgress"|"Complete"|"Failed"|string&{};
+  export type LambdaFunctionMemoryMetricName = "Duration"|string&{};
+  export type LambdaFunctionMemoryMetricStatistic = "LowerBound"|"UpperBound"|"Expected"|string&{};
   export interface LambdaFunctionMemoryProjectedMetric {
     /**
      * The name of the projected utilization metric.
@@ -1411,8 +1411,8 @@ declare namespace ComputeOptimizer {
     savingsOpportunity?: SavingsOpportunity;
   }
   export type LambdaFunctionMemoryRecommendationOptions = LambdaFunctionMemoryRecommendationOption[];
-  export type LambdaFunctionMetricName = "Duration"|"Memory"|string;
-  export type LambdaFunctionMetricStatistic = "Maximum"|"Average"|string;
+  export type LambdaFunctionMetricName = "Duration"|"Memory"|string&{};
+  export type LambdaFunctionMetricStatistic = "Maximum"|"Average"|string&{};
   export interface LambdaFunctionRecommendation {
     /**
      * The Amazon Resource Name (ARN) of the current function.
@@ -1477,10 +1477,10 @@ declare namespace ComputeOptimizer {
      */
     values?: FilterValues;
   }
-  export type LambdaFunctionRecommendationFilterName = "Finding"|"FindingReasonCode"|string;
+  export type LambdaFunctionRecommendationFilterName = "Finding"|"FindingReasonCode"|string&{};
   export type LambdaFunctionRecommendationFilters = LambdaFunctionRecommendationFilter[];
-  export type LambdaFunctionRecommendationFinding = "Optimized"|"NotOptimized"|"Unavailable"|string;
-  export type LambdaFunctionRecommendationFindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|"InsufficientData"|"Inconclusive"|string;
+  export type LambdaFunctionRecommendationFinding = "Optimized"|"NotOptimized"|"Unavailable"|string&{};
+  export type LambdaFunctionRecommendationFindingReasonCode = "MemoryOverprovisioned"|"MemoryUnderprovisioned"|"InsufficientData"|"Inconclusive"|string&{};
   export type LambdaFunctionRecommendationFindingReasonCodes = LambdaFunctionRecommendationFindingReasonCode[];
   export type LambdaFunctionRecommendations = LambdaFunctionRecommendation[];
   export interface LambdaFunctionUtilizationMetric {
@@ -1520,11 +1520,11 @@ declare namespace ComputeOptimizer {
   }
   export type Message = string;
   export type MetadataKey = string;
-  export type MetricName = "Cpu"|"Memory"|"EBS_READ_OPS_PER_SECOND"|"EBS_WRITE_OPS_PER_SECOND"|"EBS_READ_BYTES_PER_SECOND"|"EBS_WRITE_BYTES_PER_SECOND"|"DISK_READ_OPS_PER_SECOND"|"DISK_WRITE_OPS_PER_SECOND"|"DISK_READ_BYTES_PER_SECOND"|"DISK_WRITE_BYTES_PER_SECOND"|"NETWORK_IN_BYTES_PER_SECOND"|"NETWORK_OUT_BYTES_PER_SECOND"|"NETWORK_PACKETS_IN_PER_SECOND"|"NETWORK_PACKETS_OUT_PER_SECOND"|string;
-  export type MetricStatistic = "Maximum"|"Average"|string;
+  export type MetricName = "Cpu"|"Memory"|"EBS_READ_OPS_PER_SECOND"|"EBS_WRITE_OPS_PER_SECOND"|"EBS_READ_BYTES_PER_SECOND"|"EBS_WRITE_BYTES_PER_SECOND"|"DISK_READ_OPS_PER_SECOND"|"DISK_WRITE_OPS_PER_SECOND"|"DISK_READ_BYTES_PER_SECOND"|"DISK_WRITE_BYTES_PER_SECOND"|"NETWORK_IN_BYTES_PER_SECOND"|"NETWORK_OUT_BYTES_PER_SECOND"|"NETWORK_PACKETS_IN_PER_SECOND"|"NETWORK_PACKETS_OUT_PER_SECOND"|string&{};
+  export type MetricStatistic = "Maximum"|"Average"|string&{};
   export type MetricValue = number;
   export type MetricValues = MetricValue[];
-  export type MigrationEffort = "VeryLow"|"Low"|"Medium"|"High"|string;
+  export type MigrationEffort = "VeryLow"|"Low"|"Medium"|"High"|string&{};
   export type MinSize = number;
   export type NextToken = string;
   export type NullableCpu = number;
@@ -1534,7 +1534,7 @@ declare namespace ComputeOptimizer {
   export type NumberOfMemberAccountsOptedIn = number;
   export type PerformanceRisk = number;
   export type Period = number;
-  export type PlatformDifference = "Hypervisor"|"NetworkInterface"|"StorageInterface"|"InstanceStoreAvailability"|"VirtualizationType"|"Architecture"|string;
+  export type PlatformDifference = "Hypervisor"|"NetworkInterface"|"StorageInterface"|"InstanceStoreAvailability"|"VirtualizationType"|"Architecture"|string&{};
   export type PlatformDifferences = PlatformDifference[];
   export interface ProjectedMetric {
     /**
@@ -1620,7 +1620,7 @@ declare namespace ComputeOptimizer {
   }
   export type RecommendationExportJobs = RecommendationExportJob[];
   export type RecommendationOptions = InstanceRecommendationOption[];
-  export type RecommendationPreferenceName = "EnhancedInfrastructureMetrics"|"InferredWorkloadTypes"|"ExternalMetricsPreference"|string;
+  export type RecommendationPreferenceName = "EnhancedInfrastructureMetrics"|"InferredWorkloadTypes"|"ExternalMetricsPreference"|string&{};
   export type RecommendationPreferenceNames = RecommendationPreferenceName[];
   export interface RecommendationPreferences {
     /**
@@ -1662,7 +1662,7 @@ declare namespace ComputeOptimizer {
     recommendationSourceType?: RecommendationSourceType;
   }
   export type RecommendationSourceArn = string;
-  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"EcsService"|string;
+  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"EcsService"|string&{};
   export type RecommendationSources = RecommendationSource[];
   export type RecommendationSummaries = RecommendationSummary[];
   export interface RecommendationSummary {
@@ -1708,7 +1708,7 @@ declare namespace ComputeOptimizer {
   }
   export type RecommendedOptionProjectedMetrics = RecommendedOptionProjectedMetric[];
   export type ResourceArn = string;
-  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|"EcsService"|string;
+  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|"EcsService"|string&{};
   export type RootVolume = boolean;
   export interface S3Destination {
     /**
@@ -1755,7 +1755,7 @@ declare namespace ComputeOptimizer {
      */
     value?: ScopeValue;
   }
-  export type ScopeName = "Organization"|"AccountId"|"ResourceArn"|string;
+  export type ScopeName = "Organization"|"AccountId"|"ResourceArn"|string&{};
   export type ScopeValue = string;
   export type ServiceArn = string;
   export type ServiceArns = ServiceArn[];
@@ -1781,7 +1781,7 @@ declare namespace ComputeOptimizer {
      */
     taskDefinitionArn?: TaskDefinitionArn;
   }
-  export type Status = "Active"|"Inactive"|"Pending"|"Failed"|string;
+  export type Status = "Active"|"Inactive"|"Pending"|"Failed"|string&{};
   export type StatusReason = string;
   export type Summaries = Summary[];
   export interface Summary {

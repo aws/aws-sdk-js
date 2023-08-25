@@ -688,7 +688,7 @@ declare namespace Comprehend {
   export type AnyLengthString = string;
   export type AttributeNamesList = AttributeNamesListItem[];
   export type AttributeNamesListItem = string;
-  export type AugmentedManifestsDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT"|string;
+  export type AugmentedManifestsDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT"|string&{};
   export interface AugmentedManifestsListItem {
     /**
      * The Amazon S3 location of the augmented manifest file.
@@ -954,7 +954,7 @@ declare namespace Comprehend {
      */
     ChildBlocks?: ListOfChildBlocks;
   }
-  export type BlockType = "LINE"|"WORD"|string;
+  export type BlockType = "LINE"|"WORD"|string&{};
   export interface BoundingBox {
     /**
      * The height of the bounding box as a ratio of the overall document page height.
@@ -1383,7 +1383,7 @@ declare namespace Comprehend {
      */
     DocumentType?: AugmentedManifestsDocumentTypeFormat;
   }
-  export type DatasetDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
+  export type DatasetDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string&{};
   export interface DatasetDocumentClassifierInputDataConfig {
     /**
      * The Amazon S3 URI for the input data. The S3 bucket must be in the same Region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input. This parameter is required if you set DataFormat to COMPREHEND_CSV.
@@ -1509,8 +1509,8 @@ declare namespace Comprehend {
     EndTime?: Timestamp;
   }
   export type DatasetPropertiesList = DatasetProperties[];
-  export type DatasetStatus = "CREATING"|"COMPLETED"|"FAILED"|string;
-  export type DatasetType = "TRAIN"|"TEST"|string;
+  export type DatasetStatus = "CREATING"|"COMPLETED"|"FAILED"|string&{};
+  export type DatasetType = "TRAIN"|"TEST"|string&{};
   export interface DeleteDocumentClassifierRequest {
     /**
      * The Amazon Resource Name (ARN) that identifies the document classifier. 
@@ -2004,8 +2004,8 @@ declare namespace Comprehend {
   export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
   export type DocumentClassifierArn = string;
   export type DocumentClassifierAugmentedManifestsList = AugmentedManifestsListItem[];
-  export type DocumentClassifierDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
-  export type DocumentClassifierDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT"|string;
+  export type DocumentClassifierDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string&{};
+  export type DocumentClassifierDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT"|string&{};
   export interface DocumentClassifierDocuments {
     /**
      * The S3 URI location of the training documents specified in the S3Uri CSV file.
@@ -2066,7 +2066,7 @@ declare namespace Comprehend {
     Documents?: DocumentClassifierDocuments;
     DocumentReaderConfig?: DocumentReaderConfig;
   }
-  export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL"|string;
+  export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL"|string&{};
   export interface DocumentClassifierOutputDataConfig {
     /**
      * When you use the OutputDataConfig object while creating a custom classifier, you specify the Amazon S3 location where you want to write the confusion matrix and other output files. The URI must be in the same Region as the API endpoint that you are calling. The location is used as the prefix for the actual location of this output file. When the custom classifier job is finished, the service creates the output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the confusion matrix.
@@ -2207,9 +2207,9 @@ declare namespace Comprehend {
      */
     ExtractedCharacters?: ListOfExtractedCharacters;
   }
-  export type DocumentReadAction = "TEXTRACT_DETECT_DOCUMENT_TEXT"|"TEXTRACT_ANALYZE_DOCUMENT"|string;
-  export type DocumentReadFeatureTypes = "TABLES"|"FORMS"|string;
-  export type DocumentReadMode = "SERVICE_DEFAULT"|"FORCE_DOCUMENT_READ_ACTION"|string;
+  export type DocumentReadAction = "TEXTRACT_DETECT_DOCUMENT_TEXT"|"TEXTRACT_ANALYZE_DOCUMENT"|string&{};
+  export type DocumentReadFeatureTypes = "TABLES"|"FORMS"|string&{};
+  export type DocumentReadMode = "SERVICE_DEFAULT"|"FORCE_DOCUMENT_READ_ACTION"|string&{};
   export interface DocumentReaderConfig {
     /**
      * This field defines the Amazon Textract API operation that Amazon Comprehend uses to extract text from PDF files and image files. Enter one of the following values:    TEXTRACT_DETECT_DOCUMENT_TEXT - The Amazon Comprehend service uses the DetectDocumentText API operation.     TEXTRACT_ANALYZE_DOCUMENT - The Amazon Comprehend service uses the AnalyzeDocument API operation.   
@@ -2224,7 +2224,7 @@ declare namespace Comprehend {
      */
     FeatureTypes?: ListOfDocumentReadFeatureTypes;
   }
-  export type DocumentType = "NATIVE_PDF"|"SCANNED_PDF"|"MS_WORD"|"IMAGE"|"PLAIN_TEXT"|"TEXTRACT_DETECT_DOCUMENT_TEXT_JSON"|"TEXTRACT_ANALYZE_DOCUMENT_JSON"|string;
+  export type DocumentType = "NATIVE_PDF"|"SCANNED_PDF"|"MS_WORD"|"IMAGE"|"PLAIN_TEXT"|"TEXTRACT_DETECT_DOCUMENT_TEXT_JSON"|"TEXTRACT_ANALYZE_DOCUMENT_JSON"|string&{};
   export interface DocumentTypeListItem {
     /**
      * Page number.
@@ -2384,7 +2384,7 @@ declare namespace Comprehend {
     FlywheelArn?: ComprehendFlywheelArn;
   }
   export type EndpointPropertiesList = EndpointProperties[];
-  export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
+  export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string&{};
   export interface EntitiesDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -2520,7 +2520,7 @@ declare namespace Comprehend {
   }
   export type EntityRecognizerArn = string;
   export type EntityRecognizerAugmentedManifestsList = AugmentedManifestsListItem[];
-  export type EntityRecognizerDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
+  export type EntityRecognizerDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string&{};
   export interface EntityRecognizerDocuments {
     /**
      *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same Region as the API endpoint that you are calling.
@@ -2737,7 +2737,7 @@ declare namespace Comprehend {
      */
     LatestVersionStatus?: ModelStatus;
   }
-  export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
+  export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string&{};
   export type EntityTypeName = string;
   export interface EntityTypesEvaluationMetrics {
     /**
@@ -2924,7 +2924,7 @@ declare namespace Comprehend {
     EvaluationManifestS3Prefix?: S3Uri;
   }
   export type FlywheelIterationPropertiesList = FlywheelIterationProperties[];
-  export type FlywheelIterationStatus = "TRAINING"|"EVALUATING"|"COMPLETED"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
+  export type FlywheelIterationStatus = "TRAINING"|"EVALUATING"|"COMPLETED"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string&{};
   export interface FlywheelModelEvaluationMetrics {
     /**
      * The average F1 score from the evaluation metrics.
@@ -2994,7 +2994,7 @@ declare namespace Comprehend {
     LatestFlywheelIteration?: FlywheelIterationId;
   }
   export type FlywheelS3Uri = string;
-  export type FlywheelStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export type FlywheelStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED"|string&{};
   export interface FlywheelSummary {
     /**
      * The Amazon Resource Number (ARN) of the flywheel
@@ -3092,11 +3092,11 @@ declare namespace Comprehend {
      */
     DocumentReaderConfig?: DocumentReaderConfig;
   }
-  export type InputFormat = "ONE_DOC_PER_FILE"|"ONE_DOC_PER_LINE"|string;
+  export type InputFormat = "ONE_DOC_PER_FILE"|"ONE_DOC_PER_LINE"|string&{};
   export type Integer = number;
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string&{};
   export interface KeyPhrase {
     /**
      * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
@@ -3192,7 +3192,7 @@ declare namespace Comprehend {
   export type LabelDelimiter = string;
   export type LabelListItem = string;
   export type LabelsList = LabelListItem[];
-  export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|"ar"|"hi"|"ja"|"ko"|"zh"|"zh-TW"|string;
+  export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|"ar"|"hi"|"ja"|"ko"|"zh"|"zh-TW"|string&{};
   export interface ListDatasetsRequest {
     /**
      * The Amazon Resource Number (ARN) of the flywheel.
@@ -3653,8 +3653,8 @@ declare namespace Comprehend {
     Sentiment?: SentimentType;
     SentimentScore?: SentimentScore;
   }
-  export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED"|"TRAINED_WITH_WARNING"|string;
-  export type ModelType = "DOCUMENT_CLASSIFIER"|"ENTITY_RECOGNIZER"|string;
+  export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED"|"TRAINED_WITH_WARNING"|string&{};
+  export type ModelType = "DOCUMENT_CLASSIFIER"|"ENTITY_RECOGNIZER"|string&{};
   export type NumberOfDocuments = number;
   export type NumberOfTopicsInteger = number;
   export interface OutputDataConfig {
@@ -3667,8 +3667,8 @@ declare namespace Comprehend {
      */
     KmsKeyId?: KmsKeyId;
   }
-  export type PageBasedErrorCode = "TEXTRACT_BAD_PAGE"|"TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED"|"PAGE_CHARACTERS_EXCEEDED"|"PAGE_SIZE_EXCEEDED"|"INTERNAL_SERVER_ERROR"|string;
-  export type PageBasedWarningCode = "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL"|"INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL"|string;
+  export type PageBasedErrorCode = "TEXTRACT_BAD_PAGE"|"TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED"|"PAGE_CHARACTERS_EXCEEDED"|"PAGE_SIZE_EXCEEDED"|"INTERNAL_SERVER_ERROR"|string&{};
+  export type PageBasedWarningCode = "INFERENCING_PLAINTEXT_WITH_NATIVE_TRAINED_MODEL"|"INFERENCING_NATIVE_DOCUMENT_WITH_PLAINTEXT_TRAINED_MODEL"|string&{};
   export interface PartOfSpeechTag {
     /**
      * Identifies the part of speech that the token represents.
@@ -3679,7 +3679,7 @@ declare namespace Comprehend {
      */
     Score?: Float;
   }
-  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"CCONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
+  export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"CCONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string&{};
   export interface PiiEntitiesDetectionJobFilter {
     /**
      * Filters on the name of the job.
@@ -3753,8 +3753,8 @@ declare namespace Comprehend {
     Mode?: PiiEntitiesDetectionMode;
   }
   export type PiiEntitiesDetectionJobPropertiesList = PiiEntitiesDetectionJobProperties[];
-  export type PiiEntitiesDetectionMaskMode = "MASK"|"REPLACE_WITH_PII_ENTITY_TYPE"|string;
-  export type PiiEntitiesDetectionMode = "ONLY_REDACTION"|"ONLY_OFFSETS"|string;
+  export type PiiEntitiesDetectionMaskMode = "MASK"|"REPLACE_WITH_PII_ENTITY_TYPE"|string&{};
+  export type PiiEntitiesDetectionMode = "ONLY_REDACTION"|"ONLY_OFFSETS"|string&{};
   export interface PiiEntity {
     /**
      * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
@@ -3773,7 +3773,7 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
   }
-  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|"LICENSE_PLATE"|"VEHICLE_IDENTIFICATION_NUMBER"|"UK_NATIONAL_INSURANCE_NUMBER"|"CA_SOCIAL_INSURANCE_NUMBER"|"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"|"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"|"IN_PERMANENT_ACCOUNT_NUMBER"|"IN_NREGA"|"INTERNATIONAL_BANK_ACCOUNT_NUMBER"|"SWIFT_CODE"|"UK_NATIONAL_HEALTH_SERVICE_NUMBER"|"CA_HEALTH_NUMBER"|"IN_AADHAAR"|"IN_VOTER_NUMBER"|string;
+  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|"LICENSE_PLATE"|"VEHICLE_IDENTIFICATION_NUMBER"|"UK_NATIONAL_INSURANCE_NUMBER"|"CA_SOCIAL_INSURANCE_NUMBER"|"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"|"UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"|"IN_PERMANENT_ACCOUNT_NUMBER"|"IN_NREGA"|"INTERNATIONAL_BANK_ACCOUNT_NUMBER"|"SWIFT_CODE"|"UK_NATIONAL_HEALTH_SERVICE_NUMBER"|"CA_HEALTH_NUMBER"|"IN_AADHAAR"|"IN_VOTER_NUMBER"|string&{};
   export interface PiiOutputDataConfig {
     /**
      * When you use the PiiOutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data.   For a PII entity detection job, the output file is plain text, not a compressed archive. The output file name is the same as the input file, with .out appended at the end. 
@@ -3831,7 +3831,7 @@ declare namespace Comprehend {
      */
     MaskCharacter?: MaskCharacter;
   }
-  export type RelationshipType = "CHILD"|string;
+  export type RelationshipType = "CHILD"|string&{};
   export interface RelationshipsListItem {
     /**
      * Identifers of the child blocks.
@@ -3937,8 +3937,8 @@ declare namespace Comprehend {
      */
     Mixed?: Float;
   }
-  export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string;
-  export type Split = "TRAIN"|"TEST"|string;
+  export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string&{};
+  export type Split = "TRAIN"|"TEST"|string&{};
   export interface StartDocumentClassificationJobRequest {
     /**
      * The identifier of the job.
@@ -4565,7 +4565,7 @@ declare namespace Comprehend {
   export type StringList = String[];
   export type SubnetId = string;
   export type Subnets = SubnetId[];
-  export type SyntaxLanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;
+  export type SyntaxLanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string&{};
   export interface SyntaxToken {
     /**
      * A unique identifier for a token.
@@ -4689,7 +4689,7 @@ declare namespace Comprehend {
      */
     Mentions?: ListOfMentions;
   }
-  export type TargetedSentimentEntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"FACILITY"|"BRAND"|"COMMERCIAL_ITEM"|"MOVIE"|"MUSIC"|"BOOK"|"SOFTWARE"|"GAME"|"PERSONAL_TITLE"|"EVENT"|"DATE"|"QUANTITY"|"ATTRIBUTE"|"OTHER"|string;
+  export type TargetedSentimentEntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"FACILITY"|"BRAND"|"COMMERCIAL_ITEM"|"MOVIE"|"MUSIC"|"BOOK"|"SOFTWARE"|"GAME"|"PERSONAL_TITLE"|"EVENT"|"DATE"|"QUANTITY"|"ATTRIBUTE"|"OTHER"|string&{};
   export interface TargetedSentimentMention {
     /**
      * Model confidence that the entity is relevant. Value range is zero to one, where one is highest confidence.

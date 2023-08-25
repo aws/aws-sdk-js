@@ -745,7 +745,7 @@ declare namespace MediaConnect {
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
-  export type Algorithm = "aes128"|"aes192"|"aes256"|string;
+  export type Algorithm = "aes128"|"aes192"|"aes256"|string&{};
   export interface Bridge {
     /**
      * The Amazon Resource Number (ARN) of the bridge.
@@ -857,14 +857,14 @@ declare namespace MediaConnect {
     FlowOutput?: BridgeFlowOutput;
     NetworkOutput?: BridgeNetworkOutput;
   }
-  export type BridgePlacement = "AVAILABLE"|"LOCKED"|string;
+  export type BridgePlacement = "AVAILABLE"|"LOCKED"|string&{};
   export interface BridgeSource {
     FlowSource?: BridgeFlowSource;
     NetworkSource?: BridgeNetworkSource;
   }
-  export type BridgeState = "CREATING"|"STANDBY"|"STARTING"|"DEPLOYING"|"ACTIVE"|"STOPPING"|"DELETING"|"DELETED"|"START_FAILED"|"START_PENDING"|"STOP_FAILED"|"UPDATING"|string;
-  export type Colorimetry = "BT601"|"BT709"|"BT2020"|"BT2100"|"ST2065-1"|"ST2065-3"|"XYZ"|string;
-  export type ConnectionStatus = "CONNECTED"|"DISCONNECTED"|string;
+  export type BridgeState = "CREATING"|"STANDBY"|"STARTING"|"DEPLOYING"|"ACTIVE"|"STOPPING"|"DELETING"|"DELETED"|"START_FAILED"|"START_PENDING"|"STOP_FAILED"|"UPDATING"|string&{};
+  export type Colorimetry = "BT601"|"BT709"|"BT2020"|"BT2100"|"ST2065-1"|"ST2065-3"|"XYZ"|string&{};
+  export type ConnectionStatus = "CONNECTED"|"DISCONNECTED"|string&{};
   export interface CreateBridgeRequest {
     /**
      * Create a bridge with the egress bridge type. An egress bridge is a cloud-to-ground bridge. The content comes from an existing MediaConnect flow and is delivered to your premises.
@@ -1063,7 +1063,7 @@ declare namespace MediaConnect {
   export interface DescribeReservationResponse {
     Reservation?: Reservation;
   }
-  export type DesiredState = "ACTIVE"|"STANDBY"|"DELETED"|string;
+  export type DesiredState = "ACTIVE"|"STANDBY"|"DELETED"|string&{};
   export interface DestinationConfiguration {
     /**
      * The IP address where contents of the media stream will be sent.
@@ -1096,7 +1096,7 @@ declare namespace MediaConnect {
      */
     Interface: InterfaceRequest;
   }
-  export type DurationUnits = "MONTHS"|string;
+  export type DurationUnits = "MONTHS"|string&{};
   export interface EgressGatewayBridge {
     /**
      * The ID of the instance running this bridge.
@@ -1107,8 +1107,8 @@ declare namespace MediaConnect {
      */
     MaxBitrate: __integer;
   }
-  export type EncoderProfile = "main"|"high"|string;
-  export type EncodingName = "jxsv"|"raw"|"smpte291"|"pcm"|string;
+  export type EncoderProfile = "main"|"high"|string&{};
+  export type EncodingName = "jxsv"|"raw"|"smpte291"|"pcm"|string&{};
   export interface EncodingParameters {
     /**
      * A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.
@@ -1197,7 +1197,7 @@ declare namespace MediaConnect {
      */
     Subscribers: __listOf__string;
   }
-  export type EntitlementStatus = "ENABLED"|"DISABLED"|string;
+  export type EntitlementStatus = "ENABLED"|"DISABLED"|string&{};
   export interface FailoverConfig {
     /**
      * The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
@@ -1213,7 +1213,7 @@ declare namespace MediaConnect {
     SourcePriority?: SourcePriority;
     State?: State;
   }
-  export type FailoverMode = "MERGE"|"FAILOVER"|string;
+  export type FailoverMode = "MERGE"|"FAILOVER"|string&{};
   export interface Flow {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
@@ -1394,7 +1394,7 @@ declare namespace MediaConnect {
      */
     Name: __string;
   }
-  export type GatewayState = "CREATING"|"ACTIVE"|"UPDATING"|"ERROR"|"DELETING"|"DELETED"|string;
+  export type GatewayState = "CREATING"|"ACTIVE"|"UPDATING"|"ERROR"|"DELETING"|"DELETED"|string&{};
   export interface GrantEntitlementRequest {
     /**
      * Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
@@ -1479,7 +1479,7 @@ declare namespace MediaConnect {
      */
     Interface: InterfaceRequest;
   }
-  export type InstanceState = "REGISTERING"|"ACTIVE"|"DEREGISTERING"|"DEREGISTERED"|"REGISTRATION_ERROR"|"DEREGISTRATION_ERROR"|string;
+  export type InstanceState = "REGISTERING"|"ACTIVE"|"DEREGISTERING"|"DEREGISTERED"|"REGISTRATION_ERROR"|"DEREGISTRATION_ERROR"|string&{};
   export interface Interface {
     /**
      * The name of the VPC interface.
@@ -1492,7 +1492,7 @@ declare namespace MediaConnect {
      */
     Name: __string;
   }
-  export type KeyType = "speke"|"static-key"|"srt-password"|string;
+  export type KeyType = "speke"|"static-key"|"srt-password"|string&{};
   export interface ListBridgesRequest {
     /**
      * Filter the list results to display only the bridges associated with the selected Amazon Resource Name (ARN).
@@ -1760,7 +1760,7 @@ declare namespace MediaConnect {
      */
     MaintenanceStartHour?: __string;
   }
-  export type MaintenanceDay = "Monday"|"Tuesday"|"Wednesday"|"Thursday"|"Friday"|"Saturday"|"Sunday"|string;
+  export type MaintenanceDay = "Monday"|"Tuesday"|"Wednesday"|"Thursday"|"Friday"|"Saturday"|"Sunday"|string&{};
   export type MaxResults = number;
   export interface MediaStream {
     /**
@@ -1880,7 +1880,7 @@ declare namespace MediaConnect {
      */
     MediaStreamName: __string;
   }
-  export type MediaStreamType = "video"|"audio"|"ancillary-data"|string;
+  export type MediaStreamType = "video"|"audio"|"ancillary-data"|string&{};
   export interface MessageDetail {
     /**
      * The error code.
@@ -1901,7 +1901,7 @@ declare namespace MediaConnect {
      */
     Errors: __listOf__string;
   }
-  export type NetworkInterfaceType = "ena"|"efa"|string;
+  export type NetworkInterfaceType = "ena"|"efa"|string&{};
   export interface Offering {
     /**
      * The type of currency that is used for billing. The currencyCode used for all reservations is US dollars.
@@ -1998,8 +1998,8 @@ declare namespace MediaConnect {
      */
     BridgePorts?: __listOf__integer;
   }
-  export type PriceUnits = "HOURLY"|string;
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"srt-caller"|"fujitsu-qos"|"udp"|string;
+  export type PriceUnits = "HOURLY"|string&{};
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|"srt-caller"|"fujitsu-qos"|"udp"|string&{};
   export interface PurchaseOfferingRequest {
     /**
      * The Amazon Resource Name (ARN) of the offering.
@@ -2017,7 +2017,7 @@ declare namespace MediaConnect {
   export interface PurchaseOfferingResponse {
     Reservation?: Reservation;
   }
-  export type Range = "NARROW"|"FULL"|"FULLPROTECT"|string;
+  export type Range = "NARROW"|"FULL"|"FULLPROTECT"|string&{};
   export interface RemoveBridgeOutputRequest {
     /**
      * The ARN of the bridge that you want to update.
@@ -2184,7 +2184,7 @@ declare namespace MediaConnect {
      */
     Start: __string;
   }
-  export type ReservationState = "ACTIVE"|"EXPIRED"|"PROCESSING"|"CANCELED"|string;
+  export type ReservationState = "ACTIVE"|"EXPIRED"|"PROCESSING"|"CANCELED"|string&{};
   export interface ResourceSpecification {
     /**
      * The amount of outbound bandwidth that is discounted in the offering.
@@ -2195,7 +2195,7 @@ declare namespace MediaConnect {
      */
     ResourceType: ResourceType;
   }
-  export type ResourceType = "Mbps_Outbound_Bandwidth"|string;
+  export type ResourceType = "Mbps_Outbound_Bandwidth"|string&{};
   export interface RevokeFlowEntitlementRequest {
     /**
      * The ARN of the entitlement that you want to revoke.
@@ -2216,7 +2216,7 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
-  export type ScanMode = "progressive"|"interlace"|"progressive-segmented-frame"|string;
+  export type ScanMode = "progressive"|"interlace"|"progressive-segmented-frame"|string&{};
   export interface SetGatewayBridgeSourceRequest {
     /**
      * The ARN of the bridge feeding this flow.
@@ -2373,7 +2373,7 @@ declare namespace MediaConnect {
      */
     PrimarySource?: __string;
   }
-  export type SourceType = "OWNED"|"ENTITLED"|string;
+  export type SourceType = "OWNED"|"ENTITLED"|string&{};
   export interface StartFlowRequest {
     /**
      * The ARN of the flow that you want to start.
@@ -2390,8 +2390,8 @@ declare namespace MediaConnect {
      */
     Status?: Status;
   }
-  export type State = "ENABLED"|"DISABLED"|string;
-  export type Status = "STANDBY"|"ACTIVE"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"ERROR"|string;
+  export type State = "ENABLED"|"DISABLED"|string&{};
+  export type Status = "STANDBY"|"ACTIVE"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"ERROR"|string&{};
   export interface StopFlowRequest {
     /**
      * The ARN of the flow that you want to stop.
@@ -2418,7 +2418,7 @@ declare namespace MediaConnect {
      */
     Tags: __mapOf__string;
   }
-  export type Tcs = "SDR"|"PQ"|"HLG"|"LINEAR"|"BT2100LINPQ"|"BT2100LINHLG"|"ST2065-1"|"ST428-1"|"DENSITY"|string;
+  export type Tcs = "SDR"|"PQ"|"HLG"|"LINEAR"|"BT2100LINPQ"|"BT2100LINHLG"|"ST2065-1"|"ST428-1"|"DENSITY"|string&{};
   export interface Transport {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.

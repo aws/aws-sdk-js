@@ -916,9 +916,9 @@ declare namespace AlexaForBusiness {
   }
   export type BusinessReportDeliveryTime = Date;
   export type BusinessReportDownloadUrl = string;
-  export type BusinessReportFailureCode = "ACCESS_DENIED"|"NO_SUCH_BUCKET"|"INTERNAL_FAILURE"|string;
-  export type BusinessReportFormat = "CSV"|"CSV_ZIP"|string;
-  export type BusinessReportInterval = "ONE_DAY"|"ONE_WEEK"|"THIRTY_DAYS"|string;
+  export type BusinessReportFailureCode = "ACCESS_DENIED"|"NO_SUCH_BUCKET"|"INTERNAL_FAILURE"|string&{};
+  export type BusinessReportFormat = "CSV"|"CSV_ZIP"|string&{};
+  export type BusinessReportInterval = "ONE_DAY"|"ONE_WEEK"|"THIRTY_DAYS"|string&{};
   export interface BusinessReportRecurrence {
     /**
      * The start date.
@@ -972,7 +972,7 @@ declare namespace AlexaForBusiness {
   }
   export type BusinessReportScheduleList = BusinessReportSchedule[];
   export type BusinessReportScheduleName = string;
-  export type BusinessReportStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|string;
+  export type BusinessReportStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|string&{};
   export interface Category {
     /**
      * The ID of the skill store category.
@@ -989,7 +989,7 @@ declare namespace AlexaForBusiness {
   export type CertificateTime = Date;
   export type ClientId = string;
   export type ClientRequestToken = string;
-  export type CommsProtocol = "SIP"|"SIPS"|"H323"|string;
+  export type CommsProtocol = "SIP"|"SIPS"|"H323"|string&{};
   export interface ConferencePreference {
     /**
      * The ARN of the default conference provider.
@@ -1023,9 +1023,9 @@ declare namespace AlexaForBusiness {
     MeetingSetting?: MeetingSetting;
   }
   export type ConferenceProviderName = string;
-  export type ConferenceProviderType = "CHIME"|"BLUEJEANS"|"FUZE"|"GOOGLE_HANGOUTS"|"POLYCOM"|"RINGCENTRAL"|"SKYPE_FOR_BUSINESS"|"WEBEX"|"ZOOM"|"CUSTOM"|string;
+  export type ConferenceProviderType = "CHIME"|"BLUEJEANS"|"FUZE"|"GOOGLE_HANGOUTS"|"POLYCOM"|"RINGCENTRAL"|"SKYPE_FOR_BUSINESS"|"WEBEX"|"ZOOM"|"CUSTOM"|string&{};
   export type ConferenceProvidersList = ConferenceProvider[];
-  export type ConnectionStatus = "ONLINE"|"OFFLINE"|string;
+  export type ConnectionStatus = "ONLINE"|"OFFLINE"|string&{};
   export type ConnectionStatusUpdatedTime = Date;
   export interface Contact {
     /**
@@ -1790,7 +1790,7 @@ declare namespace AlexaForBusiness {
   }
   export type DeviceEventList = DeviceEvent[];
   export type DeviceEventTime = Date;
-  export type DeviceEventType = "CONNECTION_STATUS"|"DEVICE_STATUS"|string;
+  export type DeviceEventType = "CONNECTION_STATUS"|"DEVICE_STATUS"|string&{};
   export type DeviceEventValue = string;
   export type DeviceLocale = string;
   export type DeviceName = string;
@@ -1811,7 +1811,7 @@ declare namespace AlexaForBusiness {
   export type DeviceRoomName = string;
   export type DeviceSerialNumber = string;
   export type DeviceSerialNumberForAVS = string;
-  export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|"DEREGISTERED"|"FAILED"|string;
+  export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|"DEREGISTERED"|"FAILED"|string&{};
   export interface DeviceStatusDetail {
     /**
      * The list of available features on the device.
@@ -1822,7 +1822,7 @@ declare namespace AlexaForBusiness {
      */
     Code?: DeviceStatusDetailCode;
   }
-  export type DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"|"DEVICE_WAS_OFFLINE"|"CREDENTIALS_ACCESS_FAILURE"|"TLS_VERSION_MISMATCH"|"ASSOCIATION_REJECTION"|"AUTHENTICATION_FAILURE"|"DHCP_FAILURE"|"INTERNET_UNAVAILABLE"|"DNS_FAILURE"|"UNKNOWN_FAILURE"|"CERTIFICATE_ISSUING_LIMIT_EXCEEDED"|"INVALID_CERTIFICATE_AUTHORITY"|"NETWORK_PROFILE_NOT_FOUND"|"INVALID_PASSWORD_STATE"|"PASSWORD_NOT_FOUND"|"PASSWORD_MANAGER_ACCESS_DENIED"|"CERTIFICATE_AUTHORITY_ACCESS_DENIED"|string;
+  export type DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"|"DEVICE_WAS_OFFLINE"|"CREDENTIALS_ACCESS_FAILURE"|"TLS_VERSION_MISMATCH"|"ASSOCIATION_REJECTION"|"AUTHENTICATION_FAILURE"|"DHCP_FAILURE"|"INTERNET_UNAVAILABLE"|"DNS_FAILURE"|"UNKNOWN_FAILURE"|"CERTIFICATE_ISSUING_LIMIT_EXCEEDED"|"INVALID_CERTIFICATE_AUTHORITY"|"NETWORK_PROFILE_NOT_FOUND"|"INVALID_PASSWORD_STATE"|"PASSWORD_NOT_FOUND"|"PASSWORD_MANAGER_ACCESS_DENIED"|"CERTIFICATE_AUTHORITY_ACCESS_DENIED"|string&{};
   export type DeviceStatusDetails = DeviceStatusDetail[];
   export interface DeviceStatusInfo {
     /**
@@ -1839,7 +1839,7 @@ declare namespace AlexaForBusiness {
     ConnectionStatusUpdatedTime?: ConnectionStatusUpdatedTime;
   }
   export type DeviceType = string;
-  export type DeviceUsageType = "VOICE"|string;
+  export type DeviceUsageType = "VOICE"|string&{};
   export interface DisassociateContactFromAddressBookRequest {
     /**
      * The ARN of the contact to disassociate from an address book.
@@ -1892,10 +1892,10 @@ declare namespace AlexaForBusiness {
   }
   export interface DisassociateSkillGroupFromRoomResponse {
   }
-  export type DistanceUnit = "METRIC"|"IMPERIAL"|string;
+  export type DistanceUnit = "METRIC"|"IMPERIAL"|string&{};
   export type Email = string;
-  export type EnablementType = "ENABLED"|"PENDING"|string;
-  export type EnablementTypeFilter = "ENABLED"|"PENDING"|string;
+  export type EnablementType = "ENABLED"|"PENDING"|string&{};
+  export type EnablementTypeFilter = "ENABLED"|"PENDING"|string&{};
   export interface EndOfMeetingReminder {
     /**
      * A range of 3 to 15 minutes that determines when the reminder begins.
@@ -1911,12 +1911,12 @@ declare namespace AlexaForBusiness {
     Enabled?: Boolean;
   }
   export type EndOfMeetingReminderMinutesList = Minutes[];
-  export type EndOfMeetingReminderType = "ANNOUNCEMENT_TIME_CHECK"|"ANNOUNCEMENT_VARIABLE_TIME_LEFT"|"CHIME"|"KNOCK"|string;
+  export type EndOfMeetingReminderType = "ANNOUNCEMENT_TIME_CHECK"|"ANNOUNCEMENT_VARIABLE_TIME_LEFT"|"CHIME"|"KNOCK"|string&{};
   export type EndUserLicenseAgreement = string;
   export type Endpoint = string;
   export type EnrollmentId = string;
-  export type EnrollmentStatus = "INITIALIZED"|"PENDING"|"REGISTERED"|"DISASSOCIATING"|"DEREGISTERING"|string;
-  export type Feature = "BLUETOOTH"|"VOLUME"|"NOTIFICATIONS"|"LISTS"|"SKILLS"|"NETWORK_PROFILE"|"SETTINGS"|"ALL"|string;
+  export type EnrollmentStatus = "INITIALIZED"|"PENDING"|"REGISTERED"|"DISASSOCIATING"|"DEREGISTERING"|string&{};
+  export type Feature = "BLUETOOTH"|"VOLUME"|"NOTIFICATIONS"|"LISTS"|"SKILLS"|"NETWORK_PROFILE"|"SETTINGS"|"ALL"|string&{};
   export type Features = Feature[];
   export interface Filter {
     /**
@@ -2441,7 +2441,7 @@ declare namespace AlexaForBusiness {
      */
     NextToken?: NextToken;
   }
-  export type Locale = "en-US"|string;
+  export type Locale = "en-US"|string&{};
   export type MacAddress = string;
   export type MaxResults = number;
   export type MaxVolumeLimit = number;
@@ -2471,7 +2471,7 @@ declare namespace AlexaForBusiness {
     RequirePin: RequirePin;
   }
   export type Minutes = number;
-  export type NetworkEapMethod = "EAP_TLS"|string;
+  export type NetworkEapMethod = "EAP_TLS"|string&{};
   export interface NetworkProfile {
     /**
      * The ARN of the network profile associated with a device.
@@ -2547,7 +2547,7 @@ declare namespace AlexaForBusiness {
   export type NetworkProfileDataList = NetworkProfileData[];
   export type NetworkProfileDescription = string;
   export type NetworkProfileName = string;
-  export type NetworkSecurityType = "OPEN"|"WEP"|"WPA_PSK"|"WPA2_PSK"|"WPA2_ENTERPRISE"|string;
+  export type NetworkSecurityType = "OPEN"|"WEP"|"WPA_PSK"|"WPA2_PSK"|"WPA2_ENTERPRISE"|string&{};
   export type NetworkSsid = string;
   export type NewInThisVersionBulletPoints = BulletPoint[];
   export type NextToken = string;
@@ -2585,7 +2585,7 @@ declare namespace AlexaForBusiness {
     Type: PhoneNumberType;
   }
   export type PhoneNumberList = PhoneNumber[];
-  export type PhoneNumberType = "MOBILE"|"WORK"|"HOME"|string;
+  export type PhoneNumberType = "MOBILE"|"WORK"|"HOME"|string&{};
   export type PrivacyPolicy = string;
   export interface ProactiveJoin {
     EnabledByMotion?: Boolean;
@@ -2807,7 +2807,7 @@ declare namespace AlexaForBusiness {
      */
     Enabled?: Boolean;
   }
-  export type RequirePin = "YES"|"NO"|"OPTIONAL"|string;
+  export type RequirePin = "YES"|"NO"|"OPTIONAL"|string&{};
   export interface ResolveRoomRequest {
     /**
      * The ARN of the user. Required.
@@ -3214,7 +3214,7 @@ declare namespace AlexaForBusiness {
     Type: SipType;
   }
   export type SipAddressList = SipAddress[];
-  export type SipType = "WORK"|string;
+  export type SipType = "WORK"|string&{};
   export type SipUri = string;
   export interface SkillDetails {
     /**
@@ -3316,8 +3316,8 @@ declare namespace AlexaForBusiness {
     SkillType?: SkillType;
   }
   export type SkillSummaryList = SkillSummary[];
-  export type SkillType = "PUBLIC"|"PRIVATE"|string;
-  export type SkillTypeFilter = "PUBLIC"|"PRIVATE"|"ALL"|string;
+  export type SkillType = "PUBLIC"|"PRIVATE"|string&{};
+  export type SkillTypeFilter = "PUBLIC"|"PRIVATE"|"ALL"|string&{};
   export type SkillTypes = SkillStoreType[];
   export interface SkillsStoreSkill {
     /**
@@ -3378,7 +3378,7 @@ declare namespace AlexaForBusiness {
   }
   export type SortKey = string;
   export type SortList = Sort[];
-  export type SortValue = "ASC"|"DESC"|string;
+  export type SortValue = "ASC"|"DESC"|string&{};
   export interface Ssml {
     /**
      * The locale of the SSML message. Currently, en-US is supported.
@@ -3441,7 +3441,7 @@ declare namespace AlexaForBusiness {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TemperatureUnit = "FAHRENHEIT"|"CELSIUS"|string;
+  export type TemperatureUnit = "FAHRENHEIT"|"CELSIUS"|string&{};
   export interface Text {
     /**
      * The locale of the text message. Currently, en-US is supported.
@@ -3839,7 +3839,7 @@ declare namespace AlexaForBusiness {
   export type UserId = string;
   export type Utterance = string;
   export type Value = string;
-  export type WakeWord = "ALEXA"|"AMAZON"|"ECHO"|"COMPUTER"|string;
+  export type WakeWord = "ALEXA"|"AMAZON"|"ECHO"|"COMPUTER"|string&{};
   export type user_FirstName = string;
   export type user_LastName = string;
   export type user_UserId = string;

@@ -535,7 +535,7 @@ declare namespace CloudWatchLogs {
     logStreamName: LogStreamName;
   }
   export type DataProtectionPolicyDocument = string;
-  export type DataProtectionStatus = "ACTIVATED"|"DELETED"|"ARCHIVED"|"DISABLED"|string;
+  export type DataProtectionStatus = "ACTIVATED"|"DELETED"|"ARCHIVED"|"DISABLED"|string&{};
   export type Days = number;
   export type DefaultValue = number;
   export interface DeleteAccountPolicyRequest {
@@ -913,7 +913,7 @@ declare namespace CloudWatchLogs {
      */
     resourceIdentifier?: ResourceIdentifier;
   }
-  export type Distribution = "Random"|"ByLogStream"|string;
+  export type Distribution = "Random"|"ByLogStream"|string&{};
   export type EncryptionKey = string;
   export type EventId = string;
   export type EventMessage = string;
@@ -981,7 +981,7 @@ declare namespace CloudWatchLogs {
      */
     message?: ExportTaskStatusMessage;
   }
-  export type ExportTaskStatusCode = "CANCELLED"|"COMPLETED"|"FAILED"|"PENDING"|"PENDING_CANCEL"|"RUNNING"|string;
+  export type ExportTaskStatusCode = "CANCELLED"|"COMPLETED"|"FAILED"|"PENDING"|"PENDING_CANCEL"|"RUNNING"|string&{};
   export type ExportTaskStatusMessage = string;
   export type ExportTasks = ExportTask[];
   export type ExtractedValues = {[key: string]: Value};
@@ -1207,7 +1207,7 @@ declare namespace CloudWatchLogs {
   }
   export type IncludeLinkedAccounts = boolean;
   export type InheritedProperties = InheritedProperty[];
-  export type InheritedProperty = "ACCOUNT_DATA_PROTECTION"|string;
+  export type InheritedProperty = "ACCOUNT_DATA_PROTECTION"|string&{};
   export interface InputLogEvent {
     /**
      * The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
@@ -1404,7 +1404,7 @@ declare namespace CloudWatchLogs {
   export type MetricTransformations = MetricTransformation[];
   export type MetricValue = string;
   export type NextToken = string;
-  export type OrderBy = "LogStreamName"|"LastEventTime"|string;
+  export type OrderBy = "LogStreamName"|"LastEventTime"|string&{};
   export interface OutputLogEvent {
     /**
      * The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
@@ -1423,7 +1423,7 @@ declare namespace CloudWatchLogs {
   export type Percentage = number;
   export type PolicyDocument = string;
   export type PolicyName = string;
-  export type PolicyType = "DATA_PROTECTION_POLICY"|string;
+  export type PolicyType = "DATA_PROTECTION_POLICY"|string&{};
   export interface PutAccountPolicyRequest {
     /**
      * A name for the policy. This must be unique within the account.
@@ -1694,7 +1694,7 @@ declare namespace CloudWatchLogs {
      */
     bytesScanned?: StatsValue;
   }
-  export type QueryStatus = "Scheduled"|"Running"|"Complete"|"Failed"|"Cancelled"|"Timeout"|"Unknown"|string;
+  export type QueryStatus = "Scheduled"|"Running"|"Complete"|"Failed"|"Cancelled"|"Timeout"|"Unknown"|string&{};
   export type QueryString = string;
   export interface RejectedLogEventsInfo {
     /**
@@ -1738,7 +1738,7 @@ declare namespace CloudWatchLogs {
   }
   export type ResultRows = ResultField[];
   export type RoleArn = string;
-  export type Scope = "ALL"|string;
+  export type Scope = "ALL"|string&{};
   export interface SearchedLogStream {
     /**
      * The name of the log stream.
@@ -1751,7 +1751,7 @@ declare namespace CloudWatchLogs {
   }
   export type SearchedLogStreams = SearchedLogStream[];
   export type SequenceToken = string;
-  export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
+  export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string&{};
   export type StartFromHead = boolean;
   export interface StartQueryRequest {
     /**

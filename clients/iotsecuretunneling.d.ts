@@ -79,7 +79,7 @@ declare class IoTSecureTunneling extends Service {
 declare namespace IoTSecureTunneling {
   export type AmazonResourceName = string;
   export type ClientAccessToken = string;
-  export type ClientMode = "SOURCE"|"DESTINATION"|"ALL"|string;
+  export type ClientMode = "SOURCE"|"DESTINATION"|"ALL"|string&{};
   export interface CloseTunnelRequest {
     /**
      * The ID of the tunnel to close.
@@ -102,7 +102,7 @@ declare namespace IoTSecureTunneling {
      */
     lastUpdatedAt?: DateType;
   }
-  export type ConnectionStatus = "CONNECTED"|"DISCONNECTED"|string;
+  export type ConnectionStatus = "CONNECTED"|"DISCONNECTED"|string&{};
   export type DateType = Date;
   export type DeleteFlag = boolean;
   export interface DescribeTunnelRequest {
@@ -311,7 +311,7 @@ declare namespace IoTSecureTunneling {
   }
   export type TunnelArn = string;
   export type TunnelId = string;
-  export type TunnelStatus = "OPEN"|"CLOSED"|string;
+  export type TunnelStatus = "OPEN"|"CLOSED"|string&{};
   export interface TunnelSummary {
     /**
      * The unique alpha-numeric identifier for the tunnel.

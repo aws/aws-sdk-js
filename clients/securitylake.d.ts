@@ -261,7 +261,7 @@ declare class SecurityLake extends Service {
   updateSubscriberNotification(callback?: (err: AWSError, data: SecurityLake.Types.UpdateSubscriberNotificationResponse) => void): Request<SecurityLake.Types.UpdateSubscriberNotificationResponse, AWSError>;
 }
 declare namespace SecurityLake {
-  export type AccessType = "LAKEFORMATION"|"S3"|string;
+  export type AccessType = "LAKEFORMATION"|"S3"|string&{};
   export type AccessTypeList = AccessType[];
   export type AccountList = AwsAccountId[];
   export type AmazonResourceName = string;
@@ -295,7 +295,7 @@ declare namespace SecurityLake {
     sourceVersion?: AwsLogSourceVersion;
   }
   export type AwsLogSourceConfigurationList = AwsLogSourceConfiguration[];
-  export type AwsLogSourceName = "ROUTE53"|"VPC_FLOW"|"SH_FINDINGS"|"CLOUD_TRAIL_MGMT"|"LAMBDA_EXECUTION"|"S3_DATA"|string;
+  export type AwsLogSourceName = "ROUTE53"|"VPC_FLOW"|"SH_FINDINGS"|"CLOUD_TRAIL_MGMT"|"LAMBDA_EXECUTION"|"S3_DATA"|string&{};
   export interface AwsLogSourceResource {
     /**
      * The name for a Amazon Web Services source. This must be a Regionally unique value.
@@ -658,7 +658,7 @@ declare namespace SecurityLake {
     status?: SourceCollectionStatus;
   }
   export type DataLakeSourceStatusList = DataLakeSourceStatus[];
-  export type DataLakeStatus = "INITIALIZED"|"PENDING"|"COMPLETED"|"FAILED"|string;
+  export type DataLakeStatus = "INITIALIZED"|"PENDING"|"COMPLETED"|"FAILED"|string&{};
   export type DataLakeStorageClass = string;
   export interface DataLakeUpdateException {
     /**
@@ -814,7 +814,7 @@ declare namespace SecurityLake {
      */
     subscriber?: SubscriberResource;
   }
-  export type HttpMethod = "POST"|"PUT"|string;
+  export type HttpMethod = "POST"|"PUT"|string&{};
   export interface HttpsNotificationConfiguration {
     /**
      * The key name for the notification subscription.
@@ -995,7 +995,7 @@ declare namespace SecurityLake {
   export type S3BucketArn = string;
   export type S3URI = string;
   export type SafeString = string;
-  export type SourceCollectionStatus = "COLLECTING"|"MISCONFIGURED"|"NOT_COLLECTING"|string;
+  export type SourceCollectionStatus = "COLLECTING"|"MISCONFIGURED"|"NOT_COLLECTING"|string&{};
   export interface SqsNotificationConfiguration {
   }
   export type String = string;
@@ -1062,7 +1062,7 @@ declare namespace SecurityLake {
     updatedAt?: SyntheticTimestamp_date_time;
   }
   export type SubscriberResourceList = SubscriberResource[];
-  export type SubscriberStatus = "ACTIVE"|"DEACTIVATED"|"PENDING"|"READY"|string;
+  export type SubscriberStatus = "ACTIVE"|"DEACTIVATED"|"PENDING"|"READY"|string&{};
   export type SubscriptionProtocol = string;
   export type SyntheticTimestamp_date_time = Date;
   export interface Tag {

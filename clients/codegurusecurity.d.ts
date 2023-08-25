@@ -139,7 +139,7 @@ declare namespace CodeGuruSecurity {
      */
     openFindings?: FindingMetricsValuePerSeverity;
   }
-  export type AnalysisType = "Security"|"All"|string;
+  export type AnalysisType = "Security"|"All"|string&{};
   export interface BatchGetFindingsError {
     /**
      * A code associated with the type of error.
@@ -274,7 +274,7 @@ declare namespace CodeGuruSecurity {
      */
     kmsKeyArn?: KmsKeyArn;
   }
-  export type ErrorCode = "DUPLICATE_IDENTIFIER"|"ITEM_DOES_NOT_EXIST"|"INTERNAL_ERROR"|"INVALID_FINDING_ID"|"INVALID_SCAN_NAME"|string;
+  export type ErrorCode = "DUPLICATE_IDENTIFIER"|"ITEM_DOES_NOT_EXIST"|"INTERNAL_ERROR"|"INVALID_FINDING_ID"|"INVALID_SCAN_NAME"|string&{};
   export interface FilePath {
     /**
      * A list of CodeLine objects that describe where the security vulnerability appears in your code.
@@ -633,7 +633,7 @@ declare namespace CodeGuruSecurity {
      */
     scanName?: String;
   }
-  export type ScanState = "InProgress"|"Successful"|"Failed"|string;
+  export type ScanState = "InProgress"|"Successful"|"Failed"|string&{};
   export type ScanSummaries = ScanSummary[];
   export interface ScanSummary {
     /**
@@ -661,11 +661,11 @@ declare namespace CodeGuruSecurity {
      */
     updatedAt?: Timestamp;
   }
-  export type ScanType = "Standard"|"Express"|string;
+  export type ScanType = "Standard"|"Express"|string&{};
   export type ScansWithMostOpenCriticalFindings = ScanNameWithFindingNum[];
   export type ScansWithMostOpenFindings = ScanNameWithFindingNum[];
-  export type Severity = "Critical"|"High"|"Medium"|"Low"|"Info"|string;
-  export type Status = "Closed"|"Open"|"All"|string;
+  export type Severity = "Critical"|"High"|"Medium"|"Low"|"Info"|string&{};
+  export type Status = "Closed"|"Open"|"All"|string&{};
   export type String = string;
   export interface SuggestedFix {
     /**

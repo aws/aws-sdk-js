@@ -271,7 +271,7 @@ declare namespace LookoutMetrics {
   }
   export interface ActivateAnomalyDetectorResponse {
   }
-  export type AggregationFunction = "AVG"|"SUM"|string;
+  export type AggregationFunction = "AVG"|"SUM"|string&{};
   export interface Alert {
     /**
      * Action that will be triggered when there is an alert.
@@ -330,7 +330,7 @@ declare namespace LookoutMetrics {
     DimensionFilterList?: DimensionFilterList;
   }
   export type AlertName = string;
-  export type AlertStatus = "ACTIVE"|"INACTIVE"|string;
+  export type AlertStatus = "ACTIVE"|"INACTIVE"|string&{};
   export interface AlertSummary {
     /**
      * The ARN of the alert.
@@ -370,8 +370,8 @@ declare namespace LookoutMetrics {
     Tags?: TagMap;
   }
   export type AlertSummaryList = AlertSummary[];
-  export type AlertType = "SNS"|"LAMBDA"|string;
-  export type AnomalyDetectionTaskStatus = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|string;
+  export type AlertType = "SNS"|"LAMBDA"|string&{};
+  export type AnomalyDetectionTaskStatus = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"FAILED_TO_SCHEDULE"|string&{};
   export type AnomalyDetectionTaskStatusMessage = string;
   export interface AnomalyDetectorConfig {
     /**
@@ -397,9 +397,9 @@ declare namespace LookoutMetrics {
   }
   export type AnomalyDetectorDataQualityMetricList = AnomalyDetectorDataQualityMetric[];
   export type AnomalyDetectorDescription = string;
-  export type AnomalyDetectorFailureType = "ACTIVATION_FAILURE"|"BACK_TEST_ACTIVATION_FAILURE"|"DELETION_FAILURE"|"DEACTIVATION_FAILURE"|string;
+  export type AnomalyDetectorFailureType = "ACTIVATION_FAILURE"|"BACK_TEST_ACTIVATION_FAILURE"|"DELETION_FAILURE"|"DEACTIVATION_FAILURE"|string&{};
   export type AnomalyDetectorName = string;
-  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|"DEACTIVATED"|"DEACTIVATING"|string;
+  export type AnomalyDetectorStatus = "ACTIVE"|"ACTIVATING"|"DELETING"|"FAILED"|"INACTIVE"|"LEARNING"|"BACK_TEST_ACTIVATING"|"BACK_TEST_ACTIVE"|"BACK_TEST_COMPLETE"|"DEACTIVATED"|"DEACTIVATING"|string&{};
   export interface AnomalyDetectorSummary {
     /**
      * The ARN of the detector.
@@ -623,7 +623,7 @@ declare namespace LookoutMetrics {
   export type BinaryAttributeValue = string;
   export type BinaryListAttributeValue = BinaryAttributeValue[];
   export type Boolean = boolean;
-  export type CSVFileCompression = "NONE"|"GZIP"|string;
+  export type CSVFileCompression = "NONE"|"GZIP"|string&{};
   export type Charset = string;
   export interface CloudWatchConfig {
     /**
@@ -636,7 +636,7 @@ declare namespace LookoutMetrics {
     BackTestConfiguration?: BackTestConfiguration;
   }
   export type ColumnName = string;
-  export type Confidence = "HIGH"|"LOW"|"NONE"|string;
+  export type Confidence = "HIGH"|"LOW"|"NONE"|string&{};
   export interface ContributionMatrix {
     /**
      * A list of contributing dimensions.
@@ -810,7 +810,7 @@ declare namespace LookoutMetrics {
   }
   export type DataQualityMetricDescription = string;
   export type DataQualityMetricList = DataQualityMetric[];
-  export type DataQualityMetricType = "COLUMN_COMPLETENESS"|"DIMENSION_UNIQUENESS"|"TIME_SERIES_COUNT"|"ROWS_PROCESSED"|"ROWS_PARTIAL_COMPLIANCE"|"INVALID_ROWS_COMPLIANCE"|"BACKTEST_TRAINING_DATA_START_TIME_STAMP"|"BACKTEST_TRAINING_DATA_END_TIME_STAMP"|"BACKTEST_INFERENCE_DATA_START_TIME_STAMP"|"BACKTEST_INFERENCE_DATA_END_TIME_STAMP"|string;
+  export type DataQualityMetricType = "COLUMN_COMPLETENESS"|"DIMENSION_UNIQUENESS"|"TIME_SERIES_COUNT"|"ROWS_PROCESSED"|"ROWS_PARTIAL_COMPLIANCE"|"INVALID_ROWS_COMPLIANCE"|"BACKTEST_TRAINING_DATA_START_TIME_STAMP"|"BACKTEST_TRAINING_DATA_END_TIME_STAMP"|"BACKTEST_INFERENCE_DATA_START_TIME_STAMP"|"BACKTEST_INFERENCE_DATA_END_TIME_STAMP"|string&{};
   export type DatabaseHost = string;
   export type DatabasePort = number;
   export type DateTimeFormat = string;
@@ -1178,9 +1178,9 @@ declare namespace LookoutMetrics {
     FilterOperation?: FilterOperation;
   }
   export type FilterList = Filter[];
-  export type FilterOperation = "EQUALS"|string;
+  export type FilterOperation = "EQUALS"|string&{};
   export type FlowName = string;
-  export type Frequency = "P1D"|"PT1H"|"PT10M"|"PT5M"|string;
+  export type Frequency = "P1D"|"PT1H"|"PT10M"|"PT5M"|string&{};
   export interface GetAnomalyGroupRequest {
     /**
      * The ID of the anomaly group.
@@ -1293,7 +1293,7 @@ declare namespace LookoutMetrics {
     OccurrenceCount?: Integer;
   }
   export type ItemizedMetricStatsList = ItemizedMetricStats[];
-  export type JsonFileCompression = "NONE"|"GZIP"|string;
+  export type JsonFileCompression = "NONE"|"GZIP"|string&{};
   export interface JsonFormatDescriptor {
     /**
      * The level of compression of the source CSV file.
@@ -1710,7 +1710,7 @@ declare namespace LookoutMetrics {
     VpcConfiguration?: VpcConfiguration;
   }
   export type RelatedColumnName = string;
-  export type RelationshipType = "CAUSE_OF_INPUT_ANOMALY_GROUP"|"EFFECT_OF_INPUT_ANOMALY_GROUP"|string;
+  export type RelationshipType = "CAUSE_OF_INPUT_ANOMALY_GROUP"|"EFFECT_OF_INPUT_ANOMALY_GROUP"|string&{};
   export interface S3SourceConfig {
     /**
      * The ARN of an IAM role that has read and write access permissions to the source S3 bucket.
@@ -1764,7 +1764,7 @@ declare namespace LookoutMetrics {
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
   export type SensitivityThreshold = number;
-  export type SnsFormat = "LONG_TEXT"|"SHORT_TEXT"|"JSON"|string;
+  export type SnsFormat = "LONG_TEXT"|"SHORT_TEXT"|"JSON"|string&{};
   export type StringAttributeValue = string;
   export type StringListAttributeValue = StringAttributeValue[];
   export type SubnetId = string;

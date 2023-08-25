@@ -1551,7 +1551,7 @@ declare namespace Pinpoint {
      */
     Version?: __integer;
   }
-  export type Action = "OPEN_APP"|"DEEP_LINK"|"URL"|string;
+  export type Action = "OPEN_APP"|"DEEP_LINK"|"URL"|string&{};
   export interface ActivitiesResponse {
     /**
      * An array of responses, one for each activity that was performed by the campaign.
@@ -1692,7 +1692,7 @@ declare namespace Pinpoint {
      */
     TitleOverride?: __string;
   }
-  export type Alignment = "LEFT"|"CENTER"|"RIGHT"|string;
+  export type Alignment = "LEFT"|"CENTER"|"RIGHT"|string&{};
   export interface AndroidPushNotificationTemplate {
     /**
      * The action to occur if a recipient taps a push notification that's based on the message template. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
@@ -1839,7 +1839,7 @@ declare namespace Pinpoint {
      */
     Values: ListOf__string;
   }
-  export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|"CONTAINS"|"BEFORE"|"AFTER"|"ON"|"BETWEEN"|string;
+  export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|"CONTAINS"|"BEFORE"|"AFTER"|"ON"|"BETWEEN"|string&{};
   export interface AttributesResource {
     /**
      * The unique identifier for the application.
@@ -1978,7 +1978,7 @@ declare namespace Pinpoint {
      */
     Rows: ListOfResultRow;
   }
-  export type ButtonAction = "LINK"|"DEEP_LINK"|"CLOSE"|string;
+  export type ButtonAction = "LINK"|"DEEP_LINK"|"CLOSE"|string&{};
   export interface CampaignCustomMessage {
     /**
      * The raw, JSON-formatted string to use as the payload for the message. The maximum size is 5 KB.
@@ -2231,7 +2231,7 @@ declare namespace Pinpoint {
      */
     CampaignStatus?: CampaignStatus;
   }
-  export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|"DELETED"|"INVALID"|string;
+  export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|"DELETED"|"INVALID"|string&{};
   export interface CampaignsResponse {
     /**
      * An array of responses, one for each campaign that's associated with the application.
@@ -2280,7 +2280,7 @@ declare namespace Pinpoint {
      */
     Version?: __integer;
   }
-  export type ChannelType = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string;
+  export type ChannelType = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string&{};
   export interface ChannelsResponse {
     /**
      * A map that contains a multipart response for each channel. For each item in this object, the ChannelType is the key and the Channel is the value.
@@ -2866,8 +2866,8 @@ declare namespace Pinpoint {
   export interface DeleteVoiceTemplateResponse {
     MessageBody: MessageBody;
   }
-  export type DeliveryStatus = "SUCCESSFUL"|"THROTTLED"|"TEMPORARY_FAILURE"|"PERMANENT_FAILURE"|"UNKNOWN_FAILURE"|"OPT_OUT"|"DUPLICATE"|string;
-  export type DimensionType = "INCLUSIVE"|"EXCLUSIVE"|string;
+  export type DeliveryStatus = "SUCCESSFUL"|"THROTTLED"|"TEMPORARY_FAILURE"|"PERMANENT_FAILURE"|"UNKNOWN_FAILURE"|"OPT_OUT"|"DUPLICATE"|string&{};
+  export type DimensionType = "INCLUSIVE"|"EXCLUSIVE"|string&{};
   export interface DirectMessageConfiguration {
     /**
      * The default push notification message for the ADM (Amazon Device Messaging) channel. This message overrides the default push notification message (DefaultPushNotificationMessage).
@@ -2906,7 +2906,7 @@ declare namespace Pinpoint {
      */
     VoiceMessage?: VoiceMessage;
   }
-  export type Duration = "HR_24"|"DAY_7"|"DAY_14"|"DAY_30"|string;
+  export type Duration = "HR_24"|"DAY_7"|"DAY_14"|"DAY_30"|string&{};
   export interface EmailChannelRequest {
     /**
      * The Amazon SES configuration set that you want to apply to messages that you send through the channel.
@@ -3661,9 +3661,9 @@ declare namespace Pinpoint {
      */
     NextToken?: __string;
   }
-  export type FilterType = "SYSTEM"|"ENDPOINT"|string;
-  export type Format = "CSV"|"JSON"|string;
-  export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|"IN_APP_EVENT"|string;
+  export type FilterType = "SYSTEM"|"ENDPOINT"|string&{};
+  export type Format = "CSV"|"JSON"|string&{};
+  export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|"IN_APP_EVENT"|string&{};
   export interface GCMChannelRequest {
     /**
      * The Web API Key, also referred to as an API_KEY or server key, that you received from Google to communicate with Google services.
@@ -4933,7 +4933,7 @@ declare namespace Pinpoint {
      */
     Version?: __string;
   }
-  export type Include = "ALL"|"ANY"|"NONE"|string;
+  export type Include = "ALL"|"ANY"|"NONE"|string&{};
   export interface ItemResponse {
     /**
      * The response that was received after the endpoint data was accepted.
@@ -4944,7 +4944,7 @@ declare namespace Pinpoint {
      */
     EventsItemResponse?: MapOfEventItemResponse;
   }
-  export type JobStatus = "CREATED"|"PREPARING_FOR_INITIALIZATION"|"INITIALIZING"|"PROCESSING"|"PENDING_JOB"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string;
+  export type JobStatus = "CREATED"|"PREPARING_FOR_INITIALIZATION"|"INITIALIZING"|"PROCESSING"|"PENDING_JOB"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string&{};
   export interface JourneyCustomMessage {
     /**
      * The message content that's passed to an AWS Lambda function or to a web hook.
@@ -5243,7 +5243,7 @@ declare namespace Pinpoint {
      */
     NextToken?: __string;
   }
-  export type JourneyRunStatus = "SCHEDULED"|"RUNNING"|"COMPLETED"|"CANCELLED"|string;
+  export type JourneyRunStatus = "SCHEDULED"|"RUNNING"|"COMPLETED"|"CANCELLED"|string&{};
   export interface JourneySMSMessage {
     /**
      * The SMS message type. Valid values are TRANSACTIONAL (for messages that are critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL (for messsages that aren't critical or time-sensitive, such as marketing messages).
@@ -5311,7 +5311,7 @@ declare namespace Pinpoint {
      */
     NextToken?: __string;
   }
-  export type Layout = "BOTTOM_BANNER"|"TOP_BANNER"|"OVERLAYS"|"MOBILE_FEED"|"MIDDLE_BANNER"|"CAROUSEL"|string;
+  export type Layout = "BOTTOM_BANNER"|"TOP_BANNER"|"OVERLAYS"|"MOBILE_FEED"|"MIDDLE_BANNER"|"CAROUSEL"|string&{};
   export interface ListJourneysRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -5554,7 +5554,7 @@ declare namespace Pinpoint {
      */
     UpdatedToken?: __string;
   }
-  export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string;
+  export type MessageType = "TRANSACTIONAL"|"PROMOTIONAL"|string&{};
   export interface MetricDimension {
     /**
      * The operator to use when comparing metric values. Valid values are: GREATER_THAN, LESS_THAN, GREATER_THAN_OR_EQUAL, LESS_THAN_OR_EQUAL, and EQUAL.
@@ -5565,7 +5565,7 @@ declare namespace Pinpoint {
      */
     Value: __double;
   }
-  export type Mode = "DELIVERY"|"FILTER"|string;
+  export type Mode = "DELIVERY"|"FILTER"|string&{};
   export interface MultiConditionalBranch {
     /**
      * The condition to evaluate for the activity path.
@@ -5659,7 +5659,7 @@ declare namespace Pinpoint {
      */
     ZipCode?: __string;
   }
-  export type Operator = "ALL"|"ANY"|string;
+  export type Operator = "ALL"|"ANY"|string&{};
   export interface OverrideButtonConfiguration {
     /**
      * Action triggered by the button.
@@ -5903,7 +5903,7 @@ declare namespace Pinpoint {
      */
     RecencyType: RecencyType;
   }
-  export type RecencyType = "ACTIVE"|"INACTIVE"|string;
+  export type RecencyType = "ACTIVE"|"INACTIVE"|string&{};
   export interface RecommenderConfigurationResponse {
     /**
      * A map that defines 1-10 custom endpoint or user attributes, depending on the value for the RecommendationProviderIdType property. Each of these attributes temporarily stores a recommended item that's retrieved from the recommender model and sent to an AWS Lambda function for additional processing. Each attribute can be used as a message variable in a message template. This value is null if the configuration doesn't invoke an AWS Lambda function (RecommendationTransformerUri) to perform additional processing of recommendation data.
@@ -6409,7 +6409,7 @@ declare namespace Pinpoint {
      */
     Version?: __integer;
   }
-  export type SegmentType = "DIMENSIONAL"|"IMPORT"|string;
+  export type SegmentType = "DIMENSIONAL"|"IMPORT"|string&{};
   export interface SegmentsResponse {
     /**
      * An array of responses, one for each segment that's associated with the application (Segments resource) or each version of a segment that's associated with the application (Segment Versions resource).
@@ -6598,7 +6598,7 @@ declare namespace Pinpoint {
      */
     Data?: __string;
   }
-  export type SourceType = "ALL"|"ANY"|"NONE"|string;
+  export type SourceType = "ALL"|"ANY"|"NONE"|string&{};
   export interface StartCondition {
     /**
      * The custom description of the condition.
@@ -6610,7 +6610,7 @@ declare namespace Pinpoint {
      */
     SegmentStartCondition?: SegmentCondition;
   }
-  export type State = "DRAFT"|"ACTIVE"|"COMPLETED"|"CANCELLED"|"CLOSED"|"PAUSED"|string;
+  export type State = "DRAFT"|"ACTIVE"|"COMPLETED"|"CANCELLED"|"CLOSED"|"PAUSED"|string&{};
   export interface TagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -6714,7 +6714,7 @@ declare namespace Pinpoint {
      */
     Version?: __string;
   }
-  export type TemplateType = "EMAIL"|"SMS"|"VOICE"|"PUSH"|"INAPP"|string;
+  export type TemplateType = "EMAIL"|"SMS"|"VOICE"|"PUSH"|"INAPP"|string&{};
   export interface TemplateVersionResponse {
     /**
      * The date, in ISO 8601 format, when the version of the message template was created.
@@ -6811,7 +6811,7 @@ declare namespace Pinpoint {
      */
     TreatmentName?: __string;
   }
-  export type Type = "ALL"|"ANY"|"NONE"|string;
+  export type Type = "ALL"|"ANY"|"NONE"|string&{};
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -7597,8 +7597,8 @@ declare namespace Pinpoint {
      */
     TreatmentName?: __string;
   }
-  export type __EndpointTypesElement = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string;
-  export type __TimezoneEstimationMethodsElement = "PHONE_NUMBER"|"POSTAL_CODE"|string;
+  export type __EndpointTypesElement = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string&{};
+  export type __TimezoneEstimationMethodsElement = "PHONE_NUMBER"|"POSTAL_CODE"|string&{};
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
@@ -7649,7 +7649,7 @@ declare namespace Pinpoint {
   export type MapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __timestampIso8601 = Date;
-  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
+  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string&{};
   export interface OpenHoursRule {
     /**
      * The start of the scheduled time, in ISO 8601 format, when the channel can send messages.

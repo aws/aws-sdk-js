@@ -292,8 +292,8 @@ declare namespace M2 {
     offset: Integer;
   }
   export type AlternateKeyList = AlternateKey[];
-  export type ApplicationDeploymentLifecycle = "Deploying"|"Deployed"|string;
-  export type ApplicationLifecycle = "Creating"|"Created"|"Available"|"Ready"|"Starting"|"Running"|"Stopping"|"Stopped"|"Failed"|"Deleting"|"Deleting From Environment"|string;
+  export type ApplicationDeploymentLifecycle = "Deploying"|"Deployed"|string&{};
+  export type ApplicationLifecycle = "Creating"|"Created"|"Available"|"Ready"|"Starting"|"Running"|"Stopping"|"Stopped"|"Failed"|"Deleting"|"Deleting From Environment"|string&{};
   export interface ApplicationSummary {
     /**
      * The Amazon Resource Name (ARN) of the application.
@@ -349,7 +349,7 @@ declare namespace M2 {
     versionStatus?: ApplicationVersionLifecycle;
   }
   export type ApplicationSummaryList = ApplicationSummary[];
-  export type ApplicationVersionLifecycle = "Creating"|"Available"|"Failed"|string;
+  export type ApplicationVersionLifecycle = "Creating"|"Available"|"Failed"|string&{};
   export interface ApplicationVersionSummary {
     /**
      * The application version.
@@ -382,7 +382,7 @@ declare namespace M2 {
     scriptBatchJobDefinition?: ScriptBatchJobDefinition;
   }
   export type BatchJobDefinitions = BatchJobDefinition[];
-  export type BatchJobExecutionStatus = "Submitting"|"Holding"|"Dispatching"|"Running"|"Cancelling"|"Cancelled"|"Succeeded"|"Failed"|"Succeeded With Warning"|string;
+  export type BatchJobExecutionStatus = "Submitting"|"Holding"|"Dispatching"|"Running"|"Cancelling"|"Cancelled"|"Succeeded"|"Failed"|"Succeeded With Warning"|string&{};
   export interface BatchJobExecutionSummary {
     /**
      * The unique identifier of the application that hosts this batch job.
@@ -437,7 +437,7 @@ declare namespace M2 {
     scriptBatchJobIdentifier?: ScriptBatchJobIdentifier;
   }
   export type BatchJobParametersMap = {[key: string]: BatchParamValue};
-  export type BatchJobType = "VSE"|"JES2"|"JES3"|string;
+  export type BatchJobType = "VSE"|"JES2"|"JES3"|string&{};
   export type BatchParamKey = string;
   export type BatchParamValue = string;
   export type Boolean = boolean;
@@ -716,7 +716,7 @@ declare namespace M2 {
      */
     lastUpdatedTime?: Timestamp;
   }
-  export type DataSetTaskLifecycle = "Creating"|"Running"|"Completed"|string;
+  export type DataSetTaskLifecycle = "Creating"|"Running"|"Completed"|string&{};
   export type DataSetsSummaryList = DataSetSummary[];
   export interface DatasetDetailOrgAttributes {
     /**
@@ -806,7 +806,7 @@ declare namespace M2 {
      */
     statusReason?: String;
   }
-  export type DeploymentLifecycle = "Deploying"|"Succeeded"|"Failed"|string;
+  export type DeploymentLifecycle = "Deploying"|"Succeeded"|"Failed"|string&{};
   export type DeploymentList = DeploymentSummary[];
   export interface DeploymentSummary {
     /**
@@ -848,7 +848,7 @@ declare namespace M2 {
      */
     mountPoint: String200;
   }
-  export type EngineType = "microfocus"|"bluage"|string;
+  export type EngineType = "microfocus"|"bluage"|string&{};
   export type EngineVersion = string;
   export interface EngineVersionsSummary {
     /**
@@ -864,7 +864,7 @@ declare namespace M2 {
   export type EntityDescription = string;
   export type EntityName = string;
   export type EntityNameList = EntityName[];
-  export type EnvironmentLifecycle = "Creating"|"Available"|"Updating"|"Deleting"|"Failed"|string;
+  export type EnvironmentLifecycle = "Creating"|"Available"|"Updating"|"Deleting"|"Failed"|string&{};
   export interface EnvironmentSummary {
     /**
      * The timestamp when the runtime environment was created.

@@ -659,7 +659,7 @@ declare namespace Athena {
     CodeBlock?: CodeBlock;
   }
   export type CalculationExecutionId = string;
-  export type CalculationExecutionState = "CREATING"|"CREATED"|"QUEUED"|"RUNNING"|"CANCELING"|"CANCELED"|"COMPLETED"|"FAILED"|string;
+  export type CalculationExecutionState = "CREATING"|"CREATED"|"QUEUED"|"RUNNING"|"CANCELING"|"CANCELED"|"COMPLETED"|"FAILED"|string&{};
   export interface CalculationResult {
     /**
      * The Amazon S3 location of the stdout file for the calculation.
@@ -748,7 +748,7 @@ declare namespace Athena {
      */
     RequestCompletionTime?: Timestamp;
   }
-  export type CapacityAllocationStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string;
+  export type CapacityAllocationStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string&{};
   export interface CapacityAssignment {
     /**
      * The list of workgroup names for the capacity assignment.
@@ -794,7 +794,7 @@ declare namespace Athena {
     CreationTime: Timestamp;
   }
   export type CapacityReservationName = string;
-  export type CapacityReservationStatus = "PENDING"|"ACTIVE"|"CANCELLING"|"CANCELLED"|"FAILED"|"UPDATE_PENDING"|string;
+  export type CapacityReservationStatus = "PENDING"|"ACTIVE"|"CANCELLING"|"CANCELLED"|"FAILED"|"UPDATE_PENDING"|string&{};
   export type CapacityReservationsList = CapacityReservation[];
   export type CatalogNameString = string;
   export type ClientRequestToken = string;
@@ -857,7 +857,7 @@ declare namespace Athena {
   }
   export type ColumnInfoList = ColumnInfo[];
   export type ColumnList = Column[];
-  export type ColumnNullable = "NOT_NULL"|"NULLABLE"|"UNKNOWN"|string;
+  export type ColumnNullable = "NOT_NULL"|"NULLABLE"|"UNKNOWN"|string&{};
   export type CommentString = string;
   export type CoordinatorDpuSize = number;
   export interface CreateCapacityReservationInput {
@@ -1047,7 +1047,7 @@ declare namespace Athena {
     Type?: DataCatalogType;
   }
   export type DataCatalogSummaryList = DataCatalogSummary[];
-  export type DataCatalogType = "LAMBDA"|"GLUE"|"HIVE"|string;
+  export type DataCatalogType = "LAMBDA"|"GLUE"|"HIVE"|string&{};
   export interface Database {
     /**
      * The name of the database.
@@ -1139,7 +1139,7 @@ declare namespace Athena {
      */
     KmsKey?: String;
   }
-  export type EncryptionOption = "SSE_S3"|"SSE_KMS"|"CSE_KMS"|string;
+  export type EncryptionOption = "SSE_S3"|"SSE_KMS"|"CSE_KMS"|string&{};
   export interface EngineConfiguration {
     /**
      * The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.
@@ -1180,8 +1180,8 @@ declare namespace Athena {
   export type ExecutionParameter = string;
   export type ExecutionParameters = ExecutionParameter[];
   export type ExecutorId = string;
-  export type ExecutorState = "CREATING"|"CREATED"|"REGISTERED"|"TERMINATING"|"TERMINATED"|"FAILED"|string;
-  export type ExecutorType = "COORDINATOR"|"GATEWAY"|"WORKER"|string;
+  export type ExecutorState = "CREATING"|"CREATED"|"REGISTERED"|"TERMINATING"|"TERMINATED"|"FAILED"|string&{};
+  export type ExecutorType = "COORDINATOR"|"GATEWAY"|"WORKER"|string&{};
   export interface ExecutorsSummary {
     /**
      * The UUID of the executor.
@@ -2045,7 +2045,7 @@ declare namespace Athena {
     CreationTime?: _Date;
   }
   export type NotebookSessionsList = NotebookSessionSummary[];
-  export type NotebookType = "IPYNB"|string;
+  export type NotebookType = "IPYNB"|string&{};
   export type ParametersMap = {[key: string]: ParametersMapValue};
   export type ParametersMapValue = string;
   export type Payload = string;
@@ -2159,7 +2159,7 @@ declare namespace Athena {
   export type QueryExecutionId = string;
   export type QueryExecutionIdList = QueryExecutionId[];
   export type QueryExecutionList = QueryExecution[];
-  export type QueryExecutionState = "QUEUED"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELLED"|string;
+  export type QueryExecutionState = "QUEUED"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELLED"|string&{};
   export interface QueryExecutionStatistics {
     /**
      * The number of milliseconds that the query took to execute.
@@ -2422,7 +2422,7 @@ declare namespace Athena {
     Data?: datumList;
   }
   export type RowList = Row[];
-  export type S3AclOption = "BUCKET_OWNER_FULL_CONTROL"|string;
+  export type S3AclOption = "BUCKET_OWNER_FULL_CONTROL"|string&{};
   export type S3Uri = string;
   export interface SessionConfiguration {
     /**
@@ -2442,7 +2442,7 @@ declare namespace Athena {
   export type SessionId = string;
   export type SessionIdleTimeoutInMinutes = number;
   export type SessionManagerToken = string;
-  export type SessionState = "CREATING"|"CREATED"|"IDLE"|"BUSY"|"TERMINATING"|"TERMINATED"|"DEGRADED"|"FAILED"|string;
+  export type SessionState = "CREATING"|"CREATED"|"IDLE"|"BUSY"|"TERMINATING"|"TERMINATED"|"DEGRADED"|"FAILED"|string&{};
   export interface SessionStatistics {
     /**
      * The data processing unit execution time for a session in milliseconds.
@@ -2603,7 +2603,7 @@ declare namespace Athena {
     State?: SessionState;
   }
   export type StatementName = string;
-  export type StatementType = "DDL"|"DML"|"UTILITY"|string;
+  export type StatementType = "DDL"|"DML"|"UTILITY"|string&{};
   export interface StopCalculationExecutionRequest {
     /**
      * The calculation execution UUID.
@@ -3004,7 +3004,7 @@ declare namespace Athena {
   export type WorkGroupDescriptionString = string;
   export type WorkGroupName = string;
   export type WorkGroupNamesList = WorkGroupName[];
-  export type WorkGroupState = "ENABLED"|"DISABLED"|string;
+  export type WorkGroupState = "ENABLED"|"DISABLED"|string&{};
   export interface WorkGroupSummary {
     /**
      * The name of the workgroup.

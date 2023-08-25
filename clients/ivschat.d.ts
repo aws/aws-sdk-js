@@ -153,7 +153,7 @@ declare namespace Ivschat {
   export type ChatToken = string;
   export type ChatTokenAttributes = {[key: string]: String};
   export type ChatTokenCapabilities = ChatTokenCapability[];
-  export type ChatTokenCapability = "SEND_MESSAGE"|"DISCONNECT_USER"|"DELETE_MESSAGE"|string;
+  export type ChatTokenCapability = "SEND_MESSAGE"|"DISCONNECT_USER"|"DELETE_MESSAGE"|string&{};
   export interface CloudWatchLogsDestinationConfiguration {
     /**
      * Name of the Amazon Cloudwatch Logs destination where chat activity will be logged.
@@ -244,7 +244,7 @@ declare namespace Ivschat {
      */
     updateTime?: Time;
   }
-  export type CreateLoggingConfigurationState = "ACTIVE"|string;
+  export type CreateLoggingConfigurationState = "ACTIVE"|string&{};
   export interface CreateRoomRequest {
     /**
      * Array of logging-configuration identifiers attached to the room.
@@ -378,7 +378,7 @@ declare namespace Ivschat {
   }
   export type EventAttributes = {[key: string]: String};
   export type EventName = string;
-  export type FallbackResult = "ALLOW"|"DENY"|string;
+  export type FallbackResult = "ALLOW"|"DENY"|string&{};
   export interface FirehoseDestinationConfiguration {
     /**
      * Name of the Amazon Kinesis Firehose delivery stream where chat activity will be logged.
@@ -546,7 +546,7 @@ declare namespace Ivschat {
   export type LoggingConfigurationIdentifierList = LoggingConfigurationIdentifier[];
   export type LoggingConfigurationList = LoggingConfigurationSummary[];
   export type LoggingConfigurationName = string;
-  export type LoggingConfigurationState = "CREATING"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED"|"UPDATING"|"UPDATE_FAILED"|"ACTIVE"|string;
+  export type LoggingConfigurationState = "CREATING"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED"|"UPDATING"|"UPDATE_FAILED"|"ACTIVE"|string&{};
   export interface LoggingConfigurationSummary {
     /**
      * Logging-configuration ARN.
@@ -743,7 +743,7 @@ declare namespace Ivschat {
      */
     updateTime?: Time;
   }
-  export type UpdateLoggingConfigurationState = "ACTIVE"|string;
+  export type UpdateLoggingConfigurationState = "ACTIVE"|string&{};
   export interface UpdateRoomRequest {
     /**
      * Identifier of the room to be updated. Currently this must be an ARN.

@@ -734,7 +734,7 @@ declare namespace CloudTrail {
   export interface DeleteTrailResponse {
   }
   export type DeliveryS3Uri = string;
-  export type DeliveryStatus = "SUCCESS"|"FAILED"|"FAILED_SIGNING_FILE"|"PENDING"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"ACCESS_DENIED_SIGNING_FILE"|"CANCELLED"|"UNKNOWN"|string;
+  export type DeliveryStatus = "SUCCESS"|"FAILED"|"FAILED_SIGNING_FILE"|"PENDING"|"RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"ACCESS_DENIED_SIGNING_FILE"|"CANCELLED"|"UNKNOWN"|string&{};
   export interface DeregisterOrganizationDelegatedAdminRequest {
     /**
      * A delegated administrator account ID. This is a member account in an organization that is currently designated as a delegated administrator.
@@ -813,7 +813,7 @@ declare namespace CloudTrail {
      */
     Location: Location;
   }
-  export type DestinationType = "EVENT_DATA_STORE"|"AWS_SERVICE"|string;
+  export type DestinationType = "EVENT_DATA_STORE"|"AWS_SERVICE"|string&{};
   export type Destinations = Destination[];
   export type ErrorMessage = string;
   export interface Event {
@@ -854,7 +854,7 @@ declare namespace CloudTrail {
      */
     CloudTrailEvent?: String;
   }
-  export type EventCategory = "insight"|string;
+  export type EventCategory = "insight"|string&{};
   export interface EventDataStore {
     /**
      * The ARN of the event data store.
@@ -900,7 +900,7 @@ declare namespace CloudTrail {
   export type EventDataStoreArn = string;
   export type EventDataStoreKmsKeyId = string;
   export type EventDataStoreName = string;
-  export type EventDataStoreStatus = "CREATED"|"ENABLED"|"PENDING_DELETION"|"STARTING_INGESTION"|"STOPPING_INGESTION"|"STOPPED_INGESTION"|string;
+  export type EventDataStoreStatus = "CREATED"|"ENABLED"|"PENDING_DELETION"|"STARTING_INGESTION"|"STOPPING_INGESTION"|"STOPPED_INGESTION"|string&{};
   export type EventDataStores = EventDataStore[];
   export interface EventSelector {
     /**
@@ -1252,7 +1252,7 @@ declare namespace CloudTrail {
      */
     LastUpdatedTime?: _Date;
   }
-  export type ImportFailureStatus = "FAILED"|"RETRY"|"SUCCEEDED"|string;
+  export type ImportFailureStatus = "FAILED"|"RETRY"|"SUCCEEDED"|string&{};
   export interface ImportSource {
     /**
      *  The source S3 bucket. 
@@ -1281,7 +1281,7 @@ declare namespace CloudTrail {
      */
     FailedEntries?: Long;
   }
-  export type ImportStatus = "INITIALIZING"|"IN_PROGRESS"|"FAILED"|"STOPPED"|"COMPLETED"|string;
+  export type ImportStatus = "INITIALIZING"|"IN_PROGRESS"|"FAILED"|"STOPPED"|"COMPLETED"|string&{};
   export type ImportsList = ImportsListItem[];
   export interface ImportsListItem {
     /**
@@ -1334,7 +1334,7 @@ declare namespace CloudTrail {
     InsightType?: InsightType;
   }
   export type InsightSelectors = InsightSelector[];
-  export type InsightType = "ApiCallRateInsight"|"ApiErrorRateInsight"|string;
+  export type InsightType = "ApiCallRateInsight"|"ApiErrorRateInsight"|string&{};
   export type Integer = number;
   export type ListChannelsMaxResultsCount = number;
   export interface ListChannelsRequest {
@@ -1541,7 +1541,7 @@ declare namespace CloudTrail {
      */
     AttributeValue: LookupAttributeValue;
   }
-  export type LookupAttributeKey = "EventId"|"EventName"|"ReadOnly"|"Username"|"ResourceType"|"ResourceName"|"EventSource"|"AccessKeyId"|string;
+  export type LookupAttributeKey = "EventId"|"EventName"|"ReadOnly"|"Username"|"ResourceType"|"ResourceName"|"EventSource"|"AccessKeyId"|string&{};
   export type LookupAttributeValue = string;
   export type LookupAttributesList = LookupAttribute[];
   export interface LookupEventsRequest {
@@ -1733,8 +1733,8 @@ declare namespace CloudTrail {
      */
     CreationTime?: _Date;
   }
-  export type QueryStatus = "QUEUED"|"RUNNING"|"FINISHED"|"FAILED"|"CANCELLED"|"TIMED_OUT"|string;
-  export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string;
+  export type QueryStatus = "QUEUED"|"RUNNING"|"FINISHED"|"FAILED"|"CANCELLED"|"TIMED_OUT"|string&{};
+  export type ReadWriteType = "ReadOnly"|"WriteOnly"|"All"|string&{};
   export interface RegisterOrganizationDelegatedAdminRequest {
     /**
      * An organization member account ID that you want to designate as a delegated administrator.

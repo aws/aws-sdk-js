@@ -211,7 +211,7 @@ declare namespace EMRServerless {
   export type ApplicationId = string;
   export type ApplicationList = ApplicationSummary[];
   export type ApplicationName = string;
-  export type ApplicationState = "CREATING"|"CREATED"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"TERMINATED"|string;
+  export type ApplicationState = "CREATING"|"CREATED"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"TERMINATED"|string&{};
   export type ApplicationStateSet = ApplicationState[];
   export interface ApplicationSummary {
     /**
@@ -255,7 +255,7 @@ declare namespace EMRServerless {
      */
     architecture?: Architecture;
   }
-  export type Architecture = "ARM64"|"X86_64"|string;
+  export type Architecture = "ARM64"|"X86_64"|string&{};
   export interface AutoStartConfig {
     /**
      * Enables the application to automatically start on job submission. Defaults to true.
@@ -606,7 +606,7 @@ declare namespace EMRServerless {
     billedResourceUtilization?: ResourceUtilization;
   }
   export type JobRunId = string;
-  export type JobRunState = "SUBMITTED"|"PENDING"|"SCHEDULED"|"RUNNING"|"SUCCESS"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
+  export type JobRunState = "SUBMITTED"|"PENDING"|"SCHEDULED"|"RUNNING"|"SUCCESS"|"FAILED"|"CANCELLING"|"CANCELLED"|string&{};
   export type JobRunStateSet = JobRunState[];
   export interface JobRunSummary {
     /**

@@ -330,7 +330,7 @@ declare namespace IoTEvents {
     alarmModelName?: AlarmModelName;
   }
   export type AlarmModelVersion = string;
-  export type AlarmModelVersionStatus = "ACTIVE"|"ACTIVATING"|"INACTIVE"|"FAILED"|string;
+  export type AlarmModelVersionStatus = "ACTIVE"|"ACTIVATING"|"INACTIVE"|"FAILED"|string&{};
   export type AlarmModelVersionSummaries = AlarmModelVersionSummary[];
   export interface AlarmModelVersionSummary {
     /**
@@ -399,7 +399,7 @@ declare namespace IoTEvents {
      */
     locations?: AnalysisResultLocations;
   }
-  export type AnalysisResultLevel = "INFO"|"WARNING"|"ERROR"|string;
+  export type AnalysisResultLevel = "INFO"|"WARNING"|"ERROR"|string&{};
   export interface AnalysisResultLocation {
     /**
      * A JsonPath expression that identifies the error field in your detector model.
@@ -409,7 +409,7 @@ declare namespace IoTEvents {
   export type AnalysisResultLocationPath = string;
   export type AnalysisResultLocations = AnalysisResultLocation[];
   export type AnalysisResults = AnalysisResult[];
-  export type AnalysisStatus = "RUNNING"|"COMPLETE"|"FAILED"|string;
+  export type AnalysisStatus = "RUNNING"|"COMPLETE"|"FAILED"|string&{};
   export type AnalysisType = string;
   export type AssetId = string;
   export type AssetModelId = string;
@@ -479,7 +479,7 @@ declare namespace IoTEvents {
      */
     timerName: TimerName;
   }
-  export type ComparisonOperator = "GREATER"|"GREATER_OR_EQUAL"|"LESS"|"LESS_OR_EQUAL"|"EQUAL"|"NOT_EQUAL"|string;
+  export type ComparisonOperator = "GREATER"|"GREATER_OR_EQUAL"|"LESS"|"LESS_OR_EQUAL"|"EQUAL"|"NOT_EQUAL"|string&{};
   export type Condition = string;
   export type ContentExpression = string;
   export interface CreateAlarmModelRequest {
@@ -843,7 +843,7 @@ declare namespace IoTEvents {
     creationTime?: Timestamp;
   }
   export type DetectorModelVersion = string;
-  export type DetectorModelVersionStatus = "ACTIVE"|"ACTIVATING"|"INACTIVE"|"DEPRECATED"|"DRAFT"|"PAUSED"|"FAILED"|string;
+  export type DetectorModelVersionStatus = "ACTIVE"|"ACTIVATING"|"INACTIVE"|"DEPRECATED"|"DRAFT"|"PAUSED"|"FAILED"|string&{};
   export type DetectorModelVersionSummaries = DetectorModelVersionSummary[];
   export interface DetectorModelVersionSummary {
     /**
@@ -963,7 +963,7 @@ declare namespace IoTEvents {
     to?: RecipientDetails;
   }
   export type EmailSubject = string;
-  export type EvaluationMethod = "BATCH"|"SERIAL"|string;
+  export type EvaluationMethod = "BATCH"|"SERIAL"|string&{};
   export interface Event {
     /**
      * The name of the event.
@@ -1083,7 +1083,7 @@ declare namespace IoTEvents {
   }
   export type InputName = string;
   export type InputProperty = string;
-  export type InputStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|string;
+  export type InputStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|string&{};
   export type InputSummaries = InputSummary[];
   export interface InputSummary {
     /**
@@ -1331,7 +1331,7 @@ declare namespace IoTEvents {
     tags?: Tags;
   }
   export type LoggingEnabled = boolean;
-  export type LoggingLevel = "ERROR"|"INFO"|"DEBUG"|string;
+  export type LoggingLevel = "ERROR"|"INFO"|"DEBUG"|string&{};
   export interface LoggingOptions {
     /**
      * The ARN of the role that grants permission to AWS IoT Events to perform logging.
@@ -1405,7 +1405,7 @@ declare namespace IoTEvents {
      */
     type: PayloadType;
   }
-  export type PayloadType = "STRING"|"JSON"|string;
+  export type PayloadType = "STRING"|"JSON"|string&{};
   export interface PutLoggingOptionsRequest {
     /**
      * The new values of the AWS IoT Events logging options.

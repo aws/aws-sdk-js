@@ -166,9 +166,9 @@ declare class SageMakerGeospatial extends Service {
   untagResource(callback?: (err: AWSError, data: SageMakerGeospatial.Types.UntagResourceResponse) => void): Request<SageMakerGeospatial.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace SageMakerGeospatial {
-  export type AlgorithmNameCloudRemoval = "INTERPOLATION"|string;
-  export type AlgorithmNameGeoMosaic = "NEAR"|"BILINEAR"|"CUBIC"|"CUBICSPLINE"|"LANCZOS"|"AVERAGE"|"RMS"|"MODE"|"MAX"|"MIN"|"MED"|"Q1"|"Q3"|"SUM"|string;
-  export type AlgorithmNameResampling = "NEAR"|"BILINEAR"|"CUBIC"|"CUBICSPLINE"|"LANCZOS"|"AVERAGE"|"RMS"|"MODE"|"MAX"|"MIN"|"MED"|"Q1"|"Q3"|"SUM"|string;
+  export type AlgorithmNameCloudRemoval = "INTERPOLATION"|string&{};
+  export type AlgorithmNameGeoMosaic = "NEAR"|"BILINEAR"|"CUBIC"|"CUBICSPLINE"|"LANCZOS"|"AVERAGE"|"RMS"|"MODE"|"MAX"|"MIN"|"MED"|"Q1"|"Q3"|"SUM"|string&{};
+  export type AlgorithmNameResampling = "NEAR"|"BILINEAR"|"CUBIC"|"CUBICSPLINE"|"LANCZOS"|"AVERAGE"|"RMS"|"MODE"|"MAX"|"MIN"|"MED"|"Q1"|"Q3"|"SUM"|string&{};
   export interface AreaOfInterest {
     /**
      * A GeoJSON object representing the geographic extent in the coordinate space.
@@ -221,7 +221,7 @@ declare namespace SageMakerGeospatial {
      */
     TargetBands?: StringListInput;
   }
-  export type ComparisonOperator = "EQUALS"|"NOT_EQUALS"|"STARTS_WITH"|string;
+  export type ComparisonOperator = "EQUALS"|"NOT_EQUALS"|"STARTS_WITH"|string&{};
   export interface CustomIndicesInput {
     /**
      * A list of BandMath indices to compute.
@@ -229,7 +229,7 @@ declare namespace SageMakerGeospatial {
     Operations?: OperationsListInput;
   }
   export type DataCollectionArn = string;
-  export type DataCollectionType = "PUBLIC"|"PREMIUM"|"USER"|string;
+  export type DataCollectionType = "PUBLIC"|"PREMIUM"|"USER"|string&{};
   export type DataCollectionsList = RasterDataCollectionMetadata[];
   export interface DeleteEarthObservationJobInput {
     /**
@@ -259,11 +259,11 @@ declare namespace SageMakerGeospatial {
      */
     Type?: EarthObservationJobErrorType;
   }
-  export type EarthObservationJobErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string;
-  export type EarthObservationJobExportStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type EarthObservationJobErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string&{};
+  export type EarthObservationJobExportStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string&{};
   export type EarthObservationJobList = ListEarthObservationJobOutputConfig[];
   export type EarthObservationJobOutputBands = OutputBand[];
-  export type EarthObservationJobStatus = "INITIALIZING"|"IN_PROGRESS"|"STOPPING"|"COMPLETED"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|string;
+  export type EarthObservationJobStatus = "INITIALIZING"|"IN_PROGRESS"|"STOPPING"|"COMPLETED"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|string&{};
   export interface EoCloudCoverInput {
     /**
      * Lower bound for EoCloudCover.
@@ -344,7 +344,7 @@ declare namespace SageMakerGeospatial {
      */
     Type?: ExportErrorType;
   }
-  export type ExportErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string;
+  export type ExportErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string&{};
   export interface ExportS3DataInput {
     /**
      * The Key Management Service key ID for server-side encryption.
@@ -666,7 +666,7 @@ declare namespace SageMakerGeospatial {
      */
     Type: VectorEnrichmentJobType;
   }
-  export type GroupBy = "ALL"|"YEARLY"|string;
+  export type GroupBy = "ALL"|"YEARLY"|string&{};
   export type ImageSourceBandList = String[];
   export interface InputConfigInput {
     /**
@@ -925,7 +925,7 @@ declare namespace SageMakerGeospatial {
      */
     Type: VectorEnrichmentJobType;
   }
-  export type LogicalOperator = "AND"|string;
+  export type LogicalOperator = "AND"|string&{};
   export interface MapMatchingConfig {
     /**
      * The field name for the data that describes the identifier representing a collection of GPS points belonging to an individual trace.
@@ -998,7 +998,7 @@ declare namespace SageMakerGeospatial {
      */
     UserDefined?: UserDefined;
   }
-  export type OutputType = "INT32"|"FLOAT32"|"INT16"|"FLOAT64"|"UINT16"|string;
+  export type OutputType = "INT32"|"FLOAT32"|"INT16"|"FLOAT64"|"UINT16"|string&{};
   export interface PlatformInput {
     /**
      * The ComparisonOperator to use with PlatformInput.
@@ -1016,7 +1016,7 @@ declare namespace SageMakerGeospatial {
     Coordinates: LinearRings;
   }
   export type Position = Double[];
-  export type PredefinedResolution = "HIGHEST"|"LOWEST"|"AVERAGE"|string;
+  export type PredefinedResolution = "HIGHEST"|"LOWEST"|"AVERAGE"|string&{};
   export interface Properties {
     /**
      * Estimate of cloud cover.
@@ -1227,7 +1227,7 @@ declare namespace SageMakerGeospatial {
      */
     NextToken?: NextToken;
   }
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export interface StackConfigInput {
     /**
      * The structure representing output resolution (in target georeferenced units) of the result of stacking operation.
@@ -1423,8 +1423,8 @@ declare namespace SageMakerGeospatial {
   export interface TagResourceResponse {
   }
   export type Tags = {[key: string]: String};
-  export type TargetOptions = "INPUT"|"OUTPUT"|string;
-  export type TemporalStatistics = "MEAN"|"MEDIAN"|"STANDARD_DEVIATION"|string;
+  export type TargetOptions = "INPUT"|"OUTPUT"|string&{};
+  export type TemporalStatistics = "MEAN"|"MEDIAN"|"STANDARD_DEVIATION"|string&{};
   export interface TemporalStatisticsConfigInput {
     /**
      * The input for the temporal statistics grouping by time frequency option.
@@ -1461,7 +1461,7 @@ declare namespace SageMakerGeospatial {
     StartTime: SyntheticTimestamp_date_time;
   }
   export type Timestamp = Date;
-  export type Unit = "METERS"|string;
+  export type Unit = "METERS"|string&{};
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource you want to untag.
@@ -1501,7 +1501,7 @@ declare namespace SageMakerGeospatial {
      */
     S3Data?: VectorEnrichmentJobS3Data;
   }
-  export type VectorEnrichmentJobDocumentType = "CSV"|string;
+  export type VectorEnrichmentJobDocumentType = "CSV"|string&{};
   export interface VectorEnrichmentJobErrorDetails {
     /**
      * A message that you define and then is processed and rendered by the Vector Enrichment job when the error occurs.
@@ -1512,7 +1512,7 @@ declare namespace SageMakerGeospatial {
      */
     ErrorType?: VectorEnrichmentJobErrorType;
   }
-  export type VectorEnrichmentJobErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string;
+  export type VectorEnrichmentJobErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string&{};
   export interface VectorEnrichmentJobExportErrorDetails {
     /**
      * The message providing details about the errors generated during the Vector Enrichment job.
@@ -1523,8 +1523,8 @@ declare namespace SageMakerGeospatial {
      */
     Type?: VectorEnrichmentJobExportErrorType;
   }
-  export type VectorEnrichmentJobExportErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string;
-  export type VectorEnrichmentJobExportStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type VectorEnrichmentJobExportErrorType = "CLIENT_ERROR"|"SERVER_ERROR"|string&{};
+  export type VectorEnrichmentJobExportStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string&{};
   export interface VectorEnrichmentJobInputConfig {
     /**
      * The input structure for the data source that represents the storage type of the input data objects.
@@ -1546,8 +1546,8 @@ declare namespace SageMakerGeospatial {
      */
     S3Uri: S3Uri;
   }
-  export type VectorEnrichmentJobStatus = "INITIALIZING"|"IN_PROGRESS"|"STOPPING"|"STOPPED"|"COMPLETED"|"FAILED"|"DELETING"|"DELETED"|string;
-  export type VectorEnrichmentJobType = "REVERSE_GEOCODING"|"MAP_MATCHING"|string;
+  export type VectorEnrichmentJobStatus = "INITIALIZING"|"IN_PROGRESS"|"STOPPING"|"STOPPED"|"COMPLETED"|"FAILED"|"DELETING"|"DELETED"|string&{};
+  export type VectorEnrichmentJobType = "REVERSE_GEOCODING"|"MAP_MATCHING"|string&{};
   export interface ViewOffNadirInput {
     /**
      * The minimum value for ViewOffNadir property filter. This filters items having ViewOffNadir greater than or equal to this value. 
@@ -1578,7 +1578,7 @@ declare namespace SageMakerGeospatial {
      */
     UpperBound: Float;
   }
-  export type ZonalStatistics = "MEAN"|"MEDIAN"|"STANDARD_DEVIATION"|"MAX"|"MIN"|"SUM"|string;
+  export type ZonalStatistics = "MEAN"|"MEDIAN"|"STANDARD_DEVIATION"|"MAX"|"MIN"|"SUM"|string&{};
   export interface ZonalStatisticsConfigInput {
     /**
      * List of zonal statistics to compute.

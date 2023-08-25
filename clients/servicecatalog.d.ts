@@ -760,9 +760,9 @@ declare namespace ServiceCatalog {
      */
     Value?: AccessLevelFilterValue;
   }
-  export type AccessLevelFilterKey = "Account"|"Role"|"User"|string;
+  export type AccessLevelFilterKey = "Account"|"Role"|"User"|string&{};
   export type AccessLevelFilterValue = string;
-  export type AccessStatus = "ENABLED"|"UNDER_CHANGE"|"DISABLED"|string;
+  export type AccessStatus = "ENABLED"|"UNDER_CHANGE"|"DISABLED"|string&{};
   export type AccountId = string;
   export type AccountIds = AccountId[];
   export type AddTags = Tag[];
@@ -895,7 +895,7 @@ declare namespace ServiceCatalog {
   export type BudgetName = string;
   export type Budgets = BudgetDetail[];
   export type CausingEntity = string;
-  export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string;
+  export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string&{};
   export interface CloudWatchDashboard {
     /**
      * The name of the CloudWatch dashboard.
@@ -964,7 +964,7 @@ declare namespace ServiceCatalog {
     Description?: ConstraintDescription;
   }
   export type ConstraintType = string;
-  export type CopyOption = "CopyTags"|string;
+  export type CopyOption = "CopyTags"|string&{};
   export type CopyOptions = CopyOption[];
   export interface CopyProductInput {
     /**
@@ -1002,7 +1002,7 @@ declare namespace ServiceCatalog {
      */
     CopyProductToken?: Id;
   }
-  export type CopyProductStatus = "SUCCEEDED"|"IN_PROGRESS"|"FAILED"|string;
+  export type CopyProductStatus = "SUCCEEDED"|"IN_PROGRESS"|"FAILED"|string&{};
   export interface CreateConstraintInput {
     /**
      * The language code.    jp - Japanese    zh - Chinese  
@@ -1550,7 +1550,7 @@ declare namespace ServiceCatalog {
      */
     ShareDetails?: ShareDetails;
   }
-  export type DescribePortfolioShareType = "ACCOUNT"|"ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ORGANIZATION_MEMBER_ACCOUNT"|string;
+  export type DescribePortfolioShareType = "ACCOUNT"|"ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ORGANIZATION_MEMBER_ACCOUNT"|string&{};
   export interface DescribePortfolioSharesInput {
     /**
      * The unique identifier of the portfolio for which shares will be retrieved.
@@ -2012,12 +2012,12 @@ declare namespace ServiceCatalog {
      */
     UniqueTag?: UniqueTagResourceIdentifier;
   }
-  export type EngineWorkflowStatus = "SUCCEEDED"|"FAILED"|string;
+  export type EngineWorkflowStatus = "SUCCEEDED"|"FAILED"|string&{};
   export type EngineWorkflowToken = string;
   export type Error = string;
   export type ErrorCode = string;
   export type ErrorDescription = string;
-  export type EvaluationType = "STATIC"|"DYNAMIC"|string;
+  export type EvaluationType = "STATIC"|"DYNAMIC"|string&{};
   export interface ExecuteProvisionedProductPlanInput {
     /**
      * The language code.    jp - Japanese    zh - Chinese  
@@ -2212,7 +2212,7 @@ declare namespace ServiceCatalog {
      */
     LastSuccessfulSyncProvisioningArtifactId?: Id;
   }
-  export type LastSyncStatus = "SUCCEEDED"|"FAILED"|string;
+  export type LastSyncStatus = "SUCCEEDED"|"FAILED"|string&{};
   export type LastSyncStatusMessage = string;
   export type LastSyncTime = Date;
   export interface LaunchPath {
@@ -2878,7 +2878,7 @@ declare namespace ServiceCatalog {
      */
     Value?: OrganizationNodeValue;
   }
-  export type OrganizationNodeType = "ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ACCOUNT"|string;
+  export type OrganizationNodeType = "ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ACCOUNT"|string&{};
   export type OrganizationNodeValue = string;
   export type OrganizationNodes = OrganizationNode[];
   export type OutputDescription = string;
@@ -2978,7 +2978,7 @@ declare namespace ServiceCatalog {
     SharePrincipals?: Boolean;
   }
   export type PortfolioShareDetails = PortfolioShareDetail[];
-  export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS"|string;
+  export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS"|string&{};
   export interface Principal {
     /**
      * The ARN of the principal (user, role, or group). This field allows for an ARN with no accountID, with or without wildcard characters if the PrincipalType is an IAM_PATTERN.  For more information, review associate-principal-with-portfolio in the Amazon Web Services CLI Command Reference. 
@@ -2990,11 +2990,11 @@ declare namespace ServiceCatalog {
     PrincipalType?: PrincipalType;
   }
   export type PrincipalARN = string;
-  export type PrincipalType = "IAM"|"IAM_PATTERN"|string;
+  export type PrincipalType = "IAM"|"IAM_PATTERN"|string&{};
   export type Principals = Principal[];
   export type ProductArn = string;
-  export type ProductSource = "ACCOUNT"|string;
-  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|"TERRAFORM_OPEN_SOURCE"|"TERRAFORM_CLOUD"|string;
+  export type ProductSource = "ACCOUNT"|string&{};
+  export type ProductType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE"|"TERRAFORM_OPEN_SOURCE"|"TERRAFORM_CLOUD"|string&{};
   export type ProductViewAggregationType = string;
   export interface ProductViewAggregationValue {
     /**
@@ -3032,14 +3032,14 @@ declare namespace ServiceCatalog {
   }
   export type ProductViewDetails = ProductViewDetail[];
   export type ProductViewDistributor = string;
-  export type ProductViewFilterBy = "FullTextSearch"|"Owner"|"ProductType"|"SourceProductId"|string;
+  export type ProductViewFilterBy = "FullTextSearch"|"Owner"|"ProductType"|"SourceProductId"|string&{};
   export type ProductViewFilterValue = string;
   export type ProductViewFilterValues = ProductViewFilterValue[];
   export type ProductViewFilters = {[key: string]: ProductViewFilterValues};
   export type ProductViewName = string;
   export type ProductViewOwner = string;
   export type ProductViewShortDescription = string;
-  export type ProductViewSortBy = "Title"|"VersionCount"|"CreationDate"|string;
+  export type ProductViewSortBy = "Title"|"VersionCount"|"CreationDate"|string&{};
   export type ProductViewSummaries = ProductViewSummary[];
   export interface ProductViewSummary {
     /**
@@ -3087,7 +3087,7 @@ declare namespace ServiceCatalog {
      */
     SupportUrl?: SupportUrl;
   }
-  export type PropertyKey = "OWNER"|"LAUNCH_ROLE"|string;
+  export type PropertyKey = "OWNER"|"LAUNCH_ROLE"|string&{};
   export type PropertyName = string;
   export type PropertyValue = string;
   export type ProviderName = string;
@@ -3356,7 +3356,7 @@ declare namespace ServiceCatalog {
     StatusMessage?: StatusMessage;
   }
   export type ProvisionedProductPlanName = string;
-  export type ProvisionedProductPlanStatus = "CREATE_IN_PROGRESS"|"CREATE_SUCCESS"|"CREATE_FAILED"|"EXECUTE_IN_PROGRESS"|"EXECUTE_SUCCESS"|"EXECUTE_FAILED"|string;
+  export type ProvisionedProductPlanStatus = "CREATE_IN_PROGRESS"|"CREATE_SUCCESS"|"CREATE_FAILED"|"EXECUTE_IN_PROGRESS"|"EXECUTE_SUCCESS"|"EXECUTE_FAILED"|string&{};
   export interface ProvisionedProductPlanSummary {
     /**
      * The name of the plan.
@@ -3383,13 +3383,13 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactId?: Id;
   }
-  export type ProvisionedProductPlanType = "CLOUDFORMATION"|string;
+  export type ProvisionedProductPlanType = "CLOUDFORMATION"|string&{};
   export type ProvisionedProductPlans = ProvisionedProductPlanSummary[];
   export type ProvisionedProductProperties = {[key: string]: PropertyValue};
-  export type ProvisionedProductStatus = "AVAILABLE"|"UNDER_CHANGE"|"TAINTED"|"ERROR"|"PLAN_IN_PROGRESS"|string;
+  export type ProvisionedProductStatus = "AVAILABLE"|"UNDER_CHANGE"|"TAINTED"|"ERROR"|"PLAN_IN_PROGRESS"|string&{};
   export type ProvisionedProductStatusMessage = string;
   export type ProvisionedProductType = string;
-  export type ProvisionedProductViewFilterBy = "SearchQuery"|string;
+  export type ProvisionedProductViewFilterBy = "SearchQuery"|string&{};
   export type ProvisionedProductViewFilterValue = string;
   export type ProvisionedProductViewFilterValues = ProvisionedProductViewFilterValue[];
   export interface ProvisioningArtifact {
@@ -3452,7 +3452,7 @@ declare namespace ServiceCatalog {
     SourceRevision?: SourceRevision;
   }
   export type ProvisioningArtifactDetails = ProvisioningArtifactDetail[];
-  export type ProvisioningArtifactGuidance = "DEFAULT"|"DEPRECATED"|string;
+  export type ProvisioningArtifactGuidance = "DEFAULT"|"DEPRECATED"|string&{};
   export type ProvisioningArtifactInfo = {[key: string]: ProvisioningArtifactInfoValue};
   export type ProvisioningArtifactInfoKey = string;
   export type ProvisioningArtifactInfoValue = string;
@@ -3528,7 +3528,7 @@ declare namespace ServiceCatalog {
      */
     DisableTemplateValidation?: DisableTemplateValidation;
   }
-  export type ProvisioningArtifactPropertyName = "Id"|string;
+  export type ProvisioningArtifactPropertyName = "Id"|string&{};
   export type ProvisioningArtifactPropertyValue = string;
   export type ProvisioningArtifactSummaries = ProvisioningArtifactSummary[];
   export interface ProvisioningArtifactSummary {
@@ -3553,7 +3553,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactMetadata?: ProvisioningArtifactInfo;
   }
-  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|"TERRAFORM_OPEN_SOURCE"|"TERRAFORM_CLOUD"|string;
+  export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|"TERRAFORM_OPEN_SOURCE"|"TERRAFORM_CLOUD"|string&{};
   export interface ProvisioningArtifactView {
     /**
      * Summary information about a product view.
@@ -3688,7 +3688,7 @@ declare namespace ServiceCatalog {
     Description?: Description;
   }
   export type RecordOutputs = RecordOutput[];
-  export type RecordStatus = "CREATED"|"IN_PROGRESS"|"IN_PROGRESS_IN_ERROR"|"SUCCEEDED"|"FAILED"|string;
+  export type RecordStatus = "CREATED"|"IN_PROGRESS"|"IN_PROGRESS_IN_ERROR"|"SUCCEEDED"|"FAILED"|string&{};
   export interface RecordTag {
     /**
      * The key for this tag.
@@ -3720,13 +3720,13 @@ declare namespace ServiceCatalog {
   }
   export interface RejectPortfolioShareOutput {
   }
-  export type Replacement = "TRUE"|"FALSE"|"CONDITIONAL"|string;
+  export type Replacement = "TRUE"|"FALSE"|"CONDITIONAL"|string&{};
   export type Repository = string;
   export type RepositoryArtifactPath = string;
   export type RepositoryBranch = string;
-  export type RequiresRecreation = "NEVER"|"CONDITIONALLY"|"ALWAYS"|string;
+  export type RequiresRecreation = "NEVER"|"CONDITIONALLY"|"ALWAYS"|string&{};
   export type ResourceARN = string;
-  export type ResourceAttribute = "PROPERTIES"|"METADATA"|"CREATIONPOLICY"|"UPDATEPOLICY"|"DELETIONPOLICY"|"TAGS"|string;
+  export type ResourceAttribute = "PROPERTIES"|"METADATA"|"CREATIONPOLICY"|"UPDATEPOLICY"|"DELETIONPOLICY"|"TAGS"|string&{};
   export interface ResourceChange {
     /**
      * The change action.
@@ -3993,12 +3993,12 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactId: Id;
   }
-  export type ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"|"INTERNAL_FAILURE"|"LIMIT_EXCEEDED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|"INVALID_PARAMETER"|string;
+  export type ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"|"INTERNAL_FAILURE"|"LIMIT_EXCEEDED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|"INVALID_PARAMETER"|string&{};
   export type ServiceActionAssociationErrorMessage = string;
   export type ServiceActionAssociations = ServiceActionAssociation[];
-  export type ServiceActionDefinitionKey = "Name"|"Version"|"AssumeRole"|"Parameters"|string;
+  export type ServiceActionDefinitionKey = "Name"|"Version"|"AssumeRole"|"Parameters"|string&{};
   export type ServiceActionDefinitionMap = {[key: string]: ServiceActionDefinitionValue};
-  export type ServiceActionDefinitionType = "SSM_AUTOMATION"|string;
+  export type ServiceActionDefinitionType = "SSM_AUTOMATION"|string&{};
   export type ServiceActionDefinitionValue = string;
   export type ServiceActionDescription = string;
   export interface ServiceActionDetail {
@@ -4056,9 +4056,9 @@ declare namespace ServiceCatalog {
     Error?: Error;
   }
   export type ShareErrors = ShareError[];
-  export type ShareStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"ERROR"|string;
+  export type ShareStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"ERROR"|string&{};
   export type SortField = string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export interface SourceConnection {
     /**
      * The only supported SourceConnection type is Codestar. 
@@ -4092,7 +4092,7 @@ declare namespace ServiceCatalog {
   export type SourceProvisioningArtifactProperties = SourceProvisioningArtifactPropertiesMap[];
   export type SourceProvisioningArtifactPropertiesMap = {[key: string]: ProvisioningArtifactPropertyValue};
   export type SourceRevision = string;
-  export type SourceType = "CODESTAR"|string;
+  export type SourceType = "CODESTAR"|string&{};
   export interface StackInstance {
     /**
      * The name of the Amazon Web Services account that the stack instance is associated with.
@@ -4107,16 +4107,16 @@ declare namespace ServiceCatalog {
      */
     StackInstanceStatus?: StackInstanceStatus;
   }
-  export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE"|string;
+  export type StackInstanceStatus = "CURRENT"|"OUTDATED"|"INOPERABLE"|string&{};
   export type StackInstances = StackInstance[];
   export type StackSetAccounts = AccountId[];
   export type StackSetFailureToleranceCount = number;
   export type StackSetFailureTolerancePercentage = number;
   export type StackSetMaxConcurrencyCount = number;
   export type StackSetMaxConcurrencyPercentage = number;
-  export type StackSetOperationType = "CREATE"|"UPDATE"|"DELETE"|string;
+  export type StackSetOperationType = "CREATE"|"UPDATE"|"DELETE"|string&{};
   export type StackSetRegions = Region[];
-  export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
+  export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string&{};
   export type StatusDetail = string;
   export type StatusMessage = string;
   export type String = string;

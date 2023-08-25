@@ -144,8 +144,8 @@ declare namespace SageMakerFeatureStoreRuntime {
      */
     DeletionMode?: DeletionMode;
   }
-  export type DeletionMode = "SoftDelete"|"HardDelete"|string;
-  export type ExpirationTimeResponse = "Enabled"|"Disabled"|string;
+  export type DeletionMode = "SoftDelete"|"HardDelete"|string&{};
+  export type ExpirationTimeResponse = "Enabled"|"Disabled"|string&{};
   export type ExpiresAt = string;
   export type FeatureGroupNameOrArn = string;
   export type FeatureName = string;
@@ -209,7 +209,7 @@ declare namespace SageMakerFeatureStoreRuntime {
   }
   export type Record = FeatureValue[];
   export type RecordIdentifiers = ValueAsString[];
-  export type TargetStore = "OnlineStore"|"OfflineStore"|string;
+  export type TargetStore = "OnlineStore"|"OfflineStore"|string&{};
   export type TargetStores = TargetStore[];
   export interface TtlDuration {
     /**
@@ -221,7 +221,7 @@ declare namespace SageMakerFeatureStoreRuntime {
      */
     Value: TtlDurationValue;
   }
-  export type TtlDurationUnit = "Seconds"|"Minutes"|"Hours"|"Days"|"Weeks"|string;
+  export type TtlDurationUnit = "Seconds"|"Minutes"|"Hours"|"Days"|"Weeks"|string&{};
   export type TtlDurationValue = number;
   export type UnprocessedIdentifiers = BatchGetRecordIdentifier[];
   export type ValueAsString = string;

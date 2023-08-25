@@ -298,7 +298,7 @@ declare namespace Rbin {
      */
     LockState?: LockState;
   }
-  export type LockState = "locked"|"pending_unlock"|"unlocked"|string;
+  export type LockState = "locked"|"pending_unlock"|"unlocked"|string&{};
   export type MaxResults = number;
   export type NextToken = string;
   export interface ResourceTag {
@@ -314,7 +314,7 @@ declare namespace Rbin {
   export type ResourceTagKey = string;
   export type ResourceTagValue = string;
   export type ResourceTags = ResourceTag[];
-  export type ResourceType = "EBS_SNAPSHOT"|"EC2_IMAGE"|string;
+  export type ResourceType = "EBS_SNAPSHOT"|"EC2_IMAGE"|string&{};
   export interface RetentionPeriod {
     /**
      * The period value for which the retention rule is to retain resources. The period is measured using the unit specified for RetentionPeriodUnit.
@@ -325,11 +325,11 @@ declare namespace Rbin {
      */
     RetentionPeriodUnit: RetentionPeriodUnit;
   }
-  export type RetentionPeriodUnit = "DAYS"|string;
+  export type RetentionPeriodUnit = "DAYS"|string&{};
   export type RetentionPeriodValue = number;
   export type RuleArn = string;
   export type RuleIdentifier = string;
-  export type RuleStatus = "pending"|"available"|string;
+  export type RuleStatus = "pending"|"available"|string&{};
   export interface RuleSummary {
     /**
      * The unique ID of the retention rule.
@@ -386,7 +386,7 @@ declare namespace Rbin {
      */
     UnlockDelayUnit: UnlockDelayUnit;
   }
-  export type UnlockDelayUnit = "DAYS"|string;
+  export type UnlockDelayUnit = "DAYS"|string&{};
   export type UnlockDelayValue = number;
   export interface UnlockRuleRequest {
     /**

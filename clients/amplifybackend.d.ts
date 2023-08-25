@@ -261,7 +261,7 @@ declare class AmplifyBackend extends Service {
   updateBackendStorage(callback?: (err: AWSError, data: AmplifyBackend.Types.UpdateBackendStorageResponse) => void): Request<AmplifyBackend.Types.UpdateBackendStorageResponse, AWSError>;
 }
 declare namespace AmplifyBackend {
-  export type AuthResources = "USER_POOL_ONLY"|"IDENTITY_POOL_AND_USER_POOL"|string;
+  export type AuthResources = "USER_POOL_ONLY"|"IDENTITY_POOL_AND_USER_POOL"|string&{};
   export interface BackendAPIAppSyncAuthSettings {
     /**
      * The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.
@@ -996,7 +996,7 @@ declare namespace AmplifyBackend {
      */
     IsSuccess?: __boolean;
   }
-  export type DeliveryMethod = "EMAIL"|"SMS"|string;
+  export type DeliveryMethod = "EMAIL"|"SMS"|string&{};
   export interface EmailSettings {
     /**
      * The contents of the email message.
@@ -1479,9 +1479,9 @@ declare namespace AmplifyBackend {
      */
     AwsUserPoolsWebClientId?: __string;
   }
-  export type MFAMode = "ON"|"OFF"|"OPTIONAL"|string;
-  export type Mode = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|string;
-  export type OAuthGrantType = "CODE"|"IMPLICIT"|string;
+  export type MFAMode = "ON"|"OFF"|"OPTIONAL"|string&{};
+  export type Mode = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|string&{};
+  export type OAuthGrantType = "CODE"|"IMPLICIT"|string&{};
   export interface RemoveAllBackendsRequest {
     /**
      * The app ID.
@@ -1526,7 +1526,7 @@ declare namespace AmplifyBackend {
      */
     Error?: __string;
   }
-  export type ResolutionStrategy = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string;
+  export type ResolutionStrategy = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string&{};
   export interface ResourceConfig {
   }
   export interface S3BucketInfo {
@@ -1539,8 +1539,8 @@ declare namespace AmplifyBackend {
      */
     Name?: __string;
   }
-  export type Service = "COGNITO"|string;
-  export type ServiceName = "S3"|string;
+  export type Service = "COGNITO"|string&{};
+  export type ServiceName = "S3"|string&{};
   export interface Settings {
     /**
      * The supported MFA types.
@@ -1551,7 +1551,7 @@ declare namespace AmplifyBackend {
      */
     SmsMessage?: __string;
   }
-  export type SignInMethod = "EMAIL"|"EMAIL_AND_PHONE_NUMBER"|"PHONE_NUMBER"|"USERNAME"|string;
+  export type SignInMethod = "EMAIL"|"EMAIL_AND_PHONE_NUMBER"|"PHONE_NUMBER"|"USERNAME"|string&{};
   export interface SmsSettings {
     /**
      * The contents of the SMS message.
@@ -1564,7 +1564,7 @@ declare namespace AmplifyBackend {
     LoginWithAmazon?: BackendAuthSocialProviderConfig;
     SignInWithApple?: BackendAuthAppleProviderConfig;
   }
-  export type Status = "LATEST"|"STALE"|string;
+  export type Status = "LATEST"|"STALE"|string&{};
   export interface UpdateBackendAPIRequest {
     /**
      * The app ID.
@@ -1903,12 +1903,12 @@ declare namespace AmplifyBackend {
      */
     Status?: __string;
   }
-  export type AdditionalConstraintsElement = "REQUIRE_DIGIT"|"REQUIRE_LOWERCASE"|"REQUIRE_SYMBOL"|"REQUIRE_UPPERCASE"|string;
-  export type AuthenticatedElement = "READ"|"CREATE_AND_UPDATE"|"DELETE"|string;
-  export type MfaTypesElement = "SMS"|"TOTP"|string;
-  export type OAuthScopesElement = "PHONE"|"EMAIL"|"OPENID"|"PROFILE"|"AWS_COGNITO_SIGNIN_USER_ADMIN"|string;
-  export type RequiredSignUpAttributesElement = "ADDRESS"|"BIRTHDATE"|"EMAIL"|"FAMILY_NAME"|"GENDER"|"GIVEN_NAME"|"LOCALE"|"MIDDLE_NAME"|"NAME"|"NICKNAME"|"PHONE_NUMBER"|"PICTURE"|"PREFERRED_USERNAME"|"PROFILE"|"UPDATED_AT"|"WEBSITE"|"ZONE_INFO"|string;
-  export type UnAuthenticatedElement = "READ"|"CREATE_AND_UPDATE"|"DELETE"|string;
+  export type AdditionalConstraintsElement = "REQUIRE_DIGIT"|"REQUIRE_LOWERCASE"|"REQUIRE_SYMBOL"|"REQUIRE_UPPERCASE"|string&{};
+  export type AuthenticatedElement = "READ"|"CREATE_AND_UPDATE"|"DELETE"|string&{};
+  export type MfaTypesElement = "SMS"|"TOTP"|string&{};
+  export type OAuthScopesElement = "PHONE"|"EMAIL"|"OPENID"|"PROFILE"|"AWS_COGNITO_SIGNIN_USER_ADMIN"|string&{};
+  export type RequiredSignUpAttributesElement = "ADDRESS"|"BIRTHDATE"|"EMAIL"|"FAMILY_NAME"|"GENDER"|"GIVEN_NAME"|"LOCALE"|"MIDDLE_NAME"|"NAME"|"NICKNAME"|"PHONE_NUMBER"|"PICTURE"|"PREFERRED_USERNAME"|"PROFILE"|"UPDATED_AT"|"WEBSITE"|"ZONE_INFO"|string&{};
+  export type UnAuthenticatedElement = "READ"|"CREATE_AND_UPDATE"|"DELETE"|string&{};
   export type __boolean = boolean;
   export type __double = number;
   export type __integerMin1Max25 = number;

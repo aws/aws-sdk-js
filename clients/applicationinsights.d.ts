@@ -379,7 +379,7 @@ declare namespace ApplicationInsights {
   export type CWEMonitorEnabled = boolean;
   export type CloudWatchEventDetailType = string;
   export type CloudWatchEventId = string;
-  export type CloudWatchEventSource = "EC2"|"CODE_DEPLOY"|"HEALTH"|"RDS"|string;
+  export type CloudWatchEventSource = "EC2"|"CODE_DEPLOY"|"HEALTH"|"RDS"|string&{};
   export type CodeDeployApplication = string;
   export type CodeDeployDeploymentGroup = string;
   export type CodeDeployDeploymentId = string;
@@ -425,8 +425,8 @@ declare namespace ApplicationInsights {
   export type ConfigurationEventList = ConfigurationEvent[];
   export type ConfigurationEventMonitoredResourceARN = string;
   export type ConfigurationEventResourceName = string;
-  export type ConfigurationEventResourceType = "CLOUDWATCH_ALARM"|"CLOUDWATCH_LOG"|"CLOUDFORMATION"|"SSM_ASSOCIATION"|string;
-  export type ConfigurationEventStatus = "INFO"|"WARN"|"ERROR"|string;
+  export type ConfigurationEventResourceType = "CLOUDWATCH_ALARM"|"CLOUDWATCH_LOG"|"CLOUDFORMATION"|"SSM_ASSOCIATION"|string&{};
+  export type ConfigurationEventStatus = "INFO"|"WARN"|"ERROR"|string&{};
   export type ConfigurationEventTime = Date;
   export interface CreateApplicationRequest {
     /**
@@ -755,7 +755,7 @@ declare namespace ApplicationInsights {
     WorkloadConfiguration?: WorkloadConfiguration;
   }
   export type DetectedWorkload = {[key: string]: WorkloadMetaData};
-  export type DiscoveryType = "RESOURCE_GROUP_BASED"|"ACCOUNT_BASED"|string;
+  export type DiscoveryType = "RESOURCE_GROUP_BASED"|"ACCOUNT_BASED"|string&{};
   export type EbsCause = string;
   export type EbsEvent = string;
   export type EbsRequestId = string;
@@ -763,9 +763,9 @@ declare namespace ApplicationInsights {
   export type Ec2State = string;
   export type EndTime = Date;
   export type Feedback = {[key: string]: FeedbackValue};
-  export type FeedbackKey = "INSIGHTS_FEEDBACK"|string;
-  export type FeedbackValue = "NOT_SPECIFIED"|"USEFUL"|"NOT_USEFUL"|string;
-  export type GroupingType = "ACCOUNT_BASED"|string;
+  export type FeedbackKey = "INSIGHTS_FEEDBACK"|string&{};
+  export type FeedbackValue = "NOT_SPECIFIED"|"USEFUL"|"NOT_USEFUL"|string&{};
+  export type GroupingType = "ACCOUNT_BASED"|string&{};
   export type HealthEventArn = string;
   export type HealthEventDescription = string;
   export type HealthEventTypeCategory = string;
@@ -1039,7 +1039,7 @@ declare namespace ApplicationInsights {
      */
     NextToken?: PaginationToken;
   }
-  export type LogFilter = "ERROR"|"WARN"|"INFO"|string;
+  export type LogFilter = "ERROR"|"WARN"|"INFO"|string&{};
   export type LogGroup = string;
   export interface LogPattern {
     /**
@@ -1258,7 +1258,7 @@ declare namespace ApplicationInsights {
   export type ObservationList = Observation[];
   export type OpsCenterEnabled = boolean;
   export type OpsItemSNSTopicArn = string;
-  export type OsType = "WINDOWS"|"LINUX"|string;
+  export type OsType = "WINDOWS"|"LINUX"|string&{};
   export type PaginationToken = string;
   export interface Problem {
     /**
@@ -1326,7 +1326,7 @@ declare namespace ApplicationInsights {
   export type ProblemList = Problem[];
   export type RdsEventCategories = string;
   export type RdsEventMessage = string;
-  export type RecommendationType = "INFRA_ONLY"|"WORKLOAD_ONLY"|"ALL"|string;
+  export type RecommendationType = "INFRA_ONLY"|"WORKLOAD_ONLY"|"ALL"|string&{};
   export type RecurringCount = number;
   export interface RelatedObservations {
     /**
@@ -1352,13 +1352,13 @@ declare namespace ApplicationInsights {
   }
   export interface RemoveWorkloadResponse {
   }
-  export type ResolutionMethod = "MANUAL"|"AUTOMATIC"|"UNRESOLVED"|string;
+  export type ResolutionMethod = "MANUAL"|"AUTOMATIC"|"UNRESOLVED"|string&{};
   export type ResourceARN = string;
   export type ResourceGroupName = string;
   export type ResourceList = ResourceARN[];
   export type ResourceType = string;
   export type S3EventName = string;
-  export type SeverityLevel = "Informative"|"Low"|"Medium"|"High"|string;
+  export type SeverityLevel = "Informative"|"Low"|"Medium"|"High"|string&{};
   export type SourceARN = string;
   export type SourceType = string;
   export type StartTime = Date;
@@ -1366,7 +1366,7 @@ declare namespace ApplicationInsights {
   export type StatesExecutionArn = string;
   export type StatesInput = string;
   export type StatesStatus = string;
-  export type Status = "IGNORE"|"RESOLVED"|"PENDING"|"RECURRING"|"RECOVERING"|string;
+  export type Status = "IGNORE"|"RESOLVED"|"PENDING"|"RECURRING"|"RECOVERING"|string&{};
   export interface Tag {
     /**
      * One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.
@@ -1393,7 +1393,7 @@ declare namespace ApplicationInsights {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type Tier = "CUSTOM"|"DEFAULT"|"DOT_NET_CORE"|"DOT_NET_WORKER"|"DOT_NET_WEB_TIER"|"DOT_NET_WEB"|"SQL_SERVER"|"SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"|"MYSQL"|"POSTGRESQL"|"JAVA_JMX"|"ORACLE"|"SAP_HANA_MULTI_NODE"|"SAP_HANA_SINGLE_NODE"|"SAP_HANA_HIGH_AVAILABILITY"|"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"|"SHAREPOINT"|"ACTIVE_DIRECTORY"|"SAP_NETWEAVER_STANDARD"|"SAP_NETWEAVER_DISTRIBUTED"|"SAP_NETWEAVER_HIGH_AVAILABILITY"|string;
+  export type Tier = "CUSTOM"|"DEFAULT"|"DOT_NET_CORE"|"DOT_NET_WORKER"|"DOT_NET_WEB_TIER"|"DOT_NET_WEB"|"SQL_SERVER"|"SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP"|"MYSQL"|"POSTGRESQL"|"JAVA_JMX"|"ORACLE"|"SAP_HANA_MULTI_NODE"|"SAP_HANA_SINGLE_NODE"|"SAP_HANA_HIGH_AVAILABILITY"|"SQL_SERVER_FAILOVER_CLUSTER_INSTANCE"|"SHAREPOINT"|"ACTIVE_DIRECTORY"|"SAP_NETWEAVER_STANDARD"|"SAP_NETWEAVER_DISTRIBUTED"|"SAP_NETWEAVER_HIGH_AVAILABILITY"|string&{};
   export type Title = string;
   export type Unit = string;
   export interface UntagResourceRequest {
@@ -1536,7 +1536,7 @@ declare namespace ApplicationInsights {
   }
   export interface UpdateProblemResponse {
   }
-  export type UpdateStatus = "RESOLVED"|string;
+  export type UpdateStatus = "RESOLVED"|string&{};
   export interface UpdateWorkloadRequest {
     /**
      * The name of the resource group.
@@ -1566,7 +1566,7 @@ declare namespace ApplicationInsights {
     WorkloadConfiguration?: WorkloadConfiguration;
   }
   export type Value = number;
-  export type Visibility = "IGNORED"|"VISIBLE"|string;
+  export type Visibility = "IGNORED"|"VISIBLE"|string&{};
   export interface Workload {
     /**
      * The ID of the workload.

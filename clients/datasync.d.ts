@@ -551,10 +551,10 @@ declare namespace DataSync {
      */
     Status?: AgentStatus;
   }
-  export type AgentStatus = "ONLINE"|"OFFLINE"|string;
-  export type Atime = "NONE"|"BEST_EFFORT"|string;
-  export type AzureAccessTier = "HOT"|"COOL"|"ARCHIVE"|string;
-  export type AzureBlobAuthenticationType = "SAS"|string;
+  export type AgentStatus = "ONLINE"|"OFFLINE"|string&{};
+  export type Atime = "NONE"|"BEST_EFFORT"|string&{};
+  export type AzureAccessTier = "HOT"|"COOL"|"ARCHIVE"|string&{};
+  export type AzureBlobAuthenticationType = "SAS"|string&{};
   export type AzureBlobContainerUrl = string;
   export interface AzureBlobSasConfiguration {
     /**
@@ -564,7 +564,7 @@ declare namespace DataSync {
   }
   export type AzureBlobSasToken = string;
   export type AzureBlobSubdirectory = string;
-  export type AzureBlobType = "BLOCK"|string;
+  export type AzureBlobType = "BLOCK"|string&{};
   export type BytesPerSecond = number;
   export interface CancelTaskExecutionRequest {
     /**
@@ -1804,11 +1804,11 @@ declare namespace DataSync {
      */
     Status?: DiscoveryJobStatus;
   }
-  export type DiscoveryJobStatus = "RUNNING"|"WARNING"|"TERMINATED"|"FAILED"|"STOPPED"|"COMPLETED"|"COMPLETED_WITH_ISSUES"|string;
+  export type DiscoveryJobStatus = "RUNNING"|"WARNING"|"TERMINATED"|"FAILED"|"STOPPED"|"COMPLETED"|"COMPLETED_WITH_ISSUES"|string&{};
   export type DiscoveryMaxResults = number;
   export type DiscoveryNextToken = string;
-  export type DiscoveryResourceFilter = "SVM"|string;
-  export type DiscoveryResourceType = "SVM"|"VOLUME"|"CLUSTER"|string;
+  export type DiscoveryResourceFilter = "SVM"|string&{};
+  export type DiscoveryResourceType = "SVM"|"VOLUME"|"CLUSTER"|string&{};
   export interface DiscoveryServerConfiguration {
     /**
      * The domain name or IP address of your storage system's management interface.
@@ -1821,7 +1821,7 @@ declare namespace DataSync {
   }
   export type DiscoveryServerHostname = string;
   export type DiscoveryServerPort = number;
-  export type DiscoverySystemType = "NetAppONTAP"|string;
+  export type DiscoverySystemType = "NetAppONTAP"|string&{};
   export type DiscoveryTime = Date;
   export type Duration = number;
   export interface Ec2Config {
@@ -1839,11 +1839,11 @@ declare namespace DataSync {
   export type Ec2SubnetArn = string;
   export type EfsAccessPointArn = string;
   export type EfsFilesystemArn = string;
-  export type EfsInTransitEncryption = "NONE"|"TLS1_2"|string;
+  export type EfsInTransitEncryption = "NONE"|"TLS1_2"|string&{};
   export type EfsSubdirectory = string;
   export type EnabledProtocols = PtolemyString[];
   export type Endpoint = string;
-  export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|"FIPS"|string;
+  export type EndpointType = "PUBLIC"|"PRIVATE_LINK"|"FIPS"|string&{};
   export type ErrorMessage = string;
   export type FilterAttributeValue = string;
   export type FilterList = FilterRule[];
@@ -1858,7 +1858,7 @@ declare namespace DataSync {
      */
     Value?: FilterValue;
   }
-  export type FilterType = "SIMPLE_PATTERN"|string;
+  export type FilterType = "SIMPLE_PATTERN"|string&{};
   export type FilterValue = string;
   export type FilterValues = FilterAttributeValue[];
   export type FsxFilesystemArn = string;
@@ -1910,10 +1910,10 @@ declare namespace DataSync {
   }
   export interface GenerateRecommendationsResponse {
   }
-  export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
-  export type HdfsAuthenticationType = "SIMPLE"|"KERBEROS"|string;
+  export type Gid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string&{};
+  export type HdfsAuthenticationType = "SIMPLE"|"KERBEROS"|string&{};
   export type HdfsBlockSize = number;
-  export type HdfsDataTransferProtection = "DISABLED"|"AUTHENTICATION"|"INTEGRITY"|"PRIVACY"|string;
+  export type HdfsDataTransferProtection = "DISABLED"|"AUTHENTICATION"|"INTEGRITY"|"PRIVACY"|string&{};
   export interface HdfsNameNode {
     /**
      * The hostname of the NameNode in the HDFS cluster. This value is the IP address or Domain Name Service (DNS) name of the NameNode. An agent that's installed on-premises uses this hostname to communicate with the NameNode in the network.
@@ -1926,7 +1926,7 @@ declare namespace DataSync {
   }
   export type HdfsNameNodeList = HdfsNameNode[];
   export type HdfsReplicationFactor = number;
-  export type HdfsRpcProtection = "DISABLED"|"AUTHENTICATION"|"INTEGRITY"|"PRIVACY"|string;
+  export type HdfsRpcProtection = "DISABLED"|"AUTHENTICATION"|"INTEGRITY"|"PRIVACY"|string&{};
   export type HdfsServerHostname = string;
   export type HdfsServerPort = number;
   export type HdfsSubdirectory = string;
@@ -2144,7 +2144,7 @@ declare namespace DataSync {
      */
     Operator: Operator;
   }
-  export type LocationFilterName = "LocationUri"|"LocationType"|"CreationTime"|string;
+  export type LocationFilterName = "LocationUri"|"LocationType"|"CreationTime"|string&{};
   export type LocationFilters = LocationFilter[];
   export type LocationList = LocationListEntry[];
   export interface LocationListEntry {
@@ -2159,7 +2159,7 @@ declare namespace DataSync {
   }
   export type LocationUri = string;
   export type LogGroupArn = string;
-  export type LogLevel = "OFF"|"BASIC"|"TRANSFER"|string;
+  export type LogLevel = "OFF"|"BASIC"|"TRANSFER"|string&{};
   export interface MaxP95Performance {
     /**
      * Peak IOPS related to read operations.
@@ -2208,7 +2208,7 @@ declare namespace DataSync {
   }
   export type MaxResults = number;
   export type Metrics = ResourceMetrics[];
-  export type Mtime = "NONE"|"PRESERVE"|string;
+  export type Mtime = "NONE"|"PRESERVE"|string&{};
   export type Name = string;
   export interface NetAppONTAPCluster {
     /**
@@ -2392,7 +2392,7 @@ declare namespace DataSync {
     Version?: NfsVersion;
   }
   export type NfsSubdirectory = string;
-  export type NfsVersion = "AUTOMATIC"|"NFS3"|"NFS4_0"|"NFS4_1"|string;
+  export type NfsVersion = "AUTOMATIC"|"NFS3"|"NFS4_0"|"NFS4_1"|string&{};
   export type NonNegativeDouble = number;
   export type NonNegativeLong = number;
   export type ObjectStorageAccessKey = string;
@@ -2400,15 +2400,15 @@ declare namespace DataSync {
   export type ObjectStorageCertificate = Buffer|Uint8Array|Blob|string;
   export type ObjectStorageSecretKey = string;
   export type ObjectStorageServerPort = number;
-  export type ObjectStorageServerProtocol = "HTTPS"|"HTTP"|string;
-  export type ObjectTags = "PRESERVE"|"NONE"|string;
+  export type ObjectStorageServerProtocol = "HTTPS"|"HTTP"|string&{};
+  export type ObjectTags = "PRESERVE"|"NONE"|string&{};
   export interface OnPremConfig {
     /**
      * The Amazon Resource Names (ARNs) of the agents connecting to a transfer location.
      */
     AgentArns: AgentArnList;
   }
-  export type Operator = "Equals"|"NotEquals"|"In"|"LessThanOrEqual"|"LessThan"|"GreaterThanOrEqual"|"GreaterThan"|"Contains"|"NotContains"|"BeginsWith"|string;
+  export type Operator = "Equals"|"NotEquals"|"In"|"LessThanOrEqual"|"LessThan"|"GreaterThanOrEqual"|"GreaterThan"|"Contains"|"NotContains"|"BeginsWith"|string&{};
   export interface Options {
     /**
      * Specifies how and when DataSync checks the integrity of your data during a transfer.  Default value: POINT_IN_TIME_CONSISTENT   ONLY_FILES_TRANSFERRED (recommended): DataSync calculates the checksum of transferred files and metadata at the source location. At the end of the transfer, DataSync then compares this checksum to the checksum calculated on those files at the destination. We recommend this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.  POINT_IN_TIME_CONSISTENT: At the end of the transfer, DataSync scans the entire source and destination to verify that both locations are fully synchronized. You can't use this option when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes. For more information, see Storage class considerations with Amazon S3 locations.  NONE: DataSync doesn't run additional verification at the end of the transfer. All data transmissions are still integrity-checked with checksum verification during the transfer.
@@ -2472,7 +2472,7 @@ declare namespace DataSync {
     ObjectTags?: ObjectTags;
   }
   export type OutputTagList = TagListEntry[];
-  export type OverwriteMode = "ALWAYS"|"NEVER"|string;
+  export type OverwriteMode = "ALWAYS"|"NEVER"|string&{};
   export interface P95Metrics {
     /**
      * The IOPS peaks for an on-premises storage system resource. Each data point represents the 95th percentile peak value during a 1-hour interval.
@@ -2489,10 +2489,10 @@ declare namespace DataSync {
   }
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
   export type PLSubnetArnList = Ec2SubnetArn[];
-  export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string;
-  export type PosixPermissions = "NONE"|"PRESERVE"|string;
-  export type PreserveDeletedFiles = "PRESERVE"|"REMOVE"|string;
-  export type PreserveDevices = "NONE"|"PRESERVE"|string;
+  export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string&{};
+  export type PosixPermissions = "NONE"|"PRESERVE"|string&{};
+  export type PreserveDeletedFiles = "PRESERVE"|"REMOVE"|string&{};
+  export type PreserveDevices = "NONE"|"PRESERVE"|string&{};
   export interface PrivateLinkConfig {
     /**
      * Specifies the ID of the VPC endpoint that your agent connects to.
@@ -2540,7 +2540,7 @@ declare namespace DataSync {
      */
     EstimatedMonthlyStorageCost?: PtolemyString;
   }
-  export type RecommendationStatus = "NONE"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type RecommendationStatus = "NONE"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string&{};
   export type Recommendations = Recommendation[];
   export type RecommendationsConfigMap = {[key: string]: PtolemyString};
   export interface RemoveStorageSystemRequest {
@@ -2597,7 +2597,7 @@ declare namespace DataSync {
      */
     BucketAccessRoleArn: IamRoleArn;
   }
-  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_INSTANT_RETRIEVAL"|string;
+  export type S3StorageClass = "STANDARD"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|"OUTPOSTS"|"GLACIER_INSTANT_RETRIEVAL"|string&{};
   export type S3Subdirectory = string;
   export type ScheduleExpressionCron = string;
   export type SecretsManagerArn = string;
@@ -2610,10 +2610,10 @@ declare namespace DataSync {
     Version?: SmbVersion;
   }
   export type SmbPassword = string;
-  export type SmbSecurityDescriptorCopyFlags = "NONE"|"OWNER_DACL"|"OWNER_DACL_SACL"|string;
+  export type SmbSecurityDescriptorCopyFlags = "NONE"|"OWNER_DACL"|"OWNER_DACL_SACL"|string&{};
   export type SmbSubdirectory = string;
   export type SmbUser = string;
-  export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|"SMB1"|"SMB2_0"|string;
+  export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|"SMB1"|"SMB2_0"|string&{};
   export type SourceNetworkInterfaceArns = NetworkInterfaceArn[];
   export interface StartDiscoveryJobRequest {
     /**
@@ -2673,7 +2673,7 @@ declare namespace DataSync {
   export interface StopDiscoveryJobResponse {
   }
   export type StorageSystemArn = string;
-  export type StorageSystemConnectivityStatus = "PASS"|"FAIL"|"UNKNOWN"|string;
+  export type StorageSystemConnectivityStatus = "PASS"|"FAIL"|"UNKNOWN"|string&{};
   export type StorageSystemList = StorageSystemListEntry[];
   export interface StorageSystemListEntry {
     /**
@@ -2763,7 +2763,7 @@ declare namespace DataSync {
      */
     ErrorDetail?: string;
   }
-  export type TaskExecutionStatus = "QUEUED"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string;
+  export type TaskExecutionStatus = "QUEUED"|"LAUNCHING"|"PREPARING"|"TRANSFERRING"|"VERIFYING"|"SUCCESS"|"ERROR"|string&{};
   export interface TaskFilter {
     /**
      * The name of the filter being used. Each API call supports a list of filters that are available for it. For example, LocationId for ListTasks.
@@ -2778,7 +2778,7 @@ declare namespace DataSync {
      */
     Operator: Operator;
   }
-  export type TaskFilterName = "LocationId"|"CreationTime"|string;
+  export type TaskFilterName = "LocationId"|"CreationTime"|string&{};
   export type TaskFilters = TaskFilter[];
   export type TaskList = TaskListEntry[];
   export interface TaskListEntry {
@@ -2795,14 +2795,14 @@ declare namespace DataSync {
      */
     Name?: TagValue;
   }
-  export type TaskQueueing = "ENABLED"|"DISABLED"|string;
+  export type TaskQueueing = "ENABLED"|"DISABLED"|string&{};
   export interface TaskSchedule {
     /**
      * A cron expression that specifies when DataSync initiates a scheduled transfer from a source to a destination location. 
      */
     ScheduleExpression: ScheduleExpressionCron;
   }
-  export type TaskStatus = "AVAILABLE"|"CREATING"|"QUEUED"|"RUNNING"|"UNAVAILABLE"|string;
+  export type TaskStatus = "AVAILABLE"|"CREATING"|"QUEUED"|"RUNNING"|"UNAVAILABLE"|string&{};
   export interface Throughput {
     /**
      * Peak throughput related to read operations.
@@ -2823,8 +2823,8 @@ declare namespace DataSync {
   }
   export type Time = Date;
   export type Timestamp = Date;
-  export type TransferMode = "CHANGED"|"ALL"|string;
-  export type Uid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string;
+  export type TransferMode = "CHANGED"|"ALL"|string&{};
+  export type Uid = "NONE"|"INT_VALUE"|"NAME"|"BOTH"|string&{};
   export interface UntagResourceRequest {
     /**
      * Specifies the Amazon Resource Name (ARN) of the resource to remove the tags from.
@@ -3094,7 +3094,7 @@ declare namespace DataSync {
   }
   export interface UpdateTaskResponse {
   }
-  export type VerifyMode = "POINT_IN_TIME_CONSISTENT"|"ONLY_FILES_TRANSFERRED"|"NONE"|string;
+  export type VerifyMode = "POINT_IN_TIME_CONSISTENT"|"ONLY_FILES_TRANSFERRED"|"NONE"|string&{};
   export type VpcEndpointId = string;
   export type long = number;
   /**

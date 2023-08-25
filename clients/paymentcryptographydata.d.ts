@@ -303,7 +303,7 @@ declare namespace PaymentCryptographyData {
      */
     KeySerialNumber: HexLengthBetween10And24;
   }
-  export type DukptDerivationType = "TDES_2KEY"|"TDES_3KEY"|"AES_128"|"AES_192"|"AES_256"|string;
+  export type DukptDerivationType = "TDES_2KEY"|"TDES_3KEY"|"AES_128"|"AES_192"|"AES_256"|string&{};
   export interface DukptEncryptionAttributes {
     /**
      * The key type encrypted using DUKPT from a Base Derivation Key (BDK) and Key Serial Number (KSN). This must be less than or equal to the strength of the BDK. For example, you can't use AES_128 as a derivation type for a BDK of AES_128 or TDES_2KEY 
@@ -326,8 +326,8 @@ declare namespace PaymentCryptographyData {
      */
     Mode?: DukptEncryptionMode;
   }
-  export type DukptEncryptionMode = "ECB"|"CBC"|string;
-  export type DukptKeyVariant = "BIDIRECTIONAL"|"REQUEST"|"RESPONSE"|string;
+  export type DukptEncryptionMode = "ECB"|"CBC"|string&{};
+  export type DukptKeyVariant = "BIDIRECTIONAL"|"REQUEST"|"RESPONSE"|string&{};
   export interface DynamicCardVerificationCode {
     /**
      * The transaction counter value that comes from the terminal.
@@ -400,7 +400,7 @@ declare namespace PaymentCryptographyData {
      */
     Symmetric?: SymmetricEncryptionAttributes;
   }
-  export type EncryptionMode = "ECB"|"CBC"|"CFB"|"CFB1"|"CFB8"|"CFB64"|"CFB128"|"OFB"|string;
+  export type EncryptionMode = "ECB"|"CBC"|"CFB"|"CFB1"|"CFB8"|"CFB64"|"CFB128"|"OFB"|string&{};
   export interface GenerateCardValidationDataInput {
     /**
      * The algorithm for generating CVV or CSC values for the card within Amazon Web Services Payment Cryptography.
@@ -623,7 +623,7 @@ declare namespace PaymentCryptographyData {
   export type KeyArn = string;
   export type KeyArnOrKeyAliasType = string;
   export type KeyCheckValue = string;
-  export type MacAlgorithm = "ISO9797_ALGORITHM1"|"ISO9797_ALGORITHM3"|"CMAC"|"HMAC_SHA224"|"HMAC_SHA256"|"HMAC_SHA384"|"HMAC_SHA512"|string;
+  export type MacAlgorithm = "ISO9797_ALGORITHM1"|"ISO9797_ALGORITHM3"|"CMAC"|"HMAC_SHA224"|"HMAC_SHA256"|"HMAC_SHA384"|"HMAC_SHA512"|string&{};
   export interface MacAlgorithmDukpt {
     /**
      * The key type derived using DUKPT from a Base Derivation Key (BDK) and Key Serial Number (KSN). This must be less than or equal to the strength of the BDK. For example, you can't use AES_128 as a derivation type for a BDK of AES_128 or TDES_2KEY.
@@ -682,7 +682,7 @@ declare namespace PaymentCryptographyData {
      */
     EmvMac?: MacAlgorithmEmv;
   }
-  export type MajorKeyDerivationMode = "EMV_OPTION_A"|"EMV_OPTION_B"|string;
+  export type MajorKeyDerivationMode = "EMV_OPTION_A"|"EMV_OPTION_B"|string&{};
   export type NumberLengthBetween12And19 = string;
   export type NumberLengthBetween3And5 = string;
   export type NumberLengthBetween4And12 = string;
@@ -690,8 +690,8 @@ declare namespace PaymentCryptographyData {
   export type NumberLengthEquals16 = string;
   export type NumberLengthEquals3 = string;
   export type NumberLengthEquals4 = string;
-  export type PaddingType = "PKCS1"|"OAEP_SHA1"|"OAEP_SHA256"|"OAEP_SHA512"|string;
-  export type PinBlockFormatForPinData = "ISO_FORMAT_0"|"ISO_FORMAT_3"|string;
+  export type PaddingType = "PKCS1"|"OAEP_SHA1"|"OAEP_SHA256"|"OAEP_SHA512"|string&{};
+  export type PinBlockFormatForPinData = "ISO_FORMAT_0"|"ISO_FORMAT_3"|string&{};
   export interface PinData {
     /**
      * The PIN offset value.
@@ -813,7 +813,7 @@ declare namespace PaymentCryptographyData {
      */
     Visa?: SessionKeyVisa;
   }
-  export type SessionKeyDerivationMode = "EMV_COMMON_SESSION_KEY"|"EMV2000"|"AMEX"|"MASTERCARD_SESSION_KEY"|"VISA"|string;
+  export type SessionKeyDerivationMode = "EMV_COMMON_SESSION_KEY"|"EMV2000"|"AMEX"|"MASTERCARD_SESSION_KEY"|"VISA"|string&{};
   export interface SessionKeyDerivationValue {
     /**
      * The cryptogram provided by the terminal during transaction processing.

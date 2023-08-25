@@ -742,10 +742,10 @@ declare namespace RedshiftData {
   export type StatementId = string;
   export type StatementList = StatementData[];
   export type StatementNameString = string;
-  export type StatementStatusString = "SUBMITTED"|"PICKED"|"STARTED"|"FINISHED"|"ABORTED"|"FAILED"|string;
+  export type StatementStatusString = "SUBMITTED"|"PICKED"|"STARTED"|"FINISHED"|"ABORTED"|"FAILED"|string&{};
   export type StatementString = string;
   export type StatementStringList = StatementString[];
-  export type StatusString = "SUBMITTED"|"PICKED"|"STARTED"|"FINISHED"|"ABORTED"|"FAILED"|"ALL"|string;
+  export type StatusString = "SUBMITTED"|"PICKED"|"STARTED"|"FINISHED"|"ABORTED"|"FAILED"|"ALL"|string&{};
   export type String = string;
   export interface SubStatementData {
     /**

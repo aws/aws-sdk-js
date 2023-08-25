@@ -506,8 +506,8 @@ declare namespace XRay {
     Type?: EncryptionType;
   }
   export type EncryptionKeyId = string;
-  export type EncryptionStatus = "UPDATING"|"ACTIVE"|string;
-  export type EncryptionType = "NONE"|"KMS"|string;
+  export type EncryptionStatus = "UPDATING"|"ACTIVE"|string&{};
+  export type EncryptionType = "NONE"|"KMS"|string&{};
   export type EntitySelectorExpression = string;
   export interface ErrorRootCause {
     /**
@@ -1153,7 +1153,7 @@ declare namespace XRay {
      */
     TopAnomalousServices?: AnomalousServiceList;
   }
-  export type InsightCategory = "FAULT"|string;
+  export type InsightCategory = "FAULT"|string&{};
   export type InsightCategoryList = InsightCategory[];
   export interface InsightEvent {
     /**
@@ -1213,7 +1213,7 @@ declare namespace XRay {
     Edges?: InsightImpactGraphEdgeList;
   }
   export type InsightImpactGraphServiceList = InsightImpactGraphService[];
-  export type InsightState = "ACTIVE"|"CLOSED"|string;
+  export type InsightState = "ACTIVE"|"CLOSED"|string&{};
   export type InsightStateList = InsightState[];
   export interface InsightSummary {
     /**
@@ -1689,7 +1689,7 @@ declare namespace XRay {
      */
     Value?: NullableDouble;
   }
-  export type SamplingStrategyName = "PartialScan"|"FixedRate"|string;
+  export type SamplingStrategyName = "PartialScan"|"FixedRate"|string&{};
   export interface SamplingTargetDocument {
     /**
      * The name of the sampling rule.
@@ -1879,7 +1879,7 @@ declare namespace XRay {
     BackendConnectionErrors?: BackendConnectionErrors;
   }
   export type TelemetryRecordList = TelemetryRecord[];
-  export type TimeRangeType = "TraceId"|"Event"|string;
+  export type TimeRangeType = "TraceId"|"Event"|string&{};
   export interface TimeSeriesServiceStatistics {
     /**
      * Timestamp of the window for which statistics are aggregated.

@@ -378,7 +378,7 @@ declare namespace CodePipeline {
      */
     status?: JobStatus;
   }
-  export type ActionCategory = "Source"|"Build"|"Deploy"|"Test"|"Invoke"|"Approval"|string;
+  export type ActionCategory = "Source"|"Build"|"Deploy"|"Test"|"Invoke"|"Approval"|string&{};
   export interface ActionConfiguration {
     /**
      * The configuration data for the action.
@@ -418,7 +418,7 @@ declare namespace CodePipeline {
     type?: ActionConfigurationPropertyType;
   }
   export type ActionConfigurationPropertyList = ActionConfigurationProperty[];
-  export type ActionConfigurationPropertyType = "String"|"Number"|"Boolean"|string;
+  export type ActionConfigurationPropertyType = "String"|"Number"|"Boolean"|string&{};
   export type ActionConfigurationQueryableValue = string;
   export type ActionConfigurationValue = string;
   export interface ActionContext {
@@ -616,11 +616,11 @@ declare namespace CodePipeline {
      */
     externalExecutionUrl?: Url;
   }
-  export type ActionExecutionStatus = "InProgress"|"Abandoned"|"Succeeded"|"Failed"|string;
+  export type ActionExecutionStatus = "InProgress"|"Abandoned"|"Succeeded"|"Failed"|string&{};
   export type ActionExecutionToken = string;
   export type ActionName = string;
   export type ActionNamespace = string;
-  export type ActionOwner = "AWS"|"ThirdParty"|"Custom"|string;
+  export type ActionOwner = "AWS"|"ThirdParty"|"Custom"|string&{};
   export type ActionProvider = string;
   export interface ActionRevision {
     /**
@@ -864,7 +864,7 @@ declare namespace CodePipeline {
      */
     status: ApprovalStatus;
   }
-  export type ApprovalStatus = "Approved"|"Rejected"|string;
+  export type ApprovalStatus = "Approved"|"Rejected"|string&{};
   export type ApprovalSummary = string;
   export type ApprovalToken = string;
   export interface Artifact {
@@ -913,7 +913,7 @@ declare namespace CodePipeline {
      */
     s3Location?: S3ArtifactLocation;
   }
-  export type ArtifactLocationType = "S3"|string;
+  export type ArtifactLocationType = "S3"|string&{};
   export type ArtifactName = string;
   export interface ArtifactRevision {
     /**
@@ -958,7 +958,7 @@ declare namespace CodePipeline {
   }
   export type ArtifactStoreLocation = string;
   export type ArtifactStoreMap = {[key: string]: ArtifactStore};
-  export type ArtifactStoreType = "S3"|string;
+  export type ArtifactStoreType = "S3"|string&{};
   export interface BlockerDeclaration {
     /**
      * Reserved for future use.
@@ -970,7 +970,7 @@ declare namespace CodePipeline {
     type: BlockerType;
   }
   export type BlockerName = string;
-  export type BlockerType = "Schedule"|string;
+  export type BlockerType = "Schedule"|string&{};
   export type Boolean = boolean;
   export type ClientId = string;
   export type ClientRequestToken = string;
@@ -1141,7 +1141,7 @@ declare namespace CodePipeline {
     type: EncryptionKeyType;
   }
   export type EncryptionKeyId = string;
-  export type EncryptionKeyType = "KMS"|string;
+  export type EncryptionKeyType = "KMS"|string&{};
   export interface ErrorDetails {
     /**
      * The system ID or number code of the error.
@@ -1188,7 +1188,7 @@ declare namespace CodePipeline {
      */
     jobWorkerExecutorConfiguration?: JobWorkerExecutorConfiguration;
   }
-  export type ExecutorType = "JobWorker"|"Lambda"|string;
+  export type ExecutorType = "JobWorker"|"Lambda"|string&{};
   export type ExternalExecutionId = string;
   export type ExternalExecutionSummary = string;
   export interface FailureDetails {
@@ -1205,7 +1205,7 @@ declare namespace CodePipeline {
      */
     externalExecutionId?: ExecutionId;
   }
-  export type FailureType = "JobFailed"|"ConfigurationError"|"PermissionError"|"RevisionOutOfSync"|"RevisionUnavailable"|"SystemUnavailable"|string;
+  export type FailureType = "JobFailed"|"ConfigurationError"|"PermissionError"|"RevisionOutOfSync"|"RevisionUnavailable"|"SystemUnavailable"|string&{};
   export interface GetActionTypeInput {
     /**
      * Defines what kind of action can be taken in the stage. The following are the valid values:    Source     Build     Test     Deploy     Approval     Invoke   
@@ -1397,7 +1397,7 @@ declare namespace CodePipeline {
   }
   export type JobId = string;
   export type JobList = Job[];
-  export type JobStatus = "Created"|"Queued"|"Dispatched"|"InProgress"|"TimedOut"|"Succeeded"|"Failed"|string;
+  export type JobStatus = "Created"|"Queued"|"Dispatched"|"InProgress"|"TimedOut"|"Succeeded"|"Failed"|string&{};
   export type JobTimeout = number;
   export interface JobWorkerExecutorConfiguration {
     /**
@@ -1688,7 +1688,7 @@ declare namespace CodePipeline {
     artifactRevisions?: ArtifactRevisionList;
   }
   export type PipelineExecutionId = string;
-  export type PipelineExecutionStatus = "Cancelled"|"InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string;
+  export type PipelineExecutionStatus = "Cancelled"|"InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string&{};
   export type PipelineExecutionStatusSummary = string;
   export interface PipelineExecutionSummary {
     /**
@@ -2058,9 +2058,9 @@ declare namespace CodePipeline {
      */
     status: StageExecutionStatus;
   }
-  export type StageExecutionStatus = "Cancelled"|"InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string;
+  export type StageExecutionStatus = "Cancelled"|"InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string&{};
   export type StageName = string;
-  export type StageRetryMode = "FAILED_ACTIONS"|string;
+  export type StageRetryMode = "FAILED_ACTIONS"|string&{};
   export interface StageState {
     /**
      * The name of the stage.
@@ -2081,7 +2081,7 @@ declare namespace CodePipeline {
     latestExecution?: StageExecution;
   }
   export type StageStateList = StageState[];
-  export type StageTransitionType = "Inbound"|"Outbound"|string;
+  export type StageTransitionType = "Inbound"|"Outbound"|string&{};
   export interface StartPipelineExecutionInput {
     /**
      * The name of the pipeline to start.
@@ -2237,7 +2237,7 @@ declare namespace CodePipeline {
     disabledReason?: DisabledReason;
   }
   export type TriggerDetail = string;
-  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|string;
+  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|string&{};
   export interface UntagResourceInput {
     /**
      *  The Amazon Resource Name (ARN) of the resource to remove tags from.
@@ -2284,7 +2284,7 @@ declare namespace CodePipeline {
   }
   export type WebhookAuthConfigurationAllowedIPRange = string;
   export type WebhookAuthConfigurationSecretToken = string;
-  export type WebhookAuthenticationType = "GITHUB_HMAC"|"IP"|"UNAUTHENTICATED"|string;
+  export type WebhookAuthenticationType = "GITHUB_HMAC"|"IP"|"UNAUTHENTICATED"|string&{};
   export interface WebhookDefinition {
     /**
      * The name of the webhook.

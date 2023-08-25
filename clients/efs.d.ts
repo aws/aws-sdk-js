@@ -808,7 +808,7 @@ declare namespace EFS {
   export type Gid = number;
   export type IpAddress = string;
   export type KmsKeyId = string;
-  export type LifeCycleState = "creating"|"available"|"updating"|"deleting"|"deleted"|"error"|string;
+  export type LifeCycleState = "creating"|"available"|"updating"|"deleting"|"deleted"|"error"|string&{};
   export interface LifecycleConfigurationDescription {
     /**
      * An array of lifecycle management policies. EFS supports a maximum of one policy per file system.
@@ -913,7 +913,7 @@ declare namespace EFS {
   export type OwnerGid = number;
   export type OwnerUid = number;
   export type Path = string;
-  export type PerformanceMode = "generalPurpose"|"maxIO"|string;
+  export type PerformanceMode = "generalPurpose"|"maxIO"|string&{};
   export type Permissions = string;
   export type Policy = string;
   export interface PosixUser {
@@ -1002,8 +1002,8 @@ declare namespace EFS {
     Destinations: Destinations;
   }
   export type ReplicationConfigurationDescriptions = ReplicationConfigurationDescription[];
-  export type ReplicationStatus = "ENABLED"|"ENABLING"|"DELETING"|"ERROR"|"PAUSED"|"PAUSING"|string;
-  export type Resource = "FILE_SYSTEM"|"MOUNT_TARGET"|string;
+  export type ReplicationStatus = "ENABLED"|"ENABLING"|"DELETING"|"ERROR"|"PAUSED"|"PAUSING"|string&{};
+  export type Resource = "FILE_SYSTEM"|"MOUNT_TARGET"|string&{};
   export type ResourceId = string;
   export interface ResourceIdPreference {
     /**
@@ -1015,7 +1015,7 @@ declare namespace EFS {
      */
     Resources?: Resources;
   }
-  export type ResourceIdType = "LONG_ID"|"SHORT_ID"|string;
+  export type ResourceIdType = "LONG_ID"|"SHORT_ID"|string&{};
   export type Resources = Resource[];
   export interface RootDirectory {
     /**
@@ -1030,7 +1030,7 @@ declare namespace EFS {
   export type SecondaryGids = Gid[];
   export type SecurityGroup = string;
   export type SecurityGroups = SecurityGroup[];
-  export type Status = "ENABLED"|"ENABLING"|"DISABLED"|"DISABLING"|string;
+  export type Status = "ENABLED"|"ENABLING"|"DISABLED"|"DISABLING"|string&{};
   export type SubnetId = string;
   export interface Tag {
     /**
@@ -1056,11 +1056,11 @@ declare namespace EFS {
   }
   export type TagValue = string;
   export type Tags = Tag[];
-  export type ThroughputMode = "bursting"|"provisioned"|"elastic"|string;
+  export type ThroughputMode = "bursting"|"provisioned"|"elastic"|string&{};
   export type Timestamp = Date;
   export type Token = string;
-  export type TransitionToIARules = "AFTER_7_DAYS"|"AFTER_14_DAYS"|"AFTER_30_DAYS"|"AFTER_60_DAYS"|"AFTER_90_DAYS"|"AFTER_1_DAY"|string;
-  export type TransitionToPrimaryStorageClassRules = "AFTER_1_ACCESS"|string;
+  export type TransitionToIARules = "AFTER_7_DAYS"|"AFTER_14_DAYS"|"AFTER_30_DAYS"|"AFTER_60_DAYS"|"AFTER_90_DAYS"|"AFTER_1_DAY"|string&{};
+  export type TransitionToPrimaryStorageClassRules = "AFTER_1_ACCESS"|string&{};
   export type Uid = number;
   export interface UntagResourceRequest {
     /**

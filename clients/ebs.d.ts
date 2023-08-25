@@ -95,8 +95,8 @@ declare namespace EBS {
   export type ChangedBlocks = ChangedBlock[];
   export type ChangedBlocksCount = number;
   export type Checksum = string;
-  export type ChecksumAggregationMethod = "LINEAR"|string;
-  export type ChecksumAlgorithm = "SHA256"|string;
+  export type ChecksumAggregationMethod = "LINEAR"|string&{};
+  export type ChecksumAlgorithm = "SHA256"|string&{};
   export interface CompleteSnapshotRequest {
     /**
      * The ID of the snapshot.
@@ -289,7 +289,7 @@ declare namespace EBS {
      */
     ChecksumAlgorithm?: ChecksumAlgorithm;
   }
-  export type SSEType = "sse-ebs"|"sse-kms"|"none"|string;
+  export type SSEType = "sse-ebs"|"sse-kms"|"none"|string&{};
   export type SnapshotId = string;
   export interface StartSnapshotRequest {
     /**
@@ -371,7 +371,7 @@ declare namespace EBS {
      */
     SseType?: SSEType;
   }
-  export type Status = "completed"|"pending"|"error"|string;
+  export type Status = "completed"|"pending"|"error"|string&{};
   export interface Tag {
     /**
      * The key of the tag.

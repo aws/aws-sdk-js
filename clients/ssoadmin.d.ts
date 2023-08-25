@@ -766,7 +766,7 @@ declare namespace SSOAdmin {
      */
     AccessControlAttributes: AccessControlAttributeList;
   }
-  export type InstanceAccessControlAttributeConfigurationStatus = "ENABLED"|"CREATION_IN_PROGRESS"|"CREATION_FAILED"|string;
+  export type InstanceAccessControlAttributeConfigurationStatus = "ENABLED"|"CREATION_IN_PROGRESS"|"CREATION_FAILED"|string&{};
   export type InstanceAccessControlAttributeConfigurationStatusReason = string;
   export type InstanceArn = string;
   export type InstanceList = InstanceMetadata[];
@@ -1178,7 +1178,7 @@ declare namespace SSOAdmin {
     ManagedPolicyArn?: ManagedPolicyArn;
   }
   export type PrincipalId = string;
-  export type PrincipalType = "USER"|"GROUP"|string;
+  export type PrincipalType = "USER"|"GROUP"|string&{};
   export interface ProvisionPermissionSetRequest {
     /**
      * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
@@ -1203,8 +1203,8 @@ declare namespace SSOAdmin {
      */
     PermissionSetProvisioningStatus?: PermissionSetProvisioningStatus;
   }
-  export type ProvisionTargetType = "AWS_ACCOUNT"|"ALL_PROVISIONED_ACCOUNTS"|string;
-  export type ProvisioningStatus = "LATEST_PERMISSION_SET_PROVISIONED"|"LATEST_PERMISSION_SET_NOT_PROVISIONED"|string;
+  export type ProvisionTargetType = "AWS_ACCOUNT"|"ALL_PROVISIONED_ACCOUNTS"|string&{};
+  export type ProvisioningStatus = "LATEST_PERMISSION_SET_PROVISIONED"|"LATEST_PERMISSION_SET_NOT_PROVISIONED"|string&{};
   export interface PutInlinePolicyToPermissionSetRequest {
     /**
      * The ARN of the IAM Identity Center instance under which the operation will be executed. For more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
@@ -1239,7 +1239,7 @@ declare namespace SSOAdmin {
   }
   export type Reason = string;
   export type RelayState = string;
-  export type StatusValues = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|string;
+  export type StatusValues = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|string&{};
   export interface Tag {
     /**
      * The key for the tag.
@@ -1272,7 +1272,7 @@ declare namespace SSOAdmin {
   export type TagValue = string;
   export type TaggableResourceArn = string;
   export type TargetId = string;
-  export type TargetType = "AWS_ACCOUNT"|string;
+  export type TargetType = "AWS_ACCOUNT"|string&{};
   export type Token = string;
   export type UUId = string;
   export interface UntagResourceRequest {

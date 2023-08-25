@@ -534,7 +534,7 @@ declare class WorkSpaces extends Service {
 }
 declare namespace WorkSpaces {
   export type ARN = string;
-  export type AccessPropertyValue = "ALLOW"|"DENY"|string;
+  export type AccessPropertyValue = "ALLOW"|"DENY"|string&{};
   export interface AccountModification {
     /**
      * The state of the modification to the configuration of BYOL.
@@ -566,7 +566,7 @@ declare namespace WorkSpaces {
   export type AddInUrl = string;
   export type Alias = string;
   export type AmazonUuid = string;
-  export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string;
+  export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string&{};
   export type ApplicationList = Application[];
   export interface AssociateConnectionAliasRequest {
     /**
@@ -596,7 +596,7 @@ declare namespace WorkSpaces {
   }
   export interface AssociateIpGroupsResult {
   }
-  export type AssociationStatus = "NOT_ASSOCIATED"|"ASSOCIATED_WITH_OWNER_ACCOUNT"|"ASSOCIATED_WITH_SHARED_ACCOUNT"|"PENDING_ASSOCIATION"|"PENDING_DISASSOCIATION"|string;
+  export type AssociationStatus = "NOT_ASSOCIATED"|"ASSOCIATED_WITH_OWNER_ACCOUNT"|"ASSOCIATED_WITH_SHARED_ACCOUNT"|"PENDING_ASSOCIATION"|"PENDING_DISASSOCIATION"|string&{};
   export interface AuthorizeIpRulesRequest {
     /**
      * The identifier of the group.
@@ -615,7 +615,7 @@ declare namespace WorkSpaces {
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
-  export type BundleType = "REGULAR"|"STANDBY"|string;
+  export type BundleType = "REGULAR"|"STANDBY"|string&{};
   export type CertificateAuthorityArn = string;
   export interface CertificateBasedAuthProperties {
     /**
@@ -627,8 +627,8 @@ declare namespace WorkSpaces {
      */
     CertificateAuthorityArn?: CertificateAuthorityArn;
   }
-  export type CertificateBasedAuthStatusEnum = "DISABLED"|"ENABLED"|string;
-  export type ClientDeviceType = "DeviceTypeWindows"|"DeviceTypeOsx"|"DeviceTypeAndroid"|"DeviceTypeIos"|"DeviceTypeLinux"|"DeviceTypeWeb"|string;
+  export type CertificateBasedAuthStatusEnum = "DISABLED"|"ENABLED"|string&{};
+  export type ClientDeviceType = "DeviceTypeWindows"|"DeviceTypeOsx"|"DeviceTypeAndroid"|"DeviceTypeIos"|"DeviceTypeLinux"|"DeviceTypeWeb"|string&{};
   export type ClientDeviceTypeList = ClientDeviceType[];
   export type ClientEmail = string;
   export type ClientLocale = string;
@@ -655,7 +655,7 @@ declare namespace WorkSpaces {
     ClientProperties?: ClientProperties;
   }
   export type ClientUrl = string;
-  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|"GRAPHICS_G4DN"|"GRAPHICSPRO_G4DN"|string;
+  export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|"GRAPHICS_G4DN"|"GRAPHICSPRO_G4DN"|string&{};
   export interface ComputeType {
     /**
      * The compute type.
@@ -737,9 +737,9 @@ declare namespace WorkSpaces {
     AllowAssociation: BooleanObject;
   }
   export type ConnectionAliasPermissions = ConnectionAliasPermission[];
-  export type ConnectionAliasState = "CREATING"|"CREATED"|"DELETING"|string;
+  export type ConnectionAliasState = "CREATING"|"CREATED"|"DELETING"|string&{};
   export type ConnectionIdentifier = string;
-  export type ConnectionState = "CONNECTED"|"DISCONNECTED"|"UNKNOWN"|string;
+  export type ConnectionState = "CONNECTED"|"DISCONNECTED"|"UNKNOWN"|string&{};
   export type ConnectionString = string;
   export interface CopyWorkspaceImageRequest {
     /**
@@ -979,9 +979,9 @@ declare namespace WorkSpaces {
   }
   export type DedicatedTenancyCidrRangeList = DedicatedTenancyManagementCidrRange[];
   export type DedicatedTenancyManagementCidrRange = string;
-  export type DedicatedTenancyModificationStateEnum = "PENDING"|"COMPLETED"|"FAILED"|string;
-  export type DedicatedTenancySupportEnum = "ENABLED"|string;
-  export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string;
+  export type DedicatedTenancyModificationStateEnum = "PENDING"|"COMPLETED"|"FAILED"|string&{};
+  export type DedicatedTenancySupportEnum = "ENABLED"|string&{};
+  export type DedicatedTenancySupportResultEnum = "ENABLED"|"DISABLED"|string&{};
   export interface DefaultClientBrandingAttributes {
     /**
      * The logo. The only image format accepted is a binary data object that is converted from a .png file.
@@ -1055,9 +1055,9 @@ declare namespace WorkSpaces {
     EnableMaintenanceMode?: BooleanObject;
   }
   export type DeletableCertificateBasedAuthPropertiesList = DeletableCertificateBasedAuthProperty[];
-  export type DeletableCertificateBasedAuthProperty = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"|string;
+  export type DeletableCertificateBasedAuthProperty = "CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN"|string&{};
   export type DeletableSamlPropertiesList = DeletableSamlProperty[];
-  export type DeletableSamlProperty = "SAML_PROPERTIES_USER_ACCESS_URL"|"SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"|string;
+  export type DeletableSamlProperty = "SAML_PROPERTIES_USER_ACCESS_URL"|"SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME"|string&{};
   export interface DeleteClientBrandingRequest {
     /**
      * The directory identifier of the WorkSpace for which you want to delete client branding.
@@ -1582,7 +1582,7 @@ declare namespace WorkSpaces {
     SharedAccountId?: AwsAccount;
   }
   export type ImagePermissions = ImagePermission[];
-  export type ImageType = "OWNED"|"SHARED"|string;
+  export type ImageType = "OWNED"|"SHARED"|string&{};
   export interface ImportClientBrandingRequest {
     /**
      * The directory identifier of the WorkSpace for which you want to import client branding.
@@ -1778,7 +1778,7 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
-  export type LogUploadEnum = "ENABLED"|"DISABLED"|string;
+  export type LogUploadEnum = "ENABLED"|"DISABLED"|string&{};
   export type LoginMessage = {[key: string]: ClientLoginMessage};
   export type ManagementCidrRangeConstraint = string;
   export type ManagementCidrRangeMaxResults = number;
@@ -1802,7 +1802,7 @@ declare namespace WorkSpaces {
      */
     TargetWorkspaceId?: WorkspaceId;
   }
-  export type ModificationResourceEnum = "ROOT_VOLUME"|"USER_VOLUME"|"COMPUTE_TYPE"|string;
+  export type ModificationResourceEnum = "ROOT_VOLUME"|"USER_VOLUME"|"COMPUTE_TYPE"|string&{};
   export interface ModificationState {
     /**
      * The resource.
@@ -1813,7 +1813,7 @@ declare namespace WorkSpaces {
      */
     State?: ModificationStateEnum;
   }
-  export type ModificationStateEnum = "UPDATE_INITIATED"|"UPDATE_IN_PROGRESS"|string;
+  export type ModificationStateEnum = "UPDATE_INITIATED"|"UPDATE_IN_PROGRESS"|string&{};
   export type ModificationStateList = ModificationState[];
   export interface ModifyAccountRequest {
     /**
@@ -1938,7 +1938,7 @@ declare namespace WorkSpaces {
      */
     Type?: OperatingSystemType;
   }
-  export type OperatingSystemType = "WINDOWS"|"LINUX"|string;
+  export type OperatingSystemType = "WINDOWS"|"LINUX"|string&{};
   export type PaginationToken = string;
   export interface PendingCreateStandbyWorkspacesRequest {
     /**
@@ -1959,7 +1959,7 @@ declare namespace WorkSpaces {
     WorkspaceId?: WorkspaceId;
   }
   export type PendingCreateStandbyWorkspacesRequestList = PendingCreateStandbyWorkspacesRequest[];
-  export type Protocol = "PCOIP"|"WSP"|string;
+  export type Protocol = "PCOIP"|"WSP"|string&{};
   export type ProtocolList = Protocol[];
   export interface RebootRequest {
     /**
@@ -1999,7 +1999,7 @@ declare namespace WorkSpaces {
      */
     FailedRequests?: FailedRebuildWorkspaceRequests;
   }
-  export type ReconnectEnum = "ENABLED"|"DISABLED"|string;
+  export type ReconnectEnum = "ENABLED"|"DISABLED"|string&{};
   export type Region = string;
   export interface RegisterWorkspaceDirectoryRequest {
     /**
@@ -2077,7 +2077,7 @@ declare namespace WorkSpaces {
     Capacity?: NonEmptyString;
   }
   export type RootVolumeSizeGib = number;
-  export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|"MANUAL"|string;
+  export type RunningMode = "AUTO_STOP"|"ALWAYS_ON"|"MANUAL"|string&{};
   export type RunningModeAutoStopTimeoutInMinutes = number;
   export interface SamlProperties {
     /**
@@ -2093,7 +2093,7 @@ declare namespace WorkSpaces {
      */
     RelayStateParameterName?: NonEmptyString;
   }
-  export type SamlStatusEnum = "DISABLED"|"ENABLED"|"ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"|string;
+  export type SamlStatusEnum = "DISABLED"|"ENABLED"|"ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK"|string&{};
   export type SamlUserAccessUrl = string;
   export type SecurityGroupId = string;
   export interface SelfservicePermissions {
@@ -2143,7 +2143,7 @@ declare namespace WorkSpaces {
      */
     Tags?: TagList;
   }
-  export type StandbyWorkspaceRelationshipType = "PRIMARY"|"STANDBY"|string;
+  export type StandbyWorkspaceRelationshipType = "PRIMARY"|"STANDBY"|string&{};
   export type StandbyWorkspacesList = StandbyWorkspace[];
   export interface StartRequest {
     /**
@@ -2199,8 +2199,8 @@ declare namespace WorkSpaces {
   export type TagKeyList = NonEmptyString[];
   export type TagList = Tag[];
   export type TagValue = string;
-  export type TargetWorkspaceState = "AVAILABLE"|"ADMIN_MAINTENANCE"|string;
-  export type Tenancy = "DEDICATED"|"SHARED"|string;
+  export type TargetWorkspaceState = "AVAILABLE"|"ADMIN_MAINTENANCE"|string&{};
+  export type Tenancy = "DEDICATED"|"SHARED"|string&{};
   export interface TerminateRequest {
     /**
      * The identifier of the WorkSpace.
@@ -2465,7 +2465,7 @@ declare namespace WorkSpaces {
   }
   export type WorkspaceBundleDescription = string;
   export type WorkspaceBundleName = string;
-  export type WorkspaceBundleState = "AVAILABLE"|"PENDING"|"ERROR"|string;
+  export type WorkspaceBundleState = "AVAILABLE"|"PENDING"|"ERROR"|string&{};
   export interface WorkspaceConnectionStatus {
     /**
      * The identifier of the WorkSpace.
@@ -2585,8 +2585,8 @@ declare namespace WorkSpaces {
      */
     CertificateBasedAuthProperties?: CertificateBasedAuthProperties;
   }
-  export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string;
-  export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string;
+  export type WorkspaceDirectoryState = "REGISTERING"|"REGISTERED"|"DEREGISTERING"|"DEREGISTERED"|"ERROR"|string&{};
+  export type WorkspaceDirectoryType = "SIMPLE_AD"|"AD_CONNECTOR"|string&{};
   export type WorkspaceErrorCode = string;
   export type WorkspaceId = string;
   export type WorkspaceIdList = WorkspaceId[];
@@ -2640,11 +2640,11 @@ declare namespace WorkSpaces {
   export type WorkspaceImageErrorCode = string;
   export type WorkspaceImageId = string;
   export type WorkspaceImageIdList = WorkspaceImageId[];
-  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_GRAPHICS_G4DN"|"BYOL_REGULAR_WSP"|"BYOL_REGULAR_BYOP"|"BYOL_GRAPHICS_G4DN_BYOP"|string;
+  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_GRAPHICS_G4DN"|"BYOL_REGULAR_WSP"|"BYOL_REGULAR_BYOP"|"BYOL_GRAPHICS_G4DN_BYOP"|string&{};
   export type WorkspaceImageList = WorkspaceImage[];
   export type WorkspaceImageName = string;
-  export type WorkspaceImageRequiredTenancy = "DEFAULT"|"DEDICATED"|string;
-  export type WorkspaceImageState = "AVAILABLE"|"PENDING"|"ERROR"|string;
+  export type WorkspaceImageRequiredTenancy = "DEFAULT"|"DEDICATED"|string&{};
+  export type WorkspaceImageState = "AVAILABLE"|"PENDING"|"ERROR"|string&{};
   export type WorkspaceList = Workspace[];
   export interface WorkspaceProperties {
     /**
@@ -2707,7 +2707,7 @@ declare namespace WorkSpaces {
     Tags?: TagList;
   }
   export type WorkspaceRequestList = WorkspaceRequest[];
-  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"RESTORING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
+  export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"RESTORING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string&{};
   export interface WorkspacesIpGroup {
     /**
      * The identifier of the group.

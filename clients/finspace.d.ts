@@ -312,7 +312,7 @@ declare namespace Finspace {
      */
     scaleOutCooldownSeconds?: CooldownTime;
   }
-  export type AutoScalingMetric = "CPU_UTILIZATION_PERCENTAGE"|string;
+  export type AutoScalingMetric = "CPU_UTILIZATION_PERCENTAGE"|string&{};
   export type AutoScalingMetricTarget = number;
   export type AvailabilityZoneId = string;
   export type AvailabilityZoneIds = AvailabilityZoneId[];
@@ -342,9 +342,9 @@ declare namespace Finspace {
     dbPath: DbPath;
   }
   export type ChangeRequests = ChangeRequest[];
-  export type ChangeType = "PUT"|"DELETE"|string;
+  export type ChangeType = "PUT"|"DELETE"|string&{};
   export type ChangesetId = string;
-  export type ChangesetStatus = "PENDING"|"PROCESSING"|"FAILED"|"COMPLETED"|string;
+  export type ChangesetStatus = "PENDING"|"PROCESSING"|"FAILED"|"COMPLETED"|string&{};
   export type ClientToken = string;
   export type ClientTokenString = string;
   export interface CodeConfiguration {
@@ -900,8 +900,8 @@ declare namespace Finspace {
   export type EnvironmentId = string;
   export type EnvironmentList = Environment[];
   export type EnvironmentName = string;
-  export type EnvironmentStatus = "CREATE_REQUESTED"|"CREATING"|"CREATED"|"DELETE_REQUESTED"|"DELETING"|"DELETED"|"FAILED_CREATION"|"RETRY_DELETION"|"FAILED_DELETION"|"UPDATE_NETWORK_REQUESTED"|"UPDATING_NETWORK"|"FAILED_UPDATING_NETWORK"|"SUSPENDED"|string;
-  export type ErrorDetails = "The inputs to this request are invalid."|"Service limits have been exceeded."|"Missing required permission to perform this request."|"One or more inputs to this request were not found."|"The system temporarily lacks sufficient resources to process the request."|"An internal error has occurred."|"Cancelled"|"A user recoverable error has occurred"|string;
+  export type EnvironmentStatus = "CREATE_REQUESTED"|"CREATING"|"CREATED"|"DELETE_REQUESTED"|"DELETING"|"DELETED"|"FAILED_CREATION"|"RETRY_DELETION"|"FAILED_DELETION"|"UPDATE_NETWORK_REQUESTED"|"UPDATING_NETWORK"|"FAILED_UPDATING_NETWORK"|"SUSPENDED"|string&{};
+  export type ErrorDetails = "The inputs to this request are invalid."|"Service limits have been exceeded."|"Missing required permission to perform this request."|"One or more inputs to this request were not found."|"The system temporarily lacks sufficient resources to process the request."|"An internal error has occurred."|"Cancelled"|"A user recoverable error has occurred"|string&{};
   export interface ErrorInfo {
     /**
      * Specifies the error message that appears if a flow fails. 
@@ -916,7 +916,7 @@ declare namespace Finspace {
   export type ExecutionRoleArn = string;
   export type FederationAttributeKey = string;
   export type FederationAttributeValue = string;
-  export type FederationMode = "FEDERATED"|"LOCAL"|string;
+  export type FederationMode = "FEDERATED"|"LOCAL"|string&{};
   export interface FederationParameters {
     /**
      * SAML 2.0 Metadata document from identity provider (IdP).
@@ -1274,7 +1274,7 @@ declare namespace Finspace {
      */
     iamRole?: RoleArn;
   }
-  export type IPAddressType = "IP_V4"|string;
+  export type IPAddressType = "IP_V4"|string&{};
   export interface IcmpTypeCode {
     /**
      * The ICMP type. A value of -1 means all types. 
@@ -1290,7 +1290,7 @@ declare namespace Finspace {
   export type InitializationScriptFilePath = string;
   export type KmsKeyARN = string;
   export type KmsKeyId = string;
-  export type KxAzMode = "SINGLE"|"MULTI"|string;
+  export type KxAzMode = "SINGLE"|"MULTI"|string&{};
   export interface KxCacheStorageConfiguration {
     /**
      * The type of cache storage . The valid values are:    CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.   
@@ -1380,9 +1380,9 @@ declare namespace Finspace {
   export type KxClusterDescription = string;
   export type KxClusterName = string;
   export type KxClusterNodeIdString = string;
-  export type KxClusterStatus = "PENDING"|"CREATING"|"CREATE_FAILED"|"RUNNING"|"UPDATING"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
+  export type KxClusterStatus = "PENDING"|"CREATING"|"CREATE_FAILED"|"RUNNING"|"UPDATING"|"DELETING"|"DELETED"|"DELETE_FAILED"|string&{};
   export type KxClusterStatusReason = string;
-  export type KxClusterType = "HDB"|"RDB"|"GATEWAY"|string;
+  export type KxClusterType = "HDB"|"RDB"|"GATEWAY"|string&{};
   export type KxClusters = KxCluster[];
   export interface KxCommandLineArgument {
     /**
@@ -1444,7 +1444,7 @@ declare namespace Finspace {
      */
     deploymentStrategy: KxDeploymentStrategy;
   }
-  export type KxDeploymentStrategy = "NO_RESTART"|"ROLLING"|string;
+  export type KxDeploymentStrategy = "NO_RESTART"|"ROLLING"|string&{};
   export interface KxEnvironment {
     /**
      * The name of the kdb environment.
@@ -1544,7 +1544,7 @@ declare namespace Finspace {
     size: KxSavedownStorageSize;
   }
   export type KxSavedownStorageSize = number;
-  export type KxSavedownStorageType = "SDS01"|string;
+  export type KxSavedownStorageType = "SDS01"|string&{};
   export interface KxUser {
     /**
      *  The Amazon Resource Name (ARN) that identifies the user. For more information about ARNs and how to use ARNs in policies, see IAM Identifiers in the IAM User Guide. 
@@ -1801,7 +1801,7 @@ declare namespace Finspace {
   export type ReleaseLabel = string;
   export type ResultLimit = number;
   export type RoleArn = string;
-  export type RuleAction = "allow"|"deny"|string;
+  export type RuleAction = "allow"|"deny"|string&{};
   export type RuleNumber = number;
   export type S3Bucket = string;
   export type S3Key = string;
@@ -2178,12 +2178,12 @@ declare namespace Finspace {
     ipAddressType?: IPAddressType;
   }
   export type VpcIdString = string;
-  export type dnsStatus = "NONE"|"UPDATE_REQUESTED"|"UPDATING"|"FAILED_UPDATE"|"SUCCESSFULLY_UPDATED"|string;
+  export type dnsStatus = "NONE"|"UPDATE_REQUESTED"|"UPDATING"|"FAILED_UPDATE"|"SUCCESSFULLY_UPDATED"|string&{};
   export type numBytes = number;
   export type numChangesets = number;
   export type numFiles = number;
   export type stringValueLength1to255 = string;
-  export type tgwStatus = "NONE"|"UPDATE_REQUESTED"|"UPDATING"|"FAILED_UPDATE"|"SUCCESSFULLY_UPDATED"|string;
+  export type tgwStatus = "NONE"|"UPDATE_REQUESTED"|"UPDATING"|"FAILED_UPDATE"|"SUCCESSFULLY_UPDATED"|string&{};
   export type url = string;
   export type urn = string;
   /**

@@ -265,7 +265,7 @@ declare namespace ComprehendMedical {
     Traits?: TraitList;
   }
   export type AttributeList = Attribute[];
-  export type AttributeName = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|"PAST_HISTORY"|"FUTURE"|string;
+  export type AttributeName = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|"PAST_HISTORY"|"FUTURE"|string&{};
   export type BoundedLengthString = string;
   export interface Characters {
     /**
@@ -515,8 +515,8 @@ declare namespace ComprehendMedical {
     Attributes?: AttributeList;
   }
   export type EntityList = Entity[];
-  export type EntitySubType = "NAME"|"DX_NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"TEST_UNIT"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"PHONE_OR_FAX"|"EMAIL"|"IDENTIFIER"|"ID"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME"|"AMOUNT"|"GENDER"|"RACE_ETHNICITY"|"ALLERGIES"|"TOBACCO_USE"|"ALCOHOL_CONSUMPTION"|"REC_DRUG_USE"|string;
-  export type EntityType = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION"|"BEHAVIORAL_ENVIRONMENTAL_SOCIAL"|string;
+  export type EntitySubType = "NAME"|"DX_NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"TEST_UNIT"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"PHONE_OR_FAX"|"EMAIL"|"IDENTIFIER"|"ID"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME"|"AMOUNT"|"GENDER"|"RACE_ETHNICITY"|"ALLERGIES"|"TOBACCO_USE"|"ALCOHOL_CONSUMPTION"|"REC_DRUG_USE"|string&{};
+  export type EntityType = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION"|"BEHAVIORAL_ENVIRONMENTAL_SOCIAL"|string&{};
   export type Float = number;
   export interface ICD10CMAttribute {
     /**
@@ -561,7 +561,7 @@ declare namespace ComprehendMedical {
     RelationshipType?: ICD10CMRelationshipType;
   }
   export type ICD10CMAttributeList = ICD10CMAttribute[];
-  export type ICD10CMAttributeType = "ACUITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"QUALITY"|"QUANTITY"|"TIME_TO_DX_NAME"|"TIME_EXPRESSION"|string;
+  export type ICD10CMAttributeType = "ACUITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"QUALITY"|"QUANTITY"|"TIME_TO_DX_NAME"|"TIME_EXPRESSION"|string&{};
   export interface ICD10CMConcept {
     /**
      * The long description of the ICD-10-CM code in the ontology.
@@ -619,10 +619,10 @@ declare namespace ComprehendMedical {
      */
     ICD10CMConcepts?: ICD10CMConceptList;
   }
-  export type ICD10CMEntityCategory = "MEDICAL_CONDITION"|string;
+  export type ICD10CMEntityCategory = "MEDICAL_CONDITION"|string&{};
   export type ICD10CMEntityList = ICD10CMEntity[];
-  export type ICD10CMEntityType = "DX_NAME"|"TIME_EXPRESSION"|string;
-  export type ICD10CMRelationshipType = "OVERLAP"|"SYSTEM_ORGAN_SITE"|"QUALITY"|string;
+  export type ICD10CMEntityType = "DX_NAME"|"TIME_EXPRESSION"|string&{};
+  export type ICD10CMRelationshipType = "OVERLAP"|"SYSTEM_ORGAN_SITE"|"QUALITY"|string&{};
   export interface ICD10CMTrait {
     /**
      * Provides a name or contextual description about the trait.
@@ -634,7 +634,7 @@ declare namespace ComprehendMedical {
     Score?: Float;
   }
   export type ICD10CMTraitList = ICD10CMTrait[];
-  export type ICD10CMTraitName = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|string;
+  export type ICD10CMTraitName = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|string&{};
   export type IamRoleArn = string;
   export interface InferICD10CMRequest {
     /**
@@ -717,9 +717,9 @@ declare namespace ComprehendMedical {
   export type Integer = number;
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string&{};
   export type KMSKey = string;
-  export type LanguageCode = "en"|string;
+  export type LanguageCode = "en"|string&{};
   export interface ListEntitiesDetectionV2JobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -851,7 +851,7 @@ declare namespace ComprehendMedical {
      */
     S3Key?: S3Key;
   }
-  export type RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"TEST_UNIT"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"AMOUNT"|"USAGE"|"QUALITY"|string;
+  export type RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"TEST_UNIT"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"AMOUNT"|"USAGE"|"QUALITY"|string&{};
   export interface RxNormAttribute {
     /**
      * The type of attribute. The types of attributes recognized by InferRxNorm are BRAND_NAME and GENERIC_NAME.
@@ -887,7 +887,7 @@ declare namespace ComprehendMedical {
     Traits?: RxNormTraitList;
   }
   export type RxNormAttributeList = RxNormAttribute[];
-  export type RxNormAttributeType = "DOSAGE"|"DURATION"|"FORM"|"FREQUENCY"|"RATE"|"ROUTE_OR_MODE"|"STRENGTH"|string;
+  export type RxNormAttributeType = "DOSAGE"|"DURATION"|"FORM"|"FREQUENCY"|"RATE"|"ROUTE_OR_MODE"|"STRENGTH"|string&{};
   export interface RxNormConcept {
     /**
      * The description of the RxNorm concept.
@@ -945,9 +945,9 @@ declare namespace ComprehendMedical {
      */
     RxNormConcepts?: RxNormConceptList;
   }
-  export type RxNormEntityCategory = "MEDICATION"|string;
+  export type RxNormEntityCategory = "MEDICATION"|string&{};
   export type RxNormEntityList = RxNormEntity[];
-  export type RxNormEntityType = "BRAND_NAME"|"GENERIC_NAME"|string;
+  export type RxNormEntityType = "BRAND_NAME"|"GENERIC_NAME"|string&{};
   export interface RxNormTrait {
     /**
      * Provides a name or contextual description about the trait.
@@ -959,7 +959,7 @@ declare namespace ComprehendMedical {
     Score?: Float;
   }
   export type RxNormTraitList = RxNormTrait[];
-  export type RxNormTraitName = "NEGATION"|"PAST_HISTORY"|string;
+  export type RxNormTraitName = "NEGATION"|"PAST_HISTORY"|string&{};
   export type S3Bucket = string;
   export type S3Key = string;
   export interface SNOMEDCTAttribute {
@@ -1009,7 +1009,7 @@ declare namespace ComprehendMedical {
     SNOMEDCTConcepts?: SNOMEDCTConceptList;
   }
   export type SNOMEDCTAttributeList = SNOMEDCTAttribute[];
-  export type SNOMEDCTAttributeType = "ACUITY"|"QUALITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"TEST_VALUE"|"TEST_UNIT"|string;
+  export type SNOMEDCTAttributeType = "ACUITY"|"QUALITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"TEST_VALUE"|"TEST_UNIT"|string&{};
   export interface SNOMEDCTConcept {
     /**
      *  The description of the SNOMED-CT concept. 
@@ -1081,10 +1081,10 @@ declare namespace ComprehendMedical {
      */
     SNOMEDCTConcepts?: SNOMEDCTConceptList;
   }
-  export type SNOMEDCTEntityCategory = "MEDICAL_CONDITION"|"ANATOMY"|"TEST_TREATMENT_PROCEDURE"|string;
+  export type SNOMEDCTEntityCategory = "MEDICAL_CONDITION"|"ANATOMY"|"TEST_TREATMENT_PROCEDURE"|string&{};
   export type SNOMEDCTEntityList = SNOMEDCTEntity[];
-  export type SNOMEDCTEntityType = "DX_NAME"|"TEST_NAME"|"PROCEDURE_NAME"|"TREATMENT_NAME"|string;
-  export type SNOMEDCTRelationshipType = "ACUITY"|"QUALITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"TEST_UNIT"|string;
+  export type SNOMEDCTEntityType = "DX_NAME"|"TEST_NAME"|"PROCEDURE_NAME"|"TREATMENT_NAME"|string&{};
+  export type SNOMEDCTRelationshipType = "ACUITY"|"QUALITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"TEST_UNIT"|string&{};
   export interface SNOMEDCTTrait {
     /**
      *  The name or contextual description of a detected trait. 
@@ -1096,7 +1096,7 @@ declare namespace ComprehendMedical {
     Score?: Float;
   }
   export type SNOMEDCTTraitList = SNOMEDCTTrait[];
-  export type SNOMEDCTTraitName = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|"PAST_HISTORY"|"FUTURE"|string;
+  export type SNOMEDCTTraitName = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM"|"PERTAINS_TO_FAMILY"|"HYPOTHETICAL"|"LOW_CONFIDENCE"|"PAST_HISTORY"|"FUTURE"|string&{};
   export interface StartEntitiesDetectionV2JobRequest {
     /**
      * The input configuration that specifies the format and location of the input data for the job.

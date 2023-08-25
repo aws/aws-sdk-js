@@ -191,7 +191,7 @@ declare namespace MigrationHubStrategy {
      */
     srcCodeOrDbAnalysisStatus?: SrcCodeOrDbAnalysisStatus;
   }
-  export type AnalysisType = "SOURCE_CODE_ANALYSIS"|"DATABASE_ANALYSIS"|"RUNTIME_ANALYSIS"|"BINARY_ANALYSIS"|string;
+  export type AnalysisType = "SOURCE_CODE_ANALYSIS"|"DATABASE_ANALYSIS"|"RUNTIME_ANALYSIS"|"BINARY_ANALYSIS"|string&{};
   export interface AnalyzerNameUnion {
     /**
      * The binary analyzer names.
@@ -222,7 +222,7 @@ declare namespace MigrationHubStrategy {
     antipatternReportStatusMessage?: StatusMessage;
   }
   export type AntipatternReportResultList = AntipatternReportResult[];
-  export type AntipatternReportStatus = "FAILED"|"IN_PROGRESS"|"SUCCESS"|string;
+  export type AntipatternReportStatus = "FAILED"|"IN_PROGRESS"|"SUCCESS"|string&{};
   export interface AntipatternSeveritySummary {
     /**
      *  Contains the count of anti-patterns. 
@@ -233,15 +233,15 @@ declare namespace MigrationHubStrategy {
      */
     severity?: Severity;
   }
-  export type AppType = "DotNetFramework"|"Java"|"SQLServer"|"IIS"|"Oracle"|"Other"|"Tomcat"|"JBoss"|"Spring"|"Mongo DB"|"DB2"|"Maria DB"|"MySQL"|"Sybase"|"PostgreSQLServer"|"Cassandra"|"IBM WebSphere"|"Oracle WebLogic"|"Visual Basic"|"Unknown"|"DotnetCore"|"Dotnet"|string;
+  export type AppType = "DotNetFramework"|"Java"|"SQLServer"|"IIS"|"Oracle"|"Other"|"Tomcat"|"JBoss"|"Spring"|"Mongo DB"|"DB2"|"Maria DB"|"MySQL"|"Sybase"|"PostgreSQLServer"|"Cassandra"|"IBM WebSphere"|"Oracle WebLogic"|"Visual Basic"|"Unknown"|"DotnetCore"|"Dotnet"|string&{};
   export interface AppUnitError {
     /**
      * The category of the error.
      */
     appUnitErrorCategory?: AppUnitErrorCategory;
   }
-  export type AppUnitErrorCategory = "CREDENTIAL_ERROR"|"CONNECTIVITY_ERROR"|"PERMISSION_ERROR"|"UNSUPPORTED_ERROR"|"OTHER_ERROR"|string;
-  export type ApplicationComponentCriteria = "NOT_DEFINED"|"APP_NAME"|"SERVER_ID"|"APP_TYPE"|"STRATEGY"|"DESTINATION"|"ANALYSIS_STATUS"|"ERROR_CATEGORY"|string;
+  export type AppUnitErrorCategory = "CREDENTIAL_ERROR"|"CONNECTIVITY_ERROR"|"PERMISSION_ERROR"|"UNSUPPORTED_ERROR"|"OTHER_ERROR"|string&{};
+  export type ApplicationComponentCriteria = "NOT_DEFINED"|"APP_NAME"|"SERVER_ID"|"APP_TYPE"|"STRATEGY"|"DESTINATION"|"ANALYSIS_STATUS"|"ERROR_CATEGORY"|string&{};
   export interface ApplicationComponentDetail {
     /**
      *  The status of analysis, if the application component has source code or an associated database. 
@@ -373,14 +373,14 @@ declare namespace MigrationHubStrategy {
      */
     count?: Integer;
   }
-  export type ApplicationMode = "ALL"|"KNOWN"|"UNKNOWN"|string;
+  export type ApplicationMode = "ALL"|"KNOWN"|"UNKNOWN"|string&{};
   export interface ApplicationPreferences {
     /**
      *  Application preferences that you specify to prefer managed environment. 
      */
     managementPreference?: ManagementPreference;
   }
-  export type AssessmentStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|"STOPPED"|string;
+  export type AssessmentStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|"STOPPED"|string&{};
   export type AssessmentStatusMessage = string;
   export interface AssessmentSummary {
     /**
@@ -457,16 +457,16 @@ declare namespace MigrationHubStrategy {
   export type AssociatedApplications = AssociatedApplication[];
   export type AssociatedServerIDs = String[];
   export type AsyncTaskId = string;
-  export type AuthType = "NTLM"|"SSH"|"CERT"|string;
+  export type AuthType = "NTLM"|"SSH"|"CERT"|string&{};
   export interface AwsManagedResources {
     /**
      *  The choice of application destination that you specify. 
      */
     targetDestination: AwsManagedTargetDestinations;
   }
-  export type AwsManagedTargetDestination = "None specified"|"AWS Elastic BeanStalk"|"AWS Fargate"|string;
+  export type AwsManagedTargetDestination = "None specified"|"AWS Elastic BeanStalk"|"AWS Fargate"|string&{};
   export type AwsManagedTargetDestinations = AwsManagedTargetDestination[];
-  export type BinaryAnalyzerName = "DLL_ANALYZER"|"BYTECODE_ANALYZER"|string;
+  export type BinaryAnalyzerName = "DLL_ANALYZER"|"BYTECODE_ANALYZER"|string&{};
   export type Boolean = boolean;
   export interface BusinessGoals {
     /**
@@ -521,9 +521,9 @@ declare namespace MigrationHubStrategy {
      */
     registeredTimeStamp?: String;
   }
-  export type CollectorHealth = "COLLECTOR_HEALTHY"|"COLLECTOR_UNHEALTHY"|string;
+  export type CollectorHealth = "COLLECTOR_HEALTHY"|"COLLECTOR_UNHEALTHY"|string&{};
   export type Collectors = Collector[];
-  export type Condition = "EQUALS"|"NOT_EQUALS"|"CONTAINS"|"NOT_CONTAINS"|string;
+  export type Condition = "EQUALS"|"NOT_EQUALS"|"CONTAINS"|"NOT_CONTAINS"|string&{};
   export interface ConfigurationSummary {
     /**
      * IP address based configurations.
@@ -580,14 +580,14 @@ declare namespace MigrationHubStrategy {
      */
     success?: Integer;
   }
-  export type DataSourceType = "ApplicationDiscoveryService"|"MPA"|"Import"|string;
+  export type DataSourceType = "ApplicationDiscoveryService"|"MPA"|"Import"|string&{};
   export interface DatabaseConfigDetail {
     /**
      *  AWS Secrets Manager key that holds the credentials that you use to connect to a database. 
      */
     secretName?: String;
   }
-  export type DatabaseManagementPreference = "AWS-managed"|"Self-manage"|"No preference"|string;
+  export type DatabaseManagementPreference = "AWS-managed"|"Self-manage"|"No preference"|string&{};
   export interface DatabaseMigrationPreference {
     /**
      *  Indicates whether you are interested in moving from one type of database to another. For example, from SQL Server to Amazon Aurora MySQL-Compatible Edition. 
@@ -823,14 +823,14 @@ declare namespace MigrationHubStrategy {
     value?: String;
   }
   export type GroupIds = Group[];
-  export type GroupName = "ExternalId"|"ExternalSourceType"|string;
+  export type GroupName = "ExternalId"|"ExternalSourceType"|string&{};
   export interface Heterogeneous {
     /**
      *  The target database engine for heterogeneous database migration preference. 
      */
     targetDatabaseEngine: HeterogeneousTargetDatabaseEngines;
   }
-  export type HeterogeneousTargetDatabaseEngine = "None specified"|"Amazon Aurora"|"AWS PostgreSQL"|"MySQL"|"Microsoft SQL Server"|"Oracle Database"|"MariaDB"|"SAP"|"Db2 LUW"|"MongoDB"|string;
+  export type HeterogeneousTargetDatabaseEngine = "None specified"|"Amazon Aurora"|"AWS PostgreSQL"|"MySQL"|"Microsoft SQL Server"|"Oracle Database"|"MariaDB"|"SAP"|"Db2 LUW"|"MongoDB"|string&{};
   export type HeterogeneousTargetDatabaseEngines = HeterogeneousTargetDatabaseEngine[];
   export interface Homogeneous {
     /**
@@ -838,7 +838,7 @@ declare namespace MigrationHubStrategy {
      */
     targetDatabaseEngine?: HomogeneousTargetDatabaseEngines;
   }
-  export type HomogeneousTargetDatabaseEngine = "None specified"|string;
+  export type HomogeneousTargetDatabaseEngine = "None specified"|string&{};
   export type HomogeneousTargetDatabaseEngines = HomogeneousTargetDatabaseEngine[];
   export type IPAddress = string;
   export interface IPAddressBasedRemoteInfo {
@@ -902,8 +902,8 @@ declare namespace MigrationHubStrategy {
      */
     statusReportS3Key?: importS3Key;
   }
-  export type ImportFileTaskStatus = "ImportInProgress"|"ImportFailed"|"ImportPartialSuccess"|"ImportSuccess"|"DeleteInProgress"|"DeleteFailed"|"DeletePartialSuccess"|"DeleteSuccess"|string;
-  export type InclusionStatus = "excludeFromAssessment"|"includeInAssessment"|string;
+  export type ImportFileTaskStatus = "ImportInProgress"|"ImportFailed"|"ImportPartialSuccess"|"ImportSuccess"|"DeleteInProgress"|"DeleteFailed"|"DeletePartialSuccess"|"DeleteSuccess"|string&{};
+  export type InclusionStatus = "excludeFromAssessment"|"includeInAssessment"|string&{};
   export type Integer = number;
   export type InterfaceName = string;
   export type ListAntipatternSeveritySummary = AntipatternSeveritySummary[];
@@ -1076,7 +1076,7 @@ declare namespace MigrationHubStrategy {
      */
     targetDestination: NoPreferenceTargetDestinations;
   }
-  export type NoPreferenceTargetDestination = "None specified"|"AWS Elastic BeanStalk"|"AWS Fargate"|"Amazon Elastic Cloud Compute (EC2)"|"Amazon Elastic Container Service (ECS)"|"Amazon Elastic Kubernetes Service (EKS)"|string;
+  export type NoPreferenceTargetDestination = "None specified"|"AWS Elastic BeanStalk"|"AWS Fargate"|"Amazon Elastic Cloud Compute (EC2)"|"Amazon Elastic Container Service (ECS)"|"Amazon Elastic Kubernetes Service (EKS)"|string&{};
   export type NoPreferenceTargetDestinations = NoPreferenceTargetDestination[];
   export interface OSInfo {
     /**
@@ -1088,9 +1088,9 @@ declare namespace MigrationHubStrategy {
      */
     version?: OSVersion;
   }
-  export type OSType = "LINUX"|"WINDOWS"|string;
+  export type OSType = "LINUX"|"WINDOWS"|string&{};
   export type OSVersion = string;
-  export type OutputFormat = "Excel"|"Json"|string;
+  export type OutputFormat = "Excel"|"Json"|string&{};
   export interface PipelineInfo {
     /**
      * The time when the pipeline info was configured.
@@ -1102,7 +1102,7 @@ declare namespace MigrationHubStrategy {
     pipelineType?: PipelineType;
   }
   export type PipelineInfoList = PipelineInfo[];
-  export type PipelineType = "AZURE_DEVOPS"|string;
+  export type PipelineType = "AZURE_DEVOPS"|string&{};
   export interface PrioritizeBusinessGoals {
     /**
      *  Rank of business goals based on priority. 
@@ -1156,7 +1156,7 @@ declare namespace MigrationHubStrategy {
      */
     statusMessage?: RecommendationReportStatusMessage;
   }
-  export type RecommendationReportStatus = "FAILED"|"IN_PROGRESS"|"SUCCESS"|string;
+  export type RecommendationReportStatus = "FAILED"|"IN_PROGRESS"|"SUCCESS"|string&{};
   export type RecommendationReportStatusMessage = string;
   export type RecommendationReportTimeStamp = Date;
   export interface RecommendationSet {
@@ -1182,7 +1182,7 @@ declare namespace MigrationHubStrategy {
   }
   export type ResourceId = string;
   export type ResourceName = string;
-  export type ResourceSubType = "Database"|"Process"|"DatabaseProcess"|string;
+  export type ResourceSubType = "Database"|"Process"|"DatabaseProcess"|string&{};
   export interface Result {
     /**
      * The error in server analysis.
@@ -1202,9 +1202,9 @@ declare namespace MigrationHubStrategy {
     statusMessage?: StatusMessage;
   }
   export type ResultList = Result[];
-  export type RunTimeAnalyzerName = "A2C_ANALYZER"|"REHOST_ANALYZER"|"EMP_PA_ANALYZER"|"DATABASE_ANALYZER"|"SCT_ANALYZER"|string;
-  export type RunTimeAssessmentStatus = "dataCollectionTaskToBeScheduled"|"dataCollectionTaskScheduled"|"dataCollectionTaskStarted"|"dataCollectionTaskStopped"|"dataCollectionTaskSuccess"|"dataCollectionTaskFailed"|"dataCollectionTaskPartialSuccess"|string;
-  export type RuntimeAnalysisStatus = "ANALYSIS_TO_BE_SCHEDULED"|"ANALYSIS_STARTED"|"ANALYSIS_SUCCESS"|"ANALYSIS_FAILED"|string;
+  export type RunTimeAnalyzerName = "A2C_ANALYZER"|"REHOST_ANALYZER"|"EMP_PA_ANALYZER"|"DATABASE_ANALYZER"|"SCT_ANALYZER"|string&{};
+  export type RunTimeAssessmentStatus = "dataCollectionTaskToBeScheduled"|"dataCollectionTaskScheduled"|"dataCollectionTaskStarted"|"dataCollectionTaskStopped"|"dataCollectionTaskSuccess"|"dataCollectionTaskFailed"|"dataCollectionTaskPartialSuccess"|string&{};
+  export type RuntimeAnalysisStatus = "ANALYSIS_TO_BE_SCHEDULED"|"ANALYSIS_STARTED"|"ANALYSIS_SUCCESS"|"ANALYSIS_FAILED"|string&{};
   export type S3Bucket = string;
   export type S3Key = string;
   export type S3Keys = String[];
@@ -1225,9 +1225,9 @@ declare namespace MigrationHubStrategy {
      */
     targetDestination: SelfManageTargetDestinations;
   }
-  export type SelfManageTargetDestination = "None specified"|"Amazon Elastic Cloud Compute (EC2)"|"Amazon Elastic Container Service (ECS)"|"Amazon Elastic Kubernetes Service (EKS)"|string;
+  export type SelfManageTargetDestination = "None specified"|"Amazon Elastic Cloud Compute (EC2)"|"Amazon Elastic Container Service (ECS)"|"Amazon Elastic Kubernetes Service (EKS)"|string&{};
   export type SelfManageTargetDestinations = SelfManageTargetDestination[];
-  export type ServerCriteria = "NOT_DEFINED"|"OS_NAME"|"STRATEGY"|"DESTINATION"|"SERVER_ID"|"ANALYSIS_STATUS"|"ERROR_CATEGORY"|string;
+  export type ServerCriteria = "NOT_DEFINED"|"OS_NAME"|"STRATEGY"|"DESTINATION"|"SERVER_ID"|"ANALYSIS_STATUS"|"ERROR_CATEGORY"|string&{};
   export interface ServerDetail {
     /**
      *  The S3 bucket name and Amazon S3 key name for anti-pattern report. 
@@ -1293,9 +1293,9 @@ declare namespace MigrationHubStrategy {
      */
     serverErrorCategory?: ServerErrorCategory;
   }
-  export type ServerErrorCategory = "CONNECTIVITY_ERROR"|"CREDENTIAL_ERROR"|"PERMISSION_ERROR"|"ARCHITECTURE_ERROR"|"OTHER_ERROR"|string;
+  export type ServerErrorCategory = "CONNECTIVITY_ERROR"|"CREDENTIAL_ERROR"|"PERMISSION_ERROR"|"ARCHITECTURE_ERROR"|"OTHER_ERROR"|string&{};
   export type ServerId = string;
-  export type ServerOsType = "WindowsServer"|"AmazonLinux"|"EndOfSupportWindowsServer"|"Redhat"|"Other"|string;
+  export type ServerOsType = "WindowsServer"|"AmazonLinux"|"EndOfSupportWindowsServer"|"Redhat"|"Other"|string&{};
   export interface ServerStatusSummary {
     /**
      * The number of servers successfully analyzed, partially successful or failed analysis.
@@ -1335,8 +1335,8 @@ declare namespace MigrationHubStrategy {
      */
     count?: Integer;
   }
-  export type Severity = "HIGH"|"MEDIUM"|"LOW"|string;
-  export type SortOrder = "ASC"|"DESC"|string;
+  export type Severity = "HIGH"|"MEDIUM"|"LOW"|string&{};
+  export type SortOrder = "ASC"|"DESC"|string&{};
   export interface SourceCode {
     /**
      *  The repository name for the source code. 
@@ -1355,7 +1355,7 @@ declare namespace MigrationHubStrategy {
      */
     versionControl?: VersionControl;
   }
-  export type SourceCodeAnalyzerName = "CSHARP_ANALYZER"|"JAVA_ANALYZER"|"BYTECODE_ANALYZER"|"PORTING_ASSISTANT"|string;
+  export type SourceCodeAnalyzerName = "CSHARP_ANALYZER"|"JAVA_ANALYZER"|"BYTECODE_ANALYZER"|"PORTING_ASSISTANT"|string&{};
   export type SourceCodeList = SourceCode[];
   export type SourceCodeRepositories = SourceCodeRepository[];
   export interface SourceCodeRepository {
@@ -1377,7 +1377,7 @@ declare namespace MigrationHubStrategy {
     versionControlType?: String;
   }
   export type SourceVersion = string;
-  export type SrcCodeOrDbAnalysisStatus = "ANALYSIS_TO_BE_SCHEDULED"|"ANALYSIS_STARTED"|"ANALYSIS_SUCCESS"|"ANALYSIS_FAILED"|"ANALYSIS_PARTIAL_SUCCESS"|"UNCONFIGURED"|"CONFIGURED"|string;
+  export type SrcCodeOrDbAnalysisStatus = "ANALYSIS_TO_BE_SCHEDULED"|"ANALYSIS_STARTED"|"ANALYSIS_SUCCESS"|"ANALYSIS_FAILED"|"ANALYSIS_PARTIAL_SUCCESS"|"UNCONFIGURED"|"CONFIGURED"|string&{};
   export interface StartAssessmentRequest {
     /**
      * List of criteria for assessment.
@@ -1459,7 +1459,7 @@ declare namespace MigrationHubStrategy {
   }
   export interface StopAssessmentResponse {
   }
-  export type Strategy = "Rehost"|"Retirement"|"Refactor"|"Replatform"|"Retain"|"Relocate"|"Repurchase"|string;
+  export type Strategy = "Rehost"|"Retirement"|"Refactor"|"Replatform"|"Retain"|"Relocate"|"Repurchase"|string&{};
   export interface StrategyOption {
     /**
      *  Indicates if a specific strategy is preferred for the application component. 
@@ -1478,7 +1478,7 @@ declare namespace MigrationHubStrategy {
      */
     toolName?: TransformationToolName;
   }
-  export type StrategyRecommendation = "recommended"|"viableOption"|"notRecommended"|"potential"|string;
+  export type StrategyRecommendation = "recommended"|"viableOption"|"notRecommended"|"potential"|string&{};
   export interface StrategySummary {
     /**
      *  The count of recommendations per strategy. 
@@ -1508,9 +1508,9 @@ declare namespace MigrationHubStrategy {
      */
     osInfo?: OSInfo;
   }
-  export type TargetDatabaseEngine = "None specified"|"Amazon Aurora"|"AWS PostgreSQL"|"MySQL"|"Microsoft SQL Server"|"Oracle Database"|"MariaDB"|"SAP"|"Db2 LUW"|"MongoDB"|string;
+  export type TargetDatabaseEngine = "None specified"|"Amazon Aurora"|"AWS PostgreSQL"|"MySQL"|"Microsoft SQL Server"|"Oracle Database"|"MariaDB"|"SAP"|"Db2 LUW"|"MongoDB"|string&{};
   export type TargetDatabaseEngines = TargetDatabaseEngine[];
-  export type TargetDestination = "None specified"|"AWS Elastic BeanStalk"|"AWS Fargate"|"Amazon Elastic Cloud Compute (EC2)"|"Amazon Elastic Container Service (ECS)"|"Amazon Elastic Kubernetes Service (EKS)"|"Aurora MySQL"|"Aurora PostgreSQL"|"Amazon Relational Database Service on MySQL"|"Amazon Relational Database Service on PostgreSQL"|"Amazon DocumentDB"|"Amazon DynamoDB"|"Amazon Relational Database Service"|"Babelfish for Aurora PostgreSQL"|string;
+  export type TargetDestination = "None specified"|"AWS Elastic BeanStalk"|"AWS Fargate"|"Amazon Elastic Cloud Compute (EC2)"|"Amazon Elastic Container Service (ECS)"|"Amazon Elastic Kubernetes Service (EKS)"|"Aurora MySQL"|"Aurora PostgreSQL"|"Amazon Relational Database Service on MySQL"|"Amazon Relational Database Service on PostgreSQL"|"Amazon DocumentDB"|"Amazon DynamoDB"|"Amazon Relational Database Service"|"Babelfish for Aurora PostgreSQL"|string&{};
   export type TimeStamp = Date;
   export type TranformationToolDescription = string;
   export type TranformationToolInstallationLink = string;
@@ -1528,7 +1528,7 @@ declare namespace MigrationHubStrategy {
      */
     tranformationToolInstallationLink?: TranformationToolInstallationLink;
   }
-  export type TransformationToolName = "App2Container"|"Porting Assistant For .NET"|"End of Support Migration"|"Windows Web Application Migration Assistant"|"Application Migration Service"|"Strategy Recommendation Support"|"In Place Operating System Upgrade"|"Schema Conversion Tool"|"Database Migration Service"|"Native SQL Server Backup/Restore"|string;
+  export type TransformationToolName = "App2Container"|"Porting Assistant For .NET"|"End of Support Migration"|"Windows Web Application Migration Assistant"|"Application Migration Service"|"Strategy Recommendation Support"|"In Place Operating System Upgrade"|"Schema Conversion Tool"|"Database Migration Service"|"Native SQL Server Backup/Restore"|string&{};
   export interface UpdateApplicationComponentConfigRequest {
     /**
      * The type of known component.
@@ -1584,7 +1584,7 @@ declare namespace MigrationHubStrategy {
     vcenterConfigurationTimeStamp?: String;
   }
   export type VcenterBasedRemoteInfoList = VcenterBasedRemoteInfo[];
-  export type VersionControl = "GITHUB"|"GITHUB_ENTERPRISE"|"AZURE_DEVOPS_GIT"|string;
+  export type VersionControl = "GITHUB"|"GITHUB_ENTERPRISE"|"AZURE_DEVOPS_GIT"|string&{};
   export interface VersionControlInfo {
     /**
      * The time when the version control system was last configured.
@@ -1596,7 +1596,7 @@ declare namespace MigrationHubStrategy {
     versionControlType?: VersionControlType;
   }
   export type VersionControlInfoList = VersionControlInfo[];
-  export type VersionControlType = "GITHUB"|"GITHUB_ENTERPRISE"|"AZURE_DEVOPS_GIT"|string;
+  export type VersionControlType = "GITHUB"|"GITHUB_ENTERPRISE"|"AZURE_DEVOPS_GIT"|string&{};
   export type importS3Bucket = string;
   export type importS3Key = string;
   /**

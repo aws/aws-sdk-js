@@ -378,7 +378,7 @@ declare namespace BackupGateway {
      */
     VpcEndpoint?: VpcEndpoint;
   }
-  export type GatewayType = "BACKUP_VM"|string;
+  export type GatewayType = "BACKUP_VM"|string&{};
   export type Gateways = Gateway[];
   export interface GetBandwidthRateLimitScheduleInput {
     /**
@@ -515,7 +515,7 @@ declare namespace BackupGateway {
     State?: HypervisorState;
   }
   export type HypervisorId = string;
-  export type HypervisorState = "PENDING"|"ONLINE"|"OFFLINE"|"ERROR"|string;
+  export type HypervisorState = "PENDING"|"ONLINE"|"OFFLINE"|"ERROR"|string&{};
   export type Hypervisors = Hypervisor[];
   export type IamRoleArn = string;
   export interface ImportHypervisorConfigurationInput {
@@ -734,7 +734,7 @@ declare namespace BackupGateway {
      */
     HypervisorArn?: ServerArn;
   }
-  export type SyncMetadataStatus = "CREATED"|"RUNNING"|"FAILED"|"PARTIALLY_FAILED"|"SUCCEEDED"|string;
+  export type SyncMetadataStatus = "CREATED"|"RUNNING"|"FAILED"|"PARTIALLY_FAILED"|"SUCCEEDED"|string&{};
   export interface Tag {
     /**
      * The key part of a tag's key-value pair. The key can't start with aws:.

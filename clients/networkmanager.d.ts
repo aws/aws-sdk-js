@@ -881,8 +881,8 @@ declare namespace NetworkManager {
   }
   export type AttachmentId = string;
   export type AttachmentList = Attachment[];
-  export type AttachmentState = "REJECTED"|"PENDING_ATTACHMENT_ACCEPTANCE"|"CREATING"|"FAILED"|"AVAILABLE"|"UPDATING"|"PENDING_NETWORK_UPDATE"|"PENDING_TAG_ACCEPTANCE"|"DELETING"|string;
-  export type AttachmentType = "CONNECT"|"SITE_TO_SITE_VPN"|"VPC"|"TRANSIT_GATEWAY_ROUTE_TABLE"|string;
+  export type AttachmentState = "REJECTED"|"PENDING_ATTACHMENT_ACCEPTANCE"|"CREATING"|"FAILED"|"AVAILABLE"|"UPDATING"|"PENDING_NETWORK_UPDATE"|"PENDING_TAG_ACCEPTANCE"|"DELETING"|string&{};
+  export type AttachmentType = "CONNECT"|"SITE_TO_SITE_VPN"|"VPC"|"TRANSIT_GATEWAY_ROUTE_TABLE"|string&{};
   export interface Bandwidth {
     /**
      * Upload speed in Mbps.
@@ -900,10 +900,10 @@ declare namespace NetworkManager {
     PeerAsn?: Long;
   }
   export type Boolean = boolean;
-  export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string;
-  export type ChangeSetState = "PENDING_GENERATION"|"FAILED_GENERATION"|"READY_TO_EXECUTE"|"EXECUTING"|"EXECUTION_SUCCEEDED"|"OUT_OF_DATE"|string;
-  export type ChangeStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
-  export type ChangeType = "CORE_NETWORK_SEGMENT"|"CORE_NETWORK_EDGE"|"ATTACHMENT_MAPPING"|"ATTACHMENT_ROUTE_PROPAGATION"|"ATTACHMENT_ROUTE_STATIC"|"CORE_NETWORK_CONFIGURATION"|"SEGMENTS_CONFIGURATION"|"SEGMENT_ACTIONS_CONFIGURATION"|"ATTACHMENT_POLICIES_CONFIGURATION"|string;
+  export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string&{};
+  export type ChangeSetState = "PENDING_GENERATION"|"FAILED_GENERATION"|"READY_TO_EXECUTE"|"EXECUTING"|"EXECUTION_SUCCEEDED"|"OUT_OF_DATE"|string&{};
+  export type ChangeStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"FAILED"|string&{};
+  export type ChangeType = "CORE_NETWORK_SEGMENT"|"CORE_NETWORK_EDGE"|"ATTACHMENT_MAPPING"|"ATTACHMENT_ROUTE_PROPAGATION"|"ATTACHMENT_ROUTE_STATIC"|"CORE_NETWORK_CONFIGURATION"|"SEGMENTS_CONFIGURATION"|"SEGMENT_ACTIONS_CONFIGURATION"|"ATTACHMENT_POLICIES_CONFIGURATION"|string&{};
   export type ClientToken = string;
   export interface ConnectAttachment {
     /**
@@ -982,7 +982,7 @@ declare namespace NetworkManager {
     State?: ConnectPeerAssociationState;
   }
   export type ConnectPeerAssociationList = ConnectPeerAssociation[];
-  export type ConnectPeerAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string;
+  export type ConnectPeerAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string&{};
   export interface ConnectPeerBgpConfiguration {
     /**
      * The ASN of the Coret Network.
@@ -1026,7 +1026,7 @@ declare namespace NetworkManager {
   }
   export type ConnectPeerId = string;
   export type ConnectPeerIdList = ConnectPeerId[];
-  export type ConnectPeerState = "CREATING"|"FAILED"|"AVAILABLE"|"DELETING"|string;
+  export type ConnectPeerState = "CREATING"|"FAILED"|"AVAILABLE"|"DELETING"|string&{};
   export interface ConnectPeerSummary {
     /**
      * The ID of a core network.
@@ -1122,9 +1122,9 @@ declare namespace NetworkManager {
   export type ConnectionId = string;
   export type ConnectionIdList = ConnectionId[];
   export type ConnectionList = Connection[];
-  export type ConnectionState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string;
-  export type ConnectionStatus = "UP"|"DOWN"|string;
-  export type ConnectionType = "BGP"|"IPSEC"|string;
+  export type ConnectionState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string&{};
+  export type ConnectionStatus = "UP"|"DOWN"|string&{};
+  export type ConnectionType = "BGP"|"IPSEC"|string&{};
   export type ConstrainedString = string;
   export type ConstrainedStringList = ConstrainedString[];
   export interface CoreNetwork {
@@ -1318,7 +1318,7 @@ declare namespace NetworkManager {
      */
     PolicyDocument?: CoreNetworkPolicyDocument;
   }
-  export type CoreNetworkPolicyAlias = "LIVE"|"LATEST"|string;
+  export type CoreNetworkPolicyAlias = "LIVE"|"LATEST"|string&{};
   export type CoreNetworkPolicyDocument = string;
   export interface CoreNetworkPolicyError {
     /**
@@ -1391,7 +1391,7 @@ declare namespace NetworkManager {
     EdgeLocation?: ExternalRegionCode;
   }
   export type CoreNetworkSegmentList = CoreNetworkSegment[];
-  export type CoreNetworkState = "CREATING"|"UPDATING"|"AVAILABLE"|"DELETING"|string;
+  export type CoreNetworkState = "CREATING"|"UPDATING"|"AVAILABLE"|"DELETING"|string&{};
   export interface CoreNetworkSummary {
     /**
      * The ID of a core network.
@@ -1808,7 +1808,7 @@ declare namespace NetworkManager {
     State?: CustomerGatewayAssociationState;
   }
   export type CustomerGatewayAssociationList = CustomerGatewayAssociation[];
-  export type CustomerGatewayAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string;
+  export type CustomerGatewayAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string&{};
   export type DateTime = Date;
   export interface DeleteAttachmentRequest {
     /**
@@ -2060,7 +2060,7 @@ declare namespace NetworkManager {
   export type DeviceId = string;
   export type DeviceIdList = DeviceId[];
   export type DeviceList = Device[];
-  export type DeviceState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string;
+  export type DeviceState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string&{};
   export interface DisassociateConnectPeerRequest {
     /**
      * The ID of the global network.
@@ -2877,7 +2877,7 @@ declare namespace NetworkManager {
   export type GlobalNetworkId = string;
   export type GlobalNetworkIdList = GlobalNetworkId[];
   export type GlobalNetworkList = GlobalNetwork[];
-  export type GlobalNetworkState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string;
+  export type GlobalNetworkState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string&{};
   export type IPAddress = string;
   export type Integer = number;
   export interface Link {
@@ -2946,11 +2946,11 @@ declare namespace NetworkManager {
     LinkAssociationState?: LinkAssociationState;
   }
   export type LinkAssociationList = LinkAssociation[];
-  export type LinkAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string;
+  export type LinkAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string&{};
   export type LinkId = string;
   export type LinkIdList = LinkId[];
   export type LinkList = Link[];
-  export type LinkState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string;
+  export type LinkState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string&{};
   export interface ListAttachmentsRequest {
     /**
      * The ID of a core network.
@@ -3397,8 +3397,8 @@ declare namespace NetworkManager {
   }
   export type PeeringId = string;
   export type PeeringList = Peering[];
-  export type PeeringState = "CREATING"|"FAILED"|"AVAILABLE"|"DELETING"|string;
-  export type PeeringType = "TRANSIT_GATEWAY"|string;
+  export type PeeringState = "CREATING"|"FAILED"|"AVAILABLE"|"DELETING"|string&{};
+  export type PeeringType = "TRANSIT_GATEWAY"|string&{};
   export interface ProposedSegmentChange {
     /**
      * The list of key-value tags that changed for the segment.
@@ -3573,8 +3573,8 @@ declare namespace NetworkManager {
      */
     ReasonContext?: ReasonContextMap;
   }
-  export type RouteAnalysisCompletionReasonCode = "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND"|"TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY"|"CYCLIC_PATH_DETECTED"|"TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND"|"ROUTE_NOT_FOUND"|"BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND"|"INACTIVE_ROUTE_FOR_DESTINATION_FOUND"|"TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH"|"MAX_HOPS_EXCEEDED"|"POSSIBLE_MIDDLEBOX"|"NO_DESTINATION_ARN_PROVIDED"|string;
-  export type RouteAnalysisCompletionResultCode = "CONNECTED"|"NOT_CONNECTED"|string;
+  export type RouteAnalysisCompletionReasonCode = "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND"|"TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY"|"CYCLIC_PATH_DETECTED"|"TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND"|"ROUTE_NOT_FOUND"|"BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND"|"INACTIVE_ROUTE_FOR_DESTINATION_FOUND"|"TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH"|"MAX_HOPS_EXCEEDED"|"POSSIBLE_MIDDLEBOX"|"NO_DESTINATION_ARN_PROVIDED"|string&{};
+  export type RouteAnalysisCompletionResultCode = "CONNECTED"|"NOT_CONNECTED"|string&{};
   export interface RouteAnalysisEndpointOptions {
     /**
      * The ARN of the transit gateway attachment.
@@ -3609,8 +3609,8 @@ declare namespace NetworkManager {
      */
     Path?: PathComponentList;
   }
-  export type RouteAnalysisStatus = "RUNNING"|"COMPLETED"|"FAILED"|string;
-  export type RouteState = "ACTIVE"|"BLACKHOLE"|string;
+  export type RouteAnalysisStatus = "RUNNING"|"COMPLETED"|"FAILED"|string&{};
+  export type RouteState = "ACTIVE"|"BLACKHOLE"|string&{};
   export type RouteStateList = RouteState[];
   export interface RouteTableIdentifier {
     /**
@@ -3622,8 +3622,8 @@ declare namespace NetworkManager {
      */
     CoreNetworkSegmentEdge?: CoreNetworkSegmentEdgeIdentifier;
   }
-  export type RouteTableType = "TRANSIT_GATEWAY_ROUTE_TABLE"|"CORE_NETWORK_SEGMENT"|string;
-  export type RouteType = "PROPAGATED"|"STATIC"|string;
+  export type RouteTableType = "TRANSIT_GATEWAY_ROUTE_TABLE"|"CORE_NETWORK_SEGMENT"|string&{};
+  export type RouteType = "PROPAGATED"|"STATIC"|string&{};
   export type RouteTypeList = RouteType[];
   export type SLRDeploymentStatus = string;
   export type ServerSideString = string;
@@ -3665,7 +3665,7 @@ declare namespace NetworkManager {
   export type SiteId = string;
   export type SiteIdList = SiteId[];
   export type SiteList = Site[];
-  export type SiteState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string;
+  export type SiteState = "PENDING"|"AVAILABLE"|"DELETING"|"UPDATING"|string&{};
   export interface SiteToSiteVpnAttachment {
     /**
      * Provides details about a site-to-site VPN attachment.
@@ -3773,7 +3773,7 @@ declare namespace NetworkManager {
     State?: TransitGatewayConnectPeerAssociationState;
   }
   export type TransitGatewayConnectPeerAssociationList = TransitGatewayConnectPeerAssociation[];
-  export type TransitGatewayConnectPeerAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string;
+  export type TransitGatewayConnectPeerAssociationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|string&{};
   export interface TransitGatewayPeering {
     /**
      * Describes a transit gateway peer connection.
@@ -3804,7 +3804,7 @@ declare namespace NetworkManager {
     State?: TransitGatewayRegistrationStateReason;
   }
   export type TransitGatewayRegistrationList = TransitGatewayRegistration[];
-  export type TransitGatewayRegistrationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|"FAILED"|string;
+  export type TransitGatewayRegistrationState = "PENDING"|"AVAILABLE"|"DELETING"|"DELETED"|"FAILED"|string&{};
   export interface TransitGatewayRegistrationStateReason {
     /**
      * The code for the state reason.
@@ -3827,7 +3827,7 @@ declare namespace NetworkManager {
      */
     TransitGatewayRouteTableArn?: TransitGatewayRouteTableArn;
   }
-  export type TunnelProtocol = "GRE"|string;
+  export type TunnelProtocol = "GRE"|string&{};
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.

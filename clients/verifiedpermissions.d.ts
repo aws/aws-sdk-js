@@ -414,7 +414,7 @@ declare namespace VerifiedPermissions {
      */
     lastUpdatedDate: TimestampFormat;
   }
-  export type Decision = "ALLOW"|"DENY"|string;
+  export type Decision = "ALLOW"|"DENY"|string&{};
   export interface DeleteIdentitySourceInput {
     /**
      * Specifies the ID of the policy store that contains the identity source that you want to delete.
@@ -948,7 +948,7 @@ declare namespace VerifiedPermissions {
   export type Namespace = string;
   export type NamespaceList = Namespace[];
   export type NextToken = string;
-  export type OpenIdIssuer = "COGNITO"|string;
+  export type OpenIdIssuer = "COGNITO"|string&{};
   export type ParentList = EntityIdentifier[];
   export interface PolicyDefinition {
     /**
@@ -1076,7 +1076,7 @@ declare namespace VerifiedPermissions {
     lastUpdatedDate: TimestampFormat;
   }
   export type PolicyTemplatesList = PolicyTemplateItem[];
-  export type PolicyType = "STATIC"|"TEMPLATE_LINKED"|string;
+  export type PolicyType = "STATIC"|"TEMPLATE_LINKED"|string&{};
   export type PrincipalEntityType = string;
   export interface PutSchemaInput {
     /**
@@ -1366,7 +1366,7 @@ declare namespace VerifiedPermissions {
     statement: PolicyStatement;
   }
   export type UserPoolArn = string;
-  export type ValidationMode = "OFF"|"STRICT"|string;
+  export type ValidationMode = "OFF"|"STRICT"|string&{};
   export interface ValidationSettings {
     /**
      * The validation mode currently configured for this policy store. The valid values are:    OFF – Neither Verified Permissions nor Cedar perform any validation on policies. No validation errors are reported by either service.    STRICT – Requires a schema to be present in the policy store. Cedar performs validation on all submitted new or updated static policies and policy templates. Any that fail validation are rejected and Cedar doesn't store them in the policy store.    If Mode=STRICT and the policy store doesn't contain a schema, Verified Permissions rejects all static policies and policy templates because there is no schema to validate against.  To submit a static policy or policy template without a schema, you must turn off validation. 

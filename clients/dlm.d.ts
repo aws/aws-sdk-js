@@ -280,8 +280,8 @@ declare namespace DLM {
      */
     Parameters?: EventParameters;
   }
-  export type EventSourceValues = "MANAGED_CWE"|string;
-  export type EventTypeValues = "shareSnapshot"|string;
+  export type EventSourceValues = "MANAGED_CWE"|string&{};
+  export type EventTypeValues = "shareSnapshot"|string&{};
   export type ExcludeBootVolume = boolean;
   export type ExcludeDataVolumeTagList = Tag[];
   export type ExecutionRoleArn = string;
@@ -343,9 +343,9 @@ declare namespace DLM {
      */
     Policy?: LifecyclePolicy;
   }
-  export type GettablePolicyStateValues = "ENABLED"|"DISABLED"|"ERROR"|string;
+  export type GettablePolicyStateValues = "ENABLED"|"DISABLED"|"ERROR"|string&{};
   export type Interval = number;
-  export type IntervalUnitValues = "HOURS"|string;
+  export type IntervalUnitValues = "HOURS"|string&{};
   export interface LifecyclePolicy {
     /**
      * The identifier of the lifecycle policy.
@@ -423,7 +423,7 @@ declare namespace DLM {
      */
     Tags?: TagMap;
   }
-  export type LocationValues = "CLOUD"|"OUTPOST_LOCAL"|string;
+  export type LocationValues = "CLOUD"|"OUTPOST_LOCAL"|string&{};
   export type NoReboot = boolean;
   export interface Parameters {
     /**
@@ -477,10 +477,10 @@ declare namespace DLM {
   }
   export type PolicyId = string;
   export type PolicyIdList = PolicyId[];
-  export type PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"|"IMAGE_MANAGEMENT"|"EVENT_BASED_POLICY"|string;
+  export type PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"|"IMAGE_MANAGEMENT"|"EVENT_BASED_POLICY"|string&{};
   export type ResourceLocationList = ResourceLocationValues[];
-  export type ResourceLocationValues = "CLOUD"|"OUTPOST"|string;
-  export type ResourceTypeValues = "VOLUME"|"INSTANCE"|string;
+  export type ResourceLocationValues = "CLOUD"|"OUTPOST"|string&{};
+  export type ResourceTypeValues = "VOLUME"|"INSTANCE"|string&{};
   export type ResourceTypeValuesList = ResourceTypeValues[];
   export interface RetainRule {
     /**
@@ -510,7 +510,7 @@ declare namespace DLM {
      */
     IntervalUnit?: RetentionIntervalUnitValues;
   }
-  export type RetentionIntervalUnitValues = "DAYS"|"WEEKS"|"MONTHS"|"YEARS"|string;
+  export type RetentionIntervalUnitValues = "DAYS"|"WEEKS"|"MONTHS"|"YEARS"|string&{};
   export interface Schedule {
     /**
      * The name of the schedule.
@@ -559,7 +559,7 @@ declare namespace DLM {
   }
   export type ScheduleList = Schedule[];
   export type ScheduleName = string;
-  export type SettablePolicyStateValues = "ENABLED"|"DISABLED"|string;
+  export type SettablePolicyStateValues = "ENABLED"|"DISABLED"|string&{};
   export interface ShareRule {
     /**
      * The IDs of the Amazon Web Services accounts with which to share the snapshots.
