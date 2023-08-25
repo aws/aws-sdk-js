@@ -330,14 +330,14 @@ declare namespace AccessAnalyzer {
   export type AccessPreviewFindingId = string;
   export type AccessPreviewFindingsList = AccessPreviewFinding[];
   export type AccessPreviewId = string;
-  export type AccessPreviewStatus = "COMPLETED"|"CREATING"|"FAILED"|string;
+  export type AccessPreviewStatus = "COMPLETED"|"CREATING"|"FAILED"|string&{};
   export interface AccessPreviewStatusReason {
     /**
      * The reason code for the current status of the access preview.
      */
     code: AccessPreviewStatusReasonCode;
   }
-  export type AccessPreviewStatusReasonCode = "INTERNAL_ERROR"|"INVALID_CONFIGURATION"|string;
+  export type AccessPreviewStatusReasonCode = "INTERNAL_ERROR"|"INVALID_CONFIGURATION"|string&{};
   export interface AccessPreviewSummary {
     /**
      * The unique ID for the access preview.
@@ -369,7 +369,7 @@ declare namespace AccessAnalyzer {
      */
     uri?: AclUri;
   }
-  export type AclPermission = "READ"|"WRITE"|"READ_ACP"|"WRITE_ACP"|"FULL_CONTROL"|string;
+  export type AclPermission = "READ"|"WRITE"|"READ_ACP"|"WRITE_ACP"|"FULL_CONTROL"|string&{};
   export type AclUri = string;
   export type ActionList = String[];
   export interface AnalyzedResource {
@@ -434,7 +434,7 @@ declare namespace AccessAnalyzer {
   }
   export type AnalyzedResourcesList = AnalyzedResourceSummary[];
   export type AnalyzerArn = string;
-  export type AnalyzerStatus = "ACTIVE"|"CREATING"|"DISABLED"|"FAILED"|string;
+  export type AnalyzerStatus = "ACTIVE"|"CREATING"|"DISABLED"|"FAILED"|string&{};
   export interface AnalyzerSummary {
     /**
      * The ARN of the analyzer.
@@ -798,7 +798,7 @@ declare namespace AccessAnalyzer {
      */
     sources?: FindingSourceList;
   }
-  export type FindingChangeType = "CHANGED"|"NEW"|"UNCHANGED"|string;
+  export type FindingChangeType = "CHANGED"|"NEW"|"UNCHANGED"|string&{};
   export type FindingId = string;
   export type FindingIdList = FindingId[];
   export interface FindingSource {
@@ -822,9 +822,9 @@ declare namespace AccessAnalyzer {
     accessPointAccount?: String;
   }
   export type FindingSourceList = FindingSource[];
-  export type FindingSourceType = "POLICY"|"BUCKET_ACL"|"S3_ACCESS_POINT"|"S3_ACCESS_POINT_ACCOUNT"|string;
-  export type FindingStatus = "ACTIVE"|"ARCHIVED"|"RESOLVED"|string;
-  export type FindingStatusUpdate = "ACTIVE"|"ARCHIVED"|string;
+  export type FindingSourceType = "POLICY"|"BUCKET_ACL"|"S3_ACCESS_POINT"|"S3_ACCESS_POINT_ACCOUNT"|string&{};
+  export type FindingStatus = "ACTIVE"|"ARCHIVED"|"RESOLVED"|string&{};
+  export type FindingStatusUpdate = "ACTIVE"|"ARCHIVED"|string&{};
   export interface FindingSummary {
     /**
      * The ID of the finding.
@@ -1068,9 +1068,9 @@ declare namespace AccessAnalyzer {
      */
     message: String;
   }
-  export type JobErrorCode = "AUTHORIZATION_ERROR"|"RESOURCE_NOT_FOUND_ERROR"|"SERVICE_QUOTA_EXCEEDED_ERROR"|"SERVICE_ERROR"|string;
+  export type JobErrorCode = "AUTHORIZATION_ERROR"|"RESOURCE_NOT_FOUND_ERROR"|"SERVICE_QUOTA_EXCEEDED_ERROR"|"SERVICE_ERROR"|string&{};
   export type JobId = string;
-  export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"CANCELED"|string;
+  export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"CANCELED"|string&{};
   export type KmsConstraintsKey = string;
   export type KmsConstraintsMap = {[key: string]: KmsConstraintsValue};
   export type KmsConstraintsValue = string;
@@ -1107,7 +1107,7 @@ declare namespace AccessAnalyzer {
      */
     encryptionContextSubset?: KmsConstraintsMap;
   }
-  export type KmsGrantOperation = "CreateGrant"|"Decrypt"|"DescribeKey"|"Encrypt"|"GenerateDataKey"|"GenerateDataKeyPair"|"GenerateDataKeyPairWithoutPlaintext"|"GenerateDataKeyWithoutPlaintext"|"GetPublicKey"|"ReEncryptFrom"|"ReEncryptTo"|"RetireGrant"|"Sign"|"Verify"|string;
+  export type KmsGrantOperation = "CreateGrant"|"Decrypt"|"DescribeKey"|"Encrypt"|"GenerateDataKey"|"GenerateDataKeyPair"|"GenerateDataKeyPairWithoutPlaintext"|"GenerateDataKeyWithoutPlaintext"|"GetPublicKey"|"ReEncryptFrom"|"ReEncryptTo"|"RetireGrant"|"Sign"|"Verify"|string&{};
   export type KmsGrantOperationsList = KmsGrantOperation[];
   export interface KmsKeyConfiguration {
     /**
@@ -1323,7 +1323,7 @@ declare namespace AccessAnalyzer {
      */
     tags?: TagsMap;
   }
-  export type Locale = "DE"|"EN"|"ES"|"FR"|"IT"|"JA"|"KO"|"PT_BR"|"ZH_CN"|"ZH_TW"|string;
+  export type Locale = "DE"|"EN"|"ES"|"FR"|"IT"|"JA"|"KO"|"PT_BR"|"ZH_CN"|"ZH_TW"|string&{};
   export interface Location {
     /**
      * A path in a policy, represented as a sequence of path elements.
@@ -1343,7 +1343,7 @@ declare namespace AccessAnalyzer {
      */
     internetConfiguration?: InternetConfiguration;
   }
-  export type OrderBy = "ASC"|"DESC"|string;
+  export type OrderBy = "ASC"|"DESC"|string&{};
   export interface PathElement {
     /**
      * Refers to an index in a JSON array.
@@ -1394,7 +1394,7 @@ declare namespace AccessAnalyzer {
   }
   export type PolicyGenerationList = PolicyGeneration[];
   export type PolicyName = string;
-  export type PolicyType = "IDENTITY_POLICY"|"RESOURCE_POLICY"|"SERVICE_CONTROL_POLICY"|string;
+  export type PolicyType = "IDENTITY_POLICY"|"RESOURCE_POLICY"|"SERVICE_CONTROL_POLICY"|string&{};
   export interface Position {
     /**
      * The line of the position, starting from 1.
@@ -1453,10 +1453,10 @@ declare namespace AccessAnalyzer {
     kmsKeyId?: RdsDbSnapshotKmsKeyId;
   }
   export type RdsDbSnapshotKmsKeyId = string;
-  export type ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"|"DELEGATED_ADMINISTRATOR_DEREGISTERED"|"ORGANIZATION_DELETED"|"SERVICE_LINKED_ROLE_CREATION_FAILED"|string;
+  export type ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"|"DELEGATED_ADMINISTRATOR_DEREGISTERED"|"ORGANIZATION_DELETED"|"SERVICE_LINKED_ROLE_CREATION_FAILED"|string&{};
   export type RegionList = String[];
   export type ResourceArn = string;
-  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|"AWS::EFS::FileSystem"|"AWS::EC2::Snapshot"|"AWS::ECR::Repository"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBClusterSnapshot"|"AWS::SNS::Topic"|string;
+  export type ResourceType = "AWS::S3::Bucket"|"AWS::IAM::Role"|"AWS::SQS::Queue"|"AWS::Lambda::Function"|"AWS::Lambda::LayerVersion"|"AWS::KMS::Key"|"AWS::SecretsManager::Secret"|"AWS::EFS::FileSystem"|"AWS::EC2::Snapshot"|"AWS::ECR::Repository"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBClusterSnapshot"|"AWS::SNS::Topic"|string&{};
   export type RetiringPrincipal = string;
   export type RoleArn = string;
   export interface S3AccessPointConfiguration {
@@ -1658,7 +1658,7 @@ declare namespace AccessAnalyzer {
     allRegions?: Boolean;
   }
   export type TrailPropertiesList = TrailProperties[];
-  export type Type = "ACCOUNT"|"ORGANIZATION"|string;
+  export type Type = "ACCOUNT"|"ORGANIZATION"|string&{};
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource to remove the tag from.
@@ -1734,7 +1734,7 @@ declare namespace AccessAnalyzer {
     locations: LocationList;
   }
   export type ValidatePolicyFindingList = ValidatePolicyFinding[];
-  export type ValidatePolicyFindingType = "ERROR"|"SECURITY_WARNING"|"SUGGESTION"|"WARNING"|string;
+  export type ValidatePolicyFindingType = "ERROR"|"SECURITY_WARNING"|"SUGGESTION"|"WARNING"|string&{};
   export interface ValidatePolicyRequest {
     /**
      * The locale to use for localizing the findings.
@@ -1761,7 +1761,7 @@ declare namespace AccessAnalyzer {
      */
     validatePolicyResourceType?: ValidatePolicyResourceType;
   }
-  export type ValidatePolicyResourceType = "AWS::S3::Bucket"|"AWS::S3::AccessPoint"|"AWS::S3::MultiRegionAccessPoint"|"AWS::S3ObjectLambda::AccessPoint"|"AWS::IAM::AssumeRolePolicyDocument"|string;
+  export type ValidatePolicyResourceType = "AWS::S3::Bucket"|"AWS::S3::AccessPoint"|"AWS::S3::MultiRegionAccessPoint"|"AWS::S3ObjectLambda::AccessPoint"|"AWS::IAM::AssumeRolePolicyDocument"|string&{};
   export interface ValidatePolicyResponse {
     /**
      * The list of findings in a policy returned by IAM Access Analyzer based on its suite of policy checks.

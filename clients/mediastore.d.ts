@@ -212,12 +212,12 @@ declare namespace MediaStore {
   }
   export type ContainerARN = string;
   export type ContainerAccessLoggingEnabled = boolean;
-  export type ContainerLevelMetrics = "ENABLED"|"DISABLED"|string;
+  export type ContainerLevelMetrics = "ENABLED"|"DISABLED"|string&{};
   export type ContainerList = Container[];
   export type ContainerListLimit = number;
   export type ContainerName = string;
   export type ContainerPolicy = string;
-  export type ContainerStatus = "ACTIVE"|"CREATING"|"DELETING"|string;
+  export type ContainerStatus = "ACTIVE"|"CREATING"|"DELETING"|string&{};
   export type CorsPolicy = CorsRule[];
   export interface CorsRule {
     /**
@@ -394,7 +394,7 @@ declare namespace MediaStore {
     Tags?: TagList;
   }
   export type MaxAgeSeconds = number;
-  export type MethodName = "PUT"|"GET"|"DELETE"|"HEAD"|string;
+  export type MethodName = "PUT"|"GET"|"DELETE"|"HEAD"|string&{};
   export interface MetricPolicy {
     /**
      * A setting to enable or disable metrics at the container level.

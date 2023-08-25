@@ -146,10 +146,10 @@ declare namespace S3Outposts {
      */
     FailedReason?: FailedReason;
   }
-  export type EndpointAccessType = "Private"|"CustomerOwnedIp"|string;
+  export type EndpointAccessType = "Private"|"CustomerOwnedIp"|string&{};
   export type EndpointArn = string;
   export type EndpointId = string;
-  export type EndpointStatus = "Pending"|"Available"|"Deleting"|"Create_Failed"|"Delete_Failed"|string;
+  export type EndpointStatus = "Pending"|"Available"|"Deleting"|"Create_Failed"|"Delete_Failed"|string&{};
   export type Endpoints = Endpoint[];
   export type ErrorCode = string;
   export interface FailedReason {

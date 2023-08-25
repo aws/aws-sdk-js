@@ -206,8 +206,8 @@ declare namespace Macie {
   export type MemberAccounts = MemberAccount[];
   export type NextToken = string;
   export type Prefix = string;
-  export type S3ContinuousClassificationType = "FULL"|string;
-  export type S3OneTimeClassificationType = "FULL"|"NONE"|string;
+  export type S3ContinuousClassificationType = "FULL"|string&{};
+  export type S3OneTimeClassificationType = "FULL"|"NONE"|string&{};
   export interface S3Resource {
     /**
      * (Discontinued) The name of the S3 bucket.

@@ -390,7 +390,7 @@ declare namespace Wisdom {
     topicIntegrationArn?: GenericArn;
   }
   export type AssistantList = AssistantSummary[];
-  export type AssistantStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|string;
+  export type AssistantStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|string&{};
   export interface AssistantSummary {
     /**
      * The Amazon Resource Name (ARN) of the Wisdom assistant.
@@ -429,8 +429,8 @@ declare namespace Wisdom {
      */
     type: AssistantType;
   }
-  export type AssistantType = "AGENT"|string;
-  export type AssociationType = "KNOWLEDGE_BASE"|string;
+  export type AssistantType = "AGENT"|string&{};
+  export type AssociationType = "KNOWLEDGE_BASE"|string&{};
   export type Boolean = boolean;
   export type ClientToken = string;
   export interface ContentData {
@@ -510,7 +510,7 @@ declare namespace Wisdom {
      */
     knowledgeBaseId?: Uuid;
   }
-  export type ContentStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|"UPDATE_FAILED"|string;
+  export type ContentStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|"UPDATE_FAILED"|string&{};
   export interface ContentSummary {
     /**
      * The Amazon Resource Name (ARN) of the content.
@@ -807,9 +807,9 @@ declare namespace Wisdom {
      */
     value: NonEmptyString;
   }
-  export type FilterField = "NAME"|string;
+  export type FilterField = "NAME"|string&{};
   export type FilterList = Filter[];
-  export type FilterOperator = "EQUALS"|string;
+  export type FilterOperator = "EQUALS"|string&{};
   export type GenericArn = string;
   export interface GetAssistantAssociationRequest {
     /**
@@ -997,7 +997,7 @@ declare namespace Wisdom {
     tags?: Tags;
   }
   export type KnowledgeBaseList = KnowledgeBaseSummary[];
-  export type KnowledgeBaseStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|string;
+  export type KnowledgeBaseStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"ACTIVE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|string&{};
   export interface KnowledgeBaseSummary {
     /**
      * The description of the knowledge base.
@@ -1040,7 +1040,7 @@ declare namespace Wisdom {
      */
     tags?: Tags;
   }
-  export type KnowledgeBaseType = "EXTERNAL"|"CUSTOM"|string;
+  export type KnowledgeBaseType = "EXTERNAL"|"CUSTOM"|string&{};
   export interface ListAssistantAssociationsRequest {
     /**
      * The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
@@ -1242,7 +1242,7 @@ declare namespace Wisdom {
   }
   export type RecommendationIdList = String[];
   export type RecommendationList = RecommendationData[];
-  export type RecommendationSourceType = "ISSUE_DETECTION"|"RULE_EVALUATION"|"OTHER"|string;
+  export type RecommendationSourceType = "ISSUE_DETECTION"|"RULE_EVALUATION"|"OTHER"|string&{};
   export interface RecommendationTrigger {
     /**
      * A union type containing information related to the trigger.
@@ -1272,9 +1272,9 @@ declare namespace Wisdom {
     query?: QueryRecommendationTriggerData;
   }
   export type RecommendationTriggerList = RecommendationTrigger[];
-  export type RecommendationTriggerType = "QUERY"|string;
-  export type RecommendationType = "KNOWLEDGE_CONTENT"|string;
-  export type RelevanceLevel = "HIGH"|"MEDIUM"|"LOW"|string;
+  export type RecommendationTriggerType = "QUERY"|string&{};
+  export type RecommendationType = "KNOWLEDGE_CONTENT"|string&{};
+  export type RelevanceLevel = "HIGH"|"MEDIUM"|"LOW"|string&{};
   export type RelevanceScore = number;
   export interface RemoveKnowledgeBaseTemplateUriRequest {
     /**

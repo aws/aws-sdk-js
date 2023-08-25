@@ -207,7 +207,7 @@ declare namespace MQ {
      */
     ActionRequiredInfo?: __string;
   }
-  export type AuthenticationStrategy = "SIMPLE"|"LDAP"|string;
+  export type AuthenticationStrategy = "SIMPLE"|"LDAP"|string&{};
   export interface AvailabilityZone {
     /**
      * Id for the availability zone.
@@ -264,8 +264,8 @@ declare namespace MQ {
      */
     SupportedEngineVersions?: __listOf__string;
   }
-  export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|"CRITICAL_ACTION_REQUIRED"|"REPLICA"|string;
-  export type BrokerStorageType = "EBS"|"EFS"|string;
+  export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|"CRITICAL_ACTION_REQUIRED"|"REPLICA"|string&{};
+  export type BrokerStorageType = "EBS"|"EFS"|string&{};
   export interface BrokerSummary {
     /**
      * The broker's Amazon Resource Name (ARN).
@@ -300,7 +300,7 @@ declare namespace MQ {
      */
     HostInstanceType?: __string;
   }
-  export type ChangeType = "CREATE"|"UPDATE"|"DELETE"|string;
+  export type ChangeType = "CREATE"|"UPDATE"|"DELETE"|string&{};
   export interface Configuration {
     /**
      * Required. The ARN of the configuration.
@@ -583,8 +583,8 @@ declare namespace MQ {
      */
     DataReplicationRole: __string;
   }
-  export type DataReplicationMode = "NONE"|"CRDR"|string;
-  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
+  export type DataReplicationMode = "NONE"|"CRDR"|string&{};
+  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string&{};
   export interface DeleteBrokerRequest {
     /**
      * The unique ID that Amazon MQ generates for the broker.
@@ -619,7 +619,7 @@ declare namespace MQ {
   }
   export interface DeleteUserResponse {
   }
-  export type DeploymentMode = "SINGLE_INSTANCE"|"ACTIVE_STANDBY_MULTI_AZ"|"CLUSTER_MULTI_AZ"|string;
+  export type DeploymentMode = "SINGLE_INSTANCE"|"ACTIVE_STANDBY_MULTI_AZ"|"CLUSTER_MULTI_AZ"|string&{};
   export interface DescribeBrokerEngineTypesRequest {
     /**
      * Filter response by engine type.
@@ -946,7 +946,7 @@ declare namespace MQ {
      */
     UseAwsOwnedKey: __boolean;
   }
-  export type EngineType = "ACTIVEMQ"|"RABBITMQ"|string;
+  export type EngineType = "ACTIVEMQ"|"RABBITMQ"|string&{};
   export interface EngineVersion {
     /**
      * Id for the version.
@@ -1213,7 +1213,7 @@ declare namespace MQ {
      */
     General?: __boolean;
   }
-  export type PromoteMode = "SWITCHOVER"|"FAILOVER"|string;
+  export type PromoteMode = "SWITCHOVER"|"FAILOVER"|string&{};
   export interface PromoteRequest {
     /**
      * The unique ID that Amazon MQ generates for the broker.
@@ -1252,7 +1252,7 @@ declare namespace MQ {
      */
     Reason: SanitizationWarningReason;
   }
-  export type SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"|"DISALLOWED_ATTRIBUTE_REMOVED"|"INVALID_ATTRIBUTE_VALUE_REMOVED"|string;
+  export type SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"|"DISALLOWED_ATTRIBUTE_REMOVED"|"INVALID_ATTRIBUTE_VALUE_REMOVED"|string&{};
   export interface UpdateBrokerRequest {
     /**
      * Optional. The authentication strategy used to secure the broker. The default is SIMPLE.

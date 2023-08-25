@@ -599,7 +599,7 @@ declare namespace WorkSpacesWeb {
      */
     userSettingsArn: ARN;
   }
-  export type AuthenticationType = "Standard"|"IAM_Identity_Center"|string;
+  export type AuthenticationType = "Standard"|"IAM_Identity_Center"|string&{};
   export type BrowserPolicy = string;
   export interface BrowserSettings {
     /**
@@ -622,7 +622,7 @@ declare namespace WorkSpacesWeb {
      */
     browserSettingsArn?: ARN;
   }
-  export type BrowserType = "Chrome"|string;
+  export type BrowserType = "Chrome"|string&{};
   export interface Certificate {
     /**
      * The body of the certificate.
@@ -1033,7 +1033,7 @@ declare namespace WorkSpacesWeb {
   }
   export type DisconnectTimeoutInMinutes = number;
   export type DisplayName = string;
-  export type EnabledType = "Disabled"|"Enabled"|string;
+  export type EnabledType = "Disabled"|"Enabled"|string&{};
   export type EncryptionContextMap = {[key: string]: StringType};
   export interface GetBrowserSettingsRequest {
     /**
@@ -1202,7 +1202,7 @@ declare namespace WorkSpacesWeb {
      */
     identityProviderType?: IdentityProviderType;
   }
-  export type IdentityProviderType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string;
+  export type IdentityProviderType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string&{};
   export type IdleDisconnectTimeoutInMinutes = number;
   export interface IpAccessSettings {
     /**
@@ -1565,7 +1565,7 @@ declare namespace WorkSpacesWeb {
   }
   export type PortalEndpoint = string;
   export type PortalList = PortalSummary[];
-  export type PortalStatus = "Incomplete"|"Pending"|"Active"|string;
+  export type PortalStatus = "Incomplete"|"Pending"|"Active"|string&{};
   export interface PortalSummary {
     /**
      * The type of authentication integration points used when signing into the web portal. Defaults to Standard.  Standard web portals are authenticated directly through your identity provider. You need to call CreateIdentityProvider to integrate your identity provider with your web portal. User and group access to your web portal is controlled through your identity provider.  IAM_Identity_Center web portals are authenticated through AWS IAM Identity Center (successor to AWS Single Sign-On). They provide additional features, such as IdP-initiated authentication. Identity sources (including external identity provider integration), plus user and group access to your web portal, can be configured in the IAM Identity Center.
@@ -1624,7 +1624,7 @@ declare namespace WorkSpacesWeb {
      */
     userSettingsArn?: ARN;
   }
-  export type RendererType = "AppStream"|string;
+  export type RendererType = "AppStream"|string&{};
   export type SamlMetadata = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];

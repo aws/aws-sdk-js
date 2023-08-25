@@ -191,7 +191,7 @@ declare namespace MarketplaceCatalog {
      */
     FailureCode?: FailureCode;
   }
-  export type ChangeStatus = "PREPARING"|"APPLYING"|"SUCCEEDED"|"CANCELLED"|"FAILED"|string;
+  export type ChangeStatus = "PREPARING"|"APPLYING"|"SUCCEEDED"|"CANCELLED"|"FAILED"|string&{};
   export interface ChangeSummary {
     /**
      * The type of the change.
@@ -357,7 +357,7 @@ declare namespace MarketplaceCatalog {
   }
   export type ErrorDetailList = ErrorDetail[];
   export type ExceptionMessageContent = string;
-  export type FailureCode = "CLIENT_ERROR"|"SERVER_FAULT"|string;
+  export type FailureCode = "CLIENT_ERROR"|"SERVER_FAULT"|string&{};
   export interface Filter {
     /**
      * For ListEntities, the supported value for this is an EntityId. For ListChangeSets, the supported values are as follows:
@@ -473,7 +473,7 @@ declare namespace MarketplaceCatalog {
     Tags?: TagList;
   }
   export type NextToken = string;
-  export type OwnershipType = "SELF"|"SHARED"|string;
+  export type OwnershipType = "SELF"|"SHARED"|string&{};
   export interface PutResourcePolicyRequest {
     /**
      * The Amazon Resource Name (ARN) of the Entity resource you want to associate with a resource policy. 
@@ -502,7 +502,7 @@ declare namespace MarketplaceCatalog {
     SortOrder?: SortOrder;
   }
   export type SortBy = string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export interface StartChangeSetRequest {
     /**
      * The catalog related to the request. Fixed value: AWSMarketplace 

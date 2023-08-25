@@ -247,8 +247,8 @@ declare namespace Translate {
     TextTranslationJobProperties?: TextTranslationJobProperties;
   }
   export type Description = string;
-  export type Directionality = "UNI"|"MULTI"|string;
-  export type DisplayLanguageCode = "de"|"en"|"es"|"fr"|"it"|"ja"|"ko"|"pt"|"zh"|"zh-TW"|string;
+  export type Directionality = "UNI"|"MULTI"|string&{};
+  export type DisplayLanguageCode = "de"|"en"|"es"|"fr"|"it"|"ja"|"ko"|"pt"|"zh"|"zh-TW"|string&{};
   export interface Document {
     /**
      * The Contentfield type is Binary large object (blob). This object contains the document content converted into base64-encoded binary data. If you use one of the AWS SDKs, the SDK performs the Base64-encoding on this field before sending the request. 
@@ -271,8 +271,8 @@ declare namespace Translate {
     Id: EncryptionKeyID;
   }
   export type EncryptionKeyID = string;
-  export type EncryptionKeyType = "KMS"|string;
-  export type Formality = "FORMAL"|"INFORMAL"|string;
+  export type EncryptionKeyType = "KMS"|string&{};
+  export type Formality = "FORMAL"|"INFORMAL"|string&{};
   export interface GetParallelDataRequest {
     /**
      * The name of the parallel data resource that is being retrieved.
@@ -385,7 +385,7 @@ declare namespace Translate {
   }
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED"|string&{};
   export interface Language {
     /**
      * Language name of the supported language.
@@ -506,7 +506,7 @@ declare namespace Translate {
   export type LocalizedNameString = string;
   export type Long = number;
   export type MaxResultsInteger = number;
-  export type MergeStrategy = "OVERWRITE"|string;
+  export type MergeStrategy = "OVERWRITE"|string&{};
   export type NextToken = string;
   export interface OutputDataConfig {
     /**
@@ -536,7 +536,7 @@ declare namespace Translate {
      */
     Location: String;
   }
-  export type ParallelDataFormat = "TSV"|"CSV"|"TMX"|string;
+  export type ParallelDataFormat = "TSV"|"CSV"|"TMX"|string&{};
   export interface ParallelDataProperties {
     /**
      * The custom name assigned to the parallel data resource.
@@ -605,8 +605,8 @@ declare namespace Translate {
     LatestUpdateAttemptAt?: Timestamp;
   }
   export type ParallelDataPropertiesList = ParallelDataProperties[];
-  export type ParallelDataStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
-  export type Profanity = "MASK"|string;
+  export type ParallelDataStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string&{};
+  export type Profanity = "MASK"|string&{};
   export type ResourceArn = string;
   export type ResourceName = string;
   export type ResourceNameList = ResourceName[];
@@ -733,7 +733,7 @@ declare namespace Translate {
      */
     Directionality?: Directionality;
   }
-  export type TerminologyDataFormat = "CSV"|"TMX"|"TSV"|string;
+  export type TerminologyDataFormat = "CSV"|"TMX"|"TSV"|string&{};
   export interface TerminologyDataLocation {
     /**
      * The repository type for the custom terminology data.

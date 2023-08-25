@@ -969,7 +969,7 @@ declare namespace ECR {
      */
     kmsKey?: KmsKey;
   }
-  export type EncryptionType = "AES256"|"KMS"|string;
+  export type EncryptionType = "AES256"|"KMS"|string&{};
   export interface EnhancedImageScanFinding {
     /**
      * The Amazon Web Services account ID associated with the image.
@@ -1040,7 +1040,7 @@ declare namespace ECR {
   export type FindingArn = string;
   export type FindingDescription = string;
   export type FindingName = string;
-  export type FindingSeverity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNDEFINED"|string;
+  export type FindingSeverity = "INFORMATIONAL"|"LOW"|"MEDIUM"|"HIGH"|"CRITICAL"|"UNDEFINED"|string&{};
   export type FindingSeverityCounts = {[key: string]: SeverityCount};
   export type ForceFlag = boolean;
   export type GetAuthorizationTokenRegistryIdList = RegistryId[];
@@ -1234,7 +1234,7 @@ declare namespace ECR {
      */
     imageManifestMediaType?: MediaType;
   }
-  export type ImageActionType = "EXPIRE"|string;
+  export type ImageActionType = "EXPIRE"|string&{};
   export type ImageCount = number;
   export interface ImageDetail {
     /**
@@ -1298,7 +1298,7 @@ declare namespace ECR {
      */
     failureReason?: ImageFailureReason;
   }
-  export type ImageFailureCode = "InvalidImageDigest"|"InvalidImageTag"|"ImageTagDoesNotMatchDigest"|"ImageNotFound"|"MissingDigestAndTag"|"ImageReferencedByManifestList"|"KmsError"|string;
+  export type ImageFailureCode = "InvalidImageDigest"|"InvalidImageTag"|"ImageTagDoesNotMatchDigest"|"ImageNotFound"|"MissingDigestAndTag"|"ImageReferencedByManifestList"|"KmsError"|string&{};
   export type ImageFailureList = ImageFailure[];
   export type ImageFailureReason = string;
   export interface ImageIdentifier {
@@ -1411,7 +1411,7 @@ declare namespace ECR {
   export type ImageSizeInBytes = number;
   export type ImageTag = string;
   export type ImageTagList = ImageTag[];
-  export type ImageTagMutability = "MUTABLE"|"IMMUTABLE"|string;
+  export type ImageTagMutability = "MUTABLE"|"IMMUTABLE"|string&{};
   export type ImageTagsList = ImageTag[];
   export interface InitiateLayerUploadRequest {
     /**
@@ -1452,7 +1452,7 @@ declare namespace ECR {
      */
     mediaType?: MediaType;
   }
-  export type LayerAvailability = "AVAILABLE"|"UNAVAILABLE"|string;
+  export type LayerAvailability = "AVAILABLE"|"UNAVAILABLE"|string&{};
   export type LayerDigest = string;
   export type LayerDigestList = LayerDigest[];
   export interface LayerFailure {
@@ -1469,7 +1469,7 @@ declare namespace ECR {
      */
     failureReason?: LayerFailureReason;
   }
-  export type LayerFailureCode = "InvalidLayerDigest"|"MissingLayerDigest"|string;
+  export type LayerFailureCode = "InvalidLayerDigest"|"MissingLayerDigest"|string&{};
   export type LayerFailureList = LayerFailure[];
   export type LayerFailureReason = string;
   export type LayerList = Layer[];
@@ -1504,7 +1504,7 @@ declare namespace ECR {
     appliedRulePriority?: LifecyclePolicyRulePriority;
   }
   export type LifecyclePolicyPreviewResultList = LifecyclePolicyPreviewResult[];
-  export type LifecyclePolicyPreviewStatus = "IN_PROGRESS"|"COMPLETE"|"EXPIRED"|"FAILED"|string;
+  export type LifecyclePolicyPreviewStatus = "IN_PROGRESS"|"COMPLETE"|"EXPIRED"|"FAILED"|string&{};
   export interface LifecyclePolicyPreviewSummary {
     /**
      * The number of expiring images.
@@ -1879,7 +1879,7 @@ declare namespace ECR {
     repositoryFilters?: RepositoryFilterList;
   }
   export type ReplicationRuleList = ReplicationRule[];
-  export type ReplicationStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
+  export type ReplicationStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string&{};
   export interface Repository {
     /**
      * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name. For example, arn:aws:ecr:region:012345678910:repository/test.
@@ -1922,7 +1922,7 @@ declare namespace ECR {
     filterType: RepositoryFilterType;
   }
   export type RepositoryFilterList = RepositoryFilter[];
-  export type RepositoryFilterType = "PREFIX_MATCH"|string;
+  export type RepositoryFilterType = "PREFIX_MATCH"|string&{};
   export type RepositoryFilterValue = string;
   export type RepositoryList = Repository[];
   export type RepositoryName = string;
@@ -1992,13 +1992,13 @@ declare namespace ECR {
   }
   export type ResourceId = string;
   export type ResourceList = Resource[];
-  export type ScanFrequency = "SCAN_ON_PUSH"|"CONTINUOUS_SCAN"|"MANUAL"|string;
+  export type ScanFrequency = "SCAN_ON_PUSH"|"CONTINUOUS_SCAN"|"MANUAL"|string&{};
   export type ScanOnPushFlag = boolean;
-  export type ScanStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|"UNSUPPORTED_IMAGE"|"ACTIVE"|"PENDING"|"SCAN_ELIGIBILITY_EXPIRED"|"FINDINGS_UNAVAILABLE"|string;
+  export type ScanStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|"UNSUPPORTED_IMAGE"|"ACTIVE"|"PENDING"|"SCAN_ELIGIBILITY_EXPIRED"|"FINDINGS_UNAVAILABLE"|string&{};
   export type ScanStatusDescription = string;
   export type ScanTimestamp = Date;
-  export type ScanType = "BASIC"|"ENHANCED"|string;
-  export type ScanningConfigurationFailureCode = "REPOSITORY_NOT_FOUND"|string;
+  export type ScanType = "BASIC"|"ENHANCED"|string&{};
+  export type ScanningConfigurationFailureCode = "REPOSITORY_NOT_FOUND"|string&{};
   export type ScanningConfigurationFailureReason = string;
   export type ScanningConfigurationRepositoryNameList = RepositoryName[];
   export interface ScanningRepositoryFilter {
@@ -2012,7 +2012,7 @@ declare namespace ECR {
     filterType: ScanningRepositoryFilterType;
   }
   export type ScanningRepositoryFilterList = ScanningRepositoryFilter[];
-  export type ScanningRepositoryFilterType = "WILDCARD"|string;
+  export type ScanningRepositoryFilterType = "WILDCARD"|string&{};
   export type ScanningRepositoryFilterValue = string;
   export type Score = number;
   export interface ScoreDetails {
@@ -2142,7 +2142,7 @@ declare namespace ECR {
   }
   export interface TagResourceResponse {
   }
-  export type TagStatus = "TAGGED"|"UNTAGGED"|"ANY"|string;
+  export type TagStatus = "TAGGED"|"UNTAGGED"|"ANY"|string&{};
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
   export type Title = string;

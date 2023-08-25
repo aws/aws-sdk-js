@@ -709,7 +709,7 @@ declare namespace Backup {
     ResourceName?: string;
   }
   export type BackupJobChildJobsInState = {[key: string]: Long};
-  export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|"PARTIAL"|string;
+  export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|"PARTIAL"|string&{};
   export type BackupJobsList = BackupJob[];
   export type BackupOptionKey = string;
   export type BackupOptionValue = string;
@@ -931,7 +931,7 @@ declare namespace Backup {
      */
     IamRoleArn?: IAMRoleArn;
   }
-  export type BackupVaultEvent = "BACKUP_JOB_STARTED"|"BACKUP_JOB_COMPLETED"|"BACKUP_JOB_SUCCESSFUL"|"BACKUP_JOB_FAILED"|"BACKUP_JOB_EXPIRED"|"RESTORE_JOB_STARTED"|"RESTORE_JOB_COMPLETED"|"RESTORE_JOB_SUCCESSFUL"|"RESTORE_JOB_FAILED"|"COPY_JOB_STARTED"|"COPY_JOB_SUCCESSFUL"|"COPY_JOB_FAILED"|"RECOVERY_POINT_MODIFIED"|"BACKUP_PLAN_CREATED"|"BACKUP_PLAN_MODIFIED"|"S3_BACKUP_OBJECT_FAILED"|"S3_RESTORE_OBJECT_FAILED"|string;
+  export type BackupVaultEvent = "BACKUP_JOB_STARTED"|"BACKUP_JOB_COMPLETED"|"BACKUP_JOB_SUCCESSFUL"|"BACKUP_JOB_FAILED"|"BACKUP_JOB_EXPIRED"|"RESTORE_JOB_STARTED"|"RESTORE_JOB_COMPLETED"|"RESTORE_JOB_SUCCESSFUL"|"RESTORE_JOB_FAILED"|"COPY_JOB_STARTED"|"COPY_JOB_SUCCESSFUL"|"COPY_JOB_FAILED"|"RECOVERY_POINT_MODIFIED"|"BACKUP_PLAN_CREATED"|"BACKUP_PLAN_MODIFIED"|"S3_BACKUP_OBJECT_FAILED"|"S3_RESTORE_OBJECT_FAILED"|string&{};
   export type BackupVaultEvents = BackupVaultEvent[];
   export type BackupVaultList = BackupVaultListMember[];
   export interface BackupVaultListMember {
@@ -1031,7 +1031,7 @@ declare namespace Backup {
     ConditionValue?: ConditionValue;
   }
   export type ConditionParameters = ConditionParameter[];
-  export type ConditionType = "STRINGEQUALS"|string;
+  export type ConditionType = "STRINGEQUALS"|string&{};
   export type ConditionValue = string;
   export interface Conditions {
     /**
@@ -1169,7 +1169,7 @@ declare namespace Backup {
     ResourceName?: string;
   }
   export type CopyJobChildJobsInState = {[key: string]: Long};
-  export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED"|"PARTIAL"|string;
+  export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED"|"PARTIAL"|string&{};
   export type CopyJobsList = CopyJob[];
   export interface CreateBackupPlanInput {
     /**
@@ -2321,7 +2321,7 @@ declare namespace Backup {
      */
     CancellationDate?: timestamp;
   }
-  export type LegalHoldStatus = "CREATING"|"ACTIVE"|"CANCELING"|"CANCELED"|string;
+  export type LegalHoldStatus = "CREATING"|"ACTIVE"|"CANCELING"|"CANCELED"|string&{};
   export type LegalHoldsList = LegalHold[];
   export interface Lifecycle {
     /**
@@ -3136,7 +3136,7 @@ declare namespace Backup {
     ResourceIdentifiers?: ResourceIdentifiers;
     DateRange?: DateRange;
   }
-  export type RecoveryPointStatus = "COMPLETED"|"PARTIAL"|"DELETING"|"EXPIRED"|string;
+  export type RecoveryPointStatus = "COMPLETED"|"PARTIAL"|"DELETING"|"EXPIRED"|string&{};
   export type RecoveryPointsList = RecoveryPointMember[];
   export interface ReportDeliveryChannel {
     /**
@@ -3273,7 +3273,7 @@ declare namespace Backup {
   export type ResourceTypeOptInPreference = {[key: string]: IsEnabled};
   export type ResourceTypes = ResourceType[];
   export type RestoreJobId = string;
-  export type RestoreJobStatus = "PENDING"|"RUNNING"|"COMPLETED"|"ABORTED"|"FAILED"|string;
+  export type RestoreJobStatus = "PENDING"|"RUNNING"|"COMPLETED"|"ABORTED"|"FAILED"|string&{};
   export type RestoreJobsList = RestoreJobsListMember[];
   export interface RestoreJobsListMember {
     /**
@@ -3476,7 +3476,7 @@ declare namespace Backup {
      */
     BackupJobId: string;
   }
-  export type StorageClass = "WARM"|"COLD"|"DELETED"|string;
+  export type StorageClass = "WARM"|"COLD"|"DELETED"|string&{};
   export type TagKey = string;
   export type TagKeyList = string[];
   export interface TagResourceInput {
@@ -3650,8 +3650,8 @@ declare namespace Backup {
     CreationTime?: timestamp;
   }
   export type VaultNames = string[];
-  export type VaultState = "CREATING"|"AVAILABLE"|"FAILED"|string;
-  export type VaultType = "BACKUP_VAULT"|"LOGICALLY_AIR_GAPPED_BACKUP_VAULT"|string;
+  export type VaultState = "CREATING"|"AVAILABLE"|"FAILED"|string&{};
+  export type VaultType = "BACKUP_VAULT"|"LOGICALLY_AIR_GAPPED_BACKUP_VAULT"|string&{};
   export type WindowMinutes = number;
   export type integer = number;
   export type long = number;

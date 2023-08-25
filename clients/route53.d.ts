@@ -594,7 +594,7 @@ declare namespace Route53 {
      */
     Value: LimitValue;
   }
-  export type AccountLimitType = "MAX_HEALTH_CHECKS_BY_OWNER"|"MAX_HOSTED_ZONES_BY_OWNER"|"MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER"|"MAX_REUSABLE_DELEGATION_SETS_BY_OWNER"|"MAX_TRAFFIC_POLICIES_BY_OWNER"|string;
+  export type AccountLimitType = "MAX_HEALTH_CHECKS_BY_OWNER"|"MAX_HOSTED_ZONES_BY_OWNER"|"MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER"|"MAX_REUSABLE_DELEGATION_SETS_BY_OWNER"|"MAX_TRAFFIC_POLICIES_BY_OWNER"|string&{};
   export interface ActivateKeySigningKeyRequest {
     /**
      * A unique string used to identify a hosted zone.
@@ -665,7 +665,7 @@ declare namespace Route53 {
      */
     ResourceRecordSet: ResourceRecordSet;
   }
-  export type ChangeAction = "CREATE"|"DELETE"|"UPSERT"|string;
+  export type ChangeAction = "CREATE"|"DELETE"|"UPSERT"|string&{};
   export interface ChangeBatch {
     /**
      *  Optional: Any comments you want to include about a change batch request.
@@ -731,7 +731,7 @@ declare namespace Route53 {
      */
     ChangeInfo: ChangeInfo;
   }
-  export type ChangeStatus = "PENDING"|"INSYNC"|string;
+  export type ChangeStatus = "PENDING"|"INSYNC"|string&{};
   export interface ChangeTagsForResourceRequest {
     /**
      * The type of the resource.   The resource type for health checks is healthcheck.   The resource type for hosted zones is hostedzone.  
@@ -799,7 +799,7 @@ declare namespace Route53 {
      */
     CidrList: CidrList;
   }
-  export type CidrCollectionChangeAction = "PUT"|"DELETE_IF_EXISTS"|string;
+  export type CidrCollectionChangeAction = "PUT"|"DELETE_IF_EXISTS"|string&{};
   export type CidrCollectionChanges = CidrCollectionChange[];
   export type CidrList = Cidr[];
   export type CidrLocationNameDefaultAllowed = string;
@@ -850,7 +850,7 @@ declare namespace Route53 {
     Dimensions?: DimensionList;
   }
   export type CloudWatchLogsLogGroupArn = string;
-  export type CloudWatchRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-central-1"|"eu-central-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"ap-east-1"|"me-south-1"|"me-central-1"|"ap-south-1"|"ap-south-2"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"eu-north-1"|"sa-east-1"|"cn-northwest-1"|"cn-north-1"|"af-south-1"|"eu-south-1"|"eu-south-2"|"us-gov-west-1"|"us-gov-east-1"|"us-iso-east-1"|"us-iso-west-1"|"us-isob-east-1"|"ap-southeast-4"|"il-central-1"|string;
+  export type CloudWatchRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-central-1"|"eu-central-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"ap-east-1"|"me-south-1"|"me-central-1"|"ap-south-1"|"ap-south-2"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"eu-north-1"|"sa-east-1"|"cn-northwest-1"|"cn-north-1"|"af-south-1"|"eu-south-1"|"eu-south-2"|"us-gov-west-1"|"us-gov-east-1"|"us-iso-east-1"|"us-iso-west-1"|"us-isob-east-1"|"ap-southeast-4"|"il-central-1"|string&{};
   export type CollectionName = string;
   export type CollectionSummaries = CollectionSummary[];
   export interface CollectionSummary {
@@ -872,7 +872,7 @@ declare namespace Route53 {
     Version?: CollectionVersion;
   }
   export type CollectionVersion = number;
-  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string;
+  export type ComparisonOperator = "GreaterThanOrEqualToThreshold"|"GreaterThanThreshold"|"LessThanThreshold"|"LessThanOrEqualToThreshold"|string&{};
   export interface CreateCidrCollectionRequest {
     /**
      * A unique identifier for the account that can be used to reference the collection from other API calls.
@@ -1725,9 +1725,9 @@ declare namespace Route53 {
     StatusReport?: StatusReport;
   }
   export type HealthCheckObservations = HealthCheckObservation[];
-  export type HealthCheckRegion = "us-east-1"|"us-west-1"|"us-west-2"|"eu-west-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|string;
+  export type HealthCheckRegion = "us-east-1"|"us-west-1"|"us-west-2"|"eu-west-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|string&{};
   export type HealthCheckRegionList = HealthCheckRegion[];
-  export type HealthCheckType = "HTTP"|"HTTPS"|"HTTP_STR_MATCH"|"HTTPS_STR_MATCH"|"TCP"|"CALCULATED"|"CLOUDWATCH_METRIC"|"RECOVERY_CONTROL"|string;
+  export type HealthCheckType = "HTTP"|"HTTPS"|"HTTP_STR_MATCH"|"HTTPS_STR_MATCH"|"TCP"|"CALCULATED"|"CLOUDWATCH_METRIC"|"RECOVERY_CONTROL"|string&{};
   export type HealthCheckVersion = number;
   export type HealthChecks = HealthCheck[];
   export type HealthThreshold = number;
@@ -1778,7 +1778,7 @@ declare namespace Route53 {
      */
     Value: LimitValue;
   }
-  export type HostedZoneLimitType = "MAX_RRSETS_BY_ZONE"|"MAX_VPCS_ASSOCIATED_BY_ZONE"|string;
+  export type HostedZoneLimitType = "MAX_RRSETS_BY_ZONE"|"MAX_VPCS_ASSOCIATED_BY_ZONE"|string&{};
   export interface HostedZoneOwner {
     /**
      * If the hosted zone was created by an Amazon Web Services account, or was created by an Amazon Web Services service that creates hosted zones using the current account, OwningAccount contains the account ID of that account. For example, when you use Cloud Map to create a hosted zone, Cloud Map creates the hosted zone using the current Amazon Web Services account. 
@@ -1809,7 +1809,7 @@ declare namespace Route53 {
   export type HostedZones = HostedZone[];
   export type IPAddress = string;
   export type IPAddressCidr = string;
-  export type InsufficientDataHealthStatus = "Healthy"|"Unhealthy"|"LastKnownStatus"|string;
+  export type InsufficientDataHealthStatus = "Healthy"|"Unhealthy"|"LastKnownStatus"|string&{};
   export type Inverted = boolean;
   export type IsPrivateZone = boolean;
   export interface KeySigningKey {
@@ -2547,11 +2547,11 @@ declare namespace Route53 {
   export type QueryLoggingConfigId = string;
   export type QueryLoggingConfigs = QueryLoggingConfig[];
   export type RData = string;
-  export type RRType = "SOA"|"A"|"TXT"|"NS"|"CNAME"|"MX"|"NAPTR"|"PTR"|"SRV"|"SPF"|"AAAA"|"CAA"|"DS"|string;
+  export type RRType = "SOA"|"A"|"TXT"|"NS"|"CNAME"|"MX"|"NAPTR"|"PTR"|"SRV"|"SPF"|"AAAA"|"CAA"|"DS"|string&{};
   export type RecordData = RecordDataEntry[];
   export type RecordDataEntry = string;
   export type RequestInterval = number;
-  export type ResettableElementName = "FullyQualifiedDomainName"|"Regions"|"ResourcePath"|"ChildHealthChecks"|string;
+  export type ResettableElementName = "FullyQualifiedDomainName"|"Regions"|"ResourcePath"|"ChildHealthChecks"|string&{};
   export type ResettableElementNameList = ResettableElementName[];
   export type ResourceDescription = string;
   export type ResourceId = string;
@@ -2617,10 +2617,10 @@ declare namespace Route53 {
     TrafficPolicyInstanceId?: TrafficPolicyInstanceId;
     CidrRoutingConfig?: CidrRoutingConfig;
   }
-  export type ResourceRecordSetFailover = "PRIMARY"|"SECONDARY"|string;
+  export type ResourceRecordSetFailover = "PRIMARY"|"SECONDARY"|string&{};
   export type ResourceRecordSetIdentifier = string;
   export type ResourceRecordSetMultiValueAnswer = boolean;
-  export type ResourceRecordSetRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"eu-central-2"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"eu-north-1"|"sa-east-1"|"cn-north-1"|"cn-northwest-1"|"ap-east-1"|"me-south-1"|"me-central-1"|"ap-south-1"|"ap-south-2"|"af-south-1"|"eu-south-1"|"eu-south-2"|"ap-southeast-4"|"il-central-1"|string;
+  export type ResourceRecordSetRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"ca-central-1"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"eu-central-2"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"eu-north-1"|"sa-east-1"|"cn-north-1"|"cn-northwest-1"|"ap-east-1"|"me-south-1"|"me-central-1"|"ap-south-1"|"ap-south-2"|"af-south-1"|"eu-south-1"|"eu-south-2"|"ap-southeast-4"|"il-central-1"|string&{};
   export type ResourceRecordSetWeight = number;
   export type ResourceRecordSets = ResourceRecordSet[];
   export type ResourceRecords = ResourceRecord[];
@@ -2650,7 +2650,7 @@ declare namespace Route53 {
      */
     Value: LimitValue;
   }
-  export type ReusableDelegationSetLimitType = "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"|string;
+  export type ReusableDelegationSetLimitType = "MAX_ZONES_BY_REUSABLE_DELEGATION_SET"|string&{};
   export type RoutingControlArn = string;
   export type SearchString = string;
   export type ServeSignature = string;
@@ -2661,7 +2661,7 @@ declare namespace Route53 {
   export type SigningKeyStatusMessage = string;
   export type SigningKeyString = string;
   export type SigningKeyTag = number;
-  export type Statistic = "Average"|"Sum"|"SampleCount"|"Maximum"|"Minimum"|string;
+  export type Statistic = "Average"|"Sum"|"SampleCount"|"Maximum"|"Minimum"|string&{};
   export type Status = string;
   export interface StatusReport {
     /**
@@ -2690,7 +2690,7 @@ declare namespace Route53 {
   export type TagList = Tag[];
   export type TagResourceId = string;
   export type TagResourceIdList = TagResourceId[];
-  export type TagResourceType = "healthcheck"|"hostedzone"|string;
+  export type TagResourceType = "healthcheck"|"hostedzone"|string&{};
   export type TagValue = string;
   export interface TestDNSAnswerRequest {
     /**
@@ -2991,7 +2991,7 @@ declare namespace Route53 {
     VPCId?: VPCId;
   }
   export type VPCId = string;
-  export type VPCRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"eu-central-2"|"ap-east-1"|"me-south-1"|"us-gov-west-1"|"us-gov-east-1"|"us-iso-east-1"|"us-iso-west-1"|"us-isob-east-1"|"me-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-south-1"|"ap-south-2"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"eu-north-1"|"sa-east-1"|"ca-central-1"|"cn-north-1"|"af-south-1"|"eu-south-1"|"eu-south-2"|"ap-southeast-4"|"il-central-1"|string;
+  export type VPCRegion = "us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-central-1"|"eu-central-2"|"ap-east-1"|"me-south-1"|"us-gov-west-1"|"us-gov-east-1"|"us-iso-east-1"|"us-iso-west-1"|"us-isob-east-1"|"me-central-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-south-1"|"ap-south-2"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"eu-north-1"|"sa-east-1"|"ca-central-1"|"cn-north-1"|"af-south-1"|"eu-south-1"|"eu-south-2"|"ap-southeast-4"|"il-central-1"|string&{};
   export type VPCs = VPC[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

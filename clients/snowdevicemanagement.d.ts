@@ -117,7 +117,7 @@ declare class SnowDeviceManagement extends Service {
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace SnowDeviceManagement {
-  export type AttachmentStatus = "ATTACHING"|"ATTACHED"|"DETACHING"|"DETACHED"|string;
+  export type AttachmentStatus = "ATTACHING"|"ATTACHED"|"DETACHING"|"DETACHED"|string&{};
   export type Boolean = boolean;
   export interface CancelTaskInput {
     /**
@@ -394,7 +394,7 @@ declare namespace SnowDeviceManagement {
     volumeId?: String;
   }
   export type ExecutionId = string;
-  export type ExecutionState = "QUEUED"|"IN_PROGRESS"|"CANCELED"|"FAILED"|"SUCCEEDED"|"REJECTED"|"TIMED_OUT"|string;
+  export type ExecutionState = "QUEUED"|"IN_PROGRESS"|"CANCELED"|"FAILED"|"SUCCEEDED"|"REJECTED"|"TIMED_OUT"|string&{};
   export interface ExecutionSummary {
     /**
      * The ID of the execution.
@@ -488,7 +488,7 @@ declare namespace SnowDeviceManagement {
      */
     name?: InstanceStateName;
   }
-  export type InstanceStateName = "PENDING"|"RUNNING"|"SHUTTING_DOWN"|"TERMINATED"|"STOPPING"|"STOPPED"|string;
+  export type InstanceStateName = "PENDING"|"RUNNING"|"SHUTTING_DOWN"|"TERMINATED"|"STOPPING"|"STOPPED"|string&{};
   export interface InstanceSummary {
     /**
      * A structure containing details about the instance.
@@ -501,7 +501,7 @@ declare namespace SnowDeviceManagement {
   }
   export type InstanceSummaryList = InstanceSummary[];
   export type Integer = number;
-  export type IpAddressAssignment = "DHCP"|"STATIC"|string;
+  export type IpAddressAssignment = "DHCP"|"STATIC"|string&{};
   export type JobId = string;
   export interface ListDeviceResourcesInput {
     /**
@@ -624,7 +624,7 @@ declare namespace SnowDeviceManagement {
   export type ManagedDeviceId = string;
   export type MaxResults = number;
   export type NextToken = string;
-  export type PhysicalConnectorType = "RJ45"|"SFP_PLUS"|"QSFP"|"RJ45_2"|"WIFI"|string;
+  export type PhysicalConnectorType = "RJ45"|"SFP_PLUS"|"QSFP"|"RJ45_2"|"WIFI"|string&{};
   export interface PhysicalNetworkInterface {
     /**
      * The default gateway of the device.
@@ -714,7 +714,7 @@ declare namespace SnowDeviceManagement {
   export type TargetList = String[];
   export type TaskDescriptionString = string;
   export type TaskId = string;
-  export type TaskState = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|string;
+  export type TaskState = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|string&{};
   export interface TaskSummary {
     /**
      * The state of the task assigned to one or many devices.
@@ -737,7 +737,7 @@ declare namespace SnowDeviceManagement {
   export type Timestamp = Date;
   export interface Unlock {
   }
-  export type UnlockState = "UNLOCKED"|"LOCKED"|"UNLOCKING"|string;
+  export type UnlockState = "UNLOCKED"|"LOCKED"|"UNLOCKING"|string&{};
   export interface UntagResourceInput {
     /**
      * The Amazon Resource Name (ARN) of the device or task.

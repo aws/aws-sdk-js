@@ -472,8 +472,8 @@ declare namespace RolesAnywhere {
   }
   export type ManagedPolicyList = ManagedPolicyListMemberString[];
   export type ManagedPolicyListMemberString = string;
-  export type NotificationChannel = "ALL"|string;
-  export type NotificationEvent = "CA_CERTIFICATE_EXPIRY"|"END_ENTITY_CERTIFICATE_EXPIRY"|string;
+  export type NotificationChannel = "ALL"|string&{};
+  export type NotificationEvent = "CA_CERTIFICATE_EXPIRY"|"END_ENTITY_CERTIFICATE_EXPIRY"|string&{};
   export interface NotificationSetting {
     /**
      * The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.  In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels. 
@@ -807,7 +807,7 @@ declare namespace RolesAnywhere {
     trustAnchor: TrustAnchorDetail;
   }
   export type TrustAnchorDetails = TrustAnchorDetail[];
-  export type TrustAnchorType = "AWS_ACM_PCA"|"CERTIFICATE_BUNDLE"|"SELF_SIGNED_REPOSITORY"|string;
+  export type TrustAnchorType = "AWS_ACM_PCA"|"CERTIFICATE_BUNDLE"|"SELF_SIGNED_REPOSITORY"|string&{};
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource.

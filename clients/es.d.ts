@@ -573,7 +573,7 @@ declare namespace ES {
     AutoTuneDetails?: AutoTuneDetails;
   }
   export type AutoTuneDate = Date;
-  export type AutoTuneDesiredState = "ENABLED"|"DISABLED"|string;
+  export type AutoTuneDesiredState = "ENABLED"|"DISABLED"|string&{};
   export interface AutoTuneDetails {
     ScheduledAutoTuneDetails?: ScheduledAutoTuneDetails;
   }
@@ -637,7 +637,7 @@ declare namespace ES {
      */
     Status?: AutoTuneStatus;
   }
-  export type AutoTuneState = "ENABLED"|"DISABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_SCHEDULED"|"DISABLED_AND_ROLLBACK_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_COMPLETE"|"DISABLED_AND_ROLLBACK_ERROR"|"ERROR"|string;
+  export type AutoTuneState = "ENABLED"|"DISABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_SCHEDULED"|"DISABLED_AND_ROLLBACK_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_COMPLETE"|"DISABLED_AND_ROLLBACK_ERROR"|"ERROR"|string&{};
   export interface AutoTuneStatus {
     /**
      * Timestamp which tells Auto-Tune options creation date .
@@ -664,7 +664,7 @@ declare namespace ES {
      */
     PendingDeletion?: Boolean;
   }
-  export type AutoTuneType = "SCHEDULED_ACTION"|string;
+  export type AutoTuneType = "SCHEDULED_ACTION"|string&{};
   export type BackendRole = string;
   export type Boolean = boolean;
   export interface CancelElasticsearchServiceSoftwareUpdateRequest {
@@ -1002,7 +1002,7 @@ declare namespace ES {
     VpcEndpointSummary: VpcEndpointSummary;
   }
   export type DeploymentCloseDateTimeStamp = Date;
-  export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
+  export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string&{};
   export type DeploymentType = string;
   export interface DescribeDomainAutoTunesRequest {
     /**
@@ -1156,7 +1156,7 @@ declare namespace ES {
     Value?: DescribePackagesFilterValues;
   }
   export type DescribePackagesFilterList = DescribePackagesFilter[];
-  export type DescribePackagesFilterName = "PackageID"|"PackageName"|"PackageStatus"|string;
+  export type DescribePackagesFilterName = "PackageID"|"PackageName"|"PackageStatus"|string&{};
   export type DescribePackagesFilterValue = string;
   export type DescribePackagesFilterValues = DescribePackagesFilterValue[];
   export interface DescribePackagesRequest {
@@ -1351,7 +1351,7 @@ declare namespace ES {
     ErrorDetails?: ErrorDetails;
   }
   export type DomainPackageDetailsList = DomainPackageDetails[];
-  export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
+  export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string&{};
   export type Double = number;
   export type DryRun = boolean;
   export interface DryRunResults {
@@ -1407,8 +1407,8 @@ declare namespace ES {
      */
     Status: OptionStatus;
   }
-  export type ESPartitionInstanceType = "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"m5.large.elasticsearch"|"m5.xlarge.elasticsearch"|"m5.2xlarge.elasticsearch"|"m5.4xlarge.elasticsearch"|"m5.12xlarge.elasticsearch"|"r5.large.elasticsearch"|"r5.xlarge.elasticsearch"|"r5.2xlarge.elasticsearch"|"r5.4xlarge.elasticsearch"|"r5.12xlarge.elasticsearch"|"c5.large.elasticsearch"|"c5.xlarge.elasticsearch"|"c5.2xlarge.elasticsearch"|"c5.4xlarge.elasticsearch"|"c5.9xlarge.elasticsearch"|"c5.18xlarge.elasticsearch"|"ultrawarm1.medium.elasticsearch"|"ultrawarm1.large.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch"|"i3.large.elasticsearch"|"i3.xlarge.elasticsearch"|"i3.2xlarge.elasticsearch"|"i3.4xlarge.elasticsearch"|"i3.8xlarge.elasticsearch"|"i3.16xlarge.elasticsearch"|string;
-  export type ESWarmPartitionInstanceType = "ultrawarm1.medium.elasticsearch"|"ultrawarm1.large.elasticsearch"|string;
+  export type ESPartitionInstanceType = "m3.medium.elasticsearch"|"m3.large.elasticsearch"|"m3.xlarge.elasticsearch"|"m3.2xlarge.elasticsearch"|"m4.large.elasticsearch"|"m4.xlarge.elasticsearch"|"m4.2xlarge.elasticsearch"|"m4.4xlarge.elasticsearch"|"m4.10xlarge.elasticsearch"|"m5.large.elasticsearch"|"m5.xlarge.elasticsearch"|"m5.2xlarge.elasticsearch"|"m5.4xlarge.elasticsearch"|"m5.12xlarge.elasticsearch"|"r5.large.elasticsearch"|"r5.xlarge.elasticsearch"|"r5.2xlarge.elasticsearch"|"r5.4xlarge.elasticsearch"|"r5.12xlarge.elasticsearch"|"c5.large.elasticsearch"|"c5.xlarge.elasticsearch"|"c5.2xlarge.elasticsearch"|"c5.4xlarge.elasticsearch"|"c5.9xlarge.elasticsearch"|"c5.18xlarge.elasticsearch"|"ultrawarm1.medium.elasticsearch"|"ultrawarm1.large.elasticsearch"|"t2.micro.elasticsearch"|"t2.small.elasticsearch"|"t2.medium.elasticsearch"|"r3.large.elasticsearch"|"r3.xlarge.elasticsearch"|"r3.2xlarge.elasticsearch"|"r3.4xlarge.elasticsearch"|"r3.8xlarge.elasticsearch"|"i2.xlarge.elasticsearch"|"i2.2xlarge.elasticsearch"|"d2.xlarge.elasticsearch"|"d2.2xlarge.elasticsearch"|"d2.4xlarge.elasticsearch"|"d2.8xlarge.elasticsearch"|"c4.large.elasticsearch"|"c4.xlarge.elasticsearch"|"c4.2xlarge.elasticsearch"|"c4.4xlarge.elasticsearch"|"c4.8xlarge.elasticsearch"|"r4.large.elasticsearch"|"r4.xlarge.elasticsearch"|"r4.2xlarge.elasticsearch"|"r4.4xlarge.elasticsearch"|"r4.8xlarge.elasticsearch"|"r4.16xlarge.elasticsearch"|"i3.large.elasticsearch"|"i3.xlarge.elasticsearch"|"i3.2xlarge.elasticsearch"|"i3.4xlarge.elasticsearch"|"i3.8xlarge.elasticsearch"|"i3.16xlarge.elasticsearch"|string&{};
+  export type ESWarmPartitionInstanceType = "ultrawarm1.medium.elasticsearch"|"ultrawarm1.large.elasticsearch"|string&{};
   export interface ElasticsearchClusterConfig {
     /**
      * The instance type for an Elasticsearch cluster. UltraWarm instance types are not supported for data instances.
@@ -1662,7 +1662,7 @@ declare namespace ES {
   }
   export type Endpoint = string;
   export type EndpointsMap = {[key: string]: ServiceUrl};
-  export type EngineType = "OpenSearch"|"Elasticsearch"|string;
+  export type EngineType = "OpenSearch"|"Elasticsearch"|string&{};
   export interface ErrorDetails {
     ErrorType?: ErrorType;
     ErrorMessage?: ErrorMessage;
@@ -1773,7 +1773,7 @@ declare namespace ES {
      */
     Message?: CrossClusterSearchConnectionStatusMessage;
   }
-  export type InboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"APPROVED"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string;
+  export type InboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"APPROVED"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string&{};
   export type InboundCrossClusterSearchConnections = InboundCrossClusterSearchConnection[];
   export type InstanceCount = number;
   export interface InstanceCountLimits {
@@ -1987,7 +1987,7 @@ declare namespace ES {
      */
     Status?: OptionStatus;
   }
-  export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|"AUDIT_LOGS"|string;
+  export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|"AUDIT_LOGS"|string&{};
   export interface MasterUserOptions {
     /**
      * ARN for the master user (if IAM is enabled).
@@ -2024,7 +2024,7 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type NonEmptyString = string;
-  export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string;
+  export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string&{};
   export interface OptionStatus {
     /**
      * Timestamp which tells the creation date for the entity.
@@ -2079,9 +2079,9 @@ declare namespace ES {
      */
     Message?: CrossClusterSearchConnectionStatusMessage;
   }
-  export type OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"VALIDATING"|"VALIDATION_FAILED"|"PROVISIONING"|"ACTIVE"|"REJECTED"|"DELETING"|"DELETED"|string;
+  export type OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"|"VALIDATING"|"VALIDATION_FAILED"|"PROVISIONING"|"ACTIVE"|"REJECTED"|"DELETING"|"DELETED"|string&{};
   export type OutboundCrossClusterSearchConnections = OutboundCrossClusterSearchConnection[];
-  export type OverallChangeStatus = "PENDING"|"PROCESSING"|"COMPLETED"|"FAILED"|string;
+  export type OverallChangeStatus = "PENDING"|"PROCESSING"|"COMPLETED"|"FAILED"|string&{};
   export type OwnerId = string;
   export type PackageDescription = string;
   export interface PackageDetails {
@@ -2129,8 +2129,8 @@ declare namespace ES {
      */
     S3Key?: S3Key;
   }
-  export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
-  export type PackageType = "TXT-DICTIONARY"|string;
+  export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string&{};
+  export type PackageType = "TXT-DICTIONARY"|string&{};
   export type PackageVersion = string;
   export interface PackageVersionHistory {
     /**
@@ -2149,7 +2149,7 @@ declare namespace ES {
   export type PackageVersionHistoryList = PackageVersionHistory[];
   export type Password = string;
   export type PolicyDocument = string;
-  export type PrincipalType = "AWS_ACCOUNT"|"AWS_SERVICE"|string;
+  export type PrincipalType = "AWS_ACCOUNT"|"AWS_SERVICE"|string&{};
   export interface PurchaseReservedElasticsearchInstanceOfferingRequest {
     /**
      * The ID of the reserved Elasticsearch instance offering to purchase.
@@ -2300,7 +2300,7 @@ declare namespace ES {
     RecurringCharges?: RecurringChargeList;
   }
   export type ReservedElasticsearchInstanceOfferingList = ReservedElasticsearchInstanceOffering[];
-  export type ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
+  export type ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string&{};
   export interface RevokeVpcEndpointAccessRequest {
     /**
      * The name of the OpenSearch Service domain.
@@ -2314,7 +2314,7 @@ declare namespace ES {
   export interface RevokeVpcEndpointAccessResponse {
   }
   export type RoleArn = string;
-  export type RollbackOnDisable = "NO_ROLLBACK"|"DEFAULT_ROLLBACK"|string;
+  export type RollbackOnDisable = "NO_ROLLBACK"|"DEFAULT_ROLLBACK"|string&{};
   export type S3BucketName = string;
   export type S3Key = string;
   export type SAMLEntityId = string;
@@ -2381,7 +2381,7 @@ declare namespace ES {
      */
     SessionTimeoutMinutes?: IntegerClass;
   }
-  export type ScheduledAutoTuneActionType = "JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string;
+  export type ScheduledAutoTuneActionType = "JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string&{};
   export type ScheduledAutoTuneDescription = string;
   export interface ScheduledAutoTuneDetails {
     /**
@@ -2401,7 +2401,7 @@ declare namespace ES {
      */
     Severity?: ScheduledAutoTuneSeverityType;
   }
-  export type ScheduledAutoTuneSeverityType = "LOW"|"MEDIUM"|"HIGH"|string;
+  export type ScheduledAutoTuneSeverityType = "LOW"|"MEDIUM"|"HIGH"|string&{};
   export interface ServiceSoftwareOptions {
     /**
      * The current service software version that is present on the domain.
@@ -2491,7 +2491,7 @@ declare namespace ES {
   export type StorageTypeName = string;
   export type String = string;
   export type StringList = String[];
-  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
+  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string&{};
   export interface Tag {
     /**
      * Specifies the TagKey, the name of the tag. Tag keys must be unique for the Elasticsearch domain to which they are attached.
@@ -2505,7 +2505,7 @@ declare namespace ES {
   export type TagKey = string;
   export type TagList = Tag[];
   export type TagValue = string;
-  export type TimeUnit = "HOURS"|string;
+  export type TimeUnit = "HOURS"|string&{};
   export type TotalNumberOfStages = number;
   export type UIntValue = number;
   export interface UpdateElasticsearchDomainConfigRequest {
@@ -2661,8 +2661,8 @@ declare namespace ES {
   }
   export type UpgradeHistoryList = UpgradeHistory[];
   export type UpgradeName = string;
-  export type UpgradeStatus = "IN_PROGRESS"|"SUCCEEDED"|"SUCCEEDED_WITH_ISSUES"|"FAILED"|string;
-  export type UpgradeStep = "PRE_UPGRADE_CHECK"|"SNAPSHOT"|"UPGRADE"|string;
+  export type UpgradeStatus = "IN_PROGRESS"|"SUCCEEDED"|"SUCCEEDED_WITH_ISSUES"|"FAILED"|string&{};
+  export type UpgradeStep = "PRE_UPGRADE_CHECK"|"SNAPSHOT"|"UPGRADE"|string&{};
   export interface UpgradeStepItem {
     /**
      *  Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does through:  PreUpgradeCheck Snapshot Upgrade  
@@ -2723,7 +2723,7 @@ declare namespace ES {
     SecurityGroupIds?: StringList;
   }
   export type ValueStringList = NonEmptyString[];
-  export type VolumeType = "standard"|"gp2"|"io1"|"gp3"|string;
+  export type VolumeType = "standard"|"gp2"|"io1"|"gp3"|string&{};
   export interface VpcEndpoint {
     /**
      * The unique identifier of the endpoint.
@@ -2764,11 +2764,11 @@ declare namespace ES {
      */
     ErrorMessage?: String;
   }
-  export type VpcEndpointErrorCode = "ENDPOINT_NOT_FOUND"|"SERVER_ERROR"|string;
+  export type VpcEndpointErrorCode = "ENDPOINT_NOT_FOUND"|"SERVER_ERROR"|string&{};
   export type VpcEndpointErrorList = VpcEndpointError[];
   export type VpcEndpointId = string;
   export type VpcEndpointIdList = VpcEndpointId[];
-  export type VpcEndpointStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED"|string;
+  export type VpcEndpointStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED"|string&{};
   export interface VpcEndpointSummary {
     /**
      * The unique identifier of the endpoint.

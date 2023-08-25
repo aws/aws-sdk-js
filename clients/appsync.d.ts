@@ -556,9 +556,9 @@ declare namespace AppSync {
      */
     status?: ApiCacheStatus;
   }
-  export type ApiCacheStatus = "AVAILABLE"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED"|string;
-  export type ApiCacheType = "T2_SMALL"|"T2_MEDIUM"|"R4_LARGE"|"R4_XLARGE"|"R4_2XLARGE"|"R4_4XLARGE"|"R4_8XLARGE"|"SMALL"|"MEDIUM"|"LARGE"|"XLARGE"|"LARGE_2X"|"LARGE_4X"|"LARGE_8X"|"LARGE_12X"|string;
-  export type ApiCachingBehavior = "FULL_REQUEST_CACHING"|"PER_RESOLVER_CACHING"|string;
+  export type ApiCacheStatus = "AVAILABLE"|"CREATING"|"DELETING"|"MODIFYING"|"FAILED"|string&{};
+  export type ApiCacheType = "T2_SMALL"|"T2_MEDIUM"|"R4_LARGE"|"R4_XLARGE"|"R4_2XLARGE"|"R4_4XLARGE"|"R4_8XLARGE"|"SMALL"|"MEDIUM"|"LARGE"|"XLARGE"|"LARGE_2X"|"LARGE_4X"|"LARGE_8X"|"LARGE_12X"|string&{};
+  export type ApiCachingBehavior = "FULL_REQUEST_CACHING"|"PER_RESOLVER_CACHING"|string&{};
   export interface ApiKey {
     /**
      * The API key ID.
@@ -652,8 +652,8 @@ declare namespace AppSync {
      */
     sourceApiAssociation?: SourceApiAssociation;
   }
-  export type AssociationStatus = "PROCESSING"|"FAILED"|"SUCCESS"|string;
-  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|"AWS_LAMBDA"|string;
+  export type AssociationStatus = "PROCESSING"|"FAILED"|"SUCCESS"|string&{};
+  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|"AWS_LAMBDA"|string&{};
   export interface AuthorizationConfig {
     /**
      * The authorization type that the HTTP endpoint requires.    AWS_IAM: The authorization type is Signature Version 4 (SigV4).  
@@ -664,7 +664,7 @@ declare namespace AppSync {
      */
     awsIamConfig?: AwsIamConfig;
   }
-  export type AuthorizationType = "AWS_IAM"|string;
+  export type AuthorizationType = "AWS_IAM"|string&{};
   export interface AwsIamConfig {
     /**
      * The signing Amazon Web Services Region for IAM authorization.
@@ -737,8 +737,8 @@ declare namespace AppSync {
      */
     appIdClientRegex?: String;
   }
-  export type ConflictDetectionType = "VERSION"|"NONE"|string;
-  export type ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string;
+  export type ConflictDetectionType = "VERSION"|"NONE"|string&{};
+  export type ConflictHandlerType = "OPTIMISTIC_CONCURRENCY"|"LAMBDA"|"AUTOMERGE"|"NONE"|string&{};
   export type Context = string;
   export interface CreateApiCacheRequest {
     /**
@@ -1101,10 +1101,10 @@ declare namespace AppSync {
      */
     eventBridgeConfig?: EventBridgeDataSourceConfig;
   }
-  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE"|"AMAZON_EVENTBRIDGE"|string;
+  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE"|"AMAZON_EVENTBRIDGE"|string&{};
   export type DataSources = DataSource[];
   export type _Date = Date;
-  export type DefaultAction = "ALLOW"|"DENY"|string;
+  export type DefaultAction = "ALLOW"|"DENY"|string&{};
   export interface DeleteApiCacheRequest {
     /**
      * The API ID.
@@ -1384,7 +1384,7 @@ declare namespace AppSync {
      */
     eventBusArn: String;
   }
-  export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string;
+  export type FieldLogLevel = "NONE"|"ERROR"|"ALL"|string&{};
   export interface FlushApiCacheRequest {
     /**
      * The API ID.
@@ -1611,8 +1611,8 @@ declare namespace AppSync {
      */
     type?: Type;
   }
-  export type GraphQLApiType = "GRAPHQL"|"MERGED"|string;
-  export type GraphQLApiVisibility = "GLOBAL"|"PRIVATE"|string;
+  export type GraphQLApiType = "GRAPHQL"|"MERGED"|string&{};
+  export type GraphQLApiVisibility = "GLOBAL"|"PRIVATE"|string&{};
   export interface GraphqlApi {
     /**
      * The API name.
@@ -2020,7 +2020,7 @@ declare namespace AppSync {
   export type MappingTemplate = string;
   export type MaxBatchSize = number;
   export type MaxResults = number;
-  export type MergeType = "MANUAL_MERGE"|"AUTO_MERGE"|string;
+  export type MergeType = "MANUAL_MERGE"|"AUTO_MERGE"|string&{};
   export interface OpenIDConnectConfig {
     /**
      * The issuer for the OIDC configuration. The issuer returned by discovery must exactly match the value of iss in the ID token.
@@ -2049,8 +2049,8 @@ declare namespace AppSync {
      */
     awsRegion: String;
   }
-  export type OutputType = "SDL"|"JSON"|string;
-  export type Ownership = "CURRENT_ACCOUNT"|"OTHER_ACCOUNTS"|string;
+  export type OutputType = "SDL"|"JSON"|string&{};
+  export type Ownership = "CURRENT_ACCOUNT"|"OTHER_ACCOUNTS"|string&{};
   export type PaginationToken = string;
   export interface PipelineConfig {
     /**
@@ -2090,7 +2090,7 @@ declare namespace AppSync {
      */
     rdsHttpEndpointConfig?: RdsHttpEndpointConfig;
   }
-  export type RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"|string;
+  export type RelationalDatabaseSourceType = "RDS_HTTP_ENDPOINT"|string&{};
   export interface Resolver {
     /**
      * The resolver type name.
@@ -2142,12 +2142,12 @@ declare namespace AppSync {
      */
     code?: Code;
   }
-  export type ResolverKind = "UNIT"|"PIPELINE"|string;
+  export type ResolverKind = "UNIT"|"PIPELINE"|string&{};
   export type Resolvers = Resolver[];
   export type ResourceArn = string;
   export type ResourceName = string;
-  export type RuntimeName = "APPSYNC_JS"|string;
-  export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|"FAILED"|"SUCCESS"|"NOT_APPLICABLE"|string;
+  export type RuntimeName = "APPSYNC_JS"|string&{};
+  export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|"FAILED"|"SUCCESS"|"NOT_APPLICABLE"|string&{};
   export interface SourceApiAssociation {
     /**
      * The ID generated by the AppSync service for the source API association.
@@ -2200,7 +2200,7 @@ declare namespace AppSync {
      */
     mergeType?: MergeType;
   }
-  export type SourceApiAssociationStatus = "MERGE_SCHEDULED"|"MERGE_FAILED"|"MERGE_SUCCESS"|"MERGE_IN_PROGRESS"|"AUTO_MERGE_SCHEDULE_FAILED"|"DELETION_SCHEDULED"|"DELETION_IN_PROGRESS"|"DELETION_FAILED"|string;
+  export type SourceApiAssociationStatus = "MERGE_SCHEDULED"|"MERGE_FAILED"|"MERGE_SUCCESS"|"MERGE_IN_PROGRESS"|"AUTO_MERGE_SCHEDULE_FAILED"|"DELETION_SCHEDULED"|"DELETION_IN_PROGRESS"|"DELETION_FAILED"|string&{};
   export interface SourceApiAssociationSummary {
     /**
      * The ID generated by the AppSync service for the source API association.
@@ -2319,7 +2319,7 @@ declare namespace AppSync {
      */
     format?: TypeDefinitionFormat;
   }
-  export type TypeDefinitionFormat = "SDL"|"JSON"|string;
+  export type TypeDefinitionFormat = "SDL"|"JSON"|string&{};
   export type TypeList = Type[];
   export interface UntagResourceRequest {
     /**

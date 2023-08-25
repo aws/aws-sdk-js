@@ -555,9 +555,9 @@ declare namespace ForecastService {
     Transformations: Transformations;
   }
   export type AttributeConfigs = AttributeConfig[];
-  export type AttributeType = "string"|"integer"|"float"|"timestamp"|"geolocation"|string;
+  export type AttributeType = "string"|"integer"|"float"|"timestamp"|"geolocation"|string&{};
   export type AttributeValue = string;
-  export type AutoMLOverrideStrategy = "LatencyOptimized"|"AccuracyOptimized"|string;
+  export type AutoMLOverrideStrategy = "LatencyOptimized"|"AccuracyOptimized"|string&{};
   export interface Baseline {
     /**
      * The initial accuracy metrics for the predictor you are monitoring. Use these metrics as a baseline for comparison purposes as you use your predictor and the metrics change.
@@ -587,7 +587,7 @@ declare namespace ForecastService {
     Values: Values;
   }
   export type CategoricalParameterRanges = CategoricalParameterRange[];
-  export type Condition = "EQUALS"|"NOT_EQUALS"|"LESS_THAN"|"GREATER_THAN"|string;
+  export type Condition = "EQUALS"|"NOT_EQUALS"|"LESS_THAN"|"GREATER_THAN"|string&{};
   export type Configuration = {[key: string]: Values};
   export interface ContinuousParameterRange {
     /**
@@ -1191,10 +1191,10 @@ declare namespace ForecastService {
      */
     LastModificationTime?: Timestamp;
   }
-  export type DatasetType = "TARGET_TIME_SERIES"|"RELATED_TIME_SERIES"|"ITEM_METADATA"|string;
+  export type DatasetType = "TARGET_TIME_SERIES"|"RELATED_TIME_SERIES"|"ITEM_METADATA"|string&{};
   export type Datasets = DatasetSummary[];
   export type DayOfMonth = number;
-  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
+  export type DayOfWeek = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string&{};
   export interface DeleteDatasetGroupRequest {
     /**
      * The Amazon Resource Name (ARN) of the dataset group to delete.
@@ -2051,7 +2051,7 @@ declare namespace ForecastService {
     ForecastTypes?: ForecastTypes;
   }
   export type Detail = string;
-  export type Domain = "RETAIL"|"CUSTOM"|"INVENTORY_PLANNING"|"EC2_CAPACITY"|"WORK_FORCE"|"WEB_TRAFFIC"|"METRICS"|string;
+  export type Domain = "RETAIL"|"CUSTOM"|"INVENTORY_PLANNING"|"EC2_CAPACITY"|"WORK_FORCE"|"WEB_TRAFFIC"|"METRICS"|string&{};
   export type Double = number;
   export interface EncryptionConfig {
     /**
@@ -2108,7 +2108,7 @@ declare namespace ForecastService {
     TestWindows?: TestWindows;
   }
   export type EvaluationState = string;
-  export type EvaluationType = "SUMMARY"|"COMPUTED"|string;
+  export type EvaluationType = "SUMMARY"|"COMPUTED"|string&{};
   export type Explainabilities = ExplainabilitySummary[];
   export interface ExplainabilityConfig {
     /**
@@ -2226,7 +2226,7 @@ declare namespace ForecastService {
      */
     FeaturizationMethodParameters?: FeaturizationMethodParameters;
   }
-  export type FeaturizationMethodName = "filling"|string;
+  export type FeaturizationMethodName = "filling"|string&{};
   export type FeaturizationMethodParameters = {[key: string]: ParameterValue};
   export type FeaturizationPipeline = FeaturizationMethod[];
   export type Featurizations = Featurization[];
@@ -2245,7 +2245,7 @@ declare namespace ForecastService {
      */
     Condition: FilterConditionString;
   }
-  export type FilterConditionString = "IS"|"IS_NOT"|string;
+  export type FilterConditionString = "IS"|"IS_NOT"|string&{};
   export type Filters = Filter[];
   export type ForecastDimensions = Name[];
   export interface ForecastExportJobSummary {
@@ -2354,7 +2354,7 @@ declare namespace ForecastService {
      */
     ParameterRanges?: ParameterRanges;
   }
-  export type ImportMode = "FULL"|"INCREMENTAL"|string;
+  export type ImportMode = "FULL"|"INCREMENTAL"|string&{};
   export interface InputDataConfig {
     /**
      * The Amazon Resource Name (ARN) of the dataset group.
@@ -2823,11 +2823,11 @@ declare namespace ForecastService {
     LastModificationTime?: Timestamp;
   }
   export type Monitors = MonitorSummary[];
-  export type Month = "JANUARY"|"FEBRUARY"|"MARCH"|"APRIL"|"MAY"|"JUNE"|"JULY"|"AUGUST"|"SEPTEMBER"|"OCTOBER"|"NOVEMBER"|"DECEMBER"|string;
+  export type Month = "JANUARY"|"FEBRUARY"|"MARCH"|"APRIL"|"MAY"|"JUNE"|"JULY"|"AUGUST"|"SEPTEMBER"|"OCTOBER"|"NOVEMBER"|"DECEMBER"|string&{};
   export type Name = string;
   export type NextToken = string;
-  export type Operation = "ADD"|"SUBTRACT"|"MULTIPLY"|"DIVIDE"|string;
-  export type OptimizationMetric = "WAPE"|"RMSE"|"AverageWeightedQuantileLoss"|"MASE"|"MAPE"|string;
+  export type Operation = "ADD"|"SUBTRACT"|"MULTIPLY"|"DIVIDE"|string&{};
+  export type OptimizationMetric = "WAPE"|"RMSE"|"AverageWeightedQuantileLoss"|"MASE"|"MAPE"|string&{};
   export type ParameterKey = string;
   export interface ParameterRanges {
     /**
@@ -3023,7 +3023,7 @@ declare namespace ForecastService {
     KMSKeyArn?: KMSKeyArn;
   }
   export type S3Path = string;
-  export type ScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"|string;
+  export type ScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"|string&{};
   export interface Schema {
     /**
      * An array of attributes specifying the name and type of each field in a dataset.
@@ -3041,7 +3041,7 @@ declare namespace ForecastService {
     AttributeType?: AttributeType;
   }
   export type SchemaAttributes = SchemaAttribute[];
-  export type State = "Active"|"Deleted"|string;
+  export type State = "Active"|"Deleted"|string&{};
   export interface Statistics {
     /**
      * The number of values in the field. If the response value is -1, refer to CountLong.
@@ -3175,7 +3175,7 @@ declare namespace ForecastService {
      */
     Hour?: Hour;
   }
-  export type TimePointGranularity = "ALL"|"SPECIFIC"|string;
+  export type TimePointGranularity = "ALL"|"SPECIFIC"|string&{};
   export interface TimeSeriesCondition {
     /**
      * The item_id, dimension name, IM name, or timestamp that you are modifying.
@@ -3191,7 +3191,7 @@ declare namespace ForecastService {
     Condition: Condition;
   }
   export type TimeSeriesConditions = TimeSeriesCondition[];
-  export type TimeSeriesGranularity = "ALL"|"SPECIFIC"|string;
+  export type TimeSeriesGranularity = "ALL"|"SPECIFIC"|string&{};
   export interface TimeSeriesIdentifiers {
     DataSource?: DataSource;
     Schema?: Schema;

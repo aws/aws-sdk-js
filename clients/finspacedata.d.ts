@@ -263,8 +263,8 @@ declare class Finspacedata extends Service {
 declare namespace Finspacedata {
   export type AccessKeyId = string;
   export type AliasString = string;
-  export type ApiAccess = "ENABLED"|"DISABLED"|string;
-  export type ApplicationPermission = "CreateDataset"|"ManageClusters"|"ManageUsersAndGroups"|"ManageAttributeSets"|"ViewAuditData"|"AccessNotebooks"|"GetTemporaryCredentials"|string;
+  export type ApiAccess = "ENABLED"|"DISABLED"|string&{};
+  export type ApplicationPermission = "CreateDataset"|"ManageClusters"|"ManageUsersAndGroups"|"ManageAttributeSets"|"ViewAuditData"|"AccessNotebooks"|"GetTemporaryCredentials"|string&{};
   export type ApplicationPermissionList = ApplicationPermission[];
   export interface AssociateUserToPermissionGroupRequest {
     /**
@@ -305,7 +305,7 @@ declare namespace Finspacedata {
     expiration?: TimestampEpoch;
   }
   export type Boolean = boolean;
-  export type ChangeType = "REPLACE"|"APPEND"|"MODIFY"|string;
+  export type ChangeType = "REPLACE"|"APPEND"|"MODIFY"|string&{};
   export type ChangesetArn = string;
   export interface ChangesetErrorInfo {
     /**
@@ -374,7 +374,7 @@ declare namespace Finspacedata {
     updatedByChangesetId?: ChangesetId;
   }
   export type ClientToken = string;
-  export type ColumnDataType = "STRING"|"CHAR"|"INTEGER"|"TINYINT"|"SMALLINT"|"BIGINT"|"FLOAT"|"DOUBLE"|"DATE"|"DATETIME"|"BOOLEAN"|"BINARY"|string;
+  export type ColumnDataType = "STRING"|"CHAR"|"INTEGER"|"TINYINT"|"SMALLINT"|"BIGINT"|"FLOAT"|"DOUBLE"|"DATE"|"DATETIME"|"BOOLEAN"|"BINARY"|string&{};
   export interface ColumnDefinition {
     /**
      * Data type of a column.    STRING – A String data type.  CHAR – A char data type.  INTEGER – An integer data type.  TINYINT – A tinyint data type.  SMALLINT – A smallint data type.  BIGINT – A bigint data type.  FLOAT – A float data type.  DOUBLE – A double data type.  DATE – A date data type.  DATETIME – A datetime data type.  BOOLEAN – A boolean data type.  BINARY – A binary data type.  
@@ -607,7 +607,7 @@ declare namespace Finspacedata {
   }
   export type DataViewId = string;
   export type DataViewList = DataViewSummary[];
-  export type DataViewStatus = "RUNNING"|"STARTING"|"FAILED"|"CANCELLED"|"TIMEOUT"|"SUCCESS"|"PENDING"|"FAILED_CLEANUP_FAILED"|string;
+  export type DataViewStatus = "RUNNING"|"STARTING"|"FAILED"|"CANCELLED"|"TIMEOUT"|"SUCCESS"|"PENDING"|"FAILED_CLEANUP_FAILED"|string&{};
   export interface DataViewSummary {
     /**
      * The unique identifier for the Dataview.
@@ -703,7 +703,7 @@ declare namespace Finspacedata {
   export type DatasetArn = string;
   export type DatasetDescription = string;
   export type DatasetId = string;
-  export type DatasetKind = "TABULAR"|"NON_TABULAR"|string;
+  export type DatasetKind = "TABULAR"|"NON_TABULAR"|string&{};
   export type DatasetList = Dataset[];
   export interface DatasetOwnerInfo {
     /**
@@ -719,7 +719,7 @@ declare namespace Finspacedata {
      */
     email?: Email;
   }
-  export type DatasetStatus = "PENDING"|"FAILED"|"SUCCESS"|"RUNNING"|string;
+  export type DatasetStatus = "PENDING"|"FAILED"|"SUCCESS"|"RUNNING"|string&{};
   export type DatasetTitle = string;
   export interface DeleteDatasetRequest {
     /**
@@ -806,9 +806,9 @@ declare namespace Finspacedata {
      */
     userId?: UserId;
   }
-  export type ErrorCategory = "VALIDATION"|"SERVICE_QUOTA_EXCEEDED"|"ACCESS_DENIED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|"INTERNAL_SERVICE_EXCEPTION"|"CANCELLED"|"USER_RECOVERABLE"|string;
+  export type ErrorCategory = "VALIDATION"|"SERVICE_QUOTA_EXCEEDED"|"ACCESS_DENIED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|"INTERNAL_SERVICE_EXCEPTION"|"CANCELLED"|"USER_RECOVERABLE"|string&{};
   export type ErrorMessage = string;
-  export type ExportFileFormat = "PARQUET"|"DELIMITED_TEXT"|string;
+  export type ExportFileFormat = "PARQUET"|"DELIMITED_TEXT"|string&{};
   export type FirstName = string;
   export type FormatParams = {[key: string]: StringMapValue};
   export interface GetChangesetRequest {
@@ -1113,7 +1113,7 @@ declare namespace Finspacedata {
     s3Bucket?: stringValueLength1to63;
   }
   export type IdType = string;
-  export type IngestionStatus = "PENDING"|"FAILED"|"SUCCESS"|"RUNNING"|"STOP_REQUESTED"|string;
+  export type IngestionStatus = "PENDING"|"FAILED"|"SUCCESS"|"RUNNING"|"STOP_REQUESTED"|string&{};
   export type LastName = string;
   export interface ListChangesetsRequest {
     /**
@@ -1323,7 +1323,7 @@ declare namespace Finspacedata {
   export type PermissionGroupDescription = string;
   export type PermissionGroupId = string;
   export type PermissionGroupList = PermissionGroup[];
-  export type PermissionGroupMembershipStatus = "ADDITION_IN_PROGRESS"|"ADDITION_SUCCESS"|"REMOVAL_IN_PROGRESS"|string;
+  export type PermissionGroupMembershipStatus = "ADDITION_IN_PROGRESS"|"ADDITION_SUCCESS"|"REMOVAL_IN_PROGRESS"|string&{};
   export type PermissionGroupName = string;
   export interface PermissionGroupParams {
     /**
@@ -1632,9 +1632,9 @@ declare namespace Finspacedata {
   export type UserByPermissionGroupList = UserByPermissionGroup[];
   export type UserId = string;
   export type UserList = User[];
-  export type UserStatus = "CREATING"|"ENABLED"|"DISABLED"|string;
-  export type UserType = "SUPER_USER"|"APP_USER"|string;
-  export type locationType = "INGESTION"|"SAGEMAKER"|string;
+  export type UserStatus = "CREATING"|"ENABLED"|"DISABLED"|string&{};
+  export type UserType = "SUPER_USER"|"APP_USER"|string&{};
+  export type locationType = "INGESTION"|"SAGEMAKER"|string&{};
   export type stringValueLength1to1024 = string;
   export type stringValueLength1to255 = string;
   export type stringValueLength1to63 = string;

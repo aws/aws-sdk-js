@@ -293,7 +293,7 @@ declare namespace Snowball {
   }
   export type AddressId = string;
   export type AddressList = Address[];
-  export type AddressType = "CUST_PICKUP"|"AWS_SHIP"|string;
+  export type AddressType = "CUST_PICKUP"|"AWS_SHIP"|string&{};
   export type AmiId = string;
   export type Boolean = boolean;
   export interface CancelClusterRequest {
@@ -394,7 +394,7 @@ declare namespace Snowball {
      */
     OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
   }
-  export type ClusterState = "AwaitingQuorum"|"Pending"|"InUse"|"Complete"|"Cancelled"|string;
+  export type ClusterState = "AwaitingQuorum"|"Pending"|"InUse"|"Complete"|"Cancelled"|string&{};
   export interface CompatibleImage {
     /**
      * The unique identifier for an individual Snow device AMI.
@@ -734,7 +734,7 @@ declare namespace Snowball {
     SnowconeDeviceConfiguration?: SnowconeDeviceConfiguration;
   }
   export type DevicePickupId = string;
-  export type DeviceServiceName = "NFS_ON_DEVICE_SERVICE"|"S3_ON_DEVICE_SERVICE"|string;
+  export type DeviceServiceName = "NFS_ON_DEVICE_SERVICE"|"S3_ON_DEVICE_SERVICE"|string&{};
   export interface EKSOnDeviceServiceConfiguration {
     /**
      * The Kubernetes version for EKS Anywhere on the Snow Family device.
@@ -819,7 +819,7 @@ declare namespace Snowball {
      */
     GSTIN?: GSTIN;
   }
-  export type ImpactLevel = "IL2"|"IL4"|"IL5"|"IL6"|"IL99"|string;
+  export type ImpactLevel = "IL2"|"IL4"|"IL5"|"IL6"|"IL99"|string&{};
   export type InitialClusterSize = number;
   export type Integer = number;
   export type JavaBoolean = boolean;
@@ -983,9 +983,9 @@ declare namespace Snowball {
      */
     Ec2AmiResources?: Ec2AmiResourceList;
   }
-  export type JobState = "New"|"PreparingAppliance"|"PreparingShipment"|"InTransitToCustomer"|"WithCustomer"|"InTransitToAWS"|"WithAWSSortingFacility"|"WithAWS"|"InProgress"|"Complete"|"Cancelled"|"Listing"|"Pending"|string;
+  export type JobState = "New"|"PreparingAppliance"|"PreparingShipment"|"InTransitToCustomer"|"WithCustomer"|"InTransitToAWS"|"WithAWSSortingFacility"|"WithAWS"|"InProgress"|"Complete"|"Cancelled"|"Listing"|"Pending"|string&{};
   export type JobStateList = JobState[];
-  export type JobType = "IMPORT"|"EXPORT"|"LOCAL_USE"|string;
+  export type JobType = "IMPORT"|"EXPORT"|"LOCAL_USE"|string&{};
   export interface KeyRange {
     /**
      * The key that starts an optional key range for an export job. Ranges are inclusive and UTF-8 binary sorted.
@@ -1216,7 +1216,7 @@ declare namespace Snowball {
      */
     JobIds?: LongTermPricingAssociatedJobIdList;
   }
-  export type LongTermPricingType = "OneYear"|"ThreeYear"|"OneMonth"|string;
+  export type LongTermPricingType = "OneYear"|"ThreeYear"|"OneMonth"|string&{};
   export interface NFSOnDeviceServiceConfiguration {
     /**
      * The maximum NFS storage for one Snow Family device.
@@ -1295,7 +1295,7 @@ declare namespace Snowball {
      */
     DevicePickupId?: DevicePickupId;
   }
-  export type RemoteManagement = "INSTALLED_ONLY"|"INSTALLED_AUTOSTART"|"NOT_INSTALLED"|string;
+  export type RemoteManagement = "INSTALLED_ONLY"|"INSTALLED_AUTOSTART"|"NOT_INSTALLED"|string&{};
   export type ResourceARN = string;
   export type RoleARN = string;
   export interface S3OnDeviceServiceConfiguration {
@@ -1332,7 +1332,7 @@ declare namespace Snowball {
   }
   export type S3ResourceList = S3Resource[];
   export type S3StorageLimit = number;
-  export type ServiceName = "KUBERNETES"|"EKS_ANYWHERE"|string;
+  export type ServiceName = "KUBERNETES"|"EKS_ANYWHERE"|string&{};
   export type ServiceSize = number;
   export interface ServiceVersion {
     /**
@@ -1351,7 +1351,7 @@ declare namespace Snowball {
      */
     TrackingNumber?: String;
   }
-  export type ShipmentState = "RECEIVED"|"RETURNED"|string;
+  export type ShipmentState = "RECEIVED"|"RETURNED"|string&{};
   export interface ShippingDetails {
     /**
      * The shipping speed for a particular job. This speed doesn't dictate how soon you'll get the Snow device from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow devices are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.  
@@ -1366,10 +1366,10 @@ declare namespace Snowball {
      */
     OutboundShipment?: Shipment;
   }
-  export type ShippingLabelStatus = "InProgress"|"TimedOut"|"Succeeded"|"Failed"|string;
-  export type ShippingOption = "SECOND_DAY"|"NEXT_DAY"|"EXPRESS"|"STANDARD"|string;
-  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"T8"|"T14"|"T32"|"NoPreference"|"T240"|"T13"|string;
-  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|"SNC1_HDD"|"SNC1_SSD"|"V3_5C"|"V3_5S"|"RACK_5U_C"|string;
+  export type ShippingLabelStatus = "InProgress"|"TimedOut"|"Succeeded"|"Failed"|string&{};
+  export type ShippingOption = "SECOND_DAY"|"NEXT_DAY"|"EXPRESS"|"STANDARD"|string&{};
+  export type SnowballCapacity = "T50"|"T80"|"T100"|"T42"|"T98"|"T8"|"T14"|"T32"|"NoPreference"|"T240"|"T13"|string&{};
+  export type SnowballType = "STANDARD"|"EDGE"|"EDGE_C"|"EDGE_CG"|"EDGE_S"|"SNC1_HDD"|"SNC1_SSD"|"V3_5C"|"V3_5S"|"RACK_5U_C"|string&{};
   export interface SnowconeDeviceConfiguration {
     /**
      * Configures the wireless connection for the Snowcone device.
@@ -1378,7 +1378,7 @@ declare namespace Snowball {
   }
   export type SnsTopicARN = string;
   export type StorageLimit = number;
-  export type StorageUnit = "TB"|string;
+  export type StorageUnit = "TB"|string&{};
   export type String = string;
   export interface TGWOnDeviceServiceConfiguration {
     /**
@@ -1405,7 +1405,7 @@ declare namespace Snowball {
     IND?: INDTaxDocuments;
   }
   export type Timestamp = Date;
-  export type TransferOption = "IMPORT"|"EXPORT"|"LOCAL_USE"|string;
+  export type TransferOption = "IMPORT"|"EXPORT"|"LOCAL_USE"|string&{};
   export interface UpdateClusterRequest {
     /**
      * The cluster ID of the cluster that you want to update, for example CID123e4567-e89b-12d3-a456-426655440000.

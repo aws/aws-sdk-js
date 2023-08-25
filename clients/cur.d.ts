@@ -45,11 +45,11 @@ declare class CUR extends Service {
   putReportDefinition(callback?: (err: AWSError, data: CUR.Types.PutReportDefinitionResponse) => void): Request<CUR.Types.PutReportDefinitionResponse, AWSError>;
 }
 declare namespace CUR {
-  export type AWSRegion = "af-south-1"|"ap-east-1"|"ap-south-1"|"ap-south-2"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"ca-central-1"|"eu-central-1"|"eu-central-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-north-1"|"eu-south-1"|"eu-south-2"|"me-central-1"|"me-south-1"|"sa-east-1"|"us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"cn-north-1"|"cn-northwest-1"|string;
-  export type AdditionalArtifact = "REDSHIFT"|"QUICKSIGHT"|"ATHENA"|string;
+  export type AWSRegion = "af-south-1"|"ap-east-1"|"ap-south-1"|"ap-south-2"|"ap-southeast-1"|"ap-southeast-2"|"ap-southeast-3"|"ap-northeast-1"|"ap-northeast-2"|"ap-northeast-3"|"ca-central-1"|"eu-central-1"|"eu-central-2"|"eu-west-1"|"eu-west-2"|"eu-west-3"|"eu-north-1"|"eu-south-1"|"eu-south-2"|"me-central-1"|"me-south-1"|"sa-east-1"|"us-east-1"|"us-east-2"|"us-west-1"|"us-west-2"|"cn-north-1"|"cn-northwest-1"|string&{};
+  export type AdditionalArtifact = "REDSHIFT"|"QUICKSIGHT"|"ATHENA"|string&{};
   export type AdditionalArtifactList = AdditionalArtifact[];
   export type BillingViewArn = string;
-  export type CompressionFormat = "ZIP"|"GZIP"|"Parquet"|string;
+  export type CompressionFormat = "ZIP"|"GZIP"|"Parquet"|string&{};
   export interface DeleteReportDefinitionRequest {
     /**
      * The name of the report that you want to delete. The name must be unique, is case sensitive, and can't include spaces.
@@ -118,14 +118,14 @@ declare namespace CUR {
     BillingViewArn?: BillingViewArn;
   }
   export type ReportDefinitionList = ReportDefinition[];
-  export type ReportFormat = "textORcsv"|"Parquet"|string;
+  export type ReportFormat = "textORcsv"|"Parquet"|string&{};
   export type ReportName = string;
-  export type ReportVersioning = "CREATE_NEW_REPORT"|"OVERWRITE_REPORT"|string;
+  export type ReportVersioning = "CREATE_NEW_REPORT"|"OVERWRITE_REPORT"|string&{};
   export type S3Bucket = string;
   export type S3Prefix = string;
-  export type SchemaElement = "RESOURCES"|"SPLIT_COST_ALLOCATION_DATA"|string;
+  export type SchemaElement = "RESOURCES"|"SPLIT_COST_ALLOCATION_DATA"|string&{};
   export type SchemaElementList = SchemaElement[];
-  export type TimeUnit = "HOURLY"|"DAILY"|"MONTHLY"|string;
+  export type TimeUnit = "HOURLY"|"DAILY"|"MONTHLY"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

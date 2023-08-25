@@ -462,7 +462,7 @@ declare class WellArchitected extends Service {
 }
 declare namespace WellArchitected {
   export type AccountSummary = {[key: string]: CheckStatusCount};
-  export type AdditionalResourceType = "HELPFUL_RESOURCE"|"IMPROVEMENT_PLAN"|string;
+  export type AdditionalResourceType = "HELPFUL_RESOURCE"|"IMPROVEMENT_PLAN"|string&{};
   export interface AdditionalResources {
     /**
      * Type of additional resource for a custom lens.
@@ -499,7 +499,7 @@ declare namespace WellArchitected {
      */
     Reason?: AnswerReason;
   }
-  export type AnswerReason = "OUT_OF_SCOPE"|"BUSINESS_PRIORITIES"|"ARCHITECTURE_CONSTRAINTS"|"OTHER"|"NONE"|string;
+  export type AnswerReason = "OUT_OF_SCOPE"|"BUSINESS_PRIORITIES"|"ARCHITECTURE_CONSTRAINTS"|"OTHER"|"NONE"|string&{};
   export type AnswerSummaries = AnswerSummary[];
   export interface AnswerSummary {
     QuestionId?: QuestionId;
@@ -583,11 +583,11 @@ declare namespace WellArchitected {
     UpdatedAt?: Timestamp;
   }
   export type CheckDetails = CheckDetail[];
-  export type CheckFailureReason = "ASSUME_ROLE_ERROR"|"ACCESS_DENIED"|"UNKNOWN_ERROR"|"PREMIUM_SUPPORT_REQUIRED"|string;
+  export type CheckFailureReason = "ASSUME_ROLE_ERROR"|"ACCESS_DENIED"|"UNKNOWN_ERROR"|"PREMIUM_SUPPORT_REQUIRED"|string&{};
   export type CheckId = string;
   export type CheckName = string;
-  export type CheckProvider = "TRUSTED_ADVISOR"|string;
-  export type CheckStatus = "OKAY"|"WARNING"|"ERROR"|"NOT_AVAILABLE"|"FETCH_FAILED"|string;
+  export type CheckProvider = "TRUSTED_ADVISOR"|string&{};
+  export type CheckStatus = "OKAY"|"WARNING"|"ERROR"|"NOT_AVAILABLE"|"FETCH_FAILED"|string&{};
   export type CheckStatusCount = number;
   export type CheckSummaries = CheckSummary[];
   export interface CheckSummary {
@@ -693,8 +693,8 @@ declare namespace WellArchitected {
   }
   export type ChoiceImprovementPlans = ChoiceImprovementPlan[];
   export type ChoiceNotes = string;
-  export type ChoiceReason = "OUT_OF_SCOPE"|"BUSINESS_PRIORITIES"|"ARCHITECTURE_CONSTRAINTS"|"OTHER"|"NONE"|string;
-  export type ChoiceStatus = "SELECTED"|"NOT_APPLICABLE"|"UNSELECTED"|string;
+  export type ChoiceReason = "OUT_OF_SCOPE"|"BUSINESS_PRIORITIES"|"ARCHITECTURE_CONSTRAINTS"|"OTHER"|"NONE"|string&{};
+  export type ChoiceStatus = "SELECTED"|"NOT_APPLICABLE"|"UNSELECTED"|string&{};
   export type ChoiceTitle = string;
   export interface ChoiceUpdate {
     /**
@@ -863,7 +863,7 @@ declare namespace WellArchitected {
     WorkloadId?: WorkloadId;
     ShareId?: ShareId;
   }
-  export type DefinitionType = "WORKLOAD_METADATA"|"APP_REGISTRY"|string;
+  export type DefinitionType = "WORKLOAD_METADATA"|"APP_REGISTRY"|string&{};
   export interface DeleteLensInput {
     LensAlias: LensAlias;
     ClientRequestToken: ClientRequestToken;
@@ -901,7 +901,7 @@ declare namespace WellArchitected {
     WorkloadId: WorkloadId;
     ClientRequestToken: ClientRequestToken;
   }
-  export type DifferenceStatus = "UPDATED"|"NEW"|"DELETED"|string;
+  export type DifferenceStatus = "UPDATED"|"NEW"|"DELETED"|string&{};
   export interface DisassociateLensesInput {
     WorkloadId: WorkloadId;
     LensAliases: LensAliases;
@@ -913,7 +913,7 @@ declare namespace WellArchitected {
      */
     ProfileArns: ProfileArns;
   }
-  export type DiscoveryIntegrationStatus = "ENABLED"|"DISABLED"|string;
+  export type DiscoveryIntegrationStatus = "ENABLED"|"DISABLED"|string&{};
   export type DisplayText = string;
   export interface ExportLensInput {
     LensAlias: LensAlias;
@@ -1094,7 +1094,7 @@ declare namespace WellArchitected {
      */
     Status?: ImportLensStatus;
   }
-  export type ImportLensStatus = "IN_PROGRESS"|"COMPLETE"|"ERROR"|string;
+  export type ImportLensStatus = "IN_PROGRESS"|"COMPLETE"|"ERROR"|string&{};
   export type ImprovementPlanUrl = string;
   export type ImprovementSummaries = ImprovementSummary[];
   export interface ImprovementSummary {
@@ -1224,8 +1224,8 @@ declare namespace WellArchitected {
      */
     StatusMessage?: StatusMessage;
   }
-  export type LensStatus = "CURRENT"|"NOT_CURRENT"|"DEPRECATED"|"DELETED"|"UNSHARED"|string;
-  export type LensStatusType = "ALL"|"DRAFT"|"PUBLISHED"|string;
+  export type LensStatus = "CURRENT"|"NOT_CURRENT"|"DEPRECATED"|"DELETED"|"UNSHARED"|string&{};
+  export type LensStatusType = "ALL"|"DRAFT"|"PUBLISHED"|string&{};
   export type LensSummaries = LensSummary[];
   export interface LensSummary {
     /**
@@ -1251,7 +1251,7 @@ declare namespace WellArchitected {
      */
     LensStatus?: LensStatus;
   }
-  export type LensType = "AWS_OFFICIAL"|"CUSTOM_SHARED"|"CUSTOM_SELF"|string;
+  export type LensType = "AWS_OFFICIAL"|"CUSTOM_SHARED"|"CUSTOM_SELF"|string&{};
   export interface LensUpgradeSummary {
     WorkloadId?: WorkloadId;
     WorkloadName?: WorkloadName;
@@ -1564,7 +1564,7 @@ declare namespace WellArchitected {
   }
   export type MaxResults = number;
   export type MaxSelectedProfileChoices = number;
-  export type MetricType = "WORKLOAD"|string;
+  export type MetricType = "WORKLOAD"|string&{};
   export interface Milestone {
     MilestoneNumber?: MilestoneNumber;
     MilestoneName?: MilestoneName;
@@ -1594,9 +1594,9 @@ declare namespace WellArchitected {
      */
     LensUpgradeSummary?: LensUpgradeSummary;
   }
-  export type NotificationType = "LENS_VERSION_UPGRADED"|"LENS_VERSION_DEPRECATED"|string;
-  export type OrganizationSharingStatus = "ENABLED"|"DISABLED"|string;
-  export type PermissionType = "READONLY"|"CONTRIBUTOR"|string;
+  export type NotificationType = "LENS_VERSION_UPGRADED"|"LENS_VERSION_DEPRECATED"|string&{};
+  export type OrganizationSharingStatus = "ENABLED"|"DISABLED"|string&{};
+  export type PermissionType = "READONLY"|"CONTRIBUTOR"|string&{};
   export interface PillarDifference {
     PillarId?: PillarId;
     PillarName?: PillarName;
@@ -1698,8 +1698,8 @@ declare namespace WellArchitected {
     WorkloadId?: WorkloadId;
     WorkloadName?: WorkloadName;
   }
-  export type ProfileNotificationType = "PROFILE_ANSWERS_UPDATED"|"PROFILE_DELETED"|string;
-  export type ProfileOwnerType = "SELF"|"SHARED"|string;
+  export type ProfileNotificationType = "PROFILE_ANSWERS_UPDATED"|"PROFILE_DELETED"|string&{};
+  export type ProfileOwnerType = "SELF"|"SHARED"|string&{};
   export interface ProfileQuestion {
     QuestionId?: QuestionId;
     QuestionTitle?: QuestionTitle;
@@ -1819,11 +1819,11 @@ declare namespace WellArchitected {
     BestPractices?: BestPractices;
   }
   export type QuestionMetrics = QuestionMetric[];
-  export type QuestionPriority = "PRIORITIZED"|"NONE"|string;
+  export type QuestionPriority = "PRIORITIZED"|"NONE"|string&{};
   export type QuestionTitle = string;
-  export type QuestionType = "PRIORITIZED"|"NON_PRIORITIZED"|string;
-  export type ReportFormat = "PDF"|"JSON"|string;
-  export type Risk = "UNANSWERED"|"HIGH"|"MEDIUM"|"NONE"|"NOT_APPLICABLE"|string;
+  export type QuestionType = "PRIORITIZED"|"NON_PRIORITIZED"|string&{};
+  export type ReportFormat = "PDF"|"JSON"|string&{};
+  export type Risk = "UNANSWERED"|"HIGH"|"MEDIUM"|"NONE"|"NOT_APPLICABLE"|string&{};
   export type RiskCounts = {[key: string]: Count};
   export type SelectedChoiceIds = ChoiceId[];
   export type SelectedChoices = ChoiceId[];
@@ -1849,7 +1849,7 @@ declare namespace WellArchitected {
      */
     ProfileArn?: ProfileArn;
   }
-  export type ShareInvitationAction = "ACCEPT"|"REJECT"|string;
+  export type ShareInvitationAction = "ACCEPT"|"REJECT"|string&{};
   export type ShareInvitationId = string;
   export type ShareInvitationSummaries = ShareInvitationSummary[];
   export interface ShareInvitationSummary {
@@ -1880,8 +1880,8 @@ declare namespace WellArchitected {
      */
     ProfileArn?: ProfileArn;
   }
-  export type ShareResourceType = "WORKLOAD"|"LENS"|"PROFILE"|string;
-  export type ShareStatus = "ACCEPTED"|"REJECTED"|"PENDING"|"REVOKED"|"EXPIRED"|"ASSOCIATING"|"ASSOCIATED"|"FAILED"|string;
+  export type ShareResourceType = "WORKLOAD"|"LENS"|"PROFILE"|string&{};
+  export type ShareStatus = "ACCEPTED"|"REJECTED"|"PENDING"|"REVOKED"|"EXPIRED"|"ASSOCIATING"|"ASSOCIATED"|"FAILED"|string&{};
   export type SharedWith = string;
   export type SharedWithPrefix = string;
   export type StatusMessage = string;
@@ -1900,7 +1900,7 @@ declare namespace WellArchitected {
   export type TagValue = string;
   export type TemplateQuestions = ProfileTemplateQuestion[];
   export type Timestamp = Date;
-  export type TrustedAdvisorIntegrationStatus = "ENABLED"|"DISABLED"|string;
+  export type TrustedAdvisorIntegrationStatus = "ENABLED"|"DISABLED"|string&{};
   export interface UntagResourceInput {
     WorkloadArn: WorkloadArn;
     /**
@@ -2113,9 +2113,9 @@ declare namespace WellArchitected {
      */
     WorkloadResourceDefinition?: WorkloadResourceDefinition;
   }
-  export type WorkloadEnvironment = "PRODUCTION"|"PREPRODUCTION"|string;
+  export type WorkloadEnvironment = "PRODUCTION"|"PREPRODUCTION"|string&{};
   export type WorkloadId = string;
-  export type WorkloadImprovementStatus = "NOT_APPLICABLE"|"NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"RISK_ACKNOWLEDGED"|string;
+  export type WorkloadImprovementStatus = "NOT_APPLICABLE"|"NOT_STARTED"|"IN_PROGRESS"|"COMPLETE"|"RISK_ACKNOWLEDGED"|string&{};
   export type WorkloadIndustry = string;
   export type WorkloadIndustryType = string;
   export type WorkloadLenses = LensAlias[];

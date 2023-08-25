@@ -252,7 +252,7 @@ declare namespace KendraRanking {
   export type RescoreExecutionPlanArn = string;
   export type RescoreExecutionPlanId = string;
   export type RescoreExecutionPlanName = string;
-  export type RescoreExecutionPlanStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
+  export type RescoreExecutionPlanStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"|string&{};
   export interface RescoreExecutionPlanSummary {
     /**
      * The name of the rescore execution plan.

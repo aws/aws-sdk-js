@@ -144,8 +144,8 @@ declare namespace SimSpaceWeaver {
   export type AppPortMappings = SimulationAppPortMapping[];
   export type BucketName = string;
   export type ClientToken = string;
-  export type ClockStatus = "UNKNOWN"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|string;
-  export type ClockTargetStatus = "UNKNOWN"|"STARTED"|"STOPPED"|string;
+  export type ClockStatus = "UNKNOWN"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|string&{};
+  export type ClockTargetStatus = "UNKNOWN"|"STARTED"|"STOPPED"|string&{};
   export interface CloudWatchLogsLogGroup {
     /**
      * The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group for the simulation. For more information about ARNs, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference. For more information about log groups, see Working with log groups and log streams in the Amazon CloudWatch Logs User Guide.
@@ -317,7 +317,7 @@ declare namespace SimSpaceWeaver {
      */
     LaunchCommands?: LaunchCommandList;
   }
-  export type LifecycleManagementStrategy = "Unknown"|"PerWorker"|"BySpatialSubdivision"|"ByRequest"|string;
+  export type LifecycleManagementStrategy = "Unknown"|"PerWorker"|"BySpatialSubdivision"|"ByRequest"|string&{};
   export interface ListAppsInput {
     /**
      * The name of the domain that you want to list apps for.
@@ -475,8 +475,8 @@ declare namespace SimSpaceWeaver {
      */
     Declared?: PortNumber;
   }
-  export type SimulationAppStatus = "STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"ERROR"|"UNKNOWN"|string;
-  export type SimulationAppTargetStatus = "UNKNOWN"|"STARTED"|"STOPPED"|string;
+  export type SimulationAppStatus = "STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"ERROR"|"UNKNOWN"|string&{};
+  export type SimulationAppTargetStatus = "UNKNOWN"|"STARTED"|"STOPPED"|string&{};
   export interface SimulationClock {
     /**
      * The current status of the simulation clock.
@@ -511,8 +511,8 @@ declare namespace SimSpaceWeaver {
      */
     TargetStatus?: SimulationTargetStatus;
   }
-  export type SimulationStatus = "UNKNOWN"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|"SNAPSHOT_IN_PROGRESS"|string;
-  export type SimulationTargetStatus = "UNKNOWN"|"STARTED"|"STOPPED"|"DELETED"|string;
+  export type SimulationStatus = "UNKNOWN"|"STARTING"|"STARTED"|"STOPPING"|"STOPPED"|"FAILED"|"DELETING"|"DELETED"|"SNAPSHOT_IN_PROGRESS"|string&{};
+  export type SimulationTargetStatus = "UNKNOWN"|"STARTED"|"STOPPED"|"DELETED"|string&{};
   export interface StartAppInput {
     /**
      * A value that you provide to ensure that repeated calls to this API operation using the same parameters complete only once. A ClientToken is also known as an idempotency token. A ClientToken expires after 24 hours.

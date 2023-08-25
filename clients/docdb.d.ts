@@ -477,7 +477,7 @@ declare namespace DocDB {
      */
     Tags: TagList;
   }
-  export type ApplyMethod = "immediate"|"pending-reboot"|string;
+  export type ApplyMethod = "immediate"|"pending-reboot"|string&{};
   export interface ApplyPendingMaintenanceActionMessage {
     /**
      * The Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to.
@@ -2637,7 +2637,7 @@ declare namespace DocDB {
     DBCluster?: DBCluster;
   }
   export type SourceIdsList = String[];
-  export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;
+  export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string&{};
   export interface StartDBClusterMessage {
     /**
      * The identifier of the cluster to restart. Example: docdb-2019-05-28-15-24-52 

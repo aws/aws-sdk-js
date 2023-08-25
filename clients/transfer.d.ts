@@ -505,7 +505,7 @@ declare namespace Transfer {
   export type AddressAllocationId = string;
   export type AddressAllocationIds = AddressAllocationId[];
   export type AgreementId = string;
-  export type AgreementStatusType = "ACTIVE"|"INACTIVE"|string;
+  export type AgreementStatusType = "ACTIVE"|"INACTIVE"|string&{};
   export type Arn = string;
   export interface As2ConnectorConfig {
     /**
@@ -547,7 +547,7 @@ declare namespace Transfer {
   }
   export type As2ConnectorSecretId = string;
   export type As2Id = string;
-  export type As2Transport = "HTTP"|string;
+  export type As2Transport = "HTTP"|string&{};
   export type As2Transports = As2Transport[];
   export type CallbackToken = string;
   export type CertDate = Date;
@@ -557,10 +557,10 @@ declare namespace Transfer {
   export type CertificateChainType = string;
   export type CertificateId = string;
   export type CertificateIds = CertificateId[];
-  export type CertificateStatusType = "ACTIVE"|"PENDING_ROTATION"|"INACTIVE"|string;
-  export type CertificateType = "CERTIFICATE"|"CERTIFICATE_WITH_PRIVATE_KEY"|string;
-  export type CertificateUsageType = "SIGNING"|"ENCRYPTION"|string;
-  export type CompressionEnum = "ZLIB"|"DISABLED"|string;
+  export type CertificateStatusType = "ACTIVE"|"PENDING_ROTATION"|"INACTIVE"|string&{};
+  export type CertificateType = "CERTIFICATE"|"CERTIFICATE_WITH_PRIVATE_KEY"|string&{};
+  export type CertificateUsageType = "SIGNING"|"ENCRYPTION"|string&{};
+  export type CompressionEnum = "ZLIB"|"DISABLED"|string&{};
   export type ConnectorId = string;
   export interface CopyStepDetails {
     /**
@@ -883,7 +883,7 @@ declare namespace Transfer {
      */
     SourceFileLocation?: SourceFileLocation;
   }
-  export type CustomStepStatus = "SUCCESS"|"FAILURE"|string;
+  export type CustomStepStatus = "SUCCESS"|"FAILURE"|string&{};
   export type CustomStepTarget = string;
   export type CustomStepTimeoutSeconds = number;
   export type DateImported = Date;
@@ -1593,7 +1593,7 @@ declare namespace Transfer {
   }
   export type Description = string;
   export type DirectoryId = string;
-  export type Domain = "S3"|"EFS"|string;
+  export type Domain = "S3"|"EFS"|string&{};
   export interface EfsFileLocation {
     /**
      * The identifier of the file system, assigned by Amazon EFS.
@@ -1606,8 +1606,8 @@ declare namespace Transfer {
   }
   export type EfsFileSystemId = string;
   export type EfsPath = string;
-  export type EncryptionAlg = "AES128_CBC"|"AES192_CBC"|"AES256_CBC"|"NONE"|string;
-  export type EncryptionType = "PGP"|string;
+  export type EncryptionAlg = "AES128_CBC"|"AES192_CBC"|"AES256_CBC"|"NONE"|string&{};
+  export type EncryptionType = "PGP"|string&{};
   export interface EndpointDetails {
     /**
      * A list of address allocation IDs that are required to attach an Elastic IP address to your server's endpoint.  This property can only be set when EndpointType is set to VPC and it is only valid in the UpdateServer API. 
@@ -1630,7 +1630,7 @@ declare namespace Transfer {
      */
     SecurityGroupIds?: SecurityGroupIds;
   }
-  export type EndpointType = "PUBLIC"|"VPC"|"VPC_ENDPOINT"|string;
+  export type EndpointType = "PUBLIC"|"VPC"|"VPC_ENDPOINT"|string&{};
   export interface ExecutionError {
     /**
      * Specifies the error type.    ALREADY_EXISTS: occurs for a copy step, if the overwrite option is not selected and a file with the same name already exists in the target location.    BAD_REQUEST: a general bad request: for example, a step that attempts to tag an EFS file returns BAD_REQUEST, as only S3 files can be tagged.    CUSTOM_STEP_FAILED: occurs when the custom step provided a callback that indicates failure.    INTERNAL_SERVER_ERROR: a catch-all error that can occur for a variety of reasons.    NOT_FOUND: occurs when a requested entity, for example a source file for a copy step, does not exist.    PERMISSION_DENIED: occurs if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.    TIMEOUT: occurs when the execution times out.   You can set the TimeoutSeconds for a custom step, anywhere from 1 second to 1800 seconds (30 minutes).      THROTTLED: occurs if you exceed the new execution refill rate of one workflow per second.  
@@ -1642,7 +1642,7 @@ declare namespace Transfer {
     Message: ExecutionErrorMessage;
   }
   export type ExecutionErrorMessage = string;
-  export type ExecutionErrorType = "PERMISSION_DENIED"|"CUSTOM_STEP_FAILED"|"THROTTLED"|"ALREADY_EXISTS"|"NOT_FOUND"|"BAD_REQUEST"|"TIMEOUT"|"INTERNAL_SERVER_ERROR"|string;
+  export type ExecutionErrorType = "PERMISSION_DENIED"|"CUSTOM_STEP_FAILED"|"THROTTLED"|"ALREADY_EXISTS"|"NOT_FOUND"|"BAD_REQUEST"|"TIMEOUT"|"INTERNAL_SERVER_ERROR"|string&{};
   export type ExecutionId = string;
   export interface ExecutionResults {
     /**
@@ -1654,7 +1654,7 @@ declare namespace Transfer {
      */
     OnExceptionSteps?: ExecutionStepResults;
   }
-  export type ExecutionStatus = "IN_PROGRESS"|"COMPLETED"|"EXCEPTION"|"HANDLING_EXCEPTION"|string;
+  export type ExecutionStatus = "IN_PROGRESS"|"COMPLETED"|"EXCEPTION"|"HANDLING_EXCEPTION"|string&{};
   export interface ExecutionStepResult {
     /**
      * One of the available step types.     COPY  - Copy the file to another location.     CUSTOM  - Perform a custom step with an Lambda function target.     DECRYPT  - Decrypt a file that was encrypted before it was uploaded.     DELETE  - Delete the file.     TAG  - Add a tag to the file.  
@@ -1697,7 +1697,7 @@ declare namespace Transfer {
     Target: MapTarget;
   }
   export type HomeDirectoryMappings = HomeDirectoryMapEntry[];
-  export type HomeDirectoryType = "PATH"|"LOGICAL"|string;
+  export type HomeDirectoryType = "PATH"|"LOGICAL"|string&{};
   export type HostKey = string;
   export type HostKeyDescription = string;
   export type HostKeyFingerprint = string;
@@ -1725,7 +1725,7 @@ declare namespace Transfer {
      */
     SftpAuthenticationMethods?: SftpAuthenticationMethods;
   }
-  export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|"AWS_DIRECTORY_SERVICE"|"AWS_LAMBDA"|string;
+  export type IdentityProviderType = "SERVICE_MANAGED"|"API_GATEWAY"|"AWS_DIRECTORY_SERVICE"|"AWS_LAMBDA"|string&{};
   export interface ImportCertificateRequest {
     /**
      * Specifies whether this certificate is used for signing or encryption.
@@ -2376,15 +2376,15 @@ declare namespace Transfer {
   export type MapEntry = string;
   export type MapTarget = string;
   export type MaxResults = number;
-  export type MdnResponse = "SYNC"|"NONE"|string;
-  export type MdnSigningAlg = "SHA256"|"SHA384"|"SHA512"|"SHA1"|"NONE"|"DEFAULT"|string;
+  export type MdnResponse = "SYNC"|"NONE"|string&{};
+  export type MdnSigningAlg = "SHA256"|"SHA384"|"SHA512"|"SHA1"|"NONE"|"DEFAULT"|string&{};
   export type Message = string;
   export type MessageSubject = string;
   export type NextToken = string;
   export type NullableRole = string;
   export type OnPartialUploadWorkflowDetails = WorkflowDetail[];
   export type OnUploadWorkflowDetails = WorkflowDetail[];
-  export type OverwriteExisting = "TRUE"|"FALSE"|string;
+  export type OverwriteExisting = "TRUE"|"FALSE"|string&{};
   export type PassiveIp = string;
   export type Policy = string;
   export type PosixId = number;
@@ -2406,8 +2406,8 @@ declare namespace Transfer {
   export type PreAuthenticationLoginBanner = string;
   export type PrivateKeyType = string;
   export type ProfileId = string;
-  export type ProfileType = "LOCAL"|"PARTNER"|string;
-  export type Protocol = "SFTP"|"FTP"|"FTPS"|"AS2"|string;
+  export type ProfileType = "LOCAL"|"PARTNER"|string&{};
+  export type Protocol = "SFTP"|"FTP"|"FTPS"|"AS2"|string&{};
   export interface ProtocolDetails {
     /**
      *  Indicates passive mode, for FTP and FTPS protocols. Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer. For example:   aws transfer update-server --protocol-details PassiveIp=0.0.0.0  Replace 0.0.0.0 in the example above with the actual IP address you want to use.   If you change the PassiveIp value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see Configuring your FTPS server behind a firewall or NAT with Transfer Family.    Special values  The AUTO and 0.0.0.0 are special values for the PassiveIp parameter. The value PassiveIp=AUTO is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response. PassiveIp=0.0.0.0 has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment, where you have 3 subnets, you can only specify a single IP address using the PassiveIp parameter. This reduces the effectiveness of having High Availability. In this case, you can specify PassiveIp=0.0.0.0. This tells the client to use the same IP address as the Control connection and utilize all AZs for their connections. Note, however, that not all FTP clients support the PassiveIp=0.0.0.0 response. FileZilla and WinSCP do support it. If you are using other clients, check to see if your client supports the PassiveIp=0.0.0.0 response.
@@ -2510,8 +2510,8 @@ declare namespace Transfer {
     UserDetails: UserDetails;
   }
   export type SessionId = string;
-  export type SetStatOption = "DEFAULT"|"ENABLE_NO_OP"|string;
-  export type SftpAuthenticationMethods = "PASSWORD"|"PUBLIC_KEY"|"PUBLIC_KEY_OR_PASSWORD"|"PUBLIC_KEY_AND_PASSWORD"|string;
+  export type SetStatOption = "DEFAULT"|"ENABLE_NO_OP"|string&{};
+  export type SftpAuthenticationMethods = "PASSWORD"|"PUBLIC_KEY"|"PUBLIC_KEY_OR_PASSWORD"|"PUBLIC_KEY_AND_PASSWORD"|string&{};
   export interface SftpConnectorConfig {
     /**
      * The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
@@ -2524,7 +2524,7 @@ declare namespace Transfer {
   }
   export type SftpConnectorTrustedHostKey = string;
   export type SftpConnectorTrustedHostKeyList = SftpConnectorTrustedHostKey[];
-  export type SigningAlg = "SHA256"|"SHA384"|"SHA512"|"SHA1"|"NONE"|string;
+  export type SigningAlg = "SHA256"|"SHA384"|"SHA512"|"SHA1"|"NONE"|string&{};
   export type SourceFileLocation = string;
   export type SourceIp = string;
   export interface SshPublicKey {
@@ -2579,7 +2579,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
   }
-  export type State = "OFFLINE"|"ONLINE"|"STARTING"|"STOPPING"|"START_FAILED"|"STOP_FAILED"|string;
+  export type State = "OFFLINE"|"ONLINE"|"STARTING"|"STOPPING"|"START_FAILED"|"STOP_FAILED"|string&{};
   export type Status = string;
   export type StatusCode = number;
   export type StepResultOutputsJson = string;
@@ -2690,7 +2690,7 @@ declare namespace Transfer {
      */
     Url: Url;
   }
-  export type TlsSessionResumptionMode = "DISABLED"|"ENABLED"|"ENFORCED"|string;
+  export type TlsSessionResumptionMode = "DISABLED"|"ENABLED"|"ENFORCED"|string&{};
   export type TransferId = string;
   export interface UntagResourceRequest {
     /**
@@ -3056,7 +3056,7 @@ declare namespace Transfer {
     DecryptStepDetails?: DecryptStepDetails;
   }
   export type WorkflowStepName = string;
-  export type WorkflowStepType = "COPY"|"CUSTOM"|"TAG"|"DELETE"|"DECRYPT"|string;
+  export type WorkflowStepType = "COPY"|"CUSTOM"|"TAG"|"DELETE"|"DECRYPT"|string&{};
   export type WorkflowSteps = WorkflowStep[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

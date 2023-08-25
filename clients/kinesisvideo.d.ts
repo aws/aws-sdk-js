@@ -253,7 +253,7 @@ declare class KinesisVideo extends Service {
   updateStream(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateStreamOutput) => void): Request<KinesisVideo.Types.UpdateStreamOutput, AWSError>;
 }
 declare namespace KinesisVideo {
-  export type APIName = "PUT_MEDIA"|"GET_MEDIA"|"LIST_FRAGMENTS"|"GET_MEDIA_FOR_FRAGMENT_LIST"|"GET_HLS_STREAMING_SESSION_URL"|"GET_DASH_STREAMING_SESSION_URL"|"GET_CLIP"|"GET_IMAGES"|string;
+  export type APIName = "PUT_MEDIA"|"GET_MEDIA"|"LIST_FRAGMENTS"|"GET_MEDIA_FOR_FRAGMENT_LIST"|"GET_HLS_STREAMING_SESSION_URL"|"GET_DASH_STREAMING_SESSION_URL"|"GET_CLIP"|"GET_IMAGES"|string&{};
   export interface ChannelInfo {
     /**
      * The name of the signaling channel.
@@ -296,11 +296,11 @@ declare namespace KinesisVideo {
      */
     ComparisonValue?: ChannelName;
   }
-  export type ChannelProtocol = "WSS"|"HTTPS"|"WEBRTC"|string;
-  export type ChannelRole = "MASTER"|"VIEWER"|string;
-  export type ChannelType = "SINGLE_MASTER"|"FULL_MESH"|string;
-  export type ComparisonOperator = "BEGINS_WITH"|string;
-  export type ConfigurationStatus = "ENABLED"|"DISABLED"|string;
+  export type ChannelProtocol = "WSS"|"HTTPS"|"WEBRTC"|string&{};
+  export type ChannelRole = "MASTER"|"VIEWER"|string&{};
+  export type ChannelType = "SINGLE_MASTER"|"FULL_MESH"|string&{};
+  export type ComparisonOperator = "BEGINS_WITH"|string&{};
+  export type ConfigurationStatus = "ENABLED"|"DISABLED"|string&{};
   export interface CreateSignalingChannelInput {
     /**
      * A name for the signaling channel that you are creating. It must be unique for each Amazon Web Services account and Amazon Web Services Region.
@@ -597,9 +597,9 @@ declare namespace KinesisVideo {
   }
   export type EdgeRetentionInHours = number;
   export type FailedStatusDetails = string;
-  export type Format = "JPEG"|"PNG"|string;
+  export type Format = "JPEG"|"PNG"|string&{};
   export type FormatConfig = {[key: string]: FormatConfigValue};
-  export type FormatConfigKey = "JPEGQuality"|string;
+  export type FormatConfigKey = "JPEGQuality"|string&{};
   export type FormatConfigValue = string;
   export interface GetDataEndpointInput {
     /**
@@ -683,7 +683,7 @@ declare namespace KinesisVideo {
      */
     DestinationRegion: DestinationRegion;
   }
-  export type ImageSelectorType = "SERVER_TIMESTAMP"|"PRODUCER_TIMESTAMP"|string;
+  export type ImageSelectorType = "SERVER_TIMESTAMP"|"PRODUCER_TIMESTAMP"|string&{};
   export type JobStatusDetails = string;
   export type KmsKeyId = string;
   export interface LastRecorderStatus {
@@ -912,10 +912,10 @@ declare namespace KinesisVideo {
      */
     Status: MediaStorageConfigurationStatus;
   }
-  export type MediaStorageConfigurationStatus = "ENABLED"|"DISABLED"|string;
+  export type MediaStorageConfigurationStatus = "ENABLED"|"DISABLED"|string&{};
   export type MediaType = string;
   export type MediaUriSecretArn = string;
-  export type MediaUriType = "RTSP_URI"|"FILE_URI"|string;
+  export type MediaUriType = "RTSP_URI"|"FILE_URI"|string&{};
   export type MessageTtlSeconds = number;
   export type NextToken = string;
   export interface NotificationConfiguration {
@@ -944,7 +944,7 @@ declare namespace KinesisVideo {
      */
     ScheduleConfig?: ScheduleConfig;
   }
-  export type RecorderStatus = "SUCCESS"|"USER_ERROR"|"SYSTEM_ERROR"|string;
+  export type RecorderStatus = "SUCCESS"|"USER_ERROR"|"SYSTEM_ERROR"|string&{};
   export type ResourceARN = string;
   export type ResourceEndpoint = string;
   export type ResourceEndpointList = ResourceEndpointListItem[];
@@ -1031,8 +1031,8 @@ declare namespace KinesisVideo {
      */
     EdgeConfig?: EdgeConfig;
   }
-  export type Status = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|string;
-  export type StrategyOnFullSize = "DELETE_OLDEST_MEDIA"|"DENY_NEW_MEDIA"|string;
+  export type Status = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|string&{};
+  export type StrategyOnFullSize = "DELETE_OLDEST_MEDIA"|"DENY_NEW_MEDIA"|string&{};
   export interface StreamInfo {
     /**
      * The name of the device that is associated with the stream.
@@ -1083,7 +1083,7 @@ declare namespace KinesisVideo {
      */
     ComparisonValue?: StreamName;
   }
-  export type SyncStatus = "SYNCING"|"ACKNOWLEDGED"|"IN_SYNC"|"SYNC_FAILED"|"DELETING"|"DELETE_FAILED"|"DELETING_ACKNOWLEDGED"|string;
+  export type SyncStatus = "SYNCING"|"ACKNOWLEDGED"|"IN_SYNC"|"SYNC_FAILED"|"DELETING"|"DELETE_FAILED"|"DELETING_ACKNOWLEDGED"|string&{};
   export interface Tag {
     /**
      * The key of the tag that is associated with the specified signaling channel.
@@ -1179,7 +1179,7 @@ declare namespace KinesisVideo {
      */
     DataRetentionChangeInHours: DataRetentionChangeInHours;
   }
-  export type UpdateDataRetentionOperation = "INCREASE_DATA_RETENTION"|"DECREASE_DATA_RETENTION"|string;
+  export type UpdateDataRetentionOperation = "INCREASE_DATA_RETENTION"|"DECREASE_DATA_RETENTION"|string&{};
   export interface UpdateDataRetentionOutput {
   }
   export interface UpdateImageGenerationConfigurationInput {
@@ -1272,7 +1272,7 @@ declare namespace KinesisVideo {
      */
     ScheduleConfig: ScheduleConfig;
   }
-  export type UploaderStatus = "SUCCESS"|"USER_ERROR"|"SYSTEM_ERROR"|string;
+  export type UploaderStatus = "SUCCESS"|"USER_ERROR"|"SYSTEM_ERROR"|string&{};
   export type Version = string;
   export type WidthPixels = number;
   /**

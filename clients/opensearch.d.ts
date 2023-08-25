@@ -483,9 +483,9 @@ declare namespace OpenSearch {
      */
     Status: OptionStatus;
   }
-  export type ActionSeverity = "HIGH"|"MEDIUM"|"LOW"|string;
-  export type ActionStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
-  export type ActionType = "SERVICE_SOFTWARE_UPDATE"|"JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string;
+  export type ActionSeverity = "HIGH"|"MEDIUM"|"LOW"|string&{};
+  export type ActionStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string&{};
+  export type ActionType = "SERVICE_SOFTWARE_UPDATE"|"JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string&{};
   export interface AddTagsRequest {
     /**
      * Amazon Resource Name (ARN) for the OpenSearch Service domain to which you want to attach resource tags.
@@ -626,7 +626,7 @@ declare namespace OpenSearch {
     AutoTuneDetails?: AutoTuneDetails;
   }
   export type AutoTuneDate = Date;
-  export type AutoTuneDesiredState = "ENABLED"|"DISABLED"|string;
+  export type AutoTuneDesiredState = "ENABLED"|"DISABLED"|string&{};
   export interface AutoTuneDetails {
     /**
      * Container for details about a scheduled Auto-Tune action.
@@ -705,7 +705,7 @@ declare namespace OpenSearch {
      */
     Status?: AutoTuneStatus;
   }
-  export type AutoTuneState = "ENABLED"|"DISABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_SCHEDULED"|"DISABLED_AND_ROLLBACK_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_COMPLETE"|"DISABLED_AND_ROLLBACK_ERROR"|"ERROR"|string;
+  export type AutoTuneState = "ENABLED"|"DISABLED"|"ENABLE_IN_PROGRESS"|"DISABLE_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_SCHEDULED"|"DISABLED_AND_ROLLBACK_IN_PROGRESS"|"DISABLED_AND_ROLLBACK_COMPLETE"|"DISABLED_AND_ROLLBACK_ERROR"|"ERROR"|string&{};
   export interface AutoTuneStatus {
     /**
      * Date and time when Auto-Tune was enabled for the domain.
@@ -732,7 +732,7 @@ declare namespace OpenSearch {
      */
     PendingDeletion?: Boolean;
   }
-  export type AutoTuneType = "SCHEDULED_ACTION"|string;
+  export type AutoTuneType = "SCHEDULED_ACTION"|string&{};
   export type AvailabilityZone = string;
   export interface AvailabilityZoneInfo {
     /**
@@ -947,7 +947,7 @@ declare namespace OpenSearch {
   }
   export type ConnectionAlias = string;
   export type ConnectionId = string;
-  export type ConnectionMode = "DIRECT"|"VPC_ENDPOINT"|string;
+  export type ConnectionMode = "DIRECT"|"VPC_ENDPOINT"|string&{};
   export interface ConnectionProperties {
     /**
      *  The Endpoint attribute cannot be modified.   The endpoint of the remote domain. Applicable for VPC_ENDPOINT connection mode.
@@ -1203,7 +1203,7 @@ declare namespace OpenSearch {
     VpcEndpointSummary: VpcEndpointSummary;
   }
   export type DeploymentCloseDateTimeStamp = Date;
-  export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string;
+  export type DeploymentStatus = "PENDING_UPDATE"|"IN_PROGRESS"|"COMPLETED"|"NOT_ELIGIBLE"|"ELIGIBLE"|string&{};
   export type DeploymentType = string;
   export interface DescribeDomainAutoTunesRequest {
     /**
@@ -1460,7 +1460,7 @@ declare namespace OpenSearch {
     Value?: DescribePackagesFilterValues;
   }
   export type DescribePackagesFilterList = DescribePackagesFilter[];
-  export type DescribePackagesFilterName = "PackageID"|"PackageName"|"PackageStatus"|string;
+  export type DescribePackagesFilterName = "PackageID"|"PackageName"|"PackageStatus"|string&{};
   export type DescribePackagesFilterValue = string;
   export type DescribePackagesFilterValues = DescribePackagesFilterValue[];
   export interface DescribePackagesRequest {
@@ -1672,7 +1672,7 @@ declare namespace OpenSearch {
      */
     Status: OptionStatus;
   }
-  export type DomainHealth = "Red"|"Yellow"|"Green"|"NotAvailable"|string;
+  export type DomainHealth = "Red"|"Yellow"|"Green"|"NotAvailable"|string&{};
   export type DomainId = string;
   export interface DomainInfo {
     /**
@@ -1768,8 +1768,8 @@ declare namespace OpenSearch {
     ErrorDetails?: ErrorDetails;
   }
   export type DomainPackageDetailsList = DomainPackageDetails[];
-  export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string;
-  export type DomainState = "Active"|"Processing"|"NotAvailable"|string;
+  export type DomainPackageStatus = "ASSOCIATING"|"ASSOCIATION_FAILED"|"ACTIVE"|"DISSOCIATING"|"DISSOCIATION_FAILED"|string&{};
+  export type DomainState = "Active"|"Processing"|"NotAvailable"|string&{};
   export interface DomainStatus {
     /**
      * Unique identifier for the domain.
@@ -1883,7 +1883,7 @@ declare namespace OpenSearch {
   export type DomainStatusList = DomainStatus[];
   export type Double = number;
   export type DryRun = boolean;
-  export type DryRunMode = "Basic"|"Verbose"|string;
+  export type DryRunMode = "Basic"|"Verbose"|string&{};
   export interface DryRunProgressStatus {
     /**
      * The unique identifier of the dry run.
@@ -1981,7 +1981,7 @@ declare namespace OpenSearch {
   }
   export type Endpoint = string;
   export type EndpointsMap = {[key: string]: ServiceUrl};
-  export type EngineType = "OpenSearch"|"Elasticsearch"|string;
+  export type EngineType = "OpenSearch"|"Elasticsearch"|string&{};
   export interface EnvironmentInfo {
     /**
      *  A list of AvailabilityZoneInfo for the domain.
@@ -2130,7 +2130,7 @@ declare namespace OpenSearch {
      */
     Message?: ConnectionStatusMessage;
   }
-  export type InboundConnectionStatusCode = "PENDING_ACCEPTANCE"|"APPROVED"|"PROVISIONING"|"ACTIVE"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string;
+  export type InboundConnectionStatusCode = "PENDING_ACCEPTANCE"|"APPROVED"|"PROVISIONING"|"ACTIVE"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string&{};
   export type InboundConnections = InboundConnection[];
   export type InstanceCount = number;
   export interface InstanceCountLimits {
@@ -2440,9 +2440,9 @@ declare namespace OpenSearch {
      */
     Status?: OptionStatus;
   }
-  export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|"AUDIT_LOGS"|string;
+  export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|"AUDIT_LOGS"|string&{};
   export type Long = number;
-  export type MasterNodeStatus = "Available"|"UnAvailable"|string;
+  export type MasterNodeStatus = "Available"|"UnAvailable"|string&{};
   export interface MasterUserOptions {
     /**
      * Amazon Resource Name (ARN) for the master user. Only specify if InternalUserDatabaseEnabled is false.
@@ -2463,7 +2463,7 @@ declare namespace OpenSearch {
   export type MinimumInstanceCount = number;
   export type NextToken = string;
   export type NodeId = string;
-  export type NodeStatus = "Active"|"StandBy"|"NotAvailable"|string;
+  export type NodeStatus = "Active"|"StandBy"|"NotAvailable"|string&{};
   export interface NodeToNodeEncryptionOptions {
     /**
      * True to enable node-to-node encryption.
@@ -2480,7 +2480,7 @@ declare namespace OpenSearch {
      */
     Status: OptionStatus;
   }
-  export type NodeType = "Data"|"Ultrawarm"|"Master"|string;
+  export type NodeType = "Data"|"Ultrawarm"|"Master"|string&{};
   export type NonEmptyString = string;
   export type NumberOfAZs = string;
   export type NumberOfNodes = string;
@@ -2511,9 +2511,9 @@ declare namespace OpenSearch {
      */
     Status?: OptionStatus;
   }
-  export type OpenSearchPartitionInstanceType = "m3.medium.search"|"m3.large.search"|"m3.xlarge.search"|"m3.2xlarge.search"|"m4.large.search"|"m4.xlarge.search"|"m4.2xlarge.search"|"m4.4xlarge.search"|"m4.10xlarge.search"|"m5.large.search"|"m5.xlarge.search"|"m5.2xlarge.search"|"m5.4xlarge.search"|"m5.12xlarge.search"|"m5.24xlarge.search"|"r5.large.search"|"r5.xlarge.search"|"r5.2xlarge.search"|"r5.4xlarge.search"|"r5.12xlarge.search"|"r5.24xlarge.search"|"c5.large.search"|"c5.xlarge.search"|"c5.2xlarge.search"|"c5.4xlarge.search"|"c5.9xlarge.search"|"c5.18xlarge.search"|"t3.nano.search"|"t3.micro.search"|"t3.small.search"|"t3.medium.search"|"t3.large.search"|"t3.xlarge.search"|"t3.2xlarge.search"|"ultrawarm1.medium.search"|"ultrawarm1.large.search"|"ultrawarm1.xlarge.search"|"t2.micro.search"|"t2.small.search"|"t2.medium.search"|"r3.large.search"|"r3.xlarge.search"|"r3.2xlarge.search"|"r3.4xlarge.search"|"r3.8xlarge.search"|"i2.xlarge.search"|"i2.2xlarge.search"|"d2.xlarge.search"|"d2.2xlarge.search"|"d2.4xlarge.search"|"d2.8xlarge.search"|"c4.large.search"|"c4.xlarge.search"|"c4.2xlarge.search"|"c4.4xlarge.search"|"c4.8xlarge.search"|"r4.large.search"|"r4.xlarge.search"|"r4.2xlarge.search"|"r4.4xlarge.search"|"r4.8xlarge.search"|"r4.16xlarge.search"|"i3.large.search"|"i3.xlarge.search"|"i3.2xlarge.search"|"i3.4xlarge.search"|"i3.8xlarge.search"|"i3.16xlarge.search"|"r6g.large.search"|"r6g.xlarge.search"|"r6g.2xlarge.search"|"r6g.4xlarge.search"|"r6g.8xlarge.search"|"r6g.12xlarge.search"|"m6g.large.search"|"m6g.xlarge.search"|"m6g.2xlarge.search"|"m6g.4xlarge.search"|"m6g.8xlarge.search"|"m6g.12xlarge.search"|"c6g.large.search"|"c6g.xlarge.search"|"c6g.2xlarge.search"|"c6g.4xlarge.search"|"c6g.8xlarge.search"|"c6g.12xlarge.search"|"r6gd.large.search"|"r6gd.xlarge.search"|"r6gd.2xlarge.search"|"r6gd.4xlarge.search"|"r6gd.8xlarge.search"|"r6gd.12xlarge.search"|"r6gd.16xlarge.search"|"t4g.small.search"|"t4g.medium.search"|string;
-  export type OpenSearchWarmPartitionInstanceType = "ultrawarm1.medium.search"|"ultrawarm1.large.search"|"ultrawarm1.xlarge.search"|string;
-  export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string;
+  export type OpenSearchPartitionInstanceType = "m3.medium.search"|"m3.large.search"|"m3.xlarge.search"|"m3.2xlarge.search"|"m4.large.search"|"m4.xlarge.search"|"m4.2xlarge.search"|"m4.4xlarge.search"|"m4.10xlarge.search"|"m5.large.search"|"m5.xlarge.search"|"m5.2xlarge.search"|"m5.4xlarge.search"|"m5.12xlarge.search"|"m5.24xlarge.search"|"r5.large.search"|"r5.xlarge.search"|"r5.2xlarge.search"|"r5.4xlarge.search"|"r5.12xlarge.search"|"r5.24xlarge.search"|"c5.large.search"|"c5.xlarge.search"|"c5.2xlarge.search"|"c5.4xlarge.search"|"c5.9xlarge.search"|"c5.18xlarge.search"|"t3.nano.search"|"t3.micro.search"|"t3.small.search"|"t3.medium.search"|"t3.large.search"|"t3.xlarge.search"|"t3.2xlarge.search"|"ultrawarm1.medium.search"|"ultrawarm1.large.search"|"ultrawarm1.xlarge.search"|"t2.micro.search"|"t2.small.search"|"t2.medium.search"|"r3.large.search"|"r3.xlarge.search"|"r3.2xlarge.search"|"r3.4xlarge.search"|"r3.8xlarge.search"|"i2.xlarge.search"|"i2.2xlarge.search"|"d2.xlarge.search"|"d2.2xlarge.search"|"d2.4xlarge.search"|"d2.8xlarge.search"|"c4.large.search"|"c4.xlarge.search"|"c4.2xlarge.search"|"c4.4xlarge.search"|"c4.8xlarge.search"|"r4.large.search"|"r4.xlarge.search"|"r4.2xlarge.search"|"r4.4xlarge.search"|"r4.8xlarge.search"|"r4.16xlarge.search"|"i3.large.search"|"i3.xlarge.search"|"i3.2xlarge.search"|"i3.4xlarge.search"|"i3.8xlarge.search"|"i3.16xlarge.search"|"r6g.large.search"|"r6g.xlarge.search"|"r6g.2xlarge.search"|"r6g.4xlarge.search"|"r6g.8xlarge.search"|"r6g.12xlarge.search"|"m6g.large.search"|"m6g.xlarge.search"|"m6g.2xlarge.search"|"m6g.4xlarge.search"|"m6g.8xlarge.search"|"m6g.12xlarge.search"|"c6g.large.search"|"c6g.xlarge.search"|"c6g.2xlarge.search"|"c6g.4xlarge.search"|"c6g.8xlarge.search"|"c6g.12xlarge.search"|"r6gd.large.search"|"r6gd.xlarge.search"|"r6gd.2xlarge.search"|"r6gd.4xlarge.search"|"r6gd.8xlarge.search"|"r6gd.12xlarge.search"|"r6gd.16xlarge.search"|"t4g.small.search"|"t4g.medium.search"|string&{};
+  export type OpenSearchWarmPartitionInstanceType = "ultrawarm1.medium.search"|"ultrawarm1.large.search"|"ultrawarm1.xlarge.search"|string&{};
+  export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|string&{};
   export interface OptionStatus {
     /**
      * The timestamp when the entity was created.
@@ -2576,9 +2576,9 @@ declare namespace OpenSearch {
      */
     Message?: ConnectionStatusMessage;
   }
-  export type OutboundConnectionStatusCode = "VALIDATING"|"VALIDATION_FAILED"|"PENDING_ACCEPTANCE"|"APPROVED"|"PROVISIONING"|"ACTIVE"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string;
+  export type OutboundConnectionStatusCode = "VALIDATING"|"VALIDATION_FAILED"|"PENDING_ACCEPTANCE"|"APPROVED"|"PROVISIONING"|"ACTIVE"|"REJECTING"|"REJECTED"|"DELETING"|"DELETED"|string&{};
   export type OutboundConnections = OutboundConnection[];
-  export type OverallChangeStatus = "PENDING"|"PROCESSING"|"COMPLETED"|"FAILED"|string;
+  export type OverallChangeStatus = "PENDING"|"PROCESSING"|"COMPLETED"|"FAILED"|string&{};
   export type OwnerId = string;
   export type PackageDescription = string;
   export interface PackageDetails {
@@ -2632,8 +2632,8 @@ declare namespace OpenSearch {
      */
     S3Key?: S3Key;
   }
-  export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
-  export type PackageType = "TXT-DICTIONARY"|string;
+  export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string&{};
+  export type PackageType = "TXT-DICTIONARY"|string&{};
   export type PackageVersion = string;
   export interface PackageVersionHistory {
     /**
@@ -2652,7 +2652,7 @@ declare namespace OpenSearch {
   export type PackageVersionHistoryList = PackageVersionHistory[];
   export type Password = string;
   export type PolicyDocument = string;
-  export type PrincipalType = "AWS_ACCOUNT"|"AWS_SERVICE"|string;
+  export type PrincipalType = "AWS_ACCOUNT"|"AWS_SERVICE"|string&{};
   export interface PurchaseReservedInstanceOfferingRequest {
     /**
      * The ID of the Reserved Instance offering to purchase.
@@ -2807,7 +2807,7 @@ declare namespace OpenSearch {
     RecurringCharges?: RecurringChargeList;
   }
   export type ReservedInstanceOfferingList = ReservedInstanceOffering[];
-  export type ReservedInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string;
+  export type ReservedInstancePaymentOption = "ALL_UPFRONT"|"PARTIAL_UPFRONT"|"NO_UPFRONT"|string&{};
   export interface RevokeVpcEndpointAccessRequest {
     /**
      * The name of the OpenSearch Service domain.
@@ -2821,7 +2821,7 @@ declare namespace OpenSearch {
   export interface RevokeVpcEndpointAccessResponse {
   }
   export type RoleArn = string;
-  export type RollbackOnDisable = "NO_ROLLBACK"|"DEFAULT_ROLLBACK"|string;
+  export type RollbackOnDisable = "NO_ROLLBACK"|"DEFAULT_ROLLBACK"|string&{};
   export type S3BucketName = string;
   export type S3Key = string;
   export type SAMLEntityId = string;
@@ -2888,7 +2888,7 @@ declare namespace OpenSearch {
      */
     SessionTimeoutMinutes?: IntegerClass;
   }
-  export type ScheduleAt = "NOW"|"TIMESTAMP"|"OFF_PEAK_WINDOW"|string;
+  export type ScheduleAt = "NOW"|"TIMESTAMP"|"OFF_PEAK_WINDOW"|string&{};
   export interface ScheduledAction {
     /**
      * The unique identifier of the scheduled action.
@@ -2928,7 +2928,7 @@ declare namespace OpenSearch {
     Cancellable?: Boolean;
   }
   export type ScheduledActionsList = ScheduledAction[];
-  export type ScheduledAutoTuneActionType = "JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string;
+  export type ScheduledAutoTuneActionType = "JVM_HEAP_SIZE_TUNING"|"JVM_YOUNG_GEN_TUNING"|string&{};
   export type ScheduledAutoTuneDescription = string;
   export interface ScheduledAutoTuneDetails {
     /**
@@ -2948,8 +2948,8 @@ declare namespace OpenSearch {
      */
     Severity?: ScheduledAutoTuneSeverityType;
   }
-  export type ScheduledAutoTuneSeverityType = "LOW"|"MEDIUM"|"HIGH"|string;
-  export type ScheduledBy = "CUSTOMER"|"SYSTEM"|string;
+  export type ScheduledAutoTuneSeverityType = "LOW"|"MEDIUM"|"HIGH"|string&{};
+  export type ScheduledBy = "CUSTOMER"|"SYSTEM"|string&{};
   export interface ServiceSoftwareOptions {
     /**
      * The current service software version present on the domain.
@@ -2985,7 +2985,7 @@ declare namespace OpenSearch {
     OptionalDeployment?: Boolean;
   }
   export type ServiceUrl = string;
-  export type SkipUnavailableStatus = "ENABLED"|"DISABLED"|string;
+  export type SkipUnavailableStatus = "ENABLED"|"DISABLED"|string&{};
   export interface SnapshotOptions {
     /**
      * The time, in UTC format, when OpenSearch Service takes a daily automated snapshot of the specified domain. Default is 0 hours.
@@ -3072,7 +3072,7 @@ declare namespace OpenSearch {
   export type StorageTypeName = string;
   export type String = string;
   export type StringList = String[];
-  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
+  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string&{};
   export interface Tag {
     /**
      * The tag key. Tag keys must be unique for the domain to which they are attached.
@@ -3086,7 +3086,7 @@ declare namespace OpenSearch {
   export type TagKey = string;
   export type TagList = Tag[];
   export type TagValue = string;
-  export type TimeUnit = "HOURS"|string;
+  export type TimeUnit = "HOURS"|string&{};
   export type TotalNumberOfStages = number;
   export type UIntValue = number;
   export interface UpdateDomainConfigRequest {
@@ -3310,8 +3310,8 @@ declare namespace OpenSearch {
   }
   export type UpgradeHistoryList = UpgradeHistory[];
   export type UpgradeName = string;
-  export type UpgradeStatus = "IN_PROGRESS"|"SUCCEEDED"|"SUCCEEDED_WITH_ISSUES"|"FAILED"|string;
-  export type UpgradeStep = "PRE_UPGRADE_CHECK"|"SNAPSHOT"|"UPGRADE"|string;
+  export type UpgradeStatus = "IN_PROGRESS"|"SUCCEEDED"|"SUCCEEDED_WITH_ISSUES"|"FAILED"|string&{};
+  export type UpgradeStep = "PRE_UPGRADE_CHECK"|"SNAPSHOT"|"UPGRADE"|string&{};
   export interface UpgradeStepItem {
     /**
      *  One of three steps that an upgrade or upgrade eligibility check goes through:    PreUpgradeCheck   Snapshot   Upgrade  
@@ -3396,7 +3396,7 @@ declare namespace OpenSearch {
   }
   export type VersionString = string;
   export type VolumeSize = string;
-  export type VolumeType = "standard"|"gp2"|"io1"|"gp3"|string;
+  export type VolumeType = "standard"|"gp2"|"io1"|"gp3"|string&{};
   export interface VpcEndpoint {
     /**
      * The unique identifier of the endpoint.
@@ -3437,11 +3437,11 @@ declare namespace OpenSearch {
      */
     ErrorMessage?: String;
   }
-  export type VpcEndpointErrorCode = "ENDPOINT_NOT_FOUND"|"SERVER_ERROR"|string;
+  export type VpcEndpointErrorCode = "ENDPOINT_NOT_FOUND"|"SERVER_ERROR"|string&{};
   export type VpcEndpointErrorList = VpcEndpointError[];
   export type VpcEndpointId = string;
   export type VpcEndpointIdList = VpcEndpointId[];
-  export type VpcEndpointStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED"|string;
+  export type VpcEndpointStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED"|string&{};
   export interface VpcEndpointSummary {
     /**
      * The unique identifier of the endpoint.
@@ -3478,7 +3478,7 @@ declare namespace OpenSearch {
      */
     AvailabilityZoneCount?: IntegerClass;
   }
-  export type ZoneStatus = "Active"|"StandBy"|"NotAvailable"|string;
+  export type ZoneStatus = "Active"|"StandBy"|"NotAvailable"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

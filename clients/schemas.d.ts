@@ -270,7 +270,7 @@ declare class Schemas extends Service {
   waitFor(state: "codeBindingExists", callback?: (err: AWSError, data: Schemas.Types.DescribeCodeBindingResponse) => void): Request<Schemas.Types.DescribeCodeBindingResponse, AWSError>;
 }
 declare namespace Schemas {
-  export type CodeGenerationStatus = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|string;
+  export type CodeGenerationStatus = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|string&{};
   export interface CreateDiscovererRequest {
     /**
      * A description for the discoverer.
@@ -598,7 +598,7 @@ declare namespace Schemas {
      */
     VersionCreatedDate?: __timestampIso8601;
   }
-  export type DiscovererState = "STARTED"|"STOPPED"|string;
+  export type DiscovererState = "STARTED"|"STOPPED"|string&{};
   export interface DiscovererSummary {
     /**
      * The ARN of the discoverer.
@@ -1024,7 +1024,7 @@ declare namespace Schemas {
     Tags: Tags;
   }
   export type Tags = {[key: string]: __string};
-  export type Type = "OpenApi3"|"JSONSchemaDraft4"|string;
+  export type Type = "OpenApi3"|"JSONSchemaDraft4"|string&{};
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource.

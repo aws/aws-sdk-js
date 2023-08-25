@@ -782,7 +782,7 @@ declare namespace SESV2 {
      */
     Errors?: MetricDataErrorList;
   }
-  export type BehaviorOnMxFailure = "USE_DEFAULT_VALUE"|"REJECT_MESSAGE"|string;
+  export type BehaviorOnMxFailure = "USE_DEFAULT_VALUE"|"REJECT_MESSAGE"|string&{};
   export type BlacklistEntries = BlacklistEntry[];
   export interface BlacklistEntry {
     /**
@@ -848,7 +848,7 @@ declare namespace SESV2 {
     MessageId?: OutboundMessageId;
   }
   export type BulkEmailEntryResultList = BulkEmailEntryResult[];
-  export type BulkEmailStatus = "SUCCESS"|"MESSAGE_REJECTED"|"MAIL_FROM_DOMAIN_NOT_VERIFIED"|"CONFIGURATION_SET_NOT_FOUND"|"TEMPLATE_NOT_FOUND"|"ACCOUNT_SUSPENDED"|"ACCOUNT_THROTTLED"|"ACCOUNT_DAILY_QUOTA_EXCEEDED"|"INVALID_SENDING_POOL_NAME"|"ACCOUNT_SENDING_PAUSED"|"CONFIGURATION_SET_SENDING_PAUSED"|"INVALID_PARAMETER"|"TRANSIENT_FAILURE"|"FAILED"|string;
+  export type BulkEmailStatus = "SUCCESS"|"MESSAGE_REJECTED"|"MAIL_FROM_DOMAIN_NOT_VERIFIED"|"CONFIGURATION_SET_NOT_FOUND"|"TEMPLATE_NOT_FOUND"|"ACCOUNT_SUSPENDED"|"ACCOUNT_THROTTLED"|"ACCOUNT_DAILY_QUOTA_EXCEEDED"|"INVALID_SENDING_POOL_NAME"|"ACCOUNT_SENDING_PAUSED"|"CONFIGURATION_SET_SENDING_PAUSED"|"INVALID_PARAMETER"|"TRANSIENT_FAILURE"|"FAILED"|string&{};
   export type CampaignId = string;
   export type CaseId = string;
   export type Charset = string;
@@ -897,7 +897,7 @@ declare namespace SESV2 {
      */
     LastUpdatedTimestamp?: Timestamp;
   }
-  export type ContactLanguage = "EN"|"JA"|string;
+  export type ContactLanguage = "EN"|"JA"|string&{};
   export interface ContactList {
     /**
      * The name of the contact list.
@@ -918,7 +918,7 @@ declare namespace SESV2 {
      */
     ContactListImportAction: ContactListImportAction;
   }
-  export type ContactListImportAction = "DELETE"|"PUT"|string;
+  export type ContactListImportAction = "DELETE"|"PUT"|string&{};
   export type ContactListName = string;
   export interface Content {
     /**
@@ -1223,7 +1223,7 @@ declare namespace SESV2 {
      */
     EngagementMetrics?: FeatureStatus;
   }
-  export type DataFormat = "CSV"|"JSON"|string;
+  export type DataFormat = "CSV"|"JSON"|string&{};
   export interface DedicatedIp {
     /**
      * An IPv4 address.
@@ -1346,7 +1346,7 @@ declare namespace SESV2 {
   }
   export interface DeleteSuppressedDestinationResponse {
   }
-  export type DeliverabilityDashboardAccountStatus = "ACTIVE"|"PENDING_EXPIRATION"|"DISABLED"|string;
+  export type DeliverabilityDashboardAccountStatus = "ACTIVE"|"PENDING_EXPIRATION"|"DISABLED"|string&{};
   export interface DeliverabilityTestReport {
     /**
      * A unique string that identifies the predictive inbox placement test.
@@ -1374,7 +1374,7 @@ declare namespace SESV2 {
     DeliverabilityTestStatus?: DeliverabilityTestStatus;
   }
   export type DeliverabilityTestReports = DeliverabilityTestReport[];
-  export type DeliverabilityTestStatus = "IN_PROGRESS"|"COMPLETED"|string;
+  export type DeliverabilityTestStatus = "IN_PROGRESS"|"COMPLETED"|string&{};
   export type DeliverabilityTestSubject = string;
   export interface DeliveryOptions {
     /**
@@ -1402,7 +1402,7 @@ declare namespace SESV2 {
     BccAddresses?: EmailAddressList;
   }
   export type DimensionName = string;
-  export type DimensionValueSource = "MESSAGE_TAG"|"EMAIL_HEADER"|"LINK_TAG"|string;
+  export type DimensionValueSource = "MESSAGE_TAG"|"EMAIL_HEADER"|"LINK_TAG"|string&{};
   export type Dimensions = {[key: string]: MetricDimensionValue};
   export type DisplayName = string;
   export interface DkimAttributes {
@@ -1449,9 +1449,9 @@ declare namespace SESV2 {
      */
     NextSigningKeyLength?: DkimSigningKeyLength;
   }
-  export type DkimSigningAttributesOrigin = "AWS_SES"|"EXTERNAL"|string;
-  export type DkimSigningKeyLength = "RSA_1024_BIT"|"RSA_2048_BIT"|string;
-  export type DkimStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
+  export type DkimSigningAttributesOrigin = "AWS_SES"|"EXTERNAL"|string&{};
+  export type DkimSigningKeyLength = "RSA_1024_BIT"|"RSA_2048_BIT"|string&{};
+  export type DkimStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string&{};
   export type DnsToken = string;
   export type DnsTokenList = DnsToken[];
   export type Domain = string;
@@ -1661,7 +1661,7 @@ declare namespace SESV2 {
   }
   export type EventDestinationName = string;
   export type EventDestinations = EventDestination[];
-  export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|"DELIVERY_DELAY"|"SUBSCRIPTION"|string;
+  export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|"DELIVERY_DELAY"|"SUBSCRIPTION"|string&{};
   export type EventTypes = EventType[];
   export type FailedRecordsCount = number;
   export type FailedRecordsS3Url = string;
@@ -1676,7 +1676,7 @@ declare namespace SESV2 {
     ErrorMessage?: ErrorMessage;
   }
   export type FailureRedirectionURL = string;
-  export type FeatureStatus = "ENABLED"|"DISABLED"|string;
+  export type FeatureStatus = "ENABLED"|"DISABLED"|string&{};
   export type FeedbackId = string;
   export type GeneralEnforcementStatus = string;
   export interface GetAccountRequest {
@@ -2183,7 +2183,7 @@ declare namespace SESV2 {
     VerificationStatus?: VerificationStatus;
   }
   export type IdentityInfoList = IdentityInfo[];
-  export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string;
+  export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string&{};
   export type ImageUrl = string;
   export interface ImportDataSource {
     /**
@@ -2205,7 +2205,7 @@ declare namespace SESV2 {
      */
     ContactListDestination?: ContactListDestination;
   }
-  export type ImportDestinationType = "SUPPRESSION_LIST"|"CONTACT_LIST"|string;
+  export type ImportDestinationType = "SUPPRESSION_LIST"|"CONTACT_LIST"|string&{};
   export interface ImportJobSummary {
     JobId?: JobId;
     ImportDestination?: ImportDestination;
@@ -2250,7 +2250,7 @@ declare namespace SESV2 {
   }
   export type IspPlacements = IspPlacement[];
   export type JobId = string;
-  export type JobStatus = "CREATED"|"PROCESSING"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "CREATED"|"PROCESSING"|"COMPLETED"|"FAILED"|string&{};
   export interface KinesisFirehoseDestination {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
@@ -2511,7 +2511,7 @@ declare namespace SESV2 {
   export type ListOfDedicatedIpPools = PoolName[];
   export type ListRecommendationFilterValue = string;
   export type ListRecommendationsFilter = {[key: string]: ListRecommendationFilterValue};
-  export type ListRecommendationsFilterKey = "TYPE"|"IMPACT"|"STATUS"|"RESOURCE_ARN"|string;
+  export type ListRecommendationsFilterKey = "TYPE"|"IMPACT"|"STATUS"|"RESOURCE_ARN"|string&{};
   export interface ListRecommendationsRequest {
     /**
      * Filters applied when retrieving recommendations. Can eiter be an individual filter, or combinations of STATUS and IMPACT or STATUS and TYPE 
@@ -2595,8 +2595,8 @@ declare namespace SESV2 {
     BehaviorOnMxFailure: BehaviorOnMxFailure;
   }
   export type MailFromDomainName = string;
-  export type MailFromDomainStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|string;
-  export type MailType = "MARKETING"|"TRANSACTIONAL"|string;
+  export type MailFromDomainStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|string&{};
+  export type MailType = "MARKETING"|"TRANSACTIONAL"|string&{};
   export type Max24HourSend = number;
   export type MaxItems = number;
   export type MaxSendRate = number;
@@ -2625,7 +2625,7 @@ declare namespace SESV2 {
   export type MessageTagList = MessageTag[];
   export type MessageTagName = string;
   export type MessageTagValue = string;
-  export type Metric = "SEND"|"COMPLAINT"|"PERMANENT_BOUNCE"|"TRANSIENT_BOUNCE"|"OPEN"|"CLICK"|"DELIVERY"|"DELIVERY_OPEN"|"DELIVERY_CLICK"|"DELIVERY_COMPLAINT"|string;
+  export type Metric = "SEND"|"COMPLAINT"|"PERMANENT_BOUNCE"|"TRANSIENT_BOUNCE"|"OPEN"|"CLICK"|"DELIVERY"|"DELIVERY_OPEN"|"DELIVERY_CLICK"|"DELIVERY_COMPLAINT"|string&{};
   export interface MetricDataError {
     /**
      * The query identifier.
@@ -2656,9 +2656,9 @@ declare namespace SESV2 {
     Values?: MetricValueList;
   }
   export type MetricDataResultList = MetricDataResult[];
-  export type MetricDimensionName = "EMAIL_IDENTITY"|"CONFIGURATION_SET"|"ISP"|string;
+  export type MetricDimensionName = "EMAIL_IDENTITY"|"CONFIGURATION_SET"|"ISP"|string&{};
   export type MetricDimensionValue = string;
-  export type MetricNamespace = "VDM"|string;
+  export type MetricNamespace = "VDM"|string&{};
   export type MetricValueList = Counter[];
   export type NextToken = string;
   export type OutboundMessageId = string;
@@ -2984,7 +2984,7 @@ declare namespace SESV2 {
   }
   export interface PutSuppressedDestinationResponse {
   }
-  export type QueryErrorCode = "INTERNAL_FAILURE"|"ACCESS_DENIED"|string;
+  export type QueryErrorCode = "INTERNAL_FAILURE"|"ACCESS_DENIED"|string&{};
   export type QueryErrorMessage = string;
   export type QueryIdentifier = string;
   export interface RawMessage {
@@ -3026,9 +3026,9 @@ declare namespace SESV2 {
     Impact?: RecommendationImpact;
   }
   export type RecommendationDescription = string;
-  export type RecommendationImpact = "LOW"|"HIGH"|string;
-  export type RecommendationStatus = "OPEN"|"FIXED"|string;
-  export type RecommendationType = "DKIM"|"DMARC"|"SPF"|"BIMI"|string;
+  export type RecommendationImpact = "LOW"|"HIGH"|string&{};
+  export type RecommendationStatus = "OPEN"|"FIXED"|string&{};
+  export type RecommendationType = "DKIM"|"DMARC"|"SPF"|"BIMI"|string&{};
   export type RecommendationsList = Recommendation[];
   export type RenderedEmailTemplate = string;
   export interface ReplacementEmailContent {
@@ -3065,9 +3065,9 @@ declare namespace SESV2 {
      */
     CaseId?: CaseId;
   }
-  export type ReviewStatus = "PENDING"|"FAILED"|"GRANTED"|"DENIED"|string;
+  export type ReviewStatus = "PENDING"|"FAILED"|"GRANTED"|"DENIED"|string&{};
   export type S3Url = string;
-  export type ScalingMode = "STANDARD"|"MANAGED"|string;
+  export type ScalingMode = "STANDARD"|"MANAGED"|string&{};
   export type Selector = string;
   export interface SendBulkEmailRequest {
     /**
@@ -3210,7 +3210,7 @@ declare namespace SESV2 {
     TopicArn: AmazonResourceName;
   }
   export type Subject = string;
-  export type SubscriptionStatus = "OPT_IN"|"OPT_OUT"|string;
+  export type SubscriptionStatus = "OPT_IN"|"OPT_OUT"|string&{};
   export type SuccessRedirectionURL = string;
   export interface SuppressedDestination {
     /**
@@ -3267,8 +3267,8 @@ declare namespace SESV2 {
      */
     SuppressionListImportAction: SuppressionListImportAction;
   }
-  export type SuppressionListImportAction = "DELETE"|"PUT"|string;
-  export type SuppressionListReason = "BOUNCE"|"COMPLAINT"|string;
+  export type SuppressionListImportAction = "DELETE"|"PUT"|string&{};
+  export type SuppressionListReason = "BOUNCE"|"COMPLAINT"|string&{};
   export type SuppressionListReasons = SuppressionListReason[];
   export interface SuppressionOptions {
     /**
@@ -3335,7 +3335,7 @@ declare namespace SESV2 {
   }
   export type Timestamp = Date;
   export type TimestampList = Timestamp[];
-  export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string;
+  export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string&{};
   export interface Topic {
     /**
      * The name of the topic.
@@ -3534,7 +3534,7 @@ declare namespace SESV2 {
      */
     GuardianOptions?: GuardianOptions;
   }
-  export type VerificationStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
+  export type VerificationStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string&{};
   export type Volume = number;
   export interface VolumeStatistics {
     /**
@@ -3554,7 +3554,7 @@ declare namespace SESV2 {
      */
     ProjectedSpam?: Volume;
   }
-  export type WarmupStatus = "IN_PROGRESS"|"DONE"|string;
+  export type WarmupStatus = "IN_PROGRESS"|"DONE"|string&{};
   export type WebsiteURL = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

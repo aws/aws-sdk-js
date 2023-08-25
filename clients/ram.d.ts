@@ -1086,11 +1086,11 @@ declare namespace RAM {
   }
   export type MaxResults = number;
   export type PermissionArnList = String[];
-  export type PermissionFeatureSet = "CREATED_FROM_POLICY"|"PROMOTING_TO_STANDARD"|"STANDARD"|string;
+  export type PermissionFeatureSet = "CREATED_FROM_POLICY"|"PROMOTING_TO_STANDARD"|"STANDARD"|string&{};
   export type PermissionName = string;
-  export type PermissionStatus = "ATTACHABLE"|"UNATTACHABLE"|"DELETING"|"DELETED"|string;
-  export type PermissionType = "CUSTOMER_MANAGED"|"AWS_MANAGED"|string;
-  export type PermissionTypeFilter = "ALL"|"AWS_MANAGED"|"CUSTOMER_MANAGED"|string;
+  export type PermissionStatus = "ATTACHABLE"|"UNATTACHABLE"|"DELETING"|"DELETED"|string&{};
+  export type PermissionType = "CUSTOMER_MANAGED"|"AWS_MANAGED"|string&{};
+  export type PermissionTypeFilter = "ALL"|"AWS_MANAGED"|"CUSTOMER_MANAGED"|string&{};
   export type Policy = string;
   export type PolicyList = Policy[];
   export interface Principal {
@@ -1238,7 +1238,7 @@ declare namespace RAM {
   }
   export type ReplacePermissionAssociationsWorkIdList = String[];
   export type ReplacePermissionAssociationsWorkList = ReplacePermissionAssociationsWork[];
-  export type ReplacePermissionAssociationsWorkStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type ReplacePermissionAssociationsWorkStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string&{};
   export interface Resource {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -1279,9 +1279,9 @@ declare namespace RAM {
   }
   export type ResourceArnList = String[];
   export type ResourceList = Resource[];
-  export type ResourceOwner = "SELF"|"OTHER-ACCOUNTS"|string;
-  export type ResourceRegionScope = "REGIONAL"|"GLOBAL"|string;
-  export type ResourceRegionScopeFilter = "ALL"|"REGIONAL"|"GLOBAL"|string;
+  export type ResourceOwner = "SELF"|"OTHER-ACCOUNTS"|string&{};
+  export type ResourceRegionScope = "REGIONAL"|"GLOBAL"|string&{};
+  export type ResourceRegionScopeFilter = "ALL"|"REGIONAL"|"GLOBAL"|string&{};
   export interface ResourceShare {
     /**
      * The Amazon Resource Name (ARN) of the resource share
@@ -1364,9 +1364,9 @@ declare namespace RAM {
     external?: Boolean;
   }
   export type ResourceShareAssociationList = ResourceShareAssociation[];
-  export type ResourceShareAssociationStatus = "ASSOCIATING"|"ASSOCIATED"|"FAILED"|"DISASSOCIATING"|"DISASSOCIATED"|string;
-  export type ResourceShareAssociationType = "PRINCIPAL"|"RESOURCE"|string;
-  export type ResourceShareFeatureSet = "CREATED_FROM_POLICY"|"PROMOTING_TO_STANDARD"|"STANDARD"|string;
+  export type ResourceShareAssociationStatus = "ASSOCIATING"|"ASSOCIATED"|"FAILED"|"DISASSOCIATING"|"DISASSOCIATED"|string&{};
+  export type ResourceShareAssociationType = "PRINCIPAL"|"RESOURCE"|string&{};
+  export type ResourceShareFeatureSet = "CREATED_FROM_POLICY"|"PROMOTING_TO_STANDARD"|"STANDARD"|string&{};
   export interface ResourceShareInvitation {
     /**
      * The Amazon Resource Name (ARN) of the invitation.
@@ -1407,7 +1407,7 @@ declare namespace RAM {
   }
   export type ResourceShareInvitationArnList = String[];
   export type ResourceShareInvitationList = ResourceShareInvitation[];
-  export type ResourceShareInvitationStatus = "PENDING"|"ACCEPTED"|"REJECTED"|"EXPIRED"|string;
+  export type ResourceShareInvitationStatus = "PENDING"|"ACCEPTED"|"REJECTED"|"EXPIRED"|string&{};
   export type ResourceShareList = ResourceShare[];
   export interface ResourceSharePermissionDetail {
     /**
@@ -1514,8 +1514,8 @@ declare namespace RAM {
      */
     tags?: TagList;
   }
-  export type ResourceShareStatus = "PENDING"|"ACTIVE"|"FAILED"|"DELETING"|"DELETED"|string;
-  export type ResourceStatus = "AVAILABLE"|"ZONAL_RESOURCE_INACCESSIBLE"|"LIMIT_EXCEEDED"|"UNAVAILABLE"|"PENDING"|string;
+  export type ResourceShareStatus = "PENDING"|"ACTIVE"|"FAILED"|"DELETING"|"DELETED"|string&{};
+  export type ResourceStatus = "AVAILABLE"|"ZONAL_RESOURCE_INACCESSIBLE"|"LIMIT_EXCEEDED"|"UNAVAILABLE"|"PENDING"|string&{};
   export interface ServiceNameAndResourceType {
     /**
      * The type of the resource. This takes the form of: service-code:resource-code, and is case-insensitive. For example, an Amazon EC2 Subnet would be represented by the string ec2:subnet.

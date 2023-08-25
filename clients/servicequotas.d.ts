@@ -193,7 +193,7 @@ declare namespace ServiceQuotas {
   }
   export interface DisassociateServiceQuotaTemplateResponse {
   }
-  export type ErrorCode = "DEPENDENCY_ACCESS_DENIED_ERROR"|"DEPENDENCY_THROTTLING_ERROR"|"DEPENDENCY_SERVICE_ERROR"|"SERVICE_QUOTA_NOT_AVAILABLE_ERROR"|string;
+  export type ErrorCode = "DEPENDENCY_ACCESS_DENIED_ERROR"|"DEPENDENCY_THROTTLING_ERROR"|"DEPENDENCY_SERVICE_ERROR"|"SERVICE_QUOTA_NOT_AVAILABLE_ERROR"|string&{};
   export type ErrorMessage = string;
   export interface ErrorReason {
     /**
@@ -472,7 +472,7 @@ declare namespace ServiceQuotas {
   }
   export type NextToken = string;
   export type OutputTags = Tag[];
-  export type PeriodUnit = "MICROSECOND"|"MILLISECOND"|"SECOND"|"MINUTE"|"HOUR"|"DAY"|"WEEK"|string;
+  export type PeriodUnit = "MICROSECOND"|"MILLISECOND"|"SECOND"|"MINUTE"|"HOUR"|"DAY"|"WEEK"|string&{};
   export type PeriodValue = number;
   export interface PutServiceQuotaIncreaseRequestIntoTemplateRequest {
     /**
@@ -537,7 +537,7 @@ declare namespace ServiceQuotas {
      */
     RequestedQuota?: RequestedServiceQuotaChange;
   }
-  export type RequestStatus = "PENDING"|"CASE_OPENED"|"APPROVED"|"DENIED"|"CASE_CLOSED"|string;
+  export type RequestStatus = "PENDING"|"CASE_OPENED"|"APPROVED"|"DENIED"|"CASE_CLOSED"|string&{};
   export interface RequestedServiceQuotaChange {
     /**
      * The unique identifier.
@@ -697,7 +697,7 @@ declare namespace ServiceQuotas {
   }
   export type ServiceQuotaIncreaseRequestInTemplateList = ServiceQuotaIncreaseRequestInTemplate[];
   export type ServiceQuotaListDefinition = ServiceQuota[];
-  export type ServiceQuotaTemplateAssociationStatus = "ASSOCIATED"|"DISASSOCIATED"|string;
+  export type ServiceQuotaTemplateAssociationStatus = "ASSOCIATED"|"DISASSOCIATED"|string&{};
   export type Statistic = string;
   export interface Tag {
     /**

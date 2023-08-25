@@ -878,7 +878,7 @@ declare namespace ConfigService {
      */
     AwsRegion?: AwsRegion;
   }
-  export type AggregateConformancePackComplianceSummaryGroupKey = "ACCOUNT_ID"|"AWS_REGION"|string;
+  export type AggregateConformancePackComplianceSummaryGroupKey = "ACCOUNT_ID"|"AWS_REGION"|string&{};
   export type AggregateConformancePackComplianceSummaryList = AggregateConformancePackComplianceSummary[];
   export interface AggregateEvaluationResult {
     /**
@@ -964,9 +964,9 @@ declare namespace ConfigService {
     LastErrorMessage?: String;
   }
   export type AggregatedSourceStatusList = AggregatedSourceStatus[];
-  export type AggregatedSourceStatusType = "FAILED"|"SUCCEEDED"|"OUTDATED"|string;
+  export type AggregatedSourceStatusType = "FAILED"|"SUCCEEDED"|"OUTDATED"|string&{};
   export type AggregatedSourceStatusTypeList = AggregatedSourceStatusType[];
-  export type AggregatedSourceType = "ACCOUNT"|"ORGANIZATION"|string;
+  export type AggregatedSourceType = "ACCOUNT"|"ORGANIZATION"|string&{};
   export interface AggregationAuthorization {
     /**
      * The Amazon Resource Name (ARN) of the aggregation object.
@@ -1092,7 +1092,7 @@ declare namespace ConfigService {
   }
   export type Boolean = boolean;
   export type ChannelName = string;
-  export type ChronologicalOrder = "Reverse"|"Forward"|string;
+  export type ChronologicalOrder = "Reverse"|"Forward"|string&{};
   export type ClientToken = string;
   export interface Compliance {
     /**
@@ -1167,7 +1167,7 @@ declare namespace ConfigService {
      */
     ComplianceSummary?: ComplianceSummary;
   }
-  export type ComplianceType = "COMPLIANT"|"NON_COMPLIANT"|"NOT_APPLICABLE"|"INSUFFICIENT_DATA"|string;
+  export type ComplianceType = "COMPLIANT"|"NON_COMPLIANT"|"NOT_APPLICABLE"|"INSUFFICIENT_DATA"|string&{};
   export type ComplianceTypes = ComplianceType[];
   export interface ConfigExportDeliveryInfo {
     /**
@@ -1269,7 +1269,7 @@ declare namespace ConfigService {
      */
     AwsRegion?: AwsRegion;
   }
-  export type ConfigRuleComplianceSummaryGroupKey = "ACCOUNT_ID"|"AWS_REGION"|string;
+  export type ConfigRuleComplianceSummaryGroupKey = "ACCOUNT_ID"|"AWS_REGION"|string&{};
   export interface ConfigRuleEvaluationStatus {
     /**
      * The name of the Config rule.
@@ -1335,7 +1335,7 @@ declare namespace ConfigService {
   export type ConfigRuleEvaluationStatusList = ConfigRuleEvaluationStatus[];
   export type ConfigRuleName = string;
   export type ConfigRuleNames = ConfigRuleName[];
-  export type ConfigRuleState = "ACTIVE"|"DELETING"|"DELETING_RESULTS"|"EVALUATING"|string;
+  export type ConfigRuleState = "ACTIVE"|"DELETING"|"DELETING_RESULTS"|"EVALUATING"|string&{};
   export type ConfigRules = ConfigRule[];
   export interface ConfigSnapshotDeliveryProperties {
     /**
@@ -1473,7 +1473,7 @@ declare namespace ConfigService {
   export type ConfigurationItemCaptureTime = Date;
   export type ConfigurationItemList = ConfigurationItem[];
   export type ConfigurationItemMD5Hash = string;
-  export type ConfigurationItemStatus = "OK"|"ResourceDiscovered"|"ResourceNotRecorded"|"ResourceDeleted"|"ResourceDeletedNotRecorded"|string;
+  export type ConfigurationItemStatus = "OK"|"ResourceDiscovered"|"ResourceNotRecorded"|"ResourceDeleted"|"ResourceDeletedNotRecorded"|string&{};
   export interface ConfigurationRecorder {
     /**
      * The name of the configuration recorder. Config automatically assigns the name of "default" when creating the configuration recorder. You cannot change the name of the configuration recorder after it has been created. To change the configuration recorder name, you must delete it and create a new configuration recorder with a new name. 
@@ -1570,7 +1570,7 @@ declare namespace ConfigService {
     ConformancePackComplianceStatus: ConformancePackComplianceType;
   }
   export type ConformancePackComplianceSummaryList = ConformancePackComplianceSummary[];
-  export type ConformancePackComplianceType = "COMPLIANT"|"NON_COMPLIANT"|"INSUFFICIENT_DATA"|string;
+  export type ConformancePackComplianceType = "COMPLIANT"|"NON_COMPLIANT"|"INSUFFICIENT_DATA"|string&{};
   export type ConformancePackConfigRuleNames = StringWithCharLimit64[];
   export interface ConformancePackDetail {
     /**
@@ -1680,7 +1680,7 @@ declare namespace ConfigService {
   }
   export type ConformancePackRuleComplianceList = ConformancePackRuleCompliance[];
   export type ConformancePackRuleEvaluationResultsList = ConformancePackEvaluationResult[];
-  export type ConformancePackState = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|string;
+  export type ConformancePackState = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"CREATE_FAILED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|string&{};
   export interface ConformancePackStatusDetail {
     /**
      * Name of the conformance pack.
@@ -1918,7 +1918,7 @@ declare namespace ConfigService {
   export type DeliveryChannelStatusList = DeliveryChannelStatus[];
   export type DeliveryS3Bucket = string;
   export type DeliveryS3KeyPrefix = string;
-  export type DeliveryStatus = "Success"|"Failure"|"Not_Applicable"|string;
+  export type DeliveryStatus = "Success"|"Failure"|"Not_Applicable"|string&{};
   export interface DescribeAggregateComplianceByConfigRulesRequest {
     /**
      * The name of the configuration aggregator.
@@ -2523,7 +2523,7 @@ declare namespace ConfigService {
     EvaluationContextIdentifier?: EvaluationContextIdentifier;
   }
   export type EvaluationContextIdentifier = string;
-  export type EvaluationMode = "DETECTIVE"|"PROACTIVE"|string;
+  export type EvaluationMode = "DETECTIVE"|"PROACTIVE"|string&{};
   export interface EvaluationModeConfiguration {
     /**
      * The mode of an evaluation. The valid values are Detective or Proactive.
@@ -2602,7 +2602,7 @@ declare namespace ConfigService {
   }
   export type EvaluationTimeout = number;
   export type Evaluations = Evaluation[];
-  export type EventSource = "aws.config"|string;
+  export type EventSource = "aws.config"|string&{};
   export type ExcludedAccounts = AccountId[];
   export interface ExclusionByResourceTypes {
     /**
@@ -3366,8 +3366,8 @@ declare namespace ConfigService {
     NextToken?: NextToken;
   }
   export type Long = number;
-  export type MaximumExecutionFrequency = "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"|string;
-  export type MemberAccountRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
+  export type MaximumExecutionFrequency = "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"|string&{};
+  export type MemberAccountRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string&{};
   export interface MemberAccountStatus {
     /**
      * The 12-digit account ID of a member account.
@@ -3394,7 +3394,7 @@ declare namespace ConfigService {
      */
     LastUpdateTime?: _Date;
   }
-  export type MessageType = "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"|"ScheduledNotification"|"OversizedConfigurationItemChangeNotification"|string;
+  export type MessageType = "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"|"ScheduledNotification"|"OversizedConfigurationItemChangeNotification"|string&{};
   export type Name = string;
   export type NextToken = string;
   export type OrderingTimestamp = Date;
@@ -3468,8 +3468,8 @@ declare namespace ConfigService {
     LastUpdateTime?: _Date;
   }
   export type OrganizationConfigRuleStatuses = OrganizationConfigRuleStatus[];
-  export type OrganizationConfigRuleTriggerType = "ConfigurationItemChangeNotification"|"OversizedConfigurationItemChangeNotification"|"ScheduledNotification"|string;
-  export type OrganizationConfigRuleTriggerTypeNoSN = "ConfigurationItemChangeNotification"|"OversizedConfigurationItemChangeNotification"|string;
+  export type OrganizationConfigRuleTriggerType = "ConfigurationItemChangeNotification"|"OversizedConfigurationItemChangeNotification"|"ScheduledNotification"|string&{};
+  export type OrganizationConfigRuleTriggerTypeNoSN = "ConfigurationItemChangeNotification"|"OversizedConfigurationItemChangeNotification"|string&{};
   export type OrganizationConfigRuleTriggerTypeNoSNs = OrganizationConfigRuleTriggerTypeNoSN[];
   export type OrganizationConfigRuleTriggerTypes = OrganizationConfigRuleTriggerType[];
   export type OrganizationConfigRules = OrganizationConfigRule[];
@@ -3716,7 +3716,7 @@ declare namespace ConfigService {
      */
     TagValueScope?: StringWithCharLimit256;
   }
-  export type OrganizationResourceDetailedStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
+  export type OrganizationResourceDetailedStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string&{};
   export interface OrganizationResourceDetailedStatusFilters {
     /**
      * The 12-digit account ID of the member account within an organization.
@@ -3727,9 +3727,9 @@ declare namespace ConfigService {
      */
     Status?: OrganizationResourceDetailedStatus;
   }
-  export type OrganizationResourceStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
-  export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
-  export type Owner = "CUSTOM_LAMBDA"|"AWS"|"CUSTOM_POLICY"|string;
+  export type OrganizationResourceStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string&{};
+  export type OrganizationRuleStatus = "CREATE_SUCCESSFUL"|"CREATE_IN_PROGRESS"|"CREATE_FAILED"|"DELETE_SUCCESSFUL"|"DELETE_FAILED"|"DELETE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string&{};
+  export type Owner = "CUSTOM_LAMBDA"|"AWS"|"CUSTOM_POLICY"|string&{};
   export type PageSizeLimit = number;
   export type ParameterName = string;
   export type ParameterValue = string;
@@ -4047,7 +4047,7 @@ declare namespace ConfigService {
   }
   export type QueryName = string;
   export type RecorderName = string;
-  export type RecorderStatus = "Pending"|"Success"|"Failure"|string;
+  export type RecorderStatus = "Pending"|"Success"|"Failure"|string&{};
   export interface RecordingGroup {
     /**
      * Specifies whether Config records configuration changes for all supported regional resource types. If you set this field to true, when Config adds support for a new type of regional resource, Config starts recording resources of that type automatically. If you set this field to true, you cannot enumerate specific resource types to record in the resourceTypes field of RecordingGroup, or to exclude in the resourceTypes field of ExclusionByResourceTypes.
@@ -4076,7 +4076,7 @@ declare namespace ConfigService {
      */
     useOnly?: RecordingStrategyType;
   }
-  export type RecordingStrategyType = "ALL_SUPPORTED_RESOURCE_TYPES"|"INCLUSION_BY_RESOURCE_TYPES"|"EXCLUSION_BY_RESOURCE_TYPES"|string;
+  export type RecordingStrategyType = "ALL_SUPPORTED_RESOURCE_TYPES"|"INCLUSION_BY_RESOURCE_TYPES"|"EXCLUSION_BY_RESOURCE_TYPES"|string&{};
   export type ReevaluateConfigRuleNames = ConfigRuleName[];
   export type RelatedEvent = string;
   export type RelatedEventList = RelatedEvent[];
@@ -4185,7 +4185,7 @@ declare namespace ConfigService {
   }
   export type RemediationExceptionResourceKeys = RemediationExceptionResourceKey[];
   export type RemediationExceptions = RemediationException[];
-  export type RemediationExecutionState = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type RemediationExecutionState = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string&{};
   export interface RemediationExecutionStatus {
     ResourceKey?: ResourceKey;
     /**
@@ -4228,7 +4228,7 @@ declare namespace ConfigService {
      */
     StopTime?: _Date;
   }
-  export type RemediationExecutionStepState = "SUCCEEDED"|"PENDING"|"FAILED"|string;
+  export type RemediationExecutionStepState = "SUCCEEDED"|"PENDING"|"FAILED"|string&{};
   export type RemediationExecutionSteps = RemediationExecutionStep[];
   export interface RemediationParameterValue {
     /**
@@ -4241,9 +4241,9 @@ declare namespace ConfigService {
     StaticValue?: StaticValue;
   }
   export type RemediationParameters = {[key: string]: RemediationParameterValue};
-  export type RemediationTargetType = "SSM_DOCUMENT"|string;
+  export type RemediationTargetType = "SSM_DOCUMENT"|string&{};
   export type ResourceConfiguration = string;
-  export type ResourceConfigurationSchemaType = "CFN_RESOURCE_SCHEMA"|string;
+  export type ResourceConfigurationSchemaType = "CFN_RESOURCE_SCHEMA"|string&{};
   export interface ResourceCount {
     /**
      * The resource type (for example, "AWS::EC2::Instance").
@@ -4268,7 +4268,7 @@ declare namespace ConfigService {
      */
     Region?: AwsRegion;
   }
-  export type ResourceCountGroupKey = "RESOURCE_TYPE"|"ACCOUNT_ID"|"AWS_REGION"|string;
+  export type ResourceCountGroupKey = "RESOURCE_TYPE"|"ACCOUNT_ID"|"AWS_REGION"|string&{};
   export type ResourceCounts = ResourceCount[];
   export type ResourceCreationTime = Date;
   export type ResourceDeletionTime = Date;
@@ -4319,7 +4319,7 @@ declare namespace ConfigService {
     EvaluationContextIdentifier?: EvaluationContextIdentifier;
   }
   export type ResourceEvaluationId = string;
-  export type ResourceEvaluationStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|string;
+  export type ResourceEvaluationStatus = "IN_PROGRESS"|"FAILED"|"SUCCEEDED"|string&{};
   export type ResourceEvaluations = ResourceEvaluation[];
   export interface ResourceFilters {
     /**
@@ -4373,7 +4373,7 @@ declare namespace ConfigService {
   }
   export type ResourceKeys = ResourceKey[];
   export type ResourceName = string;
-  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::NatGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::FlowLog"|"AWS::EC2::VPCPeeringConnection"|"AWS::Elasticsearch::Domain"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::EventSubscription"|"AWS::S3::Bucket"|"AWS::S3::AccountPublicAccessBlock"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::SSM::ManagedInstanceInventory"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::DynamoDB::Table"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::Lambda::Function"|"AWS::NetworkFirewall::Firewall"|"AWS::NetworkFirewall::FirewallPolicy"|"AWS::NetworkFirewall::RuleGroup"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::WAFv2::WebACL"|"AWS::WAFv2::RuleGroup"|"AWS::WAFv2::IPSet"|"AWS::WAFv2::RegexPatternSet"|"AWS::WAFv2::ManagedRuleSet"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ConformancePackCompliance"|"AWS::Config::ResourceCompliance"|"AWS::ApiGateway::Stage"|"AWS::ApiGateway::RestApi"|"AWS::ApiGatewayV2::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::CodePipeline::Pipeline"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::Portfolio"|"AWS::SQS::Queue"|"AWS::KMS::Key"|"AWS::QLDB::Ledger"|"AWS::SecretsManager::Secret"|"AWS::SNS::Topic"|"AWS::SSM::FileData"|"AWS::Backup::BackupPlan"|"AWS::Backup::BackupSelection"|"AWS::Backup::BackupVault"|"AWS::Backup::RecoveryPoint"|"AWS::ECR::Repository"|"AWS::ECS::Cluster"|"AWS::ECS::Service"|"AWS::ECS::TaskDefinition"|"AWS::EFS::AccessPoint"|"AWS::EFS::FileSystem"|"AWS::EKS::Cluster"|"AWS::OpenSearch::Domain"|"AWS::EC2::TransitGateway"|"AWS::Kinesis::Stream"|"AWS::Kinesis::StreamConsumer"|"AWS::CodeDeploy::Application"|"AWS::CodeDeploy::DeploymentConfig"|"AWS::CodeDeploy::DeploymentGroup"|"AWS::EC2::LaunchTemplate"|"AWS::ECR::PublicRepository"|"AWS::GuardDuty::Detector"|"AWS::EMR::SecurityConfiguration"|"AWS::SageMaker::CodeRepository"|"AWS::Route53Resolver::ResolverEndpoint"|"AWS::Route53Resolver::ResolverRule"|"AWS::Route53Resolver::ResolverRuleAssociation"|"AWS::DMS::ReplicationSubnetGroup"|"AWS::DMS::EventSubscription"|"AWS::MSK::Cluster"|"AWS::StepFunctions::Activity"|"AWS::WorkSpaces::Workspace"|"AWS::WorkSpaces::ConnectionAlias"|"AWS::SageMaker::Model"|"AWS::ElasticLoadBalancingV2::Listener"|"AWS::StepFunctions::StateMachine"|"AWS::Batch::JobQueue"|"AWS::Batch::ComputeEnvironment"|"AWS::AccessAnalyzer::Analyzer"|"AWS::Athena::WorkGroup"|"AWS::Athena::DataCatalog"|"AWS::Detective::Graph"|"AWS::GlobalAccelerator::Accelerator"|"AWS::GlobalAccelerator::EndpointGroup"|"AWS::GlobalAccelerator::Listener"|"AWS::EC2::TransitGatewayAttachment"|"AWS::EC2::TransitGatewayRouteTable"|"AWS::DMS::Certificate"|"AWS::AppConfig::Application"|"AWS::AppSync::GraphQLApi"|"AWS::DataSync::LocationSMB"|"AWS::DataSync::LocationFSxLustre"|"AWS::DataSync::LocationS3"|"AWS::DataSync::LocationEFS"|"AWS::DataSync::Task"|"AWS::DataSync::LocationNFS"|"AWS::EC2::NetworkInsightsAccessScopeAnalysis"|"AWS::EKS::FargateProfile"|"AWS::Glue::Job"|"AWS::GuardDuty::ThreatIntelSet"|"AWS::GuardDuty::IPSet"|"AWS::SageMaker::Workteam"|"AWS::SageMaker::NotebookInstanceLifecycleConfig"|"AWS::ServiceDiscovery::Service"|"AWS::ServiceDiscovery::PublicDnsNamespace"|"AWS::SES::ContactList"|"AWS::SES::ConfigurationSet"|"AWS::Route53::HostedZone"|"AWS::IoTEvents::Input"|"AWS::IoTEvents::DetectorModel"|"AWS::IoTEvents::AlarmModel"|"AWS::ServiceDiscovery::HttpNamespace"|"AWS::Events::EventBus"|"AWS::ImageBuilder::ContainerRecipe"|"AWS::ImageBuilder::DistributionConfiguration"|"AWS::ImageBuilder::InfrastructureConfiguration"|"AWS::DataSync::LocationObjectStorage"|"AWS::DataSync::LocationHDFS"|"AWS::Glue::Classifier"|"AWS::Route53RecoveryReadiness::Cell"|"AWS::Route53RecoveryReadiness::ReadinessCheck"|"AWS::ECR::RegistryPolicy"|"AWS::Backup::ReportPlan"|"AWS::Lightsail::Certificate"|"AWS::RUM::AppMonitor"|"AWS::Events::Endpoint"|"AWS::SES::ReceiptRuleSet"|"AWS::Events::Archive"|"AWS::Events::ApiDestination"|"AWS::Lightsail::Disk"|"AWS::FIS::ExperimentTemplate"|"AWS::DataSync::LocationFSxWindows"|"AWS::SES::ReceiptFilter"|"AWS::GuardDuty::Filter"|"AWS::SES::Template"|"AWS::AmazonMQ::Broker"|"AWS::AppConfig::Environment"|"AWS::AppConfig::ConfigurationProfile"|"AWS::Cloud9::EnvironmentEC2"|"AWS::EventSchemas::Registry"|"AWS::EventSchemas::RegistryPolicy"|"AWS::EventSchemas::Discoverer"|"AWS::FraudDetector::Label"|"AWS::FraudDetector::EntityType"|"AWS::FraudDetector::Variable"|"AWS::FraudDetector::Outcome"|"AWS::IoT::Authorizer"|"AWS::IoT::SecurityProfile"|"AWS::IoT::RoleAlias"|"AWS::IoT::Dimension"|"AWS::IoTAnalytics::Datastore"|"AWS::Lightsail::Bucket"|"AWS::Lightsail::StaticIp"|"AWS::MediaPackage::PackagingGroup"|"AWS::Route53RecoveryReadiness::RecoveryGroup"|"AWS::ResilienceHub::ResiliencyPolicy"|"AWS::Transfer::Workflow"|"AWS::EKS::IdentityProviderConfig"|"AWS::EKS::Addon"|"AWS::Glue::MLTransform"|"AWS::IoT::Policy"|"AWS::IoT::MitigationAction"|"AWS::IoTTwinMaker::Workspace"|"AWS::IoTTwinMaker::Entity"|"AWS::IoTAnalytics::Dataset"|"AWS::IoTAnalytics::Pipeline"|"AWS::IoTAnalytics::Channel"|"AWS::IoTSiteWise::Dashboard"|"AWS::IoTSiteWise::Project"|"AWS::IoTSiteWise::Portal"|"AWS::IoTSiteWise::AssetModel"|"AWS::IVS::Channel"|"AWS::IVS::RecordingConfiguration"|"AWS::IVS::PlaybackKeyPair"|"AWS::KinesisAnalyticsV2::Application"|"AWS::RDS::GlobalCluster"|"AWS::S3::MultiRegionAccessPoint"|"AWS::DeviceFarm::TestGridProject"|"AWS::Budgets::BudgetsAction"|"AWS::Lex::Bot"|"AWS::CodeGuruReviewer::RepositoryAssociation"|"AWS::IoT::CustomMetric"|"AWS::Route53Resolver::FirewallDomainList"|"AWS::RoboMaker::RobotApplicationVersion"|"AWS::EC2::TrafficMirrorSession"|"AWS::IoTSiteWise::Gateway"|"AWS::Lex::BotAlias"|"AWS::LookoutMetrics::Alert"|"AWS::IoT::AccountAuditConfiguration"|"AWS::EC2::TrafficMirrorTarget"|"AWS::S3::StorageLens"|"AWS::IoT::ScheduledAudit"|"AWS::Events::Connection"|"AWS::EventSchemas::Schema"|"AWS::MediaPackage::PackagingConfiguration"|"AWS::KinesisVideo::SignalingChannel"|"AWS::AppStream::DirectoryConfig"|"AWS::LookoutVision::Project"|"AWS::Route53RecoveryControl::Cluster"|"AWS::Route53RecoveryControl::SafetyRule"|"AWS::Route53RecoveryControl::ControlPanel"|"AWS::Route53RecoveryControl::RoutingControl"|"AWS::Route53RecoveryReadiness::ResourceSet"|"AWS::RoboMaker::SimulationApplication"|"AWS::RoboMaker::RobotApplication"|"AWS::HealthLake::FHIRDatastore"|"AWS::Pinpoint::Segment"|"AWS::Pinpoint::ApplicationSettings"|"AWS::Events::Rule"|"AWS::EC2::DHCPOptions"|"AWS::EC2::NetworkInsightsPath"|"AWS::EC2::TrafficMirrorFilter"|"AWS::EC2::IPAM"|"AWS::IoTTwinMaker::Scene"|"AWS::NetworkManager::TransitGatewayRegistration"|"AWS::CustomerProfiles::Domain"|"AWS::AutoScaling::WarmPool"|"AWS::Connect::PhoneNumber"|"AWS::AppConfig::DeploymentStrategy"|"AWS::AppFlow::Flow"|"AWS::AuditManager::Assessment"|"AWS::CloudWatch::MetricStream"|"AWS::DeviceFarm::InstanceProfile"|"AWS::DeviceFarm::Project"|"AWS::EC2::EC2Fleet"|"AWS::EC2::SubnetRouteTableAssociation"|"AWS::ECR::PullThroughCacheRule"|"AWS::GroundStation::Config"|"AWS::ImageBuilder::ImagePipeline"|"AWS::IoT::FleetMetric"|"AWS::IoTWireless::ServiceProfile"|"AWS::NetworkManager::Device"|"AWS::NetworkManager::GlobalNetwork"|"AWS::NetworkManager::Link"|"AWS::NetworkManager::Site"|"AWS::Panorama::Package"|"AWS::Pinpoint::App"|"AWS::Redshift::ScheduledAction"|"AWS::Route53Resolver::FirewallRuleGroupAssociation"|"AWS::SageMaker::AppImageConfig"|"AWS::SageMaker::Image"|"AWS::ECS::TaskSet"|"AWS::Cassandra::Keyspace"|"AWS::Signer::SigningProfile"|"AWS::Amplify::App"|"AWS::AppMesh::VirtualNode"|"AWS::AppMesh::VirtualService"|"AWS::AppRunner::VpcConnector"|"AWS::AppStream::Application"|"AWS::CodeArtifact::Repository"|"AWS::EC2::PrefixList"|"AWS::EC2::SpotFleet"|"AWS::Evidently::Project"|"AWS::Forecast::Dataset"|"AWS::IAM::SAMLProvider"|"AWS::IAM::ServerCertificate"|"AWS::Pinpoint::Campaign"|"AWS::Pinpoint::InAppTemplate"|"AWS::SageMaker::Domain"|"AWS::Transfer::Agreement"|"AWS::Transfer::Connector"|"AWS::KinesisFirehose::DeliveryStream"|"AWS::Amplify::Branch"|"AWS::AppIntegrations::EventIntegration"|"AWS::AppMesh::Route"|"AWS::Athena::PreparedStatement"|"AWS::EC2::IPAMScope"|"AWS::Evidently::Launch"|"AWS::Forecast::DatasetGroup"|"AWS::GreengrassV2::ComponentVersion"|"AWS::GroundStation::MissionProfile"|"AWS::MediaConnect::FlowEntitlement"|"AWS::MediaConnect::FlowVpcInterface"|"AWS::MediaTailor::PlaybackConfiguration"|"AWS::MSK::Configuration"|"AWS::Personalize::Dataset"|"AWS::Personalize::Schema"|"AWS::Personalize::Solution"|"AWS::Pinpoint::EmailTemplate"|"AWS::Pinpoint::EventStream"|"AWS::ResilienceHub::App"|"AWS::ACMPCA::CertificateAuthority"|"AWS::AppConfig::HostedConfigurationVersion"|"AWS::AppMesh::VirtualGateway"|"AWS::AppMesh::VirtualRouter"|"AWS::AppRunner::Service"|"AWS::CustomerProfiles::ObjectType"|"AWS::DMS::Endpoint"|"AWS::EC2::CapacityReservation"|"AWS::EC2::ClientVpnEndpoint"|"AWS::Kendra::Index"|"AWS::KinesisVideo::Stream"|"AWS::Logs::Destination"|"AWS::Pinpoint::EmailChannel"|"AWS::S3::AccessPoint"|"AWS::NetworkManager::CustomerGatewayAssociation"|"AWS::NetworkManager::LinkAssociation"|string;
+  export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::EC2::RegisteredHAInstance"|"AWS::EC2::NatGateway"|"AWS::EC2::EgressOnlyInternetGateway"|"AWS::EC2::VPCEndpoint"|"AWS::EC2::VPCEndpointService"|"AWS::EC2::FlowLog"|"AWS::EC2::VPCPeeringConnection"|"AWS::Elasticsearch::Domain"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::DBCluster"|"AWS::RDS::DBClusterSnapshot"|"AWS::RDS::EventSubscription"|"AWS::S3::Bucket"|"AWS::S3::AccountPublicAccessBlock"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::SSM::ManagedInstanceInventory"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::DynamoDB::Table"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::RuleGroup"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::RuleGroup"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::Lambda::Function"|"AWS::NetworkFirewall::Firewall"|"AWS::NetworkFirewall::FirewallPolicy"|"AWS::NetworkFirewall::RuleGroup"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::WAFv2::WebACL"|"AWS::WAFv2::RuleGroup"|"AWS::WAFv2::IPSet"|"AWS::WAFv2::RegexPatternSet"|"AWS::WAFv2::ManagedRuleSet"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ConformancePackCompliance"|"AWS::Config::ResourceCompliance"|"AWS::ApiGateway::Stage"|"AWS::ApiGateway::RestApi"|"AWS::ApiGatewayV2::Stage"|"AWS::ApiGatewayV2::Api"|"AWS::CodePipeline::Pipeline"|"AWS::ServiceCatalog::CloudFormationProvisionedProduct"|"AWS::ServiceCatalog::CloudFormationProduct"|"AWS::ServiceCatalog::Portfolio"|"AWS::SQS::Queue"|"AWS::KMS::Key"|"AWS::QLDB::Ledger"|"AWS::SecretsManager::Secret"|"AWS::SNS::Topic"|"AWS::SSM::FileData"|"AWS::Backup::BackupPlan"|"AWS::Backup::BackupSelection"|"AWS::Backup::BackupVault"|"AWS::Backup::RecoveryPoint"|"AWS::ECR::Repository"|"AWS::ECS::Cluster"|"AWS::ECS::Service"|"AWS::ECS::TaskDefinition"|"AWS::EFS::AccessPoint"|"AWS::EFS::FileSystem"|"AWS::EKS::Cluster"|"AWS::OpenSearch::Domain"|"AWS::EC2::TransitGateway"|"AWS::Kinesis::Stream"|"AWS::Kinesis::StreamConsumer"|"AWS::CodeDeploy::Application"|"AWS::CodeDeploy::DeploymentConfig"|"AWS::CodeDeploy::DeploymentGroup"|"AWS::EC2::LaunchTemplate"|"AWS::ECR::PublicRepository"|"AWS::GuardDuty::Detector"|"AWS::EMR::SecurityConfiguration"|"AWS::SageMaker::CodeRepository"|"AWS::Route53Resolver::ResolverEndpoint"|"AWS::Route53Resolver::ResolverRule"|"AWS::Route53Resolver::ResolverRuleAssociation"|"AWS::DMS::ReplicationSubnetGroup"|"AWS::DMS::EventSubscription"|"AWS::MSK::Cluster"|"AWS::StepFunctions::Activity"|"AWS::WorkSpaces::Workspace"|"AWS::WorkSpaces::ConnectionAlias"|"AWS::SageMaker::Model"|"AWS::ElasticLoadBalancingV2::Listener"|"AWS::StepFunctions::StateMachine"|"AWS::Batch::JobQueue"|"AWS::Batch::ComputeEnvironment"|"AWS::AccessAnalyzer::Analyzer"|"AWS::Athena::WorkGroup"|"AWS::Athena::DataCatalog"|"AWS::Detective::Graph"|"AWS::GlobalAccelerator::Accelerator"|"AWS::GlobalAccelerator::EndpointGroup"|"AWS::GlobalAccelerator::Listener"|"AWS::EC2::TransitGatewayAttachment"|"AWS::EC2::TransitGatewayRouteTable"|"AWS::DMS::Certificate"|"AWS::AppConfig::Application"|"AWS::AppSync::GraphQLApi"|"AWS::DataSync::LocationSMB"|"AWS::DataSync::LocationFSxLustre"|"AWS::DataSync::LocationS3"|"AWS::DataSync::LocationEFS"|"AWS::DataSync::Task"|"AWS::DataSync::LocationNFS"|"AWS::EC2::NetworkInsightsAccessScopeAnalysis"|"AWS::EKS::FargateProfile"|"AWS::Glue::Job"|"AWS::GuardDuty::ThreatIntelSet"|"AWS::GuardDuty::IPSet"|"AWS::SageMaker::Workteam"|"AWS::SageMaker::NotebookInstanceLifecycleConfig"|"AWS::ServiceDiscovery::Service"|"AWS::ServiceDiscovery::PublicDnsNamespace"|"AWS::SES::ContactList"|"AWS::SES::ConfigurationSet"|"AWS::Route53::HostedZone"|"AWS::IoTEvents::Input"|"AWS::IoTEvents::DetectorModel"|"AWS::IoTEvents::AlarmModel"|"AWS::ServiceDiscovery::HttpNamespace"|"AWS::Events::EventBus"|"AWS::ImageBuilder::ContainerRecipe"|"AWS::ImageBuilder::DistributionConfiguration"|"AWS::ImageBuilder::InfrastructureConfiguration"|"AWS::DataSync::LocationObjectStorage"|"AWS::DataSync::LocationHDFS"|"AWS::Glue::Classifier"|"AWS::Route53RecoveryReadiness::Cell"|"AWS::Route53RecoveryReadiness::ReadinessCheck"|"AWS::ECR::RegistryPolicy"|"AWS::Backup::ReportPlan"|"AWS::Lightsail::Certificate"|"AWS::RUM::AppMonitor"|"AWS::Events::Endpoint"|"AWS::SES::ReceiptRuleSet"|"AWS::Events::Archive"|"AWS::Events::ApiDestination"|"AWS::Lightsail::Disk"|"AWS::FIS::ExperimentTemplate"|"AWS::DataSync::LocationFSxWindows"|"AWS::SES::ReceiptFilter"|"AWS::GuardDuty::Filter"|"AWS::SES::Template"|"AWS::AmazonMQ::Broker"|"AWS::AppConfig::Environment"|"AWS::AppConfig::ConfigurationProfile"|"AWS::Cloud9::EnvironmentEC2"|"AWS::EventSchemas::Registry"|"AWS::EventSchemas::RegistryPolicy"|"AWS::EventSchemas::Discoverer"|"AWS::FraudDetector::Label"|"AWS::FraudDetector::EntityType"|"AWS::FraudDetector::Variable"|"AWS::FraudDetector::Outcome"|"AWS::IoT::Authorizer"|"AWS::IoT::SecurityProfile"|"AWS::IoT::RoleAlias"|"AWS::IoT::Dimension"|"AWS::IoTAnalytics::Datastore"|"AWS::Lightsail::Bucket"|"AWS::Lightsail::StaticIp"|"AWS::MediaPackage::PackagingGroup"|"AWS::Route53RecoveryReadiness::RecoveryGroup"|"AWS::ResilienceHub::ResiliencyPolicy"|"AWS::Transfer::Workflow"|"AWS::EKS::IdentityProviderConfig"|"AWS::EKS::Addon"|"AWS::Glue::MLTransform"|"AWS::IoT::Policy"|"AWS::IoT::MitigationAction"|"AWS::IoTTwinMaker::Workspace"|"AWS::IoTTwinMaker::Entity"|"AWS::IoTAnalytics::Dataset"|"AWS::IoTAnalytics::Pipeline"|"AWS::IoTAnalytics::Channel"|"AWS::IoTSiteWise::Dashboard"|"AWS::IoTSiteWise::Project"|"AWS::IoTSiteWise::Portal"|"AWS::IoTSiteWise::AssetModel"|"AWS::IVS::Channel"|"AWS::IVS::RecordingConfiguration"|"AWS::IVS::PlaybackKeyPair"|"AWS::KinesisAnalyticsV2::Application"|"AWS::RDS::GlobalCluster"|"AWS::S3::MultiRegionAccessPoint"|"AWS::DeviceFarm::TestGridProject"|"AWS::Budgets::BudgetsAction"|"AWS::Lex::Bot"|"AWS::CodeGuruReviewer::RepositoryAssociation"|"AWS::IoT::CustomMetric"|"AWS::Route53Resolver::FirewallDomainList"|"AWS::RoboMaker::RobotApplicationVersion"|"AWS::EC2::TrafficMirrorSession"|"AWS::IoTSiteWise::Gateway"|"AWS::Lex::BotAlias"|"AWS::LookoutMetrics::Alert"|"AWS::IoT::AccountAuditConfiguration"|"AWS::EC2::TrafficMirrorTarget"|"AWS::S3::StorageLens"|"AWS::IoT::ScheduledAudit"|"AWS::Events::Connection"|"AWS::EventSchemas::Schema"|"AWS::MediaPackage::PackagingConfiguration"|"AWS::KinesisVideo::SignalingChannel"|"AWS::AppStream::DirectoryConfig"|"AWS::LookoutVision::Project"|"AWS::Route53RecoveryControl::Cluster"|"AWS::Route53RecoveryControl::SafetyRule"|"AWS::Route53RecoveryControl::ControlPanel"|"AWS::Route53RecoveryControl::RoutingControl"|"AWS::Route53RecoveryReadiness::ResourceSet"|"AWS::RoboMaker::SimulationApplication"|"AWS::RoboMaker::RobotApplication"|"AWS::HealthLake::FHIRDatastore"|"AWS::Pinpoint::Segment"|"AWS::Pinpoint::ApplicationSettings"|"AWS::Events::Rule"|"AWS::EC2::DHCPOptions"|"AWS::EC2::NetworkInsightsPath"|"AWS::EC2::TrafficMirrorFilter"|"AWS::EC2::IPAM"|"AWS::IoTTwinMaker::Scene"|"AWS::NetworkManager::TransitGatewayRegistration"|"AWS::CustomerProfiles::Domain"|"AWS::AutoScaling::WarmPool"|"AWS::Connect::PhoneNumber"|"AWS::AppConfig::DeploymentStrategy"|"AWS::AppFlow::Flow"|"AWS::AuditManager::Assessment"|"AWS::CloudWatch::MetricStream"|"AWS::DeviceFarm::InstanceProfile"|"AWS::DeviceFarm::Project"|"AWS::EC2::EC2Fleet"|"AWS::EC2::SubnetRouteTableAssociation"|"AWS::ECR::PullThroughCacheRule"|"AWS::GroundStation::Config"|"AWS::ImageBuilder::ImagePipeline"|"AWS::IoT::FleetMetric"|"AWS::IoTWireless::ServiceProfile"|"AWS::NetworkManager::Device"|"AWS::NetworkManager::GlobalNetwork"|"AWS::NetworkManager::Link"|"AWS::NetworkManager::Site"|"AWS::Panorama::Package"|"AWS::Pinpoint::App"|"AWS::Redshift::ScheduledAction"|"AWS::Route53Resolver::FirewallRuleGroupAssociation"|"AWS::SageMaker::AppImageConfig"|"AWS::SageMaker::Image"|"AWS::ECS::TaskSet"|"AWS::Cassandra::Keyspace"|"AWS::Signer::SigningProfile"|"AWS::Amplify::App"|"AWS::AppMesh::VirtualNode"|"AWS::AppMesh::VirtualService"|"AWS::AppRunner::VpcConnector"|"AWS::AppStream::Application"|"AWS::CodeArtifact::Repository"|"AWS::EC2::PrefixList"|"AWS::EC2::SpotFleet"|"AWS::Evidently::Project"|"AWS::Forecast::Dataset"|"AWS::IAM::SAMLProvider"|"AWS::IAM::ServerCertificate"|"AWS::Pinpoint::Campaign"|"AWS::Pinpoint::InAppTemplate"|"AWS::SageMaker::Domain"|"AWS::Transfer::Agreement"|"AWS::Transfer::Connector"|"AWS::KinesisFirehose::DeliveryStream"|"AWS::Amplify::Branch"|"AWS::AppIntegrations::EventIntegration"|"AWS::AppMesh::Route"|"AWS::Athena::PreparedStatement"|"AWS::EC2::IPAMScope"|"AWS::Evidently::Launch"|"AWS::Forecast::DatasetGroup"|"AWS::GreengrassV2::ComponentVersion"|"AWS::GroundStation::MissionProfile"|"AWS::MediaConnect::FlowEntitlement"|"AWS::MediaConnect::FlowVpcInterface"|"AWS::MediaTailor::PlaybackConfiguration"|"AWS::MSK::Configuration"|"AWS::Personalize::Dataset"|"AWS::Personalize::Schema"|"AWS::Personalize::Solution"|"AWS::Pinpoint::EmailTemplate"|"AWS::Pinpoint::EventStream"|"AWS::ResilienceHub::App"|"AWS::ACMPCA::CertificateAuthority"|"AWS::AppConfig::HostedConfigurationVersion"|"AWS::AppMesh::VirtualGateway"|"AWS::AppMesh::VirtualRouter"|"AWS::AppRunner::Service"|"AWS::CustomerProfiles::ObjectType"|"AWS::DMS::Endpoint"|"AWS::EC2::CapacityReservation"|"AWS::EC2::ClientVpnEndpoint"|"AWS::Kendra::Index"|"AWS::KinesisVideo::Stream"|"AWS::Logs::Destination"|"AWS::Pinpoint::EmailChannel"|"AWS::S3::AccessPoint"|"AWS::NetworkManager::CustomerGatewayAssociation"|"AWS::NetworkManager::LinkAssociation"|string&{};
   export type ResourceTypeList = ResourceType[];
   export type ResourceTypeString = string;
   export type ResourceTypes = StringWithCharLimit256[];
@@ -4384,7 +4384,7 @@ declare namespace ConfigService {
      */
     Value: ResourceValueType;
   }
-  export type ResourceValueType = "RESOURCE_ID"|string;
+  export type ResourceValueType = "RESOURCE_ID"|string&{};
   export type Results = String[];
   export interface RetentionConfiguration {
     /**
@@ -4483,8 +4483,8 @@ declare namespace ConfigService {
      */
     NextToken?: NextToken;
   }
-  export type SortBy = "SCORE"|string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortBy = "SCORE"|string&{};
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export interface Source {
     /**
      * Indicates whether Amazon Web Services or the customer owns and manages the Config rule. Config Managed Rules are predefined rules owned by Amazon Web Services. For more information, see Config Managed Rules in the Config developer guide. Config Custom Rules are rules that you can develop either with Guard (CUSTOM_POLICY) or Lambda (CUSTOM_LAMBDA). For more information, see Config Custom Rules  in the Config developer guide.

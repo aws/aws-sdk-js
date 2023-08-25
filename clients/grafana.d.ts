@@ -165,7 +165,7 @@ declare class Grafana extends Service {
   updateWorkspaceConfiguration(callback?: (err: AWSError, data: Grafana.Types.UpdateWorkspaceConfigurationResponse) => void): Request<Grafana.Types.UpdateWorkspaceConfigurationResponse, AWSError>;
 }
 declare namespace Grafana {
-  export type AccountAccessType = "CURRENT_ACCOUNT"|"ORGANIZATION"|string;
+  export type AccountAccessType = "CURRENT_ACCOUNT"|"ORGANIZATION"|string&{};
   export type AllowedOrganization = string;
   export type AllowedOrganizations = AllowedOrganization[];
   export type ApiKeyName = string;
@@ -227,7 +227,7 @@ declare namespace Grafana {
      */
     saml?: SamlAuthentication;
   }
-  export type AuthenticationProviderTypes = "AWS_SSO"|"SAML"|string;
+  export type AuthenticationProviderTypes = "AWS_SSO"|"SAML"|string&{};
   export type AuthenticationProviders = AuthenticationProviderTypes[];
   export interface AuthenticationSummary {
     /**
@@ -356,7 +356,7 @@ declare namespace Grafana {
      */
     workspace: WorkspaceDescription;
   }
-  export type DataSourceType = "AMAZON_OPENSEARCH_SERVICE"|"CLOUDWATCH"|"PROMETHEUS"|"XRAY"|"TIMESTREAM"|"SITEWISE"|"ATHENA"|"REDSHIFT"|"TWINMAKER"|string;
+  export type DataSourceType = "AMAZON_OPENSEARCH_SERVICE"|"CLOUDWATCH"|"PROMETHEUS"|"XRAY"|"TIMESTREAM"|"SITEWISE"|"ATHENA"|"REDSHIFT"|"TWINMAKER"|string&{};
   export type DataSourceTypesList = DataSourceType[];
   export interface DeleteWorkspaceApiKeyRequest {
     /**
@@ -462,7 +462,7 @@ declare namespace Grafana {
     xml?: String;
   }
   export type IdpMetadataUrl = string;
-  export type LicenseType = "ENTERPRISE"|"ENTERPRISE_FREE_TRIAL"|string;
+  export type LicenseType = "ENTERPRISE"|"ENTERPRISE_FREE_TRIAL"|string&{};
   export interface ListPermissionsRequest {
     /**
      * (Optional) Limits the results to only the group that matches this ID.
@@ -569,7 +569,7 @@ declare namespace Grafana {
      */
     vpceIds: VpceIds;
   }
-  export type NotificationDestinationType = "SNS"|string;
+  export type NotificationDestinationType = "SNS"|string&{};
   export type NotificationDestinationsList = NotificationDestinationType[];
   export type OrganizationRoleName = string;
   export type OrganizationalUnit = string;
@@ -587,10 +587,10 @@ declare namespace Grafana {
     user: User;
   }
   export type PermissionEntryList = PermissionEntry[];
-  export type PermissionType = "CUSTOMER_MANAGED"|"SERVICE_MANAGED"|string;
+  export type PermissionType = "CUSTOMER_MANAGED"|"SERVICE_MANAGED"|string&{};
   export type PrefixListId = string;
   export type PrefixListIds = PrefixListId[];
-  export type Role = "ADMIN"|"EDITOR"|"VIEWER"|string;
+  export type Role = "ADMIN"|"EDITOR"|"VIEWER"|string&{};
   export type RoleValue = string;
   export type RoleValueList = RoleValue[];
   export interface RoleValues {
@@ -636,7 +636,7 @@ declare namespace Grafana {
      */
     roleValues?: RoleValues;
   }
-  export type SamlConfigurationStatus = "CONFIGURED"|"NOT_CONFIGURED"|string;
+  export type SamlConfigurationStatus = "CONFIGURED"|"NOT_CONFIGURED"|string&{};
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export type SsoId = string;
@@ -673,7 +673,7 @@ declare namespace Grafana {
   }
   export interface UntagResourceResponse {
   }
-  export type UpdateAction = "ADD"|"REVOKE"|string;
+  export type UpdateAction = "ADD"|"REVOKE"|string&{};
   export interface UpdateError {
     /**
      * Specifies which permission update caused the error.
@@ -836,7 +836,7 @@ declare namespace Grafana {
     type: UserType;
   }
   export type UserList = User[];
-  export type UserType = "SSO_USER"|"SSO_GROUP"|string;
+  export type UserType = "SSO_USER"|"SSO_GROUP"|string&{};
   export interface VpcConfiguration {
     /**
      * The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect. Duplicates not allowed.
@@ -950,7 +950,7 @@ declare namespace Grafana {
   export type WorkspaceId = string;
   export type WorkspaceList = WorkspaceSummary[];
   export type WorkspaceName = string;
-  export type WorkspaceStatus = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"UPDATING"|"UPGRADING"|"DELETION_FAILED"|"CREATION_FAILED"|"UPDATE_FAILED"|"UPGRADE_FAILED"|"LICENSE_REMOVAL_FAILED"|"VERSION_UPDATING"|"VERSION_UPDATE_FAILED"|string;
+  export type WorkspaceStatus = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"UPDATING"|"UPGRADING"|"DELETION_FAILED"|"CREATION_FAILED"|"UPDATE_FAILED"|"UPGRADE_FAILED"|"LICENSE_REMOVAL_FAILED"|"VERSION_UPDATING"|"VERSION_UPDATE_FAILED"|string&{};
   export interface WorkspaceSummary {
     /**
      * A structure containing information about the authentication methods used in the workspace.

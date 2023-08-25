@@ -648,7 +648,7 @@ declare namespace LookoutEquipment {
     DuplicateTimestamps: DuplicateTimestamps;
   }
   export type DataSizeInBytes = number;
-  export type DataUploadFrequency = "PT5M"|"PT10M"|"PT15M"|"PT30M"|"PT1H"|string;
+  export type DataUploadFrequency = "PT5M"|"PT10M"|"PT15M"|"PT30M"|"PT1H"|string&{};
   export type DatasetArn = string;
   export type DatasetIdentifier = string;
   export type DatasetName = string;
@@ -658,7 +658,7 @@ declare namespace LookoutEquipment {
      */
     InlineDataSchema?: InlineDataSchema;
   }
-  export type DatasetStatus = "CREATED"|"INGESTION_IN_PROGRESS"|"ACTIVE"|"IMPORT_IN_PROGRESS"|string;
+  export type DatasetStatus = "CREATED"|"INGESTION_IN_PROGRESS"|"ACTIVE"|"IMPORT_IN_PROGRESS"|string&{};
   export type DatasetSummaries = DatasetSummary[];
   export interface DatasetSummary {
     /**
@@ -1391,7 +1391,7 @@ declare namespace LookoutEquipment {
      */
     EventDurationInSeconds?: EventDurationInSeconds;
   }
-  export type InferenceExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string;
+  export type InferenceExecutionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|string&{};
   export type InferenceExecutionSummaries = InferenceExecutionSummary[];
   export interface InferenceExecutionSummary {
     /**
@@ -1500,7 +1500,7 @@ declare namespace LookoutEquipment {
   export type InferenceSchedulerArn = string;
   export type InferenceSchedulerIdentifier = string;
   export type InferenceSchedulerName = string;
-  export type InferenceSchedulerStatus = "PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|string;
+  export type InferenceSchedulerStatus = "PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|string&{};
   export type InferenceSchedulerSummaries = InferenceSchedulerSummary[];
   export interface InferenceSchedulerSummary {
     /**
@@ -1557,7 +1557,7 @@ declare namespace LookoutEquipment {
     S3InputConfiguration: IngestionS3InputConfiguration;
   }
   export type IngestionJobId = string;
-  export type IngestionJobStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|string;
+  export type IngestionJobStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|string&{};
   export interface IngestionS3InputConfiguration {
     /**
      * The name of the S3 bucket used for the input data for the data ingestion. 
@@ -1618,7 +1618,7 @@ declare namespace LookoutEquipment {
     UpdatedAt?: Timestamp;
   }
   export type LabelId = string;
-  export type LabelRating = "ANOMALY"|"NO_ANOMALY"|"NEUTRAL"|string;
+  export type LabelRating = "ANOMALY"|"NO_ANOMALY"|"NEUTRAL"|string&{};
   export type LabelSummaries = LabelSummary[];
   export interface LabelSummary {
     /**
@@ -1692,7 +1692,7 @@ declare namespace LookoutEquipment {
      */
     MaxTimestampGapInDays?: Integer;
   }
-  export type LatestInferenceResult = "ANOMALOUS"|"NORMAL"|string;
+  export type LatestInferenceResult = "ANOMALOUS"|"NORMAL"|string&{};
   export interface ListDataIngestionJobsRequest {
     /**
      * The name of the dataset being used for the data ingestion job. 
@@ -2050,7 +2050,7 @@ declare namespace LookoutEquipment {
   export type ModelArn = string;
   export type ModelMetrics = string;
   export type ModelName = string;
-  export type ModelStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|string;
+  export type ModelStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|string&{};
   export type ModelSummaries = ModelSummary[];
   export interface ModelSummary {
     /**
@@ -2088,8 +2088,8 @@ declare namespace LookoutEquipment {
   }
   export type ModelVersion = number;
   export type ModelVersionArn = string;
-  export type ModelVersionSourceType = "TRAINING"|"RETRAINING"|"IMPORT"|string;
-  export type ModelVersionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|"CANCELED"|string;
+  export type ModelVersionSourceType = "TRAINING"|"RETRAINING"|"IMPORT"|string&{};
+  export type ModelVersionStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|"CANCELED"|string&{};
   export type ModelVersionSummaries = ModelVersionSummary[];
   export interface ModelVersionSummary {
     /**
@@ -2131,7 +2131,7 @@ declare namespace LookoutEquipment {
      */
     Monotonicity?: Monotonicity;
   }
-  export type Monotonicity = "DECREASING"|"INCREASING"|"STATIC"|string;
+  export type Monotonicity = "DECREASING"|"INCREASING"|"STATIC"|string&{};
   export interface MultipleOperatingModes {
     /**
      *  Indicates whether there is a potential data issue related to having multiple operating modes. 
@@ -2303,7 +2303,7 @@ declare namespace LookoutEquipment {
      */
     Status?: InferenceSchedulerStatus;
   }
-  export type StatisticalIssueStatus = "POTENTIAL_ISSUE_DETECTED"|"NO_ISSUE_DETECTED"|string;
+  export type StatisticalIssueStatus = "POTENTIAL_ISSUE_DETECTED"|"NO_ISSUE_DETECTED"|string&{};
   export interface StopInferenceSchedulerRequest {
     /**
      * The name of the inference scheduler to be stopped. 
@@ -2358,7 +2358,7 @@ declare namespace LookoutEquipment {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TargetSamplingRate = "PT1S"|"PT5S"|"PT10S"|"PT15S"|"PT30S"|"PT1M"|"PT5M"|"PT10M"|"PT15M"|"PT30M"|"PT1H"|string;
+  export type TargetSamplingRate = "PT1S"|"PT5S"|"PT10S"|"PT15S"|"PT30S"|"PT1M"|"PT5M"|"PT10M"|"PT15M"|"PT30M"|"PT1H"|string&{};
   export type TimeZoneOffset = string;
   export type Timestamp = Date;
   export interface UnsupportedTimestamps {

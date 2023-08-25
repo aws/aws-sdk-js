@@ -343,9 +343,9 @@ declare namespace TranscribeService {
      */
     Last?: TimestampMilliseconds;
   }
-  export type BaseModelName = "NarrowBand"|"WideBand"|string;
+  export type BaseModelName = "NarrowBand"|"WideBand"|string&{};
   export type Boolean = boolean;
-  export type CLMLanguageCode = "en-US"|"hi-IN"|"es-US"|"en-GB"|"en-AU"|"de-DE"|"ja-JP"|string;
+  export type CLMLanguageCode = "en-US"|"hi-IN"|"es-US"|"en-GB"|"en-AU"|"de-DE"|"ja-JP"|string&{};
   export interface CallAnalyticsJob {
     /**
      * The name of the Call Analytics job. Job names are case sensitive and must be unique within an Amazon Web Services account.
@@ -433,7 +433,7 @@ declare namespace TranscribeService {
      */
     LanguageIdSettings?: LanguageIdSettingsMap;
   }
-  export type CallAnalyticsJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
+  export type CallAnalyticsJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string&{};
   export type CallAnalyticsJobSummaries = CallAnalyticsJobSummary[];
   export interface CallAnalyticsJobSummary {
     /**
@@ -926,7 +926,7 @@ declare namespace TranscribeService {
      */
     DataAccessRoleArn: DataAccessRoleArn;
   }
-  export type InputType = "REAL_TIME"|"POST_CALL"|string;
+  export type InputType = "REAL_TIME"|"POST_CALL"|string&{};
   export interface InterruptionFilter {
     /**
      * Specify the duration of the interruptions in milliseconds. For example, you can flag speech that contains more than 10,000 milliseconds of interruptions.
@@ -961,7 +961,7 @@ declare namespace TranscribeService {
   }
   export type KMSEncryptionContextMap = {[key: string]: NonEmptyString};
   export type KMSKeyId = string;
-  export type LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN"|"zh-TW"|"th-TH"|"en-ZA"|"en-NZ"|"vi-VN"|"sv-SE"|string;
+  export type LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN"|"zh-TW"|"th-TH"|"en-ZA"|"en-NZ"|"vi-VN"|"sv-SE"|string&{};
   export interface LanguageCodeItem {
     /**
      * Provides the language code for each language identified in your media.
@@ -1288,9 +1288,9 @@ declare namespace TranscribeService {
      */
     RedactedMediaFileUri?: Uri;
   }
-  export type MediaFormat = "mp3"|"mp4"|"wav"|"flac"|"ogg"|"amr"|"webm"|string;
+  export type MediaFormat = "mp3"|"mp4"|"wav"|"flac"|"ogg"|"amr"|"webm"|string&{};
   export type MediaSampleRateHertz = number;
-  export type MedicalContentIdentificationType = "PHI"|string;
+  export type MedicalContentIdentificationType = "PHI"|string&{};
   export type MedicalMediaSampleRateHertz = number;
   export interface MedicalTranscript {
     /**
@@ -1441,7 +1441,7 @@ declare namespace TranscribeService {
      */
     LanguageModelName?: ModelName;
   }
-  export type ModelStatus = "IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
+  export type ModelStatus = "IN_PROGRESS"|"FAILED"|"COMPLETED"|string&{};
   export type Models = LanguageModel[];
   export type NextToken = string;
   export type NonEmptyString = string;
@@ -1465,15 +1465,15 @@ declare namespace TranscribeService {
   }
   export type OutputBucketName = string;
   export type OutputKey = string;
-  export type OutputLocationType = "CUSTOMER_BUCKET"|"SERVICE_BUCKET"|string;
-  export type ParticipantRole = "AGENT"|"CUSTOMER"|string;
+  export type OutputLocationType = "CUSTOMER_BUCKET"|"SERVICE_BUCKET"|string&{};
+  export type ParticipantRole = "AGENT"|"CUSTOMER"|string&{};
   export type Percentage = number;
   export type Phrase = string;
   export type Phrases = Phrase[];
-  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"ALL"|string;
+  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"ALL"|string&{};
   export type PiiEntityTypes = PiiEntityType[];
-  export type RedactionOutput = "redacted"|"redacted_and_unredacted"|string;
-  export type RedactionType = "PII"|string;
+  export type RedactionOutput = "redacted"|"redacted_and_unredacted"|string&{};
+  export type RedactionType = "PII"|string&{};
   export interface RelativeTimeRange {
     /**
      * The time, in percentage, when Amazon Transcribe starts searching for the specified criteria in your media file. If you include StartPercentage in your request, you must also include EndPercentage.
@@ -1533,7 +1533,7 @@ declare namespace TranscribeService {
      */
     Negate?: Boolean;
   }
-  export type SentimentValue = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string;
+  export type SentimentValue = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string&{};
   export type SentimentValueList = SentimentValue[];
   export interface Settings {
     /**
@@ -1569,7 +1569,7 @@ declare namespace TranscribeService {
      */
     VocabularyFilterMethod?: VocabularyFilterMethod;
   }
-  export type Specialty = "PRIMARYCARE"|string;
+  export type Specialty = "PRIMARYCARE"|string&{};
   export interface StartCallAnalyticsJobRequest {
     /**
      * A unique name, chosen by you, for your Call Analytics job. This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new job with the same name as an existing job, you get a ConflictException error.
@@ -1757,7 +1757,7 @@ declare namespace TranscribeService {
   }
   export type StringTargetList = NonEmptyString[];
   export type SubtitleFileUris = Uri[];
-  export type SubtitleFormat = "vtt"|"srt"|string;
+  export type SubtitleFormat = "vtt"|"srt"|string&{};
   export type SubtitleFormats = SubtitleFormat[];
   export type SubtitleOutputStartIndex = number;
   export interface Subtitles {
@@ -1812,7 +1812,7 @@ declare namespace TranscribeService {
   export type TagValue = string;
   export type TimestampMilliseconds = number;
   export type ToxicityCategories = ToxicityCategory[];
-  export type ToxicityCategory = "ALL"|string;
+  export type ToxicityCategory = "ALL"|string&{};
   export type ToxicityDetection = ToxicityDetectionSettings[];
   export interface ToxicityDetectionSettings {
     /**
@@ -1857,7 +1857,7 @@ declare namespace TranscribeService {
      */
     Targets: StringTargetList;
   }
-  export type TranscriptFilterType = "EXACT"|string;
+  export type TranscriptFilterType = "EXACT"|string&{};
   export interface TranscriptionJob {
     /**
      * The name of the transcription job. Job names are case sensitive and must be unique within an Amazon Web Services account.
@@ -1957,7 +1957,7 @@ declare namespace TranscribeService {
     ToxicityDetection?: ToxicityDetection;
   }
   export type TranscriptionJobName = string;
-  export type TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;
+  export type TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string&{};
   export type TranscriptionJobSummaries = TranscriptionJobSummary[];
   export interface TranscriptionJobSummary {
     /**
@@ -2018,7 +2018,7 @@ declare namespace TranscribeService {
      */
     ToxicityDetection?: ToxicityDetection;
   }
-  export type Type = "CONVERSATION"|"DICTATION"|string;
+  export type Type = "CONVERSATION"|"DICTATION"|string&{};
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the Amazon Transcribe resource you want to remove tags from. ARNs have the format arn:partition:service:region:account-id:resource-type/resource-id. For example, arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name. Valid values for resource-type are: transcription-job, medical-transcription-job, vocabulary, medical-vocabulary, vocabulary-filter, and language-model.
@@ -2171,7 +2171,7 @@ declare namespace TranscribeService {
      */
     LastModifiedTime?: DateTime;
   }
-  export type VocabularyFilterMethod = "remove"|"mask"|"tag"|string;
+  export type VocabularyFilterMethod = "remove"|"mask"|"tag"|string&{};
   export type VocabularyFilterName = string;
   export type VocabularyFilters = VocabularyFilterInfo[];
   export interface VocabularyInfo {
@@ -2193,7 +2193,7 @@ declare namespace TranscribeService {
     VocabularyState?: VocabularyState;
   }
   export type VocabularyName = string;
-  export type VocabularyState = "PENDING"|"READY"|"FAILED"|string;
+  export type VocabularyState = "PENDING"|"READY"|"FAILED"|string&{};
   export type Word = string;
   export type Words = Word[];
   /**

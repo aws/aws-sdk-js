@@ -314,7 +314,7 @@ declare namespace Detective {
      */
     UnprocessedAccounts?: UnprocessedAccountList;
   }
-  export type DatasourcePackage = "DETECTIVE_CORE"|"EKS_AUDIT"|"ASFF_SECURITYHUB_FINDING"|string;
+  export type DatasourcePackage = "DETECTIVE_CORE"|"EKS_AUDIT"|"ASFF_SECURITYHUB_FINDING"|string&{};
   export interface DatasourcePackageIngestDetail {
     /**
      * Details on which data source packages are ingested for a member account.
@@ -327,7 +327,7 @@ declare namespace Detective {
   }
   export type DatasourcePackageIngestDetails = {[key: string]: DatasourcePackageIngestDetail};
   export type DatasourcePackageIngestHistory = {[key: string]: LastIngestStateChangeDates};
-  export type DatasourcePackageIngestState = "STARTED"|"STOPPED"|"DISABLED"|string;
+  export type DatasourcePackageIngestState = "STARTED"|"STOPPED"|"DISABLED"|string&{};
   export type DatasourcePackageIngestStates = {[key: string]: DatasourcePackageIngestState};
   export type DatasourcePackageList = DatasourcePackage[];
   export interface DatasourcePackageUsageInfo {
@@ -425,7 +425,7 @@ declare namespace Detective {
   export type GraphArn = string;
   export type GraphArnList = GraphArn[];
   export type GraphList = Graph[];
-  export type InvitationType = "INVITATION"|"ORGANIZATION"|string;
+  export type InvitationType = "INVITATION"|"ORGANIZATION"|string&{};
   export type LastIngestStateChangeDates = {[key: string]: TimestampForCollection};
   export interface ListDatasourcePackagesRequest {
     /**
@@ -614,9 +614,9 @@ declare namespace Detective {
     DatasourcePackageIngestStates?: DatasourcePackageIngestStates;
   }
   export type MemberDetailList = MemberDetail[];
-  export type MemberDisabledReason = "VOLUME_TOO_HIGH"|"VOLUME_UNKNOWN"|string;
+  export type MemberDisabledReason = "VOLUME_TOO_HIGH"|"VOLUME_UNKNOWN"|string&{};
   export type MemberResultsLimit = number;
-  export type MemberStatus = "INVITED"|"VERIFICATION_IN_PROGRESS"|"VERIFICATION_FAILED"|"ENABLED"|"ACCEPTED_BUT_DISABLED"|string;
+  export type MemberStatus = "INVITED"|"VERIFICATION_IN_PROGRESS"|"VERIFICATION_FAILED"|"ENABLED"|"ACCEPTED_BUT_DISABLED"|string&{};
   export interface MembershipDatasources {
     /**
      * The account identifier of the Amazon Web Services account.

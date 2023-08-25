@@ -1522,8 +1522,8 @@ declare namespace QuickSight {
     ViolatedEntities?: EntityList;
   }
   export type AnalysisErrorList = AnalysisError[];
-  export type AnalysisErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string;
-  export type AnalysisFilterAttribute = "QUICKSIGHT_USER"|"QUICKSIGHT_VIEWER_OR_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"ANALYSIS_NAME"|string;
+  export type AnalysisErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string&{};
+  export type AnalysisFilterAttribute = "QUICKSIGHT_USER"|"QUICKSIGHT_VIEWER_OR_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"ANALYSIS_NAME"|string&{};
   export type AnalysisName = string;
   export interface AnalysisSearchFilter {
     /**
@@ -1593,7 +1593,7 @@ declare namespace QuickSight {
      */
     ParameterName?: ParameterName;
   }
-  export type AnchorOption = "NOW"|string;
+  export type AnchorOption = "NOW"|string&{};
   export interface AnonymousUserDashboardEmbeddingConfiguration {
     /**
      * The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard. The Amazon Resource Name (ARN) of this dashboard must be included in the AuthorizedResourceArns parameter. Otherwise, the request will fail with InvalidParameterValueException.
@@ -1669,8 +1669,8 @@ declare namespace QuickSight {
      */
     ArcThickness?: ArcThickness;
   }
-  export type ArcThickness = "SMALL"|"MEDIUM"|"LARGE"|"WHOLE"|string;
-  export type ArcThicknessOptions = "SMALL"|"MEDIUM"|"LARGE"|string;
+  export type ArcThickness = "SMALL"|"MEDIUM"|"LARGE"|"WHOLE"|string&{};
+  export type ArcThicknessOptions = "SMALL"|"MEDIUM"|"LARGE"|string&{};
   export type Arn = string;
   export type ArnList = Arn[];
   export interface AssetBundleCloudFormationOverridePropertyConfiguration {
@@ -1707,7 +1707,7 @@ declare namespace QuickSight {
      */
     Dashboards?: AssetBundleExportJobDashboardOverridePropertiesList;
   }
-  export type AssetBundleExportFormat = "CLOUDFORMATION_JSON"|"QUICKSIGHT_JSON"|string;
+  export type AssetBundleExportFormat = "CLOUDFORMATION_JSON"|"QUICKSIGHT_JSON"|string&{};
   export interface AssetBundleExportJobAnalysisOverrideProperties {
     /**
      * The ARN of the specific Analysis resource whose override properties are configured in this structure.
@@ -1719,7 +1719,7 @@ declare namespace QuickSight {
     Properties: AssetBundleExportJobAnalysisPropertyToOverrideList;
   }
   export type AssetBundleExportJobAnalysisOverridePropertiesList = AssetBundleExportJobAnalysisOverrideProperties[];
-  export type AssetBundleExportJobAnalysisPropertyToOverride = "Name"|string;
+  export type AssetBundleExportJobAnalysisPropertyToOverride = "Name"|string&{};
   export type AssetBundleExportJobAnalysisPropertyToOverrideList = AssetBundleExportJobAnalysisPropertyToOverride[];
   export interface AssetBundleExportJobDashboardOverrideProperties {
     /**
@@ -1732,7 +1732,7 @@ declare namespace QuickSight {
     Properties: AssetBundleExportJobDashboardPropertyToOverrideList;
   }
   export type AssetBundleExportJobDashboardOverridePropertiesList = AssetBundleExportJobDashboardOverrideProperties[];
-  export type AssetBundleExportJobDashboardPropertyToOverride = "Name"|string;
+  export type AssetBundleExportJobDashboardPropertyToOverride = "Name"|string&{};
   export type AssetBundleExportJobDashboardPropertyToOverrideList = AssetBundleExportJobDashboardPropertyToOverride[];
   export interface AssetBundleExportJobDataSetOverrideProperties {
     /**
@@ -1745,7 +1745,7 @@ declare namespace QuickSight {
     Properties: AssetBundleExportJobDataSetPropertyToOverrideList;
   }
   export type AssetBundleExportJobDataSetOverridePropertiesList = AssetBundleExportJobDataSetOverrideProperties[];
-  export type AssetBundleExportJobDataSetPropertyToOverride = "Name"|string;
+  export type AssetBundleExportJobDataSetPropertyToOverride = "Name"|string&{};
   export type AssetBundleExportJobDataSetPropertyToOverrideList = AssetBundleExportJobDataSetPropertyToOverride[];
   export interface AssetBundleExportJobDataSourceOverrideProperties {
     /**
@@ -1758,7 +1758,7 @@ declare namespace QuickSight {
     Properties: AssetBundleExportJobDataSourcePropertyToOverrideList;
   }
   export type AssetBundleExportJobDataSourceOverridePropertiesList = AssetBundleExportJobDataSourceOverrideProperties[];
-  export type AssetBundleExportJobDataSourcePropertyToOverride = "Name"|"DisableSsl"|"SecretArn"|"Username"|"Password"|"Domain"|"WorkGroup"|"Host"|"Port"|"Database"|"DataSetName"|"Catalog"|"InstanceId"|"ClusterId"|"ManifestFileLocation"|"Warehouse"|"RoleArn"|string;
+  export type AssetBundleExportJobDataSourcePropertyToOverride = "Name"|"DisableSsl"|"SecretArn"|"Username"|"Password"|"Domain"|"WorkGroup"|"Host"|"Port"|"Database"|"DataSetName"|"Catalog"|"InstanceId"|"ClusterId"|"ManifestFileLocation"|"Warehouse"|"RoleArn"|string&{};
   export type AssetBundleExportJobDataSourcePropertyToOverrideList = AssetBundleExportJobDataSourcePropertyToOverride[];
   export interface AssetBundleExportJobError {
     /**
@@ -1786,7 +1786,7 @@ declare namespace QuickSight {
     Properties: AssetBundleExportJobRefreshSchedulePropertyToOverrideList;
   }
   export type AssetBundleExportJobRefreshScheduleOverridePropertiesList = AssetBundleExportJobRefreshScheduleOverrideProperties[];
-  export type AssetBundleExportJobRefreshSchedulePropertyToOverride = "StartAfterDateTime"|string;
+  export type AssetBundleExportJobRefreshSchedulePropertyToOverride = "StartAfterDateTime"|string&{};
   export type AssetBundleExportJobRefreshSchedulePropertyToOverrideList = AssetBundleExportJobRefreshSchedulePropertyToOverride[];
   export interface AssetBundleExportJobResourceIdOverrideConfiguration {
     /**
@@ -1794,7 +1794,7 @@ declare namespace QuickSight {
      */
     PrefixForAllResources?: Boolean;
   }
-  export type AssetBundleExportJobStatus = "QUEUED_FOR_IMMEDIATE_EXECUTION"|"IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|string;
+  export type AssetBundleExportJobStatus = "QUEUED_FOR_IMMEDIATE_EXECUTION"|"IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|string&{};
   export interface AssetBundleExportJobSummary {
     /**
      * The current status of the export job.
@@ -1833,7 +1833,7 @@ declare namespace QuickSight {
     Properties: AssetBundleExportJobThemePropertyToOverrideList;
   }
   export type AssetBundleExportJobThemeOverridePropertiesList = AssetBundleExportJobThemeOverrideProperties[];
-  export type AssetBundleExportJobThemePropertyToOverride = "Name"|string;
+  export type AssetBundleExportJobThemePropertyToOverride = "Name"|string&{};
   export type AssetBundleExportJobThemePropertyToOverrideList = AssetBundleExportJobThemePropertyToOverride[];
   export interface AssetBundleExportJobVPCConnectionOverrideProperties {
     /**
@@ -1846,10 +1846,10 @@ declare namespace QuickSight {
     Properties: AssetBundleExportJobVPCConnectionPropertyToOverrideList;
   }
   export type AssetBundleExportJobVPCConnectionOverridePropertiesList = AssetBundleExportJobVPCConnectionOverrideProperties[];
-  export type AssetBundleExportJobVPCConnectionPropertyToOverride = "Name"|"DnsResolvers"|"RoleArn"|string;
+  export type AssetBundleExportJobVPCConnectionPropertyToOverride = "Name"|"DnsResolvers"|"RoleArn"|string&{};
   export type AssetBundleExportJobVPCConnectionPropertyToOverrideList = AssetBundleExportJobVPCConnectionPropertyToOverride[];
   export type AssetBundleImportBodyBlob = Buffer|Uint8Array|Blob|string;
-  export type AssetBundleImportFailureAction = "DO_NOTHING"|"ROLLBACK"|string;
+  export type AssetBundleImportFailureAction = "DO_NOTHING"|"ROLLBACK"|string&{};
   export interface AssetBundleImportJobAnalysisOverrideParameters {
     /**
      * The ID of the analysis that you ant to apply overrides to.
@@ -1991,7 +1991,7 @@ declare namespace QuickSight {
      */
     PrefixForAllResources?: String;
   }
-  export type AssetBundleImportJobStatus = "QUEUED_FOR_IMMEDIATE_EXECUTION"|"IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|"FAILED_ROLLBACK_IN_PROGRESS"|"FAILED_ROLLBACK_COMPLETED"|"FAILED_ROLLBACK_ERROR"|string;
+  export type AssetBundleImportJobStatus = "QUEUED_FOR_IMMEDIATE_EXECUTION"|"IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|"FAILED_ROLLBACK_IN_PROGRESS"|"FAILED_ROLLBACK_COMPLETED"|"FAILED_ROLLBACK_ERROR"|string&{};
   export interface AssetBundleImportJobSummary {
     /**
      * The current status of the import job.
@@ -2074,7 +2074,7 @@ declare namespace QuickSight {
     S3Uri?: S3Uri;
   }
   export type AssetBundleResourceArns = Arn[];
-  export type AssignmentStatus = "ENABLED"|"DRAFT"|"DISABLED"|string;
+  export type AssignmentStatus = "ENABLED"|"DRAFT"|"DISABLED"|string&{};
   export interface AthenaParameters {
     /**
      * The workgroup that Amazon Athena uses.
@@ -2123,8 +2123,8 @@ declare namespace QuickSight {
      */
     Database: Database;
   }
-  export type AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"|"IAM_ONLY"|"ACTIVE_DIRECTORY"|"IAM_IDENTITY_CENTER"|string;
-  export type AuthorSpecifiedAggregation = "COUNT"|"DISTINCT_COUNT"|"MIN"|"MAX"|"MEDIAN"|"SUM"|"AVERAGE"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|string;
+  export type AuthenticationMethodOption = "IAM_AND_QUICKSIGHT"|"IAM_ONLY"|"ACTIVE_DIRECTORY"|"IAM_IDENTITY_CENTER"|string&{};
+  export type AuthorSpecifiedAggregation = "COUNT"|"DISTINCT_COUNT"|"MIN"|"MAX"|"MEDIAN"|"SUM"|"AVERAGE"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|string&{};
   export type AuthorSpecifiedAggregations = AuthorSpecifiedAggregation[];
   export type AwsAccountId = string;
   export type AwsAndAccountId = string;
@@ -2134,7 +2134,7 @@ declare namespace QuickSight {
      */
     DataSetName: DataSetName;
   }
-  export type AxisBinding = "PRIMARY_YAXIS"|"SECONDARY_YAXIS"|string;
+  export type AxisBinding = "PRIMARY_YAXIS"|"SECONDARY_YAXIS"|string&{};
   export interface AxisDataOptions {
     /**
      * The options for an axis with a numeric field.
@@ -2344,7 +2344,7 @@ declare namespace QuickSight {
      */
     BarChartAggregatedFieldWells?: BarChartAggregatedFieldWells;
   }
-  export type BarChartOrientation = "HORIZONTAL"|"VERTICAL"|string;
+  export type BarChartOrientation = "HORIZONTAL"|"VERTICAL"|string&{};
   export interface BarChartSortConfiguration {
     /**
      * The sort configuration of category fields.
@@ -2397,8 +2397,8 @@ declare namespace QuickSight {
      */
     ColumnHierarchies?: ColumnHierarchyList;
   }
-  export type BarsArrangement = "CLUSTERED"|"STACKED"|"STACKED_PERCENT"|string;
-  export type BaseMapStyleType = "LIGHT_GRAY"|"DARK_GRAY"|"STREET"|"IMAGERY"|string;
+  export type BarsArrangement = "CLUSTERED"|"STACKED"|"STACKED_PERCENT"|string&{};
+  export type BaseMapStyleType = "LIGHT_GRAY"|"DARK_GRAY"|"STREET"|"IMAGERY"|string&{};
   export type BinCountLimit = number;
   export interface BinCountOptions {
     /**
@@ -2517,7 +2517,7 @@ declare namespace QuickSight {
      */
     BoxPlotAggregatedFieldWells?: BoxPlotAggregatedFieldWells;
   }
-  export type BoxPlotFillStyle = "SOLID"|"TRANSPARENT"|string;
+  export type BoxPlotFillStyle = "SOLID"|"TRANSPARENT"|string&{};
   export type BoxPlotMeasureFieldList = MeasureField[];
   export interface BoxPlotOptions {
     /**
@@ -2681,7 +2681,7 @@ declare namespace QuickSight {
     Format?: TypeCastFormat;
   }
   export type Catalog = string;
-  export type CategoricalAggregationFunction = "COUNT"|"DISTINCT_COUNT"|string;
+  export type CategoricalAggregationFunction = "COUNT"|"DISTINCT_COUNT"|string&{};
   export interface CategoricalDimensionField {
     /**
      * The custom field ID.
@@ -2756,10 +2756,10 @@ declare namespace QuickSight {
      */
     CustomFilterConfiguration?: CustomFilterConfiguration;
   }
-  export type CategoryFilterFunction = "EXACT"|"CONTAINS"|string;
-  export type CategoryFilterMatchOperator = "EQUALS"|"DOES_NOT_EQUAL"|"CONTAINS"|"DOES_NOT_CONTAIN"|"STARTS_WITH"|"ENDS_WITH"|string;
-  export type CategoryFilterSelectAllOptions = "FILTER_ALL_VALUES"|string;
-  export type CategoryFilterType = "CUSTOM_FILTER"|"CUSTOM_FILTER_LIST"|"FILTER_LIST"|string;
+  export type CategoryFilterFunction = "EXACT"|"CONTAINS"|string&{};
+  export type CategoryFilterMatchOperator = "EQUALS"|"DOES_NOT_EQUAL"|"CONTAINS"|"DOES_NOT_CONTAIN"|"STARTS_WITH"|"ENDS_WITH"|string&{};
+  export type CategoryFilterSelectAllOptions = "FILTER_ALL_VALUES"|string&{};
+  export type CategoryFilterType = "CUSTOM_FILTER"|"CUSTOM_FILTER_LIST"|"FILTER_LIST"|string&{};
   export type CategoryValue = string;
   export type CategoryValueList = CategoryValue[];
   export interface CellValueSynonym {
@@ -2806,7 +2806,7 @@ declare namespace QuickSight {
      */
     ValueList?: StringList;
   }
-  export type ColorFillType = "DISCRETE"|"GRADIENT"|string;
+  export type ColorFillType = "DISCRETE"|"GRADIENT"|string&{};
   export type ColorList = HexColor[];
   export interface ColorScale {
     /**
@@ -2848,8 +2848,8 @@ declare namespace QuickSight {
     ColorsConfiguration?: ColorsConfiguration;
   }
   export type ColumnConfigurationList = ColumnConfiguration[];
-  export type ColumnDataRole = "DIMENSION"|"MEASURE"|string;
-  export type ColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|string;
+  export type ColumnDataRole = "DIMENSION"|"MEASURE"|string&{};
+  export type ColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|string&{};
   export interface ColumnDescription {
     /**
      * The text of a description for a column.
@@ -2923,8 +2923,8 @@ declare namespace QuickSight {
   export type ColumnList = ColumnName[];
   export type ColumnName = string;
   export type ColumnNameList = String[];
-  export type ColumnOrderingType = "GREATER_IS_BETTER"|"LESSER_IS_BETTER"|"SPECIFIED"|string;
-  export type ColumnRole = "DIMENSION"|"MEASURE"|string;
+  export type ColumnOrderingType = "GREATER_IS_BETTER"|"LESSER_IS_BETTER"|"SPECIFIED"|string&{};
+  export type ColumnRole = "DIMENSION"|"MEASURE"|string&{};
   export interface ColumnSchema {
     /**
      * The name of the column schema.
@@ -2962,7 +2962,7 @@ declare namespace QuickSight {
     ColumnDescription?: ColumnDescription;
   }
   export type ColumnTagList = ColumnTag[];
-  export type ColumnTagName = "COLUMN_GEOGRAPHIC_ROLE"|"COLUMN_DESCRIPTION"|string;
+  export type ColumnTagName = "COLUMN_GEOGRAPHIC_ROLE"|"COLUMN_DESCRIPTION"|string&{};
   export type ColumnTagNames = ColumnTagName[];
   export interface ColumnTooltipItem {
     /**
@@ -3150,7 +3150,7 @@ declare namespace QuickSight {
      */
     PercentageDisplayFormatConfiguration?: PercentageDisplayFormatConfiguration;
   }
-  export type ComparisonMethod = "DIFFERENCE"|"PERCENT_DIFFERENCE"|"PERCENT"|string;
+  export type ComparisonMethod = "DIFFERENCE"|"PERCENT_DIFFERENCE"|"PERCENT"|string&{};
   export interface Computation {
     /**
      * The top ranked and bottom ranked computation configuration.
@@ -3258,7 +3258,7 @@ declare namespace QuickSight {
      */
     IconDisplayOption?: ConditionalFormattingIconDisplayOption;
   }
-  export type ConditionalFormattingIconDisplayOption = "ICON_ONLY"|string;
+  export type ConditionalFormattingIconDisplayOption = "ICON_ONLY"|string&{};
   export interface ConditionalFormattingIconSet {
     /**
      * The expression that determines the formatting configuration for the icon set.
@@ -3269,7 +3269,7 @@ declare namespace QuickSight {
      */
     IconSetType?: ConditionalFormattingIconSetType;
   }
-  export type ConditionalFormattingIconSetType = "PLUS_MINUS"|"CHECK_X"|"THREE_COLOR_ARROW"|"THREE_GRAY_ARROW"|"CARET_UP_MINUS_DOWN"|"THREE_SHAPE"|"THREE_CIRCLE"|"FLAGS"|"BARS"|"FOUR_COLOR_ARROW"|"FOUR_GRAY_ARROW"|string;
+  export type ConditionalFormattingIconSetType = "PLUS_MINUS"|"CHECK_X"|"THREE_COLOR_ARROW"|"THREE_GRAY_ARROW"|"CARET_UP_MINUS_DOWN"|"THREE_SHAPE"|"THREE_CIRCLE"|"FLAGS"|"BARS"|"FOUR_COLOR_ARROW"|"FOUR_GRAY_ARROW"|string&{};
   export interface ConditionalFormattingSolidColor {
     /**
      * The expression that determines the formatting configuration for solid color.
@@ -3280,7 +3280,7 @@ declare namespace QuickSight {
      */
     Color?: HexColor;
   }
-  export type ConstantType = "SINGULAR"|"RANGE"|"COLLECTIVE"|string;
+  export type ConstantType = "SINGULAR"|"RANGE"|"COLLECTIVE"|string&{};
   export interface ContributionAnalysisDefault {
     /**
      * The measure field that is used in the contribution analysis.
@@ -4367,7 +4367,7 @@ declare namespace QuickSight {
      */
     AlternateDataSourceParameters?: DataSourceParametersList;
   }
-  export type CrossDatasetTypes = "ALL_DATASETS"|"SINGLE_DATASET"|string;
+  export type CrossDatasetTypes = "ALL_DATASETS"|"SINGLE_DATASET"|string&{};
   export type CurrencyCode = string;
   export interface CurrencyDisplayFormatConfiguration {
     /**
@@ -4465,8 +4465,8 @@ declare namespace QuickSight {
      */
     ImageScaling?: CustomContentImageScalingConfiguration;
   }
-  export type CustomContentImageScalingConfiguration = "FIT_TO_HEIGHT"|"FIT_TO_WIDTH"|"DO_NOT_SCALE"|"SCALE_TO_VISUAL"|string;
-  export type CustomContentType = "IMAGE"|"OTHER_EMBEDDED_CONTENT"|string;
+  export type CustomContentImageScalingConfiguration = "FIT_TO_HEIGHT"|"FIT_TO_WIDTH"|"DO_NOT_SCALE"|"SCALE_TO_VISUAL"|string&{};
+  export type CustomContentType = "IMAGE"|"OTHER_EMBEDDED_CONTENT"|string&{};
   export interface CustomContentVisual {
     /**
      * The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.
@@ -4614,7 +4614,7 @@ declare namespace QuickSight {
      */
     LastUpdatedTime?: Timestamp;
   }
-  export type DashboardBehavior = "ENABLED"|"DISABLED"|string;
+  export type DashboardBehavior = "ENABLED"|"DISABLED"|string&{};
   export interface DashboardError {
     /**
      * Type.
@@ -4630,8 +4630,8 @@ declare namespace QuickSight {
     ViolatedEntities?: EntityList;
   }
   export type DashboardErrorList = DashboardError[];
-  export type DashboardErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string;
-  export type DashboardFilterAttribute = "QUICKSIGHT_USER"|"QUICKSIGHT_VIEWER_OR_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DASHBOARD_NAME"|string;
+  export type DashboardErrorType = "ACCESS_DENIED"|"SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"PARAMETER_VALUE_INCOMPATIBLE"|"PARAMETER_TYPE_INVALID"|"PARAMETER_NOT_FOUND"|"COLUMN_TYPE_MISMATCH"|"COLUMN_GEOGRAPHIC_ROLE_MISMATCH"|"COLUMN_REPLACEMENT_MISSING"|string&{};
+  export type DashboardFilterAttribute = "QUICKSIGHT_USER"|"QUICKSIGHT_VIEWER_OR_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DASHBOARD_NAME"|string&{};
   export type DashboardName = string;
   export interface DashboardPublishOptions {
     /**
@@ -4741,7 +4741,7 @@ declare namespace QuickSight {
     LastPublishedTime?: Timestamp;
   }
   export type DashboardSummaryList = DashboardSummary[];
-  export type DashboardUIState = "EXPANDED"|"COLLAPSED"|string;
+  export type DashboardUIState = "EXPANDED"|"COLLAPSED"|string&{};
   export interface DashboardVersion {
     /**
      * The time that this dashboard version was created.
@@ -4924,7 +4924,7 @@ declare namespace QuickSight {
      */
     Settings?: LineChartSeriesSettings;
   }
-  export type DataLabelContent = "VALUE"|"PERCENT"|"VALUE_AND_PERCENT"|string;
+  export type DataLabelContent = "VALUE"|"PERCENT"|"VALUE_AND_PERCENT"|string&{};
   export interface DataLabelOptions {
     /**
      * Determines the visibility of the data labels.
@@ -4967,8 +4967,8 @@ declare namespace QuickSight {
      */
     TotalsVisibility?: Visibility;
   }
-  export type DataLabelOverlap = "DISABLE_OVERLAP"|"ENABLE_OVERLAP"|string;
-  export type DataLabelPosition = "INSIDE"|"OUTSIDE"|"LEFT"|"TOP"|"BOTTOM"|"RIGHT"|string;
+  export type DataLabelOverlap = "DISABLE_OVERLAP"|"ENABLE_OVERLAP"|string&{};
+  export type DataLabelPosition = "INSIDE"|"OUTSIDE"|"LEFT"|"TOP"|"BOTTOM"|"RIGHT"|string&{};
   export interface DataLabelType {
     /**
      * Determines the label configuration for the entire field.
@@ -5146,7 +5146,7 @@ declare namespace QuickSight {
     ColumnGroupSchemaList?: ColumnGroupSchemaList;
   }
   export type DataSetConfigurationList = DataSetConfiguration[];
-  export type DataSetFilterAttribute = "QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DATASET_NAME"|string;
+  export type DataSetFilterAttribute = "QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DATASET_NAME"|string&{};
   export type DataSetIdentifier = string;
   export interface DataSetIdentifierDeclaration {
     /**
@@ -5159,7 +5159,7 @@ declare namespace QuickSight {
     DataSetArn: Arn;
   }
   export type DataSetIdentifierDeclarationList = DataSetIdentifierDeclaration[];
-  export type DataSetImportMode = "SPICE"|"DIRECT_QUERY"|string;
+  export type DataSetImportMode = "SPICE"|"DIRECT_QUERY"|string&{};
   export type DataSetName = string;
   export interface DataSetReference {
     /**
@@ -5326,8 +5326,8 @@ declare namespace QuickSight {
      */
     Message?: String;
   }
-  export type DataSourceErrorInfoType = "ACCESS_DENIED"|"COPY_SOURCE_NOT_FOUND"|"TIMEOUT"|"ENGINE_VERSION_NOT_SUPPORTED"|"UNKNOWN_HOST"|"GENERIC_SQL_FAILURE"|"CONFLICT"|"UNKNOWN"|string;
-  export type DataSourceFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DATASOURCE_NAME"|string;
+  export type DataSourceErrorInfoType = "ACCESS_DENIED"|"COPY_SOURCE_NOT_FOUND"|"TIMEOUT"|"ENGINE_VERSION_NOT_SUPPORTED"|"UNKNOWN_HOST"|"GENERIC_SQL_FAILURE"|"CONFLICT"|"UNKNOWN"|string&{};
+  export type DataSourceFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DATASOURCE_NAME"|string&{};
   export type DataSourceList = DataSource[];
   export interface DataSourceParameters {
     /**
@@ -5466,7 +5466,7 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type DataSourceSummaryList = DataSourceSummary[];
-  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|"AMAZON_OPENSEARCH"|"EXASOL"|"DATABRICKS"|string;
+  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|"AMAZON_OPENSEARCH"|"EXASOL"|"DATABRICKS"|string&{};
   export type Database = string;
   export interface DatabricksParameters {
     /**
@@ -5537,9 +5537,9 @@ declare namespace QuickSight {
   export type DatasetParameterId = string;
   export type DatasetParameterList = DatasetParameter[];
   export type DatasetParameterName = string;
-  export type DatasetParameterValueType = "MULTI_VALUED"|"SINGLE_VALUED"|string;
+  export type DatasetParameterValueType = "MULTI_VALUED"|"SINGLE_VALUED"|string&{};
   export type Datasets = DatasetMetadata[];
-  export type DateAggregationFunction = "COUNT"|"DISTINCT_COUNT"|"MIN"|"MAX"|string;
+  export type DateAggregationFunction = "COUNT"|"DISTINCT_COUNT"|"MIN"|"MAX"|string&{};
   export interface DateAxisOptions {
     /**
      * Determines whether or not missing dates are displayed.
@@ -5711,7 +5711,7 @@ declare namespace QuickSight {
     CustomValue?: SensitiveTimestamp;
   }
   export type DayOfMonth = string;
-  export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
+  export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string&{};
   export type DbUsername = string;
   export interface DecimalDatasetParameter {
     /**
@@ -5797,7 +5797,7 @@ declare namespace QuickSight {
      */
     CustomValue?: SensitiveDouble;
   }
-  export type DefaultAggregation = "SUM"|"MAX"|"MIN"|"COUNT"|"DISTINCT_COUNT"|"AVERAGE"|"MEDIAN"|"STDEV"|"STDEVP"|"VAR"|"VARP"|string;
+  export type DefaultAggregation = "SUM"|"MAX"|"MIN"|"COUNT"|"DISTINCT_COUNT"|"AVERAGE"|"MEDIAN"|"STDEV"|"STDEVP"|"VAR"|"VARP"|string&{};
   export interface DefaultFormatting {
     /**
      * The display format. Valid values for this structure are AUTO, PERCENT, CURRENCY, NUMBER, DATE, and STRING.
@@ -7956,7 +7956,7 @@ declare namespace QuickSight {
     DateDimensionField?: DateDimensionField;
   }
   export type DimensionFieldList = DimensionField[];
-  export type DisplayFormat = "AUTO"|"PERCENT"|"CURRENCY"|"NUMBER"|"DATE"|"STRING"|string;
+  export type DisplayFormat = "AUTO"|"PERCENT"|"CURRENCY"|"NUMBER"|"DATE"|"STRING"|string&{};
   export interface DisplayFormatOptions {
     /**
      * A Boolean value that indicates whether to use blank cell format.
@@ -8069,8 +8069,8 @@ declare namespace QuickSight {
      */
     DefaultValueColumn: ColumnIdentifier;
   }
-  export type Edition = "STANDARD"|"ENTERPRISE"|"ENTERPRISE_AND_Q"|string;
-  export type EmbeddingIdentityType = "IAM"|"QUICKSIGHT"|"ANONYMOUS"|string;
+  export type Edition = "STANDARD"|"ENTERPRISE"|"ENTERPRISE_AND_Q"|string&{};
+  export type EmbeddingIdentityType = "IAM"|"QUICKSIGHT"|"ANONYMOUS"|string&{};
   export type EmbeddingUrl = string;
   export interface EmptyVisual {
     /**
@@ -8252,7 +8252,7 @@ declare namespace QuickSight {
     Visibility?: Visibility;
   }
   export type FieldValue = string;
-  export type FileFormat = "CSV"|"TSV"|"CLF"|"ELF"|"XLSX"|"JSON"|string;
+  export type FileFormat = "CSV"|"TSV"|"CLF"|"ELF"|"XLSX"|"JSON"|string&{};
   export interface FilledMapAggregatedFieldWells {
     /**
      * The aggregated location field well of the filled map. Values are grouped by location fields.
@@ -8386,7 +8386,7 @@ declare namespace QuickSight {
      */
     TopBottomFilter?: TopBottomFilter;
   }
-  export type FilterClass = "ENFORCED_VALUE_FILTER"|"CONDITIONAL_VALUE_FILTER"|"NAMED_VALUE_FILTER"|string;
+  export type FilterClass = "ENFORCED_VALUE_FILTER"|"CONDITIONAL_VALUE_FILTER"|"NAMED_VALUE_FILTER"|string&{};
   export interface FilterControl {
     /**
      * A control from a date filter that is used to specify date and time.
@@ -8538,7 +8538,7 @@ declare namespace QuickSight {
      */
     CascadingControlConfiguration?: CascadingControlConfiguration;
   }
-  export type FilterNullOption = "ALL_VALUES"|"NULLS_ONLY"|"NON_NULLS_ONLY"|string;
+  export type FilterNullOption = "ALL_VALUES"|"NULLS_ONLY"|"NON_NULLS_ONLY"|string&{};
   export interface FilterOperation {
     /**
      * An expression that must evaluate to a Boolean value. Rows for which the expression evaluates to true are kept in the dataset.
@@ -8565,7 +8565,7 @@ declare namespace QuickSight {
      */
     SameSheetTargetVisualConfiguration?: SameSheetTargetVisualConfiguration;
   }
-  export type FilterOperator = "StringEquals"|"StringLike"|string;
+  export type FilterOperator = "StringEquals"|"StringLike"|string&{};
   export interface FilterRelativeDateTimeControl {
     /**
      * The ID of the FilterTextAreaControl.
@@ -8674,7 +8674,7 @@ declare namespace QuickSight {
      */
     DisplayOptions?: TextFieldControlDisplayOptions;
   }
-  export type FilterVisualScope = "ALL_VISUALS"|"SELECTED_VISUALS"|string;
+  export type FilterVisualScope = "ALL_VISUALS"|"SELECTED_VISUALS"|string&{};
   export type FilteredVisualsList = ShortRestrictiveResourceId[];
   export interface Folder {
     /**
@@ -8711,7 +8711,7 @@ declare namespace QuickSight {
     SharingModel?: SharingModel;
   }
   export type FolderColumnList = String[];
-  export type FolderFilterAttribute = "PARENT_FOLDER_ARN"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"QUICKSIGHT_VIEWER_OR_OWNER"|"FOLDER_NAME"|string;
+  export type FolderFilterAttribute = "PARENT_FOLDER_ARN"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"QUICKSIGHT_VIEWER_OR_OWNER"|"FOLDER_NAME"|string&{};
   export interface FolderMember {
     /**
      * The ID of an asset in the folder.
@@ -8770,7 +8770,7 @@ declare namespace QuickSight {
     SharingModel?: SharingModel;
   }
   export type FolderSummaryList = FolderSummary[];
-  export type FolderType = "SHARED"|string;
+  export type FolderType = "SHARED"|string&{};
   export interface Font {
     /**
      * Determines the font family settings.
@@ -8799,7 +8799,7 @@ declare namespace QuickSight {
      */
     FontStyle?: FontStyle;
   }
-  export type FontDecoration = "UNDERLINE"|"NONE"|string;
+  export type FontDecoration = "UNDERLINE"|"NONE"|string&{};
   export type FontList = Font[];
   export interface FontSize {
     /**
@@ -8807,14 +8807,14 @@ declare namespace QuickSight {
      */
     Relative?: RelativeFontSize;
   }
-  export type FontStyle = "NORMAL"|"ITALIC"|string;
+  export type FontStyle = "NORMAL"|"ITALIC"|string&{};
   export interface FontWeight {
     /**
      * The lexical name for the level of boldness of the text display.
      */
     Name?: FontWeightName;
   }
-  export type FontWeightName = "NORMAL"|"BOLD"|string;
+  export type FontWeightName = "NORMAL"|"BOLD"|string&{};
   export interface ForecastComputation {
     /**
      * The ID for a computation.
@@ -8862,7 +8862,7 @@ declare namespace QuickSight {
     CustomSeasonalityValue?: ForecastComputationCustomSeasonalityValue;
   }
   export type ForecastComputationCustomSeasonalityValue = number;
-  export type ForecastComputationSeasonality = "AUTOMATIC"|"CUSTOM"|string;
+  export type ForecastComputationSeasonality = "AUTOMATIC"|"CUSTOM"|string&{};
   export interface ForecastConfiguration {
     /**
      * The forecast properties setup of a forecast in the line chart.
@@ -9071,7 +9071,7 @@ declare namespace QuickSight {
      */
     FunnelChartAggregatedFieldWells?: FunnelChartAggregatedFieldWells;
   }
-  export type FunnelChartMeasureDataLabelStyle = "VALUE_ONLY"|"PERCENTAGE_BY_FIRST_STAGE"|"PERCENTAGE_BY_PREVIOUS_STAGE"|"VALUE_AND_PERCENTAGE_BY_FIRST_STAGE"|"VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE"|string;
+  export type FunnelChartMeasureDataLabelStyle = "VALUE_ONLY"|"PERCENTAGE_BY_FIRST_STAGE"|"PERCENTAGE_BY_PREVIOUS_STAGE"|"VALUE_AND_PERCENTAGE_BY_FIRST_STAGE"|"VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE"|string&{};
   export type FunnelChartMeasureFieldList = MeasureField[];
   export interface FunnelChartSortConfiguration {
     /**
@@ -9320,8 +9320,8 @@ declare namespace QuickSight {
      */
     Columns: ColumnList;
   }
-  export type GeoSpatialCountryCode = "US"|string;
-  export type GeoSpatialDataRole = "COUNTRY"|"STATE"|"COUNTY"|"CITY"|"POSTCODE"|"LONGITUDE"|"LATITUDE"|string;
+  export type GeoSpatialCountryCode = "US"|string&{};
+  export type GeoSpatialDataRole = "COUNTRY"|"STATE"|"COUNTY"|"CITY"|"POSTCODE"|"LONGITUDE"|"LATITUDE"|string&{};
   export interface GeospatialCoordinateBounds {
     /**
      * The latitude of the north bound of the geospatial coordinate bounds.
@@ -9452,7 +9452,7 @@ declare namespace QuickSight {
      */
     HeatmapConfiguration?: GeospatialHeatmapConfiguration;
   }
-  export type GeospatialSelectedPointStyle = "POINT"|"CLUSTER"|"HEATMAP"|string;
+  export type GeospatialSelectedPointStyle = "POINT"|"CLUSTER"|"HEATMAP"|string&{};
   export interface GeospatialWindowOptions {
     /**
      * The bounds options (north, south, west, east) of the geospatial window options.
@@ -9655,8 +9655,8 @@ declare namespace QuickSight {
     PrincipalId?: String;
   }
   export type GroupDescription = string;
-  export type GroupFilterAttribute = "GROUP_NAME"|string;
-  export type GroupFilterOperator = "StartsWith"|string;
+  export type GroupFilterAttribute = "GROUP_NAME"|string&{};
+  export type GroupFilterOperator = "StartsWith"|string&{};
   export type GroupList = Group[];
   export interface GroupMember {
     /**
@@ -9858,7 +9858,7 @@ declare namespace QuickSight {
      */
     StartValue?: Double;
   }
-  export type HistogramBinType = "BIN_COUNT"|"BIN_WIDTH"|string;
+  export type HistogramBinType = "BIN_COUNT"|"BIN_WIDTH"|string&{};
   export interface HistogramConfiguration {
     /**
      * The field well configuration of a histogram.
@@ -9922,7 +9922,7 @@ declare namespace QuickSight {
      */
     Actions?: VisualCustomActionList;
   }
-  export type HorizontalTextAlignment = "LEFT"|"CENTER"|"RIGHT"|"AUTO"|string;
+  export type HorizontalTextAlignment = "LEFT"|"CENTER"|"RIGHT"|"AUTO"|string&{};
   export type Host = string;
   export interface IAMPolicyAssignment {
     /**
@@ -9963,12 +9963,12 @@ declare namespace QuickSight {
   }
   export type IAMPolicyAssignmentSummaryList = IAMPolicyAssignmentSummary[];
   export type IPv4Address = string;
-  export type Icon = "CARET_UP"|"CARET_DOWN"|"PLUS"|"MINUS"|"ARROW_UP"|"ARROW_DOWN"|"ARROW_LEFT"|"ARROW_UP_LEFT"|"ARROW_DOWN_LEFT"|"ARROW_RIGHT"|"ARROW_UP_RIGHT"|"ARROW_DOWN_RIGHT"|"FACE_UP"|"FACE_DOWN"|"FACE_FLAT"|"ONE_BAR"|"TWO_BAR"|"THREE_BAR"|"CIRCLE"|"TRIANGLE"|"SQUARE"|"FLAG"|"THUMBS_UP"|"THUMBS_DOWN"|"CHECKMARK"|"X"|string;
+  export type Icon = "CARET_UP"|"CARET_DOWN"|"PLUS"|"MINUS"|"ARROW_UP"|"ARROW_DOWN"|"ARROW_LEFT"|"ARROW_UP_LEFT"|"ARROW_DOWN_LEFT"|"ARROW_RIGHT"|"ARROW_UP_RIGHT"|"ARROW_DOWN_RIGHT"|"FACE_UP"|"FACE_DOWN"|"FACE_FLAT"|"ONE_BAR"|"TWO_BAR"|"THREE_BAR"|"CIRCLE"|"TRIANGLE"|"SQUARE"|"FLAG"|"THUMBS_UP"|"THUMBS_DOWN"|"CHECKMARK"|"X"|string&{};
   export type IdentityMap = {[key: string]: IdentityNameList};
   export type IdentityName = string;
   export type IdentityNameList = IdentityName[];
-  export type IdentityStore = "QUICKSIGHT"|string;
-  export type IdentityType = "IAM"|"QUICKSIGHT"|"IAM_IDENTITY_CENTER"|string;
+  export type IdentityStore = "QUICKSIGHT"|string&{};
+  export type IdentityType = "IAM"|"QUICKSIGHT"|"IAM_IDENTITY_CENTER"|string&{};
   export interface IncrementalRefresh {
     /**
      * The lookback window setup for an incremental refresh configuration.
@@ -10015,13 +10015,13 @@ declare namespace QuickSight {
      */
     RequestType?: IngestionRequestType;
   }
-  export type IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"|"INGESTION_SUPERSEDED"|"INGESTION_CANCELED"|"DATA_SET_DELETED"|"DATA_SET_NOT_SPICE"|"S3_UPLOADED_FILE_DELETED"|"S3_MANIFEST_ERROR"|"DATA_TOLERANCE_EXCEPTION"|"SPICE_TABLE_NOT_FOUND"|"DATA_SET_SIZE_LIMIT_EXCEEDED"|"ROW_SIZE_LIMIT_EXCEEDED"|"ACCOUNT_CAPACITY_LIMIT_EXCEEDED"|"CUSTOMER_ERROR"|"DATA_SOURCE_NOT_FOUND"|"IAM_ROLE_NOT_AVAILABLE"|"CONNECTION_FAILURE"|"SQL_TABLE_NOT_FOUND"|"PERMISSION_DENIED"|"SSL_CERTIFICATE_VALIDATION_FAILURE"|"OAUTH_TOKEN_FAILURE"|"SOURCE_API_LIMIT_EXCEEDED_FAILURE"|"PASSWORD_AUTHENTICATION_FAILURE"|"SQL_SCHEMA_MISMATCH_ERROR"|"INVALID_DATE_FORMAT"|"INVALID_DATAPREP_SYNTAX"|"SOURCE_RESOURCE_LIMIT_EXCEEDED"|"SQL_INVALID_PARAMETER_VALUE"|"QUERY_TIMEOUT"|"SQL_NUMERIC_OVERFLOW"|"UNRESOLVABLE_HOST"|"UNROUTABLE_HOST"|"SQL_EXCEPTION"|"S3_FILE_INACCESSIBLE"|"IOT_FILE_NOT_FOUND"|"IOT_DATA_SET_FILE_EMPTY"|"INVALID_DATA_SOURCE_CONFIG"|"DATA_SOURCE_AUTH_FAILED"|"DATA_SOURCE_CONNECTION_FAILED"|"FAILURE_TO_PROCESS_JSON_FILE"|"INTERNAL_SERVICE_ERROR"|"REFRESH_SUPPRESSED_BY_EDIT"|"PERMISSION_NOT_FOUND"|"ELASTICSEARCH_CURSOR_NOT_ENABLED"|"CURSOR_NOT_ENABLED"|"DUPLICATE_COLUMN_NAMES_FOUND"|string;
+  export type IngestionErrorType = "FAILURE_TO_ASSUME_ROLE"|"INGESTION_SUPERSEDED"|"INGESTION_CANCELED"|"DATA_SET_DELETED"|"DATA_SET_NOT_SPICE"|"S3_UPLOADED_FILE_DELETED"|"S3_MANIFEST_ERROR"|"DATA_TOLERANCE_EXCEPTION"|"SPICE_TABLE_NOT_FOUND"|"DATA_SET_SIZE_LIMIT_EXCEEDED"|"ROW_SIZE_LIMIT_EXCEEDED"|"ACCOUNT_CAPACITY_LIMIT_EXCEEDED"|"CUSTOMER_ERROR"|"DATA_SOURCE_NOT_FOUND"|"IAM_ROLE_NOT_AVAILABLE"|"CONNECTION_FAILURE"|"SQL_TABLE_NOT_FOUND"|"PERMISSION_DENIED"|"SSL_CERTIFICATE_VALIDATION_FAILURE"|"OAUTH_TOKEN_FAILURE"|"SOURCE_API_LIMIT_EXCEEDED_FAILURE"|"PASSWORD_AUTHENTICATION_FAILURE"|"SQL_SCHEMA_MISMATCH_ERROR"|"INVALID_DATE_FORMAT"|"INVALID_DATAPREP_SYNTAX"|"SOURCE_RESOURCE_LIMIT_EXCEEDED"|"SQL_INVALID_PARAMETER_VALUE"|"QUERY_TIMEOUT"|"SQL_NUMERIC_OVERFLOW"|"UNRESOLVABLE_HOST"|"UNROUTABLE_HOST"|"SQL_EXCEPTION"|"S3_FILE_INACCESSIBLE"|"IOT_FILE_NOT_FOUND"|"IOT_DATA_SET_FILE_EMPTY"|"INVALID_DATA_SOURCE_CONFIG"|"DATA_SOURCE_AUTH_FAILED"|"DATA_SOURCE_CONNECTION_FAILED"|"FAILURE_TO_PROCESS_JSON_FILE"|"INTERNAL_SERVICE_ERROR"|"REFRESH_SUPPRESSED_BY_EDIT"|"PERMISSION_NOT_FOUND"|"ELASTICSEARCH_CURSOR_NOT_ENABLED"|"CURSOR_NOT_ENABLED"|"DUPLICATE_COLUMN_NAMES_FOUND"|string&{};
   export type IngestionId = string;
   export type IngestionMaxResults = number;
-  export type IngestionRequestSource = "MANUAL"|"SCHEDULED"|string;
-  export type IngestionRequestType = "INITIAL_INGESTION"|"EDIT"|"INCREMENTAL_REFRESH"|"FULL_REFRESH"|string;
-  export type IngestionStatus = "INITIALIZED"|"QUEUED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string;
-  export type IngestionType = "INCREMENTAL_REFRESH"|"FULL_REFRESH"|string;
+  export type IngestionRequestSource = "MANUAL"|"SCHEDULED"|string&{};
+  export type IngestionRequestType = "INITIAL_INGESTION"|"EDIT"|"INCREMENTAL_REFRESH"|"FULL_REFRESH"|string&{};
+  export type IngestionStatus = "INITIALIZED"|"QUEUED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string&{};
+  export type IngestionType = "INCREMENTAL_REFRESH"|"FULL_REFRESH"|string&{};
   export type Ingestions = Ingestion[];
   export interface InputColumn {
     /**
@@ -10033,7 +10033,7 @@ declare namespace QuickSight {
      */
     Type: InputColumnDataType;
   }
-  export type InputColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|"BIT"|"BOOLEAN"|"JSON"|string;
+  export type InputColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|"BIT"|"BOOLEAN"|"JSON"|string&{};
   export type InputColumnList = InputColumn[];
   export interface InsightConfiguration {
     /**
@@ -10200,7 +10200,7 @@ declare namespace QuickSight {
      */
     UniqueKey?: Boolean;
   }
-  export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT"|string;
+  export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT"|string&{};
   export interface KPIConditionalFormatting {
     /**
      * The conditional formatting options of a KPI visual.
@@ -10363,7 +10363,7 @@ declare namespace QuickSight {
      */
     SectionBasedLayout?: SectionBasedLayoutConfiguration;
   }
-  export type LayoutElementType = "VISUAL"|"FILTER_CONTROL"|"PARAMETER_CONTROL"|"TEXT_BOX"|string;
+  export type LayoutElementType = "VISUAL"|"FILTER_CONTROL"|"PARAMETER_CONTROL"|"TEXT_BOX"|string&{};
   export type LayoutList = Layout[];
   export interface LegendOptions {
     /**
@@ -10387,7 +10387,7 @@ declare namespace QuickSight {
      */
     Height?: PixelLength;
   }
-  export type LegendPosition = "AUTO"|"RIGHT"|"BOTTOM"|"TOP"|string;
+  export type LegendPosition = "AUTO"|"RIGHT"|"BOTTOM"|"TOP"|string&{};
   export type Length = string;
   export type LimitedString = string;
   export interface LineChartAggregatedFieldWells {
@@ -10506,7 +10506,7 @@ declare namespace QuickSight {
      */
     LineChartAggregatedFieldWells?: LineChartAggregatedFieldWells;
   }
-  export type LineChartLineStyle = "SOLID"|"DOTTED"|"DASHED"|string;
+  export type LineChartLineStyle = "SOLID"|"DOTTED"|"DASHED"|string&{};
   export interface LineChartLineStyleSettings {
     /**
      * Configuration option that determines whether to show the line for the series.
@@ -10525,7 +10525,7 @@ declare namespace QuickSight {
      */
     LineWidth?: PixelLength;
   }
-  export type LineChartMarkerShape = "CIRCLE"|"TRIANGLE"|"SQUARE"|"DIAMOND"|"ROUNDED_SQUARE"|string;
+  export type LineChartMarkerShape = "CIRCLE"|"TRIANGLE"|"SQUARE"|"DIAMOND"|"ROUNDED_SQUARE"|string&{};
   export interface LineChartMarkerStyleSettings {
     /**
      * Configuration option that determines whether to show the markers in the series.
@@ -10576,7 +10576,7 @@ declare namespace QuickSight {
      */
     SmallMultiplesLimitConfiguration?: ItemsLimitConfiguration;
   }
-  export type LineChartType = "LINE"|"AREA"|"STACKED_AREA"|string;
+  export type LineChartType = "LINE"|"AREA"|"STACKED_AREA"|string&{};
   export interface LineChartVisual {
     /**
      * The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.
@@ -10603,7 +10603,7 @@ declare namespace QuickSight {
      */
     ColumnHierarchies?: ColumnHierarchyList;
   }
-  export type LineInterpolation = "LINEAR"|"SMOOTH"|"STEPPED"|string;
+  export type LineInterpolation = "LINEAR"|"SMOOTH"|"STEPPED"|string&{};
   export interface LineSeriesAxisDisplayOptions {
     /**
      * The options that determine the presentation of the line series axis.
@@ -11669,7 +11669,7 @@ declare namespace QuickSight {
      */
     SizeUnit: LookbackWindowSizeUnit;
   }
-  export type LookbackWindowSizeUnit = "HOUR"|"DAY"|"WEEK"|string;
+  export type LookbackWindowSizeUnit = "HOUR"|"DAY"|"WEEK"|string&{};
   export interface ManifestFileLocation {
     /**
      * Amazon S3 bucket.
@@ -11680,7 +11680,7 @@ declare namespace QuickSight {
      */
     Key: S3Key;
   }
-  export type MapZoomMode = "AUTO"|"MANUAL"|string;
+  export type MapZoomMode = "AUTO"|"MANUAL"|string&{};
   export interface MappedDataSetParameter {
     /**
      * A unique name that identifies a dataset within the analysis or dashboard.
@@ -11741,7 +11741,7 @@ declare namespace QuickSight {
      */
     Type: MaximumMinimumComputationType;
   }
-  export type MaximumMinimumComputationType = "MAXIMUM"|"MINIMUM"|string;
+  export type MaximumMinimumComputationType = "MAXIMUM"|"MINIMUM"|string&{};
   export interface MeasureField {
     /**
      * The measure type field with numerical type columns.
@@ -11771,7 +11771,7 @@ declare namespace QuickSight {
      */
     MemberArn?: Arn;
   }
-  export type MemberType = "DASHBOARD"|"ANALYSIS"|"DATASET"|string;
+  export type MemberType = "DASHBOARD"|"ANALYSIS"|"DATASET"|string&{};
   export interface MetricComparisonComputation {
     /**
      * The ID for a computation.
@@ -11807,7 +11807,7 @@ declare namespace QuickSight {
     TreatmentOption?: MissingDataTreatmentOption;
   }
   export type MissingDataConfigurationList = MissingDataConfiguration[];
-  export type MissingDataTreatmentOption = "INTERPOLATE"|"SHOW_AS_ZERO"|"SHOW_AS_BLANK"|string;
+  export type MissingDataTreatmentOption = "INTERPOLATE"|"SHOW_AS_ZERO"|"SHOW_AS_BLANK"|string&{};
   export interface MySqlParameters {
     /**
      * Host.
@@ -11822,7 +11822,7 @@ declare namespace QuickSight {
      */
     Database: Database;
   }
-  export type NamedEntityAggType = "SUM"|"MIN"|"MAX"|"COUNT"|"AVERAGE"|"DISTINCT_COUNT"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|"MEDIAN"|"CUSTOM"|string;
+  export type NamedEntityAggType = "SUM"|"MIN"|"MAX"|"COUNT"|"AVERAGE"|"DISTINCT_COUNT"|"STDEV"|"STDEVP"|"VAR"|"VARP"|"PERCENTILE"|"MEDIAN"|"CUSTOM"|string&{};
   export interface NamedEntityDefinition {
     /**
      * The name of the entity.
@@ -11856,8 +11856,8 @@ declare namespace QuickSight {
     AggregationFunctionParameters?: AggregationFunctionParameters;
   }
   export type NamedEntityDefinitions = NamedEntityDefinition[];
-  export type NamedFilterAggType = "NO_AGGREGATION"|"SUM"|"AVERAGE"|"COUNT"|"DISTINCT_COUNT"|"MAX"|"MEDIAN"|"MIN"|"STDEV"|"STDEVP"|"VAR"|"VARP"|string;
-  export type NamedFilterType = "CATEGORY_FILTER"|"NUMERIC_EQUALITY_FILTER"|"NUMERIC_RANGE_FILTER"|"DATE_RANGE_FILTER"|"RELATIVE_DATE_FILTER"|string;
+  export type NamedFilterAggType = "NO_AGGREGATION"|"SUM"|"AVERAGE"|"COUNT"|"DISTINCT_COUNT"|"MAX"|"MEDIAN"|"MIN"|"STDEV"|"STDEVP"|"VAR"|"VARP"|string&{};
+  export type NamedFilterType = "CATEGORY_FILTER"|"NUMERIC_EQUALITY_FILTER"|"NUMERIC_RANGE_FILTER"|"DATE_RANGE_FILTER"|"RELATIVE_DATE_FILTER"|string&{};
   export type Namespace = string;
   export interface NamespaceError {
     /**
@@ -11869,7 +11869,7 @@ declare namespace QuickSight {
      */
     Message?: String;
   }
-  export type NamespaceErrorType = "PERMISSION_DENIED"|"INTERNAL_SERVICE_ERROR"|string;
+  export type NamespaceErrorType = "PERMISSION_DENIED"|"INTERNAL_SERVICE_ERROR"|string&{};
   export interface NamespaceInfoV2 {
     /**
      * The name of the error.
@@ -11896,7 +11896,7 @@ declare namespace QuickSight {
      */
     NamespaceError?: NamespaceError;
   }
-  export type NamespaceStatus = "CREATED"|"CREATING"|"DELETING"|"RETRYABLE_FAILURE"|"NON_RETRYABLE_FAILURE"|string;
+  export type NamespaceStatus = "CREATED"|"CREATING"|"DELETING"|"RETRYABLE_FAILURE"|"NON_RETRYABLE_FAILURE"|string&{};
   export type Namespaces = NamespaceInfoV2[];
   export type NarrativeString = string;
   export interface NegativeFormat {
@@ -11915,7 +11915,7 @@ declare namespace QuickSight {
      */
     DisplayMode: NegativeValueDisplayMode;
   }
-  export type NegativeValueDisplayMode = "POSITIVE"|"NEGATIVE"|string;
+  export type NegativeValueDisplayMode = "POSITIVE"|"NEGATIVE"|string&{};
   export interface NetworkInterface {
     /**
      * The subnet ID associated with the network interface.
@@ -11940,7 +11940,7 @@ declare namespace QuickSight {
   }
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceList = NetworkInterface[];
-  export type NetworkInterfaceStatus = "CREATING"|"AVAILABLE"|"CREATION_FAILED"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETED"|"DELETION_FAILED"|"DELETION_SCHEDULED"|"ATTACHMENT_FAILED_ROLLBACK_FAILED"|string;
+  export type NetworkInterfaceStatus = "CREATING"|"AVAILABLE"|"CREATION_FAILED"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETED"|"DELETION_FAILED"|"DELETION_SCHEDULED"|"ATTACHMENT_FAILED_ROLLBACK_FAILED"|string&{};
   export interface NewDefaultValues {
     /**
      * A list of static default values for a given string parameter.
@@ -12004,7 +12004,7 @@ declare namespace QuickSight {
      */
     FormatConfiguration?: NumericFormatConfiguration;
   }
-  export type NumberScale = "NONE"|"AUTO"|"THOUSANDS"|"MILLIONS"|"BILLIONS"|"TRILLIONS"|string;
+  export type NumberScale = "NONE"|"AUTO"|"THOUSANDS"|"MILLIONS"|"BILLIONS"|"TRILLIONS"|string&{};
   export interface NumericAxisOptions {
     /**
      * The scale setup of a numeric axis.
@@ -12059,8 +12059,8 @@ declare namespace QuickSight {
      */
     NullOption: FilterNullOption;
   }
-  export type NumericEqualityMatchOperator = "EQUALS"|"DOES_NOT_EQUAL"|string;
-  export type NumericFilterSelectAllOptions = "FILTER_ALL_VALUES"|string;
+  export type NumericEqualityMatchOperator = "EQUALS"|"DOES_NOT_EQUAL"|string&{};
+  export type NumericFilterSelectAllOptions = "FILTER_ALL_VALUES"|string&{};
   export interface NumericFormatConfiguration {
     /**
      * The options that determine the number display format configuration.
@@ -12133,7 +12133,7 @@ declare namespace QuickSight {
      */
     ThousandsSeparator?: ThousandSeparatorOptions;
   }
-  export type NumericSeparatorSymbol = "COMMA"|"DOT"|"SPACE"|string;
+  export type NumericSeparatorSymbol = "COMMA"|"DOT"|"SPACE"|string&{};
   export interface NumericalAggregationFunction {
     /**
      * Built-in aggregation functions for numerical values.    SUM: The sum of a dimension or measure.     AVERAGE: The average of a dimension or measure.    MIN: The minimum value of a dimension or measure.    MAX: The maximum value of a dimension or measure.    COUNT: The count of a dimension or measure.    DISTINCT_COUNT: The count of distinct values in a dimension or measure.    VAR: The variance of a dimension or measure.    VARP: The partitioned variance of a dimension or measure.    STDEV: The standard deviation of a dimension or measure.    STDEVP: The partitioned standard deviation of a dimension or measure.    MEDIAN: The median value of a dimension or measure.  
@@ -12196,7 +12196,7 @@ declare namespace QuickSight {
      */
     Database: Database;
   }
-  export type OtherCategories = "INCLUDE"|"EXCLUDE"|string;
+  export type OtherCategories = "INCLUDE"|"EXCLUDE"|string&{};
   export interface OutputColumn {
     /**
      * A display name for the dataset.
@@ -12237,7 +12237,7 @@ declare namespace QuickSight {
      */
     PageNumber: PageNumber;
   }
-  export type PanelBorderStyle = "SOLID"|"DASHED"|"DOTTED"|string;
+  export type PanelBorderStyle = "SOLID"|"DASHED"|"DOTTED"|string&{};
   export interface PanelConfiguration {
     /**
      * Configures the title display within each small multiples panel.
@@ -12287,8 +12287,8 @@ declare namespace QuickSight {
      */
     HorizontalTextAlignment?: HorizontalTextAlignment;
   }
-  export type PaperOrientation = "PORTRAIT"|"LANDSCAPE"|string;
-  export type PaperSize = "US_LETTER"|"US_LEGAL"|"US_TABLOID_LEDGER"|"A0"|"A1"|"A2"|"A3"|"A4"|"A5"|"JIS_B4"|"JIS_B5"|string;
+  export type PaperOrientation = "PORTRAIT"|"LANDSCAPE"|string&{};
+  export type PaperSize = "US_LETTER"|"US_LEGAL"|"US_TABLOID_LEDGER"|"A0"|"A1"|"A2"|"A3"|"A4"|"A5"|"JIS_B4"|"JIS_B5"|string&{};
   export interface ParameterControl {
     /**
      * A control from a date parameter that specifies date and time.
@@ -12495,7 +12495,7 @@ declare namespace QuickSight {
      */
     DisplayOptions?: TextFieldControlDisplayOptions;
   }
-  export type ParameterValueType = "MULTI_VALUED"|"SINGLE_VALUED"|string;
+  export type ParameterValueType = "MULTI_VALUED"|"SINGLE_VALUED"|string&{};
   export interface Parameters {
     /**
      * The parameters that have a data type of string.
@@ -12792,7 +12792,7 @@ declare namespace QuickSight {
     Role?: PivotTableConditionalFormattingScopeRole;
   }
   export type PivotTableConditionalFormattingScopeList = PivotTableConditionalFormattingScope[];
-  export type PivotTableConditionalFormattingScopeRole = "FIELD"|"FIELD_TOTAL"|"GRAND_TOTAL"|string;
+  export type PivotTableConditionalFormattingScopeRole = "FIELD"|"FIELD_TOTAL"|"GRAND_TOTAL"|string&{};
   export interface PivotTableConfiguration {
     /**
      * The field wells of the visual.
@@ -12831,7 +12831,7 @@ declare namespace QuickSight {
   }
   export type PivotTableDataPathOptionList = PivotTableDataPathOption[];
   export type PivotTableDimensionList = DimensionField[];
-  export type PivotTableFieldCollapseState = "COLLAPSED"|"EXPANDED"|string;
+  export type PivotTableFieldCollapseState = "COLLAPSED"|"EXPANDED"|string&{};
   export interface PivotTableFieldCollapseStateOption {
     /**
      * A tagged-union object that sets the collapse state.
@@ -12895,7 +12895,7 @@ declare namespace QuickSight {
      */
     PivotTableAggregatedFieldWells?: PivotTableAggregatedFieldWells;
   }
-  export type PivotTableMetricPlacement = "ROW"|"COLUMN"|string;
+  export type PivotTableMetricPlacement = "ROW"|"COLUMN"|string&{};
   export interface PivotTableOptions {
     /**
      * The metric placement (row, column) options.
@@ -12971,7 +12971,7 @@ declare namespace QuickSight {
     CustomLabel?: PivotTableRowsLabelText;
   }
   export type PivotTableRowsLabelText = string;
-  export type PivotTableRowsLayout = "TABULAR"|"HIERARCHY"|string;
+  export type PivotTableRowsLayout = "TABULAR"|"HIERARCHY"|string&{};
   export interface PivotTableSortBy {
     /**
      * The field sort (field id, direction) for the pivot table sort by options.
@@ -12992,7 +12992,7 @@ declare namespace QuickSight {
      */
     FieldSortOptions?: PivotFieldSortOptionsList;
   }
-  export type PivotTableSubtotalLevel = "ALL"|"CUSTOM"|"LAST"|string;
+  export type PivotTableSubtotalLevel = "ALL"|"CUSTOM"|"LAST"|string&{};
   export interface PivotTableTotalOptions {
     /**
      * The row subtotal options.
@@ -13116,7 +13116,7 @@ declare namespace QuickSight {
      */
     Catalog: Catalog;
   }
-  export type PrimaryValueDisplayType = "HIDDEN"|"COMPARISON"|"ACTUAL"|string;
+  export type PrimaryValueDisplayType = "HIDDEN"|"COMPARISON"|"ACTUAL"|string&{};
   export type Principal = string;
   export type PrincipalList = String[];
   export interface ProgressBarOptions {
@@ -13132,8 +13132,8 @@ declare namespace QuickSight {
     ProjectedColumns: ProjectedColumnList;
   }
   export type ProjectedColumnList = String[];
-  export type PropertyRole = "PRIMARY"|"ID"|string;
-  export type PropertyUsage = "INHERIT"|"DIMENSION"|"MEASURE"|string;
+  export type PropertyRole = "PRIMARY"|"ID"|string&{};
+  export type PropertyUsage = "INHERIT"|"DIMENSION"|"MEASURE"|string&{};
   export interface PutDataSetRefreshPropertiesRequest {
     /**
      * The Amazon Web Services account ID.
@@ -13189,7 +13189,7 @@ declare namespace QuickSight {
      */
     Visibility?: Visibility;
   }
-  export type RadarChartAxesRangeScale = "AUTO"|"INDEPENDENT"|"SHARED"|string;
+  export type RadarChartAxesRangeScale = "AUTO"|"INDEPENDENT"|"SHARED"|string&{};
   export type RadarChartCategoryFieldList = DimensionField[];
   export type RadarChartColorFieldList = DimensionField[];
   export interface RadarChartConfiguration {
@@ -13266,7 +13266,7 @@ declare namespace QuickSight {
      */
     AreaStyleSettings?: RadarChartAreaStyleSettings;
   }
-  export type RadarChartShape = "CIRCLE"|"POLYGON"|string;
+  export type RadarChartShape = "CIRCLE"|"POLYGON"|string&{};
   export interface RadarChartSortConfiguration {
     /**
      * The category sort options of a radar chart.
@@ -13436,10 +13436,10 @@ declare namespace QuickSight {
      */
     VerticalPosition?: ReferenceLineLabelVerticalPosition;
   }
-  export type ReferenceLineLabelHorizontalPosition = "LEFT"|"CENTER"|"RIGHT"|string;
-  export type ReferenceLineLabelVerticalPosition = "ABOVE"|"BELOW"|string;
+  export type ReferenceLineLabelHorizontalPosition = "LEFT"|"CENTER"|"RIGHT"|string&{};
+  export type ReferenceLineLabelVerticalPosition = "ABOVE"|"BELOW"|string&{};
   export type ReferenceLineList = ReferenceLine[];
-  export type ReferenceLinePatternType = "SOLID"|"DASHED"|"DOTTED"|string;
+  export type ReferenceLinePatternType = "SOLID"|"DASHED"|"DOTTED"|string&{};
   export interface ReferenceLineStaticDataConfiguration {
     /**
      * The double input of the static data.
@@ -13466,7 +13466,7 @@ declare namespace QuickSight {
      */
     FormatConfiguration?: NumericFormatConfiguration;
   }
-  export type ReferenceLineValueLabelRelativePosition = "BEFORE_CUSTOM_LABEL"|"AFTER_CUSTOM_LABEL"|string;
+  export type ReferenceLineValueLabelRelativePosition = "BEFORE_CUSTOM_LABEL"|"AFTER_CUSTOM_LABEL"|string&{};
   export interface RefreshConfiguration {
     /**
      * The incremental refresh for the dataset.
@@ -13491,7 +13491,7 @@ declare namespace QuickSight {
      */
     TimeOfTheDay?: String;
   }
-  export type RefreshInterval = "MINUTE15"|"MINUTE30"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string;
+  export type RefreshInterval = "MINUTE15"|"MINUTE30"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string&{};
   export interface RefreshSchedule {
     /**
      * An identifier for the refresh schedule.
@@ -13688,7 +13688,7 @@ declare namespace QuickSight {
      */
     InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
-  export type RelativeDateType = "PREVIOUS"|"THIS"|"LAST"|"NOW"|"NEXT"|string;
+  export type RelativeDateType = "PREVIOUS"|"THIS"|"LAST"|"NOW"|"NEXT"|string&{};
   export interface RelativeDatesFilter {
     /**
      * An identifier that uniquely identifies a filter within a dashboard, analysis, or template.
@@ -13731,7 +13731,7 @@ declare namespace QuickSight {
      */
     ExcludePeriodConfiguration?: ExcludePeriodConfiguration;
   }
-  export type RelativeFontSize = "EXTRA_SMALL"|"SMALL"|"MEDIUM"|"LARGE"|"EXTRA_LARGE"|string;
+  export type RelativeFontSize = "EXTRA_SMALL"|"SMALL"|"MEDIUM"|"LARGE"|"EXTRA_LARGE"|string&{};
   export interface RenameColumnOperation {
     /**
      * The name of the column to be renamed.
@@ -13742,7 +13742,7 @@ declare namespace QuickSight {
      */
     NewColumnName: ColumnName;
   }
-  export type ResizeOption = "FIXED"|"RESPONSIVE"|string;
+  export type ResizeOption = "FIXED"|"RESPONSIVE"|string&{};
   export type ResourceId = string;
   export type ResourceName = string;
   export interface ResourcePermission {
@@ -13756,7 +13756,7 @@ declare namespace QuickSight {
     Actions: ActionList;
   }
   export type ResourcePermissionList = ResourcePermission[];
-  export type ResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"DELETED"|string;
+  export type ResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"DELETED"|string&{};
   export interface RestoreAnalysisRequest {
     /**
      * The ID of the Amazon Web Services account that contains the analysis.
@@ -13850,8 +13850,8 @@ declare namespace QuickSight {
      */
     Status?: Status;
   }
-  export type RowLevelPermissionFormatVersion = "VERSION_1"|"VERSION_2"|string;
-  export type RowLevelPermissionPolicy = "GRANT_ACCESS"|"DENY_ACCESS"|string;
+  export type RowLevelPermissionFormatVersion = "VERSION_1"|"VERSION_2"|string&{};
+  export type RowLevelPermissionPolicy = "GRANT_ACCESS"|"DENY_ACCESS"|string&{};
   export interface RowLevelPermissionTagConfiguration {
     /**
      * The status of row-level security tags. If enabled, the status is ENABLED. If disabled, the status is DISABLED.
@@ -14432,7 +14432,7 @@ declare namespace QuickSight {
      */
     After?: SectionAfterPageBreak;
   }
-  export type SectionPageBreakStatus = "ENABLED"|"DISABLED"|string;
+  export type SectionPageBreakStatus = "ENABLED"|"DISABLED"|string&{};
   export interface SectionStyle {
     /**
      * The height of a section. Heights can only be defined for header and footer sections. The default height margin is 0.5 inches. 
@@ -14445,16 +14445,16 @@ declare namespace QuickSight {
   }
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
-  export type SelectAllValueOptions = "ALL_VALUES"|string;
+  export type SelectAllValueOptions = "ALL_VALUES"|string&{};
   export type SelectedFieldList = FieldId[];
-  export type SelectedFieldOptions = "ALL_FIELDS"|string;
+  export type SelectedFieldOptions = "ALL_FIELDS"|string&{};
   export interface SelectedSheetsFilterScopeConfiguration {
     /**
      * The sheet ID and visual IDs of the sheet and visuals that the filter is applied to.
      */
     SheetVisualScopingConfigurations?: SheetVisualScopingConfigurations;
   }
-  export type SelectedTooltipType = "BASIC"|"DETAILED"|string;
+  export type SelectedTooltipType = "BASIC"|"DETAILED"|string&{};
   export interface SemanticEntityType {
     /**
      * The semantic entity type name.
@@ -14557,7 +14557,7 @@ declare namespace QuickSight {
      */
     BackgroundColor: ConditionalFormattingColor;
   }
-  export type SharingModel = "ACCOUNT"|"NAMESPACE"|string;
+  export type SharingModel = "ACCOUNT"|"NAMESPACE"|string&{};
   export interface Sheet {
     /**
      * The unique identifier associated with a sheet.
@@ -14568,8 +14568,8 @@ declare namespace QuickSight {
      */
     Name?: SheetName;
   }
-  export type SheetContentType = "PAGINATED"|"INTERACTIVE"|string;
-  export type SheetControlDateTimePickerType = "SINGLE_VALUED"|"DATE_RANGE"|string;
+  export type SheetContentType = "PAGINATED"|"INTERACTIVE"|string&{};
+  export type SheetControlDateTimePickerType = "SINGLE_VALUED"|"DATE_RANGE"|string&{};
   export interface SheetControlInfoIconLabelOptions {
     /**
      * The visibility configuration of info icon label options.
@@ -14594,8 +14594,8 @@ declare namespace QuickSight {
     GridLayout?: GridLayoutConfiguration;
   }
   export type SheetControlLayoutList = SheetControlLayout[];
-  export type SheetControlListType = "MULTI_SELECT"|"SINGLE_SELECT"|string;
-  export type SheetControlSliderType = "SINGLE_POINT"|"RANGE"|string;
+  export type SheetControlListType = "MULTI_SELECT"|"SINGLE_SELECT"|string&{};
+  export type SheetControlSliderType = "SINGLE_POINT"|"RANGE"|string&{};
   export type SheetControlTitle = string;
   export interface SheetControlsOption {
     /**
@@ -14745,14 +14745,14 @@ declare namespace QuickSight {
      */
     directoryType?: String;
   }
-  export type SimpleAttributeAggregationFunction = "UNIQUE_VALUE"|string;
+  export type SimpleAttributeAggregationFunction = "UNIQUE_VALUE"|string&{};
   export interface SimpleClusterMarker {
     /**
      * The color of the simple cluster marker.
      */
     Color?: HexColor;
   }
-  export type SimpleNumericalAggregationFunction = "SUM"|"AVERAGE"|"MIN"|"MAX"|"COUNT"|"DISTINCT_COUNT"|"VAR"|"VARP"|"STDEV"|"STDEVP"|"MEDIAN"|string;
+  export type SimpleNumericalAggregationFunction = "SUM"|"AVERAGE"|"MIN"|"MAX"|"COUNT"|"DISTINCT_COUNT"|"VAR"|"VARP"|"STDEV"|"STDEVP"|"MEDIAN"|string&{};
   export type SiteBaseUrl = string;
   export interface SliderControlDisplayOptions {
     /**
@@ -14764,7 +14764,7 @@ declare namespace QuickSight {
      */
     InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
-  export type SmallMultiplesAxisPlacement = "OUTSIDE"|"INSIDE"|string;
+  export type SmallMultiplesAxisPlacement = "OUTSIDE"|"INSIDE"|string&{};
   export interface SmallMultiplesAxisProperties {
     /**
      * Determines whether scale of the axes are shared or independent. The default value is SHARED.
@@ -14775,7 +14775,7 @@ declare namespace QuickSight {
      */
     Placement?: SmallMultiplesAxisPlacement;
   }
-  export type SmallMultiplesAxisScale = "SHARED"|"INDEPENDENT"|string;
+  export type SmallMultiplesAxisScale = "SHARED"|"INDEPENDENT"|string&{};
   export type SmallMultiplesDimensionFieldList = DimensionField[];
   export interface SmallMultiplesOptions {
     /**
@@ -14840,7 +14840,7 @@ declare namespace QuickSight {
      */
     FormatType: SnapshotFileFormatType;
   }
-  export type SnapshotFileFormatType = "CSV"|"PDF"|"EXCEL"|string;
+  export type SnapshotFileFormatType = "CSV"|"PDF"|"EXCEL"|string&{};
   export interface SnapshotFileGroup {
     /**
      * A list of SnapshotFile objects that contain the information on the snapshot files that need to be generated. This structure can hold 1 configuration at a time.
@@ -14864,7 +14864,7 @@ declare namespace QuickSight {
     VisualIds?: SnapshotFileSheetSelectionVisualIdList;
   }
   export type SnapshotFileSheetSelectionList = SnapshotFileSheetSelection[];
-  export type SnapshotFileSheetSelectionScope = "ALL_VISUALS"|"SELECTED_VISUALS"|string;
+  export type SnapshotFileSheetSelectionScope = "ALL_VISUALS"|"SELECTED_VISUALS"|string&{};
   export type SnapshotFileSheetSelectionVisualIdList = ShortRestrictiveResourceId[];
   export interface SnapshotJobErrorInfo {
     /**
@@ -14919,7 +14919,7 @@ declare namespace QuickSight {
     ErrorInfo?: SnapshotJobResultErrorInfoList;
   }
   export type SnapshotJobS3ResultList = SnapshotJobS3Result[];
-  export type SnapshotJobStatus = "QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type SnapshotJobStatus = "QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|string&{};
   export interface SnapshotS3DestinationConfiguration {
     /**
      * A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.
@@ -14953,7 +14953,7 @@ declare namespace QuickSight {
      */
     Warehouse: Warehouse;
   }
-  export type SortDirection = "ASC"|"DESC"|string;
+  export type SortDirection = "ASC"|"DESC"|string&{};
   export interface Spacing {
     /**
      * Define the top spacing.
@@ -14982,7 +14982,7 @@ declare namespace QuickSight {
      */
     Port: Port;
   }
-  export type SpecialValue = "EMPTY"|"NULL"|"OTHER"|string;
+  export type SpecialValue = "EMPTY"|"NULL"|"OTHER"|string&{};
   export type SqlEndpointPath = string;
   export type SqlQuery = string;
   export interface SqlServerParameters {
@@ -15135,7 +15135,7 @@ declare namespace QuickSight {
      */
     Enabled: Boolean;
   }
-  export type Status = "ENABLED"|"DISABLED"|string;
+  export type Status = "ENABLED"|"DISABLED"|string&{};
   export type StatusCode = number;
   export type String = string;
   export interface StringDatasetParameter {
@@ -15226,7 +15226,7 @@ declare namespace QuickSight {
      */
     CustomValue?: SensitiveString;
   }
-  export type StyledCellType = "TOTAL"|"METRIC_HEADER"|"VALUE"|string;
+  export type StyledCellType = "TOTAL"|"METRIC_HEADER"|"VALUE"|string&{};
   export type SubnetId = string;
   export type SubnetIdList = SubnetId[];
   export interface SubtotalOptions {
@@ -15289,7 +15289,7 @@ declare namespace QuickSight {
      */
     Style?: TableBorderStyle;
   }
-  export type TableBorderStyle = "NONE"|"SOLID"|string;
+  export type TableBorderStyle = "NONE"|"SOLID"|string&{};
   export type TableBorderThickness = number;
   export interface TableCellConditionalFormatting {
     /**
@@ -15301,7 +15301,7 @@ declare namespace QuickSight {
      */
     TextFormat?: TextConditionalFormat;
   }
-  export type TableCellImageScalingConfiguration = "FIT_TO_CELL_HEIGHT"|"FIT_TO_CELL_WIDTH"|"DO_NOT_SCALE"|string;
+  export type TableCellImageScalingConfiguration = "FIT_TO_CELL_HEIGHT"|"FIT_TO_CELL_WIDTH"|"DO_NOT_SCALE"|string&{};
   export interface TableCellImageSizingConfiguration {
     /**
      * The cell scaling configuration of the sizing options for the table image configuration.
@@ -15406,7 +15406,7 @@ declare namespace QuickSight {
     FontConfiguration: FontConfiguration;
   }
   export type TableFieldHeight = number;
-  export type TableFieldIconSetType = "LINK"|string;
+  export type TableFieldIconSetType = "LINK"|string&{};
   export interface TableFieldImageConfiguration {
     /**
      * The sizing options for the table image configuration.
@@ -15516,7 +15516,7 @@ declare namespace QuickSight {
      */
     RowAlternateColorOptions?: RowAlternateColorOptions;
   }
-  export type TableOrientation = "VERTICAL"|"HORIZONTAL"|string;
+  export type TableOrientation = "VERTICAL"|"HORIZONTAL"|string&{};
   export interface TablePaginatedReportOptions {
     /**
      * The visibility of printing table overflow across pages.
@@ -15586,8 +15586,8 @@ declare namespace QuickSight {
     CellType: StyledCellType;
   }
   export type TableStyleTargetList = TableStyleTarget[];
-  export type TableTotalsPlacement = "START"|"END"|string;
-  export type TableTotalsScrollStatus = "PINNED"|"SCROLLED"|string;
+  export type TableTotalsPlacement = "START"|"END"|string&{};
+  export type TableTotalsScrollStatus = "PINNED"|"SCROLLED"|string&{};
   export interface TableUnaggregatedFieldWells {
     /**
      * The values field well for a pivot table. Values are unaggregated for an unaggregated table.
@@ -15665,7 +15665,7 @@ declare namespace QuickSight {
   }
   export type TagValue = string;
   export type TargetVisualList = ShortRestrictiveResourceId[];
-  export type TargetVisualOptions = "ALL_VISUALS"|string;
+  export type TargetVisualOptions = "ALL_VISUALS"|string&{};
   export interface Template {
     /**
      * The Amazon Resource Name (ARN) of the template.
@@ -15722,7 +15722,7 @@ declare namespace QuickSight {
     ViolatedEntities?: EntityList;
   }
   export type TemplateErrorList = TemplateError[];
-  export type TemplateErrorType = "SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"ACCESS_DENIED"|string;
+  export type TemplateErrorType = "SOURCE_NOT_FOUND"|"DATA_SET_NOT_FOUND"|"INTERNAL_FAILURE"|"ACCESS_DENIED"|string&{};
   export type TemplateName = string;
   export interface TemplateSourceAnalysis {
     /**
@@ -15928,8 +15928,8 @@ declare namespace QuickSight {
      */
     InfoIconLabelOptions?: SheetControlInfoIconLabelOptions;
   }
-  export type TextQualifier = "DOUBLE_QUOTE"|"SINGLE_QUOTE"|string;
-  export type TextWrap = "NONE"|"WRAP"|string;
+  export type TextQualifier = "DOUBLE_QUOTE"|"SINGLE_QUOTE"|string&{};
+  export type TextWrap = "NONE"|"WRAP"|string&{};
   export interface Theme {
     /**
      * The Amazon Resource Name (ARN) of the theme.
@@ -15998,7 +15998,7 @@ declare namespace QuickSight {
     Message?: NonEmptyString;
   }
   export type ThemeErrorList = ThemeError[];
-  export type ThemeErrorType = "INTERNAL_FAILURE"|string;
+  export type ThemeErrorType = "INTERNAL_FAILURE"|string&{};
   export type ThemeName = string;
   export interface ThemeSummary {
     /**
@@ -16027,7 +16027,7 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type ThemeSummaryList = ThemeSummary[];
-  export type ThemeType = "QUICKSIGHT"|"CUSTOM"|"ALL"|string;
+  export type ThemeType = "QUICKSIGHT"|"CUSTOM"|"ALL"|string&{};
   export interface ThemeVersion {
     /**
      * The version number of the theme.
@@ -16159,7 +16159,7 @@ declare namespace QuickSight {
      */
     TimeGranularity?: TimeGranularity;
   }
-  export type TimeGranularity = "YEAR"|"QUARTER"|"MONTH"|"WEEK"|"DAY"|"HOUR"|"MINUTE"|"SECOND"|"MILLISECOND"|string;
+  export type TimeGranularity = "YEAR"|"QUARTER"|"MONTH"|"WEEK"|"DAY"|"HOUR"|"MINUTE"|"SECOND"|"MILLISECOND"|string&{};
   export interface TimeRangeDrillDownFilter {
     /**
      * The column that the filter is applied to.
@@ -16256,8 +16256,8 @@ declare namespace QuickSight {
      */
     FieldBasedTooltip?: FieldBasedTooltip;
   }
-  export type TooltipTitleType = "NONE"|"PRIMARY_VALUE"|string;
-  export type TopBottomComputationType = "TOP"|"BOTTOM"|string;
+  export type TooltipTitleType = "NONE"|"PRIMARY_VALUE"|string&{};
+  export type TopBottomComputationType = "TOP"|"BOTTOM"|string&{};
   export interface TopBottomFilter {
     /**
      * An identifier that uniquely identifies a filter within a dashboard, analysis, or template.
@@ -16346,7 +16346,7 @@ declare namespace QuickSight {
     Type: TopBottomComputationType;
   }
   export type TopBottomRankedComputationResultSize = number;
-  export type TopBottomSortOrder = "PERCENT_DIFFERENCE"|"ABSOLUTE_DIFFERENCE"|string;
+  export type TopBottomSortOrder = "PERCENT_DIFFERENCE"|"ABSOLUTE_DIFFERENCE"|string&{};
   export interface TopicCalculatedField {
     /**
      * The calculated field name.
@@ -16640,7 +16640,7 @@ declare namespace QuickSight {
      */
     Aggregation?: NamedFilterAggType;
   }
-  export type TopicNumericSeparatorSymbol = "COMMA"|"DOT"|string;
+  export type TopicNumericSeparatorSymbol = "COMMA"|"DOT"|string&{};
   export interface TopicRangeFilterConstant {
     /**
      * The data type of the constant value that is used in a range filter. Valid values for this structure are RANGE.
@@ -16710,7 +16710,7 @@ declare namespace QuickSight {
      */
     RefreshSchedule?: TopicRefreshSchedule;
   }
-  export type TopicRefreshStatus = "INITIALIZED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string;
+  export type TopicRefreshStatus = "INITIALIZED"|"RUNNING"|"FAILED"|"COMPLETED"|"CANCELLED"|string&{};
   export interface TopicRelativeDateFilter {
     /**
      * The level of time precision that is used to aggregate DateTime values.
@@ -16725,8 +16725,8 @@ declare namespace QuickSight {
      */
     Constant?: TopicSingularFilterConstant;
   }
-  export type TopicRelativeDateFilterFunction = "PREVIOUS"|"THIS"|"LAST"|"NEXT"|"NOW"|string;
-  export type TopicScheduleType = "HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string;
+  export type TopicRelativeDateFilterFunction = "PREVIOUS"|"THIS"|"LAST"|"NEXT"|"NOW"|string&{};
+  export type TopicScheduleType = "HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|string&{};
   export interface TopicSingularFilterConstant {
     /**
      * The type of the singular filter constant. Valid values for this structure are SINGULAR.
@@ -16752,7 +16752,7 @@ declare namespace QuickSight {
      */
     Name?: ResourceName;
   }
-  export type TopicTimeGranularity = "SECOND"|"MINUTE"|"HOUR"|"DAY"|"WEEK"|"MONTH"|"QUARTER"|"YEAR"|string;
+  export type TopicTimeGranularity = "SECOND"|"MINUTE"|"HOUR"|"DAY"|"WEEK"|"MONTH"|"QUARTER"|"YEAR"|string&{};
   export interface TotalAggregationComputation {
     /**
      * The ID for a computation.
@@ -17005,7 +17005,7 @@ declare namespace QuickSight {
     MeasureForeground?: HexColor;
   }
   export type URLOperationTemplate = string;
-  export type URLTargetConfiguration = "NEW_TAB"|"NEW_WINDOW"|"SAME_TAB"|string;
+  export type URLTargetConfiguration = "NEW_TAB"|"NEW_WINDOW"|"SAME_TAB"|string&{};
   export interface UnaggregatedField {
     /**
      * The custom field ID.
@@ -17021,7 +17021,7 @@ declare namespace QuickSight {
     FormatConfiguration?: FormatConfiguration;
   }
   export type UnaggregatedFieldList = UnaggregatedField[];
-  export type UndefinedSpecifiedValueType = "LEAST"|"MOST"|string;
+  export type UndefinedSpecifiedValueType = "LEAST"|"MOST"|string&{};
   export type UnicodeIcon = string;
   export interface UniqueValuesComputation {
     /**
@@ -18365,7 +18365,7 @@ declare namespace QuickSight {
   }
   export type UserList = User[];
   export type UserName = string;
-  export type UserRole = "ADMIN"|"AUTHOR"|"READER"|"RESTRICTED_AUTHOR"|"RESTRICTED_READER"|string;
+  export type UserRole = "ADMIN"|"AUTHOR"|"READER"|"RESTRICTED_AUTHOR"|"RESTRICTED_READER"|string&{};
   export interface VPCConnection {
     /**
      * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
@@ -18416,10 +18416,10 @@ declare namespace QuickSight {
      */
     LastUpdatedTime?: Timestamp;
   }
-  export type VPCConnectionAvailabilityStatus = "AVAILABLE"|"UNAVAILABLE"|"PARTIALLY_AVAILABLE"|string;
+  export type VPCConnectionAvailabilityStatus = "AVAILABLE"|"UNAVAILABLE"|"PARTIALLY_AVAILABLE"|string&{};
   export type VPCConnectionResourceIdRestricted = string;
   export type VPCConnectionResourceIdUnrestricted = string;
-  export type VPCConnectionResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"DELETION_IN_PROGRESS"|"DELETION_FAILED"|"DELETED"|string;
+  export type VPCConnectionResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"DELETION_IN_PROGRESS"|"DELETION_FAILED"|"DELETED"|string&{};
   export interface VPCConnectionSummary {
     /**
      * The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
@@ -18471,11 +18471,11 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type VPCConnectionSummaryList = VPCConnectionSummary[];
-  export type ValueWhenUnsetOption = "RECOMMENDED_VALUE"|"NULL"|string;
+  export type ValueWhenUnsetOption = "RECOMMENDED_VALUE"|"NULL"|string&{};
   export type VersionDescription = string;
   export type VersionNumber = number;
-  export type VerticalTextAlignment = "TOP"|"MIDDLE"|"BOTTOM"|"AUTO"|string;
-  export type Visibility = "HIDDEN"|"VISIBLE"|string;
+  export type VerticalTextAlignment = "TOP"|"MIDDLE"|"BOTTOM"|"AUTO"|string&{};
+  export type Visibility = "HIDDEN"|"VISIBLE"|string&{};
   export type VisiblePanelColumns = number;
   export type VisiblePanelRows = number;
   export interface VisibleRangeOptions {
@@ -18627,7 +18627,7 @@ declare namespace QuickSight {
     SetParametersOperation?: CustomActionSetParametersOperation;
   }
   export type VisualCustomActionOperationList = VisualCustomActionOperation[];
-  export type VisualCustomActionTrigger = "DATA_POINT_CLICK"|"DATA_POINT_MENU"|string;
+  export type VisualCustomActionTrigger = "DATA_POINT_CLICK"|"DATA_POINT_MENU"|string&{};
   export type VisualList = Visual[];
   export interface VisualMenuOption {
     /**
@@ -18800,7 +18800,7 @@ declare namespace QuickSight {
      */
     Value: Double;
   }
-  export type WidgetStatus = "ENABLED"|"DISABLED"|string;
+  export type WidgetStatus = "ENABLED"|"DISABLED"|string&{};
   export interface WordCloudAggregatedFieldWells {
     /**
      * The group by field well of a word cloud. Values are grouped by group by fields.
@@ -18829,7 +18829,7 @@ declare namespace QuickSight {
      */
     WordCloudOptions?: WordCloudOptions;
   }
-  export type WordCloudCloudLayout = "FLUID"|"NORMAL"|string;
+  export type WordCloudCloudLayout = "FLUID"|"NORMAL"|string&{};
   export type WordCloudDimensionFieldList = DimensionField[];
   export interface WordCloudFieldWells {
     /**
@@ -18901,10 +18901,10 @@ declare namespace QuickSight {
      */
     ColumnHierarchies?: ColumnHierarchyList;
   }
-  export type WordCloudWordCasing = "LOWER_CASE"|"EXISTING_CASE"|string;
-  export type WordCloudWordOrientation = "HORIZONTAL"|"HORIZONTAL_AND_VERTICAL"|string;
-  export type WordCloudWordPadding = "NONE"|"SMALL"|"MEDIUM"|"LARGE"|string;
-  export type WordCloudWordScaling = "EMPHASIZE"|"NORMAL"|string;
+  export type WordCloudWordCasing = "LOWER_CASE"|"EXISTING_CASE"|string&{};
+  export type WordCloudWordOrientation = "HORIZONTAL"|"HORIZONTAL_AND_VERTICAL"|string&{};
+  export type WordCloudWordPadding = "NONE"|"SMALL"|"MEDIUM"|"LARGE"|string&{};
+  export type WordCloudWordScaling = "EMPHASIZE"|"NORMAL"|string&{};
   export type WorkGroup = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

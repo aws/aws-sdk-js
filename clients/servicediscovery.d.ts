@@ -355,7 +355,7 @@ declare namespace ServiceDiscovery {
      */
     Service?: Service;
   }
-  export type CustomHealthStatus = "HEALTHY"|"UNHEALTHY"|string;
+  export type CustomHealthStatus = "HEALTHY"|"UNHEALTHY"|string&{};
   export interface DeleteNamespaceRequest {
     /**
      * The ID of the namespace that you want to delete.
@@ -467,7 +467,7 @@ declare namespace ServiceDiscovery {
   }
   export type DnsRecordList = DnsRecord[];
   export type FailureThreshold = number;
-  export type FilterCondition = "EQ"|"IN"|"BETWEEN"|"BEGINS_WITH"|string;
+  export type FilterCondition = "EQ"|"IN"|"BETWEEN"|"BEGINS_WITH"|string&{};
   export type FilterValue = string;
   export type FilterValues = FilterValue[];
   export interface GetInstanceRequest {
@@ -570,9 +570,9 @@ declare namespace ServiceDiscovery {
      */
     FailureThreshold?: FailureThreshold;
   }
-  export type HealthCheckType = "HTTP"|"HTTPS"|"TCP"|string;
-  export type HealthStatus = "HEALTHY"|"UNHEALTHY"|"UNKNOWN"|string;
-  export type HealthStatusFilter = "HEALTHY"|"UNHEALTHY"|"ALL"|"HEALTHY_OR_ELSE_ALL"|string;
+  export type HealthCheckType = "HTTP"|"HTTPS"|"TCP"|string&{};
+  export type HealthStatus = "HEALTHY"|"UNHEALTHY"|"UNKNOWN"|string&{};
+  export type HealthStatusFilter = "HEALTHY"|"UNHEALTHY"|"ALL"|"HEALTHY_OR_ELSE_ALL"|string&{};
   export interface HttpInstanceSummary {
     /**
      * The ID of an instance that matches the values that you specified in the request.
@@ -798,7 +798,7 @@ declare namespace ServiceDiscovery {
      */
     Condition?: FilterCondition;
   }
-  export type NamespaceFilterName = "TYPE"|"NAME"|"HTTP_NAME"|string;
+  export type NamespaceFilterName = "TYPE"|"NAME"|"HTTP_NAME"|string&{};
   export type NamespaceFilters = NamespaceFilter[];
   export type NamespaceName = string;
   export type NamespaceNameHttp = string;
@@ -849,7 +849,7 @@ declare namespace ServiceDiscovery {
      */
     CreateDate?: Timestamp;
   }
-  export type NamespaceType = "DNS_PUBLIC"|"DNS_PRIVATE"|"HTTP"|string;
+  export type NamespaceType = "DNS_PUBLIC"|"DNS_PRIVATE"|"HTTP"|string&{};
   export type NextToken = string;
   export interface Operation {
     /**
@@ -899,10 +899,10 @@ declare namespace ServiceDiscovery {
      */
     Condition?: FilterCondition;
   }
-  export type OperationFilterName = "NAMESPACE_ID"|"SERVICE_ID"|"STATUS"|"TYPE"|"UPDATE_DATE"|string;
+  export type OperationFilterName = "NAMESPACE_ID"|"SERVICE_ID"|"STATUS"|"TYPE"|"UPDATE_DATE"|string&{};
   export type OperationFilters = OperationFilter[];
   export type OperationId = string;
-  export type OperationStatus = "SUBMITTED"|"PENDING"|"SUCCESS"|"FAIL"|string;
+  export type OperationStatus = "SUBMITTED"|"PENDING"|"SUCCESS"|"FAIL"|string&{};
   export interface OperationSummary {
     /**
      * The ID for an operation.
@@ -914,9 +914,9 @@ declare namespace ServiceDiscovery {
     Status?: OperationStatus;
   }
   export type OperationSummaryList = OperationSummary[];
-  export type OperationTargetType = "NAMESPACE"|"SERVICE"|"INSTANCE"|string;
+  export type OperationTargetType = "NAMESPACE"|"SERVICE"|"INSTANCE"|string&{};
   export type OperationTargetsMap = {[key: string]: ResourceId};
-  export type OperationType = "CREATE_NAMESPACE"|"DELETE_NAMESPACE"|"UPDATE_NAMESPACE"|"UPDATE_SERVICE"|"REGISTER_INSTANCE"|"DEREGISTER_INSTANCE"|string;
+  export type OperationType = "CREATE_NAMESPACE"|"DELETE_NAMESPACE"|"UPDATE_NAMESPACE"|"UPDATE_SERVICE"|"REGISTER_INSTANCE"|"DEREGISTER_INSTANCE"|string&{};
   export interface PrivateDnsNamespaceChange {
     /**
      * An updated description for the private DNS namespace.
@@ -986,7 +986,7 @@ declare namespace ServiceDiscovery {
     SOA: SOAChange;
   }
   export type RecordTTL = number;
-  export type RecordType = "SRV"|"A"|"AAAA"|"CNAME"|string;
+  export type RecordType = "SRV"|"A"|"AAAA"|"CNAME"|string&{};
   export interface RegisterInstanceRequest {
     /**
      * The ID of the service that you want to use for settings for the instance.
@@ -1015,7 +1015,7 @@ declare namespace ServiceDiscovery {
   export type ResourceDescription = string;
   export type ResourceId = string;
   export type ResourcePath = string;
-  export type RoutingPolicy = "MULTIVALUE"|"WEIGHTED"|string;
+  export type RoutingPolicy = "MULTIVALUE"|"WEIGHTED"|string&{};
   export interface SOA {
     /**
      * The time to live (TTL) for purposes of negative caching.
@@ -1106,7 +1106,7 @@ declare namespace ServiceDiscovery {
      */
     Condition?: FilterCondition;
   }
-  export type ServiceFilterName = "NAMESPACE_ID"|string;
+  export type ServiceFilterName = "NAMESPACE_ID"|string&{};
   export type ServiceFilters = ServiceFilter[];
   export type ServiceName = string;
   export type ServiceSummariesList = ServiceSummary[];
@@ -1152,8 +1152,8 @@ declare namespace ServiceDiscovery {
      */
     CreateDate?: Timestamp;
   }
-  export type ServiceType = "HTTP"|"DNS_HTTP"|"DNS"|string;
-  export type ServiceTypeOption = "HTTP"|string;
+  export type ServiceType = "HTTP"|"DNS_HTTP"|"DNS"|string&{};
+  export type ServiceTypeOption = "HTTP"|string&{};
   export interface Tag {
     /**
      * The key identifier, or name, of the tag.

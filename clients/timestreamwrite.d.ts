@@ -166,7 +166,7 @@ declare class TimestreamWrite extends Service {
 }
 declare namespace TimestreamWrite {
   export type AmazonResourceName = string;
-  export type BatchLoadDataFormat = "CSV"|string;
+  export type BatchLoadDataFormat = "CSV"|string&{};
   export interface BatchLoadProgressReport {
     /**
      * 
@@ -193,7 +193,7 @@ declare namespace TimestreamWrite {
      */
     BytesMetered?: Long;
   }
-  export type BatchLoadStatus = "CREATED"|"IN_PROGRESS"|"FAILED"|"SUCCEEDED"|"PROGRESS_STOPPED"|"PENDING_RESUME"|string;
+  export type BatchLoadStatus = "CREATED"|"IN_PROGRESS"|"FAILED"|"SUCCEEDED"|"PROGRESS_STOPPED"|"PENDING_RESUME"|string&{};
   export interface BatchLoadTask {
     /**
      * The ID of the batch load task.
@@ -570,7 +570,7 @@ declare namespace TimestreamWrite {
     DestinationColumn?: SchemaName;
   }
   export type DimensionMappings = DimensionMapping[];
-  export type DimensionValueType = "VARCHAR"|string;
+  export type DimensionValueType = "VARCHAR"|string&{};
   export type Dimensions = Dimension[];
   export interface Endpoint {
     /**
@@ -696,7 +696,7 @@ declare namespace TimestreamWrite {
      */
     Type: MeasureValueType;
   }
-  export type MeasureValueType = "DOUBLE"|"BIGINT"|"VARCHAR"|"BOOLEAN"|"TIMESTAMP"|"MULTI"|string;
+  export type MeasureValueType = "DOUBLE"|"BIGINT"|"VARCHAR"|"BOOLEAN"|"TIMESTAMP"|"MULTI"|string&{};
   export type MeasureValues = MeasureValue[];
   export type MemoryStoreRetentionPeriodInHours = number;
   export interface MixedMeasureMapping {
@@ -763,9 +763,9 @@ declare namespace TimestreamWrite {
      */
     EnforcementInRecord?: PartitionKeyEnforcementLevel;
   }
-  export type PartitionKeyEnforcementLevel = "REQUIRED"|"OPTIONAL"|string;
+  export type PartitionKeyEnforcementLevel = "REQUIRED"|"OPTIONAL"|string&{};
   export type PartitionKeyList = PartitionKey[];
-  export type PartitionKeyType = "DIMENSION"|"MEASURE"|string;
+  export type PartitionKeyType = "DIMENSION"|"MEASURE"|string&{};
   export interface Record {
     /**
      * Contains the list of dimensions for time-series data points.
@@ -879,10 +879,10 @@ declare namespace TimestreamWrite {
      */
     KmsKeyId?: StringValue2048;
   }
-  export type S3EncryptionOption = "SSE_S3"|"SSE_KMS"|string;
+  export type S3EncryptionOption = "SSE_S3"|"SSE_KMS"|string&{};
   export type S3ObjectKey = string;
   export type S3ObjectKeyPrefix = string;
-  export type ScalarMeasureValueType = "DOUBLE"|"BIGINT"|"BOOLEAN"|"VARCHAR"|"TIMESTAMP"|string;
+  export type ScalarMeasureValueType = "DOUBLE"|"BIGINT"|"BOOLEAN"|"VARCHAR"|"TIMESTAMP"|string&{};
   export interface Schema {
     /**
      * A non-empty list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed. 
@@ -934,7 +934,7 @@ declare namespace TimestreamWrite {
     Schema?: Schema;
   }
   export type TableList = Table[];
-  export type TableStatus = "ACTIVE"|"DELETING"|"RESTORING"|string;
+  export type TableStatus = "ACTIVE"|"DELETING"|"RESTORING"|string&{};
   export interface Tag {
     /**
      *  The key of the tag. Tag keys are case sensitive. 
@@ -961,7 +961,7 @@ declare namespace TimestreamWrite {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TimeUnit = "MILLISECONDS"|"SECONDS"|"MICROSECONDS"|"NANOSECONDS"|string;
+  export type TimeUnit = "MILLISECONDS"|"SECONDS"|"MICROSECONDS"|"NANOSECONDS"|string&{};
   export interface UntagResourceRequest {
     /**
      *  The Timestream resource that the tags will be removed from. This value is an Amazon Resource Name (ARN). 

@@ -870,7 +870,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     HighAction?: AccountTakeoverActionType;
   }
-  export type AccountTakeoverEventActionType = "BLOCK"|"MFA_IF_CONFIGURED"|"MFA_REQUIRED"|"NO_ACTION"|string;
+  export type AccountTakeoverEventActionType = "BLOCK"|"MFA_IF_CONFIGURED"|"MFA_REQUIRED"|"NO_ACTION"|string&{};
   export interface AccountTakeoverRiskConfigurationType {
     /**
      * The notify configuration used to construct email notifications.
@@ -1484,8 +1484,8 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface AdminUserGlobalSignOutResponse {
   }
-  export type AdvancedSecurityModeType = "OFF"|"AUDIT"|"ENFORCED"|string;
-  export type AliasAttributeType = "phone_number"|"email"|"preferred_username"|string;
+  export type AdvancedSecurityModeType = "OFF"|"AUDIT"|"ENFORCED"|string&{};
+  export type AliasAttributeType = "phone_number"|"email"|"preferred_username"|string&{};
   export type AliasAttributesListType = AliasAttributeType[];
   export interface AnalyticsConfigurationType {
     /**
@@ -1536,7 +1536,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Session?: SessionType;
   }
-  export type AttributeDataType = "String"|"Number"|"DateTime"|"Boolean"|string;
+  export type AttributeDataType = "String"|"Number"|"DateTime"|"Boolean"|string&{};
   export type AttributeListType = AttributeType[];
   export type AttributeMappingKeyType = string;
   export type AttributeMappingType = {[key: string]: StringType};
@@ -1589,7 +1589,7 @@ declare namespace CognitoIdentityServiceProvider {
     EventFeedback?: EventFeedbackType;
   }
   export type AuthEventsType = AuthEventType[];
-  export type AuthFlowType = "USER_SRP_AUTH"|"REFRESH_TOKEN_AUTH"|"REFRESH_TOKEN"|"CUSTOM_AUTH"|"ADMIN_NO_SRP_AUTH"|"USER_PASSWORD_AUTH"|"ADMIN_USER_PASSWORD_AUTH"|string;
+  export type AuthFlowType = "USER_SRP_AUTH"|"REFRESH_TOKEN_AUTH"|"REFRESH_TOKEN"|"CUSTOM_AUTH"|"ADMIN_NO_SRP_AUTH"|"USER_PASSWORD_AUTH"|"ADMIN_USER_PASSWORD_AUTH"|string&{};
   export type AuthParametersType = {[key: string]: StringType};
   export type AuthSessionValidityType = number;
   export interface AuthenticationResultType {
@@ -1623,10 +1623,10 @@ declare namespace CognitoIdentityServiceProvider {
   export type CSSType = string;
   export type CSSVersionType = string;
   export type CallbackURLsListType = RedirectUrlType[];
-  export type ChallengeName = "Password"|"Mfa"|string;
-  export type ChallengeNameType = "SMS_MFA"|"SOFTWARE_TOKEN_MFA"|"SELECT_MFA_TYPE"|"MFA_SETUP"|"PASSWORD_VERIFIER"|"CUSTOM_CHALLENGE"|"DEVICE_SRP_AUTH"|"DEVICE_PASSWORD_VERIFIER"|"ADMIN_NO_SRP_AUTH"|"NEW_PASSWORD_REQUIRED"|string;
+  export type ChallengeName = "Password"|"Mfa"|string&{};
+  export type ChallengeNameType = "SMS_MFA"|"SOFTWARE_TOKEN_MFA"|"SELECT_MFA_TYPE"|"MFA_SETUP"|"PASSWORD_VERIFIER"|"CUSTOM_CHALLENGE"|"DEVICE_SRP_AUTH"|"DEVICE_PASSWORD_VERIFIER"|"ADMIN_NO_SRP_AUTH"|"NEW_PASSWORD_REQUIRED"|string&{};
   export type ChallengeParametersType = {[key: string]: StringType};
-  export type ChallengeResponse = "Success"|"Failure"|string;
+  export type ChallengeResponse = "Success"|"Failure"|string&{};
   export type ChallengeResponseListType = ChallengeResponseType[];
   export interface ChallengeResponseType {
     /**
@@ -1689,7 +1689,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     EventAction: CompromisedCredentialsEventActionType;
   }
-  export type CompromisedCredentialsEventActionType = "BLOCK"|"NO_ACTION"|string;
+  export type CompromisedCredentialsEventActionType = "BLOCK"|"NO_ACTION"|string&{};
   export interface CompromisedCredentialsRiskConfigurationType {
     /**
      * Perform the action for these events. The default is to perform all events if no event filter is specified.
@@ -2157,7 +2157,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LambdaArn: ArnType;
   }
-  export type CustomEmailSenderLambdaVersionType = "V1_0"|string;
+  export type CustomEmailSenderLambdaVersionType = "V1_0"|string&{};
   export interface CustomSMSLambdaVersionConfigType {
     /**
      * Signature of the "request" attribute in the "event" information that Amazon Cognito passes to your custom SMS Lambda function. The only supported value is V1_0.
@@ -2168,9 +2168,9 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LambdaArn: ArnType;
   }
-  export type CustomSMSSenderLambdaVersionType = "V1_0"|string;
+  export type CustomSMSSenderLambdaVersionType = "V1_0"|string&{};
   export type DateType = Date;
-  export type DefaultEmailOptionType = "CONFIRM_WITH_LINK"|"CONFIRM_WITH_CODE"|string;
+  export type DefaultEmailOptionType = "CONFIRM_WITH_LINK"|"CONFIRM_WITH_CODE"|string&{};
   export interface DeleteGroupRequest {
     /**
      * The name of the group.
@@ -2247,9 +2247,9 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AccessToken: TokenModelType;
   }
-  export type DeletionProtectionType = "ACTIVE"|"INACTIVE"|string;
+  export type DeletionProtectionType = "ACTIVE"|"INACTIVE"|string&{};
   export type DeliveryMediumListType = DeliveryMediumType[];
-  export type DeliveryMediumType = "SMS"|"EMAIL"|string;
+  export type DeliveryMediumType = "SMS"|"EMAIL"|string&{};
   export interface DescribeIdentityProviderRequest {
     /**
      * The user pool ID.
@@ -2368,7 +2368,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type DeviceKeyType = string;
   export type DeviceListType = DeviceType[];
   export type DeviceNameType = string;
-  export type DeviceRememberedStatusType = "remembered"|"not_remembered"|string;
+  export type DeviceRememberedStatusType = "remembered"|"not_remembered"|string&{};
   export interface DeviceSecretVerifierConfigType {
     /**
      * The password verifier.
@@ -2435,7 +2435,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CustomDomainConfig?: CustomDomainConfigType;
   }
-  export type DomainStatusType = "CREATING"|"DELETING"|"UPDATING"|"ACTIVE"|"FAILED"|string;
+  export type DomainStatusType = "CREATING"|"DELETING"|"UPDATING"|"ACTIVE"|"FAILED"|string&{};
   export type DomainType = string;
   export type DomainVersionType = string;
   export type EmailAddressType = string;
@@ -2463,7 +2463,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type EmailNotificationBodyType = string;
   export type EmailNotificationSubjectType = string;
-  export type EmailSendingAccountType = "COGNITO_DEFAULT"|"DEVELOPER"|string;
+  export type EmailSendingAccountType = "COGNITO_DEFAULT"|"DEVELOPER"|string&{};
   export type EmailVerificationMessageByLinkType = string;
   export type EmailVerificationMessageType = string;
   export type EmailVerificationSubjectByLinkType = string;
@@ -2504,10 +2504,10 @@ declare namespace CognitoIdentityServiceProvider {
      */
     FeedbackDate?: DateType;
   }
-  export type EventFilterType = "SIGN_IN"|"PASSWORD_CHANGE"|"SIGN_UP"|string;
+  export type EventFilterType = "SIGN_IN"|"PASSWORD_CHANGE"|"SIGN_UP"|string&{};
   export type EventFiltersType = EventFilterType[];
   export type EventIdType = string;
-  export type EventResponseType = "Pass"|"Fail"|"InProgress"|string;
+  export type EventResponseType = "Pass"|"Fail"|"InProgress"|string&{};
   export interface EventRiskType {
     /**
      * The risk decision.
@@ -2522,11 +2522,11 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CompromisedCredentialsDetected?: WrappedBooleanType;
   }
-  export type EventSourceName = "userNotification"|string;
-  export type EventType = "SignIn"|"SignUp"|"ForgotPassword"|"PasswordChange"|"ResendCode"|string;
+  export type EventSourceName = "userNotification"|string&{};
+  export type EventType = "SignIn"|"SignUp"|"ForgotPassword"|"PasswordChange"|"ResendCode"|string&{};
   export type ExplicitAuthFlowsListType = ExplicitAuthFlowsType[];
-  export type ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"|"CUSTOM_AUTH_FLOW_ONLY"|"USER_PASSWORD_AUTH"|"ALLOW_ADMIN_USER_PASSWORD_AUTH"|"ALLOW_CUSTOM_AUTH"|"ALLOW_USER_PASSWORD_AUTH"|"ALLOW_USER_SRP_AUTH"|"ALLOW_REFRESH_TOKEN_AUTH"|string;
-  export type FeedbackValueType = "Valid"|"Invalid"|string;
+  export type ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"|"CUSTOM_AUTH_FLOW_ONLY"|"USER_PASSWORD_AUTH"|"ALLOW_ADMIN_USER_PASSWORD_AUTH"|"ALLOW_CUSTOM_AUTH"|"ALLOW_USER_PASSWORD_AUTH"|"ALLOW_USER_SRP_AUTH"|"ALLOW_REFRESH_TOKEN_AUTH"|string&{};
+  export type FeedbackValueType = "Valid"|"Invalid"|string&{};
   export type ForceAliasCreation = boolean;
   export interface ForgetDeviceRequest {
     /**
@@ -2830,7 +2830,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CreationDate?: DateType;
   }
-  export type IdentityProviderTypeType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string;
+  export type IdentityProviderTypeType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"SignInWithApple"|"OIDC"|string&{};
   export type IdpIdentifierType = string;
   export type IdpIdentifiersListType = IdpIdentifierType[];
   export type ImageFileType = Buffer|Uint8Array|Blob|string;
@@ -3198,7 +3198,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LogConfigurations: LogConfigurationListType;
   }
-  export type LogLevel = "ERROR"|string;
+  export type LogLevel = "ERROR"|string&{};
   export type LogoutURLsListType = RedirectUrlType[];
   export type LongType = number;
   export type MFAOptionListType = MFAOptionType[];
@@ -3212,7 +3212,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AttributeName?: AttributeNameType;
   }
-  export type MessageActionType = "RESEND"|"SUPPRESS"|string;
+  export type MessageActionType = "RESEND"|"SUPPRESS"|string&{};
   export interface MessageTemplateType {
     /**
      * The message template for SMS messages.
@@ -3287,7 +3287,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     MaxValue?: StringType;
   }
-  export type OAuthFlowType = "code"|"implicit"|"client_credentials"|string;
+  export type OAuthFlowType = "code"|"implicit"|"client_credentials"|string&{};
   export type OAuthFlowsType = OAuthFlowType[];
   export type PaginationKey = string;
   export type PaginationKeyType = string;
@@ -3322,7 +3322,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type PoolQueryLimitType = number;
   export type PreSignedUrlType = string;
   export type PrecedenceType = number;
-  export type PreventUserExistenceErrorTypes = "LEGACY"|"ENABLED"|string;
+  export type PreventUserExistenceErrorTypes = "LEGACY"|"ENABLED"|string&{};
   export type PriorityType = number;
   export interface ProviderDescription {
     /**
@@ -3363,7 +3363,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type QueryLimit = number;
   export type QueryLimitType = number;
   export type RecoveryMechanismsType = RecoveryOptionType[];
-  export type RecoveryOptionNameType = "verified_email"|"verified_phone_number"|"admin_only"|string;
+  export type RecoveryOptionNameType = "verified_email"|"verified_phone_number"|"admin_only"|string&{};
   export interface RecoveryOptionType {
     /**
      * A positive integer specifying priority of a method with 1 being the highest priority.
@@ -3533,7 +3533,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LastModifiedDate?: DateType;
   }
-  export type RiskDecisionType = "NoRisk"|"AccountTakeover"|"Block"|string;
+  export type RiskDecisionType = "NoRisk"|"AccountTakeover"|"Block"|string&{};
   export interface RiskExceptionConfigurationType {
     /**
      * Overrides the risk decision to always block the pre-authentication requests. The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
@@ -3544,7 +3544,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SkippedIPRangeList?: SkippedIPRangeListType;
   }
-  export type RiskLevelType = "Low"|"Medium"|"High"|string;
+  export type RiskLevelType = "Low"|"Medium"|"High"|string&{};
   export type S3BucketType = string;
   export type SESConfigurationSet = string;
   export interface SMSMfaSettingsType {
@@ -3834,7 +3834,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     UserImportJob?: UserImportJobType;
   }
-  export type StatusType = "Enabled"|"Disabled"|string;
+  export type StatusType = "Enabled"|"Disabled"|string&{};
   export interface StopUserImportJobRequest {
     /**
      * The user pool ID for the user pool that the users are being imported into.
@@ -3878,7 +3878,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type TagValueType = string;
   export type TemporaryPasswordValidityDaysType = number;
-  export type TimeUnitsType = "seconds"|"minutes"|"hours"|"days"|string;
+  export type TimeUnitsType = "seconds"|"minutes"|"hours"|"days"|string&{};
   export type TokenModelType = string;
   export interface TokenValidityUnitsType {
     /**
@@ -4291,7 +4291,7 @@ declare namespace CognitoIdentityServiceProvider {
   export type UserFilterType = string;
   export type UserImportJobIdType = string;
   export type UserImportJobNameType = string;
-  export type UserImportJobStatusType = "Created"|"Pending"|"InProgress"|"Stopping"|"Expired"|"Stopped"|"Failed"|"Succeeded"|string;
+  export type UserImportJobStatusType = "Created"|"Pending"|"InProgress"|"Stopping"|"Expired"|"Stopped"|"Failed"|"Succeeded"|string&{};
   export interface UserImportJobType {
     /**
      * The job name for the user import job.
@@ -4499,7 +4499,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type UserPoolIdType = string;
   export type UserPoolListType = UserPoolDescriptionType[];
-  export type UserPoolMfaType = "OFF"|"ON"|"OPTIONAL"|string;
+  export type UserPoolMfaType = "OFF"|"ON"|"OPTIONAL"|string&{};
   export type UserPoolNameType = string;
   export interface UserPoolPolicyType {
     /**
@@ -4643,7 +4643,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AccountRecoverySetting?: AccountRecoverySettingType;
   }
-  export type UserStatusType = "UNCONFIRMED"|"CONFIRMED"|"ARCHIVED"|"COMPROMISED"|"UNKNOWN"|"RESET_REQUIRED"|"FORCE_CHANGE_PASSWORD"|string;
+  export type UserStatusType = "UNCONFIRMED"|"CONFIRMED"|"ARCHIVED"|"COMPROMISED"|"UNKNOWN"|"RESET_REQUIRED"|"FORCE_CHANGE_PASSWORD"|string&{};
   export interface UserType {
     /**
      * The user name of the user you want to describe.
@@ -4674,7 +4674,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     MFAOptions?: MFAOptionListType;
   }
-  export type UsernameAttributeType = "phone_number"|"email"|string;
+  export type UsernameAttributeType = "phone_number"|"email"|string&{};
   export type UsernameAttributesListType = UsernameAttributeType[];
   export interface UsernameConfigurationType {
     /**
@@ -4710,7 +4710,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     DefaultEmailOption?: DefaultEmailOptionType;
   }
-  export type VerifiedAttributeType = "phone_number"|"email"|string;
+  export type VerifiedAttributeType = "phone_number"|"email"|string&{};
   export type VerifiedAttributesListType = VerifiedAttributeType[];
   export interface VerifySoftwareTokenRequest {
     /**
@@ -4740,7 +4740,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Session?: SessionType;
   }
-  export type VerifySoftwareTokenResponseType = "SUCCESS"|"ERROR"|string;
+  export type VerifySoftwareTokenResponseType = "SUCCESS"|"ERROR"|string&{};
   export interface VerifyUserAttributeRequest {
     /**
      * A valid access token that Amazon Cognito issued to the user whose user attributes you want to verify.

@@ -342,7 +342,7 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
         if (Array.isArray(shape.enum)) {
             stringType = shape.enum.map(function(s) {
                 return '"' + s + '"';
-            }).join('|') + '|' + stringType;
+            }).join('|') + '|' + stringType + "&{}";
         }
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = ' + stringType + ';\n';
     } else if (['double', 'long', 'short', 'biginteger', 'bigdecimal', 'integer', 'float'].indexOf(type) >= 0) {

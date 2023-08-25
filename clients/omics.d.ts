@@ -819,7 +819,7 @@ declare namespace Omics {
   }
   export interface AbortMultipartReadSetUploadResponse {
   }
-  export type Accelerators = "GPU"|string;
+  export type Accelerators = "GPU"|string&{};
   export interface AcceptShareRequest {
     /**
      *  The ID for a share offer for analytics store data. 
@@ -1047,7 +1047,7 @@ declare namespace Omics {
     versionSizeBytes: Long;
   }
   export type AnnotationStoreVersionItems = AnnotationStoreVersionItem[];
-  export type AnnotationType = "GENERIC"|"CHR_POS"|"CHR_POS_REF_ALT"|"CHR_START_END_ONE_BASE"|"CHR_START_END_REF_ALT_ONE_BASE"|"CHR_START_END_ZERO_BASE"|"CHR_START_END_REF_ALT_ZERO_BASE"|string;
+  export type AnnotationType = "GENERIC"|"CHR_POS"|"CHR_POS_REF_ALT"|"CHR_START_END_ONE_BASE"|"CHR_START_END_REF_ALT_ONE_BASE"|"CHR_START_END_ZERO_BASE"|"CHR_START_END_REF_ALT_ZERO_BASE"|string&{};
   export type Arn = string;
   export type ArnList = String[];
   export interface BatchDeleteReadSetRequest {
@@ -1627,7 +1627,7 @@ declare namespace Omics {
     tags?: TagMap;
   }
   export type CreationTime = Date;
-  export type CreationType = "IMPORT"|"UPLOAD"|string;
+  export type CreationType = "IMPORT"|"UPLOAD"|string&{};
   export interface DeleteAnnotationStoreRequest {
     /**
      * The store's name.
@@ -1740,7 +1740,7 @@ declare namespace Omics {
   }
   export type Description = string;
   export type Encoding = string;
-  export type EncryptionType = "KMS"|string;
+  export type EncryptionType = "KMS"|string&{};
   export type EscapeChar = string;
   export type EscapeQuotes = boolean;
   export type ExportJobId = string;
@@ -1823,7 +1823,7 @@ declare namespace Omics {
   export type FileInformationContentLengthLong = number;
   export type FileInformationPartSizeLong = number;
   export type FileInformationTotalPartsInteger = number;
-  export type FileType = "FASTQ"|"BAM"|"CRAM"|string;
+  export type FileType = "FASTQ"|"BAM"|"CRAM"|string&{};
   export interface Filter {
     /**
      *  The Amazon Resource Number (Arn) for an analytics store. 
@@ -1845,7 +1845,7 @@ declare namespace Omics {
     vcfOptions?: VcfOptions;
   }
   export type FormatToHeader = {[key: string]: FormatToHeaderValueString};
-  export type FormatToHeaderKey = "CHR"|"START"|"END"|"REF"|"ALT"|"POS"|string;
+  export type FormatToHeaderKey = "CHR"|"START"|"END"|"REF"|"ALT"|"POS"|string&{};
   export type FormatToHeaderValueString = string;
   export type GeneratedFrom = string;
   export interface GetAnnotationImportRequest {
@@ -3040,7 +3040,7 @@ declare namespace Omics {
   }
   export type ImportReferenceSourceList = ImportReferenceSourceItem[];
   export type Integer = number;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLED"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLED"|"COMPLETED"|"FAILED"|"COMPLETED_WITH_FAILURES"|string&{};
   export type JobStatusMessage = string;
   export type JobStatusMsg = string;
   export type LineSep = string;
@@ -3770,8 +3770,8 @@ declare namespace Omics {
      */
     lineSep?: LineSep;
   }
-  export type ReadSetActivationJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string;
-  export type ReadSetActivationJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string;
+  export type ReadSetActivationJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string&{};
+  export type ReadSetActivationJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string&{};
   export type ReadSetArn = string;
   export interface ReadSetBatchError {
     /**
@@ -3789,9 +3789,9 @@ declare namespace Omics {
   }
   export type ReadSetBatchErrorList = ReadSetBatchError[];
   export type ReadSetDescription = string;
-  export type ReadSetExportJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string;
-  export type ReadSetExportJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string;
-  export type ReadSetFile = "SOURCE1"|"SOURCE2"|"INDEX"|string;
+  export type ReadSetExportJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string&{};
+  export type ReadSetExportJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string&{};
+  export type ReadSetFile = "SOURCE1"|"SOURCE2"|"INDEX"|string&{};
   export interface ReadSetFiles {
     /**
      * The location of the first file in Amazon S3.
@@ -3846,8 +3846,8 @@ declare namespace Omics {
   }
   export type ReadSetId = string;
   export type ReadSetIdList = ReadSetId[];
-  export type ReadSetImportJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string;
-  export type ReadSetImportJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string;
+  export type ReadSetImportJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string&{};
+  export type ReadSetImportJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string&{};
   export type ReadSetList = ReadSetListItem[];
   export interface ReadSetListItem {
     /**
@@ -3905,9 +3905,9 @@ declare namespace Omics {
     creationType?: CreationType;
   }
   export type ReadSetName = string;
-  export type ReadSetPartSource = "SOURCE1"|"SOURCE2"|string;
+  export type ReadSetPartSource = "SOURCE1"|"SOURCE2"|string&{};
   export type ReadSetPartStreamingBlob = Buffer|Uint8Array|Blob|string|Readable;
-  export type ReadSetStatus = "ARCHIVED"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|"PROCESSING_UPLOAD"|"UPLOAD_FAILED"|string;
+  export type ReadSetStatus = "ARCHIVED"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|"PROCESSING_UPLOAD"|"UPLOAD_FAILED"|string&{};
   export type ReadSetStatusMessage = string;
   export type ReadSetStreamingBlob = Buffer|Uint8Array|Blob|string|Readable;
   export type ReadSetUploadPartList = ReadSetUploadPartListItem[];
@@ -3951,7 +3951,7 @@ declare namespace Omics {
   export type ReadSetUploadPartListItemPartSizeLong = number;
   export type ReferenceArn = string;
   export type ReferenceDescription = string;
-  export type ReferenceFile = "SOURCE"|"INDEX"|string;
+  export type ReferenceFile = "SOURCE"|"INDEX"|string&{};
   export interface ReferenceFiles {
     /**
      * The source file's location in Amazon S3.
@@ -3981,8 +3981,8 @@ declare namespace Omics {
     createdBefore?: SyntheticTimestamp_date_time;
   }
   export type ReferenceId = string;
-  export type ReferenceImportJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string;
-  export type ReferenceImportJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string;
+  export type ReferenceImportJobItemStatus = "NOT_STARTED"|"IN_PROGRESS"|"FINISHED"|"FAILED"|string&{};
+  export type ReferenceImportJobStatus = "SUBMITTED"|"IN_PROGRESS"|"CANCELLING"|"CANCELLED"|"FAILED"|"COMPLETED"|"COMPLETED_WITH_FAILURES"|string&{};
   export interface ReferenceItem {
     /**
      * The reference's ARN.
@@ -4029,7 +4029,7 @@ declare namespace Omics {
     updateTime: SyntheticTimestamp_date_time;
   }
   export type ReferenceName = string;
-  export type ReferenceStatus = "ACTIVE"|"DELETING"|"DELETED"|string;
+  export type ReferenceStatus = "ACTIVE"|"DELETING"|"DELETED"|string&{};
   export type ReferenceStoreArn = string;
   export type ReferenceStoreDescription = string;
   export interface ReferenceStoreDetail {
@@ -4078,10 +4078,10 @@ declare namespace Omics {
   export type ReferenceStreamingBlob = Buffer|Uint8Array|Blob|string|Readable;
   export type ResourceId = string;
   export type ResourceIdentifier = string;
-  export type ResourceOwner = "SELF"|"OTHER"|string;
+  export type ResourceOwner = "SELF"|"OTHER"|string&{};
   export type RoleArn = string;
   export type RunArn = string;
-  export type RunExport = "DEFINITION"|string;
+  export type RunExport = "DEFINITION"|string&{};
   export type RunExportList = RunExport[];
   export type RunGroupArn = string;
   export type RunGroupId = string;
@@ -4176,7 +4176,7 @@ declare namespace Omics {
   export type RunListItemPriorityInteger = number;
   export type RunListItemStorageCapacityInteger = number;
   export type RunListToken = string;
-  export type RunLogLevel = "OFF"|"FATAL"|"ERROR"|"ALL"|string;
+  export type RunLogLevel = "OFF"|"FATAL"|"ERROR"|"ALL"|string&{};
   export type RunName = string;
   export type RunOutputUri = string;
   export interface RunParameters {
@@ -4187,7 +4187,7 @@ declare namespace Omics {
   export type RunResourceDigests = {[key: string]: RunResourceDigest};
   export type RunRoleArn = string;
   export type RunStartedBy = string;
-  export type RunStatus = "PENDING"|"STARTING"|"RUNNING"|"STOPPING"|"COMPLETED"|"DELETED"|"CANCELLED"|"FAILED"|string;
+  export type RunStatus = "PENDING"|"STARTING"|"RUNNING"|"STOPPING"|"COMPLETED"|"DELETED"|"CANCELLED"|"FAILED"|string&{};
   export type RunStatusMessage = string;
   export type RunTimestamp = Date;
   export type S3Destination = string;
@@ -4195,7 +4195,7 @@ declare namespace Omics {
   export type SampleId = string;
   export type SchemaItem = {[key: string]: SchemaValueType};
   export type SchemaItemKeyString = string;
-  export type SchemaValueType = "LONG"|"INT"|"STRING"|"FLOAT"|"DOUBLE"|"BOOLEAN"|string;
+  export type SchemaValueType = "LONG"|"INT"|"STRING"|"FLOAT"|"DOUBLE"|"BOOLEAN"|string&{};
   export type Separator = string;
   export interface SequenceInformation {
     /**
@@ -4304,7 +4304,7 @@ declare namespace Omics {
   }
   export type ShareDetailsList = ShareDetails[];
   export type ShareName = string;
-  export type ShareStatus = "PENDING"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|"FAILED"|string;
+  export type ShareStatus = "PENDING"|"ACTIVATING"|"ACTIVE"|"DELETING"|"DELETED"|"FAILED"|string&{};
   export interface SourceFiles {
     /**
      * The location of the first file in Amazon S3.
@@ -4688,7 +4688,7 @@ declare namespace Omics {
   }
   export type StatusList = ShareStatus[];
   export type StatusMessage = string;
-  export type StoreFormat = "GFF"|"TSV"|"VCF"|string;
+  export type StoreFormat = "GFF"|"TSV"|"VCF"|string&{};
   export type StoreName = string;
   export interface StoreOptions {
     /**
@@ -4696,7 +4696,7 @@ declare namespace Omics {
      */
     tsvStoreOptions?: TsvStoreOptions;
   }
-  export type StoreStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED"|string;
+  export type StoreStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED"|string&{};
   export type String = string;
   export type SubjectId = string;
   export type SyntheticTimestamp_date_time = Date;
@@ -4769,7 +4769,7 @@ declare namespace Omics {
   export type TaskListToken = string;
   export type TaskLogStream = string;
   export type TaskName = string;
-  export type TaskStatus = "PENDING"|"STARTING"|"RUNNING"|"STOPPING"|"COMPLETED"|"CANCELLED"|"FAILED"|string;
+  export type TaskStatus = "PENDING"|"STARTING"|"RUNNING"|"STOPPING"|"COMPLETED"|"CANCELLED"|"FAILED"|string&{};
   export type TaskStatusMessage = string;
   export type TaskTimestamp = Date;
   export interface TsvOptions {
@@ -5168,13 +5168,13 @@ declare namespace Omics {
      */
     tsvVersionOptions?: TsvVersionOptions;
   }
-  export type VersionStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED"|string;
+  export type VersionStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"FAILED"|string&{};
   export type WorkflowArn = string;
   export type WorkflowDefinition = string;
   export type WorkflowDescription = string;
   export type WorkflowDigest = string;
-  export type WorkflowEngine = "WDL"|"NEXTFLOW"|"CWL"|string;
-  export type WorkflowExport = "DEFINITION"|string;
+  export type WorkflowEngine = "WDL"|"NEXTFLOW"|"CWL"|string&{};
+  export type WorkflowExport = "DEFINITION"|string&{};
   export type WorkflowExportList = WorkflowExport[];
   export type WorkflowId = string;
   export type WorkflowList = WorkflowListItem[];
@@ -5232,10 +5232,10 @@ declare namespace Omics {
   export type WorkflowParameterName = string;
   export type WorkflowParameterTemplate = {[key: string]: WorkflowParameter};
   export type WorkflowRequestId = string;
-  export type WorkflowStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETED"|"FAILED"|"INACTIVE"|string;
+  export type WorkflowStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETED"|"FAILED"|"INACTIVE"|string&{};
   export type WorkflowStatusMessage = string;
   export type WorkflowTimestamp = Date;
-  export type WorkflowType = "PRIVATE"|"READY2RUN"|string;
+  export type WorkflowType = "PRIVATE"|"READY2RUN"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

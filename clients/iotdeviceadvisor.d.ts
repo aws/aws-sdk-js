@@ -126,7 +126,7 @@ declare class IotDeviceAdvisor extends Service {
 }
 declare namespace IotDeviceAdvisor {
   export type AmazonResourceName = string;
-  export type AuthenticationMethod = "X509ClientCertificate"|"SignatureVersion4"|string;
+  export type AuthenticationMethod = "X509ClientCertificate"|"SignatureVersion4"|string&{};
   export interface CreateSuiteDefinitionRequest {
     /**
      * Creates a Device Advisor test suite with suite definition configuration.
@@ -402,7 +402,7 @@ declare namespace IotDeviceAdvisor {
   export type LogUrl = string;
   export type MaxResults = number;
   export type ParallelRun = boolean;
-  export type Protocol = "MqttV3_1_1"|"MqttV5"|"MqttV3_1_1_OverWebSocket"|"MqttV5_OverWebSocket"|string;
+  export type Protocol = "MqttV3_1_1"|"MqttV5"|"MqttV3_1_1_OverWebSocket"|"MqttV5_OverWebSocket"|string&{};
   export type QualificationReportDownloadUrl = string;
   export type RootGroup = string;
   export type SelectedTestList = UUID[];
@@ -442,7 +442,7 @@ declare namespace IotDeviceAdvisor {
      */
     endpoint?: Endpoint;
   }
-  export type Status = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string;
+  export type Status = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string&{};
   export interface StopSuiteRunRequest {
     /**
      * Suite definition ID of the test suite run to be stopped.
@@ -577,7 +577,7 @@ declare namespace IotDeviceAdvisor {
     failed?: SuiteRunResultCount;
   }
   export type SuiteRunResultCount = number;
-  export type SuiteRunStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string;
+  export type SuiteRunStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string&{};
   export type SuiteRunsList = SuiteRunInformation[];
   export type SystemMessage = string;
   export type TagKeyList = String128[];
@@ -661,8 +661,8 @@ declare namespace IotDeviceAdvisor {
     systemMessage?: SystemMessage;
   }
   export type TestCaseScenarioId = string;
-  export type TestCaseScenarioStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string;
-  export type TestCaseScenarioType = "Advanced"|"Basic"|string;
+  export type TestCaseScenarioStatus = "PASS"|"FAIL"|"CANCELED"|"PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"PASS_WITH_WARNINGS"|"ERROR"|string&{};
+  export type TestCaseScenarioType = "Advanced"|"Basic"|string&{};
   export type TestCaseScenariosList = TestCaseScenario[];
   export interface TestResult {
     /**

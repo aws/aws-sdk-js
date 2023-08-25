@@ -317,7 +317,7 @@ declare class CostExplorer extends Service {
   updateCostCategoryDefinition(callback?: (err: AWSError, data: CostExplorer.Types.UpdateCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.UpdateCostCategoryDefinitionResponse, AWSError>;
 }
 declare namespace CostExplorer {
-  export type AccountScope = "PAYER"|"LINKED"|string;
+  export type AccountScope = "PAYER"|"LINKED"|string&{};
   export type AmortizedRecurringFee = string;
   export type AmortizedUpfrontFee = string;
   export type Anomalies = Anomaly[];
@@ -369,7 +369,7 @@ declare namespace CostExplorer {
      */
     EndDate?: YearMonthDay;
   }
-  export type AnomalyFeedbackType = "YES"|"NO"|"PLANNED_ACTIVITY"|string;
+  export type AnomalyFeedbackType = "YES"|"NO"|"PLANNED_ACTIVITY"|string&{};
   export interface AnomalyMonitor {
     /**
      * The Amazon Resource Name (ARN) value. 
@@ -450,13 +450,13 @@ declare namespace CostExplorer {
      */
     ThresholdExpression?: Expression;
   }
-  export type AnomalySubscriptionFrequency = "DAILY"|"IMMEDIATE"|"WEEKLY"|string;
+  export type AnomalySubscriptionFrequency = "DAILY"|"IMMEDIATE"|"WEEKLY"|string&{};
   export type AnomalySubscriptions = AnomalySubscription[];
   export type Arn = string;
   export type AttributeType = string;
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
-  export type Context = "COST_AND_USAGE"|"RESERVATIONS"|"SAVINGS_PLANS"|string;
+  export type Context = "COST_AND_USAGE"|"RESERVATIONS"|"SAVINGS_PLANS"|string&{};
   export interface CostAllocationTag {
     /**
      * The key for the cost allocation tag. 
@@ -481,7 +481,7 @@ declare namespace CostExplorer {
   }
   export type CostAllocationTagKeyList = TagKey[];
   export type CostAllocationTagList = CostAllocationTag[];
-  export type CostAllocationTagStatus = "Active"|"Inactive"|string;
+  export type CostAllocationTagStatus = "Active"|"Inactive"|string&{};
   export interface CostAllocationTagStatusEntry {
     /**
      * The key for the cost allocation tag. 
@@ -493,7 +493,7 @@ declare namespace CostExplorer {
     Status: CostAllocationTagStatus;
   }
   export type CostAllocationTagStatusList = CostAllocationTagStatusEntry[];
-  export type CostAllocationTagType = "AWSGenerated"|"UserDefined"|string;
+  export type CostAllocationTagType = "AWSGenerated"|"UserDefined"|string&{};
   export type CostAllocationTagsMaxResults = number;
   export interface CostCategory {
     /**
@@ -534,7 +534,7 @@ declare namespace CostExplorer {
      */
     DimensionKey?: GenericString;
   }
-  export type CostCategoryInheritedValueDimensionName = "LINKED_ACCOUNT_NAME"|"TAG"|string;
+  export type CostCategoryInheritedValueDimensionName = "LINKED_ACCOUNT_NAME"|"TAG"|string&{};
   export type CostCategoryMaxResults = number;
   export type CostCategoryName = string;
   export type CostCategoryNamesList = CostCategoryName[];
@@ -593,10 +593,10 @@ declare namespace CostExplorer {
      */
     Type?: CostCategoryRuleType;
   }
-  export type CostCategoryRuleType = "REGULAR"|"INHERITED_VALUE"|string;
-  export type CostCategoryRuleVersion = "CostCategoryExpression.v1"|string;
+  export type CostCategoryRuleType = "REGULAR"|"INHERITED_VALUE"|string&{};
+  export type CostCategoryRuleVersion = "CostCategoryExpression.v1"|string&{};
   export type CostCategoryRulesList = CostCategoryRule[];
-  export type CostCategorySplitChargeMethod = "FIXED"|"PROPORTIONAL"|"EVEN"|string;
+  export type CostCategorySplitChargeMethod = "FIXED"|"PROPORTIONAL"|"EVEN"|string&{};
   export interface CostCategorySplitChargeRule {
     /**
      * The Cost Category value that you want to split. That value can't be used as a source or a target in other split charge rules. To indicate uncategorized costs, you can use an empty string as the source.
@@ -625,13 +625,13 @@ declare namespace CostExplorer {
      */
     Values: CostCategorySplitChargeRuleParameterValuesList;
   }
-  export type CostCategorySplitChargeRuleParameterType = "ALLOCATION_PERCENTAGES"|string;
+  export type CostCategorySplitChargeRuleParameterType = "ALLOCATION_PERCENTAGES"|string&{};
   export type CostCategorySplitChargeRuleParameterValuesList = GenericString[];
   export type CostCategorySplitChargeRuleParametersList = CostCategorySplitChargeRuleParameter[];
   export type CostCategorySplitChargeRuleTargetsList = GenericString[];
   export type CostCategorySplitChargeRulesList = CostCategorySplitChargeRule[];
-  export type CostCategoryStatus = "PROCESSING"|"APPLIED"|string;
-  export type CostCategoryStatusComponent = "COST_EXPLORER"|string;
+  export type CostCategoryStatus = "PROCESSING"|"APPLIED"|string&{};
+  export type CostCategoryStatusComponent = "COST_EXPLORER"|string&{};
   export type CostCategoryValue = string;
   export interface CostCategoryValues {
     Key?: CostCategoryName;
@@ -882,7 +882,7 @@ declare namespace CostExplorer {
   export interface DescribeCostCategoryDefinitionResponse {
     CostCategory?: CostCategory;
   }
-  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|"AGREEMENT_END_DATE_TIME_AFTER"|"AGREEMENT_END_DATE_TIME_BEFORE"|"INVOICING_ENTITY"|"ANOMALY_TOTAL_IMPACT_ABSOLUTE"|"ANOMALY_TOTAL_IMPACT_PERCENTAGE"|string;
+  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|"AGREEMENT_END_DATE_TIME_AFTER"|"AGREEMENT_END_DATE_TIME_BEFORE"|"INVOICING_ENTITY"|"ANOMALY_TOTAL_IMPACT_ABSOLUTE"|"ANOMALY_TOTAL_IMPACT_PERCENTAGE"|string&{};
   export interface DimensionValues {
     /**
      * The names of the metadata types that you can use to filter and group your results. For example, AZ returns a list of Availability Zones. Not all dimensions are supported in each API. Refer to the documentation for each specific API to see what is supported.  LINK_ACCOUNT_NAME and SERVICE_CODE can only be used in CostCategoryRule.  ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE can only be used in AnomalySubscriptions.
@@ -1126,7 +1126,7 @@ declare namespace CostExplorer {
     CostCategories?: CostCategoryValues;
   }
   export type Expressions = Expression[];
-  export type FindingReasonCode = "CPU_OVER_PROVISIONED"|"CPU_UNDER_PROVISIONED"|"MEMORY_OVER_PROVISIONED"|"MEMORY_UNDER_PROVISIONED"|"EBS_THROUGHPUT_OVER_PROVISIONED"|"EBS_THROUGHPUT_UNDER_PROVISIONED"|"EBS_IOPS_OVER_PROVISIONED"|"EBS_IOPS_UNDER_PROVISIONED"|"NETWORK_BANDWIDTH_OVER_PROVISIONED"|"NETWORK_BANDWIDTH_UNDER_PROVISIONED"|"NETWORK_PPS_OVER_PROVISIONED"|"NETWORK_PPS_UNDER_PROVISIONED"|"DISK_IOPS_OVER_PROVISIONED"|"DISK_IOPS_UNDER_PROVISIONED"|"DISK_THROUGHPUT_OVER_PROVISIONED"|"DISK_THROUGHPUT_UNDER_PROVISIONED"|string;
+  export type FindingReasonCode = "CPU_OVER_PROVISIONED"|"CPU_UNDER_PROVISIONED"|"MEMORY_OVER_PROVISIONED"|"MEMORY_UNDER_PROVISIONED"|"EBS_THROUGHPUT_OVER_PROVISIONED"|"EBS_THROUGHPUT_UNDER_PROVISIONED"|"EBS_IOPS_OVER_PROVISIONED"|"EBS_IOPS_UNDER_PROVISIONED"|"NETWORK_BANDWIDTH_OVER_PROVISIONED"|"NETWORK_BANDWIDTH_UNDER_PROVISIONED"|"NETWORK_PPS_OVER_PROVISIONED"|"NETWORK_PPS_UNDER_PROVISIONED"|"DISK_IOPS_OVER_PROVISIONED"|"DISK_IOPS_UNDER_PROVISIONED"|"DISK_THROUGHPUT_OVER_PROVISIONED"|"DISK_THROUGHPUT_UNDER_PROVISIONED"|string&{};
   export type FindingReasonCodes = FindingReasonCode[];
   export interface ForecastResult {
     /**
@@ -1147,7 +1147,7 @@ declare namespace CostExplorer {
     PredictionIntervalUpperBound?: GenericString;
   }
   export type ForecastResultsByTime = ForecastResult[];
-  export type GenerationStatus = "SUCCEEDED"|"PROCESSING"|"FAILED"|string;
+  export type GenerationStatus = "SUCCEEDED"|"PROCESSING"|"FAILED"|string&{};
   export interface GenerationSummary {
     /**
      * Indicates the ID for this specific recommendation.
@@ -1914,7 +1914,7 @@ declare namespace CostExplorer {
      */
     ForecastResultsByTime?: ForecastResultsByTime;
   }
-  export type Granularity = "DAILY"|"MONTHLY"|"HOURLY"|string;
+  export type Granularity = "DAILY"|"MONTHLY"|"HOURLY"|string&{};
   export interface Group {
     /**
      * The keys that are included in this group.
@@ -1936,7 +1936,7 @@ declare namespace CostExplorer {
     Key?: GroupDefinitionKey;
   }
   export type GroupDefinitionKey = string;
-  export type GroupDefinitionType = "DIMENSION"|"TAG"|"COST_CATEGORY"|string;
+  export type GroupDefinitionType = "DIMENSION"|"TAG"|"COST_CATEGORY"|string&{};
   export type GroupDefinitions = GroupDefinition[];
   export type Groups = Group[];
   export interface Impact {
@@ -2081,11 +2081,11 @@ declare namespace CostExplorer {
      */
     ResourceTags?: ResourceTagList;
   }
-  export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
-  export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|"GREATER_THAN_OR_EQUAL"|string;
+  export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string&{};
+  export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|"GREATER_THAN_OR_EQUAL"|string&{};
   export type MatchOptions = MatchOption[];
   export type MaxResults = number;
-  export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string;
+  export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string&{};
   export type MetricAmount = string;
   export type MetricName = string;
   export type MetricNames = MetricName[];
@@ -2109,8 +2109,8 @@ declare namespace CostExplorer {
     TargetInstances?: TargetInstancesList;
   }
   export type MonitorArnList = Arn[];
-  export type MonitorDimension = "SERVICE"|string;
-  export type MonitorType = "DIMENSIONAL"|"CUSTOM"|string;
+  export type MonitorDimension = "SERVICE"|string&{};
+  export type MonitorType = "DIMENSIONAL"|"CUSTOM"|string&{};
   export type NetRISavings = string;
   export interface NetworkResourceUtilization {
     /**
@@ -2133,15 +2133,15 @@ declare namespace CostExplorer {
   export type NextPageToken = string;
   export type NonNegativeInteger = number;
   export type NullableNonNegativeDouble = number;
-  export type NumericOperator = "EQUAL"|"GREATER_THAN_OR_EQUAL"|"LESS_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|"BETWEEN"|string;
-  export type OfferingClass = "STANDARD"|"CONVERTIBLE"|string;
+  export type NumericOperator = "EQUAL"|"GREATER_THAN_OR_EQUAL"|"LESS_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|"BETWEEN"|string&{};
+  export type OfferingClass = "STANDARD"|"CONVERTIBLE"|string&{};
   export type OnDemandCost = string;
   export type OnDemandCostOfRIHoursUsed = string;
   export type OnDemandHours = string;
   export type OnDemandNormalizedUnits = string;
   export type PageSize = number;
-  export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|"LIGHT_UTILIZATION"|"MEDIUM_UTILIZATION"|"HEAVY_UTILIZATION"|string;
-  export type PlatformDifference = "HYPERVISOR"|"NETWORK_INTERFACE"|"STORAGE_INTERFACE"|"INSTANCE_STORE_AVAILABILITY"|"VIRTUALIZATION_TYPE"|string;
+  export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|"LIGHT_UTILIZATION"|"MEDIUM_UTILIZATION"|"HEAVY_UTILIZATION"|string&{};
+  export type PlatformDifference = "HYPERVISOR"|"NETWORK_INTERFACE"|"STORAGE_INTERFACE"|"INSTANCE_STORE_AVAILABILITY"|"VIRTUALIZATION_TYPE"|string&{};
   export type PlatformDifferences = PlatformDifference[];
   export type PredictionIntervalLevel = number;
   export interface ProvideAnomalyFeedbackRequest {
@@ -2336,7 +2336,7 @@ declare namespace CostExplorer {
   export type RecommendationDetailId = string;
   export type RecommendationId = string;
   export type RecommendationIdList = RecommendationId[];
-  export type RecommendationTarget = "SAME_INSTANCE_FAMILY"|"CROSS_INSTANCE_FAMILY"|string;
+  export type RecommendationTarget = "SAME_INSTANCE_FAMILY"|"CROSS_INSTANCE_FAMILY"|string&{};
   export interface RedshiftInstanceDetails {
     /**
      * The instance family of the recommended reservation.
@@ -2715,7 +2715,7 @@ declare namespace CostExplorer {
      */
     SavingsPercentage?: GenericString;
   }
-  export type RightsizingType = "TERMINATE"|"MODIFY"|string;
+  export type RightsizingType = "TERMINATE"|"MODIFY"|string&{};
   export interface RootCause {
     /**
      * The Amazon Web Service name that's associated with the cost anomaly. 
@@ -2784,7 +2784,7 @@ declare namespace CostExplorer {
     CoveragePercentage?: GenericString;
   }
   export type SavingsPlansCoverages = SavingsPlansCoverage[];
-  export type SavingsPlansDataType = "ATTRIBUTES"|"UTILIZATION"|"AMORTIZED_COMMITMENT"|"SAVINGS"|string;
+  export type SavingsPlansDataType = "ATTRIBUTES"|"UTILIZATION"|"AMORTIZED_COMMITMENT"|"SAVINGS"|string&{};
   export type SavingsPlansDataTypes = SavingsPlansDataType[];
   export interface SavingsPlansDetails {
     /**
@@ -3061,7 +3061,7 @@ declare namespace CostExplorer {
   }
   export type SortDefinitionKey = string;
   export type SortDefinitions = SortDefinition[];
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export interface StartSavingsPlansPurchaseRecommendationGenerationRequest {
   }
   export interface StartSavingsPlansPurchaseRecommendationGenerationResponse {
@@ -3093,10 +3093,10 @@ declare namespace CostExplorer {
     Status?: SubscriberStatus;
   }
   export type SubscriberAddress = string;
-  export type SubscriberStatus = "CONFIRMED"|"DECLINED"|string;
-  export type SubscriberType = "EMAIL"|"SNS"|string;
+  export type SubscriberStatus = "CONFIRMED"|"DECLINED"|string&{};
+  export type SubscriberType = "EMAIL"|"SNS"|string&{};
   export type Subscribers = Subscriber[];
-  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|"SAGEMAKER_SP"|string;
+  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|"SAGEMAKER_SP"|string&{};
   export type TagKey = string;
   export type TagList = Entity[];
   export interface TagResourceRequest {
@@ -3157,7 +3157,7 @@ declare namespace CostExplorer {
     PlatformDifferences?: PlatformDifferences;
   }
   export type TargetInstancesList = TargetInstance[];
-  export type TermInYears = "ONE_YEAR"|"THREE_YEARS"|string;
+  export type TermInYears = "ONE_YEAR"|"THREE_YEARS"|string&{};
   export interface TerminateRecommendationDetail {
     /**
      * The estimated savings that result from modification, on a monthly basis.

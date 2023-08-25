@@ -469,11 +469,11 @@ declare namespace CloudWatchEvents {
   }
   export type ApiDestinationArn = string;
   export type ApiDestinationDescription = string;
-  export type ApiDestinationHttpMethod = "POST"|"GET"|"HEAD"|"OPTIONS"|"PUT"|"PATCH"|"DELETE"|string;
+  export type ApiDestinationHttpMethod = "POST"|"GET"|"HEAD"|"OPTIONS"|"PUT"|"PATCH"|"DELETE"|string&{};
   export type ApiDestinationInvocationRateLimitPerSecond = number;
   export type ApiDestinationName = string;
   export type ApiDestinationResponseList = ApiDestination[];
-  export type ApiDestinationState = "ACTIVE"|"INACTIVE"|string;
+  export type ApiDestinationState = "ACTIVE"|"INACTIVE"|string&{};
   export interface Archive {
     /**
      * The name of the archive.
@@ -512,10 +512,10 @@ declare namespace CloudWatchEvents {
   export type ArchiveDescription = string;
   export type ArchiveName = string;
   export type ArchiveResponseList = Archive[];
-  export type ArchiveState = "ENABLED"|"DISABLED"|"CREATING"|"UPDATING"|"CREATE_FAILED"|"UPDATE_FAILED"|string;
+  export type ArchiveState = "ENABLED"|"DISABLED"|"CREATING"|"UPDATING"|"CREATE_FAILED"|"UPDATE_FAILED"|string&{};
   export type ArchiveStateReason = string;
   export type Arn = string;
-  export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
+  export type AssignPublicIp = "ENABLED"|"DISABLED"|string&{};
   export type AuthHeaderParameters = string;
   export interface AwsVpcConfiguration {
     /**
@@ -673,7 +673,7 @@ declare namespace CloudWatchEvents {
      */
     InvocationHttpParameters?: ConnectionHttpParameters;
   }
-  export type ConnectionAuthorizationType = "BASIC"|"OAUTH_CLIENT_CREDENTIALS"|"API_KEY"|string;
+  export type ConnectionAuthorizationType = "BASIC"|"OAUTH_CLIENT_CREDENTIALS"|"API_KEY"|string&{};
   export interface ConnectionBasicAuthResponseParameters {
     /**
      * The user name to use for Basic authorization.
@@ -732,7 +732,7 @@ declare namespace CloudWatchEvents {
      */
     ClientID?: AuthHeaderParameters;
   }
-  export type ConnectionOAuthHttpMethod = "GET"|"POST"|"PUT"|string;
+  export type ConnectionOAuthHttpMethod = "GET"|"POST"|"PUT"|string&{};
   export interface ConnectionOAuthResponseParameters {
     /**
      * A ConnectionOAuthClientResponseParameters object that contains details about the client parameters returned when OAuth is specified as the authorization type.
@@ -767,7 +767,7 @@ declare namespace CloudWatchEvents {
   }
   export type ConnectionQueryStringParametersList = ConnectionQueryStringParameter[];
   export type ConnectionResponseList = Connection[];
-  export type ConnectionState = "CREATING"|"UPDATING"|"DELETING"|"AUTHORIZED"|"DEAUTHORIZED"|"AUTHORIZING"|"DEAUTHORIZING"|string;
+  export type ConnectionState = "CREATING"|"UPDATING"|"DELETING"|"AUTHORIZED"|"DEAUTHORIZED"|"AUTHORIZING"|"DEAUTHORIZING"|string&{};
   export type ConnectionStateReason = string;
   export interface CreateApiDestinationRequest {
     /**
@@ -1566,7 +1566,7 @@ declare namespace CloudWatchEvents {
   export type EventSourceList = EventSource[];
   export type EventSourceName = string;
   export type EventSourceNamePrefix = string;
-  export type EventSourceState = "PENDING"|"ACTIVE"|"DELETED"|string;
+  export type EventSourceState = "PENDING"|"ACTIVE"|"DELETED"|string&{};
   export type EventTime = Date;
   export type HeaderKey = string;
   export type HeaderParametersMap = {[key: string]: HeaderValue};
@@ -1604,7 +1604,7 @@ declare namespace CloudWatchEvents {
      */
     PartitionKeyPath: TargetPartitionKeyPath;
   }
-  export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL"|string;
+  export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL"|string&{};
   export type LimitMax100 = number;
   export type LimitMin1 = number;
   export interface ListApiDestinationsRequest {
@@ -1977,7 +1977,7 @@ declare namespace CloudWatchEvents {
     expression?: PlacementConstraintExpression;
   }
   export type PlacementConstraintExpression = string;
-  export type PlacementConstraintType = "distinctInstance"|"memberOf"|string;
+  export type PlacementConstraintType = "distinctInstance"|"memberOf"|string&{};
   export type PlacementConstraints = PlacementConstraint[];
   export type PlacementStrategies = PlacementStrategy[];
   export interface PlacementStrategy {
@@ -1991,9 +1991,9 @@ declare namespace CloudWatchEvents {
     field?: PlacementStrategyField;
   }
   export type PlacementStrategyField = string;
-  export type PlacementStrategyType = "random"|"spread"|"binpack"|string;
+  export type PlacementStrategyType = "random"|"spread"|"binpack"|string&{};
   export type Principal = string;
-  export type PropagateTags = "TASK_DEFINITION"|string;
+  export type PropagateTags = "TASK_DEFINITION"|string&{};
   export interface PutEventsRequest {
     /**
      * The entry that defines an event in your system. You can specify several parameters for the entry such as the source and type of the event, resources associated with the event, and so on.
@@ -2356,7 +2356,7 @@ declare namespace CloudWatchEvents {
   export type ReplayDestinationFilters = Arn[];
   export type ReplayList = Replay[];
   export type ReplayName = string;
-  export type ReplayState = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED"|string;
+  export type ReplayState = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED"|string&{};
   export type ReplayStateReason = string;
   export type ResourceArn = string;
   export type RetentionDays = number;
@@ -2414,7 +2414,7 @@ declare namespace CloudWatchEvents {
   export type RuleName = string;
   export type RuleNameList = RuleName[];
   export type RuleResponseList = Rule[];
-  export type RuleState = "ENABLED"|"DISABLED"|string;
+  export type RuleState = "ENABLED"|"DISABLED"|string&{};
   export interface RunCommandParameters {
     /**
      * Currently, we support including only one RunCommandTarget block, which specifies either an array of InstanceIds or a tag.

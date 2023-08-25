@@ -269,7 +269,7 @@ declare namespace AppFabric {
      */
     authUrl?: String;
   }
-  export type AppAuthorizationStatus = "PendingConnect"|"Connected"|"ConnectionValidationFailed"|"TokenAutoRotationFailed"|string;
+  export type AppAuthorizationStatus = "PendingConnect"|"Connected"|"ConnectionValidationFailed"|"TokenAutoRotationFailed"|string&{};
   export interface AppAuthorizationSummary {
     /**
      * The Amazon Resource Name (ARN) of the app authorization.
@@ -341,7 +341,7 @@ declare namespace AppFabric {
      */
     code: SensitiveString2048;
   }
-  export type AuthType = "oauth2"|"apiKey"|string;
+  export type AuthType = "oauth2"|"apiKey"|string&{};
   export interface BatchGetUserAccessTasksRequest {
     /**
      * The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
@@ -580,7 +580,7 @@ declare namespace AppFabric {
      */
     streamName: String64;
   }
-  export type Format = "json"|"parquet"|string;
+  export type Format = "json"|"parquet"|string&{};
   export interface GetAppAuthorizationRequest {
     /**
      * The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
@@ -715,7 +715,7 @@ declare namespace AppFabric {
     updatedAt?: DateTime;
   }
   export type IngestionDestinationList = IngestionDestinationSummary[];
-  export type IngestionDestinationStatus = "Active"|"Failed"|string;
+  export type IngestionDestinationStatus = "Active"|"Failed"|string&{};
   export interface IngestionDestinationSummary {
     /**
      * The Amazon Resource Name (ARN) of the ingestion destination.
@@ -723,7 +723,7 @@ declare namespace AppFabric {
     arn: Arn;
   }
   export type IngestionList = IngestionSummary[];
-  export type IngestionState = "enabled"|"disabled"|string;
+  export type IngestionState = "enabled"|"disabled"|string&{};
   export interface IngestionSummary {
     /**
      * The Amazon Resource Name (ARN) of the ingestion.
@@ -742,7 +742,7 @@ declare namespace AppFabric {
      */
     state: IngestionState;
   }
-  export type IngestionType = "auditLog"|string;
+  export type IngestionType = "auditLog"|string&{};
   export interface ListAppAuthorizationsRequest {
     /**
      * The Amazon Resource Name (ARN) or Universal Unique Identifier (UUID) of the app bundle to use for the request.
@@ -862,7 +862,7 @@ declare namespace AppFabric {
      */
     clientSecret: SensitiveString2048;
   }
-  export type Persona = "admin"|"endUser"|string;
+  export type Persona = "admin"|"endUser"|string&{};
   export interface ProcessingConfiguration {
     /**
      * Contains information about an audit log processing configuration.
@@ -870,7 +870,7 @@ declare namespace AppFabric {
     auditLog?: AuditLogProcessingConfiguration;
   }
   export type RedirectUri = string;
-  export type ResultStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"EXPIRED"|string;
+  export type ResultStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"EXPIRED"|string&{};
   export interface S3Bucket {
     /**
      * The name of the Amazon S3 bucket.
@@ -881,7 +881,7 @@ declare namespace AppFabric {
      */
     prefix?: String120;
   }
-  export type Schema = "ocsf"|"raw"|string;
+  export type Schema = "ocsf"|"raw"|string&{};
   export type SensitiveString2048 = string;
   export interface StartIngestionRequest {
     /**

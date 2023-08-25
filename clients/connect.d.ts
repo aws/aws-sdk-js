@@ -1621,7 +1621,7 @@ declare namespace Connect {
      */
     ActionType: ActionType;
   }
-  export type ActionType = "CREATE_TASK"|"ASSIGN_CONTACT_CATEGORY"|"GENERATE_EVENTBRIDGE_EVENT"|"SEND_NOTIFICATION"|string;
+  export type ActionType = "CREATE_TASK"|"ASSIGN_CONTACT_CATEGORY"|"GENERATE_EVENTBRIDGE_EVENT"|"SEND_NOTIFICATION"|string&{};
   export interface ActivateEvaluationFormRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -1651,7 +1651,7 @@ declare namespace Connect {
     EvaluationFormVersion: VersionNumber;
   }
   export type AfterContactWorkTimeLimit = number;
-  export type AgentAvailabilityTimer = "TIME_SINCE_LAST_ACTIVITY"|"TIME_SINCE_LAST_INBOUND"|string;
+  export type AgentAvailabilityTimer = "TIME_SINCE_LAST_ACTIVITY"|"TIME_SINCE_LAST_INBOUND"|string&{};
   export interface AgentConfig {
     /**
      * Information about traffic distributions.
@@ -1751,7 +1751,7 @@ declare namespace Connect {
      */
     StatusName?: AgentStatusName;
   }
-  export type AgentStatusState = "ENABLED"|"DISABLED"|string;
+  export type AgentStatusState = "ENABLED"|"DISABLED"|string&{};
   export interface AgentStatusSummary {
     /**
      * The identifier for an agent status.
@@ -1771,7 +1771,7 @@ declare namespace Connect {
     Type?: AgentStatusType;
   }
   export type AgentStatusSummaryList = AgentStatusSummary[];
-  export type AgentStatusType = "ROUTABLE"|"CUSTOM"|"OFFLINE"|string;
+  export type AgentStatusType = "ROUTABLE"|"CUSTOM"|"OFFLINE"|string&{};
   export type AgentStatusTypes = AgentStatusType[];
   export type AgentUsername = string;
   export type AgentsMinOneMaxHundred = UserId[];
@@ -1988,13 +1988,13 @@ declare namespace Connect {
   }
   export type AvailableNumbersList = AvailableNumberSummary[];
   export type AwsRegion = string;
-  export type BehaviorType = "ROUTE_CURRENT_CHANNEL_ONLY"|"ROUTE_ANY_CHANNEL"|string;
+  export type BehaviorType = "ROUTE_CURRENT_CHANNEL_ONLY"|"ROUTE_ANY_CHANNEL"|string&{};
   export type Boolean = boolean;
   export type BotName = string;
   export type BoxedBoolean = boolean;
   export type BucketName = string;
   export type CampaignId = string;
-  export type Channel = "VOICE"|"CHAT"|"TASK"|string;
+  export type Channel = "VOICE"|"CHAT"|"TASK"|string&{};
   export type ChannelToCountMap = {[key: string]: IntegerCount};
   export type Channels = Channel[];
   export type ChatContent = string;
@@ -2095,7 +2095,7 @@ declare namespace Connect {
   }
   export type ClientToken = string;
   export type CommonNameLength127 = string;
-  export type Comparison = "LT"|string;
+  export type Comparison = "LT"|string&{};
   export type Concurrency = number;
   export interface Contact {
     /**
@@ -2244,8 +2244,8 @@ declare namespace Connect {
   export type ContactFlowModuleDescription = string;
   export type ContactFlowModuleId = string;
   export type ContactFlowModuleName = string;
-  export type ContactFlowModuleState = "ACTIVE"|"ARCHIVED"|string;
-  export type ContactFlowModuleStatus = "PUBLISHED"|"SAVED"|string;
+  export type ContactFlowModuleState = "ACTIVE"|"ARCHIVED"|string&{};
+  export type ContactFlowModuleStatus = "PUBLISHED"|"SAVED"|string&{};
   export interface ContactFlowModuleSummary {
     /**
      * The identifier of the flow module.
@@ -2266,7 +2266,7 @@ declare namespace Connect {
   }
   export type ContactFlowModulesSummaryList = ContactFlowModuleSummary[];
   export type ContactFlowName = string;
-  export type ContactFlowState = "ACTIVE"|"ARCHIVED"|string;
+  export type ContactFlowState = "ACTIVE"|"ARCHIVED"|string&{};
   export interface ContactFlowSummary {
     /**
      * The identifier of the flow.
@@ -2290,12 +2290,12 @@ declare namespace Connect {
     ContactFlowState?: ContactFlowState;
   }
   export type ContactFlowSummaryList = ContactFlowSummary[];
-  export type ContactFlowType = "CONTACT_FLOW"|"CUSTOMER_QUEUE"|"CUSTOMER_HOLD"|"CUSTOMER_WHISPER"|"AGENT_HOLD"|"AGENT_WHISPER"|"OUTBOUND_WHISPER"|"AGENT_TRANSFER"|"QUEUE_TRANSFER"|string;
+  export type ContactFlowType = "CONTACT_FLOW"|"CUSTOMER_QUEUE"|"CUSTOMER_HOLD"|"CUSTOMER_WHISPER"|"AGENT_HOLD"|"AGENT_WHISPER"|"OUTBOUND_WHISPER"|"AGENT_TRANSFER"|"QUEUE_TRANSFER"|string&{};
   export type ContactFlowTypes = ContactFlowType[];
   export type ContactId = string;
-  export type ContactInitiationMethod = "INBOUND"|"OUTBOUND"|"TRANSFER"|"QUEUE_TRANSFER"|"CALLBACK"|"API"|"DISCONNECT"|"MONITOR"|"EXTERNAL_OUTBOUND"|string;
+  export type ContactInitiationMethod = "INBOUND"|"OUTBOUND"|"TRANSFER"|"QUEUE_TRANSFER"|"CALLBACK"|"API"|"DISCONNECT"|"MONITOR"|"EXTERNAL_OUTBOUND"|string&{};
   export type ContactReferences = {[key: string]: Reference};
-  export type ContactState = "INCOMING"|"PENDING"|"CONNECTING"|"CONNECTED"|"CONNECTED_ONHOLD"|"MISSED"|"ERROR"|"ENDED"|"REJECTED"|string;
+  export type ContactState = "INCOMING"|"PENDING"|"CONNECTING"|"CONNECTED"|"CONNECTED_ONHOLD"|"MISSED"|"ERROR"|"ENDED"|"REJECTED"|string&{};
   export type ContactStates = ContactState[];
   export type Content = string;
   export interface ControlPlaneTagFilter {
@@ -3102,7 +3102,7 @@ declare namespace Connect {
     Value?: Value;
   }
   export type CurrentMetricDataCollections = CurrentMetricData[];
-  export type CurrentMetricName = "AGENTS_ONLINE"|"AGENTS_AVAILABLE"|"AGENTS_ON_CALL"|"AGENTS_NON_PRODUCTIVE"|"AGENTS_AFTER_CONTACT_WORK"|"AGENTS_ERROR"|"AGENTS_STAFFED"|"CONTACTS_IN_QUEUE"|"OLDEST_CONTACT_AGE"|"CONTACTS_SCHEDULED"|"AGENTS_ON_CONTACT"|"SLOTS_ACTIVE"|"SLOTS_AVAILABLE"|string;
+  export type CurrentMetricName = "AGENTS_ONLINE"|"AGENTS_AVAILABLE"|"AGENTS_ON_CALL"|"AGENTS_NON_PRODUCTIVE"|"AGENTS_AFTER_CONTACT_WORK"|"AGENTS_ERROR"|"AGENTS_STAFFED"|"CONTACTS_IN_QUEUE"|"OLDEST_CONTACT_AGE"|"CONTACTS_SCHEDULED"|"AGENTS_ON_CONTACT"|"SLOTS_ACTIVE"|"SLOTS_AVAILABLE"|string&{};
   export interface CurrentMetricResult {
     /**
      * The dimensions for the metrics.
@@ -3759,7 +3759,7 @@ declare namespace Connect {
   export type DimensionsV2Value = string;
   export type DirectoryAlias = string;
   export type DirectoryId = string;
-  export type DirectoryType = "SAML"|"CONNECT_MANAGED"|"EXISTING_DIRECTORY"|string;
+  export type DirectoryType = "SAML"|"CONNECT_MANAGED"|"EXISTING_DIRECTORY"|string&{};
   export type DirectoryUserId = string;
   export interface DisassociateApprovedOriginRequest {
     /**
@@ -3933,7 +3933,7 @@ declare namespace Connect {
      */
     KeyId: KeyId;
   }
-  export type EncryptionType = "KMS"|string;
+  export type EncryptionType = "KMS"|string&{};
   export interface Evaluation {
     /**
      * A unique identifier for the contact evaluation.
@@ -4187,7 +4187,7 @@ declare namespace Connect {
   export type EvaluationFormQuestionAnswerScore = number;
   export type EvaluationFormQuestionInstructions = string;
   export type EvaluationFormQuestionTitle = string;
-  export type EvaluationFormQuestionType = "TEXT"|"SINGLESELECT"|"NUMERIC"|string;
+  export type EvaluationFormQuestionType = "TEXT"|"SINGLESELECT"|"NUMERIC"|string&{};
   export interface EvaluationFormQuestionTypeProperties {
     /**
      * The properties of the numeric question.
@@ -4198,8 +4198,8 @@ declare namespace Connect {
      */
     SingleSelect?: EvaluationFormSingleSelectQuestionProperties;
   }
-  export type EvaluationFormScoringMode = "QUESTION_ONLY"|"SECTION_ONLY"|string;
-  export type EvaluationFormScoringStatus = "ENABLED"|"DISABLED"|string;
+  export type EvaluationFormScoringMode = "QUESTION_ONLY"|"SECTION_ONLY"|string&{};
+  export type EvaluationFormScoringStatus = "ENABLED"|"DISABLED"|string&{};
   export interface EvaluationFormScoringStrategy {
     /**
      * The scoring mode of the evaluation form.
@@ -4250,7 +4250,7 @@ declare namespace Connect {
     RuleCategory?: SingleSelectQuestionRuleCategoryAutomation;
   }
   export type EvaluationFormSingleSelectQuestionAutomationOptionList = EvaluationFormSingleSelectQuestionAutomationOption[];
-  export type EvaluationFormSingleSelectQuestionDisplayMode = "DROPDOWN"|"RADIO"|string;
+  export type EvaluationFormSingleSelectQuestionDisplayMode = "DROPDOWN"|"RADIO"|string&{};
   export interface EvaluationFormSingleSelectQuestionOption {
     /**
      * The identifier of the answer option. An identifier must be unique within the question.
@@ -4334,7 +4334,7 @@ declare namespace Connect {
   export type EvaluationFormSummaryList = EvaluationFormSummary[];
   export type EvaluationFormTitle = string;
   export type EvaluationFormVersionIsLocked = boolean;
-  export type EvaluationFormVersionStatus = "DRAFT"|"ACTIVE"|string;
+  export type EvaluationFormVersionStatus = "DRAFT"|"ACTIVE"|string&{};
   export interface EvaluationFormVersionSummary {
     /**
      * The Amazon Resource Name (ARN) for the evaluation form resource.
@@ -4416,7 +4416,7 @@ declare namespace Connect {
   }
   export type EvaluationScorePercentage = number;
   export type EvaluationScoresMap = {[key: string]: EvaluationScore};
-  export type EvaluationStatus = "DRAFT"|"SUBMITTED"|string;
+  export type EvaluationStatus = "DRAFT"|"SUBMITTED"|string&{};
   export interface EvaluationSummary {
     /**
      * A unique identifier for the contact evaluation.
@@ -4463,7 +4463,7 @@ declare namespace Connect {
     Name: EventBridgeActionName;
   }
   export type EventBridgeActionName = string;
-  export type EventSourceName = "OnPostCallAnalysisAvailable"|"OnRealTimeCallAnalysisAvailable"|"OnPostChatAnalysisAvailable"|"OnZendeskTicketCreate"|"OnZendeskTicketStatusUpdate"|"OnSalesforceCaseCreate"|"OnContactEvaluationSubmit"|string;
+  export type EventSourceName = "OnPostCallAnalysisAvailable"|"OnRealTimeCallAnalysisAvailable"|"OnPostChatAnalysisAvailable"|"OnZendeskTicketCreate"|"OnZendeskTicketStatusUpdate"|"OnSalesforceCaseCreate"|"OnContactEvaluationSubmit"|string&{};
   export interface FilterV2 {
     /**
      * The key to use for filtering data. For example, QUEUE, ROUTING_PROFILE, AGENT, CHANNEL, AGENT_HIERARCHY_LEVEL_ONE, AGENT_HIERARCHY_LEVEL_TWO, AGENT_HIERARCHY_LEVEL_THREE, AGENT_HIERARCHY_LEVEL_FOUR, AGENT_HIERARCHY_LEVEL_FIVE. There must be at least 1 key and a maximum 5 keys. 
@@ -4812,7 +4812,7 @@ declare namespace Connect {
      */
     AgentConfig?: AgentConfig;
   }
-  export type Grouping = "QUEUE"|"CHANNEL"|"ROUTING_PROFILE"|string;
+  export type Grouping = "QUEUE"|"CHANNEL"|"ROUTING_PROFILE"|string&{};
   export type GroupingV2 = string;
   export type Groupings = Grouping[];
   export type GroupingsV2 = GroupingV2[];
@@ -4853,7 +4853,7 @@ declare namespace Connect {
     HierarchyGroupMatchType?: HierarchyGroupMatchType;
   }
   export type HierarchyGroupId = string;
-  export type HierarchyGroupMatchType = "EXACT"|"WITH_CHILD_GROUPS"|string;
+  export type HierarchyGroupMatchType = "EXACT"|"WITH_CHILD_GROUPS"|string&{};
   export type HierarchyGroupName = string;
   export interface HierarchyGroupSummary {
     /**
@@ -5019,7 +5019,7 @@ declare namespace Connect {
     Value?: Value;
   }
   export type HistoricalMetricDataCollections = HistoricalMetricData[];
-  export type HistoricalMetricName = "CONTACTS_QUEUED"|"CONTACTS_HANDLED"|"CONTACTS_ABANDONED"|"CONTACTS_CONSULTED"|"CONTACTS_AGENT_HUNG_UP_FIRST"|"CONTACTS_HANDLED_INCOMING"|"CONTACTS_HANDLED_OUTBOUND"|"CONTACTS_HOLD_ABANDONS"|"CONTACTS_TRANSFERRED_IN"|"CONTACTS_TRANSFERRED_OUT"|"CONTACTS_TRANSFERRED_IN_FROM_QUEUE"|"CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"|"CONTACTS_MISSED"|"CALLBACK_CONTACTS_HANDLED"|"API_CONTACTS_HANDLED"|"OCCUPANCY"|"HANDLE_TIME"|"AFTER_CONTACT_WORK_TIME"|"QUEUED_TIME"|"ABANDON_TIME"|"QUEUE_ANSWER_TIME"|"HOLD_TIME"|"INTERACTION_TIME"|"INTERACTION_AND_HOLD_TIME"|"SERVICE_LEVEL"|string;
+  export type HistoricalMetricName = "CONTACTS_QUEUED"|"CONTACTS_HANDLED"|"CONTACTS_ABANDONED"|"CONTACTS_CONSULTED"|"CONTACTS_AGENT_HUNG_UP_FIRST"|"CONTACTS_HANDLED_INCOMING"|"CONTACTS_HANDLED_OUTBOUND"|"CONTACTS_HOLD_ABANDONS"|"CONTACTS_TRANSFERRED_IN"|"CONTACTS_TRANSFERRED_OUT"|"CONTACTS_TRANSFERRED_IN_FROM_QUEUE"|"CONTACTS_TRANSFERRED_OUT_FROM_QUEUE"|"CONTACTS_MISSED"|"CALLBACK_CONTACTS_HANDLED"|"API_CONTACTS_HANDLED"|"OCCUPANCY"|"HANDLE_TIME"|"AFTER_CONTACT_WORK_TIME"|"QUEUED_TIME"|"ABANDON_TIME"|"QUEUE_ANSWER_TIME"|"HOLD_TIME"|"INTERACTION_TIME"|"INTERACTION_AND_HOLD_TIME"|"SERVICE_LEVEL"|string&{};
   export interface HistoricalMetricResult {
     /**
      * The dimension for the metrics.
@@ -5079,7 +5079,7 @@ declare namespace Connect {
     EndTime: HoursOfOperationTimeSlice;
   }
   export type HoursOfOperationConfigList = HoursOfOperationConfig[];
-  export type HoursOfOperationDays = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
+  export type HoursOfOperationDays = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string&{};
   export type HoursOfOperationDescription = string;
   export type HoursOfOperationId = string;
   export type HoursOfOperationList = HoursOfOperation[];
@@ -5176,11 +5176,11 @@ declare namespace Connect {
     InstanceAccessUrl?: Url;
   }
   export type InstanceArn = string;
-  export type InstanceAttributeType = "INBOUND_CALLS"|"OUTBOUND_CALLS"|"CONTACTFLOW_LOGS"|"CONTACT_LENS"|"AUTO_RESOLVE_BEST_VOICES"|"USE_CUSTOM_TTS_VOICES"|"EARLY_MEDIA"|"MULTI_PARTY_CONFERENCE"|"HIGH_VOLUME_OUTBOUND"|"ENHANCED_CONTACT_MONITORING"|string;
+  export type InstanceAttributeType = "INBOUND_CALLS"|"OUTBOUND_CALLS"|"CONTACTFLOW_LOGS"|"CONTACT_LENS"|"AUTO_RESOLVE_BEST_VOICES"|"USE_CUSTOM_TTS_VOICES"|"EARLY_MEDIA"|"MULTI_PARTY_CONFERENCE"|"HIGH_VOLUME_OUTBOUND"|"ENHANCED_CONTACT_MONITORING"|string&{};
   export type InstanceAttributeValue = string;
   export type InstanceId = string;
   export type InstanceIdOrArn = string;
-  export type InstanceStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|string;
+  export type InstanceStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|string&{};
   export interface InstanceStatusReason {
     /**
      * The message.
@@ -5214,7 +5214,7 @@ declare namespace Connect {
     KinesisFirehoseConfig?: KinesisFirehoseConfig;
   }
   export type InstanceStorageConfigs = InstanceStorageConfig[];
-  export type InstanceStorageResourceType = "CHAT_TRANSCRIPTS"|"CALL_RECORDINGS"|"SCHEDULED_REPORTS"|"MEDIA_STREAMS"|"CONTACT_TRACE_RECORDS"|"AGENT_EVENTS"|"REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"|"ATTACHMENTS"|"CONTACT_EVALUATIONS"|"SCREEN_RECORDINGS"|string;
+  export type InstanceStorageResourceType = "CHAT_TRANSCRIPTS"|"CALL_RECORDINGS"|"SCHEDULED_REPORTS"|"MEDIA_STREAMS"|"CONTACT_TRACE_RECORDS"|"AGENT_EVENTS"|"REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"|"ATTACHMENTS"|"CONTACT_EVALUATIONS"|"SCREEN_RECORDINGS"|string&{};
   export interface InstanceSummary {
     /**
      * The identifier of the instance.
@@ -5296,7 +5296,7 @@ declare namespace Connect {
     SourceType?: SourceType;
   }
   export type IntegrationAssociationSummaryList = IntegrationAssociationSummary[];
-  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"CASES_DOMAIN"|string;
+  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"CASES_DOMAIN"|string&{};
   export interface InvisibleFieldInfo {
     /**
      * Identifier of the invisible field.
@@ -5358,7 +5358,7 @@ declare namespace Connect {
      */
     AliasArn?: AliasArn;
   }
-  export type LexVersion = "V1"|"V2"|string;
+  export type LexVersion = "V1"|"V2"|string&{};
   export interface ListAgentStatusRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -6404,7 +6404,7 @@ declare namespace Connect {
   }
   export type MetricsV2 = MetricV2[];
   export type MinutesLimit60 = number;
-  export type MonitorCapability = "SILENT_MONITOR"|"BARGE"|string;
+  export type MonitorCapability = "SILENT_MONITOR"|"BARGE"|string&{};
   export interface MonitorContactRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -6441,8 +6441,8 @@ declare namespace Connect {
   export type Name128 = string;
   export type NextToken = string;
   export type NextToken2500 = string;
-  export type NotificationContentType = "PLAIN_TEXT"|string;
-  export type NotificationDeliveryType = "EMAIL"|string;
+  export type NotificationContentType = "PLAIN_TEXT"|string&{};
+  export type NotificationDeliveryType = "EMAIL"|string&{};
   export interface NotificationRecipientType {
     /**
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users with the specified tags will be notified.
@@ -6463,7 +6463,7 @@ declare namespace Connect {
      */
     Value?: ReferenceValue;
   }
-  export type NumericQuestionPropertyAutomationLabel = "OVERALL_CUSTOMER_SENTIMENT_SCORE"|"OVERALL_AGENT_SENTIMENT_SCORE"|"NON_TALK_TIME"|"NON_TALK_TIME_PERCENTAGE"|"NUMBER_OF_INTERRUPTIONS"|"CONTACT_DURATION"|"AGENT_INTERACTION_DURATION"|"CUSTOMER_HOLD_TIME"|string;
+  export type NumericQuestionPropertyAutomationLabel = "OVERALL_CUSTOMER_SENTIMENT_SCORE"|"OVERALL_AGENT_SENTIMENT_SCORE"|"NON_TALK_TIME"|"NON_TALK_TIME_PERCENTAGE"|"NUMBER_OF_INTERRUPTIONS"|"CONTACT_DURATION"|"AGENT_INTERACTION_DURATION"|"CUSTOMER_HOLD_TIME"|string&{};
   export interface NumericQuestionPropertyValueAutomation {
     /**
      * The property label of the automation.
@@ -6506,8 +6506,8 @@ declare namespace Connect {
     DisplayName?: DisplayName;
   }
   export type ParticipantId = string;
-  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|"CUSTOM_BOT"|string;
-  export type ParticipantTimerAction = "Unset"|string;
+  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|"CUSTOM_BOT"|string&{};
+  export type ParticipantTimerAction = "Unset"|string&{};
   export type ParticipantTimerConfigList = ParticipantTimerConfiguration[];
   export interface ParticipantTimerConfiguration {
     /**
@@ -6524,7 +6524,7 @@ declare namespace Connect {
     TimerValue: ParticipantTimerValue;
   }
   export type ParticipantTimerDurationInMinutes = number;
-  export type ParticipantTimerType = "IDLE"|"DISCONNECT_NONCUSTOMER"|string;
+  export type ParticipantTimerType = "IDLE"|"DISCONNECT_NONCUSTOMER"|string&{};
   export interface ParticipantTimerValue {
     /**
      * The timer action. Currently only one value is allowed: Unset. It deletes a timer.
@@ -6560,7 +6560,7 @@ declare namespace Connect {
     SourceContactId?: ContactId;
   }
   export type PhoneNumber = string;
-  export type PhoneNumberCountryCode = "AF"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BA"|"BW"|"BR"|"IO"|"VG"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CK"|"CR"|"HR"|"CU"|"CW"|"CY"|"CZ"|"CD"|"DK"|"DJ"|"DM"|"DO"|"TL"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"PF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"CI"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"AN"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"KP"|"MP"|"NO"|"OM"|"PK"|"PW"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"CG"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"KR"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"VI"|"UG"|"UA"|"AE"|"GB"|"US"|"UY"|"UZ"|"VU"|"VA"|"VE"|"VN"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
+  export type PhoneNumberCountryCode = "AF"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BA"|"BW"|"BR"|"IO"|"VG"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CK"|"CR"|"HR"|"CU"|"CW"|"CY"|"CZ"|"CD"|"DK"|"DJ"|"DM"|"DO"|"TL"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"PF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"CI"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"AN"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"KP"|"MP"|"NO"|"OM"|"PK"|"PW"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"CG"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"KR"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"VI"|"UG"|"UA"|"AE"|"GB"|"US"|"UY"|"UZ"|"VU"|"VA"|"VE"|"VN"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string&{};
   export type PhoneNumberCountryCodes = PhoneNumberCountryCode[];
   export type PhoneNumberDescription = string;
   export type PhoneNumberId = string;
@@ -6604,11 +6604,11 @@ declare namespace Connect {
     PhoneNumberCountryCode?: PhoneNumberCountryCode;
   }
   export type PhoneNumberSummaryList = PhoneNumberSummary[];
-  export type PhoneNumberType = "TOLL_FREE"|"DID"|"UIFN"|"SHARED"|"THIRD_PARTY_TF"|"THIRD_PARTY_DID"|string;
+  export type PhoneNumberType = "TOLL_FREE"|"DID"|"UIFN"|"SHARED"|"THIRD_PARTY_TF"|"THIRD_PARTY_DID"|string&{};
   export type PhoneNumberTypes = PhoneNumberType[];
   export type PhoneNumberWorkflowMessage = string;
-  export type PhoneNumberWorkflowStatus = "CLAIMED"|"IN_PROGRESS"|"FAILED"|string;
-  export type PhoneType = "SOFT_PHONE"|"DESK_PHONE"|string;
+  export type PhoneNumberWorkflowStatus = "CLAIMED"|"IN_PROGRESS"|"FAILED"|string&{};
+  export type PhoneType = "SOFT_PHONE"|"DESK_PHONE"|string&{};
   export type Prefix = string;
   export type Priority = number;
   export interface Prompt {
@@ -6782,7 +6782,7 @@ declare namespace Connect {
     TagFilter?: ControlPlaneTagFilter;
   }
   export type QueueSearchSummaryList = Queue[];
-  export type QueueStatus = "ENABLED"|"DISABLED"|string;
+  export type QueueStatus = "ENABLED"|"DISABLED"|string&{};
   export interface QueueSummary {
     /**
      * The identifier of the queue.
@@ -6802,7 +6802,7 @@ declare namespace Connect {
     QueueType?: QueueType;
   }
   export type QueueSummaryList = QueueSummary[];
-  export type QueueType = "STANDARD"|"AGENT"|string;
+  export type QueueType = "STANDARD"|"AGENT"|string&{};
   export type QueueTypes = QueueType[];
   export type Queues = QueueId[];
   export interface QuickConnect {
@@ -6890,7 +6890,7 @@ declare namespace Connect {
     QuickConnectType?: QuickConnectType;
   }
   export type QuickConnectSummaryList = QuickConnectSummary[];
-  export type QuickConnectType = "USER"|"QUEUE"|"PHONE_NUMBER"|string;
+  export type QuickConnectType = "USER"|"QUEUE"|"PHONE_NUMBER"|string&{};
   export type QuickConnectTypes = QuickConnectType[];
   export type QuickConnectsList = QuickConnectId[];
   export interface ReadOnlyFieldInfo {
@@ -6912,7 +6912,7 @@ declare namespace Connect {
   }
   export type ReferenceId = string;
   export type ReferenceKey = string;
-  export type ReferenceStatus = "APPROVED"|"REJECTED"|string;
+  export type ReferenceStatus = "APPROVED"|"REJECTED"|string&{};
   export interface ReferenceSummary {
     /**
      * Information about the reference when the referenceType is URL. Otherwise, null.
@@ -6940,10 +6940,10 @@ declare namespace Connect {
     Email?: EmailReference;
   }
   export type ReferenceSummaryList = ReferenceSummary[];
-  export type ReferenceType = "URL"|"ATTACHMENT"|"NUMBER"|"STRING"|"DATE"|"EMAIL"|string;
+  export type ReferenceType = "URL"|"ATTACHMENT"|"NUMBER"|"STRING"|"DATE"|"EMAIL"|string&{};
   export type ReferenceTypes = ReferenceType[];
   export type ReferenceValue = string;
-  export type RehydrationType = "ENTIRE_PAST_SESSION"|"FROM_SEGMENT"|string;
+  export type RehydrationType = "ENTIRE_PAST_SESSION"|"FROM_SEGMENT"|string&{};
   export interface ReleasePhoneNumberRequest {
     /**
      * A unique identifier for the phone number.
@@ -7233,7 +7233,7 @@ declare namespace Connect {
   export type RuleFunction = string;
   export type RuleId = string;
   export type RuleName = string;
-  export type RulePublishStatus = "DRAFT"|"PUBLISHED"|string;
+  export type RulePublishStatus = "DRAFT"|"PUBLISHED"|string&{};
   export interface RuleSummary {
     /**
      * The name of the rule.
@@ -7647,7 +7647,7 @@ declare namespace Connect {
      */
     NextToken?: VocabularyNextToken;
   }
-  export type SearchableQueueType = "STANDARD"|string;
+  export type SearchableQueueType = "STANDARD"|string&{};
   export interface SecurityKey {
     /**
      * The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
@@ -7816,12 +7816,12 @@ declare namespace Connect {
      */
     OptionRefId: ReferenceId;
   }
-  export type SingleSelectQuestionRuleCategoryAutomationCondition = "PRESENT"|"NOT_PRESENT"|string;
+  export type SingleSelectQuestionRuleCategoryAutomationCondition = "PRESENT"|"NOT_PRESENT"|string&{};
   export type SingleSelectQuestionRuleCategoryAutomationLabel = string;
   export type SnapshotVersion = string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export type SourceApplicationName = string;
-  export type SourceType = "SALESFORCE"|"ZENDESK"|string;
+  export type SourceType = "SALESFORCE"|"ZENDESK"|string&{};
   export interface StartChatContactRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -8058,7 +8058,7 @@ declare namespace Connect {
      */
     ContactId?: ContactId;
   }
-  export type Statistic = "SUM"|"MAX"|"AVG"|string;
+  export type Statistic = "SUM"|"MAX"|"AVG"|string&{};
   export interface StopContactRecordingRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -8103,10 +8103,10 @@ declare namespace Connect {
   }
   export interface StopContactStreamingResponse {
   }
-  export type StorageType = "S3"|"KINESIS_VIDEO_STREAM"|"KINESIS_STREAM"|"KINESIS_FIREHOSE"|string;
+  export type StorageType = "S3"|"KINESIS_VIDEO_STREAM"|"KINESIS_STREAM"|"KINESIS_FIREHOSE"|string&{};
   export type StreamingId = string;
   export type String = string;
-  export type StringComparisonType = "STARTS_WITH"|"CONTAINS"|"EXACT"|string;
+  export type StringComparisonType = "STARTS_WITH"|"CONTAINS"|"EXACT"|string&{};
   export interface StringCondition {
     /**
      * The name of the field in the string condition.
@@ -8316,7 +8316,7 @@ declare namespace Connect {
     Name?: TaskTemplateFieldName;
   }
   export type TaskTemplateFieldName = string;
-  export type TaskTemplateFieldType = "NAME"|"DESCRIPTION"|"SCHEDULED_TIME"|"QUICK_CONNECT"|"URL"|"NUMBER"|"TEXT"|"TEXT_AREA"|"DATE_TIME"|"BOOLEAN"|"SINGLE_SELECT"|"EMAIL"|string;
+  export type TaskTemplateFieldType = "NAME"|"DESCRIPTION"|"SCHEDULED_TIME"|"QUICK_CONNECT"|"URL"|"NUMBER"|"TEXT"|"TEXT_AREA"|"DATE_TIME"|"BOOLEAN"|"SINGLE_SELECT"|"EMAIL"|string&{};
   export type TaskTemplateFieldValue = string;
   export type TaskTemplateFields = TaskTemplateField[];
   export type TaskTemplateId = string;
@@ -8353,7 +8353,7 @@ declare namespace Connect {
   }
   export type TaskTemplateName = string;
   export type TaskTemplateSingleSelectOption = string;
-  export type TaskTemplateStatus = "ACTIVE"|"INACTIVE"|string;
+  export type TaskTemplateStatus = "ACTIVE"|"INACTIVE"|string&{};
   export interface TelephonyConfig {
     /**
      * Information about traffic distributions.
@@ -8383,7 +8383,7 @@ declare namespace Connect {
   }
   export type ThresholdValue = number;
   export type TimeZone = string;
-  export type TimerEligibleParticipantRoles = "CUSTOMER"|"AGENT"|string;
+  export type TimerEligibleParticipantRoles = "CUSTOMER"|"AGENT"|string&{};
   export type Timestamp = Date;
   export interface TrafficDistributionGroup {
     /**
@@ -8422,7 +8422,7 @@ declare namespace Connect {
   export type TrafficDistributionGroupArn = string;
   export type TrafficDistributionGroupId = string;
   export type TrafficDistributionGroupIdOrArn = string;
-  export type TrafficDistributionGroupStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|"PENDING_DELETION"|"DELETION_FAILED"|"UPDATE_IN_PROGRESS"|string;
+  export type TrafficDistributionGroupStatus = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|"PENDING_DELETION"|"DELETION_FAILED"|"UPDATE_IN_PROGRESS"|string&{};
   export interface TrafficDistributionGroupSummary {
     /**
      * The identifier of the traffic distribution group. This can be the ID or the ARN if the API is being called in the Region where the traffic distribution group was created. The ARN must be provided if the call is from the replicated Region.
@@ -8457,7 +8457,7 @@ declare namespace Connect {
     UserId?: UserId;
   }
   export type TrafficDistributionGroupUserSummaryList = TrafficDistributionGroupUserSummary[];
-  export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
+  export type TrafficType = "GENERAL"|"CAMPAIGN"|string&{};
   export interface TransferContactRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -8495,7 +8495,7 @@ declare namespace Connect {
     ContactArn?: ARN;
   }
   export type URI = string;
-  export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
+  export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string&{};
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -9369,7 +9369,7 @@ declare namespace Connect {
   }
   export type UseCaseId = string;
   export type UseCaseSummaryList = UseCase[];
-  export type UseCaseType = "RULES_EVALUATION"|"CONNECT_CAMPAIGNS"|string;
+  export type UseCaseType = "RULES_EVALUATION"|"CONNECT_CAMPAIGNS"|string&{};
   export interface User {
     /**
      * The identifier of the user account.
@@ -9667,11 +9667,11 @@ declare namespace Connect {
   export type VocabularyContent = string;
   export type VocabularyFailureReason = string;
   export type VocabularyId = string;
-  export type VocabularyLanguageCode = "ar-AE"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"hi-IN"|"it-IT"|"ja-JP"|"ko-KR"|"pt-BR"|"pt-PT"|"zh-CN"|"en-NZ"|"en-ZA"|string;
+  export type VocabularyLanguageCode = "ar-AE"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fr-CA"|"fr-FR"|"hi-IN"|"it-IT"|"ja-JP"|"ko-KR"|"pt-BR"|"pt-PT"|"zh-CN"|"en-NZ"|"en-ZA"|string&{};
   export type VocabularyLastModifiedTime = Date;
   export type VocabularyName = string;
   export type VocabularyNextToken = string;
-  export type VocabularyState = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|"DELETE_IN_PROGRESS"|string;
+  export type VocabularyState = "CREATION_IN_PROGRESS"|"ACTIVE"|"CREATION_FAILED"|"DELETE_IN_PROGRESS"|string&{};
   export interface VocabularySummary {
     /**
      * A unique name of the custom vocabulary.
@@ -9709,7 +9709,7 @@ declare namespace Connect {
      */
     VoiceRecordingTrack?: VoiceRecordingTrack;
   }
-  export type VoiceRecordingTrack = "FROM_AGENT"|"TO_AGENT"|"ALL"|string;
+  export type VoiceRecordingTrack = "FROM_AGENT"|"TO_AGENT"|"ALL"|string&{};
   export interface WisdomInfo {
     /**
      * The Amazon Resource Name (ARN) of the Wisdom session.

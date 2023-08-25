@@ -171,7 +171,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     ActiveSpeakerPosition?: ActiveSpeakerPosition;
   }
-  export type ActiveSpeakerPosition = "TopLeft"|"TopRight"|"BottomLeft"|"BottomRight"|string;
+  export type ActiveSpeakerPosition = "TopLeft"|"TopRight"|"BottomLeft"|"BottomRight"|string&{};
   export type AmazonResourceName = string;
   export interface AmazonTranscribeCallAnalyticsProcessorConfiguration {
     /**
@@ -328,7 +328,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     CompositedVideo: CompositedVideoConcatenationConfiguration;
   }
-  export type ArtifactsConcatenationState = "Enabled"|"Disabled"|string;
+  export type ArtifactsConcatenationState = "Enabled"|"Disabled"|string&{};
   export interface ArtifactsConfiguration {
     /**
      * The configuration for the audio artifacts.
@@ -347,29 +347,29 @@ declare namespace ChimeSDKMediaPipelines {
      */
     CompositedVideo?: CompositedVideoArtifactsConfiguration;
   }
-  export type ArtifactsState = "Enabled"|"Disabled"|string;
+  export type ArtifactsState = "Enabled"|"Disabled"|string&{};
   export type AttendeeIdList = GuidString[];
-  export type AudioArtifactsConcatenationState = "Enabled"|string;
+  export type AudioArtifactsConcatenationState = "Enabled"|string&{};
   export interface AudioArtifactsConfiguration {
     /**
      * The MUX type of the audio artifact configuration object.
      */
     MuxType: AudioMuxType;
   }
-  export type AudioChannelsOption = "Stereo"|"Mono"|string;
+  export type AudioChannelsOption = "Stereo"|"Mono"|string&{};
   export interface AudioConcatenationConfiguration {
     /**
      * Enables or disables the configuration object.
      */
     State: AudioArtifactsConcatenationState;
   }
-  export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|"AudioWithCompositedVideo"|string;
+  export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|"AudioWithCompositedVideo"|string&{};
   export type AudioSampleRateOption = string;
   export type Boolean = boolean;
-  export type BorderColor = "Black"|"Blue"|"Red"|"Green"|"White"|"Yellow"|string;
+  export type BorderColor = "Black"|"Blue"|"Red"|"Green"|"White"|"Yellow"|string&{};
   export type BorderThickness = number;
-  export type CallAnalyticsLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|string;
-  export type CanvasOrientation = "Landscape"|"Portrait"|string;
+  export type CallAnalyticsLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|string&{};
+  export type CanvasOrientation = "Landscape"|"Portrait"|string&{};
   export type CategoryName = string;
   export type CategoryNameList = CategoryName[];
   export interface ChannelDefinition {
@@ -450,7 +450,7 @@ declare namespace ChimeSDKMediaPipelines {
     S3BucketSinkConfiguration: S3BucketSinkConfiguration;
   }
   export type ConcatenationSinkList = ConcatenationSink[];
-  export type ConcatenationSinkType = "S3Bucket"|string;
+  export type ConcatenationSinkType = "S3Bucket"|string&{};
   export interface ConcatenationSource {
     /**
      * The type of concatenation source in a configuration object.
@@ -462,7 +462,7 @@ declare namespace ChimeSDKMediaPipelines {
     MediaCapturePipelineSourceConfiguration: MediaCapturePipelineSourceConfiguration;
   }
   export type ConcatenationSourceList = ConcatenationSource[];
-  export type ConcatenationSourceType = "MediaCapturePipeline"|string;
+  export type ConcatenationSourceType = "MediaCapturePipeline"|string&{};
   export interface ContentArtifactsConfiguration {
     /**
      * Indicates whether the content artifact is enabled or disabled.
@@ -479,10 +479,10 @@ declare namespace ChimeSDKMediaPipelines {
      */
     State: ArtifactsConcatenationState;
   }
-  export type ContentMuxType = "ContentOnly"|string;
-  export type ContentRedactionOutput = "redacted"|"redacted_and_unredacted"|string;
-  export type ContentShareLayoutOption = "PresenterOnly"|"Horizontal"|"Vertical"|"ActiveSpeakerOnly"|string;
-  export type ContentType = "PII"|string;
+  export type ContentMuxType = "ContentOnly"|string&{};
+  export type ContentRedactionOutput = "redacted"|"redacted_and_unredacted"|string&{};
+  export type ContentShareLayoutOption = "PresenterOnly"|"Horizontal"|"Vertical"|"ActiveSpeakerOnly"|string&{};
+  export type ContentType = "PII"|string&{};
   export type CornerRadius = number;
   export interface CreateMediaCapturePipelineRequest {
     /**
@@ -673,7 +673,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     TimestampRange: TimestampRange;
   }
-  export type FragmentSelectorType = "ProducerTimestamp"|"ServerTimestamp"|string;
+  export type FragmentSelectorType = "ProducerTimestamp"|"ServerTimestamp"|string&{};
   export interface GetMediaCapturePipelineRequest {
     /**
      * The ID of the pipeline that you want to get.
@@ -741,7 +741,7 @@ declare namespace ChimeSDKMediaPipelines {
     CanvasOrientation?: CanvasOrientation;
   }
   export type GuidString = string;
-  export type HighlightColor = "Black"|"Blue"|"Red"|"Green"|"White"|"Yellow"|string;
+  export type HighlightColor = "Black"|"Blue"|"Red"|"Green"|"White"|"Yellow"|string&{};
   export interface HorizontalLayoutConfiguration {
     /**
      * Sets the automatic ordering of the video tiles.
@@ -760,7 +760,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     TileAspectRatio?: TileAspectRatio;
   }
-  export type HorizontalTilePosition = "Top"|"Bottom"|string;
+  export type HorizontalTilePosition = "Top"|"Bottom"|string&{};
   export type Iso8601Timestamp = Date;
   export interface IssueDetectionConfiguration {
     /**
@@ -822,7 +822,7 @@ declare namespace ChimeSDKMediaPipelines {
     InsightsTarget?: Arn;
   }
   export type LanguageOptions = string;
-  export type LayoutOption = "GridView"|string;
+  export type LayoutOption = "GridView"|string&{};
   export interface ListMediaCapturePipelinesRequest {
     /**
      * The token used to retrieve the next page of results.
@@ -895,7 +895,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     Tags?: TagList;
   }
-  export type LiveConnectorMuxType = "AudioWithCompositedVideo"|"AudioWithActiveSpeakerVideo"|string;
+  export type LiveConnectorMuxType = "AudioWithCompositedVideo"|"AudioWithActiveSpeakerVideo"|string&{};
   export interface LiveConnectorRTMPConfiguration {
     /**
      * The URL of the RTMP configuration.
@@ -921,7 +921,7 @@ declare namespace ChimeSDKMediaPipelines {
     RTMPConfiguration: LiveConnectorRTMPConfiguration;
   }
   export type LiveConnectorSinkList = LiveConnectorSinkConfiguration[];
-  export type LiveConnectorSinkType = "RTMP"|string;
+  export type LiveConnectorSinkType = "RTMP"|string&{};
   export interface LiveConnectorSourceConfiguration {
     /**
      * The source configuration's media source type.
@@ -933,7 +933,7 @@ declare namespace ChimeSDKMediaPipelines {
     ChimeSdkMeetingLiveConnectorConfiguration: ChimeSdkMeetingLiveConnectorConfiguration;
   }
   export type LiveConnectorSourceList = LiveConnectorSourceConfiguration[];
-  export type LiveConnectorSourceType = "ChimeSdkMeeting"|string;
+  export type LiveConnectorSourceType = "ChimeSdkMeeting"|string&{};
   export interface MediaCapturePipeline {
     /**
      * The ID of a media pipeline.
@@ -1027,7 +1027,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     UpdatedTimestamp?: Iso8601Timestamp;
   }
-  export type MediaEncoding = "pcm"|string;
+  export type MediaEncoding = "pcm"|string&{};
   export interface MediaInsightsPipeline {
     /**
      * The ID of a media insights pipeline.
@@ -1138,7 +1138,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     SnsTopicSinkConfiguration?: SnsTopicSinkConfiguration;
   }
-  export type MediaInsightsPipelineConfigurationElementType = "AmazonTranscribeCallAnalyticsProcessor"|"VoiceAnalyticsProcessor"|"AmazonTranscribeProcessor"|"KinesisDataStreamSink"|"LambdaFunctionSink"|"SqsQueueSink"|"SnsTopicSink"|"S3RecordingSink"|string;
+  export type MediaInsightsPipelineConfigurationElementType = "AmazonTranscribeCallAnalyticsProcessor"|"VoiceAnalyticsProcessor"|"AmazonTranscribeProcessor"|"KinesisDataStreamSink"|"LambdaFunctionSink"|"SqsQueueSink"|"SnsTopicSink"|"S3RecordingSink"|string&{};
   export type MediaInsightsPipelineConfigurationElements = MediaInsightsPipelineConfigurationElement[];
   export type MediaInsightsPipelineConfigurationNameString = string;
   export interface MediaInsightsPipelineConfigurationSummary {
@@ -1206,10 +1206,10 @@ declare namespace ChimeSDKMediaPipelines {
     MediaInsightsPipeline?: MediaInsightsPipeline;
   }
   export type MediaPipelineList = MediaPipelineSummary[];
-  export type MediaPipelineSinkType = "S3Bucket"|string;
-  export type MediaPipelineSourceType = "ChimeSdkMeeting"|string;
-  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|"Paused"|string;
-  export type MediaPipelineStatusUpdate = "Pause"|"Resume"|string;
+  export type MediaPipelineSinkType = "S3Bucket"|string&{};
+  export type MediaPipelineSourceType = "ChimeSdkMeeting"|string&{};
+  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|"Paused"|string&{};
+  export type MediaPipelineStatusUpdate = "Pause"|"Resume"|string&{};
   export interface MediaPipelineSummary {
     /**
      * The ID of the media pipeline in the summary.
@@ -1230,8 +1230,8 @@ declare namespace ChimeSDKMediaPipelines {
   export type ModelName = string;
   export type NonEmptyString = string;
   export type NumberOfChannels = number;
-  export type PartialResultsStability = "high"|"medium"|"low"|string;
-  export type ParticipantRole = "AGENT"|"CUSTOMER"|string;
+  export type PartialResultsStability = "high"|"medium"|"low"|string&{};
+  export type ParticipantRole = "AGENT"|"CUSTOMER"|string&{};
   export type PiiEntityTypes = string;
   export interface PostCallAnalyticsSettings {
     /**
@@ -1257,7 +1257,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     PresenterPosition?: PresenterPosition;
   }
-  export type PresenterPosition = "TopLeft"|"TopRight"|"BottomLeft"|"BottomRight"|string;
+  export type PresenterPosition = "TopLeft"|"TopRight"|"BottomLeft"|"BottomRight"|string&{};
   export interface RealTimeAlertConfiguration {
     /**
      * Turns off real-time alerts.
@@ -1287,8 +1287,8 @@ declare namespace ChimeSDKMediaPipelines {
     IssueDetectionConfiguration?: IssueDetectionConfiguration;
   }
   export type RealTimeAlertRuleList = RealTimeAlertRule[];
-  export type RealTimeAlertRuleType = "KeywordMatch"|"Sentiment"|"IssueDetection"|string;
-  export type RecordingFileFormat = "Wav"|"Opus"|string;
+  export type RealTimeAlertRuleType = "KeywordMatch"|"Sentiment"|"IssueDetection"|string&{};
+  export type RecordingFileFormat = "Wav"|"Opus"|string&{};
   export interface RecordingStreamConfiguration {
     /**
      * The ARN of the recording stream.
@@ -1296,7 +1296,7 @@ declare namespace ChimeSDKMediaPipelines {
     StreamArn?: KinesisVideoStreamArn;
   }
   export type RecordingStreamList = RecordingStreamConfiguration[];
-  export type ResolutionOption = "HD"|"FHD"|string;
+  export type ResolutionOption = "HD"|"FHD"|string&{};
   export type ResultMax = number;
   export type RuleName = string;
   export interface S3BucketSinkConfiguration {
@@ -1351,7 +1351,7 @@ declare namespace ChimeSDKMediaPipelines {
     TimePeriod: SentimentTimePeriodInSeconds;
   }
   export type SentimentTimePeriodInSeconds = number;
-  export type SentimentType = "NEGATIVE"|string;
+  export type SentimentType = "NEGATIVE"|string&{};
   export interface SnsTopicSinkConfiguration {
     /**
      * The ARN of the SNS sink.
@@ -1424,7 +1424,7 @@ declare namespace ChimeSDKMediaPipelines {
   export type TagValue = string;
   export type TileAspectRatio = string;
   export type TileCount = number;
-  export type TileOrder = "JoinSequence"|"SpeakerSequence"|string;
+  export type TileOrder = "JoinSequence"|"SpeakerSequence"|string&{};
   export type Timestamp = Date;
   export interface TimestampRange {
     /**
@@ -1506,7 +1506,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     TileAspectRatio?: TileAspectRatio;
   }
-  export type VerticalTilePosition = "Left"|"Right"|string;
+  export type VerticalTilePosition = "Left"|"Right"|string&{};
   export interface VideoArtifactsConfiguration {
     /**
      * Indicates whether the video artifact is enabled or disabled.
@@ -1541,13 +1541,13 @@ declare namespace ChimeSDKMediaPipelines {
      */
     State: ArtifactsConcatenationState;
   }
-  export type VideoMuxType = "VideoOnly"|string;
-  export type VocabularyFilterMethod = "remove"|"mask"|"tag"|string;
+  export type VideoMuxType = "VideoOnly"|string&{};
+  export type VocabularyFilterMethod = "remove"|"mask"|"tag"|string&{};
   export type VocabularyFilterName = string;
   export type VocabularyFilterNames = string;
   export type VocabularyName = string;
   export type VocabularyNames = string;
-  export type VoiceAnalyticsConfigurationStatus = "Enabled"|"Disabled"|string;
+  export type VoiceAnalyticsConfigurationStatus = "Enabled"|"Disabled"|string&{};
   export interface VoiceAnalyticsProcessorConfiguration {
     /**
      * The status of the speaker search task.

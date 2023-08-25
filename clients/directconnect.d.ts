@@ -527,7 +527,7 @@ declare namespace DirectConnect {
   export interface AcceptDirectConnectGatewayAssociationProposalResult {
     directConnectGatewayAssociation?: DirectConnectGatewayAssociation;
   }
-  export type AddressFamily = "ipv4"|"ipv6"|string;
+  export type AddressFamily = "ipv4"|"ipv6"|string&{};
   export type AgreementList = CustomerAgreement[];
   export type AgreementName = string;
   export interface AllocateConnectionOnInterconnectRequest {
@@ -752,8 +752,8 @@ declare namespace DirectConnect {
   export type BGPPeerId = string;
   export type BGPPeerIdList = BGPPeerId[];
   export type BGPPeerList = BGPPeer[];
-  export type BGPPeerState = "verifying"|"pending"|"available"|"deleting"|"deleted"|string;
-  export type BGPStatus = "up"|"down"|"unknown"|string;
+  export type BGPPeerState = "verifying"|"pending"|"available"|"deleting"|"deleted"|string&{};
+  export type BGPStatus = "up"|"down"|"unknown"|string&{};
   export type Bandwidth = string;
   export type BooleanFlag = boolean;
   export type CIDR = string;
@@ -924,7 +924,7 @@ declare namespace DirectConnect {
   export type ConnectionId = string;
   export type ConnectionList = Connection[];
   export type ConnectionName = string;
-  export type ConnectionState = "ordering"|"requested"|"pending"|"available"|"down"|"deleting"|"deleted"|"rejected"|"unknown"|string;
+  export type ConnectionState = "ordering"|"requested"|"pending"|"available"|"down"|"deleting"|"deleted"|"rejected"|"unknown"|string&{};
   export interface Connections {
     /**
      * The connections.
@@ -1624,8 +1624,8 @@ declare namespace DirectConnect {
   }
   export type DirectConnectGatewayAssociationProposalId = string;
   export type DirectConnectGatewayAssociationProposalList = DirectConnectGatewayAssociationProposal[];
-  export type DirectConnectGatewayAssociationProposalState = "requested"|"accepted"|"deleted"|string;
-  export type DirectConnectGatewayAssociationState = "associating"|"associated"|"disassociating"|"disassociated"|"updating"|string;
+  export type DirectConnectGatewayAssociationProposalState = "requested"|"accepted"|"deleted"|string&{};
+  export type DirectConnectGatewayAssociationState = "associating"|"associated"|"disassociating"|"disassociated"|"updating"|string&{};
   export interface DirectConnectGatewayAttachment {
     /**
      * The ID of the Direct Connect gateway.
@@ -1657,12 +1657,12 @@ declare namespace DirectConnect {
     stateChangeError?: StateChangeError;
   }
   export type DirectConnectGatewayAttachmentList = DirectConnectGatewayAttachment[];
-  export type DirectConnectGatewayAttachmentState = "attaching"|"attached"|"detaching"|"detached"|string;
-  export type DirectConnectGatewayAttachmentType = "TransitVirtualInterface"|"PrivateVirtualInterface"|string;
+  export type DirectConnectGatewayAttachmentState = "attaching"|"attached"|"detaching"|"detached"|string&{};
+  export type DirectConnectGatewayAttachmentType = "TransitVirtualInterface"|"PrivateVirtualInterface"|string&{};
   export type DirectConnectGatewayId = string;
   export type DirectConnectGatewayList = DirectConnectGateway[];
   export type DirectConnectGatewayName = string;
-  export type DirectConnectGatewayState = "pending"|"available"|"deleting"|"deleted"|string;
+  export type DirectConnectGatewayState = "pending"|"available"|"deleting"|"deleted"|string&{};
   export interface DisassociateConnectionFromLagRequest {
     /**
      * The ID of the connection.
@@ -1699,8 +1699,8 @@ declare namespace DirectConnect {
   export type FailureTestHistoryStatus = string;
   export type GatewayIdToAssociate = string;
   export type GatewayIdentifier = string;
-  export type GatewayType = "virtualPrivateGateway"|"transitGateway"|string;
-  export type HasLogicalRedundancy = "unknown"|"yes"|"no"|string;
+  export type GatewayType = "virtualPrivateGateway"|"transitGateway"|string&{};
+  export type HasLogicalRedundancy = "unknown"|"yes"|"no"|string&{};
   export interface Interconnect {
     /**
      * The ID of the interconnect.
@@ -1766,7 +1766,7 @@ declare namespace DirectConnect {
   export type InterconnectId = string;
   export type InterconnectList = Interconnect[];
   export type InterconnectName = string;
-  export type InterconnectState = "requested"|"pending"|"available"|"down"|"deleting"|"deleted"|"unknown"|string;
+  export type InterconnectState = "requested"|"pending"|"available"|"down"|"deleting"|"deleted"|"unknown"|string&{};
   export interface Interconnects {
     /**
      * The interconnects.
@@ -1863,7 +1863,7 @@ declare namespace DirectConnect {
   export type LagId = string;
   export type LagList = Lag[];
   export type LagName = string;
-  export type LagState = "requested"|"pending"|"available"|"down"|"deleting"|"deleted"|"unknown"|string;
+  export type LagState = "requested"|"pending"|"available"|"down"|"deleting"|"deleted"|"unknown"|string&{};
   export interface Lags {
     /**
      * The LAGs.
@@ -1917,7 +1917,7 @@ declare namespace DirectConnect {
     loaContentType?: LoaContentType;
   }
   export type LoaContent = Buffer|Uint8Array|Blob|string;
-  export type LoaContentType = "application/pdf"|string;
+  export type LoaContentType = "application/pdf"|string&{};
   export type LoaIssueTime = Date;
   export interface Location {
     /**
@@ -2247,7 +2247,7 @@ declare namespace DirectConnect {
      */
     tags?: TagList;
   }
-  export type NniPartnerType = "v1"|"v2"|"nonPartner"|string;
+  export type NniPartnerType = "v1"|"v2"|"nonPartner"|string&{};
   export type OwnerAccount = string;
   export type PaginationToken = string;
   export type PartnerName = string;
@@ -2598,7 +2598,7 @@ declare namespace DirectConnect {
   export type VirtualInterfaceList = VirtualInterface[];
   export type VirtualInterfaceName = string;
   export type VirtualInterfaceRegion = string;
-  export type VirtualInterfaceState = "confirming"|"verifying"|"pending"|"available"|"down"|"deleting"|"deleted"|"rejected"|"unknown"|string;
+  export type VirtualInterfaceState = "confirming"|"verifying"|"pending"|"available"|"down"|"deleting"|"deleted"|"rejected"|"unknown"|string&{};
   export interface VirtualInterfaceTestHistory {
     /**
      * The ID of the virtual interface failover test.

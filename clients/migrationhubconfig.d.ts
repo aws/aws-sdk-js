@@ -132,7 +132,7 @@ declare namespace MigrationHubConfig {
     Id?: TargetId;
   }
   export type TargetId = string;
-  export type TargetType = "ACCOUNT"|string;
+  export type TargetType = "ACCOUNT"|string&{};
   export type Token = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -280,7 +280,7 @@ declare namespace IoTRoboRunner {
   export type DestinationArn = string;
   export type DestinationGenericIdentifier = string;
   export type DestinationId = string;
-  export type DestinationState = "ENABLED"|"DISABLED"|"DECOMMISSIONED"|string;
+  export type DestinationState = "ENABLED"|"DISABLED"|"DECOMMISSIONED"|string&{};
   export type Destinations = Destination[];
   export type Double = number;
   export interface GetDestinationRequest {

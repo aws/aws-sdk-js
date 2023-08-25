@@ -339,7 +339,7 @@ declare namespace Billingconductor {
      */
     Reason?: AssociateResourceErrorReason;
   }
-  export type AssociateResourceErrorReason = "INVALID_ARN"|"SERVICE_LIMIT_EXCEEDED"|"ILLEGAL_CUSTOMLINEITEM"|"INTERNAL_SERVER_EXCEPTION"|"INVALID_BILLING_PERIOD_RANGE"|string;
+  export type AssociateResourceErrorReason = "INVALID_ARN"|"SERVICE_LIMIT_EXCEEDED"|"ILLEGAL_CUSTOMLINEITEM"|"INTERNAL_SERVER_EXCEPTION"|"INVALID_BILLING_PERIOD_RANGE"|string&{};
   export interface AssociateResourceResponseElement {
     /**
      * The resource ARN that was associated to the custom line item.
@@ -471,7 +471,7 @@ declare namespace Billingconductor {
     AccountGrouping?: ListBillingGroupAccountGrouping;
   }
   export type BillingGroupName = string;
-  export type BillingGroupStatus = "ACTIVE"|"PRIMARY_ACCOUNT_MISSING"|string;
+  export type BillingGroupStatus = "ACTIVE"|"PRIMARY_ACCOUNT_MISSING"|string&{};
   export type BillingGroupStatusList = BillingGroupStatus[];
   export type BillingGroupStatusReason = string;
   export type BillingPeriod = string;
@@ -652,7 +652,7 @@ declare namespace Billingconductor {
     FreeTier: CreateFreeTierConfig;
   }
   export type Currency = string;
-  export type CurrencyCode = "USD"|"CNY"|string;
+  export type CurrencyCode = "USD"|"CNY"|string&{};
   export type CustomLineItemArn = string;
   export type CustomLineItemArns = CustomLineItemArn[];
   export type CustomLineItemAssociationElement = string;
@@ -748,8 +748,8 @@ declare namespace Billingconductor {
   }
   export type CustomLineItemPercentageChargeValue = number;
   export type CustomLineItemProductCode = string;
-  export type CustomLineItemRelationship = "PARENT"|"CHILD"|string;
-  export type CustomLineItemType = "CREDIT"|"FEE"|string;
+  export type CustomLineItemRelationship = "PARENT"|"CHILD"|string&{};
+  export type CustomLineItemType = "CREDIT"|"FEE"|string&{};
   export type CustomLineItemVersionList = CustomLineItemVersionListElement[];
   export interface CustomLineItemVersionListElement {
     /**
@@ -1463,8 +1463,8 @@ declare namespace Billingconductor {
     Operation?: Operation;
   }
   export type PricingRuleName = string;
-  export type PricingRuleScope = "GLOBAL"|"SERVICE"|"BILLING_ENTITY"|"SKU"|string;
-  export type PricingRuleType = "MARKUP"|"DISCOUNT"|"TIERING"|string;
+  export type PricingRuleScope = "GLOBAL"|"SERVICE"|"BILLING_ENTITY"|"SKU"|string&{};
+  export type PricingRuleType = "MARKUP"|"DISCOUNT"|"TIERING"|string&{};
   export type ProformaCost = string;
   export type Service = string;
   export type String = string;

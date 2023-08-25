@@ -118,11 +118,11 @@ declare class HealthLake extends Service {
 }
 declare namespace HealthLake {
   export type AmazonResourceName = string;
-  export type AuthorizationStrategy = "SMART_ON_FHIR_V1"|"AWS_AUTH"|string;
+  export type AuthorizationStrategy = "SMART_ON_FHIR_V1"|"AWS_AUTH"|string&{};
   export type Boolean = boolean;
   export type BoundedLengthString = string;
   export type ClientTokenString = string;
-  export type CmkType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY"|string;
+  export type CmkType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY"|string&{};
   export type ConfigurationMetadata = string;
   export interface CreateFHIRDatastoreRequest {
     /**
@@ -236,7 +236,7 @@ declare namespace HealthLake {
     IdentityProviderConfiguration?: IdentityProviderConfiguration;
   }
   export type DatastorePropertiesList = DatastoreProperties[];
-  export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|string;
+  export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|string&{};
   export interface DeleteFHIRDatastoreRequest {
     /**
      *  The AWS-generated ID for the data store to be deleted.
@@ -345,7 +345,7 @@ declare namespace HealthLake {
     Message?: Message;
   }
   export type ExportJobPropertiesList = ExportJobProperties[];
-  export type FHIRVersion = "R4"|string;
+  export type FHIRVersion = "R4"|string&{};
   export type IamRoleArn = string;
   export interface IdentityProviderConfiguration {
     /**
@@ -413,7 +413,7 @@ declare namespace HealthLake {
   }
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED_WITH_ERRORS"|"COMPLETED"|"FAILED"|"CANCEL_SUBMITTED"|"CANCEL_IN_PROGRESS"|"CANCEL_COMPLETED"|"CANCEL_FAILED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED_WITH_ERRORS"|"COMPLETED"|"FAILED"|"CANCEL_SUBMITTED"|"CANCEL_IN_PROGRESS"|"CANCEL_COMPLETED"|"CANCEL_FAILED"|string&{};
   export interface KmsEncryptionConfig {
     /**
      *  The type of customer-managed-key(CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. 
@@ -556,7 +556,7 @@ declare namespace HealthLake {
      */
     PreloadDataType: PreloadDataType;
   }
-  export type PreloadDataType = "SYNTHEA"|string;
+  export type PreloadDataType = "SYNTHEA"|string&{};
   export interface S3Configuration {
     /**
      *  The S3Uri is the user specified S3 location of the FHIR data to be imported into AWS HealthLake. 

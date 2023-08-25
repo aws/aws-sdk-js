@@ -536,7 +536,7 @@ declare namespace Imagebuilder {
   export type AmiNameString = string;
   export type Arn = string;
   export type Boolean = boolean;
-  export type BuildType = "USER_INITIATED"|"SCHEDULED"|"IMPORT"|string;
+  export type BuildType = "USER_INITIATED"|"SCHEDULED"|"IMPORT"|string&{};
   export interface CancelImageCreationRequest {
     /**
      * The Amazon Resource Name (ARN) of the image that you want to cancel creation for.
@@ -649,7 +649,7 @@ declare namespace Imagebuilder {
   }
   export type ComponentConfigurationList = ComponentConfiguration[];
   export type ComponentData = string;
-  export type ComponentFormat = "SHELL"|string;
+  export type ComponentFormat = "SHELL"|string&{};
   export interface ComponentParameter {
     /**
      * The name of the component parameter to set.
@@ -695,7 +695,7 @@ declare namespace Imagebuilder {
      */
     reason?: NonEmptyString;
   }
-  export type ComponentStatus = "DEPRECATED"|string;
+  export type ComponentStatus = "DEPRECATED"|string&{};
   export interface ComponentSummary {
     /**
      * The Amazon Resource Name (ARN) of the component.
@@ -755,7 +755,7 @@ declare namespace Imagebuilder {
     obfuscate?: Boolean;
   }
   export type ComponentSummaryList = ComponentSummary[];
-  export type ComponentType = "BUILD"|"TEST"|string;
+  export type ComponentType = "BUILD"|"TEST"|string&{};
   export interface ComponentVersion {
     /**
      * The Amazon Resource Name (ARN) of the component.  Semantic versioning is included in each object's Amazon Resource Name (ARN), at the level that applies to that object as follows:   Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.   Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;   Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.   
@@ -928,8 +928,8 @@ declare namespace Imagebuilder {
     tags?: TagMap;
   }
   export type ContainerRecipeSummaryList = ContainerRecipeSummary[];
-  export type ContainerRepositoryService = "ECR"|string;
-  export type ContainerType = "DOCKER"|string;
+  export type ContainerRepositoryService = "ECR"|string&{};
+  export type ContainerType = "DOCKER"|string&{};
   export interface CreateComponentRequest {
     /**
      * The name of the component.
@@ -1524,7 +1524,7 @@ declare namespace Imagebuilder {
      */
     infrastructureConfigurationArn?: InfrastructureConfigurationArn;
   }
-  export type DiskImageFormat = "VMDK"|"RAW"|"VHD"|string;
+  export type DiskImageFormat = "VMDK"|"RAW"|"VHD"|string&{};
   export interface Distribution {
     /**
      * The target Region.
@@ -1661,7 +1661,7 @@ declare namespace Imagebuilder {
   export type EbsIopsInteger = number;
   export type EbsVolumeSizeInteger = number;
   export type EbsVolumeThroughput = number;
-  export type EbsVolumeType = "standard"|"io1"|"io2"|"gp2"|"gp3"|"sc1"|"st1"|string;
+  export type EbsVolumeType = "standard"|"io1"|"io2"|"gp2"|"gp3"|"sc1"|"st1"|string&{};
   export interface EcrConfiguration {
     /**
      * The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don’t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository for vulnerability scans of your output container images.
@@ -2434,7 +2434,7 @@ declare namespace Imagebuilder {
      */
     reason?: NonEmptyString;
   }
-  export type ImageScanStatus = "PENDING"|"SCANNING"|"COLLECTING"|"COMPLETED"|"ABANDONED"|"FAILED"|"TIMED_OUT"|string;
+  export type ImageScanStatus = "PENDING"|"SCANNING"|"COLLECTING"|"COMPLETED"|"ABANDONED"|"FAILED"|"TIMED_OUT"|string&{};
   export interface ImageScanningConfiguration {
     /**
      * A setting that indicates whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.
@@ -2445,7 +2445,7 @@ declare namespace Imagebuilder {
      */
     ecrConfiguration?: EcrConfiguration;
   }
-  export type ImageSource = "AMAZON_MANAGED"|"AWS_MARKETPLACE"|"IMPORTED"|"CUSTOM"|string;
+  export type ImageSource = "AMAZON_MANAGED"|"AWS_MARKETPLACE"|"IMPORTED"|"CUSTOM"|string&{};
   export interface ImageState {
     /**
      * The status of the image.
@@ -2456,7 +2456,7 @@ declare namespace Imagebuilder {
      */
     reason?: NonEmptyString;
   }
-  export type ImageStatus = "PENDING"|"CREATING"|"BUILDING"|"TESTING"|"DISTRIBUTING"|"INTEGRATING"|"AVAILABLE"|"CANCELLED"|"FAILED"|"DEPRECATED"|"DELETED"|string;
+  export type ImageStatus = "PENDING"|"CREATING"|"BUILDING"|"TESTING"|"DISTRIBUTING"|"INTEGRATING"|"AVAILABLE"|"CANCELLED"|"FAILED"|"DEPRECATED"|"DELETED"|string&{};
   export interface ImageSummary {
     /**
      * The Amazon Resource Name (ARN) of the image.
@@ -2523,7 +2523,7 @@ declare namespace Imagebuilder {
     timeoutMinutes?: ImageTestsTimeoutMinutes;
   }
   export type ImageTestsTimeoutMinutes = number;
-  export type ImageType = "AMI"|"DOCKER"|string;
+  export type ImageType = "AMI"|"DOCKER"|string&{};
   export interface ImageVersion {
     /**
      * The Amazon Resource Name (ARN) of a specific version of an Image Builder image.  Semantic versioning is included in each object's Amazon Resource Name (ARN), at the level that applies to that object as follows:   Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.   Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;   Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.   
@@ -3389,7 +3389,7 @@ declare namespace Imagebuilder {
      */
     containers?: ContainerList;
   }
-  export type Ownership = "Self"|"Shared"|"Amazon"|"ThirdParty"|string;
+  export type Ownership = "Self"|"Shared"|"Amazon"|"ThirdParty"|string&{};
   export type PackageArchitecture = string;
   export type PackageEpoch = number;
   export interface PackageVulnerabilityDetails {
@@ -3435,9 +3435,9 @@ declare namespace Imagebuilder {
     referenceUrls?: NonEmptyStringList;
   }
   export type PaginationToken = string;
-  export type PipelineExecutionStartCondition = "EXPRESSION_MATCH_ONLY"|"EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"|string;
-  export type PipelineStatus = "DISABLED"|"ENABLED"|string;
-  export type Platform = "Windows"|"Linux"|string;
+  export type PipelineExecutionStartCondition = "EXPRESSION_MATCH_ONLY"|"EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE"|string&{};
+  export type PipelineStatus = "DISABLED"|"ENABLED"|string&{};
+  export type Platform = "Windows"|"Linux"|string&{};
   export interface PutComponentPolicyRequest {
     /**
      * The Amazon Resource Name (ARN) of the component that this policy should be applied to.
@@ -3945,14 +3945,14 @@ declare namespace Imagebuilder {
      */
     endTime?: DateTime;
   }
-  export type WorkflowExecutionStatus = "PENDING"|"SKIPPED"|"RUNNING"|"COMPLETED"|"FAILED"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_COMPLETED"|string;
+  export type WorkflowExecutionStatus = "PENDING"|"SKIPPED"|"RUNNING"|"COMPLETED"|"FAILED"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_COMPLETED"|string&{};
   export type WorkflowExecutionsList = WorkflowExecutionMetadata[];
   export type WorkflowStepAction = string;
   export type WorkflowStepCount = number;
   export type WorkflowStepDescription = string;
   export type WorkflowStepExecutionId = string;
-  export type WorkflowStepExecutionRollbackStatus = "RUNNING"|"COMPLETED"|"SKIPPED"|"FAILED"|string;
-  export type WorkflowStepExecutionStatus = "PENDING"|"SKIPPED"|"RUNNING"|"COMPLETED"|"FAILED"|string;
+  export type WorkflowStepExecutionRollbackStatus = "RUNNING"|"COMPLETED"|"SKIPPED"|"FAILED"|string&{};
+  export type WorkflowStepExecutionStatus = "PENDING"|"SKIPPED"|"RUNNING"|"COMPLETED"|"FAILED"|string&{};
   export type WorkflowStepExecutionsList = WorkflowStepMetadata[];
   export type WorkflowStepInputs = string;
   export type WorkflowStepMessage = string;
@@ -4005,7 +4005,7 @@ declare namespace Imagebuilder {
   export type WorkflowStepName = string;
   export type WorkflowStepOutputs = string;
   export type WorkflowStepTimeoutSecondsInteger = number;
-  export type WorkflowType = "BUILD"|"TEST"|"DISTRIBUTION"|string;
+  export type WorkflowType = "BUILD"|"TEST"|"DISTRIBUTION"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

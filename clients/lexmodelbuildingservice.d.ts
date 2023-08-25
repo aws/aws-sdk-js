@@ -490,8 +490,8 @@ declare namespace LexModelBuildingService {
   export type BuiltinSlotTypeMetadataList = BuiltinSlotTypeMetadata[];
   export type BuiltinSlotTypeSignature = string;
   export type ChannelConfigurationMap = {[key: string]: String};
-  export type ChannelStatus = "IN_PROGRESS"|"CREATED"|"FAILED"|string;
-  export type ChannelType = "Facebook"|"Slack"|"Twilio-Sms"|"Kik"|string;
+  export type ChannelStatus = "IN_PROGRESS"|"CREATED"|"FAILED"|string&{};
+  export type ChannelType = "Facebook"|"Slack"|"Twilio-Sms"|"Kik"|string&{};
   export interface CodeHook {
     /**
      * The Amazon Resource Name (ARN) of the Lambda function.
@@ -504,7 +504,7 @@ declare namespace LexModelBuildingService {
   }
   export type ConfidenceThreshold = number;
   export type ContentString = string;
-  export type ContentType = "PlainText"|"SSML"|"CustomPayload"|string;
+  export type ContentType = "PlainText"|"SSML"|"CustomPayload"|string&{};
   export type ContextTimeToLiveInSeconds = number;
   export type ContextTurnsToLive = number;
   export interface ConversationLogsRequest {
@@ -828,7 +828,7 @@ declare namespace LexModelBuildingService {
     userId: UserId;
   }
   export type Description = string;
-  export type Destination = "CLOUDWATCH_LOGS"|"S3"|string;
+  export type Destination = "CLOUDWATCH_LOGS"|"S3"|string&{};
   export interface EnumerationValue {
     /**
      * The value of the slot type.
@@ -840,8 +840,8 @@ declare namespace LexModelBuildingService {
     synonyms?: SynonymList;
   }
   export type EnumerationValues = EnumerationValue[];
-  export type ExportStatus = "IN_PROGRESS"|"READY"|"FAILED"|string;
-  export type ExportType = "ALEXA_SKILLS_KIT"|"LEX"|string;
+  export type ExportStatus = "IN_PROGRESS"|"READY"|"FAILED"|string&{};
+  export type ExportType = "ALEXA_SKILLS_KIT"|"LEX"|string&{};
   export interface FollowUpPrompt {
     /**
      * Prompts for information from the user. 
@@ -862,7 +862,7 @@ declare namespace LexModelBuildingService {
      */
     codeHook?: CodeHook;
   }
-  export type FulfillmentActivityType = "ReturnIntent"|"CodeHook"|string;
+  export type FulfillmentActivityType = "ReturnIntent"|"CodeHook"|string&{};
   export interface GetBotAliasRequest {
     /**
      * The name of the bot alias. The name is case sensitive.
@@ -1653,7 +1653,7 @@ declare namespace LexModelBuildingService {
   }
   export type GroupNumber = number;
   export type IamRoleArn = string;
-  export type ImportStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
+  export type ImportStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string&{};
   export interface InputContext {
     /**
      * The name of the context.
@@ -1729,7 +1729,7 @@ declare namespace LexModelBuildingService {
     tags?: TagList;
   }
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-IN"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT"|"ja-JP"|"ko-KR"|string;
+  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-IN"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT"|"ja-JP"|"ko-KR"|string&{};
   export type LocaleList = Locale[];
   export interface LogSettingsRequest {
     /**
@@ -1773,9 +1773,9 @@ declare namespace LexModelBuildingService {
     resourcePrefix?: ResourcePrefix;
   }
   export type LogSettingsResponseList = LogSettingsResponse[];
-  export type LogType = "AUDIO"|"TEXT"|string;
+  export type LogType = "AUDIO"|"TEXT"|string&{};
   export type MaxResults = number;
-  export type MergeStrategy = "OVERWRITE_LATEST"|"FAIL_ON_CONFLICT"|string;
+  export type MergeStrategy = "OVERWRITE_LATEST"|"FAIL_ON_CONFLICT"|string&{};
   export interface Message {
     /**
      * The content type of the message string.
@@ -1815,12 +1815,12 @@ declare namespace LexModelBuildingService {
   export type MigrationAlertMessage = string;
   export type MigrationAlertReferenceURL = string;
   export type MigrationAlertReferenceURLs = MigrationAlertReferenceURL[];
-  export type MigrationAlertType = "ERROR"|"WARN"|string;
+  export type MigrationAlertType = "ERROR"|"WARN"|string&{};
   export type MigrationAlerts = MigrationAlert[];
   export type MigrationId = string;
-  export type MigrationSortAttribute = "V1_BOT_NAME"|"MIGRATION_DATE_TIME"|string;
-  export type MigrationStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
-  export type MigrationStrategy = "CREATE_NEW"|"UPDATE_EXISTING"|string;
+  export type MigrationSortAttribute = "V1_BOT_NAME"|"MIGRATION_DATE_TIME"|string&{};
+  export type MigrationStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string&{};
+  export type MigrationStrategy = "CREATE_NEW"|"UPDATE_EXISTING"|string&{};
   export interface MigrationSummary {
     /**
      * The unique identifier that Amazon Lex assigned to the migration.
@@ -1863,7 +1863,7 @@ declare namespace LexModelBuildingService {
   export type Name = string;
   export type NextToken = string;
   export type NumericalVersion = string;
-  export type ObfuscationSetting = "NONE"|"DEFAULT_OBFUSCATION"|string;
+  export type ObfuscationSetting = "NONE"|"DEFAULT_OBFUSCATION"|string&{};
   export interface OutputContext {
     /**
      * The name of the context.
@@ -1881,7 +1881,7 @@ declare namespace LexModelBuildingService {
   export type OutputContextList = OutputContext[];
   export type OutputContextName = string;
   export type Priority = number;
-  export type ProcessBehavior = "SAVE"|"BUILD"|string;
+  export type ProcessBehavior = "SAVE"|"BUILD"|string&{};
   export interface Prompt {
     /**
      * An array of objects, each of which provides a message string and its type. You can specify the message string in plain text or in Speech Synthesis Markup Language (SSML).
@@ -2341,7 +2341,7 @@ declare namespace LexModelBuildingService {
   export type RegexPattern = string;
   export type ResourceArn = string;
   export type ResourcePrefix = string;
-  export type ResourceType = "BOT"|"INTENT"|"SLOT_TYPE"|string;
+  export type ResourceType = "BOT"|"INTENT"|"SLOT_TYPE"|string&{};
   export type ResponseCard = string;
   export type SessionTTL = number;
   export interface Slot {
@@ -2390,7 +2390,7 @@ declare namespace LexModelBuildingService {
      */
     defaultValueSpec?: SlotDefaultValueSpec;
   }
-  export type SlotConstraint = "Required"|"Optional"|string;
+  export type SlotConstraint = "Required"|"Optional"|string&{};
   export interface SlotDefaultValue {
     /**
      * The default value for the slot. You can specify one of the following:    #context-name.slot-name - The slot value "slot-name" in the context "context-name."    {attribute} - The slot value of the session attribute "attribute."    'value' - The discrete value "value."  
@@ -2445,8 +2445,8 @@ declare namespace LexModelBuildingService {
     pattern: RegexPattern;
   }
   export type SlotUtteranceList = Utterance[];
-  export type SlotValueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION"|string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SlotValueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION"|string&{};
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export interface StartImportRequest {
     /**
      * A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the resourceType field.
@@ -2561,8 +2561,8 @@ declare namespace LexModelBuildingService {
      */
     responseCard?: ResponseCard;
   }
-  export type Status = "BUILDING"|"READY"|"READY_BASIC_TESTING"|"FAILED"|"NOT_BUILT"|string;
-  export type StatusType = "Detected"|"Missed"|string;
+  export type Status = "BUILDING"|"READY"|"READY_BASIC_TESTING"|"FAILED"|"NOT_BUILT"|string&{};
+  export type StatusType = "Detected"|"Missed"|string&{};
   export type String = string;
   export type StringList = String[];
   export type SynonymList = Value[];

@@ -109,7 +109,7 @@ declare namespace Account {
      */
     Title?: Title;
   }
-  export type AlternateContactType = "BILLING"|"OPERATIONS"|"SECURITY"|string;
+  export type AlternateContactType = "BILLING"|"OPERATIONS"|"SECURITY"|string&{};
   export type City = string;
   export type CompanyName = string;
   export interface ContactInformation {
@@ -326,7 +326,7 @@ declare namespace Account {
   }
   export type RegionName = string;
   export type RegionOptList = Region[];
-  export type RegionOptStatus = "ENABLED"|"ENABLING"|"DISABLING"|"DISABLED"|"ENABLED_BY_DEFAULT"|string;
+  export type RegionOptStatus = "ENABLED"|"ENABLING"|"DISABLING"|"DISABLED"|"ENABLED_BY_DEFAULT"|string&{};
   export type RegionOptStatusList = RegionOptStatus[];
   export type StateOrRegion = string;
   export type String = string;

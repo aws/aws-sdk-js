@@ -216,7 +216,7 @@ declare namespace Signer {
      */
     profileName: ProfileName;
   }
-  export type Category = "AWSIoT"|string;
+  export type Category = "AWSIoT"|string&{};
   export type CertificateArn = string;
   export type CertificateHashes = String[];
   export type ClientRequestToken = string;
@@ -311,7 +311,7 @@ declare namespace Signer {
     s3?: S3Destination;
   }
   export type DisplayName = string;
-  export type EncryptionAlgorithm = "RSA"|"ECDSA"|string;
+  export type EncryptionAlgorithm = "RSA"|"ECDSA"|string&{};
   export interface EncryptionAlgorithmOptions {
     /**
      * The set of accepted encryption algorithms that are allowed in a code signing job.
@@ -457,7 +457,7 @@ declare namespace Signer {
      */
     tags?: TagMap;
   }
-  export type HashAlgorithm = "SHA1"|"SHA256"|string;
+  export type HashAlgorithm = "SHA1"|"SHA256"|string&{};
   export interface HashAlgorithmOptions {
     /**
      * The set of accepted hash algorithms allowed in a code signing job.
@@ -469,7 +469,7 @@ declare namespace Signer {
     defaultValue: HashAlgorithm;
   }
   export type HashAlgorithms = HashAlgorithm[];
-  export type ImageFormat = "JSON"|"JSONEmbedded"|"JSONDetached"|string;
+  export type ImageFormat = "JSON"|"JSONEmbedded"|"JSONDetached"|string&{};
   export type ImageFormats = ImageFormat[];
   export type Integer = number;
   export type JobId = string;
@@ -1058,9 +1058,9 @@ declare namespace Signer {
      */
     revokedBy?: String;
   }
-  export type SigningProfileStatus = "Active"|"Canceled"|"Revoked"|string;
+  export type SigningProfileStatus = "Active"|"Canceled"|"Revoked"|string&{};
   export type SigningProfiles = SigningProfile[];
-  export type SigningStatus = "InProgress"|"Failed"|"Succeeded"|string;
+  export type SigningStatus = "InProgress"|"Failed"|"Succeeded"|string&{};
   export interface Source {
     /**
      * The S3Source object.
@@ -1131,7 +1131,7 @@ declare namespace Signer {
   }
   export interface UntagResourceResponse {
   }
-  export type ValidityType = "DAYS"|"MONTHS"|"YEARS"|string;
+  export type ValidityType = "DAYS"|"MONTHS"|"YEARS"|string&{};
   export type Version = string;
   export type bool = boolean;
   /**

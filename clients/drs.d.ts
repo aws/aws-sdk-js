@@ -602,7 +602,7 @@ declare namespace Drs {
      */
     rawError?: LargeBoundedString;
   }
-  export type DataReplicationErrorString = "AGENT_NOT_SEEN"|"SNAPSHOTS_FAILURE"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|string;
+  export type DataReplicationErrorString = "AGENT_NOT_SEEN"|"SNAPSHOTS_FAILURE"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|string&{};
   export interface DataReplicationInfo {
     /**
      * Error in data replication.
@@ -680,10 +680,10 @@ declare namespace Drs {
      */
     status?: DataReplicationInitiationStepStatus;
   }
-  export type DataReplicationInitiationStepName = "WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER"|string;
-  export type DataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string;
+  export type DataReplicationInitiationStepName = "WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER"|string&{};
+  export type DataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string&{};
   export type DataReplicationInitiationSteps = DataReplicationInitiationStep[];
-  export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|string;
+  export type DataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|string&{};
   export interface DeleteJobRequest {
     /**
      * The ID of the Job to be deleted.
@@ -1020,7 +1020,7 @@ declare namespace Drs {
   }
   export type Disks = Disk[];
   export type EC2InstanceID = string;
-  export type EC2InstanceState = "PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"SHUTTING-DOWN"|"TERMINATED"|"NOT_FOUND"|string;
+  export type EC2InstanceState = "PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|"SHUTTING-DOWN"|"TERMINATED"|"NOT_FOUND"|string&{};
   export type EC2InstanceType = string;
   export type EbsSnapshot = string;
   export type EbsSnapshotsList = EbsSnapshot[];
@@ -1043,10 +1043,10 @@ declare namespace Drs {
      */
     s3DestinationUrl?: LargeBoundedString;
   }
-  export type ExtensionStatus = "EXTENDED"|"EXTENSION_ERROR"|"NOT_EXTENDED"|string;
-  export type FailbackLaunchType = "RECOVERY"|"DRILL"|string;
-  export type FailbackReplicationError = "AGENT_NOT_SEEN"|"FAILBACK_CLIENT_NOT_SEEN"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"|"FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|"FAILED_GETTING_REPLICATION_STATE"|"SNAPSHOTS_FAILURE"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|string;
-  export type FailbackState = "FAILBACK_NOT_STARTED"|"FAILBACK_IN_PROGRESS"|"FAILBACK_READY_FOR_LAUNCH"|"FAILBACK_COMPLETED"|"FAILBACK_ERROR"|"FAILBACK_NOT_READY_FOR_LAUNCH"|"FAILBACK_LAUNCH_STATE_NOT_AVAILABLE"|string;
+  export type ExtensionStatus = "EXTENDED"|"EXTENSION_ERROR"|"NOT_EXTENDED"|string&{};
+  export type FailbackLaunchType = "RECOVERY"|"DRILL"|string&{};
+  export type FailbackReplicationError = "AGENT_NOT_SEEN"|"FAILBACK_CLIENT_NOT_SEEN"|"NOT_CONVERGING"|"UNSTABLE_NETWORK"|"FAILED_TO_ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"|"FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|"FAILED_GETTING_REPLICATION_STATE"|"SNAPSHOTS_FAILURE"|"FAILED_TO_CREATE_SECURITY_GROUP"|"FAILED_TO_LAUNCH_REPLICATION_SERVER"|"FAILED_TO_BOOT_REPLICATION_SERVER"|"FAILED_TO_AUTHENTICATE_WITH_SERVICE"|"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"|"FAILED_TO_CREATE_STAGING_DISKS"|"FAILED_TO_ATTACH_STAGING_DISKS"|"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"|"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"|"FAILED_TO_START_DATA_TRANSFER"|string&{};
+  export type FailbackState = "FAILBACK_NOT_STARTED"|"FAILBACK_IN_PROGRESS"|"FAILBACK_READY_FOR_LAUNCH"|"FAILBACK_COMPLETED"|"FAILBACK_ERROR"|"FAILBACK_NOT_READY_FOR_LAUNCH"|"FAILBACK_LAUNCH_STATE_NOT_AVAILABLE"|string&{};
   export interface GetFailbackReplicationConfigurationRequest {
     /**
      * The ID of the Recovery Instance whose failback replication configuration should be returned.
@@ -1108,7 +1108,7 @@ declare namespace Drs {
   }
   export interface InitializeServiceResponse {
   }
-  export type InitiatedBy = "START_RECOVERY"|"START_DRILL"|"FAILBACK"|"DIAGNOSTIC"|"TERMINATE_RECOVERY_INSTANCES"|"TARGET_ACCOUNT"|"CREATE_NETWORK_RECOVERY"|"UPDATE_NETWORK_RECOVERY"|"ASSOCIATE_NETWORK_RECOVERY"|string;
+  export type InitiatedBy = "START_RECOVERY"|"START_DRILL"|"FAILBACK"|"DIAGNOSTIC"|"TERMINATE_RECOVERY_INSTANCES"|"TARGET_ACCOUNT"|"CREATE_NETWORK_RECOVERY"|"UPDATE_NETWORK_RECOVERY"|"ASSOCIATE_NETWORK_RECOVERY"|string&{};
   export interface Job {
     /**
      * The ARN of a Job.
@@ -1166,7 +1166,7 @@ declare namespace Drs {
      */
     logDateTime?: ISO8601DatetimeString;
   }
-  export type JobLogEvent = "JOB_START"|"SERVER_SKIPPED"|"CLEANUP_START"|"CLEANUP_END"|"CLEANUP_FAIL"|"SNAPSHOT_START"|"SNAPSHOT_END"|"SNAPSHOT_FAIL"|"USING_PREVIOUS_SNAPSHOT"|"USING_PREVIOUS_SNAPSHOT_FAILED"|"CONVERSION_START"|"CONVERSION_END"|"CONVERSION_FAIL"|"LAUNCH_START"|"LAUNCH_FAILED"|"JOB_CANCEL"|"JOB_END"|"DEPLOY_NETWORK_CONFIGURATION_START"|"DEPLOY_NETWORK_CONFIGURATION_END"|"DEPLOY_NETWORK_CONFIGURATION_FAILED"|"UPDATE_NETWORK_CONFIGURATION_START"|"UPDATE_NETWORK_CONFIGURATION_END"|"UPDATE_NETWORK_CONFIGURATION_FAILED"|"UPDATE_LAUNCH_TEMPLATE_START"|"UPDATE_LAUNCH_TEMPLATE_END"|"UPDATE_LAUNCH_TEMPLATE_FAILED"|"NETWORK_RECOVERY_FAIL"|string;
+  export type JobLogEvent = "JOB_START"|"SERVER_SKIPPED"|"CLEANUP_START"|"CLEANUP_END"|"CLEANUP_FAIL"|"SNAPSHOT_START"|"SNAPSHOT_END"|"SNAPSHOT_FAIL"|"USING_PREVIOUS_SNAPSHOT"|"USING_PREVIOUS_SNAPSHOT_FAILED"|"CONVERSION_START"|"CONVERSION_END"|"CONVERSION_FAIL"|"LAUNCH_START"|"LAUNCH_FAILED"|"JOB_CANCEL"|"JOB_END"|"DEPLOY_NETWORK_CONFIGURATION_START"|"DEPLOY_NETWORK_CONFIGURATION_END"|"DEPLOY_NETWORK_CONFIGURATION_FAILED"|"UPDATE_NETWORK_CONFIGURATION_START"|"UPDATE_NETWORK_CONFIGURATION_END"|"UPDATE_NETWORK_CONFIGURATION_FAILED"|"UPDATE_LAUNCH_TEMPLATE_START"|"UPDATE_LAUNCH_TEMPLATE_END"|"UPDATE_LAUNCH_TEMPLATE_FAILED"|"NETWORK_RECOVERY_FAIL"|string&{};
   export interface JobLogEventData {
     /**
      * Properties of a conversion job
@@ -1194,12 +1194,12 @@ declare namespace Drs {
     targetInstanceID?: EC2InstanceID;
   }
   export type JobLogs = JobLog[];
-  export type JobStatus = "PENDING"|"STARTED"|"COMPLETED"|string;
-  export type JobType = "LAUNCH"|"TERMINATE"|"CREATE_CONVERTED_SNAPSHOT"|string;
+  export type JobStatus = "PENDING"|"STARTED"|"COMPLETED"|string&{};
+  export type JobType = "LAUNCH"|"TERMINATE"|"CREATE_CONVERTED_SNAPSHOT"|string&{};
   export type JobsList = Job[];
   export type LargeBoundedString = string;
-  export type LastLaunchResult = "NOT_STARTED"|"PENDING"|"SUCCEEDED"|"FAILED"|string;
-  export type LastLaunchType = "RECOVERY"|"DRILL"|string;
+  export type LastLaunchResult = "NOT_STARTED"|"PENDING"|"SUCCEEDED"|"FAILED"|string&{};
+  export type LastLaunchType = "RECOVERY"|"DRILL"|string&{};
   export interface LaunchConfiguration {
     /**
      * Whether we should copy the Private IP of the Source Server to the Recovery Instance.
@@ -1275,8 +1275,8 @@ declare namespace Drs {
   export type LaunchConfigurationTemplateID = string;
   export type LaunchConfigurationTemplateIDs = LaunchConfigurationTemplateID[];
   export type LaunchConfigurationTemplates = LaunchConfigurationTemplate[];
-  export type LaunchDisposition = "STOPPED"|"STARTED"|string;
-  export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED"|string;
+  export type LaunchDisposition = "STOPPED"|"STARTED"|string&{};
+  export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED"|string&{};
   export interface Licensing {
     /**
      * Whether to enable "Bring your own license" or not.
@@ -1409,7 +1409,7 @@ declare namespace Drs {
      */
     fullString?: BoundedString;
   }
-  export type OriginEnvironment = "ON_PREMISES"|"AWS"|string;
+  export type OriginEnvironment = "ON_PREMISES"|"AWS"|string&{};
   export type PITPolicy = PITPolicyRule[];
   export interface PITPolicyRule {
     /**
@@ -1433,7 +1433,7 @@ declare namespace Drs {
      */
     units: PITPolicyRuleUnits;
   }
-  export type PITPolicyRuleUnits = "MINUTE"|"HOUR"|"DAY"|string;
+  export type PITPolicyRuleUnits = "MINUTE"|"HOUR"|"DAY"|string&{};
   export type PaginationToken = string;
   export interface ParticipatingResource {
     /**
@@ -1609,10 +1609,10 @@ declare namespace Drs {
      */
     status?: RecoveryInstanceDataReplicationInitiationStepStatus;
   }
-  export type RecoveryInstanceDataReplicationInitiationStepName = "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE"|"COMPLETE_VOLUME_MAPPING"|"ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"CONFIGURE_REPLICATION_SOFTWARE"|"PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|"WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER"|string;
-  export type RecoveryInstanceDataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string;
+  export type RecoveryInstanceDataReplicationInitiationStepName = "LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE"|"COMPLETE_VOLUME_MAPPING"|"ESTABLISH_RECOVERY_INSTANCE_COMMUNICATION"|"DOWNLOAD_REPLICATION_SOFTWARE_TO_FAILBACK_CLIENT"|"CONFIGURE_REPLICATION_SOFTWARE"|"PAIR_AGENT_WITH_REPLICATION_SOFTWARE"|"ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"|"WAIT"|"CREATE_SECURITY_GROUP"|"LAUNCH_REPLICATION_SERVER"|"BOOT_REPLICATION_SERVER"|"AUTHENTICATE_WITH_SERVICE"|"DOWNLOAD_REPLICATION_SOFTWARE"|"CREATE_STAGING_DISKS"|"ATTACH_STAGING_DISKS"|"PAIR_REPLICATION_SERVER_WITH_AGENT"|"CONNECT_AGENT_TO_REPLICATION_SERVER"|"START_DATA_TRANSFER"|string&{};
+  export type RecoveryInstanceDataReplicationInitiationStepStatus = "NOT_STARTED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"SKIPPED"|string&{};
   export type RecoveryInstanceDataReplicationInitiationSteps = RecoveryInstanceDataReplicationInitiationStep[];
-  export type RecoveryInstanceDataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"REPLICATION_STATE_NOT_AVAILABLE"|"NOT_STARTED"|string;
+  export type RecoveryInstanceDataReplicationState = "STOPPED"|"INITIATING"|"INITIAL_SYNC"|"BACKLOG"|"CREATING_SNAPSHOT"|"CONTINUOUS"|"PAUSED"|"RESCAN"|"STALLED"|"DISCONNECTED"|"REPLICATION_STATE_NOT_AVAILABLE"|"NOT_STARTED"|string&{};
   export interface RecoveryInstanceDisk {
     /**
      * The amount of storage on the disk in bytes.
@@ -1717,7 +1717,7 @@ declare namespace Drs {
      */
     lastRecoveryResult?: RecoveryResult;
   }
-  export type RecoveryResult = "NOT_STARTED"|"IN_PROGRESS"|"SUCCESS"|"FAIL"|"PARTIAL_SUCCESS"|"ASSOCIATE_SUCCESS"|"ASSOCIATE_FAIL"|string;
+  export type RecoveryResult = "NOT_STARTED"|"IN_PROGRESS"|"SUCCESS"|"FAIL"|"PARTIAL_SUCCESS"|"ASSOCIATE_SUCCESS"|"ASSOCIATE_FAIL"|string&{};
   export interface RecoverySnapshot {
     /**
      * A list of EBS snapshots.
@@ -1742,7 +1742,7 @@ declare namespace Drs {
   }
   export type RecoverySnapshotID = string;
   export type RecoverySnapshotsList = RecoverySnapshot[];
-  export type RecoverySnapshotsOrder = "ASC"|"DESC"|string;
+  export type RecoverySnapshotsOrder = "ASC"|"DESC"|string&{};
   export interface ReplicationConfiguration {
     /**
      * Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration.
@@ -1813,9 +1813,9 @@ declare namespace Drs {
      */
     useDedicatedReplicationServer?: Boolean;
   }
-  export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP"|string;
-  export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"GP3"|"ST1"|"AUTO"|string;
-  export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM"|"NONE"|string;
+  export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP"|string&{};
+  export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"GP3"|"ST1"|"AUTO"|string&{};
+  export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM"|"NONE"|string&{};
   export interface ReplicationConfigurationReplicatedDisk {
     /**
      * The name of the device.
@@ -1842,7 +1842,7 @@ declare namespace Drs {
      */
     throughput?: PositiveInteger;
   }
-  export type ReplicationConfigurationReplicatedDiskStagingDiskType = "AUTO"|"GP2"|"GP3"|"IO1"|"SC1"|"ST1"|"STANDARD"|string;
+  export type ReplicationConfigurationReplicatedDiskStagingDiskType = "AUTO"|"GP2"|"GP3"|"IO1"|"SC1"|"ST1"|"STANDARD"|string&{};
   export type ReplicationConfigurationReplicatedDisks = ReplicationConfigurationReplicatedDisk[];
   export interface ReplicationConfigurationTemplate {
     /**
@@ -1917,9 +1917,9 @@ declare namespace Drs {
   export type ReplicationConfigurationTemplateID = string;
   export type ReplicationConfigurationTemplateIDs = ReplicationConfigurationTemplateID[];
   export type ReplicationConfigurationTemplates = ReplicationConfigurationTemplate[];
-  export type ReplicationDirection = "FAILOVER"|"FAILBACK"|string;
+  export type ReplicationDirection = "FAILOVER"|"FAILBACK"|string&{};
   export type ReplicationServersSecurityGroupsIDs = SecurityGroupID[];
-  export type ReplicationStatus = "STOPPED"|"IN_PROGRESS"|"PROTECTED"|"ERROR"|string;
+  export type ReplicationStatus = "STOPPED"|"IN_PROGRESS"|"PROTECTED"|"ERROR"|string&{};
   export interface RetryDataReplicationRequest {
     /**
      * The ID of the Source Server whose data replication should be retried.
@@ -2300,7 +2300,7 @@ declare namespace Drs {
   }
   export type TagValue = string;
   export type TagsMap = {[key: string]: TagValue};
-  export type TargetInstanceTypeRightSizingMethod = "NONE"|"BASIC"|"IN_AWS"|string;
+  export type TargetInstanceTypeRightSizingMethod = "NONE"|"BASIC"|"IN_AWS"|string&{};
   export interface TerminateRecoveryInstancesRequest {
     /**
      * The IDs of the Recovery Instances that should be terminated.

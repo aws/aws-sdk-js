@@ -312,7 +312,7 @@ declare namespace AmplifyUIBuilder {
      */
     relationship?: CodegenGenericDataRelationshipType;
   }
-  export type CodegenGenericDataFieldDataType = "ID"|"String"|"Int"|"Float"|"AWSDate"|"AWSTime"|"AWSDateTime"|"AWSTimestamp"|"AWSEmail"|"AWSURL"|"AWSIPAddress"|"Boolean"|"AWSJSON"|"AWSPhone"|"Enum"|"Model"|"NonModel"|string;
+  export type CodegenGenericDataFieldDataType = "ID"|"String"|"Int"|"Float"|"AWSDate"|"AWSTime"|"AWSDateTime"|"AWSTimestamp"|"AWSEmail"|"AWSURL"|"AWSIPAddress"|"Boolean"|"AWSJSON"|"AWSPhone"|"Enum"|"Model"|"NonModel"|string&{};
   export type CodegenGenericDataFields = {[key: string]: CodegenGenericDataField};
   export interface CodegenGenericDataModel {
     /**
@@ -444,14 +444,14 @@ declare namespace AmplifyUIBuilder {
      */
     nonModels: CodegenGenericDataNonModels;
   }
-  export type CodegenJobGenericDataSourceType = "DataStore"|string;
+  export type CodegenJobGenericDataSourceType = "DataStore"|string&{};
   export interface CodegenJobRenderConfig {
     /**
      * The name of the ReactStartCodegenJobData object.
      */
     react?: ReactStartCodegenJobData;
   }
-  export type CodegenJobStatus = "in_progress"|"failed"|"succeeded"|string;
+  export type CodegenJobStatus = "in_progress"|"failed"|"succeeded"|string&{};
   export interface CodegenJobSummary {
     /**
      * The unique ID of the Amplify app associated with the code generation job.
@@ -1284,7 +1284,7 @@ declare namespace AmplifyUIBuilder {
      */
     maxSize?: Integer;
   }
-  export type FixedPosition = "first"|string;
+  export type FixedPosition = "first"|string&{};
   export type Float = number;
   export interface Form {
     /**
@@ -1340,7 +1340,7 @@ declare namespace AmplifyUIBuilder {
      */
     labelDecorator?: LabelDecorator;
   }
-  export type FormActionType = "create"|"update"|string;
+  export type FormActionType = "create"|"update"|string&{};
   export interface FormBindingElement {
     /**
      * The name of the component to retrieve a value from.
@@ -1366,7 +1366,7 @@ declare namespace AmplifyUIBuilder {
      */
     position?: FieldPosition;
   }
-  export type FormButtonsPosition = "top"|"bottom"|"top_and_bottom"|string;
+  export type FormButtonsPosition = "top"|"bottom"|"top_and_bottom"|string&{};
   export interface FormCTA {
     /**
      * The position of the button.
@@ -1385,7 +1385,7 @@ declare namespace AmplifyUIBuilder {
      */
     submit?: FormButton;
   }
-  export type FormDataSourceType = "DataStore"|"Custom"|string;
+  export type FormDataSourceType = "DataStore"|"Custom"|string&{};
   export interface FormDataTypeConfig {
     /**
      * The data source type, either an Amplify DataStore model or a custom data type.
@@ -1491,7 +1491,7 @@ declare namespace AmplifyUIBuilder {
     name: FormName;
   }
   export type FormSummaryList = FormSummary[];
-  export type GenericDataRelationshipType = "HAS_MANY"|"HAS_ONE"|"BELONGS_TO"|string;
+  export type GenericDataRelationshipType = "HAS_MANY"|"HAS_ONE"|"BELONGS_TO"|string&{};
   export interface GetCodegenJobRequest {
     /**
      * The unique ID of the Amplify app associated with the code generation job.
@@ -1612,10 +1612,10 @@ declare namespace AmplifyUIBuilder {
   }
   export type IdentifierList = String[];
   export type Integer = number;
-  export type JSModule = "es2020"|"esnext"|string;
-  export type JSScript = "jsx"|"tsx"|"js"|string;
-  export type JSTarget = "es2015"|"es2020"|string;
-  export type LabelDecorator = "required"|"optional"|"none"|string;
+  export type JSModule = "es2020"|"esnext"|string&{};
+  export type JSScript = "jsx"|"tsx"|"js"|string&{};
+  export type JSTarget = "es2015"|"es2020"|string&{};
+  export type LabelDecorator = "required"|"optional"|"none"|string&{};
   export type ListCodegenJobsLimit = number;
   export interface ListCodegenJobsRequest {
     /**
@@ -1886,7 +1886,7 @@ declare namespace AmplifyUIBuilder {
   }
   export type SectionalElementMap = {[key: string]: SectionalElement};
   export type SensitiveString = string;
-  export type SortDirection = "ASC"|"DESC"|string;
+  export type SortDirection = "ASC"|"DESC"|string&{};
   export interface SortProperty {
     /**
      * The field to perform the sort on.
@@ -1944,7 +1944,7 @@ declare namespace AmplifyUIBuilder {
      */
     entity?: CodegenJob;
   }
-  export type StorageAccessLevel = "public"|"protected"|"private"|string;
+  export type StorageAccessLevel = "public"|"protected"|"private"|string&{};
   export type StrValues = String[];
   export type String = string;
   export type SyntheticTimestamp_date_time = Date;
@@ -2031,7 +2031,7 @@ declare namespace AmplifyUIBuilder {
     value?: ThemeValue;
   }
   export type ThemeValuesList = ThemeValues[];
-  export type TokenProviders = "figma"|string;
+  export type TokenProviders = "figma"|string&{};
   export interface UpdateComponentData {
     /**
      * The unique ID of the component to update.

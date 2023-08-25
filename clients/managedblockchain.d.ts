@@ -261,7 +261,7 @@ declare namespace ManagedBlockchain {
   }
   export type AccessorBillingTokenString = string;
   export type AccessorListMaxResults = number;
-  export type AccessorStatus = "AVAILABLE"|"PENDING_DELETION"|"DELETED"|string;
+  export type AccessorStatus = "AVAILABLE"|"PENDING_DELETION"|"DELETED"|string&{};
   export interface AccessorSummary {
     /**
      * The unique identifier of the accessor.
@@ -285,7 +285,7 @@ declare namespace ManagedBlockchain {
     Arn?: ArnString;
   }
   export type AccessorSummaryList = AccessorSummary[];
-  export type AccessorType = "BILLING_TOKEN"|string;
+  export type AccessorType = "BILLING_TOKEN"|string&{};
   export interface ApprovalThresholdPolicy {
     /**
      * The percentage of votes among all members that must be YES for a proposal to be approved. For example, a ThresholdPercentage value of 50 indicates 50%. The ThresholdComparator determines the precise comparison. If a ThresholdPercentage value of 50 is specified on a network with 10 members, along with a ThresholdComparator value of GREATER_THAN, this indicates that 6 YES votes are required for the proposal to be approved.
@@ -496,9 +496,9 @@ declare namespace ManagedBlockchain {
   export interface DeleteNodeOutput {
   }
   export type DescriptionString = string;
-  export type Edition = "STARTER"|"STANDARD"|string;
+  export type Edition = "STARTER"|"STANDARD"|string&{};
   export type Enabled = boolean;
-  export type Framework = "HYPERLEDGER_FABRIC"|"ETHEREUM"|string;
+  export type Framework = "HYPERLEDGER_FABRIC"|"ETHEREUM"|string&{};
   export type FrameworkVersionString = string;
   export interface GetAccessorInput {
     /**
@@ -602,7 +602,7 @@ declare namespace ManagedBlockchain {
     Arn?: ArnString;
   }
   export type InvitationList = Invitation[];
-  export type InvitationStatus = "PENDING"|"ACCEPTED"|"ACCEPTING"|"REJECTED"|"EXPIRED"|string;
+  export type InvitationStatus = "PENDING"|"ACCEPTED"|"ACCEPTING"|"REJECTED"|"EXPIRED"|string&{};
   export interface InviteAction {
     /**
      * The Amazon Web Services account ID to invite.
@@ -944,7 +944,7 @@ declare namespace ManagedBlockchain {
      */
     Fabric?: MemberFabricLogPublishingConfiguration;
   }
-  export type MemberStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|"INACCESSIBLE_ENCRYPTION_KEY"|string;
+  export type MemberStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|"INACCESSIBLE_ENCRYPTION_KEY"|string&{};
   export interface MemberSummary {
     /**
      * The unique identifier of the member.
@@ -1067,7 +1067,7 @@ declare namespace ManagedBlockchain {
   }
   export type NetworkListMaxResults = number;
   export type NetworkMemberNameString = string;
-  export type NetworkStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"DELETING"|"DELETED"|string;
+  export type NetworkStatus = "CREATING"|"AVAILABLE"|"CREATE_FAILED"|"DELETING"|"DELETED"|string&{};
   export interface NetworkSummary {
     /**
      * The unique identifier of the network.
@@ -1222,7 +1222,7 @@ declare namespace ManagedBlockchain {
      */
     Fabric?: NodeFabricLogPublishingConfiguration;
   }
-  export type NodeStatus = "CREATING"|"AVAILABLE"|"UNHEALTHY"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|"FAILED"|"INACCESSIBLE_ENCRYPTION_KEY"|string;
+  export type NodeStatus = "CREATING"|"AVAILABLE"|"UNHEALTHY"|"CREATE_FAILED"|"UPDATING"|"DELETING"|"DELETED"|"FAILED"|"INACCESSIBLE_ENCRYPTION_KEY"|string&{};
   export interface NodeSummary {
     /**
      * The unique identifier of the node.
@@ -1324,7 +1324,7 @@ declare namespace ManagedBlockchain {
   }
   export type ProposalDurationInt = number;
   export type ProposalListMaxResults = number;
-  export type ProposalStatus = "IN_PROGRESS"|"APPROVED"|"REJECTED"|"EXPIRED"|"ACTION_FAILED"|string;
+  export type ProposalStatus = "IN_PROGRESS"|"APPROVED"|"REJECTED"|"EXPIRED"|"ACTION_FAILED"|string&{};
   export interface ProposalSummary {
     /**
      *  The unique identifier of the proposal. 
@@ -1377,7 +1377,7 @@ declare namespace ManagedBlockchain {
   }
   export type RemoveActionList = RemoveAction[];
   export type ResourceIdString = string;
-  export type StateDBType = "LevelDB"|"CouchDB"|string;
+  export type StateDBType = "LevelDB"|"CouchDB"|string&{};
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -1394,7 +1394,7 @@ declare namespace ManagedBlockchain {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type ThresholdComparator = "GREATER_THAN"|"GREATER_THAN_OR_EQUAL_TO"|string;
+  export type ThresholdComparator = "GREATER_THAN"|"GREATER_THAN_OR_EQUAL_TO"|string&{};
   export type ThresholdPercentageInt = number;
   export type Timestamp = Date;
   export interface UntagResourceRequest {
@@ -1481,7 +1481,7 @@ declare namespace ManagedBlockchain {
      */
     MemberId?: ResourceIdString;
   }
-  export type VoteValue = "YES"|"NO"|string;
+  export type VoteValue = "YES"|"NO"|string&{};
   export interface VotingPolicy {
     /**
      * Defines the rules for the network for voting on proposals, such as the percentage of YES votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.

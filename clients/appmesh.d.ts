@@ -630,7 +630,7 @@ declare namespace AppMesh {
      */
     virtualService: VirtualServiceData;
   }
-  export type DefaultGatewayRouteRewrite = "ENABLED"|"DISABLED"|string;
+  export type DefaultGatewayRouteRewrite = "ENABLED"|"DISABLED"|string&{};
   export interface DeleteGatewayRouteInput {
     /**
      * The name of the gateway route to delete.
@@ -915,7 +915,7 @@ declare namespace AppMesh {
      */
     virtualService: VirtualServiceData;
   }
-  export type DnsResponseType = "LOADBALANCER"|"ENDPOINTS"|string;
+  export type DnsResponseType = "LOADBALANCER"|"ENDPOINTS"|string&{};
   export interface DnsServiceDiscovery {
     /**
      * Specifies the DNS service discovery hostname for the virtual node. 
@@ -940,7 +940,7 @@ declare namespace AppMesh {
      */
     value?: DurationValue;
   }
-  export type DurationUnit = "s"|"ms"|string;
+  export type DurationUnit = "s"|"ms"|string&{};
   export type DurationValue = number;
   export interface EgressFilter {
     /**
@@ -948,7 +948,7 @@ declare namespace AppMesh {
      */
     type: EgressFilterType;
   }
-  export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string;
+  export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string&{};
   export type ExactHostName = string;
   export interface FileAccessLog {
     /**
@@ -1064,7 +1064,7 @@ declare namespace AppMesh {
      */
     status: GatewayRouteStatusCode;
   }
-  export type GatewayRouteStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
+  export type GatewayRouteStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string&{};
   export interface GatewayRouteTarget {
     /**
      * The port number of the gateway route target.
@@ -1181,7 +1181,7 @@ declare namespace AppMesh {
      */
     tcpRetryEvents?: TcpRetryPolicyEvents;
   }
-  export type GrpcRetryPolicyEvent = "cancelled"|"deadline-exceeded"|"internal"|"resource-exhausted"|"unavailable"|string;
+  export type GrpcRetryPolicyEvent = "cancelled"|"deadline-exceeded"|"internal"|"resource-exhausted"|"unavailable"|string&{};
   export type GrpcRetryPolicyEvents = GrpcRetryPolicyEvent[];
   export interface GrpcRoute {
     /**
@@ -1426,7 +1426,7 @@ declare namespace AppMesh {
      */
     prefix?: HttpGatewayRoutePrefixRewrite;
   }
-  export type HttpMethod = "GET"|"HEAD"|"POST"|"PUT"|"DELETE"|"CONNECT"|"OPTIONS"|"TRACE"|"PATCH"|string;
+  export type HttpMethod = "GET"|"HEAD"|"POST"|"PUT"|"DELETE"|"CONNECT"|"OPTIONS"|"TRACE"|"PATCH"|string&{};
   export type HttpPathExact = string;
   export interface HttpPathMatch {
     /**
@@ -1539,7 +1539,7 @@ declare namespace AppMesh {
      */
     scheme?: HttpScheme;
   }
-  export type HttpScheme = "http"|"https"|string;
+  export type HttpScheme = "http"|"https"|string&{};
   export interface HttpTimeout {
     /**
      * An object that represents an idle timeout. An idle timeout bounds the amount of time that a connection may be idle. The default value is none.
@@ -1550,7 +1550,7 @@ declare namespace AppMesh {
      */
     perRequest?: Duration;
   }
-  export type IpPreference = "IPv6_PREFERRED"|"IPv4_PREFERRED"|"IPv4_ONLY"|"IPv6_ONLY"|string;
+  export type IpPreference = "IPv6_PREFERRED"|"IPv4_PREFERRED"|"IPv4_ONLY"|"IPv6_ONLY"|string&{};
   export type JsonFormat = JsonFormatRef[];
   export interface JsonFormatRef {
     /**
@@ -1880,7 +1880,7 @@ declare namespace AppMesh {
      */
     privateKey: FilePath;
   }
-  export type ListenerTlsMode = "STRICT"|"PERMISSIVE"|"DISABLED"|string;
+  export type ListenerTlsMode = "STRICT"|"PERMISSIVE"|"DISABLED"|string&{};
   export interface ListenerTlsSdsCertificate {
     /**
      * A reference to an object that represents the name of the secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
@@ -2007,7 +2007,7 @@ declare namespace AppMesh {
      */
     status?: MeshStatusCode;
   }
-  export type MeshStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
+  export type MeshStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string&{};
   export type MethodName = string;
   export interface OutlierDetection {
     /**
@@ -2041,7 +2041,7 @@ declare namespace AppMesh {
     protocol: PortProtocol;
   }
   export type PortNumber = number;
-  export type PortProtocol = "http"|"tcp"|"http2"|"grpc"|string;
+  export type PortProtocol = "http"|"tcp"|"http2"|"grpc"|string&{};
   export type PortSet = PortNumber[];
   export interface QueryParameterMatch {
     /**
@@ -2175,7 +2175,7 @@ declare namespace AppMesh {
      */
     status: RouteStatusCode;
   }
-  export type RouteStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
+  export type RouteStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string&{};
   export type SdsSecretName = string;
   export interface ServiceDiscovery {
     /**
@@ -2231,7 +2231,7 @@ declare namespace AppMesh {
   }
   export type TagValue = string;
   export type TagsLimit = number;
-  export type TcpRetryPolicyEvent = "connection-error"|string;
+  export type TcpRetryPolicyEvent = "connection-error"|string&{};
   export type TcpRetryPolicyEvents = TcpRetryPolicyEvent[];
   export interface TcpRoute {
     /**
@@ -2722,7 +2722,7 @@ declare namespace AppMesh {
      */
     privateKey: FilePath;
   }
-  export type VirtualGatewayListenerTlsMode = "STRICT"|"PERMISSIVE"|"DISABLED"|string;
+  export type VirtualGatewayListenerTlsMode = "STRICT"|"PERMISSIVE"|"DISABLED"|string&{};
   export interface VirtualGatewayListenerTlsSdsCertificate {
     /**
      * A reference to an object that represents the name of the secret secret requested from the Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or certificate chain.
@@ -2766,7 +2766,7 @@ declare namespace AppMesh {
      */
     protocol: VirtualGatewayPortProtocol;
   }
-  export type VirtualGatewayPortProtocol = "http"|"http2"|"grpc"|string;
+  export type VirtualGatewayPortProtocol = "http"|"http2"|"grpc"|string&{};
   export interface VirtualGatewayRef {
     /**
      * The full Amazon Resource Name (ARN) for the resource.
@@ -2819,7 +2819,7 @@ declare namespace AppMesh {
      */
     status: VirtualGatewayStatusCode;
   }
-  export type VirtualGatewayStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
+  export type VirtualGatewayStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string&{};
   export interface VirtualGatewayTlsValidationContext {
     /**
      * A reference to an object that represents the SANs for a virtual gateway's listener's Transport Layer Security (TLS) validation context.
@@ -2993,7 +2993,7 @@ declare namespace AppMesh {
      */
     status: VirtualNodeStatusCode;
   }
-  export type VirtualNodeStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
+  export type VirtualNodeStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string&{};
   export interface VirtualNodeTcpConnectionPool {
     /**
      * Maximum number of outbound TCP connections Envoy can establish concurrently with all hosts in upstream cluster.
@@ -3079,7 +3079,7 @@ declare namespace AppMesh {
      */
     status: VirtualRouterStatusCode;
   }
-  export type VirtualRouterStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
+  export type VirtualRouterStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string&{};
   export interface VirtualServiceBackend {
     /**
      * A reference to an object that represents the client policy for a backend.
@@ -3166,7 +3166,7 @@ declare namespace AppMesh {
      */
     status: VirtualServiceStatusCode;
   }
-  export type VirtualServiceStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string;
+  export type VirtualServiceStatusCode = "ACTIVE"|"INACTIVE"|"DELETED"|string&{};
   export interface WeightedTarget {
     /**
      * The targeted port of the weighted object.

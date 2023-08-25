@@ -345,7 +345,7 @@ declare namespace IoTTwinMaker {
   }
   export type ColumnDescriptions = ColumnDescription[];
   export type ColumnName = string;
-  export type ColumnType = "NODE"|"EDGE"|"VALUE"|string;
+  export type ColumnType = "NODE"|"EDGE"|"VALUE"|string&{};
   export interface ComponentPropertyGroupRequest {
     /**
      * The group type.
@@ -483,7 +483,7 @@ declare namespace IoTTwinMaker {
      */
     propertyGroupUpdates?: ComponentPropertyGroupRequests;
   }
-  export type ComponentUpdateType = "CREATE"|"UPDATE"|"DELETE"|string;
+  export type ComponentUpdateType = "CREATE"|"UPDATE"|"DELETE"|string&{};
   export type ComponentUpdatesMapRequest = {[key: string]: ComponentUpdateRequest};
   export type ComponentsMap = {[key: string]: ComponentResponse};
   export type ComponentsMapRequest = {[key: string]: ComponentRequest};
@@ -902,7 +902,7 @@ declare namespace IoTTwinMaker {
     updateDateTime: Timestamp;
   }
   export type Entries = PropertyValueEntry[];
-  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|"SYNC_INITIALIZING_ERROR"|"SYNC_CREATING_ERROR"|"SYNC_PROCESSING_ERROR"|string;
+  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|"SYNC_INITIALIZING_ERROR"|"SYNC_CREATING_ERROR"|"SYNC_PROCESSING_ERROR"|string&{};
   export interface ErrorDetails {
     /**
      * The error code.
@@ -1386,7 +1386,7 @@ declare namespace IoTTwinMaker {
      */
     updateDateTime: Timestamp;
   }
-  export type GroupType = "TABULAR"|string;
+  export type GroupType = "TABULAR"|string&{};
   export type Id = string;
   export type IdOrArn = string;
   export type Integer = number;
@@ -1400,7 +1400,7 @@ declare namespace IoTTwinMaker {
      */
     intervalInSeconds?: IntervalInSeconds;
   }
-  export type InterpolationType = "LINEAR"|string;
+  export type InterpolationType = "LINEAR"|string&{};
   export type IntervalInSeconds = number;
   export type LambdaArn = string;
   export interface LambdaFunction {
@@ -1631,7 +1631,7 @@ declare namespace IoTTwinMaker {
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
-  export type Order = "ASCENDING"|"DESCENDING"|string;
+  export type Order = "ASCENDING"|"DESCENDING"|string&{};
   export interface OrderBy {
     /**
      * The set order that filters results.
@@ -1643,7 +1643,7 @@ declare namespace IoTTwinMaker {
     propertyName: String;
   }
   export type OrderByList = OrderBy[];
-  export type OrderByTime = "ASCENDING"|"DESCENDING"|string;
+  export type OrderByTime = "ASCENDING"|"DESCENDING"|string&{};
   export type ParentEntityId = string;
   export interface ParentEntityUpdateRequest {
     /**
@@ -1655,9 +1655,9 @@ declare namespace IoTTwinMaker {
      */
     parentEntityId?: ParentEntityId;
   }
-  export type ParentEntityUpdateType = "UPDATE"|"DELETE"|string;
+  export type ParentEntityUpdateType = "UPDATE"|"DELETE"|string&{};
   export type PricingBundles = BundleName[];
-  export type PricingMode = "BASIC"|"STANDARD"|"TIERED_BUNDLE"|string;
+  export type PricingMode = "BASIC"|"STANDARD"|"TIERED_BUNDLE"|string&{};
   export interface PricingPlan {
     /**
      * The billable entity count.
@@ -1684,7 +1684,7 @@ declare namespace IoTTwinMaker {
      */
     updateReason: UpdateReason;
   }
-  export type PricingTier = "TIER_1"|"TIER_2"|"TIER_3"|"TIER_4"|string;
+  export type PricingTier = "TIER_1"|"TIER_2"|"TIER_3"|"TIER_4"|string&{};
   export interface PropertyDefinitionRequest {
     /**
      * An object that contains information about the data type.
@@ -1807,7 +1807,7 @@ declare namespace IoTTwinMaker {
      */
     isInherited: Boolean;
   }
-  export type PropertyGroupUpdateType = "UPDATE"|"DELETE"|"CREATE"|string;
+  export type PropertyGroupUpdateType = "UPDATE"|"DELETE"|"CREATE"|string&{};
   export type PropertyGroupsRequest = {[key: string]: PropertyGroupRequest};
   export type PropertyGroupsResponse = {[key: string]: PropertyGroupResponse};
   export interface PropertyLatestValue {
@@ -1849,7 +1849,7 @@ declare namespace IoTTwinMaker {
   }
   export type PropertyResponses = {[key: string]: PropertyResponse};
   export type PropertyTableValue = {[key: string]: DataValue};
-  export type PropertyUpdateType = "UPDATE"|"DELETE"|"CREATE"|string;
+  export type PropertyUpdateType = "UPDATE"|"DELETE"|"CREATE"|string&{};
   export interface PropertyValue {
     /**
      * The timestamp of a value for a time series property.
@@ -1934,7 +1934,7 @@ declare namespace IoTTwinMaker {
      */
     message?: ErrorMessage;
   }
-  export type SceneErrorCode = "MATTERPORT_ERROR"|string;
+  export type SceneErrorCode = "MATTERPORT_ERROR"|string&{};
   export type SceneMetadataMap = {[key: string]: SceneMetadataValue};
   export type SceneMetadataValue = string;
   export type SceneSummaries = SceneSummary[];
@@ -1964,9 +1964,9 @@ declare namespace IoTTwinMaker {
      */
     description?: Description;
   }
-  export type Scope = "ENTITY"|"WORKSPACE"|string;
+  export type Scope = "ENTITY"|"WORKSPACE"|string&{};
   export type SelectedPropertyList = String[];
-  export type State = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"ERROR"|string;
+  export type State = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"ERROR"|string&{};
   export interface Status {
     /**
      * The current state of the entity, component, component type, or workspace.
@@ -1978,7 +1978,7 @@ declare namespace IoTTwinMaker {
     error?: ErrorDetails;
   }
   export type String = string;
-  export type SyncJobState = "CREATING"|"INITIALIZING"|"ACTIVE"|"DELETING"|"ERROR"|string;
+  export type SyncJobState = "CREATING"|"INITIALIZING"|"ACTIVE"|"DELETING"|"ERROR"|string&{};
   export interface SyncJobStatus {
     /**
      * The SyncJob status state.
@@ -2035,7 +2035,7 @@ declare namespace IoTTwinMaker {
     externalId?: Id;
   }
   export type SyncResourceFilters = SyncResourceFilter[];
-  export type SyncResourceState = "INITIALIZING"|"PROCESSING"|"DELETED"|"IN_SYNC"|"ERROR"|string;
+  export type SyncResourceState = "INITIALIZING"|"PROCESSING"|"DELETED"|"IN_SYNC"|"ERROR"|string&{};
   export interface SyncResourceStatus {
     /**
      * The sync resource status state.
@@ -2069,7 +2069,7 @@ declare namespace IoTTwinMaker {
      */
     updateDateTime?: Timestamp;
   }
-  export type SyncResourceType = "ENTITY"|"COMPONENT_TYPE"|string;
+  export type SyncResourceType = "ENTITY"|"COMPONENT_TYPE"|string&{};
   export type SyncSource = string;
   export interface TabularConditions {
     /**
@@ -2102,7 +2102,7 @@ declare namespace IoTTwinMaker {
   export type Time = string;
   export type Timestamp = Date;
   export type TwinMakerArn = string;
-  export type Type = "RELATIONSHIP"|"STRING"|"LONG"|"BOOLEAN"|"INTEGER"|"DOUBLE"|"LIST"|"MAP"|string;
+  export type Type = "RELATIONSHIP"|"STRING"|"LONG"|"BOOLEAN"|"INTEGER"|"DOUBLE"|"LIST"|"MAP"|string&{};
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource.
@@ -2227,7 +2227,7 @@ declare namespace IoTTwinMaker {
      */
     pendingPricingPlan?: PricingPlan;
   }
-  export type UpdateReason = "DEFAULT"|"PRICING_TIER_UPDATE"|"ENTITY_COUNT_UPDATE"|"PRICING_MODE_UPDATE"|"OVERWRITTEN"|string;
+  export type UpdateReason = "DEFAULT"|"PRICING_TIER_UPDATE"|"ENTITY_COUNT_UPDATE"|"PRICING_MODE_UPDATE"|"OVERWRITTEN"|string&{};
   export interface UpdateSceneRequest {
     /**
      * The ID of the workspace that contains the scene.

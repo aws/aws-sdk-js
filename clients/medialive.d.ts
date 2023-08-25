@@ -599,11 +599,11 @@ declare class MediaLive extends Service {
   waitFor(state: "multiplexDeleted", callback?: (err: AWSError, data: MediaLive.Types.DescribeMultiplexResponse) => void): Request<MediaLive.Types.DescribeMultiplexResponse, AWSError>;
 }
 declare namespace MediaLive {
-  export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
-  export type AacInputType = "BROADCASTER_MIXED_AD"|"NORMAL"|string;
-  export type AacProfile = "HEV1"|"HEV2"|"LC"|string;
-  export type AacRateControlMode = "CBR"|"VBR"|string;
-  export type AacRawFormat = "LATM_LOAS"|"NONE"|string;
+  export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string&{};
+  export type AacInputType = "BROADCASTER_MIXED_AD"|"NORMAL"|string&{};
+  export type AacProfile = "HEV1"|"HEV2"|"LC"|string&{};
+  export type AacRateControlMode = "CBR"|"VBR"|string&{};
+  export type AacRawFormat = "LATM_LOAS"|"NONE"|string&{};
   export interface AacSettings {
     /**
      * Average bitrate in bits/second. Valid values depend on rate control mode and profile.
@@ -644,14 +644,14 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
      */
     VbrQuality?: AacVbrQuality;
   }
-  export type AacSpec = "MPEG2"|"MPEG4"|string;
-  export type AacVbrQuality = "HIGH"|"LOW"|"MEDIUM_HIGH"|"MEDIUM_LOW"|string;
-  export type Ac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
-  export type Ac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"DIALOGUE"|"EMERGENCY"|"HEARING_IMPAIRED"|"MUSIC_AND_EFFECTS"|"VISUALLY_IMPAIRED"|"VOICE_OVER"|string;
-  export type Ac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_3_2_LFE"|string;
-  export type Ac3DrcProfile = "FILM_STANDARD"|"NONE"|string;
-  export type Ac3LfeFilter = "DISABLED"|"ENABLED"|string;
-  export type Ac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export type AacSpec = "MPEG2"|"MPEG4"|string&{};
+  export type AacVbrQuality = "HIGH"|"LOW"|"MEDIUM_HIGH"|"MEDIUM_LOW"|string&{};
+  export type Ac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string&{};
+  export type Ac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"DIALOGUE"|"EMERGENCY"|"HEARING_IMPAIRED"|"MUSIC_AND_EFFECTS"|"VISUALLY_IMPAIRED"|"VOICE_OVER"|string&{};
+  export type Ac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_3_2_LFE"|string&{};
+  export type Ac3DrcProfile = "FILM_STANDARD"|"NONE"|string&{};
+  export type Ac3LfeFilter = "DISABLED"|"ENABLED"|string&{};
+  export type Ac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string&{};
   export interface Ac3Settings {
     /**
      * Average bitrate in bits/second. Valid bitrates depend on the coding mode.
@@ -694,14 +694,14 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   }
   export interface AcceptInputDeviceTransferResponse {
   }
-  export type AccessibilityType = "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"|"IMPLEMENTS_ACCESSIBILITY_FEATURES"|string;
+  export type AccessibilityType = "DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES"|"IMPLEMENTS_ACCESSIBILITY_FEATURES"|string&{};
   export interface AccountConfiguration {
     /**
      * Specifies the KMS key to use for all features that use key encryption. Specify the ARN of a KMS key that you have created. Or leave blank to use the key that MediaLive creates and manages for you.
      */
     KmsKeyId?: __string;
   }
-  export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string;
+  export type AfdSignaling = "AUTO"|"FIXED"|"NONE"|string&{};
   export interface AncillarySourceSettings {
     /**
      * Specifies the number (1 to 4) of the captions channel you want to extract from the ancillary captions. If you plan to convert the ancillary captions to another format, complete this field. If you plan to choose Embedded as the captions destination in the output (to pass through all the channels in the ancillary captions), leave this field blank because MediaLive ignores the field.
@@ -821,8 +821,8 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     StreamName?: __string;
   }
-  export type AudioDescriptionAudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
-  export type AudioDescriptionLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export type AudioDescriptionAudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string&{};
+  export type AudioDescriptionLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string&{};
   export interface AudioDolbyEDecode {
     /**
      * Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.
@@ -849,9 +849,9 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     LanguageSelectionPolicy?: AudioLanguageSelectionPolicy;
   }
-  export type AudioLanguageSelectionPolicy = "LOOSE"|"STRICT"|string;
-  export type AudioNormalizationAlgorithm = "ITU_1770_1"|"ITU_1770_2"|string;
-  export type AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"|string;
+  export type AudioLanguageSelectionPolicy = "LOOSE"|"STRICT"|string&{};
+  export type AudioNormalizationAlgorithm = "ITU_1770_1"|"ITU_1770_2"|string&{};
+  export type AudioNormalizationAlgorithmControl = "CORRECT_AUDIO"|string&{};
   export interface AudioNormalizationSettings {
     /**
      * Audio normalization algorithm to use. itu17701 conforms to the CALM Act specification, itu17702 conforms to the EBU R-128 specification.
@@ -866,7 +866,7 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
      */
     TargetLkfs?: __doubleMinNegative59Max0;
   }
-  export type AudioOnlyHlsSegmentType = "AAC"|"FMP4"|string;
+  export type AudioOnlyHlsSegmentType = "AAC"|"FMP4"|string&{};
   export interface AudioOnlyHlsSettings {
     /**
      * Specifies the group to which the audio Rendition belongs.
@@ -899,7 +899,7 @@ Alternate rendition that the client will not try to play back by default. Repres
      */
     SegmentType?: AudioOnlyHlsSegmentType;
   }
-  export type AudioOnlyHlsTrackType = "ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|"AUDIO_ONLY_VARIANT_STREAM"|string;
+  export type AudioOnlyHlsTrackType = "ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|"AUDIO_ONLY_VARIANT_STREAM"|string&{};
   export interface AudioPidSelection {
     /**
      * Selects a specific PID from within a source.
@@ -948,14 +948,14 @@ Alternate rendition that the client will not try to play back by default. Repres
      */
     DolbyEDecode?: AudioDolbyEDecode;
   }
-  export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string;
+  export type AudioType = "CLEAN_EFFECTS"|"HEARING_IMPAIRED"|"UNDEFINED"|"VISUAL_IMPAIRED_COMMENTARY"|string&{};
   export interface AudioWatermarkSettings {
     /**
      * Settings to configure Nielsen Watermarks in the audio encode
      */
     NielsenWatermarksSettings?: NielsenWatermarksSettings;
   }
-  export type AuthenticationScheme = "AKAMAI"|"COMMON"|string;
+  export type AuthenticationScheme = "AKAMAI"|"COMMON"|string&{};
   export interface AutomaticInputFailoverSettings {
     /**
      * This clear time defines the requirement a recovered input must meet to be considered healthy. The input must have no failover conditions for this length of time. Enter a time in milliseconds. This value is particularly important if the input_preference for the failover pair is set to PRIMARY_INPUT_PREFERRED, because after this time, MediaLive will switch back to the primary input.
@@ -984,7 +984,7 @@ Alternate rendition that the client will not try to play back by default. Repres
      */
     State?: AvailBlankingState;
   }
-  export type AvailBlankingState = "DISABLED"|"ENABLED"|string;
+  export type AvailBlankingState = "DISABLED"|"ENABLED"|string&{};
   export interface AvailConfiguration {
     /**
      * Controls how SCTE-35 messages create cues. Splice Insert mode treats all segmentation signals traditionally. With Time Signal APOS mode only Time Signal Placement Opportunity and Break messages create segment breaks. With ESAM mode, signals are forwarded to an ESAM server for possible update.
@@ -1166,10 +1166,10 @@ Alternate rendition that the client will not try to play back by default. Repres
      */
     State?: BlackoutSlateState;
   }
-  export type BlackoutSlateNetworkEndBlackout = "DISABLED"|"ENABLED"|string;
-  export type BlackoutSlateState = "DISABLED"|"ENABLED"|string;
-  export type BurnInAlignment = "CENTERED"|"LEFT"|"SMART"|string;
-  export type BurnInBackgroundColor = "BLACK"|"NONE"|"WHITE"|string;
+  export type BlackoutSlateNetworkEndBlackout = "DISABLED"|"ENABLED"|string&{};
+  export type BlackoutSlateState = "DISABLED"|"ENABLED"|string&{};
+  export type BurnInAlignment = "CENTERED"|"LEFT"|"SMART"|string&{};
+  export type BurnInBackgroundColor = "BLACK"|"NONE"|"WHITE"|string&{};
   export interface BurnInDestinationSettings {
     /**
      * If no explicit xPosition or yPosition is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. Selecting "smart" justification will left-justify live subtitles and center-justify pre-recorded subtitles.  All burn-in and DVB-Sub font settings must match.
@@ -1240,10 +1240,10 @@ Alternate rendition that the client will not try to play back by default. Repres
      */
     YPosition?: __integerMin0;
   }
-  export type BurnInFontColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string;
-  export type BurnInOutlineColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string;
-  export type BurnInShadowColor = "BLACK"|"NONE"|"WHITE"|string;
-  export type BurnInTeletextGridControl = "FIXED"|"SCALED"|string;
+  export type BurnInFontColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string&{};
+  export type BurnInOutlineColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string&{};
+  export type BurnInShadowColor = "BLACK"|"NONE"|"WHITE"|string&{};
+  export type BurnInTeletextGridControl = "FIXED"|"SCALED"|string&{};
   export interface CancelInputDeviceTransferRequest {
     /**
      * The unique ID of the input device to cancel. For example, hd-123456789abcdef.
@@ -1357,7 +1357,7 @@ This field corresponds to tts:extent - X in the TTML standard.
     Scte27SourceSettings?: Scte27SourceSettings;
     TeletextSourceSettings?: TeletextSourceSettings;
   }
-  export type CdiInputResolution = "SD"|"HD"|"FHD"|"UHD"|string;
+  export type CdiInputResolution = "SD"|"HD"|"FHD"|"UHD"|string&{};
   export interface CdiInputSpecification {
     /**
      * Maximum CDI input resolution
@@ -1435,14 +1435,14 @@ one destination per packager.
      */
     Vpc?: VpcOutputSettingsDescription;
   }
-  export type ChannelClass = "STANDARD"|"SINGLE_PIPELINE"|string;
+  export type ChannelClass = "STANDARD"|"SINGLE_PIPELINE"|string&{};
   export interface ChannelEgressEndpoint {
     /**
      * Public IP of where a channel's output comes from
      */
     SourceIp?: __string;
   }
-  export type ChannelState = "CREATING"|"CREATE_FAILED"|"IDLE"|"STARTING"|"RUNNING"|"RECOVERING"|"STOPPING"|"DELETING"|"DELETED"|"UPDATING"|"UPDATE_FAILED"|string;
+  export type ChannelState = "CREATING"|"CREATE_FAILED"|"IDLE"|"STARTING"|"RUNNING"|"RECOVERING"|"STOPPING"|"DELETING"|"DELETED"|"UPDATING"|"UPDATE_FAILED"|string&{};
   export interface ChannelSummary {
     /**
      * The unique arn of the channel.
@@ -2500,9 +2500,9 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     ScheduleActions?: __listOfScheduleAction;
   }
-  export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string;
-  export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|"UPDATING"|string;
-  export type DolbyEProgramSelection = "ALL_CHANNELS"|"PROGRAM_1"|"PROGRAM_2"|"PROGRAM_3"|"PROGRAM_4"|"PROGRAM_5"|"PROGRAM_6"|"PROGRAM_7"|"PROGRAM_8"|string;
+  export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string&{};
+  export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|"UPDATING"|string&{};
+  export type DolbyEProgramSelection = "ALL_CHANNELS"|"PROGRAM_1"|"PROGRAM_2"|"PROGRAM_3"|"PROGRAM_4"|"PROGRAM_5"|"PROGRAM_6"|"PROGRAM_7"|"PROGRAM_8"|string&{};
   export interface DolbyVision81Settings {
   }
   export interface DvbNitSettings {
@@ -2519,7 +2519,7 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     RepInterval?: __integerMin25Max10000;
   }
-  export type DvbSdtOutputSdt = "SDT_FOLLOW"|"SDT_FOLLOW_IF_PRESENT"|"SDT_MANUAL"|"SDT_NONE"|string;
+  export type DvbSdtOutputSdt = "SDT_FOLLOW"|"SDT_FOLLOW_IF_PRESENT"|"SDT_MANUAL"|"SDT_NONE"|string&{};
   export interface DvbSdtSettings {
     /**
      * Selects method of inserting SDT information into output stream. The sdtFollow setting copies SDT information from input stream to output stream. The sdtFollowIfPresent setting copies SDT information from input stream to output stream if SDT information is present in the input, otherwise it will fall back on the user-defined values. The sdtManual setting means user will enter the SDT information. The sdtNone setting means output stream will not contain SDT information.
@@ -2538,10 +2538,10 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     ServiceProviderName?: __stringMin1Max256;
   }
-  export type DvbSubDestinationAlignment = "CENTERED"|"LEFT"|"SMART"|string;
-  export type DvbSubDestinationBackgroundColor = "BLACK"|"NONE"|"WHITE"|string;
-  export type DvbSubDestinationFontColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string;
-  export type DvbSubDestinationOutlineColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string;
+  export type DvbSubDestinationAlignment = "CENTERED"|"LEFT"|"SMART"|string&{};
+  export type DvbSubDestinationBackgroundColor = "BLACK"|"NONE"|"WHITE"|string&{};
+  export type DvbSubDestinationFontColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string&{};
+  export type DvbSubDestinationOutlineColor = "BLACK"|"BLUE"|"GREEN"|"RED"|"WHITE"|"YELLOW"|string&{};
   export interface DvbSubDestinationSettings {
     /**
      * If no explicit xPosition or yPosition is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. Selecting "smart" justification will left-justify live subtitles and center-justify pre-recorded subtitles.  This option is not valid for source captions that are STL or 608/embedded.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match.
@@ -2612,9 +2612,9 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     YPosition?: __integerMin0;
   }
-  export type DvbSubDestinationShadowColor = "BLACK"|"NONE"|"WHITE"|string;
-  export type DvbSubDestinationTeletextGridControl = "FIXED"|"SCALED"|string;
-  export type DvbSubOcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
+  export type DvbSubDestinationShadowColor = "BLACK"|"NONE"|"WHITE"|string&{};
+  export type DvbSubDestinationTeletextGridControl = "FIXED"|"SCALED"|string&{};
+  export type DvbSubOcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string&{};
   export interface DvbSubSourceSettings {
     /**
      * If you will configure a WebVTT caption description that references this caption selector, use this field to
@@ -2632,9 +2632,9 @@ provide the language to consider when translating the image-based source to text
      */
     RepInterval?: __integerMin1000Max30000;
   }
-  export type Eac3AtmosCodingMode = "CODING_MODE_5_1_4"|"CODING_MODE_7_1_4"|"CODING_MODE_9_1_6"|string;
-  export type Eac3AtmosDrcLine = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
-  export type Eac3AtmosDrcRf = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
+  export type Eac3AtmosCodingMode = "CODING_MODE_5_1_4"|"CODING_MODE_7_1_4"|"CODING_MODE_9_1_6"|string&{};
+  export type Eac3AtmosDrcLine = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string&{};
+  export type Eac3AtmosDrcRf = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string&{};
   export interface Eac3AtmosSettings {
     /**
      * Average bitrate in bits/second. Valid bitrates depend on the coding mode.
@@ -2666,17 +2666,17 @@ provide the language to consider when translating the image-based source to text
      */
     SurroundTrim?: __double;
   }
-  export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string;
-  export type Eac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string;
-  export type Eac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_3_2"|string;
-  export type Eac3DcFilter = "DISABLED"|"ENABLED"|string;
-  export type Eac3DrcLine = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
-  export type Eac3DrcRf = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string;
-  export type Eac3LfeControl = "LFE"|"NO_LFE"|string;
-  export type Eac3LfeFilter = "DISABLED"|"ENABLED"|string;
-  export type Eac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
-  export type Eac3PassthroughControl = "NO_PASSTHROUGH"|"WHEN_POSSIBLE"|string;
-  export type Eac3PhaseControl = "NO_SHIFT"|"SHIFT_90_DEGREES"|string;
+  export type Eac3AttenuationControl = "ATTENUATE_3_DB"|"NONE"|string&{};
+  export type Eac3BitstreamMode = "COMMENTARY"|"COMPLETE_MAIN"|"EMERGENCY"|"HEARING_IMPAIRED"|"VISUALLY_IMPAIRED"|string&{};
+  export type Eac3CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_3_2"|string&{};
+  export type Eac3DcFilter = "DISABLED"|"ENABLED"|string&{};
+  export type Eac3DrcLine = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string&{};
+  export type Eac3DrcRf = "FILM_LIGHT"|"FILM_STANDARD"|"MUSIC_LIGHT"|"MUSIC_STANDARD"|"NONE"|"SPEECH"|string&{};
+  export type Eac3LfeControl = "LFE"|"NO_LFE"|string&{};
+  export type Eac3LfeFilter = "DISABLED"|"ENABLED"|string&{};
+  export type Eac3MetadataControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string&{};
+  export type Eac3PassthroughControl = "NO_PASSTHROUGH"|"WHEN_POSSIBLE"|string&{};
+  export type Eac3PhaseControl = "NO_SHIFT"|"SHIFT_90_DEGREES"|string&{};
   export interface Eac3Settings {
     /**
      * When set to attenuate3Db, applies a 3 dB attenuation to the surround channels. Only used for 3/2 coding mode.
@@ -2759,9 +2759,9 @@ provide the language to consider when translating the image-based source to text
      */
     SurroundMode?: Eac3SurroundMode;
   }
-  export type Eac3StereoDownmix = "DPL2"|"LO_RO"|"LT_RT"|"NOT_INDICATED"|string;
-  export type Eac3SurroundExMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string;
-  export type Eac3SurroundMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string;
+  export type Eac3StereoDownmix = "DPL2"|"LO_RO"|"LT_RT"|"NOT_INDICATED"|string&{};
+  export type Eac3SurroundExMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string&{};
+  export type Eac3SurroundMode = "DISABLED"|"ENABLED"|"NOT_INDICATED"|string&{};
   export interface EbuTtDDestinationSettings {
     /**
      * Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata.
@@ -2791,14 +2791,14 @@ You specify only the font family. All other style information (color, bold, posi
      */
     StyleControl?: EbuTtDDestinationStyleControl;
   }
-  export type EbuTtDDestinationStyleControl = "EXCLUDE"|"INCLUDE"|string;
-  export type EbuTtDFillLineGapControl = "DISABLED"|"ENABLED"|string;
-  export type EmbeddedConvert608To708 = "DISABLED"|"UPCONVERT"|string;
+  export type EbuTtDDestinationStyleControl = "EXCLUDE"|"INCLUDE"|string&{};
+  export type EbuTtDFillLineGapControl = "DISABLED"|"ENABLED"|string&{};
+  export type EmbeddedConvert608To708 = "DISABLED"|"UPCONVERT"|string&{};
   export interface EmbeddedDestinationSettings {
   }
   export interface EmbeddedPlusScte20DestinationSettings {
   }
-  export type EmbeddedScte20Detection = "AUTO"|"OFF"|string;
+  export type EmbeddedScte20Detection = "AUTO"|"OFF"|string&{};
   export interface EmbeddedSourceSettings {
     /**
      * If upconvert, 608 data is both passed through via the "608 compatibility bytes" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded.
@@ -2915,8 +2915,8 @@ If you disable the feature on an existing schedule, make sure that you first del
      */
     InputPrepareScheduleActions?: FeatureActivationsInputPrepareScheduleActions;
   }
-  export type FeatureActivationsInputPrepareScheduleActions = "DISABLED"|"ENABLED"|string;
-  export type FecOutputIncludeFec = "COLUMN"|"COLUMN_AND_ROW"|string;
+  export type FeatureActivationsInputPrepareScheduleActions = "DISABLED"|"ENABLED"|string&{};
+  export type FecOutputIncludeFec = "COLUMN"|"COLUMN_AND_ROW"|string&{};
   export interface FecOutputSettings {
     /**
      * Parameter D from SMPTE 2022-1. The height of the FEC protection matrix.  The number of transport stream packets per column error correction packet. Must be between 4 and 20, inclusive.
@@ -2931,7 +2931,7 @@ If you disable the feature on an existing schedule, make sure that you first del
      */
     RowLength?: __integerMin1Max20;
   }
-  export type FixedAfd = "AFD_0000"|"AFD_0010"|"AFD_0011"|"AFD_0100"|"AFD_1000"|"AFD_1001"|"AFD_1010"|"AFD_1011"|"AFD_1101"|"AFD_1110"|"AFD_1111"|string;
+  export type FixedAfd = "AFD_0000"|"AFD_0010"|"AFD_0011"|"AFD_0100"|"AFD_1000"|"AFD_1001"|"AFD_1010"|"AFD_1011"|"AFD_1101"|"AFD_1110"|"AFD_1111"|string&{};
   export interface FixedModeScheduleActionStartSettings {
     /**
      * Start time for the action to start in the channel. (Not the time for the action to be added to the schedule: actions are always added to the schedule immediately.) UTC format: yyyy-mm-ddThh:mm:ss.nnnZ. All the letters are digits (for example, mm might be 01) except for the two constants "T" for time and "Z" for "UTC format".
@@ -2952,8 +2952,8 @@ If you disable the feature on an existing schedule, make sure that you first del
      */
     TimedMetadataBehavior?: Fmp4TimedMetadataBehavior;
   }
-  export type Fmp4NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
-  export type Fmp4TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type Fmp4NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string&{};
+  export type Fmp4TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string&{};
   export interface FollowModeScheduleActionStartSettings {
     /**
      * Identifies whether this action starts relative to the start or relative to the end of the reference action.
@@ -2964,7 +2964,7 @@ If you disable the feature on an existing schedule, make sure that you first del
      */
     ReferenceActionName: __string;
   }
-  export type FollowPoint = "END"|"START"|string;
+  export type FollowPoint = "END"|"START"|string&{};
   export interface FrameCaptureCdnSettings {
     FrameCaptureS3Settings?: FrameCaptureS3Settings;
   }
@@ -2980,7 +2980,7 @@ If you disable the feature on an existing schedule, make sure that you first del
   }
   export interface FrameCaptureHlsSettings {
   }
-  export type FrameCaptureIntervalUnit = "MILLISECONDS"|"SECONDS"|string;
+  export type FrameCaptureIntervalUnit = "MILLISECONDS"|"SECONDS"|string&{};
   export interface FrameCaptureOutputSettings {
     /**
      * Required if the output group contains more than one output. This modifier forms part of the output file name.
@@ -3058,34 +3058,34 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
      */
     SupportLowFramerateInputs?: GlobalConfigurationLowFramerateInputs;
   }
-  export type GlobalConfigurationInputEndAction = "NONE"|"SWITCH_AND_LOOP_INPUTS"|string;
-  export type GlobalConfigurationLowFramerateInputs = "DISABLED"|"ENABLED"|string;
-  export type GlobalConfigurationOutputLockingMode = "EPOCH_LOCKING"|"PIPELINE_LOCKING"|string;
-  export type GlobalConfigurationOutputTimingSource = "INPUT_CLOCK"|"SYSTEM_CLOCK"|string;
-  export type H264AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
-  export type H264ColorMetadata = "IGNORE"|"INSERT"|string;
+  export type GlobalConfigurationInputEndAction = "NONE"|"SWITCH_AND_LOOP_INPUTS"|string&{};
+  export type GlobalConfigurationLowFramerateInputs = "DISABLED"|"ENABLED"|string&{};
+  export type GlobalConfigurationOutputLockingMode = "EPOCH_LOCKING"|"PIPELINE_LOCKING"|string&{};
+  export type GlobalConfigurationOutputTimingSource = "INPUT_CLOCK"|"SYSTEM_CLOCK"|string&{};
+  export type H264AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string&{};
+  export type H264ColorMetadata = "IGNORE"|"INSERT"|string&{};
   export interface H264ColorSpaceSettings {
     ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
     Rec601Settings?: Rec601Settings;
     Rec709Settings?: Rec709Settings;
   }
-  export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
+  export type H264EntropyEncoding = "CABAC"|"CAVLC"|string&{};
   export interface H264FilterSettings {
     TemporalFilterSettings?: TemporalFilterSettings;
   }
-  export type H264FlickerAq = "DISABLED"|"ENABLED"|string;
-  export type H264ForceFieldPictures = "DISABLED"|"ENABLED"|string;
-  export type H264FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type H264GopBReference = "DISABLED"|"ENABLED"|string;
-  export type H264GopSizeUnits = "FRAMES"|"SECONDS"|string;
-  export type H264Level = "H264_LEVEL_1"|"H264_LEVEL_1_1"|"H264_LEVEL_1_2"|"H264_LEVEL_1_3"|"H264_LEVEL_2"|"H264_LEVEL_2_1"|"H264_LEVEL_2_2"|"H264_LEVEL_3"|"H264_LEVEL_3_1"|"H264_LEVEL_3_2"|"H264_LEVEL_4"|"H264_LEVEL_4_1"|"H264_LEVEL_4_2"|"H264_LEVEL_5"|"H264_LEVEL_5_1"|"H264_LEVEL_5_2"|"H264_LEVEL_AUTO"|string;
-  export type H264LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string;
-  export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
-  export type H264Profile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
-  export type H264QualityLevel = "ENHANCED_QUALITY"|"STANDARD_QUALITY"|string;
-  export type H264RateControlMode = "CBR"|"MULTIPLEX"|"QVBR"|"VBR"|string;
-  export type H264ScanType = "INTERLACED"|"PROGRESSIVE"|string;
-  export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
+  export type H264FlickerAq = "DISABLED"|"ENABLED"|string&{};
+  export type H264ForceFieldPictures = "DISABLED"|"ENABLED"|string&{};
+  export type H264FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string&{};
+  export type H264GopBReference = "DISABLED"|"ENABLED"|string&{};
+  export type H264GopSizeUnits = "FRAMES"|"SECONDS"|string&{};
+  export type H264Level = "H264_LEVEL_1"|"H264_LEVEL_1_1"|"H264_LEVEL_1_2"|"H264_LEVEL_1_3"|"H264_LEVEL_2"|"H264_LEVEL_2_1"|"H264_LEVEL_2_2"|"H264_LEVEL_3"|"H264_LEVEL_3_1"|"H264_LEVEL_3_2"|"H264_LEVEL_4"|"H264_LEVEL_4_1"|"H264_LEVEL_4_2"|"H264_LEVEL_5"|"H264_LEVEL_5_1"|"H264_LEVEL_5_2"|"H264_LEVEL_AUTO"|string&{};
+  export type H264LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string&{};
+  export type H264ParControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string&{};
+  export type H264Profile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string&{};
+  export type H264QualityLevel = "ENHANCED_QUALITY"|"STANDARD_QUALITY"|string&{};
+  export type H264RateControlMode = "CBR"|"MULTIPLEX"|"QVBR"|"VBR"|string&{};
+  export type H264ScanType = "INTERLACED"|"PROGRESSIVE"|string&{};
+  export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string&{};
   export interface H264Settings {
     /**
      * Enables or disables adaptive quantization, which is a technique MediaLive can apply to video on a frame-by-frame basis to produce more compression without losing quality. There are three types of adaptive quantization: flicker, spatial, and temporal. Set the field in one of these ways: Set to Auto. Recommended. For each type of AQ, MediaLive will determine if AQ is needed, and if so, the appropriate strength. Set a strength (a value other than Auto or Disable). This strength will apply to any of the AQ fields that you choose to enable. Set to Disabled to disable all types of adaptive quantization.
@@ -3287,14 +3287,14 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     TimecodeBurninSettings?: TimecodeBurninSettings;
   }
-  export type H264SpatialAq = "DISABLED"|"ENABLED"|string;
-  export type H264SubGopLength = "DYNAMIC"|"FIXED"|string;
-  export type H264Syntax = "DEFAULT"|"RP2027"|string;
-  export type H264TemporalAq = "DISABLED"|"ENABLED"|string;
-  export type H264TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
-  export type H265AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
-  export type H265AlternativeTransferFunction = "INSERT"|"OMIT"|string;
-  export type H265ColorMetadata = "IGNORE"|"INSERT"|string;
+  export type H264SpatialAq = "DISABLED"|"ENABLED"|string&{};
+  export type H264SubGopLength = "DYNAMIC"|"FIXED"|string&{};
+  export type H264Syntax = "DEFAULT"|"RP2027"|string&{};
+  export type H264TemporalAq = "DISABLED"|"ENABLED"|string&{};
+  export type H264TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string&{};
+  export type H265AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string&{};
+  export type H265AlternativeTransferFunction = "INSERT"|"OMIT"|string&{};
+  export type H265ColorMetadata = "IGNORE"|"INSERT"|string&{};
   export interface H265ColorSpaceSettings {
     ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
     DolbyVision81Settings?: DolbyVision81Settings;
@@ -3305,14 +3305,14 @@ This field is optional; when no value is specified the encoder will choose the n
   export interface H265FilterSettings {
     TemporalFilterSettings?: TemporalFilterSettings;
   }
-  export type H265FlickerAq = "DISABLED"|"ENABLED"|string;
-  export type H265GopSizeUnits = "FRAMES"|"SECONDS"|string;
-  export type H265Level = "H265_LEVEL_1"|"H265_LEVEL_2"|"H265_LEVEL_2_1"|"H265_LEVEL_3"|"H265_LEVEL_3_1"|"H265_LEVEL_4"|"H265_LEVEL_4_1"|"H265_LEVEL_5"|"H265_LEVEL_5_1"|"H265_LEVEL_5_2"|"H265_LEVEL_6"|"H265_LEVEL_6_1"|"H265_LEVEL_6_2"|"H265_LEVEL_AUTO"|string;
-  export type H265LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string;
-  export type H265Profile = "MAIN"|"MAIN_10BIT"|string;
-  export type H265RateControlMode = "CBR"|"MULTIPLEX"|"QVBR"|string;
-  export type H265ScanType = "INTERLACED"|"PROGRESSIVE"|string;
-  export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|string;
+  export type H265FlickerAq = "DISABLED"|"ENABLED"|string&{};
+  export type H265GopSizeUnits = "FRAMES"|"SECONDS"|string&{};
+  export type H265Level = "H265_LEVEL_1"|"H265_LEVEL_2"|"H265_LEVEL_2_1"|"H265_LEVEL_3"|"H265_LEVEL_3_1"|"H265_LEVEL_4"|"H265_LEVEL_4_1"|"H265_LEVEL_5"|"H265_LEVEL_5_1"|"H265_LEVEL_5_2"|"H265_LEVEL_6"|"H265_LEVEL_6_1"|"H265_LEVEL_6_2"|"H265_LEVEL_AUTO"|string&{};
+  export type H265LookAheadRateControl = "HIGH"|"LOW"|"MEDIUM"|string&{};
+  export type H265Profile = "MAIN"|"MAIN_10BIT"|string&{};
+  export type H265RateControlMode = "CBR"|"MULTIPLEX"|"QVBR"|string&{};
+  export type H265ScanType = "INTERLACED"|"PROGRESSIVE"|string&{};
+  export type H265SceneChangeDetect = "DISABLED"|"ENABLED"|string&{};
   export interface H265Settings {
     /**
      * Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
@@ -3453,8 +3453,8 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     TimecodeBurninSettings?: TimecodeBurninSettings;
   }
-  export type H265Tier = "HIGH"|"MAIN"|string;
-  export type H265TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
+  export type H265Tier = "HIGH"|"MAIN"|string&{};
+  export type H265TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string&{};
   export interface Hdr10Settings {
     /**
      * Maximum Content Light Level
@@ -3469,8 +3469,8 @@ for any single frame within an encoded HDR video stream or file.
      */
     MaxFall?: __integerMin0Max32768;
   }
-  export type HlsAdMarkers = "ADOBE"|"ELEMENTAL"|"ELEMENTAL_SCTE35"|string;
-  export type HlsAkamaiHttpTransferMode = "CHUNKED"|"NON_CHUNKED"|string;
+  export type HlsAdMarkers = "ADOBE"|"ELEMENTAL"|"ELEMENTAL_SCTE35"|string&{};
+  export type HlsAkamaiHttpTransferMode = "CHUNKED"|"NON_CHUNKED"|string&{};
   export interface HlsAkamaiSettings {
     /**
      * Number of seconds to wait before retrying connection to the CDN if the connection is lost.
@@ -3519,7 +3519,7 @@ for any single frame within an encoded HDR video stream or file.
      */
     RestartDelay?: __integerMin0Max15;
   }
-  export type HlsCaptionLanguageSetting = "INSERT"|"NONE"|"OMIT"|string;
+  export type HlsCaptionLanguageSetting = "INSERT"|"NONE"|"OMIT"|string&{};
   export interface HlsCdnSettings {
     HlsAkamaiSettings?: HlsAkamaiSettings;
     HlsBasicPutSettings?: HlsBasicPutSettings;
@@ -3527,11 +3527,11 @@ for any single frame within an encoded HDR video stream or file.
     HlsS3Settings?: HlsS3Settings;
     HlsWebdavSettings?: HlsWebdavSettings;
   }
-  export type HlsClientCache = "DISABLED"|"ENABLED"|string;
-  export type HlsCodecSpecification = "RFC_4281"|"RFC_6381"|string;
-  export type HlsDirectoryStructure = "SINGLE_DIRECTORY"|"SUBDIRECTORY_PER_STREAM"|string;
-  export type HlsDiscontinuityTags = "INSERT"|"NEVER_INSERT"|string;
-  export type HlsEncryptionType = "AES128"|"SAMPLE_AES"|string;
+  export type HlsClientCache = "DISABLED"|"ENABLED"|string&{};
+  export type HlsCodecSpecification = "RFC_4281"|"RFC_6381"|string&{};
+  export type HlsDirectoryStructure = "SINGLE_DIRECTORY"|"SUBDIRECTORY_PER_STREAM"|string&{};
+  export type HlsDiscontinuityTags = "INSERT"|"NEVER_INSERT"|string&{};
+  export type HlsEncryptionType = "AES128"|"SAMPLE_AES"|string&{};
   export interface HlsGroupSettings {
     /**
      * Choose one or more ad marker types to pass SCTE35 signals through to this group of Apple HLS outputs.
@@ -3741,7 +3741,7 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      */
     TsFileMode?: HlsTsFileMode;
   }
-  export type HlsH265PackagingType = "HEV1"|"HVC1"|string;
+  export type HlsH265PackagingType = "HEV1"|"HVC1"|string&{};
   export interface HlsId3SegmentTaggingScheduleActionSettings {
     /**
      * ID3 tag to insert into each segment. Supports special keyword identifiers to substitute in segment-related values.\nSupported keyword identifiers: https://docs.aws.amazon.com/medialive/latest/ug/variable-data-identifiers.html
@@ -3752,8 +3752,8 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      */
     Id3?: __string;
   }
-  export type HlsId3SegmentTaggingState = "DISABLED"|"ENABLED"|string;
-  export type HlsIncompleteSegmentBehavior = "AUTO"|"SUPPRESS"|string;
+  export type HlsId3SegmentTaggingState = "DISABLED"|"ENABLED"|string&{};
+  export type HlsIncompleteSegmentBehavior = "AUTO"|"SUPPRESS"|string&{};
   export interface HlsInputSettings {
     /**
      * When specified the HLS stream with the m3u8 BANDWIDTH that most closely matches this value will be chosen, otherwise the highest bandwidth stream in the m3u8 will be chosen.  The bitrate is specified in bits per second, as in an HLS manifest.
@@ -3776,10 +3776,10 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      */
     Scte35Source?: HlsScte35SourceType;
   }
-  export type HlsIvInManifest = "EXCLUDE"|"INCLUDE"|string;
-  export type HlsIvSource = "EXPLICIT"|"FOLLOWS_SEGMENT_NUMBER"|string;
-  export type HlsManifestCompression = "GZIP"|"NONE"|string;
-  export type HlsManifestDurationFormat = "FLOATING_POINT"|"INTEGER"|string;
+  export type HlsIvInManifest = "EXCLUDE"|"INCLUDE"|string&{};
+  export type HlsIvSource = "EXPLICIT"|"FOLLOWS_SEGMENT_NUMBER"|string&{};
+  export type HlsManifestCompression = "GZIP"|"NONE"|string&{};
+  export type HlsManifestDurationFormat = "FLOATING_POINT"|"INTEGER"|string&{};
   export interface HlsMediaStoreSettings {
     /**
      * Number of seconds to wait before retrying connection to the CDN if the connection is lost.
@@ -3802,9 +3802,9 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      */
     RestartDelay?: __integerMin0Max15;
   }
-  export type HlsMediaStoreStorageClass = "TEMPORAL"|string;
-  export type HlsMode = "LIVE"|"VOD"|string;
-  export type HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"|"SEGMENTS_ONLY"|"VARIANT_MANIFESTS_AND_SEGMENTS"|string;
+  export type HlsMediaStoreStorageClass = "TEMPORAL"|string&{};
+  export type HlsMode = "LIVE"|"VOD"|string&{};
+  export type HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"|"SEGMENTS_ONLY"|"VARIANT_MANIFESTS_AND_SEGMENTS"|string&{};
   export interface HlsOutputSettings {
     /**
      * Only applicable when this output is referencing an H.265 video description.
@@ -3824,33 +3824,33 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     SegmentModifier?: __string;
   }
-  export type HlsProgramDateTime = "EXCLUDE"|"INCLUDE"|string;
-  export type HlsProgramDateTimeClock = "INITIALIZE_FROM_OUTPUT_TIMECODE"|"SYSTEM_CLOCK"|string;
-  export type HlsRedundantManifest = "DISABLED"|"ENABLED"|string;
+  export type HlsProgramDateTime = "EXCLUDE"|"INCLUDE"|string&{};
+  export type HlsProgramDateTimeClock = "INITIALIZE_FROM_OUTPUT_TIMECODE"|"SYSTEM_CLOCK"|string&{};
+  export type HlsRedundantManifest = "DISABLED"|"ENABLED"|string&{};
   export interface HlsS3Settings {
     /**
      * Specify the canned ACL to apply to each S3 request. Defaults to none.
      */
     CannedAcl?: S3CannedAcl;
   }
-  export type HlsScte35SourceType = "MANIFEST"|"SEGMENTS"|string;
-  export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
+  export type HlsScte35SourceType = "MANIFEST"|"SEGMENTS"|string&{};
+  export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string&{};
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
     Fmp4HlsSettings?: Fmp4HlsSettings;
     FrameCaptureHlsSettings?: FrameCaptureHlsSettings;
     StandardHlsSettings?: StandardHlsSettings;
   }
-  export type HlsStreamInfResolution = "EXCLUDE"|"INCLUDE"|string;
-  export type HlsTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export type HlsStreamInfResolution = "EXCLUDE"|"INCLUDE"|string&{};
+  export type HlsTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string&{};
   export interface HlsTimedMetadataScheduleActionSettings {
     /**
      * Base64 string formatted according to the ID3 specification: http://id3.org/id3v2.4.0-structure
      */
     Id3: __string;
   }
-  export type HlsTsFileMode = "SEGMENTED_FILES"|"SINGLE_FILE"|string;
-  export type HlsWebdavHttpTransferMode = "CHUNKED"|"NON_CHUNKED"|string;
+  export type HlsTsFileMode = "SEGMENTED_FILES"|"SINGLE_FILE"|string&{};
+  export type HlsWebdavHttpTransferMode = "CHUNKED"|"NON_CHUNKED"|string&{};
   export interface HlsWebdavSettings {
     /**
      * Number of seconds to wait before retrying connection to the CDN if the connection is lost.
@@ -3875,10 +3875,10 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
   }
   export interface HtmlMotionGraphicsSettings {
   }
-  export type IFrameOnlyPlaylistType = "DISABLED"|"STANDARD"|string;
+  export type IFrameOnlyPlaylistType = "DISABLED"|"STANDARD"|string&{};
   export interface ImmediateModeScheduleActionStartSettings {
   }
-  export type IncludeFillerNalUnits = "AUTO"|"DROP"|"INCLUDE"|string;
+  export type IncludeFillerNalUnits = "AUTO"|"DROP"|"INCLUDE"|string&{};
   export interface Input {
     /**
      * The Unique ARN of the input (generated, immutable).
@@ -3971,7 +3971,7 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     InputChannel: __integerMin0Max15;
   }
-  export type InputClass = "STANDARD"|"SINGLE_PIPELINE"|string;
+  export type InputClass = "STANDARD"|"SINGLE_PIPELINE"|string&{};
   export interface InputClippingSettings {
     /**
      * The source of the timecodes in the source being clipped.
@@ -3986,9 +3986,9 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     StopTimecode?: StopTimecode;
   }
-  export type InputCodec = "MPEG2"|"AVC"|"HEVC"|string;
-  export type InputDeblockFilter = "DISABLED"|"ENABLED"|string;
-  export type InputDenoiseFilter = "DISABLED"|"ENABLED"|string;
+  export type InputCodec = "MPEG2"|"AVC"|"HEVC"|string&{};
+  export type InputDeblockFilter = "DISABLED"|"ENABLED"|string&{};
+  export type InputDenoiseFilter = "DISABLED"|"ENABLED"|string&{};
   export interface InputDestination {
     /**
      * The system-generated static IP address of endpoint.
@@ -4028,7 +4028,7 @@ to.
      */
     NetworkInterfaceId?: __string;
   }
-  export type InputDeviceActiveInput = "HDMI"|"SDI"|string;
+  export type InputDeviceActiveInput = "HDMI"|"SDI"|string&{};
   export interface InputDeviceConfigurableSettings {
     /**
      * The input source that you want to use. If the device has a source connected to only one of its input ports, or if you don't care which source the device sends, specify Auto. If the device has sources connected to both its input ports, and you want to use a specific source, specify the source.
@@ -4043,8 +4043,8 @@ to.
      */
     LatencyMs?: __integer;
   }
-  export type InputDeviceConfiguredInput = "AUTO"|"HDMI"|"SDI"|string;
-  export type InputDeviceConnectionState = "DISCONNECTED"|"CONNECTED"|string;
+  export type InputDeviceConfiguredInput = "AUTO"|"HDMI"|"SDI"|string&{};
+  export type InputDeviceConnectionState = "DISCONNECTED"|"CONNECTED"|string&{};
   export interface InputDeviceHdSettings {
     /**
      * If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI).
@@ -4083,7 +4083,7 @@ to.
      */
     LatencyMs?: __integer;
   }
-  export type InputDeviceIpScheme = "STATIC"|"DHCP"|string;
+  export type InputDeviceIpScheme = "STATIC"|"DHCP"|string&{};
   export interface InputDeviceNetworkSettings {
     /**
      * The DNS addresses of the input device.
@@ -4112,14 +4112,14 @@ to.
      */
     Id?: __string;
   }
-  export type InputDeviceScanType = "INTERLACED"|"PROGRESSIVE"|string;
+  export type InputDeviceScanType = "INTERLACED"|"PROGRESSIVE"|string&{};
   export interface InputDeviceSettings {
     /**
      * The unique ID for the device.
      */
     Id?: __string;
   }
-  export type InputDeviceState = "IDLE"|"STREAMING"|string;
+  export type InputDeviceState = "IDLE"|"STREAMING"|string&{};
   export interface InputDeviceSummary {
     /**
      * The unique ARN of the input device.
@@ -4178,8 +4178,8 @@ to.
      */
     AvailabilityZone?: __string;
   }
-  export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
-  export type InputDeviceType = "HD"|"UHD"|string;
+  export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string&{};
+  export type InputDeviceType = "HD"|"UHD"|string&{};
   export interface InputDeviceUhdSettings {
     /**
      * If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI).
@@ -4218,7 +4218,7 @@ to.
      */
     LatencyMs?: __integer;
   }
-  export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
+  export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string&{};
   export interface InputLocation {
     /**
      * key used to extract the password from EC2 Parameter store
@@ -4233,10 +4233,10 @@ to.
      */
     Username?: __string;
   }
-  export type InputLossActionForHlsOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string;
-  export type InputLossActionForMsSmoothOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string;
-  export type InputLossActionForRtmpOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string;
-  export type InputLossActionForUdpOut = "DROP_PROGRAM"|"DROP_TS"|"EMIT_PROGRAM"|string;
+  export type InputLossActionForHlsOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string&{};
+  export type InputLossActionForMsSmoothOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string&{};
+  export type InputLossActionForRtmpOut = "EMIT_OUTPUT"|"PAUSE_OUTPUT"|string&{};
+  export type InputLossActionForUdpOut = "DROP_PROGRAM"|"DROP_TS"|"EMIT_PROGRAM"|string&{};
   export interface InputLossBehavior {
     /**
      * Documentation update needed
@@ -4265,9 +4265,9 @@ to.
      */
     InputLossThresholdMsec?: __integerMin100;
   }
-  export type InputLossImageType = "COLOR"|"SLATE"|string;
-  export type InputMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
-  export type InputPreference = "EQUAL_INPUT_PREFERENCE"|"PRIMARY_INPUT_PREFERRED"|string;
+  export type InputLossImageType = "COLOR"|"SLATE"|string&{};
+  export type InputMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string&{};
+  export type InputPreference = "EQUAL_INPUT_PREFERENCE"|"PRIMARY_INPUT_PREFERRED"|string&{};
   export interface InputPrepareScheduleActionSettings {
     /**
      * The name of the input attachment that should be prepared by this action. If no name is provided, the action will stop the most recent prepare (if any) when activated.
@@ -4282,7 +4282,7 @@ to.
      */
     UrlPath?: __listOf__string;
   }
-  export type InputResolution = "SD"|"HD"|"UHD"|string;
+  export type InputResolution = "SD"|"HD"|"UHD"|string&{};
   export interface InputSecurityGroup {
     /**
      * Unique ARN of Input Security Group
@@ -4309,7 +4309,7 @@ to.
      */
     WhitelistRules?: __listOfInputWhitelistRule;
   }
-  export type InputSecurityGroupState = "IDLE"|"IN_USE"|"UPDATING"|"DELETED"|string;
+  export type InputSecurityGroupState = "IDLE"|"IN_USE"|"UPDATING"|"DELETED"|string&{};
   export interface InputSettings {
     /**
      * Used to select the audio stream to decode for inputs that have multiple available.
@@ -4377,7 +4377,7 @@ pulled from.
      */
     Username?: __string;
   }
-  export type InputSourceEndBehavior = "CONTINUE"|"LOOP"|string;
+  export type InputSourceEndBehavior = "CONTINUE"|"LOOP"|string&{};
   export interface InputSourceRequest {
     /**
      * The key used to extract the password from EC2 Parameter store.
@@ -4394,7 +4394,7 @@ pulled from.
      */
     Username?: __string;
   }
-  export type InputSourceType = "STATIC"|"DYNAMIC"|string;
+  export type InputSourceType = "STATIC"|"DYNAMIC"|string&{};
   export interface InputSpecification {
     /**
      * Input codec
@@ -4409,7 +4409,7 @@ pulled from.
      */
     Resolution?: InputResolution;
   }
-  export type InputState = "CREATING"|"DETACHED"|"ATTACHED"|"DELETING"|"DELETED"|string;
+  export type InputState = "CREATING"|"DETACHED"|"ATTACHED"|"DELETING"|"DELETED"|string&{};
   export interface InputSwitchScheduleActionSettings {
     /**
      * The name of the input attachment (not the name of the input!) to switch to. The name is specified in the channel configuration.
@@ -4424,8 +4424,8 @@ pulled from.
      */
     UrlPath?: __listOf__string;
   }
-  export type InputTimecodeSource = "ZEROBASED"|"EMBEDDED"|string;
-  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|"TS_FILE"|string;
+  export type InputTimecodeSource = "ZEROBASED"|"EMBEDDED"|string&{};
+  export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|"INPUT_DEVICE"|"AWS_CDI"|"TS_FILE"|string&{};
   export interface InputVpcRequest {
     /**
      * A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
@@ -4455,7 +4455,7 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   export interface KeyProviderSettings {
     StaticKeySettings?: StaticKeySettings;
   }
-  export type LastFrameClippingBehavior = "EXCLUDE_LAST_FRAME"|"INCLUDE_LAST_FRAME"|string;
+  export type LastFrameClippingBehavior = "EXCLUDE_LAST_FRAME"|"INCLUDE_LAST_FRAME"|string&{};
   export interface ListChannelsRequest {
     MaxResults?: MaxResults;
     NextToken?: __string;
@@ -4671,25 +4671,25 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   export interface ListTagsForResourceResponse {
     Tags?: Tags;
   }
-  export type LogLevel = "ERROR"|"WARNING"|"INFO"|"DEBUG"|"DISABLED"|string;
-  export type M2tsAbsentInputAudioBehavior = "DROP"|"ENCODE_SILENCE"|string;
-  export type M2tsArib = "DISABLED"|"ENABLED"|string;
-  export type M2tsAribCaptionsPidControl = "AUTO"|"USE_CONFIGURED"|string;
-  export type M2tsAudioBufferModel = "ATSC"|"DVB"|string;
-  export type M2tsAudioInterval = "VIDEO_AND_FIXED_INTERVALS"|"VIDEO_INTERVAL"|string;
-  export type M2tsAudioStreamType = "ATSC"|"DVB"|string;
-  export type M2tsBufferModel = "MULTIPLEX"|"NONE"|string;
-  export type M2tsCcDescriptor = "DISABLED"|"ENABLED"|string;
-  export type M2tsEbifControl = "NONE"|"PASSTHROUGH"|string;
-  export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID"|string;
-  export type M2tsEsRateInPes = "EXCLUDE"|"INCLUDE"|string;
-  export type M2tsKlv = "NONE"|"PASSTHROUGH"|string;
-  export type M2tsNielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
-  export type M2tsPcrControl = "CONFIGURED_PCR_PERIOD"|"PCR_EVERY_PES_PACKET"|string;
-  export type M2tsRateMode = "CBR"|"VBR"|string;
-  export type M2tsScte35Control = "NONE"|"PASSTHROUGH"|string;
-  export type M2tsSegmentationMarkers = "EBP"|"EBP_LEGACY"|"NONE"|"PSI_SEGSTART"|"RAI_ADAPT"|"RAI_SEGSTART"|string;
-  export type M2tsSegmentationStyle = "MAINTAIN_CADENCE"|"RESET_CADENCE"|string;
+  export type LogLevel = "ERROR"|"WARNING"|"INFO"|"DEBUG"|"DISABLED"|string&{};
+  export type M2tsAbsentInputAudioBehavior = "DROP"|"ENCODE_SILENCE"|string&{};
+  export type M2tsArib = "DISABLED"|"ENABLED"|string&{};
+  export type M2tsAribCaptionsPidControl = "AUTO"|"USE_CONFIGURED"|string&{};
+  export type M2tsAudioBufferModel = "ATSC"|"DVB"|string&{};
+  export type M2tsAudioInterval = "VIDEO_AND_FIXED_INTERVALS"|"VIDEO_INTERVAL"|string&{};
+  export type M2tsAudioStreamType = "ATSC"|"DVB"|string&{};
+  export type M2tsBufferModel = "MULTIPLEX"|"NONE"|string&{};
+  export type M2tsCcDescriptor = "DISABLED"|"ENABLED"|string&{};
+  export type M2tsEbifControl = "NONE"|"PASSTHROUGH"|string&{};
+  export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID"|string&{};
+  export type M2tsEsRateInPes = "EXCLUDE"|"INCLUDE"|string&{};
+  export type M2tsKlv = "NONE"|"PASSTHROUGH"|string&{};
+  export type M2tsNielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string&{};
+  export type M2tsPcrControl = "CONFIGURED_PCR_PERIOD"|"PCR_EVERY_PES_PACKET"|string&{};
+  export type M2tsRateMode = "CBR"|"VBR"|string&{};
+  export type M2tsScte35Control = "NONE"|"PASSTHROUGH"|string&{};
+  export type M2tsSegmentationMarkers = "EBP"|"EBP_LEGACY"|"NONE"|"PSI_SEGSTART"|"RAI_ADAPT"|"RAI_SEGSTART"|string&{};
+  export type M2tsSegmentationStyle = "MAINTAIN_CADENCE"|"RESET_CADENCE"|string&{};
   export interface M2tsSettings {
     /**
      * When set to drop, output audio streams will be removed from the program if the selected input audio stream is removed from the input. This allows the output audio configuration to dynamically change based on input configuration. If this is set to encodeSilence, all output audio streams will output encoded silence when not connected to an active input stream.
@@ -4888,11 +4888,11 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     Scte35PrerollPullupMilliseconds?: __doubleMin0Max5000;
   }
-  export type M2tsTimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
-  export type M3u8KlvBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
-  export type M3u8NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
-  export type M3u8PcrControl = "CONFIGURED_PCR_PERIOD"|"PCR_EVERY_PES_PACKET"|string;
-  export type M3u8Scte35Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type M2tsTimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string&{};
+  export type M3u8KlvBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string&{};
+  export type M3u8NielsenId3Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string&{};
+  export type M3u8PcrControl = "CONFIGURED_PCR_PERIOD"|"PCR_EVERY_PES_PACKET"|string&{};
+  export type M3u8Scte35Behavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string&{};
   export interface M3u8Settings {
     /**
      * The number of audio frames to insert for each PES packet.
@@ -4971,7 +4971,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     KlvDataPids?: __string;
   }
-  export type M3u8TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string;
+  export type M3u8TimedMetadataBehavior = "NO_PASSTHROUGH"|"PASSTHROUGH"|string&{};
   export interface MaintenanceCreateSettings {
     /**
      * Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows.
@@ -4982,7 +4982,7 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     MaintenanceStartTime?: __stringPattern010920300;
   }
-  export type MaintenanceDay = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string;
+  export type MaintenanceDay = "MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|"SUNDAY"|string&{};
   export interface MaintenanceStatus {
     /**
      * The currently selected maintenance day.
@@ -5069,11 +5069,11 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
   }
   export interface MotionGraphicsDeactivateScheduleActionSettings {
   }
-  export type MotionGraphicsInsertion = "DISABLED"|"ENABLED"|string;
+  export type MotionGraphicsInsertion = "DISABLED"|"ENABLED"|string&{};
   export interface MotionGraphicsSettings {
     HtmlMotionGraphicsSettings?: HtmlMotionGraphicsSettings;
   }
-  export type Mp2CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|string;
+  export type Mp2CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|string&{};
   export interface Mp2Settings {
     /**
      * Average bitrate in bits/second.
@@ -5088,15 +5088,15 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     SampleRate?: __double;
   }
-  export type Mpeg2AdaptiveQuantization = "AUTO"|"HIGH"|"LOW"|"MEDIUM"|"OFF"|string;
-  export type Mpeg2ColorMetadata = "IGNORE"|"INSERT"|string;
-  export type Mpeg2ColorSpace = "AUTO"|"PASSTHROUGH"|string;
-  export type Mpeg2DisplayRatio = "DISPLAYRATIO16X9"|"DISPLAYRATIO4X3"|string;
+  export type Mpeg2AdaptiveQuantization = "AUTO"|"HIGH"|"LOW"|"MEDIUM"|"OFF"|string&{};
+  export type Mpeg2ColorMetadata = "IGNORE"|"INSERT"|string&{};
+  export type Mpeg2ColorSpace = "AUTO"|"PASSTHROUGH"|string&{};
+  export type Mpeg2DisplayRatio = "DISPLAYRATIO16X9"|"DISPLAYRATIO4X3"|string&{};
   export interface Mpeg2FilterSettings {
     TemporalFilterSettings?: TemporalFilterSettings;
   }
-  export type Mpeg2GopSizeUnits = "FRAMES"|"SECONDS"|string;
-  export type Mpeg2ScanType = "INTERLACED"|"PROGRESSIVE"|string;
+  export type Mpeg2GopSizeUnits = "FRAMES"|"SECONDS"|string&{};
+  export type Mpeg2ScanType = "INTERLACED"|"PROGRESSIVE"|string&{};
   export interface Mpeg2Settings {
     /**
      * Choose Off to disable adaptive quantization. Or choose another value to enable the quantizer and set its strength. The strengths are: Auto, Off, Low, Medium, High. When you enable this field, MediaLive allows intra-frame quantizers to vary, which might improve visual quality.
@@ -5180,8 +5180,8 @@ GOP_TIMECODE: Include timecode metadata in the GOP header.
      */
     TimecodeBurninSettings?: TimecodeBurninSettings;
   }
-  export type Mpeg2SubGopLength = "DYNAMIC"|"FIXED"|string;
-  export type Mpeg2TimecodeInsertionBehavior = "DISABLED"|"GOP_TIMECODE"|string;
+  export type Mpeg2SubGopLength = "DYNAMIC"|"FIXED"|string&{};
+  export type Mpeg2TimecodeInsertionBehavior = "DISABLED"|"GOP_TIMECODE"|string&{};
   export interface MsSmoothGroupSettings {
     /**
      * The ID to include in each message in the sparse track. Ignored if sparseTrackType is NONE.
@@ -5272,7 +5272,7 @@ Options:
      */
     TimestampOffsetMode?: SmoothGroupTimestampOffsetMode;
   }
-  export type MsSmoothH265PackagingType = "HEV1"|"HVC1"|string;
+  export type MsSmoothH265PackagingType = "HEV1"|"HVC1"|string&{};
   export interface MsSmoothOutputSettings {
     /**
      * Only applicable when this output is referencing an H.265 video description.
@@ -5466,7 +5466,7 @@ The Multiplex must be in the same region as the Channel.
      */
     TransportStreamBitrate?: __integerMin1000000Max100000000;
   }
-  export type MultiplexState = "CREATING"|"CREATE_FAILED"|"IDLE"|"STARTING"|"RUNNING"|"RECOVERING"|"STOPPING"|"DELETING"|"DELETED"|string;
+  export type MultiplexState = "CREATING"|"CREATE_FAILED"|"IDLE"|"STARTING"|"RUNNING"|"RECOVERING"|"STOPPING"|"DELETING"|"DELETED"|string&{};
   export interface MultiplexStatmuxVideoSettings {
     /**
      * Maximum statmux bitrate.
@@ -5531,7 +5531,7 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     StatmuxSettings?: MultiplexStatmuxVideoSettings;
   }
-  export type NetworkInputServerValidation = "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME"|"CHECK_CRYPTOGRAPHY_ONLY"|string;
+  export type NetworkInputServerValidation = "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME"|"CHECK_CRYPTOGRAPHY_ONLY"|string&{};
   export interface NetworkInputSettings {
     /**
      * Specifies HLS input settings when the uri is for a HLS manifest.
@@ -5581,10 +5581,10 @@ the timestamps will be in Coordinated Universal Time (UTC)
      */
     Timezone?: NielsenWatermarkTimezones;
   }
-  export type NielsenPcmToId3TaggingState = "DISABLED"|"ENABLED"|string;
-  export type NielsenWatermarkTimezones = "AMERICA_PUERTO_RICO"|"US_ALASKA"|"US_ARIZONA"|"US_CENTRAL"|"US_EASTERN"|"US_HAWAII"|"US_MOUNTAIN"|"US_PACIFIC"|"US_SAMOA"|"UTC"|string;
-  export type NielsenWatermarksCbetStepaside = "DISABLED"|"ENABLED"|string;
-  export type NielsenWatermarksDistributionTypes = "FINAL_DISTRIBUTOR"|"PROGRAM_CONTENT"|string;
+  export type NielsenPcmToId3TaggingState = "DISABLED"|"ENABLED"|string&{};
+  export type NielsenWatermarkTimezones = "AMERICA_PUERTO_RICO"|"US_ALASKA"|"US_ARIZONA"|"US_CENTRAL"|"US_EASTERN"|"US_HAWAII"|"US_MOUNTAIN"|"US_PACIFIC"|"US_SAMOA"|"UTC"|string&{};
+  export type NielsenWatermarksCbetStepaside = "DISABLED"|"ENABLED"|string&{};
+  export type NielsenWatermarksDistributionTypes = "FINAL_DISTRIBUTOR"|"PROGRAM_CONTENT"|string&{};
   export interface NielsenWatermarksSettings {
     /**
      * Complete these fields only if you want to insert watermarks of type Nielsen CBET
@@ -5647,8 +5647,8 @@ the timestamps will be in Coordinated Universal Time (UTC)
      */
     UsagePrice?: __double;
   }
-  export type OfferingDurationUnits = "MONTHS"|string;
-  export type OfferingType = "NO_UPFRONT"|string;
+  export type OfferingDurationUnits = "MONTHS"|string&{};
+  export type OfferingType = "NO_UPFRONT"|string&{};
   export interface Output {
     /**
      * The names of the AudioDescriptions used as audio sources for this output.
@@ -5768,14 +5768,14 @@ the timestamps will be in Coordinated Universal Time (UTC)
      */
     PipelineId?: __string;
   }
-  export type PipelineId = "PIPELINE_0"|"PIPELINE_1"|string;
+  export type PipelineId = "PIPELINE_0"|"PIPELINE_1"|string&{};
   export interface PipelinePauseStateSettings {
     /**
      * Pipeline ID to pause ("PIPELINE_0" or "PIPELINE_1").
      */
     PipelineId: PipelineId;
   }
-  export type PreferredChannelPipeline = "CURRENTLY_ACTIVE"|"PIPELINE_0"|"PIPELINE_1"|string;
+  export type PreferredChannelPipeline = "CURRENTLY_ACTIVE"|"PIPELINE_0"|"PIPELINE_1"|string&{};
   export interface PurchaseOfferingRequest {
     /**
      * Number of resources
@@ -5811,7 +5811,7 @@ the timestamps will be in Coordinated Universal Time (UTC)
   }
   export interface RawSettings {
   }
-  export type RebootInputDeviceForce = "NO"|"YES"|string;
+  export type RebootInputDeviceForce = "NO"|"YES"|string&{};
   export interface RebootInputDeviceRequest {
     /**
      * Force a reboot of an input device. If the device is streaming, it will stop streaming and begin rebooting within a few seconds of sending the command. If the device was streaming prior to the reboot, the device will resume streaming when the reboot completes.
@@ -5939,11 +5939,11 @@ Valid values: 1, 2, 4, 6, 8
      */
     UsagePrice?: __double;
   }
-  export type ReservationAutomaticRenewal = "DISABLED"|"ENABLED"|"UNAVAILABLE"|string;
-  export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|"LINK"|string;
-  export type ReservationMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string;
-  export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string;
-  export type ReservationResolution = "SD"|"HD"|"FHD"|"UHD"|string;
+  export type ReservationAutomaticRenewal = "DISABLED"|"ENABLED"|"UNAVAILABLE"|string&{};
+  export type ReservationCodec = "MPEG2"|"AVC"|"HEVC"|"AUDIO"|"LINK"|string&{};
+  export type ReservationMaximumBitrate = "MAX_10_MBPS"|"MAX_20_MBPS"|"MAX_50_MBPS"|string&{};
+  export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string&{};
+  export type ReservationResolution = "SD"|"HD"|"FHD"|"UHD"|string&{};
   export interface ReservationResourceSpecification {
     /**
      * Channel class, e.g. 'STANDARD'
@@ -5978,13 +5978,13 @@ Valid values: 1, 2, 4, 6, 8
      */
     VideoQuality?: ReservationVideoQuality;
   }
-  export type ReservationResourceType = "INPUT"|"OUTPUT"|"MULTIPLEX"|"CHANNEL"|string;
-  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|"MGHD"|"MGUHD"|string;
-  export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
-  export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
-  export type RtmpAdMarkers = "ON_CUE_POINT_SCTE35"|string;
-  export type RtmpCacheFullBehavior = "DISCONNECT_IMMEDIATELY"|"WAIT_FOR_SERVER"|string;
-  export type RtmpCaptionData = "ALL"|"FIELD1_608"|"FIELD1_AND_FIELD2_608"|string;
+  export type ReservationResourceType = "INPUT"|"OUTPUT"|"MULTIPLEX"|"CHANNEL"|string&{};
+  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|"MGHD"|"MGUHD"|string&{};
+  export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string&{};
+  export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string&{};
+  export type RtmpAdMarkers = "ON_CUE_POINT_SCTE35"|string&{};
+  export type RtmpCacheFullBehavior = "DISCONNECT_IMMEDIATELY"|"WAIT_FOR_SERVER"|string&{};
+  export type RtmpCaptionData = "ALL"|"FIELD1_608"|"FIELD1_AND_FIELD2_608"|string&{};
   export interface RtmpCaptionInfoDestinationSettings {
   }
   export interface RtmpGroupSettings {
@@ -6024,7 +6024,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     IncludeFillerNalUnits?: IncludeFillerNalUnits;
   }
-  export type RtmpOutputCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string;
+  export type RtmpOutputCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string&{};
   export interface RtmpOutputSettings {
     /**
      * If set to verifyAuthenticity, verify the tls certificate chain to a trusted Certificate Authority (CA).  This will cause rtmps outputs with self-signed certificates to fail.
@@ -6043,7 +6043,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     NumRetries?: __integerMin0;
   }
-  export type S3CannedAcl = "AUTHENTICATED_READ"|"BUCKET_OWNER_FULL_CONTROL"|"BUCKET_OWNER_READ"|"PUBLIC_READ"|string;
+  export type S3CannedAcl = "AUTHENTICATED_READ"|"BUCKET_OWNER_FULL_CONTROL"|"BUCKET_OWNER_READ"|"PUBLIC_READ"|string&{};
   export interface ScheduleAction {
     /**
      * The name of the action, must be unique within the schedule. This name provides the main reference to an action once it is added to the schedule. A name is unique if it is no longer in the schedule. The schedule is automatically cleaned up to remove actions with a start time of more than 1 hour ago (approximately) so at that point a name can be reused.
@@ -6126,7 +6126,7 @@ Valid values: 1, 2, 4, 6, 8
      */
     ImmediateModeScheduleActionStartSettings?: ImmediateModeScheduleActionStartSettings;
   }
-  export type Scte20Convert608To708 = "DISABLED"|"UPCONVERT"|string;
+  export type Scte20Convert608To708 = "DISABLED"|"UPCONVERT"|string&{};
   export interface Scte20PlusEmbeddedDestinationSettings {
   }
   export interface Scte20SourceSettings {
@@ -6141,7 +6141,7 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface Scte27DestinationSettings {
   }
-  export type Scte27OcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
+  export type Scte27OcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string&{};
   export interface Scte27SourceSettings {
     /**
      * If you will configure a WebVTT caption description that references this caption selector, use this field to
@@ -6157,9 +6157,9 @@ provide the language to consider when translating the image-based source to text
      */
     Pid?: __integerMin1;
   }
-  export type Scte35AposNoRegionalBlackoutBehavior = "FOLLOW"|"IGNORE"|string;
-  export type Scte35AposWebDeliveryAllowedBehavior = "FOLLOW"|"IGNORE"|string;
-  export type Scte35ArchiveAllowedFlag = "ARCHIVE_NOT_ALLOWED"|"ARCHIVE_ALLOWED"|string;
+  export type Scte35AposNoRegionalBlackoutBehavior = "FOLLOW"|"IGNORE"|string&{};
+  export type Scte35AposWebDeliveryAllowedBehavior = "FOLLOW"|"IGNORE"|string&{};
+  export type Scte35ArchiveAllowedFlag = "ARCHIVE_NOT_ALLOWED"|"ARCHIVE_ALLOWED"|string&{};
   export interface Scte35DeliveryRestrictions {
     /**
      * Corresponds to SCTE-35 archive_allowed_flag.
@@ -6190,8 +6190,8 @@ provide the language to consider when translating the image-based source to text
      */
     SegmentationDescriptorScte35DescriptorSettings: Scte35SegmentationDescriptor;
   }
-  export type Scte35DeviceRestrictions = "NONE"|"RESTRICT_GROUP0"|"RESTRICT_GROUP1"|"RESTRICT_GROUP2"|string;
-  export type Scte35InputMode = "FIXED"|"FOLLOW_ACTIVE"|string;
+  export type Scte35DeviceRestrictions = "NONE"|"RESTRICT_GROUP0"|"RESTRICT_GROUP1"|"RESTRICT_GROUP2"|string&{};
+  export type Scte35InputMode = "FIXED"|"FOLLOW_ACTIVE"|string&{};
   export interface Scte35InputScheduleActionSettings {
     /**
      * In fixed mode, enter the name of the input attachment that you want to use as a SCTE-35 input. (Don't enter the ID of the input.)"
@@ -6202,14 +6202,14 @@ provide the language to consider when translating the image-based source to text
      */
     Mode: Scte35InputMode;
   }
-  export type Scte35NoRegionalBlackoutFlag = "REGIONAL_BLACKOUT"|"NO_REGIONAL_BLACKOUT"|string;
+  export type Scte35NoRegionalBlackoutFlag = "REGIONAL_BLACKOUT"|"NO_REGIONAL_BLACKOUT"|string&{};
   export interface Scte35ReturnToNetworkScheduleActionSettings {
     /**
      * The splice_event_id for the SCTE-35 splice_insert, as defined in SCTE-35.
      */
     SpliceEventId: __longMin0Max4294967295;
   }
-  export type Scte35SegmentationCancelIndicator = "SEGMENTATION_EVENT_NOT_CANCELED"|"SEGMENTATION_EVENT_CANCELED"|string;
+  export type Scte35SegmentationCancelIndicator = "SEGMENTATION_EVENT_NOT_CANCELED"|"SEGMENTATION_EVENT_CANCELED"|string&{};
   export interface Scte35SegmentationDescriptor {
     /**
      * Holds the four SCTE-35 delivery restriction parameters.
@@ -6270,7 +6270,7 @@ provide the language to consider when translating the image-based source to text
      */
     WebDeliveryAllowedFlag?: Scte35SpliceInsertWebDeliveryAllowedBehavior;
   }
-  export type Scte35SpliceInsertNoRegionalBlackoutBehavior = "FOLLOW"|"IGNORE"|string;
+  export type Scte35SpliceInsertNoRegionalBlackoutBehavior = "FOLLOW"|"IGNORE"|string&{};
   export interface Scte35SpliceInsertScheduleActionSettings {
     /**
      * Optional, the duration for the splice_insert, in 90 KHz ticks. To convert seconds to ticks, multiple the seconds by 90,000. If you enter a duration, there is an expectation that the downstream system can read the duration and cue in at that time. If you do not enter a duration, the splice_insert will continue indefinitely and there is an expectation that you will enter a return_to_network to end the splice_insert at the appropriate time.
@@ -6281,7 +6281,7 @@ provide the language to consider when translating the image-based source to text
      */
     SpliceEventId: __longMin0Max4294967295;
   }
-  export type Scte35SpliceInsertWebDeliveryAllowedBehavior = "FOLLOW"|"IGNORE"|string;
+  export type Scte35SpliceInsertWebDeliveryAllowedBehavior = "FOLLOW"|"IGNORE"|string&{};
   export interface Scte35TimeSignalApos {
     /**
      * When specified, this offset (in milliseconds) is added to the input Ad Avail PTS time. This only applies to embedded SCTE 104/35 messages and does not apply to OOB messages.
@@ -6302,22 +6302,22 @@ provide the language to consider when translating the image-based source to text
      */
     Scte35Descriptors: __listOfScte35Descriptor;
   }
-  export type Scte35WebDeliveryAllowedFlag = "WEB_DELIVERY_NOT_ALLOWED"|"WEB_DELIVERY_ALLOWED"|string;
+  export type Scte35WebDeliveryAllowedFlag = "WEB_DELIVERY_NOT_ALLOWED"|"WEB_DELIVERY_ALLOWED"|string&{};
   export interface UpdateAccountConfigurationRequest {
     AccountConfiguration?: AccountConfiguration;
   }
   export interface UpdateAccountConfigurationResponse {
     AccountConfiguration?: AccountConfiguration;
   }
-  export type SmoothGroupAudioOnlyTimecodeControl = "PASSTHROUGH"|"USE_CONFIGURED_CLOCK"|string;
-  export type SmoothGroupCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string;
-  export type SmoothGroupEventIdMode = "NO_EVENT_ID"|"USE_CONFIGURED"|"USE_TIMESTAMP"|string;
-  export type SmoothGroupEventStopBehavior = "NONE"|"SEND_EOS"|string;
-  export type SmoothGroupSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
-  export type SmoothGroupSparseTrackType = "NONE"|"SCTE_35"|"SCTE_35_WITHOUT_SEGMENTATION"|string;
-  export type SmoothGroupStreamManifestBehavior = "DO_NOT_SEND"|"SEND"|string;
-  export type SmoothGroupTimestampOffsetMode = "USE_CONFIGURED_OFFSET"|"USE_EVENT_START_DATE"|string;
-  export type Smpte2038DataPreference = "IGNORE"|"PREFER"|string;
+  export type SmoothGroupAudioOnlyTimecodeControl = "PASSTHROUGH"|"USE_CONFIGURED_CLOCK"|string&{};
+  export type SmoothGroupCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string&{};
+  export type SmoothGroupEventIdMode = "NO_EVENT_ID"|"USE_CONFIGURED"|"USE_TIMESTAMP"|string&{};
+  export type SmoothGroupEventStopBehavior = "NONE"|"SEND_EOS"|string&{};
+  export type SmoothGroupSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string&{};
+  export type SmoothGroupSparseTrackType = "NONE"|"SCTE_35"|"SCTE_35_WITHOUT_SEGMENTATION"|string&{};
+  export type SmoothGroupStreamManifestBehavior = "DO_NOT_SEND"|"SEND"|string&{};
+  export type SmoothGroupTimestampOffsetMode = "USE_CONFIGURED_OFFSET"|"USE_EVENT_START_DATE"|string&{};
+  export type Smpte2038DataPreference = "IGNORE"|"PREFER"|string&{};
   export interface SmpteTtDestinationSettings {
   }
   export interface StandardHlsSettings {
@@ -6676,7 +6676,7 @@ one destination per packager.
      */
     PageNumber?: __string;
   }
-  export type TemporalFilterPostFilterSharpening = "AUTO"|"DISABLED"|"ENABLED"|string;
+  export type TemporalFilterPostFilterSharpening = "AUTO"|"DISABLED"|"ENABLED"|string&{};
   export interface TemporalFilterSettings {
     /**
      * If you enable this filter, the results are the following:
@@ -6689,7 +6689,7 @@ one destination per packager.
      */
     Strength?: TemporalFilterStrength;
   }
-  export type TemporalFilterStrength = "AUTO"|"STRENGTH_1"|"STRENGTH_2"|"STRENGTH_3"|"STRENGTH_4"|"STRENGTH_5"|"STRENGTH_6"|"STRENGTH_7"|"STRENGTH_8"|"STRENGTH_9"|"STRENGTH_10"|"STRENGTH_11"|"STRENGTH_12"|"STRENGTH_13"|"STRENGTH_14"|"STRENGTH_15"|"STRENGTH_16"|string;
+  export type TemporalFilterStrength = "AUTO"|"STRENGTH_1"|"STRENGTH_2"|"STRENGTH_3"|"STRENGTH_4"|"STRENGTH_5"|"STRENGTH_6"|"STRENGTH_7"|"STRENGTH_8"|"STRENGTH_9"|"STRENGTH_10"|"STRENGTH_11"|"STRENGTH_12"|"STRENGTH_13"|"STRENGTH_14"|"STRENGTH_15"|"STRENGTH_16"|string&{};
   export interface Thumbnail {
     /**
      * The binary data for the latest thumbnail.
@@ -6724,10 +6724,10 @@ one destination per packager.
      */
     Thumbnails?: __listOfThumbnail;
   }
-  export type ThumbnailState = "AUTO"|"DISABLED"|string;
-  export type ThumbnailType = "UNSPECIFIED"|"CURRENT_ACTIVE"|string;
-  export type TimecodeBurninFontSize = "EXTRA_SMALL_10"|"LARGE_48"|"MEDIUM_32"|"SMALL_16"|string;
-  export type TimecodeBurninPosition = "BOTTOM_CENTER"|"BOTTOM_LEFT"|"BOTTOM_RIGHT"|"MIDDLE_CENTER"|"MIDDLE_LEFT"|"MIDDLE_RIGHT"|"TOP_CENTER"|"TOP_LEFT"|"TOP_RIGHT"|string;
+  export type ThumbnailState = "AUTO"|"DISABLED"|string&{};
+  export type ThumbnailType = "UNSPECIFIED"|"CURRENT_ACTIVE"|string&{};
+  export type TimecodeBurninFontSize = "EXTRA_SMALL_10"|"LARGE_48"|"MEDIUM_32"|"SMALL_16"|string&{};
+  export type TimecodeBurninPosition = "BOTTOM_CENTER"|"BOTTOM_LEFT"|"BOTTOM_RIGHT"|"MIDDLE_CENTER"|"MIDDLE_LEFT"|"MIDDLE_RIGHT"|"TOP_CENTER"|"TOP_LEFT"|"TOP_RIGHT"|string&{};
   export interface TimecodeBurninSettings {
     /**
      * Choose a timecode burn-in font size
@@ -6755,7 +6755,7 @@ one destination per packager.
      */
     SyncThreshold?: __integerMin1Max1000000;
   }
-  export type TimecodeConfigSource = "EMBEDDED"|"SYSTEMCLOCK"|"ZEROBASED"|string;
+  export type TimecodeConfigSource = "EMBEDDED"|"SYSTEMCLOCK"|"ZEROBASED"|string&{};
   export interface TransferInputDeviceRequest {
     /**
      * The unique ID of this input device. For example, hd-123456789abcdef.
@@ -6800,7 +6800,7 @@ one destination per packager.
      */
     StyleControl?: TtmlDestinationStyleControl;
   }
-  export type TtmlDestinationStyleControl = "PASSTHROUGH"|"USE_CONFIGURED"|string;
+  export type TtmlDestinationStyleControl = "PASSTHROUGH"|"USE_CONFIGURED"|string&{};
   export interface UdpContainerSettings {
     M2tsSettings?: M2tsSettings;
   }
@@ -6833,7 +6833,7 @@ one destination per packager.
      */
     FecOutputSettings?: FecOutputSettings;
   }
-  export type UdpTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export type UdpTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string&{};
   export interface UpdateChannelClassRequest {
     /**
      * The channel class that you wish to update this channel to use.
@@ -7139,8 +7139,8 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
      */
     Width?: __integer;
   }
-  export type VideoDescriptionRespondToAfd = "NONE"|"PASSTHROUGH"|"RESPOND"|string;
-  export type VideoDescriptionScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string;
+  export type VideoDescriptionRespondToAfd = "NONE"|"PASSTHROUGH"|"RESPOND"|string&{};
+  export type VideoDescriptionScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string&{};
   export interface VideoSelector {
     /**
      * Specifies the color space of an input. This setting works in tandem with colorSpaceUsage and a video description's colorSpaceSettingsChoice to determine if any conversion will be performed.
@@ -7159,11 +7159,11 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
      */
     SelectorSettings?: VideoSelectorSettings;
   }
-  export type VideoSelectorColorSpace = "FOLLOW"|"HDR10"|"HLG_2020"|"REC_601"|"REC_709"|string;
+  export type VideoSelectorColorSpace = "FOLLOW"|"HDR10"|"HLG_2020"|"REC_601"|"REC_709"|string&{};
   export interface VideoSelectorColorSpaceSettings {
     Hdr10Settings?: Hdr10Settings;
   }
-  export type VideoSelectorColorSpaceUsage = "FALLBACK"|"FORCE"|string;
+  export type VideoSelectorColorSpaceUsage = "FALLBACK"|"FORCE"|string&{};
   export interface VideoSelectorPid {
     /**
      * Selects a specific PID from within a video source.
@@ -7225,7 +7225,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
      */
     SubnetIds?: __listOf__string;
   }
-  export type WavCodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_4_0"|"CODING_MODE_8_0"|string;
+  export type WavCodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_4_0"|"CODING_MODE_8_0"|string&{};
   export interface WavSettings {
     /**
      * Bits per sample.
@@ -7246,7 +7246,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
      */
     StyleControl?: WebvttDestinationStyleControl;
   }
-  export type WebvttDestinationStyleControl = "NO_STYLE_DATA"|"PASSTHROUGH"|string;
+  export type WebvttDestinationStyleControl = "NO_STYLE_DATA"|"PASSTHROUGH"|string&{};
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin0Max1 = number;
@@ -7381,8 +7381,8 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __stringPattern010920300 = string;
   export type __timestampIso8601 = Date;
   export type InputDeviceThumbnail = Buffer|Uint8Array|Blob|string|Readable;
-  export type AcceptHeader = "image/jpeg"|string;
-  export type ContentType = "image/jpeg"|string;
+  export type AcceptHeader = "image/jpeg"|string&{};
+  export type ContentType = "image/jpeg"|string&{};
   export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

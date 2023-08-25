@@ -343,10 +343,10 @@ declare namespace Panorama {
     Tags?: TagMap;
   }
   export type ApplicationInstanceArn = string;
-  export type ApplicationInstanceHealthStatus = "RUNNING"|"ERROR"|"NOT_AVAILABLE"|string;
+  export type ApplicationInstanceHealthStatus = "RUNNING"|"ERROR"|"NOT_AVAILABLE"|string&{};
   export type ApplicationInstanceId = string;
   export type ApplicationInstanceName = string;
-  export type ApplicationInstanceStatus = "DEPLOYMENT_PENDING"|"DEPLOYMENT_REQUESTED"|"DEPLOYMENT_IN_PROGRESS"|"DEPLOYMENT_ERROR"|"DEPLOYMENT_SUCCEEDED"|"REMOVAL_PENDING"|"REMOVAL_REQUESTED"|"REMOVAL_IN_PROGRESS"|"REMOVAL_FAILED"|"REMOVAL_SUCCEEDED"|"DEPLOYMENT_FAILED"|string;
+  export type ApplicationInstanceStatus = "DEPLOYMENT_PENDING"|"DEPLOYMENT_REQUESTED"|"DEPLOYMENT_IN_PROGRESS"|"DEPLOYMENT_ERROR"|"DEPLOYMENT_SUCCEEDED"|"REMOVAL_PENDING"|"REMOVAL_REQUESTED"|"REMOVAL_IN_PROGRESS"|"REMOVAL_FAILED"|"REMOVAL_SUCCEEDED"|"DEPLOYMENT_FAILED"|string&{};
   export type ApplicationInstanceStatusDescription = string;
   export type ApplicationInstances = ApplicationInstance[];
   export type Boolean = boolean;
@@ -354,7 +354,7 @@ declare namespace Panorama {
   export type BucketName = string;
   export type Certificates = Buffer|Uint8Array|Blob|string;
   export type ClientToken = string;
-  export type ConnectionType = "STATIC_IP"|"DHCP"|string;
+  export type ConnectionType = "STATIC_IP"|"DHCP"|string&{};
   export interface CreateApplicationInstanceRequest {
     /**
      * The ID of an application instance to replace with the new instance.
@@ -1072,7 +1072,7 @@ declare namespace Panorama {
     StatusDescription?: PackageVersionStatusDescription;
   }
   export type Description = string;
-  export type DesiredState = "RUNNING"|"STOPPED"|"REMOVED"|string;
+  export type DesiredState = "RUNNING"|"STOPPED"|"REMOVED"|string&{};
   export interface Device {
     /**
      * The device's maker.
@@ -1127,10 +1127,10 @@ declare namespace Panorama {
      */
     Type?: DeviceType;
   }
-  export type DeviceAggregatedStatus = "ERROR"|"AWAITING_PROVISIONING"|"PENDING"|"FAILED"|"DELETING"|"ONLINE"|"OFFLINE"|"LEASE_EXPIRED"|"UPDATE_NEEDED"|"REBOOTING"|string;
+  export type DeviceAggregatedStatus = "ERROR"|"AWAITING_PROVISIONING"|"PENDING"|"FAILED"|"DELETING"|"ONLINE"|"OFFLINE"|"LEASE_EXPIRED"|"UPDATE_NEEDED"|"REBOOTING"|string&{};
   export type DeviceArn = string;
-  export type DeviceBrand = "AWS_PANORAMA"|"LENOVO"|string;
-  export type DeviceConnectionStatus = "ONLINE"|"OFFLINE"|"AWAITING_CREDENTIALS"|"NOT_AVAILABLE"|"ERROR"|string;
+  export type DeviceBrand = "AWS_PANORAMA"|"LENOVO"|string&{};
+  export type DeviceConnectionStatus = "ONLINE"|"OFFLINE"|"AWAITING_CREDENTIALS"|"NOT_AVAILABLE"|"ERROR"|string&{};
   export type DeviceId = string;
   export type DeviceIdList = DeviceId[];
   export interface DeviceJob {
@@ -1164,10 +1164,10 @@ declare namespace Panorama {
   export type DeviceJobList = DeviceJob[];
   export type DeviceList = Device[];
   export type DeviceName = string;
-  export type DeviceReportedStatus = "STOPPING"|"STOPPED"|"STOP_ERROR"|"REMOVAL_FAILED"|"REMOVAL_IN_PROGRESS"|"STARTING"|"RUNNING"|"INSTALL_ERROR"|"LAUNCHED"|"LAUNCH_ERROR"|"INSTALL_IN_PROGRESS"|string;
+  export type DeviceReportedStatus = "STOPPING"|"STOPPED"|"STOP_ERROR"|"REMOVAL_FAILED"|"REMOVAL_IN_PROGRESS"|"STARTING"|"RUNNING"|"INSTALL_ERROR"|"LAUNCHED"|"LAUNCH_ERROR"|"INSTALL_IN_PROGRESS"|string&{};
   export type DeviceSerialNumber = string;
-  export type DeviceStatus = "AWAITING_PROVISIONING"|"PENDING"|"SUCCEEDED"|"FAILED"|"ERROR"|"DELETING"|string;
-  export type DeviceType = "PANORAMA_APPLIANCE_DEVELOPER_KIT"|"PANORAMA_APPLIANCE"|string;
+  export type DeviceStatus = "AWAITING_PROVISIONING"|"PENDING"|"SUCCEEDED"|"FAILED"|"ERROR"|"DELETING"|string&{};
+  export type DeviceType = "PANORAMA_APPLIANCE_DEVELOPER_KIT"|"PANORAMA_APPLIANCE"|string&{};
   export type Dns = string;
   export type DnsList = Dns[];
   export interface EthernetPayload {
@@ -1222,9 +1222,9 @@ declare namespace Panorama {
      */
     Tags: TagMap;
   }
-  export type JobResourceType = "PACKAGE"|string;
+  export type JobResourceType = "PACKAGE"|string&{};
   export type JobTagsList = JobResourceTags[];
-  export type JobType = "OTA"|"REBOOT"|string;
+  export type JobType = "OTA"|"REBOOT"|string&{};
   export type LastUpdatedTime = Date;
   export type LatestAlternateSoftware = string;
   export interface LatestDeviceJob {
@@ -1379,7 +1379,7 @@ declare namespace Panorama {
      */
     NextToken?: NextToken;
   }
-  export type ListDevicesSortBy = "DEVICE_ID"|"CREATED_TIME"|"NAME"|"DEVICE_AGGREGATED_STATUS"|string;
+  export type ListDevicesSortBy = "DEVICE_ID"|"CREATED_TIME"|"NAME"|"DEVICE_AGGREGATED_STATUS"|string&{};
   export interface ListNodeFromTemplateJobsRequest {
     /**
      * The maximum number of node from template jobs to return in one page of results.
@@ -1511,7 +1511,7 @@ declare namespace Panorama {
   export type MaxConnections = number;
   export type MaxSize25 = number;
   export type NameFilter = string;
-  export type NetworkConnectionStatus = "CONNECTED"|"NOT_CONNECTED"|"CONNECTING"|string;
+  export type NetworkConnectionStatus = "CONNECTED"|"NOT_CONNECTED"|"CONNECTING"|string&{};
   export interface NetworkPayload {
     /**
      * Settings for Ethernet port 0.
@@ -1592,7 +1592,7 @@ declare namespace Panorama {
     PatchVersion: NodePackagePatchVersion;
   }
   export type NodeAssetName = string;
-  export type NodeCategory = "BUSINESS_LOGIC"|"ML_MODEL"|"MEDIA_SOURCE"|"MEDIA_SINK"|string;
+  export type NodeCategory = "BUSINESS_LOGIC"|"ML_MODEL"|"MEDIA_SOURCE"|"MEDIA_SINK"|string&{};
   export interface NodeFromTemplateJob {
     /**
      * When the job was created.
@@ -1620,7 +1620,7 @@ declare namespace Panorama {
     TemplateType?: TemplateType;
   }
   export type NodeFromTemplateJobList = NodeFromTemplateJob[];
-  export type NodeFromTemplateJobStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string;
+  export type NodeFromTemplateJobStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string&{};
   export type NodeFromTemplateJobStatusMessage = string;
   export type NodeId = string;
   export interface NodeInputPort {
@@ -1676,7 +1676,7 @@ declare namespace Panorama {
     PackageVersion?: NodePackageVersion;
   }
   export type NodeInstanceId = string;
-  export type NodeInstanceStatus = "RUNNING"|"ERROR"|"NOT_AVAILABLE"|"PAUSED"|string;
+  export type NodeInstanceStatus = "RUNNING"|"ERROR"|"NOT_AVAILABLE"|"PAUSED"|string&{};
   export type NodeInstances = NodeInstance[];
   export interface NodeInterface {
     /**
@@ -1719,7 +1719,7 @@ declare namespace Panorama {
     Signal: NodeSignalValue;
   }
   export type NodeSignalList = NodeSignal[];
-  export type NodeSignalValue = "PAUSE"|"RESUME"|string;
+  export type NodeSignalValue = "PAUSE"|"RESUME"|string&{};
   export type NodesList = Node[];
   export interface NtpPayload {
     /**
@@ -1823,9 +1823,9 @@ declare namespace Panorama {
      */
     PackageVersionOutputConfig?: PackageVersionOutputConfig;
   }
-  export type PackageImportJobStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string;
+  export type PackageImportJobStatus = "PENDING"|"SUCCEEDED"|"FAILED"|string&{};
   export type PackageImportJobStatusMessage = string;
-  export type PackageImportJobType = "NODE_PACKAGE_VERSION"|"MARKETPLACE_NODE_PACKAGE_VERSION"|string;
+  export type PackageImportJobType = "NODE_PACKAGE_VERSION"|"MARKETPLACE_NODE_PACKAGE_VERSION"|string&{};
   export type PackageList = PackageListItem[];
   export interface PackageListItem {
     /**
@@ -1885,11 +1885,11 @@ declare namespace Panorama {
      */
     PackageVersion: NodePackageVersion;
   }
-  export type PackageVersionStatus = "REGISTER_PENDING"|"REGISTER_COMPLETED"|"FAILED"|"DELETING"|string;
+  export type PackageVersionStatus = "REGISTER_PENDING"|"REGISTER_COMPLETED"|"FAILED"|"DELETING"|string&{};
   export type PackageVersionStatusDescription = string;
   export type PortDefaultValue = string;
   export type PortName = string;
-  export type PortType = "BOOLEAN"|"STRING"|"INT32"|"FLOAT32"|"MEDIA"|string;
+  export type PortType = "BOOLEAN"|"STRING"|"INT32"|"FLOAT32"|"MEDIA"|string&{};
   export type PrincipalArn = string;
   export type PrincipalArnsList = PrincipalArn[];
   export interface ProvisionDeviceRequest {
@@ -2017,7 +2017,7 @@ declare namespace Panorama {
      */
     ApplicationInstanceId: ApplicationInstanceId;
   }
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export interface StaticIpConnectionInfo {
     /**
      * The connection's default gateway.
@@ -2036,7 +2036,7 @@ declare namespace Panorama {
      */
     Mask: Mask;
   }
-  export type StatusFilter = "DEPLOYMENT_SUCCEEDED"|"DEPLOYMENT_ERROR"|"REMOVAL_SUCCEEDED"|"REMOVAL_FAILED"|"PROCESSING_DEPLOYMENT"|"PROCESSING_REMOVAL"|"DEPLOYMENT_FAILED"|string;
+  export type StatusFilter = "DEPLOYMENT_SUCCEEDED"|"DEPLOYMENT_ERROR"|"REMOVAL_SUCCEEDED"|"REMOVAL_FAILED"|"PROCESSING_DEPLOYMENT"|"PROCESSING_REMOVAL"|"DEPLOYMENT_FAILED"|string&{};
   export interface StorageLocation {
     /**
      * The location's binary prefix.
@@ -2077,7 +2077,7 @@ declare namespace Panorama {
   export type TagValue = string;
   export type TemplateKey = string;
   export type TemplateParametersMap = {[key: string]: TemplateValue};
-  export type TemplateType = "RTSP_CAMERA_STREAM"|string;
+  export type TemplateType = "RTSP_CAMERA_STREAM"|string&{};
   export type TemplateValue = string;
   export type TimeStamp = Date;
   export type Token = string;
@@ -2110,7 +2110,7 @@ declare namespace Panorama {
      */
     DeviceId?: DeviceId;
   }
-  export type UpdateProgress = "PENDING"|"IN_PROGRESS"|"VERIFYING"|"REBOOTING"|"DOWNLOADING"|"COMPLETED"|"FAILED"|string;
+  export type UpdateProgress = "PENDING"|"IN_PROGRESS"|"VERIFYING"|"REBOOTING"|"DOWNLOADING"|"COMPLETED"|"FAILED"|string&{};
   export type Version = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -245,7 +245,7 @@ declare namespace KafkaConnect {
      */
     logGroup?: __string;
   }
-  export type ConnectorState = "RUNNING"|"CREATING"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export type ConnectorState = "RUNNING"|"CREATING"|"UPDATING"|"DELETING"|"FAILED"|string&{};
   export interface ConnectorSummary {
     /**
      * The connector's compute capacity settings.
@@ -450,7 +450,7 @@ declare namespace KafkaConnect {
      */
     revision: __longMin1;
   }
-  export type CustomPluginContentType = "JAR"|"ZIP"|string;
+  export type CustomPluginContentType = "JAR"|"ZIP"|string&{};
   export interface CustomPluginDescription {
     /**
      * The Amazon Resource Name (ARN) of the custom plugin.
@@ -509,7 +509,7 @@ declare namespace KafkaConnect {
      */
     revision?: __long;
   }
-  export type CustomPluginState = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|string;
+  export type CustomPluginState = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|string&{};
   export interface CustomPluginSummary {
     /**
      * The time that the custom plugin was created.
@@ -750,7 +750,7 @@ declare namespace KafkaConnect {
      */
     authenticationType?: KafkaClusterClientAuthenticationType;
   }
-  export type KafkaClusterClientAuthenticationType = "NONE"|"IAM"|string;
+  export type KafkaClusterClientAuthenticationType = "NONE"|"IAM"|string&{};
   export interface KafkaClusterDescription {
     /**
      * The Apache Kafka cluster to which the connector is connected.
@@ -769,7 +769,7 @@ declare namespace KafkaConnect {
      */
     encryptionType?: KafkaClusterEncryptionInTransitType;
   }
-  export type KafkaClusterEncryptionInTransitType = "PLAINTEXT"|"TLS"|string;
+  export type KafkaClusterEncryptionInTransitType = "PLAINTEXT"|"TLS"|string&{};
   export interface ListConnectorsRequest {
     /**
      * The name prefix that you want to use to search for and list connectors.

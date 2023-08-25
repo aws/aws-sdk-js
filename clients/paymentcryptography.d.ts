@@ -549,7 +549,7 @@ declare namespace PaymentCryptography {
      */
     UsageStopTimestamp?: Timestamp;
   }
-  export type KeyAlgorithm = "TDES_2KEY"|"TDES_3KEY"|"AES_128"|"AES_192"|"AES_256"|"RSA_2048"|"RSA_3072"|"RSA_4096"|string;
+  export type KeyAlgorithm = "TDES_2KEY"|"TDES_3KEY"|"AES_128"|"AES_192"|"AES_256"|"RSA_2048"|"RSA_3072"|"RSA_4096"|string&{};
   export type KeyArn = string;
   export type KeyArnOrKeyAliasType = string;
   export interface KeyAttributes {
@@ -571,10 +571,10 @@ declare namespace PaymentCryptography {
     KeyUsage: KeyUsage;
   }
   export type KeyCheckValue = string;
-  export type KeyCheckValueAlgorithm = "CMAC"|"ANSI_X9_24"|string;
-  export type KeyClass = "SYMMETRIC_KEY"|"ASYMMETRIC_KEY_PAIR"|"PRIVATE_KEY"|"PUBLIC_KEY"|string;
+  export type KeyCheckValueAlgorithm = "CMAC"|"ANSI_X9_24"|string&{};
+  export type KeyClass = "SYMMETRIC_KEY"|"ASYMMETRIC_KEY_PAIR"|"PRIVATE_KEY"|"PUBLIC_KEY"|string&{};
   export type KeyMaterial = string;
-  export type KeyMaterialType = "TR34_KEY_BLOCK"|"TR31_KEY_BLOCK"|"ROOT_PUBLIC_KEY_CERTIFICATE"|"TRUSTED_PUBLIC_KEY_CERTIFICATE"|string;
+  export type KeyMaterialType = "TR34_KEY_BLOCK"|"TR31_KEY_BLOCK"|"ROOT_PUBLIC_KEY_CERTIFICATE"|"TRUSTED_PUBLIC_KEY_CERTIFICATE"|string&{};
   export interface KeyModesOfUse {
     /**
      * Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used to decrypt data.
@@ -613,8 +613,8 @@ declare namespace PaymentCryptography {
      */
     Wrap?: PrimitiveBoolean;
   }
-  export type KeyOrigin = "EXTERNAL"|"AWS_PAYMENT_CRYPTOGRAPHY"|string;
-  export type KeyState = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"DELETE_PENDING"|"DELETE_COMPLETE"|string;
+  export type KeyOrigin = "EXTERNAL"|"AWS_PAYMENT_CRYPTOGRAPHY"|string&{};
+  export type KeyState = "CREATE_IN_PROGRESS"|"CREATE_COMPLETE"|"DELETE_PENDING"|"DELETE_COMPLETE"|string&{};
   export interface KeySummary {
     /**
      * Specifies whether the key is enabled. 
@@ -642,7 +642,7 @@ declare namespace PaymentCryptography {
     KeyState: KeyState;
   }
   export type KeySummaryList = KeySummary[];
-  export type KeyUsage = "TR31_B0_BASE_DERIVATION_KEY"|"TR31_C0_CARD_VERIFICATION_KEY"|"TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY"|"TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION"|"TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS"|"TR31_E1_EMV_MKEY_CONFIDENTIALITY"|"TR31_E2_EMV_MKEY_INTEGRITY"|"TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS"|"TR31_E5_EMV_MKEY_CARD_PERSONALIZATION"|"TR31_E6_EMV_MKEY_OTHER"|"TR31_K0_KEY_ENCRYPTION_KEY"|"TR31_K1_KEY_BLOCK_PROTECTION_KEY"|"TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT"|"TR31_M3_ISO_9797_3_MAC_KEY"|"TR31_M6_ISO_9797_5_CMAC_KEY"|"TR31_M7_HMAC_KEY"|"TR31_P0_PIN_ENCRYPTION_KEY"|"TR31_P1_PIN_GENERATION_KEY"|"TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE"|"TR31_V1_IBM3624_PIN_VERIFICATION_KEY"|"TR31_V2_VISA_PIN_VERIFICATION_KEY"|"TR31_K2_TR34_ASYMMETRIC_KEY"|string;
+  export type KeyUsage = "TR31_B0_BASE_DERIVATION_KEY"|"TR31_C0_CARD_VERIFICATION_KEY"|"TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY"|"TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION"|"TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS"|"TR31_E1_EMV_MKEY_CONFIDENTIALITY"|"TR31_E2_EMV_MKEY_INTEGRITY"|"TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS"|"TR31_E5_EMV_MKEY_CARD_PERSONALIZATION"|"TR31_E6_EMV_MKEY_OTHER"|"TR31_K0_KEY_ENCRYPTION_KEY"|"TR31_K1_KEY_BLOCK_PROTECTION_KEY"|"TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT"|"TR31_M3_ISO_9797_3_MAC_KEY"|"TR31_M6_ISO_9797_5_CMAC_KEY"|"TR31_M7_HMAC_KEY"|"TR31_P0_PIN_ENCRYPTION_KEY"|"TR31_P1_PIN_GENERATION_KEY"|"TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE"|"TR31_V1_IBM3624_PIN_VERIFICATION_KEY"|"TR31_V2_VISA_PIN_VERIFICATION_KEY"|"TR31_K2_TR34_ASYMMETRIC_KEY"|string&{};
   export interface ListAliasesInput {
     /**
      * Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer. This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.
@@ -789,7 +789,7 @@ declare namespace PaymentCryptography {
   export type Tags = Tag[];
   export type Timestamp = Date;
   export type Tr31WrappedKeyBlock = string;
-  export type Tr34KeyBlockFormat = "X9_TR34_2012"|string;
+  export type Tr34KeyBlockFormat = "X9_TR34_2012"|string&{};
   export type Tr34WrappedKeyBlock = string;
   export interface TrustedCertificatePublicKey {
     /**
@@ -847,7 +847,7 @@ declare namespace PaymentCryptography {
      */
     WrappingKeyArn: KeyArn;
   }
-  export type WrappedKeyMaterialFormat = "KEY_CRYPTOGRAM"|"TR31_KEY_BLOCK"|"TR34_KEY_BLOCK"|string;
+  export type WrappedKeyMaterialFormat = "KEY_CRYPTOGRAM"|"TR31_KEY_BLOCK"|"TR34_KEY_BLOCK"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

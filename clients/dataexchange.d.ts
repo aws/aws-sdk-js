@@ -380,7 +380,7 @@ declare namespace DataExchange {
      */
     Key: __string;
   }
-  export type AssetType = "S3_SNAPSHOT"|"REDSHIFT_DATA_SHARE"|"API_GATEWAY_API"|"S3_DATA_ACCESS"|"LAKE_FORMATION_DATA_PERMISSION"|string;
+  export type AssetType = "S3_SNAPSHOT"|"REDSHIFT_DATA_SHARE"|"API_GATEWAY_API"|"S3_DATA_ACCESS"|"LAKE_FORMATION_DATA_PERMISSION"|string&{};
   export interface AutoExportRevisionDestinationEntry {
     /**
      * The Amazon S3 bucket that is the destination for the event action.
@@ -408,7 +408,7 @@ declare namespace DataExchange {
      */
     JobId: __string;
   }
-  export type Code = "ACCESS_DENIED_EXCEPTION"|"INTERNAL_SERVER_EXCEPTION"|"MALWARE_DETECTED"|"RESOURCE_NOT_FOUND_EXCEPTION"|"SERVICE_QUOTA_EXCEEDED_EXCEPTION"|"VALIDATION_EXCEPTION"|"MALWARE_SCAN_ENCRYPTED_FILE"|string;
+  export type Code = "ACCESS_DENIED_EXCEPTION"|"INTERNAL_SERVER_EXCEPTION"|"MALWARE_DETECTED"|"RESOURCE_NOT_FOUND_EXCEPTION"|"SERVICE_QUOTA_EXCEEDED_EXCEPTION"|"VALIDATION_EXCEPTION"|"MALWARE_SCAN_ENCRYPTED_FILE"|string&{};
   export interface CreateDataSetRequest {
     /**
      * The type of asset that is added to a data set.
@@ -703,7 +703,7 @@ declare namespace DataExchange {
      */
     Permissions: ListOfDatabaseLFTagPolicyPermissions;
   }
-  export type DatabaseLFTagPolicyPermission = "DESCRIBE"|string;
+  export type DatabaseLFTagPolicyPermission = "DESCRIBE"|string&{};
   export interface DeleteAssetRequest {
     /**
      * The unique identifier for an asset.
@@ -1444,8 +1444,8 @@ declare namespace DataExchange {
      */
     ResourceType?: JobErrorResourceTypes;
   }
-  export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|"Amazon Redshift datashare assets per revision"|"AWS Lake Formation data permission assets per revision"|"Amazon S3 data access assets per revision"|string;
-  export type JobErrorResourceTypes = "REVISION"|"ASSET"|"DATA_SET"|string;
+  export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|"Amazon Redshift datashare assets per revision"|"AWS Lake Formation data permission assets per revision"|"Amazon S3 data access assets per revision"|string&{};
+  export type JobErrorResourceTypes = "REVISION"|"ASSET"|"DATA_SET"|string&{};
   export type KmsKeyArn = string;
   export interface KmsKeyToGrant {
     /**
@@ -1453,7 +1453,7 @@ declare namespace DataExchange {
      */
     KmsKeyArn: KmsKeyArn;
   }
-  export type LFPermission = "DESCRIBE"|"SELECT"|string;
+  export type LFPermission = "DESCRIBE"|"SELECT"|string&{};
   export interface LFResourceDetails {
     /**
      * Details about the database resource included in the AWS Lake Formation data permission.
@@ -1464,7 +1464,7 @@ declare namespace DataExchange {
      */
     Table?: TableLFTagPolicy;
   }
-  export type LFResourceType = "TABLE"|"DATABASE"|string;
+  export type LFResourceType = "TABLE"|"DATABASE"|string&{};
   export interface LFTag {
     /**
      * The key name for the LF-tag.
@@ -1513,7 +1513,7 @@ declare namespace DataExchange {
      */
     LFTagPolicy?: LFTagPolicyDetails;
   }
-  export type LakeFormationDataPermissionType = "LFTagPolicy"|string;
+  export type LakeFormationDataPermissionType = "LFTagPolicy"|string&{};
   export interface ListDataSetRevisionsRequest {
     /**
      * The unique identifier for a data set.
@@ -1675,14 +1675,14 @@ declare namespace DataExchange {
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
-  export type Origin = "OWNED"|"ENTITLED"|string;
+  export type Origin = "OWNED"|"ENTITLED"|string&{};
   export interface OriginDetails {
     /**
      * The product ID of the origin of the data set.
      */
     ProductId: __string;
   }
-  export type ProtocolType = "REST"|string;
+  export type ProtocolType = "REST"|string&{};
   export interface RedshiftDataShareAsset {
     /**
      * The Amazon Resource Name (ARN) of the datashare asset.
@@ -1992,7 +1992,7 @@ declare namespace DataExchange {
      */
     ResponseHeaders?: MapOf__string;
   }
-  export type ServerSideEncryptionTypes = "aws:kms"|"AES256"|string;
+  export type ServerSideEncryptionTypes = "aws:kms"|"AES256"|string&{};
   export interface StartJobRequest {
     /**
      * The unique identifier for a job.
@@ -2001,7 +2001,7 @@ declare namespace DataExchange {
   }
   export interface StartJobResponse {
   }
-  export type State = "WAITING"|"IN_PROGRESS"|"ERROR"|"COMPLETED"|"CANCELLED"|"TIMED_OUT"|string;
+  export type State = "WAITING"|"IN_PROGRESS"|"ERROR"|"COMPLETED"|"CANCELLED"|"TIMED_OUT"|string&{};
   export type String = string;
   export interface TableLFTagPolicy {
     /**
@@ -2019,7 +2019,7 @@ declare namespace DataExchange {
      */
     Permissions: ListOfTableTagPolicyLFPermissions;
   }
-  export type TableTagPolicyLFPermission = "DESCRIBE"|"SELECT"|string;
+  export type TableTagPolicyLFPermission = "DESCRIBE"|"SELECT"|string&{};
   export interface TagResourceRequest {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.
@@ -2031,7 +2031,7 @@ declare namespace DataExchange {
     Tags: MapOf__string;
   }
   export type Timestamp = Date;
-  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"|"IMPORT_ASSET_FROM_API_GATEWAY_API"|"CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET"|"IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY"|string;
+  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"|"IMPORT_ASSET_FROM_API_GATEWAY_API"|"CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET"|"IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY"|string&{};
   export interface UntagResourceRequest {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.

@@ -409,7 +409,7 @@ declare namespace Tnb {
      */
     nsdInfoId: NsdInfoId;
   }
-  export type DescriptorContentType = "text/plain"|string;
+  export type DescriptorContentType = "text/plain"|string&{};
   export interface Document {
   }
   export type ErrorCause = string;
@@ -896,7 +896,7 @@ declare namespace Tnb {
      */
     nsLcmOpOccId: NsLcmOpOccId;
   }
-  export type LcmOperationType = "INSTANTIATE"|"UPDATE"|"TERMINATE"|string;
+  export type LcmOperationType = "INSTANTIATE"|"UPDATE"|"TERMINATE"|string&{};
   export interface ListSolFunctionInstanceInfo {
     /**
      * Network function instance ARN.
@@ -1266,18 +1266,18 @@ declare namespace Tnb {
   export type NsInstanceId = string;
   export type NsLcmOpOccArn = string;
   export type NsLcmOpOccId = string;
-  export type NsLcmOperationState = "PROCESSING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
-  export type NsState = "INSTANTIATED"|"NOT_INSTANTIATED"|"IMPAIRED"|"STOPPED"|"DELETED"|"INSTANTIATE_IN_PROGRESS"|"UPDATE_IN_PROGRESS"|"TERMINATE_IN_PROGRESS"|string;
+  export type NsLcmOperationState = "PROCESSING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED"|string&{};
+  export type NsState = "INSTANTIATED"|"NOT_INSTANTIATED"|"IMPAIRED"|"STOPPED"|"DELETED"|"INSTANTIATE_IN_PROGRESS"|"UPDATE_IN_PROGRESS"|"TERMINATE_IN_PROGRESS"|string&{};
   export type NsdId = string;
   export type NsdInfoArn = string;
   export type NsdInfoId = string;
-  export type NsdOnboardingState = "CREATED"|"ONBOARDED"|"ERROR"|string;
-  export type NsdOperationalState = "ENABLED"|"DISABLED"|string;
-  export type NsdUsageState = "IN_USE"|"NOT_IN_USE"|string;
-  export type OnboardingState = "CREATED"|"ONBOARDED"|"ERROR"|string;
-  export type OperationalState = "ENABLED"|"DISABLED"|string;
+  export type NsdOnboardingState = "CREATED"|"ONBOARDED"|"ERROR"|string&{};
+  export type NsdOperationalState = "ENABLED"|"DISABLED"|string&{};
+  export type NsdUsageState = "IN_USE"|"NOT_IN_USE"|string&{};
+  export type OnboardingState = "CREATED"|"ONBOARDED"|"ERROR"|string&{};
+  export type OperationalState = "ENABLED"|"DISABLED"|string&{};
   export type OverrideList = ToscaOverride[];
-  export type PackageContentType = "application/zip"|string;
+  export type PackageContentType = "application/zip"|string&{};
   export type PaginationToken = string;
   export interface ProblemDetails {
     /**
@@ -1399,7 +1399,7 @@ declare namespace Tnb {
   export interface TagResourceOutput {
   }
   export type TagValue = string;
-  export type TaskStatus = "SCHEDULED"|"STARTED"|"IN_PROGRESS"|"COMPLETED"|"ERROR"|"SKIPPED"|"CANCELLED"|string;
+  export type TaskStatus = "SCHEDULED"|"STARTED"|"IN_PROGRESS"|"COMPLETED"|"ERROR"|"SKIPPED"|"CANCELLED"|string&{};
   export interface TerminateSolNetworkInstanceInput {
     /**
      * ID of the network instance.
@@ -1512,8 +1512,8 @@ declare namespace Tnb {
      */
     nsdOperationalState: NsdOperationalState;
   }
-  export type UpdateSolNetworkType = "MODIFY_VNF_INFORMATION"|string;
-  export type UsageState = "IN_USE"|"NOT_IN_USE"|string;
+  export type UpdateSolNetworkType = "MODIFY_VNF_INFORMATION"|string&{};
+  export type UsageState = "IN_USE"|"NOT_IN_USE"|string&{};
   export interface ValidateSolFunctionPackageContentInput {
     /**
      * Function package content type.
@@ -1606,8 +1606,8 @@ declare namespace Tnb {
   }
   export type VnfInstanceArn = string;
   export type VnfInstanceId = string;
-  export type VnfInstantiationState = "INSTANTIATED"|"NOT_INSTANTIATED"|string;
-  export type VnfOperationalState = "STARTED"|"STOPPED"|string;
+  export type VnfInstantiationState = "INSTANTIATED"|"NOT_INSTANTIATED"|string&{};
+  export type VnfOperationalState = "STARTED"|"STOPPED"|string&{};
   export type VnfPkgArn = string;
   export type VnfPkgId = string;
   export type VnfPkgIdList = VnfPkgId[];

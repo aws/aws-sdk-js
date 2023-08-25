@@ -319,8 +319,8 @@ declare class CodeArtifact extends Service {
 }
 declare namespace CodeArtifact {
   export type AccountId = string;
-  export type AllowPublish = "ALLOW"|"BLOCK"|string;
-  export type AllowUpstream = "ALLOW"|"BLOCK"|string;
+  export type AllowPublish = "ALLOW"|"BLOCK"|string&{};
+  export type AllowUpstream = "ALLOW"|"BLOCK"|string&{};
   export type Arn = string;
   export type Asset = Buffer|Uint8Array|Blob|string|Readable;
   export type AssetHashes = {[key: string]: HashValue};
@@ -850,7 +850,7 @@ declare namespace CodeArtifact {
     externalConnectionName?: ExternalConnectionName;
   }
   export type DomainName = string;
-  export type DomainStatus = "Active"|"Deleted"|string;
+  export type DomainStatus = "Active"|"Deleted"|string&{};
   export interface DomainSummary {
     /**
      *  The name of the domain. 
@@ -880,7 +880,7 @@ declare namespace CodeArtifact {
   export type DomainSummaryList = DomainSummary[];
   export type ErrorMessage = string;
   export type ExternalConnectionName = string;
-  export type ExternalConnectionStatus = "Available"|string;
+  export type ExternalConnectionStatus = "Available"|string&{};
   export interface GetAuthorizationTokenRequest {
     /**
      *  The name of the domain that is in scope for the generated authorization token. 
@@ -1077,7 +1077,7 @@ declare namespace CodeArtifact {
      */
     policy?: ResourcePolicy;
   }
-  export type HashAlgorithm = "MD5"|"SHA-1"|"SHA-256"|"SHA-512"|string;
+  export type HashAlgorithm = "MD5"|"SHA-1"|"SHA-256"|"SHA-512"|string&{};
   export type HashValue = string;
   export type Integer = number;
   export interface LicenseInfo {
@@ -1484,7 +1484,7 @@ declare namespace CodeArtifact {
      */
     originConfiguration?: PackageOriginConfiguration;
   }
-  export type PackageFormat = "npm"|"pypi"|"maven"|"nuget"|"generic"|string;
+  export type PackageFormat = "npm"|"pypi"|"maven"|"nuget"|"generic"|string&{};
   export type PackageName = string;
   export type PackageNamespace = string;
   export interface PackageOriginConfiguration {
@@ -1587,7 +1587,7 @@ declare namespace CodeArtifact {
      */
     errorMessage?: ErrorMessage;
   }
-  export type PackageVersionErrorCode = "ALREADY_EXISTS"|"MISMATCHED_REVISION"|"MISMATCHED_STATUS"|"NOT_ALLOWED"|"NOT_FOUND"|"SKIPPED"|string;
+  export type PackageVersionErrorCode = "ALREADY_EXISTS"|"MISMATCHED_REVISION"|"MISMATCHED_STATUS"|"NOT_ALLOWED"|"NOT_FOUND"|"SKIPPED"|string&{};
   export type PackageVersionErrorMap = {[key: string]: PackageVersionError};
   export type PackageVersionList = PackageVersion[];
   export interface PackageVersionOrigin {
@@ -1600,11 +1600,11 @@ declare namespace CodeArtifact {
      */
     originType?: PackageVersionOriginType;
   }
-  export type PackageVersionOriginType = "INTERNAL"|"EXTERNAL"|"UNKNOWN"|string;
+  export type PackageVersionOriginType = "INTERNAL"|"EXTERNAL"|"UNKNOWN"|string&{};
   export type PackageVersionRevision = string;
   export type PackageVersionRevisionMap = {[key: string]: PackageVersionRevision};
-  export type PackageVersionSortType = "PUBLISHED_TIME"|string;
-  export type PackageVersionStatus = "Published"|"Unfinished"|"Unlisted"|"Archived"|"Disposed"|"Deleted"|string;
+  export type PackageVersionSortType = "PUBLISHED_TIME"|string&{};
+  export type PackageVersionStatus = "Published"|"Unfinished"|"Unlisted"|"Archived"|"Disposed"|"Deleted"|string&{};
   export interface PackageVersionSummary {
     /**
      *  Information about a package version. 

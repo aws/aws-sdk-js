@@ -324,7 +324,7 @@ declare namespace OpenSearchServerless {
      */
     type?: AccessPolicyType;
   }
-  export type AccessPolicyType = "data"|string;
+  export type AccessPolicyType = "data"|string&{};
   export interface AccountSettingsDetail {
     capacityLimits?: CapacityLimits;
   }
@@ -456,7 +456,7 @@ declare namespace OpenSearchServerless {
   export type CollectionIds = CollectionId[];
   export type CollectionName = string;
   export type CollectionNames = CollectionName[];
-  export type CollectionStatus = "CREATING"|"DELETING"|"ACTIVE"|"FAILED"|string;
+  export type CollectionStatus = "CREATING"|"DELETING"|"ACTIVE"|"FAILED"|string&{};
   export type CollectionSummaries = CollectionSummary[];
   export interface CollectionSummary {
     /**
@@ -476,7 +476,7 @@ declare namespace OpenSearchServerless {
      */
     status?: CollectionStatus;
   }
-  export type CollectionType = "SEARCH"|"TIMESERIES"|"VECTORSEARCH"|string;
+  export type CollectionType = "SEARCH"|"TIMESERIES"|"VECTORSEARCH"|string&{};
   export type ConfigDescription = string;
   export type ConfigName = string;
   export interface CreateAccessPolicyRequest {
@@ -1088,7 +1088,7 @@ declare namespace OpenSearchServerless {
      */
     type?: SecurityConfigType;
   }
-  export type SecurityConfigType = "saml"|string;
+  export type SecurityConfigType = "saml"|string&{};
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export interface SecurityPolicyDetail {
@@ -1158,7 +1158,7 @@ declare namespace OpenSearchServerless {
      */
     type?: SecurityPolicyType;
   }
-  export type SecurityPolicyType = "encryption"|"network"|string;
+  export type SecurityPolicyType = "encryption"|"network"|string&{};
   export type String = string;
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
@@ -1469,7 +1469,7 @@ declare namespace OpenSearchServerless {
   export type VpcEndpointId = string;
   export type VpcEndpointIds = VpcEndpointId[];
   export type VpcEndpointName = string;
-  export type VpcEndpointStatus = "PENDING"|"DELETING"|"ACTIVE"|"FAILED"|string;
+  export type VpcEndpointStatus = "PENDING"|"DELETING"|"ACTIVE"|"FAILED"|string&{};
   export type VpcEndpointSummaries = VpcEndpointSummary[];
   export interface VpcEndpointSummary {
     /**

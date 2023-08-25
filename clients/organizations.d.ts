@@ -477,11 +477,11 @@ declare namespace Organizations {
   }
   export type AccountArn = string;
   export type AccountId = string;
-  export type AccountJoinedMethod = "INVITED"|"CREATED"|string;
+  export type AccountJoinedMethod = "INVITED"|"CREATED"|string&{};
   export type AccountName = string;
-  export type AccountStatus = "ACTIVE"|"SUSPENDED"|"PENDING_CLOSURE"|string;
+  export type AccountStatus = "ACTIVE"|"SUSPENDED"|"PENDING_CLOSURE"|string&{};
   export type Accounts = Account[];
-  export type ActionType = "INVITE"|"ENABLE_ALL_FEATURES"|"APPROVE_ALL_FEATURES"|"ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"|string;
+  export type ActionType = "INVITE"|"ENABLE_ALL_FEATURES"|"APPROVE_ALL_FEATURES"|"ADD_ORGANIZATIONS_SERVICE_LINKED_ROLE"|string&{};
   export interface AttachPolicyRequest {
     /**
      * The unique identifier (ID) of the policy that you want to attach to the target. You can get the ID for the policy by calling the ListPolicies operation. The regex pattern for a policy ID string requires "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the underscore character (_).
@@ -516,7 +516,7 @@ declare namespace Organizations {
     Type?: ChildType;
   }
   export type ChildId = string;
-  export type ChildType = "ACCOUNT"|"ORGANIZATIONAL_UNIT"|string;
+  export type ChildType = "ACCOUNT"|"ORGANIZATIONAL_UNIT"|string&{};
   export type Children = Child[];
   export interface CloseAccountRequest {
     /**
@@ -524,7 +524,7 @@ declare namespace Organizations {
      */
     AccountId: AccountId;
   }
-  export type CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"|"EMAIL_ALREADY_EXISTS"|"INVALID_ADDRESS"|"INVALID_EMAIL"|"CONCURRENT_ACCOUNT_MODIFICATION"|"INTERNAL_FAILURE"|"GOVCLOUD_ACCOUNT_ALREADY_EXISTS"|"MISSING_BUSINESS_VALIDATION"|"FAILED_BUSINESS_VALIDATION"|"PENDING_BUSINESS_VALIDATION"|"INVALID_IDENTITY_FOR_BUSINESS_VALIDATION"|"UNKNOWN_BUSINESS_VALIDATION"|"MISSING_PAYMENT_INSTRUMENT"|"INVALID_PAYMENT_INSTRUMENT"|"UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED"|string;
+  export type CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"|"EMAIL_ALREADY_EXISTS"|"INVALID_ADDRESS"|"INVALID_EMAIL"|"CONCURRENT_ACCOUNT_MODIFICATION"|"INTERNAL_FAILURE"|"GOVCLOUD_ACCOUNT_ALREADY_EXISTS"|"MISSING_BUSINESS_VALIDATION"|"FAILED_BUSINESS_VALIDATION"|"PENDING_BUSINESS_VALIDATION"|"INVALID_IDENTITY_FOR_BUSINESS_VALIDATION"|"UNKNOWN_BUSINESS_VALIDATION"|"MISSING_PAYMENT_INSTRUMENT"|"INVALID_PAYMENT_INSTRUMENT"|"UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED"|string&{};
   export type CreateAccountName = string;
   export interface CreateAccountRequest {
     /**
@@ -555,7 +555,7 @@ declare namespace Organizations {
      */
     CreateAccountStatus?: CreateAccountStatus;
   }
-  export type CreateAccountState = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export type CreateAccountState = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string&{};
   export type CreateAccountStates = CreateAccountState[];
   export interface CreateAccountStatus {
     /**
@@ -895,7 +895,7 @@ declare namespace Organizations {
      */
     PolicyType?: EffectivePolicyType;
   }
-  export type EffectivePolicyType = "TAG_POLICY"|"BACKUP_POLICY"|"AISERVICES_OPT_OUT_POLICY"|string;
+  export type EffectivePolicyType = "TAG_POLICY"|"BACKUP_POLICY"|"AISERVICES_OPT_OUT_POLICY"|string&{};
   export type Email = string;
   export interface EnableAWSServiceAccessRequest {
     /**
@@ -998,7 +998,7 @@ declare namespace Organizations {
     Type: HandshakePartyType;
   }
   export type HandshakePartyId = string;
-  export type HandshakePartyType = "ACCOUNT"|"ORGANIZATION"|"EMAIL"|string;
+  export type HandshakePartyType = "ACCOUNT"|"ORGANIZATION"|"EMAIL"|string&{};
   export interface HandshakeResource {
     /**
      * The information that is passed to the other party in the handshake. The format of the value string must match the requirements of the specified type.
@@ -1013,12 +1013,12 @@ declare namespace Organizations {
      */
     Resources?: HandshakeResources;
   }
-  export type HandshakeResourceType = "ACCOUNT"|"ORGANIZATION"|"ORGANIZATION_FEATURE_SET"|"EMAIL"|"MASTER_EMAIL"|"MASTER_NAME"|"NOTES"|"PARENT_HANDSHAKE"|string;
+  export type HandshakeResourceType = "ACCOUNT"|"ORGANIZATION"|"ORGANIZATION_FEATURE_SET"|"EMAIL"|"MASTER_EMAIL"|"MASTER_NAME"|"NOTES"|"PARENT_HANDSHAKE"|string&{};
   export type HandshakeResourceValue = string;
   export type HandshakeResources = HandshakeResource[];
-  export type HandshakeState = "REQUESTED"|"OPEN"|"CANCELED"|"ACCEPTED"|"DECLINED"|"EXPIRED"|string;
+  export type HandshakeState = "REQUESTED"|"OPEN"|"CANCELED"|"ACCEPTED"|"DECLINED"|"EXPIRED"|string&{};
   export type Handshakes = Handshake[];
-  export type IAMUserAccessToBilling = "ALLOW"|"DENY"|string;
+  export type IAMUserAccessToBilling = "ALLOW"|"DENY"|string&{};
   export interface InviteAccountToOrganizationRequest {
     /**
      * The identifier (ID) of the Amazon Web Services account that you want to invite to join your organization. This is a JSON object that contains the following elements:  { "Type": "ACCOUNT", "Id": "&lt; account id number &gt;" }  If you use the CLI, you can submit this as a single string, similar to the following example:  --target Id=123456789012,Type=ACCOUNT  If you specify "Type": "ACCOUNT", you must provide the Amazon Web Services account ID number as the Id. If you specify "Type": "EMAIL", you must specify the email address that is associated with the account.  --target Id=diego@example.com,Type=EMAIL 
@@ -1462,7 +1462,7 @@ declare namespace Organizations {
     AvailablePolicyTypes?: PolicyTypes;
   }
   export type OrganizationArn = string;
-  export type OrganizationFeatureSet = "ALL"|"CONSOLIDATED_BILLING"|string;
+  export type OrganizationFeatureSet = "ALL"|"CONSOLIDATED_BILLING"|string&{};
   export type OrganizationId = string;
   export interface OrganizationalUnit {
     /**
@@ -1493,7 +1493,7 @@ declare namespace Organizations {
     Type?: ParentType;
   }
   export type ParentId = string;
-  export type ParentType = "ROOT"|"ORGANIZATIONAL_UNIT"|string;
+  export type ParentType = "ROOT"|"ORGANIZATIONAL_UNIT"|string&{};
   export type Parents = Parent[];
   export type Policies = PolicySummary[];
   export interface Policy {
@@ -1557,8 +1557,8 @@ declare namespace Organizations {
     Type?: TargetType;
   }
   export type PolicyTargets = PolicyTargetSummary[];
-  export type PolicyType = "SERVICE_CONTROL_POLICY"|"TAG_POLICY"|"BACKUP_POLICY"|"AISERVICES_OPT_OUT_POLICY"|string;
-  export type PolicyTypeStatus = "ENABLED"|"PENDING_ENABLE"|"PENDING_DISABLE"|string;
+  export type PolicyType = "SERVICE_CONTROL_POLICY"|"TAG_POLICY"|"BACKUP_POLICY"|"AISERVICES_OPT_OUT_POLICY"|string&{};
+  export type PolicyTypeStatus = "ENABLED"|"PENDING_ENABLE"|"PENDING_DISABLE"|string&{};
   export interface PolicyTypeSummary {
     /**
      * The name of the policy type.
@@ -1675,7 +1675,7 @@ declare namespace Organizations {
   export type TaggableResourceId = string;
   export type Tags = Tag[];
   export type TargetName = string;
-  export type TargetType = "ACCOUNT"|"ORGANIZATIONAL_UNIT"|"ROOT"|string;
+  export type TargetType = "ACCOUNT"|"ORGANIZATIONAL_UNIT"|"ROOT"|string&{};
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**

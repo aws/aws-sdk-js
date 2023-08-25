@@ -385,7 +385,7 @@ declare namespace CleanRooms {
     function: AggregateFunctionName;
   }
   export type AggregateColumnColumnNamesList = AnalysisRuleColumnName[];
-  export type AggregateFunctionName = "SUM"|"SUM_DISTINCT"|"COUNT"|"COUNT_DISTINCT"|"AVG"|string;
+  export type AggregateFunctionName = "SUM"|"SUM_DISTINCT"|"COUNT"|"COUNT_DISTINCT"|"AVG"|string&{};
   export interface AggregationConstraint {
     /**
      * Column in aggregation constraint for which there must be a minimum number of distinct values in an output row for it to be in the query output.
@@ -402,10 +402,10 @@ declare namespace CleanRooms {
   }
   export type AggregationConstraintMinimumInteger = number;
   export type AggregationConstraints = AggregationConstraint[];
-  export type AggregationType = "COUNT_DISTINCT"|string;
+  export type AggregationType = "COUNT_DISTINCT"|string&{};
   export type AllowedColumnList = ColumnName[];
-  export type AnalysisFormat = "SQL"|string;
-  export type AnalysisMethod = "DIRECT_QUERY"|string;
+  export type AnalysisFormat = "SQL"|string&{};
+  export type AnalysisMethod = "DIRECT_QUERY"|string&{};
   export interface AnalysisParameter {
     /**
      * The name of the parameter. The name must use only alphanumeric, underscore (_), or hyphen (-) characters but cannot start or end with a hyphen.
@@ -527,7 +527,7 @@ declare namespace CleanRooms {
      */
     custom?: AnalysisRuleCustom;
   }
-  export type AnalysisRuleType = "AGGREGATION"|"LIST"|"CUSTOM"|string;
+  export type AnalysisRuleType = "AGGREGATION"|"LIST"|"CUSTOM"|string&{};
   export type AnalysisRuleTypeList = AnalysisRuleType[];
   export interface AnalysisSchema {
     /**
@@ -871,7 +871,7 @@ declare namespace CleanRooms {
   export type CollaborationDescription = string;
   export type CollaborationIdentifier = string;
   export type CollaborationName = string;
-  export type CollaborationQueryLogStatus = "ENABLED"|"DISABLED"|string;
+  export type CollaborationQueryLogStatus = "ENABLED"|"DISABLED"|string&{};
   export interface CollaborationSummary {
     /**
      * The identifier for the collaboration.
@@ -1013,7 +1013,7 @@ declare namespace CleanRooms {
     aggregation?: AnalysisRuleAggregation;
     custom?: AnalysisRuleCustom;
   }
-  export type ConfiguredTableAnalysisRuleType = "AGGREGATION"|"LIST"|"CUSTOM"|string;
+  export type ConfiguredTableAnalysisRuleType = "AGGREGATION"|"LIST"|"CUSTOM"|string&{};
   export type ConfiguredTableAnalysisRuleTypeList = ConfiguredTableAnalysisRuleType[];
   export type ConfiguredTableArn = string;
   export interface ConfiguredTableAssociation {
@@ -1402,7 +1402,7 @@ declare namespace CleanRooms {
   export interface DeleteMembershipOutput {
   }
   export type DisplayName = string;
-  export type FilterableMemberStatus = "INVITED"|"ACTIVE"|string;
+  export type FilterableMemberStatus = "INVITED"|"ACTIVE"|string&{};
   export interface GetAnalysisTemplateInput {
     /**
      * The identifier for a membership resource.
@@ -1567,9 +1567,9 @@ declare namespace CleanRooms {
      */
     databaseName: GlueDatabaseName;
   }
-  export type JoinOperator = "OR"|"AND"|string;
+  export type JoinOperator = "OR"|"AND"|string&{};
   export type JoinOperatorsList = JoinOperator[];
-  export type JoinRequiredOption = "QUERY_RUNNER"|string;
+  export type JoinRequiredOption = "QUERY_RUNNER"|string&{};
   export type KeyPrefix = string;
   export interface ListAnalysisTemplatesInput {
     /**
@@ -1806,7 +1806,7 @@ declare namespace CleanRooms {
   export type Long = number;
   export type MaxResults = number;
   export type MemberAbilities = MemberAbility[];
-  export type MemberAbility = "CAN_QUERY"|"CAN_RECEIVE_RESULTS"|string;
+  export type MemberAbility = "CAN_QUERY"|"CAN_RECEIVE_RESULTS"|string&{};
   export type MemberList = MemberSpecification[];
   export interface MemberSpecification {
     /**
@@ -1822,7 +1822,7 @@ declare namespace CleanRooms {
      */
     displayName: DisplayName;
   }
-  export type MemberStatus = "INVITED"|"ACTIVE"|"LEFT"|"REMOVED"|string;
+  export type MemberStatus = "INVITED"|"ACTIVE"|"LEFT"|"REMOVED"|string&{};
   export interface MemberSummary {
     /**
      * The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
@@ -1910,8 +1910,8 @@ declare namespace CleanRooms {
   }
   export type MembershipArn = string;
   export type MembershipIdentifier = string;
-  export type MembershipQueryLogStatus = "ENABLED"|"DISABLED"|string;
-  export type MembershipStatus = "ACTIVE"|"REMOVED"|"COLLABORATION_DELETED"|string;
+  export type MembershipQueryLogStatus = "ENABLED"|"DISABLED"|string&{};
+  export type MembershipStatus = "ACTIVE"|"REMOVED"|"COLLABORATION_DELETED"|string&{};
   export interface MembershipSummary {
     /**
      * The unique ID for the membership's collaboration.
@@ -1962,7 +1962,7 @@ declare namespace CleanRooms {
   export type PaginationToken = string;
   export type ParameterMap = {[key: string]: ParameterValue};
   export type ParameterName = string;
-  export type ParameterType = "SMALLINT"|"INTEGER"|"BIGINT"|"DECIMAL"|"REAL"|"DOUBLE_PRECISION"|"BOOLEAN"|"CHAR"|"VARCHAR"|"DATE"|"TIMESTAMP"|"TIMESTAMPTZ"|"TIME"|"TIMETZ"|"VARBYTE"|string;
+  export type ParameterType = "SMALLINT"|"INTEGER"|"BIGINT"|"DECIMAL"|"REAL"|"DOUBLE_PRECISION"|"BOOLEAN"|"CHAR"|"VARCHAR"|"DATE"|"TIMESTAMP"|"TIMESTAMPTZ"|"TIME"|"TIMETZ"|"VARBYTE"|string&{};
   export type ParameterValue = string;
   export interface ProtectedQuery {
     /**
@@ -2083,7 +2083,7 @@ declare namespace CleanRooms {
      */
     totalDurationInMillis?: Long;
   }
-  export type ProtectedQueryStatus = "SUBMITTED"|"STARTED"|"CANCELLED"|"CANCELLING"|"FAILED"|"SUCCESS"|"TIMED_OUT"|string;
+  export type ProtectedQueryStatus = "SUBMITTED"|"STARTED"|"CANCELLED"|"CANCELLING"|"FAILED"|"SUCCESS"|"TIMED_OUT"|string&{};
   export interface ProtectedQuerySummary {
     /**
      * The unique ID of the protected query.
@@ -2107,13 +2107,13 @@ declare namespace CleanRooms {
     status: ProtectedQueryStatus;
   }
   export type ProtectedQuerySummaryList = ProtectedQuerySummary[];
-  export type ProtectedQueryType = "SQL"|string;
+  export type ProtectedQueryType = "SQL"|string&{};
   export type QueryTables = TableAlias[];
   export type ResourceAlias = string;
   export type ResourceDescription = string;
-  export type ResultFormat = "CSV"|"PARQUET"|string;
+  export type ResultFormat = "CSV"|"PARQUET"|string&{};
   export type RoleArn = string;
-  export type ScalarFunctions = "TRUNC"|"ABS"|"CEILING"|"FLOOR"|"LN"|"LOG"|"ROUND"|"SQRT"|"CAST"|"LOWER"|"RTRIM"|"UPPER"|"COALESCE"|string;
+  export type ScalarFunctions = "TRUNC"|"ABS"|"CEILING"|"FLOOR"|"LN"|"LOG"|"ROUND"|"SQRT"|"CAST"|"LOWER"|"RTRIM"|"UPPER"|"COALESCE"|string&{};
   export type ScalarFunctionsList = ScalarFunctions[];
   export interface Schema {
     /**
@@ -2205,7 +2205,7 @@ declare namespace CleanRooms {
     analysisMethod?: AnalysisMethod;
   }
   export type SchemaSummaryList = SchemaSummary[];
-  export type SchemaType = "TABLE"|string;
+  export type SchemaType = "TABLE"|string&{};
   export interface StartProtectedQueryInput {
     /**
      * The type of the protected query to be started.
@@ -2256,7 +2256,7 @@ declare namespace CleanRooms {
   export interface TagResourceOutput {
   }
   export type TagValue = string;
-  export type TargetProtectedQueryStatus = "CANCELLED"|string;
+  export type TargetProtectedQueryStatus = "CANCELLED"|string&{};
   export type Timestamp = Date;
   export type UUID = string;
   export interface UntagResourceInput {

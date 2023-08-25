@@ -157,7 +157,7 @@ declare namespace Keyspaces {
      */
     status: ClientSideTimestampsStatus;
   }
-  export type ClientSideTimestampsStatus = "ENABLED"|string;
+  export type ClientSideTimestampsStatus = "ENABLED"|string&{};
   export interface ClusteringKey {
     /**
      * The name(s) of the clustering column(s).
@@ -289,7 +289,7 @@ declare namespace Keyspaces {
      */
     kmsKeyIdentifier?: kmsKeyARN;
   }
-  export type EncryptionType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY"|string;
+  export type EncryptionType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY"|string&{};
   export type GenericString = string;
   export interface GetKeyspaceRequest {
     /**
@@ -482,7 +482,7 @@ declare namespace Keyspaces {
      */
     status: PointInTimeRecoveryStatus;
   }
-  export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string;
+  export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string&{};
   export interface PointInTimeRecoverySummary {
     /**
      * Shows if point-in-time recovery is enabled or disabled for the specified table.
@@ -566,7 +566,7 @@ declare namespace Keyspaces {
      */
     staticColumns?: StaticColumnList;
   }
-  export type SortOrder = "ASC"|"DESC"|string;
+  export type SortOrder = "ASC"|"DESC"|string&{};
   export interface StaticColumn {
     /**
      * The name of the static column.
@@ -576,7 +576,7 @@ declare namespace Keyspaces {
   export type StaticColumnList = StaticColumn[];
   export type String = string;
   export type TableName = string;
-  export type TableStatus = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"DELETED"|"RESTORING"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|string;
+  export type TableStatus = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"DELETED"|"RESTORING"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|string&{};
   export interface TableSummary {
     /**
      * The name of the keyspace that the table is stored in.
@@ -617,14 +617,14 @@ declare namespace Keyspaces {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type ThroughputMode = "PAY_PER_REQUEST"|"PROVISIONED"|string;
+  export type ThroughputMode = "PAY_PER_REQUEST"|"PROVISIONED"|string&{};
   export interface TimeToLive {
     /**
      * Shows how to enable custom Time to Live (TTL) settings for the specified table.
      */
     status: TimeToLiveStatus;
   }
-  export type TimeToLiveStatus = "ENABLED"|string;
+  export type TimeToLiveStatus = "ENABLED"|string&{};
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -684,7 +684,7 @@ declare namespace Keyspaces {
   }
   export type kmsKeyARN = string;
   export type region = string;
-  export type rs = "SINGLE_REGION"|"MULTI_REGION"|string;
+  export type rs = "SINGLE_REGION"|"MULTI_REGION"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

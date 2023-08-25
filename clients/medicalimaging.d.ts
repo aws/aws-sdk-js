@@ -494,7 +494,7 @@ declare namespace MedicalImaging {
      */
     updatedAt?: _Date;
   }
-  export type DatastoreStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"DELETING"|"DELETED"|string;
+  export type DatastoreStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"DELETING"|"DELETED"|string&{};
   export type DatastoreSummaries = DatastoreSummary[];
   export interface DatastoreSummary {
     /**
@@ -748,8 +748,8 @@ declare namespace MedicalImaging {
     message?: Message;
   }
   export type ImageSetPropertiesList = ImageSetProperties[];
-  export type ImageSetState = "ACTIVE"|"LOCKED"|"DELETED"|string;
-  export type ImageSetWorkflowStatus = "CREATED"|"COPIED"|"COPYING"|"COPYING_WITH_READ_ONLY_ACCESS"|"COPY_FAILED"|"UPDATING"|"UPDATED"|"UPDATE_FAILED"|"DELETING"|"DELETED"|string;
+  export type ImageSetState = "ACTIVE"|"LOCKED"|"DELETED"|string&{};
+  export type ImageSetWorkflowStatus = "CREATED"|"COPIED"|"COPYING"|"COPYING_WITH_READ_ONLY_ACCESS"|"COPY_FAILED"|"UPDATING"|"UPDATED"|"UPDATE_FAILED"|"DELETING"|"DELETED"|string&{};
   export type ImageSetsMetadataSummaries = ImageSetsMetadataSummary[];
   export interface ImageSetsMetadataSummary {
     /**
@@ -776,7 +776,7 @@ declare namespace MedicalImaging {
   export type Integer = number;
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string&{};
   export type KmsKeyArn = string;
   export interface ListDICOMImportJobsRequest {
     /**
@@ -881,7 +881,7 @@ declare namespace MedicalImaging {
     DICOMUpdates?: DICOMUpdates;
   }
   export type NextToken = string;
-  export type Operator = "EQUAL"|"BETWEEN"|string;
+  export type Operator = "EQUAL"|"BETWEEN"|string&{};
   export type PayloadBlob = Buffer|Uint8Array|Blob|string|Readable;
   export type RoleArn = string;
   export type S3Uri = string;

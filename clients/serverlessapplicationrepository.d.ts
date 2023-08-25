@@ -194,7 +194,7 @@ declare namespace ServerlessApplicationRepository {
      */
     SpdxLicenseId?: __string;
   }
-  export type Capability = "CAPABILITY_IAM"|"CAPABILITY_NAMED_IAM"|"CAPABILITY_AUTO_EXPAND"|"CAPABILITY_RESOURCE_POLICY"|string;
+  export type Capability = "CAPABILITY_IAM"|"CAPABILITY_NAMED_IAM"|"CAPABILITY_AUTO_EXPAND"|"CAPABILITY_RESOURCE_POLICY"|string&{};
   export interface CreateApplicationRequest {
     /**
      * The name of the author publishing the app.Minimum length=1. Maximum length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
@@ -880,7 +880,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Type: __string;
   }
-  export type Status = "PREPARING"|"ACTIVE"|"EXPIRED"|string;
+  export type Status = "PREPARING"|"ACTIVE"|"EXPIRED"|string&{};
   export interface Tag {
     /**
      * This property corresponds to the content of the same name for the AWS CloudFormation Tag

@@ -232,9 +232,9 @@ declare namespace IVSRealTime {
      */
     remoteParticipantId?: ParticipantId;
   }
-  export type EventErrorCode = "INSUFFICIENT_CAPABILITIES"|"QUOTA_EXCEEDED"|"PUBLISHER_NOT_FOUND"|string;
+  export type EventErrorCode = "INSUFFICIENT_CAPABILITIES"|"QUOTA_EXCEEDED"|"PUBLISHER_NOT_FOUND"|string&{};
   export type EventList = Event[];
-  export type EventName = "JOINED"|"LEFT"|"PUBLISH_STARTED"|"PUBLISH_STOPPED"|"SUBSCRIBE_STARTED"|"SUBSCRIBE_STOPPED"|"PUBLISH_ERROR"|"SUBSCRIBE_ERROR"|"JOIN_ERROR"|string;
+  export type EventName = "JOINED"|"LEFT"|"PUBLISH_STARTED"|"PUBLISH_STOPPED"|"SUBSCRIBE_STARTED"|"SUBSCRIBE_STOPPED"|"PUBLISH_ERROR"|"SUBSCRIBE_ERROR"|"JOIN_ERROR"|string&{};
   export interface GetParticipantRequest {
     /**
      * Unique identifier for the participant. This is assigned by IVS and returned by CreateParticipantToken.
@@ -445,7 +445,7 @@ declare namespace IVSRealTime {
   export type ParticipantAttributes = {[key: string]: String};
   export type ParticipantId = string;
   export type ParticipantList = ParticipantSummary[];
-  export type ParticipantState = "CONNECTED"|"DISCONNECTED"|string;
+  export type ParticipantState = "CONNECTED"|"DISCONNECTED"|string&{};
   export interface ParticipantSummary {
     /**
      * ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
@@ -500,7 +500,7 @@ declare namespace IVSRealTime {
   }
   export type ParticipantTokenAttributes = {[key: string]: String};
   export type ParticipantTokenCapabilities = ParticipantTokenCapability[];
-  export type ParticipantTokenCapability = "PUBLISH"|"SUBSCRIBE"|string;
+  export type ParticipantTokenCapability = "PUBLISH"|"SUBSCRIBE"|string&{};
   export interface ParticipantTokenConfiguration {
     /**
      * Application-provided attributes to encode into the corresponding participant token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information. 

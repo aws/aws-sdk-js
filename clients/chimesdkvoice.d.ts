@@ -789,7 +789,7 @@ declare namespace ChimeSDKVoice {
   }
   export type AlexaSkillId = string;
   export type AlexaSkillIdList = AlexaSkillId[];
-  export type AlexaSkillStatus = "ACTIVE"|"INACTIVE"|string;
+  export type AlexaSkillStatus = "ACTIVE"|"INACTIVE"|string&{};
   export type Alpha2CountryCode = string;
   export type AreaCode = string;
   export type Arn = string;
@@ -872,9 +872,9 @@ declare namespace ChimeSDKVoice {
      */
     IsCaller?: Boolean;
   }
-  export type CallLegType = "Caller"|"Callee"|string;
+  export type CallLegType = "Caller"|"Callee"|string&{};
   export type CallingName = string;
-  export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed"|string;
+  export type CallingNameStatus = "Unassigned"|"UpdateInProgress"|"UpdateSucceeded"|"UpdateFailed"|string&{};
   export type CallingRegion = string;
   export type CallingRegionList = CallingRegion[];
   export interface CandidateAddress {
@@ -908,7 +908,7 @@ declare namespace ChimeSDKVoice {
     country?: SensitiveNonEmptyString;
   }
   export type CandidateAddressList = CandidateAddress[];
-  export type Capability = "Voice"|"SMS"|string;
+  export type Capability = "Voice"|"SMS"|string&{};
   export type CapabilityList = Capability[];
   export type ClientRequestId = string;
   export type ConfidenceScore = number;
@@ -1294,9 +1294,9 @@ declare namespace ChimeSDKVoice {
      */
     DNIS?: DNISEmergencyCallingConfigurationList;
   }
-  export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|"Gone"|string;
+  export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|"Gone"|string&{};
   export type FunctionArn = string;
-  export type GeoMatchLevel = "Country"|"AreaCode"|string;
+  export type GeoMatchLevel = "Country"|"AreaCode"|string&{};
   export interface GeoMatchParams {
     /**
      * The country.
@@ -1582,7 +1582,7 @@ declare namespace ChimeSDKVoice {
   export type GuidString = string;
   export type Integer = number;
   export type Iso8601Timestamp = Date;
-  export type LanguageCode = "en-US"|string;
+  export type LanguageCode = "en-US"|string&{};
   export interface ListAvailableVoiceConnectorRegionsResponse {
     /**
      * The list of AWS Regions.
@@ -1862,9 +1862,9 @@ declare namespace ChimeSDKVoice {
   export type NonEmptyString128 = string;
   export type NonEmptyString256 = string;
   export type NonEmptyStringList = String[];
-  export type NotificationTarget = "EventBridge"|"SNS"|"SQS"|string;
+  export type NotificationTarget = "EventBridge"|"SNS"|"SQS"|string&{};
   export type NullableBoolean = boolean;
-  export type NumberSelectionBehavior = "PreferSticky"|"AvoidSticky"|string;
+  export type NumberSelectionBehavior = "PreferSticky"|"AvoidSticky"|string&{};
   export interface OrderedPhoneNumber {
     /**
      * The phone number, in E.164 format.
@@ -1876,7 +1876,7 @@ declare namespace ChimeSDKVoice {
     Status?: OrderedPhoneNumberStatus;
   }
   export type OrderedPhoneNumberList = OrderedPhoneNumber[];
-  export type OrderedPhoneNumberStatus = "Processing"|"Acquired"|"Failed"|string;
+  export type OrderedPhoneNumberStatus = "Processing"|"Acquired"|"Failed"|string&{};
   export interface Origination {
     /**
      * The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20. This parameter is not required, but you must specify this parameter or Disabled.
@@ -1911,7 +1911,7 @@ declare namespace ChimeSDKVoice {
   }
   export type OriginationRouteList = OriginationRoute[];
   export type OriginationRoutePriority = number;
-  export type OriginationRouteProtocol = "TCP"|"UDP"|string;
+  export type OriginationRouteProtocol = "TCP"|"UDP"|string&{};
   export type OriginationRouteWeight = number;
   export interface Participant {
     /**
@@ -2002,7 +2002,7 @@ declare namespace ChimeSDKVoice {
     AssociatedTimestamp?: Iso8601Timestamp;
   }
   export type PhoneNumberAssociationList = PhoneNumberAssociation[];
-  export type PhoneNumberAssociationName = "VoiceConnectorId"|"VoiceConnectorGroupId"|"SipRuleId"|string;
+  export type PhoneNumberAssociationName = "VoiceConnectorId"|"VoiceConnectorGroupId"|"SipRuleId"|string&{};
   export interface PhoneNumberCapabilities {
     /**
      * Allows or denies inbound calling for the specified phone number.
@@ -2089,11 +2089,11 @@ declare namespace ChimeSDKVoice {
     UpdatedTimestamp?: Iso8601Timestamp;
   }
   export type PhoneNumberOrderList = PhoneNumberOrder[];
-  export type PhoneNumberOrderStatus = "Processing"|"Successful"|"Failed"|"Partial"|"PendingDocuments"|"Submitted"|"FOC"|"ChangeRequested"|"Exception"|"CancelRequested"|"Cancelled"|string;
-  export type PhoneNumberOrderType = "New"|"Porting"|string;
-  export type PhoneNumberProductType = "VoiceConnector"|"SipMediaApplicationDialIn"|string;
-  export type PhoneNumberStatus = "Cancelled"|"PortinCancelRequested"|"PortinInProgress"|"AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed"|string;
-  export type PhoneNumberType = "Local"|"TollFree"|string;
+  export type PhoneNumberOrderStatus = "Processing"|"Successful"|"Failed"|"Partial"|"PendingDocuments"|"Submitted"|"FOC"|"ChangeRequested"|"Exception"|"CancelRequested"|"Cancelled"|string&{};
+  export type PhoneNumberOrderType = "New"|"Porting"|string&{};
+  export type PhoneNumberProductType = "VoiceConnector"|"SipMediaApplicationDialIn"|string&{};
+  export type PhoneNumberStatus = "Cancelled"|"PortinCancelRequested"|"PortinInProgress"|"AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed"|string&{};
+  export type PhoneNumberType = "Local"|"TollFree"|string&{};
   export type PhoneNumberTypeList = PhoneNumberType[];
   export type Port = number;
   export type PositiveInteger = number;
@@ -2170,7 +2170,7 @@ declare namespace ChimeSDKVoice {
     GeoMatchParams?: GeoMatchParams;
   }
   export type ProxySessionNameString = string;
-  export type ProxySessionStatus = "Open"|"InProgress"|"Closed"|string;
+  export type ProxySessionStatus = "Open"|"InProgress"|"Closed"|string&{};
   export type ProxySessions = ProxySession[];
   export interface PutSipMediaApplicationAlexaSkillConfigurationRequest {
     /**
@@ -2504,7 +2504,7 @@ declare namespace ChimeSDKVoice {
     AwsRegion?: String;
   }
   export type SipRuleTargetApplicationList = SipRuleTargetApplication[];
-  export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname"|string;
+  export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname"|string&{};
   export interface SpeakerSearchDetails {
     /**
      * The result value in the speaker search details.
@@ -3029,7 +3029,7 @@ declare namespace ChimeSDKVoice {
      */
     VoiceConnectorArn?: NonEmptyString;
   }
-  export type VoiceConnectorAwsRegion = "us-east-1"|"us-west-2"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"ap-northeast-2"|"ap-northeast-1"|"ap-southeast-1"|"ap-southeast-2"|string;
+  export type VoiceConnectorAwsRegion = "us-east-1"|"us-west-2"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"ap-northeast-2"|"ap-northeast-1"|"ap-southeast-1"|"ap-southeast-2"|string&{};
   export type VoiceConnectorAwsRegionList = VoiceConnectorAwsRegion[];
   export interface VoiceConnectorGroup {
     /**

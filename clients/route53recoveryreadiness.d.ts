@@ -903,7 +903,7 @@ declare namespace Route53RecoveryReadiness {
      */
     RecordSetId?: __string;
   }
-  export type Readiness = "READY"|"NOT_READY"|"UNKNOWN"|"NOT_AUTHORIZED"|string;
+  export type Readiness = "READY"|"NOT_READY"|"UNKNOWN"|"NOT_AUTHORIZED"|string&{};
   export interface ReadinessCheckOutput {
     /**
      * The Amazon Resource Name (ARN) associated with a readiness check.

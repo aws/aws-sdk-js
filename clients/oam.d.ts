@@ -465,7 +465,7 @@ declare namespace OAM {
     Policy?: String;
   }
   export type ResourceIdentifier = string;
-  export type ResourceType = "AWS::CloudWatch::Metric"|"AWS::Logs::LogGroup"|"AWS::XRay::Trace"|string;
+  export type ResourceType = "AWS::CloudWatch::Metric"|"AWS::Logs::LogGroup"|"AWS::XRay::Trace"|string&{};
   export type ResourceTypesInput = ResourceType[];
   export type ResourceTypesOutput = String[];
   export type SinkName = string;

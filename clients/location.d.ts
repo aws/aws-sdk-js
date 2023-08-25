@@ -644,7 +644,7 @@ declare namespace Location {
      */
     Message?: String;
   }
-  export type BatchItemErrorCode = "AccessDeniedError"|"ConflictError"|"InternalServerError"|"ResourceNotFoundError"|"ThrottlingError"|"ValidationError"|string;
+  export type BatchItemErrorCode = "AccessDeniedError"|"ConflictError"|"InternalServerError"|"ResourceNotFoundError"|"ThrottlingError"|"ValidationError"|string&{};
   export interface BatchPutGeofenceError {
     /**
      * Contains details associated to the batch error.
@@ -1564,7 +1564,7 @@ declare namespace Location {
      */
     SampleTime: Timestamp;
   }
-  export type DimensionUnit = "Meters"|"Feet"|string;
+  export type DimensionUnit = "Meters"|"Feet"|string&{};
   export interface DisassociateTrackerConsumerRequest {
     /**
      * The Amazon Resource Name (ARN) for the geofence collection to be disassociated from the tracker resource. Used when you need to specify a resource across all Amazon Web Services.    Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer   
@@ -1577,7 +1577,7 @@ declare namespace Location {
   }
   export interface DisassociateTrackerConsumerResponse {
   }
-  export type DistanceUnit = "Kilometers"|"Miles"|string;
+  export type DistanceUnit = "Kilometers"|"Miles"|string&{};
   export type Double = number;
   export type FilterPlaceCategoryList = PlaceCategory[];
   export type GeoArn = string;
@@ -1851,7 +1851,7 @@ declare namespace Location {
   }
   export type Id = string;
   export type Integer = number;
-  export type IntendedUse = "SingleUse"|"Storage"|string;
+  export type IntendedUse = "SingleUse"|"Storage"|string&{};
   export type KmsKeyId = string;
   export type LanguageTag = string;
   export interface Leg {
@@ -2411,7 +2411,7 @@ declare namespace Location {
   export type PlaceSupplementalCategory = string;
   export type PlaceSupplementalCategoryList = PlaceSupplementalCategory[];
   export type Position = Double[];
-  export type PositionFiltering = "TimeBased"|"DistanceBased"|"AccuracyBased"|string;
+  export type PositionFiltering = "TimeBased"|"DistanceBased"|"AccuracyBased"|string&{};
   export interface PositionalAccuracy {
     /**
      * Estimated maximum distance, in meters, between the measured position and the true position of a device, along the Earth's surface.
@@ -2419,7 +2419,7 @@ declare namespace Location {
     Horizontal: PositionalAccuracyHorizontalDouble;
   }
   export type PositionalAccuracyHorizontalDouble = number;
-  export type PricingPlan = "RequestBasedUsage"|"MobileAssetTracking"|"MobileAssetManagement"|string;
+  export type PricingPlan = "RequestBasedUsage"|"MobileAssetTracking"|"MobileAssetManagement"|string&{};
   export type PropertyMap = {[key: string]: PropertyMapValueString};
   export type PropertyMapKeyString = string;
   export type PropertyMapValueString = string;
@@ -2485,7 +2485,7 @@ declare namespace Location {
      */
     Message?: String;
   }
-  export type RouteMatrixErrorCode = "RouteNotFound"|"RouteTooLong"|"PositionsNotFound"|"DestinationPositionNotFound"|"DeparturePositionNotFound"|"OtherValidationError"|string;
+  export type RouteMatrixErrorCode = "RouteNotFound"|"RouteTooLong"|"PositionsNotFound"|"DestinationPositionNotFound"|"DeparturePositionNotFound"|"OtherValidationError"|string&{};
   export type RouteMatrixRow = RouteMatrixEntry[];
   export interface SearchForPositionResult {
     /**
@@ -2765,7 +2765,7 @@ declare namespace Location {
     Text: SensitiveString;
   }
   export type SensitiveString = string;
-  export type Status = "Active"|"Expired"|string;
+  export type Status = "Active"|"Expired"|string&{};
   export interface Step {
     /**
      * The travel distance between the step's StartPosition and EndPosition.
@@ -2821,7 +2821,7 @@ declare namespace Location {
   }
   export type Timestamp = Date;
   export type Token = string;
-  export type TravelMode = "Car"|"Truck"|"Walking"|"Bicycle"|"Motorcycle"|string;
+  export type TravelMode = "Car"|"Truck"|"Walking"|"Bicycle"|"Motorcycle"|string&{};
   export interface TruckDimensions {
     /**
      * The height of the truck.   For example, 4.5.     For routes calculated with a HERE resource, this value must be between 0 and 50 meters.  
@@ -3070,7 +3070,7 @@ declare namespace Location {
      */
     UpdateTime: Timestamp;
   }
-  export type VehicleWeightUnit = "Kilograms"|"Pounds"|string;
+  export type VehicleWeightUnit = "Kilograms"|"Pounds"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

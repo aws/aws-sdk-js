@@ -367,7 +367,7 @@ declare namespace MemoryDB {
      */
     ACLToApply?: ACLName;
   }
-  export type AZStatus = "singleaz"|"multiaz"|string;
+  export type AZStatus = "singleaz"|"multiaz"|string&{};
   export type AccessString = string;
   export interface Authentication {
     /**
@@ -389,7 +389,7 @@ declare namespace MemoryDB {
      */
     Passwords?: PasswordListInput;
   }
-  export type AuthenticationType = "password"|"no-password"|"iam"|string;
+  export type AuthenticationType = "password"|"no-password"|"iam"|string&{};
   export interface AvailabilityZone {
     /**
      * The name of the Availability Zone.
@@ -838,7 +838,7 @@ declare namespace MemoryDB {
      */
     User?: User;
   }
-  export type DataTieringStatus = "true"|"false"|string;
+  export type DataTieringStatus = "true"|"false"|string&{};
   export interface DeleteACLRequest {
     /**
      * The name of the Access Control List to delete
@@ -1358,7 +1358,7 @@ declare namespace MemoryDB {
   export type FilterName = string;
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
-  export type InputAuthenticationType = "password"|"iam"|string;
+  export type InputAuthenticationType = "password"|"iam"|string&{};
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
@@ -1679,9 +1679,9 @@ declare namespace MemoryDB {
      */
     ServiceUpdateNameToApply?: String;
   }
-  export type ServiceUpdateStatus = "available"|"in-progress"|"complete"|"scheduled"|string;
+  export type ServiceUpdateStatus = "available"|"in-progress"|"complete"|"scheduled"|string&{};
   export type ServiceUpdateStatusList = ServiceUpdateStatus[];
-  export type ServiceUpdateType = "security-update"|string;
+  export type ServiceUpdateType = "security-update"|string&{};
   export interface Shard {
     /**
      * The name of the shard
@@ -1778,7 +1778,7 @@ declare namespace MemoryDB {
   }
   export type SnapshotArnsList = String[];
   export type SnapshotList = Snapshot[];
-  export type SourceType = "node"|"parameter-group"|"subnet-group"|"cluster"|"user"|"acl"|string;
+  export type SourceType = "node"|"parameter-group"|"subnet-group"|"cluster"|"user"|"acl"|string&{};
   export type String = string;
   export interface Subnet {
     /**

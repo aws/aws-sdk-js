@@ -350,7 +350,7 @@ declare class PinpointEmail extends Service {
 }
 declare namespace PinpointEmail {
   export type AmazonResourceName = string;
-  export type BehaviorOnMxFailure = "USE_DEFAULT_VALUE"|"REJECT_MESSAGE"|string;
+  export type BehaviorOnMxFailure = "USE_DEFAULT_VALUE"|"REJECT_MESSAGE"|string&{};
   export type BlacklistEntries = BlacklistEntry[];
   export interface BlacklistEntry {
     /**
@@ -595,7 +595,7 @@ declare namespace PinpointEmail {
   }
   export interface DeleteEmailIdentityResponse {
   }
-  export type DeliverabilityDashboardAccountStatus = "ACTIVE"|"PENDING_EXPIRATION"|"DISABLED"|string;
+  export type DeliverabilityDashboardAccountStatus = "ACTIVE"|"PENDING_EXPIRATION"|"DISABLED"|string&{};
   export interface DeliverabilityTestReport {
     /**
      * A unique string that identifies the predictive inbox placement test.
@@ -623,7 +623,7 @@ declare namespace PinpointEmail {
     DeliverabilityTestStatus?: DeliverabilityTestStatus;
   }
   export type DeliverabilityTestReports = DeliverabilityTestReport[];
-  export type DeliverabilityTestStatus = "IN_PROGRESS"|"COMPLETED"|string;
+  export type DeliverabilityTestStatus = "IN_PROGRESS"|"COMPLETED"|string&{};
   export type DeliverabilityTestSubject = string;
   export interface DeliveryOptions {
     /**
@@ -650,7 +650,7 @@ declare namespace PinpointEmail {
     BccAddresses?: EmailAddressList;
   }
   export type DimensionName = string;
-  export type DimensionValueSource = "MESSAGE_TAG"|"EMAIL_HEADER"|"LINK_TAG"|string;
+  export type DimensionValueSource = "MESSAGE_TAG"|"EMAIL_HEADER"|"LINK_TAG"|string&{};
   export interface DkimAttributes {
     /**
      * If the value is true, then the messages that Amazon Pinpoint sends from the identity are DKIM-signed. If the value is false, then the messages that Amazon Pinpoint sends from the identity aren't DKIM-signed.
@@ -665,7 +665,7 @@ declare namespace PinpointEmail {
      */
     Tokens?: DnsTokenList;
   }
-  export type DkimStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
+  export type DkimStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string&{};
   export type DnsToken = string;
   export type DnsTokenList = DnsToken[];
   export type Domain = string;
@@ -843,7 +843,7 @@ declare namespace PinpointEmail {
   }
   export type EventDestinationName = string;
   export type EventDestinations = EventDestination[];
-  export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|string;
+  export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|string&{};
   export type EventTypes = EventType[];
   export type GeneralEnforcementStatus = string;
   export interface GetAccountRequest {
@@ -1098,7 +1098,7 @@ declare namespace PinpointEmail {
     SendingEnabled?: Enabled;
   }
   export type IdentityInfoList = IdentityInfo[];
-  export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string;
+  export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string&{};
   export type ImageUrl = string;
   export interface InboxPlacementTrackingOption {
     /**
@@ -1276,7 +1276,7 @@ declare namespace PinpointEmail {
     BehaviorOnMxFailure: BehaviorOnMxFailure;
   }
   export type MailFromDomainName = string;
-  export type MailFromDomainStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|string;
+  export type MailFromDomainStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|string&{};
   export type Max24HourSend = number;
   export type MaxItems = number;
   export type MaxSendRate = number;
@@ -1620,7 +1620,7 @@ declare namespace PinpointEmail {
   export type TemplateArn = string;
   export type TemplateData = string;
   export type Timestamp = Date;
-  export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string;
+  export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string&{};
   export interface TrackingOptions {
     /**
      * The domain that you want to use for tracking open and click events.
@@ -1674,7 +1674,7 @@ declare namespace PinpointEmail {
      */
     ProjectedSpam?: Volume;
   }
-  export type WarmupStatus = "IN_PROGRESS"|"DONE"|string;
+  export type WarmupStatus = "IN_PROGRESS"|"DONE"|string&{};
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

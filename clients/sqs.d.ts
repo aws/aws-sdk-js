@@ -590,8 +590,8 @@ declare namespace SQS {
   export type MessageBodySystemAttributeMap = {[key: string]: MessageSystemAttributeValue};
   export type MessageList = Message[];
   export type MessageSystemAttributeMap = {[key: string]: String};
-  export type MessageSystemAttributeName = "SenderId"|"SentTimestamp"|"ApproximateReceiveCount"|"ApproximateFirstReceiveTimestamp"|"SequenceNumber"|"MessageDeduplicationId"|"MessageGroupId"|"AWSTraceHeader"|"DeadLetterQueueSourceArn"|string;
-  export type MessageSystemAttributeNameForSends = "AWSTraceHeader"|string;
+  export type MessageSystemAttributeName = "SenderId"|"SentTimestamp"|"ApproximateReceiveCount"|"ApproximateFirstReceiveTimestamp"|"SequenceNumber"|"MessageDeduplicationId"|"MessageGroupId"|"AWSTraceHeader"|"DeadLetterQueueSourceArn"|string&{};
+  export type MessageSystemAttributeNameForSends = "AWSTraceHeader"|string&{};
   export interface MessageSystemAttributeValue {
     /**
      * Strings are Unicode with UTF-8 binary encoding. For a list of code values, see ASCII Printable Characters.
@@ -621,7 +621,7 @@ declare namespace SQS {
     QueueUrl: String;
   }
   export type QueueAttributeMap = {[key: string]: String};
-  export type QueueAttributeName = "All"|"Policy"|"VisibilityTimeout"|"MaximumMessageSize"|"MessageRetentionPeriod"|"ApproximateNumberOfMessages"|"ApproximateNumberOfMessagesNotVisible"|"CreatedTimestamp"|"LastModifiedTimestamp"|"QueueArn"|"ApproximateNumberOfMessagesDelayed"|"DelaySeconds"|"ReceiveMessageWaitTimeSeconds"|"RedrivePolicy"|"FifoQueue"|"ContentBasedDeduplication"|"KmsMasterKeyId"|"KmsDataKeyReusePeriodSeconds"|"DeduplicationScope"|"FifoThroughputLimit"|"RedriveAllowPolicy"|"SqsManagedSseEnabled"|string;
+  export type QueueAttributeName = "All"|"Policy"|"VisibilityTimeout"|"MaximumMessageSize"|"MessageRetentionPeriod"|"ApproximateNumberOfMessages"|"ApproximateNumberOfMessagesNotVisible"|"CreatedTimestamp"|"LastModifiedTimestamp"|"QueueArn"|"ApproximateNumberOfMessagesDelayed"|"DelaySeconds"|"ReceiveMessageWaitTimeSeconds"|"RedrivePolicy"|"FifoQueue"|"ContentBasedDeduplication"|"KmsMasterKeyId"|"KmsDataKeyReusePeriodSeconds"|"DeduplicationScope"|"FifoThroughputLimit"|"RedriveAllowPolicy"|"SqsManagedSseEnabled"|string&{};
   export type QueueUrlList = String[];
   export interface ReceiveMessageRequest {
     /**

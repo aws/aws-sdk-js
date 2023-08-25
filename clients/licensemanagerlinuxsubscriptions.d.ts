@@ -130,7 +130,7 @@ declare namespace LicenseManagerLinuxSubscriptions {
     UsageOperation?: String;
   }
   export type InstanceList = Instance[];
-  export type LinuxSubscriptionsDiscovery = "Enabled"|"Disabled"|string;
+  export type LinuxSubscriptionsDiscovery = "Enabled"|"Disabled"|string&{};
   export interface LinuxSubscriptionsDiscoverySettings {
     /**
      * Details if you have enabled resource discovery across your accounts in Organizations.
@@ -191,10 +191,10 @@ declare namespace LicenseManagerLinuxSubscriptions {
      */
     Subscriptions?: SubscriptionList;
   }
-  export type Operator = "Equal"|"NotEqual"|"Contains"|string;
-  export type OrganizationIntegration = "Enabled"|"Disabled"|string;
+  export type Operator = "Equal"|"NotEqual"|"Contains"|string&{};
+  export type OrganizationIntegration = "Enabled"|"Disabled"|string&{};
   export type ProductCodeList = String[];
-  export type Status = "InProgress"|"Completed"|"Successful"|"Failed"|string;
+  export type Status = "InProgress"|"Completed"|"Successful"|"Failed"|string&{};
   export type String = string;
   export type StringList = StringListMemberString[];
   export type StringListMemberString = string;

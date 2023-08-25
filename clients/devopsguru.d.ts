@@ -350,7 +350,7 @@ declare namespace DevOpsGuru {
     Type?: ResourceType;
   }
   export type AnomalyResources = AnomalyResource[];
-  export type AnomalySeverity = "LOW"|"MEDIUM"|"HIGH"|string;
+  export type AnomalySeverity = "LOW"|"MEDIUM"|"HIGH"|string&{};
   export type AnomalySource = string;
   export interface AnomalySourceDetails {
     /**
@@ -376,7 +376,7 @@ declare namespace DevOpsGuru {
      */
     SourceResourceType?: ResourceType;
   }
-  export type AnomalyStatus = "ONGOING"|"CLOSED"|string;
+  export type AnomalyStatus = "ONGOING"|"CLOSED"|string&{};
   export interface AnomalyTimeRange {
     /**
      *  The time when the anomalous behavior started. 
@@ -387,7 +387,7 @@ declare namespace DevOpsGuru {
      */
     EndTime?: Timestamp;
   }
-  export type AnomalyType = "CAUSAL"|"CONTEXTUAL"|string;
+  export type AnomalyType = "CAUSAL"|"CONTEXTUAL"|string&{};
   export type AppBoundaryKey = string;
   export type AssociatedResourceArns = ResourceArn[];
   export type AwsAccountId = string;
@@ -426,7 +426,7 @@ declare namespace DevOpsGuru {
     AnalyzedResourceCount?: AnalyzedResourceCount;
   }
   export type CloudFormationHealths = CloudFormationHealth[];
-  export type CloudWatchMetricDataStatusCode = "Complete"|"InternalError"|"PartialData"|string;
+  export type CloudWatchMetricDataStatusCode = "Complete"|"InternalError"|"PartialData"|string&{};
   export interface CloudWatchMetricsDataSummary {
     /**
      * This is a list of Amazon CloudWatch metric values at given timestamp.
@@ -484,7 +484,7 @@ declare namespace DevOpsGuru {
   export type CloudWatchMetricsMetricName = string;
   export type CloudWatchMetricsNamespace = string;
   export type CloudWatchMetricsPeriod = number;
-  export type CloudWatchMetricsStat = "Sum"|"Average"|"SampleCount"|"Minimum"|"Maximum"|"p99"|"p90"|"p50"|string;
+  export type CloudWatchMetricsStat = "Sum"|"Average"|"SampleCount"|"Minimum"|"Maximum"|"p99"|"p90"|"p50"|string&{};
   export type CloudWatchMetricsUnit = string;
   export type Cost = number;
   export interface CostEstimationResourceCollectionFilter {
@@ -498,9 +498,9 @@ declare namespace DevOpsGuru {
     Tags?: TagCostEstimationResourceCollectionFilters;
   }
   export type CostEstimationServiceResourceCount = number;
-  export type CostEstimationServiceResourceState = "ACTIVE"|"INACTIVE"|string;
+  export type CostEstimationServiceResourceState = "ACTIVE"|"INACTIVE"|string&{};
   export type CostEstimationStackNames = StackName[];
-  export type CostEstimationStatus = "ONGOING"|"COMPLETED"|string;
+  export type CostEstimationStatus = "ONGOING"|"COMPLETED"|string&{};
   export type CostEstimationTagValues = TagValue[];
   export interface CostEstimationTimeRange {
     /**
@@ -799,8 +799,8 @@ declare namespace DevOpsGuru {
      */
     Resources?: EventResources;
   }
-  export type EventClass = "INFRASTRUCTURE"|"DEPLOYMENT"|"SECURITY_CHANGE"|"CONFIG_CHANGE"|"SCHEMA_CHANGE"|string;
-  export type EventDataSource = "AWS_CLOUD_TRAIL"|"AWS_CODE_DEPLOY"|string;
+  export type EventClass = "INFRASTRUCTURE"|"DEPLOYMENT"|"SECURITY_CHANGE"|"CONFIG_CHANGE"|"SCHEMA_CHANGE"|string&{};
+  export type EventDataSource = "AWS_CLOUD_TRAIL"|"AWS_CODE_DEPLOY"|string&{};
   export type EventId = string;
   export type EventName = string;
   export interface EventResource {
@@ -822,7 +822,7 @@ declare namespace DevOpsGuru {
   export type EventResourceType = string;
   export type EventResources = EventResource[];
   export type EventSource = string;
-  export type EventSourceOptInStatus = "ENABLED"|"DISABLED"|string;
+  export type EventSourceOptInStatus = "ENABLED"|"DISABLED"|string&{};
   export interface EventSourcesConfig {
     /**
      * Information about whether DevOps Guru is configured to consume recommendations which are generated from AWS CodeGuru Profiler.
@@ -904,7 +904,7 @@ declare namespace DevOpsGuru {
      */
     Feedback?: InsightFeedbackOption;
   }
-  export type InsightFeedbackOption = "VALID_COLLECTION"|"RECOMMENDATION_USEFUL"|"ALERT_TOO_SENSITIVE"|"DATA_NOISY_ANOMALY"|"DATA_INCORRECT"|string;
+  export type InsightFeedbackOption = "VALID_COLLECTION"|"RECOMMENDATION_USEFUL"|"ALERT_TOO_SENSITIVE"|"DATA_NOISY_ANOMALY"|"DATA_INCORRECT"|string&{};
   export interface InsightHealth {
     /**
      *  The number of open proactive insights. 
@@ -922,8 +922,8 @@ declare namespace DevOpsGuru {
   export type InsightId = string;
   export type InsightName = string;
   export type InsightSeverities = InsightSeverity[];
-  export type InsightSeverity = "LOW"|"MEDIUM"|"HIGH"|string;
-  export type InsightStatus = "ONGOING"|"CLOSED"|string;
+  export type InsightSeverity = "LOW"|"MEDIUM"|"HIGH"|string&{};
+  export type InsightStatus = "ONGOING"|"CLOSED"|string&{};
   export type InsightStatuses = InsightStatus[];
   export interface InsightTimeRange {
     /**
@@ -935,7 +935,7 @@ declare namespace DevOpsGuru {
      */
     EndTime?: Timestamp;
   }
-  export type InsightType = "REACTIVE"|"PROACTIVE"|string;
+  export type InsightType = "REACTIVE"|"PROACTIVE"|string&{};
   export type KMSKeyId = string;
   export interface KMSServerSideEncryptionIntegration {
     /**
@@ -1273,7 +1273,7 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
-  export type Locale = "DE_DE"|"EN_US"|"EN_GB"|"ES_ES"|"FR_FR"|"IT_IT"|"JA_JP"|"KO_KR"|"PT_BR"|"ZH_CN"|"ZH_TW"|string;
+  export type Locale = "DE_DE"|"EN_US"|"EN_GB"|"ES_ES"|"FR_FR"|"IT_IT"|"JA_JP"|"KO_KR"|"PT_BR"|"ZH_CN"|"ZH_TW"|string&{};
   export interface LogAnomalyClass {
     /**
      *  The name of the Amazon CloudWatch log stream that the anomalous log event belongs to. A log stream is a sequence of log events that share the same source. 
@@ -1313,7 +1313,7 @@ declare namespace DevOpsGuru {
   }
   export type LogAnomalyShowcases = LogAnomalyShowcase[];
   export type LogAnomalyToken = string;
-  export type LogAnomalyType = "KEYWORD"|"KEYWORD_TOKEN"|"FORMAT"|"HTTP_CODE"|"BLOCK_FORMAT"|"NUMERICAL_POINT"|"NUMERICAL_NAN"|"NEW_FIELD_NAME"|string;
+  export type LogAnomalyType = "KEYWORD"|"KEYWORD_TOKEN"|"FORMAT"|"HTTP_CODE"|"BLOCK_FORMAT"|"NUMERICAL_POINT"|"NUMERICAL_NAN"|"NEW_FIELD_NAME"|string&{};
   export type LogEventId = string;
   export type LogGroupName = string;
   export type LogStreamName = string;
@@ -1383,7 +1383,7 @@ declare namespace DevOpsGuru {
      */
     MessageTypes?: NotificationMessageTypes;
   }
-  export type NotificationMessageType = "NEW_INSIGHT"|"CLOSED_INSIGHT"|"NEW_ASSOCIATION"|"SEVERITY_UPGRADED"|"NEW_RECOMMENDATION"|string;
+  export type NotificationMessageType = "NEW_INSIGHT"|"CLOSED_INSIGHT"|"NEW_ASSOCIATION"|"SEVERITY_UPGRADED"|"NEW_RECOMMENDATION"|string&{};
   export type NotificationMessageTypes = NotificationMessageType[];
   export type NumMetricsAnalyzed = number;
   export type NumOpenProactiveInsights = number;
@@ -1404,9 +1404,9 @@ declare namespace DevOpsGuru {
      */
     OptInStatus?: OptInStatus;
   }
-  export type OptInStatus = "ENABLED"|"DISABLED"|string;
+  export type OptInStatus = "ENABLED"|"DISABLED"|string&{};
   export type OrganizationResourceCollectionMaxResults = number;
-  export type OrganizationResourceCollectionType = "AWS_CLOUD_FORMATION"|"AWS_SERVICE"|"AWS_ACCOUNT"|"AWS_TAGS"|string;
+  export type OrganizationResourceCollectionType = "AWS_CLOUD_FORMATION"|"AWS_SERVICE"|"AWS_ACCOUNT"|"AWS_TAGS"|string&{};
   export type OrganizationalUnitId = string;
   export type OrganizationalUnitIdList = OrganizationalUnitId[];
   export type PerformanceInsightsMetricDimension = string;
@@ -2050,12 +2050,12 @@ declare namespace DevOpsGuru {
      */
     Tags?: TagCollectionFilters;
   }
-  export type ResourceCollectionType = "AWS_CLOUD_FORMATION"|"AWS_SERVICE"|"AWS_TAGS"|string;
+  export type ResourceCollectionType = "AWS_CLOUD_FORMATION"|"AWS_SERVICE"|"AWS_TAGS"|string&{};
   export type ResourceHours = number;
   export type ResourceName = string;
-  export type ResourcePermission = "FULL_PERMISSION"|"MISSING_PERMISSION"|string;
+  export type ResourcePermission = "FULL_PERMISSION"|"MISSING_PERMISSION"|string&{};
   export type ResourceType = string;
-  export type ResourceTypeFilter = "LOG_GROUPS"|"CLOUDFRONT_DISTRIBUTION"|"DYNAMODB_TABLE"|"EC2_NAT_GATEWAY"|"ECS_CLUSTER"|"ECS_SERVICE"|"EKS_CLUSTER"|"ELASTIC_BEANSTALK_ENVIRONMENT"|"ELASTIC_LOAD_BALANCER_LOAD_BALANCER"|"ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER"|"ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP"|"ELASTICACHE_CACHE_CLUSTER"|"ELASTICSEARCH_DOMAIN"|"KINESIS_STREAM"|"LAMBDA_FUNCTION"|"OPEN_SEARCH_SERVICE_DOMAIN"|"RDS_DB_INSTANCE"|"RDS_DB_CLUSTER"|"REDSHIFT_CLUSTER"|"ROUTE53_HOSTED_ZONE"|"ROUTE53_HEALTH_CHECK"|"S3_BUCKET"|"SAGEMAKER_ENDPOINT"|"SNS_TOPIC"|"SQS_QUEUE"|"STEP_FUNCTIONS_ACTIVITY"|"STEP_FUNCTIONS_STATE_MACHINE"|string;
+  export type ResourceTypeFilter = "LOG_GROUPS"|"CLOUDFRONT_DISTRIBUTION"|"DYNAMODB_TABLE"|"EC2_NAT_GATEWAY"|"ECS_CLUSTER"|"ECS_SERVICE"|"EKS_CLUSTER"|"ELASTIC_BEANSTALK_ENVIRONMENT"|"ELASTIC_LOAD_BALANCER_LOAD_BALANCER"|"ELASTIC_LOAD_BALANCING_V2_LOAD_BALANCER"|"ELASTIC_LOAD_BALANCING_V2_TARGET_GROUP"|"ELASTICACHE_CACHE_CLUSTER"|"ELASTICSEARCH_DOMAIN"|"KINESIS_STREAM"|"LAMBDA_FUNCTION"|"OPEN_SEARCH_SERVICE_DOMAIN"|"RDS_DB_INSTANCE"|"RDS_DB_CLUSTER"|"REDSHIFT_CLUSTER"|"ROUTE53_HOSTED_ZONE"|"ROUTE53_HEALTH_CHECK"|"S3_BUCKET"|"SAGEMAKER_ENDPOINT"|"SNS_TOPIC"|"SQS_QUEUE"|"STEP_FUNCTIONS_ACTIVITY"|"STEP_FUNCTIONS_STATE_MACHINE"|string&{};
   export type ResourceTypeFilters = ResourceTypeFilter[];
   export type SearchInsightsAccountIdList = AwsAccountId[];
   export interface SearchInsightsFilters {
@@ -2160,7 +2160,7 @@ declare namespace DevOpsGuru {
      */
     NextToken?: UuidNextToken;
   }
-  export type ServerSideEncryptionType = "CUSTOMER_MANAGED_KEY"|"AWS_OWNED_KMS_KEY"|string;
+  export type ServerSideEncryptionType = "CUSTOMER_MANAGED_KEY"|"AWS_OWNED_KMS_KEY"|string&{};
   export interface ServiceCollection {
     /**
      * An array of strings that each specifies the name of an Amazon Web Services service.
@@ -2206,7 +2206,7 @@ declare namespace DevOpsGuru {
      */
     KMSServerSideEncryption?: KMSServerSideEncryptionIntegration;
   }
-  export type ServiceName = "API_GATEWAY"|"APPLICATION_ELB"|"AUTO_SCALING_GROUP"|"CLOUD_FRONT"|"DYNAMO_DB"|"EC2"|"ECS"|"EKS"|"ELASTIC_BEANSTALK"|"ELASTI_CACHE"|"ELB"|"ES"|"KINESIS"|"LAMBDA"|"NAT_GATEWAY"|"NETWORK_ELB"|"RDS"|"REDSHIFT"|"ROUTE_53"|"S3"|"SAGE_MAKER"|"SNS"|"SQS"|"STEP_FUNCTIONS"|"SWF"|string;
+  export type ServiceName = "API_GATEWAY"|"APPLICATION_ELB"|"AUTO_SCALING_GROUP"|"CLOUD_FRONT"|"DYNAMO_DB"|"EC2"|"ECS"|"EKS"|"ELASTIC_BEANSTALK"|"ELASTI_CACHE"|"ELB"|"ES"|"KINESIS"|"LAMBDA"|"NAT_GATEWAY"|"NETWORK_ELB"|"RDS"|"REDSHIFT"|"ROUTE_53"|"S3"|"SAGE_MAKER"|"SNS"|"SQS"|"STEP_FUNCTIONS"|"SWF"|string&{};
   export type ServiceNames = ServiceName[];
   export interface ServiceResourceCost {
     /**
@@ -2343,7 +2343,7 @@ declare namespace DevOpsGuru {
   }
   export interface UpdateEventSourcesConfigResponse {
   }
-  export type UpdateResourceCollectionAction = "ADD"|"REMOVE"|string;
+  export type UpdateResourceCollectionAction = "ADD"|"REMOVE"|string&{};
   export interface UpdateResourceCollectionFilter {
     /**
      *  A collection of Amazon Web Services CloudFormation stacks. You can specify up to 500 Amazon Web Services CloudFormation stacks. 

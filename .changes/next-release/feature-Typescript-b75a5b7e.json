@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "TypeScript",
+  "description": "Adds the `&{}` for better string literal typings"
+}

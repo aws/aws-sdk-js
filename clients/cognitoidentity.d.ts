@@ -200,7 +200,7 @@ declare namespace CognitoIdentity {
   export type ARNString = string;
   export type AccessKeyString = string;
   export type AccountId = string;
-  export type AmbiguousRoleResolutionType = "AuthenticatedRole"|"Deny"|string;
+  export type AmbiguousRoleResolutionType = "AuthenticatedRole"|"Deny"|string&{};
   export type ClaimName = string;
   export type ClaimValue = string;
   export type ClassicFlow = boolean;
@@ -312,7 +312,7 @@ declare namespace CognitoIdentity {
   export type DeveloperProviderName = string;
   export type DeveloperUserIdentifier = string;
   export type DeveloperUserIdentifierList = DeveloperUserIdentifier[];
-  export type ErrorCode = "AccessDenied"|"InternalServerError"|string;
+  export type ErrorCode = "AccessDenied"|"InternalServerError"|string&{};
   export interface GetCredentialsForIdentityInput {
     /**
      * A unique identifier in the format REGION:GUID.
@@ -661,7 +661,7 @@ declare namespace CognitoIdentity {
      */
     RoleARN: ARNString;
   }
-  export type MappingRuleMatchType = "Equals"|"Contains"|"StartsWith"|"NotEqual"|string;
+  export type MappingRuleMatchType = "Equals"|"Contains"|"StartsWith"|"NotEqual"|string&{};
   export type MappingRulesList = MappingRule[];
   export interface MergeDeveloperIdentitiesInput {
     /**
@@ -709,7 +709,7 @@ declare namespace CognitoIdentity {
     RulesConfiguration?: RulesConfigurationType;
   }
   export type RoleMappingMap = {[key: string]: RoleMapping};
-  export type RoleMappingType = "Token"|"Rules"|string;
+  export type RoleMappingType = "Token"|"Rules"|string&{};
   export type RoleType = string;
   export type RolesMap = {[key: string]: ARNString};
   export interface RulesConfigurationType {

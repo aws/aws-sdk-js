@@ -115,7 +115,7 @@ declare namespace ConnectContactLens {
     Categories?: Categories;
   }
   export type RealtimeContactAnalysisSegments = RealtimeContactAnalysisSegment[];
-  export type SentimentValue = "POSITIVE"|"NEUTRAL"|"NEGATIVE"|string;
+  export type SentimentValue = "POSITIVE"|"NEUTRAL"|"NEGATIVE"|string&{};
   export interface Transcript {
     /**
      * The identifier of the transcript.

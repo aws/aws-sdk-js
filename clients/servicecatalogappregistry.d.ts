@@ -812,7 +812,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     errorMessage?: String;
   }
-  export type ResourceGroupState = "CREATING"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATING"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|string;
+  export type ResourceGroupState = "CREATING"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATING"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|string&{};
   export interface ResourceInfo {
     /**
      * The name of the resource.
@@ -838,11 +838,11 @@ declare namespace ServiceCatalogAppRegistry {
     resourceGroup?: ResourceGroup;
   }
   export type ResourceSpecifier = string;
-  export type ResourceType = "CFN_STACK"|"RESOURCE_TAG_VALUE"|string;
+  export type ResourceType = "CFN_STACK"|"RESOURCE_TAG_VALUE"|string&{};
   export type Resources = ResourceInfo[];
   export type StackArn = string;
   export type String = string;
-  export type SyncAction = "START_SYNC"|"NO_ACTION"|string;
+  export type SyncAction = "START_SYNC"|"NO_ACTION"|string&{};
   export interface SyncResourceRequest {
     /**
      * The type of resource of which the application will be associated.

@@ -802,10 +802,10 @@ declare namespace LexModelsV2 {
      */
     operator: AggregatedUtterancesFilterOperator;
   }
-  export type AggregatedUtterancesFilterName = "Utterance"|string;
-  export type AggregatedUtterancesFilterOperator = "CO"|"EQ"|string;
+  export type AggregatedUtterancesFilterName = "Utterance"|string&{};
+  export type AggregatedUtterancesFilterOperator = "CO"|"EQ"|string&{};
   export type AggregatedUtterancesFilters = AggregatedUtterancesFilter[];
-  export type AggregatedUtterancesSortAttribute = "HitCount"|"MissedCount"|string;
+  export type AggregatedUtterancesSortAttribute = "HitCount"|"MissedCount"|string&{};
   export interface AggregatedUtterancesSortBy {
     /**
      * The utterance attribute to sort by.
@@ -855,7 +855,7 @@ declare namespace LexModelsV2 {
   }
   export type AmazonResourceName = string;
   export type AnalyticsBinByList = AnalyticsBinBySpecification[];
-  export type AnalyticsBinByName = "ConversationStartTime"|"UtteranceTimestamp"|string;
+  export type AnalyticsBinByName = "ConversationStartTime"|"UtteranceTimestamp"|string&{};
   export interface AnalyticsBinBySpecification {
     /**
      * Specifies the time metric by which to bin the analytics data.
@@ -883,12 +883,12 @@ declare namespace LexModelsV2 {
   export type AnalyticsBinKeys = AnalyticsBinKey[];
   export type AnalyticsBinValue = number;
   export type AnalyticsChannel = string;
-  export type AnalyticsCommonFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|string;
-  export type AnalyticsFilterOperator = "EQ"|"GT"|"LT"|string;
+  export type AnalyticsCommonFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|string&{};
+  export type AnalyticsFilterOperator = "EQ"|"GT"|"LT"|string&{};
   export type AnalyticsFilterValue = string;
   export type AnalyticsFilterValues = AnalyticsFilterValue[];
   export type AnalyticsGroupByValue = string;
-  export type AnalyticsIntentField = "IntentName"|"IntentEndState"|"IntentLevel"|string;
+  export type AnalyticsIntentField = "IntentName"|"IntentEndState"|"IntentLevel"|string&{};
   export interface AnalyticsIntentFilter {
     /**
      * The category by which to filter the intents. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.    SessionId – The identifier of the session with the bot.    OriginatingRequestId – The identifier of the first request in a session.    IntentName – The name of the intent.    IntentEndState – The final state of the intent.  
@@ -903,7 +903,7 @@ declare namespace LexModelsV2 {
      */
     values: AnalyticsFilterValues;
   }
-  export type AnalyticsIntentFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"IntentName"|"IntentEndState"|string;
+  export type AnalyticsIntentFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"IntentName"|"IntentEndState"|string&{};
   export type AnalyticsIntentFilters = AnalyticsIntentFilter[];
   export interface AnalyticsIntentGroupByKey {
     /**
@@ -937,7 +937,7 @@ declare namespace LexModelsV2 {
      */
     order?: AnalyticsSortOrder;
   }
-  export type AnalyticsIntentMetricName = "Count"|"Success"|"Failure"|"Switched"|"Dropped"|string;
+  export type AnalyticsIntentMetricName = "Count"|"Success"|"Failure"|"Switched"|"Dropped"|string&{};
   export interface AnalyticsIntentMetricResult {
     /**
      * The metric that you requested. See Key definitions for more details about these metrics.    Count – The number of times the intent was invoked.    Success – The number of times the intent succeeded.    Failure – The number of times the intent failed.    Switched – The number of times there was a switch to a different intent.    Dropped – The number of times the user dropped the intent.  
@@ -992,7 +992,7 @@ declare namespace LexModelsV2 {
     metricsResults?: AnalyticsIntentMetricResults;
   }
   export type AnalyticsIntentResults = AnalyticsIntentResult[];
-  export type AnalyticsIntentStageField = "IntentStageName"|"SwitchedToIntent"|string;
+  export type AnalyticsIntentStageField = "IntentStageName"|"SwitchedToIntent"|string&{};
   export interface AnalyticsIntentStageFilter {
     /**
      * The category by which to filter the intent stages. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.    SessionId – The identifier of the session with the bot.    OriginatingRequestId – The identifier of the first request in a session.    IntentName – The name of the intent.    IntentStageName – The stage in the intent.  
@@ -1007,7 +1007,7 @@ declare namespace LexModelsV2 {
      */
     values: AnalyticsFilterValues;
   }
-  export type AnalyticsIntentStageFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"IntentName"|"IntentStageName"|string;
+  export type AnalyticsIntentStageFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"IntentName"|"IntentStageName"|string&{};
   export type AnalyticsIntentStageFilters = AnalyticsIntentStageFilter[];
   export interface AnalyticsIntentStageGroupByKey {
     /**
@@ -1041,7 +1041,7 @@ declare namespace LexModelsV2 {
      */
     order?: AnalyticsSortOrder;
   }
-  export type AnalyticsIntentStageMetricName = "Count"|"Success"|"Failed"|"Dropped"|"Retry"|string;
+  export type AnalyticsIntentStageMetricName = "Count"|"Success"|"Failed"|"Dropped"|"Retry"|string&{};
   export interface AnalyticsIntentStageMetricResult {
     /**
      * The metric that you requested.    Count – The number of times the intent stage occurred.    Success – The number of times the intent stage succeeded.    Failure – The number of times the intent stage failed.    Dropped – The number of times the user dropped the intent stage.    Retry – The number of times the bot tried to elicit a response from the user at this stage.  
@@ -1073,14 +1073,14 @@ declare namespace LexModelsV2 {
     metricsResults?: AnalyticsIntentStageMetricResults;
   }
   export type AnalyticsIntentStageResults = AnalyticsIntentStageResult[];
-  export type AnalyticsInterval = "OneHour"|"OneDay"|string;
+  export type AnalyticsInterval = "OneHour"|"OneDay"|string&{};
   export type AnalyticsLongValue = number;
-  export type AnalyticsMetricStatistic = "Sum"|"Avg"|"Max"|string;
+  export type AnalyticsMetricStatistic = "Sum"|"Avg"|"Max"|string&{};
   export type AnalyticsMetricValue = number;
-  export type AnalyticsModality = "Speech"|"Text"|"DTMF"|"MultiMode"|string;
+  export type AnalyticsModality = "Speech"|"Text"|"DTMF"|"MultiMode"|string&{};
   export type AnalyticsNodeCount = number;
   export type AnalyticsNodeLevel = number;
-  export type AnalyticsNodeType = "Inner"|"Exit"|string;
+  export type AnalyticsNodeType = "Inner"|"Exit"|string&{};
   export type AnalyticsOriginatingRequestId = string;
   export type AnalyticsPath = string;
   export interface AnalyticsPathFilter {
@@ -1098,7 +1098,7 @@ declare namespace LexModelsV2 {
     values: AnalyticsFilterValues;
   }
   export type AnalyticsPathFilters = AnalyticsPathFilter[];
-  export type AnalyticsSessionField = "ConversationEndState"|"LocaleId"|string;
+  export type AnalyticsSessionField = "ConversationEndState"|"LocaleId"|string&{};
   export interface AnalyticsSessionFilter {
     /**
      * The category by which to filter the sessions. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.    Duration – The duration of the session.    conversationEndState – The final state of the session.    SessionId – The identifier of the session with the bot.    OriginatingRequestId – The identifier of the first request in a session.    IntentPath – The order of intents taken in a session.  
@@ -1113,7 +1113,7 @@ declare namespace LexModelsV2 {
      */
     values: AnalyticsFilterValues;
   }
-  export type AnalyticsSessionFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"Duration"|"ConversationEndState"|"SessionId"|"OriginatingRequestId"|"IntentPath"|string;
+  export type AnalyticsSessionFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"Duration"|"ConversationEndState"|"SessionId"|"OriginatingRequestId"|"IntentPath"|string&{};
   export type AnalyticsSessionFilters = AnalyticsSessionFilter[];
   export interface AnalyticsSessionGroupByKey {
     /**
@@ -1148,7 +1148,7 @@ declare namespace LexModelsV2 {
      */
     order?: AnalyticsSortOrder;
   }
-  export type AnalyticsSessionMetricName = "Count"|"Success"|"Failure"|"Dropped"|"Duration"|"TurnsPerConversation"|"Concurrency"|string;
+  export type AnalyticsSessionMetricName = "Count"|"Success"|"Failure"|"Dropped"|"Duration"|"TurnsPerConversation"|"Concurrency"|string&{};
   export interface AnalyticsSessionMetricResult {
     /**
      * The metric that you requested.    Count – The number of sessions.    Success – The number of sessions that succeeded.    Failure – The number of sessions that failed.    Dropped – The number of sessions that the user dropped.    Duration – The duration of sessions.    TurnPersession – The number of turns in the sessions.    Concurrency – The number of sessions occurring in the same period of time.  
@@ -1180,15 +1180,15 @@ declare namespace LexModelsV2 {
     metricsResults?: AnalyticsSessionMetricResults;
   }
   export type AnalyticsSessionResults = AnalyticsSessionResult[];
-  export type AnalyticsSessionSortByName = "ConversationStartTime"|"NumberOfTurns"|"Duration"|string;
-  export type AnalyticsSortOrder = "Ascending"|"Descending"|string;
+  export type AnalyticsSessionSortByName = "ConversationStartTime"|"NumberOfTurns"|"Duration"|string&{};
+  export type AnalyticsSortOrder = "Ascending"|"Descending"|string&{};
   export interface AnalyticsUtteranceAttribute {
     /**
      * An attribute to return. The only available attribute is the intent that the bot mapped the utterance to.
      */
     name: AnalyticsUtteranceAttributeName;
   }
-  export type AnalyticsUtteranceAttributeName = "LastUsedIntent"|string;
+  export type AnalyticsUtteranceAttributeName = "LastUsedIntent"|string&{};
   export interface AnalyticsUtteranceAttributeResult {
     /**
      * The intent that the bot mapped the utterance to.
@@ -1197,7 +1197,7 @@ declare namespace LexModelsV2 {
   }
   export type AnalyticsUtteranceAttributeResults = AnalyticsUtteranceAttributeResult[];
   export type AnalyticsUtteranceAttributes = AnalyticsUtteranceAttribute[];
-  export type AnalyticsUtteranceField = "UtteranceText"|"UtteranceState"|string;
+  export type AnalyticsUtteranceField = "UtteranceText"|"UtteranceState"|string&{};
   export interface AnalyticsUtteranceFilter {
     /**
      * The category by which to filter the utterances. The descriptions for each option are as follows:    BotAlias – The name of the bot alias.    BotVersion – The version of the bot.    LocaleId – The locale of the bot.    Modality – The modality of the session with the bot (audio, DTMF, or text).    Channel – The channel that the bot is integrated with.    SessionId – The identifier of the session with the bot.    OriginatingRequestId – The identifier of the first request in a session.    UtteranceState – The state of the utterance.    UtteranceText – The text in the utterance.  
@@ -1212,7 +1212,7 @@ declare namespace LexModelsV2 {
      */
     values: AnalyticsFilterValues;
   }
-  export type AnalyticsUtteranceFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"UtteranceState"|"UtteranceText"|string;
+  export type AnalyticsUtteranceFilterName = "BotAliasId"|"BotVersion"|"LocaleId"|"Modality"|"Channel"|"SessionId"|"OriginatingRequestId"|"UtteranceState"|"UtteranceText"|string&{};
   export type AnalyticsUtteranceFilters = AnalyticsUtteranceFilter[];
   export interface AnalyticsUtteranceGroupByKey {
     /**
@@ -1246,7 +1246,7 @@ declare namespace LexModelsV2 {
      */
     order?: AnalyticsSortOrder;
   }
-  export type AnalyticsUtteranceMetricName = "Count"|"Missed"|"Detected"|"UtteranceTimestamp"|string;
+  export type AnalyticsUtteranceMetricName = "Count"|"Missed"|"Detected"|"UtteranceTimestamp"|string&{};
   export interface AnalyticsUtteranceMetricResult {
     /**
      * The metric that you requested.    Count – The number of utterances.    Missed – The number of utterances that Amazon Lex failed to recognize.    Detected – The number of utterances that Amazon Lex managed to detect.    UtteranceTimestamp – The date and time of the utterance.  
@@ -1282,7 +1282,7 @@ declare namespace LexModelsV2 {
     attributeResults?: AnalyticsUtteranceAttributeResults;
   }
   export type AnalyticsUtteranceResults = AnalyticsUtteranceResult[];
-  export type AnalyticsUtteranceSortByName = "UtteranceTimestamp"|string;
+  export type AnalyticsUtteranceSortByName = "UtteranceTimestamp"|string&{};
   export interface AssociatedTranscript {
     /**
      * The content of the transcript that meets the search filter criteria. For the JSON format of the transcript, see Output transcript format.
@@ -1299,7 +1299,7 @@ declare namespace LexModelsV2 {
      */
     values: FilterValues;
   }
-  export type AssociatedTranscriptFilterName = "IntentId"|"SlotTypeId"|string;
+  export type AssociatedTranscriptFilterName = "IntentId"|"SlotTypeId"|string&{};
   export type AssociatedTranscriptFilters = AssociatedTranscriptFilter[];
   export type AssociatedTranscriptList = AssociatedTranscript[];
   export type AttachmentTitle = string;
@@ -1333,7 +1333,7 @@ declare namespace LexModelsV2 {
     destination: AudioLogDestination;
   }
   export type AudioLogSettingsList = AudioLogSetting[];
-  export type AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"|string;
+  export type AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"|string&{};
   export interface AudioSpecification {
     /**
      * Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.
@@ -1493,7 +1493,7 @@ declare namespace LexModelsV2 {
   }
   export type BotAliasLocaleSettingsMap = {[key: string]: BotAliasLocaleSettings};
   export type BotAliasName = string;
-  export type BotAliasStatus = "Creating"|"Available"|"Deleting"|"Failed"|string;
+  export type BotAliasStatus = "Creating"|"Available"|"Deleting"|"Failed"|string&{};
   export interface BotAliasSummary {
     /**
      * The unique identifier assigned to the bot alias. You can use this ID to get detailed information about the alias using the DescribeBotAlias operation.
@@ -1563,8 +1563,8 @@ declare namespace LexModelsV2 {
      */
     operator: BotFilterOperator;
   }
-  export type BotFilterName = "BotName"|"BotType"|string;
-  export type BotFilterOperator = "CO"|"EQ"|"NE"|string;
+  export type BotFilterName = "BotName"|"BotType"|string&{};
+  export type BotFilterOperator = "CO"|"EQ"|"NE"|string&{};
   export type BotFilters = BotFilter[];
   export interface BotImportSpecification {
     /**
@@ -1617,8 +1617,8 @@ declare namespace LexModelsV2 {
      */
     operator: BotLocaleFilterOperator;
   }
-  export type BotLocaleFilterName = "BotLocaleName"|string;
-  export type BotLocaleFilterOperator = "CO"|"EQ"|string;
+  export type BotLocaleFilterName = "BotLocaleName"|string&{};
+  export type BotLocaleFilterOperator = "CO"|"EQ"|string&{};
   export type BotLocaleFilters = BotLocaleFilter[];
   export interface BotLocaleHistoryEvent {
     /**
@@ -1651,7 +1651,7 @@ declare namespace LexModelsV2 {
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     voiceSettings?: VoiceSettings;
   }
-  export type BotLocaleSortAttribute = "BotLocaleName"|string;
+  export type BotLocaleSortAttribute = "BotLocaleName"|string&{};
   export interface BotLocaleSortBy {
     /**
      * The bot locale attribute to sort by.
@@ -1662,7 +1662,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type BotLocaleStatus = "Creating"|"Building"|"Built"|"ReadyExpressTesting"|"Failed"|"Deleting"|"NotBuilt"|"Importing"|"Processing"|string;
+  export type BotLocaleStatus = "Creating"|"Building"|"Built"|"ReadyExpressTesting"|"Failed"|"Deleting"|"NotBuilt"|"Importing"|"Processing"|string&{};
   export interface BotLocaleSummary {
     /**
      * The language and locale of the bot locale.
@@ -1737,7 +1737,7 @@ declare namespace LexModelsV2 {
      */
     statistics?: BotRecommendationResultStatistics;
   }
-  export type BotRecommendationStatus = "Processing"|"Deleting"|"Deleted"|"Downloading"|"Updating"|"Available"|"Failed"|"Stopping"|"Stopped"|string;
+  export type BotRecommendationStatus = "Processing"|"Deleting"|"Deleted"|"Downloading"|"Updating"|"Available"|"Failed"|"Stopping"|"Stopped"|string&{};
   export interface BotRecommendationSummary {
     /**
      * The status of the bot recommendation. If the status is Failed, then the reasons for the failure are listed in the failureReasons field. 
@@ -1757,7 +1757,7 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type BotRecommendationSummaryList = BotRecommendationSummary[];
-  export type BotSortAttribute = "BotName"|string;
+  export type BotSortAttribute = "BotName"|string&{};
   export interface BotSortBy {
     /**
      * The attribute to use to sort the list of bots.
@@ -1768,7 +1768,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type BotStatus = "Creating"|"Available"|"Inactive"|"Deleting"|"Failed"|"Versioning"|"Importing"|"Updating"|string;
+  export type BotStatus = "Creating"|"Available"|"Inactive"|"Deleting"|"Failed"|"Versioning"|"Importing"|"Updating"|string&{};
   export interface BotSummary {
     /**
      * The unique identifier assigned to the bot. Use this ID to get detailed information about the bot with the DescribeBot operation.
@@ -1800,7 +1800,7 @@ declare namespace LexModelsV2 {
     botType?: BotType;
   }
   export type BotSummaryList = BotSummary[];
-  export type BotType = "Bot"|"BotNetwork"|string;
+  export type BotType = "Bot"|"BotNetwork"|string&{};
   export type BotVersion = string;
   export interface BotVersionLocaleDetails {
     /**
@@ -1809,7 +1809,7 @@ declare namespace LexModelsV2 {
     sourceBotVersion: BotVersion;
   }
   export type BotVersionLocaleSpecification = {[key: string]: BotVersionLocaleDetails};
-  export type BotVersionSortAttribute = "BotVersion"|string;
+  export type BotVersionSortAttribute = "BotVersion"|string&{};
   export interface BotVersionSortBy {
     /**
      * The attribute to use to sort the list of versions.
@@ -1880,7 +1880,7 @@ declare namespace LexModelsV2 {
      */
     lastBuildSubmittedDateTime?: Timestamp;
   }
-  export type BuiltInIntentSortAttribute = "IntentSignature"|string;
+  export type BuiltInIntentSortAttribute = "IntentSignature"|string&{};
   export interface BuiltInIntentSortBy {
     /**
      * The attribute to use to sort the list of built-in intents.
@@ -1903,7 +1903,7 @@ declare namespace LexModelsV2 {
   }
   export type BuiltInIntentSummaryList = BuiltInIntentSummary[];
   export type BuiltInOrCustomSlotTypeId = string;
-  export type BuiltInSlotTypeSortAttribute = "SlotTypeSignature"|string;
+  export type BuiltInSlotTypeSortAttribute = "SlotTypeSignature"|string&{};
   export interface BuiltInSlotTypeSortBy {
     /**
      * The attribute to use to sort the list of built-in intents.
@@ -2006,7 +2006,7 @@ declare namespace LexModelsV2 {
   export type ConfidenceThreshold = number;
   export type ContextTimeToLiveInSeconds = number;
   export type ContextTurnsToLive = number;
-  export type ConversationEndState = "Success"|"Failure"|"Dropped"|string;
+  export type ConversationEndState = "Success"|"Failure"|"Dropped"|string&{};
   export interface ConversationLevelIntentClassificationResultItem {
     /**
      * The intent name used in the evaluation of intent level success or failure.
@@ -2120,7 +2120,7 @@ declare namespace LexModelsV2 {
      */
     inputMode: ConversationLogsInputModeFilter;
   }
-  export type ConversationLogsInputModeFilter = "Speech"|"Text"|string;
+  export type ConversationLogsInputModeFilter = "Speech"|"Text"|string&{};
   export type Count = number;
   export interface CreateBotAliasRequest {
     /**
@@ -2909,7 +2909,7 @@ declare namespace LexModelsV2 {
     displayAs?: Phrase;
   }
   export type CustomVocabularyItems = CustomVocabularyItem[];
-  export type CustomVocabularyStatus = "Ready"|"Deleting"|"Exporting"|"Importing"|"Creating"|string;
+  export type CustomVocabularyStatus = "Ready"|"Deleting"|"Exporting"|"Importing"|"Creating"|string&{};
   export type DTMFCharacter = string;
   export interface DTMFSpecification {
     /**
@@ -4174,7 +4174,7 @@ declare namespace LexModelsV2 {
      */
     suppressNextMessage?: BoxedBoolean;
   }
-  export type DialogActionType = "ElicitIntent"|"StartIntent"|"ElicitSlot"|"EvaluateConditional"|"InvokeDialogCodeHook"|"ConfirmIntent"|"FulfillIntent"|"CloseIntent"|"EndConversation"|string;
+  export type DialogActionType = "ElicitIntent"|"StartIntent"|"ElicitSlot"|"EvaluateConditional"|"InvokeDialogCodeHook"|"ConfirmIntent"|"FulfillIntent"|"CloseIntent"|"EndConversation"|string&{};
   export interface DialogCodeHookInvocationSetting {
     /**
      * Indicates whether a Lambda function should be invoked for the dialog.
@@ -4208,7 +4208,7 @@ declare namespace LexModelsV2 {
     sessionAttributes?: StringMap;
   }
   export type DraftBotVersion = string;
-  export type Effect = "Allow"|"Deny"|string;
+  export type Effect = "Allow"|"Deny"|string&{};
   export interface ElicitationCodeHookInvocationSetting {
     /**
      * Indicates whether a Lambda function should be invoked for the dialog.
@@ -4233,7 +4233,7 @@ declare namespace LexModelsV2 {
      */
     associatedTranscriptsPassword?: FilePassword;
   }
-  export type ErrorCode = "DUPLICATE_INPUT"|"RESOURCE_DOES_NOT_EXIST"|"RESOURCE_ALREADY_EXISTS"|"INTERNAL_SERVER_FAILURE"|string;
+  export type ErrorCode = "DUPLICATE_INPUT"|"RESOURCE_DOES_NOT_EXIST"|"RESOURCE_ALREADY_EXISTS"|"INTERNAL_SERVER_FAILURE"|string&{};
   export type ErrorMessage = string;
   export interface ExecutionErrorDetails {
     /**
@@ -4259,8 +4259,8 @@ declare namespace LexModelsV2 {
      */
     operator: ExportFilterOperator;
   }
-  export type ExportFilterName = "ExportResourceType"|string;
-  export type ExportFilterOperator = "CO"|"EQ"|string;
+  export type ExportFilterName = "ExportResourceType"|string&{};
+  export type ExportFilterOperator = "CO"|"EQ"|string&{};
   export type ExportFilters = ExportFilter[];
   export interface ExportResourceSpecification {
     /**
@@ -4280,7 +4280,7 @@ declare namespace LexModelsV2 {
      */
     testSetExportSpecification?: TestSetExportSpecification;
   }
-  export type ExportSortAttribute = "LastUpdatedDateTime"|string;
+  export type ExportSortAttribute = "LastUpdatedDateTime"|string&{};
   export interface ExportSortBy {
     /**
      * The export field to use for sorting.
@@ -4291,7 +4291,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type ExportStatus = "InProgress"|"Completed"|"Failed"|"Deleting"|string;
+  export type ExportStatus = "InProgress"|"Completed"|"Failed"|"Deleting"|string&{};
   export interface ExportSummary {
     /**
      * The unique identifier that Amazon Lex assigned to the export.
@@ -4468,7 +4468,7 @@ declare namespace LexModelsV2 {
      */
     buttons?: ButtonsList;
   }
-  export type ImportExportFileFormat = "LexJson"|"TSV"|"CSV"|string;
+  export type ImportExportFileFormat = "LexJson"|"TSV"|"CSV"|string&{};
   export type ImportExportFilePassword = string;
   export interface ImportFilter {
     /**
@@ -4484,8 +4484,8 @@ declare namespace LexModelsV2 {
      */
     operator: ImportFilterOperator;
   }
-  export type ImportFilterName = "ImportResourceType"|string;
-  export type ImportFilterOperator = "CO"|"EQ"|string;
+  export type ImportFilterName = "ImportResourceType"|string&{};
+  export type ImportFilterOperator = "CO"|"EQ"|string&{};
   export type ImportFilters = ImportFilter[];
   export interface ImportResourceSpecification {
     /**
@@ -4502,8 +4502,8 @@ declare namespace LexModelsV2 {
      */
     testSetImportResourceSpecification?: TestSetImportResourceSpecification;
   }
-  export type ImportResourceType = "Bot"|"BotLocale"|"CustomVocabulary"|"TestSet"|string;
-  export type ImportSortAttribute = "LastUpdatedDateTime"|string;
+  export type ImportResourceType = "Bot"|"BotLocale"|"CustomVocabulary"|"TestSet"|string&{};
+  export type ImportSortAttribute = "LastUpdatedDateTime"|string&{};
   export interface ImportSortBy {
     /**
      * The export field to use for sorting.
@@ -4514,7 +4514,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type ImportStatus = "InProgress"|"Completed"|"Failed"|"Deleting"|string;
+  export type ImportStatus = "InProgress"|"Completed"|"Failed"|"Deleting"|string&{};
   export interface ImportSummary {
     /**
      * The unique identifier that Amazon Lex assigned to the import.
@@ -4693,8 +4693,8 @@ declare namespace LexModelsV2 {
      */
     operator: IntentFilterOperator;
   }
-  export type IntentFilterName = "IntentName"|string;
-  export type IntentFilterOperator = "CO"|"EQ"|string;
+  export type IntentFilterName = "IntentName"|string&{};
+  export type IntentFilterOperator = "CO"|"EQ"|string&{};
   export type IntentFilters = IntentFilter[];
   export interface IntentLevelSlotResolutionTestResultItem {
     /**
@@ -4728,7 +4728,7 @@ declare namespace LexModelsV2 {
     slots?: SlotValueOverrideMap;
   }
   export type IntentSignature = string;
-  export type IntentSortAttribute = "IntentName"|"LastUpdatedDateTime"|string;
+  export type IntentSortAttribute = "IntentName"|"LastUpdatedDateTime"|string&{};
   export interface IntentSortBy {
     /**
      * The attribute to use to sort the list of intents.
@@ -4739,7 +4739,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type IntentState = "Failed"|"Fulfilled"|"InProgress"|"ReadyForFulfillment"|"Waiting"|"FulfillmentInProgress"|string;
+  export type IntentState = "Failed"|"Fulfilled"|"InProgress"|"ReadyForFulfillment"|"Waiting"|"FulfillmentInProgress"|string&{};
   export interface IntentStatistics {
     /**
      * The number of recommended intents associated with the bot recommendation.
@@ -5947,7 +5947,7 @@ declare namespace LexModelsV2 {
   export type LogPrefix = string;
   export type MaxResults = number;
   export type MaxUtteranceDigits = number;
-  export type MergeStrategy = "Overwrite"|"FailOnConflict"|"Append"|string;
+  export type MergeStrategy = "Overwrite"|"FailOnConflict"|"Append"|string&{};
   export interface Message {
     /**
      * A message in plain text format.
@@ -5977,7 +5977,7 @@ declare namespace LexModelsV2 {
     variations?: MessageVariationsList;
   }
   export type MessageGroupsList = MessageGroup[];
-  export type MessageSelectionStrategy = "Random"|"Ordered"|string;
+  export type MessageSelectionStrategy = "Random"|"Ordered"|string&{};
   export type MessageVariationsList = Message[];
   export type MissedCount = number;
   export interface MultipleValuesSetting {
@@ -6011,7 +6011,7 @@ declare namespace LexModelsV2 {
      */
     obfuscationSettingType: ObfuscationSettingType;
   }
-  export type ObfuscationSettingType = "None"|"DefaultObfuscation"|string;
+  export type ObfuscationSettingType = "None"|"DefaultObfuscation"|string&{};
   export type ObjectPrefix = string;
   export type ObjectPrefixes = ObjectPrefix[];
   export type Operation = string;
@@ -6154,7 +6154,7 @@ declare namespace LexModelsV2 {
   export type PrincipalArn = string;
   export type PrincipalList = Principal[];
   export type PriorityValue = number;
-  export type PromptAttempt = "Initial"|"Retry1"|"Retry2"|"Retry3"|"Retry4"|"Retry5"|string;
+  export type PromptAttempt = "Initial"|"Retry1"|"Retry2"|"Retry3"|"Retry4"|"Retry5"|string&{};
   export interface PromptAttemptSpecification {
     /**
      * Indicates whether the user can interrupt a speech prompt attempt from the bot.
@@ -6388,7 +6388,7 @@ declare namespace LexModelsV2 {
      */
     totalResults?: MaxResults;
   }
-  export type SearchOrder = "Ascending"|"Descending"|string;
+  export type SearchOrder = "Ascending"|"Descending"|string&{};
   export interface SentimentAnalysisSettings {
     /**
      * Sets whether Amazon Lex uses Amazon Comprehend to detect the sentiment of user utterances.
@@ -6492,7 +6492,7 @@ declare namespace LexModelsV2 {
      */
     elicitationCodeHook?: ElicitationCodeHookInvocationSetting;
   }
-  export type SlotConstraint = "Required"|"Optional"|string;
+  export type SlotConstraint = "Required"|"Optional"|string&{};
   export interface SlotDefaultValue {
     /**
      * The default value to use when a user doesn't provide a value for a slot.
@@ -6521,8 +6521,8 @@ declare namespace LexModelsV2 {
      */
     operator: SlotFilterOperator;
   }
-  export type SlotFilterName = "SlotName"|string;
-  export type SlotFilterOperator = "CO"|"EQ"|string;
+  export type SlotFilterName = "SlotName"|string&{};
+  export type SlotFilterOperator = "CO"|"EQ"|string&{};
   export type SlotFilters = SlotFilter[];
   export type SlotHintsIntentMap = {[key: string]: SlotHintsSlotMap};
   export type SlotHintsSlotMap = {[key: string]: RuntimeHintDetails};
@@ -6562,8 +6562,8 @@ declare namespace LexModelsV2 {
     slotMatchResultCounts: TestResultMatchStatusCountMap;
   }
   export type SlotResolutionTestResultItems = SlotResolutionTestResultItem[];
-  export type SlotShape = "Scalar"|"List"|string;
-  export type SlotSortAttribute = "SlotName"|"LastUpdatedDateTime"|string;
+  export type SlotShape = "Scalar"|"List"|string&{};
+  export type SlotSortAttribute = "SlotName"|"LastUpdatedDateTime"|string&{};
   export interface SlotSortBy {
     /**
      * The attribute to use to sort the list.
@@ -6605,7 +6605,7 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type SlotSummaryList = SlotSummary[];
-  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|"Composite"|string;
+  export type SlotTypeCategory = "Custom"|"Extended"|"ExternalGrammar"|"Composite"|string&{};
   export interface SlotTypeFilter {
     /**
      * The name of the field to use for filtering.
@@ -6620,11 +6620,11 @@ declare namespace LexModelsV2 {
      */
     operator: SlotTypeFilterOperator;
   }
-  export type SlotTypeFilterName = "SlotTypeName"|"ExternalSourceType"|string;
-  export type SlotTypeFilterOperator = "CO"|"EQ"|string;
+  export type SlotTypeFilterName = "SlotTypeName"|"ExternalSourceType"|string&{};
+  export type SlotTypeFilterOperator = "CO"|"EQ"|string&{};
   export type SlotTypeFilters = SlotTypeFilter[];
   export type SlotTypeSignature = string;
-  export type SlotTypeSortAttribute = "SlotTypeName"|"LastUpdatedDateTime"|string;
+  export type SlotTypeSortAttribute = "SlotTypeName"|"LastUpdatedDateTime"|string&{};
   export interface SlotTypeSortBy {
     /**
      * The attribute to use to sort the list of slot types.
@@ -6729,7 +6729,7 @@ declare namespace LexModelsV2 {
      */
     pattern: RegexPattern;
   }
-  export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|"Concatenation"|string;
+  export type SlotValueResolutionStrategy = "OriginalValue"|"TopResolution"|"Concatenation"|string&{};
   export interface SlotValueSelectionSetting {
     /**
      * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:    ORIGINAL_VALUE - Returns the value entered by the user, if the user value is similar to the slot value.    TOP_RESOLUTION - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is ORIGINAL_VALUE.
@@ -6745,7 +6745,7 @@ declare namespace LexModelsV2 {
     advancedRecognitionSetting?: AdvancedRecognitionSetting;
   }
   export type SlotValues = SlotValueOverride[];
-  export type SortOrder = "Ascending"|"Descending"|string;
+  export type SortOrder = "Ascending"|"Descending"|string&{};
   export interface Specifications {
     /**
      * The unique identifier assigned to the slot type.
@@ -7071,8 +7071,8 @@ declare namespace LexModelsV2 {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
-  export type TestExecutionApiMode = "Streaming"|"NonStreaming"|string;
-  export type TestExecutionModality = "Text"|"Audio"|string;
+  export type TestExecutionApiMode = "Streaming"|"NonStreaming"|string&{};
+  export type TestExecutionModality = "Text"|"Audio"|string&{};
   export interface TestExecutionResultFilterBy {
     /**
      * Specifies which results to filter. See Test result details"&gt;Test results details for details about different types of results.
@@ -7105,7 +7105,7 @@ declare namespace LexModelsV2 {
      */
     utteranceLevelTestResults?: UtteranceLevelTestResults;
   }
-  export type TestExecutionSortAttribute = "TestSetName"|"CreationDateTime"|string;
+  export type TestExecutionSortAttribute = "TestSetName"|"CreationDateTime"|string&{};
   export interface TestExecutionSortBy {
     /**
      * Specifies whether to sort the test set executions by the date and time at which the test sets were created.
@@ -7116,7 +7116,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type TestExecutionStatus = "Pending"|"Waiting"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
+  export type TestExecutionStatus = "Pending"|"Waiting"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string&{};
   export interface TestExecutionSummary {
     /**
      * The unique identifier of the test execution.
@@ -7162,10 +7162,10 @@ declare namespace LexModelsV2 {
      */
     botAliasTarget?: BotAliasTestExecutionTarget;
   }
-  export type TestResultMatchStatus = "Matched"|"Mismatched"|"ExecutionError"|string;
+  export type TestResultMatchStatus = "Matched"|"Mismatched"|"ExecutionError"|string&{};
   export type TestResultMatchStatusCountMap = {[key: string]: Count};
   export type TestResultSlotName = string;
-  export type TestResultTypeFilter = "OverallTestResults"|"ConversationLevelTestResults"|"IntentClassificationTestResults"|"SlotResolutionTestResults"|"UtteranceLevelResults"|string;
+  export type TestResultTypeFilter = "OverallTestResults"|"ConversationLevelTestResults"|"IntentClassificationTestResults"|"SlotResolutionTestResults"|"UtteranceLevelResults"|string&{};
   export type TestSetAgentPrompt = string;
   export type TestSetConversationId = string;
   export interface TestSetDiscrepancyErrors {
@@ -7198,7 +7198,7 @@ declare namespace LexModelsV2 {
      */
     botAliasTarget?: TestSetDiscrepancyReportBotAliasTarget;
   }
-  export type TestSetDiscrepancyReportStatus = "InProgress"|"Completed"|"Failed"|string;
+  export type TestSetDiscrepancyReportStatus = "InProgress"|"Completed"|"Failed"|string&{};
   export interface TestSetExportSpecification {
     /**
      * The unique identifier of the test set.
@@ -7211,7 +7211,7 @@ declare namespace LexModelsV2 {
      */
     conversationLogsDataSource?: ConversationLogsDataSource;
   }
-  export type TestSetGenerationStatus = "Generating"|"Ready"|"Failed"|"Pending"|string;
+  export type TestSetGenerationStatus = "Generating"|"Ready"|"Failed"|"Pending"|string&{};
   export interface TestSetImportInputLocation {
     /**
      * The name of the Amazon S3 bucket.
@@ -7263,7 +7263,7 @@ declare namespace LexModelsV2 {
     errorMessage: String;
   }
   export type TestSetIntentDiscrepancyList = TestSetIntentDiscrepancyItem[];
-  export type TestSetModality = "Text"|"Audio"|string;
+  export type TestSetModality = "Text"|"Audio"|string&{};
   export interface TestSetSlotDiscrepancyItem {
     /**
      * The name of the intent associated with the slot in the discrepancy report.
@@ -7279,7 +7279,7 @@ declare namespace LexModelsV2 {
     errorMessage: String;
   }
   export type TestSetSlotDiscrepancyList = TestSetSlotDiscrepancyItem[];
-  export type TestSetSortAttribute = "TestSetName"|"LastUpdatedDateTime"|string;
+  export type TestSetSortAttribute = "TestSetName"|"LastUpdatedDateTime"|string&{};
   export interface TestSetSortBy {
     /**
      * Specifies whether to sort the test sets by name or by the time they were last updated.
@@ -7290,7 +7290,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type TestSetStatus = "Importing"|"PendingAnnotation"|"Deleting"|"ValidationError"|"Ready"|string;
+  export type TestSetStatus = "Importing"|"PendingAnnotation"|"Deleting"|"ValidationError"|"Ready"|string&{};
   export interface TestSetStorageLocation {
     /**
      * The name of the Amazon S3 bucket in which the test set is stored.
@@ -7398,7 +7398,7 @@ declare namespace LexModelsV2 {
     destination: TextLogDestination;
   }
   export type TextLogSettingsList = TextLogSetting[];
-  export type TimeDimension = "Hours"|"Days"|"Weeks"|string;
+  export type TimeDimension = "Hours"|"Days"|"Weeks"|string&{};
   export type TimeInMilliSeconds = number;
   export type TimeValue = number;
   export type Timestamp = Date;
@@ -7409,7 +7409,7 @@ declare namespace LexModelsV2 {
      */
     lexTranscriptFilter?: LexTranscriptFilter;
   }
-  export type TranscriptFormat = "Lex"|string;
+  export type TranscriptFormat = "Lex"|string&{};
   export interface TranscriptSourceSetting {
     /**
      * Indicates the setting of the Amazon S3 bucket where the transcript is stored.
@@ -8320,7 +8320,7 @@ declare namespace LexModelsV2 {
     imageResponseCard?: ImageResponseCard;
   }
   export type UtteranceBotResponses = UtteranceBotResponse[];
-  export type UtteranceContentType = "PlainText"|"CustomPayload"|"SSML"|"ImageResponseCard"|string;
+  export type UtteranceContentType = "PlainText"|"CustomPayload"|"SSML"|"ImageResponseCard"|string&{};
   export interface UtteranceDataSortBy {
     /**
      * The measure by which to sort the utterance analytics data.    Count – The number of utterances.    UtteranceTimestamp – The date and time of the utterance.  
@@ -8455,7 +8455,7 @@ declare namespace LexModelsV2 {
   export type UtteranceSpecifications = UtteranceSpecification[];
   export type UtteranceUnderstood = boolean;
   export type Value = string;
-  export type VoiceEngine = "standard"|"neural"|string;
+  export type VoiceEngine = "standard"|"neural"|string&{};
   export type VoiceId = string;
   export interface VoiceSettings {
     /**

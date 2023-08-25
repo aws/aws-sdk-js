@@ -382,7 +382,7 @@ declare namespace AppRunner {
     DeletedAt?: Timestamp;
   }
   export type AutoScalingConfigurationName = string;
-  export type AutoScalingConfigurationStatus = "ACTIVE"|"INACTIVE"|string;
+  export type AutoScalingConfigurationStatus = "ACTIVE"|"INACTIVE"|string&{};
   export interface AutoScalingConfigurationSummary {
     /**
      * The Amazon Resource Name (ARN) of this auto scaling configuration.
@@ -419,7 +419,7 @@ declare namespace AppRunner {
     Status?: CertificateValidationRecordStatus;
   }
   export type CertificateValidationRecordList = CertificateValidationRecord[];
-  export type CertificateValidationRecordStatus = "PENDING_VALIDATION"|"SUCCESS"|"FAILED"|string;
+  export type CertificateValidationRecordStatus = "PENDING_VALIDATION"|"SUCCESS"|"FAILED"|string&{};
   export interface CodeConfiguration {
     /**
      * The source of the App Runner configuration. Values are interpreted as follows:    REPOSITORY – App Runner reads configuration values from the apprunner.yaml file in the source code repository and ignores CodeConfigurationValues.    API – App Runner uses configuration values provided in CodeConfigurationValues and ignores the apprunner.yaml file in the source code repository.  
@@ -470,7 +470,7 @@ declare namespace AppRunner {
      */
     CodeConfiguration?: CodeConfiguration;
   }
-  export type ConfigurationSource = "REPOSITORY"|"API"|string;
+  export type ConfigurationSource = "REPOSITORY"|"API"|string&{};
   export interface Connection {
     /**
      * The customer-provided connection name.
@@ -494,7 +494,7 @@ declare namespace AppRunner {
     CreatedAt?: Timestamp;
   }
   export type ConnectionName = string;
-  export type ConnectionStatus = "PENDING_HANDSHAKE"|"AVAILABLE"|"ERROR"|"DELETED"|string;
+  export type ConnectionStatus = "PENDING_HANDSHAKE"|"AVAILABLE"|"ERROR"|"DELETED"|string&{};
   export interface ConnectionSummary {
     /**
      * The customer-provided connection name.
@@ -701,7 +701,7 @@ declare namespace AppRunner {
      */
     Status: CustomDomainAssociationStatus;
   }
-  export type CustomDomainAssociationStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"DELETING"|"DELETE_FAILED"|"PENDING_CERTIFICATE_DNS_VALIDATION"|"BINDING_CERTIFICATE"|string;
+  export type CustomDomainAssociationStatus = "CREATING"|"CREATE_FAILED"|"ACTIVE"|"DELETING"|"DELETE_FAILED"|"PENDING_CERTIFICATE_DNS_VALIDATION"|"BINDING_CERTIFICATE"|string&{};
   export type CustomDomainList = CustomDomain[];
   export type CustomerAccountId = string;
   export interface DeleteAutoScalingConfigurationRequest {
@@ -916,7 +916,7 @@ declare namespace AppRunner {
      */
     VpcConnectorArn?: AppRunnerResourceArn;
   }
-  export type EgressType = "DEFAULT"|"VPC"|string;
+  export type EgressType = "DEFAULT"|"VPC"|string&{};
   export interface EncryptionConfiguration {
     /**
      * The ARN of the KMS key that's used for encryption.
@@ -952,7 +952,7 @@ declare namespace AppRunner {
   export type HealthCheckHealthyThreshold = number;
   export type HealthCheckInterval = number;
   export type HealthCheckPath = string;
-  export type HealthCheckProtocol = "TCP"|"HTTP"|string;
+  export type HealthCheckProtocol = "TCP"|"HTTP"|string&{};
   export type HealthCheckTimeout = number;
   export type HealthCheckUnhealthyThreshold = number;
   export interface ImageConfiguration {
@@ -988,7 +988,7 @@ declare namespace AppRunner {
      */
     ImageRepositoryType: ImageRepositoryType;
   }
-  export type ImageRepositoryType = "ECR"|"ECR_PUBLIC"|string;
+  export type ImageRepositoryType = "ECR"|"ECR_PUBLIC"|string&{};
   export interface IngressConfiguration {
     /**
      * Specifies whether your App Runner service is publicly accessible. To make the service publicly accessible set it to True. To make the service privately accessible, from only within an Amazon VPC set it to False. 
@@ -1261,7 +1261,7 @@ declare namespace AppRunner {
     DeletedAt?: Timestamp;
   }
   export type ObservabilityConfigurationName = string;
-  export type ObservabilityConfigurationStatus = "ACTIVE"|"INACTIVE"|string;
+  export type ObservabilityConfigurationStatus = "ACTIVE"|"INACTIVE"|string&{};
   export interface ObservabilityConfigurationSummary {
     /**
      * The Amazon Resource Name (ARN) of this observability configuration.
@@ -1277,7 +1277,7 @@ declare namespace AppRunner {
     ObservabilityConfigurationRevision?: Integer;
   }
   export type ObservabilityConfigurationSummaryList = ObservabilityConfigurationSummary[];
-  export type OperationStatus = "PENDING"|"IN_PROGRESS"|"FAILED"|"SUCCEEDED"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_FAILED"|"ROLLBACK_SUCCEEDED"|string;
+  export type OperationStatus = "PENDING"|"IN_PROGRESS"|"FAILED"|"SUCCEEDED"|"ROLLBACK_IN_PROGRESS"|"ROLLBACK_FAILED"|"ROLLBACK_SUCCEEDED"|string&{};
   export interface OperationSummary {
     /**
      * A unique ID of this operation. It's unique in the scope of the App Runner service.
@@ -1309,7 +1309,7 @@ declare namespace AppRunner {
     UpdatedAt?: Timestamp;
   }
   export type OperationSummaryList = OperationSummary[];
-  export type OperationType = "START_DEPLOYMENT"|"CREATE_SERVICE"|"PAUSE_SERVICE"|"RESUME_SERVICE"|"DELETE_SERVICE"|"UPDATE_SERVICE"|string;
+  export type OperationType = "START_DEPLOYMENT"|"CREATE_SERVICE"|"PAUSE_SERVICE"|"RESUME_SERVICE"|"DELETE_SERVICE"|"UPDATE_SERVICE"|string&{};
   export interface PauseServiceRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner service that you want to pause.
@@ -1326,7 +1326,7 @@ declare namespace AppRunner {
      */
     OperationId?: UUID;
   }
-  export type ProviderType = "GITHUB"|string;
+  export type ProviderType = "GITHUB"|string&{};
   export interface ResumeServiceRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner service that you want to resume.
@@ -1344,7 +1344,7 @@ declare namespace AppRunner {
     OperationId?: UUID;
   }
   export type RoleArn = string;
-  export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|"NODEJS_16"|"GO_1"|"DOTNET_6"|"PHP_81"|"RUBY_31"|string;
+  export type Runtime = "PYTHON_3"|"NODEJS_12"|"NODEJS_14"|"CORRETTO_8"|"CORRETTO_11"|"NODEJS_16"|"GO_1"|"DOTNET_6"|"PHP_81"|"RUBY_31"|string&{};
   export type RuntimeEnvironmentSecrets = {[key: string]: RuntimeEnvironmentSecretsValue};
   export type RuntimeEnvironmentSecretsName = string;
   export type RuntimeEnvironmentSecretsValue = string;
@@ -1426,7 +1426,7 @@ declare namespace AppRunner {
      */
     ObservabilityConfigurationArn?: AppRunnerResourceArn;
   }
-  export type ServiceStatus = "CREATE_FAILED"|"RUNNING"|"DELETED"|"DELETE_FAILED"|"PAUSED"|"OPERATION_IN_PROGRESS"|string;
+  export type ServiceStatus = "CREATE_FAILED"|"RUNNING"|"DELETED"|"DELETE_FAILED"|"PAUSED"|"OPERATION_IN_PROGRESS"|string&{};
   export interface ServiceSummary {
     /**
      * The customer-provided service name.
@@ -1468,7 +1468,7 @@ declare namespace AppRunner {
      */
     Value: String;
   }
-  export type SourceCodeVersionType = "BRANCH"|string;
+  export type SourceCodeVersionType = "BRANCH"|string&{};
   export interface SourceConfiguration {
     /**
      * The description of a source code repository. You must provide either this member or ImageRepository (but not both).
@@ -1535,7 +1535,7 @@ declare namespace AppRunner {
      */
     Vendor: TracingVendor;
   }
-  export type TracingVendor = "AWSXRAY"|string;
+  export type TracingVendor = "AWSXRAY"|string&{};
   export type UUID = string;
   export interface UntagResourceRequest {
     /**
@@ -1640,7 +1640,7 @@ declare namespace AppRunner {
     DeletedAt?: Timestamp;
   }
   export type VpcConnectorName = string;
-  export type VpcConnectorStatus = "ACTIVE"|"INACTIVE"|string;
+  export type VpcConnectorStatus = "ACTIVE"|"INACTIVE"|string&{};
   export type VpcConnectors = VpcConnector[];
   export interface VpcDNSTarget {
     /**
@@ -1696,7 +1696,7 @@ declare namespace AppRunner {
     DeletedAt?: Timestamp;
   }
   export type VpcIngressConnectionName = string;
-  export type VpcIngressConnectionStatus = "AVAILABLE"|"PENDING_CREATION"|"PENDING_UPDATE"|"PENDING_DELETION"|"FAILED_CREATION"|"FAILED_UPDATE"|"FAILED_DELETION"|"DELETED"|string;
+  export type VpcIngressConnectionStatus = "AVAILABLE"|"PENDING_CREATION"|"PENDING_UPDATE"|"PENDING_DELETION"|"FAILED_CREATION"|"FAILED_UPDATE"|"FAILED_DELETION"|"DELETED"|string&{};
   export interface VpcIngressConnectionSummary {
     /**
      * The Amazon Resource Name (ARN) of the VPC Ingress Connection. 

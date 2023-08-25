@@ -706,7 +706,7 @@ declare namespace Macie2 {
      */
     status?: AdminStatus;
   }
-  export type AdminStatus = "ENABLED"|"DISABLING_IN_PROGRESS"|string;
+  export type AdminStatus = "ENABLED"|"DISABLING_IN_PROGRESS"|string&{};
   export interface AllowListCriteria {
     /**
      * The regular expression (regex) that defines the text pattern to ignore. The expression can contain as many as 512 characters.
@@ -727,7 +727,7 @@ declare namespace Macie2 {
      */
     description?: __stringMin1Max1024PatternSS;
   }
-  export type AllowListStatusCode = "OK"|"S3_OBJECT_NOT_FOUND"|"S3_USER_ACCESS_DENIED"|"S3_OBJECT_ACCESS_DENIED"|"S3_THROTTLED"|"S3_OBJECT_OVERSIZE"|"S3_OBJECT_EMPTY"|"UNKNOWN_ERROR"|string;
+  export type AllowListStatusCode = "OK"|"S3_OBJECT_NOT_FOUND"|"S3_USER_ACCESS_DENIED"|"S3_OBJECT_ACCESS_DENIED"|"S3_THROTTLED"|"S3_OBJECT_OVERSIZE"|"S3_OBJECT_EMPTY"|"UNKNOWN_ERROR"|string&{};
   export interface AllowListSummary {
     /**
      * The Amazon Resource Name (ARN) of the allow list.
@@ -754,7 +754,7 @@ declare namespace Macie2 {
      */
     updatedAt?: __timestampIso8601;
   }
-  export type AllowsUnencryptedObjectUploads = "TRUE"|"FALSE"|"UNKNOWN"|string;
+  export type AllowsUnencryptedObjectUploads = "TRUE"|"FALSE"|"UNKNOWN"|string&{};
   export interface ApiCallDetails {
     /**
      * The name of the operation that was invoked most recently and produced the finding.
@@ -795,8 +795,8 @@ declare namespace Macie2 {
      */
     sessionContext?: SessionContext;
   }
-  export type AutomatedDiscoveryStatus = "ENABLED"|"DISABLED"|string;
-  export type AvailabilityCode = "AVAILABLE"|"UNAVAILABLE"|string;
+  export type AutomatedDiscoveryStatus = "ENABLED"|"DISABLED"|string&{};
+  export type AvailabilityCode = "AVAILABLE"|"UNAVAILABLE"|string&{};
   export interface AwsAccount {
     /**
      * The unique identifier for the Amazon Web Services account.
@@ -1092,7 +1092,7 @@ declare namespace Macie2 {
      */
     versioning?: __boolean;
   }
-  export type BucketMetadataErrorCode = "ACCESS_DENIED"|string;
+  export type BucketMetadataErrorCode = "ACCESS_DENIED"|string&{};
   export interface BucketPermissionConfiguration {
     /**
      * The account-level permissions settings that apply to the bucket.
@@ -1256,7 +1256,7 @@ declare namespace Macie2 {
      */
     name?: ClassificationScopeName;
   }
-  export type ClassificationScopeUpdateOperation = "ADD"|"REPLACE"|"REMOVE"|string;
+  export type ClassificationScopeUpdateOperation = "ADD"|"REPLACE"|"REMOVE"|string&{};
   export interface CreateAllowListRequest {
     /**
      * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
@@ -1528,7 +1528,7 @@ declare namespace Macie2 {
      */
     neq?: __listOf__string;
   }
-  export type Currency = "USD"|string;
+  export type Currency = "USD"|string&{};
   export interface CustomDataIdentifierSummary {
     /**
      * The Amazon Resource Name (ARN) of the custom data identifier.
@@ -1582,9 +1582,9 @@ declare namespace Macie2 {
   export type CustomDetections = CustomDetection[];
   export interface DailySchedule {
   }
-  export type DataIdentifierSeverity = "LOW"|"MEDIUM"|"HIGH"|string;
-  export type DataIdentifierType = "CUSTOM"|"MANAGED"|string;
-  export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
+  export type DataIdentifierSeverity = "LOW"|"MEDIUM"|"HIGH"|string&{};
+  export type DataIdentifierType = "CUSTOM"|"MANAGED"|string&{};
+  export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string&{};
   export interface DeclineInvitationsRequest {
     /**
      * An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to decline.
@@ -1858,7 +1858,7 @@ declare namespace Macie2 {
      */
     domainName?: __string;
   }
-  export type EffectivePermission = "PUBLIC"|"NOT_PUBLIC"|"UNKNOWN"|string;
+  export type EffectivePermission = "PUBLIC"|"NOT_PUBLIC"|"UNKNOWN"|string&{};
   export interface EnableMacieRequest {
     /**
      * A unique, case-sensitive token that you provide to ensure the idempotency of the request.
@@ -1887,8 +1887,8 @@ declare namespace Macie2 {
   }
   export interface EnableOrganizationAdminAccountResponse {
   }
-  export type EncryptionType = "NONE"|"AES256"|"aws:kms"|"UNKNOWN"|string;
-  export type ErrorCode = "ClientError"|"InternalError"|string;
+  export type EncryptionType = "NONE"|"AES256"|"aws:kms"|"UNKNOWN"|string&{};
+  export type ErrorCode = "ClientError"|"InternalError"|string&{};
   export interface FederatedUser {
     /**
      * The Amazon Web Services access key ID that identifies the credentials.
@@ -1995,7 +1995,7 @@ declare namespace Macie2 {
      */
     apiCallDetails?: ApiCallDetails;
   }
-  export type FindingActionType = "AWS_API_CALL"|string;
+  export type FindingActionType = "AWS_API_CALL"|string&{};
   export interface FindingActor {
     /**
      * The domain name of the device that the entity used to perform the action on the affected resource.
@@ -2010,15 +2010,15 @@ declare namespace Macie2 {
      */
     userIdentity?: UserIdentity;
   }
-  export type FindingCategory = "CLASSIFICATION"|"POLICY"|string;
+  export type FindingCategory = "CLASSIFICATION"|"POLICY"|string&{};
   export interface FindingCriteria {
     /**
      * A condition that specifies the property, operator, and one or more values to use to filter the results.
      */
     criterion?: Criterion;
   }
-  export type FindingPublishingFrequency = "FIFTEEN_MINUTES"|"ONE_HOUR"|"SIX_HOURS"|string;
-  export type FindingStatisticsSortAttributeName = "groupKey"|"count"|string;
+  export type FindingPublishingFrequency = "FIFTEEN_MINUTES"|"ONE_HOUR"|"SIX_HOURS"|string&{};
+  export type FindingStatisticsSortAttributeName = "groupKey"|"count"|string&{};
   export interface FindingStatisticsSortCriteria {
     /**
      * The grouping to sort the results by. Valid values are: count, sort the results by the number of findings in each group of results; and, groupKey, sort the results by the name of each group of results.
@@ -2029,8 +2029,8 @@ declare namespace Macie2 {
      */
     orderBy?: OrderBy;
   }
-  export type FindingType = "SensitiveData:S3Object/Multiple"|"SensitiveData:S3Object/Financial"|"SensitiveData:S3Object/Personal"|"SensitiveData:S3Object/Credentials"|"SensitiveData:S3Object/CustomIdentifier"|"Policy:IAMUser/S3BucketPublic"|"Policy:IAMUser/S3BucketSharedExternally"|"Policy:IAMUser/S3BucketReplicatedExternally"|"Policy:IAMUser/S3BucketEncryptionDisabled"|"Policy:IAMUser/S3BlockPublicAccessDisabled"|"Policy:IAMUser/S3BucketSharedWithCloudFront"|string;
-  export type FindingsFilterAction = "ARCHIVE"|"NOOP"|string;
+  export type FindingType = "SensitiveData:S3Object/Multiple"|"SensitiveData:S3Object/Financial"|"SensitiveData:S3Object/Personal"|"SensitiveData:S3Object/Credentials"|"SensitiveData:S3Object/CustomIdentifier"|"Policy:IAMUser/S3BucketPublic"|"Policy:IAMUser/S3BucketSharedExternally"|"Policy:IAMUser/S3BucketReplicatedExternally"|"Policy:IAMUser/S3BucketEncryptionDisabled"|"Policy:IAMUser/S3BlockPublicAccessDisabled"|"Policy:IAMUser/S3BucketSharedWithCloudFront"|string&{};
+  export type FindingsFilterAction = "ARCHIVE"|"NOOP"|string&{};
   export interface FindingsFilterListItem {
     /**
      * The action that's performed on findings that match the filter criteria. Possible values are: ARCHIVE, suppress (automatically archive) the findings; and, NOOP, don't perform any action on the findings.
@@ -2601,7 +2601,7 @@ declare namespace Macie2 {
      */
     usageTotals?: __listOfUsageTotal;
   }
-  export type GroupBy = "resourcesAffected.s3Bucket.name"|"type"|"classificationDetails.jobId"|"severity.description"|string;
+  export type GroupBy = "resourcesAffected.s3Bucket.name"|"type"|"classificationDetails.jobId"|"severity.description"|string&{};
   export interface GroupCount {
     /**
      * The total number of findings in the group of query results.
@@ -2714,9 +2714,9 @@ declare namespace Macie2 {
      */
     org?: __string;
   }
-  export type IsDefinedInJob = "TRUE"|"FALSE"|"UNKNOWN"|string;
-  export type IsMonitoredByJob = "TRUE"|"FALSE"|"UNKNOWN"|string;
-  export type JobComparator = "EQ"|"GT"|"GTE"|"LT"|"LTE"|"NE"|"CONTAINS"|"STARTS_WITH"|string;
+  export type IsDefinedInJob = "TRUE"|"FALSE"|"UNKNOWN"|string&{};
+  export type IsMonitoredByJob = "TRUE"|"FALSE"|"UNKNOWN"|string&{};
+  export type JobComparator = "EQ"|"GT"|"GTE"|"LT"|"LTE"|"NE"|"CONTAINS"|"STARTS_WITH"|string&{};
   export interface JobDetails {
     /**
      * Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are: TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran. FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran. UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.
@@ -2765,7 +2765,7 @@ declare namespace Macie2 {
      */
     and?: __listOfJobScopeTerm;
   }
-  export type JobStatus = "RUNNING"|"PAUSED"|"CANCELLED"|"COMPLETE"|"IDLE"|"USER_PAUSED"|string;
+  export type JobStatus = "RUNNING"|"PAUSED"|"CANCELLED"|"COMPLETE"|"IDLE"|"USER_PAUSED"|string&{};
   export interface JobSummary {
     /**
      * The property- and tag-based conditions that determine which S3 buckets are included or excluded from the job's analysis. Each time the job runs, the job uses these criteria to determine which buckets to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.
@@ -2804,7 +2804,7 @@ declare namespace Macie2 {
      */
     userPausedDetails?: UserPausedDetails;
   }
-  export type JobType = "ONE_TIME"|"SCHEDULED"|string;
+  export type JobType = "ONE_TIME"|"SCHEDULED"|string&{};
   export interface KeyValuePair {
     /**
      * One part of a key-value pair that comprises a tag. A tag key is a general label that acts as a category for more specific tag values.
@@ -2822,7 +2822,7 @@ declare namespace Macie2 {
      */
     code?: LastRunErrorStatusCode;
   }
-  export type LastRunErrorStatusCode = "NONE"|"ERROR"|string;
+  export type LastRunErrorStatusCode = "NONE"|"ERROR"|string&{};
   export interface ListAllowListsRequest {
     /**
      * The maximum number of items to include in each page of a paginated response.
@@ -2989,7 +2989,7 @@ declare namespace Macie2 {
      */
     includes?: __listOfListJobsFilterTerm;
   }
-  export type ListJobsFilterKey = "jobType"|"jobStatus"|"createdAt"|"name"|string;
+  export type ListJobsFilterKey = "jobType"|"jobStatus"|"createdAt"|"name"|string&{};
   export interface ListJobsFilterTerm {
     /**
      * The operator to use to filter the results.
@@ -3004,7 +3004,7 @@ declare namespace Macie2 {
      */
     values?: __listOf__string;
   }
-  export type ListJobsSortAttributeName = "createdAt"|"jobStatus"|"name"|"jobType"|string;
+  export type ListJobsSortAttributeName = "createdAt"|"jobStatus"|"name"|"jobType"|string&{};
   export interface ListJobsSortCriteria {
     /**
      * The property to sort the results by.
@@ -3151,8 +3151,8 @@ declare namespace Macie2 {
      */
     tags?: TagMap;
   }
-  export type MacieStatus = "PAUSED"|"ENABLED"|string;
-  export type ManagedDataIdentifierSelector = "ALL"|"EXCLUDE"|"INCLUDE"|"NONE"|"RECOMMENDED"|string;
+  export type MacieStatus = "PAUSED"|"ENABLED"|string&{};
+  export type ManagedDataIdentifierSelector = "ALL"|"EXCLUDE"|"INCLUDE"|"NONE"|"RECOMMENDED"|string&{};
   export interface ManagedDataIdentifierSummary {
     /**
      * The category of sensitive data that the managed data identifier detects: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret access keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.
@@ -3335,8 +3335,8 @@ declare namespace Macie2 {
      */
     records?: Records;
   }
-  export type OrderBy = "ASC"|"DESC"|string;
-  export type OriginType = "SENSITIVE_DATA_DISCOVERY_JOB"|"AUTOMATED_SENSITIVE_DATA_DISCOVERY"|string;
+  export type OrderBy = "ASC"|"DESC"|string&{};
+  export type OriginType = "SENSITIVE_DATA_DISCOVERY_JOB"|"AUTOMATED_SENSITIVE_DATA_DISCOVERY"|string&{};
   export interface Page {
     /**
      *  Reserved for future use.
@@ -3412,7 +3412,7 @@ declare namespace Macie2 {
     recordIndex?: __long;
   }
   export type Records = Record[];
-  export type RelationshipStatus = "Enabled"|"Paused"|"Invited"|"Created"|"Removed"|"Resigned"|"EmailVerificationInProgress"|"EmailVerificationFailed"|"RegionDisabled"|"AccountSuspended"|string;
+  export type RelationshipStatus = "Enabled"|"Paused"|"Invited"|"Created"|"Removed"|"Resigned"|"EmailVerificationInProgress"|"EmailVerificationFailed"|"RegionDisabled"|"AccountSuspended"|string&{};
   export interface ReplicationDetails {
     /**
      * Specifies whether the bucket is configured to replicate one or more objects to any destination.
@@ -3499,8 +3499,8 @@ declare namespace Macie2 {
      */
     status: RevealStatus;
   }
-  export type RevealRequestStatus = "SUCCESS"|"PROCESSING"|"ERROR"|string;
-  export type RevealStatus = "ENABLED"|"DISABLED"|string;
+  export type RevealRequestStatus = "SUCCESS"|"PROCESSING"|"ERROR"|string&{};
+  export type RevealStatus = "ENABLED"|"DISABLED"|string&{};
   export interface S3Bucket {
     /**
      * Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are added to the bucket. Possible values are: FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include a valid server-side encryption header. TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include a valid server-side encryption header. UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects. Valid server-side encryption headers are: x-amz-server-side-encryption with a value of AES256 or aws:kms, and x-amz-server-side-encryption-customer-algorithm with a value of AES256.
@@ -3682,7 +3682,7 @@ declare namespace Macie2 {
      */
     objectKey: __stringMin1Max1024PatternSS;
   }
-  export type ScopeFilterKey = "OBJECT_EXTENSION"|"OBJECT_LAST_MODIFIED_DATE"|"OBJECT_SIZE"|"OBJECT_KEY"|string;
+  export type ScopeFilterKey = "OBJECT_EXTENSION"|"OBJECT_LAST_MODIFIED_DATE"|"OBJECT_SIZE"|"OBJECT_KEY"|string&{};
   export interface Scoping {
     /**
      * The property- and tag-based conditions that determine which objects to exclude from the analysis.
@@ -3703,7 +3703,7 @@ declare namespace Macie2 {
      */
     includes?: SearchResourcesCriteriaBlock;
   }
-  export type SearchResourcesComparator = "EQ"|"NE"|string;
+  export type SearchResourcesComparator = "EQ"|"NE"|string&{};
   export interface SearchResourcesCriteria {
     /**
      * A property-based condition that defines a property, operator, and one or more values for including or excluding resources from the results.
@@ -3762,8 +3762,8 @@ declare namespace Macie2 {
      */
     values?: __listOf__string;
   }
-  export type SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string;
-  export type SearchResourcesSortAttributeName = "ACCOUNT_ID"|"RESOURCE_NAME"|"S3_CLASSIFIABLE_OBJECT_COUNT"|"S3_CLASSIFIABLE_SIZE_IN_BYTES"|string;
+  export type SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string&{};
+  export type SearchResourcesSortAttributeName = "ACCOUNT_ID"|"RESOURCE_NAME"|"S3_CLASSIFIABLE_OBJECT_COUNT"|"S3_CLASSIFIABLE_SIZE_IN_BYTES"|string&{};
   export interface SearchResourcesSortCriteria {
     /**
      * The property to sort the results by.
@@ -3819,7 +3819,7 @@ declare namespace Macie2 {
      */
     totalCount?: __long;
   }
-  export type SensitiveDataItemCategory = "FINANCIAL_INFORMATION"|"PERSONAL_INFORMATION"|"CREDENTIALS"|"CUSTOM_IDENTIFIER"|string;
+  export type SensitiveDataItemCategory = "FINANCIAL_INFORMATION"|"PERSONAL_INFORMATION"|"CREDENTIALS"|"CUSTOM_IDENTIFIER"|string&{};
   export type SensitiveDataOccurrences = {[key: string]: __listOfDetectedDataDetails};
   export interface SensitivityAggregations {
     /**
@@ -3946,7 +3946,7 @@ declare namespace Macie2 {
      */
     score?: __long;
   }
-  export type SeverityDescription = "Low"|"Medium"|"High"|string;
+  export type SeverityDescription = "Low"|"Medium"|"High"|string&{};
   export interface SeverityLevel {
     /**
      * The minimum number of occurrences of text that must match the custom data identifier's detection criteria in order to produce a finding with the specified severity (severity).
@@ -3958,7 +3958,7 @@ declare namespace Macie2 {
     severity: DataIdentifierSeverity;
   }
   export type SeverityLevelList = SeverityLevel[];
-  export type SharedAccess = "EXTERNAL"|"INTERNAL"|"NOT_SHARED"|"UNKNOWN"|string;
+  export type SharedAccess = "EXTERNAL"|"INTERNAL"|"NOT_SHARED"|"UNKNOWN"|string&{};
   export interface SimpleCriterionForJob {
     /**
      * The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).
@@ -3973,7 +3973,7 @@ declare namespace Macie2 {
      */
     values?: __listOf__string;
   }
-  export type SimpleCriterionKeyForJob = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string;
+  export type SimpleCriterionKeyForJob = "ACCOUNT_ID"|"S3_BUCKET_NAME"|"S3_BUCKET_EFFECTIVE_PERMISSION"|"S3_BUCKET_SHARED_ACCESS"|string&{};
   export interface SimpleScopeTerm {
     /**
      * The operator to use in the condition. Valid values for each supported property (key) are: OBJECT_EXTENSION - EQ (equals) or NE (not equals) OBJECT_KEY - STARTS_WITH OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS OBJECT_SIZE - Any operator except CONTAINS
@@ -4008,7 +4008,7 @@ declare namespace Macie2 {
      */
     numberOfRuns?: __double;
   }
-  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"ONEZONE_IA"|"GLACIER"|"GLACIER_IR"|"OUTPOSTS"|string;
+  export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|"ONEZONE_IA"|"GLACIER"|"GLACIER_IR"|"OUTPOSTS"|string&{};
   export interface SuppressDataIdentifier {
     /**
      * The unique identifier for the custom data identifier or managed data identifier that detected the type of sensitive data to exclude or include in the score.
@@ -4070,7 +4070,7 @@ declare namespace Macie2 {
      */
     target?: TagTarget;
   }
-  export type TagTarget = "S3_OBJECT"|string;
+  export type TagTarget = "S3_OBJECT"|string&{};
   export interface TagValuePair {
     /**
      * The value for the tag key to use in the condition.
@@ -4109,11 +4109,11 @@ declare namespace Macie2 {
      */
     matchCount?: __integer;
   }
-  export type TimeRange = "MONTH_TO_DATE"|"PAST_30_DAYS"|string;
+  export type TimeRange = "MONTH_TO_DATE"|"PAST_30_DAYS"|string&{};
   export type Timestamp = Date;
-  export type Type = "NONE"|"AES256"|"aws:kms"|string;
-  export type UnavailabilityReasonCode = "OBJECT_EXCEEDS_SIZE_QUOTA"|"UNSUPPORTED_OBJECT_TYPE"|"UNSUPPORTED_FINDING_TYPE"|"INVALID_CLASSIFICATION_RESULT"|"OBJECT_UNAVAILABLE"|string;
-  export type Unit = "TERABYTES"|string;
+  export type Type = "NONE"|"AES256"|"aws:kms"|string&{};
+  export type UnavailabilityReasonCode = "OBJECT_EXCEEDS_SIZE_QUOTA"|"UNSUPPORTED_OBJECT_TYPE"|"UNSUPPORTED_FINDING_TYPE"|"INVALID_CLASSIFICATION_RESULT"|"OBJECT_UNAVAILABLE"|string&{};
+  export type Unit = "TERABYTES"|string&{};
   export interface UnprocessedAccount {
     /**
      * The Amazon Web Services account ID for the account that the request applies to.
@@ -4378,8 +4378,8 @@ declare namespace Macie2 {
      */
     values?: __listOf__string;
   }
-  export type UsageStatisticsFilterComparator = "GT"|"GTE"|"LT"|"LTE"|"EQ"|"NE"|"CONTAINS"|string;
-  export type UsageStatisticsFilterKey = "accountId"|"serviceLimit"|"freeTrialStartDate"|"total"|string;
+  export type UsageStatisticsFilterComparator = "GT"|"GTE"|"LT"|"LTE"|"EQ"|"NE"|"CONTAINS"|string&{};
+  export type UsageStatisticsFilterKey = "accountId"|"serviceLimit"|"freeTrialStartDate"|"total"|string&{};
   export interface UsageStatisticsSortBy {
     /**
      * The field to sort the results by.
@@ -4390,7 +4390,7 @@ declare namespace Macie2 {
      */
     orderBy?: OrderBy;
   }
-  export type UsageStatisticsSortKey = "accountId"|"total"|"serviceLimitValue"|"freeTrialStartDate"|string;
+  export type UsageStatisticsSortKey = "accountId"|"total"|"serviceLimitValue"|"freeTrialStartDate"|string&{};
   export interface UsageTotal {
     /**
      * The type of currency that the value for the metric (estimatedCost) is reported in.
@@ -4405,7 +4405,7 @@ declare namespace Macie2 {
      */
     type?: UsageType;
   }
-  export type UsageType = "DATA_INVENTORY_EVALUATION"|"SENSITIVE_DATA_DISCOVERY"|"AUTOMATED_SENSITIVE_DATA_DISCOVERY"|"AUTOMATED_OBJECT_MONITORING"|string;
+  export type UsageType = "DATA_INVENTORY_EVALUATION"|"SENSITIVE_DATA_DISCOVERY"|"AUTOMATED_SENSITIVE_DATA_DISCOVERY"|"AUTOMATED_OBJECT_MONITORING"|string&{};
   export interface UserIdentity {
     /**
      * If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the Security Token Service (STS) API, the identifiers, session context, and other details about the identity.
@@ -4450,7 +4450,7 @@ declare namespace Macie2 {
      */
     principalId?: __string;
   }
-  export type UserIdentityType = "AssumedRole"|"IAMUser"|"FederatedUser"|"Root"|"AWSAccount"|"AWSService"|string;
+  export type UserIdentityType = "AssumedRole"|"IAMUser"|"FederatedUser"|"Root"|"AWSAccount"|"AWSService"|string&{};
   export interface UserPausedDetails {
     /**
      * The date and time, in UTC and extended ISO 8601 format, when the job or job run will expire and be cancelled if you don't resume it first.

@@ -223,7 +223,7 @@ declare namespace CloudSearch {
     Options: PolicyDocument;
     Status: OptionStatus;
   }
-  export type AlgorithmicStemming = "none"|"minimal"|"light"|"full"|string;
+  export type AlgorithmicStemming = "none"|"minimal"|"light"|"full"|string&{};
   export interface AnalysisOptions {
     /**
      * A JSON object that defines synonym groups and aliases. A synonym group is an array of arrays, where each sub-array is a group of terms where each term in the group is considered a synonym of every other term in the group. The aliases value is an object that contains a collection of string:value pairs where the string specifies a term and the array of values specifies each of the aliases for that term. An alias is considered a synonym of the specified term, but the term is not considered a synonym of the alias. For more information about specifying synonyms, see Synonyms in the Amazon CloudSearch Developer Guide.
@@ -251,7 +251,7 @@ declare namespace CloudSearch {
     AnalysisSchemeLanguage: AnalysisSchemeLanguage;
     AnalysisOptions?: AnalysisOptions;
   }
-  export type AnalysisSchemeLanguage = "ar"|"bg"|"ca"|"cs"|"da"|"de"|"el"|"en"|"es"|"eu"|"fa"|"fi"|"fr"|"ga"|"gl"|"he"|"hi"|"hu"|"hy"|"id"|"it"|"ja"|"ko"|"lv"|"mul"|"nl"|"no"|"pt"|"ro"|"ru"|"sv"|"th"|"tr"|"zh-Hans"|"zh-Hant"|string;
+  export type AnalysisSchemeLanguage = "ar"|"bg"|"ca"|"cs"|"da"|"de"|"el"|"en"|"es"|"eu"|"fa"|"fi"|"fr"|"ga"|"gl"|"he"|"hi"|"hu"|"hy"|"id"|"it"|"ja"|"ko"|"lv"|"mul"|"nl"|"no"|"pt"|"ro"|"ru"|"sv"|"th"|"tr"|"zh-Hans"|"zh-Hant"|string&{};
   export interface AnalysisSchemeStatus {
     Options: AnalysisScheme;
     Status: OptionStatus;
@@ -741,7 +741,7 @@ declare namespace CloudSearch {
     Status: OptionStatus;
   }
   export type IndexFieldStatusList = IndexFieldStatus[];
-  export type IndexFieldType = "int"|"double"|"literal"|"text"|"date"|"latlon"|"int-array"|"double-array"|"literal-array"|"text-array"|"date-array"|string;
+  export type IndexFieldType = "int"|"double"|"literal"|"text"|"date"|"latlon"|"int-array"|"double-array"|"literal-array"|"text-array"|"date-array"|string&{};
   export type InstanceCount = number;
   export interface IntArrayOptions {
     /**
@@ -873,7 +873,7 @@ declare namespace CloudSearch {
   export type MaximumPartitionCount = number;
   export type MaximumReplicationCount = number;
   export type MultiAZ = boolean;
-  export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|"FailedToValidate"|string;
+  export type OptionState = "RequiresIndexDocuments"|"Processing"|"Active"|"FailedToValidate"|string&{};
   export interface OptionStatus {
     /**
      * A timestamp for when this option was created.
@@ -897,7 +897,7 @@ declare namespace CloudSearch {
     PendingDeletion?: Boolean;
   }
   export type PartitionCount = number;
-  export type PartitionInstanceType = "search.m1.small"|"search.m1.large"|"search.m2.xlarge"|"search.m2.2xlarge"|"search.m3.medium"|"search.m3.large"|"search.m3.xlarge"|"search.m3.2xlarge"|"search.small"|"search.medium"|"search.large"|"search.xlarge"|"search.2xlarge"|"search.previousgeneration.small"|"search.previousgeneration.large"|"search.previousgeneration.xlarge"|"search.previousgeneration.2xlarge"|string;
+  export type PartitionInstanceType = "search.m1.small"|"search.m1.large"|"search.m2.xlarge"|"search.m2.2xlarge"|"search.m3.medium"|"search.m3.large"|"search.m3.xlarge"|"search.m3.2xlarge"|"search.small"|"search.medium"|"search.large"|"search.xlarge"|"search.2xlarge"|"search.previousgeneration.small"|"search.previousgeneration.large"|"search.previousgeneration.xlarge"|"search.previousgeneration.2xlarge"|string&{};
   export type PolicyDocument = string;
   export interface ScalingParameters {
     /**
@@ -929,13 +929,13 @@ declare namespace CloudSearch {
     SuggesterName: StandardName;
     DocumentSuggesterOptions: DocumentSuggesterOptions;
   }
-  export type SuggesterFuzzyMatching = "none"|"low"|"high"|string;
+  export type SuggesterFuzzyMatching = "none"|"low"|"high"|string&{};
   export interface SuggesterStatus {
     Options: Suggester;
     Status: OptionStatus;
   }
   export type SuggesterStatusList = SuggesterStatus[];
-  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string;
+  export type TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"|"Policy-Min-TLS-1-2-2019-07"|string&{};
   export interface TextArrayOptions {
     /**
      * A value to use for the field if the field isn't specified for a document.

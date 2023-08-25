@@ -709,11 +709,11 @@ declare namespace WorkMail {
   }
   export type AccessControlRuleAction = string;
   export type AccessControlRuleDescription = string;
-  export type AccessControlRuleEffect = "ALLOW"|"DENY"|string;
+  export type AccessControlRuleEffect = "ALLOW"|"DENY"|string&{};
   export type AccessControlRuleName = string;
   export type AccessControlRuleNameList = AccessControlRuleName[];
   export type AccessControlRulesList = AccessControlRule[];
-  export type AccessEffect = "ALLOW"|"DENY"|string;
+  export type AccessEffect = "ALLOW"|"DENY"|string&{};
   export type ActionsList = AccessControlRuleAction[];
   export type Aliases = EmailAddress[];
   export type AmazonResourceName = string;
@@ -796,7 +796,7 @@ declare namespace WorkMail {
     DateModified?: Timestamp;
   }
   export type AvailabilityConfigurationList = AvailabilityConfiguration[];
-  export type AvailabilityProviderType = "EWS"|"LAMBDA"|string;
+  export type AvailabilityProviderType = "EWS"|"LAMBDA"|string&{};
   export interface BookingOptions {
     /**
      * The resource's ability to automatically reply to requests. If disabled, delegates must be associated to the resource.
@@ -1576,7 +1576,7 @@ declare namespace WorkMail {
      */
     Value?: String;
   }
-  export type DnsRecordVerificationStatus = "PENDING"|"VERIFIED"|"FAILED"|string;
+  export type DnsRecordVerificationStatus = "PENDING"|"VERIFIED"|"FAILED"|string&{};
   export type DnsRecords = DnsRecord[];
   export interface Domain {
     /**
@@ -1592,7 +1592,7 @@ declare namespace WorkMail {
   export type Domains = Domain[];
   export type EmailAddress = string;
   export type EntityIdentifier = string;
-  export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
+  export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string&{};
   export interface EwsAvailabilityProvider {
     /**
      * The endpoint of the remote EWS server.
@@ -1624,7 +1624,7 @@ declare namespace WorkMail {
     Period?: RetentionPeriod;
   }
   export type FolderConfigurations = FolderConfiguration[];
-  export type FolderName = "INBOX"|"DELETED_ITEMS"|"SENT_ITEMS"|"DRAFTS"|"JUNK_EMAIL"|string;
+  export type FolderName = "INBOX"|"DELETED_ITEMS"|"SENT_ITEMS"|"DRAFTS"|"JUNK_EMAIL"|string&{};
   export interface GetAccessControlEffectRequest {
     /**
      * The identifier for the organization.
@@ -1941,7 +1941,7 @@ declare namespace WorkMail {
   export type ImpersonationRoleIdList = ImpersonationRoleId[];
   export type ImpersonationRoleList = ImpersonationRole[];
   export type ImpersonationRoleName = string;
-  export type ImpersonationRoleType = "FULL_ACCESS"|"READ_ONLY"|string;
+  export type ImpersonationRoleType = "FULL_ACCESS"|"READ_ONLY"|string&{};
   export interface ImpersonationRule {
     /**
      * The identifier of the rule.
@@ -2405,7 +2405,7 @@ declare namespace WorkMail {
     EndTime?: Timestamp;
   }
   export type MailboxExportJobId = string;
-  export type MailboxExportJobState = "RUNNING"|"COMPLETED"|"FAILED"|"CANCELLED"|string;
+  export type MailboxExportJobState = "RUNNING"|"COMPLETED"|"FAILED"|"CANCELLED"|string&{};
   export type MailboxQuota = number;
   export type MailboxSize = number;
   export type MaxResults = number;
@@ -2435,7 +2435,7 @@ declare namespace WorkMail {
      */
     DisabledDate?: Timestamp;
   }
-  export type MemberType = "GROUP"|"USER"|string;
+  export type MemberType = "GROUP"|"USER"|string&{};
   export type Members = Member[];
   export interface MobileDeviceAccessMatchedRule {
     /**
@@ -2534,7 +2534,7 @@ declare namespace WorkMail {
     DateModified?: Timestamp;
   }
   export type MobileDeviceAccessRuleDescription = string;
-  export type MobileDeviceAccessRuleEffect = "ALLOW"|"DENY"|string;
+  export type MobileDeviceAccessRuleEffect = "ALLOW"|"DENY"|string&{};
   export type MobileDeviceAccessRuleId = string;
   export type MobileDeviceAccessRuleName = string;
   export type MobileDeviceAccessRulesList = MobileDeviceAccessRule[];
@@ -2580,7 +2580,7 @@ declare namespace WorkMail {
      */
     PermissionValues: PermissionValues;
   }
-  export type PermissionType = "FULL_ACCESS"|"SEND_AS"|"SEND_ON_BEHALF"|string;
+  export type PermissionType = "FULL_ACCESS"|"SEND_AS"|"SEND_ON_BEHALF"|string&{};
   export type PermissionValues = PermissionType[];
   export type Permissions = Permission[];
   export type PolicyDescription = string;
@@ -2823,9 +2823,9 @@ declare namespace WorkMail {
   export type ResourceDelegates = Delegate[];
   export type ResourceId = string;
   export type ResourceName = string;
-  export type ResourceType = "ROOM"|"EQUIPMENT"|string;
+  export type ResourceType = "ROOM"|"EQUIPMENT"|string&{};
   export type Resources = Resource[];
-  export type RetentionAction = "NONE"|"DELETE"|"PERMANENTLY_DELETE"|string;
+  export type RetentionAction = "NONE"|"DELETE"|"PERMANENTLY_DELETE"|string&{};
   export type RetentionPeriod = number;
   export type RoleArn = string;
   export type S3BucketName = string;
@@ -3139,7 +3139,7 @@ declare namespace WorkMail {
   }
   export type UserIdList = WorkMailIdentifier[];
   export type UserName = string;
-  export type UserRole = "USER"|"RESOURCE"|"SYSTEM_USER"|string;
+  export type UserRole = "USER"|"RESOURCE"|"SYSTEM_USER"|string&{};
   export type Users = User[];
   export type WorkMailDomainName = string;
   export type WorkMailIdentifier = string;

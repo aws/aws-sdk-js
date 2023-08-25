@@ -386,7 +386,7 @@ declare namespace GameSparks {
   }
   export interface DeleteStageResult {
   }
-  export type DeploymentAction = "DEPLOY"|"UNDEPLOY"|string;
+  export type DeploymentAction = "DEPLOY"|"UNDEPLOY"|string&{};
   export type DeploymentId = string;
   export interface DeploymentResult {
     /**
@@ -398,7 +398,7 @@ declare namespace GameSparks {
      */
     ResultCode?: ResultCode;
   }
-  export type DeploymentState = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type DeploymentState = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string&{};
   export interface DisconnectPlayerRequest {
     /**
      * The name of the game.
@@ -532,7 +532,7 @@ declare namespace GameSparks {
   export type GameKey = string;
   export type GameName = string;
   export type GameSdkVersion = string;
-  export type GameState = "ACTIVE"|"DELETING"|string;
+  export type GameState = "ACTIVE"|"DELETING"|string&{};
   export interface GameSummary {
     /**
      * The description of the game.
@@ -578,7 +578,7 @@ declare namespace GameSparks {
   }
   export type GeneratedCodeJobDetailsList = GeneratedCodeJobDetails[];
   export type GeneratedCodeJobId = string;
-  export type GeneratedCodeJobState = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"PENDING"|string;
+  export type GeneratedCodeJobState = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"PENDING"|string&{};
   export interface Generator {
     /**
      * The target version of the GameSparks Game SDK.
@@ -964,12 +964,12 @@ declare namespace GameSparks {
   export type MaxResults = number;
   export type Message = string;
   export type NextToken = string;
-  export type Operation = "ADD"|"REMOVE"|"REPLACE"|string;
+  export type Operation = "ADD"|"REMOVE"|"REPLACE"|string&{};
   export type Path = string;
   export type PlayerId = string;
   export type RawGameConfigurationData = Buffer|Uint8Array|Blob|string;
   export type ResourceArn = string;
-  export type ResultCode = "SUCCESS"|"INVALID_ROLE_FAILURE"|"UNSPECIFIED_FAILURE"|string;
+  export type ResultCode = "SUCCESS"|"INVALID_ROLE_FAILURE"|"UNSPECIFIED_FAILURE"|string&{};
   export type RoleARN = string;
   export type S3PresignedUrl = string;
   export interface Section {
@@ -1152,7 +1152,7 @@ declare namespace GameSparks {
     Tags?: TagMap;
   }
   export type StageName = string;
-  export type StageState = "ACTIVE"|"DELETING"|string;
+  export type StageState = "ACTIVE"|"DELETING"|string&{};
   export interface StageSummary {
     /**
      * The description of the stage.

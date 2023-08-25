@@ -118,7 +118,7 @@ declare class DocDBElastic extends Service {
 }
 declare namespace DocDBElastic {
   export type Arn = string;
-  export type Auth = "PLAIN_TEXT"|"SECRET_ARN"|string;
+  export type Auth = "PLAIN_TEXT"|"SECRET_ARN"|string&{};
   export interface Cluster {
     /**
      * The name of the Elastic DocumentDB cluster administrator.
@@ -471,7 +471,7 @@ declare namespace DocDBElastic {
      */
     cluster: Cluster;
   }
-  export type Status = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"VPC_ENDPOINT_LIMIT_EXCEEDED"|"IP_ADDRESS_LIMIT_EXCEEDED"|"INVALID_SECURITY_GROUP_ID"|"INVALID_SUBNET_ID"|"INACCESSIBLE_ENCRYPTION_CREDS"|string;
+  export type Status = "CREATING"|"ACTIVE"|"DELETING"|"UPDATING"|"VPC_ENDPOINT_LIMIT_EXCEEDED"|"IP_ADDRESS_LIMIT_EXCEEDED"|"INVALID_SECURITY_GROUP_ID"|"INVALID_SUBNET_ID"|"INACCESSIBLE_ENCRYPTION_CREDS"|string&{};
   export type String = string;
   export type StringList = String[];
   export type TagKey = string;

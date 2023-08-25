@@ -119,7 +119,7 @@ declare namespace ManagedBlockchainQuery {
     time?: Timestamp;
   }
   export type ChainAddress = string;
-  export type ErrorType = "VALIDATION_EXCEPTION"|"RESOURCE_NOT_FOUND_EXCEPTION"|string;
+  export type ErrorType = "VALIDATION_EXCEPTION"|"RESOURCE_NOT_FOUND_EXCEPTION"|string&{};
   export interface GetTokenBalanceInput {
     /**
      * The container for the identifier for the token, including the unique token ID and its blockchain network.
@@ -265,7 +265,7 @@ declare namespace ManagedBlockchainQuery {
      */
     sortOrder?: SortOrder;
   }
-  export type ListTransactionsSortBy = "TRANSACTION_TIMESTAMP"|string;
+  export type ListTransactionsSortBy = "TRANSACTION_TIMESTAMP"|string&{};
   export type Long = number;
   export type NextToken = string;
   export interface OwnerFilter {
@@ -280,12 +280,12 @@ declare namespace ManagedBlockchainQuery {
      */
     address: ChainAddress;
   }
-  export type QueryNetwork = "ETHEREUM_MAINNET"|"BITCOIN_MAINNET"|string;
+  export type QueryNetwork = "ETHEREUM_MAINNET"|"BITCOIN_MAINNET"|string&{};
   export type QueryTokenId = string;
-  export type QueryTransactionEventType = "ERC20_TRANSFER"|"ERC20_MINT"|"ERC20_BURN"|"ERC20_DEPOSIT"|"ERC20_WITHDRAWAL"|"ERC721_TRANSFER"|"ERC1155_TRANSFER"|"BITCOIN_VIN"|"BITCOIN_VOUT"|"INTERNAL_ETH_TRANSFER"|"ETH_TRANSFER"|string;
+  export type QueryTransactionEventType = "ERC20_TRANSFER"|"ERC20_MINT"|"ERC20_BURN"|"ERC20_DEPOSIT"|"ERC20_WITHDRAWAL"|"ERC721_TRANSFER"|"ERC1155_TRANSFER"|"BITCOIN_VIN"|"BITCOIN_VOUT"|"INTERNAL_ETH_TRANSFER"|"ETH_TRANSFER"|string&{};
   export type QueryTransactionHash = string;
-  export type QueryTransactionStatus = "FINAL"|"FAILED"|string;
-  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export type QueryTransactionStatus = "FINAL"|"FAILED"|string&{};
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string&{};
   export type String = string;
   export type Timestamp = Date;
   export interface TokenBalance {
