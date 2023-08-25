@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1444.0-->
+<!--LATEST=2.1445.0-->
 <!--ENTRYINSERT-->
+
+## 2.1445.0
+* feature: CloudTrail: Add ThrottlingException with error code 429 to handle CloudTrail Delegated Admin request rate exceeded on organization resources.
+* feature: Detective: Added protections to interacting with fields containing customer information.
 
 ## 2.1444.0
 * feature: EC2: Amazon EC2 M7a instances, powered by 4th generation AMD EPYC processors, deliver up to 50% higher performance compared to M6a instances. Amazon EC2 Hpc7a instances, powered by 4th Gen AMD EPYC processors, deliver up to 2.5x better performance compared to Amazon EC2 Hpc6a instances.

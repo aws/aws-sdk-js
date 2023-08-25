@@ -352,6 +352,9 @@
         },
         {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>",
@@ -496,6 +499,9 @@
         },
         {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InvalidHomeRegionException"
@@ -799,6 +805,9 @@
         },
         {
           "shape": "NoManagementAccountSLRExistsException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p>Describes the settings for the Insights event selectors that you configured for your trail. <code>GetInsightSelectors</code> shows if CloudTrail Insights event logging is enabled on the trail, and if it is, which insight types are enabled. If you run <code>GetInsightSelectors</code> on a trail that does not have Insights events enabled, the operation throws the exception <code>InsightNotEnabledException</code> </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Logging CloudTrail Insights Events for Trails </a> in the <i>CloudTrail User Guide</i>.</p>",
@@ -1293,6 +1302,9 @@
           "shape": "ConflictException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "UnsupportedOperationException"
         },
         {
@@ -1362,6 +1374,9 @@
         },
         {
           "shape": "NoManagementAccountSLRExistsException"
+        },
+        {
+          "shape": "ThrottlingException"
         }
       ],
       "documentation": "<p>Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing trail. You also use <code>PutInsightSelectors</code> to turn off Insights event logging, by passing an empty list of insight types. The valid Insights event types in this release are <code>ApiErrorRateInsight</code> and <code>ApiCallRateInsight</code>.</p> <p>To log CloudTrail Insights events on API call volume, the trail must log <code>write</code> management events. To log CloudTrail Insights events on API error rate, the trail must log <code>read</code> or <code>write</code> management events. You can call <code>GetEventSelectors</code> on a trail to check whether the trail logs management events.</p>",
@@ -1696,6 +1711,9 @@
           "shape": "ConflictException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "TrailNotFoundException"
         },
         {
@@ -1880,6 +1898,9 @@
         },
         {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InvalidHomeRegionException"
@@ -2078,6 +2099,9 @@
         },
         {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InvalidParameterCombinationException"
