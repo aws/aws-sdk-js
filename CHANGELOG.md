@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1445.0-->
+<!--LATEST=2.1446.0-->
 <!--ENTRYINSERT-->
+
+## 2.1446.0
+* feature: Backup: Add support for customizing time zone for backup window in backup plan rules.
+* feature: ComputeOptimizer: This release enables AWS Compute Optimizer to analyze and generate licensing optimization recommendations for sql server running on EC2 instances.
+* feature: SecurityLake: Remove incorrect regex enforcement on pagination tokens.
+* feature: ServiceQuotas: Service Quotas now supports viewing the applied quota value and requesting a quota increase for a specific resource in an AWS account.
+* feature: WorkSpacesWeb: WorkSpaces Web now enables Admins to configure which cookies are synchronized from an end-user's local browser to the in-session browser. In conjunction with a browser extension, this feature enables enhanced Single-Sign On capability by reducing the number of times an end-user has to authenticate.
 
 ## 2.1445.0
 * feature: CloudTrail: Add ThrottlingException with error code 429 to handle CloudTrail Delegated Admin request rate exceeded on organization resources.

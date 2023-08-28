@@ -60,11 +60,11 @@ declare class Backup extends Service {
    */
   createLegalHold(callback?: (err: AWSError, data: Backup.Types.CreateLegalHoldOutput) => void): Request<Backup.Types.CreateLegalHoldOutput, AWSError>;
   /**
-   * This request creates a logical container where backups are stored. This request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Do not include sensitive data, such as passport numbers, in the name of a backup vault. 
+   * This request creates a logical container to where backups may be copied. This request includes a name, the Region, the maximum number of retention days, the minimum number of retention days, and optionally can include tags and a creator request ID.  Do not include sensitive data, such as passport numbers, in the name of a backup vault. 
    */
   createLogicallyAirGappedBackupVault(params: Backup.Types.CreateLogicallyAirGappedBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.CreateLogicallyAirGappedBackupVaultOutput) => void): Request<Backup.Types.CreateLogicallyAirGappedBackupVaultOutput, AWSError>;
   /**
-   * This request creates a logical container where backups are stored. This request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Do not include sensitive data, such as passport numbers, in the name of a backup vault. 
+   * This request creates a logical container to where backups may be copied. This request includes a name, the Region, the maximum number of retention days, the minimum number of retention days, and optionally can include tags and a creator request ID.  Do not include sensitive data, such as passport numbers, in the name of a backup vault. 
    */
   createLogicallyAirGappedBackupVault(callback?: (err: AWSError, data: Backup.Types.CreateLogicallyAirGappedBackupVaultOutput) => void): Request<Backup.Types.CreateLogicallyAirGappedBackupVaultOutput, AWSError>;
   /**
@@ -835,6 +835,10 @@ declare namespace Backup {
      * Specifies whether Backup creates continuous backups. True causes Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes Backup to create snapshot backups.
      */
     EnableContinuousBackup?: Boolean;
+    /**
+     * This is the timezone in which the schedule expression is set. By default, ScheduleExpressions are in UTC. You can modify this to a specified timezone.
+     */
+    ScheduleExpressionTimezone?: Timezone;
   }
   export interface BackupRuleInput {
     /**
@@ -873,6 +877,10 @@ declare namespace Backup {
      * Specifies whether Backup creates continuous backups. True causes Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes Backup to create snapshot backups.
      */
     EnableContinuousBackup?: Boolean;
+    /**
+     * This is the timezone in which the schedule expression is set. By default, ScheduleExpressions are in UTC. You can modify this to a specified timezone.
+     */
+    ScheduleExpressionTimezone?: Timezone;
   }
   export type BackupRuleName = string;
   export type BackupRules = BackupRule[];
@@ -2047,7 +2055,7 @@ declare namespace Backup {
      */
     ControlInputParameters?: ControlInputParameters;
     /**
-     * The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. For more information, see  ControlScope. 
+     * The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans.
      */
     ControlScope?: ControlScope;
   }
@@ -3491,6 +3499,7 @@ declare namespace Backup {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export type Timezone = string;
   export interface UntagResourceInput {
     /**
      * An ARN that uniquely identifies a resource. The format of the ARN depends on the type of the tagged resource.

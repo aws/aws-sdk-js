@@ -12,11 +12,11 @@ declare class ServiceQuotas extends Service {
   constructor(options?: ServiceQuotas.Types.ClientConfiguration)
   config: Config & ServiceQuotas.Types.ClientConfiguration;
   /**
-   * Associates your quota request template with your organization. When a new account is created in your organization, the quota increase requests in the template are automatically applied to the account. You can add a quota increase request for any adjustable quota to your template.
+   * Associates your quota request template with your organization. When a new Amazon Web Services account is created in your organization, the quota increase requests in the template are automatically applied to the account. You can add a quota increase request for any adjustable quota to your template.
    */
   associateServiceQuotaTemplate(params: ServiceQuotas.Types.AssociateServiceQuotaTemplateRequest, callback?: (err: AWSError, data: ServiceQuotas.Types.AssociateServiceQuotaTemplateResponse) => void): Request<ServiceQuotas.Types.AssociateServiceQuotaTemplateResponse, AWSError>;
   /**
-   * Associates your quota request template with your organization. When a new account is created in your organization, the quota increase requests in the template are automatically applied to the account. You can add a quota increase request for any adjustable quota to your template.
+   * Associates your quota request template with your organization. When a new Amazon Web Services account is created in your organization, the quota increase requests in the template are automatically applied to the account. You can add a quota increase request for any adjustable quota to your template.
    */
   associateServiceQuotaTemplate(callback?: (err: AWSError, data: ServiceQuotas.Types.AssociateServiceQuotaTemplateResponse) => void): Request<ServiceQuotas.Types.AssociateServiceQuotaTemplateResponse, AWSError>;
   /**
@@ -28,11 +28,11 @@ declare class ServiceQuotas extends Service {
    */
   deleteServiceQuotaIncreaseRequestFromTemplate(callback?: (err: AWSError, data: ServiceQuotas.Types.DeleteServiceQuotaIncreaseRequestFromTemplateResponse) => void): Request<ServiceQuotas.Types.DeleteServiceQuotaIncreaseRequestFromTemplateResponse, AWSError>;
   /**
-   * Disables your quota request template. After a template is disabled, the quota increase requests in the template are not applied to new accounts in your organization. Disabling a quota request template does not apply its quota increase requests.
+   * Disables your quota request template. After a template is disabled, the quota increase requests in the template are not applied to new Amazon Web Services accounts in your organization. Disabling a quota request template does not apply its quota increase requests.
    */
   disassociateServiceQuotaTemplate(params: ServiceQuotas.Types.DisassociateServiceQuotaTemplateRequest, callback?: (err: AWSError, data: ServiceQuotas.Types.DisassociateServiceQuotaTemplateResponse) => void): Request<ServiceQuotas.Types.DisassociateServiceQuotaTemplateResponse, AWSError>;
   /**
-   * Disables your quota request template. After a template is disabled, the quota increase requests in the template are not applied to new accounts in your organization. Disabling a quota request template does not apply its quota increase requests.
+   * Disables your quota request template. After a template is disabled, the quota increase requests in the template are not applied to new Amazon Web Services accounts in your organization. Disabling a quota request template does not apply its quota increase requests.
    */
   disassociateServiceQuotaTemplate(callback?: (err: AWSError, data: ServiceQuotas.Types.DisassociateServiceQuotaTemplateResponse) => void): Request<ServiceQuotas.Types.DisassociateServiceQuotaTemplateResponse, AWSError>;
   /**
@@ -76,19 +76,19 @@ declare class ServiceQuotas extends Service {
    */
   getServiceQuotaIncreaseRequestFromTemplate(callback?: (err: AWSError, data: ServiceQuotas.Types.GetServiceQuotaIncreaseRequestFromTemplateResponse) => void): Request<ServiceQuotas.Types.GetServiceQuotaIncreaseRequestFromTemplateResponse, AWSError>;
   /**
-   * Lists the default values for the quotas for the specified AWS service. A default value does not reflect any quota increases.
+   * Lists the default values for the quotas for the specified Amazon Web Service. A default value does not reflect any quota increases.
    */
   listAWSDefaultServiceQuotas(params: ServiceQuotas.Types.ListAWSDefaultServiceQuotasRequest, callback?: (err: AWSError, data: ServiceQuotas.Types.ListAWSDefaultServiceQuotasResponse) => void): Request<ServiceQuotas.Types.ListAWSDefaultServiceQuotasResponse, AWSError>;
   /**
-   * Lists the default values for the quotas for the specified AWS service. A default value does not reflect any quota increases.
+   * Lists the default values for the quotas for the specified Amazon Web Service. A default value does not reflect any quota increases.
    */
   listAWSDefaultServiceQuotas(callback?: (err: AWSError, data: ServiceQuotas.Types.ListAWSDefaultServiceQuotasResponse) => void): Request<ServiceQuotas.Types.ListAWSDefaultServiceQuotasResponse, AWSError>;
   /**
-   * Retrieves the quota increase requests for the specified service.
+   * Retrieves the quota increase requests for the specified Amazon Web Service.
    */
   listRequestedServiceQuotaChangeHistory(params: ServiceQuotas.Types.ListRequestedServiceQuotaChangeHistoryRequest, callback?: (err: AWSError, data: ServiceQuotas.Types.ListRequestedServiceQuotaChangeHistoryResponse) => void): Request<ServiceQuotas.Types.ListRequestedServiceQuotaChangeHistoryResponse, AWSError>;
   /**
-   * Retrieves the quota increase requests for the specified service.
+   * Retrieves the quota increase requests for the specified Amazon Web Service.
    */
   listRequestedServiceQuotaChangeHistory(callback?: (err: AWSError, data: ServiceQuotas.Types.ListRequestedServiceQuotaChangeHistoryResponse) => void): Request<ServiceQuotas.Types.ListRequestedServiceQuotaChangeHistoryResponse, AWSError>;
   /**
@@ -108,19 +108,19 @@ declare class ServiceQuotas extends Service {
    */
   listServiceQuotaIncreaseRequestsInTemplate(callback?: (err: AWSError, data: ServiceQuotas.Types.ListServiceQuotaIncreaseRequestsInTemplateResponse) => void): Request<ServiceQuotas.Types.ListServiceQuotaIncreaseRequestsInTemplateResponse, AWSError>;
   /**
-   * Lists the applied quota values for the specified AWS service. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
+   * Lists the applied quota values for the specified Amazon Web Service. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
    */
   listServiceQuotas(params: ServiceQuotas.Types.ListServiceQuotasRequest, callback?: (err: AWSError, data: ServiceQuotas.Types.ListServiceQuotasResponse) => void): Request<ServiceQuotas.Types.ListServiceQuotasResponse, AWSError>;
   /**
-   * Lists the applied quota values for the specified AWS service. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
+   * Lists the applied quota values for the specified Amazon Web Service. For some quotas, only the default values are available. If the applied quota value is not available for a quota, the quota is not retrieved.
    */
   listServiceQuotas(callback?: (err: AWSError, data: ServiceQuotas.Types.ListServiceQuotasResponse) => void): Request<ServiceQuotas.Types.ListServiceQuotasResponse, AWSError>;
   /**
-   * Lists the names and codes for the services integrated with Service Quotas.
+   * Lists the names and codes for the Amazon Web Services integrated with Service Quotas.
    */
   listServices(params: ServiceQuotas.Types.ListServicesRequest, callback?: (err: AWSError, data: ServiceQuotas.Types.ListServicesResponse) => void): Request<ServiceQuotas.Types.ListServicesResponse, AWSError>;
   /**
-   * Lists the names and codes for the services integrated with Service Quotas.
+   * Lists the names and codes for the Amazon Web Services integrated with Service Quotas.
    */
   listServices(callback?: (err: AWSError, data: ServiceQuotas.Types.ListServicesResponse) => void): Request<ServiceQuotas.Types.ListServicesResponse, AWSError>;
   /**
@@ -166,6 +166,7 @@ declare class ServiceQuotas extends Service {
 }
 declare namespace ServiceQuotas {
   export type AmazonResourceName = string;
+  export type AppliedLevelEnum = "ACCOUNT"|"RESOURCE"|"ALL"|string;
   export interface AssociateServiceQuotaTemplateRequest {
   }
   export interface AssociateServiceQuotaTemplateResponse {
@@ -175,15 +176,15 @@ declare namespace ServiceQuotas {
   export type DateTime = Date;
   export interface DeleteServiceQuotaIncreaseRequestFromTemplateRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode: QuotaCode;
     /**
-     * The AWS Region.
+     * Specifies the Amazon Web Services Region for which the request was made.
      */
     AwsRegion: AwsRegion;
   }
@@ -197,7 +198,7 @@ declare namespace ServiceQuotas {
   export type ErrorMessage = string;
   export interface ErrorReason {
     /**
-     * Service Quotas returns the following error values:    DEPENDENCY_ACCESS_DENIED_ERROR - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the service or quota.    DEPENDENCY_THROTTLING_ERROR - The service is throttling Service Quotas.    DEPENDENCY_SERVICE_ERROR - The service is not available.    SERVICE_QUOTA_NOT_AVAILABLE_ERROR - There was an error in Service Quotas.  
+     * Service Quotas returns the following error values:    DEPENDENCY_ACCESS_DENIED_ERROR - The caller does not have the required permissions to complete the action. To resolve the error, you must have permission to access the Amazon Web Service or quota.    DEPENDENCY_THROTTLING_ERROR - The Amazon Web Service is throttling Service Quotas.     DEPENDENCY_SERVICE_ERROR - The Amazon Web Service is not available.    SERVICE_QUOTA_NOT_AVAILABLE_ERROR - There was an error in Service Quotas.  
      */
     ErrorCode?: ErrorCode;
     /**
@@ -207,11 +208,11 @@ declare namespace ServiceQuotas {
   }
   export interface GetAWSDefaultServiceQuotaRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode: QuotaCode;
   }
@@ -225,13 +226,13 @@ declare namespace ServiceQuotas {
   }
   export interface GetAssociationForServiceQuotaTemplateResponse {
     /**
-     * The association status. If the status is ASSOCIATED, the quota increase requests in the template are automatically applied to new accounts in your organization.
+     * The association status. If the status is ASSOCIATED, the quota increase requests in the template are automatically applied to new Amazon Web Services accounts in your organization.
      */
     ServiceQuotaTemplateAssociationStatus?: ServiceQuotaTemplateAssociationStatus;
   }
   export interface GetRequestedServiceQuotaChangeRequest {
     /**
-     * The ID of the quota increase request.
+     * Specifies the ID of the quota increase request.
      */
     RequestId: RequestId;
   }
@@ -243,15 +244,15 @@ declare namespace ServiceQuotas {
   }
   export interface GetServiceQuotaIncreaseRequestFromTemplateRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode: QuotaCode;
     /**
-     * The AWS Region.
+     * Specifies the Amazon Web Services Region for which you made the request.
      */
     AwsRegion: AwsRegion;
   }
@@ -263,13 +264,17 @@ declare namespace ServiceQuotas {
   }
   export interface GetServiceQuotaRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode: QuotaCode;
+    /**
+     * Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field depends on the context scope associated with the specified service quota.
+     */
+    ContextId?: QuotaContextId;
   }
   export interface GetServiceQuotaResponse {
     /**
@@ -282,21 +287,21 @@ declare namespace ServiceQuotas {
   export type InputTags = Tag[];
   export interface ListAWSDefaultServiceQuotasRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The token for the next page of results.
+     * Specifies a value for receiving additional results after you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+     * Specifies the maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the NextToken response element is present and has a value (is not null). Include that value as the NextToken request parameter in the next call to the operation to get the next part of the results.  An API operation can return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. 
      */
     MaxResults?: MaxResults;
   }
   export interface ListAWSDefaultServiceQuotasResponse {
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
      */
     NextToken?: NextToken;
     /**
@@ -306,29 +311,33 @@ declare namespace ServiceQuotas {
   }
   export interface ListRequestedServiceQuotaChangeHistoryByQuotaRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode: QuotaCode;
     /**
-     * The status value of the quota increase request.
+     * Specifies that you want to filter the results to only the requests with the matching status.
      */
     Status?: RequestStatus;
     /**
-     * The token for the next page of results.
+     * Specifies a value for receiving additional results after you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+     * Specifies the maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the NextToken response element is present and has a value (is not null). Include that value as the NextToken request parameter in the next call to the operation to get the next part of the results.  An API operation can return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. 
      */
     MaxResults?: MaxResults;
+    /**
+     * Specifies at which level within the Amazon Web Services account the quota request applies to.
+     */
+    QuotaRequestedAtLevel?: AppliedLevelEnum;
   }
   export interface ListRequestedServiceQuotaChangeHistoryByQuotaResponse {
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
      */
     NextToken?: NextToken;
     /**
@@ -338,25 +347,29 @@ declare namespace ServiceQuotas {
   }
   export interface ListRequestedServiceQuotaChangeHistoryRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode?: ServiceCode;
     /**
-     * The status of the quota increase request.
+     * Specifies that you want to filter the results to only the requests with the matching status.
      */
     Status?: RequestStatus;
     /**
-     * The token for the next page of results.
+     * Specifies a value for receiving additional results after you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+     * Specifies the maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the NextToken response element is present and has a value (is not null). Include that value as the NextToken request parameter in the next call to the operation to get the next part of the results.  An API operation can return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. 
      */
     MaxResults?: MaxResults;
+    /**
+     * Specifies at which level within the Amazon Web Services account the quota request applies to.
+     */
+    QuotaRequestedAtLevel?: AppliedLevelEnum;
   }
   export interface ListRequestedServiceQuotaChangeHistoryResponse {
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
      */
     NextToken?: NextToken;
     /**
@@ -366,19 +379,19 @@ declare namespace ServiceQuotas {
   }
   export interface ListServiceQuotaIncreaseRequestsInTemplateRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode?: ServiceCode;
     /**
-     * The AWS Region.
+     * Specifies the Amazon Web Services Region for which you made the request.
      */
     AwsRegion?: AwsRegion;
     /**
-     * The token for the next page of results.
+     * Specifies a value for receiving additional results after you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+     * Specifies the maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the NextToken response element is present and has a value (is not null). Include that value as the NextToken request parameter in the next call to the operation to get the next part of the results.  An API operation can return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. 
      */
     MaxResults?: MaxResults;
   }
@@ -388,27 +401,35 @@ declare namespace ServiceQuotas {
      */
     ServiceQuotaIncreaseRequestInTemplateList?: ServiceQuotaIncreaseRequestInTemplateList;
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
      */
     NextToken?: NextToken;
   }
   export interface ListServiceQuotasRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The token for the next page of results.
+     * Specifies a value for receiving additional results after you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+     * Specifies the maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the NextToken response element is present and has a value (is not null). Include that value as the NextToken request parameter in the next call to the operation to get the next part of the results.  An API operation can return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. 
      */
     MaxResults?: MaxResults;
+    /**
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
+     */
+    QuotaCode?: QuotaCode;
+    /**
+     * Specifies at which level of granularity that the quota value is applied.
+     */
+    QuotaAppliedAtLevel?: AppliedLevelEnum;
   }
   export interface ListServiceQuotasResponse {
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
      */
     NextToken?: NextToken;
     /**
@@ -418,27 +439,27 @@ declare namespace ServiceQuotas {
   }
   export interface ListServicesRequest {
     /**
-     * The token for the next page of results.
+     * Specifies a value for receiving additional results after you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to return with a single call. To retrieve the remaining results, if any, make another call with the token returned from this call.
+     * Specifies the maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the NextToken response element is present and has a value (is not null). Include that value as the NextToken request parameter in the next call to the operation to get the next part of the results.  An API operation can return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. 
      */
     MaxResults?: MaxResults;
   }
   export interface ListServicesResponse {
     /**
-     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
      */
     NextToken?: NextToken;
     /**
-     * Information about the services.
+     * The list of the Amazon Web Service names and service codes.
      */
     Services?: ServiceInfoListDefinition;
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) for the applied quota for which you want to list tags. You can get this information by using the Service Quotas console, or by listing the quotas using the list-service-quotas AWS CLI command or the ListServiceQuotas AWS API operation.
+     * The Amazon Resource Name (ARN) for the applied quota for which you want to list tags. You can get this information by using the Service Quotas console, or by listing the quotas using the list-service-quotas CLI command or the ListServiceQuotas Amazon Web Services API operation.
      */
     ResourceARN: AmazonResourceName;
   }
@@ -476,19 +497,19 @@ declare namespace ServiceQuotas {
   export type PeriodValue = number;
   export interface PutServiceQuotaIncreaseRequestIntoTemplateRequest {
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode: QuotaCode;
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The AWS Region.
+     * Specifies the Amazon Web Services Region to which the template applies.
      */
     AwsRegion: AwsRegion;
     /**
-     * The new, increased value for the quota.
+     * Specifies the new, increased value for the quota.
      */
     DesiredValue: QuotaValue;
   }
@@ -501,12 +522,29 @@ declare namespace ServiceQuotas {
   export type QuotaAdjustable = boolean;
   export type QuotaArn = string;
   export type QuotaCode = string;
+  export type QuotaContextId = string;
+  export interface QuotaContextInfo {
+    /**
+     * Specifies whether the quota applies to an Amazon Web Services account, or to a resource.
+     */
+    ContextScope?: QuotaContextScope;
+    /**
+     * When the ContextScope is RESOURCE, then this specifies the resource type of the specified resource.
+     */
+    ContextScopeType?: QuotaContextScopeType;
+    /**
+     * Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field depends on the context scope associated with the specified service quota.
+     */
+    ContextId?: QuotaContextId;
+  }
+  export type QuotaContextScope = "RESOURCE"|"ACCOUNT"|string;
+  export type QuotaContextScopeType = string;
   export type QuotaMetricName = string;
   export type QuotaMetricNamespace = string;
   export type QuotaName = string;
   export interface QuotaPeriod {
     /**
-     * The value.
+     * The value associated with the reported PeriodUnit.
      */
     PeriodValue?: PeriodValue;
     /**
@@ -519,17 +557,21 @@ declare namespace ServiceQuotas {
   export type RequestId = string;
   export interface RequestServiceQuotaIncreaseRequest {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode: ServiceCode;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode: QuotaCode;
     /**
-     * The new, increased value for the quota.
+     * Specifies the new, increased value for the quota.
      */
     DesiredValue: QuotaValue;
+    /**
+     * Specifies the Amazon Web Services account or resource to which the quota applies. The value in this field depends on the context scope associated with the specified service quota.
+     */
+    ContextId?: QuotaContextId;
   }
   export interface RequestServiceQuotaIncreaseResponse {
     /**
@@ -537,7 +579,7 @@ declare namespace ServiceQuotas {
      */
     RequestedQuota?: RequestedServiceQuotaChange;
   }
-  export type RequestStatus = "PENDING"|"CASE_OPENED"|"APPROVED"|"DENIED"|"CASE_CLOSED"|string;
+  export type RequestStatus = "PENDING"|"CASE_OPENED"|"APPROVED"|"DENIED"|"CASE_CLOSED"|"NOT_APPROVED"|"INVALID_REQUEST"|string;
   export interface RequestedServiceQuotaChange {
     /**
      * The unique identifier.
@@ -548,19 +590,19 @@ declare namespace ServiceQuotas {
      */
     CaseId?: CustomerServiceEngagementId;
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode?: ServiceCode;
     /**
-     * The service name.
+     * Specifies the service name.
      */
     ServiceName?: ServiceName;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode?: QuotaCode;
     /**
-     * The quota name.
+     * Specifies the quota name.
      */
     QuotaName?: QuotaName;
     /**
@@ -595,17 +637,25 @@ declare namespace ServiceQuotas {
      * The unit of measurement.
      */
     Unit?: QuotaUnit;
+    /**
+     * Specifies at which level within the Amazon Web Services account the quota request applies to.
+     */
+    QuotaRequestedAtLevel?: AppliedLevelEnum;
+    /**
+     * The context for this service quota.
+     */
+    QuotaContext?: QuotaContextInfo;
   }
   export type RequestedServiceQuotaChangeHistoryListDefinition = RequestedServiceQuotaChange[];
   export type Requester = string;
   export type ServiceCode = string;
   export interface ServiceInfo {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode?: ServiceCode;
     /**
-     * The service name.
+     * Specifies the service name.
      */
     ServiceName?: ServiceName;
   }
@@ -613,11 +663,11 @@ declare namespace ServiceQuotas {
   export type ServiceName = string;
   export interface ServiceQuota {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode?: ServiceCode;
     /**
-     * The service name.
+     * Specifies the service name.
      */
     ServiceName?: ServiceName;
     /**
@@ -625,11 +675,11 @@ declare namespace ServiceQuotas {
      */
     QuotaArn?: QuotaArn;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode?: QuotaCode;
     /**
-     * The quota name.
+     * Specifies the quota name.
      */
     QuotaName?: QuotaName;
     /**
@@ -660,22 +710,30 @@ declare namespace ServiceQuotas {
      * The error code and error reason.
      */
     ErrorReason?: ErrorReason;
+    /**
+     * Specifies at which level of granularity that the quota value is applied.
+     */
+    QuotaAppliedAtLevel?: AppliedLevelEnum;
+    /**
+     * The context for this service quota.
+     */
+    QuotaContext?: QuotaContextInfo;
   }
   export interface ServiceQuotaIncreaseRequestInTemplate {
     /**
-     * The service identifier.
+     * Specifies the service identifier. To find the service code value for an Amazon Web Services service, use the ListServices operation.
      */
     ServiceCode?: ServiceCode;
     /**
-     * The service name.
+     * Specifies the service name.
      */
     ServiceName?: ServiceName;
     /**
-     * The quota identifier.
+     * Specifies the quota identifier. To find the quota code for a specific quota, use the ListServiceQuotas operation, and look for the QuotaCode response in the output for the quota you want.
      */
     QuotaCode?: QuotaCode;
     /**
-     * The quota name.
+     * Specifies the quota name.
      */
     QuotaName?: QuotaName;
     /**
@@ -683,7 +741,7 @@ declare namespace ServiceQuotas {
      */
     DesiredValue?: QuotaValue;
     /**
-     * The AWS Region.
+     * The Amazon Web Services Region.
      */
     AwsRegion?: AwsRegion;
     /**
@@ -712,7 +770,7 @@ declare namespace ServiceQuotas {
   export type TagKey = string;
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) for the applied quota. You can get this information by using the Service Quotas console, or by listing the quotas using the list-service-quotas AWS CLI command or the ListServiceQuotas AWS API operation.
+     * The Amazon Resource Name (ARN) for the applied quota. You can get this information by using the Service Quotas console, or by listing the quotas using the list-service-quotas CLI command or the ListServiceQuotas Amazon Web Services API operation.
      */
     ResourceARN: AmazonResourceName;
     /**
@@ -725,7 +783,7 @@ declare namespace ServiceQuotas {
   export type TagValue = string;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can get this information by using the Service Quotas console, or by listing the quotas using the list-service-quotas AWS CLI command or the ListServiceQuotas AWS API operation.
+     * The Amazon Resource Name (ARN) for the applied quota that you want to untag. You can get this information by using the Service Quotas console, or by listing the quotas using the list-service-quotas CLI command or the ListServiceQuotas Amazon Web Services API operation.
      */
     ResourceARN: AmazonResourceName;
     /**

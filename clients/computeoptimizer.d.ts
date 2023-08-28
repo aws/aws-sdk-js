@@ -68,6 +68,14 @@ declare class ComputeOptimizer extends Service {
    */
   exportLambdaFunctionRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportLambdaFunctionRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportLambdaFunctionRecommendationsResponse, AWSError>;
   /**
+   *  Export optimization recommendations for your licenses.  Recommendations are exported in a comma-separated values (CSV) file, and its metadata in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one license export job in progress per Amazon Web Services Region.
+   */
+  exportLicenseRecommendations(params: ComputeOptimizer.Types.ExportLicenseRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportLicenseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportLicenseRecommendationsResponse, AWSError>;
+  /**
+   *  Export optimization recommendations for your licenses.  Recommendations are exported in a comma-separated values (CSV) file, and its metadata in a JavaScript Object Notation (JSON) file, to an existing Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more information, see Exporting Recommendations in the Compute Optimizer User Guide. You can have only one license export job in progress per Amazon Web Services Region.
+   */
+  exportLicenseRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.ExportLicenseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.ExportLicenseRecommendationsResponse, AWSError>;
+  /**
    * Returns Auto Scaling group recommendations. Compute Optimizer generates recommendations for Amazon EC2 Auto Scaling groups that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide.
    */
   getAutoScalingGroupRecommendations(params: ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetAutoScalingGroupRecommendationsResponse, AWSError>;
@@ -147,6 +155,14 @@ declare class ComputeOptimizer extends Service {
    * Returns Lambda function recommendations. Compute Optimizer generates recommendations for functions that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide.
    */
   getLambdaFunctionRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetLambdaFunctionRecommendationsResponse, AWSError>;
+  /**
+   * Returns license recommendations for Amazon EC2 instances that run on a specific license. Compute Optimizer generates recommendations for licenses that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide.
+   */
+  getLicenseRecommendations(params: ComputeOptimizer.Types.GetLicenseRecommendationsRequest, callback?: (err: AWSError, data: ComputeOptimizer.Types.GetLicenseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetLicenseRecommendationsResponse, AWSError>;
+  /**
+   * Returns license recommendations for Amazon EC2 instances that run on a specific license. Compute Optimizer generates recommendations for licenses that meet a specific set of requirements. For more information, see the Supported resources and requirements in the Compute Optimizer User Guide.
+   */
+  getLicenseRecommendations(callback?: (err: AWSError, data: ComputeOptimizer.Types.GetLicenseRecommendationsResponse) => void): Request<ComputeOptimizer.Types.GetLicenseRecommendationsResponse, AWSError>;
   /**
    * Returns existing recommendation preferences, such as enhanced infrastructure metrics. Use the scope parameter to specify which preferences to return. You can specify to return preferences for an organization, a specific account ID, or a specific EC2 instance or Auto Scaling group Amazon Resource Name (ARN). For more information, see Activating enhanced infrastructure metrics in the Compute Optimizer User Guide.
    */
@@ -810,6 +826,36 @@ declare namespace ComputeOptimizer {
     jobId?: JobId;
     s3Destination?: S3Destination;
   }
+  export interface ExportLicenseRecommendationsRequest {
+    /**
+     * The IDs of the Amazon Web Services accounts for which to export license recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to export recommendations. This parameter can't be specified together with the include member accounts parameter. The parameters are mutually exclusive. If this parameter is omitted, recommendations for member accounts aren't included in the export. You can specify multiple account IDs per request.
+     */
+    accountIds?: AccountIds;
+    /**
+     *  An array of objects to specify a filter that exports a more specific set of license recommendations. 
+     */
+    filters?: LicenseRecommendationFilters;
+    /**
+     * The recommendations data to include in the export file. For more information about the fields that can be exported, see Exported files in the Compute Optimizer User Guide.
+     */
+    fieldsToExport?: ExportableLicenseFields;
+    s3DestinationConfig: S3DestinationConfig;
+    /**
+     * The format of the export file. A CSV file is the only export format currently supported.
+     */
+    fileFormat?: FileFormat;
+    /**
+     * Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization. The member accounts must also be opted in to Compute Optimizer, and trusted access for Compute Optimizer must be enabled in the organization account. For more information, see Compute Optimizer and Amazon Web Services Organizations trusted access in the Compute Optimizer User Guide. If this parameter is omitted, recommendations for member accounts of the organization aren't included in the export file . This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.
+     */
+    includeMemberAccounts?: IncludeMemberAccounts;
+  }
+  export interface ExportLicenseRecommendationsResponse {
+    /**
+     *  The identification number of the export job.  To view the status of an export job, use the DescribeRecommendationExportJobs action and specify the job ID.
+     */
+    jobId?: JobId;
+    s3Destination?: S3Destination;
+  }
   export type ExportableAutoScalingGroupField = "AccountId"|"AutoScalingGroupArn"|"AutoScalingGroupName"|"Finding"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsEbsReadOpsPerSecondMaximum"|"UtilizationMetricsEbsWriteOpsPerSecondMaximum"|"UtilizationMetricsEbsReadBytesPerSecondMaximum"|"UtilizationMetricsEbsWriteBytesPerSecondMaximum"|"UtilizationMetricsDiskReadOpsPerSecondMaximum"|"UtilizationMetricsDiskWriteOpsPerSecondMaximum"|"UtilizationMetricsDiskReadBytesPerSecondMaximum"|"UtilizationMetricsDiskWriteBytesPerSecondMaximum"|"UtilizationMetricsNetworkInBytesPerSecondMaximum"|"UtilizationMetricsNetworkOutBytesPerSecondMaximum"|"UtilizationMetricsNetworkPacketsInPerSecondMaximum"|"UtilizationMetricsNetworkPacketsOutPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationInstanceType"|"CurrentConfigurationDesiredCapacity"|"CurrentConfigurationMinSize"|"CurrentConfigurationMaxSize"|"CurrentOnDemandPrice"|"CurrentStandardOneYearNoUpfrontReservedPrice"|"CurrentStandardThreeYearNoUpfrontReservedPrice"|"CurrentVCpus"|"CurrentMemory"|"CurrentStorage"|"CurrentNetwork"|"RecommendationOptionsConfigurationInstanceType"|"RecommendationOptionsConfigurationDesiredCapacity"|"RecommendationOptionsConfigurationMinSize"|"RecommendationOptionsConfigurationMaxSize"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"RecommendationOptionsPerformanceRisk"|"RecommendationOptionsOnDemandPrice"|"RecommendationOptionsStandardOneYearNoUpfrontReservedPrice"|"RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice"|"RecommendationOptionsVcpus"|"RecommendationOptionsMemory"|"RecommendationOptionsStorage"|"RecommendationOptionsNetwork"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"EffectiveRecommendationPreferencesCpuVendorArchitectures"|"EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics"|"EffectiveRecommendationPreferencesInferredWorkloadTypes"|"InferredWorkloadTypes"|"RecommendationOptionsMigrationEffort"|string;
   export type ExportableAutoScalingGroupFields = ExportableAutoScalingGroupField[];
   export type ExportableECSServiceField = "AccountId"|"ServiceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"LaunchType"|"CurrentPerformanceRisk"|"CurrentServiceConfigurationMemory"|"CurrentServiceConfigurationCpu"|"CurrentServiceConfigurationTaskDefinitionArn"|"CurrentServiceConfigurationAutoScalingConfiguration"|"CurrentServiceContainerConfigurations"|"UtilizationMetricsCpuMaximum"|"UtilizationMetricsMemoryMaximum"|"Finding"|"FindingReasonCodes"|"RecommendationOptionsMemory"|"RecommendationOptionsCpu"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RecommendationOptionsContainerRecommendations"|"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"|"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"|"Tags"|string;
@@ -818,6 +864,8 @@ declare namespace ComputeOptimizer {
   export type ExportableInstanceFields = ExportableInstanceField[];
   export type ExportableLambdaFunctionField = "AccountId"|"FunctionArn"|"FunctionVersion"|"Finding"|"FindingReasonCodes"|"NumberOfInvocations"|"UtilizationMetricsDurationMaximum"|"UtilizationMetricsDurationAverage"|"UtilizationMetricsMemoryMaximum"|"UtilizationMetricsMemoryAverage"|"LookbackPeriodInDays"|"CurrentConfigurationMemorySize"|"CurrentConfigurationTimeout"|"CurrentCostTotal"|"CurrentCostAverage"|"RecommendationOptionsConfigurationMemorySize"|"RecommendationOptionsCostLow"|"RecommendationOptionsCostHigh"|"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"|"RecommendationOptionsProjectedUtilizationMetricsDurationExpected"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|string;
   export type ExportableLambdaFunctionFields = ExportableLambdaFunctionField[];
+  export type ExportableLicenseField = "AccountId"|"ResourceArn"|"LookbackPeriodInDays"|"LastRefreshTimestamp"|"Finding"|"FindingReasonCodes"|"CurrentLicenseConfigurationNumberOfCores"|"CurrentLicenseConfigurationInstanceType"|"CurrentLicenseConfigurationOperatingSystem"|"CurrentLicenseConfigurationLicenseName"|"CurrentLicenseConfigurationLicenseEdition"|"CurrentLicenseConfigurationLicenseModel"|"CurrentLicenseConfigurationLicenseVersion"|"CurrentLicenseConfigurationMetricsSource"|"RecommendationOptionsOperatingSystem"|"RecommendationOptionsLicenseEdition"|"RecommendationOptionsLicenseModel"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"Tags"|string;
+  export type ExportableLicenseFields = ExportableLicenseField[];
   export type ExportableVolumeField = "AccountId"|"VolumeArn"|"Finding"|"UtilizationMetricsVolumeReadOpsPerSecondMaximum"|"UtilizationMetricsVolumeWriteOpsPerSecondMaximum"|"UtilizationMetricsVolumeReadBytesPerSecondMaximum"|"UtilizationMetricsVolumeWriteBytesPerSecondMaximum"|"LookbackPeriodInDays"|"CurrentConfigurationVolumeType"|"CurrentConfigurationVolumeBaselineIOPS"|"CurrentConfigurationVolumeBaselineThroughput"|"CurrentConfigurationVolumeBurstIOPS"|"CurrentConfigurationVolumeBurstThroughput"|"CurrentConfigurationVolumeSize"|"CurrentMonthlyPrice"|"RecommendationOptionsConfigurationVolumeType"|"RecommendationOptionsConfigurationVolumeBaselineIOPS"|"RecommendationOptionsConfigurationVolumeBaselineThroughput"|"RecommendationOptionsConfigurationVolumeBurstIOPS"|"RecommendationOptionsConfigurationVolumeBurstThroughput"|"RecommendationOptionsConfigurationVolumeSize"|"RecommendationOptionsMonthlyPrice"|"RecommendationOptionsPerformanceRisk"|"LastRefreshTimestamp"|"CurrentPerformanceRisk"|"RecommendationOptionsSavingsOpportunityPercentage"|"RecommendationOptionsEstimatedMonthlySavingsCurrency"|"RecommendationOptionsEstimatedMonthlySavingsValue"|"RootVolume"|"Tags"|string;
   export type ExportableVolumeFields = ExportableVolumeField[];
   export interface ExternalMetricStatus {
@@ -1168,6 +1216,42 @@ declare namespace ComputeOptimizer {
      */
     lambdaFunctionRecommendations?: LambdaFunctionRecommendations;
   }
+  export interface GetLicenseRecommendationsRequest {
+    /**
+     *  The ARN that identifies the Amazon EC2 instance.   The following is the format of the ARN:   arn:aws:ec2:region:aws_account_id:instance/instance-id 
+     */
+    resourceArns?: ResourceArns;
+    /**
+     *  The token to advance to the next page of license recommendations. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  The maximum number of license recommendations to return with a single request.   To retrieve the remaining results, make another request with the returned nextToken value. 
+     */
+    maxResults?: MaxResults;
+    /**
+     *  An array of objects to specify a filter that returns a more specific list of license recommendations. 
+     */
+    filters?: LicenseRecommendationFilters;
+    /**
+     * The ID of the Amazon Web Services account for which to return license recommendations. If your account is the management account of an organization, use this parameter to specify the member account for which you want to return license recommendations. Only one account ID can be specified per request.
+     */
+    accountIds?: AccountIds;
+  }
+  export interface GetLicenseRecommendationsResponse {
+    /**
+     *  The token to use to advance to the next page of license recommendations. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  An array of objects that describe license recommendations. 
+     */
+    licenseRecommendations?: LicenseRecommendations;
+    /**
+     *  An array of objects that describe errors of the request. 
+     */
+    errors?: GetRecommendationErrors;
+  }
   export interface GetRecommendationError {
     /**
      * The ID of the error.
@@ -1500,6 +1584,118 @@ declare namespace ComputeOptimizer {
   export type LambdaFunctionUtilizationMetrics = LambdaFunctionUtilizationMetric[];
   export type LastRefreshTimestamp = Date;
   export type LastUpdatedTimestamp = Date;
+  export interface LicenseConfiguration {
+    /**
+     *  The current number of cores associated with the instance. 
+     */
+    numberOfCores?: NumberOfCores;
+    /**
+     *  The instance type used in the license. 
+     */
+    instanceType?: InstanceType;
+    /**
+     *  The operating system of the instance. 
+     */
+    operatingSystem?: OperatingSystem;
+    /**
+     *  The edition of the license for the application that runs on the instance. 
+     */
+    licenseEdition?: LicenseEdition;
+    /**
+     *  The name of the license for the application that runs on the instance. 
+     */
+    licenseName?: LicenseName;
+    /**
+     *  The license type associated with the instance. 
+     */
+    licenseModel?: LicenseModel;
+    /**
+     *  The version of the license for the application that runs on the instance. 
+     */
+    licenseVersion?: LicenseVersion;
+    /**
+     *  The list of metric sources required to generate recommendations for commercial software licenses. 
+     */
+    metricsSource?: MetricsSource;
+  }
+  export type LicenseEdition = "Enterprise"|"Standard"|"Free"|"NoLicenseEditionFound"|string;
+  export type LicenseFinding = "InsufficientMetrics"|"Optimized"|"NotOptimized"|string;
+  export type LicenseFindingReasonCode = "InvalidCloudWatchApplicationInsightsSetup"|"CloudWatchApplicationInsightsError"|"LicenseOverprovisioned"|"Optimized"|string;
+  export type LicenseFindingReasonCodes = LicenseFindingReasonCode[];
+  export type LicenseModel = "LicenseIncluded"|"BringYourOwnLicense"|string;
+  export type LicenseName = "SQLServer"|string;
+  export interface LicenseRecommendation {
+    /**
+     *  The ARN that identifies the Amazon EC2 instance. 
+     */
+    resourceArn?: ResourceArn;
+    /**
+     *  The Amazon Web Services account ID of the license. 
+     */
+    accountId?: AccountId;
+    /**
+     *  An object that describes the current configuration of an instance that runs on a license. 
+     */
+    currentLicenseConfiguration?: LicenseConfiguration;
+    /**
+     *  The number of days for which utilization metrics were analyzed for an instance that runs on a license. 
+     */
+    lookbackPeriodInDays?: LookBackPeriodInDays;
+    /**
+     *  The timestamp of when the license recommendation was last generated. 
+     */
+    lastRefreshTimestamp?: LastRefreshTimestamp;
+    /**
+     *  The finding classification for an instance that runs on a license.  Findings include:    InsufficentMetrics — When Compute Optimizer detects that your CloudWatch Application Insights isn't enabled or is enabled with insufficient permissions.     NotOptimized — When Compute Optimizer detects that your EC2 infrastructure isn't using any of the SQL server license features you're paying for, a license is considered not optimized.    Optimized — When Compute Optimizer detects that all specifications of your license meet the performance requirements of your workload.   
+     */
+    finding?: LicenseFinding;
+    /**
+     *  The reason for the finding classification for an instance that runs on a license.  Finding reason codes include:    Optimized — All specifications of your license meet the performance requirements of your workload.     LicenseOverprovisioned — A license is considered over-provisioned when your license can be downgraded while still meeting the performance requirements of your workload.    InvalidCloudwatchApplicationInsights — CloudWatch Application Insights isn't configured properly.    CloudwatchApplicationInsightsError — There is a CloudWatch Application Insights error.   
+     */
+    findingReasonCodes?: LicenseFindingReasonCodes;
+    /**
+     *  An array of objects that describe the license recommendation options. 
+     */
+    licenseRecommendationOptions?: LicenseRecommendationOptions;
+    /**
+     *  A list of tags assigned to an EC2 instance. 
+     */
+    tags?: Tags;
+  }
+  export interface LicenseRecommendationFilter {
+    /**
+     * The name of the filter. Specify Finding to return recommendations with a specific finding classification. Specify FindingReasonCode to return recommendations with a specific finding reason code. You can filter your license recommendations by tag:key and tag-key tags. A tag:key is a key and value combination of a tag assigned to your license recommendations. Use the tag key in the filter name and the tag value as the filter value. For example, to find all license recommendations that have a tag with the key of Owner and the value of TeamA, specify tag:Owner for the filter name and TeamA for the filter value. A tag-key is the key of a tag assigned to your license recommendations. Use this filter to find all of your license recommendations that have a tag with a specific key. This doesn’t consider the tag value. For example, you can find your license recommendations with a tag key value of Owner or without any tag keys assigned.
+     */
+    name?: LicenseRecommendationFilterName;
+    /**
+     * The value of the filter. The valid values for this parameter are as follows, depending on what you specify for the name parameter:   If you specify the name parameter as Finding, then specify Optimized, NotOptimized, or InsufficentMetrics.   If you specify the name parameter as FindingReasonCode, then specify Optimized, LicenseOverprovisioned, InvalidCloudwatchApplicationInsights, or CloudwatchApplicationInsightsError.  
+     */
+    values?: FilterValues;
+  }
+  export type LicenseRecommendationFilterName = "Finding"|"FindingReasonCode"|"LicenseName"|string;
+  export type LicenseRecommendationFilters = LicenseRecommendationFilter[];
+  export interface LicenseRecommendationOption {
+    /**
+     *  The rank of the license recommendation option.   The top recommendation option is ranked as 1. 
+     */
+    rank?: Rank;
+    /**
+     *  The operating system of a license recommendation option. 
+     */
+    operatingSystem?: OperatingSystem;
+    /**
+     *  The recommended edition of the license for the application that runs on the instance. 
+     */
+    licenseEdition?: LicenseEdition;
+    /**
+     *  The recommended license type associated with the instance. 
+     */
+    licenseModel?: LicenseModel;
+    savingsOpportunity?: SavingsOpportunity;
+  }
+  export type LicenseRecommendationOptions = LicenseRecommendationOption[];
+  export type LicenseRecommendations = LicenseRecommendation[];
+  export type LicenseVersion = string;
   export type LookBackPeriodInDays = number;
   export type Low = number;
   export type LowerBoundValue = number;
@@ -1521,17 +1717,32 @@ declare namespace ComputeOptimizer {
   export type Message = string;
   export type MetadataKey = string;
   export type MetricName = "Cpu"|"Memory"|"EBS_READ_OPS_PER_SECOND"|"EBS_WRITE_OPS_PER_SECOND"|"EBS_READ_BYTES_PER_SECOND"|"EBS_WRITE_BYTES_PER_SECOND"|"DISK_READ_OPS_PER_SECOND"|"DISK_WRITE_OPS_PER_SECOND"|"DISK_READ_BYTES_PER_SECOND"|"DISK_WRITE_BYTES_PER_SECOND"|"NETWORK_IN_BYTES_PER_SECOND"|"NETWORK_OUT_BYTES_PER_SECOND"|"NETWORK_PACKETS_IN_PER_SECOND"|"NETWORK_PACKETS_OUT_PER_SECOND"|string;
+  export type MetricProviderArn = string;
+  export interface MetricSource {
+    /**
+     *  The name of the metric source provider. 
+     */
+    provider?: MetricSourceProvider;
+    /**
+     *  The ARN of the metric source provider. 
+     */
+    providerArn?: MetricProviderArn;
+  }
+  export type MetricSourceProvider = "CloudWatchApplicationInsights"|string;
   export type MetricStatistic = "Maximum"|"Average"|string;
   export type MetricValue = number;
   export type MetricValues = MetricValue[];
+  export type MetricsSource = MetricSource[];
   export type MigrationEffort = "VeryLow"|"Low"|"Medium"|"High"|string;
   export type MinSize = number;
   export type NextToken = string;
   export type NullableCpu = number;
   export type NullableMemory = number;
   export type NullableMemoryReservation = number;
+  export type NumberOfCores = number;
   export type NumberOfInvocations = number;
   export type NumberOfMemberAccountsOptedIn = number;
+  export type OperatingSystem = string;
   export type PerformanceRisk = number;
   export type Period = number;
   export type PlatformDifference = "Hypervisor"|"NetworkInterface"|"StorageInterface"|"InstanceStoreAvailability"|"VirtualizationType"|"Architecture"|string;
@@ -1662,7 +1873,7 @@ declare namespace ComputeOptimizer {
     recommendationSourceType?: RecommendationSourceType;
   }
   export type RecommendationSourceArn = string;
-  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"EcsService"|string;
+  export type RecommendationSourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"EcsService"|"License"|string;
   export type RecommendationSources = RecommendationSource[];
   export type RecommendationSummaries = RecommendationSummary[];
   export interface RecommendationSummary {
@@ -1708,7 +1919,8 @@ declare namespace ComputeOptimizer {
   }
   export type RecommendedOptionProjectedMetrics = RecommendedOptionProjectedMetric[];
   export type ResourceArn = string;
-  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|"EcsService"|string;
+  export type ResourceArns = ResourceArn[];
+  export type ResourceType = "Ec2Instance"|"AutoScalingGroup"|"EbsVolume"|"LambdaFunction"|"NotApplicable"|"EcsService"|"License"|string;
   export type RootVolume = boolean;
   export interface S3Destination {
     /**
