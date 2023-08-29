@@ -590,11 +590,11 @@ declare class Omics extends Service {
    */
   startReferenceImportJob(callback?: (err: AWSError, data: Omics.Types.StartReferenceImportJobResponse) => void): Request<Omics.Types.StartReferenceImportJobResponse, AWSError>;
   /**
-   * Starts a run.
+   * Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The remaining parameters are copied from the previous run. The total number of runs in your account is subject to a quota per Region. To avoid needing to delete runs manually, you can set the retention mode to REMOVE. Runs with this setting are deleted automatically when the run quoata is exceeded.
    */
   startRun(params: Omics.Types.StartRunRequest, callback?: (err: AWSError, data: Omics.Types.StartRunResponse) => void): Request<Omics.Types.StartRunResponse, AWSError>;
   /**
-   * Starts a run.
+   * Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN. The remaining parameters are copied from the previous run. The total number of runs in your account is subject to a quota per Region. To avoid needing to delete runs manually, you can set the retention mode to REMOVE. Runs with this setting are deleted automatically when the run quoata is exceeded.
    */
   startRun(callback?: (err: AWSError, data: Omics.Types.StartRunResponse) => void): Request<Omics.Types.StartRunResponse, AWSError>;
   /**
@@ -2574,6 +2574,10 @@ declare namespace Omics {
      *  The computational accelerator used to run the workflow. 
      */
     accelerators?: Accelerators;
+    /**
+     * The run's retention mode.
+     */
+    retentionMode?: RunRetentionMode;
   }
   export type GetRunResponsePriorityInteger = number;
   export type GetRunResponseStorageCapacityInteger = number;
@@ -4185,6 +4189,7 @@ declare namespace Omics {
   export type RunResourceDigest = string;
   export type RunResourceDigestKey = string;
   export type RunResourceDigests = {[key: string]: RunResourceDigest};
+  export type RunRetentionMode = "RETAIN"|"REMOVE"|string;
   export type RunRoleArn = string;
   export type RunStartedBy = string;
   export type RunStatus = "PENDING"|"STARTING"|"RUNNING"|"STOPPING"|"COMPLETED"|"DELETED"|"CANCELLED"|"FAILED"|string;
@@ -4590,11 +4595,11 @@ declare namespace Omics {
      */
     workflowId?: WorkflowId;
     /**
-     * The run's workflows type.
+     * The run's workflow type.
      */
     workflowType?: WorkflowType;
     /**
-     * The run's ID.
+     * The ID of a run to duplicate.
      */
     runId?: RunId;
     /**
@@ -4637,6 +4642,10 @@ declare namespace Omics {
      * To ensure that requests don't run multiple times, specify a unique ID for each request.
      */
     requestId: RunRequestId;
+    /**
+     * The retention mode for the run.
+     */
+    retentionMode?: RunRetentionMode;
   }
   export type StartRunRequestPriorityInteger = number;
   export type StartRunRequestStorageCapacityInteger = number;

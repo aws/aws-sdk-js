@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CognitoIdentityServiceProvider",
+        "description": "Added API example requests and responses for several operations. Fixed the validation regex for user pools Identity Provider name."
+    },
+    {
+        "type": "feature",
+        "category": "Omics",
+        "description": "Add RetentionMode support for Runs."
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "Adds support for the new Export and Message Insights features: create, get, list and cancel export jobs; get message insights."
+    }
+]

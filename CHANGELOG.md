@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1446.0-->
+<!--LATEST=2.1447.0-->
 <!--ENTRYINSERT-->
+
+## 2.1447.0
+* feature: CognitoIdentityServiceProvider: Added API example requests and responses for several operations. Fixed the validation regex for user pools Identity Provider name.
+* feature: Omics: Add RetentionMode support for Runs.
+* feature: SESV2: Adds support for the new Export and Message Insights features: create, get, list and cancel export jobs; get message insights.
 
 ## 2.1446.0
 * feature: Backup: Add support for customizing time zone for backup window in backup plan rules.

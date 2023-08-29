@@ -20,6 +20,14 @@ declare class SESV2 extends Service {
    */
   batchGetMetricData(callback?: (err: AWSError, data: SESV2.Types.BatchGetMetricDataResponse) => void): Request<SESV2.Types.BatchGetMetricDataResponse, AWSError>;
   /**
+   * Cancels an export job.
+   */
+  cancelExportJob(params: SESV2.Types.CancelExportJobRequest, callback?: (err: AWSError, data: SESV2.Types.CancelExportJobResponse) => void): Request<SESV2.Types.CancelExportJobResponse, AWSError>;
+  /**
+   * Cancels an export job.
+   */
+  cancelExportJob(callback?: (err: AWSError, data: SESV2.Types.CancelExportJobResponse) => void): Request<SESV2.Types.CancelExportJobResponse, AWSError>;
+  /**
    * Create a configuration set. Configuration sets are groups of rules that you can apply to the emails that you send. You apply a configuration set to an email by specifying the name of the configuration set when you call the Amazon SES API v2. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email. 
    */
   createConfigurationSet(params: SESV2.Types.CreateConfigurationSetRequest, callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetResponse) => void): Request<SESV2.Types.CreateConfigurationSetResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class SESV2 extends Service {
    * Creates an email template. Email templates enable you to send personalized email to one or more destinations in a single API operation. For more information, see the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.CreateEmailTemplateResponse) => void): Request<SESV2.Types.CreateEmailTemplateResponse, AWSError>;
+  /**
+   * Creates an export job for a data source and destination. You can execute this operation no more than once per second.
+   */
+  createExportJob(params: SESV2.Types.CreateExportJobRequest, callback?: (err: AWSError, data: SESV2.Types.CreateExportJobResponse) => void): Request<SESV2.Types.CreateExportJobResponse, AWSError>;
+  /**
+   * Creates an export job for a data source and destination. You can execute this operation no more than once per second.
+   */
+  createExportJob(callback?: (err: AWSError, data: SESV2.Types.CreateExportJobResponse) => void): Request<SESV2.Types.CreateExportJobResponse, AWSError>;
   /**
    * Creates an import job for a data destination.
    */
@@ -324,6 +340,14 @@ declare class SESV2 extends Service {
    */
   getEmailTemplate(callback?: (err: AWSError, data: SESV2.Types.GetEmailTemplateResponse) => void): Request<SESV2.Types.GetEmailTemplateResponse, AWSError>;
   /**
+   * Provides information about an export job.
+   */
+  getExportJob(params: SESV2.Types.GetExportJobRequest, callback?: (err: AWSError, data: SESV2.Types.GetExportJobResponse) => void): Request<SESV2.Types.GetExportJobResponse, AWSError>;
+  /**
+   * Provides information about an export job.
+   */
+  getExportJob(callback?: (err: AWSError, data: SESV2.Types.GetExportJobResponse) => void): Request<SESV2.Types.GetExportJobResponse, AWSError>;
+  /**
    * Provides information about an import job.
    */
   getImportJob(params: SESV2.Types.GetImportJobRequest, callback?: (err: AWSError, data: SESV2.Types.GetImportJobResponse) => void): Request<SESV2.Types.GetImportJobResponse, AWSError>;
@@ -331,6 +355,14 @@ declare class SESV2 extends Service {
    * Provides information about an import job.
    */
   getImportJob(callback?: (err: AWSError, data: SESV2.Types.GetImportJobResponse) => void): Request<SESV2.Types.GetImportJobResponse, AWSError>;
+  /**
+   * Provides information about a specific message, including the from address, the subject, the recipient address, email tags, as well as events associated with the message. You can execute this operation no more than once per second.
+   */
+  getMessageInsights(params: SESV2.Types.GetMessageInsightsRequest, callback?: (err: AWSError, data: SESV2.Types.GetMessageInsightsResponse) => void): Request<SESV2.Types.GetMessageInsightsResponse, AWSError>;
+  /**
+   * Provides information about a specific message, including the from address, the subject, the recipient address, email tags, as well as events associated with the message. You can execute this operation no more than once per second.
+   */
+  getMessageInsights(callback?: (err: AWSError, data: SESV2.Types.GetMessageInsightsResponse) => void): Request<SESV2.Types.GetMessageInsightsResponse, AWSError>;
   /**
    * Retrieves information about a specific email address that's on the suppression list for your account.
    */
@@ -411,6 +443,14 @@ declare class SESV2 extends Service {
    * Lists the email templates present in your Amazon SES account in the current Amazon Web Services Region. You can execute this operation no more than once per second.
    */
   listEmailTemplates(callback?: (err: AWSError, data: SESV2.Types.ListEmailTemplatesResponse) => void): Request<SESV2.Types.ListEmailTemplatesResponse, AWSError>;
+  /**
+   * Lists all of the export jobs.
+   */
+  listExportJobs(params: SESV2.Types.ListExportJobsRequest, callback?: (err: AWSError, data: SESV2.Types.ListExportJobsResponse) => void): Request<SESV2.Types.ListExportJobsResponse, AWSError>;
+  /**
+   * Lists all of the export jobs.
+   */
+  listExportJobs(callback?: (err: AWSError, data: SESV2.Types.ListExportJobsResponse) => void): Request<SESV2.Types.ListExportJobsResponse, AWSError>;
   /**
    * Lists all of the import jobs.
    */
@@ -812,6 +852,22 @@ declare namespace SESV2 {
      */
     Html?: Content;
   }
+  export interface Bounce {
+    /**
+     * The type of the bounce, as determined by SES. Can be one of UNDETERMINED, TRANSIENT, or PERMANENT 
+     */
+    BounceType?: BounceType;
+    /**
+     * The subtype of the bounce, as determined by SES.
+     */
+    BounceSubType?: BounceSubType;
+    /**
+     * The status code issued by the reporting Message Transfer Authority (MTA). This field only appears if a delivery status notification (DSN) was attached to the bounce and the Diagnostic-Code was provided in the DSN. 
+     */
+    DiagnosticCode?: DiagnosticCode;
+  }
+  export type BounceSubType = string;
+  export type BounceType = "UNDETERMINED"|"TRANSIENT"|"PERMANENT"|string;
   export interface BulkEmailContent {
     /**
      * The template to use for the bulk email message.
@@ -850,6 +906,14 @@ declare namespace SESV2 {
   export type BulkEmailEntryResultList = BulkEmailEntryResult[];
   export type BulkEmailStatus = "SUCCESS"|"MESSAGE_REJECTED"|"MAIL_FROM_DOMAIN_NOT_VERIFIED"|"CONFIGURATION_SET_NOT_FOUND"|"TEMPLATE_NOT_FOUND"|"ACCOUNT_SUSPENDED"|"ACCOUNT_THROTTLED"|"ACCOUNT_DAILY_QUOTA_EXCEEDED"|"INVALID_SENDING_POOL_NAME"|"ACCOUNT_SENDING_PAUSED"|"CONFIGURATION_SET_SENDING_PAUSED"|"INVALID_PARAMETER"|"TRANSIENT_FAILURE"|"FAILED"|string;
   export type CampaignId = string;
+  export interface CancelExportJobRequest {
+    /**
+     * The export job ID.
+     */
+    JobId: JobId;
+  }
+  export interface CancelExportJobResponse {
+  }
   export type CaseId = string;
   export type Charset = string;
   export interface CloudWatchDestination {
@@ -873,6 +937,18 @@ declare namespace SESV2 {
     DefaultDimensionValue: DefaultDimensionValue;
   }
   export type CloudWatchDimensionConfigurations = CloudWatchDimensionConfiguration[];
+  export interface Complaint {
+    /**
+     *  Can either be null or OnAccountSuppressionList. If the value is OnAccountSuppressionList, SES accepted the message, but didn't attempt to send it because it was on the account-level suppression list. 
+     */
+    ComplaintSubType?: ComplaintSubType;
+    /**
+     *  The value of the Feedback-Type field from the feedback report received from the ISP. 
+     */
+    ComplaintFeedbackType?: ComplaintFeedbackType;
+  }
+  export type ComplaintFeedbackType = string;
+  export type ComplaintSubType = string;
   export type ConfigurationSetName = string;
   export type ConfigurationSetNameList = ConfigurationSetName[];
   export interface Contact {
@@ -1156,6 +1232,22 @@ declare namespace SESV2 {
   }
   export interface CreateEmailTemplateResponse {
   }
+  export interface CreateExportJobRequest {
+    /**
+     * The data source for the export job.
+     */
+    ExportDataSource: ExportDataSource;
+    /**
+     * The destination for the export job.
+     */
+    ExportDestination: ExportDestination;
+  }
+  export interface CreateExportJobResponse {
+    /**
+     * A string that represents the export job ID.
+     */
+    JobId?: JobId;
+  }
   export interface CreateImportJobRequest {
     /**
      * The destination for the import job.
@@ -1376,6 +1468,7 @@ declare namespace SESV2 {
   export type DeliverabilityTestReports = DeliverabilityTestReport[];
   export type DeliverabilityTestStatus = "IN_PROGRESS"|"COMPLETED"|string;
   export type DeliverabilityTestSubject = string;
+  export type DeliveryEventType = "SEND"|"DELIVERY"|"TRANSIENT_BOUNCE"|"PERMANENT_BOUNCE"|"UNDETERMINED_BOUNCE"|"COMPLAINT"|string;
   export interface DeliveryOptions {
     /**
      * Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require, messages are only delivered if a TLS connection can be established. If the value is Optional, messages can be delivered in plain text if a TLS connection can't be established.
@@ -1401,6 +1494,7 @@ declare namespace SESV2 {
      */
     BccAddresses?: EmailAddressList;
   }
+  export type DiagnosticCode = string;
   export type DimensionName = string;
   export type DimensionValueSource = "MESSAGE_TAG"|"EMAIL_HEADER"|"LINK_TAG"|string;
   export type Dimensions = {[key: string]: MetricDimensionValue};
@@ -1553,6 +1647,7 @@ declare namespace SESV2 {
   }
   export type DomainIspPlacements = DomainIspPlacement[];
   export type EmailAddress = string;
+  export type EmailAddressFilterList = InsightsEmailAddress[];
   export type EmailAddressList = EmailAddress[];
   export interface EmailContent {
     /**
@@ -1568,6 +1663,23 @@ declare namespace SESV2 {
      */
     Template?: Template;
   }
+  export interface EmailInsights {
+    /**
+     * The recipient of the email.
+     */
+    Destination?: InsightsEmailAddress;
+    /**
+     * The recipient's ISP (e.g., Gmail, Yahoo, etc.).
+     */
+    Isp?: Isp;
+    /**
+     * A list of events associated with the sent email.
+     */
+    Events?: InsightsEvents;
+  }
+  export type EmailInsightsList = EmailInsights[];
+  export type EmailSubject = string;
+  export type EmailSubjectFilterList = EmailSubject[];
   export interface EmailTemplateContent {
     /**
      * The subject line of the email.
@@ -1600,6 +1712,7 @@ declare namespace SESV2 {
   export type EmailTemplateText = string;
   export type Enabled = boolean;
   export type EnabledWrapper = boolean;
+  export type EngagementEventType = "OPEN"|"CLICK"|string;
   export type ErrorMessage = string;
   export type Esp = string;
   export type Esps = Esp[];
@@ -1661,17 +1774,83 @@ declare namespace SESV2 {
   }
   export type EventDestinationName = string;
   export type EventDestinations = EventDestination[];
+  export interface EventDetails {
+    /**
+     * Information about a Bounce event.
+     */
+    Bounce?: Bounce;
+    /**
+     * Information about a Complaint event.
+     */
+    Complaint?: Complaint;
+  }
   export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|"DELIVERY_DELAY"|"SUBSCRIPTION"|string;
   export type EventTypes = EventType[];
+  export interface ExportDataSource {
+    MetricsDataSource?: MetricsDataSource;
+    MessageInsightsDataSource?: MessageInsightsDataSource;
+  }
+  export interface ExportDestination {
+    /**
+     * The data format of the final export job file, can be one of the following:    CSV - A comma-separated values file.    JSON - A Json file.  
+     */
+    DataFormat: DataFormat;
+    /**
+     * An Amazon S3 pre-signed URL that points to the generated export file.
+     */
+    S3Url?: S3Url;
+  }
+  export type ExportDimensionValue = MetricDimensionValue[];
+  export type ExportDimensions = {[key: string]: ExportDimensionValue};
+  export interface ExportJobSummary {
+    /**
+     * The export job ID.
+     */
+    JobId?: JobId;
+    /**
+     * The source type of the export job.
+     */
+    ExportSourceType?: ExportSourceType;
+    /**
+     * The status of the export job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * The timestamp of when the export job was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The timestamp of when the export job was completed.
+     */
+    CompletedTimestamp?: Timestamp;
+  }
+  export type ExportJobSummaryList = ExportJobSummary[];
+  export interface ExportMetric {
+    Name?: Metric;
+    Aggregation?: MetricAggregation;
+  }
+  export type ExportMetrics = ExportMetric[];
+  export type ExportSourceType = "METRICS_DATA"|"MESSAGE_INSIGHTS"|string;
+  export interface ExportStatistics {
+    /**
+     * The number of records that were processed to generate the final export file.
+     */
+    ProcessedRecordsCount?: ProcessedRecordsCount;
+    /**
+     * The number of records that were exported to the final export file. This value might not be available for all export source types
+     */
+    ExportedRecordsCount?: ExportedRecordsCount;
+  }
+  export type ExportedRecordsCount = number;
   export type FailedRecordsCount = number;
   export type FailedRecordsS3Url = string;
   export interface FailureInfo {
     /**
-     * An Amazon S3 presigned URL that contains all the failed records and related information.
+     * An Amazon S3 pre-signed URL that contains all the failed records and related information.
      */
     FailedRecordsS3Url?: FailedRecordsS3Url;
     /**
-     * A message about why the import job failed.
+     * A message about why the job failed.
      */
     ErrorMessage?: ErrorMessage;
   }
@@ -2095,6 +2274,50 @@ declare namespace SESV2 {
      */
     TemplateContent: EmailTemplateContent;
   }
+  export interface GetExportJobRequest {
+    /**
+     * The export job ID.
+     */
+    JobId: JobId;
+  }
+  export interface GetExportJobResponse {
+    /**
+     * The export job ID.
+     */
+    JobId?: JobId;
+    /**
+     * The type of source of the export job.
+     */
+    ExportSourceType?: ExportSourceType;
+    /**
+     * The status of the export job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * The destination of the export job.
+     */
+    ExportDestination?: ExportDestination;
+    /**
+     * The data source of the export job.
+     */
+    ExportDataSource?: ExportDataSource;
+    /**
+     * The timestamp of when the export job was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The timestamp of when the export job was completed.
+     */
+    CompletedTimestamp?: Timestamp;
+    /**
+     * The failure details about an export job.
+     */
+    FailureInfo?: FailureInfo;
+    /**
+     * The statistics about the export job.
+     */
+    Statistics?: ExportStatistics;
+  }
   export interface GetImportJobRequest {
     /**
      * The ID of the import job.
@@ -2138,6 +2361,34 @@ declare namespace SESV2 {
      * The number of records that failed processing because of invalid input or other reasons.
      */
     FailedRecordsCount?: FailedRecordsCount;
+  }
+  export interface GetMessageInsightsRequest {
+    /**
+     *  A MessageId is a unique identifier for a message, and is returned when sending emails through Amazon SES. 
+     */
+    MessageId: OutboundMessageId;
+  }
+  export interface GetMessageInsightsResponse {
+    /**
+     * A unique identifier for the message.
+     */
+    MessageId?: OutboundMessageId;
+    /**
+     * The from address used to send the message.
+     */
+    FromEmailAddress?: InsightsEmailAddress;
+    /**
+     * The subject line of the message.
+     */
+    Subject?: EmailSubject;
+    /**
+     *  A list of tags, in the form of name/value pairs, that were applied to the email you sent, along with Amazon SES Auto-Tags. 
+     */
+    EmailTags?: MessageTagList;
+    /**
+     * A set of insights associated with the message.
+     */
+    Insights?: EmailInsightsList;
   }
   export interface GetSuppressedDestinationRequest {
     /**
@@ -2234,8 +2485,26 @@ declare namespace SESV2 {
      */
     TrackedIsps?: IspNameList;
   }
+  export type InsightsEmailAddress = string;
+  export interface InsightsEvent {
+    /**
+     * The timestamp of the event.
+     */
+    Timestamp?: Timestamp;
+    /**
+     * The type of event:    SEND - The send request was successful and SES will attempt to deliver the message to the recipient’s mail server. (If account-level or global suppression is being used, SES will still count it as a send, but delivery is suppressed.)     DELIVERY - SES successfully delivered the email to the recipient's mail server. Excludes deliveries to the mailbox simulator, and those from emails addressed to more than one recipient.     BOUNCE - Feedback received for delivery failures. Additional details about the bounce are provided in the Details object. Excludes bounces from the mailbox simulator, and those from emails addressed to more than one recipient.     COMPLAINT - Complaint received for the email. Additional details about the complaint are provided in the Details object. This excludes complaints from the mailbox simulator, those originating from your account-level suppression list (if enabled), and those from emails addressed to more than one recipient.     OPEN - Open event for emails including open trackers. Excludes opens for emails addressed to more than one recipient.    CLICK - Click event for emails including wrapped links. Excludes clicks for emails addressed to more than one recipient.  
+     */
+    Type?: EventType;
+    /**
+     * Details about bounce or complaint events.
+     */
+    Details?: EventDetails;
+  }
+  export type InsightsEvents = InsightsEvent[];
   export type Ip = string;
   export type IpList = Ip[];
+  export type Isp = string;
+  export type IspFilterList = Isp[];
   export type IspName = string;
   export type IspNameList = IspName[];
   export interface IspPlacement {
@@ -2250,7 +2519,7 @@ declare namespace SESV2 {
   }
   export type IspPlacements = IspPlacement[];
   export type JobId = string;
-  export type JobStatus = "CREATED"|"PROCESSING"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "CREATED"|"PROCESSING"|"COMPLETED"|"FAILED"|"CANCELLED"|string;
   export interface KinesisFirehoseDestination {
     /**
      * The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
@@ -2261,6 +2530,8 @@ declare namespace SESV2 {
      */
     DeliveryStreamArn: AmazonResourceName;
   }
+  export type LastDeliveryEventList = DeliveryEventType[];
+  export type LastEngagementEventList = EngagementEventType[];
   export type LastFreshStart = Date;
   export interface ListConfigurationSetsRequest {
     /**
@@ -2472,6 +2743,34 @@ declare namespace SESV2 {
      */
     NextToken?: NextToken;
   }
+  export interface ListExportJobsRequest {
+    /**
+     * The pagination token returned from a previous call to ListExportJobs to indicate the position in the list of export jobs.
+     */
+    NextToken?: NextToken;
+    /**
+     * Maximum number of export jobs to return at once. Use this parameter to paginate results. If additional export jobs exist beyond the specified limit, the NextToken element is sent in the response. Use the NextToken value in subsequent calls to ListExportJobs to retrieve additional export jobs.
+     */
+    PageSize?: MaxItems;
+    /**
+     * A value used to list export jobs that have a certain ExportSourceType.
+     */
+    ExportSourceType?: ExportSourceType;
+    /**
+     * A value used to list export jobs that have a certain JobStatus.
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface ListExportJobsResponse {
+    /**
+     * A list of the export job summaries.
+     */
+    ExportJobs?: ExportJobSummaryList;
+    /**
+     * A string token indicating that there might be additional export jobs available to be listed. Use this token to a subsequent call to ListExportJobs with the same parameters to retrieve the next page of export jobs.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListImportJobsRequest {
     /**
      * The destination of the import job, which can be used to list import jobs that have a certain ImportDestinationType.
@@ -2612,6 +2911,55 @@ declare namespace SESV2 {
   }
   export type MessageContent = string;
   export type MessageData = string;
+  export interface MessageInsightsDataSource {
+    /**
+     * Represents the start date for the export interval as a timestamp. The start date is inclusive.
+     */
+    StartDate: Timestamp;
+    /**
+     * Represents the end date for the export interval as a timestamp. The end date is inclusive.
+     */
+    EndDate: Timestamp;
+    /**
+     * Filters for results to be included in the export file.
+     */
+    Include?: MessageInsightsFilters;
+    /**
+     * Filters for results to be excluded from the export file.
+     */
+    Exclude?: MessageInsightsFilters;
+    /**
+     * The maximum number of results.
+     */
+    MaxResults?: MessageInsightsExportMaxResults;
+  }
+  export type MessageInsightsExportMaxResults = number;
+  export interface MessageInsightsFilters {
+    /**
+     * The from address used to send the message.
+     */
+    FromEmailAddress?: EmailAddressFilterList;
+    /**
+     * The recipient's email address.
+     */
+    Destination?: EmailAddressFilterList;
+    /**
+     * The subject line of the message.
+     */
+    Subject?: EmailSubjectFilterList;
+    /**
+     * The recipient's ISP (e.g., Gmail, Yahoo, etc.).
+     */
+    Isp?: IspFilterList;
+    /**
+     *  The last delivery-related event for the email, where the ordering is as follows: SEND &lt; BOUNCE &lt; DELIVERY &lt; COMPLAINT. 
+     */
+    LastDeliveryEvent?: LastDeliveryEventList;
+    /**
+     *  The last engagement-related event for the email, where the ordering is as follows: OPEN &lt; CLICK.   Engagement events are only available if Engagement tracking is enabled. 
+     */
+    LastEngagementEvent?: LastEngagementEventList;
+  }
   export interface MessageTag {
     /**
      * The name of the message tag. The message tag name has to meet the following criteria:   It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-).   It can contain no more than 256 characters.  
@@ -2626,6 +2974,7 @@ declare namespace SESV2 {
   export type MessageTagName = string;
   export type MessageTagValue = string;
   export type Metric = "SEND"|"COMPLAINT"|"PERMANENT_BOUNCE"|"TRANSIENT_BOUNCE"|"OPEN"|"CLICK"|"DELIVERY"|"DELIVERY_OPEN"|"DELIVERY_CLICK"|"DELIVERY_COMPLAINT"|string;
+  export type MetricAggregation = "RATE"|"VOLUME"|string;
   export interface MetricDataError {
     /**
      * The query identifier.
@@ -2660,6 +3009,28 @@ declare namespace SESV2 {
   export type MetricDimensionValue = string;
   export type MetricNamespace = "VDM"|string;
   export type MetricValueList = Counter[];
+  export interface MetricsDataSource {
+    /**
+     * An object that contains a mapping between a MetricDimensionName and MetricDimensionValue to filter metrics by. Must contain a least 1 dimension but no more than 3 unique ones.
+     */
+    Dimensions: ExportDimensions;
+    /**
+     * The metrics namespace - e.g., VDM.
+     */
+    Namespace: MetricNamespace;
+    /**
+     * A list of ExportMetric objects to export.
+     */
+    Metrics: ExportMetrics;
+    /**
+     * Represents the start date for the export interval as a timestamp.
+     */
+    StartDate: Timestamp;
+    /**
+     * Represents the end date for the export interval as a timestamp.
+     */
+    EndDate: Timestamp;
+  }
   export type NextToken = string;
   export type OutboundMessageId = string;
   export interface OverallVolume {
