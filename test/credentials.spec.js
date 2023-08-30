@@ -1344,15 +1344,22 @@ const exp = require('constants');
         var STSPrototype = (new STS()).constructor.prototype;
         var spy = helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
           function(roleParams, callback) {
-            AWS.util.defer(function () {
-              callback(null, {
-                Credentials: {
-                  AccessKeyId: 'KEY',
-                  SecretAccessKey: 'SECRET',
-                  SessionToken: 'TOKEN',
-                  Expiration: expiration
-                }
+            if (this.config.credentials.accessKeyId === 'akid' &&
+                this.config.credentials.secretAccessKey === 'secret' &&
+                this.config.credentials.sessionToken === 'session') {
+              setImmediate(function () {
+                callback(null, {
+                  Credentials: {
+                    AccessKeyId: 'KEY',
+                    SecretAccessKey: 'SECRET',
+                    SessionToken: 'TOKEN',
+                    Expiration: expiration
+                  }
+                });
               });
+            }
+            setImmediate(function () {
+              callback(new Error('INVALID CREDENTIAL'));
             });
           }
         );
