@@ -28,11 +28,11 @@ declare class AppRunner extends Service {
    */
   createAutoScalingConfiguration(callback?: (err: AWSError, data: AppRunner.Types.CreateAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.CreateAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Create an App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services. A connection resource is needed to access GitHub repositories. GitHub requires a user interface approval process through the App Runner console before you can use the connection.
+   * Create an App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services. A connection resource is needed to access GitHub and Bitbucket repositories. Both require a user interface approval process through the App Runner console before you can use the connection.
    */
   createConnection(params: AppRunner.Types.CreateConnectionRequest, callback?: (err: AWSError, data: AppRunner.Types.CreateConnectionResponse) => void): Request<AppRunner.Types.CreateConnectionResponse, AWSError>;
   /**
-   * Create an App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services. A connection resource is needed to access GitHub repositories. GitHub requires a user interface approval process through the App Runner console before you can use the connection.
+   * Create an App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services. A connection resource is needed to access GitHub and Bitbucket repositories. Both require a user interface approval process through the App Runner console before you can use the connection.
    */
   createConnection(callback?: (err: AWSError, data: AppRunner.Types.CreateConnectionResponse) => void): Request<AppRunner.Types.CreateConnectionResponse, AWSError>;
   /**
@@ -1326,7 +1326,7 @@ declare namespace AppRunner {
      */
     OperationId?: UUID;
   }
-  export type ProviderType = "GITHUB"|string;
+  export type ProviderType = "GITHUB"|"BITBUCKET"|string;
   export interface ResumeServiceRequest {
     /**
      * The Amazon Resource Name (ARN) of the App Runner service that you want to resume.
@@ -1381,7 +1381,7 @@ declare namespace AppRunner {
      */
     DeletedAt?: Timestamp;
     /**
-     * The current state of the App Runner service. These particular values mean the following.    CREATE_FAILED – The service failed to create. To troubleshoot this failure, read the failure events and logs, change any parameters that need to be fixed, and retry the call to create the service. The failed service isn't usable, and still counts towards your service quota. When you're done analyzing the failure, delete the service.    DELETE_FAILED – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure that all related resources are removed.  
+     * The current state of the App Runner service. These particular values mean the following.    CREATE_FAILED – The service failed to create. The failed service isn't usable, and still counts towards your service quota. To troubleshoot this failure, read the failure events and logs, change any parameters that need to be fixed, and rebuild your service using UpdateService.    DELETE_FAILED – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure that all related resources are removed.  
      */
     Status: ServiceStatus;
     /**
@@ -1453,7 +1453,7 @@ declare namespace AppRunner {
      */
     UpdatedAt?: Timestamp;
     /**
-     * The current state of the App Runner service. These particular values mean the following.    CREATE_FAILED – The service failed to create. Read the failure events and logs, change any parameters that need to be fixed, and retry the call to create the service. The failed service isn't usable, and still counts towards your service quota. When you're done analyzing the failure, delete the service.    DELETE_FAILED – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure that all related resources are removed.  
+     * The current state of the App Runner service. These particular values mean the following.    CREATE_FAILED – The service failed to create. The failed service isn't usable, and still counts towards your service quota. To troubleshoot this failure, read the failure events and logs, change any parameters that need to be fixed, and rebuild your service using UpdateService.    DELETE_FAILED – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure that all related resources are removed.  
      */
     Status?: ServiceStatus;
   }

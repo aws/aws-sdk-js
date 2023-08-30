@@ -3673,6 +3673,10 @@ declare namespace SageMaker {
      * The workspace settings for the SageMaker Canvas application.
      */
     WorkspaceSettings?: WorkspaceSettings;
+    /**
+     * The settings for connecting to an external data source with OAuth.
+     */
+    IdentityProviderOAuthSettings?: IdentityProviderOAuthSettings;
   }
   export interface CapacitySize {
     /**
@@ -6357,6 +6361,7 @@ declare namespace SageMaker {
      */
     FileSystemDataSource?: FileSystemDataSource;
   }
+  export type DataSourceName = "SalesforceGenie"|"Snowflake"|string;
   export type Database = string;
   export interface DatasetDefinition {
     AthenaDatasetDefinition?: AthenaDatasetDefinition;
@@ -12304,6 +12309,21 @@ declare namespace SageMaker {
     SourceIdentity?: String;
   }
   export type IdempotencyToken = string;
+  export interface IdentityProviderOAuthSetting {
+    /**
+     * The name of the data source that you're connecting to. Canvas currently supports OAuth for Snowflake and Salesforce Data Cloud.
+     */
+    DataSourceName?: DataSourceName;
+    /**
+     * Describes whether OAuth for a data source is enabled or disabled in the Canvas application.
+     */
+    Status?: FeatureStatus;
+    /**
+     * The ARN of an Amazon Web Services Secrets Manager secret that stores the credentials from your identity provider, such as the client ID and secret, authorization URL, and token URL. 
+     */
+    SecretArn?: SecretArn;
+  }
+  export type IdentityProviderOAuthSettings = IdentityProviderOAuthSetting[];
   export interface Image {
     /**
      * When the image was created.
@@ -19460,7 +19480,7 @@ declare namespace SageMaker {
      */
     ModelPackageVersionArn?: ModelPackageArn;
     /**
-     * Specifies the maximum duration of the job, in seconds. The maximum value is 7200.
+     * Specifies the maximum duration of the job, in seconds. The maximum value is 18,000 seconds.
      */
     JobDurationInSeconds?: JobDurationInSeconds;
     /**

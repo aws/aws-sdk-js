@@ -352,3 +352,5 @@ export import AppFabric = require('./appfabric');
 export import MedicalImaging = require('./medicalimaging');
 export import EntityResolution = require('./entityresolution');
 export import ManagedBlockchainQuery = require('./managedblockchainquery');
+export import Neptunedata = require('./neptunedata');
+export import PcaConnectorAd = require('./pcaconnectorad');

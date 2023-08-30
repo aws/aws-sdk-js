@@ -354,6 +354,8 @@ export abstract class ConfigurationServicePlaceholders {
   medicalimaging?: AWS.MedicalImaging.Types.ClientConfiguration;
   entityresolution?: AWS.EntityResolution.Types.ClientConfiguration;
   managedblockchainquery?: AWS.ManagedBlockchainQuery.Types.ClientConfiguration;
+  neptunedata?: AWS.Neptunedata.Types.ClientConfiguration;
+  pcaconnectorad?: AWS.PcaConnectorAd.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -710,4 +712,6 @@ export interface ConfigurationServiceApiVersions {
   medicalimaging?: AWS.MedicalImaging.Types.apiVersion;
   entityresolution?: AWS.EntityResolution.Types.apiVersion;
   managedblockchainquery?: AWS.ManagedBlockchainQuery.Types.apiVersion;
+  neptunedata?: AWS.Neptunedata.Types.apiVersion;
+  pcaconnectorad?: AWS.PcaConnectorAd.Types.apiVersion;
 }

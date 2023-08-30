@@ -292,11 +292,11 @@ declare class CleanRooms extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CleanRooms.Types.ListTagsForResourceOutput) => void): Request<CleanRooms.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Creates a protected query that is started by Clean Rooms .
+   * Creates a protected query that is started by Clean Rooms.
    */
   startProtectedQuery(params: CleanRooms.Types.StartProtectedQueryInput, callback?: (err: AWSError, data: CleanRooms.Types.StartProtectedQueryOutput) => void): Request<CleanRooms.Types.StartProtectedQueryOutput, AWSError>;
   /**
-   * Creates a protected query that is started by Clean Rooms .
+   * Creates a protected query that is started by Clean Rooms.
    */
   startProtectedQuery(callback?: (err: AWSError, data: CleanRooms.Types.StartProtectedQueryOutput) => void): Request<CleanRooms.Types.StartProtectedQueryOutput, AWSError>;
   /**
@@ -1304,6 +1304,10 @@ declare namespace CleanRooms {
      * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
      */
     tags?: TagMap;
+    /**
+     * The default protected query result configuration as specified by the member who can receive results.
+     */
+    defaultResultConfiguration?: MembershipProtectedQueryResultConfiguration;
   }
   export interface CreateMembershipOutput {
     /**
@@ -1907,9 +1911,26 @@ declare namespace CleanRooms {
      * An indicator as to whether query logging has been enabled or disabled for the collaboration.
      */
     queryLogStatus: MembershipQueryLogStatus;
+    /**
+     * The default protected query result configuration as specified by the member who can receive results.
+     */
+    defaultResultConfiguration?: MembershipProtectedQueryResultConfiguration;
   }
   export type MembershipArn = string;
   export type MembershipIdentifier = string;
+  export interface MembershipProtectedQueryOutputConfiguration {
+    s3?: ProtectedQueryS3OutputConfiguration;
+  }
+  export interface MembershipProtectedQueryResultConfiguration {
+    /**
+     * Configuration for protected query results.
+     */
+    outputConfiguration: MembershipProtectedQueryOutputConfiguration;
+    /**
+     * The unique ARN for an IAM role that is used by Clean Rooms to write protected query results to the result location, given by the member who can receive results.
+     */
+    roleArn?: RoleArn;
+  }
   export type MembershipQueryLogStatus = "ENABLED"|"DISABLED"|string;
   export type MembershipStatus = "ACTIVE"|"REMOVED"|"COLLABORATION_DELETED"|string;
   export interface MembershipSummary {
@@ -1984,7 +2005,7 @@ declare namespace CleanRooms {
     /**
      * The protected query SQL parameters.
      */
-    sqlParameters: ProtectedQuerySQLParameters;
+    sqlParameters?: ProtectedQuerySQLParameters;
     /**
      * The status of the query.
      */
@@ -1992,7 +2013,7 @@ declare namespace CleanRooms {
     /**
      * Contains any details needed to write the query results.
      */
-    resultConfiguration: ProtectedQueryResultConfiguration;
+    resultConfiguration?: ProtectedQueryResultConfiguration;
     /**
      * Statistics about protected query execution.
      */
@@ -2017,11 +2038,16 @@ declare namespace CleanRooms {
     code: String;
   }
   export type ProtectedQueryIdentifier = string;
+  export type ProtectedQueryMemberOutputList = ProtectedQuerySingleMemberOutput[];
   export interface ProtectedQueryOutput {
     /**
      * If present, the output for a protected query with an `S3` output type.
      */
     s3?: ProtectedQueryS3Output;
+    /**
+     * The list of member Amazon Web Services account(s) that received the results of the query. 
+     */
+    memberList?: ProtectedQueryMemberOutputList;
   }
   export interface ProtectedQueryOutputConfiguration {
     /**
@@ -2077,6 +2103,12 @@ declare namespace CleanRooms {
     parameters?: ParameterMap;
   }
   export type ProtectedQuerySQLParametersQueryStringString = string;
+  export interface ProtectedQuerySingleMemberOutput {
+    /**
+     * The Amazon Web Services account ID of the member in the collaboration who can receive results for the query.
+     */
+    accountId: AccountId;
+  }
   export interface ProtectedQueryStatistics {
     /**
      * The duration of the Protected Query, from creation until query completion.
@@ -2222,7 +2254,7 @@ declare namespace CleanRooms {
     /**
      * The details needed to write the query results.
      */
-    resultConfiguration: ProtectedQueryResultConfiguration;
+    resultConfiguration?: ProtectedQueryResultConfiguration;
   }
   export interface StartProtectedQueryOutput {
     /**
@@ -2384,6 +2416,10 @@ declare namespace CleanRooms {
      * An indicator as to whether query logging has been enabled or disabled for the collaboration.
      */
     queryLogStatus?: MembershipQueryLogStatus;
+    /**
+     * The default protected query result configuration as specified by the member who can receive results.
+     */
+    defaultResultConfiguration?: MembershipProtectedQueryResultConfiguration;
   }
   export interface UpdateMembershipOutput {
     membership: Membership;

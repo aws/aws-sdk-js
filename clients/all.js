@@ -353,5 +353,7 @@ module.exports = {
   AppFabric: require('./appfabric'),
   MedicalImaging: require('./medicalimaging'),
   EntityResolution: require('./entityresolution'),
-  ManagedBlockchainQuery: require('./managedblockchainquery')
+  ManagedBlockchainQuery: require('./managedblockchainquery'),
+  Neptunedata: require('./neptunedata'),
+  PcaConnectorAd: require('./pcaconnectorad')
 };

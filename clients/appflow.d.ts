@@ -1710,6 +1710,14 @@ declare namespace Appflow {
      *  The number of records processed in the flow run. 
      */
     recordsProcessed?: Long;
+    /**
+     * The number of processes that Amazon AppFlow ran at the same time when it retrieved your data.
+     */
+    numParallelProcesses?: Long;
+    /**
+     * The maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application.
+     */
+    maxPageSize?: Long;
   }
   export type ExecutionStatus = "InProgress"|"Successful"|"Error"|"CancelStarted"|"Canceled"|string;
   export type FieldType = string;
@@ -2579,13 +2587,35 @@ declare namespace Appflow {
     errorHandlingConfig?: ErrorHandlingConfig;
     writeOperationType?: WriteOperationType;
   }
+  export type SAPODataMaxPageSize = number;
+  export type SAPODataMaxParallelism = number;
   export interface SAPODataMetadata {
+  }
+  export interface SAPODataPaginationConfig {
+    /**
+     * The maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application. For transfers of OData records, the maximum page size is 3,000. For transfers of data that comes from an ODP provider, the maximum page size is 10,000.
+     */
+    maxPageSize: SAPODataMaxPageSize;
+  }
+  export interface SAPODataParallelismConfig {
+    /**
+     * The maximum number of processes that Amazon AppFlow runs at the same time when it retrieves your data from your SAP application.
+     */
+    maxParallelism: SAPODataMaxParallelism;
   }
   export interface SAPODataSourceProperties {
     /**
      *  The object path specified in the SAPOData flow source. 
      */
     objectPath?: Object;
+    /**
+     * Sets the number of concurrent processes that transfers OData records from your SAP instance.
+     */
+    parallelismConfig?: SAPODataParallelismConfig;
+    /**
+     * Sets the page size for each concurrent process that transfers OData records from your SAP instance.
+     */
+    paginationConfig?: SAPODataPaginationConfig;
   }
   export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface SalesforceConnectorProfileCredentials {

@@ -124,11 +124,11 @@ declare class DataSync extends Service {
    */
   createLocationSmb(callback?: (err: AWSError, data: DataSync.Types.CreateLocationSmbResponse) => void): Request<DataSync.Types.CreateLocationSmbResponse, AWSError>;
   /**
-   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
+   * Configures a transfer task, which defines where and how DataSync moves your data. A task includes a source location, destination location, and the options for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   createTask(params: DataSync.Types.CreateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Configures a task, which defines where and how DataSync transfers your data. A task includes a source location, a destination location, and the preferences for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
+   * Configures a transfer task, which defines where and how DataSync moves your data. A task includes a source location, destination location, and the options for how and when you want to transfer your data (such as bandwidth limits, scheduling, among other options).  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class DataSync extends Service {
    */
   deleteLocation(callback?: (err: AWSError, data: DataSync.Types.DeleteLocationResponse) => void): Request<DataSync.Types.DeleteLocationResponse, AWSError>;
   /**
-   * Deletes an DataSync task.
+   * Deletes an DataSync transfer task.
    */
   deleteTask(params: DataSync.Types.DeleteTaskRequest, callback?: (err: AWSError, data: DataSync.Types.DeleteTaskResponse) => void): Request<DataSync.Types.DeleteTaskResponse, AWSError>;
   /**
-   * Deletes an DataSync task.
+   * Deletes an DataSync transfer task.
    */
   deleteTask(callback?: (err: AWSError, data: DataSync.Types.DeleteTaskResponse) => void): Request<DataSync.Types.DeleteTaskResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class DataSync extends Service {
    */
   describeTask(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskResponse) => void): Request<DataSync.Types.DescribeTaskResponse, AWSError>;
   /**
-   * Provides information about an DataSync transfer task that's running.
+   * Provides information about an execution of your DataSync task. You can use this operation to help monitor the progress of an ongoing transfer or check the results of the transfer.
    */
   describeTaskExecution(params: DataSync.Types.DescribeTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
-   * Provides information about an DataSync transfer task that's running.
+   * Provides information about an execution of your DataSync task. You can use this operation to help monitor the progress of an ongoing transfer or check the results of the transfer.
    */
   describeTaskExecution(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
@@ -380,11 +380,11 @@ declare class DataSync extends Service {
    */
   startDiscoveryJob(callback?: (err: AWSError, data: DataSync.Types.StartDiscoveryJobResponse) => void): Request<DataSync.Types.StartDiscoveryJobResponse, AWSError>;
   /**
-   * Starts an DataSync task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
+   * Starts an DataSync transfer task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   startTaskExecution(params: DataSync.Types.StartTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
-   * Starts an DataSync task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
+   * Starts an DataSync transfer task. For each task, you can only run one task execution at a time. There are several phases to a task execution. For more information, see Task execution statuses.  If you're planning to transfer data to or from an Amazon S3 location, review how DataSync can affect your S3 request charges and the DataSync pricing page before you begin. 
    */
   startTaskExecution(callback?: (err: AWSError, data: DataSync.Types.StartTaskExecutionResponse) => void): Request<DataSync.Types.StartTaskExecutionResponse, AWSError>;
   /**
@@ -476,19 +476,19 @@ declare class DataSync extends Service {
    */
   updateStorageSystem(callback?: (err: AWSError, data: DataSync.Types.UpdateStorageSystemResponse) => void): Request<DataSync.Types.UpdateStorageSystemResponse, AWSError>;
   /**
-   * Updates the metadata associated with a task.
+   * Updates the configuration of a DataSync transfer task.
    */
   updateTask(params: DataSync.Types.UpdateTaskRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
   /**
-   * Updates the metadata associated with a task.
+   * Updates the configuration of a DataSync transfer task.
    */
   updateTask(callback?: (err: AWSError, data: DataSync.Types.UpdateTaskResponse) => void): Request<DataSync.Types.UpdateTaskResponse, AWSError>;
   /**
-   * Modifies a running DataSync task.  Currently, the only Option that you can modify with UpdateTaskExecution is  BytesPerSecond , which throttles bandwidth for a running or queued task. 
+   * Updates the configuration of a running DataSync task execution.  Currently, the only Option that you can modify with UpdateTaskExecution is  BytesPerSecond , which throttles bandwidth for a running or queued task execution. 
    */
   updateTaskExecution(params: DataSync.Types.UpdateTaskExecutionRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateTaskExecutionResponse) => void): Request<DataSync.Types.UpdateTaskExecutionResponse, AWSError>;
   /**
-   * Modifies a running DataSync task.  Currently, the only Option that you can modify with UpdateTaskExecution is  BytesPerSecond , which throttles bandwidth for a running or queued task. 
+   * Updates the configuration of a running DataSync task execution.  Currently, the only Option that you can modify with UpdateTaskExecution is  BytesPerSecond , which throttles bandwidth for a running or queued task execution. 
    */
   updateTaskExecution(callback?: (err: AWSError, data: DataSync.Types.UpdateTaskExecutionResponse) => void): Request<DataSync.Types.UpdateTaskExecutionResponse, AWSError>;
 }
@@ -558,7 +558,7 @@ declare namespace DataSync {
   export type AzureBlobContainerUrl = string;
   export interface AzureBlobSasConfiguration {
     /**
-     * Specifies a SAS token that provides permissions at the Azure storage account, container, or folder level. The token is part of the SAS URI string that comes after the storage resource URI and a question mark. A token looks something like this:  sp=r&amp;st=2023-12-20T14:54:52Z&amp;se=2023-12-20T22:54:52Z&amp;spr=https&amp;sv=2021-06-08&amp;sr=c&amp;sig=aBBKDWQvyuVcTPH9EBp%2FXTI9E%2F%2Fmq171%2BZU178wcwqU%3D 
+     * Specifies a SAS token that provides permissions to access your Azure Blob Storage. The token is part of the SAS URI string that comes after the storage resource URI and a question mark. A token looks something like this:  sp=r&amp;st=2023-12-20T14:54:52Z&amp;se=2023-12-20T22:54:52Z&amp;spr=https&amp;sv=2021-06-08&amp;sr=c&amp;sig=aBBKDWQvyuVcTPH9EBp%2FXTI9E%2F%2Fmq171%2BZU178wcwqU%3D 
      */
     Token: AzureBlobSasToken;
   }
@@ -1056,6 +1056,10 @@ declare namespace DataSync {
      * Specifies a list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Includes?: FilterList;
+    /**
+     * Specifies how you want to configure a task report, which provides detailed information about for your DataSync transfer.
+     */
+    TaskReportConfig?: TaskReportConfig;
   }
   export interface CreateTaskResponse {
     /**
@@ -1663,17 +1667,17 @@ declare namespace DataSync {
   }
   export interface DescribeTaskExecutionRequest {
     /**
-     * Specifies the Amazon Resource Name (ARN) of the transfer task that's running.
+     * Specifies the Amazon Resource Name (ARN) of the task execution that you want information about.
      */
     TaskExecutionArn: TaskExecutionArn;
   }
   export interface DescribeTaskExecutionResponse {
     /**
-     * The Amazon Resource Name (ARN) of the task execution that was described. TaskExecutionArn is hierarchical and includes TaskArn for the task that was executed.  For example, a TaskExecution value with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b executed the task with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2. 
+     * The ARN of the task execution that you wanted information about. TaskExecutionArn is hierarchical and includes TaskArn for the task that was executed.  For example, a TaskExecution value with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b executed the task with the ARN arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2. 
      */
     TaskExecutionArn?: TaskExecutionArn;
     /**
-     * The status of the task execution.  For detailed information about task execution statuses, see Understanding Task Statuses in the DataSync User Guide. 
+     * The status of the task execution. 
      */
     Status?: TaskExecutionStatus;
     Options?: Options;
@@ -1686,23 +1690,23 @@ declare namespace DataSync {
      */
     Includes?: FilterList;
     /**
-     * The time that the task execution was started.
+     * The time when the task execution started.
      */
     StartTime?: Time;
     /**
-     * The expected number of files that is to be transferred over the network. This value is calculated during the PREPARING phase before the TRANSFERRING phase of the task execution. This value is the expected number of files to be transferred. It's calculated based on comparing the content of the source and destination locations and finding the delta that needs to be transferred. 
+     * The expected number of files, objects, and directories that DataSync will transfer over the network. This value is calculated during the task execution's PREPARING phase before the TRANSFERRING phase. The calculation is based on comparing the content of the source and destination locations and finding the difference that needs to be transferred. 
      */
     EstimatedFilesToTransfer?: long;
     /**
-     * The estimated physical number of bytes that is to be transferred over the network.
+     * The estimated physical number of bytes that will transfer over the network.
      */
     EstimatedBytesToTransfer?: long;
     /**
-     * The actual number of files that was transferred over the network. This value is calculated and updated on an ongoing basis during the TRANSFERRING phase of the task execution. It's updated periodically when each file is read from the source and sent over the network.  If failures occur during a transfer, this value can be less than EstimatedFilesToTransfer. In some cases, this value can also be greater than EstimatedFilesToTransfer. This element is implementation-specific for some location types, so don't use it as an indicator for a correct file number or to monitor your task execution.
+     * The actual number of files, objects, and directories that DataSync transferred over the network. This value is updated periodically during the task execution's TRANSFERRING phase when something is read from the source and sent over the network. If DataSync fails to transfer something, this value can be less than EstimatedFilesToTransfer. In some cases, this value can also be greater than EstimatedFilesToTransfer. This element is implementation-specific for some location types, so don't use it as an exact indication of what transferred or to monitor your task execution.
      */
     FilesTransferred?: long;
     /**
-     * The number of logical bytes written to the destination Amazon Web Services storage resource.
+     * The number of logical bytes written to the destination location.
      */
     BytesWritten?: long;
     /**
@@ -1717,6 +1721,30 @@ declare namespace DataSync {
      * The physical number of bytes transferred over the network after compression was applied. In most cases, this number is less than BytesTransferred unless the data isn't compressible.
      */
     BytesCompressed?: long;
+    /**
+     * The configuration of your task report, which provides detailed information about for your DataSync transfer.
+     */
+    TaskReportConfig?: TaskReportConfig;
+    /**
+     * The number of files, objects, and directories that DataSync deleted in your destination location. If you don't configure your task to delete data in the destination that isn't in the source, the value is always 0.
+     */
+    FilesDeleted?: long;
+    /**
+     * The number of files, objects, and directories that DataSync skipped during your transfer.
+     */
+    FilesSkipped?: long;
+    /**
+     * The number of files, objects, and directories that DataSync verified during your transfer.
+     */
+    FilesVerified?: long;
+    /**
+     * Indicates whether DataSync generated a complete task report for your transfer.
+     */
+    ReportResult?: ReportResult;
+    /**
+     * The expected number of files, objects, and directories that DataSync will delete in your destination location. If you don't configure your task to delete data in the destination that isn't in the source, the value is always 0.
+     */
+    EstimatedFilesToDelete?: long;
   }
   export interface DescribeTaskRequest {
     /**
@@ -1789,6 +1817,10 @@ declare namespace DataSync {
      * A list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Includes?: FilterList;
+    /**
+     * The configuration of your task report. For more information, see Creating a task report.
+     */
+    TaskReportConfig?: TaskReportConfig;
   }
   export type DestinationNetworkInterfaceArns = NetworkInterfaceArn[];
   export type DiscoveryAgentArnList = AgentArn[];
@@ -2402,6 +2434,7 @@ declare namespace DataSync {
   export type ObjectStorageServerPort = number;
   export type ObjectStorageServerProtocol = "HTTPS"|"HTTP"|string;
   export type ObjectTags = "PRESERVE"|"NONE"|string;
+  export type ObjectVersionIds = "INCLUDE"|"NONE"|string;
   export interface OnPremConfig {
     /**
      * The Amazon Resource Names (ARNs) of the agents connecting to a transfer location.
@@ -2551,6 +2584,66 @@ declare namespace DataSync {
   }
   export interface RemoveStorageSystemResponse {
   }
+  export interface ReportDestination {
+    /**
+     * Specifies the Amazon S3 bucket where DataSync uploads your task report.
+     */
+    S3?: ReportDestinationS3;
+  }
+  export interface ReportDestinationS3 {
+    /**
+     * Specifies a bucket prefix for your report.
+     */
+    Subdirectory?: S3Subdirectory;
+    /**
+     * Specifies the ARN of the S3 bucket where DataSync uploads your report.
+     */
+    S3BucketArn: S3BucketArn;
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket. For more information, see Allowing DataSync to upload a task report to an Amazon S3 bucket.
+     */
+    BucketAccessRoleArn: IamRoleArn;
+  }
+  export type ReportLevel = "ERRORS_ONLY"|"SUCCESSES_AND_ERRORS"|string;
+  export type ReportOutputType = "SUMMARY_ONLY"|"STANDARD"|string;
+  export interface ReportOverride {
+    /**
+     * Specifies whether your task report includes errors only or successes and errors. For example, your report might mostly include only what didn't go well in your transfer (ERRORS_ONLY). At the same time, you want to verify that your task filter is working correctly. In this situation, you can get a list of what files DataSync successfully skipped and if something transferred that you didn't to transfer (SUCCESSES_AND_ERRORS).
+     */
+    ReportLevel?: ReportLevel;
+  }
+  export interface ReportOverrides {
+    /**
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to transfer.
+     */
+    Transferred?: ReportOverride;
+    /**
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to verify at the end of your transfer. This only applies if you configure your task to verify data during and after the transfer (which DataSync does by default).
+     */
+    Verified?: ReportOverride;
+    /**
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source.
+     */
+    Deleted?: ReportOverride;
+    /**
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to skip during your transfer.
+     */
+    Skipped?: ReportOverride;
+  }
+  export interface ReportResult {
+    /**
+     * Indicates whether DataSync is still working on your report, created a report, or can't create a complete report.
+     */
+    Status?: PhaseStatus;
+    /**
+     * Indicates the code associated with the error if DataSync can't create a complete report.
+     */
+    ErrorCode?: string;
+    /**
+     * Provides details about issues creating a report.
+     */
+    ErrorDetail?: string;
+  }
   export interface ResourceDetails {
     /**
      * The information that DataSync Discovery collects about storage virtual machines (SVMs) in your on-premises storage system.
@@ -2657,6 +2750,10 @@ declare namespace DataSync {
      * Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task execution.  Tags are key-value pairs that help you manage, filter, and search for your DataSync resources.
      */
     Tags?: InputTagList;
+    /**
+     * Specifies how you want to configure a task report, which provides detailed information about for your DataSync transfer.
+     */
+    TaskReportConfig?: TaskReportConfig;
   }
   export interface StartTaskExecutionResponse {
     /**
@@ -2796,6 +2893,28 @@ declare namespace DataSync {
     Name?: TagValue;
   }
   export type TaskQueueing = "ENABLED"|"DISABLED"|string;
+  export interface TaskReportConfig {
+    /**
+     * Specifies the Amazon S3 bucket where DataSync uploads your task report. For more information, see Task reports.
+     */
+    Destination?: ReportDestination;
+    /**
+     * Specifies the type of task report that you want:    SUMMARY_ONLY: Provides necessary details about your task, including the number of files, objects, and directories transferred and transfer duration.    STANDARD: Provides complete details about your task, including a full list of files, objects, and directories that were transferred, skipped, verified, and more.  
+     */
+    OutputType?: ReportOutputType;
+    /**
+     * Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.    ERRORS_ONLY: A report shows what DataSync was unable to transfer, skip, verify, and delete.    SUCCESSES_AND_ERRORS: A report shows what DataSync was able and unable to transfer, skip, verify, and delete.  
+     */
+    ReportLevel?: ReportLevel;
+    /**
+     * Specifies whether your task report includes the new version of each object transferred into an S3 bucket. This only applies if you enable versioning on your bucket. Keep in mind that setting this to INCLUDE can increase the duration of your task execution.
+     */
+    ObjectVersionIds?: ObjectVersionIds;
+    /**
+     * Customizes the reporting level for aspects of your task report. For example, your report might generally only include errors, but you could specify that you want a list of successes and errors just for the files that DataSync attempted to delete in your destination location.
+     */
+    Overrides?: ReportOverrides;
+  }
   export interface TaskSchedule {
     /**
      * A cron expression that specifies when DataSync initiates a scheduled transfer from a source to a destination location. 
@@ -3091,6 +3210,10 @@ declare namespace DataSync {
      * Specifies a list of filter rules that include specific data during your transfer. For more information and examples, see Filtering data transferred by DataSync.
      */
     Includes?: FilterList;
+    /**
+     * Specifies how you want to configure a task report, which provides detailed information about for your DataSync transfer.
+     */
+    TaskReportConfig?: TaskReportConfig;
   }
   export interface UpdateTaskResponse {
   }

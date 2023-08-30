@@ -1733,7 +1733,8 @@
       "type": "list",
       "member": {
         "shape": "AWSAccount"
-      }
+      },
+      "sensitive": true
     },
     "AWSService": {
       "type": "structure",
@@ -1793,12 +1794,14 @@
     "ActionPlanInstructions": {
       "type": "string",
       "max": 1000,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "ActionPlanTitle": {
       "type": "string",
       "max": 300,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "Assessment": {
       "type": "structure",
@@ -1921,7 +1924,8 @@
     "AssessmentDescription": {
       "type": "string",
       "max": 1000,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "AssessmentEvidenceFolder": {
       "type": "structure",
@@ -2032,7 +2036,8 @@
           "documentation": "<p> The control sets that are associated with the framework. </p>"
         }
       },
-      "documentation": "<p> The file used to structure and automate Audit Manager assessments for a given compliance standard. </p>"
+      "documentation": "<p> The file used to structure and automate Audit Manager assessments for a given compliance standard. </p>",
+      "sensitive": true
     },
     "AssessmentFrameworkDescription": {
       "type": "string",
@@ -2254,7 +2259,8 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "^[^\\\\]*$"
+      "pattern": "^[^\\\\]*$",
+      "sensitive": true
     },
     "AssessmentReport": {
       "type": "structure",
@@ -2301,7 +2307,8 @@
     "AssessmentReportDescription": {
       "type": "string",
       "max": 1000,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "AssessmentReportDestinationType": {
       "type": "string",
@@ -2397,7 +2404,8 @@
           "documentation": "<p> The destination bucket where Audit Manager stores assessment reports. </p>"
         }
       },
-      "documentation": "<p> The location where Audit Manager saves assessment reports for the given assessment. </p>"
+      "documentation": "<p> The location where Audit Manager saves assessment reports for the given assessment. </p>",
+      "sensitive": true
     },
     "AssessmentReportsMetadata": {
       "type": "list",
@@ -2500,7 +2508,8 @@
       "type": "list",
       "member": {
         "shape": "BatchCreateDelegationByAssessmentError"
-      }
+      },
+      "sensitive": true
     },
     "BatchCreateDelegationByAssessmentRequest": {
       "type": "structure",
@@ -2556,7 +2565,8 @@
       "type": "list",
       "member": {
         "shape": "BatchDeleteDelegationByAssessmentError"
-      }
+      },
+      "sensitive": true
     },
     "BatchDeleteDelegationByAssessmentRequest": {
       "type": "structure",
@@ -2733,7 +2743,8 @@
     "ComplianceType": {
       "type": "string",
       "max": 100,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "Control": {
       "type": "structure",
@@ -2822,7 +2833,8 @@
     "ControlCommentBody": {
       "type": "string",
       "max": 500,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "ControlComments": {
       "type": "list",
@@ -3069,7 +3081,8 @@
       "member": {
         "shape": "ControlSet"
       },
-      "min": 1
+      "min": 1,
+      "sensitive": true
     },
     "ControlSetsCount": {
       "type": "integer"
@@ -3384,13 +3397,15 @@
         "shape": "CreateDelegationRequest"
       },
       "max": 50,
-      "min": 1
+      "min": 1,
+      "sensitive": true
     },
     "CreatedBy": {
       "type": "string",
       "max": 100,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$"
+      "pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$",
+      "sensitive": true
     },
     "DefaultExportDestination": {
       "type": "structure",
@@ -3454,12 +3469,14 @@
           "documentation": "<p> The user or role that created the delegation. </p>"
         }
       },
-      "documentation": "<p> The assignment of a control set to a delegate for review. </p>"
+      "documentation": "<p> The assignment of a control set to a delegate for review. </p>",
+      "sensitive": true
     },
     "DelegationComment": {
       "type": "string",
       "max": 350,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "DelegationIds": {
       "type": "list",
@@ -3697,7 +3714,8 @@
       "type": "string",
       "max": 320,
       "min": 1,
-      "pattern": "^.*@.*$"
+      "pattern": "^.*@.*$",
+      "sensitive": true
     },
     "ErrorCode": {
       "type": "string",
@@ -4276,7 +4294,8 @@
           "shape": "NonEmptyString",
           "documentation": "<p>The presigned URL that was generated.</p>"
         }
-      }
+      },
+      "sensitive": true
     },
     "GetEvidenceFolderRequest": {
       "type": "structure",
@@ -4649,7 +4668,8 @@
       "type": "string",
       "max": 100,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$"
+      "pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$",
+      "sensitive": true
     },
     "ListAssessmentControlInsightsByControlDomainRequest": {
       "type": "structure",
@@ -5116,13 +5136,15 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "[^\\/]*"
+      "pattern": "[^\\/]*",
+      "sensitive": true
     },
     "ManualEvidenceTextResponse": {
       "type": "string",
       "max": 1000,
       "min": 1,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "MaxResults": {
       "type": "integer",
@@ -5303,7 +5325,8 @@
       "type": "list",
       "member": {
         "shape": "Role"
-      }
+      },
+      "sensitive": true
     },
     "S3Url": {
       "type": "string",
@@ -5315,7 +5338,8 @@
       "type": "string",
       "max": 255,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9-_\\(\\)\\[\\]]+$"
+      "pattern": "^[a-zA-Z0-9-_\\(\\)\\[\\]]+$",
+      "sensitive": true
     },
     "Scope": {
       "type": "structure",
@@ -5329,7 +5353,8 @@
           "documentation": "<p> The Amazon Web Services services that are included in the scope of the assessment. </p>"
         }
       },
-      "documentation": "<p> The wrapper that contains the Amazon Web Services accounts and services that are in scope for the assessment. </p>"
+      "documentation": "<p> The wrapper that contains the Amazon Web Services accounts and services that are in scope for the assessment. </p>",
+      "sensitive": true
     },
     "ServiceMetadata": {
       "type": "structure",
@@ -5598,7 +5623,8 @@
     "TestingInformation": {
       "type": "string",
       "max": 1000,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "Timestamp": {
       "type": "timestamp"
@@ -5618,7 +5644,8 @@
     "TroubleshootingText": {
       "type": "string",
       "max": 1000,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[\\w\\W\\s\\S]*$",
+      "sensitive": true
     },
     "URL": {
       "type": "structure",
@@ -6026,7 +6053,8 @@
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9-_()\\s\\+=,.@]+$"
+      "pattern": "^[a-zA-Z0-9-_()\\s\\+=,.@]+$",
+      "sensitive": true
     },
     "ValidateAssessmentReportIntegrityRequest": {
       "type": "structure",
