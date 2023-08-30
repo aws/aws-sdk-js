@@ -1364,19 +1364,26 @@ const exp = require('constants');
           }
         );
 
-        var creds = new AWS.SharedIniFileCredentials();
-        expect(creds.roleArn).to.equal('arn');
-        return creds.refresh(function(err) {
-          expect(spy.calls[0].arguments[0].RoleArn).to.equal('arn');
-          expect(spy.calls[0].object.config.credentials.profile).to.equal('base');
-          expect(spy.calls[0].object.config.credentials.accessKeyId).to.equal('akid');
-          expect(spy.calls[0].object.config.credentials.secretAccessKey).to.equal('secret');
-          expect(spy.calls[0].object.config.credentials.sessionToken).to.equal('session');
-          expect(creds.accessKeyId).to.equal('KEY');
-          expect(creds.secretAccessKey).to.equal('SECRET');
-          expect(creds.sessionToken).to.equal('TOKEN');
-          expect(creds.expireTime).to.equal(expiration);
-          return done();
+        var creds = new AWS.SharedIniFileCredentials({
+          callback: function (err) {
+            expect(err).to.be.null;
+            expect(spy.calls.length).to.equal(2);
+            expect(spy.calls[0].arguments[0].RoleArn).to.equal('arn');
+            expect(spy.calls[0].object.config.credentials.profile).to.equal('base');
+            expect(spy.calls[0].object.config.credentials.accessKeyId).to.be.undefined;
+            expect(spy.calls[0].object.config.credentials.secretAccessKey).to.be.undefined;
+            expect(spy.calls[0].object.config.credentials.sessionToken).to.be.undefined;
+            expect(spy.calls[1].arguments[0].RoleArn).to.equal('arn');
+            expect(spy.calls[1].object.config.credentials.profile).to.equal('base');
+            expect(spy.calls[1].object.config.credentials.accessKeyId).to.equal('akid');
+            expect(spy.calls[1].object.config.credentials.secretAccessKey).to.equal('secret');
+            expect(spy.calls[1].object.config.credentials.sessionToken).to.equal('session');
+            expect(creds.accessKeyId).to.equal('KEY');
+            expect(creds.secretAccessKey).to.equal('SECRET');
+            expect(creds.sessionToken).to.equal('TOKEN');
+            expect(creds.expireTime).to.equal(expiration);
+            done();
+          }
         });
       });
 
