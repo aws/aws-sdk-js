@@ -1494,7 +1494,8 @@
       "type": "list",
       "member": {
         "shape": "RoleValue"
-      }
+      },
+      "sensitive": true
     },
     "RoleValues": {
       "type": "structure",
@@ -1576,7 +1577,7 @@
       "member": {
         "shape": "SecurityGroupId"
       },
-      "max": 100,
+      "max": 5,
       "min": 1
     },
     "SsoId": {
@@ -1600,8 +1601,8 @@
       "member": {
         "shape": "SubnetId"
       },
-      "max": 100,
-      "min": 1
+      "max": 6,
+      "min": 2
     },
     "TagKey": {
       "type": "string",

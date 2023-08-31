@@ -390,7 +390,7 @@ declare namespace PaymentCryptographyData {
     /**
      * The key check value (KCV) of the encryption key. The KCV is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.
      */
-    KeyCheckValue: KeyCheckValue;
+    KeyCheckValue?: KeyCheckValue;
   }
   export interface EncryptionDecryptionAttributes {
     Asymmetric?: AsymmetricEncryptionAttributes;
@@ -449,7 +449,7 @@ declare namespace PaymentCryptographyData {
     /**
      * The data for which a MAC is under generation.
      */
-    MessageData: HexLengthBetween2And4096;
+    MessageData: HexEvenLengthBetween2And4096;
   }
   export interface GenerateMacOutput {
     /**
@@ -517,8 +517,11 @@ declare namespace PaymentCryptographyData {
      */
     PinData: PinData;
   }
+  export type HexEvenLengthBetween16And32 = string;
   export type HexEvenLengthBetween16And4064 = string;
   export type HexEvenLengthBetween16And4096 = string;
+  export type HexEvenLengthBetween2And4096 = string;
+  export type HexEvenLengthBetween4And128 = string;
   export type HexLength16Or32 = string;
   export type HexLengthBetween10And24 = string;
   export type HexLengthBetween16And32 = string;
@@ -526,7 +529,6 @@ declare namespace PaymentCryptographyData {
   export type HexLengthBetween2And1024 = string;
   export type HexLengthBetween2And160 = string;
   export type HexLengthBetween2And4 = string;
-  export type HexLengthBetween2And4096 = string;
   export type HexLengthBetween2And8 = string;
   export type HexLengthBetween4And128 = string;
   export type HexLengthEquals1 = string;
@@ -898,7 +900,7 @@ declare namespace PaymentCryptographyData {
     /**
      * The encrypted PIN block data that Amazon Web Services Payment Cryptography translates.
      */
-    EncryptedPinBlock: HexLengthBetween16And32;
+    EncryptedPinBlock: HexEvenLengthBetween16And32;
     /**
      * The attributes and values to use for incoming DUKPT encryption key for PIN block tranlation.
      */
@@ -1040,7 +1042,7 @@ declare namespace PaymentCryptographyData {
     /**
      * The MAC being verified.
      */
-    Mac: HexLengthBetween4And128;
+    Mac: HexEvenLengthBetween4And128;
     /**
      * The length of the MAC.
      */
@@ -1048,7 +1050,7 @@ declare namespace PaymentCryptographyData {
     /**
      * The data on for which MAC is under verification.
      */
-    MessageData: HexLengthBetween2And4096;
+    MessageData: HexEvenLengthBetween2And4096;
     /**
      * The attributes and data values to use for MAC verification within Amazon Web Services Payment Cryptography.
      */

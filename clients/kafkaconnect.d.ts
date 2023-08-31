@@ -316,7 +316,7 @@ declare namespace KafkaConnect {
     /**
      * A map of keys to values that represent the configuration for the connector.
      */
-    connectorConfiguration: SyntheticCreateConnectorRequest__mapOf__string;
+    connectorConfiguration: __sensitive__mapOf__string;
     /**
      * A summary description of the connector.
      */
@@ -420,7 +420,7 @@ declare namespace KafkaConnect {
     /**
      * Base64 encoded contents of connect-distributed.properties file.
      */
-    propertiesFileContent: SyntheticCreateWorkerConfigurationRequest__string;
+    propertiesFileContent: __sensitiveString;
   }
   export interface CreateWorkerConfigurationResponse {
     /**
@@ -590,7 +590,7 @@ declare namespace KafkaConnect {
     /**
      * A map of keys to values that represent the configuration for the connector.
      */
-    connectorConfiguration?: SyntheticDescribeConnectorResponse__mapOf__string;
+    connectorConfiguration?: __sensitive__mapOf__string;
     /**
      * A summary description of the connector.
      */
@@ -991,10 +991,6 @@ declare namespace KafkaConnect {
      */
     message?: __string;
   }
-  export type SyntheticCreateConnectorRequest__mapOf__string = {[key: string]: __string};
-  export type SyntheticCreateWorkerConfigurationRequest__string = string;
-  export type SyntheticDescribeConnectorResponse__mapOf__string = {[key: string]: __string};
-  export type SyntheticWorkerConfigurationRevisionDescription__string = string;
   export interface UpdateConnectorRequest {
     /**
      * The target capacity.
@@ -1071,7 +1067,7 @@ declare namespace KafkaConnect {
     /**
      * Base64 encoded contents of the connect-distributed.properties file.
      */
-    propertiesFileContent?: SyntheticWorkerConfigurationRevisionDescription__string;
+    propertiesFileContent?: __sensitiveString;
     /**
      * The description of a revision of the worker configuration.
      */
@@ -1154,6 +1150,8 @@ declare namespace KafkaConnect {
   export type __listOf__string = __string[];
   export type __long = number;
   export type __longMin1 = number;
+  export type __sensitiveString = string;
+  export type __sensitive__mapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __stringMax1024 = string;
   export type __stringMin1Max128 = string;

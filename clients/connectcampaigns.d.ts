@@ -189,6 +189,9 @@ declare class ConnectCampaigns extends Service {
   updateCampaignOutboundCallConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace ConnectCampaigns {
+  export interface AgentlessDialerConfig {
+    dialingCapacity?: DialingCapacity;
+  }
   export interface AnswerMachineDetectionConfig {
     /**
      * Enable or disable answering machine detection
@@ -202,11 +205,11 @@ declare namespace ConnectCampaigns {
   export type BandwidthAllocation = number;
   export type Boolean = boolean;
   export interface Campaign {
+    id: CampaignId;
     arn: CampaignArn;
+    name: CampaignName;
     connectInstanceId: InstanceId;
     dialerConfig: DialerConfig;
-    id: CampaignId;
-    name: CampaignName;
     outboundCallConfig: OutboundCallConfig;
     tags?: TagMap;
   }
@@ -218,24 +221,24 @@ declare namespace ConnectCampaigns {
   export type CampaignName = string;
   export type CampaignState = "Initialized"|"Running"|"Paused"|"Stopped"|"Failed"|string;
   export interface CampaignSummary {
-    arn: CampaignArn;
-    connectInstanceId: InstanceId;
     id: CampaignId;
+    arn: CampaignArn;
     name: CampaignName;
+    connectInstanceId: InstanceId;
   }
   export type CampaignSummaryList = CampaignSummary[];
   export type ClientToken = string;
   export type ContactFlowId = string;
   export interface CreateCampaignRequest {
+    name: CampaignName;
     connectInstanceId: InstanceId;
     dialerConfig: DialerConfig;
-    name: CampaignName;
     outboundCallConfig: OutboundCallConfig;
     tags?: TagMap;
   }
   export interface CreateCampaignResponse {
-    arn?: CampaignArn;
     id?: CampaignId;
+    arn?: CampaignArn;
     tags?: TagMap;
   }
   export interface DeleteCampaignRequest {
@@ -255,17 +258,19 @@ declare namespace ConnectCampaigns {
   }
   export type DestinationPhoneNumber = string;
   export interface DialRequest {
-    attributes: Attributes;
     clientToken: ClientToken;
-    expirationTime: TimeStamp;
     phoneNumber: DestinationPhoneNumber;
+    expirationTime: TimeStamp;
+    attributes: Attributes;
   }
   export type DialRequestId = string;
   export type DialRequestList = DialRequest[];
   export interface DialerConfig {
-    predictiveDialerConfig?: PredictiveDialerConfig;
     progressiveDialerConfig?: ProgressiveDialerConfig;
+    predictiveDialerConfig?: PredictiveDialerConfig;
+    agentlessDialerConfig?: AgentlessDialerConfig;
   }
+  export type DialingCapacity = number;
   export type Enabled = boolean;
   export interface EncryptionConfig {
     enabled: Enabled;
@@ -281,8 +286,8 @@ declare namespace ConnectCampaigns {
   export type FailedCampaignStateResponseList = FailedCampaignStateResponse[];
   export interface FailedRequest {
     clientToken?: ClientToken;
-    failureCode?: FailureCode;
     id?: DialRequestId;
+    failureCode?: FailureCode;
   }
   export type FailedRequestList = FailedRequest[];
   export type FailureCode = "InvalidInput"|"RequestThrottled"|"UnknownError"|string;
@@ -292,8 +297,8 @@ declare namespace ConnectCampaigns {
   }
   export type GetCampaignStateBatchRequestCampaignIdsList = CampaignId[];
   export interface GetCampaignStateBatchResponse {
-    failedRequests?: FailedCampaignStateResponseList;
     successfulRequests?: SuccessfulCampaignStateResponseList;
+    failedRequests?: FailedCampaignStateResponseList;
   }
   export interface GetCampaignStateRequest {
     id: CampaignId;
@@ -315,30 +320,30 @@ declare namespace ConnectCampaigns {
   }
   export interface InstanceConfig {
     connectInstanceId: InstanceId;
-    encryptionConfig: EncryptionConfig;
     serviceLinkedRoleArn: ServiceLinkedRoleArn;
+    encryptionConfig: EncryptionConfig;
   }
   export type InstanceId = string;
   export interface InstanceIdFilter {
-    operator: InstanceIdFilterOperator;
     value: InstanceId;
+    operator: InstanceIdFilterOperator;
   }
   export type InstanceIdFilterOperator = "Eq"|string;
   export type InstanceOnboardingJobFailureCode = "EVENT_BRIDGE_ACCESS_DENIED"|"EVENT_BRIDGE_MANAGED_RULE_LIMIT_EXCEEDED"|"IAM_ACCESS_DENIED"|"KMS_ACCESS_DENIED"|"KMS_KEY_NOT_FOUND"|"INTERNAL_FAILURE"|string;
   export interface InstanceOnboardingJobStatus {
     connectInstanceId: InstanceId;
-    failureCode?: InstanceOnboardingJobFailureCode;
     status: InstanceOnboardingJobStatusCode;
+    failureCode?: InstanceOnboardingJobFailureCode;
   }
   export type InstanceOnboardingJobStatusCode = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
   export interface ListCampaignsRequest {
-    filters?: CampaignFilters;
     maxResults?: MaxResults;
     nextToken?: NextToken;
+    filters?: CampaignFilters;
   }
   export interface ListCampaignsResponse {
-    campaignSummaryList?: CampaignSummaryList;
     nextToken?: NextToken;
+    campaignSummaryList?: CampaignSummaryList;
   }
   export interface ListTagsForResourceRequest {
     arn: Arn;
@@ -349,27 +354,29 @@ declare namespace ConnectCampaigns {
   export type MaxResults = number;
   export type NextToken = string;
   export interface OutboundCallConfig {
-    answerMachineDetectionConfig?: AnswerMachineDetectionConfig;
     connectContactFlowId: ContactFlowId;
-    connectQueueId: QueueId;
     connectSourcePhoneNumber?: SourcePhoneNumber;
+    connectQueueId?: QueueId;
+    answerMachineDetectionConfig?: AnswerMachineDetectionConfig;
   }
   export interface PauseCampaignRequest {
     id: CampaignId;
   }
   export interface PredictiveDialerConfig {
     bandwidthAllocation: BandwidthAllocation;
+    dialingCapacity?: DialingCapacity;
   }
   export interface ProgressiveDialerConfig {
     bandwidthAllocation: BandwidthAllocation;
+    dialingCapacity?: DialingCapacity;
   }
   export interface PutDialRequestBatchRequest {
-    dialRequests: DialRequestList;
     id: CampaignId;
+    dialRequests: DialRequestList;
   }
   export interface PutDialRequestBatchResponse {
-    failedRequests?: FailedRequestList;
     successfulRequests?: SuccessfulRequestList;
+    failedRequests?: FailedRequestList;
   }
   export type QueueId = string;
   export interface ResumeCampaignRequest {
@@ -414,18 +421,18 @@ declare namespace ConnectCampaigns {
     tagKeys: TagKeyList;
   }
   export interface UpdateCampaignDialerConfigRequest {
-    dialerConfig: DialerConfig;
     id: CampaignId;
+    dialerConfig: DialerConfig;
   }
   export interface UpdateCampaignNameRequest {
     id: CampaignId;
     name: CampaignName;
   }
   export interface UpdateCampaignOutboundCallConfigRequest {
-    answerMachineDetectionConfig?: AnswerMachineDetectionConfig;
+    id: CampaignId;
     connectContactFlowId?: ContactFlowId;
     connectSourcePhoneNumber?: SourcePhoneNumber;
-    id: CampaignId;
+    answerMachineDetectionConfig?: AnswerMachineDetectionConfig;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

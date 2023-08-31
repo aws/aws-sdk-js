@@ -909,11 +909,11 @@ declare namespace CustomerProfiles {
     /**
      * A unique account number that you have given to the customer.
      */
-    AccountNumber?: string1To255;
+    AccountNumber?: sensitiveString1To255;
     /**
      * Any additional information relevant to the customer’s profile.
      */
-    AdditionalInformation?: string1To1000;
+    AdditionalInformation?: sensitiveString1To1000;
     /**
      * The type of profile used to describe the customer.
      */
@@ -921,23 +921,23 @@ declare namespace CustomerProfiles {
     /**
      * The name of the customer’s business.
      */
-    BusinessName?: string1To255;
+    BusinessName?: sensitiveString1To255;
     /**
      * The customer’s first name.
      */
-    FirstName?: string1To255;
+    FirstName?: sensitiveString1To255;
     /**
      * The customer’s middle name.
      */
-    MiddleName?: string1To255;
+    MiddleName?: sensitiveString1To255;
     /**
      * The customer’s last name.
      */
-    LastName?: string1To255;
+    LastName?: sensitiveString1To255;
     /**
      * The customer’s birth date. 
      */
-    BirthDate?: string1To255;
+    BirthDate?: sensitiveString1To255;
     /**
      * The gender with which the customer identifies. 
      */
@@ -945,31 +945,31 @@ declare namespace CustomerProfiles {
     /**
      * The customer’s phone number, which has not been specified as a mobile, home, or business number. 
      */
-    PhoneNumber?: string1To255;
+    PhoneNumber?: sensitiveString1To255;
     /**
      * The customer’s mobile phone number.
      */
-    MobilePhoneNumber?: string1To255;
+    MobilePhoneNumber?: sensitiveString1To255;
     /**
      * The customer’s home phone number.
      */
-    HomePhoneNumber?: string1To255;
+    HomePhoneNumber?: sensitiveString1To255;
     /**
      * The customer’s business phone number.
      */
-    BusinessPhoneNumber?: string1To255;
+    BusinessPhoneNumber?: sensitiveString1To255;
     /**
      * The customer’s email address, which has not been specified as a personal or business address. 
      */
-    EmailAddress?: string1To255;
+    EmailAddress?: sensitiveString1To255;
     /**
      * The customer’s personal email address.
      */
-    PersonalEmailAddress?: string1To255;
+    PersonalEmailAddress?: sensitiveString1To255;
     /**
      * The customer’s business email address.
      */
-    BusinessEmailAddress?: string1To255;
+    BusinessEmailAddress?: sensitiveString1To255;
     /**
      * A generic address associated with the customer that is not mailing, shipping, or billing.
      */
@@ -993,11 +993,11 @@ declare namespace CustomerProfiles {
     /**
      * An alternative to PartyType which accepts any string as input.
      */
-    PartyTypeString?: string1To255;
+    PartyTypeString?: sensitiveString1To255;
     /**
      * An alternative to Gender which accepts any string as input.
      */
-    GenderString?: string1To255;
+    GenderString?: sensitiveString1To255;
   }
   export interface CreateProfileResponse {
     /**
@@ -1738,7 +1738,7 @@ declare namespace CustomerProfiles {
     /**
      * The description of the profile object type.
      */
-    Description: text;
+    Description: sensitiveText;
     /**
      * A unique identifier for the object template.
      */
@@ -2679,11 +2679,11 @@ declare namespace CustomerProfiles {
     /**
      * A unique account number that you have given to the customer.
      */
-    AccountNumber?: string1To255;
+    AccountNumber?: sensitiveString1To255;
     /**
      * Any additional information relevant to the customer’s profile.
      */
-    AdditionalInformation?: string1To1000;
+    AdditionalInformation?: sensitiveString1To1000;
     /**
      * The type of profile used to describe the customer.
      */
@@ -2691,23 +2691,23 @@ declare namespace CustomerProfiles {
     /**
      * The name of the customer’s business.
      */
-    BusinessName?: string1To255;
+    BusinessName?: sensitiveString1To255;
     /**
      * The customer’s first name.
      */
-    FirstName?: string1To255;
+    FirstName?: sensitiveString1To255;
     /**
      * The customer’s middle name.
      */
-    MiddleName?: string1To255;
+    MiddleName?: sensitiveString1To255;
     /**
      * The customer’s last name.
      */
-    LastName?: string1To255;
+    LastName?: sensitiveString1To255;
     /**
      * The customer’s birth date. 
      */
-    BirthDate?: string1To255;
+    BirthDate?: sensitiveString1To255;
     /**
      * The gender with which the customer identifies. 
      */
@@ -2715,31 +2715,31 @@ declare namespace CustomerProfiles {
     /**
      * The customer's phone number, which has not been specified as a mobile, home, or business number.
      */
-    PhoneNumber?: string1To255;
+    PhoneNumber?: sensitiveString1To255;
     /**
      * The customer’s mobile phone number.
      */
-    MobilePhoneNumber?: string1To255;
+    MobilePhoneNumber?: sensitiveString1To255;
     /**
      * The customer’s home phone number.
      */
-    HomePhoneNumber?: string1To255;
+    HomePhoneNumber?: sensitiveString1To255;
     /**
      * The customer’s home phone number.
      */
-    BusinessPhoneNumber?: string1To255;
+    BusinessPhoneNumber?: sensitiveString1To255;
     /**
      * The customer’s email address, which has not been specified as a personal or business address. 
      */
-    EmailAddress?: string1To255;
+    EmailAddress?: sensitiveString1To255;
     /**
      * The customer’s personal email address.
      */
-    PersonalEmailAddress?: string1To255;
+    PersonalEmailAddress?: sensitiveString1To255;
     /**
      * The customer’s business email address.
      */
-    BusinessEmailAddress?: string1To255;
+    BusinessEmailAddress?: sensitiveString1To255;
     /**
      * A generic address associated with the customer that is not mailing, shipping, or billing.
      */
@@ -2767,11 +2767,11 @@ declare namespace CustomerProfiles {
     /**
      * An alternative to PartyType which accepts any string as input.
      */
-    PartyTypeString?: string1To255;
+    PartyTypeString?: sensitiveString1To255;
     /**
      * An alternative to Gender which accepts any string as input.
      */
-    GenderString?: string1To255;
+    GenderString?: sensitiveString1To255;
   }
   export type ProfileIdList = uuid[];
   export type ProfileIdToBeMergedList = uuid[];
@@ -2876,7 +2876,7 @@ declare namespace CustomerProfiles {
     /**
      * Description of the profile object type.
      */
-    Description: text;
+    Description: sensitiveText;
     /**
      * A unique identifier for the object template. For some attributes in the request, the service will use the default value from the object template when TemplateId is present. If these attributes are present in the request, the service may return a BadRequestException. These attributes include: AllowProfileCreation, SourceLastUpdatedTimestampFormat, Fields, and Keys. For example, if AllowProfileCreation is set to true when TemplateId is set, the service may return a BadRequestException.
      */
@@ -2918,7 +2918,7 @@ declare namespace CustomerProfiles {
     /**
      * Description of the profile object type.
      */
-    Description: text;
+    Description: sensitiveText;
     /**
      * A unique identifier for the object template.
      */
@@ -3462,11 +3462,11 @@ declare namespace CustomerProfiles {
     /**
      * Any additional information relevant to the customer’s profile.
      */
-    AdditionalInformation?: string0To1000;
+    AdditionalInformation?: sensitiveString0To1000;
     /**
      * A unique account number that you have given to the customer.
      */
-    AccountNumber?: string0To255;
+    AccountNumber?: sensitiveString0To255;
     /**
      * The type of profile used to describe the customer.
      */
@@ -3474,23 +3474,23 @@ declare namespace CustomerProfiles {
     /**
      * The name of the customer’s business.
      */
-    BusinessName?: string0To255;
+    BusinessName?: sensitiveString0To255;
     /**
      * The customer’s first name.
      */
-    FirstName?: string0To255;
+    FirstName?: sensitiveString0To255;
     /**
      * The customer’s middle name.
      */
-    MiddleName?: string0To255;
+    MiddleName?: sensitiveString0To255;
     /**
      * The customer’s last name.
      */
-    LastName?: string0To255;
+    LastName?: sensitiveString0To255;
     /**
      * The customer’s birth date. 
      */
-    BirthDate?: string0To255;
+    BirthDate?: sensitiveString0To255;
     /**
      * The gender with which the customer identifies. 
      */
@@ -3498,31 +3498,31 @@ declare namespace CustomerProfiles {
     /**
      * The customer’s phone number, which has not been specified as a mobile, home, or business number. 
      */
-    PhoneNumber?: string0To255;
+    PhoneNumber?: sensitiveString0To255;
     /**
      * The customer’s mobile phone number.
      */
-    MobilePhoneNumber?: string0To255;
+    MobilePhoneNumber?: sensitiveString0To255;
     /**
      * The customer’s home phone number.
      */
-    HomePhoneNumber?: string0To255;
+    HomePhoneNumber?: sensitiveString0To255;
     /**
      * The customer’s business phone number.
      */
-    BusinessPhoneNumber?: string0To255;
+    BusinessPhoneNumber?: sensitiveString0To255;
     /**
      * The customer’s email address, which has not been specified as a personal or business address. 
      */
-    EmailAddress?: string0To255;
+    EmailAddress?: sensitiveString0To255;
     /**
      * The customer’s personal email address.
      */
-    PersonalEmailAddress?: string0To255;
+    PersonalEmailAddress?: sensitiveString0To255;
     /**
      * The customer’s business email address.
      */
-    BusinessEmailAddress?: string0To255;
+    BusinessEmailAddress?: sensitiveString0To255;
     /**
      * A generic address associated with the customer that is not mailing, shipping, or billing.
      */
@@ -3546,11 +3546,11 @@ declare namespace CustomerProfiles {
     /**
      * An alternative to PartyType which accepts any string as input.
      */
-    PartyTypeString?: string0To255;
+    PartyTypeString?: sensitiveString0To255;
     /**
      * An alternative to Gender which accepts any string as input.
      */
-    GenderString?: string0To255;
+    GenderString?: sensitiveString0To255;
   }
   export interface UpdateProfileResponse {
     /**
@@ -3603,8 +3603,12 @@ declare namespace CustomerProfiles {
   export type s3BucketName = string;
   export type s3KeyName = string;
   export type s3KeyNameCustomerOutputConfig = string;
+  export type sensitiveString0To1000 = string;
+  export type sensitiveString0To255 = string;
+  export type sensitiveString1To1000 = string;
+  export type sensitiveString1To255 = string;
+  export type sensitiveText = string;
   export type sqsQueueUrl = string;
-  export type string0To1000 = string;
   export type string0To255 = string;
   export type string1To1000 = string;
   export type string1To255 = string;

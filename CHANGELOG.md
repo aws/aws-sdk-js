@@ -1,6 +1,21 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1448.0-->
+<!--LATEST=2.1449.0-->
 <!--ENTRYINSERT-->
+
+## 2.1449.0
+* feature: ChimeSDKMediaPipelines: This release adds support for feature Voice Enhancement for Call Recording as part of Amazon Chime SDK call analytics.
+* feature: CloudHSM: Deprecating CloudHSM Classic API Service.
+* feature: CloudWatchEvents: Documentation updates for CloudWatch Events.
+* feature: ConnectCampaigns: Amazon Connect outbound campaigns has launched agentless dialing mode which enables customers to make automated outbound calls without agent engagement. This release updates three of the campaign management API's to support the new agentless dialing mode and the new dialing capacity field.
+* feature: ConnectParticipant: Amazon Connect Participant Service adds the ability to get a view resource using a view token, which is provided in a participant message, with the release of the DescribeView API.
+* feature: CustomerProfiles: Adds sensitive trait to various shapes in Customer Profiles API model.
+* feature: ECS: This release adds support for an account-level setting that you can use to configure the number of days for AWS Fargate task retirement.
+* feature: Grafana: Marking SAML RoleValues attribute as sensitive and updating VpcConfiguration attributes to match documentation.
+* feature: Health: Adds new API DescribeEntityAggregatesForOrganization that retrieves entity aggregates across your organization. Also adds support for resource status filtering in DescribeAffectedEntitiesForOrganization, resource status aggregates in the DescribeEntityAggregates response, and new resource statuses.
+* feature: IVS: Updated "type" description for CreateChannel, UpdateChannel, Channel, and ChannelSummary.
+* feature: KafkaConnect: Minor model changes for Kafka Connect as well as endpoint updates.
+* feature: PaymentCryptographyData: Make KeyCheckValue field optional when using asymmetric keys as Key Check Values typically only apply to symmetric keys
+* feature: SageMakerRuntime: This release adds a new InvokeEndpointWithResponseStream API to support streaming of model responses.
 
 ## 2.1448.0
 * feature: AppRunner: App Runner adds support for Bitbucket. You can now create App Runner connection that connects to your Bitbucket repositories and deploy App Runner service with the source code stored in a Bitbucket repository.

@@ -1065,6 +1065,10 @@ declare namespace ChimeSDKMediaPipelines {
      * The time at which the media insights pipeline was created.
      */
     CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The statuses that the elements in a media insights pipeline can have during data processing.
+     */
+    ElementStatuses?: MediaInsightsPipelineElementStatuses;
   }
   export interface MediaInsightsPipelineConfiguration {
     /**
@@ -1137,8 +1141,12 @@ declare namespace ChimeSDKMediaPipelines {
      * The configuration settings for an SNS topic sink in a media insights pipeline configuration element.
      */
     SnsTopicSinkConfiguration?: SnsTopicSinkConfiguration;
+    /**
+     * The configuration settings for the VoiceEnhancementSinkConfiguration element.
+     */
+    VoiceEnhancementSinkConfiguration?: VoiceEnhancementSinkConfiguration;
   }
-  export type MediaInsightsPipelineConfigurationElementType = "AmazonTranscribeCallAnalyticsProcessor"|"VoiceAnalyticsProcessor"|"AmazonTranscribeProcessor"|"KinesisDataStreamSink"|"LambdaFunctionSink"|"SqsQueueSink"|"SnsTopicSink"|"S3RecordingSink"|string;
+  export type MediaInsightsPipelineConfigurationElementType = "AmazonTranscribeCallAnalyticsProcessor"|"VoiceAnalyticsProcessor"|"AmazonTranscribeProcessor"|"KinesisDataStreamSink"|"LambdaFunctionSink"|"SqsQueueSink"|"SnsTopicSink"|"S3RecordingSink"|"VoiceEnhancementSink"|string;
   export type MediaInsightsPipelineConfigurationElements = MediaInsightsPipelineConfigurationElement[];
   export type MediaInsightsPipelineConfigurationNameString = string;
   export interface MediaInsightsPipelineConfigurationSummary {
@@ -1156,6 +1164,17 @@ declare namespace ChimeSDKMediaPipelines {
     MediaInsightsPipelineConfigurationArn?: Arn;
   }
   export type MediaInsightsPipelineConfigurationSummaryList = MediaInsightsPipelineConfigurationSummary[];
+  export interface MediaInsightsPipelineElementStatus {
+    /**
+     * The type of status.
+     */
+    Type?: MediaInsightsPipelineConfigurationElementType;
+    /**
+     * The element's status.
+     */
+    Status?: MediaPipelineElementStatus;
+  }
+  export type MediaInsightsPipelineElementStatuses = MediaInsightsPipelineElementStatus[];
   export type MediaInsightsRuntimeMetadata = {[key: string]: String};
   export interface MediaLiveConnectorPipeline {
     /**
@@ -1205,10 +1224,11 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaInsightsPipeline?: MediaInsightsPipeline;
   }
+  export type MediaPipelineElementStatus = "NotStarted"|"NotSupported"|"Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|"Paused"|string;
   export type MediaPipelineList = MediaPipelineSummary[];
   export type MediaPipelineSinkType = "S3Bucket"|string;
   export type MediaPipelineSourceType = "ChimeSdkMeeting"|string;
-  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|"Paused"|string;
+  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|"Paused"|"NotStarted"|string;
   export type MediaPipelineStatusUpdate = "Pause"|"Resume"|string;
   export interface MediaPipelineSummary {
     /**
@@ -1557,6 +1577,12 @@ declare namespace ChimeSDKMediaPipelines {
      * The status of the voice tone analysis task.
      */
     VoiceToneAnalysisStatus?: VoiceAnalyticsConfigurationStatus;
+  }
+  export interface VoiceEnhancementSinkConfiguration {
+    /**
+     * Disables the VoiceEnhancementSinkConfiguration element.
+     */
+    Disabled?: Boolean;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

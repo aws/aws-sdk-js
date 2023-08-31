@@ -28,6 +28,14 @@ declare class ConnectParticipant extends Service {
    */
   createParticipantConnection(callback?: (err: AWSError, data: ConnectParticipant.Types.CreateParticipantConnectionResponse) => void): Request<ConnectParticipant.Types.CreateParticipantConnectionResponse, AWSError>;
   /**
+   * Retrieves the view for the specified view token.
+   */
+  describeView(params: ConnectParticipant.Types.DescribeViewRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.DescribeViewResponse) => void): Request<ConnectParticipant.Types.DescribeViewResponse, AWSError>;
+  /**
+   * Retrieves the view for the specified view token.
+   */
+  describeView(callback?: (err: AWSError, data: ConnectParticipant.Types.DescribeViewResponse) => void): Request<ConnectParticipant.Types.DescribeViewResponse, AWSError>;
+  /**
    * Disconnects a participant.    ConnectionToken is used for invoking this API instead of ParticipantToken.  The Amazon Connect Participant Service APIs do not use Signature Version 4 authentication.
    */
   disconnectParticipant(params: ConnectParticipant.Types.DisconnectParticipantRequest, callback?: (err: AWSError, data: ConnectParticipant.Types.DisconnectParticipantResponse) => void): Request<ConnectParticipant.Types.DisconnectParticipantResponse, AWSError>;
@@ -77,6 +85,7 @@ declare class ConnectParticipant extends Service {
   startAttachmentUpload(callback?: (err: AWSError, data: ConnectParticipant.Types.StartAttachmentUploadResponse) => void): Request<ConnectParticipant.Types.StartAttachmentUploadResponse, AWSError>;
 }
 declare namespace ConnectParticipant {
+  export type ARN = string;
   export type ArtifactId = string;
   export type ArtifactStatus = "APPROVED"|"REJECTED"|"IN_PROGRESS"|string;
   export type AttachmentIdList = ArtifactId[];
@@ -139,7 +148,7 @@ declare namespace ConnectParticipant {
   export type ContentType = string;
   export interface CreateParticipantConnectionRequest {
     /**
-     * Type of connection information required. This can be omitted if ConnectParticipant is true.
+     * Type of connection information required. If you need CONNECTION_CREDENTIALS along with marking participant as connected, pass CONNECTION_CREDENTIALS in Type.
      */
     Type?: ConnectionTypeList;
     /**
@@ -160,6 +169,22 @@ declare namespace ConnectParticipant {
      * Creates the participant's connection credentials. The authentication token associated with the participant's connection.
      */
     ConnectionCredentials?: ConnectionCredentials;
+  }
+  export interface DescribeViewRequest {
+    /**
+     * An encrypted token originating from the interactive message of a ShowView block operation. Represents the desired view.
+     */
+    ViewToken: ViewToken;
+    /**
+     * The connection token.
+     */
+    ConnectionToken: ParticipantToken;
+  }
+  export interface DescribeViewResponse {
+    /**
+     * A view resource object. Contains metadata and content necessary to render the view.
+     */
+    View?: View;
   }
   export interface DisconnectParticipantRequest {
     /**
@@ -305,7 +330,7 @@ declare namespace ConnectParticipant {
   export type NextToken = string;
   export type NonEmptyClientToken = string;
   export type ParticipantId = string;
-  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|string;
+  export type ParticipantRole = "AGENT"|"CUSTOMER"|"SYSTEM"|"CUSTOM_BOT"|string;
   export type ParticipantToken = string;
   export type PreSignedAttachmentUrl = string;
   export type PreSignedConnectionUrl = string;
@@ -447,6 +472,50 @@ declare namespace ConnectParticipant {
   export type UploadMetadataSignedHeadersKey = string;
   export type UploadMetadataSignedHeadersValue = string;
   export type UploadMetadataUrl = string;
+  export interface View {
+    /**
+     * The identifier of the view.
+     */
+    Id?: ViewId;
+    /**
+     * The Amazon Resource Name (ARN) of the view.
+     */
+    Arn?: ARN;
+    /**
+     * The name of the view.
+     */
+    Name?: ViewName;
+    /**
+     * The current version of the view.
+     */
+    Version?: ViewVersion;
+    /**
+     * View content containing all content necessary to render a view except for runtime input data.
+     */
+    Content?: ViewContent;
+  }
+  export type ViewAction = string;
+  export type ViewActions = ViewAction[];
+  export interface ViewContent {
+    /**
+     * The schema representing the input data that the view template must be supplied to render.
+     */
+    InputSchema?: ViewInputSchema;
+    /**
+     * The view template representing the structure of the view.
+     */
+    Template?: ViewTemplate;
+    /**
+     * A list of actions possible from the view
+     */
+    Actions?: ViewActions;
+  }
+  export type ViewId = string;
+  export type ViewInputSchema = string;
+  export type ViewName = string;
+  export type ViewTemplate = string;
+  export type ViewToken = string;
+  export type ViewVersion = number;
   export interface Websocket {
     /**
      * The URL of the websocket.
