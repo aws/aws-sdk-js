@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1449.0-->
+<!--LATEST=2.1450.0-->
 <!--ENTRYINSERT-->
+
+## 2.1450.0
+* feature: ChimeSDKMediaPipelines: This release adds support for the Voice Analytics feature for customer-owned KVS streams as part of the Amazon Chime SDK call analytics.
+* feature: Connect: Amazon Connect adds the ability to read, create, update, delete, and list view resources, and adds the ability to read, create, delete, and list view versions.
+* feature: IdentityStore: New Identity Store content for China Region launch
 
 ## 2.1449.0
 * feature: ChimeSDKMediaPipelines: This release adds support for feature Voice Enhancement for Call Recording as part of Amazon Chime SDK call analytics.

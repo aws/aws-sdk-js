@@ -188,11 +188,11 @@ declare class Connect extends Service {
    */
   createPrompt(callback?: (err: AWSError, data: Connect.Types.CreatePromptResponse) => void): Request<Connect.Types.CreatePromptResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. Only use the phone number ARN format that doesn't contain instance in the path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid. This is the same ARN format that is returned when you call the ListPhoneNumbersV2 API. 
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.    If the phone number is claimed to a traffic distribution group that was created in the same Region as the Amazon Connect instance where you are calling this API, then you can use a full phone number ARN or a UUID for OutboundCallerIdNumberId. However, if the phone number is claimed to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException.   Only use the phone number ARN format that doesn't contain instance in the path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid. This is the same ARN format that is returned when you call the ListPhoneNumbersV2 API.   If you plan to use IAM policies to allow/deny access to this API for phone number resources claimed to a traffic distribution group, see Allow or Deny queue API actions for phone numbers in a replica Region.   
    */
   createQueue(params: Connect.Types.CreateQueueRequest, callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. Only use the phone number ARN format that doesn't contain instance in the path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid. This is the same ARN format that is returned when you call the ListPhoneNumbersV2 API. 
+   * This API is in preview release for Amazon Connect and is subject to change. Creates a new queue for the specified Amazon Connect instance.    If the phone number is claimed to a traffic distribution group that was created in the same Region as the Amazon Connect instance where you are calling this API, then you can use a full phone number ARN or a UUID for OutboundCallerIdNumberId. However, if the phone number is claimed to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException.   Only use the phone number ARN format that doesn't contain instance in the path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid. This is the same ARN format that is returned when you call the ListPhoneNumbersV2 API.   If you plan to use IAM policies to allow/deny access to this API for phone number resources claimed to a traffic distribution group, see Allow or Deny queue API actions for phone numbers in a replica Region.   
    */
   createQueue(callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class Connect extends Service {
    */
   createTaskTemplate(callback?: (err: AWSError, data: Connect.Types.CreateTaskTemplateResponse) => void): Request<Connect.Types.CreateTaskTemplateResponse, AWSError>;
   /**
-   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
+   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.   You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
    */
   createTrafficDistributionGroup(params: Connect.Types.CreateTrafficDistributionGroupRequest, callback?: (err: AWSError, data: Connect.Types.CreateTrafficDistributionGroupResponse) => void): Request<Connect.Types.CreateTrafficDistributionGroupResponse, AWSError>;
   /**
-   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
+   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.   You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
    */
   createTrafficDistributionGroup(callback?: (err: AWSError, data: Connect.Types.CreateTrafficDistributionGroupResponse) => void): Request<Connect.Types.CreateTrafficDistributionGroupResponse, AWSError>;
   /**
@@ -267,6 +267,22 @@ declare class Connect extends Service {
    * Creates a new user hierarchy group.
    */
   createUserHierarchyGroup(callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
+  /**
+   * Creates a new view with the possible status of SAVED or PUBLISHED. The views will have a unique name for each connect instance. It performs basic content validation if the status is SAVED or full content validation if the status is set to PUBLISHED. An error is returned if validation fails. It associates either the $SAVED qualifier or both of the $SAVED and $LATEST qualifiers with the provided view content based on the status. The view is idempotent if ClientToken is provided.
+   */
+  createView(params: Connect.Types.CreateViewRequest, callback?: (err: AWSError, data: Connect.Types.CreateViewResponse) => void): Request<Connect.Types.CreateViewResponse, AWSError>;
+  /**
+   * Creates a new view with the possible status of SAVED or PUBLISHED. The views will have a unique name for each connect instance. It performs basic content validation if the status is SAVED or full content validation if the status is set to PUBLISHED. An error is returned if validation fails. It associates either the $SAVED qualifier or both of the $SAVED and $LATEST qualifiers with the provided view content based on the status. The view is idempotent if ClientToken is provided.
+   */
+  createView(callback?: (err: AWSError, data: Connect.Types.CreateViewResponse) => void): Request<Connect.Types.CreateViewResponse, AWSError>;
+  /**
+   * Publishes a new version of the view identifier. Versions are immutable and monotonically increasing. It returns the highest version if there is no change in content compared to that version. An error is displayed if the supplied ViewContentSha256 is different from the ViewContentSha256 of the $LATEST alias.
+   */
+  createViewVersion(params: Connect.Types.CreateViewVersionRequest, callback?: (err: AWSError, data: Connect.Types.CreateViewVersionResponse) => void): Request<Connect.Types.CreateViewVersionResponse, AWSError>;
+  /**
+   * Publishes a new version of the view identifier. Versions are immutable and monotonically increasing. It returns the highest version if there is no change in content compared to that version. An error is displayed if the supplied ViewContentSha256 is different from the ViewContentSha256 of the $LATEST alias.
+   */
+  createViewVersion(callback?: (err: AWSError, data: Connect.Types.CreateViewVersionResponse) => void): Request<Connect.Types.CreateViewVersionResponse, AWSError>;
   /**
    * Creates a custom vocabulary associated with your Amazon Connect instance. You can set a custom vocabulary to be your default vocabulary for a given language. Contact Lens for Amazon Connect uses the default vocabulary in post-call and real-time contact analysis sessions for that language.
    */
@@ -427,6 +443,22 @@ declare class Connect extends Service {
    * Deletes an existing user hierarchy group. It must not be associated with any agents or have any active child groups.
    */
   deleteUserHierarchyGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the view entirely. It deletes the view and all associated qualifiers (versions and aliases).
+   */
+  deleteView(params: Connect.Types.DeleteViewRequest, callback?: (err: AWSError, data: Connect.Types.DeleteViewResponse) => void): Request<Connect.Types.DeleteViewResponse, AWSError>;
+  /**
+   * Deletes the view entirely. It deletes the view and all associated qualifiers (versions and aliases).
+   */
+  deleteView(callback?: (err: AWSError, data: Connect.Types.DeleteViewResponse) => void): Request<Connect.Types.DeleteViewResponse, AWSError>;
+  /**
+   * Deletes the particular version specified in ViewVersion identifier.
+   */
+  deleteViewVersion(params: Connect.Types.DeleteViewVersionRequest, callback?: (err: AWSError, data: Connect.Types.DeleteViewVersionResponse) => void): Request<Connect.Types.DeleteViewVersionResponse, AWSError>;
+  /**
+   * Deletes the particular version specified in ViewVersion identifier.
+   */
+  deleteViewVersion(callback?: (err: AWSError, data: Connect.Types.DeleteViewVersionResponse) => void): Request<Connect.Types.DeleteViewVersionResponse, AWSError>;
   /**
    * Deletes the vocabulary that has the given identifier.
    */
@@ -603,6 +635,14 @@ declare class Connect extends Service {
    * Describes the hierarchy structure of the specified Amazon Connect instance.
    */
   describeUserHierarchyStructure(callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyStructureResponse) => void): Request<Connect.Types.DescribeUserHierarchyStructureResponse, AWSError>;
+  /**
+   * Retrieves the view for the specified Amazon Connect instance and view identifier. The view identifier can be supplied as a ViewId or ARN.  $SAVED needs to be supplied if a view is unpublished. The view identifier can contain an optional qualifier, for example, &lt;view-id&gt;:$SAVED, which is either an actual version number or an Amazon Connect managed qualifier $SAVED | $LATEST. If it is not supplied, then $LATEST is assumed for customer managed views and an error is returned if there is no published content available. Version 1 is assumed for Amazon Web Services managed views.
+   */
+  describeView(params: Connect.Types.DescribeViewRequest, callback?: (err: AWSError, data: Connect.Types.DescribeViewResponse) => void): Request<Connect.Types.DescribeViewResponse, AWSError>;
+  /**
+   * Retrieves the view for the specified Amazon Connect instance and view identifier. The view identifier can be supplied as a ViewId or ARN.  $SAVED needs to be supplied if a view is unpublished. The view identifier can contain an optional qualifier, for example, &lt;view-id&gt;:$SAVED, which is either an actual version number or an Amazon Connect managed qualifier $SAVED | $LATEST. If it is not supplied, then $LATEST is assumed for customer managed views and an error is returned if there is no published content available. Version 1 is assumed for Amazon Web Services managed views.
+   */
+  describeView(callback?: (err: AWSError, data: Connect.Types.DescribeViewResponse) => void): Request<Connect.Types.DescribeViewResponse, AWSError>;
   /**
    * Describes the specified vocabulary.
    */
@@ -908,11 +948,11 @@ declare class Connect extends Service {
    */
   listLexBots(callback?: (err: AWSError, data: Connect.Types.ListLexBotsResponse) => void): Request<Connect.Types.ListLexBotsResponse, AWSError>;
   /**
-   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.  The phone number Arn value that is returned from each of the items in the PhoneNumberSummaryList cannot be used to tag phone number resources. It will fail with a ResourceNotFoundException. Instead, use the ListPhoneNumbersV2 API. It returns the new phone number ARN that can be used to tag phone number resources. 
+   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.    We recommend using ListPhoneNumbersV2 to return phone number types. ListPhoneNumbers doesn't support number types UIFN, SHARED, THIRD_PARTY_TF, and THIRD_PARTY_DID. While it returns numbers of those types, it incorrectly lists them as TOLL_FREE or DID.    The phone number Arn value that is returned from each of the items in the PhoneNumberSummaryList cannot be used to tag phone number resources. It will fail with a ResourceNotFoundException. Instead, use the ListPhoneNumbersV2 API. It returns the new phone number ARN that can be used to tag phone number resources.   
    */
   listPhoneNumbers(params: Connect.Types.ListPhoneNumbersRequest, callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersResponse) => void): Request<Connect.Types.ListPhoneNumbersResponse, AWSError>;
   /**
-   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.  The phone number Arn value that is returned from each of the items in the PhoneNumberSummaryList cannot be used to tag phone number resources. It will fail with a ResourceNotFoundException. Instead, use the ListPhoneNumbersV2 API. It returns the new phone number ARN that can be used to tag phone number resources. 
+   * Provides information about the phone numbers for the specified Amazon Connect instance.  For more information about phone numbers, see Set Up Phone Numbers for Your Contact Center in the Amazon Connect Administrator Guide.    We recommend using ListPhoneNumbersV2 to return phone number types. ListPhoneNumbers doesn't support number types UIFN, SHARED, THIRD_PARTY_TF, and THIRD_PARTY_DID. While it returns numbers of those types, it incorrectly lists them as TOLL_FREE or DID.    The phone number Arn value that is returned from each of the items in the PhoneNumberSummaryList cannot be used to tag phone number resources. It will fail with a ResourceNotFoundException. Instead, use the ListPhoneNumbersV2 API. It returns the new phone number ARN that can be used to tag phone number resources.   
    */
   listPhoneNumbers(callback?: (err: AWSError, data: Connect.Types.ListPhoneNumbersResponse) => void): Request<Connect.Types.ListPhoneNumbersResponse, AWSError>;
   /**
@@ -1059,6 +1099,22 @@ declare class Connect extends Service {
    * Provides summary information about the users for the specified Amazon Connect instance.
    */
   listUsers(callback?: (err: AWSError, data: Connect.Types.ListUsersResponse) => void): Request<Connect.Types.ListUsersResponse, AWSError>;
+  /**
+   * Returns all the available versions for the specified Amazon Connect instance and view identifier. Results will be sorted from highest to lowest.
+   */
+  listViewVersions(params: Connect.Types.ListViewVersionsRequest, callback?: (err: AWSError, data: Connect.Types.ListViewVersionsResponse) => void): Request<Connect.Types.ListViewVersionsResponse, AWSError>;
+  /**
+   * Returns all the available versions for the specified Amazon Connect instance and view identifier. Results will be sorted from highest to lowest.
+   */
+  listViewVersions(callback?: (err: AWSError, data: Connect.Types.ListViewVersionsResponse) => void): Request<Connect.Types.ListViewVersionsResponse, AWSError>;
+  /**
+   * Returns views in the given instance. Results are sorted primarily by type, and secondarily by name.
+   */
+  listViews(params: Connect.Types.ListViewsRequest, callback?: (err: AWSError, data: Connect.Types.ListViewsResponse) => void): Request<Connect.Types.ListViewsResponse, AWSError>;
+  /**
+   * Returns views in the given instance. Results are sorted primarily by type, and secondarily by name.
+   */
+  listViews(callback?: (err: AWSError, data: Connect.Types.ListViewsResponse) => void): Request<Connect.Types.ListViewsResponse, AWSError>;
   /**
    * Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by userId will be set to silent monitoring mode on the contact.
    */
@@ -1228,11 +1284,11 @@ declare class Connect extends Service {
    */
   startTaskContact(callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
   /**
-   * Ends the specified contact. This call does not work for the following initiation methods:   DISCONNECT   TRANSFER   QUEUE_TRANSFER  
+   * Ends the specified contact. This call does not work for voice contacts that use the following initiation methods:   DISCONNECT   TRANSFER   QUEUE_TRANSFER   Chat and task contacts, however, can be terminated in any state, regardless of initiation method.
    */
   stopContact(params: Connect.Types.StopContactRequest, callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
   /**
-   * Ends the specified contact. This call does not work for the following initiation methods:   DISCONNECT   TRANSFER   QUEUE_TRANSFER  
+   * Ends the specified contact. This call does not work for voice contacts that use the following initiation methods:   DISCONNECT   TRANSFER   QUEUE_TRANSFER   Chat and task contacts, however, can be terminated in any state, regardless of initiation method.
    */
   stopContact(callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
   /**
@@ -1452,11 +1508,11 @@ declare class Connect extends Service {
    */
   updateQueueName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. Only use the phone number ARN format that doesn't contain instance in the path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid. This is the same ARN format that is returned when you call the ListPhoneNumbersV2 API. 
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.    If the phone number is claimed to a traffic distribution group that was created in the same Region as the Amazon Connect instance where you are calling this API, then you can use a full phone number ARN or a UUID for OutboundCallerIdNumberId. However, if the phone number is claimed to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException.   Only use the phone number ARN format that doesn't contain instance in the path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid. This is the same ARN format that is returned when you call the ListPhoneNumbersV2 API.   If you plan to use IAM policies to allow/deny access to this API for phone number resources claimed to a traffic distribution group, see Allow or Deny queue API actions for phone numbers in a replica Region.   
    */
   updateQueueOutboundCallerConfig(params: Connect.Types.UpdateQueueOutboundCallerConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.  If the number being used in the input is claimed to a traffic distribution group, and you are calling this API using an instance in the Amazon Web Services Region where the traffic distribution group was created, you can use either a full phone number ARN or UUID value for the OutboundCallerIdNumberId value of the OutboundCallerConfig request body parameter. However, if the number is claimed to a traffic distribution group and you are calling this API using an instance in the alternate Amazon Web Services Region associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException. Only use the phone number ARN format that doesn't contain instance in the path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid. This is the same ARN format that is returned when you call the ListPhoneNumbersV2 API. 
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the outbound caller ID name, number, and outbound whisper flow for a specified queue.    If the phone number is claimed to a traffic distribution group that was created in the same Region as the Amazon Connect instance where you are calling this API, then you can use a full phone number ARN or a UUID for OutboundCallerIdNumberId. However, if the phone number is claimed to a traffic distribution group that is in one Region, and you are calling this API from an instance in another Amazon Web Services Region that is associated with the traffic distribution group, you must provide a full phone number ARN. If a UUID is provided in this scenario, you will receive a ResourceNotFoundException.   Only use the phone number ARN format that doesn't contain instance in the path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid. This is the same ARN format that is returned when you call the ListPhoneNumbersV2 API.   If you plan to use IAM policies to allow/deny access to this API for phone number resources claimed to a traffic distribution group, see Allow or Deny queue API actions for phone numbers in a replica Region.   
    */
   updateQueueOutboundCallerConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1548,11 +1604,11 @@ declare class Connect extends Service {
    */
   updateTaskTemplate(callback?: (err: AWSError, data: Connect.Types.UpdateTaskTemplateResponse) => void): Request<Connect.Types.UpdateTaskTemplateResponse, AWSError>;
   /**
-   * Updates the traffic distribution for a given traffic distribution group.   You can change the SignInConfig only for a default TrafficDistributionGroup. If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   * Updates the traffic distribution for a given traffic distribution group.   You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
    */
   updateTrafficDistribution(params: Connect.Types.UpdateTrafficDistributionRequest, callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
-   * Updates the traffic distribution for a given traffic distribution group.   You can change the SignInConfig only for a default TrafficDistributionGroup. If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   * Updates the traffic distribution for a given traffic distribution group.   You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
    */
   updateTrafficDistribution(callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
@@ -1611,6 +1667,22 @@ declare class Connect extends Service {
    * Assigns the specified security profiles to the specified user.
    */
   updateUserSecurityProfiles(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the view content of the given view identifier in the specified Amazon Connect instance. It performs content validation if Status is set to SAVED and performs full content validation if Status is PUBLISHED. Note that the $SAVED alias' content will always be updated, but the $LATEST alias' content will only be updated if Status is PUBLISHED.
+   */
+  updateViewContent(params: Connect.Types.UpdateViewContentRequest, callback?: (err: AWSError, data: Connect.Types.UpdateViewContentResponse) => void): Request<Connect.Types.UpdateViewContentResponse, AWSError>;
+  /**
+   * Updates the view content of the given view identifier in the specified Amazon Connect instance. It performs content validation if Status is set to SAVED and performs full content validation if Status is PUBLISHED. Note that the $SAVED alias' content will always be updated, but the $LATEST alias' content will only be updated if Status is PUBLISHED.
+   */
+  updateViewContent(callback?: (err: AWSError, data: Connect.Types.UpdateViewContentResponse) => void): Request<Connect.Types.UpdateViewContentResponse, AWSError>;
+  /**
+   * Updates the view metadata. Note that either Name or Description must be provided.
+   */
+  updateViewMetadata(params: Connect.Types.UpdateViewMetadataRequest, callback?: (err: AWSError, data: Connect.Types.UpdateViewMetadataResponse) => void): Request<Connect.Types.UpdateViewMetadataResponse, AWSError>;
+  /**
+   * Updates the view metadata. Note that either Name or Description must be provided.
+   */
+  updateViewMetadata(callback?: (err: AWSError, data: Connect.Types.UpdateViewMetadataResponse) => void): Request<Connect.Types.UpdateViewMetadataResponse, AWSError>;
 }
 declare namespace Connect {
   export type ARN = string;
@@ -3017,6 +3089,66 @@ declare namespace Connect {
      */
     UserArn?: ARN;
   }
+  export interface CreateViewRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * A unique Id for each create view request to avoid duplicate view creation. For example, the view is idempotent ClientToken is provided.
+     */
+    ClientToken?: ViewsClientToken;
+    /**
+     * Indicates the view status as either SAVED or PUBLISHED. The PUBLISHED status will initiate validation on the content.
+     */
+    Status: ViewStatus;
+    /**
+     * View content containing all content necessary to render a view except for runtime input data. The total uncompressed content has a maximum file size of 400kB.
+     */
+    Content: ViewInputContent;
+    /**
+     * The description of the view.
+     */
+    Description?: ViewDescription;
+    /**
+     * The name of the view.
+     */
+    Name: ViewName;
+    /**
+     * The tags associated with the view resource (not specific to view version).These tags can be used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateViewResponse {
+    /**
+     * A view resource object. Contains metadata and content necessary to render the view.
+     */
+    View?: View;
+  }
+  export interface CreateViewVersionRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * The identifier of the view. Both ViewArn and ViewId can be used.
+     */
+    ViewId: ViewId;
+    /**
+     * The description for the version being published.
+     */
+    VersionDescription?: ViewDescription;
+    /**
+     * Indicates the checksum value of the latest published view content.
+     */
+    ViewContentSha256?: ViewContentSha256;
+  }
+  export interface CreateViewVersionResponse {
+    /**
+     * All view data is contained within the View object.
+     */
+    View?: View;
+  }
   export interface CreateVocabularyRequest {
     /**
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs. If a create request is received more than once with same client token, subsequent requests return the previous response without creating a vocabulary again.
@@ -3368,6 +3500,34 @@ declare namespace Connect {
      * The identifier of the user.
      */
     UserId: UserId;
+  }
+  export interface DeleteViewRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * The identifier of the view. Both ViewArn and ViewId can be used.
+     */
+    ViewId: ViewId;
+  }
+  export interface DeleteViewResponse {
+  }
+  export interface DeleteViewVersionRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * The identifier of the view. Both ViewArn and ViewId can be used.
+     */
+    ViewId: ViewId;
+    /**
+     * The version number of the view.
+     */
+    ViewVersion: ViewVersion;
+  }
+  export interface DeleteViewVersionResponse {
   }
   export interface DeleteVocabularyRequest {
     /**
@@ -3724,6 +3884,22 @@ declare namespace Connect {
      * Information about the user account and configuration settings.
      */
     User?: User;
+  }
+  export interface DescribeViewRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * The ViewId of the view. This must be an ARN for Amazon Web Services managed views.
+     */
+    ViewId: ViewId;
+  }
+  export interface DescribeViewResponse {
+    /**
+     * All view data is contained within the View object.
+     */
+    View?: View;
   }
   export interface DescribeVocabularyRequest {
     /**
@@ -6330,6 +6506,62 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListViewVersionsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * The identifier of the view. Both ViewArn and ViewId can be used.
+     */
+    ViewId: ViewId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: ViewsNextToken;
+    /**
+     * The maximum number of results to return per page. The default MaxResult size is 100.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListViewVersionsResponse {
+    /**
+     * A list of view version summaries.
+     */
+    ViewVersionSummaryList?: ViewVersionSummaryList;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: ViewsNextToken;
+  }
+  export interface ListViewsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * The type of the view.
+     */
+    Type?: ViewType;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: ViewsNextToken;
+    /**
+     * The maximum number of results to return per page. The default MaxResult size is 100.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListViewsResponse {
+    /**
+     * A list of view summaries.
+     */
+    ViewsSummaryList?: ViewsSummaryList;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: ViewsNextToken;
+  }
   export type Long = number;
   export type MaxResult10 = number;
   export type MaxResult100 = number;
@@ -6338,6 +6570,7 @@ declare namespace Connect {
   export type MaxResult200 = number;
   export type MaxResult25 = number;
   export type MaxResult7 = number;
+  export type MaxResults = number;
   export type MediaConcurrencies = MediaConcurrency[];
   export interface MediaConcurrency {
     /**
@@ -8415,7 +8648,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the DeleteTrafficDistributionGroup API. The default traffic distribution group is deleted as part of the process for deleting a replica.  You can change the SignInConfig only for a default TrafficDistributionGroup. If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned. 
+     * Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the DeleteTrafficDistributionGroup API. The default traffic distribution group is deleted as part of the process for deleting a replica.  You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned. 
      */
     IsDefault?: Boolean;
   }
@@ -9342,6 +9575,50 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
   }
+  export interface UpdateViewContentRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * The identifier of the view. Both ViewArn and ViewId can be used.
+     */
+    ViewId: ViewId;
+    /**
+     * Indicates the view status as either SAVED or PUBLISHED. The PUBLISHED status will initiate validation on the content.
+     */
+    Status: ViewStatus;
+    /**
+     * View content containing all content necessary to render a view except for runtime input data and the runtime input schema, which is auto-generated by this operation. The total uncompressed content has a maximum file size of 400kB.
+     */
+    Content: ViewInputContent;
+  }
+  export interface UpdateViewContentResponse {
+    /**
+     * A view resource object. Contains metadata and content necessary to render the view.
+     */
+    View?: View;
+  }
+  export interface UpdateViewMetadataRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: ViewsInstanceId;
+    /**
+     * The identifier of the view. Both ViewArn and ViewId can be used.
+     */
+    ViewId: ViewId;
+    /**
+     * The name of the view.
+     */
+    Name?: ViewName;
+    /**
+     * The description of the view.
+     */
+    Description?: ViewDescription;
+  }
+  export interface UpdateViewMetadataResponse {
+  }
   export type Url = string;
   export interface UrlReference {
     /**
@@ -9626,6 +9903,156 @@ declare namespace Connect {
   export type UserTagMap = {[key: string]: String};
   export type Value = number;
   export type VersionNumber = number;
+  export interface View {
+    /**
+     * The identifier of the view.
+     */
+    Id?: ViewId;
+    /**
+     * The Amazon Resource Name (ARN) of the view.
+     */
+    Arn?: ARN;
+    /**
+     * The name of the view.
+     */
+    Name?: ViewName;
+    /**
+     * Indicates the view status as either SAVED or PUBLISHED. The PUBLISHED status will initiate validation on the content.
+     */
+    Status?: ViewStatus;
+    /**
+     * The type of the view - CUSTOMER_MANAGED.
+     */
+    Type?: ViewType;
+    /**
+     * The description of the view.
+     */
+    Description?: ViewDescription;
+    /**
+     * Current version of the view.
+     */
+    Version?: ViewVersion;
+    /**
+     * The description of the version.
+     */
+    VersionDescription?: ViewDescription;
+    /**
+     * View content containing all content necessary to render a view except for runtime input data.
+     */
+    Content?: ViewContent;
+    /**
+     * The tags associated with the view resource (not specific to view version).
+     */
+    Tags?: TagMap;
+    /**
+     * The timestamp of when the view was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * Latest timestamp of the UpdateViewContent or CreateViewVersion operations.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * Indicates the checksum value of the latest published view content.
+     */
+    ViewContentSha256?: ViewContentSha256;
+  }
+  export type ViewAction = string;
+  export type ViewActions = ViewAction[];
+  export interface ViewContent {
+    /**
+     * The data schema matching data that the view template must be provided to render.
+     */
+    InputSchema?: ViewInputSchema;
+    /**
+     * The view template representing the structure of the view.
+     */
+    Template?: ViewTemplate;
+    /**
+     * A list of possible actions from the view.
+     */
+    Actions?: ViewActions;
+  }
+  export type ViewContentSha256 = string;
+  export type ViewDescription = string;
+  export type ViewId = string;
+  export interface ViewInputContent {
+    /**
+     * The view template representing the structure of the view.
+     */
+    Template?: ViewTemplate;
+    /**
+     * A list of possible actions from the view.
+     */
+    Actions?: ViewActions;
+  }
+  export type ViewInputSchema = string;
+  export type ViewName = string;
+  export type ViewStatus = "PUBLISHED"|"SAVED"|string;
+  export interface ViewSummary {
+    /**
+     * The identifier of the view.
+     */
+    Id?: ViewId;
+    /**
+     * The Amazon Resource Name (ARN) of the view.
+     */
+    Arn?: ARN;
+    /**
+     * The name of the view.
+     */
+    Name?: ViewName;
+    /**
+     * The type of the view.
+     */
+    Type?: ViewType;
+    /**
+     * Indicates the view status as either SAVED or PUBLISHED. The PUBLISHED status will initiate validation on the content.
+     */
+    Status?: ViewStatus;
+    /**
+     * The description of the view.
+     */
+    Description?: ViewDescription;
+  }
+  export type ViewTemplate = string;
+  export type ViewType = "CUSTOMER_MANAGED"|"AWS_MANAGED"|string;
+  export type ViewVersion = number;
+  export interface ViewVersionSummary {
+    /**
+     * The identifier of the view version.
+     */
+    Id?: ViewId;
+    /**
+     * The Amazon Resource Name (ARN) of the view version.
+     */
+    Arn?: ARN;
+    /**
+     * The description of the view version.
+     */
+    Description?: ViewDescription;
+    /**
+     * The name of the view version.
+     */
+    Name?: ViewName;
+    /**
+     * The type of the view version.
+     */
+    Type?: ViewType;
+    /**
+     * The sequentially incremented version of the view version.
+     */
+    Version?: ViewVersion;
+    /**
+     * The description of the view version.
+     */
+    VersionDescription?: ViewDescription;
+  }
+  export type ViewVersionSummaryList = ViewVersionSummary[];
+  export type ViewsClientToken = string;
+  export type ViewsInstanceId = string;
+  export type ViewsNextToken = string;
+  export type ViewsSummaryList = ViewSummary[];
   export interface Vocabulary {
     /**
      * A unique name of the custom vocabulary.

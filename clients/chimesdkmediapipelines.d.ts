@@ -100,6 +100,22 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   getMediaPipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaPipelineResponse, AWSError>;
   /**
+   * Retrieves the details of the specified speaker search task.
+   */
+  getSpeakerSearchTask(params: ChimeSDKMediaPipelines.Types.GetSpeakerSearchTaskRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetSpeakerSearchTaskResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetSpeakerSearchTaskResponse, AWSError>;
+  /**
+   * Retrieves the details of the specified speaker search task.
+   */
+  getSpeakerSearchTask(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetSpeakerSearchTaskResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetSpeakerSearchTaskResponse, AWSError>;
+  /**
+   * Retrieves the details of a voice tone analysis task.
+   */
+  getVoiceToneAnalysisTask(params: ChimeSDKMediaPipelines.Types.GetVoiceToneAnalysisTaskRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetVoiceToneAnalysisTaskResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetVoiceToneAnalysisTaskResponse, AWSError>;
+  /**
+   * Retrieves the details of a voice tone analysis task.
+   */
+  getVoiceToneAnalysisTask(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetVoiceToneAnalysisTaskResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetVoiceToneAnalysisTaskResponse, AWSError>;
+  /**
    * Returns a list of media pipelines.
    */
   listMediaCapturePipelines(params: ChimeSDKMediaPipelines.Types.ListMediaCapturePipelinesRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListMediaCapturePipelinesResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListMediaCapturePipelinesResponse, AWSError>;
@@ -131,6 +147,38 @@ declare class ChimeSDKMediaPipelines extends Service {
    * Lists the tags available for a media pipeline.
    */
   listTagsForResource(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListTagsForResourceResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Starts a speaker search task.  Before starting any speaker search tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the AWS service terms for the Amazon Chime SDK. 
+   */
+  startSpeakerSearchTask(params: ChimeSDKMediaPipelines.Types.StartSpeakerSearchTaskRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.StartSpeakerSearchTaskResponse) => void): Request<ChimeSDKMediaPipelines.Types.StartSpeakerSearchTaskResponse, AWSError>;
+  /**
+   * Starts a speaker search task.  Before starting any speaker search tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the AWS service terms for the Amazon Chime SDK. 
+   */
+  startSpeakerSearchTask(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.StartSpeakerSearchTaskResponse) => void): Request<ChimeSDKMediaPipelines.Types.StartSpeakerSearchTaskResponse, AWSError>;
+  /**
+   * Starts a voice tone analysis task. For more information about voice tone analysis, see Using Amazon Chime SDK voice analytics in the Amazon Chime SDK Developer Guide.  Before starting any voice tone analysis tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the AWS service terms for the Amazon Chime SDK. 
+   */
+  startVoiceToneAnalysisTask(params: ChimeSDKMediaPipelines.Types.StartVoiceToneAnalysisTaskRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.StartVoiceToneAnalysisTaskResponse) => void): Request<ChimeSDKMediaPipelines.Types.StartVoiceToneAnalysisTaskResponse, AWSError>;
+  /**
+   * Starts a voice tone analysis task. For more information about voice tone analysis, see Using Amazon Chime SDK voice analytics in the Amazon Chime SDK Developer Guide.  Before starting any voice tone analysis tasks, you must provide all notices and obtain all consents from the speaker as required under applicable privacy and biometrics laws, and as required under the AWS service terms for the Amazon Chime SDK. 
+   */
+  startVoiceToneAnalysisTask(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.StartVoiceToneAnalysisTaskResponse) => void): Request<ChimeSDKMediaPipelines.Types.StartVoiceToneAnalysisTaskResponse, AWSError>;
+  /**
+   * Stops a speaker search task.
+   */
+  stopSpeakerSearchTask(params: ChimeSDKMediaPipelines.Types.StopSpeakerSearchTaskRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a speaker search task.
+   */
+  stopSpeakerSearchTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a voice tone analysis task.
+   */
+  stopVoiceToneAnalysisTask(params: ChimeSDKMediaPipelines.Types.StopVoiceToneAnalysisTaskRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops a voice tone analysis task.
+   */
+  stopVoiceToneAnalysisTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * The ARN of the media pipeline that you want to tag. Consists of the pipeline's endpoint region, resource ID, and pipeline ID.
    */
@@ -710,6 +758,38 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaPipeline?: MediaPipeline;
   }
+  export interface GetSpeakerSearchTaskRequest {
+    /**
+     * The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The ID of the speaker search task.
+     */
+    SpeakerSearchTaskId: GuidString;
+  }
+  export interface GetSpeakerSearchTaskResponse {
+    /**
+     * The details of the speaker search task.
+     */
+    SpeakerSearchTask?: SpeakerSearchTask;
+  }
+  export interface GetVoiceToneAnalysisTaskRequest {
+    /**
+     * The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The ID of the voice tone anlysis task.
+     */
+    VoiceToneAnalysisTaskId: GuidString;
+  }
+  export interface GetVoiceToneAnalysisTaskResponse {
+    /**
+     * The details of the voice tone analysis task.
+     */
+    VoiceToneAnalysisTask?: VoiceToneAnalysisTask;
+  }
   export interface GridViewConfiguration {
     /**
      * Defines the layout of the video tiles when content sharing is enabled.
@@ -814,6 +894,20 @@ declare namespace ChimeSDKMediaPipelines {
      * The sample rate of the input audio (in hertz). Low-quality audio, such as telephone audio, is typically around 8,000 Hz. High-quality audio typically ranges from 16,000 Hz to 48,000 Hz. Note that the sample rate you specify must match that of your audio. Valid Range: Minimum value of 8000. Maximum value of 48000.
      */
     MediaSampleRate: MediaSampleRateHertz;
+  }
+  export interface KinesisVideoStreamSourceTaskConfiguration {
+    /**
+     * The ARN of the stream.
+     */
+    StreamArn: KinesisVideoStreamArn;
+    /**
+     * The channel ID.
+     */
+    ChannelId: ChannelId;
+    /**
+     * The unique identifier of the fragment to begin processing.
+     */
+    FragmentNumber?: FragmentNumberString;
   }
   export interface LambdaFunctionSinkConfiguration {
     /**
@@ -1142,7 +1236,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     SnsTopicSinkConfiguration?: SnsTopicSinkConfiguration;
     /**
-     * The configuration settings for the VoiceEnhancementSinkConfiguration element.
+     * The configuration settings for voice enhancement sink in a media insights pipeline configuration element.
      */
     VoiceEnhancementSinkConfiguration?: VoiceEnhancementSinkConfiguration;
   }
@@ -1240,6 +1334,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaPipelineArn?: AmazonResourceName;
   }
+  export type MediaPipelineTaskStatus = "NotStarted"|"Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
   export type MediaSampleRateHertz = number;
   export interface MeetingEventsConcatenationConfiguration {
     /**
@@ -1384,11 +1479,97 @@ declare namespace ChimeSDKMediaPipelines {
      */
     SelectedVideoStreams?: SelectedVideoStreams;
   }
+  export interface SpeakerSearchTask {
+    /**
+     * The speaker search task ID.
+     */
+    SpeakerSearchTaskId?: GuidString;
+    /**
+     * The status of the speaker search task.
+     */
+    SpeakerSearchTaskStatus?: MediaPipelineTaskStatus;
+    /**
+     * The time at which a speaker search task was created.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The time at which a speaker search task was updated.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
   export interface SqsQueueSinkConfiguration {
     /**
      * The ARN of the SQS sink.
      */
     InsightsTarget?: Arn;
+  }
+  export interface StartSpeakerSearchTaskRequest {
+    /**
+     * The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The ARN of the voice profile domain that will store the voice profile.
+     */
+    VoiceProfileDomainArn: Arn;
+    /**
+     * The task configuration for the Kinesis video stream source of the media insights pipeline.
+     */
+    KinesisVideoStreamSourceTaskConfiguration?: KinesisVideoStreamSourceTaskConfiguration;
+    /**
+     * The unique identifier for the client request. Use a different token for different speaker search tasks.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface StartSpeakerSearchTaskResponse {
+    /**
+     * The details of the speaker search task.
+     */
+    SpeakerSearchTask?: SpeakerSearchTask;
+  }
+  export interface StartVoiceToneAnalysisTaskRequest {
+    /**
+     * The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The language code.
+     */
+    LanguageCode: VoiceAnalyticsLanguageCode;
+    /**
+     * The task configuration for the Kinesis video stream source of the media insights pipeline.
+     */
+    KinesisVideoStreamSourceTaskConfiguration?: KinesisVideoStreamSourceTaskConfiguration;
+    /**
+     * The unique identifier for the client request. Use a different token for different voice tone analysis tasks.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface StartVoiceToneAnalysisTaskResponse {
+    /**
+     * The details of the voice tone analysis task.
+     */
+    VoiceToneAnalysisTask?: VoiceToneAnalysisTask;
+  }
+  export interface StopSpeakerSearchTaskRequest {
+    /**
+     * The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The speaker search task ID.
+     */
+    SpeakerSearchTaskId: GuidString;
+  }
+  export interface StopVoiceToneAnalysisTaskRequest {
+    /**
+     * The unique identifier of the resource to be updated. Valid values include the ID and ARN of the media insights pipeline.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The ID of the voice tone analysis task.
+     */
+    VoiceToneAnalysisTaskId: GuidString;
   }
   export interface StreamChannelDefinition {
     /**
@@ -1568,6 +1749,7 @@ declare namespace ChimeSDKMediaPipelines {
   export type VocabularyName = string;
   export type VocabularyNames = string;
   export type VoiceAnalyticsConfigurationStatus = "Enabled"|"Disabled"|string;
+  export type VoiceAnalyticsLanguageCode = "en-US"|string;
   export interface VoiceAnalyticsProcessorConfiguration {
     /**
      * The status of the speaker search task.
@@ -1583,6 +1765,24 @@ declare namespace ChimeSDKMediaPipelines {
      * Disables the VoiceEnhancementSinkConfiguration element.
      */
     Disabled?: Boolean;
+  }
+  export interface VoiceToneAnalysisTask {
+    /**
+     * The ID of the voice tone analysis task.
+     */
+    VoiceToneAnalysisTaskId?: GuidString;
+    /**
+     * The status of a voice tone analysis task.
+     */
+    VoiceToneAnalysisTaskStatus?: MediaPipelineTaskStatus;
+    /**
+     * The time at which a voice tone analysis task was created.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The time at which a voice tone analysis task was updated.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

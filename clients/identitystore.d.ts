@@ -60,91 +60,91 @@ declare class IdentityStore extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: IdentityStore.Types.DeleteUserResponse) => void): Request<IdentityStore.Types.DeleteUserResponse, AWSError>;
   /**
-   * Retrieves the group metadata and attributes from GroupId in an identity store.
+   * Retrieves the group metadata and attributes from GroupId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   describeGroup(params: IdentityStore.Types.DescribeGroupRequest, callback?: (err: AWSError, data: IdentityStore.Types.DescribeGroupResponse) => void): Request<IdentityStore.Types.DescribeGroupResponse, AWSError>;
   /**
-   * Retrieves the group metadata and attributes from GroupId in an identity store.
+   * Retrieves the group metadata and attributes from GroupId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   describeGroup(callback?: (err: AWSError, data: IdentityStore.Types.DescribeGroupResponse) => void): Request<IdentityStore.Types.DescribeGroupResponse, AWSError>;
   /**
-   * Retrieves membership metadata and attributes from MembershipId in an identity store.
+   * Retrieves membership metadata and attributes from MembershipId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   describeGroupMembership(params: IdentityStore.Types.DescribeGroupMembershipRequest, callback?: (err: AWSError, data: IdentityStore.Types.DescribeGroupMembershipResponse) => void): Request<IdentityStore.Types.DescribeGroupMembershipResponse, AWSError>;
   /**
-   * Retrieves membership metadata and attributes from MembershipId in an identity store.
+   * Retrieves membership metadata and attributes from MembershipId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   describeGroupMembership(callback?: (err: AWSError, data: IdentityStore.Types.DescribeGroupMembershipResponse) => void): Request<IdentityStore.Types.DescribeGroupMembershipResponse, AWSError>;
   /**
-   * Retrieves the user metadata and attributes from the UserId in an identity store.
+   * Retrieves the user metadata and attributes from the UserId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   describeUser(params: IdentityStore.Types.DescribeUserRequest, callback?: (err: AWSError, data: IdentityStore.Types.DescribeUserResponse) => void): Request<IdentityStore.Types.DescribeUserResponse, AWSError>;
   /**
-   * Retrieves the user metadata and attributes from the UserId in an identity store.
+   * Retrieves the user metadata and attributes from the UserId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   describeUser(callback?: (err: AWSError, data: IdentityStore.Types.DescribeUserResponse) => void): Request<IdentityStore.Types.DescribeUserResponse, AWSError>;
   /**
-   * Retrieves GroupId in an identity store.
+   * Retrieves GroupId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   getGroupId(params: IdentityStore.Types.GetGroupIdRequest, callback?: (err: AWSError, data: IdentityStore.Types.GetGroupIdResponse) => void): Request<IdentityStore.Types.GetGroupIdResponse, AWSError>;
   /**
-   * Retrieves GroupId in an identity store.
+   * Retrieves GroupId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   getGroupId(callback?: (err: AWSError, data: IdentityStore.Types.GetGroupIdResponse) => void): Request<IdentityStore.Types.GetGroupIdResponse, AWSError>;
   /**
-   * Retrieves the MembershipId in an identity store.
+   * Retrieves the MembershipId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   getGroupMembershipId(params: IdentityStore.Types.GetGroupMembershipIdRequest, callback?: (err: AWSError, data: IdentityStore.Types.GetGroupMembershipIdResponse) => void): Request<IdentityStore.Types.GetGroupMembershipIdResponse, AWSError>;
   /**
-   * Retrieves the MembershipId in an identity store.
+   * Retrieves the MembershipId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   getGroupMembershipId(callback?: (err: AWSError, data: IdentityStore.Types.GetGroupMembershipIdResponse) => void): Request<IdentityStore.Types.GetGroupMembershipIdResponse, AWSError>;
   /**
-   * Retrieves the UserId in an identity store.
+   * Retrieves the UserId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   getUserId(params: IdentityStore.Types.GetUserIdRequest, callback?: (err: AWSError, data: IdentityStore.Types.GetUserIdResponse) => void): Request<IdentityStore.Types.GetUserIdResponse, AWSError>;
   /**
-   * Retrieves the UserId in an identity store.
+   * Retrieves the UserId in an identity store.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   getUserId(callback?: (err: AWSError, data: IdentityStore.Types.GetUserIdResponse) => void): Request<IdentityStore.Types.GetUserIdResponse, AWSError>;
   /**
-   * Checks the user's membership in all requested groups and returns if the member exists in all queried groups.
+   * Checks the user's membership in all requested groups and returns if the member exists in all queried groups.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   isMemberInGroups(params: IdentityStore.Types.IsMemberInGroupsRequest, callback?: (err: AWSError, data: IdentityStore.Types.IsMemberInGroupsResponse) => void): Request<IdentityStore.Types.IsMemberInGroupsResponse, AWSError>;
   /**
-   * Checks the user's membership in all requested groups and returns if the member exists in all queried groups.
+   * Checks the user's membership in all requested groups and returns if the member exists in all queried groups.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   isMemberInGroups(callback?: (err: AWSError, data: IdentityStore.Types.IsMemberInGroupsResponse) => void): Request<IdentityStore.Types.IsMemberInGroupsResponse, AWSError>;
   /**
-   * For the specified group in the specified identity store, returns the list of all GroupMembership objects and returns results in paginated form.
+   * For the specified group in the specified identity store, returns the list of all GroupMembership objects and returns results in paginated form.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   listGroupMemberships(params: IdentityStore.Types.ListGroupMembershipsRequest, callback?: (err: AWSError, data: IdentityStore.Types.ListGroupMembershipsResponse) => void): Request<IdentityStore.Types.ListGroupMembershipsResponse, AWSError>;
   /**
-   * For the specified group in the specified identity store, returns the list of all GroupMembership objects and returns results in paginated form.
+   * For the specified group in the specified identity store, returns the list of all GroupMembership objects and returns results in paginated form.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   listGroupMemberships(callback?: (err: AWSError, data: IdentityStore.Types.ListGroupMembershipsResponse) => void): Request<IdentityStore.Types.ListGroupMembershipsResponse, AWSError>;
   /**
-   * For the specified member in the specified identity store, returns the list of all GroupMembership objects and returns results in paginated form.
+   * For the specified member in the specified identity store, returns the list of all GroupMembership objects and returns results in paginated form.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   listGroupMembershipsForMember(params: IdentityStore.Types.ListGroupMembershipsForMemberRequest, callback?: (err: AWSError, data: IdentityStore.Types.ListGroupMembershipsForMemberResponse) => void): Request<IdentityStore.Types.ListGroupMembershipsForMemberResponse, AWSError>;
   /**
-   * For the specified member in the specified identity store, returns the list of all GroupMembership objects and returns results in paginated form.
+   * For the specified member in the specified identity store, returns the list of all GroupMembership objects and returns results in paginated form.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   listGroupMembershipsForMember(callback?: (err: AWSError, data: IdentityStore.Types.ListGroupMembershipsForMemberResponse) => void): Request<IdentityStore.Types.ListGroupMembershipsForMemberResponse, AWSError>;
   /**
-   * Lists all groups in the identity store. Returns a paginated list of complete Group objects. Filtering for a Group by the DisplayName attribute is deprecated. Instead, use the GetGroupId API action.
+   * Lists all groups in the identity store. Returns a paginated list of complete Group objects. Filtering for a Group by the DisplayName attribute is deprecated. Instead, use the GetGroupId API action.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   listGroups(params: IdentityStore.Types.ListGroupsRequest, callback?: (err: AWSError, data: IdentityStore.Types.ListGroupsResponse) => void): Request<IdentityStore.Types.ListGroupsResponse, AWSError>;
   /**
-   * Lists all groups in the identity store. Returns a paginated list of complete Group objects. Filtering for a Group by the DisplayName attribute is deprecated. Instead, use the GetGroupId API action.
+   * Lists all groups in the identity store. Returns a paginated list of complete Group objects. Filtering for a Group by the DisplayName attribute is deprecated. Instead, use the GetGroupId API action.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide.  
    */
   listGroups(callback?: (err: AWSError, data: IdentityStore.Types.ListGroupsResponse) => void): Request<IdentityStore.Types.ListGroupsResponse, AWSError>;
   /**
-   * Lists all users in the identity store. Returns a paginated list of complete User objects. Filtering for a User by the UserName attribute is deprecated. Instead, use the GetUserId API action.
+   * Lists all users in the identity store. Returns a paginated list of complete User objects. Filtering for a User by the UserName attribute is deprecated. Instead, use the GetUserId API action.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide. 
    */
   listUsers(params: IdentityStore.Types.ListUsersRequest, callback?: (err: AWSError, data: IdentityStore.Types.ListUsersResponse) => void): Request<IdentityStore.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists all users in the identity store. Returns a paginated list of complete User objects. Filtering for a User by the UserName attribute is deprecated. Instead, use the GetUserId API action.
+   * Lists all users in the identity store. Returns a paginated list of complete User objects. Filtering for a User by the UserName attribute is deprecated. Instead, use the GetUserId API action.  If you have administrator access to a member account, you can use this API from the member account. Read about member accounts in the Organizations User Guide. 
    */
   listUsers(callback?: (err: AWSError, data: IdentityStore.Types.ListUsersResponse) => void): Request<IdentityStore.Types.ListUsersResponse, AWSError>;
   /**
@@ -216,7 +216,7 @@ declare namespace IdentityStore {
      */
     AttributePath: AttributePath;
     /**
-     * The value of the attribute. This is a Document type. This type is not supported by Java V1, Go V1, and older versions of the AWS CLI.
+     * The value of the attribute. This is a Document type. This type is not supported by Java V1, Go V1, and older versions of the CLI.
      */
     AttributeValue?: AttributeValue;
   }
@@ -254,7 +254,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A string containing the name of the group. This value is commonly displayed when the group is referenced. "Administrator" and "AWSAdministrators" are reserved names and can't be used for users or groups.
+     * A string containing the name of the group. This value is commonly displayed when the group is referenced. Administrator and AWSAdministrators are reserved names and can't be used for users or groups.
      */
     DisplayName?: GroupDisplayName;
     /**
@@ -278,7 +278,7 @@ declare namespace IdentityStore {
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store. "Administrator" and "AWSAdministrators" are reserved names and can't be used for users or groups.
+     * A unique string used to identify the user. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store. Administrator and AWSAdministrators are reserved names and can't be used for users or groups.
      */
     UserName?: UserName;
     /**
@@ -862,7 +862,7 @@ declare namespace IdentityStore {
      */
     AttributePath: AttributePath;
     /**
-     * The value of the attribute. This is a Document type. This type is not supported by Java V1, Go V1, and older versions of the AWS CLI.
+     * The value of the attribute. This is a Document type. This type is not supported by Java V1, Go V1, and older versions of the CLI.
      */
     AttributeValue: AttributeValue;
   }
