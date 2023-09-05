@@ -682,6 +682,10 @@ declare namespace Billingconductor {
      * The type of the custom line item that indicates whether the charge is a fee or credit.
      */
     Type: CustomLineItemType;
+    /**
+     * A representation of the line item filter.
+     */
+    LineItemFilters?: LineItemFiltersList;
   }
   export type CustomLineItemChargeValue = number;
   export type CustomLineItemDescription = string;
@@ -901,6 +905,24 @@ declare namespace Billingconductor {
     Activated: TieringActivated;
   }
   export type Instant = number;
+  export interface LineItemFilter {
+    /**
+     * The attribute of the line item filter. This specifies what attribute that you can filter on.
+     */
+    Attribute: LineItemFilterAttributeName;
+    /**
+     * The match criteria of the line item filter. This parameter specifies whether not to include the resource value from the billing group total cost.
+     */
+    MatchOption: MatchOption;
+    /**
+     * The values of the line item filter. This specifies the values to filter on. Currently, you can only exclude Savings Plan discounts.
+     */
+    Values: LineItemFilterValuesList;
+  }
+  export type LineItemFilterAttributeName = "LINE_ITEM_TYPE"|string;
+  export type LineItemFilterValue = "SAVINGS_PLAN_NEGATION"|string;
+  export type LineItemFilterValuesList = LineItemFilterValue[];
+  export type LineItemFiltersList = LineItemFilter[];
   export interface ListAccountAssociationsFilter {
     /**
      *  MONITORED: linked accounts that are associated to billing groups.  UNMONITORED: linked accounts that are not associated to billing groups.  Billing Group Arn: linked accounts that are associated to the provided Billing Group Arn.
@@ -1038,6 +1060,10 @@ declare namespace Billingconductor {
      *  The type of the custom line item that indicates whether the charge is a fee or credit. 
      */
     Type: CustomLineItemType;
+    /**
+     * A representation of the line item filter.
+     */
+    LineItemFilters?: LineItemFiltersList;
   }
   export interface ListCustomLineItemFlatChargeDetails {
     /**
@@ -1356,6 +1382,7 @@ declare namespace Billingconductor {
   }
   export type Margin = string;
   export type MarginPercentage = string;
+  export type MatchOption = "NOT_EQUAL"|string;
   export type MaxBillingGroupResults = number;
   export type MaxCustomLineItemResults = number;
   export type MaxPricingPlanResults = number;
@@ -1587,6 +1614,10 @@ declare namespace Billingconductor {
      *  An UpdateCustomLineItemPercentageChargeDetails that describes the new charge details of a percentage custom line item. 
      */
     Percentage?: UpdateCustomLineItemPercentageChargeDetails;
+    /**
+     * A representation of the line item filter.
+     */
+    LineItemFilters?: LineItemFiltersList;
   }
   export interface UpdateCustomLineItemFlatChargeDetails {
     /**

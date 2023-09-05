@@ -2786,7 +2786,7 @@ declare namespace ECS {
      */
     name: SettingName;
     /**
-     * The account setting value for the specified principal ARN. Accepted values are enabled, disabled, on, and off. When you specify fargateTaskRetirementWaitPeriod for the name, the following are the valid values:    0 - immediately retire the tasks and patch Fargate  There is no advanced notification. Your tasks are retired immediately, and Fargate is patched without any notification.    7 -wait 7 calendar days to retire the tasks and patch Fargate     14 - wait 14 calendar days to retire the tasks and patch Fargate   
+     * The account setting value for the specified principal ARN. Accepted values are enabled, disabled, on, and off. When you specify fargateTaskRetirementWaitPeriod for the name, the following are the valid values:    0 - Amazon Web Services sends the notification, and immediately retires the affected tasks.    7 - Amazon Web Services sends the notification, and waits 7 calendar days to retire the tasks.    14 - Amazon Web Services sends the notification, and waits 14 calendar days to retire the tasks.  
      */
     value: String;
   }
@@ -2802,7 +2802,7 @@ declare namespace ECS {
      */
     name: SettingName;
     /**
-     * The account setting value for the specified principal ARN. Accepted values are enabled, disabled, on, and off. When you specify fargateTaskRetirementWaitPeriod for the name, the following are the valid values:    0 - immediately retire the tasks and patch Fargate  There is no advanced notification. Your tasks are retired immediately, and Fargate is patched without any notification.    7 -wait 7 calendar days to retire the tasks and patch Fargate     14 - wait 14 calendar days to retire the tasks and patch Fargate   
+     * The account setting value for the specified principal ARN. Accepted values are enabled, disabled, on, and off. When you specify fargateTaskRetirementWaitPeriod for the name, the following are the valid values:    0 - Amazon Web Services sends the notification, and immediately retires the affected tasks.    7 - Amazon Web Services sends the notification, and waits 7 calendar days to retire the tasks.    14 - Amazon Web Services sends the notification, and waits 14 calendar days to retire the tasks.  
      */
     value: String;
     /**

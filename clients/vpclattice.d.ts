@@ -68,11 +68,11 @@ declare class VPCLattice extends Service {
    */
   createServiceNetworkServiceAssociation(callback?: (err: AWSError, data: VPCLattice.Types.CreateServiceNetworkServiceAssociationResponse) => void): Request<VPCLattice.Types.CreateServiceNetworkServiceAssociationResponse, AWSError>;
   /**
-   * Associates a VPC with a service network. When you associate a VPC with the service network, it enables all the resources within that VPC to be clients and communicate with other services in the service network. For more information, see Manage VPC associations in the Amazon VPC Lattice User Guide. You can't use this operation if there is a disassociation in progress. If the association fails, retry by deleting the association and recreating it. As a result of this operation, the association gets created in the service network account and the VPC owner account. If you add a security group to the service network and VPC association, the association must continue to always have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and recreate it without security groups.
+   * Associates a VPC with a service network. When you associate a VPC with the service network, it enables all the resources within that VPC to be clients and communicate with other services in the service network. For more information, see Manage VPC associations in the Amazon VPC Lattice User Guide. You can't use this operation if there is a disassociation in progress. If the association fails, retry by deleting the association and recreating it. As a result of this operation, the association gets created in the service network account and the VPC owner account. Once a security group is added to the VPC association it cannot be removed. You can add or update the security groups being used for the VPC association once a security group is attached. To remove all security groups you must reassociate the VPC.
    */
   createServiceNetworkVpcAssociation(params: VPCLattice.Types.CreateServiceNetworkVpcAssociationRequest, callback?: (err: AWSError, data: VPCLattice.Types.CreateServiceNetworkVpcAssociationResponse) => void): Request<VPCLattice.Types.CreateServiceNetworkVpcAssociationResponse, AWSError>;
   /**
-   * Associates a VPC with a service network. When you associate a VPC with the service network, it enables all the resources within that VPC to be clients and communicate with other services in the service network. For more information, see Manage VPC associations in the Amazon VPC Lattice User Guide. You can't use this operation if there is a disassociation in progress. If the association fails, retry by deleting the association and recreating it. As a result of this operation, the association gets created in the service network account and the VPC owner account. If you add a security group to the service network and VPC association, the association must continue to always have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and recreate it without security groups.
+   * Associates a VPC with a service network. When you associate a VPC with the service network, it enables all the resources within that VPC to be clients and communicate with other services in the service network. For more information, see Manage VPC associations in the Amazon VPC Lattice User Guide. You can't use this operation if there is a disassociation in progress. If the association fails, retry by deleting the association and recreating it. As a result of this operation, the association gets created in the service network account and the VPC owner account. Once a security group is added to the VPC association it cannot be removed. You can add or update the security groups being used for the VPC association once a security group is attached. To remove all security groups you must reassociate the VPC.
    */
   createServiceNetworkVpcAssociation(callback?: (err: AWSError, data: VPCLattice.Types.CreateServiceNetworkVpcAssociationResponse) => void): Request<VPCLattice.Types.CreateServiceNetworkVpcAssociationResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class VPCLattice extends Service {
    */
   deleteAccessLogSubscription(callback?: (err: AWSError, data: VPCLattice.Types.DeleteAccessLogSubscriptionResponse) => void): Request<VPCLattice.Types.DeleteAccessLogSubscriptionResponse, AWSError>;
   /**
-   * Deletes the specified auth policy. If an auth is set to AWS_IAM and the auth policy is deleted, all requests will be denied by default. If you are trying to remove the auth policy completely, you must set the auth_type to NONE. If auth is enabled on the resource, but no auth policy is set, all requests will be denied.
+   * Deletes the specified auth policy. If an auth is set to Amazon Web Services_IAM and the auth policy is deleted, all requests will be denied by default. If you are trying to remove the auth policy completely, you must set the auth_type to NONE. If auth is enabled on the resource, but no auth policy is set, all requests will be denied.
    */
   deleteAuthPolicy(params: VPCLattice.Types.DeleteAuthPolicyRequest, callback?: (err: AWSError, data: VPCLattice.Types.DeleteAuthPolicyResponse) => void): Request<VPCLattice.Types.DeleteAuthPolicyResponse, AWSError>;
   /**
-   * Deletes the specified auth policy. If an auth is set to AWS_IAM and the auth policy is deleted, all requests will be denied by default. If you are trying to remove the auth policy completely, you must set the auth_type to NONE. If auth is enabled on the resource, but no auth policy is set, all requests will be denied.
+   * Deletes the specified auth policy. If an auth is set to Amazon Web Services_IAM and the auth policy is deleted, all requests will be denied by default. If you are trying to remove the auth policy completely, you must set the auth_type to NONE. If auth is enabled on the resource, but no auth policy is set, all requests will be denied.
    */
   deleteAuthPolicy(callback?: (err: AWSError, data: VPCLattice.Types.DeleteAuthPolicyResponse) => void): Request<VPCLattice.Types.DeleteAuthPolicyResponse, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class VPCLattice extends Service {
    */
   getListener(callback?: (err: AWSError, data: VPCLattice.Types.GetListenerResponse) => void): Request<VPCLattice.Types.GetListenerResponse, AWSError>;
   /**
-   * Retrieves information about the resource policy. The resource policy is an IAM policy created on behalf of the resource owner when they share a resource.
+   * Retrieves information about the resource policy. The resource policy is an IAM policy created by AWS RAM on behalf of the resource owner when they share a resource.
    */
   getResourcePolicy(params: VPCLattice.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: VPCLattice.Types.GetResourcePolicyResponse) => void): Request<VPCLattice.Types.GetResourcePolicyResponse, AWSError>;
   /**
-   * Retrieves information about the resource policy. The resource policy is an IAM policy created on behalf of the resource owner when they share a resource.
+   * Retrieves information about the resource policy. The resource policy is an IAM policy created by AWS RAM on behalf of the resource owner when they share a resource.
    */
   getResourcePolicy(callback?: (err: AWSError, data: VPCLattice.Types.GetResourcePolicyResponse) => void): Request<VPCLattice.Types.GetResourcePolicyResponse, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class VPCLattice extends Service {
    */
   listTargets(callback?: (err: AWSError, data: VPCLattice.Types.ListTargetsResponse) => void): Request<VPCLattice.Types.ListTargetsResponse, AWSError>;
   /**
-   * Creates or updates the auth policy. The policy string in JSON must not contain newlines or blank lines.
+   * Creates or updates the auth policy.
    */
   putAuthPolicy(params: VPCLattice.Types.PutAuthPolicyRequest, callback?: (err: AWSError, data: VPCLattice.Types.PutAuthPolicyResponse) => void): Request<VPCLattice.Types.PutAuthPolicyResponse, AWSError>;
   /**
-   * Creates or updates the auth policy. The policy string in JSON must not contain newlines or blank lines.
+   * Creates or updates the auth policy.
    */
   putAuthPolicy(callback?: (err: AWSError, data: VPCLattice.Types.PutAuthPolicyResponse) => void): Request<VPCLattice.Types.PutAuthPolicyResponse, AWSError>;
   /**
@@ -412,11 +412,11 @@ declare class VPCLattice extends Service {
    */
   updateServiceNetwork(callback?: (err: AWSError, data: VPCLattice.Types.UpdateServiceNetworkResponse) => void): Request<VPCLattice.Types.UpdateServiceNetworkResponse, AWSError>;
   /**
-   * Updates the service network and VPC association. If you add a security group to the service network and VPC association, the association must continue to always have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and recreate it without security groups.
+   * Updates the service network and VPC association. Once you add a security group, it cannot be removed.
    */
   updateServiceNetworkVpcAssociation(params: VPCLattice.Types.UpdateServiceNetworkVpcAssociationRequest, callback?: (err: AWSError, data: VPCLattice.Types.UpdateServiceNetworkVpcAssociationResponse) => void): Request<VPCLattice.Types.UpdateServiceNetworkVpcAssociationResponse, AWSError>;
   /**
-   * Updates the service network and VPC association. If you add a security group to the service network and VPC association, the association must continue to always have at least one security group. You can add or edit security groups at any time. However, to remove all security groups, you must first delete the association and recreate it without security groups.
+   * Updates the service network and VPC association. Once you add a security group, it cannot be removed.
    */
   updateServiceNetworkVpcAssociation(callback?: (err: AWSError, data: VPCLattice.Types.UpdateServiceNetworkVpcAssociationResponse) => void): Request<VPCLattice.Types.UpdateServiceNetworkVpcAssociationResponse, AWSError>;
   /**
@@ -1138,7 +1138,7 @@ declare namespace VPCLattice {
      */
     policy?: AuthPolicyString;
     /**
-     * The state of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the auth type is NONE, then any auth policy you provide will remain inactive. For more information, see Create a service network in the Amazon VPC Lattice User Guide.
+     * The state of the auth policy. The auth policy is only active when the auth type is set to Amazon Web Services_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the auth type is NONE, then any auth policy you provide will remain inactive. For more information, see Create a service network in the Amazon VPC Lattice User Guide.
      */
     state?: AuthPolicyState;
   }
@@ -1196,13 +1196,13 @@ declare namespace VPCLattice {
   }
   export interface GetResourcePolicyRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service network or service.
+     * An IAM policy.
      */
     resourceArn: ResourceArn;
   }
   export interface GetResourcePolicyResponse {
     /**
-     * An IAM policy.
+     * The Amazon Resource Name (ARN) of the service network or service.
      */
     policy?: PolicyString;
   }
@@ -1633,6 +1633,7 @@ declare namespace VPCLattice {
   export type HttpMethod = string;
   export type HttpStatusCode = number;
   export type IpAddressType = "IPV4"|"IPV6"|string;
+  export type LambdaEventStructureVersion = "V1"|"V2"|string;
   export interface ListAccessLogSubscriptionsRequest {
     /**
      * The maximum number of results to return.
@@ -1945,7 +1946,7 @@ declare namespace VPCLattice {
   export type Port = number;
   export interface PutAuthPolicyRequest {
     /**
-     * The auth policy. The policy string in JSON must not contain newlines or blank lines.
+     * The auth policy.
      */
     policy: AuthPolicyString;
     /**
@@ -1955,17 +1956,17 @@ declare namespace VPCLattice {
   }
   export interface PutAuthPolicyResponse {
     /**
-     * The auth policy. The policy string in JSON must not contain newlines or blank lines.
+     * The auth policy.
      */
     policy?: AuthPolicyString;
     /**
-     * The state of the auth policy. The auth policy is only active when the auth type is set to AWS_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive. For more information, see Create a service network in the Amazon VPC Lattice User Guide.
+     * The state of the auth policy. The auth policy is only active when the auth type is set to Amazon Web Services_IAM. If you provide a policy, then authentication and authorization decisions are made based on this policy and the client's IAM policy. If the Auth type is NONE, then, any auth policy you provide will remain inactive. For more information, see Create a service network in the Amazon VPC Lattice User Guide.
      */
     state?: AuthPolicyState;
   }
   export interface PutResourcePolicyRequest {
     /**
-     * An IAM policy. The policy string in JSON must not contain newlines or blank lines.
+     * An IAM policy.
      */
     policy: PolicyString;
     /**
@@ -2357,13 +2358,17 @@ declare namespace VPCLattice {
      */
     ipAddressType?: IpAddressType;
     /**
+     * Lambda event structure version
+     */
+    lambdaEventStructureVersion?: LambdaEventStructureVersion;
+    /**
      * The port on which the targets are listening. For HTTP, the default is 80. For HTTPS, the default is 443 
      */
-    port: Port;
+    port?: Port;
     /**
      * The protocol to use for routing traffic to the targets. Default is the protocol of a target group.
      */
-    protocol: TargetGroupProtocol;
+    protocol?: TargetGroupProtocol;
     /**
      * The protocol version. Default value is HTTP1.
      */
@@ -2371,7 +2376,7 @@ declare namespace VPCLattice {
     /**
      * The ID of the VPC.
      */
-    vpcIdentifier: VpcId;
+    vpcIdentifier?: VpcId;
   }
   export type TargetGroupId = string;
   export type TargetGroupIdentifier = string;
@@ -2397,6 +2402,10 @@ declare namespace VPCLattice {
      * The type of IP address used for the target group. The possible values are ipv4 and ipv6. This is an optional parameter. If not specified, the IP address type defaults to ipv4.
      */
     ipAddressType?: IpAddressType;
+    /**
+     * Lambda event structure version
+     */
+    lambdaEventStructureVersion?: LambdaEventStructureVersion;
     /**
      * The date and time that the target group was last updated, specified in ISO-8601 format.
      */
@@ -2634,7 +2643,7 @@ declare namespace VPCLattice {
   }
   export interface UpdateServiceNetworkVpcAssociationRequest {
     /**
-     * The IDs of the security groups. 
+     * The IDs of the security groups. Once you add a security group, it cannot be removed.
      */
     securityGroupIds: UpdateServiceNetworkVpcAssociationRequestSecurityGroupIdsList;
     /**

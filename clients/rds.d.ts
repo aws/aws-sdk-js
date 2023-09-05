@@ -3048,6 +3048,10 @@ declare namespace RDS {
      * Specifies whether an Aurora DB cluster has in-cluster write forwarding enabled, not enabled, requested, or is in the process of enabling it.
      */
     LocalWriteForwardingStatus?: LocalWriteForwardingStatus;
+    /**
+     * The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.
+     */
+    AwsBackupRecoveryPointArn?: String;
   }
   export interface DBClusterAutomatedBackup {
     /**
@@ -3139,6 +3143,10 @@ declare namespace RDS {
      * The IOPS (I/O operations per second) value for the automated backup. This setting is only for non-Aurora Multi-AZ DB clusters.
      */
     Iops?: IntegerOptional;
+    /**
+     * The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.
+     */
+    AwsBackupRecoveryPointArn?: String;
   }
   export type DBClusterAutomatedBackupList = DBClusterAutomatedBackup[];
   export interface DBClusterAutomatedBackupMessage {
@@ -4074,6 +4082,10 @@ declare namespace RDS {
      * Specifies the storage throughput for the automated backup.
      */
     StorageThroughput?: IntegerOptional;
+    /**
+     * The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.
+     */
+    AwsBackupRecoveryPointArn?: String;
   }
   export type DBInstanceAutomatedBackupList = DBInstanceAutomatedBackup[];
   export interface DBInstanceAutomatedBackupMessage {
@@ -6605,6 +6617,10 @@ declare namespace RDS {
      * Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. Valid for: Aurora DB clusters only
      */
     EnableLocalWriteForwarding?: BooleanOptional;
+    /**
+     * The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.
+     */
+    AwsBackupRecoveryPointArn?: AwsBackupRecoveryPointArn;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
