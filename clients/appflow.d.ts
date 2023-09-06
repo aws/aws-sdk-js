@@ -2758,11 +2758,15 @@ declare namespace Appflow {
     /**
      *  The name of the user. 
      */
-    username: Username;
+    username?: Username;
     /**
      *  The password that corresponds to the user name. 
      */
-    password: Password;
+    password?: Password;
+    /**
+     *  The OAuth 2.0 credentials required to authenticate the user. 
+     */
+    oAuth2Credentials?: OAuth2Credentials;
   }
   export interface ServiceNowConnectorProfileProperties {
     /**

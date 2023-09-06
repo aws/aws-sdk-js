@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1451.0-->
+<!--LATEST=2.1452.0-->
 <!--ENTRYINSERT-->
+
+## 2.1452.0
+* feature: Appflow: Adding OAuth2.0 support for servicenow connector.
+* feature: EC2: This release adds 'outpost' location type to the DescribeInstanceTypeOfferings API, allowing customers that have been allowlisted for outpost to query their offerings in the API.
+* feature: MediaLive: Adds advanced Output Locking options for Epoch Locking: Custom Epoch and Jam Sync Time
+* feature: WAFV2: The targeted protection level of the Bot Control managed rule group now provides optional, machine-learning analysis of traffic statistics to detect some bot-related activity. You can enable or disable the machine learning functionality through the API.
 
 ## 2.1451.0
 * feature: Billingconductor: This release adds support for line item filtering in for the custom line item resource.

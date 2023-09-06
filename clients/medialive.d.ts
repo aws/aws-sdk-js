@@ -2862,6 +2862,16 @@ You specify only the font family. All other style information (color, bold, posi
      */
     ThumbnailConfiguration?: ThumbnailConfiguration;
   }
+  export interface EpochLockingSettings {
+    /**
+     * Optional. Enter a value here to use a custom epoch, instead of the standard epoch (which started at 1970-01-01T00:00:00 UTC). Specify the start time of the custom epoch, in YYYY-MM-DDTHH:MM:SS in UTC. The time must be 2000-01-01T00:00:00 or later. Always set the MM:SS portion to 00:00.
+     */
+    CustomEpoch?: __string;
+    /**
+     * Optional. Enter a time for the jam sync. The default is midnight UTC. When epoch locking is enabled, MediaLive performs a daily jam sync on every output encode to ensure timecodes don’t diverge from the wall clock. The jam sync applies only to encodes with frame rate of 29.97 or 59.94 FPS. To override, enter a time in HH:MM:SS in UTC. Always set the MM:SS portion to 00:00.
+     */
+    JamSyncTime?: __string;
+  }
   export interface Esam {
     /**
      * Sent as acquisitionPointIdentity to identify the MediaLive channel to the POIS.
@@ -3057,6 +3067,10 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
      * Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second.
      */
     SupportLowFramerateInputs?: GlobalConfigurationLowFramerateInputs;
+    /**
+     * Advanced output locking settings
+     */
+    OutputLockingSettings?: OutputLockingSettings;
   }
   export type GlobalConfigurationInputEndAction = "NONE"|"SWITCH_AND_LOOP_INPUTS"|string;
   export type GlobalConfigurationLowFramerateInputs = "DISABLED"|"ENABLED"|string;
@@ -5731,6 +5745,10 @@ the timestamps will be in Coordinated Universal Time (UTC)
   export interface OutputLocationRef {
     DestinationRefId?: __string;
   }
+  export interface OutputLockingSettings {
+    EpochLockingSettings?: EpochLockingSettings;
+    PipelineLockingSettings?: PipelineLockingSettings;
+  }
   export interface OutputSettings {
     ArchiveOutputSettings?: ArchiveOutputSettings;
     FrameCaptureOutputSettings?: FrameCaptureOutputSettings;
@@ -5769,6 +5787,8 @@ the timestamps will be in Coordinated Universal Time (UTC)
     PipelineId?: __string;
   }
   export type PipelineId = "PIPELINE_0"|"PIPELINE_1"|string;
+  export interface PipelineLockingSettings {
+  }
   export interface PipelinePauseStateSettings {
     /**
      * Pipeline ID to pause ("PIPELINE_0" or "PIPELINE_1").

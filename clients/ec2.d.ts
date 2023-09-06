@@ -26487,7 +26487,7 @@ declare namespace EC2 {
   export type LocalStorageType = "hdd"|"ssd"|string;
   export type LocalStorageTypeSet = LocalStorageType[];
   export type Location = string;
-  export type LocationType = "region"|"availability-zone"|"availability-zone-id"|string;
+  export type LocationType = "region"|"availability-zone"|"availability-zone-id"|"outpost"|string;
   export type LogDestinationType = "cloud-watch-logs"|"s3"|"kinesis-data-firehose"|string;
   export type Long = number;
   export interface MaintenanceDetails {
