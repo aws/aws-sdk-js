@@ -413,7 +413,7 @@ declare namespace SimSpaceWeaver {
     /**
      * The name of an Amazon S3 bucket. For more information about buckets, see Creating, configuring, and working with Amazon S3 buckets in the Amazon Simple Storage Service User Guide.
      */
-    BucketName?: BucketName;
+    BucketName: BucketName;
     /**
      * A string prefix for an Amazon S3 object key. It's usually a folder name. For more information about folders in Amazon S3, see Organizing objects in the Amazon S3 console using folders in the Amazon Simple Storage Service User Guide.
      */
@@ -423,11 +423,11 @@ declare namespace SimSpaceWeaver {
     /**
      * The name of an Amazon S3 bucket. For more information about buckets, see Creating, configuring, and working with Amazon S3 buckets in the Amazon Simple Storage Service User Guide.
      */
-    BucketName?: BucketName;
+    BucketName: BucketName;
     /**
      * The key name of an object in Amazon S3. For more information about Amazon S3 objects and object keys, see Uploading, downloading, and working with objects in Amazon S3 in the Amazon Simple Storage Service User Guide.
      */
-    ObjectKey?: ObjectKey;
+    ObjectKey: ObjectKey;
   }
   export type SimSpaceWeaverArn = string;
   export type SimSpaceWeaverLongResourceName = string;

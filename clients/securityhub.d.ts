@@ -833,143 +833,143 @@ declare namespace SecurityHub {
   }
   export interface AutomationRulesFindingFilters {
     /**
-     *  The Amazon Resource Name (ARN) for a third-party product that generated a finding in Security Hub. 
+     *  The Amazon Resource Name (ARN) for a third-party product that generated a finding in Security Hub.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ProductArn?: StringFilterList;
     /**
-     *  The Amazon Web Services account ID in which a finding was generated. 
+     *  The Amazon Web Services account ID in which a finding was generated.   Array Members: Minimum number of 1 item. Maximum number of 100 items. 
      */
     AwsAccountId?: StringFilterList;
     /**
-     *  The product-specific identifier for a finding. 
+     *  The product-specific identifier for a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     Id?: StringFilterList;
     /**
-     *  The identifier for the solution-specific component that generated a finding. 
+     *  The identifier for the solution-specific component that generated a finding.   Array Members: Minimum number of 1 item. Maximum number of 100 items. 
      */
     GeneratorId?: StringFilterList;
     /**
-     *  One or more finding types in the format of namespace/category/classifier that classify a finding. For a list of namespaces, classifiers, and categories, see Types taxonomy for ASFF in the Security Hub User Guide. 
+     *  One or more finding types in the format of namespace/category/classifier that classify a finding. For a list of namespaces, classifiers, and categories, see Types taxonomy for ASFF in the Security Hub User Guide.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     Type?: StringFilterList;
     /**
-     *  A timestamp that indicates when the potential security issue captured by a finding was first observed by the security findings product.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     *  A timestamp that indicates when the potential security issue captured by a finding was first observed by the security findings product.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     FirstObservedAt?: DateFilterList;
     /**
-     *  A timestamp that indicates when the potential security issue captured by a finding was most recently observed by the security findings product.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     *  A timestamp that indicates when the potential security issue captured by a finding was most recently observed by the security findings product.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     LastObservedAt?: DateFilterList;
     /**
-     *  A timestamp that indicates when this finding record was created.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     *  A timestamp that indicates when this finding record was created.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     CreatedAt?: DateFilterList;
     /**
-     *  A timestamp that indicates when the finding record was most recently updated.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     *  A timestamp that indicates when the finding record was most recently updated.  Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     UpdatedAt?: DateFilterList;
     /**
-     * The likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0–100 basis using a ratio scale. A value of 0 means 0 percent confidence, and a value of 100 means 100 percent confidence. For example, a data exfiltration detection based on a statistical deviation of network traffic has low confidence because an actual exfiltration hasn't been verified. For more information, see Confidence in the Security Hub User Guide. 
+     * The likelihood that a finding accurately identifies the behavior or issue that it was intended to identify. Confidence is scored on a 0–100 basis using a ratio scale. A value of 0 means 0 percent confidence, and a value of 100 means 100 percent confidence. For example, a data exfiltration detection based on a statistical deviation of network traffic has low confidence because an actual exfiltration hasn't been verified. For more information, see Confidence in the Security Hub User Guide.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     Confidence?: NumberFilterList;
     /**
-     *  The level of importance that is assigned to the resources that are associated with a finding. Criticality is scored on a 0–100 basis, using a ratio scale that supports only full integers. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. For more information, see Criticality in the Security Hub User Guide.
+     *  The level of importance that is assigned to the resources that are associated with a finding. Criticality is scored on a 0–100 basis, using a ratio scale that supports only full integers. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources. For more information, see Criticality in the Security Hub User Guide.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     Criticality?: NumberFilterList;
     /**
-     *  A finding's title. 
+     *  A finding's title.   Array Members: Minimum number of 1 item. Maximum number of 100 items. 
      */
     Title?: StringFilterList;
     /**
-     *  A finding's description. 
+     *  A finding's description.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     Description?: StringFilterList;
     /**
-     *  Provides a URL that links to a page about the current finding in the finding product. 
+     *  Provides a URL that links to a page about the current finding in the finding product.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     SourceUrl?: StringFilterList;
     /**
-     *  Provides the name of the product that generated the finding. For control-based findings, the product name is Security Hub. 
+     *  Provides the name of the product that generated the finding. For control-based findings, the product name is Security Hub.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ProductName?: StringFilterList;
     /**
-     *  The name of the company for the product that generated the finding. For control-based findings, the company is Amazon Web Services. 
+     *  The name of the company for the product that generated the finding. For control-based findings, the company is Amazon Web Services.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     CompanyName?: StringFilterList;
     /**
-     *  The severity value of the finding. 
+     *  The severity value of the finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     SeverityLabel?: StringFilterList;
     /**
-     *  The type of resource that the finding pertains to. 
+     *  The type of resource that the finding pertains to.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ResourceType?: StringFilterList;
     /**
-     *  The identifier for the given resource type. For Amazon Web Services resources that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon Web Services resources that lack ARNs, this is the identifier as defined by the Amazon Web Service that created the resource. For non-Amazon Web Services resources, this is a unique identifier that is associated with the resource. 
+     *  The identifier for the given resource type. For Amazon Web Services resources that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon Web Services resources that lack ARNs, this is the identifier as defined by the Amazon Web Service that created the resource. For non-Amazon Web Services resources, this is a unique identifier that is associated with the resource.   Array Members: Minimum number of 1 item. Maximum number of 100 items. 
      */
     ResourceId?: StringFilterList;
     /**
-     *  The partition in which the resource that the finding pertains to is located. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition. 
+     *  The partition in which the resource that the finding pertains to is located. A partition is a group of Amazon Web Services Regions. Each Amazon Web Services account is scoped to one partition.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ResourcePartition?: StringFilterList;
     /**
-     *  The Amazon Web Services Region where the resource that a finding pertains to is located. 
+     *  The Amazon Web Services Region where the resource that a finding pertains to is located.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ResourceRegion?: StringFilterList;
     /**
-     *  A list of Amazon Web Services tags associated with a resource at the time the finding was processed. 
+     *  A list of Amazon Web Services tags associated with a resource at the time the finding was processed.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ResourceTags?: MapFilterList;
     /**
-     *  Custom fields and values about the resource that a finding pertains to. 
+     *  Custom fields and values about the resource that a finding pertains to.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ResourceDetailsOther?: MapFilterList;
     /**
-     *  The result of a security check. This field is only used for findings generated from controls. 
+     *  The result of a security check. This field is only used for findings generated from controls.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ComplianceStatus?: StringFilterList;
     /**
-     *  The security control ID for which a finding was generated. Security control IDs are the same across standards.
+     *  The security control ID for which a finding was generated. Security control IDs are the same across standards.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ComplianceSecurityControlId?: StringFilterList;
     /**
-     * The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of the Amazon Resource Name (ARN) returned for a standard in the DescribeStandards API response.
+     * The unique identifier of a standard in which a control is enabled. This field consists of the resource portion of the Amazon Resource Name (ARN) returned for a standard in the DescribeStandards API response.  Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     ComplianceAssociatedStandardsId?: StringFilterList;
     /**
-     *  Provides the veracity of a finding. 
+     *  Provides the veracity of a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     VerificationState?: StringFilterList;
     /**
-     *  Provides information about the status of the investigation into a finding. 
+     *  Provides information about the status of the investigation into a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     WorkflowStatus?: StringFilterList;
     /**
-     *  Provides the current state of a finding. 
+     *  Provides the current state of a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     RecordState?: StringFilterList;
     /**
-     *  The ARN for the product that generated a related finding. 
+     *  The ARN for the product that generated a related finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     RelatedFindingsProductArn?: StringFilterList;
     /**
-     *  The product-generated identifier for a related finding. 
+     *  The product-generated identifier for a related finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     RelatedFindingsId?: StringFilterList;
     /**
-     *  The text of a user-defined note that's added to a finding. 
+     *  The text of a user-defined note that's added to a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     NoteText?: StringFilterList;
     /**
-     *  The timestamp of when the note was updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z. 
+     *  The timestamp of when the note was updated. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     NoteUpdatedAt?: DateFilterList;
     /**
-     *  The principal that created a note. 
+     *  The principal that created a note.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     NoteUpdatedBy?: StringFilterList;
     /**
-     *  A list of user-defined name and value string pairs added to a finding. 
+     *  A list of user-defined name and value string pairs added to a finding.   Array Members: Minimum number of 1 item. Maximum number of 20 items. 
      */
     UserDefinedFields?: MapFilterList;
   }

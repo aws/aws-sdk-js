@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1452.0-->
+<!--LATEST=2.1453.0-->
 <!--ENTRYINSERT-->
+
+## 2.1453.0
+* feature: Neptunedata: Minor changes to send unsigned requests to Neptune clusters
+* feature: SimSpaceWeaver: BucketName and ObjectKey are now required for the S3Location data type. BucketName is now required for the S3Destination data type.
 
 ## 2.1452.0
 * feature: Appflow: Adding OAuth2.0 support for servicenow connector.

@@ -70,7 +70,6 @@
         }
       ],
       "documentation": "<p>Cancels a Gremlin query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status-cancel.html\">Gremlin query cancellation</a> for more information.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "CancelLoaderJob": {
@@ -128,7 +127,6 @@
         }
       ],
       "documentation": "<p>Cancels a specified load job. This is an HTTP <code>DELETE</code> request.</p> <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm\">Neptune Loader Get-Status API</a> for more information.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "CancelMLDataProcessingJob": {
@@ -180,7 +178,6 @@
         }
       ],
       "documentation": "<p>Cancels a Neptune ML data processing job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The <code>dataprocessing</code> command</a>.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "CancelMLModelTrainingJob": {
@@ -232,7 +229,6 @@
         }
       ],
       "documentation": "<p>Cancels a Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model training using the <code>modeltraining</code> command</a>.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "CancelMLModelTransformJob": {
@@ -284,7 +280,6 @@
         }
       ],
       "documentation": "<p>Cancels a specified model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use a trained model to generate new model artifacts</a>.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "CancelOpenCypherQuery": {
@@ -348,7 +343,6 @@
         }
       ],
       "documentation": "<p>Cancels a specified openCypher query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-status.html\">Neptune openCypher status endpoint</a> for more information.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "CreateMLEndpoint": {
@@ -399,8 +393,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a new Neptune ML inference endpoint that lets you query one specific model that the model-training process constructed. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing inference endpoints using the endpoints command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Creates a new Neptune ML inference endpoint that lets you query one specific model that the model-training process constructed. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing inference endpoints using the endpoints command</a>.</p>"
     },
     "DeleteMLEndpoint": {
       "name": "DeleteMLEndpoint",
@@ -451,7 +444,6 @@
         }
       ],
       "documentation": "<p>Cancels the creation of a Neptune ML inference endpoint. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing inference endpoints using the endpoints command</a>.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "DeletePropertygraphStatistics": {
@@ -506,7 +498,6 @@
         }
       ],
       "documentation": "<p>Deletes statistics for Gremlin and openCypher (property graph) data.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "DeleteSparqlStatistics": {
@@ -561,7 +552,6 @@
         }
       ],
       "documentation": "<p>Deletes SPARQL statistics</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "ExecuteFastReset": {
@@ -619,7 +609,6 @@
         }
       ],
       "documentation": "<p>The fast reset REST API lets you reset a Neptune graph quicky and easily, removing all of its data.</p> <p>Neptune fast reset is a two-step process. First you call <code>ExecuteFastReset</code> with <code>action</code> set to <code>initiateDatabaseReset</code>. This returns a UUID token which you then include when calling <code>ExecuteFastReset</code> again with <code>action</code> set to <code>performDatabaseReset</code>. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-fast-reset.html\">Empty an Amazon Neptune DB cluster using the fast reset API</a>.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "ExecuteGremlinExplainQuery": {
@@ -697,8 +686,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Executes a Gremlin Explain query.</p> <p>Amazon Neptune has added a Gremlin feature named <code>explain</code> that provides is a self-service tool for understanding the execution approach being taken by the Neptune engine for the query. You invoke it by adding an <code>explain</code> parameter to an HTTP call that submits a Gremlin query.</p> <p>The explain feature provides information about the logical structure of query execution plans. You can use this information to identify potential evaluation and execution bottlenecks and to tune your query, as explained in <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-traversal-tuning.html\">Tuning Gremlin queries</a>. You can also use query hints to improve query execution plans.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Executes a Gremlin Explain query.</p> <p>Amazon Neptune has added a Gremlin feature named <code>explain</code> that provides is a self-service tool for understanding the execution approach being taken by the Neptune engine for the query. You invoke it by adding an <code>explain</code> parameter to an HTTP call that submits a Gremlin query.</p> <p>The explain feature provides information about the logical structure of query execution plans. You can use this information to identify potential evaluation and execution bottlenecks and to tune your query, as explained in <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-traversal-tuning.html\">Tuning Gremlin queries</a>. You can also use query hints to improve query execution plans.</p>"
     },
     "ExecuteGremlinProfileQuery": {
       "name": "ExecuteGremlinProfileQuery",
@@ -775,8 +763,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Executes a Gremlin Profile query, which runs a specified traversal, collects various metrics about the run, and produces a profile report as output. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-profile-api.html\">Gremlin profile API in Neptune</a> for details.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Executes a Gremlin Profile query, which runs a specified traversal, collects various metrics about the run, and produces a profile report as output. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-profile-api.html\">Gremlin profile API in Neptune</a> for details.</p>"
     },
     "ExecuteGremlinQuery": {
       "name": "ExecuteGremlinQuery",
@@ -853,8 +840,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>This commands executes a Gremlin query. Amazon Neptune is compatible with Apache TinkerPop3 and Gremlin, so you can use the Gremlin traversal language to query the graph, as described under <a href=\"https://tinkerpop.apache.org/docs/current/reference/#graph\">The Graph</a> in the Apache TinkerPop3 documentation. More details can also be found in <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin.html\">Accessing a Neptune graph with Gremlin</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>This commands executes a Gremlin query. Amazon Neptune is compatible with Apache TinkerPop3 and Gremlin, so you can use the Gremlin traversal language to query the graph, as described under <a href=\"https://tinkerpop.apache.org/docs/current/reference/#graph\">The Graph</a> in the Apache TinkerPop3 documentation. More details can also be found in <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin.html\">Accessing a Neptune graph with Gremlin</a>.</p>"
     },
     "ExecuteOpenCypherExplainQuery": {
       "name": "ExecuteOpenCypherExplainQuery",
@@ -934,8 +920,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Executes an openCypher <code>explain</code> request. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-explain.html\">The openCypher explain feature</a> for more information.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Executes an openCypher <code>explain</code> request. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-explain.html\">The openCypher explain feature</a> for more information.</p>"
     },
     "ExecuteOpenCypherQuery": {
       "name": "ExecuteOpenCypherQuery",
@@ -1015,8 +1000,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Executes an openCypher query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher.html\">Accessing the Neptune Graph with openCypher</a> for more information.</p> <p>Neptune supports building graph applications using openCypher, which is currently one of the most popular query languages among developers working with graph databases. Developers, business analysts, and data scientists like openCypher's declarative, SQL-inspired syntax because it provides a familiar structure in which to querying property graphs.</p> <p>The openCypher language was originally developed by Neo4j, then open-sourced in 2015 and contributed to the <a href=\"https://opencypher.org/\">openCypher project</a> under an Apache 2 open-source license.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Executes an openCypher query. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher.html\">Accessing the Neptune Graph with openCypher</a> for more information.</p> <p>Neptune supports building graph applications using openCypher, which is currently one of the most popular query languages among developers working with graph databases. Developers, business analysts, and data scientists like openCypher's declarative, SQL-inspired syntax because it provides a familiar structure in which to querying property graphs.</p> <p>The openCypher language was originally developed by Neo4j, then open-sourced in 2015 and contributed to the <a href=\"https://opencypher.org/\">openCypher project</a> under an Apache 2 open-source license.</p>"
     },
     "GetEngineStatus": {
       "name": "GetEngineStatus",
@@ -1054,8 +1038,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Check the status of the graph database on the host.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Check the status of the graph database on the host.</p>"
     },
     "GetGremlinQueryStatus": {
       "name": "GetGremlinQueryStatus",
@@ -1120,8 +1103,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Gets the status of a specified Gremlin query.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets the status of a specified Gremlin query.</p>"
     },
     "GetLoaderJobStatus": {
       "name": "GetLoaderJobStatus",
@@ -1177,8 +1159,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Gets status information about a specified load job. Neptune keeps track of the most recent 1,024 bulk load jobs, and stores the last 10,000 error details per job.</p> <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm\">Neptune Loader Get-Status API</a> for more information.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets status information about a specified load job. Neptune keeps track of the most recent 1,024 bulk load jobs, and stores the last 10,000 error details per job.</p> <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm\">Neptune Loader Get-Status API</a> for more information.</p>"
     },
     "GetMLDataProcessingJob": {
       "name": "GetMLDataProcessingJob",
@@ -1228,8 +1209,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Retrieves information about a specified data processing job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The <code>dataprocessing</code> command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Retrieves information about a specified data processing job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The <code>dataprocessing</code> command</a>.</p>"
     },
     "GetMLEndpoint": {
       "name": "GetMLEndpoint",
@@ -1279,8 +1259,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Retrieves details about an inference endpoint. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing inference endpoints using the endpoints command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Retrieves details about an inference endpoint. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing inference endpoints using the endpoints command</a>.</p>"
     },
     "GetMLModelTrainingJob": {
       "name": "GetMLModelTrainingJob",
@@ -1330,8 +1309,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Retrieves information about a Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model training using the <code>modeltraining</code> command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Retrieves information about a Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model training using the <code>modeltraining</code> command</a>.</p>"
     },
     "GetMLModelTransformJob": {
       "name": "GetMLModelTransformJob",
@@ -1381,8 +1359,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Gets information about a specified model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use a trained model to generate new model artifacts</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets information about a specified model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use a trained model to generate new model artifacts</a>.</p>"
     },
     "GetOpenCypherQueryStatus": {
       "name": "GetOpenCypherQueryStatus",
@@ -1450,8 +1427,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Retrieves the status of a specified openCypher query.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Retrieves the status of a specified openCypher query.</p>"
     },
     "GetPropertygraphStatistics": {
       "name": "GetPropertygraphStatistics",
@@ -1504,8 +1480,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Gets property graph statistics (Gremlin and openCypher).</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets property graph statistics (Gremlin and openCypher).</p>"
     },
     "GetPropertygraphStream": {
       "name": "GetPropertygraphStream",
@@ -1558,8 +1533,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Gets a stream for a property graph.</p> <p>With the Neptune Streams feature, you can generate a complete sequence of change-log entries that record every change made to your graph data as it happens. <code>GetPropertygraphStream</code> lets you collect these change-log entries for a property graph.</p> <p>The Neptune streams feature needs to be enabled on your Neptune DBcluster. To enable streams, set the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams\">neptune_streams</a> DB cluster parameter to <code>1</code>.</p> <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/streams.html\">Capturing graph changes in real time using Neptune streams</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets a stream for a property graph.</p> <p>With the Neptune Streams feature, you can generate a complete sequence of change-log entries that record every change made to your graph data as it happens. <code>GetPropertygraphStream</code> lets you collect these change-log entries for a property graph.</p> <p>The Neptune streams feature needs to be enabled on your Neptune DBcluster. To enable streams, set the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams\">neptune_streams</a> DB cluster parameter to <code>1</code>.</p> <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/streams.html\">Capturing graph changes in real time using Neptune streams</a>.</p>"
     },
     "GetPropertygraphSummary": {
       "name": "GetPropertygraphSummary",
@@ -1615,8 +1589,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Gets a graph summary for a property graph.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets a graph summary for a property graph.</p>"
     },
     "GetRDFGraphSummary": {
       "name": "GetRDFGraphSummary",
@@ -1672,8 +1645,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Gets a graph summary for an RDF graph.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets a graph summary for an RDF graph.</p>"
     },
     "GetSparqlStatistics": {
       "name": "GetSparqlStatistics",
@@ -1726,8 +1698,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Gets RDF statistics (SPARQL).</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets RDF statistics (SPARQL).</p>"
     },
     "GetSparqlStream": {
       "name": "GetSparqlStream",
@@ -1780,8 +1751,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Gets a stream for an RDF graph.</p> <p>With the Neptune Streams feature, you can generate a complete sequence of change-log entries that record every change made to your graph data as it happens. <code>GetSparqlStream</code> lets you collect these change-log entries for an RDF graph.</p> <p>The Neptune streams feature needs to be enabled on your Neptune DBcluster. To enable streams, set the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams\">neptune_streams</a> DB cluster parameter to <code>1</code>.</p> <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/streams.html\">Capturing graph changes in real time using Neptune streams</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Gets a stream for an RDF graph.</p> <p>With the Neptune Streams feature, you can generate a complete sequence of change-log entries that record every change made to your graph data as it happens. <code>GetSparqlStream</code> lets you collect these change-log entries for an RDF graph.</p> <p>The Neptune streams feature needs to be enabled on your Neptune DBcluster. To enable streams, set the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/parameters.html#parameters-db-cluster-parameters-neptune_streams\">neptune_streams</a> DB cluster parameter to <code>1</code>.</p> <p>See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/streams.html\">Capturing graph changes in real time using Neptune streams</a>.</p>"
     },
     "ListGremlinQueries": {
       "name": "ListGremlinQueries",
@@ -1846,8 +1816,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Lists active Gremlin queries. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html\">Gremlin query status API</a> for details about the output.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Lists active Gremlin queries. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html\">Gremlin query status API</a> for details about the output.</p>"
     },
     "ListLoaderJobs": {
       "name": "ListLoaderJobs",
@@ -1900,8 +1869,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Retrieves a list of the <code>loadIds</code> for all active loader jobs.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Retrieves a list of the <code>loadIds</code> for all active loader jobs.</p>"
     },
     "ListMLDataProcessingJobs": {
       "name": "ListMLDataProcessingJobs",
@@ -1951,8 +1919,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Returns a list of Neptune ML data processing jobs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html#machine-learning-api-dataprocessing-list-jobs\">Listing active data-processing jobs using the Neptune ML dataprocessing command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Returns a list of Neptune ML data processing jobs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html#machine-learning-api-dataprocessing-list-jobs\">Listing active data-processing jobs using the Neptune ML dataprocessing command</a>.</p>"
     },
     "ListMLEndpoints": {
       "name": "ListMLEndpoints",
@@ -2002,8 +1969,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Lists existing inference endpoints. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing inference endpoints using the endpoints command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Lists existing inference endpoints. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-endpoints.html\">Managing inference endpoints using the endpoints command</a>.</p>"
     },
     "ListMLModelTrainingJobs": {
       "name": "ListMLModelTrainingJobs",
@@ -2053,8 +2019,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Lists Neptune ML model-training jobs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model training using the <code>modeltraining</code> command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Lists Neptune ML model-training jobs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model training using the <code>modeltraining</code> command</a>.</p>"
     },
     "ListMLModelTransformJobs": {
       "name": "ListMLModelTransformJobs",
@@ -2104,8 +2069,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Returns a list of model transform job IDs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use a trained model to generate new model artifacts</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Returns a list of model transform job IDs. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use a trained model to generate new model artifacts</a>.</p>"
     },
     "ListOpenCypherQueries": {
       "name": "ListOpenCypherQueries",
@@ -2173,8 +2137,7 @@
           "shape": "MissingParameterException"
         }
       ],
-      "documentation": "<p>Lists active openCypher queries. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-status.html\">Neptune openCypher status endpoint</a> for more information.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Lists active openCypher queries. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher-status.html\">Neptune openCypher status endpoint</a> for more information.</p>"
     },
     "ManagePropertygraphStatistics": {
       "name": "ManagePropertygraphStatistics",
@@ -2231,7 +2194,6 @@
         }
       ],
       "documentation": "<p>Manages the generation and use of property graph statistics.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "ManageSparqlStatistics": {
@@ -2289,7 +2251,6 @@
         }
       ],
       "documentation": "<p>Manages the generation and use of RDF graph statistics.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "StartLoaderJob": {
@@ -2350,7 +2311,6 @@
         }
       ],
       "documentation": "<p>Starts a Neptune bulk loader job to load data from an Amazon S3 bucket into a Neptune DB instance. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load.html\">Using the Amazon Neptune Bulk Loader to Ingest Data</a>.</p>",
-      "authtype": "v4",
       "idempotent": true
     },
     "StartMLDataProcessingJob": {
@@ -2401,8 +2361,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a new Neptune ML data processing job for processing the graph data exported from Neptune for training. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The <code>dataprocessing</code> command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Creates a new Neptune ML data processing job for processing the graph data exported from Neptune for training. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html\">The <code>dataprocessing</code> command</a>.</p>"
     },
     "StartMLModelTrainingJob": {
       "name": "StartMLModelTrainingJob",
@@ -2452,8 +2411,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a new Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model training using the <code>modeltraining</code> command</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Creates a new Neptune ML model training job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html\">Model training using the <code>modeltraining</code> command</a>.</p>"
     },
     "StartMLModelTransformJob": {
       "name": "StartMLModelTransformJob",
@@ -2503,8 +2461,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a new model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use a trained model to generate new model artifacts</a>.</p>",
-      "authtype": "v4"
+      "documentation": "<p>Creates a new model transform job. See <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html\">Use a trained model to generate new model artifacts</a>.</p>"
     }
   },
   "shapes": {
