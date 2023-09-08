@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1453.0-->
+<!--LATEST=2.1454.0-->
 <!--ENTRYINSERT-->
+
+## 2.1454.0
+* bugfix: Paginator: Fix nextPage typing in requests
+* feature: SSOAdmin: Content updates to IAM Identity Center API for China Regions.
+* feature: SageMaker: Autopilot APIs will now support holiday featurization for Timeseries models. The models will now hold holiday metadata and should be able to accommodate holiday effect during inference.
+* feature: WorkSpaces: A new field "ErrorDetails" will be added to the output of "DescribeWorkspaceImages" API call. This field provides in-depth details about the error occurred during image import process. These details include the possible causes of the errors and troubleshooting information.
 
 ## 2.1453.0
 * feature: Neptunedata: Minor changes to send unsigned requests to Neptune clusters

@@ -919,13 +919,13 @@ declare namespace FSx {
     Tags?: Tags;
     KmsKeyId?: KmsKeyId;
     /**
-     * The Microsoft Windows configuration for the file system that's being created. 
+     * The Microsoft Windows configuration for the file system that's being created.
      */
     WindowsConfiguration?: CreateFileSystemWindowsConfiguration;
     LustreConfiguration?: CreateFileSystemLustreConfiguration;
     OntapConfiguration?: CreateFileSystemOntapConfiguration;
     /**
-     * (Optional) For FSx for Lustre file systems, sets the Lustre version for the file system that you're creating. Valid values are 2.10, 2.12m and 2.15:   2.10 is supported by the Scratch and Persistent_1 Lustre deployment types.   2.12 and 2.15 are supported by all Lustre deployment types. 2.12 or 2.15 is required when setting FSx for Lustre DeploymentType to PERSISTENT_2.   Default value = 2.10, except when DeploymentType is set to PERSISTENT_2, then the default is 2.12.  If you set FileSystemTypeVersion to 2.10 for a PERSISTENT_2 Lustre deployment type, the CreateFileSystem operation fails. 
+     * (Optional) For FSx for Lustre file systems, sets the Lustre version for the file system that you're creating. Valid values are 2.10, 2.12, and 2.15:   2.10 is supported by the Scratch and Persistent_1 Lustre deployment types.   2.12 and 2.15 are supported by all Lustre deployment types. 2.12 or 2.15 is required when setting FSx for Lustre DeploymentType to PERSISTENT_2.   Default value = 2.10, except when DeploymentType is set to PERSISTENT_2, then the default is 2.12.  If you set FileSystemTypeVersion to 2.10 for a PERSISTENT_2 Lustre deployment type, the CreateFileSystem operation fails. 
      */
     FileSystemTypeVersion?: FileSystemTypeVersion;
     /**
@@ -2098,7 +2098,7 @@ declare namespace FSx {
      */
     OntapConfiguration?: OntapFileSystemConfiguration;
     /**
-     * The Lustre version of the Amazon FSx for Lustre file system, which is 2.10, 2.12, or 2.15.
+     * The Lustre version of the Amazon FSx for Lustre file system, which can be 2.10, 2.12, or 2.15.
      */
     FileSystemTypeVersion?: FileSystemTypeVersion;
     /**

@@ -85,19 +85,19 @@ declare class SageMaker extends Service {
    */
   createArtifact(callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, and non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, and non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
    */
   createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, and non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
    */
   createAutoMLJobV2(params: SageMaker.Types.CreateAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, and non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
    */
   createAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
@@ -3369,7 +3369,7 @@ declare namespace SageMaker {
      */
     TabularJobConfig?: TabularJobConfig;
     /**
-     * Settings used to configure an AutoML job V2 for a time-series forecasting problem type.  The TimeSeriesForecastingJobConfig problem type is only available in private beta. Contact Amazon Web Services Support or your account manager to learn more about access privileges. 
+     * Settings used to configure an AutoML job V2 for a time-series forecasting problem type.
      */
     TimeSeriesForecastingJobConfig?: TimeSeriesForecastingJobConfig;
   }
@@ -4245,6 +4245,7 @@ declare namespace SageMaker {
      */
     CompleteOnConvergence?: CompleteOnConvergence;
   }
+  export type CountryCode = string;
   export interface CreateActionRequest {
     /**
      * The name of the action. Must be unique to your account in an Amazon Web Services Region.
@@ -11660,6 +11661,13 @@ declare namespace SageMaker {
   export type GroupingAttributeName = string;
   export type GroupingAttributeNames = GroupingAttributeName[];
   export type Groups = Group[];
+  export type HolidayConfig = HolidayConfigAttributes[];
+  export interface HolidayConfigAttributes {
+    /**
+     * The country code for the holiday calendar. For the list of public holiday calendars supported by AutoML job V2, see Country Codes. Use the country code corresponding to the country of your choice.
+     */
+    CountryCode?: CountryCode;
+  }
   export type HookParameters = {[key: string]: ConfigValue};
   export type Horovod = boolean;
   export type HubArn = string;
@@ -20793,6 +20801,10 @@ declare namespace SageMaker {
      * The collection of components that defines the time-series.
      */
     TimeSeriesConfig: TimeSeriesConfig;
+    /**
+     * The collection of holiday featurization attributes used to incorporate national holiday information into your forecasting model.
+     */
+    HolidayConfig?: HolidayConfig;
   }
   export interface TimeSeriesForecastingSettings {
     /**

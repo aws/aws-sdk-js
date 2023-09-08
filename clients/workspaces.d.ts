@@ -1525,6 +1525,17 @@ declare namespace WorkSpaces {
   }
   export type DnsIpAddresses = IpAddress[];
   export type Ec2ImageId = string;
+  export interface ErrorDetails {
+    /**
+     * Indicates the error code returned.
+     */
+    ErrorCode?: WorkspaceImageErrorDetailCode;
+    /**
+     * The text of the error message related the error code.
+     */
+    ErrorMessage?: Description;
+  }
+  export type ErrorDetailsList = ErrorDetails[];
   export type ErrorType = string;
   export interface FailedCreateStandbyWorkspacesRequest {
     /**
@@ -2635,9 +2646,14 @@ declare namespace WorkSpaces {
      * The updates (if any) that are available for the specified image.
      */
     Updates?: UpdateResult;
+    /**
+     * The details of the error returned for the image.
+     */
+    ErrorDetails?: ErrorDetailsList;
   }
   export type WorkspaceImageDescription = string;
   export type WorkspaceImageErrorCode = string;
+  export type WorkspaceImageErrorDetailCode = "OutdatedPowershellVersion"|"OfficeInstalled"|"PCoIPAgentInstalled"|"WindowsUpdatesEnabled"|"AutoMountDisabled"|"WorkspacesBYOLAccountNotFound"|"WorkspacesBYOLAccountDisabled"|"DHCPDisabled"|"DiskFreeSpace"|"AdditionalDrivesAttached"|"OSNotSupported"|"DomainJoined"|"AzureDomainJoined"|"FirewallEnabled"|"VMWareToolsInstalled"|"DiskSizeExceeded"|"IncompatiblePartitioning"|"PendingReboot"|"AutoLogonEnabled"|"RealTimeUniversalDisabled"|"MultipleBootPartition"|"Requires64BitOS"|"ZeroRearmCount"|"InPlaceUpgrade"|"AntiVirusInstalled"|"UEFINotSupported"|string;
   export type WorkspaceImageId = string;
   export type WorkspaceImageIdList = WorkspaceImageId[];
   export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_GRAPHICS_G4DN"|"BYOL_REGULAR_WSP"|"BYOL_REGULAR_BYOP"|"BYOL_GRAPHICS_G4DN_BYOP"|string;

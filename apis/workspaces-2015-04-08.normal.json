@@ -3438,6 +3438,26 @@
       "type": "string",
       "pattern": "^ami\\-([a-f0-9]{8}|[a-f0-9]{17})$"
     },
+    "ErrorDetails": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "shape": "WorkspaceImageErrorDetailCode",
+          "documentation": "<p>Indicates the error code returned.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "Description",
+          "documentation": "<p>The text of the error message related the error code.</p>"
+        }
+      },
+      "documentation": "<p>Provides in-depth details about the error. These details include the possible causes of the errors and troubleshooting information.</p>"
+    },
+    "ErrorDetailsList": {
+      "type": "list",
+      "member": {
+        "shape": "ErrorDetails"
+      }
+    },
     "ErrorType": {
       "type": "string"
     },
@@ -5283,6 +5303,10 @@
         "Updates": {
           "shape": "UpdateResult",
           "documentation": "<p>The updates (if any) that are available for the specified image.</p>"
+        },
+        "ErrorDetails": {
+          "shape": "ErrorDetailsList",
+          "documentation": "<p>The details of the error returned for the image.</p>"
         }
       },
       "documentation": "<p>Describes a WorkSpace image.</p>"
@@ -5295,6 +5319,37 @@
     },
     "WorkspaceImageErrorCode": {
       "type": "string"
+    },
+    "WorkspaceImageErrorDetailCode": {
+      "type": "string",
+      "enum": [
+        "OutdatedPowershellVersion",
+        "OfficeInstalled",
+        "PCoIPAgentInstalled",
+        "WindowsUpdatesEnabled",
+        "AutoMountDisabled",
+        "WorkspacesBYOLAccountNotFound",
+        "WorkspacesBYOLAccountDisabled",
+        "DHCPDisabled",
+        "DiskFreeSpace",
+        "AdditionalDrivesAttached",
+        "OSNotSupported",
+        "DomainJoined",
+        "AzureDomainJoined",
+        "FirewallEnabled",
+        "VMWareToolsInstalled",
+        "DiskSizeExceeded",
+        "IncompatiblePartitioning",
+        "PendingReboot",
+        "AutoLogonEnabled",
+        "RealTimeUniversalDisabled",
+        "MultipleBootPartition",
+        "Requires64BitOS",
+        "ZeroRearmCount",
+        "InPlaceUpgrade",
+        "AntiVirusInstalled",
+        "UEFINotSupported"
+      ]
     },
     "WorkspaceImageId": {
       "type": "string",
