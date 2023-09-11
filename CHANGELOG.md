@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1454.0-->
+<!--LATEST=2.1455.0-->
 <!--ENTRYINSERT-->
+
+## 2.1455.0
+* feature: ECR: This release will have ValidationException be thrown from ECR LifecyclePolicy APIs in regions LifecyclePolicy is not supported, this includes existing Amazon Dedicated Cloud (ADC) regions. This release will also change Tag: TagValue and Tag: TagKey to required.
+* feature: MediaLive: AWS Elemental Link now supports attaching a Link UHD device to a MediaConnect flow.
+* feature: QuickSight: This release launches new updates to QuickSight KPI visuals - support for sparklines, new templated layout and new targets for conditional formatting rules.
 
 ## 2.1454.0
 * bugfix: Paginator: Fix nextPage typing in requests

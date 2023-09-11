@@ -406,6 +406,14 @@ declare class MediaLive extends Service {
    */
   startChannel(callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
   /**
+   * Start an input device that is attached to a MediaConnect flow. (There is no need to start a device that is attached to a MediaLive input; MediaLive starts the device when the channel starts.)
+   */
+  startInputDevice(params: MediaLive.Types.StartInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceResponse) => void): Request<MediaLive.Types.StartInputDeviceResponse, AWSError>;
+  /**
+   * Start an input device that is attached to a MediaConnect flow. (There is no need to start a device that is attached to a MediaLive input; MediaLive starts the device when the channel starts.)
+   */
+  startInputDevice(callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceResponse) => void): Request<MediaLive.Types.StartInputDeviceResponse, AWSError>;
+  /**
    * Start a maintenance window for the specified input device. Starting a maintenance window will give the device up to two hours to install software. If the device was streaming prior to the maintenance, it will resume streaming when the software is fully installed. Devices automatically install updates while they are powered on and their MediaLive channels are stopped. A maintenance window allows you to update a device without having to stop MediaLive channels that use the device. The device must remain powered on and connected to the internet for the duration of the maintenance.
    */
   startInputDeviceMaintenanceWindow(params: MediaLive.Types.StartInputDeviceMaintenanceWindowRequest, callback?: (err: AWSError, data: MediaLive.Types.StartInputDeviceMaintenanceWindowResponse) => void): Request<MediaLive.Types.StartInputDeviceMaintenanceWindowResponse, AWSError>;
@@ -429,6 +437,14 @@ declare class MediaLive extends Service {
    * Stops a running channel
    */
   stopChannel(callback?: (err: AWSError, data: MediaLive.Types.StopChannelResponse) => void): Request<MediaLive.Types.StopChannelResponse, AWSError>;
+  /**
+   * Stop an input device that is attached to a MediaConnect flow. (There is no need to stop a device that is attached to a MediaLive input; MediaLive automatically stops the device when the channel stops.)
+   */
+  stopInputDevice(params: MediaLive.Types.StopInputDeviceRequest, callback?: (err: AWSError, data: MediaLive.Types.StopInputDeviceResponse) => void): Request<MediaLive.Types.StopInputDeviceResponse, AWSError>;
+  /**
+   * Stop an input device that is attached to a MediaConnect flow. (There is no need to stop a device that is attached to a MediaLive input; MediaLive automatically stops the device when the channel stops.)
+   */
+  stopInputDevice(callback?: (err: AWSError, data: MediaLive.Types.StopInputDeviceResponse) => void): Request<MediaLive.Types.StopInputDeviceResponse, AWSError>;
   /**
    * Stops a running multiplex. If the multiplex isn't running, this action has no effect.
    */
@@ -2131,6 +2147,14 @@ one destination per packager.
      * The Availability Zone associated with this input device.
      */
     AvailabilityZone?: __string;
+    /**
+     * An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.
+     */
+    MedialiveInputArns?: __listOf__string;
+    /**
+     * The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
+     */
+    OutputType?: InputDeviceOutputType;
   }
   export interface DescribeInputDeviceThumbnailRequest {
     /**
@@ -4043,6 +4067,7 @@ to.
     NetworkInterfaceId?: __string;
   }
   export type InputDeviceActiveInput = "HDMI"|"SDI"|string;
+  export type InputDeviceCodec = "HEVC"|"AVC"|string;
   export interface InputDeviceConfigurableSettings {
     /**
      * The input source that you want to use. If the device has a source connected to only one of its input ports, or if you don't care which source the device sends, specify Auto. If the device has sources connected to both its input ports, and you want to use a specific source, specify the source.
@@ -4056,6 +4081,14 @@ to.
      * The Link device's buffer size (latency) in milliseconds (ms).
      */
     LatencyMs?: __integer;
+    /**
+     * Choose the codec for the video that the device produces. Only UHD devices can specify this parameter.
+     */
+    Codec?: InputDeviceCodec;
+    /**
+     * To attach this device to a MediaConnect flow, specify these parameters. To detach an existing flow, enter {} for the value of mediaconnectSettings. Only UHD devices can specify this parameter.
+     */
+    MediaconnectSettings?: InputDeviceMediaConnectConfigurableSettings;
   }
   export type InputDeviceConfiguredInput = "AUTO"|"HDMI"|"SDI"|string;
   export type InputDeviceConnectionState = "DISCONNECTED"|"CONNECTED"|string;
@@ -4098,6 +4131,42 @@ to.
     LatencyMs?: __integer;
   }
   export type InputDeviceIpScheme = "STATIC"|"DHCP"|string;
+  export interface InputDeviceMediaConnectConfigurableSettings {
+    /**
+     * The ARN of the MediaConnect flow to attach this device to.
+     */
+    FlowArn?: __string;
+    /**
+     * The ARN for the role that MediaLive assumes to access the attached flow and secret. For more information about how to create this role, see the MediaLive user guide.
+     */
+    RoleArn?: __string;
+    /**
+     * The ARN for the secret that holds the encryption key to encrypt the content output by the device.
+     */
+    SecretArn?: __string;
+    /**
+     * The name of the MediaConnect Flow source to stream to.
+     */
+    SourceName?: __string;
+  }
+  export interface InputDeviceMediaConnectSettings {
+    /**
+     * The ARN of the MediaConnect flow.
+     */
+    FlowArn?: __string;
+    /**
+     * The ARN for the role that MediaLive assumes to access the attached flow and secret.
+     */
+    RoleArn?: __string;
+    /**
+     * The ARN of the secret used to encrypt the stream.
+     */
+    SecretArn?: __string;
+    /**
+     * The name of the MediaConnect flow source.
+     */
+    SourceName?: __string;
+  }
   export interface InputDeviceNetworkSettings {
     /**
      * The DNS addresses of the input device.
@@ -4120,6 +4189,7 @@ to.
      */
     SubnetMask?: __string;
   }
+  export type InputDeviceOutputType = "NONE"|"MEDIALIVE_INPUT"|"MEDIACONNECT_FLOW"|string;
   export interface InputDeviceRequest {
     /**
      * The unique ID for the device.
@@ -4191,6 +4261,14 @@ to.
      * The Availability Zone associated with this input device.
      */
     AvailabilityZone?: __string;
+    /**
+     * An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.
+     */
+    MedialiveInputArns?: __listOf__string;
+    /**
+     * The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
+     */
+    OutputType?: InputDeviceOutputType;
   }
   export type InputDeviceTransferType = "OUTGOING"|"INCOMING"|string;
   export type InputDeviceType = "HD"|"UHD"|string;
@@ -4231,6 +4309,14 @@ to.
      * The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.
      */
     LatencyMs?: __integer;
+    /**
+     * The codec for the video that the device produces.
+     */
+    Codec?: InputDeviceCodec;
+    /**
+     * Information about the MediaConnect flow attached to the device. Returned only if the outputType is MEDIACONNECT_FLOW.
+     */
+    MediaconnectSettings?: InputDeviceMediaConnectSettings;
   }
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {
@@ -6432,6 +6518,14 @@ one destination per packager.
   }
   export interface StartInputDeviceMaintenanceWindowResponse {
   }
+  export interface StartInputDeviceRequest {
+    /**
+     * The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface StartInputDeviceResponse {
+  }
   export interface StartMultiplexRequest {
     /**
      * The ID of the multiplex.
@@ -6624,6 +6718,14 @@ one destination per packager.
      * Settings for VPC output
      */
     Vpc?: VpcOutputSettingsDescription;
+  }
+  export interface StopInputDeviceRequest {
+    /**
+     * The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+     */
+    InputDeviceId: __string;
+  }
+  export interface StopInputDeviceResponse {
   }
   export interface StopMultiplexRequest {
     /**
@@ -6992,6 +7094,14 @@ one destination per packager.
      * The Availability Zone associated with this input device.
      */
     AvailabilityZone?: __string;
+    /**
+     * An array of the ARNs for the MediaLive inputs attached to the device. Returned only if the outputType is MEDIALIVE_INPUT.
+     */
+    MedialiveInputArns?: __listOf__string;
+    /**
+     * The output attachment type of the input device. Specifies MEDIACONNECT_FLOW if this device is the source for a MediaConnect flow. Specifies MEDIALIVE_INPUT if this device is the source for a MediaLive input.
+     */
+    OutputType?: InputDeviceOutputType;
   }
   export interface UpdateInputRequest {
     /**

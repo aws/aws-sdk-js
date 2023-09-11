@@ -10201,6 +10201,26 @@ declare namespace QuickSight {
     UniqueKey?: Boolean;
   }
   export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT"|string;
+  export interface KPIActualValueConditionalFormatting {
+    /**
+     * The conditional formatting of the actual value's text color.
+     */
+    TextColor?: ConditionalFormattingColor;
+    /**
+     * The conditional formatting of the actual value's icon.
+     */
+    Icon?: ConditionalFormattingIcon;
+  }
+  export interface KPIComparisonValueConditionalFormatting {
+    /**
+     * The conditional formatting of the comparison value's text color.
+     */
+    TextColor?: ConditionalFormattingColor;
+    /**
+     * The conditional formatting of the comparison value's icon.
+     */
+    Icon?: ConditionalFormattingIcon;
+  }
   export interface KPIConditionalFormatting {
     /**
      * The conditional formatting options of a KPI visual.
@@ -10216,6 +10236,14 @@ declare namespace QuickSight {
      * The conditional formatting for the progress bar of a KPI visual.
      */
     ProgressBar?: KPIProgressBarConditionalFormatting;
+    /**
+     * The conditional formatting for the actual value of a KPI visual.
+     */
+    ActualValue?: KPIActualValueConditionalFormatting;
+    /**
+     * The conditional formatting for the comparison value of a KPI visual.
+     */
+    ComparisonValue?: KPIComparisonValueConditionalFormatting;
   }
   export type KPIConditionalFormattingOptionList = KPIConditionalFormattingOption[];
   export interface KPIConfiguration {
@@ -10275,6 +10303,14 @@ declare namespace QuickSight {
      * The options that determine the secondary value font configuration.
      */
     SecondaryValueFontConfiguration?: FontConfiguration;
+    /**
+     * The options that determine the visibility, color, type, and tooltip visibility of the sparkline of a KPI visual.
+     */
+    Sparkline?: KPISparklineOptions;
+    /**
+     * The options that determine the layout a KPI visual.
+     */
+    VisualLayoutOptions?: KPIVisualLayoutOptions;
   }
   export interface KPIPrimaryValueConditionalFormatting {
     /**
@@ -10298,6 +10334,25 @@ declare namespace QuickSight {
      */
     TrendGroupSort?: FieldSortOptionsList;
   }
+  export interface KPISparklineOptions {
+    /**
+     * The visibility of the sparkline.
+     */
+    Visibility?: Visibility;
+    /**
+     * The type of the sparkline.
+     */
+    Type: KPISparklineType;
+    /**
+     * The color of the sparkline.
+     */
+    Color?: HexColor;
+    /**
+     * The tooltip visibility of the sparkline.
+     */
+    TooltipVisibility?: Visibility;
+  }
+  export type KPISparklineType = "LINE"|"AREA"|string;
   export interface KPIVisual {
     /**
      * The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.
@@ -10328,6 +10383,19 @@ declare namespace QuickSight {
      */
     ColumnHierarchies?: ColumnHierarchyList;
   }
+  export interface KPIVisualLayoutOptions {
+    /**
+     * The standard layout of the KPI visual.
+     */
+    StandardLayout?: KPIVisualStandardLayout;
+  }
+  export interface KPIVisualStandardLayout {
+    /**
+     * The standard layout type.
+     */
+    Type: KPIVisualStandardLayoutType;
+  }
+  export type KPIVisualStandardLayoutType = "CLASSIC"|"VERTICAL"|string;
   export interface LabelOptions {
     /**
      * Determines whether or not the label is visible.

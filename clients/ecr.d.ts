@@ -593,7 +593,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app).
+     * The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app). The repository name must start with a letter and can only contain lowercase letters, numbers, hyphens, underscores, and forward slashes.
      */
     repositoryName: RepositoryName;
     /**
@@ -1832,7 +1832,7 @@ declare namespace ECR {
   }
   export interface RegistryScanningRule {
     /**
-     * The frequency that scans are performed at for a private registry. When the ENHANCED scan type is specified, the supported scan frequencies are CONTINUOUS_SCAN and SCAN_ON_PUSH. When the BASIC scan type is specified, the SCAN_ON_PUSH and MANUAL scan frequencies are supported.
+     * The frequency that scans are performed at for a private registry. When the ENHANCED scan type is specified, the supported scan frequencies are CONTINUOUS_SCAN and SCAN_ON_PUSH. When the BASIC scan type is specified, the SCAN_ON_PUSH scan frequency is supported. If scan on push is not specified, then the MANUAL scan frequency is set by default.
      */
     scanFrequency: ScanFrequency;
     /**
@@ -1882,7 +1882,7 @@ declare namespace ECR {
   export type ReplicationStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
   export interface Repository {
     /**
-     * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name. For example, arn:aws:ecr:region:012345678910:repository/test.
+     * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name. For example, arn:aws:ecr:region:012345678910:repository-namespace/repository-name.
      */
     repositoryArn?: Arn;
     /**
@@ -2121,11 +2121,11 @@ declare namespace ECR {
     /**
      * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
      */
-    Key?: TagKey;
+    Key: TagKey;
     /**
      * A value acts as a descriptor within a tag category (key).
      */
-    Value?: TagValue;
+    Value: TagValue;
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
