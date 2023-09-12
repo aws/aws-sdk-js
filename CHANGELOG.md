@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1455.0-->
+<!--LATEST=2.1456.0-->
 <!--ENTRYINSERT-->
+
+## 2.1456.0
+* feature: EC2: This release adds support for restricting public sharing of AMIs through AMI Block Public Access
+* feature: EventBridge: Adds sensitive trait to various shapes in Jetstream Connections API model.
+* feature: Kendra: Amazon Kendra now supports confidence score buckets for retrieved passage results using the Retrieve API.
 
 ## 2.1455.0
 * feature: ECR: This release will have ValidationException be thrown from ECR LifecyclePolicy APIs in regions LifecyclePolicy is not supported, this includes existing Amazon Dedicated Cloud (ADC) regions. This release will also change Tag: TagValue and Tag: TagKey to required.

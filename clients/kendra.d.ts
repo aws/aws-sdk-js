@@ -28,11 +28,11 @@ declare class Kendra extends Service {
    */
   associatePersonasToEntities(callback?: (err: AWSError, data: Kendra.Types.AssociatePersonasToEntitiesResponse) => void): Request<Kendra.Types.AssociatePersonasToEntitiesResponse, AWSError>;
   /**
-   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument API. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
+   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument API. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to your Amazon Web Services CloudWatch log. You can also use the BatchGetDocumentStatus API to monitor the progress of deleting your documents. Deleting documents from an index using BatchDeleteDocument could take up to an hour or more, depending on the number of documents you want to delete.
    */
   batchDeleteDocument(params: Kendra.Types.BatchDeleteDocumentRequest, callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
-   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument API. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
+   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument API. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to your Amazon Web Services CloudWatch log. You can also use the BatchGetDocumentStatus API to monitor the progress of deleting your documents. Deleting documents from an index using BatchDeleteDocument could take up to an hour or more, depending on the number of documents you want to delete.
    */
   batchDeleteDocument(callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class Kendra extends Service {
    */
   batchGetDocumentStatus(callback?: (err: AWSError, data: Kendra.Types.BatchGetDocumentStatusResponse) => void): Request<Kendra.Types.BatchGetDocumentStatusResponse, AWSError>;
   /**
-   * Adds one or more documents to an index. The BatchPutDocument API enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this API to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log. For an example of ingesting inline documents using Python and Java SDKs, see Adding files directly to an index.
+   * Adds one or more documents to an index. The BatchPutDocument API enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this API to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log. You can also use the BatchGetDocumentStatus API to monitor the progress of indexing your documents. For an example of ingesting inline documents using Python and Java SDKs, see Adding files directly to an index.
    */
   batchPutDocument(params: Kendra.Types.BatchPutDocumentRequest, callback?: (err: AWSError, data: Kendra.Types.BatchPutDocumentResponse) => void): Request<Kendra.Types.BatchPutDocumentResponse, AWSError>;
   /**
-   * Adds one or more documents to an index. The BatchPutDocument API enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this API to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log. For an example of ingesting inline documents using Python and Java SDKs, see Adding files directly to an index.
+   * Adds one or more documents to an index. The BatchPutDocument API enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this API to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log. You can also use the BatchGetDocumentStatus API to monitor the progress of indexing your documents. For an example of ingesting inline documents using Python and Java SDKs, see Adding files directly to an index.
    */
   batchPutDocument(callback?: (err: AWSError, data: Kendra.Types.BatchPutDocumentResponse) => void): Request<Kendra.Types.BatchPutDocumentResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class Kendra extends Service {
    */
   createFeaturedResultsSet(callback?: (err: AWSError, data: Kendra.Types.CreateFeaturedResultsSetResponse) => void): Request<Kendra.Types.CreateFeaturedResultsSetResponse, AWSError>;
   /**
-   * Creates an Amazon Kendra index. Index creation is an asynchronous API. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument API or using one of the supported data sources. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
+   * Creates an Amazon Kendra index. Index creation is an asynchronous API. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active, you can index your documents using the BatchPutDocument API or using one of the supported data sources. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
    */
   createIndex(params: Kendra.Types.CreateIndexRequest, callback?: (err: AWSError, data: Kendra.Types.CreateIndexResponse) => void): Request<Kendra.Types.CreateIndexResponse, AWSError>;
   /**
-   * Creates an Amazon Kendra index. Index creation is an asynchronous API. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active you can index your documents using the BatchPutDocument API or using one of the supported data sources. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
+   * Creates an Amazon Kendra index. Index creation is an asynchronous API. To determine if index creation has completed, check the Status field returned from a call to DescribeIndex. The Status field is set to ACTIVE when the index is ready to use. Once the index is active, you can index your documents using the BatchPutDocument API or using one of the supported data sources. For an example of creating an index and data source using the Python SDK, see Getting started with Python SDK. For an example of creating an index and data source using the Java SDK, see Getting started with Java SDK.
    */
   createIndex(callback?: (err: AWSError, data: Kendra.Types.CreateIndexResponse) => void): Request<Kendra.Types.CreateIndexResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class Kendra extends Service {
    */
   deleteAccessControlConfiguration(callback?: (err: AWSError, data: Kendra.Types.DeleteAccessControlConfigurationResponse) => void): Request<Kendra.Types.DeleteAccessControlConfigurationResponse, AWSError>;
   /**
-   * Deletes an Amazon Kendra data source connector. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources.
+   * Deletes an Amazon Kendra data source connector. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources. Deleting an entire data source or re-syncing your index after deleting specific documents from a data source could take up to an hour or more, depending on the number of documents you want to delete.
    */
   deleteDataSource(params: Kendra.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Amazon Kendra data source connector. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources.
+   * Deletes an Amazon Kendra data source connector. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the Status field returned by a call to the DescribeDataSource API is set to DELETING. For more information, see Deleting Data Sources. Deleting an entire data source or re-syncing your index after deleting specific documents from a data source could take up to an hour or more, depending on the number of documents you want to delete.
    */
   deleteDataSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -428,19 +428,19 @@ declare class Kendra extends Service {
    */
   query(callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
-   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce no relevant passages using the Retrieve API, you can alternatively use the Query API. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   You can also include certain fields in the response that might provide useful additional information.
+   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce zero passages using the Retrieve API, you can alternatively use the Query API and its types of responses. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   You can also include certain fields in the response that might provide useful additional information. The Retrieve API shares the number of query capacity units that you set for your index. For more information on what's included in a single capacity unit and the default base capacity for an index, see Adjusting capacity.
    */
   retrieve(params: Kendra.Types.RetrieveRequest, callback?: (err: AWSError, data: Kendra.Types.RetrieveResult) => void): Request<Kendra.Types.RetrieveResult, AWSError>;
   /**
-   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce no relevant passages using the Retrieve API, you can alternatively use the Query API. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   You can also include certain fields in the response that might provide useful additional information.
+   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce zero passages using the Retrieve API, you can alternatively use the Query API and its types of responses. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   You can also include certain fields in the response that might provide useful additional information. The Retrieve API shares the number of query capacity units that you set for your index. For more information on what's included in a single capacity unit and the default base capacity for an index, see Adjusting capacity.
    */
   retrieve(callback?: (err: AWSError, data: Kendra.Types.RetrieveResult) => void): Request<Kendra.Types.RetrieveResult, AWSError>;
   /**
-   * Starts a synchronization job for a data source connector. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception.
+   * Starts a synchronization job for a data source connector. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception. Re-syncing your data source with your index after modifying, adding, or deleting documents from your data source respository could take up to an hour or more, depending on the number of documents to sync.
    */
   startDataSourceSyncJob(params: Kendra.Types.StartDataSourceSyncJobRequest, callback?: (err: AWSError, data: Kendra.Types.StartDataSourceSyncJobResponse) => void): Request<Kendra.Types.StartDataSourceSyncJobResponse, AWSError>;
   /**
-   * Starts a synchronization job for a data source connector. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception.
+   * Starts a synchronization job for a data source connector. If a synchronization job is already in progress, Amazon Kendra returns a ResourceInUseException exception. Re-syncing your data source with your index after modifying, adding, or deleting documents from your data source respository could take up to an hour or more, depending on the number of documents to sync.
    */
   startDataSourceSyncJob(callback?: (err: AWSError, data: Kendra.Types.StartDataSourceSyncJobResponse) => void): Request<Kendra.Types.StartDataSourceSyncJobResponse, AWSError>;
   /**
@@ -684,43 +684,43 @@ declare namespace Kendra {
   }
   export interface AttributeFilter {
     /**
-     * Performs a logical AND operation on all supplied filters.
+     * Performs a logical AND operation on all filters that you specify.
      */
     AndAllFilters?: AttributeFilterList;
     /**
-     * Performs a logical OR operation on all supplied filters.
+     * Performs a logical OR operation on all filters that you specify.
      */
     OrAllFilters?: AttributeFilterList;
     /**
-     * Performs a logical NOT operation on all supplied filters.
+     * Performs a logical NOT operation on all filters that you specify.
      */
     NotFilter?: AttributeFilter;
     /**
-     * Performs an equals operation on two document attributes or metadata fields.
+     * Performs an equals operation on document attributes/fields and their values.
      */
     EqualsTo?: DocumentAttribute;
     /**
-     * Returns true when a document contains all of the specified document attributes or metadata fields. This filter is only applicable to StringListValue metadata.
+     * Returns true when a document contains all of the specified document attributes/fields. This filter is only applicable to StringListValue.
      */
     ContainsAll?: DocumentAttribute;
     /**
-     * Returns true when a document contains any of the specified document attributes or metadata fields. This filter is only applicable to StringListValue metadata.
+     * Returns true when a document contains any of the specified document attributes/fields. This filter is only applicable to StringListValue.
      */
     ContainsAny?: DocumentAttribute;
     /**
-     * Performs a greater than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
+     * Performs a greater than operation on document attributes/fields and their values. Use with the document attribute type Date or Long.
      */
     GreaterThan?: DocumentAttribute;
     /**
-     * Performs a greater or equals than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
+     * Performs a greater or equals than operation on document attributes/fields and their values. Use with the document attribute type Date or Long.
      */
     GreaterThanOrEquals?: DocumentAttribute;
     /**
-     * Performs a less than operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
+     * Performs a less than operation on document attributes/fields and their values. Use with the document attribute type Date or Long.
      */
     LessThan?: DocumentAttribute;
     /**
-     * Performs a less than or equals operation on two document attributes or metadata fields. Use with a document attribute of type Date or Long.
+     * Performs a less than or equals operation on document attributes/fields and their values. Use with the document attribute type Date or Long.
      */
     LessThanOrEquals?: DocumentAttribute;
   }
@@ -903,7 +903,7 @@ declare namespace Kendra {
   }
   export interface BatchPutDocumentResponse {
     /**
-     * A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. If there was an error adding a document to an index the error is reported in your Amazon Web Services CloudWatch log. For more information, see Monitoring Amazon Kendra with Amazon CloudWatch Logs 
+     * A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. If there was an error adding a document to an index the error is reported in your Amazon Web Services CloudWatch log. For more information, see Monitoring Amazon Kendra with Amazon CloudWatch logs.
      */
     FailedDocuments?: BatchPutDocumentResponseFailedDocuments;
   }
@@ -1786,15 +1786,15 @@ declare namespace Kendra {
   export type DataSourceSyncJobStatus = "FAILED"|"SUCCEEDED"|"SYNCING"|"INCOMPLETE"|"STOPPING"|"ABORTED"|"SYNCING_INDEXING"|string;
   export interface DataSourceToIndexFieldMapping {
     /**
-     * The name of the column or attribute in the data source.
+     * The name of the field in the data source. You must first create the index field using the UpdateIndex API.
      */
     DataSourceFieldName: DataSourceFieldName;
     /**
-     * The type of data stored in the column or attribute.
+     * The format for date fields in the data source. If the field specified in DataSourceFieldName is a date field, you must specify the date format. If the field is not a date field, an exception is thrown.
      */
     DateFieldFormat?: DataSourceDateFieldFormat;
     /**
-     * The name of the field in the index.
+     * The name of the index field to map to the data source field. The index field type must match the data source field type.
      */
     IndexFieldName: IndexFieldName;
   }
@@ -2603,15 +2603,15 @@ declare namespace Kendra {
   }
   export interface DocumentAttributeValueCountPair {
     /**
-     * The value of the attribute. For example, "HR".
+     * The value of the attribute/field. For example, "HR".
      */
     DocumentAttributeValue?: DocumentAttributeValue;
     /**
-     * The number of documents in the response that have the attribute value for the key.
+     * The number of documents in the response that have the attribute/field value for the key.
      */
     Count?: Integer;
     /**
-     * Contains the results of a document attribute that is a nested facet. A FacetResult contains the counts for each facet nested within a facet. For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. The counts for documents that belong to "Frontend" and "Backend" within "Engineering" are returned for a query.  
+     * Contains the results of a document attribute/field that is a nested facet. A FacetResult contains the counts for each facet nested within a facet. For example, the document attribute or facet "Department" includes a value called "Engineering". In addition, the document attribute or facet "SubDepartment" includes the values "Frontend" and "Backend" for documents assigned to "Engineering". You can display nested facets in the search results so that documents can be searched not only by department but also by a sub department within a department. The counts for documents that belong to "Frontend" and "Backend" within "Engineering" are returned for a query.  
      */
     FacetResults?: FacetResultList;
   }
@@ -4365,6 +4365,10 @@ declare namespace Kendra {
      * An array of document fields/attributes assigned to a document in the search results. For example, the document author (_author) or the source URI (_source_uri) of the document.
      */
     DocumentAttributes?: DocumentAttributeList;
+    /**
+     * The confidence score bucket for a retrieved passage result. The confidence bucket provides a relative ranking that indicates how confident Amazon Kendra is that the response is relevant to the query.
+     */
+    ScoreAttributes?: ScoreAttributes;
   }
   export type RetrieveResultItemList = RetrieveResultItem[];
   export type RoleArn = string;

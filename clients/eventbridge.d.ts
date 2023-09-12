@@ -557,6 +557,7 @@ declare namespace EventBridge {
   export type Arn = string;
   export type AssignPublicIp = "ENABLED"|"DISABLED"|string;
   export type AuthHeaderParameters = string;
+  export type AuthHeaderParametersSensitive = string;
   export interface AwsVpcConfiguration {
     /**
      * Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.
@@ -728,7 +729,7 @@ declare namespace EventBridge {
     /**
      * The value associated with the key.
      */
-    Value?: String;
+    Value?: SensitiveString;
     /**
      * Specified whether the value is secret.
      */
@@ -744,7 +745,7 @@ declare namespace EventBridge {
     /**
      * The value associated with the key.
      */
-    Value?: HeaderValue;
+    Value?: HeaderValueSensitive;
     /**
      * Specified whether the value is a secret.
      */
@@ -799,7 +800,7 @@ declare namespace EventBridge {
     /**
      * The value associated with the key for the query string parameter.
      */
-    Value?: QueryStringValue;
+    Value?: QueryStringValueSensitive;
     /**
      * Specifies whether the value is secret.
      */
@@ -901,7 +902,7 @@ declare namespace EventBridge {
     /**
      * The value for the API key to use for authorization.
      */
-    ApiKeyValue: AuthHeaderParameters;
+    ApiKeyValue: AuthHeaderParametersSensitive;
   }
   export interface CreateConnectionAuthRequestParameters {
     /**
@@ -929,7 +930,7 @@ declare namespace EventBridge {
     /**
      * The password associated with the user name to use for Basic authorization.
      */
-    Password: AuthHeaderParameters;
+    Password: AuthHeaderParametersSensitive;
   }
   export interface CreateConnectionOAuthClientRequestParameters {
     /**
@@ -939,7 +940,7 @@ declare namespace EventBridge {
     /**
      * The client secret associated with the client ID to use for OAuth authorization for the connection.
      */
-    ClientSecret: AuthHeaderParameters;
+    ClientSecret: AuthHeaderParametersSensitive;
   }
   export interface CreateConnectionOAuthRequestParameters {
     /**
@@ -1818,6 +1819,7 @@ declare namespace EventBridge {
   export type HeaderKey = string;
   export type HeaderParametersMap = {[key: string]: HeaderValue};
   export type HeaderValue = string;
+  export type HeaderValueSensitive = string;
   export type HealthCheck = string;
   export type HomeRegion = string;
   export interface HttpParameters {
@@ -2507,6 +2509,7 @@ declare namespace EventBridge {
   export type QueryStringKey = string;
   export type QueryStringParametersMap = {[key: string]: QueryStringValue};
   export type QueryStringValue = string;
+  export type QueryStringValueSensitive = string;
   export interface RedshiftDataParameters {
     /**
      * The name or ARN of the secret that enables access to the database. Required when authenticating using Amazon Web Services Secrets Manager.
@@ -2766,6 +2769,7 @@ declare namespace EventBridge {
     Route: Route;
   }
   export type SecretsManagerSecretArn = string;
+  export type SensitiveString = string;
   export type Sql = string;
   export type Sqls = Sql[];
   export interface SqsParameters {
@@ -3041,7 +3045,7 @@ declare namespace EventBridge {
     /**
      * The value associated with teh API key to use for authorization.
      */
-    ApiKeyValue?: AuthHeaderParameters;
+    ApiKeyValue?: AuthHeaderParametersSensitive;
   }
   export interface UpdateConnectionAuthRequestParameters {
     /**
@@ -3069,7 +3073,7 @@ declare namespace EventBridge {
     /**
      * The password associated with the user name to use for Basic authorization.
      */
-    Password?: AuthHeaderParameters;
+    Password?: AuthHeaderParametersSensitive;
   }
   export interface UpdateConnectionOAuthClientRequestParameters {
     /**
@@ -3079,7 +3083,7 @@ declare namespace EventBridge {
     /**
      * The client secret assciated with the client ID to use for OAuth authorization.
      */
-    ClientSecret?: AuthHeaderParameters;
+    ClientSecret?: AuthHeaderParametersSensitive;
   }
   export interface UpdateConnectionOAuthRequestParameters {
     /**

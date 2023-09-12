@@ -2997,6 +2997,14 @@ declare class EC2 extends Service {
    */
   disableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
   /**
+   * Disables block public access for AMIs at the account level in the specified Amazon Web Services Region. This removes the block public access restriction from your account. With the restriction removed, you can publicly share your AMIs in the specified Amazon Web Services Region. The API can take up to 10 minutes to configure this setting. During this time, if you run GetImageBlockPublicAccessState, the response will be block-new-sharing. When the API has completed the configuration, the response will be unblocked. For more information, see Block public access to your AMIs in the Amazon EC2 User Guide.
+   */
+  disableImageBlockPublicAccess(params: EC2.Types.DisableImageBlockPublicAccessRequest, callback?: (err: AWSError, data: EC2.Types.DisableImageBlockPublicAccessResult) => void): Request<EC2.Types.DisableImageBlockPublicAccessResult, AWSError>;
+  /**
+   * Disables block public access for AMIs at the account level in the specified Amazon Web Services Region. This removes the block public access restriction from your account. With the restriction removed, you can publicly share your AMIs in the specified Amazon Web Services Region. The API can take up to 10 minutes to configure this setting. During this time, if you run GetImageBlockPublicAccessState, the response will be block-new-sharing. When the API has completed the configuration, the response will be unblocked. For more information, see Block public access to your AMIs in the Amazon EC2 User Guide.
+   */
+  disableImageBlockPublicAccess(callback?: (err: AWSError, data: EC2.Types.DisableImageBlockPublicAccessResult) => void): Request<EC2.Types.DisableImageBlockPublicAccessResult, AWSError>;
+  /**
    * Cancels the deprecation of the specified AMI. For more information, see Deprecate an AMI in the Amazon EC2 User Guide.
    */
   disableImageDeprecation(params: EC2.Types.DisableImageDeprecationRequest, callback?: (err: AWSError, data: EC2.Types.DisableImageDeprecationResult) => void): Request<EC2.Types.DisableImageDeprecationResult, AWSError>;
@@ -3205,6 +3213,14 @@ declare class EC2 extends Service {
    */
   enableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.EnableFastSnapshotRestoresResult) => void): Request<EC2.Types.EnableFastSnapshotRestoresResult, AWSError>;
   /**
+   * Enables block public access for AMIs at the account level in the specified Amazon Web Services Region. This prevents the public sharing of your AMIs. However, if you already have public AMIs, they will remain publicly available. The API can take up to 10 minutes to configure this setting. During this time, if you run GetImageBlockPublicAccessState, the response will be unblocked. When the API has completed the configuration, the response will be block-new-sharing. For more information, see Block public access to your AMIs in the Amazon EC2 User Guide.
+   */
+  enableImageBlockPublicAccess(params: EC2.Types.EnableImageBlockPublicAccessRequest, callback?: (err: AWSError, data: EC2.Types.EnableImageBlockPublicAccessResult) => void): Request<EC2.Types.EnableImageBlockPublicAccessResult, AWSError>;
+  /**
+   * Enables block public access for AMIs at the account level in the specified Amazon Web Services Region. This prevents the public sharing of your AMIs. However, if you already have public AMIs, they will remain publicly available. The API can take up to 10 minutes to configure this setting. During this time, if you run GetImageBlockPublicAccessState, the response will be unblocked. When the API has completed the configuration, the response will be block-new-sharing. For more information, see Block public access to your AMIs in the Amazon EC2 User Guide.
+   */
+  enableImageBlockPublicAccess(callback?: (err: AWSError, data: EC2.Types.EnableImageBlockPublicAccessResult) => void): Request<EC2.Types.EnableImageBlockPublicAccessResult, AWSError>;
+  /**
    * Enables deprecation of the specified AMI at the specified date and time. For more information, see Deprecate an AMI in the Amazon EC2 User Guide.
    */
   enableImageDeprecation(params: EC2.Types.EnableImageDeprecationRequest, callback?: (err: AWSError, data: EC2.Types.EnableImageDeprecationResult) => void): Request<EC2.Types.EnableImageDeprecationResult, AWSError>;
@@ -3412,6 +3428,14 @@ declare class EC2 extends Service {
    * Preview a reservation purchase with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This is a preview of the PurchaseHostReservation action and does not result in the offering being purchased.
    */
   getHostReservationPurchasePreview(callback?: (err: AWSError, data: EC2.Types.GetHostReservationPurchasePreviewResult) => void): Request<EC2.Types.GetHostReservationPurchasePreviewResult, AWSError>;
+  /**
+   * Gets the current state of block public access for AMIs at the account level in the specified Amazon Web Services Region. For more information, see Block public access to your AMIs in the Amazon EC2 User Guide.
+   */
+  getImageBlockPublicAccessState(params: EC2.Types.GetImageBlockPublicAccessStateRequest, callback?: (err: AWSError, data: EC2.Types.GetImageBlockPublicAccessStateResult) => void): Request<EC2.Types.GetImageBlockPublicAccessStateResult, AWSError>;
+  /**
+   * Gets the current state of block public access for AMIs at the account level in the specified Amazon Web Services Region. For more information, see Block public access to your AMIs in the Amazon EC2 User Guide.
+   */
+  getImageBlockPublicAccessState(callback?: (err: AWSError, data: EC2.Types.GetImageBlockPublicAccessStateResult) => void): Request<EC2.Types.GetImageBlockPublicAccessStateResult, AWSError>;
   /**
    * Returns a list of instance types with the specified instance attributes. You can use the response to preview the instance types without launching instances. Note that the response does not consider capacity. When you specify multiple parameters, you get instance types that satisfy all of the specified parameters. If you specify multiple values for a parameter, you get instance types that satisfy any of the specified values. For more information, see Preview instance types with specified attributes, Attribute-based instance type selection for EC2 Fleet, Attribute-based instance type selection for Spot Fleet, and Spot placement score in the Amazon EC2 User Guide, and Creating an Auto Scaling group using attribute-based instance type selection in the Amazon EC2 Auto Scaling User Guide.
    */
@@ -18072,6 +18096,18 @@ declare namespace EC2 {
      */
     Unsuccessful?: DisableFastSnapshotRestoreErrorSet;
   }
+  export interface DisableImageBlockPublicAccessRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableImageBlockPublicAccessResult {
+    /**
+     * Returns unblocked if the request succeeds; otherwise, it returns an error.
+     */
+    ImageBlockPublicAccessState?: ImageBlockPublicAccessDisabledState;
+  }
   export interface DisableImageDeprecationRequest {
     /**
      * The ID of the AMI.
@@ -19128,6 +19164,22 @@ declare namespace EC2 {
      * Information about the snapshots for which fast snapshot restores could not be enabled.
      */
     Unsuccessful?: EnableFastSnapshotRestoreErrorSet;
+  }
+  export interface EnableImageBlockPublicAccessRequest {
+    /**
+     * Specify block-new-sharing to enable block public access for AMIs at the account level in the specified Region. This will block any attempt to publicly share your AMIs in the specified Region.
+     */
+    ImageBlockPublicAccessState: ImageBlockPublicAccessEnabledState;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableImageBlockPublicAccessResult {
+    /**
+     * Returns block-new-sharing if the request succeeds; otherwise, it returns an error.
+     */
+    ImageBlockPublicAccessState?: ImageBlockPublicAccessEnabledState;
   }
   export interface EnableImageDeprecationRequest {
     /**
@@ -20824,6 +20876,18 @@ declare namespace EC2 {
      */
     TotalUpfrontPrice?: String;
   }
+  export interface GetImageBlockPublicAccessStateRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetImageBlockPublicAccessStateResult {
+    /**
+     * The current state of block public access for AMIs at the account level in the specified Amazon Web Services Region. Possible values:    block-new-sharing - Any attempt to publicly share your AMIs in the specified Region is blocked.    unblocked - Your AMIs in the specified Region can be publicly shared.  
+     */
+    ImageBlockPublicAccessState?: String;
+  }
   export interface GetInstanceTypesFromInstanceRequirementsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -22345,6 +22409,8 @@ declare namespace EC2 {
     ImdsSupport?: AttributeValue;
   }
   export type ImageAttributeName = "description"|"kernel"|"ramdisk"|"launchPermission"|"productCodes"|"blockDeviceMapping"|"sriovNetSupport"|"bootMode"|"tpmSupport"|"uefiData"|"lastLaunchedTime"|"imdsSupport"|string;
+  export type ImageBlockPublicAccessDisabledState = "unblocked"|string;
+  export type ImageBlockPublicAccessEnabledState = "block-new-sharing"|string;
   export interface ImageDiskContainer {
     /**
      * The description of the disk image.
