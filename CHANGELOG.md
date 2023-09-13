@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1456.0-->
+<!--LATEST=2.1457.0-->
 <!--ENTRYINSERT-->
+
+## 2.1457.0
+* feature: Drs: Updated existing APIs and added new ones to support using AWS Elastic Disaster Recovery post-launch actions. Added support for new regions.
+* feature: Firehose: DocumentIdOptions has been added for the Amazon OpenSearch destination.
+* feature: GuardDuty: Add `managementType` field to ListCoverage API response.
+* feature: InternetMonitor: This release updates the Amazon CloudWatch Internet Monitor API domain name.
+* feature: XRay: Add StartTime field in GetTraceSummaries API response for each TraceSummary.
 
 ## 2.1456.0
 * feature: EC2: This release adds support for restricting public sharing of AMIs through AMI Block Public Access

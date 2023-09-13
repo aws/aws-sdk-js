@@ -1931,6 +1931,10 @@ declare namespace XRay {
      */
     Id?: TraceId;
     /**
+     * The start time of a trace, based on the earliest trace segment start time.
+     */
+    StartTime?: Timestamp;
+    /**
      * The length of time in seconds between the start time of the root segment and the end time of the last segment that completed.
      */
     Duration?: NullableDouble;
