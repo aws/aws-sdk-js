@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1457.0-->
+<!--LATEST=2.1458.0-->
 <!--ENTRYINSERT-->
+
+## 2.1458.0
+* feature: AppStream: This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.
+* feature: EntityResolution: Changed "ResolutionTechniques" and "MappedInputFields" in workflow and schema mapping operations to be required fields.
+* feature: LookoutEquipment: This release adds APIs for the new scheduled retraining feature.
 
 ## 2.1457.0
 * feature: Drs: Updated existing APIs and added new ones to support using AWS Elastic Disaster Recovery post-launch actions. Added support for new regions.

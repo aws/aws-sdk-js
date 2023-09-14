@@ -84,27 +84,27 @@ declare class EntityResolution extends Service {
    */
   listMatchingJobs(callback?: (err: AWSError, data: EntityResolution.Types.ListMatchingJobsOutput) => void): Request<EntityResolution.Types.ListMatchingJobsOutput, AWSError>;
   /**
-   * Returns a list of all the MatchingWorkflows that have been created for an AWS account.
+   * Returns a list of all the MatchingWorkflows that have been created for an Amazon Web Services account.
    */
   listMatchingWorkflows(params: EntityResolution.Types.ListMatchingWorkflowsInput, callback?: (err: AWSError, data: EntityResolution.Types.ListMatchingWorkflowsOutput) => void): Request<EntityResolution.Types.ListMatchingWorkflowsOutput, AWSError>;
   /**
-   * Returns a list of all the MatchingWorkflows that have been created for an AWS account.
+   * Returns a list of all the MatchingWorkflows that have been created for an Amazon Web Services account.
    */
   listMatchingWorkflows(callback?: (err: AWSError, data: EntityResolution.Types.ListMatchingWorkflowsOutput) => void): Request<EntityResolution.Types.ListMatchingWorkflowsOutput, AWSError>;
   /**
-   * Returns a list of all the SchemaMappings that have been created for an AWS account.
+   * Returns a list of all the SchemaMappings that have been created for an Amazon Web Services account.
    */
   listSchemaMappings(params: EntityResolution.Types.ListSchemaMappingsInput, callback?: (err: AWSError, data: EntityResolution.Types.ListSchemaMappingsOutput) => void): Request<EntityResolution.Types.ListSchemaMappingsOutput, AWSError>;
   /**
-   * Returns a list of all the SchemaMappings that have been created for an AWS account.
+   * Returns a list of all the SchemaMappings that have been created for an Amazon Web Services account.
    */
   listSchemaMappings(callback?: (err: AWSError, data: EntityResolution.Types.ListSchemaMappingsOutput) => void): Request<EntityResolution.Types.ListSchemaMappingsOutput, AWSError>;
   /**
-   * Displays the tags associated with an AWS Entity Resolution resource. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged.
+   * Displays the tags associated with an Entity Resolution resource. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged.
    */
   listTagsForResource(params: EntityResolution.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: EntityResolution.Types.ListTagsForResourceOutput) => void): Request<EntityResolution.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Displays the tags associated with an AWS Entity Resolution resource. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged.
+   * Displays the tags associated with an Entity Resolution resource. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged.
    */
   listTagsForResource(callback?: (err: AWSError, data: EntityResolution.Types.ListTagsForResourceOutput) => void): Request<EntityResolution.Types.ListTagsForResourceOutput, AWSError>;
   /**
@@ -116,19 +116,19 @@ declare class EntityResolution extends Service {
    */
   startMatchingJob(callback?: (err: AWSError, data: EntityResolution.Types.StartMatchingJobOutput) => void): Request<EntityResolution.Types.StartMatchingJobOutput, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified AWS Entity Resolution resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
+   * Assigns one or more tags (key-value pairs) to the specified Entity Resolution resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In Entity Resolution, SchemaMapping and MatchingWorkflow can be tagged. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
    */
   tagResource(params: EntityResolution.Types.TagResourceInput, callback?: (err: AWSError, data: EntityResolution.Types.TagResourceOutput) => void): Request<EntityResolution.Types.TagResourceOutput, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified AWS Entity Resolution resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
+   * Assigns one or more tags (key-value pairs) to the specified Entity Resolution resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In Entity Resolution, SchemaMapping and MatchingWorkflow can be tagged. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.
    */
   tagResource(callback?: (err: AWSError, data: EntityResolution.Types.TagResourceOutput) => void): Request<EntityResolution.Types.TagResourceOutput, AWSError>;
   /**
-   * Removes one or more tags from the specified AWS Entity Resolution resource. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged.
+   * Removes one or more tags from the specified Entity Resolution resource. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged.
    */
   untagResource(params: EntityResolution.Types.UntagResourceInput, callback?: (err: AWSError, data: EntityResolution.Types.UntagResourceOutput) => void): Request<EntityResolution.Types.UntagResourceOutput, AWSError>;
   /**
-   * Removes one or more tags from the specified AWS Entity Resolution resource. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged.
+   * Removes one or more tags from the specified Entity Resolution resource. In Entity Resolution, SchemaMapping, and MatchingWorkflow can be tagged.
    */
   untagResource(callback?: (err: AWSError, data: EntityResolution.Types.UntagResourceOutput) => void): Request<EntityResolution.Types.UntagResourceOutput, AWSError>;
   /**
@@ -162,11 +162,11 @@ declare namespace EntityResolution {
      */
     outputSourceConfig: OutputSourceConfig;
     /**
-     * An object which defines the resolutionType and the ruleBasedProperties 
+     * An object which defines the resolutionType and the ruleBasedProperties.
      */
     resolutionTechniques: ResolutionTechniques;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
      */
     roleArn: String;
     /**
@@ -196,11 +196,11 @@ declare namespace EntityResolution {
      */
     outputSourceConfig: OutputSourceConfig;
     /**
-     * An object which defines the resolutionType and the ruleBasedProperties 
+     * An object which defines the resolutionType and the ruleBasedProperties.
      */
     resolutionTechniques: ResolutionTechniques;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
      */
     roleArn: String;
     /**
@@ -220,7 +220,7 @@ declare namespace EntityResolution {
     /**
      * A list of MappedInputFields. Each MappedInputField corresponds to a column the source data table, and contains column name plus additional information that Entity Resolution uses for matching.
      */
-    mappedInputFields?: SchemaInputAttributes;
+    mappedInputFields: SchemaInputAttributes;
     /**
      * The name of the schema. There cannot be multiple SchemaMappings with the same name.
      */
@@ -329,7 +329,7 @@ declare namespace EntityResolution {
      */
     startTime: Timestamp;
     /**
-     * The current status of the job. Either running, succeeded, queued, or failed.
+     * The current status of the job.
      */
     status: JobStatus;
   }
@@ -361,11 +361,11 @@ declare namespace EntityResolution {
      */
     outputSourceConfig: OutputSourceConfig;
     /**
-     * An object which defines the resolutionType and the ruleBasedProperties 
+     * An object which defines the resolutionType and the ruleBasedProperties.
      */
     resolutionTechniques: ResolutionTechniques;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to access resources on your behalf.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to access resources on your behalf.
      */
     roleArn: String;
     /**
@@ -457,7 +457,7 @@ declare namespace EntityResolution {
      */
     matchIDs?: Integer;
     /**
-     * The total number of records that did not get processed,
+     * The total number of records that did not get processed.
      */
     recordsNotProcessed?: Integer;
     /**
@@ -480,7 +480,7 @@ declare namespace EntityResolution {
      */
     startTime: Timestamp;
     /**
-     * The current status of the job. Either running, succeeded, queued, or failed.
+     * The current status of the job.
      */
     status: JobStatus;
   }
@@ -611,19 +611,18 @@ declare namespace EntityResolution {
     /**
      * The S3 path to which Entity Resolution will write the output table.
      */
-    outputS3Path: OutputSourceOutputS3PathString;
+    outputS3Path: S3Path;
   }
   export type OutputSourceConfig = OutputSource[];
   export type OutputSourceOutputList = OutputAttribute[];
-  export type OutputSourceOutputS3PathString = string;
   export type RecordAttributeMap = {[key: string]: RecordAttributeMapValueString};
   export type RecordAttributeMapKeyString = string;
   export type RecordAttributeMapValueString = string;
   export interface ResolutionTechniques {
     /**
-     * There are two types of matching, RULE_MATCHING and ML_MATCHING 
+     * The type of matching. There are two types of matching: RULE_MATCHING and ML_MATCHING.
      */
-    resolutionType?: ResolutionType;
+    resolutionType: ResolutionType;
     /**
      * An object which defines the list of matching rules to run and has a field Rules, which is a list of rule objects.
      */
@@ -642,7 +641,7 @@ declare namespace EntityResolution {
   }
   export interface RuleBasedProperties {
     /**
-     * You can either choose ONE_TO_ONE or MANY_TO_MANY as the AttributeMatchingModel. When choosing MANY_TO_MANY, the system can match attribute across the sub-types of an attribute type. For example, if the value of the Email field of Profile A and the value of BusinessEmail field of Profile B matches, the two profiles are matched on the Email type. When choosing ONE_TO_ONE the system can only match if the sub-types are exact matches. For example, only when the value of the Email field of Profile A and the value of the Email field of Profile B matches, the two profiles are matched on the Email type.
+     * The comparison type. You can either choose ONE_TO_ONE or MANY_TO_MANY as the AttributeMatchingModel. When choosing MANY_TO_MANY, the system can match attributes across the sub-types of an attribute type. For example, if the value of the Email field of Profile A and the value of BusinessEmail field of Profile B matches, the two profiles are matched on the Email type. When choosing ONE_TO_ONE ,the system can only match if the sub-types are exact matches. For example, only when the value of the Email field of Profile A and the value of the Email field of Profile B matches, the two profiles are matched on the Email type.
      */
     attributeMatchingModel: AttributeMatchingModel;
     /**
@@ -653,6 +652,7 @@ declare namespace EntityResolution {
   export type RuleBasedPropertiesRulesList = Rule[];
   export type RuleMatchingKeysList = AttributeName[];
   export type RuleRuleNameString = string;
+  export type S3Path = string;
   export type SchemaAttributeType = "NAME"|"NAME_FIRST"|"NAME_MIDDLE"|"NAME_LAST"|"ADDRESS"|"ADDRESS_STREET1"|"ADDRESS_STREET2"|"ADDRESS_STREET3"|"ADDRESS_CITY"|"ADDRESS_STATE"|"ADDRESS_COUNTRY"|"ADDRESS_POSTALCODE"|"PHONE"|"PHONE_NUMBER"|"PHONE_COUNTRYCODE"|"EMAIL_ADDRESS"|"UNIQUE_ID"|"DATE"|"STRING"|string;
   export interface SchemaInputAttribute {
     /**
@@ -664,7 +664,7 @@ declare namespace EntityResolution {
      */
     groupName?: AttributeName;
     /**
-     * A key that allows grouping of multiple input attributes into a unified matching group. For example, let's consider a scenario where the source table contains various addresses, such as business_address and shipping_address. By assigning the MatchKey Address' to both attributes, Entity Resolution will match records across these fields to create a consolidated matching group. If no MatchKey is specified for a column, it won't be utilized for matching purposes but will still be included in the output table.
+     * A key that allows grouping of multiple input attributes into a unified matching group. For example, let's consider a scenario where the source table contains various addresses, such as business_address and shipping_address. By assigning the MatchKey Address to both attributes, Entity Resolution will match records across these fields to create a consolidated matching group. If no MatchKey is specified for a column, it won't be utilized for matching purposes but will still be included in the output table.
      */
     matchKey?: AttributeName;
     /**
@@ -753,11 +753,11 @@ declare namespace EntityResolution {
      */
     outputSourceConfig: OutputSourceConfig;
     /**
-     * An object which defines the resolutionType and the ruleBasedProperties 
+     * An object which defines the resolutionType and the ruleBasedProperties.
      */
     resolutionTechniques: ResolutionTechniques;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
      */
     roleArn: String;
     /**
@@ -787,7 +787,7 @@ declare namespace EntityResolution {
      */
     resolutionTechniques: ResolutionTechniques;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+     * The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
      */
     roleArn: String;
     /**

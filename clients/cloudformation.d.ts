@@ -1091,7 +1091,7 @@ declare namespace CloudFormation {
      */
     EnableTerminationProtection?: EnableTerminationProtection;
     /**
-     * This deletion policy deletes newly created resources, but retains existing resources, when a stack operation is rolled back. This ensures new, empty, and unused resources are deleted, while critical resources and their data are retained. RetainExceptOnCreate can be specified for any resource that supports the  DeletionPolicy attribute.
+     * When set to true, newly created resources are deleted when the operation rolls back. This includes newly created resources marked with a deletion policy of Retain. Default: false 
      */
     RetainExceptOnCreate?: RetainExceptOnCreate;
   }
@@ -1730,7 +1730,7 @@ declare namespace CloudFormation {
   }
   export interface DescribeStacksInput {
     /**
-     *  If you don't pass a parameter to StackName, the API returns a response that describes all resources in the account. This requires ListStacks and DescribeStacks permissions. The IAM policy below can be added to IAM policies when you want to limit resource-level permissions and avoid returning a response when no parameter is sent in the request: { "Version": "2012-10-17", "Statement": [{ "Effect": "Deny", "Action": "cloudformation:DescribeStacks", "NotResource": "arn:aws:cloudformation:*:*:stack/**" }] }  The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:   Running stacks: You can specify either the stack's name or its unique stack ID.   Deleted stacks: You must specify the unique stack ID.   Default: There is no default value.
+     *  If you don't pass a parameter to StackName, the API returns a response that describes all resources in the account, which can impact performance. This requires ListStacks and DescribeStacks permissions. Consider using the ListStacks API if you're not passing a parameter to StackName. The IAM policy below can be added to IAM policies when you want to limit resource-level permissions and avoid returning a response when no parameter is sent in the request: { "Version": "2012-10-17", "Statement": [{ "Effect": "Deny", "Action": "cloudformation:DescribeStacks", "NotResource": "arn:aws:cloudformation:*:*:stack/**" }] }  The name or the unique stack ID that's associated with the stack, which aren't always interchangeable:   Running stacks: You can specify either the stack's name or its unique stack ID.   Deleted stacks: You must specify the unique stack ID.   Default: There is no default value.
      */
     StackName?: StackName;
     /**
@@ -2011,7 +2011,7 @@ declare namespace CloudFormation {
      */
     DisableRollback?: DisableRollback;
     /**
-     * This deletion policy deletes newly created resources, but retains existing resources, when a stack operation is rolled back. This ensures new, empty, and unused resources are deleted, while critical resources and their data are retained. RetainExceptOnCreate can be specified for any resource that supports the  DeletionPolicy attribute.
+     * When set to true, newly created resources are deleted when the operation rolls back. This includes newly created resources marked with a deletion policy of Retain. Default: false 
      */
     RetainExceptOnCreate?: RetainExceptOnCreate;
   }
@@ -3052,7 +3052,7 @@ declare namespace CloudFormation {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * This deletion policy deletes newly created resources, but retains existing resources, when a stack operation is rolled back. This ensures new, empty, and unused resources are deleted, while critical resources and their data are retained. RetainExceptOnCreate can be specified for any resource that supports the  DeletionPolicy attribute.
+     * When set to true, newly created resources are deleted when the operation rolls back. This includes newly created resources marked with a deletion policy of Retain. Default: false 
      */
     RetainExceptOnCreate?: RetainExceptOnCreate;
   }
@@ -3246,7 +3246,7 @@ declare namespace CloudFormation {
      */
     DriftInformation?: StackDriftInformation;
     /**
-     * This deletion policy deletes newly created resources, but retains existing resources, when a stack operation is rolled back. This ensures new, empty, and unused resources are deleted, while critical resources and their data are retained. RetainExceptOnCreate can be specified for any resource that supports the  DeletionPolicy attribute.
+     * When set to true, newly created resources are deleted when the operation rolls back. This includes newly created resources marked with a deletion policy of Retain. Default: false 
      */
     RetainExceptOnCreate?: RetainExceptOnCreate;
   }
@@ -4400,7 +4400,7 @@ declare namespace CloudFormation {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * This deletion policy deletes newly created resources, but retains existing resources, when a stack operation is rolled back. This ensures new, empty, and unused resources are deleted, while critical resources and their data are retained. RetainExceptOnCreate can be specified for any resource that supports the  DeletionPolicy attribute.
+     * When set to true, newly created resources are deleted when the operation rolls back. This includes newly created resources marked with a deletion policy of Retain. Default: false 
      */
     RetainExceptOnCreate?: RetainExceptOnCreate;
   }

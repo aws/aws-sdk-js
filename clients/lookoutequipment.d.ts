@@ -44,13 +44,21 @@ declare class LookoutEquipment extends Service {
    */
   createLabelGroup(callback?: (err: AWSError, data: LookoutEquipment.Types.CreateLabelGroupResponse) => void): Request<LookoutEquipment.Types.CreateLabelGroupResponse, AWSError>;
   /**
-   * Creates an ML model for data inference.  A machine-learning (ML) model is a mathematical model that finds patterns in your data. In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and detects abnormal behavior that could be potential equipment failure (or maintenance events). The models are made by analyzing normal data and abnormalities in machine behavior that have already occurred. Your model is trained using a portion of the data from your dataset and uses that data to learn patterns of normal behavior and abnormal patterns that lead to equipment failure. Another portion of the data is used to evaluate the model's accuracy. 
+   * Creates a machine learning model for data inference.  A machine-learning (ML) model is a mathematical model that finds patterns in your data. In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and detects abnormal behavior that could be potential equipment failure (or maintenance events). The models are made by analyzing normal data and abnormalities in machine behavior that have already occurred. Your model is trained using a portion of the data from your dataset and uses that data to learn patterns of normal behavior and abnormal patterns that lead to equipment failure. Another portion of the data is used to evaluate the model's accuracy. 
    */
   createModel(params: LookoutEquipment.Types.CreateModelRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.CreateModelResponse) => void): Request<LookoutEquipment.Types.CreateModelResponse, AWSError>;
   /**
-   * Creates an ML model for data inference.  A machine-learning (ML) model is a mathematical model that finds patterns in your data. In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and detects abnormal behavior that could be potential equipment failure (or maintenance events). The models are made by analyzing normal data and abnormalities in machine behavior that have already occurred. Your model is trained using a portion of the data from your dataset and uses that data to learn patterns of normal behavior and abnormal patterns that lead to equipment failure. Another portion of the data is used to evaluate the model's accuracy. 
+   * Creates a machine learning model for data inference.  A machine-learning (ML) model is a mathematical model that finds patterns in your data. In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and detects abnormal behavior that could be potential equipment failure (or maintenance events). The models are made by analyzing normal data and abnormalities in machine behavior that have already occurred. Your model is trained using a portion of the data from your dataset and uses that data to learn patterns of normal behavior and abnormal patterns that lead to equipment failure. Another portion of the data is used to evaluate the model's accuracy. 
    */
   createModel(callback?: (err: AWSError, data: LookoutEquipment.Types.CreateModelResponse) => void): Request<LookoutEquipment.Types.CreateModelResponse, AWSError>;
+  /**
+   * Creates a retraining scheduler on the specified model. 
+   */
+  createRetrainingScheduler(params: LookoutEquipment.Types.CreateRetrainingSchedulerRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.CreateRetrainingSchedulerResponse) => void): Request<LookoutEquipment.Types.CreateRetrainingSchedulerResponse, AWSError>;
+  /**
+   * Creates a retraining scheduler on the specified model. 
+   */
+  createRetrainingScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.CreateRetrainingSchedulerResponse) => void): Request<LookoutEquipment.Types.CreateRetrainingSchedulerResponse, AWSError>;
   /**
    *  Deletes a dataset and associated artifacts. The operation will check to see if any inference scheduler or data ingestion job is currently using the dataset, and if there isn't, the dataset, its metadata, and any associated data stored in S3 will be deleted. This does not affect any models that used this dataset for training and evaluation, but does prevent it from being used in the future. 
    */
@@ -60,11 +68,11 @@ declare class LookoutEquipment extends Service {
    */
   deleteDataset(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an inference scheduler that has been set up. Already processed output results are not affected. 
+   * Deletes an inference scheduler that has been set up. Prior inference results will not be deleted.
    */
   deleteInferenceScheduler(params: LookoutEquipment.Types.DeleteInferenceSchedulerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an inference scheduler that has been set up. Already processed output results are not affected. 
+   * Deletes an inference scheduler that has been set up. Prior inference results will not be deleted.
    */
   deleteInferenceScheduler(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -84,11 +92,11 @@ declare class LookoutEquipment extends Service {
    */
   deleteLabelGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an ML model currently available for Amazon Lookout for Equipment. This will prevent it from being used with an inference scheduler, even one that is already set up. 
+   * Deletes a machine learning model currently available for Amazon Lookout for Equipment. This will prevent it from being used with an inference scheduler, even one that is already set up. 
    */
   deleteModel(params: LookoutEquipment.Types.DeleteModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an ML model currently available for Amazon Lookout for Equipment. This will prevent it from being used with an inference scheduler, even one that is already set up. 
+   * Deletes a machine learning model currently available for Amazon Lookout for Equipment. This will prevent it from being used with an inference scheduler, even one that is already set up. 
    */
   deleteModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -99,6 +107,14 @@ declare class LookoutEquipment extends Service {
    * Deletes the resource policy attached to the resource.
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a retraining scheduler from a model. The retraining scheduler must be in the STOPPED status. 
+   */
+  deleteRetrainingScheduler(params: LookoutEquipment.Types.DeleteRetrainingSchedulerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a retraining scheduler from a model. The retraining scheduler must be in the STOPPED status. 
+   */
+  deleteRetrainingScheduler(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Provides information on a specific data ingestion job such as creation time, dataset ARN, and status.
    */
@@ -140,11 +156,11 @@ declare class LookoutEquipment extends Service {
    */
   describeLabelGroup(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeLabelGroupResponse) => void): Request<LookoutEquipment.Types.DescribeLabelGroupResponse, AWSError>;
   /**
-   * Provides a JSON containing the overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
+   * Provides a JSON containing the overall information about a specific machine learning model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
    */
   describeModel(params: LookoutEquipment.Types.DescribeModelRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeModelResponse) => void): Request<LookoutEquipment.Types.DescribeModelResponse, AWSError>;
   /**
-   * Provides a JSON containing the overall information about a specific ML model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
+   * Provides a JSON containing the overall information about a specific machine learning model, including model name and ARN, dataset, training and evaluation information, status, and so on. 
    */
   describeModel(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeModelResponse) => void): Request<LookoutEquipment.Types.DescribeModelResponse, AWSError>;
   /**
@@ -163,6 +179,14 @@ declare class LookoutEquipment extends Service {
    * Provides the details of a resource policy attached to a resource.
    */
   describeResourcePolicy(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeResourcePolicyResponse) => void): Request<LookoutEquipment.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
+   * Provides a description of the retraining scheduler, including information such as the model name and retraining parameters. 
+   */
+  describeRetrainingScheduler(params: LookoutEquipment.Types.DescribeRetrainingSchedulerRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeRetrainingSchedulerResponse) => void): Request<LookoutEquipment.Types.DescribeRetrainingSchedulerResponse, AWSError>;
+  /**
+   * Provides a description of the retraining scheduler, including information such as the model name and retraining parameters. 
+   */
+  describeRetrainingScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.DescribeRetrainingSchedulerResponse) => void): Request<LookoutEquipment.Types.DescribeRetrainingSchedulerResponse, AWSError>;
   /**
    * Imports a dataset.
    */
@@ -252,6 +276,14 @@ declare class LookoutEquipment extends Service {
    */
   listModels(callback?: (err: AWSError, data: LookoutEquipment.Types.ListModelsResponse) => void): Request<LookoutEquipment.Types.ListModelsResponse, AWSError>;
   /**
+   * Lists all retraining schedulers in your account, filtering by model name prefix and status. 
+   */
+  listRetrainingSchedulers(params: LookoutEquipment.Types.ListRetrainingSchedulersRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListRetrainingSchedulersResponse) => void): Request<LookoutEquipment.Types.ListRetrainingSchedulersResponse, AWSError>;
+  /**
+   * Lists all retraining schedulers in your account, filtering by model name prefix and status. 
+   */
+  listRetrainingSchedulers(callback?: (err: AWSError, data: LookoutEquipment.Types.ListRetrainingSchedulersResponse) => void): Request<LookoutEquipment.Types.ListRetrainingSchedulersResponse, AWSError>;
+  /**
    *  Lists statistics about the data collected for each of the sensors that have been successfully ingested in the particular dataset. Can also be used to retreive Sensor Statistics for a previous ingestion job. 
    */
   listSensorStatistics(params: LookoutEquipment.Types.ListSensorStatisticsRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.ListSensorStatisticsResponse) => void): Request<LookoutEquipment.Types.ListSensorStatisticsResponse, AWSError>;
@@ -292,6 +324,14 @@ declare class LookoutEquipment extends Service {
    */
   startInferenceScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.StartInferenceSchedulerResponse) => void): Request<LookoutEquipment.Types.StartInferenceSchedulerResponse, AWSError>;
   /**
+   * Starts a retraining scheduler. 
+   */
+  startRetrainingScheduler(params: LookoutEquipment.Types.StartRetrainingSchedulerRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.StartRetrainingSchedulerResponse) => void): Request<LookoutEquipment.Types.StartRetrainingSchedulerResponse, AWSError>;
+  /**
+   * Starts a retraining scheduler. 
+   */
+  startRetrainingScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.StartRetrainingSchedulerResponse) => void): Request<LookoutEquipment.Types.StartRetrainingSchedulerResponse, AWSError>;
+  /**
    * Stops an inference scheduler. 
    */
   stopInferenceScheduler(params: LookoutEquipment.Types.StopInferenceSchedulerRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.StopInferenceSchedulerResponse) => void): Request<LookoutEquipment.Types.StopInferenceSchedulerResponse, AWSError>;
@@ -299,6 +339,14 @@ declare class LookoutEquipment extends Service {
    * Stops an inference scheduler. 
    */
   stopInferenceScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.StopInferenceSchedulerResponse) => void): Request<LookoutEquipment.Types.StopInferenceSchedulerResponse, AWSError>;
+  /**
+   * Stops a retraining scheduler. 
+   */
+  stopRetrainingScheduler(params: LookoutEquipment.Types.StopRetrainingSchedulerRequest, callback?: (err: AWSError, data: LookoutEquipment.Types.StopRetrainingSchedulerResponse) => void): Request<LookoutEquipment.Types.StopRetrainingSchedulerResponse, AWSError>;
+  /**
+   * Stops a retraining scheduler. 
+   */
+  stopRetrainingScheduler(callback?: (err: AWSError, data: LookoutEquipment.Types.StopRetrainingSchedulerResponse) => void): Request<LookoutEquipment.Types.StopRetrainingSchedulerResponse, AWSError>;
   /**
    * Associates a given tag to a resource in your account. A tag is a key-value pair which can be added to an Amazon Lookout for Equipment resource as metadata. Tags can be used for organizing your resources as well as helping you to search and filter by tag. Multiple tags can be added to a resource, either when you create it, or later. Up to 50 tags can be associated with each resource. 
    */
@@ -339,9 +387,27 @@ declare class LookoutEquipment extends Service {
    *  Updates the label group. 
    */
   updateLabelGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a model in the account.
+   */
+  updateModel(params: LookoutEquipment.Types.UpdateModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a model in the account.
+   */
+  updateModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a retraining scheduler. 
+   */
+  updateRetrainingScheduler(params: LookoutEquipment.Types.UpdateRetrainingSchedulerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a retraining scheduler. 
+   */
+  updateRetrainingScheduler(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace LookoutEquipment {
   export type AmazonResourceArn = string;
+  export type AutoPromotionResult = "MODEL_PROMOTED"|"MODEL_NOT_PROMOTED"|"RETRAINING_INTERNAL_ERROR"|"RETRAINING_CUSTOMER_ERROR"|"RETRAINING_CANCELLED"|string;
+  export type AutoPromotionResultReason = string;
   export type Boolean = boolean;
   export type BoundedLengthString = string;
   export interface CategoricalValues {
@@ -405,7 +471,7 @@ declare namespace LookoutEquipment {
   }
   export interface CreateInferenceSchedulerRequest {
     /**
-     * The name of the previously trained ML model being used to create the inference scheduler. 
+     * The name of the previously trained machine learning model being used to create the inference scheduler. 
      */
     ModelName: ModelName;
     /**
@@ -529,19 +595,19 @@ declare namespace LookoutEquipment {
   }
   export interface CreateModelRequest {
     /**
-     * The name for the ML model to be created.
+     * The name for the machine learning model to be created.
      */
     ModelName: ModelName;
     /**
-     * The name of the dataset for the ML model being created. 
+     * The name of the dataset for the machine learning model being created. 
      */
     DatasetName: DatasetIdentifier;
     /**
-     * The data schema for the ML model being created. 
+     * The data schema for the machine learning model being created. 
      */
     DatasetSchema?: DatasetSchema;
     /**
-     * The input configuration for the labels being used for the ML model that's being created. 
+     * The input configuration for the labels being used for the machine learning model that's being created. 
      */
     LabelsInputConfiguration?: LabelsInputConfiguration;
     /**
@@ -549,23 +615,23 @@ declare namespace LookoutEquipment {
      */
     ClientToken: IdempotenceToken;
     /**
-     * Indicates the time reference in the dataset that should be used to begin the subset of training data for the ML model. 
+     * Indicates the time reference in the dataset that should be used to begin the subset of training data for the machine learning model. 
      */
     TrainingDataStartTime?: Timestamp;
     /**
-     * Indicates the time reference in the dataset that should be used to end the subset of training data for the ML model. 
+     * Indicates the time reference in the dataset that should be used to end the subset of training data for the machine learning model. 
      */
     TrainingDataEndTime?: Timestamp;
     /**
-     * Indicates the time reference in the dataset that should be used to begin the subset of evaluation data for the ML model. 
+     * Indicates the time reference in the dataset that should be used to begin the subset of evaluation data for the machine learning model. 
      */
     EvaluationDataStartTime?: Timestamp;
     /**
-     *  Indicates the time reference in the dataset that should be used to end the subset of evaluation data for the ML model. 
+     *  Indicates the time reference in the dataset that should be used to end the subset of evaluation data for the machine learning model. 
      */
     EvaluationDataEndTime?: Timestamp;
     /**
-     *  The Amazon Resource Name (ARN) of a role with permission to access the data source being used to create the ML model. 
+     *  The Amazon Resource Name (ARN) of a role with permission to access the data source being used to create the machine learning model. 
      */
     RoleArn?: IamRoleArn;
     /**
@@ -577,7 +643,7 @@ declare namespace LookoutEquipment {
      */
     ServerSideKmsKeyId?: NameOrArn;
     /**
-     *  Any tags associated with the ML model being created. 
+     *  Any tags associated with the machine learning model being created. 
      */
     Tags?: TagList;
     /**
@@ -594,6 +660,46 @@ declare namespace LookoutEquipment {
      * Indicates the status of the CreateModel operation. 
      */
     Status?: ModelStatus;
+  }
+  export interface CreateRetrainingSchedulerRequest {
+    /**
+     * The name of the model to add the retraining scheduler to. 
+     */
+    ModelName: ModelName;
+    /**
+     * The start date for the retraining scheduler. Lookout for Equipment truncates the time you provide to the nearest UTC day.
+     */
+    RetrainingStartDate?: Timestamp;
+    /**
+     * This parameter uses the ISO 8601 standard to set the frequency at which you want retraining to occur in terms of Years, Months, and/or Days (note: other parameters like Time are not currently supported). The minimum value is 30 days (P30D) and the maximum value is 1 year (P1Y). For example, the following values are valid:   P3M15D – Every 3 months and 15 days   P2M – Every 2 months   P150D – Every 150 days  
+     */
+    RetrainingFrequency: RetrainingFrequency;
+    /**
+     * The number of past days of data that will be used for retraining.
+     */
+    LookbackWindow: LookbackWindow;
+    /**
+     * Indicates how the service will use new models. In MANAGED mode, new models will automatically be used for inference if they have better performance than the current model. In MANUAL mode, the new models will not be used until they are manually activated.
+     */
+    PromoteMode?: ModelPromoteMode;
+    /**
+     * A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. 
+     */
+    ClientToken: IdempotenceToken;
+  }
+  export interface CreateRetrainingSchedulerResponse {
+    /**
+     * The name of the model that you added the retraining scheduler to. 
+     */
+    ModelName?: ModelName;
+    /**
+     * The ARN of the model that you added the retraining scheduler to. 
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The status of the retraining scheduler. 
+     */
+    Status?: RetrainingSchedulerStatus;
   }
   export type DataDelayOffsetInMinutes = number;
   export type DataIngestionJobSummaries = DataIngestionJobSummary[];
@@ -654,7 +760,7 @@ declare namespace LookoutEquipment {
   export type DatasetName = string;
   export interface DatasetSchema {
     /**
-     *  
+     * The data schema used within the given dataset.
      */
     InlineDataSchema?: InlineDataSchema;
   }
@@ -708,7 +814,7 @@ declare namespace LookoutEquipment {
   }
   export interface DeleteModelRequest {
     /**
-     * The name of the ML model to be deleted. 
+     * The name of the machine learning model to be deleted. 
      */
     ModelName: ModelName;
   }
@@ -717,6 +823,12 @@ declare namespace LookoutEquipment {
      * The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.
      */
     ResourceArn: ResourceArn;
+  }
+  export interface DeleteRetrainingSchedulerRequest {
+    /**
+     * The name of the model whose retraining scheduler you want to delete. 
+     */
+    ModelName: ModelName;
   }
   export interface DescribeDataIngestionJobRequest {
     /**
@@ -851,11 +963,11 @@ declare namespace LookoutEquipment {
   }
   export interface DescribeInferenceSchedulerResponse {
     /**
-     * The Amazon Resource Name (ARN) of the ML model of the inference scheduler being described. 
+     * The Amazon Resource Name (ARN) of the machine learning model of the inference scheduler being described. 
      */
     ModelArn?: ModelArn;
     /**
-     * The name of the ML model of the inference scheduler being described. 
+     * The name of the machine learning model of the inference scheduler being described. 
      */
     ModelName?: ModelName;
     /**
@@ -989,25 +1101,25 @@ declare namespace LookoutEquipment {
   }
   export interface DescribeModelRequest {
     /**
-     * The name of the ML model to be described. 
+     * The name of the machine learning model to be described. 
      */
     ModelName: ModelName;
   }
   export interface DescribeModelResponse {
     /**
-     * The name of the ML model being described. 
+     * The name of the machine learning model being described. 
      */
     ModelName?: ModelName;
     /**
-     * The Amazon Resource Name (ARN) of the ML model being described. 
+     * The Amazon Resource Name (ARN) of the machine learning model being described. 
      */
     ModelArn?: ModelArn;
     /**
-     * The name of the dataset being used by the ML being described. 
+     * The name of the dataset being used by the machine learning being described. 
      */
     DatasetName?: DatasetName;
     /**
-     * The Amazon Resouce Name (ARN) of the dataset used to create the ML model being described. 
+     * The Amazon Resouce Name (ARN) of the dataset used to create the machine learning model being described. 
      */
     DatasetArn?: DatasetArn;
     /**
@@ -1019,23 +1131,23 @@ declare namespace LookoutEquipment {
      */
     LabelsInputConfiguration?: LabelsInputConfiguration;
     /**
-     *  Indicates the time reference in the dataset that was used to begin the subset of training data for the ML model. 
+     *  Indicates the time reference in the dataset that was used to begin the subset of training data for the machine learning model. 
      */
     TrainingDataStartTime?: Timestamp;
     /**
-     *  Indicates the time reference in the dataset that was used to end the subset of training data for the ML model. 
+     *  Indicates the time reference in the dataset that was used to end the subset of training data for the machine learning model. 
      */
     TrainingDataEndTime?: Timestamp;
     /**
-     *  Indicates the time reference in the dataset that was used to begin the subset of evaluation data for the ML model. 
+     *  Indicates the time reference in the dataset that was used to begin the subset of evaluation data for the machine learning model. 
      */
     EvaluationDataStartTime?: Timestamp;
     /**
-     *  Indicates the time reference in the dataset that was used to end the subset of evaluation data for the ML model. 
+     *  Indicates the time reference in the dataset that was used to end the subset of evaluation data for the machine learning model. 
      */
     EvaluationDataEndTime?: Timestamp;
     /**
-     *  The Amazon Resource Name (ARN) of a role with permission to access the data source for the ML model being described. 
+     *  The Amazon Resource Name (ARN) of a role with permission to access the data source for the machine learning model being described. 
      */
     RoleArn?: IamRoleArn;
     /**
@@ -1047,15 +1159,15 @@ declare namespace LookoutEquipment {
      */
     Status?: ModelStatus;
     /**
-     * Indicates the time at which the training of the ML model began. 
+     * Indicates the time at which the training of the machine learning model began. 
      */
     TrainingExecutionStartTime?: Timestamp;
     /**
-     * Indicates the time at which the training of the ML model was completed. 
+     * Indicates the time at which the training of the machine learning model was completed. 
      */
     TrainingExecutionEndTime?: Timestamp;
     /**
-     * If the training of the ML model failed, this indicates the reason for that failure. 
+     * If the training of the machine learning model failed, this indicates the reason for that failure. 
      */
     FailedReason?: BoundedLengthString;
     /**
@@ -1063,11 +1175,11 @@ declare namespace LookoutEquipment {
      */
     ModelMetrics?: ModelMetrics;
     /**
-     * Indicates the last time the ML model was updated. The type of update is not specified. 
+     * Indicates the last time the machine learning model was updated. The type of update is not specified. 
      */
     LastUpdatedTime?: Timestamp;
     /**
-     * Indicates the time and date at which the ML model was created. 
+     * Indicates the time and date at which the machine learning model was created. 
      */
     CreatedAt?: Timestamp;
     /**
@@ -1114,6 +1226,46 @@ declare namespace LookoutEquipment {
      * The date and time when the previous active model version was activated.
      */
     PreviousModelVersionActivatedAt?: Timestamp;
+    /**
+     * If the model version was retrained, this field shows a summary of the performance of the prior model on the new training range. You can use the information in this JSON-formatted object to compare the new model version and the prior model version.
+     */
+    PriorModelMetrics?: ModelMetrics;
+    /**
+     * If the model version was generated by retraining and the training failed, this indicates the reason for that failure. 
+     */
+    LatestScheduledRetrainingFailedReason?: BoundedLengthString;
+    /**
+     * Indicates the status of the most recent scheduled retraining run. 
+     */
+    LatestScheduledRetrainingStatus?: ModelVersionStatus;
+    /**
+     * Indicates the most recent model version that was generated by retraining. 
+     */
+    LatestScheduledRetrainingModelVersion?: ModelVersion;
+    /**
+     * Indicates the start time of the most recent scheduled retraining run. 
+     */
+    LatestScheduledRetrainingStartTime?: Timestamp;
+    /**
+     * Indicates the number of days of data used in the most recent scheduled retraining run. 
+     */
+    LatestScheduledRetrainingAvailableDataInDays?: Integer;
+    /**
+     * Indicates the date and time that the next scheduled retraining run will start on. Lookout for Equipment truncates the time you provide to the nearest UTC day.
+     */
+    NextScheduledRetrainingStartDate?: Timestamp;
+    /**
+     * Indicates the start time of the inference data that has been accumulated. 
+     */
+    AccumulatedInferenceDataStartTime?: Timestamp;
+    /**
+     * Indicates the end time of the inference data that has been accumulated. 
+     */
+    AccumulatedInferenceDataEndTime?: Timestamp;
+    /**
+     * Indicates the status of the retraining scheduler. 
+     */
+    RetrainingSchedulerStatus?: RetrainingSchedulerStatus;
   }
   export interface DescribeModelVersionRequest {
     /**
@@ -1232,6 +1384,22 @@ declare namespace LookoutEquipment {
      * The size in bytes of the imported data. This field appears if the model version was imported.
      */
     ImportedDataSizeInBytes?: DataSizeInBytes;
+    /**
+     * If the model version was retrained, this field shows a summary of the performance of the prior model on the new training range. You can use the information in this JSON-formatted object to compare the new model version and the prior model version.
+     */
+    PriorModelMetrics?: ModelMetrics;
+    /**
+     * Indicates the number of days of data used in the most recent scheduled retraining run. 
+     */
+    RetrainingAvailableDataInDays?: Integer;
+    /**
+     * Indicates whether the model version was promoted to be the active version after retraining or if there was an error with or cancellation of the retraining. 
+     */
+    AutoPromotionResult?: AutoPromotionResult;
+    /**
+     * Indicates the reason for the AutoPromotionResult. For example, a model might not be promoted if its performance was worse than the active version, if there was an error during training, or if the retraining scheduler was using MANUAL promote mode. The model will be promoted in MANAGED promote mode if the performance is better than the previous model. 
+     */
+    AutoPromotionResultReason?: AutoPromotionResultReason;
   }
   export interface DescribeResourcePolicyRequest {
     /**
@@ -1256,6 +1424,50 @@ declare namespace LookoutEquipment {
      * The time when the resource policy was last modified.
      */
     LastModifiedTime?: Timestamp;
+  }
+  export interface DescribeRetrainingSchedulerRequest {
+    /**
+     * The name of the model that the retraining scheduler is attached to. 
+     */
+    ModelName: ModelName;
+  }
+  export interface DescribeRetrainingSchedulerResponse {
+    /**
+     * The name of the model that the retraining scheduler is attached to. 
+     */
+    ModelName?: ModelName;
+    /**
+     * The ARN of the model that the retraining scheduler is attached to. 
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The start date for the retraining scheduler. Lookout for Equipment truncates the time you provide to the nearest UTC day.
+     */
+    RetrainingStartDate?: Timestamp;
+    /**
+     * The frequency at which the model retraining is set. This follows the ISO 8601 guidelines.
+     */
+    RetrainingFrequency?: RetrainingFrequency;
+    /**
+     * The number of past days of data used for retraining.
+     */
+    LookbackWindow?: LookbackWindow;
+    /**
+     * The status of the retraining scheduler. 
+     */
+    Status?: RetrainingSchedulerStatus;
+    /**
+     * Indicates how the service uses new models. In MANAGED mode, new models are used for inference if they have better performance than the current model. In MANUAL mode, the new models are not used until they are manually activated.
+     */
+    PromoteMode?: ModelPromoteMode;
+    /**
+     * Indicates the time and date at which the retraining scheduler was created. 
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * Indicates the time and date at which the retraining scheduler was updated. 
+     */
+    UpdatedAt?: Timestamp;
   }
   export interface DuplicateTimestamps {
     /**
@@ -1341,6 +1553,10 @@ declare namespace LookoutEquipment {
      * The tags associated with the machine learning model to be created. 
      */
     Tags?: TagList;
+    /**
+     * Indicates how to import the accumulated inference data when a model version is imported. The possible values are as follows:   NO_IMPORT – Don't import the data.   ADD_WHEN_EMPTY – Only import the data from the source model if there is no existing data in the target model.   OVERWRITE – Import the data from the source model and overwrite the existing data in the target model.  
+     */
+    InferenceDataImportStrategy?: InferenceDataImportStrategy;
   }
   export interface ImportModelVersionResponse {
     /**
@@ -1364,6 +1580,7 @@ declare namespace LookoutEquipment {
      */
     Status?: ModelVersionStatus;
   }
+  export type InferenceDataImportStrategy = "NO_IMPORT"|"ADD_WHEN_EMPTY"|"OVERWRITE"|string;
   export type InferenceEventSummaries = InferenceEventSummary[];
   export interface InferenceEventSummary {
     /**
@@ -1395,11 +1612,11 @@ declare namespace LookoutEquipment {
   export type InferenceExecutionSummaries = InferenceExecutionSummary[];
   export interface InferenceExecutionSummary {
     /**
-     * The name of the ML model being used for the inference execution. 
+     * The name of the machine learning model being used for the inference execution. 
      */
     ModelName?: ModelName;
     /**
-     * The Amazon Resource Name (ARN) of the ML model used for the inference execution. 
+     * The Amazon Resource Name (ARN) of the machine learning model used for the inference execution. 
      */
     ModelArn?: ModelArn;
     /**
@@ -1431,7 +1648,7 @@ declare namespace LookoutEquipment {
      */
     DataOutputConfiguration?: InferenceOutputConfiguration;
     /**
-     *  
+     * The S3 object that the inference execution results were uploaded to.
      */
     CustomerResultObject?: S3Object;
     /**
@@ -1442,6 +1659,14 @@ declare namespace LookoutEquipment {
      *  Specifies the reason for failure when an inference execution has failed. 
      */
     FailedReason?: BoundedLengthString;
+    /**
+     * The model version used for the inference execution.
+     */
+    ModelVersion?: ModelVersion;
+    /**
+     * The Amazon Resource Number (ARN) of the model version used for the inference execution.
+     */
+    ModelVersionArn?: ModelVersionArn;
   }
   export interface InferenceInputConfiguration {
     /**
@@ -1504,11 +1729,11 @@ declare namespace LookoutEquipment {
   export type InferenceSchedulerSummaries = InferenceSchedulerSummary[];
   export interface InferenceSchedulerSummary {
     /**
-     * The name of the ML model used for the inference scheduler. 
+     * The name of the machine learning model used for the inference scheduler. 
      */
     ModelName?: ModelName;
     /**
-     *  The Amazon Resource Name (ARN) of the ML model used by the inference scheduler. 
+     *  The Amazon Resource Name (ARN) of the machine learning model used by the inference scheduler. 
      */
     ModelArn?: ModelArn;
     /**
@@ -1827,7 +2052,7 @@ declare namespace LookoutEquipment {
      */
     InferenceSchedulerNameBeginsWith?: InferenceSchedulerIdentifier;
     /**
-     * The name of the ML model used by the inference scheduler to be listed. 
+     * The name of the machine learning model used by the inference scheduler to be listed. 
      */
     ModelName?: ModelName;
     /**
@@ -1959,29 +2184,29 @@ declare namespace LookoutEquipment {
   }
   export interface ListModelsRequest {
     /**
-     *  An opaque pagination token indicating where to continue the listing of ML models. 
+     *  An opaque pagination token indicating where to continue the listing of machine learning models. 
      */
     NextToken?: NextToken;
     /**
-     *  Specifies the maximum number of ML models to list. 
+     *  Specifies the maximum number of machine learning models to list. 
      */
     MaxResults?: MaxResults;
     /**
-     * The status of the ML model. 
+     * The status of the machine learning model. 
      */
     Status?: ModelStatus;
     /**
-     * The beginning of the name of the ML models being listed. 
+     * The beginning of the name of the machine learning models being listed. 
      */
     ModelNameBeginsWith?: ModelName;
     /**
-     * The beginning of the name of the dataset of the ML models to be listed. 
+     * The beginning of the name of the dataset of the machine learning models to be listed. 
      */
     DatasetNameBeginsWith?: DatasetName;
   }
   export interface ListModelsResponse {
     /**
-     *  An opaque pagination token indicating where to continue the listing of ML models. 
+     *  An opaque pagination token indicating where to continue the listing of machine learning models. 
      */
     NextToken?: NextToken;
     /**
@@ -1990,6 +2215,34 @@ declare namespace LookoutEquipment {
     ModelSummaries?: ModelSummaries;
   }
   export type ListOfDiscardedFiles = S3Object[];
+  export interface ListRetrainingSchedulersRequest {
+    /**
+     * Specify this field to only list retraining schedulers whose machine learning models begin with the value you specify. 
+     */
+    ModelNameBeginsWith?: ModelName;
+    /**
+     * Specify this field to only list retraining schedulers whose status matches the value you specify. 
+     */
+    Status?: RetrainingSchedulerStatus;
+    /**
+     * If the number of results exceeds the maximum, a pagination token is returned. Use the token in the request to show the next page of retraining schedulers.
+     */
+    NextToken?: NextToken;
+    /**
+     * Specifies the maximum number of retraining schedulers to list. 
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListRetrainingSchedulersResponse {
+    /**
+     * Provides information on the specified retraining scheduler, including the model name, model ARN, status, and start date. 
+     */
+    RetrainingSchedulerSummaries?: RetrainingSchedulerSummaries;
+    /**
+     * If the number of results exceeds the maximum, this pagination token is returned. Use this token in the request to show the next page of retraining schedulers.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListSensorStatisticsRequest {
     /**
      *  The name of the dataset associated with the list of Sensor Statistics. 
@@ -2030,6 +2283,7 @@ declare namespace LookoutEquipment {
      */
     Tags?: TagList;
   }
+  export type LookbackWindow = string;
   export type MaxResults = number;
   export interface MissingCompleteSensorData {
     /**
@@ -2050,19 +2304,20 @@ declare namespace LookoutEquipment {
   export type ModelArn = string;
   export type ModelMetrics = string;
   export type ModelName = string;
+  export type ModelPromoteMode = "MANAGED"|"MANUAL"|string;
   export type ModelStatus = "IN_PROGRESS"|"SUCCESS"|"FAILED"|"IMPORT_IN_PROGRESS"|string;
   export type ModelSummaries = ModelSummary[];
   export interface ModelSummary {
     /**
-     * The name of the ML model. 
+     * The name of the machine learning model. 
      */
     ModelName?: ModelName;
     /**
-     *  The Amazon Resource Name (ARN) of the ML model. 
+     *  The Amazon Resource Name (ARN) of the machine learning model. 
      */
     ModelArn?: ModelArn;
     /**
-     * The name of the dataset being used for the ML model. 
+     * The name of the dataset being used for the machine learning model. 
      */
     DatasetName?: DatasetName;
     /**
@@ -2070,7 +2325,7 @@ declare namespace LookoutEquipment {
      */
     DatasetArn?: DatasetArn;
     /**
-     * Indicates the status of the ML model. 
+     * Indicates the status of the machine learning model. 
      */
     Status?: ModelStatus;
     /**
@@ -2085,6 +2340,26 @@ declare namespace LookoutEquipment {
      * The Amazon Resource Name (ARN) of the model version that is set as active. The active model version is the model version that the inference scheduler uses to run an inference execution.
      */
     ActiveModelVersionArn?: ModelVersionArn;
+    /**
+     * Indicates the status of the most recent scheduled retraining run. 
+     */
+    LatestScheduledRetrainingStatus?: ModelVersionStatus;
+    /**
+     * Indicates the most recent model version that was generated by retraining. 
+     */
+    LatestScheduledRetrainingModelVersion?: ModelVersion;
+    /**
+     * Indicates the start time of the most recent scheduled retraining run. 
+     */
+    LatestScheduledRetrainingStartTime?: Timestamp;
+    /**
+     * Indicates the date that the next scheduled retraining run will start on. Lookout for Equipment truncates the time you provide to the nearest UTC day.
+     */
+    NextScheduledRetrainingStartDate?: Timestamp;
+    /**
+     * Indicates the status of the retraining scheduler. 
+     */
+    RetrainingSchedulerStatus?: RetrainingSchedulerStatus;
   }
   export type ModelVersion = number;
   export type ModelVersionArn = string;
@@ -2172,6 +2447,35 @@ declare namespace LookoutEquipment {
     PolicyRevisionId?: PolicyRevisionId;
   }
   export type ResourceArn = string;
+  export type RetrainingFrequency = string;
+  export type RetrainingSchedulerStatus = "PENDING"|"RUNNING"|"STOPPING"|"STOPPED"|string;
+  export type RetrainingSchedulerSummaries = RetrainingSchedulerSummary[];
+  export interface RetrainingSchedulerSummary {
+    /**
+     * The name of the model that the retraining scheduler is attached to. 
+     */
+    ModelName?: ModelName;
+    /**
+     * The ARN of the model that the retraining scheduler is attached to. 
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The status of the retraining scheduler. 
+     */
+    Status?: RetrainingSchedulerStatus;
+    /**
+     * The start date for the retraining scheduler. Lookout for Equipment truncates the time you provide to the nearest UTC day.
+     */
+    RetrainingStartDate?: Timestamp;
+    /**
+     * The frequency at which the model retraining is set. This follows the ISO 8601 guidelines.
+     */
+    RetrainingFrequency?: RetrainingFrequency;
+    /**
+     * The number of past days of data used for retraining.
+     */
+    LookbackWindow?: LookbackWindow;
+  }
   export type S3Bucket = string;
   export type S3Key = string;
   export interface S3Object {
@@ -2283,11 +2587,11 @@ declare namespace LookoutEquipment {
   }
   export interface StartInferenceSchedulerResponse {
     /**
-     * The Amazon Resource Name (ARN) of the ML model being used by the inference scheduler. 
+     * The Amazon Resource Name (ARN) of the machine learning model being used by the inference scheduler. 
      */
     ModelArn?: ModelArn;
     /**
-     * The name of the ML model being used by the inference scheduler. 
+     * The name of the machine learning model being used by the inference scheduler. 
      */
     ModelName?: ModelName;
     /**
@@ -2303,6 +2607,26 @@ declare namespace LookoutEquipment {
      */
     Status?: InferenceSchedulerStatus;
   }
+  export interface StartRetrainingSchedulerRequest {
+    /**
+     * The name of the model whose retraining scheduler you want to start.
+     */
+    ModelName: ModelName;
+  }
+  export interface StartRetrainingSchedulerResponse {
+    /**
+     * The name of the model whose retraining scheduler is being started. 
+     */
+    ModelName?: ModelName;
+    /**
+     * The ARN of the model whose retraining scheduler is being started. 
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The status of the retraining scheduler. 
+     */
+    Status?: RetrainingSchedulerStatus;
+  }
   export type StatisticalIssueStatus = "POTENTIAL_ISSUE_DETECTED"|"NO_ISSUE_DETECTED"|string;
   export interface StopInferenceSchedulerRequest {
     /**
@@ -2312,11 +2636,11 @@ declare namespace LookoutEquipment {
   }
   export interface StopInferenceSchedulerResponse {
     /**
-     * The Amazon Resource Name (ARN) of the ML model used by the inference scheduler being stopped. 
+     * The Amazon Resource Name (ARN) of the machine learning model used by the inference scheduler being stopped. 
      */
     ModelArn?: ModelArn;
     /**
-     * The name of the ML model used by the inference scheduler being stopped. 
+     * The name of the machine learning model used by the inference scheduler being stopped. 
      */
     ModelName?: ModelName;
     /**
@@ -2331,6 +2655,26 @@ declare namespace LookoutEquipment {
      * Indicates the status of the inference scheduler. 
      */
     Status?: InferenceSchedulerStatus;
+  }
+  export interface StopRetrainingSchedulerRequest {
+    /**
+     * The name of the model whose retraining scheduler you want to stop.
+     */
+    ModelName: ModelName;
+  }
+  export interface StopRetrainingSchedulerResponse {
+    /**
+     * The name of the model whose retraining scheduler is being stopped. 
+     */
+    ModelName?: ModelName;
+    /**
+     * The ARN of the model whose retraining scheduler is being stopped. 
+     */
+    ModelArn?: ModelArn;
+    /**
+     * The status of the retraining scheduler. 
+     */
+    Status?: RetrainingSchedulerStatus;
   }
   export interface Tag {
     /**
@@ -2450,6 +2794,39 @@ declare namespace LookoutEquipment {
      *  Updates the code indicating the type of anomaly associated with the label.  Data in this field will be retained for service usage. Follow best practices for the security of your data.
      */
     FaultCodes?: FaultCodes;
+  }
+  export interface UpdateModelRequest {
+    /**
+     * The name of the model to update.
+     */
+    ModelName: ModelName;
+    LabelsInputConfiguration?: LabelsInputConfiguration;
+    /**
+     * The ARN of the model to update.
+     */
+    RoleArn?: IamRoleArn;
+  }
+  export interface UpdateRetrainingSchedulerRequest {
+    /**
+     * The name of the model whose retraining scheduler you want to update. 
+     */
+    ModelName: ModelName;
+    /**
+     * The start date for the retraining scheduler. Lookout for Equipment truncates the time you provide to the nearest UTC day.
+     */
+    RetrainingStartDate?: Timestamp;
+    /**
+     * This parameter uses the ISO 8601 standard to set the frequency at which you want retraining to occur in terms of Years, Months, and/or Days (note: other parameters like Time are not currently supported). The minimum value is 30 days (P30D) and the maximum value is 1 year (P1Y). For example, the following values are valid:   P3M15D – Every 3 months and 15 days   P2M – Every 2 months   P150D – Every 150 days  
+     */
+    RetrainingFrequency?: RetrainingFrequency;
+    /**
+     * The number of past days of data that will be used for retraining.
+     */
+    LookbackWindow?: LookbackWindow;
+    /**
+     * Indicates how the service will use new models. In MANAGED mode, new models will automatically be used for inference if they have better performance than the current model. In MANUAL mode, the new models will not be used until they are manually activated.
+     */
+    PromoteMode?: ModelPromoteMode;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
