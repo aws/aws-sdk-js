@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1458.0-->
+<!--LATEST=2.1459.0-->
 <!--ENTRYINSERT-->
+
+## 2.1459.0
+* feature: AppStream: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
+* feature: Connect: New rule type (OnMetricDataUpdate) has been added
+* feature: SageMaker: This release introduces Skip Model Validation for Model Packages
 
 ## 2.1458.0
 * feature: AppStream: This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.

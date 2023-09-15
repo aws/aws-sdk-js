@@ -300,11 +300,11 @@ declare class DataSync extends Service {
    */
   describeTaskExecution(callback?: (err: AWSError, data: DataSync.Types.DescribeTaskExecutionResponse) => void): Request<DataSync.Types.DescribeTaskExecutionResponse, AWSError>;
   /**
-   * Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system's resources. For more information, see Recommendations provided by DataSync Discovery. Once generated, you can view your recommendations by using the DescribeStorageSystemResources operation.  If your discovery job completes successfully, you don't need to use this operation. DataSync Discovery generates the recommendations for you automatically. 
+   * Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system's resources. For more information, see Recommendations provided by DataSync Discovery. Once generated, you can view your recommendations by using the DescribeStorageSystemResources operation.
    */
   generateRecommendations(params: DataSync.Types.GenerateRecommendationsRequest, callback?: (err: AWSError, data: DataSync.Types.GenerateRecommendationsResponse) => void): Request<DataSync.Types.GenerateRecommendationsResponse, AWSError>;
   /**
-   * Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system's resources. For more information, see Recommendations provided by DataSync Discovery. Once generated, you can view your recommendations by using the DescribeStorageSystemResources operation.  If your discovery job completes successfully, you don't need to use this operation. DataSync Discovery generates the recommendations for you automatically. 
+   * Creates recommendations about where to migrate your data to in Amazon Web Services. Recommendations are generated based on information that DataSync Discovery collects about your on-premises storage system's resources. For more information, see Recommendations provided by DataSync Discovery. Once generated, you can view your recommendations by using the DescribeStorageSystemResources operation.
    */
   generateRecommendations(callback?: (err: AWSError, data: DataSync.Types.GenerateRecommendationsResponse) => void): Request<DataSync.Types.GenerateRecommendationsResponse, AWSError>;
   /**
@@ -2618,7 +2618,7 @@ declare namespace DataSync {
      */
     Transferred?: ReportOverride;
     /**
-     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to verify at the end of your transfer. This only applies if you configure your task to verify data during and after the transfer (which DataSync does by default).
+     * Specifies the level of reporting for the files, objects, and directories that DataSync attempted to verify at the end of your transfer.
      */
     Verified?: ReportOverride;
     /**

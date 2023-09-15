@@ -3692,7 +3692,7 @@ declare namespace SageMaker {
   export type CapacitySizeValue = number;
   export interface CaptureContentTypeHeader {
     /**
-     * The list of all content type headers that SageMaker will treat as CSV and capture accordingly.
+     * The list of all content type headers that Amazon SageMaker will treat as CSV and capture accordingly.
      */
     CsvContentTypes?: CsvContentTypes;
     /**
@@ -4621,7 +4621,7 @@ declare namespace SageMaker {
     RoleArn: RoleArn;
     StoppingCondition?: MonitoringStoppingCondition;
     /**
-     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.
+     * (Optional) An array of key-value pairs. For more information, see  Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.
      */
     Tags?: TagList;
   }
@@ -5285,7 +5285,7 @@ declare namespace SageMaker {
     RoleArn: RoleArn;
     StoppingCondition?: MonitoringStoppingCondition;
     /**
-     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.
+     * (Optional) An array of key-value pairs. For more information, see  Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.
      */
     Tags?: TagList;
   }
@@ -5376,7 +5376,7 @@ declare namespace SageMaker {
     RoleArn: RoleArn;
     StoppingCondition?: MonitoringStoppingCondition;
     /**
-     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.
+     * (Optional) An array of key-value pairs. For more information, see  Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.
      */
     Tags?: TagList;
   }
@@ -5516,6 +5516,10 @@ declare namespace SageMaker {
      * An array of additional Inference Specification objects. Each additional Inference Specification specifies artifacts based on this model package that can be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts. 
      */
     AdditionalInferenceSpecifications?: AdditionalInferenceSpecifications;
+    /**
+     * Indicates if you want to skip model validation.
+     */
+    SkipModelValidation?: SkipModelValidation;
   }
   export interface CreateModelPackageOutput {
     /**
@@ -5552,7 +5556,7 @@ declare namespace SageMaker {
     RoleArn: RoleArn;
     StoppingCondition?: MonitoringStoppingCondition;
     /**
-     * (Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.
+     * (Optional) An array of key-value pairs. For more information, see  Using Cost Allocation Tags in the Amazon Web Services Billing and Cost Management User Guide.
      */
     Tags?: TagList;
   }
@@ -6246,7 +6250,7 @@ declare namespace SageMaker {
      */
     DestinationS3Uri: DestinationS3Uri;
     /**
-     * The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that SageMaker uses to encrypt the captured data at rest using Amazon S3 server-side encryption. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
+     * The Amazon Resource Name (ARN) of an Key Management Service key that SageMaker uses to encrypt the captured data at rest using Amazon S3 server-side encryption. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -6325,7 +6329,7 @@ declare namespace SageMaker {
      */
     ContainerArguments?: MonitoringContainerArguments;
     /**
-     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
+     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flattened JSON so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
      */
     RecordPreprocessorSourceUri?: S3Uri;
     /**
@@ -8884,7 +8888,7 @@ declare namespace SageMaker {
      */
     NetworkConfig?: MonitoringNetworkConfig;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     * The Amazon Resource Name (ARN) of the IAM role that has read permission to the input data location and write permission to the output data location in Amazon S3.
      */
     RoleArn: RoleArn;
     StoppingCondition?: MonitoringStoppingCondition;
@@ -9025,7 +9029,7 @@ declare namespace SageMaker {
      */
     NetworkConfig?: MonitoringNetworkConfig;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+     * The Amazon Resource Name (ARN) of the IAM role that has read permission to the input data location and write permission to the output data location in Amazon S3.
      */
     RoleArn: RoleArn;
     StoppingCondition?: MonitoringStoppingCondition;
@@ -9205,6 +9209,10 @@ declare namespace SageMaker {
      * An array of additional Inference Specification objects. Each additional Inference Specification specifies artifacts based on this model package that can be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.
      */
     AdditionalInferenceSpecifications?: AdditionalInferenceSpecifications;
+    /**
+     * Indicates if you want to skip model validation.
+     */
+    SkipModelValidation?: SkipModelValidation;
   }
   export interface DescribeModelQualityJobDefinitionRequest {
     /**
@@ -10924,7 +10932,7 @@ declare namespace SageMaker {
      */
     S3InputMode?: ProcessingS3InputMode;
     /**
-     * Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defaults to FullyReplicated 
+     * Whether input data distributed in Amazon S3 is fully replicated or sharded by an Amazon S3 key. Defaults to FullyReplicated 
      */
     S3DataDistributionType?: ProcessingS3DataDistributionType;
     /**
@@ -13674,7 +13682,7 @@ declare namespace SageMaker {
      */
     SortBy?: MonitoringJobDefinitionSortKey;
     /**
-     * The sort order for results. The default is Descending.
+     * Whether to sort the results in Ascending or Descending order. The default is Descending.
      */
     SortOrder?: SortOrder;
     /**
@@ -14787,7 +14795,7 @@ declare namespace SageMaker {
      */
     JobDefinitionSummaries: MonitoringJobDefinitionSummaryList;
     /**
-     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.
+     * The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.
      */
     NextToken?: NextToken;
   }
@@ -14971,7 +14979,7 @@ declare namespace SageMaker {
      */
     JobDefinitionSummaries: MonitoringJobDefinitionSummaryList;
     /**
-     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.
+     * The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.
      */
     NextToken?: NextToken;
   }
@@ -15101,7 +15109,7 @@ declare namespace SageMaker {
      */
     SortBy?: MonitoringJobDefinitionSortKey;
     /**
-     * The sort order for results. The default is Descending.
+     * Whether to sort the results in Ascending or Descending order. The default is Descending.
      */
     SortOrder?: SortOrder;
     /**
@@ -15257,7 +15265,7 @@ declare namespace SageMaker {
      */
     EndpointName?: EndpointName;
     /**
-     * Whether to sort results by Status, CreationTime, ScheduledTime field. The default is CreationTime.
+     * Whether to sort the results by the Status, CreationTime, or ScheduledTime field. The default is CreationTime.
      */
     SortBy?: MonitoringExecutionSortKey;
     /**
@@ -15315,7 +15323,7 @@ declare namespace SageMaker {
      */
     MonitoringExecutionSummaries: MonitoringExecutionSummaryList;
     /**
-     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent reques
+     * The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.
      */
     NextToken?: NextToken;
   }
@@ -15325,7 +15333,7 @@ declare namespace SageMaker {
      */
     EndpointName?: EndpointName;
     /**
-     * Whether to sort results by Status, CreationTime, ScheduledTime field. The default is CreationTime.
+     * Whether to sort the results by the Status, CreationTime, or ScheduledTime field. The default is CreationTime.
      */
     SortBy?: MonitoringScheduleSortKey;
     /**
@@ -15379,7 +15387,7 @@ declare namespace SageMaker {
      */
     MonitoringScheduleSummaries: MonitoringScheduleSummaryList;
     /**
-     * If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.
+     * The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.
      */
     NextToken?: NextToken;
   }
@@ -16836,7 +16844,7 @@ declare namespace SageMaker {
      */
     ImageUri: ImageUri;
     /**
-     * JSON formatted S3 file that defines explainability parameters. For more information on this JSON configuration file, see Configure model explainability parameters.
+     * JSON formatted Amazon S3 file that defines explainability parameters. For more information on this JSON configuration file, see Configure model explainability parameters.
      */
     ConfigUri: S3Uri;
     /**
@@ -17053,6 +17061,10 @@ declare namespace SageMaker {
      * Represents the drift check baselines that can be used when the model monitor is set using the model package.
      */
     DriftCheckBaselines?: DriftCheckBaselines;
+    /**
+     * Indicates if you want to skip model validation.
+     */
+    SkipModelValidation?: SkipModelValidation;
   }
   export type ModelPackageArn = string;
   export type ModelPackageArnList = ModelPackageArn[];
@@ -17263,7 +17275,7 @@ declare namespace SageMaker {
      */
     ContainerArguments?: MonitoringContainerArguments;
     /**
-     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
+     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flattened JSON so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
      */
     RecordPreprocessorSourceUri?: S3Uri;
     /**
@@ -17441,7 +17453,7 @@ declare namespace SageMaker {
      */
     ContainerArguments?: MonitoringContainerArguments;
     /**
-     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
+     * An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flattened JSON so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
      */
     RecordPreprocessorSourceUri?: S3Uri;
     /**
@@ -17477,7 +17489,7 @@ declare namespace SageMaker {
      */
     VolumeSizeInGB: ProcessingVolumeSizeInGB;
     /**
-     * The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.
+     * The Key Management Service (KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the model monitoring job.
      */
     VolumeKmsKeyId?: KmsKeyId;
   }
@@ -17582,7 +17594,7 @@ declare namespace SageMaker {
      */
     MonitoringInputs: MonitoringInputs;
     /**
-     * The array of outputs from the monitoring job to be uploaded to Amazon Simple Storage Service (Amazon S3).
+     * The array of outputs from the monitoring job to be uploaded to Amazon S3.
      */
     MonitoringOutputConfig: MonitoringOutputConfig;
     /**
@@ -17634,7 +17646,7 @@ declare namespace SageMaker {
   export type MonitoringJobDefinitionSummaryList = MonitoringJobDefinitionSummary[];
   export interface MonitoringJsonDatasetFormat {
     /**
-     * Indicates if the file should be read as a json object per line. 
+     * Indicates if the file should be read as a JSON object per line. 
      */
     Line?: Boolean;
   }
@@ -17662,7 +17674,7 @@ declare namespace SageMaker {
      */
     MonitoringOutputs: MonitoringOutputs;
     /**
-     * The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+     * The Key Management Service (KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -20264,6 +20276,7 @@ declare namespace SageMaker {
     Seed: Seed;
   }
   export type SingleSignOnUserIdentifier = string;
+  export type SkipModelValidation = "All"|"None"|string;
   export type SnsTopicArn = string;
   export type SortActionsBy = "Name"|"CreationTime"|string;
   export type SortArtifactsBy = "CreationTime"|string;
