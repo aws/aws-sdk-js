@@ -236,6 +236,14 @@ declare class WorkMail extends Service {
    */
   describeEmailMonitoringConfiguration(callback?: (err: AWSError, data: WorkMail.Types.DescribeEmailMonitoringConfigurationResponse) => void): Request<WorkMail.Types.DescribeEmailMonitoringConfigurationResponse, AWSError>;
   /**
+   * Returns basic details about an entity in WorkMail. 
+   */
+  describeEntity(params: WorkMail.Types.DescribeEntityRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeEntityResponse) => void): Request<WorkMail.Types.DescribeEntityResponse, AWSError>;
+  /**
+   * Returns basic details about an entity in WorkMail. 
+   */
+  describeEntity(callback?: (err: AWSError, data: WorkMail.Types.DescribeEntityResponse) => void): Request<WorkMail.Types.DescribeEntityResponse, AWSError>;
+  /**
    * Returns the data available for the group.
    */
   describeGroup(params: WorkMail.Types.DescribeGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeGroupResponse) => void): Request<WorkMail.Types.DescribeGroupResponse, AWSError>;
@@ -403,6 +411,14 @@ declare class WorkMail extends Service {
    * Returns summaries of the organization's groups.
    */
   listGroups(callback?: (err: AWSError, data: WorkMail.Types.ListGroupsResponse) => void): Request<WorkMail.Types.ListGroupsResponse, AWSError>;
+  /**
+   * Returns all the groups to which an entity belongs.
+   */
+  listGroupsForEntity(params: WorkMail.Types.ListGroupsForEntityRequest, callback?: (err: AWSError, data: WorkMail.Types.ListGroupsForEntityResponse) => void): Request<WorkMail.Types.ListGroupsForEntityResponse, AWSError>;
+  /**
+   * Returns all the groups to which an entity belongs.
+   */
+  listGroupsForEntity(callback?: (err: AWSError, data: WorkMail.Types.ListGroupsForEntityResponse) => void): Request<WorkMail.Types.ListGroupsForEntityResponse, AWSError>;
   /**
    * Lists all the impersonation roles for the given WorkMail organization.
    */
@@ -612,6 +628,14 @@ declare class WorkMail extends Service {
    */
   updateDefaultMailDomain(callback?: (err: AWSError, data: WorkMail.Types.UpdateDefaultMailDomainResponse) => void): Request<WorkMail.Types.UpdateDefaultMailDomainResponse, AWSError>;
   /**
+   * Updates attibutes in a group.
+   */
+  updateGroup(params: WorkMail.Types.UpdateGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateGroupResponse) => void): Request<WorkMail.Types.UpdateGroupResponse, AWSError>;
+  /**
+   * Updates attibutes in a group.
+   */
+  updateGroup(callback?: (err: AWSError, data: WorkMail.Types.UpdateGroupResponse) => void): Request<WorkMail.Types.UpdateGroupResponse, AWSError>;
+  /**
    * Updates an impersonation role for the given WorkMail organization.
    */
   updateImpersonationRole(params: WorkMail.Types.UpdateImpersonationRoleRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateImpersonationRoleResponse) => void): Request<WorkMail.Types.UpdateImpersonationRoleResponse, AWSError>;
@@ -651,6 +675,14 @@ declare class WorkMail extends Service {
    * Updates data for the resource. To have the latest information, it must be preceded by a DescribeResource call. The dataset in the request should be the one expected when performing another DescribeResource call.
    */
   updateResource(callback?: (err: AWSError, data: WorkMail.Types.UpdateResourceResponse) => void): Request<WorkMail.Types.UpdateResourceResponse, AWSError>;
+  /**
+   * Updates data for the user. To have the latest information, it must be preceded by a DescribeUser call. The dataset in the request should be the one expected when performing another DescribeUser call.
+   */
+  updateUser(params: WorkMail.Types.UpdateUserRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateUserResponse) => void): Request<WorkMail.Types.UpdateUserResponse, AWSError>;
+  /**
+   * Updates data for the user. To have the latest information, it must be preceded by a DescribeUser call. The dataset in the request should be the one expected when performing another DescribeUser call.
+   */
+  updateUser(callback?: (err: AWSError, data: WorkMail.Types.UpdateUserResponse) => void): Request<WorkMail.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace WorkMail {
   export interface AccessControlRule {
@@ -723,13 +755,13 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The resource for which members (users or groups) are associated.
+     * The resource for which members (users or groups) are associated. The identifier can accept ResourceId, Resourcename, or email. The following identity formats are available:   Resource ID: r-0123456789a0123456789b0123456789   Email address: resource@domain.tld   Resource name: resource  
      */
-    ResourceId: ResourceId;
+    ResourceId: EntityIdentifier;
     /**
-     * The member (user or group) to associate to the resource.
+     * The member (user or group) to associate to the resource. The entity ID can accept UserId or GroupID, Username or Groupname, or email.   Entity: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: entity@domain.tld   Entity: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
   }
   export interface AssociateDelegateToResourceResponse {
   }
@@ -739,13 +771,13 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The group to which the member (user or group) is associated.
+     * The group to which the member (user or group) is associated. The identifier can accept GroupId, Groupname, or email. The following identity formats are available:   Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: group@domain.tld   Group name: group  
      */
-    GroupId: WorkMailIdentifier;
+    GroupId: EntityIdentifier;
     /**
-     * The member (user or group) to associate to the group.
+     * The member (user or group) to associate to the group. The member ID can accept UserID or GroupId, Username or Groupname, or email.   Member: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: member@domain.tld   Member name: member  
      */
-    MemberId: WorkMailIdentifier;
+    MemberId: EntityIdentifier;
   }
   export interface AssociateMemberToGroupResponse {
   }
@@ -878,6 +910,10 @@ declare namespace WorkMail {
      * The name of the group.
      */
     Name: GroupName;
+    /**
+     * If this parameter is enabled, the group will be hidden from the address book.
+     */
+    HiddenFromGlobalAddressList?: Boolean;
   }
   export interface CreateGroupResponse {
     /**
@@ -1022,6 +1058,14 @@ declare namespace WorkMail {
      * The type of the new resource. The available types are equipment and room.
      */
     Type: ResourceType;
+    /**
+     * Resource description.
+     */
+    Description?: ResourceDescription;
+    /**
+     * If this parameter is enabled, the resource will be hidden from the address book.
+     */
+    HiddenFromGlobalAddressList?: Boolean;
   }
   export interface CreateResourceResponse {
     /**
@@ -1041,11 +1085,27 @@ declare namespace WorkMail {
     /**
      * The display name for the new user.
      */
-    DisplayName: String;
+    DisplayName: UserAttribute;
     /**
      * The password for the new user.
      */
-    Password: Password;
+    Password?: Password;
+    /**
+     * The role of the new user. You cannot pass SYSTEM_USER or RESOURCE role in a single request. When a user role is not selected, the default role of USER is selected.
+     */
+    Role?: UserRole;
+    /**
+     * The first name of the new user.
+     */
+    FirstName?: UserAttribute;
+    /**
+     * The last name of the new user. 
+     */
+    LastName?: UserAttribute;
+    /**
+     * If this parameter is enabled, the user will be hidden from the address book.
+     */
+    HiddenFromGlobalAddressList?: Boolean;
   }
   export interface CreateUserResponse {
     /**
@@ -1117,9 +1177,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the group to be deleted.
+     * The identifier of the group to be deleted. The identifier can be the GroupId, or Groupname. The following identity formats are available:   Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Group name: group  
      */
-    GroupId: WorkMailIdentifier;
+    GroupId: EntityIdentifier;
   }
   export interface DeleteGroupResponse {
   }
@@ -1141,13 +1201,13 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the member (user or group) that owns the mailbox.
+     * The identifier of the entity that owns the mailbox. The identifier can be UserId or Group Id, Username or Groupname, or email.   Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234   Email address: entity@domain.tld   Entity name: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
     /**
-     * The identifier of the member (user or group) for which to delete granted permissions.
+     * The identifier of the entity for which to delete granted permissions. The identifier can be UserId, ResourceID, or Group Id, Username or Groupname, or email.   Grantee ID: 12345678-1234-1234-1234-123456789012,r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234   Email address: grantee@domain.tld   Grantee name: grantee  
      */
-    GranteeId: WorkMailIdentifier;
+    GranteeId: EntityIdentifier;
   }
   export interface DeleteMailboxPermissionsResponse {
   }
@@ -1192,6 +1252,10 @@ declare namespace WorkMail {
      * If true, deletes the AWS Directory Service directory associated with the organization.
      */
     DeleteDirectory: Boolean;
+    /**
+     * Deletes a WorkMail organization even if the organization has enabled users.
+     */
+    ForceDelete?: Boolean;
   }
   export interface DeleteOrganizationResponse {
     /**
@@ -1209,9 +1273,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the resource to be deleted.
+     * The identifier of the resource to be deleted. The identifier can accept ResourceId, or Resourcename. The following identity formats are available:   Resource ID: r-0123456789a0123456789b0123456789   Resource name: resource  
      */
-    ResourceId: ResourceId;
+    ResourceId: EntityIdentifier;
   }
   export interface DeleteResourceResponse {
   }
@@ -1233,9 +1297,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the user to be deleted.
+     * The identifier of the user to be deleted. The identifier can be the UserId or Username. The following identity formats are available:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   User name: user  
      */
-    UserId: WorkMailIdentifier;
+    UserId: EntityIdentifier;
   }
   export interface DeleteUserResponse {
   }
@@ -1245,9 +1309,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier for the member (user or group) to be updated.
+     * The identifier for the member to be updated. The identifier can be UserId, ResourceId, or Group Id, Username, Resourcename, or Groupname, or email.   Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234   Email address: entity@domain.tld   Entity name: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
   }
   export interface DeregisterFromWorkMailResponse {
   }
@@ -1279,15 +1343,39 @@ declare namespace WorkMail {
      */
     LogGroupArn?: LogGroupArn;
   }
+  export interface DescribeEntityRequest {
+    /**
+     * The identifier for the organization under which the entity exists.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The email under which the entity exists.
+     */
+    Email: EmailAddress;
+  }
+  export interface DescribeEntityResponse {
+    /**
+     * The entity ID under which the entity exists.
+     */
+    EntityId?: WorkMailIdentifier;
+    /**
+     * Username, GroupName, or ResourceName based on entity type.
+     */
+    Name?: String;
+    /**
+     * Entity type.
+     */
+    Type?: EntityType;
+  }
   export interface DescribeGroupRequest {
     /**
      * The identifier for the organization under which the group exists.
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier for the group to be described.
+     * The identifier for the group to be described. The identifier can accept GroupId, Groupname, or email. The following identity formats are available:   Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: group@domain.tld   Group name: group  
      */
-    GroupId: WorkMailIdentifier;
+    GroupId: EntityIdentifier;
   }
   export interface DescribeGroupResponse {
     /**
@@ -1314,6 +1402,10 @@ declare namespace WorkMail {
      * The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.
      */
     DisabledDate?: Timestamp;
+    /**
+     * If the value is set to true, the group is hidden from the address book.
+     */
+    HiddenFromGlobalAddressList?: Boolean;
   }
   export interface DescribeInboundDmarcSettingsRequest {
     /**
@@ -1430,6 +1522,14 @@ declare namespace WorkMail {
      * The Amazon Resource Name (ARN) of the organization.
      */
     ARN?: AmazonResourceName;
+    /**
+     * The user ID of the migration admin if migration is enabled for the organization.
+     */
+    MigrationAdmin?: WorkMailIdentifier;
+    /**
+     * Indicates if interoperability is enabled for this organization.
+     */
+    InteroperabilityEnabled?: Boolean;
   }
   export interface DescribeResourceRequest {
     /**
@@ -1437,9 +1537,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the resource to be described.
+     * The identifier of the resource to be described. The identifier can accept ResourceId, Resourcename, or email. The following identity formats are available:   Resource ID: r-0123456789a0123456789b0123456789   Email address: resource@domain.tld   Resource name: resource  
      */
-    ResourceId: ResourceId;
+    ResourceId: EntityIdentifier;
   }
   export interface DescribeResourceResponse {
     /**
@@ -1474,6 +1574,14 @@ declare namespace WorkMail {
      * The date and time when a resource was disabled from WorkMail, in UNIX epoch time format.
      */
     DisabledDate?: Timestamp;
+    /**
+     * Description of the resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * If enabled, the resource is hidden from the global address list.
+     */
+    HiddenFromGlobalAddressList?: Boolean;
   }
   export interface DescribeUserRequest {
     /**
@@ -1481,9 +1589,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier for the user to be described.
+     * The identifier for the user to be described. The identifier can be the UserId, Username, or email. The following identity formats are available:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: user@domain.tld   User name: user   
      */
-    UserId: WorkMailIdentifier;
+    UserId: EntityIdentifier;
   }
   export interface DescribeUserResponse {
     /**
@@ -1501,13 +1609,13 @@ declare namespace WorkMail {
     /**
      * The display name of the user.
      */
-    DisplayName?: String;
+    DisplayName?: UserAttribute;
     /**
      * The state of a user: enabled (registered to WorkMail) or disabled (deregistered or never registered to WorkMail).
      */
     State?: EntityState;
     /**
-     * In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, and SYSTEM_USER.
+     * In certain cases, other entities are modeled as users. If interoperability is enabled, resources are imported into WorkMail as users. Because different WorkMail organizations rely on different directory types, administrators can distinguish between an unregistered user (account is disabled and has a user role) and the directory administrators. The values are USER, RESOURCE, SYSTEM_USER, and REMOTE_USER.
      */
     UserRole?: UserRole;
     /**
@@ -1518,6 +1626,66 @@ declare namespace WorkMail {
      * The date and time at which the user was disabled for WorkMail usage, in UNIX epoch time format.
      */
     DisabledDate?: Timestamp;
+    /**
+     * The date when the mailbox was created for the user.
+     */
+    MailboxProvisionedDate?: Timestamp;
+    /**
+     * The date when the mailbox was removed for the user.
+     */
+    MailboxDeprovisionedDate?: Timestamp;
+    /**
+     * First name of the user.
+     */
+    FirstName?: UserAttribute;
+    /**
+     * Last name of the user.
+     */
+    LastName?: UserAttribute;
+    /**
+     * If enabled, the user is hidden from the global address list.
+     */
+    HiddenFromGlobalAddressList?: Boolean;
+    /**
+     * Initials of the user.
+     */
+    Initials?: UserAttribute;
+    /**
+     * User's contact number.
+     */
+    Telephone?: UserAttribute;
+    /**
+     * Street where the user is located.
+     */
+    Street?: UserAttribute;
+    /**
+     * Job title of the user.
+     */
+    JobTitle?: UserAttribute;
+    /**
+     * City where the user is located.
+     */
+    City?: UserAttribute;
+    /**
+     * Company of the user.
+     */
+    Company?: UserAttribute;
+    /**
+     * Zip code of the user.
+     */
+    ZipCode?: UserAttribute;
+    /**
+     * Department of the user.
+     */
+    Department?: UserAttribute;
+    /**
+     * Country where the user is located.
+     */
+    Country?: UserAttribute;
+    /**
+     * Office where the user is located.
+     */
+    Office?: UserAttribute;
   }
   export type Description = string;
   export type DeviceId = string;
@@ -1536,13 +1704,13 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the resource from which delegates' set members are removed. 
+     * The identifier of the resource from which delegates' set members are removed.  The identifier can accept ResourceId, Resourcename, or email. The following identity formats are available:   Resource ID: r-0123456789a0123456789b0123456789   Email address: resource@domain.tld   Resource name: resource  
      */
-    ResourceId: ResourceId;
+    ResourceId: EntityIdentifier;
     /**
-     * The identifier for the member (user, group) to be removed from the resource's delegates.
+     * The identifier for the member (user, group) to be removed from the resource's delegates. The entity ID can accept UserId or GroupID, Username or Groupname, or email.   Entity: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: entity@domain.tld   Entity: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
   }
   export interface DisassociateDelegateFromResourceResponse {
   }
@@ -1552,13 +1720,13 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier for the group from which members are removed.
+     * The identifier for the group from which members are removed. The identifier can accept GroupId, Groupname, or email. The following identity formats are available:   Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: group@domain.tld   Group name: group  
      */
-    GroupId: WorkMailIdentifier;
+    GroupId: EntityIdentifier;
     /**
-     * The identifier for the member to be removed to the group.
+     * The identifier for the member to be removed from the group. The member ID can accept UserID or GroupId, Username or Groupname, or email.   Member ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: member@domain.tld   Member name: member  
      */
-    MemberId: WorkMailIdentifier;
+    MemberId: EntityIdentifier;
   }
   export interface DisassociateMemberFromGroupResponse {
   }
@@ -1582,7 +1750,7 @@ declare namespace WorkMail {
     /**
      * The fully qualified domain name.
      */
-    DomainName?: DomainName;
+    DomainName: DomainName;
     /**
      * The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.
      */
@@ -1593,6 +1761,7 @@ declare namespace WorkMail {
   export type EmailAddress = string;
   export type EntityIdentifier = string;
   export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
+  export type EntityType = "GROUP"|"USER"|"RESOURCE"|string;
   export interface EwsAvailabilityProvider {
     /**
      * The endpoint of the remote EWS server.
@@ -1787,9 +1956,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier for the user whose mailbox details are being requested.
+     * The identifier for the user whose mailbox details are being requested. The identifier can be the UserId, Username, or email. The following identity formats are available:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: user@domain.tld   User name: user  
      */
-    UserId: WorkMailIdentifier;
+    UserId: EntityIdentifier;
   }
   export interface GetMailboxDetailsResponse {
     /**
@@ -1899,6 +2068,17 @@ declare namespace WorkMail {
      */
     DisabledDate?: Timestamp;
   }
+  export interface GroupIdentifier {
+    /**
+     * Group ID that matched the group.
+     */
+    GroupId?: WorkMailIdentifier;
+    /**
+     * Group name that matched the group.
+     */
+    GroupName?: GroupName;
+  }
+  export type GroupIdentifiers = GroupIdentifier[];
   export type GroupName = string;
   export type Groups = Group[];
   export type HostedZoneId = string;
@@ -2055,9 +2235,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier for the group to which the members (users or groups) are associated.
+     * The identifier for the group to which the members (users or groups) are associated. The identifier can accept GroupId, Groupname, or email. The following identity formats are available:   Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: group@domain.tld   Group name: group  
      */
-    GroupId: WorkMailIdentifier;
+    GroupId: EntityIdentifier;
     /**
      *  The token to use to retrieve the next page of results. The first call does not contain any tokens.
      */
@@ -2077,6 +2257,58 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export interface ListGroupsFilters {
+    /**
+     * Filters only groups with the provided name prefix.
+     */
+    NamePrefix?: String;
+    /**
+     * Filters only groups with the provided primary email prefix.
+     */
+    PrimaryEmailPrefix?: String;
+    /**
+     * Filters only groups with the provided state.
+     */
+    State?: EntityState;
+  }
+  export interface ListGroupsForEntityFilters {
+    /**
+     * Filters only group names that start with the provided name prefix.
+     */
+    GroupNamePrefix?: String;
+  }
+  export interface ListGroupsForEntityRequest {
+    /**
+     * The identifier for the organization under which the entity exists.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier for the entity. The entity ID can accept UserId or GroupID, Username or Groupname, or email.   Entity ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: entity@domain.tld   Entity name: entity  
+     */
+    EntityId: EntityIdentifier;
+    /**
+     * Limit the search results based on the filter criteria.
+     */
+    Filters?: ListGroupsForEntityFilters;
+    /**
+     * The token to use to retrieve the next page of results. The first call does not contain any tokens.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListGroupsForEntityResponse {
+    /**
+     * The overview of groups in an organization.
+     */
+    Groups?: GroupIdentifiers;
+    /**
+     * The token to use to retrieve the next page of results. This value is `null` when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListGroupsRequest {
     /**
      * The identifier for the organization under which the groups exist.
@@ -2090,6 +2322,10 @@ declare namespace WorkMail {
      * The maximum number of results to return in a single call.
      */
     MaxResults?: MaxResults;
+    /**
+     * Limit the search results based on the filter criteria. Only one filter per request is supported.
+     */
+    Filters?: ListGroupsFilters;
   }
   export interface ListGroupsResponse {
     /**
@@ -2179,9 +2415,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the user, group, or resource for which to list mailbox permissions.
+     * The identifier of the user, or resource for which to list mailbox permissions. The entity ID can accept UserId or ResourceId, Username or Resourcename, or email.   Entity ID: 12345678-1234-1234-1234-123456789012, or r-0123456789a0123456789b0123456789   Email address: entity@domain.tld   Entity name: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
     /**
      * The token to use to retrieve the next page of results. The first call does not contain any tokens.
      */
@@ -2271,9 +2507,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier for the resource whose delegates are listed.
+     * The identifier for the resource whose delegates are listed. The identifier can accept ResourceId, Resourcename, or email. The following identity formats are available:   Resource ID: r-0123456789a0123456789b0123456789   Email address: resource@domain.tld   Resource name: resource  
      */
-    ResourceId: WorkMailIdentifier;
+    ResourceId: EntityIdentifier;
     /**
      * The token used to paginate through the delegates associated with a resource.
      */
@@ -2293,6 +2529,20 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export interface ListResourcesFilters {
+    /**
+     * Filters only resource that start with the entered name prefix .
+     */
+    NamePrefix?: String;
+    /**
+     * Filters only resource with the provided primary email prefix.
+     */
+    PrimaryEmailPrefix?: String;
+    /**
+     * Filters only resource with the provided state.
+     */
+    State?: EntityState;
+  }
   export interface ListResourcesRequest {
     /**
      * The identifier for the organization under which the resources exist.
@@ -2306,6 +2556,10 @@ declare namespace WorkMail {
      * The maximum number of results to return in a single call.
      */
     MaxResults?: MaxResults;
+    /**
+     * Limit the resource search results based on the filter criteria. You can only use one filter per request.
+     */
+    Filters?: ListResourcesFilters;
   }
   export interface ListResourcesResponse {
     /**
@@ -2329,6 +2583,24 @@ declare namespace WorkMail {
      */
     Tags?: TagList;
   }
+  export interface ListUsersFilters {
+    /**
+     * Filters only users with the provided username prefix.
+     */
+    UsernamePrefix?: String;
+    /**
+     * Filters only users with the provided display name prefix.
+     */
+    DisplayNamePrefix?: UserAttribute;
+    /**
+     * Filters only users with the provided email prefix.
+     */
+    PrimaryEmailPrefix?: String;
+    /**
+     * Filters only users with the provided state.
+     */
+    State?: EntityState;
+  }
   export interface ListUsersRequest {
     /**
      * The identifier for the organization under which the users exist.
@@ -2342,6 +2614,10 @@ declare namespace WorkMail {
      * The maximum number of results to return in a single call.
      */
     MaxResults?: MaxResults;
+    /**
+     * Limit the user search results based on the filter criteria. You can only use one filter per request.
+     */
+    Filters?: ListUsersFilters;
   }
   export interface ListUsersResponse {
     /**
@@ -2538,6 +2814,7 @@ declare namespace WorkMail {
   export type MobileDeviceAccessRuleId = string;
   export type MobileDeviceAccessRuleName = string;
   export type MobileDeviceAccessRulesList = MobileDeviceAccessRule[];
+  export type NewResourceDescription = string;
   export type NextToken = string;
   export type OrganizationId = string;
   export type OrganizationName = string;
@@ -2670,13 +2947,13 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the user, group, or resource for which to update mailbox permissions.
+     * The identifier of the user or resource for which to update mailbox permissions. The identifier can be UserId, ResourceID, or Group Id, Username, Resourcename, or Groupname, or email.   Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234   Email address: entity@domain.tld   Entity name: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
     /**
-     * The identifier of the user, group, or resource to which to grant the permissions.
+     * The identifier of the user, group, or resource to which to grant the permissions. The identifier can be UserId, ResourceID, or Group Id, Username, Resourcename, or Groupname, or email.   Grantee ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234   Email address: grantee@domain.tld   Grantee name: grantee  
      */
-    GranteeId: WorkMailIdentifier;
+    GranteeId: EntityIdentifier;
     /**
      * The permissions granted to the grantee. SEND_AS allows the grantee to send email as the owner of the mailbox (the grantee is not mentioned on these emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the owner of the mailbox (the grantee is not mentioned as the physical sender of these emails). FULL_ACCESS allows the grantee full access to the mailbox, irrespective of other folder-level permissions set on the mailbox.
      */
@@ -2764,9 +3041,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier for the user, group, or resource to be updated.
+     * The identifier for the user, group, or resource to be updated. The identifier can accept UserId, ResourceId, or GroupId, or Username, Resourcename, or Groupname. The following identity formats are available:   Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234   Entity name: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
     /**
      * The email for the user, group, or resource to be updated.
      */
@@ -2819,8 +3096,13 @@ declare namespace WorkMail {
      * The date indicating when the resource was disabled from WorkMail use.
      */
     DisabledDate?: Timestamp;
+    /**
+     * Resource description.
+     */
+    Description?: ResourceDescription;
   }
   export type ResourceDelegates = Delegate[];
+  export type ResourceDescription = string;
   export type ResourceId = string;
   export type ResourceName = string;
   export type ResourceType = "ROOM"|"EQUIPMENT"|string;
@@ -2841,9 +3123,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the user or resource associated with the mailbox.
+     * The identifier of the user or resource associated with the mailbox. The identifier can accept UserId or ResourceId, Username or Resourcename, or email. The following identity formats are available:   Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789 , or S-1-1-12-1234567890-123456789-123456789-1234   Email address: entity@domain.tld   Entity name: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
     /**
      * The mailbox export job description.
      */
@@ -2966,6 +3248,22 @@ declare namespace WorkMail {
   }
   export interface UpdateDefaultMailDomainResponse {
   }
+  export interface UpdateGroupRequest {
+    /**
+     * The identifier for the organization under which the group exists.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier for the group to be updated. The identifier can accept GroupId, Groupname, or email. The following identity formats are available:   Group ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: group@domain.tld   Group name: group  
+     */
+    GroupId: EntityIdentifier;
+    /**
+     * If enabled, the group is hidden from the global address list.
+     */
+    HiddenFromGlobalAddressList?: BooleanObject;
+  }
+  export interface UpdateGroupResponse {
+  }
   export interface UpdateImpersonationRoleRequest {
     /**
      * The WorkMail organization that contains the impersonation role to update.
@@ -3000,9 +3298,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifer for the user for whom to update the mailbox quota.
+     * The identifer for the user for whom to update the mailbox quota. The identifier can be the UserId, Username, or email. The following identity formats are available:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: user@domain.tld   User name: user  
      */
-    UserId: WorkMailIdentifier;
+    UserId: EntityIdentifier;
     /**
      * The updated mailbox quota, in MB, for the specified user.
      */
@@ -3072,9 +3370,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The user, group, or resource to update.
+     * The user, group, or resource to update. The identifier can accept UseriD, ResourceId, or GroupId, Username, Resourcename, or Groupname, or email. The following identity formats are available:   Entity ID: 12345678-1234-1234-1234-123456789012, r-0123456789a0123456789b0123456789, or S-1-1-12-1234567890-123456789-123456789-1234   Email address: entity@domain.tld   Entity name: entity  
      */
-    EntityId: WorkMailIdentifier;
+    EntityId: EntityIdentifier;
     /**
      * The value of the email to be updated as primary.
      */
@@ -3088,9 +3386,9 @@ declare namespace WorkMail {
      */
     OrganizationId: OrganizationId;
     /**
-     * The identifier of the resource to be updated.
+     * The identifier of the resource to be updated. The identifier can accept ResourceId, Resourcename, or email. The following identity formats are available:   Resource ID: r-0123456789a0123456789b0123456789   Email address: resource@domain.tld   Resource name: resource  
      */
-    ResourceId: ResourceId;
+    ResourceId: EntityIdentifier;
     /**
      * The name of the resource to be updated.
      */
@@ -3099,8 +3397,92 @@ declare namespace WorkMail {
      * The resource's booking options to be updated.
      */
     BookingOptions?: BookingOptions;
+    /**
+     * Updates the resource description.
+     */
+    Description?: NewResourceDescription;
+    /**
+     * Updates the resource type.
+     */
+    Type?: ResourceType;
+    /**
+     * If enabled, the resource is hidden from the global address list.
+     */
+    HiddenFromGlobalAddressList?: BooleanObject;
   }
   export interface UpdateResourceResponse {
+  }
+  export interface UpdateUserRequest {
+    /**
+     * The identifier for the organization under which the user exists.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier for the user to be updated. The identifier can be the UserId, Username, or email. The following identity formats are available:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234   Email address: user@domain.tld   User name: user  
+     */
+    UserId: EntityIdentifier;
+    /**
+     * Updates the user role. You cannot pass SYSTEM_USER or RESOURCE.
+     */
+    Role?: UserRole;
+    /**
+     * Updates the display name of the user.
+     */
+    DisplayName?: UserAttribute;
+    /**
+     * Updates the user's first name.
+     */
+    FirstName?: UserAttribute;
+    /**
+     * Updates the user's last name.
+     */
+    LastName?: UserAttribute;
+    /**
+     * If enabled, the user is hidden from the global address list.
+     */
+    HiddenFromGlobalAddressList?: BooleanObject;
+    /**
+     * Updates the user's initials.
+     */
+    Initials?: UserAttribute;
+    /**
+     * Updates the user's contact details.
+     */
+    Telephone?: UserAttribute;
+    /**
+     * Updates the user's street address.
+     */
+    Street?: UserAttribute;
+    /**
+     * Updates the user's job title.
+     */
+    JobTitle?: UserAttribute;
+    /**
+     * Updates the user's city.
+     */
+    City?: UserAttribute;
+    /**
+     * Updates the user's company.
+     */
+    Company?: UserAttribute;
+    /**
+     * Updates the user's zipcode.
+     */
+    ZipCode?: UserAttribute;
+    /**
+     * Updates the user's department.
+     */
+    Department?: UserAttribute;
+    /**
+     * Updates the user's country.
+     */
+    Country?: UserAttribute;
+    /**
+     * Updates the user's office.
+     */
+    Office?: UserAttribute;
+  }
+  export interface UpdateUserResponse {
   }
   export type Url = string;
   export interface User {
@@ -3137,9 +3519,10 @@ declare namespace WorkMail {
      */
     DisabledDate?: Timestamp;
   }
+  export type UserAttribute = string;
   export type UserIdList = WorkMailIdentifier[];
   export type UserName = string;
-  export type UserRole = "USER"|"RESOURCE"|"SYSTEM_USER"|string;
+  export type UserRole = "USER"|"RESOURCE"|"SYSTEM_USER"|"REMOTE_USER"|string;
   export type Users = User[];
   export type WorkMailDomainName = string;
   export type WorkMailIdentifier = string;

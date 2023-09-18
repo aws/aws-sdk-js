@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1459.0-->
+<!--LATEST=2.1460.0-->
 <!--ENTRYINSERT-->
+
+## 2.1460.0
+* feature: Discovery: Add sensitive protection for customer information
+* feature: WorkMail: This release includes four new APIs UpdateUser, UpdateGroup, ListGroupsForEntity and DescribeEntity, along with RemoteUsers and some enhancements to existing APIs.
 
 ## 2.1459.0
 * feature: AppStream: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
