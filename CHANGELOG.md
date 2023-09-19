@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1460.0-->
+<!--LATEST=2.1461.0-->
 <!--ENTRYINSERT-->
+
+## 2.1461.0
+* feature: EC2: This release adds support for C7i, and R7a instance types.
+* feature: Outposts: This release adds the InstanceFamilies field to the ListAssets response.
+* feature: SageMaker: This release adds support for one-time model monitoring schedules that are executed immediately without delay, explicit data analysis windows for model monitoring schedules and exclude features attributes to remove features from model monitor analysis.
 
 ## 2.1460.0
 * feature: Discovery: Add sensitive protection for customer information

@@ -367,6 +367,10 @@ declare namespace Outposts {
      * The state.   ACTIVE - The asset is available and can provide capacity for new compute resources.   ISOLATED - The asset is undergoing maintenance and can't provide capacity for new compute resources. Existing compute resources on the asset are not affected.   RETIRING - The underlying hardware for the asset is degraded. Capacity for new compute resources is reduced. Amazon Web Services sends notifications for resources that must be stopped before the asset can be replaced.  
      */
     State?: ComputeAssetState;
+    /**
+     * A list of the names of instance families that are currently associated with a given asset.
+     */
+    InstanceFamilies?: InstanceFamilies;
   }
   export interface ConnectionDetails {
     /**
@@ -603,6 +607,8 @@ declare namespace Outposts {
   export type HostId = string;
   export type HostIdList = HostId[];
   export type ISO8601Timestamp = Date;
+  export type InstanceFamilies = InstanceFamilyName[];
+  export type InstanceFamilyName = string;
   export type InstanceType = string;
   export interface InstanceTypeItem {
     InstanceType?: InstanceType;
@@ -612,7 +618,7 @@ declare namespace Outposts {
   export type LifeCycleStatusList = LifeCycleStatus[];
   export interface LineItem {
     /**
-     *  The ID of the catalog item. 
+     *  The ID of the catalog item.
      */
     CatalogItemId?: SkuCode;
     /**
@@ -640,7 +646,7 @@ declare namespace Outposts {
      */
     PreviousLineItemId?: LineItemId;
     /**
-     * The ID of the previous order item.
+     * The ID of the previous order.
      */
     PreviousOrderId?: OrderId;
   }
@@ -826,7 +832,7 @@ declare namespace Outposts {
      */
     PaymentTerm?: PaymentTerm;
     /**
-     * Type of order.
+     * The type of order.
      */
     OrderType?: OrderType;
   }
@@ -842,7 +848,7 @@ declare namespace Outposts {
      */
     OrderId?: OrderId;
     /**
-     *  The type of order. 
+     * The type of order.
      */
     OrderType?: OrderType;
     /**
