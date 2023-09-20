@@ -44,11 +44,11 @@ declare class AppConfig extends Service {
    */
   createEnvironment(callback?: (err: AWSError, data: AppConfig.Types.Environment) => void): Request<AppConfig.Types.Environment, AWSError>;
   /**
-   * Creates an AppConfig extension. An extension augments your ability to inject logic or behavior at different points during the AppConfig workflow of creating or deploying a configuration. You can create your own extensions or use the Amazon Web Services authored extensions provided by AppConfig. For most use cases, to create your own extension, you must create an Lambda function to perform any computation and processing defined in the extension. For more information about extensions, see Working with AppConfig extensions in the AppConfig User Guide.
+   * Creates an AppConfig extension. An extension augments your ability to inject logic or behavior at different points during the AppConfig workflow of creating or deploying a configuration. You can create your own extensions or use the Amazon Web Services authored extensions provided by AppConfig. For an AppConfig extension that uses Lambda, you must create a Lambda function to perform any computation and processing defined in the extension. If you plan to create custom versions of the Amazon Web Services authored notification extensions, you only need to specify an Amazon Resource Name (ARN) in the Uri field for the new extension version.   For a custom EventBridge notification extension, enter the ARN of the EventBridge default events in the Uri field.   For a custom Amazon SNS notification extension, enter the ARN of an Amazon SNS topic in the Uri field.   For a custom Amazon SQS notification extension, enter the ARN of an Amazon SQS message queue in the Uri field.    For more information about extensions, see Working with AppConfig extensions in the AppConfig User Guide.
    */
   createExtension(params: AppConfig.Types.CreateExtensionRequest, callback?: (err: AWSError, data: AppConfig.Types.Extension) => void): Request<AppConfig.Types.Extension, AWSError>;
   /**
-   * Creates an AppConfig extension. An extension augments your ability to inject logic or behavior at different points during the AppConfig workflow of creating or deploying a configuration. You can create your own extensions or use the Amazon Web Services authored extensions provided by AppConfig. For most use cases, to create your own extension, you must create an Lambda function to perform any computation and processing defined in the extension. For more information about extensions, see Working with AppConfig extensions in the AppConfig User Guide.
+   * Creates an AppConfig extension. An extension augments your ability to inject logic or behavior at different points during the AppConfig workflow of creating or deploying a configuration. You can create your own extensions or use the Amazon Web Services authored extensions provided by AppConfig. For an AppConfig extension that uses Lambda, you must create a Lambda function to perform any computation and processing defined in the extension. If you plan to create custom versions of the Amazon Web Services authored notification extensions, you only need to specify an Amazon Resource Name (ARN) in the Uri field for the new extension version.   For a custom EventBridge notification extension, enter the ARN of the EventBridge default events in the Uri field.   For a custom Amazon SNS notification extension, enter the ARN of an Amazon SNS topic in the Uri field.   For a custom Amazon SQS notification extension, enter the ARN of an Amazon SQS message queue in the Uri field.    For more information about extensions, see Working with AppConfig extensions in the AppConfig User Guide.
    */
   createExtension(callback?: (err: AWSError, data: AppConfig.Types.Extension) => void): Request<AppConfig.Types.Extension, AWSError>;
   /**
@@ -570,7 +570,7 @@ declare namespace AppConfig {
      */
     Description?: Description;
     /**
-     * A URI to locate the configuration. You can specify the following:   For the AppConfig hosted configuration store and for feature flags, specify hosted.   For an Amazon Web Services Systems Manager Parameter Store parameter, specify either the parameter name in the format ssm-parameter://&lt;parameter name&gt; or the ARN.   For an Secrets Manager secret, specify the URI in the following format: secrets-manager://&lt;secret name&gt;.   For an Amazon S3 object, specify the URI in the following format: s3://&lt;bucket&gt;/&lt;objectKey&gt; . Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json    For an SSM document, specify either the document name in the format ssm-document://&lt;document name&gt; or the Amazon Resource Name (ARN).  
+     * A URI to locate the configuration. You can specify the following:   For the AppConfig hosted configuration store and for feature flags, specify hosted.   For an Amazon Web Services Systems Manager Parameter Store parameter, specify either the parameter name in the format ssm-parameter://&lt;parameter name&gt; or the ARN.   For an Amazon Web Services CodePipeline pipeline, specify the URI in the following format: codepipeline://&lt;pipeline name&gt;.   For an Secrets Manager secret, specify the URI in the following format: secretsmanager://&lt;secret name&gt;.   For an Amazon S3 object, specify the URI in the following format: s3://&lt;bucket&gt;/&lt;objectKey&gt; . Here is an example: s3://my-bucket/my-app/us-east-1/my-config.json    For an SSM document, specify either the document name in the format ssm-document://&lt;document name&gt; or the Amazon Resource Name (ARN).  
      */
     LocationUri: Uri;
     /**
@@ -871,6 +871,10 @@ declare namespace AppConfig {
      * The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this ID to encrypt the configuration data using a customer managed key. 
      */
     KmsKeyIdentifier?: Identifier;
+    /**
+     * A user-defined label for an AppConfig hosted configuration version.
+     */
+    VersionLabel?: VersionLabel;
   }
   export interface DeploymentEvent {
     /**
@@ -882,7 +886,7 @@ declare namespace AppConfig {
      */
     TriggeredBy?: TriggeredBy;
     /**
-     * A description of the deployment event. Descriptions include, but are not limited to, the user account or the Amazon CloudWatch alarm ARN that initiated a rollback, the percentage of hosts that received the deployment, or in the case of an internal error, a recommendation to attempt a new deployment.
+     * A description of the deployment event. Descriptions include, but are not limited to, the following:   The Amazon Web Services account or the Amazon CloudWatch alarm ARN that initiated a rollback.   The percentage of hosts that received the deployment.   A recommendation to attempt a new deployment (in the case of an internal error).  
      */
     Description?: Description;
     /**
@@ -989,6 +993,10 @@ declare namespace AppConfig {
      * Time the deployment completed.
      */
     CompletedAt?: Iso8601DateTime;
+    /**
+     * A user-defined label for an AppConfig hosted configuration version.
+     */
+    VersionLabel?: VersionLabel;
   }
   export interface Deployments {
     /**
@@ -1514,7 +1522,7 @@ declare namespace AppConfig {
      */
     ConfigurationProfileId: Id;
     /**
-     * The configuration version to deploy. If deploying an AppConfig hosted configuration version, you can specify either the version number or version label.
+     * The configuration version to deploy. If deploying an AppConfig hosted configuration version, you can specify either the version number or version label. For all other configurations, you must specify the version number.
      */
     ConfigurationVersion: Version;
     /**

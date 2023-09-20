@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1461.0-->
+<!--LATEST=2.1462.0-->
 <!--ENTRYINSERT-->
+
+## 2.1462.0
+* feature: AppConfig: Enabling boto3 paginators for list APIs and adding documentation around ServiceQuotaExceededException errors
+* feature: AppRunner: This release adds improvements for managing App Runner auto scaling configuration resources. New APIs: UpdateDefaultAutoScalingConfiguration and ListServicesForAutoScalingConfiguration. Updated API: DeleteAutoScalingConfiguration.
+* feature: CloudWatchLogs: Add ClientToken to QueryDefinition CFN Handler in CWL
+* feature: CodeArtifact: Add support for the Swift package format.
+* feature: S3: Fix an issue where the SDK can fail to unmarshall response due to NumberFormatException
+* feature: SSOOIDC: Update FIPS endpoints in aws-us-gov.
+* feature: ServiceDiscovery: Adds a new DiscoverInstancesRevision API and also adds InstanceRevision field to the DiscoverInstances API response.
 
 ## 2.1461.0
 * feature: EC2: This release adds support for C7i, and R7a instance types.

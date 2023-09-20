@@ -68,13 +68,21 @@ declare class ServiceDiscovery extends Service {
    */
   deregisterInstance(callback?: (err: AWSError, data: ServiceDiscovery.Types.DeregisterInstanceResponse) => void): Request<ServiceDiscovery.Types.DeregisterInstanceResponse, AWSError>;
   /**
-   * Discovers registered instances for a specified namespace and service. You can use DiscoverInstances to discover instances for any type of namespace. For public and private DNS namespaces, you can also use DNS queries to discover instances.
+   * Discovers registered instances for a specified namespace and service. You can use DiscoverInstances to discover instances for any type of namespace. DiscoverInstances returns a randomized list of instances allowing customers to distribute traffic evenly across instances. For public and private DNS namespaces, you can also use DNS queries to discover instances.
    */
   discoverInstances(params: ServiceDiscovery.Types.DiscoverInstancesRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.DiscoverInstancesResponse) => void): Request<ServiceDiscovery.Types.DiscoverInstancesResponse, AWSError>;
   /**
-   * Discovers registered instances for a specified namespace and service. You can use DiscoverInstances to discover instances for any type of namespace. For public and private DNS namespaces, you can also use DNS queries to discover instances.
+   * Discovers registered instances for a specified namespace and service. You can use DiscoverInstances to discover instances for any type of namespace. DiscoverInstances returns a randomized list of instances allowing customers to distribute traffic evenly across instances. For public and private DNS namespaces, you can also use DNS queries to discover instances.
    */
   discoverInstances(callback?: (err: AWSError, data: ServiceDiscovery.Types.DiscoverInstancesResponse) => void): Request<ServiceDiscovery.Types.DiscoverInstancesResponse, AWSError>;
+  /**
+   * Discovers the increasing revision associated with an instance.
+   */
+  discoverInstancesRevision(params: ServiceDiscovery.Types.DiscoverInstancesRevisionRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.DiscoverInstancesRevisionResponse) => void): Request<ServiceDiscovery.Types.DiscoverInstancesRevisionResponse, AWSError>;
+  /**
+   * Discovers the increasing revision associated with an instance.
+   */
+  discoverInstancesRevision(callback?: (err: AWSError, data: ServiceDiscovery.Types.DiscoverInstancesRevisionResponse) => void): Request<ServiceDiscovery.Types.DiscoverInstancesRevisionResponse, AWSError>;
   /**
    * Gets information about a specified instance.
    */
@@ -100,11 +108,11 @@ declare class ServiceDiscovery extends Service {
    */
   getNamespace(callback?: (err: AWSError, data: ServiceDiscovery.Types.GetNamespaceResponse) => void): Request<ServiceDiscovery.Types.GetNamespaceResponse, AWSError>;
   /**
-   * Gets information about any operation that returns an operation ID in the response, such as a CreateService request.  To get a list of operations that match specified criteria, see ListOperations. 
+   * Gets information about any operation that returns an operation ID in the response, such as a CreateHttpNamespace request.  To get a list of operations that match specified criteria, see ListOperations. 
    */
   getOperation(params: ServiceDiscovery.Types.GetOperationRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetOperationResponse) => void): Request<ServiceDiscovery.Types.GetOperationResponse, AWSError>;
   /**
-   * Gets information about any operation that returns an operation ID in the response, such as a CreateService request.  To get a list of operations that match specified criteria, see ListOperations. 
+   * Gets information about any operation that returns an operation ID in the response, such as a CreateHttpNamespace request.  To get a list of operations that match specified criteria, see ListOperations. 
    */
   getOperation(callback?: (err: AWSError, data: ServiceDiscovery.Types.GetOperationResponse) => void): Request<ServiceDiscovery.Types.GetOperationResponse, AWSError>;
   /**
@@ -423,6 +431,26 @@ declare namespace ServiceDiscovery {
      * A complex type that contains one HttpInstanceSummary for each registered instance.
      */
     Instances?: HttpInstanceSummaryList;
+    /**
+     * The increasing revision associated to the response Instances list. If a new instance is registered or deregistered, the InstancesRevision updates. The health status updates don't update InstancesRevision.
+     */
+    InstancesRevision?: Revision;
+  }
+  export interface DiscoverInstancesRevisionRequest {
+    /**
+     * The HttpName name of the namespace. It's found in the HttpProperties member of the Properties member of the namespace.
+     */
+    NamespaceName: NamespaceName;
+    /**
+     * The name of the service that you specified when you registered the instance.
+     */
+    ServiceName: ServiceName;
+  }
+  export interface DiscoverInstancesRevisionResponse {
+    /**
+     * The increasing revision associated to the response Instances list. If a new instance is registered or deregistered, the InstancesRevision updates. The health status updates don't update InstancesRevision.
+     */
+    InstancesRevision?: Revision;
   }
   export type DiscoverMaxResults = number;
   export interface DnsConfig {
@@ -1001,7 +1029,7 @@ declare namespace ServiceDiscovery {
      */
     CreatorRequestId?: ResourceId;
     /**
-     * A string map that contains the following information for the service that you specify in ServiceId:   The attributes that apply to the records that are defined in the service.    For each attribute, the applicable value.    Do not include sensitive information in the attributes if the namespace is discoverable by public DNS queries.  Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME  If you want Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that's associated with the load balancer. For information about how to get the DNS name, see "DNSName" in the topic AliasTarget in the Route 53 API Reference. Note the following:   The configuration for the service that's specified by ServiceId must include settings for an A record, an AAAA record, or both.   In the service that's specified by ServiceId, the value of RoutingPolicy must be WEIGHTED.   If the service that's specified by ServiceId includes HealthCheckConfig settings, Cloud Map will create the Route 53 health check, but it doesn't associate the health check with the alias record.   Auto naming currently doesn't support creating alias records that route traffic to Amazon Web Services resources other than Elastic Load Balancing load balancers.   If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE attributes.    AWS_EC2_INSTANCE_ID   HTTP namespaces only. The Amazon EC2 instance ID for the instance. If the AWS_EC2_INSTANCE_ID attribute is specified, then the only other attribute that can be specified is AWS_INIT_HEALTH_STATUS. When the AWS_EC2_INSTANCE_ID attribute is specified, then the AWS_INSTANCE_IPV4 attribute will be filled out with the primary private IPv4 address.  AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries (for example, example.com). This value is required if the service specified by ServiceId includes settings for an CNAME record.  AWS_INSTANCE_IPV4  If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries (for example, 192.0.2.44). This value is required if the service specified by ServiceId includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_IPV6  If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345). This value is required if the service specified by ServiceId includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_PORT  If the service includes an SRV record, the value that you want Route 53 to return for the port. If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.  This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.  Custom attributes  You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute name is 255 characters, and the maximum length of the attribute value is 1,024 characters. The total size of all provided attributes (sum of all keys and values) must not exceed 5,000 characters.  
+     * A string map that contains the following information for the service that you specify in ServiceId:   The attributes that apply to the records that are defined in the service.    For each attribute, the applicable value.    Do not include sensitive information in the attributes if the namespace is discoverable by public DNS queries.  Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME  If you want Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that's associated with the load balancer. For information about how to get the DNS name, see "DNSName" in the topic AliasTarget in the Route 53 API Reference. Note the following:   The configuration for the service that's specified by ServiceId must include settings for an A record, an AAAA record, or both.   In the service that's specified by ServiceId, the value of RoutingPolicy must be WEIGHTED.   If the service that's specified by ServiceId includes HealthCheckConfig settings, Cloud Map will create the Route 53 health check, but it doesn't associate the health check with the alias record.   Cloud Map currently doesn't support creating alias records that route traffic to Amazon Web Services resources other than Elastic Load Balancing load balancers.   If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE attributes.    AWS_EC2_INSTANCE_ID   HTTP namespaces only. The Amazon EC2 instance ID for the instance. If the AWS_EC2_INSTANCE_ID attribute is specified, then the only other attribute that can be specified is AWS_INIT_HEALTH_STATUS. When the AWS_EC2_INSTANCE_ID attribute is specified, then the AWS_INSTANCE_IPV4 attribute will be filled out with the primary private IPv4 address.  AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries (for example, example.com). This value is required if the service specified by ServiceId includes settings for an CNAME record.  AWS_INSTANCE_IPV4  If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries (for example, 192.0.2.44). This value is required if the service specified by ServiceId includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_IPV6  If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345). This value is required if the service specified by ServiceId includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_PORT  If the service includes an SRV record, the value that you want Route 53 to return for the port. If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.  This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.  Custom attributes  You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute name is 255 characters, and the maximum length of the attribute value is 1,024 characters. The total size of all provided attributes (sum of all keys and values) must not exceed 5,000 characters.  
      */
     Attributes: Attributes;
   }
@@ -1015,6 +1043,7 @@ declare namespace ServiceDiscovery {
   export type ResourceDescription = string;
   export type ResourceId = string;
   export type ResourcePath = string;
+  export type Revision = number;
   export type RoutingPolicy = "MULTIVALUE"|"WEIGHTED"|string;
   export interface SOA {
     /**

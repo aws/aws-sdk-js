@@ -68,11 +68,11 @@ declare class AppRunner extends Service {
    */
   createVpcIngressConnection(callback?: (err: AWSError, data: AppRunner.Types.CreateVpcIngressConnectionResponse) => void): Request<AppRunner.Types.CreateVpcIngressConnectionResponse, AWSError>;
   /**
-   * Delete an App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.
+   * Delete an App Runner automatic scaling configuration resource. You can delete a top level auto scaling configuration, a specific revision of one, or all revisions associated with the top level configuration. You can't delete the default auto scaling configuration or a configuration that's used by one or more App Runner services.
    */
   deleteAutoScalingConfiguration(params: AppRunner.Types.DeleteAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.DeleteAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.DeleteAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Delete an App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.
+   * Delete an App Runner automatic scaling configuration resource. You can delete a top level auto scaling configuration, a specific revision of one, or all revisions associated with the top level configuration. You can't delete the default auto scaling configuration or a configuration that's used by one or more App Runner services.
    */
   deleteAutoScalingConfiguration(callback?: (err: AWSError, data: AppRunner.Types.DeleteAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.DeleteAutoScalingConfigurationResponse, AWSError>;
   /**
@@ -212,6 +212,14 @@ declare class AppRunner extends Service {
    */
   listServices(callback?: (err: AWSError, data: AppRunner.Types.ListServicesResponse) => void): Request<AppRunner.Types.ListServicesResponse, AWSError>;
   /**
+   * Returns a list of the associated App Runner services using an auto scaling configuration.
+   */
+  listServicesForAutoScalingConfiguration(params: AppRunner.Types.ListServicesForAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.ListServicesForAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.ListServicesForAutoScalingConfigurationResponse, AWSError>;
+  /**
+   * Returns a list of the associated App Runner services using an auto scaling configuration.
+   */
+  listServicesForAutoScalingConfiguration(callback?: (err: AWSError, data: AppRunner.Types.ListServicesForAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.ListServicesForAutoScalingConfigurationResponse, AWSError>;
+  /**
    * List tags that are associated with for an App Runner resource. The response contains a list of tag key-value pairs.
    */
   listTagsForResource(params: AppRunner.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppRunner.Types.ListTagsForResourceResponse) => void): Request<AppRunner.Types.ListTagsForResourceResponse, AWSError>;
@@ -275,6 +283,14 @@ declare class AppRunner extends Service {
    * Remove tags from an App Runner resource.
    */
   untagResource(callback?: (err: AWSError, data: AppRunner.Types.UntagResourceResponse) => void): Request<AppRunner.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Update an auto scaling configuration to be the default. The existing default auto scaling configuration will be set to non-default automatically.
+   */
+  updateDefaultAutoScalingConfiguration(params: AppRunner.Types.UpdateDefaultAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.UpdateDefaultAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.UpdateDefaultAutoScalingConfigurationResponse, AWSError>;
+  /**
+   * Update an auto scaling configuration to be the default. The existing default auto scaling configuration will be set to non-default automatically.
+   */
+  updateDefaultAutoScalingConfiguration(callback?: (err: AWSError, data: AppRunner.Types.UpdateDefaultAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.UpdateDefaultAutoScalingConfigurationResponse, AWSError>;
   /**
    * Update an App Runner service. You can update the source configuration and instance configuration of the service. You can also update the ARN of the auto scaling configuration resource that's associated with the service. However, you can't change the name or the encryption configuration of the service. These can be set only when you create the service. To update the tags applied to your service, use the separate actions TagResource and UntagResource. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
@@ -351,11 +367,11 @@ declare namespace AppRunner {
     /**
      * The revision of this auto scaling configuration. It's unique among all the active configurations ("Status": "ACTIVE") that share the same AutoScalingConfigurationName.
      */
-    AutoScalingConfigurationRevision?: Integer;
+    AutoScalingConfigurationRevision?: AutoScalingConfigurationRevision;
     /**
      * It's set to true for the configuration with the highest Revision among all configurations that share the same AutoScalingConfigurationName. It's set to false otherwise.
      */
-    Latest?: Boolean;
+    Latest?: Latest;
     /**
      * The current state of the auto scaling configuration. If the status of a configuration revision is INACTIVE, it was deleted and can't be used. Inactive configuration revisions are permanently removed some time after they are deleted.
      */
@@ -363,15 +379,15 @@ declare namespace AppRunner {
     /**
      * The maximum number of concurrent requests that an instance processes. If the number of concurrent requests exceeds this limit, App Runner scales the service up.
      */
-    MaxConcurrency?: Integer;
+    MaxConcurrency?: MaxConcurrency;
     /**
      * The minimum number of instances that App Runner provisions for a service. The service always has at least MinSize provisioned instances. Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset. App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.
      */
-    MinSize?: Integer;
+    MinSize?: MinSize;
     /**
      * The maximum number of instances that a service scales up to. At most MaxSize instances actively serve traffic for your service.
      */
-    MaxSize?: Integer;
+    MaxSize?: MaxSize;
     /**
      * The time when the auto scaling configuration was created. It's in Unix time stamp format.
      */
@@ -380,8 +396,17 @@ declare namespace AppRunner {
      * The time when the auto scaling configuration was deleted. It's in Unix time stamp format.
      */
     DeletedAt?: Timestamp;
+    /**
+     * Indicates if this auto scaling configuration has an App Runner service associated with it. A value of true indicates one or more services are associated. A value of false indicates no services are associated.
+     */
+    HasAssociatedService?: HasAssociatedService;
+    /**
+     * Indicates if this auto scaling configuration should be used as the default for a new App Runner service that does not have an auto scaling configuration ARN specified during creation. Each account can have only one default AutoScalingConfiguration per region. The default AutoScalingConfiguration can be any revision under the same AutoScalingConfigurationName.
+     */
+    IsDefault?: IsDefault;
   }
   export type AutoScalingConfigurationName = string;
+  export type AutoScalingConfigurationRevision = number;
   export type AutoScalingConfigurationStatus = "ACTIVE"|"INACTIVE"|string;
   export interface AutoScalingConfigurationSummary {
     /**
@@ -396,6 +421,22 @@ declare namespace AppRunner {
      * The revision of this auto scaling configuration. It's unique among all the active configurations ("Status": "ACTIVE") with the same AutoScalingConfigurationName.
      */
     AutoScalingConfigurationRevision?: Integer;
+    /**
+     * The current state of the auto scaling configuration. If the status of a configuration revision is INACTIVE, it was deleted and can't be used. Inactive configuration revisions are permanently removed some time after they are deleted.
+     */
+    Status?: AutoScalingConfigurationStatus;
+    /**
+     * The time when the auto scaling configuration was created. It's in Unix time stamp format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * Indicates if this auto scaling configuration has an App Runner service associated with it. A value of true indicates one or more services are associated. A value of false indicates no services are associated.
+     */
+    HasAssociatedService?: HasAssociatedService;
+    /**
+     * Indicates if this auto scaling configuration should be used as the default for a new App Runner service that does not have an auto scaling configuration ARN specified during creation. Each account can have only one default AutoScalingConfiguration per region. The default AutoScalingConfiguration can be any revision under the same AutoScalingConfigurationName.
+     */
+    IsDefault?: IsDefault;
   }
   export type AutoScalingConfigurationSummaryList = AutoScalingConfigurationSummary[];
   export type Boolean = boolean;
@@ -521,7 +562,7 @@ declare namespace AppRunner {
   export type Cpu = string;
   export interface CreateAutoScalingConfigurationRequest {
     /**
-     * A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.  The name DefaultConfiguration is reserved (it's the configuration that App Runner uses if you don't provide a custome one). You can't use it to create a new auto scaling configuration, and you can't create a revision of it. When you want to use your own auto scaling configuration for your App Runner service, create a configuration with a different name, and then provide it when you create or update your service. 
+     * A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.  Prior to the release of Managing auto scaling, the name DefaultConfiguration was reserved.  This restriction is no longer in place. You can now manage DefaultConfiguration the same way you manage your custom auto scaling configurations. This means you can do the following with the DefaultConfiguration that App Runner provides:   Create new revisions of the DefaultConfiguration.   Delete the revisions of the DefaultConfiguration.   Delete the auto scaling configuration for which the App Runner DefaultConfiguration was created.   If you delete the auto scaling configuration you can create another custom auto scaling configuration with the same DefaultConfiguration name. The original DefaultConfiguration resource provided by App Runner remains in your account unless you make changes to it.   
      */
     AutoScalingConfigurationName: AutoScalingConfigurationName;
     /**
@@ -709,6 +750,10 @@ declare namespace AppRunner {
      * The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to delete. The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either .../name  or .../name/revision . If a revision isn't specified, the latest active revision is deleted.
      */
     AutoScalingConfigurationArn: AppRunnerResourceArn;
+    /**
+     * Set to true to delete all of the revisions associated with the AutoScalingConfigurationArn parameter value. When DeleteAllRevisions is set to true, the only valid value for the Amazon Resource Name (ARN) is a partial ARN ending with: .../name.
+     */
+    DeleteAllRevisions?: Boolean;
   }
   export interface DeleteAutoScalingConfigurationResponse {
     /**
@@ -923,6 +968,7 @@ declare namespace AppRunner {
      */
     KmsKey: KmsKeyArn;
   }
+  export type HasAssociatedService = boolean;
   export interface HealthCheckConfiguration {
     /**
      * The IP protocol that App Runner uses to perform health checks for your service. If you set Protocol to HTTP, App Runner sends health check requests to the HTTP path specified by Path. Default: TCP 
@@ -1020,7 +1066,9 @@ declare namespace AppRunner {
     InstanceRoleArn?: RoleArn;
   }
   export type Integer = number;
+  export type IsDefault = boolean;
   export type KmsKeyArn = string;
+  export type Latest = boolean;
   export interface ListAutoScalingConfigurationsRequest {
     /**
      * The name of the App Runner auto scaling configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner returns revisions of all active configurations.
@@ -1126,6 +1174,30 @@ declare namespace AppRunner {
      */
     NextToken?: String;
   }
+  export interface ListServicesForAutoScalingConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to list the services for. The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either .../name  or .../name/revision . If a revision isn't specified, the latest active revision is used.
+     */
+    AutoScalingConfigurationArn: AppRunnerResourceArn;
+    /**
+     * The maximum number of results to include in each response (result page). It's used for a paginated request. If you don't specify MaxResults, the request retrieves all available results in a single response.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones specified in the initial request. If you don't specify NextToken, the request retrieves the first result page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListServicesForAutoScalingConfigurationResponse {
+    /**
+     * A list of service ARN records. In a paginated request, the request returns up to MaxResults records for each call.
+     */
+    ServiceArnList: ServiceArnList;
+    /**
+     * The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListServicesRequest {
     /**
      * A token from a previous result page. Used for a paginated request. The request retrieves the next result page. All other parameter values must be identical to the ones specified in the initial request. If you don't specify NextToken, the request retrieves the first result page.
@@ -1212,8 +1284,11 @@ declare namespace AppRunner {
      */
     NextToken?: NextToken;
   }
+  export type MaxConcurrency = number;
   export type MaxResults = number;
+  export type MaxSize = number;
   export type Memory = string;
+  export type MinSize = number;
   export interface NetworkConfiguration {
     /**
      * Network configuration settings for outbound message traffic.
@@ -1413,6 +1488,7 @@ declare namespace AppRunner {
      */
     ObservabilityConfiguration?: ServiceObservabilityConfiguration;
   }
+  export type ServiceArnList = AppRunnerResourceArn[];
   export type ServiceId = string;
   export type ServiceMaxResults = number;
   export type ServiceName = string;
@@ -1548,6 +1624,18 @@ declare namespace AppRunner {
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateDefaultAutoScalingConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to set as the default. The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either .../name  or .../name/revision . If a revision isn't specified, the latest active revision is set as the default.
+     */
+    AutoScalingConfigurationArn: AppRunnerResourceArn;
+  }
+  export interface UpdateDefaultAutoScalingConfigurationResponse {
+    /**
+     * A description of the App Runner auto scaling configuration that was set as default.
+     */
+    AutoScalingConfiguration: AutoScalingConfiguration;
   }
   export interface UpdateServiceRequest {
     /**

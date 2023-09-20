@@ -1484,7 +1484,7 @@ declare namespace CodeArtifact {
      */
     originConfiguration?: PackageOriginConfiguration;
   }
-  export type PackageFormat = "npm"|"pypi"|"maven"|"nuget"|"generic"|string;
+  export type PackageFormat = "npm"|"pypi"|"maven"|"nuget"|"generic"|"swift"|string;
   export type PackageName = string;
   export type PackageNamespace = string;
   export interface PackageOriginConfiguration {
