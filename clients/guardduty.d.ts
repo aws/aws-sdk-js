@@ -340,11 +340,11 @@ declare class GuardDuty extends Service {
    */
   getUsageStatistics(callback?: (err: AWSError, data: GuardDuty.Types.GetUsageStatisticsResponse) => void): Request<GuardDuty.Types.GetUsageStatisticsResponse, AWSError>;
   /**
-   * Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account that invokes this API. If you are using organizations to manager your GuardDuty environment, this step is not needed. For more information, see Managing accounts with organizations. To invite Amazon Web Services accounts, the first step is to ensure that GuardDuty has been enabled in the potential member accounts. You can now invoke this API to add accounts by invitation. The invited accounts can either accept or decline the invitation from their GuardDuty accounts. Each invited Amazon Web Services account can choose to accept the invitation from only one Amazon Web Services account. For more information, see Managing GuardDuty accounts by invitation. After the invite has been accepted and you choose to disassociate a member account (by using DisassociateMembers) from your account, the details of the member account obtained by invoking CreateMembers, including the associated email addresses, will be retained. This is done so that you can invoke InviteMembers without the need to invoke CreateMembers again. To remove the details associated with a member account, you must also invoke DeleteMembers. 
+   * Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account that invokes this API. If you are using Amazon Web Services Organizations to manage your GuardDuty environment, this step is not needed. For more information, see Managing accounts with organizations. To invite Amazon Web Services accounts, the first step is to ensure that GuardDuty has been enabled in the potential member accounts. You can now invoke this API to add accounts by invitation. The invited accounts can either accept or decline the invitation from their GuardDuty accounts. Each invited Amazon Web Services account can choose to accept the invitation from only one Amazon Web Services account. For more information, see Managing GuardDuty accounts by invitation. After the invite has been accepted and you choose to disassociate a member account (by using DisassociateMembers) from your account, the details of the member account obtained by invoking CreateMembers, including the associated email addresses, will be retained. This is done so that you can invoke InviteMembers without the need to invoke CreateMembers again. To remove the details associated with a member account, you must also invoke DeleteMembers. 
    */
   inviteMembers(params: GuardDuty.Types.InviteMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
   /**
-   * Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account that invokes this API. If you are using organizations to manager your GuardDuty environment, this step is not needed. For more information, see Managing accounts with organizations. To invite Amazon Web Services accounts, the first step is to ensure that GuardDuty has been enabled in the potential member accounts. You can now invoke this API to add accounts by invitation. The invited accounts can either accept or decline the invitation from their GuardDuty accounts. Each invited Amazon Web Services account can choose to accept the invitation from only one Amazon Web Services account. For more information, see Managing GuardDuty accounts by invitation. After the invite has been accepted and you choose to disassociate a member account (by using DisassociateMembers) from your account, the details of the member account obtained by invoking CreateMembers, including the associated email addresses, will be retained. This is done so that you can invoke InviteMembers without the need to invoke CreateMembers again. To remove the details associated with a member account, you must also invoke DeleteMembers. 
+   * Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account that invokes this API. If you are using Amazon Web Services Organizations to manage your GuardDuty environment, this step is not needed. For more information, see Managing accounts with organizations. To invite Amazon Web Services accounts, the first step is to ensure that GuardDuty has been enabled in the potential member accounts. You can now invoke this API to add accounts by invitation. The invited accounts can either accept or decline the invitation from their GuardDuty accounts. Each invited Amazon Web Services account can choose to accept the invitation from only one Amazon Web Services account. For more information, see Managing GuardDuty accounts by invitation. After the invite has been accepted and you choose to disassociate a member account (by using DisassociateMembers) from your account, the details of the member account obtained by invoking CreateMembers, including the associated email addresses, will be retained. This is done so that you can invoke InviteMembers without the need to invoke CreateMembers again. To remove the details associated with a member account, you must also invoke DeleteMembers. 
    */
   inviteMembers(callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
   /**
@@ -404,11 +404,11 @@ declare class GuardDuty extends Service {
    */
   listMembers(callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
-   * Lists the accounts configured as GuardDuty delegated administrators. Only the organization's management account can run this API operation.
+   * Lists the accounts designated as GuardDuty delegated administrators. Only the organization's management account can run this API operation.
    */
   listOrganizationAdminAccounts(params: GuardDuty.Types.ListOrganizationAdminAccountsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListOrganizationAdminAccountsResponse) => void): Request<GuardDuty.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
-   * Lists the accounts configured as GuardDuty delegated administrators. Only the organization's management account can run this API operation.
+   * Lists the accounts designated as GuardDuty delegated administrators. Only the organization's management account can run this API operation.
    */
   listOrganizationAdminAccounts(callback?: (err: AWSError, data: GuardDuty.Types.ListOrganizationAdminAccountsResponse) => void): Request<GuardDuty.Types.ListOrganizationAdminAccountsResponse, AWSError>;
   /**
@@ -963,7 +963,7 @@ declare namespace GuardDuty {
   }
   export interface CoverageFilterCriterion {
     /**
-     * An enum value representing possible filter fields.
+     * An enum value representing possible filter fields.  Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME. CLUSTER_NAME has been deprecated. 
      */
     CriterionKey?: CoverageFilterCriterionKey;
     /**
@@ -971,7 +971,7 @@ declare namespace GuardDuty {
      */
     FilterCondition?: CoverageFilterCondition;
   }
-  export type CoverageFilterCriterionKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"RESOURCE_TYPE"|"COVERAGE_STATUS"|"ADDON_VERSION"|"MANAGEMENT_TYPE"|string;
+  export type CoverageFilterCriterionKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"RESOURCE_TYPE"|"COVERAGE_STATUS"|"ADDON_VERSION"|"MANAGEMENT_TYPE"|"EKS_CLUSTER_NAME"|string;
   export type CoverageFilterCriterionList = CoverageFilterCriterion[];
   export interface CoverageResource {
     /**
@@ -1016,7 +1016,7 @@ declare namespace GuardDuty {
   export type CoverageResources = CoverageResource[];
   export interface CoverageSortCriteria {
     /**
-     * Represents the field name used to sort the coverage details.
+     * Represents the field name used to sort the coverage details.  Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME. CLUSTER_NAME has been deprecated. 
      */
     AttributeName?: CoverageSortKey;
     /**
@@ -1024,7 +1024,7 @@ declare namespace GuardDuty {
      */
     OrderBy?: OrderBy;
   }
-  export type CoverageSortKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"COVERAGE_STATUS"|"ISSUE"|"ADDON_VERSION"|"UPDATED_AT"|string;
+  export type CoverageSortKey = "ACCOUNT_ID"|"CLUSTER_NAME"|"COVERAGE_STATUS"|"ISSUE"|"ADDON_VERSION"|"UPDATED_AT"|"EKS_CLUSTER_NAME"|string;
   export interface CoverageStatistics {
     /**
      * Represents coverage statistics for EKS clusters aggregated by resource type.
@@ -1839,7 +1839,7 @@ declare namespace GuardDuty {
   export type Email = string;
   export interface EnableOrganizationAdminAccountRequest {
     /**
-     * The Amazon Web Services Account ID for the organization account to be enabled as a GuardDuty delegated administrator.
+     * The Amazon Web Services account ID for the organization account to be enabled as a GuardDuty delegated administrator.
      */
     AdminAccountId: String;
   }
@@ -1880,7 +1880,7 @@ declare namespace GuardDuty {
   }
   export interface FilterCriterion {
     /**
-     * An enum value representing possible scan properties to match with given scan entries.
+     * An enum value representing possible scan properties to match with given scan entries.  Replace the enum value CLUSTER_NAME with EKS_CLUSTER_NAME. CLUSTER_NAME has been deprecated. 
      */
     CriterionKey?: CriterionKey;
     /**
@@ -3289,7 +3289,7 @@ declare namespace GuardDuty {
      */
     Name?: OrgFeature;
     /**
-     * The status of the feature that will be configured for the organization. Use one of the following values to configure the feature status for the entire organization:    NEW: Indicates that when a new account joins the organization, they will have the feature enabled automatically.     ALL: Indicates that all accounts in the organization have the feature enabled automatically. This includes NEW accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty. It may take up to 24 hours to update the configuration for all the member accounts.    NONE: Indicates that the feature will not be automatically enabled for any account in the organization. The administrator must manage the feature for each account individually.  
+     * Describes the status of the feature that is configured for the member accounts within the organization. One of the following values is the status for the entire organization:    NEW: Indicates that when a new account joins the organization, they will have the feature enabled automatically.     ALL: Indicates that all accounts in the organization have the feature enabled automatically. This includes NEW accounts that join the organization and accounts that may have been suspended or removed from the organization in GuardDuty. It may take up to 24 hours to update the configuration for all the member accounts.    NONE: Indicates that the feature will not be automatically enabled for any account in the organization. The administrator must manage the feature for each account individually.  
      */
     AutoEnable?: OrgFeatureStatus;
     /**
@@ -3864,11 +3864,11 @@ declare namespace GuardDuty {
   }
   export interface ScanConditionPair {
     /**
-     * Represents key  in the map condition.
+     * Represents the key in the map condition.
      */
     Key: TagKey;
     /**
-     * Represents optional value  in the map condition. If not specified, only key  will be matched.
+     * Represents optional value in the map condition. If not specified, only the key will be matched.
      */
     Value?: TagValue;
   }
@@ -4390,7 +4390,7 @@ declare namespace GuardDuty {
      */
     DetectorId: DetectorId;
     /**
-     * Indicates whether to automatically enable member accounts in the organization. Even though this is still supported, we recommend using AutoEnableOrganizationMembers to achieve the similar results. You must provide the value for either autoEnableOrganizationMembers or autoEnable.
+     * Represents whether or not to automatically enable member accounts in the organization. Even though this is still supported, we recommend using AutoEnableOrganizationMembers to achieve the similar results. You must provide a value for either autoEnableOrganizationMembers or autoEnable.
      */
     AutoEnable?: Boolean;
     /**

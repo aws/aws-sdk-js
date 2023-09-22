@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1462.0-->
+<!--LATEST=2.1463.0-->
 <!--ENTRYINSERT-->
+
+## 2.1463.0
+* feature: Braket: This release adds support to view the device queue depth (the number of queued quantum tasks and hybrid jobs on a device) and queue position for a quantum task and hybrid job.
+* feature: CloudWatchEvents: Adds sensitive trait to various shapes in Jetstream Connections API model.
+* feature: DMS: new vendors for DMS CSF: MongoDB, MariaDB, DocumentDb and Redshift
+* feature: EC2: EC2 M2 Pro Mac instances are powered by Apple M2 Pro Mac Mini computers featuring 12 core CPU, 19 core GPU, 32 GiB of memory, and 16 core Apple Neural Engine and uniquely enabled by the AWS Nitro System through high-speed Thunderbolt connections.
+* feature: GuardDuty: Add `EKS_CLUSTER_NAME` to filter and sort key.
+* feature: MediaConvert: This release supports the creation of of audio-only tracks in CMAF output groups.
 
 ## 2.1462.0
 * feature: AppConfig: Enabling boto3 paginators for list APIs and adding documentation around ServiceQuotaExceededException errors

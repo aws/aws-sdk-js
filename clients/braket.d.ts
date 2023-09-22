@@ -290,6 +290,21 @@ declare namespace Braket {
      */
     device: String256;
   }
+  export interface DeviceQueueInfo {
+    /**
+     * The name of the queue. 
+     */
+    queue: QueueName;
+    /**
+     * Optional. Specifies the priority of the queue. Tasks in a priority queue are processed before the tasks in a normal queue.
+     */
+    queuePriority?: QueuePriority;
+    /**
+     * The number of jobs or tasks in the queue for a given device. 
+     */
+    queueSize: String;
+  }
+  export type DeviceQueueInfoList = DeviceQueueInfo[];
   export type DeviceStatus = "ONLINE"|"OFFLINE"|"RETIRED"|string;
   export interface DeviceSummary {
     /**
@@ -335,6 +350,10 @@ declare namespace Braket {
      */
     deviceName: String;
     /**
+     * List of information about tasks and jobs queued on a device.
+     */
+    deviceQueueInfo?: DeviceQueueInfoList;
+    /**
      * The status of the device.
      */
     deviceStatus: DeviceStatus;
@@ -348,6 +367,10 @@ declare namespace Braket {
     providerName: String;
   }
   export interface GetJobRequest {
+    /**
+     * A list of attributes to return information for.
+     */
+    additionalAttributeNames?: HybridJobAdditionalAttributeNamesList;
     /**
      * The ARN of the job to retrieve.
      */
@@ -411,6 +434,10 @@ declare namespace Braket {
      */
     outputDataConfig: JobOutputDataConfig;
     /**
+     * Queue information for the requested job. Only returned if QueueInfo is specified in the additionalAttributeNames" field in the GetJob API request.
+     */
+    queueInfo?: HybridJobQueueInfo;
+    /**
      * The Amazon Resource Name (ARN) of an IAM role that Amazon Braket can assume to perform tasks on behalf of a user. It can access user resources, run an Amazon Braket job container on behalf of user, and output resources to the s3 buckets of a user.
      */
     roleArn: RoleArn;
@@ -433,6 +460,10 @@ declare namespace Braket {
   }
   export type GetJobResponseJobNameString = string;
   export interface GetQuantumTaskRequest {
+    /**
+     * A list of attributes to return information for.
+     */
+    additionalAttributeNames?: QuantumTaskAdditionalAttributeNamesList;
     /**
      * the ARN of the task to retrieve.
      */
@@ -476,6 +507,10 @@ declare namespace Braket {
      */
     quantumTaskArn: QuantumTaskArn;
     /**
+     * Queue information for the requested quantum task. Only returned if QueueInfo is specified in the additionalAttributeNames" field in the GetQuantumTask API request.
+     */
+    queueInfo?: QuantumTaskQueueInfo;
+    /**
      * The number of shots used in the task.
      */
     shots: Long;
@@ -487,6 +522,22 @@ declare namespace Braket {
      * The tags that belong to this task.
      */
     tags?: TagsMap;
+  }
+  export type HybridJobAdditionalAttributeName = "QueueInfo"|string;
+  export type HybridJobAdditionalAttributeNamesList = HybridJobAdditionalAttributeName[];
+  export interface HybridJobQueueInfo {
+    /**
+     * Optional. Provides more information about the queue position. For example, if the job is complete and no longer in the queue, the message field contains that information.
+     */
+    message?: String;
+    /**
+     * Current position of the job in the jobs queue.
+     */
+    position: String;
+    /**
+     * The name of the queue.
+     */
+    queue: QueueName;
   }
   export type HyperParameters = {[key: string]: HyperParametersValueString};
   export type HyperParametersValueString = string;
@@ -620,7 +671,27 @@ declare namespace Braket {
     tags?: TagsMap;
   }
   export type Long = number;
+  export type QuantumTaskAdditionalAttributeName = "QueueInfo"|string;
+  export type QuantumTaskAdditionalAttributeNamesList = QuantumTaskAdditionalAttributeName[];
   export type QuantumTaskArn = string;
+  export interface QuantumTaskQueueInfo {
+    /**
+     * Optional. Provides more information about the queue position. For example, if the task is complete and no longer in the queue, the message field contains that information.
+     */
+    message?: String;
+    /**
+     * Current position of the task in the quantum tasks queue.
+     */
+    position: String;
+    /**
+     * The name of the queue. 
+     */
+    queue: QueueName;
+    /**
+     * Optional. Specifies the priority of the queue. Quantum tasks in a priority queue are processed before the tasks in a normal queue.
+     */
+    queuePriority?: QueuePriority;
+  }
   export type QuantumTaskStatus = "CREATED"|"QUEUED"|"RUNNING"|"COMPLETED"|"FAILED"|"CANCELLING"|"CANCELLED"|string;
   export interface QuantumTaskSummary {
     /**
@@ -661,6 +732,8 @@ declare namespace Braket {
     tags?: TagsMap;
   }
   export type QuantumTaskSummaryList = QuantumTaskSummary[];
+  export type QueueName = "QUANTUM_TASKS_QUEUE"|"JOBS_QUEUE"|string;
+  export type QueuePriority = "Normal"|"Priority"|string;
   export type RoleArn = string;
   export interface S3DataSource {
     /**

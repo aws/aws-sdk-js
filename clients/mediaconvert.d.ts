@@ -1265,7 +1265,7 @@ declare namespace MediaConvert {
   export type CmafWriteHLSManifest = "DISABLED"|"ENABLED"|string;
   export type CmafWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
   export type CmfcAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION"|string;
-  export type CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|string;
+  export type CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"|"ALTERNATE_AUDIO_AUTO_SELECT"|"ALTERNATE_AUDIO_NOT_AUTO_SELECT"|"AUDIO_ONLY_VARIANT_STREAM"|string;
   export type CmfcDescriptiveVideoServiceFlag = "DONT_FLAG"|"FLAG"|string;
   export type CmfcIFrameOnlyManifest = "INCLUDE"|"EXCLUDE"|string;
   export type CmfcKlvMetadata = "PASSTHROUGH"|"NONE"|string;
@@ -1286,7 +1286,7 @@ declare namespace MediaConvert {
      */
     AudioRenditionSets?: __string;
     /**
-     * Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting.
+     * Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. Choose Audio-only variant stream (AUDIO_ONLY_VARIANT_STREAM) for any variant that you want to prohibit the client from playing with video. This causes MediaConvert to represent the variant as an EXT-X-STREAM-INF in the HLS manifest. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting.
      */
     AudioTrackType?: CmfcAudioTrackType;
     /**
@@ -3645,6 +3645,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ExtendedDataServices?: ExtendedDataServices;
     /**
+     * Specifies which input metadata to use for the default "Follow input" option for the following settings: resolution, frame rate, and pixel aspect ratio. In the simplest case, specify which input is used based on its index in the job. For example if you specify 3, then the fourth input will be used from each input. If the job does not have a fourth input, then the first input will be used. If no followInputIndex is specified, then 0 will be chosen automatically.
+     */
+    FollowInputIndex?: __integerMin0Max149;
+    /**
      * Use Inputs to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
      */
     Inputs?: __listOfInput;
@@ -3750,6 +3754,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.
      */
     ExtendedDataServices?: ExtendedDataServices;
+    /**
+     * Specifies which input metadata to use for the default "Follow input" option for the following settings: resolution, frame rate, and pixel aspect ratio. In the simplest case, specify which input is used based on its index in the job. For example if you specify 3, then the fourth input will be used from each input. If the job does not have a fourth input, then the first input will be used. If no followInputIndex is specified, then 0 will be chosen automatically.
+     */
+    FollowInputIndex?: __integerMin0Max149;
     /**
      * Use Inputs to define the source file used in the transcode job. There can only be one input in a job template. Using the API, you can include multiple inputs when referencing a job template.
      */
@@ -5290,7 +5298,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     Encryption?: S3EncryptionSettings;
     /**
-     * Specify the S3 storage class to use for this destination.
+     * Specify the S3 storage class to use for this output. To use your destination's default storage class: Keep the default value, Not set. For more information about S3 storage classes, see https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html
      */
     StorageClass?: S3StorageClass;
   }
@@ -5338,7 +5346,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
     /**
      * Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.
      */
-    Url?: __stringPatternHttps;
+    Url?: __stringPatternHttpsD;
   }
   export interface SpekeKeyProviderCmaf {
     /**
@@ -5360,7 +5368,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
     /**
      * Specify the URL to the key server that your SPEKE-compliant DRM key provider uses to provide keys for encrypting your content.
      */
-    Url?: __stringPatternHttps;
+    Url?: __stringPatternHttpsD;
   }
   export interface SrtDestinationSettings {
     /**
@@ -6225,6 +6233,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __integerMin0Max1152000000 = number;
   export type __integerMin0Max128 = number;
   export type __integerMin0Max1466400000 = number;
+  export type __integerMin0Max149 = number;
   export type __integerMin0Max15 = number;
   export type __integerMin0Max16 = number;
   export type __integerMin0Max2147483647 = number;
@@ -6396,6 +6405,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = string;
   export type __stringPatternDD = string;
   export type __stringPatternHttps = string;
+  export type __stringPatternHttpsD = string;
   export type __stringPatternHttpsKantarmedia = string;
   export type __stringPatternIdentityAZaZ26AZaZ09163 = string;
   export type __stringPatternS3 = string;

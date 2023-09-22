@@ -101,11 +101,11 @@ declare class DMS extends Service {
    */
   createReplicationConfig(callback?: (err: AWSError, data: DMS.Types.CreateReplicationConfigResponse) => void): Request<DMS.Types.CreateReplicationConfigResponse, AWSError>;
   /**
-   * Creates the replication instance using the specified parameters. DMS requires that your account have certain roles with appropriate permissions before you can create a replication instance. For information on the required roles, see Creating the IAM Roles to Use With the CLI and DMS API. For information on the required permissions, see IAM Permissions Needed to Use DMS.
+   * Creates the replication instance using the specified parameters. DMS requires that your account have certain roles with appropriate permissions before you can create a replication instance. For information on the required roles, see Creating the IAM Roles to Use With the CLI and DMS API. For information on the required permissions, see IAM Permissions Needed to Use DMS.  If you don't specify a version when creating a replication instance, DMS will create the instance using the default engine version. For information about the default engine version, see Release Notes. 
    */
   createReplicationInstance(params: DMS.Types.CreateReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
   /**
-   * Creates the replication instance using the specified parameters. DMS requires that your account have certain roles with appropriate permissions before you can create a replication instance. For information on the required roles, see Creating the IAM Roles to Use With the CLI and DMS API. For information on the required permissions, see IAM Permissions Needed to Use DMS.
+   * Creates the replication instance using the specified parameters. DMS requires that your account have certain roles with appropriate permissions before you can create a replication instance. For information on the required roles, see Creating the IAM Roles to Use With the CLI and DMS API. For information on the required permissions, see IAM Permissions Needed to Use DMS.  If you don't specify a version when creating a replication instance, DMS will create the instance using the default engine version. For information about the default engine version, see Release Notes. 
    */
   createReplicationInstance(callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
   /**
@@ -849,11 +849,11 @@ declare class DMS extends Service {
    */
   testConnection(callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
   /**
-   * Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher. If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the Force option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be available when you use Amazon EventBridge. To call this operation, make sure that you have certain permissions added to your user account. For more information, see Migrating event subscriptions to Amazon EventBridge in the Amazon Web Services Database Migration Service User Guide.
+   * Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.5 or higher. If any replication instances are from versions earlier than 3.4.5, the operation raises an error and tells you to upgrade these instances to version 3.4.5 or higher. To enable migration regardless of version, set the Force option to true. However, if you don't upgrade instances earlier than version 3.4.5, some types of events might not be available when you use Amazon EventBridge. To call this operation, make sure that you have certain permissions added to your user account. For more information, see Migrating event subscriptions to Amazon EventBridge in the Amazon Web Services Database Migration Service User Guide.
    */
   updateSubscriptionsToEventBridge(params: DMS.Types.UpdateSubscriptionsToEventBridgeMessage, callback?: (err: AWSError, data: DMS.Types.UpdateSubscriptionsToEventBridgeResponse) => void): Request<DMS.Types.UpdateSubscriptionsToEventBridgeResponse, AWSError>;
   /**
-   * Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.6 or higher. If any replication instances are from versions earlier than 3.4.6, the operation raises an error and tells you to upgrade these instances to version 3.4.6 or higher. To enable migration regardless of version, set the Force option to true. However, if you don't upgrade instances earlier than version 3.4.6, some types of events might not be available when you use Amazon EventBridge. To call this operation, make sure that you have certain permissions added to your user account. For more information, see Migrating event subscriptions to Amazon EventBridge in the Amazon Web Services Database Migration Service User Guide.
+   * Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules. By default, this operation migrates subscriptions only when all your replication instance versions are 3.4.5 or higher. If any replication instances are from versions earlier than 3.4.5, the operation raises an error and tells you to upgrade these instances to version 3.4.5 or higher. To enable migration regardless of version, set the Force option to true. However, if you don't upgrade instances earlier than version 3.4.5, some types of events might not be available when you use Amazon EventBridge. To call this operation, make sure that you have certain permissions added to your user account. For more information, see Migrating event subscriptions to Amazon EventBridge in the Amazon Web Services Database Migration Service User Guide.
    */
   updateSubscriptionsToEventBridge(callback?: (err: AWSError, data: DMS.Types.UpdateSubscriptionsToEventBridgeResponse) => void): Request<DMS.Types.UpdateSubscriptionsToEventBridgeResponse, AWSError>;
   /**
@@ -1163,11 +1163,11 @@ declare namespace DMS {
      */
     KmsKeyId?: String;
     /**
-     * Specifies the maximum value of the DMS capacity units (DCUs) for which a given DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value that you can specify for DMS Serverless is 384. The MaxCapacityUnits parameter is the only DCU parameter you are required to specify.
+     * Specifies the maximum value of the DMS capacity units (DCUs) for which a given DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 1 DCU as the minimum value allowed. The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value that you can specify for DMS Serverless is 384. The MaxCapacityUnits parameter is the only DCU parameter you are required to specify.
      */
     MaxCapacityUnits?: IntegerOptional;
     /**
-     * Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU value that you can specify for DMS Serverless is 2. You don't have to specify a value for the MinCapacityUnits parameter. If you don't set this value, DMS scans the current activity of available source tables to identify an optimum setting for this parameter. If there is no current source activity or DMS can't otherwise identify a more appropriate value, it sets this parameter to the minimum DCU value allowed, 2.
+     * Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 1 DCU as the minimum value allowed. The list of valid DCU values includes 1, 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU value that you can specify for DMS Serverless is 1. You don't have to specify a value for the MinCapacityUnits parameter. If you don't set this value, DMS scans the current activity of available source tables to identify an optimum setting for this parameter. If there is no current source activity or DMS can't otherwise identify a more appropriate value, it sets this parameter to the minimum DCU value allowed, 1.
      */
     MinCapacityUnits?: IntegerOptional;
     /**
@@ -1630,7 +1630,7 @@ declare namespace DMS {
      */
     EngineVersion?: String;
     /**
-     * A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window. This parameter defaults to true. Default: true  When AutoMinorVersionUpgrade is enabled, DMS uses the current default engine version when you create a replication instance. For example, if you set EngineVersion to a lower version number than the current default version, DMS uses the default version. If AutoMinorVersionUpgrade isn’t enabled when you create a replication instance, DMS uses the engine version specified by the EngineVersion parameter. 
+     * A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window. This parameter defaults to true. Default: true 
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
@@ -1726,7 +1726,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“
      */
     CdcStopPosition?: String;
     /**
@@ -1811,10 +1811,20 @@ declare namespace DMS {
   export type DataProviderDescriptorList = DataProviderDescriptor[];
   export type DataProviderList = DataProvider[];
   export interface DataProviderSettings {
+    RedshiftSettings?: RedshiftDataProviderSettings;
     PostgreSqlSettings?: PostgreSqlDataProviderSettings;
     MySqlSettings?: MySqlDataProviderSettings;
     OracleSettings?: OracleDataProviderSettings;
     MicrosoftSqlServerSettings?: MicrosoftSqlServerDataProviderSettings;
+    DocDbSettings?: DocDbDataProviderSettings;
+    /**
+     * Provides information that defines a MariaDB data provider.
+     */
+    MariaDbSettings?: MariaDbDataProviderSettings;
+    /**
+     * Provides information that defines a MongoDB data provider.
+     */
+    MongoDbSettings?: MongoDbDataProviderSettings;
   }
   export interface DatabaseInstanceSoftwareDetailsResponse {
     /**
@@ -3157,6 +3167,28 @@ declare namespace DMS {
      */
     BucketName?: String;
   }
+  export interface DocDbDataProviderSettings {
+    /**
+     * The name of the source DocumentDB server.
+     */
+    ServerName?: String;
+    /**
+     * The port value for the DocumentDB data provider.
+     */
+    Port?: IntegerOptional;
+    /**
+     * The database name on the DocumentDB data provider.
+     */
+    DatabaseName?: String;
+    /**
+     * The SSL mode used to connect to the DocumentDB data provider. The default value is none.
+     */
+    SslMode?: DmsSslModeValue;
+    /**
+     * The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+     */
+    CertificateArn?: String;
+  }
   export interface DocDbSettings {
     /**
      * The user name you use to access the DocumentDB source endpoint. 
@@ -3995,6 +4027,24 @@ declare namespace DMS {
   export type Long = number;
   export type LongOptional = number;
   export type LongVarcharMappingType = "wstring"|"clob"|"nclob"|string;
+  export interface MariaDbDataProviderSettings {
+    /**
+     * The name of the MariaDB server.
+     */
+    ServerName?: String;
+    /**
+     * The port value for the MariaDB data provider
+     */
+    Port?: IntegerOptional;
+    /**
+     * The SSL mode used to connect to the MariaDB data provider. The default value is none.
+     */
+    SslMode?: DmsSslModeValue;
+    /**
+     * The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+     */
+    CertificateArn?: String;
+  }
   export type MessageFormatValue = "json"|"json-unformatted"|string;
   export interface MicrosoftSQLServerSettings {
     /**
@@ -4054,7 +4104,7 @@ declare namespace DMS {
      */
     SecretsManagerSecretId?: String;
     /**
-     * Use the TrimSpaceInChar source endpoint setting to trim data on CHAR and NCHAR data types during migration. The default value is true.
+     * Use the TrimSpaceInChar source endpoint setting to right-trim data on CHAR and NCHAR data types during migration. Setting TrimSpaceInChar does not left-trim data. The default value is true.
      */
     TrimSpaceInChar?: BooleanOptional;
     /**
@@ -4515,7 +4565,7 @@ declare namespace DMS {
      */
     AllowMajorVersionUpgrade?: Boolean;
     /**
-     * A value that indicates that minor version upgrades are applied automatically to the replication instance during the maintenance window. Changing this parameter doesn't result in an outage, except in the case described following. The change is asynchronously applied as soon as possible.  An outage does result if these factors apply:    This parameter is set to true during the maintenance window.   A newer minor version is available.    DMS has enabled automatic patching for the given engine version.    When AutoMinorVersionUpgrade is enabled, DMS uses the current default engine version when you modify a replication instance. For example, if you set EngineVersion to a lower version number than the current default version, DMS uses the default version. If AutoMinorVersionUpgrade isn’t enabled when you modify a replication instance, DMS uses the engine version specified by the EngineVersion parameter.
+     * A value that indicates that minor version upgrades are applied automatically to the replication instance during the maintenance window. Changing this parameter doesn't result in an outage, except in the case described following. The change is asynchronously applied as soon as possible.  An outage does result if these factors apply:    This parameter is set to true during the maintenance window.   A newer minor version is available.    DMS has enabled automatic patching for the given engine version.   
      */
     AutoMinorVersionUpgrade?: BooleanOptional;
     /**
@@ -4583,7 +4633,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“
      */
     CdcStopPosition?: String;
     /**
@@ -4597,6 +4647,40 @@ declare namespace DMS {
      */
     ReplicationTask?: ReplicationTask;
   }
+  export interface MongoDbDataProviderSettings {
+    /**
+     * The name of the MongoDB server.
+     */
+    ServerName?: String;
+    /**
+     * The port value for the MongoDB data provider.
+     */
+    Port?: IntegerOptional;
+    /**
+     * The database name on the MongoDB data provider.
+     */
+    DatabaseName?: String;
+    /**
+     * The SSL mode used to connect to the MongoDB data provider. The default value is none.
+     */
+    SslMode?: DmsSslModeValue;
+    /**
+     * The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+     */
+    CertificateArn?: String;
+    /**
+     * The authentication type for the database connection. Valid values are PASSWORD or NO.
+     */
+    AuthType?: AuthTypeValue;
+    /**
+     *  The MongoDB database name. This setting isn't used when AuthType is set to "no".  The default is "admin".
+     */
+    AuthSource?: String;
+    /**
+     * The authentication method for connecting to the data provider. Valid values are DEFAULT, MONGODB_CR, or SCRAM_SHA_1.
+     */
+    AuthMechanism?: AuthMechanismValue;
+  }
   export interface MongoDbSettings {
     /**
      * The user name you use to access the MongoDB source endpoint. 
@@ -4607,7 +4691,7 @@ declare namespace DMS {
      */
     Password?: SecretString;
     /**
-     *  The name of the server on the MongoDB source endpoint. 
+     *  The name of the server on the MongoDB source endpoint. For MongoDB Atlas, provide the server name for any of the servers in the replication set.
      */
     ServerName?: String;
     /**
@@ -4982,7 +5066,7 @@ declare namespace DMS {
      */
     SecretsManagerSecretId?: String;
     /**
-     * Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN of the IAM role that specifies DMS as the trusted entity and grants the required permissions to access the SecretsManagerOracleAsmSecret. This SecretsManagerOracleAsmSecret has the secret value that allows access to the Oracle ASM of the endpoint.  You can specify one of two sets of values for these permissions. You can specify the values for this setting and SecretsManagerOracleAsmSecretId. Or you can specify clear-text values for AsmUserName, AsmPassword, and AsmServerName. You can't specify both. For more information on creating this SecretsManagerOracleAsmSecret and the SecretsManagerOracleAsmAccessRoleArn and SecretsManagerOracleAsmSecretId required to access it, see Using secrets to access Database Migration Service resources in the Database Migration Service User Guide. 
+     * Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN of the IAM role that specifies DMS as the trusted entity and grants the required permissions to access the SecretsManagerOracleAsmSecret. This SecretsManagerOracleAsmSecret has the secret value that allows access to the Oracle ASM of the endpoint.  You can specify one of two sets of values for these permissions. You can specify the values for this setting and SecretsManagerOracleAsmSecretId. Or you can specify clear-text values for AsmUser, AsmPassword, and AsmServerName. You can't specify both. For more information on creating this SecretsManagerOracleAsmSecret and the SecretsManagerOracleAsmAccessRoleArn and SecretsManagerOracleAsmSecretId required to access it, see Using secrets to access Database Migration Service resources in the Database Migration Service User Guide. 
      */
     SecretsManagerOracleAsmAccessRoleArn?: String;
     /**
@@ -5150,7 +5234,7 @@ declare namespace DMS {
      */
     TrimSpaceInChar?: BooleanOptional;
     /**
-     * When true, lets PostgreSQL migrate the boolean type as boolean. By default, PostgreSQL migrates booleans as varchar(5).
+     * When true, lets PostgreSQL migrate the boolean type as boolean. By default, PostgreSQL migrates booleans as varchar(5). You must set this setting on both the source and target endpoints for it to take effect.
      */
     MapBooleanAsBoolean?: BooleanOptional;
     /**
@@ -5394,6 +5478,20 @@ declare namespace DMS {
      */
     SslCaCertificateArn?: String;
   }
+  export interface RedshiftDataProviderSettings {
+    /**
+     * The name of the Amazon Redshift server.
+     */
+    ServerName?: String;
+    /**
+     * The port value for the Amazon Redshift data provider.
+     */
+    Port?: IntegerOptional;
+    /**
+     * The database name on the Amazon Redshift data provider.
+     */
+    DatabaseName?: String;
+  }
   export interface RedshiftSettings {
     /**
      * A value that indicates to allow any date format, including invalid formats such as 00/00/00 00:00:00, to be loaded without generating an error. You can choose true or false (the default). This parameter applies only to TIMESTAMP and DATE columns. Always use ACCEPTANYDATE with the DATEFORMAT parameter. If the date format for the data doesn't match the DATEFORMAT specification, Amazon Redshift inserts a NULL value into that field. 
@@ -5516,7 +5614,7 @@ declare namespace DMS {
      */
     SecretsManagerSecretId?: String;
     /**
-     * When true, lets Redshift migrate the boolean type as boolean. By default, Redshift migrates booleans as varchar(1).
+     * When true, lets Redshift migrate the boolean type as boolean. By default, Redshift migrates booleans as varchar(1). You must set this setting on both the source and target endpoints for it to take effect.
      */
     MapBooleanAsBoolean?: BooleanOptional;
   }
@@ -6007,7 +6105,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“
      */
     CdcStopPosition?: String;
     /**
@@ -6347,7 +6445,7 @@ declare namespace DMS {
      */
     CdcMinFileSize?: IntegerOptional;
     /**
-     * An optional parameter that specifies how DMS treats null values. While handling the null value, you can use this parameter to pass a user-defined string as null when writing to the target. For example, when target columns are not nullable, you can use this option to differentiate between the empty string value and the null value. So, if you set this parameter value to the empty string ("" or ''), DMS treats the empty string as the null value instead of NULL. The default value is NULL. Valid values include any valid string.
+     * An optional parameter that specifies how DMS treats null values. While handling the null value, you can use this parameter to pass a user-defined string as null when writing to the target. For example, when target columns are nullable, you can use this option to differentiate between the empty string value and the null value. So, if you set this parameter value to the empty string ("" or ''), DMS treats the empty string as the null value instead of NULL. The default value is NULL. Valid values include any valid string.
      */
     CsvNullValue?: String;
     /**
@@ -6718,7 +6816,7 @@ declare namespace DMS {
      */
     CdcStartPosition?: String;
     /**
-     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time: 2018-02-09T12:12:12“
+     * Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time. Server time example: --cdc-stop-position “server_time:2018-02-09T12:12:12” Commit time example: --cdc-stop-position “commit_time:2018-02-09T12:12:12“
      */
     CdcStopPosition?: String;
   }
@@ -6988,7 +7086,7 @@ declare namespace DMS {
   export type TlogAccessMode = "BackupOnly"|"PreferBackup"|"PreferTlog"|"TlogOnly"|string;
   export interface UpdateSubscriptionsToEventBridgeMessage {
     /**
-     * When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is. If not set or set to false, this operation runs only when all your replication instances are from DMS version 3.4.6 or higher. 
+     * When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is. If not set or set to false, this operation runs only when all your replication instances are from DMS version 3.4.5 or higher. 
      */
     ForceMove?: BooleanOptional;
   }
