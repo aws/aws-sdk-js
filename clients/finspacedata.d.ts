@@ -12,11 +12,11 @@ declare class Finspacedata extends Service {
   constructor(options?: Finspacedata.Types.ClientConfiguration)
   config: Config & Finspacedata.Types.ClientConfiguration;
   /**
-   * Adds a user account to a permission group to grant permissions for actions a user can perform in FinSpace.
+   * Adds a user to a permission group to grant permissions for actions a user can perform in FinSpace.
    */
   associateUserToPermissionGroup(params: Finspacedata.Types.AssociateUserToPermissionGroupRequest, callback?: (err: AWSError, data: Finspacedata.Types.AssociateUserToPermissionGroupResponse) => void): Request<Finspacedata.Types.AssociateUserToPermissionGroupResponse, AWSError>;
   /**
-   * Adds a user account to a permission group to grant permissions for actions a user can perform in FinSpace.
+   * Adds a user to a permission group to grant permissions for actions a user can perform in FinSpace.
    */
   associateUserToPermissionGroup(callback?: (err: AWSError, data: Finspacedata.Types.AssociateUserToPermissionGroupResponse) => void): Request<Finspacedata.Types.AssociateUserToPermissionGroupResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class Finspacedata extends Service {
    */
   disableUser(callback?: (err: AWSError, data: Finspacedata.Types.DisableUserResponse) => void): Request<Finspacedata.Types.DisableUserResponse, AWSError>;
   /**
-   * Removes a user account from a permission group.
+   * Removes a user from a permission group.
    */
   disassociateUserFromPermissionGroup(params: Finspacedata.Types.DisassociateUserFromPermissionGroupRequest, callback?: (err: AWSError, data: Finspacedata.Types.DisassociateUserFromPermissionGroupResponse) => void): Request<Finspacedata.Types.DisassociateUserFromPermissionGroupResponse, AWSError>;
   /**
-   * Removes a user account from a permission group.
+   * Removes a user from a permission group.
    */
   disassociateUserFromPermissionGroup(callback?: (err: AWSError, data: Finspacedata.Types.DisassociateUserFromPermissionGroupResponse) => void): Request<Finspacedata.Types.DisassociateUserFromPermissionGroupResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class Finspacedata extends Service {
    */
   getPermissionGroup(callback?: (err: AWSError, data: Finspacedata.Types.GetPermissionGroupResponse) => void): Request<Finspacedata.Types.GetPermissionGroupResponse, AWSError>;
   /**
-   * Request programmatic credentials to use with FinSpace SDK.
+   * Request programmatic credentials to use with FinSpace SDK. For more information, see Step 2. Access credentials programmatically using IAM access key id and secret access key.
    */
   getProgrammaticAccessCredentials(params: Finspacedata.Types.GetProgrammaticAccessCredentialsRequest, callback?: (err: AWSError, data: Finspacedata.Types.GetProgrammaticAccessCredentialsResponse) => void): Request<Finspacedata.Types.GetProgrammaticAccessCredentialsResponse, AWSError>;
   /**
-   * Request programmatic credentials to use with FinSpace SDK.
+   * Request programmatic credentials to use with FinSpace SDK. For more information, see Step 2. Access credentials programmatically using IAM access key id and secret access key.
    */
   getProgrammaticAccessCredentials(callback?: (err: AWSError, data: Finspacedata.Types.GetProgrammaticAccessCredentialsResponse) => void): Request<Finspacedata.Types.GetProgrammaticAccessCredentialsResponse, AWSError>;
   /**
@@ -196,19 +196,19 @@ declare class Finspacedata extends Service {
    */
   listPermissionGroups(callback?: (err: AWSError, data: Finspacedata.Types.ListPermissionGroupsResponse) => void): Request<Finspacedata.Types.ListPermissionGroupsResponse, AWSError>;
   /**
-   * Lists all the permission groups that are associated with a specific user account.
+   * Lists all the permission groups that are associated with a specific user.
    */
   listPermissionGroupsByUser(params: Finspacedata.Types.ListPermissionGroupsByUserRequest, callback?: (err: AWSError, data: Finspacedata.Types.ListPermissionGroupsByUserResponse) => void): Request<Finspacedata.Types.ListPermissionGroupsByUserResponse, AWSError>;
   /**
-   * Lists all the permission groups that are associated with a specific user account.
+   * Lists all the permission groups that are associated with a specific user.
    */
   listPermissionGroupsByUser(callback?: (err: AWSError, data: Finspacedata.Types.ListPermissionGroupsByUserResponse) => void): Request<Finspacedata.Types.ListPermissionGroupsByUserResponse, AWSError>;
   /**
-   * Lists all available user accounts in FinSpace.
+   * Lists all available users in FinSpace.
    */
   listUsers(params: Finspacedata.Types.ListUsersRequest, callback?: (err: AWSError, data: Finspacedata.Types.ListUsersResponse) => void): Request<Finspacedata.Types.ListUsersResponse, AWSError>;
   /**
-   * Lists all available user accounts in FinSpace.
+   * Lists all available users in FinSpace.
    */
   listUsers(callback?: (err: AWSError, data: Finspacedata.Types.ListUsersResponse) => void): Request<Finspacedata.Types.ListUsersResponse, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class Finspacedata extends Service {
    */
   updatePermissionGroup(callback?: (err: AWSError, data: Finspacedata.Types.UpdatePermissionGroupResponse) => void): Request<Finspacedata.Types.UpdatePermissionGroupResponse, AWSError>;
   /**
-   * Modifies the details of the specified user account. You cannot update the userId for a user.
+   * Modifies the details of the specified user. You cannot update the userId for a user.
    */
   updateUser(params: Finspacedata.Types.UpdateUserRequest, callback?: (err: AWSError, data: Finspacedata.Types.UpdateUserResponse) => void): Request<Finspacedata.Types.UpdateUserResponse, AWSError>;
   /**
-   * Modifies the details of the specified user account. You cannot update the userId for a user.
+   * Modifies the details of the specified user. You cannot update the userId for a user.
    */
   updateUser(callback?: (err: AWSError, data: Finspacedata.Types.UpdateUserResponse) => void): Request<Finspacedata.Types.UpdateUserResponse, AWSError>;
 }
@@ -549,7 +549,7 @@ declare namespace Finspacedata {
     /**
      * The option to indicate whether the user can use the GetProgrammaticAccessCredentials API to obtain credentials that can then be used to access other FinSpace Data API operations.    ENABLED – The user has permissions to use the APIs.    DISABLED – The user does not have permissions to use any APIs.  
      */
-    ApiAccess?: ApiAccess;
+    apiAccess?: ApiAccess;
     /**
      * The ARN identifier of an AWS user or role that is allowed to call the GetProgrammaticAccessCredentials API to obtain a credentials token for a specific FinSpace user. This must be an IAM role within your FinSpace account.
      */
@@ -755,7 +755,7 @@ declare namespace Finspacedata {
   }
   export interface DisableUserRequest {
     /**
-     * The unique identifier for the user account that you want to disable.
+     * The unique identifier for the user that you want to deactivate.
      */
     userId: UserId;
     /**
@@ -765,7 +765,7 @@ declare namespace Finspacedata {
   }
   export interface DisableUserResponse {
     /**
-     * The unique identifier for the disabled user account.
+     * The unique identifier for the deactivated user.
      */
     userId?: UserId;
   }
@@ -792,7 +792,7 @@ declare namespace Finspacedata {
   export type Email = string;
   export interface EnableUserRequest {
     /**
-     * The unique identifier for the user account that you want to enable.
+     * The unique identifier for the user that you want to activate.
      */
     userId: UserId;
     /**
@@ -802,7 +802,7 @@ declare namespace Finspacedata {
   }
   export interface EnableUserResponse {
     /**
-     * The unique identifier for the enabled user account.
+     * The unique identifier for the active user.
      */
     userId?: UserId;
   }
@@ -1040,11 +1040,11 @@ declare namespace Finspacedata {
   }
   export interface GetUserResponse {
     /**
-     * The unique identifier for the user account that is retrieved.
+     * The unique identifier for the user that is retrieved.
      */
     userId?: UserId;
     /**
-     * The current status of the user account.     CREATING – The user account creation is in progress.    ENABLED – The user account is created and is currently active.    DISABLED – The user account is currently inactive.  
+     * The current status of the user.     CREATING – The creation is in progress.    ENABLED – The user is created and is currently active.    DISABLED – The user is currently inactive.  
      */
     status?: UserStatus;
     /**
@@ -1072,19 +1072,19 @@ declare namespace Finspacedata {
      */
     apiAccessPrincipalArn?: RoleArn;
     /**
-     * The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. 
+     * The timestamp at which the user was created in FinSpace. The value is determined as epoch time in milliseconds. 
      */
     createTime?: TimestampEpoch;
     /**
-     * Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds.
+     * Describes the last time the user was activated. The value is determined as epoch time in milliseconds.
      */
     lastEnabledTime?: TimestampEpoch;
     /**
-     * Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.
+     * Describes the last time the user was deactivated. The value is determined as epoch time in milliseconds.
      */
     lastDisabledTime?: TimestampEpoch;
     /**
-     * Describes the last time the user account was updated. The value is determined as epoch time in milliseconds.
+     * Describes the last time the user details were updated. The value is determined as epoch time in milliseconds.
      */
     lastModifiedTime?: TimestampEpoch;
     /**
@@ -1263,7 +1263,7 @@ declare namespace Finspacedata {
   }
   export interface ListUsersResponse {
     /**
-     * A list of all the user accounts.
+     * A list of all the users.
      */
     users?: UserList;
     /**
@@ -1301,7 +1301,7 @@ declare namespace Finspacedata {
      */
     lastModifiedTime?: TimestampEpoch;
     /**
-     * Indicates the status of the user account within a permission group.    ADDITION_IN_PROGRESS – The user account is currently being added to the permission group.    ADDITION_SUCCESS – The user account is successfully added to the permission group.    REMOVAL_IN_PROGRESS – The user is currently being removed from the permission group.  
+     * Indicates the status of the user within a permission group.    ADDITION_IN_PROGRESS – The user is currently being added to the permission group.    ADDITION_SUCCESS – The user is successfully added to the permission group.    REMOVAL_IN_PROGRESS – The user is currently being removed from the permission group.  
      */
     membershipStatus?: PermissionGroupMembershipStatus;
   }
@@ -1315,7 +1315,7 @@ declare namespace Finspacedata {
      */
     name?: PermissionGroupName;
     /**
-     * Indicates the status of the user account within a permission group.    ADDITION_IN_PROGRESS – The user account is currently being added to the permission group.    ADDITION_SUCCESS – The user account is successfully added to the permission group.    REMOVAL_IN_PROGRESS – The user is currently being removed from the permission group.  
+     * Indicates the status of the user within a permission group.    ADDITION_IN_PROGRESS – The user is currently being added to the permission group.    ADDITION_SUCCESS – The user is successfully added to the permission group.    REMOVAL_IN_PROGRESS – The user is currently being removed from the permission group.  
      */
     membershipStatus?: PermissionGroupMembershipStatus;
   }
@@ -1352,7 +1352,7 @@ declare namespace Finspacedata {
      */
     userId?: UserId;
     /**
-     * A randomly generated temporary password for the requested user account. This password expires in 7 days.
+     * A randomly generated temporary password for the requested user. This password expires in 7 days.
      */
     temporaryPassword?: Password;
   }
@@ -1503,7 +1503,7 @@ declare namespace Finspacedata {
   }
   export interface UpdateUserRequest {
     /**
-     * The unique identifier for the user account to update.
+     * The unique identifier for the user that you want to update.
      */
     userId: UserId;
     /**
@@ -1533,7 +1533,7 @@ declare namespace Finspacedata {
   }
   export interface UpdateUserResponse {
     /**
-     * The unique identifier of the updated user account.
+     * The unique identifier of the updated user.
      */
     userId?: UserId;
   }
@@ -1543,7 +1543,7 @@ declare namespace Finspacedata {
      */
     userId?: UserId;
     /**
-     * The current status of the user account.     CREATING – The user account creation is in progress.    ENABLED – The user account is created and is currently active.    DISABLED – The user account is currently inactive.  
+     * The current status of the user.     CREATING – The user creation is in progress.    ENABLED – The user is created and is currently active.    DISABLED – The user is currently inactive.  
      */
     status?: UserStatus;
     /**
@@ -1571,19 +1571,19 @@ declare namespace Finspacedata {
      */
     apiAccessPrincipalArn?: RoleArn;
     /**
-     * The timestamp at which the user account was created in FinSpace. The value is determined as epoch time in milliseconds. 
+     * The timestamp at which the user was created in FinSpace. The value is determined as epoch time in milliseconds. 
      */
     createTime?: TimestampEpoch;
     /**
-     *  Describes the last time the user account was enabled. The value is determined as epoch time in milliseconds. 
+     *  Describes the last time the user was activated. The value is determined as epoch time in milliseconds. 
      */
     lastEnabledTime?: TimestampEpoch;
     /**
-     * Describes the last time the user account was disabled. The value is determined as epoch time in milliseconds.
+     * Describes the last time the user was deactivated. The value is determined as epoch time in milliseconds.
      */
     lastDisabledTime?: TimestampEpoch;
     /**
-     * Describes the last time the user account was updated. The value is determined as epoch time in milliseconds. 
+     * Describes the last time the user was updated. The value is determined as epoch time in milliseconds. 
      */
     lastModifiedTime?: TimestampEpoch;
     /**
@@ -1597,7 +1597,7 @@ declare namespace Finspacedata {
      */
     userId?: UserId;
     /**
-     * The current status of the user account.     CREATING – The user account creation is in progress.    ENABLED – The user account is created and is currently active.    DISABLED – The user account is currently inactive.  
+     * The current status of the user.     CREATING – The user creation is in progress.    ENABLED – The user is created and is currently active.    DISABLED – The user is currently inactive.  
      */
     status?: UserStatus;
     /**
@@ -1625,7 +1625,7 @@ declare namespace Finspacedata {
      */
     apiAccessPrincipalArn?: RoleArn;
     /**
-     * Indicates the status of the user account within a permission group.    ADDITION_IN_PROGRESS – The user account is currently being added to the permission group.    ADDITION_SUCCESS – The user account is successfully added to the permission group.    REMOVAL_IN_PROGRESS – The user is currently being removed from the permission group.  
+     * Indicates the status of the user within a permission group.    ADDITION_IN_PROGRESS – The user is currently being added to the permission group.    ADDITION_SUCCESS – The user is successfully added to the permission group.    REMOVAL_IN_PROGRESS – The user is currently being removed from the permission group.  
      */
     membershipStatus?: PermissionGroupMembershipStatus;
   }

@@ -2470,7 +2470,7 @@ declare namespace SSM {
     SeveritySummary?: SeveritySummary;
   }
   export type ComputerName = string;
-  export type ConnectionStatus = "Connected"|"NotConnected"|string;
+  export type ConnectionStatus = "connected"|"notconnected"|string;
   export type ContentLength = number;
   export interface CreateActivationRequest {
     /**
@@ -2795,11 +2795,11 @@ declare namespace SSM {
   }
   export interface CreateOpsItemRequest {
     /**
-     * Information about the OpsItem. 
+     * User-defined text that contains information about the OpsItem, in Markdown format.   Provide enough information so that users viewing this OpsItem for the first time understand the issue.  
      */
     Description: OpsItemDescription;
     /**
-     * The type of OpsItem to create. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insights  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
+     * The type of OpsItem to create. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insight  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
      */
     OpsItemType?: OpsItemType;
     /**
@@ -7148,7 +7148,7 @@ declare namespace SSM {
      */
     CreatedBy?: String;
     /**
-     * The type of OpsItem. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insights  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
+     * The type of OpsItem. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insight  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
      */
     OpsItemType?: OpsItemType;
     /**
@@ -7448,7 +7448,7 @@ declare namespace SSM {
      */
     Severity?: OpsItemSeverity;
     /**
-     * The type of OpsItem. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insights  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
+     * The type of OpsItem. Systems Manager supports the following types of OpsItems:    /aws/issue  This type of OpsItem is used for default OpsItems created by OpsCenter.     /aws/changerequest  This type of OpsItem is used by Change Manager for reviewing and approving or rejecting change requests.     /aws/insight  This type of OpsItem is used by OpsCenter for aggregating and reporting on duplicate OpsItems.   
      */
     OpsItemType?: OpsItemType;
     /**
@@ -8608,7 +8608,7 @@ declare namespace SSM {
   export type ResourceDataSyncType = string;
   export type ResourceId = string;
   export type ResourcePolicyMaxResults = number;
-  export type ResourceType = "ManagedInstance"|"Document"|"EC2Instance"|string;
+  export type ResourceType = "ManagedInstance"|"EC2Instance"|string;
   export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|"OpsItem"|"OpsMetadata"|"Automation"|"Association"|string;
   export type ResponseCode = number;
   export interface ResultAttribute {
@@ -9837,7 +9837,7 @@ declare namespace SSM {
   }
   export interface UpdateOpsItemRequest {
     /**
-     * Update the information about the OpsItem. Provide enough information so that users reading this OpsItem for the first time understand the issue. 
+     * User-defined text that contains information about the OpsItem, in Markdown format. 
      */
     Description?: OpsItemDescription;
     /**

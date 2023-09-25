@@ -60,11 +60,11 @@ declare class AmplifyUIBuilder extends Service {
    */
   deleteTheme(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Exchanges an access code for a token.
+   *  This is for internal use.  Amplify uses this action to exchange an access code for a token.
    */
   exchangeCodeForToken(params: AmplifyUIBuilder.Types.ExchangeCodeForTokenRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ExchangeCodeForTokenResponse) => void): Request<AmplifyUIBuilder.Types.ExchangeCodeForTokenResponse, AWSError>;
   /**
-   * Exchanges an access code for a token.
+   *  This is for internal use.  Amplify uses this action to exchange an access code for a token.
    */
   exchangeCodeForToken(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.ExchangeCodeForTokenResponse) => void): Request<AmplifyUIBuilder.Types.ExchangeCodeForTokenResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class AmplifyUIBuilder extends Service {
    */
   putMetadataFlag(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Refreshes a previously issued access token that might have expired.
+   *  This is for internal use.  Amplify uses this action to refresh a previously issued access token that might have expired.
    */
   refreshToken(params: AmplifyUIBuilder.Types.RefreshTokenRequest, callback?: (err: AWSError, data: AmplifyUIBuilder.Types.RefreshTokenResponse) => void): Request<AmplifyUIBuilder.Types.RefreshTokenResponse, AWSError>;
   /**
-   * Refreshes a previously issued access token that might have expired.
+   *  This is for internal use.  Amplify uses this action to refresh a previously issued access token that might have expired.
    */
   refreshToken(callback?: (err: AWSError, data: AmplifyUIBuilder.Types.RefreshTokenResponse) => void): Request<AmplifyUIBuilder.Types.RefreshTokenResponse, AWSError>;
   /**
@@ -268,6 +268,25 @@ declare namespace AmplifyUIBuilder {
   export type AppId = string;
   export type AssociatedFieldsList = String[];
   export type Boolean = boolean;
+  export type CodegenDependencies = CodegenDependency[];
+  export interface CodegenDependency {
+    /**
+     * Name of the dependency package.
+     */
+    name?: String;
+    /**
+     * Indicates the version of the supported dependency package.
+     */
+    supportedVersion?: String;
+    /**
+     * Determines if the dependency package is using Semantic versioning. If set to true, it indicates that the dependency package uses Semantic versioning.
+     */
+    isSemVer?: Boolean;
+    /**
+     * Indicates the reason to include the dependency package in your project code.
+     */
+    reason?: String;
+  }
   export interface CodegenFeatureFlags {
     /**
      * Specifes whether a code generation job supports data relationships.
@@ -419,6 +438,10 @@ declare namespace AmplifyUIBuilder {
      * The time that the code generation job was modified.
      */
     modifiedAt?: SyntheticTimestamp_date_time;
+    /**
+     * Lists the dependency packages that may be required for the project code to run.
+     */
+    dependencies?: CodegenDependencies;
   }
   export interface CodegenJobAsset {
     /**
@@ -1801,6 +1824,7 @@ declare namespace AmplifyUIBuilder {
      */
     body: PutMetadataFlagBody;
   }
+  export type ReactCodegenDependencies = {[key: string]: String};
   export interface ReactStartCodegenJobData {
     /**
      * The JavaScript module type.
@@ -1826,6 +1850,10 @@ declare namespace AmplifyUIBuilder {
      * The API configuration for the code generation job.
      */
     apiConfiguration?: ApiConfiguration;
+    /**
+     * Lists the dependency packages that may be required for the project code to run.
+     */
+    dependencies?: ReactCodegenDependencies;
   }
   export interface RefreshTokenRequest {
     /**

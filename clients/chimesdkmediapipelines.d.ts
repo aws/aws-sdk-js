@@ -52,6 +52,22 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   createMediaLiveConnectorPipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaLiveConnectorPipelineResponse, AWSError>;
   /**
+   * Creates an Kinesis video stream pool for the media pipeline.
+   */
+  createMediaPipelineKinesisVideoStreamPool(params: ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
+  /**
+   * Creates an Kinesis video stream pool for the media pipeline.
+   */
+  createMediaPipelineKinesisVideoStreamPool(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
+  /**
+   * Creates a streaming media pipeline.
+   */
+  createMediaStreamPipeline(params: ChimeSDKMediaPipelines.Types.CreateMediaStreamPipelineRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaStreamPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaStreamPipelineResponse, AWSError>;
+  /**
+   * Creates a streaming media pipeline.
+   */
+  createMediaStreamPipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.CreateMediaStreamPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.CreateMediaStreamPipelineResponse, AWSError>;
+  /**
    * Deletes the media pipeline.
    */
   deleteMediaCapturePipeline(params: ChimeSDKMediaPipelines.Types.DeleteMediaCapturePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -76,6 +92,14 @@ declare class ChimeSDKMediaPipelines extends Service {
    */
   deleteMediaPipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an Kinesis video stream pool.
+   */
+  deleteMediaPipelineKinesisVideoStreamPool(params: ChimeSDKMediaPipelines.Types.DeleteMediaPipelineKinesisVideoStreamPoolRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Kinesis video stream pool.
+   */
+  deleteMediaPipelineKinesisVideoStreamPool(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Gets an existing media pipeline.
    */
   getMediaCapturePipeline(params: ChimeSDKMediaPipelines.Types.GetMediaCapturePipelineRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaCapturePipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaCapturePipelineResponse, AWSError>;
@@ -99,6 +123,14 @@ declare class ChimeSDKMediaPipelines extends Service {
    * Gets an existing media pipeline.
    */
   getMediaPipeline(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaPipelineResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaPipelineResponse, AWSError>;
+  /**
+   * Gets an Kinesis video stream pool.
+   */
+  getMediaPipelineKinesisVideoStreamPool(params: ChimeSDKMediaPipelines.Types.GetMediaPipelineKinesisVideoStreamPoolRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
+  /**
+   * Gets an Kinesis video stream pool.
+   */
+  getMediaPipelineKinesisVideoStreamPool(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.GetMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.GetMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
   /**
    * Retrieves the details of the specified speaker search task.
    */
@@ -131,6 +163,14 @@ declare class ChimeSDKMediaPipelines extends Service {
    * Lists the available media insights pipeline configurations.
    */
   listMediaInsightsPipelineConfigurations(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListMediaInsightsPipelineConfigurationsResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListMediaInsightsPipelineConfigurationsResponse, AWSError>;
+  /**
+   * Lists the video stream pools in the media pipeline.
+   */
+  listMediaPipelineKinesisVideoStreamPools(params: ChimeSDKMediaPipelines.Types.ListMediaPipelineKinesisVideoStreamPoolsRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListMediaPipelineKinesisVideoStreamPoolsResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListMediaPipelineKinesisVideoStreamPoolsResponse, AWSError>;
+  /**
+   * Lists the video stream pools in the media pipeline.
+   */
+  listMediaPipelineKinesisVideoStreamPools(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.ListMediaPipelineKinesisVideoStreamPoolsResponse) => void): Request<ChimeSDKMediaPipelines.Types.ListMediaPipelineKinesisVideoStreamPoolsResponse, AWSError>;
   /**
    * Returns a list of media pipelines.
    */
@@ -211,6 +251,14 @@ declare class ChimeSDKMediaPipelines extends Service {
    * Updates the status of a media insights pipeline.
    */
   updateMediaInsightsPipelineStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an Kinesis video stream pool in a media pipeline.
+   */
+  updateMediaPipelineKinesisVideoStreamPool(params: ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolRequest, callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
+  /**
+   * Updates an Kinesis video stream pool in a media pipeline.
+   */
+  updateMediaPipelineKinesisVideoStreamPool(callback?: (err: AWSError, data: ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolResponse) => void): Request<ChimeSDKMediaPipelines.Types.UpdateMediaPipelineKinesisVideoStreamPoolResponse, AWSError>;
 }
 declare namespace ChimeSDKMediaPipelines {
   export interface ActiveSpeakerOnlyConfiguration {
@@ -413,6 +461,7 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export type AudioMuxType = "AudioOnly"|"AudioWithActiveSpeakerVideo"|"AudioWithCompositedVideo"|string;
   export type AudioSampleRateOption = string;
+  export type AwsRegion = string;
   export type Boolean = boolean;
   export type BorderColor = "Black"|"Blue"|"Red"|"Green"|"White"|"Yellow"|string;
   export type BorderThickness = number;
@@ -684,12 +733,62 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaLiveConnectorPipeline?: MediaLiveConnectorPipeline;
   }
+  export interface CreateMediaPipelineKinesisVideoStreamPoolRequest {
+    /**
+     * The configuration settings for the video stream.
+     */
+    StreamConfiguration: KinesisVideoStreamConfiguration;
+    /**
+     * The name of the video stream pool.
+     */
+    PoolName: KinesisVideoStreamPoolName;
+    /**
+     * The token assigned to the client making the request.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags assigned to the video stream pool.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateMediaPipelineKinesisVideoStreamPoolResponse {
+    /**
+     * The configuration for the Kinesis video stream pool.
+     */
+    KinesisVideoStreamPoolConfiguration?: KinesisVideoStreamPoolConfiguration;
+  }
+  export interface CreateMediaStreamPipelineRequest {
+    /**
+     * The data sources for the media pipeline.
+     */
+    Sources: MediaStreamSourceList;
+    /**
+     * The data sink for the media pipeline.
+     */
+    Sinks: MediaStreamSinkList;
+    /**
+     * The token assigned to the client making the request.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags assigned to the media pipeline.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateMediaStreamPipelineResponse {
+    /**
+     * The requested media pipeline.
+     */
+    MediaStreamPipeline?: MediaStreamPipeline;
+  }
   export interface DataChannelConcatenationConfiguration {
     /**
      * Enables or disables the configuration object.
      */
     State: ArtifactsConcatenationState;
   }
+  export type DataRetentionChangeInHours = number;
+  export type DataRetentionInHours = number;
   export interface DeleteMediaCapturePipelineRequest {
     /**
      * The ID of the media pipeline being deleted. 
@@ -699,6 +798,12 @@ declare namespace ChimeSDKMediaPipelines {
   export interface DeleteMediaInsightsPipelineConfigurationRequest {
     /**
      * The unique identifier of the resource to be deleted. Valid values include the name and ARN of the media insights pipeline configuration.
+     */
+    Identifier: NonEmptyString;
+  }
+  export interface DeleteMediaPipelineKinesisVideoStreamPoolRequest {
+    /**
+     * The ID of the pool being deleted.
      */
     Identifier: NonEmptyString;
   }
@@ -746,6 +851,18 @@ declare namespace ChimeSDKMediaPipelines {
      */
     MediaInsightsPipelineConfiguration?: MediaInsightsPipelineConfiguration;
   }
+  export interface GetMediaPipelineKinesisVideoStreamPoolRequest {
+    /**
+     * The ID of the video stream pool.
+     */
+    Identifier: NonEmptyString;
+  }
+  export interface GetMediaPipelineKinesisVideoStreamPoolResponse {
+    /**
+     * The video stream pool configuration object.
+     */
+    KinesisVideoStreamPoolConfiguration?: KinesisVideoStreamPoolConfiguration;
+  }
   export interface GetMediaPipelineRequest {
     /**
      * The ID of the pipeline that you want to get.
@@ -780,7 +897,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     Identifier: NonEmptyString;
     /**
-     * The ID of the voice tone anlysis task.
+     * The ID of the voice tone analysis task.
      */
     VoiceToneAnalysisTaskId: GuidString;
   }
@@ -836,7 +953,7 @@ declare namespace ChimeSDKMediaPipelines {
      */
     TileCount?: TileCount;
     /**
-     * Sets the aspect ratio of the video tiles, such as 16:9.
+     * Specifies the aspect ratio of all video tiles.
      */
     TileAspectRatio?: TileAspectRatio;
   }
@@ -871,6 +988,75 @@ declare namespace ChimeSDKMediaPipelines {
     InsightsTarget?: Arn;
   }
   export type KinesisVideoStreamArn = string;
+  export interface KinesisVideoStreamConfiguration {
+    /**
+     * The Amazon Web Services Region of the video stream.
+     */
+    Region: AwsRegion;
+    /**
+     * The amount of time that data is retained.
+     */
+    DataRetentionInHours?: DataRetentionInHours;
+  }
+  export interface KinesisVideoStreamConfigurationUpdate {
+    /**
+     * The updated time that data is retained.
+     */
+    DataRetentionInHours?: DataRetentionChangeInHours;
+  }
+  export interface KinesisVideoStreamPoolConfiguration {
+    /**
+     * The ARN of the video stream pool configuration.
+     */
+    PoolArn?: Arn;
+    /**
+     * The name of the video stream pool configuration.
+     */
+    PoolName?: KinesisVideoStreamPoolName;
+    /**
+     * The ID of the video stream pool in the configuration.
+     */
+    PoolId?: KinesisVideoStreamPoolId;
+    /**
+     * The status of the video stream pool in the configuration. 
+     */
+    PoolStatus?: KinesisVideoStreamPoolStatus;
+    /**
+     * The size of the video stream pool in the configuration.
+     */
+    PoolSize?: KinesisVideoStreamPoolSize;
+    /**
+     * The Kinesis video stream pool configuration object.
+     */
+    StreamConfiguration?: KinesisVideoStreamConfiguration;
+    /**
+     * The time at which the configuration was created.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The time at which the configuration was updated.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type KinesisVideoStreamPoolId = string;
+  export type KinesisVideoStreamPoolName = string;
+  export type KinesisVideoStreamPoolSize = number;
+  export type KinesisVideoStreamPoolStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export interface KinesisVideoStreamPoolSummary {
+    /**
+     * The name of the video stream pool.
+     */
+    PoolName?: KinesisVideoStreamPoolName;
+    /**
+     * The ID of the video stream pool.
+     */
+    PoolId?: KinesisVideoStreamPoolId;
+    /**
+     * The ARN of the video stream pool.
+     */
+    PoolArn?: Arn;
+  }
+  export type KinesisVideoStreamPoolSummaryList = KinesisVideoStreamPoolSummary[];
   export interface KinesisVideoStreamRecordingSourceRuntimeConfiguration {
     /**
      * The stream or streams to be recorded.
@@ -954,6 +1140,26 @@ declare namespace ChimeSDKMediaPipelines {
     MediaInsightsPipelineConfigurations?: MediaInsightsPipelineConfigurationSummaryList;
     /**
      * The token used to return the next page of results. 
+     */
+    NextToken?: String;
+  }
+  export interface ListMediaPipelineKinesisVideoStreamPoolsRequest {
+    /**
+     * The token used to return the next page of results. 
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: ResultMax;
+  }
+  export interface ListMediaPipelineKinesisVideoStreamPoolsResponse {
+    /**
+     * The list of video stream pools.
+     */
+    KinesisVideoStreamPools?: KinesisVideoStreamPoolSummaryList;
+    /**
+     * The token used to return the next page of results.
      */
     NextToken?: String;
   }
@@ -1317,6 +1523,10 @@ declare namespace ChimeSDKMediaPipelines {
      * The media insights pipeline of a media pipeline.
      */
     MediaInsightsPipeline?: MediaInsightsPipeline;
+    /**
+     * Designates a media pipeline as a media stream pipeline.
+     */
+    MediaStreamPipeline?: MediaStreamPipeline;
   }
   export type MediaPipelineElementStatus = "NotStarted"|"NotSupported"|"Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|"Paused"|string;
   export type MediaPipelineList = MediaPipelineSummary[];
@@ -1336,6 +1546,68 @@ declare namespace ChimeSDKMediaPipelines {
   }
   export type MediaPipelineTaskStatus = "NotStarted"|"Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
   export type MediaSampleRateHertz = number;
+  export interface MediaStreamPipeline {
+    /**
+     * The ID of the media stream pipeline
+     */
+    MediaPipelineId?: GuidString;
+    /**
+     * The ARN of the media stream pipeline.
+     */
+    MediaPipelineArn?: AmazonResourceName;
+    /**
+     * The time at which the media stream pipeline was created.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The time at which the media stream pipeline was updated.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The status of the media stream pipeline.
+     */
+    Status?: MediaPipelineStatus;
+    /**
+     * The media stream pipeline's data sources.
+     */
+    Sources?: MediaStreamSourceList;
+    /**
+     * The media stream pipeline's data sinks.
+     */
+    Sinks?: MediaStreamSinkList;
+  }
+  export type MediaStreamPipelineSinkType = "KinesisVideoStreamPool"|string;
+  export interface MediaStreamSink {
+    /**
+     * The ARN of the media stream sink.
+     */
+    SinkArn: Arn;
+    /**
+     * The media stream sink's type.
+     */
+    SinkType: MediaStreamPipelineSinkType;
+    /**
+     * Specifies the number of streams that the sink can accept.
+     */
+    ReservedStreamCapacity: ReservedStreamCapacity;
+    /**
+     * The media stream sink's media stream type.
+     */
+    MediaStreamType: MediaStreamType;
+  }
+  export type MediaStreamSinkList = MediaStreamSink[];
+  export interface MediaStreamSource {
+    /**
+     * The type of media stream source.
+     */
+    SourceType: MediaPipelineSourceType;
+    /**
+     * The ARN of the media stream source. 
+     */
+    SourceArn: Arn;
+  }
+  export type MediaStreamSourceList = MediaStreamSource[];
+  export type MediaStreamType = "MixedAudio"|"IndividualAudio"|string;
   export interface MeetingEventsConcatenationConfiguration {
     /**
      * Enables or disables the configuration object.
@@ -1411,6 +1683,7 @@ declare namespace ChimeSDKMediaPipelines {
     StreamArn?: KinesisVideoStreamArn;
   }
   export type RecordingStreamList = RecordingStreamConfiguration[];
+  export type ReservedStreamCapacity = number;
   export type ResolutionOption = "HD"|"FHD"|string;
   export type ResultMax = number;
   export type RuleName = string;
@@ -1688,6 +1961,22 @@ declare namespace ChimeSDKMediaPipelines {
      * The requested status of the media insights pipeline.
      */
     UpdateStatus: MediaPipelineStatusUpdate;
+  }
+  export interface UpdateMediaPipelineKinesisVideoStreamPoolRequest {
+    /**
+     * The ID of the video stream pool.
+     */
+    Identifier: NonEmptyString;
+    /**
+     * The configuration settings for the video stream.
+     */
+    StreamConfiguration?: KinesisVideoStreamConfigurationUpdate;
+  }
+  export interface UpdateMediaPipelineKinesisVideoStreamPoolResponse {
+    /**
+     * The video stream pool configuration object.
+     */
+    KinesisVideoStreamPoolConfiguration?: KinesisVideoStreamPoolConfiguration;
   }
   export interface VerticalLayoutConfiguration {
     /**

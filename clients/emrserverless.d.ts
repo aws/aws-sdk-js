@@ -206,6 +206,11 @@ declare namespace EMRServerless {
      * The specification applied to each worker type.
      */
     workerTypeSpecifications?: WorkerTypeSpecificationMap;
+    /**
+     * The Configuration specifications of an application. Each configuration consists of a classification and properties. You use this parameter when creating or updating an application. To see the runtimeConfiguration object of an application, run the GetApplication API operation.
+     */
+    runtimeConfiguration?: ConfigurationList;
+    monitoringConfiguration?: MonitoringConfiguration;
   }
   export type ApplicationArn = string;
   export type ApplicationId = string;
@@ -396,6 +401,14 @@ declare namespace EMRServerless {
      * The key-value pairs that specify worker type to WorkerTypeSpecificationInput. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include Driver and Executor for Spark applications and HiveDriver and TezTask for Hive applications. You can either set image details in this parameter for each worker type, or in imageConfiguration for all worker types.
      */
     workerTypeSpecifications?: WorkerTypeSpecificationInputMap;
+    /**
+     * The Configuration specifications to use when creating an application. Each configuration consists of a classification and properties. This configuration is applied to all the job runs submitted under the application.
+     */
+    runtimeConfiguration?: ConfigurationList;
+    /**
+     * The configuration setting for monitoring.
+     */
+    monitoringConfiguration?: MonitoringConfiguration;
   }
   export interface CreateApplicationResponse {
     /**
@@ -987,6 +1000,14 @@ declare namespace EMRServerless {
      * The Amazon EMR release label for the application. You can change the release label to use a different release of Amazon EMR.
      */
     releaseLabel?: ReleaseLabel;
+    /**
+     * The Configuration specifications to use when updating an application. Each configuration consists of a classification and properties. This configuration is applied across all the job runs submitted under the application.
+     */
+    runtimeConfiguration?: ConfigurationList;
+    /**
+     * The configuration setting for monitoring.
+     */
+    monitoringConfiguration?: MonitoringConfiguration;
   }
   export interface UpdateApplicationResponse {
     /**

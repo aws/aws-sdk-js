@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1463.0-->
+<!--LATEST=2.1464.0-->
 <!--ENTRYINSERT-->
+
+## 2.1464.0
+* feature: AmplifyUIBuilder: Support for generating code that is compatible with future versions of amplify project dependencies.
+* feature: ChimeSDKMediaPipelines: Adds support for sending WebRTC audio to Amazon Kineses Video Streams.
+* feature: EMRServerless: This release adds support for application-wide default job configurations.
+* feature: Finspacedata: Adding sensitive trait to attributes. Change max SessionDuration from 720 to 60. Correct "ApiAccess" attribute to "apiAccess" to maintain consistency between APIs.
+* feature: QuickSight: Added ability to tag users upon creation.
+* feature: SSM: This release updates the enum values for ResourceType in SSM DescribeInstanceInformation input and ConnectionStatus in GetConnectionStatus output.
+* feature: WAFV2: You can now perform an exact match against the web request's JA3 fingerprint.
 
 ## 2.1463.0
 * feature: Braket: This release adds support to view the device queue depth (the number of queued quantum tasks and hybrid jobs on a device) and queue position for a quantum task and hybrid job.
