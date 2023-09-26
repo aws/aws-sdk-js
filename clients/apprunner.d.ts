@@ -510,6 +510,10 @@ declare namespace AppRunner {
      * Configuration for building and running the service from a source code repository.   CodeConfiguration is required only for CreateService request. 
      */
     CodeConfiguration?: CodeConfiguration;
+    /**
+     * The path of the directory that stores source code and configuration files. The build and start commands also execute from here. The path is absolute from root and, if not specified, defaults to the repository root.
+     */
+    SourceDirectory?: SourceDirectory;
   }
   export type ConfigurationSource = "REPOSITORY"|"API"|string;
   export interface Connection {
@@ -562,7 +566,7 @@ declare namespace AppRunner {
   export type Cpu = string;
   export interface CreateAutoScalingConfigurationRequest {
     /**
-     * A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.  Prior to the release of Managing auto scaling, the name DefaultConfiguration was reserved.  This restriction is no longer in place. You can now manage DefaultConfiguration the same way you manage your custom auto scaling configurations. This means you can do the following with the DefaultConfiguration that App Runner provides:   Create new revisions of the DefaultConfiguration.   Delete the revisions of the DefaultConfiguration.   Delete the auto scaling configuration for which the App Runner DefaultConfiguration was created.   If you delete the auto scaling configuration you can create another custom auto scaling configuration with the same DefaultConfiguration name. The original DefaultConfiguration resource provided by App Runner remains in your account unless you make changes to it.   
+     * A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.  Prior to the release of Auto scale configuration enhancements, the name DefaultConfiguration was reserved.  This restriction is no longer in place. You can now manage DefaultConfiguration the same way you manage your custom auto scaling configurations. This means you can do the following with the DefaultConfiguration that App Runner provides:   Create new revisions of the DefaultConfiguration.   Delete the revisions of the DefaultConfiguration.   Delete the auto scaling configuration for which the App Runner DefaultConfiguration was created.   If you delete the auto scaling configuration you can create another custom auto scaling configuration with the same DefaultConfiguration name. The original DefaultConfiguration resource provided by App Runner remains in your account unless you make changes to it.   
      */
     AutoScalingConfigurationName: AutoScalingConfigurationName;
     /**
@@ -1563,6 +1567,7 @@ declare namespace AppRunner {
      */
     AuthenticationConfiguration?: AuthenticationConfiguration;
   }
+  export type SourceDirectory = string;
   export type StartCommand = string;
   export interface StartDeploymentRequest {
     /**

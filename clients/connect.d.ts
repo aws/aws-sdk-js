@@ -1028,6 +1028,14 @@ declare class Connect extends Service {
    */
   listSecurityKeys(callback?: (err: AWSError, data: Connect.Types.ListSecurityKeysResponse) => void): Request<Connect.Types.ListSecurityKeysResponse, AWSError>;
   /**
+   * Returns a list of third party applications in a specific security profile.
+   */
+  listSecurityProfileApplications(params: Connect.Types.ListSecurityProfileApplicationsRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfileApplicationsResponse) => void): Request<Connect.Types.ListSecurityProfileApplicationsResponse, AWSError>;
+  /**
+   * Returns a list of third party applications in a specific security profile.
+   */
+  listSecurityProfileApplications(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfileApplicationsResponse) => void): Request<Connect.Types.ListSecurityProfileApplicationsResponse, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Lists the permissions granted to a security profile.
    */
   listSecurityProfilePermissions(params: Connect.Types.ListSecurityProfilePermissionsRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilePermissionsResponse) => void): Request<Connect.Types.ListSecurityProfilePermissionsResponse, AWSError>;
@@ -1860,6 +1868,18 @@ declare namespace Connect {
      */
     AwaitAnswerMachinePrompt?: Boolean;
   }
+  export interface Application {
+    /**
+     * Namespace of the application that you want to give access to.
+     */
+    Namespace?: Namespace;
+    /**
+     * The permissions that the agent is granted on the application. Only the ACCESS permission is supported.
+     */
+    ApplicationPermissions?: ApplicationPermissions;
+  }
+  export type ApplicationPermissions = Permission[];
+  export type Applications = Application[];
   export type ApproximateTotalCount = number;
   export interface AssignContactCategoryActionDefinition {
   }
@@ -2750,7 +2770,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The name of the quick connect.
+     * A unique name of the quick connect.
      */
     Name: QuickConnectName;
     /**
@@ -2890,6 +2910,10 @@ declare namespace Connect {
      * The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: User | SecurityProfile | Queue | RoutingProfile 
      */
     TagRestrictedResources?: TagRestrictedResourceList;
+    /**
+     * This API is in preview release for Amazon Connect and is subject to change. A list of third party applications that the security profile will give access to.
+     */
+    Applications?: Applications;
   }
   export interface CreateSecurityProfileResponse {
     /**
@@ -5472,7 +5496,7 @@ declare namespace Connect {
     SourceType?: SourceType;
   }
   export type IntegrationAssociationSummaryList = IntegrationAssociationSummary[];
-  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"CASES_DOMAIN"|string;
+  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"CASES_DOMAIN"|"APPLICATION"|string;
   export interface InvisibleFieldInfo {
     /**
      * Identifier of the invisible field.
@@ -5981,7 +6005,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The type of phone number.
+     * The type of phone number.  We recommend using ListPhoneNumbersV2 to return phone number types. While ListPhoneNumbers returns number types UIFN, SHARED, THIRD_PARTY_TF, and THIRD_PARTY_DID, it incorrectly lists them as TOLL_FREE or DID.  
      */
     PhoneNumberTypes?: PhoneNumberTypes;
     /**
@@ -6283,6 +6307,34 @@ declare namespace Connect {
     SecurityKeys?: SecurityKeysList;
     /**
      * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListSecurityProfileApplicationsRequest {
+    /**
+     * The security profile identifier.
+     */
+    SecurityProfileId: SecurityProfileId;
+    /**
+     * The instance identifier.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. The next set of results can be retrieved by using the token value returned in the previous response when making the next request.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult1000;
+  }
+  export interface ListSecurityProfileApplicationsResponse {
+    /**
+     * A list of the third party application's metadata.
+     */
+    Applications?: Applications;
+    /**
+     * The token for the next set of results. The next set of results can be retrieved by using the token value returned in the previous response when making the next request.
      */
     NextToken?: NextToken;
   }
@@ -6672,6 +6724,7 @@ declare namespace Connect {
   }
   export type Name = string;
   export type Name128 = string;
+  export type Namespace = string;
   export type NextToken = string;
   export type NextToken2500 = string;
   export type NotificationContentType = "PLAIN_TEXT"|string;
@@ -6781,6 +6834,7 @@ declare namespace Connect {
   }
   export type Password = string;
   export type Percentage = number;
+  export type Permission = string;
   export type PermissionsList = SecurityProfilePermission[];
   export interface PersistentChat {
     /**
@@ -7450,15 +7504,15 @@ declare namespace Connect {
      */
     TaskAction?: TaskActionDefinition;
     /**
-     * Information about the EventBridge action.
+     * Information about the EventBridge action. Supported only for TriggerEventSource values: OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable | OnPostChatAnalysisAvailable | OnContactEvaluationSubmit | OnMetricDataUpdate 
      */
     EventBridgeAction?: EventBridgeActionDefinition;
     /**
-     * Information about the contact category action.
+     * Information about the contact category action. Supported only for TriggerEventSource values: OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable | OnPostChatAnalysisAvailable | OnZendeskTicketCreate | OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate 
      */
     AssignContactCategoryAction?: AssignContactCategoryActionDefinition;
     /**
-     * Information about the send notification action.
+     * Information about the send notification action. Supported only for TriggerEventSource values: OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable | OnPostChatAnalysisAvailable | OnContactEvaluationSubmit | OnMetricDataUpdate 
      */
     SendNotificationAction?: SendNotificationActionDefinition;
   }
@@ -9372,6 +9426,10 @@ declare namespace Connect {
      * The list of resources that a security profile applies tag restrictions to in Amazon Connect.
      */
     TagRestrictedResources?: TagRestrictedResourceList;
+    /**
+     * This API is in preview release for Amazon Connect and is subject to change. A list of the third party application's metadata.
+     */
+    Applications?: Applications;
   }
   export interface UpdateTaskTemplateRequest {
     /**

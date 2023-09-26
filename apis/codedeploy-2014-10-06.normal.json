@@ -717,7 +717,7 @@
         "shape": "DeleteResourcesByExternalIdOutput"
       },
       "errors": [],
-      "documentation": "<p>Deletes resources linked to an external ID.</p>"
+      "documentation": "<p>Deletes resources linked to an external ID. This action only applies if you have configured blue/green deployments through CloudFormation. </p> <note> <p>It is not necessary to call this action directly. CloudFormation calls it on your behalf when it needs to delete stack resources. This action is offered publicly in case you need to delete resources to comply with General Data Protection Regulation (GDPR) requirements.</p> </note>"
     },
     "DeregisterOnPremisesInstance": {
       "name": "DeregisterOnPremisesInstance",
@@ -1054,7 +1054,7 @@
           "shape": "InvalidNextTokenException"
         }
       ],
-      "documentation": "<p>Lists the applications registered with the IAM user or Amazon Web Services account.</p>"
+      "documentation": "<p>Lists the applications registered with the user or Amazon Web Services account.</p>"
     },
     "ListDeploymentConfigs": {
       "name": "ListDeploymentConfigs",
@@ -1073,7 +1073,7 @@
           "shape": "InvalidNextTokenException"
         }
       ],
-      "documentation": "<p>Lists the deployment configurations with the IAM user or Amazon Web Services account.</p>"
+      "documentation": "<p>Lists the deployment configurations with the user or Amazon Web Services account.</p>"
     },
     "ListDeploymentGroups": {
       "name": "ListDeploymentGroups",
@@ -1101,7 +1101,7 @@
           "shape": "InvalidNextTokenException"
         }
       ],
-      "documentation": "<p>Lists the deployment groups for an application registered with the IAM user or Amazon Web Services account.</p>"
+      "documentation": "<p>Lists the deployment groups for an application registered with the Amazon Web Services user or Amazon Web Services account.</p>"
     },
     "ListDeploymentInstances": {
       "name": "ListDeploymentInstances",
@@ -1147,7 +1147,7 @@
           "shape": "InvalidComputePlatformException"
         }
       ],
-      "documentation": "<note> <p> The newer <code>BatchGetDeploymentTargets</code> should be used instead because it works with all compute types. <code>ListDeploymentInstances</code> throws an exception if it is used with a compute platform other than EC2/On-premises or Lambda. </p> </note> <p> Lists the instance for a deployment associated with the IAM user or Amazon Web Services account. </p>",
+      "documentation": "<note> <p> The newer <code>BatchGetDeploymentTargets</code> should be used instead because it works with all compute types. <code>ListDeploymentInstances</code> throws an exception if it is used with a compute platform other than EC2/On-premises or Lambda. </p> </note> <p> Lists the instance for a deployment associated with the user or Amazon Web Services account. </p>",
       "deprecated": true,
       "deprecatedMessage": "This operation is deprecated, use ListDeploymentTargets instead."
     },
@@ -1238,7 +1238,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p>Lists the deployments in a deployment group for an application registered with the IAM user or Amazon Web Services account.</p>"
+      "documentation": "<p>Lists the deployments in a deployment group for an application registered with the user or Amazon Web Services account.</p>"
     },
     "ListGitHubAccountTokenNames": {
       "name": "ListGitHubAccountTokenNames",
@@ -2008,7 +2008,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the applicable IAM or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the applicable user or Amazon Web Services account.</p>"
         },
         "deploymentGroupNames": {
           "shape": "DeploymentGroupsList",
@@ -2245,7 +2245,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of the application. This name must be unique with the applicable IAM or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of the application. This name must be unique with the applicable user or Amazon Web Services account.</p>"
         },
         "computePlatform": {
           "shape": "ComputePlatform",
@@ -2313,7 +2313,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>"
         },
         "deploymentGroupName": {
           "shape": "DeploymentGroupName",
@@ -2404,7 +2404,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>"
         },
         "deploymentGroupName": {
           "shape": "DeploymentGroupName",
@@ -2416,7 +2416,7 @@
         },
         "deploymentConfigName": {
           "shape": "DeploymentConfigName",
-          "documentation": "<p>The name of a deployment configuration associated with the IAM user or Amazon Web Services account.</p> <p>If not specified, the value configured in the deployment group is used as the default. If the deployment group does not have a deployment configuration associated with it, <code>CodeDeployDefault</code>.<code>OneAtATime</code> is used by default.</p>"
+          "documentation": "<p>The name of a deployment configuration associated with the user or Amazon Web Services account.</p> <p>If not specified, the value configured in the deployment group is used as the default. If the deployment group does not have a deployment configuration associated with it, <code>CodeDeployDefault</code>.<code>OneAtATime</code> is used by default.</p>"
         },
         "description": {
           "shape": "Description",
@@ -2467,7 +2467,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>DeleteApplication</code> operation.</p>"
@@ -2480,7 +2480,7 @@
       "members": {
         "deploymentConfigName": {
           "shape": "DeploymentConfigName",
-          "documentation": "<p>The name of a deployment configuration associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of a deployment configuration associated with the user or Amazon Web Services account.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>DeleteDeploymentConfig</code> operation.</p>"
@@ -2494,7 +2494,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>"
         },
         "deploymentGroupName": {
           "shape": "DeploymentGroupName",
@@ -3213,10 +3213,10 @@
       "members": {
         "name": {
           "shape": "ELBName",
-          "documentation": "<p>For blue/green deployments, the name of the load balancer that is used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment is complete.</p>"
+          "documentation": "<p>For blue/green deployments, the name of the Classic Load Balancer that is used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the Classic Load Balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment is complete.</p>"
         }
       },
-      "documentation": "<p>Information about a load balancer in Elastic Load Balancing to use in a deployment. Instances are registered directly with a load balancer, and traffic is routed to the load balancer.</p>"
+      "documentation": "<p>Information about a Classic Load Balancer in Elastic Load Balancing to use in a deployment. Instances are registered directly with a load balancer, and traffic is routed to the load balancer.</p>"
     },
     "ELBInfoList": {
       "type": "list",
@@ -3340,7 +3340,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>GetApplication</code> operation.</p>"
@@ -3399,7 +3399,7 @@
       "members": {
         "deploymentConfigName": {
           "shape": "DeploymentConfigName",
-          "documentation": "<p>The name of a deployment configuration associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of a deployment configuration associated with the user or Amazon Web Services account.</p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>GetDeploymentConfig</code> operation.</p>"
@@ -3423,7 +3423,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>"
         },
         "deploymentGroupName": {
           "shape": "DeploymentGroupName",
@@ -3450,7 +3450,7 @@
       "members": {
         "deploymentId": {
           "shape": "DeploymentId",
-          "documentation": "<p> The unique ID of a deployment associated with the IAM user or Amazon Web Services account. </p>"
+          "documentation": "<p> The unique ID of a deployment associated with the user or Amazon Web Services account. </p>"
         }
       },
       "documentation": "<p>Represents the input of a <code>GetDeployment</code> operation.</p>"
@@ -3613,7 +3613,7 @@
         },
         "iamUserArn": {
           "shape": "IamUserArn",
-          "documentation": "<p>The IAM user ARN associated with the on-premises instance.</p>"
+          "documentation": "<p>The user ARN associated with the on-premises instance.</p>"
         },
         "instanceArn": {
           "shape": "InstanceArn",
@@ -3922,7 +3922,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p> The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account. </p>"
+          "documentation": "<p> The name of an CodeDeploy application associated with the user or Amazon Web Services account. </p>"
         },
         "sortBy": {
           "shape": "ApplicationRevisionSortBy",
@@ -4021,7 +4021,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -4122,7 +4122,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p> <note> <p>If <code>applicationName</code> is specified, then <code>deploymentGroupName</code> must be specified. If it is not specified, then <code>deploymentGroupName</code> must not be specified. </p> </note>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p> <note> <p>If <code>applicationName</code> is specified, then <code>deploymentGroupName</code> must be specified. If it is not specified, then <code>deploymentGroupName</code> must not be specified. </p> </note>"
         },
         "deploymentGroupName": {
           "shape": "DeploymentGroupName",
@@ -4268,18 +4268,18 @@
       "members": {
         "elbInfoList": {
           "shape": "ELBInfoList",
-          "documentation": "<p>An array that contains information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.</p> <note> <p> Adding more than one load balancer to the array is not supported. </p> </note>"
+          "documentation": "<p>An array that contains information about the load balancers to use for load balancing in a deployment. If you're using Classic Load Balancers, specify those load balancers in this array. </p> <note> <p>You can add up to 10 load balancers to the array.</p> </note> <note> <p>If you're using Application Load Balancers or Network Load Balancers, use the <code>targetGroupInfoList</code> array instead of this one.</p> </note>"
         },
         "targetGroupInfoList": {
           "shape": "TargetGroupInfoList",
-          "documentation": "<p>An array that contains information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.</p> <note> <p> Adding more than one target group to the array is not supported. </p> </note>"
+          "documentation": "<p>An array that contains information about the target groups to use for load balancing in a deployment. If you're using Application Load Balancers and Network Load Balancers, specify their associated target groups in this array.</p> <note> <p>You can add up to 10 target groups to the array.</p> </note> <note> <p>If you're using Classic Load Balancers, use the <code>elbInfoList</code> array instead of this one.</p> </note>"
         },
         "targetGroupPairInfoList": {
           "shape": "TargetGroupPairInfoList",
           "documentation": "<p> The target group pair information. This is an array of <code>TargeGroupPairInfo</code> objects with a maximum size of one. </p>"
         }
       },
-      "documentation": "<p>Information about the Elastic Load Balancing load balancer or target group used in a deployment.</p>"
+      "documentation": "<p>Information about the Elastic Load Balancing load balancer or target group used in a deployment.</p> <p>You can use load balancers and target groups in combination. For example, if you have two Classic Load Balancers, and five target groups tied to an Application Load Balancer, you can specify the two Classic Load Balancers in <code>elbInfoList</code>, and the five target groups in <code>targetGroupInfoList</code>.</p>"
     },
     "LogTail": {
       "type": "string"
@@ -4400,7 +4400,7 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.</p>"
+          "documentation": "<p>The name of an CodeDeploy application associated with the user or Amazon Web Services account.</p>"
         },
         "description": {
           "shape": "Description",
@@ -4429,7 +4429,7 @@
         },
         "iamUserArn": {
           "shape": "IamUserArn",
-          "documentation": "<p>The ARN of the IAM user to associate with the on-premises instance.</p>"
+          "documentation": "<p>The ARN of the user to associate with the on-premises instance.</p>"
         }
       },
       "documentation": "<p>Represents the input of the register on-premises instance operation.</p>"
@@ -4577,7 +4577,7 @@
         },
         "bundleType": {
           "shape": "BundleType",
-          "documentation": "<p>The file type of the application revision. Must be one of the following:</p> <ul> <li> <p> <code>tar</code>: A tar archive file.</p> </li> <li> <p> <code>tgz</code>: A compressed tar archive file.</p> </li> <li> <p> <code>zip</code>: A zip archive file.</p> </li> </ul>"
+          "documentation": "<p>The file type of the application revision. Must be one of the following:</p> <ul> <li> <p> <code>tar</code>: A tar archive file.</p> </li> <li> <p> <code>tgz</code>: A compressed tar archive file.</p> </li> <li> <p> <code>zip</code>: A zip archive file.</p> </li> <li> <p> <code>YAML</code>: A YAML-formatted file.</p> </li> <li> <p> <code>JSON</code>: A JSON-formatted file.</p> </li> </ul>"
         },
         "version": {
           "shape": "VersionId",
@@ -5040,7 +5040,7 @@
         },
         "autoScalingGroups": {
           "shape": "AutoScalingGroupNameList",
-          "documentation": "<p>The replacement list of Auto Scaling groups to be included in the deployment group, if you want to change them.</p> <ul> <li> <p>To keep the Auto Scaling groups, enter their names or do not specify this parameter. </p> </li> <li> <p>To remove Auto Scaling groups, specify a non-null empty list of Auto Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat\">Amazon EC2 instances in an Amazon EC2 Auto Scaling group fail to launch and receive the error \"Heartbeat Timeout\"</a> in the <i>CodeDeploy User Guide</i>.</p> </li> </ul>"
+          "documentation": "<p>The replacement list of Auto Scaling groups to be included in the deployment group, if you want to change them.</p> <ul> <li> <p>To keep the Auto Scaling groups, enter their names or do not specify this parameter. </p> </li> <li> <p>To remove Auto Scaling groups, specify a non-null empty list of Auto Scaling group names to detach all CodeDeploy-managed Auto Scaling lifecycle hooks. For examples, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/troubleshooting-auto-scaling.html#troubleshooting-auto-scaling-heartbeat\">Amazon EC2 instances in an Amazon EC2 Auto Scaling group fail to launch and receive the error \"Heartbeat Timeout\"</a> in the <i>CodeDeploy User Guide</i>.</p> </li> </ul>"
         },
         "serviceRoleArn": {
           "shape": "Role",

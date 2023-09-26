@@ -149,11 +149,11 @@ declare class CodeDeploy extends Service {
    */
   deleteGitHubAccountToken(callback?: (err: AWSError, data: CodeDeploy.Types.DeleteGitHubAccountTokenOutput) => void): Request<CodeDeploy.Types.DeleteGitHubAccountTokenOutput, AWSError>;
   /**
-   * Deletes resources linked to an external ID.
+   * Deletes resources linked to an external ID. This action only applies if you have configured blue/green deployments through CloudFormation.   It is not necessary to call this action directly. CloudFormation calls it on your behalf when it needs to delete stack resources. This action is offered publicly in case you need to delete resources to comply with General Data Protection Regulation (GDPR) requirements. 
    */
   deleteResourcesByExternalId(params: CodeDeploy.Types.DeleteResourcesByExternalIdInput, callback?: (err: AWSError, data: CodeDeploy.Types.DeleteResourcesByExternalIdOutput) => void): Request<CodeDeploy.Types.DeleteResourcesByExternalIdOutput, AWSError>;
   /**
-   * Deletes resources linked to an external ID.
+   * Deletes resources linked to an external ID. This action only applies if you have configured blue/green deployments through CloudFormation.   It is not necessary to call this action directly. CloudFormation calls it on your behalf when it needs to delete stack resources. This action is offered publicly in case you need to delete resources to comply with General Data Protection Regulation (GDPR) requirements. 
    */
   deleteResourcesByExternalId(callback?: (err: AWSError, data: CodeDeploy.Types.DeleteResourcesByExternalIdOutput) => void): Request<CodeDeploy.Types.DeleteResourcesByExternalIdOutput, AWSError>;
   /**
@@ -237,35 +237,35 @@ declare class CodeDeploy extends Service {
    */
   listApplicationRevisions(callback?: (err: AWSError, data: CodeDeploy.Types.ListApplicationRevisionsOutput) => void): Request<CodeDeploy.Types.ListApplicationRevisionsOutput, AWSError>;
   /**
-   * Lists the applications registered with the IAM user or Amazon Web Services account.
+   * Lists the applications registered with the user or Amazon Web Services account.
    */
   listApplications(params: CodeDeploy.Types.ListApplicationsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListApplicationsOutput) => void): Request<CodeDeploy.Types.ListApplicationsOutput, AWSError>;
   /**
-   * Lists the applications registered with the IAM user or Amazon Web Services account.
+   * Lists the applications registered with the user or Amazon Web Services account.
    */
   listApplications(callback?: (err: AWSError, data: CodeDeploy.Types.ListApplicationsOutput) => void): Request<CodeDeploy.Types.ListApplicationsOutput, AWSError>;
   /**
-   * Lists the deployment configurations with the IAM user or Amazon Web Services account.
+   * Lists the deployment configurations with the user or Amazon Web Services account.
    */
   listDeploymentConfigs(params: CodeDeploy.Types.ListDeploymentConfigsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentConfigsOutput) => void): Request<CodeDeploy.Types.ListDeploymentConfigsOutput, AWSError>;
   /**
-   * Lists the deployment configurations with the IAM user or Amazon Web Services account.
+   * Lists the deployment configurations with the user or Amazon Web Services account.
    */
   listDeploymentConfigs(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentConfigsOutput) => void): Request<CodeDeploy.Types.ListDeploymentConfigsOutput, AWSError>;
   /**
-   * Lists the deployment groups for an application registered with the IAM user or Amazon Web Services account.
+   * Lists the deployment groups for an application registered with the Amazon Web Services user or Amazon Web Services account.
    */
   listDeploymentGroups(params: CodeDeploy.Types.ListDeploymentGroupsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.ListDeploymentGroupsOutput, AWSError>;
   /**
-   * Lists the deployment groups for an application registered with the IAM user or Amazon Web Services account.
+   * Lists the deployment groups for an application registered with the Amazon Web Services user or Amazon Web Services account.
    */
   listDeploymentGroups(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.ListDeploymentGroupsOutput, AWSError>;
   /**
-   *   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or Lambda.    Lists the instance for a deployment associated with the IAM user or Amazon Web Services account. 
+   *   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or Lambda.    Lists the instance for a deployment associated with the user or Amazon Web Services account. 
    */
   listDeploymentInstances(params: CodeDeploy.Types.ListDeploymentInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.ListDeploymentInstancesOutput, AWSError>;
   /**
-   *   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or Lambda.    Lists the instance for a deployment associated with the IAM user or Amazon Web Services account. 
+   *   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or Lambda.    Lists the instance for a deployment associated with the user or Amazon Web Services account. 
    */
   listDeploymentInstances(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.ListDeploymentInstancesOutput, AWSError>;
   /**
@@ -277,11 +277,11 @@ declare class CodeDeploy extends Service {
    */
   listDeploymentTargets(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.ListDeploymentTargetsOutput, AWSError>;
   /**
-   * Lists the deployments in a deployment group for an application registered with the IAM user or Amazon Web Services account.
+   * Lists the deployments in a deployment group for an application registered with the user or Amazon Web Services account.
    */
   listDeployments(params: CodeDeploy.Types.ListDeploymentsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentsOutput) => void): Request<CodeDeploy.Types.ListDeploymentsOutput, AWSError>;
   /**
-   * Lists the deployments in a deployment group for an application registered with the IAM user or Amazon Web Services account.
+   * Lists the deployments in a deployment group for an application registered with the user or Amazon Web Services account.
    */
   listDeployments(callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentsOutput) => void): Request<CodeDeploy.Types.ListDeploymentsOutput, AWSError>;
   /**
@@ -537,7 +537,7 @@ declare namespace CodeDeploy {
   }
   export interface BatchGetDeploymentGroupsInput {
     /**
-     * The name of an CodeDeploy application associated with the applicable IAM or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the applicable user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
     /**
@@ -686,7 +686,7 @@ declare namespace CodeDeploy {
   }
   export interface CreateApplicationInput {
     /**
-     * The name of the application. This name must be unique with the applicable IAM or Amazon Web Services account.
+     * The name of the application. This name must be unique with the applicable user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
     /**
@@ -730,7 +730,7 @@ declare namespace CodeDeploy {
   }
   export interface CreateDeploymentGroupInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
     /**
@@ -810,7 +810,7 @@ declare namespace CodeDeploy {
   }
   export interface CreateDeploymentInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
     /**
@@ -822,7 +822,7 @@ declare namespace CodeDeploy {
      */
     revision?: RevisionLocation;
     /**
-     * The name of a deployment configuration associated with the IAM user or Amazon Web Services account. If not specified, the value configured in the deployment group is used as the default. If the deployment group does not have a deployment configuration associated with it, CodeDeployDefault.OneAtATime is used by default.
+     * The name of a deployment configuration associated with the user or Amazon Web Services account. If not specified, the value configured in the deployment group is used as the default. If the deployment group does not have a deployment configuration associated with it, CodeDeployDefault.OneAtATime is used by default.
      */
     deploymentConfigName?: DeploymentConfigName;
     /**
@@ -862,19 +862,19 @@ declare namespace CodeDeploy {
   }
   export interface DeleteApplicationInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
   }
   export interface DeleteDeploymentConfigInput {
     /**
-     * The name of a deployment configuration associated with the IAM user or Amazon Web Services account.
+     * The name of a deployment configuration associated with the user or Amazon Web Services account.
      */
     deploymentConfigName: DeploymentConfigName;
   }
   export interface DeleteDeploymentGroupInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
     /**
@@ -1357,7 +1357,7 @@ declare namespace CodeDeploy {
   export type ECSTaskSetStatus = string;
   export interface ELBInfo {
     /**
-     * For blue/green deployments, the name of the load balancer that is used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the load balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment is complete.
+     * For blue/green deployments, the name of the Classic Load Balancer that is used to route traffic from original instances to replacement instances in a blue/green deployment. For in-place deployments, the name of the Classic Load Balancer that instances are deregistered from so they are not serving traffic during a deployment, and then re-registered with after the deployment is complete.
      */
     name?: ELBName;
   }
@@ -1404,7 +1404,7 @@ declare namespace CodeDeploy {
   }
   export interface GetApplicationInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
   }
@@ -1440,7 +1440,7 @@ declare namespace CodeDeploy {
   }
   export interface GetDeploymentConfigInput {
     /**
-     * The name of a deployment configuration associated with the IAM user or Amazon Web Services account.
+     * The name of a deployment configuration associated with the user or Amazon Web Services account.
      */
     deploymentConfigName: DeploymentConfigName;
   }
@@ -1452,7 +1452,7 @@ declare namespace CodeDeploy {
   }
   export interface GetDeploymentGroupInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
     /**
@@ -1468,7 +1468,7 @@ declare namespace CodeDeploy {
   }
   export interface GetDeploymentInput {
     /**
-     *  The unique ID of a deployment associated with the IAM user or Amazon Web Services account. 
+     *  The unique ID of a deployment associated with the user or Amazon Web Services account. 
      */
     deploymentId: DeploymentId;
   }
@@ -1557,7 +1557,7 @@ declare namespace CodeDeploy {
      */
     iamSessionArn?: IamSessionArn;
     /**
-     * The IAM user ARN associated with the on-premises instance.
+     * The user ARN associated with the on-premises instance.
      */
     iamUserArn?: IamUserArn;
     /**
@@ -1745,7 +1745,7 @@ declare namespace CodeDeploy {
   export type LifecycleMessage = string;
   export interface ListApplicationRevisionsInput {
     /**
-     *  The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account. 
+     *  The name of an CodeDeploy application associated with the user or Amazon Web Services account. 
      */
     applicationName: ApplicationName;
     /**
@@ -1817,7 +1817,7 @@ declare namespace CodeDeploy {
   }
   export interface ListDeploymentGroupsInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
     /**
@@ -1893,7 +1893,7 @@ declare namespace CodeDeploy {
   }
   export interface ListDeploymentsInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.  If applicationName is specified, then deploymentGroupName must be specified. If it is not specified, then deploymentGroupName must not be specified.  
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.  If applicationName is specified, then deploymentGroupName must be specified. If it is not specified, then deploymentGroupName must not be specified.  
      */
     applicationName?: ApplicationName;
     /**
@@ -1992,11 +1992,11 @@ declare namespace CodeDeploy {
   export type ListenerArnList = ListenerArn[];
   export interface LoadBalancerInfo {
     /**
-     * An array that contains information about the load balancer to use for load balancing in a deployment. In Elastic Load Balancing, load balancers are used with Classic Load Balancers.   Adding more than one load balancer to the array is not supported.  
+     * An array that contains information about the load balancers to use for load balancing in a deployment. If you're using Classic Load Balancers, specify those load balancers in this array.   You can add up to 10 load balancers to the array.   If you're using Application Load Balancers or Network Load Balancers, use the targetGroupInfoList array instead of this one. 
      */
     elbInfoList?: ELBInfoList;
     /**
-     * An array that contains information about the target group to use for load balancing in a deployment. In Elastic Load Balancing, target groups are used with Application Load Balancers.   Adding more than one target group to the array is not supported.  
+     * An array that contains information about the target groups to use for load balancing in a deployment. If you're using Application Load Balancers and Network Load Balancers, specify their associated target groups in this array.  You can add up to 10 target groups to the array.   If you're using Classic Load Balancers, use the elbInfoList array instead of this one. 
      */
     targetGroupInfoList?: TargetGroupInfoList;
     /**
@@ -2063,7 +2063,7 @@ declare namespace CodeDeploy {
   export type RawStringSha256 = string;
   export interface RegisterApplicationRevisionInput {
     /**
-     * The name of an CodeDeploy application associated with the IAM user or Amazon Web Services account.
+     * The name of an CodeDeploy application associated with the user or Amazon Web Services account.
      */
     applicationName: ApplicationName;
     /**
@@ -2085,7 +2085,7 @@ declare namespace CodeDeploy {
      */
     iamSessionArn?: IamSessionArn;
     /**
-     * The ARN of the IAM user to associate with the on-premises instance.
+     * The ARN of the user to associate with the on-premises instance.
      */
     iamUserArn?: IamUserArn;
   }
@@ -2173,7 +2173,7 @@ declare namespace CodeDeploy {
      */
     key?: S3Key;
     /**
-     * The file type of the application revision. Must be one of the following:    tar: A tar archive file.    tgz: A compressed tar archive file.    zip: A zip archive file.  
+     * The file type of the application revision. Must be one of the following:    tar: A tar archive file.    tgz: A compressed tar archive file.    zip: A zip archive file.    YAML: A YAML-formatted file.    JSON: A JSON-formatted file.  
      */
     bundleType?: BundleType;
     /**

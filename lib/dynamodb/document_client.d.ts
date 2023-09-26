@@ -1271,9 +1271,18 @@ export namespace DocumentClient {
      * The number of items exported.
      */
     ItemCount?: ItemCount;
+    /**
+     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     */
+    ExportType?: ExportType;
+    /**
+     * Optional object containing the parameters specific to an incremental export.
+     */
+    IncrementalExportSpecification?: IncrementalExportSpecification;
   }
   export type ExportEndTime = Date;
   export type ExportFormat = "DYNAMODB_JSON"|"ION"|string;
+  export type ExportFromTime = Date;
   export type ExportManifest = string;
   export type ExportNextToken = string;
   export type ExportStartTime = Date;
@@ -1288,6 +1297,10 @@ export namespace DocumentClient {
      * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
      */
     ExportStatus?: ExportStatus;
+    /**
+     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     */
+    ExportType?: ExportType;
   }
   export interface ExportTableToPointInTimeInput {
     /**
@@ -1326,6 +1339,14 @@ export namespace DocumentClient {
      * The format for the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
      */
     ExportFormat?: ExportFormat;
+    /**
+     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     */
+    ExportType?: ExportType;
+    /**
+     * Optional object containing the parameters specific to an incremental export.
+     */
+    IncrementalExportSpecification?: IncrementalExportSpecification;
   }
   export interface ExportTableToPointInTimeOutput {
     /**
@@ -1334,6 +1355,9 @@ export namespace DocumentClient {
     ExportDescription?: ExportDescription;
   }
   export type ExportTime = Date;
+  export type ExportToTime = Date;
+  export type ExportType = "FULL_EXPORT"|"INCREMENTAL_EXPORT"|string;
+  export type ExportViewType = "NEW_IMAGE"|"NEW_AND_OLD_IMAGES"|string;
   export type ExpressionAttributeNameMap = {[key: string]: AttributeName};
   export type ExpressionAttributeNameVariable = string;
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
@@ -1707,6 +1731,20 @@ export namespace DocumentClient {
     ImportTableDescription: ImportTableDescription;
   }
   export type ImportedItemCount = number;
+  export interface IncrementalExportSpecification {
+    /**
+     * Time in the past which provides the inclusive start range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state including and after this point in time.
+     */
+    ExportFromTime?: ExportFromTime;
+    /**
+     * Time in the past which provides the exclusive end range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state just prior to this point in time. If this is not provided, the latest time with data available will be used.
+     */
+    ExportToTime?: ExportToTime;
+    /**
+     * Choice of whether to output the previous item image prior to the start time of the incremental export. Valid values are NEW_AND_OLD_IMAGES and NEW_IMAGES.
+     */
+    ExportViewType?: ExportViewType;
+  }
   export type IndexName = string;
   export type IndexStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
   export type InputCompressionType = "GZIP"|"ZSTD"|"NONE"|string;

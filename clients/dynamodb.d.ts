@@ -247,11 +247,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   importTable(callback?: (err: AWSError, data: DynamoDB.Types.ImportTableOutput) => void): Request<DynamoDB.Types.ImportTableOutput, AWSError>;
   /**
-   * List backups associated with an Amazon Web Services account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page. In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
+   * List DynamoDB backups that are associated with an Amazon Web Services account and weren't made with Amazon Web Services Backup. To list these backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page. In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second. If you want to retrieve the complete list of backups made with Amazon Web Services Backup, use the Amazon Web Services Backup list API. 
    */
   listBackups(params: DynamoDB.Types.ListBackupsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
   /**
-   * List backups associated with an Amazon Web Services account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page. In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
+   * List DynamoDB backups that are associated with an Amazon Web Services account and weren't made with Amazon Web Services Backup. To list these backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page. In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second. If you want to retrieve the complete list of backups made with Amazon Web Services Backup, use the Amazon Web Services Backup list API. 
    */
   listBackups(callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
   /**
@@ -1642,9 +1642,18 @@ declare namespace DynamoDB {
      * The number of items exported.
      */
     ItemCount?: ItemCount;
+    /**
+     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     */
+    ExportType?: ExportType;
+    /**
+     * Optional object containing the parameters specific to an incremental export.
+     */
+    IncrementalExportSpecification?: IncrementalExportSpecification;
   }
   export type ExportEndTime = Date;
   export type ExportFormat = "DYNAMODB_JSON"|"ION"|string;
+  export type ExportFromTime = Date;
   export type ExportManifest = string;
   export type ExportNextToken = string;
   export type ExportStartTime = Date;
@@ -1659,6 +1668,10 @@ declare namespace DynamoDB {
      * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
      */
     ExportStatus?: ExportStatus;
+    /**
+     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     */
+    ExportType?: ExportType;
   }
   export interface ExportTableToPointInTimeInput {
     /**
@@ -1697,6 +1710,14 @@ declare namespace DynamoDB {
      * The format for the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
      */
     ExportFormat?: ExportFormat;
+    /**
+     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     */
+    ExportType?: ExportType;
+    /**
+     * Optional object containing the parameters specific to an incremental export.
+     */
+    IncrementalExportSpecification?: IncrementalExportSpecification;
   }
   export interface ExportTableToPointInTimeOutput {
     /**
@@ -1705,6 +1726,9 @@ declare namespace DynamoDB {
     ExportDescription?: ExportDescription;
   }
   export type ExportTime = Date;
+  export type ExportToTime = Date;
+  export type ExportType = "FULL_EXPORT"|"INCREMENTAL_EXPORT"|string;
+  export type ExportViewType = "NEW_IMAGE"|"NEW_AND_OLD_IMAGES"|string;
   export type ExpressionAttributeNameMap = {[key: string]: AttributeName};
   export type ExpressionAttributeNameVariable = string;
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
@@ -2078,6 +2102,20 @@ declare namespace DynamoDB {
     ImportTableDescription: ImportTableDescription;
   }
   export type ImportedItemCount = number;
+  export interface IncrementalExportSpecification {
+    /**
+     * Time in the past which provides the inclusive start range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state including and after this point in time.
+     */
+    ExportFromTime?: ExportFromTime;
+    /**
+     * Time in the past which provides the exclusive end range for the export table's data, counted in seconds from the start of the Unix epoch. The incremental export will reflect the table's state just prior to this point in time. If this is not provided, the latest time with data available will be used.
+     */
+    ExportToTime?: ExportToTime;
+    /**
+     * Choice of whether to output the previous item image prior to the start time of the incremental export. Valid values are NEW_AND_OLD_IMAGES and NEW_IMAGES.
+     */
+    ExportViewType?: ExportViewType;
+  }
   export type IndexName = string;
   export type IndexStatus = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|string;
   export type InputCompressionType = "GZIP"|"ZSTD"|"NONE"|string;

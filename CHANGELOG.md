@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1464.0-->
+<!--LATEST=2.1465.0-->
 <!--ENTRYINSERT-->
+
+## 2.1465.0
+* feature: AppIntegrations: The Amazon AppIntegrations service adds a set of APIs (in preview) to manage third party applications to be used in Amazon Connect agent workspace.
+* feature: AppRunner: This release allows an App Runner customer to specify a custom source directory to run the build & start command. This change allows App Runner to support monorepo based repositories
+* feature: Connect: This release updates a set of Amazon Connect APIs that provides the ability to integrate third party applications in the Amazon Connect agent workspace.
+* feature: DynamoDB: Amazon DynamoDB now supports Incremental Export as an enhancement to the existing Export Table
+* feature: EC2: The release includes AWS verified access to support FIPs compliance in North America regions
+* feature: LakeFormation: This release adds three new API support "CreateLakeFormationOptIn", "DeleteLakeFormationOptIn" and "ListLakeFormationOptIns", and also updates the corresponding documentation.
+* feature: S3: This release adds a new field COMPLETED to the ReplicationStatus Enum. You can now use this field to validate the replication status of S3 objects using the AWS SDK.
 
 ## 2.1464.0
 * feature: AmplifyUIBuilder: Support for generating code that is compatible with future versions of amplify project dependencies.

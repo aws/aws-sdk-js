@@ -5696,7 +5696,7 @@ declare namespace S3 {
   }
   export type ReplicationRuleStatus = "Enabled"|"Disabled"|string;
   export type ReplicationRules = ReplicationRule[];
-  export type ReplicationStatus = "COMPLETE"|"PENDING"|"FAILED"|"REPLICA"|string;
+  export type ReplicationStatus = "COMPLETE"|"PENDING"|"FAILED"|"REPLICA"|"COMPLETED"|string;
   export interface ReplicationTime {
     /**
      *  Specifies whether the replication time is enabled. 

@@ -77,6 +77,14 @@ declare class LakeFormation extends Service {
    */
   createLFTag(callback?: (err: AWSError, data: LakeFormation.Types.CreateLFTagResponse) => void): Request<LakeFormation.Types.CreateLFTagResponse, AWSError>;
   /**
+   * Enforce Lake Formation permissions for the given databases, tables, and principals.
+   */
+  createLakeFormationOptIn(params: LakeFormation.Types.CreateLakeFormationOptInRequest, callback?: (err: AWSError, data: LakeFormation.Types.CreateLakeFormationOptInResponse) => void): Request<LakeFormation.Types.CreateLakeFormationOptInResponse, AWSError>;
+  /**
+   * Enforce Lake Formation permissions for the given databases, tables, and principals.
+   */
+  createLakeFormationOptIn(callback?: (err: AWSError, data: LakeFormation.Types.CreateLakeFormationOptInResponse) => void): Request<LakeFormation.Types.CreateLakeFormationOptInResponse, AWSError>;
+  /**
    * Deletes a data cell filter.
    */
   deleteDataCellsFilter(params: LakeFormation.Types.DeleteDataCellsFilterRequest, callback?: (err: AWSError, data: LakeFormation.Types.DeleteDataCellsFilterResponse) => void): Request<LakeFormation.Types.DeleteDataCellsFilterResponse, AWSError>;
@@ -92,6 +100,14 @@ declare class LakeFormation extends Service {
    * Deletes the specified LF-tag given a key name. If the input parameter tag key was not found, then the operation will throw an exception. When you delete an LF-tag, the LFTagPolicy attached to the LF-tag becomes invalid. If the deleted LF-tag was still assigned to any resource, the tag policy attach to the deleted LF-tag will no longer be applied to the resource.
    */
   deleteLFTag(callback?: (err: AWSError, data: LakeFormation.Types.DeleteLFTagResponse) => void): Request<LakeFormation.Types.DeleteLFTagResponse, AWSError>;
+  /**
+   * Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.
+   */
+  deleteLakeFormationOptIn(params: LakeFormation.Types.DeleteLakeFormationOptInRequest, callback?: (err: AWSError, data: LakeFormation.Types.DeleteLakeFormationOptInResponse) => void): Request<LakeFormation.Types.DeleteLakeFormationOptInResponse, AWSError>;
+  /**
+   * Remove the Lake Formation permissions enforcement of the given databases, tables, and principals.
+   */
+  deleteLakeFormationOptIn(callback?: (err: AWSError, data: LakeFormation.Types.DeleteLakeFormationOptInResponse) => void): Request<LakeFormation.Types.DeleteLakeFormationOptInResponse, AWSError>;
   /**
    * For a specific governed table, provides a list of Amazon S3 objects that will be written during the current transaction and that can be automatically deleted if the transaction is canceled. Without this call, no Amazon S3 objects are automatically deleted when a transaction cancels.   The Glue ETL library function write_dynamic_frame.from_catalog() includes an option to automatically call DeleteObjectsOnCancel before writes. For more information, see Rolling Back Amazon S3 Writes. 
    */
@@ -252,6 +268,14 @@ declare class LakeFormation extends Service {
    * Lists LF-tags that the requester has permission to view. 
    */
   listLFTags(callback?: (err: AWSError, data: LakeFormation.Types.ListLFTagsResponse) => void): Request<LakeFormation.Types.ListLFTagsResponse, AWSError>;
+  /**
+   * Retrieve the current list of resources and principals that are opt in to enforce Lake Formation permissions.
+   */
+  listLakeFormationOptIns(params: LakeFormation.Types.ListLakeFormationOptInsRequest, callback?: (err: AWSError, data: LakeFormation.Types.ListLakeFormationOptInsResponse) => void): Request<LakeFormation.Types.ListLakeFormationOptInsResponse, AWSError>;
+  /**
+   * Retrieve the current list of resources and principals that are opt in to enforce Lake Formation permissions.
+   */
+  listLakeFormationOptIns(callback?: (err: AWSError, data: LakeFormation.Types.ListLakeFormationOptInsResponse) => void): Request<LakeFormation.Types.ListLakeFormationOptInsResponse, AWSError>;
   /**
    * Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER. This operation returns only those permissions that have been explicitly granted. For information about permissions, see Security and Access Control to Metadata and Data.
    */
@@ -608,6 +632,12 @@ declare namespace LakeFormation {
   }
   export interface CreateLFTagResponse {
   }
+  export interface CreateLakeFormationOptInRequest {
+    Principal: DataLakePrincipal;
+    Resource: Resource;
+  }
+  export interface CreateLakeFormationOptInResponse {
+  }
   export type CredentialTimeoutDurationSecondInteger = number;
   export interface DataCellsFilter {
     /**
@@ -766,6 +796,12 @@ declare namespace LakeFormation {
     TagKey: LFTagKey;
   }
   export interface DeleteLFTagResponse {
+  }
+  export interface DeleteLakeFormationOptInRequest {
+    Principal: DataLakePrincipal;
+    Resource: Resource;
+  }
+  export interface DeleteLakeFormationOptInResponse {
   }
   export interface DeleteObjectInput {
     /**
@@ -1264,7 +1300,7 @@ declare namespace LakeFormation {
      */
     TagKey: LFTagKey;
     /**
-     * A list of possible values an attribute can take.
+     * A list of possible values an attribute can take. The maximum number of values that can be defined for a LF-Tag is 1000. A single API call supports 50 values. You can use multiple API calls to add more values.
      */
     TagValues: TagValueList;
   }
@@ -1324,6 +1360,19 @@ declare namespace LakeFormation {
   }
   export type LFTagValue = string;
   export type LFTagsList = LFTagPair[];
+  export interface LakeFormationOptInsInfo {
+    Resource?: Resource;
+    Principal?: DataLakePrincipal;
+    /**
+     * The last modified date and time of the record.
+     */
+    LastModified?: LastModifiedTimestamp;
+    /**
+     * The user who updated the record.
+     */
+    LastUpdatedBy?: NameString;
+  }
+  export type LakeFormationOptInsInfoList = LakeFormationOptInsInfo[];
   export type LastModifiedTimestamp = Date;
   export interface ListDataCellsFilterRequest {
     /**
@@ -1374,6 +1423,31 @@ declare namespace LakeFormation {
     LFTags?: LFTagsList;
     /**
      * A continuation token, present if the current list segment is not the last.
+     */
+    NextToken?: Token;
+  }
+  export interface ListLakeFormationOptInsRequest {
+    Principal?: DataLakePrincipal;
+    /**
+     * A structure for the resource.
+     */
+    Resource?: Resource;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is not the first call to retrieve this list.
+     */
+    NextToken?: Token;
+  }
+  export interface ListLakeFormationOptInsResponse {
+    /**
+     * A list of principal-resource pairs that have Lake Formation permissins enforced.
+     */
+    LakeFormationOptInsInfoList?: LakeFormationOptInsInfoList;
+    /**
+     * A continuation token, if this is not the first call to retrieve this list.
      */
     NextToken?: Token;
   }
@@ -1590,6 +1664,14 @@ declare namespace LakeFormation {
      * This attribute can be used to return any additional details of PrincipalResourcePermissions. Currently returns only as a RAM resource share ARN.
      */
     AdditionalDetails?: DetailsMap;
+    /**
+     * The date and time when the resource was last updated.
+     */
+    LastUpdated?: LastModifiedTimestamp;
+    /**
+     * The user who updated the record.
+     */
+    LastUpdatedBy?: NameString;
   }
   export type PrincipalResourcePermissionsList = PrincipalResourcePermissions[];
   export interface PutDataLakeSettingsRequest {
@@ -1648,6 +1730,10 @@ declare namespace LakeFormation {
      * Whether or not the resource is a federated resource.
      */
     WithFederation?: NullableBoolean;
+    /**
+     *  Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies. 
+     */
+    HybridAccessEnabled?: NullableBoolean;
   }
   export interface RegisterResourceResponse {
   }
@@ -1723,6 +1809,10 @@ declare namespace LakeFormation {
      * Whether or not the resource is a federated resource.
      */
     WithFederation?: NullableBoolean;
+    /**
+     *  Indicates whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies. 
+     */
+    HybridAccessEnabled?: NullableBoolean;
   }
   export type ResourceInfoList = ResourceInfo[];
   export type ResourceShareList = RAMResourceShareArn[];
@@ -2041,6 +2131,10 @@ declare namespace LakeFormation {
      * Whether or not the resource is a federated resource.
      */
     WithFederation?: NullableBoolean;
+    /**
+     *  Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies. 
+     */
+    HybridAccessEnabled?: NullableBoolean;
   }
   export interface UpdateResourceResponse {
   }
