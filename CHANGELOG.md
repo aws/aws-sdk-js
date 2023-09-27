@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1465.0-->
+<!--LATEST=2.1466.0-->
 <!--ENTRYINSERT-->
+
+## 2.1466.0
+* feature: CognitoIdentityServiceProvider: The UserPoolType Status field is no longer used.
+* feature: Firehose: Features : Adding support for new data ingestion source to Kinesis Firehose - AWS Managed Services Kafka.
+* feature: Iot: Added support for IoT Rules Engine Kafka Action Headers
+* feature: Textract: This release adds new feature - Layout to Analyze Document API which can automatically extract layout elements such as titles, paragraphs, headers, section headers, lists, page numbers, footers, table areas, key-value areas and figure areas and order the elements as a human would read.
 
 ## 2.1465.0
 * feature: AppIntegrations: The Amazon AppIntegrations service adds a set of APIs (in preview) to manage third party applications to be used in Amazon Connect agent workspace.

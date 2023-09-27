@@ -164,11 +164,11 @@ declare class Iot extends Service {
    */
   createBillingGroup(callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
+   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-521 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
    */
   createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
+   * Creates an X.509 certificate using the specified certificate signing request.  Requires permission to access the CreateCertificateFromCsr action.   The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256, NIST P-384, or NIST P-521 curves. For supported certificates, consult  Certificate signing algorithms supported by IoT.    Reusing the same certificate signing request (CSR) results in a distinct certificate.  You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is:   $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}  This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR.  You can also run the aws iot create-certificate-from-csr part of the command in parallel to speed up the certificate creation process:  $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}   On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:  &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_}   On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:  &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"  
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
@@ -516,11 +516,11 @@ declare class Iot extends Service {
    */
   deletePackage(callback?: (err: AWSError, data: Iot.Types.DeletePackageResponse) => void): Request<Iot.Types.DeletePackageResponse, AWSError>;
   /**
-   * Deletes a specific version from a software package.  Note: If a package version is designated as default, you must remove the designation from the package using the UpdatePackage action.
+   * Deletes a specific version from a software package.  Note: If a package version is designated as default, you must remove the designation from the software package using the UpdatePackage action.
    */
   deletePackageVersion(params: Iot.Types.DeletePackageVersionRequest, callback?: (err: AWSError, data: Iot.Types.DeletePackageVersionResponse) => void): Request<Iot.Types.DeletePackageVersionResponse, AWSError>;
   /**
-   * Deletes a specific version from a software package.  Note: If a package version is designated as default, you must remove the designation from the package using the UpdatePackage action.
+   * Deletes a specific version from a software package.  Note: If a package version is designated as default, you must remove the designation from the software package using the UpdatePackage action.
    */
   deletePackageVersion(callback?: (err: AWSError, data: Iot.Types.DeletePackageVersionResponse) => void): Request<Iot.Types.DeletePackageVersionResponse, AWSError>;
   /**
@@ -1908,19 +1908,19 @@ declare class Iot extends Service {
    */
   updateMitigationAction(callback?: (err: AWSError, data: Iot.Types.UpdateMitigationActionResponse) => void): Request<Iot.Types.UpdateMitigationActionResponse, AWSError>;
   /**
-   * Updates the supported fields for a specific package. Requires permission to access the UpdatePackage and GetIndexingConfiguration actions.
+   * Updates the supported fields for a specific software package. Requires permission to access the UpdatePackage and GetIndexingConfiguration actions.
    */
   updatePackage(params: Iot.Types.UpdatePackageRequest, callback?: (err: AWSError, data: Iot.Types.UpdatePackageResponse) => void): Request<Iot.Types.UpdatePackageResponse, AWSError>;
   /**
-   * Updates the supported fields for a specific package. Requires permission to access the UpdatePackage and GetIndexingConfiguration actions.
+   * Updates the supported fields for a specific software package. Requires permission to access the UpdatePackage and GetIndexingConfiguration actions.
    */
   updatePackage(callback?: (err: AWSError, data: Iot.Types.UpdatePackageResponse) => void): Request<Iot.Types.UpdatePackageResponse, AWSError>;
   /**
-   * Updates the package configuration. Requires permission to access the UpdatePackageConfiguration and iam:PassRole actions.
+   * Updates the software package configuration. Requires permission to access the UpdatePackageConfiguration and iam:PassRole actions.
    */
   updatePackageConfiguration(params: Iot.Types.UpdatePackageConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdatePackageConfigurationResponse) => void): Request<Iot.Types.UpdatePackageConfigurationResponse, AWSError>;
   /**
-   * Updates the package configuration. Requires permission to access the UpdatePackageConfiguration and iam:PassRole actions.
+   * Updates the software package configuration. Requires permission to access the UpdatePackageConfiguration and iam:PassRole actions.
    */
   updatePackageConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdatePackageConfigurationResponse) => void): Request<Iot.Types.UpdatePackageConfigurationResponse, AWSError>;
   /**
@@ -2847,7 +2847,7 @@ declare namespace Iot {
      */
     metricDimension?: MetricDimension;
     /**
-     * The criteria that determine if a device is behaving normally in regard to the metric.
+     * The criteria that determine if a device is behaving normally in regard to the metric.  In the IoT console, you can choose to be sent an alert through Amazon SNS when IoT Device Defender detects that a device is behaving anomalously. 
      */
     criteria?: BehaviorCriteria;
     /**
@@ -3764,7 +3764,7 @@ declare namespace Iot {
      */
     jobArn?: JobArn;
     /**
-     * An S3 link to the job document to use in the template. Required if you don't specify a value for document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
+     * An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for document. For example, --document-source https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0  For more information, see Methods for accessing a bucket.
      */
     documentSource?: JobDocumentSource;
     /**
@@ -3904,7 +3904,7 @@ declare namespace Iot {
      */
     roleArn: RoleArn;
     /**
-     * A list of additional OTA update parameters which are name-value pairs.
+     * A list of additional OTA update parameters, which are name-value pairs. They won't be sent to devices as a part of the Job document.
      */
     additionalParameters?: AdditionalParameterMap;
     /**
@@ -3936,7 +3936,7 @@ declare namespace Iot {
   }
   export interface CreatePackageRequest {
     /**
-     * The name of the new package.
+     * The name of the new software package.
      */
     packageName: PackageName;
     /**
@@ -3954,7 +3954,7 @@ declare namespace Iot {
   }
   export interface CreatePackageResponse {
     /**
-     * The name of the package.
+     * The name of the software package.
      */
     packageName?: PackageName;
     /**
@@ -3968,7 +3968,7 @@ declare namespace Iot {
   }
   export interface CreatePackageVersionRequest {
     /**
-     * The name of the associated package.
+     * The name of the associated software package.
      */
     packageName: PackageName;
     /**
@@ -3998,7 +3998,7 @@ declare namespace Iot {
      */
     packageVersionArn?: PackageVersionArn;
     /**
-     * The name of the associated package.
+     * The name of the associated software package.
      */
     packageName?: PackageName;
     /**
@@ -4647,7 +4647,7 @@ declare namespace Iot {
   }
   export interface DeletePackageRequest {
     /**
-     * The name of the target package.
+     * The name of the target software package.
      */
     packageName: PackageName;
     /**
@@ -4659,7 +4659,7 @@ declare namespace Iot {
   }
   export interface DeletePackageVersionRequest {
     /**
-     * The name of the associated package.
+     * The name of the associated software package.
      */
     packageName: PackageName;
     /**
@@ -5150,7 +5150,7 @@ declare namespace Iot {
   }
   export interface DescribeEndpointRequest {
     /**
-     * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an IoT credentials provider API endpoint.      iot:Jobs - Returns an IoT device management Jobs API endpoint.   We strongly recommend that customers use the newer iot:Data-ATS endpoint type to avoid issues related to the widespread distrust of Symantec certificate authorities.
+     * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an IoT credentials provider API endpoint.      iot:Jobs - Returns an IoT device management Jobs API endpoint.   We strongly recommend that customers use the newer iot:Data-ATS endpoint type to avoid issues related to the widespread distrust of Symantec certificate authorities. ATS Signed Certificates are more secure and are trusted by most popular browsers.
      */
     endpointType?: EndpointType;
   }
@@ -6400,13 +6400,13 @@ declare namespace Iot {
   }
   export interface GetPackageRequest {
     /**
-     * The name of the target package.
+     * The name of the target software package.
      */
     packageName: PackageName;
   }
   export interface GetPackageResponse {
     /**
-     * The name of the package.
+     * The name of the software package.
      */
     packageName?: PackageName;
     /**
@@ -6446,7 +6446,7 @@ declare namespace Iot {
      */
     packageVersionArn?: PackageVersionArn;
     /**
-     * The name of the package.
+     * The name of the software package.
      */
     packageName?: PackageName;
     /**
@@ -7181,7 +7181,24 @@ declare namespace Iot {
      * Properties of the Apache Kafka producer client.
      */
     clientProperties: ClientProperties;
+    /**
+     * The list of Kafka headers that you specify.
+     */
+    headers?: KafkaHeaders;
   }
+  export interface KafkaActionHeader {
+    /**
+     * The key of the Kafka header.
+     */
+    key: KafkaHeaderKey;
+    /**
+     * The value of the Kafka header.
+     */
+    value: KafkaHeaderValue;
+  }
+  export type KafkaHeaderKey = string;
+  export type KafkaHeaderValue = string;
+  export type KafkaHeaders = KafkaActionHeader[];
   export type Key = string;
   export type KeyName = string;
   export interface KeyPair {
@@ -8034,7 +8051,7 @@ declare namespace Iot {
   }
   export interface ListPackageVersionsRequest {
     /**
-     * The name of the target package.
+     * The name of the target software package.
      */
     packageName: PackageName;
     /**
@@ -8886,7 +8903,7 @@ declare namespace Iot {
   }
   export type LogTargetConfigurations = LogTargetConfiguration[];
   export type LogTargetName = string;
-  export type LogTargetType = "DEFAULT"|"THING_GROUP"|"CLIENT_ID"|"SOURCE_IP"|"PRINCIPAL_ID"|string;
+  export type LogTargetType = "DEFAULT"|"THING_GROUP"|"CLIENT_ID"|"SOURCE_IP"|"PRINCIPAL_ID"|"EVENT_TYPE"|"DEVICE_DEFENDER"|string;
   export interface LoggingOptionsPayload {
     /**
      * The ARN of the IAM role that grants access.
@@ -9172,7 +9189,7 @@ declare namespace Iot {
      */
     codeSigning?: CodeSigning;
     /**
-     * A list of name/attribute pairs.
+     * A list of name-attribute pairs. They won't be sent to devices as a part of the Job document.
      */
     attributes?: AttributesMap;
   }
@@ -9318,7 +9335,7 @@ declare namespace Iot {
   export type PackageName = string;
   export interface PackageSummary {
     /**
-     * The name for the target package.
+     * The name for the target software package.
      */
     packageName?: PackageName;
     /**
@@ -10020,11 +10037,11 @@ declare namespace Iot {
   export type ScheduledJobRolloutList = ScheduledJobRollout[];
   export interface SchedulingConfig {
     /**
-     * The time a job will begin rollout of the job document to all devices in the target group for a job. The startTime can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time. The date and time format for the startTime is YYYY-MM-DD for the date and HH:MM for the time.
+     * The time a job will begin rollout of the job document to all devices in the target group for a job. The startTime can be scheduled up to a year in advance and must be scheduled a minimum of thirty minutes from the current time. The date and time format for the startTime is YYYY-MM-DD for the date and HH:MM for the time. For more information on the syntax for startTime when using an API command or the Command Line Interface, see Timestamp.
      */
     startTime?: StringDateTime;
     /**
-     * The time a job will stop rollout of the job document to all devices in the target group for a job. The endTime must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between startTime and endTime is thirty minutes. The maximum duration between startTime and endTime is two years. The date and time format for the endTime is YYYY-MM-DD for the date and HH:MM for the time.
+     * The time a job will stop rollout of the job document to all devices in the target group for a job. The endTime must take place no later than two years from the current time and be scheduled a minimum of thirty minutes from the current time. The minimum duration between startTime and endTime is thirty minutes. The maximum duration between startTime and endTime is two years. The date and time format for the endTime is YYYY-MM-DD for the date and HH:MM for the time. For more information on the syntax for endTime when using an API command or the Command Line Interface, see Timestamp.
      */
     endTime?: StringDateTime;
     /**
@@ -11625,7 +11642,7 @@ declare namespace Iot {
   }
   export interface UpdatePackageRequest {
     /**
-     * The name of the target package.
+     * The name of the target software package.
      */
     packageName: PackageName;
     /**
@@ -11661,7 +11678,7 @@ declare namespace Iot {
      */
     description?: ResourceDescription;
     /**
-     * Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet.   Note: Attributes can be updated only when the package version is in a draft state. The combined size of all the attributes on a package version is limited to 3KB.
+     * Metadata that can be used to define a package version’s configuration. For example, the Amazon S3 file location, configuration options that are being sent to the device or fleet.   Note: Attributes can be updated only when the package version is in a draft state. The combined size of all the attributes on a package version is limited to 3KB.
      */
     attributes?: ResourceAttributes;
     /**
