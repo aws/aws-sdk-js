@@ -645,7 +645,7 @@ declare namespace Budgets {
   export interface DescribeBudgetNotificationsForAccountRequest {
     AccountId: AccountId;
     /**
-     *  An integer that shows how many budget name entries a paginated response contains. 
+     *  An integer that represents how many budgets a paginated response contains. The default is 50. 
      */
     MaxResults?: MaxResultsBudgetNotifications;
     NextToken?: GenericString;
@@ -692,13 +692,13 @@ declare namespace Budgets {
   }
   export interface DescribeBudgetsRequest {
     /**
-     * The accountId that is associated with the budgets that you want descriptions of.
+     * The accountId that is associated with the budgets that you want to describe.
      */
     AccountId: AccountId;
     /**
-     * An optional integer that represents how many entries a paginated response contains. The maximum is 100.
+     * An integer that represents how many budgets a paginated response contains. The default is 100.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: MaxResultsDescribeBudgets;
     /**
      * The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
      */
@@ -724,7 +724,7 @@ declare namespace Budgets {
      */
     BudgetName: BudgetName;
     /**
-     * An optional integer that represents how many entries a paginated response contains. The maximum is 100.
+     * An optional integer that represents how many entries a paginated response contains.
      */
     MaxResults?: MaxResults;
     /**
@@ -756,7 +756,7 @@ declare namespace Budgets {
      */
     Notification: Notification;
     /**
-     * An optional integer that represents how many entries a paginated response contains. The maximum is 100.
+     * An optional integer that represents how many entries a paginated response contains.
      */
     MaxResults?: MaxResults;
     /**
@@ -838,6 +838,7 @@ declare namespace Budgets {
   export type InstanceIds = InstanceId[];
   export type MaxResults = number;
   export type MaxResultsBudgetNotifications = number;
+  export type MaxResultsDescribeBudgets = number;
   export interface Notification {
     /**
      * Specifies whether the notification is for how much you have spent (ACTUAL) or for how much that you're forecasted to spend (FORECASTED).
@@ -900,7 +901,7 @@ declare namespace Budgets {
      */
     Amount: NumericValue;
     /**
-     * The unit of measurement that's used for the budget forecast, actual spend, or budget threshold, such as USD or GBP.
+     * The unit of measurement that's used for the budget forecast, actual spend, or budget threshold.
      */
     Unit: UnitValue;
   }

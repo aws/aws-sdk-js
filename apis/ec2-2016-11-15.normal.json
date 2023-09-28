@@ -17454,6 +17454,10 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationRequest",
+          "documentation": "<p> Options for server side encryption. </p>"
         }
       }
     },
@@ -17505,6 +17509,10 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationRequest",
+          "documentation": "<p> Options for server side encryption. </p>"
         }
       }
     },
@@ -17541,7 +17549,7 @@
         },
         "FIPSEnabled": {
           "shape": "Boolean",
-          "documentation": "<p> Choose to enable or disable support for Federal Information Processing Standards (FIPS) on the instance. </p>"
+          "documentation": "<p>Enable or disable support for Federal Information Processing Standards (FIPS) on the instance.</p>"
         }
       }
     },
@@ -17647,6 +17655,10 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationRequest",
+          "documentation": "<p> Options for server side encryption. </p>"
         }
       }
     },
@@ -40301,6 +40313,9 @@
         "ed25519"
       ]
     },
+    "KmsKeyArn": {
+      "type": "string"
+    },
     "KmsKeyId": {
       "type": "string"
     },
@@ -44609,8 +44624,7 @@
     "ModifyVerifiedAccessEndpointPolicyRequest": {
       "type": "structure",
       "required": [
-        "VerifiedAccessEndpointId",
-        "PolicyEnabled"
+        "VerifiedAccessEndpointId"
       ],
       "members": {
         "VerifiedAccessEndpointId": {
@@ -44633,6 +44647,10 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationRequest",
+          "documentation": "<p> Options for server side encryption. </p>"
         }
       }
     },
@@ -44648,6 +44666,11 @@
           "shape": "String",
           "documentation": "<p>The Verified Access policy document.</p>",
           "locationName": "policyDocument"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationResponse",
+          "documentation": "<p> Describes the options in use for server side encryption. </p>",
+          "locationName": "sseSpecification"
         }
       }
     },
@@ -44708,8 +44731,7 @@
     "ModifyVerifiedAccessGroupPolicyRequest": {
       "type": "structure",
       "required": [
-        "VerifiedAccessGroupId",
-        "PolicyEnabled"
+        "VerifiedAccessGroupId"
       ],
       "members": {
         "VerifiedAccessGroupId": {
@@ -44732,6 +44754,10 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationRequest",
+          "documentation": "<p> Options for server side encryption. </p>"
         }
       }
     },
@@ -44747,6 +44773,11 @@
           "shape": "String",
           "documentation": "<p>The Verified Access policy document.</p>",
           "locationName": "policyDocument"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationResponse",
+          "documentation": "<p> Describes the options in use for server side encryption. </p>",
+          "locationName": "sseSpecification"
         }
       }
     },
@@ -44920,6 +44951,10 @@
           "shape": "String",
           "documentation": "<p>A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>",
           "idempotencyToken": true
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationRequest",
+          "documentation": "<p> Options for server side encryption. </p>"
         }
       }
     },
@@ -59550,6 +59585,11 @@
           "shape": "TagList",
           "documentation": "<p>The tags.</p>",
           "locationName": "tagSet"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationResponse",
+          "documentation": "<p> Describes the options in use for server side encryption. </p>",
+          "locationName": "sseSpecification"
         }
       },
       "documentation": "<p>An Amazon Web Services Verified Access endpoint specifies the application that Amazon Web Services Verified Access provides access to. It must be attached to an Amazon Web Services Verified Access group. An Amazon Web Services Verified Access endpoint must also have an attached access policy before you attached it to a group.</p>"
@@ -59723,6 +59763,11 @@
           "shape": "TagList",
           "documentation": "<p>The tags.</p>",
           "locationName": "tagSet"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationResponse",
+          "documentation": "<p> Describes the options in use for server side encryption. </p>",
+          "locationName": "sseSpecification"
         }
       },
       "documentation": "<p>Describes a Verified Access group.</p>"
@@ -59779,7 +59824,7 @@
         },
         "FipsEnabled": {
           "shape": "Boolean",
-          "documentation": "<p> Describes if support for Federal Information Processing Standards (FIPS) is enabled on the instance. </p>",
+          "documentation": "<p>Describes whether support for Federal Information Processing Standards (FIPS) is enabled on the instance.</p>",
           "locationName": "fipsEnabled"
         }
       },
@@ -60037,6 +60082,36 @@
       },
       "documentation": "<p>Describes the options for Verified Access logs.</p>"
     },
+    "VerifiedAccessSseSpecificationRequest": {
+      "type": "structure",
+      "members": {
+        "CustomerManagedKeyEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p> Enable or disable the use of customer managed KMS keys for server side encryption. </p> <p>Valid values: <code>True</code> | <code>False</code> </p>"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p> The ARN of the KMS key. </p>"
+        }
+      },
+      "documentation": "<p> Verified Access provides server side encryption by default to data at rest using Amazon Web Services-owned KMS keys. You also have the option of using customer managed KMS keys, which can be specified using the options below. </p>"
+    },
+    "VerifiedAccessSseSpecificationResponse": {
+      "type": "structure",
+      "members": {
+        "CustomerManagedKeyEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p> Describes the use of customer managed KMS keys for server side encryption. </p> <p>Valid values: <code>True</code> | <code>False</code> </p>",
+          "locationName": "customerManagedKeyEnabled"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p> Describes the ARN of the KMS key. </p>",
+          "locationName": "kmsKeyArn"
+        }
+      },
+      "documentation": "<p> Describes the options in use for server side encryption. </p>"
+    },
     "VerifiedAccessTrustProvider": {
       "type": "structure",
       "members": {
@@ -60094,6 +60169,11 @@
           "shape": "TagList",
           "documentation": "<p>The tags.</p>",
           "locationName": "tagSet"
+        },
+        "SseSpecification": {
+          "shape": "VerifiedAccessSseSpecificationResponse",
+          "documentation": "<p> Describes the options in use for server side encryption. </p>",
+          "locationName": "sseSpecification"
         }
       },
       "documentation": "<p>Describes a Verified Access trust provider.</p>"

@@ -156,9 +156,13 @@ declare namespace SageMakerFeatureStoreRuntime {
      */
     FeatureName: FeatureName;
     /**
-     * The value associated with a feature, in string format. Note that features types can be String, Integral, or Fractional. This value represents all three types as a string.
+     * The value in string format associated with a feature. Used when your CollectionType is None. Note that features types can be String, Integral, or Fractional. This value represents all three types as a string.
      */
-    ValueAsString: ValueAsString;
+    ValueAsString?: ValueAsString;
+    /**
+     * The list of values in string format associated with a feature. Used when your CollectionType is a List, Set, or Vector. Note that features types can be String, Integral, or Fractional. These values represents all three types as a string.
+     */
+    ValueAsStringList?: ValueAsStringList;
   }
   export interface GetRecordRequest {
     /**
@@ -225,6 +229,7 @@ declare namespace SageMakerFeatureStoreRuntime {
   export type TtlDurationValue = number;
   export type UnprocessedIdentifiers = BatchGetRecordIdentifier[];
   export type ValueAsString = string;
+  export type ValueAsStringList = ValueAsString[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

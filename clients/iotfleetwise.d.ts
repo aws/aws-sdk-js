@@ -156,6 +156,14 @@ declare class IoTFleetWise extends Service {
    */
   getDecoderManifest(callback?: (err: AWSError, data: IoTFleetWise.Types.GetDecoderManifestResponse) => void): Request<IoTFleetWise.Types.GetDecoderManifestResponse, AWSError>;
   /**
+   * Retrieves the encryption configuration for resources and data in Amazon Web Services IoT FleetWise.
+   */
+  getEncryptionConfiguration(params: IoTFleetWise.Types.GetEncryptionConfigurationRequest, callback?: (err: AWSError, data: IoTFleetWise.Types.GetEncryptionConfigurationResponse) => void): Request<IoTFleetWise.Types.GetEncryptionConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the encryption configuration for resources and data in Amazon Web Services IoT FleetWise.
+   */
+  getEncryptionConfiguration(callback?: (err: AWSError, data: IoTFleetWise.Types.GetEncryptionConfigurationResponse) => void): Request<IoTFleetWise.Types.GetEncryptionConfigurationResponse, AWSError>;
+  /**
    *  Retrieves information about a fleet. 
    */
   getFleet(params: IoTFleetWise.Types.GetFleetRequest, callback?: (err: AWSError, data: IoTFleetWise.Types.GetFleetResponse) => void): Request<IoTFleetWise.Types.GetFleetResponse, AWSError>;
@@ -331,6 +339,14 @@ declare class IoTFleetWise extends Service {
    *  Retrieves a list of summaries of all vehicles associated with a fleet.   This API operation uses pagination. Specify the nextToken parameter in the request to return more results. 
    */
   listVehiclesInFleet(callback?: (err: AWSError, data: IoTFleetWise.Types.ListVehiclesInFleetResponse) => void): Request<IoTFleetWise.Types.ListVehiclesInFleetResponse, AWSError>;
+  /**
+   * Creates or updates the encryption configuration. Amazon Web Services IoT FleetWise can encrypt your data and resources using an Amazon Web Services managed key. Or, you can use a KMS key that you own and manage. For more information, see Data encryption in the Amazon Web Services IoT FleetWise Developer Guide.
+   */
+  putEncryptionConfiguration(params: IoTFleetWise.Types.PutEncryptionConfigurationRequest, callback?: (err: AWSError, data: IoTFleetWise.Types.PutEncryptionConfigurationResponse) => void): Request<IoTFleetWise.Types.PutEncryptionConfigurationResponse, AWSError>;
+  /**
+   * Creates or updates the encryption configuration. Amazon Web Services IoT FleetWise can encrypt your data and resources using an Amazon Web Services managed key. Or, you can use a KMS key that you own and manage. For more information, see Data encryption in the Amazon Web Services IoT FleetWise Developer Guide.
+   */
+  putEncryptionConfiguration(callback?: (err: AWSError, data: IoTFleetWise.Types.PutEncryptionConfigurationResponse) => void): Request<IoTFleetWise.Types.PutEncryptionConfigurationResponse, AWSError>;
   /**
    * Creates or updates the logging option.
    */
@@ -765,7 +781,7 @@ declare namespace IoTFleetWise {
      */
     tags?: TagList;
     /**
-     * The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream. Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics.  You can use Amazon Timestream to access and analyze time series data, and Timestream to query vehicle data so that you can identify trends and patterns.
+     * The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream. Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. Amazon Web Services IoT FleetWise supports at-least-once file delivery to S3. Your vehicle data is stored on multiple Amazon Web Services IoT FleetWise servers for redundancy and high availability. You can use Amazon Timestream to access and analyze time series data, and Timestream to query vehicle data so that you can identify trends and patterns.
      */
     dataDestinationConfigs?: DataDestinationConfigs;
   }
@@ -1149,6 +1165,8 @@ declare namespace IoTFleetWise {
   }
   export interface DisassociateVehicleFleetResponse {
   }
+  export type EncryptionStatus = "PENDING"|"SUCCESS"|"FAILURE"|string;
+  export type EncryptionType = "KMS_BASED_ENCRYPTION"|"FLEETWISE_DEFAULT_ENCRYPTION"|string;
   export interface FleetSummary {
     /**
      * The unique ID of the fleet.
@@ -1302,6 +1320,34 @@ declare namespace IoTFleetWise {
      *  The time the decoder manifest was last updated in seconds since epoch (January 1, 1970 at midnight UTC time). 
      */
     lastModificationTime: timestamp;
+  }
+  export interface GetEncryptionConfigurationRequest {
+  }
+  export interface GetEncryptionConfigurationResponse {
+    /**
+     * The ID of the KMS key that is used for encryption.
+     */
+    kmsKeyId?: String;
+    /**
+     * The encryption status.
+     */
+    encryptionStatus: EncryptionStatus;
+    /**
+     * The type of encryption. Set to KMS_BASED_ENCRYPTION to use an KMS key that you own and manage. Set to FLEETWISE_DEFAULT_ENCRYPTION to use an Amazon Web Services managed key that is owned by the Amazon Web Services IoT FleetWise service account.
+     */
+    encryptionType: EncryptionType;
+    /**
+     * The error message that describes why encryption settings couldn't be configured, if applicable.
+     */
+    errorMessage?: errorMessage;
+    /**
+     * The time when encryption was configured in seconds since epoch (January 1, 1970 at midnight UTC time).
+     */
+    creationTime?: timestamp;
+    /**
+     * The time when encryption was last updated in seconds since epoch (January 1, 1970 at midnight UTC time).
+     */
+    lastModificationTime?: timestamp;
   }
   export interface GetFleetRequest {
     /**
@@ -2040,6 +2086,30 @@ declare namespace IoTFleetWise {
   export type Prefix = string;
   export type ProtocolName = string;
   export type ProtocolVersion = string;
+  export interface PutEncryptionConfigurationRequest {
+    /**
+     * The ID of the KMS key that is used for encryption.
+     */
+    kmsKeyId?: String;
+    /**
+     * The type of encryption. Choose KMS_BASED_ENCRYPTION to use a KMS key or FLEETWISE_DEFAULT_ENCRYPTION to use an Amazon Web Services managed key.
+     */
+    encryptionType: EncryptionType;
+  }
+  export interface PutEncryptionConfigurationResponse {
+    /**
+     * The ID of the KMS key that is used for encryption.
+     */
+    kmsKeyId?: String;
+    /**
+     * The encryption status.
+     */
+    encryptionStatus: EncryptionStatus;
+    /**
+     * The type of encryption. Set to KMS_BASED_ENCRYPTION to use an KMS key that you own and manage. Set to FLEETWISE_DEFAULT_ENCRYPTION to use an Amazon Web Services managed key that is owned by the Amazon Web Services IoT FleetWise service account.
+     */
+    encryptionType: EncryptionType;
+  }
   export interface PutLoggingOptionsRequest {
     /**
      * Creates or updates the log delivery option to Amazon CloudWatch Logs.

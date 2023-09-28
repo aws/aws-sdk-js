@@ -356,6 +356,8 @@ export abstract class ConfigurationServicePlaceholders {
   managedblockchainquery?: AWS.ManagedBlockchainQuery.Types.ClientConfiguration;
   neptunedata?: AWS.Neptunedata.Types.ClientConfiguration;
   pcaconnectorad?: AWS.PcaConnectorAd.Types.ClientConfiguration;
+  bedrock?: AWS.Bedrock.Types.ClientConfiguration;
+  bedrockruntime?: AWS.BedrockRuntime.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -714,4 +716,6 @@ export interface ConfigurationServiceApiVersions {
   managedblockchainquery?: AWS.ManagedBlockchainQuery.Types.apiVersion;
   neptunedata?: AWS.Neptunedata.Types.apiVersion;
   pcaconnectorad?: AWS.PcaConnectorAd.Types.apiVersion;
+  bedrock?: AWS.Bedrock.Types.apiVersion;
+  bedrockruntime?: AWS.BedrockRuntime.Types.apiVersion;
 }

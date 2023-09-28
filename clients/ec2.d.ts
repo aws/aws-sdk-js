@@ -10984,6 +10984,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     *  Options for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface CreateVerifiedAccessEndpointResult {
     /**
@@ -11017,6 +11021,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     *  Options for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface CreateVerifiedAccessGroupResult {
     /**
@@ -11042,7 +11050,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     *  Choose to enable or disable support for Federal Information Processing Standards (FIPS) on the instance. 
+     * Enable or disable support for Federal Information Processing Standards (FIPS) on the instance.
      */
     FIPSEnabled?: Boolean;
   }
@@ -11129,6 +11137,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     *  Options for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface CreateVerifiedAccessTrustProviderResult {
     /**
@@ -25273,6 +25285,7 @@ declare namespace EC2 {
   export type KeyPairList = KeyPairInfo[];
   export type KeyPairName = string;
   export type KeyType = "rsa"|"ed25519"|string;
+  export type KmsKeyArn = string;
   export type KmsKeyId = string;
   export interface LastError {
     /**
@@ -28145,7 +28158,7 @@ declare namespace EC2 {
     /**
      * The status of the Verified Access policy.
      */
-    PolicyEnabled: Boolean;
+    PolicyEnabled?: Boolean;
     /**
      * The Verified Access policy document.
      */
@@ -28158,6 +28171,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     *  Options for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface ModifyVerifiedAccessEndpointPolicyResult {
     /**
@@ -28168,6 +28185,10 @@ declare namespace EC2 {
      * The Verified Access policy document.
      */
     PolicyDocument?: String;
+    /**
+     *  Describes the options in use for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
   export interface ModifyVerifiedAccessEndpointRequest {
     /**
@@ -28214,7 +28235,7 @@ declare namespace EC2 {
     /**
      * The status of the Verified Access policy.
      */
-    PolicyEnabled: Boolean;
+    PolicyEnabled?: Boolean;
     /**
      * The Verified Access policy document.
      */
@@ -28227,6 +28248,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     *  Options for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface ModifyVerifiedAccessGroupPolicyResult {
     /**
@@ -28237,6 +28262,10 @@ declare namespace EC2 {
      * The Verified Access policy document.
      */
     PolicyDocument?: String;
+    /**
+     *  Describes the options in use for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
   export interface ModifyVerifiedAccessGroupRequest {
     /**
@@ -28365,6 +28394,10 @@ declare namespace EC2 {
      * A unique, case-sensitive token that you provide to ensure idempotency of your modification request. For more information, see Ensuring Idempotency.
      */
     ClientToken?: String;
+    /**
+     *  Options for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface ModifyVerifiedAccessTrustProviderResult {
     /**
@@ -37231,6 +37264,10 @@ declare namespace EC2 {
      * The tags.
      */
     Tags?: TagList;
+    /**
+     *  Describes the options in use for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
   export type VerifiedAccessEndpointAttachmentType = "vpc"|string;
   export interface VerifiedAccessEndpointEniOptions {
@@ -37320,6 +37357,10 @@ declare namespace EC2 {
      * The tags.
      */
     Tags?: TagList;
+    /**
+     *  Describes the options in use for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
   export type VerifiedAccessGroupId = string;
   export type VerifiedAccessGroupIdList = VerifiedAccessGroupId[];
@@ -37350,7 +37391,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     *  Describes if support for Federal Information Processing Standards (FIPS) is enabled on the instance. 
+     * Describes whether support for Federal Information Processing Standards (FIPS) is enabled on the instance.
      */
     FipsEnabled?: Boolean;
   }
@@ -37511,6 +37552,26 @@ declare namespace EC2 {
      */
     IncludeTrustContext?: Boolean;
   }
+  export interface VerifiedAccessSseSpecificationRequest {
+    /**
+     *  Enable or disable the use of customer managed KMS keys for server side encryption.  Valid values: True | False 
+     */
+    CustomerManagedKeyEnabled?: Boolean;
+    /**
+     *  The ARN of the KMS key. 
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export interface VerifiedAccessSseSpecificationResponse {
+    /**
+     *  Describes the use of customer managed KMS keys for server side encryption.  Valid values: True | False 
+     */
+    CustomerManagedKeyEnabled?: Boolean;
+    /**
+     *  Describes the ARN of the KMS key. 
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
   export interface VerifiedAccessTrustProvider {
     /**
      * The ID of the Amazon Web Services Verified Access trust provider.
@@ -37556,6 +37617,10 @@ declare namespace EC2 {
      * The tags.
      */
     Tags?: TagList;
+    /**
+     *  Describes the options in use for server side encryption. 
+     */
+    SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
   export interface VerifiedAccessTrustProviderCondensed {
     /**

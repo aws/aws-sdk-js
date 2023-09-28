@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1466.0-->
+<!--LATEST=2.1467.0-->
 <!--ENTRYINSERT-->
+
+## 2.1467.0
+* feature: Bedrock: Model Invocation logging added to enable or disable logs in customer account. Model listing and description support added. Provisioned Throughput feature added. Custom model support added for creating custom models. Also includes list, and delete functions for custom model.
+* feature: BedrockRuntime: Run Inference: Added support to run the inference on models.  Includes set of APIs for running inference in streaming and non-streaming mode.
+* feature: Budgets: Update DescribeBudgets and DescribeBudgetNotificationsForAccount MaxResults limit to 1000.
+* feature: EC2: Adds support for Customer Managed Key encryption for Amazon Verified Access resources
+* feature: IoTFleetWise: AWS IoT FleetWise now supports encryption through a customer managed AWS KMS key. The PutEncryptionConfiguration and GetEncryptionConfiguration APIs were added.
+* feature: SageMaker: Online store feature groups supports Standard and InMemory tier storage types for low latency storage for real-time data retrieval. The InMemory tier supports collection types List, Set, and Vector.
+* feature: SageMakerFeatureStoreRuntime: Feature Store supports read/write of records with collection type features.
 
 ## 2.1466.0
 * feature: CognitoIdentityServiceProvider: The UserPoolType Status field is no longer used.

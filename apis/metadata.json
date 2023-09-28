@@ -1335,5 +1335,12 @@
   "pcaconnectorad": {
     "prefix": "pca-connector-ad",
     "name": "PcaConnectorAd"
+  },
+  "bedrock": {
+    "name": "Bedrock"
+  },
+  "bedrockruntime": {
+    "prefix": "bedrock-runtime",
+    "name": "BedrockRuntime"
   }
 }

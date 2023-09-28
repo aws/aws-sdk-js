@@ -355,5 +355,7 @@ module.exports = {
   EntityResolution: require('./entityresolution'),
   ManagedBlockchainQuery: require('./managedblockchainquery'),
   Neptunedata: require('./neptunedata'),
-  PcaConnectorAd: require('./pcaconnectorad')
+  PcaConnectorAd: require('./pcaconnectorad'),
+  Bedrock: require('./bedrock'),
+  BedrockRuntime: require('./bedrockruntime')
 };
