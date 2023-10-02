@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "Bedrock",
+        "description": "Provisioned throughput feature with Amazon and third-party base models, and update validators for model identifier and taggable resource ARNs."
+    },
+    {
+        "type": "feature",
+        "category": "BedrockRuntime",
+        "description": "Add model timeout exception for InvokeModelWithResponseStream API and update validator for invoke model identifier."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Introducing Amazon EC2 R7iz instances with 3.9 GHz sustained all-core turbo frequency and deliver up to 20% better performance than previous generation z1d instances."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adds DefaultCertificateForNewLaunches field in the DescribeCertificates API response."
+    },
+    {
+        "type": "feature",
+        "category": "SSO",
+        "description": "Fix FIPS Endpoints in aws-us-gov."
+    },
+    {
+        "type": "feature",
+        "category": "STS",
+        "description": "STS API updates for assumeRole"
+    }
+]

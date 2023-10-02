@@ -20,6 +20,14 @@ declare class Bedrock extends Service {
    */
   createModelCustomizationJob(callback?: (err: AWSError, data: Bedrock.Types.CreateModelCustomizationJobResponse) => void): Request<Bedrock.Types.CreateModelCustomizationJobResponse, AWSError>;
   /**
+   * Creates a provisioned throughput with dedicated capacity for a foundation model or a fine-tuned model. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  createProvisionedModelThroughput(params: Bedrock.Types.CreateProvisionedModelThroughputRequest, callback?: (err: AWSError, data: Bedrock.Types.CreateProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.CreateProvisionedModelThroughputResponse, AWSError>;
+  /**
+   * Creates a provisioned throughput with dedicated capacity for a foundation model or a fine-tuned model. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  createProvisionedModelThroughput(callback?: (err: AWSError, data: Bedrock.Types.CreateProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.CreateProvisionedModelThroughputResponse, AWSError>;
+  /**
    * Deletes a custom model that you created earlier. For more information, see Custom models in the Bedrock User Guide.
    */
   deleteCustomModel(params: Bedrock.Types.DeleteCustomModelRequest, callback?: (err: AWSError, data: Bedrock.Types.DeleteCustomModelResponse) => void): Request<Bedrock.Types.DeleteCustomModelResponse, AWSError>;
@@ -35,6 +43,14 @@ declare class Bedrock extends Service {
    * Delete the invocation logging. 
    */
   deleteModelInvocationLoggingConfiguration(callback?: (err: AWSError, data: Bedrock.Types.DeleteModelInvocationLoggingConfigurationResponse) => void): Request<Bedrock.Types.DeleteModelInvocationLoggingConfigurationResponse, AWSError>;
+  /**
+   * Deletes a provisioned throughput. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  deleteProvisionedModelThroughput(params: Bedrock.Types.DeleteProvisionedModelThroughputRequest, callback?: (err: AWSError, data: Bedrock.Types.DeleteProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.DeleteProvisionedModelThroughputResponse, AWSError>;
+  /**
+   * Deletes a provisioned throughput. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  deleteProvisionedModelThroughput(callback?: (err: AWSError, data: Bedrock.Types.DeleteProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.DeleteProvisionedModelThroughputResponse, AWSError>;
   /**
    * Get the properties associated with a Bedrock custom model that you have created.For more information, see Custom models in the Bedrock User Guide.
    */
@@ -68,6 +84,14 @@ declare class Bedrock extends Service {
    */
   getModelInvocationLoggingConfiguration(callback?: (err: AWSError, data: Bedrock.Types.GetModelInvocationLoggingConfigurationResponse) => void): Request<Bedrock.Types.GetModelInvocationLoggingConfigurationResponse, AWSError>;
   /**
+   * Get details for a provisioned throughput. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  getProvisionedModelThroughput(params: Bedrock.Types.GetProvisionedModelThroughputRequest, callback?: (err: AWSError, data: Bedrock.Types.GetProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.GetProvisionedModelThroughputResponse, AWSError>;
+  /**
+   * Get details for a provisioned throughput. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  getProvisionedModelThroughput(callback?: (err: AWSError, data: Bedrock.Types.GetProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.GetProvisionedModelThroughputResponse, AWSError>;
+  /**
    * Returns a list of the custom models that you have created with the CreateModelCustomizationJob operation. For more information, see Custom models in the Bedrock User Guide.
    */
   listCustomModels(params: Bedrock.Types.ListCustomModelsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListCustomModelsResponse) => void): Request<Bedrock.Types.ListCustomModelsResponse, AWSError>;
@@ -91,6 +115,14 @@ declare class Bedrock extends Service {
    * Returns a list of model customization jobs that you have submitted. You can filter the jobs to return based on one or more criteria. For more information, see Custom models in the Bedrock User Guide.
    */
   listModelCustomizationJobs(callback?: (err: AWSError, data: Bedrock.Types.ListModelCustomizationJobsResponse) => void): Request<Bedrock.Types.ListModelCustomizationJobsResponse, AWSError>;
+  /**
+   * List the provisioned capacities. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  listProvisionedModelThroughputs(params: Bedrock.Types.ListProvisionedModelThroughputsRequest, callback?: (err: AWSError, data: Bedrock.Types.ListProvisionedModelThroughputsResponse) => void): Request<Bedrock.Types.ListProvisionedModelThroughputsResponse, AWSError>;
+  /**
+   * List the provisioned capacities. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  listProvisionedModelThroughputs(callback?: (err: AWSError, data: Bedrock.Types.ListProvisionedModelThroughputsResponse) => void): Request<Bedrock.Types.ListProvisionedModelThroughputsResponse, AWSError>;
   /**
    * List the tags associated with the specified resource. For more information, see Tagging resources in the Bedrock User Guide.
    */
@@ -131,6 +163,14 @@ declare class Bedrock extends Service {
    * Remove one or more tags from a resource. For more information, see Tagging resources in the Bedrock User Guide.
    */
   untagResource(callback?: (err: AWSError, data: Bedrock.Types.UntagResourceResponse) => void): Request<Bedrock.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Update a provisioned throughput. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  updateProvisionedModelThroughput(params: Bedrock.Types.UpdateProvisionedModelThroughputRequest, callback?: (err: AWSError, data: Bedrock.Types.UpdateProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.UpdateProvisionedModelThroughputResponse, AWSError>;
+  /**
+   * Update a provisioned throughput. For more information, see Provisioned throughput in the Bedrock User Guide.
+   */
+  updateProvisionedModelThroughput(callback?: (err: AWSError, data: Bedrock.Types.UpdateProvisionedModelThroughputResponse) => void): Request<Bedrock.Types.UpdateProvisionedModelThroughputResponse, AWSError>;
 }
 declare namespace Bedrock {
   export type BaseModelIdentifier = string;
@@ -140,10 +180,6 @@ declare namespace Bedrock {
   export type BucketName = string;
   export interface CloudWatchConfig {
     /**
-     * S3 configuration for delivering a large amount of data.
-     */
-    largeDataDeliveryS3Config?: S3Config;
-    /**
      * The log group name.
      */
     logGroupName: LogGroupName;
@@ -151,48 +187,45 @@ declare namespace Bedrock {
      * The role ARN.
      */
     roleArn: RoleArn;
+    /**
+     * S3 configuration for delivering a large amount of data.
+     */
+    largeDataDeliveryS3Config?: S3Config;
   }
+  export type CommitmentDuration = "OneMonth"|"SixMonths"|string;
   export interface CreateModelCustomizationJobRequest {
-    /**
-     * Name of the base model.
-     */
-    baseModelIdentifier: BaseModelIdentifier;
-    /**
-     * Unique token value that you can provide. The GetModelCustomizationJob response includes the same token value.
-     */
-    clientRequestToken?: IdempotencyToken;
-    /**
-     * The custom model is encrypted at rest using this key.
-     */
-    customModelKmsKeyId?: KmsKeyId;
-    /**
-     * Enter a name for the custom model.
-     */
-    customModelName: CustomModelName;
-    /**
-     * Assign tags to the custom model.
-     */
-    customModelTags?: TagList;
-    /**
-     * Parameters related to tuning the model.
-     */
-    hyperParameters: ModelCustomizationHyperParameters;
     /**
      * Enter a unique name for the fine-tuning job.
      */
     jobName: JobName;
     /**
-     * Assign tags to the job.
+     * Enter a name for the custom model.
      */
-    jobTags?: TagList;
-    /**
-     * S3 location for the output data.
-     */
-    outputDataConfig: OutputDataConfig;
+    customModelName: CustomModelName;
     /**
      * The Amazon Resource Name (ARN) of an IAM role that Bedrock can assume to perform tasks on your behalf. For example, during model training, Bedrock needs your permission to read input data from an S3 bucket, write model artifacts to an S3 bucket. To pass this role to Bedrock, the caller of this API must have the iam:PassRole permission. 
      */
     roleArn: RoleArn;
+    /**
+     * Unique token value that you can provide. The GetModelCustomizationJob response includes the same token value.
+     */
+    clientRequestToken?: IdempotencyToken;
+    /**
+     * Name of the base model.
+     */
+    baseModelIdentifier: BaseModelIdentifier;
+    /**
+     * The custom model is encrypted at rest using this key.
+     */
+    customModelKmsKeyId?: KmsKeyId;
+    /**
+     * Assign tags to the job.
+     */
+    jobTags?: TagList;
+    /**
+     * Assign tags to the custom model.
+     */
+    customModelTags?: TagList;
     /**
      * Information about the training dataset.
      */
@@ -201,6 +234,14 @@ declare namespace Bedrock {
      * Information about the validation dataset. 
      */
     validationDataConfig?: ValidationDataConfig;
+    /**
+     * S3 location for the output data.
+     */
+    outputDataConfig: OutputDataConfig;
+    /**
+     * Parameters related to tuning the model.
+     */
+    hyperParameters: ModelCustomizationHyperParameters;
     /**
      * VPC configuration (optional). Configuration parameters for the private Virtual Private Cloud (VPC) that contains the resources you are using for this job.
      */
@@ -212,21 +253,41 @@ declare namespace Bedrock {
      */
     jobArn: ModelCustomizationJobArn;
   }
+  export interface CreateProvisionedModelThroughputRequest {
+    /**
+     * Unique token value that you can provide. If this token matches a previous request, Bedrock ignores the request, but does not return an error.
+     */
+    clientRequestToken?: IdempotencyToken;
+    /**
+     * Number of model units to allocate.
+     */
+    modelUnits: PositiveInteger;
+    /**
+     * Unique name for this provisioned throughput.
+     */
+    provisionedModelName: ProvisionedModelName;
+    /**
+     * Name or ARN of the model to associate with this provisioned throughput.
+     */
+    modelId: ModelIdentifier;
+    /**
+     * Commitment duration requested for the provisioned throughput.
+     */
+    commitmentDuration?: CommitmentDuration;
+    /**
+     * Tags to associate with this provisioned throughput.
+     */
+    tags?: TagList;
+  }
+  export interface CreateProvisionedModelThroughputResponse {
+    /**
+     * The ARN for this provisioned throughput.
+     */
+    provisionedModelArn: ProvisionedModelArn;
+  }
   export type CustomModelArn = string;
   export type CustomModelName = string;
   export interface CustomModelSummary {
-    /**
-     * The base model ARN.
-     */
-    baseModelArn: ModelArn;
-    /**
-     * The base model name.
-     */
-    baseModelName: ModelName;
-    /**
-     * Creation time of the model.
-     */
-    creationTime: Timestamp;
     /**
      * The ARN of the custom model.
      */
@@ -235,6 +296,18 @@ declare namespace Bedrock {
      * The name of the custom model.
      */
     modelName: CustomModelName;
+    /**
+     * Creation time of the model.
+     */
+    creationTime: Timestamp;
+    /**
+     * The base model ARN.
+     */
+    baseModelArn: ModelArn;
+    /**
+     * The base model name.
+     */
+    baseModelName: ModelName;
   }
   export type CustomModelSummaryList = CustomModelSummary[];
   export interface DeleteCustomModelRequest {
@@ -249,22 +322,18 @@ declare namespace Bedrock {
   }
   export interface DeleteModelInvocationLoggingConfigurationResponse {
   }
+  export interface DeleteProvisionedModelThroughputRequest {
+    /**
+     * The ARN or name of the provisioned throughput.
+     */
+    provisionedModelId: ProvisionedModelId;
+  }
+  export interface DeleteProvisionedModelThroughputResponse {
+  }
   export type ErrorMessage = string;
   export type FineTuningJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"|string;
   export type FoundationModelArn = string;
   export interface FoundationModelDetails {
-    /**
-     * The customization that the model supports.
-     */
-    customizationsSupported?: ModelCustomizationList;
-    /**
-     * The inference types that the model supports.
-     */
-    inferenceTypesSupported?: InferenceTypeList;
-    /**
-     * The input modalities that the model supports.
-     */
-    inputModalities?: ModelModalityList;
     /**
      * The model ARN.
      */
@@ -278,31 +347,31 @@ declare namespace Bedrock {
      */
     modelName?: BrandedName;
     /**
-     * The output modalities that the model supports.
-     */
-    outputModalities?: ModelModalityList;
-    /**
      * he model's provider name.
      */
     providerName?: BrandedName;
     /**
+     * The input modalities that the model supports.
+     */
+    inputModalities?: ModelModalityList;
+    /**
+     * The output modalities that the model supports.
+     */
+    outputModalities?: ModelModalityList;
+    /**
      * Indicates whether the model supports streaming.
      */
     responseStreamingSupported?: Boolean;
-  }
-  export interface FoundationModelSummary {
     /**
-     * Whether the model supports fine-tuning or continual pre-training.
+     * The customization that the model supports.
      */
     customizationsSupported?: ModelCustomizationList;
     /**
      * The inference types that the model supports.
      */
     inferenceTypesSupported?: InferenceTypeList;
-    /**
-     * The input modalities that the model supports.
-     */
-    inputModalities?: ModelModalityList;
+  }
+  export interface FoundationModelSummary {
     /**
      * The ARN of the foundation model.
      */
@@ -316,17 +385,29 @@ declare namespace Bedrock {
      */
     modelName?: BrandedName;
     /**
-     * The output modalities that the model supports.
-     */
-    outputModalities?: ModelModalityList;
-    /**
      * The model's provider name.
      */
     providerName?: BrandedName;
     /**
+     * The input modalities that the model supports.
+     */
+    inputModalities?: ModelModalityList;
+    /**
+     * The output modalities that the model supports.
+     */
+    outputModalities?: ModelModalityList;
+    /**
      * Indicates whether the model supports streaming.
      */
     responseStreamingSupported?: Boolean;
+    /**
+     * Whether the model supports fine-tuning or continual pre-training.
+     */
+    customizationsSupported?: ModelCustomizationList;
+    /**
+     * The inference types that the model supports.
+     */
+    inferenceTypesSupported?: InferenceTypeList;
   }
   export type FoundationModelSummaryList = FoundationModelSummary[];
   export interface GetCustomModelRequest {
@@ -337,54 +418,54 @@ declare namespace Bedrock {
   }
   export interface GetCustomModelResponse {
     /**
-     * ARN of the base model.
-     */
-    baseModelArn: ModelArn;
-    /**
-     * Creation time of the model.
-     */
-    creationTime: Timestamp;
-    /**
-     * Hyperparameter values associated with this model.
-     */
-    hyperParameters?: ModelCustomizationHyperParameters;
-    /**
-     * Job ARN associated with this model.
-     */
-    jobArn: ModelCustomizationJobArn;
-    /**
-     * Job name associated with this model.
-     */
-    jobName?: JobName;
-    /**
      * ARN associated with this model.
      */
     modelArn: ModelArn;
-    /**
-     * The custom model is encrypted at rest using this key.
-     */
-    modelKmsKeyArn?: KmsKeyArn;
     /**
      * Model name associated with this model.
      */
     modelName: CustomModelName;
     /**
-     * Output data configuration associated with this custom model.
+     * Job name associated with this model.
      */
-    outputDataConfig: OutputDataConfig;
+    jobName?: JobName;
+    /**
+     * Job ARN associated with this model.
+     */
+    jobArn: ModelCustomizationJobArn;
+    /**
+     * ARN of the base model.
+     */
+    baseModelArn: ModelArn;
+    /**
+     * The custom model is encrypted at rest using this key.
+     */
+    modelKmsKeyArn?: KmsKeyArn;
+    /**
+     * Hyperparameter values associated with this model.
+     */
+    hyperParameters?: ModelCustomizationHyperParameters;
     /**
      * Information about the training dataset.
      */
     trainingDataConfig: TrainingDataConfig;
+    validationDataConfig?: ValidationDataConfig;
+    /**
+     * Output data configuration associated with this custom model.
+     */
+    outputDataConfig: OutputDataConfig;
     /**
      * The training metrics from the job creation.
      */
     trainingMetrics?: TrainingMetrics;
-    validationDataConfig?: ValidationDataConfig;
     /**
      * The validation metrics from the job creation.
      */
     validationMetrics?: ValidationMetrics;
+    /**
+     * Creation time of the model.
+     */
+    creationTime: Timestamp;
   }
   export interface GetFoundationModelRequest {
     /**
@@ -406,30 +487,6 @@ declare namespace Bedrock {
   }
   export interface GetModelCustomizationJobResponse {
     /**
-     * ARN of the base model.
-     */
-    baseModelArn: FoundationModelArn;
-    /**
-     * The token that you specified in the CreateCustomizationJob request.
-     */
-    clientRequestToken?: IdempotencyToken;
-    /**
-     * Time that the resource was created.
-     */
-    creationTime: Timestamp;
-    /**
-     * Time that the resource transitioned to terminal state.
-     */
-    endTime?: Timestamp;
-    /**
-     * Information about why the job failed.
-     */
-    failureMessage?: ErrorMessage;
-    /**
-     * The hyperparameter values for the job.
-     */
-    hyperParameters: ModelCustomizationHyperParameters;
-    /**
      * The ARN of the customization job.
      */
     jobArn: ModelCustomizationJobArn;
@@ -438,25 +495,17 @@ declare namespace Bedrock {
      */
     jobName: JobName;
     /**
-     * Time that the resource was last modified.
+     * The name of the output model.
      */
-    lastModifiedTime?: Timestamp;
-    /**
-     * Output data configuration 
-     */
-    outputDataConfig: OutputDataConfig;
+    outputModelName: CustomModelName;
     /**
      * The ARN of the output model.
      */
     outputModelArn?: CustomModelArn;
     /**
-     * The custom model is encrypted at rest using this key.
+     * The token that you specified in the CreateCustomizationJob request.
      */
-    outputModelKmsKeyArn?: KmsKeyArn;
-    /**
-     * The name of the output model.
-     */
-    outputModelName: CustomModelName;
+    clientRequestToken?: IdempotencyToken;
     /**
      * The ARN of the IAM role.
      */
@@ -465,9 +514,41 @@ declare namespace Bedrock {
      * The status of the job. A successful job transitions from in-progress to completed when the output model is ready to use. If the job failed, the failure message contains information about why the job failed.
      */
     status?: ModelCustomizationJobStatus;
+    /**
+     * Information about why the job failed.
+     */
+    failureMessage?: ErrorMessage;
+    /**
+     * Time that the resource was created.
+     */
+    creationTime: Timestamp;
+    /**
+     * Time that the resource was last modified.
+     */
+    lastModifiedTime?: Timestamp;
+    /**
+     * Time that the resource transitioned to terminal state.
+     */
+    endTime?: Timestamp;
+    /**
+     * ARN of the base model.
+     */
+    baseModelArn: FoundationModelArn;
+    /**
+     * The hyperparameter values for the job.
+     */
+    hyperParameters: ModelCustomizationHyperParameters;
     trainingDataConfig: TrainingDataConfig;
-    trainingMetrics?: TrainingMetrics;
     validationDataConfig: ValidationDataConfig;
+    /**
+     * Output data configuration 
+     */
+    outputDataConfig: OutputDataConfig;
+    /**
+     * The custom model is encrypted at rest using this key.
+     */
+    outputModelKmsKeyArn?: KmsKeyArn;
+    trainingMetrics?: TrainingMetrics;
     /**
      * The loss metric for each validator that you provided in the createjob request.
      */
@@ -485,6 +566,66 @@ declare namespace Bedrock {
      */
     loggingConfig?: LoggingConfig;
   }
+  export interface GetProvisionedModelThroughputRequest {
+    /**
+     * The ARN or name of the provisioned throughput.
+     */
+    provisionedModelId: ProvisionedModelId;
+  }
+  export interface GetProvisionedModelThroughputResponse {
+    /**
+     * The current number of model units requested to be available for this provisioned throughput.
+     */
+    modelUnits: PositiveInteger;
+    /**
+     * The desired number of model units that was requested to be available for this provisioned throughput.
+     */
+    desiredModelUnits: PositiveInteger;
+    /**
+     * The name of the provisioned throughput.
+     */
+    provisionedModelName: ProvisionedModelName;
+    /**
+     * The ARN of the provisioned throughput.
+     */
+    provisionedModelArn: ProvisionedModelArn;
+    /**
+     * The ARN or name of the model associated with this provisioned throughput.
+     */
+    modelArn: ModelArn;
+    /**
+     * The ARN of the new model to asssociate with this provisioned throughput.
+     */
+    desiredModelArn: ModelArn;
+    /**
+     * ARN of the foundation model.
+     */
+    foundationModelArn: FoundationModelArn;
+    /**
+     * Status of the provisioned throughput. 
+     */
+    status: ProvisionedModelStatus;
+    /**
+     * The timestamp of the creation time for this provisioned throughput. 
+     */
+    creationTime: Timestamp;
+    /**
+     * The timestamp of the last modified time of this provisioned throughput. 
+     */
+    lastModifiedTime: Timestamp;
+    /**
+     * Failure message for any issues that the create operation encounters.
+     */
+    failureMessage?: ErrorMessage;
+    /**
+     * Commitment duration of the provisioned throughput.
+     */
+    commitmentDuration?: CommitmentDuration;
+    /**
+     * Commitment expiration time for the provisioned throughput.
+     */
+    commitmentExpirationTime?: Timestamp;
+  }
   export type IdempotencyToken = string;
   export type InferenceType = "ON_DEMAND"|"PROVISIONED"|string;
   export type InferenceTypeList = InferenceType[];
@@ -494,17 +635,21 @@ declare namespace Bedrock {
   export type KmsKeyId = string;
   export interface ListCustomModelsRequest {
     /**
-     * Return custom models only if the base model ARN matches this parameter.
+     * Return custom models created before the specified time. 
      */
-    baseModelArnEquals?: ModelArn;
+    creationTimeBefore?: Timestamp;
     /**
      * Return custom models created after the specified time. 
      */
     creationTimeAfter?: Timestamp;
     /**
-     * Return custom models created before the specified time. 
+     * Return custom models only if the job name contains these characters.
      */
-    creationTimeBefore?: Timestamp;
+    nameContains?: CustomModelName;
+    /**
+     * Return custom models only if the base model ARN matches this parameter.
+     */
+    baseModelArnEquals?: ModelArn;
     /**
      * Return custom models only if the foundation model ARN matches this parameter.
      */
@@ -513,10 +658,6 @@ declare namespace Bedrock {
      * Maximum number of results to return in the response.
      */
     maxResults?: MaxResults;
-    /**
-     * Return custom models only if the job name contains these characters.
-     */
-    nameContains?: CustomModelName;
     /**
      * Continuation token from the previous response, for Bedrock to list the next set of results.
      */
@@ -532,31 +673,31 @@ declare namespace Bedrock {
   }
   export interface ListCustomModelsResponse {
     /**
-     * Model summaries.
-     */
-    modelSummaries?: CustomModelSummaryList;
-    /**
      * Continuation token for the next request to list the next set of results.
      */
     nextToken?: PaginationToken;
+    /**
+     * Model summaries.
+     */
+    modelSummaries?: CustomModelSummaryList;
   }
   export interface ListFoundationModelsRequest {
+    /**
+     * A Bedrock model provider.
+     */
+    byProvider?: Provider;
     /**
      * List by customization type.
      */
     byCustomizationType?: ModelCustomization;
     /**
-     * List by inference type.
-     */
-    byInferenceType?: InferenceType;
-    /**
      * List by output modality type.
      */
     byOutputModality?: ModelModality;
     /**
-     * A Bedrock model provider.
+     * List by inference type.
      */
-    byProvider?: Provider;
+    byInferenceType?: InferenceType;
   }
   export interface ListFoundationModelsResponse {
     /**
@@ -574,13 +715,17 @@ declare namespace Bedrock {
      */
     creationTimeBefore?: Timestamp;
     /**
-     * Maximum number of results to return in the response.
+     * Return customization jobs with the specified status. 
      */
-    maxResults?: MaxResults;
+    statusEquals?: FineTuningJobStatus;
     /**
      * Return customization jobs only if the job name contains these characters.
      */
     nameContains?: JobName;
+    /**
+     * Maximum number of results to return in the response.
+     */
+    maxResults?: MaxResults;
     /**
      * Continuation token from the previous response, for Bedrock to list the next set of results.
      */
@@ -593,20 +738,64 @@ declare namespace Bedrock {
      * The sort order of the results.
      */
     sortOrder?: SortOrder;
-    /**
-     * Return customization jobs with the specified status. 
-     */
-    statusEquals?: FineTuningJobStatus;
   }
   export interface ListModelCustomizationJobsResponse {
-    /**
-     * Job summaries.
-     */
-    modelCustomizationJobSummaries?: ModelCustomizationJobSummaries;
     /**
      * Page continuation token to use in the next request.
      */
     nextToken?: PaginationToken;
+    /**
+     * Job summaries.
+     */
+    modelCustomizationJobSummaries?: ModelCustomizationJobSummaries;
+  }
+  export interface ListProvisionedModelThroughputsRequest {
+    /**
+     * Return provisioned capacities created after the specified time. 
+     */
+    creationTimeAfter?: Timestamp;
+    /**
+     * Return provisioned capacities created before the specified time. 
+     */
+    creationTimeBefore?: Timestamp;
+    /**
+     * Return the list of provisioned capacities that match the specified status.
+     */
+    statusEquals?: ProvisionedModelStatus;
+    /**
+     * Return the list of provisioned capacities where their model ARN is equal to this parameter.
+     */
+    modelArnEquals?: ModelArn;
+    /**
+     * Return the list of provisioned capacities if their name contains these characters.
+     */
+    nameContains?: ProvisionedModelName;
+    /**
+     * THe maximum number of results to return in the response.
+     */
+    maxResults?: MaxResults;
+    /**
+     * Continuation token from the previous response, for Bedrock to list the next set of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The field to sort by in the returned list of provisioned capacities.
+     */
+    sortBy?: SortByProvisionedModels;
+    /**
+     * The sort order of the results.
+     */
+    sortOrder?: SortOrder;
+  }
+  export interface ListProvisionedModelThroughputsResponse {
+    /**
+     * Continuation token for the next request to list the next set of results.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * List of summaries, one for each provisioned throughput in the response.
+     */
+    provisionedModelSummaries?: ProvisionedModelSummaries;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -627,14 +816,6 @@ declare namespace Bedrock {
      */
     cloudWatchConfig?: CloudWatchConfig;
     /**
-     * Set to include embeddings data in the log delivery.
-     */
-    embeddingDataDeliveryEnabled?: Boolean;
-    /**
-     * Set to include image data in the log delivery.
-     */
-    imageDataDeliveryEnabled?: Boolean;
-    /**
      * S3 configuration for storing log data.
      */
     s3Config?: S3Config;
@@ -642,6 +823,14 @@ declare namespace Bedrock {
      * Set to include text data in the log delivery.
      */
     textDataDeliveryEnabled?: Boolean;
+    /**
+     * Set to include image data in the log delivery.
+     */
+    imageDataDeliveryEnabled?: Boolean;
+    /**
+     * Set to include embeddings data in the log delivery.
+     */
+    embeddingDataDeliveryEnabled?: Boolean;
   }
   export type MaxResults = number;
   export type MetricFloat = number;
@@ -654,13 +843,33 @@ declare namespace Bedrock {
   export type ModelCustomizationJobSummaries = ModelCustomizationJobSummary[];
   export interface ModelCustomizationJobSummary {
     /**
+     * ARN of the customization job.
+     */
+    jobArn: ModelCustomizationJobArn;
+    /**
      * ARN of the base model.
      */
     baseModelArn: ModelArn;
     /**
+     * Name of the customization job.
+     */
+    jobName: JobName;
+    /**
+     * Status of the customization job. 
+     */
+    status: ModelCustomizationJobStatus;
+    /**
+     * Time that the customization job was last modified.
+     */
+    lastModifiedTime?: Timestamp;
+    /**
      * Creation time of the custom model. 
      */
     creationTime: Timestamp;
+    /**
+     * Time that the customization job ended.
+     */
+    endTime?: Timestamp;
     /**
      * ARN of the custom model.
      */
@@ -669,26 +878,6 @@ declare namespace Bedrock {
      * Name of the custom model.
      */
     customModelName?: CustomModelName;
-    /**
-     * Time that the customization job ended.
-     */
-    endTime?: Timestamp;
-    /**
-     * ARN of the customization job.
-     */
-    jobArn: ModelCustomizationJobArn;
-    /**
-     * Name of the customization job.
-     */
-    jobName: JobName;
-    /**
-     * Time that the customization job was last modified.
-     */
-    lastModifiedTime?: Timestamp;
-    /**
-     * Status of the customization job. 
-     */
-    status: ModelCustomizationJobStatus;
   }
   export type ModelCustomizationList = ModelCustomization[];
   export type ModelIdentifier = string;
@@ -702,7 +891,63 @@ declare namespace Bedrock {
     s3Uri: S3Uri;
   }
   export type PaginationToken = string;
+  export type PositiveInteger = number;
   export type Provider = string;
+  export type ProvisionedModelArn = string;
+  export type ProvisionedModelId = string;
+  export type ProvisionedModelName = string;
+  export type ProvisionedModelStatus = "Creating"|"InService"|"Updating"|"Failed"|string;
+  export type ProvisionedModelSummaries = ProvisionedModelSummary[];
+  export interface ProvisionedModelSummary {
+    /**
+     * The name of the provisioned throughput.
+     */
+    provisionedModelName: ProvisionedModelName;
+    /**
+     * The ARN of the provisioned throughput.
+     */
+    provisionedModelArn: ProvisionedModelArn;
+    /**
+     * The ARN of the model associated with this provisioned throughput.
+     */
+    modelArn: ModelArn;
+    /**
+     * Desired model ARN.
+     */
+    desiredModelArn: ModelArn;
+    /**
+     * Foundation model ARN.
+     */
+    foundationModelArn: FoundationModelArn;
+    /**
+     * The number of model units allocated.
+     */
+    modelUnits: PositiveInteger;
+    /**
+     * Desired model units.
+     */
+    desiredModelUnits: PositiveInteger;
+    /**
+     * Status of the provisioned throughput.
+     */
+    status: ProvisionedModelStatus;
+    /**
+     * Commitment duration for the provisioned throughput.
+     */
+    commitmentDuration?: CommitmentDuration;
+    /**
+     * Commitment expiration time for the provisioned throughput.
+     */
+    commitmentExpirationTime?: Timestamp;
+    /**
+     * The time that this provisioned throughput was created. 
+     */
+    creationTime: Timestamp;
+    /**
+     * The time that this provisioned throughput was last modified. 
+     */
+    lastModifiedTime: Timestamp;
+  }
   export interface PutModelInvocationLoggingConfigurationRequest {
     /**
      * The logging configuration values to set.
@@ -725,6 +970,7 @@ declare namespace Bedrock {
   export type S3Uri = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
+  export type SortByProvisionedModels = "CreationTime"|string;
   export type SortJobsBy = "CreationTime"|string;
   export type SortModelsBy = "CreationTime"|string;
   export type SortOrder = "Ascending"|"Descending"|string;
@@ -791,6 +1037,22 @@ declare namespace Bedrock {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateProvisionedModelThroughputRequest {
+    /**
+     * The ARN or name of the provisioned throughput to update.
+     */
+    provisionedModelId: ProvisionedModelId;
+    /**
+     * The new name for this provisioned throughput.
+     */
+    desiredProvisionedModelName?: ProvisionedModelName;
+    /**
+     * The ARN of the new model to associate with this provisioned throughput.
+     */
+    desiredModelId?: ModelIdentifier;
+  }
+  export interface UpdateProvisionedModelThroughputResponse {
+  }
   export interface ValidationDataConfig {
     /**
      * Information about the validators.
@@ -813,13 +1075,13 @@ declare namespace Bedrock {
   export type Validators = Validator[];
   export interface VpcConfig {
     /**
-     * VPC configuration security group Ids.
-     */
-    securityGroupIds: SecurityGroupIds;
-    /**
      * VPC configuration subnets.
      */
     subnetIds: SubnetIds;
+    /**
+     * VPC configuration security group Ids.
+     */
+    securityGroupIds: SecurityGroupIds;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

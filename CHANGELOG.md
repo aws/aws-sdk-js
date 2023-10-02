@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1467.0-->
+<!--LATEST=2.1468.0-->
 <!--ENTRYINSERT-->
+
+## 2.1468.0
+* feature: Bedrock: Provisioned throughput feature with Amazon and third-party base models, and update validators for model identifier and taggable resource ARNs.
+* feature: BedrockRuntime: Add model timeout exception for InvokeModelWithResponseStream API and update validator for invoke model identifier.
+* feature: EC2: Introducing Amazon EC2 R7iz instances with 3.9 GHz sustained all-core turbo frequency and deliver up to 20% better performance than previous generation z1d instances.
+* feature: RDS: Adds DefaultCertificateForNewLaunches field in the DescribeCertificates API response.
+* feature: SSO: Fix FIPS Endpoints in aws-us-gov.
+* feature: STS: STS API updates for assumeRole
 
 ## 2.1467.0
 * feature: Bedrock: Model Invocation logging added to enable or disable logs in customer account. Model listing and description support added. Provisioned Throughput feature added. Custom model support added for creating custom models. Also includes list, and delete functions for custom model.

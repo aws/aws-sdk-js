@@ -405,7 +405,7 @@ declare namespace ManagedBlockchain {
      */
     ClientRequestToken: ClientRequestTokenString;
     /**
-     * The unique identifier of the network for the node. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli     n-ethereum-rinkeby   
+     * The unique identifier of the network for the node. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli   
      */
     NetworkId: ResourceIdString;
     /**
@@ -481,7 +481,7 @@ declare namespace ManagedBlockchain {
   }
   export interface DeleteNodeInput {
     /**
-     * The unique identifier of the network that the node is on. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli     n-ethereum-rinkeby   
+     * The unique identifier of the network that the node is on. Ethereum public networks have the following NetworkIds:    n-ethereum-mainnet     n-ethereum-goerli   
      */
     NetworkId: ResourceIdString;
     /**
@@ -1029,7 +1029,7 @@ declare namespace ManagedBlockchain {
   }
   export interface NetworkEthereumAttributes {
     /**
-     * The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as follows:   mainnet = 1    goerli = 5    rinkeby = 4   
+     * The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as follows:   mainnet = 1    goerli = 5   
      */
     ChainId?: String;
   }

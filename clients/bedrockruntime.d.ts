@@ -13,19 +13,19 @@ declare class BedrockRuntime extends Service {
   constructor(options?: BedrockRuntime.Types.ClientConfiguration)
   config: Config & BedrockRuntime.Types.ClientConfiguration;
   /**
-   * Invokes the specified Bedrock model to run inference using the input provided in the request body. You use InvokeModel to run inference for text models, image models, and embedding models. For more information about invoking models, see Using the API in the Bedrock User Guide. For example requests, see Examples (after the Errors section).
+   * Invokes the specified Bedrock model to run inference using the input provided in the request body. You use InvokeModel to run inference for text models, image models, and embedding models. For more information, see Run inference in the Bedrock User Guide. For example requests, see Examples (after the Errors section).
    */
   invokeModel(params: BedrockRuntime.Types.InvokeModelRequest, callback?: (err: AWSError, data: BedrockRuntime.Types.InvokeModelResponse) => void): Request<BedrockRuntime.Types.InvokeModelResponse, AWSError>;
   /**
-   * Invokes the specified Bedrock model to run inference using the input provided in the request body. You use InvokeModel to run inference for text models, image models, and embedding models. For more information about invoking models, see Using the API in the Bedrock User Guide. For example requests, see Examples (after the Errors section).
+   * Invokes the specified Bedrock model to run inference using the input provided in the request body. You use InvokeModel to run inference for text models, image models, and embedding models. For more information, see Run inference in the Bedrock User Guide. For example requests, see Examples (after the Errors section).
    */
   invokeModel(callback?: (err: AWSError, data: BedrockRuntime.Types.InvokeModelResponse) => void): Request<BedrockRuntime.Types.InvokeModelResponse, AWSError>;
   /**
-   * Invoke the specified Bedrock model to run inference using the input provided. Return the response in a stream. For more information about invoking models, see Using the API in the Bedrock User Guide. For an example request and response, see Examples (after the Errors section).
+   * Invoke the specified Bedrock model to run inference using the input provided. Return the response in a stream. For more information, see Run inference in the Bedrock User Guide. For an example request and response, see Examples (after the Errors section).
    */
   invokeModelWithResponseStream(params: BedrockRuntime.Types.InvokeModelWithResponseStreamRequest, callback?: (err: AWSError, data: BedrockRuntime.Types.InvokeModelWithResponseStreamResponse) => void): Request<BedrockRuntime.Types.InvokeModelWithResponseStreamResponse, AWSError>;
   /**
-   * Invoke the specified Bedrock model to run inference using the input provided. Return the response in a stream. For more information about invoking models, see Using the API in the Bedrock User Guide. For an example request and response, see Examples (after the Errors section).
+   * Invoke the specified Bedrock model to run inference using the input provided. Return the response in a stream. For more information, see Run inference in the Bedrock User Guide. For an example request and response, see Examples (after the Errors section).
    */
   invokeModelWithResponseStream(callback?: (err: AWSError, data: BedrockRuntime.Types.InvokeModelWithResponseStreamResponse) => void): Request<BedrockRuntime.Types.InvokeModelWithResponseStreamResponse, AWSError>;
 }
@@ -103,6 +103,9 @@ declare namespace BedrockRuntime {
      */
     originalStatusCode?: StatusCode;
   }
+  export interface ModelTimeoutException {
+    message?: NonBlankString;
+  }
   export type NonBlankString = string;
   export type PartBody = Buffer|Uint8Array|Blob|string;
   export interface PayloadPart {
@@ -111,7 +114,7 @@ declare namespace BedrockRuntime {
      */
     bytes?: PartBody;
   }
-  export type ResponseStream = EventStream<{chunk?:PayloadPart,internalServerException?:InternalServerException,modelStreamErrorException?:ModelStreamErrorException,throttlingException?:ThrottlingException,validationException?:ValidationException}>;
+  export type ResponseStream = EventStream<{chunk?:PayloadPart,internalServerException?:InternalServerException,modelStreamErrorException?:ModelStreamErrorException,modelTimeoutException?:ModelTimeoutException,throttlingException?:ThrottlingException,validationException?:ValidationException}>;
   export type StatusCode = number;
   export interface ThrottlingException {
     message?: NonBlankString;
