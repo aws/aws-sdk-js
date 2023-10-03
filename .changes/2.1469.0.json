@@ -1,0 +1,32 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "GetMetricDataV2 API: Update to include new metrics CONTACTS_RESOLVED_IN_X , AVG_HOLD_TIME_ALL_CONTACTS , AVG_RESOLUTION_TIME , ABANDONMENT_RATE , AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS with added features: Interval Period, TimeZone, Negate MetricFilters, Extended date time range."
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "Amazon Location Service adds support for bounding polygon queries. Additionally, the GeofenceCount field has been added to the DescribeGeofenceCollection API response."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "This release adds the ability to replace video frames without modifying the audio essence."
+    },
+    {
+        "type": "feature",
+        "category": "OAM",
+        "description": "This release adds support for sharing AWS::ApplicationInsights::Application resources."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps."
+    },
+    {
+        "type": "feature",
+        "category": "WellArchitected",
+        "description": "AWS Well-Architected now supports Review Templates that allows you to create templates with pre-filled answers for Well-Architected and Custom Lens best practices."
+    }
+]

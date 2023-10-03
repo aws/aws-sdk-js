@@ -100,11 +100,11 @@ declare class OAM extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: OAM.Types.ListTagsForResourceOutput) => void): Request<OAM.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Creates or updates the resource policy that grants permissions to source accounts to link to the monitoring account sink. When you create a sink policy, you can grant permissions to all accounts in an organization or to individual accounts. You can also use a sink policy to limit the types of data that is shared. The three types that you can allow or deny are:    Metrics - Specify with AWS::CloudWatch::Metric     Log groups - Specify with AWS::Logs::LogGroup     Traces - Specify with AWS::XRay::Trace    See the examples in this section to see how to specify permitted source accounts and data types.
+   * Creates or updates the resource policy that grants permissions to source accounts to link to the monitoring account sink. When you create a sink policy, you can grant permissions to all accounts in an organization or to individual accounts. You can also use a sink policy to limit the types of data that is shared. The three types that you can allow or deny are:    Metrics - Specify with AWS::CloudWatch::Metric     Log groups - Specify with AWS::Logs::LogGroup     Traces - Specify with AWS::XRay::Trace     Application Insights - Applications - Specify with AWS::ApplicationInsights::Application    See the examples in this section to see how to specify permitted source accounts and data types.
    */
   putSinkPolicy(params: OAM.Types.PutSinkPolicyInput, callback?: (err: AWSError, data: OAM.Types.PutSinkPolicyOutput) => void): Request<OAM.Types.PutSinkPolicyOutput, AWSError>;
   /**
-   * Creates or updates the resource policy that grants permissions to source accounts to link to the monitoring account sink. When you create a sink policy, you can grant permissions to all accounts in an organization or to individual accounts. You can also use a sink policy to limit the types of data that is shared. The three types that you can allow or deny are:    Metrics - Specify with AWS::CloudWatch::Metric     Log groups - Specify with AWS::Logs::LogGroup     Traces - Specify with AWS::XRay::Trace    See the examples in this section to see how to specify permitted source accounts and data types.
+   * Creates or updates the resource policy that grants permissions to source accounts to link to the monitoring account sink. When you create a sink policy, you can grant permissions to all accounts in an organization or to individual accounts. You can also use a sink policy to limit the types of data that is shared. The three types that you can allow or deny are:    Metrics - Specify with AWS::CloudWatch::Metric     Log groups - Specify with AWS::Logs::LogGroup     Traces - Specify with AWS::XRay::Trace     Application Insights - Applications - Specify with AWS::ApplicationInsights::Application    See the examples in this section to see how to specify permitted source accounts and data types.
    */
   putSinkPolicy(callback?: (err: AWSError, data: OAM.Types.PutSinkPolicyOutput) => void): Request<OAM.Types.PutSinkPolicyOutput, AWSError>;
   /**
@@ -465,7 +465,7 @@ declare namespace OAM {
     Policy?: String;
   }
   export type ResourceIdentifier = string;
-  export type ResourceType = "AWS::CloudWatch::Metric"|"AWS::Logs::LogGroup"|"AWS::XRay::Trace"|string;
+  export type ResourceType = "AWS::CloudWatch::Metric"|"AWS::Logs::LogGroup"|"AWS::XRay::Trace"|"AWS::ApplicationInsights::Application"|string;
   export type ResourceTypesInput = ResourceType[];
   export type ResourceTypesOutput = String[];
   export type SinkName = string;

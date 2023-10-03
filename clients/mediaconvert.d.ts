@@ -2428,6 +2428,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type H264CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_1_1"|"LEVEL_1_2"|"LEVEL_1_3"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_2_2"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_3_2"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_4_2"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|string;
   export type H264CodecProfile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
   export type H264DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
+  export type H264EndOfStreamMarkers = "INCLUDE"|"SUPPRESS"|string;
   export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
   export type H264FieldEncoding = "PAFF"|"FORCE_FIELD"|"MBAFF"|string;
   export type H264FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
@@ -2481,6 +2482,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * Specify whether to allow the number of B-frames in your output GOP structure to vary or not depending on your input video content. To improve the subjective video quality of your output that has high-motion content: Leave blank or keep the default value Adaptive. MediaConvert will use fewer B-frames for high-motion video content than low-motion content. The maximum number of B- frames is limited by the value that you choose for B-frames between reference frames. To use the same number B-frames for all types of content: Choose Static.
      */
     DynamicSubGop?: H264DynamicSubGop;
+    /**
+     * Optionally include or suppress markers at the end of your output that signal the end of the video stream. To include end of stream markers: Leave blank or keep the default value, Include. To not include end of stream markers: Choose Suppress. This is useful when your output will be inserted into another stream.
+     */
+    EndOfStreamMarkers?: H264EndOfStreamMarkers;
     /**
      * Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.
      */
@@ -2637,6 +2642,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type H265CodecLevel = "AUTO"|"LEVEL_1"|"LEVEL_2"|"LEVEL_2_1"|"LEVEL_3"|"LEVEL_3_1"|"LEVEL_4"|"LEVEL_4_1"|"LEVEL_5"|"LEVEL_5_1"|"LEVEL_5_2"|"LEVEL_6"|"LEVEL_6_1"|"LEVEL_6_2"|string;
   export type H265CodecProfile = "MAIN_MAIN"|"MAIN_HIGH"|"MAIN10_MAIN"|"MAIN10_HIGH"|"MAIN_422_8BIT_MAIN"|"MAIN_422_8BIT_HIGH"|"MAIN_422_10BIT_MAIN"|"MAIN_422_10BIT_HIGH"|string;
   export type H265DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
+  export type H265EndOfStreamMarkers = "INCLUDE"|"SUPPRESS"|string;
   export type H265FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
   export type H265FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H265FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
@@ -2692,6 +2698,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * Specify whether to allow the number of B-frames in your output GOP structure to vary or not depending on your input video content. To improve the subjective video quality of your output that has high-motion content: Leave blank or keep the default value Adaptive. MediaConvert will use fewer B-frames for high-motion video content than low-motion content. The maximum number of B- frames is limited by the value that you choose for B-frames between reference frames. To use the same number B-frames for all types of content: Choose Static.
      */
     DynamicSubGop?: H265DynamicSubGop;
+    /**
+     * Optionally include or suppress markers at the end of your output that signal the end of the video stream. To include end of stream markers: Leave blank or keep the default value, Include. To not include end of stream markers: Choose Suppress. This is useful when your output will be inserted into another stream.
+     */
+    EndOfStreamMarkers?: H265EndOfStreamMarkers;
     /**
      * Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set adaptiveQuantization to a value other than Off.
      */
@@ -3329,6 +3339,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     VideoGenerator?: InputVideoGenerator;
     /**
+     * Contains an array of video overlays.
+     */
+    VideoOverlays?: __listOfVideoOverlay;
+    /**
      * Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector.
      */
     VideoSelector?: VideoSelector;
@@ -3448,6 +3462,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * Specify the timecode that you want the service to use for this input's initial frame. To use this setting, you must set the Timecode source setting, located under the input settings, to Specified start. For more information about timecodes, see https://docs.aws.amazon.com/console/mediaconvert/timecode.
      */
     TimecodeStart?: __stringMin11Max11Pattern01D20305D205D;
+    /**
+     * Contains an array of video overlays.
+     */
+    VideoOverlays?: __listOfVideoOverlay;
     /**
      * Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector.
      */
@@ -3645,10 +3663,6 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ExtendedDataServices?: ExtendedDataServices;
     /**
-     * Specifies which input metadata to use for the default "Follow input" option for the following settings: resolution, frame rate, and pixel aspect ratio. In the simplest case, specify which input is used based on its index in the job. For example if you specify 3, then the fourth input will be used from each input. If the job does not have a fourth input, then the first input will be used. If no followInputIndex is specified, then 0 will be chosen automatically.
-     */
-    FollowInputIndex?: __integerMin0Max149;
-    /**
      * Use Inputs to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
      */
     Inputs?: __listOfInput;
@@ -3754,10 +3768,6 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.
      */
     ExtendedDataServices?: ExtendedDataServices;
-    /**
-     * Specifies which input metadata to use for the default "Follow input" option for the following settings: resolution, frame rate, and pixel aspect ratio. In the simplest case, specify which input is used based on its index in the job. For example if you specify 3, then the fourth input will be used from each input. If the job does not have a fourth input, then the first input will be used. If no followInputIndex is specified, then 0 will be chosen automatically.
-     */
-    FollowInputIndex?: __integerMin0Max149;
     /**
      * Use Inputs to define the source file used in the transcode job. There can only be one input in a job template. Using the API, you can include multiple inputs when referencing a job template.
      */
@@ -5768,6 +5778,48 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     WidthInPx?: __integer;
   }
+  export interface VideoOverlay {
+    /**
+     * Enter the end timecode in the underlying input video for this overlay. Your overlay will be active through this frame. To display your video overlay for the duration of the underlying video: Leave blank. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for the underlying Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your overlay to end ten minutes into the video, enter 01:10:00:00.
+     */
+    EndTimecode?: __stringPattern010920405090509092;
+    /**
+     * Input settings for Video overlay. You can include one or more video overlays in sequence at different times that you specify.
+     */
+    Input?: VideoOverlayInput;
+    /**
+     * Enter the start timecode in the underlying input video for this overlay. Your overlay will be active starting with this frame. To display your video overlay starting at the beginning of the underlying video: Leave blank. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for the underlying Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your overlay to begin five minutes into the video, enter 01:05:00:00.
+     */
+    StartTimecode?: __stringPattern010920405090509092;
+  }
+  export interface VideoOverlayInput {
+    /**
+     * Specify the input file S3, HTTP, or HTTPS URI for your video overlay. For consistency in color and formatting in your output video image, we recommend that you specify a video with similar characteristics as the underlying input video.
+     */
+    FileInput?: __stringPatternS3Https;
+    /**
+     * Specify one or more clips to use from your video overlay. When you include an input clip, you must also specify its start timecode, end timecode, or both start and end timecode.
+     */
+    InputClippings?: __listOfVideoOverlayInputClipping;
+    /**
+     * Specify the starting timecode for your video overlay. To use the timecode present in your video overlay: Choose Embedded. To use a zerobased timecode: Choose Start at 0. To choose a timecode: Choose Specified start. When you do, enter the starting timecode in Start timecode. If you don't specify a value for Timecode source, MediaConvert uses Embedded by default.
+     */
+    TimecodeSource?: InputTimecodeSource;
+    /**
+     * Specify the starting timecode for this video overlay. To use this setting, you must set Timecode source to Specified start.
+     */
+    TimecodeStart?: __stringMin11Max11Pattern01D20305D205D;
+  }
+  export interface VideoOverlayInputClipping {
+    /**
+     * Specify the timecode of the last frame to include in your video overlay's clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for Timecode source.
+     */
+    EndTimecode?: __stringPattern010920405090509092;
+    /**
+     * Specify the timecode of the first frame to include in your video overlay's clip. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When entering this value, take into account your choice for Timecode source.
+     */
+    StartTimecode?: __stringPattern010920405090509092;
+  }
   export interface VideoPreprocessor {
     /**
      * Use these settings to convert the color space or to modify properties such as hue and contrast for this output. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/converting-the-color-space.html.
@@ -6233,7 +6285,6 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __integerMin0Max1152000000 = number;
   export type __integerMin0Max128 = number;
   export type __integerMin0Max1466400000 = number;
-  export type __integerMin0Max149 = number;
   export type __integerMin0Max15 = number;
   export type __integerMin0Max16 = number;
   export type __integerMin0Max2147483647 = number;
@@ -6354,6 +6405,8 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __listOfQueue = Queue[];
   export type __listOfQueueTransition = QueueTransition[];
   export type __listOfTeletextPageType = TeletextPageType[];
+  export type __listOfVideoOverlay = VideoOverlay[];
+  export type __listOfVideoOverlayInputClipping = VideoOverlayInputClipping[];
   export type __listOfWarningGroup = WarningGroup[];
   export type __listOf__doubleMinNegative60Max6 = __doubleMinNegative60Max6[];
   export type __listOf__integerMin1Max2147483647 = __integerMin1Max2147483647[];

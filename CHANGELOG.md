@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1468.0-->
+<!--LATEST=2.1469.0-->
 <!--ENTRYINSERT-->
+
+## 2.1469.0
+* feature: Connect: GetMetricDataV2 API: Update to include new metrics CONTACTS_RESOLVED_IN_X , AVG_HOLD_TIME_ALL_CONTACTS , AVG_RESOLUTION_TIME , ABANDONMENT_RATE , AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS with added features: Interval Period, TimeZone, Negate MetricFilters, Extended date time range.
+* feature: Location: Amazon Location Service adds support for bounding polygon queries. Additionally, the GeofenceCount field has been added to the DescribeGeofenceCollection API response.
+* feature: MediaConvert: This release adds the ability to replace video frames without modifying the audio essence.
+* feature: OAM: This release adds support for sharing AWS::ApplicationInsights::Application resources.
+* feature: SageMaker: This release allows users to run Selective Execution in SageMaker Pipelines without SourcePipelineExecutionArn if selected steps do not have any dependent steps.
+* feature: WellArchitected: AWS Well-Architected now supports Review Templates that allows you to create templates with pre-filled answers for Well-Architected and Custom Lens best practices.
 
 ## 2.1468.0
 * feature: Bedrock: Provisioned throughput feature with Amazon and third-party base models, and update validators for model identifier and taggable resource ARNs.

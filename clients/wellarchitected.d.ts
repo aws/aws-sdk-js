@@ -68,11 +68,27 @@ declare class WellArchitected extends Service {
    */
   createProfileShare(callback?: (err: AWSError, data: WellArchitected.Types.CreateProfileShareOutput) => void): Request<WellArchitected.Types.CreateProfileShareOutput, AWSError>;
   /**
-   * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.  Either AwsRegions, NonAwsRegions, or both must be specified when creating a workload. You also must specify ReviewOwner, even though the parameter is listed as not being required in the following section.  
+   * Create a review template.   Disclaimer  Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your review templates. If your review template or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data. 
+   */
+  createReviewTemplate(params: WellArchitected.Types.CreateReviewTemplateInput, callback?: (err: AWSError, data: WellArchitected.Types.CreateReviewTemplateOutput) => void): Request<WellArchitected.Types.CreateReviewTemplateOutput, AWSError>;
+  /**
+   * Create a review template.   Disclaimer  Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your review templates. If your review template or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data. 
+   */
+  createReviewTemplate(callback?: (err: AWSError, data: WellArchitected.Types.CreateReviewTemplateOutput) => void): Request<WellArchitected.Types.CreateReviewTemplateOutput, AWSError>;
+  /**
+   * Create a review template share. The owner of a review template can share it with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region.   Shared access to a review template is not removed until the review template share invitation is deleted. If you share a review template with an organization or OU, all accounts in the organization or OU are granted access to the review template.   Disclaimer  By sharing your review template with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your review template available to those other accounts. 
+   */
+  createTemplateShare(params: WellArchitected.Types.CreateTemplateShareInput, callback?: (err: AWSError, data: WellArchitected.Types.CreateTemplateShareOutput) => void): Request<WellArchitected.Types.CreateTemplateShareOutput, AWSError>;
+  /**
+   * Create a review template share. The owner of a review template can share it with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region.   Shared access to a review template is not removed until the review template share invitation is deleted. If you share a review template with an organization or OU, all accounts in the organization or OU are granted access to the review template.   Disclaimer  By sharing your review template with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your review template available to those other accounts. 
+   */
+  createTemplateShare(callback?: (err: AWSError, data: WellArchitected.Types.CreateTemplateShareOutput) => void): Request<WellArchitected.Types.CreateTemplateShareOutput, AWSError>;
+  /**
+   * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.  Either AwsRegions, NonAwsRegions, or both must be specified when creating a workload. You also must specify ReviewOwner, even though the parameter is listed as not being required in the following section.   When creating a workload using a review template, you must have the following IAM permissions:    wellarchitected:GetReviewTemplate     wellarchitected:GetReviewTemplateAnswer     wellarchitected:ListReviewTemplateAnswers     wellarchitected:GetReviewTemplateLensReview   
    */
   createWorkload(params: WellArchitected.Types.CreateWorkloadInput, callback?: (err: AWSError, data: WellArchitected.Types.CreateWorkloadOutput) => void): Request<WellArchitected.Types.CreateWorkloadOutput, AWSError>;
   /**
-   * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.  Either AwsRegions, NonAwsRegions, or both must be specified when creating a workload. You also must specify ReviewOwner, even though the parameter is listed as not being required in the following section.  
+   * Create a new workload. The owner of a workload can share the workload with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it. For more information, see Defining a Workload in the Well-Architected Tool User Guide.  Either AwsRegions, NonAwsRegions, or both must be specified when creating a workload. You also must specify ReviewOwner, even though the parameter is listed as not being required in the following section.   When creating a workload using a review template, you must have the following IAM permissions:    wellarchitected:GetReviewTemplate     wellarchitected:GetReviewTemplateAnswer     wellarchitected:ListReviewTemplateAnswers     wellarchitected:GetReviewTemplateLensReview   
    */
   createWorkload(callback?: (err: AWSError, data: WellArchitected.Types.CreateWorkloadOutput) => void): Request<WellArchitected.Types.CreateWorkloadOutput, AWSError>;
   /**
@@ -115,6 +131,22 @@ declare class WellArchitected extends Service {
    * Delete a profile share.
    */
   deleteProfileShare(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a review template. Only the owner of a review template can delete it. After the review template is deleted, Amazon Web Services accounts, users, organizations, and organizational units (OUs) that you shared the review template with will no longer be able to apply it to new workloads.
+   */
+  deleteReviewTemplate(params: WellArchitected.Types.DeleteReviewTemplateInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a review template. Only the owner of a review template can delete it. After the review template is deleted, Amazon Web Services accounts, users, organizations, and organizational units (OUs) that you shared the review template with will no longer be able to apply it to new workloads.
+   */
+  deleteReviewTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a review template share. After the review template share is deleted, Amazon Web Services accounts, users, organizations, and organizational units (OUs) that you shared the review template with will no longer be able to apply it to new workloads.
+   */
+  deleteTemplateShare(params: WellArchitected.Types.DeleteTemplateShareInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a review template share. After the review template share is deleted, Amazon Web Services accounts, users, organizations, and organizational units (OUs) that you shared the review template with will no longer be able to apply it to new workloads.
+   */
+  deleteTemplateShare(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete an existing workload.
    */
@@ -228,6 +260,30 @@ declare class WellArchitected extends Service {
    */
   getProfileTemplate(callback?: (err: AWSError, data: WellArchitected.Types.GetProfileTemplateOutput) => void): Request<WellArchitected.Types.GetProfileTemplateOutput, AWSError>;
   /**
+   * Get review template.
+   */
+  getReviewTemplate(params: WellArchitected.Types.GetReviewTemplateInput, callback?: (err: AWSError, data: WellArchitected.Types.GetReviewTemplateOutput) => void): Request<WellArchitected.Types.GetReviewTemplateOutput, AWSError>;
+  /**
+   * Get review template.
+   */
+  getReviewTemplate(callback?: (err: AWSError, data: WellArchitected.Types.GetReviewTemplateOutput) => void): Request<WellArchitected.Types.GetReviewTemplateOutput, AWSError>;
+  /**
+   * Get review template answer.
+   */
+  getReviewTemplateAnswer(params: WellArchitected.Types.GetReviewTemplateAnswerInput, callback?: (err: AWSError, data: WellArchitected.Types.GetReviewTemplateAnswerOutput) => void): Request<WellArchitected.Types.GetReviewTemplateAnswerOutput, AWSError>;
+  /**
+   * Get review template answer.
+   */
+  getReviewTemplateAnswer(callback?: (err: AWSError, data: WellArchitected.Types.GetReviewTemplateAnswerOutput) => void): Request<WellArchitected.Types.GetReviewTemplateAnswerOutput, AWSError>;
+  /**
+   * Get a lens review associated with a review template.
+   */
+  getReviewTemplateLensReview(params: WellArchitected.Types.GetReviewTemplateLensReviewInput, callback?: (err: AWSError, data: WellArchitected.Types.GetReviewTemplateLensReviewOutput) => void): Request<WellArchitected.Types.GetReviewTemplateLensReviewOutput, AWSError>;
+  /**
+   * Get a lens review associated with a review template.
+   */
+  getReviewTemplateLensReview(callback?: (err: AWSError, data: WellArchitected.Types.GetReviewTemplateLensReviewOutput) => void): Request<WellArchitected.Types.GetReviewTemplateLensReviewOutput, AWSError>;
+  /**
    * Get an existing workload.
    */
   getWorkload(params: WellArchitected.Types.GetWorkloadInput, callback?: (err: AWSError, data: WellArchitected.Types.GetWorkloadOutput) => void): Request<WellArchitected.Types.GetWorkloadOutput, AWSError>;
@@ -340,21 +396,45 @@ declare class WellArchitected extends Service {
    */
   listProfiles(callback?: (err: AWSError, data: WellArchitected.Types.ListProfilesOutput) => void): Request<WellArchitected.Types.ListProfilesOutput, AWSError>;
   /**
-   * List the workload invitations.
+   * List the answers of a review template.
+   */
+  listReviewTemplateAnswers(params: WellArchitected.Types.ListReviewTemplateAnswersInput, callback?: (err: AWSError, data: WellArchitected.Types.ListReviewTemplateAnswersOutput) => void): Request<WellArchitected.Types.ListReviewTemplateAnswersOutput, AWSError>;
+  /**
+   * List the answers of a review template.
+   */
+  listReviewTemplateAnswers(callback?: (err: AWSError, data: WellArchitected.Types.ListReviewTemplateAnswersOutput) => void): Request<WellArchitected.Types.ListReviewTemplateAnswersOutput, AWSError>;
+  /**
+   * List review templates.
+   */
+  listReviewTemplates(params: WellArchitected.Types.ListReviewTemplatesInput, callback?: (err: AWSError, data: WellArchitected.Types.ListReviewTemplatesOutput) => void): Request<WellArchitected.Types.ListReviewTemplatesOutput, AWSError>;
+  /**
+   * List review templates.
+   */
+  listReviewTemplates(callback?: (err: AWSError, data: WellArchitected.Types.ListReviewTemplatesOutput) => void): Request<WellArchitected.Types.ListReviewTemplatesOutput, AWSError>;
+  /**
+   * List the share invitations.  WorkloadNamePrefix, LensNamePrefix, ProfileNamePrefix, and TemplateNamePrefix are mutually exclusive. Use the parameter that matches your ShareResourceType.
    */
   listShareInvitations(params: WellArchitected.Types.ListShareInvitationsInput, callback?: (err: AWSError, data: WellArchitected.Types.ListShareInvitationsOutput) => void): Request<WellArchitected.Types.ListShareInvitationsOutput, AWSError>;
   /**
-   * List the workload invitations.
+   * List the share invitations.  WorkloadNamePrefix, LensNamePrefix, ProfileNamePrefix, and TemplateNamePrefix are mutually exclusive. Use the parameter that matches your ShareResourceType.
    */
   listShareInvitations(callback?: (err: AWSError, data: WellArchitected.Types.ListShareInvitationsOutput) => void): Request<WellArchitected.Types.ListShareInvitationsOutput, AWSError>;
   /**
-   * List the tags for a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN. 
+   * List the tags for a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN. 
    */
   listTagsForResource(params: WellArchitected.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.ListTagsForResourceOutput) => void): Request<WellArchitected.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * List the tags for a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN. 
+   * List the tags for a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN. 
    */
   listTagsForResource(callback?: (err: AWSError, data: WellArchitected.Types.ListTagsForResourceOutput) => void): Request<WellArchitected.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * List review template shares.
+   */
+  listTemplateShares(params: WellArchitected.Types.ListTemplateSharesInput, callback?: (err: AWSError, data: WellArchitected.Types.ListTemplateSharesOutput) => void): Request<WellArchitected.Types.ListTemplateSharesOutput, AWSError>;
+  /**
+   * List review template shares.
+   */
+  listTemplateShares(callback?: (err: AWSError, data: WellArchitected.Types.ListTemplateSharesOutput) => void): Request<WellArchitected.Types.ListTemplateSharesOutput, AWSError>;
   /**
    * List the workload shares associated with the workload.
    */
@@ -372,19 +452,19 @@ declare class WellArchitected extends Service {
    */
   listWorkloads(callback?: (err: AWSError, data: WellArchitected.Types.ListWorkloadsOutput) => void): Request<WellArchitected.Types.ListWorkloadsOutput, AWSError>;
   /**
-   * Adds one or more tags to the specified resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN. 
+   * Adds one or more tags to the specified resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN. 
    */
   tagResource(params: WellArchitected.Types.TagResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.TagResourceOutput) => void): Request<WellArchitected.Types.TagResourceOutput, AWSError>;
   /**
-   * Adds one or more tags to the specified resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN. 
+   * Adds one or more tags to the specified resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN. 
    */
   tagResource(callback?: (err: AWSError, data: WellArchitected.Types.TagResourceOutput) => void): Request<WellArchitected.Types.TagResourceOutput, AWSError>;
   /**
-   * Deletes specified tags from a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.  To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
+   * Deletes specified tags from a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.  To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
    */
   untagResource(params: WellArchitected.Types.UntagResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.UntagResourceOutput) => void): Request<WellArchitected.Types.UntagResourceOutput, AWSError>;
   /**
-   * Deletes specified tags from a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.  To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
+   * Deletes specified tags from a resource.  The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.  To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
    */
   untagResource(callback?: (err: AWSError, data: WellArchitected.Types.UntagResourceOutput) => void): Request<WellArchitected.Types.UntagResourceOutput, AWSError>;
   /**
@@ -419,6 +499,30 @@ declare class WellArchitected extends Service {
    * Update a profile.
    */
   updateProfile(callback?: (err: AWSError, data: WellArchitected.Types.UpdateProfileOutput) => void): Request<WellArchitected.Types.UpdateProfileOutput, AWSError>;
+  /**
+   * Update a review template.
+   */
+  updateReviewTemplate(params: WellArchitected.Types.UpdateReviewTemplateInput, callback?: (err: AWSError, data: WellArchitected.Types.UpdateReviewTemplateOutput) => void): Request<WellArchitected.Types.UpdateReviewTemplateOutput, AWSError>;
+  /**
+   * Update a review template.
+   */
+  updateReviewTemplate(callback?: (err: AWSError, data: WellArchitected.Types.UpdateReviewTemplateOutput) => void): Request<WellArchitected.Types.UpdateReviewTemplateOutput, AWSError>;
+  /**
+   * Update a review template answer.
+   */
+  updateReviewTemplateAnswer(params: WellArchitected.Types.UpdateReviewTemplateAnswerInput, callback?: (err: AWSError, data: WellArchitected.Types.UpdateReviewTemplateAnswerOutput) => void): Request<WellArchitected.Types.UpdateReviewTemplateAnswerOutput, AWSError>;
+  /**
+   * Update a review template answer.
+   */
+  updateReviewTemplateAnswer(callback?: (err: AWSError, data: WellArchitected.Types.UpdateReviewTemplateAnswerOutput) => void): Request<WellArchitected.Types.UpdateReviewTemplateAnswerOutput, AWSError>;
+  /**
+   * Update a lens review associated with a review template.
+   */
+  updateReviewTemplateLensReview(params: WellArchitected.Types.UpdateReviewTemplateLensReviewInput, callback?: (err: AWSError, data: WellArchitected.Types.UpdateReviewTemplateLensReviewOutput) => void): Request<WellArchitected.Types.UpdateReviewTemplateLensReviewOutput, AWSError>;
+  /**
+   * Update a lens review associated with a review template.
+   */
+  updateReviewTemplateLensReview(callback?: (err: AWSError, data: WellArchitected.Types.UpdateReviewTemplateLensReviewOutput) => void): Request<WellArchitected.Types.UpdateReviewTemplateLensReviewOutput, AWSError>;
   /**
    * Update a workload or custom lens share invitation.  This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified. 
    */
@@ -459,6 +563,14 @@ declare class WellArchitected extends Service {
    * Upgrade a profile.
    */
   upgradeProfileVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Upgrade the lens review of a review template.
+   */
+  upgradeReviewTemplateLensReview(params: WellArchitected.Types.UpgradeReviewTemplateLensReviewInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Upgrade the lens review of a review template.
+   */
+  upgradeReviewTemplateLensReview(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace WellArchitected {
   export type AccountSummary = {[key: string]: CheckStatusCount};
@@ -817,6 +929,47 @@ declare namespace WellArchitected {
      */
     ProfileArn?: ProfileArn;
   }
+  export interface CreateReviewTemplateInput {
+    /**
+     * Name of the review template.
+     */
+    TemplateName: TemplateName;
+    /**
+     * The review template description.
+     */
+    Description: TemplateDescription;
+    /**
+     * Lenses applied to the review template.
+     */
+    Lenses: ReviewTemplateLenses;
+    Notes?: Notes;
+    /**
+     * The tags assigned to the review template.
+     */
+    Tags?: TagMap;
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface CreateReviewTemplateOutput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+  }
+  export interface CreateTemplateShareInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+    SharedWith: SharedWith;
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface CreateTemplateShareOutput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+    ShareId?: ShareId;
+  }
   export interface CreateWorkloadInput {
     WorkloadName: WorkloadName;
     Description: WorkloadDescription;
@@ -848,6 +1001,10 @@ declare namespace WellArchitected {
      * The list of profile ARNs associated with the workload.
      */
     ProfileArns?: WorkloadProfileArns;
+    /**
+     * The list of review template ARNs to associate with the workload.
+     */
+    ReviewTemplateArns?: ReviewTemplateArns;
   }
   export interface CreateWorkloadOutput {
     WorkloadId?: WorkloadId;
@@ -890,6 +1047,21 @@ declare namespace WellArchitected {
      * The profile ARN.
      */
     ProfileArn: ProfileArn;
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface DeleteReviewTemplateInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface DeleteTemplateShareInput {
+    ShareId: ShareId;
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
     ClientRequestToken: ClientRequestToken;
   }
   export interface DeleteWorkloadInput {
@@ -1064,6 +1236,54 @@ declare namespace WellArchitected {
      * The profile template.
      */
     ProfileTemplate?: ProfileTemplate;
+  }
+  export interface GetReviewTemplateAnswerInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+    LensAlias: LensAlias;
+    QuestionId: QuestionId;
+  }
+  export interface GetReviewTemplateAnswerOutput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+    LensAlias?: LensAlias;
+    /**
+     * An answer of the question.
+     */
+    Answer?: ReviewTemplateAnswer;
+  }
+  export interface GetReviewTemplateInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+  }
+  export interface GetReviewTemplateLensReviewInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+    LensAlias: LensAlias;
+  }
+  export interface GetReviewTemplateLensReviewOutput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+    /**
+     * A lens review of a question.
+     */
+    LensReview?: ReviewTemplateLensReview;
+  }
+  export interface GetReviewTemplateOutput {
+    /**
+     * The review template.
+     */
+    ReviewTemplate?: ReviewTemplate;
   }
   export interface GetWorkloadInput {
     WorkloadId: WorkloadId;
@@ -1268,6 +1488,11 @@ declare namespace WellArchitected {
      * The latest version of the lens.
      */
     LatestLensVersion?: LensVersion;
+    /**
+     *  ResourceArn of the lens being upgraded
+     */
+    ResourceArn?: ResourceArn;
+    ResourceName?: WorkloadName;
   }
   export type LensVersion = string;
   export type LensesAppliedCount = number;
@@ -1378,7 +1603,7 @@ declare namespace WellArchitected {
   export interface ListLensSharesInput {
     LensAlias: LensAlias;
     /**
-     * The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the lens is shared.
+     * The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the lens is shared.
      */
     SharedWithPrefix?: SharedWithPrefix;
     NextToken?: NextToken;
@@ -1429,6 +1654,10 @@ declare namespace WellArchitected {
      * The maximum number of results to return for this request.
      */
     MaxResults?: ListNotificationsMaxResults;
+    /**
+     * The ARN for the related resource for the notification.  Only one of WorkloadID or ResourceARN should be specified. 
+     */
+    ResourceArn?: ResourceArn;
   }
   export type ListNotificationsMaxResults = number;
   export interface ListNotificationsOutput {
@@ -1456,7 +1685,7 @@ declare namespace WellArchitected {
      */
     ProfileArn: ProfileArn;
     /**
-     * The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the profile is shared.
+     * The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the profile is shared.
      */
     SharedWithPrefix?: SharedWithPrefix;
     NextToken?: NextToken;
@@ -1476,7 +1705,7 @@ declare namespace WellArchitected {
   }
   export interface ListProfilesInput {
     /**
-     * Prefix for profile name.
+     * An optional string added to the beginning of each profile name returned in the results.
      */
     ProfileNamePrefix?: ProfileNamePrefix;
     /**
@@ -1491,6 +1720,43 @@ declare namespace WellArchitected {
      * Profile summaries.
      */
     ProfileSummaries?: ProfileSummaries;
+    NextToken?: NextToken;
+  }
+  export interface ListReviewTemplateAnswersInput {
+    /**
+     * The ARN of the review template.
+     */
+    TemplateArn: TemplateArn;
+    LensAlias: LensAlias;
+    PillarId?: PillarId;
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return for this request.
+     */
+    MaxResults?: ListReviewTemplateAnswersMaxResults;
+  }
+  export type ListReviewTemplateAnswersMaxResults = number;
+  export interface ListReviewTemplateAnswersOutput {
+    /**
+     * The ARN of the review template.
+     */
+    TemplateArn?: TemplateArn;
+    LensAlias?: LensAlias;
+    /**
+     * List of answer summaries of a lens review in a review template.
+     */
+    AnswerSummaries?: ReviewTemplateAnswerSummaries;
+    NextToken?: NextToken;
+  }
+  export interface ListReviewTemplatesInput {
+    NextToken?: NextToken;
+    MaxResults?: MaxResults;
+  }
+  export interface ListReviewTemplatesOutput {
+    /**
+     * List of review templates.
+     */
+    ReviewTemplates?: ReviewTemplates;
     NextToken?: NextToken;
   }
   export interface ListShareInvitationsInput {
@@ -1509,9 +1775,13 @@ declare namespace WellArchitected {
      */
     MaxResults?: ListShareInvitationsMaxResults;
     /**
-     * Profile name prefix.
+     * An optional string added to the beginning of each profile name returned in the results.
      */
     ProfileNamePrefix?: ProfileNamePrefix;
+    /**
+     * An optional string added to the beginning of each review template name returned in the results.
+     */
+    TemplateNamePrefix?: TemplateNamePrefix;
   }
   export type ListShareInvitationsMaxResults = number;
   export interface ListShareInvitationsOutput {
@@ -1530,10 +1800,38 @@ declare namespace WellArchitected {
      */
     Tags?: TagMap;
   }
+  export interface ListTemplateSharesInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+    /**
+     * The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the profile is shared.
+     */
+    SharedWithPrefix?: SharedWithPrefix;
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return for this request.
+     */
+    MaxResults?: ListTemplateSharesMaxResults;
+    Status?: ShareStatus;
+  }
+  export type ListTemplateSharesMaxResults = number;
+  export interface ListTemplateSharesOutput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+    /**
+     * A review template share summary return object.
+     */
+    TemplateShareSummaries?: TemplateShareSummaries;
+    NextToken?: NextToken;
+  }
   export interface ListWorkloadSharesInput {
     WorkloadId: WorkloadId;
     /**
-     * The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.
+     * The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload is shared.
      */
     SharedWithPrefix?: SharedWithPrefix;
     NextToken?: NextToken;
@@ -1799,6 +2097,8 @@ declare namespace WellArchitected {
   }
   export type ProfileTemplateQuestionChoices = ProfileTemplateChoice[];
   export type ProfileVersion = string;
+  export type Question = "UNANSWERED"|"ANSWERED"|string;
+  export type QuestionCounts = {[key: string]: Count};
   export type QuestionDescription = string;
   export interface QuestionDifference {
     QuestionId?: QuestionId;
@@ -1823,6 +2123,164 @@ declare namespace WellArchitected {
   export type QuestionTitle = string;
   export type QuestionType = "PRIORITIZED"|"NON_PRIORITIZED"|string;
   export type ReportFormat = "PDF"|"JSON"|string;
+  export type ResourceArn = string;
+  export interface ReviewTemplate {
+    /**
+     * The review template description.
+     */
+    Description?: TemplateDescription;
+    /**
+     * The lenses applied to the review template.
+     */
+    Lenses?: ReviewTemplateLenses;
+    Notes?: Notes;
+    /**
+     * A count of how many total questions are answered and unanswered in the review template.
+     */
+    QuestionCounts?: QuestionCounts;
+    Owner?: AwsAccountId;
+    UpdatedAt?: Timestamp;
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+    /**
+     * The name of the review template.
+     */
+    TemplateName?: TemplateName;
+    /**
+     * The tags assigned to the review template.
+     */
+    Tags?: TagMap;
+    /**
+     * The latest status of a review template.
+     */
+    UpdateStatus?: ReviewTemplateUpdateStatus;
+    /**
+     * The ID assigned to the template share invitation.
+     */
+    ShareInvitationId?: ShareInvitationId;
+  }
+  export interface ReviewTemplateAnswer {
+    QuestionId?: QuestionId;
+    PillarId?: PillarId;
+    QuestionTitle?: QuestionTitle;
+    QuestionDescription?: QuestionDescription;
+    ImprovementPlanUrl?: ImprovementPlanUrl;
+    HelpfulResourceUrl?: HelpfulResourceUrl;
+    /**
+     * The helpful resource text to be displayed for a custom lens.  This field does not apply to Amazon Web Services official lenses. 
+     */
+    HelpfulResourceDisplayText?: DisplayText;
+    Choices?: Choices;
+    SelectedChoices?: SelectedChoices;
+    /**
+     * A list of selected choices to a question in your review template.
+     */
+    ChoiceAnswers?: ChoiceAnswers;
+    IsApplicable?: IsApplicable;
+    /**
+     * The status of whether or not this question has been answered.
+     */
+    AnswerStatus?: ReviewTemplateAnswerStatus;
+    Notes?: Notes;
+    /**
+     * The reason why the question is not applicable to your review template.
+     */
+    Reason?: AnswerReason;
+  }
+  export type ReviewTemplateAnswerStatus = "UNANSWERED"|"ANSWERED"|string;
+  export type ReviewTemplateAnswerSummaries = ReviewTemplateAnswerSummary[];
+  export interface ReviewTemplateAnswerSummary {
+    QuestionId?: QuestionId;
+    PillarId?: PillarId;
+    QuestionTitle?: QuestionTitle;
+    Choices?: Choices;
+    SelectedChoices?: SelectedChoices;
+    /**
+     * A list of selected choices to a question in the review template.
+     */
+    ChoiceAnswerSummaries?: ChoiceAnswerSummaries;
+    IsApplicable?: IsApplicable;
+    /**
+     * The status of whether or not this question has been answered.
+     */
+    AnswerStatus?: ReviewTemplateAnswerStatus;
+    /**
+     * The reason why a choice is not-applicable to a question in the review template.
+     */
+    Reason?: AnswerReason;
+    /**
+     * The type of question.
+     */
+    QuestionType?: QuestionType;
+  }
+  export type ReviewTemplateArns = TemplateArn[];
+  export type ReviewTemplateLensAliases = LensAlias[];
+  export interface ReviewTemplateLensReview {
+    LensAlias?: LensAlias;
+    /**
+     * The lens ARN.
+     */
+    LensArn?: LensArn;
+    /**
+     * The version of the lens.
+     */
+    LensVersion?: LensVersion;
+    LensName?: LensName;
+    /**
+     * The status of the lens.
+     */
+    LensStatus?: LensStatus;
+    /**
+     * Pillar review summaries of a lens review.
+     */
+    PillarReviewSummaries?: ReviewTemplatePillarReviewSummaries;
+    UpdatedAt?: Timestamp;
+    Notes?: Notes;
+    /**
+     * A count of how many questions are answered and unanswered in the lens review.
+     */
+    QuestionCounts?: QuestionCounts;
+    NextToken?: NextToken;
+  }
+  export type ReviewTemplateLenses = LensAlias[];
+  export type ReviewTemplatePillarReviewSummaries = ReviewTemplatePillarReviewSummary[];
+  export interface ReviewTemplatePillarReviewSummary {
+    PillarId?: PillarId;
+    PillarName?: PillarName;
+    Notes?: Notes;
+    /**
+     * A count of how many questions are answered and unanswered in the requested pillar of the lens review.
+     */
+    QuestionCounts?: QuestionCounts;
+  }
+  export interface ReviewTemplateSummary {
+    /**
+     * Description of the review template.
+     */
+    Description?: TemplateDescription;
+    /**
+     * Lenses associated with the review template.
+     */
+    Lenses?: ReviewTemplateLenses;
+    Owner?: AwsAccountId;
+    UpdatedAt?: Timestamp;
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+    /**
+     * The name of the review template.
+     */
+    TemplateName?: TemplateName;
+    /**
+     * The latest status of a review template.
+     */
+    UpdateStatus?: ReviewTemplateUpdateStatus;
+  }
+  export type ReviewTemplateUpdateStatus = "CURRENT"|"LENS_NOT_CURRENT"|string;
+  export type ReviewTemplates = ReviewTemplateSummary[];
   export type Risk = "UNANSWERED"|"HIGH"|"MEDIUM"|"NONE"|"NOT_APPLICABLE"|string;
   export type RiskCounts = {[key: string]: Count};
   export type SelectedChoiceIds = ChoiceId[];
@@ -1848,6 +2306,10 @@ declare namespace WellArchitected {
      * The profile ARN.
      */
     ProfileArn?: ProfileArn;
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
   }
   export type ShareInvitationAction = "ACCEPT"|"REJECT"|string;
   export type ShareInvitationId = string;
@@ -1879,8 +2341,16 @@ declare namespace WellArchitected {
      * The profile ARN.
      */
     ProfileArn?: ProfileArn;
+    /**
+     * The name of the review template.
+     */
+    TemplateName?: TemplateName;
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
   }
-  export type ShareResourceType = "WORKLOAD"|"LENS"|"PROFILE"|string;
+  export type ShareResourceType = "WORKLOAD"|"LENS"|"PROFILE"|"TEMPLATE"|string;
   export type ShareStatus = "ACCEPTED"|"REJECTED"|"PENDING"|"REVOKED"|"EXPIRED"|"ASSOCIATING"|"ASSOCIATED"|"FAILED"|string;
   export type SharedWith = string;
   export type SharedWithPrefix = string;
@@ -1898,7 +2368,21 @@ declare namespace WellArchitected {
   export interface TagResourceOutput {
   }
   export type TagValue = string;
+  export type TemplateArn = string;
+  export type TemplateDescription = string;
+  export type TemplateName = string;
+  export type TemplateNamePrefix = string;
   export type TemplateQuestions = ProfileTemplateQuestion[];
+  export type TemplateShareSummaries = TemplateShareSummary[];
+  export interface TemplateShareSummary {
+    ShareId?: ShareId;
+    SharedWith?: SharedWith;
+    Status?: ShareStatus;
+    /**
+     * Review template share invitation status message. 
+     */
+    StatusMessage?: StatusMessage;
+  }
   export type Timestamp = Date;
   export type TrustedAdvisorIntegrationStatus = "ENABLED"|"DISABLED"|string;
   export interface UntagResourceInput {
@@ -1975,6 +2459,84 @@ declare namespace WellArchitected {
      */
     Profile?: Profile;
   }
+  export interface UpdateReviewTemplateAnswerInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+    LensAlias: LensAlias;
+    QuestionId: QuestionId;
+    SelectedChoices?: SelectedChoices;
+    /**
+     * A list of choices to be updated.
+     */
+    ChoiceUpdates?: ChoiceUpdates;
+    Notes?: Notes;
+    IsApplicable?: IsApplicable;
+    /**
+     * The update reason.
+     */
+    Reason?: AnswerReason;
+  }
+  export interface UpdateReviewTemplateAnswerOutput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+    LensAlias?: LensAlias;
+    /**
+     * An answer of the question.
+     */
+    Answer?: ReviewTemplateAnswer;
+  }
+  export interface UpdateReviewTemplateInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+    /**
+     * The review template name.
+     */
+    TemplateName?: TemplateName;
+    /**
+     * The review template description.
+     */
+    Description?: TemplateDescription;
+    Notes?: Notes;
+    /**
+     * A list of lens aliases or ARNs to apply to the review template.
+     */
+    LensesToAssociate?: ReviewTemplateLensAliases;
+    /**
+     * A list of lens aliases or ARNs to unapply to the review template. The wellarchitected lens cannot be unapplied.
+     */
+    LensesToDisassociate?: ReviewTemplateLensAliases;
+  }
+  export interface UpdateReviewTemplateLensReviewInput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn: TemplateArn;
+    LensAlias: LensAlias;
+    LensNotes?: Notes;
+    PillarNotes?: PillarNotes;
+  }
+  export interface UpdateReviewTemplateLensReviewOutput {
+    /**
+     * The review template ARN.
+     */
+    TemplateArn?: TemplateArn;
+    /**
+     * A lens review of a question.
+     */
+    LensReview?: ReviewTemplateLensReview;
+  }
+  export interface UpdateReviewTemplateOutput {
+    /**
+     * A review template.
+     */
+    ReviewTemplate?: ReviewTemplate;
+  }
   export interface UpdateShareInvitationInput {
     /**
      * The ID assigned to the share invitation.
@@ -2041,6 +2603,14 @@ declare namespace WellArchitected {
      */
     ProfileArn: ProfileArn;
     MilestoneName?: MilestoneName;
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface UpgradeReviewTemplateLensReviewInput {
+    /**
+     * The ARN of the review template.
+     */
+    TemplateArn: TemplateArn;
+    LensAlias: LensAlias;
     ClientRequestToken?: ClientRequestToken;
   }
   export type Urls = ChoiceContent[];
