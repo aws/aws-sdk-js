@@ -1342,5 +1342,8 @@
   "bedrockruntime": {
     "prefix": "bedrock-runtime",
     "name": "BedrockRuntime"
+  },
+  "datazone": {
+    "name": "DataZone"
   }
 }

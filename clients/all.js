@@ -357,5 +357,6 @@ module.exports = {
   Neptunedata: require('./neptunedata'),
   PcaConnectorAd: require('./pcaconnectorad'),
   Bedrock: require('./bedrock'),
-  BedrockRuntime: require('./bedrockruntime')
+  BedrockRuntime: require('./bedrockruntime'),
+  DataZone: require('./datazone')
 };

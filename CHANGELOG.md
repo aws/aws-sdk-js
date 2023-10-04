@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1469.0-->
+<!--LATEST=2.1470.0-->
 <!--ENTRYINSERT-->
+
+## 2.1470.0
+* feature: AppConfig: AWS AppConfig introduces KMS customer-managed key (CMK) encryption support for data saved to AppConfig's hosted configuration store.
+* feature: DataZone: Initial release of Amazon DataZone
+* feature: MediaTailor: Updates DescribeVodSource to include a list of ad break opportunities in the response
+* feature: Mgn: This release includes the following new APIs: ListConnectors, CreateConnector,  UpdateConnector, DeleteConnector and UpdateSourceServer to support the source action framework feature.
+* feature: SageMaker: Adding support for AdditionalS3DataSource, a data source used for training or inference that is in addition to the input dataset or model data.
 
 ## 2.1469.0
 * feature: Connect: GetMetricDataV2 API: Update to include new metrics CONTACTS_RESOLVED_IN_X , AVG_HOLD_TIME_ALL_CONTACTS , AVG_RESOLUTION_TIME , ABANDONMENT_RATE , AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS with added features: Interval Period, TimeZone, Negate MetricFilters, Extended date time range.

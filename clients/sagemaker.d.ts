@@ -2671,6 +2671,21 @@ declare namespace SageMaker {
     SupportedResponseMIMETypes?: ResponseMIMETypes;
   }
   export type AdditionalInferenceSpecifications = AdditionalInferenceSpecificationDefinition[];
+  export interface AdditionalS3DataSource {
+    /**
+     * The data type of the additional data source that you specify for use in inference or training. 
+     */
+    S3DataType: AdditionalS3DataSourceDataType;
+    /**
+     * The uniform resource identifier (URI) used to identify an additional data source used in inference or training.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The type of compression used for an additional data source used in inference or training. Specify None if your additional data source is not compressed.
+     */
+    CompressionType?: CompressionType;
+  }
+  export type AdditionalS3DataSourceDataType = "S3Object"|string;
   export interface AgentVersion {
     /**
      * Version of the agent.
@@ -17134,6 +17149,10 @@ declare namespace SageMaker {
      * The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model. You can find a list of benchmarked models by calling ListModelMetadata.
      */
     NearestModelName?: String;
+    /**
+     * The additional data source that is used during inference in the Docker container for your model package.
+     */
+    AdditionalS3DataSource?: AdditionalS3DataSource;
   }
   export type ModelPackageContainerDefinitionList = ModelPackageContainerDefinition[];
   export type ModelPackageFrameworkVersion = string;
@@ -20174,7 +20193,7 @@ declare namespace SageMaker {
   export type SelectedStepList = SelectedStep[];
   export interface SelectiveExecutionConfig {
     /**
-     * The ARN from a reference execution of the current pipeline. Used to copy input collaterals needed for the selected steps to run. The execution status of the pipeline can be either Failed or Success. This field is required if the steps you specify for SelectedSteps depend on output collaterals from any non-specified pipeline steps. For more information, see Selective Execution for Pipeline Steps.
+     * The ARN from a reference execution of the current pipeline. Used to copy input collaterals needed for the selected steps to run. The execution status of the pipeline can be either Failed or Success.
      */
     SourcePipelineExecutionArn?: PipelineExecutionArn;
     /**
@@ -21203,6 +21222,10 @@ declare namespace SageMaker {
      * A list of the metrics that the algorithm emits that can be used as the objective metric in a hyperparameter tuning job.
      */
     SupportedTuningJobObjectiveMetrics?: HyperParameterTuningJobObjectives;
+    /**
+     * The additional data source used during the training job.
+     */
+    AdditionalS3DataSource?: AdditionalS3DataSource;
   }
   export type TrainingTimeInSeconds = number;
   export interface TransformDataSource {

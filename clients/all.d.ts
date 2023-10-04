@@ -356,3 +356,4 @@ export import Neptunedata = require('./neptunedata');
 export import PcaConnectorAd = require('./pcaconnectorad');
 export import Bedrock = require('./bedrock');
 export import BedrockRuntime = require('./bedrockruntime');
+export import DataZone = require('./datazone');

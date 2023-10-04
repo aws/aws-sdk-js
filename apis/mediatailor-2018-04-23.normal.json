@@ -767,6 +767,26 @@
         "shape": "KeyValuePair"
       }
     },
+    "AdBreakOpportunities": {
+      "type": "list",
+      "member": {
+        "shape": "AdBreakOpportunity"
+      },
+      "documentation": "<p>The list of ad break opportunities detected within the VOD source.</p>"
+    },
+    "AdBreakOpportunity": {
+      "type": "structure",
+      "required": [
+        "OffsetMillis"
+      ],
+      "members": {
+        "OffsetMillis": {
+          "shape": "__long",
+          "documentation": "<p>The offset in milliseconds from the start of the VOD source at which an ad marker was detected.</p>"
+        }
+      },
+      "documentation": "<p>A location at which a zero-duration ad marker was detected in a VOD source manifest.</p>"
+    },
     "AdMarkerPassthrough": {
       "type": "structure",
       "members": {
@@ -2016,6 +2036,10 @@
     "DescribeVodSourceResponse": {
       "type": "structure",
       "members": {
+        "AdBreakOpportunities": {
+          "shape": "AdBreakOpportunities",
+          "documentation": "<p>The ad break opportunities within the VOD source.</p>"
+        },
         "Arn": {
           "shape": "__string",
           "documentation": "<p>The ARN of the VOD source.</p>"

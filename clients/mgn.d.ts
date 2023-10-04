@@ -60,6 +60,14 @@ declare class Mgn extends Service {
    */
   createApplication(callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
   /**
+   * Create Connector.
+   */
+  createConnector(params: Mgn.Types.CreateConnectorRequest, callback?: (err: AWSError, data: Mgn.Types.Connector) => void): Request<Mgn.Types.Connector, AWSError>;
+  /**
+   * Create Connector.
+   */
+  createConnector(callback?: (err: AWSError, data: Mgn.Types.Connector) => void): Request<Mgn.Types.Connector, AWSError>;
+  /**
    * Creates a new Launch Configuration Template.
    */
   createLaunchConfigurationTemplate(params: Mgn.Types.CreateLaunchConfigurationTemplateRequest, callback?: (err: AWSError, data: Mgn.Types.LaunchConfigurationTemplate) => void): Request<Mgn.Types.LaunchConfigurationTemplate, AWSError>;
@@ -91,6 +99,14 @@ declare class Mgn extends Service {
    * Delete application.
    */
   deleteApplication(callback?: (err: AWSError, data: Mgn.Types.DeleteApplicationResponse) => void): Request<Mgn.Types.DeleteApplicationResponse, AWSError>;
+  /**
+   * Delete Connector.
+   */
+  deleteConnector(params: Mgn.Types.DeleteConnectorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete Connector.
+   */
+  deleteConnector(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a single Job by ID.
    */
@@ -251,6 +267,14 @@ declare class Mgn extends Service {
    * Retrieves all applications or multiple applications by ID.
    */
   listApplications(callback?: (err: AWSError, data: Mgn.Types.ListApplicationsResponse) => void): Request<Mgn.Types.ListApplicationsResponse, AWSError>;
+  /**
+   * List Connectors.
+   */
+  listConnectors(params: Mgn.Types.ListConnectorsRequest, callback?: (err: AWSError, data: Mgn.Types.ListConnectorsResponse) => void): Request<Mgn.Types.ListConnectorsResponse, AWSError>;
+  /**
+   * List Connectors.
+   */
+  listConnectors(callback?: (err: AWSError, data: Mgn.Types.ListConnectorsResponse) => void): Request<Mgn.Types.ListConnectorsResponse, AWSError>;
   /**
    * List export errors.
    */
@@ -484,6 +508,14 @@ declare class Mgn extends Service {
    */
   updateApplication(callback?: (err: AWSError, data: Mgn.Types.Application) => void): Request<Mgn.Types.Application, AWSError>;
   /**
+   * Update Connector.
+   */
+  updateConnector(params: Mgn.Types.UpdateConnectorRequest, callback?: (err: AWSError, data: Mgn.Types.Connector) => void): Request<Mgn.Types.Connector, AWSError>;
+  /**
+   * Update Connector.
+   */
+  updateConnector(callback?: (err: AWSError, data: Mgn.Types.Connector) => void): Request<Mgn.Types.Connector, AWSError>;
+  /**
    * Updates multiple LaunchConfigurations by Source Server ID.
    */
   updateLaunchConfiguration(params: Mgn.Types.UpdateLaunchConfigurationRequest, callback?: (err: AWSError, data: Mgn.Types.LaunchConfiguration) => void): Request<Mgn.Types.LaunchConfiguration, AWSError>;
@@ -515,6 +547,14 @@ declare class Mgn extends Service {
    * Updates multiple ReplicationConfigurationTemplates by ID.
    */
   updateReplicationConfigurationTemplate(callback?: (err: AWSError, data: Mgn.Types.ReplicationConfigurationTemplate) => void): Request<Mgn.Types.ReplicationConfigurationTemplate, AWSError>;
+  /**
+   * Update Source Server.
+   */
+  updateSourceServer(params: Mgn.Types.UpdateSourceServerRequest, callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
+  /**
+   * Update Source Server.
+   */
+  updateSourceServer(callback?: (err: AWSError, data: Mgn.Types.SourceServer) => void): Request<Mgn.Types.SourceServer, AWSError>;
   /**
    * Allows you to change between the AGENT_BASED replication type and the SNAPSHOT_SHIPPING replication type.
    */
@@ -698,6 +738,55 @@ declare namespace Mgn {
   export type ChangeServerLifeCycleStateSourceServerLifecycleState = "READY_FOR_TEST"|"READY_FOR_CUTOVER"|"CUTOVER"|string;
   export type ClientIdempotencyToken = string;
   export type CloudWatchLogGroupName = string;
+  export interface Connector {
+    /**
+     * Connector arn.
+     */
+    arn?: ARN;
+    /**
+     * Connector ID.
+     */
+    connectorID?: ConnectorID;
+    /**
+     * Connector name.
+     */
+    name?: ConnectorName;
+    /**
+     * Connector SSM command config.
+     */
+    ssmCommandConfig?: ConnectorSsmCommandConfig;
+    /**
+     * Connector SSM instance ID.
+     */
+    ssmInstanceID?: SsmInstanceID;
+    /**
+     * Connector tags.
+     */
+    tags?: TagsMap;
+  }
+  export type ConnectorArn = string;
+  export type ConnectorID = string;
+  export type ConnectorIDsFilter = ConnectorID[];
+  export type ConnectorName = string;
+  export interface ConnectorSsmCommandConfig {
+    /**
+     * Connector SSM command config CloudWatch log group name.
+     */
+    cloudWatchLogGroupName?: CloudWatchLogGroupName;
+    /**
+     * Connector SSM command config CloudWatch output enabled.
+     */
+    cloudWatchOutputEnabled: Boolean;
+    /**
+     * Connector SSM command config output S3 bucket name.
+     */
+    outputS3BucketName?: S3BucketName;
+    /**
+     * Connector SSM command config S3 output enabled.
+     */
+    s3OutputEnabled: Boolean;
+  }
+  export type ConnectorsList = Connector[];
   export type Cpus = CPU[];
   export interface CreateApplicationRequest {
     /**
@@ -714,6 +803,24 @@ declare namespace Mgn {
     name: ApplicationName;
     /**
      * Application tags.
+     */
+    tags?: TagsMap;
+  }
+  export interface CreateConnectorRequest {
+    /**
+     * Create Connector request name.
+     */
+    name: ConnectorName;
+    /**
+     * Create Connector request SSM command config.
+     */
+    ssmCommandConfig?: ConnectorSsmCommandConfig;
+    /**
+     * Create Connector request SSM instance ID.
+     */
+    ssmInstanceID: SsmInstanceID;
+    /**
+     * Create Connector request tags.
      */
     tags?: TagsMap;
   }
@@ -951,6 +1058,12 @@ declare namespace Mgn {
     applicationID: ApplicationID;
   }
   export interface DeleteApplicationResponse {
+  }
+  export interface DeleteConnectorRequest {
+    /**
+     * Delete Connector request connector ID.
+     */
+    connectorID: ConnectorID;
   }
   export interface DeleteJobRequest {
     /**
@@ -1917,6 +2030,36 @@ declare namespace Mgn {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListConnectorsRequest {
+    /**
+     * List Connectors Request filters.
+     */
+    filters?: ListConnectorsRequestFilters;
+    /**
+     * List Connectors Request max results.
+     */
+    maxResults?: MaxResultsType;
+    /**
+     * List Connectors Request next token.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListConnectorsRequestFilters {
+    /**
+     * List Connectors Request Filters connector IDs.
+     */
+    connectorIDs?: ConnectorIDsFilter;
+  }
+  export interface ListConnectorsResponse {
+    /**
+     * List connectors response items.
+     */
+    items?: ConnectorsList;
+    /**
+     * List connectors response next token.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListExportErrorsRequest {
     /**
      * List export errors request export id.
@@ -2606,6 +2749,7 @@ declare namespace Mgn {
   }
   export type S3Key = string;
   export type S3LogBucketName = string;
+  export type SecretArn = string;
   export type SecurityGroupID = string;
   export type SmallBoundedString = string;
   export interface SourceProperties {
@@ -2651,6 +2795,10 @@ declare namespace Mgn {
      * Source server ARN.
      */
     arn?: ARN;
+    /**
+     * Source Server connector action.
+     */
+    connectorAction?: SourceServerConnectorAction;
     /**
      * Source server data replication info.
      */
@@ -2753,6 +2901,16 @@ declare namespace Mgn {
      */
     actionIDs?: ActionIDs;
   }
+  export interface SourceServerConnectorAction {
+    /**
+     * Source Server connector action connector arn.
+     */
+    connectorArn?: ConnectorArn;
+    /**
+     * Source Server connector action credentials secret arn.
+     */
+    credentialsSecretArn?: SecretArn;
+  }
   export type SourceServerID = string;
   export type SourceServersList = SourceServer[];
   export interface SsmDocument {
@@ -2793,6 +2951,7 @@ declare namespace Mgn {
      */
     dynamicPath?: JmesPathString;
   }
+  export type SsmInstanceID = string;
   export interface SsmParameterStoreParameter {
     /**
      * AWS Systems Manager Parameter Store parameter name.
@@ -3052,6 +3211,20 @@ declare namespace Mgn {
      */
     name?: ApplicationName;
   }
+  export interface UpdateConnectorRequest {
+    /**
+     * Update Connector request connector ID.
+     */
+    connectorID: ConnectorID;
+    /**
+     * Update Connector request name.
+     */
+    name?: ConnectorName;
+    /**
+     * Update Connector request SSM command config.
+     */
+    ssmCommandConfig?: ConnectorSsmCommandConfig;
+  }
   export interface UpdateLaunchConfigurationRequest {
     /**
      * Update Launch configuration Account ID.
@@ -3297,6 +3470,20 @@ declare namespace Mgn {
     replicationType: ReplicationType;
     /**
      * ID of source server on which to update replication type.
+     */
+    sourceServerID: SourceServerID;
+  }
+  export interface UpdateSourceServerRequest {
+    /**
+     * Update Source Server request account ID.
+     */
+    accountID?: AccountID;
+    /**
+     * Update Source Server request connector action.
+     */
+    connectorAction?: SourceServerConnectorAction;
+    /**
+     * Update Source Server request source server ID.
      */
     sourceServerID: SourceServerID;
   }

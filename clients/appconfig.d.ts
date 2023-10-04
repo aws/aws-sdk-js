@@ -503,6 +503,14 @@ declare namespace AppConfig {
      * The type of configurations contained in the profile. AppConfig supports feature flags and freeform configurations. We recommend you create feature flag configurations to enable or disable new features and freeform configurations to distribute configurations to an application. When calling this API, enter one of the following values for Type:  AWS.AppConfig.FeatureFlags   AWS.Freeform 
      */
     Type?: ConfigurationProfileType;
+    /**
+     * The Amazon Resource Name of the Key Management Service key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. To encrypt data managed in other configuration stores, see the documentation for how to specify an KMS key for that particular service.
+     */
+    KmsKeyArn?: Arn;
+    /**
+     * The Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.
+     */
+    KmsKeyIdentifier?: KmsKeyIdentifier;
   }
   export interface ConfigurationProfileSummary {
     /**
@@ -589,6 +597,10 @@ declare namespace AppConfig {
      * The type of configurations contained in the profile. AppConfig supports feature flags and freeform configurations. We recommend you create feature flag configurations to enable or disable new features and freeform configurations to distribute configurations to an application. When calling this API, enter one of the following values for Type:  AWS.AppConfig.FeatureFlags   AWS.Freeform 
      */
     Type?: ConfigurationProfileType;
+    /**
+     * The identifier for an Key Management Service key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. The identifier can be an KMS key ID, alias, or the Amazon Resource Name (ARN) of the key ID or alias. To encrypt data managed in other configuration stores, see the documentation for how to specify an KMS key for that particular service.
+     */
+    KmsKeyIdentifier?: KmsKeyIdentifier;
   }
   export interface CreateDeploymentStrategyRequest {
     /**
@@ -672,7 +684,7 @@ declare namespace AppConfig {
     /**
      * A name for the extension. Each extension name in your account must be unique. Extension versions use the same name.
      */
-    Name: Name;
+    Name: ExtensionOrParameterName;
     /**
      * Information about the extension.
      */
@@ -868,9 +880,9 @@ declare namespace AppConfig {
      */
     KmsKeyArn?: Arn;
     /**
-     * The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this ID to encrypt the configuration data using a customer managed key. 
+     * The Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.
      */
-    KmsKeyIdentifier?: Identifier;
+    KmsKeyIdentifier?: KmsKeyIdentifier;
     /**
      * A user-defined label for an AppConfig hosted configuration version.
      */
@@ -1128,6 +1140,7 @@ declare namespace AppConfig {
      */
     NextToken?: NextToken;
   }
+  export type ExtensionOrParameterName = string;
   export type ExtensionSummaries = ExtensionSummary[];
   export interface ExtensionSummary {
     /**
@@ -1290,6 +1303,10 @@ declare namespace AppConfig {
      * A user-defined label for an AppConfig hosted configuration version.
      */
     VersionLabel?: VersionLabel;
+    /**
+     * The Amazon Resource Name of the Key Management Service key that was used to encrypt this specific version of the configuration data in the AppConfig hosted configuration store.
+     */
+    KmsKeyArn?: Arn;
   }
   export interface HostedConfigurationVersionSummary {
     /**
@@ -1316,6 +1333,10 @@ declare namespace AppConfig {
      * A user-defined label for an AppConfig hosted configuration version.
      */
     VersionLabel?: VersionLabel;
+    /**
+     * The Amazon Resource Name of the Key Management Service key that was used to encrypt this specific version of the configuration data in the AppConfig hosted configuration store.
+     */
+    KmsKeyArn?: Arn;
   }
   export type HostedConfigurationVersionSummaryList = HostedConfigurationVersionSummary[];
   export interface HostedConfigurationVersions {
@@ -1332,6 +1353,8 @@ declare namespace AppConfig {
   export type Identifier = string;
   export type Integer = number;
   export type Iso8601DateTime = Date;
+  export type KmsKeyIdentifier = string;
+  export type KmsKeyIdentifierOrEmpty = string;
   export interface ListApplicationsRequest {
     /**
      * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
@@ -1536,7 +1559,7 @@ declare namespace AppConfig {
     /**
      * The KMS key identifier (key ID, key alias, or key ARN). AppConfig uses this ID to encrypt the configuration data using a customer managed key. 
      */
-    KmsKeyIdentifier?: Identifier;
+    KmsKeyIdentifier?: KmsKeyIdentifier;
   }
   export interface StopDeploymentRequest {
     /**
@@ -1621,6 +1644,10 @@ declare namespace AppConfig {
      * A list of methods for validating the configuration.
      */
     Validators?: ValidatorList;
+    /**
+     * The identifier for a Key Management Service key to encrypt new configuration data versions in the AppConfig hosted configuration store. This attribute is only used for hosted configuration types. The identifier can be an KMS key ID, alias, or the Amazon Resource Name (ARN) of the key ID or alias. To encrypt data managed in other configuration stores, see the documentation for how to specify an KMS key for that particular service.
+     */
+    KmsKeyIdentifier?: KmsKeyIdentifierOrEmpty;
   }
   export interface UpdateDeploymentStrategyRequest {
     /**

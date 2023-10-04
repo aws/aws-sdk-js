@@ -403,6 +403,13 @@ declare namespace MediaTailor {
     TimeSignalMessage?: TimeSignalMessage;
   }
   export type AdBreakMetadataList = KeyValuePair[];
+  export type AdBreakOpportunities = AdBreakOpportunity[];
+  export interface AdBreakOpportunity {
+    /**
+     * The offset in milliseconds from the start of the VOD source at which an ad marker was detected.
+     */
+    OffsetMillis: __long;
+  }
   export interface AdMarkerPassthrough {
     /**
      * Enables ad marker passthrough for your configuration.
@@ -1259,6 +1266,10 @@ declare namespace MediaTailor {
     VodSourceName: __string;
   }
   export interface DescribeVodSourceResponse {
+    /**
+     * The ad break opportunities within the VOD source.
+     */
+    AdBreakOpportunities?: AdBreakOpportunities;
     /**
      * The ARN of the VOD source.
      */
