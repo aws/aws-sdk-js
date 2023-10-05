@@ -3115,6 +3115,177 @@ declare namespace SecurityHub {
      */
     AllowHeaders?: NonEmptyStringList;
   }
+  export interface AwsDmsEndpointDetails {
+    /**
+     *  The Amazon Resource Name (ARN) for the SSL certificate that encrypts connections between the DMS endpoint and the replication instance. 
+     */
+    CertificateArn?: NonEmptyString;
+    /**
+     *  The name of the endpoint database.
+     */
+    DatabaseName?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of the endpoint. 
+     */
+    EndpointArn?: NonEmptyString;
+    /**
+     *  The database endpoint identifier. 
+     */
+    EndpointIdentifier?: NonEmptyString;
+    /**
+     *  The type of endpoint. Valid values are source and target. 
+     */
+    EndpointType?: NonEmptyString;
+    /**
+     *  The type of engine for the endpoint, depending on the EndpointType value. 
+     */
+    EngineName?: NonEmptyString;
+    /**
+     *  A value that can be used for cross-account validation. 
+     */
+    ExternalId?: NonEmptyString;
+    /**
+     *  Additional attributes associated with the connection. 
+     */
+    ExtraConnectionAttributes?: NonEmptyString;
+    /**
+     *  An DMS key identifier that is used to encrypt the connection parameters for the endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     *  The port used to access the endpoint. 
+     */
+    Port?: Integer;
+    /**
+     *  The name of the server where the endpoint database resides.
+     */
+    ServerName?: NonEmptyString;
+    /**
+     *  The SSL mode used to connect to the endpoint. The default is none.
+     */
+    SslMode?: NonEmptyString;
+    /**
+     *  The user name to be used to log in to the endpoint database. 
+     */
+    Username?: NonEmptyString;
+  }
+  export interface AwsDmsReplicationInstanceDetails {
+    /**
+     *  The amount of storage (in gigabytes) that is allocated for the replication instance. 
+     */
+    AllocatedStorage?: Integer;
+    /**
+     *  Indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window. 
+     */
+    AutoMinorVersionUpgrade?: Boolean;
+    /**
+     *  The Availability Zone that the replication instance is created in. The default value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, such as us-east-1d.
+     */
+    AvailabilityZone?: NonEmptyString;
+    /**
+     *  The engine version number of the replication instance. If an engine version number is not specified when a replication instance is created, the default is the latest engine version available. 
+     */
+    EngineVersion?: NonEmptyString;
+    /**
+     *  An KMS key identifier that is used to encrypt the data on the replication instance. If you don't specify a value for the KmsKeyId parameter, DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     *  Specifies whether the replication instance is deployed across multiple Availability Zones (AZs). You can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true.
+     */
+    MultiAZ?: Boolean;
+    /**
+     *  The maintenance window times for the replication instance. Upgrades to the replication instance are performed during this time.
+     */
+    PreferredMaintenanceWindow?: NonEmptyString;
+    /**
+     *  Specifies the accessibility options for the replication instance. A value of true represents an instance with a public IP address. A value of false represents an instance with a private IP address. The default value is true.
+     */
+    PubliclyAccessible?: Boolean;
+    /**
+     *  The compute and memory capacity of the replication instance as defined for the specified replication instance class. 
+     */
+    ReplicationInstanceClass?: NonEmptyString;
+    /**
+     *  The replication instance identifier.
+     */
+    ReplicationInstanceIdentifier?: NonEmptyString;
+    /**
+     *  The subnet group for the replication instance.
+     */
+    ReplicationSubnetGroup?: AwsDmsReplicationInstanceReplicationSubnetGroupDetails;
+    /**
+     *  The virtual private cloud (VPC) security group for the replication instance.
+     */
+    VpcSecurityGroups?: AwsDmsReplicationInstanceVpcSecurityGroupsList;
+  }
+  export interface AwsDmsReplicationInstanceReplicationSubnetGroupDetails {
+    /**
+     *  The identifier of the replication subnet group. 
+     */
+    ReplicationSubnetGroupIdentifier?: NonEmptyString;
+  }
+  export interface AwsDmsReplicationInstanceVpcSecurityGroupsDetails {
+    /**
+     *  The identifier of the VPC security group that’s associated with the replication instance. 
+     */
+    VpcSecurityGroupId?: NonEmptyString;
+  }
+  export type AwsDmsReplicationInstanceVpcSecurityGroupsList = AwsDmsReplicationInstanceVpcSecurityGroupsDetails[];
+  export interface AwsDmsReplicationTaskDetails {
+    /**
+     *  Indicates when you want a change data capture (CDC) operation to start. CCdcStartPosition or CCdcStartTime specifies when you want a CDC operation to start. Only a value for one of these fields is included.
+     */
+    CdcStartPosition?: NonEmptyString;
+    /**
+     *  Indicates the start time for a CDC operation. CdcStartPosition or CCdcStartTime specifies when you want a CDC operation to start. Only a value for one of these fields is included.
+     */
+    CdcStartTime?: NonEmptyString;
+    /**
+     *  Indicates when you want a CDC operation to stop. The value can be either server time or commit time.
+     */
+    CdcStopPosition?: NonEmptyString;
+    /**
+     *  The migration type. 
+     */
+    MigrationType?: NonEmptyString;
+    /**
+     *  The identifier of the replication task.
+     */
+    Id?: NonEmptyString;
+    /**
+     *  A display name for the resource identifier at the end of the EndpointArn response parameter. If you don't specify a ResourceIdentifier value, DMS generates a default identifier value for the end of EndpointArn.
+     */
+    ResourceIdentifier?: NonEmptyString;
+    /**
+     *  The Amazon Resource Name (ARN) of a replication instance. 
+     */
+    ReplicationInstanceArn?: NonEmptyString;
+    /**
+     *  The user-defined replication task identifier or name.
+     */
+    ReplicationTaskIdentifier?: NonEmptyString;
+    /**
+     *  The settings for the replication task.
+     */
+    ReplicationTaskSettings?: NonEmptyString;
+    /**
+     *  The ARN of the source endpoint.
+     */
+    SourceEndpointArn?: NonEmptyString;
+    /**
+     *  The table mappings for the replication task, in JSON format.
+     */
+    TableMappings?: NonEmptyString;
+    /**
+     *  The ARN of the target endpoint.
+     */
+    TargetEndpointArn?: NonEmptyString;
+    /**
+     *  Supplemental information that the task requires to migrate the data for certain source and target endpoints.
+     */
+    TaskData?: NonEmptyString;
+  }
   export interface AwsDynamoDbTableAttributeDefinition {
     /**
      * The name of the attribute.
@@ -5864,6 +6035,10 @@ declare namespace SecurityHub {
      * The data volume definitions for the task.
      */
     Volumes?: AwsEcsTaskDefinitionVolumesList;
+    /**
+     *  The status of the task definition. 
+     */
+    Status?: NonEmptyString;
   }
   export interface AwsEcsTaskDefinitionInferenceAcceleratorsDetails {
     /**
@@ -6807,6 +6982,107 @@ declare namespace SecurityHub {
      */
     RegistryName?: NonEmptyString;
   }
+  export interface AwsEventsEndpointDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the endpoint. 
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  A description of the endpoint. 
+     */
+    Description?: NonEmptyString;
+    /**
+     *  The URL subdomain of the endpoint. For example, if EndpointUrl is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
+     */
+    EndpointId?: NonEmptyString;
+    /**
+     *  The URL of the endpoint.
+     */
+    EndpointUrl?: NonEmptyString;
+    /**
+     *  The event buses being used by the endpoint.
+     */
+    EventBuses?: AwsEventsEndpointEventBusesList;
+    /**
+     *  The name of the endpoint.
+     */
+    Name?: NonEmptyString;
+    /**
+     *  Whether event replication was enabled or disabled for this endpoint. The default state is ENABLED, which means you must supply a RoleArn. If you don't have a RoleArn or you don't want event replication enabled, set the state to DISABLED.
+     */
+    ReplicationConfig?: AwsEventsEndpointReplicationConfigDetails;
+    /**
+     *  The ARN of the role used by event replication for the endpoint.
+     */
+    RoleArn?: NonEmptyString;
+    /**
+     *  The routing configuration of the endpoint.
+     */
+    RoutingConfig?: AwsEventsEndpointRoutingConfigDetails;
+    /**
+     *  The current state of the endpoint.
+     */
+    State?: NonEmptyString;
+    /**
+     *  The reason the endpoint is in its current state.
+     */
+    StateReason?: NonEmptyString;
+  }
+  export interface AwsEventsEndpointEventBusesDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the event bus that the endpoint is associated with.
+     */
+    EventBusArn?: NonEmptyString;
+  }
+  export type AwsEventsEndpointEventBusesList = AwsEventsEndpointEventBusesDetails[];
+  export interface AwsEventsEndpointReplicationConfigDetails {
+    /**
+     *  The state of event replication.
+     */
+    State?: NonEmptyString;
+  }
+  export interface AwsEventsEndpointRoutingConfigDetails {
+    /**
+     *  The failover configuration for an endpoint. This includes what triggers failover and what happens when it's triggered.
+     */
+    FailoverConfig?: AwsEventsEndpointRoutingConfigFailoverConfigDetails;
+  }
+  export interface AwsEventsEndpointRoutingConfigFailoverConfigDetails {
+    /**
+     *  The main Region of the endpoint.
+     */
+    Primary?: AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails;
+    /**
+     *  The Region that events are routed to when failover is triggered or event replication is enabled.
+     */
+    Secondary?: AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails;
+  }
+  export interface AwsEventsEndpointRoutingConfigFailoverConfigPrimaryDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the health check used by the endpoint to determine whether failover is triggered.
+     */
+    HealthCheck?: NonEmptyString;
+  }
+  export interface AwsEventsEndpointRoutingConfigFailoverConfigSecondaryDetails {
+    /**
+     *  Defines the secondary Region.
+     */
+    Route?: NonEmptyString;
+  }
+  export interface AwsEventsEventbusDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the account permitted to write events to the current account.
+     */
+    Arn?: NonEmptyString;
+    /**
+     *  The name of the event bus.
+     */
+    Name?: NonEmptyString;
+    /**
+     *  The policy that enables the external account to send events to your account.
+     */
+    Policy?: NonEmptyString;
+  }
   export interface AwsGuardDutyDetectorDataSourcesCloudTrailDetails {
     /**
      *  Specifies whether CloudTrail is activated as a data source for the detector. 
@@ -7515,6 +7791,112 @@ declare namespace SecurityHub {
     ContainerPath?: NonEmptyString;
   }
   export type AwsMountPointList = AwsMountPoint[];
+  export interface AwsMskClusterClusterInfoClientAuthenticationDetails {
+    /**
+     *  Provides details for client authentication using SASL.
+     */
+    Sasl?: AwsMskClusterClusterInfoClientAuthenticationSaslDetails;
+    /**
+     *  Provides details for allowing no client authentication.
+     */
+    Unauthenticated?: AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails;
+    /**
+     *  Provides details for client authentication using TLS.
+     */
+    Tls?: AwsMskClusterClusterInfoClientAuthenticationTlsDetails;
+  }
+  export interface AwsMskClusterClusterInfoClientAuthenticationSaslDetails {
+    /**
+     *  Provides details for SASL client authentication using IAM. 
+     */
+    Iam?: AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails;
+    /**
+     *  Details for SASL client authentication using SCRAM.
+     */
+    Scram?: AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails;
+  }
+  export interface AwsMskClusterClusterInfoClientAuthenticationSaslIamDetails {
+    /**
+     *  Indicates whether SASL/IAM authentication is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsMskClusterClusterInfoClientAuthenticationSaslScramDetails {
+    /**
+     *  Indicates whether SASL/SCRAM authentication is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsMskClusterClusterInfoClientAuthenticationTlsDetails {
+    /**
+     *  List of Amazon Web Services Private CA Amazon Resource Names (ARNs). Amazon Web Services Private CA enables creation of private certificate authority (CA) hierarchies, including root and subordinate CAs, without the investment and maintenance costs of operating an on-premises CA.
+     */
+    CertificateAuthorityArnList?: StringList;
+    /**
+     *  Indicates whether TLS authentication is enabled or not.
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsMskClusterClusterInfoClientAuthenticationUnauthenticatedDetails {
+    /**
+     *  Indicates whether unauthenticated is allowed or not.
+     */
+    Enabled?: Boolean;
+  }
+  export interface AwsMskClusterClusterInfoDetails {
+    /**
+     *  Includes encryption-related information, such as the KMS key used for encrypting data at rest and whether you want Amazon MSK to encrypt your data in transit.
+     */
+    EncryptionInfo?: AwsMskClusterClusterInfoEncryptionInfoDetails;
+    /**
+     *  The current version of the MSK cluster.
+     */
+    CurrentVersion?: NonEmptyString;
+    /**
+     *  The number of broker nodes in the cluster.
+     */
+    NumberOfBrokerNodes?: Integer;
+    /**
+     *  The name of the cluster.
+     */
+    ClusterName?: NonEmptyString;
+    /**
+     *  Provides information for different modes of client authentication.
+     */
+    ClientAuthentication?: AwsMskClusterClusterInfoClientAuthenticationDetails;
+  }
+  export interface AwsMskClusterClusterInfoEncryptionInfoDetails {
+    /**
+     *  The settings for encrypting data in transit.
+     */
+    EncryptionInTransit?: AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails;
+    /**
+     *  The data-volume encryption details. You can't update encryption at rest settings for existing clusters.
+     */
+    EncryptionAtRest?: AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails;
+  }
+  export interface AwsMskClusterClusterInfoEncryptionInfoEncryptionAtRestDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the KMS key for encrypting data at rest. If you don't specify a KMS key, MSK creates one for you and uses it.
+     */
+    DataVolumeKMSKeyId?: NonEmptyString;
+  }
+  export interface AwsMskClusterClusterInfoEncryptionInfoEncryptionInTransitDetails {
+    /**
+     *  When set to true, it indicates that data communication among the broker nodes of the cluster is encrypted. When set to false, the communication happens in plain text. The default value is true.
+     */
+    InCluster?: Boolean;
+    /**
+     *  Indicates the encryption setting for data in transit between clients and brokers.
+     */
+    ClientBroker?: NonEmptyString;
+  }
+  export interface AwsMskClusterDetails {
+    /**
+     *  Provides information about a cluster.
+     */
+    ClusterInfo?: AwsMskClusterClusterInfoDetails;
+  }
   export interface AwsNetworkFirewallFirewallDetails {
     /**
      * Whether the firewall is protected from deletion. If set to true, then the firewall cannot be deleted.
@@ -8020,6 +8402,10 @@ declare namespace SecurityHub {
      * Whether the mapping of IAM accounts to database accounts is enabled.
      */
     IamDatabaseAuthenticationEnabled?: Boolean;
+    /**
+     *  Indicates if minor version upgrades are automatically applied to the cluster.
+     */
+    AutoMinorVersionUpgrade?: Boolean;
   }
   export interface AwsRdsDbClusterMember {
     /**
@@ -9240,6 +9626,62 @@ declare namespace SecurityHub {
     VpcSecurityGroupId?: NonEmptyString;
   }
   export type AwsRedshiftClusterVpcSecurityGroups = AwsRedshiftClusterVpcSecurityGroup[];
+  export interface AwsRoute53HostedZoneConfigDetails {
+    /**
+     *  Any comments that you include about the hosted zone. 
+     */
+    Comment?: NonEmptyString;
+  }
+  export interface AwsRoute53HostedZoneDetails {
+    /**
+     *  An object that contains information about the specified hosted zone.
+     */
+    HostedZone?: AwsRoute53HostedZoneObjectDetails;
+    /**
+     *  An object that contains information about the Amazon Virtual Private Clouds (Amazon VPCs) that are associated with the specified hosted zone.
+     */
+    Vpcs?: AwsRoute53HostedZoneVpcsList;
+    /**
+     *  An object that contains a list of the authoritative name servers for a hosted zone or for a reusable delegation set.
+     */
+    NameServers?: AwsRoute53HostedZoneNameServersList;
+    /**
+     *  An array that contains one QueryLoggingConfig element for each DNS query logging configuration that is associated with the current Amazon Web Services account.
+     */
+    QueryLoggingConfig?: AwsRoute53QueryLoggingConfigDetails;
+  }
+  export type AwsRoute53HostedZoneNameServersList = NonEmptyString[];
+  export interface AwsRoute53HostedZoneObjectDetails {
+    /**
+     *  The ID that Route 53 assigns to the hosted zone when you create it. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The name of the domain. For public hosted zones, this is the name that you have registered with your DNS registrar.
+     */
+    Name?: NonEmptyString;
+    /**
+     *  An object that includes the Comment element.
+     */
+    Config?: AwsRoute53HostedZoneConfigDetails;
+  }
+  export interface AwsRoute53HostedZoneVpcDetails {
+    /**
+     *  The identifier of an Amazon VPC. 
+     */
+    Id?: NonEmptyString;
+    /**
+     *  The Amazon Web Services Region that an Amazon VPC was created in.
+     */
+    Region?: NonEmptyString;
+  }
+  export type AwsRoute53HostedZoneVpcsList = AwsRoute53HostedZoneVpcDetails[];
+  export interface AwsRoute53QueryLoggingConfigDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group that Route 53 is publishing logs to.
+     */
+    CloudWatchLogsLogGroupArn?: CloudWatchLogsLogGroupArnConfigDetails;
+  }
   export interface AwsS3AccountPublicAccessBlockDetails {
     /**
      * Indicates whether to reject calls to update an S3 bucket if the calls include a public access control list (ACL).
@@ -11448,6 +11890,20 @@ declare namespace SecurityHub {
      */
     Reason?: NonEmptyString;
   }
+  export interface CloudWatchLogsLogGroupArnConfigDetails {
+    /**
+     *  The ARN of the CloudWatch Logs log group that Route 53 is publishing logs to.
+     */
+    CloudWatchLogsLogGroupArn?: NonEmptyString;
+    /**
+     *  The ID of the hosted zone that CloudWatch Logs is logging queries for. 
+     */
+    HostedZoneId?: NonEmptyString;
+    /**
+     *  The ID for a DNS query logging configuration. 
+     */
+    Id?: NonEmptyString;
+  }
   export interface CodeVulnerabilitiesFilePath {
     /**
      *  The line number of the last line of code in which the vulnerability is located. 
@@ -13610,6 +14066,34 @@ declare namespace SecurityHub {
      *  Provides information about an Amazon Athena workgroup. A workgroup helps you separate users, teams, applications, or workloads. It also helps you set limits on data processing and track costs. 
      */
     AwsAthenaWorkGroup?: AwsAthenaWorkGroupDetails;
+    /**
+     *  Provides details about Amazon EventBridge event bus for an endpoint. An event bus is a router that receives events and delivers them to zero or more destinations, or targets.
+     */
+    AwsEventsEventbus?: AwsEventsEventbusDetails;
+    /**
+     *  Provides details about an Database Migration Service (DMS) endpoint. An endpoint provides connection, data store type, and location information about your data store.
+     */
+    AwsDmsEndpoint?: AwsDmsEndpointDetails;
+    /**
+     *  Provides details about an Amazon EventBridge global endpoint. The endpoint can improve your application’s availability by making it Regional-fault tolerant.
+     */
+    AwsEventsEndpoint?: AwsEventsEndpointDetails;
+    /**
+     *  Provides details about an DMS replication task. A replication task moves a set of data from the source endpoint to the target endpoint.
+     */
+    AwsDmsReplicationTask?: AwsDmsReplicationTaskDetails;
+    /**
+     *  Provides details about an DMS replication instance. DMS uses a replication instance to connect to your source data store, read the source data, and format the data for consumption by the target data store.
+     */
+    AwsDmsReplicationInstance?: AwsDmsReplicationInstanceDetails;
+    /**
+     *  Provides details about an Amazon Route 53 hosted zone, including the four name servers assigned to the hosted zone. A hosted zone represents a collection of records that can be managed together, belonging to a single parent domain name.
+     */
+    AwsRoute53HostedZone?: AwsRoute53HostedZoneDetails;
+    /**
+     *  Provides details about an Amazon Managed Streaming for Apache Kafka (Amazon MSK) cluster.
+     */
+    AwsMskCluster?: AwsMskClusterDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {

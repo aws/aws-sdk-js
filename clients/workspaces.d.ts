@@ -28,6 +28,14 @@ declare class WorkSpaces extends Service {
    */
   associateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.AssociateIpGroupsResult) => void): Request<WorkSpaces.Types.AssociateIpGroupsResult, AWSError>;
   /**
+   * Associates the specified application to the specified WorkSpace.
+   */
+  associateWorkspaceApplication(params: WorkSpaces.Types.AssociateWorkspaceApplicationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.AssociateWorkspaceApplicationResult, AWSError>;
+  /**
+   * Associates the specified application to the specified WorkSpace.
+   */
+  associateWorkspaceApplication(callback?: (err: AWSError, data: WorkSpaces.Types.AssociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.AssociateWorkspaceApplicationResult, AWSError>;
+  /**
    * Adds one or more rules to the specified IP access control group. This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.
    */
   authorizeIpRules(params: WorkSpaces.Types.AuthorizeIpRulesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
@@ -172,6 +180,14 @@ declare class WorkSpaces extends Service {
    */
   deleteWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
+   * Deploys associated applications to the specified WorkSpace
+   */
+  deployWorkspaceApplications(params: WorkSpaces.Types.DeployWorkspaceApplicationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeployWorkspaceApplicationsResult) => void): Request<WorkSpaces.Types.DeployWorkspaceApplicationsResult, AWSError>;
+  /**
+   * Deploys associated applications to the specified WorkSpace
+   */
+  deployWorkspaceApplications(callback?: (err: AWSError, data: WorkSpaces.Types.DeployWorkspaceApplicationsResult) => void): Request<WorkSpaces.Types.DeployWorkspaceApplicationsResult, AWSError>;
+  /**
    * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the Directory Service pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   deregisterWorkspaceDirectory(params: WorkSpaces.Types.DeregisterWorkspaceDirectoryRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeregisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.DeregisterWorkspaceDirectoryResult, AWSError>;
@@ -195,6 +211,30 @@ declare class WorkSpaces extends Service {
    * Retrieves a list that describes modifications to the configuration of Bring Your Own License (BYOL) for the specified account.
    */
   describeAccountModifications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
+  /**
+   * Describes the associations between the application and the specified associated resources.
+   */
+  describeApplicationAssociations(params: WorkSpaces.Types.DescribeApplicationAssociationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeApplicationAssociationsResult) => void): Request<WorkSpaces.Types.DescribeApplicationAssociationsResult, AWSError>;
+  /**
+   * Describes the associations between the application and the specified associated resources.
+   */
+  describeApplicationAssociations(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeApplicationAssociationsResult) => void): Request<WorkSpaces.Types.DescribeApplicationAssociationsResult, AWSError>;
+  /**
+   * Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.
+   */
+  describeApplications(params: WorkSpaces.Types.DescribeApplicationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeApplicationsResult) => void): Request<WorkSpaces.Types.DescribeApplicationsResult, AWSError>;
+  /**
+   * Describes the specified applications by filtering based on their compute types, license availability, operating systems, and owners.
+   */
+  describeApplications(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeApplicationsResult) => void): Request<WorkSpaces.Types.DescribeApplicationsResult, AWSError>;
+  /**
+   * Describes the associations between the applications and the specified bundle.
+   */
+  describeBundleAssociations(params: WorkSpaces.Types.DescribeBundleAssociationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeBundleAssociationsResult) => void): Request<WorkSpaces.Types.DescribeBundleAssociationsResult, AWSError>;
+  /**
+   * Describes the associations between the applications and the specified bundle.
+   */
+  describeBundleAssociations(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeBundleAssociationsResult) => void): Request<WorkSpaces.Types.DescribeBundleAssociationsResult, AWSError>;
   /**
    * Describes the specified client branding. Client branding allows you to customize the log in page of various device types for your users. You can add your company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in.  Only device types that have branding information configured will be shown in the response. 
    */
@@ -236,6 +276,14 @@ declare class WorkSpaces extends Service {
    */
   describeConnectionAliases(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasesResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasesResult, AWSError>;
   /**
+   * Describes the associations between the applications and the specified image.
+   */
+  describeImageAssociations(params: WorkSpaces.Types.DescribeImageAssociationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeImageAssociationsResult) => void): Request<WorkSpaces.Types.DescribeImageAssociationsResult, AWSError>;
+  /**
+   * Describes the associations between the applications and the specified image.
+   */
+  describeImageAssociations(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeImageAssociationsResult) => void): Request<WorkSpaces.Types.DescribeImageAssociationsResult, AWSError>;
+  /**
    * Describes one or more of your IP access control groups.
    */
   describeIpGroups(params: WorkSpaces.Types.DescribeIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeIpGroupsResult) => void): Request<WorkSpaces.Types.DescribeIpGroupsResult, AWSError>;
@@ -251,6 +299,14 @@ declare class WorkSpaces extends Service {
    * Describes the specified tags for the specified WorkSpaces resource.
    */
   describeTags(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
+  /**
+   * Describes the associations betweens applications and the specified WorkSpace.
+   */
+  describeWorkspaceAssociations(params: WorkSpaces.Types.DescribeWorkspaceAssociationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceAssociationsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceAssociationsResult, AWSError>;
+  /**
+   * Describes the associations betweens applications and the specified WorkSpace.
+   */
+  describeWorkspaceAssociations(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceAssociationsResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceAssociationsResult, AWSError>;
   /**
    * Retrieves a list that describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
    */
@@ -323,6 +379,14 @@ declare class WorkSpaces extends Service {
    * Disassociates the specified IP access control group from the specified directory.
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
+  /**
+   * Disassociates the specified application from a WorkSpace.
+   */
+  disassociateWorkspaceApplication(params: WorkSpaces.Types.DisassociateWorkspaceApplicationRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.DisassociateWorkspaceApplicationResult, AWSError>;
+  /**
+   * Disassociates the specified application from a WorkSpace.
+   */
+  disassociateWorkspaceApplication(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateWorkspaceApplicationResult) => void): Request<WorkSpaces.Types.DisassociateWorkspaceApplicationResult, AWSError>;
   /**
    * Imports client branding. Client branding allows you to customize your WorkSpace's client login portal. You can tailor your login portal company logo, the support email address, support link, link to reset password, and a custom message for users trying to sign in. After you import client branding, the default branding experience for the specified platform type is replaced with the imported experience    You must specify at least one platform type when importing client branding.   You can import up to 6 MB of data with each request. If your request exceeds this limit, you can import client branding for different platform types using separate requests.   In each platform type, the SupportEmail and SupportLink parameters are mutually exclusive. You can specify only one parameter for each platform type, but not both.   Imported data can take up to a minute to appear in the WorkSpaces client.   
    */
@@ -567,7 +631,40 @@ declare namespace WorkSpaces {
   export type Alias = string;
   export type AmazonUuid = string;
   export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string;
+  export type ApplicationAssociatedResourceType = "WORKSPACE"|"BUNDLE"|"IMAGE"|string;
+  export type ApplicationAssociatedResourceTypeList = ApplicationAssociatedResourceType[];
   export type ApplicationList = Application[];
+  export interface ApplicationResourceAssociation {
+    /**
+     * The identifier of the application.
+     */
+    ApplicationId?: WorkSpaceApplicationId;
+    /**
+     * The identifier of the associated resource.
+     */
+    AssociatedResourceId?: NonEmptyString;
+    /**
+     * The resource type of the associated resource.
+     */
+    AssociatedResourceType?: ApplicationAssociatedResourceType;
+    /**
+     * The time the association was created.
+     */
+    Created?: Timestamp;
+    /**
+     * The time the association status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The status of the application resource association.
+     */
+    State?: AssociationState;
+    /**
+     * The reason the association deployment failed.
+     */
+    StateReason?: AssociationStateReason;
+  }
+  export type ApplicationResourceAssociationList = ApplicationResourceAssociation[];
   export interface AssociateConnectionAliasRequest {
     /**
      * The identifier of the connection alias.
@@ -596,6 +693,34 @@ declare namespace WorkSpaces {
   }
   export interface AssociateIpGroupsResult {
   }
+  export interface AssociateWorkspaceApplicationRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The identifier of the application.
+     */
+    ApplicationId: WorkSpaceApplicationId;
+  }
+  export interface AssociateWorkspaceApplicationResult {
+    /**
+     * Information about the association between the specified WorkSpace and the specified application.
+     */
+    Association?: WorkspaceResourceAssociation;
+  }
+  export type AssociationErrorCode = "ValidationError.InsufficientDiskSpace"|"ValidationError.InsufficientMemory"|"ValidationError.UnsupportedOperatingSystem"|"DeploymentError.InternalServerError"|"DeploymentError.WorkspaceUnreachable"|string;
+  export type AssociationState = "PENDING_INSTALL"|"PENDING_INSTALL_DEPLOYMENT"|"PENDING_UNINSTALL"|"PENDING_UNINSTALL_DEPLOYMENT"|"INSTALLING"|"UNINSTALLING"|"ERROR"|"COMPLETED"|"REMOVED"|string;
+  export interface AssociationStateReason {
+    /**
+     * The error code of the association deployment failure.
+     */
+    ErrorCode?: AssociationErrorCode;
+    /**
+     * The error message of the association deployment failure.
+     */
+    ErrorMessage?: String2048;
+  }
   export type AssociationStatus = "NOT_ASSOCIATED"|"ASSOCIATED_WITH_OWNER_ACCOUNT"|"ASSOCIATED_WITH_SHARED_ACCOUNT"|"PENDING_ASSOCIATION"|"PENDING_DISASSOCIATION"|string;
   export interface AuthorizeIpRulesRequest {
     /**
@@ -611,10 +736,43 @@ declare namespace WorkSpaces {
   }
   export type AwsAccount = string;
   export type BooleanObject = boolean;
+  export type BundleAssociatedResourceType = "APPLICATION"|string;
+  export type BundleAssociatedResourceTypeList = BundleAssociatedResourceType[];
   export type BundleId = string;
   export type BundleIdList = BundleId[];
   export type BundleList = WorkspaceBundle[];
   export type BundleOwner = string;
+  export interface BundleResourceAssociation {
+    /**
+     * The identifier of the associated resource.
+     */
+    AssociatedResourceId?: NonEmptyString;
+    /**
+     * The resource type of the associated resources.
+     */
+    AssociatedResourceType?: BundleAssociatedResourceType;
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+    /**
+     * The time the association is created.
+     */
+    Created?: Timestamp;
+    /**
+     * The time the association status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The status of the bundle resource association.
+     */
+    State?: AssociationState;
+    /**
+     * The reason the association deployment failed.
+     */
+    StateReason?: AssociationStateReason;
+  }
+  export type BundleResourceAssociationList = BundleResourceAssociation[];
   export type BundleType = "REGULAR"|"STANDBY"|string;
   export type CertificateAuthorityArn = string;
   export interface CertificateBasedAuthProperties {
@@ -656,6 +814,7 @@ declare namespace WorkSpaces {
   }
   export type ClientUrl = string;
   export type Compute = "VALUE"|"STANDARD"|"PERFORMANCE"|"POWER"|"GRAPHICS"|"POWERPRO"|"GRAPHICSPRO"|"GRAPHICS_G4DN"|"GRAPHICSPRO_G4DN"|string;
+  export type ComputeList = Compute[];
   export interface ComputeType {
     /**
      * The compute type.
@@ -1126,6 +1285,22 @@ declare namespace WorkSpaces {
   }
   export interface DeleteWorkspaceImageResult {
   }
+  export interface DeployWorkspaceApplicationsRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * Indicates whether the force flag is applied for the specified WorkSpace. When the force flag is enabled, it allows previously failed deployments to be retried.
+     */
+    Force?: BooleanObject;
+  }
+  export interface DeployWorkspaceApplicationsResult {
+    /**
+     * The list of deployed associations and information about them.
+     */
+    Deployment?: WorkSpaceApplicationDeployment;
+  }
   export interface DeregisterWorkspaceDirectoryRequest {
     /**
      * The identifier of the directory. If any WorkSpaces are registered to this directory, you must remove them before you deregister the directory, or you will receive an OperationNotSupportedException error.
@@ -1161,6 +1336,90 @@ declare namespace WorkSpaces {
      * The IP address range, specified as an IPv4 CIDR block, used for the management network interface. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
      */
     DedicatedTenancyManagementCidrRange?: DedicatedTenancyManagementCidrRange;
+  }
+  export interface DescribeApplicationAssociationsRequest {
+    /**
+     * The maximum number of associations to return.
+     */
+    MaxResults?: Limit;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The identifier of the specified application.
+     */
+    ApplicationId: WorkSpaceApplicationId;
+    /**
+     * The resource type of the associated resources.
+     */
+    AssociatedResourceTypes: ApplicationAssociatedResourceTypeList;
+  }
+  export interface DescribeApplicationAssociationsResult {
+    /**
+     * List of associations and information about them.
+     */
+    Associations?: ApplicationResourceAssociationList;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeApplicationsRequest {
+    /**
+     * The identifiers of one or more applications.
+     */
+    ApplicationIds?: WorkSpaceApplicationIdList;
+    /**
+     * The compute types supported by the applications.
+     */
+    ComputeTypeNames?: ComputeList;
+    /**
+     * The license availability for the applications.
+     */
+    LicenseType?: WorkSpaceApplicationLicenseType;
+    /**
+     * The operating systems supported by the applications.
+     */
+    OperatingSystemNames?: OperatingSystemNameList;
+    /**
+     * The owner of the applications.
+     */
+    Owner?: WorkSpaceApplicationOwner;
+    /**
+     * The maximum number of applications to return.
+     */
+    MaxResults?: Limit;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeApplicationsResult {
+    /**
+     * List of information about the specified applications.
+     */
+    Applications?: WorkSpaceApplicationList;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeBundleAssociationsRequest {
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId: BundleId;
+    /**
+     * The resource types of the associated resource.
+     */
+    AssociatedResourceTypes: BundleAssociatedResourceTypeList;
+  }
+  export interface DescribeBundleAssociationsResult {
+    /**
+     * List of information about the specified associations.
+     */
+    Associations?: BundleResourceAssociationList;
   }
   export interface DescribeClientBrandingRequest {
     /**
@@ -1286,6 +1545,22 @@ declare namespace WorkSpaces {
      */
     NextToken?: PaginationToken;
   }
+  export interface DescribeImageAssociationsRequest {
+    /**
+     * The identifier of the image.
+     */
+    ImageId: WorkspaceImageId;
+    /**
+     * The resource types of the associated resource.
+     */
+    AssociatedResourceTypes: ImageAssociatedResourceTypeList;
+  }
+  export interface DescribeImageAssociationsResult {
+    /**
+     * List of information about the specified associations.
+     */
+    Associations?: ImageResourceAssociationList;
+  }
   export interface DescribeIpGroupsRequest {
     /**
      * The identifiers of one or more IP access control groups.
@@ -1321,6 +1596,22 @@ declare namespace WorkSpaces {
      * The tags.
      */
     TagList?: TagList;
+  }
+  export interface DescribeWorkspaceAssociationsRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The resource types of the associated resources.
+     */
+    AssociatedResourceTypes: WorkSpaceAssociatedResourceTypeList;
+  }
+  export interface DescribeWorkspaceAssociationsResult {
+    /**
+     * List of information about the specified associations.
+     */
+    Associations?: WorkspaceResourceAssociationList;
   }
   export interface DescribeWorkspaceBundlesRequest {
     /**
@@ -1523,6 +1814,22 @@ declare namespace WorkSpaces {
   }
   export interface DisassociateIpGroupsResult {
   }
+  export interface DisassociateWorkspaceApplicationRequest {
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId: WorkspaceId;
+    /**
+     * The identifier of the application.
+     */
+    ApplicationId: WorkSpaceApplicationId;
+  }
+  export interface DisassociateWorkspaceApplicationResult {
+    /**
+     * Information about the targeted association.
+     */
+    Association?: WorkspaceResourceAssociation;
+  }
   export type DnsIpAddresses = IpAddress[];
   export type Ec2ImageId = string;
   export interface ErrorDetails {
@@ -1586,6 +1893,8 @@ declare namespace WorkSpaces {
      */
     ErrorMessage?: Description;
   }
+  export type ImageAssociatedResourceType = "APPLICATION"|string;
+  export type ImageAssociatedResourceTypeList = ImageAssociatedResourceType[];
   export interface ImagePermission {
     /**
      * The identifier of the Amazon Web Services account that an image has been shared with.
@@ -1593,6 +1902,37 @@ declare namespace WorkSpaces {
     SharedAccountId?: AwsAccount;
   }
   export type ImagePermissions = ImagePermission[];
+  export interface ImageResourceAssociation {
+    /**
+     * The identifier of the associated resource.
+     */
+    AssociatedResourceId?: NonEmptyString;
+    /**
+     * The resource type of the associated resources.
+     */
+    AssociatedResourceType?: ImageAssociatedResourceType;
+    /**
+     * The time the association is created.
+     */
+    Created?: Timestamp;
+    /**
+     * The time the association status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The identifier of the image.
+     */
+    ImageId?: WorkspaceImageId;
+    /**
+     * The status of the image resource association.
+     */
+    State?: AssociationState;
+    /**
+     * The reason the association deployment failed.
+     */
+    StateReason?: AssociationStateReason;
+  }
+  export type ImageResourceAssociationList = ImageResourceAssociation[];
   export type ImageType = "OWNED"|"SHARED"|string;
   export interface ImportClientBrandingRequest {
     /**
@@ -1949,6 +2289,8 @@ declare namespace WorkSpaces {
      */
     Type?: OperatingSystemType;
   }
+  export type OperatingSystemName = "AMAZON_LINUX_2"|"UBUNTU_18_04"|"UBUNTU_20_04"|"UBUNTU_22_04"|"UNKNOWN"|"WINDOWS_10"|"WINDOWS_11"|"WINDOWS_7"|"WINDOWS_SERVER_2016"|"WINDOWS_SERVER_2019"|"WINDOWS_SERVER_2022"|string;
+  export type OperatingSystemNameList = OperatingSystemName[];
   export type OperatingSystemType = "WINDOWS"|"LINUX"|string;
   export type PaginationToken = string;
   export interface PendingCreateStandbyWorkspacesRequest {
@@ -2194,6 +2536,7 @@ declare namespace WorkSpaces {
      */
     FailedRequests?: FailedStopWorkspaceRequests;
   }
+  export type String2048 = string;
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
   export interface Tag {
@@ -2324,6 +2667,58 @@ declare namespace WorkSpaces {
   }
   export type UserVolumeSizeGib = number;
   export type VolumeEncryptionKey = string;
+  export interface WorkSpaceApplication {
+    /**
+     * The identifier of the application.
+     */
+    ApplicationId?: WorkSpaceApplicationId;
+    /**
+     * The time the application is created.
+     */
+    Created?: Timestamp;
+    /**
+     * The description of the WorkSpace application.
+     */
+    Description?: String2048;
+    /**
+     * The license availability for the applications.
+     */
+    LicenseType?: WorkSpaceApplicationLicenseType;
+    /**
+     * The name of the WorkSpace application.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The owner of the WorkSpace application.
+     */
+    Owner?: WorkSpaceApplicationOwner;
+    /**
+     * The status of WorkSpace application.
+     */
+    State?: WorkSpaceApplicationState;
+    /**
+     * The supported compute types of the WorkSpace application.
+     */
+    SupportedComputeTypeNames?: ComputeList;
+    /**
+     * The supported operating systems of the WorkSpace application.
+     */
+    SupportedOperatingSystemNames?: OperatingSystemNameList;
+  }
+  export interface WorkSpaceApplicationDeployment {
+    /**
+     * The associations between the applications and the associated resources.
+     */
+    Associations?: WorkspaceResourceAssociationList;
+  }
+  export type WorkSpaceApplicationId = string;
+  export type WorkSpaceApplicationIdList = WorkSpaceApplicationId[];
+  export type WorkSpaceApplicationLicenseType = "LICENSED"|"UNLICENSED"|string;
+  export type WorkSpaceApplicationList = WorkSpaceApplication[];
+  export type WorkSpaceApplicationOwner = string;
+  export type WorkSpaceApplicationState = "PENDING"|"ERROR"|"AVAILABLE"|"UNINSTALL_ONLY"|string;
+  export type WorkSpaceAssociatedResourceType = "APPLICATION"|string;
+  export type WorkSpaceAssociatedResourceTypeList = WorkSpaceAssociatedResourceType[];
   export interface Workspace {
     /**
      * The identifier of the WorkSpace.
@@ -2647,7 +3042,7 @@ declare namespace WorkSpaces {
      */
     Updates?: UpdateResult;
     /**
-     * The details of the error returned for the image.
+     * Additional details of the error returned for the image, including the possible causes of the errors and troubleshooting information.
      */
     ErrorDetails?: ErrorDetailsList;
   }
@@ -2687,6 +3082,10 @@ declare namespace WorkSpaces {
      * The protocol. For more information, see  Protocols for Amazon WorkSpaces.    Only available for WorkSpaces created with PCoIP bundles.   The Protocols property is case sensitive. Ensure you use PCOIP or WSP.   Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based bundles (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).   
      */
     Protocols?: ProtocolList;
+    /**
+     * The name of the operating system.
+     */
+    OperatingSystemName?: OperatingSystemName;
   }
   export interface WorkspaceRequest {
     /**
@@ -2723,6 +3122,37 @@ declare namespace WorkSpaces {
     Tags?: TagList;
   }
   export type WorkspaceRequestList = WorkspaceRequest[];
+  export interface WorkspaceResourceAssociation {
+    /**
+     * The identifier of the associated resource.
+     */
+    AssociatedResourceId?: NonEmptyString;
+    /**
+     * The resource types of the associated resource.
+     */
+    AssociatedResourceType?: WorkSpaceAssociatedResourceType;
+    /**
+     * The time the association is created.
+     */
+    Created?: Timestamp;
+    /**
+     * The time the association status was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+    /**
+     * The status of the WorkSpace resource association.
+     */
+    State?: AssociationState;
+    /**
+     * The reason the association deployment failed.
+     */
+    StateReason?: AssociationStateReason;
+    /**
+     * The identifier of the WorkSpace.
+     */
+    WorkspaceId?: WorkspaceId;
+  }
+  export type WorkspaceResourceAssociationList = WorkspaceResourceAssociation[];
   export type WorkspaceState = "PENDING"|"AVAILABLE"|"IMPAIRED"|"UNHEALTHY"|"REBOOTING"|"STARTING"|"REBUILDING"|"RESTORING"|"MAINTENANCE"|"ADMIN_MAINTENANCE"|"TERMINATING"|"TERMINATED"|"SUSPENDED"|"UPDATING"|"STOPPING"|"STOPPED"|"ERROR"|string;
   export interface WorkspacesIpGroup {
     /**

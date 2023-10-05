@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1470.0-->
+<!--LATEST=2.1471.0-->
 <!--ENTRYINSERT-->
+
+## 2.1471.0
+* feature: Omics: Add Etag Support for Omics Storage in ListReadSets and GetReadSetMetadata API
+* feature: Route53: Add hostedzonetype filter to ListHostedZones API.
+* feature: SecurityHub: Added new resource detail objects to ASFF, including resources for AwsEventsEventbus, AwsEventsEndpoint, AwsDmsEndpoint, AwsDmsReplicationTask, AwsDmsReplicationInstance, AwsRoute53HostedZone, and AwsMskCluster
+* feature: StorageGateway: Add SoftwareVersion to response of DescribeGatewayInformation.
+* feature: WorkSpaces: This release introduces Manage applications. This feature allows users to manage their WorkSpaces applications by associating or disassociating their WorkSpaces with applications. The DescribeWorkspaces API will now additionally return OperatingSystemName in its responses.
 
 ## 2.1470.0
 * feature: AppConfig: AWS AppConfig introduces KMS customer-managed key (CMK) encryption support for data saved to AppConfig's hosted configuration store.

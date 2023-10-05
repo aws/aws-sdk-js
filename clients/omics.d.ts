@@ -1739,6 +1739,21 @@ declare namespace Omics {
     id: WorkflowId;
   }
   export type Description = string;
+  export interface ETag {
+    /**
+     *  The algorithm used to calculate the read set’s ETag(s). 
+     */
+    algorithm?: ETagAlgorithm;
+    /**
+     *  The ETag hash calculated on Source1 of the read set. 
+     */
+    source1?: String;
+    /**
+     *  The ETag hash calculated on Source2 of the read set. 
+     */
+    source2?: String;
+  }
+  export type ETagAlgorithm = "FASTQ_MD5up"|"BAM_MD5up"|"CRAM_MD5up"|string;
   export type Encoding = string;
   export type EncryptionType = "KMS"|string;
   export type EscapeChar = string;
@@ -2236,6 +2251,10 @@ declare namespace Omics {
      *  The creation type of the read set. 
      */
     creationType?: CreationType;
+    /**
+     *  The entity tag (ETag) is a hash of the object meant to represent its semantic content. 
+     */
+    etag?: ETag;
   }
   export interface GetReadSetRequest {
     /**
@@ -3907,6 +3926,10 @@ declare namespace Omics {
      *  The creation type of the read set. 
      */
     creationType?: CreationType;
+    /**
+     *  The entity tag (ETag) is a hash of the object representing its semantic content. 
+     */
+    etag?: ETag;
   }
   export type ReadSetName = string;
   export type ReadSetPartSource = "SOURCE1"|"SOURCE2"|string;
