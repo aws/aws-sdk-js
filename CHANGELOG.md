@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1471.0-->
+<!--LATEST=2.1472.0-->
 <!--ENTRYINSERT-->
+
+## 2.1472.0
+* feature: EC2: Documentation updates for Elastic Compute Cloud (EC2).
+* feature: FSx: After performing steps to repair the Active Directory configuration of a file system, use this action to initiate the process of attempting to recover to the file system.
+* feature: MarketplaceCatalog: This release adds support for Document type as an alternative for stringified JSON for StartChangeSet, DescribeChangeSet and DescribeEntity APIs
+* feature: QuickSight: NullOption in FilterListConfiguration; Dataset schema/table max length increased; Support total placement for pivot table visual; Lenient mode relaxes the validation to create resources with definition; Data sources can be added to folders; Redshift data sources support IAM Role-based authentication
+* feature: Transfer: This release updates the max character limit of PreAuthenticationLoginBanner and PostAuthenticationLoginBanner to 4096 characters
 
 ## 2.1471.0
 * feature: Omics: Add Etag Support for Omics Storage in ListReadSets and GetReadSetMetadata API

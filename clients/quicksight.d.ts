@@ -3451,6 +3451,10 @@ declare namespace QuickSight {
      * The definition of an analysis. A definition is the data model of all features in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     Definition?: AnalysisDefinition;
+    /**
+     * The option to relax the validation needed to create an analysis with definition objects. This skips the validation step for specific errors.
+     */
+    ValidationStrategy?: ValidationStrategy;
   }
   export interface CreateAnalysisResponse {
     /**
@@ -3525,6 +3529,10 @@ declare namespace QuickSight {
      * The definition of a dashboard. A definition is the data model of all features in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     Definition?: DashboardVersionDefinition;
+    /**
+     * The option to relax the validation needed to create a dashboard with definition objects. This option skips the validation step for specific errors.
+     */
+    ValidationStrategy?: ValidationStrategy;
   }
   export interface CreateDashboardResponse {
     /**
@@ -4090,6 +4098,10 @@ declare namespace QuickSight {
      * The definition of a template. A definition is the data model of all features in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition must be provided in order for the request to be valid.
      */
     Definition?: TemplateVersionDefinition;
+    /**
+     * TThe option to relax the validation needed to create a template with definition objects. This skips the validation step for specific errors.
+     */
+    ValidationStrategy?: ValidationStrategy;
   }
   export interface CreateTemplateResponse {
     /**
@@ -5468,6 +5480,9 @@ declare namespace QuickSight {
   export type DataSourceSummaryList = DataSourceSummary[];
   export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|"AMAZON_OPENSEARCH"|"EXASOL"|"DATABRICKS"|string;
   export type Database = string;
+  export type DatabaseGroup = string;
+  export type DatabaseGroupList = DatabaseGroup[];
+  export type DatabaseUser = string;
   export interface DatabricksParameters {
     /**
      * The host name of the Databricks data source.
@@ -8507,6 +8522,10 @@ declare namespace QuickSight {
      * Select all of the values. Null is not the assigned value of select all.    FILTER_ALL_VALUES   
      */
     SelectAllOptions?: CategoryFilterSelectAllOptions;
+    /**
+     * This option determines how null values should be treated when filtering data.    ALL_VALUES: Include null values in filtered results.    NULLS_ONLY: Only include null values in filtered results.    NON_NULLS_ONLY: Exclude null values from filtered results.  
+     */
+    NullOption?: FilterNullOption;
   }
   export interface FilterListControl {
     /**
@@ -11839,7 +11858,7 @@ declare namespace QuickSight {
      */
     MemberArn?: Arn;
   }
-  export type MemberType = "DASHBOARD"|"ANALYSIS"|"DATASET"|"TOPIC"|string;
+  export type MemberType = "DASHBOARD"|"ANALYSIS"|"DATASET"|"DATASOURCE"|"TOPIC"|string;
   export interface MetricComparisonComputation {
     /**
      * The ID for a computation.
@@ -13408,6 +13427,24 @@ declare namespace QuickSight {
     Database: Database;
   }
   export type RecoveryWindowInDays = number;
+  export interface RedshiftIAMParameters {
+    /**
+     * Use the RoleArn structure to allow Amazon QuickSight to call redshift:GetClusterCredentials on your cluster. The calling principal must have iam:PassRole access to pass the role to Amazon QuickSight. The role's trust policy must allow the Amazon QuickSight service principal to assume the role.
+     */
+    RoleArn: RoleArn;
+    /**
+     * The user whose permissions and group memberships will be used by Amazon QuickSight to access the cluster. If this user already exists in your database, Amazon QuickSight is granted the same permissions that the user has. If the user doesn't exist, set the value of AutoCreateDatabaseUser to True to create a new user with PUBLIC permissions.
+     */
+    DatabaseUser: DatabaseUser;
+    /**
+     * A list of groups whose permissions will be granted to Amazon QuickSight to access the cluster. These permissions are combined with the permissions granted to Amazon QuickSight by the DatabaseUser. If you choose to include this parameter, the RoleArn must grant access to redshift:JoinGroup.
+     */
+    DatabaseGroups?: DatabaseGroupList;
+    /**
+     * Automatically creates a database user. If your database doesn't have a DatabaseUser, set this parameter to True. If there is no DatabaseUser, Amazon QuickSight can't connect to your cluster. The RoleArn that you use for this operation must grant access to redshift:CreateClusterUser to successfully create the user.
+     */
+    AutoCreateDatabaseUser?: Boolean;
+  }
   export interface RedshiftParameters {
     /**
      * Host. This field can be blank if ClusterId is provided.
@@ -13425,6 +13462,10 @@ declare namespace QuickSight {
      * Cluster ID. This field can be blank if the Host and Port are provided.
      */
     ClusterId?: ClusterId;
+    /**
+     * An optional parameter that uses IAM authentication to grant Amazon QuickSight access to your cluster. This parameter can be used instead of DataSourceCredentials.
+     */
+    IAMParameters?: RedshiftIAMParameters;
   }
   export interface ReferenceLine {
     /**
@@ -15658,7 +15699,7 @@ declare namespace QuickSight {
     CellType: StyledCellType;
   }
   export type TableStyleTargetList = TableStyleTarget[];
-  export type TableTotalsPlacement = "START"|"END"|string;
+  export type TableTotalsPlacement = "START"|"END"|"AUTO"|string;
   export type TableTotalsScrollStatus = "PINNED"|"SCROLLED"|string;
   export interface TableUnaggregatedFieldWells {
     /**
@@ -17277,6 +17318,10 @@ declare namespace QuickSight {
      * The definition of an analysis. A definition is the data model of all features in a Dashboard, Template, or Analysis.
      */
     Definition?: AnalysisDefinition;
+    /**
+     * The option to relax the validation needed to update an analysis with definition objects. This skips the validation step for specific errors.
+     */
+    ValidationStrategy?: ValidationStrategy;
   }
   export interface UpdateAnalysisResponse {
     /**
@@ -17421,6 +17466,10 @@ declare namespace QuickSight {
      * The definition of a dashboard. A definition is the data model of all features in a Dashboard, Template, or Analysis.
      */
     Definition?: DashboardVersionDefinition;
+    /**
+     * The option to relax the validation needed to update a dashboard with definition objects. This skips the validation step for specific errors.
+     */
+    ValidationStrategy?: ValidationStrategy;
   }
   export interface UpdateDashboardResponse {
     /**
@@ -17988,6 +18037,10 @@ declare namespace QuickSight {
      * The definition of a template. A definition is the data model of all features in a Dashboard, Template, or Analysis.
      */
     Definition?: TemplateVersionDefinition;
+    /**
+     * The option to relax the validation needed to update a template with definition objects. This skips the validation step for specific errors.
+     */
+    ValidationStrategy?: ValidationStrategy;
   }
   export interface UpdateTemplateResponse {
     /**
@@ -18543,6 +18596,13 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type VPCConnectionSummaryList = VPCConnectionSummary[];
+  export interface ValidationStrategy {
+    /**
+     * The mode of validation for the asset to be creaed or updated. When you set this value to STRICT, strict validation for every error is enforced. When you set this value to LENIENT, validation is skipped for specific UI errors.
+     */
+    Mode: ValidationStrategyMode;
+  }
+  export type ValidationStrategyMode = "STRICT"|"LENIENT"|string;
   export type ValueWhenUnsetOption = "RECOMMENDED_VALUE"|"NULL"|string;
   export type VersionDescription = string;
   export type VersionNumber = number;

@@ -276,6 +276,14 @@ declare class FSx extends Service {
    */
   restoreVolumeFromSnapshot(callback?: (err: AWSError, data: FSx.Types.RestoreVolumeFromSnapshotResponse) => void): Request<FSx.Types.RestoreVolumeFromSnapshotResponse, AWSError>;
   /**
+   * After performing steps to repair the Active Directory configuration of an FSx for Windows File Server file system, use this action to initiate the process of Amazon FSx attempting to reconnect to the file system.
+   */
+  startMisconfiguredStateRecovery(params: FSx.Types.StartMisconfiguredStateRecoveryRequest, callback?: (err: AWSError, data: FSx.Types.StartMisconfiguredStateRecoveryResponse) => void): Request<FSx.Types.StartMisconfiguredStateRecoveryResponse, AWSError>;
+  /**
+   * After performing steps to repair the Active Directory configuration of an FSx for Windows File Server file system, use this action to initiate the process of Amazon FSx attempting to reconnect to the file system.
+   */
+  startMisconfiguredStateRecovery(callback?: (err: AWSError, data: FSx.Types.StartMisconfiguredStateRecoveryResponse) => void): Request<FSx.Types.StartMisconfiguredStateRecoveryResponse, AWSError>;
+  /**
    * Tags an Amazon FSx resource.
    */
   tagResource(params: FSx.Types.TagResourceRequest, callback?: (err: AWSError, data: FSx.Types.TagResourceResponse) => void): Request<FSx.Types.TagResourceResponse, AWSError>;
@@ -383,7 +391,7 @@ declare namespace FSx {
      */
     Message?: ErrorMessage;
   }
-  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|"THROUGHPUT_OPTIMIZATION"|"IOPS_OPTIMIZATION"|"STORAGE_TYPE_OPTIMIZATION"|string;
+  export type AdministrativeActionType = "FILE_SYSTEM_UPDATE"|"STORAGE_OPTIMIZATION"|"FILE_SYSTEM_ALIAS_ASSOCIATION"|"FILE_SYSTEM_ALIAS_DISASSOCIATION"|"VOLUME_UPDATE"|"SNAPSHOT_UPDATE"|"RELEASE_NFS_V3_LOCKS"|"VOLUME_RESTORE"|"THROUGHPUT_OPTIMIZATION"|"IOPS_OPTIMIZATION"|"STORAGE_TYPE_OPTIMIZATION"|"MISCONFIGURED_STATE_RECOVERY"|string;
   export type AdministrativeActions = AdministrativeAction[];
   export interface Alias {
     /**
@@ -2801,6 +2809,13 @@ declare namespace FSx {
   export type SnapshotPolicy = string;
   export type Snapshots = Snapshot[];
   export type SourceBackupId = string;
+  export interface StartMisconfiguredStateRecoveryRequest {
+    ClientRequestToken?: ClientRequestToken;
+    FileSystemId: FileSystemId;
+  }
+  export interface StartMisconfiguredStateRecoveryResponse {
+    FileSystem?: FileSystem;
+  }
   export type StartTime = Date;
   export type Status = "FAILED"|"IN_PROGRESS"|"PENDING"|"COMPLETED"|"UPDATED_OPTIMIZING"|string;
   export type StorageCapacity = number;

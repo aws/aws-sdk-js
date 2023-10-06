@@ -20,11 +20,11 @@ declare class MarketplaceCatalog extends Service {
    */
   cancelChangeSet(callback?: (err: AWSError, data: MarketplaceCatalog.Types.CancelChangeSetResponse) => void): Request<MarketplaceCatalog.Types.CancelChangeSetResponse, AWSError>;
   /**
-   * Deletes a resource-based policy on an Entity that is identified by its resource ARN.
+   * Deletes a resource-based policy on an entity that is identified by its resource ARN.
    */
   deleteResourcePolicy(params: MarketplaceCatalog.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.DeleteResourcePolicyResponse) => void): Request<MarketplaceCatalog.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
-   * Deletes a resource-based policy on an Entity that is identified by its resource ARN.
+   * Deletes a resource-based policy on an entity that is identified by its resource ARN.
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: MarketplaceCatalog.Types.DeleteResourcePolicyResponse) => void): Request<MarketplaceCatalog.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class MarketplaceCatalog extends Service {
    */
   describeEntity(callback?: (err: AWSError, data: MarketplaceCatalog.Types.DescribeEntityResponse) => void): Request<MarketplaceCatalog.Types.DescribeEntityResponse, AWSError>;
   /**
-   * Gets a resource-based policy of an Entity that is identified by its resource ARN.
+   * Gets a resource-based policy of an entity that is identified by its resource ARN.
    */
   getResourcePolicy(params: MarketplaceCatalog.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.GetResourcePolicyResponse) => void): Request<MarketplaceCatalog.Types.GetResourcePolicyResponse, AWSError>;
   /**
-   * Gets a resource-based policy of an Entity that is identified by its resource ARN.
+   * Gets a resource-based policy of an entity that is identified by its resource ARN.
    */
   getResourcePolicy(callback?: (err: AWSError, data: MarketplaceCatalog.Types.GetResourcePolicyResponse) => void): Request<MarketplaceCatalog.Types.GetResourcePolicyResponse, AWSError>;
   /**
@@ -76,19 +76,19 @@ declare class MarketplaceCatalog extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: MarketplaceCatalog.Types.ListTagsForResourceResponse) => void): Request<MarketplaceCatalog.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Attaches a resource-based policy to an Entity. Examples of an entity include: AmiProduct and ContainerProduct.
+   * Attaches a resource-based policy to an entity. Examples of an entity include: AmiProduct and ContainerProduct.
    */
   putResourcePolicy(params: MarketplaceCatalog.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.PutResourcePolicyResponse) => void): Request<MarketplaceCatalog.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Attaches a resource-based policy to an Entity. Examples of an entity include: AmiProduct and ContainerProduct.
+   * Attaches a resource-based policy to an entity. Examples of an entity include: AmiProduct and ContainerProduct.
    */
   putResourcePolicy(callback?: (err: AWSError, data: MarketplaceCatalog.Types.PutResourcePolicyResponse) => void): Request<MarketplaceCatalog.Types.PutResourcePolicyResponse, AWSError>;
   /**
-   * Allows you to request changes for your entities. Within a single ChangeSet, you can't start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a ResourceInUseException error. For example, you can't start the ChangeSet described in the example later in this topic because it contains two changes to run the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets. For information on change types for single-AMI products, see Working with single-AMI products. Als, for more information on change types available for container-based products, see Working with container products.
+   * Allows you to request changes for your entities. Within a single ChangeSet, you can't start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a ResourceInUseException error. For example, you can't start the ChangeSet described in the example later in this topic because it contains two changes to run the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets. For information about change types for single-AMI products, see Working with single-AMI products. Also, for more information about change types available for container-based products, see Working with container products.
    */
   startChangeSet(params: MarketplaceCatalog.Types.StartChangeSetRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.StartChangeSetResponse) => void): Request<MarketplaceCatalog.Types.StartChangeSetResponse, AWSError>;
   /**
-   * Allows you to request changes for your entities. Within a single ChangeSet, you can't start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a ResourceInUseException error. For example, you can't start the ChangeSet described in the example later in this topic because it contains two changes to run the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets. For information on change types for single-AMI products, see Working with single-AMI products. Als, for more information on change types available for container-based products, see Working with container products.
+   * Allows you to request changes for your entities. Within a single ChangeSet, you can't start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the change set has completed (either succeeded, cancelled, or failed). If you try to start a change set containing a change against an entity that is already locked, you will receive a ResourceInUseException error. For example, you can't start the ChangeSet described in the example later in this topic because it contains two changes to run the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets. For information about change types for single-AMI products, see Working with single-AMI products. Also, for more information about change types available for container-based products, see Working with container products.
    */
   startChangeSet(callback?: (err: AWSError, data: MarketplaceCatalog.Types.StartChangeSetResponse) => void): Request<MarketplaceCatalog.Types.StartChangeSetResponse, AWSError>;
   /**
@@ -133,7 +133,7 @@ declare namespace MarketplaceCatalog {
   export type Catalog = string;
   export interface Change {
     /**
-     * Change types are single string values that describe your intention for the change. Each change type is unique for each EntityType provided in the change's scope. For more information on change types available for single-AMI products, see Working with single-AMI products. Also, for more information on change types available for container-based products, see Working with container products.
+     * Change types are single string values that describe your intention for the change. Each change type is unique for each EntityType provided in the change's scope. For more information on change types available for single-AMI products, see Working with single-AMI products. Also, for more information about change types available for container-based products, see Working with container products.
      */
     ChangeType: ChangeType;
     /**
@@ -145,9 +145,13 @@ declare namespace MarketplaceCatalog {
      */
     EntityTags?: TagList;
     /**
-     * This object contains details specific to the change type of the requested change. For more information on change types available for single-AMI products, see Working with single-AMI products. Also, for more information on change types available for container-based products, see Working with container products.
+     * This object contains details specific to the change type of the requested change. For more information about change types available for single-AMI products, see Working with single-AMI products. Also, for more information about change types available for container-based products, see Working with container products.
      */
-    Details: Json;
+    Details?: Json;
+    /**
+     * Alternative field that accepts a JSON value instead of a string for ChangeType details. You can use either Details or DetailsDocument, but not both.
+     */
+    DetailsDocument?: JsonDocumentType;
     /**
      * Optional name for the change.
      */
@@ -206,6 +210,10 @@ declare namespace MarketplaceCatalog {
      */
     Details?: Json;
     /**
+     * The JSON value of the details specific to the change type of the requested change.
+     */
+    DetailsDocument?: JsonDocumentType;
+    /**
      * An array of ErrorDetail objects associated with the change.
      */
     ErrorDetailList?: ErrorDetailList;
@@ -219,7 +227,7 @@ declare namespace MarketplaceCatalog {
   export type DateTimeISO8601 = string;
   export interface DeleteResourcePolicyRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Entity resource that is associated with the resource policy.
+     * The Amazon Resource Name (ARN) of the entity resource that is associated with the resource policy.
      */
     ResourceArn: ResourceARN;
   }
@@ -304,6 +312,10 @@ declare namespace MarketplaceCatalog {
      * This stringified JSON object includes the details of the entity.
      */
     Details?: Json;
+    /**
+     * The JSON value of the details specific to the entity.
+     */
+    DetailsDocument?: JsonDocumentType;
   }
   export interface Entity {
     /**
@@ -373,7 +385,7 @@ declare namespace MarketplaceCatalog {
   export type FilterValueContent = string;
   export interface GetResourcePolicyRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Entity resource that is associated with the resource policy.
+     * The Amazon Resource Name (ARN) of the entity resource that is associated with the resource policy.
      */
     ResourceArn: ResourceARN;
   }
@@ -385,6 +397,8 @@ declare namespace MarketplaceCatalog {
   }
   export type Identifier = string;
   export type Json = string;
+  export interface JsonDocumentType {
+  }
   export type ListChangeSetsMaxResultInteger = number;
   export interface ListChangeSetsRequest {
     /**
@@ -444,6 +458,9 @@ declare namespace MarketplaceCatalog {
      * Specifies the upper limit of the elements on a single page. If a value isn't provided, the default value is 20.
      */
     MaxResults?: ListEntitiesMaxResultInteger;
+    /**
+     * Filters the returned set of entities based on their owner. The default is SELF. To list entities shared with you through AWS Resource Access Manager (AWS RAM), set to SHARED. Entities shared through the AWS Marketplace Catalog API PutResourcePolicy operation can't be discovered through the SHARED parameter.
+     */
     OwnershipType?: OwnershipType;
   }
   export interface ListEntitiesResponse {
@@ -476,7 +493,7 @@ declare namespace MarketplaceCatalog {
   export type OwnershipType = "SELF"|"SHARED"|string;
   export interface PutResourcePolicyRequest {
     /**
-     * The Amazon Resource Name (ARN) of the Entity resource you want to associate with a resource policy. 
+     * The Amazon Resource Name (ARN) of the entity resource you want to associate with a resource policy.
      */
     ResourceArn: ResourceARN;
     /**
@@ -493,7 +510,7 @@ declare namespace MarketplaceCatalog {
   export type ResourcePolicyJson = string;
   export interface Sort {
     /**
-     * For ListEntities, supported attributes include LastModifiedDate (default), Visibility, EntityId, and Name. For ListChangeSets, supported attributes include StartTime and EndTime.
+     * For ListEntities, supported attributes include LastModifiedDate (default) and EntityId. In addition to LastModifiedDate and EntityId, each EntityType might support additional fields. For ListChangeSets, supported attributes include StartTime and EndTime.
      */
     SortBy?: SortBy;
     /**
