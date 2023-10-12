@@ -626,6 +626,7 @@ declare namespace AutoScaling {
   export type Alarms = Alarm[];
   export type AllowedInstanceType = string;
   export type AllowedInstanceTypes = AllowedInstanceType[];
+  export type AnyPrintableAsciiStringMaxLen4000 = string;
   export type AsciiStringMaxLen255 = string;
   export type AssociatePublicIpAddress = boolean;
   export interface AttachInstancesQuery {
@@ -2357,7 +2358,7 @@ declare namespace AutoScaling {
     /**
      * Additional information that is included any time Amazon EC2 Auto Scaling sends a message to the notification target.
      */
-    NotificationMetadata?: XmlStringMaxLen1023;
+    NotificationMetadata?: AnyPrintableAsciiStringMaxLen4000;
     /**
      * The maximum time, in seconds, that can elapse before the lifecycle hook times out. If the lifecycle hook times out, Amazon EC2 Auto Scaling performs the action that you specified in the DefaultResult property.
      */
@@ -2384,7 +2385,7 @@ declare namespace AutoScaling {
     /**
      * Additional information that you want to include any time Amazon EC2 Auto Scaling sends a message to the notification target.
      */
-    NotificationMetadata?: XmlStringMaxLen1023;
+    NotificationMetadata?: AnyPrintableAsciiStringMaxLen4000;
     /**
      * The maximum time, in seconds, that can elapse before the lifecycle hook times out. The range is from 30 to 7200 seconds. The default value is 3600 seconds (1 hour).
      */
@@ -2803,7 +2804,7 @@ declare namespace AutoScaling {
     /**
      * Additional information that you want to include any time Amazon EC2 Auto Scaling sends a message to the notification target.
      */
-    NotificationMetadata?: XmlStringMaxLen1023;
+    NotificationMetadata?: AnyPrintableAsciiStringMaxLen4000;
     /**
      * The maximum time, in seconds, that can elapse before the lifecycle hook times out. The range is from 30 to 7200 seconds. The default value is 3600 seconds (1 hour).
      */

@@ -11678,7 +11678,7 @@ declare namespace Glue {
      */
     AuthToken?: Generic512CharString;
   }
-  export type SourceControlProvider = "GITHUB"|"AWS_CODE_COMMIT"|string;
+  export type SourceControlProvider = "GITHUB"|"GITLAB"|"BITBUCKET"|"AWS_CODE_COMMIT"|string;
   export interface SparkConnectorSource {
     /**
      * The name of the data source.
@@ -13150,11 +13150,11 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The provider for the remote repository.
+     *  The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET. 
      */
     Provider?: SourceControlProvider;
     /**
-     * The name of the remote repository that contains the job artifacts.
+     * The name of the remote repository that contains the job artifacts. For BitBucket providers, RepositoryName should include WorkspaceName. Use the format &lt;WorkspaceName&gt;/&lt;RepositoryName&gt;. 
      */
     RepositoryName?: NameString;
     /**
@@ -13348,11 +13348,11 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The provider for the remote repository.
+     *  The provider for the remote repository. Possible values: GITHUB, AWS_CODE_COMMIT, GITLAB, BITBUCKET. 
      */
     Provider?: SourceControlProvider;
     /**
-     * The name of the remote repository that contains the job artifacts.
+     * The name of the remote repository that contains the job artifacts. For BitBucket providers, RepositoryName should include WorkspaceName. Use the format &lt;WorkspaceName&gt;/&lt;RepositoryName&gt;. 
      */
     RepositoryName?: NameString;
     /**

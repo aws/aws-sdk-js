@@ -1288,7 +1288,7 @@ declare namespace TranscribeService {
      */
     RedactedMediaFileUri?: Uri;
   }
-  export type MediaFormat = "mp3"|"mp4"|"wav"|"flac"|"ogg"|"amr"|"webm"|string;
+  export type MediaFormat = "mp3"|"mp4"|"wav"|"flac"|"ogg"|"amr"|"webm"|"m4a"|string;
   export type MediaSampleRateHertz = number;
   export type MedicalContentIdentificationType = "PHI"|string;
   export type MedicalMediaSampleRateHertz = number;

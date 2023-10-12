@@ -36,6 +36,38 @@ declare class Textract extends Service {
    */
   analyzeID(callback?: (err: AWSError, data: Textract.Types.AnalyzeIDResponse) => void): Request<Textract.Types.AnalyzeIDResponse, AWSError>;
   /**
+   * Creates an adapter, which can be fine-tuned for enhanced performance on user provided documents. Takes an AdapterName and FeatureType. Currently the only supported feature type is QUERIES. You can also provide a Description, Tags, and a ClientRequestToken. You can choose whether or not the adapter should be AutoUpdated with the AutoUpdate argument. By default, AutoUpdate is set to DISABLED.
+   */
+  createAdapter(params: Textract.Types.CreateAdapterRequest, callback?: (err: AWSError, data: Textract.Types.CreateAdapterResponse) => void): Request<Textract.Types.CreateAdapterResponse, AWSError>;
+  /**
+   * Creates an adapter, which can be fine-tuned for enhanced performance on user provided documents. Takes an AdapterName and FeatureType. Currently the only supported feature type is QUERIES. You can also provide a Description, Tags, and a ClientRequestToken. You can choose whether or not the adapter should be AutoUpdated with the AutoUpdate argument. By default, AutoUpdate is set to DISABLED.
+   */
+  createAdapter(callback?: (err: AWSError, data: Textract.Types.CreateAdapterResponse) => void): Request<Textract.Types.CreateAdapterResponse, AWSError>;
+  /**
+   * Creates a new version of an adapter. Operates on a provided AdapterId and a specified dataset provided via the DatasetConfig argument. Requires that you specify an Amazon S3 bucket with the OutputConfig argument. You can provide an optional KMSKeyId, an optional ClientRequestToken, and optional tags.
+   */
+  createAdapterVersion(params: Textract.Types.CreateAdapterVersionRequest, callback?: (err: AWSError, data: Textract.Types.CreateAdapterVersionResponse) => void): Request<Textract.Types.CreateAdapterVersionResponse, AWSError>;
+  /**
+   * Creates a new version of an adapter. Operates on a provided AdapterId and a specified dataset provided via the DatasetConfig argument. Requires that you specify an Amazon S3 bucket with the OutputConfig argument. You can provide an optional KMSKeyId, an optional ClientRequestToken, and optional tags.
+   */
+  createAdapterVersion(callback?: (err: AWSError, data: Textract.Types.CreateAdapterVersionResponse) => void): Request<Textract.Types.CreateAdapterVersionResponse, AWSError>;
+  /**
+   * Deletes an Amazon Textract adapter. Takes an AdapterId and deletes the adapter specified by the ID.
+   */
+  deleteAdapter(params: Textract.Types.DeleteAdapterRequest, callback?: (err: AWSError, data: Textract.Types.DeleteAdapterResponse) => void): Request<Textract.Types.DeleteAdapterResponse, AWSError>;
+  /**
+   * Deletes an Amazon Textract adapter. Takes an AdapterId and deletes the adapter specified by the ID.
+   */
+  deleteAdapter(callback?: (err: AWSError, data: Textract.Types.DeleteAdapterResponse) => void): Request<Textract.Types.DeleteAdapterResponse, AWSError>;
+  /**
+   * Deletes an Amazon Textract adapter version. Requires that you specify both an AdapterId and a AdapterVersion. Deletes the adapter version specified by the AdapterId and the AdapterVersion.
+   */
+  deleteAdapterVersion(params: Textract.Types.DeleteAdapterVersionRequest, callback?: (err: AWSError, data: Textract.Types.DeleteAdapterVersionResponse) => void): Request<Textract.Types.DeleteAdapterVersionResponse, AWSError>;
+  /**
+   * Deletes an Amazon Textract adapter version. Requires that you specify both an AdapterId and a AdapterVersion. Deletes the adapter version specified by the AdapterId and the AdapterVersion.
+   */
+  deleteAdapterVersion(callback?: (err: AWSError, data: Textract.Types.DeleteAdapterVersionResponse) => void): Request<Textract.Types.DeleteAdapterVersionResponse, AWSError>;
+  /**
    * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be in one of the following image formats: JPEG, PNG, PDF, or TIFF. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
    */
   detectDocumentText(params: Textract.Types.DetectDocumentTextRequest, callback?: (err: AWSError, data: Textract.Types.DetectDocumentTextResponse) => void): Request<Textract.Types.DetectDocumentTextResponse, AWSError>;
@@ -43,6 +75,22 @@ declare class Textract extends Service {
    * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be in one of the following image formats: JPEG, PNG, PDF, or TIFF. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
    */
   detectDocumentText(callback?: (err: AWSError, data: Textract.Types.DetectDocumentTextResponse) => void): Request<Textract.Types.DetectDocumentTextResponse, AWSError>;
+  /**
+   * Gets configuration information for an adapter specified by an AdapterId, returning information on AdapterName, Description, CreationTime, AutoUpdate status, and FeatureTypes.
+   */
+  getAdapter(params: Textract.Types.GetAdapterRequest, callback?: (err: AWSError, data: Textract.Types.GetAdapterResponse) => void): Request<Textract.Types.GetAdapterResponse, AWSError>;
+  /**
+   * Gets configuration information for an adapter specified by an AdapterId, returning information on AdapterName, Description, CreationTime, AutoUpdate status, and FeatureTypes.
+   */
+  getAdapter(callback?: (err: AWSError, data: Textract.Types.GetAdapterResponse) => void): Request<Textract.Types.GetAdapterResponse, AWSError>;
+  /**
+   * Gets configuration information for the specified adapter version, including: AdapterId, AdapterVersion, FeatureTypes, Status, StatusMessage, DatasetConfig, KMSKeyId, OutputConfig, Tags and EvaluationMetrics.
+   */
+  getAdapterVersion(params: Textract.Types.GetAdapterVersionRequest, callback?: (err: AWSError, data: Textract.Types.GetAdapterVersionResponse) => void): Request<Textract.Types.GetAdapterVersionResponse, AWSError>;
+  /**
+   * Gets configuration information for the specified adapter version, including: AdapterId, AdapterVersion, FeatureTypes, Status, StatusMessage, DatasetConfig, KMSKeyId, OutputConfig, Tags and EvaluationMetrics.
+   */
+  getAdapterVersion(callback?: (err: AWSError, data: Textract.Types.GetAdapterVersionResponse) => void): Request<Textract.Types.GetAdapterVersionResponse, AWSError>;
   /**
    * Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document. You start asynchronous text analysis by calling StartDocumentAnalysis, which returns a job identifier (JobId). When the text analysis operation finishes, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that's registered in the initial call to StartDocumentAnalysis. To get the results of the text-detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis.  GetDocumentAnalysis returns an array of Block objects. The following types of information are returned:    Form data (key-value pairs). The related information is returned in two Block objects, each of type KEY_VALUE_SET: a KEY Block object and a VALUE Block object. For example, Name: Ana Silva Carolina contains a key and value. Name: is the key. Ana Silva Carolina is the value.   Table and table cell data. A TABLE Block object contains information about a detected table. A CELL Block object is returned for each cell in a table.   Lines and words of text. A LINE Block object contains one or more WORD Block objects. All lines and words that are detected in the document are returned (including text that doesn't have a relationship with the value of the StartDocumentAnalysis FeatureTypes input parameter).    Query. A QUERY Block object contains the query text, alias and link to the associated Query results block object.   Query Results. A QUERY_RESULT Block object contains the answer to the query and an ID that connects it to the query asked. This Block also contains a confidence score.    While processing a document with queries, look out for INVALID_REQUEST_PARAMETERS output. This indicates that either the per page query limit has been exceeded or that the operation is trying to query a page in the document which doesn’t exist.   Selection elements such as check boxes and option buttons (radio buttons) can be detected in form data and in tables. A SELECTION_ELEMENT Block object contains information about a selection element, including the selection status. Use the MaxResults parameter to limit the number of blocks that are returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetDocumentAnalysis, and populate the NextToken request parameter with the token value that's returned from the previous call to GetDocumentAnalysis. For more information, see Document Text Analysis.
    */
@@ -84,6 +132,30 @@ declare class Textract extends Service {
    */
   getLendingAnalysisSummary(callback?: (err: AWSError, data: Textract.Types.GetLendingAnalysisSummaryResponse) => void): Request<Textract.Types.GetLendingAnalysisSummaryResponse, AWSError>;
   /**
+   * List all version of an adapter that meet the specified filtration criteria.
+   */
+  listAdapterVersions(params: Textract.Types.ListAdapterVersionsRequest, callback?: (err: AWSError, data: Textract.Types.ListAdapterVersionsResponse) => void): Request<Textract.Types.ListAdapterVersionsResponse, AWSError>;
+  /**
+   * List all version of an adapter that meet the specified filtration criteria.
+   */
+  listAdapterVersions(callback?: (err: AWSError, data: Textract.Types.ListAdapterVersionsResponse) => void): Request<Textract.Types.ListAdapterVersionsResponse, AWSError>;
+  /**
+   * Lists all adapters that match the specified filtration criteria.
+   */
+  listAdapters(params: Textract.Types.ListAdaptersRequest, callback?: (err: AWSError, data: Textract.Types.ListAdaptersResponse) => void): Request<Textract.Types.ListAdaptersResponse, AWSError>;
+  /**
+   * Lists all adapters that match the specified filtration criteria.
+   */
+  listAdapters(callback?: (err: AWSError, data: Textract.Types.ListAdaptersResponse) => void): Request<Textract.Types.ListAdaptersResponse, AWSError>;
+  /**
+   * Lists all tags for an Amazon Textract resource.
+   */
+  listTagsForResource(params: Textract.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Textract.Types.ListTagsForResourceResponse) => void): Request<Textract.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all tags for an Amazon Textract resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Textract.Types.ListTagsForResourceResponse) => void): Request<Textract.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Starts the asynchronous analysis of an input document for relationships between detected items such as key-value pairs, tables, and selection elements.  StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocation to specify the bucket name and file name of the document.   StartDocumentAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetDocumentAnalysis, and pass the job identifier (JobId) from the initial call to StartDocumentAnalysis. For more information, see Document Text Analysis.
    */
   startDocumentAnalysis(params: Textract.Types.StartDocumentAnalysisRequest, callback?: (err: AWSError, data: Textract.Types.StartDocumentAnalysisResponse) => void): Request<Textract.Types.StartDocumentAnalysisResponse, AWSError>;
@@ -115,15 +187,133 @@ declare class Textract extends Service {
    * Starts the classification and analysis of an input document. StartLendingAnalysis initiates the classification and analysis of a packet of lending documents. StartLendingAnalysis operates on a document file located in an Amazon S3 bucket.  StartLendingAnalysis can analyze text in documents that are in one of the following formats: JPEG, PNG, TIFF, PDF. Use DocumentLocation to specify the bucket name and the file name of the document.   StartLendingAnalysis returns a job identifier (JobId) that you use to get the results of the operation. When the text analysis is finished, Amazon Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that you specify in NotificationChannel. To get the results of the text analysis operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If the status is SUCCEEDED you can call either GetLendingAnalysis or GetLendingAnalysisSummary and provide the JobId to obtain the results of the analysis. If using OutputConfig to specify an Amazon S3 bucket, the output will be contained within the specified prefix in a directory labeled with the job-id. In the directory there are 3 sub-directories:    detailedResponse (contains the GetLendingAnalysis response)   summaryResponse (for the GetLendingAnalysisSummary response)   splitDocuments (documents split across logical boundaries)  
    */
   startLendingAnalysis(callback?: (err: AWSError, data: Textract.Types.StartLendingAnalysisResponse) => void): Request<Textract.Types.StartLendingAnalysisResponse, AWSError>;
+  /**
+   * Adds one or more tags to the specified resource.
+   */
+  tagResource(params: Textract.Types.TagResourceRequest, callback?: (err: AWSError, data: Textract.Types.TagResourceResponse) => void): Request<Textract.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds one or more tags to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Textract.Types.TagResourceResponse) => void): Request<Textract.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes any tags with the specified keys from the specified resource.
+   */
+  untagResource(params: Textract.Types.UntagResourceRequest, callback?: (err: AWSError, data: Textract.Types.UntagResourceResponse) => void): Request<Textract.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes any tags with the specified keys from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Textract.Types.UntagResourceResponse) => void): Request<Textract.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Update the configuration for an adapter. FeatureTypes configurations cannot be updated. At least one new parameter must be specified as an argument.
+   */
+  updateAdapter(params: Textract.Types.UpdateAdapterRequest, callback?: (err: AWSError, data: Textract.Types.UpdateAdapterResponse) => void): Request<Textract.Types.UpdateAdapterResponse, AWSError>;
+  /**
+   * Update the configuration for an adapter. FeatureTypes configurations cannot be updated. At least one new parameter must be specified as an argument.
+   */
+  updateAdapter(callback?: (err: AWSError, data: Textract.Types.UpdateAdapterResponse) => void): Request<Textract.Types.UpdateAdapterResponse, AWSError>;
 }
 declare namespace Textract {
+  export interface Adapter {
+    /**
+     * A unique identifier for the adapter resource.
+     */
+    AdapterId: AdapterId;
+    /**
+     * Pages is a parameter that the user inputs to specify which pages to apply an adapter to. The following is a list of rules for using this parameter.   If a page is not specified, it is set to ["1"] by default.   The following characters are allowed in the parameter's string: 0 1 2 3 4 5 6 7 8 9 - *. No whitespace is allowed.   When using * to indicate all pages, it must be the only element in the list.   You can use page intervals, such as ["1-3", "1-1", "4-*"]. Where * indicates last page of document.   Specified pages must be greater than 0 and less than or equal to the number of pages in the document.  
+     */
+    Pages?: AdapterPages;
+    /**
+     * A string that identifies the version of the adapter.
+     */
+    Version: AdapterVersion;
+  }
+  export type AdapterDescription = string;
+  export type AdapterId = string;
+  export type AdapterList = AdapterOverview[];
+  export type AdapterName = string;
+  export interface AdapterOverview {
+    /**
+     * A unique identifier for the adapter resource.
+     */
+    AdapterId?: AdapterId;
+    /**
+     * A string naming the adapter resource.
+     */
+    AdapterName?: AdapterName;
+    /**
+     * The date and time that the adapter was created.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The feature types that the adapter is operating on.
+     */
+    FeatureTypes?: FeatureTypes;
+  }
+  export type AdapterPage = string;
+  export type AdapterPages = AdapterPage[];
+  export type AdapterVersion = string;
+  export interface AdapterVersionDatasetConfig {
+    ManifestS3Object?: S3Object;
+  }
+  export interface AdapterVersionEvaluationMetric {
+    /**
+     * The F1 score, precision, and recall metrics for the baseline model.
+     */
+    Baseline?: EvaluationMetric;
+    /**
+     * The F1 score, precision, and recall metrics for the baseline model.
+     */
+    AdapterVersion?: EvaluationMetric;
+    /**
+     * Indicates the feature type being analyzed by a given adapter version.
+     */
+    FeatureType?: FeatureType;
+  }
+  export type AdapterVersionEvaluationMetrics = AdapterVersionEvaluationMetric[];
+  export type AdapterVersionList = AdapterVersionOverview[];
+  export interface AdapterVersionOverview {
+    /**
+     * A unique identifier for the adapter associated with a given adapter version.
+     */
+    AdapterId?: AdapterId;
+    /**
+     * An identified for a given adapter version.
+     */
+    AdapterVersion?: AdapterVersion;
+    /**
+     * The date and time that a given adapter version was created.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The feature types that the adapter version is operating on.
+     */
+    FeatureTypes?: FeatureTypes;
+    /**
+     * Contains information on the status of a given adapter version.
+     */
+    Status?: AdapterVersionStatus;
+    /**
+     * A message explaining the status of a given adapter vesion.
+     */
+    StatusMessage?: AdapterVersionStatusMessage;
+  }
+  export type AdapterVersionStatus = "ACTIVE"|"AT_RISK"|"DEPRECATED"|"CREATION_ERROR"|"CREATION_IN_PROGRESS"|string;
+  export type AdapterVersionStatusMessage = string;
+  export type Adapters = Adapter[];
+  export interface AdaptersConfig {
+    /**
+     * A list of adapters to be used when analyzing the specified document.
+     */
+    Adapters: Adapters;
+  }
+  export type AmazonResourceName = string;
   export interface AnalyzeDocumentRequest {
     /**
      * The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI to call Amazon Textract operations, you can't pass image bytes. The document must be an image in JPEG, PNG, PDF, or TIFF format. If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode image bytes that are passed using the Bytes field. 
      */
     Document: Document;
     /**
-     * A list of the types of analysis to perform. Add TABLES to the list to return information about the tables that are detected in the input document. Add FORMS to return detected form data. Add SIGNATURES to return the locations of detected signatures. Add LAYOUT to the list to return information about the layout of the document. To perform both forms and table analysis, add TABLES and FORMS to FeatureTypes. To detect signatures within the document and within form data and table data, add SIGNATURES to either TABLES or FORMS. All lines and words detected in the document are included in the response (including text that isn't related to the value of FeatureTypes). 
+     * A list of the types of analysis to perform. Add TABLES to the list to return information about the tables that are detected in the input document. Add FORMS to return detected form data. Add SIGNATURES to return the locations of detected signatures. Add LAYOUT to the list to return information about the layout of the document. All lines and words detected in the document are included in the response (including text that isn't related to the value of FeatureTypes). 
      */
     FeatureTypes: FeatureTypes;
     /**
@@ -134,6 +324,10 @@ declare namespace Textract {
      * Contains Queries and the alias for those Queries, as determined by the input. 
      */
     QueriesConfig?: QueriesConfig;
+    /**
+     * Specifies the adapter to be used when analyzing a document.
+     */
+    AdaptersConfig?: AdaptersConfig;
   }
   export interface AnalyzeDocumentResponse {
     /**
@@ -194,9 +388,10 @@ declare namespace Textract {
      */
     AnalyzeIDModelVersion?: String;
   }
+  export type AutoUpdate = "ENABLED"|"DISABLED"|string;
   export interface Block {
     /**
-     * The type of text item that's recognized. In operations for text detection, the following types are returned:    PAGE - Contains a list of the LINE Block objects that are detected on a document page.    WORD - A word detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.   In text analysis operations, the following types are returned:    PAGE - Contains a list of child Block objects that are detected on a document page.    KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text that's detected on a document page. Use the EntityType field to determine if a KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.     WORD - A word that's detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.    TABLE - A table that's detected on a document page. A table is grid-based information with two or more rows or columns, with a cell span of one row and one column each.     TABLE_TITLE - The title of a table. A title is typically a line of text above or below a table, or embedded as the first row of a table.     TABLE_FOOTER - The footer associated with a table. A footer is typically a line or lines of text below a table or embedded as the last row of a table.     CELL - A cell within a detected table. The cell is the parent of the block that contains the text in the cell.    MERGED_CELL - A cell in a table whose content spans more than one row or column. The Relationships array for this cell contain data from individual cells.    SELECTION_ELEMENT - A selection element such as an option button (radio button) or a check box that's detected on a document page. Use the value of SelectionStatus to determine the status of the selection element.    SIGNATURE - The location and confidence score of a signature detected on a document page. Can be returned as part of a Key-Value pair or a detected cell.    QUERY - A question asked during the call of AnalyzeDocument. Contains an alias and an ID that attaches it to its answer.    QUERY_RESULT - A response to a question asked during the call of analyze document. Comes with an alias and ID for ease of locating in a response. Also contains location and confidence score.  
+     * The type of text item that's recognized. In operations for text detection, the following types are returned:    PAGE - Contains a list of the LINE Block objects that are detected on a document page.    WORD - A word detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.   In text analysis operations, the following types are returned:    PAGE - Contains a list of child Block objects that are detected on a document page.    KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text that's detected on a document page. Use the EntityType field to determine if a KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.     WORD - A word that's detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.    TABLE - A table that's detected on a document page. A table is grid-based information with two or more rows or columns, with a cell span of one row and one column each.     TABLE_TITLE - The title of a table. A title is typically a line of text above or below a table, or embedded as the first row of a table.     TABLE_FOOTER - The footer associated with a table. A footer is typically a line or lines of text below a table or embedded as the last row of a table.     CELL - A cell within a detected table. The cell is the parent of the block that contains the text in the cell.    MERGED_CELL - A cell in a table whose content spans more than one row or column. The Relationships array for this cell contain data from individual cells.    SELECTION_ELEMENT - A selection element such as an option button (radio button) or a check box that's detected on a document page. Use the value of SelectionStatus to determine the status of the selection element.    SIGNATURE - The location and confidence score of a signature detected on a document page. Can be returned as part of a Key-Value pair or a detected cell.    QUERY - A question asked during the call of AnalyzeDocument. Contains an alias and an ID that attaches it to its answer.    QUERY_RESULT - A response to a question asked during the call of analyze document. Comes with an alias and ID for ease of locating in a response. Also contains location and confidence score.   The following BlockTypes are only returned for Amazon Textract Layout.    LAYOUT_TITLE - The main title of the document.    LAYOUT_HEADER - Text located in the top margin of the document.    LAYOUT_FOOTER - Text located in the bottom margin of the document.    LAYOUT_SECTION_HEADER - The titles of sections within a document.    LAYOUT_PAGE_NUMBER - The page number of the documents.    LAYOUT_LIST - Any information grouped together in list form.     LAYOUT_FIGURE - Indicates the location of an image in a document.    LAYOUT_TABLE - Indicates the location of a table in the document.    LAYOUT_KEY_VALUE - Indicates the location of form key-values in a document.    LAYOUT_TEXT - Text that is present typically as a part of paragraphs in documents.  
      */
     BlockType?: BlockType;
     /**
@@ -279,6 +474,92 @@ declare namespace Textract {
   export type ClientRequestToken = string;
   export type ContentClassifier = "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"|string;
   export type ContentClassifiers = ContentClassifier[];
+  export interface CreateAdapterRequest {
+    /**
+     * The name to be assigned to the adapter being created.
+     */
+    AdapterName: AdapterName;
+    /**
+     * Idempotent token is used to recognize the request. If the same token is used with multiple CreateAdapter requests, the same session is returned. This token is employed to avoid unintentionally creating the same session multiple times.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The description to be assigned to the adapter being created.
+     */
+    Description?: AdapterDescription;
+    /**
+     * The type of feature that the adapter is being trained on. Currrenly, supported feature types are: QUERIES 
+     */
+    FeatureTypes: FeatureTypes;
+    /**
+     * Controls whether or not the adapter should automatically update.
+     */
+    AutoUpdate?: AutoUpdate;
+    /**
+     * A list of tags to be added to the adapter.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateAdapterResponse {
+    /**
+     * A string containing the unique ID for the adapter that has been created.
+     */
+    AdapterId?: AdapterId;
+  }
+  export interface CreateAdapterVersionRequest {
+    /**
+     * A string containing a unique ID for the adapter that will receive a new version.
+     */
+    AdapterId: AdapterId;
+    /**
+     * Idempotent token is used to recognize the request. If the same token is used with multiple CreateAdapterVersion requests, the same session is returned. This token is employed to avoid unintentionally creating the same session multiple times.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * Specifies a dataset used to train a new adapter version. Takes a ManifestS3Object as the value.
+     */
+    DatasetConfig: AdapterVersionDatasetConfig;
+    /**
+     * The identifier for your AWS Key Management Service key (AWS KMS key). Used to encrypt your documents.
+     */
+    KMSKeyId?: KMSKeyId;
+    OutputConfig: OutputConfig;
+    /**
+     * A set of tags (key-value pairs) that you want to attach to the adapter version. 
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateAdapterVersionResponse {
+    /**
+     * A string containing the unique ID for the adapter that has received a new version.
+     */
+    AdapterId?: AdapterId;
+    /**
+     * A string describing the new version of the adapter.
+     */
+    AdapterVersion?: AdapterVersion;
+  }
+  export type DateTime = Date;
+  export interface DeleteAdapterRequest {
+    /**
+     * A string containing a unique ID for the adapter to be deleted.
+     */
+    AdapterId: AdapterId;
+  }
+  export interface DeleteAdapterResponse {
+  }
+  export interface DeleteAdapterVersionRequest {
+    /**
+     * A string containing a unique ID for the adapter version that will be deleted.
+     */
+    AdapterId: AdapterId;
+    /**
+     * Specifies the adapter version to be deleted.
+     */
+    AdapterVersion: AdapterVersion;
+  }
+  export interface DeleteAdapterVersionResponse {
+  }
   export interface DetectDocumentTextRequest {
     /**
      * The input document as base64-encoded bytes or an Amazon S3 object. If you use the AWS CLI to call Amazon Textract operations, you can't pass image bytes. The document must be an image in JPEG or PNG format. If you're using an AWS SDK to call Amazon Textract, you might not need to base64-encode image bytes that are passed using the Bytes field. 
@@ -351,6 +632,20 @@ declare namespace Textract {
   export type EntityType = "KEY"|"VALUE"|"COLUMN_HEADER"|"TABLE_TITLE"|"TABLE_FOOTER"|"TABLE_SECTION_TITLE"|"TABLE_SUMMARY"|"STRUCTURED_TABLE"|"SEMI_STRUCTURED_TABLE"|string;
   export type EntityTypes = EntityType[];
   export type ErrorCode = string;
+  export interface EvaluationMetric {
+    /**
+     * The F1 score for an adapter version.
+     */
+    F1Score?: Float;
+    /**
+     * The Precision score for an adapter version.
+     */
+    Precision?: Float;
+    /**
+     * The Recall score for an adapter version.
+     */
+    Recall?: Float;
+  }
   export interface ExpenseCurrency {
     /**
      * Currency code for detected currency. the current supported codes are:   USD   EUR   GBP   CAD   INR   JPY   CHF   AUD   CNY   BZR   SEK   HKD  
@@ -461,6 +756,95 @@ declare namespace Textract {
      * Within the bounding box, a fine-grained polygon around the recognized item.
      */
     Polygon?: Polygon;
+  }
+  export interface GetAdapterRequest {
+    /**
+     * A string containing a unique ID for the adapter.
+     */
+    AdapterId: AdapterId;
+  }
+  export interface GetAdapterResponse {
+    /**
+     * A string identifying the adapter that information has been retrieved for.
+     */
+    AdapterId?: AdapterId;
+    /**
+     * The name of the requested adapter.
+     */
+    AdapterName?: AdapterName;
+    /**
+     * The date and time the requested adapter was created at.
+     */
+    CreationTime?: DateTime;
+    /**
+     * The description for the requested adapter.
+     */
+    Description?: AdapterDescription;
+    /**
+     * List of the targeted feature types for the requested adapter.
+     */
+    FeatureTypes?: FeatureTypes;
+    /**
+     * Binary value indicating if the adapter is being automatically updated or not.
+     */
+    AutoUpdate?: AutoUpdate;
+    /**
+     * A set of tags (key-value pairs) associated with the adapter that has been retrieved.
+     */
+    Tags?: TagMap;
+  }
+  export interface GetAdapterVersionRequest {
+    /**
+     * A string specifying a unique ID for the adapter version you want to retrieve information for.
+     */
+    AdapterId: AdapterId;
+    /**
+     * A string specifying the adapter version you want to retrieve information for.
+     */
+    AdapterVersion: AdapterVersion;
+  }
+  export interface GetAdapterVersionResponse {
+    /**
+     * A string containing a unique ID for the adapter version being retrieved.
+     */
+    AdapterId?: AdapterId;
+    /**
+     * A string containing the adapter version that has been retrieved.
+     */
+    AdapterVersion?: AdapterVersion;
+    /**
+     * The time that the adapter version was created.
+     */
+    CreationTime?: DateTime;
+    /**
+     * List of the targeted feature types for the requested adapter version.
+     */
+    FeatureTypes?: FeatureTypes;
+    /**
+     * The status of the adapter version that has been requested.
+     */
+    Status?: AdapterVersionStatus;
+    /**
+     * A message that describes the status of the requested adapter version.
+     */
+    StatusMessage?: AdapterVersionStatusMessage;
+    /**
+     * Specifies a dataset used to train a new adapter version. Takes a ManifestS3Objec as the value.
+     */
+    DatasetConfig?: AdapterVersionDatasetConfig;
+    /**
+     * The identifier for your AWS Key Management Service key (AWS KMS key). Used to encrypt your documents.
+     */
+    KMSKeyId?: KMSKeyId;
+    OutputConfig?: OutputConfig;
+    /**
+     * The evaluation metrics (F1 score, Precision, and Recall) for the requested version, grouped by baseline metrics and adapter version.
+     */
+    EvaluationMetrics?: AdapterVersionEvaluationMetrics;
+    /**
+     * A set of tags (key-value pairs) that are associated with the adapter version.
+     */
+    Tags?: TagMap;
   }
   export interface GetDocumentAnalysisRequest {
     /**
@@ -810,6 +1194,78 @@ declare namespace Textract {
   }
   export type LineItemGroupList = LineItemGroup[];
   export type LineItemList = LineItemFields[];
+  export interface ListAdapterVersionsRequest {
+    /**
+     * A string containing a unique ID for the adapter to match for when listing adapter versions.
+     */
+    AdapterId?: AdapterId;
+    /**
+     * Specifies the lower bound for the ListAdapterVersions operation. Ensures ListAdapterVersions returns only adapter versions created after the specified creation time.
+     */
+    AfterCreationTime?: DateTime;
+    /**
+     * Specifies the upper bound for the ListAdapterVersions operation. Ensures ListAdapterVersions returns only adapter versions created after the specified creation time.
+     */
+    BeforeCreationTime?: DateTime;
+    /**
+     * The maximum number of results to return when listing adapter versions.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Identifies the next page of results to return when listing adapter versions.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListAdapterVersionsResponse {
+    /**
+     * Adapter versions that match the filtering criteria specified when calling ListAdapters.
+     */
+    AdapterVersions?: AdapterVersionList;
+    /**
+     * Identifies the next page of results to return when listing adapter versions.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListAdaptersRequest {
+    /**
+     * Specifies the lower bound for the ListAdapters operation. Ensures ListAdapters returns only adapters created after the specified creation time.
+     */
+    AfterCreationTime?: DateTime;
+    /**
+     * Specifies the upper bound for the ListAdapters operation. Ensures ListAdapters returns only adapters created before the specified creation time.
+     */
+    BeforeCreationTime?: DateTime;
+    /**
+     * The maximum number of results to return when listing adapters.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Identifies the next page of results to return when listing adapters.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListAdaptersResponse {
+    /**
+     * A list of adapters that matches the filtering criteria specified when calling ListAdapters.
+     */
+    Adapters?: AdapterList;
+    /**
+     * Identifies the next page of results to return when listing adapters.
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that specifies the resource to list tags for.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A set of tags (key-value pairs) that are part of the requested resource.
+     */
+    Tags?: TagMap;
+  }
   export type MaxResults = number;
   export type NonEmptyString = string;
   export interface NormalizedValue {
@@ -983,6 +1439,10 @@ declare namespace Textract {
      */
     KMSKeyId?: KMSKeyId;
     QueriesConfig?: QueriesConfig;
+    /**
+     * Specifies the adapter to be used when analyzing a document.
+     */
+    AdaptersConfig?: AdaptersConfig;
   }
   export interface StartDocumentAnalysisResponse {
     /**
@@ -1080,6 +1540,22 @@ declare namespace Textract {
   export type StatusMessage = string;
   export type String = string;
   export type StringList = String[];
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that specifies the resource to be tagged.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * A set of tags (key-value pairs) that you want to assign to the resource.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type TextType = "HANDWRITING"|"PRINTED"|string;
   export type UInteger = number;
   export type UndetectedDocumentTypeList = NonEmptyString[];
@@ -1090,6 +1566,62 @@ declare namespace Textract {
     Page?: UInteger;
   }
   export type UndetectedSignatureList = UndetectedSignature[];
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that specifies the resource to be untagged.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * Specifies the tags to be removed from the resource specified by the ResourceARN.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
+  export interface UpdateAdapterRequest {
+    /**
+     * A string containing a unique ID for the adapter that will be updated.
+     */
+    AdapterId: AdapterId;
+    /**
+     * The new description to be applied to the adapter.
+     */
+    Description?: AdapterDescription;
+    /**
+     * The new name to be applied to the adapter.
+     */
+    AdapterName?: AdapterName;
+    /**
+     * The new auto-update status to be applied to the adapter.
+     */
+    AutoUpdate?: AutoUpdate;
+  }
+  export interface UpdateAdapterResponse {
+    /**
+     * A string containing a unique ID for the adapter that has been updated.
+     */
+    AdapterId?: AdapterId;
+    /**
+     * A string containing the name of the adapter that has been updated.
+     */
+    AdapterName?: AdapterName;
+    /**
+     * An object specifying the creation time of the the adapter that has been updated.
+     */
+    CreationTime?: DateTime;
+    /**
+     * A string containing the description of the adapter that has been updated.
+     */
+    Description?: AdapterDescription;
+    /**
+     * List of the targeted feature types for the updated adapter.
+     */
+    FeatureTypes?: FeatureTypes;
+    /**
+     * The auto-update status of the adapter that has been updated.
+     */
+    AutoUpdate?: AutoUpdate;
+  }
   export type ValueType = "DATE"|string;
   export interface Warning {
     /**

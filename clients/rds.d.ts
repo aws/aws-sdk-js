@@ -2338,6 +2338,10 @@ declare namespace RDS {
      * The Oracle system identifier (SID), which is the name of the Oracle database instance that manages your database files. In this context, the term "Oracle database instance" refers exclusively to the system global area (SGA) and Oracle background processes. If you don't specify a SID, the value defaults to RDSCDB. The Oracle SID is also the name of your CDB.
      */
     DBSystemId?: String;
+    /**
+     * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+     */
+    DedicatedLogVolume?: BooleanOptional;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -2505,6 +2509,10 @@ declare namespace RDS {
      * The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas. Constraints:   Must be the identifier of an existing Multi-AZ DB cluster.   Can't be specified if the SourceDBInstanceIdentifier parameter is also specified.   The specified DB cluster must have automatic backups enabled, that is, its backup retention period must be greater than 0.   The source DB cluster must be in the same Amazon Web Services Region as the read replica. Cross-Region replication isn't supported.  
      */
     SourceDBClusterIdentifier?: String;
+    /**
+     * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+     */
+    DedicatedLogVolume?: BooleanOptional;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -3972,6 +3980,10 @@ declare namespace RDS {
      * The progress of the storage optimization operation as a percentage.
      */
     PercentProgress?: String;
+    /**
+     * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+     */
+    DedicatedLogVolume?: Boolean;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -4090,6 +4102,10 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.
      */
     AwsBackupRecoveryPointArn?: String;
+    /**
+     * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+     */
+    DedicatedLogVolume?: BooleanOptional;
   }
   export type DBInstanceAutomatedBackupList = DBInstanceAutomatedBackup[];
   export interface DBInstanceAutomatedBackupMessage {
@@ -4580,6 +4596,10 @@ declare namespace RDS {
      * The Oracle system identifier (SID), which is the name of the Oracle database instance that manages your database files. The Oracle SID is also the name of your CDB.
      */
     DBSystemId?: String;
+    /**
+     * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+     */
+    DedicatedLogVolume?: Boolean;
   }
   export interface DBSnapshotAttribute {
     /**
@@ -6893,6 +6913,10 @@ declare namespace RDS {
      * The target Oracle DB engine when you convert a non-CDB to a CDB. This intermediate step is necessary to upgrade an Oracle Database 19c non-CDB to an Oracle Database 21c CDB. Note the following requirements:   Make sure that you specify oracle-ee-cdb or oracle-se2-cdb.   Make sure that your DB engine runs Oracle Database 19c with an April 2021 or later RU.   Note the following limitations:   You can't convert a CDB to a non-CDB.   You can't convert a replica database.   You can't convert a non-CDB to a CDB and upgrade the engine version in the same command.   You can't convert the existing custom parameter or option group when it has options or parameters that are permanent or persistent. In this situation, the DB instance reverts to the default option and parameter group. To avoid reverting to the default, specify a new parameter group with --db-parameter-group-name and a new option group with --option-group-name.  
      */
     Engine?: String;
+    /**
+     * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
+     */
+    DedicatedLogVolume?: BooleanOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -7559,6 +7583,10 @@ declare namespace RDS {
      * Maximum storage throughput to provisioned IOPS ratio for a DB instance.
      */
     MaxStorageThroughputPerIops?: DoubleOptional;
+    /**
+     * Indicates whether a DB instance supports using a dedicated log volume (DLV).
+     */
+    SupportsDedicatedLogVolume?: Boolean;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -7750,6 +7778,10 @@ declare namespace RDS {
      * The database engine of the DB instance.
      */
     Engine?: String;
+    /**
+     * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.&gt;
+     */
+    DedicatedLogVolume?: BooleanOptional;
   }
   export interface ProcessorFeature {
     /**
@@ -8637,6 +8669,10 @@ declare namespace RDS {
      * The amount of storage (in gibibytes) to allocate initially for the DB instance. Follow the allocation rules specified in CreateDBInstance.  Be sure to allocate enough storage for your new DB instance so that the restore operation can succeed. You can also allocate additional storage for future growth. 
      */
     AllocatedStorage?: IntegerOptional;
+    /**
+     * Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
+     */
+    DedicatedLogVolume?: BooleanOptional;
   }
   export interface RestoreDBInstanceFromDBSnapshotResult {
     DBInstance?: DBInstance;
@@ -8834,6 +8870,10 @@ declare namespace RDS {
      * The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager. This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets Manager for the DB instance. The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If you don't specify MasterUserSecretKmsKeyId, then the aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't use the aws/secretsmanager KMS key to encrypt the secret, and you must use a customer managed KMS key. There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.
      */
     MasterUserSecretKmsKeyId?: String;
+    /**
+     * Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
+     */
+    DedicatedLogVolume?: BooleanOptional;
   }
   export interface RestoreDBInstanceFromS3Result {
     DBInstance?: DBInstance;
@@ -9008,6 +9048,10 @@ declare namespace RDS {
      * The amount of storage (in gibibytes) to allocate initially for the DB instance. Follow the allocation rules specified in CreateDBInstance.  Be sure to allocate enough storage for your new DB instance so that the restore operation can succeed. You can also allocate additional storage for future growth. 
      */
     AllocatedStorage?: IntegerOptional;
+    /**
+     * Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
+     */
+    DedicatedLogVolume?: BooleanOptional;
   }
   export interface RestoreDBInstanceToPointInTimeResult {
     DBInstance?: DBInstance;
@@ -9548,6 +9592,10 @@ declare namespace RDS {
      * Valid processor features for your DB instance.
      */
     ValidProcessorFeatures?: AvailableProcessorFeatureList;
+    /**
+     * Indicates whether a DB instance supports using a dedicated log volume (DLV).
+     */
+    SupportsDedicatedLogVolume?: Boolean;
   }
   export interface ValidStorageOptions {
     /**

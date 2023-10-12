@@ -50,7 +50,7 @@
       ],
       "documentation": "<p>Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection. </p> <p>You can associate up to five geofence collections to each tracker resource.</p> <note> <p>Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account.</p> </note>",
       "endpoint": {
-        "hostPrefix": "tracking."
+        "hostPrefix": "cp.tracking."
       }
     },
     "BatchDeleteDevicePositionHistory": {
@@ -368,7 +368,7 @@
       ],
       "documentation": "<p>Creates a geofence collection, which manages and stores geofences.</p>",
       "endpoint": {
-        "hostPrefix": "geofencing."
+        "hostPrefix": "cp.geofencing."
       },
       "idempotent": true
     },
@@ -407,7 +407,7 @@
       ],
       "documentation": "<p>Creates an API key resource in your Amazon Web Services account, which lets you grant actions for Amazon Location resources to the API key bearer.</p> <note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html\">Using API keys</a>.</p> </note>",
       "endpoint": {
-        "hostPrefix": "metadata."
+        "hostPrefix": "cp.metadata."
       },
       "idempotent": true
     },
@@ -446,7 +446,7 @@
       ],
       "documentation": "<p>Creates a map resource in your Amazon Web Services account, which provides map tiles of different styles sourced from global location data providers.</p> <note> <p>If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services service terms</a> for more details.</p> </note>",
       "endpoint": {
-        "hostPrefix": "maps."
+        "hostPrefix": "cp.maps."
       },
       "idempotent": true
     },
@@ -485,7 +485,7 @@
       ],
       "documentation": "<p>Creates a place index resource in your Amazon Web Services account. Use a place index resource to geocode addresses and other text queries by using the <code>SearchPlaceIndexForText</code> operation, and reverse geocode coordinates by using the <code>SearchPlaceIndexForPosition</code> operation, and enable autosuggestions by using the <code>SearchPlaceIndexForSuggestions</code> operation.</p> <note> <p>If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services service terms</a> for more details.</p> </note>",
       "endpoint": {
-        "hostPrefix": "places."
+        "hostPrefix": "cp.places."
       },
       "idempotent": true
     },
@@ -524,7 +524,7 @@
       ],
       "documentation": "<p>Creates a route calculator resource in your Amazon Web Services account.</p> <p>You can send requests to a route calculator resource to estimate travel time, distance, and get directions. A route calculator sources traffic and road network data from your chosen data provider.</p> <note> <p>If your application is tracking or routing assets you use in your business, such as delivery vehicles or employees, you must not use Esri as your geolocation provider. See section 82 of the <a href=\"http://aws.amazon.com/service-terms\">Amazon Web Services service terms</a> for more details.</p> </note>",
       "endpoint": {
-        "hostPrefix": "routes."
+        "hostPrefix": "cp.routes."
       },
       "idempotent": true
     },
@@ -563,7 +563,7 @@
       ],
       "documentation": "<p>Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and historical location of devices.</p>",
       "endpoint": {
-        "hostPrefix": "tracking."
+        "hostPrefix": "cp.tracking."
       },
       "idempotent": true
     },
@@ -599,7 +599,7 @@
       ],
       "documentation": "<p>Deletes a geofence collection from your Amazon Web Services account.</p> <note> <p>This operation deletes the resource permanently. If the geofence collection is the target of a tracker resource, the devices will no longer be monitored.</p> </note>",
       "endpoint": {
-        "hostPrefix": "geofencing."
+        "hostPrefix": "cp.geofencing."
       },
       "idempotent": true
     },
@@ -635,7 +635,7 @@
       ],
       "documentation": "<p>Deletes the specified API key. The API key must have been deactivated more than 90 days previously.</p>",
       "endpoint": {
-        "hostPrefix": "metadata."
+        "hostPrefix": "cp.metadata."
       },
       "idempotent": true
     },
@@ -671,7 +671,7 @@
       ],
       "documentation": "<p>Deletes a map resource from your Amazon Web Services account.</p> <note> <p>This operation deletes the resource permanently. If the map is being used in an application, the map may not render.</p> </note>",
       "endpoint": {
-        "hostPrefix": "maps."
+        "hostPrefix": "cp.maps."
       },
       "idempotent": true
     },
@@ -707,7 +707,7 @@
       ],
       "documentation": "<p>Deletes a place index resource from your Amazon Web Services account.</p> <note> <p>This operation deletes the resource permanently.</p> </note>",
       "endpoint": {
-        "hostPrefix": "places."
+        "hostPrefix": "cp.places."
       },
       "idempotent": true
     },
@@ -743,7 +743,7 @@
       ],
       "documentation": "<p>Deletes a route calculator resource from your Amazon Web Services account.</p> <note> <p>This operation deletes the resource permanently.</p> </note>",
       "endpoint": {
-        "hostPrefix": "routes."
+        "hostPrefix": "cp.routes."
       },
       "idempotent": true
     },
@@ -779,7 +779,7 @@
       ],
       "documentation": "<p>Deletes a tracker resource from your Amazon Web Services account.</p> <note> <p>This operation deletes the resource permanently. If the tracker resource is in use, you may encounter an error. Make sure that the target resource isn't a dependency for your applications.</p> </note>",
       "endpoint": {
-        "hostPrefix": "tracking."
+        "hostPrefix": "cp.tracking."
       },
       "idempotent": true
     },
@@ -815,7 +815,7 @@
       ],
       "documentation": "<p>Retrieves the geofence collection details.</p>",
       "endpoint": {
-        "hostPrefix": "geofencing."
+        "hostPrefix": "cp.geofencing."
       }
     },
     "DescribeKey": {
@@ -850,7 +850,7 @@
       ],
       "documentation": "<p>Retrieves the API key resource details.</p>",
       "endpoint": {
-        "hostPrefix": "metadata."
+        "hostPrefix": "cp.metadata."
       }
     },
     "DescribeMap": {
@@ -885,7 +885,7 @@
       ],
       "documentation": "<p>Retrieves the map resource details.</p>",
       "endpoint": {
-        "hostPrefix": "maps."
+        "hostPrefix": "cp.maps."
       }
     },
     "DescribePlaceIndex": {
@@ -920,7 +920,7 @@
       ],
       "documentation": "<p>Retrieves the place index resource details.</p>",
       "endpoint": {
-        "hostPrefix": "places."
+        "hostPrefix": "cp.places."
       }
     },
     "DescribeRouteCalculator": {
@@ -955,7 +955,7 @@
       ],
       "documentation": "<p>Retrieves the route calculator resource details.</p>",
       "endpoint": {
-        "hostPrefix": "routes."
+        "hostPrefix": "cp.routes."
       }
     },
     "DescribeTracker": {
@@ -990,7 +990,7 @@
       ],
       "documentation": "<p>Retrieves the tracker resource details.</p>",
       "endpoint": {
-        "hostPrefix": "tracking."
+        "hostPrefix": "cp.tracking."
       }
     },
     "DisassociateTrackerConsumer": {
@@ -1025,7 +1025,7 @@
       ],
       "documentation": "<p>Removes the association between a tracker resource and a geofence collection.</p> <note> <p>Once you unlink a tracker resource from a geofence collection, the tracker positions will no longer be automatically evaluated against geofences.</p> </note>",
       "endpoint": {
-        "hostPrefix": "tracking."
+        "hostPrefix": "cp.tracking."
       }
     },
     "GetDevicePosition": {
@@ -1369,7 +1369,7 @@
       ],
       "documentation": "<p>Lists geofence collections in your Amazon Web Services account.</p>",
       "endpoint": {
-        "hostPrefix": "geofencing."
+        "hostPrefix": "cp.geofencing."
       }
     },
     "ListGeofences": {
@@ -1436,7 +1436,7 @@
       ],
       "documentation": "<p>Lists API key resources in your Amazon Web Services account.</p>",
       "endpoint": {
-        "hostPrefix": "metadata."
+        "hostPrefix": "cp.metadata."
       }
     },
     "ListMaps": {
@@ -1468,7 +1468,7 @@
       ],
       "documentation": "<p>Lists map resources in your Amazon Web Services account.</p>",
       "endpoint": {
-        "hostPrefix": "maps."
+        "hostPrefix": "cp.maps."
       }
     },
     "ListPlaceIndexes": {
@@ -1500,7 +1500,7 @@
       ],
       "documentation": "<p>Lists place index resources in your Amazon Web Services account.</p>",
       "endpoint": {
-        "hostPrefix": "places."
+        "hostPrefix": "cp.places."
       }
     },
     "ListRouteCalculators": {
@@ -1532,7 +1532,7 @@
       ],
       "documentation": "<p>Lists route calculator resources in your Amazon Web Services account.</p>",
       "endpoint": {
-        "hostPrefix": "routes."
+        "hostPrefix": "cp.routes."
       }
     },
     "ListTagsForResource": {
@@ -1567,7 +1567,7 @@
       ],
       "documentation": "<p>Returns a list of tags that are applied to the specified Amazon Location resource.</p>",
       "endpoint": {
-        "hostPrefix": "metadata."
+        "hostPrefix": "cp.metadata."
       }
     },
     "ListTrackerConsumers": {
@@ -1602,7 +1602,7 @@
       ],
       "documentation": "<p>Lists geofence collections currently associated to the given tracker resource.</p>",
       "endpoint": {
-        "hostPrefix": "tracking."
+        "hostPrefix": "cp.tracking."
       }
     },
     "ListTrackers": {
@@ -1634,7 +1634,7 @@
       ],
       "documentation": "<p>Lists tracker resources in your Amazon Web Services account.</p>",
       "endpoint": {
-        "hostPrefix": "tracking."
+        "hostPrefix": "cp.tracking."
       }
     },
     "PutGeofence": {
@@ -1812,7 +1812,7 @@
       ],
       "documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>You can use the <code>TagResource</code> operation with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that's already associated with the resource, the new tag value that you specify replaces the previous value for that tag. </p> <p>You can associate up to 50 tags with a resource.</p>",
       "endpoint": {
-        "hostPrefix": "metadata."
+        "hostPrefix": "cp.metadata."
       }
     },
     "UntagResource": {
@@ -1847,7 +1847,7 @@
       ],
       "documentation": "<p>Removes one or more tags from the specified Amazon Location resource.</p>",
       "endpoint": {
-        "hostPrefix": "metadata."
+        "hostPrefix": "cp.metadata."
       },
       "idempotent": true
     },
@@ -1883,7 +1883,7 @@
       ],
       "documentation": "<p>Updates the specified properties of a given geofence collection.</p>",
       "endpoint": {
-        "hostPrefix": "geofencing."
+        "hostPrefix": "cp.geofencing."
       },
       "idempotent": true
     },
@@ -1919,7 +1919,7 @@
       ],
       "documentation": "<p>Updates the specified properties of a given API key resource.</p>",
       "endpoint": {
-        "hostPrefix": "metadata."
+        "hostPrefix": "cp.metadata."
       },
       "idempotent": true
     },
@@ -1955,7 +1955,7 @@
       ],
       "documentation": "<p>Updates the specified properties of a given map resource.</p>",
       "endpoint": {
-        "hostPrefix": "maps."
+        "hostPrefix": "cp.maps."
       },
       "idempotent": true
     },
@@ -1991,7 +1991,7 @@
       ],
       "documentation": "<p>Updates the specified properties of a given place index resource.</p>",
       "endpoint": {
-        "hostPrefix": "places."
+        "hostPrefix": "cp.places."
       },
       "idempotent": true
     },
@@ -2027,7 +2027,7 @@
       ],
       "documentation": "<p>Updates the specified properties for a given route calculator resource.</p>",
       "endpoint": {
-        "hostPrefix": "routes."
+        "hostPrefix": "cp.routes."
       },
       "idempotent": true
     },
@@ -2063,7 +2063,7 @@
       ],
       "documentation": "<p>Updates the specified properties of a given tracker resource.</p>",
       "endpoint": {
-        "hostPrefix": "tracking."
+        "hostPrefix": "cp.tracking."
       },
       "idempotent": true
     }

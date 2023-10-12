@@ -116,11 +116,11 @@ declare class WorkSpaces extends Service {
    */
   createWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceImageResult) => void): Request<WorkSpaces.Types.CreateWorkspaceImageResult, AWSError>;
   /**
-   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.  The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core. 
+   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   PCoIP is only available for Windows bundles.   
    */
   createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
-   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.  The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core. 
+   * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.    The MANUAL running mode value is only supported by Amazon WorkSpaces Core. Contact your account team to be allow-listed to use this value. For more information, see Amazon WorkSpaces Core.   PCoIP is only available for Windows bundles.   
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**

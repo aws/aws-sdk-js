@@ -422,9 +422,29 @@ declare namespace IVSRealTime {
      */
     attributes?: ParticipantAttributes;
     /**
+     * The participant’s browser.
+     */
+    browserName?: ParticipantClientAttribute;
+    /**
+     * The participant’s browser version.
+     */
+    browserVersion?: ParticipantClientAttribute;
+    /**
      * ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
      */
     firstJoinTime?: Time;
+    /**
+     * The participant’s Internet Service Provider.
+     */
+    ispName?: ParticipantClientAttribute;
+    /**
+     * The participant’s operating system.
+     */
+    osName?: ParticipantClientAttribute;
+    /**
+     * The participant’s operating system version.
+     */
+    osVersion?: ParticipantClientAttribute;
     /**
      * Unique identifier for this participant, assigned by IVS.
      */
@@ -433,6 +453,10 @@ declare namespace IVSRealTime {
      * Whether the participant ever published to the stage session.
      */
     published?: Published;
+    /**
+     * The participant’s SDK version.
+     */
+    sdkVersion?: ParticipantClientAttribute;
     /**
      * Whether the participant is connected to or disconnected from the stage.
      */
@@ -443,6 +467,7 @@ declare namespace IVSRealTime {
     userId?: UserId;
   }
   export type ParticipantAttributes = {[key: string]: String};
+  export type ParticipantClientAttribute = string;
   export type ParticipantId = string;
   export type ParticipantList = ParticipantSummary[];
   export type ParticipantState = "CONNECTED"|"DISCONNECTED"|string;

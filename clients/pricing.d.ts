@@ -28,11 +28,11 @@ declare class Pricing extends Service {
    */
   getAttributeValues(callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
   /**
-   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns the URL that you can retrieve your Price List file from. This URL is based on the PriceListArn and FileFormat that you retrieve from the  ListPriceLists  response. 
+   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns the URL that you can retrieve your Price List file from. This URL is based on the PriceListArn and FileFormat that you retrieve from the ListPriceLists response. 
    */
   getPriceListFileUrl(params: Pricing.Types.GetPriceListFileUrlRequest, callback?: (err: AWSError, data: Pricing.Types.GetPriceListFileUrlResponse) => void): Request<Pricing.Types.GetPriceListFileUrlResponse, AWSError>;
   /**
-   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns the URL that you can retrieve your Price List file from. This URL is based on the PriceListArn and FileFormat that you retrieve from the  ListPriceLists  response. 
+   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns the URL that you can retrieve your Price List file from. This URL is based on the PriceListArn and FileFormat that you retrieve from the ListPriceLists response. 
    */
   getPriceListFileUrl(callback?: (err: AWSError, data: Pricing.Types.GetPriceListFileUrlResponse) => void): Request<Pricing.Types.GetPriceListFileUrlResponse, AWSError>;
   /**
@@ -44,11 +44,11 @@ declare class Pricing extends Service {
    */
   getProducts(callback?: (err: AWSError, data: Pricing.Types.GetProductsResponse) => void): Request<Pricing.Types.GetProductsResponse, AWSError>;
   /**
-   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns a list of Price List references that the requester if authorized to view, given a ServiceCode, CurrencyCode, and an EffectiveDate. Use without a RegionCode filter to list Price List references from all available Amazon Web Services Regions. Use with a RegionCode filter to get the Price List reference that's specific to a specific Amazon Web Services Region. You can use the PriceListArn from the response to get your preferred Price List files through the  GetPriceListFileUrl  API.
+   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns a list of Price List references that the requester if authorized to view, given a ServiceCode, CurrencyCode, and an EffectiveDate. Use without a RegionCode filter to list Price List references from all available Amazon Web Services Regions. Use with a RegionCode filter to get the Price List reference that's specific to a specific Amazon Web Services Region. You can use the PriceListArn from the response to get your preferred Price List files through the GetPriceListFileUrl API.
    */
   listPriceLists(params: Pricing.Types.ListPriceListsRequest, callback?: (err: AWSError, data: Pricing.Types.ListPriceListsResponse) => void): Request<Pricing.Types.ListPriceListsResponse, AWSError>;
   /**
-   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns a list of Price List references that the requester if authorized to view, given a ServiceCode, CurrencyCode, and an EffectiveDate. Use without a RegionCode filter to list Price List references from all available Amazon Web Services Regions. Use with a RegionCode filter to get the Price List reference that's specific to a specific Amazon Web Services Region. You can use the PriceListArn from the response to get your preferred Price List files through the  GetPriceListFileUrl  API.
+   *   This feature is in preview release and is subject to change. Your use of Amazon Web Services Price List API is subject to the Beta Service Participation terms of the Amazon Web Services Service Terms (Section 1.10).   This returns a list of Price List references that the requester if authorized to view, given a ServiceCode, CurrencyCode, and an EffectiveDate. Use without a RegionCode filter to list Price List references from all available Amazon Web Services Regions. Use with a RegionCode filter to get the Price List reference that's specific to a specific Amazon Web Services Region. You can use the PriceListArn from the response to get your preferred Price List files through the GetPriceListFileUrl API.
    */
   listPriceLists(callback?: (err: AWSError, data: Pricing.Types.ListPriceListsResponse) => void): Request<Pricing.Types.ListPriceListsResponse, AWSError>;
 }
@@ -144,11 +144,11 @@ declare namespace Pricing {
   }
   export interface GetPriceListFileUrlRequest {
     /**
-     * The unique identifier that maps to where your Price List files are located. PriceListArn can be obtained from the  ListPriceLists  response. 
+     * The unique identifier that maps to where your Price List files are located. PriceListArn can be obtained from the ListPriceLists response. 
      */
     PriceListArn: PriceListArn;
     /**
-     * The format that you want to retrieve your Price List files in. The FileFormat can be obtained from the  ListPriceLists  response. 
+     * The format that you want to retrieve your Price List files in. The FileFormat can be obtained from the ListPriceLists response. 
      */
     FileFormat: FileFormat;
   }
@@ -196,7 +196,7 @@ declare namespace Pricing {
   }
   export interface ListPriceListsRequest {
     /**
-     * The service code or the Savings Plan service code for the attributes that you want to retrieve. For example, to get the list of applicable Amazon EC2 price lists, use AmazonEC2. For a full list of service codes containing On-Demand and Reserved Instance (RI) pricing, use the  DescribeServices  API. To retrieve the Compute Savings Plan price lists, use ComputeSavingsPlans. To retrieve Machine Learning Savings Plans price lists, use MachineLearningSavingsPlans. 
+     * The service code or the Savings Plan service code for the attributes that you want to retrieve. For example, to get the list of applicable Amazon EC2 price lists, use AmazonEC2. For a full list of service codes containing On-Demand and Reserved Instance (RI) pricing, use the DescribeServices API. To retrieve the Reserved Instance and Compute Savings Plan price lists, use ComputeSavingsPlans.  To retrieve Machine Learning Savings Plans price lists, use MachineLearningSavingsPlans. 
      */
     ServiceCode: ServiceCode;
     /**
@@ -204,7 +204,7 @@ declare namespace Pricing {
      */
     EffectiveDate: EffectiveDate;
     /**
-     * This is used to filter the Price List by Amazon Web Services Region. For example, to get the price list only for the US East (N. Virginia) Region, use us-east-1. If nothing is specified, you retrieve price lists for all applicable Regions. The available RegionCode list can be retrieved from  GetAttributeValues  API.
+     * This is used to filter the Price List by Amazon Web Services Region. For example, to get the price list only for the US East (N. Virginia) Region, use us-east-1. If nothing is specified, you retrieve price lists for all applicable Regions. The available RegionCode list can be retrieved from GetAttributeValues API.
      */
     RegionCode?: RegionCode;
     /**

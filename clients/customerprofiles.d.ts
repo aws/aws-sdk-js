@@ -713,7 +713,7 @@ declare namespace CustomerProfiles {
     /**
      * The description of the calculated attribute.
      */
-    Description?: text;
+    Description?: sensitiveText;
     /**
      * Mathematical expression and a list of attribute items specified in that expression.
      */
@@ -743,7 +743,7 @@ declare namespace CustomerProfiles {
     /**
      * The description of the calculated attribute.
      */
-    Description?: text;
+    Description?: sensitiveText;
     /**
      * Mathematical expression and a list of attribute items specified in that expression.
      */
@@ -1438,7 +1438,7 @@ declare namespace CustomerProfiles {
     /**
      * The description of the calculated attribute.
      */
-    Description?: text;
+    Description?: sensitiveText;
     /**
      * The timestamp of when the calculated attribute definition was created.
      */
@@ -2065,7 +2065,7 @@ declare namespace CustomerProfiles {
     /**
      * The threshold for the calculated attribute.
      */
-    Description?: text;
+    Description?: sensitiveText;
     /**
      * The threshold for the calculated attribute.
      */
@@ -3338,7 +3338,7 @@ declare namespace CustomerProfiles {
     /**
      * The description of the calculated attribute.
      */
-    Description?: text;
+    Description?: sensitiveText;
     /**
      * The conditions including range, object count, and threshold for the calculated attribute.
      */
@@ -3356,7 +3356,7 @@ declare namespace CustomerProfiles {
     /**
      * The description of the calculated attribute.
      */
-    Description?: text;
+    Description?: sensitiveText;
     /**
      * The timestamp of when the calculated attribute definition was created.
      */

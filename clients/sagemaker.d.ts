@@ -197,11 +197,11 @@ declare class SageMaker extends Service {
    */
   createExperiment(callback?: (err: AWSError, data: SageMaker.Types.CreateExperimentResponse) => void): Request<SageMaker.Types.CreateExperimentResponse, AWSError>;
   /**
-   * Create a new FeatureGroup. A FeatureGroup is a group of Features defined in the FeatureStore to describe a Record.  The FeatureGroup defines the schema and features contained in the FeatureGroup. A FeatureGroup definition is composed of a list of Features, a RecordIdentifierFeatureName, an EventTimeFeatureName and configurations for its OnlineStore and OfflineStore. Check Amazon Web Services service quotas to see the FeatureGroups quota for your Amazon Web Services account.  You must include at least one of OnlineStoreConfig and OfflineStoreConfig to create a FeatureGroup. 
+   * Create a new FeatureGroup. A FeatureGroup is a group of Features defined in the FeatureStore to describe a Record.  The FeatureGroup defines the schema and features contained in the FeatureGroup. A FeatureGroup definition is composed of a list of Features, a RecordIdentifierFeatureName, an EventTimeFeatureName and configurations for its OnlineStore and OfflineStore. Check Amazon Web Services service quotas to see the FeatureGroups quota for your Amazon Web Services account. Note that it can take approximately 10-15 minutes to provision an OnlineStore FeatureGroup with the InMemory StorageType.  You must include at least one of OnlineStoreConfig and OfflineStoreConfig to create a FeatureGroup. 
    */
   createFeatureGroup(params: SageMaker.Types.CreateFeatureGroupRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateFeatureGroupResponse) => void): Request<SageMaker.Types.CreateFeatureGroupResponse, AWSError>;
   /**
-   * Create a new FeatureGroup. A FeatureGroup is a group of Features defined in the FeatureStore to describe a Record.  The FeatureGroup defines the schema and features contained in the FeatureGroup. A FeatureGroup definition is composed of a list of Features, a RecordIdentifierFeatureName, an EventTimeFeatureName and configurations for its OnlineStore and OfflineStore. Check Amazon Web Services service quotas to see the FeatureGroups quota for your Amazon Web Services account.  You must include at least one of OnlineStoreConfig and OfflineStoreConfig to create a FeatureGroup. 
+   * Create a new FeatureGroup. A FeatureGroup is a group of Features defined in the FeatureStore to describe a Record.  The FeatureGroup defines the schema and features contained in the FeatureGroup. A FeatureGroup definition is composed of a list of Features, a RecordIdentifierFeatureName, an EventTimeFeatureName and configurations for its OnlineStore and OfflineStore. Check Amazon Web Services service quotas to see the FeatureGroups quota for your Amazon Web Services account. Note that it can take approximately 10-15 minutes to provision an OnlineStore FeatureGroup with the InMemory StorageType.  You must include at least one of OnlineStoreConfig and OfflineStoreConfig to create a FeatureGroup. 
    */
   createFeatureGroup(callback?: (err: AWSError, data: SageMaker.Types.CreateFeatureGroupResponse) => void): Request<SageMaker.Types.CreateFeatureGroupResponse, AWSError>;
   /**
@@ -605,11 +605,11 @@ declare class SageMaker extends Service {
    */
   deleteExperiment(callback?: (err: AWSError, data: SageMaker.Types.DeleteExperimentResponse) => void): Request<SageMaker.Types.DeleteExperimentResponse, AWSError>;
   /**
-   * Delete the FeatureGroup and any data that was written to the OnlineStore of the FeatureGroup. Data cannot be accessed from the OnlineStore immediately after DeleteFeatureGroup is called.  Data written into the OfflineStore will not be deleted. The Amazon Web Services Glue database and tables that are automatically created for your OfflineStore are not deleted. 
+   * Delete the FeatureGroup and any data that was written to the OnlineStore of the FeatureGroup. Data cannot be accessed from the OnlineStore immediately after DeleteFeatureGroup is called.  Data written into the OfflineStore will not be deleted. The Amazon Web Services Glue database and tables that are automatically created for your OfflineStore are not deleted.  Note that it can take approximately 10-15 minutes to delete an OnlineStore FeatureGroup with the InMemory StorageType.
    */
   deleteFeatureGroup(params: SageMaker.Types.DeleteFeatureGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete the FeatureGroup and any data that was written to the OnlineStore of the FeatureGroup. Data cannot be accessed from the OnlineStore immediately after DeleteFeatureGroup is called.  Data written into the OfflineStore will not be deleted. The Amazon Web Services Glue database and tables that are automatically created for your OfflineStore are not deleted. 
+   * Delete the FeatureGroup and any data that was written to the OnlineStore of the FeatureGroup. Data cannot be accessed from the OnlineStore immediately after DeleteFeatureGroup is called.  Data written into the OfflineStore will not be deleted. The Amazon Web Services Glue database and tables that are automatically created for your OfflineStore are not deleted.  Note that it can take approximately 10-15 minutes to delete an OnlineStore FeatureGroup with the InMemory StorageType.
    */
   deleteFeatureGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3681,7 +3681,7 @@ declare namespace SageMaker {
   export type CandidateSteps = AutoMLCandidateStep[];
   export interface CanvasAppSettings {
     /**
-     * Time series forecast settings for the Canvas application.
+     * Time series forecast settings for the SageMaker Canvas application.
      */
     TimeSeriesForecastingSettings?: TimeSeriesForecastingSettings;
     /**
@@ -3696,6 +3696,14 @@ declare namespace SageMaker {
      * The settings for connecting to an external data source with OAuth.
      */
     IdentityProviderOAuthSettings?: IdentityProviderOAuthSettings;
+    /**
+     * The settings for document querying.
+     */
+    KendraSettings?: KendraSettings;
+    /**
+     * The model deployment settings for the SageMaker Canvas application.
+     */
+    DirectDeploySettings?: DirectDeploySettings;
   }
   export interface CapacitySize {
     /**
@@ -10435,6 +10443,12 @@ declare namespace SageMaker {
   }
   export type Devices = Device[];
   export type Dimension = number;
+  export interface DirectDeploySettings {
+    /**
+     * Describes whether model deployment permissions are enabled or disabled in the Canvas application.
+     */
+    Status?: FeatureStatus;
+  }
   export type DirectInternetAccess = "Enabled"|"Disabled"|string;
   export type Direction = "Both"|"Ascendants"|"Descendants"|string;
   export type DirectoryPath = string;
@@ -12868,6 +12882,12 @@ declare namespace SageMaker {
     CodeRepositories?: CodeRepositories;
   }
   export type KeepAlivePeriodInSeconds = number;
+  export interface KendraSettings {
+    /**
+     * Describes whether the document querying feature is enabled or disabled in the Canvas application.
+     */
+    Status?: FeatureStatus;
+  }
   export type KernelDisplayName = string;
   export interface KernelGatewayAppSettings {
     /**
@@ -20193,7 +20213,7 @@ declare namespace SageMaker {
   export type SelectedStepList = SelectedStep[];
   export interface SelectiveExecutionConfig {
     /**
-     * The ARN from a reference execution of the current pipeline. Used to copy input collaterals needed for the selected steps to run. The execution status of the pipeline can be either Failed or Success.
+     * The ARN from a reference execution of the current pipeline. Used to copy input collaterals needed for the selected steps to run. The execution status of the pipeline can be either Failed or Success. This field is required if the steps you specify for SelectedSteps depend on output collaterals from any non-specified pipeline steps. For more information, see Selective Execution for Pipeline Steps.
      */
     SourcePipelineExecutionArn?: PipelineExecutionArn;
     /**

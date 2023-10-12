@@ -1,6 +1,25 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1472.0-->
+<!--LATEST=2.1473.0-->
 <!--ENTRYINSERT-->
+
+## 2.1473.0
+* feature: AuditManager: This release introduces a new limit to the awsAccounts parameter. When you create or update an assessment, there is now a limit of 200 AWS accounts that can be specified in the assessment scope.
+* feature: AutoScaling: Update the NotificationMetadata field to only allow visible ascii characters. Add paginators to DescribeInstanceRefreshes, DescribeLoadBalancers, and DescribeLoadBalancerTargetGroups
+* feature: ConfigService: Add enums for resource types supported by Config
+* feature: ControlTower: Added new EnabledControl resource details to ListEnabledControls API and added new GetEnabledControl API.
+* feature: CustomerProfiles: Adds sensitive trait to various shapes in Customer Profiles Calculated Attribute API model.
+* feature: EC2: This release adds Ubuntu Pro as a supported platform for On-Demand Capacity Reservations and adds support for setting an Amazon Machine Image (AMI) to disabled state. Disabling the AMI makes it private if it was previously shared, and prevents new EC2 instance launches from it.
+* feature: Glue: Extending version control support to GitLab and Bitbucket from AWSGlue
+* feature: IVSRealTime: Update GetParticipant to return additional metadata.
+* feature: Inspector2: Add MacOs ec2 platform support
+* feature: Lambda: Adds support for Lambda functions to access Dual-Stack subnets over IPv6, via an opt-in flag in CreateFunction and UpdateFunctionConfiguration APIs
+* feature: Location: This release adds endpoint updates for all AWS Location resource operations.
+* feature: MachineLearning: This release marks Password field as sensitive
+* feature: RDS: This release adds support for adding a dedicated log volume to open-source RDS instances.
+* feature: Rekognition: Amazon Rekognition introduces support for Custom Moderation. This allows the enhancement of accuracy for detect moderation labels operations by creating custom adapters tuned on customer data.
+* feature: SageMaker: Amazon SageMaker Canvas adds KendraSettings and DirectDeploySettings support for CanvasAppSettings
+* feature: Textract: This release adds 9 new APIs for adapter and adapter version management, 3 new APIs for tagging, and updates AnalyzeDocument and StartDocumentAnalysis API parameters for using adapters.
+* feature: TranscribeService: This release is to enable m4a format to customers
 
 ## 2.1472.0
 * feature: EC2: Documentation updates for Elastic Compute Cloud (EC2).

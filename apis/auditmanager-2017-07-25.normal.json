@@ -1734,6 +1734,8 @@
       "member": {
         "shape": "AWSAccount"
       },
+      "max": 200,
+      "min": 1,
       "sensitive": true
     },
     "AWSService": {

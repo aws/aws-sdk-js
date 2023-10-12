@@ -1961,7 +1961,8 @@
       "type": "list",
       "member": {
         "shape": "ListCalculatedAttributeDefinitionItem"
-      }
+      },
+      "sensitive": true
     },
     "CalculatedAttributesForProfileList": {
       "type": "list",
@@ -2082,7 +2083,7 @@
           "documentation": "<p>The display name of the calculated attribute.</p>"
         },
         "Description": {
-          "shape": "text",
+          "shape": "sensitiveText",
           "documentation": "<p>The description of the calculated attribute.</p>"
         },
         "AttributeDetails": {
@@ -2115,7 +2116,7 @@
           "documentation": "<p>The display name of the calculated attribute.</p>"
         },
         "Description": {
-          "shape": "text",
+          "shape": "sensitiveText",
           "documentation": "<p>The description of the calculated attribute.</p>"
         },
         "AttributeDetails": {
@@ -3183,7 +3184,7 @@
           "documentation": "<p>The display name of the calculated attribute.</p>"
         },
         "Description": {
-          "shape": "text",
+          "shape": "sensitiveText",
           "documentation": "<p>The description of the calculated attribute.</p>"
         },
         "CreatedAt": {
@@ -4083,7 +4084,7 @@
           "documentation": "<p>The display name of the calculated attribute.</p>"
         },
         "Description": {
-          "shape": "text",
+          "shape": "sensitiveText",
           "documentation": "<p>The threshold for the calculated attribute.</p>"
         },
         "CreatedAt": {
@@ -6257,7 +6258,7 @@
           "documentation": "<p>The display name of the calculated attribute.</p>"
         },
         "Description": {
-          "shape": "text",
+          "shape": "sensitiveText",
           "documentation": "<p>The description of the calculated attribute.</p>"
         },
         "Conditions": {
@@ -6278,7 +6279,7 @@
           "documentation": "<p>The display name of the calculated attribute.</p>"
         },
         "Description": {
-          "shape": "text",
+          "shape": "sensitiveText",
           "documentation": "<p>The description of the calculated attribute.</p>"
         },
         "CreatedAt": {

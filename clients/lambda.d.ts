@@ -2586,6 +2586,7 @@ declare namespace Lambda {
   export type NamespacedFunctionName = string;
   export type NamespacedStatementId = string;
   export type NonNegativeInteger = number;
+  export type NullableBoolean = boolean;
   export interface OnFailure {
     /**
      * The Amazon Resource Name (ARN) of the destination resource.
@@ -3334,6 +3335,10 @@ declare namespace Lambda {
      * A list of VPC security group IDs.
      */
     SecurityGroupIds?: SecurityGroupIds;
+    /**
+     * Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.
+     */
+    Ipv6AllowedForDualStack?: NullableBoolean;
   }
   export interface VpcConfigResponse {
     /**
@@ -3348,6 +3353,10 @@ declare namespace Lambda {
      * The ID of the VPC.
      */
     VpcId?: VpcId;
+    /**
+     * Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets.
+     */
+    Ipv6AllowedForDualStack?: NullableBoolean;
   }
   export type VpcId = string;
   export type Weight = number;
