@@ -16,7 +16,7 @@ export class ManagedUpload {
     /**
      * Initiates the managed upload for the payload.
      */
-    send(callback?: (err: AWSError, data: ManagedUpload.SendData) => void): void;
+    send(callback?: (err: AWSError|null, data: ManagedUpload.SendData) => void): void;
     /**
      * Adds a listener that is triggered when theuploader has uploaded more data.
      *
