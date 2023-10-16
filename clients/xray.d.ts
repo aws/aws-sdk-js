@@ -993,7 +993,7 @@ declare namespace XRay {
      */
     EndTime: Timestamp;
     /**
-     * A parameter to indicate whether to query trace summaries by TraceId or Event time.
+     * A parameter to indicate whether to query trace summaries by TraceId, Event (trace update time), or Service (segment end time).
      */
     TimeRangeType?: TimeRangeType;
     /**
@@ -1879,7 +1879,7 @@ declare namespace XRay {
     BackendConnectionErrors?: BackendConnectionErrors;
   }
   export type TelemetryRecordList = TelemetryRecord[];
-  export type TimeRangeType = "TraceId"|"Event"|string;
+  export type TimeRangeType = "TraceId"|"Event"|"Service"|string;
   export interface TimeSeriesServiceStatistics {
     /**
      * Timestamp of the window for which statistics are aggregated.

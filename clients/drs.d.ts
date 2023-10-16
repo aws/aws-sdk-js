@@ -512,6 +512,10 @@ declare namespace Drs {
      */
     launchDisposition?: LaunchDisposition;
     /**
+     * DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+     */
+    launchIntoSourceInstance?: Boolean;
+    /**
      * Licensing.
      */
     licensing?: Licensing;
@@ -1339,6 +1343,10 @@ declare namespace Drs {
      */
     launchDisposition?: LaunchDisposition;
     /**
+     * Launch into existing instance properties.
+     */
+    launchIntoInstanceProperties?: LaunchIntoInstanceProperties;
+    /**
      * The licensing configuration to be used for this launch configuration.
      */
     licensing?: Licensing;
@@ -1385,6 +1393,10 @@ declare namespace Drs {
      */
     launchDisposition?: LaunchDisposition;
     /**
+     * DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+     */
+    launchIntoSourceInstance?: Boolean;
+    /**
      * Licensing.
      */
     licensing?: Licensing;
@@ -1405,6 +1417,12 @@ declare namespace Drs {
   export type LaunchConfigurationTemplateIDs = LaunchConfigurationTemplateID[];
   export type LaunchConfigurationTemplates = LaunchConfigurationTemplate[];
   export type LaunchDisposition = "STOPPED"|"STARTED"|string;
+  export interface LaunchIntoInstanceProperties {
+    /**
+     * Optionally holds EC2 instance ID of an instance to launch into, instead of launching a new instance during drill, recovery or failback.
+     */
+    launchIntoEC2InstanceID?: EC2InstanceID;
+  }
   export type LaunchStatus = "PENDING"|"IN_PROGRESS"|"LAUNCHED"|"FAILED"|"TERMINATED"|string;
   export interface Licensing {
     /**
@@ -1638,7 +1656,7 @@ declare namespace Drs {
      */
     active: Boolean;
     category: LaunchActionCategory;
-    description?: LaunchActionDescription;
+    description: LaunchActionDescription;
     name: LaunchActionName;
     /**
      * Whether the launch will not be marked as failed if this action fails.
@@ -2562,6 +2580,10 @@ declare namespace Drs {
      */
     launchDisposition?: LaunchDisposition;
     /**
+     * Launch into existing instance properties.
+     */
+    launchIntoInstanceProperties?: LaunchIntoInstanceProperties;
+    /**
      * The licensing configuration to be used for this launch configuration.
      */
     licensing?: Licensing;
@@ -2603,6 +2625,10 @@ declare namespace Drs {
      * Launch disposition.
      */
     launchDisposition?: LaunchDisposition;
+    /**
+     * DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.
+     */
+    launchIntoSourceInstance?: Boolean;
     /**
      * Licensing.
      */

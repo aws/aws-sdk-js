@@ -227,7 +227,7 @@ declare namespace MediaPackageV2 {
     /**
      * Any descriptive information that you want to add to the channel group for future identification purposes.
      */
-    Description?: String;
+    Description?: ResourceDescription;
   }
   export type ChannelGroupsList = ChannelGroupListConfiguration[];
   export type ChannelList = ChannelListConfiguration[];
@@ -255,7 +255,7 @@ declare namespace MediaPackageV2 {
     /**
      * Any descriptive information that you want to add to the channel for future identification purposes.
      */
-    Description?: String;
+    Description?: ResourceDescription;
   }
   export type CmafEncryptionMethod = "CENC"|"CBCS"|string;
   export type ContainerType = "TS"|"CMAF"|string;
@@ -301,7 +301,7 @@ declare namespace MediaPackageV2 {
     /**
      * The description for your channel group.
      */
-    Description?: String;
+    Description?: ResourceDescription;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel group.
      */
@@ -353,7 +353,7 @@ declare namespace MediaPackageV2 {
     /**
      * The description for your channel.
      */
-    Description?: String;
+    Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel.
@@ -640,7 +640,7 @@ declare namespace MediaPackageV2 {
     /**
      * The description for your channel group.
      */
-    Description?: String;
+    Description?: ResourceDescription;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel group.
      */
@@ -668,7 +668,7 @@ declare namespace MediaPackageV2 {
     /**
      * The policy assigned to the channel.
      */
-    Policy: String;
+    Policy: PolicyText;
   }
   export interface GetChannelRequest {
     /**
@@ -704,7 +704,7 @@ declare namespace MediaPackageV2 {
     /**
      * The description for your channel.
      */
-    Description?: String;
+    Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel.
@@ -777,19 +777,19 @@ declare namespace MediaPackageV2 {
     /**
      * The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.
      */
-    ChannelGroupName: String;
+    ChannelGroupName: ResourceName;
     /**
      * The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.
      */
-    ChannelName: String;
+    ChannelName: ResourceName;
     /**
      * The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel.
      */
-    OriginEndpointName: String;
+    OriginEndpointName: ResourceName;
     /**
      * The policy assigned to the origin endpoint.
      */
-    Policy: String;
+    Policy: PolicyText;
   }
   export interface GetOriginEndpointRequest {
     /**
@@ -1200,7 +1200,7 @@ declare namespace MediaPackageV2 {
     /**
      * The description for your channel group.
      */
-    Description?: String;
+    Description?: ResourceDescription;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel group.
      */
@@ -1244,7 +1244,7 @@ declare namespace MediaPackageV2 {
     /**
      * The description for your channel.
      */
-    Description?: String;
+    Description?: ResourceDescription;
     IngestEndpoints?: IngestEndpointList;
     /**
      * The comma-separated list of tag key:value pairs assigned to the channel.

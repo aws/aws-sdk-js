@@ -404,11 +404,11 @@ declare class OpenSearch extends Service {
    */
   startServiceSoftwareUpdate(callback?: (err: AWSError, data: OpenSearch.Types.StartServiceSoftwareUpdateResponse) => void): Request<OpenSearch.Types.StartServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.sl
+   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
    */
   updateDomainConfig(params: OpenSearch.Types.UpdateDomainConfigRequest, callback?: (err: AWSError, data: OpenSearch.Types.UpdateDomainConfigResponse) => void): Request<OpenSearch.Types.UpdateDomainConfigResponse, AWSError>;
   /**
-   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.sl
+   * Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
    */
   updateDomainConfig(callback?: (err: AWSError, data: OpenSearch.Types.UpdateDomainConfigResponse) => void): Request<OpenSearch.Types.UpdateDomainConfigResponse, AWSError>;
   /**
@@ -1138,7 +1138,7 @@ declare namespace OpenSearch {
   export type CreatedAt = Date;
   export interface CrossClusterSearchConnectionProperties {
     /**
-     * Status of SkipUnavailable param for outbound connection.
+     * The status of the SkipUnavailable setting for the outbound connection. This feature allows you to specify some clusters as optional and ensure that your cross-cluster queries return partial results despite failures on one or more remote clusters.
      */
     SkipUnavailable?: SkipUnavailableStatus;
   }
@@ -1343,7 +1343,7 @@ declare namespace OpenSearch {
   }
   export interface DescribeDomainsRequest {
     /**
-     * Array of OpenSearch Service domain names that you want information about. If you don't specify any domains, OpenSearch Service returns information about all domains owned by the account.
+     * Array of OpenSearch Service domain names that you want information about. You must specify at least one domain name.
      */
     DomainNames: DomainNameList;
   }
@@ -1460,7 +1460,7 @@ declare namespace OpenSearch {
     Value?: DescribePackagesFilterValues;
   }
   export type DescribePackagesFilterList = DescribePackagesFilter[];
-  export type DescribePackagesFilterName = "PackageID"|"PackageName"|"PackageStatus"|string;
+  export type DescribePackagesFilterName = "PackageID"|"PackageName"|"PackageStatus"|"PackageType"|"EngineVersion"|string;
   export type DescribePackagesFilterValue = string;
   export type DescribePackagesFilterValues = DescribePackagesFilterValue[];
   export interface DescribePackagesRequest {
@@ -1982,6 +1982,7 @@ declare namespace OpenSearch {
   export type Endpoint = string;
   export type EndpointsMap = {[key: string]: ServiceUrl};
   export type EngineType = "OpenSearch"|"Elasticsearch"|string;
+  export type EngineVersion = string;
   export interface EnvironmentInfo {
     /**
      *  A list of AvailabilityZoneInfo for the domain.
@@ -2618,6 +2619,14 @@ declare namespace OpenSearch {
      * Additional information if the package is in an error state. Null otherwise.
      */
     ErrorDetails?: ErrorDetails;
+    /**
+     * Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y. Defaults to the latest version of OpenSearch.
+     */
+    EngineVersion?: EngineVersion;
+    /**
+     * If the package is a ZIP-PLUGIN package, additional information about plugin properties.
+     */
+    AvailablePluginProperties?: PluginProperties;
   }
   export type PackageDetailsList = PackageDetails[];
   export type PackageID = string;
@@ -2633,7 +2642,7 @@ declare namespace OpenSearch {
     S3Key?: S3Key;
   }
   export type PackageStatus = "COPYING"|"COPY_FAILED"|"VALIDATING"|"VALIDATION_FAILED"|"AVAILABLE"|"DELETING"|"DELETED"|"DELETE_FAILED"|string;
-  export type PackageType = "TXT-DICTIONARY"|string;
+  export type PackageType = "TXT-DICTIONARY"|"ZIP-PLUGIN"|string;
   export type PackageVersion = string;
   export interface PackageVersionHistory {
     /**
@@ -2648,9 +2657,39 @@ declare namespace OpenSearch {
      * The date and time when the package was created.
      */
     CreatedAt?: CreatedAt;
+    /**
+     * Additional information about plugin properties if the package is a ZIP-PLUGIN package.
+     */
+    PluginProperties?: PluginProperties;
   }
   export type PackageVersionHistoryList = PackageVersionHistory[];
   export type Password = string;
+  export type PluginClassName = string;
+  export type PluginDescription = string;
+  export type PluginName = string;
+  export interface PluginProperties {
+    /**
+     * The name of the plugin.
+     */
+    Name?: PluginName;
+    /**
+     * The description of the plugin.
+     */
+    Description?: PluginDescription;
+    /**
+     * The version of the plugin.
+     */
+    Version?: PluginVersion;
+    /**
+     * The name of the class to load.
+     */
+    ClassName?: PluginClassName;
+    /**
+     * The uncompressed size of the plugin.
+     */
+    UncompressedSizeInBytes?: UncompressedPluginSizeInBytes;
+  }
+  export type PluginVersion = string;
   export type PolicyDocument = string;
   export type PrincipalType = "AWS_ACCOUNT"|"AWS_SERVICE"|string;
   export interface PurchaseReservedInstanceOfferingRequest {
@@ -3089,6 +3128,7 @@ declare namespace OpenSearch {
   export type TimeUnit = "HOURS"|string;
   export type TotalNumberOfStages = number;
   export type UIntValue = number;
+  export type UncompressedPluginSizeInBytes = number;
   export interface UpdateDomainConfigRequest {
     /**
      * The name of the domain that you're updating.

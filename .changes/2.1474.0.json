@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudFormation",
+        "description": "SDK and documentation updates for UpdateReplacePolicy"
+    },
+    {
+        "type": "feature",
+        "category": "Drs",
+        "description": "Updated exsiting API to allow AWS Elastic Disaster Recovery support of launching recovery into existing EC2 instances."
+    },
+    {
+        "type": "feature",
+        "category": "EntityResolution",
+        "description": "This launch expands our matching techniques to include provider-based matching to help customer match, link, and enhance records with minimal data movement. With data service providers, we have removed the need for customers to build bespoke integrations,."
+    },
+    {
+        "type": "feature",
+        "category": "ManagedBlockchainQuery",
+        "description": "This release introduces two new APIs: GetAssetContract and ListAssetContracts. This release also adds support for Bitcoin Testnet."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackageV2",
+        "description": "This release allows customers to manage MediaPackage v2 resource using CloudFormation."
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearch",
+        "description": "This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Added support for managing credentials of provisioned cluster admin using AWS Secrets Manager."
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftServerless",
+        "description": "Added support for managing credentials of serverless namespace admin using AWS Secrets Manager."
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "This release provides enhanced visibility into your SES identity verification status. This will offer you more actionable insights, enabling you to promptly address any verification-related issues."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "This releases enhances GetTraceSummaries API to support new TimeRangeType Service to query trace summaries by segment end time."
+    }
+]

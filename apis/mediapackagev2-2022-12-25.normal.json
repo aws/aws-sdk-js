@@ -818,7 +818,7 @@
           "documentation": "<p>The date and time the channel group was modified.</p>"
         },
         "Description": {
-          "shape": "String",
+          "shape": "ResourceDescription",
           "documentation": "<p>Any descriptive information that you want to add to the channel group for future identification purposes.</p>"
         }
       },
@@ -867,7 +867,7 @@
           "documentation": "<p>The date and time the channel was modified.</p>"
         },
         "Description": {
-          "shape": "String",
+          "shape": "ResourceDescription",
           "documentation": "<p>Any descriptive information that you want to add to the channel for future identification purposes.</p>"
         }
       },
@@ -946,7 +946,7 @@
           "documentation": "<p>The date and time the channel group was modified.</p>"
         },
         "Description": {
-          "shape": "String",
+          "shape": "ResourceDescription",
           "documentation": "<p>The description for your channel group.</p>"
         },
         "Tags": {
@@ -1021,7 +1021,7 @@
           "documentation": "<p>The date and time the channel was modified.</p>"
         },
         "Description": {
-          "shape": "String",
+          "shape": "ResourceDescription",
           "documentation": "<p>The description for your channel.</p>"
         },
         "IngestEndpoints": {
@@ -1516,7 +1516,7 @@
           "documentation": "<p>The date and time the channel group was modified.</p>"
         },
         "Description": {
-          "shape": "String",
+          "shape": "ResourceDescription",
           "documentation": "<p>The description for your channel group.</p>"
         },
         "Tags": {
@@ -1564,7 +1564,7 @@
           "documentation": "<p>The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.</p>"
         },
         "Policy": {
-          "shape": "String",
+          "shape": "PolicyText",
           "documentation": "<p>The policy assigned to the channel.</p>"
         }
       }
@@ -1621,7 +1621,7 @@
           "documentation": "<p>The date and time the channel was modified.</p>"
         },
         "Description": {
-          "shape": "String",
+          "shape": "ResourceDescription",
           "documentation": "<p>The description for your channel.</p>"
         },
         "IngestEndpoints": {
@@ -1749,19 +1749,19 @@
       ],
       "members": {
         "ChannelGroupName": {
-          "shape": "String",
+          "shape": "ResourceName",
           "documentation": "<p>The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.</p>"
         },
         "ChannelName": {
-          "shape": "String",
+          "shape": "ResourceName",
           "documentation": "<p>The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.</p>"
         },
         "OriginEndpointName": {
-          "shape": "String",
+          "shape": "ResourceName",
           "documentation": "<p>The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel.</p>"
         },
         "Policy": {
-          "shape": "String",
+          "shape": "PolicyText",
           "documentation": "<p>The policy assigned to the origin endpoint.</p>"
         }
       }
@@ -2534,7 +2534,7 @@
           "documentation": "<p>The date and time the channel group was modified.</p>"
         },
         "Description": {
-          "shape": "String",
+          "shape": "ResourceDescription",
           "documentation": "<p>The description for your channel group.</p>"
         },
         "Tags": {
@@ -2600,7 +2600,7 @@
           "documentation": "<p>The date and time the channel was modified.</p>"
         },
         "Description": {
-          "shape": "String",
+          "shape": "ResourceDescription",
           "documentation": "<p>The description for your channel.</p>"
         },
         "IngestEndpoints": {

@@ -777,6 +777,7 @@ declare namespace SESV2 {
   }
   export type AdditionalContactEmailAddress = string;
   export type AdditionalContactEmailAddresses = AdditionalContactEmailAddress[];
+  export type AdminEmail = string;
   export type AmazonResourceName = string;
   export type AttributesData = string;
   export type BatchGetMetricDataQueries = BatchGetMetricDataQuery[];
@@ -1655,7 +1656,7 @@ declare namespace SESV2 {
      */
     Simple?: Message;
     /**
-     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   If you include attachments, they must be in a file format that the Amazon SES API v2 supports.    The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
+     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   If you include attachments, they must be in a file format that the Amazon SES API v2 supports.    The raw data of the message needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for you.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
      */
     Raw?: RawMessage;
     /**
@@ -2257,6 +2258,10 @@ declare namespace SESV2 {
      * The verification status of the identity. The status can be one of the following:    PENDING – The verification process was initiated, but Amazon SES hasn't yet been able to verify the identity.    SUCCESS – The verification process completed successfully.    FAILED – The verification process failed.    TEMPORARY_FAILURE – A temporary issue is preventing Amazon SES from determining the verification status of the identity.    NOT_STARTED – The verification process hasn't been initiated for the identity.  
      */
     VerificationStatus?: VerificationStatus;
+    /**
+     * An object that contains additional information about the verification status for the identity.
+     */
+    VerificationInfo?: VerificationInfo;
   }
   export interface GetEmailTemplateRequest {
     /**
@@ -2729,7 +2734,7 @@ declare namespace SESV2 {
      */
     NextToken?: NextToken;
     /**
-     * The number of results to show in a single call to ListEmailTemplates. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 1, and can be no more than 10.
+     * The number of results to show in a single call to ListEmailTemplates. If the number of results is larger than the number you specified in this parameter, then the response includes a NextToken element, which you can use to obtain additional results. The value you specify has to be at least 1, and can be no more than 100.
      */
     PageSize?: MaxItems;
   }
@@ -3081,6 +3086,7 @@ declare namespace SESV2 {
   export type PolicyMap = {[key: string]: Policy};
   export type PolicyName = string;
   export type PoolName = string;
+  export type PrimaryNameServer = string;
   export type PrivateKey = string;
   export type ProcessedRecordsCount = number;
   export interface PutAccountDedicatedIpWarmupAttributesRequest {
@@ -3360,7 +3366,7 @@ declare namespace SESV2 {
   export type QueryIdentifier = string;
   export interface RawMessage {
     /**
-     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES supports.   The entire message must be Base64 encoded.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
+     * The raw email message. The message has to meet the following criteria:   The message has to contain a header and a body, separated by one blank line.   All of the required header fields must be present in the message.   Each part of a multipart MIME message must be formatted properly.   Attachments must be in a file format that the Amazon SES supports.   The raw data of the message needs to base64-encoded if you are accessing Amazon SES directly through the HTTPS interface. If you are accessing Amazon SES using an Amazon Web Services SDK, the SDK takes care of the base 64-encoding for you.   If any of the MIME parts in your message contain content that is outside of the 7-bit ASCII character range, you should encode that content to ensure that recipients' email clients render the message properly.   The length of any single line of text in the message can't exceed 1,000 characters. This restriction is defined in RFC 5321.  
      */
     Data: RawMessageData;
   }
@@ -3438,6 +3444,20 @@ declare namespace SESV2 {
   }
   export type ReviewStatus = "PENDING"|"FAILED"|"GRANTED"|"DENIED"|string;
   export type S3Url = string;
+  export interface SOARecord {
+    /**
+     * Primary name server specified in the SOA record.
+     */
+    PrimaryNameServer?: PrimaryNameServer;
+    /**
+     * Administrative contact email from the SOA record.
+     */
+    AdminEmail?: AdminEmail;
+    /**
+     * Serial number from the SOA record.
+     */
+    SerialNumber?: SerialNumber;
+  }
   export type ScalingMode = "STANDARD"|"MANAGED"|string;
   export type Selector = string;
   export interface SendBulkEmailRequest {
@@ -3574,6 +3594,7 @@ declare namespace SESV2 {
   }
   export type SendingPoolName = string;
   export type SentLast24Hours = number;
+  export type SerialNumber = number;
   export interface SnsDestination {
     /**
      * The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to. For more information about Amazon SNS topics, see the Amazon SNS Developer Guide.
@@ -3904,6 +3925,25 @@ declare namespace SESV2 {
      * Specifies additional settings for your VDM configuration as applicable to the Guardian.
      */
     GuardianOptions?: GuardianOptions;
+  }
+  export type VerificationError = "SERVICE_ERROR"|"DNS_SERVER_ERROR"|"HOST_NOT_FOUND"|"TYPE_NOT_FOUND"|"INVALID_VALUE"|string;
+  export interface VerificationInfo {
+    /**
+     * The last time a verification attempt was made for this identity.
+     */
+    LastCheckedTimestamp?: Timestamp;
+    /**
+     * The last time a successful verification was made for this identity.
+     */
+    LastSuccessTimestamp?: Timestamp;
+    /**
+     * Provides the reason for the failure describing why Amazon SES was not able to successfully verify the identity. Below are the possible values:     INVALID_VALUE – Amazon SES was able to find the record, but the value contained within the record was invalid. Ensure you have published the correct values for the record.    TYPE_NOT_FOUND – The queried hostname exists but does not have the requested type of DNS record. Ensure that you have published the correct type of DNS record.    HOST_NOT_FOUND – The queried hostname does not exist or was not reachable at the time of the request. Ensure that you have published the required DNS record(s).     SERVICE_ERROR – A temporary issue is preventing Amazon SES from determining the verification status of the domain.    DNS_SERVER_ERROR – The DNS server encountered an issue and was unable to complete the request.  
+     */
+    ErrorType?: VerificationError;
+    /**
+     * An object that contains information about the start of authority (SOA) record associated with the identity.
+     */
+    SOARecord?: SOARecord;
   }
   export type VerificationStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
   export type Volume = number;

@@ -397,7 +397,11 @@ declare namespace RedshiftServerless {
   }
   export interface CreateNamespaceRequest {
     /**
-     * The password of the administrator for the first database created in the namespace.
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if manageAdminPassword is true.
+     */
+    adminPasswordSecretKmsKeyId?: KmsKeyId;
+    /**
+     * The password of the administrator for the first database created in the namespace. You can't use adminUserPassword if manageAdminPassword is true. 
      */
     adminUserPassword?: DbPassword;
     /**
@@ -424,6 +428,10 @@ declare namespace RedshiftServerless {
      * The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
      */
     logExports?: LogExportList;
+    /**
+     * If true, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password. 
+     */
+    manageAdminPassword?: Boolean;
     /**
      * The name of the namespace.
      */
@@ -1040,6 +1048,14 @@ declare namespace RedshiftServerless {
   export type Long = number;
   export interface Namespace {
     /**
+     * The Amazon Resource Name (ARN) for the namespace's admin user credentials secret.
+     */
+    adminPasswordSecretArn?: String;
+    /**
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
+     */
+    adminPasswordSecretKmsKeyId?: KmsKeyId;
+    /**
      * The username of the administrator for the first database created in the namespace.
      */
     adminUsername?: DbUser;
@@ -1188,6 +1204,14 @@ declare namespace RedshiftServerless {
   }
   export interface RestoreFromSnapshotRequest {
     /**
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
+     */
+    adminPasswordSecretKmsKeyId?: KmsKeyId;
+    /**
+     * If true, Amazon Redshift uses Secrets Manager to manage the restored snapshot's admin credentials. If MmanageAdminPassword is false or not set, Amazon Redshift uses the admin credentials that the namespace or cluster had at the time the snapshot was taken.
+     */
+    manageAdminPassword?: Boolean;
+    /**
      * The name of the namespace to restore the snapshot to.
      */
     namespaceName: NamespaceName;
@@ -1282,6 +1306,14 @@ declare namespace RedshiftServerless {
      * The size of the incremental backup in megabytes.
      */
     actualIncrementalBackupSizeInMegaBytes?: Double;
+    /**
+     * The Amazon Resource Name (ARN) for the namespace's admin user credentials secret.
+     */
+    adminPasswordSecretArn?: String;
+    /**
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
+     */
+    adminPasswordSecretKmsKeyId?: KmsKeyId;
     /**
      * The username of the database within a snapshot.
      */
@@ -1477,7 +1509,11 @@ declare namespace RedshiftServerless {
   }
   export interface UpdateNamespaceRequest {
     /**
-     * The password of the administrator for the first database created in the namespace. This parameter must be updated together with adminUsername.
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if manageAdminPassword is true.
+     */
+    adminPasswordSecretKmsKeyId?: KmsKeyId;
+    /**
+     * The password of the administrator for the first database created in the namespace. This parameter must be updated together with adminUsername. You can't use adminUserPassword if manageAdminPassword is true. 
      */
     adminUserPassword?: DbPassword;
     /**
@@ -1500,6 +1536,10 @@ declare namespace RedshiftServerless {
      * The types of logs the namespace can export. The export types are userlog, connectionlog, and useractivitylog.
      */
     logExports?: LogExportList;
+    /**
+     * If true, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password. 
+     */
+    manageAdminPassword?: Boolean;
     /**
      * The name of the namespace to update. You can't update the name of a namespace once it is created.
      */

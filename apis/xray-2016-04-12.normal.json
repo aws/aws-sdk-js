@@ -1806,7 +1806,7 @@
         },
         "TimeRangeType": {
           "shape": "TimeRangeType",
-          "documentation": "<p>A parameter to indicate whether to query trace summaries by TraceId or Event time.</p>"
+          "documentation": "<p>A parameter to indicate whether to query trace summaries by TraceId, Event (trace update time), or Service (segment end time).</p>"
         },
         "Sampling": {
           "shape": "NullableBoolean",
@@ -3143,7 +3143,8 @@
       "type": "string",
       "enum": [
         "TraceId",
-        "Event"
+        "Event",
+        "Service"
       ]
     },
     "TimeSeriesServiceStatistics": {

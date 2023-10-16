@@ -2905,7 +2905,7 @@ declare namespace CloudFormation {
   }
   export type RequiredActivatedTypes = RequiredActivatedType[];
   export type RequiresRecreation = "Never"|"Conditionally"|"Always"|string;
-  export type ResourceAttribute = "Properties"|"Metadata"|"CreationPolicy"|"UpdatePolicy"|"DeletionPolicy"|"Tags"|string;
+  export type ResourceAttribute = "Properties"|"Metadata"|"CreationPolicy"|"UpdatePolicy"|"DeletionPolicy"|"UpdateReplacePolicy"|"Tags"|string;
   export interface ResourceChange {
     /**
      * The action that CloudFormation takes on the resource, such as Add (adds a new resource), Modify (changes a resource), Remove (deletes a resource), Import (imports a resource), or Dynamic (exact action for the resource can't be determined).

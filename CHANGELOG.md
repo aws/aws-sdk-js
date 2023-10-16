@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1473.0-->
+<!--LATEST=2.1474.0-->
 <!--ENTRYINSERT-->
+
+## 2.1474.0
+* feature: CloudFormation: SDK and documentation updates for UpdateReplacePolicy
+* feature: Drs: Updated exsiting API to allow AWS Elastic Disaster Recovery support of launching recovery into existing EC2 instances.
+* feature: EntityResolution: This launch expands our matching techniques to include provider-based matching to help customer match, link, and enhance records with minimal data movement. With data service providers, we have removed the need for customers to build bespoke integrations,.
+* feature: ManagedBlockchainQuery: This release introduces two new APIs: GetAssetContract and ListAssetContracts. This release also adds support for Bitcoin Testnet.
+* feature: MediaPackageV2: This release allows customers to manage MediaPackage v2 resource using CloudFormation.
+* feature: OpenSearch: This release allows customers to list and associate optional plugin packages with compatible Amazon OpenSearch Service clusters for enhanced functionality.
+* feature: Redshift: Added support for managing credentials of provisioned cluster admin using AWS Secrets Manager.
+* feature: RedshiftServerless: Added support for managing credentials of serverless namespace admin using AWS Secrets Manager.
+* feature: SESV2: This release provides enhanced visibility into your SES identity verification status. This will offer you more actionable insights, enabling you to promptly address any verification-related issues.
+* feature: XRay: This releases enhances GetTraceSummaries API to support new TimeRangeType Service to query trace summaries by segment end time.
 
 ## 2.1473.0
 * feature: AuditManager: This release introduces a new limit to the awsAccounts parameter. When you create or update an assessment, there is now a limit of 200 AWS accounts that can be specified in the assessment scope.

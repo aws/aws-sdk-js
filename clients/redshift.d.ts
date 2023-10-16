@@ -461,11 +461,11 @@ declare class Redshift extends Service {
    */
   describeClusters(callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
-   * Contains information for custom domain associations for a cluster.
+   * Contains information about custom domain associations for a cluster.
    */
   describeCustomDomainAssociations(params: Redshift.Types.DescribeCustomDomainAssociationsMessage, callback?: (err: AWSError, data: Redshift.Types.CustomDomainAssociationsMessage) => void): Request<Redshift.Types.CustomDomainAssociationsMessage, AWSError>;
   /**
-   * Contains information for custom domain associations for a cluster.
+   * Contains information about custom domain associations for a cluster.
    */
   describeCustomDomainAssociations(callback?: (err: AWSError, data: Redshift.Types.CustomDomainAssociationsMessage) => void): Request<Redshift.Types.CustomDomainAssociationsMessage, AWSError>;
   /**
@@ -1497,6 +1497,14 @@ declare namespace Redshift {
      * The expiration date for the certificate associated with the custom domain name.
      */
     CustomDomainCertificateExpiryDate?: TStamp;
+    /**
+     * The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.
+     */
+    MasterPasswordSecretArn?: String;
+    /**
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
+     */
+    MasterPasswordSecretKmsKeyId?: String;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -1872,9 +1880,9 @@ declare namespace Redshift {
      */
     MasterUsername: String;
     /**
-     * The password associated with the admin user account for the cluster that is being created. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
+     * The password associated with the admin user account for the cluster that is being created. You can't use MasterUserPassword if ManageMasterPassword is true. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
      */
-    MasterUserPassword: String;
+    MasterUserPassword?: SensitiveString;
     /**
      * A list of security groups to be associated with this cluster. Default: The default cluster security group for Amazon Redshift.
      */
@@ -1987,6 +1995,14 @@ declare namespace Redshift {
      * A flag that specifies whether to load sample data once the cluster is created.
      */
     LoadSampleData?: String;
+    /**
+     * If true, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password. 
+     */
+    ManageMasterPassword?: BooleanOptional;
+    /**
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. You can only use this parameter if ManageMasterPassword is true.
+     */
+    MasterPasswordSecretKmsKeyId?: String;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -4125,9 +4141,9 @@ declare namespace Redshift {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the MasterUserPassword element exists in the PendingModifiedValues element of the operation response.   Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.  Default: Uses existing setting. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
+     * The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the MasterUserPassword element exists in the PendingModifiedValues element of the operation response.  You can't use MasterUserPassword if ManageMasterPassword is true.  Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.  Default: Uses existing setting. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33-126) except ' (single quote), " (double quote), \, /, or @.  
      */
-    MasterUserPassword?: String;
+    MasterUserPassword?: SensitiveString;
     /**
      * The name of the cluster parameter group to apply to this cluster. This change is applied only after the cluster is rebooted. To reboot a cluster use RebootCluster.  Default: Uses existing setting. Constraints: The cluster parameter group must be in the same parameter group family that matches the cluster version.
      */
@@ -4200,6 +4216,14 @@ declare namespace Redshift {
      * The option to change the port of an Amazon Redshift cluster.
      */
     Port?: IntegerOptional;
+    /**
+     * If true, Amazon Redshift uses Secrets Manager to manage this cluster's admin credentials. You can't use MasterUserPassword if ManageMasterPassword is true. If ManageMasterPassword is false or not set, Amazon Redshift uses MasterUserPassword for the admin user account's password. 
+     */
+    ManageMasterPassword?: BooleanOptional;
+    /**
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. You can only use this parameter if ManageMasterPassword is true.
+     */
+    MasterPasswordSecretKmsKeyId?: String;
   }
   export interface ModifyClusterParameterGroupMessage {
     /**
@@ -4622,7 +4646,7 @@ declare namespace Redshift {
     /**
      * The pending or in-progress change of the admin user password for the cluster.
      */
-    MasterUserPassword?: String;
+    MasterUserPassword?: SensitiveString;
     /**
      * The pending or in-progress change of the cluster's node type.
      */
@@ -5125,6 +5149,14 @@ declare namespace Redshift {
      * Enables support for restoring an unencrypted snapshot to a cluster encrypted with Key Management Service (KMS) and a customer managed key.
      */
     Encrypted?: BooleanOptional;
+    /**
+     * If true, Amazon Redshift uses Secrets Manager to manage the restored cluster's admin credentials. If ManageMasterPassword is false or not set, Amazon Redshift uses the admin credentials the cluster had at the time the snapshot was taken.
+     */
+    ManageMasterPassword?: BooleanOptional;
+    /**
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. You can only use this parameter if ManageMasterPassword is true.
+     */
+    MasterPasswordSecretKmsKeyId?: String;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
@@ -5508,6 +5540,14 @@ declare namespace Redshift {
      * A timestamp representing the start of the retention period for the snapshot.
      */
     SnapshotRetentionStartTime?: TStamp;
+    /**
+     * The Amazon Resource Name (ARN) for the cluster's admin user credentials secret.
+     */
+    MasterPasswordSecretArn?: String;
+    /**
+     * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
+     */
+    MasterPasswordSecretKmsKeyId?: String;
   }
   export type SnapshotAttributeToSortBy = "SOURCE_TYPE"|"TOTAL_SIZE"|"CREATE_TIME"|string;
   export interface SnapshotCopyGrant {

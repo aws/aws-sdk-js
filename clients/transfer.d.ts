@@ -582,7 +582,7 @@ declare namespace Transfer {
   }
   export interface CreateAccessRequest {
     /**
-     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL. 
+     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH. 
      */
     HomeDirectory?: HomeDirectory;
     /**
@@ -791,7 +791,7 @@ declare namespace Transfer {
   }
   export interface CreateUserRequest {
     /**
-     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL. 
+     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH. 
      */
     HomeDirectory?: HomeDirectory;
     /**
@@ -1169,7 +1169,7 @@ declare namespace Transfer {
   }
   export interface DescribedAccess {
     /**
-     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL. 
+     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH. 
      */
     HomeDirectory?: HomeDirectory;
     /**
@@ -1529,7 +1529,7 @@ declare namespace Transfer {
      */
     Arn: Arn;
     /**
-     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL. 
+     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH. 
      */
     HomeDirectory?: HomeDirectory;
     /**
@@ -2122,7 +2122,7 @@ declare namespace Transfer {
   }
   export interface ListedAccess {
     /**
-     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL. 
+     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH. 
      */
     HomeDirectory?: HomeDirectory;
     /**
@@ -2326,7 +2326,7 @@ declare namespace Transfer {
      */
     Arn: Arn;
     /**
-     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL. 
+     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH. 
      */
     HomeDirectory?: HomeDirectory;
     /**
@@ -2704,7 +2704,7 @@ declare namespace Transfer {
   }
   export interface UpdateAccessRequest {
     /**
-     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL. 
+     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH. 
      */
     HomeDirectory?: HomeDirectory;
     /**
@@ -2945,7 +2945,7 @@ declare namespace Transfer {
   }
   export interface UpdateUserRequest {
     /**
-     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to LOGICAL. 
+     * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.  The HomeDirectory parameter is only used if HomeDirectoryType is set to PATH. 
      */
     HomeDirectory?: HomeDirectory;
     /**

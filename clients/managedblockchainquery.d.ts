@@ -12,13 +12,21 @@ declare class ManagedBlockchainQuery extends Service {
   constructor(options?: ManagedBlockchainQuery.Types.ClientConfiguration)
   config: Config & ManagedBlockchainQuery.Types.ClientConfiguration;
   /**
-   * Gets the token balance for a batch of tokens by using the GetTokenBalance action for every token in the request.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
+   * Gets the token balance for a batch of tokens by using the BatchGetTokenBalance action for every token in the request.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
    */
   batchGetTokenBalance(params: ManagedBlockchainQuery.Types.BatchGetTokenBalanceInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.BatchGetTokenBalanceOutput) => void): Request<ManagedBlockchainQuery.Types.BatchGetTokenBalanceOutput, AWSError>;
   /**
-   * Gets the token balance for a batch of tokens by using the GetTokenBalance action for every token in the request.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
+   * Gets the token balance for a batch of tokens by using the BatchGetTokenBalance action for every token in the request.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
    */
   batchGetTokenBalance(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.BatchGetTokenBalanceOutput) => void): Request<ManagedBlockchainQuery.Types.BatchGetTokenBalanceOutput, AWSError>;
+  /**
+   * Gets the information about a specific contract deployed on the blockchain.    The Bitcoin blockchain networks do not support this operation.   Metadata is currently only available for some ERC-20 contracts. Metadata will be available for additional contracts in the future.   
+   */
+  getAssetContract(params: ManagedBlockchainQuery.Types.GetAssetContractInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.GetAssetContractOutput) => void): Request<ManagedBlockchainQuery.Types.GetAssetContractOutput, AWSError>;
+  /**
+   * Gets the information about a specific contract deployed on the blockchain.    The Bitcoin blockchain networks do not support this operation.   Metadata is currently only available for some ERC-20 contracts. Metadata will be available for additional contracts in the future.   
+   */
+  getAssetContract(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.GetAssetContractOutput) => void): Request<ManagedBlockchainQuery.Types.GetAssetContractOutput, AWSError>;
   /**
    * Gets the balance of a specific token, including native tokens, for a given address (wallet or contract) on the blockchain.  Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported. 
    */
@@ -36,11 +44,19 @@ declare class ManagedBlockchainQuery extends Service {
    */
   getTransaction(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.GetTransactionOutput) => void): Request<ManagedBlockchainQuery.Types.GetTransactionOutput, AWSError>;
   /**
-   * This action returns the following for a given a blockchain network:   Lists all token balances owned by an address (either a contact address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of the tokenFilter when using this operation. 
+   * Lists all the contracts for a given contract type deployed by an address (either a contract address or a wallet address). The Bitcoin blockchain networks do not support this operation.
+   */
+  listAssetContracts(params: ManagedBlockchainQuery.Types.ListAssetContractsInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListAssetContractsOutput) => void): Request<ManagedBlockchainQuery.Types.ListAssetContractsOutput, AWSError>;
+  /**
+   * Lists all the contracts for a given contract type deployed by an address (either a contract address or a wallet address). The Bitcoin blockchain networks do not support this operation.
+   */
+  listAssetContracts(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListAssetContractsOutput) => void): Request<ManagedBlockchainQuery.Types.ListAssetContractsOutput, AWSError>;
+  /**
+   * This action returns the following for a given blockchain network:   Lists all token balances owned by an address (either a contract address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of the tokenFilter when using this operation. 
    */
   listTokenBalances(params: ManagedBlockchainQuery.Types.ListTokenBalancesInput, callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTokenBalancesOutput) => void): Request<ManagedBlockchainQuery.Types.ListTokenBalancesOutput, AWSError>;
   /**
-   * This action returns the following for a given a blockchain network:   Lists all token balances owned by an address (either a contact address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of the tokenFilter when using this operation. 
+   * This action returns the following for a given blockchain network:   Lists all token balances owned by an address (either a contract address or a wallet address).   Lists all token balances for all tokens created by a contract.   Lists all token balances for a given token.    You must always specify the network property of the tokenFilter when using this operation. 
    */
   listTokenBalances(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTokenBalancesOutput) => void): Request<ManagedBlockchainQuery.Types.ListTokenBalancesOutput, AWSError>;
   /**
@@ -61,6 +77,21 @@ declare class ManagedBlockchainQuery extends Service {
   listTransactions(callback?: (err: AWSError, data: ManagedBlockchainQuery.Types.ListTransactionsOutput) => void): Request<ManagedBlockchainQuery.Types.ListTransactionsOutput, AWSError>;
 }
 declare namespace ManagedBlockchainQuery {
+  export interface AssetContract {
+    /**
+     * The container for the contract identifier containing its blockchain network and address.
+     */
+    contractIdentifier: ContractIdentifier;
+    /**
+     * The token standard of the contract.
+     */
+    tokenStandard: QueryTokenStandard;
+    /**
+     * The address of the contract deployer.
+     */
+    deployerAddress: ChainAddress;
+  }
+  export type AssetContractList = AssetContract[];
   export interface BatchGetTokenBalanceErrorItem {
     tokenIdentifier?: TokenIdentifier;
     ownerIdentifier?: OwnerIdentifier;
@@ -81,7 +112,7 @@ declare namespace ManagedBlockchainQuery {
   export type BatchGetTokenBalanceErrors = BatchGetTokenBalanceErrorItem[];
   export interface BatchGetTokenBalanceInput {
     /**
-     * An array of GetTokenBalanceInput objects whose balance is being requested.
+     * An array of BatchGetTokenBalanceInputItem objects whose balance is being requested.
      */
     getTokenBalanceInputs?: GetTokenBalanceInputList;
   }
@@ -119,7 +150,66 @@ declare namespace ManagedBlockchainQuery {
     time?: Timestamp;
   }
   export type ChainAddress = string;
+  export interface ContractFilter {
+    /**
+     * The blockchain network of the contract.
+     */
+    network: QueryNetwork;
+    /**
+     * The container for the token standard.
+     */
+    tokenStandard: QueryTokenStandard;
+    /**
+     * The network address of the deployer.
+     */
+    deployerAddress: ChainAddress;
+  }
+  export interface ContractIdentifier {
+    /**
+     * The blockchain network of the contract.
+     */
+    network: QueryNetwork;
+    /**
+     * Container for the blockchain address about a contract.
+     */
+    contractAddress: ChainAddress;
+  }
+  export interface ContractMetadata {
+    /**
+     * The name of the token contract.
+     */
+    name?: String;
+    /**
+     * The symbol of the token contract.
+     */
+    symbol?: String;
+    /**
+     * The decimals used by the token contract.
+     */
+    decimals?: Integer;
+  }
   export type ErrorType = "VALIDATION_EXCEPTION"|"RESOURCE_NOT_FOUND_EXCEPTION"|string;
+  export interface GetAssetContractInput {
+    /**
+     * Contains the blockchain address and network information about the contract.
+     */
+    contractIdentifier: ContractIdentifier;
+  }
+  export interface GetAssetContractOutput {
+    /**
+     * Contains the blockchain address and network information about the contract.
+     */
+    contractIdentifier: ContractIdentifier;
+    /**
+     * The token standard of the contract requested.
+     */
+    tokenStandard: QueryTokenStandard;
+    /**
+     * The address of the deployer of contract.
+     */
+    deployerAddress: ChainAddress;
+    metadata?: ContractMetadata;
+  }
   export interface GetTokenBalanceInput {
     /**
      * The container for the identifier for the token, including the unique token ID and its blockchain network.
@@ -162,6 +252,31 @@ declare namespace ManagedBlockchainQuery {
     transaction: Transaction;
   }
   export type Integer = number;
+  export interface ListAssetContractsInput {
+    /**
+     * Contains the filter parameter for the request.
+     */
+    contractFilter: ContractFilter;
+    /**
+     *  The pagination token that indicates the next set of results to retrieve.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of contracts to list.
+     */
+    maxResults?: ListAssetContractsInputMaxResultsInteger;
+  }
+  export type ListAssetContractsInputMaxResultsInteger = number;
+  export interface ListAssetContractsOutput {
+    /**
+     * An array of contract objects that contain the properties for each contract.
+     */
+    contracts: AssetContractList;
+    /**
+     * The pagination token that indicates the next set of results to retrieve. 
+     */
+    nextToken?: NextToken;
+  }
   export interface ListTokenBalancesInput {
     /**
      * The contract or wallet address on the blockchain network by which to filter the request. You must specify the address property of the ownerFilter when listing balances of tokens owned by the address.
@@ -280,8 +395,9 @@ declare namespace ManagedBlockchainQuery {
      */
     address: ChainAddress;
   }
-  export type QueryNetwork = "ETHEREUM_MAINNET"|"BITCOIN_MAINNET"|string;
+  export type QueryNetwork = "ETHEREUM_MAINNET"|"BITCOIN_MAINNET"|"BITCOIN_TESTNET"|string;
   export type QueryTokenId = string;
+  export type QueryTokenStandard = "ERC20"|"ERC721"|"ERC1155"|string;
   export type QueryTransactionEventType = "ERC20_TRANSFER"|"ERC20_MINT"|"ERC20_BURN"|"ERC20_DEPOSIT"|"ERC20_WITHDRAWAL"|"ERC721_TRANSFER"|"ERC1155_TRANSFER"|"BITCOIN_VIN"|"BITCOIN_VOUT"|"INTERNAL_ETH_TRANSFER"|"ETH_TRANSFER"|string;
   export type QueryTransactionHash = string;
   export type QueryTransactionStatus = "FINAL"|"FAILED"|string;
@@ -306,7 +422,7 @@ declare namespace ManagedBlockchainQuery {
      */
     atBlockchainInstant: BlockchainInstant;
     /**
-     * The timestamp of the last transaction at which the balance for the token in the wallet was updated.
+     * The Timestamp of the last transaction at which the balance for the token in the wallet was updated.
      */
     lastUpdatedTime?: BlockchainInstant;
   }
@@ -335,13 +451,13 @@ declare namespace ManagedBlockchainQuery {
      */
     contractAddress?: ChainAddress;
     /**
-     * The unique identifier of the token.
+     * The unique identifier of the token.  You must specify this container with btc for the native BTC token, and eth for the native ETH token. For all other token types you must specify the tokenId in the 64 character hexadecimal tokenid format. 
      */
     tokenId?: QueryTokenId;
   }
   export interface Transaction {
     /**
-     * The blockchain network where the transaction occured.
+     * The blockchain network where the transaction occurred.
      */
     network: QueryNetwork;
     /**

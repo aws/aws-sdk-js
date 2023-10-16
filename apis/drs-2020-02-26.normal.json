@@ -1837,6 +1837,10 @@
           "shape": "LaunchDisposition",
           "documentation": "<p>Launch disposition.</p>"
         },
+        "launchIntoSourceInstance": {
+          "shape": "Boolean",
+          "documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
+        },
         "licensing": {
           "shape": "Licensing",
           "documentation": "<p>Licensing.</p>"
@@ -3362,6 +3366,10 @@
           "shape": "LaunchDisposition",
           "documentation": "<p>The state of the Recovery Instance in EC2 after the recovery operation.</p>"
         },
+        "launchIntoInstanceProperties": {
+          "shape": "LaunchIntoInstanceProperties",
+          "documentation": "<p>Launch into existing instance properties.</p>"
+        },
         "licensing": {
           "shape": "Licensing",
           "documentation": "<p>The licensing configuration to be used for this launch configuration.</p>"
@@ -3411,6 +3419,10 @@
           "shape": "LaunchDisposition",
           "documentation": "<p>Launch disposition.</p>"
         },
+        "launchIntoSourceInstance": {
+          "shape": "Boolean",
+          "documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
+        },
         "licensing": {
           "shape": "Licensing",
           "documentation": "<p>Licensing.</p>"
@@ -3458,6 +3470,16 @@
         "STOPPED",
         "STARTED"
       ]
+    },
+    "LaunchIntoInstanceProperties": {
+      "type": "structure",
+      "members": {
+        "launchIntoEC2InstanceID": {
+          "shape": "EC2InstanceID",
+          "documentation": "<p>Optionally holds EC2 instance ID of an instance to launch into, instead of launching a new instance during drill, recovery or failback.</p>"
+        }
+      },
+      "documentation": "<p>Launch into existing instance.</p>"
     },
     "LaunchStatus": {
       "type": "string",
@@ -3841,6 +3863,7 @@
         "actionVersion",
         "active",
         "category",
+        "description",
         "name",
         "optional",
         "order",
@@ -4915,7 +4938,7 @@
       "type": "string",
       "max": 1011,
       "min": 1,
-      "pattern": "^([A-Za-z0-9-])+$"
+      "pattern": "^([A-Za-z0-9-/:])+$"
     },
     "StagingArea": {
       "type": "structure",
@@ -5352,6 +5375,10 @@
           "shape": "LaunchDisposition",
           "documentation": "<p>The state of the Recovery Instance in EC2 after the recovery operation.</p>"
         },
+        "launchIntoInstanceProperties": {
+          "shape": "LaunchIntoInstanceProperties",
+          "documentation": "<p>Launch into existing instance properties.</p>"
+        },
         "licensing": {
           "shape": "Licensing",
           "documentation": "<p>The licensing configuration to be used for this launch configuration.</p>"
@@ -5399,6 +5426,10 @@
         "launchDisposition": {
           "shape": "LaunchDisposition",
           "documentation": "<p>Launch disposition.</p>"
+        },
+        "launchIntoSourceInstance": {
+          "shape": "Boolean",
+          "documentation": "<p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>"
         },
         "licensing": {
           "shape": "Licensing",
