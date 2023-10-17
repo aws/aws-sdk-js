@@ -60,6 +60,14 @@ declare class Kafka extends Service {
    */
   createConfiguration(callback?: (err: AWSError, data: Kafka.Types.CreateConfigurationResponse) => void): Request<Kafka.Types.CreateConfigurationResponse, AWSError>;
   /**
+   * Creates the replicator.
+   */
+  createReplicator(params: Kafka.Types.CreateReplicatorRequest, callback?: (err: AWSError, data: Kafka.Types.CreateReplicatorResponse) => void): Request<Kafka.Types.CreateReplicatorResponse, AWSError>;
+  /**
+   * Creates the replicator.
+   */
+  createReplicator(callback?: (err: AWSError, data: Kafka.Types.CreateReplicatorResponse) => void): Request<Kafka.Types.CreateReplicatorResponse, AWSError>;
+  /**
    * 
             Creates a new MSK VPC connection.
          
@@ -107,6 +115,14 @@ declare class Kafka extends Service {
          
    */
   deleteConfiguration(callback?: (err: AWSError, data: Kafka.Types.DeleteConfigurationResponse) => void): Request<Kafka.Types.DeleteConfigurationResponse, AWSError>;
+  /**
+   * Deletes a replicator.
+   */
+  deleteReplicator(params: Kafka.Types.DeleteReplicatorRequest, callback?: (err: AWSError, data: Kafka.Types.DeleteReplicatorResponse) => void): Request<Kafka.Types.DeleteReplicatorResponse, AWSError>;
+  /**
+   * Deletes a replicator.
+   */
+  deleteReplicator(callback?: (err: AWSError, data: Kafka.Types.DeleteReplicatorResponse) => void): Request<Kafka.Types.DeleteReplicatorResponse, AWSError>;
   /**
    * 
             Deletes a MSK VPC connection.
@@ -191,6 +207,14 @@ declare class Kafka extends Service {
          
    */
   describeConfigurationRevision(callback?: (err: AWSError, data: Kafka.Types.DescribeConfigurationRevisionResponse) => void): Request<Kafka.Types.DescribeConfigurationRevisionResponse, AWSError>;
+  /**
+   * Describes a replicator.
+   */
+  describeReplicator(params: Kafka.Types.DescribeReplicatorRequest, callback?: (err: AWSError, data: Kafka.Types.DescribeReplicatorResponse) => void): Request<Kafka.Types.DescribeReplicatorResponse, AWSError>;
+  /**
+   * Describes a replicator.
+   */
+  describeReplicator(callback?: (err: AWSError, data: Kafka.Types.DescribeReplicatorResponse) => void): Request<Kafka.Types.DescribeReplicatorResponse, AWSError>;
   /**
    * 
             Returns a description of this MSK VPC connection.
@@ -347,6 +371,14 @@ declare class Kafka extends Service {
          
    */
   listNodes(callback?: (err: AWSError, data: Kafka.Types.ListNodesResponse) => void): Request<Kafka.Types.ListNodesResponse, AWSError>;
+  /**
+   * Lists the replicators.
+   */
+  listReplicators(params: Kafka.Types.ListReplicatorsRequest, callback?: (err: AWSError, data: Kafka.Types.ListReplicatorsResponse) => void): Request<Kafka.Types.ListReplicatorsResponse, AWSError>;
+  /**
+   * Lists the replicators.
+   */
+  listReplicators(callback?: (err: AWSError, data: Kafka.Types.ListReplicatorsResponse) => void): Request<Kafka.Types.ListReplicatorsResponse, AWSError>;
   /**
    * 
             Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
@@ -548,6 +580,14 @@ declare class Kafka extends Service {
    */
   updateMonitoring(callback?: (err: AWSError, data: Kafka.Types.UpdateMonitoringResponse) => void): Request<Kafka.Types.UpdateMonitoringResponse, AWSError>;
   /**
+   * Updates replication info of a replicator.
+   */
+  updateReplicationInfo(params: Kafka.Types.UpdateReplicationInfoRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateReplicationInfoResponse) => void): Request<Kafka.Types.UpdateReplicationInfoResponse, AWSError>;
+  /**
+   * Updates replication info of a replicator.
+   */
+  updateReplicationInfo(callback?: (err: AWSError, data: Kafka.Types.UpdateReplicationInfoResponse) => void): Request<Kafka.Types.UpdateReplicationInfoResponse, AWSError>;
+  /**
    * 
             Updates the security settings for the cluster. You can use this operation to specify encryption and authentication on existing clusters.
          
@@ -569,6 +609,12 @@ declare class Kafka extends Service {
   updateStorage(callback?: (err: AWSError, data: Kafka.Types.UpdateStorageResponse) => void): Request<Kafka.Types.UpdateStorageResponse, AWSError>;
 }
 declare namespace Kafka {
+  export interface AmazonMskCluster {
+    /**
+     * The Amazon Resource Name (ARN) of an Amazon MSK cluster.
+     */
+    MskClusterArn: __string;
+  }
   export interface BatchAssociateScramSecretRequest {
     /**
      * 
@@ -1395,6 +1441,42 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     VpcConnectivity?: VpcConnectivity;
   }
+  export interface ConsumerGroupReplication {
+    /**
+     * List of regular expression patterns indicating the consumer groups that should not be replicated.
+     */
+    ConsumerGroupsToExclude?: __listOf__stringMax256;
+    /**
+     * List of regular expression patterns indicating the consumer groups to copy.
+     */
+    ConsumerGroupsToReplicate: __listOf__stringMax256;
+    /**
+     * Enables synchronization of consumer groups to target cluster.
+     */
+    DetectAndCopyNewConsumerGroups?: __boolean;
+    /**
+     * Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.
+     */
+    SynchroniseConsumerGroupOffsets?: __boolean;
+  }
+  export interface ConsumerGroupReplicationUpdate {
+    /**
+     * List of regular expression patterns indicating the consumer groups that should not be replicated.
+     */
+    ConsumerGroupsToExclude: __listOf__stringMax256;
+    /**
+     * List of regular expression patterns indicating the consumer groups to copy.
+     */
+    ConsumerGroupsToReplicate: __listOf__stringMax256;
+    /**
+     * Enables synchronization of consumer groups to target cluster.
+     */
+    DetectAndCopyNewConsumerGroups: __boolean;
+    /**
+     * Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.
+     */
+    SynchroniseConsumerGroupOffsets: __boolean;
+  }
   export interface CreateClusterV2Request {
     /**
      * 
@@ -1594,6 +1676,46 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     State?: ConfigurationState;
+  }
+  export interface CreateReplicatorRequest {
+    /**
+     * A summary description of the replicator.
+     */
+    Description?: __stringMax1024;
+    /**
+     * Kafka Clusters to use in setting up sources / targets for replication.
+     */
+    KafkaClusters: __listOfKafkaCluster;
+    /**
+     * A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.
+     */
+    ReplicationInfoList: __listOfReplicationInfo;
+    /**
+     * The name of the replicator. Alpha-numeric characters with '-' are allowed.
+     */
+    ReplicatorName: __stringMin1Max128Pattern09AZaZ09AZaZ0;
+    /**
+     * The ARN of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters)
+     */
+    ServiceExecutionRoleArn: __string;
+    /**
+     * List of tags to attach to created Replicator.
+     */
+    Tags?: __mapOf__string;
+  }
+  export interface CreateReplicatorResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the replicator.
+     */
+    ReplicatorArn?: __string;
+    /**
+     * Name of the replicator provided by the customer.
+     */
+    ReplicatorName?: __string;
+    /**
+     * State of the replicator.
+     */
+    ReplicatorState?: ReplicatorState;
   }
   export interface CreateVpcConnectionRequest {
     /**
@@ -1861,6 +1983,26 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     State?: ConfigurationState;
   }
+  export interface DeleteReplicatorRequest {
+    /**
+     * The current version of the replicator.
+     */
+    CurrentVersion?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the replicator to be deleted.
+     */
+    ReplicatorArn: __string;
+  }
+  export interface DeleteReplicatorResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the replicator.
+     */
+    ReplicatorArn?: __string;
+    /**
+     * The state of the replicator.
+     */
+    ReplicatorState?: ReplicatorState;
+  }
   export interface DeleteVpcConnectionRequest {
     /**
      * 
@@ -2050,6 +2192,66 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
    
      */
     Arn: __string;
+  }
+  export interface DescribeReplicatorRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the replicator to be described.
+     */
+    ReplicatorArn: __string;
+  }
+  export interface DescribeReplicatorResponse {
+    /**
+     * The time when the replicator was created.
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * The current version number of the replicator.
+     */
+    CurrentVersion?: __string;
+    /**
+     * Whether this resource is a replicator reference.
+     */
+    IsReplicatorReference?: __boolean;
+    /**
+     * Kafka Clusters used in setting up sources / targets for replication.
+     */
+    KafkaClusters?: __listOfKafkaClusterDescription;
+    /**
+     * A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.
+     */
+    ReplicationInfoList?: __listOfReplicationInfoDescription;
+    /**
+     * The Amazon Resource Name (ARN) of the replicator.
+     */
+    ReplicatorArn?: __string;
+    /**
+     * The description of the replicator.
+     */
+    ReplicatorDescription?: __string;
+    /**
+     * The name of the replicator.
+     */
+    ReplicatorName?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the replicator resource in the region where the replicator was created.
+     */
+    ReplicatorResourceArn?: __string;
+    /**
+     * State of the replicator.
+     */
+    ReplicatorState?: ReplicatorState;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role used by the replicator to access resources in the customer's account (e.g source and target clusters)
+     */
+    ServiceExecutionRoleArn?: __string;
+    /**
+     * Details about the state of the replicator.
+     */
+    StateInfo?: ReplicationStateInfo;
+    /**
+     * List of tags attached to the Replicator.
+     */
+    Tags?: __mapOf__string;
   }
   export interface DescribeVpcConnectionResponse {
     /**
@@ -2320,6 +2522,50 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Policy?: __string;
   }
+  export interface KafkaCluster {
+    /**
+     * Details of an Amazon MSK Cluster.
+     */
+    AmazonMskCluster: AmazonMskCluster;
+    /**
+     * Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
+     */
+    VpcConfig: KafkaClusterClientVpcConfig;
+  }
+  export interface KafkaClusterClientVpcConfig {
+    /**
+     * The security groups to attach to the ENIs for the broker nodes.
+     */
+    SecurityGroupIds?: __listOf__string;
+    /**
+     * The list of subnets in the client VPC to connect to.
+     */
+    SubnetIds: __listOf__string;
+  }
+  export interface KafkaClusterDescription {
+    /**
+     * Details of an Amazon MSK Cluster.
+     */
+    AmazonMskCluster?: AmazonMskCluster;
+    /**
+     * The alias of the Kafka cluster. Used to prefix names of replicated topics. 
+     */
+    KafkaClusterAlias?: __string;
+    /**
+     * Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.
+     */
+    VpcConfig?: KafkaClusterClientVpcConfig;
+  }
+  export interface KafkaClusterSummary {
+    /**
+     * Details of an Amazon MSK Cluster.
+     */
+    AmazonMskCluster?: AmazonMskCluster;
+    /**
+     * The alias of the Kafka cluster. Used to prefix names of replicated topics. 
+     */
+    KafkaClusterAlias?: __string;
+  }
   export interface KafkaVersion {
     Version?: __string;
     Status?: KafkaVersionStatus;
@@ -2580,6 +2826,30 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     NodeInfoList?: __listOfNodeInfo;
+  }
+  export interface ListReplicatorsRequest {
+    /**
+     * The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the response of ListReplicators is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListReplicators.
+     */
+    NextToken?: __string;
+    /**
+     * Returns replicators starting with given name.
+     */
+    ReplicatorNameFilter?: __string;
+  }
+  export interface ListReplicatorsResponse {
+    /**
+     * If the response of ListReplicators is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListReplicators.
+     */
+    NextToken?: __string;
+    /**
+     * List containing information of each of the replicators in the account.
+     */
+    Replicators?: __listOfReplicatorSummary;
   }
   export interface ListScramSecretsRequest {
     /**
@@ -3057,6 +3327,109 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     ZookeeperNodeInfo?: ZookeeperNodeInfo;
   }
   export type NodeType = "BROKER"|string;
+  export interface ReplicationInfo {
+    /**
+     * Configuration relating to consumer group replication.
+     */
+    ConsumerGroupReplication: ConsumerGroupReplication;
+    /**
+     * The ARN of the source Kafka cluster.
+     */
+    SourceKafkaClusterArn: __string;
+    /**
+     * The compression type to use when producing records to target cluster.
+     */
+    TargetCompressionType: TargetCompressionType;
+    /**
+     * The ARN of the target Kafka cluster.
+     */
+    TargetKafkaClusterArn: __string;
+    /**
+     * Configuration relating to topic replication.
+     */
+    TopicReplication: TopicReplication;
+  }
+  export interface ReplicationInfoDescription {
+    /**
+     * Configuration relating to consumer group replication.
+     */
+    ConsumerGroupReplication?: ConsumerGroupReplication;
+    /**
+     * The alias of the source Kafka cluster.
+     */
+    SourceKafkaClusterAlias?: __string;
+    /**
+     * The compression type to use when producing records to target cluster.
+     */
+    TargetCompressionType?: TargetCompressionType;
+    /**
+     * The alias of the target Kafka cluster.
+     */
+    TargetKafkaClusterAlias?: __string;
+    /**
+     * Configuration relating to topic replication.
+     */
+    TopicReplication?: TopicReplication;
+  }
+  export interface ReplicationInfoSummary {
+    /**
+     * The alias of the source Kafka cluster.
+     */
+    SourceKafkaClusterAlias?: __string;
+    /**
+     * The alias of the target Kafka cluster.
+     */
+    TargetKafkaClusterAlias?: __string;
+  }
+  export interface ReplicationStateInfo {
+    /**
+     * Code that describes the current state of the replicator.
+     */
+    Code?: __string;
+    /**
+     * Message that describes the state of the replicator.
+     */
+    Message?: __string;
+  }
+  export type ReplicatorState = "RUNNING"|"CREATING"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export interface ReplicatorSummary {
+    /**
+     * The time the replicator was created.
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * The current version of the replicator.
+     */
+    CurrentVersion?: __string;
+    /**
+     * Whether this resource is a replicator reference.
+     */
+    IsReplicatorReference?: __boolean;
+    /**
+     * Kafka Clusters used in setting up sources / targets for replication.
+     */
+    KafkaClustersSummary?: __listOfKafkaClusterSummary;
+    /**
+     * A list of summarized information of replications between clusters.
+     */
+    ReplicationInfoSummaryList?: __listOfReplicationInfoSummary;
+    /**
+     * The Amazon Resource Name (ARN) of the replicator.
+     */
+    ReplicatorArn?: __string;
+    /**
+     * The name of the replicator.
+     */
+    ReplicatorName?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the replicator resource in the region where the replicator was created.
+     */
+    ReplicatorResourceArn?: __string;
+    /**
+     * State of the replicator.
+     */
+    ReplicatorState?: ReplicatorState;
+  }
   export interface StateInfo {
     Code?: __string;
     Message?: __string;
@@ -3084,6 +3457,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     Tags: __mapOf__string;
   }
+  export type TargetCompressionType = "NONE"|"GZIP"|"SNAPPY"|"LZ4"|"ZSTD"|string;
   export interface Tls {
     /**
      * 
@@ -3105,6 +3479,50 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     Enabled?: __boolean;
+  }
+  export interface TopicReplication {
+    /**
+     * Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.
+     */
+    CopyAccessControlListsForTopics?: __boolean;
+    /**
+     * Whether to periodically configure remote topics to match their corresponding upstream topics.
+     */
+    CopyTopicConfigurations?: __boolean;
+    /**
+     * Whether to periodically check for new topics and partitions.
+     */
+    DetectAndCopyNewTopics?: __boolean;
+    /**
+     * List of regular expression patterns indicating the topics that should not be replicated.
+     */
+    TopicsToExclude?: __listOf__stringMax249;
+    /**
+     * List of regular expression patterns indicating the topics to copy.
+     */
+    TopicsToReplicate: __listOf__stringMax249;
+  }
+  export interface TopicReplicationUpdate {
+    /**
+     * Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.
+     */
+    CopyAccessControlListsForTopics: __boolean;
+    /**
+     * Whether to periodically configure remote topics to match their corresponding upstream topics.
+     */
+    CopyTopicConfigurations: __boolean;
+    /**
+     * Whether to periodically check for new topics and partitions.
+     */
+    DetectAndCopyNewTopics: __boolean;
+    /**
+     * List of regular expression patterns indicating the topics that should not be replicated.
+     */
+    TopicsToExclude: __listOf__stringMax249;
+    /**
+     * List of regular expression patterns indicating the topics to copy.
+     */
+    TopicsToReplicate: __listOf__stringMax249;
   }
   export interface Unauthenticated {
     /**
@@ -3384,6 +3802,42 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ClusterOperationArn?: __string;
   }
+  export interface UpdateReplicationInfoRequest {
+    /**
+     * Updated consumer group replication information.
+     */
+    ConsumerGroupReplication?: ConsumerGroupReplicationUpdate;
+    /**
+     * Current replicator version.
+     */
+    CurrentVersion: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the replicator to be updated.
+     */
+    ReplicatorArn: __string;
+    /**
+     * The ARN of the source Kafka cluster.
+     */
+    SourceKafkaClusterArn: __string;
+    /**
+     * The ARN of the target Kafka cluster.
+     */
+    TargetKafkaClusterArn: __string;
+    /**
+     * Updated topic replication information.
+     */
+    TopicReplication?: TopicReplicationUpdate;
+  }
+  export interface UpdateReplicationInfoResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the replicator.
+     */
+    ReplicatorArn?: __string;
+    /**
+     * State of the replicator.
+     */
+    ReplicatorState?: ReplicatorState;
+  }
   export interface UpdateSecurityRequest {
     /**
      * 
@@ -3660,17 +4114,30 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfConfiguration = Configuration[];
   export type __listOfConfigurationRevision = ConfigurationRevision[];
   export type __listOfKafkaVersion = KafkaVersion[];
+  export type __listOfKafkaCluster = KafkaCluster[];
+  export type __listOfKafkaClusterDescription = KafkaClusterDescription[];
+  export type __listOfKafkaClusterSummary = KafkaClusterSummary[];
   export type __listOfNodeInfo = NodeInfo[];
   export type __listOfClientVpcConnection = ClientVpcConnection[];
+  export type __listOfReplicationInfo = ReplicationInfo[];
+  export type __listOfReplicationInfoDescription = ReplicationInfoDescription[];
+  export type __listOfReplicationInfoSummary = ReplicationInfoSummary[];
+  export type __listOfReplicatorSummary = ReplicatorSummary[];
   export type __listOfVpcConnection = VpcConnection[];
   export type __listOfUnprocessedScramSecret = UnprocessedScramSecret[];
   export type __listOf__string = __string[];
   export type __long = number;
   export type __mapOf__string = {[key: string]: __string};
+  export type __listOf__stringMax249 = __stringMax249[];
+  export type __listOf__stringMax256 = __stringMax256[];
   export type __string = string;
+  export type __stringMax1024 = string;
+  export type __stringMax249 = string;
+  export type __stringMax256 = string;
   export type __stringMin1Max128 = string;
   export type __stringMin1Max64 = string;
   export type __stringMin5Max32 = string;
+  export type __stringMin1Max128Pattern09AZaZ09AZaZ0 = string;
   export type __timestampIso8601 = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1474.0-->
+<!--LATEST=2.1475.0-->
 <!--ENTRYINSERT-->
+
+## 2.1475.0
+* feature: CodePipeline: Add retryMode ALL_ACTIONS to RetryStageExecution API that retries a failed stage starting from first action in the stage
+* feature: Discovery: This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+* feature: GlobalAccelerator: Fixed error where ListCustomRoutingEndpointGroups did not have a paginator
+* feature: GuardDuty: Add domainWithSuffix finding field to dnsRequestAction
+* feature: Kafka: AWS Managed Streaming for Kafka is launching MSK Replicator, a new feature that enables customers to reliably replicate data across Amazon MSK clusters in same or different AWS regions. You can now use SDK to create, list, describe, delete, update, and manage tags of MSK Replicators.
+* feature: Route53RecoveryCluster: Adds Owner field to ListRoutingControls API.
+* feature: Route53RecoveryControlConfig: Adds permissions for GetResourcePolicy to support returning details about AWS Resource Access Manager resource policies for shared resources.
 
 ## 2.1474.0
 * feature: CloudFormation: SDK and documentation updates for UpdateReplacePolicy

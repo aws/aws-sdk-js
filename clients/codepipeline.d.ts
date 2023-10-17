@@ -268,11 +268,11 @@ declare class CodePipeline extends Service {
    */
   registerWebhookWithThirdParty(callback?: (err: AWSError, data: CodePipeline.Types.RegisterWebhookWithThirdPartyOutput) => void): Request<CodePipeline.Types.RegisterWebhookWithThirdPartyOutput, AWSError>;
   /**
-   * Resumes the pipeline execution by retrying the last failed actions in a stage. You can retry a stage immediately if any of the actions in the stage fail. When you retry, all actions that are still in progress continue working, and failed actions are triggered again.
+   * You can retry a stage that has failed without having to run a pipeline again from the beginning. You do this by either retrying the failed actions in a stage or by retrying all actions in the stage starting from the first action in the stage. When you retry the failed actions in a stage, all actions that are still in progress continue working, and failed actions are triggered again. When you retry a failed stage from the first action in the stage, the stage cannot have any actions in progress. Before a stage can be retried, it must either have all actions failed or some actions failed and some succeeded.
    */
   retryStageExecution(params: CodePipeline.Types.RetryStageExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.RetryStageExecutionOutput) => void): Request<CodePipeline.Types.RetryStageExecutionOutput, AWSError>;
   /**
-   * Resumes the pipeline execution by retrying the last failed actions in a stage. You can retry a stage immediately if any of the actions in the stage fail. When you retry, all actions that are still in progress continue working, and failed actions are triggered again.
+   * You can retry a stage that has failed without having to run a pipeline again from the beginning. You do this by either retrying the failed actions in a stage or by retrying all actions in the stage starting from the first action in the stage. When you retry the failed actions in a stage, all actions that are still in progress continue working, and failed actions are triggered again. When you retry a failed stage from the first action in the stage, the stage cannot have any actions in progress. Before a stage can be retried, it must either have all actions failed or some actions failed and some succeeded.
    */
   retryStageExecution(callback?: (err: AWSError, data: CodePipeline.Types.RetryStageExecutionOutput) => void): Request<CodePipeline.Types.RetryStageExecutionOutput, AWSError>;
   /**
@@ -1966,7 +1966,7 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId: PipelineExecutionId;
     /**
-     * The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.
+     * The scope of the retry attempt.
      */
     retryMode: StageRetryMode;
   }
@@ -2060,7 +2060,7 @@ declare namespace CodePipeline {
   }
   export type StageExecutionStatus = "Cancelled"|"InProgress"|"Failed"|"Stopped"|"Stopping"|"Succeeded"|string;
   export type StageName = string;
-  export type StageRetryMode = "FAILED_ACTIONS"|string;
+  export type StageRetryMode = "FAILED_ACTIONS"|"ALL_ACTIONS"|string;
   export interface StageState {
     /**
      * The name of the stage.

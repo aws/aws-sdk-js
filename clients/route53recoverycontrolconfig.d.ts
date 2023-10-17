@@ -109,6 +109,14 @@ declare class Route53RecoveryControlConfig extends Service {
    */
   describeSafetyRule(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.DescribeSafetyRuleResponse) => void): Request<Route53RecoveryControlConfig.Types.DescribeSafetyRuleResponse, AWSError>;
   /**
+   * Get information about the resource policy for a cluster.
+   */
+  getResourcePolicy(params: Route53RecoveryControlConfig.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.GetResourcePolicyResponse) => void): Request<Route53RecoveryControlConfig.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Get information about the resource policy for a cluster.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.GetResourcePolicyResponse) => void): Request<Route53RecoveryControlConfig.Types.GetResourcePolicyResponse, AWSError>;
+  /**
    * Returns an array of all Amazon Route 53 health checks associated with a specific routing control.
    */
   listAssociatedRoute53HealthChecks(params: Route53RecoveryControlConfig.Types.ListAssociatedRoute53HealthChecksRequest, callback?: (err: AWSError, data: Route53RecoveryControlConfig.Types.ListAssociatedRoute53HealthChecksResponse) => void): Request<Route53RecoveryControlConfig.Types.ListAssociatedRoute53HealthChecksResponse, AWSError>;
@@ -275,6 +283,10 @@ declare namespace Route53RecoveryControlConfig {
      * An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.
      */
     WaitPeriodMs: __integer;
+    /**
+     * The Amazon Web Services account ID of the assertion rule owner.
+     */
+    Owner?: __stringMin12Max12PatternD12;
   }
   export interface AssertionRuleUpdate {
     /**
@@ -307,6 +319,10 @@ declare namespace Route53RecoveryControlConfig {
      * Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
      */
     Status?: Status;
+    /**
+     * The Amazon Web Services account ID of the cluster owner.
+     */
+    Owner?: __stringMin12Max12PatternD12;
   }
   export interface ClusterEndpoint {
     /**
@@ -343,6 +359,10 @@ declare namespace Route53RecoveryControlConfig {
      * The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
      */
     Status?: Status;
+    /**
+     * The Amazon Web Services account ID of the control panel owner.
+     */
+    Owner?: __stringMin12Max12PatternD12;
   }
   export interface CreateClusterRequest {
     /**
@@ -557,6 +577,10 @@ declare namespace Route53RecoveryControlConfig {
      * An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.
      */
     WaitPeriodMs: __integer;
+    /**
+     * The Amazon Web Services account ID of the gating rule owner.
+     */
+    Owner?: __stringMin12Max12PatternD12;
   }
   export interface GatingRuleUpdate {
     /**
@@ -571,6 +595,18 @@ declare namespace Route53RecoveryControlConfig {
      * An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent "flapping" of state. The wait period is 5000 ms by default, but you can choose a custom value.
      */
     WaitPeriodMs: __integer;
+  }
+  export interface GetResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+  }
+  export interface GetResourcePolicyResponse {
+    /**
+     * The resource policy.
+     */
+    Policy?: __policy;
   }
   export interface ListAssociatedRoute53HealthChecksRequest {
     /**
@@ -766,6 +802,10 @@ declare namespace Route53RecoveryControlConfig {
      * The deployment status of a routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
      */
     Status?: Status;
+    /**
+     * The Amazon Web Services account ID of the routing control owner.
+     */
+    Owner?: __stringMin12Max12PatternD12;
   }
   export interface Rule {
     /**
@@ -883,11 +923,13 @@ declare namespace Route53RecoveryControlConfig {
   export type __string = string;
   export type __stringMax36PatternS = string;
   export type __stringMin0Max256PatternS = string;
+  export type __stringMin12Max12PatternD12 = string;
   export type __stringMin1Max128PatternAZaZ09 = string;
   export type __stringMin1Max256PatternAZaZ09 = string;
   export type __stringMin1Max32PatternS = string;
   export type __stringMin1Max64PatternS = string;
   export type __stringMin1Max8096PatternS = string;
+  export type __policy = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
