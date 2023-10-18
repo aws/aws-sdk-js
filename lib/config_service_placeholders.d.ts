@@ -302,7 +302,6 @@ export abstract class ConfigurationServicePlaceholders {
   amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.ClientConfiguration;
   keyspaces?: AWS.Keyspaces.Types.ClientConfiguration;
   billingconductor?: AWS.Billingconductor.Types.ClientConfiguration;
-  gamesparks?: AWS.GameSparks.Types.ClientConfiguration;
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.ClientConfiguration;
   ivschat?: AWS.Ivschat.Types.ClientConfiguration;
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.ClientConfiguration;
@@ -663,7 +662,6 @@ export interface ConfigurationServiceApiVersions {
   amplifyuibuilder?: AWS.AmplifyUIBuilder.Types.apiVersion;
   keyspaces?: AWS.Keyspaces.Types.apiVersion;
   billingconductor?: AWS.Billingconductor.Types.apiVersion;
-  gamesparks?: AWS.GameSparks.Types.apiVersion;
   pinpointsmsvoicev2?: AWS.PinpointSMSVoiceV2.Types.apiVersion;
   ivschat?: AWS.Ivschat.Types.apiVersion;
   chimesdkmediapipelines?: AWS.ChimeSDKMediaPipelines.Types.apiVersion;

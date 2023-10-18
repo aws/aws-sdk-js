@@ -302,7 +302,6 @@ module.exports = {
   AmplifyUIBuilder: require('./amplifyuibuilder'),
   Keyspaces: require('./keyspaces'),
   Billingconductor: require('./billingconductor'),
-  GameSparks: require('./gamesparks'),
   PinpointSMSVoiceV2: require('./pinpointsmsvoicev2'),
   Ivschat: require('./ivschat'),
   ChimeSDKMediaPipelines: require('./chimesdkmediapipelines'),
