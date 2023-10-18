@@ -1643,7 +1643,7 @@ declare namespace DynamoDB {
      */
     ItemCount?: ItemCount;
     /**
-     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     * The type of export that was performed. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT.
      */
     ExportType?: ExportType;
     /**
@@ -1669,7 +1669,7 @@ declare namespace DynamoDB {
      */
     ExportStatus?: ExportStatus;
     /**
-     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     * The type of export that was performed. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT.
      */
     ExportType?: ExportType;
   }
@@ -1711,7 +1711,7 @@ declare namespace DynamoDB {
      */
     ExportFormat?: ExportFormat;
     /**
-     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
+     * Choice of whether to execute as a full export or incremental export. Valid values are FULL_EXPORT or INCREMENTAL_EXPORT. The default value is FULL_EXPORT. If INCREMENTAL_EXPORT is provided, the IncrementalExportSpecification must also be used.
      */
     ExportType?: ExportType;
     /**
@@ -2112,7 +2112,7 @@ declare namespace DynamoDB {
      */
     ExportToTime?: ExportToTime;
     /**
-     * Choice of whether to output the previous item image prior to the start time of the incremental export. Valid values are NEW_AND_OLD_IMAGES and NEW_IMAGES.
+     * The view type that was chosen for the export. Valid values are NEW_AND_OLD_IMAGES and NEW_IMAGES. The default value is NEW_AND_OLD_IMAGES.
      */
     ExportViewType?: ExportViewType;
   }

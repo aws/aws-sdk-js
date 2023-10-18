@@ -2474,7 +2474,9 @@
       "type": "list",
       "member": {
         "shape": "String"
-      }
+      },
+      "max": 25,
+      "min": 0
     },
     "RecommendationList": {
       "type": "list",

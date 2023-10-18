@@ -1780,6 +1780,14 @@ declare namespace RDS {
      * Tags to assign to the blue/green deployment.
      */
     Tags?: TagList;
+    /**
+     * Specify the DB instance class for the databases in the green environment.
+     */
+    TargetDBInstanceClass?: TargetDBInstanceClass;
+    /**
+     * Whether to upgrade the storage file system configuration on the green database. This option migrates the green DB instance from the older 32-bit file system to the preferred configuration. For more information, see Upgrading the storage file system for a DB instance.
+     */
+    UpgradeTargetStorageConfig?: BooleanOptional;
   }
   export interface CreateBlueGreenDeploymentResponse {
     BlueGreenDeployment?: BlueGreenDeployment;
@@ -2513,6 +2521,10 @@ declare namespace RDS {
      * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
      */
     DedicatedLogVolume?: BooleanOptional;
+    /**
+     * Whether to upgrade the storage file system configuration on the read replica. This option migrates the read replica from the old storage file system layout to the preferred layout.
+     */
+    UpgradeStorageConfig?: BooleanOptional;
     /**
      * The ID of the region that contains the source for the read replica.
      */
@@ -3984,6 +3996,10 @@ declare namespace RDS {
      * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
      */
     DedicatedLogVolume?: Boolean;
+    /**
+     * Indicates whether an upgrade is recommended for the storage file system configuration on the DB instance. To migrate to the preferred configuration, you can either create a blue/green deployment, or create a read replica from the DB instance. For more information, see Upgrading the storage file system for a DB instance.
+     */
+    IsStorageConfigUpgradeAvailable?: BooleanOptional;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -9459,6 +9475,7 @@ declare namespace RDS {
     TagList?: TagList;
   }
   export type TargetDBClusterParameterGroupName = string;
+  export type TargetDBInstanceClass = string;
   export type TargetDBParameterGroupName = string;
   export type TargetEngineVersion = string;
   export type TargetGroupList = DBProxyTargetGroup[];

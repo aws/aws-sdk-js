@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1475.0-->
+<!--LATEST=2.1476.0-->
 <!--ENTRYINSERT-->
+
+## 2.1476.0
+* feature: Kendra: Changes for a new feature in Amazon Kendra's Query API to Collapse/Expand query results
+* feature: RDS: This release adds support for upgrading the storage file system configuration on the DB instance using a blue/green deployment or a read replica.
+* feature: Wisdom: This release adds an max limit of 25 recommendation ids for NotifyRecommendationsReceived API.
 
 ## 2.1475.0
 * feature: CodePipeline: Add retryMode ALL_ACTIONS to RetryStageExecution API that retries a failed stage starting from first action in the stage

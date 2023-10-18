@@ -420,19 +420,19 @@ declare class Kendra extends Service {
    */
   putPrincipalMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Searches an index given an input query. You can configure boosting or relevance tuning at the query level to override boosting at the index level, filter based on document fields/attributes and faceted search, and filter based on the user or their group access to documents. You can also include certain fields in the response that might provide useful additional information. A query response contains three types of results.   Relevant suggested answers. The answers can be either a text excerpt or table excerpt. The answer can be highlighted in the excerpt.   Matching FAQs or questions-answer from your FAQ file.   Relevant documents. This result type includes an excerpt of the document with the document title. The searched terms can be highlighted in the excerpt.   You can specify that the query return only one type of result using the QueryResultTypeFilter parameter. Each query returns the 100 most relevant results. If you filter result type to only question-answers, a maximum of four results are returned. If you filter result type to only answers, a maximum of three results are returned.
+   * Searches an index given an input query.  If you are working with large language models (LLMs) or implementing retrieval augmented generation (RAG) systems, you can use Amazon Kendra's Retrieve API, which can return longer semantically relevant passages. We recommend using the Retrieve API instead of filing a service limit increase to increase the Query API document excerpt length.  You can configure boosting or relevance tuning at the query level to override boosting at the index level, filter based on document fields/attributes and faceted search, and filter based on the user or their group access to documents. You can also include certain fields in the response that might provide useful additional information. A query response contains three types of results.   Relevant suggested answers. The answers can be either a text excerpt or table excerpt. The answer can be highlighted in the excerpt.   Matching FAQs or questions-answer from your FAQ file.   Relevant documents. This result type includes an excerpt of the document with the document title. The searched terms can be highlighted in the excerpt.   You can specify that the query return only one type of result using the QueryResultTypeFilter parameter. Each query returns the 100 most relevant results. If you filter result type to only question-answers, a maximum of four results are returned. If you filter result type to only answers, a maximum of three results are returned.
    */
   query(params: Kendra.Types.QueryRequest, callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
-   * Searches an index given an input query. You can configure boosting or relevance tuning at the query level to override boosting at the index level, filter based on document fields/attributes and faceted search, and filter based on the user or their group access to documents. You can also include certain fields in the response that might provide useful additional information. A query response contains three types of results.   Relevant suggested answers. The answers can be either a text excerpt or table excerpt. The answer can be highlighted in the excerpt.   Matching FAQs or questions-answer from your FAQ file.   Relevant documents. This result type includes an excerpt of the document with the document title. The searched terms can be highlighted in the excerpt.   You can specify that the query return only one type of result using the QueryResultTypeFilter parameter. Each query returns the 100 most relevant results. If you filter result type to only question-answers, a maximum of four results are returned. If you filter result type to only answers, a maximum of three results are returned.
+   * Searches an index given an input query.  If you are working with large language models (LLMs) or implementing retrieval augmented generation (RAG) systems, you can use Amazon Kendra's Retrieve API, which can return longer semantically relevant passages. We recommend using the Retrieve API instead of filing a service limit increase to increase the Query API document excerpt length.  You can configure boosting or relevance tuning at the query level to override boosting at the index level, filter based on document fields/attributes and faceted search, and filter based on the user or their group access to documents. You can also include certain fields in the response that might provide useful additional information. A query response contains three types of results.   Relevant suggested answers. The answers can be either a text excerpt or table excerpt. The answer can be highlighted in the excerpt.   Matching FAQs or questions-answer from your FAQ file.   Relevant documents. This result type includes an excerpt of the document with the document title. The searched terms can be highlighted in the excerpt.   You can specify that the query return only one type of result using the QueryResultTypeFilter parameter. Each query returns the 100 most relevant results. If you filter result type to only question-answers, a maximum of four results are returned. If you filter result type to only answers, a maximum of three results are returned.
    */
   query(callback?: (err: AWSError, data: Kendra.Types.QueryResult) => void): Request<Kendra.Types.QueryResult, AWSError>;
   /**
-   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce zero passages using the Retrieve API, you can alternatively use the Query API and its types of responses. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   You can also include certain fields in the response that might provide useful additional information. The Retrieve API shares the number of query capacity units that you set for your index. For more information on what's included in a single capacity unit and the default base capacity for an index, see Adjusting capacity.
+   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce zero passages using the Retrieve API, you can alternatively use the Query API and its types of responses. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   View the confidence score bucket for a retrieved passage result. The confidence bucket provides a relative ranking that indicates how confident Amazon Kendra is that the response is relevant to the query.  Confidence score buckets are currently available only for English.    You can also include certain fields in the response that might provide useful additional information. The Retrieve API shares the number of query capacity units that you set for your index. For more information on what's included in a single capacity unit and the default base capacity for an index, see Adjusting capacity.
    */
   retrieve(params: Kendra.Types.RetrieveRequest, callback?: (err: AWSError, data: Kendra.Types.RetrieveResult) => void): Request<Kendra.Types.RetrieveResult, AWSError>;
   /**
-   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce zero passages using the Retrieve API, you can alternatively use the Query API and its types of responses. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   You can also include certain fields in the response that might provide useful additional information. The Retrieve API shares the number of query capacity units that you set for your index. For more information on what's included in a single capacity unit and the default base capacity for an index, see Adjusting capacity.
+   * Retrieves relevant passages or text excerpts given an input query. This API is similar to the Query API. However, by default, the Query API only returns excerpt passages of up to 100 token words. With the Retrieve API, you can retrieve longer passages of up to 200 token words and up to 100 semantically relevant passages. This doesn't include question-answer or FAQ type responses from your index. The passages are text excerpts that can be semantically extracted from multiple documents and multiple parts of the same document. If in extreme cases your documents produce zero passages using the Retrieve API, you can alternatively use the Query API and its types of responses. You can also do the following:   Override boosting at the index level   Filter based on document fields or attributes   Filter based on the user or their group access to documents   View the confidence score bucket for a retrieved passage result. The confidence bucket provides a relative ranking that indicates how confident Amazon Kendra is that the response is relevant to the query.  Confidence score buckets are currently available only for English.    You can also include certain fields in the response that might provide useful additional information. The Retrieve API shares the number of query capacity units that you set for your index. For more information on what's included in a single capacity unit and the default base capacity for an index, see Adjusting capacity.
    */
   retrieve(callback?: (err: AWSError, data: Kendra.Types.RetrieveResult) => void): Request<Kendra.Types.RetrieveResult, AWSError>;
   /**
@@ -1008,6 +1008,38 @@ declare namespace Kendra {
   }
   export type ClickFeedbackList = ClickFeedback[];
   export type ClientTokenName = string;
+  export interface CollapseConfiguration {
+    /**
+     * The document attribute used to group search results. You can use any attribute that has the Sortable flag set to true. You can also sort by any of the following built-in attributes:"_category","_created_at", "_last_updated_at", "_version", "_view_count".
+     */
+    DocumentAttributeKey: DocumentAttributeKey;
+    /**
+     * A prioritized list of document attributes/fields that determine the primary document among those in a collapsed group.
+     */
+    SortingConfigurations?: SortingConfigurationList;
+    /**
+     * Specifies the behavior for documents without a value for the collapse attribute. Amazon Kendra offers three customization options:   Choose to COLLAPSE all documents with null or missing values in one group. This is the default configuration.   Choose to IGNORE documents with null or missing values. Ignored documents will not appear in query results.   Choose to EXPAND each document with a null or missing value into a group of its own.  
+     */
+    MissingAttributeKeyStrategy?: MissingAttributeKeyStrategy;
+    /**
+     * Specifies whether to expand the collapsed results.
+     */
+    Expand?: Boolean;
+    /**
+     * Provides configuration information to customize expansion options for a collapsed group.
+     */
+    ExpandConfiguration?: ExpandConfiguration;
+  }
+  export interface CollapsedResultDetail {
+    /**
+     * The value of the document attribute that results are collapsed on.
+     */
+    DocumentAttribute: DocumentAttribute;
+    /**
+     * A list of results in the collapsed group.
+     */
+    ExpandedResults?: ExpandedResultList;
+  }
   export interface ColumnConfiguration {
     /**
      * The column that provides the document's identifier.
@@ -1350,7 +1382,7 @@ declare namespace Kendra {
      */
     IndexId: IndexId;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role with permission to access Query API, GetQuerySuggestions API, and other required APIs. The role also must include permission to access IAM Identity Center (successor to Single Sign-On) that stores your user and group information. For more information, see IAM access roles for Amazon Kendra.
+     * The Amazon Resource Name (ARN) of an IAM role with permission to access Query API, GetQuerySuggestions API, and other required APIs. The role also must include permission to access IAM Identity Center that stores your user and group information. For more information, see IAM access roles for Amazon Kendra.
      */
     RoleArn?: RoleArn;
     /**
@@ -1494,7 +1526,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Gets users and groups from IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see UserGroupResolutionConfiguration.
+     * Gets users and groups from IAM Identity Center identity source. To configure this, see UserGroupResolutionConfiguration.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -2258,7 +2290,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Whether you have enabled the configuration for fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source.
+     * Whether you have enabled the configuration for fetching access levels of groups and users from an IAM Identity Center identity source.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -2729,6 +2761,37 @@ declare namespace Kendra {
   export type ExcludeMimeTypesList = MimeType[];
   export type ExcludeSharedDrivesList = SharedDriveId[];
   export type ExcludeUserAccountsList = UserAccount[];
+  export interface ExpandConfiguration {
+    /**
+     * The number of collapsed search result groups to expand. If you set this value to 10, for example, only the first 10 out of 100 result groups will have expand functionality. 
+     */
+    MaxResultItemsToExpand?: Integer;
+    /**
+     * The number of expanded results to show per collapsed primary document. For instance, if you set this value to 3, then at most 3 results per collapsed group will be displayed.
+     */
+    MaxExpandedResultsPerItem?: Integer;
+  }
+  export interface ExpandedResultItem {
+    /**
+     * The identifier for the expanded result.
+     */
+    Id?: ResultId;
+    /**
+     * The idenitifier of the document.
+     */
+    DocumentId?: DocumentId;
+    DocumentTitle?: TextWithHighlights;
+    DocumentExcerpt?: TextWithHighlights;
+    /**
+     * The URI of the original location of the document.
+     */
+    DocumentURI?: Url;
+    /**
+     * An array of document attributes assigned to a document in the search results. For example, the document author ("_author") or the source URI ("_source_uri") of the document.
+     */
+    DocumentAttributes?: DocumentAttributeList;
+  }
+  export type ExpandedResultList = ExpandedResultItem[];
   export interface ExperienceConfiguration {
     /**
      * The identifiers of your data sources and FAQs. Or, you can specify that you want to use documents indexed via the BatchPutDocument API. This is the content you want to use for your Amazon Kendra experience.
@@ -3884,6 +3947,7 @@ declare namespace Kendra {
   export type MimeType = string;
   export type MinimumNumberOfQueryingUsers = number;
   export type MinimumQueryCount = number;
+  export type MissingAttributeKeyStrategy = "IGNORE"|"COLLAPSE"|"EXPAND"|string;
   export type Mode = "ENABLED"|"LEARN_ONLY"|string;
   export type NameType = string;
   export type NextToken = string;
@@ -4079,6 +4143,10 @@ declare namespace Kendra {
      */
     SortingConfiguration?: SortingConfiguration;
     /**
+     * Provides configuration information to determine how the results of a query are sorted. You can set upto 3 fields that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. The sort field quota can be increased. If you don't provide a sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result. In the case of ties in sorting the results, the results are sorted by relevance. 
+     */
+    SortingConfigurations?: SortingConfigurationList;
+    /**
      * The user context token or user and group information.
      */
     UserContext?: UserContext;
@@ -4090,6 +4158,10 @@ declare namespace Kendra {
      * Enables suggested spell corrections for queries.
      */
     SpellCorrectionConfiguration?: SpellCorrectionConfiguration;
+    /**
+     * Provides configuration to determine how to group results by document attribute value, and how to display them (collapsed or expanded) under a designated primary document for each group.
+     */
+    CollapseConfiguration?: CollapseConfiguration;
   }
   export interface QueryResult {
     /**
@@ -4171,6 +4243,10 @@ declare namespace Kendra {
      * An excerpt from a table within a document.
      */
     TableExcerpt?: TableExcerpt;
+    /**
+     * Provides details about a collapsed group of search results.
+     */
+    CollapsedResultDetail?: CollapsedResultDetail;
   }
   export type QueryResultItemList = QueryResultItem[];
   export type QueryResultType = "DOCUMENT"|"QUESTION_ANSWER"|"ANSWER"|string;
@@ -4834,6 +4910,7 @@ declare namespace Kendra {
      */
     SortOrder: SortOrder;
   }
+  export type SortingConfigurationList = SortingConfiguration[];
   export interface SourceDocument {
     /**
      * The identifier of the document used for a query suggestion.
@@ -5308,7 +5385,7 @@ declare namespace Kendra {
      */
     UserContextPolicy?: UserContextPolicy;
     /**
-     * Enables fetching access levels of groups and users from an IAM Identity Center (successor to Single Sign-On) identity source. To configure this, see UserGroupResolutionConfiguration.
+     * Enables fetching access levels of groups and users from an IAM Identity Center identity source. To configure this, see UserGroupResolutionConfiguration.
      */
     UserGroupResolutionConfiguration?: UserGroupResolutionConfiguration;
   }
@@ -5424,7 +5501,7 @@ declare namespace Kendra {
   export type UserContextPolicy = "ATTRIBUTE_FILTER"|"USER_TOKEN"|string;
   export interface UserGroupResolutionConfiguration {
     /**
-     * The identity store provider (mode) you want to use to get users and groups. IAM Identity Center (successor to Single Sign-On) is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
+     * The identity store provider (mode) you want to use to get users and groups. IAM Identity Center is currently the only available mode. Your users and groups must exist in an IAM Identity Center identity source in order to use this mode.
      */
     UserGroupResolutionMode: UserGroupResolutionMode;
   }
