@@ -260,6 +260,14 @@ declare class OpenSearch extends Service {
    */
   getCompatibleVersions(callback?: (err: AWSError, data: OpenSearch.Types.GetCompatibleVersionsResponse) => void): Request<OpenSearch.Types.GetCompatibleVersionsResponse, AWSError>;
   /**
+   * Get the status of the maintenance action.
+   */
+  getDomainMaintenanceStatus(params: OpenSearch.Types.GetDomainMaintenanceStatusRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetDomainMaintenanceStatusResponse) => void): Request<OpenSearch.Types.GetDomainMaintenanceStatusResponse, AWSError>;
+  /**
+   * Get the status of the maintenance action.
+   */
+  getDomainMaintenanceStatus(callback?: (err: AWSError, data: OpenSearch.Types.GetDomainMaintenanceStatusResponse) => void): Request<OpenSearch.Types.GetDomainMaintenanceStatusResponse, AWSError>;
+  /**
    * Returns a list of Amazon OpenSearch Service package versions, along with their creation time, commit message, and plugin properties (if the package is a zip plugin package). For more information, see Custom packages for Amazon OpenSearch Service.
    */
   getPackageVersionHistory(params: OpenSearch.Types.GetPackageVersionHistoryRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetPackageVersionHistoryResponse) => void): Request<OpenSearch.Types.GetPackageVersionHistoryResponse, AWSError>;
@@ -283,6 +291,14 @@ declare class OpenSearch extends Service {
    * Returns the most recent status of the last upgrade or upgrade eligibility check performed on an Amazon OpenSearch Service domain.
    */
   getUpgradeStatus(callback?: (err: AWSError, data: OpenSearch.Types.GetUpgradeStatusResponse) => void): Request<OpenSearch.Types.GetUpgradeStatusResponse, AWSError>;
+  /**
+   * Get the list of the maintenance action.
+   */
+  listDomainMaintenances(params: OpenSearch.Types.ListDomainMaintenancesRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListDomainMaintenancesResponse) => void): Request<OpenSearch.Types.ListDomainMaintenancesResponse, AWSError>;
+  /**
+   * Get the list of the maintenance action.
+   */
+  listDomainMaintenances(callback?: (err: AWSError, data: OpenSearch.Types.ListDomainMaintenancesResponse) => void): Request<OpenSearch.Types.ListDomainMaintenancesResponse, AWSError>;
   /**
    * Returns the names of all Amazon OpenSearch Service domains owned by the current user in the active Region.
    */
@@ -395,6 +411,14 @@ declare class OpenSearch extends Service {
    * Revokes access to an Amazon OpenSearch Service domain that was provided through an interface VPC endpoint.
    */
   revokeVpcEndpointAccess(callback?: (err: AWSError, data: OpenSearch.Types.RevokeVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.RevokeVpcEndpointAccessResponse, AWSError>;
+  /**
+   * Starts the node maintenance (Node restart, Node reboot, Opensearch/Elasticsearch process restart, Dashboard/kibana restart) on the data node.
+   */
+  startDomainMaintenance(params: OpenSearch.Types.StartDomainMaintenanceRequest, callback?: (err: AWSError, data: OpenSearch.Types.StartDomainMaintenanceResponse) => void): Request<OpenSearch.Types.StartDomainMaintenanceResponse, AWSError>;
+  /**
+   * Starts the node maintenance (Node restart, Node reboot, Opensearch/Elasticsearch process restart, Dashboard/kibana restart) on the data node.
+   */
+  startDomainMaintenance(callback?: (err: AWSError, data: OpenSearch.Types.StartDomainMaintenanceResponse) => void): Request<OpenSearch.Types.StartDomainMaintenanceResponse, AWSError>;
   /**
    * Schedules a service software update for an Amazon OpenSearch Service domain. For more information, see Service software updates in Amazon OpenSearch Service.
    */
@@ -845,7 +869,7 @@ declare namespace OpenSearch {
      */
     InstanceType?: OpenSearchPartitionInstanceType;
     /**
-     * Number of dedicated master nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.
+     * Number of data nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.
      */
     InstanceCount?: IntegerClass;
     /**
@@ -1691,6 +1715,41 @@ declare namespace OpenSearch {
      */
     AWSDomainInformation?: AWSDomainInformation;
   }
+  export interface DomainMaintenanceDetails {
+    /**
+     * Id of the requested action.
+     */
+    MaintenanceId?: RequestId;
+    /**
+     * The name of the domain.
+     */
+    DomainName?: DomainName;
+    /**
+     * The name of the action.
+     */
+    Action?: MaintenanceType;
+    /**
+     * Id of the data node.
+     */
+    NodeId?: NodeId;
+    /**
+     * The status of the action.
+     */
+    Status?: MaintenanceStatus;
+    /**
+     * The status message of the action.
+     */
+    StatusMessage?: MaintenanceStatusMessage;
+    /**
+     * Contains time at which action created.
+     */
+    CreatedAt?: UpdateTimestamp;
+    /**
+     * Contains time at which action updated.
+     */
+    UpdatedAt?: UpdateTimestamp;
+  }
+  export type DomainMaintenanceList = DomainMaintenanceDetails[];
   export type DomainName = string;
   export type DomainNameFqdn = string;
   export type DomainNameList = DomainName[];
@@ -2026,6 +2085,42 @@ declare namespace OpenSearch {
      */
     CompatibleVersions?: CompatibleVersionsList;
   }
+  export interface GetDomainMaintenanceStatusRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The request id of the maintenance action.
+     */
+    MaintenanceId: RequestId;
+  }
+  export interface GetDomainMaintenanceStatusResponse {
+    /**
+     * Contains status of the maintenance action.
+     */
+    Status?: MaintenanceStatus;
+    /**
+     * Contains status message of the maintenance action.
+     */
+    StatusMessage?: MaintenanceStatusMessage;
+    /**
+     * Contains node id of maintenance action.
+     */
+    NodeId?: NodeId;
+    /**
+     * Contains action name.
+     */
+    Action?: MaintenanceType;
+    /**
+     * Contains time at which action created.
+     */
+    CreatedAt?: UpdateTimestamp;
+    /**
+     * Contains time at which action updated.
+     */
+    UpdatedAt?: UpdateTimestamp;
+  }
   export interface GetPackageVersionHistoryRequest {
     /**
      * The unique identifier of the package.
@@ -2212,6 +2307,38 @@ declare namespace OpenSearch {
     AdditionalLimits?: AdditionalLimitList;
   }
   export type LimitsByRole = {[key: string]: Limits};
+  export interface ListDomainMaintenancesRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The name of the action.
+     */
+    Action?: MaintenanceType;
+    /**
+     * The status of the action.
+     */
+    Status?: MaintenanceStatus;
+    /**
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If your initial ListDomainMaintenances operation returns a nextToken, you can include the returned nextToken in subsequent ListDomainMaintenances operations, which returns results in the next page.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListDomainMaintenancesResponse {
+    /**
+     * List of the submitted maintenance actions.
+     */
+    DomainMaintenances?: DomainMaintenanceList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListDomainNamesRequest {
     /**
      * Filters the output by domain engine type.
@@ -2443,6 +2570,9 @@ declare namespace OpenSearch {
   }
   export type LogType = "INDEX_SLOW_LOGS"|"SEARCH_SLOW_LOGS"|"ES_APPLICATION_LOGS"|"AUDIT_LOGS"|string;
   export type Long = number;
+  export type MaintenanceStatus = "PENDING"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|"TIMED_OUT"|string;
+  export type MaintenanceStatusMessage = string;
+  export type MaintenanceType = "REBOOT_NODE"|"RESTART_SEARCH_PROCESS"|"RESTART_DASHBOARD"|string;
   export type MasterNodeStatus = "Available"|"UnAvailable"|string;
   export interface MasterUserOptions {
     /**
@@ -2751,6 +2881,7 @@ declare namespace OpenSearch {
      */
     TagKeys: StringList;
   }
+  export type RequestId = string;
   export type ReservationToken = string;
   export interface ReservedInstance {
     /**
@@ -3058,6 +3189,26 @@ declare namespace OpenSearch {
     Status?: OptionStatus;
   }
   export type StartAt = Date;
+  export interface StartDomainMaintenanceRequest {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The name of the action.
+     */
+    Action: MaintenanceType;
+    /**
+     * Id of the data node.
+     */
+    NodeId?: NodeId;
+  }
+  export interface StartDomainMaintenanceResponse {
+    /**
+     * Contains request id of requested action.
+     */
+    MaintenanceId?: RequestId;
+  }
   export interface StartServiceSoftwareUpdateRequest {
     /**
      * The name of the domain that you want to update to the latest service software.

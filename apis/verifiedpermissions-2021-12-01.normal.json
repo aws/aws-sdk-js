@@ -33,6 +33,9 @@
           "shape": "ServiceQuotaExceededException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "AccessDeniedException"
         },
         {
@@ -66,6 +69,9 @@
         },
         {
           "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "AccessDeniedException"
@@ -103,6 +109,9 @@
           "shape": "ServiceQuotaExceededException"
         },
         {
+          "shape": "ConflictException"
+        },
+        {
           "shape": "AccessDeniedException"
         },
         {
@@ -112,7 +121,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p> <note> <p>Although <a href=\"https://docs.cedarpolicy.com/schema.html#namespace\">Cedar supports multiple namespaces</a>, Verified Permissions currently supports only one namespace per policy store.</p> </note> <note> <p>Verified Permissions is <i> <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>",
+      "documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p> <note> <p>Although <a href=\"https://docs.cedarpolicy.com/schema/schema.html#namespace\">Cedar supports multiple namespaces</a>, Verified Permissions currently supports only one namespace per policy store.</p> </note> <note> <p>Verified Permissions is <i> <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>",
       "idempotent": true
     },
     "CreatePolicyTemplate": {
@@ -133,6 +142,9 @@
         },
         {
           "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "AccessDeniedException"
@@ -800,7 +812,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Updates the specified policy template. You can update only the description and the some elements of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html#amazonverifiedpermissions-UpdatePolicyTemplate-request-policyBody\">policyBody</a>. </p> <important> <p>Changes you make to the policy template content are immediately reflected in authorization decisions that involve all template-linked policies instantiated from this template.</p> </important> <note> <p>Verified Permissions is <i> <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>",
+      "documentation": "<p>Updates the specified policy template. You can update only the description and the some elements of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html#amazonverifiedpermissions-UpdatePolicyTemplate-request-policyBody\">policyBody</a>. </p> <important> <p>Changes you make to the policy template content are immediately (within the constraints of eventual consistency) reflected in authorization decisions that involve all template-linked policies instantiated from this template.</p> </important> <note> <p>Verified Permissions is <i> <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>",
       "idempotent": true
     }
   },
@@ -842,7 +854,7 @@
       "members": {
         "boolean": {
           "shape": "BooleanAttribute",
-          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#boolean\">Boolean</a> type.</p> <p>Example: <code>{\"boolean\": true}</code> </p>"
+          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean\">Boolean</a> type.</p> <p>Example: <code>{\"boolean\": true}</code> </p>"
         },
         "entityIdentifier": {
           "shape": "EntityIdentifier",
@@ -850,19 +862,19 @@
         },
         "long": {
           "shape": "LongAttribute",
-          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#long\">Long</a> type.</p> <p>Example: <code>{\"long\": 0}</code> </p>"
+          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long\">Long</a> type.</p> <p>Example: <code>{\"long\": 0}</code> </p>"
         },
         "string": {
           "shape": "StringAttribute",
-          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#string\">String</a> type.</p> <p>Example: <code>{\"string\": \"abc\"}</code> </p>"
+          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string\">String</a> type.</p> <p>Example: <code>{\"string\": \"abc\"}</code> </p>"
         },
         "set": {
           "shape": "SetAttribute",
-          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#set\">Set</a> type.</p> <p>Example: <code>{\"set\": [ {} ] }</code> </p>"
+          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set\">Set</a> type.</p> <p>Example: <code>{\"set\": [ {} ] }</code> </p>"
         },
         "record": {
           "shape": "RecordAttribute",
-          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#record\">Record</a> type.</p> <p>Example: <code>{\"record\": { \"keyName\": {} } }</code> </p>"
+          "documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record\">Record</a> type.</p> <p>Example: <code>{\"record\": { \"keyName\": {} } }</code> </p>"
         }
       },
       "documentation": "<p>The value of an attribute.</p> <p>Contains information about the runtime context for a request for which an authorization decision is made. </p> <p>This data type is used as a member of the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html\">ContextDefinition</a> structure which is uses as a request parameter for the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>",

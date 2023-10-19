@@ -4833,6 +4833,10 @@
         "KMS"
       ]
     },
+    "EngineLogStream": {
+      "type": "string",
+      "pattern": "[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+"
+    },
     "EscapeChar": {
       "type": "string",
       "max": 1,
@@ -6107,6 +6111,14 @@
         "retentionMode": {
           "shape": "RunRetentionMode",
           "documentation": "<p>The run's retention mode.</p>"
+        },
+        "failureReason": {
+          "shape": "RunFailureReason",
+          "documentation": "<p> The reason a run has failed. </p>"
+        },
+        "logLocation": {
+          "shape": "RunLogLocation",
+          "documentation": "<p> The location of the run log. </p>"
         }
       }
     },
@@ -6131,7 +6143,7 @@
       "members": {
         "id": {
           "shape": "RunId",
-          "documentation": "<p>The task's ID.</p>",
+          "documentation": "<p>The workflow run ID.</p>",
           "location": "uri",
           "locationName": "id"
         },
@@ -6193,6 +6205,10 @@
         "instanceType": {
           "shape": "TaskInstanceType",
           "documentation": "<p> The instance type for a task. </p>"
+        },
+        "failureReason": {
+          "shape": "TaskFailureReason",
+          "documentation": "<p> The reason a task has failed. </p>"
         }
       }
     },
@@ -8713,6 +8729,12 @@
       "max": 32,
       "min": 0
     },
+    "RunFailureReason": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+"
+    },
     "RunGroupArn": {
       "type": "string",
       "max": 128,
@@ -8905,6 +8927,24 @@
       "max": 64,
       "min": 1
     },
+    "RunLogLocation": {
+      "type": "structure",
+      "members": {
+        "engineLogStream": {
+          "shape": "EngineLogStream",
+          "documentation": "<p> The log stream ARN for the engine log. </p>"
+        },
+        "runLogStream": {
+          "shape": "RunLogStream",
+          "documentation": "<p> The log stream ARN for the run log. </p>"
+        }
+      },
+      "documentation": "<p> The URI for the run log. </p>"
+    },
+    "RunLogStream": {
+      "type": "string",
+      "pattern": "[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+"
+    },
     "RunName": {
       "type": "string",
       "max": 128,
@@ -8913,7 +8953,7 @@
     },
     "RunOutputUri": {
       "type": "string",
-      "max": 128,
+      "max": 750,
       "min": 1,
       "pattern": "[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+"
     },
@@ -9922,6 +9962,12 @@
       "type": "string",
       "max": 256,
       "min": 0
+    },
+    "TaskFailureReason": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+"
     },
     "TaskId": {
       "type": "string",

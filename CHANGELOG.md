@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1476.0-->
+<!--LATEST=2.1477.0-->
 <!--ENTRYINSERT-->
+
+## 2.1477.0
+* bugfix: Gamesparks: Deprecate Gamesparks
+* feature: EC2: Amazon EC2 C7a instances, powered by 4th generation AMD EPYC processors, are ideal for high performance, compute-intensive workloads such as high performance computing. Amazon EC2 R7i instances are next-generation memory optimized and powered by custom 4th Generation Intel Xeon Scalable processors.
+* feature: ManagedBlockchainQuery: This release adds support for Ethereum Sepolia network
+* feature: Omics: This change enables customers to retrieve failure reasons with detailed status messages for their failed runs
+* feature: OpenSearch: Added Cluster Administrative options for node restart, opensearch process restart and opensearch dashboard restart for Multi-AZ without standby domains
+* feature: QuickSight: This release adds the following: 1) Trino and Starburst Database Connectors 2) Custom total for tables and pivot tables 3) Enable restricted folders 4) Add rolling dates for time equality filters 5) Refine DataPathValue and introduce DataPathType 6) Add SeriesType to ReferenceLineDataConfiguration
+* feature: ServiceCatalog: Introduce support for EXTERNAL product and provisioning artifact type in CreateProduct and CreateProvisioningArtifact APIs.
+* feature: VerifiedPermissions: Improving Amazon Verified Permissions Create experience
 
 ## 2.1476.0
 * feature: Kendra: Changes for a new feature in Amazon Kendra's Query API to Collapse/Expand query results

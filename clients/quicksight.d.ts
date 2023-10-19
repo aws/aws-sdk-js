@@ -3455,6 +3455,10 @@ declare namespace QuickSight {
      * The option to relax the validation needed to create an analysis with definition objects. This skips the validation step for specific errors.
      */
     ValidationStrategy?: ValidationStrategy;
+    /**
+     * When you create the analysis, Amazon QuickSight adds the analysis to these folders.
+     */
+    FolderArns?: FolderArnList;
   }
   export interface CreateAnalysisResponse {
     /**
@@ -3533,6 +3537,10 @@ declare namespace QuickSight {
      * The option to relax the validation needed to create a dashboard with definition objects. This option skips the validation step for specific errors.
      */
     ValidationStrategy?: ValidationStrategy;
+    /**
+     * When you create the dashboard, Amazon QuickSight adds the dashboard to these folders.
+     */
+    FolderArns?: FolderArnList;
   }
   export interface CreateDashboardResponse {
     /**
@@ -3618,6 +3626,10 @@ declare namespace QuickSight {
      * The parameter declarations of the dataset.
      */
     DatasetParameters?: DatasetParameterList;
+    /**
+     * When you create the dataset, Amazon QuickSight adds the dataset to these folders.
+     */
+    FolderArns?: FolderArnList;
   }
   export interface CreateDataSetResponse {
     /**
@@ -3686,6 +3698,10 @@ declare namespace QuickSight {
      * Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.
      */
     Tags?: TagList;
+    /**
+     * When you create the data source, Amazon QuickSight adds the data source to these folders.
+     */
+    FolderArns?: FolderArnList;
   }
   export interface CreateDataSourceResponse {
     /**
@@ -5043,15 +5059,25 @@ declare namespace QuickSight {
      */
     SortPaths: DataPathValueList;
   }
+  export interface DataPathType {
+    /**
+     * The type of data path value utilized in a pivot table. Choose one of the following options:    HIERARCHY_ROWS_LAYOUT_COLUMN - The type of data path for the rows layout column, when RowsLayout is set to HIERARCHY.    MULTIPLE_ROW_METRICS_COLUMN - The type of data path for the metric column when the row is set to Metric Placement.    EMPTY_COLUMN_HEADER - The type of data path for the column with empty column header, when there is no field in ColumnsFieldWell and the row is set to Metric Placement.    COUNT_METRIC_COLUMN - The type of data path for the column with COUNT as the metric, when there is no field in the ValuesFieldWell.  
+     */
+    PivotTableDataPathType?: PivotTableDataPathType;
+  }
   export interface DataPathValue {
     /**
      * The field ID of the field that needs to be sorted.
      */
-    FieldId: FieldId;
+    FieldId?: FieldId;
     /**
      * The actual value of the field that needs to be sorted.
      */
-    FieldValue: FieldValue;
+    FieldValue?: FieldValue;
+    /**
+     * The type configuration of the field.
+     */
+    DataPathType?: DataPathType;
   }
   export type DataPathValueList = DataPathValue[];
   export interface DataPointDrillUpDownOption {
@@ -5431,9 +5457,17 @@ declare namespace QuickSight {
      */
     ExasolParameters?: ExasolParameters;
     /**
-     * The required parameters that are needed to connect to a Databricks data source.
+     * The parameters that are required to connect to a Databricks data source.
      */
     DatabricksParameters?: DatabricksParameters;
+    /**
+     * The parameters that are required to connect to a Starburst data source.
+     */
+    StarburstParameters?: StarburstParameters;
+    /**
+     * The parameters that are required to connect to a Trino data source.
+     */
+    TrinoParameters?: TrinoParameters;
   }
   export type DataSourceParametersList = DataSourceParameters[];
   export interface DataSourceSearchFilter {
@@ -8729,6 +8763,7 @@ declare namespace QuickSight {
      */
     SharingModel?: SharingModel;
   }
+  export type FolderArnList = Arn[];
   export type FolderColumnList = String[];
   export type FolderFilterAttribute = "PARENT_FOLDER_ARN"|"DIRECT_QUICKSIGHT_OWNER"|"DIRECT_QUICKSIGHT_SOLE_OWNER"|"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"|"QUICKSIGHT_OWNER"|"QUICKSIGHT_VIEWER_OR_OWNER"|"FOLDER_NAME"|string;
   export interface FolderMember {
@@ -8789,7 +8824,7 @@ declare namespace QuickSight {
     SharingModel?: SharingModel;
   }
   export type FolderSummaryList = FolderSummary[];
-  export type FolderType = "SHARED"|string;
+  export type FolderType = "SHARED"|"RESTRICTED"|string;
   export interface Font {
     /**
      * Determines the font family settings.
@@ -12917,6 +12952,7 @@ declare namespace QuickSight {
     Width?: PixelLength;
   }
   export type PivotTableDataPathOptionList = PivotTableDataPathOption[];
+  export type PivotTableDataPathType = "HIERARCHY_ROWS_LAYOUT_COLUMN"|"MULTIPLE_ROW_METRICS_COLUMN"|"EMPTY_COLUMN_HEADER"|"COUNT_METRIC_COLUMN"|string;
   export type PivotTableDimensionList = DimensionField[];
   export type PivotTableFieldCollapseState = "COLLAPSED"|"EXPANDED"|string;
   export interface PivotTableFieldCollapseStateOption {
@@ -13153,6 +13189,10 @@ declare namespace QuickSight {
      * The cell styling options for the total of header cells.
      */
     MetricHeaderCellStyle?: TableCellStyle;
+    /**
+     * The total aggregation options for each value field.
+     */
+    TotalAggregationOptions?: TotalAggregationOptionList;
   }
   export type PixelLength = string;
   export type Port = number;
@@ -13501,9 +13541,13 @@ declare namespace QuickSight {
      */
     DynamicConfiguration?: ReferenceLineDynamicDataConfiguration;
     /**
-     * The axis binding type of the reference line. Choose one of the following options:   PrimaryY   SecondaryY  
+     * The axis binding type of the reference line. Choose one of the following options:    PrimaryY     SecondaryY   
      */
     AxisBinding?: AxisBinding;
+    /**
+     * The series type of the reference line data configuration. Choose one of the following options:    BAR     LINE   
+     */
+    SeriesType?: ReferenceLineSeriesType;
   }
   export interface ReferenceLineDynamicDataConfiguration {
     /**
@@ -13549,6 +13593,7 @@ declare namespace QuickSight {
   export type ReferenceLineLabelVerticalPosition = "ABOVE"|"BELOW"|string;
   export type ReferenceLineList = ReferenceLine[];
   export type ReferenceLinePatternType = "SOLID"|"DASHED"|"DOTTED"|string;
+  export type ReferenceLineSeriesType = "BAR"|"LINE"|string;
   export interface ReferenceLineStaticDataConfiguration {
     /**
      * The double input of the static data.
@@ -14866,6 +14911,7 @@ declare namespace QuickSight {
     Color?: HexColor;
   }
   export type SimpleNumericalAggregationFunction = "SUM"|"AVERAGE"|"MIN"|"MAX"|"COUNT"|"DISTINCT_COUNT"|"VAR"|"VARP"|"STDEV"|"STDEVP"|"MEDIAN"|string;
+  export type SimpleTotalAggregationFunction = "DEFAULT"|"SUM"|"AVERAGE"|"MIN"|"MAX"|"NONE"|string;
   export type SiteBaseUrl = string;
   export interface SliderControlDisplayOptions {
     /**
@@ -15118,6 +15164,25 @@ declare namespace QuickSight {
      */
     DisableSsl?: Boolean;
   }
+  export interface StarburstParameters {
+    /**
+     * The host name of the Starburst data source.
+     */
+    Host: Host;
+    /**
+     * The port for the Starburst data source.
+     */
+    Port: Port;
+    /**
+     * The catalog name for the Starburst data source.
+     */
+    Catalog: Catalog;
+    /**
+     * The product type for the Starburst data source.
+     */
+    ProductType?: StarburstProductType;
+  }
+  export type StarburstProductType = "GALAXY"|"ENTERPRISE"|string;
   export interface StartAssetBundleExportJobRequest {
     /**
      * The ID of the Amazon Web Services account to export assets from.
@@ -16260,17 +16325,21 @@ declare namespace QuickSight {
      */
     Column: ColumnIdentifier;
     /**
-     * The value of a TimeEquality filter. This field is mutually exclusive to ParameterName.
+     * The value of a TimeEquality filter. This field is mutually exclusive to RollingDate and ParameterName.
      */
     Value?: Timestamp;
     /**
-     * The parameter whose value should be used for the filter value. This field is mutually exclusive to Value.
+     * The parameter whose value should be used for the filter value. This field is mutually exclusive to Value and RollingDate.
      */
     ParameterName?: ParameterName;
     /**
      * The level of time precision that is used to aggregate DateTime values.
      */
     TimeGranularity?: TimeGranularity;
+    /**
+     * The rolling date input for the TimeEquality filter. This field is mutually exclusive to Value and ParameterName.
+     */
+    RollingDate?: RollingDateConfiguration;
   }
   export type TimeGranularity = "YEAR"|"QUARTER"|"MONTH"|"WEEK"|"DAY"|"HOUR"|"MINUTE"|"SECOND"|"MILLISECOND"|string;
   export interface TimeRangeDrillDownFilter {
@@ -16880,6 +16949,23 @@ declare namespace QuickSight {
      */
     Value?: MeasureField;
   }
+  export interface TotalAggregationFunction {
+    /**
+     * A built in aggregation function for total values.
+     */
+    SimpleTotalAggregationFunction?: SimpleTotalAggregationFunction;
+  }
+  export interface TotalAggregationOption {
+    /**
+     * The field id that's associated with the total aggregation option.
+     */
+    FieldId: FieldId;
+    /**
+     * The total aggregation function that you want to set for a specified field id.
+     */
+    TotalAggregationFunction: TotalAggregationFunction;
+  }
+  export type TotalAggregationOptionList = TotalAggregationOption[];
   export interface TotalOptions {
     /**
      * The visibility configuration for the total cells.
@@ -16901,6 +16987,10 @@ declare namespace QuickSight {
      * Cell styling options for the total cells.
      */
     TotalCellStyle?: TableCellStyle;
+    /**
+     * The total aggregation settings for each value field.
+     */
+    TotalAggregationOptions?: TotalAggregationOptionList;
   }
   export interface TransformOperation {
     /**
@@ -17032,6 +17122,20 @@ declare namespace QuickSight {
      * The visibility of the trend arrows.
      */
     Visibility?: Visibility;
+  }
+  export interface TrinoParameters {
+    /**
+     * The host name of the Trino data source.
+     */
+    Host: Host;
+    /**
+     * The port for the Trino data source.
+     */
+    Port: Port;
+    /**
+     * The catalog name for the Trino data source.
+     */
+    Catalog: Catalog;
   }
   export interface TwitterParameters {
     /**

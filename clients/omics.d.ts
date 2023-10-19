@@ -1756,6 +1756,7 @@ declare namespace Omics {
   export type ETagAlgorithm = "FASTQ_MD5up"|"BAM_MD5up"|"CRAM_MD5up"|string;
   export type Encoding = string;
   export type EncryptionType = "KMS"|string;
+  export type EngineLogStream = string;
   export type EscapeChar = string;
   export type EscapeQuotes = boolean;
   export type ExportJobId = string;
@@ -2597,12 +2598,20 @@ declare namespace Omics {
      * The run's retention mode.
      */
     retentionMode?: RunRetentionMode;
+    /**
+     *  The reason a run has failed. 
+     */
+    failureReason?: RunFailureReason;
+    /**
+     *  The location of the run log. 
+     */
+    logLocation?: RunLogLocation;
   }
   export type GetRunResponsePriorityInteger = number;
   export type GetRunResponseStorageCapacityInteger = number;
   export interface GetRunTaskRequest {
     /**
-     * The task's ID.
+     * The workflow run ID.
      */
     id: RunId;
     /**
@@ -2659,6 +2668,10 @@ declare namespace Omics {
      *  The instance type for a task. 
      */
     instanceType?: TaskInstanceType;
+    /**
+     *  The reason a task has failed. 
+     */
+    failureReason?: TaskFailureReason;
   }
   export type GetRunTaskResponseCpusInteger = number;
   export type GetRunTaskResponseGpusInteger = number;
@@ -4110,6 +4123,7 @@ declare namespace Omics {
   export type RunArn = string;
   export type RunExport = "DEFINITION"|string;
   export type RunExportList = RunExport[];
+  export type RunFailureReason = string;
   export type RunGroupArn = string;
   export type RunGroupId = string;
   export type RunGroupList = RunGroupListItem[];
@@ -4204,6 +4218,17 @@ declare namespace Omics {
   export type RunListItemStorageCapacityInteger = number;
   export type RunListToken = string;
   export type RunLogLevel = "OFF"|"FATAL"|"ERROR"|"ALL"|string;
+  export interface RunLogLocation {
+    /**
+     *  The log stream ARN for the engine log. 
+     */
+    engineLogStream?: EngineLogStream;
+    /**
+     *  The log stream ARN for the run log. 
+     */
+    runLogStream?: RunLogStream;
+  }
+  export type RunLogStream = string;
   export type RunName = string;
   export type RunOutputUri = string;
   export interface RunParameters {
@@ -4750,6 +4775,7 @@ declare namespace Omics {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TaskFailureReason = string;
   export type TaskId = string;
   export type TaskInstanceType = string;
   export type TaskList = TaskListItem[];

@@ -395,7 +395,7 @@ declare namespace ManagedBlockchainQuery {
      */
     address: ChainAddress;
   }
-  export type QueryNetwork = "ETHEREUM_MAINNET"|"BITCOIN_MAINNET"|"BITCOIN_TESTNET"|string;
+  export type QueryNetwork = "ETHEREUM_MAINNET"|"BITCOIN_MAINNET"|"BITCOIN_TESTNET"|"ETHEREUM_SEPOLIA_TESTNET"|string;
   export type QueryTokenId = string;
   export type QueryTokenStandard = "ERC20"|"ERC721"|"ERC1155"|string;
   export type QueryTransactionEventType = "ERC20_TRANSFER"|"ERC20_MINT"|"ERC20_BURN"|"ERC20_DEPOSIT"|"ERC20_WITHDRAWAL"|"ERC721_TRANSFER"|"ERC1155_TRANSFER"|"BITCOIN_VIN"|"BITCOIN_VOUT"|"INTERNAL_ETH_TRANSFER"|"ETH_TRANSFER"|string;
