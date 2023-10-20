@@ -236,11 +236,11 @@ declare class Connect extends Service {
    */
   createTaskTemplate(callback?: (err: AWSError, data: Connect.Types.CreateTaskTemplateResponse) => void): Request<Connect.Types.CreateTaskTemplateResponse, AWSError>;
   /**
-   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.   You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
+   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.   The SignInConfig distribution is available only on a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
    */
   createTrafficDistributionGroup(params: Connect.Types.CreateTrafficDistributionGroupRequest, callback?: (err: AWSError, data: Connect.Types.CreateTrafficDistributionGroupResponse) => void): Request<Connect.Types.CreateTrafficDistributionGroupResponse, AWSError>;
   /**
-   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.   You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
+   * Creates a traffic distribution group given an Amazon Connect instance that has been replicated.   The SignInConfig distribution is available only on a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about creating traffic distribution groups, see Set up traffic distribution groups in the Amazon Connect Administrator Guide. 
    */
   createTrafficDistributionGroup(callback?: (err: AWSError, data: Connect.Types.CreateTrafficDistributionGroupResponse) => void): Request<Connect.Types.CreateTrafficDistributionGroupResponse, AWSError>;
   /**
@@ -252,11 +252,11 @@ declare class Connect extends Service {
    */
   createUseCase(callback?: (err: AWSError, data: Connect.Types.CreateUseCaseResponse) => void): Request<Connect.Types.CreateUseCaseResponse, AWSError>;
   /**
-   * Creates a user account for the specified Amazon Connect instance. For information about how to create user accounts using the Amazon Connect console, see Add Users in the Amazon Connect Administrator Guide.
+   * Creates a user account for the specified Amazon Connect instance.  Certain UserIdentityInfo parameters are required in some situations. For example, Email is required if you are using SAML for identity management. FirstName and LastName are required if you are using Amazon Connect or SAML for identity management.  For information about how to create user accounts using the Amazon Connect console, see Add Users in the Amazon Connect Administrator Guide.
    */
   createUser(params: Connect.Types.CreateUserRequest, callback?: (err: AWSError, data: Connect.Types.CreateUserResponse) => void): Request<Connect.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates a user account for the specified Amazon Connect instance. For information about how to create user accounts using the Amazon Connect console, see Add Users in the Amazon Connect Administrator Guide.
+   * Creates a user account for the specified Amazon Connect instance.  Certain UserIdentityInfo parameters are required in some situations. For example, Email is required if you are using SAML for identity management. FirstName and LastName are required if you are using Amazon Connect or SAML for identity management.  For information about how to create user accounts using the Amazon Connect console, see Add Users in the Amazon Connect Administrator Guide.
    */
   createUser(callback?: (err: AWSError, data: Connect.Types.CreateUserResponse) => void): Request<Connect.Types.CreateUserResponse, AWSError>;
   /**
@@ -764,19 +764,19 @@ declare class Connect extends Service {
    */
   getCurrentUserData(callback?: (err: AWSError, data: Connect.Types.GetCurrentUserDataResponse) => void): Request<Connect.Types.GetCurrentUserDataResponse, AWSError>;
   /**
-   * Retrieves a token for federation.  This API doesn't support root users. If you try to invoke GetFederationToken with root credentials, an error message similar to the following one appears:   Provided identity: Principal: .... User: .... cannot be used for federation with Amazon Connect  
+   * Supports SAML sign-in for Amazon Connect. Retrieves a token for federation. The token is for the Amazon Connect user which corresponds to the IAM credentials that were used to invoke this action.  For more information about how SAML sign-in works in Amazon Connect, see Configure SAML with IAM for Amazon Connect in the Amazon Connect Administrator Guide.   This API doesn't support root users. If you try to invoke GetFederationToken with root credentials, an error message similar to the following one appears:   Provided identity: Principal: .... User: .... cannot be used for federation with Amazon Connect  
    */
   getFederationToken(params: Connect.Types.GetFederationTokenRequest, callback?: (err: AWSError, data: Connect.Types.GetFederationTokenResponse) => void): Request<Connect.Types.GetFederationTokenResponse, AWSError>;
   /**
-   * Retrieves a token for federation.  This API doesn't support root users. If you try to invoke GetFederationToken with root credentials, an error message similar to the following one appears:   Provided identity: Principal: .... User: .... cannot be used for federation with Amazon Connect  
+   * Supports SAML sign-in for Amazon Connect. Retrieves a token for federation. The token is for the Amazon Connect user which corresponds to the IAM credentials that were used to invoke this action.  For more information about how SAML sign-in works in Amazon Connect, see Configure SAML with IAM for Amazon Connect in the Amazon Connect Administrator Guide.   This API doesn't support root users. If you try to invoke GetFederationToken with root credentials, an error message similar to the following one appears:   Provided identity: Principal: .... User: .... cannot be used for federation with Amazon Connect  
    */
   getFederationToken(callback?: (err: AWSError, data: Connect.Types.GetFederationTokenResponse) => void): Request<Connect.Types.GetFederationTokenResponse, AWSError>;
   /**
-   * Gets historical metric data from the specified Amazon Connect instance. For a description of each historical metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.
+   * Gets historical metric data from the specified Amazon Connect instance. For a description of each historical metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.  We recommend using the GetMetricDataV2 API. It provides more flexibility, features, and the ability to query longer time ranges than GetMetricData. Use it to retrieve historical agent and contact metrics for the last 3 months, at varying intervals. You can also use it to build custom dashboards to measure historical queue and agent performance. For example, you can track the number of incoming contacts for the last 7 days, with data split by day, to see how contact volume changed per day of the week. 
    */
   getMetricData(params: Connect.Types.GetMetricDataRequest, callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
-   * Gets historical metric data from the specified Amazon Connect instance. For a description of each historical metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.
+   * Gets historical metric data from the specified Amazon Connect instance. For a description of each historical metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.  We recommend using the GetMetricDataV2 API. It provides more flexibility, features, and the ability to query longer time ranges than GetMetricData. Use it to retrieve historical agent and contact metrics for the last 3 months, at varying intervals. You can also use it to build custom dashboards to measure historical queue and agent performance. For example, you can track the number of incoming contacts for the last 7 days, with data split by day, to see how contact volume changed per day of the week. 
    */
   getMetricData(callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
@@ -1228,11 +1228,11 @@ declare class Connect extends Service {
    */
   searchSecurityProfiles(callback?: (err: AWSError, data: Connect.Types.SearchSecurityProfilesResponse) => void): Request<Connect.Types.SearchSecurityProfilesResponse, AWSError>;
   /**
-   * Searches users in an Amazon Connect instance, with optional filtering.   AfterContactWorkTimeLimit is returned in milliseconds.  
+   * Searches users in an Amazon Connect instance, with optional filtering.    AfterContactWorkTimeLimit is returned in milliseconds.  
    */
   searchUsers(params: Connect.Types.SearchUsersRequest, callback?: (err: AWSError, data: Connect.Types.SearchUsersResponse) => void): Request<Connect.Types.SearchUsersResponse, AWSError>;
   /**
-   * Searches users in an Amazon Connect instance, with optional filtering.   AfterContactWorkTimeLimit is returned in milliseconds.  
+   * Searches users in an Amazon Connect instance, with optional filtering.    AfterContactWorkTimeLimit is returned in milliseconds.  
    */
   searchUsers(callback?: (err: AWSError, data: Connect.Types.SearchUsersResponse) => void): Request<Connect.Types.SearchUsersResponse, AWSError>;
   /**
@@ -1284,11 +1284,11 @@ declare class Connect extends Service {
    */
   startOutboundVoiceContact(callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
-   * Initiates a flow to start a new task.
+   * Initiates a flow to start a new task contact. For more information about task contacts, see Concepts: Tasks in Amazon Connect in the Amazon Connect Administrator Guide.  When using PreviousContactId and RelatedContactId input parameters, note the following:    PreviousContactId    Any updates to user-defined task contact attributes on any contact linked through the same PreviousContactId will affect every contact in the chain.   There can be a maximum of 12 linked task contacts in a chain. That is, 12 task contacts can be created that share the same PreviousContactId.      RelatedContactId    Copies contact attributes from the related task contact to the new contact.   Any update on attributes in a new task contact does not update attributes on previous contact.   There’s no limit on the number of task contacts that can be created that use the same RelatedContactId.     In addition, when calling StartTaskContact include only one of these parameters: ContactFlowID, QuickConnectID, or TaskTemplateID. Only one parameter is required as long as the task template has a flow configured to run it. If more than one parameter is specified, or only the TaskTemplateID is specified but it does not have a flow configured, the request returns an error because Amazon Connect cannot identify the unique flow to run when the task is created. A ServiceQuotaExceededException occurs when the number of open tasks exceeds the active tasks quota or there are already 12 tasks referencing the same PreviousContactId. For more information about service quotas for task contacts, see Amazon Connect service quotas in the Amazon Connect Administrator Guide. 
    */
   startTaskContact(params: Connect.Types.StartTaskContactRequest, callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
   /**
-   * Initiates a flow to start a new task.
+   * Initiates a flow to start a new task contact. For more information about task contacts, see Concepts: Tasks in Amazon Connect in the Amazon Connect Administrator Guide.  When using PreviousContactId and RelatedContactId input parameters, note the following:    PreviousContactId    Any updates to user-defined task contact attributes on any contact linked through the same PreviousContactId will affect every contact in the chain.   There can be a maximum of 12 linked task contacts in a chain. That is, 12 task contacts can be created that share the same PreviousContactId.      RelatedContactId    Copies contact attributes from the related task contact to the new contact.   Any update on attributes in a new task contact does not update attributes on previous contact.   There’s no limit on the number of task contacts that can be created that use the same RelatedContactId.     In addition, when calling StartTaskContact include only one of these parameters: ContactFlowID, QuickConnectID, or TaskTemplateID. Only one parameter is required as long as the task template has a flow configured to run it. If more than one parameter is specified, or only the TaskTemplateID is specified but it does not have a flow configured, the request returns an error because Amazon Connect cannot identify the unique flow to run when the task is created. A ServiceQuotaExceededException occurs when the number of open tasks exceeds the active tasks quota or there are already 12 tasks referencing the same PreviousContactId. For more information about service quotas for task contacts, see Amazon Connect service quotas in the Amazon Connect Administrator Guide. 
    */
   startTaskContact(callback?: (err: AWSError, data: Connect.Types.StartTaskContactResponse) => void): Request<Connect.Types.StartTaskContactResponse, AWSError>;
   /**
@@ -1484,6 +1484,14 @@ declare class Connect extends Service {
    */
   updatePhoneNumber(callback?: (err: AWSError, data: Connect.Types.UpdatePhoneNumberResponse) => void): Request<Connect.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
+   * Updates a phone number’s metadata.  To verify the status of a previous UpdatePhoneNumberMetadata operation, call the DescribePhoneNumber API. 
+   */
+  updatePhoneNumberMetadata(params: Connect.Types.UpdatePhoneNumberMetadataRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates a phone number’s metadata.  To verify the status of a previous UpdatePhoneNumberMetadata operation, call the DescribePhoneNumber API. 
+   */
+  updatePhoneNumberMetadata(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates a prompt.
    */
   updatePrompt(params: Connect.Types.UpdatePromptRequest, callback?: (err: AWSError, data: Connect.Types.UpdatePromptResponse) => void): Request<Connect.Types.UpdatePromptResponse, AWSError>;
@@ -1612,11 +1620,11 @@ declare class Connect extends Service {
    */
   updateTaskTemplate(callback?: (err: AWSError, data: Connect.Types.UpdateTaskTemplateResponse) => void): Request<Connect.Types.UpdateTaskTemplateResponse, AWSError>;
   /**
-   * Updates the traffic distribution for a given traffic distribution group.   You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   * Updates the traffic distribution for a given traffic distribution group.   The SignInConfig distribution is available only on a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
    */
   updateTrafficDistribution(params: Connect.Types.UpdateTrafficDistributionRequest, callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
-   * Updates the traffic distribution for a given traffic distribution group.   You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
+   * Updates the traffic distribution for a given traffic distribution group.   The SignInConfig distribution is available only on a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned.  For more information about updating a traffic distribution group, see Update telephony traffic distribution across Amazon Web Services Regions  in the Amazon Connect Administrator Guide. 
    */
   updateTrafficDistribution(callback?: (err: AWSError, data: Connect.Types.UpdateTrafficDistributionResponse) => void): Request<Connect.Types.UpdateTrafficDistributionResponse, AWSError>;
   /**
@@ -2181,7 +2189,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * The status of the phone number.    CLAIMED means the previous ClaimedPhoneNumber or UpdatePhoneNumber operation succeeded.    IN_PROGRESS means a ClaimedPhoneNumber or UpdatePhoneNumber operation is still in progress and has not yet completed. You can call DescribePhoneNumber at a later time to verify if the previous operation has completed.    FAILED indicates that the previous ClaimedPhoneNumber or UpdatePhoneNumber operation has failed. It will include a message indicating the failure reason. A common reason for a failure may be that the TargetArn value you are claiming or updating a phone number to has reached its limit of total claimed numbers. If you received a FAILED status from a ClaimPhoneNumber API call, you have one day to retry claiming the phone number before the number is released back to the inventory for other customers to claim.    You will not be billed for the phone number during the 1-day period if number claiming fails.  
+     * The status of the phone number.    CLAIMED means the previous ClaimPhoneNumber or UpdatePhoneNumber operation succeeded.    IN_PROGRESS means a ClaimPhoneNumber, UpdatePhoneNumber, or UpdatePhoneNumberMetadata operation is still in progress and has not yet completed. You can call DescribePhoneNumber at a later time to verify if the previous operation has completed.    FAILED indicates that the previous ClaimPhoneNumber or UpdatePhoneNumber operation has failed. It will include a message indicating the failure reason. A common reason for a failure may be that the TargetArn value you are claiming or updating a phone number to has reached its limit of total claimed numbers. If you received a FAILED status from a ClaimPhoneNumber API call, you have one day to retry claiming the phone number before the number is released back to the inventory for other customers to claim.    You will not be billed for the phone number during the 1-day period if number claiming fails.  
      */
     PhoneNumberStatus?: PhoneNumberStatus;
   }
@@ -2287,7 +2295,7 @@ declare namespace Connect {
      */
     Description?: ContactFlowDescription;
     /**
-     * The JSON string that represents the content of the flow. For an example, see Example contact flow in Amazon Connect Flow language. 
+     * The JSON string that represents the content of the flow. For an example, see Example flow in Amazon Connect Flow language.  Length Constraints: Minimum length of 1. Maximum length of 256000.
      */
     Content?: ContactFlowContent;
     /**
@@ -2312,7 +2320,7 @@ declare namespace Connect {
      */
     Name?: ContactFlowModuleName;
     /**
-     * The JSON string that represents the content of the flow. For an example, see Example contact flow in Amazon Connect Flow language.  Length Constraints: Minimum length of 1. Maximum length of 256000.
+     * The JSON string that represents the content of the flow. For an example, see Example flow in Amazon Connect Flow language. 
      */
     Content?: ContactFlowModuleContent;
     /**
@@ -2454,7 +2462,7 @@ declare namespace Connect {
      */
     Description?: ContactFlowModuleDescription;
     /**
-     * The content of the flow module.
+     * The JSON string that represents the content of the flow. For an example, see Example flow in Amazon Connect Flow language. 
      */
     Content: ContactFlowModuleContent;
     /**
@@ -2494,7 +2502,7 @@ declare namespace Connect {
      */
     Description?: ContactFlowDescription;
     /**
-     * The JSON string that represents the content of the flow. For an example, see Example contact flow in Amazon Connect Flow language.  Length Constraints: Minimum length of 1. Maximum length of 256000.
+     * The JSON string that represents the content of the flow. For an example, see Example flow in Amazon Connect Flow language.  Length Constraints: Minimum length of 1. Maximum length of 256000.
      */
     Content: ContactFlowContent;
     /**
@@ -5008,7 +5016,7 @@ declare namespace Connect {
      */
     Arn?: TrafficDistributionGroupArn;
     /**
-     * The distribution of allowing signing in to the instance and its replica(s).
+     * The distribution that determines which Amazon Web Services Regions should be used to sign in agents in to both the instance and its replica(s).
      */
     SignInConfig?: SignInConfig;
     /**
@@ -7904,7 +7912,7 @@ declare namespace Connect {
   }
   export interface SearchUsersRequest {
     /**
-     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.  InstanceID is a required field. The "Required: No" below is incorrect. 
      */
     InstanceId?: InstanceId;
     /**
@@ -8332,7 +8340,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier of the previous chat, voice, or task contact. 
+     * The identifier of the previous chat, voice, or task contact. Any updates to user-defined attributes to task contacts linked using the same PreviousContactID will affect every contact in the chain. There can be a maximum of 12 linked task contacts in a chain.
      */
     PreviousContactId?: ContactId;
     /**
@@ -8348,7 +8356,7 @@ declare namespace Connect {
      */
     Name: Name;
     /**
-     * A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+     * A formatted URL that is shown to an agent in the Contact Control Panel (CCP). Tasks can have the following reference types at the time of creation: URL | NUMBER | STRING | DATE | EMAIL. ATTACHMENT is not a supported reference type during task creation.
      */
     References?: ContactReferences;
     /**
@@ -8364,15 +8372,15 @@ declare namespace Connect {
      */
     ScheduledTime?: Timestamp;
     /**
-     * A unique identifier for the task template.
+     * A unique identifier for the task template. For more information about task templates, see Create task templates in the Amazon Connect Administrator Guide. 
      */
     TaskTemplateId?: TaskTemplateId;
     /**
-     * The identifier for the quick connect.
+     * The identifier for the quick connect. Tasks that are created by using QuickConnectId will use the flow that is defined on agent or queue quick connect. For more information about quick connects, see Create quick connects.
      */
     QuickConnectId?: QuickConnectId;
     /**
-     * The contactId that is related to this contact.
+     * The contactId that is related to this contact. Linking tasks together by using RelatedContactID copies over contact attributes from the related task contact to the new task contact. All updates to user-defined attributes in the new task contact are limited to the individual contact ID, unlike what happens when tasks are linked by using PreviousContactID. There are no limits to the number of contacts that can be linked by using RelatedContactId. 
      */
     RelatedContactId?: ContactId;
   }
@@ -8731,7 +8739,7 @@ declare namespace Connect {
      */
     InstanceArn?: InstanceArn;
     /**
-     * The status of the traffic distribution group.    CREATION_IN_PROGRESS means the previous CreateTrafficDistributionGroup operation is still in progress and has not yet completed.    ACTIVE means the previous CreateTrafficDistributionGroup operation has succeeded.    CREATION_FAILED indicates that the previous CreateTrafficDistributionGroup operation has failed.    PENDING_DELETION means the previous DeleteTrafficDistributionGroup operation is still in progress and has not yet completed.    DELETION_FAILED means the previous DeleteTrafficDistributionGroup operation has failed.    UPDATE_IN_PROGRESS means the previous UpdateTrafficDistributionGroup operation is still in progress and has not yet completed.  
+     * The status of the traffic distribution group.    CREATION_IN_PROGRESS means the previous CreateTrafficDistributionGroup operation is still in progress and has not yet completed.    ACTIVE means the previous CreateTrafficDistributionGroup operation has succeeded.    CREATION_FAILED indicates that the previous CreateTrafficDistributionGroup operation has failed.    PENDING_DELETION means the previous DeleteTrafficDistributionGroup operation is still in progress and has not yet completed.    DELETION_FAILED means the previous DeleteTrafficDistributionGroup operation has failed.    UPDATE_IN_PROGRESS means the previous UpdateTrafficDistribution operation is still in progress and has not yet completed.  
      */
     Status?: TrafficDistributionGroupStatus;
     /**
@@ -8739,7 +8747,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the DeleteTrafficDistributionGroup API. The default traffic distribution group is deleted as part of the process for deleting a replica.  You can change the SignInConfig distribution only for a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned. 
+     * Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the DeleteTrafficDistributionGroup API. The default traffic distribution group is deleted as part of the process for deleting a replica.  The SignInConfig distribution is available only on the default TrafficDistributionGroup. If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned. 
      */
     IsDefault?: Boolean;
   }
@@ -8915,7 +8923,7 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * The JSON string that represents the content of the flow. For an example, see Example contact flow in Amazon Connect Flow language.  Length Constraints: Minimum length of 1. Maximum length of 256000.
+     * The JSON string that represents the content of the flow. For an example, see Example flow in Amazon Connect Flow language.  Length Constraints: Minimum length of 1. Maximum length of 256000.
      */
     Content: ContactFlowContent;
   }
@@ -8955,7 +8963,7 @@ declare namespace Connect {
      */
     ContactFlowModuleId: ContactFlowModuleId;
     /**
-     * The JSON string that represents the content of the flow. For an example, see Example contact flow in Amazon Connect Flow language. 
+     * The JSON string that represents the content of the flow. For an example, see Example flow in Amazon Connect Flow language. 
      */
     Content: ContactFlowModuleContent;
   }
@@ -9174,6 +9182,20 @@ declare namespace Connect {
     ChannelConfiguration: UpdateParticipantRoleConfigChannelInfo;
   }
   export interface UpdateParticipantRoleConfigResponse {
+  }
+  export interface UpdatePhoneNumberMetadataRequest {
+    /**
+     * The Amazon Resource Name (ARN) or resource ID of the phone number.
+     */
+    PhoneNumberId: PhoneNumberId;
+    /**
+     * The description of the phone number.
+     */
+    PhoneNumberDescription?: PhoneNumberDescription;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
   }
   export interface UpdatePhoneNumberRequest {
     /**
@@ -9566,7 +9588,7 @@ declare namespace Connect {
      */
     TelephonyConfig?: TelephonyConfig;
     /**
-     * The distribution of allowing signing in to the instance and its replica(s).
+     * The distribution that determines which Amazon Web Services Regions should be used to sign in agents in to both the instance and its replica(s).
      */
     SignInConfig?: SignInConfig;
     /**

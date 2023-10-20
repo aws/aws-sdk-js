@@ -20,6 +20,14 @@ declare class Discovery extends Service {
    */
   associateConfigurationItemsToApplication(callback?: (err: AWSError, data: Discovery.Types.AssociateConfigurationItemsToApplicationResponse) => void): Request<Discovery.Types.AssociateConfigurationItemsToApplicationResponse, AWSError>;
   /**
+   *  Deletes one or more agents or collectors as specified by ID. Deleting an agent or collector does not delete the previously discovered data. To delete the data collected, use StartBatchDeleteConfigurationTask. 
+   */
+  batchDeleteAgents(params: Discovery.Types.BatchDeleteAgentsRequest, callback?: (err: AWSError, data: Discovery.Types.BatchDeleteAgentsResponse) => void): Request<Discovery.Types.BatchDeleteAgentsResponse, AWSError>;
+  /**
+   *  Deletes one or more agents or collectors as specified by ID. Deleting an agent or collector does not delete the previously discovered data. To delete the data collected, use StartBatchDeleteConfigurationTask. 
+   */
+  batchDeleteAgents(callback?: (err: AWSError, data: Discovery.Types.BatchDeleteAgentsResponse) => void): Request<Discovery.Types.BatchDeleteAgentsResponse, AWSError>;
+  /**
    * Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.  Amazon Web Services Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you've previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.
    */
   batchDeleteImportData(params: Discovery.Types.BatchDeleteImportDataRequest, callback?: (err: AWSError, data: Discovery.Types.BatchDeleteImportDataResponse) => void): Request<Discovery.Types.BatchDeleteImportDataResponse, AWSError>;
@@ -67,6 +75,14 @@ declare class Discovery extends Service {
    * Lists agents or collectors as specified by ID or other filters. All agents/collectors associated with your user can be listed if you call DescribeAgents as is without passing any parameters.
    */
   describeAgents(callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
+  /**
+   *  Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task.
+   */
+  describeBatchDeleteConfigurationTask(params: Discovery.Types.DescribeBatchDeleteConfigurationTaskRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeBatchDeleteConfigurationTaskResponse) => void): Request<Discovery.Types.DescribeBatchDeleteConfigurationTaskResponse, AWSError>;
+  /**
+   *  Takes a unique deletion task identifier as input and returns metadata about a configuration deletion task.
+   */
+  describeBatchDeleteConfigurationTask(callback?: (err: AWSError, data: Discovery.Types.DescribeBatchDeleteConfigurationTaskResponse) => void): Request<Discovery.Types.DescribeBatchDeleteConfigurationTaskResponse, AWSError>;
   /**
    * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the following:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action in the Amazon Web Services Application Discovery Service User Guide. 
    */
@@ -151,6 +167,14 @@ declare class Discovery extends Service {
    * Retrieves a list of servers that are one network hop away from a specified server.
    */
   listServerNeighbors(callback?: (err: AWSError, data: Discovery.Types.ListServerNeighborsResponse) => void): Request<Discovery.Types.ListServerNeighborsResponse, AWSError>;
+  /**
+   *  Takes a list of configurationId as input and starts an asynchronous deletion task to remove the configurationItems. Returns a unique deletion task identifier. 
+   */
+  startBatchDeleteConfigurationTask(params: Discovery.Types.StartBatchDeleteConfigurationTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartBatchDeleteConfigurationTaskResponse) => void): Request<Discovery.Types.StartBatchDeleteConfigurationTaskResponse, AWSError>;
+  /**
+   *  Takes a list of configurationId as input and starts an asynchronous deletion task to remove the configurationItems. Returns a unique deletion task identifier. 
+   */
+  startBatchDeleteConfigurationTask(callback?: (err: AWSError, data: Discovery.Types.StartBatchDeleteConfigurationTaskResponse) => void): Request<Discovery.Types.StartBatchDeleteConfigurationTaskResponse, AWSError>;
   /**
    * Start the continuous flow of agent's discovered data into Amazon Athena.
    */
@@ -297,6 +321,72 @@ declare namespace Discovery {
   }
   export interface AssociateConfigurationItemsToApplicationResponse {
   }
+  export interface BatchDeleteAgentError {
+    /**
+     *  The ID of the agent or data collector to delete. 
+     */
+    agentId: AgentId;
+    /**
+     *  The description of the error that occurred for the delete failed agent. 
+     */
+    errorMessage: String;
+    /**
+     *  The type of error that occurred for the delete failed agent. Valid status are: AGENT_IN_USE | NOT_FOUND | INTERNAL_SERVER_ERROR. 
+     */
+    errorCode: DeleteAgentErrorCode;
+  }
+  export type BatchDeleteAgentErrors = BatchDeleteAgentError[];
+  export interface BatchDeleteAgentsRequest {
+    /**
+     *  The list of agents to delete. 
+     */
+    deleteAgents: DeleteAgents;
+  }
+  export interface BatchDeleteAgentsResponse {
+    /**
+     *  A list of agent IDs that failed to delete during the deletion task, each paired with an error message. 
+     */
+    errors?: BatchDeleteAgentErrors;
+  }
+  export interface BatchDeleteConfigurationTask {
+    /**
+     *  The deletion task's unique identifier. 
+     */
+    taskId?: UUID;
+    /**
+     *  The current execution status of the deletion task. Valid status are: INITIALIZING | VALIDATING | DELETING | COMPLETED | FAILED. 
+     */
+    status?: BatchDeleteConfigurationTaskStatus;
+    /**
+     *  An epoch seconds timestamp (UTC) of when the deletion task was started. 
+     */
+    startTime?: TimeStamp;
+    /**
+     *  An epoch seconds timestamp (UTC) of when the deletion task was completed or failed. 
+     */
+    endTime?: TimeStamp;
+    /**
+     *  The type of configuration item to delete. Supported types are: SERVER. 
+     */
+    configurationType?: DeletionConfigurationItemType;
+    /**
+     *  The list of configuration IDs that were originally requested to be deleted by the deletion task. 
+     */
+    requestedConfigurations?: ConfigurationIdList;
+    /**
+     *  The list of configuration IDs that were successfully deleted by the deletion task. 
+     */
+    deletedConfigurations?: ConfigurationIdList;
+    /**
+     *  A list of configuration IDs that failed to delete during the deletion task, each paired with an error message. 
+     */
+    failedConfigurations?: FailedConfigurationList;
+    /**
+     *  A list of configuration IDs that produced warnings regarding their deletion, paired with a warning message. 
+     */
+    deletionWarnings?: DeletionWarningsList;
+  }
+  export type BatchDeleteConfigurationTaskStatus = "INITIALIZING"|"VALIDATING"|"DELETING"|"COMPLETED"|"FAILED"|string;
   export interface BatchDeleteImportDataError {
     /**
      * The unique import ID associated with the error that occurred.
@@ -319,6 +409,10 @@ declare namespace Discovery {
      * The IDs for the import tasks that you want to delete.
      */
     importTaskIds: ToDeleteIdentifierList;
+    /**
+     *  Set to true to remove the deleted import task from DescribeImportTasks. 
+     */
+    deleteHistory?: Boolean;
   }
   export interface BatchDeleteImportDataResponse {
     /**
@@ -547,6 +641,18 @@ declare namespace Discovery {
   }
   export type DataSource = "AGENT"|string;
   export type DatabaseName = string;
+  export interface DeleteAgent {
+    /**
+     *  The ID of the agent or data collector to delete. 
+     */
+    agentId: AgentId;
+    /**
+     *  Optional flag used to force delete an agent or data collector. It is needed to delete any agent in HEALTHY/UNHEALTHY/RUNNING status. Note that deleting an agent that is actively reporting health causes it to be re-registered with a different agent ID after data collector re-connects with Amazon Web Services. 
+     */
+    force?: Boolean;
+  }
+  export type DeleteAgentErrorCode = "NOT_FOUND"|"INTERNAL_SERVER_ERROR"|"AGENT_IN_USE"|string;
+  export type DeleteAgents = DeleteAgent[];
   export interface DeleteApplicationsRequest {
     /**
      * Configuration ID of an application to be deleted.
@@ -567,6 +673,22 @@ declare namespace Discovery {
   }
   export interface DeleteTagsResponse {
   }
+  export type DeletionConfigurationItemType = "SERVER"|string;
+  export interface DeletionWarning {
+    /**
+     *  The unique identifier of the configuration that produced a warning. 
+     */
+    configurationId?: ConfigurationId;
+    /**
+     *  The integer warning code associated with the warning message. 
+     */
+    warningCode?: WarningCode;
+    /**
+     *  A descriptive message of the warning the associated configuration ID produced. 
+     */
+    warningText?: WarningText;
+  }
+  export type DeletionWarningsList = DeletionWarning[];
   export interface DescribeAgentsRequest {
     /**
      * The agent or the collector IDs for which you want information. If you specify no IDs, the system returns information about all agents/collectors associated with your user.
@@ -594,6 +716,18 @@ declare namespace Discovery {
      * Token to retrieve the next set of results. For example, if you specified 100 IDs for DescribeAgentsRequest$agentIds but set DescribeAgentsRequest$maxResults to 10, you received a set of 10 results along with this token. Use this token in the next query to retrieve the next set of 10.
      */
     nextToken?: NextToken;
+  }
+  export interface DescribeBatchDeleteConfigurationTaskRequest {
+    /**
+     *  The ID of the task to delete. 
+     */
+    taskId: UUID;
+  }
+  export interface DescribeBatchDeleteConfigurationTaskResponse {
+    /**
+     *  The BatchDeleteConfigurationTask that represents the deletion task being executed. 
+     */
+    task?: BatchDeleteConfigurationTask;
   }
   export type DescribeConfigurationsAttribute = {[key: string]: String};
   export type DescribeConfigurationsAttributes = DescribeConfigurationsAttribute[];
@@ -779,6 +913,8 @@ declare namespace Discovery {
      */
     reservedInstanceOptions?: ReservedInstanceOptions;
   }
+  export type ErrorMessage = string;
+  export type ErrorStatusCode = number;
   export type ExcludedInstanceTypes = EC2InstanceType[];
   export interface ExportConfigurationsResponse {
     /**
@@ -849,6 +985,21 @@ declare namespace Discovery {
   export type ExportStatus = "FAILED"|"SUCCEEDED"|"IN_PROGRESS"|string;
   export type ExportStatusMessage = string;
   export type ExportsInfo = ExportInfo[];
+  export interface FailedConfiguration {
+    /**
+     *  The unique identifier of the configuration the failed to delete. 
+     */
+    configurationId?: ConfigurationId;
+    /**
+     *  The integer error code associated with the error message. 
+     */
+    errorStatusCode?: ErrorStatusCode;
+    /**
+     *  A descriptive message indicating why the associated configuration failed to delete. 
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export type FailedConfigurationList = FailedConfiguration[];
   export interface Filter {
     /**
      * The name of the filter.
@@ -1100,6 +1251,22 @@ declare namespace Discovery {
   export type S3Bucket = string;
   export type S3PresignedUrl = string;
   export type SchemaStorageConfig = {[key: string]: String};
+  export interface StartBatchDeleteConfigurationTaskRequest {
+    /**
+     *  The type of configuration item to delete. Supported types are: SERVER. 
+     */
+    configurationType: DeletionConfigurationItemType;
+    /**
+     *  The list of configuration IDs that will be deleted by the task. 
+     */
+    configurationIds: ConfigurationIdList;
+  }
+  export interface StartBatchDeleteConfigurationTaskResponse {
+    /**
+     *  The unique identifier associated with the newly started deletion task. 
+     */
+    taskId?: UUID;
+  }
   export interface StartContinuousExportRequest {
   }
   export interface StartContinuousExportResponse {
@@ -1242,6 +1409,7 @@ declare namespace Discovery {
   export type TermLength = "ONE_YEAR"|"THREE_YEAR"|string;
   export type TimeStamp = Date;
   export type ToDeleteIdentifierList = ImportTaskIdentifier[];
+  export type UUID = string;
   export interface UpdateApplicationRequest {
     /**
      * Configuration ID of the application to be updated.
@@ -1271,6 +1439,8 @@ declare namespace Discovery {
   export type UsageMetricBasisName = string;
   export type UsageMetricPercentageAdjust = number;
   export type UserPreferredRegion = string;
+  export type WarningCode = number;
+  export type WarningText = string;
   export type orderString = "ASC"|"DESC"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

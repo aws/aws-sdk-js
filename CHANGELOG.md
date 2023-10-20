@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1477.0-->
+<!--LATEST=2.1478.0-->
 <!--ENTRYINSERT-->
+
+## 2.1478.0
+* feature: AppConfig: Update KmsKeyIdentifier constraints to support AWS KMS multi-Region keys.
+* feature: AppIntegrations: Updated ScheduleConfig to be an optional input to CreateDataIntegration to support event driven downloading of files from sources such as Amazon s3 using Amazon Connect AppIntegrations.
+* feature: Connect: This release adds support for updating phone number metadata, such as phone number description.
+* feature: Discovery: This release introduces three new APIs: StartBatchDeleteConfigurationTask, DescribeBatchDeleteConfigurationTask, and BatchDeleteAgents.
+* feature: SSM: This release introduces a new API: DeleteOpsItem. This allows deletion of an OpsItem.
 
 ## 2.1477.0
 * bugfix: Gamesparks: Deprecate Gamesparks

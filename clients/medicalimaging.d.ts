@@ -85,19 +85,19 @@ declare class MedicalImaging extends Service {
    */
   getImageSetMetadata(callback?: (err: AWSError, data: MedicalImaging.Types.GetImageSetMetadataResponse) => void): Request<MedicalImaging.Types.GetImageSetMetadataResponse, AWSError>;
   /**
-   * List import jobs created by this AWS account for a specific data store.
+   * List import jobs created for a specific data store.
    */
   listDICOMImportJobs(params: MedicalImaging.Types.ListDICOMImportJobsRequest, callback?: (err: AWSError, data: MedicalImaging.Types.ListDICOMImportJobsResponse) => void): Request<MedicalImaging.Types.ListDICOMImportJobsResponse, AWSError>;
   /**
-   * List import jobs created by this AWS account for a specific data store.
+   * List import jobs created for a specific data store.
    */
   listDICOMImportJobs(callback?: (err: AWSError, data: MedicalImaging.Types.ListDICOMImportJobsResponse) => void): Request<MedicalImaging.Types.ListDICOMImportJobsResponse, AWSError>;
   /**
-   * List data stores created by this AWS account.
+   * List data stores.
    */
   listDatastores(params: MedicalImaging.Types.ListDatastoresRequest, callback?: (err: AWSError, data: MedicalImaging.Types.ListDatastoresResponse) => void): Request<MedicalImaging.Types.ListDatastoresResponse, AWSError>;
   /**
-   * List data stores created by this AWS account.
+   * List data stores.
    */
   listDatastores(callback?: (err: AWSError, data: MedicalImaging.Types.ListDatastoresResponse) => void): Request<MedicalImaging.Types.ListDatastoresResponse, AWSError>;
   /**
@@ -117,11 +117,11 @@ declare class MedicalImaging extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: MedicalImaging.Types.ListTagsForResourceResponse) => void): Request<MedicalImaging.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Search image sets based on defined input attributes.
+   * Search image sets based on defined input attributes.   SearchImageSets accepts a single search query parameter and returns a paginated response of all image sets that have the matching criteria. All range queries must be input as (lowerBound, upperBound).  SearchImageSets uses the updatedAt field for sorting in decreasing order from latest to oldest. 
    */
   searchImageSets(params: MedicalImaging.Types.SearchImageSetsRequest, callback?: (err: AWSError, data: MedicalImaging.Types.SearchImageSetsResponse) => void): Request<MedicalImaging.Types.SearchImageSetsResponse, AWSError>;
   /**
-   * Search image sets based on defined input attributes.
+   * Search image sets based on defined input attributes.   SearchImageSets accepts a single search query parameter and returns a paginated response of all image sets that have the matching criteria. All range queries must be input as (lowerBound, upperBound).  SearchImageSets uses the updatedAt field for sorting in decreasing order from latest to oldest. 
    */
   searchImageSets(callback?: (err: AWSError, data: MedicalImaging.Types.SearchImageSetsResponse) => void): Request<MedicalImaging.Types.SearchImageSetsResponse, AWSError>;
   /**
@@ -288,7 +288,7 @@ declare namespace MedicalImaging {
      */
     tags?: TagMap;
     /**
-     * The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS KMS) key for accessing encrypted data.
+     * The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.
      */
     kmsKeyArn?: KmsKeyArn;
   }
@@ -478,7 +478,7 @@ declare namespace MedicalImaging {
      */
     datastoreStatus: DatastoreStatus;
     /**
-     * The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS KMS) key for accessing encrypted data.
+     * The Amazon Resource Name (ARN) assigned to the Key Management Service (KMS) key for accessing encrypted data.
      */
     kmsKeyArn?: KmsKeyArn;
     /**
@@ -761,11 +761,11 @@ declare namespace MedicalImaging {
      */
     version?: Integer;
     /**
-     * The time an image set is created in AWS HealthImaging. Sample creation date is provided in 1985-04-12T23:20:50.52Z format.
+     * The time an image set is created. Sample creation date is provided in 1985-04-12T23:20:50.52Z format.
      */
     createdAt?: _Date;
     /**
-     * The time when an image was last updated in AWS HealthImaging.
+     * The time an image set was last updated.
      */
     updatedAt?: _Date;
     /**

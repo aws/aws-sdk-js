@@ -270,7 +270,7 @@ declare namespace AppIntegrations {
     /**
      * The name of the data and how often it should be pulled from the source.
      */
-    ScheduleConfig: ScheduleConfiguration;
+    ScheduleConfig?: ScheduleConfiguration;
     /**
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
