@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1478.0-->
+<!--LATEST=2.1479.0-->
 <!--ENTRYINSERT-->
+
+## 2.1479.0
+* feature: MarketplaceCommerceAnalytics: The StartSupportDataExport operation has been deprecated as part of the Product Support Connection deprecation. As of December 2022, Product Support Connection is no longer supported.
+* feature: NetworkManager: This release adds API support for Tunnel-less Connect (NoEncap Protocol) for AWS Cloud WAN
+* feature: RedshiftServerless: This release adds support for customers to see the patch version and workgroup version in Amazon Redshift Serverless.
+* feature: Rekognition: Amazon Rekognition introduces StartMediaAnalysisJob, GetMediaAnalysisJob, and ListMediaAnalysisJobs operations to run a bulk analysis of images with a Detect Moderation model.
 
 ## 2.1478.0
 * feature: AppConfig: Update KmsKeyIdentifier constraints to support AWS KMS multi-Region keys.

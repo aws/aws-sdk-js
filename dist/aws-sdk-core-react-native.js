@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.1478.0',
+	  VERSION: '2.1479.0',
 
 	  /**
 	   * @api private
@@ -9980,16 +9980,16 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ }),
 /* 63 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var hasOwnProperty = {}.hasOwnProperty;
 	var call = Function.prototype.call;
+	var $hasOwn = Object.prototype.hasOwnProperty;
+	var bind = __webpack_require__(61);
 
-	module.exports = call.bind ? call.bind(hasOwnProperty) : function (O, P) {
-	  return call.call(hasOwnProperty, O, P);
-	};
+	/** @type {(o: {}, p: PropertyKey) => p is keyof o} */
+	module.exports = bind.call(call, $hasOwn);
 
 
 /***/ }),

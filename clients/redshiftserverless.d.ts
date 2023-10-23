@@ -1513,7 +1513,7 @@ declare namespace RedshiftServerless {
      */
     adminPasswordSecretKmsKeyId?: KmsKeyId;
     /**
-     * The password of the administrator for the first database created in the namespace. This parameter must be updated together with adminUsername. You can't use adminUserPassword if manageAdminPassword is true. 
+     * The password of the administrator for the first database created in the namespace. This parameter must be updated together with adminUsername. You can't use adminUserPassword if manageAdminPassword is true.
      */
     adminUserPassword?: DbPassword;
     /**
@@ -1715,6 +1715,10 @@ declare namespace RedshiftServerless {
      */
     namespaceName?: String;
     /**
+     * The patch version of your Amazon Redshift Serverless workgroup. For more information about patch versions, see Cluster versions for Amazon Redshift.
+     */
+    patchVersion?: String;
+    /**
      * The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.
      */
     port?: Integer;
@@ -1746,6 +1750,10 @@ declare namespace RedshiftServerless {
      * The name of the workgroup.
      */
     workgroupName?: WorkgroupName;
+    /**
+     * The Amazon Redshift Serverless version of your workgroup. For more information about Amazon Redshift Serverless versions, seeCluster versions for Amazon Redshift.
+     */
+    workgroupVersion?: String;
   }
   export type WorkgroupList = Workgroup[];
   export type WorkgroupName = string;

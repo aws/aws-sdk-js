@@ -3258,6 +3258,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>The list of key-value tags associated with the Connect peer.</p>"
+        },
+        "SubnetArn": {
+          "shape": "SubnetArn",
+          "documentation": "<p>The subnet ARN for the Connect peer.</p>"
         }
       },
       "documentation": "<p>Describes a core network Connect peer.</p>"
@@ -3408,6 +3412,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>The list of key-value tags associated with the Connect peer summary.</p>"
+        },
+        "SubnetArn": {
+          "shape": "SubnetArn",
+          "documentation": "<p>The subnet ARN for the Connect peer summary.</p>"
         }
       },
       "documentation": "<p>Summary description of a Connect peer.</p>"
@@ -4007,8 +4015,7 @@
       "type": "structure",
       "required": [
         "ConnectAttachmentId",
-        "PeerAddress",
-        "InsideCidrBlocks"
+        "PeerAddress"
       ],
       "members": {
         "ConnectAttachmentId": {
@@ -4039,6 +4046,10 @@
           "shape": "ClientToken",
           "documentation": "<p>The client token associated with the request.</p>",
           "idempotencyToken": true
+        },
+        "SubnetArn": {
+          "shape": "SubnetArn",
+          "documentation": "<p>The subnet ARN for the Connect peer.</p>"
         }
       }
     },
@@ -7509,7 +7520,7 @@
       "members": {
         "TransitGatewayRouteTableArn": {
           "shape": "TransitGatewayRouteTableArn",
-          "documentation": "<p>The ARN of the transit gateway route table.</p>"
+          "documentation": "<p>The ARN of the transit gateway route table for the attachment request. For example, <code>\"TransitGatewayRouteTableArn\": \"arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456\"</code>.</p>"
         },
         "CoreNetworkSegmentEdge": {
           "shape": "CoreNetworkSegmentEdgeIdentifier",
@@ -7944,7 +7955,8 @@
     "TunnelProtocol": {
       "type": "string",
       "enum": [
-        "GRE"
+        "GRE",
+        "NO_ENCAP"
       ]
     },
     "UntagResourceRequest": {

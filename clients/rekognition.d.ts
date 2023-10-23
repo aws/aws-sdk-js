@@ -317,6 +317,14 @@ declare class Rekognition extends Service {
    */
   getLabelDetection(callback?: (err: AWSError, data: Rekognition.Types.GetLabelDetectionResponse) => void): Request<Rekognition.Types.GetLabelDetectionResponse, AWSError>;
   /**
+   * Retrieves the results for a given media analysis job. Takes a JobId returned by StartMediaAnalysisJob.
+   */
+  getMediaAnalysisJob(params: Rekognition.Types.GetMediaAnalysisJobRequest, callback?: (err: AWSError, data: Rekognition.Types.GetMediaAnalysisJobResponse) => void): Request<Rekognition.Types.GetMediaAnalysisJobResponse, AWSError>;
+  /**
+   * Retrieves the results for a given media analysis job. Takes a JobId returned by StartMediaAnalysisJob.
+   */
+  getMediaAnalysisJob(callback?: (err: AWSError, data: Rekognition.Types.GetMediaAnalysisJobResponse) => void): Request<Rekognition.Types.GetMediaAnalysisJobResponse, AWSError>;
+  /**
    * Gets the path tracking results of a Amazon Rekognition Video analysis started by StartPersonTracking. The person path tracking operation is started by a call to StartPersonTracking which returns a job identifier (JobId). When the operation finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartPersonTracking. To get the results of the person path tracking operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetPersonTracking and pass the job identifier (JobId) from the initial call to StartPersonTracking.  GetPersonTracking returns an array, Persons, of tracked persons and the time(s) their paths were tracked in the video.    GetPersonTracking only returns the default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial attributes listed in the Face object of the following response syntax are not returned.  For more information, see FaceDetail in the Amazon Rekognition Developer Guide.  By default, the array is sorted by the time(s) a person's path is tracked in the video. You can sort by tracked persons by specifying INDEX for the SortBy input parameter. Use the MaxResults parameter to limit the number of items returned. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetPersonTracking and populate the NextToken request parameter with the token value returned from the previous call to GetPersonTracking.
    */
   getPersonTracking(params: Rekognition.Types.GetPersonTrackingRequest, callback?: (err: AWSError, data: Rekognition.Types.GetPersonTrackingResponse) => void): Request<Rekognition.Types.GetPersonTrackingResponse, AWSError>;
@@ -380,6 +388,14 @@ declare class Rekognition extends Service {
    * Returns metadata for faces in the specified collection. This metadata includes information such as the bounding box coordinates, the confidence (that the bounding box contains a face), and face ID. For an example, see Listing Faces in a Collection in the Amazon Rekognition Developer Guide. This operation requires permissions to perform the rekognition:ListFaces action.
    */
   listFaces(callback?: (err: AWSError, data: Rekognition.Types.ListFacesResponse) => void): Request<Rekognition.Types.ListFacesResponse, AWSError>;
+  /**
+   * Returns a list of media analysis jobs. Results are sorted by CreationTimestamp in descending order.
+   */
+  listMediaAnalysisJobs(params: Rekognition.Types.ListMediaAnalysisJobsRequest, callback?: (err: AWSError, data: Rekognition.Types.ListMediaAnalysisJobsResponse) => void): Request<Rekognition.Types.ListMediaAnalysisJobsResponse, AWSError>;
+  /**
+   * Returns a list of media analysis jobs. Results are sorted by CreationTimestamp in descending order.
+   */
+  listMediaAnalysisJobs(callback?: (err: AWSError, data: Rekognition.Types.ListMediaAnalysisJobsResponse) => void): Request<Rekognition.Types.ListMediaAnalysisJobsResponse, AWSError>;
   /**
    *  This operation applies only to Amazon Rekognition Custom Labels.  Gets a list of the project policies attached to a project. To attach a project policy to a project, call PutProjectPolicy. To remove a project policy from a project, call DeleteProjectPolicy. This operation requires permissions to perform the rekognition:ListProjectPolicies action.
    */
@@ -500,6 +516,14 @@ declare class Rekognition extends Service {
    * Starts asynchronous detection of labels in a stored video. Amazon Rekognition Video can detect labels in a video. Labels are instances of real-world entities. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; concepts like landscape, evening, and nature; and activities like a person getting out of a car or a person skiing. The video must be stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartLabelDetection returns a job identifier (JobId) which you use to get the results of the operation. When label detection is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. To get the results of the label detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetLabelDetection and pass the job identifier (JobId) from the initial call to StartLabelDetection.  Optional Parameters   StartLabelDetection has the GENERAL_LABELS Feature applied by default. This feature allows you to provide filtering criteria to the Settings parameter. You can filter with sets of individual labels or with label categories. You can specify inclusive filters, exclusive filters, or a combination of inclusive and exclusive filters. For more information on filtering, see Detecting labels in a video. You can specify MinConfidence to control the confidence threshold for the labels returned. The default is 50.
    */
   startLabelDetection(callback?: (err: AWSError, data: Rekognition.Types.StartLabelDetectionResponse) => void): Request<Rekognition.Types.StartLabelDetectionResponse, AWSError>;
+  /**
+   * Initiates a new media analysis job. Accepts a manifest file in an Amazon S3 bucket. The output is a manifest file and a summary of the manifest stored in the Amazon S3 bucket.
+   */
+  startMediaAnalysisJob(params: Rekognition.Types.StartMediaAnalysisJobRequest, callback?: (err: AWSError, data: Rekognition.Types.StartMediaAnalysisJobResponse) => void): Request<Rekognition.Types.StartMediaAnalysisJobResponse, AWSError>;
+  /**
+   * Initiates a new media analysis job. Accepts a manifest file in an Amazon S3 bucket. The output is a manifest file and a summary of the manifest stored in the Amazon S3 bucket.
+   */
+  startMediaAnalysisJob(callback?: (err: AWSError, data: Rekognition.Types.StartMediaAnalysisJobResponse) => void): Request<Rekognition.Types.StartMediaAnalysisJobResponse, AWSError>;
   /**
    * Starts the asynchronous tracking of a person's path in a stored video. Amazon Rekognition Video can track the path of people in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartPersonTracking returns a job identifier (JobId) which you use to get the results of the operation. When label detection is finished, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel.  To get the results of the person detection operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetPersonTracking and pass the job identifier (JobId) from the initial call to StartPersonTracking.
    */
@@ -2549,6 +2573,62 @@ declare namespace Rekognition {
      */
     GetRequestMetadata?: GetLabelDetectionRequestMetadata;
   }
+  export interface GetMediaAnalysisJobRequest {
+    /**
+     * Unique identifier for the media analysis job for which you want to retrieve results.
+     */
+    JobId: MediaAnalysisJobId;
+  }
+  export interface GetMediaAnalysisJobResponse {
+    /**
+     * The identifier for the media analysis job.
+     */
+    JobId: MediaAnalysisJobId;
+    /**
+     * The name of the media analysis job.
+     */
+    JobName?: MediaAnalysisJobName;
+    /**
+     * Operation configurations that were provided during job creation.
+     */
+    OperationsConfig: MediaAnalysisOperationsConfig;
+    /**
+     * The current status of the media analysis job.
+     */
+    Status: MediaAnalysisJobStatus;
+    /**
+     * Details about the error that resulted in failure of the job.
+     */
+    FailureDetails?: MediaAnalysisJobFailureDetails;
+    /**
+     * The Unix date and time when the job was started.
+     */
+    CreationTimestamp: DateTime;
+    /**
+     * The Unix date and time when the job finished.
+     */
+    CompletionTimestamp?: DateTime;
+    /**
+     * Reference to the input manifest that was provided in the job creation request.
+     */
+    Input: MediaAnalysisInput;
+    /**
+     * Output configuration that was provided in the creation request.
+     */
+    OutputConfig: MediaAnalysisOutputConfig;
+    /**
+     * KMS Key that was provided in the creation request.
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * Output manifest that contains prediction results.
+     */
+    Results?: MediaAnalysisResults;
+    /**
+     * The summary manifest provides statistics on input manifest and errors identified in the input manifest.
+     */
+    ManifestSummary?: MediaAnalysisManifestSummary;
+  }
   export interface GetPersonTrackingRequest {
     /**
      * The identifier for a job that tracks persons in a video. You get the JobId from a call to StartPersonTracking. 
@@ -3073,6 +3153,27 @@ declare namespace Rekognition {
      */
     FaceModelVersion?: String;
   }
+  export type ListMediaAnalysisJobsPageSize = number;
+  export interface ListMediaAnalysisJobsRequest {
+    /**
+     * Pagination token, if the previous response was incomplete.
+     */
+    NextToken?: ExtendedPaginationToken;
+    /**
+     * The maximum number of results to return per paginated call. The largest value user can specify is 100. If user specifies a value greater than 100, an InvalidParameterException error occurs. The default value is 100.
+     */
+    MaxResults?: ListMediaAnalysisJobsPageSize;
+  }
+  export interface ListMediaAnalysisJobsResponse {
+    /**
+     * Pagination token, if the previous response was incomplete.
+     */
+    NextToken?: ExtendedPaginationToken;
+    /**
+     * Contains a list of all media analysis jobs.
+     */
+    MediaAnalysisJobs: MediaAnalysisJobDescriptions;
+  }
   export type ListProjectPoliciesPageSize = number;
   export interface ListProjectPoliciesRequest {
     /**
@@ -3184,6 +3285,107 @@ declare namespace Rekognition {
   export type MaxPixelThreshold = number;
   export type MaxResults = number;
   export type MaxUserResults = number;
+  export interface MediaAnalysisDetectModerationLabelsConfig {
+    /**
+     * Specifies the minimum confidence level for the moderation labels to return. Amazon Rekognition doesn't return any labels with a confidence level lower than this specified value. 
+     */
+    MinConfidence?: Percent;
+    /**
+     * Specifies the custom moderation model to be used during the label detection job. If not provided the pre-trained model is used.
+     */
+    ProjectVersion?: ProjectVersionId;
+  }
+  export interface MediaAnalysisInput {
+    S3Object: S3Object;
+  }
+  export interface MediaAnalysisJobDescription {
+    /**
+     * The identifier for a media analysis job.
+     */
+    JobId: MediaAnalysisJobId;
+    /**
+     * The name of a media analysis job.
+     */
+    JobName?: MediaAnalysisJobName;
+    /**
+     * Operation configurations that were provided during job creation.
+     */
+    OperationsConfig: MediaAnalysisOperationsConfig;
+    /**
+     * The status of the media analysis job being retrieved.
+     */
+    Status: MediaAnalysisJobStatus;
+    /**
+     * Details about the error that resulted in failure of the job.
+     */
+    FailureDetails?: MediaAnalysisJobFailureDetails;
+    /**
+     * The Unix date and time when the job was started.
+     */
+    CreationTimestamp: DateTime;
+    /**
+     * The Unix date and time when the job finished.
+     */
+    CompletionTimestamp?: DateTime;
+    /**
+     * Reference to the input manifest that was provided in the job creation request.
+     */
+    Input: MediaAnalysisInput;
+    /**
+     * Output configuration that was provided in the creation request.
+     */
+    OutputConfig: MediaAnalysisOutputConfig;
+    /**
+     * KMS Key that was provided in the creation request.
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * Output manifest that contains prediction results.
+     */
+    Results?: MediaAnalysisResults;
+    /**
+     * Provides statistics on input manifest and errors identified in the input manifest.
+     */
+    ManifestSummary?: MediaAnalysisManifestSummary;
+  }
+  export type MediaAnalysisJobDescriptions = MediaAnalysisJobDescription[];
+  export type MediaAnalysisJobFailureCode = "INTERNAL_ERROR"|"INVALID_S3_OBJECT"|"INVALID_MANIFEST"|"INVALID_OUTPUT_CONFIG"|"INVALID_KMS_KEY"|"ACCESS_DENIED"|"RESOURCE_NOT_FOUND"|"RESOURCE_NOT_READY"|"THROTTLED"|string;
+  export interface MediaAnalysisJobFailureDetails {
+    /**
+     * Error code for the failed job.
+     */
+    Code?: MediaAnalysisJobFailureCode;
+    /**
+     * Human readable error message.
+     */
+    Message?: String;
+  }
+  export type MediaAnalysisJobId = string;
+  export type MediaAnalysisJobName = string;
+  export type MediaAnalysisJobStatus = "CREATED"|"QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export interface MediaAnalysisManifestSummary {
+    S3Object?: S3Object;
+  }
+  export interface MediaAnalysisOperationsConfig {
+    /**
+     * Contains configuration options for a DetectModerationLabels job.
+     */
+    DetectModerationLabels?: MediaAnalysisDetectModerationLabelsConfig;
+  }
+  export interface MediaAnalysisOutputConfig {
+    /**
+     * Specifies the Amazon S3 bucket to contain the output of the media analysis job.
+     */
+    S3Bucket: S3Bucket;
+    /**
+     * Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for storage.
+     */
+    S3KeyPrefix?: MediaAnalysisS3KeyPrefix;
+  }
+  export interface MediaAnalysisResults {
+    S3Object?: S3Object;
+  }
+  export type MediaAnalysisS3KeyPrefix = string;
   export type MinCoveragePercentage = number;
   export interface ModerationLabel {
     /**
@@ -4011,6 +4213,38 @@ declare namespace Rekognition {
      * The identifier for the label detection job. Use JobId to identify the job in a subsequent call to GetLabelDetection. 
      */
     JobId?: JobId;
+  }
+  export interface StartMediaAnalysisJobRequest {
+    /**
+     * Idempotency token used to prevent the accidental creation of duplicate versions. If you use the same token with multiple StartMediaAnalysisJobRequest requests, the same response is returned. Use ClientRequestToken to prevent the same request from being processed more than once.
+     */
+    ClientRequestToken?: ClientRequestToken;
+    /**
+     * The name of the job. Does not have to be unique.
+     */
+    JobName?: MediaAnalysisJobName;
+    /**
+     * Configuration options for the media analysis job to be created.
+     */
+    OperationsConfig: MediaAnalysisOperationsConfig;
+    /**
+     * Input data to be analyzed by the job.
+     */
+    Input: MediaAnalysisInput;
+    /**
+     * The Amazon S3 bucket location to store the results.
+     */
+    OutputConfig: MediaAnalysisOutputConfig;
+    /**
+     * The identifier of customer managed AWS KMS key (name or ARN). The key is used to encrypt images copied into the service. The key is also used to encrypt results and manifest files written to the output Amazon S3 bucket.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export interface StartMediaAnalysisJobResponse {
+    /**
+     * Identifier for the created job.
+     */
+    JobId: MediaAnalysisJobId;
   }
   export interface StartPersonTrackingRequest {
     /**

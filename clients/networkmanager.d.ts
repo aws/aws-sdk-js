@@ -958,6 +958,10 @@ declare namespace NetworkManager {
      * The list of key-value tags associated with the Connect peer.
      */
     Tags?: TagList;
+    /**
+     * The subnet ARN for the Connect peer.
+     */
+    SubnetArn?: SubnetArn;
   }
   export interface ConnectPeerAssociation {
     /**
@@ -1056,6 +1060,10 @@ declare namespace NetworkManager {
      * The list of key-value tags associated with the Connect peer summary.
      */
     Tags?: TagList;
+    /**
+     * The subnet ARN for the Connect peer summary.
+     */
+    SubnetArn?: SubnetArn;
   }
   export type ConnectPeerSummaryList = ConnectPeerSummary[];
   export interface Connection {
@@ -1475,7 +1483,7 @@ declare namespace NetworkManager {
     /**
      * The inside IP addresses used for BGP peering.
      */
-    InsideCidrBlocks: ConstrainedStringList;
+    InsideCidrBlocks?: ConstrainedStringList;
     /**
      * The tags associated with the peer request.
      */
@@ -1484,6 +1492,10 @@ declare namespace NetworkManager {
      * The client token associated with the request.
      */
     ClientToken?: ClientToken;
+    /**
+     * The subnet ARN for the Connect peer.
+     */
+    SubnetArn?: SubnetArn;
   }
   export interface CreateConnectPeerResponse {
     /**
@@ -3614,7 +3626,7 @@ declare namespace NetworkManager {
   export type RouteStateList = RouteState[];
   export interface RouteTableIdentifier {
     /**
-     * The ARN of the transit gateway route table.
+     * The ARN of the transit gateway route table for the attachment request. For example, "TransitGatewayRouteTableArn": "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456".
      */
     TransitGatewayRouteTableArn?: TransitGatewayRouteTableArn;
     /**
@@ -3827,7 +3839,7 @@ declare namespace NetworkManager {
      */
     TransitGatewayRouteTableArn?: TransitGatewayRouteTableArn;
   }
-  export type TunnelProtocol = "GRE"|string;
+  export type TunnelProtocol = "GRE"|"NO_ENCAP"|string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
