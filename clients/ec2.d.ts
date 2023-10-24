@@ -16431,7 +16431,7 @@ declare namespace EC2 {
   }
   export interface DescribeSpotPriceHistoryRequest {
     /**
-     * The filters.    availability-zone - The Availability Zone for which prices should be returned.    instance-type - The type of instance (for example, m3.medium).    product-description - The product description for the Spot price (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC)).    spot-price - The Spot price. The value must match exactly (or use wildcards; greater than or less than comparison is not supported).    timestamp - The time stamp of the Spot price history, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater than or less than comparison is not supported.  
+     * The filters.    availability-zone - The Availability Zone for which prices should be returned.    instance-type - The type of instance (for example, m3.medium).    product-description - The product description for the Spot price (Linux/UNIX | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) | Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows (Amazon VPC)).    spot-price - The Spot price. The value must match exactly (or use wildcards; greater than or less than comparison is not supported).    timestamp - The time stamp of the Spot price history, in UTC format (for example, ddd MMM dd HH:mm:ss UTC YYYY). You can use wildcards (* and ?). Greater than or less than comparison is not supported.  
      */
     Filters?: FilterList;
     /**
@@ -21962,7 +21962,7 @@ declare namespace EC2 {
   }
   export interface HibernationOptionsRequest {
     /**
-     * Set to true to enable your instance for hibernation. Default: false 
+     * Set to true to enable your instance for hibernation. For Spot Instances, if you set Configured to true, either omit the InstanceInterruptionBehavior parameter (for  SpotMarketOptions ), or set it to hibernate. When Configured is true:   If you omit InstanceInterruptionBehavior, it defaults to hibernate.   If you set InstanceInterruptionBehavior to a value other than hibernate, you'll get an error.   Default: false 
      */
     Configured?: Boolean;
   }
@@ -34779,7 +34779,7 @@ declare namespace EC2 {
      */
     ValidUntil?: DateTime;
     /**
-     * The behavior when a Spot Instance is interrupted. The default is terminate.
+     * The behavior when a Spot Instance is interrupted. If Configured (for  HibernationOptions ) is set to true, the InstanceInterruptionBehavior parameter is automatically set to hibernate. If you set it to stop or terminate, you'll get an error. If Configured (for  HibernationOptions ) is set to false or null, the InstanceInterruptionBehavior parameter is automatically set to terminate. You can also set it to stop or hibernate. For more information, see Interruption behavior in the Amazon EC2 User Guide.
      */
     InstanceInterruptionBehavior?: InstanceInterruptionBehavior;
   }

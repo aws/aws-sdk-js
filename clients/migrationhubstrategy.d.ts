@@ -92,6 +92,14 @@ declare class MigrationHubStrategy extends Service {
    */
   getServerStrategies(callback?: (err: AWSError, data: MigrationHubStrategy.Types.GetServerStrategiesResponse) => void): Request<MigrationHubStrategy.Types.GetServerStrategiesResponse, AWSError>;
   /**
+   * Retrieves a list of all the servers fetched from customer vCenter using Strategy Recommendation Collector.
+   */
+  listAnalyzableServers(params: MigrationHubStrategy.Types.ListAnalyzableServersRequest, callback?: (err: AWSError, data: MigrationHubStrategy.Types.ListAnalyzableServersResponse) => void): Request<MigrationHubStrategy.Types.ListAnalyzableServersResponse, AWSError>;
+  /**
+   * Retrieves a list of all the servers fetched from customer vCenter using Strategy Recommendation Collector.
+   */
+  listAnalyzableServers(callback?: (err: AWSError, data: MigrationHubStrategy.Types.ListAnalyzableServersResponse) => void): Request<MigrationHubStrategy.Types.ListAnalyzableServersResponse, AWSError>;
+  /**
    *  Retrieves a list of all the application components (processes). 
    */
   listApplicationComponents(params: MigrationHubStrategy.Types.ListApplicationComponentsRequest, callback?: (err: AWSError, data: MigrationHubStrategy.Types.ListApplicationComponentsResponse) => void): Request<MigrationHubStrategy.Types.ListApplicationComponentsResponse, AWSError>;
@@ -192,6 +200,25 @@ declare namespace MigrationHubStrategy {
     srcCodeOrDbAnalysisStatus?: SrcCodeOrDbAnalysisStatus;
   }
   export type AnalysisType = "SOURCE_CODE_ANALYSIS"|"DATABASE_ANALYSIS"|"RUNTIME_ANALYSIS"|"BINARY_ANALYSIS"|string;
+  export interface AnalyzableServerSummary {
+    /**
+     * The host name of the analyzable server.
+     */
+    hostname?: String;
+    /**
+     * The ip address of the analyzable server.
+     */
+    ipAddress?: String;
+    /**
+     * The data source of the analyzable server.
+     */
+    source?: String;
+    /**
+     * The virtual machine id of the analyzable server.
+     */
+    vmId?: String;
+  }
+  export type AnalyzableServerSummaryList = AnalyzableServerSummary[];
   export interface AnalyzerNameUnion {
     /**
      * The binary analyzer names.
@@ -380,6 +407,7 @@ declare namespace MigrationHubStrategy {
      */
     managementPreference?: ManagementPreference;
   }
+  export type AssessmentDataSourceType = "StrategyRecommendationsApplicationDataCollector"|"ManualImport"|"ApplicationDiscoveryService"|string;
   export type AssessmentStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|"STOPPED"|string;
   export type AssessmentStatusMessage = string;
   export interface AssessmentSummary {
@@ -580,7 +608,7 @@ declare namespace MigrationHubStrategy {
      */
     success?: Integer;
   }
-  export type DataSourceType = "ApplicationDiscoveryService"|"MPA"|"Import"|string;
+  export type DataSourceType = "ApplicationDiscoveryService"|"MPA"|"Import"|"StrategyRecommendationsApplicationDataCollector"|string;
   export interface DatabaseConfigDetail {
     /**
      *  AWS Secrets Manager key that holds the credentials that you use to connect to a database. 
@@ -906,6 +934,30 @@ declare namespace MigrationHubStrategy {
   export type InclusionStatus = "excludeFromAssessment"|"includeInAssessment"|string;
   export type Integer = number;
   export type InterfaceName = string;
+  export interface ListAnalyzableServersRequest {
+    /**
+     * The maximum number of items to include in the response. The maximum value is 100.
+     */
+    maxResults?: MaxResult;
+    /**
+     * The token from a previous call that you use to retrieve the next set of results. For example, if a previous call to this action returned 100 items, but you set maxResults to 10. You'll receive a set of 10 results along with a token. You then use the returned token to retrieve the next set of 10.
+     */
+    nextToken?: NextToken;
+    /**
+     * Specifies whether to sort by ascending (ASC) or descending (DESC) order.
+     */
+    sort?: SortOrder;
+  }
+  export interface ListAnalyzableServersResponse {
+    /**
+     * The list of analyzable servers with summary information about each server.
+     */
+    analyzableServers?: AnalyzableServerSummaryList;
+    /**
+     * The token you use to retrieve the next set of results, or null if there are no more results.
+     */
+    nextToken?: NextToken;
+  }
   export type ListAntipatternSeveritySummary = AntipatternSeveritySummary[];
   export type ListApplicationComponentStatusSummary = ApplicationComponentStatusSummary[];
   export type ListApplicationComponentSummary = ApplicationComponentSummary[];
@@ -1379,6 +1431,10 @@ declare namespace MigrationHubStrategy {
   export type SourceVersion = string;
   export type SrcCodeOrDbAnalysisStatus = "ANALYSIS_TO_BE_SCHEDULED"|"ANALYSIS_STARTED"|"ANALYSIS_SUCCESS"|"ANALYSIS_FAILED"|"ANALYSIS_PARTIAL_SUCCESS"|"UNCONFIGURED"|"CONFIGURED"|string;
   export interface StartAssessmentRequest {
+    /**
+     * The data source type of an assessment to be started.
+     */
+    assessmentDataSourceType?: AssessmentDataSourceType;
     /**
      * List of criteria for assessment.
      */

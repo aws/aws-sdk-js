@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1479.0-->
+<!--LATEST=2.1480.0-->
 <!--ENTRYINSERT-->
+
+## 2.1480.0
+* feature: CodePipeline: Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2.
+* feature: EC2: This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation.
+* feature: EKS: Added support for Cluster Subnet and Security Group mutability.
+* feature: IAM: Add the partitional endpoint for IAM in iso-f.
+* feature: MigrationHubConfig: This release introduces DeleteHomeRegionControl API that customers can use to delete the Migration Hub Home Region configuration
+* feature: MigrationHubStrategy: This release introduces multi-data-source feature in Migration Hub Strategy Recommendations. This feature now supports vCenter as a data source to fetch inventory in addition to ADS and Import from file workflow that is currently supported with MHSR collector.
+* feature: OpenSearchServerless: This release includes the following new APIs: CreateLifecyclePolicy, UpdateLifecyclePolicy, BatchGetLifecyclePolicy, DeleteLifecyclePolicy, ListLifecyclePolicies and BatchGetEffectiveLifecyclePolicy to support the data lifecycle management feature.
 
 ## 2.1479.0
 * feature: MarketplaceCommerceAnalytics: The StartSupportDataExport operation has been deprecated as part of the Product Support Connection deprecation. As of December 2022, Product Support Connection is no longer supported.

@@ -1322,6 +1322,35 @@ declare namespace CodePipeline {
      */
     jobDetails?: ThirdPartyJobDetails;
   }
+  export interface GitConfiguration {
+    /**
+     * The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.  You can only specify one trigger configuration per source action. 
+     */
+    sourceActionName: ActionName;
+    /**
+     * The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details.  Git tags is the only supported event type. 
+     */
+    push?: GitPushFilterList;
+  }
+  export interface GitPushFilter {
+    /**
+     * The field that contains the details for the Git tags trigger configuration.
+     */
+    tags?: GitTagFilterCriteria;
+  }
+  export type GitPushFilterList = GitPushFilter[];
+  export interface GitTagFilterCriteria {
+    /**
+     * The list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+     */
+    includes?: GitTagPatternList;
+    /**
+     * The list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+     */
+    excludes?: GitTagPatternList;
+  }
+  export type GitTagNamePattern = string;
+  export type GitTagPatternList = GitTagNamePattern[];
   export interface InputArtifact {
     /**
      * The name of the artifact to be worked on (for example, "My App"). Artifacts are the files that are worked on by actions in the pipeline. See the action configuration for each action for details about artifact parameters. For example, the S3 source action input artifact is a file name (or file path), and the files are generally provided as a ZIP file. Example artifact name: SampleApp_Windows.zip The input artifact of an action must exactly match the output artifact declared in a preceding action, but the input artifact does not have to be the next action in strict sequence from the action that provided the output artifact. Actions in parallel can declare different output artifacts, which are in turn consumed by different following actions.
@@ -1660,6 +1689,18 @@ declare namespace CodePipeline {
      * The version number of the pipeline. A new pipeline always has a version number of 1. This number is incremented when a pipeline is updated.
      */
     version?: PipelineVersion;
+    /**
+     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.
+     */
+    pipelineType?: PipelineType;
+    /**
+     * The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.  When a trigger configuration is specified, default change detection for repository and branch commits is disabled. 
+     */
+    triggers?: PipelineTriggerDeclarationList;
+    /**
+     * A list that defines the pipeline variables for a pipeline resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9@\-_]+.
+     */
+    variables?: PipelineVariableDeclarationList;
   }
   export interface PipelineExecution {
     /**
@@ -1686,6 +1727,11 @@ declare namespace CodePipeline {
      * A list of ArtifactRevision objects included in a pipeline execution.
      */
     artifactRevisions?: ArtifactRevisionList;
+    trigger?: ExecutionTrigger;
+    /**
+     * A list of pipeline variables used for the pipeline execution.
+     */
+    variables?: ResolvedPipelineVariableList;
   }
   export type PipelineExecutionId = string;
   export type PipelineExecutionStatus = "Cancelled"|"InProgress"|"Stopped"|"Stopping"|"Succeeded"|"Superseded"|"Failed"|string;
@@ -1752,6 +1798,10 @@ declare namespace CodePipeline {
      */
     version?: PipelineVersion;
     /**
+     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.
+     */
+    pipelineType?: PipelineType;
+    /**
      * The date and time the pipeline was created, in timestamp format.
      */
     created?: Timestamp;
@@ -1760,6 +1810,48 @@ declare namespace CodePipeline {
      */
     updated?: Timestamp;
   }
+  export interface PipelineTriggerDeclaration {
+    /**
+     * The source provider for the event, such as connections configured for a repository with Git tags, for the specified trigger configuration.
+     */
+    providerType: PipelineTriggerProviderType;
+    /**
+     * Provides the filter criteria and the source stage for the repository event that starts the pipeline, such as Git tags.
+     */
+    gitConfiguration: GitConfiguration;
+  }
+  export type PipelineTriggerDeclarationList = PipelineTriggerDeclaration[];
+  export type PipelineTriggerProviderType = "CodeStarSourceConnection"|string;
+  export type PipelineType = "V1"|"V2"|string;
+  export interface PipelineVariable {
+    /**
+     * The name of a pipeline-level variable.
+     */
+    name: PipelineVariableName;
+    /**
+     * The value of a pipeline-level variable.
+     */
+    value: PipelineVariableValue;
+  }
+  export interface PipelineVariableDeclaration {
+    /**
+     * The name of a pipeline-level variable.
+     */
+    name: PipelineVariableName;
+    /**
+     * The value of a pipeline-level variable.
+     */
+    defaultValue?: PipelineVariableValue;
+    /**
+     * The description of a pipeline-level variable. It's used to add additional context about the variable, and not being used at time when pipeline executes.
+     */
+    description?: PipelineVariableDescription;
+  }
+  export type PipelineVariableDeclarationList = PipelineVariableDeclaration[];
+  export type PipelineVariableDescription = string;
+  export type PipelineVariableList = PipelineVariable[];
+  export type PipelineVariableName = string;
+  export type PipelineVariableValue = string;
   export type PipelineVersion = number;
   export type PolicyStatementsTemplate = string;
   export interface PollForJobsInput {
@@ -1951,6 +2043,17 @@ declare namespace CodePipeline {
   export interface RegisterWebhookWithThirdPartyOutput {
   }
   export type ResolvedActionConfigurationMap = {[key: string]: String};
+  export interface ResolvedPipelineVariable {
+    /**
+     * The name of a pipeline-level variable.
+     */
+    name?: String;
+    /**
+     * The resolved value of a pipeline-level variable.
+     */
+    resolvedValue?: String;
+  }
+  export type ResolvedPipelineVariableList = ResolvedPipelineVariable[];
   export type ResourceArn = string;
   export interface RetryStageExecutionInput {
     /**
@@ -2087,6 +2190,10 @@ declare namespace CodePipeline {
      * The name of the pipeline to start.
      */
     name: PipelineName;
+    /**
+     * A list that overrides pipeline variables for a pipeline execution that's being started. Variable names must match [A-Za-z0-9@\-_]+, and the values can be anything except an empty string.
+     */
+    variables?: PipelineVariableList;
     /**
      * The system-generated unique ID used to identify a unique execution request.
      */
@@ -2237,7 +2344,7 @@ declare namespace CodePipeline {
     disabledReason?: DisabledReason;
   }
   export type TriggerDetail = string;
-  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|string;
+  export type TriggerType = "CreatePipeline"|"StartPipelineExecution"|"PollForSourceChanges"|"Webhook"|"CloudWatchEvent"|"PutActionRevision"|"WebhookV2"|string;
   export interface UntagResourceInput {
     /**
      *  The Amazon Resource Name (ARN) of the resource to remove tags from.

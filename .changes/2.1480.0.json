@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release updates the documentation for InstanceInterruptionBehavior and HibernationOptionsRequest to more accurately describe the behavior of these two parameters when using Spot hibernation."
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Added support for Cluster Subnet and Security Group mutability."
+    },
+    {
+        "type": "feature",
+        "category": "IAM",
+        "description": "Add the partitional endpoint for IAM in iso-f."
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHubConfig",
+        "description": "This release introduces DeleteHomeRegionControl API that customers can use to delete the Migration Hub Home Region configuration"
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHubStrategy",
+        "description": "This release introduces multi-data-source feature in Migration Hub Strategy Recommendations. This feature now supports vCenter as a data source to fetch inventory in addition to ADS and Import from file workflow that is currently supported with MHSR collector."
+    },
+    {
+        "type": "feature",
+        "category": "OpenSearchServerless",
+        "description": "This release includes the following new APIs: CreateLifecyclePolicy, UpdateLifecyclePolicy, BatchGetLifecyclePolicy, DeleteLifecyclePolicy, ListLifecyclePolicies and BatchGetEffectiveLifecyclePolicy to support the data lifecycle management feature."
+    }
+]

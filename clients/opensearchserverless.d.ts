@@ -20,6 +20,22 @@ declare class OpenSearchServerless extends Service {
    */
   batchGetCollection(callback?: (err: AWSError, data: OpenSearchServerless.Types.BatchGetCollectionResponse) => void): Request<OpenSearchServerless.Types.BatchGetCollectionResponse, AWSError>;
   /**
+   * Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes. For more information, see Viewing data lifecycle policies.
+   */
+  batchGetEffectiveLifecyclePolicy(params: OpenSearchServerless.Types.BatchGetEffectiveLifecyclePolicyRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.BatchGetEffectiveLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.BatchGetEffectiveLifecyclePolicyResponse, AWSError>;
+  /**
+   * Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes. For more information, see Viewing data lifecycle policies.
+   */
+  batchGetEffectiveLifecyclePolicy(callback?: (err: AWSError, data: OpenSearchServerless.Types.BatchGetEffectiveLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.BatchGetEffectiveLifecyclePolicyResponse, AWSError>;
+  /**
+   * Returns one or more configured OpenSearch Serverless lifecycle policies. For more information, see Viewing data lifecycle policies.
+   */
+  batchGetLifecyclePolicy(params: OpenSearchServerless.Types.BatchGetLifecyclePolicyRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.BatchGetLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.BatchGetLifecyclePolicyResponse, AWSError>;
+  /**
+   * Returns one or more configured OpenSearch Serverless lifecycle policies. For more information, see Viewing data lifecycle policies.
+   */
+  batchGetLifecyclePolicy(callback?: (err: AWSError, data: OpenSearchServerless.Types.BatchGetLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.BatchGetLifecyclePolicyResponse, AWSError>;
+  /**
    * Returns attributes for one or more VPC endpoints associated with the current account. For more information, see Access Amazon OpenSearch Serverless using an interface endpoint.
    */
   batchGetVpcEndpoint(params: OpenSearchServerless.Types.BatchGetVpcEndpointRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.BatchGetVpcEndpointResponse) => void): Request<OpenSearchServerless.Types.BatchGetVpcEndpointResponse, AWSError>;
@@ -43,6 +59,14 @@ declare class OpenSearchServerless extends Service {
    * Creates a new OpenSearch Serverless collection. For more information, see Creating and managing Amazon OpenSearch Serverless collections.
    */
   createCollection(callback?: (err: AWSError, data: OpenSearchServerless.Types.CreateCollectionResponse) => void): Request<OpenSearchServerless.Types.CreateCollectionResponse, AWSError>;
+  /**
+   * Creates a lifecyle policy to be applied to OpenSearch Serverless indexes. Lifecycle policies define the number of days or hours to retain the data on an OpenSearch Serverless index. For more information, see Creating data lifecycle policies.
+   */
+  createLifecyclePolicy(params: OpenSearchServerless.Types.CreateLifecyclePolicyRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.CreateLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.CreateLifecyclePolicyResponse, AWSError>;
+  /**
+   * Creates a lifecyle policy to be applied to OpenSearch Serverless indexes. Lifecycle policies define the number of days or hours to retain the data on an OpenSearch Serverless index. For more information, see Creating data lifecycle policies.
+   */
+  createLifecyclePolicy(callback?: (err: AWSError, data: OpenSearchServerless.Types.CreateLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.CreateLifecyclePolicyResponse, AWSError>;
   /**
    * Specifies a security configuration for OpenSearch Serverless. For more information, see SAML authentication for Amazon OpenSearch Serverless. 
    */
@@ -83,6 +107,14 @@ declare class OpenSearchServerless extends Service {
    * Deletes an OpenSearch Serverless collection. For more information, see Creating and managing Amazon OpenSearch Serverless collections.
    */
   deleteCollection(callback?: (err: AWSError, data: OpenSearchServerless.Types.DeleteCollectionResponse) => void): Request<OpenSearchServerless.Types.DeleteCollectionResponse, AWSError>;
+  /**
+   * Deletes an OpenSearch Serverless lifecycle policy. For more information, see Deleting data lifecycle policies.
+   */
+  deleteLifecyclePolicy(params: OpenSearchServerless.Types.DeleteLifecyclePolicyRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.DeleteLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.DeleteLifecyclePolicyResponse, AWSError>;
+  /**
+   * Deletes an OpenSearch Serverless lifecycle policy. For more information, see Deleting data lifecycle policies.
+   */
+  deleteLifecyclePolicy(callback?: (err: AWSError, data: OpenSearchServerless.Types.DeleteLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
    * Deletes a security configuration for OpenSearch Serverless. For more information, see SAML authentication for Amazon OpenSearch Serverless.
    */
@@ -164,6 +196,14 @@ declare class OpenSearchServerless extends Service {
    */
   listCollections(callback?: (err: AWSError, data: OpenSearchServerless.Types.ListCollectionsResponse) => void): Request<OpenSearchServerless.Types.ListCollectionsResponse, AWSError>;
   /**
+   * Returns a list of OpenSearch Serverless lifecycle policies. For more information, see Viewing data lifecycle policies.
+   */
+  listLifecyclePolicies(params: OpenSearchServerless.Types.ListLifecyclePoliciesRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.ListLifecyclePoliciesResponse) => void): Request<OpenSearchServerless.Types.ListLifecyclePoliciesResponse, AWSError>;
+  /**
+   * Returns a list of OpenSearch Serverless lifecycle policies. For more information, see Viewing data lifecycle policies.
+   */
+  listLifecyclePolicies(callback?: (err: AWSError, data: OpenSearchServerless.Types.ListLifecyclePoliciesResponse) => void): Request<OpenSearchServerless.Types.ListLifecyclePoliciesResponse, AWSError>;
+  /**
    * Returns information about configured OpenSearch Serverless security configurations. For more information, see SAML authentication for Amazon OpenSearch Serverless.
    */
   listSecurityConfigs(params: OpenSearchServerless.Types.ListSecurityConfigsRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.ListSecurityConfigsResponse) => void): Request<OpenSearchServerless.Types.ListSecurityConfigsResponse, AWSError>;
@@ -235,6 +275,14 @@ declare class OpenSearchServerless extends Service {
    * Updates an OpenSearch Serverless collection.
    */
   updateCollection(callback?: (err: AWSError, data: OpenSearchServerless.Types.UpdateCollectionResponse) => void): Request<OpenSearchServerless.Types.UpdateCollectionResponse, AWSError>;
+  /**
+   * Updates an OpenSearch Serverless access policy. For more information, see Updating data lifecycle policies.
+   */
+  updateLifecyclePolicy(params: OpenSearchServerless.Types.UpdateLifecyclePolicyRequest, callback?: (err: AWSError, data: OpenSearchServerless.Types.UpdateLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.UpdateLifecyclePolicyResponse, AWSError>;
+  /**
+   * Updates an OpenSearch Serverless access policy. For more information, see Updating data lifecycle policies.
+   */
+  updateLifecyclePolicy(callback?: (err: AWSError, data: OpenSearchServerless.Types.UpdateLifecyclePolicyResponse) => void): Request<OpenSearchServerless.Types.UpdateLifecyclePolicyResponse, AWSError>;
   /**
    * Updates a security configuration for OpenSearch Serverless. For more information, see SAML authentication for Amazon OpenSearch Serverless.
    */
@@ -320,7 +368,7 @@ declare namespace OpenSearchServerless {
      */
     policyVersion?: PolicyVersion;
     /**
-     * The type of access policy. Currently the only available type is data.
+     * The type of access policy. Currently, the only available type is data.
      */
     type?: AccessPolicyType;
   }
@@ -349,6 +397,38 @@ declare namespace OpenSearchServerless {
      */
     collectionErrorDetails?: CollectionErrorDetails;
   }
+  export interface BatchGetEffectiveLifecyclePolicyRequest {
+    /**
+     * The unique identifiers of policy types and resource names.
+     */
+    resourceIdentifiers: LifecyclePolicyResourceIdentifiers;
+  }
+  export interface BatchGetEffectiveLifecyclePolicyResponse {
+    /**
+     * A list of lifecycle policies applied to the OpenSearch Serverless indexes.
+     */
+    effectiveLifecyclePolicyDetails?: EffectiveLifecyclePolicyDetails;
+    /**
+     * A list of resources for which retrieval failed.
+     */
+    effectiveLifecyclePolicyErrorDetails?: EffectiveLifecyclePolicyErrorDetails;
+  }
+  export interface BatchGetLifecyclePolicyRequest {
+    /**
+     * The unique identifiers of policy types and policy names.
+     */
+    identifiers: LifecyclePolicyIdentifiers;
+  }
+  export interface BatchGetLifecyclePolicyResponse {
+    /**
+     * A list of lifecycle policies matched to the input policy name and policy type.
+     */
+    lifecyclePolicyDetails?: LifecyclePolicyDetails;
+    /**
+     * A list of lifecycle policy names and policy types for which retrieval failed.
+     */
+    lifecyclePolicyErrorDetails?: LifecyclePolicyErrorDetails;
+  }
   export interface BatchGetVpcEndpointRequest {
     /**
      * A list of VPC endpoint identifiers.
@@ -365,6 +445,7 @@ declare namespace OpenSearchServerless {
      */
     vpcEndpointErrorDetails?: VpcEndpointErrorDetails;
   }
+  export type Boolean = boolean;
   export interface CapacityLimits {
     /**
      * The maximum indexing capacity for collections.
@@ -574,6 +655,34 @@ declare namespace OpenSearchServerless {
      */
     createCollectionDetail?: CreateCollectionDetail;
   }
+  export interface CreateLifecyclePolicyRequest {
+    /**
+     * A unique, case-sensitive identifier to ensure idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * A description of the lifecycle policy.
+     */
+    description?: PolicyDescription;
+    /**
+     * The name of the lifecycle policy.
+     */
+    name: PolicyName;
+    /**
+     * The JSON policy document to use as the content for the lifecycle policy.
+     */
+    policy: PolicyDocument;
+    /**
+     * The type of lifecycle policy.
+     */
+    type: LifecyclePolicyType;
+  }
+  export interface CreateLifecyclePolicyResponse {
+    /**
+     * Details about the created lifecycle policy.
+     */
+    lifecyclePolicyDetail?: LifecyclePolicyDetail;
+  }
   export interface CreateSecurityConfigRequest {
     /**
      * Unique, case-sensitive identifier to ensure idempotency of the request.
@@ -718,6 +827,22 @@ declare namespace OpenSearchServerless {
      */
     deleteCollectionDetail?: DeleteCollectionDetail;
   }
+  export interface DeleteLifecyclePolicyRequest {
+    /**
+     * Unique, case-sensitive identifier to ensure idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The name of the policy to delete.
+     */
+    name: PolicyName;
+    /**
+     * The type of lifecycle policy.
+     */
+    type: LifecyclePolicyType;
+  }
+  export interface DeleteLifecyclePolicyResponse {
+  }
   export interface DeleteSecurityConfigRequest {
     /**
      * Unique, case-sensitive identifier to ensure idempotency of the request.
@@ -778,13 +903,59 @@ declare namespace OpenSearchServerless {
   }
   export interface Document {
   }
+  export interface EffectiveLifecyclePolicyDetail {
+    /**
+     * The minimum number of index retention days set. That is an optional param that will return as true if the minimum number of days or hours is not set to a index resource.
+     */
+    noMinRetentionPeriod?: Boolean;
+    /**
+     * The name of the lifecycle policy.
+     */
+    policyName?: PolicyName;
+    /**
+     * The name of the OpenSearch Serverless index resource.
+     */
+    resource?: Resource;
+    /**
+     * The type of OpenSearch Serverless resource. Currently, the only supported resource is index.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The minimum number of index retention in days or hours. This is an optional parameter that will return only if it’s set.
+     */
+    retentionPeriod?: String;
+    /**
+     * The type of lifecycle policy.
+     */
+    type?: LifecyclePolicyType;
+  }
+  export type EffectiveLifecyclePolicyDetails = EffectiveLifecyclePolicyDetail[];
+  export interface EffectiveLifecyclePolicyErrorDetail {
+    /**
+     * The error code for the request.
+     */
+    errorCode?: String;
+    /**
+     * A description of the error. For example, The specified Index resource is not found.
+     */
+    errorMessage?: String;
+    /**
+     * The name of OpenSearch Serverless index resource.
+     */
+    resource?: Resource;
+    /**
+     * The type of lifecycle policy.
+     */
+    type?: LifecyclePolicyType;
+  }
+  export type EffectiveLifecyclePolicyErrorDetails = EffectiveLifecyclePolicyErrorDetail[];
   export interface GetAccessPolicyRequest {
     /**
      * The name of the access policy.
      */
     name: PolicyName;
     /**
-     * Tye type of policy. Currently the only supported value is data.
+     * Tye type of policy. Currently, the only supported value is data.
      */
     type: AccessPolicyType;
   }
@@ -809,6 +980,10 @@ declare namespace OpenSearchServerless {
      * Information about the data access policies in your account.
      */
     AccessPolicyStats?: AccessPolicyStats;
+    /**
+     * Information about the lifecycle policies in your account.
+     */
+    LifecyclePolicyStats?: LifecyclePolicyStats;
     /**
      * Information about the security configurations in your account.
      */
@@ -851,6 +1026,113 @@ declare namespace OpenSearchServerless {
     securityPolicyDetail?: SecurityPolicyDetail;
   }
   export type IndexingCapacityValue = number;
+  export interface LifecyclePolicyDetail {
+    /**
+     * The date the lifecycle policy was created.
+     */
+    createdDate?: Long;
+    /**
+     * The description of the lifecycle policy.
+     */
+    description?: PolicyDescription;
+    /**
+     * The timestamp of when the lifecycle policy was last modified.
+     */
+    lastModifiedDate?: Long;
+    /**
+     * The name of the lifecycle policy.
+     */
+    name?: PolicyName;
+    /**
+     * The JSON policy document without any whitespaces.
+     */
+    policy?: Document;
+    /**
+     * The version of the lifecycle policy.
+     */
+    policyVersion?: PolicyVersion;
+    /**
+     * The type of lifecycle policy.
+     */
+    type?: LifecyclePolicyType;
+  }
+  export type LifecyclePolicyDetails = LifecyclePolicyDetail[];
+  export interface LifecyclePolicyErrorDetail {
+    /**
+     * The error code for the request. For example, NOT_FOUND.
+     */
+    errorCode?: String;
+    /**
+     * A description of the error. For example, The specified Lifecycle Policy is not found.
+     */
+    errorMessage?: String;
+    /**
+     * The name of the lifecycle policy.
+     */
+    name?: PolicyName;
+    /**
+     * The type of lifecycle policy.
+     */
+    type?: LifecyclePolicyType;
+  }
+  export type LifecyclePolicyErrorDetails = LifecyclePolicyErrorDetail[];
+  export interface LifecyclePolicyIdentifier {
+    /**
+     * The name of the lifecycle policy.
+     */
+    name: PolicyName;
+    /**
+     * The type of lifecycle policy.
+     */
+    type: LifecyclePolicyType;
+  }
+  export type LifecyclePolicyIdentifiers = LifecyclePolicyIdentifier[];
+  export interface LifecyclePolicyResourceIdentifier {
+    /**
+     * The name of the OpenSearch Serverless ilndex resource.
+     */
+    resource: ResourceName;
+    /**
+     * The type of lifecycle policy.
+     */
+    type: LifecyclePolicyType;
+  }
+  export type LifecyclePolicyResourceIdentifiers = LifecyclePolicyResourceIdentifier[];
+  export interface LifecyclePolicyStats {
+    /**
+     * The number of retention lifecycle policies in the current account.
+     */
+    RetentionPolicyCount?: Long;
+  }
+  export type LifecyclePolicySummaries = LifecyclePolicySummary[];
+  export interface LifecyclePolicySummary {
+    /**
+     * The Epoch time when the lifecycle policy was created.
+     */
+    createdDate?: Long;
+    /**
+     * The description of the lifecycle policy.
+     */
+    description?: PolicyDescription;
+    /**
+     * The date and time when the lifecycle policy was last modified.
+     */
+    lastModifiedDate?: Long;
+    /**
+     * The name of the lifecycle policy.
+     */
+    name?: PolicyName;
+    /**
+     * The version of the lifecycle policy.
+     */
+    policyVersion?: PolicyVersion;
+    /**
+     * The type of lifecycle policy.
+     */
+    type?: LifecyclePolicyType;
+  }
+  export type LifecyclePolicyType = "retention"|string;
+  export type LifecycleResource = string;
   export interface ListAccessPoliciesRequest {
     /**
      * An optional parameter that specifies the maximum number of results to return. You can use nextToken to get the next page of results. The default is 20.
@@ -883,7 +1165,7 @@ declare namespace OpenSearchServerless {
   }
   export interface ListCollectionsRequest {
     /**
-     * List of filter names and values that you can use for requests.
+     *  A list of filter names and values that you can use for requests.
      */
     collectionFilters?: CollectionFilters;
     /**
@@ -901,6 +1183,36 @@ declare namespace OpenSearchServerless {
      * Details about each collection.
      */
     collectionSummaries?: CollectionSummaries;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    nextToken?: String;
+  }
+  export interface ListLifecyclePoliciesRequest {
+    /**
+     * An optional parameter that specifies the maximum number of results to return. You can use use nextToken to get the next page of results. The default is 10.
+     */
+    maxResults?: ListLifecyclePoliciesRequestMaxResultsInteger;
+    /**
+     * If your initial ListLifecyclePolicies operation returns a nextToken, you can include the returned nextToken in subsequent ListLifecyclePolicies operations, which returns results in the next page.
+     */
+    nextToken?: String;
+    /**
+     * Resource filters that policies can apply to. Currently, the only supported resource type is index.
+     */
+    resources?: ListLifecyclePoliciesRequestResourcesList;
+    /**
+     * The type of lifecycle policy.
+     */
+    type: LifecyclePolicyType;
+  }
+  export type ListLifecyclePoliciesRequestMaxResultsInteger = number;
+  export type ListLifecyclePoliciesRequestResourcesList = LifecycleResource[];
+  export interface ListLifecyclePoliciesResponse {
+    /**
+     * Details about the requested lifecycle policies.
+     */
+    lifecyclePolicySummaries?: LifecyclePolicySummaries;
     /**
      * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
      */
@@ -1004,6 +1316,8 @@ declare namespace OpenSearchServerless {
   export type PolicyName = string;
   export type PolicyVersion = string;
   export type Resource = string;
+  export type ResourceName = string;
+  export type ResourceType = "index"|string;
   export interface SamlConfigOptions {
     /**
      * The group attribute for this SAML integration.
@@ -1295,6 +1609,38 @@ declare namespace OpenSearchServerless {
      * Details about the updated collection.
      */
     updateCollectionDetail?: UpdateCollectionDetail;
+  }
+  export interface UpdateLifecyclePolicyRequest {
+    /**
+     * A unique, case-sensitive identifier to ensure idempotency of the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * A description of the lifecycle policy.
+     */
+    description?: PolicyDescription;
+    /**
+     * The name of the policy.
+     */
+    name: PolicyName;
+    /**
+     * The JSON policy document to use as the content for the lifecycle policy.
+     */
+    policy?: PolicyDocument;
+    /**
+     * The version of the policy being updated.
+     */
+    policyVersion: PolicyVersion;
+    /**
+     *  The type of lifecycle policy.
+     */
+    type: LifecyclePolicyType;
+  }
+  export interface UpdateLifecyclePolicyResponse {
+    /**
+     * Details about the updated lifecycle policy.
+     */
+    lifecyclePolicyDetail?: LifecyclePolicyDetail;
   }
   export interface UpdateSecurityConfigRequest {
     /**
