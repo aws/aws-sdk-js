@@ -1324,12 +1324,17 @@ declare namespace GroundStation {
   export type IpV4Address = string;
   export type JsonString = string;
   export type KeyAliasArn = string;
+  export type KeyAliasName = string;
   export type KeyArn = string;
   export interface KmsKey {
     /**
      * KMS Alias Arn.
      */
     kmsAliasArn?: KeyAliasArn;
+    /**
+     * KMS Alias Name.
+     */
+    kmsAliasName?: KeyAliasName;
     /**
      * KMS Key Arn.
      */

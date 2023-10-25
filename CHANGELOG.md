@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1480.0-->
+<!--LATEST=2.1481.0-->
 <!--ENTRYINSERT-->
+
+## 2.1481.0
+* feature: ConnectCases: Increase maximum length of CommentBody to 3000, and increase maximum length of StringValue to 1500
+* feature: GroundStation: This release will allow KMS alias names to be used when creating Mission Profiles
+* feature: IAM: Updates to GetAccessKeyLastUsed action to replace NoSuchEntity error with AccessDeniedException error.
 
 ## 2.1480.0
 * feature: CodePipeline: Add ability to trigger pipelines from git tags, define variables at pipeline level and new pipeline type V2.

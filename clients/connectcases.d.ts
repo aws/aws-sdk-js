@@ -28,11 +28,11 @@ declare class ConnectCases extends Service {
    */
   batchPutFieldOptions(callback?: (err: AWSError, data: ConnectCases.Types.BatchPutFieldOptionsResponse) => void): Request<ConnectCases.Types.BatchPutFieldOptionsResponse, AWSError>;
   /**
-   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.  The following fields are required when creating a case:  &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;/note&gt; 
+   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types. The following fields are required when creating a case:  &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
    */
   createCase(params: ConnectCases.Types.CreateCaseRequest, callback?: (err: AWSError, data: ConnectCases.Types.CreateCaseResponse) => void): Request<ConnectCases.Types.CreateCaseResponse, AWSError>;
   /**
-   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types.  The following fields are required when creating a case:  &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your AWS Region:your AWS account ID:domains/profiles domain name/profiles/profile ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; &lt;/note&gt; 
+   * Creates a case in the specified Cases domain. Case system and custom fields are taken as an array id/value pairs with a declared data types. The following fields are required when creating a case:  &lt;ul&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;customer_id&lt;/code&gt; - You must provide the full customer profile ARN in this format: &lt;code&gt;arn:aws:profile:your_AWS_Region:your_AWS_account ID:domains/your_profiles_domain_name/profiles/profile_ID&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;li&gt; &lt;p&gt; &lt;code&gt;title&lt;/code&gt; &lt;/p&gt; &lt;/li&gt; &lt;/ul&gt; 
    */
   createCase(callback?: (err: AWSError, data: ConnectCases.Types.CreateCaseResponse) => void): Request<ConnectCases.Types.CreateCaseResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class ConnectCases extends Service {
    */
   listTemplates(callback?: (err: AWSError, data: ConnectCases.Types.ListTemplatesResponse) => void): Request<ConnectCases.Types.ListTemplatesResponse, AWSError>;
   /**
-   * API for adding case event publishing configuration
+   * Adds case event publishing configuration. For a complete list of fields you can add to the event message, see Create case fields in the Amazon Connect Administrator Guide 
    */
   putCaseEventConfiguration(params: ConnectCases.Types.PutCaseEventConfigurationRequest, callback?: (err: AWSError, data: ConnectCases.Types.PutCaseEventConfigurationResponse) => void): Request<ConnectCases.Types.PutCaseEventConfigurationResponse, AWSError>;
   /**
-   * API for adding case event publishing configuration
+   * Adds case event publishing configuration. For a complete list of fields you can add to the event message, see Create case fields in the Amazon Connect Administrator Guide 
    */
   putCaseEventConfiguration(callback?: (err: AWSError, data: ConnectCases.Types.PutCaseEventConfigurationResponse) => void): Request<ConnectCases.Types.PutCaseEventConfigurationResponse, AWSError>;
   /**
@@ -1444,7 +1444,7 @@ declare namespace ConnectCases {
   }
   export interface UpdateLayoutRequest {
     /**
-     * Information about which fields will be present in the layout, the order of the fields, and a read-only attribute of the field. 
+     * Information about which fields will be present in the layout, the order of the fields.
      */
     content?: LayoutContent;
     /**
