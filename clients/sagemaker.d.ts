@@ -85,19 +85,19 @@ declare class SageMaker extends Service {
    */
   createArtifact(callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, and non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, non-tabular problem types such as image or text classification, and text generation (LLMs fine-tuning). Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
    */
   createAutoMLJob(params: SageMaker.Types.CreateAutoMLJobRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, and non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.  We recommend using the new versions CreateAutoMLJobV2 and DescribeAutoMLJobV2, which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, non-tabular problem types such as image or text classification, and text generation (LLMs fine-tuning). Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  You can find the best-performing model after you run an AutoML job by calling DescribeAutoMLJobV2 (recommended) or DescribeAutoMLJob.
    */
   createAutoMLJob(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobResponse) => void): Request<SageMaker.Types.CreateAutoMLJobResponse, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, and non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, non-tabular problem types such as image or text classification, and text generation (LLMs fine-tuning). Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
    */
   createAutoMLJobV2(params: SageMaker.Types.CreateAutoMLJobV2Request, callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
-   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, and non-tabular problem types such as image or text classification. Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
+   * Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.   CreateAutoMLJobV2 and DescribeAutoMLJobV2 are new versions of CreateAutoMLJob and DescribeAutoMLJob which offer backward compatibility.  CreateAutoMLJobV2 can manage tabular problem types identical to those of its previous version CreateAutoMLJob, as well as time-series forecasting, non-tabular problem types such as image or text classification, and text generation (LLMs fine-tuning). Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to CreateAutoMLJobV2.  For the list of available problem types supported by CreateAutoMLJobV2, see AutoMLProblemTypeConfig. You can find the best-performing model after you run an AutoML job V2 by calling DescribeAutoMLJobV2.
    */
   createAutoMLJobV2(callback?: (err: AWSError, data: SageMaker.Types.CreateAutoMLJobV2Response) => void): Request<SageMaker.Types.CreateAutoMLJobV2Response, AWSError>;
   /**
@@ -3244,7 +3244,7 @@ declare namespace SageMaker {
      */
     ChannelType?: AutoMLChannelType;
     /**
-     * The content type of the data from the input source. The following are the allowed content types for different problems:   For tabular problem types: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For image classification: image/png, image/jpeg, or image/*. The default value is image/*.   For text classification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For time-series forecasting: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
+     * The content type of the data from the input source. The following are the allowed content types for different problems:   For tabular problem types: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For image classification: image/png, image/jpeg, or image/*. The default value is image/*.   For text classification: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For time-series forecasting: text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.   For text generation (LLMs fine-tuning): text/csv;header=present or x-application/vnd.amazon+parquet. The default value is text/csv;header=present.  
      */
     ContentType?: ContentType;
     /**
@@ -3258,7 +3258,7 @@ declare namespace SageMaker {
   }
   export interface AutoMLJobCompletionCriteria {
     /**
-     * The maximum number of times a training job is allowed to run. For text and image classification, as well as time-series forecasting problem types, the supported value is 1. For tabular problem types, the maximum value is 750.
+     * The maximum number of times a training job is allowed to run. For text and image classification, time-series forecasting, as well as text generation (LLMs fine-tuning) problem types, the supported value is 1. For tabular problem types, the maximum value is 750.
      */
     MaxCandidates?: MaxCandidates;
     /**
@@ -3296,7 +3296,7 @@ declare namespace SageMaker {
   export type AutoMLJobName = string;
   export interface AutoMLJobObjective {
     /**
-     * The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset. For the list of all available metrics supported by Autopilot, see Autopilot metrics. If you do not specify a metric explicitly, the default behavior is to automatically use:   For tabular problem types:   Regression: MSE.   Binary classification: F1.   Multiclass classification: Accuracy.     For image or text classification problem types: Accuracy    For time-series forecasting problem types: AverageWeightedQuantileLoss   
+     * The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model's parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset. The list of available metrics supported by Autopilot and the default metric applied when you do not specify a metric name explicitly depend on the problem type.   For tabular problem types:   List of available metrics:     Regression: InferenceLatency, MAE, MSE, R2, RMSE     Binary classification: Accuracy, AUC, BalancedAccuracy, F1, InferenceLatency, LogLoss, Precision, Recall     Multiclass classification: Accuracy, BalancedAccuracy, F1macro, InferenceLatency, LogLoss, PrecisionMacro, RecallMacro    For a description of each metric, see Autopilot metrics for classification and regression.   Default objective metrics:   Regression: MSE.   Binary classification: F1.   Multiclass classification: Accuracy.       For image or text classification problem types:   List of available metrics: Accuracy  For a description of each metric, see Autopilot metrics for text and image classification.   Default objective metrics: Accuracy      For time-series forecasting problem types:   List of available metrics: RMSE, wQL, Average wQL, MASE, MAPE, WAPE  For a description of each metric, see Autopilot metrics for time-series forecasting.   Default objective metrics: AverageWeightedQuantileLoss      For text generation problem types (LLMs fine-tuning): Fine-tuning language models in Autopilot does not require setting the AutoMLJobObjective field. Autopilot fine-tunes LLMs without requiring multiple candidates to be trained and evaluated. Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a default objective metric, the cross-entropy loss. After fine-tuning a language model, you can evaluate the quality of its generated text using different metrics. For a list of the available metrics, see Metrics for fine-tuning LLMs in Autopilot.  
      */
     MetricName: AutoMLMetricEnum;
   }
@@ -3350,7 +3350,7 @@ declare namespace SageMaker {
   }
   export type AutoMLMaxResults = number;
   export type AutoMLMetricEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"MAPE"|"MASE"|"WAPE"|"AverageWeightedQuantileLoss"|string;
-  export type AutoMLMetricExtendedEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"LogLoss"|"InferenceLatency"|"MAPE"|"MASE"|"WAPE"|"AverageWeightedQuantileLoss"|string;
+  export type AutoMLMetricExtendedEnum = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"|"RMSE"|"MAE"|"R2"|"BalancedAccuracy"|"Precision"|"PrecisionMacro"|"Recall"|"RecallMacro"|"LogLoss"|"InferenceLatency"|"MAPE"|"MASE"|"WAPE"|"AverageWeightedQuantileLoss"|"Rouge1"|"Rouge2"|"RougeL"|"RougeLSum"|"Perplexity"|"ValidationLoss"|"TrainingLoss"|string;
   export type AutoMLMode = "AUTO"|"ENSEMBLING"|"HYPERPARAMETER_TUNING"|string;
   export type AutoMLNameContains = string;
   export interface AutoMLOutputDataConfig {
@@ -3380,20 +3380,28 @@ declare namespace SageMaker {
      */
     TextClassificationJobConfig?: TextClassificationJobConfig;
     /**
-     * Settings used to configure an AutoML job V2 for a tabular problem type (regression, classification).
+     * Settings used to configure an AutoML job V2 for the tabular problem type (regression, classification).
      */
     TabularJobConfig?: TabularJobConfig;
     /**
-     * Settings used to configure an AutoML job V2 for a time-series forecasting problem type.
+     * Settings used to configure an AutoML job V2 for the time-series forecasting problem type.
      */
     TimeSeriesForecastingJobConfig?: TimeSeriesForecastingJobConfig;
+    /**
+     * Settings used to configure an AutoML job V2 for the text generation (LLMs fine-tuning) problem type.  The text generation models that support fine-tuning in Autopilot are currently accessible exclusively in regions supported by Canvas. Refer to the documentation of Canvas for the full list of its supported Regions. 
+     */
+    TextGenerationJobConfig?: TextGenerationJobConfig;
   }
-  export type AutoMLProblemTypeConfigName = "ImageClassification"|"TextClassification"|"Tabular"|"TimeSeriesForecasting"|string;
+  export type AutoMLProblemTypeConfigName = "ImageClassification"|"TextClassification"|"Tabular"|"TimeSeriesForecasting"|"TextGeneration"|string;
   export interface AutoMLProblemTypeResolvedAttributes {
     /**
-     * Defines the resolved attributes for the TABULAR problem type.
+     * The resolved attributes for the tabular problem type.
      */
     TabularResolvedAttributes?: TabularResolvedAttributes;
+    /**
+     * The resolved attributes for the text generation problem type.
+     */
+    TextGenerationResolvedAttributes?: TextGenerationResolvedAttributes;
   }
   export type AutoMLProcessingUnit = "CPU"|"GPU"|string;
   export interface AutoMLResolvedAttributes {
@@ -3457,6 +3465,7 @@ declare namespace SageMaker {
   export type AutotuneMode = "Enabled"|string;
   export type AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"|string;
   export type BacktestResultsLocation = string;
+  export type BaseModelName = string;
   export interface BatchDataCaptureConfig {
     /**
      * The Amazon S3 location being used to capture the data.
@@ -4492,7 +4501,7 @@ declare namespace SageMaker {
      */
     AutoMLJobName: AutoMLJobName;
     /**
-     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to the InputDataConfig attribute in the CreateAutoMLJob input parameters. The supported formats depend on the problem type:   For tabular problem types: S3Prefix, ManifestFile.   For image classification: S3Prefix, ManifestFile, AugmentedManifestFile.   For text classification: S3Prefix.   For time-series forecasting: S3Prefix.  
+     * An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to the InputDataConfig attribute in the CreateAutoMLJob input parameters. The supported formats depend on the problem type:   For tabular problem types: S3Prefix, ManifestFile.   For image classification: S3Prefix, ManifestFile, AugmentedManifestFile.   For text classification: S3Prefix.   For time-series forecasting: S3Prefix.   For text generation (LLMs fine-tuning): S3Prefix.  
      */
     AutoMLJobInputDataConfig: AutoMLJobInputDataConfig;
     /**
@@ -4516,7 +4525,7 @@ declare namespace SageMaker {
      */
     SecurityConfig?: AutoMLSecurityConfig;
     /**
-     * Specifies a metric to minimize or maximize as the objective of a job. If not specified, the default objective metric depends on the problem type. For the list of default values per problem type, see AutoMLJobObjective.  For tabular problem types, you must either provide both the AutoMLJobObjective and indicate the type of supervised learning problem in AutoMLProblemTypeConfig (TabularJobConfig.ProblemType), or none at all. 
+     * Specifies a metric to minimize or maximize as the objective of a job. If not specified, the default objective metric depends on the problem type. For the list of default values per problem type, see AutoMLJobObjective.    For tabular problem types: You must either provide both the AutoMLJobObjective and indicate the type of supervised learning problem in AutoMLProblemTypeConfig (TabularJobConfig.ProblemType), or none at all.   For text generation problem types (LLMs fine-tuning): Fine-tuning language models in Autopilot does not require setting the AutoMLJobObjective field. Autopilot fine-tunes LLMs without requiring multiple candidates to be trained and evaluated. Instead, using your dataset, Autopilot directly fine-tunes your target model to enhance a default objective metric, the cross-entropy loss. After fine-tuning a language model, you can evaluate the quality of its generated text using different metrics. For a list of the available metrics, see Metrics for fine-tuning LLMs in Autopilot.   
      */
     AutoMLJobObjective?: AutoMLJobObjective;
     /**
@@ -20845,6 +20854,19 @@ declare namespace SageMaker {
      * The name of the column used to provide the class labels. It should not be same as the content column.
      */
     TargetLabelColumn: TargetLabelColumn;
+  }
+  export interface TextGenerationJobConfig {
+    CompletionCriteria?: AutoMLJobCompletionCriteria;
+    /**
+     * The name of the base model to fine-tune. Autopilot supports fine-tuning a variety of large language models. For information on the list of supported models, see Text generation models supporting fine-tuning in Autopilot. If no BaseModelName is provided, the default model used is Falcon-7B-Instruct. 
+     */
+    BaseModelName?: BaseModelName;
+  }
+  export interface TextGenerationResolvedAttributes {
+    /**
+     * The name of the base model to fine-tune.
+     */
+    BaseModelName?: BaseModelName;
   }
   export type ThingName = string;
   export interface TimeSeriesConfig {

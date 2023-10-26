@@ -157,6 +157,7 @@ declare class SsmSap extends Service {
   updateApplicationSettings(callback?: (err: AWSError, data: SsmSap.Types.UpdateApplicationSettingsOutput) => void): Request<SsmSap.Types.UpdateApplicationSettingsOutput, AWSError>;
 }
 declare namespace SsmSap {
+  export type AllocationType = "VPC_SUBNET"|"ELASTIC_IP"|"OVERLAY"|"UNKNOWN"|string;
   export type AppRegistryArn = string;
   export interface Application {
     /**
@@ -220,6 +221,10 @@ declare namespace SsmSap {
      */
     Id?: ApplicationId;
     /**
+     * The status of the latest discovery.
+     */
+    DiscoveryStatus?: ApplicationDiscoveryStatus;
+    /**
      * The type of the application.
      */
     Type?: ApplicationType;
@@ -233,7 +238,7 @@ declare namespace SsmSap {
     Tags?: TagMap;
   }
   export type ApplicationSummaryList = ApplicationSummary[];
-  export type ApplicationType = "HANA"|string;
+  export type ApplicationType = "HANA"|"SAP_ABAP"|string;
   export type Arn = string;
   export interface AssociatedHost {
     /**
@@ -244,6 +249,10 @@ declare namespace SsmSap {
      * The ID of the Amazon EC2 instance.
      */
     Ec2InstanceId?: String;
+    /**
+     * The IP addresses of the associated host.
+     */
+    IpAddresses?: IpAddressList;
     /**
      * The version of the operating system.
      */
@@ -268,6 +277,14 @@ declare namespace SsmSap {
      */
     ComponentId?: ComponentId;
     /**
+     * The SAP System Identifier of the application component.
+     */
+    Sid?: SID;
+    /**
+     * The SAP system number of the application component.
+     */
+    SystemNumber?: SAPInstanceNumber;
+    /**
      * The parent component of a highly available environment. For example, in a highly available SAP on AWS workload, the parent component consists of the entire setup, including the child components.
      */
     ParentComponent?: ComponentId;
@@ -284,13 +301,17 @@ declare namespace SsmSap {
      */
     ComponentType?: ComponentType;
     /**
-     * The status of the component.
+     * The status of the component.   ACTIVATED - this status has been deprecated.   STARTING - the component is in the process of being started.   STOPPED - the component is not running.   STOPPING - the component is in the process of being stopped.   RUNNING - the component is running.   RUNNING_WITH_ERROR - one or more child component(s) of the parent component is not running. Call  GetComponent  to review the status of each child component.   UNDEFINED - AWS Systems Manager for SAP cannot provide the component status based on the discovered information. Verify your SAP application.  
      */
     Status?: ComponentStatus;
     /**
      * The hostname of the component.
      */
     SapHostname?: String;
+    /**
+     * The SAP feature of the component.
+     */
+    SapFeature?: String;
     /**
      * The kernel version of the component.
      */
@@ -319,6 +340,10 @@ declare namespace SsmSap {
      * The primary host of the component.
      */
     PrimaryHost?: String;
+    /**
+     * The connection specifications for the database of the component.
+     */
+    DatabaseConnection?: DatabaseConnection;
     /**
      * The time at which the component was last updated.
      */
@@ -354,7 +379,7 @@ declare namespace SsmSap {
     Arn?: SsmSapArn;
   }
   export type ComponentSummaryList = ComponentSummary[];
-  export type ComponentType = "HANA"|"HANA_NODE"|string;
+  export type ComponentType = "HANA"|"HANA_NODE"|"ABAP"|"ASCS"|"DIALOG"|"WEBDISP"|"WD"|"ERS"|string;
   export type CredentialType = "ADMIN"|string;
   export interface Database {
     /**
@@ -402,6 +427,21 @@ declare namespace SsmSap {
      */
     LastUpdated?: Timestamp;
   }
+  export interface DatabaseConnection {
+    /**
+     * The method of connection.
+     */
+    DatabaseConnectionMethod?: DatabaseConnectionMethod;
+    /**
+     * The Amazon Resource Name of the connected SAP HANA database.
+     */
+    DatabaseArn?: SsmSapArn;
+    /**
+     * The IP address for connection.
+     */
+    ConnectionIp?: String;
+  }
+  export type DatabaseConnectionMethod = "DIRECT"|"OVERLAY"|string;
   export type DatabaseId = string;
   export type DatabaseIdList = DatabaseId[];
   export type DatabaseName = string;
@@ -611,6 +651,21 @@ declare namespace SsmSap {
   export type InstanceId = string;
   export type InstanceList = InstanceId[];
   export type Integer = number;
+  export type IpAddressList = IpAddressMember[];
+  export interface IpAddressMember {
+    /**
+     * The IP address.
+     */
+    IpAddress?: String;
+    /**
+     * The primary IP address.
+     */
+    Primary?: Boolean;
+    /**
+     * The type of allocation for the IP address.
+     */
+    AllocationType?: AllocationType;
+  }
   export interface ListApplicationsInput {
     /**
      * The token for the next page of results.
@@ -620,6 +675,10 @@ declare namespace SsmSap {
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. 
      */
     MaxResults?: MaxResults;
+    /**
+     * The filter of name, value, and operator.
+     */
+    Filters?: FilterList;
   }
   export interface ListApplicationsOutput {
     /**
@@ -827,7 +886,11 @@ declare namespace SsmSap {
     /**
      * The credentials of the SAP application.
      */
-    Credentials: ApplicationCredentialList;
+    Credentials?: ApplicationCredentialList;
+    /**
+     * The Amazon Resource Name of the SAP HANA database.
+     */
+    DatabaseArn?: SsmSapArn;
   }
   export interface RegisterApplicationOutput {
     /**
@@ -857,6 +920,10 @@ declare namespace SsmSap {
      * The cluster status of the component.
      */
     ClusterStatus?: ClusterStatus;
+    /**
+     * Indicates if or not enqueue replication is enabled for the ASCS component.
+     */
+    EnqueueReplication?: Boolean;
   }
   export type ResourceId = string;
   export type ResourceType = string;
@@ -923,6 +990,10 @@ declare namespace SsmSap {
      * Installation of AWS Backint Agent for SAP HANA.
      */
     Backint?: BackintConfig;
+    /**
+     * The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA connection with the SAP_ABAP application.
+     */
+    DatabaseArn?: SsmSapArn;
   }
   export interface UpdateApplicationSettingsOutput {
     /**

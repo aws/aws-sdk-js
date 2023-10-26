@@ -749,7 +749,7 @@ declare namespace Transfer {
     /**
      * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
      */
-    LoggingRole?: Role;
+    LoggingRole?: NullableRole;
     /**
      * Specifies a string to display when users connect to a server. This string is displayed after the user authenticates.  The SFTP protocol does not support post-authentication display banners. 
      */
@@ -1481,7 +1481,7 @@ declare namespace Transfer {
     /**
      * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFSevents. When set, you can view user activity in your CloudWatch logs.
      */
-    LoggingRole?: Role;
+    LoggingRole?: NullableRole;
     /**
      * Specifies a string to display when users connect to a server. This string is displayed after the user authenticates.  The SFTP protocol does not support post-authentication display banners. 
      */
@@ -2514,7 +2514,7 @@ declare namespace Transfer {
   export type SftpAuthenticationMethods = "PASSWORD"|"PUBLIC_KEY"|"PUBLIC_KEY_OR_PASSWORD"|"PUBLIC_KEY_AND_PASSWORD"|string;
   export interface SftpConnectorConfig {
     /**
-     * The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier can be either the Amazon Resource Name (ARN) or the name of the secret.
+     * The identifier for the secret (in Amazon Web Services Secrets Manager) that contains the SFTP user's private key, password, or both. The identifier must be the Amazon Resource Name (ARN) of the secret.
      */
     UserSecretId?: SecretId;
     /**

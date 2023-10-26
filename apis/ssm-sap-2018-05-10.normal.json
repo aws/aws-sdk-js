@@ -54,6 +54,9 @@
       },
       "errors": [
         {
+          "shape": "UnauthorizedException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -99,6 +102,9 @@
         "shape": "GetComponentOutput"
       },
       "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
         {
           "shape": "ValidationException"
         },
@@ -220,6 +226,9 @@
         "shape": "ListComponentsOutput"
       },
       "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
         {
           "shape": "ResourceNotFoundException"
         },
@@ -348,6 +357,9 @@
       },
       "errors": [
         {
+          "shape": "ResourceNotFoundException"
+        },
+        {
           "shape": "ValidationException"
         },
         {
@@ -373,6 +385,9 @@
         "shape": "StartApplicationRefreshOutput"
       },
       "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
         {
           "shape": "ResourceNotFoundException"
         },
@@ -456,6 +471,9 @@
       },
       "errors": [
         {
+          "shape": "UnauthorizedException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         },
         {
@@ -472,6 +490,15 @@
     }
   },
   "shapes": {
+    "AllocationType": {
+      "type": "string",
+      "enum": [
+        "VPC_SUBNET",
+        "ELASTIC_IP",
+        "OVERLAY",
+        "UNKNOWN"
+      ]
+    },
     "AppRegistryArn": {
       "type": "string",
       "pattern": "arn:aws:servicecatalog:[a-z0-9:\\/-]+"
@@ -547,7 +574,7 @@
         "shape": "ApplicationCredential"
       },
       "max": 20,
-      "min": 1
+      "min": 0
     },
     "ApplicationDiscoveryStatus": {
       "type": "string",
@@ -583,6 +610,10 @@
           "shape": "ApplicationId",
           "documentation": "<p>The ID of the application.</p>"
         },
+        "DiscoveryStatus": {
+          "shape": "ApplicationDiscoveryStatus",
+          "documentation": "<p>The status of the latest discovery.</p>"
+        },
         "Type": {
           "shape": "ApplicationType",
           "documentation": "<p>The type of the application.</p>"
@@ -607,7 +638,8 @@
     "ApplicationType": {
       "type": "string",
       "enum": [
-        "HANA"
+        "HANA",
+        "SAP_ABAP"
       ]
     },
     "Arn": {
@@ -624,6 +656,10 @@
         "Ec2InstanceId": {
           "shape": "String",
           "documentation": "<p>The ID of the Amazon EC2 instance.</p>"
+        },
+        "IpAddresses": {
+          "shape": "IpAddressList",
+          "documentation": "<p>The IP addresses of the associated host.</p>"
         },
         "OsVersion": {
           "shape": "String",
@@ -677,6 +713,14 @@
           "shape": "ComponentId",
           "documentation": "<p>The ID of the component.</p>"
         },
+        "Sid": {
+          "shape": "SID",
+          "documentation": "<p>The SAP System Identifier of the application component.</p>"
+        },
+        "SystemNumber": {
+          "shape": "SAPInstanceNumber",
+          "documentation": "<p>The SAP system number of the application component.</p>"
+        },
         "ParentComponent": {
           "shape": "ComponentId",
           "documentation": "<p>The parent component of a highly available environment. For example, in a highly available SAP on AWS workload, the parent component consists of the entire setup, including the child components.</p>"
@@ -695,11 +739,15 @@
         },
         "Status": {
           "shape": "ComponentStatus",
-          "documentation": "<p>The status of the component.</p>"
+          "documentation": "<p>The status of the component.</p> <ul> <li> <p>ACTIVATED - this status has been deprecated.</p> </li> <li> <p>STARTING - the component is in the process of being started.</p> </li> <li> <p>STOPPED - the component is not running.</p> </li> <li> <p>STOPPING - the component is in the process of being stopped.</p> </li> <li> <p>RUNNING - the component is running.</p> </li> <li> <p>RUNNING_WITH_ERROR - one or more child component(s) of the parent component is not running. Call <a href=\"https://docs.aws.amazon.com/ssmsap/latest/APIReference/API_GetComponent.html\"> <code>GetComponent</code> </a> to review the status of each child component.</p> </li> <li> <p>UNDEFINED - AWS Systems Manager for SAP cannot provide the component status based on the discovered information. Verify your SAP application.</p> </li> </ul>"
         },
         "SapHostname": {
           "shape": "String",
           "documentation": "<p>The hostname of the component.</p>"
+        },
+        "SapFeature": {
+          "shape": "String",
+          "documentation": "<p>The SAP feature of the component.</p>"
         },
         "SapKernelVersion": {
           "shape": "String",
@@ -732,6 +780,10 @@
           "documentation": "<p>The primary host of the component.</p>",
           "deprecated": true,
           "deprecatedMessage": "This shape is no longer used. Please use AssociatedHost."
+        },
+        "DatabaseConnection": {
+          "shape": "DatabaseConnection",
+          "documentation": "<p>The connection specifications for the database of the component.</p>"
         },
         "LastUpdated": {
           "shape": "Timestamp",
@@ -802,7 +854,13 @@
       "type": "string",
       "enum": [
         "HANA",
-        "HANA_NODE"
+        "HANA_NODE",
+        "ABAP",
+        "ASCS",
+        "DIALOG",
+        "WEBDISP",
+        "WD",
+        "ERS"
       ]
     },
     "CredentialType": {
@@ -860,6 +918,31 @@
         }
       },
       "documentation": "<p>The SAP HANA database of the application registered with AWS Systems Manager for SAP.</p>"
+    },
+    "DatabaseConnection": {
+      "type": "structure",
+      "members": {
+        "DatabaseConnectionMethod": {
+          "shape": "DatabaseConnectionMethod",
+          "documentation": "<p>The method of connection.</p>"
+        },
+        "DatabaseArn": {
+          "shape": "SsmSapArn",
+          "documentation": "<p>The Amazon Resource Name of the connected SAP HANA database.</p>"
+        },
+        "ConnectionIp": {
+          "shape": "String",
+          "documentation": "<p>The IP address for connection.</p>"
+        }
+      },
+      "documentation": "<p>The connection specifications for the database.</p>"
+    },
+    "DatabaseConnectionMethod": {
+      "type": "string",
+      "enum": [
+        "DIRECT",
+        "OVERLAY"
+      ]
     },
     "DatabaseId": {
       "type": "string",
@@ -1225,6 +1308,30 @@
       "type": "integer",
       "box": true
     },
+    "IpAddressList": {
+      "type": "list",
+      "member": {
+        "shape": "IpAddressMember"
+      }
+    },
+    "IpAddressMember": {
+      "type": "structure",
+      "members": {
+        "IpAddress": {
+          "shape": "String",
+          "documentation": "<p>The IP address.</p>"
+        },
+        "Primary": {
+          "shape": "Boolean",
+          "documentation": "<p>The primary IP address.</p>"
+        },
+        "AllocationType": {
+          "shape": "AllocationType",
+          "documentation": "<p>The type of allocation for the IP address.</p>"
+        }
+      },
+      "documentation": "<p>Provides information of the IP address.</p>"
+    },
     "ListApplicationsInput": {
       "type": "structure",
       "members": {
@@ -1236,6 +1343,10 @@
           "shape": "MaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. </p>",
           "box": true
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>The filter of name, value, and operator.</p>"
         }
       }
     },
@@ -1526,8 +1637,7 @@
       "required": [
         "ApplicationId",
         "ApplicationType",
-        "Instances",
-        "Credentials"
+        "Instances"
       ],
       "members": {
         "ApplicationId": {
@@ -1557,6 +1667,10 @@
         "Credentials": {
           "shape": "ApplicationCredentialList",
           "documentation": "<p>The credentials of the SAP application.</p>"
+        },
+        "DatabaseArn": {
+          "shape": "SsmSapArn",
+          "documentation": "<p>The Amazon Resource Name of the SAP HANA database.</p>"
         }
       }
     },
@@ -1601,6 +1715,10 @@
         "ClusterStatus": {
           "shape": "ClusterStatus",
           "documentation": "<p>The cluster status of the component.</p>"
+        },
+        "EnqueueReplication": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates if or not enqueue replication is enabled for the ASCS component.</p>"
         }
       },
       "documentation": "<p>Details of the SAP HANA system replication for the instance.</p>"
@@ -1753,6 +1871,10 @@
         "Backint": {
           "shape": "BackintConfig",
           "documentation": "<p>Installation of AWS Backint Agent for SAP HANA.</p>"
+        },
+        "DatabaseArn": {
+          "shape": "SsmSapArn",
+          "documentation": "<p>The Amazon Resource Name of the SAP HANA database that replaces the current SAP HANA connection with the SAP_ABAP application.</p>"
         }
       }
     },

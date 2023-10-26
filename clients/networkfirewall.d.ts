@@ -52,11 +52,11 @@ declare class NetworkFirewall extends Service {
    */
   createRuleGroup(callback?: (err: AWSError, data: NetworkFirewall.Types.CreateRuleGroupResponse) => void): Request<NetworkFirewall.Types.CreateRuleGroupResponse, AWSError>;
   /**
-   * Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate references that Network Firewall uses to decrypt and re-encrypt inbound traffic. After you create a TLS inspection configuration, you associate it with a new firewall policy. To update the settings for a TLS inspection configuration, use UpdateTLSInspectionConfiguration. To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about TLS inspection configurations, use ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration.  For more information about TLS inspection configurations, see Decrypting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide. 
+   * Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate associations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall. After you create a TLS inspection configuration, you can associate it with a new firewall policy. To update the settings for a TLS inspection configuration, use UpdateTLSInspectionConfiguration. To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about TLS inspection configurations, use ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration.  For more information about TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide. 
    */
   createTLSInspectionConfiguration(params: NetworkFirewall.Types.CreateTLSInspectionConfigurationRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.CreateTLSInspectionConfigurationResponse) => void): Request<NetworkFirewall.Types.CreateTLSInspectionConfigurationResponse, AWSError>;
   /**
-   * Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate references that Network Firewall uses to decrypt and re-encrypt inbound traffic. After you create a TLS inspection configuration, you associate it with a new firewall policy. To update the settings for a TLS inspection configuration, use UpdateTLSInspectionConfiguration. To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about TLS inspection configurations, use ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration.  For more information about TLS inspection configurations, see Decrypting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide. 
+   * Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate associations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall. After you create a TLS inspection configuration, you can associate it with a new firewall policy. To update the settings for a TLS inspection configuration, use UpdateTLSInspectionConfiguration. To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about TLS inspection configurations, use ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration.  For more information about TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide. 
    */
   createTLSInspectionConfiguration(callback?: (err: AWSError, data: NetworkFirewall.Types.CreateTLSInspectionConfigurationResponse) => void): Request<NetworkFirewall.Types.CreateTLSInspectionConfigurationResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class NetworkFirewall extends Service {
    */
   updateSubnetChangeProtection(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateSubnetChangeProtectionResponse) => void): Request<NetworkFirewall.Types.UpdateSubnetChangeProtectionResponse, AWSError>;
   /**
-   * Updates the TLS inspection configuration settings for the specified TLS inspection configuration. You use a TLS inspection configuration by reference in one or more firewall policies. When you modify a TLS inspection configuration, you modify all firewall policies that use the TLS inspection configuration.  To update a TLS inspection configuration, first call DescribeTLSInspectionConfiguration to retrieve the current TLSInspectionConfiguration object, update the object as needed, and then provide the updated object to this call. 
+   * Updates the TLS inspection configuration settings for the specified TLS inspection configuration. You use a TLS inspection configuration by referencing it in one or more firewall policies. When you modify a TLS inspection configuration, you modify all firewall policies that use the TLS inspection configuration.  To update a TLS inspection configuration, first call DescribeTLSInspectionConfiguration to retrieve the current TLSInspectionConfiguration object, update the object as needed, and then provide the updated object to this call. 
    */
   updateTLSInspectionConfiguration(params: NetworkFirewall.Types.UpdateTLSInspectionConfigurationRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateTLSInspectionConfigurationResponse) => void): Request<NetworkFirewall.Types.UpdateTLSInspectionConfigurationResponse, AWSError>;
   /**
-   * Updates the TLS inspection configuration settings for the specified TLS inspection configuration. You use a TLS inspection configuration by reference in one or more firewall policies. When you modify a TLS inspection configuration, you modify all firewall policies that use the TLS inspection configuration.  To update a TLS inspection configuration, first call DescribeTLSInspectionConfiguration to retrieve the current TLSInspectionConfiguration object, update the object as needed, and then provide the updated object to this call. 
+   * Updates the TLS inspection configuration settings for the specified TLS inspection configuration. You use a TLS inspection configuration by referencing it in one or more firewall policies. When you modify a TLS inspection configuration, you modify all firewall policies that use the TLS inspection configuration.  To update a TLS inspection configuration, first call DescribeTLSInspectionConfiguration to retrieve the current TLSInspectionConfiguration object, update the object as needed, and then provide the updated object to this call. 
    */
   updateTLSInspectionConfiguration(callback?: (err: AWSError, data: NetworkFirewall.Types.UpdateTLSInspectionConfigurationResponse) => void): Request<NetworkFirewall.Types.UpdateTLSInspectionConfigurationResponse, AWSError>;
 }
@@ -433,6 +433,16 @@ declare namespace NetworkFirewall {
     CIDRs?: CIDRSummary;
   }
   export type Certificates = TlsCertificateData[];
+  export interface CheckCertificateRevocationStatusActions {
+    /**
+     * Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has a revoked status.    PASS - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.    DROP - Network Firewall fails closed and drops all subsequent traffic.    REJECT - Network Firewall sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall then fails closed and drops all subsequent traffic. REJECT is available only for TCP traffic.  
+     */
+    RevokedStatusAction?: RevocationCheckAction;
+    /**
+     * Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has an unknown status, or a status that cannot be determined for any other reason, including when the service is unable to connect to the OCSP and CRL endpoints for the certificate.    PASS - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.    DROP - Network Firewall fails closed and drops all subsequent traffic.    REJECT - Network Firewall sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall then fails closed and drops all subsequent traffic. REJECT is available only for TCP traffic.   
+     */
+    UnknownStatusAction?: RevocationCheckAction;
+  }
   export type CollectionMember_String = string;
   export type ConfigurationSyncState = "PENDING"|"IN_SYNC"|"CAPACITY_CONSTRAINED"|string;
   export interface CreateFirewallPolicyRequest {
@@ -581,7 +591,7 @@ declare namespace NetworkFirewall {
      */
     TLSInspectionConfigurationName: ResourceName;
     /**
-     * The object that defines a TLS inspection configuration. This, along with TLSInspectionConfigurationResponse, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling DescribeTLSInspectionConfiguration.  Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination. To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see Decrypting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide.
+     * The object that defines a TLS inspection configuration. This, along with TLSInspectionConfigurationResponse, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling DescribeTLSInspectionConfiguration.  Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination. To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide.
      */
     TLSInspectionConfiguration: TLSInspectionConfiguration;
     /**
@@ -851,7 +861,7 @@ declare namespace NetworkFirewall {
      */
     UpdateToken: UpdateToken;
     /**
-     * The object that defines a TLS inspection configuration. This, along with TLSInspectionConfigurationResponse, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling DescribeTLSInspectionConfiguration.  Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination. To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see Decrypting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide.
+     * The object that defines a TLS inspection configuration. This, along with TLSInspectionConfigurationResponse, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling DescribeTLSInspectionConfiguration.  Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination. To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide.
      */
     TLSInspectionConfiguration?: TLSInspectionConfiguration;
     /**
@@ -1393,7 +1403,8 @@ declare namespace NetworkFirewall {
   export type ResourceManagedStatus = "MANAGED"|"ACCOUNT"|string;
   export type ResourceManagedType = "AWS_MANAGED_THREAT_SIGNATURES"|"AWS_MANAGED_DOMAIN_LISTS"|string;
   export type ResourceName = string;
-  export type ResourceStatus = "ACTIVE"|"DELETING"|string;
+  export type ResourceStatus = "ACTIVE"|"DELETING"|"ERROR"|string;
+  export type RevocationCheckAction = "PASS"|"DROP"|"REJECT"|string;
   export type RuleCapacity = number;
   export interface RuleDefinition {
     /**
@@ -1552,19 +1563,27 @@ declare namespace NetworkFirewall {
   export type RulesString = string;
   export interface ServerCertificate {
     /**
-     * The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server certificate.
+     * The Amazon Resource Name (ARN) of the Certificate Manager SSL/TLS server certificate that's used for inbound SSL/TLS inspection.
      */
     ResourceArn?: ResourceArn;
   }
   export interface ServerCertificateConfiguration {
     /**
-     * The list of a server certificate configuration's Certificate Manager SSL/TLS certificates.
+     * The list of a server certificate configuration's Certificate Manager certificates, used for inbound SSL/TLS inspection.
      */
     ServerCertificates?: ServerCertificates;
     /**
-     * A list of a server certificate configuration's scopes.
+     * A list of scopes.
      */
     Scopes?: ServerCertificateScopes;
+    /**
+     * The Amazon Resource Name (ARN) of the imported certificate authority (CA) certificate configured in Certificate Manager (ACM) to use for outbound SSL/TLS inspection. The following limitations apply:   You can use CA certificates that you imported into ACM, but you can't generate CA certificates with ACM.   You can't use certificates issued by Private Certificate Authority.   For more information about the certificate requirements for outbound inspection, see Requirements for using SSL/TLS certificates with TLS inspection configurations in the Network Firewall Developer Guide.  For information about working with certificates in ACM, see Importing certificates in the Certificate Manager User Guide.
+     */
+    CertificateAuthorityArn?: ResourceArn;
+    /**
+     * When enabled, Network Firewall checks if the server certificate presented by the server in the SSL/TLS connection has a revoked or unkown status. If the certificate has an unknown or revoked status, you must specify the actions that Network Firewall takes on outbound traffic. To use this option, you must specify a CertificateAuthorityArn in ServerCertificateConfiguration.
+     */
+    CheckCertificateRevocationStatus?: CheckCertificateRevocationStatusActions;
   }
   export type ServerCertificateConfigurations = ServerCertificateConfiguration[];
   export interface ServerCertificateScope {
@@ -1788,6 +1807,7 @@ declare namespace NetworkFirewall {
      * A list of the certificates associated with the TLS inspection configuration.
      */
     Certificates?: Certificates;
+    CertificateAuthority?: TlsCertificateData;
   }
   export type TLSInspectionConfigurations = TLSInspectionConfigurationMetadata[];
   export interface Tag {
@@ -2150,7 +2170,7 @@ declare namespace NetworkFirewall {
      */
     TLSInspectionConfigurationName?: ResourceName;
     /**
-     * The object that defines a TLS inspection configuration. This, along with TLSInspectionConfigurationResponse, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling DescribeTLSInspectionConfiguration.  Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination. To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect inbound traffic. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see Decrypting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide.
+     * The object that defines a TLS inspection configuration. This, along with TLSInspectionConfigurationResponse, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling DescribeTLSInspectionConfiguration.  Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination. To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide.
      */
     TLSInspectionConfiguration: TLSInspectionConfiguration;
     /**

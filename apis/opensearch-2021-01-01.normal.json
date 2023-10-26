@@ -946,7 +946,7 @@
           "shape": "DisabledOperationException"
         }
       ],
-      "documentation": "<p>Get the status of the maintenance action.</p>"
+      "documentation": "<p>The status of the maintenance action.</p>"
     },
     "GetPackageVersionHistory": {
       "name": "GetPackageVersionHistory",
@@ -1070,7 +1070,7 @@
           "shape": "DisabledOperationException"
         }
       ],
-      "documentation": "<p>Get the list of the maintenance action.</p>"
+      "documentation": "<p>A list of maintenance actions for the domain.</p>"
     },
     "ListDomainNames": {
       "name": "ListDomainNames",
@@ -1490,7 +1490,7 @@
           "shape": "DisabledOperationException"
         }
       ],
-      "documentation": "<p>Starts the node maintenance (Node restart, Node reboot, Opensearch/Elasticsearch process restart, Dashboard/kibana restart) on the data node.</p>"
+      "documentation": "<p>Starts the node maintenance process on the data node. These processes can include a node reboot, an Opensearch or Elasticsearch process restart, or a Dashboard or Kibana restart.</p>"
     },
     "StartServiceSoftwareUpdate": {
       "name": "StartServiceSoftwareUpdate",
@@ -2601,6 +2601,10 @@
           "shape": "PolicyDocument",
           "documentation": "<p>Identity and Access Management (IAM) policy document specifying the access policies for the new domain.</p>"
         },
+        "IPAddressType": {
+          "shape": "IPAddressType",
+          "documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
+        },
         "SnapshotOptions": {
           "shape": "SnapshotOptions",
           "documentation": "<p>DEPRECATED. Container for the parameters required to configure automated snapshots of domain indexes.</p>"
@@ -3592,6 +3596,10 @@
           "shape": "AccessPoliciesStatus",
           "documentation": "<p>Specifies the access policies for the domain.</p>"
         },
+        "IPAddressType": {
+          "shape": "IPAddressTypeStatus",
+          "documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
+        },
         "SnapshotOptions": {
           "shape": "SnapshotOptionsStatus",
           "documentation": "<p>DEPRECATED. Container for parameters required to configure automated snapshots of domain indexes.</p>"
@@ -3742,7 +3750,7 @@
       "members": {
         "MaintenanceId": {
           "shape": "RequestId",
-          "documentation": "<p>Id of the requested action.</p>"
+          "documentation": "<p>The ID of the requested action.</p>"
         },
         "DomainName": {
           "shape": "DomainName",
@@ -3754,7 +3762,7 @@
         },
         "NodeId": {
           "shape": "NodeId",
-          "documentation": "<p>Id of the data node.</p>"
+          "documentation": "<p>The ID of the data node.</p>"
         },
         "Status": {
           "shape": "MaintenanceStatus",
@@ -3762,15 +3770,15 @@
         },
         "StatusMessage": {
           "shape": "MaintenanceStatusMessage",
-          "documentation": "<p>The status message of the action.</p>"
+          "documentation": "<p>The status message for the action.</p>"
         },
         "CreatedAt": {
           "shape": "UpdateTimestamp",
-          "documentation": "<p>Contains time at which action created.</p>"
+          "documentation": "<p>The time at which the action was created.</p>"
         },
         "UpdatedAt": {
           "shape": "UpdateTimestamp",
-          "documentation": "<p>Contains time at which action updated.</p>"
+          "documentation": "<p>The time at which the action was updated.</p>"
         }
       },
       "documentation": "<p>Container for the domain maintenance details.</p>"
@@ -3945,6 +3953,9 @@
           "shape": "ServiceUrl",
           "documentation": "<p>Domain-specific endpoint used to submit index, search, and data upload requests to the domain.</p>"
         },
+        "EndpointV2": {
+          "shape": "ServiceUrl"
+        },
         "Endpoints": {
           "shape": "EndpointsMap",
           "documentation": "<p>The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints.. Example <code>key, value</code>: <code>'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'</code>.</p>"
@@ -3972,6 +3983,10 @@
         "AccessPolicies": {
           "shape": "PolicyDocument",
           "documentation": "<p>Identity and Access Management (IAM) policy document specifying the access policies for the domain.</p>"
+        },
+        "IPAddressType": {
+          "shape": "IPAddressType",
+          "documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
         },
         "SnapshotOptions": {
           "shape": "SnapshotOptions",
@@ -4317,7 +4332,7 @@
         },
         "MaintenanceId": {
           "shape": "RequestId",
-          "documentation": "<p>The request id of the maintenance action.</p>",
+          "documentation": "<p>The request ID of the maintenance action.</p>",
           "location": "querystring",
           "locationName": "maintenanceId"
         }
@@ -4329,30 +4344,30 @@
       "members": {
         "Status": {
           "shape": "MaintenanceStatus",
-          "documentation": "<p>Contains status of the maintenance action.</p>"
+          "documentation": "<p>The status of the maintenance action.</p>"
         },
         "StatusMessage": {
           "shape": "MaintenanceStatusMessage",
-          "documentation": "<p>Contains status message of the maintenance action.</p>"
+          "documentation": "<p>The status message of the maintenance action.</p>"
         },
         "NodeId": {
           "shape": "NodeId",
-          "documentation": "<p>Contains node id of maintenance action.</p>"
+          "documentation": "<p>The node ID of the maintenance action.</p>"
         },
         "Action": {
           "shape": "MaintenanceType",
-          "documentation": "<p>Contains action name.</p>"
+          "documentation": "<p>The action name.</p>"
         },
         "CreatedAt": {
           "shape": "UpdateTimestamp",
-          "documentation": "<p>Contains time at which action created.</p>"
+          "documentation": "<p>The time at which the action was created.</p>"
         },
         "UpdatedAt": {
           "shape": "UpdateTimestamp",
-          "documentation": "<p>Contains time at which action updated.</p>"
+          "documentation": "<p>The time at which the action was updated.</p>"
         }
       },
-      "documentation": "<p>The result of a <code>GetDomainMaintenanceStatus</code> request. Contains information about the requested action. </p>"
+      "documentation": "<p>The result of a <code>GetDomainMaintenanceStatus</code> request that information about the requested action.</p>"
     },
     "GetPackageVersionHistoryRequest": {
       "type": "structure",
@@ -4472,6 +4487,30 @@
         }
       },
       "documentation": "<p>Container for the response returned by the <code>GetUpgradeStatus</code> operation.</p>"
+    },
+    "IPAddressType": {
+      "type": "string",
+      "enum": [
+        "ipv4",
+        "dualstack"
+      ]
+    },
+    "IPAddressTypeStatus": {
+      "type": "structure",
+      "required": [
+        "Options",
+        "Status"
+      ],
+      "members": {
+        "Options": {
+          "shape": "IPAddressType",
+          "documentation": "<p>The IP address options for the domain.</p>"
+        },
+        "Status": {
+          "shape": "OptionStatus"
+        }
+      },
+      "documentation": "<p>The IP address type status for the domain.</p>"
     },
     "IdentityPoolId": {
       "type": "string",
@@ -4722,7 +4761,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>If your initial <code>ListDomainMaintenances</code> operation returns a <code>nextToken</code>, you can include the returned <code>nextToken</code> in subsequent <code>ListDomainMaintenances</code> operations, which returns results in the next page.</p>",
+          "documentation": "<p>If your initial <code>ListDomainMaintenances</code> operation returns a <code>nextToken</code>, include the returned <code>nextToken</code> in subsequent <code>ListDomainMaintenances</code> operations, which returns results in the next page.</p>",
           "location": "querystring",
           "locationName": "nextToken"
         }
@@ -4734,14 +4773,14 @@
       "members": {
         "DomainMaintenances": {
           "shape": "DomainMaintenanceList",
-          "documentation": "<p>List of the submitted maintenance actions.</p>"
+          "documentation": "<p>A list of the submitted maintenance actions.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.</p>"
         }
       },
-      "documentation": "<p>The result of a <code>ListDomainMaintenances</code> request. Contains information about the requested actions. </p>"
+      "documentation": "<p>The result of a <code>ListDomainMaintenances</code> request that contains information about the requested actions. </p>"
     },
     "ListDomainNamesRequest": {
       "type": "structure",
@@ -6370,7 +6409,7 @@
         },
         "NodeId": {
           "shape": "NodeId",
-          "documentation": "<p>Id of the data node.</p>"
+          "documentation": "<p>The ID of the data node.</p>"
         }
       },
       "documentation": "<p>Container for the parameters to the <code>StartDomainMaintenance</code> operation.</p>"
@@ -6380,10 +6419,10 @@
       "members": {
         "MaintenanceId": {
           "shape": "RequestId",
-          "documentation": "<p>Contains request id of requested action.</p>"
+          "documentation": "<p>The request ID of requested action.</p>"
         }
       },
-      "documentation": "<p>The result of a <code>StartDomainMaintenance</code> request. Contains information about the requested action. </p>"
+      "documentation": "<p>The result of a <code>StartDomainMaintenance</code> request that information about the requested action. </p>"
     },
     "StartServiceSoftwareUpdateRequest": {
       "type": "structure",
@@ -6592,6 +6631,10 @@
         "AccessPolicies": {
           "shape": "PolicyDocument",
           "documentation": "<p>Identity and Access Management (IAM) access policy as a JSON-formatted string.</p>"
+        },
+        "IPAddressType": {
+          "shape": "IPAddressType",
+          "documentation": "<p>The type of IP addresses supported by the endpoint for the domain.</p>"
         },
         "LogPublishingOptions": {
           "shape": "LogPublishingOptions",

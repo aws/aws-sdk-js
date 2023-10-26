@@ -260,11 +260,11 @@ declare class OpenSearch extends Service {
    */
   getCompatibleVersions(callback?: (err: AWSError, data: OpenSearch.Types.GetCompatibleVersionsResponse) => void): Request<OpenSearch.Types.GetCompatibleVersionsResponse, AWSError>;
   /**
-   * Get the status of the maintenance action.
+   * The status of the maintenance action.
    */
   getDomainMaintenanceStatus(params: OpenSearch.Types.GetDomainMaintenanceStatusRequest, callback?: (err: AWSError, data: OpenSearch.Types.GetDomainMaintenanceStatusResponse) => void): Request<OpenSearch.Types.GetDomainMaintenanceStatusResponse, AWSError>;
   /**
-   * Get the status of the maintenance action.
+   * The status of the maintenance action.
    */
   getDomainMaintenanceStatus(callback?: (err: AWSError, data: OpenSearch.Types.GetDomainMaintenanceStatusResponse) => void): Request<OpenSearch.Types.GetDomainMaintenanceStatusResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class OpenSearch extends Service {
    */
   getUpgradeStatus(callback?: (err: AWSError, data: OpenSearch.Types.GetUpgradeStatusResponse) => void): Request<OpenSearch.Types.GetUpgradeStatusResponse, AWSError>;
   /**
-   * Get the list of the maintenance action.
+   * A list of maintenance actions for the domain.
    */
   listDomainMaintenances(params: OpenSearch.Types.ListDomainMaintenancesRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListDomainMaintenancesResponse) => void): Request<OpenSearch.Types.ListDomainMaintenancesResponse, AWSError>;
   /**
-   * Get the list of the maintenance action.
+   * A list of maintenance actions for the domain.
    */
   listDomainMaintenances(callback?: (err: AWSError, data: OpenSearch.Types.ListDomainMaintenancesResponse) => void): Request<OpenSearch.Types.ListDomainMaintenancesResponse, AWSError>;
   /**
@@ -412,11 +412,11 @@ declare class OpenSearch extends Service {
    */
   revokeVpcEndpointAccess(callback?: (err: AWSError, data: OpenSearch.Types.RevokeVpcEndpointAccessResponse) => void): Request<OpenSearch.Types.RevokeVpcEndpointAccessResponse, AWSError>;
   /**
-   * Starts the node maintenance (Node restart, Node reboot, Opensearch/Elasticsearch process restart, Dashboard/kibana restart) on the data node.
+   * Starts the node maintenance process on the data node. These processes can include a node reboot, an Opensearch or Elasticsearch process restart, or a Dashboard or Kibana restart.
    */
   startDomainMaintenance(params: OpenSearch.Types.StartDomainMaintenanceRequest, callback?: (err: AWSError, data: OpenSearch.Types.StartDomainMaintenanceResponse) => void): Request<OpenSearch.Types.StartDomainMaintenanceResponse, AWSError>;
   /**
-   * Starts the node maintenance (Node restart, Node reboot, Opensearch/Elasticsearch process restart, Dashboard/kibana restart) on the data node.
+   * Starts the node maintenance process on the data node. These processes can include a node reboot, an Opensearch or Elasticsearch process restart, or a Dashboard or Kibana restart.
    */
   startDomainMaintenance(callback?: (err: AWSError, data: OpenSearch.Types.StartDomainMaintenanceResponse) => void): Request<OpenSearch.Types.StartDomainMaintenanceResponse, AWSError>;
   /**
@@ -1004,6 +1004,10 @@ declare namespace OpenSearch {
      * Identity and Access Management (IAM) policy document specifying the access policies for the new domain.
      */
     AccessPolicies?: PolicyDocument;
+    /**
+     * The type of IP addresses supported by the endpoint for the domain.
+     */
+    IPAddressType?: IPAddressType;
     /**
      * DEPRECATED. Container for the parameters required to configure automated snapshots of domain indexes.
      */
@@ -1612,6 +1616,10 @@ declare namespace OpenSearch {
      */
     AccessPolicies?: AccessPoliciesStatus;
     /**
+     * The type of IP addresses supported by the endpoint for the domain.
+     */
+    IPAddressType?: IPAddressTypeStatus;
+    /**
      * DEPRECATED. Container for parameters required to configure automated snapshots of domain indexes.
      */
     SnapshotOptions?: SnapshotOptionsStatus;
@@ -1717,7 +1725,7 @@ declare namespace OpenSearch {
   }
   export interface DomainMaintenanceDetails {
     /**
-     * Id of the requested action.
+     * The ID of the requested action.
      */
     MaintenanceId?: RequestId;
     /**
@@ -1729,7 +1737,7 @@ declare namespace OpenSearch {
      */
     Action?: MaintenanceType;
     /**
-     * Id of the data node.
+     * The ID of the data node.
      */
     NodeId?: NodeId;
     /**
@@ -1737,15 +1745,15 @@ declare namespace OpenSearch {
      */
     Status?: MaintenanceStatus;
     /**
-     * The status message of the action.
+     * The status message for the action.
      */
     StatusMessage?: MaintenanceStatusMessage;
     /**
-     * Contains time at which action created.
+     * The time at which the action was created.
      */
     CreatedAt?: UpdateTimestamp;
     /**
-     * Contains time at which action updated.
+     * The time at which the action was updated.
      */
     UpdatedAt?: UpdateTimestamp;
   }
@@ -1854,6 +1862,7 @@ declare namespace OpenSearch {
      * Domain-specific endpoint used to submit index, search, and data upload requests to the domain.
      */
     Endpoint?: ServiceUrl;
+    EndpointV2?: ServiceUrl;
     /**
      * The key-value pair that exists if the OpenSearch Service domain uses VPC endpoints.. Example key, value: 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
      */
@@ -1882,6 +1891,10 @@ declare namespace OpenSearch {
      * Identity and Access Management (IAM) policy document specifying the access policies for the domain.
      */
     AccessPolicies?: PolicyDocument;
+    /**
+     * The type of IP addresses supported by the endpoint for the domain.
+     */
+    IPAddressType?: IPAddressType;
     /**
      * DEPRECATED. Container for parameters required to configure automated snapshots of domain indexes.
      */
@@ -2091,33 +2104,33 @@ declare namespace OpenSearch {
      */
     DomainName: DomainName;
     /**
-     * The request id of the maintenance action.
+     * The request ID of the maintenance action.
      */
     MaintenanceId: RequestId;
   }
   export interface GetDomainMaintenanceStatusResponse {
     /**
-     * Contains status of the maintenance action.
+     * The status of the maintenance action.
      */
     Status?: MaintenanceStatus;
     /**
-     * Contains status message of the maintenance action.
+     * The status message of the maintenance action.
      */
     StatusMessage?: MaintenanceStatusMessage;
     /**
-     * Contains node id of maintenance action.
+     * The node ID of the maintenance action.
      */
     NodeId?: NodeId;
     /**
-     * Contains action name.
+     * The action name.
      */
     Action?: MaintenanceType;
     /**
-     * Contains time at which action created.
+     * The time at which the action was created.
      */
     CreatedAt?: UpdateTimestamp;
     /**
-     * Contains time at which action updated.
+     * The time at which the action was updated.
      */
     UpdatedAt?: UpdateTimestamp;
   }
@@ -2192,6 +2205,14 @@ declare namespace OpenSearch {
      * A string that describes the update.
      */
     UpgradeName?: UpgradeName;
+  }
+  export type IPAddressType = "ipv4"|"dualstack"|string;
+  export interface IPAddressTypeStatus {
+    /**
+     * The IP address options for the domain.
+     */
+    Options: IPAddressType;
+    Status: OptionStatus;
   }
   export type IdentityPoolId = string;
   export interface InboundConnection {
@@ -2325,13 +2346,13 @@ declare namespace OpenSearch {
      */
     MaxResults?: MaxResults;
     /**
-     * If your initial ListDomainMaintenances operation returns a nextToken, you can include the returned nextToken in subsequent ListDomainMaintenances operations, which returns results in the next page.
+     * If your initial ListDomainMaintenances operation returns a nextToken, include the returned nextToken in subsequent ListDomainMaintenances operations, which returns results in the next page.
      */
     NextToken?: NextToken;
   }
   export interface ListDomainMaintenancesResponse {
     /**
-     * List of the submitted maintenance actions.
+     * A list of the submitted maintenance actions.
      */
     DomainMaintenances?: DomainMaintenanceList;
     /**
@@ -3199,13 +3220,13 @@ declare namespace OpenSearch {
      */
     Action: MaintenanceType;
     /**
-     * Id of the data node.
+     * The ID of the data node.
      */
     NodeId?: NodeId;
   }
   export interface StartDomainMaintenanceResponse {
     /**
-     * Contains request id of requested action.
+     * The request ID of requested action.
      */
     MaintenanceId?: RequestId;
   }
@@ -3313,6 +3334,10 @@ declare namespace OpenSearch {
      * Identity and Access Management (IAM) access policy as a JSON-formatted string.
      */
     AccessPolicies?: PolicyDocument;
+    /**
+     * The type of IP addresses supported by the endpoint for the domain.
+     */
+    IPAddressType?: IPAddressType;
     /**
      * Options to publish OpenSearch logs to Amazon CloudWatch Logs.
      */

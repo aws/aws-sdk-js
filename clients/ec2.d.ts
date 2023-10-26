@@ -3573,6 +3573,14 @@ declare class EC2 extends Service {
    */
   getReservedInstancesExchangeQuote(callback?: (err: AWSError, data: EC2.Types.GetReservedInstancesExchangeQuoteResult) => void): Request<EC2.Types.GetReservedInstancesExchangeQuoteResult, AWSError>;
   /**
+   * Gets security groups that can be associated by the Amazon Web Services account making the request with network interfaces in the specified VPC.
+   */
+  getSecurityGroupsForVpc(params: EC2.Types.GetSecurityGroupsForVpcRequest, callback?: (err: AWSError, data: EC2.Types.GetSecurityGroupsForVpcResult) => void): Request<EC2.Types.GetSecurityGroupsForVpcResult, AWSError>;
+  /**
+   * Gets security groups that can be associated by the Amazon Web Services account making the request with network interfaces in the specified VPC.
+   */
+  getSecurityGroupsForVpc(callback?: (err: AWSError, data: EC2.Types.GetSecurityGroupsForVpcResult) => void): Request<EC2.Types.GetSecurityGroupsForVpcResult, AWSError>;
+  /**
    * Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
   getSerialConsoleAccessStatus(params: EC2.Types.GetSerialConsoleAccessStatusRequest, callback?: (err: AWSError, data: EC2.Types.GetSerialConsoleAccessStatusResult) => void): Request<EC2.Types.GetSerialConsoleAccessStatusResult, AWSError>;
@@ -21454,6 +21462,39 @@ declare namespace EC2 {
      */
     ValidationFailureReason?: String;
   }
+  export interface GetSecurityGroupsForVpcRequest {
+    /**
+     * The VPC ID where the security group can be used.
+     */
+    VpcId: VpcId;
+    /**
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination.
+     */
+    MaxResults?: GetSecurityGroupsForVpcRequestMaxResults;
+    /**
+     * The filters. If using multiple filters, the results include security groups which match all filters.    group-id: The security group ID.    description: The security group's description.    group-name: The security group name.    owner-id: The security group owner ID.    primary-vpc-id: The VPC ID in which the security group was created.  
+     */
+    Filters?: FilterList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export type GetSecurityGroupsForVpcRequestMaxResults = number;
+  export interface GetSecurityGroupsForVpcResult {
+    /**
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
+     */
+    NextToken?: String;
+    /**
+     * The security group that can be used by interfaces in the VPC.
+     */
+    SecurityGroupForVpcs?: SecurityGroupForVpcList;
+  }
   export interface GetSerialConsoleAccessStatusRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -33758,6 +33799,33 @@ declare namespace EC2 {
      */
     VpcId?: String;
   }
+  export interface SecurityGroupForVpc {
+    /**
+     * The security group's description.
+     */
+    Description?: String;
+    /**
+     * The security group name.
+     */
+    GroupName?: String;
+    /**
+     * The security group owner ID.
+     */
+    OwnerId?: String;
+    /**
+     * The security group ID.
+     */
+    GroupId?: String;
+    /**
+     * The security group tags.
+     */
+    Tags?: TagList;
+    /**
+     * The VPC ID in which the security group was created.
+     */
+    PrimaryVpcId?: String;
+  }
+  export type SecurityGroupForVpcList = SecurityGroupForVpc[];
   export type SecurityGroupId = string;
   export type SecurityGroupIdList = SecurityGroupId[];
   export type SecurityGroupIdSet = SecurityGroupId[];

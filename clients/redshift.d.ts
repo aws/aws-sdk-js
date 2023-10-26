@@ -333,6 +333,14 @@ declare class Redshift extends Service {
    */
   deletePartner(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
   /**
+   * Deletes the resource policy for a specified resource.
+   */
+  deleteResourcePolicy(params: Redshift.Types.DeleteResourcePolicyMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the resource policy for a specified resource.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a scheduled action. 
    */
   deleteScheduledAction(params: Redshift.Types.DeleteScheduledActionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -557,6 +565,14 @@ declare class Redshift extends Service {
    */
   describeHsmConfigurations(callback?: (err: AWSError, data: Redshift.Types.HsmConfigurationMessage) => void): Request<Redshift.Types.HsmConfigurationMessage, AWSError>;
   /**
+   * Returns a list of inbound integrations.
+   */
+  describeInboundIntegrations(params: Redshift.Types.DescribeInboundIntegrationsMessage, callback?: (err: AWSError, data: Redshift.Types.InboundIntegrationsMessage) => void): Request<Redshift.Types.InboundIntegrationsMessage, AWSError>;
+  /**
+   * Returns a list of inbound integrations.
+   */
+  describeInboundIntegrations(callback?: (err: AWSError, data: Redshift.Types.InboundIntegrationsMessage) => void): Request<Redshift.Types.InboundIntegrationsMessage, AWSError>;
+  /**
    * Describes whether information, such as queries and connection attempts, is being logged for the specified Amazon Redshift cluster.
    */
   describeLoggingStatus(params: Redshift.Types.DescribeLoggingStatusMessage, callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
@@ -745,6 +761,14 @@ declare class Redshift extends Service {
    */
   getReservedNodeExchangeOfferings(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
+   * Get the resource policy for a specified resource.
+   */
+  getResourcePolicy(params: Redshift.Types.GetResourcePolicyMessage, callback?: (err: AWSError, data: Redshift.Types.GetResourcePolicyResult) => void): Request<Redshift.Types.GetResourcePolicyResult, AWSError>;
+  /**
+   * Get the resource policy for a specified resource.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: Redshift.Types.GetResourcePolicyResult) => void): Request<Redshift.Types.GetResourcePolicyResult, AWSError>;
+  /**
    * This operation is retired. Calling this operation does not change AQUA configuration. Amazon Redshift automatically determines whether to use AQUA (Advanced Query Accelerator). 
    */
   modifyAquaConfiguration(params: Redshift.Types.ModifyAquaInputMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
@@ -896,6 +920,14 @@ declare class Redshift extends Service {
    * Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the DescribeReservedNodeOfferings API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
   purchaseReservedNodeOffering(callback?: (err: AWSError, data: Redshift.Types.PurchaseReservedNodeOfferingResult) => void): Request<Redshift.Types.PurchaseReservedNodeOfferingResult, AWSError>;
+  /**
+   * Updates the resource policy for a specified resource.
+   */
+  putResourcePolicy(params: Redshift.Types.PutResourcePolicyMessage, callback?: (err: AWSError, data: Redshift.Types.PutResourcePolicyResult) => void): Request<Redshift.Types.PutResourcePolicyResult, AWSError>;
+  /**
+   * Updates the resource policy for a specified resource.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: Redshift.Types.PutResourcePolicyResult) => void): Request<Redshift.Types.PutResourcePolicyResult, AWSError>;
   /**
    * Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to rebooting. A cluster event is created when the reboot is completed. Any pending cluster modifications (see ModifyCluster) are applied at this reboot. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. 
    */
@@ -2573,6 +2605,12 @@ declare namespace Redshift {
      */
     HsmConfigurationIdentifier: String;
   }
+  export interface DeleteResourcePolicyMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the resource of which its resource policy is deleted.
+     */
+    ResourceArn: String;
+  }
   export interface DeleteScheduledActionMessage {
     /**
      * The name of the scheduled action to delete. 
@@ -3095,6 +3133,24 @@ declare namespace Redshift {
      * A tag value or values for which you want to return all matching HSM configurations that are associated with the specified tag value or values. For example, suppose that you have HSM configurations that are tagged with values called admin and test. If you specify both of these tag values in the request, Amazon Redshift returns a response with the HSM configurations that have either or both of these tag values associated with them.
      */
     TagValues?: TagValueList;
+  }
+  export interface DescribeInboundIntegrationsMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the inbound integration.
+     */
+    IntegrationArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the target of an inbound integration.
+     */
+    TargetArn?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.  Default: 100  Constraints: minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeInboundIntegrations request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
   }
   export interface DescribeLoggingStatusMessage {
     /**
@@ -3870,6 +3926,18 @@ declare namespace Redshift {
      */
     ReservedNodeOfferings?: ReservedNodeOfferingList;
   }
+  export interface GetResourcePolicyMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the resource of which its resource policy is fetched.
+     */
+    ResourceArn: String;
+  }
+  export interface GetResourcePolicyResult {
+    /**
+     * The content of the resource policy.
+     */
+    ResourcePolicy?: ResourcePolicy;
+  }
   export interface HsmClientCertificate {
     /**
      * The identifier of the HSM client certificate.
@@ -3961,8 +4029,56 @@ declare namespace Redshift {
   export type ImportTablesCompleted = String[];
   export type ImportTablesInProgress = String[];
   export type ImportTablesNotStarted = String[];
+  export interface InboundIntegration {
+    /**
+     * The Amazon Resource Name (ARN) of an inbound integration.
+     */
+    IntegrationArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the source of an inbound integration.
+     */
+    SourceArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the target of an inbound integration.
+     */
+    TargetArn?: String;
+    /**
+     * The status of an inbound integration.
+     */
+    Status?: ZeroETLIntegrationStatus;
+    /**
+     * The outstanding errors of an inbound integration. Each item is an "IntegrationError". This is null if there is no error.
+     */
+    Errors?: IntegrationErrorList;
+    /**
+     * The creation time of an inbound integration.
+     */
+    CreateTime?: TStamp;
+  }
+  export type InboundIntegrationList = InboundIntegration[];
+  export interface InboundIntegrationsMessage {
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
+     */
+    Marker?: String;
+    /**
+     * A list of InboundIntegration instances.
+     */
+    InboundIntegrations?: InboundIntegrationList;
+  }
   export type Integer = number;
   export type IntegerOptional = number;
+  export interface IntegrationError {
+    /**
+     * The error code of an inbound integration error.
+     */
+    ErrorCode: String;
+    /**
+     * The error message of an inbound integration error.
+     */
+    ErrorMessage?: String;
+  }
+  export type IntegrationErrorList = IntegrationError[];
   export type LogDestinationType = "s3"|"cloudwatch"|string;
   export type LogTypeList = String[];
   export interface LoggingStatus {
@@ -4701,6 +4817,22 @@ declare namespace Redshift {
   export interface PurchaseReservedNodeOfferingResult {
     ReservedNode?: ReservedNode;
   }
+  export interface PutResourcePolicyMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the resource of which its resource policy is updated.
+     */
+    ResourceArn: String;
+    /**
+     * The content of the resource policy being updated.
+     */
+    Policy: String;
+  }
+  export interface PutResourcePolicyResult {
+    /**
+     * The content of the updated resource policy.
+     */
+    ResourcePolicy?: ResourcePolicy;
+  }
   export interface RebootClusterMessage {
     /**
      * The cluster identifier.
@@ -5014,6 +5146,16 @@ declare namespace Redshift {
      * The percent of data transferred from source cluster to target cluster.
      */
     DataTransferProgressPercent?: DoubleOptional;
+  }
+  export interface ResourcePolicy {
+    /**
+     * The resources that a policy is attached to.
+     */
+    ResourceArn?: String;
+    /**
+     * The content of a resource policy.
+     */
+    Policy?: String;
   }
   export type RestorableNodeTypeList = String[];
   export interface RestoreFromClusterSnapshotMessage {
@@ -5919,6 +6061,7 @@ declare namespace Redshift {
     Status?: String;
   }
   export type VpcSecurityGroupMembershipList = VpcSecurityGroupMembership[];
+  export type ZeroETLIntegrationStatus = "creating"|"active"|"modifying"|"failed"|"deleting"|"syncing"|"needs_attention"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

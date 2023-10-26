@@ -986,7 +986,11 @@ declare namespace AppStream {
     /**
      * The desired number of streaming instances.
      */
-    DesiredInstances: Integer;
+    DesiredInstances?: Integer;
+    /**
+     * The desired number of user sessions for a multi-session fleet. This is not allowed for single-session fleets. When you create a fleet, you must set either the DesiredSessions or DesiredInstances attribute, based on the type of fleet you create. You can’t define both attributes or leave both attributes blank.
+     */
+    DesiredSessions?: Integer;
   }
   export interface ComputeCapacityStatus {
     /**
@@ -1005,6 +1009,22 @@ declare namespace AppStream {
      * The number of currently available instances that can be used to stream sessions.
      */
     Available?: Integer;
+    /**
+     * The total number of sessions slots that are either running or pending. This represents the total number of concurrent streaming sessions your fleet can support in a steady state. DesiredUserSessionCapacity = ActualUserSessionCapacity + PendingUserSessionCapacity This only applies to multi-session fleets.
+     */
+    DesiredUserSessions?: Integer;
+    /**
+     * The number of idle session slots currently available for user sessions. AvailableUserSessionCapacity = ActualUserSessionCapacity - ActiveUserSessions This only applies to multi-session fleets.
+     */
+    AvailableUserSessions?: Integer;
+    /**
+     * The number of user sessions currently being used for streaming sessions. This only applies to multi-session fleets.
+     */
+    ActiveUserSessions?: Integer;
+    /**
+     * The total number of session slots that are available for streaming or are currently streaming. ActualUserSessionCapacity = AvailableUserSessionCapacity + ActiveUserSessions This only applies to multi-session fleets.
+     */
+    ActualUserSessions?: Integer;
   }
   export interface CopyImageRequest {
     /**
@@ -1266,7 +1286,7 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 360000.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 432000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
@@ -1321,6 +1341,10 @@ declare namespace AppStream {
      * The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.
      */
     SessionScriptS3Location?: S3Location;
+    /**
+     * The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+     */
+    MaxSessionsPerInstance?: Integer;
   }
   export interface CreateFleetResult {
     /**
@@ -1974,11 +1998,11 @@ declare namespace AppStream {
     /**
      * The name of the stack. This value is case-sensitive.
      */
-    StackName: String;
+    StackName: Name;
     /**
      * The name of the fleet. This value is case-sensitive.
      */
-    FleetName: String;
+    FleetName: Name;
     /**
      * The user identifier (ID). If you specify a user ID, you must also specify the authentication type.
      */
@@ -1995,6 +2019,10 @@ declare namespace AppStream {
      * The authentication method. Specify API for a user authenticated using a streaming URL or SAML for a SAML federated user. The default is to authenticate users using a streaming URL.
      */
     AuthenticationType?: AuthenticationType;
+    /**
+     * The identifier for the instance hosting the session.
+     */
+    InstanceId?: String;
   }
   export interface DescribeSessionsResult {
     /**
@@ -2385,8 +2413,12 @@ declare namespace AppStream {
      * The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.
      */
     SessionScriptS3Location?: S3Location;
+    /**
+     * The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+     */
+    MaxSessionsPerInstance?: Integer;
   }
-  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|"IAM_ROLE_ARN"|"USB_DEVICE_FILTER_STRINGS"|"SESSION_SCRIPT_S3_LOCATION"|string;
+  export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|"IAM_ROLE_ARN"|"USB_DEVICE_FILTER_STRINGS"|"SESSION_SCRIPT_S3_LOCATION"|"MAX_SESSIONS_PER_INSTANCE"|string;
   export type FleetAttributes = FleetAttribute[];
   export interface FleetError {
     /**
@@ -2794,6 +2826,10 @@ declare namespace AppStream {
      * The network details for the streaming session.
      */
     NetworkAccessConfiguration?: NetworkAccessConfiguration;
+    /**
+     * The identifier for the instance hosting the session.
+     */
+    InstanceId?: String;
   }
   export type SessionConnectionState = "CONNECTED"|"NOT_CONNECTED"|string;
   export type SessionList = Session[];
@@ -3151,7 +3187,7 @@ declare namespace AppStream {
     /**
      * A unique name for the fleet.
      */
-    Name?: String;
+    Name?: Name;
     /**
      * The instance type to use when launching fleet instances. The following instance types are available:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge   stream.compute.large   stream.compute.xlarge   stream.compute.2xlarge   stream.compute.4xlarge   stream.compute.8xlarge   stream.memory.large   stream.memory.xlarge   stream.memory.2xlarge   stream.memory.4xlarge   stream.memory.8xlarge   stream.memory.z1d.large   stream.memory.z1d.xlarge   stream.memory.z1d.2xlarge   stream.memory.z1d.3xlarge   stream.memory.z1d.6xlarge   stream.memory.z1d.12xlarge   stream.graphics-design.large   stream.graphics-design.xlarge   stream.graphics-design.2xlarge   stream.graphics-design.4xlarge   stream.graphics-desktop.2xlarge   stream.graphics.g4dn.xlarge   stream.graphics.g4dn.2xlarge   stream.graphics.g4dn.4xlarge   stream.graphics.g4dn.8xlarge   stream.graphics.g4dn.12xlarge   stream.graphics.g4dn.16xlarge   stream.graphics-pro.4xlarge   stream.graphics-pro.8xlarge   stream.graphics-pro.16xlarge   The following instance types are available for Elastic fleets:   stream.standard.small   stream.standard.medium   stream.standard.large   stream.standard.xlarge   stream.standard.2xlarge  
      */
@@ -3224,6 +3260,10 @@ declare namespace AppStream {
      * The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets. 
      */
     SessionScriptS3Location?: S3Location;
+    /**
+     * The maximum number of user sessions on an instance. This only applies to multi-session fleets.
+     */
+    MaxSessionsPerInstance?: Integer;
   }
   export interface UpdateFleetResult {
     /**
