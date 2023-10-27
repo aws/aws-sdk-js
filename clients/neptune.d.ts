@@ -899,11 +899,11 @@ declare namespace Neptune {
      */
     OptionGroupName?: String;
     /**
-     * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region. To see the time blocks available, see  Adjusting the Preferred Maintenance Window in the Amazon Neptune User Guide.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
+     * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region. To see the time blocks available, see Neptune Maintenance Window in the Amazon Neptune User Guide.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.   Must be at least 30 minutes.  
      */
     PreferredBackupWindow?: String;
     /**
-     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region, occurring on a random day of the week. To see the time blocks available, see  Adjusting the Preferred Maintenance Window in the Amazon Neptune User Guide.  Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi  The default is a 30-minute window selected at random from an 8-hour block of time for each Amazon Region, occurring on a random day of the week. To see the time blocks available, see Neptune Maintenance Window in the Amazon Neptune User Guide.  Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -938,6 +938,9 @@ declare namespace Neptune {
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is enabled.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
     /**
      * The ID of the Neptune global database to which this new DB cluster should be added.
@@ -1101,7 +1104,7 @@ declare namespace Neptune {
     /**
      * The password for the given ARN from the key store in order to access the device.
      */
-    TdeCredentialPassword?: String;
+    TdeCredentialPassword?: SensitiveString;
     /**
      * Specifies whether the DB instance is encrypted. Not applicable. The encryption for DB instances is managed by the DB cluster. For more information, see CreateDBCluster. Default: false
      */
@@ -1431,6 +1434,9 @@ declare namespace Neptune {
      * Time at which the DB cluster will be automatically restarted.
      */
     AutomaticRestartTime?: TStamp;
+    /**
+     * Shows the scaling configuration for a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfigurationInfo;
     /**
      * Contains a user-supplied global database cluster identifier. This identifier is the unique key that identifies a global database.
@@ -3084,6 +3090,9 @@ declare namespace Neptune {
      *  If set to true, tags are copied to any snapshot of the DB cluster that is created. 
      */
     CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface ModifyDBClusterParameterGroupMessage {
@@ -3212,7 +3221,7 @@ declare namespace Neptune {
     /**
      * The password for the given ARN from the key store in order to access the device.
      */
-    TdeCredentialPassword?: String;
+    TdeCredentialPassword?: SensitiveString;
     /**
      * Indicates the certificate that needs to be associated with the instance.
      */
@@ -3805,6 +3814,9 @@ declare namespace Neptune {
      *  If set to true, tags are copied to any snapshot of the restored DB cluster that is created. 
      */
     CopyTagsToSnapshot?: BooleanOptional;
+    /**
+     * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface RestoreDBClusterFromSnapshotResult {
@@ -3871,11 +3883,15 @@ declare namespace Neptune {
      * A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. 
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * Contains the scaling configuration of a Neptune Serverless DB cluster. For more information, see Using Amazon Neptune Serverless in the Amazon Neptune User Guide.
+     */
     ServerlessV2ScalingConfiguration?: ServerlessV2ScalingConfiguration;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
   }
+  export type SensitiveString = string;
   export interface ServerlessV2ScalingConfiguration {
     /**
      * The minimum number of Neptune capacity units (NCUs) for a DB instance in a Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on.

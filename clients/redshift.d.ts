@@ -1537,6 +1537,10 @@ declare namespace Redshift {
      * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret.
      */
     MasterPasswordSecretKmsKeyId?: String;
+    /**
+     * The IP address type for the cluster. Possible values are ipv4 and dualstack.
+     */
+    IpAddressType?: String;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -1802,6 +1806,10 @@ declare namespace Redshift {
      * The list of tags for the cluster subnet group.
      */
     Tags?: TagList;
+    /**
+     * The IP address types supported by this cluster subnet group. Possible values are ipv4 and dualstack.
+     */
+    SupportedClusterIpAddressTypes?: ValueStringList;
   }
   export interface ClusterSubnetGroupMessage {
     /**
@@ -2035,6 +2043,10 @@ declare namespace Redshift {
      * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. You can only use this parameter if ManageMasterPassword is true.
      */
     MasterPasswordSecretKmsKeyId?: String;
+    /**
+     * The IP address types that the cluster supports. Possible values are ipv4 and dualstack.
+     */
+    IpAddressType?: String;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -4340,6 +4352,10 @@ declare namespace Redshift {
      * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. You can only use this parameter if ManageMasterPassword is true.
      */
     MasterPasswordSecretKmsKeyId?: String;
+    /**
+     * The IP address types that the cluster supports. Possible values are ipv4 and dualstack.
+     */
+    IpAddressType?: String;
   }
   export interface ModifyClusterParameterGroupMessage {
     /**
@@ -4569,6 +4585,10 @@ declare namespace Redshift {
      * The Availability Zone. 
      */
     AvailabilityZone?: String;
+    /**
+     * The IPv6 address of the network interface within the subnet. 
+     */
+    Ipv6Address?: String;
   }
   export type NetworkInterfaceList = NetworkInterface[];
   export interface NodeConfigurationOption {
@@ -5299,6 +5319,10 @@ declare namespace Redshift {
      * The ID of the Key Management Service (KMS) key used to encrypt and store the cluster's admin credentials secret. You can only use this parameter if ManageMasterPassword is true.
      */
     MasterPasswordSecretKmsKeyId?: String;
+    /**
+     * The IP address type for the cluster. Possible values are ipv4 and dualstack.
+     */
+    IpAddressType?: String;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;

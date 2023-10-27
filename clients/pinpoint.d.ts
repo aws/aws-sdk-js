@@ -2723,7 +2723,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The unique identifier for the endpoint.
+     * The case insensitive unique identifier for the endpoint. The identifier can't contain $, { or }.
      */
     EndpointId: __string;
   }
@@ -4103,7 +4103,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The unique identifier for the endpoint.
+     * The case insensitive unique identifier for the endpoint. The identifier can't contain $, { or }.
      */
     EndpointId: __string;
   }
@@ -6946,7 +6946,7 @@ declare namespace Pinpoint {
      */
     ApplicationId: __string;
     /**
-     * The unique identifier for the endpoint.
+     * The case insensitive unique identifier for the endpoint. The identifier can't contain $, { or }.
      */
     EndpointId: __string;
     EndpointRequest: EndpointRequest;

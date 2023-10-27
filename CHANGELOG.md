@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1482.0-->
+<!--LATEST=2.1483.0-->
 <!--ENTRYINSERT-->
+
+## 2.1483.0
+* feature: EMR: Updated CreateCluster API request and DescribeCluster API responses to include EbsRootVolumeIops, and EbsRootVolumeThroughput attributes that specify the user configured root volume IOPS and throughput for Amazon EBS root device volume. This feature will be available from Amazon EMR releases 6.15.0
+* feature: Neptune: Update TdeCredentialPassword type to SensitiveString
+* feature: Redshift: added support to create a dual stack cluster
 
 ## 2.1482.0
 * feature: AppStream: This release introduces multi-session fleets, allowing customers to provision more than one user session on a single fleet instance.
