@@ -244,6 +244,14 @@ declare class Finspace extends Service {
    */
   updateEnvironment(callback?: (err: AWSError, data: Finspace.Types.UpdateEnvironmentResponse) => void): Request<Finspace.Types.UpdateEnvironmentResponse, AWSError>;
   /**
+   *  Allows you to update code configuration on a running cluster. By using this API you can update the code, the initialization script path, and the command line arguments for a specific cluster. The configuration that you want to update will override any existing configurations on the cluster. 
+   */
+  updateKxClusterCodeConfiguration(params: Finspace.Types.UpdateKxClusterCodeConfigurationRequest, callback?: (err: AWSError, data: Finspace.Types.UpdateKxClusterCodeConfigurationResponse) => void): Request<Finspace.Types.UpdateKxClusterCodeConfigurationResponse, AWSError>;
+  /**
+   *  Allows you to update code configuration on a running cluster. By using this API you can update the code, the initialization script path, and the command line arguments for a specific cluster. The configuration that you want to update will override any existing configurations on the cluster. 
+   */
+  updateKxClusterCodeConfiguration(callback?: (err: AWSError, data: Finspace.Types.UpdateKxClusterCodeConfigurationResponse) => void): Request<Finspace.Types.UpdateKxClusterCodeConfigurationResponse, AWSError>;
+  /**
    * Updates the databases mounted on a kdb cluster, which includes the changesetId and all the dbPaths to be cached. This API does not allow you to change a database name or add a database if you created a cluster without one.  Using this API you can point a cluster to a different changeset and modify a list of partitions being cached.
    */
   updateKxClusterDatabases(params: Finspace.Types.UpdateKxClusterDatabasesRequest, callback?: (err: AWSError, data: Finspace.Types.UpdateKxClusterDatabasesResponse) => void): Request<Finspace.Types.UpdateKxClusterDatabasesResponse, AWSError>;
@@ -1293,7 +1301,7 @@ declare namespace Finspace {
   export type KxAzMode = "SINGLE"|"MULTI"|string;
   export interface KxCacheStorageConfiguration {
     /**
-     * The type of cache storage . The valid values are:    CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.   
+     * The type of cache storage. The valid values are:    CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.    CACHE_250 – This type provides at least 250 MB/s disk access throughput.    CACHE_12 – This type provides at least 12 MB/s disk access throughput.    For cache type CACHE_1000 and CACHE_250 you can select cache size as 1200 GB or increments of 2400 GB. For cache type CACHE_12 you can select the cache size in increments of 6000 GB.
      */
     type: KxCacheStorageType;
     /**
@@ -1377,6 +1385,13 @@ declare namespace Finspace {
      */
     createdTimestamp?: Timestamp;
   }
+  export interface KxClusterCodeDeploymentConfiguration {
+    /**
+     *  The type of deployment that you want on a cluster.    ROLLING – This options updates the cluster by stopping the exiting q process and starting a new q process with updated configuration.   FORCE – This option updates the cluster by immediately stopping all the running processes before starting up new ones with the updated configuration.   
+     */
+    deploymentStrategy: KxClusterCodeDeploymentStrategy;
+  }
+  export type KxClusterCodeDeploymentStrategy = "ROLLING"|"FORCE"|string;
   export type KxClusterDescription = string;
   export type KxClusterName = string;
   export type KxClusterNodeIdString = string;
@@ -1440,7 +1455,7 @@ declare namespace Finspace {
   export type KxDatabases = KxDatabaseListEntry[];
   export interface KxDeploymentConfiguration {
     /**
-     *  The type of deployment that you want on a cluster.    ROLLING – This options loads the updated database by stopping the exiting q process and starting a new q process with updated configuration.   NO_RESTART – This option loads the updated database on the running q process without stopping it. This option is quicker as it reduces the turn around time to update a kdb database changeset configuration on a cluster.  
+     *  The type of deployment that you want on a cluster.    ROLLING – This options updates the cluster by stopping the exiting q process and starting a new q process with updated configuration.   NO_RESTART – This option updates the cluster without stopping the running q process. It is only available for HDB type cluster. This option is quicker as it reduces the turn around time to update configuration on a cluster.  With this deployment mode, you cannot update the initializationScript and commandLineArguments parameters.  
      */
     deploymentStrategy: KxDeploymentStrategy;
   }
@@ -1896,6 +1911,35 @@ declare namespace Finspace {
      * Returns the FinSpace environment object.
      */
     environment?: Environment;
+  }
+  export interface UpdateKxClusterCodeConfigurationRequest {
+    /**
+     *  A unique identifier of the kdb environment. 
+     */
+    environmentId: KxEnvironmentId;
+    /**
+     * The name of the cluster.
+     */
+    clusterName: KxClusterName;
+    /**
+     * A token that ensures idempotency. This token expires in 10 minutes.
+     */
+    clientToken?: ClientTokenString;
+    code: CodeConfiguration;
+    /**
+     * Specifies a Q program that will be run at launch of a cluster. It is a relative path within .zip file that contains the custom code, which will be loaded on the cluster. It must include the file name itself. For example, somedir/init.q.
+     */
+    initializationScript?: InitializationScriptFilePath;
+    /**
+     * Specifies the key-value pairs to make them available inside the cluster.
+     */
+    commandLineArguments?: KxCommandLineArguments;
+    /**
+     *  The configuration that allows you to choose how you want to update the code on a cluster. 
+     */
+    deploymentConfiguration?: KxClusterCodeDeploymentConfiguration;
+  }
+  export interface UpdateKxClusterCodeConfigurationResponse {
   }
   export interface UpdateKxClusterDatabasesRequest {
     /**

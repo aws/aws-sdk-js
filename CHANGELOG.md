@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1483.0-->
+<!--LATEST=2.1484.0-->
 <!--ENTRYINSERT-->
+
+## 2.1484.0
+* feature: Connect: This release adds InstanceId field for phone number APIs.
+* feature: DataExchange: We added a new API action: SendDataSetNotification.
+* feature: DataSync: Platform version changes to support AL1 deprecation initiative.
+* feature: Finspace: Introducing new API UpdateKxClusterCodeConfiguration, introducing new cache types for clusters and introducing new deployment modes for updating clusters.
+* feature: MediaPackageV2: This feature allows customers to create a combination of manifest filtering, startover and time delay configuration that applies to all egress requests by default.
+* feature: RDS: This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations.
+* feature: RedshiftServerless: Added support for custom domain names for Amazon Redshift Serverless workgroups. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
+* feature: Resiliencehub: Introduced the ability to filter applications by their last assessment date and time and have included metrics for the application's estimated workload Recovery Time Objective (RTO) and estimated workload Recovery Point Objective (RPO).
+* feature: S3Outposts: Updated ListOutpostsWithS3 API response to include S3OutpostArn for use with AWS RAM.
 
 ## 2.1483.0
 * feature: EMR: Updated CreateCluster API request and DescribeCluster API responses to include EbsRootVolumeIops, and EbsRootVolumeThroughput attributes that specify the user configured root volume IOPS and throughput for Amazon EBS root device volume. This feature will be available from Amazon EMR releases 6.15.0

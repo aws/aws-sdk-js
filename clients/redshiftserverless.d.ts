@@ -20,6 +20,14 @@ declare class RedshiftServerless extends Service {
    */
   convertRecoveryPointToSnapshot(callback?: (err: AWSError, data: RedshiftServerless.Types.ConvertRecoveryPointToSnapshotResponse) => void): Request<RedshiftServerless.Types.ConvertRecoveryPointToSnapshotResponse, AWSError>;
   /**
+   * Creates a custom domain association for Amazon Redshift Serverless.
+   */
+  createCustomDomainAssociation(params: RedshiftServerless.Types.CreateCustomDomainAssociationRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.CreateCustomDomainAssociationResponse) => void): Request<RedshiftServerless.Types.CreateCustomDomainAssociationResponse, AWSError>;
+  /**
+   * Creates a custom domain association for Amazon Redshift Serverless.
+   */
+  createCustomDomainAssociation(callback?: (err: AWSError, data: RedshiftServerless.Types.CreateCustomDomainAssociationResponse) => void): Request<RedshiftServerless.Types.CreateCustomDomainAssociationResponse, AWSError>;
+  /**
    * Creates an Amazon Redshift Serverless managed VPC endpoint.
    */
   createEndpointAccess(params: RedshiftServerless.Types.CreateEndpointAccessRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.CreateEndpointAccessResponse) => void): Request<RedshiftServerless.Types.CreateEndpointAccessResponse, AWSError>;
@@ -59,6 +67,14 @@ declare class RedshiftServerless extends Service {
    * Creates an workgroup in Amazon Redshift Serverless.
    */
   createWorkgroup(callback?: (err: AWSError, data: RedshiftServerless.Types.CreateWorkgroupResponse) => void): Request<RedshiftServerless.Types.CreateWorkgroupResponse, AWSError>;
+  /**
+   * Deletes a custom domain association for Amazon Redshift Serverless.
+   */
+  deleteCustomDomainAssociation(params: RedshiftServerless.Types.DeleteCustomDomainAssociationRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteCustomDomainAssociationResponse) => void): Request<RedshiftServerless.Types.DeleteCustomDomainAssociationResponse, AWSError>;
+  /**
+   * Deletes a custom domain association for Amazon Redshift Serverless.
+   */
+  deleteCustomDomainAssociation(callback?: (err: AWSError, data: RedshiftServerless.Types.DeleteCustomDomainAssociationResponse) => void): Request<RedshiftServerless.Types.DeleteCustomDomainAssociationResponse, AWSError>;
   /**
    * Deletes an Amazon Redshift Serverless managed VPC endpoint.
    */
@@ -115,6 +131,14 @@ declare class RedshiftServerless extends Service {
    * Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes).  &lt;p&gt;The Identity and Access Management (IAM) user or role that runs GetCredentials must have an IAM policy attached that allows access to all necessary actions and resources.&lt;/p&gt; &lt;p&gt;If the &lt;code&gt;DbName&lt;/code&gt; parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name.&lt;/p&gt; 
    */
   getCredentials(callback?: (err: AWSError, data: RedshiftServerless.Types.GetCredentialsResponse) => void): Request<RedshiftServerless.Types.GetCredentialsResponse, AWSError>;
+  /**
+   * Gets information about a specific custom domain association.
+   */
+  getCustomDomainAssociation(params: RedshiftServerless.Types.GetCustomDomainAssociationRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.GetCustomDomainAssociationResponse) => void): Request<RedshiftServerless.Types.GetCustomDomainAssociationResponse, AWSError>;
+  /**
+   * Gets information about a specific custom domain association.
+   */
+  getCustomDomainAssociation(callback?: (err: AWSError, data: RedshiftServerless.Types.GetCustomDomainAssociationResponse) => void): Request<RedshiftServerless.Types.GetCustomDomainAssociationResponse, AWSError>;
   /**
    * Returns information, such as the name, about a VPC endpoint.
    */
@@ -179,6 +203,14 @@ declare class RedshiftServerless extends Service {
    * Returns information about a specific workgroup.
    */
   getWorkgroup(callback?: (err: AWSError, data: RedshiftServerless.Types.GetWorkgroupResponse) => void): Request<RedshiftServerless.Types.GetWorkgroupResponse, AWSError>;
+  /**
+   *  Lists custom domain associations for Amazon Redshift Serverless.
+   */
+  listCustomDomainAssociations(params: RedshiftServerless.Types.ListCustomDomainAssociationsRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.ListCustomDomainAssociationsResponse) => void): Request<RedshiftServerless.Types.ListCustomDomainAssociationsResponse, AWSError>;
+  /**
+   *  Lists custom domain associations for Amazon Redshift Serverless.
+   */
+  listCustomDomainAssociations(callback?: (err: AWSError, data: RedshiftServerless.Types.ListCustomDomainAssociationsResponse) => void): Request<RedshiftServerless.Types.ListCustomDomainAssociationsResponse, AWSError>;
   /**
    * Returns an array of EndpointAccess objects and relevant information.
    */
@@ -292,6 +324,14 @@ declare class RedshiftServerless extends Service {
    */
   untagResource(callback?: (err: AWSError, data: RedshiftServerless.Types.UntagResourceResponse) => void): Request<RedshiftServerless.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates an Amazon Redshift Serverless certificate associated with a custom domain.
+   */
+  updateCustomDomainAssociation(params: RedshiftServerless.Types.UpdateCustomDomainAssociationRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateCustomDomainAssociationResponse) => void): Request<RedshiftServerless.Types.UpdateCustomDomainAssociationResponse, AWSError>;
+  /**
+   * Updates an Amazon Redshift Serverless certificate associated with a custom domain.
+   */
+  updateCustomDomainAssociation(callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateCustomDomainAssociationResponse) => void): Request<RedshiftServerless.Types.UpdateCustomDomainAssociationResponse, AWSError>;
+  /**
    * Updates an Amazon Redshift Serverless managed endpoint.
    */
   updateEndpointAccess(params: RedshiftServerless.Types.UpdateEndpointAccessRequest, callback?: (err: AWSError, data: RedshiftServerless.Types.UpdateEndpointAccessResponse) => void): Request<RedshiftServerless.Types.UpdateEndpointAccessResponse, AWSError>;
@@ -335,6 +375,25 @@ declare class RedshiftServerless extends Service {
 declare namespace RedshiftServerless {
   export type AccountIdList = String[];
   export type AmazonResourceName = string;
+  export interface Association {
+    /**
+     * The custom domain name’s certificate Amazon resource name (ARN).
+     */
+    customDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The expiration time for the certificate.
+     */
+    customDomainCertificateExpiryTime?: SyntheticTimestamp_date_time;
+    /**
+     * The custom domain name associated with the workgroup.
+     */
+    customDomainName?: CustomDomainName;
+    /**
+     * The name of the workgroup associated with the database.
+     */
+    workgroupName?: WorkgroupName;
+  }
+  export type AssociationList = Association[];
   export type Boolean = boolean;
   export interface ConfigParameter {
     /**
@@ -370,6 +429,38 @@ declare namespace RedshiftServerless {
      * The snapshot converted from the recovery point.
      */
     snapshot?: Snapshot;
+  }
+  export interface CreateCustomDomainAssociationRequest {
+    /**
+     * The custom domain name’s certificate Amazon resource name (ARN).
+     */
+    customDomainCertificateArn: CustomDomainCertificateArnString;
+    /**
+     * The custom domain name to associate with the workgroup.
+     */
+    customDomainName: CustomDomainName;
+    /**
+     * The name of the workgroup associated with the database.
+     */
+    workgroupName: WorkgroupName;
+  }
+  export interface CreateCustomDomainAssociationResponse {
+    /**
+     * The custom domain name’s certificate Amazon resource name (ARN).
+     */
+    customDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The expiration time for the certificate.
+     */
+    customDomainCertificateExpiryTime?: SyntheticTimestamp_date_time;
+    /**
+     * The custom domain name to associate with the workgroup.
+     */
+    customDomainName?: CustomDomainName;
+    /**
+     * The name of the workgroup associated with the database.
+     */
+    workgroupName?: WorkgroupName;
   }
   export interface CreateEndpointAccessRequest {
     /**
@@ -547,9 +638,23 @@ declare namespace RedshiftServerless {
      */
     workgroup?: Workgroup;
   }
+  export type CustomDomainCertificateArnString = string;
+  export type CustomDomainName = string;
   export type DbName = string;
   export type DbPassword = string;
   export type DbUser = string;
+  export interface DeleteCustomDomainAssociationRequest {
+    /**
+     * The custom domain name associated with the workgroup.
+     */
+    customDomainName: CustomDomainName;
+    /**
+     * The name of the workgroup associated with the database.
+     */
+    workgroupName: WorkgroupName;
+  }
+  export interface DeleteCustomDomainAssociationResponse {
+  }
   export interface DeleteEndpointAccessRequest {
     /**
      * The name of the VPC endpoint to delete.
@@ -686,6 +791,10 @@ declare namespace RedshiftServerless {
   export type EndpointAccessList = EndpointAccess[];
   export interface GetCredentialsRequest {
     /**
+     * The custom domain name associated with the workgroup. The custom domain name or the workgroup name must be included in the request.
+     */
+    customDomainName?: CustomDomainName;
+    /**
      * The name of the database to get temporary authorization to log on to. Constraints:   Must be 1 to 64 alphanumeric characters or hyphens.   Must contain only uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   The first character must be a letter.   Must not contain a colon ( : ) or slash ( / ).   Cannot be a reserved word. A list of reserved words can be found in Reserved Words  in the Amazon Redshift Database Developer Guide  
      */
     dbName?: DbName;
@@ -696,7 +805,7 @@ declare namespace RedshiftServerless {
     /**
      * The name of the workgroup associated with the database.
      */
-    workgroupName: WorkgroupName;
+    workgroupName?: WorkgroupName;
   }
   export interface GetCredentialsResponse {
     /**
@@ -715,6 +824,34 @@ declare namespace RedshiftServerless {
      * The date and time of when the DbUser and DbPassword authorization refreshes.
      */
     nextRefreshTime?: Timestamp;
+  }
+  export interface GetCustomDomainAssociationRequest {
+    /**
+     * The custom domain name associated with the workgroup.
+     */
+    customDomainName: CustomDomainName;
+    /**
+     * The name of the workgroup associated with the database.
+     */
+    workgroupName: WorkgroupName;
+  }
+  export interface GetCustomDomainAssociationResponse {
+    /**
+     * The custom domain name’s certificate Amazon resource name (ARN).
+     */
+    customDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The expiration time for the certificate.
+     */
+    customDomainCertificateExpiryTime?: SyntheticTimestamp_date_time;
+    /**
+     * The custom domain name associated with the workgroup.
+     */
+    customDomainName?: CustomDomainName;
+    /**
+     * The name of the workgroup associated with the database.
+     */
+    workgroupName?: WorkgroupName;
   }
   export interface GetEndpointAccessRequest {
     /**
@@ -824,6 +961,35 @@ declare namespace RedshiftServerless {
   export type IamRoleArnList = IamRoleArn[];
   export type Integer = number;
   export type KmsKeyId = string;
+  export interface ListCustomDomainAssociationsRequest {
+    /**
+     * The custom domain name’s certificate Amazon resource name (ARN).
+     */
+    customDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The custom domain name associated with the workgroup.
+     */
+    customDomainName?: CustomDomainName;
+    /**
+     * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
+     */
+    maxResults?: ListCustomDomainAssociationsRequestMaxResultsInteger;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    nextToken?: PaginationToken;
+  }
+  export type ListCustomDomainAssociationsRequestMaxResultsInteger = number;
+  export interface ListCustomDomainAssociationsResponse {
+    /**
+     * A list of Association objects.
+     */
+    associations?: AssociationList;
+    /**
+     * When nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.
+     */
+    nextToken?: PaginationToken;
+  }
   export interface ListEndpointAccessRequest {
     /**
      * An optional parameter that specifies the maximum number of results to return. You can use nextToken to display the next page of results.
@@ -1491,6 +1657,38 @@ declare namespace RedshiftServerless {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateCustomDomainAssociationRequest {
+    /**
+     * The custom domain name’s certificate Amazon resource name (ARN). This is optional.
+     */
+    customDomainCertificateArn: CustomDomainCertificateArnString;
+    /**
+     * The custom domain name associated with the workgroup.
+     */
+    customDomainName: CustomDomainName;
+    /**
+     * The name of the workgroup associated with the database.
+     */
+    workgroupName: WorkgroupName;
+  }
+  export interface UpdateCustomDomainAssociationResponse {
+    /**
+     * The custom domain name’s certificate Amazon resource name (ARN).
+     */
+    customDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The expiration time for the certificate.
+     */
+    customDomainCertificateExpiryTime?: SyntheticTimestamp_date_time;
+    /**
+     * The custom domain name associated with the workgroup.
+     */
+    customDomainName?: CustomDomainName;
+    /**
+     * The name of the workgroup associated with the database.
+     */
+    workgroupName?: WorkgroupName;
+  }
   export interface UpdateEndpointAccessRequest {
     /**
      * The name of the VPC endpoint to update.
@@ -1513,7 +1711,7 @@ declare namespace RedshiftServerless {
      */
     adminPasswordSecretKmsKeyId?: KmsKeyId;
     /**
-     * The password of the administrator for the first database created in the namespace. This parameter must be updated together with adminUsername. You can't use adminUserPassword if manageAdminPassword is true.
+     * The password of the administrator for the first database created in the namespace. This parameter must be updated together with adminUsername. You can't use adminUserPassword if manageAdminPassword is true. 
      */
     adminUserPassword?: DbPassword;
     /**
@@ -1702,6 +1900,18 @@ declare namespace RedshiftServerless {
      * The creation date of the workgroup.
      */
     creationDate?: SyntheticTimestamp_date_time;
+    /**
+     * The custom domain name’s certificate Amazon resource name (ARN).
+     */
+    customDomainCertificateArn?: CustomDomainCertificateArnString;
+    /**
+     * The expiration time for the certificate.
+     */
+    customDomainCertificateExpiryTime?: SyntheticTimestamp_date_time;
+    /**
+     * The custom domain name associated with the workgroup.
+     */
+    customDomainName?: CustomDomainName;
     /**
      * The endpoint that is created from the workgroup.
      */

@@ -246,6 +246,14 @@ declare class RDS extends Service {
    */
   createGlobalCluster(callback?: (err: AWSError, data: RDS.Types.CreateGlobalClusterResult) => void): Request<RDS.Types.CreateGlobalClusterResult, AWSError>;
   /**
+   * Creates a zero-ETL integration with Amazon Redshift. For more information, see Working with Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide.
+   */
+  createIntegration(params: RDS.Types.CreateIntegrationMessage, callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
+  /**
+   * Creates a zero-ETL integration with Amazon Redshift. For more information, see Working with Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide.
+   */
+  createIntegration(callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
+  /**
    * Creates a new option group. You can create up to 20 option groups. This command doesn't apply to RDS Custom.
    */
   createOptionGroup(params: RDS.Types.CreateOptionGroupMessage, callback?: (err: AWSError, data: RDS.Types.CreateOptionGroupResult) => void): Request<RDS.Types.CreateOptionGroupResult, AWSError>;
@@ -389,6 +397,14 @@ declare class RDS extends Service {
    * Deletes a global database cluster. The primary and secondary clusters must already be detached or destroyed first.  This action only applies to Aurora DB clusters. 
    */
   deleteGlobalCluster(callback?: (err: AWSError, data: RDS.Types.DeleteGlobalClusterResult) => void): Request<RDS.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
+   * Deletes a zero-ETL integration with Amazon Redshift. For more information, see Deleting Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide 
+   */
+  deleteIntegration(params: RDS.Types.DeleteIntegrationMessage, callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
+  /**
+   * Deletes a zero-ETL integration with Amazon Redshift. For more information, see Deleting Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide 
+   */
+  deleteIntegration(callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
   /**
    * Deletes an existing option group.
    */
@@ -661,6 +677,14 @@ declare class RDS extends Service {
    * Returns information about Aurora global database clusters. This API supports pagination. For more information on Amazon Aurora, see  What is Amazon Aurora? in the Amazon Aurora User Guide.  This action only applies to Aurora DB clusters. 
    */
   describeGlobalClusters(callback?: (err: AWSError, data: RDS.Types.GlobalClustersMessage) => void): Request<RDS.Types.GlobalClustersMessage, AWSError>;
+  /**
+   * Describe one or more zero-ETL integration with Amazon Redshift. For more information, see Viewing and monitoring Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide 
+   */
+  describeIntegrations(params: RDS.Types.DescribeIntegrationsMessage, callback?: (err: AWSError, data: RDS.Types.DescribeIntegrationsResponse) => void): Request<RDS.Types.DescribeIntegrationsResponse, AWSError>;
+  /**
+   * Describe one or more zero-ETL integration with Amazon Redshift. For more information, see Viewing and monitoring Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide 
+   */
+  describeIntegrations(callback?: (err: AWSError, data: RDS.Types.DescribeIntegrationsResponse) => void): Request<RDS.Types.DescribeIntegrationsResponse, AWSError>;
   /**
    * Describes all available options.
    */
@@ -1328,6 +1352,7 @@ declare namespace RDS {
   export interface ApplyPendingMaintenanceActionResult {
     ResourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
   }
+  export type Arn = string;
   export type AttributeValueList = String[];
   export type AuditPolicyState = "locked"|"unlocked"|string;
   export type AuthScheme = "SECRETS"|string;
@@ -2749,6 +2774,29 @@ declare namespace RDS {
   export interface CreateGlobalClusterResult {
     GlobalCluster?: GlobalCluster;
   }
+  export interface CreateIntegrationMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the source for replication.
+     */
+    SourceArn: SourceArn;
+    /**
+     * The ARN of the Redshift data warehouse to use as the target for replication.
+     */
+    TargetArn: Arn;
+    /**
+     * The name of the integration.
+     */
+    IntegrationName: IntegrationName;
+    /**
+     * The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, Aurora uses a default Amazon Web Services owned key. 
+     */
+    KMSKeyId?: String;
+    /**
+     * An optional set of non-secret key–value pairs that contains additional contextual information about the data. For more information, see Encryption context in the Amazon Web Services Key Management Service Developer Guide. You can only include this parameter if you specify the KMSKeyId parameter.
+     */
+    AdditionalEncryptionContext?: EncryptionContextMap;
+    Tags?: TagList;
+  }
   export interface CreateOptionGroupMessage {
     /**
      * Specifies the name of the option group to be created. Constraints:   Must be 1 to 255 letters, numbers, or hyphens   First character must be a letter   Can't end with a hyphen or contain two consecutive hyphens   Example: myoptiongroup 
@@ -3654,6 +3702,10 @@ declare namespace RDS {
      * Indicates whether the DB engine version supports forwarding write operations from reader DB instances to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. Valid for: Aurora DB clusters only
      */
     SupportsLocalWriteForwarding?: BooleanOptional;
+    /**
+     * Indicates whether the DB engine version supports Aurora zero-ETL integrations with Amazon Redshift.
+     */
+    SupportsIntegrations?: Boolean;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -4868,6 +4920,12 @@ declare namespace RDS {
   export interface DeleteGlobalClusterResult {
     GlobalCluster?: GlobalCluster;
   }
+  export interface DeleteIntegrationMessage {
+    /**
+     * The unique identifier of the integration.
+     */
+    IntegrationIdentifier: IntegrationIdentifier;
+  }
   export interface DeleteOptionGroupMessage {
     /**
      * The name of the option group to be deleted.  You can't delete default option groups. 
@@ -5657,6 +5715,34 @@ declare namespace RDS {
      */
     Marker?: String;
   }
+  export interface DescribeIntegrationsMessage {
+    /**
+     * The unique identifier of the integration.
+     */
+    IntegrationIdentifier?: IntegrationIdentifier;
+    /**
+     * A filter that specifies one or more resources to return.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeIntegrations request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: Marker;
+  }
+  export interface DescribeIntegrationsResponse {
+    /**
+     * A pagination token that can be used in a later DescribeIntegrations request.
+     */
+    Marker?: Marker;
+    /**
+     * A list of integrations.
+     */
+    Integrations?: IntegrationList;
+  }
   export interface DescribeOptionGroupOptionsMessage {
     /**
      * A required parameter. Options available for the given engine name are described. Valid Values:    mariadb     mysql     oracle-ee     oracle-ee-cdb     oracle-se2     oracle-se2-cdb     postgres     sqlserver-ee     sqlserver-se     sqlserver-ex     sqlserver-web   
@@ -5968,6 +6054,7 @@ declare namespace RDS {
     EC2SecurityGroupOwnerId?: String;
   }
   export type EC2SecurityGroupList = EC2SecurityGroup[];
+  export type EncryptionContextMap = {[key: string]: String};
   export interface Endpoint {
     /**
      * Specifies the DNS address of the DB instance.
@@ -6346,6 +6433,61 @@ declare namespace RDS {
   export type IPRangeList = IPRange[];
   export type Integer = number;
   export type IntegerOptional = number;
+  export interface Integration {
+    /**
+     * The Amazon Resource Name (ARN) of the Aurora DB cluster used as the source for replication.
+     */
+    SourceArn?: SourceArn;
+    /**
+     * The ARN of the Redshift data warehouse used as the target for replication.
+     */
+    TargetArn?: Arn;
+    /**
+     * The name of the integration.
+     */
+    IntegrationName?: IntegrationName;
+    /**
+     * The ARN of the integration.
+     */
+    IntegrationArn?: IntegrationArn;
+    /**
+     * The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key used to to encrypt the integration. 
+     */
+    KMSKeyId?: String;
+    /**
+     * The encryption context for the integration. For more information, see Encryption context in the Amazon Web Services Key Management Service Developer Guide.
+     */
+    AdditionalEncryptionContext?: EncryptionContextMap;
+    /**
+     * The current status of the integration.
+     */
+    Status?: IntegrationStatus;
+    Tags?: TagList;
+    /**
+     * The time when the integration was created, in Universal Coordinated Time (UTC).
+     */
+    CreateTime?: TStamp;
+    /**
+     * Any errors associated with the integration.
+     */
+    Errors?: IntegrationErrorList;
+  }
+  export type IntegrationArn = string;
+  export interface IntegrationError {
+    /**
+     * The error code associated with the integration.
+     */
+    ErrorCode: String;
+    /**
+     * A message explaining the error.
+     */
+    ErrorMessage?: String;
+  }
+  export type IntegrationErrorList = IntegrationError[];
+  export type IntegrationIdentifier = string;
+  export type IntegrationList = Integration[];
+  export type IntegrationName = string;
+  export type IntegrationStatus = "creating"|"active"|"modifying"|"failed"|"deleting"|"syncing"|"needs_attention"|string;
   export type KeyList = String[];
   export type KmsKeyIdOrArn = string;
   export interface ListTagsForResourceMessage {
@@ -6362,6 +6504,7 @@ declare namespace RDS {
   export type LogTypeList = String[];
   export type Long = number;
   export type LongOptional = number;
+  export type Marker = string;
   export interface MasterUserSecret {
     /**
      * The Amazon Resource Name (ARN) of the secret.
@@ -9179,6 +9322,7 @@ declare namespace RDS {
      */
     MaxCapacity?: DoubleOptional;
   }
+  export type SourceArn = string;
   export type SourceIdsList = String[];
   export interface SourceRegion {
     /**
@@ -9545,6 +9689,10 @@ declare namespace RDS {
      * Indicates whether the target engine version supports forwarding write operations from reader DB instances to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances. Valid for: Aurora DB clusters only
      */
     SupportsLocalWriteForwarding?: BooleanOptional;
+    /**
+     * Indicates whether the DB engine version supports Aurora zero-ETL integrations with Amazon Redshift.
+     */
+    SupportsIntegrations?: BooleanOptional;
   }
   export interface UserAuthConfig {
     /**

@@ -263,7 +263,7 @@ declare class Wisdom extends Service {
 declare namespace Wisdom {
   export interface AppIntegrationsConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.    For  Salesforce, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least Id, ArticleNumber, VersionNumber, Title, PublishStatus, and IsDeleted as source fields.     For  ServiceNow, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least number, short_description, sys_mod_count, workflow_state, and active as source fields.     For  Zendesk, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least id, title, updated_at, and draft as source fields.     For  SharePoint, your AppIntegrations DataIntegration must have a FileConfiguration, including only file extensions that are among docx, pdf, html, htm, and txt.   
+     * The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use for ingesting content.    For  Salesforce, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least Id, ArticleNumber, VersionNumber, Title, PublishStatus, and IsDeleted as source fields.     For  ServiceNow, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least number, short_description, sys_mod_count, workflow_state, and active as source fields.     For  Zendesk, your AppIntegrations DataIntegration must have an ObjectConfiguration if objectFields is not provided, including at least id, title, updated_at, and draft as source fields.     For SharePoint, your AppIntegrations DataIntegration must have a FileConfiguration, including only file extensions that are among docx, pdf, html, htm, and txt.     For Amazon S3, the ObjectConfiguration and FileConfiguration of your AppIntegrations DataIntegration must be null. The SourceURI of your DataIntegration must use the following format: s3://your_s3_bucket_name.  The bucket policy of the corresponding S3 bucket must allow the Amazon Web Services principal app-integrations.amazonaws.com to perform s3:ListBucket, s3:GetObject, and s3:GetBucketLocation against the bucket.   
      */
     appIntegrationArn: GenericArn;
     /**
@@ -367,7 +367,7 @@ declare namespace Wisdom {
      */
     name: Name;
     /**
-     * The KMS key used for encryption.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -413,7 +413,7 @@ declare namespace Wisdom {
      */
     name: Name;
     /**
-     * The KMS key used for encryption.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -602,7 +602,7 @@ declare namespace Wisdom {
      */
     name: Name;
     /**
-     * The KMS key used for encryption.
+     * The configuration information for the customer managed key used for encryption.  The customer managed key must have a policy that allows kms:CreateGrant and  kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -682,7 +682,7 @@ declare namespace Wisdom {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The KMS key used for encryption.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom. For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -980,7 +980,7 @@ declare namespace Wisdom {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The KMS key used for encryption.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1024,7 +1024,7 @@ declare namespace Wisdom {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The KMS key used for encryption.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1369,7 +1369,7 @@ declare namespace Wisdom {
   export type SensitiveString = string;
   export interface ServerSideEncryptionConfiguration {
     /**
-     * The KMS key. For information about valid ID values, see Key identifiers (KeyId).
+     * The customer managed key used for encryption. For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance. For information about valid ID values, see Key identifiers (KeyId).
      */
     kmsKeyId?: NonEmptyString;
   }

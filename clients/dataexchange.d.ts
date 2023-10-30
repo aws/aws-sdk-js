@@ -188,6 +188,14 @@ declare class DataExchange extends Service {
    */
   sendApiAsset(callback?: (err: AWSError, data: DataExchange.Types.SendApiAssetResponse) => void): Request<DataExchange.Types.SendApiAssetResponse, AWSError>;
   /**
+   * The type of event associated with the data set.
+   */
+  sendDataSetNotification(params: DataExchange.Types.SendDataSetNotificationRequest, callback?: (err: AWSError, data: DataExchange.Types.SendDataSetNotificationResponse) => void): Request<DataExchange.Types.SendDataSetNotificationResponse, AWSError>;
+  /**
+   * The type of event associated with the data set.
+   */
+  sendDataSetNotification(callback?: (err: AWSError, data: DataExchange.Types.SendDataSetNotificationResponse) => void): Request<DataExchange.Types.SendDataSetNotificationResponse, AWSError>;
+  /**
    * This operation starts a job.
    */
   startJob(params: DataExchange.Types.StartJobRequest, callback?: (err: AWSError, data: DataExchange.Types.StartJobResponse) => void): Request<DataExchange.Types.StartJobResponse, AWSError>;
@@ -408,6 +416,7 @@ declare namespace DataExchange {
      */
     JobId: __string;
   }
+  export type ClientToken = string;
   export type Code = "ACCESS_DENIED_EXCEPTION"|"INTERNAL_SERVER_EXCEPTION"|"MALWARE_DETECTED"|"RESOURCE_NOT_FOUND_EXCEPTION"|"SERVICE_QUOTA_EXCEEDED_EXCEPTION"|"VALIDATION_EXCEPTION"|"MALWARE_SCAN_ENCRYPTED_FILE"|string;
   export interface CreateDataSetRequest {
     /**
@@ -687,6 +696,12 @@ declare namespace DataExchange {
      */
     UpdatedAt: Timestamp;
   }
+  export interface DataUpdateRequestDetails {
+    /**
+     * A datetime in the past when the data was updated. This typically means that the underlying resource supporting the data set was updated.
+     */
+    DataUpdatedAt?: Timestamp;
+  }
   export interface DatabaseLFTagPolicy {
     /**
      * A list of LF-tag conditions that apply to database resources.
@@ -739,6 +754,12 @@ declare namespace DataExchange {
      * The unique identifier for a revision.
      */
     RevisionId: __string;
+  }
+  export interface DeprecationRequestDetails {
+    /**
+     * A datetime in the future when the data set will be deprecated.
+     */
+    DeprecationAt: Timestamp;
   }
   export type Description = string;
   export interface Details {
@@ -1514,6 +1535,16 @@ declare namespace DataExchange {
     LFTagPolicy?: LFTagPolicyDetails;
   }
   export type LakeFormationDataPermissionType = "LFTagPolicy"|string;
+  export interface LakeFormationTagPolicyDetails {
+    /**
+     * The underlying Glue database that the notification is referring to.
+     */
+    Database?: __string;
+    /**
+     * The underlying Glue table that the notification is referring to.
+     */
+    Table?: __string;
+  }
   export interface ListDataSetRevisionsRequest {
     /**
      * The unique identifier for a data set.
@@ -1626,9 +1657,13 @@ declare namespace DataExchange {
   export type ListOfLFPermissions = LFPermission[];
   export type ListOfLFTagValues = String[];
   export type ListOfLFTags = LFTag[];
+  export type ListOfLakeFormationTagPolicies = LakeFormationTagPolicyDetails[];
   export type ListOfRedshiftDataShareAssetSourceEntry = RedshiftDataShareAssetSourceEntry[];
+  export type ListOfRedshiftDataShares = RedshiftDataShareDetails[];
   export type ListOfRevisionDestinationEntry = RevisionDestinationEntry[];
   export type ListOfRevisionEntry = RevisionEntry[];
+  export type ListOfS3DataAccesses = S3DataAccessDetails[];
+  export type ListOfSchemaChangeDetails = SchemaChangeDetails[];
   export type ListOfTableTagPolicyLFPermissions = TableTagPolicyLFPermission[];
   export type ListOf__string = __string[];
   export interface ListRevisionAssetsRequest {
@@ -1675,6 +1710,21 @@ declare namespace DataExchange {
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
+  export interface NotificationDetails {
+    /**
+     * Extra details specific to a data update type notification.
+     */
+    DataUpdate?: DataUpdateRequestDetails;
+    /**
+     * Extra details specific to a deprecation type notification.
+     */
+    Deprecation?: DeprecationRequestDetails;
+    /**
+     * Extra details specific to a schema change type notification.
+     */
+    SchemaChange?: SchemaChangeRequestDetails;
+  }
+  export type NotificationType = "DATA_DELAY"|"DATA_UPDATE"|"DEPRECATION"|"SCHEMA_CHANGE"|string;
   export type Origin = "OWNED"|"ENTITLED"|string;
   export interface OriginDetails {
     /**
@@ -1694,6 +1744,32 @@ declare namespace DataExchange {
      * The Amazon Resource Name (ARN) of the datashare asset.
      */
     DataShareArn: __string;
+  }
+  export interface RedshiftDataShareDetails {
+    /**
+     * The ARN of the underlying Redshift data share that is being affected by this notification.
+     */
+    Arn: __string;
+    /**
+     * The database name in the Redshift data share that is being affected by this notification.
+     */
+    Database: __string;
+    /**
+     * A function name in the Redshift database that is being affected by this notification.
+     */
+    Function?: __string;
+    /**
+     * A table name in the Redshift database that is being affected by this notification.
+     */
+    Table?: __string;
+    /**
+     * A schema name in the Redshift database that is being affected by this notification.
+     */
+    Schema?: __string;
+    /**
+     * A view name in the Redshift database that is being affected by this notification.
+     */
+    View?: __string;
   }
   export interface RequestDetails {
     /**
@@ -1942,11 +2018,60 @@ declare namespace DataExchange {
      */
     KmsKeysToGrant?: ListOfKmsKeysToGrant;
   }
+  export interface S3DataAccessDetails {
+    /**
+     * A list of the key prefixes affected by this notification. This can have up to 50 entries.
+     */
+    KeyPrefixes?: ListOf__string;
+    /**
+     * A list of the keys affected by this notification. This can have up to 50 entries.
+     */
+    Keys?: ListOf__string;
+  }
   export interface S3SnapshotAsset {
     /**
      * The size of the Amazon S3 object that is the object.
      */
     Size: __doubleMin0;
+  }
+  export interface SchemaChangeDetails {
+    /**
+     * Name of the changing field. This value can be up to 255 characters long.
+     */
+    Name: __string;
+    /**
+     * Is the field being added, removed, or modified?
+     */
+    Type: SchemaChangeType;
+    /**
+     * Description of what's changing about this field. This value can be up to 512 characters long.
+     */
+    Description?: __string;
+  }
+  export interface SchemaChangeRequestDetails {
+    /**
+     * List of schema changes happening in the scope of this notification. This can have up to 100 entries.
+     */
+    Changes?: ListOfSchemaChangeDetails;
+    /**
+     * A date in the future when the schema change is taking effect.
+     */
+    SchemaChangeAt: Timestamp;
+  }
+  export type SchemaChangeType = "ADD"|"REMOVE"|"MODIFY"|string;
+  export interface ScopeDetails {
+    /**
+     * Underlying LF resources that will be affected by this notification.
+     */
+    LakeFormationTagPolicies?: ListOfLakeFormationTagPolicies;
+    /**
+     * Underlying Redshift resources that will be affected by this notification.
+     */
+    RedshiftDataShares?: ListOfRedshiftDataShares;
+    /**
+     * Underlying S3 resources that will be affected by this notification.
+     */
+    S3DataAccesses?: ListOfS3DataAccesses;
   }
   export interface SendApiAssetRequest {
     /**
@@ -1991,6 +2116,34 @@ declare namespace DataExchange {
      * The response headers from the underlying API tracked by the API asset.
      */
     ResponseHeaders?: MapOf__string;
+  }
+  export interface SendDataSetNotificationRequest {
+    /**
+     * Affected scope of this notification such as the underlying resources affected by the notification event.
+     */
+    Scope?: ScopeDetails;
+    /**
+     * Idempotency key for the notification, this key allows us to deduplicate notifications that are sent in quick succession erroneously.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * Free-form text field for providers to add information about their notifications.
+     */
+    Comment?: __stringMin0Max16384;
+    /**
+     * Affected data set of the notification.
+     */
+    DataSetId: __string;
+    /**
+     * Extra details specific to this notification type.
+     */
+    Details?: NotificationDetails;
+    /**
+     * The type of the notification. Describing the kind of event the notification is alerting you to.
+     */
+    Type: NotificationType;
+  }
+  export interface SendDataSetNotificationResponse {
   }
   export type ServerSideEncryptionTypes = "aws:kms"|"AES256"|string;
   export interface StartJobRequest {

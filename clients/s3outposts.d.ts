@@ -243,6 +243,10 @@ declare namespace S3Outposts {
      */
     OutpostArn?: OutpostArn;
     /**
+     * Specifies the unique S3 on Outposts ARN for use with Resource Access Manager (RAM).
+     */
+    S3OutpostArn?: S3OutpostArn;
+    /**
      * Specifies the unique identifier for the outpost.
      */
     OutpostId?: OutpostId;
@@ -258,6 +262,7 @@ declare namespace S3Outposts {
   export type OutpostArn = string;
   export type OutpostId = string;
   export type Outposts = Outpost[];
+  export type S3OutpostArn = string;
   export type SecurityGroupId = string;
   export type SubnetId = string;
   export type VpcId = string;

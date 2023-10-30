@@ -1,0 +1,47 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release adds InstanceId field for phone number APIs."
+    },
+    {
+        "type": "feature",
+        "category": "DataExchange",
+        "description": "We added a new API action: SendDataSetNotification."
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "Platform version changes to support AL1 deprecation initiative."
+    },
+    {
+        "type": "feature",
+        "category": "Finspace",
+        "description": "Introducing new API UpdateKxClusterCodeConfiguration, introducing new cache types for clusters and introducing new deployment modes for updating clusters."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackageV2",
+        "description": "This feature allows customers to create a combination of manifest filtering, startover and time delay configuration that applies to all egress requests by default."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release launches the CreateIntegration, DeleteIntegration, and DescribeIntegrations APIs to manage zero-ETL Integrations."
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftServerless",
+        "description": "Added support for custom domain names for Amazon Redshift Serverless workgroups. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it."
+    },
+    {
+        "type": "feature",
+        "category": "Resiliencehub",
+        "description": "Introduced the ability to filter applications by their last assessment date and time and have included metrics for the application's estimated workload Recovery Time Objective (RTO) and estimated workload Recovery Point Objective (RPO)."
+    },
+    {
+        "type": "feature",
+        "category": "S3Outposts",
+        "description": "Updated ListOutpostsWithS3 API response to include S3OutpostArn for use with AWS RAM."
+    }
+]

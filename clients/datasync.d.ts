@@ -60,11 +60,11 @@ declare class DataSync extends Service {
    */
   createLocationFsxLustre(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxLustreResponse) => void): Request<DataSync.Types.CreateLocationFsxLustreResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that DataSync can access for a transfer. For more information, see Creating a location for FSx for ONTAP.
+   * Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that DataSync can use for a data transfer. Before you begin, make sure that you understand how DataSync accesses an FSx for ONTAP file system.
    */
   createLocationFsxOntap(params: DataSync.Types.CreateLocationFsxOntapRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOntapResponse) => void): Request<DataSync.Types.CreateLocationFsxOntapResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that DataSync can access for a transfer. For more information, see Creating a location for FSx for ONTAP.
+   * Creates an endpoint for an Amazon FSx for NetApp ONTAP file system that DataSync can use for a data transfer. Before you begin, make sure that you understand how DataSync accesses an FSx for ONTAP file system.
    */
   createLocationFsxOntap(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOntapResponse) => void): Request<DataSync.Types.CreateLocationFsxOntapResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class DataSync extends Service {
    */
   createLocationFsxOpenZfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxOpenZfsResponse) => void): Request<DataSync.Types.CreateLocationFsxOpenZfsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for Windows File Server file system.
+   * Creates an endpoint for an Amazon FSx for Windows File Server file system that DataSync can use for a data transfer. Before you begin, make sure that you understand how DataSync accesses an FSx for Windows File Server.
    */
   createLocationFsxWindows(params: DataSync.Types.CreateLocationFsxWindowsRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
   /**
-   * Creates an endpoint for an Amazon FSx for Windows File Server file system.
+   * Creates an endpoint for an Amazon FSx for Windows File Server file system that DataSync can use for a data transfer. Before you begin, make sure that you understand how DataSync accesses an FSx for Windows File Server.
    */
   createLocationFsxWindows(callback?: (err: AWSError, data: DataSync.Types.CreateLocationFsxWindowsResponse) => void): Request<DataSync.Types.CreateLocationFsxWindowsResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class DataSync extends Service {
    */
   createTask(callback?: (err: AWSError, data: DataSync.Types.CreateTaskResponse) => void): Request<DataSync.Types.CreateTaskResponse, AWSError>;
   /**
-   * Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your Amazon Web Services account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.
+   * Removes an DataSync agent resource from your Amazon Web Services account. Keep in mind that this operation (which can't be undone) doesn't remove the agent's virtual machine (VM) or Amazon EC2 instance from your storage environment. For next steps, you can delete the VM or instance from your storage environment or reuse it to activate a new agent.
    */
   deleteAgent(params: DataSync.Types.DeleteAgentRequest, callback?: (err: AWSError, data: DataSync.Types.DeleteAgentResponse) => void): Request<DataSync.Types.DeleteAgentResponse, AWSError>;
   /**
-   * Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your Amazon Web Services account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.
+   * Removes an DataSync agent resource from your Amazon Web Services account. Keep in mind that this operation (which can't be undone) doesn't remove the agent's virtual machine (VM) or Amazon EC2 instance from your storage environment. For next steps, you can delete the VM or instance from your storage environment or reuse it to activate a new agent.
    */
   deleteAgent(callback?: (err: AWSError, data: DataSync.Types.DeleteAgentResponse) => void): Request<DataSync.Types.DeleteAgentResponse, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class DataSync extends Service {
    */
   deleteTask(callback?: (err: AWSError, data: DataSync.Types.DeleteTaskResponse) => void): Request<DataSync.Types.DeleteTaskResponse, AWSError>;
   /**
-   * Returns metadata about an DataSync agent, such as its name, endpoint type, and status.
+   * Returns information about an DataSync agent, such as its name, service endpoint type, and status.
    */
   describeAgent(params: DataSync.Types.DescribeAgentRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeAgentResponse) => void): Request<DataSync.Types.DescribeAgentResponse, AWSError>;
   /**
-   * Returns metadata about an DataSync agent, such as its name, endpoint type, and status.
+   * Returns information about an DataSync agent, such as its name, service endpoint type, and status.
    */
   describeAgent(callback?: (err: AWSError, data: DataSync.Types.DescribeAgentResponse) => void): Request<DataSync.Types.DescribeAgentResponse, AWSError>;
   /**
@@ -412,11 +412,11 @@ declare class DataSync extends Service {
    */
   untagResource(callback?: (err: AWSError, data: DataSync.Types.UntagResourceResponse) => void): Request<DataSync.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the name of an agent.
+   * Updates the name of an DataSync agent.
    */
   updateAgent(params: DataSync.Types.UpdateAgentRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateAgentResponse) => void): Request<DataSync.Types.UpdateAgentResponse, AWSError>;
   /**
-   * Updates the name of an agent.
+   * Updates the name of an DataSync agent.
    */
   updateAgent(callback?: (err: AWSError, data: DataSync.Types.UpdateAgentResponse) => void): Request<DataSync.Types.UpdateAgentResponse, AWSError>;
   /**
@@ -460,11 +460,11 @@ declare class DataSync extends Service {
    */
   updateLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see Creating a location for SMB.
+   * Updates some of the parameters of a Server Message Block (SMB) file server location that you can use for DataSync transfers.
    */
   updateLocationSmb(params: DataSync.Types.UpdateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see Creating a location for SMB.
+   * Updates some of the parameters of a Server Message Block (SMB) file server location that you can use for DataSync transfers.
    */
   updateLocationSmb(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
   /**
@@ -547,11 +547,16 @@ declare namespace DataSync {
      */
     Name?: TagValue;
     /**
-     * The status of an agent. For more information, see DataSync agent statuses.
+     * The status of an agent.   If the status is ONLINE, the agent is configured properly and ready to use.   If the status is OFFLINE, the agent has been out of contact with DataSync for five minutes or longer. This can happen for a few reasons. For more information, see What do I do if my agent is offline?   
      */
     Status?: AgentStatus;
+    /**
+     * The platform-related details about the agent, such as the version number.
+     */
+    Platform?: Platform;
   }
   export type AgentStatus = "ONLINE"|"OFFLINE"|string;
+  export type AgentVersion = string;
   export type Atime = "NONE"|"BEST_EFFORT"|string;
   export type AzureAccessTier = "HOT"|"COOL"|"ARCHIVE"|string;
   export type AzureBlobAuthenticationType = "SAS"|string;
@@ -796,15 +801,15 @@ declare namespace DataSync {
      */
     Tags?: InputTagList;
     /**
-     * Specifies the user who has the permissions to access files, folders, and metadata in your file system. For information about choosing a user with sufficient permissions, see Required permissions.
+     * Specifies the user who has the permissions to access files, folders, and metadata in your file system. For information about choosing a user with the right level of access for your transfer, see required permissions for FSx for Windows File Server locations.
      */
     User: SmbUser;
     /**
-     * Specifies the name of the Windows domain that the FSx for Windows File Server belongs to.
+     * Specifies the name of the Windows domain that the FSx for Windows File Server belongs to. If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server. For more information, see required permissions for FSx for Windows File Server locations.
      */
     Domain?: SmbDomain;
     /**
-     * Specifies the password of the user who has the permissions to access files and folders in the file system.
+     * Specifies the password of the user who has the permissions to access files and folders in the file system. For more information, see required permissions for FSx for Windows File Server locations.
      */
     Password: SmbPassword;
   }
@@ -993,7 +998,7 @@ declare namespace DataSync {
      */
     User: SmbUser;
     /**
-     * Specifies the Windows domain name that your SMB file server belongs to.  For more information, see required permissions for SMB locations.
+     * Specifies the Windows domain name that your SMB file server belongs to.  If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server. For more information, see required permissions for SMB locations.
      */
     Domain?: SmbDomain;
     /**
@@ -1103,7 +1108,7 @@ declare namespace DataSync {
   }
   export interface DescribeAgentRequest {
     /**
-     * Specifies the Amazon Resource Name (ARN) of the DataSync agent to describe.
+     * Specifies the Amazon Resource Name (ARN) of the DataSync agent that you want information about.
      */
     AgentArn: AgentArn;
   }
@@ -1117,25 +1122,29 @@ declare namespace DataSync {
      */
     Name?: TagValue;
     /**
-     * The status of the agent. If the status is ONLINE, then the agent is configured properly and is available to use. The Running status is the normal running status for an agent. If the status is OFFLINE, the agent's VM is turned off or the agent is in an unhealthy state. When the issue that caused the unhealthy state is resolved, the agent returns to ONLINE status.
+     * The status of the agent.   If the status is ONLINE, the agent is configured properly and ready to use.   If the status is OFFLINE, the agent has been out of contact with DataSync for five minutes or longer. This can happen for a few reasons. For more information, see What do I do if my agent is offline?   
      */
     Status?: AgentStatus;
     /**
-     * The time that the agent last connected to DataSync.
+     * The last time that the agent was communicating with the DataSync service.
      */
     LastConnectionTime?: Time;
     /**
-     * The time that the agent was activated (that is, created in your account).
+     * The time that the agent was activated.
      */
     CreationTime?: Time;
     /**
-     * The type of endpoint that your agent is connected to. If the endpoint is a VPC endpoint, the agent is not accessible over the public internet. 
+     * The type of service endpoint that your agent is connected to.
      */
     EndpointType?: EndpointType;
     /**
-     * The subnet and the security group that DataSync used to access a VPC endpoint.
+     * The network configuration that the agent uses when connecting to a VPC service endpoint.
      */
     PrivateLinkConfig?: PrivateLinkConfig;
+    /**
+     * The platform-related details about the agent, such as the version number.
+     */
+    Platform?: Platform;
   }
   export interface DescribeDiscoveryJobRequest {
     /**
@@ -1734,7 +1743,7 @@ declare namespace DataSync {
      */
     FilesSkipped?: long;
     /**
-     * The number of files, objects, and directories that DataSync verified during your transfer.
+     * The number of files, objects, and directories that DataSync verified during your transfer.  When you configure your task to verify only the data that's transferred, DataSync doesn't verify directories in some situations or files that fail to transfer. 
      */
     FilesVerified?: long;
     /**
@@ -2523,6 +2532,12 @@ declare namespace DataSync {
   export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
   export type PLSubnetArnList = Ec2SubnetArn[];
   export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string;
+  export interface Platform {
+    /**
+     * The version of the DataSync agent.  Beginning December 7, 2023, we will discontinue version 1 DataSync agents. Check the DataSync console to see if you have affected agents. If you do, replace those agents before then to avoid data transfer or storage discovery disruptions. If you need more help, contact Amazon Web Services Support. 
+     */
+    Version?: AgentVersion;
+  }
   export type PosixPermissions = "NONE"|"PRESERVE"|string;
   export type PreserveDeletedFiles = "PRESERVE"|"REMOVE"|string;
   export type PreserveDevices = "NONE"|"PRESERVE"|string;
@@ -3120,27 +3135,27 @@ declare namespace DataSync {
   }
   export interface UpdateLocationSmbRequest {
     /**
-     * The Amazon Resource Name (ARN) of the SMB location to update.
+     * Specifies the ARN of the SMB location that you want to update.
      */
     LocationArn: LocationArn;
     /**
-     * The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination. The SMB path should be a path that's exported by the SMB server, or a subdirectory of that path. The path should be such that it can be mounted by other SMB clients in your network.   Subdirectory must be specified with forward slashes. For example, /path/to/folder.  To transfer all the data in the folder that you specified, DataSync must have permissions to mount the SMB share and to access all the data in that share. To ensure this, do either of the following:   Ensure that the user/password specified belongs to the user who can mount the share and who has the appropriate permissions for all of the files and directories that you want DataSync to access.   Use credentials of a member of the Backup Operators group to mount the share.    Doing either of these options enables the agent to access the data. For the agent to access directories, you must also enable all execute access.
+     * Specifies the name of the share exported by your SMB file server where DataSync will read or write data. You can include a subdirectory in the share path (for example, /path/to/subdirectory). Make sure that other SMB clients in your network can also mount this path. To copy all data in the specified subdirectory, DataSync must be able to mount the SMB share and access all of its data. For more information, see required permissions for SMB locations.
      */
     Subdirectory?: SmbSubdirectory;
     /**
-     * The user who can mount the share has the permissions to access files and folders in the SMB share.
+     * Specifies the user name that can mount your SMB file server and has permission to access the files and folders involved in your transfer. For information about choosing a user with the right level of access for your transfer, see required permissions for SMB locations.
      */
     User?: SmbUser;
     /**
-     * The name of the Windows domain that the SMB server belongs to.
+     * Specifies the Windows domain name that your SMB file server belongs to.  If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right file server. For more information, see required permissions for SMB locations.
      */
     Domain?: SmbDomain;
     /**
-     * The password of the user who can mount the share has the permissions to access files and folders in the SMB share.
+     * Specifies the password of the user who can mount your SMB file server and has permission to access the files and folders involved in your transfer. For more information, see required permissions for SMB locations.
      */
     Password?: SmbPassword;
     /**
-     * The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.
+     * Specifies the DataSync agent (or agents) which you want to connect to your SMB file server. You specify an agent by using its Amazon Resource Name (ARN).
      */
     AgentArns?: AgentArnList;
     MountOptions?: SmbMountOptions;

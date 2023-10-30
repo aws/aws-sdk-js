@@ -1028,11 +1028,11 @@ declare class Connect extends Service {
    */
   listSecurityKeys(callback?: (err: AWSError, data: Connect.Types.ListSecurityKeysResponse) => void): Request<Connect.Types.ListSecurityKeysResponse, AWSError>;
   /**
-   * Returns a list of third party applications in a specific security profile.
+   * Returns a list of third-party applications in a specific security profile.
    */
   listSecurityProfileApplications(params: Connect.Types.ListSecurityProfileApplicationsRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfileApplicationsResponse) => void): Request<Connect.Types.ListSecurityProfileApplicationsResponse, AWSError>;
   /**
-   * Returns a list of third party applications in a specific security profile.
+   * Returns a list of third-party applications in a specific security profile.
    */
   listSecurityProfileApplications(callback?: (err: AWSError, data: Connect.Types.ListSecurityProfileApplicationsResponse) => void): Request<Connect.Types.ListSecurityProfileApplicationsResponse, AWSError>;
   /**
@@ -1156,11 +1156,11 @@ declare class Connect extends Service {
    */
   replicateInstance(callback?: (err: AWSError, data: Connect.Types.ReplicateInstanceResponse) => void): Request<Connect.Types.ReplicateInstanceResponse, AWSError>;
   /**
-   * When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording the call or screen. Voice and screen recordings are supported.
+   * When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording whatever recording is selected in the flow configuration: call, screen, or both. If only call recording or only screen recording is enabled, then it would resume. Voice and screen recordings are supported.
    */
   resumeContactRecording(params: Connect.Types.ResumeContactRecordingRequest, callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
   /**
-   * When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording the call or screen. Voice and screen recordings are supported.
+   * When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording whatever recording is selected in the flow configuration: call, screen, or both. If only call recording or only screen recording is enabled, then it would resume. Voice and screen recordings are supported.
    */
   resumeContactRecording(callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
   /**
@@ -1324,11 +1324,11 @@ declare class Connect extends Service {
    */
   submitContactEvaluation(callback?: (err: AWSError, data: Connect.Types.SubmitContactEvaluationResponse) => void): Request<Connect.Types.SubmitContactEvaluationResponse, AWSError>;
   /**
-   * When a contact is being recorded, this API suspends recording the call or screen. For example, you might suspend the call or screen recording while collecting sensitive information, such as a credit card number. Then use ResumeContactRecording to restart recording. The period of time that the recording is suspended is filled with silence in the final recording. Voice and screen recordings are supported.
+   * When a contact is being recorded, this API suspends recording whatever is selected in the flow configuration: call, screen, or both. If only call recording or only screen recording is enabled, then it would be suspended. For example, you might suspend the screen recording while collecting sensitive information, such as a credit card number. Then use ResumeContactRecording to restart recording the screen. The period of time that the recording is suspended is filled with silence in the final recording. Voice and screen recordings are supported.
    */
   suspendContactRecording(params: Connect.Types.SuspendContactRecordingRequest, callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
-   * When a contact is being recorded, this API suspends recording the call or screen. For example, you might suspend the call or screen recording while collecting sensitive information, such as a credit card number. Then use ResumeContactRecording to restart recording. The period of time that the recording is suspended is filled with silence in the final recording. Voice and screen recordings are supported.
+   * When a contact is being recorded, this API suspends recording whatever is selected in the flow configuration: call, screen, or both. If only call recording or only screen recording is enabled, then it would be suspended. For example, you might suspend the screen recording while collecting sensitive information, such as a credit card number. Then use ResumeContactRecording to restart recording the screen. The period of time that the recording is suspended is filled with silence in the final recording. Voice and screen recordings are supported.
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
@@ -2125,9 +2125,13 @@ declare namespace Connect {
   export type ChatStreamingEndpointARN = string;
   export interface ClaimPhoneNumberRequest {
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. You must enter InstanceId or TargetArn. 
      */
-    TargetArn: ARN;
+    TargetArn?: ARN;
+    /**
+     * The identifier of the Amazon Connect instance that phone numbers are claimed to. You can find the instance ID in the Amazon Resource Name (ARN) of the instance. You must enter InstanceId or TargetArn. 
+     */
+    InstanceId?: InstanceId;
     /**
      * The phone number you want to claim. Phone numbers are formatted [+] [country code] [subscriber number including area code].
      */
@@ -2181,9 +2185,13 @@ declare namespace Connect {
      */
     PhoneNumberDescription?: PhoneNumberDescription;
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through.
      */
     TargetArn?: ARN;
+    /**
+     * The identifier of the Amazon Connect instance that phone numbers are claimed to. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId?: InstanceId;
     /**
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
@@ -2919,7 +2927,7 @@ declare namespace Connect {
      */
     TagRestrictedResources?: TagRestrictedResourceList;
     /**
-     * This API is in preview release for Amazon Connect and is subject to change. A list of third party applications that the security profile will give access to.
+     * This API is in preview release for Amazon Connect and is subject to change. A list of third-party applications that the security profile will give access to.
      */
     Applications?: Applications;
   }
@@ -6076,16 +6084,24 @@ declare namespace Connect {
      */
     PhoneNumberType?: PhoneNumberType;
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through.
      */
     TargetArn?: ARN;
+    /**
+     * The identifier of the Amazon Connect instance that phone numbers are claimed to. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId?: InstanceId;
   }
   export type ListPhoneNumbersSummaryList = ListPhoneNumbersSummary[];
   export interface ListPhoneNumbersV2Request {
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to. If TargetArn input is not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account in the same Amazon Web Services Region as the request.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. If both TargetArn and InstanceId input are not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account in the same Amazon Web Services Region as the request.
      */
     TargetArn?: ARN;
+    /**
+     * The identifier of the Amazon Connect instance that phone numbers are claimed to. You can find the instance ID in the Amazon Resource Name (ARN) of the instance. If both TargetArn and InstanceId are not provided, this API lists numbers claimed to all the Amazon Connect instances belonging to your account in the same AWS Region as the request.
+     */
+    InstanceId?: InstanceId;
     /**
      * The maximum number of results to return per page.
      */
@@ -6335,15 +6351,15 @@ declare namespace Connect {
   }
   export interface ListSecurityProfileApplicationsRequest {
     /**
-     * The security profile identifier.
+     * The identifier for the security profle.
      */
     SecurityProfileId: SecurityProfileId;
     /**
-     * The instance identifier.
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
     /**
-     * The token for the next set of results. The next set of results can be retrieved by using the token value returned in the previous response when making the next request.
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
      */
     NextToken?: NextToken;
     /**
@@ -6353,11 +6369,11 @@ declare namespace Connect {
   }
   export interface ListSecurityProfileApplicationsResponse {
     /**
-     * This API is in preview release for Amazon Connect and is subject to change. A list of the third party application's metadata.
+     * This API is in preview release for Amazon Connect and is subject to change. A list of the third-party application's metadata.
      */
     Applications?: Applications;
     /**
-     * The token for the next set of results. The next set of results can be retrieved by using the token value returned in the previous response when making the next request.
+     * If there are additional results, this is the token for the next set of results.
      */
     NextToken?: NextToken;
   }
@@ -7628,9 +7644,13 @@ declare namespace Connect {
   export type S3Uri = string;
   export interface SearchAvailablePhoneNumbersRequest {
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. You must enter InstanceId or TargetArn. 
      */
-    TargetArn: ARN;
+    TargetArn?: ARN;
+    /**
+     * The identifier of the Amazon Connect instance that phone numbers are claimed to. You can find the instance ID in the Amazon Resource Name (ARN) of the instance. You must enter InstanceId or TargetArn. 
+     */
+    InstanceId?: InstanceId;
     /**
      * The ISO country code.
      */
@@ -9203,9 +9223,13 @@ declare namespace Connect {
      */
     PhoneNumberId: PhoneNumberId;
     /**
-     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone numbers are claimed to.
+     * The Amazon Resource Name (ARN) for Amazon Connect instances or traffic distribution groups that phone number inbound traffic is routed through. You must enter InstanceId or TargetArn. 
      */
-    TargetArn: ARN;
+    TargetArn?: ARN;
+    /**
+     * The identifier of the Amazon Connect instance that phone numbers are claimed to. You can find the instance ID in the Amazon Resource Name (ARN) of the instance. You must enter InstanceId or TargetArn. 
+     */
+    InstanceId?: InstanceId;
     /**
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
      */
@@ -9486,7 +9510,7 @@ declare namespace Connect {
      */
     TagRestrictedResources?: TagRestrictedResourceList;
     /**
-     * This API is in preview release for Amazon Connect and is subject to change. A list of the third party application's metadata.
+     * This API is in preview release for Amazon Connect and is subject to change. A list of the third-party application's metadata.
      */
     Applications?: Applications;
   }

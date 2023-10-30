@@ -378,6 +378,7 @@ declare namespace MediaPackageV2 {
      * Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. ID3Timed metadata messages generate every 5 seconds whenever the content is ingested. Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.
      */
     ProgramDateTimeIntervalSeconds?: CreateHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger;
+    FilterConfiguration?: FilterConfiguration;
   }
   export type CreateHlsManifestConfigurationManifestWindowSecondsInteger = number;
   export type CreateHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger = number;
@@ -400,6 +401,7 @@ declare namespace MediaPackageV2 {
      * Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. ID3Timed metadata messages generate every 5 seconds whenever the content is ingested. Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.
      */
     ProgramDateTimeIntervalSeconds?: CreateLowLatencyHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger;
+    FilterConfiguration?: FilterConfiguration;
   }
   export type CreateLowLatencyHlsManifestConfigurationManifestWindowSecondsInteger = number;
   export type CreateLowLatencyHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger = number;
@@ -610,6 +612,26 @@ declare namespace MediaPackageV2 {
      */
     CmafEncryptionMethod?: CmafEncryptionMethod;
   }
+  export interface FilterConfiguration {
+    /**
+     * Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.
+     */
+    ManifestFilter?: FilterConfigurationManifestFilterString;
+    /**
+     * Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.
+     */
+    Start?: Timestamp;
+    /**
+     * Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.
+     */
+    End?: Timestamp;
+    /**
+     * Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.
+     */
+    TimeDelaySeconds?: FilterConfigurationTimeDelaySecondsInteger;
+  }
+  export type FilterConfigurationManifestFilterString = string;
+  export type FilterConfigurationTimeDelaySecondsInteger = number;
   export interface GetChannelGroupRequest {
     /**
      * The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.
@@ -733,6 +755,7 @@ declare namespace MediaPackageV2 {
      */
     ProgramDateTimeIntervalSeconds?: Integer;
     ScteHls?: ScteHls;
+    FilterConfiguration?: FilterConfiguration;
   }
   export type GetHlsManifests = GetHlsManifestConfiguration[];
   export interface GetLowLatencyHlsManifestConfiguration {
@@ -757,6 +780,7 @@ declare namespace MediaPackageV2 {
      */
     ProgramDateTimeIntervalSeconds?: Integer;
     ScteHls?: ScteHls;
+    FilterConfiguration?: FilterConfiguration;
   }
   export type GetLowLatencyHlsManifests = GetLowLatencyHlsManifestConfiguration[];
   export interface GetOriginEndpointPolicyRequest {
