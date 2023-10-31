@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1484.0-->
+<!--LATEST=2.1485.0-->
 <!--ENTRYINSERT-->
+
+## 2.1485.0
+* feature: Amplify: Add backend field to CreateBranch and UpdateBranch requests. Add pagination support for ListApps, ListDomainAssociations, ListBranches, and ListJobs
+* feature: ApplicationInsights: Automate attaching managed policies
+* feature: EC2: Capacity Blocks for ML are a new EC2 purchasing option for reserving GPU instances on a future date to support short duration machine learning (ML) workloads. Capacity Blocks automatically place instances close together inside Amazon EC2 UltraClusters for low-latency, high-throughput networking.
+* feature: M2: Added name filter ability for ListDataSets API, added ForceUpdate for Updating environment and BatchJob submission using S3BatchJobIdentifier
+* feature: Neptunedata: Minor change to not retry CancelledByUserException
+* feature: Translate: Added support for Brevity translation settings feature.
 
 ## 2.1484.0
 * feature: Connect: This release adds InstanceId field for phone number APIs.

@@ -372,8 +372,13 @@ declare namespace ApplicationInsights {
      *  The method used by Application Insights to onboard your resources. 
      */
     DiscoveryType?: DiscoveryType;
+    /**
+     * If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.
+     */
+    AttachMissingPermission?: AttachMissingPermission;
   }
   export type ApplicationInfoList = ApplicationInfo[];
+  export type AttachMissingPermission = boolean;
   export type AutoConfigEnabled = boolean;
   export type AutoCreate = boolean;
   export type CWEMonitorEnabled = boolean;
@@ -461,6 +466,10 @@ declare namespace ApplicationInsights {
      * Application Insights can create applications based on a resource group or on an account. To create an account-based application using all of the resources in the account, set this parameter to ACCOUNT_BASED. 
      */
     GroupingType?: GroupingType;
+    /**
+     * If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.
+     */
+    AttachMissingPermission?: AttachMissingPermission;
   }
   export interface CreateApplicationResponse {
     /**
@@ -582,6 +591,10 @@ declare namespace ApplicationInsights {
      * The tier of the application component.
      */
     Tier: Tier;
+    /**
+     * The name of the workload.
+     */
+    WorkloadName?: WorkloadName;
     /**
      * The recommended configuration type.
      */
@@ -1433,6 +1446,10 @@ declare namespace ApplicationInsights {
      *  Turns auto-configuration on or off. 
      */
     AutoConfigEnabled?: AutoConfigEnabled;
+    /**
+     * If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing.
+     */
+    AttachMissingPermission?: AttachMissingPermission;
   }
   export interface UpdateApplicationResponse {
     /**

@@ -132,11 +132,11 @@ declare class Translate extends Service {
    */
   tagResource(callback?: (err: AWSError, data: Translate.Types.TagResourceResponse) => void): Request<Translate.Types.TagResourceResponse, AWSError>;
   /**
-   * Translates the input document from the source language to the target language. This synchronous operation supports plain text or HTML for the input document. TranslateDocument supports translations from English to any supported language, and from any supported language to English. Therefore, specify either the source language code or the target language code as “en” (English).   TranslateDocument does not support language auto-detection.   If you set the Formality parameter, the request will fail if the target language does not support formality. For a list of target languages that support formality, see Setting formality. 
+   * Translates the input document from the source language to the target language. This synchronous operation supports text, HTML, or Word documents as the input document. TranslateDocument supports translations from English to any supported language, and from any supported language to English. Therefore, specify either the source language code or the target language code as “en” (English).   If you set the Formality parameter, the request will fail if the target language does not support formality. For a list of target languages that support formality, see Setting formality. 
    */
   translateDocument(params: Translate.Types.TranslateDocumentRequest, callback?: (err: AWSError, data: Translate.Types.TranslateDocumentResponse) => void): Request<Translate.Types.TranslateDocumentResponse, AWSError>;
   /**
-   * Translates the input document from the source language to the target language. This synchronous operation supports plain text or HTML for the input document. TranslateDocument supports translations from English to any supported language, and from any supported language to English. Therefore, specify either the source language code or the target language code as “en” (English).   TranslateDocument does not support language auto-detection.   If you set the Formality parameter, the request will fail if the target language does not support formality. For a list of target languages that support formality, see Setting formality. 
+   * Translates the input document from the source language to the target language. This synchronous operation supports text, HTML, or Word documents as the input document. TranslateDocument supports translations from English to any supported language, and from any supported language to English. Therefore, specify either the source language code or the target language code as “en” (English).   If you set the Formality parameter, the request will fail if the target language does not support formality. For a list of target languages that support formality, see Setting formality. 
    */
   translateDocument(callback?: (err: AWSError, data: Translate.Types.TranslateDocumentResponse) => void): Request<Translate.Types.TranslateDocumentResponse, AWSError>;
   /**
@@ -177,6 +177,7 @@ declare namespace Translate {
   }
   export type AppliedTerminologyList = AppliedTerminology[];
   export type BoundedLengthString = string;
+  export type Brevity = "ON"|string;
   export type ClientTokenString = string;
   export type ContentType = string;
   export interface CreateParallelDataRequest {
@@ -520,11 +521,11 @@ declare namespace Translate {
     /**
      * The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
      */
-    S3Uri: S3Uri;
+    S3Uri?: S3Uri;
     /**
      * The format of the parallel data input file.
      */
-    Format: ParallelDataFormat;
+    Format?: ParallelDataFormat;
   }
   export interface ParallelDataDataLocation {
     /**
@@ -649,7 +650,7 @@ declare namespace Translate {
      */
     ClientToken: ClientTokenString;
     /**
-     * Settings to configure your translation output, including the option to set the formality level of the output text and the option to mask profane words and phrases.
+     * Settings to configure your translation output. You can configure the following options:   Brevity: not supported.   Formality: sets the formality level of the output text.   Profanity: masks profane words and phrases in your translation output.  
      */
     Settings?: TranslationSettings;
   }
@@ -896,13 +897,16 @@ declare namespace Translate {
      */
     TerminologyNames?: ResourceNameList;
     /**
-     * The language code for the language of the source text. Do not use auto, because TranslateDocument does not support language auto-detection. For a list of supported language codes, see Supported languages.
+     * The language code for the language of the source text. For a list of supported language codes, see Supported languages. To have Amazon Translate determine the source language of your text, you can specify auto in the SourceLanguageCode field. If you specify auto, Amazon Translate will call Amazon Comprehend to determine the source language.  If you specify auto, you must send the TranslateDocument request in a region that supports Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported.  
      */
     SourceLanguageCode: LanguageCodeString;
     /**
      * The language code requested for the translated document. For a list of supported language codes, see Supported languages.
      */
     TargetLanguageCode: LanguageCodeString;
+    /**
+     * Settings to configure your translation output. You can configure the following options:   Brevity: not supported.   Formality: sets the formality level of the output text.   Profanity: masks profane words and phrases in your translation output.  
+     */
     Settings?: TranslationSettings;
   }
   export interface TranslateDocumentResponse {
@@ -942,7 +946,7 @@ declare namespace Translate {
      */
     TargetLanguageCode: LanguageCodeString;
     /**
-     * Settings to configure your translation output, including the option to set the formality level of the output text and the option to mask profane words and phrases.
+     * Settings to configure your translation output. You can configure the following options:   Brevity: reduces the length of the translated output for most translations.   Formality: sets the formality level of the output text.   Profanity: masks profane words and phrases in your translation output.  
      */
     Settings?: TranslationSettings;
   }
@@ -978,13 +982,17 @@ declare namespace Translate {
   export type TranslatedTextString = string;
   export interface TranslationSettings {
     /**
-     * You can optionally specify the desired level of formality for translations to supported target languages. The formality setting controls the level of formal language usage (also known as register) in the translation output. You can set the value to informal or formal. If you don't specify a value for formality, or if the target language doesn't support formality, the translation will ignore the formality setting.  If you specify multiple target languages for the job, translate ignores the formality setting for any unsupported target language. For a list of target languages that support formality, see Supported languages in the Amazon Translate Developer Guide.
+     * You can specify the desired level of formality for translations to supported target languages. The formality setting controls the level of formal language usage (also known as register) in the translation output. You can set the value to informal or formal. If you don't specify a value for formality, or if the target language doesn't support formality, the translation will ignore the formality setting.  If you specify multiple target languages for the job, translate ignores the formality setting for any unsupported target language. For a list of target languages that support formality, see Supported languages in the Amazon Translate Developer Guide.
      */
     Formality?: Formality;
     /**
-     * Enable the profanity setting if you want Amazon Translate to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate doesn't detect profanity in all of its supported languages. For languages that don't support profanity detection, see Unsupported languages in the Amazon Translate Developer Guide. If you specify multiple target languages for the job, all the target languages must support profanity masking. If any of the target languages don't support profanity masking, the translation job won't mask profanity for any target language.
+     * You can enable the profanity setting if you want to mask profane words and phrases in your translation output. To mask profane words and phrases, Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the length or number of words. Amazon Translate doesn't detect profanity in all of its supported languages. For languages that don't support profanity detection, see Unsupported languages in the Amazon Translate Developer Guide. If you specify multiple target languages for the job, all the target languages must support profanity masking. If any of the target languages don't support profanity masking, the translation job won't mask profanity for any target language.
      */
     Profanity?: Profanity;
+    /**
+     * When you turn on brevity, Amazon Translate reduces the length of the translation output for most translations (when compared with the same translation with brevity turned off). By default, brevity is turned off. If you turn on brevity for a translation request with an unsupported language pair, the translation proceeds with the brevity setting turned off. For the language pairs that brevity supports, see Using brevity in the Amazon Translate Developer Guide.
+     */
+    Brevity?: Brevity;
   }
   export type UnboundedLengthString = string;
   export interface UntagResourceRequest {

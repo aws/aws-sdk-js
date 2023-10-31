@@ -1821,6 +1821,14 @@ declare class EC2 extends Service {
    */
   describeByoipCidrs(callback?: (err: AWSError, data: EC2.Types.DescribeByoipCidrsResult) => void): Request<EC2.Types.DescribeByoipCidrsResult, AWSError>;
   /**
+   * Describes Capacity Block offerings available for purchase. With Capacity Blocks, you purchase a specific instance type for a period of time.
+   */
+  describeCapacityBlockOfferings(params: EC2.Types.DescribeCapacityBlockOfferingsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeCapacityBlockOfferingsResult) => void): Request<EC2.Types.DescribeCapacityBlockOfferingsResult, AWSError>;
+  /**
+   * Describes Capacity Block offerings available for purchase. With Capacity Blocks, you purchase a specific instance type for a period of time.
+   */
+  describeCapacityBlockOfferings(callback?: (err: AWSError, data: EC2.Types.DescribeCapacityBlockOfferingsResult) => void): Request<EC2.Types.DescribeCapacityBlockOfferingsResult, AWSError>;
+  /**
    * Describes one or more Capacity Reservation Fleets.
    */
   describeCapacityReservationFleets(params: EC2.Types.DescribeCapacityReservationFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeCapacityReservationFleetsResult) => void): Request<EC2.Types.DescribeCapacityReservationFleetsResult, AWSError>;
@@ -4324,6 +4332,14 @@ declare class EC2 extends Service {
    * Provision a CIDR to a public IPv4 pool. For more information about IPAM, see What is IPAM? in the Amazon VPC IPAM User Guide.
    */
   provisionPublicIpv4PoolCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionPublicIpv4PoolCidrResult) => void): Request<EC2.Types.ProvisionPublicIpv4PoolCidrResult, AWSError>;
+  /**
+   * Purchase the Capacity Block for use with your account. With Capacity Blocks you ensure GPU capacity is available for machine learning (ML) workloads. You must specify the ID of the Capacity Block offering you are purchasing.
+   */
+  purchaseCapacityBlock(params: EC2.Types.PurchaseCapacityBlockRequest, callback?: (err: AWSError, data: EC2.Types.PurchaseCapacityBlockResult) => void): Request<EC2.Types.PurchaseCapacityBlockResult, AWSError>;
+  /**
+   * Purchase the Capacity Block for use with your account. With Capacity Blocks you ensure GPU capacity is available for machine learning (ML) workloads. You must specify the ID of the Capacity Block offering you are purchasing.
+   */
+  purchaseCapacityBlock(callback?: (err: AWSError, data: EC2.Types.PurchaseCapacityBlockResult) => void): Request<EC2.Types.PurchaseCapacityBlockResult, AWSError>;
   /**
    * Purchase a reservation with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This action results in the specified reservation being purchased and charged to your account.
    */
@@ -7352,6 +7368,49 @@ declare namespace EC2 {
     Count?: Integer;
   }
   export type CapacityAllocations = CapacityAllocation[];
+  export interface CapacityBlockOffering {
+    /**
+     * The ID of the Capacity Block offering.
+     */
+    CapacityBlockOfferingId?: OfferingId;
+    /**
+     * The instance type of the Capacity Block offering.
+     */
+    InstanceType?: String;
+    /**
+     * The Availability Zone of the Capacity Block offering.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The number of instances in the Capacity Block offering.
+     */
+    InstanceCount?: Integer;
+    /**
+     * The start date of the Capacity Block offering.
+     */
+    StartDate?: MillisecondDateTime;
+    /**
+     * The end date of the Capacity Block offering.
+     */
+    EndDate?: MillisecondDateTime;
+    /**
+     * The amount of time of the Capacity Block reservation in hours.
+     */
+    CapacityBlockDurationHours?: Integer;
+    /**
+     * The total price to be paid up front.
+     */
+    UpfrontFee?: String;
+    /**
+     * The currency of the payment for the Capacity Block.
+     */
+    CurrencyCode?: String;
+    /**
+     * The tenancy of the Capacity Block.
+     */
+    Tenancy?: CapacityReservationTenancy;
+  }
+  export type CapacityBlockOfferingSet = CapacityBlockOffering[];
   export interface CapacityReservation {
     /**
      * The ID of the Capacity Reservation.
@@ -7445,6 +7504,10 @@ declare namespace EC2 {
      * Information about instance capacity usage.
      */
     CapacityAllocations?: CapacityAllocations;
+    /**
+     * The type of Capacity Reservation.
+     */
+    ReservationType?: CapacityReservationType;
   }
   export interface CapacityReservationFleet {
     /**
@@ -7563,7 +7626,7 @@ declare namespace EC2 {
      */
     CapacityReservationTarget?: CapacityReservationTargetResponse;
   }
-  export type CapacityReservationState = "active"|"expired"|"cancelled"|"pending"|"failed"|string;
+  export type CapacityReservationState = "active"|"expired"|"cancelled"|"pending"|"failed"|"scheduled"|"payment-pending"|"payment-failed"|string;
   export interface CapacityReservationTarget {
     /**
      * The ID of the Capacity Reservation in which to run the instance.
@@ -7585,6 +7648,7 @@ declare namespace EC2 {
     CapacityReservationResourceGroupArn?: String;
   }
   export type CapacityReservationTenancy = "default"|"dedicated"|string;
+  export type CapacityReservationType = "default"|"capacity-block"|string;
   export interface CarrierGateway {
     /**
      * The ID of the carrier gateway.
@@ -11676,7 +11740,7 @@ declare namespace EC2 {
   export type DefaultNetworkCardIndex = number;
   export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
-  export type DefaultTargetCapacityType = "spot"|"on-demand"|string;
+  export type DefaultTargetCapacityType = "spot"|"on-demand"|"capacity-block"|string;
   export type DefaultingDhcpOptionsId = string;
   export interface DeleteCarrierGatewayRequest {
     /**
@@ -13305,6 +13369,51 @@ declare namespace EC2 {
      * Information about your address ranges.
      */
     ByoipCidrs?: ByoipCidrSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export type DescribeCapacityBlockOfferingsMaxResults = number;
+  export interface DescribeCapacityBlockOfferingsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The type of instance for which the Capacity Block offering reserves capacity.
+     */
+    InstanceType: String;
+    /**
+     * The number of instances for which to reserve capacity.
+     */
+    InstanceCount: Integer;
+    /**
+     * The earliest start date for the Capacity Block offering.
+     */
+    StartDateRange?: MillisecondDateTime;
+    /**
+     * The latest end date for the Capacity Block offering.
+     */
+    EndDateRange?: MillisecondDateTime;
+    /**
+     * The number of hours for which to reserve Capacity Block.
+     */
+    CapacityDurationHours: Integer;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value. This value can be between 5 and 500. If maxResults is given a larger value than 500, you receive an error.
+     */
+    MaxResults?: DescribeCapacityBlockOfferingsMaxResults;
+  }
+  export interface DescribeCapacityBlockOfferingsResult {
+    /**
+     * The recommended Capacity Block offering for the dates specified.
+     */
+    CapacityBlockOfferings?: CapacityBlockOfferingSet;
     /**
      * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
@@ -23721,7 +23830,7 @@ declare namespace EC2 {
   }
   export type InstanceIpv6PrefixList = InstanceIpv6Prefix[];
   export type InstanceLifecycle = "spot"|"on-demand"|string;
-  export type InstanceLifecycleType = "spot"|"scheduled"|string;
+  export type InstanceLifecycleType = "spot"|"scheduled"|"capacity-block"|string;
   export type InstanceList = Instance[];
   export interface InstanceMaintenanceOptions {
     /**
@@ -26727,7 +26836,7 @@ declare namespace EC2 {
     OwnerId?: String;
   }
   export type ManagedPrefixListSet = ManagedPrefixList[];
-  export type MarketType = "spot"|string;
+  export type MarketType = "spot"|"capacity-block"|string;
   export type MaxIpv4AddrPerInterface = number;
   export type MaxIpv6AddrPerInterface = number;
   export type MaxNetworkInterfaces = number;
@@ -30892,6 +31001,30 @@ declare namespace EC2 {
      * The upfront price of the reservation.
      */
     UpfrontPrice?: String;
+  }
+  export interface PurchaseCapacityBlockRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The tags to apply to the Capacity Block during launch.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * The ID of the Capacity Block offering.
+     */
+    CapacityBlockOfferingId: OfferingId;
+    /**
+     * The type of operating system for which to reserve capacity.
+     */
+    InstancePlatform: CapacityReservationInstancePlatform;
+  }
+  export interface PurchaseCapacityBlockResult {
+    /**
+     * The Capacity Reservation.
+     */
+    CapacityReservation?: CapacityReservation;
   }
   export interface PurchaseHostReservationRequest {
     /**
@@ -37192,7 +37325,7 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
-  export type UsageClassType = "spot"|"on-demand"|string;
+  export type UsageClassType = "spot"|"on-demand"|"capacity-block"|string;
   export type UsageClassTypeList = UsageClassType[];
   export interface UserBucket {
     /**
