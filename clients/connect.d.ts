@@ -108,6 +108,14 @@ declare class Connect extends Service {
    */
   associateTrafficDistributionGroupUser(callback?: (err: AWSError, data: Connect.Types.AssociateTrafficDistributionGroupUserResponse) => void): Request<Connect.Types.AssociateTrafficDistributionGroupUserResponse, AWSError>;
   /**
+   * Retrieve the flow associations for the given resources.
+   */
+  batchGetFlowAssociation(params: Connect.Types.BatchGetFlowAssociationRequest, callback?: (err: AWSError, data: Connect.Types.BatchGetFlowAssociationResponse) => void): Request<Connect.Types.BatchGetFlowAssociationResponse, AWSError>;
+  /**
+   * Retrieve the flow associations for the given resources.
+   */
+  batchGetFlowAssociation(callback?: (err: AWSError, data: Connect.Types.BatchGetFlowAssociationResponse) => void): Request<Connect.Types.BatchGetFlowAssociationResponse, AWSError>;
+  /**
    * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   claimPhoneNumber(params: Connect.Types.ClaimPhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
@@ -1148,11 +1156,11 @@ declare class Connect extends Service {
    */
   releasePhoneNumber(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replicates an Amazon Connect instance in the specified Amazon Web Services Region. For more information about replicating an Amazon Connect instance, see Create a replica of your existing Amazon Connect instance in the Amazon Connect Administrator Guide.
+   * Replicates an Amazon Connect instance in the specified Amazon Web Services Region and copies configuration information for Amazon Connect resources across Amazon Web Services Regions.  For more information about replicating an Amazon Connect instance, see Create a replica of your existing Amazon Connect instance in the Amazon Connect Administrator Guide.
    */
   replicateInstance(params: Connect.Types.ReplicateInstanceRequest, callback?: (err: AWSError, data: Connect.Types.ReplicateInstanceResponse) => void): Request<Connect.Types.ReplicateInstanceResponse, AWSError>;
   /**
-   * Replicates an Amazon Connect instance in the specified Amazon Web Services Region. For more information about replicating an Amazon Connect instance, see Create a replica of your existing Amazon Connect instance in the Amazon Connect Administrator Guide.
+   * Replicates an Amazon Connect instance in the specified Amazon Web Services Region and copies configuration information for Amazon Connect resources across Amazon Web Services Regions.  For more information about replicating an Amazon Connect instance, see Create a replica of your existing Amazon Connect instance in the Amazon Connect Administrator Guide.
    */
   replicateInstance(callback?: (err: AWSError, data: Connect.Types.ReplicateInstanceResponse) => void): Request<Connect.Types.ReplicateInstanceResponse, AWSError>;
   /**
@@ -1820,6 +1828,14 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type AgentStatusDescription = string;
   export type AgentStatusId = string;
@@ -1857,6 +1873,14 @@ declare namespace Connect {
      * The type of the agent status.
      */
     Type?: AgentStatusType;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type AgentStatusSummaryList = AgentStatusSummary[];
   export type AgentStatusType = "ROUTABLE"|"CUSTOM"|"OFFLINE"|string;
@@ -2088,6 +2112,26 @@ declare namespace Connect {
   }
   export type AvailableNumbersList = AvailableNumberSummary[];
   export type AwsRegion = string;
+  export interface BatchGetFlowAssociationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * A list of resource identifiers to retrieve flow associations.
+     */
+    ResourceIds: resourceArnListMaxLimit100;
+    /**
+     * The type of resource association.
+     */
+    ResourceType?: ListFlowAssociationResourceType;
+  }
+  export interface BatchGetFlowAssociationResponse {
+    /**
+     * Information about flow associations.
+     */
+    FlowAssociationSummaryList?: FlowAssociationSummaryList;
+  }
   export type BehaviorType = "ROUTE_CURRENT_CHANNEL_ONLY"|"ROUTE_ANY_CHANNEL"|string;
   export type Boolean = boolean;
   export type BotName = string;
@@ -2718,7 +2762,7 @@ declare namespace Connect {
      */
     Description?: PromptDescription;
     /**
-     * The URI for the S3 bucket where the prompt is stored.
+     * The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the GetPromptFile API instead of providing S3 URIs.
      */
     S3Uri: S3Uri;
     /**
@@ -4706,6 +4750,21 @@ declare namespace Connect {
     RoutingProfiles?: RoutingProfiles;
   }
   export type FiltersV2List = FilterV2[];
+  export interface FlowAssociationSummary {
+    /**
+     * The identifier of the resource.
+     */
+    ResourceId?: ARN;
+    /**
+     * The identifier of the flow.
+     */
+    FlowId?: ARN;
+    /**
+     * The type of resource association.
+     */
+    ResourceType?: ListFlowAssociationResourceType;
+  }
+  export type FlowAssociationSummaryList = FlowAssociationSummary[];
   export type FunctionArn = string;
   export type FunctionArnsList = FunctionArn[];
   export interface GetContactAttributesRequest {
@@ -4935,6 +4994,14 @@ declare namespace Connect {
      * A generated URL to the prompt that can be given to an unauthorized user so they can access the prompt in S3.
      */
     PromptPresignedUrl?: PromptPresignedUrl;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface GetTaskTemplateRequest {
     /**
@@ -5061,6 +5128,14 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface HierarchyGroupCondition {
     /**
@@ -5088,6 +5163,14 @@ declare namespace Connect {
      * The name of the hierarchy group.
      */
     Name?: HierarchyGroupName;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type HierarchyGroupSummaryList = HierarchyGroupSummary[];
   export interface HierarchyGroupSummaryReference {
@@ -5113,6 +5196,14 @@ declare namespace Connect {
      * The name of the hierarchy level.
      */
     Name?: HierarchyLevelName;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type HierarchyLevelId = string;
   export type HierarchyLevelName = string;
@@ -5283,6 +5374,14 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface HoursOfOperationConfig {
     /**
@@ -5335,6 +5434,14 @@ declare namespace Connect {
      * The name of the hours of operation.
      */
     Name?: HoursOfOperationName;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type HoursOfOperationSummaryList = HoursOfOperationSummary[];
   export interface HoursOfOperationTimeSlice {
@@ -5858,6 +5965,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export type ListFlowAssociationResourceType = "SMS_PHONE_NUMBER"|"VOICE_PHONE_NUMBER"|string;
   export interface ListHoursOfOperationsRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
@@ -6184,6 +6292,14 @@ declare namespace Connect {
      * Information about the quick connects.
      */
     QuickConnectSummaryList?: QuickConnectSummaryList;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface ListQueuesRequest {
     /**
@@ -6268,6 +6384,14 @@ declare namespace Connect {
      * Information about the routing profiles.
      */
     RoutingProfileQueueConfigSummaryList?: RoutingProfileQueueConfigSummaryList;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface ListRoutingProfilesRequest {
     /**
@@ -6376,6 +6500,14 @@ declare namespace Connect {
      * If there are additional results, this is the token for the next set of results.
      */
     NextToken?: NextToken;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface ListSecurityProfilePermissionsRequest {
     /**
@@ -6404,6 +6536,14 @@ declare namespace Connect {
      * If there are additional results, this is the token for the next set of results.
      */
     NextToken?: NextToken;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface ListSecurityProfilesRequest {
     /**
@@ -6980,6 +7120,14 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type PromptDescription = string;
   export type PromptId = string;
@@ -7017,6 +7165,14 @@ declare namespace Connect {
      * The name of the prompt.
      */
     Name?: PromptName;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type PromptSummaryList = PromptSummary[];
   export interface PutUserStatusRequest {
@@ -7072,6 +7228,14 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type QueueDescription = string;
   export type QueueId = string;
@@ -7148,6 +7312,14 @@ declare namespace Connect {
      * The type of queue.
      */
     QueueType?: QueueType;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type QueueSummaryList = QueueSummary[];
   export type QueueType = "STANDARD"|"AGENT"|string;
@@ -7178,6 +7350,14 @@ declare namespace Connect {
      * The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.
      */
     Tags?: TagMap;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface QuickConnectConfig {
     /**
@@ -7236,6 +7416,14 @@ declare namespace Connect {
      * The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
      */
     QuickConnectType?: QuickConnectType;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type QuickConnectSummaryList = QuickConnectSummary[];
   export type QuickConnectType = "USER"|"QUEUE"|"PHONE_NUMBER"|string;
@@ -7291,6 +7479,7 @@ declare namespace Connect {
   export type ReferenceType = "URL"|"ATTACHMENT"|"NUMBER"|"STRING"|"DATE"|"EMAIL"|string;
   export type ReferenceTypes = ReferenceType[];
   export type ReferenceValue = string;
+  export type RegionName = string;
   export type RehydrationType = "ENTIRE_PAST_SESSION"|"FROM_SEGMENT"|string;
   export interface ReleasePhoneNumberRequest {
     /**
@@ -7407,6 +7596,18 @@ declare namespace Connect {
      * Whether agents with this routing profile will have their routing order calculated based on time since their last inbound contact or longest idle time. 
      */
     AgentAvailabilityTimer?: AgentAvailabilityTimer;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
+    /**
+     * Whether this a default routing profile.
+     */
+    IsDefault?: Boolean;
   }
   export type RoutingProfileDescription = string;
   export type RoutingProfileId = string;
@@ -7506,6 +7707,14 @@ declare namespace Connect {
      * The name of the routing profile.
      */
     Name?: RoutingProfileName;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type RoutingProfileSummaryList = RoutingProfileSummary[];
   export type RoutingProfiles = RoutingProfileId[];
@@ -8048,6 +8257,14 @@ declare namespace Connect {
      * The list of resources that a security profile applies tag restrictions to in Amazon Connect.
      */
     TagRestrictedResources?: TagRestrictedResourceList;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type SecurityProfileDescription = string;
   export type SecurityProfileId = string;
@@ -8107,6 +8324,14 @@ declare namespace Connect {
      * The name of the security profile.
      */
     Name?: SecurityProfileName;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type SecurityProfileSummaryList = SecurityProfileSummary[];
   export interface SecurityProfilesSearchFilter {
@@ -8767,7 +8992,7 @@ declare namespace Connect {
      */
     Tags?: TagMap;
     /**
-     * Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the DeleteTrafficDistributionGroup API. The default traffic distribution group is deleted as part of the process for deleting a replica.  The SignInConfig distribution is available only on the default TrafficDistributionGroup. If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned. 
+     * Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the DeleteTrafficDistributionGroup API. The default traffic distribution group is deleted as part of the process for deleting a replica.  The SignInConfig distribution is available only on a default TrafficDistributionGroup (see the IsDefault parameter in the TrafficDistributionGroup data type). If you call UpdateTrafficDistribution with a modified SignInConfig and a non-default TrafficDistributionGroup, an InvalidRequestException is returned. 
      */
     IsDefault?: Boolean;
   }
@@ -9263,7 +9488,7 @@ declare namespace Connect {
      */
     Description?: PromptDescription;
     /**
-     * The URI for the S3 bucket where the prompt is stored.
+     * The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the GetPromptFile API instead of providing S3 URIs.
      */
     S3Uri?: S3Uri;
   }
@@ -9829,6 +10054,14 @@ declare namespace Connect {
      * The tags.
      */
     Tags?: TagMap;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export interface UserData {
     /**
@@ -10039,6 +10272,14 @@ declare namespace Connect {
      * The Amazon Connect user name of the user account.
      */
     Username?: AgentUsername;
+    /**
+     * The timestamp when this resource was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Web Services Region where this resource was last modified.
+     */
+    LastModifiedRegion?: RegionName;
   }
   export type UserSummaryList = UserSummary[];
   export type UserTagMap = {[key: string]: String};
@@ -10284,6 +10525,7 @@ declare namespace Connect {
      */
     SessionArn?: ARN;
   }
+  export type resourceArnListMaxLimit100 = ARN[];
   export type timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

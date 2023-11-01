@@ -729,6 +729,14 @@ declare class Redshift extends Service {
    */
   enableSnapshotCopy(callback?: (err: AWSError, data: Redshift.Types.EnableSnapshotCopyResult) => void): Request<Redshift.Types.EnableSnapshotCopyResult, AWSError>;
   /**
+   * Fails over the primary compute unit of the specified Multi-AZ cluster to another Availability Zone.
+   */
+  failoverPrimaryCompute(params: Redshift.Types.FailoverPrimaryComputeInputMessage, callback?: (err: AWSError, data: Redshift.Types.FailoverPrimaryComputeResult) => void): Request<Redshift.Types.FailoverPrimaryComputeResult, AWSError>;
+  /**
+   * Fails over the primary compute unit of the specified Multi-AZ cluster to another Availability Zone.
+   */
+  failoverPrimaryCompute(callback?: (err: AWSError, data: Redshift.Types.FailoverPrimaryComputeResult) => void): Request<Redshift.Types.FailoverPrimaryComputeResult, AWSError>;
+  /**
    * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser permission. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
    */
   getClusterCredentials(params: Redshift.Types.GetClusterCredentialsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
@@ -1541,6 +1549,14 @@ declare namespace Redshift {
      * The IP address type for the cluster. Possible values are ipv4 and dualstack.
      */
     IpAddressType?: String;
+    /**
+     * A boolean value that, if true, indicates that the cluster is deployed in two Availability Zones.
+     */
+    MultiAZ?: String;
+    /**
+     * The secondary compute unit of a cluster, if Multi-AZ deployment is turned on.
+     */
+    MultiAZSecondary?: SecondaryClusterInfo;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -2047,6 +2063,10 @@ declare namespace Redshift {
      * The IP address types that the cluster supports. Possible values are ipv4 and dualstack.
      */
     IpAddressType?: String;
+    /**
+     * If true, Amazon Redshift will deploy the cluster in two Availability Zones (AZ).
+     */
+    MultiAZ?: BooleanOptional;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -3834,6 +3854,15 @@ declare namespace Redshift {
      */
     Events?: EventList;
   }
+  export interface FailoverPrimaryComputeInputMessage {
+    /**
+     * The unique identifier of the cluster for which the primary compute unit will be failed over to another Availability Zone.
+     */
+    ClusterIdentifier: String;
+  }
+  export interface FailoverPrimaryComputeResult {
+    Cluster?: Cluster;
+  }
   export interface GetClusterCredentialsMessage {
     /**
      * The name of a database user. If a user name matching DbUser exists in the database, the temporary user credentials have the same permissions as the existing user. If DbUser doesn't exist in the database and Autocreate is True, a new user is created using the value for DbUser with PUBLIC permissions. If a database user matching the value for DbUser doesn't exist and Autocreate is False, then the command succeeds but the connection attempt will fail because the user doesn't exist in the database. For more information, see CREATE USER in the Amazon Redshift Database Developer Guide.  Constraints:   Must be 1 to 64 alphanumeric characters or hyphens. The user name can't be PUBLIC.   Must contain uppercase or lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.   First character must be a letter.   Must not contain a colon ( : ) or slash ( / ).    Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.  
@@ -4356,6 +4385,10 @@ declare namespace Redshift {
      * The IP address types that the cluster supports. Possible values are ipv4 and dualstack.
      */
     IpAddressType?: String;
+    /**
+     * If true and the cluster is currently only deployed in a single Availability Zone, the cluster will be modified to be deployed in two Availability Zones.
+     */
+    MultiAZ?: BooleanOptional;
   }
   export interface ModifyClusterParameterGroupMessage {
     /**
@@ -5323,6 +5356,10 @@ declare namespace Redshift {
      * The IP address type for the cluster. Possible values are ipv4 and dualstack.
      */
     IpAddressType?: String;
+    /**
+     * If true, the snapshot will be restored to a cluster deployed in two Availability Zones.
+     */
+    MultiAZ?: BooleanOptional;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
@@ -5568,6 +5605,16 @@ declare namespace Redshift {
     ScheduledActions?: ScheduledActionList;
   }
   export type ScheduledSnapshotTimeList = TStamp[];
+  export interface SecondaryClusterInfo {
+    /**
+     * The name of the Availability Zone in which the secondary compute unit of the cluster is located.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The nodes in the secondary compute unit.
+     */
+    ClusterNodes?: ClusterNodesList;
+  }
   export type SensitiveString = string;
   export interface Snapshot {
     /**

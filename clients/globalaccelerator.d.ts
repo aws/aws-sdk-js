@@ -52,6 +52,14 @@ declare class GlobalAccelerator extends Service {
    */
   createAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
+   * Create a cross-account attachment in Global Accelerator. You create a cross-account attachment to specify the principals who have permission to add to accelerators in their own account the resources in your account that you also list in the attachment. A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an accelerator. For account numbers that are listed as principals, to add a resource listed in the attachment to an accelerator, you must sign in to an account specified as a principal. Then you can add the resources that are listed to any of your accelerators. If an accelerator ARN is listed in the cross-account attachment as a principal, anyone with permission to make updates to the accelerator can add as endpoints resources that are listed in the attachment. 
+   */
+  createCrossAccountAttachment(params: GlobalAccelerator.Types.CreateCrossAccountAttachmentRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.CreateCrossAccountAttachmentResponse, AWSError>;
+  /**
+   * Create a cross-account attachment in Global Accelerator. You create a cross-account attachment to specify the principals who have permission to add to accelerators in their own account the resources in your account that you also list in the attachment. A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an accelerator. For account numbers that are listed as principals, to add a resource listed in the attachment to an accelerator, you must sign in to an account specified as a principal. Then you can add the resources that are listed to any of your accelerators. If an accelerator ARN is listed in the cross-account attachment as a principal, anyone with permission to make updates to the accelerator can add as endpoints resources that are listed in the attachment. 
+   */
+  createCrossAccountAttachment(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.CreateCrossAccountAttachmentResponse, AWSError>;
+  /**
    * Create a custom routing accelerator. A custom routing accelerator directs traffic to one of possibly thousands of Amazon EC2 instance destinations running in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware that, by default, all destination EC2 instances in a VPC subnet endpoint cannot receive traffic. To enable all destinations to receive traffic, or to specify individual port mappings that can receive traffic, see the  AllowCustomRoutingTraffic operation.  Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the US West (Oregon) Region to create, update, or otherwise work with accelerators. That is, for example, specify --region us-west-2 on Amazon Web Services CLI commands. 
    */
   createCustomRoutingAccelerator(params: GlobalAccelerator.Types.CreateCustomRoutingAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateCustomRoutingAcceleratorResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class GlobalAccelerator extends Service {
    * Delete an accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create an accelerator, by default, Global Accelerator provides you with a set of two static IP addresses. Alternatively, you can bring your own IP address ranges to Global Accelerator and assign IP addresses from those ranges.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Identity and access management in the Global Accelerator Developer Guide. 
    */
   deleteAccelerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a cross-account attachment. When you delete an attachment, Global Accelerator revokes the permission to use the resources in the attachment from all principals in the list of principals. Global Accelerator revokes the permission for specific resources by doing the following:   If the principal is an account ID, Global Accelerator reviews every accelerator in the account and removes cross-account endpoints from all accelerators.   If the principal is an accelerator, Global Accelerator reviews just that accelerator and removes cross-account endpoints from it.   If there are overlapping permissions provided by multiple cross-account attachments, Global Accelerator only removes endpoints if there are no current cross-account attachments that provide access permission. For example, if you delete a cross-account attachment that lists an accelerator as a principal, but another cross-account attachment includes the account ID that owns that accelerator, endpoints will not be removed from the accelerator.
+   */
+  deleteCrossAccountAttachment(params: GlobalAccelerator.Types.DeleteCrossAccountAttachmentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Delete a cross-account attachment. When you delete an attachment, Global Accelerator revokes the permission to use the resources in the attachment from all principals in the list of principals. Global Accelerator revokes the permission for specific resources by doing the following:   If the principal is an account ID, Global Accelerator reviews every accelerator in the account and removes cross-account endpoints from all accelerators.   If the principal is an accelerator, Global Accelerator reviews just that accelerator and removes cross-account endpoints from it.   If there are overlapping permissions provided by multiple cross-account attachments, Global Accelerator only removes endpoints if there are no current cross-account attachments that provide access permission. For example, if you delete a cross-account attachment that lists an accelerator as a principal, but another cross-account attachment includes the account ID that owns that accelerator, endpoints will not be removed from the accelerator.
+   */
+  deleteCrossAccountAttachment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a custom routing accelerator. Before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups). To disable the accelerator, update the accelerator to set Enabled to false.  When you create a custom routing accelerator, by default, Global Accelerator provides you with a set of two static IP addresses.  The IP addresses are assigned to your accelerator for as long as it exists, even if you disable the accelerator and it no longer accepts or routes traffic. However, when you delete an accelerator, you lose the static IP addresses that are assigned to the accelerator, so you can no longer route traffic by using them. As a best practice, ensure that you have permissions in place to avoid inadvertently deleting accelerators. You can use IAM policies with Global Accelerator to limit the users who have permissions to delete an accelerator. For more information, see Identity and access management in the Global Accelerator Developer Guide. 
    */
@@ -172,6 +188,14 @@ declare class GlobalAccelerator extends Service {
    */
   describeAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
   /**
+   * Gets configuration information about a cross-account attachment.
+   */
+  describeCrossAccountAttachment(params: GlobalAccelerator.Types.DescribeCrossAccountAttachmentRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.DescribeCrossAccountAttachmentResponse, AWSError>;
+  /**
+   * Gets configuration information about a cross-account attachment.
+   */
+  describeCrossAccountAttachment(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.DescribeCrossAccountAttachmentResponse, AWSError>;
+  /**
    * Describe a custom routing accelerator. 
    */
   describeCustomRoutingAccelerator(params: GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeCustomRoutingAcceleratorResponse, AWSError>;
@@ -235,6 +259,30 @@ declare class GlobalAccelerator extends Service {
    * Lists the IP address ranges that were specified in calls to ProvisionByoipCidr, including the current state and a history of state changes.
    */
   listByoipCidrs(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListByoipCidrsResponse) => void): Request<GlobalAccelerator.Types.ListByoipCidrsResponse, AWSError>;
+  /**
+   * List the cross-account attachments that have been created in Global Accelerator.
+   */
+  listCrossAccountAttachments(params: GlobalAccelerator.Types.ListCrossAccountAttachmentsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountAttachmentsResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountAttachmentsResponse, AWSError>;
+  /**
+   * List the cross-account attachments that have been created in Global Accelerator.
+   */
+  listCrossAccountAttachments(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountAttachmentsResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountAttachmentsResponse, AWSError>;
+  /**
+   * List the accounts that have cross-account endpoints.
+   */
+  listCrossAccountResourceAccounts(params: GlobalAccelerator.Types.ListCrossAccountResourceAccountsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountResourceAccountsResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountResourceAccountsResponse, AWSError>;
+  /**
+   * List the accounts that have cross-account endpoints.
+   */
+  listCrossAccountResourceAccounts(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountResourceAccountsResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountResourceAccountsResponse, AWSError>;
+  /**
+   * List the cross-account endpoints available to add to an accelerator.
+   */
+  listCrossAccountResources(params: GlobalAccelerator.Types.ListCrossAccountResourcesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountResourcesResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountResourcesResponse, AWSError>;
+  /**
+   * List the cross-account endpoints available to add to an accelerator.
+   */
+  listCrossAccountResources(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListCrossAccountResourcesResponse) => void): Request<GlobalAccelerator.Types.ListCrossAccountResourcesResponse, AWSError>;
   /**
    * List the custom routing accelerators for an Amazon Web Services account. 
    */
@@ -355,6 +403,14 @@ declare class GlobalAccelerator extends Service {
    * Update the attributes for an accelerator. 
    */
   updateAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse, AWSError>;
+  /**
+   * Update a cross-account attachment to add or remove principals or resources. When you update an attachment to remove a principal (account ID or accelerator) or a resource, Global Accelerator revokes the permission for specific resources by doing the following:   If the principal is an account ID, Global Accelerator reviews every accelerator in the account and removes cross-account endpoints from all accelerators.   If the principal is an accelerator, Global Accelerator reviews just that accelerator and removes cross-account endpoints from it.   If there are overlapping permissions provided by multiple cross-account attachments, Global Accelerator only removes endpoints if there are no current cross-account attachments that provide access permission. For example, if you delete a cross-account attachment that lists an accelerator as a principal, but another cross-account attachment includes the account ID that owns that accelerator, endpoints will not be removed from the accelerator.
+   */
+  updateCrossAccountAttachment(params: GlobalAccelerator.Types.UpdateCrossAccountAttachmentRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.UpdateCrossAccountAttachmentResponse, AWSError>;
+  /**
+   * Update a cross-account attachment to add or remove principals or resources. When you update an attachment to remove a principal (account ID or accelerator) or a resource, Global Accelerator revokes the permission for specific resources by doing the following:   If the principal is an account ID, Global Accelerator reviews every accelerator in the account and removes cross-account endpoints from all accelerators.   If the principal is an accelerator, Global Accelerator reviews just that accelerator and removes cross-account endpoints from it.   If there are overlapping permissions provided by multiple cross-account attachments, Global Accelerator only removes endpoints if there are no current cross-account attachments that provide access permission. For example, if you delete a cross-account attachment that lists an accelerator as a principal, but another cross-account attachment includes the account ID that owns that accelerator, endpoints will not be removed from the accelerator.
+   */
+  updateCrossAccountAttachment(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateCrossAccountAttachmentResponse) => void): Request<GlobalAccelerator.Types.UpdateCrossAccountAttachmentResponse, AWSError>;
   /**
    * Update a custom routing accelerator. 
    */
@@ -552,6 +608,36 @@ declare namespace GlobalAccelerator {
      */
     AllowAllTrafficToEndpoint?: GenericBoolean;
   }
+  export interface Attachment {
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment.
+     */
+    AttachmentArn?: GenericString;
+    /**
+     * The name of the cross-account attachment.
+     */
+    Name?: AttachmentName;
+    /**
+     * The principals included in the cross-account attachment.
+     */
+    Principals?: Principals;
+    /**
+     * The resources included in the cross-account attachment.
+     */
+    Resources?: Resources;
+    /**
+     * The date and time that the cross-account attachment was last modified.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The date and time that the cross-account attachment was created.
+     */
+    CreatedTime?: Timestamp;
+  }
+  export type AttachmentName = string;
+  export type Attachments = Attachment[];
+  export type AwsAccountId = string;
+  export type AwsAccountIds = AwsAccountId[];
   export interface ByoipCidr {
     /**
      * The address range, in CIDR notation.
@@ -621,6 +707,34 @@ declare namespace GlobalAccelerator {
      * The accelerator that is created by specifying a listener and the supported IP address types.
      */
     Accelerator?: Accelerator;
+  }
+  export interface CreateCrossAccountAttachmentRequest {
+    /**
+     * The name of the cross-account attachment. 
+     */
+    Name: AttachmentName;
+    /**
+     * The principals to list in the cross-account attachment. A principal can be an Amazon Web Services account number or the Amazon Resource Name (ARN) for an accelerator. 
+     */
+    Principals?: Principals;
+    /**
+     * The Amazon Resource Names (ARNs) for the resources to list in the cross-account attachment. A resource can be any supported Amazon Web Services resource type for Global Accelerator. 
+     */
+    Resources?: Resources;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency—that is, the uniqueness—of the request.
+     */
+    IdempotencyToken: IdempotencyToken;
+    /**
+     * Create tags for cross-account attachment. For more information, see Tagging in Global Accelerator in the Global Accelerator Developer Guide.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateCrossAccountAttachmentResponse {
+    /**
+     * Information about the cross-account attachment.
+     */
+    CrossAccountAttachment?: Attachment;
   }
   export interface CreateCustomRoutingAcceleratorRequest {
     /**
@@ -778,6 +892,17 @@ declare namespace GlobalAccelerator {
      */
     Listener?: Listener;
   }
+  export interface CrossAccountResource {
+    /**
+     * The endpoint ID for the endpoint that is listed in a cross-account attachment and can be added to an accelerator by specified principals.
+     */
+    EndpointId?: GenericString;
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources) that can be added to accelerators and principals that have permission to add the endpoints to accelerators.
+     */
+    AttachmentArn?: GenericString;
+  }
+  export type CrossAccountResources = CrossAccountResource[];
   export interface CustomRoutingAccelerator {
     /**
      * The Amazon Resource Name (ARN) of the custom routing accelerator.
@@ -868,6 +993,10 @@ declare namespace GlobalAccelerator {
      * An ID for the endpoint. For custom routing accelerators, this is the virtual private cloud (VPC) subnet ID. 
      */
     EndpointId?: GenericString;
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources) that can be added to accelerators and principals that have permission to add the endpoints to accelerators.
+     */
+    AttachmentArn?: GenericString;
   }
   export type CustomRoutingEndpointConfigurations = CustomRoutingEndpointConfiguration[];
   export interface CustomRoutingEndpointDescription {
@@ -914,6 +1043,12 @@ declare namespace GlobalAccelerator {
      * The Amazon Resource Name (ARN) of an accelerator.
      */
     AcceleratorArn: GenericString;
+  }
+  export interface DeleteCrossAccountAttachmentRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the cross-account attachment to delete.
+     */
+    AttachmentArn: GenericString;
   }
   export interface DeleteCustomRoutingAcceleratorRequest {
     /**
@@ -1002,6 +1137,18 @@ declare namespace GlobalAccelerator {
      * The description of the accelerator.
      */
     Accelerator?: Accelerator;
+  }
+  export interface DescribeCrossAccountAttachmentRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the cross-account attachment to describe.
+     */
+    AttachmentArn: GenericString;
+  }
+  export interface DescribeCrossAccountAttachmentResponse {
+    /**
+     * Information about the cross-account attachment.
+     */
+    CrossAccountAttachment?: Attachment;
   }
   export interface DescribeCustomRoutingAcceleratorAttributesRequest {
     /**
@@ -1122,9 +1269,13 @@ declare namespace GlobalAccelerator {
      */
     Weight?: EndpointWeight;
     /**
-     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers, Amazon EC2 instances, and Network Load Balancers with Security Groups. IMPORTANT: You cannot use client IP address preservation with Network Load Balancers with TLS listeners. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
+     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for Application Load Balancer endpoints.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers, Amazon EC2 instances, and Network Load Balancers with security groups. IMPORTANT: You cannot use client IP address preservation with Network Load Balancers with TLS listeners. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
      */
     ClientIPPreservationEnabled?: GenericBoolean;
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment that specifies the endpoints (resources) that can be added to accelerators and principals that have permission to add the endpoints to accelerators.
+     */
+    AttachmentArn?: GenericString;
   }
   export type EndpointConfigurations = EndpointConfiguration[];
   export interface EndpointDescription {
@@ -1145,7 +1296,7 @@ declare namespace GlobalAccelerator {
      */
     HealthReason?: GenericString;
     /**
-     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for new accelerators.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers, Amazon EC2 instances, and Network Load Balancers with Security Groups. IMPORTANT: You cannot use client IP address preservation with Network Load Balancers with TLS listeners. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
+     * Indicates whether client IP address preservation is enabled for an endpoint. The value is true or false. The default value is true for Application Load Balancers endpoints.  If the value is set to true, the client's IP address is preserved in the X-Forwarded-For request header as traffic travels to applications on the endpoint fronted by the accelerator. Client IP address preservation is supported, in specific Amazon Web Services Regions, for endpoints that are Application Load Balancers, Amazon EC2 instances, and Network Load Balancers with security groups. IMPORTANT: You cannot use client IP address preservation with Network Load Balancers with TLS listeners. For more information, see  Preserve client IP addresses in Global Accelerator in the Global Accelerator Developer Guide.
      */
     ClientIPPreservationEnabled?: GenericBoolean;
   }
@@ -1270,6 +1421,62 @@ declare namespace GlobalAccelerator {
     ByoipCidrs?: ByoipCidrs;
     /**
      * The token for the next page of results.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCrossAccountAttachmentsRequest {
+    /**
+     * The number of cross-account attachment objects that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCrossAccountAttachmentsResponse {
+    /**
+     * Information about the cross-account attachments.
+     */
+    CrossAccountAttachments?: Attachments;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCrossAccountResourceAccountsRequest {
+  }
+  export interface ListCrossAccountResourceAccountsResponse {
+    /**
+     * The account IDs of principals (resource owners) in a cross-account attachment who can add endpoints (resources) listed in the same attachment.
+     */
+    ResourceOwnerAwsAccountIds?: AwsAccountIds;
+  }
+  export interface ListCrossAccountResourcesRequest {
+    /**
+     * The Amazon Resource Name (ARN) of an accelerator in a cross-account attachment.
+     */
+    AcceleratorArn?: GenericString;
+    /**
+     * The account ID of a resource owner in a cross-account attachment.
+     */
+    ResourceOwnerAwsAccountId: AwsAccountId;
+    /**
+     * The number of cross-account endpoints objects that you want to return with this call. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListCrossAccountResourcesResponse {
+    /**
+     * The endpoints attached to an accelerator in a cross-account attachment.
+     */
+    CrossAccountResources?: CrossAccountResources;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
      */
     NextToken?: GenericString;
   }
@@ -1528,6 +1735,8 @@ declare namespace GlobalAccelerator {
     ToPort?: PortNumber;
   }
   export type PortRanges = PortRange[];
+  export type Principal = string;
+  export type Principals = Principal[];
   export type Protocol = "TCP"|"UDP"|string;
   export type Protocols = Protocol[];
   export interface ProvisionByoipCidrRequest {
@@ -1566,7 +1775,18 @@ declare namespace GlobalAccelerator {
      */
     EndpointGroupArn: GenericString;
   }
+  export interface Resource {
+    /**
+     * The endpoint ID for the endpoint (Amazon Web Services resource).
+     */
+    EndpointId: GenericString;
+    /**
+     * The Amazon Web Services Region where a resource is located.
+     */
+    Region?: GenericString;
+  }
   export type ResourceArn = string;
+  export type Resources = Resource[];
   export interface SocketAddress {
     /**
      * The IP address for the socket address.
@@ -1666,6 +1886,38 @@ declare namespace GlobalAccelerator {
      * Information about the updated accelerator.
      */
     Accelerator?: Accelerator;
+  }
+  export interface UpdateCrossAccountAttachmentRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the cross-account attachment to update.
+     */
+    AttachmentArn: GenericString;
+    /**
+     * The name of the cross-account attachment. 
+     */
+    Name?: AttachmentName;
+    /**
+     * The principals to add to the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN) of an accelerator that the attachment gives permission to add the resources from another account, listed in the attachment. To add more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.
+     */
+    AddPrincipals?: Principals;
+    /**
+     * The principals to remove from the cross-account attachment. A principal is an account or the Amazon Resource Name (ARN) of an accelerator that is given permission to add the resources from another account, listed in the cross-account attachment. To remove more than one principal, separate the account numbers or accelerator ARNs, or both, with commas.
+     */
+    RemovePrincipals?: Principals;
+    /**
+     * The resources to add to the cross-account attachment. A resource listed in a cross-account attachment can be added to an accelerator by the principals that are listed in the attachment. To add more than one resource, separate the resource ARNs with commas.
+     */
+    AddResources?: Resources;
+    /**
+     * The resources to remove from the cross-account attachment. A resource listed in a cross-account attachment can be added to an accelerator fy principals that are listed in the cross-account attachment. To remove more than one resource, separate the resource ARNs with commas.
+     */
+    RemoveResources?: Resources;
+  }
+  export interface UpdateCrossAccountAttachmentResponse {
+    /**
+     * Information about the updated cross-account attachment.
+     */
+    CrossAccountAttachment?: Attachment;
   }
   export interface UpdateCustomRoutingAcceleratorAttributesRequest {
     /**

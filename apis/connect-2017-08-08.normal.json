@@ -404,6 +404,40 @@
       "documentation": "<p>Associates an agent with a traffic distribution group.</p>",
       "idempotent": true
     },
+    "BatchGetFlowAssociation": {
+      "name": "BatchGetFlowAssociation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/flow-associations-batch/{InstanceId}"
+      },
+      "input": {
+        "shape": "BatchGetFlowAssociationRequest"
+      },
+      "output": {
+        "shape": "BatchGetFlowAssociationResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieve the flow associations for the given resources.</p>"
+    },
     "ClaimPhoneNumber": {
       "name": "ClaimPhoneNumber",
       "http": {
@@ -4544,7 +4578,7 @@
           "shape": "ResourceConflictException"
         }
       ],
-      "documentation": "<p>Replicates an Amazon Connect instance in the specified Amazon Web Services Region.</p> <p>For more information about replicating an Amazon Connect instance, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html\">Create a replica of your existing Amazon Connect instance</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+      "documentation": "<p>Replicates an Amazon Connect instance in the specified Amazon Web Services Region and copies configuration information for Amazon Connect resources across Amazon Web Services Regions. </p> <p>For more information about replicating an Amazon Connect instance, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html\">Create a replica of your existing Amazon Connect instance</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
     "ResumeContactRecording": {
       "name": "ResumeContactRecording",
@@ -6854,6 +6888,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about an agent status.</p>"
@@ -6919,6 +6961,14 @@
         "Type": {
           "shape": "AgentStatusType",
           "documentation": "<p>The type of the agent status.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Summary information for an agent status.</p>"
@@ -7396,6 +7446,38 @@
       "max": 31,
       "min": 8,
       "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?"
+    },
+    "BatchGetFlowAssociationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "ResourceIds"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "ResourceIds": {
+          "shape": "resourceArnListMaxLimit100",
+          "documentation": "<p>A list of resource identifiers to retrieve flow associations.</p>"
+        },
+        "ResourceType": {
+          "shape": "ListFlowAssociationResourceType",
+          "documentation": "<p>The type of resource association.</p>"
+        }
+      }
+    },
+    "BatchGetFlowAssociationResponse": {
+      "type": "structure",
+      "members": {
+        "FlowAssociationSummaryList": {
+          "shape": "FlowAssociationSummaryList",
+          "documentation": "<p>Information about flow associations.</p>"
+        }
+      }
     },
     "BehaviorType": {
       "type": "string",
@@ -8408,7 +8490,7 @@
         },
         "S3Uri": {
           "shape": "S3Uri",
-          "documentation": "<p>The URI for the S3 bucket where the prompt is stored.</p>"
+          "documentation": "<p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html\">GetPromptFile</a> API instead of providing S3 URIs.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -11921,6 +12003,30 @@
       "max": 5,
       "min": 1
     },
+    "FlowAssociationSummary": {
+      "type": "structure",
+      "members": {
+        "ResourceId": {
+          "shape": "ARN",
+          "documentation": "<p>The identifier of the resource.</p>"
+        },
+        "FlowId": {
+          "shape": "ARN",
+          "documentation": "<p>The identifier of the flow.</p>"
+        },
+        "ResourceType": {
+          "shape": "ListFlowAssociationResourceType",
+          "documentation": "<p>The type of resource association.</p>"
+        }
+      },
+      "documentation": "<p>Information about flow associations.</p>"
+    },
+    "FlowAssociationSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "FlowAssociationSummary"
+      }
+    },
     "FunctionArn": {
       "type": "string",
       "max": 140,
@@ -12253,6 +12359,14 @@
         "PromptPresignedUrl": {
           "shape": "PromptPresignedUrl",
           "documentation": "<p>A generated URL to the prompt that can be given to an unauthorized user so they can access the prompt in S3.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       }
     },
@@ -12435,6 +12549,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about a hierarchy group.</p>"
@@ -12480,6 +12602,14 @@
         "Name": {
           "shape": "HierarchyGroupName",
           "documentation": "<p>The name of the hierarchy group.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains summary information about a hierarchy group.</p>"
@@ -12518,6 +12648,14 @@
         "Name": {
           "shape": "HierarchyLevelName",
           "documentation": "<p>The name of the hierarchy level.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about a hierarchy level.</p>"
@@ -12786,6 +12924,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Information about of the hours of operation.</p>"
@@ -12897,6 +13043,14 @@
         "Name": {
           "shape": "HoursOfOperationName",
           "documentation": "<p>The name of the hours of operation.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains summary information about hours of operation for a contact center.</p>"
@@ -13823,6 +13977,13 @@
         }
       }
     },
+    "ListFlowAssociationResourceType": {
+      "type": "string",
+      "enum": [
+        "SMS_PHONE_NUMBER",
+        "VOICE_PHONE_NUMBER"
+      ]
+    },
     "ListHoursOfOperationsRequest": {
       "type": "structure",
       "required": [
@@ -14328,6 +14489,14 @@
         "QuickConnectSummaryList": {
           "shape": "QuickConnectSummaryList",
           "documentation": "<p>Information about the quick connects.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       }
     },
@@ -14466,6 +14635,14 @@
         "RoutingProfileQueueConfigSummaryList": {
           "shape": "RoutingProfileQueueConfigSummaryList",
           "documentation": "<p>Information about the routing profiles.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       }
     },
@@ -14647,6 +14824,14 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       }
     },
@@ -14694,6 +14879,14 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       }
     },
@@ -16045,6 +16238,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Information about a prompt.</p>"
@@ -16122,6 +16323,14 @@
         "Name": {
           "shape": "PromptName",
           "documentation": "<p>The name of the prompt.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about the prompt.</p>"
@@ -16201,6 +16410,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about a queue.</p>"
@@ -16336,6 +16553,14 @@
         "QueueType": {
           "shape": "QueueType",
           "documentation": "<p>The type of queue.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains summary information about a queue.</p>"
@@ -16394,6 +16619,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about a quick connect.</p>"
@@ -16493,6 +16726,14 @@
         "QuickConnectType": {
           "shape": "QuickConnectType",
           "documentation": "<p>The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains summary information about a quick connect.</p>"
@@ -16636,6 +16877,10 @@
       "type": "string",
       "max": 4096,
       "min": 0
+    },
+    "RegionName": {
+      "type": "string",
+      "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?"
     },
     "RehydrationType": {
       "type": "string",
@@ -16821,6 +17066,18 @@
         "AgentAvailabilityTimer": {
           "shape": "AgentAvailabilityTimer",
           "documentation": "<p>Whether agents with this routing profile will have their routing order calculated based on <i>time since their last inbound contact</i> or <i>longest idle time</i>. </p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
+        },
+        "IsDefault": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether this a default routing profile.</p>"
         }
       },
       "documentation": "<p>Contains information about a routing profile.</p>"
@@ -17006,6 +17263,14 @@
         "Name": {
           "shape": "RoutingProfileName",
           "documentation": "<p>The name of the routing profile.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains summary information about a routing profile.</p>"
@@ -17237,9 +17502,9 @@
     },
     "S3Uri": {
       "type": "string",
-      "max": 512,
+      "max": 2000,
       "min": 1,
-      "pattern": "s3://\\S+/.+"
+      "pattern": "s3://\\S+/.+|https://\\\\S+\\\\.s3\\\\.\\\\S+\\\\.amazonaws\\\\.com/\\\\S+"
     },
     "SearchAvailablePhoneNumbersRequest": {
       "type": "structure",
@@ -17763,6 +18028,14 @@
         "TagRestrictedResources": {
           "shape": "TagRestrictedResourceList",
           "documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about a security profile.</p>"
@@ -17866,6 +18139,14 @@
         "Name": {
           "shape": "SecurityProfileName",
           "documentation": "<p>The name of the security profile.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about a security profile.</p>"
@@ -19034,7 +19315,7 @@
         },
         "IsDefault": {
           "shape": "Boolean",
-          "documentation": "<p>Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the <code>DeleteTrafficDistributionGroup</code> API. The default traffic distribution group is deleted as part of the process for deleting a replica.</p> <note> <p>The <code>SignInConfig</code> distribution is available only on the default <code>TrafficDistributionGroup</code>. If you call <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>, an <code>InvalidRequestException</code> is returned.</p> </note>"
+          "documentation": "<p>Whether this is the default traffic distribution group created during instance replication. The default traffic distribution group cannot be deleted by the <code>DeleteTrafficDistributionGroup</code> API. The default traffic distribution group is deleted as part of the process for deleting a replica.</p> <note> <p>The <code>SignInConfig</code> distribution is available only on a default <code>TrafficDistributionGroup</code> (see the <code>IsDefault</code> parameter in the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html\">TrafficDistributionGroup</a> data type). If you call <code>UpdateTrafficDistribution</code> with a modified <code>SignInConfig</code> and a non-default <code>TrafficDistributionGroup</code>, an <code>InvalidRequestException</code> is returned.</p> </note>"
         }
       },
       "documentation": "<p>Information about a traffic distribution group.</p>"
@@ -19865,7 +20146,7 @@
         },
         "S3Uri": {
           "shape": "S3Uri",
-          "documentation": "<p>The URI for the S3 bucket where the prompt is stored.</p>"
+          "documentation": "<p>The URI for the S3 bucket where the prompt is stored. You can provide S3 pre-signed URLs returned by the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_GetPromptFile.html\">GetPromptFile</a> API instead of providing S3 URIs.</p>"
         }
       }
     },
@@ -20764,6 +21045,14 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains information about a user account for an Amazon Connect instance.</p>"
@@ -21058,6 +21347,14 @@
         "Username": {
           "shape": "AgentUsername",
           "documentation": "<p>The Amazon Connect user name of the user account.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The timestamp when this resource was last modified.</p>"
+        },
+        "LastModifiedRegion": {
+          "shape": "RegionName",
+          "documentation": "<p>The Amazon Web Services Region where this resource was last modified.</p>"
         }
       },
       "documentation": "<p>Contains summary information about a user.</p>"
@@ -21519,6 +21816,14 @@
         }
       },
       "documentation": "<p>Information about Amazon Connect Wisdom.</p>"
+    },
+    "resourceArnListMaxLimit100": {
+      "type": "list",
+      "member": {
+        "shape": "ARN"
+      },
+      "max": 100,
+      "min": 1
     },
     "timestamp": {
       "type": "timestamp"

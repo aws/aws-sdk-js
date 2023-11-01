@@ -1602,6 +1602,10 @@ declare namespace RDS {
      */
     AllocatedStorage?: IntegerOptional;
     /**
+     * Reserved for future use.
+     */
+    RdsCustomClusterConfiguration?: RdsCustomClusterConfiguration;
+    /**
      * The Provisioned IOPS (I/O operations per second) value. This setting is only for non-Aurora Multi-AZ DB clusters.
      */
     Iops?: IntegerOptional;
@@ -1991,6 +1995,10 @@ declare namespace RDS {
      * For DB clusters in serverless DB engine mode, the scaling properties of the DB cluster. Valid for Cluster Type: Aurora DB clusters only
      */
     ScalingConfiguration?: ScalingConfiguration;
+    /**
+     * Reserved for future use.
+     */
+    RdsCustomClusterConfiguration?: RdsCustomClusterConfiguration;
     /**
      * Specifies whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection isn't enabled. Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
      */
@@ -3010,6 +3018,10 @@ declare namespace RDS {
      */
     EngineMode?: String;
     ScalingConfigurationInfo?: ScalingConfigurationInfo;
+    /**
+     * Reserved for future use.
+     */
+    RdsCustomClusterConfiguration?: RdsCustomClusterConfiguration;
     /**
      * Indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
      */
@@ -8012,6 +8024,16 @@ declare namespace RDS {
     Step?: IntegerOptional;
   }
   export type RangeList = Range[];
+  export interface RdsCustomClusterConfiguration {
+    /**
+     * Reserved for future use.
+     */
+    InterconnectSubnetId?: String;
+    /**
+     * Reserved for future use.
+     */
+    TransitGatewayMulticastDomainId?: String;
+  }
   export type ReadReplicaDBClusterIdentifierList = String[];
   export type ReadReplicaDBInstanceIdentifierList = String[];
   export type ReadReplicaIdentifierList = String[];
@@ -8559,6 +8581,10 @@ declare namespace RDS {
      * The network type of the DB cluster. Valid Values:    IPV4     DUAL    The network type is determined by the DBSubnetGroup specified for the DB cluster. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (DUAL). For more information, see  Working with a DB instance in a VPC in the Amazon Aurora User Guide.  Valid for: Aurora DB clusters only
      */
     NetworkType?: String;
+    /**
+     * Reserved for future use.
+     */
+    RdsCustomClusterConfiguration?: RdsCustomClusterConfiguration;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -8670,6 +8696,10 @@ declare namespace RDS {
      * The resource ID of the source DB cluster from which to restore.
      */
     SourceDbClusterResourceId?: String;
+    /**
+     * Reserved for future use.
+     */
+    RdsCustomClusterConfiguration?: RdsCustomClusterConfiguration;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;

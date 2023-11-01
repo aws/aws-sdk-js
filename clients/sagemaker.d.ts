@@ -16867,6 +16867,7 @@ declare namespace SageMaker {
      */
     MonitoringAlertSummaries?: MonitoringAlertSummaryList;
     LastMonitoringExecutionSummary?: MonitoringExecutionSummary;
+    BatchTransformInput?: BatchTransformInput;
   }
   export type ModelDashboardMonitoringSchedules = ModelDashboardMonitoringSchedule[];
   export interface ModelDataQuality {

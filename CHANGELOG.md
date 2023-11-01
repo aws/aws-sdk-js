@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1485.0-->
+<!--LATEST=2.1486.0-->
 <!--ENTRYINSERT-->
+
+## 2.1486.0
+* feature: Connect: Adds the BatchGetFlowAssociation API which returns flow associations (flow-resource) corresponding to the list of resourceArns supplied in the request. This release also adds IsDefault, LastModifiedRegion and LastModifiedTime fields to the responses of several Describe and List APIs.
+* feature: GlobalAccelerator: Global Accelerator now support accelerators with cross account endpoints.
+* feature: RDS: This release adds support for customized networking resources to Amazon RDS Custom.
+* feature: Redshift: Added support for Multi-AZ deployments for Provisioned RA3 clusters that provide 99.99% SLA availability.
+* feature: SageMaker: Support for batch transform input in Model dashboard
 
 ## 2.1485.0
 * feature: Amplify: Add backend field to CreateBranch and UpdateBranch requests. Add pagination support for ListApps, ListDomainAssociations, ListBranches, and ListJobs
