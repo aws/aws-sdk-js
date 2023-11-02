@@ -44,11 +44,11 @@ declare class GameLift extends Service {
    */
   createBuild(callback?: (err: AWSError, data: GameLift.Types.CreateBuildOutput) => void): Request<GameLift.Types.CreateBuildOutput, AWSError>;
   /**
-   * Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host your custom game server or Realtime Servers. Use this operation to configure the computing resources for your fleet and provide instructions for running game servers on each instance. Most Amazon GameLift fleets can deploy instances to multiple locations, including the home Region (where the fleet is created) and an optional set of remote locations. Fleets that are created in the following Amazon Web Services Regions support multiple locations: us-east-1 (N. Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland), ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that are created in other Amazon GameLift Regions can deploy instances in the fleet's home Region only. All fleet instances use the same configuration regardless of location; however, you can adjust capacity settings and turn auto-scaling on/off for each location. To create a fleet, choose the hardware for your instances, specify a game server build or Realtime script to deploy, and provide a runtime configuration to direct Amazon GameLift how to start and run game servers on each instance in the fleet. Set permissions for inbound traffic to your game servers, and enable optional features as needed. When creating a multi-location fleet, provide a list of additional remote locations. If you need to debug your fleet, fetch logs, view performance metrics or other actions on the fleet, create the development fleet with port 22/3389 open. As a best practice, we recommend opening ports for remote access only when you need them and closing them when you're finished.  If successful, this operation creates a new Fleet resource and places it in NEW status, which prompts Amazon GameLift to initiate the fleet creation workflow.  Learn more   Setting up fleets   Debug fleet creation issues   Multi-location fleets 
+   * Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host your custom game server or Realtime Servers. Use this operation to configure the computing resources for your fleet and provide instructions for running game servers on each instance. Most Amazon GameLift fleets can deploy instances to multiple locations, including the home Region (where the fleet is created) and an optional set of remote locations. Fleets that are created in the following Amazon Web Services Regions support multiple locations: us-east-1 (N. Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland), ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that are created in other Amazon GameLift Regions can deploy instances in the fleet's home Region only. All fleet instances use the same configuration regardless of location; however, you can adjust capacity settings and turn auto-scaling on/off for each location. To create a fleet, choose the hardware for your instances, specify a game server build or Realtime script to deploy, and provide a runtime configuration to direct Amazon GameLift how to start and run game servers on each instance in the fleet. Set permissions for inbound traffic to your game servers, and enable optional features as needed. When creating a multi-location fleet, provide a list of additional remote locations. If you need to debug your fleet, fetch logs, view performance metrics or other actions on the fleet, create the development fleet with port 22/3389 open. As a best practice, we recommend opening ports for remote access only when you need them and closing them when you're finished.  If successful, this operation creates a new Fleet resource and places it in NEW status, which prompts Amazon GameLift to initiate the fleet creation workflow. You can track fleet creation by checking fleet status using DescribeFleetAttributes and DescribeFleetLocationAttributes/, or by monitoring fleet creation events using DescribeFleetEvents.  When the fleet status changes to ACTIVE, you can enable automatic scaling with PutScalingPolicy and set capacity for the home Region with UpdateFleetCapacity. When the status of each remote location reaches ACTIVE, you can set capacity by location using UpdateFleetCapacity.  Learn more   Setting up fleets   Debug fleet creation issues   Multi-location fleets 
    */
   createFleet(params: GameLift.Types.CreateFleetInput, callback?: (err: AWSError, data: GameLift.Types.CreateFleetOutput) => void): Request<GameLift.Types.CreateFleetOutput, AWSError>;
   /**
-   * Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host your custom game server or Realtime Servers. Use this operation to configure the computing resources for your fleet and provide instructions for running game servers on each instance. Most Amazon GameLift fleets can deploy instances to multiple locations, including the home Region (where the fleet is created) and an optional set of remote locations. Fleets that are created in the following Amazon Web Services Regions support multiple locations: us-east-1 (N. Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland), ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that are created in other Amazon GameLift Regions can deploy instances in the fleet's home Region only. All fleet instances use the same configuration regardless of location; however, you can adjust capacity settings and turn auto-scaling on/off for each location. To create a fleet, choose the hardware for your instances, specify a game server build or Realtime script to deploy, and provide a runtime configuration to direct Amazon GameLift how to start and run game servers on each instance in the fleet. Set permissions for inbound traffic to your game servers, and enable optional features as needed. When creating a multi-location fleet, provide a list of additional remote locations. If you need to debug your fleet, fetch logs, view performance metrics or other actions on the fleet, create the development fleet with port 22/3389 open. As a best practice, we recommend opening ports for remote access only when you need them and closing them when you're finished.  If successful, this operation creates a new Fleet resource and places it in NEW status, which prompts Amazon GameLift to initiate the fleet creation workflow.  Learn more   Setting up fleets   Debug fleet creation issues   Multi-location fleets 
+   * Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host your custom game server or Realtime Servers. Use this operation to configure the computing resources for your fleet and provide instructions for running game servers on each instance. Most Amazon GameLift fleets can deploy instances to multiple locations, including the home Region (where the fleet is created) and an optional set of remote locations. Fleets that are created in the following Amazon Web Services Regions support multiple locations: us-east-1 (N. Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland), ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that are created in other Amazon GameLift Regions can deploy instances in the fleet's home Region only. All fleet instances use the same configuration regardless of location; however, you can adjust capacity settings and turn auto-scaling on/off for each location. To create a fleet, choose the hardware for your instances, specify a game server build or Realtime script to deploy, and provide a runtime configuration to direct Amazon GameLift how to start and run game servers on each instance in the fleet. Set permissions for inbound traffic to your game servers, and enable optional features as needed. When creating a multi-location fleet, provide a list of additional remote locations. If you need to debug your fleet, fetch logs, view performance metrics or other actions on the fleet, create the development fleet with port 22/3389 open. As a best practice, we recommend opening ports for remote access only when you need them and closing them when you're finished.  If successful, this operation creates a new Fleet resource and places it in NEW status, which prompts Amazon GameLift to initiate the fleet creation workflow. You can track fleet creation by checking fleet status using DescribeFleetAttributes and DescribeFleetLocationAttributes/, or by monitoring fleet creation events using DescribeFleetEvents.  When the fleet status changes to ACTIVE, you can enable automatic scaling with PutScalingPolicy and set capacity for the home Region with UpdateFleetCapacity. When the status of each remote location reaches ACTIVE, you can set capacity by location using UpdateFleetCapacity.  Learn more   Setting up fleets   Debug fleet creation issues   Multi-location fleets 
    */
   createFleet(callback?: (err: AWSError, data: GameLift.Types.CreateFleetOutput) => void): Request<GameLift.Types.CreateFleetOutput, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class GameLift extends Service {
    */
   deleteGameSessionQueue(callback?: (err: AWSError, data: GameLift.Types.DeleteGameSessionQueueOutput) => void): Request<GameLift.Types.DeleteGameSessionQueueOutput, AWSError>;
   /**
-   * Deletes a custom location. Before deleting a custom location, review any fleets currently using the custom location and deregister the location if it is in use. For more information see, DeregisterCompute.
+   * Deletes a custom location. Before deleting a custom location, review any fleets currently using the custom location and deregister the location if it is in use. For more information, see DeregisterCompute.
    */
   deleteLocation(params: GameLift.Types.DeleteLocationInput, callback?: (err: AWSError, data: GameLift.Types.DeleteLocationOutput) => void): Request<GameLift.Types.DeleteLocationOutput, AWSError>;
   /**
-   * Deletes a custom location. Before deleting a custom location, review any fleets currently using the custom location and deregister the location if it is in use. For more information see, DeregisterCompute.
+   * Deletes a custom location. Before deleting a custom location, review any fleets currently using the custom location and deregister the location if it is in use. For more information, see DeregisterCompute.
    */
   deleteLocation(callback?: (err: AWSError, data: GameLift.Types.DeleteLocationOutput) => void): Request<GameLift.Types.DeleteLocationOutput, AWSError>;
   /**
@@ -853,7 +853,7 @@ declare namespace GameLift {
     /**
      * A unique identifier for a player delivering the response. This parameter can include one or multiple player IDs.
      */
-    PlayerIds: StringList;
+    PlayerIds: PlayerIdsForAcceptMatch;
     /**
      * Player response to the proposed match.
      */
@@ -1152,11 +1152,11 @@ declare namespace GameLift {
      */
     Description?: NonZeroAndMaxString;
     /**
-     * The unique identifier for a custom game server build to be deployed on fleet instances. You can use either the build ID or ARN. The build must be uploaded to Amazon GameLift and in READY status. This fleet property cannot be changed later.
+     * The unique identifier for a custom game server build to be deployed on fleet instances. You can use either the build ID or ARN. The build must be uploaded to Amazon GameLift and in READY status. This fleet property can't be changed after the fleet is created.
      */
     BuildId?: BuildIdOrArn;
     /**
-     * The unique identifier for a Realtime configuration script to be deployed on fleet instances. You can use either the script ID or ARN. Scripts must be uploaded to Amazon GameLift prior to creating the fleet. This fleet property cannot be changed later.
+     * The unique identifier for a Realtime configuration script to be deployed on fleet instances. You can use either the script ID or ARN. Scripts must be uploaded to Amazon GameLift prior to creating the fleet. This fleet property can't be changed after the fleet is created.
      */
     ScriptId?: ScriptIdOrArn;
     /**
@@ -1204,11 +1204,11 @@ declare namespace GameLift {
      */
     PeerVpcId?: NonZeroAndMaxString;
     /**
-     * Indicates whether to use On-Demand or Spot instances for this fleet. By default, this property is set to ON_DEMAND. Learn more about when to use  On-Demand versus Spot Instances. This property cannot be changed after the fleet is created.
+     * Indicates whether to use On-Demand or Spot instances for this fleet. By default, this property is set to ON_DEMAND. Learn more about when to use  On-Demand versus Spot Instances. This fleet property can't be changed after the fleet is created.
      */
     FleetType?: FleetType;
     /**
-     * A unique identifier for an IAM role that manages access to your Amazon Web Services services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN by using the IAM dashboard in the Amazon Web Services Management Console. Learn more about using on-box credentials for your game servers at  Access external resources from a game server. This property cannot be changed after the fleet is created.
+     * A unique identifier for an IAM role with access permissions to other Amazon Web Services services. Any application that runs on an instance in the fleet--including install scripts, server processes, and other processes--can use these permissions to interact with Amazon Web Services resources that you own or have access to. For more information about using the role with your game server builds, see  Communicate with other Amazon Web Services resources from your fleets. This fleet property can't be changed after the fleet is created.
      */
     InstanceRoleArn?: NonEmptyString;
     /**
@@ -1231,6 +1231,10 @@ declare namespace GameLift {
      * Amazon GameLift Anywhere configuration options.
      */
     AnywhereConfiguration?: AnywhereConfiguration;
+    /**
+     * Prompts Amazon GameLift to generate a shared credentials file for the IAM role defined in InstanceRoleArn. The shared credentials file is stored on each fleet instance and refreshed as needed. Use shared credentials for applications that are deployed along with the game server executable, if the game server is integrated with server SDK version 5.x. For more information about using shared credentials, see  Communicate with other Amazon Web Services resources from your fleets.
+     */
+    InstanceRoleCredentialsProvider?: InstanceRoleCredentialsProvider;
   }
   export interface CreateFleetLocationsInput {
     /**
@@ -1522,7 +1526,7 @@ declare namespace GameLift {
     /**
      * A unique identifier for a player. Player IDs are developer-defined.
      */
-    PlayerId: NonZeroAndMaxString;
+    PlayerId: PlayerId;
     /**
      * Developer-defined information related to a player. Amazon GameLift does not use this data, so it can be formatted as needed for use in the game.
      */
@@ -2305,7 +2309,7 @@ declare namespace GameLift {
     /**
      * A unique identifier for a player to retrieve player sessions for.
      */
-    PlayerId?: NonZeroAndMaxString;
+    PlayerId?: PlayerId;
     /**
      * A unique identifier for a player session to retrieve.
      */
@@ -2413,7 +2417,7 @@ declare namespace GameLift {
     /**
      * A unique identifier for a player to associate with the player session.
      */
-    PlayerId?: NonZeroAndMaxString;
+    PlayerId?: PlayerId;
     /**
      * Developer-defined information related to a player. Amazon GameLift does not use this data, so it can be formatted as needed for use in the game.
      */
@@ -2523,7 +2527,7 @@ declare namespace GameLift {
      */
     FleetArn?: FleetArn;
     /**
-     * Indicates whether to use On-Demand or Spot instances for this fleet. By default, this property is set to ON_DEMAND. Learn more about when to use  On-Demand versus Spot Instances. This property cannot be changed after the fleet is created.
+     * Indicates whether to use On-Demand or Spot instances for this fleet. By default, this property is set to ON_DEMAND. Learn more about when to use  On-Demand versus Spot Instances. This fleet property can't be changed after the fleet is created.
      */
     FleetType?: FleetType;
     /**
@@ -2596,7 +2600,7 @@ declare namespace GameLift {
      */
     StoppedActions?: FleetActionList;
     /**
-     * A unique identifier for an IAM role that manages access to your Amazon Web Services services. With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, including install scripts, server processes, and daemons (background processes). Create a role or look up a role's ARN by using the IAM dashboard in the Amazon Web Services Management Console. Learn more about using on-box credentials for your game servers at  Access external resources from a game server.
+     * A unique identifier for an IAM role with access permissions to other Amazon Web Services services. Any application that runs on an instance in the fleet--including install scripts, server processes, and other processes--can use these permissions to interact with Amazon Web Services resources that you own or have access to. For more information about using the role with your game server builds, see  Communicate with other Amazon Web Services resources from your fleets.
      */
     InstanceRoleArn?: NonEmptyString;
     CertificateConfiguration?: CertificateConfiguration;
@@ -2605,6 +2609,10 @@ declare namespace GameLift {
      */
     ComputeType?: ComputeType;
     AnywhereConfiguration?: AnywhereConfiguration;
+    /**
+     * Indicates that fleet instances maintain a shared credentials file for the IAM role defined in InstanceRoleArn. Shared credentials allow applications that are deployed with the game server executable to communicate with other Amazon Web Services resources. This property is used only when the game server is integrated with the server SDK version 5.x. For more information about using shared credentials, see  Communicate with other Amazon Web Services resources from your fleets.
+     */
+    InstanceRoleCredentialsProvider?: InstanceRoleCredentialsProvider;
   }
   export type FleetAttributesList = FleetAttributes[];
   export interface FleetCapacity {
@@ -3252,6 +3260,7 @@ declare namespace GameLift {
   export type InstanceDefinitions = InstanceDefinition[];
   export type InstanceId = string;
   export type InstanceList = Instance[];
+  export type InstanceRoleCredentialsProvider = "SHARED_CREDENTIAL_FILE"|string;
   export type InstanceStatus = "PENDING"|"ACTIVE"|"TERMINATING"|string;
   export type Integer = number;
   export type IpAddress = string;
@@ -3267,7 +3276,7 @@ declare namespace GameLift {
     /**
      * A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: "000.000.000.000/[subnet mask]" or optionally the shortened version "0.0.0.0/[subnet mask]".
      */
-    IpRange: NonBlankString;
+    IpRange: IpRange;
     /**
      * The network communication protocol used by the fleet.
      */
@@ -3275,6 +3284,7 @@ declare namespace GameLift {
   }
   export type IpPermissionsList = IpPermission[];
   export type IpProtocol = "TCP"|"UDP"|string;
+  export type IpRange = string;
   export type LargeGameSessionData = string;
   export type LatencyMap = {[key: string]: PositiveInteger};
   export type LaunchParametersStringModel = string;
@@ -3563,7 +3573,7 @@ declare namespace GameLift {
     /**
      * A unique identifier for a player 
      */
-    PlayerId?: NonZeroAndMaxString;
+    PlayerId?: PlayerId;
     /**
      * A unique identifier for a player session
      */
@@ -3724,7 +3734,6 @@ declare namespace GameLift {
   export type MetricGroupList = MetricGroup[];
   export type MetricName = "ActivatingGameSessions"|"ActiveGameSessions"|"ActiveInstances"|"AvailableGameSessions"|"AvailablePlayerSessions"|"CurrentPlayerSessions"|"IdleInstances"|"PercentAvailableGameSessions"|"PercentIdleInstances"|"QueueDepth"|"WaitTime"|"ConcurrentActivatableGameSessions"|string;
   export type NonBlankAndLengthConstraintString = string;
-  export type NonBlankString = string;
   export type NonEmptyString = string;
   export type NonNegativeDouble = number;
   export type NonNegativeLimitedLengthDouble = string;
@@ -3734,7 +3743,7 @@ declare namespace GameLift {
     /**
      * A unique identifier for a player that is associated with this player session.
      */
-    PlayerId?: NonZeroAndMaxString;
+    PlayerId?: PlayerId;
     /**
      * A unique identifier for a player session.
      */
@@ -3745,7 +3754,7 @@ declare namespace GameLift {
     /**
      * A unique identifier for a player
      */
-    PlayerId?: NonZeroAndMaxString;
+    PlayerId?: PlayerId;
     /**
      * A collection of key:value pairs containing player information for use in matchmaking. Player attribute keys must match the playerAttributes used in a matchmaking rule set. Example: "PlayerAttributes": {"skill": {"N": "23"}, "gameMode": {"S": "deathmatch"}}. You can provide up to 10 PlayerAttributes.
      */
@@ -3765,12 +3774,14 @@ declare namespace GameLift {
   export type PlayerAttributeStringList = PlayerAttributeString[];
   export type PlayerData = string;
   export type PlayerDataMap = {[key: string]: PlayerData};
-  export type PlayerIdList = NonZeroAndMaxString[];
+  export type PlayerId = string;
+  export type PlayerIdList = PlayerId[];
+  export type PlayerIdsForAcceptMatch = PlayerId[];
   export interface PlayerLatency {
     /**
      * A unique identifier for a player associated with the latency data.
      */
-    PlayerId?: NonZeroAndMaxString;
+    PlayerId?: PlayerId;
     /**
      * Name of the Region that is associated with the latency value.
      */
@@ -3801,7 +3812,7 @@ declare namespace GameLift {
     /**
      * A unique identifier for a player that is associated with this player session.
      */
-    PlayerId?: NonZeroAndMaxString;
+    PlayerId?: PlayerId;
     /**
      * A unique identifier for the game session that the player session is connected to.
      */

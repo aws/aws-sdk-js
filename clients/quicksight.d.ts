@@ -1473,6 +1473,7 @@ declare namespace QuickSight {
      * A list of the associated sheets with the unique identifier and name of each sheet.
      */
     Sheets?: SheetList;
+    Options?: AssetOptions;
   }
   export interface AnalysisDefaults {
     /**
@@ -1506,6 +1507,10 @@ declare namespace QuickSight {
      */
     ColumnConfigurations?: ColumnConfigurationList;
     AnalysisDefaults?: AnalysisDefaults;
+    /**
+     * An array of option definitions for an analysis.
+     */
+    Options?: AssetOptions;
   }
   export interface AnalysisError {
     /**
@@ -2074,6 +2079,16 @@ declare namespace QuickSight {
     S3Uri?: S3Uri;
   }
   export type AssetBundleResourceArns = Arn[];
+  export interface AssetOptions {
+    /**
+     * Determines the timezone for the analysis.
+     */
+    Timezone?: String;
+    /**
+     * Determines the week start day for an analysis.
+     */
+    WeekStart?: DayOfTheWeek;
+  }
   export type AssignmentStatus = "ENABLED"|"DRAFT"|"DISABLED"|string;
   export interface AthenaParameters {
     /**
@@ -2676,6 +2691,10 @@ declare namespace QuickSight {
      */
     NewColumnType: ColumnDataType;
     /**
+     * The sub data type of the new column. Sub types are only available for decimal columns that are part of a SPICE dataset.
+     */
+    SubType?: ColumnDataSubType;
+    /**
      * When casting a column from string to datetime type, you can supply a string in a format supported by Amazon QuickSight to denote the source data format.
      */
     Format?: TypeCastFormat;
@@ -2849,6 +2868,7 @@ declare namespace QuickSight {
   }
   export type ColumnConfigurationList = ColumnConfiguration[];
   export type ColumnDataRole = "DIMENSION"|"MEASURE"|string;
+  export type ColumnDataSubType = "FLOAT"|"FIXED"|string;
   export type ColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|string;
   export interface ColumnDescription {
     /**
@@ -4811,6 +4831,7 @@ declare namespace QuickSight {
      * A list of the associated sheets with the unique identifier and name of each sheet.
      */
     Sheets?: SheetList;
+    Options?: AssetOptions;
   }
   export interface DashboardVersionDefinition {
     /**
@@ -4838,6 +4859,10 @@ declare namespace QuickSight {
      */
     ColumnConfigurations?: ColumnConfigurationList;
     AnalysisDefaults?: AnalysisDefaults;
+    /**
+     * An array of option definitions for a dashboard.
+     */
+    Options?: AssetOptions;
   }
   export interface DashboardVersionSummary {
     /**
@@ -5760,6 +5785,7 @@ declare namespace QuickSight {
     CustomValue?: SensitiveTimestamp;
   }
   export type DayOfMonth = string;
+  export type DayOfTheWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
   export type DayOfWeek = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
   export type DbUsername = string;
   export interface DecimalDatasetParameter {
@@ -10086,6 +10112,10 @@ declare namespace QuickSight {
      * The data type of the column.
      */
     Type: InputColumnDataType;
+    /**
+     * The sub data type of the column. Sub types are only available for decimal columns that are part of a SPICE dataset.
+     */
+    SubType?: ColumnDataSubType;
   }
   export type InputColumnDataType = "STRING"|"INTEGER"|"DECIMAL"|"DATETIME"|"BIT"|"BOOLEAN"|"JSON"|string;
   export type InputColumnList = InputColumn[];
@@ -12321,7 +12351,7 @@ declare namespace QuickSight {
   export type OtherCategories = "INCLUDE"|"EXCLUDE"|string;
   export interface OutputColumn {
     /**
-     * A display name for the dataset.
+     * The display name of the column..
      */
     Name?: ColumnName;
     /**
@@ -12329,9 +12359,13 @@ declare namespace QuickSight {
      */
     Description?: ColumnDescriptiveText;
     /**
-     * The type.
+     * The data type of the column.
      */
     Type?: ColumnDataType;
+    /**
+     * The sub data type of the column.
+     */
+    SubType?: ColumnDataSubType;
   }
   export type OutputColumnList = OutputColumn[];
   export interface OverrideDatasetParameterOperation {
@@ -15992,6 +16026,7 @@ declare namespace QuickSight {
      * A list of the associated sheets with the unique identifier and name of each sheet.
      */
     Sheets?: SheetList;
+    Options?: AssetOptions;
   }
   export interface TemplateVersionDefinition {
     /**
@@ -16019,6 +16054,10 @@ declare namespace QuickSight {
      */
     ColumnConfigurations?: ColumnConfigurationList;
     AnalysisDefaults?: AnalysisDefaults;
+    /**
+     * An array of option definitions for a template.
+     */
+    Options?: AssetOptions;
   }
   export interface TemplateVersionSummary {
     /**

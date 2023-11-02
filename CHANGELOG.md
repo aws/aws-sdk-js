@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1486.0-->
+<!--LATEST=2.1487.0-->
 <!--ENTRYINSERT-->
+
+## 2.1487.0
+* feature: AppRunner: AWS App Runner now supports using dual-stack address type for the public endpoint of your incoming traffic.
+* feature: Connect: GetMetricDataV2 API: Update to include new metrics PERCENT_NON_TALK_TIME, PERCENT_TALK_TIME, PERCENT_TALK_TIME_AGENT, PERCENT_TALK_TIME_CUSTOMER
+* feature: GameLift: Amazon GameLift adds support for shared credentials, which allows applications that are deployed on managed EC2 fleets to interact with other AWS resources.
+* feature: Glue: This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
+* feature: NetworkFirewall: This release introduces the stateless rule analyzer, which enables you to analyze your stateless rules for asymmetric routing.
+* feature: QuickSight: Got confirmed from qmeixua@ about custom week features, and tested locally with aws cli and java sdk that the subtypes are showing up.
 
 ## 2.1486.0
 * feature: Connect: Adds the BatchGetFlowAssociation API which returns flow associations (flow-resource) corresponding to the list of resourceArns supplied in the request. This release also adds IsDefault, LastModifiedRegion and LastModifiedTime fields to the responses of several Describe and List APIs.

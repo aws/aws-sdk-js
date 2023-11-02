@@ -52,11 +52,11 @@ declare class NetworkFirewall extends Service {
    */
   createRuleGroup(callback?: (err: AWSError, data: NetworkFirewall.Types.CreateRuleGroupResponse) => void): Request<NetworkFirewall.Types.CreateRuleGroupResponse, AWSError>;
   /**
-   * Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate associations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall. After you create a TLS inspection configuration, you can associate it with a new firewall policy. To update the settings for a TLS inspection configuration, use UpdateTLSInspectionConfiguration. To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about TLS inspection configurations, use ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration.  For more information about TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide. 
+   * Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains Certificate Manager certificate associations between and the scope configurations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall. After you create a TLS inspection configuration, you can associate it with a new firewall policy. To update the settings for a TLS inspection configuration, use UpdateTLSInspectionConfiguration. To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about TLS inspection configurations, use ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration.  For more information about TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide. 
    */
   createTLSInspectionConfiguration(params: NetworkFirewall.Types.CreateTLSInspectionConfigurationRequest, callback?: (err: AWSError, data: NetworkFirewall.Types.CreateTLSInspectionConfigurationResponse) => void): Request<NetworkFirewall.Types.CreateTLSInspectionConfigurationResponse, AWSError>;
   /**
-   * Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains the Certificate Manager certificate associations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall. After you create a TLS inspection configuration, you can associate it with a new firewall policy. To update the settings for a TLS inspection configuration, use UpdateTLSInspectionConfiguration. To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about TLS inspection configurations, use ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration.  For more information about TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide. 
+   * Creates an Network Firewall TLS inspection configuration. A TLS inspection configuration contains Certificate Manager certificate associations between and the scope configurations that Network Firewall uses to decrypt and re-encrypt traffic traveling through your firewall. After you create a TLS inspection configuration, you can associate it with a new firewall policy. To update the settings for a TLS inspection configuration, use UpdateTLSInspectionConfiguration. To manage a TLS inspection configuration's tags, use the standard Amazon Web Services resource tagging operations, ListTagsForResource, TagResource, and UntagResource. To retrieve information about TLS inspection configurations, use ListTLSInspectionConfigurations and DescribeTLSInspectionConfiguration.  For more information about TLS inspection configurations, see Inspecting SSL/TLS traffic with TLS inspection configurations in the Network Firewall Developer Guide. 
    */
   createTLSInspectionConfiguration(callback?: (err: AWSError, data: NetworkFirewall.Types.CreateTLSInspectionConfigurationResponse) => void): Request<NetworkFirewall.Types.CreateTLSInspectionConfigurationResponse, AWSError>;
   /**
@@ -316,6 +316,21 @@ declare namespace NetworkFirewall {
   }
   export type AddressDefinition = string;
   export type Addresses = Address[];
+  export interface AnalysisResult {
+    /**
+     * The priority number of the stateless rules identified in the analysis.
+     */
+    IdentifiedRuleIds?: RuleIdList;
+    /**
+     * The types of rule configurations that Network Firewall analyzes your rule groups for. Network Firewall analyzes stateless rule groups for the following types of rule configurations:    STATELESS_RULE_FORWARDING_ASYMMETRICALLY  Cause: One or more stateless rules with the action pass or forward are forwarding traffic asymmetrically. Specifically, the rule's set of source IP addresses or their associated port numbers, don't match the set of destination IP addresses or their associated port numbers. To mitigate: Make sure that there's an existing return path. For example, if the rule allows traffic from source 10.1.0.0/24 to destination 20.1.0.0/24, you should allow return traffic from source 20.1.0.0/24 to destination 10.1.0.0/24.    STATELESS_RULE_CONTAINS_TCP_FLAGS  Cause: At least one stateless rule with the action pass orforward contains TCP flags that are inconsistent in the forward and return directions. To mitigate: Prevent asymmetric routing issues caused by TCP flags by following these actions:   Remove unnecessary TCP flag inspections from the rules.   If you need to inspect TCP flags, check that the rules correctly account for changes in TCP flags throughout the TCP connection cycle, for example SYN and ACK flags used in a 3-way TCP handshake.    
+     */
+    IdentifiedType?: IdentifiedType;
+    /**
+     * Provides analysis details for the identified rule.
+     */
+    AnalysisDetail?: CollectionMember_String;
+  }
+  export type AnalysisResultList = AnalysisResult[];
   export interface AssociateFirewallPolicyRequest {
     /**
      * An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request.  To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it. To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an InvalidTokenException. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. 
@@ -435,11 +450,11 @@ declare namespace NetworkFirewall {
   export type Certificates = TlsCertificateData[];
   export interface CheckCertificateRevocationStatusActions {
     /**
-     * Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has a revoked status.    PASS - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.    DROP - Network Firewall fails closed and drops all subsequent traffic.    REJECT - Network Firewall sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall then fails closed and drops all subsequent traffic. REJECT is available only for TCP traffic.  
+     * Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has a revoked status.    PASS - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.    DROP - Network Firewall closes the connection and drops subsequent packets for that connection.    REJECT - Network Firewall sends a TCP reject packet back to your client. The service closes the connection and drops subsequent packets for that connection. REJECT is available only for TCP traffic.  
      */
     RevokedStatusAction?: RevocationCheckAction;
     /**
-     * Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has an unknown status, or a status that cannot be determined for any other reason, including when the service is unable to connect to the OCSP and CRL endpoints for the certificate.    PASS - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.    DROP - Network Firewall fails closed and drops all subsequent traffic.    REJECT - Network Firewall sends a TCP reject packet back to your client so that the client can immediately establish a new session. Network Firewall then fails closed and drops all subsequent traffic. REJECT is available only for TCP traffic.   
+     * Configures how Network Firewall processes traffic when it determines that the certificate presented by the server in the SSL/TLS connection has an unknown status, or a status that cannot be determined for any other reason, including when the service is unable to connect to the OCSP and CRL endpoints for the certificate.    PASS - Allow the connection to continue, and pass subsequent packets to the stateful engine for inspection.    DROP - Network Firewall closes the connection and drops subsequent packets for that connection.    REJECT - Network Firewall sends a TCP reject packet back to your client. The service closes the connection and drops subsequent packets for that connection. REJECT is available only for TCP traffic.  
      */
     UnknownStatusAction?: RevocationCheckAction;
   }
@@ -574,6 +589,10 @@ declare namespace NetworkFirewall {
      * A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.
      */
     SourceMetadata?: SourceMetadata;
+    /**
+     * Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to TRUE, Network Firewall runs the analysis and then creates the rule group for you. To run the stateless rule group analyzer without creating the rule group, set DryRun to TRUE.
+     */
+    AnalyzeRuleGroup?: Boolean;
   }
   export interface CreateRuleGroupResponse {
     /**
@@ -830,6 +849,10 @@ declare namespace NetworkFirewall {
      * Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.   This setting is required for requests that do not include the RuleGroupARN. 
      */
     Type?: RuleGroupType;
+    /**
+     * Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to TRUE, Network Firewall runs the analysis.
+     */
+    AnalyzeRuleGroup?: Boolean;
   }
   export interface DescribeRuleGroupResponse {
     /**
@@ -1156,6 +1179,7 @@ declare namespace NetworkFirewall {
   export type IPSetReferenceMap = {[key: string]: IPSetReference};
   export type IPSetReferenceName = string;
   export type IPSets = {[key: string]: IPSet};
+  export type IdentifiedType = "STATELESS_RULE_FORWARDING_ASYMMETRICALLY"|"STATELESS_RULE_CONTAINS_TCP_FLAGS"|string;
   export type KeyId = string;
   export type Keyword = string;
   export type LastUpdateTime = Date;
@@ -1430,7 +1454,7 @@ declare namespace NetworkFirewall {
      */
     RulesSource: RulesSource;
     /**
-     * Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful rule group must have stateful rule options settings that are compatible with these settings.
+     * Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful rule group must have stateful rule options settings that are compatible with these settings. Some limitations apply; for more information, see Strict evaluation order in the Network Firewall Developer Guide.
      */
     StatefulRuleOptions?: StatefulRuleOptions;
   }
@@ -1501,9 +1525,14 @@ declare namespace NetworkFirewall {
      * The last time that the rule group was changed.
      */
     LastModifiedTime?: LastUpdateTime;
+    /**
+     * The list of analysis results for AnalyzeRuleGroup. If you set AnalyzeRuleGroup to TRUE in CreateRuleGroup, UpdateRuleGroup, or DescribeRuleGroup, Network Firewall analyzes the rule group and identifies the rules that might adversely effect your firewall's functionality. For example, if Network Firewall detects a rule that's routing traffic asymmetrically, which impacts the service's ability to properly process traffic, the service includes the rule in the list of analysis results.
+     */
+    AnalysisResults?: AnalysisResultList;
   }
   export type RuleGroupType = "STATELESS"|"STATEFUL"|string;
   export type RuleGroups = RuleGroupMetadata[];
+  export type RuleIdList = CollectionMember_String[];
   export interface RuleOption {
     /**
      * The keyword for the Suricata compatible rule option. You must include a sid (signature ID), and can optionally include other keywords. For information about Suricata compatible keywords, see Rule options in the Suricata documentation.
@@ -1530,7 +1559,7 @@ declare namespace NetworkFirewall {
   }
   export interface RulesSource {
     /**
-     * Stateful inspection criteria, provided in Suricata compatible intrusion prevention system (IPS) rules. Suricata is an open-source network IPS that includes a standard rule-based language for network traffic inspection. These rules contain the inspection criteria and the action to take for traffic that matches the criteria, so this type of rule group doesn't have a separate action setting.
+     * Stateful inspection criteria, provided in Suricata compatible rules. Suricata is an open-source threat detection framework that includes a standard rule-based language for network traffic inspection. These rules contain the inspection criteria and the action to take for traffic that matches the criteria, so this type of rule group doesn't have a separate action setting.  You can't use the priority keyword if the RuleOrder option in StatefulRuleOptions is set to STRICT_ORDER. 
      */
     RulesString?: RulesString;
     /**
@@ -1569,7 +1598,7 @@ declare namespace NetworkFirewall {
   }
   export interface ServerCertificateConfiguration {
     /**
-     * The list of a server certificate configuration's Certificate Manager certificates, used for inbound SSL/TLS inspection.
+     * The list of server certificates to use for inbound SSL/TLS inspection.
      */
     ServerCertificates?: ServerCertificates;
     /**
@@ -1577,11 +1606,11 @@ declare namespace NetworkFirewall {
      */
     Scopes?: ServerCertificateScopes;
     /**
-     * The Amazon Resource Name (ARN) of the imported certificate authority (CA) certificate configured in Certificate Manager (ACM) to use for outbound SSL/TLS inspection. The following limitations apply:   You can use CA certificates that you imported into ACM, but you can't generate CA certificates with ACM.   You can't use certificates issued by Private Certificate Authority.   For more information about the certificate requirements for outbound inspection, see Requirements for using SSL/TLS certificates with TLS inspection configurations in the Network Firewall Developer Guide.  For information about working with certificates in ACM, see Importing certificates in the Certificate Manager User Guide.
+     * The Amazon Resource Name (ARN) of the imported certificate authority (CA) certificate within Certificate Manager (ACM) to use for outbound SSL/TLS inspection. The following limitations apply:   You can use CA certificates that you imported into ACM, but you can't generate CA certificates with ACM.   You can't use certificates issued by Private Certificate Authority.   For more information about configuring certificates for outbound inspection, see Using SSL/TLS certificates with certificates with TLS inspection configurations in the Network Firewall Developer Guide.  For information about working with certificates in ACM, see Importing certificates in the Certificate Manager User Guide.
      */
     CertificateAuthorityArn?: ResourceArn;
     /**
-     * When enabled, Network Firewall checks if the server certificate presented by the server in the SSL/TLS connection has a revoked or unkown status. If the certificate has an unknown or revoked status, you must specify the actions that Network Firewall takes on outbound traffic. To use this option, you must specify a CertificateAuthorityArn in ServerCertificateConfiguration.
+     * When enabled, Network Firewall checks if the server certificate presented by the server in the SSL/TLS connection has a revoked or unkown status. If the certificate has an unknown or revoked status, you must specify the actions that Network Firewall takes on outbound traffic. To check the certificate revocation status, you must also specify a CertificateAuthorityArn in ServerCertificateConfiguration.
      */
     CheckCertificateRevocationStatus?: CheckCertificateRevocationStatusActions;
   }
@@ -1627,7 +1656,7 @@ declare namespace NetworkFirewall {
   export type StatefulActions = CollectionMember_String[];
   export interface StatefulEngineOptions {
     /**
-     * Indicates how to manage the order of stateful rule evaluation for the policy. DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on certain settings. For more information, see Evaluation order for stateful rules in the Network Firewall Developer Guide. 
+     * Indicates how to manage the order of stateful rule evaluation for the policy. STRICT_ORDER is the default and recommended option. With STRICT_ORDER, provide your rules in the order that you want them to be evaluated. You can then choose one or more default actions for packets that don't match any rules. Choose STRICT_ORDER to have the stateful rules engine determine the evaluation order of your rules. The default action for this rule order is PASS, followed by DROP, REJECT, and ALERT actions. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on your settings. For more information, see Evaluation order for stateful rules in the Network Firewall Developer Guide. 
      */
     RuleOrder?: RuleOrder;
     /**
@@ -1637,7 +1666,7 @@ declare namespace NetworkFirewall {
   }
   export interface StatefulRule {
     /**
-     * Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow.  The actions for a stateful rule are defined as follows:     PASS - Permits the packets to go to the intended destination.    DROP - Blocks the packets from going to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.     ALERT - Permits the packets to go to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.  You can use this action to test a rule that you intend to use to drop traffic. You can enable the rule with ALERT action, verify in the logs that the rule is filtering as you want, then change the action to DROP.  
+     * Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow.  The actions for a stateful rule are defined as follows:     PASS - Permits the packets to go to the intended destination.    DROP - Blocks the packets from going to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.     ALERT - Sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.  You can use this action to test a rule that you intend to use to drop traffic. You can enable the rule with ALERT action, verify in the logs that the rule is filtering as you want, then change the action to DROP.  
      */
     Action: StatefulAction;
     /**
@@ -2113,6 +2142,10 @@ declare namespace NetworkFirewall {
      * A complex type that contains metadata about the rule group that your own rule group is copied from. You can use the metadata to keep track of updates made to the originating rule group.
      */
     SourceMetadata?: SourceMetadata;
+    /**
+     * Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to TRUE, Network Firewall runs the analysis and then updates the rule group for you. To run the stateless rule group analyzer without updating the rule group, set DryRun to TRUE. 
+     */
+    AnalyzeRuleGroup?: Boolean;
   }
   export interface UpdateRuleGroupResponse {
     /**

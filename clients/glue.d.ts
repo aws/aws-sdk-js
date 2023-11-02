@@ -3012,6 +3012,14 @@ declare namespace Glue {
      * Specifies a target that writes to a Snowflake data source.
      */
     SnowflakeTarget?: SnowflakeTarget;
+    /**
+     * Specifies a source generated with standard connection options.
+     */
+    ConnectorDataSource?: ConnectorDataSource;
+    /**
+     * Specifies a target generated with standard connection options.
+     */
+    ConnectorDataTarget?: ConnectorDataTarget;
   }
   export type CodeGenConfigurationNodes = {[key: string]: CodeGenConfigurationNode};
   export interface CodeGenEdge {
@@ -3315,6 +3323,43 @@ declare namespace Glue {
      */
     Connections?: OrchestrationStringList;
   }
+  export interface ConnectorDataSource {
+    /**
+     * The name of this source node.
+     */
+    Name: NodeName;
+    /**
+     * The connectionType, as provided to the underlying Glue library. This node type supports the following connection types:     bigquery   
+     */
+    ConnectionType: EnclosedInStringProperty;
+    /**
+     * A map specifying connection options for the node. You can find standard connection options for the corresponding connection type in the  Connection parameters section of the Glue documentation.
+     */
+    Data: ConnectorOptions;
+    /**
+     * Specifies the data schema for this source.
+     */
+    OutputSchemas?: GlueSchemas;
+  }
+  export interface ConnectorDataTarget {
+    /**
+     * The name of this target node.
+     */
+    Name: NodeName;
+    /**
+     * The connectionType, as provided to the underlying Glue library. This node type supports the following connection types:     bigquery   
+     */
+    ConnectionType: EnclosedInStringProperty;
+    /**
+     * A map specifying connection options for the node. You can find standard connection options for the corresponding connection type in the  Connection parameters section of the Glue documentation.
+     */
+    Data: ConnectorOptions;
+    /**
+     * The nodes that are inputs to the data target.
+     */
+    Inputs?: OneInput;
+  }
+  export type ConnectorOptions = {[key: string]: GenericString};
   export type ContextWords = NameString[];
   export interface Crawl {
     /**
