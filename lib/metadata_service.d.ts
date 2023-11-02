@@ -54,4 +54,19 @@ interface MetadataServiceOptions {
      * A set of options to configure the retry delay on retryable errors. See AWS.Config for details.
      */
     retryDelayOptions?: any
+
+    /**
+     * Prevent IMDSv1 fallback.
+     */
+    ec2MetadataV1Disabled?: boolean
+
+    /**
+     * profile name to check for IMDSv1 settings.
+     */
+    profile?: string
+
+    /**
+     * optional file from which to to get config.
+     */
+    filename?: string
 }

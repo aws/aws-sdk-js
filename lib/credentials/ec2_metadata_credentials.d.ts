@@ -28,4 +28,18 @@ interface EC2MetadataCredentialsOptions {
     }
     maxRetries?: number
     logger?: Logger
+    /**
+     * Prevent IMDSv1 fallback.
+     */
+    ec2MetadataV1Disabled?: boolean
+
+    /**
+     * profile name to check for IMDSv1 settings.
+     */
+    profile?: string
+
+    /**
+     * optional file from which to to get config.
+     */
+    filename?: string
 }
