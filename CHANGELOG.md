@@ -8,7 +8,7 @@
 * feature: GameLift: Amazon GameLift adds support for shared credentials, which allows applications that are deployed on managed EC2 fleets to interact with other AWS resources.
 * feature: Glue: This release introduces Google BigQuery Source and Target in AWS Glue CodeGenConfigurationNode.
 * feature: NetworkFirewall: This release introduces the stateless rule analyzer, which enables you to analyze your stateless rules for asymmetric routing.
-* feature: QuickSight: Got confirmed from qmeixua@ about custom week features, and tested locally with aws cli and java sdk that the subtypes are showing up.
+* feature: QuickSight: This release introduces Float Decimal Type as SubType in QuickSight SPICE datasets and Custom week start and Custom timezone options in Analysis and Dashboard.
 
 ## 2.1486.0
 * feature: Connect: Adds the BatchGetFlowAssociation API which returns flow associations (flow-resource) corresponding to the list of resourceArns supplied in the request. This release also adds IsDefault, LastModifiedRegion and LastModifiedTime fields to the responses of several Describe and List APIs.
