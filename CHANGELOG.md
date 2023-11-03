@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1487.0-->
+<!--LATEST=2.1488.0-->
 <!--ENTRYINSERT-->
+
+## 2.1488.0
+* feature: ConfigService: Updated ResourceType enum with new resource types onboarded by AWS Config in October 2023.
+* feature: Connect: Amazon Connect Chat introduces Create Persistent Contact Association API, allowing customers to choose when to resume previous conversations from previous chats, eliminating the need to repeat themselves and allowing agents to provide personalized service with access to entire conversation history.
+* feature: IMDS: IMDSv1 fallback toggle
+* feature: IoTWireless: Added LoRaWAN version 1.0.4 support
+* feature: LaunchWizard: AWS Launch Wizard is a service that helps reduce the time it takes to deploy applications to the cloud while providing a guided deployment experience.
 
 ## 2.1487.0
 * feature: AppRunner: AWS App Runner now supports using dual-stack address type for the public endpoint of your incoming traffic.

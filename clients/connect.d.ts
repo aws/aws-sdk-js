@@ -188,6 +188,14 @@ declare class Connect extends Service {
    */
   createParticipant(callback?: (err: AWSError, data: Connect.Types.CreateParticipantResponse) => void): Request<Connect.Types.CreateParticipantResponse, AWSError>;
   /**
+   * Enables rehydration of chats for the lifespan of a contact. For more information about chat rehydration, see Enable persistent chat in the Amazon Connect Administrator Guide. 
+   */
+  createPersistentContactAssociation(params: Connect.Types.CreatePersistentContactAssociationRequest, callback?: (err: AWSError, data: Connect.Types.CreatePersistentContactAssociationResponse) => void): Request<Connect.Types.CreatePersistentContactAssociationResponse, AWSError>;
+  /**
+   * Enables rehydration of chats for the lifespan of a contact. For more information about chat rehydration, see Enable persistent chat in the Amazon Connect Administrator Guide. 
+   */
+  createPersistentContactAssociation(callback?: (err: AWSError, data: Connect.Types.CreatePersistentContactAssociationResponse) => void): Request<Connect.Types.CreatePersistentContactAssociationResponse, AWSError>;
+  /**
    * Creates a prompt. For more information about prompts, such as supported file types and maximum length, see Create prompts in the Amazon Connect Administrator's Guide.
    */
   createPrompt(params: Connect.Types.CreatePromptRequest, callback?: (err: AWSError, data: Connect.Types.CreatePromptResponse) => void): Request<Connect.Types.CreatePromptResponse, AWSError>;
@@ -2747,6 +2755,34 @@ declare namespace Connect {
      * The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat lifecycle.
      */
     ParticipantId?: ParticipantId;
+  }
+  export interface CreatePersistentContactAssociationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * This is the contactId of the current contact that the CreatePersistentContactAssociation API is being called from.
+     */
+    InitialContactId: ContactId;
+    /**
+     * The contactId chosen for rehydration depends on the type chosen.    ENTIRE_PAST_SESSION: Rehydrates a chat from the most recently terminated past chat contact of the specified past ended chat session. To use this type, provide the initialContactId of the past ended chat session in the sourceContactId field. In this type, Amazon Connect determines what the most recent chat contact on the past ended chat session and uses it to start a persistent chat.     FROM_SEGMENT: Rehydrates a chat from the specified past chat contact provided in the sourceContactId field.    The actual contactId used for rehydration is provided in the response of this API. To illustrate how to use rehydration type, consider the following example: A customer starts a chat session. Agent a1 accepts the chat and a conversation starts between the customer and Agent a1. This first contact creates a contact ID C1. Agent a1 then transfers the chat to Agent a2. This creates another contact ID C2. At this point Agent a2 ends the chat. The customer is forwarded to the disconnect flow for a post chat survey that creates another contact ID C3. After the chat survey, the chat session ends. Later, the customer returns and wants to resume their past chat session. At this point, the customer can have following use cases:     Use Case 1: The customer wants to continue the past chat session but they want to hide the post chat survey. For this they will use the following configuration:    Configuration    SourceContactId = "C2"   RehydrationType = "FROM_SEGMENT"      Expected behavior    This starts a persistent chat session from the specified past ended contact (C2). Transcripts of past chat sessions C2 and C1 are accessible in the current persistent chat session. Note that chat segment C3 is dropped from the persistent chat session.        Use Case 2: The customer wants to continue the past chat session and see the transcript of the entire past engagement, including the post chat survey. For this they will use the following configuration:    Configuration    SourceContactId = "C1"   RehydrationType = "ENTIRE_PAST_SESSION"      Expected behavior    This starts a persistent chat session from the most recently ended chat contact (C3). Transcripts of past chat sessions C3, C2 and C1 are accessible in the current persistent chat session.      
+     */
+    RehydrationType: RehydrationType;
+    /**
+     * The contactId from which a persistent chat session must be started.
+     */
+    SourceContactId: ContactId;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+  }
+  export interface CreatePersistentContactAssociationResponse {
+    /**
+     * The contactId from which a persistent chat session is started. This field is populated only for persistent chat.
+     */
+    ContinuedFromContactId?: ContactId;
   }
   export interface CreatePromptRequest {
     /**

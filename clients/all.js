@@ -357,5 +357,6 @@ module.exports = {
   PcaConnectorAd: require('./pcaconnectorad'),
   Bedrock: require('./bedrock'),
   BedrockRuntime: require('./bedrockruntime'),
-  DataZone: require('./datazone')
+  DataZone: require('./datazone'),
+  LaunchWizard: require('./launchwizard')
 };

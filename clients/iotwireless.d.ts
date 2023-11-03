@@ -1995,7 +1995,7 @@ declare namespace IoTWireless {
   export interface GetNetworkAnalyzerConfigurationResponse {
     TraceContent?: TraceContent;
     /**
-     * List of wireless gateway resources that have been added to the network analyzer configuration.
+     * List of wireless device resources that have been added to the network analyzer configuration.
      */
     WirelessDevices?: WirelessDeviceList;
     /**
@@ -2077,7 +2077,7 @@ declare namespace IoTWireless {
   }
   export interface GetPositionEstimateResponse {
     /**
-     * The position information of the resource, displayed as a JSON payload. The payload uses the GeoJSON format, which a format that's used to encode geographic data structures. For more information, see GeoJSON.
+     * The position information of the resource, displayed as a JSON payload. The payload is of type blob and uses the GeoJSON format, which a format that's used to encode geographic data structures. A sample payload contains the timestamp information, the WGS84 coordinates of the location, and the accuracy and confidence level. For more information and examples, see Resolve device location (console).
      */
     GeoJsonPayload?: GeoJsonPayload;
   }
@@ -3146,7 +3146,7 @@ declare namespace IoTWireless {
      */
     MaxEirp?: MaxEirp;
     /**
-     * The MaxDutyCycle value.
+     * The MaxDutyCycle value. It ranges from 0 to 15.
      */
     MaxDutyCycle?: MaxDutyCycle;
     /**
@@ -3580,6 +3580,10 @@ declare namespace IoTWireless {
      * The AppEUI value.
      */
     AppEui?: AppEui;
+    /**
+     * The JoinEUI value.
+     */
+    JoinEui?: JoinEui;
     /**
      * The GenAppKey value.
      */
@@ -4398,7 +4402,7 @@ declare namespace IoTWireless {
      */
     MulticastGroupsToAdd?: NetworkAnalyzerMulticastGroupList;
     /**
-     * Multicast group resources to remove from the network analyzer configuration. Provide the MulticastGroupId of the resource to remove in the input array.
+     * Multicast group resources to remove from the network analyzer configuration. Provide the MulticastGroupId of the resources to remove in the input array.
      */
     MulticastGroupsToRemove?: NetworkAnalyzerMulticastGroupList;
   }

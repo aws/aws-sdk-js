@@ -358,6 +358,7 @@ export abstract class ConfigurationServicePlaceholders {
   bedrock?: AWS.Bedrock.Types.ClientConfiguration;
   bedrockruntime?: AWS.BedrockRuntime.Types.ClientConfiguration;
   datazone?: AWS.DataZone.Types.ClientConfiguration;
+  launchwizard?: AWS.LaunchWizard.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -718,4 +719,5 @@ export interface ConfigurationServiceApiVersions {
   bedrock?: AWS.Bedrock.Types.apiVersion;
   bedrockruntime?: AWS.BedrockRuntime.Types.apiVersion;
   datazone?: AWS.DataZone.Types.apiVersion;
+  launchwizard?: AWS.LaunchWizard.Types.apiVersion;
 }

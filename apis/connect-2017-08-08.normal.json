@@ -760,6 +760,40 @@
       ],
       "documentation": "<p>Adds a new participant into an on-going chat contact. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat flow experiences by integrating custom participants</a>.</p>"
     },
+    "CreatePersistentContactAssociation": {
+      "name": "CreatePersistentContactAssociation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/contact/persistent-contact-association/{InstanceId}/{InitialContactId}"
+      },
+      "input": {
+        "shape": "CreatePersistentContactAssociationRequest"
+      },
+      "output": {
+        "shape": "CreatePersistentContactAssociationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Enables rehydration of chats for the lifespan of a contact. For more information about chat rehydration, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a> in the <i>Amazon Connect Administrator Guide</i>. </p>"
+    },
     "CreatePrompt": {
       "name": "CreatePrompt",
       "http": {
@@ -8463,6 +8497,50 @@
         "ParticipantId": {
           "shape": "ParticipantId",
           "documentation": "<p>The identifier for a chat participant. The participantId for a chat participant is the same throughout the chat lifecycle.</p>"
+        }
+      }
+    },
+    "CreatePersistentContactAssociationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "InitialContactId",
+        "RehydrationType",
+        "SourceContactId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "InitialContactId": {
+          "shape": "ContactId",
+          "documentation": "<p>This is the contactId of the current contact that the <code>CreatePersistentContactAssociation</code> API is being called from.</p>",
+          "location": "uri",
+          "locationName": "InitialContactId"
+        },
+        "RehydrationType": {
+          "shape": "RehydrationType",
+          "documentation": "<p>The contactId chosen for rehydration depends on the type chosen.</p> <ul> <li> <p> <code>ENTIRE_PAST_SESSION</code>: Rehydrates a chat from the most recently terminated past chat contact of the specified past ended chat session. To use this type, provide the <code>initialContactId</code> of the past ended chat session in the <code>sourceContactId</code> field. In this type, Amazon Connect determines what the most recent chat contact on the past ended chat session and uses it to start a persistent chat. </p> </li> <li> <p> <code>FROM_SEGMENT</code>: Rehydrates a chat from the specified past chat contact provided in the <code>sourceContactId</code> field. </p> </li> </ul> <p>The actual contactId used for rehydration is provided in the response of this API.</p> <p>To illustrate how to use rehydration type, consider the following example: A customer starts a chat session. Agent a1 accepts the chat and a conversation starts between the customer and Agent a1. This first contact creates a contact ID <b>C1</b>. Agent a1 then transfers the chat to Agent a2. This creates another contact ID <b>C2</b>. At this point Agent a2 ends the chat. The customer is forwarded to the disconnect flow for a post chat survey that creates another contact ID <b>C3</b>. After the chat survey, the chat session ends. Later, the customer returns and wants to resume their past chat session. At this point, the customer can have following use cases: </p> <ul> <li> <p> <b>Use Case 1</b>: The customer wants to continue the past chat session but they want to hide the post chat survey. For this they will use the following configuration:</p> <ul> <li> <p> <b>Configuration</b> </p> <ul> <li> <p>SourceContactId = \"C2\"</p> </li> <li> <p>RehydrationType = \"FROM_SEGMENT\"</p> </li> </ul> </li> <li> <p> <b>Expected behavior</b> </p> <ul> <li> <p>This starts a persistent chat session from the specified past ended contact (C2). Transcripts of past chat sessions C2 and C1 are accessible in the current persistent chat session. Note that chat segment C3 is dropped from the persistent chat session.</p> </li> </ul> </li> </ul> </li> <li> <p> <b>Use Case 2</b>: The customer wants to continue the past chat session and see the transcript of the entire past engagement, including the post chat survey. For this they will use the following configuration:</p> <ul> <li> <p> <b>Configuration</b> </p> <ul> <li> <p>SourceContactId = \"C1\"</p> </li> <li> <p>RehydrationType = \"ENTIRE_PAST_SESSION\"</p> </li> </ul> </li> <li> <p> <b>Expected behavior</b> </p> <ul> <li> <p>This starts a persistent chat session from the most recently ended chat contact (C3). Transcripts of past chat sessions C3, C2 and C1 are accessible in the current persistent chat session.</p> </li> </ul> </li> </ul> </li> </ul>"
+        },
+        "SourceContactId": {
+          "shape": "ContactId",
+          "documentation": "<p>The contactId from which a persistent chat session must be started.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>"
+        }
+      }
+    },
+    "CreatePersistentContactAssociationResponse": {
+      "type": "structure",
+      "members": {
+        "ContinuedFromContactId": {
+          "shape": "ContactId",
+          "documentation": "<p>The contactId from which a persistent chat session is started. This field is populated only for persistent chat.</p>"
         }
       }
     },

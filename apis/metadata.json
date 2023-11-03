@@ -1342,5 +1342,9 @@
   },
   "datazone": {
     "name": "DataZone"
+  },
+  "launchwizard": {
+    "prefix": "launch-wizard",
+    "name": "LaunchWizard"
   }
 }
