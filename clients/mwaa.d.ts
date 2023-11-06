@@ -128,7 +128,7 @@ declare namespace MWAA {
      */
     AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, and 2.5.1. For more information, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA).
+     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. For more information, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA). Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2.
      */
     AirflowVersion?: AirflowVersion;
     /**
@@ -261,7 +261,7 @@ declare namespace MWAA {
      */
     AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, and 2.5.1.
+     * The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2.
      */
     AirflowVersion?: AirflowVersion;
     /**
@@ -630,7 +630,7 @@ declare namespace MWAA {
      */
     AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA. Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating your resources, see Upgrading an Amazon MWAA environment. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, and 2.5.1.
+     * The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA. Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating your resources, see Upgrading an Amazon MWAA environment. Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2.
      */
     AirflowVersion?: AirflowVersion;
     /**

@@ -1963,25 +1963,29 @@ declare namespace CostExplorer {
   }
   export interface InstanceDetails {
     /**
-     * The Amazon EC2 instances that Amazon Web Services recommends that you purchase.
+     * The Amazon EC2 reservations that Amazon Web Services recommends that you purchase.
      */
     EC2InstanceDetails?: EC2InstanceDetails;
     /**
-     * The Amazon RDS instances that Amazon Web Services recommends that you purchase.
+     * The Amazon RDS reservations that Amazon Web Services recommends that you purchase.
      */
     RDSInstanceDetails?: RDSInstanceDetails;
     /**
-     * The Amazon Redshift instances that Amazon Web Services recommends that you purchase.
+     * The Amazon Redshift reservations that Amazon Web Services recommends that you purchase.
      */
     RedshiftInstanceDetails?: RedshiftInstanceDetails;
     /**
-     * The ElastiCache instances that Amazon Web Services recommends that you purchase.
+     * The ElastiCache reservations that Amazon Web Services recommends that you purchase.
      */
     ElastiCacheInstanceDetails?: ElastiCacheInstanceDetails;
     /**
-     * The Amazon OpenSearch Service instances that Amazon Web Services recommends that you purchase.
+     * The Amazon OpenSearch Service reservations that Amazon Web Services recommends that you purchase.
      */
     ESInstanceDetails?: ESInstanceDetails;
+    /**
+     * The MemoryDB reservations that Amazon Web Services recommends that you purchase.
+     */
+    MemoryDBInstanceDetails?: MemoryDBInstanceDetails;
   }
   export type Key = string;
   export type Keys = Key[];
@@ -2085,6 +2089,28 @@ declare namespace CostExplorer {
   export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|"GREATER_THAN_OR_EQUAL"|string;
   export type MatchOptions = MatchOption[];
   export type MaxResults = number;
+  export interface MemoryDBInstanceDetails {
+    /**
+     * The instance family of the recommended reservation.
+     */
+    Family?: GenericString;
+    /**
+     * The node type of the recommended reservation.
+     */
+    NodeType?: GenericString;
+    /**
+     * The Amazon Web Services Region of the recommended reservation.
+     */
+    Region?: GenericString;
+    /**
+     * Determines whether the recommendation is for a current generation instance.
+     */
+    CurrentGeneration?: GenericBoolean;
+    /**
+     * Determines whether the recommended reservation is size flexible.
+     */
+    SizeFlexEligible?: GenericBoolean;
+  }
   export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string;
   export type MetricAmount = string;
   export type MetricName = string;
@@ -2478,7 +2504,7 @@ declare namespace CostExplorer {
      */
     AccountId?: GenericString;
     /**
-     * Details about the instances that Amazon Web Services recommends that you purchase.
+     * Details about the reservations that Amazon Web Services recommends that you purchase.
      */
     InstanceDetails?: InstanceDetails;
     /**

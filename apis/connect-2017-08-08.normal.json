@@ -438,6 +438,41 @@
       ],
       "documentation": "<p>Retrieve the flow associations for the given resources.</p>"
     },
+    "BatchPutContact": {
+      "name": "BatchPutContact",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/contact/batch/{InstanceId}"
+      },
+      "input": {
+        "shape": "BatchPutContactRequest"
+      },
+      "output": {
+        "shape": "BatchPutContactResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "IdempotencyException"
+        }
+      ],
+      "documentation": "<note> <p>Only the Amazon Connect outbound campaigns service principal is allowed to assume a role in your account and call this API.</p> </note> <p>Allows you to create a batch of contacts in Amazon Connect. The outbound campaigns capability ingests dial requests via the <a href=\"https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html\">PutDialRequestBatch</a> API. It then uses BatchPutContact to create contacts corresponding to those dial requests. If agents are available, the dial requests are dialed out, which results in a voice call. The resulting voice call uses the same contactId that was created by BatchPutContact. </p>",
+      "idempotent": true
+    },
     "ClaimPhoneNumber": {
       "name": "ClaimPhoneNumber",
       "http": {
@@ -7513,6 +7548,43 @@
         }
       }
     },
+    "BatchPutContactRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "ContactDataRequestList"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+          "idempotencyToken": true
+        },
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "ContactDataRequestList": {
+          "shape": "ContactDataRequestList",
+          "documentation": "<p>List of individual contact requests.</p>"
+        }
+      }
+    },
+    "BatchPutContactResponse": {
+      "type": "structure",
+      "members": {
+        "SuccessfulRequestList": {
+          "shape": "SuccessfulRequestList",
+          "documentation": "<p>List of requests for which contact was successfully created.</p>"
+        },
+        "FailedRequestList": {
+          "shape": "FailedRequestList",
+          "documentation": "<p>List of requests for which contact creation failed.</p>"
+        }
+      }
+    },
     "BehaviorType": {
       "type": "string",
       "enum": [
@@ -7534,6 +7606,16 @@
       "type": "string",
       "max": 128,
       "min": 1
+    },
+    "Campaign": {
+      "type": "structure",
+      "members": {
+        "CampaignId": {
+          "shape": "CampaignId",
+          "documentation": "<p>A unique identifier for a campaign.</p>"
+        }
+      },
+      "documentation": "<p>Information associated with a campaign.</p>"
     },
     "CampaignId": {
       "type": "string",
@@ -7809,6 +7891,44 @@
         }
       },
       "documentation": "<p>Contains information about a contact.</p>"
+    },
+    "ContactDataRequest": {
+      "type": "structure",
+      "members": {
+        "SystemEndpoint": {
+          "shape": "Endpoint",
+          "documentation": "<p>Endpoint associated with the Amazon Connect instance from which outbound contact will be initiated for the campaign.</p>"
+        },
+        "CustomerEndpoint": {
+          "shape": "Endpoint",
+          "documentation": "<p>Endpoint of the customer for which contact will be initiated.</p>"
+        },
+        "RequestIdentifier": {
+          "shape": "RequestIdentifier",
+          "documentation": "<p>Identifier to uniquely identify individual requests in the batch.</p>"
+        },
+        "QueueId": {
+          "shape": "QueueId",
+          "documentation": "<p>The identifier of the queue associated with the Amazon Connect instance in which contacts that are created will be queued.</p>"
+        },
+        "Attributes": {
+          "shape": "Attributes",
+          "documentation": "<p>List of attributes to be stored in a contact.</p>"
+        },
+        "Campaign": {
+          "shape": "Campaign",
+          "documentation": "<p>Structure to store information associated with a campaign.</p>"
+        }
+      },
+      "documentation": "<p>Request object with information to create a contact.</p>"
+    },
+    "ContactDataRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "ContactDataRequest"
+      },
+      "max": 25,
+      "min": 1
     },
     "ContactFilter": {
       "type": "structure",
@@ -11017,6 +11137,19 @@
       "type": "structure",
       "members": {}
     },
+    "DisconnectReason": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "DisconnectReasonCode",
+          "documentation": "<p>A code that indicates how the contact was terminated.</p>"
+        }
+      },
+      "documentation": "<p>Contains details about why a contact was disconnected. Only Amazon Connect outbound campaigns can provide this field.</p>"
+    },
+    "DisconnectReasonCode": {
+      "type": "string"
+    },
     "DismissUserContactRequest": {
       "type": "structure",
       "required": [
@@ -11115,6 +11248,33 @@
       "type": "string",
       "enum": [
         "KMS"
+      ]
+    },
+    "Endpoint": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "EndpointType",
+          "documentation": "<p>Type of the endpoint.</p>"
+        },
+        "Address": {
+          "shape": "EndpointAddress",
+          "documentation": "<p>Address of the endpoint.</p>"
+        }
+      },
+      "documentation": "<p>Information about the endpoint.</p>"
+    },
+    "EndpointAddress": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
+    "EndpointType": {
+      "type": "string",
+      "enum": [
+        "TELEPHONE_NUMBER",
+        "VOIP",
+        "CONTACT_FLOW"
       ]
     },
     "Evaluation": {
@@ -12031,6 +12191,45 @@
         "OnSalesforceCaseCreate",
         "OnContactEvaluationSubmit",
         "OnMetricDataUpdate"
+      ]
+    },
+    "FailedRequest": {
+      "type": "structure",
+      "members": {
+        "RequestIdentifier": {
+          "shape": "RequestIdentifier",
+          "documentation": "<p>Request identifier provided in the API call in the ContactDataRequest to create a contact.</p>"
+        },
+        "FailureReasonCode": {
+          "shape": "FailureReasonCode",
+          "documentation": "<p>Reason code for the failure.</p>"
+        },
+        "FailureReasonMessage": {
+          "shape": "String",
+          "documentation": "<p>Why the request to create a contact failed.</p>"
+        }
+      },
+      "documentation": "<p>Request for which contact failed to be generated.</p>"
+    },
+    "FailedRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "FailedRequest"
+      }
+    },
+    "FailureReasonCode": {
+      "type": "string",
+      "enum": [
+        "INVALID_ATTRIBUTE_KEY",
+        "INVALID_CUSTOMER_ENDPOINT",
+        "INVALID_SYSTEM_ENDPOINT",
+        "INVALID_QUEUE",
+        "MISSING_CAMPAIGN",
+        "MISSING_CUSTOMER_ENDPOINT",
+        "MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT",
+        "REQUEST_THROTTLED",
+        "IDEMPOTENCY_EXCEPTION",
+        "INTERNAL_ERROR"
       ]
     },
     "FilterV2": {
@@ -17030,6 +17229,10 @@
         }
       }
     },
+    "RequestIdentifier": {
+      "type": "string",
+      "max": 80
+    },
     "RequiredFieldInfo": {
       "type": "structure",
       "members": {
@@ -18751,6 +18954,10 @@
         "InstanceId": {
           "shape": "InstanceId",
           "documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>"
+        },
+        "DisconnectReason": {
+          "shape": "DisconnectReason",
+          "documentation": "<p>The reason a contact can be disconnected. Only Amazon Connect outbound campaigns can provide this field.</p>"
         }
       }
     },
@@ -18890,6 +19097,26 @@
           "shape": "ARN",
           "documentation": "<p>The Amazon Resource Name (ARN) for the contact evaluation resource.</p>"
         }
+      }
+    },
+    "SuccessfulRequest": {
+      "type": "structure",
+      "members": {
+        "RequestIdentifier": {
+          "shape": "RequestIdentifier",
+          "documentation": "<p>Request identifier provided in the API call in the ContactDataRequest to create a contact.</p>"
+        },
+        "ContactId": {
+          "shape": "ContactId",
+          "documentation": "<p>The contactId of the contact that was created successfully.</p>"
+        }
+      },
+      "documentation": "<p>Request for which contact was successfully created.</p>"
+    },
+    "SuccessfulRequestList": {
+      "type": "list",
+      "member": {
+        "shape": "SuccessfulRequest"
       }
     },
     "SupportedMessagingContentType": {

@@ -506,6 +506,7 @@ declare namespace DocDB {
   export type AvailabilityZones = String[];
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
+  export type CACertificateIdentifiersList = String[];
   export interface Certificate {
     /**
      * The unique key that identifies a certificate. Example: rds-ca-2019 
@@ -531,6 +532,16 @@ declare namespace DocDB {
      * The Amazon Resource Name (ARN) for the certificate. Example: arn:aws:rds:us-east-1::cert:rds-ca-2019 
      */
     CertificateArn?: String;
+  }
+  export interface CertificateDetails {
+    /**
+     * The CA identifier of the CA certificate used for the DB instance's server certificate.
+     */
+    CAIdentifier?: String;
+    /**
+     * The expiration date of the DB instance’s server certificate.
+     */
+    ValidTill?: TStamp;
   }
   export type CertificateList = Certificate[];
   export interface CertificateMessage {
@@ -775,6 +786,10 @@ declare namespace DocDB {
      * The KMS key identifier for encryption of Performance Insights data. The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your default KMS key. There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account has a different default KMS key for each Amazon Web Services region.
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * The CA certificate identifier to use for the DB instance's server certificate. For more information, see Updating Your Amazon DocumentDB TLS Certificates and  Encrypting Data in Transit in the Amazon DocumentDB Developer Guide.
+     */
+    CACertificateIdentifier?: String;
   }
   export interface CreateDBInstanceResult {
     DBInstance?: DBInstance;
@@ -1217,6 +1232,14 @@ declare namespace DocDB {
      * A value that indicates whether the engine version supports exporting the log types specified by ExportableLogTypes to CloudWatch Logs.
      */
     SupportsLogExportsToCloudwatchLogs?: Boolean;
+    /**
+     * A list of the supported CA certificate identifiers. For more information, see Updating Your Amazon DocumentDB TLS Certificates and  Encrypting Data in Transit in the Amazon DocumentDB Developer Guide.
+     */
+    SupportedCACertificateIdentifiers?: CACertificateIdentifiersList;
+    /**
+     * Indicates whether the engine version supports rotating the server certificate without rebooting the DB instance.
+     */
+    SupportsCertificateRotationWithoutRestart?: BooleanOptional;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -1338,6 +1361,10 @@ declare namespace DocDB {
      * A list of log types that this instance is configured to export to CloudWatch Logs.
      */
     EnabledCloudwatchLogsExports?: LogTypeList;
+    /**
+     * The details of the DB instance's server certificate.
+     */
+    CertificateDetails?: CertificateDetails;
   }
   export type DBInstanceList = DBInstance[];
   export interface DBInstanceMessage {
@@ -2202,6 +2229,10 @@ declare namespace DocDB {
      * The KMS key identifier for encryption of Performance Insights data. The KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. If you do not specify a value for PerformanceInsightsKMSKeyId, then Amazon DocumentDB uses your default KMS key. There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account has a different default KMS key for each Amazon Web Services region.
      */
     PerformanceInsightsKMSKeyId?: String;
+    /**
+     * Specifies whether the DB instance is restarted when you rotate your SSL/TLS certificate. By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.  Set this parameter only if you are not using SSL/TLS to connect to the DB instance.  If you are using SSL/TLS to connect to the DB instance, see Updating Your Amazon DocumentDB TLS Certificates and  Encrypting Data in Transit in the Amazon DocumentDB Developer Guide.
+     */
+    CertificateRotationRestart?: BooleanOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;

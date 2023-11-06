@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1488.0-->
+<!--LATEST=2.1489.0-->
 <!--ENTRYINSERT-->
+
+## 2.1489.0
+* feature: CodeBuild: AWS CodeBuild now supports AWS Lambda compute.
+* feature: Connect: Added new API that allows Amazon Connect Outbound Campaigns to create contacts in Amazon Connect when ingesting your dial requests.
+* feature: CostExplorer: This release extends the GetReservationPurchaseRecommendation API to support recommendations for Amazon MemoryDB reservations.
+* feature: DocDB: Update the input of CreateDBInstance and ModifyDBInstance to support setting CA Certificates. Update the output of DescribeDBInstance and DescribeDBEngineVersions to show current and supported CA certificates.
+* feature: IAM: Add partitional endpoint for iso-e.
+* feature: MWAA: This release adds support for Apache Airflow version 2.7.2. This version release includes support for deferrable operators and triggers.
+* feature: Polly: Amazon Polly adds new US English voices - Danielle and Gregory. Danielle and Gregory are available as Neural voices only.
+* feature: Route53: Add partitional endpoints for iso-e and iso-f.
 
 ## 2.1488.0
 * feature: ConfigService: Updated ResourceType enum with new resource types onboarded by AWS Config in October 2023.

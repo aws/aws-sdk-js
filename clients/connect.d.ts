@@ -116,6 +116,14 @@ declare class Connect extends Service {
    */
   batchGetFlowAssociation(callback?: (err: AWSError, data: Connect.Types.BatchGetFlowAssociationResponse) => void): Request<Connect.Types.BatchGetFlowAssociationResponse, AWSError>;
   /**
+   *  Only the Amazon Connect outbound campaigns service principal is allowed to assume a role in your account and call this API.  Allows you to create a batch of contacts in Amazon Connect. The outbound campaigns capability ingests dial requests via the PutDialRequestBatch API. It then uses BatchPutContact to create contacts corresponding to those dial requests. If agents are available, the dial requests are dialed out, which results in a voice call. The resulting voice call uses the same contactId that was created by BatchPutContact. 
+   */
+  batchPutContact(params: Connect.Types.BatchPutContactRequest, callback?: (err: AWSError, data: Connect.Types.BatchPutContactResponse) => void): Request<Connect.Types.BatchPutContactResponse, AWSError>;
+  /**
+   *  Only the Amazon Connect outbound campaigns service principal is allowed to assume a role in your account and call this API.  Allows you to create a batch of contacts in Amazon Connect. The outbound campaigns capability ingests dial requests via the PutDialRequestBatch API. It then uses BatchPutContact to create contacts corresponding to those dial requests. If agents are available, the dial requests are dialed out, which results in a voice call. The resulting voice call uses the same contactId that was created by BatchPutContact. 
+   */
+  batchPutContact(callback?: (err: AWSError, data: Connect.Types.BatchPutContactResponse) => void): Request<Connect.Types.BatchPutContactResponse, AWSError>;
+  /**
    * Claims an available phone number to your Amazon Connect instance or traffic distribution group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created. For more information about how to use this operation, see Claim a phone number in your country and Claim phone numbers to traffic distribution groups in the Amazon Connect Administrator Guide.   You can call the SearchAvailablePhoneNumbers API for available phone numbers that you can claim. Call the DescribePhoneNumber API to verify the status of a previous ClaimPhoneNumber operation.  If you plan to claim and release numbers frequently during a 30 day period, contact us for a service quota exception. Otherwise, it is possible you will be blocked from claiming and releasing any more numbers until 30 days past the oldest number released has expired. By default you can claim and release up to 200% of your maximum number of active phone numbers during any 30 day period. If you claim and release phone numbers using the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number service level quota, you will be blocked from claiming any more numbers until 30 days past the oldest number released has expired.  For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30 day period you release 99, claim 99, and then release 99, you will have exceeded the 200% limit. At that point you are blocked from claiming any more numbers until you open an Amazon Web Services support ticket.
    */
   claimPhoneNumber(params: Connect.Types.ClaimPhoneNumberRequest, callback?: (err: AWSError, data: Connect.Types.ClaimPhoneNumberResponse) => void): Request<Connect.Types.ClaimPhoneNumberResponse, AWSError>;
@@ -2140,11 +2148,41 @@ declare namespace Connect {
      */
     FlowAssociationSummaryList?: FlowAssociationSummaryList;
   }
+  export interface BatchPutContactRequest {
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * List of individual contact requests.
+     */
+    ContactDataRequestList: ContactDataRequestList;
+  }
+  export interface BatchPutContactResponse {
+    /**
+     * List of requests for which contact was successfully created.
+     */
+    SuccessfulRequestList?: SuccessfulRequestList;
+    /**
+     * List of requests for which contact creation failed.
+     */
+    FailedRequestList?: FailedRequestList;
+  }
   export type BehaviorType = "ROUTE_CURRENT_CHANNEL_ONLY"|"ROUTE_ANY_CHANNEL"|string;
   export type Boolean = boolean;
   export type BotName = string;
   export type BoxedBoolean = boolean;
   export type BucketName = string;
+  export interface Campaign {
+    /**
+     * A unique identifier for a campaign.
+     */
+    CampaignId?: CampaignId;
+  }
   export type CampaignId = string;
   export type Channel = "VOICE"|"CHAT"|"TASK"|string;
   export type ChannelToCountMap = {[key: string]: IntegerCount};
@@ -2323,6 +2361,33 @@ declare namespace Connect {
      */
     WisdomInfo?: WisdomInfo;
   }
+  export interface ContactDataRequest {
+    /**
+     * Endpoint associated with the Amazon Connect instance from which outbound contact will be initiated for the campaign.
+     */
+    SystemEndpoint?: Endpoint;
+    /**
+     * Endpoint of the customer for which contact will be initiated.
+     */
+    CustomerEndpoint?: Endpoint;
+    /**
+     * Identifier to uniquely identify individual requests in the batch.
+     */
+    RequestIdentifier?: RequestIdentifier;
+    /**
+     * The identifier of the queue associated with the Amazon Connect instance in which contacts that are created will be queued.
+     */
+    QueueId?: QueueId;
+    /**
+     * List of attributes to be stored in a contact.
+     */
+    Attributes?: Attributes;
+    /**
+     * Structure to store information associated with a campaign.
+     */
+    Campaign?: Campaign;
+  }
+  export type ContactDataRequestList = ContactDataRequest[];
   export interface ContactFilter {
     /**
      * A list of up to 9 contact states.
@@ -4180,6 +4245,13 @@ declare namespace Connect {
   }
   export interface DisassociateTrafficDistributionGroupUserResponse {
   }
+  export interface DisconnectReason {
+    /**
+     * A code that indicates how the contact was terminated.
+     */
+    Code?: DisconnectReasonCode;
+  }
+  export type DisconnectReasonCode = string;
   export interface DismissUserContactRequest {
     /**
      * The identifier of the user account.
@@ -4230,6 +4302,18 @@ declare namespace Connect {
     KeyId: KeyId;
   }
   export type EncryptionType = "KMS"|string;
+  export interface Endpoint {
+    /**
+     * Type of the endpoint.
+     */
+    Type?: EndpointType;
+    /**
+     * Address of the endpoint.
+     */
+    Address?: EndpointAddress;
+  }
+  export type EndpointAddress = string;
+  export type EndpointType = "TELEPHONE_NUMBER"|"VOIP"|"CONTACT_FLOW"|string;
   export interface Evaluation {
     /**
      * A unique identifier for the contact evaluation.
@@ -4760,6 +4844,22 @@ declare namespace Connect {
   }
   export type EventBridgeActionName = string;
   export type EventSourceName = "OnPostCallAnalysisAvailable"|"OnRealTimeCallAnalysisAvailable"|"OnPostChatAnalysisAvailable"|"OnZendeskTicketCreate"|"OnZendeskTicketStatusUpdate"|"OnSalesforceCaseCreate"|"OnContactEvaluationSubmit"|"OnMetricDataUpdate"|string;
+  export interface FailedRequest {
+    /**
+     * Request identifier provided in the API call in the ContactDataRequest to create a contact.
+     */
+    RequestIdentifier?: RequestIdentifier;
+    /**
+     * Reason code for the failure.
+     */
+    FailureReasonCode?: FailureReasonCode;
+    /**
+     * Why the request to create a contact failed.
+     */
+    FailureReasonMessage?: String;
+  }
+  export type FailedRequestList = FailedRequest[];
+  export type FailureReasonCode = "INVALID_ATTRIBUTE_KEY"|"INVALID_CUSTOMER_ENDPOINT"|"INVALID_SYSTEM_ENDPOINT"|"INVALID_QUEUE"|"MISSING_CAMPAIGN"|"MISSING_CUSTOMER_ENDPOINT"|"MISSING_QUEUE_ID_AND_SYSTEM_ENDPOINT"|"REQUEST_THROTTLED"|"IDEMPOTENCY_EXCEPTION"|"INTERNAL_ERROR"|string;
   export interface FilterV2 {
     /**
      * The key to use for filtering data. For example, QUEUE, ROUTING_PROFILE, AGENT, CHANNEL, AGENT_HIERARCHY_LEVEL_ONE, AGENT_HIERARCHY_LEVEL_TWO, AGENT_HIERARCHY_LEVEL_THREE, AGENT_HIERARCHY_LEVEL_FOUR, AGENT_HIERARCHY_LEVEL_FIVE. There must be at least 1 key and a maximum 5 keys. 
@@ -7555,6 +7655,7 @@ declare namespace Connect {
      */
     Arn?: ARN;
   }
+  export type RequestIdentifier = string;
   export interface RequiredFieldInfo {
     /**
      * The unique identifier for the field.
@@ -8697,6 +8798,10 @@ declare namespace Connect {
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.
      */
     InstanceId: InstanceId;
+    /**
+     * The reason a contact can be disconnected. Only Amazon Connect outbound campaigns can provide this field.
+     */
+    DisconnectReason?: DisconnectReason;
   }
   export interface StopContactResponse {
   }
@@ -8773,6 +8878,17 @@ declare namespace Connect {
      */
     EvaluationArn: ARN;
   }
+  export interface SuccessfulRequest {
+    /**
+     * Request identifier provided in the API call in the ContactDataRequest to create a contact.
+     */
+    RequestIdentifier?: RequestIdentifier;
+    /**
+     * The contactId of the contact that was created successfully.
+     */
+    ContactId?: ContactId;
+  }
+  export type SuccessfulRequestList = SuccessfulRequest[];
   export type SupportedMessagingContentType = string;
   export type SupportedMessagingContentTypes = SupportedMessagingContentType[];
   export interface SuspendContactRecordingRequest {
