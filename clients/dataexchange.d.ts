@@ -2129,7 +2129,7 @@ declare namespace DataExchange {
     /**
      * Free-form text field for providers to add information about their notifications.
      */
-    Comment?: __stringMin0Max16384;
+    Comment?: __stringMin0Max4096;
     /**
      * Affected data set of the notification.
      */
@@ -2416,6 +2416,7 @@ declare namespace DataExchange {
   export type __doubleMin0 = number;
   export type __string = string;
   export type __stringMin0Max16384 = string;
+  export type __stringMin0Max4096 = string;
   export type __stringMin10Max512 = string;
   export type __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 = string;
   /**

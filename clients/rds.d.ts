@@ -262,6 +262,14 @@ declare class RDS extends Service {
    */
   createOptionGroup(callback?: (err: AWSError, data: RDS.Types.CreateOptionGroupResult) => void): Request<RDS.Types.CreateOptionGroupResult, AWSError>;
   /**
+   * Creates a tenant database in a DB instance that uses the multi-tenant configuration. Only RDS for Oracle container database (CDB) instances are supported.
+   */
+  createTenantDatabase(params: RDS.Types.CreateTenantDatabaseMessage, callback?: (err: AWSError, data: RDS.Types.CreateTenantDatabaseResult) => void): Request<RDS.Types.CreateTenantDatabaseResult, AWSError>;
+  /**
+   * Creates a tenant database in a DB instance that uses the multi-tenant configuration. Only RDS for Oracle container database (CDB) instances are supported.
+   */
+  createTenantDatabase(callback?: (err: AWSError, data: RDS.Types.CreateTenantDatabaseResult) => void): Request<RDS.Types.CreateTenantDatabaseResult, AWSError>;
+  /**
    * Deletes a blue/green deployment. For more information, see Using Amazon RDS Blue/Green Deployments for database updates in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for database updates in the Amazon Aurora User Guide.
    */
   deleteBlueGreenDeployment(params: RDS.Types.DeleteBlueGreenDeploymentRequest, callback?: (err: AWSError, data: RDS.Types.DeleteBlueGreenDeploymentResponse) => void): Request<RDS.Types.DeleteBlueGreenDeploymentResponse, AWSError>;
@@ -413,6 +421,14 @@ declare class RDS extends Service {
    * Deletes an existing option group.
    */
   deleteOptionGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a tenant database from your DB instance. This command only applies to RDS for Oracle container database (CDB) instances. You can't delete a tenant database when it is the only tenant in the DB instance.
+   */
+  deleteTenantDatabase(params: RDS.Types.DeleteTenantDatabaseMessage, callback?: (err: AWSError, data: RDS.Types.DeleteTenantDatabaseResult) => void): Request<RDS.Types.DeleteTenantDatabaseResult, AWSError>;
+  /**
+   * Deletes a tenant database from your DB instance. This command only applies to RDS for Oracle container database (CDB) instances. You can't delete a tenant database when it is the only tenant in the DB instance.
+   */
+  deleteTenantDatabase(callback?: (err: AWSError, data: RDS.Types.DeleteTenantDatabaseResult) => void): Request<RDS.Types.DeleteTenantDatabaseResult, AWSError>;
   /**
    * Remove the association between one or more DBProxyTarget data structures and a DBProxyTargetGroup.
    */
@@ -606,6 +622,14 @@ declare class RDS extends Service {
    */
   describeDBSnapshotAttributes(callback?: (err: AWSError, data: RDS.Types.DescribeDBSnapshotAttributesResult) => void): Request<RDS.Types.DescribeDBSnapshotAttributesResult, AWSError>;
   /**
+   * Describes the tenant databases that exist in a DB snapshot. This command only applies to RDS for Oracle DB instances in the multi-tenant configuration. You can use this command to inspect the tenant databases within a snapshot before restoring it. You can't directly interact with the tenant databases in a DB snapshot. If you restore a snapshot that was taken from DB instance using the multi-tenant configuration, you restore all its tenant databases.
+   */
+  describeDBSnapshotTenantDatabases(params: RDS.Types.DescribeDBSnapshotTenantDatabasesMessage, callback?: (err: AWSError, data: RDS.Types.DBSnapshotTenantDatabasesMessage) => void): Request<RDS.Types.DBSnapshotTenantDatabasesMessage, AWSError>;
+  /**
+   * Describes the tenant databases that exist in a DB snapshot. This command only applies to RDS for Oracle DB instances in the multi-tenant configuration. You can use this command to inspect the tenant databases within a snapshot before restoring it. You can't directly interact with the tenant databases in a DB snapshot. If you restore a snapshot that was taken from DB instance using the multi-tenant configuration, you restore all its tenant databases.
+   */
+  describeDBSnapshotTenantDatabases(callback?: (err: AWSError, data: RDS.Types.DBSnapshotTenantDatabasesMessage) => void): Request<RDS.Types.DBSnapshotTenantDatabasesMessage, AWSError>;
+  /**
    * Returns information about DB snapshots. This API action supports pagination.
    */
   describeDBSnapshots(params: RDS.Types.DescribeDBSnapshotsMessage, callback?: (err: AWSError, data: RDS.Types.DBSnapshotMessage) => void): Request<RDS.Types.DBSnapshotMessage, AWSError>;
@@ -741,6 +765,14 @@ declare class RDS extends Service {
    * Returns a list of the source Amazon Web Services Regions where the current Amazon Web Services Region can create a read replica, copy a DB snapshot from, or replicate automated backups from. Use this operation to determine whether cross-Region features are supported between other Regions and your current Region. This operation supports pagination. To return information about the Regions that are enabled for your account, or all Regions, use the EC2 operation DescribeRegions. For more information, see  DescribeRegions in the Amazon EC2 API Reference.
    */
   describeSourceRegions(callback?: (err: AWSError, data: RDS.Types.SourceRegionMessage) => void): Request<RDS.Types.SourceRegionMessage, AWSError>;
+  /**
+   * Describes the tenant databases in a DB instance that uses the multi-tenant configuration. Only RDS for Oracle CDB instances are supported.
+   */
+  describeTenantDatabases(params: RDS.Types.DescribeTenantDatabasesMessage, callback?: (err: AWSError, data: RDS.Types.TenantDatabasesMessage) => void): Request<RDS.Types.TenantDatabasesMessage, AWSError>;
+  /**
+   * Describes the tenant databases in a DB instance that uses the multi-tenant configuration. Only RDS for Oracle CDB instances are supported.
+   */
+  describeTenantDatabases(callback?: (err: AWSError, data: RDS.Types.TenantDatabasesMessage) => void): Request<RDS.Types.TenantDatabasesMessage, AWSError>;
   /**
    * You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance. This command doesn't apply to RDS Custom.
    */
@@ -933,6 +965,14 @@ declare class RDS extends Service {
    * Modifies an existing option group.
    */
   modifyOptionGroup(callback?: (err: AWSError, data: RDS.Types.ModifyOptionGroupResult) => void): Request<RDS.Types.ModifyOptionGroupResult, AWSError>;
+  /**
+   * Modifies an existing tenant database in a DB instance. You can change the tenant database name or the master user password. This operation is supported only for RDS for Oracle CDB instances using the multi-tenant configuration.
+   */
+  modifyTenantDatabase(params: RDS.Types.ModifyTenantDatabaseMessage, callback?: (err: AWSError, data: RDS.Types.ModifyTenantDatabaseResult) => void): Request<RDS.Types.ModifyTenantDatabaseResult, AWSError>;
+  /**
+   * Modifies an existing tenant database in a DB instance. You can change the tenant database name or the master user password. This operation is supported only for RDS for Oracle CDB instances using the multi-tenant configuration.
+   */
+  modifyTenantDatabase(callback?: (err: AWSError, data: RDS.Types.ModifyTenantDatabaseResult) => void): Request<RDS.Types.ModifyTenantDatabaseResult, AWSError>;
   /**
    * Promotes a read replica DB instance to a standalone DB instance.    Backup duration is a function of the amount of changes to the database since the previous backup. If you plan to promote a read replica to a standalone instance, we recommend that you enable backups and complete at least one backup prior to promotion. In addition, a read replica cannot be promoted to a standalone instance when it is in the backing-up status. If you have enabled backups on your read replica, configure the automated backup window so that daily backups do not interfere with read replica promotion.   This command doesn't apply to Aurora MySQL, Aurora PostgreSQL, or RDS Custom.   
    */
@@ -1253,6 +1293,22 @@ declare class RDS extends Service {
    * Waits for the dBClusterDeleted state by periodically calling the underlying RDS.describeDBClustersoperation every 30 seconds (at most 60 times).
    */
   waitFor(state: "dBClusterDeleted", callback?: (err: AWSError, data: RDS.Types.DBClusterMessage) => void): Request<RDS.Types.DBClusterMessage, AWSError>;
+  /**
+   * Waits for the tenantDatabaseAvailable state by periodically calling the underlying RDS.describeTenantDatabasesoperation every 30 seconds (at most 60 times).
+   */
+  waitFor(state: "tenantDatabaseAvailable", params: RDS.Types.DescribeTenantDatabasesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: RDS.Types.TenantDatabasesMessage) => void): Request<RDS.Types.TenantDatabasesMessage, AWSError>;
+  /**
+   * Waits for the tenantDatabaseAvailable state by periodically calling the underlying RDS.describeTenantDatabasesoperation every 30 seconds (at most 60 times).
+   */
+  waitFor(state: "tenantDatabaseAvailable", callback?: (err: AWSError, data: RDS.Types.TenantDatabasesMessage) => void): Request<RDS.Types.TenantDatabasesMessage, AWSError>;
+  /**
+   * Waits for the tenantDatabaseDeleted state by periodically calling the underlying RDS.describeTenantDatabasesoperation every 30 seconds (at most 60 times).
+   */
+  waitFor(state: "tenantDatabaseDeleted", params: RDS.Types.DescribeTenantDatabasesMessage & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: RDS.Types.TenantDatabasesMessage) => void): Request<RDS.Types.TenantDatabasesMessage, AWSError>;
+  /**
+   * Waits for the tenantDatabaseDeleted state by periodically calling the underlying RDS.describeTenantDatabasesoperation every 30 seconds (at most 60 times).
+   */
+  waitFor(state: "tenantDatabaseDeleted", callback?: (err: AWSError, data: RDS.Types.TenantDatabasesMessage) => void): Request<RDS.Types.TenantDatabasesMessage, AWSError>;
 }
 declare namespace RDS {
   export import Signer = signer;
@@ -2383,6 +2439,10 @@ declare namespace RDS {
      * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
      */
     DedicatedLogVolume?: BooleanOptional;
+    /**
+     * Specifies whether to use the multi-tenant configuration or the single-tenant configuration (default). This parameter only applies to RDS for Oracle container database (CDB) engines. Note the following restrictions:    The DB engine that you specify in the request must support the multi-tenant configuration. If you attempt to enable the multi-tenant configuration on a DB engine that doesn't support it, the request fails.   If you specify the multi-tenant configuration when you create your DB instance, you can't later modify this DB instance to use the single-tenant configuration.  
+     */
+    MultiTenant?: BooleanOptional;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -2829,6 +2889,36 @@ declare namespace RDS {
   }
   export interface CreateOptionGroupResult {
     OptionGroup?: OptionGroup;
+  }
+  export interface CreateTenantDatabaseMessage {
+    /**
+     * The user-supplied DB instance identifier. RDS creates your tenant database in this DB instance. This parameter isn't case-sensitive.
+     */
+    DBInstanceIdentifier: String;
+    /**
+     * The user-supplied name of the tenant database that you want to create in your DB instance. This parameter has the same constraints as DBName in CreateDBInstance.
+     */
+    TenantDBName: String;
+    /**
+     * The name for the master user account in your tenant database. RDS creates this user account in the tenant database and grants privileges to the master user. This parameter is case-sensitive. Constraints:   Must be 1 to 16 letters, numbers, or underscores.   First character must be a letter.   Can't be a reserved word for the chosen database engine.  
+     */
+    MasterUsername: String;
+    /**
+     * The password for the master user in your tenant database. Constraints:   Must be 8 to 30 characters.   Can include any printable ASCII character except forward slash (/), double quote ("), at symbol (@), ampersand (&amp;), or single quote (').  
+     */
+    MasterUserPassword: SensitiveString;
+    /**
+     * The character set for your tenant database. If you don't specify a value, the character set name defaults to AL32UTF8.
+     */
+    CharacterSetName?: String;
+    /**
+     * The NCHAR value for the tenant database.
+     */
+    NcharCharacterSetName?: String;
+    Tags?: TagList;
+  }
+  export interface CreateTenantDatabaseResult {
+    TenantDatabase?: TenantDatabase;
   }
   export interface CustomDBEngineVersionAMI {
     /**
@@ -3756,7 +3846,7 @@ declare namespace RDS {
      */
     MasterUsername?: String;
     /**
-     * Contains the initial database name that you provided (if required) when you created the DB instance. This name is returned for the life of your DB instance. For an RDS for Oracle CDB instance, the name identifies the PDB rather than the CDB.
+     * The initial database name that you provided (if required) when you created the DB instance. This name is returned for the life of your DB instance. For an RDS for Oracle CDB instance, the name identifies the PDB rather than the CDB.
      */
     DBName?: String;
     /**
@@ -4064,6 +4154,10 @@ declare namespace RDS {
      * Indicates whether an upgrade is recommended for the storage file system configuration on the DB instance. To migrate to the preferred configuration, you can either create a blue/green deployment, or create a read replica from the DB instance. For more information, see Upgrading the storage file system for a DB instance.
      */
     IsStorageConfigUpgradeAvailable?: BooleanOptional;
+    /**
+     * Specifies whether the DB instance is in the multi-tenant configuration (TRUE) or the single-tenant configuration (FALSE).
+     */
+    MultiTenant?: BooleanOptional;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -4186,6 +4280,10 @@ declare namespace RDS {
      * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
      */
     DedicatedLogVolume?: BooleanOptional;
+    /**
+     * Specifies whether the automatic backup is for a DB instance in the multi-tenant configuration (TRUE) or the single-tenant configuration (FALSE). 
+     */
+    MultiTenant?: BooleanOptional;
   }
   export type DBInstanceAutomatedBackupList = DBInstanceAutomatedBackup[];
   export interface DBInstanceAutomatedBackupMessage {
@@ -4237,7 +4335,7 @@ declare namespace RDS {
      */
     StatusType?: String;
     /**
-     * A Boolean value that is true if the instance is operating normally, or false if the instance is in an error state.
+     * Indicates whether the instance is operating normally (TRUE) or is in an error state (FALSE).
      */
     Normal?: Boolean;
     /**
@@ -4680,6 +4778,10 @@ declare namespace RDS {
      * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
      */
     DedicatedLogVolume?: Boolean;
+    /**
+     * Indicates whether the snapshot is of a DB instance using the multi-tenant configuration (TRUE) or the single-tenant configuration (FALSE).
+     */
+    MultiTenant?: BooleanOptional;
   }
   export interface DBSnapshotAttribute {
     /**
@@ -4712,6 +4814,68 @@ declare namespace RDS {
      * A list of DBSnapshot instances.
      */
     DBSnapshots?: DBSnapshotList;
+  }
+  export interface DBSnapshotTenantDatabase {
+    /**
+     * The identifier for the snapshot of the DB instance.
+     */
+    DBSnapshotIdentifier?: String;
+    /**
+     * The ID for the DB instance that contains the tenant databases.
+     */
+    DBInstanceIdentifier?: String;
+    /**
+     * The resource identifier of the source CDB instance. This identifier can't be changed and is unique to an Amazon Web Services Region.
+     */
+    DbiResourceId?: String;
+    /**
+     * The name of the database engine.
+     */
+    EngineName?: String;
+    /**
+     * The type of DB snapshot.
+     */
+    SnapshotType?: String;
+    /**
+     * The time the DB snapshot was taken, specified in Coordinated Universal Time (UTC). If you copy the snapshot, the creation time changes.
+     */
+    TenantDatabaseCreateTime?: TStamp;
+    /**
+     * The name of the tenant database.
+     */
+    TenantDBName?: String;
+    /**
+     * The master username of the tenant database.
+     */
+    MasterUsername?: String;
+    /**
+     * The resource ID of the tenant database.
+     */
+    TenantDatabaseResourceId?: String;
+    /**
+     * The name of the character set of a tenant database.
+     */
+    CharacterSetName?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the snapshot tenant database.
+     */
+    DBSnapshotTenantDatabaseARN?: String;
+    /**
+     * The NCHAR character set name of the tenant database.
+     */
+    NcharCharacterSetName?: String;
+    TagList?: TagList;
+  }
+  export type DBSnapshotTenantDatabasesList = DBSnapshotTenantDatabase[];
+  export interface DBSnapshotTenantDatabasesMessage {
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * A list of DB snapshot tenant databases.
+     */
+    DBSnapshotTenantDatabases?: DBSnapshotTenantDatabasesList;
   }
   export interface DBSubnetGroup {
     /**
@@ -4943,6 +5107,27 @@ declare namespace RDS {
      * The name of the option group to be deleted.  You can't delete default option groups. 
      */
     OptionGroupName: String;
+  }
+  export interface DeleteTenantDatabaseMessage {
+    /**
+     * The user-supplied identifier for the DB instance that contains the tenant database that you want to delete.
+     */
+    DBInstanceIdentifier: String;
+    /**
+     * The user-supplied name of the tenant database that you want to remove from your DB instance. Amazon RDS deletes the tenant database with this name. This parameter isn’t case-sensitive.
+     */
+    TenantDBName: String;
+    /**
+     * Specifies whether to skip the creation of a final DB snapshot before removing the tenant database from your DB instance. If you enable this parameter, RDS doesn't create a DB snapshot. If you don't enable this parameter, RDS creates a DB snapshot before it deletes the tenant database. By default, RDS doesn't skip the final snapshot. If you don't enable this parameter, you must specify the FinalDBSnapshotIdentifier parameter.
+     */
+    SkipFinalSnapshot?: Boolean;
+    /**
+     * The DBSnapshotIdentifier of the new DBSnapshot created when the SkipFinalSnapshot parameter is disabled.  If you enable this parameter and also enable SkipFinalShapshot, the command results in an error. 
+     */
+    FinalDBSnapshotIdentifier?: String;
+  }
+  export interface DeleteTenantDatabaseResult {
+    TenantDatabase?: TenantDatabase;
   }
   export interface DeregisterDBProxyTargetsRequest {
     /**
@@ -5519,6 +5704,36 @@ declare namespace RDS {
   export interface DescribeDBSnapshotAttributesResult {
     DBSnapshotAttributesResult?: DBSnapshotAttributesResult;
   }
+  export interface DescribeDBSnapshotTenantDatabasesMessage {
+    /**
+     * The ID of the DB instance used to create the DB snapshots. This parameter isn't case-sensitive. Constraints:   If supplied, must match the identifier of an existing DBInstance.  
+     */
+    DBInstanceIdentifier?: String;
+    /**
+     * The ID of a DB snapshot that contains the tenant databases to describe. This value is stored as a lowercase string. Constraints:   If you specify this parameter, the value must match the ID of an existing DB snapshot.   If you specify an automatic snapshot, you must also specify SnapshotType.  
+     */
+    DBSnapshotIdentifier?: String;
+    /**
+     * The type of DB snapshots to be returned. You can specify one of the following values:    automated – All DB snapshots that have been automatically taken by Amazon RDS for my Amazon Web Services account.    manual – All DB snapshots that have been taken by my Amazon Web Services account.    shared – All manual DB snapshots that have been shared to my Amazon Web Services account.    public – All DB snapshots that have been marked as public.    awsbackup – All DB snapshots managed by the Amazon Web Services Backup service.  
+     */
+    SnapshotType?: String;
+    /**
+     * A filter that specifies one or more tenant databases to describe. Supported filters:    tenant-db-name - Tenant database names. The results list only includes information about the tenant databases that match these tenant DB names.    tenant-database-resource-id - Tenant database resource identifiers. The results list only includes information about the tenant databases contained within the DB snapshots.    dbi-resource-id - DB instance resource identifiers. The results list only includes information about snapshots containing tenant databases contained within the DB instances identified by these resource identifiers.    db-instance-id - Accepts DB instance identifiers and DB instance Amazon Resource Names (ARNs).    db-snapshot-id - Accepts DB snapshot identifiers.    snapshot-type - Accepts types of DB snapshots.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeDBSnapshotTenantDatabases request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * A specific DB resource identifier to describe.
+     */
+    DbiResourceId?: String;
+  }
   export interface DescribeDBSnapshotsMessage {
     /**
      * The ID of the DB instance to retrieve the list of DB snapshots for. This parameter isn't case-sensitive. Constraints:   If supplied, must match the identifier of an existing DBInstance.  
@@ -5961,6 +6176,28 @@ declare namespace RDS {
      */
     Filters?: FilterList;
   }
+  export interface DescribeTenantDatabasesMessage {
+    /**
+     * The user-supplied DB instance identifier, which must match the identifier of an existing instance owned by the Amazon Web Services account. This parameter isn't case-sensitive.
+     */
+    DBInstanceIdentifier?: String;
+    /**
+     * The user-supplied tenant database name, which must match the name of an existing tenant database on the specified DB instance owned by your Amazon Web Services account. This parameter isn’t case-sensitive.
+     */
+    TenantDBName?: String;
+    /**
+     * A filter that specifies one or more database tenants to describe. Supported filters:    tenant-db-name - Tenant database names. The results list only includes information about the tenant databases that match these tenant DB names.    tenant-database-resource-id - Tenant database resource identifiers.    dbi-resource-id - DB instance resource identifiers. The results list only includes information about the tenants contained within the DB instances identified by these resource identifiers.  
+     */
+    Filters?: FilterList;
+    /**
+     * An optional pagination token provided by a previous DescribeTenantDatabases request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.
+     */
+    MaxRecords?: IntegerOptional;
+  }
   export interface DescribeValidDBInstanceModificationsMessage {
     /**
      * The customer identifier or the ARN of your DB instance.
@@ -6176,7 +6413,7 @@ declare namespace RDS {
      */
     EventCategoriesList?: EventCategoriesList;
     /**
-     * A Boolean value indicating if the subscription is enabled. True indicates the subscription is enabled.
+     * Specifies whether the subscription is enabled. True indicates the subscription is enabled.
      */
     Enabled?: Boolean;
     /**
@@ -6319,7 +6556,7 @@ declare namespace RDS {
   }
   export interface FailoverState {
     /**
-     * The current status of the global cluster. Possible values are as follows:   pending &#x96; The service received a request to switch over or fail over the global cluster. The global cluster's primary DB cluster and the specified secondary DB cluster are being verified before the operation starts.   failing-over &#x96; This status covers the range of Aurora internal operations that take place during the switchover or failover process, such as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB cluster, and synchronizing replicas.   cancelling &#x96; The request to switch over or fail over the global cluster was cancelled and the primary Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states.  
+     * The current status of the global cluster. Possible values are as follows:   pending &#x96; The service received a request to switch over or fail over the global cluster. The global cluster's primary DB cluster and the specified secondary DB cluster are being verified before the operation starts.   failing-over &#x96; Aurora is promoting the chosen secondary Aurora DB cluster to become the new primary DB cluster to fail over the global cluster.   cancelling &#x96; The request to switch over or fail over the global cluster was cancelled and the primary Aurora DB cluster and the selected secondary Aurora DB cluster are returning to their previous states.   switching-over &#x96; This status covers the range of Aurora internal operations that take place during the switchover process, such as demoting the primary Aurora DB cluster, promoting the secondary Aurora DB cluster, and synchronizing replicas.  
      */
     Status?: FailoverStatus;
     /**
@@ -6861,7 +7098,7 @@ declare namespace RDS {
      */
     AllocatedStorage?: IntegerOptional;
     /**
-     * The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see DB Instance Class in the Amazon RDS User Guide or Aurora DB instance classes in the Amazon Aurora User Guide. For RDS Custom, see DB instance class support for RDS Custom for Oracle and  DB instance class support for RDS Custom for SQL Server. If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless you specify ApplyImmediately in your request.  Default: Uses existing setting Constraints:   If you are modifying the DB instance class and upgrading the engine version at the same time, the currently running engine version must be supported on the specified DB instance class. Otherwise, the operation returns an error. In this case, first run the operation to modify the DB instance class, and then run it again to upgrade the engine version.  
+     * The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see DB Instance Class in the Amazon RDS User Guide or Aurora DB instance classes in the Amazon Aurora User Guide. For RDS Custom, see DB instance class support for RDS Custom for Oracle and  DB instance class support for RDS Custom for SQL Server. If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless you specify ApplyImmediately in your request.  Default: Uses existing setting Constraints:   If you are modifying the DB instance class and upgrading the engine version at the same time, the currently running engine version must be supported on the specified DB instance class. Otherwise, the operation returns an error. In this case, first run the operation to upgrade the engine version, and then run it again to modify the DB instance class.  
      */
     DBInstanceClass?: String;
     /**
@@ -6905,7 +7142,7 @@ declare namespace RDS {
      */
     MultiAZ?: BooleanOptional;
     /**
-     * The version number of the database engine to upgrade to. Changing this parameter results in an outage and the change is applied during the next maintenance window unless the ApplyImmediately parameter is enabled for this request. For major version upgrades, if a nondefault DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family. If you specify only a major version, Amazon RDS updates the DB instance to the default minor version if the current minor version is lower. For information about valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions. If the instance that you're modifying is acting as a read replica, the engine version that you specify must be the same or higher than the version that the source DB instance or cluster is running. In RDS Custom for Oracle, this parameter is supported for read replicas only if they are in the PATCH_DB_FAILURE lifecycle. Constraints:   If you are upgrading the engine version and modifying the DB instance class at the same time, the currently running engine version must be supported on the specified DB instance class. Otherwise, the operation returns an error. In this case, first run the operation to modify the DB instance class, and then run it again to upgrade the engine version.  
+     * The version number of the database engine to upgrade to. Changing this parameter results in an outage and the change is applied during the next maintenance window unless the ApplyImmediately parameter is enabled for this request. For major version upgrades, if a nondefault DB parameter group is currently in use, a new DB parameter group in the DB parameter group family for the new engine version must be specified. The new DB parameter group can be the default for that DB parameter group family. If you specify only a major version, Amazon RDS updates the DB instance to the default minor version if the current minor version is lower. For information about valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions. If the instance that you're modifying is acting as a read replica, the engine version that you specify must be the same or higher than the version that the source DB instance or cluster is running. In RDS Custom for Oracle, this parameter is supported for read replicas only if they are in the PATCH_DB_FAILURE lifecycle. Constraints:   If you are upgrading the engine version and modifying the DB instance class at the same time, the currently running engine version must be supported on the specified DB instance class. Otherwise, the operation returns an error. In this case, first run the operation to upgrade the engine version, and then run it again to modify the DB instance class.  
      */
     EngineVersion?: String;
     /**
@@ -7088,6 +7325,10 @@ declare namespace RDS {
      * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
      */
     DedicatedLogVolume?: BooleanOptional;
+    /**
+     * Specifies whether the to convert your DB instance from the single-tenant conﬁguration to the multi-tenant conﬁguration. This parameter is supported only for RDS for Oracle CDB instances. During the conversion, RDS creates an initial tenant database and associates the DB name, master user name, character set, and national character set metadata with this database. The tags associated with the instance also propagate to the initial tenant database. You can add more tenant databases to your DB instance by using the CreateTenantDatabase operation.  The conversion to the multi-tenant configuration is permanent and irreversible, so you can't later convert back to the single-tenant configuration. When you specify this parameter, you must also specify ApplyImmediately. 
+     */
+    MultiTenant?: BooleanOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -7311,6 +7552,27 @@ declare namespace RDS {
   }
   export interface ModifyOptionGroupResult {
     OptionGroup?: OptionGroup;
+  }
+  export interface ModifyTenantDatabaseMessage {
+    /**
+     * The identifier of the DB instance that contains the tenant database that you are modifying. This parameter isn't case-sensitive. Constraints:   Must match the identifier of an existing DB instance.  
+     */
+    DBInstanceIdentifier: String;
+    /**
+     * The user-supplied name of the tenant database that you want to modify. This parameter isn’t case-sensitive. Constraints:   Must match the identifier of an existing tenant database.  
+     */
+    TenantDBName: String;
+    /**
+     * The new password for the master user of the specified tenant database in your DB instance.  Amazon RDS operations never return the password, so this action provides a way to regain access to a tenant database user if the password is lost. This includes restoring privileges that might have been accidentally revoked.  Constraints:   Can include any printable ASCII character except /, " (double quote), @, &amp; (ampersand), and ' (single quote).   Length constraints:   Must contain between 8 and 30 characters.   
+     */
+    MasterUserPassword?: SensitiveString;
+    /**
+     * The new name of the tenant database when renaming a tenant database. This parameter isn’t case-sensitive. Constraints:   Can't be the string null or any other reserved word.   Can't be longer than 8 characters.  
+     */
+    NewTenantDBName?: String;
+  }
+  export interface ModifyTenantDatabaseResult {
+    TenantDatabase?: TenantDatabase;
   }
   export interface Option {
     /**
@@ -7953,6 +8215,10 @@ declare namespace RDS {
      * Indicates whether the DB instance has a dedicated log volume (DLV) enabled.&gt;
      */
     DedicatedLogVolume?: BooleanOptional;
+    /**
+     * Indicates whether the DB instance will change to the multi-tenant configuration (TRUE) or the single-tenant configuration (FALSE). 
+     */
+    MultiTenant?: BooleanOptional;
   }
   export interface ProcessorFeature {
     /**
@@ -9332,6 +9598,7 @@ declare namespace RDS {
      */
     SecondsBeforeTimeout?: IntegerOptional;
   }
+  export type SensitiveString = string;
   export interface ServerlessV2ScalingConfiguration {
     /**
      * The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.
@@ -9672,6 +9939,78 @@ declare namespace RDS {
   export type TargetRole = "READ_WRITE"|"READ_ONLY"|"UNKNOWN"|string;
   export type TargetState = "REGISTERING"|"AVAILABLE"|"UNAVAILABLE"|string;
   export type TargetType = "RDS_INSTANCE"|"RDS_SERVERLESS_ENDPOINT"|"TRACKED_CLUSTER"|string;
+  export interface TenantDatabase {
+    /**
+     * The creation time of the tenant database.
+     */
+    TenantDatabaseCreateTime?: TStamp;
+    /**
+     * The ID of the DB instance that contains the tenant database.
+     */
+    DBInstanceIdentifier?: String;
+    /**
+     * The database name of the tenant database.
+     */
+    TenantDBName?: String;
+    /**
+     * The status of the tenant database.
+     */
+    Status?: String;
+    /**
+     * The master username of the tenant database.
+     */
+    MasterUsername?: String;
+    /**
+     * The Amazon Web Services Region-unique, immutable identifier for the DB instance.
+     */
+    DbiResourceId?: String;
+    /**
+     * The Amazon Web Services Region-unique, immutable identifier for the tenant database.
+     */
+    TenantDatabaseResourceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the tenant database.
+     */
+    TenantDatabaseARN?: String;
+    /**
+     * The character set of the tenant database.
+     */
+    CharacterSetName?: String;
+    /**
+     * The NCHAR character set name of the tenant database.
+     */
+    NcharCharacterSetName?: String;
+    /**
+     * Specifies whether deletion protection is enabled for the DB instance.
+     */
+    DeletionProtection?: Boolean;
+    /**
+     * Information about pending changes for a tenant database.
+     */
+    PendingModifiedValues?: TenantDatabasePendingModifiedValues;
+    TagList?: TagList;
+  }
+  export interface TenantDatabasePendingModifiedValues {
+    /**
+     * The master password for the tenant database.
+     */
+    MasterUserPassword?: SensitiveString;
+    /**
+     * The name of the tenant database.
+     */
+    TenantDBName?: String;
+  }
+  export type TenantDatabasesList = TenantDatabase[];
+  export interface TenantDatabasesMessage {
+    /**
+     * An optional pagination token provided by a previous DescribeTenantDatabases request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * An array of the tenant databases requested by the DescribeTenantDatabases operation.
+     */
+    TenantDatabases?: TenantDatabasesList;
+  }
   export interface Timezone {
     /**
      * The name of the time zone.

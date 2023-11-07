@@ -157,6 +157,10 @@ declare namespace DLM {
      * The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. For more information, see Cron expressions in the Amazon CloudWatch User Guide.
      */
     CronExpression?: CronExpression;
+    /**
+     *  [Snapshot policies that target instances only] Specifies pre and/or post scripts for a snapshot lifecycle policy that targets instances. This is useful for creating application-consistent snapshots, or for performing specific administrative tasks before or after Amazon Data Lifecycle Manager initiates snapshot creation. For more information, see Automating application-consistent snapshots with pre and post scripts.
+     */
+    Scripts?: ScriptsList;
   }
   export type CronExpression = string;
   export interface CrossRegionCopyAction {
@@ -193,11 +197,11 @@ declare namespace DLM {
   }
   export interface CrossRegionCopyRule {
     /**
-     *  Avoid using this parameter when creating new policies. Instead, use Target to specify a target Region or a target Outpost for snapshot copies. For policies created before the Target parameter was introduced, this parameter indicates the target Region for snapshot copies. 
+     *  Use this parameter for AMI policies only. For snapshot policies, use Target instead. For snapshot policies created before the Target parameter was introduced, this parameter indicates the target Region for snapshot copies.    [AMI policies only] The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
      */
     TargetRegion?: TargetRegion;
     /**
-     * The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies. Use this parameter instead of TargetRegion. Do not specify both.
+     *  Use this parameter for snapshot policies only. For AMI policies, use TargetRegion instead.   [Snapshot policies only] The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
      */
     Target?: Target;
     /**
@@ -284,6 +288,9 @@ declare namespace DLM {
   export type EventTypeValues = "shareSnapshot"|string;
   export type ExcludeBootVolume = boolean;
   export type ExcludeDataVolumeTagList = Tag[];
+  export type ExecuteOperationOnScriptFailure = boolean;
+  export type ExecutionHandler = string;
+  export type ExecutionHandlerServiceValues = "AWS_SYSTEMS_MANAGER"|string;
   export type ExecutionRoleArn = string;
   export interface FastRestoreRule {
     /**
@@ -559,6 +566,35 @@ declare namespace DLM {
   }
   export type ScheduleList = Schedule[];
   export type ScheduleName = string;
+  export interface Script {
+    /**
+     * Indicate which scripts Amazon Data Lifecycle Manager should run on target instances. Pre scripts run before Amazon Data Lifecycle Manager initiates snapshot creation. Post scripts run after Amazon Data Lifecycle Manager initiates snapshot creation.   To run a pre script only, specify PRE. In this case, Amazon Data Lifecycle Manager calls the SSM document with the pre-script parameter before initiating snapshot creation.   To run a post script only, specify POST. In this case, Amazon Data Lifecycle Manager calls the SSM document with the post-script parameter after initiating snapshot creation.   To run both pre and post scripts, specify both PRE and POST. In this case, Amazon Data Lifecycle Manager calls the SSM document with the pre-script parameter before initiating snapshot creation, and then it calls the SSM document again with the post-script parameter after initiating snapshot creation.   If you are automating VSS Backups, omit this parameter. Default: PRE and POST
+     */
+    Stages?: StagesList;
+    /**
+     * Indicates the service used to execute the pre and/or post scripts.   If you are using custom SSM documents, specify AWS_SYSTEMS_MANAGER.   If you are automating VSS Backups, omit this parameter.   Default: AWS_SYSTEMS_MANAGER
+     */
+    ExecutionHandlerService?: ExecutionHandlerServiceValues;
+    /**
+     * The SSM document that includes the pre and/or post scripts to run.   If you are automating VSS backups, specify AWS_VSS_BACKUP. In this case, Amazon Data Lifecycle Manager automatically uses the AWSEC2-CreateVssSnapshot SSM document.   If you are using a custom SSM document that you own, specify either the name or ARN of the SSM document. If you are using a custom SSM document that is shared with you, specify the ARN of the SSM document.  
+     */
+    ExecutionHandler: ExecutionHandler;
+    /**
+     * Indicates whether Amazon Data Lifecycle Manager should default to crash-consistent snapshots if the pre script fails.   To default to crash consistent snapshot if the pre script fails, specify true.   To skip the instance for snapshot creation if the pre script fails, specify false.   This parameter is supported only if you run a pre script. If you run a post script only, omit this parameter. Default: true
+     */
+    ExecuteOperationOnScriptFailure?: ExecuteOperationOnScriptFailure;
+    /**
+     * Specifies a timeout period, in seconds, after which Amazon Data Lifecycle Manager fails the script run attempt if it has not completed. If a script does not complete within its timeout period, Amazon Data Lifecycle Manager fails the attempt. The timeout period applies to the pre and post scripts individually.  If you are automating VSS Backups, omit this parameter. Default: 10
+     */
+    ExecutionTimeout?: ScriptExecutionTimeout;
+    /**
+     * Specifies the number of times Amazon Data Lifecycle Manager should retry scripts that fail.   If the pre script fails, Amazon Data Lifecycle Manager retries the entire snapshot creation process, including running the pre and post scripts.   If the post script fails, Amazon Data Lifecycle Manager retries the post script only; in this case, the pre script will have completed and the snapshot might have been created.   If you do not want Amazon Data Lifecycle Manager to retry failed scripts, specify 0. Default: 0
+     */
+    MaximumRetryCount?: ScriptMaximumRetryCount;
+  }
+  export type ScriptExecutionTimeout = number;
+  export type ScriptMaximumRetryCount = number;
+  export type ScriptsList = Script[];
   export type SettablePolicyStateValues = "ENABLED"|"DISABLED"|string;
   export interface ShareRule {
     /**
@@ -577,6 +613,8 @@ declare namespace DLM {
   export type ShareRules = ShareRule[];
   export type ShareTargetAccountList = AwsAccountId[];
   export type SnapshotOwnerList = AwsAccountId[];
+  export type StageValues = "PRE"|"POST"|string;
+  export type StagesList = StageValues[];
   export type StandardTierRetainRuleCount = number;
   export type StandardTierRetainRuleInterval = number;
   export type StatusMessage = string;
