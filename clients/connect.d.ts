@@ -8280,7 +8280,7 @@ declare namespace Connect {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.  InstanceID is a required field. The "Required: No" below is incorrect. 
      */
-    InstanceId?: InstanceId;
+    InstanceId: InstanceId;
     /**
      * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
      */

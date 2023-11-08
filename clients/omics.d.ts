@@ -2606,6 +2606,14 @@ declare namespace Omics {
      *  The location of the run log. 
      */
     logLocation?: RunLogLocation;
+    /**
+     *  The universally unique identifier for a run. 
+     */
+    uuid?: RunUuid;
+    /**
+     *  The destination for workflow outputs. 
+     */
+    runOutputUri?: RunOutputUri;
   }
   export type GetRunResponsePriorityInteger = number;
   export type GetRunResponseStorageCapacityInteger = number;
@@ -4243,6 +4251,7 @@ declare namespace Omics {
   export type RunStatus = "PENDING"|"STARTING"|"RUNNING"|"STOPPING"|"COMPLETED"|"DELETED"|"CANCELLED"|"FAILED"|string;
   export type RunStatusMessage = string;
   export type RunTimestamp = Date;
+  export type RunUuid = string;
   export type S3Destination = string;
   export type S3Uri = string;
   export type SampleId = string;
@@ -4714,6 +4723,14 @@ declare namespace Omics {
      * The run's tags.
      */
     tags?: TagMap;
+    /**
+     *  The universally unique identifier for a run. 
+     */
+    uuid?: RunUuid;
+    /**
+     *  The destination for workflow outputs. 
+     */
+    runOutputUri?: RunOutputUri;
   }
   export interface StartVariantImportRequest {
     /**

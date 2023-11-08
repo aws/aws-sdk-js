@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1490.0-->
+<!--LATEST=2.1491.0-->
 <!--ENTRYINSERT-->
+
+## 2.1491.0
+* feature: Connect: This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.
+* feature: ConnectCases: This release adds the ability to add/view comment authors through CreateRelatedItem and SearchRelatedItems API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* feature: DataSync: This change allows for 0 length access keys and secret keys for object storage locations. Users can now pass in empty string credentials.
+* feature: GuardDuty: Added API support for new GuardDuty EKS Audit Log finding types.
+* feature: Lambda: Add Node 20 (nodejs20.x) support to AWS Lambda.
+* feature: LexModelsV2: AWS Lex now supports selective log capture in conversation logs. When you enable this option within the conversation log settings, only the utterances that trigger intents and slots specified in session attributes will be logged.
+* feature: Omics: Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields "uuid" and "runOutputUri".
+* feature: RedshiftServerless: Added a new parameter in the workgroup that helps you control your cost for compute resources. This feature provides a ceiling for RPUs that Amazon Redshift Serverless can scale up to. When automatic compute scaling is required, having a higher value for MaxRPU can enhance query throughput.
+* feature: Resiliencehub: AWS Resilience Hub enhances Resiliency Score, providing actionable recommendations to improve application resilience. Amazon Elastic Kubernetes Service (EKS) operational recommendations have been added to help improve the resilience posture of your applications.
+* feature: SQS: This release enables customers to call SQS using AWS JSON-1.0 protocol.
 
 ## 2.1490.0
 * feature: DLM: Added support for pre and post scripts in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.

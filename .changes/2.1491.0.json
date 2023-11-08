@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "Connect",
+        "description": "This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests."
+    },
+    {
+        "type": "feature",
+        "category": "ConnectCases",
+        "description": "This release adds the ability to add/view comment authors through CreateRelatedItem and SearchRelatedItems API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html"
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "This change allows for 0 length access keys and secret keys for object storage locations. Users can now pass in empty string credentials."
+    },
+    {
+        "type": "feature",
+        "category": "GuardDuty",
+        "description": "Added API support for new GuardDuty EKS Audit Log finding types."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Add Node 20 (nodejs20.x) support to AWS Lambda."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "AWS Lex now supports selective log capture in conversation logs. When you enable this option within the conversation log settings, only the utterances that trigger intents and slots specified in session attributes will be logged."
+    },
+    {
+        "type": "feature",
+        "category": "Omics",
+        "description": "Adding Run UUID and Run Output URI: GetRun and StartRun API response has two new fields \"uuid\" and \"runOutputUri\"."
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftServerless",
+        "description": "Added a new parameter in the workgroup that helps you control your cost for compute resources. This feature provides a ceiling for RPUs that Amazon Redshift Serverless can scale up to. When automatic compute scaling is required, having a higher value for MaxRPU can enhance query throughput."
+    },
+    {
+        "type": "feature",
+        "category": "Resiliencehub",
+        "description": "AWS Resilience Hub enhances Resiliency Score, providing actionable recommendations to improve application resilience. Amazon Elastic Kubernetes Service (EKS) operational recommendations have been added to help improve the resilience posture of your applications."
+    },
+    {
+        "type": "feature",
+        "category": "SQS",
+        "description": "This release enables customers to call SQS using AWS JSON-1.0 protocol."
+    }
+]

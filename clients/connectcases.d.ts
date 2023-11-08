@@ -60,11 +60,11 @@ declare class ConnectCases extends Service {
    */
   createLayout(callback?: (err: AWSError, data: ConnectCases.Types.CreateLayoutResponse) => void): Request<ConnectCases.Types.CreateLayoutResponse, AWSError>;
   /**
-   * Creates a related item (comments, tasks, and contacts) and associates it with a case.  A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a contactArn). All Related Items have their own internal identifier, the relatedItemArn. Examples of related items include comments and contacts. 
+   * Creates a related item (comments, tasks, and contacts) and associates it with a case.    A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a contactArn). All Related Items have their own internal identifier, the relatedItemArn. Examples of related items include comments and contacts.   If you provide a value for performedBy.userArn you must also have DescribeUser permission on the ARN of the user that you provide.    &lt;/note&gt; 
    */
   createRelatedItem(params: ConnectCases.Types.CreateRelatedItemRequest, callback?: (err: AWSError, data: ConnectCases.Types.CreateRelatedItemResponse) => void): Request<ConnectCases.Types.CreateRelatedItemResponse, AWSError>;
   /**
-   * Creates a related item (comments, tasks, and contacts) and associates it with a case.  A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a contactArn). All Related Items have their own internal identifier, the relatedItemArn. Examples of related items include comments and contacts. 
+   * Creates a related item (comments, tasks, and contacts) and associates it with a case.    A Related Item is a resource that is associated with a case. It may or may not have an external identifier linking it to an external resource (for example, a contactArn). All Related Items have their own internal identifier, the relatedItemArn. Examples of related items include comments and contacts.   If you provide a value for performedBy.userArn you must also have DescribeUser permission on the ARN of the user that you provide.    &lt;/note&gt; 
    */
   createRelatedItem(callback?: (err: AWSError, data: ConnectCases.Types.CreateRelatedItemResponse) => void): Request<ConnectCases.Types.CreateRelatedItemResponse, AWSError>;
   /**
@@ -510,6 +510,10 @@ declare namespace ConnectCases {
      * The unique identifier of the Cases domain. 
      */
     domainId: DomainId;
+    /**
+     * Represents the creator of the related item.
+     */
+    performedBy?: UserUnion;
     /**
      * The type of a related item.
      */
@@ -1327,6 +1331,10 @@ declare namespace ConnectCases {
      */
     content: RelatedItemContent;
     /**
+     * Represents the creator of the related item.
+     */
+    performedBy?: UserUnion;
+    /**
      * Unique identifier of a related item.
      */
     relatedItemId: RelatedItemId;
@@ -1493,6 +1501,13 @@ declare namespace ConnectCases {
     templateId: TemplateId;
   }
   export interface UpdateTemplateResponse {
+  }
+  export type UserArn = string;
+  export interface UserUnion {
+    /**
+     * Represents the Amazon Connect ARN of the user.
+     */
+    userArn?: UserArn;
   }
   export type Value = string;
   export type ValuesList = Value[];

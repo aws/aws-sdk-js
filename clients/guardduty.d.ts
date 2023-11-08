@@ -680,6 +680,18 @@ declare namespace GuardDuty {
      * Information about RDS_LOGIN_ATTEMPT action described in this finding.
      */
     RdsLoginAttemptAction?: RdsLoginAttemptAction;
+    /**
+     * Information whether the user has the permission to use a specific Kubernetes API.
+     */
+    KubernetesPermissionCheckedDetails?: KubernetesPermissionCheckedDetails;
+    /**
+     * Information about the role binding that grants the permission defined in a Kubernetes role.
+     */
+    KubernetesRoleBindingDetails?: KubernetesRoleBindingDetails;
+    /**
+     * Information about the Kubernetes role name and role type.
+     */
+    KubernetesRoleDetails?: KubernetesRoleDetails;
   }
   export interface AddonDetails {
     /**
@@ -722,6 +734,40 @@ declare namespace GuardDuty {
     InvitedAt?: String;
   }
   export type AffectedResources = {[key: string]: String};
+  export interface Anomaly {
+    /**
+     * Information about the types of profiles.
+     */
+    Profiles?: AnomalyProfiles;
+    /**
+     * Information about the behavior of the anomalies.
+     */
+    Unusual?: AnomalyUnusual;
+  }
+  export interface AnomalyObject {
+    /**
+     * The type of behavior of the profile.
+     */
+    ProfileType?: ProfileType;
+    /**
+     * The frequency of the anomaly.
+     */
+    ProfileSubtype?: ProfileSubtype;
+    /**
+     * The recorded value.
+     */
+    Observations?: Observations;
+  }
+  export type AnomalyProfileFeatureObjects = AnomalyObject[];
+  export type AnomalyProfileFeatures = {[key: string]: AnomalyProfileFeatureObjects};
+  export type AnomalyProfiles = {[key: string]: AnomalyProfileFeatures};
+  export interface AnomalyUnusual {
+    /**
+     * The behavior of the anomalous activity that caused GuardDuty to generate the finding.
+     */
+    Behavior?: Behavior;
+  }
+  export type AnomalyUnusualBehaviorFeature = {[key: string]: AnomalyObject};
   export interface ArchiveFindingsRequest {
     /**
      * The ID of the detector that specifies the GuardDuty service whose findings you want to archive.
@@ -773,6 +819,7 @@ declare namespace GuardDuty {
      */
     AffectedResources?: AffectedResources;
   }
+  export type Behavior = {[key: string]: AnomalyUnusualBehaviorFeature};
   export interface BlockPublicAccess {
     /**
      * Indicates if S3 Block Public Access is set to IgnorePublicAcls.
@@ -1096,7 +1143,7 @@ declare namespace GuardDuty {
      */
     Rank?: FilterRank;
     /**
-     * Represents the criteria to be used in the filter for querying findings. You can only use the following attributes to query findings:   accountId   id   region   severity To filter on the basis of severity, the API and CLI use the following input list for the FindingCriteria condition:    Low: ["1", "2", "3"]     Medium: ["4", "5", "6"]     High: ["7", "8", "9"]    For more information, see Severity levels for GuardDuty findings.   type   updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.outpostArn   resource.resourceType   resource.s3BucketDetails.publicAccess.effectivePermissions   resource.s3BucketDetails.name   resource.s3BucketDetails.tags.key   resource.s3BucketDetails.tags.value   resource.s3BucketDetails.type   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.errorCode   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.action.awsApiCallAction.remoteAccountDetails.affiliated   service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4   service.action.kubernetesApiCallAction.requestUri   service.action.networkConnectionAction.localIpDetails.ipAddressV4   service.action.networkConnectionAction.protocol   service.action.awsApiCallAction.serviceName   service.action.awsApiCallAction.remoteAccountDetails.accountId   service.additionalInfo.threatListName   service.resourceRole   resource.eksClusterDetails.name   resource.kubernetesDetails.kubernetesWorkloadDetails.name   resource.kubernetesDetails.kubernetesWorkloadDetails.namespace   resource.kubernetesDetails.kubernetesUserDetails.username   resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image   resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix   service.ebsVolumeScanDetails.scanId   service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name   service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity   service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash   resource.ecsClusterDetails.name   resource.ecsClusterDetails.taskDetails.containers.image   resource.ecsClusterDetails.taskDetails.definitionArn   resource.containerDetails.image   resource.rdsDbInstanceDetails.dbInstanceIdentifier   resource.rdsDbInstanceDetails.dbClusterIdentifier   resource.rdsDbInstanceDetails.engine   resource.rdsDbUserDetails.user   resource.rdsDbInstanceDetails.tags.key   resource.rdsDbInstanceDetails.tags.value   service.runtimeDetails.process.executableSha256   service.runtimeDetails.process.name   service.runtimeDetails.process.name   resource.lambdaDetails.functionName   resource.lambdaDetails.functionArn   resource.lambdaDetails.tags.key   resource.lambdaDetails.tags.value  
+     * Represents the criteria to be used in the filter for querying findings. You can only use the following attributes to query findings:   accountId   id   region   severity To filter on the basis of severity, the API and CLI use the following input list for the FindingCriteria condition:    Low: ["1", "2", "3"]     Medium: ["4", "5", "6"]     High: ["7", "8", "9"]    For more information, see Severity levels for GuardDuty findings.   type   updatedAt Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.   resource.accessKeyDetails.accessKeyId   resource.accessKeyDetails.principalId   resource.accessKeyDetails.userName   resource.accessKeyDetails.userType   resource.instanceDetails.iamInstanceProfile.id   resource.instanceDetails.imageId   resource.instanceDetails.instanceId   resource.instanceDetails.tags.key   resource.instanceDetails.tags.value   resource.instanceDetails.networkInterfaces.ipv6Addresses   resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress   resource.instanceDetails.networkInterfaces.publicDnsName   resource.instanceDetails.networkInterfaces.publicIp   resource.instanceDetails.networkInterfaces.securityGroups.groupId   resource.instanceDetails.networkInterfaces.securityGroups.groupName   resource.instanceDetails.networkInterfaces.subnetId   resource.instanceDetails.networkInterfaces.vpcId   resource.instanceDetails.outpostArn   resource.resourceType   resource.s3BucketDetails.publicAccess.effectivePermissions   resource.s3BucketDetails.name   resource.s3BucketDetails.tags.key   resource.s3BucketDetails.tags.value   resource.s3BucketDetails.type   service.action.actionType   service.action.awsApiCallAction.api   service.action.awsApiCallAction.callerType   service.action.awsApiCallAction.errorCode   service.action.awsApiCallAction.remoteIpDetails.city.cityName   service.action.awsApiCallAction.remoteIpDetails.country.countryName   service.action.awsApiCallAction.remoteIpDetails.ipAddressV4   service.action.awsApiCallAction.remoteIpDetails.organization.asn   service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg   service.action.awsApiCallAction.serviceName   service.action.dnsRequestAction.domain   service.action.dnsRequestAction.domainWithSuffix   service.action.networkConnectionAction.blocked   service.action.networkConnectionAction.connectionDirection   service.action.networkConnectionAction.localPortDetails.port   service.action.networkConnectionAction.protocol   service.action.networkConnectionAction.remoteIpDetails.city.cityName   service.action.networkConnectionAction.remoteIpDetails.country.countryName   service.action.networkConnectionAction.remoteIpDetails.ipAddressV4   service.action.networkConnectionAction.remoteIpDetails.organization.asn   service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg   service.action.networkConnectionAction.remotePortDetails.port   service.action.awsApiCallAction.remoteAccountDetails.affiliated   service.action.kubernetesApiCallAction.remoteIpDetails.ipAddressV4   service.action.kubernetesApiCallAction.namespace   service.action.kubernetesApiCallAction.remoteIpDetails.organization.asn   service.action.kubernetesApiCallAction.requestUri   service.action.kubernetesApiCallAction.statusCode   service.action.networkConnectionAction.localIpDetails.ipAddressV4   service.action.networkConnectionAction.protocol   service.action.awsApiCallAction.serviceName   service.action.awsApiCallAction.remoteAccountDetails.accountId   service.additionalInfo.threatListName   service.resourceRole   resource.eksClusterDetails.name   resource.kubernetesDetails.kubernetesWorkloadDetails.name   resource.kubernetesDetails.kubernetesWorkloadDetails.namespace   resource.kubernetesDetails.kubernetesUserDetails.username   resource.kubernetesDetails.kubernetesWorkloadDetails.containers.image   resource.kubernetesDetails.kubernetesWorkloadDetails.containers.imagePrefix   service.ebsVolumeScanDetails.scanId   service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.name   service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.severity   service.ebsVolumeScanDetails.scanDetections.threatDetectedByName.threatNames.filePaths.hash   resource.ecsClusterDetails.name   resource.ecsClusterDetails.taskDetails.containers.image   resource.ecsClusterDetails.taskDetails.definitionArn   resource.containerDetails.image   resource.rdsDbInstanceDetails.dbInstanceIdentifier   resource.rdsDbInstanceDetails.dbClusterIdentifier   resource.rdsDbInstanceDetails.engine   resource.rdsDbUserDetails.user   resource.rdsDbInstanceDetails.tags.key   resource.rdsDbInstanceDetails.tags.value   service.runtimeDetails.process.executableSha256   service.runtimeDetails.process.name   service.runtimeDetails.process.name   resource.lambdaDetails.functionName   resource.lambdaDetails.functionArn   resource.lambdaDetails.tags.key   resource.lambdaDetails.tags.value  
      */
     FindingCriteria: FindingCriteria;
     /**
@@ -1557,6 +1604,12 @@ declare namespace GuardDuty {
   }
   export type DestinationType = "S3"|string;
   export type Destinations = Destination[];
+  export interface Detection {
+    /**
+     * The details about the anomalous activity that caused GuardDuty to generate the finding.
+     */
+    Anomaly?: Anomaly;
+  }
   export interface DetectorAdditionalConfiguration {
     /**
      * Name of the additional configuration.
@@ -2378,6 +2431,16 @@ declare namespace GuardDuty {
      */
     Id?: String;
   }
+  export interface ImpersonatedUser {
+    /**
+     * Information about the username that was being impersonated.
+     */
+    Username?: String;
+    /**
+     * The group to which the user name belongs.
+     */
+    Groups?: Groups;
+  }
   export type InstanceArn = string;
   export interface InstanceDetails {
     /**
@@ -2508,6 +2571,22 @@ declare namespace GuardDuty {
      * Parameters related to the Kubernetes API call action.
      */
     Parameters?: String;
+    /**
+     * The resource component in the Kubernetes API call action.
+     */
+    Resource?: String;
+    /**
+     * The name of the sub-resource in the Kubernetes API call action.
+     */
+    Subresource?: String;
+    /**
+     * The name of the namespace where the Kubernetes API call action takes place.
+     */
+    Namespace?: String;
+    /**
+     * The name of the resource in the Kubernetes API call action.
+     */
+    ResourceName?: String;
   }
   export interface KubernetesAuditLogsConfiguration {
     /**
@@ -2549,6 +2628,60 @@ declare namespace GuardDuty {
      */
     KubernetesWorkloadDetails?: KubernetesWorkloadDetails;
   }
+  export interface KubernetesPermissionCheckedDetails {
+    /**
+     * The verb component of the Kubernetes API call. For example, when you check whether or not you have the permission to call the CreatePod API, the verb component will be Create.
+     */
+    Verb?: String;
+    /**
+     * The Kubernetes resource with which your Kubernetes API call will interact.
+     */
+    Resource?: String;
+    /**
+     * The namespace where the Kubernetes API action will take place.
+     */
+    Namespace?: String;
+    /**
+     * Information whether the user has the permission to call the Kubernetes API.
+     */
+    Allowed?: Boolean;
+  }
+  export interface KubernetesRoleBindingDetails {
+    /**
+     * The kind of the role. For role binding, this value will be RoleBinding.
+     */
+    Kind?: String;
+    /**
+     * The name of the RoleBinding.
+     */
+    Name?: String;
+    /**
+     * The unique identifier of the role binding.
+     */
+    Uid?: String;
+    /**
+     * The name of the role being referenced. This must match the name of the Role or ClusterRole that you want to bind to.
+     */
+    RoleRefName?: String;
+    /**
+     * The type of the role being referenced. This could be either Role or ClusterRole.
+     */
+    RoleRefKind?: String;
+  }
+  export interface KubernetesRoleDetails {
+    /**
+     * The kind of role. For this API, the value of kind will be Role.
+     */
+    Kind?: String;
+    /**
+     * The name of the Kubernetes role.
+     */
+    Name?: String;
+    /**
+     * The unique identifier of the Kubernetes role name.
+     */
+    Uid?: String;
+  }
   export interface KubernetesUserDetails {
     /**
      * The username of the user who called the Kubernetes API.
@@ -2566,6 +2699,10 @@ declare namespace GuardDuty {
      * Entity that assumes the IAM role when Kubernetes RBAC permissions are assigned to that role.
      */
     SessionName?: SessionNameList;
+    /**
+     * Information about the impersonated user.
+     */
+    ImpersonatedUser?: ImpersonatedUser;
   }
   export interface KubernetesWorkloadDetails {
     /**
@@ -2596,6 +2733,18 @@ declare namespace GuardDuty {
      * Volumes used by the Kubernetes workload.
      */
     Volumes?: Volumes;
+    /**
+     * The service account name that is associated with a Kubernetes workload.
+     */
+    ServiceAccountName?: String;
+    /**
+     * Whether the host IPC flag is enabled for the pods in the workload.
+     */
+    HostIPC?: Boolean;
+    /**
+     * Whether the host PID flag is enabled for the pods in the workload. 
+     */
+    HostPID?: Boolean;
   }
   export interface LambdaDetails {
     /**
@@ -2846,7 +2995,7 @@ declare namespace GuardDuty {
   }
   export interface ListMembersResponse {
     /**
-     * A list of members.
+     * A list of members.  The values for email and invitedAt are available only if the member accounts are added by invitation. 
      */
     Members?: Members;
     /**
@@ -3203,6 +3352,13 @@ declare namespace GuardDuty {
   export type NetworkInterfaces = NetworkInterface[];
   export type NonEmptyString = string;
   export type NotEquals = String[];
+  export type ObservationTexts = String[];
+  export interface Observations {
+    /**
+     * The text that was unusual.
+     */
+    Text?: ObservationTexts;
+  }
   export type OrderBy = "ASC"|"DESC"|string;
   export type OrgFeature = "S3_DATA_EVENTS"|"EKS_AUDIT_LOGS"|"EBS_MALWARE_PROTECTION"|"RDS_LOGIN_EVENTS"|"EKS_RUNTIME_MONITORING"|"LAMBDA_NETWORK_LOGS"|string;
   export type OrgFeatureAdditionalConfiguration = "EKS_ADDON_MANAGEMENT"|string;
@@ -3495,6 +3651,8 @@ declare namespace GuardDuty {
     ProductType?: String;
   }
   export type ProductCodes = ProductCode[];
+  export type ProfileSubtype = "FREQUENT"|"INFREQUENT"|"UNSEEN"|"RARE"|string;
+  export type ProfileType = "FREQUENCY"|string;
   export interface PublicAccess {
     /**
      * Contains information about how permissions are configured for the S3 bucket.
@@ -3984,6 +4142,10 @@ declare namespace GuardDuty {
      * Whether the container is privileged.
      */
     Privileged?: Boolean;
+    /**
+     * Whether or not a container or a Kubernetes pod is allowed to gain more privileges than its parent process.
+     */
+    AllowPrivilegeEscalation?: Boolean;
   }
   export interface SecurityGroup {
     /**
@@ -4053,6 +4215,10 @@ declare namespace GuardDuty {
      * Information about the process and any required context values for a specific finding
      */
     RuntimeDetails?: RuntimeDetails;
+    /**
+     * Contains information about the detected unusual behavior.
+     */
+    Detection?: Detection;
   }
   export interface ServiceAdditionalInfo {
     /**

@@ -4326,6 +4326,10 @@
         },
         "destination": {
           "shape": "AudioLogDestination"
+        },
+        "selectiveLoggingEnabled": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>The option to enable selective conversation log capture for audio.</p>"
         }
       },
       "documentation": "<p>Settings for logging audio of conversations between Amazon Lex and a user. You specify whether to log audio and the Amazon S3 bucket where the audio file is stored.</p>"
@@ -13987,6 +13991,10 @@
         },
         "destination": {
           "shape": "TextLogDestination"
+        },
+        "selectiveLoggingEnabled": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>The option to enable selective conversation log capture for text.</p>"
         }
       },
       "documentation": "<p>Defines settings to enable text conversation logs.</p>"

@@ -604,6 +604,10 @@ declare namespace RedshiftServerless {
      */
     enhancedVpcRouting?: Boolean;
     /**
+     * The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.
+     */
+    maxCapacity?: Integer;
+    /**
      * The name of the namespace to associate with the workgroup.
      */
     namespaceName: NamespaceName;
@@ -1799,6 +1803,10 @@ declare namespace RedshiftServerless {
      */
     enhancedVpcRouting?: Boolean;
     /**
+     * The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.
+     */
+    maxCapacity?: Integer;
+    /**
      * The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.
      */
     port?: Integer;
@@ -1920,6 +1928,10 @@ declare namespace RedshiftServerless {
      * The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.
      */
     enhancedVpcRouting?: Boolean;
+    /**
+     * The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries. The max capacity is specified in RPUs.
+     */
+    maxCapacity?: Integer;
     /**
      * The namespace the workgroup is associated with.
      */

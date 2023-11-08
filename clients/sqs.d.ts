@@ -275,7 +275,7 @@ declare namespace SQS {
     /**
      * The new value (in seconds) for the message's visibility timeout.
      */
-    VisibilityTimeout?: Integer;
+    VisibilityTimeout?: NullableInteger;
   }
   export type ChangeMessageVisibilityBatchRequestEntryList = ChangeMessageVisibilityBatchRequestEntry[];
   export interface ChangeMessageVisibilityBatchResult {
@@ -307,7 +307,7 @@ declare namespace SQS {
     /**
      * The new value for the message's visibility timeout (in seconds). Values range: 0 to 43200. Maximum: 12 hours.
      */
-    VisibilityTimeout: Integer;
+    VisibilityTimeout: NullableInteger;
   }
   export interface CreateQueueRequest {
     /**
@@ -415,7 +415,6 @@ declare namespace SQS {
      */
     QueueUrl?: String;
   }
-  export type Integer = number;
   export interface ListDeadLetterSourceQueuesRequest {
     /**
      * The URL of a dead-letter queue. Queue URLs and names are case-sensitive.
@@ -448,7 +447,7 @@ declare namespace SQS {
     /**
      * The maximum number of results to include in the response. The default is 1, which provides the most recent message movement task. The upper limit is 10.
      */
-    MaxResults?: Integer;
+    MaxResults?: NullableInteger;
   }
   export interface ListMessageMoveTasksResult {
     /**
@@ -464,7 +463,7 @@ declare namespace SQS {
     /**
      * The status of the message movement task. Possible values are: RUNNING, COMPLETED, CANCELLING, CANCELLED, and FAILED.
      */
-    Status?: String;
+    Status?: TaskStatus;
     /**
      * The ARN of the queue that contains the messages to be moved to another queue.
      */
@@ -476,7 +475,7 @@ declare namespace SQS {
     /**
      * The number of messages to be moved per second (the message movement rate), if it has been specified in the StartMessageMoveTask request. If a MaxNumberOfMessagesPerSecond has not been specified in the StartMessageMoveTask request, this field value will be NULL.
      */
-    MaxNumberOfMessagesPerSecond?: Integer;
+    MaxNumberOfMessagesPerSecond?: NullableInteger;
     /**
      * The approximate number of messages already moved to the destination queue.
      */
@@ -484,7 +483,7 @@ declare namespace SQS {
     /**
      * The number of messages to be moved from the source queue. This number is obtained at the time of starting the message movement task.
      */
-    ApproximateNumberOfMessagesToMove?: Long;
+    ApproximateNumberOfMessagesToMove?: NullableLong;
     /**
      * The task failure reason (only included if the task status is FAILED).
      */
@@ -614,6 +613,8 @@ declare namespace SQS {
      */
     DataType: String;
   }
+  export type NullableInteger = number;
+  export type NullableLong = number;
   export interface PurgeQueueRequest {
     /**
      * The URL of the queue from which the PurgeQueue action deletes messages. Queue URLs and names are case-sensitive.
@@ -639,15 +640,15 @@ declare namespace SQS {
     /**
      * The maximum number of messages to return. Amazon SQS never returns more messages than this value (however, fewer messages might be returned). Valid values: 1 to 10. Default: 1.
      */
-    MaxNumberOfMessages?: Integer;
+    MaxNumberOfMessages?: NullableInteger;
     /**
      * The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request.
      */
-    VisibilityTimeout?: Integer;
+    VisibilityTimeout?: NullableInteger;
     /**
      * The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than WaitTimeSeconds. If no messages are available and the wait time expires, the call returns successfully with an empty list of messages.  To avoid HTTP errors, ensure that the HTTP response timeout for ReceiveMessage requests is longer than the WaitTimeSeconds parameter. For example, with the Java SDK, you can set HTTP transport settings using the  NettyNioAsyncHttpClient for asynchronous clients, or the  ApacheHttpClient for synchronous clients.  
      */
-    WaitTimeSeconds?: Integer;
+    WaitTimeSeconds?: NullableInteger;
     /**
      * This parameter applies only to FIFO (first-in-first-out) queues. The token used for deduplication of ReceiveMessage calls. If a networking issue occurs after a ReceiveMessage action, and instead of a response you receive a generic error, it is possible to retry the same action with an identical ReceiveRequestAttemptId to retrieve the same set of messages, even if their visibility timeout has not yet expired.   You can use ReceiveRequestAttemptId only for 5 minutes after a ReceiveMessage action.   When you set FifoQueue, a caller of the ReceiveMessage action can provide a ReceiveRequestAttemptId explicitly.   If a caller of the ReceiveMessage action doesn't provide a ReceiveRequestAttemptId, Amazon SQS generates a ReceiveRequestAttemptId.   It is possible to retry the ReceiveMessage action with the same ReceiveRequestAttemptId if none of the messages have been modified (deleted or had their visibility changes).   During a visibility timeout, subsequent calls with the same ReceiveRequestAttemptId return the same messages and receipt handles. If a retry occurs within the deduplication interval, it resets the visibility timeout. For more information, see Visibility Timeout in the Amazon SQS Developer Guide.  If a caller of the ReceiveMessage action still processes messages when the visibility timeout expires and messages become visible, another worker consuming from the same queue can receive the same messages and therefore process duplicates. Also, if a consumer whose message processing time is longer than the visibility timeout tries to delete the processed messages, the action fails with an error. To mitigate this effect, ensure that your application observes a safe threshold before the visibility timeout expires and extend the visibility timeout as necessary.    While messages with a particular MessageGroupId are invisible, no more messages belonging to the same MessageGroupId are returned until the visibility timeout expires. You can still receive messages with another MessageGroupId as long as it is also visible.   If a caller of ReceiveMessage can't track the ReceiveRequestAttemptId, no retries work until the original visibility timeout expires. As a result, delays might occur but the messages in the queue remain in a strict order.   The maximum length of ReceiveRequestAttemptId is 128 characters. ReceiveRequestAttemptId can contain alphanumeric characters (a-z, A-Z, 0-9) and punctuation (!"#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~). For best practices of using ReceiveRequestAttemptId, see Using the ReceiveRequestAttemptId Request Parameter in the Amazon SQS Developer Guide.
      */
@@ -691,7 +692,7 @@ declare namespace SQS {
     /**
      * The length of time, in seconds, for which a specific message is delayed. Valid values: 0 to 900. Maximum: 15 minutes. Messages with a positive DelaySeconds value become available for processing after the delay period is finished. If you don't specify a value, the default value for the queue is applied.   When you set FifoQueue, you can't set DelaySeconds per message. You can set this parameter only on a queue level. 
      */
-    DelaySeconds?: Integer;
+    DelaySeconds?: NullableInteger;
     /**
      * Each message attribute consists of a Name, Type, and Value. For more information, see Amazon SQS message attributes in the Amazon SQS Developer Guide.
      */
@@ -759,7 +760,7 @@ declare namespace SQS {
     /**
      *  The length of time, in seconds, for which to delay a specific message. Valid values: 0 to 900. Maximum: 15 minutes. Messages with a positive DelaySeconds value become available for processing after the delay period is finished. If you don't specify a value, the default value for the queue applies.   When you set FifoQueue, you can't set DelaySeconds per message. You can set this parameter only on a queue level. 
      */
-    DelaySeconds?: Integer;
+    DelaySeconds?: NullableInteger;
     /**
      * Each message attribute consists of a Name, Type, and Value. For more information, see Amazon SQS message attributes in the Amazon SQS Developer Guide.
      */
@@ -821,7 +822,7 @@ declare namespace SQS {
     /**
      * The number of messages to be moved per second (the message movement rate). You can use this field to define a fixed message movement rate. The maximum value for messages per second is 500. If this field is left blank, the system will optimize the rate based on the queue message backlog size, which may vary throughout the duration of the message movement task.
      */
-    MaxNumberOfMessagesPerSecond?: Integer;
+    MaxNumberOfMessagesPerSecond?: NullableInteger;
   }
   export interface StartMessageMoveTaskResult {
     /**
@@ -845,6 +846,7 @@ declare namespace SQS {
     Tags: TagMap;
   }
   export type TagValue = string;
+  export type TaskStatus = "RUNNING"|"FAILED"|"CANCELLING"|"CANCELLED"|"COMPLETED"|string;
   export type Token = string;
   export interface UntagQueueRequest {
     /**

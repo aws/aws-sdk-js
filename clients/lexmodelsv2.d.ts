@@ -1331,6 +1331,10 @@ declare namespace LexModelsV2 {
      */
     enabled: Boolean;
     destination: AudioLogDestination;
+    /**
+     * The option to enable selective conversation log capture for audio.
+     */
+    selectiveLoggingEnabled?: BoxedBoolean;
   }
   export type AudioLogSettingsList = AudioLogSetting[];
   export type AudioRecognitionStrategy = "UseSlotValuesAsCustomVocabulary"|string;
@@ -7396,6 +7400,10 @@ declare namespace LexModelsV2 {
      */
     enabled: Boolean;
     destination: TextLogDestination;
+    /**
+     * The option to enable selective conversation log capture for text.
+     */
+    selectiveLoggingEnabled?: BoxedBoolean;
   }
   export type TextLogSettingsList = TextLogSetting[];
   export type TimeDimension = "Hours"|"Days"|"Weeks"|string;
