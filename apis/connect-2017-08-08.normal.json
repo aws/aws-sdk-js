@@ -13638,7 +13638,8 @@
         "WISDOM_ASSISTANT",
         "WISDOM_KNOWLEDGE_BASE",
         "CASES_DOMAIN",
-        "APPLICATION"
+        "APPLICATION",
+        "FILE_SCANNER"
       ]
     },
     "IntervalDetails": {
@@ -14448,6 +14449,12 @@
           "box": true,
           "location": "querystring",
           "locationName": "maxResults"
+        },
+        "IntegrationArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the integration.</p>",
+          "location": "querystring",
+          "locationName": "integrationArn"
         }
       }
     },

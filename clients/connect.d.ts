@@ -5759,7 +5759,7 @@ declare namespace Connect {
     SourceType?: SourceType;
   }
   export type IntegrationAssociationSummaryList = IntegrationAssociationSummary[];
-  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"CASES_DOMAIN"|"APPLICATION"|string;
+  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"CASES_DOMAIN"|"APPLICATION"|"FILE_SCANNER"|string;
   export interface IntervalDetails {
     /**
      * The timezone applied to requested metrics.
@@ -6215,6 +6215,10 @@ declare namespace Connect {
      * The maximum number of results to return per page.
      */
     MaxResults?: MaxResult100;
+    /**
+     * The Amazon Resource Name (ARN) of the integration.
+     */
+    IntegrationArn?: ARN;
   }
   export interface ListIntegrationAssociationsResponse {
     /**

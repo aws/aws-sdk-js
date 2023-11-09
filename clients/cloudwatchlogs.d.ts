@@ -28,6 +28,14 @@ declare class CloudWatchLogs extends Service {
    */
   cancelExportTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a delivery. A delivery is a connection between a logical delivery source and a logical delivery destination that you have already created. Only some Amazon Web Services services support being configured as a delivery source using this operation. These services are listed as Supported [V2 Permissions] in the table at Enabling logging from Amazon Web Services services.  A delivery destination can represent a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose. To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:   Create a delivery source, which is a logical object that represents the resource that is actually sending the logs. For more information, see PutDeliverySource.   Create a delivery destination, which is a logical object that represents the actual delivery destination. For more information, see PutDeliveryDestination.   If you are delivering logs cross-account, you must use PutDeliveryDestinationPolicy in the destination account to assign an IAM policy to the destination. This policy allows delivery to that destination.    Use CreateDelivery to create a delivery by pairing exactly one delivery source and one delivery destination.    You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination. You can't update an existing delivery. You can only create and delete deliveries.
+   */
+  createDelivery(params: CloudWatchLogs.Types.CreateDeliveryRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateDeliveryResponse) => void): Request<CloudWatchLogs.Types.CreateDeliveryResponse, AWSError>;
+  /**
+   * Creates a delivery. A delivery is a connection between a logical delivery source and a logical delivery destination that you have already created. Only some Amazon Web Services services support being configured as a delivery source using this operation. These services are listed as Supported [V2 Permissions] in the table at Enabling logging from Amazon Web Services services.  A delivery destination can represent a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose. To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:   Create a delivery source, which is a logical object that represents the resource that is actually sending the logs. For more information, see PutDeliverySource.   Create a delivery destination, which is a logical object that represents the actual delivery destination. For more information, see PutDeliveryDestination.   If you are delivering logs cross-account, you must use PutDeliveryDestinationPolicy in the destination account to assign an IAM policy to the destination. This policy allows delivery to that destination.    Use CreateDelivery to create a delivery by pairing exactly one delivery source and one delivery destination.    You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination. You can't update an existing delivery. You can only create and delete deliveries.
+   */
+  createDelivery(callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateDeliveryResponse) => void): Request<CloudWatchLogs.Types.CreateDeliveryResponse, AWSError>;
+  /**
    * Creates an export task so that you can efficiently export data from a log group to an Amazon S3 bucket. When you perform a CreateExportTask operation, you must use credentials that have permission to write to the S3 bucket that you specify as the destination. Exporting log data to S3 buckets that are encrypted by KMS is supported. Exporting log data to Amazon S3 buckets that have S3 Object Lock enabled with a retention period is also supported. Exporting to S3 buckets that are encrypted with AES-256 is supported.  This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate log data for each export task, specify a prefix to be used as the Amazon S3 key prefix for all exported objects.  Time-based sorting on chunks of log data inside an exported file is not guaranteed. You can sort the exported log field data by using Linux utilities. 
    */
   createExportTask(params: CloudWatchLogs.Types.CreateExportTaskRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateExportTaskResponse) => void): Request<CloudWatchLogs.Types.CreateExportTaskResponse, AWSError>;
@@ -67,6 +75,38 @@ declare class CloudWatchLogs extends Service {
    * Deletes the data protection policy from the specified log group.  For more information about data protection policies, see PutDataProtectionPolicy.
    */
   deleteDataProtectionPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes s delivery. A delivery is a connection between a logical delivery source and a logical delivery destination. Deleting a delivery only deletes the connection between the delivery source and delivery destination. It does not delete the delivery destination or the delivery source.
+   */
+  deleteDelivery(params: CloudWatchLogs.Types.DeleteDeliveryRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes s delivery. A delivery is a connection between a logical delivery source and a logical delivery destination. Deleting a delivery only deletes the connection between the delivery source and delivery destination. It does not delete the delivery destination or the delivery source.
+   */
+  deleteDelivery(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a delivery destination. A delivery is a connection between a logical delivery source and a logical delivery destination. You can't delete a delivery destination if any current deliveries are associated with it. To find whether any deliveries are associated with this delivery destination, use the DescribeDeliveries operation and check the deliveryDestinationArn field in the results.
+   */
+  deleteDeliveryDestination(params: CloudWatchLogs.Types.DeleteDeliveryDestinationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a delivery destination. A delivery is a connection between a logical delivery source and a logical delivery destination. You can't delete a delivery destination if any current deliveries are associated with it. To find whether any deliveries are associated with this delivery destination, use the DescribeDeliveries operation and check the deliveryDestinationArn field in the results.
+   */
+  deleteDeliveryDestination(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a delivery destination policy. For more information about these policies, see PutDeliveryDestinationPolicy.
+   */
+  deleteDeliveryDestinationPolicy(params: CloudWatchLogs.Types.DeleteDeliveryDestinationPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a delivery destination policy. For more information about these policies, see PutDeliveryDestinationPolicy.
+   */
+  deleteDeliveryDestinationPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a delivery source. A delivery is a connection between a logical delivery source and a logical delivery destination. You can't delete a delivery source if any current deliveries are associated with it. To find whether any deliveries are associated with this delivery source, use the DescribeDeliveries operation and check the deliverySourceName field in the results.
+   */
+  deleteDeliverySource(params: CloudWatchLogs.Types.DeleteDeliverySourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a delivery source. A delivery is a connection between a logical delivery source and a logical delivery destination. You can't delete a delivery source if any current deliveries are associated with it. To find whether any deliveries are associated with this delivery source, use the DescribeDeliveries operation and check the deliverySourceName field in the results.
+   */
+  deleteDeliverySource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified destination, and eventually disables all the subscription filters that publish to it. This operation does not delete the physical resource encapsulated by the destination.
    */
@@ -139,6 +179,30 @@ declare class CloudWatchLogs extends Service {
    * Returns a list of all CloudWatch Logs account policies in the account.
    */
   describeAccountPolicies(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeAccountPoliciesResponse) => void): Request<CloudWatchLogs.Types.DescribeAccountPoliciesResponse, AWSError>;
+  /**
+   * Retrieves a list of the deliveries that have been created in the account.
+   */
+  describeDeliveries(params: CloudWatchLogs.Types.DescribeDeliveriesRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeDeliveriesResponse) => void): Request<CloudWatchLogs.Types.DescribeDeliveriesResponse, AWSError>;
+  /**
+   * Retrieves a list of the deliveries that have been created in the account.
+   */
+  describeDeliveries(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeDeliveriesResponse) => void): Request<CloudWatchLogs.Types.DescribeDeliveriesResponse, AWSError>;
+  /**
+   * Retrieves a list of the delivery destinations that have been created in the account.
+   */
+  describeDeliveryDestinations(params: CloudWatchLogs.Types.DescribeDeliveryDestinationsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeDeliveryDestinationsResponse) => void): Request<CloudWatchLogs.Types.DescribeDeliveryDestinationsResponse, AWSError>;
+  /**
+   * Retrieves a list of the delivery destinations that have been created in the account.
+   */
+  describeDeliveryDestinations(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeDeliveryDestinationsResponse) => void): Request<CloudWatchLogs.Types.DescribeDeliveryDestinationsResponse, AWSError>;
+  /**
+   * Retrieves a list of the delivery sources that have been created in the account.
+   */
+  describeDeliverySources(params: CloudWatchLogs.Types.DescribeDeliverySourcesRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeDeliverySourcesResponse) => void): Request<CloudWatchLogs.Types.DescribeDeliverySourcesResponse, AWSError>;
+  /**
+   * Retrieves a list of the delivery sources that have been created in the account.
+   */
+  describeDeliverySources(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeDeliverySourcesResponse) => void): Request<CloudWatchLogs.Types.DescribeDeliverySourcesResponse, AWSError>;
   /**
    * Lists all your destinations. The results are ASCII-sorted by destination name.
    */
@@ -236,6 +300,38 @@ declare class CloudWatchLogs extends Service {
    */
   getDataProtectionPolicy(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDataProtectionPolicyResponse) => void): Request<CloudWatchLogs.Types.GetDataProtectionPolicyResponse, AWSError>;
   /**
+   * Returns complete information about one delivery. A delivery is a connection between a logical delivery source and a logical delivery destination  You need to specify the delivery id in this operation. You can find the IDs of the deliveries in your account with the DescribeDeliveries operation.
+   */
+  getDelivery(params: CloudWatchLogs.Types.GetDeliveryRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliveryResponse) => void): Request<CloudWatchLogs.Types.GetDeliveryResponse, AWSError>;
+  /**
+   * Returns complete information about one delivery. A delivery is a connection between a logical delivery source and a logical delivery destination  You need to specify the delivery id in this operation. You can find the IDs of the deliveries in your account with the DescribeDeliveries operation.
+   */
+  getDelivery(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliveryResponse) => void): Request<CloudWatchLogs.Types.GetDeliveryResponse, AWSError>;
+  /**
+   * Retrieves complete information about one delivery destination.
+   */
+  getDeliveryDestination(params: CloudWatchLogs.Types.GetDeliveryDestinationRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliveryDestinationResponse) => void): Request<CloudWatchLogs.Types.GetDeliveryDestinationResponse, AWSError>;
+  /**
+   * Retrieves complete information about one delivery destination.
+   */
+  getDeliveryDestination(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliveryDestinationResponse) => void): Request<CloudWatchLogs.Types.GetDeliveryDestinationResponse, AWSError>;
+  /**
+   * Retrieves the delivery destination policy assigned to the delivery destination that you specify. For more information about delivery destinations and their policies, see PutDeliveryDestinationPolicy.
+   */
+  getDeliveryDestinationPolicy(params: CloudWatchLogs.Types.GetDeliveryDestinationPolicyRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliveryDestinationPolicyResponse) => void): Request<CloudWatchLogs.Types.GetDeliveryDestinationPolicyResponse, AWSError>;
+  /**
+   * Retrieves the delivery destination policy assigned to the delivery destination that you specify. For more information about delivery destinations and their policies, see PutDeliveryDestinationPolicy.
+   */
+  getDeliveryDestinationPolicy(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliveryDestinationPolicyResponse) => void): Request<CloudWatchLogs.Types.GetDeliveryDestinationPolicyResponse, AWSError>;
+  /**
+   * Retrieves complete information about one delivery source.
+   */
+  getDeliverySource(params: CloudWatchLogs.Types.GetDeliverySourceRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliverySourceResponse) => void): Request<CloudWatchLogs.Types.GetDeliverySourceResponse, AWSError>;
+  /**
+   * Retrieves complete information about one delivery source.
+   */
+  getDeliverySource(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetDeliverySourceResponse) => void): Request<CloudWatchLogs.Types.GetDeliverySourceResponse, AWSError>;
+  /**
    * Lists log events from the specified log stream. You can list all of the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call. This operation can return empty results while there are more log events available through the token. If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and view data from the linked source accounts. For more information, see CloudWatch cross-account observability. You can specify the log group to search by using either logGroupIdentifier or logGroupName. You must include one of these two parameters, but you can't include both. 
    */
   getLogEvents(params: CloudWatchLogs.Types.GetLogEventsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogEventsResponse) => void): Request<CloudWatchLogs.Types.GetLogEventsResponse, AWSError>;
@@ -260,11 +356,11 @@ declare class CloudWatchLogs extends Service {
    */
   getLogRecord(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogRecordResponse) => void): Request<CloudWatchLogs.Types.GetLogRecordResponse, AWSError>;
   /**
-   * Returns the results from the specified query. Only the fields requested in the query are returned, along with a @ptr field, which is the identifier for the log record. You can use the value of @ptr in a GetLogRecord operation to get the full log record.  GetQueryResults does not start running a query. To run a query, use StartQuery. If the value of the Status field in the output is Running, this operation returns only partial results. If you see a value of Scheduled or Running for the status, you can retry the operation later to see the final results.  If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account to start queries in linked source accounts. For more information, see CloudWatch cross-account observability.
+   * Returns the results from the specified query. Only the fields requested in the query are returned, along with a @ptr field, which is the identifier for the log record. You can use the value of @ptr in a GetLogRecord operation to get the full log record.  GetQueryResults does not start running a query. To run a query, use StartQuery. For more information about how long results of previous queries are available, see CloudWatch Logs quotas. If the value of the Status field in the output is Running, this operation returns only partial results. If you see a value of Scheduled or Running for the status, you can retry the operation later to see the final results.  If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account to start queries in linked source accounts. For more information, see CloudWatch cross-account observability.
    */
   getQueryResults(params: CloudWatchLogs.Types.GetQueryResultsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetQueryResultsResponse) => void): Request<CloudWatchLogs.Types.GetQueryResultsResponse, AWSError>;
   /**
-   * Returns the results from the specified query. Only the fields requested in the query are returned, along with a @ptr field, which is the identifier for the log record. You can use the value of @ptr in a GetLogRecord operation to get the full log record.  GetQueryResults does not start running a query. To run a query, use StartQuery. If the value of the Status field in the output is Running, this operation returns only partial results. If you see a value of Scheduled or Running for the status, you can retry the operation later to see the final results.  If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account to start queries in linked source accounts. For more information, see CloudWatch cross-account observability.
+   * Returns the results from the specified query. Only the fields requested in the query are returned, along with a @ptr field, which is the identifier for the log record. You can use the value of @ptr in a GetLogRecord operation to get the full log record.  GetQueryResults does not start running a query. To run a query, use StartQuery. For more information about how long results of previous queries are available, see CloudWatch Logs quotas. If the value of the Status field in the output is Running, this operation returns only partial results. If you see a value of Scheduled or Running for the status, you can retry the operation later to see the final results.  If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account to start queries in linked source accounts. For more information, see CloudWatch cross-account observability.
    */
   getQueryResults(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetQueryResultsResponse) => void): Request<CloudWatchLogs.Types.GetQueryResultsResponse, AWSError>;
   /**
@@ -299,6 +395,30 @@ declare class CloudWatchLogs extends Service {
    * Creates a data protection policy for the specified log group. A data protection policy can help safeguard sensitive data that's ingested by the log group by auditing and masking the sensitive log data.  Sensitive data is detected and masked when it is ingested into the log group. When you set a data protection policy, log events ingested into the log group before that time are not masked.  By default, when a user views a log event that includes masked data, the sensitive data is replaced by asterisks. A user who has the logs:Unmask permission can use a GetLogEvents or FilterLogEvents operation with the unmask parameter set to true to view the unmasked log events. Users with the logs:Unmask can also view unmasked data in the CloudWatch Logs console by running a CloudWatch Logs Insights query with the unmask query command. For more information, including a list of types of data that can be audited and masked, see Protect sensitive log data with masking. The PutDataProtectionPolicy operation applies to only the specified log group. You can also use PutAccountPolicy to create an account-level data protection policy that applies to all log groups in the account, including both existing log groups and log groups that are created level. If a log group has its own data protection policy and the account also has an account-level data protection policy, then the two policies are cumulative. Any sensitive term specified in either policy is masked.
    */
   putDataProtectionPolicy(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDataProtectionPolicyResponse) => void): Request<CloudWatchLogs.Types.PutDataProtectionPolicyResponse, AWSError>;
+  /**
+   * Creates or updates a logical delivery destination. A delivery destination is an Amazon Web Services resource that represents an Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3, and Kinesis Data Firehose are supported as logs delivery destinations. To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:   Create a delivery source, which is a logical object that represents the resource that is actually sending the logs. For more information, see PutDeliverySource.   Use PutDeliveryDestination to create a delivery destination, which is a logical object that represents the actual delivery destination.    If you are delivering logs cross-account, you must use PutDeliveryDestinationPolicy in the destination account to assign an IAM policy to the destination. This policy allows delivery to that destination.    Use CreateDelivery to create a delivery by pairing exactly one delivery source and one delivery destination. For more information, see CreateDelivery.    You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination. Only some Amazon Web Services services support being configured as a delivery source. These services are listed as Supported [V2 Permissions] in the table at Enabling logging from Amazon Web Services services.  If you use this operation to update an existing delivery destination, all the current delivery destination parameters are overwritten with the new parameter values that you specify.
+   */
+  putDeliveryDestination(params: CloudWatchLogs.Types.PutDeliveryDestinationRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDeliveryDestinationResponse) => void): Request<CloudWatchLogs.Types.PutDeliveryDestinationResponse, AWSError>;
+  /**
+   * Creates or updates a logical delivery destination. A delivery destination is an Amazon Web Services resource that represents an Amazon Web Services service that logs can be sent to. CloudWatch Logs, Amazon S3, and Kinesis Data Firehose are supported as logs delivery destinations. To configure logs delivery between a supported Amazon Web Services service and a destination, you must do the following:   Create a delivery source, which is a logical object that represents the resource that is actually sending the logs. For more information, see PutDeliverySource.   Use PutDeliveryDestination to create a delivery destination, which is a logical object that represents the actual delivery destination.    If you are delivering logs cross-account, you must use PutDeliveryDestinationPolicy in the destination account to assign an IAM policy to the destination. This policy allows delivery to that destination.    Use CreateDelivery to create a delivery by pairing exactly one delivery source and one delivery destination. For more information, see CreateDelivery.    You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination. Only some Amazon Web Services services support being configured as a delivery source. These services are listed as Supported [V2 Permissions] in the table at Enabling logging from Amazon Web Services services.  If you use this operation to update an existing delivery destination, all the current delivery destination parameters are overwritten with the new parameter values that you specify.
+   */
+  putDeliveryDestination(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDeliveryDestinationResponse) => void): Request<CloudWatchLogs.Types.PutDeliveryDestinationResponse, AWSError>;
+  /**
+   * Creates and assigns an IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account. To configure the delivery of logs from an Amazon Web Services service in another account to a logs delivery destination in the current account, you must do the following:   Create a delivery source, which is a logical object that represents the resource that is actually sending the logs. For more information, see PutDeliverySource.   Create a delivery destination, which is a logical object that represents the actual delivery destination. For more information, see PutDeliveryDestination.   Use this operation in the destination account to assign an IAM policy to the destination. This policy allows delivery to that destination.    Create a delivery by pairing exactly one delivery source and one delivery destination. For more information, see CreateDelivery.   Only some Amazon Web Services services support being configured as a delivery source. These services are listed as Supported [V2 Permissions] in the table at Enabling logging from Amazon Web Services services.  The contents of the policy must include two statements. One statement enables general logs delivery, and the other allows delivery to the chosen destination. See the examples for the needed policies.
+   */
+  putDeliveryDestinationPolicy(params: CloudWatchLogs.Types.PutDeliveryDestinationPolicyRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDeliveryDestinationPolicyResponse) => void): Request<CloudWatchLogs.Types.PutDeliveryDestinationPolicyResponse, AWSError>;
+  /**
+   * Creates and assigns an IAM policy that grants permissions to CloudWatch Logs to deliver logs cross-account to a specified destination in this account. To configure the delivery of logs from an Amazon Web Services service in another account to a logs delivery destination in the current account, you must do the following:   Create a delivery source, which is a logical object that represents the resource that is actually sending the logs. For more information, see PutDeliverySource.   Create a delivery destination, which is a logical object that represents the actual delivery destination. For more information, see PutDeliveryDestination.   Use this operation in the destination account to assign an IAM policy to the destination. This policy allows delivery to that destination.    Create a delivery by pairing exactly one delivery source and one delivery destination. For more information, see CreateDelivery.   Only some Amazon Web Services services support being configured as a delivery source. These services are listed as Supported [V2 Permissions] in the table at Enabling logging from Amazon Web Services services.  The contents of the policy must include two statements. One statement enables general logs delivery, and the other allows delivery to the chosen destination. See the examples for the needed policies.
+   */
+  putDeliveryDestinationPolicy(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDeliveryDestinationPolicyResponse) => void): Request<CloudWatchLogs.Types.PutDeliveryDestinationPolicyResponse, AWSError>;
+  /**
+   * Creates or updates a logical delivery source. A delivery source represents an Amazon Web Services resource that sends logs to an logs delivery destination. The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose. To configure logs delivery between a delivery destination and an Amazon Web Services service that is supported as a delivery source, you must do the following:   Use PutDeliverySource to create a delivery source, which is a logical object that represents the resource that is actually sending the logs.    Use PutDeliveryDestination to create a delivery destination, which is a logical object that represents the actual delivery destination. For more information, see PutDeliveryDestination.   If you are delivering logs cross-account, you must use PutDeliveryDestinationPolicy in the destination account to assign an IAM policy to the destination. This policy allows delivery to that destination.    Use CreateDelivery to create a delivery by pairing exactly one delivery source and one delivery destination. For more information, see CreateDelivery.    You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination. Only some Amazon Web Services services support being configured as a delivery source. These services are listed as Supported [V2 Permissions] in the table at Enabling logging from Amazon Web Services services.  If you use this operation to update an existing delivery source, all the current delivery source parameters are overwritten with the new parameter values that you specify.
+   */
+  putDeliverySource(params: CloudWatchLogs.Types.PutDeliverySourceRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDeliverySourceResponse) => void): Request<CloudWatchLogs.Types.PutDeliverySourceResponse, AWSError>;
+  /**
+   * Creates or updates a logical delivery source. A delivery source represents an Amazon Web Services resource that sends logs to an logs delivery destination. The destination can be CloudWatch Logs, Amazon S3, or Kinesis Data Firehose. To configure logs delivery between a delivery destination and an Amazon Web Services service that is supported as a delivery source, you must do the following:   Use PutDeliverySource to create a delivery source, which is a logical object that represents the resource that is actually sending the logs.    Use PutDeliveryDestination to create a delivery destination, which is a logical object that represents the actual delivery destination. For more information, see PutDeliveryDestination.   If you are delivering logs cross-account, you must use PutDeliveryDestinationPolicy in the destination account to assign an IAM policy to the destination. This policy allows delivery to that destination.    Use CreateDelivery to create a delivery by pairing exactly one delivery source and one delivery destination. For more information, see CreateDelivery.    You can configure a single delivery source to send logs to multiple destinations by creating multiple deliveries. You can also create multiple deliveries to configure multiple delivery sources to send logs to the same delivery destination. Only some Amazon Web Services services support being configured as a delivery source. These services are listed as Supported [V2 Permissions] in the table at Enabling logging from Amazon Web Services services.  If you use this operation to update an existing delivery source, all the current delivery source parameters are overwritten with the new parameter values that you specify.
+   */
+  putDeliverySource(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDeliverySourceResponse) => void): Request<CloudWatchLogs.Types.PutDeliverySourceResponse, AWSError>;
   /**
    * Creates or updates a destination. This operation is used only to create destinations for cross-account subscriptions. A destination encapsulates a physical resource (such as an Amazon Kinesis stream). With a destination, you can subscribe to a real-time stream of log events for a different account, ingested using PutLogEvents. Through an access policy, a destination controls what is written to it. By default, PutDestination does not set any access policy with the destination, which means a cross-account user cannot call PutSubscriptionFilter against this destination. To enable this, the destination owner must call PutDestinationPolicy after PutDestination. To perform a PutDestination operation, you must also have the iam:PassRole permission.
    */
@@ -475,6 +595,26 @@ declare namespace CloudWatchLogs {
     taskId: ExportTaskId;
   }
   export type ClientToken = string;
+  export interface CreateDeliveryRequest {
+    /**
+     * The name of the delivery source to use for this delivery.
+     */
+    deliverySourceName: DeliverySourceName;
+    /**
+     * The ARN of the delivery destination to use for this delivery.
+     */
+    deliveryDestinationArn: Arn;
+    /**
+     * An optional list of key-value pairs to associate with the resource. For more information about tagging, see Tagging Amazon Web Services resources 
+     */
+    tags?: Tags;
+  }
+  export interface CreateDeliveryResponse {
+    /**
+     * A structure that contains information about the delivery that you just created.
+     */
+    delivery?: Delivery;
+  }
   export interface CreateExportTaskRequest {
     /**
      * The name of the export task.
@@ -555,6 +695,30 @@ declare namespace CloudWatchLogs {
      */
     logGroupIdentifier: LogGroupIdentifier;
   }
+  export interface DeleteDeliveryDestinationPolicyRequest {
+    /**
+     * The name of the delivery destination that you want to delete the policy for.
+     */
+    deliveryDestinationName: DeliveryDestinationName;
+  }
+  export interface DeleteDeliveryDestinationRequest {
+    /**
+     * The name of the delivery destination that you want to delete. You can find a list of delivery destionation names by using the DescribeDeliveryDestinations operation.
+     */
+    name: DeliveryDestinationName;
+  }
+  export interface DeleteDeliveryRequest {
+    /**
+     * The unique ID of the delivery to delete. You can find the ID of a delivery with the DescribeDeliveries operation.
+     */
+    id: DeliveryId;
+  }
+  export interface DeleteDeliverySourceRequest {
+    /**
+     * The name of the delivery source that you want to delete.
+     */
+    name: DeliverySourceName;
+  }
   export interface DeleteDestinationRequest {
     /**
      * The name of the destination.
@@ -621,6 +785,98 @@ declare namespace CloudWatchLogs {
      */
     filterName: FilterName;
   }
+  export type Deliveries = Delivery[];
+  export interface Delivery {
+    /**
+     * The unique ID that identifies this delivery in your account.
+     */
+    id?: DeliveryId;
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies this delivery.
+     */
+    arn?: Arn;
+    /**
+     * The name of the delivery source that is associated with this delivery.
+     */
+    deliverySourceName?: DeliverySourceName;
+    /**
+     * The ARN of the delivery destination that is associated with this delivery.
+     */
+    deliveryDestinationArn?: Arn;
+    /**
+     * Displays whether the delivery destination associated with this delivery is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+     */
+    deliveryDestinationType?: DeliveryDestinationType;
+    /**
+     * The tags that have been assigned to this delivery.
+     */
+    tags?: Tags;
+  }
+  export interface DeliveryDestination {
+    /**
+     * The name of this delivery destination.
+     */
+    name?: DeliveryDestinationName;
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies this delivery destination.
+     */
+    arn?: Arn;
+    /**
+     * Displays whether this delivery destination is CloudWatch Logs, Amazon S3, or Kinesis Data Firehose.
+     */
+    deliveryDestinationType?: DeliveryDestinationType;
+    /**
+     * The format of the logs that are sent to this delivery destination. 
+     */
+    outputFormat?: OutputFormat;
+    /**
+     * A structure that contains the ARN of the Amazon Web Services resource that will receive the logs.
+     */
+    deliveryDestinationConfiguration?: DeliveryDestinationConfiguration;
+    /**
+     * The tags that have been assigned to this delivery destination.
+     */
+    tags?: Tags;
+  }
+  export interface DeliveryDestinationConfiguration {
+    /**
+     * The ARN of the Amazon Web Services destination that this delivery destination represents. That Amazon Web Services destination can be a log group in CloudWatch Logs, an Amazon S3 bucket, or a delivery stream in Kinesis Data Firehose.
+     */
+    destinationResourceArn: Arn;
+  }
+  export type DeliveryDestinationName = string;
+  export type DeliveryDestinationPolicy = string;
+  export type DeliveryDestinationType = "S3"|"CWL"|"FH"|string;
+  export type DeliveryDestinations = DeliveryDestination[];
+  export type DeliveryId = string;
+  export interface DeliverySource {
+    /**
+     * The unique name of the delivery source.
+     */
+    name?: DeliverySourceName;
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies this delivery source.
+     */
+    arn?: Arn;
+    /**
+     * This array contains the ARN of the Amazon Web Services resource that sends logs and is represented by this delivery source. Currently, only one ARN can be in the array.
+     */
+    resourceArns?: ResourceArns;
+    /**
+     * The Amazon Web Services service that is sending logs.
+     */
+    service?: Service;
+    /**
+     * The type of log that the source is sending. For valid values for this parameter, see the documentation for the source service.
+     */
+    logType?: LogType;
+    /**
+     * The tags that have been assigned to this delivery source.
+     */
+    tags?: Tags;
+  }
+  export type DeliverySourceName = string;
+  export type DeliverySources = DeliverySource[];
   export type Descending = boolean;
   export interface DescribeAccountPoliciesRequest {
     /**
@@ -641,6 +897,48 @@ declare namespace CloudWatchLogs {
      * An array of structures that contain information about the CloudWatch Logs account policies that match the specified filters.
      */
     accountPolicies?: AccountPolicies;
+  }
+  export interface DescribeDeliveriesRequest {
+    nextToken?: NextToken;
+    /**
+     * Optionally specify the maximum number of deliveries to return in the response.
+     */
+    limit?: DescribeLimit;
+  }
+  export interface DescribeDeliveriesResponse {
+    /**
+     * An array of structures. Each structure contains information about one delivery in the account.
+     */
+    deliveries?: Deliveries;
+    nextToken?: NextToken;
+  }
+  export interface DescribeDeliveryDestinationsRequest {
+    nextToken?: NextToken;
+    /**
+     * Optionally specify the maximum number of delivery destinations to return in the response.
+     */
+    limit?: DescribeLimit;
+  }
+  export interface DescribeDeliveryDestinationsResponse {
+    /**
+     * An array of structures. Each structure contains information about one delivery destination in the account.
+     */
+    deliveryDestinations?: DeliveryDestinations;
+    nextToken?: NextToken;
+  }
+  export interface DescribeDeliverySourcesRequest {
+    nextToken?: NextToken;
+    /**
+     * Optionally specify the maximum number of delivery sources to return in the response.
+     */
+    limit?: DescribeLimit;
+  }
+  export interface DescribeDeliverySourcesResponse {
+    /**
+     * An array of structures. Each structure contains information about one delivery source in the account.
+     */
+    deliverySources?: DeliverySources;
+    nextToken?: NextToken;
   }
   export interface DescribeDestinationsRequest {
     /**
@@ -1094,6 +1392,54 @@ declare namespace CloudWatchLogs {
      */
     lastUpdatedTime?: Timestamp;
   }
+  export interface GetDeliveryDestinationPolicyRequest {
+    /**
+     * The name of the delivery destination that you want to retrieve the policy of.
+     */
+    deliveryDestinationName: DeliveryDestinationName;
+  }
+  export interface GetDeliveryDestinationPolicyResponse {
+    /**
+     * The IAM policy for this delivery destination.
+     */
+    policy?: Policy;
+  }
+  export interface GetDeliveryDestinationRequest {
+    /**
+     * The name of the delivery destination that you want to retrieve.
+     */
+    name: DeliveryDestinationName;
+  }
+  export interface GetDeliveryDestinationResponse {
+    /**
+     * A structure containing information about the delivery destination.
+     */
+    deliveryDestination?: DeliveryDestination;
+  }
+  export interface GetDeliveryRequest {
+    /**
+     * The ID of the delivery that you want to retrieve.
+     */
+    id: DeliveryId;
+  }
+  export interface GetDeliveryResponse {
+    /**
+     * A structure that contains information about the delivery.
+     */
+    delivery?: Delivery;
+  }
+  export interface GetDeliverySourceRequest {
+    /**
+     * The name of the delivery source that you want to retrieve.
+     */
+    name: DeliverySourceName;
+  }
+  export interface GetDeliverySourceResponse {
+    /**
+     * A structure containing information about the delivery source.
+     */
+    deliverySource?: DeliverySource;
+  }
   export interface GetLogEventsRequest {
     /**
      * The name of the log group.   You must include either logGroupIdentifier or logGroupName, but not both.  
@@ -1339,6 +1685,7 @@ declare namespace CloudWatchLogs {
   export type LogStreamName = string;
   export type LogStreamSearchedCompletely = boolean;
   export type LogStreams = LogStream[];
+  export type LogType = string;
   export interface MetricFilter {
     /**
      * The name of the metric filter.
@@ -1406,6 +1753,7 @@ declare namespace CloudWatchLogs {
   export type MetricValue = string;
   export type NextToken = string;
   export type OrderBy = "LogStreamName"|"LastEventTime"|string;
+  export type OutputFormat = "json"|"plain"|"w3c"|"raw"|"parquet"|string;
   export interface OutputLogEvent {
     /**
      * The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
@@ -1422,6 +1770,12 @@ declare namespace CloudWatchLogs {
   }
   export type OutputLogEvents = OutputLogEvent[];
   export type Percentage = number;
+  export interface Policy {
+    /**
+     * The contents of the delivery destination policy.
+     */
+    deliveryDestinationPolicy?: DeliveryDestinationPolicy;
+  }
   export type PolicyDocument = string;
   export type PolicyName = string;
   export type PolicyType = "DATA_PROTECTION_POLICY"|string;
@@ -1472,6 +1826,70 @@ declare namespace CloudWatchLogs {
      * The date and time that this policy was most recently updated.
      */
     lastUpdatedTime?: Timestamp;
+  }
+  export interface PutDeliveryDestinationPolicyRequest {
+    /**
+     * The name of the delivery destination to assign this policy to.
+     */
+    deliveryDestinationName: DeliveryDestinationName;
+    /**
+     * The contents of the policy.
+     */
+    deliveryDestinationPolicy: DeliveryDestinationPolicy;
+  }
+  export interface PutDeliveryDestinationPolicyResponse {
+    /**
+     * The contents of the policy that you just created.
+     */
+    policy?: Policy;
+  }
+  export interface PutDeliveryDestinationRequest {
+    /**
+     * A name for this delivery destination. This name must be unique for all delivery destinations in your account.
+     */
+    name: DeliveryDestinationName;
+    /**
+     * The format for the logs that this delivery destination will receive.
+     */
+    outputFormat?: OutputFormat;
+    /**
+     * A structure that contains the ARN of the Amazon Web Services resource that will receive the logs.
+     */
+    deliveryDestinationConfiguration: DeliveryDestinationConfiguration;
+    /**
+     * An optional list of key-value pairs to associate with the resource. For more information about tagging, see Tagging Amazon Web Services resources 
+     */
+    tags?: Tags;
+  }
+  export interface PutDeliveryDestinationResponse {
+    /**
+     * A structure containing information about the delivery destination that you just created or updated.
+     */
+    deliveryDestination?: DeliveryDestination;
+  }
+  export interface PutDeliverySourceRequest {
+    /**
+     * A name for this delivery source. This name must be unique for all delivery sources in your account.
+     */
+    name: DeliverySourceName;
+    /**
+     * The ARN of the Amazon Web Services resource that is generating and sending logs. For example, arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234 
+     */
+    resourceArn: Arn;
+    /**
+     * Defines the type of log that the source is sending. For valid values for this parameter, see the documentation for the source service.
+     */
+    logType: LogType;
+    /**
+     * An optional list of key-value pairs to associate with the resource. For more information about tagging, see Tagging Amazon Web Services resources 
+     */
+    tags?: Tags;
+  }
+  export interface PutDeliverySourceResponse {
+    /**
+     * A structure containing information about the delivery source that was just created or updated.
+     */
+    deliverySource?: DeliverySource;
   }
   export interface PutDestinationPolicyRequest {
     /**
@@ -1715,6 +2133,7 @@ declare namespace CloudWatchLogs {
      */
     expiredLogEventEndIndex?: LogEventIndex;
   }
+  export type ResourceArns = Arn[];
   export type ResourceIdentifier = string;
   export type ResourcePolicies = ResourcePolicy[];
   export interface ResourcePolicy {
@@ -1756,6 +2175,7 @@ declare namespace CloudWatchLogs {
   }
   export type SearchedLogStreams = SearchedLogStream[];
   export type SequenceToken = string;
+  export type Service = string;
   export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
   export type StartFromHead = boolean;
   export interface StartQueryRequest {

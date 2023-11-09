@@ -3045,6 +3045,14 @@ declare class EC2 extends Service {
    */
   disableSerialConsoleAccess(callback?: (err: AWSError, data: EC2.Types.DisableSerialConsoleAccessResult) => void): Request<EC2.Types.DisableSerialConsoleAccessResult, AWSError>;
   /**
+   * Disables the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you disable block public access for snapshots in a Region, users can publicly share snapshots in that Region. If block public access is enabled in block-all-sharing mode, and you disable block public access, all snapshots that were previously publicly shared are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide . 
+   */
+  disableSnapshotBlockPublicAccess(params: EC2.Types.DisableSnapshotBlockPublicAccessRequest, callback?: (err: AWSError, data: EC2.Types.DisableSnapshotBlockPublicAccessResult) => void): Request<EC2.Types.DisableSnapshotBlockPublicAccessResult, AWSError>;
+  /**
+   * Disables the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you disable block public access for snapshots in a Region, users can publicly share snapshots in that Region. If block public access is enabled in block-all-sharing mode, and you disable block public access, all snapshots that were previously publicly shared are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide . 
+   */
+  disableSnapshotBlockPublicAccess(callback?: (err: AWSError, data: EC2.Types.DisableSnapshotBlockPublicAccessResult) => void): Request<EC2.Types.DisableSnapshotBlockPublicAccessResult, AWSError>;
+  /**
    * Disables the specified resource attachment from propagating routes to the specified propagation route table.
    */
   disableTransitGatewayRouteTablePropagation(params: EC2.Types.DisableTransitGatewayRouteTablePropagationRequest, callback?: (err: AWSError, data: EC2.Types.DisableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.DisableTransitGatewayRouteTablePropagationResult, AWSError>;
@@ -3276,6 +3284,14 @@ declare class EC2 extends Service {
    * Enables access to the EC2 serial console of all instances for your account. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
   enableSerialConsoleAccess(callback?: (err: AWSError, data: EC2.Types.EnableSerialConsoleAccessResult) => void): Request<EC2.Types.EnableSerialConsoleAccessResult, AWSError>;
+  /**
+   * Enables or modifies the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you enable block public access for snapshots in a Region, users can no longer request public sharing for snapshots in that Region. Snapshots that are already publicly shared are either treated as private or they remain publicly shared, depending on the State that you specify. If block public access is enabled in block-all-sharing mode, and you change the mode to block-new-sharing, all snapshots that were previously publicly shared are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide.
+   */
+  enableSnapshotBlockPublicAccess(params: EC2.Types.EnableSnapshotBlockPublicAccessRequest, callback?: (err: AWSError, data: EC2.Types.EnableSnapshotBlockPublicAccessResult) => void): Request<EC2.Types.EnableSnapshotBlockPublicAccessResult, AWSError>;
+  /**
+   * Enables or modifies the block public access for snapshots setting at the account level for the specified Amazon Web Services Region. After you enable block public access for snapshots in a Region, users can no longer request public sharing for snapshots in that Region. Snapshots that are already publicly shared are either treated as private or they remain publicly shared, depending on the State that you specify. If block public access is enabled in block-all-sharing mode, and you change the mode to block-new-sharing, all snapshots that were previously publicly shared are no longer treated as private and they become publicly accessible again. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide.
+   */
+  enableSnapshotBlockPublicAccess(callback?: (err: AWSError, data: EC2.Types.EnableSnapshotBlockPublicAccessResult) => void): Request<EC2.Types.EnableSnapshotBlockPublicAccessResult, AWSError>;
   /**
    * Enables the specified attachment to propagate routes to the specified propagation route table.
    */
@@ -3596,6 +3612,14 @@ declare class EC2 extends Service {
    * Retrieves the access status of your account to the EC2 serial console of all instances. By default, access to the EC2 serial console is disabled for your account. For more information, see Manage account access to the EC2 serial console in the Amazon EC2 User Guide.
    */
   getSerialConsoleAccessStatus(callback?: (err: AWSError, data: EC2.Types.GetSerialConsoleAccessStatusResult) => void): Request<EC2.Types.GetSerialConsoleAccessStatusResult, AWSError>;
+  /**
+   * Gets the current state of block public access for snapshots setting for the account and Region. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide.
+   */
+  getSnapshotBlockPublicAccessState(params: EC2.Types.GetSnapshotBlockPublicAccessStateRequest, callback?: (err: AWSError, data: EC2.Types.GetSnapshotBlockPublicAccessStateResult) => void): Request<EC2.Types.GetSnapshotBlockPublicAccessStateResult, AWSError>;
+  /**
+   * Gets the current state of block public access for snapshots setting for the account and Region. For more information, see  Block public access for snapshots in the Amazon Elastic Compute Cloud User Guide.
+   */
+  getSnapshotBlockPublicAccessState(callback?: (err: AWSError, data: EC2.Types.GetSnapshotBlockPublicAccessStateResult) => void): Request<EC2.Types.GetSnapshotBlockPublicAccessStateResult, AWSError>;
   /**
    * Calculates the Spot placement score for a Region or Availability Zone based on the specified target capacity and compute requirements. You can specify your compute requirements either by using InstanceRequirementsWithMetadata and letting Amazon EC2 choose the optimal instance types to fulfill your Spot request, or you can specify the instance types by using InstanceTypes. For more information, see Spot placement score in the Amazon EC2 User Guide.
    */
@@ -18321,6 +18345,18 @@ declare namespace EC2 {
      */
     SerialConsoleAccessEnabled?: Boolean;
   }
+  export interface DisableSnapshotBlockPublicAccessRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableSnapshotBlockPublicAccessResult {
+    /**
+     * Returns unblocked if the request succeeds.
+     */
+    State?: SnapshotBlockPublicAccessState;
+  }
   export interface DisableTransitGatewayRouteTablePropagationRequest {
     /**
      * The ID of the propagation route table.
@@ -19425,6 +19461,22 @@ declare namespace EC2 {
      * If true, access to the EC2 serial console of all instances is enabled for your account. If false, access to the EC2 serial console of all instances is disabled for your account.
      */
     SerialConsoleAccessEnabled?: Boolean;
+  }
+  export interface EnableSnapshotBlockPublicAccessRequest {
+    /**
+     * The mode in which to enable block public access for snapshots for the Region. Specify one of the following values:    block-all-sharing - Prevents all public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. Additionally, snapshots that are already publicly shared are treated as private and they are no longer publicly available.  If you enable block public access for snapshots in block-all-sharing mode, it does not change the permissions for snapshots that are already publicly shared. Instead, it prevents these snapshots from be publicly visible and publicly accessible. Therefore, the attributes for these snapshots still indicate that they are publicly shared, even though they are not publicly available.     block-new-sharing - Prevents only new public sharing of snapshots in the Region. Users in the account will no longer be able to request new public sharing. However, snapshots that are already publicly shared, remain publicly available.  
+     */
+    State: SnapshotBlockPublicAccessState;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableSnapshotBlockPublicAccessResult {
+    /**
+     * The state of block public access for snapshots for the account and Region. Returns either block-all-sharing or block-new-sharing if the request succeeds.
+     */
+    State?: SnapshotBlockPublicAccessState;
   }
   export interface EnableTransitGatewayRouteTablePropagationRequest {
     /**
@@ -21615,6 +21667,18 @@ declare namespace EC2 {
      * If true, access to the EC2 serial console of all instances is enabled for your account. If false, access to the EC2 serial console of all instances is disabled for your account.
      */
     SerialConsoleAccessEnabled?: Boolean;
+  }
+  export interface GetSnapshotBlockPublicAccessStateRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetSnapshotBlockPublicAccessStateResult {
+    /**
+     * The current state of block public access for snapshots. Possible values include:    block-all-sharing - All public sharing of snapshots is blocked. Users in the account can't request new public sharing. Additionally, snapshots that were already publicly shared are treated as private and are not publicly available.    block-new-sharing - Only new public sharing of snapshots is blocked. Users in the account can't request new public sharing. However, snapshots that were already publicly shared, remain publicly available.    unblocked - Public sharing is not blocked. Users can publicly share snapshots.  
+     */
+    State?: SnapshotBlockPublicAccessState;
   }
   export interface GetSpotPlacementScoresRequest {
     /**
@@ -34350,6 +34414,7 @@ declare namespace EC2 {
     SseType?: SSEType;
   }
   export type SnapshotAttributeName = "productCodes"|"createVolumePermission"|string;
+  export type SnapshotBlockPublicAccessState = "block-all-sharing"|"block-new-sharing"|"unblocked"|string;
   export interface SnapshotDetail {
     /**
      * A description for the snapshot.

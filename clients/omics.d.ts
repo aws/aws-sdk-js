@@ -1277,7 +1277,7 @@ declare namespace Omics {
     /**
      *  The ARN of the reference. 
      */
-    referenceArn: ReferenceArn;
+    referenceArn?: ReferenceArn;
     /**
      *  The name of the read set. 
      */
@@ -1839,7 +1839,7 @@ declare namespace Omics {
   export type FileInformationContentLengthLong = number;
   export type FileInformationPartSizeLong = number;
   export type FileInformationTotalPartsInteger = number;
-  export type FileType = "FASTQ"|"BAM"|"CRAM"|string;
+  export type FileType = "FASTQ"|"BAM"|"CRAM"|"UBAM"|string;
   export interface Filter {
     /**
      *  The Amazon Resource Number (Arn) for an analytics store. 
@@ -3862,7 +3862,7 @@ declare namespace Omics {
     /**
      * A genome reference ARN to filter on.
      */
-    referenceArn?: ReferenceArn;
+    referenceArn?: ReferenceArnFilter;
     /**
      * The filter's start date.
      */
@@ -3998,6 +3998,7 @@ declare namespace Omics {
   export type ReadSetUploadPartListItemPartNumberInteger = number;
   export type ReadSetUploadPartListItemPartSizeLong = number;
   export type ReferenceArn = string;
+  export type ReferenceArnFilter = string;
   export type ReferenceDescription = string;
   export type ReferenceFile = "SOURCE"|"INDEX"|string;
   export interface ReferenceFiles {
@@ -4573,7 +4574,7 @@ declare namespace Omics {
     /**
      * The source's reference ARN.
      */
-    referenceArn: ReferenceArn;
+    referenceArn?: ReferenceArn;
     /**
      * The source's name.
      */

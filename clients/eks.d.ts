@@ -45,6 +45,14 @@ declare class EKS extends Service {
    */
   createCluster(callback?: (err: AWSError, data: EKS.Types.CreateClusterResponse) => void): Request<EKS.Types.CreateClusterResponse, AWSError>;
   /**
+   * Creates an EKS Anywhere subscription. When a subscription is created, it is a contract agreement for the length of the term specified in the request. Licenses that are used to validate support are provisioned in Amazon Web Services License Manager and the caller account is granted access to EKS Anywhere Curated Packages.
+   */
+  createEksAnywhereSubscription(params: EKS.Types.CreateEksAnywhereSubscriptionRequest, callback?: (err: AWSError, data: EKS.Types.CreateEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.CreateEksAnywhereSubscriptionResponse, AWSError>;
+  /**
+   * Creates an EKS Anywhere subscription. When a subscription is created, it is a contract agreement for the length of the term specified in the request. Licenses that are used to validate support are provisioned in Amazon Web Services License Manager and the caller account is granted access to EKS Anywhere Curated Packages.
+   */
+  createEksAnywhereSubscription(callback?: (err: AWSError, data: EKS.Types.CreateEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.CreateEksAnywhereSubscriptionResponse, AWSError>;
+  /**
    * Creates an Fargate profile for your Amazon EKS cluster. You must have at least one Fargate profile in a cluster to be able to run pods on Fargate. The Fargate profile allows an administrator to declare which pods run on Fargate and specify which pods run on which Fargate profile. This declaration is done through the profile’s selectors. Each profile can have up to five selectors that contain a namespace and labels. A namespace is required for every selector. The label field consists of multiple optional key-value pairs. Pods that match the selectors are scheduled on Fargate. If a to-be-scheduled pod matches any of the selectors in the Fargate profile, then that pod is run on Fargate. When you create a Fargate profile, you must specify a pod execution role to use with the pods that are scheduled with the profile. This role is added to the cluster's Kubernetes Role Based Access Control (RBAC) for authorization so that the kubelet that is running on the Fargate infrastructure can register with your Amazon EKS cluster so that it can appear in your cluster as a node. The pod execution role also provides IAM permissions to the Fargate infrastructure to allow read access to Amazon ECR image repositories. For more information, see Pod Execution Role in the Amazon EKS User Guide. Fargate profiles are immutable. However, you can create a new updated profile to replace an existing profile and then delete the original after the updated profile has finished creating. If any Fargate profiles in a cluster are in the DELETING status, you must wait for that Fargate profile to finish deleting before you can create any other profiles in that cluster. For more information, see Fargate Profile in the Amazon EKS User Guide.
    */
   createFargateProfile(params: EKS.Types.CreateFargateProfileRequest, callback?: (err: AWSError, data: EKS.Types.CreateFargateProfileResponse) => void): Request<EKS.Types.CreateFargateProfileResponse, AWSError>;
@@ -53,11 +61,11 @@ declare class EKS extends Service {
    */
   createFargateProfile(callback?: (err: AWSError, data: EKS.Types.CreateFargateProfileResponse) => void): Request<EKS.Types.CreateFargateProfileResponse, AWSError>;
   /**
-   * Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. All node groups are created with the latest AMI release version for the respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using a launch template. For more information about using launch templates, see Launch template support. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see Managed node groups in the Amazon EKS User Guide.  Windows AMI types are only supported for commercial Regions that support Windows Amazon EKS. 
+   * Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see Managed node groups in the Amazon EKS User Guide.  Windows AMI types are only supported for commercial Regions that support Windows Amazon EKS. 
    */
   createNodegroup(params: EKS.Types.CreateNodegroupRequest, callback?: (err: AWSError, data: EKS.Types.CreateNodegroupResponse) => void): Request<EKS.Types.CreateNodegroupResponse, AWSError>;
   /**
-   * Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. All node groups are created with the latest AMI release version for the respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using a launch template. For more information about using launch templates, see Launch template support. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see Managed node groups in the Amazon EKS User Guide.  Windows AMI types are only supported for commercial Regions that support Windows Amazon EKS. 
+   * Creates a managed node group for an Amazon EKS cluster. You can only create a node group for your cluster that is equal to the current Kubernetes version for the cluster. An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS cluster. For more information, see Managed node groups in the Amazon EKS User Guide.  Windows AMI types are only supported for commercial Regions that support Windows Amazon EKS. 
    */
   createNodegroup(callback?: (err: AWSError, data: EKS.Types.CreateNodegroupResponse) => void): Request<EKS.Types.CreateNodegroupResponse, AWSError>;
   /**
@@ -76,6 +84,14 @@ declare class EKS extends Service {
    * Deletes the Amazon EKS cluster control plane. If you have active services in your cluster that are associated with a load balancer, you must delete those services before deleting the cluster so that the load balancers are deleted properly. Otherwise, you can have orphaned resources in your VPC that prevent you from being able to delete the VPC. For more information, see Deleting a Cluster in the Amazon EKS User Guide. If you have managed node groups or Fargate profiles attached to the cluster, you must delete them first. For more information, see DeleteNodegroup and DeleteFargateProfile.
    */
   deleteCluster(callback?: (err: AWSError, data: EKS.Types.DeleteClusterResponse) => void): Request<EKS.Types.DeleteClusterResponse, AWSError>;
+  /**
+   * Deletes an expired / inactive subscription. Deleting inactive subscriptions removes them from the Amazon Web Services Management Console view and from list/describe API responses. Subscriptions can only be cancelled within 7 days of creation, and are cancelled by creating a ticket in the Amazon Web Services Support Center. 
+   */
+  deleteEksAnywhereSubscription(params: EKS.Types.DeleteEksAnywhereSubscriptionRequest, callback?: (err: AWSError, data: EKS.Types.DeleteEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.DeleteEksAnywhereSubscriptionResponse, AWSError>;
+  /**
+   * Deletes an expired / inactive subscription. Deleting inactive subscriptions removes them from the Amazon Web Services Management Console view and from list/describe API responses. Subscriptions can only be cancelled within 7 days of creation, and are cancelled by creating a ticket in the Amazon Web Services Support Center. 
+   */
+  deleteEksAnywhereSubscription(callback?: (err: AWSError, data: EKS.Types.DeleteEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.DeleteEksAnywhereSubscriptionResponse, AWSError>;
   /**
    * Deletes an Fargate profile. When you delete a Fargate profile, any pods running on Fargate that were created with the profile are deleted. If those pods match another Fargate profile, then they are scheduled on Fargate with that profile. If they no longer match any Fargate profiles, then they are not scheduled on Fargate and they may remain in a pending state. Only one Fargate profile in a cluster can be in the DELETING status at a time. You must wait for a Fargate profile to finish deleting before you can delete any other profiles in that cluster.
    */
@@ -133,6 +149,14 @@ declare class EKS extends Service {
    */
   describeCluster(callback?: (err: AWSError, data: EKS.Types.DescribeClusterResponse) => void): Request<EKS.Types.DescribeClusterResponse, AWSError>;
   /**
+   * Returns descriptive information about a subscription.
+   */
+  describeEksAnywhereSubscription(params: EKS.Types.DescribeEksAnywhereSubscriptionRequest, callback?: (err: AWSError, data: EKS.Types.DescribeEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.DescribeEksAnywhereSubscriptionResponse, AWSError>;
+  /**
+   * Returns descriptive information about a subscription.
+   */
+  describeEksAnywhereSubscription(callback?: (err: AWSError, data: EKS.Types.DescribeEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.DescribeEksAnywhereSubscriptionResponse, AWSError>;
+  /**
    * Returns descriptive information about an Fargate profile.
    */
   describeFargateProfile(params: EKS.Types.DescribeFargateProfileRequest, callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
@@ -165,19 +189,19 @@ declare class EKS extends Service {
    */
   describeUpdate(callback?: (err: AWSError, data: EKS.Types.DescribeUpdateResponse) => void): Request<EKS.Types.DescribeUpdateResponse, AWSError>;
   /**
-   * Disassociates an identity provider configuration from a cluster. If you disassociate an identity provider from your cluster, users included in the provider can no longer access the cluster. However, you can still access the cluster with Amazon Web Services IAM users.
+   * Disassociates an identity provider configuration from a cluster. If you disassociate an identity provider from your cluster, users included in the provider can no longer access the cluster. However, you can still access the cluster with IAM principals.
    */
   disassociateIdentityProviderConfig(params: EKS.Types.DisassociateIdentityProviderConfigRequest, callback?: (err: AWSError, data: EKS.Types.DisassociateIdentityProviderConfigResponse) => void): Request<EKS.Types.DisassociateIdentityProviderConfigResponse, AWSError>;
   /**
-   * Disassociates an identity provider configuration from a cluster. If you disassociate an identity provider from your cluster, users included in the provider can no longer access the cluster. However, you can still access the cluster with Amazon Web Services IAM users.
+   * Disassociates an identity provider configuration from a cluster. If you disassociate an identity provider from your cluster, users included in the provider can no longer access the cluster. However, you can still access the cluster with IAM principals.
    */
   disassociateIdentityProviderConfig(callback?: (err: AWSError, data: EKS.Types.DisassociateIdentityProviderConfigResponse) => void): Request<EKS.Types.DisassociateIdentityProviderConfigResponse, AWSError>;
   /**
-   * Lists the available add-ons.
+   * Lists the installed add-ons.
    */
   listAddons(params: EKS.Types.ListAddonsRequest, callback?: (err: AWSError, data: EKS.Types.ListAddonsResponse) => void): Request<EKS.Types.ListAddonsResponse, AWSError>;
   /**
-   * Lists the available add-ons.
+   * Lists the installed add-ons.
    */
   listAddons(callback?: (err: AWSError, data: EKS.Types.ListAddonsResponse) => void): Request<EKS.Types.ListAddonsResponse, AWSError>;
   /**
@@ -188,6 +212,14 @@ declare class EKS extends Service {
    * Lists the Amazon EKS clusters in your Amazon Web Services account in the specified Region.
    */
   listClusters(callback?: (err: AWSError, data: EKS.Types.ListClustersResponse) => void): Request<EKS.Types.ListClustersResponse, AWSError>;
+  /**
+   * Displays the full description of the subscription.
+   */
+  listEksAnywhereSubscriptions(params: EKS.Types.ListEksAnywhereSubscriptionsRequest, callback?: (err: AWSError, data: EKS.Types.ListEksAnywhereSubscriptionsResponse) => void): Request<EKS.Types.ListEksAnywhereSubscriptionsResponse, AWSError>;
+  /**
+   * Displays the full description of the subscription.
+   */
+  listEksAnywhereSubscriptions(callback?: (err: AWSError, data: EKS.Types.ListEksAnywhereSubscriptionsResponse) => void): Request<EKS.Types.ListEksAnywhereSubscriptionsResponse, AWSError>;
   /**
    * Lists the Fargate profiles associated with the specified cluster in your Amazon Web Services account in the specified Region.
    */
@@ -276,6 +308,14 @@ declare class EKS extends Service {
    * Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active. If your cluster has managed node groups attached to it, all of your node groups’ Kubernetes versions must match the cluster’s Kubernetes version in order to update the cluster to a new Kubernetes version.
    */
   updateClusterVersion(callback?: (err: AWSError, data: EKS.Types.UpdateClusterVersionResponse) => void): Request<EKS.Types.UpdateClusterVersionResponse, AWSError>;
+  /**
+   * Update an EKS Anywhere Subscription. Only auto renewal and tags can be updated after subscription creation.
+   */
+  updateEksAnywhereSubscription(params: EKS.Types.UpdateEksAnywhereSubscriptionRequest, callback?: (err: AWSError, data: EKS.Types.UpdateEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.UpdateEksAnywhereSubscriptionResponse, AWSError>;
+  /**
+   * Update an EKS Anywhere Subscription. Only auto renewal and tags can be updated after subscription creation.
+   */
+  updateEksAnywhereSubscription(callback?: (err: AWSError, data: EKS.Types.UpdateEksAnywhereSubscriptionResponse) => void): Request<EKS.Types.UpdateEksAnywhereSubscriptionResponse, AWSError>;
   /**
    * Updates an Amazon EKS managed node group configuration. Your node group continues to function during the update. The response output includes an update ID that you can use to track the status of your node group update with the DescribeUpdate API operation. Currently you can update the Kubernetes labels for a node group or the scaling configuration.
    */
@@ -730,7 +770,7 @@ declare namespace EKS {
      */
     serviceAccountRoleArn?: RoleArn;
     /**
-     * How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are handled based on the value you choose:    None – If the self-managed version of the add-on is installed on your cluster, Amazon EKS doesn't change the value. Creation of the add-on might fail.    Overwrite – If the self-managed version of the add-on is installed on your cluster and the Amazon EKS default value is different than the existing value, Amazon EKS changes the value to the Amazon EKS default value.    Preserve – Not supported. You can set this value when updating an add-on though. For more information, see UpdateAddon.   If you don't currently have the self-managed version of the add-on installed on your cluster, the Amazon EKS add-on is installed. Amazon EKS sets all values to default values, regardless of the option that you specify.
+     * How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are handled based on the value you choose:    None – If the self-managed version of the add-on is installed on your cluster, Amazon EKS doesn't change the value. Creation of the add-on might fail.    Overwrite – If the self-managed version of the add-on is installed on your cluster and the Amazon EKS default value is different than the existing value, Amazon EKS changes the value to the Amazon EKS default value.    Preserve – This is similar to the NONE option. If the self-managed version of the add-on is installed on your cluster Amazon EKS doesn't change the add-on resource properties. Creation of the add-on might fail if conflicts are detected. This option works differently during the update operation. For more information, see UpdateAddon.   If you don't currently have the self-managed version of the add-on installed on your cluster, the Amazon EKS add-on is installed. Amazon EKS sets all values to default values, regardless of the option that you specify.
      */
     resolveConflicts?: ResolveConflicts;
     /**
@@ -796,6 +836,42 @@ declare namespace EKS {
      * The full description of your new cluster.
      */
     cluster?: Cluster;
+  }
+  export interface CreateEksAnywhereSubscriptionRequest {
+    /**
+     * The unique name for your subscription. It must be unique in your Amazon Web Services account in the Amazon Web Services Region you're creating the subscription in. The name can contain only alphanumeric characters (case-sensitive), hyphens, and underscores. It must start with an alphabetic character and can't be longer than 100 characters.
+     */
+    name: EksAnywhereSubscriptionName;
+    /**
+     * An object representing the term duration and term unit type of your subscription. This determines the term length of your subscription. Valid values are MONTHS for term unit and 12 or 36 for term duration, indicating a 12 month or 36 month subscription. This value cannot be changed after creating the subscription.
+     */
+    term: EksAnywhereSubscriptionTerm;
+    /**
+     * The number of licenses to purchase with the subscription. Valid values are between 1 and 1000. This value cannot be changed after creating the subscription.
+     */
+    licenseQuantity?: Integer;
+    /**
+     * The license type for all licenses in the subscription. Valid value is CLUSTER. With the CLUSTER license type, each license covers support for a single EKS Anywhere cluster.
+     */
+    licenseType?: EksAnywhereSubscriptionLicenseType;
+    /**
+     * A boolean indicating whether the subscription auto renews at the end of the term.
+     */
+    autoRenew?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: String;
+    /**
+     * The metadata for a subscription to assist with categorization and organization. Each tag consists of a key and an optional value. Subscription tags do not propagate to any other resources associated with the subscription.
+     */
+    tags?: TagMap;
+  }
+  export interface CreateEksAnywhereSubscriptionResponse {
+    /**
+     * The full description of the subscription.
+     */
+    subscription?: EksAnywhereSubscription;
   }
   export interface CreateFargateProfileRequest {
     /**
@@ -942,6 +1018,18 @@ declare namespace EKS {
      */
     cluster?: Cluster;
   }
+  export interface DeleteEksAnywhereSubscriptionRequest {
+    /**
+     * The ID of the subscription.
+     */
+    id: String;
+  }
+  export interface DeleteEksAnywhereSubscriptionResponse {
+    /**
+     * The full description of the subscription to be deleted.
+     */
+    subscription?: EksAnywhereSubscription;
+  }
   export interface DeleteFargateProfileRequest {
     /**
      * The name of the Amazon EKS cluster associated with the Fargate profile to delete.
@@ -1073,6 +1161,18 @@ declare namespace EKS {
      */
     cluster?: Cluster;
   }
+  export interface DescribeEksAnywhereSubscriptionRequest {
+    /**
+     * The ID of the subscription.
+     */
+    id: String;
+  }
+  export interface DescribeEksAnywhereSubscriptionResponse {
+    /**
+     * The full description of the subscription.
+     */
+    subscription?: EksAnywhereSubscription;
+  }
   export interface DescribeFargateProfileRequest {
     /**
      * The name of the Amazon EKS cluster associated with the Fargate profile.
@@ -1162,6 +1262,72 @@ declare namespace EKS {
   export interface DisassociateIdentityProviderConfigResponse {
     update?: Update;
   }
+  export interface EksAnywhereSubscription {
+    /**
+     * UUID identifying a subscription.
+     */
+    id?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the subscription.
+     */
+    arn?: String;
+    /**
+     * The Unix timestamp in seconds for when the subscription was created.
+     */
+    createdAt?: Timestamp;
+    /**
+     * The Unix timestamp in seconds for when the subscription is effective.
+     */
+    effectiveDate?: Timestamp;
+    /**
+     * The Unix timestamp in seconds for when the subscription will expire or auto renew, depending on the auto renew configuration of the subscription object.
+     */
+    expirationDate?: Timestamp;
+    /**
+     * The number of licenses included in a subscription. Valid values are between 1 and 1000.
+     */
+    licenseQuantity?: Integer;
+    /**
+     * The type of licenses included in the subscription. Valid value is CLUSTER. With the CLUSTER license type, each license covers support for a single EKS Anywhere cluster.
+     */
+    licenseType?: EksAnywhereSubscriptionLicenseType;
+    /**
+     * An EksAnywhereSubscriptionTerm object. 
+     */
+    term?: EksAnywhereSubscriptionTerm;
+    /**
+     * The status of a subscription.
+     */
+    status?: String;
+    /**
+     * A boolean indicating whether or not a subscription will auto renew when it expires.
+     */
+    autoRenew?: Boolean;
+    /**
+     * License Manager License ARNs associated with the subscription.
+     */
+    licenseArns?: StringList;
+    /**
+     * The metadata for a subscription to assist with categorization and organization. Each tag consists of a key and an optional value. Subscription tags do not propagate to any other resources associated with the subscription.
+     */
+    tags?: TagMap;
+  }
+  export type EksAnywhereSubscriptionLicenseType = "Cluster"|string;
+  export type EksAnywhereSubscriptionList = EksAnywhereSubscription[];
+  export type EksAnywhereSubscriptionName = string;
+  export type EksAnywhereSubscriptionStatus = "CREATING"|"ACTIVE"|"UPDATING"|"EXPIRING"|"EXPIRED"|"DELETING"|string;
+  export type EksAnywhereSubscriptionStatusValues = EksAnywhereSubscriptionStatus[];
+  export interface EksAnywhereSubscriptionTerm {
+    /**
+     * The duration of the subscription term. Valid values are 12 and 36, indicating a 12 month or 36 month subscription.
+     */
+    duration?: Integer;
+    /**
+     * The term unit of the subscription. Valid value is MONTHS.
+     */
+    unit?: EksAnywhereSubscriptionTermUnit;
+  }
+  export type EksAnywhereSubscriptionTermUnit = "MONTHS"|string;
   export interface EncryptionConfig {
     /**
      * Specifies the resources to be encrypted. The only supported value is "secrets".
@@ -1265,6 +1431,7 @@ declare namespace EKS {
   }
   export type IdentityProviderConfigs = IdentityProviderConfig[];
   export type IncludeClustersList = String[];
+  export type Integer = number;
   export type IpFamily = "ipv4"|"ipv6"|string;
   export interface Issue {
     /**
@@ -1336,7 +1503,7 @@ declare namespace EKS {
   export type ListAddonsRequestMaxResults = number;
   export interface ListAddonsResponse {
     /**
-     * A list of available add-ons.
+     * A list of installed add-ons.
      */
     addons?: StringList;
     /**
@@ -1366,6 +1533,31 @@ declare namespace EKS {
     clusters?: StringList;
     /**
      * The nextToken value to include in a future ListClusters request. When the results of a ListClusters request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: String;
+  }
+  export interface ListEksAnywhereSubscriptionsRequest {
+    /**
+     * The maximum number of cluster results returned by ListEksAnywhereSubscriptions in paginated output. When you use this parameter, ListEksAnywhereSubscriptions returns only maxResults results in a single page along with a nextToken response element. You can see the remaining results of the initial request by sending another ListEksAnywhereSubscriptions request with the returned nextToken value. This value can be between 1 and 100. If you don't use this parameter, ListEksAnywhereSubscriptions returns up to 10 results and a nextToken value if applicable.
+     */
+    maxResults?: ListEksAnywhereSubscriptionsRequestMaxResults;
+    /**
+     * The nextToken value to include in a future ListEksAnywhereSubscriptions request. When the results of a ListEksAnywhereSubscriptions request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: String;
+    /**
+     * An array of subscription statuses to filter on.
+     */
+    includeStatus?: EksAnywhereSubscriptionStatusValues;
+  }
+  export type ListEksAnywhereSubscriptionsRequestMaxResults = number;
+  export interface ListEksAnywhereSubscriptionsResponse {
+    /**
+     * A list of all subscription objects in the region, filtered by includeStatus and paginated by nextToken and maxResults.
+     */
+    subscriptions?: EksAnywhereSubscriptionList;
+    /**
+     * The nextToken value to include in a future ListEksAnywhereSubscriptions request. When the results of a ListEksAnywhereSubscriptions request exceed maxResults, you can use this value to retrieve the next page of results. This value is null when there are no more results to return.
      */
     nextToken?: String;
   }
@@ -1775,7 +1967,7 @@ declare namespace EKS {
   export type PercentCapacity = number;
   export interface Provider {
     /**
-     * Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key. For more information, see Allowing Users in Other Accounts to Use a KMS key in the Key Management Service Developer Guide.
+     * Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric and created in the same Amazon Web Services Region as the cluster. If the KMS key was created in a different account, the IAM principal must have access to the KMS key. For more information, see Allowing users in other accounts to use a KMS key in the Key Management Service Developer Guide.
      */
     keyArn?: String;
   }
@@ -1954,6 +2146,26 @@ declare namespace EKS {
      * The full description of the specified update
      */
     update?: Update;
+  }
+  export interface UpdateEksAnywhereSubscriptionRequest {
+    /**
+     * 
+     */
+    id: String;
+    /**
+     * A boolean indicating whether or not to automatically renew the subscription.
+     */
+    autoRenew: Boolean;
+    /**
+     * Unique, case-sensitive identifier to ensure the idempotency of the request.
+     */
+    clientRequestToken?: String;
+  }
+  export interface UpdateEksAnywhereSubscriptionResponse {
+    /**
+     * The full description of the updated subscription.
+     */
+    subscription?: EksAnywhereSubscription;
   }
   export interface UpdateLabelsPayload {
     /**
