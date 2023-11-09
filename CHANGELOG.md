@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1491.0-->
+<!--LATEST=2.1492.0-->
 <!--ENTRYINSERT-->
+
+## 2.1492.0
+* feature: SQS: This release enables customers to call SQS using AWS JSON-1.0 protocol and bug fix.
 
 ## 2.1491.0
 * feature: Connect: This release clarifies in our public documentation that InstanceId is a requirement for SearchUsers API requests.

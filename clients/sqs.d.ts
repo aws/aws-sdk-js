@@ -463,7 +463,7 @@ declare namespace SQS {
     /**
      * The status of the message movement task. Possible values are: RUNNING, COMPLETED, CANCELLING, CANCELLED, and FAILED.
      */
-    Status?: TaskStatus;
+    Status?: String;
     /**
      * The ARN of the queue that contains the messages to be moved to another queue.
      */
@@ -846,7 +846,6 @@ declare namespace SQS {
     Tags: TagMap;
   }
   export type TagValue = string;
-  export type TaskStatus = "RUNNING"|"FAILED"|"CANCELLING"|"CANCELLED"|"COMPLETED"|string;
   export type Token = string;
   export interface UntagQueueRequest {
     /**
