@@ -1054,7 +1054,7 @@
           "shape": "IntegrationConflictOperationFault"
         }
       ],
-      "documentation": "<p>Creates a zero-ETL integration with Amazon Redshift. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html\">Working with Amazon Aurora zero-ETL integrations with Amazon Redshift</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+      "documentation": "<p>Creates a zero-ETL integration with Amazon Redshift.</p>"
     },
     "CreateOptionGroup": {
       "name": "CreateOptionGroup",
@@ -1537,7 +1537,7 @@
           "shape": "InvalidIntegrationStateFault"
         }
       ],
-      "documentation": "<p>Deletes a zero-ETL integration with Amazon Redshift. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.deleting.html\">Deleting Amazon Aurora zero-ETL integrations with Amazon Redshift</a> in the <i>Amazon Aurora User Guide</i> </p>"
+      "documentation": "<p>Deletes a zero-ETL integration with Amazon Redshift.</p>"
     },
     "DeleteOptionGroup": {
       "name": "DeleteOptionGroup",
@@ -2282,7 +2282,7 @@
           "shape": "IntegrationNotFoundFault"
         }
       ],
-      "documentation": "<p>Describe one or more zero-ETL integration with Amazon Redshift. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.describingmonitoring.html\">Viewing and monitoring Amazon Aurora zero-ETL integrations with Amazon Redshift</a> in the <i>Amazon Aurora User Guide</i> </p>"
+      "documentation": "<p>Describe one or more zero-ETL integrations with Amazon Redshift.</p>"
     },
     "DescribeOptionGroupOptions": {
       "name": "DescribeOptionGroupOptions",
@@ -6501,7 +6501,7 @@
       "members": {
         "SourceArn": {
           "shape": "SourceArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the source for replication.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the database to use as the source for replication.</p>"
         },
         "TargetArn": {
           "shape": "Arn",
@@ -6513,7 +6513,7 @@
         },
         "KMSKeyId": {
           "shape": "String",
-          "documentation": "<p>The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, Aurora uses a default Amazon Web Services owned key. </p>"
+          "documentation": "<p>The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default Amazon Web Services owned key. </p>"
         },
         "AdditionalEncryptionContext": {
           "shape": "EncryptionContextMap",
@@ -7684,7 +7684,7 @@
         },
         "SupportsIntegrations": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the DB engine version supports Aurora zero-ETL integrations with Amazon Redshift.</p>"
+          "documentation": "<p>Indicates whether the DB engine version supports zero-ETL integrations with Amazon Redshift.</p>"
         }
       },
       "documentation": "<p>This data type is used as a response element in the action <code>DescribeDBEngineVersions</code>.</p>"
@@ -11551,7 +11551,7 @@
       "members": {
         "SourceArn": {
           "shape": "SourceArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora DB cluster used as the source for replication.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the database used as the source for replication.</p>"
         },
         "TargetArn": {
           "shape": "Arn",
@@ -11589,7 +11589,7 @@
           "documentation": "<p>Any errors associated with the integration.</p>"
         }
       },
-      "documentation": "<p>An Aurora zero-ETL integration with Amazon Redshift. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.html\">Working with Amazon Aurora zero-ETL integrations with Amazon Redshift</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+      "documentation": "<p>A zero-ETL integration with Amazon Redshift.</p>"
     },
     "IntegrationArn": {
       "type": "string",
@@ -16097,7 +16097,7 @@
         },
         "SupportsIntegrations": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates whether the DB engine version supports Aurora zero-ETL integrations with Amazon Redshift.</p>"
+          "documentation": "<p>Indicates whether the DB engine version supports zero-ETL integrations with Amazon Redshift.</p>"
         }
       },
       "documentation": "<p>The version of the database engine that a DB instance can be upgraded to.</p>"

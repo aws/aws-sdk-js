@@ -20,37 +20,61 @@ declare class ControlTower extends Service {
    */
   disableControl(callback?: (err: AWSError, data: ControlTower.Types.DisableControlOutput) => void): Request<ControlTower.Types.DisableControlOutput, AWSError>;
   /**
-   * This API call activates a control. It starts an asynchronous operation that creates AWS resources on the specified organizational unit and the accounts it contains. The resources created will vary according to the control that you specify. For usage examples, see  the AWS Control Tower User Guide  
+   * This API call activates a control. It starts an asynchronous operation that creates AWS resources on the specified organizational unit and the accounts it contains. The resources created will vary according to the control that you specify. For usage examples, see  the AWS Control Tower User Guide .
    */
   enableControl(params: ControlTower.Types.EnableControlInput, callback?: (err: AWSError, data: ControlTower.Types.EnableControlOutput) => void): Request<ControlTower.Types.EnableControlOutput, AWSError>;
   /**
-   * This API call activates a control. It starts an asynchronous operation that creates AWS resources on the specified organizational unit and the accounts it contains. The resources created will vary according to the control that you specify. For usage examples, see  the AWS Control Tower User Guide  
+   * This API call activates a control. It starts an asynchronous operation that creates AWS resources on the specified organizational unit and the accounts it contains. The resources created will vary according to the control that you specify. For usage examples, see  the AWS Control Tower User Guide .
    */
   enableControl(callback?: (err: AWSError, data: ControlTower.Types.EnableControlOutput) => void): Request<ControlTower.Types.EnableControlOutput, AWSError>;
   /**
-   * Returns the status of a particular EnableControl or DisableControl operation. Displays a message in case of error. Details for an operation are available for 90 days. For usage examples, see  the AWS Control Tower User Guide  
+   * Returns the status of a particular EnableControl or DisableControl operation. Displays a message in case of error. Details for an operation are available for 90 days. For usage examples, see  the AWS Control Tower User Guide .
    */
   getControlOperation(params: ControlTower.Types.GetControlOperationInput, callback?: (err: AWSError, data: ControlTower.Types.GetControlOperationOutput) => void): Request<ControlTower.Types.GetControlOperationOutput, AWSError>;
   /**
-   * Returns the status of a particular EnableControl or DisableControl operation. Displays a message in case of error. Details for an operation are available for 90 days. For usage examples, see  the AWS Control Tower User Guide  
+   * Returns the status of a particular EnableControl or DisableControl operation. Displays a message in case of error. Details for an operation are available for 90 days. For usage examples, see  the AWS Control Tower User Guide .
    */
   getControlOperation(callback?: (err: AWSError, data: ControlTower.Types.GetControlOperationOutput) => void): Request<ControlTower.Types.GetControlOperationOutput, AWSError>;
   /**
-   *  Provides details about the enabled control. For usage examples, see  the AWS Control Tower User Guide .  Returned values    TargetRegions: Shows target AWS Regions where the enabled control is available to be deployed.   StatusSummary: Provides a detailed summary of the deployment status.   DriftSummary: Provides a detailed summary of the drifted status.  
+   * Retrieves details about an enabled control. For usage examples, see  the AWS Control Tower User Guide .
    */
   getEnabledControl(params: ControlTower.Types.GetEnabledControlInput, callback?: (err: AWSError, data: ControlTower.Types.GetEnabledControlOutput) => void): Request<ControlTower.Types.GetEnabledControlOutput, AWSError>;
   /**
-   *  Provides details about the enabled control. For usage examples, see  the AWS Control Tower User Guide .  Returned values    TargetRegions: Shows target AWS Regions where the enabled control is available to be deployed.   StatusSummary: Provides a detailed summary of the deployment status.   DriftSummary: Provides a detailed summary of the drifted status.  
+   * Retrieves details about an enabled control. For usage examples, see  the AWS Control Tower User Guide .
    */
   getEnabledControl(callback?: (err: AWSError, data: ControlTower.Types.GetEnabledControlOutput) => void): Request<ControlTower.Types.GetEnabledControlOutput, AWSError>;
   /**
-   * Lists the controls enabled by AWS Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see  the AWS Control Tower User Guide  
+   * Lists the controls enabled by AWS Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see  the AWS Control Tower User Guide .
    */
   listEnabledControls(params: ControlTower.Types.ListEnabledControlsInput, callback?: (err: AWSError, data: ControlTower.Types.ListEnabledControlsOutput) => void): Request<ControlTower.Types.ListEnabledControlsOutput, AWSError>;
   /**
-   * Lists the controls enabled by AWS Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see  the AWS Control Tower User Guide  
+   * Lists the controls enabled by AWS Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see  the AWS Control Tower User Guide .
    */
   listEnabledControls(callback?: (err: AWSError, data: ControlTower.Types.ListEnabledControlsOutput) => void): Request<ControlTower.Types.ListEnabledControlsOutput, AWSError>;
+  /**
+   * Returns a list of tags associated with the resource. For usage examples, see  the AWS Control Tower User Guide .
+   */
+  listTagsForResource(params: ControlTower.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: ControlTower.Types.ListTagsForResourceOutput) => void): Request<ControlTower.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Returns a list of tags associated with the resource. For usage examples, see  the AWS Control Tower User Guide .
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ControlTower.Types.ListTagsForResourceOutput) => void): Request<ControlTower.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Applies tags to a resource. For usage examples, see  the AWS Control Tower User Guide .
+   */
+  tagResource(params: ControlTower.Types.TagResourceInput, callback?: (err: AWSError, data: ControlTower.Types.TagResourceOutput) => void): Request<ControlTower.Types.TagResourceOutput, AWSError>;
+  /**
+   * Applies tags to a resource. For usage examples, see  the AWS Control Tower User Guide .
+   */
+  tagResource(callback?: (err: AWSError, data: ControlTower.Types.TagResourceOutput) => void): Request<ControlTower.Types.TagResourceOutput, AWSError>;
+  /**
+   * Removes tags from a resource. For usage examples, see  the AWS Control Tower User Guide .
+   */
+  untagResource(params: ControlTower.Types.UntagResourceInput, callback?: (err: AWSError, data: ControlTower.Types.UntagResourceOutput) => void): Request<ControlTower.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Removes tags from a resource. For usage examples, see  the AWS Control Tower User Guide .
+   */
+  untagResource(callback?: (err: AWSError, data: ControlTower.Types.UntagResourceOutput) => void): Request<ControlTower.Types.UntagResourceOutput, AWSError>;
 }
 declare namespace ControlTower {
   export type Arn = string;
@@ -108,11 +132,19 @@ declare namespace ControlTower {
      */
     controlIdentifier: ControlIdentifier;
     /**
+     * Tags to be applied to the EnabledControl resource.
+     */
+    tags?: TagMap;
+    /**
      * The ARN of the organizational unit. For information on how to find the targetIdentifier, see the overview page.
      */
     targetIdentifier: TargetIdentifier;
   }
   export interface EnableControlOutput {
+    /**
+     * The ARN of the EnabledControl resource.
+     */
+    arn?: Arn;
     /**
      * The ID of the asynchronous operation, which is used to track status. The operation is available for 90 days.
      */
@@ -120,45 +152,45 @@ declare namespace ControlTower {
   }
   export interface EnabledControlDetails {
     /**
-     *  The ARN of the enabled control. 
+     * The ARN of the enabled control.
      */
     arn?: Arn;
     /**
-     *  The control identifier of the enabled control. For information on how to find the controlIdentifier, see the overview page. 
+     * The control identifier of the enabled control. For information on how to find the controlIdentifier, see the overview page.
      */
     controlIdentifier?: ControlIdentifier;
     /**
-     *  The drift status of the enabled control. 
+     * The drift status of the enabled control.
      */
     driftStatusSummary?: DriftStatusSummary;
     /**
-     *  The deployment summary of the enabled control. 
+     * The deployment summary of the enabled control.
      */
     statusSummary?: EnablementStatusSummary;
     /**
-     *  The ARN of the organizational unit. For information on how to find the targetIdentifier, see the overview page. 
+     * The ARN of the organizational unit. For information on how to find the targetIdentifier, see the overview page.
      */
     targetIdentifier?: TargetIdentifier;
     /**
-     *  Target AWS Regions for the enabled control. 
+     * Target AWS Regions for the enabled control.
      */
     targetRegions?: TargetRegions;
   }
   export interface EnabledControlSummary {
     /**
-     *  The ARN of the enabled control. 
+     * The ARN of the enabled control.
      */
     arn?: Arn;
     /**
-     * The ARN of the control. Only Strongly recommended and Elective controls are permitted, with the exception of the Region deny control. For information on how to find the controlIdentifier, see the overview page.
+     * The controlIdentifier of the enabled control.
      */
     controlIdentifier?: ControlIdentifier;
     /**
-     *  The drift status of the enabled control. 
+     * The drift status of the enabled control.
      */
     driftStatusSummary?: DriftStatusSummary;
     /**
-     * 
+     * A short description of the status of the enabled control.
      */
     statusSummary?: EnablementStatusSummary;
     /**
@@ -170,7 +202,7 @@ declare namespace ControlTower {
   export type EnablementStatus = "SUCCEEDED"|"FAILED"|"UNDER_CHANGE"|string;
   export interface EnablementStatusSummary {
     /**
-     *  The last operation identifier for the enabled control. 
+     * The last operation identifier for the enabled control.
      */
     lastOperationIdentifier?: OperationIdentifier;
     /**
@@ -192,13 +224,13 @@ declare namespace ControlTower {
   }
   export interface GetEnabledControlInput {
     /**
-     *  The ARN of the enabled control. 
+     * The controlIdentifier of the enabled control.
      */
     enabledControlIdentifier: Arn;
   }
   export interface GetEnabledControlOutput {
     /**
-     *  Information about the enabled control. 
+     * Information about the enabled control.
      */
     enabledControlDetails: EnabledControlDetails;
   }
@@ -226,19 +258,59 @@ declare namespace ControlTower {
      */
     nextToken?: String;
   }
+  export interface ListTagsForResourceInput {
+    /**
+     *  The ARN of the resource.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * A list of tags, as key:value strings.
+     */
+    tags: TagMap;
+  }
   export type MaxResults = number;
   export type OperationIdentifier = string;
   export interface Region {
     /**
-     *  The AWS Region name. 
+     * The AWS Region name.
      */
     name?: RegionName;
   }
   export type RegionName = string;
   export type String = string;
   export type SyntheticTimestamp_date_time = Date;
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceInput {
+    /**
+     * The ARN of the resource to be tagged.
+     */
+    resourceArn: Arn;
+    /**
+     * Tags to be applied to the resource.
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
   export type TargetIdentifier = string;
   export type TargetRegions = Region[];
+  export interface UntagResourceInput {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: Arn;
+    /**
+     * Tag keys to be removed from the resource.
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceOutput {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

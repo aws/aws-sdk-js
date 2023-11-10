@@ -246,11 +246,11 @@ declare class RDS extends Service {
    */
   createGlobalCluster(callback?: (err: AWSError, data: RDS.Types.CreateGlobalClusterResult) => void): Request<RDS.Types.CreateGlobalClusterResult, AWSError>;
   /**
-   * Creates a zero-ETL integration with Amazon Redshift. For more information, see Working with Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide.
+   * Creates a zero-ETL integration with Amazon Redshift.
    */
   createIntegration(params: RDS.Types.CreateIntegrationMessage, callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
   /**
-   * Creates a zero-ETL integration with Amazon Redshift. For more information, see Working with Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide.
+   * Creates a zero-ETL integration with Amazon Redshift.
    */
   createIntegration(callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
   /**
@@ -406,11 +406,11 @@ declare class RDS extends Service {
    */
   deleteGlobalCluster(callback?: (err: AWSError, data: RDS.Types.DeleteGlobalClusterResult) => void): Request<RDS.Types.DeleteGlobalClusterResult, AWSError>;
   /**
-   * Deletes a zero-ETL integration with Amazon Redshift. For more information, see Deleting Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide 
+   * Deletes a zero-ETL integration with Amazon Redshift.
    */
   deleteIntegration(params: RDS.Types.DeleteIntegrationMessage, callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
   /**
-   * Deletes a zero-ETL integration with Amazon Redshift. For more information, see Deleting Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide 
+   * Deletes a zero-ETL integration with Amazon Redshift.
    */
   deleteIntegration(callback?: (err: AWSError, data: RDS.Types.Integration) => void): Request<RDS.Types.Integration, AWSError>;
   /**
@@ -702,11 +702,11 @@ declare class RDS extends Service {
    */
   describeGlobalClusters(callback?: (err: AWSError, data: RDS.Types.GlobalClustersMessage) => void): Request<RDS.Types.GlobalClustersMessage, AWSError>;
   /**
-   * Describe one or more zero-ETL integration with Amazon Redshift. For more information, see Viewing and monitoring Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide 
+   * Describe one or more zero-ETL integrations with Amazon Redshift.
    */
   describeIntegrations(params: RDS.Types.DescribeIntegrationsMessage, callback?: (err: AWSError, data: RDS.Types.DescribeIntegrationsResponse) => void): Request<RDS.Types.DescribeIntegrationsResponse, AWSError>;
   /**
-   * Describe one or more zero-ETL integration with Amazon Redshift. For more information, see Viewing and monitoring Amazon Aurora zero-ETL integrations with Amazon Redshift in the Amazon Aurora User Guide 
+   * Describe one or more zero-ETL integrations with Amazon Redshift.
    */
   describeIntegrations(callback?: (err: AWSError, data: RDS.Types.DescribeIntegrationsResponse) => void): Request<RDS.Types.DescribeIntegrationsResponse, AWSError>;
   /**
@@ -2844,7 +2844,7 @@ declare namespace RDS {
   }
   export interface CreateIntegrationMessage {
     /**
-     * The Amazon Resource Name (ARN) of the Aurora DB cluster to use as the source for replication.
+     * The Amazon Resource Name (ARN) of the database to use as the source for replication.
      */
     SourceArn: SourceArn;
     /**
@@ -2856,7 +2856,7 @@ declare namespace RDS {
      */
     IntegrationName: IntegrationName;
     /**
-     * The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, Aurora uses a default Amazon Web Services owned key. 
+     * The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default Amazon Web Services owned key. 
      */
     KMSKeyId?: String;
     /**
@@ -3805,7 +3805,7 @@ declare namespace RDS {
      */
     SupportsLocalWriteForwarding?: BooleanOptional;
     /**
-     * Indicates whether the DB engine version supports Aurora zero-ETL integrations with Amazon Redshift.
+     * Indicates whether the DB engine version supports zero-ETL integrations with Amazon Redshift.
      */
     SupportsIntegrations?: Boolean;
   }
@@ -6684,7 +6684,7 @@ declare namespace RDS {
   export type IntegerOptional = number;
   export interface Integration {
     /**
-     * The Amazon Resource Name (ARN) of the Aurora DB cluster used as the source for replication.
+     * The Amazon Resource Name (ARN) of the database used as the source for replication.
      */
     SourceArn?: SourceArn;
     /**
@@ -10059,7 +10059,7 @@ declare namespace RDS {
      */
     SupportsLocalWriteForwarding?: BooleanOptional;
     /**
-     * Indicates whether the DB engine version supports Aurora zero-ETL integrations with Amazon Redshift.
+     * Indicates whether the DB engine version supports zero-ETL integrations with Amazon Redshift.
      */
     SupportsIntegrations?: BooleanOptional;
   }

@@ -363,7 +363,7 @@ declare namespace MediaConvert {
      */
     Channels?: __integerMin1Max64;
     /**
-     * Sample rate in hz.
+     * Sample rate in Hz.
      */
     SampleRate?: __integerMin8000Max192000;
   }
@@ -410,9 +410,13 @@ declare namespace MediaConvert {
   export type AudioChannelTag = "L"|"R"|"C"|"LFE"|"LS"|"RS"|"LC"|"RC"|"CS"|"LSD"|"RSD"|"TCS"|"VHL"|"VHC"|"VHR"|"TBL"|"TBC"|"TBR"|"RSL"|"RSR"|"LW"|"RW"|"LFE2"|"LT"|"RT"|"HI"|"NAR"|"M"|string;
   export interface AudioChannelTaggingSettings {
     /**
-     * You can add a tag for this mono-channel audio track to mimic its placement in a multi-channel layout. For example, if this track is the left surround channel, choose Left surround (LS).
+     * Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track.
      */
     ChannelTag?: AudioChannelTag;
+    /**
+     * Specify the QuickTime audio channel layout tags for the audio channels in this audio track. Enter channel layout tags in the same order as your output's audio channel order. For example, if your output audio track has a left and a right channel, enter Left (L) for the first channel and Right (R) for the second. If your output has multiple single-channel audio tracks, enter a single channel layout tag for each track.
+     */
+    ChannelTags?: __listOfAudioChannelTag;
   }
   export type AudioCodec = "AAC"|"MP2"|"MP3"|"WAV"|"AIFF"|"AC3"|"EAC3"|"EAC3_ATMOS"|"VORBIS"|"OPUS"|"PASSTHROUGH"|"FLAC"|string;
   export interface AudioCodecSettings {
@@ -468,7 +472,7 @@ declare namespace MediaConvert {
   export type AudioDefaultSelection = "DEFAULT"|"NOT_DEFAULT"|string;
   export interface AudioDescription {
     /**
-     * When you mimic a multi-channel audio layout with multiple mono-channel tracks, you can tag each channel layout manually. For example, you would tag the tracks that contain your left, right, and center audio with Left (L), Right (R), and Center (C), respectively. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use audio layout tagging, your output must be in a QuickTime (.mov) container; your audio codec must be AAC, WAV, or AIFF; and you must set up your audio track to have only one channel.
+     * Specify the QuickTime audio channel layout tags for the audio channels in this audio track. When you don't specify a value, MediaConvert labels your track as Center (C) by default. To use Audio layout tagging, your output must be in a QuickTime (MOV) container and your audio codec must be AAC, WAV, or AIFF.
      */
     AudioChannelTaggingSettings?: AudioChannelTaggingSettings;
     /**
@@ -2283,7 +2287,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
   export type F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL"|string;
   export interface F4vSettings {
     /**
-     * If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.
+     * To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal.
      */
     MoovPlacement?: F4vMoovPlacement;
   }
@@ -2335,7 +2339,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Channels?: __integerMin1Max8;
     /**
-     * Sample rate in hz.
+     * Sample rate in Hz.
      */
     SampleRate?: __integerMin22050Max48000;
   }
@@ -3663,6 +3667,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     ExtendedDataServices?: ExtendedDataServices;
     /**
+     * Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable "Follow source" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.
+     */
+    FollowSource?: __integerMin1Max150;
+    /**
      * Use Inputs to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
      */
     Inputs?: __listOfInput;
@@ -3768,6 +3776,10 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      * If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.
      */
     ExtendedDataServices?: ExtendedDataServices;
+    /**
+     * Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable "Follow source" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.
+     */
+    FollowSource?: __integerMin1Max150;
     /**
      * Use Inputs to define the source file used in the transcode job. There can only be one input in a job template. Using the API, you can include multiple inputs when referencing a job template.
      */
@@ -4375,7 +4387,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     Channels?: __integerMin1Max2;
     /**
-     * Sample rate in hz.
+     * Sample rate in Hz.
      */
     SampleRate?: __integerMin32000Max48000;
   }
@@ -4394,7 +4406,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     RateControlMode?: Mp3RateControlMode;
     /**
-     * Sample rate in hz.
+     * Sample rate in Hz.
      */
     SampleRate?: __integerMin22050Max48000;
     /**
@@ -4423,7 +4435,7 @@ Within your job settings, all of your DVB-Sub settings must be identical.
      */
     FreeSpaceBox?: Mp4FreeSpaceBox;
     /**
-     * If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end.
+     * To place the MOOV atom at the beginning of your output, which is useful for progressive downloading: Leave blank or choose Progressive download. To place the MOOV at the end of your output: Choose Normal.
      */
     MoovPlacement?: Mp4MoovPlacement;
     /**
@@ -4872,7 +4884,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     Channels?: __integerMin1Max2;
     /**
-     * Optional. Sample rate in hz. Valid values are 16000, 24000, and 48000. The default value is 48000.
+     * Optional. Sample rate in Hz. Valid values are 16000, 24000, and 48000. The default value is 48000.
      */
     SampleRate?: __integerMin16000Max48000;
   }
@@ -5330,7 +5342,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type S3ServerSideEncryptionType = "SERVER_SIDE_ENCRYPTION_S3"|"SERVER_SIDE_ENCRYPTION_KMS"|string;
   export type S3StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
   export type SampleRangeConversion = "LIMITED_RANGE_SQUEEZE"|"NONE"|"LIMITED_RANGE_CLIP"|string;
-  export type ScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|string;
+  export type ScalingBehavior = "DEFAULT"|"STRETCH_TO_OUTPUT"|"FIT"|"FIT_NO_UPSCALE"|"FILL"|string;
   export type SccDestinationFramerate = "FRAMERATE_23_97"|"FRAMERATE_24"|"FRAMERATE_25"|"FRAMERATE_29_97_DROPFRAME"|"FRAMERATE_29_97_NON_DROPFRAME"|string;
   export interface SccDestinationSettings {
     /**
@@ -5748,7 +5760,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     RespondToAfd?: RespondToAfd;
     /**
-     * Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output to have the service stretch your video image to fit. Keep the setting Default to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement in this output.
+     * Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html
      */
     ScalingBehavior?: ScalingBehavior;
     /**
@@ -5802,7 +5814,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
      */
     InputClippings?: __listOfVideoOverlayInputClipping;
     /**
-     * Specify the starting timecode for your video overlay. To use the timecode present in your video overlay: Choose Embedded. To use a zerobased timecode: Choose Start at 0. To choose a timecode: Choose Specified start. When you do, enter the starting timecode in Start timecode. If you don't specify a value for Timecode source, MediaConvert uses Embedded by default.
+     * Specify the timecode source for your video overlay input clips. To use the timecode present in your video overlay: Choose Embedded. To use a zerobased timecode: Choose Start at 0. To choose a timecode: Choose Specified start. When you do, enter the starting timecode in Start timecode. If you don't specify a value for Timecode source, MediaConvert uses Embedded by default.
      */
     TimecodeSource?: InputTimecodeSource;
     /**
@@ -6324,6 +6336,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __integerMin1Max100 = number;
   export type __integerMin1Max10000000 = number;
   export type __integerMin1Max1001 = number;
+  export type __integerMin1Max150 = number;
   export type __integerMin1Max17895697 = number;
   export type __integerMin1Max2 = number;
   export type __integerMin1Max20 = number;
@@ -6376,6 +6389,7 @@ When you specify Version 1, you must also set ID3 metadata to Passthrough.
   export type __integerMinNegative60Max6 = number;
   export type __integerMinNegative70Max0 = number;
   export type __listOfAllowedRenditionSize = AllowedRenditionSize[];
+  export type __listOfAudioChannelTag = AudioChannelTag[];
   export type __listOfAudioDescription = AudioDescription[];
   export type __listOfAutomatedAbrRule = AutomatedAbrRule[];
   export type __listOfCaptionDescription = CaptionDescription[];
