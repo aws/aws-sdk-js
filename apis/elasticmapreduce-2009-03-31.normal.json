@@ -2586,8 +2586,7 @@
     "GetClusterSessionCredentialsInput": {
       "type": "structure",
       "required": [
-        "ClusterId",
-        "ExecutionRoleArn"
+        "ClusterId"
       ],
       "members": {
         "ClusterId": {

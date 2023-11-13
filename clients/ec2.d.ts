@@ -1661,11 +1661,11 @@ declare class EC2 extends Service {
    */
   deleteVpcEndpoints(callback?: (err: AWSError, data: EC2.Types.DeleteVpcEndpointsResult) => void): Request<EC2.Types.DeleteVpcEndpointsResult, AWSError>;
   /**
-   * Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. You cannot delete a VPC peering connection that's in the failed state.
+   * Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. You cannot delete a VPC peering connection that's in the failed or rejected state.
    */
   deleteVpcPeeringConnection(params: EC2.Types.DeleteVpcPeeringConnectionRequest, callback?: (err: AWSError, data: EC2.Types.DeleteVpcPeeringConnectionResult) => void): Request<EC2.Types.DeleteVpcPeeringConnectionResult, AWSError>;
   /**
-   * Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. You cannot delete a VPC peering connection that's in the failed state.
+   * Deletes a VPC peering connection. Either the owner of the requester VPC or the owner of the accepter VPC can delete the VPC peering connection if it's in the active state. The owner of the requester VPC can delete a VPC peering connection in the pending-acceptance state. You cannot delete a VPC peering connection that's in the failed or rejected state.
    */
   deleteVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.DeleteVpcPeeringConnectionResult) => void): Request<EC2.Types.DeleteVpcPeeringConnectionResult, AWSError>;
   /**
@@ -1965,11 +1965,11 @@ declare class EC2 extends Service {
    */
   describeExportTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
-   * Describe details for Windows AMIs that are configured for faster launching.
+   * Describe details for Windows AMIs that are configured for Windows fast launch.
    */
   describeFastLaunchImages(params: EC2.Types.DescribeFastLaunchImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFastLaunchImagesResult) => void): Request<EC2.Types.DescribeFastLaunchImagesResult, AWSError>;
   /**
-   * Describe details for Windows AMIs that are configured for faster launching.
+   * Describe details for Windows AMIs that are configured for Windows fast launch.
    */
   describeFastLaunchImages(callback?: (err: AWSError, data: EC2.Types.DescribeFastLaunchImagesResult) => void): Request<EC2.Types.DescribeFastLaunchImagesResult, AWSError>;
   /**
@@ -2156,6 +2156,14 @@ declare class EC2 extends Service {
    * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshoot instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
    */
   describeInstanceStatus(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceStatusResult) => void): Request<EC2.Types.DescribeInstanceStatusResult, AWSError>;
+  /**
+   * Describes a tree-based hierarchy that represents the physical host placement of your EC2 instances within an Availability Zone or Local Zone. You can use this information to determine the relative proximity of your EC2 instances within the Amazon Web Services network to support your tightly coupled workloads.  Limitations    Supported zones   Availability Zone   Local Zone     Supported instance types    hpc6a.48xlarge | hpc6id.32xlarge | hpc7a.12xlarge | hpc7a.24xlarge | hpc7a.48xlarge | hpc7a.96xlarge | hpc7g.4xlarge | hpc7g.8xlarge | hpc7g.16xlarge     p3dn.24xlarge | p4d.24xlarge | p4de.24xlarge | p5.48xlarge     trn1.2xlarge | trn1.32xlarge | trn1n.32xlarge      For more information, see Amazon EC2 instance topology in the Amazon EC2 User Guide.
+   */
+  describeInstanceTopology(params: EC2.Types.DescribeInstanceTopologyRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTopologyResult) => void): Request<EC2.Types.DescribeInstanceTopologyResult, AWSError>;
+  /**
+   * Describes a tree-based hierarchy that represents the physical host placement of your EC2 instances within an Availability Zone or Local Zone. You can use this information to determine the relative proximity of your EC2 instances within the Amazon Web Services network to support your tightly coupled workloads.  Limitations    Supported zones   Availability Zone   Local Zone     Supported instance types    hpc6a.48xlarge | hpc6id.32xlarge | hpc7a.12xlarge | hpc7a.24xlarge | hpc7a.48xlarge | hpc7a.96xlarge | hpc7g.4xlarge | hpc7g.8xlarge | hpc7g.16xlarge     p3dn.24xlarge | p4d.24xlarge | p4de.24xlarge | p5.48xlarge     trn1.2xlarge | trn1.32xlarge | trn1n.32xlarge      For more information, see Amazon EC2 instance topology in the Amazon EC2 User Guide.
+   */
+  describeInstanceTopology(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceTopologyResult) => void): Request<EC2.Types.DescribeInstanceTopologyResult, AWSError>;
   /**
    * Returns a list of all instance types offered. The results can be filtered by location (Region or Availability Zone). If no location is specified, the instance types offered in the current Region are returned.
    */
@@ -2989,11 +2997,11 @@ declare class EC2 extends Service {
    */
   disableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.  To change these settings, you must own the AMI. 
+   * Discontinue Windows fast launch for a Windows AMI, and clean up existing pre-provisioned snapshots. After you disable Windows fast launch, the AMI uses the standard launch process for each new instance. Amazon EC2 must remove all pre-provisioned snapshots before you can enable Windows fast launch again.  You can only change these settings for Windows AMIs that you own or that have been shared with you. 
    */
   disableFastLaunch(params: EC2.Types.DisableFastLaunchRequest, callback?: (err: AWSError, data: EC2.Types.DisableFastLaunchResult) => void): Request<EC2.Types.DisableFastLaunchResult, AWSError>;
   /**
-   * Discontinue faster launching for a Windows AMI, and clean up existing pre-provisioned snapshots. When you disable faster launching, the AMI uses the standard launch process for each instance. All pre-provisioned snapshots must be removed before you can enable faster launching again.  To change these settings, you must own the AMI. 
+   * Discontinue Windows fast launch for a Windows AMI, and clean up existing pre-provisioned snapshots. After you disable Windows fast launch, the AMI uses the standard launch process for each new instance. Amazon EC2 must remove all pre-provisioned snapshots before you can enable Windows fast launch again.  You can only change these settings for Windows AMIs that you own or that have been shared with you. 
    */
   disableFastLaunch(callback?: (err: AWSError, data: EC2.Types.DisableFastLaunchResult) => void): Request<EC2.Types.DisableFastLaunchResult, AWSError>;
   /**
@@ -3005,11 +3013,11 @@ declare class EC2 extends Service {
    */
   disableFastSnapshotRestores(callback?: (err: AWSError, data: EC2.Types.DisableFastSnapshotRestoresResult) => void): Request<EC2.Types.DisableFastSnapshotRestoresResult, AWSError>;
   /**
-   * Sets the AMI state to disabled and removes all launch permissions from the AMI. A disabled AMI can't be used for instance launches. A disabled AMI can't be shared. If a public or shared AMI was previously shared, it is made private. If an AMI was shared with an Amazon Web Services account, organization, or Organizational Unit, they lose access to the disabled AMI.  A disabled AMI does not appear in DescribeImages API calls by default. Only the AMI owner can disable an AMI. You can re-enable a disabled AMI using EnableImage. For more information, see Disable an AMI in the Amazon EC2 User Guide.
+   * Sets the AMI state to disabled and removes all launch permissions from the AMI. A disabled AMI can't be used for instance launches. A disabled AMI can't be shared. If an AMI was public or previously shared, it is made private. If an AMI was shared with an Amazon Web Services account, organization, or Organizational Unit, they lose access to the disabled AMI.  A disabled AMI does not appear in DescribeImages API calls by default. Only the AMI owner can disable an AMI. You can re-enable a disabled AMI using EnableImage. For more information, see Disable an AMI in the Amazon EC2 User Guide.
    */
   disableImage(params: EC2.Types.DisableImageRequest, callback?: (err: AWSError, data: EC2.Types.DisableImageResult) => void): Request<EC2.Types.DisableImageResult, AWSError>;
   /**
-   * Sets the AMI state to disabled and removes all launch permissions from the AMI. A disabled AMI can't be used for instance launches. A disabled AMI can't be shared. If a public or shared AMI was previously shared, it is made private. If an AMI was shared with an Amazon Web Services account, organization, or Organizational Unit, they lose access to the disabled AMI.  A disabled AMI does not appear in DescribeImages API calls by default. Only the AMI owner can disable an AMI. You can re-enable a disabled AMI using EnableImage. For more information, see Disable an AMI in the Amazon EC2 User Guide.
+   * Sets the AMI state to disabled and removes all launch permissions from the AMI. A disabled AMI can't be used for instance launches. A disabled AMI can't be shared. If an AMI was public or previously shared, it is made private. If an AMI was shared with an Amazon Web Services account, organization, or Organizational Unit, they lose access to the disabled AMI.  A disabled AMI does not appear in DescribeImages API calls by default. Only the AMI owner can disable an AMI. You can re-enable a disabled AMI using EnableImage. For more information, see Disable an AMI in the Amazon EC2 User Guide.
    */
   disableImage(callback?: (err: AWSError, data: EC2.Types.DisableImageResult) => void): Request<EC2.Types.DisableImageResult, AWSError>;
   /**
@@ -3221,11 +3229,11 @@ declare class EC2 extends Service {
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.  To change these settings, you must own the AMI. 
+   * When you enable Windows fast launch for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.  You can only change these settings for Windows AMIs that you own or that have been shared with you. 
    */
   enableFastLaunch(params: EC2.Types.EnableFastLaunchRequest, callback?: (err: AWSError, data: EC2.Types.EnableFastLaunchResult) => void): Request<EC2.Types.EnableFastLaunchResult, AWSError>;
   /**
-   * When you enable faster launching for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.  To change these settings, you must own the AMI. 
+   * When you enable Windows fast launch for a Windows AMI, images are pre-provisioned, using snapshots to launch instances up to 65% faster. To create the optimized Windows image, Amazon EC2 launches an instance and runs through Sysprep steps, rebooting as required. Then it creates a set of reserved snapshots that are used for subsequent launches. The reserved snapshots are automatically replenished as they are used, depending on your settings for launch frequency.  You can only change these settings for Windows AMIs that you own or that have been shared with you. 
    */
   enableFastLaunch(callback?: (err: AWSError, data: EC2.Types.EnableFastLaunchResult) => void): Request<EC2.Types.EnableFastLaunchResult, AWSError>;
   /**
@@ -5162,9 +5170,9 @@ declare namespace EC2 {
      */
     Max?: Integer;
   }
-  export type AcceleratorManufacturer = "nvidia"|"amd"|"amazon-web-services"|"xilinx"|string;
+  export type AcceleratorManufacturer = "amazon-web-services"|"amd"|"nvidia"|"xilinx"|string;
   export type AcceleratorManufacturerSet = AcceleratorManufacturer[];
-  export type AcceleratorName = "a100"|"v100"|"k80"|"t4"|"m60"|"radeon-pro-v520"|"vu9p"|"inferentia"|"k520"|string;
+  export type AcceleratorName = "a100"|"inferentia"|"k520"|"k80"|"m60"|"radeon-pro-v520"|"t4"|"vu9p"|"v100"|string;
   export type AcceleratorNameSet = AcceleratorName[];
   export interface AcceleratorTotalMemoryMiB {
     /**
@@ -6684,11 +6692,11 @@ declare namespace EC2 {
   }
   export interface AttachVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Verified Access trust provider.
+     * Details about the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
     /**
-     * The ID of the Verified Access instance.
+     * Details about the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
@@ -7848,7 +7856,6 @@ declare namespace EC2 {
     BannerText?: String;
   }
   export type ClientSecretType = string;
-  export type ClientVpnAssociationId = string;
   export interface ClientVpnAuthentication {
     /**
      * The authentication type used.
@@ -9197,7 +9204,7 @@ declare namespace EC2 {
   }
   export interface CreateImageRequest {
     /**
-     * The block device mappings. This parameter cannot be used to modify the encryption status of existing volumes or snapshots. To create an AMI with encrypted snapshots, use the CopyImage action.
+     * The block device mappings. When using the CreateImage action:   You can't change the volume size using the VolumeSize parameter. If you want a different volume size, you must first change the volume size of the source instance.   You can't modify the encryption status of existing volumes or snapshots. To create an AMI with volumes or snapshots that have a different encryption status (for example, where the source volume and snapshots are unencrypted, and you want to create an AMI with encrypted volumes or snapshots), use the CopyImage action.   The only option that can be changed for existing mappings or snapshots is DeleteOnTermination.  
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
@@ -11065,7 +11072,7 @@ declare namespace EC2 {
      */
     EndpointDomainPrefix: String;
     /**
-     * The IDs of the security groups to associate with the Verified Access endpoint.
+     * The IDs of the security groups to associate with the Verified Access endpoint. Required if AttachmentType is set to vpc.
      */
     SecurityGroupIds?: SecurityGroupIdList;
     /**
@@ -11097,13 +11104,13 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     *  Options for server side encryption. 
+     * The options for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface CreateVerifiedAccessEndpointResult {
     /**
-     * The ID of the Verified Access endpoint.
+     * Details about the Verified Access endpoint.
      */
     VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
   }
@@ -11134,13 +11141,13 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     *  Options for server side encryption. 
+     * The options for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface CreateVerifiedAccessGroupResult {
     /**
-     * The ID of the Verified Access group.
+     * Details about the Verified Access group.
      */
     VerifiedAccessGroup?: VerifiedAccessGroup;
   }
@@ -11168,7 +11175,7 @@ declare namespace EC2 {
   }
   export interface CreateVerifiedAccessInstanceResult {
     /**
-     * The ID of the Verified Access instance.
+     * Details about the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
@@ -11250,13 +11257,13 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     *  Options for server side encryption. 
+     * The options for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface CreateVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Verified Access trust provider.
+     * Details about the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
   }
@@ -12857,7 +12864,7 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessEndpointResult {
     /**
-     * The ID of the Verified Access endpoint.
+     * Details about the Verified Access endpoint.
      */
     VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
   }
@@ -12877,7 +12884,7 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessGroupResult {
     /**
-     * The ID of the Verified Access group.
+     * Details about the Verified Access group.
      */
     VerifiedAccessGroup?: VerifiedAccessGroup;
   }
@@ -12897,7 +12904,7 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessInstanceResult {
     /**
-     * The ID of the Verified Access instance.
+     * Details about the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
@@ -12917,7 +12924,7 @@ declare namespace EC2 {
   }
   export interface DeleteVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Verified Access trust provider.
+     * Details about the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
   }
@@ -13966,11 +13973,11 @@ declare namespace EC2 {
   }
   export interface DescribeFastLaunchImagesRequest {
     /**
-     * Details for one or more Windows AMI image IDs.
+     * Specify one or more Windows AMI image IDs for the request.
      */
     ImageIds?: FastLaunchImageIdList;
     /**
-     * Use the following filters to streamline results.    resource-type - The resource type for pre-provisioning.    launch-template - The launch template that is associated with the pre-provisioned Windows AMI.    owner-id - The owner ID for the pre-provisioning resource.    state - The current state of fast launching for the Windows AMI.  
+     * Use the following filters to streamline results.    resource-type - The resource type for pre-provisioning.    owner-id - The owner ID for the pre-provisioning resource.    state - The current state of fast launching for the Windows AMI.  
      */
     Filters?: FilterList;
     /**
@@ -13999,11 +14006,11 @@ declare namespace EC2 {
   }
   export interface DescribeFastLaunchImagesSuccessItem {
     /**
-     * The image ID that identifies the fast-launch enabled Windows image.
+     * The image ID that identifies the Windows fast launch enabled image.
      */
     ImageId?: ImageId;
     /**
-     * The resource type that is used for pre-provisioning the Windows AMI. Supported values include: snapshot.
+     * The resource type that Amazon EC2 uses for pre-provisioning the Windows AMI. Supported values include: snapshot.
      */
     ResourceType?: FastLaunchResourceType;
     /**
@@ -14011,27 +14018,27 @@ declare namespace EC2 {
      */
     SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
     /**
-     * The launch template that the fast-launch enabled Windows AMI uses when it launches Windows instances from pre-provisioned snapshots.
+     * The launch template that the Windows fast launch enabled AMI uses when it launches Windows instances from pre-provisioned snapshots.
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
     /**
-     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows faster launching.
+     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows fast launch.
      */
     MaxParallelLaunches?: Integer;
     /**
-     * The owner ID for the fast-launch enabled Windows AMI.
+     * The owner ID for the Windows fast launch enabled AMI.
      */
     OwnerId?: String;
     /**
-     * The current state of faster launching for the specified Windows AMI.
+     * The current state of Windows fast launch for the specified Windows AMI.
      */
     State?: FastLaunchStateCode;
     /**
-     * The reason that faster launching for the Windows AMI changed to the current state.
+     * The reason that Windows fast launch for the AMI changed to the current state.
      */
     StateTransitionReason?: String;
     /**
-     * The time that faster launching for the Windows AMI changed to the current state.
+     * The time that Windows fast launch for the AMI changed to the current state.
      */
     StateTransitionTime?: MillisecondDateTime;
   }
@@ -14789,6 +14796,45 @@ declare namespace EC2 {
      * Information about the status of the instances.
      */
     InstanceStatuses?: InstanceStatusList;
+    /**
+     * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
+     */
+    NextToken?: String;
+  }
+  export type DescribeInstanceTopologyGroupNameSet = PlacementGroupName[];
+  export type DescribeInstanceTopologyInstanceIdSet = InstanceId[];
+  export type DescribeInstanceTopologyMaxResults = number;
+  export interface DescribeInstanceTopologyRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see Pagination. You can't specify this parameter and the instance IDs parameter in the same request. Default: 20 
+     */
+    MaxResults?: DescribeInstanceTopologyMaxResults;
+    /**
+     * The instance IDs. Default: Describes all your instances. Constraints: Maximum 100 explicitly specified instance IDs.
+     */
+    InstanceIds?: DescribeInstanceTopologyInstanceIdSet;
+    /**
+     * The name of the placement group that each instance is in. Constraints: Maximum 100 explicitly specified placement group names.
+     */
+    GroupNames?: DescribeInstanceTopologyGroupNameSet;
+    /**
+     * The filters.    availability-zone - The name of the Availability Zone (for example, us-west-2a) or Local Zone (for example, us-west-2-lax-1b) that the instance is in.    instance-type - The instance type (for example, p4d.24xlarge) or instance family (for example, p4d*). You can use the * wildcard to match zero or more characters, or the ? wildcard to match zero or one character.    zone-id - The ID of the Availability Zone (for example, usw2-az2) or Local Zone (for example, usw2-lax1-az1) that the instance is in.  
+     */
+    Filters?: FilterList;
+  }
+  export interface DescribeInstanceTopologyResult {
+    /**
+     * Information about the topology of each instance.
+     */
+    Instances?: InstanceSet;
     /**
      * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
      */
@@ -17224,7 +17270,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessEndpointsResult {
     /**
-     * The ID of the Verified Access endpoint.
+     * Details about the Verified Access endpoints.
      */
     VerifiedAccessEndpoints?: VerifiedAccessEndpointList;
     /**
@@ -17261,7 +17307,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessGroupsResult {
     /**
-     * The ID of the Verified Access group.
+     * Details about the Verified Access groups.
      */
     VerifiedAccessGroups?: VerifiedAccessGroupList;
     /**
@@ -17294,7 +17340,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessInstanceLoggingConfigurationsResult {
     /**
-     * The current logging configuration for the Verified Access instances.
+     * The logging configuration for the Verified Access instances.
      */
     LoggingConfigurations?: VerifiedAccessInstanceLoggingConfigurationList;
     /**
@@ -17327,7 +17373,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessInstancesResult {
     /**
-     * The IDs of the Verified Access instances.
+     * Details about the Verified Access instances.
      */
     VerifiedAccessInstances?: VerifiedAccessInstanceList;
     /**
@@ -17360,7 +17406,7 @@ declare namespace EC2 {
   }
   export interface DescribeVerifiedAccessTrustProvidersResult {
     /**
-     * The IDs of the Verified Access trust providers.
+     * Details about the Verified Access trust providers.
      */
     VerifiedAccessTrustProviders?: VerifiedAccessTrustProviderList;
     /**
@@ -17965,11 +18011,11 @@ declare namespace EC2 {
   }
   export interface DetachVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Verified Access trust provider.
+     * Details about the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
     /**
-     * The ID of the Verified Access instance.
+     * Details about the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
@@ -18120,11 +18166,11 @@ declare namespace EC2 {
   }
   export interface DisableFastLaunchRequest {
     /**
-     * The ID of the image for which you’re turning off faster launching, and removing pre-provisioned snapshots.
+     * Specify the ID of the image for which to disable Windows fast launch.
      */
     ImageId: ImageId;
     /**
-     * Forces the image settings to turn off faster launching for your Windows AMI. This parameter overrides any errors that are encountered while cleaning up resources in your account.
+     * Forces the image settings to turn off Windows fast launch for your Windows AMI. This parameter overrides any errors that are encountered while cleaning up resources in your account.
      */
     Force?: Boolean;
     /**
@@ -18134,15 +18180,15 @@ declare namespace EC2 {
   }
   export interface DisableFastLaunchResult {
     /**
-     * The ID of the image for which faster-launching has been turned off.
+     * The ID of the image for which Windows fast launch was disabled.
      */
     ImageId?: ImageId;
     /**
-     * The pre-provisioning resource type that must be cleaned after turning off faster launching for the Windows AMI. Supported values include: snapshot.
+     * The pre-provisioning resource type that must be cleaned after turning off Windows fast launch for the Windows AMI. Supported values include: snapshot.
      */
     ResourceType?: FastLaunchResourceType;
     /**
-     * Parameters that were used for faster launching for the Windows AMI before faster launching was turned off. This informs the clean-up process.
+     * Parameters that were used for Windows fast launch for the Windows AMI before Windows fast launch was disabled. This informs the clean-up process.
      */
     SnapshotConfiguration?: FastLaunchSnapshotConfigurationResponse;
     /**
@@ -18150,23 +18196,23 @@ declare namespace EC2 {
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
     /**
-     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows faster launching.
+     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows fast launch.
      */
     MaxParallelLaunches?: Integer;
     /**
-     * The owner of the Windows AMI for which faster launching was turned off.
+     * The owner of the Windows AMI for which Windows fast launch was disabled.
      */
     OwnerId?: String;
     /**
-     * The current state of faster launching for the specified Windows AMI.
+     * The current state of Windows fast launch for the specified Windows AMI.
      */
     State?: FastLaunchStateCode;
     /**
-     * The reason that the state changed for faster launching for the Windows AMI.
+     * The reason that the state changed for Windows fast launch for the Windows AMI.
      */
     StateTransitionReason?: String;
     /**
-     * The time that the state changed for faster launching for the Windows AMI.
+     * The time that the state changed for Windows fast launch for the Windows AMI.
      */
     StateTransitionTime?: MillisecondDateTime;
   }
@@ -18445,7 +18491,7 @@ declare namespace EC2 {
     /**
      * The ID of the target network association.
      */
-    AssociationId: ClientVpnAssociationId;
+    AssociationId: String;
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
@@ -19221,15 +19267,15 @@ declare namespace EC2 {
   }
   export interface EnableFastLaunchRequest {
     /**
-     * The ID of the image for which you’re enabling faster launching.
+     * Specify the ID of the image for which to enable Windows fast launch.
      */
     ImageId: ImageId;
     /**
-     * The type of resource to use for pre-provisioning the Windows AMI for faster launching. Supported values include: snapshot, which is the default value.
+     * The type of resource to use for pre-provisioning the AMI for Windows fast launch. Supported values include: snapshot, which is the default value.
      */
     ResourceType?: String;
     /**
-     * Configuration settings for creating and managing the snapshots that are used for pre-provisioning the Windows AMI for faster launching. The associated ResourceType must be snapshot.
+     * Configuration settings for creating and managing the snapshots that are used for pre-provisioning the AMI for Windows fast launch. The associated ResourceType must be snapshot.
      */
     SnapshotConfiguration?: FastLaunchSnapshotConfigurationRequest;
     /**
@@ -19237,7 +19283,7 @@ declare namespace EC2 {
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationRequest;
     /**
-     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows faster launching. Value must be 6 or greater.
+     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows fast launch. Value must be 6 or greater.
      */
     MaxParallelLaunches?: Integer;
     /**
@@ -19247,11 +19293,11 @@ declare namespace EC2 {
   }
   export interface EnableFastLaunchResult {
     /**
-     * The image ID that identifies the Windows AMI for which faster launching was enabled.
+     * The image ID that identifies the AMI for which Windows fast launch was enabled.
      */
     ImageId?: ImageId;
     /**
-     * The type of resource that was defined for pre-provisioning the Windows AMI for faster launching.
+     * The type of resource that was defined for pre-provisioning the AMI for Windows fast launch.
      */
     ResourceType?: FastLaunchResourceType;
     /**
@@ -19263,23 +19309,23 @@ declare namespace EC2 {
      */
     LaunchTemplate?: FastLaunchLaunchTemplateSpecificationResponse;
     /**
-     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows faster launching.
+     * The maximum number of instances that Amazon EC2 can launch at the same time to create pre-provisioned snapshots for Windows fast launch.
      */
     MaxParallelLaunches?: Integer;
     /**
-     * The owner ID for the Windows AMI for which faster launching was enabled.
+     * The owner ID for the AMI for which Windows fast launch was enabled.
      */
     OwnerId?: String;
     /**
-     * The current state of faster launching for the specified Windows AMI.
+     * The current state of Windows fast launch for the specified AMI.
      */
     State?: FastLaunchStateCode;
     /**
-     * The reason that the state changed for faster launching for the Windows AMI.
+     * The reason that the state changed for Windows fast launch for the AMI.
      */
     StateTransitionReason?: String;
     /**
-     * The time that the state changed for faster launching for the Windows AMI.
+     * The time that the state changed for Windows fast launch for the AMI.
      */
     StateTransitionTime?: MillisecondDateTime;
   }
@@ -20112,42 +20158,42 @@ declare namespace EC2 {
   export type FastLaunchImageIdList = ImageId[];
   export interface FastLaunchLaunchTemplateSpecificationRequest {
     /**
-     * The ID of the launch template to use for faster launching for a Windows AMI.
+     * Specify the ID of the launch template that the AMI should use for Windows fast launch.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template to use for faster launching for a Windows AMI.
+     * Specify the name of the launch template that the AMI should use for Windows fast launch.
      */
     LaunchTemplateName?: String;
     /**
-     * The version of the launch template to use for faster launching for a Windows AMI.
+     * Specify the version of the launch template that the AMI should use for Windows fast launch.
      */
     Version: String;
   }
   export interface FastLaunchLaunchTemplateSpecificationResponse {
     /**
-     * The ID of the launch template for faster launching of the associated Windows AMI.
+     * The ID of the launch template that the AMI uses for Windows fast launch.
      */
     LaunchTemplateId?: LaunchTemplateId;
     /**
-     * The name of the launch template for faster launching of the associated Windows AMI.
+     * The name of the launch template that the AMI uses for Windows fast launch.
      */
     LaunchTemplateName?: String;
     /**
-     * The version of the launch template for faster launching of the associated Windows AMI.
+     * The version of the launch template that the AMI uses for Windows fast launch.
      */
     Version?: String;
   }
   export type FastLaunchResourceType = "snapshot"|string;
   export interface FastLaunchSnapshotConfigurationRequest {
     /**
-     * The number of pre-provisioned snapshots to keep on hand for a fast-launch enabled Windows AMI.
+     * The number of pre-provisioned snapshots to keep on hand for a Windows fast launch enabled AMI.
      */
     TargetResourceCount?: Integer;
   }
   export interface FastLaunchSnapshotConfigurationResponse {
     /**
-     * The number of pre-provisioned snapshots requested to keep on hand for a fast-launch enabled Windows AMI.
+     * The number of pre-provisioned snapshots requested to keep on hand for a Windows fast launch enabled AMI.
      */
     TargetResourceCount?: Integer;
   }
@@ -20951,6 +20997,10 @@ declare namespace EC2 {
      * The ID of the local gateway route table.
      */
     LocalGatewayRouteTableId?: String;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface GetConsoleOutputRequest {
     /**
@@ -24449,6 +24499,7 @@ declare namespace EC2 {
      */
     InstanceRequirements?: InstanceRequirementsRequest;
   }
+  export type InstanceSet = InstanceTopology[];
   export interface InstanceSpecification {
     /**
      * The instance to specify which volumes should be snapshotted.
@@ -24602,6 +24653,32 @@ declare namespace EC2 {
      * Indicates wheter all tag keys in the current Region are registered to appear in scheduled event notifications. true indicates that all tag keys in the current Region are registered.
      */
     IncludeAllTagsOfInstance?: Boolean;
+  }
+  export interface InstanceTopology {
+    /**
+     * The instance ID.
+     */
+    InstanceId?: String;
+    /**
+     * The instance type.
+     */
+    InstanceType?: String;
+    /**
+     * The name of the placement group that the instance is in.
+     */
+    GroupName?: String;
+    /**
+     * The network nodes. The nodes are hashed based on your account. Instances from different accounts running under the same droplet will return a different hashed list of strings.
+     */
+    NetworkNodes?: NetworkNodesList;
+    /**
+     * The name of the Availability Zone or Local Zone that the instance is in.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The ID of the Availability Zone or Local Zone that the instance is in.
+     */
+    ZoneId?: String;
   }
   export type InstanceType = "a1.medium"|"a1.large"|"a1.xlarge"|"a1.2xlarge"|"a1.4xlarge"|"a1.metal"|"c1.medium"|"c1.xlarge"|"c3.large"|"c3.xlarge"|"c3.2xlarge"|"c3.4xlarge"|"c3.8xlarge"|"c4.large"|"c4.xlarge"|"c4.2xlarge"|"c4.4xlarge"|"c4.8xlarge"|"c5.large"|"c5.xlarge"|"c5.2xlarge"|"c5.4xlarge"|"c5.9xlarge"|"c5.12xlarge"|"c5.18xlarge"|"c5.24xlarge"|"c5.metal"|"c5a.large"|"c5a.xlarge"|"c5a.2xlarge"|"c5a.4xlarge"|"c5a.8xlarge"|"c5a.12xlarge"|"c5a.16xlarge"|"c5a.24xlarge"|"c5ad.large"|"c5ad.xlarge"|"c5ad.2xlarge"|"c5ad.4xlarge"|"c5ad.8xlarge"|"c5ad.12xlarge"|"c5ad.16xlarge"|"c5ad.24xlarge"|"c5d.large"|"c5d.xlarge"|"c5d.2xlarge"|"c5d.4xlarge"|"c5d.9xlarge"|"c5d.12xlarge"|"c5d.18xlarge"|"c5d.24xlarge"|"c5d.metal"|"c5n.large"|"c5n.xlarge"|"c5n.2xlarge"|"c5n.4xlarge"|"c5n.9xlarge"|"c5n.18xlarge"|"c5n.metal"|"c6g.medium"|"c6g.large"|"c6g.xlarge"|"c6g.2xlarge"|"c6g.4xlarge"|"c6g.8xlarge"|"c6g.12xlarge"|"c6g.16xlarge"|"c6g.metal"|"c6gd.medium"|"c6gd.large"|"c6gd.xlarge"|"c6gd.2xlarge"|"c6gd.4xlarge"|"c6gd.8xlarge"|"c6gd.12xlarge"|"c6gd.16xlarge"|"c6gd.metal"|"c6gn.medium"|"c6gn.large"|"c6gn.xlarge"|"c6gn.2xlarge"|"c6gn.4xlarge"|"c6gn.8xlarge"|"c6gn.12xlarge"|"c6gn.16xlarge"|"c6i.large"|"c6i.xlarge"|"c6i.2xlarge"|"c6i.4xlarge"|"c6i.8xlarge"|"c6i.12xlarge"|"c6i.16xlarge"|"c6i.24xlarge"|"c6i.32xlarge"|"c6i.metal"|"cc1.4xlarge"|"cc2.8xlarge"|"cg1.4xlarge"|"cr1.8xlarge"|"d2.xlarge"|"d2.2xlarge"|"d2.4xlarge"|"d2.8xlarge"|"d3.xlarge"|"d3.2xlarge"|"d3.4xlarge"|"d3.8xlarge"|"d3en.xlarge"|"d3en.2xlarge"|"d3en.4xlarge"|"d3en.6xlarge"|"d3en.8xlarge"|"d3en.12xlarge"|"dl1.24xlarge"|"f1.2xlarge"|"f1.4xlarge"|"f1.16xlarge"|"g2.2xlarge"|"g2.8xlarge"|"g3.4xlarge"|"g3.8xlarge"|"g3.16xlarge"|"g3s.xlarge"|"g4ad.xlarge"|"g4ad.2xlarge"|"g4ad.4xlarge"|"g4ad.8xlarge"|"g4ad.16xlarge"|"g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|"g4dn.metal"|"g5.xlarge"|"g5.2xlarge"|"g5.4xlarge"|"g5.8xlarge"|"g5.12xlarge"|"g5.16xlarge"|"g5.24xlarge"|"g5.48xlarge"|"g5g.xlarge"|"g5g.2xlarge"|"g5g.4xlarge"|"g5g.8xlarge"|"g5g.16xlarge"|"g5g.metal"|"hi1.4xlarge"|"hpc6a.48xlarge"|"hs1.8xlarge"|"h1.2xlarge"|"h1.4xlarge"|"h1.8xlarge"|"h1.16xlarge"|"i2.xlarge"|"i2.2xlarge"|"i2.4xlarge"|"i2.8xlarge"|"i3.large"|"i3.xlarge"|"i3.2xlarge"|"i3.4xlarge"|"i3.8xlarge"|"i3.16xlarge"|"i3.metal"|"i3en.large"|"i3en.xlarge"|"i3en.2xlarge"|"i3en.3xlarge"|"i3en.6xlarge"|"i3en.12xlarge"|"i3en.24xlarge"|"i3en.metal"|"im4gn.large"|"im4gn.xlarge"|"im4gn.2xlarge"|"im4gn.4xlarge"|"im4gn.8xlarge"|"im4gn.16xlarge"|"inf1.xlarge"|"inf1.2xlarge"|"inf1.6xlarge"|"inf1.24xlarge"|"is4gen.medium"|"is4gen.large"|"is4gen.xlarge"|"is4gen.2xlarge"|"is4gen.4xlarge"|"is4gen.8xlarge"|"m1.small"|"m1.medium"|"m1.large"|"m1.xlarge"|"m2.xlarge"|"m2.2xlarge"|"m2.4xlarge"|"m3.medium"|"m3.large"|"m3.xlarge"|"m3.2xlarge"|"m4.large"|"m4.xlarge"|"m4.2xlarge"|"m4.4xlarge"|"m4.10xlarge"|"m4.16xlarge"|"m5.large"|"m5.xlarge"|"m5.2xlarge"|"m5.4xlarge"|"m5.8xlarge"|"m5.12xlarge"|"m5.16xlarge"|"m5.24xlarge"|"m5.metal"|"m5a.large"|"m5a.xlarge"|"m5a.2xlarge"|"m5a.4xlarge"|"m5a.8xlarge"|"m5a.12xlarge"|"m5a.16xlarge"|"m5a.24xlarge"|"m5ad.large"|"m5ad.xlarge"|"m5ad.2xlarge"|"m5ad.4xlarge"|"m5ad.8xlarge"|"m5ad.12xlarge"|"m5ad.16xlarge"|"m5ad.24xlarge"|"m5d.large"|"m5d.xlarge"|"m5d.2xlarge"|"m5d.4xlarge"|"m5d.8xlarge"|"m5d.12xlarge"|"m5d.16xlarge"|"m5d.24xlarge"|"m5d.metal"|"m5dn.large"|"m5dn.xlarge"|"m5dn.2xlarge"|"m5dn.4xlarge"|"m5dn.8xlarge"|"m5dn.12xlarge"|"m5dn.16xlarge"|"m5dn.24xlarge"|"m5dn.metal"|"m5n.large"|"m5n.xlarge"|"m5n.2xlarge"|"m5n.4xlarge"|"m5n.8xlarge"|"m5n.12xlarge"|"m5n.16xlarge"|"m5n.24xlarge"|"m5n.metal"|"m5zn.large"|"m5zn.xlarge"|"m5zn.2xlarge"|"m5zn.3xlarge"|"m5zn.6xlarge"|"m5zn.12xlarge"|"m5zn.metal"|"m6a.large"|"m6a.xlarge"|"m6a.2xlarge"|"m6a.4xlarge"|"m6a.8xlarge"|"m6a.12xlarge"|"m6a.16xlarge"|"m6a.24xlarge"|"m6a.32xlarge"|"m6a.48xlarge"|"m6g.metal"|"m6g.medium"|"m6g.large"|"m6g.xlarge"|"m6g.2xlarge"|"m6g.4xlarge"|"m6g.8xlarge"|"m6g.12xlarge"|"m6g.16xlarge"|"m6gd.metal"|"m6gd.medium"|"m6gd.large"|"m6gd.xlarge"|"m6gd.2xlarge"|"m6gd.4xlarge"|"m6gd.8xlarge"|"m6gd.12xlarge"|"m6gd.16xlarge"|"m6i.large"|"m6i.xlarge"|"m6i.2xlarge"|"m6i.4xlarge"|"m6i.8xlarge"|"m6i.12xlarge"|"m6i.16xlarge"|"m6i.24xlarge"|"m6i.32xlarge"|"m6i.metal"|"mac1.metal"|"p2.xlarge"|"p2.8xlarge"|"p2.16xlarge"|"p3.2xlarge"|"p3.8xlarge"|"p3.16xlarge"|"p3dn.24xlarge"|"p4d.24xlarge"|"r3.large"|"r3.xlarge"|"r3.2xlarge"|"r3.4xlarge"|"r3.8xlarge"|"r4.large"|"r4.xlarge"|"r4.2xlarge"|"r4.4xlarge"|"r4.8xlarge"|"r4.16xlarge"|"r5.large"|"r5.xlarge"|"r5.2xlarge"|"r5.4xlarge"|"r5.8xlarge"|"r5.12xlarge"|"r5.16xlarge"|"r5.24xlarge"|"r5.metal"|"r5a.large"|"r5a.xlarge"|"r5a.2xlarge"|"r5a.4xlarge"|"r5a.8xlarge"|"r5a.12xlarge"|"r5a.16xlarge"|"r5a.24xlarge"|"r5ad.large"|"r5ad.xlarge"|"r5ad.2xlarge"|"r5ad.4xlarge"|"r5ad.8xlarge"|"r5ad.12xlarge"|"r5ad.16xlarge"|"r5ad.24xlarge"|"r5b.large"|"r5b.xlarge"|"r5b.2xlarge"|"r5b.4xlarge"|"r5b.8xlarge"|"r5b.12xlarge"|"r5b.16xlarge"|"r5b.24xlarge"|"r5b.metal"|"r5d.large"|"r5d.xlarge"|"r5d.2xlarge"|"r5d.4xlarge"|"r5d.8xlarge"|"r5d.12xlarge"|"r5d.16xlarge"|"r5d.24xlarge"|"r5d.metal"|"r5dn.large"|"r5dn.xlarge"|"r5dn.2xlarge"|"r5dn.4xlarge"|"r5dn.8xlarge"|"r5dn.12xlarge"|"r5dn.16xlarge"|"r5dn.24xlarge"|"r5dn.metal"|"r5n.large"|"r5n.xlarge"|"r5n.2xlarge"|"r5n.4xlarge"|"r5n.8xlarge"|"r5n.12xlarge"|"r5n.16xlarge"|"r5n.24xlarge"|"r5n.metal"|"r6g.medium"|"r6g.large"|"r6g.xlarge"|"r6g.2xlarge"|"r6g.4xlarge"|"r6g.8xlarge"|"r6g.12xlarge"|"r6g.16xlarge"|"r6g.metal"|"r6gd.medium"|"r6gd.large"|"r6gd.xlarge"|"r6gd.2xlarge"|"r6gd.4xlarge"|"r6gd.8xlarge"|"r6gd.12xlarge"|"r6gd.16xlarge"|"r6gd.metal"|"r6i.large"|"r6i.xlarge"|"r6i.2xlarge"|"r6i.4xlarge"|"r6i.8xlarge"|"r6i.12xlarge"|"r6i.16xlarge"|"r6i.24xlarge"|"r6i.32xlarge"|"r6i.metal"|"t1.micro"|"t2.nano"|"t2.micro"|"t2.small"|"t2.medium"|"t2.large"|"t2.xlarge"|"t2.2xlarge"|"t3.nano"|"t3.micro"|"t3.small"|"t3.medium"|"t3.large"|"t3.xlarge"|"t3.2xlarge"|"t3a.nano"|"t3a.micro"|"t3a.small"|"t3a.medium"|"t3a.large"|"t3a.xlarge"|"t3a.2xlarge"|"t4g.nano"|"t4g.micro"|"t4g.small"|"t4g.medium"|"t4g.large"|"t4g.xlarge"|"t4g.2xlarge"|"u-6tb1.56xlarge"|"u-6tb1.112xlarge"|"u-9tb1.112xlarge"|"u-12tb1.112xlarge"|"u-6tb1.metal"|"u-9tb1.metal"|"u-12tb1.metal"|"u-18tb1.metal"|"u-24tb1.metal"|"vt1.3xlarge"|"vt1.6xlarge"|"vt1.24xlarge"|"x1.16xlarge"|"x1.32xlarge"|"x1e.xlarge"|"x1e.2xlarge"|"x1e.4xlarge"|"x1e.8xlarge"|"x1e.16xlarge"|"x1e.32xlarge"|"x2iezn.2xlarge"|"x2iezn.4xlarge"|"x2iezn.6xlarge"|"x2iezn.8xlarge"|"x2iezn.12xlarge"|"x2iezn.metal"|"x2gd.medium"|"x2gd.large"|"x2gd.xlarge"|"x2gd.2xlarge"|"x2gd.4xlarge"|"x2gd.8xlarge"|"x2gd.12xlarge"|"x2gd.16xlarge"|"x2gd.metal"|"z1d.large"|"z1d.xlarge"|"z1d.2xlarge"|"z1d.3xlarge"|"z1d.6xlarge"|"z1d.12xlarge"|"z1d.metal"|"x2idn.16xlarge"|"x2idn.24xlarge"|"x2idn.32xlarge"|"x2iedn.xlarge"|"x2iedn.2xlarge"|"x2iedn.4xlarge"|"x2iedn.8xlarge"|"x2iedn.16xlarge"|"x2iedn.24xlarge"|"x2iedn.32xlarge"|"c6a.large"|"c6a.xlarge"|"c6a.2xlarge"|"c6a.4xlarge"|"c6a.8xlarge"|"c6a.12xlarge"|"c6a.16xlarge"|"c6a.24xlarge"|"c6a.32xlarge"|"c6a.48xlarge"|"c6a.metal"|"m6a.metal"|"i4i.large"|"i4i.xlarge"|"i4i.2xlarge"|"i4i.4xlarge"|"i4i.8xlarge"|"i4i.16xlarge"|"i4i.32xlarge"|"i4i.metal"|"x2idn.metal"|"x2iedn.metal"|"c7g.medium"|"c7g.large"|"c7g.xlarge"|"c7g.2xlarge"|"c7g.4xlarge"|"c7g.8xlarge"|"c7g.12xlarge"|"c7g.16xlarge"|"mac2.metal"|"c6id.large"|"c6id.xlarge"|"c6id.2xlarge"|"c6id.4xlarge"|"c6id.8xlarge"|"c6id.12xlarge"|"c6id.16xlarge"|"c6id.24xlarge"|"c6id.32xlarge"|"c6id.metal"|"m6id.large"|"m6id.xlarge"|"m6id.2xlarge"|"m6id.4xlarge"|"m6id.8xlarge"|"m6id.12xlarge"|"m6id.16xlarge"|"m6id.24xlarge"|"m6id.32xlarge"|"m6id.metal"|"r6id.large"|"r6id.xlarge"|"r6id.2xlarge"|"r6id.4xlarge"|"r6id.8xlarge"|"r6id.12xlarge"|"r6id.16xlarge"|"r6id.24xlarge"|"r6id.32xlarge"|"r6id.metal"|"r6a.large"|"r6a.xlarge"|"r6a.2xlarge"|"r6a.4xlarge"|"r6a.8xlarge"|"r6a.12xlarge"|"r6a.16xlarge"|"r6a.24xlarge"|"r6a.32xlarge"|"r6a.48xlarge"|"r6a.metal"|"p4de.24xlarge"|"u-3tb1.56xlarge"|"u-18tb1.112xlarge"|"u-24tb1.112xlarge"|"trn1.2xlarge"|"trn1.32xlarge"|"hpc6id.32xlarge"|"c6in.large"|"c6in.xlarge"|"c6in.2xlarge"|"c6in.4xlarge"|"c6in.8xlarge"|"c6in.12xlarge"|"c6in.16xlarge"|"c6in.24xlarge"|"c6in.32xlarge"|"m6in.large"|"m6in.xlarge"|"m6in.2xlarge"|"m6in.4xlarge"|"m6in.8xlarge"|"m6in.12xlarge"|"m6in.16xlarge"|"m6in.24xlarge"|"m6in.32xlarge"|"m6idn.large"|"m6idn.xlarge"|"m6idn.2xlarge"|"m6idn.4xlarge"|"m6idn.8xlarge"|"m6idn.12xlarge"|"m6idn.16xlarge"|"m6idn.24xlarge"|"m6idn.32xlarge"|"r6in.large"|"r6in.xlarge"|"r6in.2xlarge"|"r6in.4xlarge"|"r6in.8xlarge"|"r6in.12xlarge"|"r6in.16xlarge"|"r6in.24xlarge"|"r6in.32xlarge"|"r6idn.large"|"r6idn.xlarge"|"r6idn.2xlarge"|"r6idn.4xlarge"|"r6idn.8xlarge"|"r6idn.12xlarge"|"r6idn.16xlarge"|"r6idn.24xlarge"|"r6idn.32xlarge"|"c7g.metal"|"m7g.medium"|"m7g.large"|"m7g.xlarge"|"m7g.2xlarge"|"m7g.4xlarge"|"m7g.8xlarge"|"m7g.12xlarge"|"m7g.16xlarge"|"m7g.metal"|"r7g.medium"|"r7g.large"|"r7g.xlarge"|"r7g.2xlarge"|"r7g.4xlarge"|"r7g.8xlarge"|"r7g.12xlarge"|"r7g.16xlarge"|"r7g.metal"|"c6in.metal"|"m6in.metal"|"m6idn.metal"|"r6in.metal"|"r6idn.metal"|"inf2.xlarge"|"inf2.8xlarge"|"inf2.24xlarge"|"inf2.48xlarge"|"trn1n.32xlarge"|"i4g.large"|"i4g.xlarge"|"i4g.2xlarge"|"i4g.4xlarge"|"i4g.8xlarge"|"i4g.16xlarge"|"hpc7g.4xlarge"|"hpc7g.8xlarge"|"hpc7g.16xlarge"|"c7gn.medium"|"c7gn.large"|"c7gn.xlarge"|"c7gn.2xlarge"|"c7gn.4xlarge"|"c7gn.8xlarge"|"c7gn.12xlarge"|"c7gn.16xlarge"|"p5.48xlarge"|"m7i.large"|"m7i.xlarge"|"m7i.2xlarge"|"m7i.4xlarge"|"m7i.8xlarge"|"m7i.12xlarge"|"m7i.16xlarge"|"m7i.24xlarge"|"m7i.48xlarge"|"m7i-flex.large"|"m7i-flex.xlarge"|"m7i-flex.2xlarge"|"m7i-flex.4xlarge"|"m7i-flex.8xlarge"|"m7a.medium"|"m7a.large"|"m7a.xlarge"|"m7a.2xlarge"|"m7a.4xlarge"|"m7a.8xlarge"|"m7a.12xlarge"|"m7a.16xlarge"|"m7a.24xlarge"|"m7a.32xlarge"|"m7a.48xlarge"|"m7a.metal-48xl"|"hpc7a.12xlarge"|"hpc7a.24xlarge"|"hpc7a.48xlarge"|"hpc7a.96xlarge"|"c7gd.medium"|"c7gd.large"|"c7gd.xlarge"|"c7gd.2xlarge"|"c7gd.4xlarge"|"c7gd.8xlarge"|"c7gd.12xlarge"|"c7gd.16xlarge"|"m7gd.medium"|"m7gd.large"|"m7gd.xlarge"|"m7gd.2xlarge"|"m7gd.4xlarge"|"m7gd.8xlarge"|"m7gd.12xlarge"|"m7gd.16xlarge"|"r7gd.medium"|"r7gd.large"|"r7gd.xlarge"|"r7gd.2xlarge"|"r7gd.4xlarge"|"r7gd.8xlarge"|"r7gd.12xlarge"|"r7gd.16xlarge"|"r7a.medium"|"r7a.large"|"r7a.xlarge"|"r7a.2xlarge"|"r7a.4xlarge"|"r7a.8xlarge"|"r7a.12xlarge"|"r7a.16xlarge"|"r7a.24xlarge"|"r7a.32xlarge"|"r7a.48xlarge"|"c7i.large"|"c7i.xlarge"|"c7i.2xlarge"|"c7i.4xlarge"|"c7i.8xlarge"|"c7i.12xlarge"|"c7i.16xlarge"|"c7i.24xlarge"|"c7i.48xlarge"|"mac2-m2pro.metal"|"r7iz.large"|"r7iz.xlarge"|"r7iz.2xlarge"|"r7iz.4xlarge"|"r7iz.8xlarge"|"r7iz.12xlarge"|"r7iz.16xlarge"|"r7iz.32xlarge"|"c7a.medium"|"c7a.large"|"c7a.xlarge"|"c7a.2xlarge"|"c7a.4xlarge"|"c7a.8xlarge"|"c7a.12xlarge"|"c7a.16xlarge"|"c7a.24xlarge"|"c7a.32xlarge"|"c7a.48xlarge"|"c7a.metal-48xl"|"r7a.metal-48xl"|"r7i.large"|"r7i.xlarge"|"r7i.2xlarge"|"r7i.4xlarge"|"r7i.8xlarge"|"r7i.12xlarge"|"r7i.16xlarge"|"r7i.24xlarge"|"r7i.48xlarge"|string;
   export type InstanceTypeHypervisor = "nitro"|"xen"|string;
@@ -28506,7 +28583,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     *  Options for server side encryption. 
+     * The options for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
@@ -28520,7 +28597,7 @@ declare namespace EC2 {
      */
     PolicyDocument?: String;
     /**
-     *  Describes the options in use for server side encryption. 
+     * The options in use for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
@@ -28556,7 +28633,7 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessEndpointResult {
     /**
-     * The Verified Access endpoint details.
+     * Details about the Verified Access endpoint.
      */
     VerifiedAccessEndpoint?: VerifiedAccessEndpoint;
   }
@@ -28583,7 +28660,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     *  Options for server side encryption. 
+     * The options for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
@@ -28597,7 +28674,7 @@ declare namespace EC2 {
      */
     PolicyDocument?: String;
     /**
-     *  Describes the options in use for server side encryption. 
+     * The options in use for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
@@ -28625,7 +28702,7 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessGroupResult {
     /**
-     * Details of Verified Access group.
+     * Details about the Verified Access group.
      */
     VerifiedAccessGroup?: VerifiedAccessGroup;
   }
@@ -28673,7 +28750,7 @@ declare namespace EC2 {
   }
   export interface ModifyVerifiedAccessInstanceResult {
     /**
-     * The ID of the Verified Access instance.
+     * Details about the Verified Access instance.
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
@@ -28729,13 +28806,13 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     *  Options for server side encryption. 
+     * The options for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationRequest;
   }
   export interface ModifyVerifiedAccessTrustProviderResult {
     /**
-     * The ID of the Verified Access trust provider.
+     * Details about the Verified Access trust provider.
      */
     VerifiedAccessTrustProvider?: VerifiedAccessTrustProvider;
   }
@@ -29141,7 +29218,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Choose whether or not to trigger immediate tunnel replacement. Valid values: True | False 
+     * Choose whether or not to trigger immediate tunnel replacement. This is only applicable when turning on or off EnableTunnelLifecycleControl. Valid values: True | False 
      */
     SkipTunnelReplacement?: Boolean;
   }
@@ -29185,7 +29262,7 @@ declare namespace EC2 {
      */
     ReplayWindowSize?: Integer;
     /**
-     * The number of seconds after which a DPD timeout occurs. Constraints: A value greater than or equal to 30. Default: 30 
+     * The number of seconds after which a DPD timeout occurs. A DPD timeout of 40 seconds means that the VPN endpoint will consider the peer dead 30 seconds after the first failed keep-alive. Constraints: A value greater than or equal to 30. Default: 40 
      */
     DPDTimeoutSeconds?: Integer;
     /**
@@ -30089,6 +30166,7 @@ declare namespace EC2 {
   export type NetworkInterfacePrivateIpAddressList = NetworkInterfacePrivateIpAddress[];
   export type NetworkInterfaceStatus = "available"|"associated"|"attaching"|"in-use"|"detaching"|string;
   export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|"trunk"|"load_balancer"|"network_load_balancer"|"vpc_endpoint"|"branch"|"transit_gateway"|"lambda"|"quicksight"|"global_accelerator_managed"|"api_gateway_managed"|"gateway_load_balancer"|"gateway_load_balancer_endpoint"|"iot_rules_managed"|"aws_codestar_connections_managed"|string;
+  export type NetworkNodesList = String[];
   export type NetworkPerformance = string;
   export interface NewDhcpConfiguration {
     Key?: String;
@@ -37651,7 +37729,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     *  Describes the options in use for server side encryption. 
+     * The options in use for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
@@ -37744,7 +37822,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     *  Describes the options in use for server side encryption. 
+     * The options in use for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
@@ -37777,7 +37855,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     * Describes whether support for Federal Information Processing Standards (FIPS) is enabled on the instance.
+     * Indicates whether support for Federal Information Processing Standards (FIPS) is enabled on the instance.
      */
     FipsEnabled?: Boolean;
   }
@@ -37868,11 +37946,11 @@ declare namespace EC2 {
      */
     KinesisDataFirehose?: VerifiedAccessLogKinesisDataFirehoseDestinationOptions;
     /**
-     *  The logging version to use.  Valid values: ocsf-0.1 | ocsf-1.0.0-rc.2 
+     * The logging version. Valid values: ocsf-0.1 | ocsf-1.0.0-rc.2 
      */
     LogVersion?: String;
     /**
-     *  Include trust data sent by trust providers into the logs. 
+     * Indicates whether to include trust data sent by trust providers in the logs.
      */
     IncludeTrustContext?: Boolean;
   }
@@ -37930,11 +38008,11 @@ declare namespace EC2 {
      */
     KinesisDataFirehose?: VerifiedAccessLogKinesisDataFirehoseDestination;
     /**
-     *  Describes current setting for the logging version. 
+     * The log version.
      */
     LogVersion?: String;
     /**
-     *  Describes current setting for including trust data into the logs. 
+     * Indicates whether trust data is included in the logs.
      */
     IncludeTrustContext?: Boolean;
   }
@@ -37950,11 +38028,11 @@ declare namespace EC2 {
   }
   export interface VerifiedAccessSseSpecificationResponse {
     /**
-     *  Describes the use of customer managed KMS keys for server side encryption.  Valid values: True | False 
+     * Indicates whether customer managed KMS keys are in use for server side encryption. Valid values: True | False 
      */
     CustomerManagedKeyEnabled?: Boolean;
     /**
-     *  Describes the ARN of the KMS key. 
+     * The ARN of the KMS key.
      */
     KmsKeyArn?: KmsKeyArn;
   }
@@ -38004,7 +38082,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     *  Describes the options in use for server side encryption. 
+     * The options in use for server side encryption.
      */
     SseSpecification?: VerifiedAccessSseSpecificationResponse;
   }
@@ -38042,7 +38120,7 @@ declare namespace EC2 {
      */
     AcceptedRouteCount?: Integer;
     /**
-     * The date and time of the last change in status.
+     * The date and time of the last change in status. This field is updated when changes in IKE (Phase 1), IPSec (Phase 2), or BGP status are detected.
      */
     LastStatusChange?: DateTime;
     /**

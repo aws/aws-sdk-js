@@ -1730,7 +1730,7 @@ declare namespace DataExchange {
     /**
      * The product ID of the origin of the data set.
      */
-    ProductId: __string;
+    ProductId?: __string;
   }
   export type ProtocolType = "REST"|string;
   export interface RedshiftDataShareAsset {

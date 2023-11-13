@@ -1224,7 +1224,7 @@ declare namespace DMS {
      */
     Description?: String;
     /**
-     * The type of database engine for the data provider. Valid values include "aurora", "aurora_postgresql", "mysql", "oracle", "postgres", and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+     * The type of database engine for the data provider. Valid values include "aurora", "aurora-postgresql", "mysql", "oracle", "postgres", "sqlserver", redshift, mariadb, mongodb, and docdb. A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
      */
     Engine: String;
     /**
@@ -1674,7 +1674,7 @@ declare namespace DMS {
      */
     ReplicationSubnetGroupDescription: String;
     /**
-     * One or more subnet IDs to be assigned to the subnet group.
+     * Two or more subnet IDs to be assigned to the subnet group.
      */
     SubnetIds: SubnetIdentifierList;
     /**
@@ -1767,7 +1767,7 @@ declare namespace DMS {
      */
     Description?: String;
     /**
-     * The type of database engine for the data provider. Valid values include "aurora", "aurora_postgresql", "mysql", "oracle", "postgres", and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+     * The type of database engine for the data provider. Valid values include "aurora", "aurora-postgresql", "mysql", "oracle", "postgres", "sqlserver", redshift, mariadb, mongodb, and docdb. A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
      */
     Engine?: String;
     /**
@@ -2194,7 +2194,7 @@ declare namespace DMS {
   }
   export interface DescribeDataProvidersMessage {
     /**
-     * Filters applied to the data providers described in the form of key-value pairs.
+     * Filters applied to the data providers described in the form of key-value pairs. Valid filter names: data-provider-identifier
      */
     Filters?: FilterList;
     /**
@@ -3284,7 +3284,7 @@ declare namespace DMS {
      */
     EndpointType?: ReplicationEndpointTypeValue;
     /**
-     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and "babelfish".
+     * The database engine name. Valid values, depending on the EndpointType, include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql", "redshift", "redshift-serverless", "s3", "db2", "db2-zos", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis", "kafka", "elasticsearch", "documentdb", "sqlserver", "neptune", and "babelfish".
      */
     EngineName?: String;
     /**
@@ -3769,6 +3769,22 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the Db2 LUW endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * The amount of time (in milliseconds) before DMS times out operations performed by DMS on the Db2 target. The default value is 1200 (20 minutes).
+     */
+    LoadTimeout?: IntegerOptional;
+    /**
+     * The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk on the DMS replication instance. The default value is 1024 (1 MB).
+     */
+    WriteBufferSize?: IntegerOptional;
+    /**
+     * Specifies the maximum size (in KB) of .csv files used to transfer data to Db2 LUW.
+     */
+    MaxFileSize?: IntegerOptional;
+    /**
+     * If true, DMS saves any .csv files to the Db2 LUW target that were used to replicate data. DMS uses these files for analysis and troubleshooting. The default value is false. 
+     */
+    KeepCsvFiles?: BooleanOptional;
   }
   export interface ImportCertificateMessage {
     /**
@@ -4212,7 +4228,7 @@ declare namespace DMS {
      */
     Description?: String;
     /**
-     * The type of database engine for the data provider. Valid values include "aurora", "aurora_postgresql", "mysql", "oracle", "postgres", and "sqlserver". A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
+     * The type of database engine for the data provider. Valid values include "aurora", "aurora-postgresql", "mysql", "oracle", "postgres", "sqlserver", redshift, mariadb, mongodb, and docdb. A value of "aurora" represents Amazon Aurora MySQL-Compatible Edition.
      */
     Engine?: String;
     /**
@@ -4820,6 +4836,10 @@ declare namespace DMS {
      * The full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the MySQL endpoint connection details.
      */
     SecretsManagerSecretId?: String;
+    /**
+     * Sets the client statement timeout (in seconds) for a MySQL source endpoint.
+     */
+    ExecuteTimeout?: IntegerOptional;
   }
   export interface MySqlDataProviderSettings {
     /**
@@ -5784,6 +5804,10 @@ declare namespace DMS {
      * The timestamp when replication was last stopped.
      */
     ReplicationLastStopTime?: TStamp;
+    /**
+     * The timestamp when DMS will deprovision the replication.
+     */
+    ReplicationDeprovisionTime?: TStamp;
   }
   export interface ReplicationConfig {
     /**
