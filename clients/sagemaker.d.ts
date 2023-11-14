@@ -12776,11 +12776,11 @@ declare namespace SageMaker {
     /**
      * The supported MIME types for the input data.
      */
-    SupportedContentTypes: ContentTypes;
+    SupportedContentTypes?: ContentTypes;
     /**
      * The supported MIME types for the output data.
      */
-    SupportedResponseMIMETypes: ResponseMIMETypes;
+    SupportedResponseMIMETypes?: ResponseMIMETypes;
   }
   export type InferenceSpecificationName = string;
   export type InitialInstanceCount = number;

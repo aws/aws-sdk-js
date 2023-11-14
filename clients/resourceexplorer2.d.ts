@@ -64,6 +64,10 @@ declare class ResourceExplorer2 extends Service {
    */
   disassociateDefaultView(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Retrieves the status of your account's Amazon Web Services service access, and validates the service linked role required to access the multi-account search feature. Only the management account or a delegated administrator with service access enabled can invoke this API call. 
+   */
+  getAccountLevelServiceConfiguration(callback?: (err: AWSError, data: ResourceExplorer2.Types.GetAccountLevelServiceConfigurationOutput) => void): Request<ResourceExplorer2.Types.GetAccountLevelServiceConfigurationOutput, AWSError>;
+  /**
    * Retrieves the Amazon Resource Name (ARN) of the view that is the default for the Amazon Web Services Region in which you call this operation. You can then call GetView to retrieve the details of that view.
    */
   getDefaultView(callback?: (err: AWSError, data: ResourceExplorer2.Types.GetDefaultViewOutput) => void): Request<ResourceExplorer2.Types.GetDefaultViewOutput, AWSError>;
@@ -87,6 +91,14 @@ declare class ResourceExplorer2 extends Service {
    * Retrieves a list of all of the indexes in Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer.
    */
   listIndexes(callback?: (err: AWSError, data: ResourceExplorer2.Types.ListIndexesOutput) => void): Request<ResourceExplorer2.Types.ListIndexesOutput, AWSError>;
+  /**
+   * Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a delegated administrator with service access enabled can invoke this API call. 
+   */
+  listIndexesForMembers(params: ResourceExplorer2.Types.ListIndexesForMembersInput, callback?: (err: AWSError, data: ResourceExplorer2.Types.ListIndexesForMembersOutput) => void): Request<ResourceExplorer2.Types.ListIndexesForMembersOutput, AWSError>;
+  /**
+   * Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer. Only the management account or a delegated administrator with service access enabled can invoke this API call. 
+   */
+  listIndexesForMembers(callback?: (err: AWSError, data: ResourceExplorer2.Types.ListIndexesForMembersOutput) => void): Request<ResourceExplorer2.Types.ListIndexesForMembersOutput, AWSError>;
   /**
    * Retrieves a list of all resource types currently supported by Amazon Web Services Resource Explorer.
    */
@@ -153,6 +165,8 @@ declare class ResourceExplorer2 extends Service {
   updateView(callback?: (err: AWSError, data: ResourceExplorer2.Types.UpdateViewOutput) => void): Request<ResourceExplorer2.Types.UpdateViewOutput, AWSError>;
 }
 declare namespace ResourceExplorer2 {
+  export type AWSServiceAccessStatus = "ENABLED"|"DISABLED"|string;
+  export type AccountId = string;
   export interface AssociateDefaultViewInput {
     /**
      * The Amazon resource name (ARN) of the view to set as the default for the Amazon Web Services Region and Amazon Web Services account in which you call this operation. The specified view must already exist in the called Region.
@@ -197,7 +211,7 @@ declare namespace ResourceExplorer2 {
   export type Boolean = boolean;
   export interface CreateIndexInput {
     /**
-     * This value helps ensure idempotency. Resource Explorer uses this value to prevent the accidental creation of duplicate versions. We recommend that you generate a UUID-type value to ensure the uniqueness of your views.
+     * This value helps ensure idempotency. Resource Explorer uses this value to prevent the accidental creation of duplicate versions. We recommend that you generate a UUID-type value to ensure the uniqueness of your index.
      */
     ClientToken?: String;
     /**
@@ -233,6 +247,10 @@ declare namespace ResourceExplorer2 {
      */
     IncludedProperties?: IncludedPropertyList;
     /**
+     * The root ARN of the account, an organizational unit (OU), or an organization ARN. If left empty, the default is account.
+     */
+    Scope?: CreateViewInputScopeString;
+    /**
      * Tag key and value pairs that are attached to the view.
      */
     Tags?: TagMap;
@@ -242,6 +260,7 @@ declare namespace ResourceExplorer2 {
     ViewName: ViewName;
   }
   export type CreateViewInputClientTokenString = string;
+  export type CreateViewInputScopeString = string;
   export interface CreateViewOutput {
     /**
      * A structure that contains the details about the new view.
@@ -282,6 +301,12 @@ declare namespace ResourceExplorer2 {
     ViewArn?: String;
   }
   export interface Document {
+  }
+  export interface GetAccountLevelServiceConfigurationOutput {
+    /**
+     * Details about the organization, and whether configuration is ENABLED or DISABLED.
+     */
+    OrgConfiguration?: OrgConfiguration;
   }
   export interface GetDefaultViewOutput {
     /**
@@ -365,13 +390,40 @@ declare namespace ResourceExplorer2 {
   export type IndexList = Index[];
   export type IndexState = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|"UPDATING"|string;
   export type IndexType = "LOCAL"|"AGGREGATOR"|string;
+  export interface ListIndexesForMembersInput {
+    /**
+     * The account IDs will limit the output to only indexes from these accounts.
+     */
+    AccountIdList: ListIndexesForMembersInputAccountIdListList;
+    /**
+     * The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the NextToken response element is present and has a value (is not null). Include that value as the NextToken request parameter in the next call to the operation to get the next part of the results.  An API operation can return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. 
+     */
+    MaxResults?: ListIndexesForMembersInputMaxResultsInteger;
+    /**
+     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from. The pagination tokens expire after 24 hours.
+     */
+    NextToken?: ListIndexesForMembersInputNextTokenString;
+  }
+  export type ListIndexesForMembersInputAccountIdListList = AccountId[];
+  export type ListIndexesForMembersInputMaxResultsInteger = number;
+  export type ListIndexesForMembersInputNextTokenString = string;
+  export interface ListIndexesForMembersOutput {
+    /**
+     * A structure that contains the details and status of each index.
+     */
+    Indexes?: MemberIndexList;
+    /**
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null. The pagination tokens expire after 24 hours.
+     */
+    NextToken?: String;
+  }
   export interface ListIndexesInput {
     /**
      * The maximum number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value appropriate to the operation. If additional items exist beyond those included in the current response, the NextToken response element is present and has a value (is not null). Include that value as the NextToken request parameter in the next call to the operation to get the next part of the results.  An API operation can return fewer results than the maximum even when there are more results available. You should check NextToken after every operation to ensure that you receive all of the results. 
      */
     MaxResults?: ListIndexesInputMaxResultsInteger;
     /**
-     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
+     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from. The pagination tokens expire after 24 hours.
      */
     NextToken?: ListIndexesInputNextTokenString;
     /**
@@ -392,7 +444,7 @@ declare namespace ResourceExplorer2 {
      */
     Indexes?: IndexList;
     /**
-     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null. The pagination tokens expire after 24 hours.
      */
     NextToken?: String;
   }
@@ -402,14 +454,14 @@ declare namespace ResourceExplorer2 {
      */
     MaxResults?: ListSupportedResourceTypesInputMaxResultsInteger;
     /**
-     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
+     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from. The pagination tokens expire after 24 hours.
      */
     NextToken?: String;
   }
   export type ListSupportedResourceTypesInputMaxResultsInteger = number;
   export interface ListSupportedResourceTypesOutput {
     /**
-     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null. The pagination tokens expire after 24 hours.
      */
     NextToken?: String;
     /**
@@ -435,14 +487,14 @@ declare namespace ResourceExplorer2 {
      */
     MaxResults?: ListViewsInputMaxResultsInteger;
     /**
-     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
+     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from. The pagination tokens expire after 24 hours.
      */
     NextToken?: String;
   }
   export type ListViewsInputMaxResultsInteger = number;
   export interface ListViewsOutput {
     /**
-     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null. The pagination tokens expire after 24 hours.
      */
     NextToken?: String;
     /**
@@ -451,6 +503,35 @@ declare namespace ResourceExplorer2 {
     Views?: ViewArnList;
   }
   export type Long = number;
+  export interface MemberIndex {
+    /**
+     * The account ID for the index.
+     */
+    AccountId?: String;
+    /**
+     * The Amazon resource name (ARN) of the index.
+     */
+    Arn?: String;
+    /**
+     * The Amazon Web Services Region in which the index exists.
+     */
+    Region?: String;
+    /**
+     * The type of index. It can be one of the following values:     LOCAL – The index contains information about resources from only the same Amazon Web Services Region.    AGGREGATOR – Resource Explorer replicates copies of the indexed information about resources in all other Amazon Web Services Regions to the aggregator index. This lets search results in the Region with the aggregator index to include resources from all Regions in the account where Resource Explorer is turned on.  
+     */
+    Type?: IndexType;
+  }
+  export type MemberIndexList = MemberIndex[];
+  export interface OrgConfiguration {
+    /**
+     * This value displays whether your Amazon Web Services service access is ENABLED or DISABLED.
+     */
+    AWSServiceAccessStatus: AWSServiceAccessStatus;
+    /**
+     * This value shows whether or not you have a valid a service-linked role required to start the multi-account search feature.
+     */
+    ServiceLinkedRole?: String;
+  }
   export type QueryString = string;
   export type RegionList = String[];
   export interface Resource {
@@ -523,7 +604,7 @@ declare namespace ResourceExplorer2 {
      */
     MaxResults?: SearchInputMaxResultsInteger;
     /**
-     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from.
+     * The parameter for receiving additional results if you receive a NextToken response in a previous request. A NextToken response indicates that more output is available. Set this parameter to the value of the previous call's NextToken response to indicate where the output should continue from. The pagination tokens expire after 24 hours.
      */
     NextToken?: SearchInputNextTokenString;
     /**
@@ -544,7 +625,7 @@ declare namespace ResourceExplorer2 {
      */
     Count?: ResourceCount;
     /**
-     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null.
+     * If present, indicates that more output is available than is included in the current response. Use this value in the NextToken request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the NextToken response element comes back as null. The pagination tokens expire after 24 hours.
      */
     NextToken?: SearchOutputNextTokenString;
     /**

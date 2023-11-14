@@ -84,11 +84,11 @@ declare class Pipes extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Pipes.Types.UntagResourceResponse) => void): Request<Pipes.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update an existing pipe. When you call UpdatePipe, only the fields that are included in the request are changed, the rest are unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the SourceParameters, EnrichmentParameters, or TargetParameters objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update. For more information about pipes, see  Amazon EventBridge Pipes in the Amazon EventBridge User Guide.
+   * Update an existing pipe. When you call UpdatePipe, EventBridge only the updates fields you have specified in the request; the rest remain unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the SourceParameters, EnrichmentParameters, or TargetParameters objects. For example, DynamoDBStreamParameters or EventBridgeEventBusParameters. EventBridge updates the fields in these objects atomically as one and overrides existing values. This is by design, and means that if you don't specify an optional field in one of these Parameters objects, EventBridge sets that field to its system-default value during the update. For more information about pipes, see  Amazon EventBridge Pipes in the Amazon EventBridge User Guide.
    */
   updatePipe(params: Pipes.Types.UpdatePipeRequest, callback?: (err: AWSError, data: Pipes.Types.UpdatePipeResponse) => void): Request<Pipes.Types.UpdatePipeResponse, AWSError>;
   /**
-   * Update an existing pipe. When you call UpdatePipe, only the fields that are included in the request are changed, the rest are unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the SourceParameters, EnrichmentParameters, or TargetParameters objects. The fields in these objects are updated atomically as one and override existing values. This is by design and means that if you don't specify an optional field in one of these Parameters objects, that field will be set to its system-default value after the update. For more information about pipes, see  Amazon EventBridge Pipes in the Amazon EventBridge User Guide.
+   * Update an existing pipe. When you call UpdatePipe, EventBridge only the updates fields you have specified in the request; the rest remain unchanged. The exception to this is if you modify any Amazon Web Services-service specific fields in the SourceParameters, EnrichmentParameters, or TargetParameters objects. For example, DynamoDBStreamParameters or EventBridgeEventBusParameters. EventBridge updates the fields in these objects atomically as one and overrides existing values. This is by design, and means that if you don't specify an optional field in one of these Parameters objects, EventBridge sets that field to its system-default value during the update. For more information about pipes, see  Amazon EventBridge Pipes in the Amazon EventBridge User Guide.
    */
   updatePipe(callback?: (err: AWSError, data: Pipes.Types.UpdatePipeResponse) => void): Request<Pipes.Types.UpdatePipeResponse, AWSError>;
 }
@@ -198,6 +198,19 @@ declare namespace Pipes {
   }
   export type CapacityProviderStrategyItemBase = number;
   export type CapacityProviderStrategyItemWeight = number;
+  export type CloudwatchLogGroupArn = string;
+  export interface CloudwatchLogsLogDestination {
+    /**
+     * The Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+     */
+    LogGroupArn?: CloudwatchLogGroupArn;
+  }
+  export interface CloudwatchLogsLogDestinationParameters {
+    /**
+     * The Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+     */
+    LogGroupArn: CloudwatchLogGroupArn;
+  }
   export interface CreatePipeRequest {
     /**
      * A description of the pipe.
@@ -215,6 +228,10 @@ declare namespace Pipes {
      * The parameters required to set up enrichment on your pipe.
      */
     EnrichmentParameters?: PipeEnrichmentParameters;
+    /**
+     * The logging configuration settings for the pipe.
+     */
+    LogConfiguration?: PipeLogConfigurationParameters;
     /**
      * The name of the pipe.
      */
@@ -240,7 +257,7 @@ declare namespace Pipes {
      */
     Target: Arn;
     /**
-     * The parameters required to set up a target for your pipe.
+     * The parameters required to set up a target for your pipe. For more information about pipe target parameters, including how to use dynamic path parameters, see Target parameters in the Amazon EventBridge User Guide.
      */
     TargetParameters?: PipeTargetParameters;
   }
@@ -274,7 +291,7 @@ declare namespace Pipes {
   export type DbUser = string;
   export interface DeadLetterConfig {
     /**
-     * The ARN of the Amazon SQS queue specified as the target for the dead-letter queue.
+     * The ARN of the specified target for the dead-letter queue.  For Amazon Kinesis stream and Amazon DynamoDB stream sources, specify either an Amazon SNS topic or Amazon SQS queue ARN.
      */
     Arn?: Arn;
   }
@@ -350,6 +367,10 @@ declare namespace Pipes {
      */
     LastModifiedTime?: Timestamp;
     /**
+     * The logging configuration settings for the pipe.
+     */
+    LogConfiguration?: PipeLogConfiguration;
+    /**
      * The name of the pipe.
      */
     Name?: PipeName;
@@ -378,7 +399,7 @@ declare namespace Pipes {
      */
     Target?: Arn;
     /**
-     * The parameters required to set up a target for your pipe.
+     * The parameters required to set up a target for your pipe. For more information about pipe target parameters, including how to use dynamic path parameters, see Target parameters in the Amazon EventBridge User Guide.
      */
     TargetParameters?: PipeTargetParameters;
   }
@@ -520,9 +541,24 @@ declare namespace Pipes {
     Filters?: FilterList;
   }
   export type FilterList = Filter[];
+  export type FirehoseArn = string;
+  export interface FirehoseLogDestination {
+    /**
+     * The Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+     */
+    DeliveryStreamArn?: FirehoseArn;
+  }
+  export interface FirehoseLogDestinationParameters {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+     */
+    DeliveryStreamArn: FirehoseArn;
+  }
   export type HeaderKey = string;
   export type HeaderParametersMap = {[key: string]: HeaderValue};
   export type HeaderValue = string;
+  export type IncludeExecutionData = IncludeExecutionDataOption[];
+  export type IncludeExecutionDataOption = "ALL"|string;
   export type InputTemplate = string;
   export type Integer = number;
   export type JsonPath = string;
@@ -587,6 +623,7 @@ declare namespace Pipes {
      */
     tags?: TagMap;
   }
+  export type LogLevel = "OFF"|"ERROR"|"INFO"|"TRACE"|string;
   export type LogStreamName = string;
   export interface MQBrokerAccessCredentials {
     /**
@@ -686,11 +723,55 @@ declare namespace Pipes {
      */
     HttpParameters?: PipeEnrichmentHttpParameters;
     /**
-     * Valid JSON text passed to the enrichment. In this case, nothing from the event itself is passed to the enrichment. For more information, see The JavaScript Object Notation (JSON) Data Interchange Format.
+     * Valid JSON text passed to the enrichment. In this case, nothing from the event itself is passed to the enrichment. For more information, see The JavaScript Object Notation (JSON) Data Interchange Format. To remove an input template, specify an empty string.
      */
     InputTemplate?: InputTemplate;
   }
   export type PipeList = Pipe[];
+  export interface PipeLogConfiguration {
+    /**
+     * The Amazon CloudWatch Logs logging configuration settings for the pipe.
+     */
+    CloudwatchLogsLogDestination?: CloudwatchLogsLogDestination;
+    /**
+     * The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+     */
+    FirehoseLogDestination?: FirehoseLogDestination;
+    /**
+     * Whether the execution data (specifically, the payload, awsRequest, and awsResponse fields) is included in the log messages for this pipe. This applies to all log destinations for the pipe. For more information, see Including execution data in logs in the Amazon EventBridge User Guide.
+     */
+    IncludeExecutionData?: IncludeExecutionData;
+    /**
+     * The level of logging detail to include. This applies to all log destinations for the pipe.
+     */
+    Level?: LogLevel;
+    /**
+     * The Amazon S3 logging configuration settings for the pipe.
+     */
+    S3LogDestination?: S3LogDestination;
+  }
+  export interface PipeLogConfigurationParameters {
+    /**
+     * The Amazon CloudWatch Logs logging configuration settings for the pipe.
+     */
+    CloudwatchLogsLogDestination?: CloudwatchLogsLogDestinationParameters;
+    /**
+     * The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+     */
+    FirehoseLogDestination?: FirehoseLogDestinationParameters;
+    /**
+     * Specify ON to include the execution data (specifically, the payload and awsRequest fields) in the log messages for this pipe. This applies to all log destinations for the pipe. For more information, see Including execution data in logs in the Amazon EventBridge User Guide. The default is OFF.
+     */
+    IncludeExecutionData?: IncludeExecutionData;
+    /**
+     * The level of logging detail to include. This applies to all log destinations for the pipe. For more information, see Specifying EventBridge Pipes log level in the Amazon EventBridge User Guide.
+     */
+    Level: LogLevel;
+    /**
+     * The Amazon S3 logging configuration settings for the pipe.
+     */
+    S3LogDestination?: S3LogDestinationParameters;
+  }
   export type PipeName = string;
   export interface PipeSourceActiveMQBrokerParameters {
     /**
@@ -818,7 +899,7 @@ declare namespace Pipes {
      */
     DynamoDBStreamParameters?: PipeSourceDynamoDBStreamParameters;
     /**
-     * The collection of event patterns used to filter events. For more information, see Events and Event Patterns in the Amazon EventBridge User Guide.
+     * The collection of event patterns used to filter events. To remove a filter, specify a FilterCriteria object with an empty array of Filter objects. For more information, see Events and Event Patterns in the Amazon EventBridge User Guide.
      */
     FilterCriteria?: FilterCriteria;
     /**
@@ -912,7 +993,7 @@ declare namespace Pipes {
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
   }
-  export type PipeState = "RUNNING"|"STOPPED"|"CREATING"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"CREATE_FAILED"|"UPDATE_FAILED"|"START_FAILED"|"STOP_FAILED"|string;
+  export type PipeState = "RUNNING"|"STOPPED"|"CREATING"|"UPDATING"|"DELETING"|"STARTING"|"STOPPING"|"CREATE_FAILED"|"UPDATE_FAILED"|"START_FAILED"|"STOP_FAILED"|"DELETE_FAILED"|"CREATE_ROLLBACK_FAILED"|"DELETE_ROLLBACK_FAILED"|"UPDATE_ROLLBACK_FAILED"|string;
   export type PipeStateReason = string;
   export interface PipeTargetBatchJobParameters {
     /**
@@ -1022,7 +1103,7 @@ declare namespace Pipes {
      */
     DetailType?: EventBridgeDetailType;
     /**
-     * The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.  When using Java, you must include auth-crt on the class path. 
+     * The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is abcde.veo.
      */
     EndpointId?: EventBridgeEndpointId;
     /**
@@ -1061,7 +1142,7 @@ declare namespace Pipes {
   }
   export interface PipeTargetLambdaFunctionParameters {
     /**
-     * Choose from the following options.    RequestResponse (default) - Invoke the function synchronously. Keep the connection open until the function returns a response or times out. The API response includes the function response and additional data.    Event - Invoke the function asynchronously. Send events that fail multiple times to the function's dead-letter queue (if it's configured). The API response only includes a status code.    DryRun - Validate parameter values and verify that the user or role has permission to invoke the function.  
+     * Specify whether to invoke the function synchronously or asynchronously.    REQUEST_RESPONSE (default) - Invoke synchronously. This corresponds to the RequestResponse option in the InvocationType parameter for the Lambda Invoke API.    FIRE_AND_FORGET - Invoke asynchronously. This corresponds to the Event option in the InvocationType parameter for the Lambda Invoke API.   For more information, see Invocation types in the Amazon EventBridge User Guide.
      */
     InvocationType?: PipeTargetInvocationType;
   }
@@ -1087,11 +1168,11 @@ declare namespace Pipes {
      */
     HttpParameters?: PipeTargetHttpParameters;
     /**
-     * Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. For more information, see The JavaScript Object Notation (JSON) Data Interchange Format.
+     * Valid JSON text passed to the target. In this case, nothing from the event itself is passed to the target. For more information, see The JavaScript Object Notation (JSON) Data Interchange Format. To remove an input template, specify an empty string.
      */
     InputTemplate?: InputTemplate;
     /**
-     * The parameters for using a Kinesis stream as a source.
+     * The parameters for using a Kinesis stream as a target.
      */
     KinesisStreamParameters?: PipeTargetKinesisStreamParameters;
     /**
@@ -1099,7 +1180,7 @@ declare namespace Pipes {
      */
     LambdaFunctionParameters?: PipeTargetLambdaFunctionParameters;
     /**
-     * These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API ExecuteStatement.
+     * These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the Amazon Redshift Data API BatchExecuteStatement.
      */
     RedshiftDataParameters?: PipeTargetRedshiftDataParameters;
     /**
@@ -1107,7 +1188,7 @@ declare namespace Pipes {
      */
     SageMakerPipelineParameters?: PipeTargetSageMakerPipelineParameters;
     /**
-     * The parameters for using a Amazon SQS stream as a source.
+     * The parameters for using a Amazon SQS stream as a target.
      */
     SqsQueueParameters?: PipeTargetSqsQueueParameters;
     /**
@@ -1125,7 +1206,7 @@ declare namespace Pipes {
      */
     DbUser?: DbUser;
     /**
-     * The name or ARN of the secret that enables access to the database. Required when authenticating using SageMaker.
+     * The name or ARN of the secret that enables access to the database. Required when authenticating using Secrets Manager.
      */
     SecretManagerArn?: SecretManagerArnOrJsonPath;
     /**
@@ -1159,7 +1240,7 @@ declare namespace Pipes {
   }
   export interface PipeTargetStateMachineParameters {
     /**
-     * Specify whether to wait for the state machine to finish or not.
+     * Specify whether to invoke the Step Functions state machine synchronously or asynchronously.    REQUEST_RESPONSE (default) - Invoke synchronously. For more information, see StartSyncExecution in the Step Functions API Reference.   REQUEST_RESPONSE is not supported for STANDARD state machine workflows.     FIRE_AND_FORGET - Invoke asynchronously. For more information, see StartExecution in the Step Functions API Reference.   For more information, see Invocation types in the Amazon EventBridge User Guide.
      */
     InvocationType?: PipeTargetInvocationType;
   }
@@ -1198,6 +1279,46 @@ declare namespace Pipes {
   export type RequestedPipeStateDescribeResponse = "RUNNING"|"STOPPED"|"DELETED"|string;
   export type ResourceArn = string;
   export type RoleArn = string;
+  export interface S3LogDestination {
+    /**
+     * The name of the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+     */
+    BucketName?: String;
+    /**
+     * The Amazon Web Services account that owns the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+     */
+    BucketOwner?: String;
+    /**
+     * The format EventBridge uses for the log records.    json: JSON     plain: Plain text    w3c: W3C extended logging file format   
+     */
+    OutputFormat?: S3OutputFormat;
+    /**
+     * The prefix text with which to begin Amazon S3 log object names. For more information, see Organizing objects using prefixes in the Amazon Simple Storage Service User Guide.
+     */
+    Prefix?: String;
+  }
+  export interface S3LogDestinationParameters {
+    /**
+     * Specifies the name of the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+     */
+    BucketName: S3LogDestinationParametersBucketNameString;
+    /**
+     * Specifies the Amazon Web Services account that owns the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+     */
+    BucketOwner: S3LogDestinationParametersBucketOwnerString;
+    /**
+     * How EventBridge should format the log records.    json: JSON     plain: Plain text    w3c: W3C extended logging file format   
+     */
+    OutputFormat?: S3OutputFormat;
+    /**
+     * Specifies any prefix text with which to begin Amazon S3 log object names. You can use prefixes to organize the data that you store in Amazon S3 buckets. A prefix is a string of characters at the beginning of the object key name. A prefix can be any length, subject to the maximum length of the object key name (1,024 bytes). For more information, see Organizing objects using prefixes in the Amazon Simple Storage Service User Guide.
+     */
+    Prefix?: S3LogDestinationParametersPrefixString;
+  }
+  export type S3LogDestinationParametersBucketNameString = string;
+  export type S3LogDestinationParametersBucketOwnerString = string;
+  export type S3LogDestinationParametersPrefixString = string;
+  export type S3OutputFormat = "json"|"plain"|"w3c"|string;
   export interface SageMakerPipelineParameter {
     /**
      * Name of parameter to start execution of a SageMaker Model Building Pipeline.
@@ -1378,6 +1499,10 @@ declare namespace Pipes {
      */
     EnrichmentParameters?: PipeEnrichmentParameters;
     /**
+     * The logging configuration settings for the pipe.
+     */
+    LogConfiguration?: PipeLogConfigurationParameters;
+    /**
      * The name of the pipe.
      */
     Name: PipeName;
@@ -1394,7 +1519,7 @@ declare namespace Pipes {
      */
     Target?: Arn;
     /**
-     * The parameters required to set up a target for your pipe.
+     * The parameters required to set up a target for your pipe. For more information about pipe target parameters, including how to use dynamic path parameters, see Target parameters in the Amazon EventBridge User Guide.
      */
     TargetParameters?: PipeTargetParameters;
   }
@@ -1522,7 +1647,7 @@ declare namespace Pipes {
      */
     DynamoDBStreamParameters?: UpdatePipeSourceDynamoDBStreamParameters;
     /**
-     * The collection of event patterns used to filter events. For more information, see Events and Event Patterns in the Amazon EventBridge User Guide.
+     * The collection of event patterns used to filter events. To remove a filter, specify a FilterCriteria object with an empty array of Filter objects. For more information, see Events and Event Patterns in the Amazon EventBridge User Guide.
      */
     FilterCriteria?: FilterCriteria;
     /**

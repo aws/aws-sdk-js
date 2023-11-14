@@ -348,11 +348,11 @@ declare class Iot extends Service {
    */
   createThing(callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions.  Requires permission to access the CreateThingGroup action.
+   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. If the ThingGroup that you create has the exact same attributes as an existing ThingGroup, you will get a 200 success response.   Requires permission to access the CreateThingGroup action.
    */
   createThingGroup(params: Iot.Types.CreateThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
-   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions.  Requires permission to access the CreateThingGroup action.
+   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. If the ThingGroup that you create has the exact same attributes as an existing ThingGroup, you will get a 200 success response.   Requires permission to access the CreateThingGroup action.
    */
   createThingGroup(callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
@@ -2854,6 +2854,10 @@ declare namespace Iot {
      *  Suppresses alerts. 
      */
     suppressAlerts?: SuppressAlerts;
+    /**
+     * Value indicates exporting metrics related to the behavior when it is true.
+     */
+    exportMetric?: ExportMetric;
   }
   export interface BehaviorCriteria {
     /**
@@ -4279,6 +4283,10 @@ declare namespace Iot {
      * Metadata that can be used to manage the security profile.
      */
     tags?: TagList;
+    /**
+     * Specifies the MQTT topic and role ARN required for metric export.
+     */
+    metricsExportConfig?: MetricsExportConfig;
   }
   export interface CreateSecurityProfileResponse {
     /**
@@ -4621,6 +4629,7 @@ declare namespace Iot {
      */
     jobTemplateId: JobTemplateId;
   }
+  export type DeleteMetricsExportConfig = boolean;
   export interface DeleteMitigationActionRequest {
     /**
      * The name of the mitigation action that you want to delete.
@@ -5591,6 +5600,10 @@ declare namespace Iot {
      * The time the security profile was last modified.
      */
     lastModifiedDate?: Timestamp;
+    /**
+     * Specifies the MQTT topic and role ARN required for metric export.
+     */
+    metricsExportConfig?: MetricsExportConfig;
   }
   export interface DescribeStreamRequest {
     /**
@@ -6168,6 +6181,7 @@ declare namespace Iot {
      */
     rateIncreaseCriteria: RateIncreaseCriteria;
   }
+  export type ExportMetric = boolean;
   export type FailedChecksCount = number;
   export type FailedFindingsCount = number;
   export type FailedThings = number;
@@ -8998,6 +9012,10 @@ declare namespace Iot {
      * The dimension of a metric. This can't be used with custom metrics.
      */
     metricDimension?: MetricDimension;
+    /**
+     * Value added in both Behavior and AdditionalMetricsToRetainV2 to indicate if Device Defender Detect should export the corresponding metrics.
+     */
+    exportMetric?: ExportMetric;
   }
   export interface MetricValue {
     /**
@@ -9024,6 +9042,16 @@ declare namespace Iot {
      *  The string values of a metric. 
      */
     strings?: StringList;
+  }
+  export interface MetricsExportConfig {
+    /**
+     * The MQTT topic that Device Defender Detect should publish messages to for metrics export.
+     */
+    mqttTopic: MqttTopic;
+    /**
+     * This role ARN has permission to publish MQTT messages, after which Device Defender Detect can assume the role and publish messages on your behalf.
+     */
+    roleArn: RoleArn;
   }
   export type Minimum = number;
   export type MinimumNumberOfExecutedThings = number;
@@ -9138,6 +9166,7 @@ declare namespace Iot {
     userProperties?: UserProperties;
   }
   export type MqttPassword = Buffer|Uint8Array|Blob|string;
+  export type MqttTopic = string;
   export type MqttUsername = string;
   export type NamedShadowIndexingMode = "OFF"|"ON"|string;
   export type NamedShadowNamesFilter = ShadowName[];
@@ -10067,7 +10096,7 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return at one time.
+     * The maximum number of results to return at one time. The response might contain fewer results but will never contain more.
      */
     maxResults?: QueryMaxResults;
     /**
@@ -10827,7 +10856,7 @@ declare namespace Iot {
      */
     thingGroupIndexingMode: ThingGroupIndexingMode;
     /**
-     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service. This is an optional field. For more information, see Managed fields in the Amazon Web Services IoT Core Developer Guide.
+     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service. This is an optional field. For more information, see Managed fields in the Amazon Web Services IoT Core Developer Guide.  You can't modify managed fields by updating fleet indexing configuration. 
      */
     managedFields?: Fields;
     /**
@@ -10884,7 +10913,7 @@ declare namespace Iot {
      */
     namedShadowIndexingMode?: NamedShadowIndexingMode;
     /**
-     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service.
+     * Contains fields that are indexed and whose types are already known by the Fleet Indexing service. This is an optional field. For more information, see Managed fields in the Amazon Web Services IoT Core Developer Guide.  You can't modify managed fields by updating fleet indexing configuration. 
      */
     managedFields?: Fields;
     /**
@@ -11817,6 +11846,14 @@ declare namespace Iot {
      * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different from the actual version, a VersionConflictException is thrown.
      */
     expectedVersion?: OptionalVersion;
+    /**
+     * Specifies the MQTT topic and role ARN required for metric export.
+     */
+    metricsExportConfig?: MetricsExportConfig;
+    /**
+     * Set the value as true to delete metrics export related configurations.
+     */
+    deleteMetricsExportConfig?: DeleteMetricsExportConfig;
   }
   export interface UpdateSecurityProfileResponse {
     /**
@@ -11859,6 +11896,10 @@ declare namespace Iot {
      * The time the security profile was last modified.
      */
     lastModifiedDate?: Timestamp;
+    /**
+     * Specifies the MQTT topic and role ARN required for metric export.
+     */
+    metricsExportConfig?: MetricsExportConfig;
   }
   export interface UpdateStreamRequest {
     /**

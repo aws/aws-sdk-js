@@ -1200,6 +1200,10 @@ declare namespace CleanRooms {
      * An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.
      */
     tags?: TagMap;
+    /**
+     * The collaboration creator's payment responsibilities set by the collaboration creator.  If the collaboration creator hasn't specified anyone as the member paying for query compute costs, then the member who can query is the default payer.
+     */
+    creatorPaymentConfiguration?: PaymentConfiguration;
   }
   export interface CreateCollaborationOutput {
     /**
@@ -1297,7 +1301,7 @@ declare namespace CleanRooms {
      */
     collaborationIdentifier: CollaborationIdentifier;
     /**
-     * An indicator as to whether query logging has been enabled or disabled for the collaboration.
+     * An indicator as to whether query logging has been enabled or disabled for the membership.
      */
     queryLogStatus: MembershipQueryLogStatus;
     /**
@@ -1308,6 +1312,10 @@ declare namespace CleanRooms {
      * The default protected query result configuration as specified by the member who can receive results.
      */
     defaultResultConfiguration?: MembershipProtectedQueryResultConfiguration;
+    /**
+     * The payment responsibilities accepted by the collaboration member. Not required if the collaboration member has the member ability to run queries.  Required if the collaboration member doesn't have the member ability to run queries but is configured as a payer by the collaboration creator. 
+     */
+    paymentConfiguration?: MembershipPaymentConfiguration;
   }
   export interface CreateMembershipOutput {
     /**
@@ -1317,19 +1325,19 @@ declare namespace CleanRooms {
   }
   export interface DataEncryptionMetadata {
     /**
-     * Indicates whether encrypted tables can contain cleartext data (true) or are to cryptographically process every column (false).
+     * Indicates whether encrypted tables can contain cleartext data (TRUE) or are to cryptographically process every column (FALSE).
      */
     allowCleartext: Boolean;
     /**
-     * Indicates whether Fingerprint columns can contain duplicate entries (true) or are to contain only non-repeated values (false).
+     * Indicates whether Fingerprint columns can contain duplicate entries (TRUE) or are to contain only non-repeated values (FALSE).
      */
     allowDuplicates: Boolean;
     /**
-     * Indicates whether Fingerprint columns can be joined on any other Fingerprint column with a different name (true) or can only be joined on Fingerprint columns of the same name (false).
+     * Indicates whether Fingerprint columns can be joined on any other Fingerprint column with a different name (TRUE) or can only be joined on Fingerprint columns of the same name (FALSE).
      */
     allowJoinsOnColumnsWithDifferentNames: Boolean;
     /**
-     * Indicates whether NULL values are to be copied as NULL to encrypted tables (true) or cryptographically processed (false).
+     * Indicates whether NULL values are to be copied as NULL to encrypted tables (TRUE) or cryptographically processed (FALSE).
      */
     preserveNulls: Boolean;
   }
@@ -1825,6 +1833,10 @@ declare namespace CleanRooms {
      * The member's display name.
      */
     displayName: DisplayName;
+    /**
+     * The collaboration member's payment responsibilities set by the collaboration creator.  If the collaboration creator hasn't speciﬁed anyone as the member paying for query compute costs, then the member who can query is the default payer.
+     */
+    paymentConfiguration?: PaymentConfiguration;
   }
   export type MemberStatus = "INVITED"|"ACTIVE"|"LEFT"|"REMOVED"|string;
   export interface MemberSummary {
@@ -1833,7 +1845,7 @@ declare namespace CleanRooms {
      */
     accountId: AccountId;
     /**
-     * The status of the member. Valid values are `INVITED`, `ACTIVE`, `LEFT`, and `REMOVED`.
+     * The status of the member. 
      */
     status: MemberStatus;
     /**
@@ -1860,6 +1872,10 @@ declare namespace CleanRooms {
      * The unique ARN for the member's associated membership, if present.
      */
     membershipArn?: MembershipArn;
+    /**
+     * The collaboration member's payment responsibilities set by the collaboration creator. 
+     */
+    paymentConfiguration: PaymentConfiguration;
   }
   export type MemberSummaryList = MemberSummary[];
   export interface Membership {
@@ -1900,7 +1916,7 @@ declare namespace CleanRooms {
      */
     updateTime: Timestamp;
     /**
-     * The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and `COLLABORATION_DELETED`.
+     * The status of the membership.
      */
     status: MembershipStatus;
     /**
@@ -1908,16 +1924,26 @@ declare namespace CleanRooms {
      */
     memberAbilities: MemberAbilities;
     /**
-     * An indicator as to whether query logging has been enabled or disabled for the collaboration.
+     * An indicator as to whether query logging has been enabled or disabled for the membership.
      */
     queryLogStatus: MembershipQueryLogStatus;
     /**
      * The default protected query result configuration as specified by the member who can receive results.
      */
     defaultResultConfiguration?: MembershipProtectedQueryResultConfiguration;
+    /**
+     * The payment responsibilities accepted by the collaboration member.
+     */
+    paymentConfiguration: MembershipPaymentConfiguration;
   }
   export type MembershipArn = string;
   export type MembershipIdentifier = string;
+  export interface MembershipPaymentConfiguration {
+    /**
+     * The payment responsibilities accepted by the collaboration member for query compute costs.
+     */
+    queryCompute: MembershipQueryComputePaymentConfig;
+  }
   export interface MembershipProtectedQueryOutputConfiguration {
     s3?: ProtectedQueryS3OutputConfiguration;
   }
@@ -1930,6 +1956,12 @@ declare namespace CleanRooms {
      * The unique ARN for an IAM role that is used by Clean Rooms to write protected query results to the result location, given by the member who can receive results.
      */
     roleArn?: RoleArn;
+  }
+  export interface MembershipQueryComputePaymentConfig {
+    /**
+     * Indicates whether the collaboration member has accepted to pay for query compute costs (TRUE) or has not accepted to pay for query compute costs (FALSE). If the collaboration creator has not specified anyone to pay for query compute costs, then the member who can query is the default payer.  An error message is returned for the following reasons:    If you set the value to FALSE but you are responsible to pay for query compute costs.    If you set the value to TRUE but you are not responsible to pay for query compute costs.   
+     */
+    isResponsible: Boolean;
   }
   export type MembershipQueryLogStatus = "ENABLED"|"DISABLED"|string;
   export type MembershipStatus = "ACTIVE"|"REMOVED"|"COLLABORATION_DELETED"|string;
@@ -1971,13 +2003,17 @@ declare namespace CleanRooms {
      */
     updateTime: Timestamp;
     /**
-     * The status of the membership. Valid values are `ACTIVE`, `REMOVED`, and `COLLABORATION_DELETED`.
+     * The status of the membership.
      */
     status: MembershipStatus;
     /**
      * The abilities granted to the collaboration member.
      */
     memberAbilities: MemberAbilities;
+    /**
+     * The payment responsibilities accepted by the collaboration member.
+     */
+    paymentConfiguration: MembershipPaymentConfiguration;
   }
   export type MembershipSummaryList = MembershipSummary[];
   export type PaginationToken = string;
@@ -1985,6 +2021,12 @@ declare namespace CleanRooms {
   export type ParameterName = string;
   export type ParameterType = "SMALLINT"|"INTEGER"|"BIGINT"|"DECIMAL"|"REAL"|"DOUBLE_PRECISION"|"BOOLEAN"|"CHAR"|"VARCHAR"|"DATE"|"TIMESTAMP"|"TIMESTAMPTZ"|"TIME"|"TIMETZ"|"VARBYTE"|string;
   export type ParameterValue = string;
+  export interface PaymentConfiguration {
+    /**
+     * The collaboration member's payment responsibilities set by the collaboration creator for query compute costs.
+     */
+    queryCompute: QueryComputePaymentConfig;
+  }
   export interface ProtectedQuery {
     /**
      * The identifier for a protected query instance.
@@ -2140,6 +2182,12 @@ declare namespace CleanRooms {
   }
   export type ProtectedQuerySummaryList = ProtectedQuerySummary[];
   export type ProtectedQueryType = "SQL"|string;
+  export interface QueryComputePaymentConfig {
+    /**
+     * Indicates whether the collaboration creator has configured the collaboration member to pay for query compute costs (TRUE) or has not configured the collaboration member to pay for query compute costs (FALSE). Exactly one member can be configured to pay for query compute costs. An error is returned if the collaboration creator sets a TRUE value for more than one member in the collaboration.  If the collaboration creator hasn't specified anyone as the member paying for query compute costs, then the member who can query is the default payer. An error is returned if the collaboration creator sets a FALSE value for the member who can query.
+     */
+    isResponsible: Boolean;
+  }
   export type QueryTables = TableAlias[];
   export type ResourceAlias = string;
   export type ResourceDescription = string;
@@ -2413,7 +2461,7 @@ declare namespace CleanRooms {
      */
     membershipIdentifier: MembershipIdentifier;
     /**
-     * An indicator as to whether query logging has been enabled or disabled for the collaboration.
+     * An indicator as to whether query logging has been enabled or disabled for the membership.
      */
     queryLogStatus?: MembershipQueryLogStatus;
     /**

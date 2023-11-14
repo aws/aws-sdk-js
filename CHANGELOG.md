@@ -1,6 +1,19 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1495.0-->
+<!--LATEST=2.1496.0-->
 <!--ENTRYINSERT-->
+
+## 2.1496.0
+* feature: Backup: AWS Backup - Features: Provide Job Summary for your backup activity.
+* feature: CleanRooms: This feature provides the ability for the collaboration creator to configure either the member who can run queries or a different member in the collaboration to be billed for query compute costs.
+* feature: Connect: Introducing SegmentAttributes parameter for StartChatContact API
+* feature: Glue: Introduces new storage optimization APIs to support automatic compaction of Apache Iceberg tables.
+* feature: Iot: This release introduces new attributes in API CreateSecurityProfile, UpdateSecurityProfile and DescribeSecurityProfile to support management of Metrics Export for AWS IoT Device Defender Detect.
+* feature: Lambda: Add Python 3.12 (python3.12) support to AWS Lambda
+* feature: MediaTailor: Removed unnecessary default values.
+* feature: Pipes: Added support (via new LogConfiguration field in CreatePipe and UpdatePipe APIs) for logging to Amazon CloudWatch Logs, Amazon Simple Storage Service (Amazon S3), and Amazon Kinesis Data Firehose
+* feature: ResourceExplorer2: Resource Explorer supports multi-account search. You can now use Resource Explorer to search and discover resources across AWS accounts within your organization or organizational unit.
+* feature: SageMaker: This release makes Model Registry Inference Specification fields as not required.
+* feature: StepFunctions: This release adds support to redrive executions in AWS Step Functions with a new RedriveExecution operation.
 
 ## 2.1495.0
 * feature: DMS: Added new Db2 LUW Target endpoint with related endpoint settings. New executeTimeout endpoint setting for mysql endpoint. New ReplicationDeprovisionTime field for serverless describe-replications.

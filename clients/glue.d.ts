@@ -108,6 +108,14 @@ declare class Glue extends Service {
    */
   batchGetPartition(callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
   /**
+   * Returns the configuration for the specified table optimizers.
+   */
+  batchGetTableOptimizer(params: Glue.Types.BatchGetTableOptimizerRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetTableOptimizerResponse) => void): Request<Glue.Types.BatchGetTableOptimizerResponse, AWSError>;
+  /**
+   * Returns the configuration for the specified table optimizers.
+   */
+  batchGetTableOptimizer(callback?: (err: AWSError, data: Glue.Types.BatchGetTableOptimizerResponse) => void): Request<Glue.Types.BatchGetTableOptimizerResponse, AWSError>;
+  /**
    * Returns a list of resource metadata for a given list of trigger names. After calling the ListTriggers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetTriggers(params: Glue.Types.BatchGetTriggersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetTriggersResponse) => void): Request<Glue.Types.BatchGetTriggersResponse, AWSError>;
@@ -324,6 +332,14 @@ declare class Glue extends Service {
    */
   createTable(callback?: (err: AWSError, data: Glue.Types.CreateTableResponse) => void): Request<Glue.Types.CreateTableResponse, AWSError>;
   /**
+   * Creates a new table optimizer for a specific function. compaction is the only currently supported optimizer type.
+   */
+  createTableOptimizer(params: Glue.Types.CreateTableOptimizerRequest, callback?: (err: AWSError, data: Glue.Types.CreateTableOptimizerResponse) => void): Request<Glue.Types.CreateTableOptimizerResponse, AWSError>;
+  /**
+   * Creates a new table optimizer for a specific function. compaction is the only currently supported optimizer type.
+   */
+  createTableOptimizer(callback?: (err: AWSError, data: Glue.Types.CreateTableOptimizerResponse) => void): Request<Glue.Types.CreateTableOptimizerResponse, AWSError>;
+  /**
    * Creates a new trigger.
    */
   createTrigger(params: Glue.Types.CreateTriggerRequest, callback?: (err: AWSError, data: Glue.Types.CreateTriggerResponse) => void): Request<Glue.Types.CreateTriggerResponse, AWSError>;
@@ -515,6 +531,14 @@ declare class Glue extends Service {
    * Removes a table definition from the Data Catalog.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
+  /**
+   * Deletes an optimizer and all associated metadata for a table. The optimization will no longer be performed on the table.
+   */
+  deleteTableOptimizer(params: Glue.Types.DeleteTableOptimizerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTableOptimizerResponse) => void): Request<Glue.Types.DeleteTableOptimizerResponse, AWSError>;
+  /**
+   * Deletes an optimizer and all associated metadata for a table. The optimization will no longer be performed on the table.
+   */
+  deleteTableOptimizer(callback?: (err: AWSError, data: Glue.Types.DeleteTableOptimizerResponse) => void): Request<Glue.Types.DeleteTableOptimizerResponse, AWSError>;
   /**
    * Deletes a specified version of a table.
    */
@@ -948,6 +972,14 @@ declare class Glue extends Service {
    */
   getTable(callback?: (err: AWSError, data: Glue.Types.GetTableResponse) => void): Request<Glue.Types.GetTableResponse, AWSError>;
   /**
+   * Returns the configuration of all optimizers associated with a specified table.
+   */
+  getTableOptimizer(params: Glue.Types.GetTableOptimizerRequest, callback?: (err: AWSError, data: Glue.Types.GetTableOptimizerResponse) => void): Request<Glue.Types.GetTableOptimizerResponse, AWSError>;
+  /**
+   * Returns the configuration of all optimizers associated with a specified table.
+   */
+  getTableOptimizer(callback?: (err: AWSError, data: Glue.Types.GetTableOptimizerResponse) => void): Request<Glue.Types.GetTableOptimizerResponse, AWSError>;
+  /**
    * Retrieves a specified version of a table.
    */
   getTableVersion(params: Glue.Types.GetTableVersionRequest, callback?: (err: AWSError, data: Glue.Types.GetTableVersionResponse) => void): Request<Glue.Types.GetTableVersionResponse, AWSError>;
@@ -1204,6 +1236,14 @@ declare class Glue extends Service {
    */
   listStatements(callback?: (err: AWSError, data: Glue.Types.ListStatementsResponse) => void): Request<Glue.Types.ListStatementsResponse, AWSError>;
   /**
+   * Lists the history of previous optimizer runs for a specific table.
+   */
+  listTableOptimizerRuns(params: Glue.Types.ListTableOptimizerRunsRequest, callback?: (err: AWSError, data: Glue.Types.ListTableOptimizerRunsResponse) => void): Request<Glue.Types.ListTableOptimizerRunsResponse, AWSError>;
+  /**
+   * Lists the history of previous optimizer runs for a specific table.
+   */
+  listTableOptimizerRuns(callback?: (err: AWSError, data: Glue.Types.ListTableOptimizerRunsResponse) => void): Request<Glue.Types.ListTableOptimizerRunsResponse, AWSError>;
+  /**
    * Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listTriggers(params: Glue.Types.ListTriggersRequest, callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
@@ -1332,11 +1372,11 @@ declare class Glue extends Service {
    */
   startCrawlerSchedule(callback?: (err: AWSError, data: Glue.Types.StartCrawlerScheduleResponse) => void): Request<Glue.Types.StartCrawlerScheduleResponse, AWSError>;
   /**
-   * Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking.
+   * Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking. Recommendation runs are automatically deleted after 90 days.
    */
   startDataQualityRuleRecommendationRun(params: Glue.Types.StartDataQualityRuleRecommendationRunRequest, callback?: (err: AWSError, data: Glue.Types.StartDataQualityRuleRecommendationRunResponse) => void): Request<Glue.Types.StartDataQualityRuleRecommendationRunResponse, AWSError>;
   /**
-   * Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking.
+   * Starts a recommendation run that is used to generate rules when you don't know what rules to write. Glue Data Quality analyzes the data and comes up with recommendations for a potential ruleset. You can then triage the ruleset and modify the generated ruleset to your liking. Recommendation runs are automatically deleted after 90 days.
    */
   startDataQualityRuleRecommendationRun(callback?: (err: AWSError, data: Glue.Types.StartDataQualityRuleRecommendationRunResponse) => void): Request<Glue.Types.StartDataQualityRuleRecommendationRunResponse, AWSError>;
   /**
@@ -1604,6 +1644,14 @@ declare class Glue extends Service {
    */
   updateTable(callback?: (err: AWSError, data: Glue.Types.UpdateTableResponse) => void): Request<Glue.Types.UpdateTableResponse, AWSError>;
   /**
+   * Updates the configuration for an existing table optimizer.
+   */
+  updateTableOptimizer(params: Glue.Types.UpdateTableOptimizerRequest, callback?: (err: AWSError, data: Glue.Types.UpdateTableOptimizerResponse) => void): Request<Glue.Types.UpdateTableOptimizerResponse, AWSError>;
+  /**
+   * Updates the configuration for an existing table optimizer.
+   */
+  updateTableOptimizer(callback?: (err: AWSError, data: Glue.Types.UpdateTableOptimizerResponse) => void): Request<Glue.Types.UpdateTableOptimizerResponse, AWSError>;
+  /**
    * Updates a trigger definition.
    */
   updateTrigger(params: Glue.Types.UpdateTriggerRequest, callback?: (err: AWSError, data: Glue.Types.UpdateTriggerResponse) => void): Request<Glue.Types.UpdateTriggerResponse, AWSError>;
@@ -1845,6 +1893,7 @@ declare namespace Glue {
      */
     Mapping: Mappings;
   }
+  export type ArnString = string;
   export interface AthenaConnectorSource {
     /**
      * The name of the data source.
@@ -2177,6 +2226,64 @@ declare namespace Glue {
     UnprocessedKeys?: BatchGetPartitionValueList;
   }
   export type BatchGetPartitionValueList = PartitionValueList[];
+  export type BatchGetTableOptimizerEntries = BatchGetTableOptimizerEntry[];
+  export interface BatchGetTableOptimizerEntry {
+    /**
+     * The Catalog ID of the table.
+     */
+    catalogId?: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    databaseName?: databaseNameString;
+    /**
+     * The name of the table.
+     */
+    tableName?: tableNameString;
+    /**
+     * The type of table optimizer.
+     */
+    type?: TableOptimizerType;
+  }
+  export interface BatchGetTableOptimizerError {
+    /**
+     * An ErrorDetail object containing code and message details about the error.
+     */
+    error?: ErrorDetail;
+    /**
+     * The Catalog ID of the table.
+     */
+    catalogId?: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    databaseName?: databaseNameString;
+    /**
+     * The name of the table.
+     */
+    tableName?: tableNameString;
+    /**
+     * The type of table optimizer.
+     */
+    type?: TableOptimizerType;
+  }
+  export type BatchGetTableOptimizerErrors = BatchGetTableOptimizerError[];
+  export interface BatchGetTableOptimizerRequest {
+    /**
+     * A list of BatchGetTableOptimizerEntry objects specifying the table optimizers to retrieve.
+     */
+    Entries: BatchGetTableOptimizerEntries;
+  }
+  export interface BatchGetTableOptimizerResponse {
+    /**
+     * A list of BatchTableOptimizer objects.
+     */
+    TableOptimizers?: BatchTableOptimizers;
+    /**
+     * A list of errors from the operation.
+     */
+    Failures?: BatchGetTableOptimizerErrors;
+  }
   export interface BatchGetTriggersRequest {
     /**
      * A list of trigger names, which may be the names returned from the ListTriggers operation.
@@ -2261,6 +2368,25 @@ declare namespace Glue {
     JobRunId?: IdString;
   }
   export type BatchStopJobRunSuccessfulSubmissionList = BatchStopJobRunSuccessfulSubmission[];
+  export interface BatchTableOptimizer {
+    /**
+     * The Catalog ID of the table.
+     */
+    catalogId?: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    databaseName?: databaseNameString;
+    /**
+     * The name of the table.
+     */
+    tableName?: tableNameString;
+    /**
+     * A TableOptimizer object that contains details on the configuration and last run of a table optimzer.
+     */
+    tableOptimizer?: TableOptimizer;
+  }
+  export type BatchTableOptimizers = BatchTableOptimizer[];
   export interface BatchUpdatePartitionFailureEntry {
     /**
      * A list of values defining the partitions.
@@ -4446,6 +4572,30 @@ declare namespace Glue {
      */
     Session?: Session;
   }
+  export interface CreateTableOptimizerRequest {
+    /**
+     * The Catalog ID of the table.
+     */
+    CatalogId: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table.
+     */
+    TableName: NameString;
+    /**
+     * The type of table optimizer. Currently, the only valid value is compaction.
+     */
+    Type: TableOptimizerType;
+    /**
+     * A TableOptimizerConfiguration object representing the configuration of a table optimizer.
+     */
+    TableOptimizerConfiguration: TableOptimizerConfiguration;
+  }
+  export interface CreateTableOptimizerResponse {
+  }
   export interface CreateTableRequest {
     /**
      * The ID of the Data Catalog in which to create the Table. If none is supplied, the Amazon Web Services account ID is used by default.
@@ -5428,6 +5578,26 @@ declare namespace Glue {
      * Returns the ID of the deleted session.
      */
     Id?: NameString;
+  }
+  export interface DeleteTableOptimizerRequest {
+    /**
+     * The Catalog ID of the table.
+     */
+    CatalogId: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table.
+     */
+    TableName: NameString;
+    /**
+     * The type of table optimizer.
+     */
+    Type: TableOptimizerType;
+  }
+  export interface DeleteTableOptimizerResponse {
   }
   export interface DeleteTableRequest {
     /**
@@ -7556,6 +7726,42 @@ declare namespace Glue {
      */
     Statement?: Statement;
   }
+  export interface GetTableOptimizerRequest {
+    /**
+     * The Catalog ID of the table.
+     */
+    CatalogId: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table.
+     */
+    TableName: NameString;
+    /**
+     * The type of table optimizer.
+     */
+    Type: TableOptimizerType;
+  }
+  export interface GetTableOptimizerResponse {
+    /**
+     * The Catalog ID of the table.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    DatabaseName?: NameString;
+    /**
+     * The name of the table.
+     */
+    TableName?: NameString;
+    /**
+     * The optimizer associated with the specified table.
+     */
+    TableOptimizer?: TableOptimizer;
+  }
   export interface GetTableRequest {
     /**
      * The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.
@@ -9389,6 +9595,55 @@ declare namespace Glue {
      */
     NextToken?: OrchestrationToken;
   }
+  export interface ListTableOptimizerRunsRequest {
+    /**
+     * The Catalog ID of the table.
+     */
+    CatalogId: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table.
+     */
+    TableName: NameString;
+    /**
+     * The type of table optimizer. Currently, the only valid value is compaction.
+     */
+    Type: TableOptimizerType;
+    /**
+     * The maximum number of optimizer runs to return on each call.
+     */
+    MaxResults?: MaxListTableOptimizerRunsTokenResults;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: ListTableOptimizerRunsToken;
+  }
+  export interface ListTableOptimizerRunsResponse {
+    /**
+     * The Catalog ID of the table.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    DatabaseName?: NameString;
+    /**
+     * The name of the table.
+     */
+    TableName?: NameString;
+    /**
+     * A continuation token for paginating the returned list of optimizer runs, returned if the current segment of the list is not the last.
+     */
+    NextToken?: ListTableOptimizerRunsToken;
+    /**
+     * A list of the optimizer runs associated with a table.
+     */
+    TableOptimizerRuns?: TableOptimizerRuns;
+  }
+  export type ListTableOptimizerRunsToken = string;
   export interface ListTriggersRequest {
     /**
      * A continuation token, if this is a continuation request.
@@ -9626,6 +9881,7 @@ declare namespace Glue {
   export type MaskValue = string;
   export type MatchCriteria = NameString[];
   export type MaxConcurrentRuns = number;
+  export type MaxListTableOptimizerRunsTokenResults = number;
   export type MaxResultsNumber = number;
   export type MaxRetries = number;
   export interface Merge {
@@ -10613,6 +10869,24 @@ declare namespace Glue {
   export type RowTag = string;
   export type RulesetNames = NameString[];
   export type RunId = string;
+  export interface RunMetrics {
+    /**
+     * The number of bytes removed by the compaction job run.
+     */
+    NumberOfBytesCompacted?: MessageString;
+    /**
+     * The number of files removed by the compaction job run.
+     */
+    NumberOfFilesCompacted?: MessageString;
+    /**
+     * The number of DPU hours consumed by the job.
+     */
+    NumberOfDpus?: MessageString;
+    /**
+     * The duration of the job in hours.
+     */
+    JobDurationInHour?: MessageString;
+  }
   export interface RunStatementRequest {
     /**
      * The Session Id of the statement to be run.
@@ -12491,6 +12765,56 @@ declare namespace Glue {
   }
   export type TableList = Table[];
   export type TableName = string;
+  export interface TableOptimizer {
+    /**
+     * The type of table optimizer. Currently, the only valid value is compaction.
+     */
+    type?: TableOptimizerType;
+    /**
+     * A TableOptimizerConfiguration object that was specified when creating or updating a table optimizer.
+     */
+    configuration?: TableOptimizerConfiguration;
+    /**
+     * A TableOptimizerRun object representing the last run of the table optimizer.
+     */
+    lastRun?: TableOptimizerRun;
+  }
+  export interface TableOptimizerConfiguration {
+    /**
+     * A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.
+     */
+    roleArn?: ArnString;
+    /**
+     * Whether table optimization is enabled. 
+     */
+    enabled?: NullableBoolean;
+  }
+  export type TableOptimizerEventType = "starting"|"completed"|"failed"|"in_progress"|string;
+  export interface TableOptimizerRun {
+    /**
+     * An event type representing the status of the table optimizer run.
+     */
+    eventType?: TableOptimizerEventType;
+    /**
+     * Represents the epoch timestamp at which the compaction job was started within Lake Formation.
+     */
+    startTimestamp?: TableOptimizerRunTimestamp;
+    /**
+     * Represents the epoch timestamp at which the compaction job ended.
+     */
+    endTimestamp?: TableOptimizerRunTimestamp;
+    /**
+     * A RunMetrics object containing metrics for the optimizer run.
+     */
+    metrics?: RunMetrics;
+    /**
+     * An error that occured during the optimizer run.
+     */
+    error?: MessageString;
+  }
+  export type TableOptimizerRunTimestamp = Date;
+  export type TableOptimizerRuns = TableOptimizerRun[];
+  export type TableOptimizerType = "compaction"|string;
   export type TablePrefix = string;
   export type TableTypeString = string;
   export interface TableVersion {
@@ -13431,6 +13755,30 @@ declare namespace Glue {
      */
     JobName?: NameString;
   }
+  export interface UpdateTableOptimizerRequest {
+    /**
+     * The Catalog ID of the table.
+     */
+    CatalogId: CatalogIdString;
+    /**
+     * The name of the database in the catalog in which the table resides.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table.
+     */
+    TableName: NameString;
+    /**
+     * The type of table optimizer. Currently, the only valid value is compaction.
+     */
+    Type: TableOptimizerType;
+    /**
+     * A TableOptimizerConfiguration object representing the configuration of a table optimizer.
+     */
+    TableOptimizerConfiguration: TableOptimizerConfiguration;
+  }
+  export interface UpdateTableOptimizerResponse {
+  }
   export interface UpdateTableRequest {
     /**
      * The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.
@@ -13773,6 +14121,8 @@ declare namespace Glue {
      */
     RowTag?: RowTag;
   }
+  export type databaseNameString = string;
+  export type tableNameString = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

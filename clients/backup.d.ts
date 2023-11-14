@@ -328,6 +328,14 @@ declare class Backup extends Service {
    */
   getSupportedResourceTypes(callback?: (err: AWSError, data: Backup.Types.GetSupportedResourceTypesOutput) => void): Request<Backup.Types.GetSupportedResourceTypesOutput, AWSError>;
   /**
+   * This is a request for a summary of backup jobs created or running within the most recent 30 days. You can include parameters AccountID, State, ResourceType, MessageCategory, AggregationPeriod, MaxResults, or NextToken to filter results. This request returns a summary that contains Region, Account, State, ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+   */
+  listBackupJobSummaries(params: Backup.Types.ListBackupJobSummariesInput, callback?: (err: AWSError, data: Backup.Types.ListBackupJobSummariesOutput) => void): Request<Backup.Types.ListBackupJobSummariesOutput, AWSError>;
+  /**
+   * This is a request for a summary of backup jobs created or running within the most recent 30 days. You can include parameters AccountID, State, ResourceType, MessageCategory, AggregationPeriod, MaxResults, or NextToken to filter results. This request returns a summary that contains Region, Account, State, ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+   */
+  listBackupJobSummaries(callback?: (err: AWSError, data: Backup.Types.ListBackupJobSummariesOutput) => void): Request<Backup.Types.ListBackupJobSummariesOutput, AWSError>;
+  /**
    * Returns a list of existing backup jobs for an authenticated account for the last 30 days. For a longer period of time, consider using these monitoring tools.
    */
   listBackupJobs(params: Backup.Types.ListBackupJobsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
@@ -375,6 +383,14 @@ declare class Backup extends Service {
    * Returns a list of recovery point storage containers along with information about them.
    */
   listBackupVaults(callback?: (err: AWSError, data: Backup.Types.ListBackupVaultsOutput) => void): Request<Backup.Types.ListBackupVaultsOutput, AWSError>;
+  /**
+   * This request obtains a list of copy jobs created or running within the the most recent 30 days. You can include parameters AccountID, State, ResourceType, MessageCategory, AggregationPeriod, MaxResults, or NextToken to filter results. This request returns a summary that contains Region, Account, State, RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+   */
+  listCopyJobSummaries(params: Backup.Types.ListCopyJobSummariesInput, callback?: (err: AWSError, data: Backup.Types.ListCopyJobSummariesOutput) => void): Request<Backup.Types.ListCopyJobSummariesOutput, AWSError>;
+  /**
+   * This request obtains a list of copy jobs created or running within the the most recent 30 days. You can include parameters AccountID, State, ResourceType, MessageCategory, AggregationPeriod, MaxResults, or NextToken to filter results. This request returns a summary that contains Region, Account, State, RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+   */
+  listCopyJobSummaries(callback?: (err: AWSError, data: Backup.Types.ListCopyJobSummariesOutput) => void): Request<Backup.Types.ListCopyJobSummariesOutput, AWSError>;
   /**
    * Returns metadata about your copy jobs.
    */
@@ -455,6 +471,14 @@ declare class Backup extends Service {
    * Returns a list of your report plans. For detailed information about a single report plan, use DescribeReportPlan.
    */
   listReportPlans(callback?: (err: AWSError, data: Backup.Types.ListReportPlansOutput) => void): Request<Backup.Types.ListReportPlansOutput, AWSError>;
+  /**
+   * This request obtains a summary of restore jobs created or running within the the most recent 30 days. You can include parameters AccountID, State, ResourceType, AggregationPeriod, MaxResults, or NextToken to filter results. This request returns a summary that contains Region, Account, State, RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+   */
+  listRestoreJobSummaries(params: Backup.Types.ListRestoreJobSummariesInput, callback?: (err: AWSError, data: Backup.Types.ListRestoreJobSummariesOutput) => void): Request<Backup.Types.ListRestoreJobSummariesOutput, AWSError>;
+  /**
+   * This request obtains a summary of restore jobs created or running within the the most recent 30 days. You can include parameters AccountID, State, ResourceType, AggregationPeriod, MaxResults, or NextToken to filter results. This request returns a summary that contains Region, Account, State, RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+   */
+  listRestoreJobSummaries(callback?: (err: AWSError, data: Backup.Types.ListRestoreJobSummariesOutput) => void): Request<Backup.Types.ListRestoreJobSummariesOutput, AWSError>;
   /**
    * Returns a list of jobs that Backup initiated to restore a saved resource, including details about the recovery process.
    */
@@ -614,6 +638,7 @@ declare namespace Backup {
     BackupOptions?: BackupOptions;
   }
   export type AdvancedBackupSettings = AdvancedBackupSetting[];
+  export type AggregationPeriod = "ONE_DAY"|"SEVEN_DAYS"|"FOURTEEN_DAYS"|string;
   export interface BackupJob {
     /**
      * The account ID that owns the backup job.
@@ -707,9 +732,49 @@ declare namespace Backup {
      * This is the non-unique name of the resource that belongs to the specified backup.
      */
     ResourceName?: string;
+    /**
+     * This parameter is the job count for the specified message category. Example strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
+     */
+    MessageCategory?: string;
   }
   export type BackupJobChildJobsInState = {[key: string]: Long};
   export type BackupJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|"PARTIAL"|string;
+  export type BackupJobStatus = "CREATED"|"PENDING"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETED"|"FAILED"|"EXPIRED"|"PARTIAL"|"AGGREGATE_ALL"|"ANY"|string;
+  export interface BackupJobSummary {
+    /**
+     * The Amazon Web Services Regions within the job summary.
+     */
+    Region?: Region;
+    /**
+     * The account ID that owns the jobs within the summary.
+     */
+    AccountId?: AccountId;
+    /**
+     * This value is job count for jobs with the specified state.
+     */
+    State?: BackupJobStatus;
+    /**
+     * This value is the job count for the specified resource type. The request GetSupportedResourceTypes returns strings for supported resource types.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * This parameter is the job count for the specified message category. Example strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
+     */
+    MessageCategory?: MessageCategory;
+    /**
+     * The value as a number of jobs in a job summary.
+     */
+    Count?: integer;
+    /**
+     * The value of time in number format of a job start time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    StartTime?: timestamp;
+    /**
+     * The value of time in number format of a job end time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    EndTime?: timestamp;
+  }
+  export type BackupJobSummaryList = BackupJobSummary[];
   export type BackupJobsList = BackupJob[];
   export type BackupOptionKey = string;
   export type BackupOptionValue = string;
@@ -1175,9 +1240,49 @@ declare namespace Backup {
      * This is the non-unique name of the resource that belongs to the specified backup.
      */
     ResourceName?: string;
+    /**
+     * This parameter is the job count for the specified message category. Example strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum
+     */
+    MessageCategory?: string;
   }
   export type CopyJobChildJobsInState = {[key: string]: Long};
   export type CopyJobState = "CREATED"|"RUNNING"|"COMPLETED"|"FAILED"|"PARTIAL"|string;
+  export type CopyJobStatus = "CREATED"|"RUNNING"|"ABORTING"|"ABORTED"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|"PARTIAL"|"AGGREGATE_ALL"|"ANY"|string;
+  export interface CopyJobSummary {
+    /**
+     * This is the Amazon Web Services Regions within the job summary.
+     */
+    Region?: Region;
+    /**
+     * The account ID that owns the jobs within the summary.
+     */
+    AccountId?: AccountId;
+    /**
+     * This value is job count for jobs with the specified state.
+     */
+    State?: CopyJobStatus;
+    /**
+     * This value is the job count for the specified resource type. The request GetSupportedResourceTypes returns strings for supported resource types
+     */
+    ResourceType?: ResourceType;
+    /**
+     * This parameter is the job count for the specified message category. Example strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
+     */
+    MessageCategory?: MessageCategory;
+    /**
+     * The value as a number of jobs in a job summary.
+     */
+    Count?: integer;
+    /**
+     * The value of time in number format of a job start time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    StartTime?: timestamp;
+    /**
+     * The value of time in number format of a job end time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    EndTime?: timestamp;
+  }
+  export type CopyJobSummaryList = CopyJobSummary[];
   export type CopyJobsList = CopyJob[];
   export interface CreateBackupPlanInput {
     /**
@@ -1637,6 +1742,10 @@ declare namespace Backup {
      * This is the non-unique name of the resource that belongs to the specified backup.
      */
     ResourceName?: string;
+    /**
+     * This is the job count for the specified message category. Example strings may include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings.
+     */
+    MessageCategory?: string;
   }
   export interface DescribeBackupVaultInput {
     /**
@@ -2341,6 +2450,50 @@ declare namespace Backup {
      */
     DeleteAfterDays?: Long;
   }
+  export interface ListBackupJobSummariesInput {
+    /**
+     * Returns the job count for the specified account. If the request is sent from a member account or an account not part of Amazon Web Services Organizations, jobs within requestor's account will be returned. Root, admin, and delegated administrator accounts can use the value ANY to return job counts from every account in the organization.  AGGREGATE_ALL aggregates job counts from all accounts within the authenticated organization, then returns the sum.
+     */
+    AccountId?: AccountId;
+    /**
+     * This parameter returns the job count for jobs with the specified state. The the value ANY returns count of all states.  AGGREGATE_ALL aggregates job counts for all states and returns the sum.
+     */
+    State?: BackupJobStatus;
+    /**
+     * Returns the job count for the specified resource type. Use request GetSupportedResourceTypes to obtain strings for supported resource types. The the value ANY returns count of all resource types.  AGGREGATE_ALL aggregates job counts for all resource types and returns the sum. The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * This parameter returns the job count for the specified message category. Example accepted strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of accepted MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
+     */
+    MessageCategory?: MessageCategory;
+    /**
+     * This is the period that sets the boundaries for returned results. Acceptable values include    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated job count for the prior 7 days.    FOURTEEN_DAYS for aggregated job count for prior 14 days.  
+     */
+    AggregationPeriod?: AggregationPeriod;
+    /**
+     * This parameter sets the maximum number of items to be returned. The value is an integer. Range of accepted values is from 1 to 500.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
+  export interface ListBackupJobSummariesOutput {
+    /**
+     * This request returns a summary that contains Region, Account, State, ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+     */
+    BackupJobSummaries?: BackupJobSummaryList;
+    /**
+     * This is the period that sets the boundaries for returned results.    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated job count for the prior 7 days.    FOURTEEN_DAYS for aggregated job count for prior 14 days.  
+     */
+    AggregationPeriod?: string;
+    /**
+     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
   export interface ListBackupJobsInput {
     /**
      * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
@@ -2390,6 +2543,10 @@ declare namespace Backup {
      * This is a filter to list child (nested) jobs based on parent job ID.
      */
     ByParentJobId?: string;
+    /**
+     * This returns a list of backup jobs for the specified message category. Example strings may include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of MessageCategory strings.
+     */
+    ByMessageCategory?: string;
   }
   export interface ListBackupJobsOutput {
     /**
@@ -2521,6 +2678,50 @@ declare namespace Backup {
      */
     NextToken?: string;
   }
+  export interface ListCopyJobSummariesInput {
+    /**
+     * Returns the job count for the specified account. If the request is sent from a member account or an account not part of Amazon Web Services Organizations, jobs within requestor's account will be returned. Root, admin, and delegated administrator accounts can use the value ANY to return job counts from every account in the organization.  AGGREGATE_ALL aggregates job counts from all accounts within the authenticated organization, then returns the sum.
+     */
+    AccountId?: AccountId;
+    /**
+     * This parameter returns the job count for jobs with the specified state. The the value ANY returns count of all states.  AGGREGATE_ALL aggregates job counts for all states and returns the sum.
+     */
+    State?: CopyJobStatus;
+    /**
+     * Returns the job count for the specified resource type. Use request GetSupportedResourceTypes to obtain strings for supported resource types. The the value ANY returns count of all resource types.  AGGREGATE_ALL aggregates job counts for all resource types and returns the sum. The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * This parameter returns the job count for the specified message category. Example accepted strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of accepted MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
+     */
+    MessageCategory?: MessageCategory;
+    /**
+     * This is the period that sets the boundaries for returned results.    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated job count for the prior 7 days.    FOURTEEN_DAYS for aggregated job count for prior 14 days.  
+     */
+    AggregationPeriod?: AggregationPeriod;
+    /**
+     * This parameter sets the maximum number of items to be returned. The value is an integer. Range of accepted values is from 1 to 500.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
+  export interface ListCopyJobSummariesOutput {
+    /**
+     * This return shows a summary that contains Region, Account, State, ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+     */
+    CopyJobSummaries?: CopyJobSummaryList;
+    /**
+     * This is the period that sets the boundaries for returned results.    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated job count for the prior 7 days.    FOURTEEN_DAYS for aggregated job count for prior 14 days.  
+     */
+    AggregationPeriod?: string;
+    /**
+     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
   export interface ListCopyJobsInput {
     /**
      * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token. 
@@ -2570,6 +2771,10 @@ declare namespace Backup {
      * This is a filter to list child (nested) jobs based on parent job ID.
      */
     ByParentJobId?: string;
+    /**
+     * This parameter returns the job count for the specified message category. Example accepted strings include AccessDenied, Success, and InvalidParameters. See Monitoring for a list of accepted MessageCategory strings. The the value ANY returns count of all message categories.  AGGREGATE_ALL aggregates job counts for all message categories and returns the sum.
+     */
+    ByMessageCategory?: string;
   }
   export interface ListCopyJobsOutput {
     /**
@@ -2826,6 +3031,46 @@ declare namespace Backup {
      */
     NextToken?: string;
   }
+  export interface ListRestoreJobSummariesInput {
+    /**
+     * Returns the job count for the specified account. If the request is sent from a member account or an account not part of Amazon Web Services Organizations, jobs within requestor's account will be returned. Root, admin, and delegated administrator accounts can use the value ANY to return job counts from every account in the organization.  AGGREGATE_ALL aggregates job counts from all accounts within the authenticated organization, then returns the sum.
+     */
+    AccountId?: AccountId;
+    /**
+     * This parameter returns the job count for jobs with the specified state. The the value ANY returns count of all states.  AGGREGATE_ALL aggregates job counts for all states and returns the sum.
+     */
+    State?: RestoreJobState;
+    /**
+     * Returns the job count for the specified resource type. Use request GetSupportedResourceTypes to obtain strings for supported resource types. The the value ANY returns count of all resource types.  AGGREGATE_ALL aggregates job counts for all resource types and returns the sum. The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * This is the period that sets the boundaries for returned results. Acceptable values include    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated job count for the prior 7 days.    FOURTEEN_DAYS for aggregated job count for prior 14 days.  
+     */
+    AggregationPeriod?: AggregationPeriod;
+    /**
+     * This parameter sets the maximum number of items to be returned. The value is an integer. Range of accepted values is from 1 to 500.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
+  export interface ListRestoreJobSummariesOutput {
+    /**
+     * This return contains a summary that contains Region, Account, State, ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
+     */
+    RestoreJobSummaries?: RestoreJobSummaryList;
+    /**
+     * This is the period that sets the boundaries for returned results.    ONE_DAY for daily job count for the prior 14 days.    SEVEN_DAYS for the aggregated job count for the prior 7 days.    FOURTEEN_DAYS for aggregated job count for prior 14 days.  
+     */
+    AggregationPeriod?: string;
+    /**
+     * The next item following a partial list of returned resources. For example, if a request is made to return maxResults number of resources, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
+     */
+    NextToken?: string;
+  }
   export interface ListRestoreJobsInput {
     /**
      * The next item following a partial list of returned items. For example, if a request is made to return maxResults number of items, NextToken allows you to return more items in your list starting at the location pointed to by the next token.
@@ -2897,6 +3142,7 @@ declare namespace Backup {
   export type Long = number;
   export type MaxFrameworkInputs = number;
   export type MaxResults = number;
+  export type MessageCategory = string;
   export type Metadata = {[key: string]: MetadataValue};
   export type MetadataKey = string;
   export type MetadataValue = string;
@@ -3146,6 +3392,7 @@ declare namespace Backup {
   }
   export type RecoveryPointStatus = "COMPLETED"|"PARTIAL"|"DELETING"|"EXPIRED"|string;
   export type RecoveryPointsList = RecoveryPointMember[];
+  export type Region = string;
   export interface ReportDeliveryChannel {
     /**
      * The unique name of the S3 bucket that receives your reports.
@@ -3281,7 +3528,39 @@ declare namespace Backup {
   export type ResourceTypeOptInPreference = {[key: string]: IsEnabled};
   export type ResourceTypes = ResourceType[];
   export type RestoreJobId = string;
+  export type RestoreJobState = "CREATED"|"PENDING"|"RUNNING"|"ABORTED"|"COMPLETED"|"FAILED"|"AGGREGATE_ALL"|"ANY"|string;
   export type RestoreJobStatus = "PENDING"|"RUNNING"|"COMPLETED"|"ABORTED"|"FAILED"|string;
+  export interface RestoreJobSummary {
+    /**
+     * The Amazon Web Services Regions within the job summary.
+     */
+    Region?: Region;
+    /**
+     * The account ID that owns the jobs within the summary.
+     */
+    AccountId?: AccountId;
+    /**
+     * This value is job count for jobs with the specified state.
+     */
+    State?: RestoreJobState;
+    /**
+     * This value is the job count for the specified resource type. The request GetSupportedResourceTypes returns strings for supported resource types.
+     */
+    ResourceType?: ResourceType;
+    /**
+     * The value as a number of jobs in a job summary.
+     */
+    Count?: integer;
+    /**
+     * The value of time in number format of a job start time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    StartTime?: timestamp;
+    /**
+     * The value of time in number format of a job end time. This value is the time in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    EndTime?: timestamp;
+  }
+  export type RestoreJobSummaryList = RestoreJobSummary[];
   export type RestoreJobsList = RestoreJobsListMember[];
   export interface RestoreJobsListMember {
     /**

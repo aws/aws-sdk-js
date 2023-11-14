@@ -8480,6 +8480,15 @@ declare namespace Connect {
   }
   export type SecurityProfilesSearchSummaryList = SecurityProfileSearchSummary[];
   export type SecurityToken = string;
+  export type SegmentAttributeName = string;
+  export interface SegmentAttributeValue {
+    /**
+     * The value of a segment attribute.
+     */
+    ValueString?: SegmentAttributeValueString;
+  }
+  export type SegmentAttributeValueString = string;
+  export type SegmentAttributes = {[key: string]: SegmentAttributeValue};
   export interface SendNotificationActionDefinition {
     /**
      * Notification delivery method.
@@ -8581,6 +8590,10 @@ declare namespace Connect {
      * The unique identifier for an Amazon Connect contact. This identifier is related to the chat starting.  You cannot provide data for both RelatedContactId and PersistentChat.  
      */
     RelatedContactId?: ContactId;
+    /**
+     * A set of system defined key-value pairs stored on individual contact segments using an attribute map. The attributes are standard Amazon Connect attributes. They can be accessed in flows. Attribute keys can include only alphanumeric, -, and _. This field can be used to show channel subtype, such as connect:Guide.  The types application/vnd.amazonaws.connect.message.interactive and application/vnd.amazonaws.connect.message.interactive.response must be present in the SupportedMessagingContentTypes field of this API in order to set SegmentAttributes as { "connect:Subtype": {"valueString" : "connect:Guide" }}. 
+     */
+    SegmentAttributes?: SegmentAttributes;
   }
   export interface StartChatContactResponse {
     /**
