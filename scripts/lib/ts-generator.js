@@ -338,7 +338,7 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     } else if (type === 'map') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = {[key: string]: ' + this.generateSafeShapeName(shape.value.shape, customClassNames) + '};\n';
     } else if (type === 'string' || type === 'character') {
-        var stringType = 'string';
+        var stringType = '(string & {})';
         if (Array.isArray(shape.enum)) {
             stringType = shape.enum.map(function(s) {
                 return '"' + s + '"';
