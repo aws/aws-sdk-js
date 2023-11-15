@@ -364,11 +364,11 @@ declare class CloudTrail extends Service {
    */
   updateChannel(callback?: (err: AWSError, data: CloudTrail.Types.UpdateChannelResponse) => void): Request<CloudTrail.Types.UpdateChannelResponse, AWSError>;
   /**
-   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2557. By default, TerminationProtection is enabled. For event data stores for CloudTrail events, AdvancedEventSelectors includes or excludes management, data, or Insights events in your event data store. For more information about AdvancedEventSelectors, see AdvancedEventSelectors.  For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, AdvancedEventSelectors includes events of that type in your event data store.
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 7 and 3653 if the BillingMode is set to EXTENDABLE_RETENTION_PRICING, or between 7 and 2557 if BillingMode is set to FIXED_RETENTION_PRICING. By default, TerminationProtection is enabled. For event data stores for CloudTrail events, AdvancedEventSelectors includes or excludes management, data, or Insights events in your event data store. For more information about AdvancedEventSelectors, see AdvancedEventSelectors.  For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, AdvancedEventSelectors includes events of that type in your event data store.
    */
   updateEventDataStore(params: CloudTrail.Types.UpdateEventDataStoreRequest, callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
   /**
-   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 90 and 2557. By default, TerminationProtection is enabled. For event data stores for CloudTrail events, AdvancedEventSelectors includes or excludes management, data, or Insights events in your event data store. For more information about AdvancedEventSelectors, see AdvancedEventSelectors.  For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, AdvancedEventSelectors includes events of that type in your event data store.
+   * Updates an event data store. The required EventDataStore value is an ARN or the ID portion of the ARN. Other parameters are optional, but at least one optional parameter must be specified, or CloudTrail throws an error. RetentionPeriod is in days, and valid values are integers between 7 and 3653 if the BillingMode is set to EXTENDABLE_RETENTION_PRICING, or between 7 and 2557 if BillingMode is set to FIXED_RETENTION_PRICING. By default, TerminationProtection is enabled. For event data stores for CloudTrail events, AdvancedEventSelectors includes or excludes management, data, or Insights events in your event data store. For more information about AdvancedEventSelectors, see AdvancedEventSelectors.  For event data stores for Config configuration items, Audit Manager evidence, or non-Amazon Web Services events, AdvancedEventSelectors includes events of that type in your event data store.
    */
   updateEventDataStore(callback?: (err: AWSError, data: CloudTrail.Types.UpdateEventDataStoreResponse) => void): Request<CloudTrail.Types.UpdateEventDataStoreResponse, AWSError>;
   /**
@@ -436,6 +436,7 @@ declare namespace CloudTrail {
     NotEndsWith?: Operator;
   }
   export type AdvancedFieldSelectors = AdvancedFieldSelector[];
+  export type BillingMode = "EXTENDABLE_RETENTION_PRICING"|"FIXED_RETENTION_PRICING"|string;
   export type Boolean = boolean;
   export type ByteBuffer = Buffer|Uint8Array|Blob|string;
   export interface CancelQueryRequest {
@@ -523,7 +524,7 @@ declare namespace CloudTrail {
      */
     OrganizationEnabled?: Boolean;
     /**
-     * The retention period of the event data store, in days. You can set a retention period of up to 2557 days, the equivalent of seven years. CloudTrail Lake determines whether to retain an event by checking if the eventTime of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events when the eventTime is older than 90 days.  If you plan to copy trail events to this event data store, we recommend that you consider both the age of the events that you want to copy as well as how long you want to keep the copied events in your event data store. For example, if you copy trail events that are 5 years old and specify a retention period of 7 years, the event data store will retain those events for two years. 
+     * The retention period of the event data store, in days. If BillingMode is set to EXTENDABLE_RETENTION_PRICING, you can set a retention period of up to 3653 days, the equivalent of 10 years. If BillingMode is set to FIXED_RETENTION_PRICING, you can set a retention period of up to 2557 days, the equivalent of seven years. CloudTrail Lake determines whether to retain an event by checking if the eventTime of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events when the eventTime is older than 90 days.  If you plan to copy trail events to this event data store, we recommend that you consider both the age of the events that you want to copy as well as how long you want to keep the copied events in your event data store. For example, if you copy trail events that are 5 years old and specify a retention period of 7 years, the event data store will retain those events for two years. 
      */
     RetentionPeriod?: RetentionPeriod;
     /**
@@ -539,6 +540,10 @@ declare namespace CloudTrail {
      * Specifies whether the event data store should start ingesting live events. The default is true.
      */
     StartIngestion?: Boolean;
+    /**
+     * The billing mode for the event data store determines the cost for ingesting events and the default and maximum retention period for the event data store. The following are the possible values:    EXTENDABLE_RETENTION_PRICING - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is 366 days.    FIXED_RETENTION_PRICING - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). The default retention period for this billing mode is 2557 days.   The default value is EXTENDABLE_RETENTION_PRICING. For more information about CloudTrail pricing, see CloudTrail Pricing and Managing CloudTrail Lake costs.
+     */
+    BillingMode?: BillingMode;
   }
   export interface CreateEventDataStoreResponse {
     /**
@@ -586,6 +591,10 @@ declare namespace CloudTrail {
      * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * The billing mode for the event data store.
+     */
+    BillingMode?: BillingMode;
   }
   export interface CreateTrailRequest {
     /**
@@ -1006,6 +1015,10 @@ declare namespace CloudTrail {
      * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * The billing mode for the event data store.
+     */
+    BillingMode?: BillingMode;
   }
   export interface GetEventSelectorsRequest {
     /**
@@ -1859,6 +1872,10 @@ declare namespace CloudTrail {
      * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * The billing mode for the event data store.
+     */
+    BillingMode?: BillingMode;
   }
   export type RetentionPeriod = number;
   export interface S3ImportSource {
@@ -2197,7 +2214,7 @@ declare namespace CloudTrail {
      */
     OrganizationEnabled?: Boolean;
     /**
-     * The retention period of the event data store, in days. You can set a retention period of up to 2557 days, the equivalent of seven years. CloudTrail Lake determines whether to retain an event by checking if the eventTime of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events when the eventTime is older than 90 days.  If you decrease the retention period of an event data store, CloudTrail will remove any events with an eventTime older than the new retention period. For example, if the previous retention period was 365 days and you decrease it to 100 days, CloudTrail will remove events with an eventTime older than 100 days. 
+     * The retention period of the event data store, in days. If BillingMode is set to EXTENDABLE_RETENTION_PRICING, you can set a retention period of up to 3653 days, the equivalent of 10 years. If BillingMode is set to FIXED_RETENTION_PRICING, you can set a retention period of up to 2557 days, the equivalent of seven years. CloudTrail Lake determines whether to retain an event by checking if the eventTime of the event is within the specified retention period. For example, if you set a retention period of 90 days, CloudTrail will remove events when the eventTime is older than 90 days.  If you decrease the retention period of an event data store, CloudTrail will remove any events with an eventTime older than the new retention period. For example, if the previous retention period was 365 days and you decrease it to 100 days, CloudTrail will remove events with an eventTime older than 100 days. 
      */
     RetentionPeriod?: RetentionPeriod;
     /**
@@ -2208,6 +2225,10 @@ declare namespace CloudTrail {
      * Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.  Disabling or deleting the KMS key, or removing CloudTrail permissions on the key, prevents CloudTrail from logging events to the event data store, and prevents users from querying the data in the event data store that was encrypted with the key. After you associate an event data store with a KMS key, the KMS key cannot be removed or changed. Before you disable or delete a KMS key that you are using with an event data store, delete or back up your event data store.  CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys, see Using multi-Region keys in the Key Management Service Developer Guide. Examples:    alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:alias/MyAliasName     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012     12345678-1234-1234-1234-123456789012   
      */
     KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     *  You can't change the billing mode from EXTENDABLE_RETENTION_PRICING to FIXED_RETENTION_PRICING. If BillingMode is set to EXTENDABLE_RETENTION_PRICING and you want to use FIXED_RETENTION_PRICING instead, you'll need to stop ingestion on the event data store and create a new event data store that uses FIXED_RETENTION_PRICING.  The billing mode for the event data store determines the cost for ingesting events and the default and maximum retention period for the event data store. The following are the possible values:    EXTENDABLE_RETENTION_PRICING - This billing mode is generally recommended if you want a flexible retention period of up to 3653 days (about 10 years). The default retention period for this billing mode is 366 days.    FIXED_RETENTION_PRICING - This billing mode is recommended if you expect to ingest more than 25 TB of event data per month and need a retention period of up to 2557 days (about 7 years). The default retention period for this billing mode is 2557 days.   For more information about CloudTrail pricing, see CloudTrail Pricing and Managing CloudTrail Lake costs.
+     */
+    BillingMode?: BillingMode;
   }
   export interface UpdateEventDataStoreResponse {
     /**
@@ -2254,6 +2275,10 @@ declare namespace CloudTrail {
      * Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.  arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012 
      */
     KmsKeyId?: EventDataStoreKmsKeyId;
+    /**
+     * The billing mode for the event data store.
+     */
+    BillingMode?: BillingMode;
   }
   export interface UpdateTrailRequest {
     /**

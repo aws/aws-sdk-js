@@ -472,11 +472,11 @@ declare class AutoScaling extends Service {
    */
   setInstanceProtection(callback?: (err: AWSError, data: AutoScaling.Types.SetInstanceProtectionAnswer) => void): Request<AutoScaling.Types.SetInstanceProtectionAnswer, AWSError>;
   /**
-   * Starts an instance refresh. During an instance refresh, Amazon EC2 Auto Scaling performs a rolling update of instances in an Auto Scaling group. Instances are terminated first and then replaced, which temporarily reduces the capacity available within your Auto Scaling group. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group. This feature is helpful, for example, when you have a new AMI or a new user data script. You just need to create a new launch template that specifies the new AMI or user data script. Then start an instance refresh to immediately begin the process of updating instances in the group.  If successful, the request's response contains a unique ID that you can use to track the progress of the instance refresh. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh that is in progress, use the CancelInstanceRefresh API.  An instance refresh might fail for several reasons, such as EC2 launch failures, misconfigured health checks, or not ignoring or allowing the termination of instances that are in Standby state or protected from scale in. You can monitor for failed EC2 launches using the scaling activities. To find the scaling activities, call the DescribeScalingActivities API. If you enable auto rollback, your Auto Scaling group will be rolled back automatically when the instance refresh fails. You can enable this feature before starting an instance refresh by specifying the AutoRollback property in the instance refresh preferences. Otherwise, to roll back an instance refresh before it finishes, use the RollbackInstanceRefresh API. 
+   * Starts an instance refresh. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group. This feature is helpful, for example, when you have a new AMI or a new user data script. You just need to create a new launch template that specifies the new AMI or user data script. Then start an instance refresh to immediately begin the process of updating instances in the group.  If successful, the request's response contains a unique ID that you can use to track the progress of the instance refresh. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh that is in progress, use the CancelInstanceRefresh API.  An instance refresh might fail for several reasons, such as EC2 launch failures, misconfigured health checks, or not ignoring or allowing the termination of instances that are in Standby state or protected from scale in. You can monitor for failed EC2 launches using the scaling activities. To find the scaling activities, call the DescribeScalingActivities API. If you enable auto rollback, your Auto Scaling group will be rolled back automatically when the instance refresh fails. You can enable this feature before starting an instance refresh by specifying the AutoRollback property in the instance refresh preferences. Otherwise, to roll back an instance refresh before it finishes, use the RollbackInstanceRefresh API. 
    */
   startInstanceRefresh(params: AutoScaling.Types.StartInstanceRefreshType, callback?: (err: AWSError, data: AutoScaling.Types.StartInstanceRefreshAnswer) => void): Request<AutoScaling.Types.StartInstanceRefreshAnswer, AWSError>;
   /**
-   * Starts an instance refresh. During an instance refresh, Amazon EC2 Auto Scaling performs a rolling update of instances in an Auto Scaling group. Instances are terminated first and then replaced, which temporarily reduces the capacity available within your Auto Scaling group. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group. This feature is helpful, for example, when you have a new AMI or a new user data script. You just need to create a new launch template that specifies the new AMI or user data script. Then start an instance refresh to immediately begin the process of updating instances in the group.  If successful, the request's response contains a unique ID that you can use to track the progress of the instance refresh. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh that is in progress, use the CancelInstanceRefresh API.  An instance refresh might fail for several reasons, such as EC2 launch failures, misconfigured health checks, or not ignoring or allowing the termination of instances that are in Standby state or protected from scale in. You can monitor for failed EC2 launches using the scaling activities. To find the scaling activities, call the DescribeScalingActivities API. If you enable auto rollback, your Auto Scaling group will be rolled back automatically when the instance refresh fails. You can enable this feature before starting an instance refresh by specifying the AutoRollback property in the instance refresh preferences. Otherwise, to roll back an instance refresh before it finishes, use the RollbackInstanceRefresh API. 
+   * Starts an instance refresh. This operation is part of the instance refresh feature in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group. This feature is helpful, for example, when you have a new AMI or a new user data script. You just need to create a new launch template that specifies the new AMI or user data script. Then start an instance refresh to immediately begin the process of updating instances in the group.  If successful, the request's response contains a unique ID that you can use to track the progress of the instance refresh. To query its status, call the DescribeInstanceRefreshes API. To describe the instance refreshes that have already run, call the DescribeInstanceRefreshes API. To cancel an instance refresh that is in progress, use the CancelInstanceRefresh API.  An instance refresh might fail for several reasons, such as EC2 launch failures, misconfigured health checks, or not ignoring or allowing the termination of instances that are in Standby state or protected from scale in. You can monitor for failed EC2 launches using the scaling activities. To find the scaling activities, call the DescribeScalingActivities API. If you enable auto rollback, your Auto Scaling group will be rolled back automatically when the instance refresh fails. You can enable this feature before starting an instance refresh by specifying the AutoRollback property in the instance refresh preferences. Otherwise, to roll back an instance refresh before it finishes, use the RollbackInstanceRefresh API. 
    */
   startInstanceRefresh(callback?: (err: AWSError, data: AutoScaling.Types.StartInstanceRefreshAnswer) => void): Request<AutoScaling.Types.StartInstanceRefreshAnswer, AWSError>;
   /**
@@ -813,6 +813,10 @@ declare namespace AutoScaling {
      * The traffic sources associated with this Auto Scaling group.
      */
     TrafficSources?: TrafficSources;
+    /**
+     * An instance maintenance policy.
+     */
+    InstanceMaintenancePolicy?: InstanceMaintenancePolicy;
   }
   export type AutoScalingGroupDesiredCapacity = number;
   export type AutoScalingGroupMaxSize = number;
@@ -1136,6 +1140,10 @@ declare namespace AutoScaling {
      * The list of traffic sources to attach to this Auto Scaling group. You can use any of the following as traffic sources for an Auto Scaling group: Classic Load Balancer, Application Load Balancer, Gateway Load Balancer, Network Load Balancer, and VPC Lattice.
      */
     TrafficSources?: TrafficSources;
+    /**
+     * An instance maintenance policy. For more information, see Set instance maintenance policy in the Amazon EC2 Auto Scaling User Guide.
+     */
+    InstanceMaintenancePolicy?: InstanceMaintenancePolicy;
   }
   export interface CreateLaunchConfigurationType {
     /**
@@ -1939,6 +1947,16 @@ declare namespace AutoScaling {
   export type InstanceGeneration = "current"|"previous"|string;
   export type InstanceGenerations = InstanceGeneration[];
   export type InstanceIds = XmlStringMaxLen19[];
+  export interface InstanceMaintenancePolicy {
+    /**
+     * Specifies the lower threshold as a percentage of the desired capacity of the Auto Scaling group. It represents the minimum percentage of the group to keep in service, healthy, and ready to use to support your workload when replacing instances. Value range is 0 to 100. After it's set, a value of -1 will clear the previously set value.
+     */
+    MinHealthyPercentage?: IntPercentResettable;
+    /**
+     * Specifies the upper threshold as a percentage of the desired capacity of the Auto Scaling group. It represents the maximum percentage of the group that can be in service and healthy, or pending, to support your workload when replacing instances. Value range is 100 to 200. After it's set, a value of -1 will clear the previously set value.  Both MinHealthyPercentage and MaxHealthyPercentage must be specified, and the difference between them cannot be greater than 100. A large range increases the number of instances that can be replaced at the same time.
+     */
+    MaxHealthyPercentage?: IntPercent100To200Resettable;
+  }
   export type InstanceMetadataEndpointState = "disabled"|"enabled"|string;
   export type InstanceMetadataHttpPutResponseHopLimit = number;
   export type InstanceMetadataHttpTokensState = "optional"|"required"|string;
@@ -2175,6 +2193,9 @@ declare namespace AutoScaling {
   }
   export type InstancesToUpdate = number;
   export type IntPercent = number;
+  export type IntPercent100To200 = number;
+  export type IntPercent100To200Resettable = number;
+  export type IntPercentResettable = number;
   export interface LaunchConfiguration {
     /**
      * The name of the launch configuration.
@@ -2975,7 +2996,7 @@ declare namespace AutoScaling {
   export type RefreshInstanceWarmup = number;
   export interface RefreshPreferences {
     /**
-     * The amount of capacity in the Auto Scaling group that must pass your group's health checks to allow the operation to continue. The value is expressed as a percentage of the desired capacity of the Auto Scaling group (rounded up to the nearest integer). The default is 90. Setting the minimum healthy percentage to 100 percent limits the rate of replacement to one instance at a time. In contrast, setting it to 0 percent has the effect of replacing all instances at the same time. 
+     * Specifies the minimum percentage of the group to keep in service, healthy, and ready to use to support your workload to allow the operation to continue. The value is expressed as a percentage of the desired capacity of the Auto Scaling group. Value range is 0 to 100. If you do not specify this property, the default is 90 percent, or the percentage set in the instance maintenance policy for the Auto Scaling group, if defined.
      */
     MinHealthyPercentage?: IntPercent;
     /**
@@ -3010,6 +3031,10 @@ declare namespace AutoScaling {
      * (Optional) The CloudWatch alarm specification. CloudWatch alarms can be used to identify any issues and fail the operation if an alarm threshold is met.
      */
     AlarmSpecification?: AlarmSpecification;
+    /**
+     * Specifies the maximum percentage of the group that can be in service and healthy, or pending, to support your workload when replacing instances. The value is expressed as a percentage of the desired capacity of the Auto Scaling group. Value range is 100 to 200. If you specify MaxHealthyPercentage, you must also specify MinHealthyPercentage, and the difference between them cannot be greater than 100. A larger range increases the number of instances that can be replaced at the same time. If you do not specify this property, the default is 100 percent, or the percentage set in the instance maintenance policy for the Auto Scaling group, if defined.
+     */
+    MaxHealthyPercentage?: IntPercent100To200;
   }
   export type RefreshStrategy = "Rolling"|string;
   export type ResourceName = string;
@@ -3293,7 +3318,7 @@ declare namespace AutoScaling {
      */
     DesiredConfiguration?: DesiredConfiguration;
     /**
-     * Sets your preferences for the instance refresh so that it performs as expected when you start it. Includes the instance warmup time, the minimum healthy percentage, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in Standby state or protected from scale in are found. You can also choose to enable additional features, such as the following:   Auto rollback   Checkpoints   CloudWatch alarms   Skip matching  
+     * Sets your preferences for the instance refresh so that it performs as expected when you start it. Includes the instance warmup time, the minimum and maximum healthy percentages, and the behaviors that you want Amazon EC2 Auto Scaling to use if instances that are in Standby state or protected from scale in are found. You can also choose to enable additional features, such as the following:   Auto rollback   Checkpoints   CloudWatch alarms   Skip matching  
      */
     Preferences?: RefreshPreferences;
   }
@@ -3574,6 +3599,10 @@ declare namespace AutoScaling {
      * The amount of time, in seconds, until a new instance is considered to have finished initializing and resource consumption to become stable after it enters the InService state.  During an instance refresh, Amazon EC2 Auto Scaling waits for the warm-up period after it replaces an instance before it moves on to replacing the next instance. Amazon EC2 Auto Scaling also waits for the warm-up period before aggregating the metrics for new instances with existing instances in the Amazon CloudWatch metrics that are used for scaling, resulting in more reliable usage data. For more information, see Set the default instance warmup for an Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.  To manage various warm-up settings at the group level, we recommend that you set the default instance warmup, even if it is set to 0 seconds. To remove a value that you previously set, include the property but specify -1 for the value. However, we strongly recommend keeping the default instance warmup enabled by specifying a value of 0 or other nominal value. 
      */
     DefaultInstanceWarmup?: DefaultInstanceWarmup;
+    /**
+     * An instance maintenance policy. For more information, see Set instance maintenance policy in the Amazon EC2 Auto Scaling User Guide.
+     */
+    InstanceMaintenancePolicy?: InstanceMaintenancePolicy;
   }
   export interface VCpuCountRequest {
     /**

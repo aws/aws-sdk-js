@@ -2612,6 +2612,10 @@ declare namespace Redshift {
      * The identifier of the cluster to delete a custom domain association for.
      */
     ClusterIdentifier: String;
+    /**
+     * The custom domain name for the custom domain association.
+     */
+    CustomDomainName: CustomDomainNameString;
   }
   export interface DeleteEndpointAccessMessage {
     /**
@@ -4455,11 +4459,11 @@ declare namespace Redshift {
     /**
      * The custom domain name for a changed custom domain association.
      */
-    CustomDomainName?: CustomDomainNameString;
+    CustomDomainName: CustomDomainNameString;
     /**
      * The certificate Amazon Resource Name (ARN) for the changed custom domain association.
      */
-    CustomDomainCertificateArn?: CustomDomainCertificateArnString;
+    CustomDomainCertificateArn: CustomDomainCertificateArnString;
     /**
      * The identifier of the cluster to change a custom domain association for.
      */

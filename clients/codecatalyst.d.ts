@@ -148,6 +148,22 @@ declare class CodeCatalyst extends Service {
    */
   getUserDetails(callback?: (err: AWSError, data: CodeCatalyst.Types.GetUserDetailsResponse) => void): Request<CodeCatalyst.Types.GetUserDetailsResponse, AWSError>;
   /**
+   * Returns information about a workflow.
+   */
+  getWorkflow(params: CodeCatalyst.Types.GetWorkflowRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.GetWorkflowResponse) => void): Request<CodeCatalyst.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Returns information about a workflow.
+   */
+  getWorkflow(callback?: (err: AWSError, data: CodeCatalyst.Types.GetWorkflowResponse) => void): Request<CodeCatalyst.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Returns information about a specified run of a workflow.
+   */
+  getWorkflowRun(params: CodeCatalyst.Types.GetWorkflowRunRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.GetWorkflowRunResponse) => void): Request<CodeCatalyst.Types.GetWorkflowRunResponse, AWSError>;
+  /**
+   * Returns information about a specified run of a workflow.
+   */
+  getWorkflowRun(callback?: (err: AWSError, data: CodeCatalyst.Types.GetWorkflowRunResponse) => void): Request<CodeCatalyst.Types.GetWorkflowRunResponse, AWSError>;
+  /**
    * Lists all personal access tokens (PATs) associated with the user who calls the API. You can only list PATs associated with your Amazon Web Services Builder ID.
    */
   listAccessTokens(params: CodeCatalyst.Types.ListAccessTokensRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.ListAccessTokensResponse) => void): Request<CodeCatalyst.Types.ListAccessTokensResponse, AWSError>;
@@ -172,11 +188,11 @@ declare class CodeCatalyst extends Service {
    */
   listDevEnvironments(callback?: (err: AWSError, data: CodeCatalyst.Types.ListDevEnvironmentsResponse) => void): Request<CodeCatalyst.Types.ListDevEnvironmentsResponse, AWSError>;
   /**
-   * Retrieves a list of events that occurred during a specified time period in a space. You can use these events to audit user and system activity in a space.
+   * Retrieves a list of events that occurred during a specific time in a space. You can use these events to audit user and system activity in a space. For more information, see Monitoring in the Amazon CodeCatalyst User Guide.  ListEventLogs guarantees events for the last 30 days in a given space. You can also view and retrieve a list of management events over the last 90 days for Amazon CodeCatalyst in the CloudTrail console by viewing Event history, or by creating a trail to create and maintain a record of events that extends past 90 days. For more information, see Working with CloudTrail Event History and Working with CloudTrail trails. 
    */
   listEventLogs(params: CodeCatalyst.Types.ListEventLogsRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.ListEventLogsResponse) => void): Request<CodeCatalyst.Types.ListEventLogsResponse, AWSError>;
   /**
-   * Retrieves a list of events that occurred during a specified time period in a space. You can use these events to audit user and system activity in a space.
+   * Retrieves a list of events that occurred during a specific time in a space. You can use these events to audit user and system activity in a space. For more information, see Monitoring in the Amazon CodeCatalyst User Guide.  ListEventLogs guarantees events for the last 30 days in a given space. You can also view and retrieve a list of management events over the last 90 days for Amazon CodeCatalyst in the CloudTrail console by viewing Event history, or by creating a trail to create and maintain a record of events that extends past 90 days. For more information, see Working with CloudTrail Event History and Working with CloudTrail trails. 
    */
   listEventLogs(callback?: (err: AWSError, data: CodeCatalyst.Types.ListEventLogsResponse) => void): Request<CodeCatalyst.Types.ListEventLogsResponse, AWSError>;
   /**
@@ -212,6 +228,22 @@ declare class CodeCatalyst extends Service {
    */
   listSpaces(callback?: (err: AWSError, data: CodeCatalyst.Types.ListSpacesResponse) => void): Request<CodeCatalyst.Types.ListSpacesResponse, AWSError>;
   /**
+   * Retrieves a list of workflow runs of a specified workflow.
+   */
+  listWorkflowRuns(params: CodeCatalyst.Types.ListWorkflowRunsRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.ListWorkflowRunsResponse) => void): Request<CodeCatalyst.Types.ListWorkflowRunsResponse, AWSError>;
+  /**
+   * Retrieves a list of workflow runs of a specified workflow.
+   */
+  listWorkflowRuns(callback?: (err: AWSError, data: CodeCatalyst.Types.ListWorkflowRunsResponse) => void): Request<CodeCatalyst.Types.ListWorkflowRunsResponse, AWSError>;
+  /**
+   * Retrieves a list of workflows in a specified project.
+   */
+  listWorkflows(params: CodeCatalyst.Types.ListWorkflowsRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.ListWorkflowsResponse) => void): Request<CodeCatalyst.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Retrieves a list of workflows in a specified project.
+   */
+  listWorkflows(callback?: (err: AWSError, data: CodeCatalyst.Types.ListWorkflowsResponse) => void): Request<CodeCatalyst.Types.ListWorkflowsResponse, AWSError>;
+  /**
    * Starts a specified Dev Environment and puts it into an active state. 
    */
   startDevEnvironment(params: CodeCatalyst.Types.StartDevEnvironmentRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.StartDevEnvironmentResponse) => void): Request<CodeCatalyst.Types.StartDevEnvironmentResponse, AWSError>;
@@ -227,6 +259,14 @@ declare class CodeCatalyst extends Service {
    * Starts a session for a specified Dev Environment.
    */
   startDevEnvironmentSession(callback?: (err: AWSError, data: CodeCatalyst.Types.StartDevEnvironmentSessionResponse) => void): Request<CodeCatalyst.Types.StartDevEnvironmentSessionResponse, AWSError>;
+  /**
+   * Begins a run of a specified workflow.
+   */
+  startWorkflowRun(params: CodeCatalyst.Types.StartWorkflowRunRequest, callback?: (err: AWSError, data: CodeCatalyst.Types.StartWorkflowRunResponse) => void): Request<CodeCatalyst.Types.StartWorkflowRunResponse, AWSError>;
+  /**
+   * Begins a run of a specified workflow.
+   */
+  startWorkflowRun(callback?: (err: AWSError, data: CodeCatalyst.Types.StartWorkflowRunResponse) => void): Request<CodeCatalyst.Types.StartWorkflowRunResponse, AWSError>;
   /**
    * Pauses a specified Dev Environment and places it in a non-running state. Stopped Dev Environments do not consume compute minutes.
    */
@@ -293,7 +333,7 @@ declare namespace CodeCatalyst {
   }
   export type Boolean = boolean;
   export type ClientToken = string;
-  export type ComparisonOperator = "EQ"|"GT"|"GE"|"LT"|"LE"|string;
+  export type ComparisonOperator = "EQ"|"GT"|"GE"|"LT"|"LE"|"BEGINS_WITH"|string;
   export interface CreateAccessTokenRequest {
     /**
      * The friendly name of the personal access token.
@@ -811,7 +851,7 @@ declare namespace CodeCatalyst {
      */
     comparisonOperator?: String;
   }
-  export type FilterKey = "hasAccessTo"|string;
+  export type FilterKey = "hasAccessTo"|"name"|string;
   export type Filters = Filter[];
   export interface GetDevEnvironmentRequest {
     /**
@@ -1045,6 +1085,120 @@ declare namespace CodeCatalyst {
      */
     version?: String;
   }
+  export interface GetWorkflowRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The ID of the workflow. To rerieve a list of workflow IDs, use ListWorkflows.
+     */
+    id: Uuid;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: GetWorkflowRequestProjectNameString;
+  }
+  export type GetWorkflowRequestProjectNameString = string;
+  export interface GetWorkflowResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The ID of the workflow.
+     */
+    id: Uuid;
+    /**
+     * The name of the workflow.
+     */
+    name: String;
+    /**
+     * The name of the source repository where the workflow YAML is stored.
+     */
+    sourceRepositoryName?: SourceRepositoryNameString;
+    /**
+     * The name of the branch that contains the workflow YAML.
+     */
+    sourceBranchName?: SourceRepositoryBranchString;
+    /**
+     * Information about the workflow definition file for the workflow.
+     */
+    definition: WorkflowDefinition;
+    /**
+     * The date and time the workflow was created, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    createdTime: SyntheticTimestamp_date_time;
+    /**
+     * The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    lastUpdatedTime: SyntheticTimestamp_date_time;
+    /**
+     * The behavior to use when multiple workflows occur at the same time. For more information, see https://docs.aws.amazon.com/codecatalyst/latest/userguide/workflows-configure-runs.html in the Amazon CodeCatalyst User Guide.
+     */
+    runMode: WorkflowRunMode;
+    /**
+     * The status of the workflow.
+     */
+    status: WorkflowStatus;
+  }
+  export interface GetWorkflowRunRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The ID of the workflow run. To retrieve a list of workflow run IDs, use ListWorkflowRuns.
+     */
+    id: Uuid;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: GetWorkflowRunRequestProjectNameString;
+  }
+  export type GetWorkflowRunRequestProjectNameString = string;
+  export interface GetWorkflowRunResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The ID of the workflow run.
+     */
+    id: Uuid;
+    /**
+     * The ID of the workflow.
+     */
+    workflowId: Uuid;
+    /**
+     * The status of the workflow run.
+     */
+    status: WorkflowRunStatus;
+    /**
+     * Information about the reasons for the status of the workflow run.
+     */
+    statusReasons?: WorkflowRunStatusReasons;
+    /**
+     * The date and time the workflow run began, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    startTime: SyntheticTimestamp_date_time;
+    /**
+     * The date and time the workflow run ended, in coordinated universal time (UTC) timestamp format as specified in RFC 3339.
+     */
+    endTime?: SyntheticTimestamp_date_time;
+    /**
+     * The date and time the workflow run status was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    lastUpdatedTime: SyntheticTimestamp_date_time;
+  }
   export interface Ide {
     /**
      * A link to the IDE runtime image.
@@ -1137,7 +1291,7 @@ declare namespace CodeCatalyst {
     /**
      * The name of the project in the space.
      */
-    projectName: NameString;
+    projectName?: NameString;
     /**
      * Information about filters to apply to narrow the results returned in the list.
      */
@@ -1354,6 +1508,80 @@ declare namespace CodeCatalyst {
      */
     items?: SpaceSummaries;
   }
+  export interface ListWorkflowRunsRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The ID of the workflow. To retrieve a list of workflow IDs, use ListWorkflows.
+     */
+    workflowId?: Uuid;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: ListWorkflowRunsRequestProjectNameString;
+    /**
+     * A token returned from a call to this API to indicate the next batch of results to return, if any.
+     */
+    nextToken?: ListWorkflowRunsRequestNextTokenString;
+    /**
+     * The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a NextToken element, which you can use to obtain additional results.
+     */
+    maxResults?: ListWorkflowRunsRequestMaxResultsInteger;
+    /**
+     * Information used to sort the items in the returned list.
+     */
+    sortBy?: WorkflowRunSortCriteriaList;
+  }
+  export type ListWorkflowRunsRequestMaxResultsInteger = number;
+  export type ListWorkflowRunsRequestNextTokenString = string;
+  export type ListWorkflowRunsRequestProjectNameString = string;
+  export interface ListWorkflowRunsResponse {
+    /**
+     * A token returned from a call to this API to indicate the next batch of results to return, if any.
+     */
+    nextToken?: String;
+    /**
+     * Information about the runs of a workflow.
+     */
+    items?: WorkflowRunSummaries;
+  }
+  export interface ListWorkflowsRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: ListWorkflowsRequestSpaceNameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * A token returned from a call to this API to indicate the next batch of results to return, if any.
+     */
+    nextToken?: ListWorkflowsRequestNextTokenString;
+    /**
+     * The maximum number of results to show in a single call to this API. If the number of results is larger than the number you specified, the response will include a NextToken element, which you can use to obtain additional results.
+     */
+    maxResults?: ListWorkflowsRequestMaxResultsInteger;
+    /**
+     * Information used to sort the items in the returned list.
+     */
+    sortBy?: WorkflowSortCriteriaList;
+  }
+  export type ListWorkflowsRequestMaxResultsInteger = number;
+  export type ListWorkflowsRequestNextTokenString = string;
+  export type ListWorkflowsRequestSpaceNameString = string;
+  export interface ListWorkflowsResponse {
+    /**
+     * A token returned from a call to this API to indicate the next batch of results to return, if any.
+     */
+    nextToken?: String;
+    /**
+     * Information about the workflows in a project.
+     */
+    items?: WorkflowSummaries;
+  }
   export type NameString = string;
   export type OperationType = "READONLY"|"MUTATION"|string;
   export interface PersistentStorage {
@@ -1529,6 +1757,45 @@ declare namespace CodeCatalyst {
     id: Uuid;
   }
   export type StartDevEnvironmentSessionResponseSessionIdString = string;
+  export interface StartWorkflowRunRequest {
+    /**
+     * The name of the space.
+     */
+    spaceName: StartWorkflowRunRequestSpaceNameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: StartWorkflowRunRequestProjectNameString;
+    /**
+     * The system-generated unique ID of the workflow. To retrieve a list of workflow IDs, use ListWorkflows.
+     */
+    workflowId: Uuid;
+    /**
+     * A user-specified idempotency token. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.
+     */
+    clientToken?: StartWorkflowRunRequestClientTokenString;
+  }
+  export type StartWorkflowRunRequestClientTokenString = string;
+  export type StartWorkflowRunRequestProjectNameString = string;
+  export type StartWorkflowRunRequestSpaceNameString = string;
+  export interface StartWorkflowRunResponse {
+    /**
+     * The name of the space.
+     */
+    spaceName: NameString;
+    /**
+     * The name of the project in the space.
+     */
+    projectName: NameString;
+    /**
+     * The system-generated unique ID of the workflow run.
+     */
+    id: Uuid;
+    /**
+     * The system-generated unique ID of the workflow.
+     */
+    workflowId: Uuid;
+  }
   export type StatusReason = string;
   export interface StopDevEnvironmentRequest {
     /**
@@ -1757,6 +2024,104 @@ declare namespace CodeCatalyst {
     identity?: VerifySessionResponseIdentityString;
   }
   export type VerifySessionResponseIdentityString = string;
+  export interface WorkflowDefinition {
+    /**
+     * The path to the workflow definition file stored in the source repository for the project, including the file name.
+     */
+    path: String;
+  }
+  export interface WorkflowDefinitionSummary {
+    /**
+     * The path to the workflow definition file stored in the source repository for the project, including the file name.
+     */
+    path: String;
+  }
+  export type WorkflowRunMode = "QUEUED"|"PARALLEL"|"SUPERSEDED"|string;
+  export interface WorkflowRunSortCriteria {
+  }
+  export type WorkflowRunSortCriteriaList = WorkflowRunSortCriteria[];
+  export type WorkflowRunStatus = "SUCCEEDED"|"FAILED"|"STOPPED"|"SUPERSEDED"|"CANCELLED"|"NOT_RUN"|"VALIDATING"|"PROVISIONING"|"IN_PROGRESS"|"STOPPING"|"ABANDONED"|string;
+  export interface WorkflowRunStatusReason {
+  }
+  export type WorkflowRunStatusReasons = WorkflowRunStatusReason[];
+  export type WorkflowRunSummaries = WorkflowRunSummary[];
+  export interface WorkflowRunSummary {
+    /**
+     * The system-generated unique ID of the workflow run.
+     */
+    id: Uuid;
+    /**
+     * The system-generated unique ID of the workflow.
+     */
+    workflowId: Uuid;
+    /**
+     * The name of the workflow.
+     */
+    workflowName: String;
+    /**
+     * The status of the workflow run.
+     */
+    status: WorkflowRunStatus;
+    /**
+     * The reasons for the workflow run status.
+     */
+    statusReasons?: WorkflowRunStatusReasons;
+    /**
+     * The date and time the workflow run began, in coordinated universal time (UTC) timestamp format as specified in RFC 3339.
+     */
+    startTime: SyntheticTimestamp_date_time;
+    /**
+     * The date and time the workflow run ended, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    endTime?: SyntheticTimestamp_date_time;
+    /**
+     * The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    lastUpdatedTime: SyntheticTimestamp_date_time;
+  }
+  export interface WorkflowSortCriteria {
+  }
+  export type WorkflowSortCriteriaList = WorkflowSortCriteria[];
+  export type WorkflowStatus = "INVALID"|"ACTIVE"|string;
+  export type WorkflowSummaries = WorkflowSummary[];
+  export interface WorkflowSummary {
+    /**
+     * The system-generated unique ID of a workflow.
+     */
+    id: Uuid;
+    /**
+     * The name of the workflow.
+     */
+    name: String;
+    /**
+     * The name of the source repository where the workflow definition file is stored.
+     */
+    sourceRepositoryName: SourceRepositoryNameString;
+    /**
+     * The name of the branch of the source repository where the workflow definition file is stored.
+     */
+    sourceBranchName: SourceRepositoryBranchString;
+    /**
+     * Information about the workflow definition file.
+     */
+    definition: WorkflowDefinitionSummary;
+    /**
+     * The date and time the workflow was created, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    createdTime: SyntheticTimestamp_date_time;
+    /**
+     * The date and time the workflow was last updated, in coordinated universal time (UTC) timestamp format as specified in RFC 3339 
+     */
+    lastUpdatedTime: SyntheticTimestamp_date_time;
+    /**
+     * The run mode of the workflow.
+     */
+    runMode: WorkflowRunMode;
+    /**
+     * The status of the workflow.
+     */
+    status: WorkflowStatus;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

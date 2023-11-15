@@ -53,6 +53,14 @@ declare class S3Control extends Service {
    */
   createMultiRegionAccessPoint(callback?: (err: AWSError, data: S3Control.Types.CreateMultiRegionAccessPointResult) => void): Request<S3Control.Types.CreateMultiRegionAccessPointResult, AWSError>;
   /**
+   *  Creates a new S3 Storage Lens group and associates it with the specified Amazon Web Services account ID. An S3 Storage Lens group is a custom grouping of objects based on prefix, suffix, object tags, object size, object age, or a combination of these filters. For each Storage Lens group that you’ve created, you can also optionally add Amazon Web Services resource tags. For more information about S3 Storage Lens groups, see Working with S3 Storage Lens groups. To use this operation, you must have the permission to perform the s3:CreateStorageLensGroup action. If you’re trying to create a Storage Lens group with Amazon Web Services resource tags, you must also have permission to perform the s3:TagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  createStorageLensGroup(params: S3Control.Types.CreateStorageLensGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Creates a new S3 Storage Lens group and associates it with the specified Amazon Web Services account ID. An S3 Storage Lens group is a custom grouping of objects based on prefix, suffix, object tags, object size, object age, or a combination of these filters. For each Storage Lens group that you’ve created, you can also optionally add Amazon Web Services resource tags. For more information about S3 Storage Lens groups, see Working with S3 Storage Lens groups. To use this operation, you must have the permission to perform the s3:CreateStorageLensGroup action. If you’re trying to create a Storage Lens group with Amazon Web Services resource tags, you must also have permission to perform the s3:TagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  createStorageLensGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPoint:    CreateAccessPoint     GetAccessPoint     ListAccessPoints   
    */
   deleteAccessPoint(params: S3Control.Types.DeleteAccessPointRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -93,11 +101,11 @@ declare class S3Control extends Service {
    */
   deleteBucket(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see DeleteBucketLifecycle in the Amazon S3 API Reference.   Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. To use this action, you must have permission to perform the s3-outposts:DeleteLifecycleConfiguration action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. For more information about object expiration, see Elements to Describe Lifecycle Actions. Related actions include:    PutBucketLifecycleConfiguration     GetBucketLifecycleConfiguration   
+   *  This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see DeleteBucketLifecycle in the Amazon S3 API Reference.   Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. To use this operation, you must have permission to perform the s3-outposts:PutLifecycleConfiguration action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. For more information about object expiration, see Elements to Describe Lifecycle Actions. Related actions include:    PutBucketLifecycleConfiguration     GetBucketLifecycleConfiguration   
    */
   deleteBucketLifecycleConfiguration(params: S3Control.Types.DeleteBucketLifecycleConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see DeleteBucketLifecycle in the Amazon S3 API Reference.   Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. To use this action, you must have permission to perform the s3-outposts:DeleteLifecycleConfiguration action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. For more information about object expiration, see Elements to Describe Lifecycle Actions. Related actions include:    PutBucketLifecycleConfiguration     GetBucketLifecycleConfiguration   
+   *  This action deletes an Amazon S3 on Outposts bucket's lifecycle configuration. To delete an S3 bucket's lifecycle configuration, see DeleteBucketLifecycle in the Amazon S3 API Reference.   Deletes the lifecycle configuration from the specified Outposts bucket. Amazon S3 on Outposts removes all the lifecycle configuration rules in the lifecycle subresource associated with the bucket. Your objects never expire, and Amazon S3 on Outposts no longer automatically deletes any objects on the basis of rules contained in the deleted lifecycle configuration. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. To use this operation, you must have permission to perform the s3-outposts:PutLifecycleConfiguration action. By default, the bucket owner has this permission and the Outposts bucket owner can grant this permission to others. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. For more information about object expiration, see Elements to Describe Lifecycle Actions. Related actions include:    PutBucketLifecycleConfiguration     GetBucketLifecycleConfiguration   
    */
   deleteBucketLifecycleConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -164,6 +172,14 @@ declare class S3Control extends Service {
    * Deletes the Amazon S3 Storage Lens configuration tags. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:DeleteStorageLensConfigurationTagging action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
    */
   deleteStorageLensConfigurationTagging(callback?: (err: AWSError, data: S3Control.Types.DeleteStorageLensConfigurationTaggingResult) => void): Request<S3Control.Types.DeleteStorageLensConfigurationTaggingResult, AWSError>;
+  /**
+   *  Deletes an existing S3 Storage Lens group. To use this operation, you must have the permission to perform the s3:DeleteStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  deleteStorageLensGroup(params: S3Control.Types.DeleteStorageLensGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Deletes an existing S3 Storage Lens group. To use this operation, you must have the permission to perform the s3:DeleteStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  deleteStorageLensGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     UpdateJobPriority     UpdateJobStatus   
    */
@@ -349,6 +365,14 @@ declare class S3Control extends Service {
    */
   getStorageLensConfigurationTagging(callback?: (err: AWSError, data: S3Control.Types.GetStorageLensConfigurationTaggingResult) => void): Request<S3Control.Types.GetStorageLensConfigurationTaggingResult, AWSError>;
   /**
+   *  Retrieves the Storage Lens group configuration details. To use this operation, you must have the permission to perform the s3:GetStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  getStorageLensGroup(params: S3Control.Types.GetStorageLensGroupRequest, callback?: (err: AWSError, data: S3Control.Types.GetStorageLensGroupResult) => void): Request<S3Control.Types.GetStorageLensGroupResult, AWSError>;
+  /**
+   *  Retrieves the Storage Lens group configuration details. To use this operation, you must have the permission to perform the s3:GetStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  getStorageLensGroup(callback?: (err: AWSError, data: S3Control.Types.GetStorageLensGroupResult) => void): Request<S3Control.Types.GetStorageLensGroupResult, AWSError>;
+  /**
    * Returns a list of the access points that are owned by the current account that's associated with the specified bucket. You can retrieve up to 1000 access points per call. If the specified bucket has more than 1,000 access points (or the number specified in maxResults, whichever is less), the response will include a continuation token that you can use to list the additional access points.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived by using the access point ARN, see the Examples section. The following actions are related to ListAccessPoints:    CreateAccessPoint     DeleteAccessPoint     GetAccessPoint   
    */
   listAccessPoints(params: S3Control.Types.ListAccessPointsRequest, callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsResult) => void): Request<S3Control.Types.ListAccessPointsResult, AWSError>;
@@ -396,6 +420,22 @@ declare class S3Control extends Service {
    * Gets a list of Amazon S3 Storage Lens configurations. For more information about S3 Storage Lens, see Assessing your storage activity and usage with Amazon S3 Storage Lens  in the Amazon S3 User Guide.  To use this action, you must have permission to perform the s3:ListStorageLensConfigurations action. For more information, see Setting permissions to use Amazon S3 Storage Lens in the Amazon S3 User Guide. 
    */
   listStorageLensConfigurations(callback?: (err: AWSError, data: S3Control.Types.ListStorageLensConfigurationsResult) => void): Request<S3Control.Types.ListStorageLensConfigurationsResult, AWSError>;
+  /**
+   *  Lists all the Storage Lens groups in the specified home Region.  To use this operation, you must have the permission to perform the s3:ListStorageLensGroups action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  listStorageLensGroups(params: S3Control.Types.ListStorageLensGroupsRequest, callback?: (err: AWSError, data: S3Control.Types.ListStorageLensGroupsResult) => void): Request<S3Control.Types.ListStorageLensGroupsResult, AWSError>;
+  /**
+   *  Lists all the Storage Lens groups in the specified home Region.  To use this operation, you must have the permission to perform the s3:ListStorageLensGroups action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  listStorageLensGroups(callback?: (err: AWSError, data: S3Control.Types.ListStorageLensGroupsResult) => void): Request<S3Control.Types.ListStorageLensGroupsResult, AWSError>;
+  /**
+   *  This operation allows you to list all the Amazon Web Services resource tags for the specified resource.  To use this operation, you must have the permission to perform the s3:ListTagsForResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   */
+  listTagsForResource(params: S3Control.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: S3Control.Types.ListTagsForResourceResult) => void): Request<S3Control.Types.ListTagsForResourceResult, AWSError>;
+  /**
+   *  This operation allows you to list all the Amazon Web Services resource tags for the specified resource.  To use this operation, you must have the permission to perform the s3:ListTagsForResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: S3Control.Types.ListTagsForResourceResult) => void): Request<S3Control.Types.ListTagsForResourceResult, AWSError>;
   /**
    * Replaces configuration for an Object Lambda Access Point. The following actions are related to PutAccessPointConfigurationForObjectLambda:    GetAccessPointConfigurationForObjectLambda   
    */
@@ -509,6 +549,22 @@ declare class S3Control extends Service {
    */
   submitMultiRegionAccessPointRoutes(callback?: (err: AWSError, data: S3Control.Types.SubmitMultiRegionAccessPointRoutesResult) => void): Request<S3Control.Types.SubmitMultiRegionAccessPointRoutesResult, AWSError>;
   /**
+   *  Creates a new Amazon Web Services resource tag or updates an existing resource tag. You can add up to 50 Amazon Web Services resource tags for each S3 resource.  To use this operation, you must have the permission to perform the s3:TagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   */
+  tagResource(params: S3Control.Types.TagResourceRequest, callback?: (err: AWSError, data: S3Control.Types.TagResourceResult) => void): Request<S3Control.Types.TagResourceResult, AWSError>;
+  /**
+   *  Creates a new Amazon Web Services resource tag or updates an existing resource tag. You can add up to 50 Amazon Web Services resource tags for each S3 resource.  To use this operation, you must have the permission to perform the s3:TagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   */
+  tagResource(callback?: (err: AWSError, data: S3Control.Types.TagResourceResult) => void): Request<S3Control.Types.TagResourceResult, AWSError>;
+  /**
+   *  This operation removes the specified Amazon Web Services resource tags from an S3 resource.  To use this operation, you must have the permission to perform the s3:UntagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   */
+  untagResource(params: S3Control.Types.UntagResourceRequest, callback?: (err: AWSError, data: S3Control.Types.UntagResourceResult) => void): Request<S3Control.Types.UntagResourceResult, AWSError>;
+  /**
+   *  This operation removes the specified Amazon Web Services resource tags from an S3 resource.  To use this operation, you must have the permission to perform the s3:UntagResource action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about S3 Tagging errors, see List of Amazon S3 Tagging error codes.  This operation is only supported for S3 Storage Lens groups. 
+   */
+  untagResource(callback?: (err: AWSError, data: S3Control.Types.UntagResourceResult) => void): Request<S3Control.Types.UntagResourceResult, AWSError>;
+  /**
    * Updates an existing S3 Batch Operations job's priority. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus   
    */
   updateJobPriority(params: S3Control.Types.UpdateJobPriorityRequest, callback?: (err: AWSError, data: S3Control.Types.UpdateJobPriorityResult) => void): Request<S3Control.Types.UpdateJobPriorityResult, AWSError>;
@@ -524,6 +580,14 @@ declare class S3Control extends Service {
    * Updates the status for the specified job. Use this action to confirm that you want to run a job or to cancel an existing job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     DescribeJob     UpdateJobStatus   
    */
   updateJobStatus(callback?: (err: AWSError, data: S3Control.Types.UpdateJobStatusResult) => void): Request<S3Control.Types.UpdateJobStatusResult, AWSError>;
+  /**
+   *  Updates the existing Storage Lens group. To use this operation, you must have the permission to perform the s3:UpdateStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  updateStorageLensGroup(params: S3Control.Types.UpdateStorageLensGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   *  Updates the existing Storage Lens group. To use this operation, you must have the permission to perform the s3:UpdateStorageLensGroup action. For more information about the required Storage Lens Groups permissions, see Setting account permissions to use S3 Storage Lens groups. For information about Storage Lens groups errors, see List of Amazon S3 Storage Lens error codes.
+   */
+  updateStorageLensGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace S3Control {
   export interface AbortIncompleteMultipartUpload {
@@ -573,25 +637,29 @@ declare namespace S3Control {
   export type AccountId = string;
   export interface AccountLevel {
     /**
-     * A container for S3 Storage Lens activity metrics.
+     * A container element for S3 Storage Lens activity metrics.
      */
     ActivityMetrics?: ActivityMetrics;
     /**
-     * A container for the S3 Storage Lens bucket-level configuration.
+     * A container element for the S3 Storage Lens bucket-level configuration.
      */
     BucketLevel: BucketLevel;
     /**
-     * A container for S3 Storage Lens advanced cost-optimization metrics.
+     * A container element for S3 Storage Lens advanced cost-optimization metrics.
      */
     AdvancedCostOptimizationMetrics?: AdvancedCostOptimizationMetrics;
     /**
-     * A container for S3 Storage Lens advanced data-protection metrics.
+     * A container element for S3 Storage Lens advanced data-protection metrics.
      */
     AdvancedDataProtectionMetrics?: AdvancedDataProtectionMetrics;
     /**
-     * A container for detailed status code metrics. 
+     * A container element for detailed status code metrics. 
      */
     DetailedStatusCodesMetrics?: DetailedStatusCodesMetrics;
+    /**
+     *  A container element for S3 Storage Lens groups metrics. 
+     */
+    StorageLensGroupLevel?: StorageLensGroupLevel;
   }
   export interface ActivityMetrics {
     /**
@@ -936,6 +1004,20 @@ declare namespace S3Control {
      */
     RequestTokenARN?: AsyncRequestTokenARN;
   }
+  export interface CreateStorageLensGroupRequest {
+    /**
+     *  The Amazon Web Services account ID that the Storage Lens group is created from and associated with. 
+     */
+    AccountId: AccountId;
+    /**
+     *  The Storage Lens group configuration. 
+     */
+    StorageLensGroup: StorageLensGroup;
+    /**
+     *  The Amazon Web Services resource tags that you're adding to your Storage Lens group. This parameter is optional. 
+     */
+    Tags?: TagList;
+  }
   export type CreationDate = Date;
   export type CreationTimestamp = Date;
   export type _Date = Date;
@@ -1103,6 +1185,16 @@ declare namespace S3Control {
     AccountId: AccountId;
   }
   export interface DeleteStorageLensConfigurationTaggingResult {
+  }
+  export interface DeleteStorageLensGroupRequest {
+    /**
+     *  The name of the Storage Lens group that you're trying to delete. 
+     */
+    Name: StorageLensGroupName;
+    /**
+     *  The Amazon Web Services account ID used to create the Storage Lens group that you're trying to delete. 
+     */
+    AccountId: AccountId;
   }
   export interface DescribeJobRequest {
     /**
@@ -1603,6 +1695,22 @@ declare namespace S3Control {
      * The tags of S3 Storage Lens configuration requested.
      */
     Tags?: StorageLensTags;
+  }
+  export interface GetStorageLensGroupRequest {
+    /**
+     *  The name of the Storage Lens group that you're trying to retrieve the configuration details for. 
+     */
+    Name: StorageLensGroupName;
+    /**
+     *  The Amazon Web Services account ID associated with the Storage Lens group that you're trying to retrieve the details for. 
+     */
+    AccountId: AccountId;
+  }
+  export interface GetStorageLensGroupResult {
+    /**
+     *  The name of the Storage Lens group that you're trying to retrieve the configuration details for. 
+     */
+    StorageLensGroup?: StorageLensGroup;
   }
   export type GrantFullControl = string;
   export type GrantRead = string;
@@ -2171,11 +2279,84 @@ declare namespace S3Control {
      */
     StorageLensConfigurationList?: StorageLensConfigurationList;
   }
+  export interface ListStorageLensGroupEntry {
+    /**
+     *  Contains the name of the Storage Lens group that exists in the specified home Region. 
+     */
+    Name: StorageLensGroupName;
+    /**
+     *  Contains the Amazon Resource Name (ARN) of the Storage Lens group. This property is read-only. 
+     */
+    StorageLensGroupArn: StorageLensGroupArn;
+    /**
+     *  Contains the Amazon Web Services Region where the Storage Lens group was created. 
+     */
+    HomeRegion: S3AWSRegion;
+  }
+  export interface ListStorageLensGroupsRequest {
+    /**
+     *  The Amazon Web Services account ID that owns the Storage Lens groups. 
+     */
+    AccountId: AccountId;
+    /**
+     * The token for the next set of results, or null if there are no more results. 
+     */
+    NextToken?: ContinuationToken;
+  }
+  export interface ListStorageLensGroupsResult {
+    /**
+     *  If NextToken is returned, there are more Storage Lens groups results available. The value of NextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. 
+     */
+    NextToken?: ContinuationToken;
+    /**
+     *  The list of Storage Lens groups that exist in the specified home Region. 
+     */
+    StorageLensGroupList?: StorageLensGroupList;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     *  The Amazon Web Services account ID of the resource owner. 
+     */
+    AccountId: AccountId;
+    /**
+     *  The Amazon Resource Name (ARN) of the S3 resource that you want to list the tags for. 
+     */
+    ResourceArn: S3ResourceArn;
+  }
+  export interface ListTagsForResourceResult {
+    /**
+     *  The Amazon Web Services resource tags that are associated with the resource. 
+     */
+    Tags?: TagList;
+  }
   export type Location = string;
   export type MFA = string;
   export type MFADelete = "Enabled"|"Disabled"|string;
   export type MFADeleteStatus = "Enabled"|"Disabled"|string;
   export type ManifestPrefixString = string;
+  export type MatchAnyPrefix = Prefix[];
+  export type MatchAnySuffix = Suffix[];
+  export type MatchAnyTag = S3Tag[];
+  export interface MatchObjectAge {
+    /**
+     *  Specifies the maximum object age in days. Must be a positive whole number, greater than the minimum object age and less than or equal to 2,147,483,647. 
+     */
+    DaysGreaterThan?: ObjectAgeValue;
+    /**
+     *  Specifies the minimum object age in days. The value must be a positive whole number, greater than 0 and less than or equal to 2,147,483,647. 
+     */
+    DaysLessThan?: ObjectAgeValue;
+  }
+  export interface MatchObjectSize {
+    /**
+     *  Specifies the minimum object size in Bytes. The value must be a positive number, greater than 0 and less than 5 TB. 
+     */
+    BytesGreaterThan?: ObjectSizeValue;
+    /**
+     *  Specifies the maximum object size in Bytes. The value must be a positive number, greater than the minimum object size and less than 5 TB. 
+     */
+    BytesLessThan?: ObjectSizeValue;
+  }
   export type MaxLength1024String = string;
   export type MaxResults = number;
   export interface Metrics {
@@ -2288,6 +2469,7 @@ declare namespace S3Control {
     StorageClass?: TransitionStorageClass;
   }
   export type NoncurrentVersionTransitionList = NoncurrentVersionTransition[];
+  export type ObjectAgeValue = number;
   export type ObjectCreationTime = Date;
   export interface ObjectLambdaAccessPoint {
     /**
@@ -2362,6 +2544,7 @@ declare namespace S3Control {
   export type ObjectLockEnabledForBucket = boolean;
   export type ObjectSizeGreaterThanBytes = number;
   export type ObjectSizeLessThanBytes = number;
+  export type ObjectSizeValue = number;
   export type OperationName = "LambdaInvoke"|"S3PutObjectCopy"|"S3PutObjectAcl"|"S3PutObjectTagging"|"S3DeleteObjectTagging"|"S3InitiateRestoreObject"|"S3PutObjectLegalHold"|"S3PutObjectRetention"|"S3ReplicateObject"|string;
   export type OutputSchemaVersion = "V_1"|string;
   export type OwnerOverride = "Destination"|string;
@@ -3069,6 +3252,7 @@ declare namespace S3Control {
   export type S3RegionalBucketArn = string;
   export interface S3ReplicateObjectOperation {
   }
+  export type S3ResourceArn = string;
   export interface S3Retention {
     /**
      * The date when the applied Object Lock retention will expire on all objects set by the Batch Operations job.
@@ -3232,6 +3416,115 @@ declare namespace S3Control {
      */
     SSEKMS?: SSEKMS;
   }
+  export interface StorageLensGroup {
+    /**
+     *  Contains the name of the Storage Lens group. 
+     */
+    Name: StorageLensGroupName;
+    /**
+     * Sets the criteria for the Storage Lens group data that is displayed. For multiple filter conditions, the AND or OR logical operator is used.
+     */
+    Filter: StorageLensGroupFilter;
+    /**
+     *  Contains the Amazon Resource Name (ARN) of the Storage Lens group. This property is read-only. 
+     */
+    StorageLensGroupArn?: StorageLensGroupArn;
+  }
+  export interface StorageLensGroupAndOperator {
+    /**
+     *  Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes are allowed. 
+     */
+    MatchAnyPrefix?: MatchAnyPrefix;
+    /**
+     *  Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes are allowed. 
+     */
+    MatchAnySuffix?: MatchAnySuffix;
+    /**
+     *  Contains the list of object tags. At least one object tag must be specified. Up to 10 object tags are allowed. 
+     */
+    MatchAnyTag?: MatchAnyTag;
+    /**
+     *  Contains DaysGreaterThan and DaysLessThan to define the object age range (minimum and maximum number of days). 
+     */
+    MatchObjectAge?: MatchObjectAge;
+    /**
+     *  Contains BytesGreaterThan and BytesLessThan to define the object size range (minimum and maximum number of Bytes). 
+     */
+    MatchObjectSize?: MatchObjectSize;
+  }
+  export type StorageLensGroupArn = string;
+  export interface StorageLensGroupFilter {
+    /**
+     *  Contains a list of prefixes. At least one prefix must be specified. Up to 10 prefixes are allowed. 
+     */
+    MatchAnyPrefix?: MatchAnyPrefix;
+    /**
+     *  Contains a list of suffixes. At least one suffix must be specified. Up to 10 suffixes are allowed. 
+     */
+    MatchAnySuffix?: MatchAnySuffix;
+    /**
+     *  Contains the list of S3 object tags. At least one object tag must be specified. Up to 10 object tags are allowed. 
+     */
+    MatchAnyTag?: MatchAnyTag;
+    /**
+     *  Contains DaysGreaterThan and DaysLessThan to define the object age range (minimum and maximum number of days). 
+     */
+    MatchObjectAge?: MatchObjectAge;
+    /**
+     *  Contains BytesGreaterThan and BytesLessThan to define the object size range (minimum and maximum number of Bytes). 
+     */
+    MatchObjectSize?: MatchObjectSize;
+    /**
+     * A logical operator that allows multiple filter conditions to be joined for more complex comparisons of Storage Lens group data. Objects must match all of the listed filter conditions that are joined by the And logical operator. Only one of each filter condition is allowed.
+     */
+    And?: StorageLensGroupAndOperator;
+    /**
+     * A single logical operator that allows multiple filter conditions to be joined. Objects can match any of the listed filter conditions, which are joined by the Or logical operator. Only one of each filter condition is allowed. 
+     */
+    Or?: StorageLensGroupOrOperator;
+  }
+  export interface StorageLensGroupLevel {
+    /**
+     *  Indicates which Storage Lens group ARNs to include or exclude in the Storage Lens group aggregation. If this value is left null, then all Storage Lens groups are selected. 
+     */
+    SelectionCriteria?: StorageLensGroupLevelSelectionCriteria;
+  }
+  export type StorageLensGroupLevelExclude = StorageLensGroupArn[];
+  export type StorageLensGroupLevelInclude = StorageLensGroupArn[];
+  export interface StorageLensGroupLevelSelectionCriteria {
+    /**
+     *  Indicates which Storage Lens group ARNs to include in the Storage Lens group aggregation. 
+     */
+    Include?: StorageLensGroupLevelInclude;
+    /**
+     *  Indicates which Storage Lens group ARNs to exclude from the Storage Lens group aggregation. 
+     */
+    Exclude?: StorageLensGroupLevelExclude;
+  }
+  export type StorageLensGroupList = ListStorageLensGroupEntry[];
+  export type StorageLensGroupName = string;
+  export interface StorageLensGroupOrOperator {
+    /**
+     *  Filters objects that match any of the specified prefixes. 
+     */
+    MatchAnyPrefix?: MatchAnyPrefix;
+    /**
+     *  Filters objects that match any of the specified suffixes. 
+     */
+    MatchAnySuffix?: MatchAnySuffix;
+    /**
+     *  Filters objects that match any of the specified S3 object tags. 
+     */
+    MatchAnyTag?: MatchAnyTag;
+    /**
+     *  Filters objects that match the specified object age range. 
+     */
+    MatchObjectAge?: MatchObjectAge;
+    /**
+     *  Filters objects that match the specified object size range. 
+     */
+    MatchObjectSize?: MatchObjectSize;
+  }
   export type StorageLensPrefixLevelDelimiter = string;
   export type StorageLensPrefixLevelMaxDepth = number;
   export interface StorageLensTag {
@@ -3262,9 +3555,38 @@ declare namespace S3Control {
   }
   export interface SubmitMultiRegionAccessPointRoutesResult {
   }
+  export type Suffix = string;
   export type SuspendedCause = string;
   export type SuspendedDate = Date;
+  export interface Tag {
+    /**
+     *  The tag key for your Amazon Web Services resource. A tag key can be up to 128 Unicode characters in length and is case-sensitive. System created tags that begin with aws: aren’t supported. 
+     */
+    Key: TagKeyString;
+    /**
+     *  The tag value for your Amazon Web Services resource. A tag value can be up to 256 Unicode characters in length and is case-sensitive. 
+     */
+    Value: TagValueString;
+  }
+  export type TagKeyList = TagKeyString[];
   export type TagKeyString = string;
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     *  The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to. 
+     */
+    AccountId: AccountId;
+    /**
+     *  The Amazon Resource Name (ARN) of the S3 resource that you're trying to add tags to. 
+     */
+    ResourceArn: S3ResourceArn;
+    /**
+     *  The Amazon Web Services resource tags that you want to add to the specified S3 resource. 
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResult {
+  }
   export type TagValueString = string;
   export interface Tagging {
     /**
@@ -3290,6 +3612,22 @@ declare namespace S3Control {
   }
   export type TransitionList = Transition[];
   export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
+  export interface UntagResourceRequest {
+    /**
+     *  The Amazon Web Services account ID that owns the resource that you're trying to remove the tags from. 
+     */
+    AccountId: AccountId;
+    /**
+     *  The Amazon Resource Name (ARN) of the S3 resource that you want to remove the resource tags from. 
+     */
+    ResourceArn: S3ResourceArn;
+    /**
+     *  The tag key pair of the S3 resource tag that you're trying to remove. 
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResult {
+  }
   export interface UpdateJobPriorityRequest {
     /**
      * The Amazon Web Services account ID associated with the S3 Batch Operations job.
@@ -3345,6 +3683,20 @@ declare namespace S3Control {
      * The reason that the specified job's status was updated.
      */
     StatusUpdateReason?: JobStatusUpdateReason;
+  }
+  export interface UpdateStorageLensGroupRequest {
+    /**
+     *  The name of the Storage Lens group that you want to update. 
+     */
+    Name: StorageLensGroupName;
+    /**
+     *  The Amazon Web Services account ID of the Storage Lens group owner. 
+     */
+    AccountId: AccountId;
+    /**
+     *  The JSON file that contains the Storage Lens group configuration. 
+     */
+    StorageLensGroup: StorageLensGroup;
   }
   export interface VersioningConfiguration {
     /**

@@ -103,6 +103,7 @@ declare class MWAA extends Service {
 declare namespace MWAA {
   export type AirflowConfigurationOptions = {[key: string]: ConfigValue};
   export type AirflowVersion = string;
+  export type CeleryExecutorQueue = string;
   export type CloudWatchLogGroupArn = string;
   export type ConfigKey = string;
   export type ConfigValue = string;
@@ -128,13 +129,17 @@ declare namespace MWAA {
      */
     AirflowConfigurationOptions?: AirflowConfigurationOptions;
     /**
-     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. For more information, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA). Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2.
+     * The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. For more information, see Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA). Valid values: 1.10.12, 2.0.2, 2.2.2, 2.4.3, 2.5.1, 2.6.3, 2.7.2 
      */
     AirflowVersion?: AirflowVersion;
     /**
      * The relative path to the DAGs folder on your Amazon S3 bucket. For example, dags. For more information, see Adding or updating DAGs.
      */
     DagS3Path: RelativePath;
+    /**
+     * Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. If you choose to create an environment in a shared VPC, you must set this value to CUSTOMER. In a shared VPC deployment, the environment will remain in PENDING status until you create the VPC endpoints. If you do not take action to create the endpoints within 72 hours, the status will change to CREATE_FAILED. You can delete the failed environment and create a new one.
+     */
+    EndpointManagement?: EndpointManagement;
     /**
      * The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. For more information, see Amazon MWAA environment class.
      */
@@ -204,7 +209,7 @@ declare namespace MWAA {
      */
     Tags?: TagMap;
     /**
-     * The Apache Airflow Web server access mode. For more information, see Apache Airflow access modes.
+     * Defines the access mode for the Apache Airflow web server. For more information, see Apache Airflow access modes.
      */
     WebserverAccessMode?: WebserverAccessMode;
     /**
@@ -255,6 +260,7 @@ declare namespace MWAA {
   }
   export type Dimensions = Dimension[];
   export type Double = number;
+  export type EndpointManagement = "CUSTOMER"|"SERVICE"|string;
   export interface Environment {
     /**
      * A list of key-value pairs containing the Apache Airflow configuration options attached to your environment. For more information, see Apache Airflow configuration options.
@@ -269,6 +275,10 @@ declare namespace MWAA {
      */
     Arn?: EnvironmentArn;
     /**
+     * The queue ARN for the environment's Celery Executor. Amazon MWAA uses a Celery Executor to distribute tasks across multiple workers. When you create an environment in a shared VPC, you must provide access to the Celery Executor queue from your VPC.
+     */
+    CeleryExecutorQueue?: CeleryExecutorQueue;
+    /**
      * The day and time the environment was created.
      */
     CreatedAt?: CreatedAt;
@@ -276,6 +286,14 @@ declare namespace MWAA {
      * The relative path to the DAGs folder in your Amazon S3 bucket. For example, s3://mwaa-environment/dags. For more information, see Adding or updating DAGs.
      */
     DagS3Path?: RelativePath;
+    /**
+     * The VPC endpoint for the environment's Amazon RDS database.
+     */
+    DatabaseVpcEndpointService?: VpcEndpointServiceName;
+    /**
+     * Defines whether the VPC endpoints configured for the environment are created, and managed, by the customer or by Amazon MWAA. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints in your VPC.
+     */
+    EndpointManagement?: EndpointManagement;
     /**
      * The environment class type. Valid values: mw1.small, mw1.medium, mw1.large. For more information, see Amazon MWAA environment class.
      */
@@ -349,7 +367,7 @@ declare namespace MWAA {
      */
     StartupScriptS3Path?: String;
     /**
-     * The status of the Amazon MWAA environment. Valid values:    CREATING - Indicates the request to create the environment is in progress.    CREATING_SNAPSHOT - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade an environment fails.    CREATE_FAILED - Indicates the request to create the environment failed, and the environment could not be created.    AVAILABLE - Indicates the request was successful and the environment is ready to use.    UPDATING - Indicates the request to update the environment is in progress.    ROLLING_BACK - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.    DELETING - Indicates the request to delete the environment is in progress.    DELETED - Indicates the request to delete the environment is complete, and the environment has been deleted.    UNAVAILABLE - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.    UPDATE_FAILED - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.   We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see Amazon MWAA troubleshooting.
+     * The status of the Amazon MWAA environment. Valid values:    CREATING - Indicates the request to create the environment is in progress.    CREATING_SNAPSHOT - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade an environment fails.    CREATE_FAILED - Indicates the request to create the environment failed, and the environment could not be created.    AVAILABLE - Indicates the request was successful and the environment is ready to use.    PENDING - Indicates the request was successful, but the process to create the environment is paused until you create the required VPC endpoints in your VPC. After you create the VPC endpoints, the process resumes.    UPDATING - Indicates the request to update the environment is in progress.    ROLLING_BACK - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.    DELETING - Indicates the request to delete the environment is in progress.    DELETED - Indicates the request to delete the environment is complete, and the environment has been deleted.    UNAVAILABLE - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.    UPDATE_FAILED - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.   We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see Amazon MWAA troubleshooting.
      */
     Status?: EnvironmentStatus;
     /**
@@ -357,13 +375,17 @@ declare namespace MWAA {
      */
     Tags?: TagMap;
     /**
-     * The Apache Airflow Web server access mode. For more information, see Apache Airflow access modes.
+     * The Apache Airflow web server access mode. For more information, see Apache Airflow access modes.
      */
     WebserverAccessMode?: WebserverAccessMode;
     /**
      * The Apache Airflow Web server host name for the Amazon MWAA environment. For more information, see Accessing the Apache Airflow UI.
      */
     WebserverUrl?: WebserverUrl;
+    /**
+     * The VPC endpoint for the environment's web server.
+     */
+    WebserverVpcEndpointService?: VpcEndpointServiceName;
     /**
      * The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: TUE:03:30.
      */
@@ -373,7 +395,7 @@ declare namespace MWAA {
   export type EnvironmentClass = string;
   export type EnvironmentList = EnvironmentName[];
   export type EnvironmentName = string;
-  export type EnvironmentStatus = "CREATING"|"CREATE_FAILED"|"AVAILABLE"|"UPDATING"|"DELETING"|"DELETED"|"UNAVAILABLE"|"UPDATE_FAILED"|"ROLLING_BACK"|"CREATING_SNAPSHOT"|string;
+  export type EnvironmentStatus = "CREATING"|"CREATE_FAILED"|"AVAILABLE"|"UPDATING"|"DELETING"|"DELETED"|"UNAVAILABLE"|"UPDATE_FAILED"|"ROLLING_BACK"|"CREATING_SNAPSHOT"|"PENDING"|string;
   export type ErrorCode = string;
   export type ErrorMessage = string;
   export interface GetEnvironmentInput {
@@ -730,6 +752,7 @@ declare namespace MWAA {
   }
   export type UpdateSource = string;
   export type UpdateStatus = "SUCCESS"|"PENDING"|"FAILED"|string;
+  export type VpcEndpointServiceName = string;
   export type WebserverAccessMode = "PRIVATE_ONLY"|"PUBLIC_ONLY"|string;
   export type WebserverUrl = string;
   export type WeeklyMaintenanceWindowStart = string;
