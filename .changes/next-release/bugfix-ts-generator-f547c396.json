@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "ts-generator",
+  "description": "Provides loose auto complete capabilities for enum like inputs."
+}
