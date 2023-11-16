@@ -636,6 +636,22 @@ declare class Glue extends Service {
    */
   getColumnStatisticsForTable(callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsForTableResponse) => void): Request<Glue.Types.GetColumnStatisticsForTableResponse, AWSError>;
   /**
+   * Get the associated metadata/information for a task run, given a task run ID.
+   */
+  getColumnStatisticsTaskRun(params: Glue.Types.GetColumnStatisticsTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsTaskRunResponse) => void): Request<Glue.Types.GetColumnStatisticsTaskRunResponse, AWSError>;
+  /**
+   * Get the associated metadata/information for a task run, given a task run ID.
+   */
+  getColumnStatisticsTaskRun(callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsTaskRunResponse) => void): Request<Glue.Types.GetColumnStatisticsTaskRunResponse, AWSError>;
+  /**
+   * Retrieves information about all runs associated with the specified table.
+   */
+  getColumnStatisticsTaskRuns(params: Glue.Types.GetColumnStatisticsTaskRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsTaskRunsResponse) => void): Request<Glue.Types.GetColumnStatisticsTaskRunsResponse, AWSError>;
+  /**
+   * Retrieves information about all runs associated with the specified table.
+   */
+  getColumnStatisticsTaskRuns(callback?: (err: AWSError, data: Glue.Types.GetColumnStatisticsTaskRunsResponse) => void): Request<Glue.Types.GetColumnStatisticsTaskRunsResponse, AWSError>;
+  /**
    * Retrieves a connection definition from the Data Catalog.
    */
   getConnection(params: Glue.Types.GetConnectionRequest, callback?: (err: AWSError, data: Glue.Types.GetConnectionResponse) => void): Request<Glue.Types.GetConnectionResponse, AWSError>;
@@ -1116,6 +1132,14 @@ declare class Glue extends Service {
    */
   listBlueprints(callback?: (err: AWSError, data: Glue.Types.ListBlueprintsResponse) => void): Request<Glue.Types.ListBlueprintsResponse, AWSError>;
   /**
+   * List all task runs for a particular account.
+   */
+  listColumnStatisticsTaskRuns(params: Glue.Types.ListColumnStatisticsTaskRunsRequest, callback?: (err: AWSError, data: Glue.Types.ListColumnStatisticsTaskRunsResponse) => void): Request<Glue.Types.ListColumnStatisticsTaskRunsResponse, AWSError>;
+  /**
+   * List all task runs for a particular account.
+   */
+  listColumnStatisticsTaskRuns(callback?: (err: AWSError, data: Glue.Types.ListColumnStatisticsTaskRunsResponse) => void): Request<Glue.Types.ListColumnStatisticsTaskRunsResponse, AWSError>;
+  /**
    * Retrieves the names of all crawler resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listCrawlers(params: Glue.Types.ListCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
@@ -1356,6 +1380,14 @@ declare class Glue extends Service {
    */
   startBlueprintRun(callback?: (err: AWSError, data: Glue.Types.StartBlueprintRunResponse) => void): Request<Glue.Types.StartBlueprintRunResponse, AWSError>;
   /**
+   * Starts a column statistics task run, for a specified table and columns.
+   */
+  startColumnStatisticsTaskRun(params: Glue.Types.StartColumnStatisticsTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartColumnStatisticsTaskRunResponse) => void): Request<Glue.Types.StartColumnStatisticsTaskRunResponse, AWSError>;
+  /**
+   * Starts a column statistics task run, for a specified table and columns.
+   */
+  startColumnStatisticsTaskRun(callback?: (err: AWSError, data: Glue.Types.StartColumnStatisticsTaskRunResponse) => void): Request<Glue.Types.StartColumnStatisticsTaskRunResponse, AWSError>;
+  /**
    * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
   startCrawler(params: Glue.Types.StartCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
@@ -1443,6 +1475,14 @@ declare class Glue extends Service {
    * Starts a new run of the specified workflow.
    */
   startWorkflowRun(callback?: (err: AWSError, data: Glue.Types.StartWorkflowRunResponse) => void): Request<Glue.Types.StartWorkflowRunResponse, AWSError>;
+  /**
+   * Stops a task run for the specified table.
+   */
+  stopColumnStatisticsTaskRun(params: Glue.Types.StopColumnStatisticsTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StopColumnStatisticsTaskRunResponse) => void): Request<Glue.Types.StopColumnStatisticsTaskRunResponse, AWSError>;
+  /**
+   * Stops a task run for the specified table.
+   */
+  stopColumnStatisticsTaskRun(callback?: (err: AWSError, data: Glue.Types.StopColumnStatisticsTaskRunResponse) => void): Request<Glue.Types.StopColumnStatisticsTaskRunResponse, AWSError>;
   /**
    * If the specified crawler is running, stops the crawl.
    */
@@ -3238,6 +3278,7 @@ declare namespace Glue {
   }
   export type ColumnImportanceList = ColumnImportance[];
   export type ColumnList = Column[];
+  export type ColumnNameList = NameString[];
   export type ColumnNameString = string;
   export interface ColumnRowFilter {
     /**
@@ -3314,6 +3355,83 @@ declare namespace Glue {
   }
   export type ColumnStatisticsErrors = ColumnStatisticsError[];
   export type ColumnStatisticsList = ColumnStatistics[];
+  export type ColumnStatisticsState = "STARTING"|"RUNNING"|"SUCCEEDED"|"FAILED"|"STOPPED"|string;
+  export interface ColumnStatisticsTaskRun {
+    /**
+     * The Amazon Web Services account ID.
+     */
+    CustomerId?: AccountId;
+    /**
+     * The identifier for the particular column statistics task run.
+     */
+    ColumnStatisticsTaskRunId?: HashString;
+    /**
+     * The database where the table resides.
+     */
+    DatabaseName?: DatabaseName;
+    /**
+     * The name of the table for which column statistics is generated.
+     */
+    TableName?: TableName;
+    /**
+     * A list of the column names. If none is supplied, all column names for the table will be used by default.
+     */
+    ColumnNameList?: ColumnNameList;
+    /**
+     * The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.
+     */
+    CatalogID?: CatalogIdString;
+    /**
+     * The IAM role that the service assumes to generate statistics.
+     */
+    Role?: Role;
+    /**
+     * The percentage of rows used to generate statistics. If none is supplied, the entire table will be used to generate stats.
+     */
+    SampleSize?: SampleSizePercentage;
+    /**
+     * Name of the security configuration that is used to encrypt CloudWatch logs for the column stats task run.
+     */
+    SecurityConfiguration?: CrawlerSecurityConfiguration;
+    /**
+     * The number of workers used to generate column statistics. The job is preconfigured to autoscale up to 25 instances.
+     */
+    NumberOfWorkers?: PositiveInteger;
+    /**
+     * The type of workers being used for generating stats. The default is g.1x.
+     */
+    WorkerType?: NameString;
+    /**
+     * The status of the task run.
+     */
+    Status?: ColumnStatisticsState;
+    /**
+     * The time that this task was created.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The last point in time when this task was modified.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * The start time of the task.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The end time of the task.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The error message for the job.
+     */
+    ErrorMessage?: DescriptionString;
+    /**
+     * The calculated DPU usage in seconds for all autoscaled workers.
+     */
+    DPUSeconds?: NonNegativeDouble;
+  }
+  export type ColumnStatisticsTaskRunIdList = HashString[];
+  export type ColumnStatisticsTaskRunsList = ColumnStatisticsTaskRun[];
   export type ColumnStatisticsType = "BOOLEAN"|"DATE"|"DECIMAL"|"DOUBLE"|"LONG"|"STRING"|"BINARY"|string;
   export type ColumnTypeString = string;
   export type ColumnValueStringList = ColumnValuesString[];
@@ -6515,6 +6633,46 @@ declare namespace Glue {
      */
     Errors?: ColumnErrors;
   }
+  export interface GetColumnStatisticsTaskRunRequest {
+    /**
+     * The identifier for the particular column statistics task run.
+     */
+    ColumnStatisticsTaskRunId: HashString;
+  }
+  export interface GetColumnStatisticsTaskRunResponse {
+    /**
+     * A ColumnStatisticsTaskRun object representing the details of the column stats run.
+     */
+    ColumnStatisticsTaskRun?: ColumnStatisticsTaskRun;
+  }
+  export interface GetColumnStatisticsTaskRunsRequest {
+    /**
+     * The name of the database where the table resides.
+     */
+    DatabaseName: DatabaseName;
+    /**
+     * The name of the table.
+     */
+    TableName: NameString;
+    /**
+     * The maximum size of the response.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: Token;
+  }
+  export interface GetColumnStatisticsTaskRunsResponse {
+    /**
+     * A list of column statistics task runs.
+     */
+    ColumnStatisticsTaskRuns?: ColumnStatisticsTaskRunsList;
+    /**
+     * A continuation token, if not all task runs have yet been returned.
+     */
+    NextToken?: Token;
+  }
   export interface GetConnectionRequest {
     /**
      * The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services account ID is used by default.
@@ -9215,6 +9373,26 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
   }
+  export interface ListColumnStatisticsTaskRunsRequest {
+    /**
+     * The maximum size of the response.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: Token;
+  }
+  export interface ListColumnStatisticsTaskRunsResponse {
+    /**
+     * A list of column statistics task run IDs.
+     */
+    ColumnStatisticsTaskRunIds?: ColumnStatisticsTaskRunIdList;
+    /**
+     * A continuation token, if not all task run IDs have yet been returned.
+     */
+    NextToken?: Token;
+  }
   export interface ListCrawlersRequest {
     /**
      * The maximum size of a list to return.
@@ -10343,6 +10521,7 @@ declare namespace Glue {
   export type PiiType = "RowAudit"|"RowMasking"|"ColumnAudit"|"ColumnMasking"|string;
   export type PolicyJsonString = string;
   export type PollingTime = number;
+  export type PositiveInteger = number;
   export type PositiveLong = number;
   export interface PostgreSQLCatalogSource {
     /**
@@ -11473,6 +11652,7 @@ declare namespace Glue {
     DlqEventQueueArn?: EventQueueArn;
   }
   export type S3TargetList = S3Target[];
+  export type SampleSizePercentage = number;
   export type ScalaCode = string;
   export interface Schedule {
     /**
@@ -12144,6 +12324,42 @@ declare namespace Glue {
      */
     RunId?: IdString;
   }
+  export interface StartColumnStatisticsTaskRunRequest {
+    /**
+     * The name of the database where the table resides.
+     */
+    DatabaseName: NameString;
+    /**
+     * The name of the table to generate statistics.
+     */
+    TableName: NameString;
+    /**
+     * A list of the column names to generate statistics. If none is supplied, all column names for the table will be used by default.
+     */
+    ColumnNameList?: ColumnNameList;
+    /**
+     * The IAM role that the service assumes to generate statistics.
+     */
+    Role: NameString;
+    /**
+     * The percentage of rows used to generate statistics. If none is supplied, the entire table will be used to generate stats.
+     */
+    SampleSize?: SampleSizePercentage;
+    /**
+     * The ID of the Data Catalog where the table reside. If none is supplied, the Amazon Web Services account ID is used by default.
+     */
+    CatalogID?: NameString;
+    /**
+     * Name of the security configuration that is used to encrypt CloudWatch logs for the column stats task run.
+     */
+    SecurityConfiguration?: NameString;
+  }
+  export interface StartColumnStatisticsTaskRunResponse {
+    /**
+     * The identifier for the column statistics task run.
+     */
+    ColumnStatisticsTaskRunId?: HashString;
+  }
   export interface StartCrawlerRequest {
     /**
      * Name of the crawler to start.
@@ -12451,6 +12667,18 @@ declare namespace Glue {
     TextPlain?: GenericString;
   }
   export type StatementState = "WAITING"|"RUNNING"|"AVAILABLE"|"CANCELLING"|"CANCELLED"|"ERROR"|string;
+  export interface StopColumnStatisticsTaskRunRequest {
+    /**
+     * The name of the database where the table resides.
+     */
+    DatabaseName: DatabaseName;
+    /**
+     * The name of the table.
+     */
+    TableName: NameString;
+  }
+  export interface StopColumnStatisticsTaskRunResponse {
+  }
   export interface StopCrawlerRequest {
     /**
      * Name of the crawler to stop.

@@ -17821,6 +17821,10 @@
         "TenantId": {
           "shape": "String",
           "documentation": "<p>The ID of the tenant application with the device-identity provider.</p>"
+        },
+        "PublicSigningKeyUrl": {
+          "shape": "String",
+          "documentation": "<p> The URL Amazon Web Services Verified Access will use to verify the authenticity of the device tokens. </p>"
         }
       },
       "documentation": "<p>Describes the options when creating an Amazon Web Services Verified Access trust provider using the <code>device</code> type.</p>"
@@ -27860,6 +27864,11 @@
           "shape": "String",
           "documentation": "<p>The ID of the tenant application with the device-identity provider.</p>",
           "locationName": "tenantId"
+        },
+        "PublicSigningKeyUrl": {
+          "shape": "String",
+          "documentation": "<p> The URL Amazon Web Services Verified Access will use to verify the authenticity of the device tokens. </p>",
+          "locationName": "publicSigningKeyUrl"
         }
       },
       "documentation": "<p>Describes the options for an Amazon Web Services Verified Access device-identity based trust provider.</p>"
@@ -27868,7 +27877,8 @@
       "type": "string",
       "enum": [
         "jamf",
-        "crowdstrike"
+        "crowdstrike",
+        "jumpcloud"
       ]
     },
     "DeviceType": {
@@ -45821,6 +45831,16 @@
         }
       }
     },
+    "ModifyVerifiedAccessTrustProviderDeviceOptions": {
+      "type": "structure",
+      "members": {
+        "PublicSigningKeyUrl": {
+          "shape": "String",
+          "documentation": "<p> The URL Amazon Web Services Verified Access will use to verify the authenticity of the device tokens. </p>"
+        }
+      },
+      "documentation": "<p>Modifies the configuration of the specified device-based Amazon Web Services Verified Access trust provider.</p>"
+    },
     "ModifyVerifiedAccessTrustProviderOidcOptions": {
       "type": "structure",
       "members": {
@@ -45868,6 +45888,10 @@
         "OidcOptions": {
           "shape": "ModifyVerifiedAccessTrustProviderOidcOptions",
           "documentation": "<p>The options for an OpenID Connect-compatible user-identity trust provider.</p>"
+        },
+        "DeviceOptions": {
+          "shape": "ModifyVerifiedAccessTrustProviderDeviceOptions",
+          "documentation": "<p>The options for a device-based trust provider. This parameter is required when the provider type is <code>device</code>.</p>"
         },
         "Description": {
           "shape": "String",

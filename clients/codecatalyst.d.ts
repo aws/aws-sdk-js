@@ -399,6 +399,10 @@ declare namespace CodeCatalyst {
      * Information about the amount of storage allocated to the Dev Environment.   By default, a Dev Environment is configured to have 16GB of persistent storage when created from the Amazon CodeCatalyst console, but there is no default when programmatically creating a Dev Environment. Valid values for persistent storage are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64. 
      */
     persistentStorage: PersistentStorageConfiguration;
+    /**
+     * The name of the connection to use connect to a Amazon VPC.
+     */
+    vpcConnectionName?: NameString;
   }
   export type CreateDevEnvironmentRequestAliasString = string;
   export interface CreateDevEnvironmentResponse {
@@ -414,6 +418,10 @@ declare namespace CodeCatalyst {
      * The system-generated unique ID of the Dev Environment. 
      */
     id: Uuid;
+    /**
+     * The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.
+     */
+    vpcConnectionName?: NameString;
   }
   export interface CreateProjectRequest {
     /**
@@ -737,6 +745,10 @@ declare namespace CodeCatalyst {
      * Information about the configuration of persistent storage for the Dev Environment.
      */
     persistentStorage: PersistentStorage;
+    /**
+     * The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.
+     */
+    vpcConnectionName?: NameString;
   }
   export type DevEnvironmentSummaryAliasString = string;
   export type DevEnvironmentSummaryCreatorIdString = string;
@@ -920,6 +932,10 @@ declare namespace CodeCatalyst {
      * Information about the amount of storage allocated to the Dev Environment. By default, a Dev Environment is configured to have 16GB of persistent storage.
      */
     persistentStorage: PersistentStorage;
+    /**
+     * The name of the connection used to connect to Amazon VPC used when the Dev Environment was created, if any.
+     */
+    vpcConnectionName?: NameString;
   }
   export type GetDevEnvironmentResponseAliasString = string;
   export type GetDevEnvironmentResponseCreatorIdString = string;

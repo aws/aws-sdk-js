@@ -11210,6 +11210,10 @@ declare namespace EC2 {
      * The ID of the tenant application with the device-identity provider.
      */
     TenantId?: String;
+    /**
+     *  The URL Amazon Web Services Verified Access will use to verify the authenticity of the device tokens. 
+     */
+    PublicSigningKeyUrl?: String;
   }
   export interface CreateVerifiedAccessTrustProviderOidcOptions {
     /**
@@ -18119,8 +18123,12 @@ declare namespace EC2 {
      * The ID of the tenant application with the device-identity provider.
      */
     TenantId?: String;
+    /**
+     *  The URL Amazon Web Services Verified Access will use to verify the authenticity of the device tokens. 
+     */
+    PublicSigningKeyUrl?: String;
   }
-  export type DeviceTrustProviderType = "jamf"|"crowdstrike"|string;
+  export type DeviceTrustProviderType = "jamf"|"crowdstrike"|"jumpcloud"|string;
   export type DeviceType = "ebs"|"instance-store"|string;
   export interface DhcpConfiguration {
     /**
@@ -28914,6 +28922,12 @@ declare namespace EC2 {
      */
     VerifiedAccessInstance?: VerifiedAccessInstance;
   }
+  export interface ModifyVerifiedAccessTrustProviderDeviceOptions {
+    /**
+     *  The URL Amazon Web Services Verified Access will use to verify the authenticity of the device tokens. 
+     */
+    PublicSigningKeyUrl?: String;
+  }
   export interface ModifyVerifiedAccessTrustProviderOidcOptions {
     /**
      * The OIDC issuer.
@@ -28953,6 +28967,10 @@ declare namespace EC2 {
      * The options for an OpenID Connect-compatible user-identity trust provider.
      */
     OidcOptions?: ModifyVerifiedAccessTrustProviderOidcOptions;
+    /**
+     * The options for a device-based trust provider. This parameter is required when the provider type is device.
+     */
+    DeviceOptions?: ModifyVerifiedAccessTrustProviderDeviceOptions;
     /**
      * A description for the Verified Access trust provider.
      */

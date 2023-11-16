@@ -132,6 +132,14 @@ declare class QuickSight extends Service {
    */
   createRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.CreateRefreshScheduleResponse) => void): Request<QuickSight.Types.CreateRefreshScheduleResponse, AWSError>;
   /**
+   * Use CreateRoleMembership to add an existing Amazon QuickSight group to an existing role.
+   */
+  createRoleMembership(params: QuickSight.Types.CreateRoleMembershipRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateRoleMembershipResponse) => void): Request<QuickSight.Types.CreateRoleMembershipResponse, AWSError>;
+  /**
+   * Use CreateRoleMembership to add an existing Amazon QuickSight group to an existing role.
+   */
+  createRoleMembership(callback?: (err: AWSError, data: QuickSight.Types.CreateRoleMembershipResponse) => void): Request<QuickSight.Types.CreateRoleMembershipResponse, AWSError>;
+  /**
    * Creates a template either from a TemplateDefinition or from an existing Amazon QuickSight analysis or template. You can use the resulting template to create additional dashboards, templates, or analyses. A template is an entity in Amazon QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(params: QuickSight.Types.CreateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
@@ -299,6 +307,22 @@ declare class QuickSight extends Service {
    * Deletes a refresh schedule from a dataset.
    */
   deleteRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.DeleteRefreshScheduleResponse) => void): Request<QuickSight.Types.DeleteRefreshScheduleResponse, AWSError>;
+  /**
+   * Removes custom permissions from the role.
+   */
+  deleteRoleCustomPermission(params: QuickSight.Types.DeleteRoleCustomPermissionRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteRoleCustomPermissionResponse) => void): Request<QuickSight.Types.DeleteRoleCustomPermissionResponse, AWSError>;
+  /**
+   * Removes custom permissions from the role.
+   */
+  deleteRoleCustomPermission(callback?: (err: AWSError, data: QuickSight.Types.DeleteRoleCustomPermissionResponse) => void): Request<QuickSight.Types.DeleteRoleCustomPermissionResponse, AWSError>;
+  /**
+   * Removes a group from a role.
+   */
+  deleteRoleMembership(params: QuickSight.Types.DeleteRoleMembershipRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteRoleMembershipResponse) => void): Request<QuickSight.Types.DeleteRoleMembershipResponse, AWSError>;
+  /**
+   * Removes a group from a role.
+   */
+  deleteRoleMembership(callback?: (err: AWSError, data: QuickSight.Types.DeleteRoleMembershipResponse) => void): Request<QuickSight.Types.DeleteRoleMembershipResponse, AWSError>;
   /**
    * Deletes a template.
    */
@@ -596,6 +620,14 @@ declare class QuickSight extends Service {
    */
   describeRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.DescribeRefreshScheduleResponse) => void): Request<QuickSight.Types.DescribeRefreshScheduleResponse, AWSError>;
   /**
+   * Describes all custom permissions that are mapped to a role.
+   */
+  describeRoleCustomPermission(params: QuickSight.Types.DescribeRoleCustomPermissionRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeRoleCustomPermissionResponse) => void): Request<QuickSight.Types.DescribeRoleCustomPermissionResponse, AWSError>;
+  /**
+   * Describes all custom permissions that are mapped to a role.
+   */
+  describeRoleCustomPermission(callback?: (err: AWSError, data: QuickSight.Types.DescribeRoleCustomPermissionResponse) => void): Request<QuickSight.Types.DescribeRoleCustomPermissionResponse, AWSError>;
+  /**
    * Describes a template's metadata.
    */
   describeTemplate(params: QuickSight.Types.DescribeTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeTemplateResponse) => void): Request<QuickSight.Types.DescribeTemplateResponse, AWSError>;
@@ -859,6 +891,14 @@ declare class QuickSight extends Service {
    * Lists the refresh schedules of a dataset. Each dataset can have up to 5 schedules. 
    */
   listRefreshSchedules(callback?: (err: AWSError, data: QuickSight.Types.ListRefreshSchedulesResponse) => void): Request<QuickSight.Types.ListRefreshSchedulesResponse, AWSError>;
+  /**
+   * Lists all groups that are associated with a role.
+   */
+  listRoleMemberships(params: QuickSight.Types.ListRoleMembershipsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListRoleMembershipsResponse) => void): Request<QuickSight.Types.ListRoleMembershipsResponse, AWSError>;
+  /**
+   * Lists all groups that are associated with a role.
+   */
+  listRoleMemberships(callback?: (err: AWSError, data: QuickSight.Types.ListRoleMembershipsResponse) => void): Request<QuickSight.Types.ListRoleMembershipsResponse, AWSError>;
   /**
    * Lists the tags assigned to a resource.
    */
@@ -1212,6 +1252,14 @@ declare class QuickSight extends Service {
    */
   updateRefreshSchedule(callback?: (err: AWSError, data: QuickSight.Types.UpdateRefreshScheduleResponse) => void): Request<QuickSight.Types.UpdateRefreshScheduleResponse, AWSError>;
   /**
+   * Updates the custom permissions that are associated with a role.
+   */
+  updateRoleCustomPermission(params: QuickSight.Types.UpdateRoleCustomPermissionRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateRoleCustomPermissionResponse) => void): Request<QuickSight.Types.UpdateRoleCustomPermissionResponse, AWSError>;
+  /**
+   * Updates the custom permissions that are associated with a role.
+   */
+  updateRoleCustomPermission(callback?: (err: AWSError, data: QuickSight.Types.UpdateRoleCustomPermissionResponse) => void): Request<QuickSight.Types.UpdateRoleCustomPermissionResponse, AWSError>;
+  /**
    * Updates a template from an existing Amazon QuickSight analysis or another template.
    */
   updateTemplate(params: QuickSight.Types.UpdateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateTemplateResponse) => void): Request<QuickSight.Types.UpdateTemplateResponse, AWSError>;
@@ -1473,7 +1521,6 @@ declare namespace QuickSight {
      * A list of the associated sheets with the unique identifier and name of each sheet.
      */
     Sheets?: SheetList;
-    Options?: AssetOptions;
   }
   export interface AnalysisDefaults {
     /**
@@ -1717,7 +1764,7 @@ declare namespace QuickSight {
     /**
      * The ARN of the specific Analysis resource whose override properties are configured in this structure.
      */
-    Arn?: Arn;
+    Arn: Arn;
     /**
      * A list of Analysis resource properties to generate variables for in the returned CloudFormation template.
      */
@@ -1730,7 +1777,7 @@ declare namespace QuickSight {
     /**
      * The ARN of the specific Dashboard resource whose override properties are configured in this structure.
      */
-    Arn?: Arn;
+    Arn: Arn;
     /**
      * A list of Dashboard resource properties to generate variables for in the returned CloudFormation template.
      */
@@ -1743,7 +1790,7 @@ declare namespace QuickSight {
     /**
      * The ARN of the specific DataSet resource whose override properties are configured in this structure.
      */
-    Arn?: Arn;
+    Arn: Arn;
     /**
      * A list of DataSet resource properties to generate variables for in the returned CloudFormation template.
      */
@@ -1756,7 +1803,7 @@ declare namespace QuickSight {
     /**
      * The ARN of the specific DataSource resource whose override properties are configured in this structure.
      */
-    Arn?: Arn;
+    Arn: Arn;
     /**
      * A list of DataSource resource properties to generate variables for in the returned CloudFormation template.
      */
@@ -1784,7 +1831,7 @@ declare namespace QuickSight {
     /**
      * The ARN of the specific RefreshSchedule resource whose override properties are configured in this structure.
      */
-    Arn?: Arn;
+    Arn: Arn;
     /**
      * A list of RefreshSchedule resource properties to generate variables for in the returned CloudFormation template.
      */
@@ -1825,13 +1872,21 @@ declare namespace QuickSight {
      * The format for the export job.
      */
     ExportFormat?: AssetBundleExportFormat;
+    /**
+     * The flag that determines the inclusion of permissions associated with each resource ARN.
+     */
+    IncludePermissions?: Boolean;
+    /**
+     * The flag that determines the inclusion of tags associated with each resource ARN.
+     */
+    IncludeTags?: Boolean;
   }
   export type AssetBundleExportJobSummaryList = AssetBundleExportJobSummary[];
   export interface AssetBundleExportJobThemeOverrideProperties {
     /**
      * The ARN of the specific Theme resource whose override properties are configured in this structure.
      */
-    Arn?: Arn;
+    Arn: Arn;
     /**
      * A list of Theme resource properties to generate variables for in the returned CloudFormation template.
      */
@@ -1844,7 +1899,7 @@ declare namespace QuickSight {
     /**
      * The ARN of the specific VPCConnection resource whose override properties are configured in this structure.
      */
-    Arn?: Arn;
+    Arn: Arn;
     /**
      * A list of VPCConnection resource properties to generate variables for in the returned CloudFormation template.
      */
@@ -1853,6 +1908,23 @@ declare namespace QuickSight {
   export type AssetBundleExportJobVPCConnectionOverridePropertiesList = AssetBundleExportJobVPCConnectionOverrideProperties[];
   export type AssetBundleExportJobVPCConnectionPropertyToOverride = "Name"|"DnsResolvers"|"RoleArn"|string;
   export type AssetBundleExportJobVPCConnectionPropertyToOverrideList = AssetBundleExportJobVPCConnectionPropertyToOverride[];
+  export interface AssetBundleExportJobValidationStrategy {
+    /**
+     * A Boolean value that indicates whether to export resources under strict or lenient mode.
+     */
+    StrictModeForAllResources?: Boolean;
+  }
+  export interface AssetBundleExportJobWarning {
+    /**
+     * The ARN of the resource whose processing caused a warning.
+     */
+    Arn?: Arn;
+    /**
+     * A description of the warning.
+     */
+    Message?: NonEmptyString;
+  }
+  export type AssetBundleExportJobWarningList = AssetBundleExportJobWarning[];
   export type AssetBundleImportBodyBlob = Buffer|Uint8Array|Blob|string;
   export type AssetBundleImportFailureAction = "DO_NOTHING"|"ROLLBACK"|string;
   export interface AssetBundleImportJobAnalysisOverrideParameters {
@@ -1866,6 +1938,28 @@ declare namespace QuickSight {
     Name?: ResourceName;
   }
   export type AssetBundleImportJobAnalysisOverrideParametersList = AssetBundleImportJobAnalysisOverrideParameters[];
+  export interface AssetBundleImportJobAnalysisOverridePermissions {
+    /**
+     * A list of analysis IDs that you want to apply overrides to. You can use * to override all analyses in this asset bundle.
+     */
+    AnalysisIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of permissions for the analyses that you want to apply overrides to.
+     */
+    Permissions: AssetBundleResourcePermissions;
+  }
+  export type AssetBundleImportJobAnalysisOverridePermissionsList = AssetBundleImportJobAnalysisOverridePermissions[];
+  export interface AssetBundleImportJobAnalysisOverrideTags {
+    /**
+     * A list of analysis IDs that you want to apply overrides to. You can use * to override all analyses in this asset bundle.
+     */
+    AnalysisIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of tags for the analyses that you want to apply overrides to.
+     */
+    Tags: TagList;
+  }
+  export type AssetBundleImportJobAnalysisOverrideTagsList = AssetBundleImportJobAnalysisOverrideTags[];
   export interface AssetBundleImportJobDashboardOverrideParameters {
     /**
      * The ID of the dashboard that you want to apply overrides to.
@@ -1877,6 +1971,32 @@ declare namespace QuickSight {
     Name?: ResourceName;
   }
   export type AssetBundleImportJobDashboardOverrideParametersList = AssetBundleImportJobDashboardOverrideParameters[];
+  export interface AssetBundleImportJobDashboardOverridePermissions {
+    /**
+     * A list of dashboard IDs that you want to apply overrides to. You can use * to override all dashboards in this asset bundle.
+     */
+    DashboardIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of permissions for the dashboards that you want to apply overrides to.
+     */
+    Permissions?: AssetBundleResourcePermissions;
+    /**
+     * A structure that contains the link sharing configurations that you want to apply overrides to.
+     */
+    LinkSharingConfiguration?: AssetBundleResourceLinkSharingConfiguration;
+  }
+  export type AssetBundleImportJobDashboardOverridePermissionsList = AssetBundleImportJobDashboardOverridePermissions[];
+  export interface AssetBundleImportJobDashboardOverrideTags {
+    /**
+     * A list of dashboard IDs that you want to apply overrides to. You can use * to override all dashboards in this asset bundle.
+     */
+    DashboardIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of tags for the dashboards that you want to apply overrides to.
+     */
+    Tags: TagList;
+  }
+  export type AssetBundleImportJobDashboardOverrideTagsList = AssetBundleImportJobDashboardOverrideTags[];
   export interface AssetBundleImportJobDataSetOverrideParameters {
     /**
      * The ID of the dataset to apply overrides to.
@@ -1888,6 +2008,28 @@ declare namespace QuickSight {
     Name?: ResourceName;
   }
   export type AssetBundleImportJobDataSetOverrideParametersList = AssetBundleImportJobDataSetOverrideParameters[];
+  export interface AssetBundleImportJobDataSetOverridePermissions {
+    /**
+     * A list of dataset IDs that you want to apply overrides to. You can use * to override all datasets in this asset bundle.
+     */
+    DataSetIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of permissions for the datasets that you want to apply overrides to.
+     */
+    Permissions: AssetBundleResourcePermissions;
+  }
+  export type AssetBundleImportJobDataSetOverridePermissionsList = AssetBundleImportJobDataSetOverridePermissions[];
+  export interface AssetBundleImportJobDataSetOverrideTags {
+    /**
+     * A list of dataset IDs that you want to apply overrides to. You can use * to override all datasets in this asset bundle.
+     */
+    DataSetIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of tags for the datasets that you want to apply overrides to.
+     */
+    Tags: TagList;
+  }
+  export type AssetBundleImportJobDataSetOverrideTagsList = AssetBundleImportJobDataSetOverrideTags[];
   export interface AssetBundleImportJobDataSourceCredentialPair {
     /**
      * The username for the data source connection.
@@ -1926,6 +2068,28 @@ declare namespace QuickSight {
     Credentials?: AssetBundleImportJobDataSourceCredentials;
   }
   export type AssetBundleImportJobDataSourceOverrideParametersList = AssetBundleImportJobDataSourceOverrideParameters[];
+  export interface AssetBundleImportJobDataSourceOverridePermissions {
+    /**
+     * A list of data source IDs that you want to apply overrides to. You can use * to override all data sources in this asset bundle.
+     */
+    DataSourceIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of permissions for the data source that you want to apply overrides to.
+     */
+    Permissions: AssetBundleResourcePermissions;
+  }
+  export type AssetBundleImportJobDataSourceOverridePermissionsList = AssetBundleImportJobDataSourceOverridePermissions[];
+  export interface AssetBundleImportJobDataSourceOverrideTags {
+    /**
+     * A list of data source IDs that you want to apply overrides to. You can use * to override all data sources in this asset bundle.
+     */
+    DataSourceIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of tags for the data source that you want to apply overrides to.
+     */
+    Tags: TagList;
+  }
+  export type AssetBundleImportJobDataSourceOverrideTagsList = AssetBundleImportJobDataSourceOverrideTags[];
   export interface AssetBundleImportJobError {
     /**
      * The ARN of the resource whose processing caused an error.
@@ -1974,6 +2138,60 @@ declare namespace QuickSight {
      * A list of overrides for any Dashboard resources that are present in the asset bundle that is imported.
      */
     Dashboards?: AssetBundleImportJobDashboardOverrideParametersList;
+  }
+  export interface AssetBundleImportJobOverridePermissions {
+    /**
+     * A list of permissions overrides for any DataSource resources that are present in the asset bundle that is imported.
+     */
+    DataSources?: AssetBundleImportJobDataSourceOverridePermissionsList;
+    /**
+     * A list of permissions overrides for any DataSet resources that are present in the asset bundle that is imported.
+     */
+    DataSets?: AssetBundleImportJobDataSetOverridePermissionsList;
+    /**
+     * A list of permissions overrides for any Theme resources that are present in the asset bundle that is imported.
+     */
+    Themes?: AssetBundleImportJobThemeOverridePermissionsList;
+    /**
+     * A list of permissions overrides for any Analysis resources that are present in the asset bundle that is imported.
+     */
+    Analyses?: AssetBundleImportJobAnalysisOverridePermissionsList;
+    /**
+     * A list of permissions overrides for any Dashboard resources that are present in the asset bundle that is imported.
+     */
+    Dashboards?: AssetBundleImportJobDashboardOverridePermissionsList;
+  }
+  export interface AssetBundleImportJobOverrideTags {
+    /**
+     * A list of tag overrides for any VPCConnection resources that are present in the asset bundle that is imported.
+     */
+    VPCConnections?: AssetBundleImportJobVPCConnectionOverrideTagsList;
+    /**
+     * A list of tag overrides for any DataSource resources that are present in the asset bundle that is imported.
+     */
+    DataSources?: AssetBundleImportJobDataSourceOverrideTagsList;
+    /**
+     * A list of tag overrides for any DataSet resources that are present in the asset bundle that is imported.
+     */
+    DataSets?: AssetBundleImportJobDataSetOverrideTagsList;
+    /**
+     * A list of tag overrides for any Theme resources that are present in the asset bundle that is imported.
+     */
+    Themes?: AssetBundleImportJobThemeOverrideTagsList;
+    /**
+     * A list of tag overrides for any Analysis resources that are present in the asset bundle that is imported.
+     */
+    Analyses?: AssetBundleImportJobAnalysisOverrideTagsList;
+    /**
+     * A list of tag overrides for any Dashboard resources that are present in the asset bundle that is imported.
+     */
+    Dashboards?: AssetBundleImportJobDashboardOverrideTagsList;
+  }
+  export interface AssetBundleImportJobOverrideValidationStrategy {
+    /**
+     * A Boolean value that indicates whether to import all analyses and dashboards under strict or lenient mode.
+     */
+    StrictModeForAllResources?: Boolean;
   }
   export interface AssetBundleImportJobRefreshScheduleOverrideParameters {
     /**
@@ -2031,6 +2249,28 @@ declare namespace QuickSight {
     Name?: ResourceName;
   }
   export type AssetBundleImportJobThemeOverrideParametersList = AssetBundleImportJobThemeOverrideParameters[];
+  export interface AssetBundleImportJobThemeOverridePermissions {
+    /**
+     * A list of theme IDs that you want to apply overrides to. You can use * to override all themes in this asset bundle.
+     */
+    ThemeIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of permissions for the themes that you want to apply overrides to.
+     */
+    Permissions: AssetBundleResourcePermissions;
+  }
+  export type AssetBundleImportJobThemeOverridePermissionsList = AssetBundleImportJobThemeOverridePermissions[];
+  export interface AssetBundleImportJobThemeOverrideTags {
+    /**
+     * A list of theme IDs that you want to apply overrides to. You can use * to override all themes in this asset bundle.
+     */
+    ThemeIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of tags for the themes that you want to apply overrides to.
+     */
+    Tags: TagList;
+  }
+  export type AssetBundleImportJobThemeOverrideTagsList = AssetBundleImportJobThemeOverrideTags[];
   export interface AssetBundleImportJobVPCConnectionOverrideParameters {
     /**
      * The ID of the VPC Connection to apply overrides to.
@@ -2058,6 +2298,17 @@ declare namespace QuickSight {
     RoleArn?: RoleArn;
   }
   export type AssetBundleImportJobVPCConnectionOverrideParametersList = AssetBundleImportJobVPCConnectionOverrideParameters[];
+  export interface AssetBundleImportJobVPCConnectionOverrideTags {
+    /**
+     * A list of VPC connection IDs that you want to apply overrides to. You can use * to override all VPC connections in this asset bundle.
+     */
+    VPCConnectionIds: AssetBundleRestrictiveResourceIdList;
+    /**
+     * A list of tags for the VPC connections that you want to apply overrides to.
+     */
+    Tags: TagList;
+  }
+  export type AssetBundleImportJobVPCConnectionOverrideTagsList = AssetBundleImportJobVPCConnectionOverrideTags[];
   export interface AssetBundleImportSource {
     /**
      * The bytes of the base64 encoded asset bundle import zip file. This file can't exceed 20 MB. If you are calling the API operations from the Amazon Web Services SDK for Java, JavaScript, Python, or PHP, the SDK encodes base64 automatically to allow the direct setting of the zip file's bytes. If you are using an SDK for a different language or receiving related errors, try to base64 encode your data.
@@ -2072,13 +2323,32 @@ declare namespace QuickSight {
     /**
      * An HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for five minutes after issuance. Call DescribeAssetBundleExportJob again for a fresh URL if needed. The downloaded asset bundle is a .qs zip file.
      */
-    Body?: String;
+    Body?: SensitiveS3Uri;
     /**
      * The Amazon S3 URI that you provided at the start of the import job.
      */
     S3Uri?: S3Uri;
   }
+  export type AssetBundlePrincipalList = Principal[];
   export type AssetBundleResourceArns = Arn[];
+  export interface AssetBundleResourceLinkSharingConfiguration {
+    /**
+     * A list of link sharing permissions for the dashboards that you want to apply overrides to.
+     */
+    Permissions?: AssetBundleResourcePermissions;
+  }
+  export interface AssetBundleResourcePermissions {
+    /**
+     * A list of principals to grant permissions on.
+     */
+    Principals: AssetBundlePrincipalList;
+    /**
+     * A list of IAM actions to grant permissions on.
+     */
+    Actions: ActionList;
+  }
+  export type AssetBundleRestrictiveResourceId = string;
+  export type AssetBundleRestrictiveResourceIdList = AssetBundleRestrictiveResourceId[];
   export interface AssetOptions {
     /**
      * Determines the timezone for the analysis.
@@ -2414,6 +2684,16 @@ declare namespace QuickSight {
   }
   export type BarsArrangement = "CLUSTERED"|"STACKED"|"STACKED_PERCENT"|string;
   export type BaseMapStyleType = "LIGHT_GRAY"|"DARK_GRAY"|"STREET"|"IMAGERY"|string;
+  export interface BigQueryParameters {
+    /**
+     * The Google Cloud Platform project ID where your datasource was created.
+     */
+    ProjectId: ProjectId;
+    /**
+     * The storage location where you create a Google BigQuery data source.
+     */
+    DataSetRegion?: DataSetRegion;
+  }
   export type BinCountLimit = number;
   export interface BinCountOptions {
     /**
@@ -3364,7 +3644,7 @@ declare namespace QuickSight {
      */
     Edition: Edition;
     /**
-     * The method that you want to use to authenticate your Amazon QuickSight account. Currently, the valid values for this parameter are IAM_AND_QUICKSIGHT, IAM_ONLY, and ACTIVE_DIRECTORY. If you choose ACTIVE_DIRECTORY, provide an ActiveDirectoryName and an AdminGroup associated with your Active Directory.
+     * The method that you want to use to authenticate your Amazon QuickSight account. If you choose ACTIVE_DIRECTORY, provide an ActiveDirectoryName and an AdminGroup associated with your Active Directory. If you choose IAM_IDENTITY_CENTER, provide an AdminGroup associated with your IAM Identity Center account.
      */
     AuthenticationMethod: AuthenticationMethodOption;
     /**
@@ -3392,15 +3672,15 @@ declare namespace QuickSight {
      */
     DirectoryId?: String;
     /**
-     * The admin group associated with your Active Directory. This field is required if ACTIVE_DIRECTORY is the selected authentication method of the new Amazon QuickSight account. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+     * The admin group associated with your Active Directory or IAM Identity Center account. This field is required if ACTIVE_DIRECTORY or IAM_IDENTITY_CENTER is the selected authentication method of the new Amazon QuickSight account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
      */
     AdminGroup?: GroupsList;
     /**
-     * The author group associated with your Active Directory. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+     * The author group associated with your Active Directory or IAM Identity Center account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
      */
     AuthorGroup?: GroupsList;
     /**
-     * The reader group associated with your Active Direcrtory. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
+     * The reader group associated with your Active Directory or IAM Identity Center account. For more information about using IAM Identity Center in Amazon QuickSight, see Using IAM Identity Center with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide. For more information about using Active Directory in Amazon QuickSight, see Using Active Directory with Amazon QuickSight Enterprise Edition in the Amazon QuickSight User Guide.
      */
     ReaderGroup?: GroupsList;
     /**
@@ -3561,6 +3841,10 @@ declare namespace QuickSight {
      * When you create the dashboard, Amazon QuickSight adds the dashboard to these folders.
      */
     FolderArns?: FolderArnList;
+    /**
+     * A structure that contains the permissions of a shareable link to the dashboard.
+     */
+    LinkSharingConfiguration?: LinkSharingConfiguration;
   }
   export interface CreateDashboardResponse {
     /**
@@ -4068,6 +4352,34 @@ declare namespace QuickSight {
      * The Amazon Resource Name (ARN) for the refresh schedule.
      */
     Arn?: Arn;
+  }
+  export interface CreateRoleMembershipRequest {
+    /**
+     * The name of the group that you want to add to the role.
+     */
+    MemberName: GroupName;
+    /**
+     * The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that the role belongs to.
+     */
+    Namespace: Namespace;
+    /**
+     * The role that you want to add a group to.
+     */
+    Role: Role;
+  }
+  export interface CreateRoleMembershipResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
   }
   export interface CreateTemplateAliasRequest {
     /**
@@ -4831,7 +5143,6 @@ declare namespace QuickSight {
      * A list of the associated sheets with the unique identifier and name of each sheet.
      */
     Sheets?: SheetList;
-    Options?: AssetOptions;
   }
   export interface DashboardVersionDefinition {
     /**
@@ -5241,6 +5552,7 @@ declare namespace QuickSight {
      */
     RefreshConfiguration: RefreshConfiguration;
   }
+  export type DataSetRegion = string;
   export interface DataSetSchema {
     /**
      * A structure containing the list of column schemas.
@@ -5493,6 +5805,10 @@ declare namespace QuickSight {
      * The parameters that are required to connect to a Trino data source.
      */
     TrinoParameters?: TrinoParameters;
+    /**
+     * The parameters that are required to connect to a Google BigQuery data source.
+     */
+    BigQueryParameters?: BigQueryParameters;
   }
   export type DataSourceParametersList = DataSourceParameters[];
   export interface DataSourceSearchFilter {
@@ -5537,7 +5853,7 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type DataSourceSummaryList = DataSourceSummary[];
-  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|"AMAZON_OPENSEARCH"|"EXASOL"|"DATABRICKS"|string;
+  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|"AMAZON_OPENSEARCH"|"EXASOL"|"DATABRICKS"|"STARBURST"|"TRINO"|"BIGQUERY"|string;
   export type Database = string;
   export type DatabaseGroup = string;
   export type DatabaseGroupList = DatabaseGroup[];
@@ -6303,6 +6619,58 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
   }
+  export interface DeleteRoleCustomPermissionRequest {
+    /**
+     * The role that you want to remove permissions from.
+     */
+    Role: Role;
+    /**
+     * The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the Amazon Web Services account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that includes the role.
+     */
+    Namespace: Namespace;
+  }
+  export interface DeleteRoleCustomPermissionResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
+  export interface DeleteRoleMembershipRequest {
+    /**
+     * The name of the group.
+     */
+    MemberName: GroupName;
+    /**
+     * The role that you want to remove permissions from.
+     */
+    Role: Role;
+    /**
+     * The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that contains the role.
+     */
+    Namespace: Namespace;
+  }
+  export interface DeleteRoleMembershipResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DeleteTemplateAliasRequest {
     /**
      * The ID of the Amazon Web Services account that contains the item to delete.
@@ -6786,7 +7154,7 @@ declare namespace QuickSight {
     /**
      * The URL to download the exported asset bundle data from. This URL is available only after the job has succeeded. This URL is valid for 5 minutes after issuance. Call DescribeAssetBundleExportJob again for a fresh URL if needed. The downloaded asset bundle is a zip file named assetbundle-{jobId}.qs. The file has a .qs extension. This URL can't be used in a StartAssetBundleImportJob API call and should only be used for download purposes.
      */
-    DownloadUrl?: String;
+    DownloadUrl?: SensitiveS3Uri;
     /**
      * An array of error records that describes any failures that occurred during the export job processing. Error records accumulate while the job runs. The complete set of error records is available after the job has completed and failed.
      */
@@ -6831,6 +7199,22 @@ declare namespace QuickSight {
      * The HTTP status of the response.
      */
     Status?: StatusCode;
+    /**
+     * The include permissions flag.
+     */
+    IncludePermissions?: Boolean;
+    /**
+     * The include tags flag.
+     */
+    IncludeTags?: Boolean;
+    /**
+     * The validation strategy that is used to export the analysis or dashboard.
+     */
+    ValidationStrategy?: AssetBundleExportJobValidationStrategy;
+    /**
+     * An array of warning records that describe the analysis or dashboard that is exported. This array includes UI errors that can be skipped during the validation process. This property only appears if StrictModeForAllResources in ValidationStrategy is set to FALSE.
+     */
+    Warnings?: AssetBundleExportJobWarningList;
   }
   export interface DescribeAssetBundleImportJobRequest {
     /**
@@ -6876,7 +7260,7 @@ declare namespace QuickSight {
      */
     AssetBundleImportSource?: AssetBundleImportSourceDescription;
     /**
-     * Optional overrides to be applied to the resource configuration before import.
+     * Optional overrides that are applied to the resource configuration before import.
      */
     OverrideParameters?: AssetBundleImportJobOverrideParameters;
     /**
@@ -6891,6 +7275,18 @@ declare namespace QuickSight {
      * The HTTP status of the response.
      */
     Status?: StatusCode;
+    /**
+     * Optional permission overrides that are applied to the resource configuration before import.
+     */
+    OverridePermissions?: AssetBundleImportJobOverridePermissions;
+    /**
+     * Optional tag overrides that are applied to the resource configuration before import.
+     */
+    OverrideTags?: AssetBundleImportJobOverrideTags;
+    /**
+     * An optional validation strategy override for all analyses and dashboards to be applied to the resource configuration before import.
+     */
+    OverrideValidationStrategy?: AssetBundleImportJobOverrideValidationStrategy;
   }
   export interface DescribeDashboardDefinitionRequest {
     /**
@@ -7576,6 +7972,34 @@ declare namespace QuickSight {
      * The Amazon Resource Name (ARN) for the refresh schedule.
      */
     Arn?: Arn;
+  }
+  export interface DescribeRoleCustomPermissionRequest {
+    /**
+     * The name of the role whose permissions you want described.
+     */
+    Role: Role;
+    /**
+     * The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that contains the role.
+     */
+    Namespace: Namespace;
+  }
+  export interface DescribeRoleCustomPermissionResponse {
+    /**
+     * The name of the custom permission that is described.
+     */
+    CustomPermissionsName?: RoleName;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
   }
   export interface DescribeTemplateAliasRequest {
     /**
@@ -11346,6 +11770,46 @@ declare namespace QuickSight {
      */
     RequestId?: String;
   }
+  export interface ListRoleMembershipsRequest {
+    /**
+     * The name of the role.
+     */
+    Role: Role;
+    /**
+     * A pagination token that can be used in a subsequent request.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that includes the role.
+     */
+    Namespace: Namespace;
+  }
+  export interface ListRoleMembershipsResponse {
+    /**
+     * The list of groups associated with a role
+     */
+    MembersList?: GroupsList;
+    /**
+     * A pagination token that can be used in a subsequent request.
+     */
+    NextToken?: String;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want a list of tags for.
@@ -13286,6 +13750,7 @@ declare namespace QuickSight {
      */
     Visibility?: Visibility;
   }
+  export type ProjectId = string;
   export interface ProjectOperation {
     /**
      * Projected columns.
@@ -13978,6 +14443,7 @@ declare namespace QuickSight {
     RequestId?: String;
   }
   export type RestrictiveResourceId = string;
+  export type Role = "ADMIN"|"AUTHOR"|"READER"|string;
   export type RoleArn = string;
   export type RoleName = string;
   export type RoleSessionName = string;
@@ -15242,6 +15708,18 @@ declare namespace QuickSight {
      * An optional collection of structures that generate CloudFormation parameters to override the existing resource property values when the resource is exported to a new CloudFormation template. Use this field if the ExportFormat field of a StartAssetBundleExportJobRequest API call is set to CLOUDFORMATION_JSON.
      */
     CloudFormationOverridePropertyConfiguration?: AssetBundleCloudFormationOverridePropertyConfiguration;
+    /**
+     * A Boolean that determines whether all permissions for each resource ARN are exported with the job. If you set IncludePermissions to TRUE, any permissions associated with each resource are exported. 
+     */
+    IncludePermissions?: Boolean;
+    /**
+     *  A Boolean that determines whether all tags for each resource ARN are exported with the job. If you set IncludeTags to TRUE, any tags associated with each resource are exported.
+     */
+    IncludeTags?: Boolean;
+    /**
+     * An optional parameter that determines which validation strategy to use for the export job. If StrictModeForAllResources is set to TRUE, strict validation for every error is enforced. If it is set to FALSE, validation is skipped for specific UI errors that are shown as warnings. The default value for StrictModeForAllResources is FALSE.
+     */
+    ValidationStrategy?: AssetBundleExportJobValidationStrategy;
   }
   export interface StartAssetBundleExportJobResponse {
     /**
@@ -15275,13 +15753,25 @@ declare namespace QuickSight {
      */
     AssetBundleImportSource: AssetBundleImportSource;
     /**
-     * Optional overrides to be applied to the resource configuration before import.
+     * Optional overrides that are applied to the resource configuration before import.
      */
     OverrideParameters?: AssetBundleImportJobOverrideParameters;
     /**
      * The failure action for the import job. If you choose ROLLBACK, failed import jobs will attempt to undo any asset changes caused by the failed job. If you choose DO_NOTHING, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly keeping the Amazon QuickSight account in an inconsistent state.
      */
     FailureAction?: AssetBundleImportFailureAction;
+    /**
+     * Optional permission overrides that are applied to the resource configuration before import.
+     */
+    OverridePermissions?: AssetBundleImportJobOverridePermissions;
+    /**
+     * Optional tag overrides that are applied to the resource configuration before import.
+     */
+    OverrideTags?: AssetBundleImportJobOverrideTags;
+    /**
+     * An optional validation strategy override for all analyses and dashboards that is applied to the resource configuration before import. 
+     */
+    OverrideValidationStrategy?: AssetBundleImportJobOverrideValidationStrategy;
   }
   export interface StartAssetBundleImportJobResponse {
     /**
@@ -16026,7 +16516,6 @@ declare namespace QuickSight {
      * A list of the associated sheets with the unique identifier and name of each sheet.
      */
     Sheets?: SheetList;
-    Options?: AssetOptions;
   }
   export interface TemplateVersionDefinition {
     /**
@@ -18083,6 +18572,34 @@ declare namespace QuickSight {
     Arn?: Arn;
   }
   export type UpdateResourcePermissionList = ResourcePermission[];
+  export interface UpdateRoleCustomPermissionRequest {
+    /**
+     * The name of the custom permission that you want to update the role with.
+     */
+    CustomPermissionsName: RoleName;
+    /**
+     * The name of role tht you want to update.
+     */
+    Role: Role;
+    /**
+     * The ID for the Amazon Web Services account that you want to create a group in. The Amazon Web Services account ID that you provide must be the same Amazon Web Services account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace that contains the role that you want to update.
+     */
+    Namespace: Namespace;
+  }
+  export interface UpdateRoleCustomPermissionResponse {
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The HTTP status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface UpdateTemplateAliasRequest {
     /**
      * The ID of the Amazon Web Services account that contains the template alias that you're updating.
@@ -18741,7 +19258,7 @@ declare namespace QuickSight {
   export type VPCConnectionSummaryList = VPCConnectionSummary[];
   export interface ValidationStrategy {
     /**
-     * The mode of validation for the asset to be creaed or updated. When you set this value to STRICT, strict validation for every error is enforced. When you set this value to LENIENT, validation is skipped for specific UI errors.
+     * The mode of validation for the asset to be created or updated. When you set this value to STRICT, strict validation for every error is enforced. When you set this value to LENIENT, validation is skipped for specific UI errors.
      */
     Mode: ValidationStrategyMode;
   }

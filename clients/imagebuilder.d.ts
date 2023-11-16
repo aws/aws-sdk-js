@@ -20,6 +20,14 @@ declare class Imagebuilder extends Service {
    */
   cancelImageCreation(callback?: (err: AWSError, data: Imagebuilder.Types.CancelImageCreationResponse) => void): Request<Imagebuilder.Types.CancelImageCreationResponse, AWSError>;
   /**
+   * Cancel a specific image lifecycle policy runtime instance.
+   */
+  cancelLifecycleExecution(params: Imagebuilder.Types.CancelLifecycleExecutionRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CancelLifecycleExecutionResponse) => void): Request<Imagebuilder.Types.CancelLifecycleExecutionResponse, AWSError>;
+  /**
+   * Cancel a specific image lifecycle policy runtime instance.
+   */
+  cancelLifecycleExecution(callback?: (err: AWSError, data: Imagebuilder.Types.CancelLifecycleExecutionResponse) => void): Request<Imagebuilder.Types.CancelLifecycleExecutionResponse, AWSError>;
+  /**
    * Creates a new component that can be used to build, validate, test, and assess your image. The component is based on a YAML document that you specify using exactly one of the following methods:   Inline, using the data property in the request body.   A URL that points to a YAML document file stored in Amazon S3, using the uri property in the request body.  
    */
   createComponent(params: Imagebuilder.Types.CreateComponentRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateComponentResponse) => void): Request<Imagebuilder.Types.CreateComponentResponse, AWSError>;
@@ -76,6 +84,14 @@ declare class Imagebuilder extends Service {
    */
   createInfrastructureConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.CreateInfrastructureConfigurationResponse) => void): Request<Imagebuilder.Types.CreateInfrastructureConfigurationResponse, AWSError>;
   /**
+   * Create a lifecycle policy resource.
+   */
+  createLifecyclePolicy(params: Imagebuilder.Types.CreateLifecyclePolicyRequest, callback?: (err: AWSError, data: Imagebuilder.Types.CreateLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.CreateLifecyclePolicyResponse, AWSError>;
+  /**
+   * Create a lifecycle policy resource.
+   */
+  createLifecyclePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.CreateLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.CreateLifecyclePolicyResponse, AWSError>;
+  /**
    * Deletes a component build version.
    */
   deleteComponent(params: Imagebuilder.Types.DeleteComponentRequest, callback?: (err: AWSError, data: Imagebuilder.Types.DeleteComponentResponse) => void): Request<Imagebuilder.Types.DeleteComponentResponse, AWSError>;
@@ -131,6 +147,14 @@ declare class Imagebuilder extends Service {
    * Deletes an infrastructure configuration.
    */
   deleteInfrastructureConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.DeleteInfrastructureConfigurationResponse) => void): Request<Imagebuilder.Types.DeleteInfrastructureConfigurationResponse, AWSError>;
+  /**
+   * Delete the specified lifecycle policy resource.
+   */
+  deleteLifecyclePolicy(params: Imagebuilder.Types.DeleteLifecyclePolicyRequest, callback?: (err: AWSError, data: Imagebuilder.Types.DeleteLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.DeleteLifecyclePolicyResponse, AWSError>;
+  /**
+   * Delete the specified lifecycle policy resource.
+   */
+  deleteLifecyclePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.DeleteLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
    * Gets a component object.
    */
@@ -219,6 +243,22 @@ declare class Imagebuilder extends Service {
    * Gets an infrastructure configuration.
    */
   getInfrastructureConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.GetInfrastructureConfigurationResponse) => void): Request<Imagebuilder.Types.GetInfrastructureConfigurationResponse, AWSError>;
+  /**
+   * Get the runtime information that was logged for a specific runtime instance of the lifecycle policy.
+   */
+  getLifecycleExecution(params: Imagebuilder.Types.GetLifecycleExecutionRequest, callback?: (err: AWSError, data: Imagebuilder.Types.GetLifecycleExecutionResponse) => void): Request<Imagebuilder.Types.GetLifecycleExecutionResponse, AWSError>;
+  /**
+   * Get the runtime information that was logged for a specific runtime instance of the lifecycle policy.
+   */
+  getLifecycleExecution(callback?: (err: AWSError, data: Imagebuilder.Types.GetLifecycleExecutionResponse) => void): Request<Imagebuilder.Types.GetLifecycleExecutionResponse, AWSError>;
+  /**
+   * Get details for the specified image lifecycle policy.
+   */
+  getLifecyclePolicy(params: Imagebuilder.Types.GetLifecyclePolicyRequest, callback?: (err: AWSError, data: Imagebuilder.Types.GetLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.GetLifecyclePolicyResponse, AWSError>;
+  /**
+   * Get details for the specified image lifecycle policy.
+   */
+  getLifecyclePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.GetLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.GetLifecyclePolicyResponse, AWSError>;
   /**
    * Get the runtime information that was logged for a specific runtime instance of the workflow.
    */
@@ -356,6 +396,30 @@ declare class Imagebuilder extends Service {
    */
   listInfrastructureConfigurations(callback?: (err: AWSError, data: Imagebuilder.Types.ListInfrastructureConfigurationsResponse) => void): Request<Imagebuilder.Types.ListInfrastructureConfigurationsResponse, AWSError>;
   /**
+   * List resources that the runtime instance of the image lifecycle identified for lifecycle actions.
+   */
+  listLifecycleExecutionResources(params: Imagebuilder.Types.ListLifecycleExecutionResourcesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListLifecycleExecutionResourcesResponse) => void): Request<Imagebuilder.Types.ListLifecycleExecutionResourcesResponse, AWSError>;
+  /**
+   * List resources that the runtime instance of the image lifecycle identified for lifecycle actions.
+   */
+  listLifecycleExecutionResources(callback?: (err: AWSError, data: Imagebuilder.Types.ListLifecycleExecutionResourcesResponse) => void): Request<Imagebuilder.Types.ListLifecycleExecutionResourcesResponse, AWSError>;
+  /**
+   * Get the lifecycle runtime history for the specified resource.
+   */
+  listLifecycleExecutions(params: Imagebuilder.Types.ListLifecycleExecutionsRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListLifecycleExecutionsResponse) => void): Request<Imagebuilder.Types.ListLifecycleExecutionsResponse, AWSError>;
+  /**
+   * Get the lifecycle runtime history for the specified resource.
+   */
+  listLifecycleExecutions(callback?: (err: AWSError, data: Imagebuilder.Types.ListLifecycleExecutionsResponse) => void): Request<Imagebuilder.Types.ListLifecycleExecutionsResponse, AWSError>;
+  /**
+   * Get a list of lifecycle policies in your Amazon Web Services account.
+   */
+  listLifecyclePolicies(params: Imagebuilder.Types.ListLifecyclePoliciesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListLifecyclePoliciesResponse) => void): Request<Imagebuilder.Types.ListLifecyclePoliciesResponse, AWSError>;
+  /**
+   * Get a list of lifecycle policies in your Amazon Web Services account.
+   */
+  listLifecyclePolicies(callback?: (err: AWSError, data: Imagebuilder.Types.ListLifecyclePoliciesResponse) => void): Request<Imagebuilder.Types.ListLifecyclePoliciesResponse, AWSError>;
+  /**
    * Returns the list of tags for the specified resource.
    */
   listTagsForResource(params: Imagebuilder.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListTagsForResourceResponse) => void): Request<Imagebuilder.Types.ListTagsForResourceResponse, AWSError>;
@@ -420,6 +484,14 @@ declare class Imagebuilder extends Service {
    */
   startImagePipelineExecution(callback?: (err: AWSError, data: Imagebuilder.Types.StartImagePipelineExecutionResponse) => void): Request<Imagebuilder.Types.StartImagePipelineExecutionResponse, AWSError>;
   /**
+   * Begin asynchronous resource state update for lifecycle changes to the specified image resources.
+   */
+  startResourceStateUpdate(params: Imagebuilder.Types.StartResourceStateUpdateRequest, callback?: (err: AWSError, data: Imagebuilder.Types.StartResourceStateUpdateResponse) => void): Request<Imagebuilder.Types.StartResourceStateUpdateResponse, AWSError>;
+  /**
+   * Begin asynchronous resource state update for lifecycle changes to the specified image resources.
+   */
+  startResourceStateUpdate(callback?: (err: AWSError, data: Imagebuilder.Types.StartResourceStateUpdateResponse) => void): Request<Imagebuilder.Types.StartResourceStateUpdateResponse, AWSError>;
+  /**
    * Adds a tag to a resource.
    */
   tagResource(params: Imagebuilder.Types.TagResourceRequest, callback?: (err: AWSError, data: Imagebuilder.Types.TagResourceResponse) => void): Request<Imagebuilder.Types.TagResourceResponse, AWSError>;
@@ -459,6 +531,14 @@ declare class Imagebuilder extends Service {
    * Updates a new infrastructure configuration. An infrastructure configuration defines the environment in which your image will be built and tested.
    */
   updateInfrastructureConfiguration(callback?: (err: AWSError, data: Imagebuilder.Types.UpdateInfrastructureConfigurationResponse) => void): Request<Imagebuilder.Types.UpdateInfrastructureConfigurationResponse, AWSError>;
+  /**
+   * Update the specified lifecycle policy.
+   */
+  updateLifecyclePolicy(params: Imagebuilder.Types.UpdateLifecyclePolicyRequest, callback?: (err: AWSError, data: Imagebuilder.Types.UpdateLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.UpdateLifecyclePolicyResponse, AWSError>;
+  /**
+   * Update the specified lifecycle policy.
+   */
+  updateLifecyclePolicy(callback?: (err: AWSError, data: Imagebuilder.Types.UpdateLifecyclePolicyResponse) => void): Request<Imagebuilder.Types.UpdateLifecyclePolicyResponse, AWSError>;
 }
 declare namespace Imagebuilder {
   export interface AccountAggregation {
@@ -553,13 +633,29 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token that was used for this request.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
      * The ARN of the image whose creation this request canceled.
      */
     imageBuildVersionArn?: ImageBuildVersionArn;
+  }
+  export interface CancelLifecycleExecutionRequest {
+    /**
+     * Identifies the specific runtime instance of the image lifecycle to cancel.
+     */
+    lifecycleExecutionId: LifecycleExecutionId;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
+     */
+    clientToken: ClientToken;
+  }
+  export interface CancelLifecycleExecutionResponse {
+    /**
+     * The unique identifier for the image lifecycle runtime instance that was canceled.
+     */
+    lifecycleExecutionId?: LifecycleExecutionId;
   }
   export type ClientToken = string;
   export interface Component {
@@ -972,7 +1068,7 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
     /**
-     * The idempotency token of the component.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -982,11 +1078,11 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
-     * The Amazon Resource Name (ARN) of the component that this request created.
+     * The Amazon Resource Name (ARN) of the component that the request created.
      */
     componentBuildVersionArn?: ComponentBuildVersionArn;
   }
@@ -1052,7 +1148,7 @@ declare namespace Imagebuilder {
      */
     kmsKeyId?: NonEmptyString;
     /**
-     * The client token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -1062,7 +1158,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The client token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
@@ -1088,7 +1184,7 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
     /**
-     * The idempotency token of the distribution configuration.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -1098,7 +1194,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
@@ -1152,7 +1248,7 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
     /**
-     * The idempotency token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
     /**
@@ -1166,7 +1262,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
@@ -1212,7 +1308,7 @@ declare namespace Imagebuilder {
      */
     additionalInstanceConfiguration?: AdditionalInstanceConfiguration;
     /**
-     * The idempotency token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -1222,7 +1318,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
@@ -1260,7 +1356,7 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
     /**
-     * The idempotency token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
     /**
@@ -1274,11 +1370,11 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
-     * The Amazon Resource Name (ARN) of the image that this request created.
+     * The Amazon Resource Name (ARN) of the image that the request created.
      */
     imageBuildVersionArn?: ImageBuildVersionArn;
   }
@@ -1336,7 +1432,7 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
     /**
-     * The idempotency token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -1346,13 +1442,61 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
      * The Amazon Resource Name (ARN) of the infrastructure configuration that was created by this request.
      */
     infrastructureConfigurationArn?: InfrastructureConfigurationArn;
+  }
+  export interface CreateLifecyclePolicyRequest {
+    /**
+     * The name of the lifecycle policy to create.
+     */
+    name: ResourceName;
+    /**
+     * Optional description for the lifecycle policy.
+     */
+    description?: NonEmptyString;
+    /**
+     * Indicates whether the lifecycle policy resource is enabled.
+     */
+    status?: LifecyclePolicyStatus;
+    /**
+     * The role name or Amazon Resource Name (ARN) for the IAM role that grants Image Builder access to run lifecycle actions.
+     */
+    executionRole: RoleNameOrArn;
+    /**
+     * The type of Image Builder resource that the lifecycle policy applies to.
+     */
+    resourceType: LifecyclePolicyResourceType;
+    /**
+     * Configuration details for the lifecycle policy rules.
+     */
+    policyDetails: LifecyclePolicyDetails;
+    /**
+     * Selection criteria for the resources that the lifecycle policy applies to. 
+     */
+    resourceSelection: LifecyclePolicyResourceSelection;
+    /**
+     * Tags to apply to the lifecycle policy resource.
+     */
+    tags?: TagMap;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
+     */
+    clientToken: ClientToken;
+  }
+  export interface CreateLifecyclePolicyResponse {
+    /**
+     * The client token that uniquely identifies the request.
+     */
+    clientToken?: ClientToken;
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle policy that the request created.
+     */
+    lifecyclePolicyArn?: LifecyclePolicyArn;
   }
   export interface CvssScore {
     /**
@@ -1523,6 +1667,18 @@ declare namespace Imagebuilder {
      * The Amazon Resource Name (ARN) of the infrastructure configuration that was deleted.
      */
     infrastructureConfigurationArn?: InfrastructureConfigurationArn;
+  }
+  export interface DeleteLifecyclePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle policy resource to delete.
+     */
+    lifecyclePolicyArn: LifecyclePolicyArn;
+  }
+  export interface DeleteLifecyclePolicyResponse {
+    /**
+     * The ARN of the lifecycle policy that was deleted.
+     */
+    lifecyclePolicyArn?: LifecyclePolicyArn;
   }
   export type DiskImageFormat = "VMDK"|"RAW"|"VHD"|string;
   export interface Distribution {
@@ -1906,6 +2062,30 @@ declare namespace Imagebuilder {
      */
     infrastructureConfiguration?: InfrastructureConfiguration;
   }
+  export interface GetLifecycleExecutionRequest {
+    /**
+     * Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.
+     */
+    lifecycleExecutionId: LifecycleExecutionId;
+  }
+  export interface GetLifecycleExecutionResponse {
+    /**
+     * Runtime details for the specified runtime instance of the lifecycle policy.
+     */
+    lifecycleExecution?: LifecycleExecution;
+  }
+  export interface GetLifecyclePolicyRequest {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the image lifecycle policy resource to get.
+     */
+    lifecyclePolicyArn: LifecyclePolicyArn;
+  }
+  export interface GetLifecyclePolicyResponse {
+    /**
+     * The ARN of the image lifecycle policy resource that was returned.
+     */
+    lifecyclePolicy?: LifecyclePolicy;
+  }
   export interface GetWorkflowExecutionRequest {
     /**
      * Use the unique identifier for a runtime instance of the workflow to get runtime details.
@@ -2133,6 +2313,14 @@ declare namespace Imagebuilder {
      * Contains settings for vulnerability scans.
      */
     imageScanningConfiguration?: ImageScanningConfiguration;
+    /**
+     * The time when deprecation occurs for an image resource. This can be a past or future date.
+     */
+    deprecationTime?: DateTimeTimestamp;
+    /**
+     * Identifies the last runtime instance of the lifecycle policy to take action on the image.
+     */
+    lifecycleExecutionId?: LifecycleExecutionId;
   }
   export interface ImageAggregation {
     /**
@@ -2456,7 +2644,7 @@ declare namespace Imagebuilder {
      */
     reason?: NonEmptyString;
   }
-  export type ImageStatus = "PENDING"|"CREATING"|"BUILDING"|"TESTING"|"DISTRIBUTING"|"INTEGRATING"|"AVAILABLE"|"CANCELLED"|"FAILED"|"DEPRECATED"|"DELETED"|string;
+  export type ImageStatus = "PENDING"|"CREATING"|"BUILDING"|"TESTING"|"DISTRIBUTING"|"INTEGRATING"|"AVAILABLE"|"CANCELLED"|"FAILED"|"DEPRECATED"|"DELETED"|"DISABLED"|string;
   export interface ImageSummary {
     /**
      * The Amazon Resource Name (ARN) of the image.
@@ -2510,6 +2698,14 @@ declare namespace Imagebuilder {
      * The origin of the base image that Image Builder used to build this image.
      */
     imageSource?: ImageSource;
+    /**
+     * The time when deprecation occurs for an image resource. This can be a past or future date.
+     */
+    deprecationTime?: DateTimeTimestamp;
+    /**
+     * Identifies the last runtime instance of the lifecycle policy to take action on the image.
+     */
+    lifecycleExecutionId?: LifecycleExecutionId;
   }
   export type ImageSummaryList = ImageSummary[];
   export interface ImageTestsConfiguration {
@@ -2615,7 +2811,7 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
     /**
-     * The idempotency token of the component.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -2625,7 +2821,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
@@ -2677,7 +2873,7 @@ declare namespace Imagebuilder {
      */
     imageArn?: Arn;
     /**
-     * The idempotency token that was used for this request.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
   }
@@ -2873,6 +3069,337 @@ declare namespace Imagebuilder {
   export type LaunchTemplateId = string;
   export type LicenseConfigurationArn = string;
   export type LicenseConfigurationArnList = LicenseConfigurationArn[];
+  export interface LifecycleExecution {
+    /**
+     * Identifies the lifecycle policy runtime instance.
+     */
+    lifecycleExecutionId?: LifecycleExecutionId;
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle policy that ran.
+     */
+    lifecyclePolicyArn?: LifecyclePolicyArn;
+    /**
+     * Contains information about associated resources that are identified for action by the runtime instance of the lifecycle policy.
+     */
+    resourcesImpactedSummary?: LifecycleExecutionResourcesImpactedSummary;
+    /**
+     * Runtime state that reports if the policy action ran successfully, failed, or was skipped.
+     */
+    state?: LifecycleExecutionState;
+    /**
+     * The timestamp when the lifecycle runtime instance started.
+     */
+    startTime?: DateTimeTimestamp;
+    /**
+     * The timestamp when the lifecycle runtime instance completed.
+     */
+    endTime?: DateTimeTimestamp;
+  }
+  export type LifecycleExecutionId = string;
+  export interface LifecycleExecutionResource {
+    /**
+     * The account that owns the impacted resource.
+     */
+    accountId?: NonEmptyString;
+    /**
+     * Identifies the impacted resource. The resource ID depends on the type of resource, as follows.   Image Builder image resources: Amazon Resource Name (ARN)   Distributed AMIs: AMI ID   Container images distributed to an ECR repository: image URI or SHA Digest  
+     */
+    resourceId?: NonEmptyString;
+    /**
+     * The runtime state for the lifecycle execution.
+     */
+    state?: LifecycleExecutionResourceState;
+    /**
+     * The action to take for the identified resource.
+     */
+    action?: LifecycleExecutionResourceAction;
+    /**
+     * The Amazon Web Services Region where the lifecycle execution resource is stored.
+     */
+    region?: NonEmptyString;
+    /**
+     * A list of associated resource snapshots for the impacted resource if it’s an AMI.
+     */
+    snapshots?: LifecycleExecutionSnapshotResourceList;
+    /**
+     * For an impacted container image, this identifies a list of URIs for associated container images distributed to ECR repositories.
+     */
+    imageUris?: StringList;
+  }
+  export interface LifecycleExecutionResourceAction {
+    /**
+     * The name of the resource that was identified for a lifecycle policy action.
+     */
+    name?: LifecycleExecutionResourceActionName;
+    /**
+     * The reason why the lifecycle policy action is taken.
+     */
+    reason?: NonEmptyString;
+  }
+  export type LifecycleExecutionResourceActionName = "AVAILABLE"|"DELETE"|"DEPRECATE"|"DISABLE"|string;
+  export type LifecycleExecutionResourceList = LifecycleExecutionResource[];
+  export interface LifecycleExecutionResourceState {
+    /**
+     * The runtime status of the lifecycle action taken for the impacted resource.
+     */
+    status?: LifecycleExecutionResourceStatus;
+    /**
+     * Messaging that clarifies the reason for the assigned status.
+     */
+    reason?: NonEmptyString;
+  }
+  export type LifecycleExecutionResourceStatus = "FAILED"|"IN_PROGRESS"|"SKIPPED"|"SUCCESS"|string;
+  export interface LifecycleExecutionResourcesImpactedSummary {
+    /**
+     * Indicates whether an image resource that was identified for a lifecycle action has associated resources that are also impacted.
+     */
+    hasImpactedResources?: Boolean;
+  }
+  export interface LifecycleExecutionSnapshotResource {
+    /**
+     * Identifies the impacted snapshot resource.
+     */
+    snapshotId?: NonEmptyString;
+    /**
+     * The runtime status of the lifecycle action taken for the snapshot.
+     */
+    state?: LifecycleExecutionResourceState;
+  }
+  export type LifecycleExecutionSnapshotResourceList = LifecycleExecutionSnapshotResource[];
+  export interface LifecycleExecutionState {
+    /**
+     * The runtime status of the lifecycle execution.
+     */
+    status?: LifecycleExecutionStatus;
+    /**
+     * The reason for the current status.
+     */
+    reason?: NonEmptyString;
+  }
+  export type LifecycleExecutionStatus = "IN_PROGRESS"|"CANCELLED"|"CANCELLING"|"FAILED"|"SUCCESS"|string;
+  export type LifecycleExecutionsList = LifecycleExecution[];
+  export interface LifecyclePolicy {
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle policy resource.
+     */
+    arn?: LifecyclePolicyArn;
+    /**
+     * The name of the lifecycle policy.
+     */
+    name?: ResourceName;
+    /**
+     * Optional description for the lifecycle policy.
+     */
+    description?: NonEmptyString;
+    /**
+     * Indicates whether the lifecycle policy resource is enabled.
+     */
+    status?: LifecyclePolicyStatus;
+    /**
+     * The name of the IAM role that Image Builder uses to run the lifecycle policy. This is a custom role that you create.
+     */
+    executionRole?: RoleNameOrArn;
+    /**
+     * The type of resources the lifecycle policy targets.
+     */
+    resourceType?: LifecyclePolicyResourceType;
+    /**
+     * The configuration details for a lifecycle policy resource.
+     */
+    policyDetails?: LifecyclePolicyDetails;
+    /**
+     * Resource selection criteria used to run the lifecycle policy.
+     */
+    resourceSelection?: LifecyclePolicyResourceSelection;
+    /**
+     * The timestamp when Image Builder created the lifecycle policy resource.
+     */
+    dateCreated?: DateTimeTimestamp;
+    /**
+     * The timestamp when Image Builder updated the lifecycle policy resource.
+     */
+    dateUpdated?: DateTimeTimestamp;
+    /**
+     * The timestamp for the last time Image Builder ran the lifecycle policy.
+     */
+    dateLastRun?: DateTimeTimestamp;
+    /**
+     * To help manage your lifecycle policy resources, you can assign your own metadata to each resource in the form of tags. Each tag consists of a key and an optional value, both of which you define.
+     */
+    tags?: TagMap;
+  }
+  export type LifecyclePolicyArn = string;
+  export interface LifecyclePolicyDetail {
+    /**
+     * Configuration details for the policy action.
+     */
+    action: LifecyclePolicyDetailAction;
+    /**
+     * Specifies the resources that the lifecycle policy applies to.
+     */
+    filter: LifecyclePolicyDetailFilter;
+    /**
+     * Additional rules to specify resources that should be exempt from policy actions.
+     */
+    exclusionRules?: LifecyclePolicyDetailExclusionRules;
+  }
+  export interface LifecyclePolicyDetailAction {
+    /**
+     * Specifies the lifecycle action to take.
+     */
+    type: LifecyclePolicyDetailActionType;
+    /**
+     * Specifies the resources that the lifecycle policy applies to.
+     */
+    includeResources?: LifecyclePolicyDetailActionIncludeResources;
+  }
+  export interface LifecyclePolicyDetailActionIncludeResources {
+    /**
+     * Specifies whether the lifecycle action should apply to distributed AMIs.
+     */
+    amis?: Boolean;
+    /**
+     * Specifies whether the lifecycle action should apply to snapshots associated with distributed AMIs.
+     */
+    snapshots?: Boolean;
+    /**
+     * Specifies whether the lifecycle action should apply to distributed containers.
+     */
+    containers?: Boolean;
+  }
+  export type LifecyclePolicyDetailActionType = "DELETE"|"DEPRECATE"|"DISABLE"|string;
+  export interface LifecyclePolicyDetailExclusionRules {
+    /**
+     * Contains a list of tags that Image Builder uses to skip lifecycle actions for AMIs that have them.
+     */
+    tagMap?: TagMap;
+    /**
+     * Lists configuration values that apply to AMIs that Image Builder should exclude from the lifecycle action.
+     */
+    amis?: LifecyclePolicyDetailExclusionRulesAmis;
+  }
+  export interface LifecyclePolicyDetailExclusionRulesAmis {
+    /**
+     * Configures whether public AMIs are excluded from the lifecycle action.
+     */
+    isPublic?: Boolean;
+    /**
+     * Specifies Amazon Web Services accounts whose resources are excluded from the lifecycle action.
+     */
+    regions?: StringList;
+    /**
+     * Specifies configuration details for Image Builder to exclude the most recent resources from lifecycle actions.
+     */
+    sharedAccounts?: AccountList;
+    /**
+     * Configures Amazon Web Services Regions that are excluded from the lifecycle action.
+     */
+    lastLaunched?: LifecyclePolicyDetailExclusionRulesAmisLastLaunched;
+    /**
+     * Lists tags that should be excluded from lifecycle actions for the AMIs that have them.
+     */
+    tagMap?: TagMap;
+  }
+  export interface LifecyclePolicyDetailExclusionRulesAmisLastLaunched {
+    /**
+     * The integer number of units for the time period. For example 6 (months).
+     */
+    value: LifecyclePolicyDetailExclusionRulesAmisLastLaunchedValue;
+    /**
+     * Defines the unit of time that the lifecycle policy uses to calculate elapsed time since the last instance launched from the AMI. For example: days, weeks, months, or years.
+     */
+    unit: LifecyclePolicyTimeUnit;
+  }
+  export type LifecyclePolicyDetailExclusionRulesAmisLastLaunchedValue = number;
+  export interface LifecyclePolicyDetailFilter {
+    /**
+     * Filter resources based on either age or count.
+     */
+    type: LifecyclePolicyDetailFilterType;
+    /**
+     * The number of units for the time period or for the count. For example, a value of 6 might refer to six months or six AMIs.  For count-based filters, this value represents the minimum number of resources to keep on hand. If you have fewer resources than this number, the resource is excluded from lifecycle actions. 
+     */
+    value: LifecyclePolicyDetailFilterValue;
+    /**
+     * Defines the unit of time that the lifecycle policy uses to determine impacted resources. This is required for age-based rules.
+     */
+    unit?: LifecyclePolicyTimeUnit;
+    /**
+     * For age-based filters, this is the number of resources to keep on hand after the lifecycle DELETE action is applied. Impacted resources are only deleted if you have more than this number of resources. If you have fewer resources than this number, the impacted resource is not deleted.
+     */
+    retainAtLeast?: LifecyclePolicyDetailFilterRetainAtLeast;
+  }
+  export type LifecyclePolicyDetailFilterRetainAtLeast = number;
+  export type LifecyclePolicyDetailFilterType = "AGE"|"COUNT"|string;
+  export type LifecyclePolicyDetailFilterValue = number;
+  export type LifecyclePolicyDetails = LifecyclePolicyDetail[];
+  export interface LifecyclePolicyResourceSelection {
+    /**
+     * A list of recipes that are used as selection criteria for the output images that the lifecycle policy applies to.
+     */
+    recipes?: LifecyclePolicyResourceSelectionRecipes;
+    /**
+     * A list of tags that are used as selection criteria for the resources that the lifecycle policy applies to.
+     */
+    tagMap?: TagMap;
+  }
+  export interface LifecyclePolicyResourceSelectionRecipe {
+    /**
+     * The name of an Image Builder recipe that the lifecycle policy uses for resource selection.
+     */
+    name: ResourceName;
+    /**
+     * The version of the Image Builder recipe specified by the name field.
+     */
+    semanticVersion: VersionNumber;
+  }
+  export type LifecyclePolicyResourceSelectionRecipes = LifecyclePolicyResourceSelectionRecipe[];
+  export type LifecyclePolicyResourceType = "AMI_IMAGE"|"CONTAINER_IMAGE"|string;
+  export type LifecyclePolicyStatus = "DISABLED"|"ENABLED"|string;
+  export interface LifecyclePolicySummary {
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle policy summary resource.
+     */
+    arn?: LifecyclePolicyArn;
+    /**
+     * The name of the lifecycle policy.
+     */
+    name?: ResourceName;
+    /**
+     * Optional description for the lifecycle policy.
+     */
+    description?: NonEmptyString;
+    /**
+     * The lifecycle policy resource status.
+     */
+    status?: LifecyclePolicyStatus;
+    /**
+     * The name of the IAM role that Image Builder uses to run the lifecycle policy.
+     */
+    executionRole?: RoleNameOrArn;
+    /**
+     * The type of resources the lifecycle policy targets.
+     */
+    resourceType?: LifecyclePolicyResourceType;
+    /**
+     * The timestamp when Image Builder created the lifecycle policy resource.
+     */
+    dateCreated?: DateTimeTimestamp;
+    /**
+     * The timestamp when Image Builder updated the lifecycle policy resource.
+     */
+    dateUpdated?: DateTimeTimestamp;
+    /**
+     * The timestamp for the last time Image Builder ran the lifecycle policy.
+     */
+    dateLastRun?: DateTimeTimestamp;
+    /**
+     * To help manage your lifecycle policy resources, you can assign your own metadata to each resource in the form of tags. Each tag consists of a key and an optional value, both of which you define.
+     */
+    tags?: TagMap;
+  }
+  export type LifecyclePolicySummaryList = LifecyclePolicySummary[];
+  export type LifecyclePolicyTimeUnit = "DAYS"|"WEEKS"|"MONTHS"|"YEARS"|string;
   export interface ListComponentBuildVersionsRequest {
     /**
      * The component version Amazon Resource Name (ARN) whose versions you want to list.
@@ -2883,7 +3410,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -2897,7 +3424,7 @@ declare namespace Imagebuilder {
      */
     componentSummaryList?: ComponentSummaryList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -2919,7 +3446,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -2933,7 +3460,7 @@ declare namespace Imagebuilder {
      */
     componentVersionList?: ComponentVersionList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -2951,7 +3478,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: NonEmptyString;
   }
@@ -2965,7 +3492,7 @@ declare namespace Imagebuilder {
      */
     containerRecipeSummaryList?: ContainerRecipeSummaryList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: NonEmptyString;
   }
@@ -2979,7 +3506,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -2993,7 +3520,7 @@ declare namespace Imagebuilder {
      */
     distributionConfigurationSummaryList?: DistributionConfigurationSummaryList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3011,7 +3538,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -3025,7 +3552,7 @@ declare namespace Imagebuilder {
      */
     imageSummaryList?: ImageSummaryList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3039,7 +3566,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -3053,7 +3580,7 @@ declare namespace Imagebuilder {
      */
     imagePackageList?: ImagePackageList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3071,7 +3598,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -3085,7 +3612,7 @@ declare namespace Imagebuilder {
      */
     imageSummaryList?: ImageSummaryList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3099,7 +3626,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -3113,7 +3640,7 @@ declare namespace Imagebuilder {
      */
     imagePipelineList?: ImagePipelineList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3131,7 +3658,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -3145,14 +3672,14 @@ declare namespace Imagebuilder {
      */
     imageRecipeSummaryList?: ImageRecipeSummaryList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
   export interface ListImageScanFindingAggregationsRequest {
     filter?: Filter;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -3170,7 +3697,7 @@ declare namespace Imagebuilder {
      */
     responses?: ImageScanFindingAggregationsList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3184,7 +3711,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -3198,7 +3725,7 @@ declare namespace Imagebuilder {
      */
     findings?: ImageScanFindingsList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3220,7 +3747,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
     /**
@@ -3238,7 +3765,7 @@ declare namespace Imagebuilder {
      */
     imageVersionList?: ImageVersionList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3252,7 +3779,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
   }
@@ -3266,7 +3793,91 @@ declare namespace Imagebuilder {
      */
     infrastructureConfigurationSummaryList?: InfrastructureConfigurationSummaryList;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListLifecycleExecutionResourcesRequest {
+    /**
+     * Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.
+     */
+    lifecycleExecutionId: LifecycleExecutionId;
+    /**
+     * You can leave this empty to get a list of Image Builder resources that were identified for lifecycle actions. To get a list of associated resources that are impacted for an individual resource (the parent), specify its Amazon Resource Name (ARN). Associated resources are produced from your image and distributed when you run a build, such as AMIs or container images stored in ECR repositories.
+     */
+    parentResourceId?: NonEmptyString;
+    /**
+     * The maximum items to return in a request.
+     */
+    maxResults?: RestrictedInteger;
+    /**
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListLifecycleExecutionResourcesResponse {
+    /**
+     * Runtime details for the specified runtime instance of the lifecycle policy.
+     */
+    lifecycleExecutionId?: LifecycleExecutionId;
+    /**
+     * The current state of the lifecycle runtime instance.
+     */
+    lifecycleExecutionState?: LifecycleExecutionState;
+    /**
+     * A list of resources that were identified for lifecycle actions.
+     */
+    resources?: LifecycleExecutionResourceList;
+    /**
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListLifecycleExecutionsRequest {
+    /**
+     * The maximum items to return in a request.
+     */
+    maxResults?: RestrictedInteger;
+    /**
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
+     */
+    nextToken?: PaginationToken;
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which to get a list of lifecycle runtime instances.
+     */
+    resourceArn: ImageBuilderArn;
+  }
+  export interface ListLifecycleExecutionsResponse {
+    /**
+     * A list of lifecycle runtime instances for the specified resource.
+     */
+    lifecycleExecutions?: LifecycleExecutionsList;
+    /**
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListLifecyclePoliciesRequest {
+    /**
+     * Streamline results based on one of the following values: Name, Status.
+     */
+    filters?: FilterList;
+    /**
+     * The maximum items to return in a request.
+     */
+    maxResults?: RestrictedInteger;
+    /**
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListLifecyclePoliciesResponse {
+    /**
+     * A list of lifecycle policies in your Amazon Web Services account that meet the criteria specified in the request.
+     */
+    lifecyclePolicySummaryList?: LifecyclePolicySummaryList;
+    /**
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3288,7 +3899,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
     /**
@@ -3314,7 +3925,7 @@ declare namespace Imagebuilder {
      */
     message?: ImageBuildMessage;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3324,7 +3935,7 @@ declare namespace Imagebuilder {
      */
     maxResults?: RestrictedInteger;
     /**
-     * A token to specify where to start paginating. This is the NextToken from a previously truncated response.
+     * A token to specify where to start paginating. This is the nextToken from a previously truncated response.
      */
     nextToken?: PaginationToken;
     /**
@@ -3358,7 +3969,7 @@ declare namespace Imagebuilder {
      */
     message?: ImageBuildMessage;
     /**
-     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service has'ot included in this request. Use this token with the next request to retrieve additional objects.
+     * The next token used for paginated responses. When this field isn't empty, there are additional elements that the service hasn't included in this request. Use this token with the next request to retrieve additional objects.
      */
     nextToken?: PaginationToken;
   }
@@ -3537,8 +4148,33 @@ declare namespace Imagebuilder {
   }
   export type ResourceName = string;
   export type ResourcePolicyDocument = string;
+  export interface ResourceState {
+    /**
+     * Shows the current lifecycle policy action that was applied to an impacted resource.
+     */
+    status?: ResourceStatus;
+  }
+  export interface ResourceStateUpdateExclusionRules {
+    amis?: LifecyclePolicyDetailExclusionRulesAmis;
+  }
+  export interface ResourceStateUpdateIncludeResources {
+    /**
+     * Specifies whether the lifecycle action should apply to distributed AMIs
+     */
+    amis?: Boolean;
+    /**
+     * Specifies whether the lifecycle action should apply to snapshots associated with distributed AMIs.
+     */
+    snapshots?: Boolean;
+    /**
+     * Specifies whether the lifecycle action should apply to distributed containers.
+     */
+    containers?: Boolean;
+  }
+  export type ResourceStatus = "AVAILABLE"|"DELETED"|"DEPRECATED"|"DISABLED"|string;
   export type ResourceTagMap = {[key: string]: TagValue};
   export type RestrictedInteger = number;
+  export type RoleNameOrArn = string;
   export interface S3ExportConfiguration {
     /**
      * The name of the role that grants VM Import/Export permission to export images to your S3 bucket.
@@ -3609,7 +4245,7 @@ declare namespace Imagebuilder {
      */
     imagePipelineArn: ImagePipelineArn;
     /**
-     * The idempotency token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -3619,13 +4255,53 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
-     * The Amazon Resource Name (ARN) of the image that was created by this request.
+     * The Amazon Resource Name (ARN) of the image that the request created.
      */
     imageBuildVersionArn?: ImageBuildVersionArn;
+  }
+  export interface StartResourceStateUpdateRequest {
+    /**
+     * The ARN of the Image Builder resource that is updated. The state update might also impact associated resources.
+     */
+    resourceArn: ImageBuildVersionArn;
+    /**
+     * Indicates the lifecycle action to take for this request.
+     */
+    state: ResourceState;
+    /**
+     * The name or Amazon Resource Name (ARN) of the IAM role that’s used to update image state.
+     */
+    executionRole?: RoleNameOrArn;
+    /**
+     * A list of image resources to update state for.
+     */
+    includeResources?: ResourceStateUpdateIncludeResources;
+    /**
+     * Skip action on the image resource and associated resources if specified exclusion rules are met.
+     */
+    exclusionRules?: ResourceStateUpdateExclusionRules;
+    /**
+     * The timestamp that indicates when resources are updated by a lifecycle action.
+     */
+    updateAt?: DateTimeTimestamp;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
+     */
+    clientToken: ClientToken;
+  }
+  export interface StartResourceStateUpdateResponse {
+    /**
+     * Identifies the lifecycle runtime instance that started the resource state update.
+     */
+    lifecycleExecutionId?: LifecycleExecutionId;
+    /**
+     * The requested ARN of the Image Builder resource for the asynchronous update.
+     */
+    resourceArn?: ImageBuildVersionArn;
   }
   export type StringList = NonEmptyString[];
   export interface SystemsManagerAgent {
@@ -3688,7 +4364,7 @@ declare namespace Imagebuilder {
      */
     distributions: DistributionList;
     /**
-     * The idempotency token of the distribution configuration.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
   }
@@ -3698,7 +4374,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
@@ -3748,7 +4424,7 @@ declare namespace Imagebuilder {
      */
     status?: PipelineStatus;
     /**
-     * The idempotency token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
     /**
@@ -3762,7 +4438,7 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
@@ -3812,7 +4488,7 @@ declare namespace Imagebuilder {
      */
     snsTopicArn?: SnsTopicArn;
     /**
-     * The idempotency token used to make this request idempotent.
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
      */
     clientToken: ClientToken;
     /**
@@ -3830,13 +4506,53 @@ declare namespace Imagebuilder {
      */
     requestId?: NonEmptyString;
     /**
-     * The idempotency token used to make this request idempotent.
+     * The client token that uniquely identifies the request.
      */
     clientToken?: ClientToken;
     /**
      * The Amazon Resource Name (ARN) of the infrastructure configuration that was updated by this request.
      */
     infrastructureConfigurationArn?: InfrastructureConfigurationArn;
+  }
+  export interface UpdateLifecyclePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the lifecycle policy resource.
+     */
+    lifecyclePolicyArn: LifecyclePolicyArn;
+    /**
+     * Optional description for the lifecycle policy.
+     */
+    description?: NonEmptyString;
+    /**
+     * Indicates whether the lifecycle policy resource is enabled.
+     */
+    status?: LifecyclePolicyStatus;
+    /**
+     * The name of the IAM role that Image Builder should use to update the lifecycle policy.
+     */
+    executionRole: RoleNameOrArn;
+    /**
+     * The type of image resource that the lifecycle policy applies to.
+     */
+    resourceType: LifecyclePolicyResourceType;
+    /**
+     * The configuration details for a lifecycle policy resource.
+     */
+    policyDetails: LifecyclePolicyDetails;
+    /**
+     * Selection criteria for resources that the lifecycle policy applies to.
+     */
+    resourceSelection: LifecyclePolicyResourceSelection;
+    /**
+     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see Ensuring idempotency in the Amazon EC2 API Reference.
+     */
+    clientToken: ClientToken;
+  }
+  export interface UpdateLifecyclePolicyResponse {
+    /**
+     * The ARN of the image lifecycle policy resource that was updated.
+     */
+    lifecyclePolicyArn?: LifecyclePolicyArn;
   }
   export type Uri = string;
   export type UserDataOverride = string;

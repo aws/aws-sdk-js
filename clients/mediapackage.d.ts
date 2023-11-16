@@ -514,7 +514,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     IncludeIframeOnlyStream?: __boolean;
     /**
-     * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+     * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level. When set to DRM_TOP_LEVEL_COMPACT, content protection elements are placed the MPD level and referenced at the AdaptationSet level.
      */
     ManifestLayout?: ManifestLayout;
     /**
@@ -1091,7 +1091,7 @@ rounded to the nearest multiple of the source fragment duration.
   export interface ListTagsForResourceResponse {
     Tags?: __mapOf__string;
   }
-  export type ManifestLayout = "FULL"|"COMPACT"|string;
+  export type ManifestLayout = "FULL"|"COMPACT"|"DRM_TOP_LEVEL_COMPACT"|string;
   export type MaxResults = number;
   export interface MssEncryption {
     SpekeKeyProvider: SpekeKeyProvider;

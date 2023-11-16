@@ -287,11 +287,11 @@ declare class Lambda extends Service {
    */
   invoke(callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
-   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.  If you do use the InvokeAsync action, note that it doesn't support the use of X-Ray active tracing. Trace ID is not propagated to the function, even if X-Ray active tracing is turned on. 
+   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.
    */
   invokeAsync(params: Lambda.Types.InvokeAsyncRequest, callback?: (err: AWSError, data: Lambda.Types.InvokeAsyncResponse) => void): Request<Lambda.Types.InvokeAsyncResponse, AWSError>;
   /**
-   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.  If you do use the InvokeAsync action, note that it doesn't support the use of X-Ray active tracing. Trace ID is not propagated to the function, even if X-Ray active tracing is turned on. 
+   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.
    */
   invokeAsync(callback?: (err: AWSError, data: Lambda.Types.InvokeAsyncResponse) => void): Request<Lambda.Types.InvokeAsyncResponse, AWSError>;
   /**
@@ -768,6 +768,7 @@ declare namespace Lambda {
      */
     ConsumerGroupId?: URI;
   }
+  export type ApplicationLogLevel = "TRACE"|"DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export type Architecture = "x86_64"|"arm64"|string;
   export type ArchitecturesList = Architecture[];
   export type Arn = string;
@@ -1069,13 +1070,17 @@ declare namespace Lambda {
      */
     Architectures?: ArchitecturesList;
     /**
-     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see Configuring ephemeral storage (console).
+     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB.
      */
     EphemeralStorage?: EphemeralStorage;
     /**
      * The function's SnapStart setting.
      */
     SnapStart?: SnapStart;
+    /**
+     * The function's Amazon CloudWatch Logs configuration settings.
+     */
+    LoggingConfig?: LoggingConfig;
   }
   export interface CreateFunctionUrlConfigRequest {
     /**
@@ -1597,7 +1602,7 @@ declare namespace Lambda {
      */
     Architectures?: ArchitecturesList;
     /**
-     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see Configuring ephemeral storage (console).
+     * The size of the function’s /tmp directory in MB. The default value is 512, but it can be any whole number between 512 and 10,240 MB.
      */
     EphemeralStorage?: EphemeralStorage;
     /**
@@ -1608,6 +1613,10 @@ declare namespace Lambda {
      * The ARN of the runtime and any errors that occured.
      */
     RuntimeVersionConfig?: RuntimeVersionConfig;
+    /**
+     * The function's Amazon CloudWatch Logs configuration settings.
+     */
+    LoggingConfig?: LoggingConfig;
   }
   export interface FunctionEventInvokeConfig {
     /**
@@ -2565,7 +2574,27 @@ declare namespace Lambda {
     Versions?: FunctionList;
   }
   export type LocalMountPath = string;
+  export type LogFormat = "JSON"|"Text"|string;
+  export type LogGroup = string;
   export type LogType = "None"|"Tail"|string;
+  export interface LoggingConfig {
+    /**
+     * The format in which Lambda sends your function's application and system logs to CloudWatch. Select between plain text and structured JSON.
+     */
+    LogFormat?: LogFormat;
+    /**
+     * Set this property to filter the application logs for your function that Lambda sends to CloudWatch. Lambda only sends application logs at the selected level and lower.
+     */
+    ApplicationLogLevel?: ApplicationLogLevel;
+    /**
+     * Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level and lower.
+     */
+    SystemLogLevel?: SystemLogLevel;
+    /**
+     * The name of the Amazon CloudWatch log group the function sends logs to. By default, Lambda functions send logs to a default log group named /aws/lambda/&lt;function name&gt;. To use a different log group, enter an existing log group or enter a new log group name.
+     */
+    LogGroup?: LogGroup;
+  }
   export type Long = number;
   export type MasterRegion = string;
   export type MaxAge = number;
@@ -2974,6 +3003,7 @@ declare namespace Lambda {
   export type StringList = String[];
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
+  export type SystemLogLevel = "DEBUG"|"INFO"|"WARN"|string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export interface TagResourceRequest {
@@ -3242,13 +3272,17 @@ declare namespace Lambda {
      */
     ImageConfig?: ImageConfig;
     /**
-     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB. For more information, see Configuring ephemeral storage (console).
+     * The size of the function's /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB.
      */
     EphemeralStorage?: EphemeralStorage;
     /**
      * The function's SnapStart setting.
      */
     SnapStart?: SnapStart;
+    /**
+     * The function's Amazon CloudWatch Logs configuration settings.
+     */
+    LoggingConfig?: LoggingConfig;
   }
   export interface UpdateFunctionEventInvokeConfigRequest {
     /**

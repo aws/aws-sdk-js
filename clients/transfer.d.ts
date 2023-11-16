@@ -782,6 +782,10 @@ declare namespace Transfer {
      * Specifies the log groups to which your server logs are sent. To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:  arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*  For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*  If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an update-server call. For example:  update-server --server-id s-1234567890abcdef0 --structured-log-destinations 
      */
     StructuredLogDestinations?: StructuredLogDestinations;
+    /**
+     * Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
+     */
+    S3StorageOptions?: S3StorageOptions;
   }
   export interface CreateServerResponse {
     /**
@@ -1522,6 +1526,10 @@ declare namespace Transfer {
      * Specifies the log groups to which your server logs are sent. To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:  arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*  For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*  If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an update-server call. For example:  update-server --server-id s-1234567890abcdef0 --structured-log-destinations 
      */
     StructuredLogDestinations?: StructuredLogDestinations;
+    /**
+     * Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
+     */
+    S3StorageOptions?: S3StorageOptions;
   }
   export interface DescribedUser {
     /**
@@ -1593,6 +1601,7 @@ declare namespace Transfer {
   }
   export type Description = string;
   export type DirectoryId = string;
+  export type DirectoryListingOptimization = "ENABLED"|"DISABLED"|string;
   export type Domain = "S3"|"EFS"|string;
   export interface EfsFileLocation {
     /**
@@ -1692,9 +1701,13 @@ declare namespace Transfer {
      */
     Entry: MapEntry;
     /**
-     * Represents the map target that is used in a HomeDirectorymapEntry.
+     * Represents the map target that is used in a HomeDirectoryMapEntry.
      */
     Target: MapTarget;
+    /**
+     * Specifies the type of mapping. Set the type to FILE if you want the mapping to point to a file, or DIRECTORY for the directory to point to a directory.  By default, home directory mappings have a Type of DIRECTORY when you create a Transfer Family server. You would need to explicitly set Type to FILE if you want a mapping to have a file target. 
+     */
+    Type?: MapType;
   }
   export type HomeDirectoryMappings = HomeDirectoryMapEntry[];
   export type HomeDirectoryType = "PATH"|"LOGICAL"|string;
@@ -2375,6 +2388,7 @@ declare namespace Transfer {
   }
   export type MapEntry = string;
   export type MapTarget = string;
+  export type MapType = "FILE"|"DIRECTORY"|string;
   export type MaxResults = number;
   export type MdnResponse = "SYNC"|"NONE"|string;
   export type MdnSigningAlg = "SHA256"|"SHA384"|"SHA512"|"SHA1"|"NONE"|"DEFAULT"|string;
@@ -2460,6 +2474,12 @@ declare namespace Transfer {
     Key?: S3Key;
   }
   export type S3Key = string;
+  export interface S3StorageOptions {
+    /**
+     * Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
+     */
+    DirectoryListingOptimization?: DirectoryListingOptimization;
+  }
   export interface S3Tag {
     /**
      * The name assigned to the tag that you create.
@@ -2936,6 +2956,10 @@ declare namespace Transfer {
      * Specifies the log groups to which your server logs are sent. To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:  arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*  For example, arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*  If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an update-server call. For example:  update-server --server-id s-1234567890abcdef0 --structured-log-destinations 
      */
     StructuredLogDestinations?: StructuredLogDestinations;
+    /**
+     * Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. By default, home directory mappings have a TYPE of DIRECTORY. If you enable this option, you would then need to explicitly set the HomeDirectoryMapEntry Type to FILE if you want a mapping to have a file target.
+     */
+    S3StorageOptions?: S3StorageOptions;
   }
   export interface UpdateServerResponse {
     /**

@@ -12,11 +12,11 @@ declare class DLM extends Service {
   constructor(options?: DLM.Types.ClientConfiguration)
   config: Config & DLM.Types.ClientConfiguration;
   /**
-   * Creates a policy to manage the lifecycle of the specified Amazon Web Services resources. You can create up to 100 lifecycle policies.
+   * Creates an Amazon Data Lifecycle Manager lifecycle policy. Amazon Data Lifecycle Manager supports the following policy types:   Custom EBS snapshot policy   Custom EBS-backed AMI policy   Cross-account copy event policy   Default policy for EBS snapshots   Default policy for EBS-backed AMIs   For more information, see  Default policies vs custom policies.  If you create a default policy, you can specify the request parameters either in the request body, or in the PolicyDetails request structure, but not both. 
    */
   createLifecyclePolicy(params: DLM.Types.CreateLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.CreateLifecyclePolicyResponse) => void): Request<DLM.Types.CreateLifecyclePolicyResponse, AWSError>;
   /**
-   * Creates a policy to manage the lifecycle of the specified Amazon Web Services resources. You can create up to 100 lifecycle policies.
+   * Creates an Amazon Data Lifecycle Manager lifecycle policy. Amazon Data Lifecycle Manager supports the following policy types:   Custom EBS snapshot policy   Custom EBS-backed AMI policy   Cross-account copy event policy   Default policy for EBS snapshots   Default policy for EBS-backed AMIs   For more information, see  Default policies vs custom policies.  If you create a default policy, you can specify the request parameters either in the request body, or in the PolicyDetails request structure, but not both. 
    */
   createLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.CreateLifecyclePolicyResponse) => void): Request<DLM.Types.CreateLifecyclePolicyResponse, AWSError>;
   /**
@@ -108,6 +108,7 @@ declare namespace DLM {
   export type CopyTags = boolean;
   export type CopyTagsNullable = boolean;
   export type Count = number;
+  export type CreateInterval = number;
   export interface CreateLifecyclePolicyRequest {
     /**
      * The Amazon Resource Name (ARN) of the IAM role used to run the operations specified by the lifecycle policy.
@@ -118,17 +119,45 @@ declare namespace DLM {
      */
     Description: PolicyDescription;
     /**
-     * The desired activation state of the lifecycle policy after creation.
+     * The activation state of the lifecycle policy after creation.
      */
     State: SettablePolicyStateValues;
     /**
-     * The configuration details of the lifecycle policy.
+     * The configuration details of the lifecycle policy.  If you create a default policy, you can specify the request parameters either in the request body, or in the PolicyDetails request structure, but not both. 
      */
-    PolicyDetails: PolicyDetails;
+    PolicyDetails?: PolicyDetails;
     /**
      * The tags to apply to the lifecycle policy during creation.
      */
     Tags?: TagMap;
+    /**
+     *  [Default policies only] Specify the type of default policy to create.   To create a default policy for EBS snapshots, that creates snapshots of all volumes in the Region that do not have recent backups, specify VOLUME.   To create a default policy for EBS-backed AMIs, that creates EBS-backed AMIs from all instances in the Region that do not have recent backups, specify INSTANCE.  
+     */
+    DefaultPolicy?: DefaultPolicyTypeValues;
+    /**
+     *  [Default policies only] Specifies how often the policy should run and create snapshots or AMIs. The creation frequency can range from 1 to 7 days. If you do not specify a value, the default is 1. Default: 1
+     */
+    CreateInterval?: CreateInterval;
+    /**
+     *  [Default policies only] Specifies how long the policy should retain snapshots or AMIs before deleting them. The retention period can range from 2 to 14 days, but it must be greater than the creation frequency to ensure that the policy retains at least 1 snapshot or AMI at any given time. If you do not specify a value, the default is 7. Default: 7
+     */
+    RetainInterval?: RetainInterval;
+    /**
+     *  [Default policies only] Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. If you do not specify a value, the default is false. Default: false
+     */
+    CopyTags?: CopyTagsNullable;
+    /**
+     *  [Default policies only] Defines the snapshot or AMI retention behavior for the policy if the source volume or instance is deleted, or if the policy enters the error, disabled, or deleted state. By default (ExtendDeletion=false):   If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously created snapshots or AMIs, up to but not including the last one, based on the specified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs, including the last one, specify true.   If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting snapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs, including the last one, if the policy enters one of these states, specify true.   If you enable extended deletion (ExtendDeletion=true), you override both default behaviors simultaneously. If you do not specify a value, the default is false. Default: false
+     */
+    ExtendDeletion?: ExtendDeletion;
+    /**
+     *  [Default policies only] Specifies destination Regions for snapshot or AMI copies. You can specify up to 3 destination Regions. If you do not want to create cross-Region copies, omit this parameter.
+     */
+    CrossRegionCopyTargets?: CrossRegionCopyTargetList;
+    /**
+     *  [Default policies only] Specifies exclusion parameters for volumes or instances for which you do not want to create snapshots or AMIs. The policy will not create snapshots or AMIs for target resources that match any of the specified exclusion parameters.
+     */
+    Exclusions?: Exclusions;
   }
   export interface CreateLifecyclePolicyResponse {
     /**
@@ -138,7 +167,7 @@ declare namespace DLM {
   }
   export interface CreateRule {
     /**
-     *  [Snapshot policies only] Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an Amazon Web Services Region, then you must create snapshots in the same Region as the source resource. If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.
+     *  [Custom snapshot policies only] Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an Amazon Web Services Region, then you must create snapshots in the same Region as the source resource. If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.
      */
     Location?: LocationValues;
     /**
@@ -158,7 +187,7 @@ declare namespace DLM {
      */
     CronExpression?: CronExpression;
     /**
-     *  [Snapshot policies that target instances only] Specifies pre and/or post scripts for a snapshot lifecycle policy that targets instances. This is useful for creating application-consistent snapshots, or for performing specific administrative tasks before or after Amazon Data Lifecycle Manager initiates snapshot creation. For more information, see Automating application-consistent snapshots with pre and post scripts.
+     *  [Custom snapshot policies that target instances only] Specifies pre and/or post scripts for a snapshot lifecycle policy that targets instances. This is useful for creating application-consistent snapshots, or for performing specific administrative tasks before or after Amazon Data Lifecycle Manager initiates snapshot creation. For more information, see Automating application-consistent snapshots with pre and post scripts.
      */
     Scripts?: ScriptsList;
   }
@@ -197,11 +226,11 @@ declare namespace DLM {
   }
   export interface CrossRegionCopyRule {
     /**
-     *  Use this parameter for AMI policies only. For snapshot policies, use Target instead. For snapshot policies created before the Target parameter was introduced, this parameter indicates the target Region for snapshot copies.    [AMI policies only] The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+     *  Use this parameter for AMI policies only. For snapshot policies, use Target instead. For snapshot policies created before the Target parameter was introduced, this parameter indicates the target Region for snapshot copies.    [Custom AMI policies only] The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
      */
     TargetRegion?: TargetRegion;
     /**
-     *  Use this parameter for snapshot policies only. For AMI policies, use TargetRegion instead.   [Snapshot policies only] The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
+     *  Use this parameter for snapshot policies only. For AMI policies, use TargetRegion instead.   [Custom snapshot policies only] The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies.
      */
     Target?: Target;
     /**
@@ -221,11 +250,21 @@ declare namespace DLM {
      */
     RetainRule?: CrossRegionCopyRetainRule;
     /**
-     *  [AMI policies only] The AMI deprecation rule for cross-Region AMI copies created by the rule.
+     *  [Custom AMI policies only] The AMI deprecation rule for cross-Region AMI copies created by the rule.
      */
     DeprecateRule?: CrossRegionCopyDeprecateRule;
   }
   export type CrossRegionCopyRules = CrossRegionCopyRule[];
+  export interface CrossRegionCopyTarget {
+    /**
+     * The target Region, for example us-east-1.
+     */
+    TargetRegion?: TargetRegion;
+  }
+  export type CrossRegionCopyTargetList = CrossRegionCopyTarget[];
+  export type DefaultPoliciesTypeValues = "VOLUME"|"INSTANCE"|"ALL"|string;
+  export type DefaultPolicy = boolean;
+  export type DefaultPolicyTypeValues = "VOLUME"|"INSTANCE"|string;
   export interface DeleteLifecyclePolicyRequest {
     /**
      * The identifier of the lifecycle policy.
@@ -287,11 +326,29 @@ declare namespace DLM {
   export type EventSourceValues = "MANAGED_CWE"|string;
   export type EventTypeValues = "shareSnapshot"|string;
   export type ExcludeBootVolume = boolean;
+  export type ExcludeBootVolumes = boolean;
   export type ExcludeDataVolumeTagList = Tag[];
+  export type ExcludeTagsList = Tag[];
+  export type ExcludeVolumeTypesList = VolumeTypeValues[];
+  export interface Exclusions {
+    /**
+     *  [Default policies for EBS snapshots only] Indicates whether to exclude volumes that are attached to instances as the boot volume. If you exclude boot volumes, only volumes attached as data (non-boot) volumes will be backed up by the policy. To exclude boot volumes, specify true.
+     */
+    ExcludeBootVolumes?: ExcludeBootVolumes;
+    /**
+     *  [Default policies for EBS snapshots only] Specifies the volume types to exclude. Volumes of the specified types will not be targeted by the policy.
+     */
+    ExcludeVolumeTypes?: ExcludeVolumeTypesList;
+    /**
+     *  [Default policies for EBS-backed AMIs only] Specifies whether to exclude volumes that have specific tags. 
+     */
+    ExcludeTags?: ExcludeTagsList;
+  }
   export type ExecuteOperationOnScriptFailure = boolean;
   export type ExecutionHandler = string;
   export type ExecutionHandlerServiceValues = "AWS_SYSTEMS_MANAGER"|string;
   export type ExecutionRoleArn = string;
+  export type ExtendDeletion = boolean;
   export interface FastRestoreRule {
     /**
      * The number of snapshots to be enabled with fast snapshot restore.
@@ -331,6 +388,10 @@ declare namespace DLM {
      * The tags to add to objects created by the policy. Tags are strings in the format key=value. These user-defined tags are added in addition to the Amazon Web Services-added lifecycle tags.
      */
     TagsToAdd?: TagsToAddFilterList;
+    /**
+     *  [Default policies only] Specifies the type of default policy to get. Specify one of the following:    VOLUME - To get only the default policy for EBS snapshots    INSTANCE - To get only the default policy for EBS-backed AMIs    ALL - To get all default policies  
+     */
+    DefaultPolicyType?: DefaultPoliciesTypeValues;
   }
   export interface GetLifecyclePoliciesResponse {
     /**
@@ -394,6 +455,10 @@ declare namespace DLM {
      * The Amazon Resource Name (ARN) of the policy.
      */
     PolicyArn?: PolicyArn;
+    /**
+     *  [Default policies only] The type of default policy. Values include:    VOLUME - Default policy for EBS snapshots    INSTANCE - Default policy for EBS-backed AMIs  
+     */
+    DefaultPolicy?: DefaultPolicy;
   }
   export interface LifecyclePolicySummary {
     /**
@@ -416,6 +481,10 @@ declare namespace DLM {
      * The type of policy. EBS_SNAPSHOT_MANAGEMENT indicates that the policy manages the lifecycle of Amazon EBS snapshots. IMAGE_MANAGEMENT indicates that the policy manages the lifecycle of EBS-backed AMIs. EVENT_BASED_POLICY indicates that the policy automates cross-account snapshot copies for snapshots that are shared with your account.
      */
     PolicyType?: PolicyTypeValues;
+    /**
+     *  [Default policies only] The type of default policy. Values include:    VOLUME - Default policy for EBS snapshots    INSTANCE - Default policy for EBS-backed AMIs  
+     */
+    DefaultPolicy?: DefaultPolicy;
   }
   export type LifecyclePolicySummaryList = LifecyclePolicySummary[];
   export interface ListTagsForResourceRequest {
@@ -434,15 +503,15 @@ declare namespace DLM {
   export type NoReboot = boolean;
   export interface Parameters {
     /**
-     *  [Snapshot policies that target instances only] Indicates whether to exclude the root volume from multi-volume snapshot sets. The default is false. If you specify true, then the root volumes attached to targeted instances will be excluded from the multi-volume snapshot sets created by the policy.
+     *  [Custom snapshot policies that target instances only] Indicates whether to exclude the root volume from multi-volume snapshot sets. The default is false. If you specify true, then the root volumes attached to targeted instances will be excluded from the multi-volume snapshot sets created by the policy.
      */
     ExcludeBootVolume?: ExcludeBootVolume;
     /**
-     *  [AMI policies only] Indicates whether targeted instances are rebooted when the lifecycle policy runs. true indicates that targeted instances are not rebooted when the policy runs. false indicates that target instances are rebooted when the policy runs. The default is true (instances are not rebooted).
+     *  [Custom AMI policies only] Indicates whether targeted instances are rebooted when the lifecycle policy runs. true indicates that targeted instances are not rebooted when the policy runs. false indicates that target instances are rebooted when the policy runs. The default is true (instances are not rebooted).
      */
     NoReboot?: NoReboot;
     /**
-     *  [Snapshot policies that target instances only] The tags used to identify data (non-root) volumes to exclude from multi-volume snapshot sets. If you create a snapshot lifecycle policy that targets instances and you specify tags for this parameter, then data volumes with the specified tags that are attached to targeted instances will be excluded from the multi-volume snapshot sets created by the policy.
+     *  [Custom snapshot policies that target instances only] The tags used to identify data (non-root) volumes to exclude from multi-volume snapshot sets. If you create a snapshot lifecycle policy that targets instances and you specify tags for this parameter, then data volumes with the specified tags that are attached to targeted instances will be excluded from the multi-volume snapshot sets created by the policy.
      */
     ExcludeDataVolumeTags?: ExcludeDataVolumeTagList;
   }
@@ -450,27 +519,27 @@ declare namespace DLM {
   export type PolicyDescription = string;
   export interface PolicyDetails {
     /**
-     *  [All policy types] The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY  to create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account. The default is EBS_SNAPSHOT_MANAGEMENT.
+     *  [Custom policies only] The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY  to create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account. The default is EBS_SNAPSHOT_MANAGEMENT.
      */
     PolicyType?: PolicyTypeValues;
     /**
-     *  [Snapshot policies only] The target resource type for snapshot and AMI lifecycle policies. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
+     *  [Custom snapshot policies only] The target resource type for snapshot and AMI lifecycle policies. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
      */
     ResourceTypes?: ResourceTypeValuesList;
     /**
-     *  [Snapshot and AMI policies only] The location of the resources to backup. If the source resources are located in an Amazon Web Services Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.
+     *  [Custom snapshot and AMI policies only] The location of the resources to backup. If the source resources are located in an Amazon Web Services Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.
      */
     ResourceLocations?: ResourceLocationList;
     /**
-     *  [Snapshot and AMI policies only] The single tag that identifies targeted resources for this policy.
+     *  [Custom snapshot and AMI policies only] The single tag that identifies targeted resources for this policy.
      */
     TargetTags?: TargetTagList;
     /**
-     *  [Snapshot and AMI policies only] The schedules of policy-defined actions for snapshot and AMI lifecycle policies. A policy can have up to four schedules—one mandatory schedule and up to three optional schedules.
+     *  [Custom snapshot and AMI policies only] The schedules of policy-defined actions for snapshot and AMI lifecycle policies. A policy can have up to four schedules—one mandatory schedule and up to three optional schedules.
      */
     Schedules?: ScheduleList;
     /**
-     *  [Snapshot and AMI policies only] A set of optional parameters for snapshot and AMI lifecycle policies.   If you are modifying a policy that was created or previously modified using the Amazon Data Lifecycle Manager console, then you must include this parameter and specify either the default values or the new values that you require. You can't omit this parameter or set its values to null. 
+     *  [Custom snapshot and AMI policies only] A set of optional parameters for snapshot and AMI lifecycle policies.   If you are modifying a policy that was created or previously modified using the Amazon Data Lifecycle Manager console, then you must include this parameter and specify either the default values or the new values that you require. You can't omit this parameter or set its values to null. 
      */
     Parameters?: Parameters;
     /**
@@ -481,14 +550,48 @@ declare namespace DLM {
      *  [Event-based policies only] The actions to be performed when the event-based policy is activated. You can specify only one action per policy.
      */
     Actions?: ActionList;
+    /**
+     * The type of policy to create. Specify one of the following:    SIMPLIFIED To create a default policy.    STANDARD To create a custom policy.  
+     */
+    PolicyLanguage?: PolicyLanguageValues;
+    /**
+     *  [Default policies only] Specify the type of default policy to create.   To create a default policy for EBS snapshots, that creates snapshots of all volumes in the Region that do not have recent backups, specify VOLUME.   To create a default policy for EBS-backed AMIs, that creates EBS-backed AMIs from all instances in the Region that do not have recent backups, specify INSTANCE.  
+     */
+    ResourceType?: ResourceTypeValues;
+    /**
+     *  [Default policies only] Specifies how often the policy should run and create snapshots or AMIs. The creation frequency can range from 1 to 7 days. If you do not specify a value, the default is 1. Default: 1
+     */
+    CreateInterval?: CreateInterval;
+    /**
+     *  [Default policies only] Specifies how long the policy should retain snapshots or AMIs before deleting them. The retention period can range from 2 to 14 days, but it must be greater than the creation frequency to ensure that the policy retains at least 1 snapshot or AMI at any given time. If you do not specify a value, the default is 7. Default: 7
+     */
+    RetainInterval?: RetainInterval;
+    /**
+     *  [Default policies only] Indicates whether the policy should copy tags from the source resource to the snapshot or AMI. If you do not specify a value, the default is false. Default: false
+     */
+    CopyTags?: CopyTagsNullable;
+    /**
+     *  [Default policies only] Specifies destination Regions for snapshot or AMI copies. You can specify up to 3 destination Regions. If you do not want to create cross-Region copies, omit this parameter.
+     */
+    CrossRegionCopyTargets?: CrossRegionCopyTargetList;
+    /**
+     *  [Default policies only] Defines the snapshot or AMI retention behavior for the policy if the source volume or instance is deleted, or if the policy enters the error, disabled, or deleted state. By default (ExtendDeletion=false):   If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously created snapshots or AMIs, up to but not including the last one, based on the specified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs, including the last one, specify true.   If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting snapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs, including the last one, if the policy enters one of these states, specify true.   If you enable extended deletion (ExtendDeletion=true), you override both default behaviors simultaneously. If you do not specify a value, the default is false. Default: false
+     */
+    ExtendDeletion?: ExtendDeletion;
+    /**
+     *  [Default policies only] Specifies exclusion parameters for volumes or instances for which you do not want to create snapshots or AMIs. The policy will not create snapshots or AMIs for target resources that match any of the specified exclusion parameters.
+     */
+    Exclusions?: Exclusions;
   }
   export type PolicyId = string;
   export type PolicyIdList = PolicyId[];
+  export type PolicyLanguageValues = "SIMPLIFIED"|"STANDARD"|string;
   export type PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"|"IMAGE_MANAGEMENT"|"EVENT_BASED_POLICY"|string;
   export type ResourceLocationList = ResourceLocationValues[];
   export type ResourceLocationValues = "CLOUD"|"OUTPOST"|string;
   export type ResourceTypeValues = "VOLUME"|"INSTANCE"|string;
   export type ResourceTypeValuesList = ResourceTypeValues[];
+  export type RetainInterval = number;
   export interface RetainRule {
     /**
      * The number of snapshots to retain for each volume, up to a maximum of 1000. For example if you want to retain a maximum of three snapshots, specify 3. When the fourth snapshot is created, the oldest retained snapshot is deleted, or it is moved to the archive tier if you have specified an ArchiveRule.
@@ -544,7 +647,7 @@ declare namespace DLM {
      */
     RetainRule?: RetainRule;
     /**
-     *  [Snapshot policies only] The rule for enabling fast snapshot restore.
+     *  [Custom snapshot policies only] The rule for enabling fast snapshot restore.
      */
     FastRestoreRule?: FastRestoreRule;
     /**
@@ -552,15 +655,15 @@ declare namespace DLM {
      */
     CrossRegionCopyRules?: CrossRegionCopyRules;
     /**
-     *  [Snapshot policies only] The rule for sharing snapshots with other Amazon Web Services accounts.
+     *  [Custom snapshot policies only] The rule for sharing snapshots with other Amazon Web Services accounts.
      */
     ShareRules?: ShareRules;
     /**
-     *  [AMI policies only] The AMI deprecation rule for the schedule.
+     *  [Custom AMI policies only] The AMI deprecation rule for the schedule.
      */
     DeprecateRule?: DeprecateRule;
     /**
-     *  [Snapshot policies that target volumes only] The snapshot archiving rule for the schedule. When you specify an archiving rule, snapshots are automatically moved from the standard tier to the archive tier once the schedule's retention threshold is met. Snapshots are then retained in the archive tier for the archive retention period that you specify.  For more information about using snapshot archiving, see Considerations for snapshot lifecycle policies.
+     *  [Custom snapshot policies that target volumes only] The snapshot archiving rule for the schedule. When you specify an archiving rule, snapshots are automatically moved from the standard tier to the archive tier once the schedule's retention threshold is met. Snapshots are then retained in the archive tier for the archive retention period that you specify.  For more information about using snapshot archiving, see Considerations for snapshot lifecycle policies.
      */
     ArchiveRule?: ArchiveRule;
   }
@@ -688,10 +791,35 @@ declare namespace DLM {
      * The configuration of the lifecycle policy. You cannot update the policy type or the resource type.
      */
     PolicyDetails?: PolicyDetails;
+    /**
+     *  [Default policies only] Specifies how often the policy should run and create snapshots or AMIs. The creation frequency can range from 1 to 7 days.
+     */
+    CreateInterval?: CreateInterval;
+    /**
+     *  [Default policies only] Specifies how long the policy should retain snapshots or AMIs before deleting them. The retention period can range from 2 to 14 days, but it must be greater than the creation frequency to ensure that the policy retains at least 1 snapshot or AMI at any given time.
+     */
+    RetainInterval?: RetainInterval;
+    /**
+     *  [Default policies only] Indicates whether the policy should copy tags from the source resource to the snapshot or AMI.
+     */
+    CopyTags?: CopyTagsNullable;
+    /**
+     *  [Default policies only] Defines the snapshot or AMI retention behavior for the policy if the source volume or instance is deleted, or if the policy enters the error, disabled, or deleted state. By default (ExtendDeletion=false):   If a source resource is deleted, Amazon Data Lifecycle Manager will continue to delete previously created snapshots or AMIs, up to but not including the last one, based on the specified retention period. If you want Amazon Data Lifecycle Manager to delete all snapshots or AMIs, including the last one, specify true.   If a policy enters the error, disabled, or deleted state, Amazon Data Lifecycle Manager stops deleting snapshots and AMIs. If you want Amazon Data Lifecycle Manager to continue deleting snapshots or AMIs, including the last one, if the policy enters one of these states, specify true.   If you enable extended deletion (ExtendDeletion=true), you override both default behaviors simultaneously. Default: false
+     */
+    ExtendDeletion?: ExtendDeletion;
+    /**
+     *  [Default policies only] Specifies destination Regions for snapshot or AMI copies. You can specify up to 3 destination Regions. If you do not want to create cross-Region copies, omit this parameter.
+     */
+    CrossRegionCopyTargets?: CrossRegionCopyTargetList;
+    /**
+     *  [Default policies only] Specifies exclusion parameters for volumes or instances for which you do not want to create snapshots or AMIs. The policy will not create snapshots or AMIs for target resources that match any of the specified exclusion parameters.
+     */
+    Exclusions?: Exclusions;
   }
   export interface UpdateLifecyclePolicyResponse {
   }
   export type VariableTagsList = Tag[];
+  export type VolumeTypeValues = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
