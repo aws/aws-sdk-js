@@ -1560,18 +1560,6 @@
     "hostname": "logs-fips.us-west-2.amazonaws.com"
   },
   {
-    "endpointPrefix": "macie",
-    "clientName": "Macie",
-    "region": "fips-us-east-1",
-    "hostname": "macie-fips.us-east-1.amazonaws.com"
-  },
-  {
-    "endpointPrefix": "macie",
-    "clientName": "Macie",
-    "region": "fips-us-west-2",
-    "hostname": "macie-fips.us-west-2.amazonaws.com"
-  },
-  {
     "endpointPrefix": "macie2",
     "clientName": "Macie2",
     "region": "fips-us-east-1",

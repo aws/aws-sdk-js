@@ -4288,14 +4288,6 @@
     "hostname": "machinelearning-fips.eu-west-1.api.aws"
   },
   {
-    "endpointPrefix": "macie",
-    "clientName": "Macie",
-    "region": "us-east-1",
-    "useFipsEndpoint": true,
-    "useDualstackEndpoint": false,
-    "hostname": "macie-fips.us-east-1.amazonaws.com"
-  },
-  {
     "endpointPrefix": "macie2",
     "clientName": "Macie2",
     "region": "af-south-1",

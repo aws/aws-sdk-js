@@ -144,7 +144,6 @@ export abstract class ConfigurationServicePlaceholders {
   neptune?: AWS.Neptune.Types.ClientConfiguration;
   mediatailor?: AWS.MediaTailor.Types.ClientConfiguration;
   eks?: AWS.EKS.Types.ClientConfiguration;
-  macie?: AWS.Macie.Types.ClientConfiguration;
   dlm?: AWS.DLM.Types.ClientConfiguration;
   signer?: AWS.Signer.Types.ClientConfiguration;
   chime?: AWS.Chime.Types.ClientConfiguration;
@@ -504,7 +503,6 @@ export interface ConfigurationServiceApiVersions {
   neptune?: AWS.Neptune.Types.apiVersion;
   mediatailor?: AWS.MediaTailor.Types.apiVersion;
   eks?: AWS.EKS.Types.apiVersion;
-  macie?: AWS.Macie.Types.apiVersion;
   dlm?: AWS.DLM.Types.apiVersion;
   signer?: AWS.Signer.Types.apiVersion;
   chime?: AWS.Chime.Types.apiVersion;
