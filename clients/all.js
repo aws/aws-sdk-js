@@ -144,7 +144,6 @@ module.exports = {
   Neptune: require('./neptune'),
   MediaTailor: require('./mediatailor'),
   EKS: require('./eks'),
-  Macie: require('./macie'),
   DLM: require('./dlm'),
   Signer: require('./signer'),
   Chime: require('./chime'),

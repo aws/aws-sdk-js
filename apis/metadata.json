@@ -607,9 +607,6 @@
   "eks": {
     "name": "EKS"
   },
-  "macie": {
-    "name": "Macie"
-  },
   "dlm": {
     "name": "DLM"
   },
