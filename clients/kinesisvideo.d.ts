@@ -76,11 +76,11 @@ declare class KinesisVideo extends Service {
    */
   describeMappedResourceConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMappedResourceConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMappedResourceConfigurationOutput, AWSError>;
   /**
-   *  This API is related to WebRTC Ingestion and is only available in the us-west-2 region.  Returns the most current information about the channel. Specify the ChannelName or ChannelARN in the input.
+   * Returns the most current information about the channel. Specify the ChannelName or ChannelARN in the input.
    */
   describeMediaStorageConfiguration(params: KinesisVideo.Types.DescribeMediaStorageConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMediaStorageConfigurationOutput, AWSError>;
   /**
-   *  This API is related to WebRTC Ingestion and is only available in the us-west-2 region.  Returns the most current information about the channel. Specify the ChannelName or ChannelARN in the input.
+   * Returns the most current information about the channel. Specify the ChannelName or ChannelARN in the input.
    */
   describeMediaStorageConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.DescribeMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.DescribeMediaStorageConfigurationOutput, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class KinesisVideo extends Service {
    */
   untagStream(callback?: (err: AWSError, data: KinesisVideo.Types.UntagStreamOutput) => void): Request<KinesisVideo.Types.UntagStreamOutput, AWSError>;
   /**
-   *  Increases or decreases the stream's data retention period by the value that you specify. To indicate whether you want to increase or decrease the data retention period, specify the Operation parameter in the request body. In the request, you must specify either the StreamName or the StreamARN.   The retention period that you specify replaces the current value.  This operation requires permission for the KinesisVideo:UpdateDataRetention action. Changing the data retention period affects the data in the stream as follows:   If the data retention period is increased, existing data is retained for the new retention period. For example, if the data retention period is increased from one hour to seven hours, all existing data is retained for seven hours.   If the data retention period is decreased, existing data is retained for the new retention period. For example, if the data retention period is decreased from seven hours to one hour, all existing data is retained for one hour, and any data older than one hour is deleted immediately.  
+   * Increases or decreases the stream's data retention period by the value that you specify. To indicate whether you want to increase or decrease the data retention period, specify the Operation parameter in the request body. In the request, you must specify either the StreamName or the StreamARN.  This operation requires permission for the KinesisVideo:UpdateDataRetention action. Changing the data retention period affects the data in the stream as follows:   If the data retention period is increased, existing data is retained for the new retention period. For example, if the data retention period is increased from one hour to seven hours, all existing data is retained for seven hours.   If the data retention period is decreased, existing data is retained for the new retention period. For example, if the data retention period is decreased from seven hours to one hour, all existing data is retained for one hour, and any data older than one hour is deleted immediately.  
    */
   updateDataRetention(params: KinesisVideo.Types.UpdateDataRetentionInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateDataRetentionOutput) => void): Request<KinesisVideo.Types.UpdateDataRetentionOutput, AWSError>;
   /**
-   *  Increases or decreases the stream's data retention period by the value that you specify. To indicate whether you want to increase or decrease the data retention period, specify the Operation parameter in the request body. In the request, you must specify either the StreamName or the StreamARN.   The retention period that you specify replaces the current value.  This operation requires permission for the KinesisVideo:UpdateDataRetention action. Changing the data retention period affects the data in the stream as follows:   If the data retention period is increased, existing data is retained for the new retention period. For example, if the data retention period is increased from one hour to seven hours, all existing data is retained for seven hours.   If the data retention period is decreased, existing data is retained for the new retention period. For example, if the data retention period is decreased from seven hours to one hour, all existing data is retained for one hour, and any data older than one hour is deleted immediately.  
+   * Increases or decreases the stream's data retention period by the value that you specify. To indicate whether you want to increase or decrease the data retention period, specify the Operation parameter in the request body. In the request, you must specify either the StreamName or the StreamARN.  This operation requires permission for the KinesisVideo:UpdateDataRetention action. Changing the data retention period affects the data in the stream as follows:   If the data retention period is increased, existing data is retained for the new retention period. For example, if the data retention period is increased from one hour to seven hours, all existing data is retained for seven hours.   If the data retention period is decreased, existing data is retained for the new retention period. For example, if the data retention period is decreased from seven hours to one hour, all existing data is retained for one hour, and any data older than one hour is deleted immediately.  
    */
   updateDataRetention(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateDataRetentionOutput) => void): Request<KinesisVideo.Types.UpdateDataRetentionOutput, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class KinesisVideo extends Service {
    */
   updateImageGenerationConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateImageGenerationConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateImageGenerationConfigurationOutput, AWSError>;
   /**
-   *  This API is related to WebRTC Ingestion and is only available in the us-west-2 region.  Associates a SignalingChannel to a stream to store the media. There are two signaling modes that can specified :   If the StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.    If the StorageStatus is enabled, the data will be stored in the StreamARN provided.     If StorageStatus is enabled, direct peer-to-peer (master-viewer) connections no longer occur. Peers connect directly to the storage session. You must call the JoinStorageSession API to trigger an SDP offer send and establish a connection between a peer and the storage session.  
+   * Associates a SignalingChannel to a stream to store the media. There are two signaling modes that you can specify :   If StorageStatus is enabled, the data will be stored in the StreamARN provided. In order for WebRTC Ingestion to work, the stream must have data retention enabled.   If StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.     If StorageStatus is enabled, direct peer-to-peer (master-viewer) connections no longer occur. Peers connect directly to the storage session. You must call the JoinStorageSession API to trigger an SDP offer send and establish a connection between a peer and the storage session.  
    */
   updateMediaStorageConfiguration(params: KinesisVideo.Types.UpdateMediaStorageConfigurationInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateMediaStorageConfigurationOutput, AWSError>;
   /**
-   *  This API is related to WebRTC Ingestion and is only available in the us-west-2 region.  Associates a SignalingChannel to a stream to store the media. There are two signaling modes that can specified :   If the StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.    If the StorageStatus is enabled, the data will be stored in the StreamARN provided.     If StorageStatus is enabled, direct peer-to-peer (master-viewer) connections no longer occur. Peers connect directly to the storage session. You must call the JoinStorageSession API to trigger an SDP offer send and establish a connection between a peer and the storage session.  
+   * Associates a SignalingChannel to a stream to store the media. There are two signaling modes that you can specify :   If StorageStatus is enabled, the data will be stored in the StreamARN provided. In order for WebRTC Ingestion to work, the stream must have data retention enabled.   If StorageStatus is disabled, no data will be stored, and the StreamARN parameter will not be needed.     If StorageStatus is enabled, direct peer-to-peer (master-viewer) connections no longer occur. Peers connect directly to the storage session. You must call the JoinStorageSession API to trigger an SDP offer send and establish a connection between a peer and the storage session.  
    */
   updateMediaStorageConfiguration(callback?: (err: AWSError, data: KinesisVideo.Types.UpdateMediaStorageConfigurationOutput) => void): Request<KinesisVideo.Types.UpdateMediaStorageConfigurationOutput, AWSError>;
   /**
@@ -904,7 +904,7 @@ declare namespace KinesisVideo {
   }
   export interface MediaStorageConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the stream 
+     * The Amazon Resource Name (ARN) of the stream. 
      */
     StreamARN?: ResourceARN;
     /**
@@ -1175,7 +1175,7 @@ declare namespace KinesisVideo {
      */
     Operation: UpdateDataRetentionOperation;
     /**
-     * The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).
+     * The number of hours to adjust the current retention by. The value you specify is added to or subtracted from the current value, depending on the operation. The minimum value for data retention is 0 and the maximum value is 87600 (ten years).
      */
     DataRetentionChangeInHours: DataRetentionChangeInHours;
   }

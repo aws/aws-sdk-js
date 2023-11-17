@@ -44,6 +44,22 @@ declare class InternetMonitor extends Service {
    */
   getMonitor(callback?: (err: AWSError, data: InternetMonitor.Types.GetMonitorOutput) => void): Request<InternetMonitor.Types.GetMonitorOutput, AWSError>;
   /**
+   * Return the data for a query with the Amazon CloudWatch Internet Monitor query interface. Specify the query that you want to return results for by providing a QueryId and a monitor name. For more information about using the query interface, including examples, see Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
+   */
+  getQueryResults(params: InternetMonitor.Types.GetQueryResultsInput, callback?: (err: AWSError, data: InternetMonitor.Types.GetQueryResultsOutput) => void): Request<InternetMonitor.Types.GetQueryResultsOutput, AWSError>;
+  /**
+   * Return the data for a query with the Amazon CloudWatch Internet Monitor query interface. Specify the query that you want to return results for by providing a QueryId and a monitor name. For more information about using the query interface, including examples, see Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
+   */
+  getQueryResults(callback?: (err: AWSError, data: InternetMonitor.Types.GetQueryResultsOutput) => void): Request<InternetMonitor.Types.GetQueryResultsOutput, AWSError>;
+  /**
+   * Returns the current status of a query for the Amazon CloudWatch Internet Monitor query interface, for a specified query ID and monitor. When you run a query, check the status to make sure that the query has SUCCEEDED before you review the results.    QUEUED: The query is scheduled to run.    RUNNING: The query is in progress but not complete.    SUCCEEDED: The query completed sucessfully.    FAILED: The query failed due to an error.    CANCELED: The query was canceled.  
+   */
+  getQueryStatus(params: InternetMonitor.Types.GetQueryStatusInput, callback?: (err: AWSError, data: InternetMonitor.Types.GetQueryStatusOutput) => void): Request<InternetMonitor.Types.GetQueryStatusOutput, AWSError>;
+  /**
+   * Returns the current status of a query for the Amazon CloudWatch Internet Monitor query interface, for a specified query ID and monitor. When you run a query, check the status to make sure that the query has SUCCEEDED before you review the results.    QUEUED: The query is scheduled to run.    RUNNING: The query is in progress but not complete.    SUCCEEDED: The query completed sucessfully.    FAILED: The query failed due to an error.    CANCELED: The query was canceled.  
+   */
+  getQueryStatus(callback?: (err: AWSError, data: InternetMonitor.Types.GetQueryStatusOutput) => void): Request<InternetMonitor.Types.GetQueryStatusOutput, AWSError>;
+  /**
    * Lists all health events for a monitor in Amazon CloudWatch Internet Monitor. Returns information for health events including the event start and end time and the status.  Health events that have start times during the time frame that is requested are not included in the list of health events. 
    */
   listHealthEvents(params: InternetMonitor.Types.ListHealthEventsInput, callback?: (err: AWSError, data: InternetMonitor.Types.ListHealthEventsOutput) => void): Request<InternetMonitor.Types.ListHealthEventsOutput, AWSError>;
@@ -67,6 +83,22 @@ declare class InternetMonitor extends Service {
    * Lists the tags for a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor.
    */
   listTagsForResource(callback?: (err: AWSError, data: InternetMonitor.Types.ListTagsForResourceOutput) => void): Request<InternetMonitor.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Start a query to return data for a specific query type for the Amazon CloudWatch Internet Monitor query interface. Specify a time period for the data that you want returned by using StartTime and EndTime. You filter the query results to return by providing parameters that you specify with FilterParameters. For more information about using the query interface, including examples, see Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
+   */
+  startQuery(params: InternetMonitor.Types.StartQueryInput, callback?: (err: AWSError, data: InternetMonitor.Types.StartQueryOutput) => void): Request<InternetMonitor.Types.StartQueryOutput, AWSError>;
+  /**
+   * Start a query to return data for a specific query type for the Amazon CloudWatch Internet Monitor query interface. Specify a time period for the data that you want returned by using StartTime and EndTime. You filter the query results to return by providing parameters that you specify with FilterParameters. For more information about using the query interface, including examples, see Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
+   */
+  startQuery(callback?: (err: AWSError, data: InternetMonitor.Types.StartQueryOutput) => void): Request<InternetMonitor.Types.StartQueryOutput, AWSError>;
+  /**
+   * Stop a query that is progress for a specific monitor.
+   */
+  stopQuery(params: InternetMonitor.Types.StopQueryInput, callback?: (err: AWSError, data: InternetMonitor.Types.StopQueryOutput) => void): Request<InternetMonitor.Types.StopQueryOutput, AWSError>;
+  /**
+   * Stop a query that is progress for a specific monitor.
+   */
+  stopQuery(callback?: (err: AWSError, data: InternetMonitor.Types.StopQueryOutput) => void): Request<InternetMonitor.Types.StopQueryOutput, AWSError>;
   /**
    * Adds a tag to a resource. Tags are supported only for monitors in Amazon CloudWatch Internet Monitor. You can add a maximum of 50 tags in Internet Monitor. A minimum of one tag is required for this call. It returns an error if you use the TagResource request with 0 tags.
    */
@@ -161,13 +193,29 @@ declare namespace InternetMonitor {
   export interface DeleteMonitorOutput {
   }
   export type Double = number;
+  export type FilterList = String[];
+  export interface FilterParameter {
+    /**
+     * A data field that you want to filter, to further scope your application's Internet Monitor data in a repository that you created by running a query. A field might be city, for example. The field must be one of the fields that was returned by the specific query that you used to create the repository.
+     */
+    Field?: String;
+    /**
+     * The operator to use with the filter field and a value, such as not_equals.
+     */
+    Operator?: Operator;
+    /**
+     * One or more values to be used, together with the specified operator, to filter data for a query. For example, you could specify an array of values such as ["Seattle", "Redmond"]. Values in the array are separated by commas.
+     */
+    Values?: FilterList;
+  }
+  export type FilterParameters = FilterParameter[];
   export interface GetHealthEventInput {
     /**
      * The name of the monitor.
      */
     MonitorName: ResourceName;
     /**
-     * The internally generated identifier of a health event. Because EventID contains the forward slash (“/”) character, you must URL-encode the EventID field in the request URL.
+     * The internally-generated identifier of a health event. Because EventID contains the forward slash (“/”) character, you must URL-encode the EventID field in the request URL.
      */
     EventId: HealthEventName;
   }
@@ -177,7 +225,7 @@ declare namespace InternetMonitor {
      */
     EventArn: Arn;
     /**
-     * The internally generated identifier of a health event.
+     * The internally-generated identifier of a health event.
      */
     EventId: HealthEventName;
     /**
@@ -277,13 +325,61 @@ declare namespace InternetMonitor {
      */
     HealthEventsConfig?: HealthEventsConfig;
   }
+  export interface GetQueryResultsInput {
+    /**
+     * The name of the monitor to return data for.
+     */
+    MonitorName: ResourceName;
+    /**
+     * The ID of the query that you want to return data results for. A QueryId is an internally-generated identifier for a specific query.
+     */
+    QueryId: String;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: String;
+    /**
+     * The number of query results that you want to return with this call.
+     */
+    MaxResults?: QueryMaxResults;
+  }
+  export interface GetQueryResultsOutput {
+    /**
+     * The fields that the query returns data for. Fields are name-data type pairs, such as availability_score-float.
+     */
+    Fields: QueryFields;
+    /**
+     * The data results that the query returns. Data is returned in arrays, aligned with the Fields for the query, which creates a repository of Amazon CloudWatch Internet Monitor information for your application. Then, you can filter the information in the repository by using FilterParameters that you define.
+     */
+    Data: QueryData;
+    /**
+     * The token for the next set of results. You receive this token from a previous call.
+     */
+    NextToken?: String;
+  }
+  export interface GetQueryStatusInput {
+    /**
+     * The name of the monitor.
+     */
+    MonitorName: ResourceName;
+    /**
+     * The ID of the query that you want to return the status for. A QueryId is an internally-generated dentifier for a specific query.
+     */
+    QueryId: String;
+  }
+  export interface GetQueryStatusOutput {
+    /**
+     * The current status for a query.
+     */
+    Status: QueryStatus;
+  }
   export interface HealthEvent {
     /**
      * The Amazon Resource Name (ARN) of the event.
      */
     EventArn: Arn;
     /**
-     * The internally generated identifier of a specific network traffic impairment health event.
+     * The internally-generated identifier of a specific network traffic impairment health event.
      */
     EventId: HealthEventName;
     /**
@@ -502,7 +598,7 @@ declare namespace InternetMonitor {
      */
     HealthScoreThreshold?: Percentage;
     /**
-     * The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a threshold is crossed for a local health score.
+     * The minimum percentage of overall traffic for an application that must be impacted by an issue before Internet Monitor creates an event when a threshold is crossed for a local health score. If you don't set a minimum traffic impact threshold, the default value is 0.01%.
      */
     MinTrafficImpact?: Percentage;
   }
@@ -558,6 +654,7 @@ declare namespace InternetMonitor {
     NetworkEventType: TriangulationEventType;
   }
   export type NetworkList = Network[];
+  export type Operator = "EQUALS"|"NOT_EQUALS"|string;
   export type Percentage = number;
   export interface PerformanceMeasurement {
     /**
@@ -577,6 +674,22 @@ declare namespace InternetMonitor {
      */
     RoundTripTime?: RoundTripTime;
   }
+  export type QueryData = QueryRow[];
+  export interface QueryField {
+    /**
+     * The name of a field to query your application's Amazon CloudWatch Internet Monitor data for, such as availability_score.
+     */
+    Name?: String;
+    /**
+     * The data type for a query field, which must correspond to the field you're defining for QueryField. For example, if the query field name is availability_score, the data type is float.
+     */
+    Type?: String;
+  }
+  export type QueryFields = QueryField[];
+  export type QueryMaxResults = number;
+  export type QueryRow = String[];
+  export type QueryStatus = "QUEUED"|"RUNNING"|"SUCCEEDED"|"FAILED"|"CANCELED"|string;
+  export type QueryType = "MEASUREMENTS"|"TOP_LOCATIONS"|"TOP_LOCATION_DETAILS"|string;
   export type ResourceName = string;
   export interface RoundTripTime {
     /**
@@ -608,6 +721,46 @@ declare namespace InternetMonitor {
   }
   export type S3ConfigBucketNameString = string;
   export type SetOfARNs = Arn[];
+  export interface StartQueryInput {
+    /**
+     * The name of the monitor to query.
+     */
+    MonitorName: ResourceName;
+    /**
+     * The timestamp that is the beginning of the period that you want to retrieve data for with your query.
+     */
+    StartTime: SyntheticTimestamp_date_time;
+    /**
+     * The timestamp that is the end of the period that you want to retrieve data for with your query.
+     */
+    EndTime: SyntheticTimestamp_date_time;
+    /**
+     * The type of query to run. The following are the three types of queries that you can run using the Internet Monitor query interface:    MEASUREMENTS: TBD definition    TOP_LOCATIONS: TBD definition    TOP_LOCATION_DETAILS: TBD definition   For lists of the fields returned with each query type and more information about how each type of query is performed, see  Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
+     */
+    QueryType: QueryType;
+    /**
+     * The FilterParameters field that you use with Amazon CloudWatch Internet Monitor queries is a string the defines how you want a query to be filtered. The filter parameters that you can specify depend on the query type, since each query type returns a different set of Internet Monitor data. For more information about specifying filter parameters, see Using the Amazon CloudWatch Internet Monitor query interface in the Amazon CloudWatch Internet Monitor User Guide.
+     */
+    FilterParameters?: FilterParameters;
+  }
+  export interface StartQueryOutput {
+    /**
+     * The internally-generated identifier of a specific query.
+     */
+    QueryId: String;
+  }
+  export interface StopQueryInput {
+    /**
+     * The name of the monitor.
+     */
+    MonitorName: ResourceName;
+    /**
+     * The ID of the query that you want to stop. A QueryId is an internally-generated identifier for a specific query.
+     */
+    QueryId: String;
+  }
+  export interface StopQueryOutput {
+  }
   export type String = string;
   export type SyntheticTimestamp_date_time = Date;
   export type TagKey = string;

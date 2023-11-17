@@ -5759,7 +5759,7 @@ declare namespace Connect {
     SourceType?: SourceType;
   }
   export type IntegrationAssociationSummaryList = IntegrationAssociationSummary[];
-  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"CASES_DOMAIN"|"APPLICATION"|"FILE_SCANNER"|string;
+  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|"WISDOM_QUICK_RESPONSES"|"CASES_DOMAIN"|"APPLICATION"|"FILE_SCANNER"|string;
   export interface IntervalDetails {
     /**
      * The timezone applied to requested metrics.
@@ -6101,7 +6101,7 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
-  export type ListFlowAssociationResourceType = "SMS_PHONE_NUMBER"|"VOICE_PHONE_NUMBER"|string;
+  export type ListFlowAssociationResourceType = "VOICE_PHONE_NUMBER"|string;
   export interface ListHoursOfOperationsRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instance ID in the Amazon Resource Name (ARN) of the instance.

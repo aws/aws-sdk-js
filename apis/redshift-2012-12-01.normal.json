@@ -441,6 +441,9 @@
         },
         {
           "shape": "UnsupportedOperationFault"
+        },
+        {
+          "shape": "RedshiftIdcApplicationNotExistsFault"
         }
       ],
       "documentation": "<p>Creates a new cluster with the specified parameters.</p> <p>To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
@@ -762,6 +765,38 @@
         }
       ],
       "documentation": "<p>Creates an HSM configuration that contains the information required by an Amazon Redshift cluster to store and use database encryption keys in a Hardware Security Module (HSM). After creating the HSM configuration, you can specify it as a parameter when creating a cluster. The cluster will then store its encryption keys in the HSM.</p> <p>In addition to creating an HSM configuration, you must also create an HSM client certificate. For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html\">Hardware Security Modules</a> in the Amazon Redshift Cluster Management Guide.</p>"
+    },
+    "CreateRedshiftIdcApplication": {
+      "name": "CreateRedshiftIdcApplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateRedshiftIdcApplicationMessage"
+      },
+      "output": {
+        "shape": "CreateRedshiftIdcApplicationResult",
+        "resultWrapper": "CreateRedshiftIdcApplicationResult"
+      },
+      "errors": [
+        {
+          "shape": "RedshiftIdcApplicationAlreadyExistsFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        },
+        {
+          "shape": "DependentServiceAccessDeniedFault"
+        },
+        {
+          "shape": "RedshiftIdcApplicationQuotaExceededFault"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon Redshift application for use with IAM Identity Center.</p>"
     },
     "CreateScheduledAction": {
       "name": "CreateScheduledAction",
@@ -1237,6 +1272,31 @@
         }
       ],
       "documentation": "<p>Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.</p>"
+    },
+    "DeleteRedshiftIdcApplication": {
+      "name": "DeleteRedshiftIdcApplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteRedshiftIdcApplicationMessage"
+      },
+      "errors": [
+        {
+          "shape": "RedshiftIdcApplicationNotExistsFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        },
+        {
+          "shape": "DependentServiceAccessDeniedFault"
+        }
+      ],
+      "documentation": "<p>Deletes an Amazon Redshift IAM Identity Center application.</p>"
     },
     "DeleteResourcePolicy": {
       "name": "DeleteResourcePolicy",
@@ -1959,6 +2019,35 @@
         }
       ],
       "documentation": "<p>Returns information about the partner integrations defined for a cluster.</p>"
+    },
+    "DescribeRedshiftIdcApplications": {
+      "name": "DescribeRedshiftIdcApplications",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeRedshiftIdcApplicationsMessage"
+      },
+      "output": {
+        "shape": "DescribeRedshiftIdcApplicationsResult",
+        "resultWrapper": "DescribeRedshiftIdcApplicationsResult"
+      },
+      "errors": [
+        {
+          "shape": "RedshiftIdcApplicationNotExistsFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        },
+        {
+          "shape": "DependentServiceAccessDeniedFault"
+        }
+      ],
+      "documentation": "<p>Lists the Amazon Redshift IAM Identity Center applications.</p>"
     },
     "DescribeReservedNodeExchangeStatus": {
       "name": "DescribeReservedNodeExchangeStatus",
@@ -2973,6 +3062,35 @@
       ],
       "documentation": "<p>Modifies an existing Amazon Redshift event notification subscription.</p>"
     },
+    "ModifyRedshiftIdcApplication": {
+      "name": "ModifyRedshiftIdcApplication",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyRedshiftIdcApplicationMessage"
+      },
+      "output": {
+        "shape": "ModifyRedshiftIdcApplicationResult",
+        "resultWrapper": "ModifyRedshiftIdcApplicationResult"
+      },
+      "errors": [
+        {
+          "shape": "RedshiftIdcApplicationNotExistsFault"
+        },
+        {
+          "shape": "DependentServiceUnavailableFault"
+        },
+        {
+          "shape": "UnsupportedOperationFault"
+        },
+        {
+          "shape": "DependentServiceAccessDeniedFault"
+        }
+      ],
+      "documentation": "<p>Changes an existing Amazon Redshift IAM Identity Center application.</p>"
+    },
     "ModifyScheduledAction": {
       "name": "ModifyScheduledAction",
       "http": {
@@ -3972,6 +4090,32 @@
         "Snapshot": {
           "shape": "Snapshot"
         }
+      }
+    },
+    "AuthorizedAudienceList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "AuthorizedTokenIssuer": {
+      "type": "structure",
+      "members": {
+        "TrustedTokenIssuerArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN for the authorized token issuer for integrating Amazon Redshift with IDC Identity Center.</p>"
+        },
+        "AuthorizedAudiencesList": {
+          "shape": "AuthorizedAudienceList",
+          "documentation": "<p>The list of audiences for the authorized token issuer for integrating Amazon Redshift with IDC Identity Center.</p>"
+        }
+      },
+      "documentation": "<p>The authorized token issuer for the Amazon Redshift IAM Identity Center application.</p>"
+    },
+    "AuthorizedTokenIssuerList": {
+      "type": "list",
+      "member": {
+        "shape": "AuthorizedTokenIssuer"
       }
     },
     "AvailabilityZone": {
@@ -5045,6 +5189,10 @@
         "MultiAZ": {
           "shape": "BooleanOptional",
           "documentation": "<p>If true, Amazon Redshift will deploy the cluster in two Availability Zones (AZ).</p>"
+        },
+        "RedshiftIdcApplicationArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center application.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5385,6 +5533,53 @@
       "members": {
         "HsmConfiguration": {
           "shape": "HsmConfiguration"
+        }
+      }
+    },
+    "CreateRedshiftIdcApplicationMessage": {
+      "type": "structure",
+      "required": [
+        "IdcInstanceArn",
+        "RedshiftIdcApplicationName",
+        "IdcDisplayName",
+        "IamRoleArn"
+      ],
+      "members": {
+        "IdcInstanceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon resource name (ARN) of the IAM Identity Center instance where Amazon Redshift creates a new managed application.</p>"
+        },
+        "RedshiftIdcApplicationName": {
+          "shape": "RedshiftIdcApplicationName",
+          "documentation": "<p>The name of the Redshift application in IAM Identity Center.</p>"
+        },
+        "IdentityNamespace": {
+          "shape": "IdentityNamespaceString",
+          "documentation": "<p>The namespace for the Amazon Redshift IAM Identity Center application instance. It determines which managed application verifies the connection token.</p>"
+        },
+        "IdcDisplayName": {
+          "shape": "IdcDisplayNameString",
+          "documentation": "<p>The display name for the Amazon Redshift IAM Identity Center application instance. It appears in the console.</p>"
+        },
+        "IamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The IAM role ARN for the Amazon Redshift IAM Identity Center application instance. It has the required permissions to be assumed and invoke the IDC Identity Center API.</p>"
+        },
+        "AuthorizedTokenIssuerList": {
+          "shape": "AuthorizedTokenIssuerList",
+          "documentation": "<p>The token issuer list for the Amazon Redshift IAM Identity Center application instance.</p>"
+        },
+        "ServiceIntegrations": {
+          "shape": "ServiceIntegrationList",
+          "documentation": "<p>A collection of service integrations for the Redshift IAM Identity Center application.</p>"
+        }
+      }
+    },
+    "CreateRedshiftIdcApplicationResult": {
+      "type": "structure",
+      "members": {
+        "RedshiftIdcApplication": {
+          "shape": "RedshiftIdcApplication"
         }
       }
     },
@@ -5965,6 +6160,18 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "DeleteRedshiftIdcApplicationMessage": {
+      "type": "structure",
+      "required": [
+        "RedshiftIdcApplicationArn"
+      ],
+      "members": {
+        "RedshiftIdcApplicationArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN for a deleted Amazon Redshift IAM Identity Center application.</p>"
+        }
+      }
     },
     "DeleteResourcePolicyMessage": {
       "type": "structure",
@@ -6767,6 +6974,36 @@
         "PartnerIntegrationInfoList": {
           "shape": "PartnerIntegrationInfoList",
           "documentation": "<p>A list of partner integrations.</p>"
+        }
+      }
+    },
+    "DescribeRedshiftIdcApplicationsMessage": {
+      "type": "structure",
+      "members": {
+        "RedshiftIdcApplicationArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. </p>"
+        }
+      }
+    },
+    "DescribeRedshiftIdcApplicationsResult": {
+      "type": "structure",
+      "members": {
+        "RedshiftIdcApplications": {
+          "shape": "RedshiftIdcApplicationList",
+          "documentation": "<p>The list of Amazon Redshift IAM Identity Center applications.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. </p>"
         }
       }
     },
@@ -7875,6 +8112,18 @@
         "locationName": "IamRoleArn"
       }
     },
+    "IdcDisplayNameString": {
+      "type": "string",
+      "max": 127,
+      "min": 1,
+      "pattern": "[\\w+=,.@-]+"
+    },
+    "IdentityNamespaceString": {
+      "type": "string",
+      "max": 127,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_+.#@$-]+$"
+    },
     "ImportTablesCompleted": {
       "type": "list",
       "member": {
@@ -7971,6 +8220,36 @@
       "member": {
         "shape": "IntegrationError",
         "locationName": "IntegrationError"
+      }
+    },
+    "LakeFormationQuery": {
+      "type": "structure",
+      "required": [
+        "Authorization"
+      ],
+      "members": {
+        "Authorization": {
+          "shape": "ServiceAuthorization",
+          "documentation": "<p>Determines whether the query scope is enabled or disabled.</p>"
+        }
+      },
+      "documentation": "<p>The Lake Formation scope.</p>"
+    },
+    "LakeFormationScopeUnion": {
+      "type": "structure",
+      "members": {
+        "LakeFormationQuery": {
+          "shape": "LakeFormationQuery",
+          "documentation": "<p>The Lake Formation scope.</p>"
+        }
+      },
+      "documentation": "<p>A list of scopes set up for Lake Formation integration.</p>",
+      "union": true
+    },
+    "LakeFormationServiceIntegrations": {
+      "type": "list",
+      "member": {
+        "shape": "LakeFormationScopeUnion"
       }
     },
     "LogDestinationType": {
@@ -8538,6 +8817,46 @@
       "members": {
         "EventSubscription": {
           "shape": "EventSubscription"
+        }
+      }
+    },
+    "ModifyRedshiftIdcApplicationMessage": {
+      "type": "structure",
+      "required": [
+        "RedshiftIdcApplicationArn"
+      ],
+      "members": {
+        "RedshiftIdcApplicationArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>"
+        },
+        "IdentityNamespace": {
+          "shape": "IdentityNamespaceString",
+          "documentation": "<p>The namespace for the Amazon Redshift IAM Identity Center application to change. It determines which managed application verifies the connection token.</p>"
+        },
+        "IamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The IAM role ARN associated with the Amazon Redshift IAM Identity Center application to change. It has the required permissions to be assumed and invoke the IDC Identity Center API.</p>"
+        },
+        "IdcDisplayName": {
+          "shape": "IdcDisplayNameString",
+          "documentation": "<p>The display name for the Amazon Redshift IAM Identity Center application to change. It appears on the console.</p>"
+        },
+        "AuthorizedTokenIssuerList": {
+          "shape": "AuthorizedTokenIssuerList",
+          "documentation": "<p>The authorized token issuer list for the Amazon Redshift IAM Identity Center application to change.</p>"
+        },
+        "ServiceIntegrations": {
+          "shape": "ServiceIntegrationList",
+          "documentation": "<p>A collection of service integrations associated with the application.</p>"
+        }
+      }
+    },
+    "ModifyRedshiftIdcApplicationResult": {
+      "type": "structure",
+      "members": {
+        "RedshiftIdcApplication": {
+          "shape": "RedshiftIdcApplication"
         }
       }
     },
@@ -9159,6 +9478,65 @@
         "shape": "RecurringCharge",
         "locationName": "RecurringCharge"
       }
+    },
+    "RedshiftIdcApplication": {
+      "type": "structure",
+      "members": {
+        "IdcInstanceArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN for the IAM Identity Center instance that Redshift integrates with.</p>"
+        },
+        "RedshiftIdcApplicationName": {
+          "shape": "RedshiftIdcApplicationName",
+          "documentation": "<p>The name of the Redshift application in IAM Identity Center.</p>"
+        },
+        "RedshiftIdcApplicationArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>"
+        },
+        "IdentityNamespace": {
+          "shape": "IdentityNamespaceString",
+          "documentation": "<p>The identity namespace for the Amazon Redshift IAM Identity Center application. It determines which managed application verifies the connection token.</p>"
+        },
+        "IdcDisplayName": {
+          "shape": "IdcDisplayNameString",
+          "documentation": "<p>The display name for the Amazon Redshift IAM Identity Center application. It appears on the console.</p>"
+        },
+        "IamRoleArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN for the Amazon Redshift IAM Identity Center application. It has the required permissions to be assumed and invoke the IDC Identity Center API.</p>"
+        },
+        "IdcManagedApplicationArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN for the Amazon Redshift IAM Identity Center application.</p>"
+        },
+        "IdcOnboardStatus": {
+          "shape": "String",
+          "documentation": "<p>The onboarding status for the Amazon Redshift IAM Identity Center application.</p>"
+        },
+        "AuthorizedTokenIssuerList": {
+          "shape": "AuthorizedTokenIssuerList",
+          "documentation": "<p>The authorized token issuer list for the Amazon Redshift IAM Identity Center application.</p>"
+        },
+        "ServiceIntegrations": {
+          "shape": "ServiceIntegrationList",
+          "documentation": "<p>A list of service integrations for the Redshift IAM Identity Center application.</p>"
+        }
+      },
+      "documentation": "<p>Contains properties for the Redshift IDC application.</p>",
+      "wrapper": true
+    },
+    "RedshiftIdcApplicationList": {
+      "type": "list",
+      "member": {
+        "shape": "RedshiftIdcApplication"
+      }
+    },
+    "RedshiftIdcApplicationName": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[a-z][a-z0-9]*(-[a-z0-9]+)*"
     },
     "RejectDataShareMessage": {
       "type": "structure",
@@ -10165,6 +10543,30 @@
     "SensitiveString": {
       "type": "string",
       "sensitive": true
+    },
+    "ServiceAuthorization": {
+      "type": "string",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "ServiceIntegrationList": {
+      "type": "list",
+      "member": {
+        "shape": "ServiceIntegrationsUnion"
+      }
+    },
+    "ServiceIntegrationsUnion": {
+      "type": "structure",
+      "members": {
+        "LakeFormation": {
+          "shape": "LakeFormationServiceIntegrations",
+          "documentation": "<p>A list of scopes set up for Lake Formation integration.</p>"
+        }
+      },
+      "documentation": "<p>A list of service integrations.</p>",
+      "union": true
     },
     "Snapshot": {
       "type": "structure",

@@ -1,6 +1,35 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1498.0-->
+<!--LATEST=2.1499.0-->
 <!--ENTRYINSERT-->
+
+## 2.1499.0
+* feature: AppMesh: Change the default value of these fields from 0 to null: MaxConnections, MaxPendingRequests, MaxRequests, HealthCheckThreshold, PortNumber, and HealthCheckPolicy -> port. Users are not expected to perceive the change, except that badRequestException is thrown when required fields missing configured.
+* feature: Athena: Adding SerivicePreProcessing time metric
+* feature: CloudFormation: This release adds a new flag ImportExistingResources to CreateChangeSet. Specify this parameter on a CREATE- or UPDATE-type change set to import existing resources with custom names instead of recreating them.
+* feature: CodePipeline: CodePipeline now supports overriding source revisions to achieve manual re-deploy of a past revision
+* feature: CodeStarconnections: This release adds support for the CloudFormation Git sync feature. Git sync enables updating a CloudFormation stack from a template stored in a Git repository.
+* feature: Connect: This release adds WISDOM_QUICK_RESPONSES as new IntegrationType of Connect IntegrationAssociation resource and bug fixes.
+* feature: EC2: This release adds new features for Amazon VPC IP Address Manager (IPAM) Allowing a choice between Free and Advanced Tiers, viewing public IP address insights across regions and in Amazon Cloudwatch, use IPAM to plan your subnet IPs within a VPC and bring your own autonomous system number to IPAM.
+* feature: ECR: Documentation and operational updates for Amazon ECR, adding support for pull through cache rules for upstream registries that require authentication.
+* feature: EMR: Launch support for IAM Identity Center Trusted Identity Propagation and workspace storage encryption using AWS KMS in EMR Studio
+* feature: EventBridge: Introduces a new rule state ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS for matching with Get, List and Describe AWS API call events from CloudTrail.
+* feature: IVS: type & defaulting refinement to various range properties
+* feature: InternetMonitor: Adds new querying capabilities for running data queries on a monitor
+* feature: Ivschat: type & defaulting refinement to various range properties
+* feature: Location: Remove default value and allow nullable for request parameters having minimum value larger than zero.
+* feature: MediaLive: MediaLive has now added support for per-output static image overlay.
+* feature: Mgn: Removed invalid and unnecessary default values.
+* feature: OSIS: Add support for enabling a persistent buffer when creating or updating an OpenSearch Ingestion pipeline. Add tags to Pipeline and PipelineSummary response models.
+* feature: Pipes: TargetParameters now properly supports BatchJobParameters.ArrayProperties.Size and BatchJobParameters.RetryStrategy.Attempts being optional, and EcsTaskParameters.Overrides.EphemeralStorage.SizeInGiB now properly required when setting EphemeralStorage
+* feature: RDS: This release adds support for option groups and replica enhancements to Amazon RDS Custom.
+* feature: Redshift: Updated SDK for Amazon Redshift, which you can use to configure a connection with IAM Identity Center to manage access to databases. With these, you can create a connection through a managed application. You can also change a managed application, delete it, or get information about an existing one.
+* feature: RedshiftServerless: Updated SDK for Amazon Redshift Serverless, which provides the ability to configure a connection with IAM Identity Center to manage user and group access to databases.
+* feature: S3: Removes all default 0 values for numbers and false values for booleans
+* feature: SSOAdmin: Improves support for configuring RefreshToken and TokenExchange grants on applications.
+* feature: SSOOIDC: Adding support for `sso-oauth:CreateTokenWithIAM`.
+* feature: TrustedAdvisor: AWS Trusted Advisor introduces new APIs to enable you to programmatically access Trusted Advisor best practice checks, recommendations, and prioritized recommendations. Trusted Advisor APIs enable you to integrate Trusted Advisor with your operational tools to automate your workloads.
+* feature: VerifiedPermissions: Adding BatchIsAuthorized API which supports multiple authorization requests against a PolicyStore
+* feature: Wisdom: This release adds QuickResponse as a new Wisdom resource and Wisdom APIs for import, create, read, search, update and delete QuickResponse resources.
 
 ## 2.1498.0
 * feature: CodeCatalyst: This release includes updates to the Dev Environment APIs to include an optional vpcConnectionName parameter that supports using Dev Environments with Amazon VPC.

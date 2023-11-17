@@ -303,6 +303,20 @@
       },
       "documentation": "<p>Associates one or more targets with an event window. Only one type of target (instance IDs, Dedicated Host IDs, or tags) can be specified with an event window.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
+    "AssociateIpamByoasn": {
+      "name": "AssociateIpamByoasn",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateIpamByoasnRequest"
+      },
+      "output": {
+        "shape": "AssociateIpamByoasnResult"
+      },
+      "documentation": "<p>Associates your Autonomous System Number (ASN) with a BYOIP CIDR that you own in the same Amazon Web Services Region. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html\">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p> <p>After the association succeeds, the ASN is eligible for advertisement. You can view the association with <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeByoipCidrs.html\">DescribeByoipCidrs</a>. You can advertise the CIDR with <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AdvertiseByoipCidr.html\">AdvertiseByoipCidr</a>.</p>"
+    },
     "AssociateIpamResourceDiscovery": {
       "name": "AssociateIpamResourceDiscovery",
       "http": {
@@ -357,7 +371,7 @@
       "output": {
         "shape": "AssociateSubnetCidrBlockResult"
       },
-      "documentation": "<p>Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.</p>"
+      "documentation": "<p>Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet.</p>"
     },
     "AssociateTransitGatewayMulticastDomain": {
       "name": "AssociateTransitGatewayMulticastDomain",
@@ -413,7 +427,7 @@
       "output": {
         "shape": "AssociateTrunkInterfaceResult"
       },
-      "documentation": "<note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Associates a branch network interface with a trunk network interface.</p> <p>Before you create the association, run the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">create-network-interface</a> command and set <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p>"
+      "documentation": "<p>Associates a branch network interface with a trunk network interface.</p> <p>Before you create the association, run the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">create-network-interface</a> command and set <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p>"
     },
     "AssociateVpcCidrBlock": {
       "name": "AssociateVpcCidrBlock",
@@ -427,7 +441,7 @@
       "output": {
         "shape": "AssociateVpcCidrBlockResult"
       },
-      "documentation": "<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">BYOIP</a>). The IPv6 CIDR block size is fixed at /56.</p> <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html\">IP addressing for your VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      "documentation": "<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">BYOIP</a>). </p> <p>You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html\">IP addressing for your VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
     },
     "AttachClassicLinkVpc": {
       "name": "AttachClassicLinkVpc",
@@ -1479,7 +1493,7 @@
       "output": {
         "shape": "CreateSubnetResult"
       },
-      "documentation": "<p>Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block.</p> <p>A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block.</p> <p>The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for your use.</p> <p>If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it. The allowed block size for an IPv6 subnet is a /64 netmask.</p> <p>If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle.</p> <p>When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html\">Subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
+      "documentation": "<p>Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block.</p> <p>A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block.</p> <p>The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for your use.</p> <p>If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it. </p> <p>If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle.</p> <p>When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html\">Subnets</a> in the <i>Amazon VPC User Guide</i>.</p>"
     },
     "CreateSubnetCidrReservation": {
       "name": "CreateSubnetCidrReservation",
@@ -1798,7 +1812,7 @@
       "output": {
         "shape": "CreateVpcResult"
       },
-      "documentation": "<p>Creates a VPC with the specified CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html\">IP addressing for your VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p> <p>You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">BYOIP</a>).</p> <p>By default, each instance that you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html\">DHCP option sets</a> in the <i>Amazon VPC User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPC with the specified CIDR blocks. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html\">IP addressing for your VPCs and subnets</a> in the <i>Amazon VPC User Guide</i>.</p> <p>You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">BYOIP</a>).</p> <p>By default, each instance that you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html\">DHCP option sets</a> in the <i>Amazon VPC User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
     "CreateVpcEndpoint": {
       "name": "CreateVpcEndpoint",
@@ -2888,6 +2902,20 @@
       },
       "documentation": "<p>Releases the specified address range that you provisioned for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and deletes the corresponding address pool.</p> <p>Before you can release an address range, you must stop advertising it using <a>WithdrawByoipCidr</a> and you must not have any IP addresses allocated from its address range.</p>"
     },
+    "DeprovisionIpamByoasn": {
+      "name": "DeprovisionIpamByoasn",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeprovisionIpamByoasnRequest"
+      },
+      "output": {
+        "shape": "DeprovisionIpamByoasnResult"
+      },
+      "documentation": "<p>Deprovisions your Autonomous System Number (ASN) from your Amazon Web Services account. This action can only be called after any BYOIP CIDR associations are removed from your Amazon Web Services account with <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIpamByoasn.html\">DisassociateIpamByoasn</a>. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html\">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>"
+    },
     "DeprovisionIpamPoolCidr": {
       "name": "DeprovisionIpamPoolCidr",
       "http": {
@@ -3752,6 +3780,20 @@
         "shape": "DescribeInternetGatewaysResult"
       },
       "documentation": "<p>Describes one or more of your internet gateways.</p>"
+    },
+    "DescribeIpamByoasn": {
+      "name": "DescribeIpamByoasn",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeIpamByoasnRequest"
+      },
+      "output": {
+        "shape": "DescribeIpamByoasnResult"
+      },
+      "documentation": "<p>Describes your Autonomous System Numbers (ASNs), their provisioning statuses, and the BYOIP CIDRs with which they are associated. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html\">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>"
     },
     "DescribeIpamPools": {
       "name": "DescribeIpamPools",
@@ -4731,7 +4773,7 @@
       "output": {
         "shape": "DescribeTrunkInterfaceAssociationsResult"
       },
-      "documentation": "<note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Describes one or more network interface trunk associations.</p>"
+      "documentation": "<p>Describes one or more network interface trunk associations.</p>"
     },
     "DescribeVerifiedAccessEndpoints": {
       "name": "DescribeVerifiedAccessEndpoints",
@@ -5390,6 +5432,20 @@
       },
       "documentation": "<p>Disassociates one or more targets from an event window.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
+    "DisassociateIpamByoasn": {
+      "name": "DisassociateIpamByoasn",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateIpamByoasnRequest"
+      },
+      "output": {
+        "shape": "DisassociateIpamByoasnResult"
+      },
+      "documentation": "<p>Remove the association between your Autonomous System Number (ASN) and your BYOIP CIDR. You may want to use this action to disassociate an ASN from a CIDR or if you want to swap ASNs. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html\">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>"
+    },
     "DisassociateIpamResourceDiscovery": {
       "name": "DisassociateIpamResourceDiscovery",
       "http": {
@@ -5497,7 +5553,7 @@
       "output": {
         "shape": "DisassociateTrunkInterfaceResult"
       },
-      "documentation": "<note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Removes an association between a branch network interface with a trunk network interface.</p>"
+      "documentation": "<p>Removes an association between a branch network interface with a trunk network interface.</p>"
     },
     "DisassociateVpcCidrBlock": {
       "name": "DisassociateVpcCidrBlock",
@@ -6052,6 +6108,20 @@
         "shape": "GetIpamDiscoveredAccountsResult"
       },
       "documentation": "<p>Gets IPAM discovered accounts. A discovered account is an Amazon Web Services account that is monitored under a resource discovery. If you have integrated IPAM with Amazon Web Services Organizations, all accounts in the organization are discovered accounts. Only the IPAM account can get all discovered accounts in the organization.</p>"
+    },
+    "GetIpamDiscoveredPublicAddresses": {
+      "name": "GetIpamDiscoveredPublicAddresses",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetIpamDiscoveredPublicAddressesRequest"
+      },
+      "output": {
+        "shape": "GetIpamDiscoveredPublicAddressesResult"
+      },
+      "documentation": "<p>Gets the public IP addresses that have been discovered by IPAM.</p>"
     },
     "GetIpamDiscoveredResourceCidrs": {
       "name": "GetIpamDiscoveredResourceCidrs",
@@ -7495,6 +7565,20 @@
         "shape": "ProvisionByoipCidrResult"
       },
       "documentation": "<p>Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using <a>AdvertiseByoipCidr</a>.</p> <p>Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html\">Bring your own IP addresses (BYOIP)</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from <code>pending-provision</code> to <code>provisioned</code>. To monitor the status of an address range, use <a>DescribeByoipCidrs</a>. To allocate an Elastic IP address from your IPv4 address pool, use <a>AllocateAddress</a> with either the specific address from the address pool or the ID of the address pool.</p>"
+    },
+    "ProvisionIpamByoasn": {
+      "name": "ProvisionIpamByoasn",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ProvisionIpamByoasnRequest"
+      },
+      "output": {
+        "shape": "ProvisionIpamByoasnResult"
+      },
+      "documentation": "<p>Provisions your Autonomous System Number (ASN) for use in your Amazon Web Services account. This action requires authorization context for Amazon to bring the ASN to an Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html\">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>"
     },
     "ProvisionIpamPoolCidr": {
       "name": "ProvisionIpamPoolCidr",
@@ -9203,6 +9287,10 @@
           "shape": "String",
           "documentation": "<p>The address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.</p>"
         },
+        "Asn": {
+          "shape": "String",
+          "documentation": "<p>The public 2-byte or 4-byte ASN that you want to advertise.</p>"
+        },
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
@@ -9410,6 +9498,11 @@
         "PreviewNextCidr": {
           "shape": "Boolean",
           "documentation": "<p>A preview of the next available CIDR in a pool.</p>"
+        },
+        "AllowedCidrs": {
+          "shape": "IpamPoolAllocationAllowedCidrs",
+          "documentation": "<p>Include a particular CIDR range that can be returned by the pool. Allowed CIDRs are only allowed if using netmask length for allocation.</p>",
+          "locationName": "AllowedCidr"
         },
         "DisallowedCidrs": {
           "shape": "IpamPoolAllocationDisallowedCidrs",
@@ -9906,6 +9999,79 @@
         "locationName": "item"
       }
     },
+    "AsnAssociation": {
+      "type": "structure",
+      "members": {
+        "Asn": {
+          "shape": "String",
+          "documentation": "<p>The association's ASN.</p>",
+          "locationName": "asn"
+        },
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The association's CIDR.</p>",
+          "locationName": "cidr"
+        },
+        "StatusMessage": {
+          "shape": "String",
+          "documentation": "<p>The association's status message.</p>",
+          "locationName": "statusMessage"
+        },
+        "State": {
+          "shape": "AsnAssociationState",
+          "documentation": "<p>The association's state.</p>",
+          "locationName": "state"
+        }
+      },
+      "documentation": "<p>An Autonomous System Number (ASN) and BYOIP CIDR association.</p>"
+    },
+    "AsnAssociationSet": {
+      "type": "list",
+      "member": {
+        "shape": "AsnAssociation",
+        "locationName": "item"
+      }
+    },
+    "AsnAssociationState": {
+      "type": "string",
+      "enum": [
+        "disassociated",
+        "failed-disassociation",
+        "failed-association",
+        "pending-disassociation",
+        "pending-association",
+        "associated"
+      ]
+    },
+    "AsnAuthorizationContext": {
+      "type": "structure",
+      "required": [
+        "Message",
+        "Signature"
+      ],
+      "members": {
+        "Message": {
+          "shape": "String",
+          "documentation": "<p>The authorization context's message.</p>"
+        },
+        "Signature": {
+          "shape": "String",
+          "documentation": "<p>The authorization context's signature.</p>"
+        }
+      },
+      "documentation": "<p>Provides authorization for Amazon to bring an Autonomous System Number (ASN) to a specific Amazon Web Services account using bring your own ASN (BYOASN). For details on the format of the message and signature, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html\">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>"
+    },
+    "AsnState": {
+      "type": "string",
+      "enum": [
+        "deprovisioned",
+        "failed-deprovision",
+        "failed-provision",
+        "pending-deprovision",
+        "pending-provision",
+        "provisioned"
+      ]
+    },
     "AssetId": {
       "type": "string"
     },
@@ -10292,6 +10458,37 @@
         }
       }
     },
+    "AssociateIpamByoasnRequest": {
+      "type": "structure",
+      "required": [
+        "Asn",
+        "Cidr"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Asn": {
+          "shape": "String",
+          "documentation": "<p>A public 2-byte or 4-byte ASN.</p>"
+        },
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>The BYOIP CIDR you want to associate with an ASN.</p>"
+        }
+      }
+    },
+    "AssociateIpamByoasnResult": {
+      "type": "structure",
+      "members": {
+        "AsnAssociation": {
+          "shape": "AsnAssociation",
+          "documentation": "<p>The ASN and BYOIP CIDR association.</p>",
+          "locationName": "asnAssociation"
+        }
+      }
+    },
     "AssociateIpamResourceDiscoveryRequest": {
       "type": "structure",
       "required": [
@@ -10420,19 +10617,26 @@
     "AssociateSubnetCidrBlockRequest": {
       "type": "structure",
       "required": [
-        "Ipv6CidrBlock",
         "SubnetId"
       ],
       "members": {
         "Ipv6CidrBlock": {
           "shape": "String",
-          "documentation": "<p>The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.</p>",
+          "documentation": "<p>The IPv6 CIDR block for your subnet.</p>",
           "locationName": "ipv6CidrBlock"
         },
         "SubnetId": {
           "shape": "SubnetId",
           "documentation": "<p>The ID of your subnet.</p>",
           "locationName": "subnetId"
+        },
+        "Ipv6IpamPoolId": {
+          "shape": "IpamPoolId",
+          "documentation": "<p>An IPv6 IPAM pool ID.</p>"
+        },
+        "Ipv6NetmaskLength": {
+          "shape": "NetmaskLength",
+          "documentation": "<p>An IPv6 netmask length.</p>"
         }
       }
     },
@@ -10606,7 +10810,7 @@
       "members": {
         "AmazonProvidedIpv6CidrBlock": {
           "shape": "Boolean",
-          "documentation": "<p>Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.</p>",
+          "documentation": "<p>Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses or the size of the CIDR block.</p>",
           "locationName": "amazonProvidedIpv6CidrBlock"
         },
         "CidrBlock": {
@@ -11765,6 +11969,39 @@
     "BurstablePerformanceFlag": {
       "type": "boolean"
     },
+    "Byoasn": {
+      "type": "structure",
+      "members": {
+        "Asn": {
+          "shape": "String",
+          "documentation": "<p>A public 2-byte or 4-byte ASN.</p>",
+          "locationName": "asn"
+        },
+        "IpamId": {
+          "shape": "IpamId",
+          "documentation": "<p>An IPAM ID.</p>",
+          "locationName": "ipamId"
+        },
+        "StatusMessage": {
+          "shape": "String",
+          "documentation": "<p>The status message.</p>",
+          "locationName": "statusMessage"
+        },
+        "State": {
+          "shape": "AsnState",
+          "documentation": "<p>The provisioning state of the BYOASN.</p>",
+          "locationName": "state"
+        }
+      },
+      "documentation": "<p>The Autonomous System Number (ASN) and BYOIP CIDR association.</p>"
+    },
+    "ByoasnSet": {
+      "type": "list",
+      "member": {
+        "shape": "Byoasn",
+        "locationName": "item"
+      }
+    },
     "ByoipCidr": {
       "type": "structure",
       "members": {
@@ -11777,6 +12014,11 @@
           "shape": "String",
           "documentation": "<p>The description of the address range.</p>",
           "locationName": "description"
+        },
+        "AsnAssociations": {
+          "shape": "AsnAssociationSet",
+          "documentation": "<p>The BYOIP CIDR associations with ASNs.</p>",
+          "locationName": "asnAssociationSet"
         },
         "StatusMessage": {
           "shape": "String",
@@ -13828,6 +14070,87 @@
         "Topic"
       ]
     },
+    "ConnectionTrackingConfiguration": {
+      "type": "structure",
+      "members": {
+        "TcpEstablishedTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>",
+          "locationName": "tcpEstablishedTimeout"
+        },
+        "UdpStreamTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>",
+          "locationName": "udpStreamTimeout"
+        },
+        "UdpTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>",
+          "locationName": "udpTimeout"
+        }
+      },
+      "documentation": "<p>A security group connection tracking configuration that enables you to set the idle timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ConnectionTrackingSpecification": {
+      "type": "structure",
+      "members": {
+        "TcpEstablishedTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>",
+          "locationName": "tcpEstablishedTimeout"
+        },
+        "UdpTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>",
+          "locationName": "udpTimeout"
+        },
+        "UdpStreamTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>",
+          "locationName": "udpStreamTimeout"
+        }
+      },
+      "documentation": "<p>A security group connection tracking specification that enables you to set the idle timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ConnectionTrackingSpecificationRequest": {
+      "type": "structure",
+      "members": {
+        "TcpEstablishedTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>"
+        },
+        "UdpStreamTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>"
+        },
+        "UdpTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>"
+        }
+      },
+      "documentation": "<p>A security group connection tracking specification request that enables you to set the idle timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ConnectionTrackingSpecificationResponse": {
+      "type": "structure",
+      "members": {
+        "TcpEstablishedTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.</p>",
+          "locationName": "tcpEstablishedTimeout"
+        },
+        "UdpStreamTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.</p>",
+          "locationName": "udpStreamTimeout"
+        },
+        "UdpTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.</p>",
+          "locationName": "udpTimeout"
+        }
+      },
+      "documentation": "<p>A security group connection tracking specification response that enables you to set the idle timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
     "ConnectivityType": {
       "type": "string",
       "enum": [
@@ -15362,6 +15685,10 @@
         "PublicIpSource": {
           "shape": "IpamPoolPublicIpSource",
           "documentation": "<p>The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is <code>byoip</code>. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html\">Create IPv6 pools</a> in the <i>Amazon VPC IPAM User Guide</i>. By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool if PublicIpSource is <code>amazon</code>. For information on increasing the default limit, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html\"> Quotas for your IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>"
+        },
+        "SourceResource": {
+          "shape": "IpamPoolSourceResourceRequest",
+          "documentation": "<p>The resource used to provision CIDRs to a resource planning pool.</p>"
         }
       }
     },
@@ -15400,6 +15727,10 @@
           "shape": "String",
           "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>",
           "idempotencyToken": true
+        },
+        "Tier": {
+          "shape": "IpamTier",
+          "documentation": "<p>IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see <a href=\"http://aws.amazon.com/vpc/pricing/\">Amazon VPC pricing &gt; IPAM tab</a>.</p>"
         }
       }
     },
@@ -16227,6 +16558,10 @@
         "EnablePrimaryIpv6": {
           "shape": "Boolean",
           "documentation": "<p>If you’re creating a network interface in a dual-stack or IPv6-only subnet, you have the option to assign a primary IPv6 IP address. A primary IPv6 address is an IPv6 GUA address associated with an ENI that you have enabled to use a primary IPv6 address. Use this option if the instance that this ENI will be attached to relies on its IPv6 address not changing. Amazon Web Services will automatically assign an IPv6 address associated with the ENI attached to your instance to be the primary IPv6 address. Once you enable an IPv6 GUA address to be a primary IPv6, you cannot disable it. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. If you have multiple IPv6 addresses associated with an ENI attached to your instance and you enable a primary IPv6 address, the first IPv6 GUA address associated with the ENI becomes the primary IPv6 address.</p>"
+        },
+        "ConnectionTrackingSpecification": {
+          "shape": "ConnectionTrackingSpecificationRequest",
+          "documentation": "<p>A connection tracking specification for the network interface.</p>"
         }
       }
     },
@@ -16829,7 +17164,7 @@
         },
         "Ipv6CidrBlock": {
           "shape": "String",
-          "documentation": "<p>The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length.</p> <p>This parameter is required for an IPv6 only subnet.</p>"
+          "documentation": "<p>The IPv6 network range for the subnet, in CIDR notation. This parameter is required for an IPv6 only subnet.</p>"
         },
         "OutpostArn": {
           "shape": "String",
@@ -16847,6 +17182,22 @@
         "Ipv6Native": {
           "shape": "Boolean",
           "documentation": "<p>Indicates whether to create an IPv6 only subnet.</p>"
+        },
+        "Ipv4IpamPoolId": {
+          "shape": "IpamPoolId",
+          "documentation": "<p>An IPv4 IPAM pool ID for the subnet.</p>"
+        },
+        "Ipv4NetmaskLength": {
+          "shape": "NetmaskLength",
+          "documentation": "<p>An IPv4 netmask length for the subnet.</p>"
+        },
+        "Ipv6IpamPoolId": {
+          "shape": "IpamPoolId",
+          "documentation": "<p>An IPv6 IPAM pool ID for the subnet.</p>"
+        },
+        "Ipv6NetmaskLength": {
+          "shape": "NetmaskLength",
+          "documentation": "<p>An IPv6 netmask length for the subnet.</p>"
         }
       }
     },
@@ -19143,6 +19494,10 @@
         "IpamPoolId": {
           "shape": "IpamPoolId",
           "documentation": "<p>The ID of the pool to delete.</p>"
+        },
+        "Cascade": {
+          "shape": "Boolean",
+          "documentation": "<p>Enables you to quickly delete an IPAM pool and all resources within that pool, including provisioned CIDRs, allocations, and other pools.</p> <important> <p>You can only use this option to delete pools in the private scope or pools in the public scope with a source resource. A source resource is a resource used to provision CIDRs to a resource planning pool.</p> </important>"
         }
       }
     },
@@ -20781,6 +21136,37 @@
           "shape": "ByoipCidr",
           "documentation": "<p>Information about the address range.</p>",
           "locationName": "byoipCidr"
+        }
+      }
+    },
+    "DeprovisionIpamByoasnRequest": {
+      "type": "structure",
+      "required": [
+        "IpamId",
+        "Asn"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "IpamId": {
+          "shape": "IpamId",
+          "documentation": "<p>The IPAM ID.</p>"
+        },
+        "Asn": {
+          "shape": "String",
+          "documentation": "<p>An ASN.</p>"
+        }
+      }
+    },
+    "DeprovisionIpamByoasnResult": {
+      "type": "structure",
+      "members": {
+        "Byoasn": {
+          "shape": "Byoasn",
+          "documentation": "<p>An ASN and BYOIP CIDR association.</p>",
+          "locationName": "byoasn"
         }
       }
     },
@@ -23515,6 +23901,43 @@
         "NextToken": {
           "shape": "String",
           "documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeIpamByoasnMaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
+    "DescribeIpamByoasnRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "MaxResults": {
+          "shape": "DescribeIpamByoasnMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeIpamByoasnResult": {
+      "type": "structure",
+      "members": {
+        "Byoasns": {
+          "shape": "ByoasnSet",
+          "documentation": "<p>ASN and BYOIP CIDR associations.</p>",
+          "locationName": "byoasnSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
       }
@@ -28676,6 +29099,37 @@
         }
       }
     },
+    "DisassociateIpamByoasnRequest": {
+      "type": "structure",
+      "required": [
+        "Asn",
+        "Cidr"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Asn": {
+          "shape": "String",
+          "documentation": "<p>A public 2-byte or 4-byte ASN.</p>"
+        },
+        "Cidr": {
+          "shape": "String",
+          "documentation": "<p>A BYOIP CIDR.</p>"
+        }
+      }
+    },
+    "DisassociateIpamByoasnResult": {
+      "type": "structure",
+      "members": {
+        "AsnAssociation": {
+          "shape": "AsnAssociation",
+          "documentation": "<p>An ASN and BYOIP CIDR association.</p>",
+          "locationName": "asnAssociation"
+        }
+      }
+    },
     "DisassociateIpamResourceDiscoveryRequest": {
       "type": "structure",
       "required": [
@@ -33195,6 +33649,60 @@
         }
       }
     },
+    "GetIpamDiscoveredPublicAddressesRequest": {
+      "type": "structure",
+      "required": [
+        "IpamResourceDiscoveryId",
+        "AddressRegion"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "IpamResourceDiscoveryId": {
+          "shape": "IpamResourceDiscoveryId",
+          "documentation": "<p>An IPAM resource discovery ID.</p>"
+        },
+        "AddressRegion": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Web Services Region for the IP address.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>Filters.</p>",
+          "locationName": "Filter"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "IpamMaxResults",
+          "documentation": "<p>The maximum number of IPAM discovered public addresses to return in one page of results.</p>"
+        }
+      }
+    },
+    "GetIpamDiscoveredPublicAddressesResult": {
+      "type": "structure",
+      "members": {
+        "IpamDiscoveredPublicAddresses": {
+          "shape": "IpamDiscoveredPublicAddressSet",
+          "documentation": "<p>IPAM discovered public addresses.</p>",
+          "locationName": "ipamDiscoveredPublicAddressSet"
+        },
+        "OldestSampleTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The oldest successful resource discovery time.</p>",
+          "locationName": "oldestSampleTime"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
     "GetIpamDiscoveredResourceCidrsRequest": {
       "type": "structure",
       "required": [
@@ -36396,7 +36904,7 @@
         },
         "Platform": {
           "shape": "PlatformValues",
-          "documentation": "<p>The value is <code>Windows</code> for Windows instances; otherwise blank.</p>",
+          "documentation": "<p>The platform. This value is <code>windows</code> for Windows instances; otherwise, it is empty.</p>",
           "locationName": "platform"
         },
         "PrivateDnsName": {
@@ -37608,6 +38116,11 @@
           "shape": "InstanceIpv6PrefixList",
           "documentation": "<p>The IPv6 delegated prefixes that are assigned to the network interface.</p>",
           "locationName": "ipv6PrefixSet"
+        },
+        "ConnectionTrackingConfiguration": {
+          "shape": "ConnectionTrackingSpecificationResponse",
+          "documentation": "<p>A security group connection tracking configuration that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "connectionTrackingConfiguration"
         }
       },
       "documentation": "<p>Describes a network interface.</p>"
@@ -37793,6 +38306,10 @@
         "EnaSrdSpecification": {
           "shape": "EnaSrdSpecificationRequest",
           "documentation": "<p>Specifies the ENA Express settings for the network interface that's attached to the instance.</p>"
+        },
+        "ConnectionTrackingSpecification": {
+          "shape": "ConnectionTrackingSpecificationRequest",
+          "documentation": "<p>A security group connection tracking specification that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         }
       },
       "documentation": "<p>Describes a network interface.</p>"
@@ -39707,6 +40224,16 @@
           "shape": "Integer",
           "documentation": "<p>The IPAM's resource discovery association count.</p>",
           "locationName": "resourceDiscoveryAssociationCount"
+        },
+        "StateMessage": {
+          "shape": "String",
+          "documentation": "<p>The state message.</p>",
+          "locationName": "stateMessage"
+        },
+        "Tier": {
+          "shape": "IpamTier",
+          "documentation": "<p>IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see <a href=\"http://aws.amazon.com/vpc/pricing/\">Amazon VPC pricing &gt; IPAM tab</a>.</p>",
+          "locationName": "tier"
         }
       },
       "documentation": "<p>IPAM is a VPC feature that you can use to automate your IP address management workflows including assigning, tracking, troubleshooting, and auditing IP addresses across Amazon Web Services Regions and accounts throughout your Amazon Web Services Organization. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html\">What is IPAM?</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>"
@@ -39859,6 +40386,114 @@
       "type": "list",
       "member": {
         "shape": "IpamDiscoveredAccount",
+        "locationName": "item"
+      }
+    },
+    "IpamDiscoveredPublicAddress": {
+      "type": "structure",
+      "members": {
+        "IpamResourceDiscoveryId": {
+          "shape": "IpamResourceDiscoveryId",
+          "documentation": "<p>The resource discovery ID.</p>",
+          "locationName": "ipamResourceDiscoveryId"
+        },
+        "AddressRegion": {
+          "shape": "String",
+          "documentation": "<p>The Region of the resource the IP address is assigned to.</p>",
+          "locationName": "addressRegion"
+        },
+        "Address": {
+          "shape": "String",
+          "documentation": "<p>The IP address.</p>",
+          "locationName": "address"
+        },
+        "AddressOwnerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the owner of the resource the IP address is assigned to.</p>",
+          "locationName": "addressOwnerId"
+        },
+        "AddressAllocationId": {
+          "shape": "String",
+          "documentation": "<p>The allocation ID of the resource the IP address is assigned to.</p>",
+          "locationName": "addressAllocationId"
+        },
+        "AssociationStatus": {
+          "shape": "IpamPublicAddressAssociationStatus",
+          "documentation": "<p>The association status.</p>",
+          "locationName": "associationStatus"
+        },
+        "AddressType": {
+          "shape": "IpamPublicAddressType",
+          "documentation": "<p>The IP address type.</p>",
+          "locationName": "addressType"
+        },
+        "Service": {
+          "shape": "IpamPublicAddressAwsService",
+          "documentation": "<p>The Amazon Web Services service associated with the IP address.</p>",
+          "locationName": "service"
+        },
+        "ServiceResource": {
+          "shape": "String",
+          "documentation": "<p>The resource ARN or ID.</p>",
+          "locationName": "serviceResource"
+        },
+        "VpcId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the VPC that the resource with the assigned IP address is in.</p>",
+          "locationName": "vpcId"
+        },
+        "SubnetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the subnet that the resource with the assigned IP address is in.</p>",
+          "locationName": "subnetId"
+        },
+        "PublicIpv4PoolId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the public IPv4 pool that the resource with the assigned IP address is from.</p>",
+          "locationName": "publicIpv4PoolId"
+        },
+        "NetworkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The network interface ID of the resource with the assigned IP address.</p>",
+          "locationName": "networkInterfaceId"
+        },
+        "NetworkInterfaceDescription": {
+          "shape": "String",
+          "documentation": "<p>The description of the network interface that IP address is assigned to.</p>",
+          "locationName": "networkInterfaceDescription"
+        },
+        "InstanceId": {
+          "shape": "String",
+          "documentation": "<p>The instance ID of the instance the assigned IP address is assigned to.</p>",
+          "locationName": "instanceId"
+        },
+        "Tags": {
+          "shape": "IpamPublicAddressTags",
+          "documentation": "<p>Tags associated with the IP address.</p>",
+          "locationName": "tags"
+        },
+        "NetworkBorderGroup": {
+          "shape": "String",
+          "documentation": "<p>The network border group that the resource that the IP address is assigned to is in.</p>",
+          "locationName": "networkBorderGroup"
+        },
+        "SecurityGroups": {
+          "shape": "IpamPublicAddressSecurityGroupList",
+          "documentation": "<p>Security groups associated with the resource that the IP address is assigned to.</p>",
+          "locationName": "securityGroupSet"
+        },
+        "SampleTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>The last successful resource discovery time.</p>",
+          "locationName": "sampleTime"
+        }
+      },
+      "documentation": "<p>A public IP Address discovered by IPAM.</p>"
+    },
+    "IpamDiscoveredPublicAddressSet": {
+      "type": "list",
+      "member": {
+        "shape": "IpamDiscoveredPublicAddress",
         "locationName": "item"
       }
     },
@@ -40056,7 +40691,7 @@
         },
         "StateMessage": {
           "shape": "String",
-          "documentation": "<p>A message related to the failed creation of an IPAM pool.</p>",
+          "documentation": "<p>The state message.</p>",
           "locationName": "stateMessage"
         },
         "Description": {
@@ -40113,6 +40748,10 @@
           "shape": "IpamPoolPublicIpSource",
           "documentation": "<p>The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is <code>BYOIP</code>. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/intro-create-ipv6-pools.html\">Create IPv6 pools</a> in the <i>Amazon VPC IPAM User Guide</i>. By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool. For information on increasing the default limit, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/quotas-ipam.html\"> Quotas for your IPAM</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>",
           "locationName": "publicIpSource"
+        },
+        "SourceResource": {
+          "shape": "IpamPoolSourceResource",
+          "locationName": "sourceResource"
         }
       },
       "documentation": "<p>In IPAM, a pool is a collection of contiguous IP addresses CIDRs. Pools enable you to organize your IP addresses according to your routing and security needs. For example, if you have separate routing and security needs for development and production applications, you can create a pool for each.</p>"
@@ -40158,6 +40797,13 @@
       },
       "documentation": "<p>In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource.</p>"
     },
+    "IpamPoolAllocationAllowedCidrs": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "item"
+      }
+    },
     "IpamPoolAllocationDisallowedCidrs": {
       "type": "list",
       "member": {
@@ -40174,7 +40820,8 @@
         "ipam-pool",
         "vpc",
         "ec2-public-ipv4-pool",
-        "custom"
+        "custom",
+        "subnet"
       ]
     },
     "IpamPoolAllocationSet": {
@@ -40284,6 +40931,60 @@
         "locationName": "item"
       }
     },
+    "IpamPoolSourceResource": {
+      "type": "structure",
+      "members": {
+        "ResourceId": {
+          "shape": "String",
+          "documentation": "<p>The source resource ID.</p>",
+          "locationName": "resourceId"
+        },
+        "ResourceType": {
+          "shape": "IpamPoolSourceResourceType",
+          "documentation": "<p>The source resource type.</p>",
+          "locationName": "resourceType"
+        },
+        "ResourceRegion": {
+          "shape": "String",
+          "documentation": "<p>The source resource Region.</p>",
+          "locationName": "resourceRegion"
+        },
+        "ResourceOwner": {
+          "shape": "String",
+          "documentation": "<p>The source resource owner.</p>",
+          "locationName": "resourceOwner"
+        }
+      },
+      "documentation": "<p>The resource used to provision CIDRs to a resource planning pool.</p>"
+    },
+    "IpamPoolSourceResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceId": {
+          "shape": "String",
+          "documentation": "<p>The source resource ID.</p>"
+        },
+        "ResourceType": {
+          "shape": "IpamPoolSourceResourceType",
+          "documentation": "<p>The source resource type.</p>"
+        },
+        "ResourceRegion": {
+          "shape": "String",
+          "documentation": "<p>The source resource Region.</p>"
+        },
+        "ResourceOwner": {
+          "shape": "String",
+          "documentation": "<p>The source resource owner.</p>"
+        }
+      },
+      "documentation": "<p>The resource used to provision CIDRs to a resource planning pool.</p>"
+    },
+    "IpamPoolSourceResourceType": {
+      "type": "string",
+      "enum": [
+        "vpc"
+      ]
+    },
     "IpamPoolState": {
       "type": "string",
       "enum": [
@@ -40299,6 +41000,94 @@
         "isolate-in-progress",
         "isolate-complete",
         "restore-in-progress"
+      ]
+    },
+    "IpamPublicAddressAssociationStatus": {
+      "type": "string",
+      "enum": [
+        "associated",
+        "disassociated"
+      ]
+    },
+    "IpamPublicAddressAwsService": {
+      "type": "string",
+      "enum": [
+        "nat-gateway",
+        "database-migration-service",
+        "redshift",
+        "elastic-container-service",
+        "relational-database-service",
+        "site-to-site-vpn",
+        "load-balancer",
+        "global-accelerator",
+        "other"
+      ]
+    },
+    "IpamPublicAddressSecurityGroup": {
+      "type": "structure",
+      "members": {
+        "GroupName": {
+          "shape": "String",
+          "documentation": "<p>The security group's name.</p>",
+          "locationName": "groupName"
+        },
+        "GroupId": {
+          "shape": "String",
+          "documentation": "<p>The security group's ID.</p>",
+          "locationName": "groupId"
+        }
+      },
+      "documentation": "<p>The security group that the resource with the public IP address is in.</p>"
+    },
+    "IpamPublicAddressSecurityGroupList": {
+      "type": "list",
+      "member": {
+        "shape": "IpamPublicAddressSecurityGroup",
+        "locationName": "item"
+      }
+    },
+    "IpamPublicAddressTag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "String",
+          "documentation": "<p>The tag's key.</p>",
+          "locationName": "key"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The tag's value.</p>",
+          "locationName": "value"
+        }
+      },
+      "documentation": "<p>A tag for a public IP address discovered by IPAM.</p>"
+    },
+    "IpamPublicAddressTagList": {
+      "type": "list",
+      "member": {
+        "shape": "IpamPublicAddressTag",
+        "locationName": "item"
+      }
+    },
+    "IpamPublicAddressTags": {
+      "type": "structure",
+      "members": {
+        "EipTags": {
+          "shape": "IpamPublicAddressTagList",
+          "documentation": "<p>Tags for an Elastic IP address.</p>",
+          "locationName": "eipTagSet"
+        }
+      },
+      "documentation": "<p>Tags for a public IP address discovered by IPAM.</p>"
+    },
+    "IpamPublicAddressType": {
+      "type": "string",
+      "enum": [
+        "service-managed-ip",
+        "service-managed-byoip",
+        "amazon-owned-eip",
+        "byoip",
+        "ec2-public-ip"
       ]
     },
     "IpamResourceCidr": {
@@ -40582,7 +41371,8 @@
         "subnet",
         "eip",
         "public-ipv4-pool",
-        "ipv6-pool"
+        "ipv6-pool",
+        "eni"
       ]
     },
     "IpamScope": {
@@ -40702,6 +41492,13 @@
         "isolate-in-progress",
         "isolate-complete",
         "restore-in-progress"
+      ]
+    },
+    "IpamTier": {
+      "type": "string",
+      "enum": [
+        "free",
+        "advanced"
       ]
     },
     "Ipv4PoolCoipId": {
@@ -41948,6 +42745,11 @@
           "shape": "LaunchTemplateEnaSrdSpecification",
           "documentation": "<p>Contains the ENA Express settings for instances launched from your launch template.</p>",
           "locationName": "enaSrdSpecification"
+        },
+        "ConnectionTrackingSpecification": {
+          "shape": "ConnectionTrackingSpecification",
+          "documentation": "<p>A security group connection tracking specification that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "connectionTrackingSpecification"
         }
       },
       "documentation": "<p>Describes a network interface.</p>"
@@ -42048,6 +42850,10 @@
         "EnaSrdSpecification": {
           "shape": "EnaSrdSpecificationRequest",
           "documentation": "<p>Configure ENA Express settings for your launch template.</p>"
+        },
+        "ConnectionTrackingSpecification": {
+          "shape": "ConnectionTrackingSpecificationRequest",
+          "documentation": "<p>A security group connection tracking specification that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         }
       },
       "documentation": "<p>The parameters for a network interface.</p>"
@@ -44608,6 +45414,10 @@
           "shape": "RemoveIpamOperatingRegionSet",
           "documentation": "<p>The operating Regions to remove.</p>",
           "locationName": "RemoveOperatingRegion"
+        },
+        "Tier": {
+          "shape": "IpamTier",
+          "documentation": "<p>IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see <a href=\"http://aws.amazon.com/vpc/pricing/\">Amazon VPC pricing &gt; IPAM tab</a>.</p>"
         }
       }
     },
@@ -44910,6 +45720,10 @@
         "EnablePrimaryIpv6": {
           "shape": "Boolean",
           "documentation": "<p>If you’re modifying a network interface in a dual-stack or IPv6-only subnet, you have the option to assign a primary IPv6 IP address. A primary IPv6 address is an IPv6 GUA address associated with an ENI that you have enabled to use a primary IPv6 address. Use this option if the instance that this ENI will be attached to relies on its IPv6 address not changing. Amazon Web Services will automatically assign an IPv6 address associated with the ENI attached to your instance to be the primary IPv6 address. Once you enable an IPv6 GUA address to be a primary IPv6, you cannot disable it. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. If you have multiple IPv6 addresses associated with an ENI attached to your instance and you enable a primary IPv6 address, the first IPv6 GUA address associated with the ENI becomes the primary IPv6 address.</p>"
+        },
+        "ConnectionTrackingSpecification": {
+          "shape": "ConnectionTrackingSpecificationRequest",
+          "documentation": "<p>A connection tracking specification.</p>"
         }
       },
       "documentation": "<p>Contains the parameters for ModifyNetworkInterfaceAttribute.</p>"
@@ -47549,6 +48363,11 @@
           "documentation": "<p>The Availability Zone.</p>",
           "locationName": "availabilityZone"
         },
+        "ConnectionTrackingConfiguration": {
+          "shape": "ConnectionTrackingConfiguration",
+          "documentation": "<p>A security group connection tracking configuration that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-connection-tracking.html#connection-tracking-timeouts\">Connection tracking timeouts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "locationName": "connectionTrackingConfiguration"
+        },
         "Description": {
           "shape": "String",
           "documentation": "<p>A description.</p>",
@@ -49700,6 +50519,42 @@
           "shape": "ByoipCidr",
           "documentation": "<p>Information about the address range.</p>",
           "locationName": "byoipCidr"
+        }
+      }
+    },
+    "ProvisionIpamByoasnRequest": {
+      "type": "structure",
+      "required": [
+        "IpamId",
+        "Asn",
+        "AsnAuthorizationContext"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "IpamId": {
+          "shape": "IpamId",
+          "documentation": "<p>An IPAM ID.</p>"
+        },
+        "Asn": {
+          "shape": "String",
+          "documentation": "<p>A public 2-byte or 4-byte ASN.</p>"
+        },
+        "AsnAuthorizationContext": {
+          "shape": "AsnAuthorizationContext",
+          "documentation": "<p>An ASN authorization context.</p>"
+        }
+      }
+    },
+    "ProvisionIpamByoasnResult": {
+      "type": "structure",
+      "members": {
+        "Byoasn": {
+          "shape": "Byoasn",
+          "documentation": "<p>An ASN and BYOIP CIDR association.</p>",
+          "locationName": "byoasn"
         }
       }
     },
@@ -59854,7 +60709,7 @@
           "locationName": "tagSet"
         }
       },
-      "documentation": "<note> <p>Currently available in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Information about an association between a branch network interface with a trunk network interface.</p>"
+      "documentation": "<p>Information about an association between a branch network interface with a trunk network interface.</p>"
     },
     "TrunkInterfaceAssociationId": {
       "type": "string"

@@ -528,6 +528,10 @@ declare namespace RedshiftServerless {
      */
     namespaceName: NamespaceName;
     /**
+     * The ARN for the Redshift application that integrates with IAM Identity Center.
+     */
+    redshiftIdcApplicationArn?: RedshiftIdcApplicationArn;
+    /**
      * A list of tag instances.
      */
     tags?: TagList;
@@ -1338,6 +1342,7 @@ declare namespace RedshiftServerless {
     workgroupName?: WorkgroupName;
   }
   export type RecoveryPointList = RecoveryPoint[];
+  export type RedshiftIdcApplicationArn = string;
   export interface ResourcePolicy {
     /**
      * The resource policy.

@@ -44,6 +44,14 @@ declare class Wisdom extends Service {
    */
   createKnowledgeBase(callback?: (err: AWSError, data: Wisdom.Types.CreateKnowledgeBaseResponse) => void): Request<Wisdom.Types.CreateKnowledgeBaseResponse, AWSError>;
   /**
+   * Creates a Wisdom quick response.
+   */
+  createQuickResponse(params: Wisdom.Types.CreateQuickResponseRequest, callback?: (err: AWSError, data: Wisdom.Types.CreateQuickResponseResponse) => void): Request<Wisdom.Types.CreateQuickResponseResponse, AWSError>;
+  /**
+   * Creates a Wisdom quick response.
+   */
+  createQuickResponse(callback?: (err: AWSError, data: Wisdom.Types.CreateQuickResponseResponse) => void): Request<Wisdom.Types.CreateQuickResponseResponse, AWSError>;
+  /**
    * Creates a session. A session is a contextual container used for generating recommendations. Amazon Connect creates a new Wisdom session for each contact on which Wisdom is enabled.
    */
   createSession(params: Wisdom.Types.CreateSessionRequest, callback?: (err: AWSError, data: Wisdom.Types.CreateSessionResponse) => void): Request<Wisdom.Types.CreateSessionResponse, AWSError>;
@@ -76,6 +84,14 @@ declare class Wisdom extends Service {
    */
   deleteContent(callback?: (err: AWSError, data: Wisdom.Types.DeleteContentResponse) => void): Request<Wisdom.Types.DeleteContentResponse, AWSError>;
   /**
+   * Deletes the quick response import job.
+   */
+  deleteImportJob(params: Wisdom.Types.DeleteImportJobRequest, callback?: (err: AWSError, data: Wisdom.Types.DeleteImportJobResponse) => void): Request<Wisdom.Types.DeleteImportJobResponse, AWSError>;
+  /**
+   * Deletes the quick response import job.
+   */
+  deleteImportJob(callback?: (err: AWSError, data: Wisdom.Types.DeleteImportJobResponse) => void): Request<Wisdom.Types.DeleteImportJobResponse, AWSError>;
+  /**
    * Deletes the knowledge base.  When you use this API to delete an external knowledge base such as Salesforce or ServiceNow, you must also delete the Amazon AppIntegrations DataIntegration. This is because you can't reuse the DataIntegration after it's been associated with an external knowledge base. However, you can delete and recreate it. See DeleteDataIntegration and CreateDataIntegration in the Amazon AppIntegrations API Reference. 
    */
   deleteKnowledgeBase(params: Wisdom.Types.DeleteKnowledgeBaseRequest, callback?: (err: AWSError, data: Wisdom.Types.DeleteKnowledgeBaseResponse) => void): Request<Wisdom.Types.DeleteKnowledgeBaseResponse, AWSError>;
@@ -83,6 +99,14 @@ declare class Wisdom extends Service {
    * Deletes the knowledge base.  When you use this API to delete an external knowledge base such as Salesforce or ServiceNow, you must also delete the Amazon AppIntegrations DataIntegration. This is because you can't reuse the DataIntegration after it's been associated with an external knowledge base. However, you can delete and recreate it. See DeleteDataIntegration and CreateDataIntegration in the Amazon AppIntegrations API Reference. 
    */
   deleteKnowledgeBase(callback?: (err: AWSError, data: Wisdom.Types.DeleteKnowledgeBaseResponse) => void): Request<Wisdom.Types.DeleteKnowledgeBaseResponse, AWSError>;
+  /**
+   * Deletes a quick response.
+   */
+  deleteQuickResponse(params: Wisdom.Types.DeleteQuickResponseRequest, callback?: (err: AWSError, data: Wisdom.Types.DeleteQuickResponseResponse) => void): Request<Wisdom.Types.DeleteQuickResponseResponse, AWSError>;
+  /**
+   * Deletes a quick response.
+   */
+  deleteQuickResponse(callback?: (err: AWSError, data: Wisdom.Types.DeleteQuickResponseResponse) => void): Request<Wisdom.Types.DeleteQuickResponseResponse, AWSError>;
   /**
    * Retrieves information about an assistant.
    */
@@ -116,6 +140,14 @@ declare class Wisdom extends Service {
    */
   getContentSummary(callback?: (err: AWSError, data: Wisdom.Types.GetContentSummaryResponse) => void): Request<Wisdom.Types.GetContentSummaryResponse, AWSError>;
   /**
+   * Retrieves the started import job.
+   */
+  getImportJob(params: Wisdom.Types.GetImportJobRequest, callback?: (err: AWSError, data: Wisdom.Types.GetImportJobResponse) => void): Request<Wisdom.Types.GetImportJobResponse, AWSError>;
+  /**
+   * Retrieves the started import job.
+   */
+  getImportJob(callback?: (err: AWSError, data: Wisdom.Types.GetImportJobResponse) => void): Request<Wisdom.Types.GetImportJobResponse, AWSError>;
+  /**
    * Retrieves information about the knowledge base.
    */
   getKnowledgeBase(params: Wisdom.Types.GetKnowledgeBaseRequest, callback?: (err: AWSError, data: Wisdom.Types.GetKnowledgeBaseResponse) => void): Request<Wisdom.Types.GetKnowledgeBaseResponse, AWSError>;
@@ -123,6 +155,14 @@ declare class Wisdom extends Service {
    * Retrieves information about the knowledge base.
    */
   getKnowledgeBase(callback?: (err: AWSError, data: Wisdom.Types.GetKnowledgeBaseResponse) => void): Request<Wisdom.Types.GetKnowledgeBaseResponse, AWSError>;
+  /**
+   * Retrieves the quick response.
+   */
+  getQuickResponse(params: Wisdom.Types.GetQuickResponseRequest, callback?: (err: AWSError, data: Wisdom.Types.GetQuickResponseResponse) => void): Request<Wisdom.Types.GetQuickResponseResponse, AWSError>;
+  /**
+   * Retrieves the quick response.
+   */
+  getQuickResponse(callback?: (err: AWSError, data: Wisdom.Types.GetQuickResponseResponse) => void): Request<Wisdom.Types.GetQuickResponseResponse, AWSError>;
   /**
    * Retrieves recommendations for the specified session. To avoid retrieving the same recommendations in subsequent calls, use NotifyRecommendationsReceived. This API supports long-polling behavior with the waitTimeSeconds parameter. Short poll is the default behavior and only returns recommendations already available. To perform a manual query against an assistant, use QueryAssistant.
    */
@@ -164,6 +204,14 @@ declare class Wisdom extends Service {
    */
   listContents(callback?: (err: AWSError, data: Wisdom.Types.ListContentsResponse) => void): Request<Wisdom.Types.ListContentsResponse, AWSError>;
   /**
+   * Lists information about import jobs.
+   */
+  listImportJobs(params: Wisdom.Types.ListImportJobsRequest, callback?: (err: AWSError, data: Wisdom.Types.ListImportJobsResponse) => void): Request<Wisdom.Types.ListImportJobsResponse, AWSError>;
+  /**
+   * Lists information about import jobs.
+   */
+  listImportJobs(callback?: (err: AWSError, data: Wisdom.Types.ListImportJobsResponse) => void): Request<Wisdom.Types.ListImportJobsResponse, AWSError>;
+  /**
    * Lists the knowledge bases.
    */
   listKnowledgeBases(params: Wisdom.Types.ListKnowledgeBasesRequest, callback?: (err: AWSError, data: Wisdom.Types.ListKnowledgeBasesResponse) => void): Request<Wisdom.Types.ListKnowledgeBasesResponse, AWSError>;
@@ -171,6 +219,14 @@ declare class Wisdom extends Service {
    * Lists the knowledge bases.
    */
   listKnowledgeBases(callback?: (err: AWSError, data: Wisdom.Types.ListKnowledgeBasesResponse) => void): Request<Wisdom.Types.ListKnowledgeBasesResponse, AWSError>;
+  /**
+   * Lists information about quick response.
+   */
+  listQuickResponses(params: Wisdom.Types.ListQuickResponsesRequest, callback?: (err: AWSError, data: Wisdom.Types.ListQuickResponsesResponse) => void): Request<Wisdom.Types.ListQuickResponsesResponse, AWSError>;
+  /**
+   * Lists information about quick response.
+   */
+  listQuickResponses(callback?: (err: AWSError, data: Wisdom.Types.ListQuickResponsesResponse) => void): Request<Wisdom.Types.ListQuickResponsesResponse, AWSError>;
   /**
    * Lists the tags for the specified resource.
    */
@@ -212,6 +268,14 @@ declare class Wisdom extends Service {
    */
   searchContent(callback?: (err: AWSError, data: Wisdom.Types.SearchContentResponse) => void): Request<Wisdom.Types.SearchContentResponse, AWSError>;
   /**
+   * Searches existing Wisdom quick responses in a Wisdom knowledge base.
+   */
+  searchQuickResponses(params: Wisdom.Types.SearchQuickResponsesRequest, callback?: (err: AWSError, data: Wisdom.Types.SearchQuickResponsesResponse) => void): Request<Wisdom.Types.SearchQuickResponsesResponse, AWSError>;
+  /**
+   * Searches existing Wisdom quick responses in a Wisdom knowledge base.
+   */
+  searchQuickResponses(callback?: (err: AWSError, data: Wisdom.Types.SearchQuickResponsesResponse) => void): Request<Wisdom.Types.SearchQuickResponsesResponse, AWSError>;
+  /**
    * Searches for sessions.
    */
   searchSessions(params: Wisdom.Types.SearchSessionsRequest, callback?: (err: AWSError, data: Wisdom.Types.SearchSessionsResponse) => void): Request<Wisdom.Types.SearchSessionsResponse, AWSError>;
@@ -227,6 +291,14 @@ declare class Wisdom extends Service {
    * Get a URL to upload content to a knowledge base. To upload content, first make a PUT request to the returned URL with your file, making sure to include the required headers. Then use CreateContent to finalize the content creation process or UpdateContent to modify an existing resource. You can only upload content to a knowledge base of type CUSTOM.
    */
   startContentUpload(callback?: (err: AWSError, data: Wisdom.Types.StartContentUploadResponse) => void): Request<Wisdom.Types.StartContentUploadResponse, AWSError>;
+  /**
+   * Start an asynchronous job to import Wisdom resources from an uploaded source file. Before calling this API, use StartContentUpload to upload an asset that contains the resource data.   For importing Wisdom quick responses, you need to upload a csv file including the quick responses. For information about how to format the csv file for importing quick responses, see Import quick responses.  
+   */
+  startImportJob(params: Wisdom.Types.StartImportJobRequest, callback?: (err: AWSError, data: Wisdom.Types.StartImportJobResponse) => void): Request<Wisdom.Types.StartImportJobResponse, AWSError>;
+  /**
+   * Start an asynchronous job to import Wisdom resources from an uploaded source file. Before calling this API, use StartContentUpload to upload an asset that contains the resource data.   For importing Wisdom quick responses, you need to upload a csv file including the quick responses. For information about how to format the csv file for importing quick responses, see Import quick responses.  
+   */
+  startImportJob(callback?: (err: AWSError, data: Wisdom.Types.StartImportJobResponse) => void): Request<Wisdom.Types.StartImportJobResponse, AWSError>;
   /**
    * Adds the specified tags to the specified resource.
    */
@@ -259,6 +331,14 @@ declare class Wisdom extends Service {
    * Updates the template URI of a knowledge base. This is only supported for knowledge bases of type EXTERNAL. Include a single variable in ${variable} format; this interpolated by Wisdom using ingested content. For example, if you ingest a Salesforce article, it has an Id value, and you can set the template URI to https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*view. 
    */
   updateKnowledgeBaseTemplateUri(callback?: (err: AWSError, data: Wisdom.Types.UpdateKnowledgeBaseTemplateUriResponse) => void): Request<Wisdom.Types.UpdateKnowledgeBaseTemplateUriResponse, AWSError>;
+  /**
+   * Updates an existing Wisdom quick response.
+   */
+  updateQuickResponse(params: Wisdom.Types.UpdateQuickResponseRequest, callback?: (err: AWSError, data: Wisdom.Types.UpdateQuickResponseResponse) => void): Request<Wisdom.Types.UpdateQuickResponseResponse, AWSError>;
+  /**
+   * Updates an existing Wisdom quick response.
+   */
+  updateQuickResponse(callback?: (err: AWSError, data: Wisdom.Types.UpdateQuickResponseResponse) => void): Request<Wisdom.Types.UpdateQuickResponseResponse, AWSError>;
 }
 declare namespace Wisdom {
   export interface AppIntegrationsConfiguration {
@@ -304,7 +384,7 @@ declare namespace Wisdom {
   }
   export interface AssistantAssociationInputData {
     /**
-     * The identifier of the knowledge base.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
      */
     knowledgeBaseId?: Uuid;
   }
@@ -367,7 +447,7 @@ declare namespace Wisdom {
      */
     name: Name;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -413,7 +493,7 @@ declare namespace Wisdom {
      */
     name: Name;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -432,7 +512,25 @@ declare namespace Wisdom {
   export type AssistantType = "AGENT"|string;
   export type AssociationType = "KNOWLEDGE_BASE"|string;
   export type Boolean = boolean;
+  export type Channel = string;
+  export type Channels = Channel[];
   export type ClientToken = string;
+  export interface Configuration {
+    /**
+     * The configuration information of the Amazon Connect data source.
+     */
+    connectConfiguration?: ConnectConfiguration;
+  }
+  export interface ConnectConfiguration {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    instanceId?: NonEmptyString;
+  }
+  export type ContactAttributeKey = string;
+  export type ContactAttributeKeys = ContactAttributeKey[];
+  export type ContactAttributeValue = string;
+  export type ContactAttributes = {[key: string]: ContactAttributeValue};
   export interface ContentData {
     /**
      * The Amazon Resource Name (ARN) of the content.
@@ -451,7 +549,7 @@ declare namespace Wisdom {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -506,7 +604,7 @@ declare namespace Wisdom {
      */
     knowledgeBaseArn?: Arn;
     /**
-     * The identifier of the knowledge base.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
      */
     knowledgeBaseId?: Uuid;
   }
@@ -529,7 +627,7 @@ declare namespace Wisdom {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -602,7 +700,7 @@ declare namespace Wisdom {
      */
     name: Name;
     /**
-     * The configuration information for the customer managed key used for encryption.  The customer managed key must have a policy that allows kms:CreateGrant and  kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
+     * The configuration information for the customer managed key used for encryption.  The customer managed key must have a policy that allows kms:CreateGrant,  kms:DescribeKey, and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the key to invoke Wisdom. To use Wisdom with chat, the key policy must also allow kms:Decrypt, kms:GenerateDataKey*, and kms:DescribeKey permissions to the connect.amazonaws.com service principal.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -626,7 +724,7 @@ declare namespace Wisdom {
      */
     clientToken?: NonEmptyString;
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -682,7 +780,7 @@ declare namespace Wisdom {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom. For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the key to invoke Wisdom. For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -699,6 +797,62 @@ declare namespace Wisdom {
      * The knowledge base.
      */
     knowledgeBase?: KnowledgeBaseData;
+  }
+  export interface CreateQuickResponseRequest {
+    /**
+     * The Amazon Connect channels this quick response applies to.
+     */
+    channels?: Channels;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see Making retries safe with idempotent APIs.
+     */
+    clientToken?: NonEmptyString;
+    /**
+     * The content of the quick response.
+     */
+    content: QuickResponseDataProvider;
+    /**
+     * The media type of the quick response content.   Use application/x.quickresponse;format=plain for a quick response written in plain text.   Use application/x.quickresponse;format=markdown for a quick response written in richtext.  
+     */
+    contentType?: QuickResponseType;
+    /**
+     * The description of the quick response.
+     */
+    description?: QuickResponseDescription;
+    /**
+     * The configuration information of the user groups that the quick response is accessible to.
+     */
+    groupingConfiguration?: GroupingConfiguration;
+    /**
+     * Whether the quick response is active.
+     */
+    isActive?: Boolean;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The language code value for the language in which the quick response is written. The supported language codes include de_DE, en_US, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, zh_TW 
+     */
+    language?: LanguageCode;
+    /**
+     * The name of the quick response.
+     */
+    name: QuickResponseName;
+    /**
+     * The shortcut key of the quick response. The value should be unique across the knowledge base. 
+     */
+    shortcutKey?: ShortCutKey;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: Tags;
+  }
+  export interface CreateQuickResponseResponse {
+    /**
+     * The quick response.
+     */
+    quickResponse?: QuickResponseData;
   }
   export interface CreateSessionRequest {
     /**
@@ -754,11 +908,23 @@ declare namespace Wisdom {
      */
     contentId: UuidOrArn;
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
   export interface DeleteContentResponse {
+  }
+  export interface DeleteImportJobRequest {
+    /**
+     * The identifier of the import job to be deleted.
+     */
+    importJobId: Uuid;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
+     */
+    knowledgeBaseId: UuidOrArn;
+  }
+  export interface DeleteImportJobResponse {
   }
   export interface DeleteKnowledgeBaseRequest {
     /**
@@ -767,6 +933,18 @@ declare namespace Wisdom {
     knowledgeBaseId: UuidOrArn;
   }
   export interface DeleteKnowledgeBaseResponse {
+  }
+  export interface DeleteQuickResponseRequest {
+    /**
+     * The knowledge base from which the quick response is deleted. The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The identifier of the quick response to delete.
+     */
+    quickResponseId: UuidOrArn;
+  }
+  export interface DeleteQuickResponseResponse {
   }
   export type Description = string;
   export interface Document {
@@ -792,6 +970,17 @@ declare namespace Wisdom {
      * Text in the document.
      */
     text?: SensitiveString;
+  }
+  export type ExternalSource = "AMAZON_CONNECT"|string;
+  export interface ExternalSourceConfiguration {
+    /**
+     * The configuration information of the external data source.
+     */
+    configuration: Configuration;
+    /**
+     * The type of the external data source.
+     */
+    source: ExternalSource;
   }
   export interface Filter {
     /**
@@ -845,7 +1034,7 @@ declare namespace Wisdom {
      */
     contentId: UuidOrArn;
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -861,7 +1050,7 @@ declare namespace Wisdom {
      */
     contentId: UuidOrArn;
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -871,9 +1060,25 @@ declare namespace Wisdom {
      */
     contentSummary?: ContentSummary;
   }
+  export interface GetImportJobRequest {
+    /**
+     * The identifier of the import job to retrieve.
+     */
+    importJobId: Uuid;
+    /**
+     * The identifier of the knowledge base that the import job belongs to.
+     */
+    knowledgeBaseId: UuidOrArn;
+  }
+  export interface GetImportJobResponse {
+    /**
+     * The import job.
+     */
+    importJob?: ImportJobData;
+  }
   export interface GetKnowledgeBaseRequest {
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -882,6 +1087,22 @@ declare namespace Wisdom {
      * The knowledge base.
      */
     knowledgeBase?: KnowledgeBaseData;
+  }
+  export interface GetQuickResponseRequest {
+    /**
+     * The identifier of the knowledge base. This should be a QUICK_RESPONSES type knowledge base.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The identifier of the quick response.
+     */
+    quickResponseId: UuidOrArn;
+  }
+  export interface GetQuickResponseResponse {
+    /**
+     * The quick response.
+     */
+    quickResponse?: QuickResponseData;
   }
   export interface GetRecommendationsRequest {
     /**
@@ -927,6 +1148,19 @@ declare namespace Wisdom {
      */
     session?: SessionData;
   }
+  export interface GroupingConfiguration {
+    /**
+     * The criteria used for grouping Wisdom users. The following is the list of supported criteria values.    RoutingProfileArn: Grouping the users by their Amazon Connect routing profile ARN. User should have SearchRoutingProfile and DescribeRoutingProfile permissions when setting criteria to this value.  
+     */
+    criteria?: GroupingCriteria;
+    /**
+     * The list of values that define different groups of Wisdom users.   When setting criteria to RoutingProfileArn, you need to provide a list of ARNs of Amazon Connect routing profiles as values of this parameter.  
+     */
+    values?: GroupingValues;
+  }
+  export type GroupingCriteria = string;
+  export type GroupingValue = string;
+  export type GroupingValues = GroupingValue[];
   export type Headers = {[key: string]: NonEmptyString};
   export interface Highlight {
     /**
@@ -940,13 +1174,109 @@ declare namespace Wisdom {
   }
   export type HighlightOffset = number;
   export type Highlights = Highlight[];
+  export interface ImportJobData {
+    /**
+     * The timestamp when the import job was created.
+     */
+    createdTime: SyntheticTimestamp_epoch_seconds;
+    externalSourceConfiguration?: ExternalSourceConfiguration;
+    /**
+     * The link to donwload the information of resource data that failed to be imported.
+     */
+    failedRecordReport?: Url;
+    /**
+     * The identifier of the import job.
+     */
+    importJobId: Uuid;
+    /**
+     * The type of the import job.
+     */
+    importJobType: ImportJobType;
+    /**
+     * The Amazon Resource Name (ARN) of the knowledge base.
+     */
+    knowledgeBaseArn: Arn;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
+     */
+    knowledgeBaseId: Uuid;
+    /**
+     * The timestamp when the import job data was last modified.
+     */
+    lastModifiedTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The metadata fields of the imported Wisdom resources.
+     */
+    metadata?: ContentMetadata;
+    /**
+     * The status of the import job.
+     */
+    status: ImportJobStatus;
+    /**
+     * A pointer to the uploaded asset. This value is returned by StartContentUpload.
+     */
+    uploadId: UploadId;
+    /**
+     * The download link to the resource file that is uploaded to the import job.
+     */
+    url: Url;
+    /**
+     * The expiration time of the URL as an epoch timestamp.
+     */
+    urlExpiry: SyntheticTimestamp_epoch_seconds;
+  }
+  export type ImportJobList = ImportJobSummary[];
+  export type ImportJobStatus = "START_IN_PROGRESS"|"FAILED"|"COMPLETE"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|string;
+  export interface ImportJobSummary {
+    /**
+     * The timestamp when the import job was created.
+     */
+    createdTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The configuration information of the external source that the resource data are imported from.
+     */
+    externalSourceConfiguration?: ExternalSourceConfiguration;
+    /**
+     * The identifier of the import job.
+     */
+    importJobId: Uuid;
+    /**
+     * The type of import job.
+     */
+    importJobType: ImportJobType;
+    /**
+     * The Amazon Resource Name (ARN) of the knowledge base.
+     */
+    knowledgeBaseArn: Arn;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
+     */
+    knowledgeBaseId: Uuid;
+    /**
+     * The timestamp when the import job was last modified.
+     */
+    lastModifiedTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The metadata fields of the imported Wisdom resources.
+     */
+    metadata?: ContentMetadata;
+    /**
+     * The status of the import job.
+     */
+    status: ImportJobStatus;
+    /**
+     * A pointer to the uploaded asset. This value is returned by StartContentUpload.
+     */
+    uploadId: UploadId;
+  }
+  export type ImportJobType = "QUICK_RESPONSES"|string;
   export interface KnowledgeBaseAssociationData {
     /**
      * The Amazon Resource Name (ARN) of the knowledge base.
      */
     knowledgeBaseArn?: Arn;
     /**
-     * The identifier of the knowledge base.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
      */
     knowledgeBaseId?: Uuid;
   }
@@ -960,7 +1290,7 @@ declare namespace Wisdom {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -980,7 +1310,7 @@ declare namespace Wisdom {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, and kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the key to invoke Wisdom.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1008,7 +1338,7 @@ declare namespace Wisdom {
      */
     knowledgeBaseArn: Arn;
     /**
-     * The identifier of the knowledge base.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
      */
     knowledgeBaseId: Uuid;
     /**
@@ -1024,7 +1354,7 @@ declare namespace Wisdom {
      */
     renderingConfiguration?: RenderingConfiguration;
     /**
-     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant and kms:DescribeKey permissions to the IAM identity using the key to invoke Wisdom.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
+     * The configuration information for the customer managed key used for encryption.  This KMS key must have a policy that allows kms:CreateGrant, kms:DescribeKey, kms:Decrypt/kms:GenerateDataKey permissions to the IAM identity using the key to invoke Wisdom.  For more information about setting up a customer managed key for Wisdom, see Enable Amazon Connect Wisdom for your instance.
      */
     serverSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1040,7 +1370,8 @@ declare namespace Wisdom {
      */
     tags?: Tags;
   }
-  export type KnowledgeBaseType = "EXTERNAL"|"CUSTOM"|string;
+  export type KnowledgeBaseType = "EXTERNAL"|"CUSTOM"|"QUICK_RESPONSES"|string;
+  export type LanguageCode = string;
   export interface ListAssistantAssociationsRequest {
     /**
      * The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
@@ -1087,7 +1418,7 @@ declare namespace Wisdom {
   }
   export interface ListContentsRequest {
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -1109,6 +1440,30 @@ declare namespace Wisdom {
      */
     nextToken?: NextToken;
   }
+  export interface ListImportJobsRequest {
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The maximum number of results to return per page.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    nextToken?: NonEmptyString;
+  }
+  export interface ListImportJobsResponse {
+    /**
+     * Summary information about the import jobs.
+     */
+    importJobSummaries: ImportJobList;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    nextToken?: NonEmptyString;
+  }
   export interface ListKnowledgeBasesRequest {
     /**
      * The maximum number of results to return per page.
@@ -1128,6 +1483,30 @@ declare namespace Wisdom {
      * If there are additional results, this is the token for the next set of results.
      */
     nextToken?: NonEmptyString;
+  }
+  export interface ListQuickResponsesRequest {
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The maximum number of results to return per page.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    nextToken?: NonEmptyString;
+  }
+  export interface ListQuickResponsesResponse {
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    nextToken?: NonEmptyString;
+    /**
+     * Summary information about the quick responses.
+     */
+    quickResponseSummaries: QuickResponseSummaryList;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -1182,6 +1561,8 @@ declare namespace Wisdom {
     recommendationIds?: RecommendationIdList;
   }
   export type ObjectFieldsList = NonEmptyString[];
+  export type Order = "ASC"|"DESC"|string;
+  export type Priority = "HIGH"|"MEDIUM"|"LOW"|string;
   export interface QueryAssistantRequest {
     /**
      * The identifier of the Wisdom assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.
@@ -1218,6 +1599,315 @@ declare namespace Wisdom {
   }
   export type QueryResultsList = ResultData[];
   export type QueryText = string;
+  export type QuickResponseContent = string;
+  export interface QuickResponseContentProvider {
+    /**
+     * The content of the quick response.
+     */
+    content?: QuickResponseContent;
+  }
+  export interface QuickResponseContents {
+    markdown?: QuickResponseContentProvider;
+    plainText?: QuickResponseContentProvider;
+  }
+  export interface QuickResponseData {
+    /**
+     * The Amazon Connect contact channels this quick response applies to. The supported contact channel types include Chat.
+     */
+    channels?: Channels;
+    /**
+     * The media type of the quick response content.   Use application/x.quickresponse;format=plain for quick response written in plain text.   Use application/x.quickresponse;format=markdown for quick response written in richtext.  
+     */
+    contentType: QuickResponseType;
+    /**
+     * The contents of the quick response.
+     */
+    contents?: QuickResponseContents;
+    /**
+     * The timestamp when the quick response was created.
+     */
+    createdTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The description of the quick response.
+     */
+    description?: QuickResponseDescription;
+    /**
+     * The configuration information of the user groups that the quick response is accessible to.
+     */
+    groupingConfiguration?: GroupingConfiguration;
+    /**
+     * Whether the quick response is active.
+     */
+    isActive?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the knowledge base.
+     */
+    knowledgeBaseArn: Arn;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    knowledgeBaseId: Uuid;
+    /**
+     * The language code value for the language in which the quick response is written.
+     */
+    language?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the quick response data.
+     */
+    lastModifiedBy?: GenericArn;
+    /**
+     * The timestamp when the quick response data was last modified.
+     */
+    lastModifiedTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The name of the quick response.
+     */
+    name: QuickResponseName;
+    /**
+     * The Amazon Resource Name (ARN) of the quick response.
+     */
+    quickResponseArn: Arn;
+    /**
+     * The identifier of the quick response.
+     */
+    quickResponseId: Uuid;
+    /**
+     * The shortcut key of the quick response. The value should be unique across the knowledge base.
+     */
+    shortcutKey?: ShortCutKey;
+    /**
+     * The status of the quick response data.
+     */
+    status: QuickResponseStatus;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: Tags;
+  }
+  export interface QuickResponseDataProvider {
+    /**
+     * The content of the quick response.
+     */
+    content?: QuickResponseContent;
+  }
+  export type QuickResponseDescription = string;
+  export interface QuickResponseFilterField {
+    /**
+     * Whether to treat null value as a match for the attribute field.
+     */
+    includeNoExistence?: Boolean;
+    /**
+     * The name of the attribute field to filter the quick responses by.
+     */
+    name: NonEmptyString;
+    /**
+     * The operator to use for filtering.
+     */
+    operator: QuickResponseFilterOperator;
+    /**
+     * The values of attribute field to filter the quick response by.
+     */
+    values?: QuickResponseFilterValueList;
+  }
+  export type QuickResponseFilterFieldList = QuickResponseFilterField[];
+  export type QuickResponseFilterOperator = "EQUALS"|"PREFIX"|string;
+  export type QuickResponseFilterValue = string;
+  export type QuickResponseFilterValueList = QuickResponseFilterValue[];
+  export type QuickResponseName = string;
+  export interface QuickResponseOrderField {
+    /**
+     * The name of the attribute to order the quick response query results by.
+     */
+    name: NonEmptyString;
+    /**
+     * The order at which the quick responses are sorted by.
+     */
+    order?: Order;
+  }
+  export interface QuickResponseQueryField {
+    /**
+     * Whether the query expects only exact matches on the attribute field values. The results of the query will only include exact matches if this parameter is set to false.
+     */
+    allowFuzziness?: Boolean;
+    /**
+     * The name of the attribute to query the quick responses by.
+     */
+    name: NonEmptyString;
+    /**
+     * The operator to use for matching attribute field values in the query.
+     */
+    operator: QuickResponseQueryOperator;
+    /**
+     * The importance of the attribute field when calculating query result relevancy scores. The value set for this parameter affects the ordering of search results.
+     */
+    priority?: Priority;
+    /**
+     * The values of the attribute to query the quick responses by.
+     */
+    values: QuickResponseQueryValueList;
+  }
+  export type QuickResponseQueryFieldList = QuickResponseQueryField[];
+  export type QuickResponseQueryOperator = "CONTAINS"|"CONTAINS_AND_PREFIX"|string;
+  export type QuickResponseQueryValue = string;
+  export type QuickResponseQueryValueList = QuickResponseQueryValue[];
+  export interface QuickResponseSearchExpression {
+    /**
+     * The configuration of filtering rules applied to quick response query results.
+     */
+    filters?: QuickResponseFilterFieldList;
+    /**
+     * The quick response attribute fields on which the query results are ordered.
+     */
+    orderOnField?: QuickResponseOrderField;
+    /**
+     * The quick response query expressions.
+     */
+    queries?: QuickResponseQueryFieldList;
+  }
+  export interface QuickResponseSearchResultData {
+    /**
+     * The user defined contact attributes that are resolved when the search result is returned.
+     */
+    attributesInterpolated?: ContactAttributeKeys;
+    /**
+     * The user defined contact attributes that are not resolved when the search result is returned.
+     */
+    attributesNotInterpolated?: ContactAttributeKeys;
+    /**
+     * The Amazon Connect contact channels this quick response applies to. The supported contact channel types include Chat.
+     */
+    channels?: Channels;
+    /**
+     * The media type of the quick response content.   Use application/x.quickresponse;format=plain for quick response written in plain text.   Use application/x.quickresponse;format=markdown for quick response written in richtext.  
+     */
+    contentType: QuickResponseType;
+    /**
+     * The contents of the quick response.
+     */
+    contents: QuickResponseContents;
+    /**
+     * The timestamp when the quick response was created.
+     */
+    createdTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The description of the quick response.
+     */
+    description?: QuickResponseDescription;
+    /**
+     * The configuration information of the user groups that the quick response is accessible to.
+     */
+    groupingConfiguration?: GroupingConfiguration;
+    /**
+     * Whether the quick response is active.
+     */
+    isActive: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the knowledge base.
+     */
+    knowledgeBaseArn: Arn;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    knowledgeBaseId: Uuid;
+    /**
+     * The language code value for the language in which the quick response is written.
+     */
+    language?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the quick response search result data.
+     */
+    lastModifiedBy?: GenericArn;
+    /**
+     * The timestamp when the quick response search result data was last modified.
+     */
+    lastModifiedTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The name of the quick response.
+     */
+    name: QuickResponseName;
+    /**
+     * The Amazon Resource Name (ARN) of the quick response.
+     */
+    quickResponseArn: Arn;
+    /**
+     * The identifier of the quick response.
+     */
+    quickResponseId: Uuid;
+    /**
+     * The shortcut key of the quick response. The value should be unique across the knowledge base.
+     */
+    shortcutKey?: ShortCutKey;
+    /**
+     * The resource status of the quick response.
+     */
+    status: QuickResponseStatus;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: Tags;
+  }
+  export type QuickResponseSearchResultsList = QuickResponseSearchResultData[];
+  export type QuickResponseStatus = "CREATE_IN_PROGRESS"|"CREATE_FAILED"|"CREATED"|"DELETE_IN_PROGRESS"|"DELETE_FAILED"|"DELETED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|string;
+  export interface QuickResponseSummary {
+    /**
+     * The Amazon Connect contact channels this quick response applies to. The supported contact channel types include Chat.
+     */
+    channels?: Channels;
+    /**
+     * The media type of the quick response content.   Use application/x.quickresponse;format=plain for quick response written in plain text.   Use application/x.quickresponse;format=markdown for quick response written in richtext.  
+     */
+    contentType: QuickResponseType;
+    /**
+     * The timestamp when the quick response was created.
+     */
+    createdTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The description of the quick response.
+     */
+    description?: QuickResponseDescription;
+    /**
+     * Whether the quick response is active.
+     */
+    isActive?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the knowledge base.
+     */
+    knowledgeBaseArn: Arn;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it.
+     */
+    knowledgeBaseId: Uuid;
+    /**
+     * The Amazon Resource Name (ARN) of the user who last updated the quick response data.
+     */
+    lastModifiedBy?: GenericArn;
+    /**
+     * The timestamp when the quick response summary was last modified.
+     */
+    lastModifiedTime: SyntheticTimestamp_epoch_seconds;
+    /**
+     * The name of the quick response.
+     */
+    name: QuickResponseName;
+    /**
+     * The Amazon Resource Name (ARN) of the quick response.
+     */
+    quickResponseArn: Arn;
+    /**
+     * The identifier of the quick response.
+     */
+    quickResponseId: Uuid;
+    /**
+     * The resource status of the quick response.
+     */
+    status: QuickResponseStatus;
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    tags?: Tags;
+  }
+  export type QuickResponseSummaryList = QuickResponseSummary[];
+  export type QuickResponseType = string;
   export interface RecommendationData {
     /**
      * The recommended document.
@@ -1278,7 +1968,7 @@ declare namespace Wisdom {
   export type RelevanceScore = number;
   export interface RemoveKnowledgeBaseTemplateUriRequest {
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
   }
@@ -1306,7 +1996,7 @@ declare namespace Wisdom {
   }
   export interface SearchContentRequest {
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -1337,6 +2027,38 @@ declare namespace Wisdom {
      * The search expression filters.
      */
     filters: FilterList;
+  }
+  export interface SearchQuickResponsesRequest {
+    /**
+     * The user-defined Amazon Connect contact attributes to be resolved when search results are returned.
+     */
+    attributes?: ContactAttributes;
+    /**
+     * The identifier of the knowledge base. This should be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The maximum number of results to return per page.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    nextToken?: NonEmptyString;
+    /**
+     * The search expression for querying the quick response.
+     */
+    searchExpression: QuickResponseSearchExpression;
+  }
+  export interface SearchQuickResponsesResponse {
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    nextToken?: NonEmptyString;
+    /**
+     * The results of the quick response search.
+     */
+    results: QuickResponseSearchResultsList;
   }
   export interface SearchSessionsRequest {
     /**
@@ -1424,6 +2146,7 @@ declare namespace Wisdom {
      */
     sessionId: Uuid;
   }
+  export type ShortCutKey = string;
   export interface SourceConfiguration {
     /**
      * Configuration information for Amazon AppIntegrations to automatically ingest content.
@@ -1436,9 +2159,13 @@ declare namespace Wisdom {
      */
     contentType: ContentType;
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
+    /**
+     * The expected expiration time of the generated presigned URL, specified in minutes.
+     */
+    presignedUrlTimeToLive?: TimeToLive;
   }
   export interface StartContentUploadResponse {
     /**
@@ -1458,6 +2185,38 @@ declare namespace Wisdom {
      */
     urlExpiry: SyntheticTimestamp_epoch_seconds;
   }
+  export interface StartImportJobRequest {
+    /**
+     * The tags used to organize, track, or control access for this resource.
+     */
+    clientToken?: NonEmptyString;
+    /**
+     * The configuration information of the external source that the resource data are imported from.
+     */
+    externalSourceConfiguration?: ExternalSourceConfiguration;
+    /**
+     * The type of the import job.   For importing quick response resource, set the value to QUICK_RESPONSES.  
+     */
+    importJobType: ImportJobType;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.   For importing Wisdom quick responses, this should be a QUICK_RESPONSES type knowledge base.  
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The metadata fields of the imported Wisdom resources.
+     */
+    metadata?: ContentMetadata;
+    /**
+     * A pointer to the uploaded asset. This value is returned by StartContentUpload.
+     */
+    uploadId: UploadId;
+  }
+  export interface StartImportJobResponse {
+    /**
+     * The import job.
+     */
+    importJob?: ImportJobData;
+  }
   export type String = string;
   export type SyntheticTimestamp_epoch_seconds = Date;
   export type TagKey = string;
@@ -1476,6 +2235,7 @@ declare namespace Wisdom {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: TagValue};
+  export type TimeToLive = number;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -1494,7 +2254,7 @@ declare namespace Wisdom {
      */
     contentId: UuidOrArn;
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -1530,7 +2290,7 @@ declare namespace Wisdom {
   }
   export interface UpdateKnowledgeBaseTemplateUriRequest {
     /**
-     * The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
      */
     knowledgeBaseId: UuidOrArn;
     /**
@@ -1543,6 +2303,70 @@ declare namespace Wisdom {
      * The knowledge base to update.
      */
     knowledgeBase?: KnowledgeBaseData;
+  }
+  export interface UpdateQuickResponseRequest {
+    /**
+     * The Amazon Connect contact channels this quick response applies to. The supported contact channel types include Chat.
+     */
+    channels?: Channels;
+    /**
+     * The updated content of the quick response.
+     */
+    content?: QuickResponseDataProvider;
+    /**
+     * The media type of the quick response content.   Use application/x.quickresponse;format=plain for quick response written in plain text.   Use application/x.quickresponse;format=markdown for quick response written in richtext.  
+     */
+    contentType?: QuickResponseType;
+    /**
+     * The updated description of the quick response.
+     */
+    description?: QuickResponseDescription;
+    /**
+     * The updated grouping configuration of the quick response.
+     */
+    groupingConfiguration?: GroupingConfiguration;
+    /**
+     * Whether the quick response is active. 
+     */
+    isActive?: Boolean;
+    /**
+     * The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base if you're storing Wisdom Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.
+     */
+    knowledgeBaseId: UuidOrArn;
+    /**
+     * The language code value for the language in which the quick response is written. The supported language codes include de_DE, en_US, es_ES, fr_FR, id_ID, it_IT, ja_JP, ko_KR, pt_BR, zh_CN, zh_TW 
+     */
+    language?: LanguageCode;
+    /**
+     * The name of the quick response.
+     */
+    name?: QuickResponseName;
+    /**
+     * The identifier of the quick response.
+     */
+    quickResponseId: UuidOrArn;
+    /**
+     * Whether to remove the description from the quick response.
+     */
+    removeDescription?: Boolean;
+    /**
+     * Whether to remove the grouping configuration of the quick response.
+     */
+    removeGroupingConfiguration?: Boolean;
+    /**
+     * Whether to remove the shortcut key of the quick response.
+     */
+    removeShortcutKey?: Boolean;
+    /**
+     * The shortcut key of the quick response. The value should be unique across the knowledge base.
+     */
+    shortcutKey?: ShortCutKey;
+  }
+  export interface UpdateQuickResponseResponse {
+    /**
+     * The quick response.
+     */
+    quickResponse?: QuickResponseData;
   }
   export type UploadId = string;
   export type Uri = string;

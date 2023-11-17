@@ -190,6 +190,14 @@ declare class MediaLive extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Describe account configuration
+   */
+  describeAccountConfiguration(params: MediaLive.Types.DescribeAccountConfigurationRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeAccountConfigurationResponse) => void): Request<MediaLive.Types.DescribeAccountConfigurationResponse, AWSError>;
+  /**
+   * Describe account configuration
+   */
+  describeAccountConfiguration(callback?: (err: AWSError, data: MediaLive.Types.DescribeAccountConfigurationResponse) => void): Request<MediaLive.Types.DescribeAccountConfigurationResponse, AWSError>;
+  /**
    * Gets details about a channel
    */
   describeChannel(params: MediaLive.Types.DescribeChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
@@ -269,14 +277,6 @@ declare class MediaLive extends Service {
    * Get a channel schedule
    */
   describeSchedule(callback?: (err: AWSError, data: MediaLive.Types.DescribeScheduleResponse) => void): Request<MediaLive.Types.DescribeScheduleResponse, AWSError>;
-  /**
-   * Get account configuration
-   */
-  describeAccountConfiguration(params: MediaLive.Types.DescribeAccountConfigurationRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeAccountConfigurationResponse) => void): Request<MediaLive.Types.DescribeAccountConfigurationResponse, AWSError>;
-  /**
-   * Get account configuration
-   */
-  describeAccountConfiguration(callback?: (err: AWSError, data: MediaLive.Types.DescribeAccountConfigurationResponse) => void): Request<MediaLive.Types.DescribeAccountConfigurationResponse, AWSError>;
   /**
    * Describe the latest thumbnails data.
    */
@@ -390,14 +390,6 @@ declare class MediaLive extends Service {
    */
   rejectInputDeviceTransfer(callback?: (err: AWSError, data: MediaLive.Types.RejectInputDeviceTransferResponse) => void): Request<MediaLive.Types.RejectInputDeviceTransferResponse, AWSError>;
   /**
-   * Update account configuration
-   */
-  updateAccountConfiguration(params: MediaLive.Types.UpdateAccountConfigurationRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateAccountConfigurationResponse) => void): Request<MediaLive.Types.UpdateAccountConfigurationResponse, AWSError>;
-  /**
-   * Update account configuration
-   */
-  updateAccountConfiguration(callback?: (err: AWSError, data: MediaLive.Types.UpdateAccountConfigurationResponse) => void): Request<MediaLive.Types.UpdateAccountConfigurationResponse, AWSError>;
-  /**
    * Starts an existing channel
    */
   startChannel(params: MediaLive.Types.StartChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
@@ -461,6 +453,14 @@ declare class MediaLive extends Service {
    * Start an input device transfer to another AWS account. After you make the request, the other account must accept or reject the transfer.
    */
   transferInputDevice(callback?: (err: AWSError, data: MediaLive.Types.TransferInputDeviceResponse) => void): Request<MediaLive.Types.TransferInputDeviceResponse, AWSError>;
+  /**
+   * Update account configuration
+   */
+  updateAccountConfiguration(params: MediaLive.Types.UpdateAccountConfigurationRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateAccountConfigurationResponse) => void): Request<MediaLive.Types.UpdateAccountConfigurationResponse, AWSError>;
+  /**
+   * Update account configuration
+   */
+  updateAccountConfiguration(callback?: (err: AWSError, data: MediaLive.Types.UpdateAccountConfigurationResponse) => void): Request<MediaLive.Types.UpdateAccountConfigurationResponse, AWSError>;
   /**
    * Updates a channel.
    */
@@ -2007,6 +2007,11 @@ one destination per packager.
      */
     TagKeys: __listOf__string;
   }
+  export interface DescribeAccountConfigurationRequest {
+  }
+  export interface DescribeAccountConfigurationResponse {
+    AccountConfiguration?: AccountConfiguration;
+  }
   export interface DescribeChannelRequest {
     /**
      * channel ID
@@ -2524,6 +2529,23 @@ during input switch actions. Presently, this functionality only works with MP4_F
      */
     ScheduleActions?: __listOfScheduleAction;
   }
+  export interface DescribeThumbnailsRequest {
+    /**
+     * Unique ID of the channel
+     */
+    ChannelId: __string;
+    /**
+     * Pipeline ID ("0" or "1")
+     */
+    PipelineId: __string;
+    /**
+     * thumbnail type
+     */
+    ThumbnailType: __string;
+  }
+  export interface DescribeThumbnailsResponse {
+    ThumbnailDetails?: __listOfThumbnailDetail;
+  }
   export type DeviceSettingsSyncState = "SYNCED"|"SYNCING"|string;
   export type DeviceUpdateStatus = "UP_TO_DATE"|"NOT_UP_TO_DATE"|"UPDATING"|string;
   export type DolbyEProgramSelection = "ALL_CHANNELS"|"PROGRAM_1"|"PROGRAM_2"|"PROGRAM_3"|"PROGRAM_4"|"PROGRAM_5"|"PROGRAM_6"|"PROGRAM_7"|"PROGRAM_8"|string;
@@ -2948,8 +2970,14 @@ You specify only the font family. All other style information (color, bold, posi
 If you disable the feature on an existing schedule, make sure that you first delete all input prepare actions from the schedule.
      */
     InputPrepareScheduleActions?: FeatureActivationsInputPrepareScheduleActions;
+    /**
+     * Enables the output static image overlay feature. Enabling this feature allows you to send channel schedule updates
+to display/clear/modify image overlays on an output-by-output bases.
+     */
+    OutputStaticImageOverlayScheduleActions?: FeatureActivationsOutputStaticImageOverlayScheduleActions;
   }
   export type FeatureActivationsInputPrepareScheduleActions = "DISABLED"|"ENABLED"|string;
+  export type FeatureActivationsOutputStaticImageOverlayScheduleActions = "DISABLED"|"ENABLED"|string;
   export type FecOutputIncludeFec = "COLUMN"|"COLUMN_AND_ROW"|string;
   export interface FecOutputSettings {
     /**
@@ -3040,28 +3068,6 @@ If you disable the feature on an existing schedule, make sure that you first del
      * Timecode burn-in settings
      */
     TimecodeBurninSettings?: TimecodeBurninSettings;
-  }
-  export interface DescribeAccountConfigurationRequest {
-  }
-  export interface DescribeAccountConfigurationResponse {
-    AccountConfiguration?: AccountConfiguration;
-  }
-  export interface DescribeThumbnailsRequest {
-    /**
-     * Unique ID of the channel
-     */
-    ChannelId: __string;
-    /**
-     * Pipeline ID ("0" or "1")
-     */
-    PipelineId: __string;
-    /**
-     * thumbnail type
-     */
-    ThumbnailType: __string;
-  }
-  export interface DescribeThumbnailsResponse {
-    ThumbnailDetails?: __listOfThumbnailDetail;
   }
   export interface GlobalConfiguration {
     /**
@@ -6217,6 +6223,14 @@ Valid values: 1, 2, 4, 6, 8
      * Action to deactivate a static image overlay
      */
     StaticImageDeactivateSettings?: StaticImageDeactivateScheduleActionSettings;
+    /**
+     * Action to activate a static image overlay in one or more specified outputs
+     */
+    StaticImageOutputActivateSettings?: StaticImageOutputActivateScheduleActionSettings;
+    /**
+     * Action to deactivate a static image overlay in one or more specified outputs
+     */
+    StaticImageOutputDeactivateSettings?: StaticImageOutputDeactivateScheduleActionSettings;
   }
   export interface ScheduleActionStartSettings {
     /**
@@ -6409,12 +6423,6 @@ provide the language to consider when translating the image-based source to text
     Scte35Descriptors: __listOfScte35Descriptor;
   }
   export type Scte35WebDeliveryAllowedFlag = "WEB_DELIVERY_NOT_ALLOWED"|"WEB_DELIVERY_ALLOWED"|string;
-  export interface UpdateAccountConfigurationRequest {
-    AccountConfiguration?: AccountConfiguration;
-  }
-  export interface UpdateAccountConfigurationResponse {
-    AccountConfiguration?: AccountConfiguration;
-  }
   export type SmoothGroupAudioOnlyTimecodeControl = "PASSTHROUGH"|"USE_CONFIGURED_CLOCK"|string;
   export type SmoothGroupCertificateMode = "SELF_SIGNED"|"VERIFY_AUTHENTICITY"|string;
   export type SmoothGroupEventIdMode = "NO_EVENT_ID"|"USE_CONFIGURED"|"USE_TIMESTAMP"|string;
@@ -6520,7 +6528,7 @@ one destination per packager.
   }
   export interface StartInputDeviceRequest {
     /**
-     * The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+     * The unique ID of the input device to start. For example, hd-123456789abcdef.
      */
     InputDeviceId: __string;
   }
@@ -6632,6 +6640,66 @@ one destination per packager.
      */
     Layer?: __integerMin0Max7;
   }
+  export interface StaticImageOutputActivateScheduleActionSettings {
+    /**
+     * The duration in milliseconds for the image to remain on the video. If omitted or set to 0 the duration is unlimited and the image will remain until it is explicitly deactivated.
+     */
+    Duration?: __integerMin0;
+    /**
+     * The time in milliseconds for the image to fade in. The fade-in starts at the start time of the overlay. Default is 0 (no fade-in).
+     */
+    FadeIn?: __integerMin0;
+    /**
+     * Applies only if a duration is specified. The time in milliseconds for the image to fade out. The fade-out starts when the duration time is hit, so it effectively extends the duration. Default is 0 (no fade-out).
+     */
+    FadeOut?: __integerMin0;
+    /**
+     * The height of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified height. Leave blank to use the native height of the overlay.
+     */
+    Height?: __integerMin1;
+    /**
+     * The location and filename of the image file to overlay on the video. The file must be a 32-bit BMP, PNG, or TGA file, and must not be larger (in pixels) than the input video.
+     */
+    Image: InputLocation;
+    /**
+     * Placement of the left edge of the overlay relative to the left edge of the video frame, in pixels. 0 (the default) is the left edge of the frame. If the placement causes the overlay to extend beyond the right edge of the underlying video, then the overlay is cropped on the right.
+     */
+    ImageX?: __integerMin0;
+    /**
+     * Placement of the top edge of the overlay relative to the top edge of the video frame, in pixels. 0 (the default) is the top edge of the frame. If the placement causes the overlay to extend beyond the bottom edge of the underlying video, then the overlay is cropped on the bottom.
+     */
+    ImageY?: __integerMin0;
+    /**
+     * The number of the layer, 0 to 7. There are 8 layers that can be overlaid on the video, each layer with a different image. The layers are in Z order, which means that overlays with higher values of layer are inserted on top of overlays with lower values of layer. Default is 0.
+     */
+    Layer?: __integerMin0Max7;
+    /**
+     * Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.
+     */
+    Opacity?: __integerMin0Max100;
+    /**
+     * The name(s) of the output(s) the activation should apply to.
+     */
+    OutputNames: __listOf__string;
+    /**
+     * The width of the image when inserted into the video, in pixels. The overlay will be scaled up or down to the specified width. Leave blank to use the native width of the overlay.
+     */
+    Width?: __integerMin1;
+  }
+  export interface StaticImageOutputDeactivateScheduleActionSettings {
+    /**
+     * The time in milliseconds for the image to fade out. Default is 0 (no fade-out).
+     */
+    FadeOut?: __integerMin0;
+    /**
+     * The image overlay layer to deactivate, 0 to 7. Default is 0.
+     */
+    Layer?: __integerMin0Max7;
+    /**
+     * The name(s) of the output(s) the deactivation should apply to.
+     */
+    OutputNames: __listOf__string;
+  }
   export interface StaticKeySettings {
     /**
      * The URL of the license server used for protecting content.
@@ -6721,7 +6789,7 @@ one destination per packager.
   }
   export interface StopInputDeviceRequest {
     /**
-     * The unique ID of the input device to reboot. For example, hd-123456789abcdef.
+     * The unique ID of the input device to stop. For example, hd-123456789abcdef.
      */
     InputDeviceId: __string;
   }
@@ -6832,7 +6900,7 @@ one destination per packager.
   }
   export interface ThumbnailConfiguration {
     /**
-     * Whether Thumbnail is enabled.
+     * Enables the thumbnail feature. The feature generates thumbnails of the incoming video in each pipeline in the channel. AUTO turns the feature on, DISABLE turns the feature off.
      */
     State: ThumbnailState;
   }
@@ -6956,6 +7024,12 @@ one destination per packager.
     FecOutputSettings?: FecOutputSettings;
   }
   export type UdpTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export interface UpdateAccountConfigurationRequest {
+    AccountConfiguration?: AccountConfiguration;
+  }
+  export interface UpdateAccountConfigurationResponse {
+    AccountConfiguration?: AccountConfiguration;
+  }
   export interface UpdateChannelClassRequest {
     /**
      * The channel class that you wish to update this channel to use.

@@ -1343,5 +1343,8 @@
   "launchwizard": {
     "prefix": "launch-wizard",
     "name": "LaunchWizard"
+  },
+  "trustedadvisor": {
+    "name": "TrustedAdvisor"
   }
 }

@@ -181,6 +181,14 @@ declare class EC2 extends Service {
    */
   associateInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.AssociateInstanceEventWindowResult) => void): Request<EC2.Types.AssociateInstanceEventWindowResult, AWSError>;
   /**
+   * Associates your Autonomous System Number (ASN) with a BYOIP CIDR that you own in the same Amazon Web Services Region. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide. After the association succeeds, the ASN is eligible for advertisement. You can view the association with DescribeByoipCidrs. You can advertise the CIDR with AdvertiseByoipCidr.
+   */
+  associateIpamByoasn(params: EC2.Types.AssociateIpamByoasnRequest, callback?: (err: AWSError, data: EC2.Types.AssociateIpamByoasnResult) => void): Request<EC2.Types.AssociateIpamByoasnResult, AWSError>;
+  /**
+   * Associates your Autonomous System Number (ASN) with a BYOIP CIDR that you own in the same Amazon Web Services Region. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide. After the association succeeds, the ASN is eligible for advertisement. You can view the association with DescribeByoipCidrs. You can advertise the CIDR with AdvertiseByoipCidr.
+   */
+  associateIpamByoasn(callback?: (err: AWSError, data: EC2.Types.AssociateIpamByoasnResult) => void): Request<EC2.Types.AssociateIpamByoasnResult, AWSError>;
+  /**
    * Associates an IPAM resource discovery with an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   associateIpamResourceDiscovery(params: EC2.Types.AssociateIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.AssociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.AssociateIpamResourceDiscoveryResult, AWSError>;
@@ -205,11 +213,11 @@ declare class EC2 extends Service {
    */
   associateRouteTable(callback?: (err: AWSError, data: EC2.Types.AssociateRouteTableResult) => void): Request<EC2.Types.AssociateRouteTableResult, AWSError>;
   /**
-   * Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.
+   * Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet.
    */
   associateSubnetCidrBlock(params: EC2.Types.AssociateSubnetCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.AssociateSubnetCidrBlockResult) => void): Request<EC2.Types.AssociateSubnetCidrBlockResult, AWSError>;
   /**
-   * Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have a prefix length of /64.
+   * Associates a CIDR block with your subnet. You can only associate a single IPv6 CIDR block with your subnet.
    */
   associateSubnetCidrBlock(callback?: (err: AWSError, data: EC2.Types.AssociateSubnetCidrBlockResult) => void): Request<EC2.Types.AssociateSubnetCidrBlockResult, AWSError>;
   /**
@@ -237,19 +245,19 @@ declare class EC2 extends Service {
    */
   associateTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.AssociateTransitGatewayRouteTableResult, AWSError>;
   /**
-   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.
+   * Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.
    */
   associateTrunkInterface(params: EC2.Types.AssociateTrunkInterfaceRequest, callback?: (err: AWSError, data: EC2.Types.AssociateTrunkInterfaceResult) => void): Request<EC2.Types.AssociateTrunkInterfaceResult, AWSError>;
   /**
-   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.
+   * Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.
    */
   associateTrunkInterface(callback?: (err: AWSError, data: EC2.Types.AssociateTrunkInterfaceResult) => void): Request<EC2.Types.AssociateTrunkInterfaceResult, AWSError>;
   /**
-   * Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). The IPv6 CIDR block size is fixed at /56. You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block. For more information about associating CIDR blocks with your VPC and applicable restrictions, see IP addressing for your VPCs and subnets in the Amazon VPC User Guide.
+   * Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP).  You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block. For more information about associating CIDR blocks with your VPC and applicable restrictions, see IP addressing for your VPCs and subnets in the Amazon VPC User Guide.
    */
   associateVpcCidrBlock(params: EC2.Types.AssociateVpcCidrBlockRequest, callback?: (err: AWSError, data: EC2.Types.AssociateVpcCidrBlockResult) => void): Request<EC2.Types.AssociateVpcCidrBlockResult, AWSError>;
   /**
-   * Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). The IPv6 CIDR block size is fixed at /56. You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block. For more information about associating CIDR blocks with your VPC and applicable restrictions, see IP addressing for your VPCs and subnets in the Amazon VPC User Guide.
+   * Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, an Amazon-provided IPv6 CIDR block, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP).  You must specify one of the following in the request: an IPv4 CIDR block, an IPv6 pool, or an Amazon-provided IPv6 CIDR block. For more information about associating CIDR blocks with your VPC and applicable restrictions, see IP addressing for your VPCs and subnets in the Amazon VPC User Guide.
    */
   associateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.AssociateVpcCidrBlockResult) => void): Request<EC2.Types.AssociateVpcCidrBlockResult, AWSError>;
   /**
@@ -853,11 +861,11 @@ declare class EC2 extends Service {
    */
   createStoreImageTask(callback?: (err: AWSError, data: EC2.Types.CreateStoreImageTaskResult) => void): Request<EC2.Types.CreateStoreImageTaskResult, AWSError>;
   /**
-   * Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block. A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block. The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for your use. If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it. The allowed block size for an IPv6 subnet is a /64 netmask. If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information, see Subnets in the Amazon VPC User Guide.
+   * Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block. A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block. The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for your use. If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information, see Subnets in the Amazon VPC User Guide.
    */
   createSubnet(params: EC2.Types.CreateSubnetRequest, callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
-   * Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block. A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block. The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for your use. If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it. The allowed block size for an IPv6 subnet is a /64 netmask. If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information, see Subnets in the Amazon VPC User Guide.
+   * Creates a subnet in the specified VPC. For an IPv4 only subnet, specify an IPv4 CIDR block. If the VPC has an IPv6 CIDR block, you can create an IPv6 only subnet or a dual stack subnet instead. For an IPv6 only subnet, specify an IPv6 CIDR block. For a dual stack subnet, specify both an IPv4 CIDR block and an IPv6 CIDR block. A subnet CIDR block must not overlap the CIDR block of an existing subnet in the VPC. After you create a subnet, you can't change its CIDR block. The allowed size for an IPv4 subnet is between a /28 netmask (16 IP addresses) and a /16 netmask (65,536 IP addresses). Amazon Web Services reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for your use. If you've associated an IPv6 CIDR block with your VPC, you can associate an IPv6 CIDR block with a subnet when you create it.  If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle. When you stop an instance in a subnet, it retains its private IPv4 address. It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available. For more information, see Subnets in the Amazon VPC User Guide.
    */
   createSubnet(callback?: (err: AWSError, data: EC2.Types.CreateSubnetResult) => void): Request<EC2.Types.CreateSubnetResult, AWSError>;
   /**
@@ -1037,11 +1045,11 @@ declare class EC2 extends Service {
    */
   createVolume(callback?: (err: AWSError, data: EC2.Types.Volume) => void): Request<EC2.Types.Volume, AWSError>;
   /**
-   * Creates a VPC with the specified CIDR blocks. For more information, see IP addressing for your VPCs and subnets in the Amazon VPC User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance that you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP option sets in the Amazon VPC User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon EC2 User Guide.
+   * Creates a VPC with the specified CIDR blocks. For more information, see IP addressing for your VPCs and subnets in the Amazon VPC User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance that you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP option sets in the Amazon VPC User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon EC2 User Guide.
    */
   createVpc(params: EC2.Types.CreateVpcRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
-   * Creates a VPC with the specified CIDR blocks. For more information, see IP addressing for your VPCs and subnets in the Amazon VPC User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance that you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP option sets in the Amazon VPC User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon EC2 User Guide.
+   * Creates a VPC with the specified CIDR blocks. For more information, see IP addressing for your VPCs and subnets in the Amazon VPC User Guide. You can optionally request an IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool of IPv6 addresses or an IPv6 CIDR block from an IPv6 address pool that you provisioned through bring your own IP addresses (BYOIP). By default, each instance that you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see DHCP option sets in the Amazon VPC User Guide. You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see Dedicated Instances in the Amazon EC2 User Guide.
    */
   createVpc(callback?: (err: AWSError, data: EC2.Types.CreateVpcResult) => void): Request<EC2.Types.CreateVpcResult, AWSError>;
   /**
@@ -1701,6 +1709,14 @@ declare class EC2 extends Service {
    */
   deprovisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.DeprovisionByoipCidrResult) => void): Request<EC2.Types.DeprovisionByoipCidrResult, AWSError>;
   /**
+   * Deprovisions your Autonomous System Number (ASN) from your Amazon Web Services account. This action can only be called after any BYOIP CIDR associations are removed from your Amazon Web Services account with DisassociateIpamByoasn. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+   */
+  deprovisionIpamByoasn(params: EC2.Types.DeprovisionIpamByoasnRequest, callback?: (err: AWSError, data: EC2.Types.DeprovisionIpamByoasnResult) => void): Request<EC2.Types.DeprovisionIpamByoasnResult, AWSError>;
+  /**
+   * Deprovisions your Autonomous System Number (ASN) from your Amazon Web Services account. This action can only be called after any BYOIP CIDR associations are removed from your Amazon Web Services account with DisassociateIpamByoasn. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+   */
+  deprovisionIpamByoasn(callback?: (err: AWSError, data: EC2.Types.DeprovisionIpamByoasnResult) => void): Request<EC2.Types.DeprovisionIpamByoasnResult, AWSError>;
+  /**
    * Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR from a pool that has a source pool, the CIDR is recycled back into the source pool. For more information, see Deprovision pool CIDRs in the Amazon VPC IPAM User Guide.
    */
   deprovisionIpamPoolCidr(params: EC2.Types.DeprovisionIpamPoolCidrRequest, callback?: (err: AWSError, data: EC2.Types.DeprovisionIpamPoolCidrResult) => void): Request<EC2.Types.DeprovisionIpamPoolCidrResult, AWSError>;
@@ -2196,6 +2212,14 @@ declare class EC2 extends Service {
    * Describes one or more of your internet gateways.
    */
   describeInternetGateways(callback?: (err: AWSError, data: EC2.Types.DescribeInternetGatewaysResult) => void): Request<EC2.Types.DescribeInternetGatewaysResult, AWSError>;
+  /**
+   * Describes your Autonomous System Numbers (ASNs), their provisioning statuses, and the BYOIP CIDRs with which they are associated. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+   */
+  describeIpamByoasn(params: EC2.Types.DescribeIpamByoasnRequest, callback?: (err: AWSError, data: EC2.Types.DescribeIpamByoasnResult) => void): Request<EC2.Types.DescribeIpamByoasnResult, AWSError>;
+  /**
+   * Describes your Autonomous System Numbers (ASNs), their provisioning statuses, and the BYOIP CIDRs with which they are associated. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+   */
+  describeIpamByoasn(callback?: (err: AWSError, data: EC2.Types.DescribeIpamByoasnResult) => void): Request<EC2.Types.DescribeIpamByoasnResult, AWSError>;
   /**
    * Get information about your IPAM pools.
    */
@@ -2749,11 +2773,11 @@ declare class EC2 extends Service {
    */
   describeTransitGateways(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewaysResult) => void): Request<EC2.Types.DescribeTransitGatewaysResult, AWSError>;
   /**
-   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Describes one or more network interface trunk associations.
+   * Describes one or more network interface trunk associations.
    */
   describeTrunkInterfaceAssociations(params: EC2.Types.DescribeTrunkInterfaceAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTrunkInterfaceAssociationsResult) => void): Request<EC2.Types.DescribeTrunkInterfaceAssociationsResult, AWSError>;
   /**
-   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Describes one or more network interface trunk associations.
+   * Describes one or more network interface trunk associations.
    */
   describeTrunkInterfaceAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeTrunkInterfaceAssociationsResult) => void): Request<EC2.Types.DescribeTrunkInterfaceAssociationsResult, AWSError>;
   /**
@@ -3141,6 +3165,14 @@ declare class EC2 extends Service {
    */
   disassociateInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.DisassociateInstanceEventWindowResult) => void): Request<EC2.Types.DisassociateInstanceEventWindowResult, AWSError>;
   /**
+   * Remove the association between your Autonomous System Number (ASN) and your BYOIP CIDR. You may want to use this action to disassociate an ASN from a CIDR or if you want to swap ASNs. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+   */
+  disassociateIpamByoasn(params: EC2.Types.DisassociateIpamByoasnRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateIpamByoasnResult) => void): Request<EC2.Types.DisassociateIpamByoasnResult, AWSError>;
+  /**
+   * Remove the association between your Autonomous System Number (ASN) and your BYOIP CIDR. You may want to use this action to disassociate an ASN from a CIDR or if you want to swap ASNs. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+   */
+  disassociateIpamByoasn(callback?: (err: AWSError, data: EC2.Types.DisassociateIpamByoasnResult) => void): Request<EC2.Types.DisassociateIpamByoasnResult, AWSError>;
+  /**
    * Disassociates a resource discovery from an Amazon VPC IPAM. A resource discovery is an IPAM component that enables IPAM to manage and monitor resources that belong to the owning account.
    */
   disassociateIpamResourceDiscovery(params: EC2.Types.DisassociateIpamResourceDiscoveryRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateIpamResourceDiscoveryResult) => void): Request<EC2.Types.DisassociateIpamResourceDiscoveryResult, AWSError>;
@@ -3197,11 +3229,11 @@ declare class EC2 extends Service {
    */
   disassociateTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.DisassociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.DisassociateTransitGatewayRouteTableResult, AWSError>;
   /**
-   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Removes an association between a branch network interface with a trunk network interface.
+   * Removes an association between a branch network interface with a trunk network interface.
    */
   disassociateTrunkInterface(params: EC2.Types.DisassociateTrunkInterfaceRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateTrunkInterfaceResult) => void): Request<EC2.Types.DisassociateTrunkInterfaceResult, AWSError>;
   /**
-   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Removes an association between a branch network interface with a trunk network interface.
+   * Removes an association between a branch network interface with a trunk network interface.
    */
   disassociateTrunkInterface(callback?: (err: AWSError, data: EC2.Types.DisassociateTrunkInterfaceResult) => void): Request<EC2.Types.DisassociateTrunkInterfaceResult, AWSError>;
   /**
@@ -3524,6 +3556,14 @@ declare class EC2 extends Service {
    * Gets IPAM discovered accounts. A discovered account is an Amazon Web Services account that is monitored under a resource discovery. If you have integrated IPAM with Amazon Web Services Organizations, all accounts in the organization are discovered accounts. Only the IPAM account can get all discovered accounts in the organization.
    */
   getIpamDiscoveredAccounts(callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredAccountsResult) => void): Request<EC2.Types.GetIpamDiscoveredAccountsResult, AWSError>;
+  /**
+   * Gets the public IP addresses that have been discovered by IPAM.
+   */
+  getIpamDiscoveredPublicAddresses(params: EC2.Types.GetIpamDiscoveredPublicAddressesRequest, callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredPublicAddressesResult) => void): Request<EC2.Types.GetIpamDiscoveredPublicAddressesResult, AWSError>;
+  /**
+   * Gets the public IP addresses that have been discovered by IPAM.
+   */
+  getIpamDiscoveredPublicAddresses(callback?: (err: AWSError, data: EC2.Types.GetIpamDiscoveredPublicAddressesResult) => void): Request<EC2.Types.GetIpamDiscoveredPublicAddressesResult, AWSError>;
   /**
    * Returns the resource CIDRs that are monitored as part of a resource discovery. A discovered resource is a resource CIDR monitored under a resource discovery. The following resources can be discovered: VPCs, Public IPv4 pools, VPC subnets, and Elastic IP addresses. 
    */
@@ -4364,6 +4404,14 @@ declare class EC2 extends Service {
    * Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services resources through bring your own IP addresses (BYOIP) and creates a corresponding address pool. After the address range is provisioned, it is ready to be advertised using AdvertiseByoipCidr. Amazon Web Services verifies that you own the address range and are authorized to advertise it. You must ensure that the address range is registered to you and that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more information, see Bring your own IP addresses (BYOIP) in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is an asynchronous operation, so the call returns immediately, but the address range is not ready to use until its status changes from pending-provision to provisioned. To monitor the status of an address range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress with either the specific address from the address pool or the ID of the address pool.
    */
   provisionByoipCidr(callback?: (err: AWSError, data: EC2.Types.ProvisionByoipCidrResult) => void): Request<EC2.Types.ProvisionByoipCidrResult, AWSError>;
+  /**
+   * Provisions your Autonomous System Number (ASN) for use in your Amazon Web Services account. This action requires authorization context for Amazon to bring the ASN to an Amazon Web Services account. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+   */
+  provisionIpamByoasn(params: EC2.Types.ProvisionIpamByoasnRequest, callback?: (err: AWSError, data: EC2.Types.ProvisionIpamByoasnResult) => void): Request<EC2.Types.ProvisionIpamByoasnResult, AWSError>;
+  /**
+   * Provisions your Autonomous System Number (ASN) for use in your Amazon Web Services account. This action requires authorization context for Amazon to bring the ASN to an Amazon Web Services account. For more information, see Tutorial: Bring your ASN to IPAM in the Amazon VPC IPAM guide.
+   */
+  provisionIpamByoasn(callback?: (err: AWSError, data: EC2.Types.ProvisionIpamByoasnResult) => void): Request<EC2.Types.ProvisionIpamByoasnResult, AWSError>;
   /**
    * Provision a CIDR to an IPAM pool. You can use this action to provision new CIDRs to a top-level pool or to transfer a CIDR from a top-level pool to a pool within it. For more information, see Provision CIDRs to pools in the Amazon VPC IPAM User Guide. 
    */
@@ -5628,6 +5676,10 @@ declare namespace EC2 {
      */
     Cidr: String;
     /**
+     * The public 2-byte or 4-byte ASN that you want to advertise.
+     */
+    Asn?: String;
+    /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
@@ -5784,6 +5836,10 @@ declare namespace EC2 {
      * A preview of the next available CIDR in a pool.
      */
     PreviewNextCidr?: Boolean;
+    /**
+     * Include a particular CIDR range that can be returned by the pool. Allowed CIDRs are only allowed if using netmask length for allocation.
+     */
+    AllowedCidrs?: IpamPoolAllocationAllowedCidrs;
     /**
      * Exclude a particular CIDR range from being returned by the pool. Disallowed CIDRs are only allowed if using netmask length for allocation.
      */
@@ -6045,6 +6101,37 @@ declare namespace EC2 {
   export type ArchitectureTypeSet = ArchitectureType[];
   export type ArchitectureValues = "i386"|"x86_64"|"arm64"|"x86_64_mac"|"arm64_mac"|string;
   export type ArnList = ResourceArn[];
+  export interface AsnAssociation {
+    /**
+     * The association's ASN.
+     */
+    Asn?: String;
+    /**
+     * The association's CIDR.
+     */
+    Cidr?: String;
+    /**
+     * The association's status message.
+     */
+    StatusMessage?: String;
+    /**
+     * The association's state.
+     */
+    State?: AsnAssociationState;
+  }
+  export type AsnAssociationSet = AsnAssociation[];
+  export type AsnAssociationState = "disassociated"|"failed-disassociation"|"failed-association"|"pending-disassociation"|"pending-association"|"associated"|string;
+  export interface AsnAuthorizationContext {
+    /**
+     * The authorization context's message.
+     */
+    Message: String;
+    /**
+     * The authorization context's signature.
+     */
+    Signature: String;
+  }
+  export type AsnState = "deprovisioned"|"failed-deprovision"|"failed-provision"|"pending-deprovision"|"pending-provision"|"provisioned"|string;
   export type AssetId = string;
   export type AssetIdList = AssetId[];
   export interface AssignIpv6AddressesRequest {
@@ -6300,6 +6387,26 @@ declare namespace EC2 {
      */
     InstanceEventWindow?: InstanceEventWindow;
   }
+  export interface AssociateIpamByoasnRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A public 2-byte or 4-byte ASN.
+     */
+    Asn: String;
+    /**
+     * The BYOIP CIDR you want to associate with an ASN.
+     */
+    Cidr: String;
+  }
+  export interface AssociateIpamByoasnResult {
+    /**
+     * The ASN and BYOIP CIDR association.
+     */
+    AsnAssociation?: AsnAssociation;
+  }
   export interface AssociateIpamResourceDiscoveryRequest {
     /**
      * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -6386,13 +6493,21 @@ declare namespace EC2 {
   }
   export interface AssociateSubnetCidrBlockRequest {
     /**
-     * The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix length.
+     * The IPv6 CIDR block for your subnet.
      */
-    Ipv6CidrBlock: String;
+    Ipv6CidrBlock?: String;
     /**
      * The ID of your subnet.
      */
     SubnetId: SubnetId;
+    /**
+     * An IPv6 IPAM pool ID.
+     */
+    Ipv6IpamPoolId?: IpamPoolId;
+    /**
+     * An IPv6 netmask length.
+     */
+    Ipv6NetmaskLength?: NetmaskLength;
   }
   export interface AssociateSubnetCidrBlockResult {
     /**
@@ -6506,7 +6621,7 @@ declare namespace EC2 {
   }
   export interface AssociateVpcCidrBlockRequest {
     /**
-     * Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses, or the size of the CIDR block.
+     * Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IPv6 addresses or the size of the CIDR block.
      */
     AmazonProvidedIpv6CidrBlock?: Boolean;
     /**
@@ -7164,6 +7279,25 @@ declare namespace EC2 {
   export type BundleTaskState = "pending"|"waiting-for-shutdown"|"bundling"|"storing"|"cancelling"|"complete"|"failed"|string;
   export type BurstablePerformance = "included"|"required"|"excluded"|string;
   export type BurstablePerformanceFlag = boolean;
+  export interface Byoasn {
+    /**
+     * A public 2-byte or 4-byte ASN.
+     */
+    Asn?: String;
+    /**
+     * An IPAM ID.
+     */
+    IpamId?: IpamId;
+    /**
+     * The status message.
+     */
+    StatusMessage?: String;
+    /**
+     * The provisioning state of the BYOASN.
+     */
+    State?: AsnState;
+  }
+  export type ByoasnSet = Byoasn[];
   export interface ByoipCidr {
     /**
      * The address range, in CIDR notation.
@@ -7173,6 +7307,10 @@ declare namespace EC2 {
      * The description of the address range.
      */
     Description?: String;
+    /**
+     * The BYOIP CIDR associations with ASNs.
+     */
+    AsnAssociations?: AsnAssociationSet;
     /**
      * Upon success, contains the ID of the address pool. Otherwise, contains an error message.
      */
@@ -8338,6 +8476,62 @@ declare namespace EC2 {
   export type ConnectionNotificationSet = ConnectionNotification[];
   export type ConnectionNotificationState = "Enabled"|"Disabled"|string;
   export type ConnectionNotificationType = "Topic"|string;
+  export interface ConnectionTrackingConfiguration {
+    /**
+     * Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+     */
+    TcpEstablishedTimeout?: Integer;
+    /**
+     * Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+     */
+    UdpStreamTimeout?: Integer;
+    /**
+     * Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+     */
+    UdpTimeout?: Integer;
+  }
+  export interface ConnectionTrackingSpecification {
+    /**
+     * Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+     */
+    TcpEstablishedTimeout?: Integer;
+    /**
+     * Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+     */
+    UdpTimeout?: Integer;
+    /**
+     * Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+     */
+    UdpStreamTimeout?: Integer;
+  }
+  export interface ConnectionTrackingSpecificationRequest {
+    /**
+     * Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+     */
+    TcpEstablishedTimeout?: Integer;
+    /**
+     * Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+     */
+    UdpStreamTimeout?: Integer;
+    /**
+     * Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+     */
+    UdpTimeout?: Integer;
+  }
+  export interface ConnectionTrackingSpecificationResponse {
+    /**
+     * Timeout (in seconds) for idle TCP connections in an established state. Min: 60 seconds. Max: 432000 seconds (5 days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+     */
+    TcpEstablishedTimeout?: Integer;
+    /**
+     * Timeout (in seconds) for idle UDP flows classified as streams which have seen more than one request-response transaction. Min: 60 seconds. Max: 180 seconds (3 minutes). Default: 180 seconds.
+     */
+    UdpStreamTimeout?: Integer;
+    /**
+     * Timeout (in seconds) for idle UDP flows that have seen traffic only in a single direction or a single request-response transaction. Min: 30 seconds. Max: 60 seconds. Default: 30 seconds.
+     */
+    UdpTimeout?: Integer;
+  }
   export type ConnectivityType = "private"|"public"|string;
   export type ContainerFormat = "ova"|string;
   export type ConversionIdStringList = ConversionTaskId[];
@@ -9437,6 +9631,10 @@ declare namespace EC2 {
      * The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is byoip. For more information, see Create IPv6 pools in the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool if PublicIpSource is amazon. For information on increasing the default limit, see  Quotas for your IPAM in the Amazon VPC IPAM User Guide.
      */
     PublicIpSource?: IpamPoolPublicIpSource;
+    /**
+     * The resource used to provision CIDRs to a resource planning pool.
+     */
+    SourceResource?: IpamPoolSourceResourceRequest;
   }
   export interface CreateIpamPoolResult {
     /**
@@ -9465,6 +9663,10 @@ declare namespace EC2 {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see Ensuring Idempotency.
      */
     ClientToken?: String;
+    /**
+     * IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see Amazon VPC pricing &gt; IPAM tab.
+     */
+    Tier?: IpamTier;
   }
   export interface CreateIpamResourceDiscoveryRequest {
     /**
@@ -10065,6 +10267,10 @@ declare namespace EC2 {
      * If you’re creating a network interface in a dual-stack or IPv6-only subnet, you have the option to assign a primary IPv6 IP address. A primary IPv6 address is an IPv6 GUA address associated with an ENI that you have enabled to use a primary IPv6 address. Use this option if the instance that this ENI will be attached to relies on its IPv6 address not changing. Amazon Web Services will automatically assign an IPv6 address associated with the ENI attached to your instance to be the primary IPv6 address. Once you enable an IPv6 GUA address to be a primary IPv6, you cannot disable it. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. If you have multiple IPv6 addresses associated with an ENI attached to your instance and you enable a primary IPv6 address, the first IPv6 GUA address associated with the ENI becomes the primary IPv6 address.
      */
     EnablePrimaryIpv6?: Boolean;
+    /**
+     * A connection tracking specification for the network interface.
+     */
+    ConnectionTrackingSpecification?: ConnectionTrackingSpecificationRequest;
   }
   export interface CreateNetworkInterfaceResult {
     /**
@@ -10484,7 +10690,7 @@ declare namespace EC2 {
      */
     CidrBlock?: String;
     /**
-     * The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length. This parameter is required for an IPv6 only subnet.
+     * The IPv6 network range for the subnet, in CIDR notation. This parameter is required for an IPv6 only subnet.
      */
     Ipv6CidrBlock?: String;
     /**
@@ -10503,6 +10709,22 @@ declare namespace EC2 {
      * Indicates whether to create an IPv6 only subnet.
      */
     Ipv6Native?: Boolean;
+    /**
+     * An IPv4 IPAM pool ID for the subnet.
+     */
+    Ipv4IpamPoolId?: IpamPoolId;
+    /**
+     * An IPv4 netmask length for the subnet.
+     */
+    Ipv4NetmaskLength?: NetmaskLength;
+    /**
+     * An IPv6 IPAM pool ID for the subnet.
+     */
+    Ipv6IpamPoolId?: IpamPoolId;
+    /**
+     * An IPv6 netmask length for the subnet.
+     */
+    Ipv6NetmaskLength?: NetmaskLength;
   }
   export interface CreateSubnetResult {
     /**
@@ -12079,6 +12301,10 @@ declare namespace EC2 {
      * The ID of the pool to delete.
      */
     IpamPoolId: IpamPoolId;
+    /**
+     * Enables you to quickly delete an IPAM pool and all resources within that pool, including provisioned CIDRs, allocations, and other pools.  You can only use this option to delete pools in the private scope or pools in the public scope with a source resource. A source resource is a resource used to provision CIDRs to a resource planning pool. 
+     */
+    Cascade?: Boolean;
   }
   export interface DeleteIpamPoolResult {
     /**
@@ -13087,6 +13313,26 @@ declare namespace EC2 {
      * Information about the address range.
      */
     ByoipCidr?: ByoipCidr;
+  }
+  export interface DeprovisionIpamByoasnRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IPAM ID.
+     */
+    IpamId: IpamId;
+    /**
+     * An ASN.
+     */
+    Asn: String;
+  }
+  export interface DeprovisionIpamByoasnResult {
+    /**
+     * An ASN and BYOIP CIDR association.
+     */
+    Byoasn?: Byoasn;
   }
   export interface DeprovisionIpamPoolCidrRequest {
     /**
@@ -14996,6 +15242,31 @@ declare namespace EC2 {
     InternetGateways?: InternetGatewayList;
     /**
      * The token to include in another request to get the next page of items. This value is null when there are no more items to return.
+     */
+    NextToken?: String;
+  }
+  export type DescribeIpamByoasnMaxResults = number;
+  export interface DescribeIpamByoasnRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeIpamByoasnMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeIpamByoasnResult {
+    /**
+     * ASN and BYOIP CIDR associations.
+     */
+    Byoasns?: ByoasnSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
   }
@@ -18626,6 +18897,26 @@ declare namespace EC2 {
      */
     InstanceEventWindow?: InstanceEventWindow;
   }
+  export interface DisassociateIpamByoasnRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * A public 2-byte or 4-byte ASN.
+     */
+    Asn: String;
+    /**
+     * A BYOIP CIDR.
+     */
+    Cidr: String;
+  }
+  export interface DisassociateIpamByoasnResult {
+    /**
+     * An ASN and BYOIP CIDR association.
+     */
+    AsnAssociation?: AsnAssociation;
+  }
   export interface DisassociateIpamResourceDiscoveryRequest {
     /**
      * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -21394,6 +21685,46 @@ declare namespace EC2 {
      */
     NextToken?: NextToken;
   }
+  export interface GetIpamDiscoveredPublicAddressesRequest {
+    /**
+     * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * An IPAM resource discovery ID.
+     */
+    IpamResourceDiscoveryId: IpamResourceDiscoveryId;
+    /**
+     * The Amazon Web Services Region for the IP address.
+     */
+    AddressRegion: String;
+    /**
+     * Filters.
+     */
+    Filters?: FilterList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of IPAM discovered public addresses to return in one page of results.
+     */
+    MaxResults?: IpamMaxResults;
+  }
+  export interface GetIpamDiscoveredPublicAddressesResult {
+    /**
+     * IPAM discovered public addresses.
+     */
+    IpamDiscoveredPublicAddresses?: IpamDiscoveredPublicAddressSet;
+    /**
+     * The oldest successful resource discovery time.
+     */
+    OldestSampleTime?: MillisecondDateTime;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export interface GetIpamDiscoveredResourceCidrsRequest {
     /**
      * A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -23492,7 +23823,7 @@ declare namespace EC2 {
      */
     Placement?: Placement;
     /**
-     * The value is Windows for Windows instances; otherwise blank.
+     * The platform. This value is windows for Windows instances; otherwise, it is empty.
      */
     Platform?: PlatformValues;
     /**
@@ -24204,6 +24535,10 @@ declare namespace EC2 {
      * The IPv6 delegated prefixes that are assigned to the network interface.
      */
     Ipv6Prefixes?: InstanceIpv6PrefixList;
+    /**
+     * A security group connection tracking configuration that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see Connection tracking timeouts in the Amazon Elastic Compute Cloud User Guide.
+     */
+    ConnectionTrackingConfiguration?: ConnectionTrackingSpecificationResponse;
   }
   export interface InstanceNetworkInterfaceAssociation {
     /**
@@ -24343,6 +24678,10 @@ declare namespace EC2 {
      * Specifies the ENA Express settings for the network interface that's attached to the instance.
      */
     EnaSrdSpecification?: EnaSrdSpecificationRequest;
+    /**
+     * A security group connection tracking specification that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see Connection tracking timeouts in the Amazon Elastic Compute Cloud User Guide.
+     */
+    ConnectionTrackingSpecification?: ConnectionTrackingSpecificationRequest;
   }
   export type InstanceNetworkInterfaceSpecificationList = InstanceNetworkInterfaceSpecification[];
   export interface InstancePrivateIpAddress {
@@ -25043,6 +25382,14 @@ declare namespace EC2 {
      * The IPAM's resource discovery association count.
      */
     ResourceDiscoveryAssociationCount?: Integer;
+    /**
+     * The state message.
+     */
+    StateMessage?: String;
+    /**
+     * IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see Amazon VPC pricing &gt; IPAM tab.
+     */
+    Tier?: IpamTier;
   }
   export type IpamAddressHistoryMaxResults = number;
   export interface IpamAddressHistoryRecord {
@@ -25128,6 +25475,85 @@ declare namespace EC2 {
     LastSuccessfulDiscoveryTime?: MillisecondDateTime;
   }
   export type IpamDiscoveredAccountSet = IpamDiscoveredAccount[];
+  export interface IpamDiscoveredPublicAddress {
+    /**
+     * The resource discovery ID.
+     */
+    IpamResourceDiscoveryId?: IpamResourceDiscoveryId;
+    /**
+     * The Region of the resource the IP address is assigned to.
+     */
+    AddressRegion?: String;
+    /**
+     * The IP address.
+     */
+    Address?: String;
+    /**
+     * The ID of the owner of the resource the IP address is assigned to.
+     */
+    AddressOwnerId?: String;
+    /**
+     * The allocation ID of the resource the IP address is assigned to.
+     */
+    AddressAllocationId?: String;
+    /**
+     * The association status.
+     */
+    AssociationStatus?: IpamPublicAddressAssociationStatus;
+    /**
+     * The IP address type.
+     */
+    AddressType?: IpamPublicAddressType;
+    /**
+     * The Amazon Web Services service associated with the IP address.
+     */
+    Service?: IpamPublicAddressAwsService;
+    /**
+     * The resource ARN or ID.
+     */
+    ServiceResource?: String;
+    /**
+     * The ID of the VPC that the resource with the assigned IP address is in.
+     */
+    VpcId?: String;
+    /**
+     * The ID of the subnet that the resource with the assigned IP address is in.
+     */
+    SubnetId?: String;
+    /**
+     * The ID of the public IPv4 pool that the resource with the assigned IP address is from.
+     */
+    PublicIpv4PoolId?: String;
+    /**
+     * The network interface ID of the resource with the assigned IP address.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The description of the network interface that IP address is assigned to.
+     */
+    NetworkInterfaceDescription?: String;
+    /**
+     * The instance ID of the instance the assigned IP address is assigned to.
+     */
+    InstanceId?: String;
+    /**
+     * Tags associated with the IP address.
+     */
+    Tags?: IpamPublicAddressTags;
+    /**
+     * The network border group that the resource that the IP address is assigned to is in.
+     */
+    NetworkBorderGroup?: String;
+    /**
+     * Security groups associated with the resource that the IP address is assigned to.
+     */
+    SecurityGroups?: IpamPublicAddressSecurityGroupList;
+    /**
+     * The last successful resource discovery time.
+     */
+    SampleTime?: MillisecondDateTime;
+  }
+  export type IpamDiscoveredPublicAddressSet = IpamDiscoveredPublicAddress[];
   export interface IpamDiscoveredResourceCidr {
     /**
      * The resource discovery ID.
@@ -25240,7 +25666,7 @@ declare namespace EC2 {
      */
     State?: IpamPoolState;
     /**
-     * A message related to the failed creation of an IPAM pool.
+     * The state message.
      */
     StateMessage?: String;
     /**
@@ -25287,6 +25713,7 @@ declare namespace EC2 {
      * The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is BYOIP. For more information, see Create IPv6 pools in the Amazon VPC IPAM User Guide. By default, you can add only one Amazon-provided IPv6 CIDR block to a top-level IPv6 pool. For information on increasing the default limit, see  Quotas for your IPAM in the Amazon VPC IPAM User Guide.
      */
     PublicIpSource?: IpamPoolPublicIpSource;
+    SourceResource?: IpamPoolSourceResource;
   }
   export interface IpamPoolAllocation {
     /**
@@ -25318,9 +25745,10 @@ declare namespace EC2 {
      */
     ResourceOwner?: String;
   }
+  export type IpamPoolAllocationAllowedCidrs = String[];
   export type IpamPoolAllocationDisallowedCidrs = String[];
   export type IpamPoolAllocationId = string;
-  export type IpamPoolAllocationResourceType = "ipam-pool"|"vpc"|"ec2-public-ipv4-pool"|"custom"|string;
+  export type IpamPoolAllocationResourceType = "ipam-pool"|"vpc"|"ec2-public-ipv4-pool"|"custom"|"subnet"|string;
   export type IpamPoolAllocationSet = IpamPoolAllocation[];
   export type IpamPoolAwsService = "ec2"|string;
   export interface IpamPoolCidr {
@@ -25362,7 +25790,75 @@ declare namespace EC2 {
   export type IpamPoolId = string;
   export type IpamPoolPublicIpSource = "amazon"|"byoip"|string;
   export type IpamPoolSet = IpamPool[];
+  export interface IpamPoolSourceResource {
+    /**
+     * The source resource ID.
+     */
+    ResourceId?: String;
+    /**
+     * The source resource type.
+     */
+    ResourceType?: IpamPoolSourceResourceType;
+    /**
+     * The source resource Region.
+     */
+    ResourceRegion?: String;
+    /**
+     * The source resource owner.
+     */
+    ResourceOwner?: String;
+  }
+  export interface IpamPoolSourceResourceRequest {
+    /**
+     * The source resource ID.
+     */
+    ResourceId?: String;
+    /**
+     * The source resource type.
+     */
+    ResourceType?: IpamPoolSourceResourceType;
+    /**
+     * The source resource Region.
+     */
+    ResourceRegion?: String;
+    /**
+     * The source resource owner.
+     */
+    ResourceOwner?: String;
+  }
+  export type IpamPoolSourceResourceType = "vpc"|string;
   export type IpamPoolState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
+  export type IpamPublicAddressAssociationStatus = "associated"|"disassociated"|string;
+  export type IpamPublicAddressAwsService = "nat-gateway"|"database-migration-service"|"redshift"|"elastic-container-service"|"relational-database-service"|"site-to-site-vpn"|"load-balancer"|"global-accelerator"|"other"|string;
+  export interface IpamPublicAddressSecurityGroup {
+    /**
+     * The security group's name.
+     */
+    GroupName?: String;
+    /**
+     * The security group's ID.
+     */
+    GroupId?: String;
+  }
+  export type IpamPublicAddressSecurityGroupList = IpamPublicAddressSecurityGroup[];
+  export interface IpamPublicAddressTag {
+    /**
+     * The tag's key.
+     */
+    Key?: String;
+    /**
+     * The tag's value.
+     */
+    Value?: String;
+  }
+  export type IpamPublicAddressTagList = IpamPublicAddressTag[];
+  export interface IpamPublicAddressTags {
+    /**
+     * Tags for an Elastic IP address.
+     */
+    EipTags?: IpamPublicAddressTagList;
+  }
+  export type IpamPublicAddressType = "service-managed-ip"|"service-managed-byoip"|"amazon-owned-eip"|"byoip"|"ec2-public-ip"|string;
   export interface IpamResourceCidr {
     /**
      * The IPAM ID for an IPAM resource.
@@ -25527,7 +26023,7 @@ declare namespace EC2 {
     Value?: String;
   }
   export type IpamResourceTagList = IpamResourceTag[];
-  export type IpamResourceType = "vpc"|"subnet"|"eip"|"public-ipv4-pool"|"ipv6-pool"|string;
+  export type IpamResourceType = "vpc"|"subnet"|"eip"|"public-ipv4-pool"|"ipv6-pool"|"eni"|string;
   export interface IpamScope {
     /**
      * The Amazon Web Services account ID of the owner of the scope.
@@ -25580,6 +26076,7 @@ declare namespace EC2 {
   export type IpamScopeType = "public"|"private"|string;
   export type IpamSet = Ipam[];
   export type IpamState = "create-in-progress"|"create-complete"|"create-failed"|"modify-in-progress"|"modify-complete"|"modify-failed"|"delete-in-progress"|"delete-complete"|"delete-failed"|"isolate-in-progress"|"isolate-complete"|"restore-in-progress"|string;
+  export type IpamTier = "free"|"advanced"|string;
   export type Ipv4PoolCoipId = string;
   export type Ipv4PoolEc2Id = string;
   export type Ipv4PrefixList = Ipv4PrefixSpecificationRequest[];
@@ -26302,6 +26799,10 @@ declare namespace EC2 {
      * Contains the ENA Express settings for instances launched from your launch template.
      */
     EnaSrdSpecification?: LaunchTemplateEnaSrdSpecification;
+    /**
+     * A security group connection tracking specification that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see Connection tracking timeouts in the Amazon Elastic Compute Cloud User Guide.
+     */
+    ConnectionTrackingSpecification?: ConnectionTrackingSpecification;
   }
   export type LaunchTemplateInstanceNetworkInterfaceSpecificationList = LaunchTemplateInstanceNetworkInterfaceSpecification[];
   export interface LaunchTemplateInstanceNetworkInterfaceSpecificationRequest {
@@ -26389,6 +26890,10 @@ declare namespace EC2 {
      * Configure ENA Express settings for your launch template.
      */
     EnaSrdSpecification?: EnaSrdSpecificationRequest;
+    /**
+     * A security group connection tracking specification that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see Connection tracking timeouts in the Amazon Elastic Compute Cloud User Guide.
+     */
+    ConnectionTrackingSpecification?: ConnectionTrackingSpecificationRequest;
   }
   export type LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList = LaunchTemplateInstanceNetworkInterfaceSpecificationRequest[];
   export interface LaunchTemplateLicenseConfiguration {
@@ -28024,6 +28529,10 @@ declare namespace EC2 {
      * The operating Regions to remove.
      */
     RemoveOperatingRegions?: RemoveIpamOperatingRegionSet;
+    /**
+     * IPAM is offered in a Free Tier and an Advanced Tier. For more information about the features available in each tier and the costs associated with the tiers, see Amazon VPC pricing &gt; IPAM tab.
+     */
+    Tier?: IpamTier;
   }
   export interface ModifyIpamResourceCidrRequest {
     /**
@@ -28244,6 +28753,10 @@ declare namespace EC2 {
      * If you’re modifying a network interface in a dual-stack or IPv6-only subnet, you have the option to assign a primary IPv6 IP address. A primary IPv6 address is an IPv6 GUA address associated with an ENI that you have enabled to use a primary IPv6 address. Use this option if the instance that this ENI will be attached to relies on its IPv6 address not changing. Amazon Web Services will automatically assign an IPv6 address associated with the ENI attached to your instance to be the primary IPv6 address. Once you enable an IPv6 GUA address to be a primary IPv6, you cannot disable it. When you enable an IPv6 GUA address to be a primary IPv6, the first IPv6 GUA will be made the primary IPv6 address until the instance is terminated or the network interface is detached. If you have multiple IPv6 addresses associated with an ENI attached to your instance and you enable a primary IPv6 address, the first IPv6 GUA address associated with the ENI becomes the primary IPv6 address.
      */
     EnablePrimaryIpv6?: Boolean;
+    /**
+     * A connection tracking specification.
+     */
+    ConnectionTrackingSpecification?: ConnectionTrackingSpecificationRequest;
   }
   export interface ModifyPrivateDnsNameOptionsRequest {
     /**
@@ -30075,6 +30588,10 @@ declare namespace EC2 {
      */
     AvailabilityZone?: String;
     /**
+     * A security group connection tracking configuration that enables you to set the timeout for connection tracking on an Elastic network interface. For more information, see Connection tracking timeouts in the Amazon Elastic Compute Cloud User Guide.
+     */
+    ConnectionTrackingConfiguration?: ConnectionTrackingConfiguration;
+    /**
      * A description.
      */
     Description?: String;
@@ -31202,6 +31719,30 @@ declare namespace EC2 {
      * Information about the address range.
      */
     ByoipCidr?: ByoipCidr;
+  }
+  export interface ProvisionIpamByoasnRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * An IPAM ID.
+     */
+    IpamId: IpamId;
+    /**
+     * A public 2-byte or 4-byte ASN.
+     */
+    Asn: String;
+    /**
+     * An ASN authorization context.
+     */
+    AsnAuthorizationContext: AsnAuthorizationContext;
+  }
+  export interface ProvisionIpamByoasnResult {
+    /**
+     * An ASN and BYOIP CIDR association.
+     */
+    Byoasn?: Byoasn;
   }
   export interface ProvisionIpamPoolCidrRequest {
     /**

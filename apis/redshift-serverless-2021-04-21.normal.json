@@ -1531,6 +1531,10 @@
           "shape": "NamespaceName",
           "documentation": "<p>The name of the namespace.</p>"
         },
+        "redshiftIdcApplicationArn": {
+          "shape": "RedshiftIdcApplicationArn",
+          "documentation": "<p>The ARN for the Redshift application that integrates with IAM Identity Center.</p>"
+        },
         "tags": {
           "shape": "TagList",
           "documentation": "<p>A list of tag instances.</p>"
@@ -2769,6 +2773,11 @@
       "member": {
         "shape": "RecoveryPoint"
       }
+    },
+    "RedshiftIdcApplicationArn": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
     },
     "ResourcePolicy": {
       "type": "structure",

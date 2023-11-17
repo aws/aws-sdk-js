@@ -356,3 +356,4 @@ export import Bedrock = require('./bedrock');
 export import BedrockRuntime = require('./bedrockruntime');
 export import DataZone = require('./datazone');
 export import LaunchWizard = require('./launchwizard');
+export import TrustedAdvisor = require('./trustedadvisor');

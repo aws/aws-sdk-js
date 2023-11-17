@@ -357,5 +357,6 @@ module.exports = {
   Bedrock: require('./bedrock'),
   BedrockRuntime: require('./bedrockruntime'),
   DataZone: require('./datazone'),
-  LaunchWizard: require('./launchwizard')
+  LaunchWizard: require('./launchwizard'),
+  TrustedAdvisor: require('./trustedadvisor')
 };

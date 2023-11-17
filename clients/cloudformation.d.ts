@@ -908,6 +908,10 @@ declare namespace CloudFormation {
      * The root change set ID.
      */
     RootChangeSetId?: ChangeSetId;
+    /**
+     * Indicates if the stack set imports resources that already exist.
+     */
+    ImportExistingResources?: ImportExistingResources;
   }
   export type ChangeSetType = "CREATE"|"UPDATE"|"IMPORT"|string;
   export type ChangeSource = "ResourceReference"|"ParameterReference"|"ResourceAttribute"|"DirectModification"|"Automatic"|string;
@@ -1011,6 +1015,10 @@ declare namespace CloudFormation {
      * Determines what action will be taken if stack creation fails. If this parameter is specified, the DisableRollback parameter to the ExecuteChangeSet API operation must not be specified. This must be one of these values:    DELETE - Deletes the change set if the stack creation fails. This is only valid when the ChangeSetType parameter is set to CREATE. If the deletion of the stack fails, the status of the stack is DELETE_FAILED.    DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to specifying true for the DisableRollback parameter to the ExecuteChangeSet API operation.    ROLLBACK - if the stack creation fails, roll back the stack. This is equivalent to specifying false for the DisableRollback parameter to the ExecuteChangeSet API operation.   For nested stacks, when the OnStackFailure parameter is set to DELETE for the change set for the parent stack, any failure in a child stack will cause the parent stack creation to fail and all stacks to be deleted.
      */
     OnStackFailure?: OnStackFailure;
+    /**
+     * Indicates if the stack set imports resources that already exist.  This parameter can only import resources that have custom names in templates. For more information, see name type in the CloudFormation User Guide. To import resources that do not accept custom names, such as EC2 instances, use the resource import feature instead. For more information, see Bringing existing resources into CloudFormation management in the CloudFormation User Guide. 
+     */
+    ImportExistingResources?: ImportExistingResources;
   }
   export interface CreateChangeSetOutput {
     /**
@@ -1512,6 +1520,10 @@ declare namespace CloudFormation {
      * Determines what action will be taken if stack creation fails. When this parameter is specified, the DisableRollback parameter to the ExecuteChangeSet API operation must not be specified. This must be one of these values:    DELETE - Deletes the change set if the stack creation fails. This is only valid when the ChangeSetType parameter is set to CREATE. If the deletion of the stack fails, the status of the stack is DELETE_FAILED.    DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to specifying true for the DisableRollback parameter to the ExecuteChangeSet API operation.    ROLLBACK - if the stack creation fails, roll back the stack. This is equivalent to specifying false for the DisableRollback parameter to the ExecuteChangeSet API operation.  
      */
     OnStackFailure?: OnStackFailure;
+    /**
+     * Indicates if the stack set imports resources that already exist.  This parameter can only import resources that have custom names in templates. To import resources that do not accept custom names, such as EC2 instances, use the resource import feature instead. 
+     */
+    ImportExistingResources?: ImportExistingResources;
   }
   export interface DescribeOrganizationsAccessInput {
     /**
@@ -2157,6 +2169,7 @@ declare namespace CloudFormation {
   export type HookTypeName = string;
   export type HookTypeVersionId = string;
   export type IdentityProvider = "AWS_Marketplace"|"GitHub"|"Bitbucket"|string;
+  export type ImportExistingResources = boolean;
   export interface ImportStacksToStackSetInput {
     /**
      * The name of the stack set. The name must be unique in the Region where you create your stack set.
@@ -3900,7 +3913,7 @@ declare namespace CloudFormation {
      */
     MaxConcurrentPercentage?: MaxConcurrentPercentage;
     /**
-     * Specifies how the concurrency level behaves during the operation execution.    STRICT_FAILURE_TOLERANCE: Dynamically lowers the concurrency level to ensure the number of failed accounts never exceeds the FailureToleranceCount +1. StackSets will set the actual concurrency of your deployment as the minimum value between the MaxConcurrentCount and the FailureToleranceCount +1. This is the default behavior. If failure tolerance or Maximum concurrent accounts are set to percentages, the behavior is similar.    SOFT_FAILURE_TOLERANCE: Always run at the concurrency level set by the user in the MaxConcurrentCount or MaxConcurrentPercentage, regardless of the number of failures.  
+     * Specifies how the concurrency level behaves during the operation execution.    STRICT_FAILURE_TOLERANCE: This option dynamically lowers the concurrency level to ensure the number of failed accounts never exceeds the value of FailureToleranceCount +1. The initial actual concurrency is set to the lower of either the value of the MaxConcurrentCount, or the value of MaxConcurrentCount +1. The actual concurrency is then reduced proportionally by the number of failures. This is the default behavior. If failure tolerance or Maximum concurrent accounts are set to percentages, the behavior is similar.    SOFT_FAILURE_TOLERANCE: This option decouples FailureToleranceCount from the actual concurrency. This allows stack set operations to run at the concurrency level set by the MaxConcurrentCount value, or MaxConcurrentPercentage, regardless of the number of failures.  
      */
     ConcurrencyMode?: ConcurrencyMode;
   }

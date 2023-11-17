@@ -28,11 +28,11 @@ declare class EventBridge extends Service {
    */
   cancelReplay(callback?: (err: AWSError, data: EventBridge.Types.CancelReplayResponse) => void): Request<EventBridge.Types.CancelReplayResponse, AWSError>;
   /**
-   * Creates an API destination, which is an HTTP invocation endpoint configured as a target for events.
+   * Creates an API destination, which is an HTTP invocation endpoint configured as a target for events. API destinations do not support private destinations, such as interface VPC endpoints. For more information, see API destinations in the EventBridge User Guide.
    */
   createApiDestination(params: EventBridge.Types.CreateApiDestinationRequest, callback?: (err: AWSError, data: EventBridge.Types.CreateApiDestinationResponse) => void): Request<EventBridge.Types.CreateApiDestinationResponse, AWSError>;
   /**
-   * Creates an API destination, which is an HTTP invocation endpoint configured as a target for events.
+   * Creates an API destination, which is an HTTP invocation endpoint configured as a target for events. API destinations do not support private destinations, such as interface VPC endpoints. For more information, see API destinations in the EventBridge User Guide.
    */
   createApiDestination(callback?: (err: AWSError, data: EventBridge.Types.CreateApiDestinationResponse) => void): Request<EventBridge.Types.CreateApiDestinationResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class EventBridge extends Service {
    */
   createEventBus(callback?: (err: AWSError, data: EventBridge.Types.CreateEventBusResponse) => void): Request<EventBridge.Types.CreateEventBusResponse, AWSError>;
   /**
-   * Called by an SaaS partner to create a partner event source. This operation is not used by Amazon Web Services customers. Each partner event source can be used by one Amazon Web Services account to create a matching partner event bus in that Amazon Web Services account. A SaaS partner must create one partner event source for each Amazon Web Services account that wants to receive those event types.  A partner event source creates events based on resources within the SaaS partner's service or application. An Amazon Web Services account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using Amazon Web Services Events rules and targets. Partner event source names follow this format:   partner_name/event_namespace/event_name    partner_name is determined during partner registration and identifies the partner to Amazon Web Services customers. event_namespace is determined by the partner and is a way for the partner to categorize their events. event_name is determined by the partner, and should uniquely identify an event-generating resource within the partner system. The combination of event_namespace and event_name should help Amazon Web Services customers decide whether to create an event bus to receive these events.
+   * Called by an SaaS partner to create a partner event source. This operation is not used by Amazon Web Services customers. Each partner event source can be used by one Amazon Web Services account to create a matching partner event bus in that Amazon Web Services account. A SaaS partner must create one partner event source for each Amazon Web Services account that wants to receive those event types.  A partner event source creates events based on resources within the SaaS partner's service or application. An Amazon Web Services account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using Amazon Web Services Events rules and targets. Partner event source names follow this format:   partner_name/event_namespace/event_name      partner_name is determined during partner registration, and identifies the partner to Amazon Web Services customers.     event_namespace is determined by the partner, and is a way for the partner to categorize their events.    event_name is determined by the partner, and should uniquely identify an event-generating resource within the partner system.  The event_name must be unique across all Amazon Web Services customers. This is because the event source is a shared resource between the partner and customer accounts, and each partner event source unique in the partner account.   The combination of event_namespace and event_name should help Amazon Web Services customers decide whether to create an event bus to receive these events.
    */
   createPartnerEventSource(params: EventBridge.Types.CreatePartnerEventSourceRequest, callback?: (err: AWSError, data: EventBridge.Types.CreatePartnerEventSourceResponse) => void): Request<EventBridge.Types.CreatePartnerEventSourceResponse, AWSError>;
   /**
-   * Called by an SaaS partner to create a partner event source. This operation is not used by Amazon Web Services customers. Each partner event source can be used by one Amazon Web Services account to create a matching partner event bus in that Amazon Web Services account. A SaaS partner must create one partner event source for each Amazon Web Services account that wants to receive those event types.  A partner event source creates events based on resources within the SaaS partner's service or application. An Amazon Web Services account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using Amazon Web Services Events rules and targets. Partner event source names follow this format:   partner_name/event_namespace/event_name    partner_name is determined during partner registration and identifies the partner to Amazon Web Services customers. event_namespace is determined by the partner and is a way for the partner to categorize their events. event_name is determined by the partner, and should uniquely identify an event-generating resource within the partner system. The combination of event_namespace and event_name should help Amazon Web Services customers decide whether to create an event bus to receive these events.
+   * Called by an SaaS partner to create a partner event source. This operation is not used by Amazon Web Services customers. Each partner event source can be used by one Amazon Web Services account to create a matching partner event bus in that Amazon Web Services account. A SaaS partner must create one partner event source for each Amazon Web Services account that wants to receive those event types.  A partner event source creates events based on resources within the SaaS partner's service or application. An Amazon Web Services account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using Amazon Web Services Events rules and targets. Partner event source names follow this format:   partner_name/event_namespace/event_name      partner_name is determined during partner registration, and identifies the partner to Amazon Web Services customers.     event_namespace is determined by the partner, and is a way for the partner to categorize their events.    event_name is determined by the partner, and should uniquely identify an event-generating resource within the partner system.  The event_name must be unique across all Amazon Web Services customers. This is because the event source is a shared resource between the partner and customer accounts, and each partner event source unique in the partner account.   The combination of event_namespace and event_name should help Amazon Web Services customers decide whether to create an event bus to receive these events.
    */
   createPartnerEventSource(callback?: (err: AWSError, data: EventBridge.Types.CreatePartnerEventSourceResponse) => void): Request<EventBridge.Types.CreatePartnerEventSourceResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class EventBridge extends Service {
    */
   describeConnection(callback?: (err: AWSError, data: EventBridge.Types.DescribeConnectionResponse) => void): Request<EventBridge.Types.DescribeConnectionResponse, AWSError>;
   /**
-   * Get the information about an existing global endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   * Get the information about an existing global endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide.
    */
   describeEndpoint(params: EventBridge.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: EventBridge.Types.DescribeEndpointResponse) => void): Request<EventBridge.Types.DescribeEndpointResponse, AWSError>;
   /**
-   * Get the information about an existing global endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   * Get the information about an existing global endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide.
    */
   describeEndpoint(callback?: (err: AWSError, data: EventBridge.Types.DescribeEndpointResponse) => void): Request<EventBridge.Types.DescribeEndpointResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class EventBridge extends Service {
    */
   listConnections(callback?: (err: AWSError, data: EventBridge.Types.ListConnectionsResponse) => void): Request<EventBridge.Types.ListConnectionsResponse, AWSError>;
   /**
-   * List the global endpoints associated with this account. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   * List the global endpoints associated with this account. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide.
    */
   listEndpoints(params: EventBridge.Types.ListEndpointsRequest, callback?: (err: AWSError, data: EventBridge.Types.ListEndpointsResponse) => void): Request<EventBridge.Types.ListEndpointsResponse, AWSError>;
   /**
-   * List the global endpoints associated with this account. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   * List the global endpoints associated with this account. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide.
    */
   listEndpoints(callback?: (err: AWSError, data: EventBridge.Types.ListEndpointsResponse) => void): Request<EventBridge.Types.ListEndpointsResponse, AWSError>;
   /**
@@ -308,19 +308,19 @@ declare class EventBridge extends Service {
    */
   listReplays(callback?: (err: AWSError, data: EventBridge.Types.ListReplaysResponse) => void): Request<EventBridge.Types.ListReplaysResponse, AWSError>;
   /**
-   * Lists the rules for the specified target. You can see which of the rules in Amazon EventBridge can invoke a specific target in your account.
+   * Lists the rules for the specified target. You can see which of the rules in Amazon EventBridge can invoke a specific target in your account. The maximum number of results per page for requests is 100.
    */
   listRuleNamesByTarget(params: EventBridge.Types.ListRuleNamesByTargetRequest, callback?: (err: AWSError, data: EventBridge.Types.ListRuleNamesByTargetResponse) => void): Request<EventBridge.Types.ListRuleNamesByTargetResponse, AWSError>;
   /**
-   * Lists the rules for the specified target. You can see which of the rules in Amazon EventBridge can invoke a specific target in your account.
+   * Lists the rules for the specified target. You can see which of the rules in Amazon EventBridge can invoke a specific target in your account. The maximum number of results per page for requests is 100.
    */
   listRuleNamesByTarget(callback?: (err: AWSError, data: EventBridge.Types.ListRuleNamesByTargetResponse) => void): Request<EventBridge.Types.ListRuleNamesByTargetResponse, AWSError>;
   /**
-   * Lists your Amazon EventBridge rules. You can either list all the rules or you can provide a prefix to match to the rule names. ListRules does not list the targets of a rule. To see the targets associated with a rule, use ListTargetsByRule.
+   * Lists your Amazon EventBridge rules. You can either list all the rules or you can provide a prefix to match to the rule names. The maximum number of results per page for requests is 100. ListRules does not list the targets of a rule. To see the targets associated with a rule, use ListTargetsByRule.
    */
   listRules(params: EventBridge.Types.ListRulesRequest, callback?: (err: AWSError, data: EventBridge.Types.ListRulesResponse) => void): Request<EventBridge.Types.ListRulesResponse, AWSError>;
   /**
-   * Lists your Amazon EventBridge rules. You can either list all the rules or you can provide a prefix to match to the rule names. ListRules does not list the targets of a rule. To see the targets associated with a rule, use ListTargetsByRule.
+   * Lists your Amazon EventBridge rules. You can either list all the rules or you can provide a prefix to match to the rule names. The maximum number of results per page for requests is 100. ListRules does not list the targets of a rule. To see the targets associated with a rule, use ListTargetsByRule.
    */
   listRules(callback?: (err: AWSError, data: EventBridge.Types.ListRulesResponse) => void): Request<EventBridge.Types.ListRulesResponse, AWSError>;
   /**
@@ -332,27 +332,27 @@ declare class EventBridge extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: EventBridge.Types.ListTagsForResourceResponse) => void): Request<EventBridge.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the targets assigned to the specified rule.
+   * Lists the targets assigned to the specified rule. The maximum number of results per page for requests is 100.
    */
   listTargetsByRule(params: EventBridge.Types.ListTargetsByRuleRequest, callback?: (err: AWSError, data: EventBridge.Types.ListTargetsByRuleResponse) => void): Request<EventBridge.Types.ListTargetsByRuleResponse, AWSError>;
   /**
-   * Lists the targets assigned to the specified rule.
+   * Lists the targets assigned to the specified rule. The maximum number of results per page for requests is 100.
    */
   listTargetsByRule(callback?: (err: AWSError, data: EventBridge.Types.ListTargetsByRuleResponse) => void): Request<EventBridge.Types.ListTargetsByRuleResponse, AWSError>;
   /**
-   * Sends custom events to Amazon EventBridge so that they can be matched to rules.  PutEvents will only process nested JSON up to 1100 levels deep. 
+   * Sends custom events to Amazon EventBridge so that they can be matched to rules. The maximum size for a PutEvents event entry is 256 KB. Entry size is calculated including the event and any necessary characters and keys of the JSON representation of the event. To learn more, see Calculating PutEvents event entry size in the Amazon EventBridge User Guide  PutEvents accepts the data in JSON format. For the JSON number (integer) data type, the constraints are: a minimum value of -9,223,372,036,854,775,808 and a maximum value of 9,223,372,036,854,775,807.  PutEvents will only process nested JSON up to 1100 levels deep. 
    */
   putEvents(params: EventBridge.Types.PutEventsRequest, callback?: (err: AWSError, data: EventBridge.Types.PutEventsResponse) => void): Request<EventBridge.Types.PutEventsResponse, AWSError>;
   /**
-   * Sends custom events to Amazon EventBridge so that they can be matched to rules.  PutEvents will only process nested JSON up to 1100 levels deep. 
+   * Sends custom events to Amazon EventBridge so that they can be matched to rules. The maximum size for a PutEvents event entry is 256 KB. Entry size is calculated including the event and any necessary characters and keys of the JSON representation of the event. To learn more, see Calculating PutEvents event entry size in the Amazon EventBridge User Guide  PutEvents accepts the data in JSON format. For the JSON number (integer) data type, the constraints are: a minimum value of -9,223,372,036,854,775,808 and a maximum value of 9,223,372,036,854,775,807.  PutEvents will only process nested JSON up to 1100 levels deep. 
    */
   putEvents(callback?: (err: AWSError, data: EventBridge.Types.PutEventsResponse) => void): Request<EventBridge.Types.PutEventsResponse, AWSError>;
   /**
-   * This is used by SaaS partners to write events to a customer's partner event bus. Amazon Web Services customers do not use this operation.
+   * This is used by SaaS partners to write events to a customer's partner event bus. Amazon Web Services customers do not use this operation. For information on calculating event batch size, see Calculating EventBridge PutEvents event entry size in the EventBridge User Guide.
    */
   putPartnerEvents(params: EventBridge.Types.PutPartnerEventsRequest, callback?: (err: AWSError, data: EventBridge.Types.PutPartnerEventsResponse) => void): Request<EventBridge.Types.PutPartnerEventsResponse, AWSError>;
   /**
-   * This is used by SaaS partners to write events to a customer's partner event bus. Amazon Web Services customers do not use this operation.
+   * This is used by SaaS partners to write events to a customer's partner event bus. Amazon Web Services customers do not use this operation. For information on calculating event batch size, see Calculating EventBridge PutEvents event entry size in the EventBridge User Guide.
    */
   putPartnerEvents(callback?: (err: AWSError, data: EventBridge.Types.PutPartnerEventsResponse) => void): Request<EventBridge.Types.PutPartnerEventsResponse, AWSError>;
   /**
@@ -372,11 +372,11 @@ declare class EventBridge extends Service {
    */
   putRule(callback?: (err: AWSError, data: EventBridge.Types.PutRuleResponse) => void): Request<EventBridge.Types.PutRuleResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination     API Gateway    Batch job queue   CloudWatch group   CodeBuild project   CodePipeline   EC2 CreateSnapshot API call   EC2 Image Builder   EC2 RebootInstances API call   EC2 StopInstances API call   EC2 TerminateInstances API call   ECS task    Event bus in a different account or Region     Event bus in the same account and Region    Firehose delivery stream   Glue workflow    Incident Manager response plan    Inspector assessment template   Kinesis stream   Lambda function   Redshift cluster   Redshift Serverless workgroup   SageMaker Pipeline   SNS topic   SQS queue   Step Functions state machine   Systems Manager Automation   Systems Manager OpsItem   Systems Manager Run Command   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. The maximum number of entries per request is 10.  Each rule can have up to five (5) targets associated with it at one time.  For a list of services you can configure as targets for events, see EventBridge targets in the Amazon EventBridge User Guide. Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are:    Amazon EBS CreateSnapshot API call     Amazon EC2 RebootInstances API call     Amazon EC2 StopInstances API call     Amazon EC2 TerminateInstances API call    For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions:    For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies.   For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets.   For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide.  If you have an IAM role on a cross-account event bus target, a PutTargets call without a role on the same target (same Id and Arn) will not remove the role.  For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(params: EventBridge.Types.PutTargetsRequest, callback?: (err: AWSError, data: EventBridge.Types.PutTargetsResponse) => void): Request<EventBridge.Types.PutTargetsResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered.  Each rule can have up to five (5) targets associated with it at one time.  You can configure the following as targets for Events:    API destination     API Gateway    Batch job queue   CloudWatch group   CodeBuild project   CodePipeline   EC2 CreateSnapshot API call   EC2 Image Builder   EC2 RebootInstances API call   EC2 StopInstances API call   EC2 TerminateInstances API call   ECS task    Event bus in a different account or Region     Event bus in the same account and Region    Firehose delivery stream   Glue workflow    Incident Manager response plan    Inspector assessment template   Kinesis stream   Lambda function   Redshift cluster   Redshift Serverless workgroup   SageMaker Pipeline   SNS topic   SQS queue   Step Functions state machine   Systems Manager Automation   Systems Manager OpsItem   Systems Manager Run Command   Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. The maximum number of entries per request is 10.  Each rule can have up to five (5) targets associated with it at one time.  For a list of services you can configure as targets for events, see EventBridge targets in the Amazon EventBridge User Guide. Creating rules with built-in targets is supported only in the Amazon Web Services Management Console. The built-in targets are:    Amazon EBS CreateSnapshot API call     Amazon EC2 RebootInstances API call     Amazon EC2 StopInstances API call     Amazon EC2 TerminateInstances API call    For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions:    For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies.   For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets.   For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide.  If you have an IAM role on a cross-account event bus target, a PutTargets call without a role on the same target (same Id and Arn) will not remove the role.  For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(callback?: (err: AWSError, data: EventBridge.Types.PutTargetsResponse) => void): Request<EventBridge.Types.PutTargetsResponse, AWSError>;
   /**
@@ -388,11 +388,11 @@ declare class EventBridge extends Service {
    */
   removePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.  A successful execution of RemoveTargets doesn't guarantee all targets are removed from the rule, it means that the target(s) listed in the request are removed.  When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.  A successful execution of RemoveTargets doesn't guarantee all targets are removed from the rule, it means that the target(s) listed in the request are removed.  When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code. The maximum number of entries per request is 10.
    */
   removeTargets(params: EventBridge.Types.RemoveTargetsRequest, callback?: (err: AWSError, data: EventBridge.Types.RemoveTargetsResponse) => void): Request<EventBridge.Types.RemoveTargetsResponse, AWSError>;
   /**
-   * Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.  A successful execution of RemoveTargets doesn't guarantee all targets are removed from the rule, it means that the target(s) listed in the request are removed.  When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Removes the specified targets from the specified rule. When the rule is triggered, those targets are no longer be invoked.  A successful execution of RemoveTargets doesn't guarantee all targets are removed from the rule, it means that the target(s) listed in the request are removed.  When you remove a target, when the associated rule triggers, removed targets might continue to be invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code. The maximum number of entries per request is 10.
    */
   removeTargets(callback?: (err: AWSError, data: EventBridge.Types.RemoveTargetsResponse) => void): Request<EventBridge.Types.RemoveTargetsResponse, AWSError>;
   /**
@@ -452,11 +452,11 @@ declare class EventBridge extends Service {
    */
   updateConnection(callback?: (err: AWSError, data: EventBridge.Types.UpdateConnectionResponse) => void): Request<EventBridge.Types.UpdateConnectionResponse, AWSError>;
   /**
-   * Update an existing endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   * Update an existing endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide.
    */
   updateEndpoint(params: EventBridge.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: EventBridge.Types.UpdateEndpointResponse) => void): Request<EventBridge.Types.UpdateEndpointResponse, AWSError>;
   /**
-   * Update an existing endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide..
+   * Update an existing endpoint. For more information about global endpoints, see Making applications Regional-fault tolerant with global endpoints and event replication in the Amazon EventBridge User Guide.
    */
   updateEndpoint(callback?: (err: AWSError, data: EventBridge.Types.UpdateEndpointResponse) => void): Request<EventBridge.Types.UpdateEndpointResponse, AWSError>;
 }
@@ -2297,7 +2297,7 @@ declare namespace EventBridge {
      */
     Time?: EventTime;
     /**
-     * The source of the event.
+     * The source of the event.   Detail, DetailType, and Source are required for EventBridge to successfully send an event to an event bus. If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. If you submit a request in which none of the entries have each of these properties, EventBridge fails the entire request.  
      */
     Source?: String;
     /**
@@ -2305,15 +2305,15 @@ declare namespace EventBridge {
      */
     Resources?: EventResourceList;
     /**
-     * Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
+     * Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.   Detail, DetailType, and Source are required for EventBridge to successfully send an event to an event bus. If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. If you submit a request in which none of the entries have each of these properties, EventBridge fails the entire request.  
      */
     DetailType?: String;
     /**
-     * A valid JSON object. There is no other schema imposed. The JSON object may contain fields and nested subobjects.
+     * A valid JSON object. There is no other schema imposed. The JSON object may contain fields and nested sub-objects.   Detail, DetailType, and Source are required for EventBridge to successfully send an event to an event bus. If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. If you submit a request in which none of the entries have each of these properties, EventBridge fails the entire request.  
      */
     Detail?: String;
     /**
-     * The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.  If you're using a global endpoint with a custom bus, you must enter the name, not the ARN, of the event bus in either the primary or secondary Region here and the corresponding event bus in the other Region will be determined based on the endpoint referenced by the EndpointId. 
+     * The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.  If you're using a global endpoint with a custom bus, you can enter either the name or Amazon Resource Name (ARN) of the event bus in either the primary or secondary Region here. EventBridge then determines the corresponding event bus in the other Region based on the endpoint referenced by the EndpointId. Specifying the event bus ARN is preferred. 
      */
     EventBusName?: NonPartnerEventBusNameOrArn;
     /**
@@ -2338,7 +2338,7 @@ declare namespace EventBridge {
      */
     EventId?: EventId;
     /**
-     * The error code that indicates why the event submission failed.
+     * The error code that indicates why the event submission failed. Retryable errors include:     InternalFailure   The request processing has failed because of an unknown error, exception or failure.     ThrottlingException   The request was denied due to request throttling.   Non-retryable errors include:     AccessDeniedException   You do not have sufficient access to perform this action.    InvalidAccountIdException  The account ID provided is not valid.    InvalidArgument  A specified parameter is not valid.    MalformedDetail  The JSON provided is not valid.    RedactionFailure  Redacting the CloudTrail event failed.    NotAuthorizedForSourceException  You do not have permissions to publish events with this source onto this event bus.    NotAuthorizedForDetailTypeException  You do not have permissions to publish events with this detail type onto this event bus.  
      */
     ErrorCode?: ErrorCode;
     /**
@@ -2359,7 +2359,7 @@ declare namespace EventBridge {
      */
     Time?: EventTime;
     /**
-     * The event source that is generating the entry.
+     * The event source that is generating the entry.   Detail, DetailType, and Source are required for EventBridge to successfully send an event to an event bus. If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. If you submit a request in which none of the entries have each of these properties, EventBridge fails the entire request.  
      */
     Source?: EventSourceName;
     /**
@@ -2367,11 +2367,11 @@ declare namespace EventBridge {
      */
     Resources?: EventResourceList;
     /**
-     * A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.
+     * A free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.   Detail, DetailType, and Source are required for EventBridge to successfully send an event to an event bus. If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. If you submit a request in which none of the entries have each of these properties, EventBridge fails the entire request.  
      */
     DetailType?: String;
     /**
-     * A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested subobjects.
+     * A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested sub-objects.   Detail, DetailType, and Source are required for EventBridge to successfully send an event to an event bus. If you include event entries in a request that do not include each of those properties, EventBridge fails that entry. If you submit a request in which none of the entries have each of these properties, EventBridge fails the entire request.  
      */
     Detail?: String;
   }
@@ -2382,7 +2382,7 @@ declare namespace EventBridge {
      */
     FailedEntryCount?: Integer;
     /**
-     * The list of events from this operation that were successfully written to the partner event bus.
+     * The results for each event entry the partner submitted in this request. If the event was successfully submitted, the entry has the event ID in it. Otherwise, you can use the error code and error message to identify the problem with the entry. For each record, the index of the response element is the same as the index in the request array.
      */
     Entries?: PutPartnerEventsResultEntryList;
   }
@@ -2441,7 +2441,7 @@ declare namespace EventBridge {
      */
     EventPattern?: EventPattern;
     /**
-     * Indicates whether the rule is enabled or disabled.
+     * The state of the rule. Valid values include:    DISABLED: The rule is disabled. EventBridge does not match any events against the rule.    ENABLED: The rule is enabled. EventBridge matches events against the rule, except for Amazon Web Services management events delivered through CloudTrail.    ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS: The rule is enabled for all events, including Amazon Web Services management events delivered through CloudTrail. Management events provide visibility into management operations that are performed on resources in your Amazon Web Services account. These are also known as control plane operations. For more information, see Logging management events in the CloudTrail User Guide, and Filtering management events from Amazon Web Services services in the Amazon EventBridge User Guide. This value is only valid for rules on the default event bus or custom event buses. It does not apply to partner event buses.  
      */
     State?: RuleState;
     /**
@@ -2520,7 +2520,7 @@ declare namespace EventBridge {
      */
     Database: Database;
     /**
-     * The database user name. Required when authenticating using temporary credentials. Do not provide this parameter when connecting to a Redshift Serverless workgroup.
+     * The database user name. Required when authenticating using temporary credentials.
      */
     DbUser?: DbUser;
     /**
@@ -2535,6 +2535,9 @@ declare namespace EventBridge {
      * Indicates whether to send an event back to EventBridge after the SQL statement runs.
      */
     WithEvent?: Boolean;
+    /**
+     * One or more SQL statements to run. The SQL statements are run as a single transaction. They run serially in the order of the array. Subsequent SQL statements don't start until the previous statement in the array completes. If any SQL statement fails, then because they are run as one transaction, all work is rolled back.
+     */
     Sqls?: Sqls;
   }
   export type RedshiftSecretManagerArn = string;
@@ -2692,7 +2695,7 @@ declare namespace EventBridge {
      */
     EventPattern?: EventPattern;
     /**
-     * The state of the rule.
+     * The state of the rule. Valid values include:    DISABLED: The rule is disabled. EventBridge does not match any events against the rule.    ENABLED: The rule is enabled. EventBridge matches events against the rule, except for Amazon Web Services management events delivered through CloudTrail.    ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS: The rule is enabled for all events, including Amazon Web Services management events delivered through CloudTrail. Management events provide visibility into management operations that are performed on resources in your Amazon Web Services account. These are also known as control plane operations. For more information, see Logging management events in the CloudTrail User Guide, and Filtering management events from Amazon Web Services services in the Amazon EventBridge User Guide. This value is only valid for rules on the default event bus or custom event buses. It does not apply to partner event buses.  
      */
     State?: RuleState;
     /**
@@ -2721,7 +2724,7 @@ declare namespace EventBridge {
   export type RuleName = string;
   export type RuleNameList = RuleName[];
   export type RuleResponseList = Rule[];
-  export type RuleState = "ENABLED"|"DISABLED"|string;
+  export type RuleState = "ENABLED"|"DISABLED"|"ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS"|string;
   export interface RunCommandParameters {
     /**
      * Currently, we support including only one RunCommandTarget block, which specifies either an array of InstanceIds or a tag.

@@ -1690,7 +1690,7 @@ declare namespace CodePipeline {
      */
     version?: PipelineVersion;
     /**
-     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.
+     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.  V2 type pipelines, along with triggers on Git tags and pipeline-level variables, are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see Pipeline types in the CodePipeline User Guide. 
      */
     pipelineType?: PipelineType;
     /**
@@ -1798,7 +1798,7 @@ declare namespace CodePipeline {
      */
     version?: PipelineVersion;
     /**
-     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.
+     * CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.   V1 type pipelines have a JSON structure that contains standard pipeline, stage, and action-level parameters.   V2 type pipelines have the same structure as a V1 type, along with additional parameters for release safety and trigger configuration.    Including V2 parameters, such as triggers on Git tags, in the pipeline JSON when creating or updating a pipeline will result in the pipeline having the V2 type of pipeline and the associated costs.  For information about pricing for CodePipeline, see Pricing.  For information about which type of pipeline to choose, see What type of pipeline is right for me?.  V2 type pipelines, along with triggers on Git tags and pipeline-level variables, are not currently supported for CloudFormation and CDK resources in CodePipeline. For more information about V2 type pipelines, see Pipeline types in the CodePipeline User Guide. 
      */
     pipelineType?: PipelineType;
     /**
@@ -2129,6 +2129,22 @@ declare namespace CodePipeline {
     revisionUrl?: Url;
   }
   export type SourceRevisionList = SourceRevision[];
+  export interface SourceRevisionOverride {
+    /**
+     * The name of the action where the override will be applied.
+     */
+    actionName: ActionName;
+    /**
+     * The type of source revision, based on the source provider. For example, the revision type for the CodeCommit action provider is the commit ID.
+     */
+    revisionType: SourceRevisionType;
+    /**
+     * The source revision, or version of your source artifact, with the changes that you want to run in the pipeline execution.
+     */
+    revisionValue: Revision;
+  }
+  export type SourceRevisionOverrideList = SourceRevisionOverride[];
+  export type SourceRevisionType = "COMMIT_ID"|"IMAGE_DIGEST"|"S3_OBJECT_VERSION_ID"|string;
   export type StageActionDeclarationList = ActionDeclaration[];
   export type StageBlockerDeclarationList = BlockerDeclaration[];
   export interface StageContext {
@@ -2198,6 +2214,10 @@ declare namespace CodePipeline {
      * The system-generated unique ID used to identify a unique execution request.
      */
     clientRequestToken?: ClientRequestToken;
+    /**
+     * A list that allows you to specify, or override, the source revision for a pipeline execution that's being started. A source revision is the version with all the changes to your application code, or source artifact, for the pipeline execution.
+     */
+    sourceRevisions?: SourceRevisionOverrideList;
   }
   export interface StartPipelineExecutionOutput {
     /**

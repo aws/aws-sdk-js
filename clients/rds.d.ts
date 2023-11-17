@@ -78,11 +78,11 @@ declare class RDS extends Service {
    */
   cancelExportTask(callback?: (err: AWSError, data: RDS.Types.ExportTask) => void): Request<RDS.Types.ExportTask, AWSError>;
   /**
-   * Copies the specified DB cluster parameter group.
+   * Copies the specified DB cluster parameter group.  You can't copy a default DB cluster parameter group. Instead, create a new custom DB cluster parameter group, which copies the default parameters and values for the specified DB cluster parameter group family. 
    */
   copyDBClusterParameterGroup(params: RDS.Types.CopyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: RDS.Types.CopyDBClusterParameterGroupResult) => void): Request<RDS.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
-   * Copies the specified DB cluster parameter group.
+   * Copies the specified DB cluster parameter group.  You can't copy a default DB cluster parameter group. Instead, create a new custom DB cluster parameter group, which copies the default parameters and values for the specified DB cluster parameter group family. 
    */
   copyDBClusterParameterGroup(callback?: (err: AWSError, data: RDS.Types.CopyDBClusterParameterGroupResult) => void): Request<RDS.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
@@ -94,11 +94,11 @@ declare class RDS extends Service {
    */
   copyDBClusterSnapshot(callback?: (err: AWSError, data: RDS.Types.CopyDBClusterSnapshotResult) => void): Request<RDS.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
-   * Copies the specified DB parameter group.
+   * Copies the specified DB parameter group.  You can't copy a default DB parameter group. Instead, create a new custom DB parameter group, which copies the default parameters and values for the specified DB parameter group family. 
    */
   copyDBParameterGroup(params: RDS.Types.CopyDBParameterGroupMessage, callback?: (err: AWSError, data: RDS.Types.CopyDBParameterGroupResult) => void): Request<RDS.Types.CopyDBParameterGroupResult, AWSError>;
   /**
-   * Copies the specified DB parameter group.
+   * Copies the specified DB parameter group.  You can't copy a default DB parameter group. Instead, create a new custom DB parameter group, which copies the default parameters and values for the specified DB parameter group family. 
    */
   copyDBParameterGroup(callback?: (err: AWSError, data: RDS.Types.CopyDBParameterGroupResult) => void): Request<RDS.Types.CopyDBParameterGroupResult, AWSError>;
   /**
@@ -3040,6 +3040,10 @@ declare namespace RDS {
      */
     ReadReplicaIdentifiers?: ReadReplicaIdentifierList;
     /**
+     * Reserved for future use.
+     */
+    StatusInfos?: DBClusterStatusInfoList;
+    /**
      * The list of DB instances that make up the DB cluster.
      */
     DBClusterMembers?: DBClusterMemberList;
@@ -3678,6 +3682,25 @@ declare namespace RDS {
      */
     DBClusterSnapshots?: DBClusterSnapshotList;
   }
+  export interface DBClusterStatusInfo {
+    /**
+     * Reserved for future use.
+     */
+    StatusType?: String;
+    /**
+     * Reserved for future use.
+     */
+    Normal?: Boolean;
+    /**
+     * Reserved for future use.
+     */
+    Status?: String;
+    /**
+     * Reserved for future use.
+     */
+    Message?: String;
+  }
+  export type DBClusterStatusInfoList = DBClusterStatusInfo[];
   export interface DBEngineVersion {
     /**
      * The name of the database engine.
@@ -8299,6 +8322,10 @@ declare namespace RDS {
      * Reserved for future use.
      */
     TransitGatewayMulticastDomainId?: String;
+    /**
+     * Reserved for future use.
+     */
+    ReplicaMode?: ReplicaMode;
   }
   export type ReadReplicaDBClusterIdentifierList = String[];
   export type ReadReplicaDBInstanceIdentifierList = String[];

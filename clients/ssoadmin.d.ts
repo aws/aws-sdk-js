@@ -869,7 +869,7 @@ declare namespace SSOAdmin {
   export type AuthenticationMethods = AuthenticationMethodItem[];
   export interface AuthorizationCodeGrant {
     /**
-     * ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+     * A list of URIs that are valid locations to redirect a user's browser after the user is authorized.
      */
     RedirectUris?: RedirectUris;
   }
@@ -1611,21 +1611,29 @@ declare namespace SSOAdmin {
   }
   export interface Grant {
     /**
-     * ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+     * Configuration options for the authorization_code grant type.
      */
     AuthorizationCode?: AuthorizationCodeGrant;
     /**
-     * ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+     * Configuration options for the urn:ietf:params:oauth:grant-type:jwt-bearer grant type.
      */
     JwtBearer?: JwtBearerGrant;
+    /**
+     * Configuration options for the refresh_token grant type.
+     */
+    RefreshToken?: RefreshTokenGrant;
+    /**
+     * Configuration options for the urn:ietf:params:oauth:grant-type:token-exchange grant type.
+     */
+    TokenExchange?: TokenExchangeGrant;
   }
   export interface GrantItem {
     /**
-     * ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+     * The configuration structure for the selected grant.
      */
     Grant: Grant;
     /**
-     * ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+     * The type of the selected grant.
      */
     GrantType: GrantType;
   }
@@ -1680,7 +1688,7 @@ declare namespace SSOAdmin {
   export type JwksRetrievalOption = "OPEN_ID_DISCOVERY"|string;
   export interface JwtBearerGrant {
     /**
-     * ~~~[ TODO: ADD DESCRIPTION HERE ]~~~
+     * A list of allowed token issuers trusted by the Identity Center instances for this application.
      */
     AuthorizedTokenIssuers?: AuthorizedTokenIssuers;
   }
@@ -2495,6 +2503,8 @@ declare namespace SSOAdmin {
   }
   export type Reason = string;
   export type RedirectUris = URI[];
+  export interface RefreshTokenGrant {
+  }
   export type RelayState = string;
   export interface ResourceServerConfig {
     /**
@@ -2574,6 +2584,8 @@ declare namespace SSOAdmin {
   export type TargetId = string;
   export type TargetType = "AWS_ACCOUNT"|string;
   export type Token = string;
+  export interface TokenExchangeGrant {
+  }
   export type TokenIssuerAudience = string;
   export type TokenIssuerAudiences = TokenIssuerAudience[];
   export type TrustedTokenIssuerArn = string;

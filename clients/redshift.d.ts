@@ -189,6 +189,14 @@ declare class Redshift extends Service {
    */
   createHsmConfiguration(callback?: (err: AWSError, data: Redshift.Types.CreateHsmConfigurationResult) => void): Request<Redshift.Types.CreateHsmConfigurationResult, AWSError>;
   /**
+   * Creates an Amazon Redshift application for use with IAM Identity Center.
+   */
+  createRedshiftIdcApplication(params: Redshift.Types.CreateRedshiftIdcApplicationMessage, callback?: (err: AWSError, data: Redshift.Types.CreateRedshiftIdcApplicationResult) => void): Request<Redshift.Types.CreateRedshiftIdcApplicationResult, AWSError>;
+  /**
+   * Creates an Amazon Redshift application for use with IAM Identity Center.
+   */
+  createRedshiftIdcApplication(callback?: (err: AWSError, data: Redshift.Types.CreateRedshiftIdcApplicationResult) => void): Request<Redshift.Types.CreateRedshiftIdcApplicationResult, AWSError>;
+  /**
    * Creates a scheduled action. A scheduled action contains a schedule and an Amazon Redshift API action. For example, you can create a schedule of when to run the ResizeCluster API operation. 
    */
   createScheduledAction(params: Redshift.Types.CreateScheduledActionMessage, callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
@@ -332,6 +340,14 @@ declare class Redshift extends Service {
    * Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
    */
   deletePartner(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Deletes an Amazon Redshift IAM Identity Center application.
+   */
+  deleteRedshiftIdcApplication(params: Redshift.Types.DeleteRedshiftIdcApplicationMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon Redshift IAM Identity Center application.
+   */
+  deleteRedshiftIdcApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the resource policy for a specified resource.
    */
@@ -604,6 +620,14 @@ declare class Redshift extends Service {
    * Returns information about the partner integrations defined for a cluster.
    */
   describePartners(callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
+  /**
+   * Lists the Amazon Redshift IAM Identity Center applications.
+   */
+  describeRedshiftIdcApplications(params: Redshift.Types.DescribeRedshiftIdcApplicationsMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeRedshiftIdcApplicationsResult) => void): Request<Redshift.Types.DescribeRedshiftIdcApplicationsResult, AWSError>;
+  /**
+   * Lists the Amazon Redshift IAM Identity Center applications.
+   */
+  describeRedshiftIdcApplications(callback?: (err: AWSError, data: Redshift.Types.DescribeRedshiftIdcApplicationsResult) => void): Request<Redshift.Types.DescribeRedshiftIdcApplicationsResult, AWSError>;
   /**
    * Returns exchange status details and associated metadata for a reserved-node exchange. Statuses include such values as in progress and requested.
    */
@@ -880,6 +904,14 @@ declare class Redshift extends Service {
    * Modifies an existing Amazon Redshift event notification subscription.
    */
   modifyEventSubscription(callback?: (err: AWSError, data: Redshift.Types.ModifyEventSubscriptionResult) => void): Request<Redshift.Types.ModifyEventSubscriptionResult, AWSError>;
+  /**
+   * Changes an existing Amazon Redshift IAM Identity Center application.
+   */
+  modifyRedshiftIdcApplication(params: Redshift.Types.ModifyRedshiftIdcApplicationMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyRedshiftIdcApplicationResult) => void): Request<Redshift.Types.ModifyRedshiftIdcApplicationResult, AWSError>;
+  /**
+   * Changes an existing Amazon Redshift IAM Identity Center application.
+   */
+  modifyRedshiftIdcApplication(callback?: (err: AWSError, data: Redshift.Types.ModifyRedshiftIdcApplicationResult) => void): Request<Redshift.Types.ModifyRedshiftIdcApplicationResult, AWSError>;
   /**
    * Modifies a scheduled action. 
    */
@@ -1244,6 +1276,18 @@ declare namespace Redshift {
   export interface AuthorizeSnapshotAccessResult {
     Snapshot?: Snapshot;
   }
+  export type AuthorizedAudienceList = String[];
+  export interface AuthorizedTokenIssuer {
+    /**
+     * The ARN for the authorized token issuer for integrating Amazon Redshift with IDC Identity Center.
+     */
+    TrustedTokenIssuerArn?: String;
+    /**
+     * The list of audiences for the authorized token issuer for integrating Amazon Redshift with IDC Identity Center.
+     */
+    AuthorizedAudiencesList?: AuthorizedAudienceList;
+  }
+  export type AuthorizedTokenIssuerList = AuthorizedTokenIssuer[];
   export interface AvailabilityZone {
     /**
      * The name of the availability zone.
@@ -2067,6 +2111,10 @@ declare namespace Redshift {
      * If true, Amazon Redshift will deploy the cluster in two Availability Zones (AZ).
      */
     MultiAZ?: BooleanOptional;
+    /**
+     * The Amazon resource name (ARN) of the Amazon Redshift IAM Identity Center application.
+     */
+    RedshiftIdcApplicationArn?: String;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
@@ -2287,6 +2335,39 @@ declare namespace Redshift {
   }
   export interface CreateHsmConfigurationResult {
     HsmConfiguration?: HsmConfiguration;
+  }
+  export interface CreateRedshiftIdcApplicationMessage {
+    /**
+     * The Amazon resource name (ARN) of the IAM Identity Center instance where Amazon Redshift creates a new managed application.
+     */
+    IdcInstanceArn: String;
+    /**
+     * The name of the Redshift application in IAM Identity Center.
+     */
+    RedshiftIdcApplicationName: RedshiftIdcApplicationName;
+    /**
+     * The namespace for the Amazon Redshift IAM Identity Center application instance. It determines which managed application verifies the connection token.
+     */
+    IdentityNamespace?: IdentityNamespaceString;
+    /**
+     * The display name for the Amazon Redshift IAM Identity Center application instance. It appears in the console.
+     */
+    IdcDisplayName: IdcDisplayNameString;
+    /**
+     * The IAM role ARN for the Amazon Redshift IAM Identity Center application instance. It has the required permissions to be assumed and invoke the IDC Identity Center API.
+     */
+    IamRoleArn: String;
+    /**
+     * The token issuer list for the Amazon Redshift IAM Identity Center application instance.
+     */
+    AuthorizedTokenIssuerList?: AuthorizedTokenIssuerList;
+    /**
+     * A collection of service integrations for the Redshift IAM Identity Center application.
+     */
+    ServiceIntegrations?: ServiceIntegrationList;
+  }
+  export interface CreateRedshiftIdcApplicationResult {
+    RedshiftIdcApplication?: RedshiftIdcApplication;
   }
   export interface CreateScheduledActionMessage {
     /**
@@ -2640,6 +2721,12 @@ declare namespace Redshift {
      * The identifier of the Amazon Redshift HSM configuration to be deleted.
      */
     HsmConfigurationIdentifier: String;
+  }
+  export interface DeleteRedshiftIdcApplicationMessage {
+    /**
+     * The ARN for a deleted Amazon Redshift IAM Identity Center application.
+     */
+    RedshiftIdcApplicationArn: String;
   }
   export interface DeleteResourcePolicyMessage {
     /**
@@ -3269,6 +3356,30 @@ declare namespace Redshift {
      * A list of partner integrations.
      */
     PartnerIntegrationInfoList?: PartnerIntegrationInfoList;
+  }
+  export interface DescribeRedshiftIdcApplicationsMessage {
+    /**
+     * The ARN for the Redshift application that integrates with IAM Identity Center.
+     */
+    RedshiftIdcApplicationArn?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeRedshiftIdcApplicationsResult {
+    /**
+     * The list of Amazon Redshift IAM Identity Center applications.
+     */
+    RedshiftIdcApplications?: RedshiftIdcApplicationList;
+    /**
+     * A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the Marker parameter and retrying the command. If the Marker field is empty, all response records have been retrieved for the request. 
+     */
+    Marker?: String;
   }
   export interface DescribeReservedNodeExchangeStatusInputMessage {
     /**
@@ -4071,6 +4182,8 @@ declare namespace Redshift {
   }
   export type IPRangeList = IPRange[];
   export type IamRoleArnList = String[];
+  export type IdcDisplayNameString = string;
+  export type IdentityNamespaceString = string;
   export type ImportTablesCompleted = String[];
   export type ImportTablesInProgress = String[];
   export type ImportTablesNotStarted = String[];
@@ -4124,6 +4237,19 @@ declare namespace Redshift {
     ErrorMessage?: String;
   }
   export type IntegrationErrorList = IntegrationError[];
+  export interface LakeFormationQuery {
+    /**
+     * Determines whether the query scope is enabled or disabled.
+     */
+    Authorization: ServiceAuthorization;
+  }
+  export interface LakeFormationScopeUnion {
+    /**
+     * The Lake Formation scope.
+     */
+    LakeFormationQuery?: LakeFormationQuery;
+  }
+  export type LakeFormationServiceIntegrations = LakeFormationScopeUnion[];
   export type LogDestinationType = "s3"|"cloudwatch"|string;
   export type LogTypeList = String[];
   export interface LoggingStatus {
@@ -4530,6 +4656,35 @@ declare namespace Redshift {
   export interface ModifyEventSubscriptionResult {
     EventSubscription?: EventSubscription;
   }
+  export interface ModifyRedshiftIdcApplicationMessage {
+    /**
+     * The ARN for the Redshift application that integrates with IAM Identity Center.
+     */
+    RedshiftIdcApplicationArn: String;
+    /**
+     * The namespace for the Amazon Redshift IAM Identity Center application to change. It determines which managed application verifies the connection token.
+     */
+    IdentityNamespace?: IdentityNamespaceString;
+    /**
+     * The IAM role ARN associated with the Amazon Redshift IAM Identity Center application to change. It has the required permissions to be assumed and invoke the IDC Identity Center API.
+     */
+    IamRoleArn?: String;
+    /**
+     * The display name for the Amazon Redshift IAM Identity Center application to change. It appears on the console.
+     */
+    IdcDisplayName?: IdcDisplayNameString;
+    /**
+     * The authorized token issuer list for the Amazon Redshift IAM Identity Center application to change.
+     */
+    AuthorizedTokenIssuerList?: AuthorizedTokenIssuerList;
+    /**
+     * A collection of service integrations associated with the application.
+     */
+    ServiceIntegrations?: ServiceIntegrationList;
+  }
+  export interface ModifyRedshiftIdcApplicationResult {
+    RedshiftIdcApplication?: RedshiftIdcApplication;
+  }
   export interface ModifyScheduledActionMessage {
     /**
      * The name of the scheduled action to modify. 
@@ -4910,6 +5065,50 @@ declare namespace Redshift {
     RecurringChargeFrequency?: String;
   }
   export type RecurringChargeList = RecurringCharge[];
+  export interface RedshiftIdcApplication {
+    /**
+     * The ARN for the IAM Identity Center instance that Redshift integrates with.
+     */
+    IdcInstanceArn?: String;
+    /**
+     * The name of the Redshift application in IAM Identity Center.
+     */
+    RedshiftIdcApplicationName?: RedshiftIdcApplicationName;
+    /**
+     * The ARN for the Redshift application that integrates with IAM Identity Center.
+     */
+    RedshiftIdcApplicationArn?: String;
+    /**
+     * The identity namespace for the Amazon Redshift IAM Identity Center application. It determines which managed application verifies the connection token.
+     */
+    IdentityNamespace?: IdentityNamespaceString;
+    /**
+     * The display name for the Amazon Redshift IAM Identity Center application. It appears on the console.
+     */
+    IdcDisplayName?: IdcDisplayNameString;
+    /**
+     * The ARN for the Amazon Redshift IAM Identity Center application. It has the required permissions to be assumed and invoke the IDC Identity Center API.
+     */
+    IamRoleArn?: String;
+    /**
+     * The ARN for the Amazon Redshift IAM Identity Center application.
+     */
+    IdcManagedApplicationArn?: String;
+    /**
+     * The onboarding status for the Amazon Redshift IAM Identity Center application.
+     */
+    IdcOnboardStatus?: String;
+    /**
+     * The authorized token issuer list for the Amazon Redshift IAM Identity Center application.
+     */
+    AuthorizedTokenIssuerList?: AuthorizedTokenIssuerList;
+    /**
+     * A list of service integrations for the Redshift IAM Identity Center application.
+     */
+    ServiceIntegrations?: ServiceIntegrationList;
+  }
+  export type RedshiftIdcApplicationList = RedshiftIdcApplication[];
+  export type RedshiftIdcApplicationName = string;
   export interface RejectDataShareMessage {
     /**
      * The Amazon Resource Name (ARN) of the datashare to reject.
@@ -5620,6 +5819,14 @@ declare namespace Redshift {
     ClusterNodes?: ClusterNodesList;
   }
   export type SensitiveString = string;
+  export type ServiceAuthorization = "Enabled"|"Disabled"|string;
+  export type ServiceIntegrationList = ServiceIntegrationsUnion[];
+  export interface ServiceIntegrationsUnion {
+    /**
+     * A list of scopes set up for Lake Formation integration.
+     */
+    LakeFormation?: LakeFormationServiceIntegrations;
+  }
   export interface Snapshot {
     /**
      * The snapshot identifier that is provided in the request.

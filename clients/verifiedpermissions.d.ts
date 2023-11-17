@@ -12,6 +12,14 @@ declare class VerifiedPermissions extends Service {
   constructor(options?: VerifiedPermissions.Types.ClientConfiguration)
   config: Config & VerifiedPermissions.Types.ClientConfiguration;
   /**
+   * Makes a series of decisions about multiple authorization requests for one principal or resource. Each request contains the equivalent content of an IsAuthorized request: principal, action, resource, and context. Either the principal or the resource parameter must be identical across all requests. For example, Verified Permissions won't evaluate a pair of requests where bob views photo1 and alice views photo2. Authorization of bob to view photo1 and photo2, or bob and alice to view photo1, are valid batches.  The request is evaluated against all policies in the specified policy store that match the entities that you declare. The result of the decisions is a series of Allow or Deny responses, along with the IDs of the policies that produced each decision. The entities of a BatchIsAuthorized API request can contain up to 100 principals and up to 100 resources. The requests of a BatchIsAuthorized API request can contain up to 30 requests.
+   */
+  batchIsAuthorized(params: VerifiedPermissions.Types.BatchIsAuthorizedInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedOutput, AWSError>;
+  /**
+   * Makes a series of decisions about multiple authorization requests for one principal or resource. Each request contains the equivalent content of an IsAuthorized request: principal, action, resource, and context. Either the principal or the resource parameter must be identical across all requests. For example, Verified Permissions won't evaluate a pair of requests where bob views photo1 and alice views photo2. Authorization of bob to view photo1 and photo2, or bob and alice to view photo1, are valid batches.  The request is evaluated against all policies in the specified policy store that match the entities that you declare. The result of the decisions is a series of Allow or Deny responses, along with the IDs of the policies that produced each decision. The entities of a BatchIsAuthorized API request can contain up to 100 principals and up to 100 resources. The requests of a BatchIsAuthorized API request can contain up to 30 requests.
+   */
+  batchIsAuthorized(callback?: (err: AWSError, data: VerifiedPermissions.Types.BatchIsAuthorizedOutput) => void): Request<VerifiedPermissions.Types.BatchIsAuthorizedOutput, AWSError>;
+  /**
    * Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP).  After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the IsAuthorizedWithToken operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.  If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.   To reference a user from this identity source in your Cedar policies, use the following syntax.  IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;  Where IdentityType is the string that you provide to the PrincipalEntityType parameter for this operation. The CognitoUserPoolId and CognitoClientId are defined by the Amazon Cognito user pool.   Verified Permissions is  eventually consistent . It can take a few seconds for a new or changed element to be propagate through the service and be visible in the results of other Verified Permissions operations. 
    */
   createIdentitySource(params: VerifiedPermissions.Types.CreateIdentitySourceInput, callback?: (err: AWSError, data: VerifiedPermissions.Types.CreateIdentitySourceOutput) => void): Request<VerifiedPermissions.Types.CreateIdentitySourceOutput, AWSError>;
@@ -243,6 +251,64 @@ declare namespace VerifiedPermissions {
      */
     record?: RecordAttribute;
   }
+  export interface BatchIsAuthorizedInput {
+    /**
+     * Specifies the ID of the policy store. Policies in this policy store will be used to make the authorization decisions for the input.
+     */
+    policyStoreId: PolicyStoreId;
+    /**
+     * Specifies the list of resources and principals and their associated attributes that Verified Permissions can examine when evaluating the policies.   You can include only principal and resource entities in this parameter; you can't include actions. You must specify actions in the schema. 
+     */
+    entities?: EntitiesDefinition;
+    /**
+     * An array of up to 30 requests that you want Verified Permissions to evaluate.
+     */
+    requests: BatchIsAuthorizedInputList;
+  }
+  export interface BatchIsAuthorizedInputItem {
+    /**
+     * Specifies the principal for which the authorization decision is to be made.
+     */
+    principal?: EntityIdentifier;
+    /**
+     * Specifies the requested action to be authorized. For example, is the principal authorized to perform this action on the resource?
+     */
+    action?: ActionIdentifier;
+    /**
+     * Specifies the resource for which the authorization decision is to be made.
+     */
+    resource?: EntityIdentifier;
+    /**
+     * Specifies additional context that can be used to make more granular authorization decisions.
+     */
+    context?: ContextDefinition;
+  }
+  export type BatchIsAuthorizedInputList = BatchIsAuthorizedInputItem[];
+  export interface BatchIsAuthorizedOutput {
+    /**
+     * A series of Allow or Deny decisions for each request, and the policies that produced them.
+     */
+    results: BatchIsAuthorizedOutputList;
+  }
+  export interface BatchIsAuthorizedOutputItem {
+    /**
+     * The authorization request that initiated the decision.
+     */
+    request: BatchIsAuthorizedInputItem;
+    /**
+     * An authorization decision that indicates if the authorization request should be allowed or denied.
+     */
+    decision: Decision;
+    /**
+     * The list of determining policies used to make the authorization decision. For example, if there are two matching policies, where one is a forbid and the other is a permit, then the forbid policy will be the determining policy. In the case of multiple matching permit policies then there would be multiple determining policies. In the case that no policies match, and hence the response is DENY, there would be no determining policies.
+     */
+    determiningPolicies: DeterminingPolicyList;
+    /**
+     * Errors that occurred while making an authorization decision, for example, a policy references an Entity or entity Attribute that does not exist in the slice.
+     */
+    errors: EvaluationErrorList;
+  }
+  export type BatchIsAuthorizedOutputList = BatchIsAuthorizedOutputItem[];
   export type Boolean = boolean;
   export type BooleanAttribute = boolean;
   export type ClientId = string;
@@ -265,7 +331,7 @@ declare namespace VerifiedPermissions {
   }
   export interface ContextDefinition {
     /**
-     * An list of attributes that are needed to successfully evaluate an authorization request. Each attribute in this array must include a map of a data type and its value. Example: "Context":{"&lt;KeyName1&gt;":{"boolean":true},"&lt;KeyName2&gt;":{"long":1234}} 
+     * An list of attributes that are needed to successfully evaluate an authorization request. Each attribute in this array must include a map of a data type and its value. Example: "contextMap":{"&lt;KeyName1&gt;":{"boolean":true},"&lt;KeyName2&gt;":{"long":1234}} 
      */
     contextMap?: ContextMap;
   }

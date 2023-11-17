@@ -60,11 +60,11 @@ declare class Athena extends Service {
    */
   createDataCatalog(callback?: (err: AWSError, data: Athena.Types.CreateDataCatalogOutput) => void): Request<Athena.Types.CreateDataCatalogOutput, AWSError>;
   /**
-   * Creates a named query in the specified workgroup. Requires that you have access to the workgroup. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Creates a named query in the specified workgroup. Requires that you have access to the workgroup.
    */
   createNamedQuery(params: Athena.Types.CreateNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.CreateNamedQueryOutput) => void): Request<Athena.Types.CreateNamedQueryOutput, AWSError>;
   /**
-   * Creates a named query in the specified workgroup. Requires that you have access to the workgroup. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Creates a named query in the specified workgroup. Requires that you have access to the workgroup.
    */
   createNamedQuery(callback?: (err: AWSError, data: Athena.Types.CreateNamedQueryOutput) => void): Request<Athena.Types.CreateNamedQueryOutput, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class Athena extends Service {
    */
   deleteDataCatalog(callback?: (err: AWSError, data: Athena.Types.DeleteDataCatalogOutput) => void): Request<Athena.Types.DeleteDataCatalogOutput, AWSError>;
   /**
-   * Deletes the named query if you have access to the workgroup in which the query was saved. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Deletes the named query if you have access to the workgroup in which the query was saved.
    */
   deleteNamedQuery(params: Athena.Types.DeleteNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.DeleteNamedQueryOutput) => void): Request<Athena.Types.DeleteNamedQueryOutput, AWSError>;
   /**
-   * Deletes the named query if you have access to the workgroup in which the query was saved. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Deletes the named query if you have access to the workgroup in which the query was saved.
    */
   deleteNamedQuery(callback?: (err: AWSError, data: Athena.Types.DeleteNamedQueryOutput) => void): Request<Athena.Types.DeleteNamedQueryOutput, AWSError>;
   /**
@@ -356,11 +356,11 @@ declare class Athena extends Service {
    */
   listExecutors(callback?: (err: AWSError, data: Athena.Types.ListExecutorsResponse) => void): Request<Athena.Types.ListExecutorsResponse, AWSError>;
   /**
-   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup.
    */
   listNamedQueries(params: Athena.Types.ListNamedQueriesInput, callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
   /**
-   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the specified workgroup. If a workgroup is not specified, lists the saved queries for the primary workgroup.
    */
   listNamedQueries(callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
   /**
@@ -388,11 +388,11 @@ declare class Athena extends Service {
    */
   listPreparedStatements(callback?: (err: AWSError, data: Athena.Types.ListPreparedStatementsOutput) => void): Request<Athena.Types.ListPreparedStatementsOutput, AWSError>;
   /**
-   * Provides a list of available query execution IDs for the queries in the specified workgroup. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Provides a list of available query execution IDs for the queries in the specified workgroup. Athena keeps a query history for 45 days. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran.
    */
   listQueryExecutions(params: Athena.Types.ListQueryExecutionsInput, callback?: (err: AWSError, data: Athena.Types.ListQueryExecutionsOutput) => void): Request<Athena.Types.ListQueryExecutionsOutput, AWSError>;
   /**
-   * Provides a list of available query execution IDs for the queries in the specified workgroup. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Provides a list of available query execution IDs for the queries in the specified workgroup. Athena keeps a query history for 45 days. If a workgroup is not specified, returns a list of query execution IDs for the primary workgroup. Requires you to have access to the workgroup in which the queries ran.
    */
   listQueryExecutions(callback?: (err: AWSError, data: Athena.Types.ListQueryExecutionsOutput) => void): Request<Athena.Types.ListQueryExecutionsOutput, AWSError>;
   /**
@@ -436,11 +436,11 @@ declare class Athena extends Service {
    */
   putCapacityAssignmentConfiguration(callback?: (err: AWSError, data: Athena.Types.PutCapacityAssignmentConfigurationOutput) => void): Request<Athena.Types.PutCapacityAssignmentConfigurationOutput, AWSError>;
   /**
-   * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request.
+   * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request.  The request syntax requires the StartCalculationExecutionRequest$CodeBlock parameter or the CalculationConfiguration$CodeBlock parameter, but not both. Because CalculationConfiguration$CodeBlock is deprecated, use the StartCalculationExecutionRequest$CodeBlock parameter instead. 
    */
   startCalculationExecution(params: Athena.Types.StartCalculationExecutionRequest, callback?: (err: AWSError, data: Athena.Types.StartCalculationExecutionResponse) => void): Request<Athena.Types.StartCalculationExecutionResponse, AWSError>;
   /**
-   * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request.
+   * Submits calculations for execution within a session. You can supply the code to run as an inline code block within the request.  The request syntax requires the StartCalculationExecutionRequest$CodeBlock parameter or the CalculationConfiguration$CodeBlock parameter, but not both. Because CalculationConfiguration$CodeBlock is deprecated, use the StartCalculationExecutionRequest$CodeBlock parameter instead. 
    */
   startCalculationExecution(callback?: (err: AWSError, data: Athena.Types.StartCalculationExecutionResponse) => void): Request<Athena.Types.StartCalculationExecutionResponse, AWSError>;
   /**
@@ -468,11 +468,11 @@ declare class Athena extends Service {
    */
   stopCalculationExecution(callback?: (err: AWSError, data: Athena.Types.StopCalculationExecutionResponse) => void): Request<Athena.Types.StopCalculationExecutionResponse, AWSError>;
   /**
-   * Stops a query execution. Requires you to have access to the workgroup in which the query ran. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Stops a query execution. Requires you to have access to the workgroup in which the query ran.
    */
   stopQueryExecution(params: Athena.Types.StopQueryExecutionInput, callback?: (err: AWSError, data: Athena.Types.StopQueryExecutionOutput) => void): Request<Athena.Types.StopQueryExecutionOutput, AWSError>;
   /**
-   * Stops a query execution. Requires you to have access to the workgroup in which the query ran. For code samples using the Amazon Web Services SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Stops a query execution. Requires you to have access to the workgroup in which the query ran.
    */
   stopQueryExecution(callback?: (err: AWSError, data: Athena.Types.StopQueryExecutionOutput) => void): Request<Athena.Types.StopQueryExecutionOutput, AWSError>;
   /**
@@ -890,7 +890,7 @@ declare namespace Athena {
      */
     Description?: DescriptionString;
     /**
-     * Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type takes a catalog ID parameter and is required. The  catalog_id  is the account ID of the Amazon Web Services account to which the Glue Data Catalog belongs.  catalog-id=catalog_id     The GLUE data catalog type also applies to the default AwsDataCatalog that already exists in your account, of which you can have only one and cannot modify.   Queries that specify a Glue Data Catalog other than the default AwsDataCatalog must be run on Athena engine version 2.   In Regions where Athena engine version 2 is not available, creating new Glue data catalogs results in an INVALID_INPUT error.    
+     * Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type takes a catalog ID parameter and is required. The  catalog_id  is the account ID of the Amazon Web Services account to which the Glue Data Catalog belongs.  catalog-id=catalog_id     The GLUE data catalog type also applies to the default AwsDataCatalog that already exists in your account, of which you can have only one and cannot modify.    
      */
     Parameters?: ParametersMap;
     /**
@@ -1014,7 +1014,7 @@ declare namespace Athena {
   }
   export interface CustomerContentEncryptionConfiguration {
     /**
-     * The KMS key that is used to encrypt the user's data stores in Athena.
+     * The customer managed KMS key that is used to encrypt the user's data stores in Athena.
      */
     KmsKey: KmsKey;
   }
@@ -1032,7 +1032,7 @@ declare namespace Athena {
      */
     Type: DataCatalogType;
     /**
-     * Specifies the Lambda function or functions to use for the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type takes a catalog ID parameter and is required. The  catalog_id  is the account ID of the Amazon Web Services account to which the Glue catalog belongs.  catalog-id=catalog_id     The GLUE data catalog type also applies to the default AwsDataCatalog that already exists in your account, of which you can have only one and cannot modify.   Queries that specify a Glue Data Catalog other than the default AwsDataCatalog must be run on Athena engine version 2.    
+     * Specifies the Lambda function or functions to use for the data catalog. This is a mapping whose values depend on the catalog type.    For the HIVE data catalog type, use the following syntax. The metadata-function parameter is required. The sdk-version parameter is optional and defaults to the currently supported version.  metadata-function=lambda_arn, sdk-version=version_number     For the LAMBDA data catalog type, use one of the following sets of required parameters, but not both.   If you have one Lambda function that processes metadata and another for reading the actual data, use the following syntax. Both parameters are required.  metadata-function=lambda_arn, record-function=lambda_arn      If you have a composite Lambda function that processes both metadata and data, use the following syntax to specify your Lambda function.  function=lambda_arn       The GLUE type takes a catalog ID parameter and is required. The  catalog_id  is the account ID of the Amazon Web Services account to which the Glue catalog belongs.  catalog-id=catalog_id     The GLUE data catalog type also applies to the default AwsDataCatalog that already exists in your account, of which you can have only one and cannot modify.    
      */
     Parameters?: ParametersMap;
   }
@@ -2182,6 +2182,10 @@ declare namespace Athena {
      */
     QueryQueueTimeInMillis?: Long;
     /**
+     * The number of milliseconds that Athena took to preprocess the query before submitting the query to the query engine.
+     */
+    ServicePreProcessingTimeInMillis?: Long;
+    /**
      * The number of milliseconds that Athena took to plan the query processing flow. This includes the time spent retrieving table partitions from the data source. Note that because the query engine performs the query planning, query planning time is a subset of engine processing time.
      */
     QueryPlanningTimeInMillis?: Long;
@@ -2247,6 +2251,10 @@ declare namespace Athena {
      * The number of milliseconds that the query was in your query queue waiting for resources. Note that if transient errors occur, Athena might automatically add the query back to the queue.
      */
     QueryQueueTimeInMillis?: Long;
+    /**
+     *  The number of milliseconds that Athena spends on preprocessing before it submits the query to the engine. 
+     */
+    ServicePreProcessingTimeInMillis?: Long;
     /**
      * The number of milliseconds that Athena took to plan the query processing flow. This includes the time spent retrieving table partitions from the data source. Note that because the query engine performs the query planning, query planning time is a subset of engine processing time.
      */
@@ -2426,7 +2434,7 @@ declare namespace Athena {
   export type S3Uri = string;
   export interface SessionConfiguration {
     /**
-     * The ARN of the execution role used for the session.
+     * The ARN of the execution role used in a Spark session to access user resources. This property applies only to Spark-enabled workgroups.
      */
     ExecutionRole?: RoleArn;
     /**
@@ -2512,7 +2520,7 @@ declare namespace Athena {
      */
     CalculationConfiguration?: CalculationConfiguration;
     /**
-     * A string that contains the code of the calculation.
+     * A string that contains the code of the calculation. Use this parameter instead of CalculationConfiguration$CodeBlock, which is deprecated.
      */
     CodeBlock?: CodeBlock;
     /**
@@ -2942,7 +2950,7 @@ declare namespace Athena {
      */
     AdditionalConfiguration?: NameString;
     /**
-     * Role used in a session for accessing the user's resources.
+     * Role used in a Spark session for accessing the user's resources. This property applies only to Spark-enabled workgroups.
      */
     ExecutionRole?: RoleArn;
     /**
@@ -2992,7 +3000,7 @@ declare namespace Athena {
      */
     AdditionalConfiguration?: NameString;
     /**
-     * Contains the ARN of the execution role for the workgroup
+     * The ARN of the execution role used to access user resources. This property applies only to Spark-enabled workgroups.
      */
     ExecutionRole?: RoleArn;
     CustomerContentEncryptionConfiguration?: CustomerContentEncryptionConfiguration;
