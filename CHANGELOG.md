@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1499.0-->
+<!--LATEST=2.1500.0-->
 <!--ENTRYINSERT-->
+
+## 2.1500.0
+* feature: CodeStarconnections: This release updates a few CodeStar Connections related APIs.
+* feature: DocDB: Amazon DocumentDB updates for new cluster storage configuration: Amazon DocumentDB I/O-Optimized.
+* feature: EC2: This release adds support for Security group referencing over Transit gateways, enabling you to simplify Security group management and control of instance-to-instance traffic across VPCs that are connected by Transit gateway.
 
 ## 2.1499.0
 * feature: AppMesh: Change the default value of these fields from 0 to null: MaxConnections, MaxPendingRequests, MaxRequests, HealthCheckThreshold, PortNumber, and HealthCheckPolicy -> port. Users are not expected to perceive the change, except that badRequestException is thrown when required fields missing configured.

@@ -550,7 +550,7 @@
       "output": {
         "shape": "AuthorizeSecurityGroupEgressResult"
       },
-      "documentation": "<p>Adds the specified outbound (egress) rules to a security group for use with a VPC.</p> <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the <code>IpPermissions</code> must include a destination for the traffic.</p> <p>You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p> <p>For information about VPC security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC quotas</a>.</p>"
+      "documentation": "<p>Adds the specified outbound (egress) rules to a security group for use with a VPC.</p> <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the <code>IpPermissions</code> must include a destination for the traffic.</p> <p>You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p> <p>For information about VPC security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC quotas</a>.</p> <note> <p>If you want to reference a security group across VPCs attached to a transit gateway using the <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw\">security group referencing feature</a>, note that you can only reference security groups for ingress rules. You cannot reference a security group for egress rules.</p> </note>"
     },
     "AuthorizeSecurityGroupIngress": {
       "name": "AuthorizeSecurityGroupIngress",
@@ -4367,7 +4367,7 @@
       "output": {
         "shape": "DescribeSecurityGroupReferencesResult"
       },
-      "documentation": "<p>Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.</p>"
+      "documentation": "<p>Describes the VPCs on the other side of a VPC peering connection or the VPCs attached to a transit gateway that are referencing the security groups you've specified in this request.</p>"
     },
     "DescribeSecurityGroupRules": {
       "name": "DescribeSecurityGroupRules",
@@ -4535,7 +4535,7 @@
       "output": {
         "shape": "DescribeStaleSecurityGroupsResult"
       },
-      "documentation": "<p>Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC or in a peer VPC, or if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.</p>"
+      "documentation": "<p>Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC, peered VPC, or in separate VPCs attached to a transit gateway (with <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw\">security group referencing support</a> enabled). Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has been deleted or if they reference a security group in a VPC that has been detached from a transit gateway.</p>"
     },
     "DescribeStoreImageTasks": {
       "name": "DescribeStoreImageTasks",
@@ -17925,6 +17925,10 @@
         "DnsSupport": {
           "shape": "DnsSupportValue",
           "documentation": "<p>Enable or disable DNS support. The default is <code>enable</code>.</p>"
+        },
+        "SecurityGroupReferencingSupport": {
+          "shape": "SecurityGroupReferencingSupportValue",
+          "documentation": "<p>Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature.</p> <p>If you don't enable or disable SecurityGroupReferencingSupport in the request, the attachment will inherit the security group referencing support setting on the transit gateway.</p> <p>For important information about this feature, see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment\">Create a transit gateway attachment to a VPC</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>"
         },
         "Ipv6Support": {
           "shape": "Ipv6SupportValue",
@@ -46186,6 +46190,10 @@
           "shape": "DnsSupportValue",
           "documentation": "<p>Enable or disable DNS support.</p>"
         },
+        "SecurityGroupReferencingSupport": {
+          "shape": "SecurityGroupReferencingSupportValue",
+          "documentation": "<p>Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature.</p> <p>For important information about this feature, see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw\">Create a transit gateway</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>"
+        },
         "AutoAcceptSharedAttachments": {
           "shape": "AutoAcceptSharedAttachmentsValue",
           "documentation": "<p>Enable or disable automatic acceptance of attachment requests.</p>"
@@ -46320,6 +46328,10 @@
         "DnsSupport": {
           "shape": "DnsSupportValue",
           "documentation": "<p>Enable or disable DNS support. The default is <code>enable</code>.</p>"
+        },
+        "SecurityGroupReferencingSupport": {
+          "shape": "SecurityGroupReferencingSupportValue",
+          "documentation": "<p>Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature.</p> <p>For important information about this feature, see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment\">Create a transit gateway attachment to a VPC</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>"
         },
         "Ipv6Support": {
           "shape": "Ipv6SupportValue",
@@ -51146,7 +51158,7 @@
         },
         "VpcPeeringConnectionId": {
           "shape": "String",
-          "documentation": "<p>The ID of the VPC peering connection.</p>",
+          "documentation": "<p>The ID of the VPC peering connection (if applicable).</p>",
           "locationName": "vpcPeeringConnectionId"
         }
       },
@@ -55520,8 +55532,13 @@
         },
         "VpcPeeringConnectionId": {
           "shape": "String",
-          "documentation": "<p>The ID of the VPC peering connection.</p>",
+          "documentation": "<p>The ID of the VPC peering connection (if applicable). For more information about security group referencing for peering connections, see <a href=\"https://docs.aws.amazon.com/peering/vpc-peering-security-groups.html\">Update your security groups to reference peer security groups</a> in the <i>VPC Peering Guide</i>.</p>",
           "locationName": "vpcPeeringConnectionId"
+        },
+        "TransitGatewayId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the transit gateway (if applicable). For more information about security group referencing for transit gateways, see <a href=\"https://docs.aws.amazon.com/tgw/tgw-vpc-attachments.html#create-vpc-attachment\">Create a transit gateway attachment to a VPC</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>",
+          "locationName": "transitGatewayId"
         }
       },
       "documentation": "<p>Describes a VPC with a security group that references your security group.</p>"
@@ -55532,6 +55549,13 @@
         "shape": "SecurityGroupReference",
         "locationName": "item"
       }
+    },
+    "SecurityGroupReferencingSupportValue": {
+      "type": "string",
+      "enum": [
+        "enable",
+        "disable"
+      ]
     },
     "SecurityGroupRule": {
       "type": "structure",
@@ -59796,6 +59820,11 @@
           "documentation": "<p>Indicates whether DNS support is enabled.</p>",
           "locationName": "dnsSupport"
         },
+        "SecurityGroupReferencingSupport": {
+          "shape": "SecurityGroupReferencingSupportValue",
+          "documentation": "<p>Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature.</p> <p>For important information about this feature, see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw\">Create a transit gateway</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>",
+          "locationName": "securityGroupReferencingSupport"
+        },
         "MulticastSupport": {
           "shape": "MulticastSupportValue",
           "documentation": "<p>Indicates whether multicast is enabled on the transit gateway</p>",
@@ -60192,6 +60221,10 @@
         "DnsSupport": {
           "shape": "DnsSupportValue",
           "documentation": "<p>Enable or disable DNS support. Enabled by default.</p>"
+        },
+        "SecurityGroupReferencingSupport": {
+          "shape": "SecurityGroupReferencingSupportValue",
+          "documentation": "<p>Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature.</p> <p>For important information about this feature, see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw\">Create a transit gateway</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>"
         },
         "MulticastSupport": {
           "shape": "MulticastSupportValue",
@@ -60649,6 +60682,11 @@
           "shape": "DnsSupportValue",
           "documentation": "<p>Indicates whether DNS support is enabled.</p>",
           "locationName": "dnsSupport"
+        },
+        "SecurityGroupReferencingSupport": {
+          "shape": "SecurityGroupReferencingSupportValue",
+          "documentation": "<p>For important information about this feature, see <a href=\"https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#create-vpc-attachment\">Create a transit gateway attachment to a VPC</a> in the <i>Amazon Web Services Transit Gateway Guide</i>.</p>",
+          "locationName": "securityGroupReferencingSupport"
         },
         "Ipv6Support": {
           "shape": "Ipv6SupportValue",

@@ -317,11 +317,11 @@ declare class EC2 extends Service {
    */
   authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
-   * Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the IpPermissions must include a destination for the traffic. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+   * Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the IpPermissions must include a destination for the traffic. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.  If you want to reference a security group across VPCs attached to a transit gateway using the security group referencing feature, note that you can only reference security groups for ingress rules. You cannot reference a security group for egress rules. 
    */
   authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
-   * Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the IpPermissions must include a destination for the traffic. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.
+   * Adds the specified outbound (egress) rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances that are associated with the specified source security groups. When specifying an outbound rule for your security group in a VPC, the IpPermissions must include a destination for the traffic. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For information about VPC security group quotas, see Amazon VPC quotas.  If you want to reference a security group across VPCs attached to a transit gateway using the security group referencing feature, note that you can only reference security groups for ingress rules. You cannot reference a security group for egress rules. 
    */
   authorizeSecurityGroupEgress(callback?: (err: AWSError, data: EC2.Types.AuthorizeSecurityGroupEgressResult) => void): Request<EC2.Types.AuthorizeSecurityGroupEgressResult, AWSError>;
   /**
@@ -2541,11 +2541,11 @@ declare class EC2 extends Service {
    */
   describeScheduledInstances(callback?: (err: AWSError, data: EC2.Types.DescribeScheduledInstancesResult) => void): Request<EC2.Types.DescribeScheduledInstancesResult, AWSError>;
   /**
-   * Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
+   * Describes the VPCs on the other side of a VPC peering connection or the VPCs attached to a transit gateway that are referencing the security groups you've specified in this request.
    */
   describeSecurityGroupReferences(params: EC2.Types.DescribeSecurityGroupReferencesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupReferencesResult) => void): Request<EC2.Types.DescribeSecurityGroupReferencesResult, AWSError>;
   /**
-   * Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
+   * Describes the VPCs on the other side of a VPC peering connection or the VPCs attached to a transit gateway that are referencing the security groups you've specified in this request.
    */
   describeSecurityGroupReferences(callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupReferencesResult) => void): Request<EC2.Types.DescribeSecurityGroupReferencesResult, AWSError>;
   /**
@@ -2637,11 +2637,11 @@ declare class EC2 extends Service {
    */
   describeSpotPriceHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotPriceHistoryResult) => void): Request<EC2.Types.DescribeSpotPriceHistoryResult, AWSError>;
   /**
-   * Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC or in a peer VPC, or if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.
+   * Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC, peered VPC, or in separate VPCs attached to a transit gateway (with security group referencing support enabled). Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has been deleted or if they reference a security group in a VPC that has been detached from a transit gateway.
    */
   describeStaleSecurityGroups(params: EC2.Types.DescribeStaleSecurityGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
-   * Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC or in a peer VPC, or if they reference a security group in a peer VPC for which the VPC peering connection has been deleted.
+   * Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in the same VPC, peered VPC, or in separate VPCs attached to a transit gateway (with security group referencing support enabled). Rules can also be stale if they reference a security group in a peer VPC for which the VPC peering connection has been deleted or if they reference a security group in a VPC that has been detached from a transit gateway.
    */
   describeStaleSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
@@ -11247,6 +11247,10 @@ declare namespace EC2 {
      * Enable or disable DNS support. The default is enable.
      */
     DnsSupport?: DnsSupportValue;
+    /**
+     * Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature. If you don't enable or disable SecurityGroupReferencingSupport in the request, the attachment will inherit the security group referencing support setting on the transit gateway. For important information about this feature, see Create a transit gateway attachment to a VPC in the Amazon Web Services Transit Gateway Guide.
+     */
+    SecurityGroupReferencingSupport?: SecurityGroupReferencingSupportValue;
     /**
      * Enable or disable IPv6 support. The default is disable.
      */
@@ -29100,6 +29104,10 @@ declare namespace EC2 {
      */
     DnsSupport?: DnsSupportValue;
     /**
+     * Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature. For important information about this feature, see Create a transit gateway in the Amazon Web Services Transit Gateway Guide.
+     */
+    SecurityGroupReferencingSupport?: SecurityGroupReferencingSupportValue;
+    /**
      * Enable or disable automatic acceptance of attachment requests.
      */
     AutoAcceptSharedAttachments?: AutoAcceptSharedAttachmentsValue;
@@ -29203,6 +29211,10 @@ declare namespace EC2 {
      * Enable or disable DNS support. The default is enable.
      */
     DnsSupport?: DnsSupportValue;
+    /**
+     * Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature. For important information about this feature, see Create a transit gateway attachment to a VPC in the Amazon Web Services Transit Gateway Guide.
+     */
+    SecurityGroupReferencingSupport?: SecurityGroupReferencingSupportValue;
     /**
      * Enable or disable IPv6 support. The default is enable.
      */
@@ -32103,7 +32115,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
-     * The ID of the VPC peering connection.
+     * The ID of the VPC peering connection (if applicable).
      */
     VpcPeeringConnectionId?: String;
   }
@@ -34913,11 +34925,16 @@ declare namespace EC2 {
      */
     ReferencingVpcId?: String;
     /**
-     * The ID of the VPC peering connection.
+     * The ID of the VPC peering connection (if applicable). For more information about security group referencing for peering connections, see Update your security groups to reference peer security groups in the VPC Peering Guide.
      */
     VpcPeeringConnectionId?: String;
+    /**
+     * The ID of the transit gateway (if applicable). For more information about security group referencing for transit gateways, see Create a transit gateway attachment to a VPC in the Amazon Web Services Transit Gateway Guide.
+     */
+    TransitGatewayId?: String;
   }
   export type SecurityGroupReferences = SecurityGroupReference[];
+  export type SecurityGroupReferencingSupportValue = "enable"|"disable"|string;
   export interface SecurityGroupRule {
     /**
      * The ID of the security group rule.
@@ -37435,6 +37452,10 @@ declare namespace EC2 {
      */
     DnsSupport?: DnsSupportValue;
     /**
+     * Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature. For important information about this feature, see Create a transit gateway in the Amazon Web Services Transit Gateway Guide.
+     */
+    SecurityGroupReferencingSupport?: SecurityGroupReferencingSupportValue;
+    /**
      * Indicates whether multicast is enabled on the transit gateway
      */
     MulticastSupport?: MulticastSupportValue;
@@ -37678,6 +37699,10 @@ declare namespace EC2 {
      * Enable or disable DNS support. Enabled by default.
      */
     DnsSupport?: DnsSupportValue;
+    /**
+     * Enables you to reference a security group across VPCs attached to a transit gateway (TGW). Use this option to simplify security group management and control of instance-to-instance traffic across VPCs that are connected by transit gateway. You can also use this option to migrate from VPC peering (which was the only option that supported security group referencing) to transit gateways (which now also support security group referencing). This option is disabled by default and there are no additional costs to use this feature. For important information about this feature, see Create a transit gateway in the Amazon Web Services Transit Gateway Guide.
+     */
+    SecurityGroupReferencingSupport?: SecurityGroupReferencingSupportValue;
     /**
      * Indicates whether multicast is enabled on the transit gateway
      */
@@ -37934,6 +37959,10 @@ declare namespace EC2 {
      * Indicates whether DNS support is enabled.
      */
     DnsSupport?: DnsSupportValue;
+    /**
+     * For important information about this feature, see Create a transit gateway attachment to a VPC in the Amazon Web Services Transit Gateway Guide.
+     */
+    SecurityGroupReferencingSupport?: SecurityGroupReferencingSupportValue;
     /**
      * Indicates whether IPv6 support is disabled.
      */

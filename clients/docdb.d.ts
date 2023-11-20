@@ -695,6 +695,10 @@ declare namespace DocDB {
      * The cluster identifier of the new global cluster.
      */
     GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The storage type to associate with the DB cluster. For information on storage types for Amazon DocumentDB clusters, see Cluster storage configurations in the Amazon DocumentDB Developer Guide. Valid values for storage type - standard | iopt1  Default value is standard    When you create a DocumentDB DB cluster with the storage type set to iopt1, the storage type is returned in the response. The storage type isn't returned when you set it to standard. 
+     */
+    StorageType?: String;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -1010,6 +1014,10 @@ declare namespace DocDB {
      * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
      */
     DeletionProtection?: Boolean;
+    /**
+     * Storage type associated with your cluster Storage type associated with your cluster For information on storage types for Amazon DocumentDB clusters, see Cluster storage configurations in the Amazon DocumentDB Developer Guide. Valid values for storage type - standard | iopt1  Default value is standard  
+     */
+    StorageType?: String;
   }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
@@ -1166,6 +1174,10 @@ declare namespace DocDB {
      * If the cluster snapshot was copied from a source cluster snapshot, the ARN for the source cluster snapshot; otherwise, a null value.
      */
     SourceDBClusterSnapshotArn?: String;
+    /**
+     * Storage type associated with your cluster snapshot  For information on storage types for Amazon DocumentDB clusters, see Cluster storage configurations in the Amazon DocumentDB Developer Guide. Valid values for storage type - standard | iopt1  Default value is standard  
+     */
+    StorageType?: String;
   }
   export interface DBClusterSnapshotAttribute {
     /**
@@ -2149,6 +2161,10 @@ declare namespace DocDB {
      * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The storage type to associate with the DB cluster. For information on storage types for Amazon DocumentDB clusters, see Cluster storage configurations in the Amazon DocumentDB Developer Guide. Valid values for storage type - standard | iopt1  Default value is standard  
+     */
+    StorageType?: String;
   }
   export interface ModifyDBClusterParameterGroupMessage {
     /**
@@ -2321,6 +2337,10 @@ declare namespace DocDB {
      * Indicates whether an instance is in a virtual private cloud (VPC).
      */
     Vpc?: Boolean;
+    /**
+     * The storage type to associate with the DB cluster
+     */
+    StorageType?: String;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -2610,6 +2630,10 @@ declare namespace DocDB {
      * The name of the DB cluster parameter group to associate with this DB cluster.  Type: String.       Required: No. If this argument is omitted, the default DB cluster parameter group is used. If supplied, must match the name of an existing default DB cluster parameter group. The string must consist of from 1 to 255 letters, numbers or hyphens. Its first character must be a letter, and it cannot end with a hyphen or contain two consecutive hyphens.
      */
     DBClusterParameterGroupName?: String;
+    /**
+     * The storage type to associate with the DB cluster. For information on storage types for Amazon DocumentDB clusters, see Cluster storage configurations in the Amazon DocumentDB Developer Guide. Valid values for storage type - standard | iopt1  Default value is standard  
+     */
+    StorageType?: String;
   }
   export interface RestoreDBClusterFromSnapshotResult {
     DBCluster?: DBCluster;
@@ -2663,6 +2687,10 @@ declare namespace DocDB {
      * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The storage type to associate with the DB cluster. For information on storage types for Amazon DocumentDB clusters, see Cluster storage configurations in the Amazon DocumentDB Developer Guide. Valid values for storage type - standard | iopt1  Default value is standard  
+     */
+    StorageType?: String;
   }
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
