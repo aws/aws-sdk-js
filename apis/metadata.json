@@ -1346,5 +1346,13 @@
   },
   "trustedadvisor": {
     "name": "TrustedAdvisor"
+  },
+  "cloudfrontkeyvaluestore": {
+    "prefix": "cloudfront-keyvaluestore",
+    "name": "CloudFrontKeyValueStore"
+  },
+  "inspectorscan": {
+    "prefix": "inspector-scan",
+    "name": "InspectorScan"
   }
 }

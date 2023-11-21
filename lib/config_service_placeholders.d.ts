@@ -359,6 +359,8 @@ export abstract class ConfigurationServicePlaceholders {
   datazone?: AWS.DataZone.Types.ClientConfiguration;
   launchwizard?: AWS.LaunchWizard.Types.ClientConfiguration;
   trustedadvisor?: AWS.TrustedAdvisor.Types.ClientConfiguration;
+  cloudfrontkeyvaluestore?: AWS.CloudFrontKeyValueStore.Types.ClientConfiguration;
+  inspectorscan?: AWS.InspectorScan.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -720,4 +722,6 @@ export interface ConfigurationServiceApiVersions {
   datazone?: AWS.DataZone.Types.apiVersion;
   launchwizard?: AWS.LaunchWizard.Types.apiVersion;
   trustedadvisor?: AWS.TrustedAdvisor.Types.apiVersion;
+  cloudfrontkeyvaluestore?: AWS.CloudFrontKeyValueStore.Types.apiVersion;
+  inspectorscan?: AWS.InspectorScan.Types.apiVersion;
 }

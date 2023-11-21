@@ -20,6 +20,14 @@ declare class IoTTwinMaker extends Service {
    */
   batchPutPropertyValues(callback?: (err: AWSError, data: IoTTwinMaker.Types.BatchPutPropertyValuesResponse) => void): Request<IoTTwinMaker.Types.BatchPutPropertyValuesResponse, AWSError>;
   /**
+   * Cancels the metadata transfer job.
+   */
+  cancelMetadataTransferJob(params: IoTTwinMaker.Types.CancelMetadataTransferJobRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.CancelMetadataTransferJobResponse) => void): Request<IoTTwinMaker.Types.CancelMetadataTransferJobResponse, AWSError>;
+  /**
+   * Cancels the metadata transfer job.
+   */
+  cancelMetadataTransferJob(callback?: (err: AWSError, data: IoTTwinMaker.Types.CancelMetadataTransferJobResponse) => void): Request<IoTTwinMaker.Types.CancelMetadataTransferJobResponse, AWSError>;
+  /**
    * Creates a component type.
    */
   createComponentType(params: IoTTwinMaker.Types.CreateComponentTypeRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateComponentTypeResponse) => void): Request<IoTTwinMaker.Types.CreateComponentTypeResponse, AWSError>;
@@ -35,6 +43,14 @@ declare class IoTTwinMaker extends Service {
    * Creates an entity.
    */
   createEntity(callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateEntityResponse) => void): Request<IoTTwinMaker.Types.CreateEntityResponse, AWSError>;
+  /**
+   * Creates a new metadata transfer job.
+   */
+  createMetadataTransferJob(params: IoTTwinMaker.Types.CreateMetadataTransferJobRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateMetadataTransferJobResponse) => void): Request<IoTTwinMaker.Types.CreateMetadataTransferJobResponse, AWSError>;
+  /**
+   * Creates a new metadata transfer job.
+   */
+  createMetadataTransferJob(callback?: (err: AWSError, data: IoTTwinMaker.Types.CreateMetadataTransferJobResponse) => void): Request<IoTTwinMaker.Types.CreateMetadataTransferJobResponse, AWSError>;
   /**
    * Creates a scene.
    */
@@ -100,11 +116,11 @@ declare class IoTTwinMaker extends Service {
    */
   deleteWorkspace(callback?: (err: AWSError, data: IoTTwinMaker.Types.DeleteWorkspaceResponse) => void): Request<IoTTwinMaker.Types.DeleteWorkspaceResponse, AWSError>;
   /**
-   * Run queries to access information from your knowledge graph of entities within individual workspaces.
+   * Run queries to access information from your knowledge graph of entities within individual workspaces.  The ExecuteQuery action only works with Amazon Web Services Java SDK2. ExecuteQuery will not work with any Amazon Web Services Java SDK version &lt; 2.x. 
    */
   executeQuery(params: IoTTwinMaker.Types.ExecuteQueryRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.ExecuteQueryResponse) => void): Request<IoTTwinMaker.Types.ExecuteQueryResponse, AWSError>;
   /**
-   * Run queries to access information from your knowledge graph of entities within individual workspaces.
+   * Run queries to access information from your knowledge graph of entities within individual workspaces.  The ExecuteQuery action only works with Amazon Web Services Java SDK2. ExecuteQuery will not work with any Amazon Web Services Java SDK version &lt; 2.x. 
    */
   executeQuery(callback?: (err: AWSError, data: IoTTwinMaker.Types.ExecuteQueryResponse) => void): Request<IoTTwinMaker.Types.ExecuteQueryResponse, AWSError>;
   /**
@@ -123,6 +139,14 @@ declare class IoTTwinMaker extends Service {
    * Retrieves information about an entity.
    */
   getEntity(callback?: (err: AWSError, data: IoTTwinMaker.Types.GetEntityResponse) => void): Request<IoTTwinMaker.Types.GetEntityResponse, AWSError>;
+  /**
+   * Gets a nmetadata transfer job.
+   */
+  getMetadataTransferJob(params: IoTTwinMaker.Types.GetMetadataTransferJobRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.GetMetadataTransferJobResponse) => void): Request<IoTTwinMaker.Types.GetMetadataTransferJobResponse, AWSError>;
+  /**
+   * Gets a nmetadata transfer job.
+   */
+  getMetadataTransferJob(callback?: (err: AWSError, data: IoTTwinMaker.Types.GetMetadataTransferJobResponse) => void): Request<IoTTwinMaker.Types.GetMetadataTransferJobResponse, AWSError>;
   /**
    * Gets the pricing plan.
    */
@@ -180,6 +204,14 @@ declare class IoTTwinMaker extends Service {
    */
   listComponentTypes(callback?: (err: AWSError, data: IoTTwinMaker.Types.ListComponentTypesResponse) => void): Request<IoTTwinMaker.Types.ListComponentTypesResponse, AWSError>;
   /**
+   * This API lists the components of an entity.
+   */
+  listComponents(params: IoTTwinMaker.Types.ListComponentsRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.ListComponentsResponse) => void): Request<IoTTwinMaker.Types.ListComponentsResponse, AWSError>;
+  /**
+   * This API lists the components of an entity.
+   */
+  listComponents(callback?: (err: AWSError, data: IoTTwinMaker.Types.ListComponentsResponse) => void): Request<IoTTwinMaker.Types.ListComponentsResponse, AWSError>;
+  /**
    * Lists all entities in a workspace.
    */
   listEntities(params: IoTTwinMaker.Types.ListEntitiesRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.ListEntitiesResponse) => void): Request<IoTTwinMaker.Types.ListEntitiesResponse, AWSError>;
@@ -187,6 +219,22 @@ declare class IoTTwinMaker extends Service {
    * Lists all entities in a workspace.
    */
   listEntities(callback?: (err: AWSError, data: IoTTwinMaker.Types.ListEntitiesResponse) => void): Request<IoTTwinMaker.Types.ListEntitiesResponse, AWSError>;
+  /**
+   * Lists the metadata transfer jobs.
+   */
+  listMetadataTransferJobs(params: IoTTwinMaker.Types.ListMetadataTransferJobsRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.ListMetadataTransferJobsResponse) => void): Request<IoTTwinMaker.Types.ListMetadataTransferJobsResponse, AWSError>;
+  /**
+   * Lists the metadata transfer jobs.
+   */
+  listMetadataTransferJobs(callback?: (err: AWSError, data: IoTTwinMaker.Types.ListMetadataTransferJobsResponse) => void): Request<IoTTwinMaker.Types.ListMetadataTransferJobsResponse, AWSError>;
+  /**
+   * This API lists the properties of a component.
+   */
+  listProperties(params: IoTTwinMaker.Types.ListPropertiesRequest, callback?: (err: AWSError, data: IoTTwinMaker.Types.ListPropertiesResponse) => void): Request<IoTTwinMaker.Types.ListPropertiesResponse, AWSError>;
+  /**
+   * This API lists the properties of a component.
+   */
+  listProperties(callback?: (err: AWSError, data: IoTTwinMaker.Types.ListPropertiesResponse) => void): Request<IoTTwinMaker.Types.ListPropertiesResponse, AWSError>;
   /**
    * Lists all scenes in a workspace.
    */
@@ -333,6 +381,34 @@ declare namespace IoTTwinMaker {
     pricingTier?: PricingTier;
   }
   export type BundleName = string;
+  export interface CancelMetadataTransferJobRequest {
+    /**
+     * The metadata transfer job Id.
+     */
+    metadataTransferJobId: Id;
+  }
+  export interface CancelMetadataTransferJobResponse {
+    /**
+     * The metadata transfer job Id.
+     */
+    metadataTransferJobId: Id;
+    /**
+     * The metadata transfer job ARN.
+     */
+    arn: TwinMakerArn;
+    /**
+     * Used to update the DateTime property.
+     */
+    updateDateTime: Timestamp;
+    /**
+     * The metadata transfer job's status.
+     */
+    status: MetadataTransferJobStatus;
+    /**
+     * The metadata transfer job's progress.
+     */
+    progress?: MetadataTransferJobProgress;
+  }
   export interface ColumnDescription {
     /**
      * The name of the column description.
@@ -346,6 +422,7 @@ declare namespace IoTTwinMaker {
   export type ColumnDescriptions = ColumnDescription[];
   export type ColumnName = string;
   export type ColumnType = "NODE"|"EDGE"|"VALUE"|string;
+  export type ComponentPath = string;
   export interface ComponentPropertyGroupRequest {
     /**
      * The group type.
@@ -427,6 +504,53 @@ declare namespace IoTTwinMaker {
      * The syncSource of the sync job, if this entity was created by a sync job.
      */
     syncSource?: SyncSource;
+    /**
+     * This flag notes whether all properties of the component are returned in the API response. The maximum number of properties returned is 800.
+     */
+    areAllPropertiesReturned?: Boolean;
+    /**
+     * This lists objects that contain information about the compositeComponents.
+     */
+    compositeComponents?: CompositeComponentResponse;
+    /**
+     * This flag notes whether all compositeComponents are returned in the API response.
+     */
+    areAllCompositeComponentsReturned?: Boolean;
+  }
+  export type ComponentSummaries = ComponentSummary[];
+  export interface ComponentSummary {
+    /**
+     * The name of the component.
+     */
+    componentName: Name;
+    /**
+     * The ID of the component type.
+     */
+    componentTypeId: ComponentTypeId;
+    /**
+     * The name of the property definition set in the request.
+     */
+    definedIn?: String;
+    /**
+     * The description of the component request.
+     */
+    description?: Description;
+    /**
+     * The property groups.
+     */
+    propertyGroups?: ComponentPropertyGroupResponses;
+    /**
+     * The status of the component type.
+     */
+    status: Status;
+    /**
+     * The syncSource of the sync job, if this entity was created by a sync job.
+     */
+    syncSource?: SyncSource;
+    /**
+     * This string specifies the path to the composite component, starting from the top-level component.
+     */
+    componentPath?: ComponentPath;
   }
   export type ComponentTypeId = string;
   export type ComponentTypeName = string;
@@ -487,6 +611,59 @@ declare namespace IoTTwinMaker {
   export type ComponentUpdatesMapRequest = {[key: string]: ComponentUpdateRequest};
   export type ComponentsMap = {[key: string]: ComponentResponse};
   export type ComponentsMapRequest = {[key: string]: ComponentRequest};
+  export interface CompositeComponentRequest {
+    /**
+     * The description of the component type.
+     */
+    description?: Description;
+    /**
+     * This is an object that maps strings to the properties to set in the component type. Each string in the mapping must be unique to this object.
+     */
+    properties?: PropertyRequests;
+    /**
+     * The property groups.
+     */
+    propertyGroups?: ComponentPropertyGroupRequests;
+  }
+  export type CompositeComponentResponse = {[key: string]: ComponentSummary};
+  export interface CompositeComponentTypeRequest {
+    /**
+     * This is the componentTypeId that the compositeComponentType refers to.
+     */
+    componentTypeId?: ComponentTypeId;
+  }
+  export interface CompositeComponentTypeResponse {
+    /**
+     * This is the componentTypeId that this compositeComponentType refers to.
+     */
+    componentTypeId?: ComponentTypeId;
+    /**
+     * This boolean indicates whether this compositeComponentType is inherited from its parent.
+     */
+    isInherited?: Boolean;
+  }
+  export type CompositeComponentTypesRequest = {[key: string]: CompositeComponentTypeRequest};
+  export type CompositeComponentTypesResponse = {[key: string]: CompositeComponentTypeResponse};
+  export interface CompositeComponentUpdateRequest {
+    /**
+     * The update type of the component update request.
+     */
+    updateType?: ComponentUpdateType;
+    /**
+     * The description of the component type.
+     */
+    description?: Description;
+    /**
+     * An object that maps strings to the properties to set in the component type update. Each string in the mapping must be unique to this object.
+     */
+    propertyUpdates?: PropertyRequests;
+    /**
+     * The property group updates.
+     */
+    propertyGroupUpdates?: ComponentPropertyGroupRequests;
+  }
+  export type CompositeComponentUpdatesMapRequest = {[key: string]: CompositeComponentUpdateRequest};
+  export type CompositeComponentsMapRequest = {[key: string]: CompositeComponentRequest};
   export type Configuration = {[key: string]: Value};
   export interface CreateComponentTypeRequest {
     /**
@@ -529,6 +706,10 @@ declare namespace IoTTwinMaker {
      * A friendly name for the component type.
      */
     componentTypeName?: ComponentTypeName;
+    /**
+     * This is an object that maps strings to compositeComponentTypes of the componentType. CompositeComponentType is referenced by componentTypeId.
+     */
+    compositeComponentTypes?: CompositeComponentTypesRequest;
   }
   export interface CreateComponentTypeResponse {
     /**
@@ -566,6 +747,10 @@ declare namespace IoTTwinMaker {
      */
     components?: ComponentsMapRequest;
     /**
+     * This is an object that maps strings to compositeComponent updates in the request. Each key of the map represents the componentPath of the compositeComponent.
+     */
+    compositeComponents?: CompositeComponentsMapRequest;
+    /**
      * The ID of the entity's parent entity.
      */
     parentEntityId?: ParentEntityId;
@@ -591,6 +776,42 @@ declare namespace IoTTwinMaker {
      * The current state of the entity.
      */
     state: State;
+  }
+  export interface CreateMetadataTransferJobRequest {
+    /**
+     * The metadata transfer job Id.
+     */
+    metadataTransferJobId?: Id;
+    /**
+     * The metadata transfer job description.
+     */
+    description?: Description;
+    /**
+     * The metadata transfer job sources.
+     */
+    sources: SourceConfigurations;
+    /**
+     * The metadata transfer job destination.
+     */
+    destination: DestinationConfiguration;
+  }
+  export interface CreateMetadataTransferJobResponse {
+    /**
+     * The metadata transfer job Id.
+     */
+    metadataTransferJobId: Id;
+    /**
+     * The metadata transfer job ARN.
+     */
+    arn: TwinMakerArn;
+    /**
+     * The The metadata transfer job creation DateTime property.
+     */
+    creationDateTime: Timestamp;
+    /**
+     * The metadata transfer job response status.
+     */
+    status: MetadataTransferJobStatus;
   }
   export interface CreateSceneRequest {
     /**
@@ -676,11 +897,11 @@ declare namespace IoTTwinMaker {
     /**
      * The ARN of the S3 bucket where resources associated with the workspace are stored.
      */
-    s3Location: S3Location;
+    s3Location?: S3Location;
     /**
      * The ARN of the execution role associated with the workspace.
      */
-    role: RoleArn;
+    role?: RoleArn;
     /**
      * Metadata that you can use to manage the workspace
      */
@@ -839,8 +1060,27 @@ declare namespace IoTTwinMaker {
     workspaceId: Id;
   }
   export interface DeleteWorkspaceResponse {
+    /**
+     * The string that specifies the delete result for the workspace.
+     */
+    message?: WorkspaceDeleteMessage;
   }
   export type Description = string;
+  export interface DestinationConfiguration {
+    /**
+     * The destination type.
+     */
+    type: DestinationType;
+    /**
+     * The metadata transfer job S3 configuration. [need to add S3 entity]
+     */
+    s3Configuration?: S3DestinationConfiguration;
+    /**
+     * The metadata transfer job Amazon Web Services IoT TwinMaker configuration.
+     */
+    iotTwinMakerConfiguration?: IotTwinMakerDestinationConfiguration;
+  }
+  export type DestinationType = "s3"|"iotsitewise"|"iottwinmaker"|string;
   export type Double = number;
   export type EntityId = string;
   export type EntityName = string;
@@ -849,6 +1089,10 @@ declare namespace IoTTwinMaker {
      * The name of the component.
      */
     componentName?: Name;
+    /**
+     * This string specifies the path to the composite component, starting from the top-level component.
+     */
+    componentPath?: ComponentPath;
     /**
      * A mapping of external IDs to property names. External IDs uniquely identify properties from external data stores.
      */
@@ -889,7 +1133,7 @@ declare namespace IoTTwinMaker {
      */
     description?: Description;
     /**
-     * A Boolean value that specifies whether the entity has child entities or not.
+     * An eventual Boolean value that specifies whether the entity has child entities or not.
      */
     hasChildEntities?: Boolean;
     /**
@@ -902,7 +1146,7 @@ declare namespace IoTTwinMaker {
     updateDateTime: Timestamp;
   }
   export type Entries = PropertyValueEntry[];
-  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|"SYNC_INITIALIZING_ERROR"|"SYNC_CREATING_ERROR"|"SYNC_PROCESSING_ERROR"|string;
+  export type ErrorCode = "VALIDATION_ERROR"|"INTERNAL_FAILURE"|"SYNC_INITIALIZING_ERROR"|"SYNC_CREATING_ERROR"|"SYNC_PROCESSING_ERROR"|"SYNC_DELETING_ERROR"|"PROCESSING_ERROR"|"COMPOSITE_COMPONENT_FAILURE"|string;
   export interface ErrorDetails {
     /**
      * The error code.
@@ -926,7 +1170,7 @@ declare namespace IoTTwinMaker {
      */
     queryStatement: QueryStatement;
     /**
-     * The maximum number of results to return at one time. The default is 25. Valid Range: Minimum value of 1. Maximum value of 250.
+     * The maximum number of results to return at one time. The default is 50.
      */
     maxResults?: QueryServiceMaxResults;
     /**
@@ -951,6 +1195,54 @@ declare namespace IoTTwinMaker {
   export type Expression = string;
   export type ExtendsFrom = ComponentTypeId[];
   export type ExternalIdProperty = {[key: string]: String};
+  export interface FilterByAsset {
+    /**
+     * Filter by asset Id.
+     */
+    assetId?: Uuid;
+    /**
+     * The external-Id property of an asset. 
+     */
+    assetExternalId?: SiteWiseExternalId;
+    /**
+     * Includes sub-assets.[need description hekp for this]
+     */
+    includeOffspring?: Boolean;
+    /**
+     * Boolean to include the asset model.
+     */
+    includeAssetModel?: Boolean;
+  }
+  export interface FilterByAssetModel {
+    /**
+     * The asset model Id.
+     */
+    assetModelId?: Uuid;
+    /**
+     * The external-Id property of an asset model.
+     */
+    assetModelExternalId?: SiteWiseExternalId;
+    /**
+     * Include asset offspring. [need desc.]
+     */
+    includeOffspring?: Boolean;
+    /**
+     * Bolean to include assets.
+     */
+    includeAssets?: Boolean;
+  }
+  export interface FilterByComponentType {
+    /**
+     * The component type Id.
+     */
+    componentTypeId: ComponentTypeId;
+  }
+  export interface FilterByEntity {
+    /**
+     * The entity Id.
+     */
+    entityId: EntityId;
+  }
   export interface FunctionRequest {
     /**
      * The required properties of the function.
@@ -1061,6 +1353,10 @@ declare namespace IoTTwinMaker {
      * The component type name.
      */
     componentTypeName?: ComponentTypeName;
+    /**
+     * This is an object that maps strings to compositeComponentTypes of the componentType. CompositeComponentType is referenced by componentTypeId.
+     */
+    compositeComponentTypes?: CompositeComponentTypesResponse;
   }
   export interface GetEntityRequest {
     /**
@@ -1121,6 +1417,62 @@ declare namespace IoTTwinMaker {
      * The syncSource of the sync job, if this entity was created by a sync job.
      */
     syncSource?: SyncSource;
+    /**
+     * This flag notes whether all components are returned in the API response. The maximum number of components returned is 30.
+     */
+    areAllComponentsReturned?: Boolean;
+  }
+  export interface GetMetadataTransferJobRequest {
+    /**
+     * The metadata transfer job Id.
+     */
+    metadataTransferJobId: Id;
+  }
+  export interface GetMetadataTransferJobResponse {
+    /**
+     * The metadata transfer job Id.
+     */
+    metadataTransferJobId: Id;
+    /**
+     * The metadata transfer job ARN.
+     */
+    arn: TwinMakerArn;
+    /**
+     * The metadata transfer job description.
+     */
+    description?: Description;
+    /**
+     * The metadata transfer job's sources.
+     */
+    sources: SourceConfigurations;
+    /**
+     * The metadata transfer job's destination.
+     */
+    destination: DestinationConfiguration;
+    /**
+     * The metadata transfer job's role.
+     */
+    metadataTransferJobRole: RoleArn;
+    /**
+     * The metadata transfer job's report URL.
+     */
+    reportUrl?: String;
+    /**
+     * The metadata transfer job's creation DateTime property.
+     */
+    creationDateTime: Timestamp;
+    /**
+     * The metadata transfer job's update DateTime property.
+     */
+    updateDateTime: Timestamp;
+    /**
+     * The metadata transfer job's status.
+     */
+    status: MetadataTransferJobStatus;
+    /**
+     * The metadata transfer job's progress.
+     */
+    progress?: MetadataTransferJobProgress;
   }
   export interface GetPricingPlanRequest {
   }
@@ -1147,6 +1499,10 @@ declare namespace IoTTwinMaker {
      * The name of the component.
      */
     componentName?: Name;
+    /**
+     * This string specifies the path to the composite component, starting from the top-level component.
+     */
+    componentPath?: ComponentPath;
     /**
      * The ID of the component type.
      */
@@ -1207,6 +1563,10 @@ declare namespace IoTTwinMaker {
      * The name of the component whose property values the operation returns.
      */
     componentName?: Name;
+    /**
+     * This string specifies the path to the composite component, starting from the top-level component.
+     */
+    componentPath?: ComponentPath;
     /**
      * The ID of the component type whose property values the operation returns.
      */
@@ -1370,13 +1730,17 @@ declare namespace IoTTwinMaker {
      */
     description?: Description;
     /**
+     * A list of services that are linked to the workspace.
+     */
+    linkedServices?: LinkedServices;
+    /**
      * The ARN of the S3 bucket where resources associated with the workspace are stored.
      */
-    s3Location: S3Location;
+    s3Location?: S3Location;
     /**
      * The ARN of the execution role associated with the workspace.
      */
-    role: RoleArn;
+    role?: RoleArn;
     /**
      * The date and time when the workspace was created.
      */
@@ -1402,6 +1766,50 @@ declare namespace IoTTwinMaker {
   }
   export type InterpolationType = "LINEAR"|string;
   export type IntervalInSeconds = number;
+  export interface IotSiteWiseSourceConfiguration {
+    /**
+     * The AWS IoT SiteWise soucre configuration filters.
+     */
+    filters?: IotSiteWiseSourceConfigurationFilters;
+  }
+  export interface IotSiteWiseSourceConfigurationFilter {
+    /**
+     * Filter by asset model.
+     */
+    filterByAssetModel?: FilterByAssetModel;
+    /**
+     * Filter by asset.
+     */
+    filterByAsset?: FilterByAsset;
+  }
+  export type IotSiteWiseSourceConfigurationFilters = IotSiteWiseSourceConfigurationFilter[];
+  export interface IotTwinMakerDestinationConfiguration {
+    /**
+     * The IoT TwinMaker workspace.
+     */
+    workspace: TwinMakerArn;
+  }
+  export interface IotTwinMakerSourceConfiguration {
+    /**
+     * The IoT TwinMaker workspace.
+     */
+    workspace: TwinMakerArn;
+    /**
+     * The metadata transfer job AWS IoT TwinMaker source configuration filters.
+     */
+    filters?: IotTwinMakerSourceConfigurationFilters;
+  }
+  export interface IotTwinMakerSourceConfigurationFilter {
+    /**
+     * Filter by component type.
+     */
+    filterByComponentType?: FilterByComponentType;
+    /**
+     * Filter by entity.
+     */
+    filterByEntity?: FilterByEntity;
+  }
+  export type IotTwinMakerSourceConfigurationFilters = IotTwinMakerSourceConfigurationFilter[];
   export type LambdaArn = string;
   export interface LambdaFunction {
     /**
@@ -1409,6 +1817,8 @@ declare namespace IoTTwinMaker {
      */
     arn: LambdaArn;
   }
+  export type LinkedService = string;
+  export type LinkedServices = LinkedService[];
   export interface ListComponentTypesFilter {
     /**
      * The component type that the component types in the list extend.
@@ -1460,6 +1870,38 @@ declare namespace IoTTwinMaker {
      */
     maxResults?: MaxResults;
   }
+  export interface ListComponentsRequest {
+    /**
+     * The workspace ID.
+     */
+    workspaceId: Id;
+    /**
+     * The ID for the entity whose metadata (component/properties) is returned by the operation.
+     */
+    entityId: EntityId;
+    /**
+     * This string specifies the path to the composite component, starting from the top-level component.
+     */
+    componentPath?: ComponentPath;
+    /**
+     * The maximum number of results returned at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListComponentsResponse {
+    /**
+     * A list of objects that contain information about the components.
+     */
+    componentSummaries: ComponentSummaries;
+    /**
+     * The string that specifies the next page of component results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListEntitiesFilter {
     /**
      * The parent of the entities in the list.
@@ -1500,6 +1942,85 @@ declare namespace IoTTwinMaker {
     entitySummaries?: EntitySummaries;
     /**
      * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListMetadataTransferJobsFilter {
+    /**
+     * The workspace Id.
+     */
+    workspaceId?: Id;
+    /**
+     * The filter state.
+     */
+    state?: MetadataTransferJobState;
+  }
+  export type ListMetadataTransferJobsFilters = ListMetadataTransferJobsFilter[];
+  export interface ListMetadataTransferJobsRequest {
+    /**
+     * The metadata transfer job's source type.
+     */
+    sourceType: SourceType;
+    /**
+     * The metadata transfer job's destination type.
+     */
+    destinationType: DestinationType;
+    /**
+     * An object that filters metadata transfer jobs.
+     */
+    filters?: ListMetadataTransferJobsFilters;
+    /**
+     * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListMetadataTransferJobsResponse {
+    /**
+     * The metadata transfer job summaries.
+     */
+    metadataTransferJobSummaries: MetadataTransferJobSummaries;
+    /**
+     * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListPropertiesRequest {
+    /**
+     * The workspace ID.
+     */
+    workspaceId: Id;
+    /**
+     * The name of the component whose properties are returned by the operation.
+     */
+    componentName?: Name;
+    /**
+     * This string specifies the path to the composite component, starting from the top-level component.
+     */
+    componentPath?: ComponentPath;
+    /**
+     * The ID for the entity whose metadata (component/properties) is returned by the operation.
+     */
+    entityId: EntityId;
+    /**
+     * The maximum number of results returned at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The string that specifies the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListPropertiesResponse {
+    /**
+     * A list of objects that contain information about the properties.
+     */
+    propertySummaries: PropertySummaries;
+    /**
+     * The string that specifies the next page of property results.
      */
     nextToken?: NextToken;
   }
@@ -1629,6 +2150,66 @@ declare namespace IoTTwinMaker {
   }
   export type Long = number;
   export type MaxResults = number;
+  export interface MetadataTransferJobProgress {
+    /**
+     * The total count. [of what]
+     */
+    totalCount?: Integer;
+    /**
+     * The succeeded count.
+     */
+    succeededCount?: Integer;
+    /**
+     * The skipped count.
+     */
+    skippedCount?: Integer;
+    /**
+     * The failed count.
+     */
+    failedCount?: Integer;
+  }
+  export type MetadataTransferJobState = "VALIDATING"|"PENDING"|"RUNNING"|"CANCELLING"|"ERROR"|"COMPLETED"|"CANCELLED"|string;
+  export interface MetadataTransferJobStatus {
+    /**
+     * The metadata transfer job state.
+     */
+    state?: MetadataTransferJobState;
+    /**
+     * The metadata transfer job error.
+     */
+    error?: ErrorDetails;
+    /**
+     * The queued position.
+     */
+    queuedPosition?: Integer;
+  }
+  export type MetadataTransferJobSummaries = MetadataTransferJobSummary[];
+  export interface MetadataTransferJobSummary {
+    /**
+     * The metadata transfer job summary Id.
+     */
+    metadataTransferJobId: Id;
+    /**
+     * The metadata transfer job summary ARN.
+     */
+    arn: TwinMakerArn;
+    /**
+     * The metadata transfer job summary creation DateTime object.
+     */
+    creationDateTime: Timestamp;
+    /**
+     * The metadata transfer job summary update DateTime object
+     */
+    updateDateTime: Timestamp;
+    /**
+     * The metadata transfer job summary status.
+     */
+    status: MetadataTransferJobStatus;
+    /**
+     * The metadata transfer job summary progess.
+     */
+    progress?: MetadataTransferJobProgress;
+  }
   export type Name = string;
   export type NextToken = string;
   export type Order = "ASCENDING"|"DESCENDING"|string;
@@ -1846,8 +2427,31 @@ declare namespace IoTTwinMaker {
      * The value of the property.
      */
     value?: DataValue;
+    /**
+     * This flag notes whether all values of a list or map type property are returned in the API response. The maximum number of values per property returned is 50.
+     */
+    areAllPropertyValuesReturned?: Boolean;
   }
   export type PropertyResponses = {[key: string]: PropertyResponse};
+  export type PropertySummaries = PropertySummary[];
+  export interface PropertySummary {
+    /**
+     * This is the schema for the property.
+     */
+    definition?: PropertyDefinitionResponse;
+    /**
+     * This is the name of the property.
+     */
+    propertyName: Name;
+    /**
+     * This is the value for the property.
+     */
+    value?: DataValue;
+    /**
+     * This flag notes whether all values of a list or map type property are returned in the API response. The maximum number of values per property returned is 50.
+     */
+    areAllPropertyValuesReturned?: Boolean;
+  }
   export type PropertyTableValue = {[key: string]: DataValue};
   export type PropertyUpdateType = "UPDATE"|"DELETE"|"CREATE"|string;
   export interface PropertyValue {
@@ -1920,7 +2524,21 @@ declare namespace IoTTwinMaker {
   }
   export type RowData = QueryResultValue[];
   export type Rows = Row[];
+  export interface S3DestinationConfiguration {
+    /**
+     * The S3 destination configuration location.
+     */
+    location: S3DestinationLocation;
+  }
+  export type S3DestinationLocation = string;
   export type S3Location = string;
+  export interface S3SourceConfiguration {
+    /**
+     * The S3 destination source configuration location.
+     */
+    location: S3SourceLocation;
+  }
+  export type S3SourceLocation = string;
   export type S3Url = string;
   export type SceneCapabilities = SceneCapability[];
   export type SceneCapability = string;
@@ -1966,6 +2584,27 @@ declare namespace IoTTwinMaker {
   }
   export type Scope = "ENTITY"|"WORKSPACE"|string;
   export type SelectedPropertyList = String[];
+  export type SiteWiseExternalId = string;
+  export interface SourceConfiguration {
+    /**
+     * The source configuration type.
+     */
+    type: SourceType;
+    /**
+     * The source configuration S3 configuration.
+     */
+    s3Configuration?: S3SourceConfiguration;
+    /**
+     * The source configuration IoT SiteWise configuration.
+     */
+    iotSiteWiseConfiguration?: IotSiteWiseSourceConfiguration;
+    /**
+     * The source configuration IoT TwinMaker configuration.
+     */
+    iotTwinMakerConfiguration?: IotTwinMakerSourceConfiguration;
+  }
+  export type SourceConfigurations = SourceConfiguration[];
+  export type SourceType = "s3"|"iotsitewise"|"iottwinmaker"|string;
   export type State = "CREATING"|"UPDATING"|"DELETING"|"ACTIVE"|"ERROR"|string;
   export interface Status {
     /**
@@ -2152,6 +2791,10 @@ declare namespace IoTTwinMaker {
      * The component type name.
      */
     componentTypeName?: ComponentTypeName;
+    /**
+     * This is an object that maps strings to compositeComponentTypes of the componentType. CompositeComponentType is referenced by componentTypeId.
+     */
+    compositeComponentTypes?: CompositeComponentTypesRequest;
   }
   export interface UpdateComponentTypeResponse {
     /**
@@ -2192,6 +2835,10 @@ declare namespace IoTTwinMaker {
      * An object that maps strings to the component updates in the request. Each string in the mapping must be unique to this object.
      */
     componentUpdates?: ComponentUpdatesMapRequest;
+    /**
+     * This is an object that maps strings to compositeComponent updates in the request. Each key of the map represents the componentPath of the compositeComponent.
+     */
+    compositeComponentUpdates?: CompositeComponentUpdatesMapRequest;
     /**
      * An object that describes the update request for a parent entity.
      */
@@ -2273,6 +2920,10 @@ declare namespace IoTTwinMaker {
      * The ARN of the execution role associated with the workspace.
      */
     role?: RoleArn;
+    /**
+     * The ARN of the S3 bucket where resources associated with the workspace are stored.
+     */
+    s3Location?: S3Location;
   }
   export interface UpdateWorkspaceResponse {
     /**
@@ -2280,8 +2931,10 @@ declare namespace IoTTwinMaker {
      */
     updateDateTime: Timestamp;
   }
+  export type Uuid = string;
   export type Value = string;
   export type Values = PropertyValue[];
+  export type WorkspaceDeleteMessage = string;
   export type WorkspaceSummaries = WorkspaceSummary[];
   export interface WorkspaceSummary {
     /**
@@ -2296,6 +2949,10 @@ declare namespace IoTTwinMaker {
      * The description of the workspace.
      */
     description?: Description;
+    /**
+     * A list of services that are linked to the workspace.
+     */
+    linkedServices?: LinkedServices;
     /**
      * The date and time when the workspace was created.
      */

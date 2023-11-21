@@ -110,6 +110,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.CreateKeyGroupResult) => void): Request<CloudFront.Types.CreateKeyGroupResult, AWSError>;
   /**
+   * Specifies the Key Value Store resource to add to your account. In your account, the Key Value Store names must be unique. You can also import Key Value Store data in JSON format from an S3 bucket by providing a valid ImportSource that you own.
+   */
+  createKeyValueStore(params: CloudFront.Types.CreateKeyValueStoreRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateKeyValueStoreResult) => void): Request<CloudFront.Types.CreateKeyValueStoreResult, AWSError>;
+  /**
+   * Specifies the Key Value Store resource to add to your account. In your account, the Key Value Store names must be unique. You can also import Key Value Store data in JSON format from an S3 bucket by providing a valid ImportSource that you own.
+   */
+  createKeyValueStore(callback?: (err: AWSError, data: CloudFront.Types.CreateKeyValueStoreResult) => void): Request<CloudFront.Types.CreateKeyValueStoreResult, AWSError>;
+  /**
    * Enables additional CloudWatch metrics for the specified CloudFront distribution. The additional metrics incur an additional cost. For more information, see Viewing additional CloudFront distribution metrics in the Amazon CloudFront Developer Guide.
    */
   createMonitoringSubscription(params: CloudFront.Types.CreateMonitoringSubscriptionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateMonitoringSubscriptionResult) => void): Request<CloudFront.Types.CreateMonitoringSubscriptionResult, AWSError>;
@@ -238,6 +246,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   deleteKeyGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Specifies the Key Value Store to delete.
+   */
+  deleteKeyValueStore(params: CloudFront.Types.DeleteKeyValueStoreRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Specifies the Key Value Store to delete.
+   */
+  deleteKeyValueStore(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Disables additional CloudWatch metrics for the specified CloudFront distribution.
    */
   deleteMonitoringSubscription(params: CloudFront.Types.DeleteMonitoringSubscriptionRequest, callback?: (err: AWSError, data: CloudFront.Types.DeleteMonitoringSubscriptionResult) => void): Request<CloudFront.Types.DeleteMonitoringSubscriptionResult, AWSError>;
@@ -301,6 +317,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Gets configuration information and metadata about a CloudFront function, but not the function's code. To get a function's code, use GetFunction. To get configuration information and metadata about a function, you must provide the function's name and stage. To get these values, you can use ListFunctions.
    */
   describeFunction(callback?: (err: AWSError, data: CloudFront.Types.DescribeFunctionResult) => void): Request<CloudFront.Types.DescribeFunctionResult, AWSError>;
+  /**
+   * Specifies the Key Value Store and its configuration.
+   */
+  describeKeyValueStore(params: CloudFront.Types.DescribeKeyValueStoreRequest, callback?: (err: AWSError, data: CloudFront.Types.DescribeKeyValueStoreResult) => void): Request<CloudFront.Types.DescribeKeyValueStoreResult, AWSError>;
+  /**
+   * Specifies the Key Value Store and its configuration.
+   */
+  describeKeyValueStore(callback?: (err: AWSError, data: CloudFront.Types.DescribeKeyValueStoreResult) => void): Request<CloudFront.Types.DescribeKeyValueStoreResult, AWSError>;
   /**
    * Gets a cache policy, including the following metadata:   The policy's identifier.   The date and time when the policy was last modified.   To get a cache policy, you must provide the policy's identifier. If the cache policy is attached to a distribution's cache behavior, you can get the policy's identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
    */
@@ -654,6 +678,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listKeyGroups(callback?: (err: AWSError, data: CloudFront.Types.ListKeyGroupsResult) => void): Request<CloudFront.Types.ListKeyGroupsResult, AWSError>;
   /**
+   * Specifies the Key Value Stores to list.
+   */
+  listKeyValueStores(params: CloudFront.Types.ListKeyValueStoresRequest, callback?: (err: AWSError, data: CloudFront.Types.ListKeyValueStoresResult) => void): Request<CloudFront.Types.ListKeyValueStoresResult, AWSError>;
+  /**
+   * Specifies the Key Value Stores to list.
+   */
+  listKeyValueStores(callback?: (err: AWSError, data: CloudFront.Types.ListKeyValueStoresResult) => void): Request<CloudFront.Types.ListKeyValueStoresResult, AWSError>;
+  /**
    * Gets the list of CloudFront origin access controls in this Amazon Web Services account. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send another request that specifies the NextMarker value from the current response as the Marker value in the next request.
    */
   listOriginAccessControls(params: CloudFront.Types.ListOriginAccessControlsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListOriginAccessControlsResult) => void): Request<CloudFront.Types.ListOriginAccessControlsResult, AWSError>;
@@ -813,6 +845,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Updates a key group. When you update a key group, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a key group:   Get the current key group with GetKeyGroup or GetKeyGroupConfig.   Locally modify the fields in the key group that you want to update. For example, add or remove public key IDs.   Call UpdateKeyGroup with the entire key group object, including the fields that you modified and those that you didn't.  
    */
   updateKeyGroup(callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyGroupResult) => void): Request<CloudFront.Types.UpdateKeyGroupResult, AWSError>;
+  /**
+   * Specifies the Key Value Store to update.
+   */
+  updateKeyValueStore(params: CloudFront.Types.UpdateKeyValueStoreRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyValueStoreResult) => void): Request<CloudFront.Types.UpdateKeyValueStoreResult, AWSError>;
+  /**
+   * Specifies the Key Value Store to update.
+   */
+  updateKeyValueStore(callback?: (err: AWSError, data: CloudFront.Types.UpdateKeyValueStoreResult) => void): Request<CloudFront.Types.UpdateKeyValueStoreResult, AWSError>;
   /**
    * Updates a CloudFront origin access control.
    */
@@ -1624,6 +1664,34 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface CreateKeyValueStoreRequest {
+    /**
+     * The name of the Key Value Store. The maximum length of the name is 32 characters.
+     */
+    Name: KeyValueStoreName;
+    /**
+     * The comment of the Key Value Store.
+     */
+    Comment?: KeyValueStoreComment;
+    /**
+     * The S3 bucket that provides the source for the import. The source must be in a valid JSON format.
+     */
+    ImportSource?: ImportSource;
+  }
+  export interface CreateKeyValueStoreResult {
+    /**
+     * The resulting Key Value Store.
+     */
+    KeyValueStore?: KeyValueStore;
+    /**
+     * The ETag in the resulting Key Value Store.
+     */
+    ETag?: string;
+    /**
+     * The location of the resulting Key Value Store.
+     */
+    Location?: string;
+  }
   export interface CreateMonitoringSubscriptionRequest {
     /**
      * The ID of the distribution that you are enabling metrics for.
@@ -2000,6 +2068,16 @@ declare namespace CloudFront {
      */
     IfMatch?: string;
   }
+  export interface DeleteKeyValueStoreRequest {
+    /**
+     * The name of the Key Value Store.
+     */
+    Name: KeyValueStoreName;
+    /**
+     * The Key Value Store to delete, if a match occurs.
+     */
+    IfMatch: string;
+  }
   export interface DeleteMonitoringSubscriptionRequest {
     /**
      * The ID of the distribution that you are disabling metrics for.
@@ -2085,6 +2163,22 @@ declare namespace CloudFront {
     FunctionSummary?: FunctionSummary;
     /**
      * The version identifier for the current version of the CloudFront function.
+     */
+    ETag?: string;
+  }
+  export interface DescribeKeyValueStoreRequest {
+    /**
+     * The name of the Key Value Store.
+     */
+    Name: KeyValueStoreName;
+  }
+  export interface DescribeKeyValueStoreResult {
+    /**
+     * The resulting Key Value Store.
+     */
+    KeyValueStore?: KeyValueStore;
+    /**
+     * The ETag of the resulting Key Value Store.
      */
     ETag?: string;
   }
@@ -2501,7 +2595,7 @@ declare namespace CloudFront {
      */
     Id: string;
     /**
-     * The time when the the field-level encryption profile summary was last updated.
+     * The time when the field-level encryption profile summary was last updated.
      */
     LastModifiedTime: timestamp;
     /**
@@ -2602,9 +2696,13 @@ declare namespace CloudFront {
      */
     Comment: string;
     /**
-     * The function's runtime environment verion.
+     * The function's runtime environment version.
      */
     Runtime: FunctionRuntime;
+    /**
+     * The configuration for the Key Value Store associations.
+     */
+    KeyValueStoreAssociations?: KeyValueStoreAssociations;
   }
   export type FunctionEventObject = Buffer|Uint8Array|Blob|string;
   export type FunctionExecutionLogList = string[];
@@ -3143,6 +3241,17 @@ declare namespace CloudFront {
   }
   export type HttpVersion = "http1.1"|"http2"|"http3"|"http2and3"|string;
   export type ICPRecordalStatus = "APPROVED"|"SUSPENDED"|"PENDING"|string;
+  export interface ImportSource {
+    /**
+     * The source type of the import source for the Key Value Store.
+     */
+    SourceType: ImportSourceType;
+    /**
+     * The Amazon Resource Name (ARN) of the import source for the Key Value Store.
+     */
+    SourceARN: string;
+  }
+  export type ImportSourceType = "S3"|string;
   export interface Invalidation {
     /**
      * The identifier for the invalidation request. For example: IDFDVBD632BHDS5.
@@ -3285,6 +3394,71 @@ declare namespace CloudFront {
      */
     Items?: KeyPairIdList;
   }
+  export interface KeyValueStore {
+    /**
+     * The name of the Key Value Store.
+     */
+    Name: string;
+    /**
+     * The unique Id for the Key Value Store.
+     */
+    Id: string;
+    /**
+     * A comment for the Key Value Store.
+     */
+    Comment: string;
+    /**
+     * The Amazon Resource Name (ARN) of the Key Value Store.
+     */
+    ARN: string;
+    /**
+     * The status of the Key Value Store.
+     */
+    Status?: string;
+    /**
+     * The last-modified time of the Key Value Store.
+     */
+    LastModifiedTime: timestamp;
+  }
+  export type KeyValueStoreARN = string;
+  export interface KeyValueStoreAssociation {
+    /**
+     * The Amazon Resource Name (ARN) of the Key Value Store association.
+     */
+    KeyValueStoreARN: KeyValueStoreARN;
+  }
+  export type KeyValueStoreAssociationList = KeyValueStoreAssociation[];
+  export interface KeyValueStoreAssociations {
+    /**
+     * The quantity of Key Value Store associations.
+     */
+    Quantity: integer;
+    /**
+     * The items of the Key Value Store association.
+     */
+    Items?: KeyValueStoreAssociationList;
+  }
+  export type KeyValueStoreComment = string;
+  export interface KeyValueStoreList {
+    /**
+     * The next marker associated with the Key Value Store list.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of items in the Key Value Store list.
+     */
+    MaxItems: integer;
+    /**
+     * The quantity of the Key Value Store list.
+     */
+    Quantity: integer;
+    /**
+     * The items of the Key Value Store list.
+     */
+    Items?: KeyValueStoreSummaryList;
+  }
+  export type KeyValueStoreName = string;
+  export type KeyValueStoreSummaryList = KeyValueStore[];
   export interface KinesisStreamConfig {
     /**
      * The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role that CloudFront can use to send real-time log data to your Kinesis data stream. For more information the IAM role, see Real-time log configuration IAM role in the Amazon CloudFront Developer Guide.
@@ -3615,6 +3789,26 @@ declare namespace CloudFront {
      * A list of key groups.
      */
     KeyGroupList?: KeyGroupList;
+  }
+  export interface ListKeyValueStoresRequest {
+    /**
+     * The marker associated with the Key Value Stores list.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of items in the Key Value Stores list.
+     */
+    MaxItems?: string;
+    /**
+     * The status of the request for the Key Value Stores list.
+     */
+    Status?: string;
+  }
+  export interface ListKeyValueStoresResult {
+    /**
+     * The resulting Key Value Stores list.
+     */
+    KeyValueStoreList?: KeyValueStoreList;
   }
   export interface ListOriginAccessControlsRequest {
     /**
@@ -5180,6 +5374,30 @@ declare namespace CloudFront {
     KeyGroup?: KeyGroup;
     /**
      * The identifier for this version of the key group.
+     */
+    ETag?: string;
+  }
+  export interface UpdateKeyValueStoreRequest {
+    /**
+     * The name of the Key Value Store to update.
+     */
+    Name: KeyValueStoreName;
+    /**
+     * The comment of the Key Value Store to update.
+     */
+    Comment: KeyValueStoreComment;
+    /**
+     * The Key Value Store to update, if a match occurs.
+     */
+    IfMatch: string;
+  }
+  export interface UpdateKeyValueStoreResult {
+    /**
+     * The resulting Key Value Store to update.
+     */
+    KeyValueStore?: KeyValueStore;
+    /**
+     * The ETag of the resulting Key Value Store.
      */
     ETag?: string;
   }

@@ -358,5 +358,7 @@ module.exports = {
   BedrockRuntime: require('./bedrockruntime'),
   DataZone: require('./datazone'),
   LaunchWizard: require('./launchwizard'),
-  TrustedAdvisor: require('./trustedadvisor')
+  TrustedAdvisor: require('./trustedadvisor'),
+  CloudFrontKeyValueStore: require('./cloudfrontkeyvaluestore'),
+  InspectorScan: require('./inspectorscan')
 };
