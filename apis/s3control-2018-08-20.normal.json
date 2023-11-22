@@ -4278,15 +4278,33 @@
         },
         "CreatedAfter": {
           "shape": "ObjectCreationTime",
-          "documentation": "<p>If provided, the generated manifest should include only source bucket objects that were created after this time.</p>"
+          "documentation": "<p>If provided, the generated manifest includes only source bucket objects that were created after this time.</p>"
         },
         "CreatedBefore": {
           "shape": "ObjectCreationTime",
-          "documentation": "<p>If provided, the generated manifest should include only source bucket objects that were created before this time.</p>"
+          "documentation": "<p>If provided, the generated manifest includes only source bucket objects that were created before this time.</p>"
         },
         "ObjectReplicationStatuses": {
           "shape": "ReplicationStatusFilterList",
-          "documentation": "<p>If provided, the generated manifest should include only source bucket objects that have one of the specified Replication statuses.</p>"
+          "documentation": "<p>If provided, the generated manifest includes only source bucket objects that have one of the specified Replication statuses.</p>"
+        },
+        "KeyNameConstraint": {
+          "shape": "KeyNameConstraint",
+          "documentation": "<p>If provided, the generated manifest includes only source bucket objects whose object keys match the string constraints specified for <code>MatchAnyPrefix</code>, <code>MatchAnySuffix</code>, and <code>MatchAnySubstring</code>.</p>"
+        },
+        "ObjectSizeGreaterThanBytes": {
+          "shape": "ObjectSizeGreaterThanBytes",
+          "documentation": "<p>If provided, the generated manifest includes only source bucket objects whose file size is greater than the specified number of bytes.</p>",
+          "box": true
+        },
+        "ObjectSizeLessThanBytes": {
+          "shape": "ObjectSizeLessThanBytes",
+          "documentation": "<p>If provided, the generated manifest includes only source bucket objects whose file size is less than the specified number of bytes.</p>",
+          "box": true
+        },
+        "MatchAnyStorageClass": {
+          "shape": "StorageClassList",
+          "documentation": "<p>If provided, the generated manifest includes only source bucket objects that are stored with the specified storage class.</p>"
         }
       },
       "documentation": "<p>The filter used to describe a set of objects for the job's manifest.</p>"
@@ -4515,6 +4533,24 @@
     "JobTotalNumberOfTasks": {
       "type": "long",
       "min": 0
+    },
+    "KeyNameConstraint": {
+      "type": "structure",
+      "members": {
+        "MatchAnyPrefix": {
+          "shape": "NonEmptyMaxLength1024StringList",
+          "documentation": "<p>If provided, the generated manifest includes objects where the specified string appears at the start of the object key string.</p>"
+        },
+        "MatchAnySuffix": {
+          "shape": "NonEmptyMaxLength1024StringList",
+          "documentation": "<p>If provided, the generated manifest includes objects where the specified string appears at the end of the object key string.</p>"
+        },
+        "MatchAnySubstring": {
+          "shape": "NonEmptyMaxLength1024StringList",
+          "documentation": "<p>If provided, the generated manifest includes objects where the specified string appears anywhere within the object key string.</p>"
+        }
+      },
+      "documentation": "<p>If provided, the generated manifest includes only source bucket objects whose object keys match the string constraints specified for <code>MatchAnyPrefix</code>, <code>MatchAnySuffix</code>, and <code>MatchAnySubstring</code>.</p>"
     },
     "KmsKeyArnString": {
       "type": "string",
@@ -5315,6 +5351,12 @@
       "type": "string",
       "max": 1024,
       "min": 1
+    },
+    "NonEmptyMaxLength1024StringList": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyMaxLength1024String"
+      }
     },
     "NonEmptyMaxLength2048String": {
       "type": "string",
@@ -7171,6 +7213,12 @@
         "Enabled",
         "Disabled"
       ]
+    },
+    "StorageClassList": {
+      "type": "list",
+      "member": {
+        "shape": "S3StorageClass"
+      }
     },
     "StorageLensArn": {
       "type": "string",

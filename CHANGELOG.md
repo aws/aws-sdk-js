@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.1501.0-->
+<!--LATEST=2.1502.0-->
 <!--ENTRYINSERT-->
+
+## 2.1502.0
+* feature: Kinesis: Updates API to latest version.
+* feature: S3Control: Amazon S3 Batch Operations now manages buckets or prefixes in a single step.
+* feature: SageMaker: This feature adds the end user license agreement status as a model access configuration parameter.
 
 ## 2.1501.0
 * feature: CloudFront: This release adds support for CloudFront KeyValueStore, a globally managed key value datastore associated with CloudFront Functions.

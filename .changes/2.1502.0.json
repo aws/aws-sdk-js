@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Kinesis",
+        "description": "Updates API to latest version."
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "Amazon S3 Batch Operations now manages buckets or prefixes in a single step."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This feature adds the end user license agreement status as a model access configuration parameter."
+    }
+]

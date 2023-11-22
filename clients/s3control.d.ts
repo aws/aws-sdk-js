@@ -1885,17 +1885,33 @@ declare namespace S3Control {
      */
     EligibleForReplication?: Boolean;
     /**
-     * If provided, the generated manifest should include only source bucket objects that were created after this time.
+     * If provided, the generated manifest includes only source bucket objects that were created after this time.
      */
     CreatedAfter?: ObjectCreationTime;
     /**
-     * If provided, the generated manifest should include only source bucket objects that were created before this time.
+     * If provided, the generated manifest includes only source bucket objects that were created before this time.
      */
     CreatedBefore?: ObjectCreationTime;
     /**
-     * If provided, the generated manifest should include only source bucket objects that have one of the specified Replication statuses.
+     * If provided, the generated manifest includes only source bucket objects that have one of the specified Replication statuses.
      */
     ObjectReplicationStatuses?: ReplicationStatusFilterList;
+    /**
+     * If provided, the generated manifest includes only source bucket objects whose object keys match the string constraints specified for MatchAnyPrefix, MatchAnySuffix, and MatchAnySubstring.
+     */
+    KeyNameConstraint?: KeyNameConstraint;
+    /**
+     * If provided, the generated manifest includes only source bucket objects whose file size is greater than the specified number of bytes.
+     */
+    ObjectSizeGreaterThanBytes?: ObjectSizeGreaterThanBytes;
+    /**
+     * If provided, the generated manifest includes only source bucket objects whose file size is less than the specified number of bytes.
+     */
+    ObjectSizeLessThanBytes?: ObjectSizeLessThanBytes;
+    /**
+     * If provided, the generated manifest includes only source bucket objects that are stored with the specified storage class.
+     */
+    MatchAnyStorageClass?: StorageClassList;
   }
   export interface JobManifestLocation {
     /**
@@ -2010,6 +2026,20 @@ declare namespace S3Control {
     ElapsedTimeInActiveSeconds?: JobTimeInStateSeconds;
   }
   export type JobTotalNumberOfTasks = number;
+  export interface KeyNameConstraint {
+    /**
+     * If provided, the generated manifest includes objects where the specified string appears at the start of the object key string.
+     */
+    MatchAnyPrefix?: NonEmptyMaxLength1024StringList;
+    /**
+     * If provided, the generated manifest includes objects where the specified string appears at the end of the object key string.
+     */
+    MatchAnySuffix?: NonEmptyMaxLength1024StringList;
+    /**
+     * If provided, the generated manifest includes objects where the specified string appears anywhere within the object key string.
+     */
+    MatchAnySubstring?: NonEmptyMaxLength1024StringList;
+  }
   export type KmsKeyArnString = string;
   export interface LambdaInvokeOperation {
     /**
@@ -2444,6 +2474,7 @@ declare namespace S3Control {
   }
   export type NetworkOrigin = "Internet"|"VPC"|string;
   export type NonEmptyMaxLength1024String = string;
+  export type NonEmptyMaxLength1024StringList = NonEmptyMaxLength1024String[];
   export type NonEmptyMaxLength2048String = string;
   export type NonEmptyMaxLength256String = string;
   export type NonEmptyMaxLength64String = string;
@@ -3354,6 +3385,7 @@ declare namespace S3Control {
     Status: SseKmsEncryptedObjectsStatus;
   }
   export type SseKmsEncryptedObjectsStatus = "Enabled"|"Disabled"|string;
+  export type StorageClassList = S3StorageClass[];
   export type StorageLensArn = string;
   export interface StorageLensAwsOrg {
     /**
