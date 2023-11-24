@@ -15,8 +15,6 @@ or [API Reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/index.
 
 For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
-### We are excited to announce the [developer preview](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/preview/) of AWS SDK for JavaScript v3's new API documentation.
-
 ## Version 2.x Support
 We are formalizing our plans to make the *Maintenance Announcement (Phase 2)* for **AWS SDK for JavaScript v2** in 2023.
 Please refer to the [AWS SDKs and Tools maintenance policy][aws-sdks-maintenance-policy] for further details.
